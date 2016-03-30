@@ -14,6 +14,9 @@ plugins.concat = require('gulp-concat');
 plugins.del = require('del');
 plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
+plugins.browserify = require('gulp-browserify');
+plugins.sourcemaps = require('gulp-sourcemaps');
+plugins.rename = require('gulp-rename');
 
 const PROJECT_NAME = 'mall'; // 每次使用新项目时, 只需要更换项目名称
 
@@ -33,21 +36,24 @@ gulp.task(PROJECT_NAME, function () {
         .pipe(plugins.cssnano())
         .pipe(gulp.dest(`${BUILD_PATH}/css`));
 
-    gulp.src([`${APP_PATH}/scripts/**/*.jsx`])
+    gulp.src([
+            `${APP_PATH}/scripts/components/*.jsx`,
+            `${APP_PATH}/scripts/index.jsx`
+        ])
         .pipe(plugins.changed(`${BUILD_PATH}/scripts`))
         .pipe(plugins.plumber())
         .pipe(plugins.babel({
             presets: ['es2015', 'react']
         }))
-        //.pipe(plugins.browserify({debug: true}))
+        // .pipe(plugins.browserify({debug: true}))
         .pipe(plugins.js_uglify())
-        //.pipe(plugins.concat('all.js'))
+        .pipe(plugins.concat('bundle.js', {newLine: ';'}))
         .pipe(gulp.dest(`${BUILD_PATH}/scripts`));
 
     gulp.src([`${APP_PATH}/scripts/**/*.js`])
         .pipe(plugins.changed(`${BUILD_PATH}/scripts`))
         // .pipe(plugins.js_uglify())
-        // .pipe(plugins.concat('lib.js'))
+        .pipe(plugins.concat('lib.js'))
         .pipe(gulp.dest(`${BUILD_PATH}/scripts`));
 
     gulp.src([`${APP_PATH}/images/**/*.jpg`,
