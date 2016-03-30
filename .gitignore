@@ -1,0 +1,12 @@
+
+node_modules
+npm-debug.log
+build
+dist
+cdn
+
+workspace.xml
+.idea
+Thumbs.db
+
+!build/.git
