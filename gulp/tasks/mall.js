@@ -14,7 +14,6 @@ plugins.concat = require('gulp-concat');
 plugins.del = require('del');
 plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
-plugins.browserify = require('gulp-browserify');
 plugins.sourcemaps = require('gulp-sourcemaps');
 plugins.rename = require('gulp-rename');
 
@@ -96,7 +95,7 @@ gulp.task(`${PROJECT_NAME}:server`, [PROJECT_NAME], function () {
                 res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
                 res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
                 next();
-            }
+            }	
         }
     });
     gulp.watch(`apps/${PROJECT_NAME}/**`, [PROJECT_NAME]);
