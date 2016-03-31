@@ -30,7 +30,7 @@ gulp.task(PROJECT_NAME, function () {
         //.pipe(plugins.htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(BUILD_PATH));
 
-    gulp.src([`${APP_PATH}/less/**/*.less`])
+    gulp.src([`${APP_PATH}/less/index.less`])
         .pipe(plugins.changed(`${BUILD_PATH}/css`))
         .pipe(plugins.less())
         .pipe(plugins.cssnano())
