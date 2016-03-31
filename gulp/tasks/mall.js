@@ -14,7 +14,7 @@ plugins.concat = require('gulp-concat');
 plugins.del = require('del');
 plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
-plugins.browserify = require('gulp-browserify');
+// plugins.browserify = require('gulp-browserify');
 plugins.sourcemaps = require('gulp-sourcemaps');
 plugins.rename = require('gulp-rename');
 
@@ -30,7 +30,7 @@ gulp.task(PROJECT_NAME, function () {
         //.pipe(plugins.htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(BUILD_PATH));
 
-    gulp.src([`${APP_PATH}/less/**/*.less`])
+    gulp.src([`${APP_PATH}/less/index.less`])
         .pipe(plugins.changed(`${BUILD_PATH}/css`))
         .pipe(plugins.less())
         .pipe(plugins.cssnano())
@@ -50,7 +50,10 @@ gulp.task(PROJECT_NAME, function () {
         .pipe(plugins.concat('bundle.js', {newLine: ';'}))
         .pipe(gulp.dest(`${BUILD_PATH}/scripts`));
 
-    gulp.src([`${APP_PATH}/scripts/**/*.js`])
+    gulp.src([
+    		`${APP_PATH}/scripts/react-0.14.1/react.js`,
+    		`${APP_PATH}/scripts/react-0.14.1/react-dom.js`
+    	])
         .pipe(plugins.changed(`${BUILD_PATH}/scripts`))
         // .pipe(plugins.js_uglify())
         .pipe(plugins.concat('lib.js'))
@@ -91,7 +94,7 @@ gulp.task(`${PROJECT_NAME}:server`, [PROJECT_NAME], function () {
                 res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
                 res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
                 next();
-            }
+            }	
         }
     });
     gulp.watch(`apps/${PROJECT_NAME}/**`, [PROJECT_NAME]);
