@@ -47,6 +47,7 @@
     "del": ">=2",
     "require-dir": ">=0.3",
     "browser-sync": ">=2",
-    "gulp-react":">=3"
+    "gulp-react":">=3",
+    "object-assign": ">= 4.0"
   }
 }

@@ -20,48 +20,53 @@ plugins.rename = require('gulp-rename');
 
 const PROJECT_NAME = 'mall'; // 每次使用新项目时, 只需要更换项目名称
 
-const APP_PATH = `apps/${PROJECT_NAME}`;
-const BUILD_PATH = `build/${PROJECT_NAME}`;
+const APP_PATH = `apps/${PROJECT_NAME}/`;
+const BUILD_PATH = `build/${PROJECT_NAME}/`;
+const LIB_PATH = `lib/`;
 
 gulp.task(PROJECT_NAME, function () {
 
-    gulp.src([`${APP_PATH}/**/*.html`])
+    gulp.src([`${APP_PATH}**/*.html`])
         .pipe(plugins.changed(BUILD_PATH))
         //.pipe(plugins.htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest(BUILD_PATH));
 
-    gulp.src([`${APP_PATH}/less/index.less`])
-        .pipe(plugins.changed(`${BUILD_PATH}/css`))
+    gulp.src([`${APP_PATH}less/index.less`])
+        .pipe(plugins.changed(`${BUILD_PATH}css`))
         .pipe(plugins.less())
         .pipe(plugins.cssnano())
-        .pipe(gulp.dest(`${BUILD_PATH}/css`));
+        .pipe(plugins.rename('all.css'))
+        .pipe(gulp.dest(`${BUILD_PATH}css`));
 
     gulp.src([
-            `${APP_PATH}/scripts/components/*.jsx`,
-            `${APP_PATH}/scripts/index.jsx`
+            `${APP_PATH}scripts/components/*.jsx`,
+            `${APP_PATH}scripts/index.jsx`
         ])
-        .pipe(plugins.changed(`${BUILD_PATH}/scripts`))
+        .pipe(plugins.changed(`${BUILD_PATH}scripts`))
         .pipe(plugins.plumber())
         .pipe(plugins.babel({
             presets: ['es2015', 'react']
         }))
-        // .pipe(plugins.browserify({debug: true}))
         .pipe(plugins.js_uglify())
         .pipe(plugins.concat('bundle.js', {newLine: ';'}))
-        .pipe(gulp.dest(`${BUILD_PATH}/scripts`));
+        .pipe(gulp.dest(`${BUILD_PATH}scripts`));
 
-    gulp.src([`${APP_PATH}/scripts/**/*.js`])
-        .pipe(plugins.changed(`${BUILD_PATH}/scripts`))
+    gulp.src([
+            `${LIB_PATH}react-0.14.1/react.js`,
+            `${LIB_PATH}react-0.14.1/react-dom.js`,
+            `${LIB_PATH}swipe.js`
+        ])
+        .pipe(plugins.changed(`${BUILD_PATH}scripts`))
         // .pipe(plugins.js_uglify())
         .pipe(plugins.concat('lib.js'))
-        .pipe(gulp.dest(`${BUILD_PATH}/scripts`));
+        .pipe(gulp.dest(`${BUILD_PATH}scripts`));
 
-    gulp.src([`${APP_PATH}/images/**/*.jpg`,
-            `${APP_PATH}/images/**/*.png`,
-            `${APP_PATH}/images/**/*.gif`])
-        .pipe(plugins.changed(`${BUILD_PATH}/images`))
+    gulp.src([`${APP_PATH}images/**/*.jpg`,
+            `${APP_PATH}images/**/*.png`,
+            `${APP_PATH}images/**/*.gif`])
+        .pipe(plugins.changed(`${BUILD_PATH}images`))
         //.pipe(plugins.imagemin())
-        .pipe(gulp.dest(`${BUILD_PATH}/images`));
+        .pipe(gulp.dest(`${BUILD_PATH}images`));
 });
 
 gulp.task(`${PROJECT_NAME}:revision`, function () {
@@ -72,7 +77,7 @@ gulp.task(`${PROJECT_NAME}:revision`, function () {
 
     const CDN_PATH = `cdn/${PROJECT_NAME}`;
 
-    gulp.src([`${BUILD_PATH}/**`])
+    gulp.src([`${APP_PATH}**`])
         .pipe(RevAll.revision())
         .pipe(gulp.dest(CDN_PATH))
         .pipe(RevAll.manifestFile())
