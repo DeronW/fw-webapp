@@ -10,3 +10,4 @@ workspace.xml
 Thumbs.db
 
 !build/.git
+.project
