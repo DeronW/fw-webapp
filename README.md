@@ -39,26 +39,31 @@ POST
 #### 正确返回格式
 
     {
-        total: 200,
-        next_cursor: '143123123341',
-        products: [
-            {
-                name: 'NAME',
-                market_price: 2300,
-                sold_price: 999,
-                stock: 20,
-                desc: 'many text',
-                tag: ['hot', 'new', 'sales']
-            }
-        ]
+        "error_code": 10000,
+        "error": null,
+        "data": {
+            "total": 200,
+            "next_cursor": '143123123341',
+            "products": [
+                {
+                    "name": 'NAME',
+                    "market_price": 2300,
+                    "sold_price": 999,
+                    "stock": 20,
+                    "desc": 'many text',
+                    "tag": ['hot', 'new', 'sales']
+                }
+            ]
+        }
     }
 
 #### 错误返回值格式
 
     JSON
     {
-        "error_code" : "40101",
-        "error" : "need login"
+        "error_code" : 40101,
+        "error" : "need login",
+        "data": null
     }
 
 
