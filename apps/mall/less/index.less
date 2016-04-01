@@ -133,3 +133,38 @@ ul, ol, li {
         }
     }  
 }
+
+.banner-carousel {
+
+  position: relative;
+
+  .wrap {
+    & > div {
+      height: 150px;
+      background: #f2f2f2;
+    }
+  }
+
+  .points {
+    list-style: none;
+    position: absolute;
+    bottom: 30px;
+    width: 80px;
+    left: 50%;
+    margin-left: -40px;
+
+    div {
+      float: left;
+      width: 10px;
+      height: 10px;
+      background: gray;
+      border-radius: 50%;
+      margin-right: 10px;
+
+      &.on {
+        background: black;
+      }
+
+    }
+  }
+}

@@ -1,3 +1,4 @@
+
 'use strict';
 
 /*
@@ -149,3 +150,4 @@ var json={"cont":
 	]
 }
  	ReactDOM.render(<HomePage sum={99} indexlist={json}/>, document.getElementById('cnt'));
+
