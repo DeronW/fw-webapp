@@ -41,21 +41,16 @@ const HomePage = React.createClass({
 				Sum {this.props.sum}
 				</header>
 				
-				<HomePage.Swipe/>
-				
-//				<HomePage.ActList indexlist={this.props.indexlist}/>
-				
-				
 			</div>	
 		)
 	}
 });
 
-HomePage.Swipe = React.createClass({
-	render: function(){
-		return <div>I am swipe</div>
-	}
-})
+//HomePage.Swipe = React.createClass({
+//	render: function(){
+//		return <div>I am swipe</div>
+//	}
+//})
 //HomePage.ActList = React.createClass({
 //	render: function(){
 //		return (
@@ -171,4 +166,4 @@ HomePage.Swipe = React.createClass({
 //		}
 //	]
 //}
-ReactDOM.render(<HomePage sum={99}/>, document.getElementById('cnt'));
+   	ReactDOM.render(<HomePage sum={99}/>, document.getElementById('cnt'));
