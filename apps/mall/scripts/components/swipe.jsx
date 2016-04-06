@@ -113,38 +113,3 @@ const ReactSwipe = React.createClass({
         this.swipe.prev();
     }
 });
-
-
-'use strict';
-
-var Carousel = React.createClass({
-    getInitialState: function () {
-        return {cur_index: 0}
-    },
-
-    changeCurrentIndex: function (index) {
-        this.setState({cur_index: index})
-    },
-
-    render: function () {
-        return (
-            <div className="banner-carousel">
-                <ReactSwipe wrapperClassName={'wrap'} auto={3000} speed={1000} callback={this.changeCurrentIndex}>
-                    <div>'PANE 1'</div>
-                    <div>'PANE 2'</div>
-                    <div>'PANE 3'</div>
-                    <div>'PANE 3'</div>
-                </ReactSwipe>
-
-                <div className="points">
-                    <div className={this.state.cur_index == 0 ? "on" : ''}></div>
-                    <div className={this.state.cur_index == 1 ? "on" : ''}></div>
-                    <div className={this.state.cur_index == 2 ? "on" : ''}></div>
-                    <div className={this.state.cur_index == 3 ? "on" : ''}></div>
-                </div>
-            </div>
-        );
-    }
-});
-
-ReactDOM.render(<Carousel />, document.getElementById('cnt'));

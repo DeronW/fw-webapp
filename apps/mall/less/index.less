@@ -6,9 +6,6 @@ img {
     width:100%;
     height:auto;
 }
-a:active,a:focus{
-    outline:0;
-}
 a{
     text-decoration: none;
     &:active{outline:0;}
@@ -20,10 +17,14 @@ ul, ol, li {
     margin:0;
 }    
 .header {
-    height: 80px;
+    position:relative;
+    height: 98px;
+    line-height:98px;
     text-align: center;
     font-size: 40px;
-    
+    color:#333;
+    background-color:#fff;
+    border-bottom:1px solid #d8d8d8;   
     .btn-back {
         width: 60px;
         height: 60px;
@@ -100,8 +101,8 @@ ul, ol, li {
             .list-price-box{
                 position: absolute;
                 bottom:1px;
-                left:220px; 
-                
+                left:200px; 
+                width:480px;
                 height:55px;
                 line-height:50px;
                 *zoom:1;
@@ -120,6 +121,9 @@ ul, ol, li {
                     .list-price-num{
                        font-size:38px; 
                     }
+                    .list-price-scorehide{
+                        display:none;
+                    }
                 }
                 .list-sold{
                     float:right;
@@ -129,18 +133,46 @@ ul, ol, li {
                     font-size:24px;
                 }
                 
+            }
+            .list-name{
+                line-height:38px;
+                max-height:76px;
+                margin-bottom:14px;
+                font-size:30px;
+                color:#333;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .list-mark{
+                color:#6280a8;
+                font-size:20px;
+                line-height:28px;
+                *zoom:1;
+                &:after {
+                    content:'';
+                    display:block;
+                    height:0;
+                    clear:both;
+                }
+                div{
+                    float:left;
+                    padding:0 10px;
+                    margin:0 10px 4px 0;
+                    border:2px solid #6280a8;
+                    border-radius:4px;
+                }
+                
             }           
         }
     }  
 }
-
 .banner-carousel {
 
   position: relative;
 
   .wrap {
     & > div {
-      height: 150px;
+      height: 232px;
       background: #f2f2f2;
     }
   }
@@ -148,23 +180,59 @@ ul, ol, li {
   .points {
     list-style: none;
     position: absolute;
-    bottom: 30px;
-    width: 80px;
-    left: 50%;
-    margin-left: -40px;
-
+    bottom: 23px;
+    width: 720px;
+    left: 0;
+    text-align: center;
+    
     div {
-      float: left;
-      width: 10px;
-      height: 10px;
-      background: gray;
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background: rgba(255,255,255,0.25);
       border-radius: 50%;
-      margin-right: 10px;
-
+      margin-right: 18px;
+      &:last-child{margin-right:0;}
       &.on {
-        background: black;
+        background:#fff;
       }
 
     }
   }
+}
+
+.indexnav {
+    height: 140px;
+    background-color:#fff;
+    border-bottom:1px solid #d8d8d8; 
+    *zoom:1;
+    &:after {
+        content:'';
+        display:block;
+        height:0;
+        clear:both;
+    }   
+    a {
+        float:left;
+        color:#555; 
+        font-size:26px;
+        padding:85px 0 0;
+        div{
+            text-align: center;
+            line-height:44px;
+        }           
+    }
+    .indexnav1{
+        width:238px;
+        background:url(../images/ico-vip.png) no-repeat center 23px ;
+    }
+    .indexnav2{
+        width:242px;
+        background:url(../images/ico-goods.png) no-repeat center 23px ;
+    }
+    .indexnav3{
+        width:240px;
+        background:url(../images/ico-shop.png) no-repeat center 23px ;
+    }
+    
 }

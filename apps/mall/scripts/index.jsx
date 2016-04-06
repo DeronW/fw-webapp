@@ -1,97 +1,182 @@
-
 'use strict';
 
-/*
-var Carousel = React.createClass({
-    render: function () {
-        return (
-            <ReactSwipe>
-                <div>'PANE 1'</div>
-                <div>'PANE 2'</div>
-                <div>'PANE 3'</div>
-                <div>'PANE 3'</div>
-            </ReactSwipe>
-        );
-    }
-});
-
-ReactDOM.render(<Carousel />, document.getElementById('cnt'));
-*/
-
 const HomePage = React.createClass({
-		
-		
-		
 	render: function(){
 		return (
 			<div>
 				<header className="header">
-				<div className="btn-back">&lt;</div>			
-
+				逗哥商城
 				</header>
-				
-				
-			<HomePage.ActList indexlist={this.props.indexlist.cont}/>
-				
-				
+				<Carousel bannerJson={proIndexJson}/>
+				<Nav />				
+				<div className="index-actList-wrap">
+				{proIndexJson.cont.map(function(i, index){		
+					return <ActivityProduct b={i} key={index} />
+				})}
+				</div>							
 			</div>	
 		)
 	}
 });
 
-HomePage.ActList = React.createClass({
+const ActivityProduct = React.createClass({
+	render: function(){
+		var products = this.props.b.products;
+		var c=this.props.b;
+		return (
+			<div className="index-actList-box">
+				<TextBar title={this.props.b.title} link={this.props.b.morehref} />
+				<ActBanner actimg={this.props.b.actimg} link={this.props.b.morehref} />				
+				<ul  className="index-actList-list">
+					{
+						products.map(function(data, index){
+						return <ProductItem data={data} title={c.title} key={index} />
+						})
+					}
+				</ul>
+			</div>
+		)
+	}
+})
+const ActBanner = React.createClass({
 	render: function(){
 		return (
-		<div className="index-actList-wrap">
-		{
-			this.props.indexlist.map(function(date1){
-				return (
-				<div className="index-actList-box">
-							<div className="index-actList-h">
-								<div className="index-actList-htext">{date1.title}</div>
-								<a href={date1.morehref} className="index-actList-hmore" style={{background:"url(../images/ico-blue-right.png) no-repeat right center"}}>更多</a>
-							</div>
-							<div className="index-actList-img"><img src={date1.actimg} /></div>
-							<ul className="index-actList-list">
-							{
-								date1.products.map(function(date2){
-									return(
-										<li>
-										<a href={date2.ahref} className="index-actList-a">									
-											<div className="list-img"><img src={date2.img} /></div>
-											<div className="list-label">{date2.label}</div>
-											<div className="list-name">{date2.name}</div>
-											<div className="list-mark">
-												<div>{date2.mark}</div>
-											</div>
-											<div className="list-price-box">
-												<div className="list-price">
-													<span className="list-price-mark">&yen;</span>
-													<span className="list-price-num">{date2.price}</span>
-													<span className="list-price-score">&#43;{date2.score}</span>
-												</div>
-												<div className="list-sold">
-													<span>累计销量 </span>
-													<span>{date2.sold}</span>
-												</div>
-											</div>
-										</a>
-									</li>
-									)
-								})
-							}
-								
-							</ul>
-						</div>
-					)
-				})
-			}
+			<div className="index-actList-img">
+				<a href={this.props.link}><img src={this.props.actimg} /></a>
+			</div>
+		)
+	}
+});
+
+const Carousel = React.createClass({
+    getInitialState: function () {
+        return {cur_index: 0}
+    },
+
+    changeCurrentIndex: function (index) {
+        this.setState({cur_index: index})
+    },	
+    render: function () {
+    	var bannerArr=this.props.bannerJson.banner;
+    	var _this = this;    	
+    	var banner = function(dot, index){
+						return <div className={(_this.state.cur_index == dot.bannerIndex) ? "on" : ''}></div>
+		}    	
+        return (
+            <div className="banner-carousel">
+                <ReactSwipe wrapperClassName={'wrap'} auto={3000} speed={1000} callback={this.changeCurrentIndex}>
+                	{
+						bannerArr.map(function(d){
+						return (
+								<div>
+									<a href={d.bannerHref}><img src={d.bannerImg}/></a>
+								</div>
+							)
+						})
+					}
+                </ReactSwipe>                
+                <div className="points"> 
+                {bannerArr.map(banner)}
+                </div>
+            </div>
+        );
+    }
+});
+
+const Nav = React.createClass({
+	render: function(){
+		return (
+			<div className="indexnav">
+				<a href="#"  className="indexnav1">
+					<div className="text">VIP专区</div>
+				</a>
+				<a href="#"  className="indexnav2">
+					<div className="text">豆哥商品</div>
+				</a>
+				<a href="#"  className="indexnav3">
+					<div className="text">我的商城</div>
+				</a>
+			</div>
+		)
+	}
+});
+
+const TextBar = React.createClass({
+	render: function(){
+		return (
+			<div className="index-actList-h">
+				<div className="index-actList-htext">{this.props.title}</div>
+				<a href={this.props.link} className="index-actList-hmore" 
+				style={{background:"url(../images/ico-blue-right.png) no-repeat right center"}}>更多</a>
 			</div>
 		)
 	}
 })
 
-var json={"cont":
+const ProductItem = React.createClass({
+	render: function(){
+		var date2 = this.props.data;		
+		var price = (parseFloat(date2.score)>0)?(<span className="list-price-score">&#43;{date2.score}分</span>):""
+		
+		return (
+			<li>
+				<a href={date2.ahref} className="index-actList-a">									
+					<div className="list-img"><img src={date2.img} /></div>
+					<div className="list-label">{date2.label}</div>
+					<div className="list-name">{date2.name}</div>
+					<div className="list-mark">
+						{
+							date2.mark.map(function(d){
+								return (<div>{d}</div>)
+							})
+						}
+					</div>
+					<div className="list-price-box">
+						<div className="list-price">
+							<span className="list-price-mark">&yen;</span>
+							<span className="list-price-num">{formatNum(date2.price)}</span>							
+							{	
+								price
+							}	
+						</div>
+						<div className="list-sold">
+							<span>累计销量 </span>
+							<span>{date2.sold}</span>
+						</div>
+					</div>
+				</a>
+			</li>
+		)
+	}
+})
+
+
+var proIndexJson={
+	"success":true,
+	"banner":[
+		{
+			"bannerHref":"http://www.jd.com",
+			"bannerImg":"../images/act-banner2.jpg",
+			"bannerIndex":0		
+		},
+		{
+			"bannerHref":"http://www.jd.com",
+			"bannerImg":"../images/act-banner1.jpg",
+			"bannerIndex":1
+		},
+		{
+			"bannerHref":"http://www.jd.com",
+			"bannerImg":"../images/act-banner3.jpg",
+			"bannerIndex":2
+		},
+		{
+			"bannerHref":"http://www.jd.com",
+			"bannerImg":"../images/act-banner1.jpg",
+			"bannerIndex":3
+		}
+	],
+	
+	"cont":
 	[	{	
 			"success": true,			
 			"actimg":"../images/act-banner1.jpg",
@@ -99,23 +184,23 @@ var json={"cont":
 			"morehref":"http://www.jd.com",		
 			"products": [
 				{	"label":"愚",
-					"name": "product 11",
-					"price": 199900,
+					"name": "product 11限购一件限购一件限购一件限购一件限购一件限人节人节人节人节人节人节人节购一件",
+					"price": "19900",
 					"sold": 999,
 					"ahref": "http://m.9888.cn/mpwap/",
 					"img": "../images/pro-img1.jpg",
-					"mark": "限购一件",					
+					"mark":  ["限购一件","限购2件"],					
 					"score": 999
 					
 				},				
 				{	"label":"愚",
 					"name": "product 12",
-					"price": 199900,
+					"price": "199900.0000",
 					"sold": 999,
 					"ahref": "http://m.9888.cn/mpwap/",
 					"img": "../images/pro-img2.jpg",
-					"mark": "限购一件",
-					"score": 999
+					"mark": ["限购一件","限购2件"],
+					"score": 0
 				}
 			]
 		},
@@ -127,27 +212,58 @@ var json={"cont":
 			"products": [
 				{	
 					"label":"清",
-					"name": "product 21",
-					"price": 199900,
+					"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
+					"price": "199900.000",
 					"sold": 999,
 					"ahref": "http://m.9888.cn/mpwap/",
 					"img": "../images/pro-img1.jpg",
-					"mark": "限购一件",
-					"score": 999
+					"mark": ["限购一件","限购2件"],
+					"score": "999"
 				},				
+					
 				{	
 					"label":"清",
 					"name": "product 22",
-					"price": 199900,
+					"price": "900",
 					"sold": 999,
 					"ahref": "http://m.9888.cn/mpwap/",
 					"img": "../images/pro-img3.jpg",
-					"mark": "限购一件",
+					"mark":  ["限购一件","限购2件"],
 					"score": 999
 				}
 			]
 		}
 	]
 }
- 	ReactDOM.render(<HomePage sum={99} indexlist={json}/>, document.getElementById('cnt'));
+ 	ReactDOM.render(<HomePage indexlist={proIndexJson}/>, document.getElementById('cnt'));
+
+function formatNum(str){
+	var newStr = "";
+	var count = 0;			 
+	if(str.indexOf(".")==-1){
+	   for(var i=str.length-1;i>=0;i--){
+	if(count % 3 == 0 && count != 0){
+	   newStr = str.charAt(i) + "," + newStr;
+	}else{
+	   newStr = str.charAt(i) + newStr;
+	}
+	count++;
+	   }
+	   str = newStr + ".00";
+	   return str
+	}
+	else
+	{
+		for(var i = str.indexOf(".")-1;i>=0;i--){
+			if(count % 3 == 0 && count != 0){
+			   newStr = str.charAt(i) + "," + newStr;
+			}else{
+			   newStr = str.charAt(i) + newStr;
+			}
+	    	count++;
+	   }
+	   str = newStr + (str + "00").substr((str + "00").indexOf("."),3);
+	   return str
+	}
+}
 
