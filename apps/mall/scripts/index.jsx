@@ -5,7 +5,7 @@ const HomePage = React.createClass({
 		return (
 			<div>
 				<header className="header">
-				逗哥商城
+				豆哥商城
 				</header>
 				<Carousel bannerJson={proIndexJson}/>
 				<Nav />				
@@ -30,7 +30,7 @@ const ActivityProduct = React.createClass({
 				<ul  className="index-actList-list">
 					{
 						products.map(function(data, index){
-						return <ProductItem data={data} title={c.title} key={index} />
+						return <ProductItem data={data} key={index} />
 						})
 					}
 				</ul>
