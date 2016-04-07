@@ -1,4 +1,5 @@
 'use strict';
+
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
@@ -34,7 +35,7 @@ function objectAssign(target, source) {
     }
 
     return to;
-};
+}
 
 var styles = {
     container: {
