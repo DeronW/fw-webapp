@@ -7,7 +7,7 @@ const HomePage = React.createClass({
 		return (
 			<div>
 				<header className="header">
-				豆哥商品<a href="#" className="btn-back" style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}></a>
+				暖心礼活动<a href="#" className="btn-back" style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}></a>
 				</header>
 				<TabProducts />
 				<div className="products-list">

@@ -17,7 +17,11 @@ ul, ol, li {
     margin:0;
 }    
 .header {
-    position:relative;
+    z-index:2;
+    position:fixed;
+    top:0;
+    left:0;
+    width:720px;
     height: 98px;
     line-height:98px;
     text-align: center;
@@ -167,9 +171,9 @@ ul, ol, li {
     }  
 }
 .banner-carousel {
-
+  padding:99px 0 0;
   position: relative;
-
+    
   .wrap {
     & > div {
       height: 232px;

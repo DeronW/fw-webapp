@@ -11,7 +11,7 @@ const HomePage = React.createClass({
 				<Nav />				
 				<div className="index-actList-wrap">
 				{proIndexJson.cont.map(function(i, index){		
-					return <ActivityProduct b={i} key={index} />
+					return <ActivityProduct indexProList={i} key={index} />
 				})}
 				</div>							
 			</div>	
@@ -21,12 +21,11 @@ const HomePage = React.createClass({
 
 const ActivityProduct = React.createClass({
 	render: function(){
-		var products = this.props.b.products;
-		var c=this.props.b;
+		var products = this.props.indexProList.products;		
 		return (
 			<div className="index-actList-box">
-				<TextBar title={this.props.b.title} link={this.props.b.morehref} />
-				<ActBanner actimg={this.props.b.actimg} link={this.props.b.morehref} />				
+				<TextBar title={this.props.indexProList.title} link={this.props.indexProList.morehref} />
+				<ActBanner actimg={this.props.indexProList.actimg} link={this.props.indexProList.morehref} />				
 				<ul  className="index-actList-list">
 					{
 						products.map(function(data, index){
@@ -116,13 +115,13 @@ const TextBar = React.createClass({
 const ProductItem = React.createClass({
 	render: function(){
 		var date2 = this.props.data;		
-		var price = (parseFloat(date2.score)>0)?(<span className="list-price-score">&#43;{date2.score}分</span>):""
-		
+		var price = (parseFloat(date2.score)>0)?(<span className="list-price-score">&#43;{date2.score}分</span>):"";
+		var Olabel=(date2.label)?(<div className="list-label">{date2.label}</div>):"";
 		return (
 			<li>
 				<a href={date2.ahref} className="index-actList-a">									
 					<div className="list-img"><img src={date2.img} /></div>
-					<div className="list-label">{date2.label}</div>
+					{Olabel}
 					<div className="list-name">{date2.name}</div>
 					<div className="list-mark">
 						{
