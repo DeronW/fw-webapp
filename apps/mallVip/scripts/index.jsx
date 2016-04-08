@@ -15,13 +15,13 @@ const MallVip = React.createClass({
     },
     getTabContClass:function(index){
     	return index==this.state.tabOnIndex?"index-actList-list show":"index-actList-list";
-    }
+    },
     
 	render: function(){
 		var productsList=this.props.vipJson.vip;
 		var list=function(data, index){return <ProductItem data={data}  key={index} />};
-		var vipBoxClass=this.state.close?"vip-box":"vip-box vip-box-close";		
-		var that=this;
+		var vipBoxClass=this.state.close?"vip-box":"vip-box vip-box-close";
+		var tabOnClass=this.state.tabOnIndex?"on":"";
 		return (
 			<div>
 				<header className="header">
@@ -38,7 +38,7 @@ const MallVip = React.createClass({
 						{
 							productsList.map(function(datavip){
 								return (
-									<ul className={ulShowClass}>
+									<ul className="index-actList-list show">
 										{datavip.products.map(list)}
 									</ul>
 								)
@@ -59,7 +59,7 @@ const VipTab = React.createClass({
 				{
 					this.props.vip.vip.map(function(data) {
 						return(
-							<li onClick={that.handleClickTab} style={{background:"#fff url(../images/tab-gray-dot.png) no-repeat right 0"}}><span className={tabOnClass}>{data.title}</span></li>
+							<li style={{background:"#fff url(../images/tab-gray-dot.png) no-repeat right 0"}}><span className={tabOnClass}>{data.title}</span></li>
 							)
 					})
 				}	
