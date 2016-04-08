@@ -1,33 +1,58 @@
 'use strict';
 
-const HomePage = React.createClass({
+const Mall = React.createClass({
     render: function () {
-
         return (
             <div>
                 <header className="header">豆哥商城</header>
-                <Carousel bannerJson={proIndexJson}/>
-                <Nav />
-                <div className="index-actList-wrap"> {proIndexJson.cont.map((i, index) => <ActivityProduct
-                    indexProList={i} key={index}/>)} </div>
+                <Carousel banners={this.props.banners}/>
+                <div className="index-actList-wrap">
+                    { this.props.activities.map((i, index) =>
+                        <ActivityProduct title={i.title} img={i.img} link={i.link}
+                                         products={i.products} key={index}/>) }
+                </div>
             </div>
         )
     }
 });
 
-const ActivityProduct = React.createClass({
-    render: function () {
-        var products = this.props.indexProList.products;
+const Carousel = React.createClass({
+    getInitialState: function () {
+        return {
+            banners: this.props.banners,
+            cur_index: 0
+        }
+    },
 
-        let pi = function (data, index) {
-            return <ProductItem data={data} key={index}/>
-        };
+    changeCurrentIndex: function (index) {
+        this.setState({cur_index: index})
+    },
+
+    render: function () {
+        let banner = (dot, index) => <div key={index} className={(this.state.cur_index == index) ? "on" : ''}></div>;
+        let ba = (d, index) => <div key={index}><a href={d.href}><img src={d.img}/></a></div>;
 
         return (
+            <div className="banner-carousel">
+                <ReactSwipe wrapperClassName={'wrap'} auto={3000} speed={1000} callback={this.changeCurrentIndex}>
+                    {this.state.banners.map(ba) }
+                </ReactSwipe>
+                <div className="points">
+                    {this.state.banners.map(banner)}
+                </div>
+            </div>
+        );
+    }
+});
+
+const ActivityProduct = React.createClass({
+    render: function () {
+        let pi = (data, index) => <ProductItem {...data} key={index}/>;
+        return (
             <div className="index-actList-box">
-                <TextBar title={this.props.indexProList.title} link={this.props.indexProList.morehref}/>
-                <ActBanner actimg={this.props.indexProList.actimg} link={this.props.indexProList.morehref}/>
-                <ul className="index-actList-list">{products.map(pi)}</ul>
+                <TextBar title={this.props.title} link={this.props.link}/>
+                <ActBanner img={this.props.img} link={this.props.link}/>
+                <ul className="index-actList-list">{this.props.products.map(pi)}</ul>
             </div>
         )
     }
@@ -37,41 +62,9 @@ const ActBanner = React.createClass({
     render: function () {
         return (
             <div className="index-actList-img">
-                <a href={this.props.link}><img src={this.props.actimg}/></a>
+                <a href={this.props.link}><img src={this.props.img}/></a>
             </div>
         )
-    }
-});
-
-const Carousel = React.createClass({
-    getInitialState: function () {
-        return {cur_index: 0}
-    },
-
-    changeCurrentIndex: function (index) {
-        this.setState({cur_index: index})
-    },
-    render: function () {
-        var bannerArr = this.props.bannerJson.banner;
-        var _this = this;
-        var banner = function (dot, index) {
-            return <div key={index} className={(_this.state.cur_index == index) ? "on" : ''}></div>
-        };
-
-        let ba = function (d, index) {
-            return ( <div key={index}><a href={d.href}><img src={d.img}/></a></div> )
-        };
-
-        return (
-            <div className="banner-carousel">
-                <ReactSwipe wrapperClassName={'wrap'} auto={3000} speed={1000} callback={this.changeCurrentIndex}>
-                    { bannerArr.map(ba) }
-                </ReactSwipe>
-                <div className="points">
-                    {bannerArr.map(banner)}
-                </div>
-            </div>
-        );
     }
 });
 
@@ -107,31 +100,31 @@ const TextBar = React.createClass({
 
 const ProductItem = React.createClass({
     render: function () {
-        var date2 = this.props.data;
-        var price = (parseFloat(date2.score) > 0) ? (
-            <span className="list-price-score">&#43;{date2.score}分</span>) : "";
-        var Olabel = (date2.label) ? (<div className="list-label">{date2.label}</div>) : "";
+        var price = (parseFloat(this.props.score) > 0) ? (
+            <span className="list-price-score">&#43;{this.props.score}分</span>) : "";
+
+        let Angle = this.props.angle_text ?
+            <div className={"list-label" + this.props.angle_type}>{this.props.angle_text}</div> :
+            null;
 
         return (
             <li>
-                <a href={date2.ahref} className="index-actList-a">
-                    <div className="list-img"><img src={date2.img}/></div>
-                    {Olabel}
-                    <div className="list-name">{date2.name}</div>
+                <a href={this.props.link} className="index-actList-a">
+                    <div className="list-img"><img src={this.props.img}/></div>
+                    {Angle}
+                    <div className="list-name">{this.props.title}</div>
                     <div className="list-mark">
-                        { date2.mark.map((d) => {
-                            <div>{d}</div>
-                        }) }
+                        { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
                     </div>
                     <div className="list-price-box">
                         <div className="list-price">
                             <span className="list-price-mark">&yen;</span>
-                            <span className="list-price-num">{formatNum(date2.price)}</span>
+                            <span className="list-price-num">{formatNum(this.props.price)}</span>
                             { price }
                         </div>
                         <div className="list-sold">
                             <span>累计销量 </span>
-                            <span>{date2.sold}</span>
+                            <span>{this.props.sales}</span>
                         </div>
                     </div>
                 </a>
@@ -140,94 +133,21 @@ const ProductItem = React.createClass({
     }
 });
 
+$FW.DOMReady(function () {
+    $FW.BatchGet([
+        'http://10.10.100.112/mockjs/4/api/v1/mall/banner',
+        'http://10.10.100.112/mockjs/4/api/v1/mall/activities'
+    ], function (data) {
+        var banners = data[0].banners, activities = data[1].activities;
+        ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
+    });
+});
 
-var proIndexJson = {
-    "success": true,
-    "banner": [
-        {
-            "href": "http://www.jd.com",
-            "img": "../images/act-banner2.jpg"
-        },
-        {
-            "href": "http://www.jd.com",
-            "img": "../images/act-banner1.jpg"
-        },
-        {
-            "href": "http://www.jd.com",
-            "img": "../images/act-banner3.jpg"
-        },
-        {
-            "href": "http://www.jd.com",
-            "img": "../images/act-banner1.jpg"
-        }
-    ],
-
-    "cont": [{
-        "success": true,
-        "actimg": "../images/act-banner1.jpg",
-        "title": "愚人节",
-        "morehref": "http://www.jd.com",
-        "products": [
-            {
-                "label": "愚",
-                "name": "product 11限购一件限购一件限购一件限购一件限购一件限人节人节人节人节人节人节人节购一件",
-                "price": "19900",
-                "sold": 999,
-                "ahref": "http://m.9888.cn/mpwap/",
-                "img": "../images/pro-img1.jpg",
-                "mark": ["限购一件", "限购2件"],
-                "score": 999
-
-            },
-            {
-                "label": "愚",
-                "name": "product 12",
-                "price": "199900.0000",
-                "sold": 999,
-                "ahref": "http://m.9888.cn/mpwap/",
-                "img": "../images/pro-img2.jpg",
-                "mark": ["限购一件", "限购2件"],
-                "score": 0
-            }
-        ]
-    },
-        {
-            "success": true,
-            "actimg": "../images/act-banner2.jpg",
-            "title": "清明节",
-            "morehref": "http://www.jd.com",
-            "products": [
-                {
-                    "label": "清",
-                    "name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
-                    "price": "199900.000",
-                    "sold": 999,
-                    "ahref": "http://m.9888.cn/mpwap/",
-                    "img": "../images/pro-img1.jpg",
-                    "mark": ["限购一件", "限购2件"],
-                    "score": "999"
-                },
-
-                {
-                    "label": "清",
-                    "name": "product 22",
-                    "price": "900",
-                    "sold": 999,
-                    "ahref": "http://m.9888.cn/mpwap/",
-                    "img": "../images/pro-img3.jpg",
-                    "mark": ["限购一件", "限购2件"],
-                    "score": 999
-                }
-            ]
-        }
-    ]
-};
-
-ReactDOM.render(<HomePage indexlist={proIndexJson}/>, document.getElementById('cnt'));
 
 function formatNum(str) {
     var newStr = "";
     var count = 0;
+    str += '';
 
     if (str.indexOf(".") == -1) {
         for (var i = str.length - 1; i >= 0; i--) {
