@@ -1,49 +1,58 @@
 'use strict';
 
-const HomePage = React.createClass({
+const MallAct = React.createClass({
 	render: function(){
-		var productsList=this.props.productsJson;
+		var productsList=this.props.productsActJson;
 		var list=function(data, index){return <ProductItem data={data}  key={index} />}
 		return (
 			<div>
 				<header className="header">
-				暖心礼活动<a href="#" className="btn-back" style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}></a>
+				{productsList.actProduct.actTitle}<a href="#" className="btn-back" style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}></a>
 				</header>
-				<TabProducts />
-				<div className="products-list">
-					<ul className="index-actList-list on">						
-						{							
-							productsList.all.products.map(list)
-						}
-					</ul>
+				<a href="#" className="act-img-detail"><img src={productsList.actProduct.actimg} /></a>
+				<ActExplain actExplain={productsList.actProduct.actExplain}/>
+				<div className="products-act">
 					<ul className="index-actList-list">						
 						{							
-							productsList.realProduct.products.map(list)
+							productsList.actProduct.products.map(list)
 						}
 					</ul>
-					<ul className="index-actList-list">						
-						{							
-							productsList.fictitiousProduct.products.map(list)
-						}
-					</ul>
+					
 				</div>
 						
 			</div>	
 		)
 	}
 });
-const TabProducts = React.createClass({
-	render: function(){
+
+const ActExplain = React.createClass({
+	getInitialState: function () {
+		
+        return {onoff:true}
+    },
+    handleClick:function() {
+    	this.setState({onoff: !this.state.onoff});
+    },
+	render: function(){		
+		var actExplainContClass=this.state.onoff?"act-explain-cont":"act-explain-cont show";
+		var actExplainBtn=this.state.onoff?"act-explain-btn":"act-explain-btn on";
 		return(
-			<div className="productsTab">
-				<div className="productsTab1 act"><span>全部</span></div>
-				<div className="productsTab2"><span>虚拟商品</span></div>
-				<div className="productsTab3"><span>实物商品</span></div>
+			<div className="act-explain-box">
+				<div className="act-explain-head">
+					<div className="act-explain-h">{this.props.actExplain.title}</div>
+					<div className={actExplainBtn} onClick={this.handleClick} style={{background:"url(../images/ico-grap-down.png) no-repeat center"}}></div>
+				</div>
+				<ul className={actExplainContClass}>
+					{
+						this.props.actExplain.cont.map(function(data){
+									return (<li>{data}</li>)
+								})
+					}
+				</ul>
 			</div>
 		)
 	}
 });
-
 const ProductItem = React.createClass({
 	render: function(){
 		var date2 = this.props.data;		
@@ -82,77 +91,21 @@ const ProductItem = React.createClass({
 })
 
 
-var productsJson={
+var productsActJson={
 	"success":true,
-	"all":{
-		"products": [
-			{	"label":"",
-				"name": "product 11限购一件限购一件限购一件限购一件限购一件限人节人节人节人节人节人节人节购一件",
-				"price": "19900",
-				"sold": 999,
-				"ahref": "http://m.9888.cn/mpwap/",
-				"img": "../images/pro-img1.jpg",
-				"mark":  ["限购一件","限购2件"],					
-				"score": 999
-				
-			},				
-			{	"label":"愚",
-				"name": "product 12",
-				"price": "199900.0000",
-				"sold": 999,
-				"ahref": "http://m.9888.cn/mpwap/",
-				"img": "../images/pro-img2.jpg",
-				"mark": ["限购一件","限购2件"],
-				"score": 0
-			},
-			{
-				"label":"清",
-				"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
-				"price": "199900.000",
-				"sold": 999,
-				"ahref": "http://m.9888.cn/mpwap/",
-				"img": "../images/pro-img1.jpg",
-				"mark": ["限购一件","限购2件"],
-				"score": "999"
-			},				
-				
-			{	
-				"label":"清",
-				"name": "product 22",
-				"price": "900",
-				"sold": 999,
-				"ahref": "http://m.9888.cn/mpwap/",
-				"img": "../images/pro-img3.jpg",
-				"mark":  ["限购一件","限购2件"],
-				"score": 999
-			}
-		]
-	},
-	"realProduct":{
-		"products": [
-				{	
-					"label":"清",
-					"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
-					"price": "199900.000",
-					"sold": 999,
-					"ahref": "http://m.9888.cn/mpwap/",
-					"img": "../images/pro-img1.jpg",
-					"mark": ["限购一件","限购2件"],
-					"score": "999"
-				},									
-				{	
-					"label":"清",
-					"name": "product 22",
-					"price": "900",
-					"sold": 999,
-					"ahref": "http://m.9888.cn/mpwap/",
-					"img": "../images/pro-img3.jpg",
-					"mark":  ["限购一件","限购2件"],
-					"score": 999
-				}
-			]
-	},
-	"fictitiousProduct":{
+	"actProduct":{
+		"actimg":"../images/act-banner3.jpg",
+		"actTitle":"暖心礼活动",
+		"actExplain":{
+			"title":"活动说明",
+			"cont":[
+					"1、活动时间2.22—3.23；",
+					"2、30日内累计投资满5W；",
+					"3、活动期间内拉新人数大于5人；",
+					"4、年化拉新投资大于10W。"
+				]
+			
+		},
 		"products": [
 				{	
 					"label":"清",
@@ -178,7 +131,7 @@ var productsJson={
 	}
 }
 
-ReactDOM.render(<HomePage productsJson={productsJson} />, document.getElementById('cnt'));
+ReactDOM.render(<MallAct productsActJson={productsActJson} />, document.getElementById('cnt'));
 function formatNum(str){
 	var newStr = "";
 	var count = 0;			 

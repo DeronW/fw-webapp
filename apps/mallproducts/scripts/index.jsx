@@ -1,6 +1,6 @@
 'use strict';
 
-const HomePage = React.createClass({
+const MallProducts = React.createClass({
 	render: function(){
 		var productsList=this.props.productsJson;
 		var list=function(data, index){return <ProductItem data={data}  key={index} />}
@@ -178,7 +178,7 @@ var productsJson={
 	}
 }
 
-ReactDOM.render(<HomePage productsJson={productsJson} />, document.getElementById('cnt'));
+ReactDOM.render(<MallProducts productsJson={productsJson} />, document.getElementById('cnt'));
 function formatNum(str){
 	var newStr = "";
 	var count = 0;			 
