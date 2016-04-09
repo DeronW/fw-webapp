@@ -46,13 +46,14 @@ gulp.task(PROJECT_NAME, function () {
         .pipe(plugins.babel({
             presets: ['es2015', 'react']
         }))
-        .pipe(plugins.js_uglify())
+        //.pipe(plugins.js_uglify())
         .pipe(plugins.concat('bundle.js', {newLine: ';'}))
         .pipe(gulp.dest(`${BUILD_PATH}scripts`));
 
     gulp.src([
             `${LIB_PATH}react-0.14.1/react.js`,
             `${LIB_PATH}react-0.14.1/react-dom.js`,
+            `${LIB_PATH}financial-workspace-0.1.0.js`,
             `${LIB_PATH}swipe.js`
         ])
         .pipe(plugins.changed(`${BUILD_PATH}scripts`))

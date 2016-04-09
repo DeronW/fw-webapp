@@ -46,7 +46,7 @@ gulp.task(PROJECT_NAME, function () {
         .pipe(plugins.babel({
             presets: ['es2015', 'react']
         }))
-        .pipe(plugins.js_uglify())
+        //.pipe(plugins.js_uglify())
         .pipe(plugins.concat('bundle.js', {newLine: ';'}))
         .pipe(gulp.dest(`${BUILD_PATH}scripts`));
 
