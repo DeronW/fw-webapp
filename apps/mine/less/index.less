@@ -42,10 +42,22 @@ em, i {
 	float: @fr;
 }
 
+.border-radius-als (@r) {
+	-webkit-border-radius: @r;
+	   -moz-border-radius: @r;
+		border-radius: @r;
+}
+
 .border-radius (@u: 0, @r: 0, @d: 0, @l: 0) {
 	-webkit-border-radius: @u @r @d @l;
 	   -moz-border-radius: @u @r @d @l;
 		border-radius: @u @r @d @l;
+}
+
+.border-radius-l-r(@l, @r) {
+	-webkit-border-radius: @l @r 0 0;
+	   -moz-border-radius: @l @r 0 0;
+		border-radius: @l @r 0 0;
 }
 
 .width (@w) {
@@ -90,6 +102,10 @@ em, i {
 	padding-bottom: @b;
 }
 
+.padding-tb-lr(@tb, @lr) {
+	padding: @tb  @lr;
+}
+
 .margin (@t: 0, @r: 0, @b: 0, @l: 0) {
 	margin: @t @r @b @l; 
 }
@@ -120,15 +136,50 @@ em, i {
 	margin-right: @r;
 }
 
+.back-color(@bc) {
+	background-color: @bc;
+}
+
+.border (@w, @style, @color) {
+	border: @w @style @color;	
+}
+
+.border-t (@w, @style @color){
+	border-top: @w @style @color;
+}
+
+.border-b (@w, @style @color){
+	border-bottom: @w @style @color;
+}
+
+.border-t-b(@w, @style, @color-t, @color-b) {
+	border-top: @w @style @color-t;
+	border-bottom: @w @style @color-b;
+}
+
+.text-align (@p) {
+	text-align: @p;
+}
+
+.position (@pos) {
+	position: @pos;
+}
 
 .color(@color) {
 	color: @color;
 }
 
+.clear-fix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
 
 .user-area {
 	.height(125px);
-	.padding-t-b(28px, 30px);
+	.padding-tb-lr(28px, 30px); 
 	background-color: #fd4d4c;
 	color: @back-color;
 }
@@ -163,6 +214,10 @@ em, i {
 
 }
 
+.display (@display) {
+	display: @display;
+}
+
 .usr-info-vip {
 	.line-height(28px);
 	.text {
@@ -184,8 +239,8 @@ em, i {
 
 .user-get-adders {
 	.adders-icon {
-		display: @block;	
-		text-align: @center;
+		.display(block);
+		.text-align(center);
 	}
 
 	.text {
@@ -193,6 +248,226 @@ em, i {
 	}
 }
 
+
+
+.my-oder-block {
+	.height(84px);
+	.padding-l-r(30px, 30px);
+	.line-height(84px);
+	.back-color(#fff);
+
+	.title {
+		.fl;
+	}
+
+	.oder-lick-text {
+		.fr;
+		.color(#999);		
+		
+		.text {
+			.fl();
+		}
+
+		.icon {
+			.fl();
+			.margin-t(10px);
+		}
+	}
+}
+
+.delivery-list {
+	.height(124px);
+	.back-color(#f9f9f9);
+	.padding-t-b(8px, 5px);
+	
+	.border-t-b (1px, solid, #e3e5ea,  #d8d8d8);
+
+	ul li {
+		.fl;
+		.width(33.3%);
+		.text-align(center);		
+		
+		.icon {
+			.display(block);
+		}
+		
+		.text {
+			.display(block);
+			.margin-t (-8px);
+			.line-height(30px);
+		}
+	}
+	
+}
+
+
+.my-account-block {
+	.margin-t-b (20px, 20px);
+	.back-color(#fff);
+	.border-t-b(1px, solid, #d8d8d8, #d8d8d8);
+}
+
+.my-account-title {
+	.height(84px);
+	.line-height(84px);
+	.padding-l-r(30px, 30px);
+	
+	.border-b(1px, solid, #d8d8d8);	
+
+	.l-text {
+		.fl();
+	}
+
+	.money-number {
+		.fr();
+		.color(#fd4d4c);
+	}
+}
+
+.my-account-list {	
+	.padding-l(30px);
+	.back-color (#f9f9f9);
+	ul {
+	}
+		
+	ul li {
+		.height(70px);	
+		.line-height(70px);	
+		.border-b (1px, solid, #e3e5ea);	
+		.padding-r(30px);		
+
+
+		.r-text {
+			.fr();
+		}
+	}
+	
+	ul li:last-child {
+		border-bottom: none;
+	}
+}
+
+.my-voucher {
+
+}
+
+.my-voucher-title {
+	.height(80px);
+	.line-height(80px);
+	.back-color(#fff);
+	.padding-l-r(30px, 0);
+	.border-t(1px, solid, #d8d8d8);
+	.border-b(3px, solid, #ebebee);
+
+	.title-text {
+		.fl();
+	}
+}
+
+
+.my-voucher-tab {
+	.fr();
+
+	li {
+		.fl();
+		.width(96px);
+		.padding-l-r(16px, 16px);
+		.text-align(center);
+		background: url(../images/line-icon.png) no-repeat center right;
+		
+		&:last-child {
+			background: none;
+		}
+	}
+
+	li .tab-text {
+		
+	}
+
+	li.select-li .tab-text {
+		.display(block);
+		.line-height(80px);
+		.color(#fd4d4c);
+		.border-b(4px, solid, #fd4d4c);	
+	}
+}
+
+.my-voucher-cont {
+	.border-t(1px, solid, #d8d8d8);
+}
+
+.my-voucher-cont-list {
+	.position(relative);
+	max-width: 658px;
+	min-width: 318px;
+	margin: 20px auto;
+	.border-radius-als(5px);
+	.back-color(#fff);	
+	.border(1px, solid, #d8d8d8);
+
+	.t-info {
+		.height(96px);
+		.back-color(#ff8758);
+		.color(#fff);
+		.padding(20px, 20px, 0, 20px);
+		.border-radius-l-r(5px, 5px);
+
+		.title-info {
+			.height(40px);
+			.line-height(40px);
+			.title-text {
+				.fl();
+				font-size: 30px;
+				font-weight: normal;
+			}
+		
+			.money-text {
+				.fr();
+			}
+		}
+
+		
+		.clear-info {
+			.line-height(40px);
+			font-size: 22px;	
+			.text {
+				.fl();
+			}
+
+			.text-timer {
+				.fr();
+			}
+		}
+	}
+
+	.b-info {
+		.height(44px);
+		.line-height(44px);
+		.padding-l-r(20px, 20px);
+		.color(#999);
+		font-size: 18px;
+	}
+
+}
+
+
+.my-vorcher-mark {
+	.position(absolute);
+	top: 30px;
+	right: 0;
+	overflow: hidden;
+}
+
+
+.bb{
+	height: 400px;
+	background-color: red;
+}
+
+.aaaaa {
+	height: 400px;
+	background-color: #000;
+}
 
 
 
