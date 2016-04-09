@@ -1,48 +1,53 @@
 'use strict';
 
 const MallProducts = React.createClass({
+	getInitialState: function () {		
+    	return {tabOnIndex:0}
+	},
+	handleClickTab:function(index) {
+    	this.setState({tabOnIndex:index});
+    },  
 	render: function(){
 		var productsList=this.props.productsJson;
-		var list=function(data, index){return <ProductItem data={data}  key={index} />}
+		var list=function(data, index){return <ProductItem data={data}  key={index} />};
+		let _this=this;
 		return (
 			<div>
 				<header className="header">
 				豆哥商品<a href="#" className="btn-back" style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}></a>
 				</header>
-				<TabProducts />
+				<div className="productsTab">
+					{
+						productsList.list.map(function(name,index){
+							return (
+								<div key={index} 
+									className={index==_this.state.tabOnIndex?"act":""} 
+									onClick={function(){_this.handleClickTab(index)}}>
+									<span>{name.title}</span>
+								</div>
+							)						
+						})
+					}	
+				</div>
+
 				<div className="products-list">
-					<ul className="index-actList-list on">						
-						{							
-							productsList.all.products.map(list)
-						}
-					</ul>
-					<ul className="index-actList-list">						
-						{							
-							productsList.realProduct.products.map(list)
-						}
-					</ul>
-					<ul className="index-actList-list">						
-						{							
-							productsList.fictitiousProduct.products.map(list)
-						}
-					</ul>
+					{
+						productsList.list.map(function(name,index){
+							return (
+								<ul key={index} 
+									className={index==_this.state.tabOnIndex?"index-actList-list on":"index-actList-list"} >
+									{name.products.map(list)}
+								</ul>
+							)						
+						})
+					}
 				</div>
 						
 			</div>	
 		)
 	}
 });
-const TabProducts = React.createClass({
-	render: function(){
-		return(
-			<div className="productsTab">
-				<div className="productsTab1 act"><span>全部</span></div>
-				<div className="productsTab2"><span>虚拟商品</span></div>
-				<div className="productsTab3"><span>实物商品</span></div>
-			</div>
-		)
-	}
-});
+
 
 const ProductItem = React.createClass({
 	render: function(){
@@ -84,53 +89,30 @@ const ProductItem = React.createClass({
 
 var productsJson={
 	"success":true,
-	"all":{
-		"products": [
-			{	"label":"",
-				"name": "product 11限购一件限购一件限购一件限购一件限购一件限人节人节人节人节人节人节人节购一件",
-				"price": "19900",
-				"sold": 999,
-				"ahref": "http://m.9888.cn/mpwap/",
-				"img": "../images/pro-img1.jpg",
-				"mark":  ["限购一件","限购2件"],					
-				"score": 999
-				
-			},				
-			{	"label":"愚",
-				"name": "product 12",
-				"price": "199900.0000",
-				"sold": 999,
-				"ahref": "http://m.9888.cn/mpwap/",
-				"img": "../images/pro-img2.jpg",
-				"mark": ["限购一件","限购2件"],
-				"score": 0
-			},
+	"list":[
 			{
-				"label":"清",
-				"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
-				"price": "199900.000",
-				"sold": 999,
-				"ahref": "http://m.9888.cn/mpwap/",
-				"img": "../images/pro-img1.jpg",
-				"mark": ["限购一件","限购2件"],
-				"score": "999"
-			},				
-				
-			{	
-				"label":"清",
-				"name": "product 22",
-				"price": "900",
-				"sold": 999,
-				"ahref": "http://m.9888.cn/mpwap/",
-				"img": "../images/pro-img3.jpg",
-				"mark":  ["限购一件","限购2件"],
-				"score": 999
-			}
-		]
-	},
-	"realProduct":{
-		"products": [
-				{	
+			"title":"全部",
+			"products": [
+				{	"label":"",
+					"name": "product 11限购一件限购一件限购一件限购一件限购一件限人节人节人节人节人节人节人节购一件",
+					"price": "19900",
+					"sold": 999,
+					"ahref": "http://m.9888.cn/mpwap/",
+					"img": "../images/pro-img1.jpg",
+					"mark":  ["限购一件","限购2件"],					
+					"score": 999
+					
+				},				
+				{	"label":"愚",
+					"name": "product 12",
+					"price": "199900.0000",
+					"sold": 999,
+					"ahref": "http://m.9888.cn/mpwap/",
+					"img": "../images/pro-img2.jpg",
+					"mark": ["限购一件","限购2件"],
+					"score": 0
+				},
+				{
 					"label":"清",
 					"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
 					"price": "199900.000",
@@ -139,7 +121,8 @@ var productsJson={
 					"img": "../images/pro-img1.jpg",
 					"mark": ["限购一件","限购2件"],
 					"score": "999"
-				},									
+				},				
+					
 				{	
 					"label":"清",
 					"name": "product 22",
@@ -151,31 +134,56 @@ var productsJson={
 					"score": 999
 				}
 			]
-	},
-	"fictitiousProduct":{
-		"products": [
-				{	
-					"label":"清",
-					"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
-					"price": "199900.000",
-					"sold": 999,
-					"ahref": "http://m.9888.cn/mpwap/",
-					"img": "../images/pro-img1.jpg",
-					"mark": ["限购一件","限购2件"],
-					"score": "999"
-				},									
-				{	
-					"label":"清",
-					"name": "product 22",
-					"price": "900",
-					"sold": 999,
-					"ahref": "http://m.9888.cn/mpwap/",
-					"img": "../images/pro-img3.jpg",
-					"mark":  ["限购一件","限购2件"],
-					"score": 999
-				}
-			]
-	}
+		},
+		{	"title":"真实商品",
+			"products": [
+					{	
+						"label":"清",
+						"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
+						"price": "199900.000",
+						"sold": 999,
+						"ahref": "http://m.9888.cn/mpwap/",
+						"img": "../images/pro-img1.jpg",
+						"mark": ["限购一件","限购2件"],
+						"score": "999"
+					},									
+					{	
+						"label":"清",
+						"name": "product 22",
+						"price": "900",
+						"sold": 999,
+						"ahref": "http://m.9888.cn/mpwap/",
+						"img": "../images/pro-img3.jpg",
+						"mark":  ["限购一件","限购2件"],
+						"score": 999
+					}
+				]
+		},
+		{	"title":"虚拟商品",
+			"products": [
+					{	
+						"label":"愚",
+						"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
+						"price": "199900.000",
+						"sold": 999,
+						"ahref": "http://m.9888.cn/mpwap/",
+						"img": "../images/pro-img1.jpg",
+						"mark": ["限购一件","限购2件"],
+						"score": "999"
+					},									
+					{	
+						"label":"愚",
+						"name": "product 22",
+						"price": "900",
+						"sold": 999,
+						"ahref": "http://m.9888.cn/mpwap/",
+						"img": "../images/pro-img3.jpg",
+						"mark":  ["限购一件","限购2件"],
+						"score": 999
+					}
+				]
+		}
+	]
 }
 
 ReactDOM.render(<MallProducts productsJson={productsJson} />, document.getElementById('cnt'));

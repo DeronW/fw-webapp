@@ -9,19 +9,22 @@ const MallVip = React.createClass({
     },
     handleClickTab:function(index) {
     	this.setState({tabOnIndex:index});
-    },
-    getTabClass:function(index){
-    	return index==this.state.tabOnIndex?"on":"";
-    },
-    getTabContClass:function(index){
-    	return index==this.state.tabOnIndex?"index-actList-list show":"index-actList-list";
-    },
-    
+    },    
 	render: function(){
 		var productsList=this.props.vipJson.vip;
 		var list=function(data, index){return <ProductItem data={data}  key={index} />};
 		var vipBoxClass=this.state.close?"vip-box":"vip-box vip-box-close";
 		var tabOnClass=this.state.tabOnIndex?"on":"";
+		let that=this;
+		let btn_vip = (name, index) => (
+			<li key={index} 
+				className={index == this.state.tabOnIndex ? "on" : ""}
+				onClick={function(){that.handleClickTab(index)}} 
+				style={{background:"#fff url(../images/tab-gray-dot.png) no-repeat right 0"}}>
+				<span>{name.title}</span>
+			</li>
+		)
+		
 		return (
 			<div>
 				<header className="header">
@@ -32,13 +35,18 @@ const MallVip = React.createClass({
 						<div className="vip-tip">您当前等级是<span className="vip-tip-mylevel">{this.props.vipJson.mylevel}</span>，可购买该等级及以下等级商品！
 							<div className="vip-tip-close" onClick={this.handleClickClose} style={{background:"url(../images/ico-gray-close.png) no-repeat center"}}></div>
 						</div>
-						<div className="vip-tab-box"><VipTab vip={vipJson} tabOnClass={tabOnClass}/></div>
+						<div className="vip-tab-box">
+							<ul className="vip-tab">
+								{productsList.map(btn_vip)}
+							</ul>
+						</div>
+						
 					</div>
 					<div className="vip-cont">
 						{
-							productsList.map(function(datavip){
+							productsList.map(function(datavip,index){
 								return (
-									<ul className="index-actList-list show">
+									<ul className={index == that.state.tabOnIndex?"index-actList-list show":"index-actList-list"} key={index}>
 										{datavip.products.map(list)}
 									</ul>
 								)
@@ -51,24 +59,7 @@ const MallVip = React.createClass({
 		)
 	}
 });
-const VipTab = React.createClass({
-	render: function(){
-		var tabOnClass=this.props.tabOnClass;
-		return (
-			<ul className="vip-tab">
-				{
-					this.props.vip.vip.map(function(data) {
-						return(
-							<li style={{background:"#fff url(../images/tab-gray-dot.png) no-repeat right 0"}}><span className={tabOnClass}>{data.title}</span></li>
-							)
-					})
-				}	
-			</ul>
-		)
-		
-	}
-	
-});
+
 
 const ProductItem = React.createClass({
 	render: function(){
