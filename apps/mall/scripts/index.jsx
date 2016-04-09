@@ -51,36 +51,10 @@ const ActivityProduct = React.createClass({
         return (
             <div className="index-actList-box">
                 <TextBar title={this.props.title} link={this.props.link}/>
-                <ActBanner img={this.props.img} link={this.props.link}/>
+                <div className="index-actList-img">
+                    <a href={this.props.link}><img src={this.props.img}/></a>
+                </div>
                 <ul className="index-actList-list">{this.props.products.map(pi)}</ul>
-            </div>
-        )
-    }
-});
-
-const ActBanner = React.createClass({
-    render: function () {
-        return (
-            <div className="index-actList-img">
-                <a href={this.props.link}><img src={this.props.img}/></a>
-            </div>
-        )
-    }
-});
-
-const Nav = React.createClass({
-    render: function () {
-        return (
-            <div className="indexnav">
-                <a href="#" className="indexnav1">
-                    <div className="text">VIP专区</div>
-                </a>
-                <a href="#" className="indexnav2">
-                    <div className="text">豆哥商品</div>
-                </a>
-                <a href="#" className="indexnav3">
-                    <div className="text">我的商城</div>
-                </a>
             </div>
         )
     }
