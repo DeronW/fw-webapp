@@ -1,219 +1,108 @@
 'use strict';
 
 const MallProducts = React.createClass({
-	getInitialState: function () {		
-    	return {tabOnIndex:0}
-	},
-	handleClickTab:function(index) {
-    	this.setState({tabOnIndex:index});
-    },  
-	render: function(){
-		var productsList=this.props.productsJson;
-		var list=function(data, index){return <ProductItem data={data}  key={index} />};
-		let _this=this;
-		return (
-			<div>
-				<header className="header">
-				豆哥商品<a href="#" className="btn-back" style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}></a>
-				</header>
-				<div className="productsTab">
-					{
-						productsList.list.map(function(name,index){
-							return (
-								<div key={index} 
-									className={index==_this.state.tabOnIndex?"act":""} 
-									onClick={function(){_this.handleClickTab(index)}}>
-									<span>{name.title}</span>
-								</div>
-							)						
-						})
-					}	
-				</div>
+    getInitialState: function () {
+        return {
+            index: 0,
+            tabs: ['all', 'virtual', 'reality'],
+            products: []
+        }
+    },
 
-				<div className="products-list">
-					{
-						productsList.list.map(function(name,index){
-							return (
-								<ul key={index} 
-									className={index==_this.state.tabOnIndex?"index-actList-list on":"index-actList-list"} >
-									{name.products.map(list)}
-								</ul>
-							)						
-						})
-					}
-				</div>
-						
-			</div>	
-		)
-	}
+    tabClickHandler: function (index) {
+        this.setState({index: index});
+    },
+
+    componentDidMount: function () {
+        let _this = this;
+        $FW.Ajax({
+            url: 'http://10.10.100.112/mockjs/4/api/v1/products?count=&type=&cursor=',
+            success: function (data) {
+                let products = window.Products.all.concat(data.products);
+                window.Products.all = products;
+                _this.setState({products: products});
+            }
+        })
+    },
+
+    render: function () {
+        let _this = this;
+
+        let tab = function (i, index) {
+            let name = {
+                all: '全部',
+                virtual: '虚拟商品',
+                reality: '实物商品'
+            };
+            return (
+                <div key={index}
+                     className={index==_this.state.index ? "act" : null}
+                     onClick={function(){_this.tabClickHandler(index)}}>
+                    <span>{name[i]}</span>
+                </div>
+            )
+        };
+
+        return (
+            <div>
+                <header className="header">
+                    豆哥商品
+                    <a className="btn-back"
+                       style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}> </a>
+                </header>
+                <div className="productsTab">
+                    {this.state.tabs.map(tab)}
+                </div>
+
+                <div className="products-list">
+                    <ul className="index-actList-list on">
+                        { this.state.products.map((p) => <ProductItem {...p} key={p.id}/>) }
+                    </ul>
+                </div>
+
+            </div>
+        )
+    }
 });
 
-
 const ProductItem = React.createClass({
-	render: function(){
-		var date2 = this.props.data;		
-		var price = (parseFloat(date2.score)>0)?(<span className="list-price-score">&#43;{date2.score}分</span>):"";
-		var Olabel=(date2.label)?(<div className="list-label">{date2.label}</div>):"";
-		return (
-			<li>
-				<a href={date2.ahref} className="index-actList-a">									
-					<div className="list-img"><img src={date2.img} /></div>
-					{Olabel}
-					<div className="list-name">{date2.name}</div>
-					<div className="list-mark">
-						{
-							date2.mark.map(function(d){
-								return (<div>{d}</div>)
-							})
-						}
-					</div>
-					<div className="list-price-box">
-						<div className="list-price">
-							<span className="list-price-mark">&yen;</span>
-							<span className="list-price-num">{formatNum(date2.price)}</span>							
-							{	
-								price
-							}	
-						</div>
-						<div className="list-sold">
-							<span>累计销量 </span>
-							<span>{date2.sold}</span>
-						</div>
-					</div>
-				</a>
-			</li>
-		)
-	}
-})
+    render: function () {
+        var price = (parseFloat(this.props.score) > 0) ? (
+            <span className="list-price-score">&#43;{this.props.score}分</span>) : null;
+        var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
 
+        return (
+            <li>
+                <a href={this.props.link} className="index-actList-a">
+                    <div className="list-img"><img src={this.props.img}/></div>
+                    {Angle}
+                    <div className="list-name">{this.props.title}</div>
+                    <div className="list-mark">
+                        { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
+                    </div>
+                    <div className="list-price-box">
+                        <div className="list-price">
+                            <span className="list-price-mark">&yen;</span>
+                            <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
+                            { price }
+                        </div>
+                        <div className="list-sold">
+                            <span>累计销量 </span>
+                            <span>{this.props.sales}</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        )
+    }
+});
 
-var productsJson={
-	"success":true,
-	"list":[
-			{
-			"title":"全部",
-			"products": [
-				{	"label":"",
-					"name": "product 11限购一件限购一件限购一件限购一件限购一件限人节人节人节人节人节人节人节购一件",
-					"price": "19900",
-					"sold": 999,
-					"ahref": "http://m.9888.cn/mpwap/",
-					"img": "../images/pro-img1.jpg",
-					"mark":  ["限购一件","限购2件"],					
-					"score": 999
-					
-				},				
-				{	"label":"愚",
-					"name": "product 12",
-					"price": "199900.0000",
-					"sold": 999,
-					"ahref": "http://m.9888.cn/mpwap/",
-					"img": "../images/pro-img2.jpg",
-					"mark": ["限购一件","限购2件"],
-					"score": 0
-				},
-				{
-					"label":"清",
-					"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
-					"price": "199900.000",
-					"sold": 999,
-					"ahref": "http://m.9888.cn/mpwap/",
-					"img": "../images/pro-img1.jpg",
-					"mark": ["限购一件","限购2件"],
-					"score": "999"
-				},				
-					
-				{	
-					"label":"清",
-					"name": "product 22",
-					"price": "900",
-					"sold": 999,
-					"ahref": "http://m.9888.cn/mpwap/",
-					"img": "../images/pro-img3.jpg",
-					"mark":  ["限购一件","限购2件"],
-					"score": 999
-				}
-			]
-		},
-		{	"title":"真实商品",
-			"products": [
-					{	
-						"label":"清",
-						"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
-						"price": "199900.000",
-						"sold": 999,
-						"ahref": "http://m.9888.cn/mpwap/",
-						"img": "../images/pro-img1.jpg",
-						"mark": ["限购一件","限购2件"],
-						"score": "999"
-					},									
-					{	
-						"label":"清",
-						"name": "product 22",
-						"price": "900",
-						"sold": 999,
-						"ahref": "http://m.9888.cn/mpwap/",
-						"img": "../images/pro-img3.jpg",
-						"mark":  ["限购一件","限购2件"],
-						"score": 999
-					}
-				]
-		},
-		{	"title":"虚拟商品",
-			"products": [
-					{	
-						"label":"愚",
-						"name": "Apple / 苹果   iPad Air2  128G   WIFI 64g 玫瑰色",
-						"price": "199900.000",
-						"sold": 999,
-						"ahref": "http://m.9888.cn/mpwap/",
-						"img": "../images/pro-img1.jpg",
-						"mark": ["限购一件","限购2件"],
-						"score": "999"
-					},									
-					{	
-						"label":"愚",
-						"name": "product 22",
-						"price": "900",
-						"sold": 999,
-						"ahref": "http://m.9888.cn/mpwap/",
-						"img": "../images/pro-img3.jpg",
-						"mark":  ["限购一件","限购2件"],
-						"score": 999
-					}
-				]
-		}
-	]
-}
+window.Products = {
+    all: [],
+    virtual: [],
+    real: []
+};
 
-ReactDOM.render(<MallProducts productsJson={productsJson} />, document.getElementById('cnt'));
-function formatNum(str){
-	var newStr = "";
-	var count = 0;			 
-	if(str.indexOf(".")==-1){
-	   for(var i=str.length-1;i>=0;i--){
-	if(count % 3 == 0 && count != 0){
-	   newStr = str.charAt(i) + "," + newStr;
-	}else{
-	   newStr = str.charAt(i) + newStr;
-	}
-	count++;
-	   }
-	   str = newStr + ".00";
-	   return str
-	}
-	else
-	{
-		for(var i = str.indexOf(".")-1;i>=0;i--){
-			if(count % 3 == 0 && count != 0){
-			   newStr = str.charAt(i) + "," + newStr;
-			}else{
-			   newStr = str.charAt(i) + newStr;
-			}
-	    	count++;
-	   }
-	   str = newStr + (str + "00").substr((str + "00").indexOf("."),3);
-	   return str
-	}
-}
-
+$FW.DOMReady(function () {
+    ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
+});
