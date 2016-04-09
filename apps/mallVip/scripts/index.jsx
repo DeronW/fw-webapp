@@ -32,8 +32,10 @@ const MallVip = React.createClass({
 				</header>
 				<div className={vipBoxClass}>				
 					<div className="vip-header">
-						<div className="vip-tip">您当前等级是<span className="vip-tip-mylevel">{this.props.vipJson.mylevel}</span>，可购买该等级及以下等级商品！
-							<div className="vip-tip-close" onClick={this.handleClickClose} style={{background:"url(../images/ico-gray-close.png) no-repeat center"}}></div>
+						<div className="vip-tip-box">
+							<div className="vip-tip">您当前等级是<span className="vip-tip-mylevel">{this.props.vipJson.mylevel}</span>，可购买该等级及以下等级商品！
+								<div className="vip-tip-close" onClick={this.handleClickClose} style={{background:"url(../images/ico-white-close.png) no-repeat center"}}></div>
+							</div>
 						</div>
 						<div className="vip-tab-box">
 							<ul className="vip-tab">

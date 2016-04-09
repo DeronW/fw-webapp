@@ -158,26 +158,31 @@ ul, ol, li {
         top:99px;
         left:0;
         width:100%;
-        .vip-tip{
-            position: relative;
+        .vip-tip-box{
             height:83px;
-            line-height:83px;
-            padding:0 30px;
-            color:#555;
-            font-size:26px;
-            background-color:#fee8b7;
+            background-color:#ebebee;
             border-bottom:1px solid #d8d8d8;
-            .vip-tip-mylevel{
-                color:#fd4d4c;
+            .vip-tip{
+                position: relative;
+                height:70px;
+                line-height:70px;
+                padding:0 30px;
+                color:#fff;
+                font-size:24px;
+                background-color:#5b6993;                
+                .vip-tip-mylevel{
+                    color:#fee8b7;
+                }
+                .vip-tip-close{
+                    position: absolute;
+                    top:0;
+                    right:0;
+                    height:70px;
+                    width:60px;                                
+                }            
             }
-            .vip-tip-close{
-                position: absolute;
-                top:0;
-                right:0;
-                height:83px;
-                width:60px;                                
-            }            
         }
+        
         .vip-tab-box{
             height:86px;
             background-color:#ebebee ;
@@ -228,7 +233,7 @@ ul, ol, li {
 .vip-box-close{
     padding:206px 0 0;
     .vip-header{
-        .vip-tip{
+        .vip-tip-box{
            display:none ; 
         }
     }
