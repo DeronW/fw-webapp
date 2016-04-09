@@ -17,7 +17,7 @@ plugins.imagemin = require('gulp-imagemin');
 plugins.sourcemaps = require('gulp-sourcemaps');
 plugins.rename = require('gulp-rename');
 
-const PROJECT_NAME = 'mall'; // 每次使用新项目时, 只需要更换项目名称
+const PROJECT_NAME = 'mallVip'; // 每次使用新项目时, 只需要更换项目名称
 
 const APP_PATH = `apps/${PROJECT_NAME}/`;
 const BUILD_PATH = `build/${PROJECT_NAME}/`;
@@ -53,7 +53,6 @@ gulp.task(PROJECT_NAME, function () {
     gulp.src([
             `${LIB_PATH}react-0.14.1/react.js`,
             `${LIB_PATH}react-0.14.1/react-dom.js`,
-            `${LIB_PATH}financial-workspace-0.1.0.js`,
             `${LIB_PATH}swipe.js`
         ])
         .pipe(plugins.changed(`${BUILD_PATH}scripts`))
