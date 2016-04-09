@@ -11,3 +11,7 @@ Thumbs.db
 
 !build/.git
 .project
+
+
+*swp
+*swo
