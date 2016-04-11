@@ -50,22 +50,59 @@ const Carousel = React.createClass({
 const ProductDesc = React.createClass({
 	render: function () {
 		var product = this.props.detailJson;
-		var scoreSpan = (parseFloat(product.score)>0)?(<span className="list-price-score">&#43;{product.score}分</span>):"";
+		var scoreSpan = (parseFloat(product.score)>0)?(<span className="score">&#43;{product.score}分</span>):"";
 		return(
 			<div className="product-desc">
-				<div className="list-name">{product.name}</div>
-				<div className="subtitle-name">{product.subtitle}</div>
-				<div className="list-price-box">
-					<div className="list-price">
-						<span className="list-price-mark">&yen;</span>
-						<span className="list-price-num">{formatNum(product.price)}</span>
-                        {
-                            scoreSpan
-                        }
+				<div className="detail-inf">
+					<div className="detail-inf-name">
+						{product.name}
 					</div>
-					<div className="list-sold">
-						<span>累计销量 </span>
-						<span>{product.sold}</span>
+					<div className="detail-inf-des">
+						{product.subtitle}
+					</div>
+					<div className="detail-inf-price">
+						<span className="money">&yen;</span>
+						<span className="price">{formatNum(product.price)}</span>
+						{
+							scoreSpan
+						}
+					</div>
+					<div className="detail-inf1">
+						<div className="market-price"><span>市价：</span><span>&yen;{formatNum(product.market_price)}</span>
+						</div>
+						<div className="total"><span>累计销量</span><span>{product.sold}</span></div>
+					</div>
+					<div className="detail-inf1">
+						<div className="market-price"><span>快递：</span><span>{}</span>
+						</div>
+						<div className="total"><span>配送范围：</span><span>{}</span></div>
+					</div>
+				</div>
+				<div className="detail-mark">
+					<div>限购普一见</div><div>拉新5人</div><div>1111</div>
+				</div>
+				<div className="detail-explain">
+					<div className="detail-explain-h">活动说明</div>
+					<div className="detail-explain-cont">
+						<p>1、活动时间2.22~3.23；</p>
+						<p>2、30日内累计投资满5W；</p>
+						<p>3、活动期间内拉新人数大于5人</p>
+						<p>4、年化拉新投资大于10W。</p>
+					</div>
+				</div>
+				<div className="detail-des">
+					<p>商品展示的划横线价格为参考价，该价格可能是品牌专柜标价、商品吊牌价或由品牌供应商提供的正品零售价（如厂商指导价、建议零售价等）或该商品在京东平台上曾经展示过的销售价；由于地区、时间的差异性和市场行情波动，品牌专柜标价、商品吊牌价等可能会与您购物时展示的不一致，该价格仅供您参考。</p>
+					<img src=""/>
+				</div>
+				<div className="detail-foot">
+					<div className="detail-num-change">
+						<div className="plus"></div><input type="text" value="0"/><div className="minus"></div>
+					</div>
+					<div className="stock-box">
+						<span>库存</span><span className="stock">10000</span><span className="unit">件</span>
+					</div>
+					<div className="btn-buy btn-buy-dis">
+						立即购买
 					</div>
 				</div>
 			</div>
