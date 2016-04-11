@@ -7,6 +7,7 @@ cdn
 
 workspace.xml
 .idea
+*.iml
 Thumbs.db
 
 !build/.git

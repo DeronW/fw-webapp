@@ -1,0 +1,173 @@
+html, body {
+    margin: 0;
+    background-color:#ebebee;
+}
+img {
+    width:100%;
+    height:auto;
+}
+
+a{
+    text-decoration: none;
+    &:active{outline:0;}
+    &:focus{outline:0;}
+}
+ul, ol, li {
+    list-style: none outside none;
+    padding:0;
+    margin:0;
+}
+.header {
+    z-index:2;
+    position:fixed;
+    top:0;
+    left:0;
+    width:720px;
+    height: 98px;
+    line-height:98px;
+    text-align: center;
+    font-size: 40px;
+    color:#333;
+    background-color:#fff;
+    border-bottom:1px solid #d8d8d8;
+    .btn-back {
+        width: 60px;
+        height: 60px;
+
+    }
+}
+
+.product-desc{
+    padding:0 0 0 20px;
+    margin-top: 30px;
+    background-color:#fff;
+    .list-name{
+        line-height:38px;
+        max-height:76px;
+        margin-bottom:14px;
+        font-size:40px;
+        color:#333;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .subtitle-name{
+        line-height:38px;
+        max-height:76px;
+        margin-bottom:14px;
+        font-size:30px;
+        color: #5b729a;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .list-price-box{
+        bottom:1px;
+        left:200px;
+        width:480px;
+        height:55px;
+        line-height:50px;
+        *zoom:1;
+        &:after {
+            content:'';
+            display:block;
+            height:0;
+            clear:both;
+        }
+        .list-price{
+            float:left;
+            height:55px;
+            line-height:50px;
+            color:#fd4d4c;
+            font-size:28px;
+            .list-price-num{
+                font-size:38px;
+            }
+            .list-price-scorehide{
+                display:none;
+            }
+        }
+        .list-sold{
+            float:right;
+            height:55px;
+            line-height:50px;
+            color:#999;
+            font-size:24px;
+        }
+
+    }
+}
+
+.banner-carousel {
+    padding:99px 0 0;
+    position: relative;
+
+    .wrap {
+        & > div {
+            height: 400px;
+            background: #fff;
+        }
+        img{
+            width:100%;
+            height:auto;
+        }
+    }
+
+    .points {
+        list-style: none;
+        bottom: 23px;
+        width: 720px;
+        height: 60px;
+        left: 0;
+        text-align: center;
+        background: #fff;
+        div {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            background: rgba(219, 219, 219, 0.25);
+            border-radius: 50%;
+            margin-right: 18px;
+            margin-top: 23px;
+            &:last-child{margin-right:0;}
+            &.on {
+                background: #ee343b;
+            }
+
+        }
+    }
+}
+
+.indexnav {
+    height: 140px;
+    background-color:#fff;
+    border-bottom:1px solid #d8d8d8;
+    *zoom:1;
+    &:after {
+        content:'';
+        display:block;
+        height:0;
+        clear:both;
+    }
+    a {
+        float:left;
+        color:#555;
+        font-size:26px;
+        padding:85px 0 0;
+        div{
+            text-align: center;
+            line-height:44px;
+        }
+    }
+    .indexnav1{
+        width:238px;
+        background:url(../images/ico-vip.png) no-repeat center 23px ;
+    }
+    .indexnav2{
+        width:242px;
+        background:url(../images/ico-goods.png) no-repeat center 23px ;
+    }
+    .indexnav3{
+        width:240px;
+        background:url(../images/ico-shop.png) no-repeat center 23px ;
+    }
+
+}
