@@ -322,22 +322,6 @@ strN(str);
 })
 
 
-function strN(str) {
-    var a ";
-    var n = 3;
-    var c = 1;
-    var d = 0;
-
-    for(var i = 0; i < str.length; i++) {
-        if((i+ 1) == (n * c)) {
-            
-            console.log(a+str.substring(d, n * c));
-            d = n * c;    
-            c++;
-        }
-    }
-}
-
 
 
 
