@@ -65,6 +65,7 @@ ul, ol, li {
         width:480px;
         height:55px;
         line-height:50px;
+        color:#fd4d4c;
         *zoom:1;
         &:after {
             content:'';
@@ -72,12 +73,13 @@ ul, ol, li {
             height:0;
             clear:both;
         }
+        .money{
+            font-size:38px;
+        }
         .price{
-            float:left;
             height:55px;
             line-height:50px;
-            color:#fd4d4c;
-            font-size:28px;
+            font-size:48px;
             .list-price-num{
                 font-size:38px;
             }
@@ -85,12 +87,92 @@ ul, ol, li {
                 display:none;
             }
         }
-        .list-sold{
+        .score{
+            position: absolute;
+            height:60px;
+            text-align: center;
+            color:#fd4d4c;
+            font-size:38px;
+            //font-size:30px;
+        }
+
+    }
+    .detail-inf1{
+        bottom:1px;
+        left:200px;
+        width:480px;
+        height:55px;
+        line-height:50px;
+        *zoom:1;
+        &:after {
+            content:'';
+            display:block;
+            height:0;
+            clear:both;
+        }
+        .market-price{
+            float:left;
+            height:55px;
+            line-height:50px;
+            color:#999;
+            font-size:24px;
+        }
+        .total{
             float:right;
             height:55px;
             line-height:50px;
             color:#999;
             font-size:24px;
+        }
+
+    }
+
+    .detail-inf2{
+        bottom:1px;
+        left:200px;
+        width:480px;
+        height:55px;
+        line-height:50px;
+        *zoom:1;
+        &:after {
+            content:'';
+            display:block;
+            height:0;
+            clear:both;
+        }
+        .send-channels{
+            float:left;
+            height:55px;
+            line-height:50px;
+            color:#999;
+            font-size:24px;
+        }
+        .send-channel-rang{
+            float:right;
+            height:55px;
+            line-height:50px;
+            color:#999;
+            font-size:24px;
+        }
+
+    }
+    .detail-mark{
+        color:#6280a8;
+        font-size:20px;
+        line-height:28px;
+        *zoom:1;
+        &:after {
+            content:'';
+            display:block;
+            height:0;
+            clear:both;
+        }
+        div{
+            float:left;
+            padding:0 10px;
+            margin:0 10px 4px 0;
+            border:2px solid #6280a8;
+            border-radius:4px;
         }
 
     }

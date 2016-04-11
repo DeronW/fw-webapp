@@ -72,14 +72,14 @@ const ProductDesc = React.createClass({
 						</div>
 						<div className="total"><span>累计销量</span><span>{product.sold}</span></div>
 					</div>
-					<div className="detail-inf1">
-						<div className="market-price"><span>快递：</span><span>免运费</span>
+					<div className="detail-inf2">
+						<div className="send-channels"><span>快递：</span><span>免运费</span>
 						</div>
-						<div className="total"><span>配送范围：</span><span>全国</span></div>
+						<div className="send-channel-rang"><span>配送范围：</span><span>全国</span></div>
 					</div>
 				</div>
 				<div className="detail-mark">
-					<div>限购普一见</div><div>拉新5人</div><div>1111</div>
+					{ product.mark.map((d, index) => <div key={index}>{d}</div>) }
 				</div>
 				<div className="detail-explain">
 					<div className="detail-explain-h">活动说明</div>
