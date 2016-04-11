@@ -73,9 +73,9 @@ const ProductDesc = React.createClass({
 						<div className="total"><span>累计销量</span><span>{product.sold}</span></div>
 					</div>
 					<div className="detail-inf1">
-						<div className="market-price"><span>快递：</span><span>{}</span>
+						<div className="market-price"><span>快递：</span><span>免运费</span>
 						</div>
-						<div className="total"><span>配送范围：</span><span>{}</span></div>
+						<div className="total"><span>配送范围：</span><span>全国</span></div>
 					</div>
 				</div>
 				<div className="detail-mark">
