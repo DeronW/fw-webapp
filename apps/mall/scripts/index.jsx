@@ -122,7 +122,6 @@ function formatNum(str) {
     var newStr = "";
     var count = 0;
     str += '';
-
     if (str.indexOf(".") == -1) {
         for (var i = str.length - 1; i >= 0; i--) {
             if (count % 3 == 0 && count != 0) {
