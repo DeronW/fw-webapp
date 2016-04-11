@@ -1,68 +1,213 @@
 'use strict';
 
 const Mall = React.createClass({
-    render: function () {
+	
+    render: function () {  
+    	let data=this.props.data;
+    	let score=data.score?<span className="score"> + {data.score}分</span>:"";
+    	let markList=(list,index)=><div>{list}</div>;
+    	let descData=data.desc.split(/[;|；]/)
+    	let desc = descData.map(function(i, index){
+                		return <div key={index}>{i}</div>
+                	})		    	
         return (
-            <div>
+            <div  className="detail-box">
                 <header className="header">商品详情<a href="#" className="btn-back"
                        style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}> </a></header>
-                <CarouselDetail banners={this.props.banners}/>    
+                <CarouselDetail data={this.props.data}/>    
                 <div className="detail-inf">
-	                <div className="detail-inf-name">
-	                戴森(Dyson)吸尘器V6 origin+高配版(旧名DC62 Complete)(新老包装型号随机发，产品相同)	                	
-	                </div>
-                	<div className="detail-inf-des">
-                	</div>
+	                <div className="detail-inf-name">{data.title}</div>
+                	<div className="detail-inf-des">{data.sub_title} </div>
                 	<div className="detail-inf-price">
-                		<span className="money">&yen;</span><span className="price">2,199</span><span className="score">+ {200}分</span>
+                		<span className="money">&yen;</span><span className="price">{$FW.Format.currency(data.price)}</span>
+                		{score}
                 	</div>
                 	<div className="detail-inf1">
-                		<div className="market-price"><span>市价：</span><span>&yen;{3688}</span>
+                		<div className="market-price"><span>市价：</span><span className="market-price-num">&yen;{data.market_price}</span>
                 		</div>
-                		<div className="total"><span>累计销量</span><span>{3688}</span></div>
+                		<div className="total"><span>累计销量</span><span className="total-num">{data.sales}</span></div>
                 	</div>
                 	<div className="detail-inf1">
-                		<div className="market-price"><span>快递：</span><span>{}</span>
+                		<div className="market-price"><span>快递：</span><span>{data.ems}</span>
                 		</div>
-                		<div className="total"><span>配送范围：</span><span>{}</span></div>
+                		<div className="total"><span>配送范围：</span><span>{data.range}</span></div>
                 	</div>                	                	
                 </div>
                 <div className="detail-mark">
-                	<div>限购普一见</div><div>拉新5人</div><div>1111</div>
+                	{data.mark.map(markList)}
                 </div>
                 <div className="detail-explain">
                 	<div className="detail-explain-h">活动说明</div>
-                	<div className="detail-explain-cont">
-                		<p>1、活动时间2.22~3.23；</p>
-						<p>2、30日内累计投资满5W；</p>
-						<p>3、活动期间内拉新人数大于5人</p>
-						<p>4、年化拉新投资大于10W。</p>
-					</div>
+                	<div className="detail-explain-cont">{desc}</div>					
                 </div>
                 <div className="detail-des">
-                	<p>商品展示的划横线价格为参考价，该价格可能是品牌专柜标价、商品吊牌价或由品牌供应商提供的正品零售价（如厂商指导价、建议零售价等）或该商品在京东平台上曾经展示过的销售价；由于地区、时间的差异性和市场行情波动，品牌专柜标价、商品吊牌价等可能会与您购物时展示的不一致，该价格仅供您参考。</p>
-                	<img src=""/>
-                </div>
-                <div className="detail-foot">
-                	<div className="detail-num-change">
-                		<div className="plus"></div><input type="text" value="0"/><div className="minus"></div>
-                	</div>
-                	<div className="stock-box">
-                		<span>库存</span><span className="stock">10000</span><span className="unit">件</span>
-                	</div>
-                	<div className="btn-buy btn-buy-dis">
-                		立即购买
-                	</div>
-                </div>
+                	{data.rich_detail}
+                </div>                              	
+                {<PlusMinus MaxNum={data.stock}/>}                	               
             </div>
         )
     }
+});
+const PlusMinus=React.createClass({
+	 getInitialState: function (e) {
+        return {
+        	value:1,
+            disable:false,
+            minus:false,
+            plus:true
+        }
+    },
+    changeValue: function (e) {  	
+		if(this.props.MaxNum==0){    		
+    		this.setState({ 
+	        	value:0,
+	            disable:true,
+	            minus:false,
+	            plus:false
+        	})
+    	}else if(e.target.value==""){
+			this.setState({ 
+	        	value:e.target.value,
+    		});
+    		return
+		}else if(parseInt(e.target.value)==1&&parseInt(e.target.value)<this.props.MaxNum){
+			this.setState({ 
+	        	value:1,
+	            minus:false,
+	            plus:true
+        	});
+        	return
+		}else if(parseInt(e.target.value)>=this.props.MaxNum){
+			this.setState({ 
+	        	value:this.props.MaxNum,
+	            minus:true,
+	            plus:false
+        	});
+		}else if(1<parseInt(e.target.value)&&parseInt(e.target.value)<this.props.MaxNum){
+			this.setState({ 
+	        	value:e.target.value,
+	            minus:true,
+	            plus:true
+        	});
+		}else{
+			this.setState({ 
+	        	value:1,
+	            minus:false,
+	            plus:true
+        	});
+		}    	    	        
+    },
+    changePlus: function (e) {    	
+    	if(this.props.MaxNum==0){    		
+    		this.setState({ 
+	        	value:0,
+	            disable:true,
+	            minus:false,
+	            plus:false
+        	})
+    	}else if(this.props.MaxNum==1){    		
+    		this.setState({ 
+	        	value:1,
+	            disable:false,
+	            minus:false,
+	            plus:false
+        	})
+    	}else if(parseInt(this.state.value)<this.props.MaxNum){    		
+    		this.setState({ 
+	        	value:parseInt(this.state.value)+1,
+	            disable:false,
+	            minus:true,
+	            plus:true
+        	})
+    	}else if(parseInt(this.state.value)==this.props.MaxNum){
+    		this.setState({ 
+	        	value:parseInt(this.state.value),
+	            disable:false,
+	            minus:true,
+	            plus:false
+        	})
+    	}
+        
+    },
+    changeMinus: function (e) {    	
+    	if(this.props.MaxNum==0){    		
+    		this.setState({ 
+	        	value:0,
+	            disable:true,
+	            minus:false,
+	            plus:false
+        	})
+    	}else if(this.props.MaxNum==1){    		
+    		this.setState({ 
+	        	value:1,
+	            disable:false,
+	            minus:false,
+	            plus:false
+        	})
+    	}else if(parseInt(this.state.value)==2){    		
+    		this.setState({ 
+	        	value:parseInt(this.state.value)-1,
+	            disable:false,
+	            minus:false,
+	            plus:true
+        	})
+    	}else if(parseInt(this.state.value)>2){
+    		this.setState({ 
+	        	value:parseInt(this.state.value)-1,
+	            disable:false,
+	            minus:true,
+	            plus:true
+        	})
+    	}
+        
+    },
+    
+    blur: function (e) {
+        if(this.props.MaxNum==0){    		
+    		this.setState({ 
+	        	value:0,
+	            disable:true,
+	            minus:false,
+	            plus:false
+        	})
+    	}else if(e.target.value==""){
+			this.setState({ 
+	        	value:1,
+    		})
+		}
+    },
+	render: function () {
+		let disable="#";
+		let btnBuy="btn-buy btn-buy-dis";
+		if(this.props.MaxNum>0){
+			disable=this.state.disable?"http://m.9888.cn/mpwap/":"#";
+			btnBuy=this.state.disable?"btn-buy btn-buy-dis":"btn-buy";
+		}		
+		let stock=this.props.MaxNum;
+		let _this=this;
+		let minusb=this.state.minus?"blue-minus":"gray-minus";
+		let plusb=this.state.plus?"blue-plus":"gray-plus";
+		
+		return (
+			<div className="detail-foot">  
+				<div className="detail-num-change">
+	        		<div className="minus" onClick={_this.changeMinus} style={{background:"url(../images/"+minusb+".png) no-repeat center"}}></div>
+	        		<div className="input-num"><input type="text" value={_this.state.value} onChange={_this.changeValue} onBlur={_this.blur}/></div>        		
+	        		<div className="plus" onClick={_this.changePlus}  style={{background:"url(../images/"+plusb+".png) no-repeat center"}}></div>
+	            </div>
+	            <div className="stock-box">
+	                <span>库存</span><span className="stock">{stock}</span><span className="unit">件</span>
+	            </div>
+	            <a href={disable} className={btnBuy}>立即购买</a>
+            </div>
+		)
+	}
 });
 
 const CarouselDetail = React.createClass({
     getInitialState: function () {
         return {
-            banners: this.props.banners,
+            banners: this.props.data.head_images,
             cur_index: 0
         }
     },
@@ -92,11 +237,10 @@ const CarouselDetail = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.BatchGet([
-        'http://10.10.100.112/mockjs/4/api/v1/mall/banner',
-        'http://10.10.100.112/mockjs/4/api/v1/mall/activities'
+        'http://10.10.100.112/mockjs/4/api/v1/product/?product_id='
     ], function (data) {
-        var banners = data[0].banners, activities = data[1].activities;
-        ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
+        var data = data[0];
+        ReactDOM.render(<Mall data={data} />, document.getElementById('cnt'));
     });
 });
 
