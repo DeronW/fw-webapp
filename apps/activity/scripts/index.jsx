@@ -1,5 +1,7 @@
 'use strict';
 
+const STATIC_PATH = document.getElementById('static-path').value;
+const API_PATH = document.getElementById('api-path').value;
 
 const MallActivity = React.createClass({
     render: function () {
@@ -8,14 +10,11 @@ const MallActivity = React.createClass({
                 <header className="header">
                     {this.props.activity.title}
                     <a href="#" className="btn-back"
-                       style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}> </a>
+                       style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}> </a>
                 </header>
                 <a href="#" className="act-img-detail"><img src={this.props.activity.img}/></a>
                 <MallActivity.Explain desc={this.props.activity.desc}/>
-                <div className="products-act">
-                    <ProductList />
-                </div>
-
+                <ProductList />
             </div>
         )
     }
@@ -23,24 +22,29 @@ const MallActivity = React.createClass({
 
 MallActivity.Explain = React.createClass({
     getInitialState: function () {
-        return {show: true}
+        return {show: false}
     },
     toggleHandler: function () {
         this.setState({show: !this.state.show});
     },
     render: function () {
-        var actExplainContClass = this.state.show ? "act-explain-cont" : "act-explain-cont show";
-        var actExplainBtn = this.state.show ? "act-explain-btn" : "act-explain-btn on";
-        return (
-            <div className="act-explain-box">
-                <div className="act-explain-head">
-                    <div className="act-explain-h">活动说明</div>
-                    <div className={actExplainBtn} onClick={this.toggleHandler}
-                         style={{background:"url(../images/ico-grap-down.png) no-repeat center"}}></div>
-                </div>
-                <ul className={actExplainContClass}>
+        let desc = null;
+        if(this.state.show) {
+            desc = (
+                <ul className="act-explain-cont show">
                     { this.props.desc.split(',').map((i, index) => <li key={index}>{i}</li>) }
                 </ul>
+            )
+        }
+
+        return (
+            <div className="act-explain-box">
+                <div className="act-explain-head" onClick={this.toggleHandler}>
+                    <div className="act-explain-h">活动说明</div>
+                    <div className={this.state.show ? "act-explain-btn on" : "act-explain-btn"}
+                         style={{background:"url("+STATIC_PATH+"images/ico-grap-down.png) no-repeat center"}}></div>
+                </div>
+                {desc}
             </div>
         )
     }
@@ -48,9 +52,7 @@ MallActivity.Explain = React.createClass({
 
 const ProductList = React.createClass({
     getInitialState: function () {
-        return {
-            products: []
-        }
+        return { products: []}
     },
     componentDidMount: function () {
         $FW.Ajax({
@@ -62,9 +64,11 @@ const ProductList = React.createClass({
     },
     render: function () {
         return (
-            <ul className="index-actList-list">
-                { this.state.products.map((p) => <ProductItem {...p} key={p.id}/>) }
-            </ul>
+            <div className="products-act">
+                <ul className="index-actList-list">
+                    { this.state.products.map((p) => <ProductItem {...p} key={p.id}/>) }
+                </ul>
+            </div>
         )
     }
 });
@@ -104,9 +108,9 @@ const ProductItem = React.createClass({
 $FW.DOMReady(function () {
     $FW.BatchGet(
         [
-            'http://10.10.100.112/mockjs/4/api/v1/activity?activity_id=12',
-            'http://10.10.100.112/mockjs/4/api/v1/products?count=&type=&cursor='
+            'http://10.10.100.112/mockjs/4/api/v1/activity?activity_id=12'
+            //API_PATH + 'mall/api/v1/activity?activity_id=12',
         ], function (arr) {
-            ReactDOM.render(<MallActivity activity={arr[0]} products={arr[1]} />, document.getElementById('cnt'));
+            ReactDOM.render(<MallActivity activity={arr[0]} />, document.getElementById('cnt'));
         });
 });

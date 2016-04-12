@@ -1,5 +1,8 @@
 'use strict';
 
+const STATIC_PATH = document.getElementById('static-path').value;
+const API_PATH = document.getElementById('api-path').value;
+
 const MallProducts = React.createClass({
     getInitialState: function () {
         return {
@@ -48,7 +51,7 @@ const MallProducts = React.createClass({
                 <header className="header">
                     豆哥商品
                     <a className="btn-back"
-                       style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}> </a>
+                       style={{background:"url(" + STATIC_PATH + "images/ico-blue-back.png) no-repeat 30px center"}}> </a>
                 </header>
                 <div className="productsTab">
                     {this.state.tabs.map(tab)}

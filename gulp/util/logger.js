@@ -12,4 +12,4 @@ module.exports = {
         var prettyTime = prettyHrtime.hrtime(taskTime);
         gutil.log('Bundling', gutil.colors.green(filepath), 'in', gutil.colors.magenta(prettyTime) )
     }
-}
+};
