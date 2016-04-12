@@ -1,0 +1,1 @@
+require('../generate_task.js')('vip_zone');

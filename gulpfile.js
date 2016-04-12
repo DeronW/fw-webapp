@@ -17,3 +17,12 @@ gulp.task('clean', function () {
     // You can use multiple globbing patterns as you would with `gulp.src`
     del(['build', 'dest', 'dist']);
 });
+
+gulp.task('package:mall', ['mall', 'mallAct', 'mallDetail', 'mallproducts', 'mallVip', 'mine'], function () {
+
+    gulp.src([
+        'build/mall/**',
+        'build/mallAct/**',
+        'build/mallDetail/**'
+    ]).pipe(gulp.dest('cdn'));
+});

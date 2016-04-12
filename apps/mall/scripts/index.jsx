@@ -1,15 +1,26 @@
 'use strict';
 
+const STATIC_PATH = document.getElementById('static-path').value;
+const API_PATH = document.getElementById('api-path').value;
+
 const Mall = React.createClass({
     render: function () {
+        let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} link={i.link}
+                                                      products={i.products} key={index}/>;
         return (
             <div>
                 <header className="header">豆哥商城</header>
                 <Carousel banners={this.props.banners}/>
+                <div className="header-nav">
+                    <a className="vip" style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-vip.png)'}}>
+                        VIP专区 </a>
+                    <a className="goods" style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-goods.png)'}}>
+                        豆哥商城 </a>
+                    <a className="mine" style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-shop.png)'}}>
+                        我的商城 </a>
+                </div>
                 <div className="index-actList-wrap">
-                    { this.props.activities.map((i, index) =>
-                        <ActivityProduct title={i.title} img={i.img} link={i.link}
-                                         products={i.products} key={index}/>) }
+                    { this.props.activities.map(activity) }
                 </div>
             </div>
         )
@@ -93,7 +104,7 @@ const ProductItem = React.createClass({
                     <div className="list-price-box">
                         <div className="list-price">
                             <span className="list-price-mark">&yen;</span>
-                            <span className="list-price-num">{formatNum(this.props.price)}</span>
+                            <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
                             { price }
                         </div>
                         <div className="list-sold">
@@ -109,39 +120,10 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.BatchGet([
-        'http://10.10.100.112/mockjs/4/api/v1/mall/banner',
-        'http://10.10.100.112/mockjs/4/api/v1/mall/activities'
+        API_PATH + 'mall/api/v1/banners.json', // banner轮播图数据
+        API_PATH + 'mall/api/v1/activities.json' // 明前活动的数据
     ], function (data) {
         var banners = data[0].banners, activities = data[1].activities;
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
     });
 });
-
-
-function formatNum(str) {
-    var newStr = "";
-    var count = 0;
-    str += '';
-    if (str.indexOf(".") == -1) {
-        for (var i = str.length - 1; i >= 0; i--) {
-            if (count % 3 == 0 && count != 0) {
-                newStr = str.charAt(i) + "," + newStr;
-            } else {
-                newStr = str.charAt(i) + newStr;
-            }
-            count++;
-        }
-        str = newStr + ".00";
-    } else {
-        for (var i = str.indexOf(".") - 1; i >= 0; i--) {
-            if (count % 3 == 0 && count != 0) {
-                newStr = str.charAt(i) + "," + newStr;
-            } else {
-                newStr = str.charAt(i) + newStr;
-            }
-            count++;
-        }
-        str = newStr + (str + "00").substr((str + "00").indexOf("."), 3);
-    }
-    return str
-}

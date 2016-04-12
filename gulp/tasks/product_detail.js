@@ -1,0 +1,1 @@
+require('../generate_task.js')('product_detail');

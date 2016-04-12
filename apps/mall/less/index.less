@@ -25,10 +25,10 @@ ul, ol, li {
 }
 
 .header {
-  z-index:2;
-  position:fixed;
-  top:0;
-  left:0;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 720px;
   height: 98px;
   line-height: 98px;
@@ -79,112 +79,112 @@ ul, ol, li {
     font-size: 28px;
   }
 }
-.index-actList-list{
-    padding:0 0 0 20px;
-    background-color:#fff;
-    li{  
-        border-bottom:1px solid #e3e5ea;
-        &:last-child{
-               border-bottom:none;
-        }      
-        a{
-            display: block;
-            position:relative;
-            padding:15px 20px 18px 200px;            
-            height:185px;
-            .list-img{
-                position:absolute;
-                top:20px;
-                left:0px;
-                width:180px;
-                height:180px;
-            }
-            .list-label{
-                position: absolute;
-                left:-10px;
-                top:10px;
-                height:60px;
-                line-height:60px;
-                width:60px;
-                text-align: center;
-                border-radius:30px ;
-                color:#fff;
-                font-size:30px;
-                background-color:#fd4d4c ;
-            }
-            .list-price-box{
-                position: absolute;
-                bottom:1px;
-                left:200px; 
-                width:480px;
-                height:55px;
-                line-height:50px;
-                display:table;               
-                .list-price{
-                    float:left;
-                    height:55px;
-                    line-height:50px;
-                    color:#fd4d4c;
-                    font-size:28px;
-                    .list-price-num{
-                       font-size:38px; 
-                    }
-                    .list-price-scorehide{
-                        display:none;
-                    }
-                }
-            }
-        .list-sold {
-          float: right;
+
+.index-actList-list {
+  padding: 0 0 0 20px;
+  background-color: #fff;
+  li {
+    border-bottom: 1px solid #e3e5ea;
+    &:last-child {
+      border-bottom: none;
+    }
+    a {
+      display: block;
+      position: relative;
+      padding: 15px 20px 18px 200px;
+      height: 185px;
+      .list-img {
+        position: absolute;
+        top: 20px;
+        left: 0px;
+        width: 180px;
+        height: 180px;
+      }
+      .list-label {
+        position: absolute;
+        left: -10px;
+        top: 10px;
+        height: 60px;
+        line-height: 60px;
+        width: 60px;
+        text-align: center;
+        border-radius: 30px;
+        color: #fff;
+        font-size: 30px;
+        background-color: #fd4d4c;
+      }
+      .list-price-box {
+        position: absolute;
+        bottom: 1px;
+        left: 200px;
+        width: 480px;
+        height: 55px;
+        line-height: 50px;
+        display: table;
+        .list-price {
+          float: left;
           height: 55px;
           line-height: 50px;
-          color: #999;
-          font-size: 24px;
+          color: #fd4d4c;
+          font-size: 28px;
+          .list-price-num {
+            font-size: 38px;
+          }
+          .list-price-scorehide {
+            display: none;
+          }
         }
+      }
+      .list-sold {
+        float: right;
+        height: 55px;
+        line-height: 50px;
+        color: #999;
+        font-size: 24px;
+      }
 
-      }
-      .list-name {
-        line-height: 38px;
-        max-height: 76px;
-        margin-bottom: 14px;
-        font-size: 30px;
-        color: #333;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .list-mark {
-        color: #6280a8;
-        font-size: 20px;
-        line-height: 28px;
-        *zoom: 1;
-        &:after {
-          content: '';
-          display: block;
-          height: 0;
-          clear: both;
-        }
-        div {
-          float: left;
-          padding: 0 10px;
-          margin: 0 10px 4px 0;
-          border: 2px solid #6280a8;
-          border-radius: 4px;
-        }
-
-      }
     }
-  
+    .list-name {
+      line-height: 38px;
+      max-height: 76px;
+      margin-bottom: 14px;
+      font-size: 30px;
+      color: #333;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .list-mark {
+      color: #6280a8;
+      font-size: 20px;
+      line-height: 28px;
+      *zoom: 1;
+      &:after {
+        content: '';
+        display: block;
+        height: 0;
+        clear: both;
+      }
+      div {
+        float: left;
+        padding: 0 10px;
+        margin: 0 10px 4px 0;
+        border: 2px solid #6280a8;
+        border-radius: 4px;
+      }
+
+    }
+  }
+
 }
 
 .banner-carousel {
   position: relative;
-  height: 240px;
+  height: 190px;
   overflow: hidden;
-  padding:99px 0 0;
+  padding: 99px 0 0;
 
   .wrap {
     & > div {
-      height: 232px;
       background: #f2f2f2;
     }
   }
@@ -204,6 +204,7 @@ ul, ol, li {
       background: rgba(255, 255, 255, 0.25);
       border-radius: 50%;
       margin-right: 18px;
+      border: 1px solid #979797;
       &:last-child {
         margin-right: 0;
       }
@@ -215,17 +216,14 @@ ul, ol, li {
   }
 }
 
-.indexnav {
+.header-nav {
   height: 140px;
   background-color: #fff;
   border-bottom: 1px solid #d8d8d8;
-  *zoom: 1;
-  &:after {
-    content: '';
-    display: block;
-    height: 0;
-    clear: both;
-  }
+  width: 100%;
+  display: table;
+  text-align: center;
+
   a {
     float: left;
     color: #555;
@@ -236,17 +234,16 @@ ul, ol, li {
       line-height: 44px;
     }
   }
-  .indexnav1 {
+  .vip {
     width: 238px;
-    background: url(../images/ico-vip.png) no-repeat center 23px;
+    background: transparent url() no-repeat center 23px;
   }
-  .indexnav2 {
+  .goods {
     width: 242px;
-    background: url(../images/ico-goods.png) no-repeat center 23px;
+    background: transparent url() no-repeat center 23px;
   }
-  .indexnav3 {
+  .mine {
     width: 240px;
-    background: url(../images/ico-shop.png) no-repeat center 23px;
+    background: transparent url() no-repeat center 23px;
   }
-
 }
