@@ -119,25 +119,43 @@ login:mall
 
 backward
 
+backward:level
+
 关闭当前页面
 
 close
 
+close:next_view
+
 显示后退按钮
 
-show:back_button
+show_back_button
 
 隐藏后退按钮
 
-hide:back_button
+hide_back_button
 
 显示关闭按钮
 
-show:close_button
+show_close_button
 
 隐藏关闭按钮
 
-hide:close_button
+hide_close_button
+
+页面加载动画
+
+显示
+
+loading:show_cover
+
+隐藏
+
+loading:hide_cover
+
+加载完成
+
+loading:complete
 
 设置标题
 
