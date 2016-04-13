@@ -19,6 +19,6 @@ gulp.task('clean', function () {
 });
 
 // package mall file
-gulp.task('package:mall', gulp.series(['mall', 'mine'], function () {
-    gulp.src(['build/**']).pipe(gulp.dest('cdn'));
-}));
+//gulp.task('package:mall', gulp.series(['mall', 'mine'], function () {
+//    gulp.src(['build/**']).pipe(gulp.dest('cdn'));
+//}));
