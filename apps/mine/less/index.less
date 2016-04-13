@@ -316,8 +316,8 @@ em, i {
                 .line-height(30px);
             }
 
-            }
         }
+    }
 }
 
 
@@ -427,10 +427,10 @@ em, i {
 
 	.t-info {
 		.height(96px);
-		.back-color(#ff8758);
 		.color(#fff);
 		.padding(20px, 20px, 0, 20px);
 		.border-radius-l-r(5px, 5px);
+        background: #ff8758 url(../images/icon.png) repeat-x bottom ;
 
 		.title-info {
 			.height(40px);
@@ -458,7 +458,12 @@ em, i {
 				.fr();
 			}
 		}
+
 	}
+
+    .b-color {
+        background: #ccc url(../images/icon-b.png) repeat-x bottom ;
+    }
 
 	.b-info {
 		.height(44px);
@@ -473,8 +478,10 @@ em, i {
 
 .my-vorcher-mark {
 	.position(absolute);
-	top: 30px;
+	bottom: 0;
 	right: 0;
+    .width(102px);
+    .height(105px);
 	overflow: hidden;
 }
 

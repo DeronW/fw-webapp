@@ -13,124 +13,60 @@ const NavTitle = React.createClass({
     }
 });
 
-var orderListData = {
-    all: [
+var data = [
+    {
+        pay_at: "@date_time",
+        products: [
         {
-            count: 35326,
-            img: "http://lorempixel.com/100/100/",
-            pay_at: "2016.11.11 15.20,30",
-            place_order_time: "测试内容ik4n",
-            price: 24510,
-            score: 78425,
-            status: "delivery",
-            tags: [
-                "string1",
-                "string2",
-                "string3",
-                "string4",
-                "string5"
-            ],
-            title: "测试内容2651"
-        },
-        {
-            count: 35326,
-            img: "http://static.yingyonghui.com/screenshots/614/614760_2.jpg",
-            pay_at: "@date_time",
-            place_order_time: "测试内容ik4n",
-            price: 1000,
-            score: 200,
-            status: "delivery",
-            tags: [
-                "xioaa",
-                "kstring4",
-                "aaa"
-            ],
-            title: "测试内容2651"
+            count: 64786,
+            img: "测试内容0ptn",
+            score: 10130,
+            tags: "测试内容ut7v",
+            price: 53206,
+            title: "测试内容25hr"
         }
-    ],
+        ],
+        orderPrice: 58536,
+        status: "prepare",
+        orderCount: 76720,
+        orderScore: 88380
+    },
+    {
+        pay_at: "@date_time",
+        products: [
+        {
+            count: 64786,
+            img: "测试内容0ptn",
+            score: 10130,
+            tags: "测试内容ut7v",
+            price: 53206,
+            title: "测试内容25hr"
+        }
+        ],
+        orderPrice: 58536,
+        status: "shipping",
+        orderCount: 76720,
+        orderScore: 88380
+    },
+    {
+        pay_at: "@date_time",
+        products: [
+            {
+                count: 64786,
+                img: "测试内容0ptn",
+                score: 10130,
+                tags: "测试内容ut7v",
+                price: 53206,
+                title: "测试内容25hr"
+            }
+        ],
+        orderPrice: 58536,
+        status: "complete",
+        orderCount: 76720,
+        orderScore: 88380
+    }
+]
 
-    ship: [
-        {
-            count: 35326,
-            img: "http://static.yingyonghui.com/screenshots/614/614760_2.jpg",
-            pay_at: "@date_time",
-            place_order_time: "测试内容ik4n",
-            price: 1000,
-            score: 200,
-            status: "delivery",
-            tags: [
-                "xioaa",
-                "kstring4",
-                "aaa"
-            ],
-            title: "测试内容2651"
-        }
-    ],
-    receipt: [
-        {
-            count: 326,
-            img: "http://static.yingyonghui.com/screenshots/614/614760_2.jpg",
-            pay_at: "@date_time",
-            place_order_time: "测试内容ik4n",
-            price: 10000,
-            score: 190,
-            status: "delivery",
-            tags: [
-                "xioaa",
-                "kstring4",
-                "aaa"
-            ],
-            title: "afxxxxxxxxxx"
-        },
-        {
-            count: 326,
-            img: "http://static.yingyonghui.com/screenshots/614/614760_2.jpg",
-            pay_at: "@date_time",
-            place_order_time: "测试内容ik4n",
-            price: 10000,
-            score: 190,
-            status: "delivery",
-            tags: [
-                "xioaa",
-                "kstring4",
-                "aaa"
-            ],
-            title: "afdafadfafdafasdf2651"
-        }
-    ],
-    finisch: [
-        {
-            count: 326,
-            img: "http://static.yingyonghui.com/screenshots/614/614760_2.jpg",
-            pay_at: "@date_time",
-            place_order_time: "测试内容ik4n",
-            price: 10000,
-            score: 190,
-            status: "delivery",
-            tags: [
-                "xioaa",
-                "kstring4",
-                "aaa"
-            ],
-            title: "000000000000"
-        },
-        {
-            count: 326,
-            img: "http://static.yingyonghui.com/screenshots/614/614760_2.jpg",
-            pay_at: "@date_time",
-            place_order_time: "测试内容ik4n",
-            price: 10000,
-            score: 190,
-            status: "delivery",
-            tags: [
-                "xioaa",
-                "kstring4",
-                "aaa"
-            ],
-            title: "ssssssss"
-        }
-    ]
-}
 const MyOrderMain = React.createClass({
     getInitialState: function() {
         return {
@@ -166,7 +102,7 @@ const MyOrderMain = React.createClass({
                     </ul>
                 </div>
 
-                <OrderList index = {this.state.index} data={orderListData}/>
+                <OrderList index = {this.state.index} data={data}/>
             </div>
         );
     } 
@@ -239,39 +175,35 @@ const OrderBlock = React.createClass({
         return(
                 <div className="order-block">
                     <div className="title-block">
-                        <span className="time-text">{this.props.data.pay_at}</span>
+                        <span className="time-text"></span>
                         <span className="ship-text">已发货</span>
                     </div>
 
                     <div className="info-block">
                         <div className="t-info">
                             <div className="commodity-img">
-                                <img src={this.props.data.img}/>
+                                <img src=""/>
                             </div>
 
                             <div className="commodity-info">
                                 <div className="commodity-name">
-                                    <h2>{this.props.data.title}</h2>
+                                    <h2></h2>
                                 </div>
 
                                 <div className="tag-block">
-                                    {
-                                        this.props.data.tags.map(function(index) {
-                                            return <span className="text">{index}</span>
-                                        })
-                                    }
+                                             <span className="text">afafa</span>
                                 </div>
 
                                 <div className="commodity-number">
-                                    <span className="money-text">￥{severStr(this.props.data.price.toString(), 3, ",")} + {this.props.data.score}分</span>
-                                    <span className="number-text">X{this.props.data.count}</span>
+                                    <span className="money-text">￥ + 分</span>
+                                    <span className="number-text">X</span>
                                 </div>
                             </div>
                         </div>
 
                         <div className="commodity-total">
-                             <span className="commodity-text">共{this.props.data.count}件商品</span>
-                             <span className="total-text">合计: ￥{this.props.data.price} + {this.props.data.score}工分</span>
+                             <span className="commodity-text">共件商品</span>
+                             <span className="total-text">合计: ￥ + 工分</span>
                         </div>
                     </div>
                 </div>
@@ -280,7 +212,7 @@ const OrderBlock = React.createClass({
 });
 
 $FW.DOMReady(function() {
-/*    $FW.Ajax({
+    $FW.Ajax({
         url: "http://10.10.100.112/mockjs/4/api/v1/order/list?status=",
         success: function(data) {
             ReactDOM.render(
@@ -289,15 +221,14 @@ $FW.DOMReady(function() {
             );
         }
     });
-*/
 })
 
 
-ReactDOM.render(
+/*ReactDOM.render(
     <MyOrderMain/>,
     document.getElementById("main")
 );
-
+*/
 function severStr(str, n, symbol) {
     var returnStr = "";
     var c = 0;

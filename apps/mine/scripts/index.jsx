@@ -1,28 +1,5 @@
 'use strict';
 
-var myAccountData = {
-    preferential: {
-        number: "2"
-    },
-    score: {
-        number: "600"
-    },
-    seed: {
-        number: "200.20"
-    }
-};
-
-var myMoney = {
-    money: 20000
-};
-
-
-var myDelivery = {
-    waitShipNumber: 8,
-    waitConductNumber: 0,
-    waitCompleteNumber: 2,
-};
-
 const HomePage = React.createClass({
     getInitialState: function(){
         console.log(this.props.vip_level)
@@ -50,7 +27,7 @@ const HomePage = React.createClass({
                     bean={this.props.bean}
                 />
 
-				<MyVoucher/>
+				<MyVoucher cxchangeCert={this.props.exchange_cert}/>
 			</div>
 		);
 	}
@@ -232,28 +209,36 @@ const MyVoucher = React.createClass({
 				</span>
 			</li>
 		)
-		
 		let  normal_voucher = function(){
 			return (
 			<div className="my-voucher-not-used">
-				<Voucher />
+                {
+                    self.props.cxchangeCert.dated.map(function(index) {   
+				       return <Voucher data={index}/>
+                    })
+                }
 			</div>)
 		}
 
 		let  used_voucher = function(){
 			return (
 			<div className="my-voucher-not-used">
-				<Voucher />
-				<Voucher />
+                {
+                    self.props.cxchangeCert.normal.map(function(index) {   
+				       return <Voucher data={index}/>
+                    })
+                }
 			</div>)
 		}
 
 		let  dated_voucher = function(){
 			return (
 			<div className="my-voucher-not-used">
-				<Voucher />
-				<Voucher />
-				<Voucher />
+                {
+                    self.props.cxchangeCert.used.map(function(index) {   
+				       return <Voucher data={index}/>
+                    })
+                }
 			</div>)
 		}
 	
@@ -281,25 +266,33 @@ const MyVoucher = React.createClass({
 
 const Voucher = React.createClass({
 	render: function(){
+        let img = function(src) {
+            return (
+                <img src={src}/>
+            )
+        }
+
 		return (
 			<div className="my-voucher-cont-list">
-				<div className="t-info">
+				<div className={this.props.data.mark >= 2 ? "t-info b-color" : "t-info"}>
 					<div className="title-info">
-						<h2 className="title-text">乐视超级电视S50 Air全配版</h2>
-						<span className="money-text">￥3,999</span>
+						<h2 className="title-text">{this.props.data.title}</h2>
+						<span className="money-text">￥{this.props.data.price}</span>
 					</div>
 					<div className="clear-info">
-						<span className="text">来源市场活动</span>
-						<span className="text-timer">有效目期<em>2016-10.03 16.22.45</em></span>
+						<span className="text">来源 {this.props.data.type}</span>
+						<span className="text-timer">有效目期<em>{this.props.data.indate}</em></span>
 					</div>
 				</div>
 
 				<div className="b-info">
-					<span className="text">备注:<em>满￥3000送加湿器</em></span>
+					<span className="text">备注:<em>{this.props.data.comment}</em></span>
 				</div>
 				
 				<div className="my-vorcher-mark">
-					<img src="../images/mark-delete.png"/>
+                    {this.props.data.mark == 0 ? img("../images/mark-delete.png") : null}
+                    {this.props.data.mark == 2 ? img("../images/mark-used.png") : null}
+                    {this.props.data.mark == 3 ? img("../images/mark-expired.png") : null}
 				</div>
 			</div>
 
@@ -308,17 +301,12 @@ const Voucher = React.createClass({
 })
 
 $FW.DOMReady(function(){
-
     $FW.Ajax({
         url: 'http://10.10.100.112/mockjs/4/api/v1/user/?user_id=',
         success: function(data){
             ReactDOM.render( <HomePage {...data}/>, document.getElementById("cont"));
         }
     })
-
-var str = "123452789";
-
-strN(str);
 })
 
 
