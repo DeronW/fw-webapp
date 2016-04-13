@@ -18,12 +18,12 @@ plugins.rename = require('gulp-rename');
 
 
 // project_name 每次使用新项目时, 只需要更换项目名称
-function generate_task(project_name) {
+function generate_task(project_name, configs) {
 
-    var PROJECT_NAME = project_name;
-    var APP_PATH = 'apps/' + project_name + '/';
-    var BUILD_PATH = 'build/' + project_name + '/';
-    var LIB_PATH = 'lib/';
+    var PROJECT_NAME = project_name,
+        APP_PATH = 'apps/' + project_name + '/',
+        BUILD_PATH = 'build/' + project_name + '/',
+        LIB_PATH = 'lib/';
 
     gulp.task(PROJECT_NAME, function () {
 

@@ -39,8 +39,9 @@ POST
 #### 正确返回格式
 
     {
-        "error_code": 10000,
-        "error": null,
+        "ret": true,
+        "code": 10000,
+        "message": null,
         "data": {
             "total": 200,
             "next_cursor": '143123123341',
@@ -61,9 +62,10 @@ POST
 
     JSON
     {
-        "error_code" : 40101,
-        "error" : "need login",
-        "data": null
+        "code" : 40101,
+        "message" : "need login",
+        "data": null,
+        "ret": false
     }
 
 
@@ -88,3 +90,65 @@ POST
 - 40102 用户无权限
 - 40301 产品库存不足
 - 待补充...
+
+
+### APP消息互传
+
+#### webview给native发消息
+
+全部字母小写,
+第一个参数固定为all,
+第二个参数是动作关键字,
+第三个参数是动作参数
+
+消息格式:
+
+  keywork[:params]
+
+例子:
+
+去登录
+
+login
+
+登录后跳转到商城页面
+
+login:mall
+
+后退页面
+
+backward
+
+关闭当前页面
+
+close
+
+显示后退按钮
+
+show:back_button
+
+隐藏后退按钮
+
+hide:back_button
+
+显示关闭按钮
+
+show:close_button
+
+隐藏关闭按钮
+
+hide:close_button
+
+设置标题
+
+set_title:[xxx]
+
+#### native给webview发消息
+
+调用全局的js方法
+
+onNativeMessageReceive('action', 'params')
+
+设置登录用的token
+
+onNativeMessageReceive('login_token', 'params')
