@@ -170,3 +170,31 @@ onNativeMessageReceive('action', 'params')
 设置登录用的token
 
 onNativeMessageReceive('login_token', 'params')
+
+
+### url定义
+
+商城首页 [http://m.mall.9888.cn](http://m.mall.9888.cn)
+
+专题活动页 [http://m.mall.9888.cn/activity](http://m.mall.9888.cn/activity)
+
+VIP专区页 [http://m.mall.9888.cn/vip](http://m.mall.9888.cn/vip)
+
+商品列表页 [http://m.mall.9888.cn/products](http://m.mall.9888.cn/products)
+
+商品详情页 [http://m.mall.9888.cn/product/uid](http://m.mall.9888.cn/product/[uid])
+
+确认订单页 [http://m.mall.9888.cn/order/confirm](http://m.mall.9888.cn/order/confirm)
+
+交易成功页 [http://m.mall.9888.cn/order/complete](http://m.mall.9888.cn/order/complete)
+
+我的订单页 [http://m.mall.9888.cn/order/mine](http://m.mall.9888.cn/order/mine)
+
+订单详情页 [http://m.mall.9888.cn/order/uid](http://m.mall.9888.cn/order/uid)
+
+我的商城页 [http://m.mall.9888.cn/user](http://m.mall.9888.cn/user)
+
+收货地址列表页 [http://m.mall.9888.cn/delivery_address](http://m.mall.9888.cn/delivery_address)
+
+新建收货地址页 [http://m.mall.9888.cn/delivery_address/create](http://m.mall.9888.cn/delivery_address/create)
+
