@@ -12,7 +12,7 @@ WebAPP
 
 #### URL
 
-https://api.9888.cn/v1/products.json
+http://m.mall.9888.cn/mall/api/v1/products.json
 
 #### 支持格式
 
