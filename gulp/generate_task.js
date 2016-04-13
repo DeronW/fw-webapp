@@ -53,9 +53,10 @@ function generate_task(project_name, configs) {
             .pipe(gulp.dest(BUILD_PATH + 'scripts'));
 
         gulp.src([
+                LIB_PATH + 'financial-workspace-0.1.0.js',
                 LIB_PATH + 'react-0.14.1/react.js',
                 LIB_PATH + 'react-0.14.1/react-dom.js',
-                LIB_PATH + 'financial-workspace-0.1.0.js',
+                LIB_PATH + 'native-bridge-0.1.0.js',
                 LIB_PATH + 'swipe.js'
             ])
             .pipe(plugins.changed(BUILD_PATH + 'scripts'))
