@@ -21,20 +21,29 @@ const Mall = React.createClass({
                     <div className="detail-inf-name">{data.title}</div>
                     <div className="detail-inf-des">{data.sub_title} </div>
                     <div className="detail-inf-price">
-                        <span className="money">&yen;</span><span
-                        className="price">{$FW.Format.currency(data.price)}</span>
+                        <span className="money">&yen;</span>
+                        <span className="price">{$FW.Format.currency(data.price)}</span>
                         {score}
                     </div>
                     <div className="detail-inf1">
-                        <div className="market-price"><span>市价：</span><span
-                            className="market-price-num">&yen;{data.market_price}</span>
+                        <div className="market-price">
+                            <span>市价：</span>
+                            <span className="market-price-num">&yen;{data.market_price}</span>
                         </div>
-                        <div className="total"><span>累计销量</span><span className="total-num">{data.sales}</span></div>
+                        <div className="total">
+                            <span>累计销量</span>
+                            <span className="total-num">{data.sales}</span>
+                        </div>
                     </div>
                     <div className="detail-inf1">
-                        <div className="market-price"><span>快递：</span><span>{data.ems}</span>
+                        <div className="market-price">
+                            <span>快递：</span>
+                            <span>{data.ems}</span>
                         </div>
-                        <div className="total"><span>配送范围：</span><span>{data.range}</span></div>
+                        <div className="total">
+                            <span>配送范围：</span>
+                            <span>{data.range}</span>
+                        </div>
                     </div>
                 </div>
                 <div className="detail-mark">
@@ -127,7 +136,7 @@ const CarouselDetail = React.createClass({
 
     render: function () {
         let banner = (dot, index) => <div key={index} className={(this.state.cur_index == index) ? "on" : ''}></div>;
-        let ba = (i, index) => <div key={index}><a href={d.href}><img src={i}/></a>
+        let ba = (i, index) => <div key={index}><a href={i.href}><img src={i}/></a>
             <div className="label"></div>
         </div>;
 
@@ -144,12 +153,11 @@ const CarouselDetail = React.createClass({
     }
 });
 
-
 $FW.DOMReady(function () {
-    $FW.BatchGet([
-        'http://10.10.100.112/mockjs/4/api/v1/product/?product_id='
-    ], function (data) {
-        var data = data[0];
-        ReactDOM.render(<Mall data={data}/>, document.getElementById('cnt'));
+    $FW.Ajax({
+        url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000643',
+        success: function (data) {
+            ReactDOM.render(<Mall data={data}/>, document.getElementById('cnt'));
+        }
     });
 });
