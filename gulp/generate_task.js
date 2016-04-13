@@ -19,6 +19,12 @@ plugins.rename = require('gulp-rename');
 
 // project_name 每次使用新项目时, 只需要更换项目名称
 function generate_task(project_name, configs) {
+    configs = configs || {};
+    /*
+     configs = {
+
+     }
+     */
 
     var PROJECT_NAME = project_name,
         APP_PATH = 'apps/' + project_name + '/',
@@ -41,7 +47,8 @@ function generate_task(project_name, configs) {
 
         gulp.src([
                 APP_PATH + 'scripts/components/*.jsx',
-                APP_PATH + 'scripts/index.jsx'
+                APP_PATH + 'scripts/index.jsx',
+                APP_PATH + 'scripts/index.js'
             ])
             .pipe(plugins.changed(BUILD_PATH + 'scripts'))
             .pipe(plugins.plumber())
@@ -52,13 +59,15 @@ function generate_task(project_name, configs) {
             .pipe(plugins.concat('bundle.js', {newLine: ';'}))
             .pipe(gulp.dest(BUILD_PATH + 'scripts'));
 
-        gulp.src([
-                LIB_PATH + 'financial-workspace-0.1.0.js',
-                LIB_PATH + 'react-0.14.1/react.js',
-                LIB_PATH + 'react-0.14.1/react-dom.js',
-                LIB_PATH + 'native-bridge-0.1.0.js',
-                LIB_PATH + 'swipe.js'
-            ])
+        // common library
+        lib_files = [
+            LIB_PATH + 'financial-workspace-0.1.0.js',
+            LIB_PATH + 'react-0.14.1/react.js',
+            LIB_PATH + 'react-0.14.1/react-dom.js',
+            LIB_PATH + 'native-bridge-0.1.0.js',
+            LIB_PATH + 'swipe.js'
+        ];
+        gulp.src(lib_files)
             .pipe(plugins.changed(BUILD_PATH + 'scripts'))
             // .pipe(plugins.js_uglify())
             .pipe(plugins.concat('lib.js'))

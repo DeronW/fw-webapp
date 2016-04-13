@@ -167,7 +167,7 @@ set_title:[xxx]
 
 onNativeMessageReceive('action', 'params')
 
-设置登录用的token
+设置登录用的token 
 
 onNativeMessageReceive('login_token', 'params')
 
