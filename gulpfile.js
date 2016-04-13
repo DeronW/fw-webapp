@@ -18,11 +18,7 @@ gulp.task('clean', function () {
     del(['build', 'dest', 'dist']);
 });
 
-gulp.task('package:mall', ['mall', 'mallAct', 'mallDetail', 'mallproducts', 'mallVip', 'mine'], function () {
-
-    gulp.src([
-        'build/mall/**',
-        'build/mallAct/**',
-        'build/mallDetail/**'
-    ]).pipe(gulp.dest('cdn'));
-});
+// package mall file
+//gulp.task('package:mall', gulp.series(['mall', 'mine'], function () {
+//    gulp.src(['build/**']).pipe(gulp.dest('cdn'));
+//}));

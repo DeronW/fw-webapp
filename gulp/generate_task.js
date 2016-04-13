@@ -18,12 +18,18 @@ plugins.rename = require('gulp-rename');
 
 
 // project_name 每次使用新项目时, 只需要更换项目名称
-function generate_task(project_name) {
+function generate_task(project_name, configs) {
+    configs = configs || {};
+    /*
+     configs = {
 
-    var PROJECT_NAME = project_name;
-    var APP_PATH = 'apps/' + project_name + '/';
-    var BUILD_PATH = 'build/' + project_name + '/';
-    var LIB_PATH = 'lib/';
+     }
+     */
+
+    var PROJECT_NAME = project_name,
+        APP_PATH = 'apps/' + project_name + '/',
+        BUILD_PATH = 'build/' + project_name + '/',
+        LIB_PATH = 'lib/';
 
     gulp.task(PROJECT_NAME, function () {
 
@@ -41,7 +47,8 @@ function generate_task(project_name) {
 
         gulp.src([
                 APP_PATH + 'scripts/components/*.jsx',
-                APP_PATH + 'scripts/index.jsx'
+                APP_PATH + 'scripts/index.jsx',
+                APP_PATH + 'scripts/index.js'
             ])
             .pipe(plugins.changed(BUILD_PATH + 'scripts'))
             .pipe(plugins.plumber())
@@ -52,12 +59,15 @@ function generate_task(project_name) {
             .pipe(plugins.concat('bundle.js', {newLine: ';'}))
             .pipe(gulp.dest(BUILD_PATH + 'scripts'));
 
-        gulp.src([
-                LIB_PATH + 'react-0.14.1/react.js',
-                LIB_PATH + 'react-0.14.1/react-dom.js',
-                LIB_PATH + 'financial-workspace-0.1.0.js',
-                LIB_PATH + 'swipe.js'
-            ])
+        // common library
+        lib_files = [
+            LIB_PATH + 'financial-workspace-0.1.0.js',
+            LIB_PATH + 'react-0.14.1/react.js',
+            LIB_PATH + 'react-0.14.1/react-dom.js',
+            LIB_PATH + 'native-bridge-0.1.0.js',
+            LIB_PATH + 'swipe.js'
+        ];
+        gulp.src(lib_files)
             .pipe(plugins.changed(BUILD_PATH + 'scripts'))
             // .pipe(plugins.js_uglify())
             .pipe(plugins.concat('lib.js'))
@@ -74,6 +84,42 @@ function generate_task(project_name) {
     gulp.task(PROJECT_NAME + ':watch', [PROJECT_NAME], function () {
         gulp.watch('apps/' + PROJECT_NAME + '/**', [PROJECT_NAME]);
     });
+
+
+    //gulp.task(PROJECT_NAME + ':revision', function () {
+    //
+    //    var RevAll = new plugins.rev_all({
+    //        dontRenameFile: [/^\/favicon.ico$/g, 'index.html']
+    //    });
+    //
+    //    const CDN_PATH = 'cdn/' + 'PROJECT_NAME';
+    //
+    //    gulp.src([APP_PATH + '**'])
+    //        .pipe(RevAll.revision())
+    //        .pipe(gulp.dest(CDN_PATH))
+    //        .pipe(RevAll.manifestFile())
+    //        .pipe(gulp.dest(CDN_PATH))
+    //        .pipe(RevAll.versionFile())
+    //        .pipe(gulp.dest(CDN_PATH));
+    //});
+    //
+    //gulp.task(PROJECT_NAME + ':server', [PROJECT_NAME], function () {
+    //    browserSync.init({
+    //        server: {
+    //            baseDir: BUILD_PATH,
+    //            middleware: function (req, res, next) {
+    //                console.log('got request:' + req.method + ': ' + req.url);
+    //                res.setHeader('Access-Control-Allow-Origin', '*');
+    //                res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    //                res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    //                next();
+    //            }
+    //        }
+    //    });
+    //    gulp.watch('apps/' + PROJECT_NAME + '/**', [PROJECT_NAME]);
+    //    //gulp.watch('apps/' + PROJECT_NAME + '/**/*.html').on('change', browserSync.reload);
+    //});
+
 }
 
 module.exports = generate_task;

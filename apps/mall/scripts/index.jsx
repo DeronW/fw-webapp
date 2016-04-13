@@ -20,7 +20,7 @@ const Mall = React.createClass({
                         我的商城 </a>
                 </div>
                 <div className="index-actList-wrap">
-                    { this.props.activities.map(activity) }
+                    { (this.props.activities || []).map(activity) }
                 </div>
             </div>
         )
@@ -30,7 +30,7 @@ const Mall = React.createClass({
 const Carousel = React.createClass({
     getInitialState: function () {
         return {
-            banners: this.props.banners,
+            banners: this.props.banners || [],
             cur_index: 0
         }
     },
@@ -125,5 +125,6 @@ $FW.DOMReady(function () {
     ], function (data) {
         var banners = data[0].banners, activities = data[1].activities;
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
+        sendMessageToNative('loading:complete');
     });
 });

@@ -1,5 +1,8 @@
 'use strict';
 
+const STATIC_PATH = document.getElementById('static-path').value;
+const API_PATH = document.getElementById('api-path').value;
+
 const HomePage = React.createClass({
     getInitialState: function(){
         console.log(this.props.vip_level)
@@ -302,11 +305,12 @@ const Voucher = React.createClass({
 
 $FW.DOMReady(function(){
     $FW.Ajax({
-        url: 'http://10.10.100.112/mockjs/4/api/v1/user/?user_id=',
+        url: API_PATH + 'api/v1/user?user_id=dabai',
         success: function(data){
             ReactDOM.render( <HomePage {...data}/>, document.getElementById("cont"));
         }
-    })
+    });
+
 })
 
 
