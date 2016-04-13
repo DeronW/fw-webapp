@@ -1,11 +1,14 @@
 'use strict';
 
+const STATIC_PATH = document.getElementById('static-path').value;
+const API_PATH = document.getElementById('api-path').value;
+
 const Mall = React.createClass({
 
     render: function () {
         let data = this.props.data;
         let score = data.score ? <span className="score"> + {data.score}分</span> : "";
-        let markList = (list, index)=><div>{list}</div>;
+        let markList = (list, index)=><div key={index}>{list}</div>;
         let descData = data.desc.split(/[;|；]/);
         let desc = descData.map(function (i, index) {
             return <div key={index}>{i}</div>
@@ -13,8 +16,7 @@ const Mall = React.createClass({
 
         return (
             <div className="detail-box">
-                <header className="header">商品详情<a href="#" className="btn-back"
-                                                  style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}> </a>
+                <header className="header">商品详情
                 </header>
                 <CarouselDetail data={this.props.data}/>
                 <div className="detail-inf">
@@ -47,164 +49,67 @@ const Mall = React.createClass({
                 <div className="detail-des">
                     {data.rich_detail}
                 </div>
-                <PlusMinus MaxNum={data.stock} stock={data.stock} />
+                <PlusMinus MaxNum={data.stock} stock={data.stock}/>
             </div>
         )
     }
 });
 const PlusMinus = React.createClass({
     getInitialState: function () {
+        let stock = this.props.stock;
+
         return {
             value: 1,
-            disable: false,
-            minus: false,
-            plus: true
+            disable: stock <= 0,
+            minus: stock > 0,
+            plus: stock > 0
         }
     },
-    changeValue: function (e) {
-        if (this.props.MaxNum == 0) {
-            this.setState({
-                value: 0,
-                disable: true,
-                minus: false,
-                plus: false
-            })
-        } else if (e.target.value == "") {
-            this.setState({
-                value: e.target.value,
-            });
-        } else if (parseInt(e.target.value) == 1 && parseInt(e.target.value) < this.props.MaxNum) {
-            this.setState({
-                value: 1,
-                minus: false,
-                plus: true
-            });
-        } else if (parseInt(e.target.value) >= this.props.MaxNum) {
-            this.setState({
-                value: this.props.MaxNum,
-                minus: true,
-                plus: false
-            });
-        } else if (1 < parseInt(e.target.value) && parseInt(e.target.value) < this.props.MaxNum) {
-            this.setState({
-                value: e.target.value,
-                minus: true,
-                plus: true
-            });
-        } else {
-            this.setState({
-                value: 1,
-                minus: false,
-                plus: true
-            });
-        }
-    },
-    changePlus: function () {
-        if (this.props.MaxNum == 0) {
-            this.setState({
-                value: 0,
-                disable: true,
-                minus: false,
-                plus: false
-            })
-        } else if (this.props.MaxNum == 1) {
-            this.setState({
-                value: 1,
-                disable: false,
-                minus: false,
-                plus: false
-            })
-        } else if (parseInt(this.state.value) < this.props.MaxNum) {
-            this.setState({
-                value: parseInt(this.state.value) + 1,
-                disable: false,
-                minus: true,
-                plus: true
-            })
-        } else if (parseInt(this.state.value) == this.props.MaxNum) {
-            this.setState({
-                value: parseInt(this.state.value),
-                disable: false,
-                minus: true,
-                plus: false
-            })
-        }
 
+    changeValue: function (e) {
+        this.updateCount(e.target.value);
+    },
+
+    updateCount: function (c) {
+        c = parseInt(c) || 1;
+        if (c < 1) c = 1;
+        if (c > this.props.stock) c = this.props.stock;
+        this.setState({
+            value: c,
+            minus: c > 1,
+            plus: c < this.props.stock
+        });
+    },
+
+    changePlus: function () {
+        this.updateCount(this.state.value + 1)
     },
     changeMinus: function () {
-        if (this.props.MaxNum == 0) {
-            this.setState({
-                value: 0,
-                disable: true,
-                minus: false,
-                plus: false
-            })
-        } else if (this.props.MaxNum == 1) {
-            this.setState({
-                value: 1,
-                disable: false,
-                minus: false,
-                plus: false
-            })
-        } else if (parseInt(this.state.value) == 2) {
-            this.setState({
-                value: parseInt(this.state.value) - 1,
-                disable: false,
-                minus: false,
-                plus: true
-            })
-        } else if (parseInt(this.state.value) > 2) {
-            this.setState({
-                value: parseInt(this.state.value) - 1,
-                disable: false,
-                minus: true,
-                plus: true
-            })
-        }
+        this.updateCount(this.state.value - 1)
     },
 
     blur: function (e) {
-        if (this.props.MaxNum == 0) {
-            this.setState({
-                value: 0,
-                disable: true,
-                minus: false,
-                plus: false
-            })
-        } else if (e.target.value == "") {
-            this.setState({
-                value: 1,
-            })
-        }
+        this.updateCount(e.target.value)
     },
     render: function () {
-        let disable = "#";
-        let btnBuy = "btn-buy btn-buy-dis";
-        if (this.props.MaxNum > 0) {
-            disable = this.state.disable ? "http://m.9888.cn/mpwap/" : "#";
-            btnBuy = this.state.disable ? "btn-buy btn-buy-dis" : "btn-buy";
-        }
-        let stock = this.props.MaxNum;
-        let _this = this;
-        let minusb = this.state.minus ? "blue-minus" : "gray-minus";
-        let plusb = this.state.plus ? "blue-plus" : "gray-plus";
+        let btnMinusBg = "url(" + STATIC_PATH + "images/" + (this.state.minus ? "blue-minus" : "gray-minus") + ".png)";
+        let btnPlusBg = "url(" + STATIC_PATH + "images/" + (this.state.plus ? "blue-plus" : "gray-plus") + ".png)";
 
         return (
             <div className="detail-foot">
                 <div className="detail-num-change">
-                    <div className="minus" onClick={_this.changeMinus}
-                         style={{background:"url(../images/"+minusb+".png) no-repeat center"}}></div>
-                    <div className="input-num"><input type="text" value={_this.state.value} onChange={_this.changeValue}
-                                                      onBlur={_this.blur}/></div>
-                    <div className="plus" onClick={_this.changePlus}
-                         style={{background:"url(../images/"+plusb+".png) no-repeat center"}}></div>
+                    <div className="minus" onClick={this.changeMinus} style={{background:btnMinusBg}}></div>
+                    <div className="input-num">
+                        <input type="text" value={this.state.value} onChange={this.changeValue} onBlur={this.blur}/>
+                    </div>
+                    <div className="plus" onClick={this.changePlus} style={{background:btnPlusBg}}></div>
                 </div>
                 <div className="stock-box">
                     <span>库存</span>
                     <span className="stock">{this.props.stock}</span>
                     <span className="unit">件</span>
                 </div>
-                <a href={disable} className={btnBuy}>立即购买</a>
+                <a className={this.state.stock > 0 ? "btn-buy btn-buy-dis" : "btn-buy"}>立即购买</a>
             </div>
         )
     }
