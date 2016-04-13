@@ -10,9 +10,7 @@ const Mall = React.createClass({
         let score = data.score ? <span className="score"> + {data.score}分</span> : "";
         let markList = (list, index)=><div key={index}>{list}</div>;
         let descData = data.desc.split(/[;|；]/);
-        let desc = descData.map(function (i, index) {
-            return <div key={index}>{i}</div>
-        });
+        let desc = descData.map((i, index) => <div key={index}>{i}</div>);
 
         return (
             <div className="detail-box">
@@ -40,7 +38,7 @@ const Mall = React.createClass({
                     </div>
                 </div>
                 <div className="detail-mark">
-                    {data.mark.map(markList)}
+                    {data.tags.map(markList)}
                 </div>
                 <div className="detail-explain">
                     <div className="detail-explain-h">活动说明</div>
@@ -49,7 +47,7 @@ const Mall = React.createClass({
                 <div className="detail-des">
                     {data.rich_detail}
                 </div>
-                <PlusMinus MaxNum={data.stock} stock={data.stock}/>
+                <PlusMinus stock={data.stock}/>
             </div>
         )
     }

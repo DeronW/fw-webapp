@@ -1,2 +1,1 @@
-const PROJECT_NAME = 'products';
-require('../generate_task.js')(PROJECT_NAME);
+require('../generate_task.js')('products');

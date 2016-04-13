@@ -75,6 +75,42 @@ function generate_task(project_name, configs) {
     gulp.task(PROJECT_NAME + ':watch', [PROJECT_NAME], function () {
         gulp.watch('apps/' + PROJECT_NAME + '/**', [PROJECT_NAME]);
     });
+
+
+    //gulp.task(PROJECT_NAME + ':revision', function () {
+    //
+    //    var RevAll = new plugins.rev_all({
+    //        dontRenameFile: [/^\/favicon.ico$/g, 'index.html']
+    //    });
+    //
+    //    const CDN_PATH = 'cdn/' + 'PROJECT_NAME';
+    //
+    //    gulp.src([APP_PATH + '**'])
+    //        .pipe(RevAll.revision())
+    //        .pipe(gulp.dest(CDN_PATH))
+    //        .pipe(RevAll.manifestFile())
+    //        .pipe(gulp.dest(CDN_PATH))
+    //        .pipe(RevAll.versionFile())
+    //        .pipe(gulp.dest(CDN_PATH));
+    //});
+    //
+    //gulp.task(PROJECT_NAME + ':server', [PROJECT_NAME], function () {
+    //    browserSync.init({
+    //        server: {
+    //            baseDir: BUILD_PATH,
+    //            middleware: function (req, res, next) {
+    //                console.log('got request:' + req.method + ': ' + req.url);
+    //                res.setHeader('Access-Control-Allow-Origin', '*');
+    //                res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    //                res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    //                next();
+    //            }
+    //        }
+    //    });
+    //    gulp.watch('apps/' + PROJECT_NAME + '/**', [PROJECT_NAME]);
+    //    //gulp.watch('apps/' + PROJECT_NAME + '/**/*.html').on('change', browserSync.reload);
+    //});
+
 }
 
 module.exports = generate_task;
