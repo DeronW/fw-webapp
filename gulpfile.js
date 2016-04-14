@@ -5,7 +5,7 @@ var del = require('del');
 require('require-dir')('./gulp/tasks', {recurse: true});
 
 gulp.task('default', function () {
-    console.log("This is all task we got");
+    console.log("This is all task we got:");
     for (taskName in gulp.tasks) {
         if (gulp.tasks.hasOwnProperty(taskName)) console.log(taskName);
     }
