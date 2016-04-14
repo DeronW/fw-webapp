@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var react = require('gulp-react');
 var babel = require('gulp-babel');
 var plugins = require('gulp-load-plugins')();
+var fs = require('fs');
 
 plugins.less = require('gulp-less');
 plugins.changed = require('gulp-changed');
@@ -15,6 +16,7 @@ plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
 plugins.sourcemaps = require('gulp-sourcemaps');
 plugins.rename = require('gulp-rename');
+plugins.replace = require('gulp-replace');
 
 
 // project_name 每次使用新项目时, 只需要更换项目名称
@@ -22,7 +24,7 @@ function generate_task(project_name, configs) {
     configs = configs || {};
     /*
      configs = {
-
+     static_path: 'http://cdn.9888.cn/assets/'
      }
      */
 
@@ -36,6 +38,8 @@ function generate_task(project_name, configs) {
         gulp.src([APP_PATH + '**/*.html'])
             .pipe(plugins.changed(BUILD_PATH))
             //.pipe(plugins.htmlmin({collapseWhitespace: true}))
+            .pipe(plugins.replace('{API_PATH}', configs.api_path || 'http://m.mall.9888.cn/'))
+            .pipe(plugins.replace('{STATIC_PATH}', configs.static_path || '../'))
             .pipe(gulp.dest(BUILD_PATH));
 
         gulp.src([APP_PATH + 'less/index.less'])
