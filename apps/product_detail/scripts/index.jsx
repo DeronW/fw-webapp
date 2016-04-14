@@ -45,6 +45,10 @@ const Mall = React.createClass({
                             <span>{data.range}</span>
                         </div>
                     </div>
+                    <div className="detail-inf1">
+                        <div className="operators">运营商：</div>
+                        <div className="operators-name">{data.operators}</div>
+                    </div>
                 </div>
                 <div className="detail-mark">
                     {data.tags.map(markList)}
