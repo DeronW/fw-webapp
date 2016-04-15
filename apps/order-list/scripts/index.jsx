@@ -70,17 +70,27 @@ const OrderList = React.createClass({
         let allBlock = function (s) {
             return (
                 <div className="order-all">
-                    { self.state[s].map((order) => <OrderBlock key={order.id} dataJson={order}/>) }
+                    {
+                        self.state[s].map((order) => <OrderBlock key={order.id} dataJson={order}/>)
+                    }
                 </div>
             );
         };
 
+        let blockText = function() {
+            return (
+                <div className="no-commodity-block">
+                    对不起没有商品
+                </div>
+            );
+        }
+
         return (
             <div className="order-area">
-                {this.props.index == 0 ? allBlock("all") : null}
-                {this.props.index == 1 ? allBlock("prepare") : null}
-                {this.props.index == 2 ? allBlock("shipping") : null}
-                {this.props.index == 3 ? allBlock("complete") : null}
+                {this.props.index == 0 ? (this.state.all.length != 0 ? allBlock("all") : blockText()) : null}
+                {this.props.index == 1 ? (this.state.prepare.length != 0 ? allBlock("prepare") : blockText()) : null}
+                {this.props.index == 2 ? (this.state.shipping.length != 0 ? allBlock("shipping") : blockText()) : null}
+                {this.props.index == 3 ? (this.state.complete.length != 0 ? allBlock("complete") : blockText()) : null}
             </div>
         );
     }
@@ -88,6 +98,11 @@ const OrderList = React.createClass({
 
 const OrderBlock = React.createClass({
     render: function () {
+        let tags = function(s) {
+           return (
+             <span className="text">{s}</span>
+            );
+        }
         let infoBlock = function (index) {
             return (
                 <a href={index.order_item_detail_url}>
@@ -102,7 +117,9 @@ const OrderBlock = React.createClass({
                             </div>
 
                             <div className="tag-block">
-                                <span className="text">tags</span>
+                                {
+                                    index.tags.length != 0 ? tags(index.tags) : null
+                                }
                             </div>
 
                             <div className="commodity-number">
@@ -120,7 +137,7 @@ const OrderBlock = React.createClass({
                 <div className="title-block">
                     <span className="time-text">{this.props.dataJson.pay_at}</span>
                     <span className="ship-text">
-                            {this.props.dataJson.status == "prepare" ? "待发货" : null}
+                        {this.props.dataJson.status == "prepare" ? "待发货" : null}
                         {this.props.dataJson.status == "shipping" ? "待收货" : null}
                         {this.props.dataJson.status == "complete" ? "已完成" : null}
                         
@@ -136,8 +153,13 @@ const OrderBlock = React.createClass({
 
                     <div className="commodity-total">
                         <span className="commodity-text">共件{this.props.dataJson.orderCount}商品</span>
-                        <span className="total-text">合计:￥{this.props.dataJson.orderPrice}
-                            + {this.props.dataJson.orderScore}工分</span>
+                        <span className="total-text">
+                            合计:￥
+                            {this.props.dataJson.orderPrice}
+                            + 
+                            {this.props.dataJson.orderScore}
+                            工分
+                        </span>
                     </div>
                 </div>
             </div>
