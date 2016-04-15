@@ -19,7 +19,7 @@ const MallProducts = React.createClass({
     componentDidMount: function () {
         let _this = this;
         $FW.Ajax({
-            url: 'http://10.10.100.112/mockjs/4/api/v1/products?count=&type=&cursor=',
+            url: API_PATH + 'mall/api/v1/products.json',
             success: function (data) {
                 let products = window.Products.all.concat(data.products);
                 window.Products.all = products;
@@ -58,11 +58,8 @@ const MallProducts = React.createClass({
                 </div>
 
                 <div className="products-list">
-                    <ul className="index-actList-list on">
-                        { this.state.products.map((p) => <ProductItem {...p} key={p.id}/>) }
-                    </ul>
+                    { this.state.products.map((p) => <ProductItem {...p} key={p.bizNo}/>) }
                 </div>
-
             </div>
         )
     }
@@ -75,27 +72,25 @@ const ProductItem = React.createClass({
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
 
         return (
-            <li>
-                <a href={this.props.link} className="index-actList-a">
-                    <div className="list-img"><img src={this.props.img}/></div>
-                    {Angle}
-                    <div className="list-name">{this.props.title}</div>
-                    <div className="list-mark">
-                        { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
+            <a href={this.props.link} className="index-actList-a">
+                <div className="list-img"><img src={this.props.img}/></div>
+                {Angle}
+                <div className="list-name">{this.props.title}</div>
+                <div className="list-mark">
+                    { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
+                </div>
+                <div className="list-price-box">
+                    <div className="list-price">
+                        <span className="list-price-mark">&yen;</span>
+                        <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
+                        { price }
                     </div>
-                    <div className="list-price-box">
-                        <div className="list-price">
-                            <span className="list-price-mark">&yen;</span>
-                            <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
-                            { price }
-                        </div>
-                        <div className="list-sold">
-                            <span>累计销量 </span>
-                            <span>{this.props.sales}</span>
-                        </div>
+                    <div className="list-sold">
+                        <span>累计销量 </span>
+                        <span>{this.props.sales}</span>
                     </div>
-                </a>
-            </li>
+                </div>
+            </a>
         )
     }
 });

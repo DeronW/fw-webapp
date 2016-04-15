@@ -20,10 +20,10 @@ const HomePage = React.createClass({
                     completeCount={this.props.complete_count}
                 />
 
-                <MyAccount
+                <Account
                     money={this.props.money}
 
-                    voucherCount={this.props.voucher_count}
+                    voucher_count={this.props.voucher_count}
                     score={this.props.score}
                     bean={this.props.bean}
                 />
@@ -56,12 +56,14 @@ const UserInfo = React.createClass({
                     </div>
 
                     <div className="user-info-r">
-                        <div className="user-get-adders">
-                            <i className="adders-icon">
-                                <img src="../images/address-icon.png"/>
-                            </i>
-                            <span className="text">收货地址</span>
-                        </div>
+                        <a href="/user/address">
+                            <div className="user-get-adders">
+                                <i className="adders-icon">
+                                    <img src="../images/address-icon.png"/>
+                                </i>
+                                <span className="text">收货地址</span>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <MyOderBlock/>
@@ -82,11 +84,8 @@ const MyOderBlock = React.createClass({
             <div>
                 <div className="my-oder-block">
                     <span className="title">我的订单</span>
-                    <a href="" className="oder-lick-text">
+                    <a href="/order" className="oder-lick-text">
                         查看全部订单
-                        <i>
-                            <img src=""/>
-                        </i>
                     </a>
                 </div>
             </div>
@@ -99,70 +98,60 @@ const DeliveryProcessList = React.createClass({
         let marKion = (numberText) => <span className="mark-icon">{numberText}</span>;
 
         return (
-            <div className="delivery-list clear-fix">
-                <ul>
-                    <li>
-                        <div className="info-block">
-                            <i className="icon">
-                                <img src="../images/shopping-ship-icon.png"/>
-                            </i>
+            <div className="delivery-list">
+                <div className="info-block">
+                    <i className="icon">
+                        <img src={STATIC_PATH + "images/shopping-ship-icon.png"}/>
+                    </i>
 
-                            {this.props.perpareCount >= 1 ? marKion(this.props.perpareCount) : null }
-                            <span className="text">待发货</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="info-block">
-                            <i className="icon">
-                                <img src="../images/shopping-conduct-icon.png"/>
-                            </i>
+                    {this.props.perpareCount >= 1 ? marKion(this.props.perpareCount) : null }
+                    <span className="text">待发货</span>
+                </div>
+                <div className="info-block">
+                    <i className="icon">
+                        <img src={STATIC_PATH +"images/shopping-conduct-icon.png"}/>
+                    </i>
 
-                            {this.props.shippingCount >= 1 ? marKion(this.props.shippingCount) : null }
-                            <span className="text">待收货</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div className="info-block">
-                            <i className="icon">
-                                <img src="../images/shopping-complete-icon.png"/>
-                            </i>
+                    {this.props.shippingCount >= 1 ? marKion(this.props.shippingCount) : null }
+                    <span className="text">待收货</span>
+                </div>
+                <div className="info-block">
+                    <i className="icon">
+                        <img src={STATIC_PATH +"images/shopping-complete-icon.png"}/>
+                    </i>
 
-                            {this.props.completeCount >= 1 ? marKion(this.props.completeCount) : null }
-                            <span className="text">已完成</span>
-                        </div>
-                    </li>
-                </ul>
+                    {this.props.completeCount >= 1 ? marKion(this.props.completeCount) : null }
+                    <span className="text">已完成</span>
+                </div>
             </div>
         );
     }
 });
 
 
-const MyAccount = React.createClass({
+const Account = React.createClass({
     render: function () {
         return (
             <div>
                 <div className="my-account-block">
                     <div className="my-account-title">
                         <span className="l-text">我的账户</span>
-                        <span className="r-text money-number">￥{this.props.money}</span>
+                        <span className="r-text money-number">￥{$FW.Format.currency(this.props.money)}</span>
                     </div>
 
-                    <div className="my-account-list">
-                        <ul>
-                            <li>
-                                <span className="l-text">优惠券</span>
-                                <span className="r-text">{this.props.voucher_count}张</span>
-                            </li>
-                            <li>
-                                <span className="l-text">工分</span>
-                                <span className="r-text">{this.props.score}分</span>
-                            </li>
-                            <li>
-                                <span className="l-text">工豆</span>
-                                <span className="r-text">￥{this.props.bean}</span>
-                            </li>
-                        </ul>
+                    <div className="voucher-list">
+                        <div>
+                            <span className="l-text">优惠券</span>
+                            <span className="r-text">{this.props.voucher_count}张</span>
+                        </div>
+                        <div>
+                            <span className="l-text">工分</span>
+                            <span className="r-text">{$FW.Format.currency(this.props.score)}分</span>
+                        </div>
+                        <div>
+                            <span className="l-text">工豆</span>
+                            <span className="r-text">￥{$FW.Format.currency(this.props.bean)}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -198,13 +187,13 @@ const MyVoucher = React.createClass({
         };
 
         var btn_voucher = (v, index) => (
-            <li key={index}
-                className={index == this.state.index ? "select-li" : ""}
-                onClick={function(){self.clickHandler(index)}}>
+            <div key={index}
+                 className={index == this.state.index ? "select-li" : ""}
+                 onClick={function(){self.clickHandler(index)}}>
 				<span className="tab-text">
 					{voucher_name(v)}
 				</span>
-            </li>
+            </div>
         );
 
         let voucher = (i, index) => <Voucher key={index} data={i}/>;
@@ -235,10 +224,9 @@ const MyVoucher = React.createClass({
                 <div className="my-voucher">
                     <div className="my-voucher-title">
                         <span className="title-text">我的兑换券</span>
-
-                        <ul className="my-voucher-tab">
+                        <div className="my-voucher-tab">
                             {this.state.voucher.map(btn_voucher)}
-                        </ul>
+                        </div>
                     </div>
 
                     <div className="my-voucher-cont">
@@ -288,7 +276,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + 'mall/api/v1/user.json',
         success: function (data) {
-            ReactDOM.render(<HomePage {...data}/>, document.getElementById("cont"));
+            ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
         }
     });
 });

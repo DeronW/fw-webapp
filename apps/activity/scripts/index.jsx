@@ -59,7 +59,7 @@ const ProductList = React.createClass({
     },
     componentDidMount: function () {
         $FW.Ajax({
-            url: API_PATH + 'mall/api/v1/activity/products.json?count=20&page=' + this.state.page,
+            url: API_PATH + 'mall/api/v1/products.json?activityId=14420b54cdc14cce8bcc58bd0be8e942&count=20' + this.state.page,
             success: function (data) {
                 this.setState({
                     products: this.state.products.concat(data.products),
@@ -111,7 +111,7 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: API_PATH + 'mall/api/v1/activity.json?activity_id=12',
+        url: API_PATH + '/mall/api/v1/activity.json?bizNo=D0000000239',
         success: function (arr) {
             ReactDOM.render(<MallActivity activity={arr}/>, document.getElementById('cnt'));
         }

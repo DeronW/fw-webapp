@@ -18,8 +18,6 @@ gulp.task('clean', function () {
     del(['build', 'dest', 'dist']);
 });
 
-gulp.task('build:mall', ['pack:mall', 'pack:activity', 'pack:mine', 'pack:my-order', 'pack:order-detail', 'pack:product_detail', 'pack:products', 'pack:privilege']);
-
 // package mall file
 //gulp.task('package:mall', gulp.series(['mall', 'mine'], function () {
 //    gulp.src(['build/**']).pipe(gulp.dest('cdn'));
