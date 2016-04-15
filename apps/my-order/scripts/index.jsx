@@ -4,7 +4,7 @@ const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const NavTitle = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="nav-title">
                 <span className="back-btn">
@@ -17,20 +17,20 @@ const NavTitle = React.createClass({
 });
 
 const MyOrderMain = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             index: 0,
             voucherName: ["全部", "待发货", "待收货", "已完成"]
         };
     },
-    clickHandler: function(index) {
+    clickHandler: function (index) {
         this.setState({
-            index: index  
-        }); 
+            index: index
+        });
     },
-    render: function() {
+    render: function () {
         var self = this;
-        
+
         var btnVoucher = (v, index) => (
             <li className={index == this.state.index ? "select-li" : ""} onClick={
                     function() {
@@ -47,14 +47,14 @@ const MyOrderMain = React.createClass({
 
                 <div className="ui-tab">
                     <ul>
-                        {this.state.voucherName.map(btnVoucher)} 
+                        {this.state.voucherName.map(btnVoucher)}
                     </ul>
                 </div>
 
                 <OrderList index = {this.state.index} dataJson={this.props}/>
             </div>
         );
-    } 
+    }
 });
 
 const OrderList = React.createClass({
@@ -73,11 +73,9 @@ const OrderList = React.createClass({
     },
     render: function() {
         var self = this;
-        console.log( this.state.all == []);
         let allBlock = function(s) {
             return (
                 <div className="order-all">
-                    
                     {
                         self.state[s].map(function(index){
                             return <OrderBlock dataJson={index}/>
@@ -86,6 +84,7 @@ const OrderList = React.createClass({
                 </div>
             );
         };
+
         return (
             <div className="order-area">
                  {this.props.index == 0 ? allBlock("all") : null}
@@ -98,15 +97,7 @@ const OrderList = React.createClass({
 });
 
 const OrderBlock = React.createClass({
-    getInitialState: function() {
-        return {
-            prepare: [],
-            shipping: [],
-            complete: []
-        };
-    },
     render: function() {
-
         let infoBlock = function(index) {
             return (
                 <a href={index.order_item_detail_url}>
@@ -135,45 +126,43 @@ const OrderBlock = React.createClass({
         };
 
         return(
-                <div className="order-block">
-                    <div className="title-block">
-                        <span className="time-text">{this.props.dataJson.pay_at}</span>
-                        <span className="ship-text">
-                                {this.props.dataJson.status == "prepare" ? "待发货" : null}
-                                {this.props.dataJson.status == "shipping" ? "待收货" : null}
-                                {this.props.dataJson.status == "complete" ? "已完成" : null}
-                            
-                        </span>
-                    </div>
+            <div className="order-block">
+                <div className="title-block">
+                    <span className="time-text">{this.props.dataJson.pay_at}</span>
+                    <span className="ship-text">
+                            {this.props.dataJson.status == "prepare" ? "待发货" : null}
+                            {this.props.dataJson.status == "shipping" ? "待收货" : null}
+                            {this.props.dataJson.status == "complete" ? "已完成" : null}
+                        
+                    </span>
+                </div>
 
-                    <div className="info-block">
-                        {
-                            this.props.dataJson.products.map(function(index) {
-                                return infoBlock(index);
-                            })
-                        }
+                <div className="info-block">
+                    {
+                        this.props.dataJson.products.map(function(index) {
+                            return infoBlock(index);
+                        })
+                    }
 
-                        <div className="commodity-total">
-                             <span className="commodity-text">共件{this.props.dataJson.orderCount}商品</span>
-                             <span className="total-text">合计:￥{this.props.dataJson.orderPrice} + {this.props.dataJson.orderScore}工分</span>
-                        </div>
+                    <div className="commodity-total">
+                        <span className="commodity-text">共件{this.props.dataJson.orderCount}商品</span>
+                        <span className="total-text">合计:￥{this.props.dataJson.orderPrice} + {this.props.dataJson.orderScore}工分</span>
                     </div>
                 </div>
-        ); 
+            </div>
+        );
     }
 });
 
-$FW.DOMReady(function() {
+$FW.DOMReady(function () {
     $FW.Ajax({
-        url: API_PATH + "mall/api/v1/order_list.json?userId=97360&memberId=71042c451fa84214b8e4e33d71d208b1",
-        success: function(data) {
-            ReactDOM.render(
-                <MyOrderMain {...data}/>,
-                document.getElementById("main")
+        url: "http://10.10.100.112/mockjs/4/api/v1/order/list?status=",
+        success: function (data) {
+            ReactDOM.render(<MyOrderMain {...data}/>, document.getElementById("cnt")
             );
         }
     });
-})
+});
 
 function severStr(str, n, symbol) {
     var returnStr = "";
@@ -191,20 +180,19 @@ function severStr(str, n, symbol) {
     returnStr = (a != 0) ? (newFloorStr.substring(0, a) + symbol) : "";
     var newStr = newFloorStr.substring(a, newFloorStr.length);
     for (var i = 1; i < newStr.length + 1; i++) {
-        if(i == b + n) {
-            if(i == newStr.length) {
-                returnStr = returnStr + newStr.substring(b, i -c ) + poin; 
+        if (i == b + n) {
+            if (i == newStr.length) {
+                returnStr = returnStr + newStr.substring(b, i - c) + poin;
             } else {
-                returnStr = returnStr + newStr.substring(b, i) + symbol; 
+                returnStr = returnStr + newStr.substring(b, i) + symbol;
             }
-            b = i; 
-        } 
+            b = i;
+        }
     }
-    
-    if ( c == 1) {
+
+    if (c == 1) {
         return "-" + returnStr;
     } else {
         return returnStr;
     }
 }
-

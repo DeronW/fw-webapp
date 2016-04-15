@@ -29,7 +29,7 @@ MallActivity.Explain = React.createClass({
     },
     render: function () {
         let desc = null;
-        if(this.state.show) {
+        if (this.state.show) {
             desc = (
                 <ul className="act-explain-cont show">
                     { this.props.desc.split(',').map((i, index) => <li key={index}>{i}</li>) }
@@ -52,22 +52,28 @@ MallActivity.Explain = React.createClass({
 
 const ProductList = React.createClass({
     getInitialState: function () {
-        return { products: []}
+        return {
+            page: 1,
+            products: []
+        }
     },
     componentDidMount: function () {
         $FW.Ajax({
-            url: 'http://10.10.100.112/mockjs/4/api/v1/products?count=&type=&cursor=',
+            url: API_PATH + 'mall/api/v1/activity/products.json?count=20&page=' + this.state.page,
             success: function (data) {
-                this.setState({products: this.state.products.concat(data.products)})
+                this.setState({
+                    products: this.state.products.concat(data.products),
+                    page: this.state.page++
+                })
             }.bind(this)
         })
     },
     render: function () {
         return (
             <div className="products-act">
-                <ul className="index-actList-list">
-                    { this.state.products.map((p) => <ProductItem {...p} key={p.id}/>) }
-                </ul>
+                <div className="index-actList-list">
+                    { this.state.products.map((p, index) => <ProductItem key={index} {...p} key={p.id}/>) }
+                </div>
             </div>
         )
     }
@@ -80,37 +86,34 @@ const ProductItem = React.createClass({
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
 
         return (
-            <li>
-                <a href={this.props.link} className="index-actList-a">
-                    <div className="list-img"><img src={this.props.img}/></div>
-                    {Angle}
-                    <div className="list-name">{this.props.title}</div>
-                    <div className="list-mark">
-                        { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
+            <a href={this.props.link} className="index-actList-a">
+                <div className="list-img"><img src={this.props.img}/></div>
+                {Angle}
+                <div className="list-name">{this.props.title}</div>
+                <div className="list-mark">
+                    { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
+                </div>
+                <div className="list-price-box">
+                    <div className="list-price">
+                        <span className="list-price-mark">&yen;</span>
+                        <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
+                        { price }
                     </div>
-                    <div className="list-price-box">
-                        <div className="list-price">
-                            <span className="list-price-mark">&yen;</span>
-                            <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
-                            { price }
-                        </div>
-                        <div className="list-sold">
-                            <span>累计销量 </span>
-                            <span>{this.props.sales}</span>
-                        </div>
+                    <div className="list-sold">
+                        <span>累计销量 </span>
+                        <span>{this.props.sales}</span>
                     </div>
-                </a>
-            </li>
+                </div>
+            </a>
         )
     }
 });
 
 $FW.DOMReady(function () {
-    $FW.BatchGet(
-        [
-            'http://10.10.100.112/mockjs/4/api/v1/activity?activity_id=12'
-            //API_PATH + 'mall/api/v1/activity?activity_id=12',
-        ], function (arr) {
-            ReactDOM.render(<MallActivity activity={arr[0]} />, document.getElementById('cnt'));
-        });
+    $FW.Ajax({
+        url: API_PATH + 'mall/api/v1/activity.json?activity_id=12',
+        success: function (arr) {
+            ReactDOM.render(<MallActivity activity={arr}/>, document.getElementById('cnt'));
+        }
+    })
 });

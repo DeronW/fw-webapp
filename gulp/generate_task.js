@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var react = require('gulp-react');
 var babel = require('gulp-babel');
 var plugins = require('gulp-load-plugins')();
+var fs = require('fs');
 
 plugins.less = require('gulp-less');
 plugins.changed = require('gulp-changed');
@@ -15,14 +16,22 @@ plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
 plugins.sourcemaps = require('gulp-sourcemaps');
 plugins.rename = require('gulp-rename');
+plugins.replace = require('gulp-replace');
 
 
 // project_name 每次使用新项目时, 只需要更换项目名称
 function generate_task(project_name, configs) {
-    configs = configs || {};
+    configs = configs || {
+            cmd_prefix: '',
+            api_path: 'http://m.mall.9888.cn/',
+            static_path: '../',
+            enable_watch: true,
+            enable_server: false,
+            enable_revision: false
+        };
     /*
      configs = {
-
+     static_path: 'http://cdn.9888.cn/assets/'
      }
      */
 
@@ -31,11 +40,13 @@ function generate_task(project_name, configs) {
         BUILD_PATH = 'build/' + project_name + '/',
         LIB_PATH = 'lib/';
 
-    gulp.task(PROJECT_NAME, function () {
+    gulp.task(configs.cmd_prefix + PROJECT_NAME, function () {
 
         gulp.src([APP_PATH + '**/*.html'])
             .pipe(plugins.changed(BUILD_PATH))
             //.pipe(plugins.htmlmin({collapseWhitespace: true}))
+            .pipe(plugins.replace('{API_PATH}', configs.api_path))
+            .pipe(plugins.replace('{STATIC_PATH}', configs.static_path))
             .pipe(gulp.dest(BUILD_PATH));
 
         gulp.src([APP_PATH + 'less/index.less'])
@@ -47,8 +58,7 @@ function generate_task(project_name, configs) {
 
         gulp.src([
                 APP_PATH + 'scripts/components/*.jsx',
-                APP_PATH + 'scripts/index.jsx',
-                APP_PATH + 'scripts/index.js'
+                APP_PATH + 'scripts/index.jsx'
             ])
             .pipe(plugins.changed(BUILD_PATH + 'scripts'))
             .pipe(plugins.plumber())
@@ -81,9 +91,11 @@ function generate_task(project_name, configs) {
             .pipe(gulp.dest(BUILD_PATH + 'images'));
     });
 
-    gulp.task(PROJECT_NAME + ':watch', [PROJECT_NAME], function () {
-        gulp.watch('apps/' + PROJECT_NAME + '/**', [PROJECT_NAME]);
-    });
+    if (configs.enable_watch) {
+        gulp.task(PROJECT_NAME + ':watch', [PROJECT_NAME], function () {
+            gulp.watch('apps/' + PROJECT_NAME + '/**', [PROJECT_NAME]);
+        });
+    }
 
 
     //gulp.task(PROJECT_NAME + ':revision', function () {

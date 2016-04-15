@@ -3,7 +3,11 @@
 const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
-const Mall = React.createClass({
+const Product = React.createClass({
+
+    getInitialState: function () {
+        return {}
+    },
 
     render: function () {
         let data = this.props.data;
@@ -21,20 +25,33 @@ const Mall = React.createClass({
                     <div className="detail-inf-name">{data.title}</div>
                     <div className="detail-inf-des">{data.sub_title} </div>
                     <div className="detail-inf-price">
-                        <span className="money">&yen;</span><span
-                        className="price">{$FW.Format.currency(data.price)}</span>
+                        <span className="money">&yen;</span>
+                        <span className="price">{$FW.Format.currency(data.price)}</span>
                         {score}
                     </div>
                     <div className="detail-inf1">
-                        <div className="market-price"><span>市价：</span><span
-                            className="market-price-num">&yen;{data.market_price}</span>
+                        <div className="market-price">
+                            <span>市价：</span>
+                            <span className="market-price-num">&yen;{data.market_price}</span>
                         </div>
-                        <div className="total"><span>累计销量</span><span className="total-num">{data.sales}</span></div>
+                        <div className="total">
+                            <span>累计销量</span>
+                            <span className="total-num">{data.sales}</span>
+                        </div>
                     </div>
                     <div className="detail-inf1">
-                        <div className="market-price"><span>快递：</span><span>{data.ems}</span>
+                        <div className="market-price">
+                            <span>快递：</span>
+                            <span>免快递费</span>
                         </div>
-                        <div className="total"><span>配送范围：</span><span>{data.range}</span></div>
+                        <div className="total">
+                            <span>配送范围：</span>
+                            <span>全国</span>
+                        </div>
+                    </div>
+                    <div className="detail-inf1">
+                        <div className="operators">运营商：</div>
+                        <div className="operators-name">{data.operators}</div>
                     </div>
                 </div>
                 <div className="detail-mark">
@@ -57,8 +74,7 @@ const PlusMinus = React.createClass({
         let stock = this.props.stock;
 
         return {
-            value: 1,
-            disable: stock <= 0,
+            value: stock > 0 ? 1 : 0,
             minus: stock > 0,
             plus: stock > 0
         }
@@ -107,7 +123,7 @@ const PlusMinus = React.createClass({
                     <span className="stock">{this.props.stock}</span>
                     <span className="unit">件</span>
                 </div>
-                <a className={this.state.stock > 0 ? "btn-buy btn-buy-dis" : "btn-buy"}>立即购买</a>
+                <a className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>立即购买</a>
             </div>
         )
     }
@@ -127,7 +143,7 @@ const CarouselDetail = React.createClass({
 
     render: function () {
         let banner = (dot, index) => <div key={index} className={(this.state.cur_index == index) ? "on" : ''}></div>;
-        let ba = (i, index) => <div key={index}><a href={d.href}><img src={i}/></a>
+        let ba = (i, index) => <div key={index}><a href={i.href}><img src={i}/></a>
             <div className="label"></div>
         </div>;
 
@@ -144,12 +160,15 @@ const CarouselDetail = React.createClass({
     }
 });
 
-
 $FW.DOMReady(function () {
-    $FW.BatchGet([
-        'http://10.10.100.112/mockjs/4/api/v1/product/?product_id='
-    ], function (data) {
-        var data = data[0];
-        ReactDOM.render(<Mall data={data}/>, document.getElementById('cnt'));
+    $FW.Ajax({
+        url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000647',
+        success: function (data) {
+            if (!data) {
+                alert('这个产品没有任何详情');
+                return;
+            }
+            ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
+        }
     });
 });

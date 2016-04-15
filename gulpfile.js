@@ -5,7 +5,7 @@ var del = require('del');
 require('require-dir')('./gulp/tasks', {recurse: true});
 
 gulp.task('default', function () {
-    console.log("This is all task we got");
+    console.log("This is all task we got:");
     for (taskName in gulp.tasks) {
         if (gulp.tasks.hasOwnProperty(taskName)) console.log(taskName);
     }
@@ -17,6 +17,8 @@ gulp.task('clean', function () {
     // You can use multiple globbing patterns as you would with `gulp.src`
     del(['build', 'dest', 'dist']);
 });
+
+gulp.task('build:mall', ['pack:mall', 'pack:activity', 'pack:mine', 'pack:my-order', 'pack:order-detail', 'pack:product_detail', 'pack:products', 'pack:privilege']);
 
 // package mall file
 //gulp.task('package:mall', gulp.series(['mall', 'mine'], function () {
