@@ -12,12 +12,15 @@ const Mall = React.createClass({
                 <header className="header">豆哥商城</header>
                 <Carousel banners={this.props.banners}/>
                 <div className="header-nav">
-                    <a className="vip" style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-vip.png)'}}>
-                        VIP专区 </a>
-                    <a className="goods" style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-goods.png)'}}>
-                        豆哥商城 </a>
-                    <a className="mine" style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-shop.png)'}}>
-                        我的商城 </a>
+                    <a className="vip" href="/vip/products"
+                       style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-vip.png)'}}>
+                        VIP专区</a>
+                    <a className="goods" href="/products"
+                       style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-goods.png)'}}>
+                        豆哥商品</a>
+                    <a className="mine" href="/mine"
+                       style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-shop.png)'}}>
+                        我的商城</a>
                 </div>
                 <div className="index-actList-wrap">
                     { (this.props.activities || []).map(activity) }
@@ -125,6 +128,6 @@ $FW.DOMReady(function () {
     ], function (data) {
         var banners = data[0].banners, activities = data[1].activities;
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
-        sendMessageToNative('loading:complete');
+        //sendMessageToNative('loading:complete');
     });
 });

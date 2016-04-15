@@ -1,7 +1,7 @@
 'use strict';
 
 const NavTitle = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="nav-title">
                 <span className="back-btn">
@@ -17,14 +17,14 @@ var data = [
     {
         pay_at: "@date_time",
         products: [
-        {
-            count: 64786,
-            img: "测试内容0ptn",
-            score: 10130,
-            tags: "测试内容ut7v",
-            price: 53206,
-            title: "测试内容25hr"
-        }
+            {
+                count: 64786,
+                img: "测试内容0ptn",
+                score: 10130,
+                tags: "测试内容ut7v",
+                price: 53206,
+                title: "测试内容25hr"
+            }
         ],
         orderPrice: 58536,
         status: "prepare",
@@ -34,14 +34,14 @@ var data = [
     {
         pay_at: "@date_time",
         products: [
-        {
-            count: 64786,
-            img: "测试内容0ptn",
-            score: 10130,
-            tags: "测试内容ut7v",
-            price: 53206,
-            title: "测试内容25hr"
-        }
+            {
+                count: 64786,
+                img: "测试内容0ptn",
+                score: 10130,
+                tags: "测试内容ut7v",
+                price: 53206,
+                title: "测试内容25hr"
+            }
         ],
         orderPrice: 58536,
         status: "shipping",
@@ -68,20 +68,20 @@ var data = [
 ]
 
 const MyOrderMain = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             index: 0,
             voucherName: ["全部", "待发货", "待收货", "已完成"]
         };
     },
-    clickHandler: function(index) {
+    clickHandler: function (index) {
         this.setState({
-            index: index  
-        }); 
+            index: index
+        });
     },
-    render: function() {
+    render: function () {
         var self = this;
-        
+
         var btnVoucher = (v, index) => (
             <li className={index == this.state.index ? "select-li" : ""} onClick={
                     function() {
@@ -98,24 +98,24 @@ const MyOrderMain = React.createClass({
 
                 <div className="ui-tab">
                     <ul>
-                        {this.state.voucherName.map(btnVoucher)} 
+                        {this.state.voucherName.map(btnVoucher)}
                     </ul>
                 </div>
 
-                <OrderList index = {this.state.index} data={data}/>
+                <OrderList index={this.state.index} data={data}/>
             </div>
         );
-    } 
+    }
 });
 
 const OrderList = React.createClass({
-    render: function() {
+    render: function () {
         var self = this;
-        let allBlock = function() {
+        let allBlock = function () {
             return (
                 <div className="order-all">
                     {
-                        self.props.data.all.map(function(index) {
+                        self.props.data.all.map(function (index) {
                             return <OrderBlock data={index}/>
                         })
                     }
@@ -123,23 +123,11 @@ const OrderList = React.createClass({
             );
         };
 
-        let shipBlock = function() {
+        let shipBlock = function () {
             return (
                 <div className="order-ship">
                     {
-                        self.props.data.ship.map(function(index) {
-                            return <OrderBlock data={index}/>
-                        })
-                    }
-                </div>
-            );
-        };
-        
-        let receiptBlock = function() {
-            return (
-                <div className="order-receipt">
-                    {
-                        self.props.data.receipt.map(function(index) {
+                        self.props.data.ship.map(function (index) {
                             return <OrderBlock data={index}/>
                         })
                     }
@@ -147,11 +135,23 @@ const OrderList = React.createClass({
             );
         };
 
-        let finishBlock = function() {
+        let receiptBlock = function () {
+            return (
+                <div className="order-receipt">
+                    {
+                        self.props.data.receipt.map(function (index) {
+                            return <OrderBlock data={index}/>
+                        })
+                    }
+                </div>
+            );
+        };
+
+        let finishBlock = function () {
             return (
                 <div className="order-finish">
                     {
-                        self.props.data.finisch.map(function(index) {
+                        self.props.data.finisch.map(function (index) {
                             return <OrderBlock data={index}/>
                         })
                     }
@@ -161,74 +161,72 @@ const OrderList = React.createClass({
 
         return (
             <div className="order-area">
-                 {this.props.index == 0 ? allBlock() : null}
-                 {this.props.index == 1 ? shipBlock() : null}
-                 {this.props.index == 2 ? receiptBlock() : null}
-                 {this.props.index == 3 ? finishBlock() : null}
+                {this.props.index == 0 ? allBlock() : null}
+                {this.props.index == 1 ? shipBlock() : null}
+                {this.props.index == 2 ? receiptBlock() : null}
+                {this.props.index == 3 ? finishBlock() : null}
             </div>
         );
     }
 });
 
 const OrderBlock = React.createClass({
-    render: function() {
-        return(
-                <div className="order-block">
-                    <div className="title-block">
-                        <span className="time-text"></span>
-                        <span className="ship-text">已发货</span>
+    render: function () {
+        return (
+            <div className="order-block">
+                <div className="title-block">
+                    <span className="time-text"></span>
+                    <span className="ship-text">已发货</span>
+                </div>
+
+                <div className="info-block">
+                    <div className="t-info">
+                        <div className="commodity-img">
+                            <img src=""/>
+                        </div>
+
+                        <div className="commodity-info">
+                            <div className="commodity-name">
+                                <h2></h2>
+                            </div>
+
+                            <div className="tag-block">
+                                <span className="text">afafa</span>
+                            </div>
+
+                            <div className="commodity-number">
+                                <span className="money-text">￥ + 分</span>
+                                <span className="number-text">X</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="info-block">
-                        <div className="t-info">
-                            <div className="commodity-img">
-                                <img src=""/>
-                            </div>
-
-                            <div className="commodity-info">
-                                <div className="commodity-name">
-                                    <h2></h2>
-                                </div>
-
-                                <div className="tag-block">
-                                             <span className="text">afafa</span>
-                                </div>
-
-                                <div className="commodity-number">
-                                    <span className="money-text">￥ + 分</span>
-                                    <span className="number-text">X</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="commodity-total">
-                             <span className="commodity-text">共件商品</span>
-                             <span className="total-text">合计: ￥ + 工分</span>
-                        </div>
+                    <div className="commodity-total">
+                        <span className="commodity-text">共件商品</span>
+                        <span className="total-text">合计: ￥ + 工分</span>
                     </div>
                 </div>
-        ); 
+            </div>
+        );
     }
 });
 
-$FW.DOMReady(function() {
+$FW.DOMReady(function () {
     $FW.Ajax({
         url: "http://10.10.100.112/mockjs/4/api/v1/order/list?status=",
-        success: function(data) {
-            ReactDOM.render(
-                <MyOrderMain {...data}/>,
-                document.getElementById("main")
+        success: function (data) {
+            ReactDOM.render(<MyOrderMain {...data}/>, document.getElementById("cnt")
             );
         }
     });
-})
+});
 
 
 /*ReactDOM.render(
-    <MyOrderMain/>,
-    document.getElementById("main")
-);
-*/
+ <MyOrderMain/>,
+ document.getElementById("main")
+ );
+ */
 function severStr(str, n, symbol) {
     var returnStr = "";
     var c = 0;
@@ -245,20 +243,19 @@ function severStr(str, n, symbol) {
     returnStr = (a != 0) ? (newFloorStr.substring(0, a) + symbol) : "";
     var newStr = newFloorStr.substring(a, newFloorStr.length);
     for (var i = 1; i < newStr.length + 1; i++) {
-        if(i == b + n) {
-            if(i == newStr.length) {
-                returnStr = returnStr + newStr.substring(b, i -c ) + poin; 
+        if (i == b + n) {
+            if (i == newStr.length) {
+                returnStr = returnStr + newStr.substring(b, i - c) + poin;
             } else {
-                returnStr = returnStr + newStr.substring(b, i) + symbol; 
+                returnStr = returnStr + newStr.substring(b, i) + symbol;
             }
-            b = i; 
-        } 
+            b = i;
+        }
     }
-    
-    if ( c == 1) {
+
+    if (c == 1) {
         return "-" + returnStr;
     } else {
         return returnStr;
     }
 }
-

@@ -3,7 +3,11 @@
 const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
-const Mall = React.createClass({
+const Product = React.createClass({
+
+    getInitialState: function () {
+        return {}
+    },
 
     render: function () {
         let data = this.props.data;
@@ -38,11 +42,11 @@ const Mall = React.createClass({
                     <div className="detail-inf1">
                         <div className="market-price">
                             <span>快递：</span>
-                            <span>{data.ems}</span>
+                            <span>免快递费</span>
                         </div>
                         <div className="total">
                             <span>配送范围：</span>
-                            <span>{data.range}</span>
+                            <span>全国</span>
                         </div>
                     </div>
                     <div className="detail-inf1">
@@ -70,8 +74,7 @@ const PlusMinus = React.createClass({
         let stock = this.props.stock;
 
         return {
-            value: 1,
-            disable: stock <= 0,
+            value: stock > 0 ? 1 : 0,
             minus: stock > 0,
             plus: stock > 0
         }
@@ -120,7 +123,7 @@ const PlusMinus = React.createClass({
                     <span className="stock">{this.props.stock}</span>
                     <span className="unit">件</span>
                 </div>
-                <a className={this.state.stock > 0 ? "btn-buy btn-buy-dis" : "btn-buy"}>立即购买</a>
+                <a className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>立即购买</a>
             </div>
         )
     }
@@ -159,9 +162,13 @@ const CarouselDetail = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000643',
+        url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000647',
         success: function (data) {
-            ReactDOM.render(<Mall data={data}/>, document.getElementById('cnt'));
+            if (!data) {
+                alert('这个产品没有任何详情');
+                return;
+            }
+            ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
         }
     });
 });
