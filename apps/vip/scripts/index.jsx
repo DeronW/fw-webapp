@@ -1,5 +1,8 @@
 'use strict';
 
+const STATIC_PATH = document.getElementById('static-path').value;
+const API_PATH = document.getElementById('api-path').value;
+
 const NavTitle = React.createClass({
     render: function() {
         return (

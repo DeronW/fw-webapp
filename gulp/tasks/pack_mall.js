@@ -1,6 +1,9 @@
+var gulp = require('gulp');
 var gt = require('../generate_task.js');
 
-['mall', 'activity', 'mine', 'my-order', 'order-detail', 'product_detail', 'products', 'privilege'].forEach(function (i) {
+var apps = ['mall', 'activity', 'mine', 'order-list', 'order-detail', 'order-confirm', 'product-detail', 'product-list', 'vip'];
+
+apps.forEach(function (i) {
     gt(i, {
         cmd_prefix: 'pack:',
         api_path: 'http://m.mall.9888.cn/',
@@ -10,3 +13,6 @@ var gt = require('../generate_task.js');
         enable_revision: false
     })
 });
+
+
+gulp.task('build:mall', apps.map(function(i){return 'pack:' + i}));

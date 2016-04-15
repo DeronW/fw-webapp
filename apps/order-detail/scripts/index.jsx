@@ -1,11 +1,14 @@
 'use strict';
 
+const STATIC_PATH = document.getElementById('static-path').value;
+const API_PATH = document.getElementById('api-path').value;
+
 const OrderDetail = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div>
                 <NavTitle/>
-                <OrderStatusList 
+                <OrderStatusList
                     shippingInfo={this.props.shipping_info}
                     distributionName={this.props.distribution}
                     statusText={this.props.status}
@@ -16,11 +19,11 @@ const OrderDetail = React.createClass({
                 <OrderNumberList orderList={this.props.order}/>
             </div>
         );
-    } 
+    }
 });
 
 const NavTitle = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="nav-title">
                 <span className="back-btn">
@@ -28,12 +31,12 @@ const NavTitle = React.createClass({
                 </span>
                 <h1 className="title">订单详情</h1>
             </div>
-        );  
-    }   
+        );
+    }
 });
 
 const OrderStatusList = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="l-r-text">
                 <div className="info-block">
@@ -48,7 +51,7 @@ const OrderStatusList = React.createClass({
                     <span className="text">物流编号</span>
                     <span className="data-text">{this.props.distributionCode}</span>
                 </div>
-               <div className="address-list">
+                <div className="address-list">
                     <div className="address-icon">
                         <img src="../images/ico-blue-location.png"/>
                     </div>
@@ -62,17 +65,16 @@ const OrderStatusList = React.createClass({
                             <p>收货地址: {this.props.shippingInfo.address}</p>
                         </div>
                     </div>
-               </div> 
+                </div>
             </div>
         );
     }
 });
 
 const OrderStatusBlock = React.createClass({
-    render: function() {
-        console.log(this.props.products[0]);
+    render: function () {
         return (
-            <div className="order-block">                                                                                                                                            
+            <div className="order-block">
                 <div className="info-block">
                     <div className="order-block-info">
                         <div className="commodity-img">
@@ -85,11 +87,13 @@ const OrderStatusBlock = React.createClass({
                             </div>
 
                             <div className="tag-block">
-                                     <span className="text">{this.props.products[0].tags}</span>
+                                <span className="text">{this.props.products[0].tags}</span>
                             </div>
 
                             <div className="commodity-number">
-                                <span className="money-text">￥{severStr(this.props.products[0].price.toString(), 3, ",")} + {this.props.products[0].score}分</span>
+                                <span
+                                    className="money-text">￥{severStr(this.props.products[0].price.toString(), 3, ",")}
+                                    + {this.props.products[0].score}分</span>
                                 <span className="number-text">X{this.props.products[0].count}</span>
                             </div>
                         </div>
@@ -97,17 +101,18 @@ const OrderStatusBlock = React.createClass({
 
                     <div className="order-commodity-total">
                         <span className="commodity-text">共{this.props.products[0].count}件商品</span>
-                        <span className="total-text">合计: ￥{severStr(this.props.products[0].price.toString(), 3, ",")} + {this.props.products[0].score}工分 + 兑换券*</span>
+                        <span className="total-text">合计: ￥{severStr(this.props.products[0].price.toString(), 3, ",")}
+                            + {this.props.products[0].score}工分 + 兑换券*</span>
                     </div>
                 </div>
             </div>
- 
+
         );
     }
 });
 
 const OrderPayInfo = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="order-pay-info">
                 <div className="ui-block-title">
@@ -133,13 +138,13 @@ const OrderPayInfo = React.createClass({
                 </div>
 
             </div>
-                     
+
         );
     }
 });
 
 const OrderNumberList = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="order-number">
                 <div className="title">
@@ -166,49 +171,44 @@ const OrderNumberList = React.createClass({
 });
 
 
-
-$FW.DOMReady(function(){
+$FW.DOMReady(function () {
     $FW.Ajax({
-        url: "http://10.10.100.112/mockjs/4/api/v1/order?order_id=",
-        success: function(data) {
-            ReactDOM.render(
-                <OrderDetail {...data}/>,
-                document.getElementById("main")
-            ); 
+        url: API_PATH + "mall/api/v1/order_detail.json",
+        success: function (data) {
+            ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
         }
     })
 });
 
 function severStr(str, n, symbol) {
-    var returnStr = ""; 
+    var returnStr = "";
     var c = 0;
-    var newFloorStr = ""; 
+    var newFloorStr = "";
     if (str[0] == "-") {
         c = 1;
         newFloorStr = Math.floor(str.substring(1, str.length)).toString();
     } else {
         newFloorStr = Math.floor(str).toString();
-    }   
+    }
     var a = newFloorStr.length % n;
     var b = 0;
     var poin = str.substr(newFloorStr.length, str.length);
-    returnStr = (a != 0) ? (newFloorStr.substring(0, a) + symbol) : ""; 
+    returnStr = (a != 0) ? (newFloorStr.substring(0, a) + symbol) : "";
     var newStr = newFloorStr.substring(a, newFloorStr.length);
     for (var i = 1; i < newStr.length + 1; i++) {
-        if(i == b + n) {
-            if(i == newStr.length) {
-                returnStr = returnStr + newStr.substring(b, i -c ) + poin; 
+        if (i == b + n) {
+            if (i == newStr.length) {
+                returnStr = returnStr + newStr.substring(b, i - c) + poin;
             } else {
-                returnStr = returnStr + newStr.substring(b, i) + symbol; 
-            }   
-            b = i;  
-        }   
-    }   
-    
-    if ( c == 1) {
+                returnStr = returnStr + newStr.substring(b, i) + symbol;
+            }
+            b = i;
+        }
+    }
+
+    if (c == 1) {
         return "-" + returnStr;
     } else {
         return returnStr;
-    }   
+    }
 }
-

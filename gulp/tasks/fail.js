@@ -1,1 +1,0 @@
-require('../generate_task.js')('fail');

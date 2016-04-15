@@ -32,26 +32,20 @@ const MyOrderMain = React.createClass({
         var self = this;
 
         var btnVoucher = (v, index) => (
-            <li className={index == this.state.index ? "select-li" : ""} onClick={
-                    function() {
-                        self.clickHandler(index)
-                    }
-                }>
+            <div className={index == this.state.index ? "btn-tab select-li" : "btn-tab"}
+                 style={{backgroundImage: "url("+STATIC_PATH+"images/line-icon.png)"}}
+                 onClick={ function() { self.clickHandler(index) } }>
                 <span className="tab-text">{self.state.voucherName[index]}</span>
-            </li>
+            </div>
         );
 
         return (
             <div>
                 <NavTitle/>
-
                 <div className="ui-tab">
-                    <ul>
-                        {this.state.voucherName.map(btnVoucher)}
-                    </ul>
+                    <div> {this.state.voucherName.map(btnVoucher)} </div>
                 </div>
-
-                <OrderList index={this.state.index} dataJson={this.props}/>
+                <OrderList index={this.state.index} orders={this.props.orders}/>
             </div>
         );
     }
@@ -65,7 +59,7 @@ const OrderList = React.createClass({
             shipping: [],
             complete: []
         };
-        this.props.dataJson.cont.forEach(function (i) {
+        this.props.orders.forEach(function (i) {
             state.all.push(i);
             state[i.status].push(i);
         });
@@ -76,11 +70,7 @@ const OrderList = React.createClass({
         let allBlock = function (s) {
             return (
                 <div className="order-all">
-                    {
-                        self.state[s].map(function (index) {
-                            return <OrderBlock dataJson={index}/>
-                        })
-                    }
+                    { self.state[s].map((order) => <OrderBlock key={order.id} dataJson={order}/>) }
                 </div>
             );
         };
@@ -157,9 +147,9 @@ const OrderBlock = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: "http://10.10.100.112/mockjs/4/api/v1/order/list?status=",
+        url: API_PATH + "mall/api/v1/order_list.json",
         success: function (data) {
-            ReactDOM.render(<MyOrderMain {...data}/>, document.getElementById("cnt")
+            ReactDOM.render(<MyOrderMain orders={data.orders}/>, document.getElementById("cnt")
             );
         }
     });
