@@ -14,7 +14,7 @@ const Address = React.createClass({
     },
     saveHandler: function () {
         $FW.Ajax({
-            url: 'mall/api/v1/delivery_address/create.json',
+            url: API_PATH + 'mall/api/v1/delivery_address/create.json',
             method: 'post',
             data: {
                 username: this.state.username,
