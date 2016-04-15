@@ -6,18 +6,16 @@ const API_PATH = document.getElementById('api-path').value;
 var dataJson = {
     vip: {
         imgUrl: [
-            "../images/vip.jpg",
+            "../images/vip.jpg"
         ],
         title: [
             "豆哥在你的生日当天，为你准备了生日大礼包哦，一 起来金融工场开派对吧!"
-        ]
+        ],
         info: [
-            [
-                "<em className='c-fe606b'>100</em>元返现券."
-            ]
+            ["<em className='c-fe606b'>100</em>元返现券."]
         ]
     },
-   vip1: {
+    vip1: {
         imgUrl: [
             "../images/vip-1-a.jpg",
             "../images/vip-1-b.jpg",
@@ -27,7 +25,7 @@ var dataJson = {
             "豆哥在你的生日当天，为你准备了生日大礼包哦，一 起来金融工场开派对吧!",
             "提升至VIP1会员，可领取升级大礼包，只可领取一次。",
             "每笔投资都可享受等级加息奖励，加息奖励以工豆形式发放，每笔订单在起息后发放至您的账户。",
-        ]
+        ],
         info: [
             [
                 "<em className='c-fe606b'>40</em>元返现券."
@@ -52,7 +50,7 @@ var dataJson = {
             "豆哥在你的生日当天，为你准备了生日大礼包哦，一 起来金融工场开派对吧!",
             "提升至VIP1会员，可领取升级大礼包，只可领取一次。",
             "每笔投资都可享受等级加息奖励，加息奖励以工豆形式发放，每笔订单在起息后发放至您的账户。",
-        ]
+        ],
         info: [
             [
                 "<em className='c-fe606b'>140</em>元返现券."
@@ -77,7 +75,7 @@ var dataJson = {
             "豆哥在你的生日当天，为你准备了生日大礼包哦，一 起来金融工场开派对吧!",
             "提升至VIP1会员，可领取升级大礼包，只可领取一次。",
             "每笔投资都可享受等级加息奖励，加息奖励以工豆形式发放，每笔订单在起息后发放至您的账户。",
-        ]
+        ],
         info: [
             [
                 "<em className='c-fe606b'>160</em>元返现券."
@@ -102,7 +100,7 @@ var dataJson = {
             "豆哥在你的生日当天，为你准备了生日大礼包哦，一 起来金融工场开派对吧!",
             "提升至VIP1会员，可领取升级大礼包，只可领取一次。",
             "每笔投资都可享受等级加息奖励，加息奖励以工豆形式发放，每笔订单在起息后发放至您的账户。",
-        ]
+        ],
         info: [
             [
                 "<em className='c-fe606b'>180</em>元返现券."
@@ -120,7 +118,7 @@ var dataJson = {
 };
 
 const NavTitle = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="nav-title">
                 <span className="back-btn">
@@ -128,16 +126,16 @@ const NavTitle = React.createClass({
                 </span>
                 <h1 className="title">{this.props.title}</h1>
             </div>
-        );  
-    }   
+        );
+    }
 });
 
 const PrivilegePageContent = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div>
                 <div className="privilege-banner">
-                    <img src="../images/banner.jpg"/> 
+                    <img src="../images/banner.jpg"/>
                 </div>
 
                 <div className="privilege-introduction t-b-content">
@@ -168,7 +166,7 @@ const PrivilegePageContent = React.createClass({
 });
 
 const PrivilegePage = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div>
                 <NavTitle title="特权详情"/>
