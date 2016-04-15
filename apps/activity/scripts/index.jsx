@@ -111,7 +111,7 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: API_PATH + 'mall/api/v1/activity.json?bizNo=D0000000239',
+        url: API_PATH + '/mall/api/v1/activity.json?bizNo=D0000000239',
         success: function (arr) {
             ReactDOM.render(<MallActivity activity={arr}/>, document.getElementById('cnt'));
         }

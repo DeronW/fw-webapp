@@ -51,33 +51,33 @@ const MyOrderMain = React.createClass({
                     </ul>
                 </div>
 
-                <OrderList index = {this.state.index} dataJson={this.props}/>
+                <OrderList index={this.state.index} dataJson={this.props}/>
             </div>
         );
     }
 });
 
 const OrderList = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         var state = {
             all: [],
             prepare: [],
             shipping: [],
             complete: []
         };
-        this.props.dataJson.cont.forEach(function(i){
+        this.props.dataJson.cont.forEach(function (i) {
             state.all.push(i);
             state[i.status].push(i);
-        })
+        });
         return state
     },
-    render: function() {
+    render: function () {
         var self = this;
-        let allBlock = function(s) {
+        let allBlock = function (s) {
             return (
                 <div className="order-all">
                     {
-                        self.state[s].map(function(index){
+                        self.state[s].map(function (index) {
                             return <OrderBlock dataJson={index}/>
                         })
                     }
@@ -87,18 +87,18 @@ const OrderList = React.createClass({
 
         return (
             <div className="order-area">
-                 {this.props.index == 0 ? allBlock("all") : null}
-                 {this.props.index == 1 ? allBlock("prepare") : null}
-                 {this.props.index == 2 ? allBlock("shipping") : null}
-                 {this.props.index == 3 ? allBlock("complete") : null}
+                {this.props.index == 0 ? allBlock("all") : null}
+                {this.props.index == 1 ? allBlock("prepare") : null}
+                {this.props.index == 2 ? allBlock("shipping") : null}
+                {this.props.index == 3 ? allBlock("complete") : null}
             </div>
         );
     }
 });
 
 const OrderBlock = React.createClass({
-    render: function() {
-        let infoBlock = function(index) {
+    render: function () {
+        let infoBlock = function (index) {
             return (
                 <a href={index.order_item_detail_url}>
                     <div className="t-info">
@@ -112,7 +112,7 @@ const OrderBlock = React.createClass({
                             </div>
 
                             <div className="tag-block">
-                                     <span className="text">tags</span>
+                                <span className="text">tags</span>
                             </div>
 
                             <div className="commodity-number">
@@ -122,31 +122,32 @@ const OrderBlock = React.createClass({
                         </div>
                     </div>
                 </a>
-            );       
+            );
         };
 
-        return(
+        return (
             <div className="order-block">
                 <div className="title-block">
                     <span className="time-text">{this.props.dataJson.pay_at}</span>
                     <span className="ship-text">
                             {this.props.dataJson.status == "prepare" ? "待发货" : null}
-                            {this.props.dataJson.status == "shipping" ? "待收货" : null}
-                            {this.props.dataJson.status == "complete" ? "已完成" : null}
+                        {this.props.dataJson.status == "shipping" ? "待收货" : null}
+                        {this.props.dataJson.status == "complete" ? "已完成" : null}
                         
                     </span>
                 </div>
 
                 <div className="info-block">
                     {
-                        this.props.dataJson.products.map(function(index) {
+                        this.props.dataJson.products.map(function (index) {
                             return infoBlock(index);
                         })
                     }
 
                     <div className="commodity-total">
                         <span className="commodity-text">共件{this.props.dataJson.orderCount}商品</span>
-                        <span className="total-text">合计:￥{this.props.dataJson.orderPrice} + {this.props.dataJson.orderScore}工分</span>
+                        <span className="total-text">合计:￥{this.props.dataJson.orderPrice}
+                            + {this.props.dataJson.orderScore}工分</span>
                     </div>
                 </div>
             </div>
