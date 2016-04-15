@@ -24,7 +24,7 @@ function generate_task(project_name, configs) {
     configs = configs || {
             cmd_prefix: '',
             api_path: 'http://m.mall.9888.cn/',
-            static_path: '../',
+            static_path: 'pages/' + project_name + '/',
             enable_watch: true,
             enable_server: false,
             enable_revision: false
