@@ -1,0 +1,275 @@
+* {
+   	padding: 0;
+	margin: 0;
+}
+
+body {
+	font: 28px/1.4"Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+    	background-color:#ebebee;
+}
+
+a{
+    text-decoration: none;
+    &:active{outline:0;}
+    &:focus{outline:0;}
+}
+ul, ol, li { 
+    list-style: none outside none;
+}    
+
+em, i {
+	font-style: normal;
+}
+
+@fl: left;
+
+@fr: right;
+
+@color-ff: #fff;
+
+@back-color: #fff;
+
+@block: block;
+
+@center: center;
+
+@c-d8d8d8: #d8d8d8;
+
+.fl () {
+	float: @fl;
+}
+
+.fr () {
+	float: @fr;
+}
+
+.border-radius-als (@r) {
+	-webkit-border-radius: @r;
+	   -moz-border-radius: @r;
+		border-radius: @r;
+}
+
+.border-radius (@u: 0, @r: 0, @d: 0, @l: 0) {
+	-webkit-border-radius: @u @r @d @l;
+	   -moz-border-radius: @u @r @d @l;
+		border-radius: @u @r @d @l;
+}
+
+.border-radius-l-r(@l, @r) {
+	-webkit-border-radius: @l @r 0 0;
+	   -moz-border-radius: @l @r 0 0;
+		border-radius: @l @r 0 0;
+}
+
+.width (@w) {
+	width: @w;
+}
+
+.height (@h) {
+	height: @h;
+}
+
+.line-height (@lh) {
+	line-height: @lh;
+}
+
+.padding (@t: 0, @r: 0, @b: 0, @l: 0) {
+	padding: @t @r @b @l; 
+}
+
+.padding-t (@t) {
+	padding-top: @t;
+}
+
+.padding-r (@r) {
+	padding-right: @r;
+}
+
+.padding-b (@b) {
+	padding-bottom: @b;
+}
+
+.padding-l (@l) {
+	padding-left: @l;
+}
+
+.padding-l-r (@l, @r) {
+	padding-left: @l;
+	padding-right: @r;
+}
+
+.padding-t-b (@t, @b) {
+	padding-top: @t;
+	padding-bottom: @b;
+}
+
+.padding-tb-lr(@tb, @lr) {
+	padding: @tb  @lr;
+}
+
+.margin (@t: 0, @r: 0, @b: 0, @l: 0) {
+	margin: @t @r @b @l; 
+}
+
+.margin-t (@t) {
+	margin-top: @t;
+}
+
+.margin-r (@r) {
+	margin-right: @r;
+}
+
+.margin-b (@b) {
+	margin-bottom: @b;
+}
+
+.margin-l (@l) {
+	margin-left: @l;
+}
+
+.margin-t-b (@t, @b){
+	margin-top: @t;
+	margin-bottom: @b;
+}
+
+.margin-l-r (@l, @r) {
+	margin-left: @l;
+	margin-right: @r;
+}
+
+.back-color(@bc) {
+	background-color: @bc;
+}
+
+.border (@w, @style, @color) {
+	border: @w @style @color;	
+}
+
+.border-t (@w, @style @color){
+	border-top: @w @style @color;
+}
+
+.border-b (@w, @style @color){
+	border-bottom: @w @style @color;
+}
+
+.border-t-b(@w, @style, @color-t, @color-b) {
+	border-top: @w @style @color-t;
+	border-bottom: @w @style @color-b;
+}
+
+.text-align (@p) {
+	text-align: @p;
+}
+
+.position (@pos) {
+	position: @pos;
+}
+
+.display (@p) {
+    display: @p;
+}
+
+.color(@color) {
+	color: @color;
+}
+
+.font-size(@size) {
+   font-size: @size;
+}
+.clear-fix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.c-fe606b {
+    color: #f3606b;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+.nav-title {                                                                                                                                                                             
+    .position(relative);
+    .height(98px);
+    .back-color(#fff); 
+    .border-b (1px, solid, @c-d8d8d8); 
+
+    .back-btn {
+        .position(absolute);
+        left: 16px;
+        top: 26px;
+    }   
+
+    .title {
+        .text-align(center);
+        font-size: 34px;
+        .line-height(98px);
+    }   
+
+}
+
+.banner-block {
+    .position(relative);
+    .text-align(center);
+    .margin-b(150px);
+
+    .banner-img {
+        .img-block {
+            .height(360px);
+            .padding-t(40px);
+            .back-color(#fff);
+            
+            .border-b(1px, solid, #ddd);
+        }
+
+        .cont-img {
+            .margin-t (40px);
+        }
+    }
+
+    .points {
+        .position(absolute);
+        top: 372px;
+        left: 50%; 
+        .margin-l(-50px);
+        div {
+            .fl();
+            .width(10px);
+            .height(10px);
+            .margin-l(10px);
+            .border-radius(50%, 50%, 50%, 50%);
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .on {
+            background-color: #fd4d4c;
+        }
+    }
+}
+
+.ui-btn {
+    .position(fixed);
+    .width(100%);
+    bottom: 0;
+    .height(116px);
+    .back-color(#fff);
+   
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+
+    .btn {
+        .display(block);
+        .height(74px);
+        .margin(20px, 30px, 20px, 30px);
+        .line-height(74px);
+        .back-color(#fd4d4c);
+        .color(#fff);
+        .text-align(center);
+        .border-radius(5px, 5px, 5px, 5px);
+    }
+}
+
