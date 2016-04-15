@@ -5,6 +5,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 const OrderDetail = React.createClass({
     render: function () {
+        console.log(this.props);
         return (
             <div>
                 <NavTitle/>
@@ -14,7 +15,7 @@ const OrderDetail = React.createClass({
                     statusText={this.props.status}
                     distributionCode={this.props.distribution_code}
                 />
-                <OrderStatusBlock products={this.props.products}/>
+                <OrderStatusBlock orderList={this.props.order} products={this.props.products}/>
                 <OrderPayInfo payment={this.props.payment}/>
                 <OrderNumberList orderList={this.props.order}/>
             </div>
@@ -41,7 +42,11 @@ const OrderStatusList = React.createClass({
             <div className="l-r-text">
                 <div className="info-block">
                     <span className="text">订单状态</span>
-                    <span className="data-text stake-text">{this.props.statusText}</span>
+                    <span className="data-text stake-text">
+                        {this.props.statusText == "prepare" ? "待发货": null}
+                        {this.props.statusText == "shipping" ? "待收货": null}
+                        {this.props.statusText == "complete" ? "已完成": null}
+                    </span>
                 </div>
                 <div className="info-block">
                     <span className="text">物流名称</span>
@@ -58,11 +63,11 @@ const OrderStatusList = React.createClass({
 
                     <div className="address-info">
                         <div className="my-info-text">
-                            <span className="receipt-name">收货人:{this.props.shippingInfo.username}</span>
+                            <span className="receipt-name">收货人:{this.props.shippingInfo.address}</span>
                             <span className="phone-number">{this.props.shippingInfo.phone}</span>
                         </div>
                         <div className="address-text">
-                            <p>收货地址: {this.props.shippingInfo.address}</p>
+                            <p>收货地址: {this.props.shippingInfo.username}</p>
                         </div>
                     </div>
                 </div>
@@ -73,40 +78,68 @@ const OrderStatusList = React.createClass({
 
 const OrderStatusBlock = React.createClass({
     render: function () {
-        return (
-            <div className="order-block">
-                <div className="info-block">
-                    <div className="order-block-info">
-                        <div className="commodity-img">
-                            <img src={this.props.products[0].img}/>
+        var self = this;
+
+        let tags = function() {
+             this.props.products.tags.map(function(tagsText) {
+                return <span className="text">{tagsText}</span>
+            })
+        };
+
+        let commodityTotal = function () {
+            return (
+                <div className="order-commodity-total">
+                    <span className="commodity-text">共{self.props.orderList.orderCount}件商品</span>
+                    <span className="total-text">合计: ￥{severStr(self.props.orderList.orderPrice.toString(), 3, ",")}
+                        + {self.props.orderList.orderScore}工分 + 兑换券*</span>
+                </div>
+
+            ); 
+        };
+
+        let orderBlock = function(d) {
+            return (
+                <div className="order-block">
+                    <div className="info-block">
+                        <div className="order-block-info">
+                            <div className="commodity-img">
+                                <img src={d.img}/>
+                            </div>
+
+                            <div className="commodity-info">
+                                <div className="commodity-name">
+                                    <h2>{d.title}</h2>
+                                </div>
+
+                                <div className="tag-block">
+                                    {
+                                        d.tags.length != 0 ? tag() : null
+                                    }
+                                </div>
+
+                                <div className="commodity-number">
+                                    <span
+                                        className="money-text">￥{severStr(d.price.toString(), 3, ",")}
+                                        + {d.score}分</span>
+                                    <span className="number-text">X{d.count}</span>
+                                </div>
+
+                            </div>
                         </div>
 
-                        <div className="commodity-info">
-                            <div className="commodity-name">
-                                <h2>{this.props.products[0].title}</h2>
-                            </div>
-
-                            <div className="tag-block">
-                                <span className="text">{this.props.products[0].tags}</span>
-                            </div>
-
-                            <div className="commodity-number">
-                                <span
-                                    className="money-text">￥{severStr(this.props.products[0].price.toString(), 3, ",")}
-                                    + {this.props.products[0].score}分</span>
-                                <span className="number-text">X{this.props.products[0].count}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="order-commodity-total">
-                        <span className="commodity-text">共{this.props.products[0].count}件商品</span>
-                        <span className="total-text">合计: ￥{severStr(this.props.products[0].price.toString(), 3, ",")}
-                            + {this.props.products[0].score}工分 + 兑换券*</span>
+                        {commodityTotal()}
                     </div>
                 </div>
-            </div>
-
+            );
+        };
+        return (
+                <div className="order-all">
+                    {
+                        this.props.products.map(function(d) {
+                            return orderBlock(d);            
+                        })
+                    } 
+                </div>
         );
     }
 });
@@ -121,7 +154,7 @@ const OrderPayInfo = React.createClass({
                 <div className="l-r-text">
                     <div className="info-block">
                         <span className="text">兑换券支付</span>
-                        <span className="data-text">{this.props.payment.voucher_name}</span>
+                        <span className="data-text">{this.props.payment.ticket_price}</span>
                     </div>
                     <div className="info-block">
                         <span className="text">余额支付</span>
@@ -158,11 +191,11 @@ const OrderNumberList = React.createClass({
                     </div>
                     <div className="sequence-text">
                         <span className="text">发货时间:</span>
-                        <span className="time-text">{this.props.orderList.receive_at}</span>
+                        <span className="time-text">{this.props.orderList.deliver_at}</span>
                     </div>
                     <div className="sequence-text">
                         <span className="text">收货时间:</span>
-                        <span className="time-text">{this.props.orderList.deliver_at}</span>
+                        <span className="time-text">{this.props.orderList.receive_at}</span>
                     </div>
                 </div>
             </div>
