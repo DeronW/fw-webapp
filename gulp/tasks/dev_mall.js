@@ -12,3 +12,5 @@ gt('product-list');
 gt('success');
 gt('vip');
 gt('product-vip');
+gt('deliver-address');
+gt('new-deliver-address');

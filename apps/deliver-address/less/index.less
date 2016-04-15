@@ -1,0 +1,46 @@
+
+body {
+  background: #eee;
+}
+
+.address-panel {
+  display: table;
+  width: 100%;
+  font-size: 32px;
+  background: white;
+  margin-bottom: 20px;
+
+  .username {
+    float: left;
+  }
+
+  .phone {
+    float: right;
+  }
+
+  .address {
+    margin-top: 40px;
+  }
+
+  &.on {
+    background: #ccc;
+  }
+
+}
+
+.bottom-panel {
+  position: fixed;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+
+  .create-address {
+    background: red;
+    text-align: center;
+    color: white;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+  }
+}
