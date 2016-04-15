@@ -1,5 +1,8 @@
 'use strict';
 
+const STATIC_PATH = document.getElementById('static-path').value;
+const API_PATH = document.getElementById('api-path').value;
+
 const NavTitle = React.createClass({
     render: function() {
         return (
@@ -12,60 +15,6 @@ const NavTitle = React.createClass({
         );
     }
 });
-
-var data = [
-    {
-        pay_at: "@date_time",
-        products: [
-        {
-            count: 64786,
-            img: "测试内容0ptn",
-            score: 10130,
-            tags: "测试内容ut7v",
-            price: 53206,
-            title: "测试内容25hr"
-        }
-        ],
-        orderPrice: 58536,
-        status: "prepare",
-        orderCount: 76720,
-        orderScore: 88380
-    },
-    {
-        pay_at: "@date_time",
-        products: [
-        {
-            count: 64786,
-            img: "测试内容0ptn",
-            score: 10130,
-            tags: "测试内容ut7v",
-            price: 53206,
-            title: "测试内容25hr"
-        }
-        ],
-        orderPrice: 58536,
-        status: "shipping",
-        orderCount: 76720,
-        orderScore: 88380
-    },
-    {
-        pay_at: "@date_time",
-        products: [
-            {
-                count: 64786,
-                img: "测试内容0ptn",
-                score: 10130,
-                tags: "测试内容ut7v",
-                price: 53206,
-                title: "测试内容25hr"
-            }
-        ],
-        orderPrice: 58536,
-        status: "complete",
-        orderCount: 76720,
-        orderScore: 88380
-    }
-]
 
 const MyOrderMain = React.createClass({
     getInitialState: function() {
@@ -102,108 +51,111 @@ const MyOrderMain = React.createClass({
                     </ul>
                 </div>
 
-                <OrderList index = {this.state.index} data={data}/>
+                <OrderList index = {this.state.index} dataJson={this.props}/>
             </div>
         );
     } 
 });
 
 const OrderList = React.createClass({
+    getInitialState: function() {
+        var state = {
+            all: [],
+            prepare: [],
+            shipping: [],
+            complete: []
+        };
+        this.props.dataJson.cont.forEach(function(i){
+            state.all.push(i);
+            state[i.status].push(i);
+        })
+        return state
+    },
     render: function() {
         var self = this;
-        let allBlock = function() {
+        console.log( this.state.all == []);
+        let allBlock = function(s) {
             return (
                 <div className="order-all">
+                    
                     {
-                        self.props.data.all.map(function(index) {
-                            return <OrderBlock data={index}/>
+                        self.state[s].map(function(index){
+                            return <OrderBlock dataJson={index}/>
                         })
                     }
                 </div>
             );
         };
-
-        let shipBlock = function() {
-            return (
-                <div className="order-ship">
-                    {
-                        self.props.data.ship.map(function(index) {
-                            return <OrderBlock data={index}/>
-                        })
-                    }
-                </div>
-            );
-        };
-        
-        let receiptBlock = function() {
-            return (
-                <div className="order-receipt">
-                    {
-                        self.props.data.receipt.map(function(index) {
-                            return <OrderBlock data={index}/>
-                        })
-                    }
-                </div>
-            );
-        };
-
-        let finishBlock = function() {
-            return (
-                <div className="order-finish">
-                    {
-                        self.props.data.finisch.map(function(index) {
-                            return <OrderBlock data={index}/>
-                        })
-                    }
-                </div>
-            );
-        };
-
         return (
             <div className="order-area">
-                 {this.props.index == 0 ? allBlock() : null}
-                 {this.props.index == 1 ? shipBlock() : null}
-                 {this.props.index == 2 ? receiptBlock() : null}
-                 {this.props.index == 3 ? finishBlock() : null}
+                 {this.props.index == 0 ? allBlock("all") : null}
+                 {this.props.index == 1 ? allBlock("prepare") : null}
+                 {this.props.index == 2 ? allBlock("shipping") : null}
+                 {this.props.index == 3 ? allBlock("complete") : null}
             </div>
         );
     }
 });
 
 const OrderBlock = React.createClass({
+    getInitialState: function() {
+        return {
+            prepare: [],
+            shipping: [],
+            complete: []
+        };
+    },
     render: function() {
+
+        let infoBlock = function(index) {
+            return (
+                <a href={index.order_item_detail_url}>
+                    <div className="t-info">
+                        <div className="commodity-img">
+                            <img src={index.img}/>
+                        </div>
+
+                        <div className="commodity-info">
+                            <div className="commodity-name">
+                                <h2>{index.title}</h2>
+                            </div>
+
+                            <div className="tag-block">
+                                     <span className="text">tags</span>
+                            </div>
+
+                            <div className="commodity-number">
+                                <span className="money-text">￥{index.price} + {index.score}分</span>
+                                <span className="number-text">X{index.count}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            );       
+        };
+
         return(
                 <div className="order-block">
                     <div className="title-block">
-                        <span className="time-text"></span>
-                        <span className="ship-text">已发货</span>
+                        <span className="time-text">{this.props.dataJson.pay_at}</span>
+                        <span className="ship-text">
+                                {this.props.dataJson.status == "prepare" ? "待发货" : null}
+                                {this.props.dataJson.status == "shipping" ? "待收货" : null}
+                                {this.props.dataJson.status == "complete" ? "已完成" : null}
+                            
+                        </span>
                     </div>
 
                     <div className="info-block">
-                        <div className="t-info">
-                            <div className="commodity-img">
-                                <img src=""/>
-                            </div>
-
-                            <div className="commodity-info">
-                                <div className="commodity-name">
-                                    <h2></h2>
-                                </div>
-
-                                <div className="tag-block">
-                                             <span className="text">afafa</span>
-                                </div>
-
-                                <div className="commodity-number">
-                                    <span className="money-text">￥ + 分</span>
-                                    <span className="number-text">X</span>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            this.props.dataJson.products.map(function(index) {
+                                return infoBlock(index);
+                            })
+                        }
 
                         <div className="commodity-total">
-                             <span className="commodity-text">共件商品</span>
-                             <span className="total-text">合计: ￥ + 工分</span>
+                             <span className="commodity-text">共件{this.props.dataJson.orderCount}商品</span>
+                             <span className="total-text">合计:￥{this.props.dataJson.orderPrice} + {this.props.dataJson.orderScore}工分</span>
                         </div>
                     </div>
                 </div>
@@ -213,7 +165,7 @@ const OrderBlock = React.createClass({
 
 $FW.DOMReady(function() {
     $FW.Ajax({
-        url: "http://10.10.100.112/mockjs/4/api/v1/order/list?status=",
+        url: API_PATH + "mall/api/v1/order_list.json?userId=97360&memberId=71042c451fa84214b8e4e33d71d208b1",
         success: function(data) {
             ReactDOM.render(
                 <MyOrderMain {...data}/>,
@@ -223,12 +175,6 @@ $FW.DOMReady(function() {
     });
 })
 
-
-/*ReactDOM.render(
-    <MyOrderMain/>,
-    document.getElementById("main")
-);
-*/
 function severStr(str, n, symbol) {
     var returnStr = "";
     var c = 0;
