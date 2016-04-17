@@ -30,14 +30,19 @@ function generate_task(project_name, configs) {
                 static_path: '../',
                 enable_watch: true,
                 enable_server: false,
-                enable_revision: false
+                enable_revision: true
             }, configs);
 
     gulp.task(CONFIG.cmd_prefix + PROJECT_NAME,
-      gulp.series(compile_html, compile_styles, compile_commonjs, compile_images));
+      gulp.series(compile_html,
+        compile_styles,
+        compile_commonjs,
+        compile_scripts,
+        compile_images));
 
-    if (CONFIG.enable_watch)
+    if (CONFIG.enable_watch) {
         gulp.task(PROJECT_NAME + ':watch', gulp.series(PROJECT_NAME, monitor));
+    }
 
     if (CONFIG.enable_revision)
       gulp.task(PROJECT_NAME + ':revision', gulp.series(PROJECT_NAME, revision));
@@ -102,7 +107,10 @@ function generate_task(project_name, configs) {
       }
 
       function monitor(){
-          gulp.watch('apps/' + PROJECT_NAME + '/**', gulp.parallel(PROJECT_NAME));
+          gulp.watch('apps/' + PROJECT_NAME + '/html/**', gulp.parallel(compile_html));
+          gulp.watch('apps/' + PROJECT_NAME + '/images/**', gulp.parallel(compile_images));
+          gulp.watch('apps/' + PROJECT_NAME + '/less/**', gulp.parallel(compile_styles));
+          gulp.watch('apps/' + PROJECT_NAME + '/scripts/**', gulp.parallel(compile_scripts));
       }
 
       function revision(){
@@ -111,9 +119,8 @@ function generate_task(project_name, configs) {
                dontRenameFile: [/^\/favicon.ico$/g, 'index.html']
            });
 
-           const CDN_PATH = 'cdn/' + PROJECT_NAME;
-
-           return gulp.src([APP_PATH + '**'])
+          const CDN_PATH = 'cdn/' + PROJECT_NAME + '/';
+           return gulp.src([BUILD_PATH + '/**'])
                .pipe(RevAll.revision())
                .pipe(gulp.dest(CDN_PATH))
                .pipe(RevAll.manifestFile())
