@@ -4,21 +4,34 @@ var del = require('del');
 // Require all tasks in gulp/tasks, including subfolders
 require('require-dir')('./gulp/tasks', {recurse: true});
 
-gulp.task('default', function () {
-    console.log("This is all task we got:");
-    for (taskName in gulp.tasks) {
-        if (gulp.tasks.hasOwnProperty(taskName)) console.log(taskName);
-    }
+gulp.task('default', (done) => {
+    console.log(require('archy')(gulp.tree()));
+    done();
 });
 
-// Not all tasks need to use streams
-// A gulpfile is just another node program and you can use any package available on npm
-gulp.task('clean', function () {
-    // You can use multiple globbing patterns as you would with `gulp.src`
-    del(['build', 'dest', 'dist']);
-});
+gulp.task('clean', () => del(['build', 'dest', 'dist', 'cdn']));
 
 // package mall file
-//gulp.task('package:mall', gulp.series(['mall', 'mine'], function () {
-//    gulp.src(['build/**']).pipe(gulp.dest('cdn'));
-//}));
+gulp.task('build:mall', gulp.series(
+    ['clean',
+      'pack:mall',
+      'pack:activity',
+      'pack:mine',
+      'pack:order-list',
+      'pack:order-detail',
+      'pack:order-confirm',
+      'pack:product-detail',
+      'pack:product-list',
+      'pack:product-vip',
+      'pack:vip',
+      'pack:fail',
+      'pack:success',
+      'pack:deliver-address',
+      'pack:new-deliver-address',
+      'pack:vip-grade'
+    ],
+    function (done) {
+        gulp.src(['build/**']).pipe(gulp.dest('cdn'));
+        done();
+    })
+);
