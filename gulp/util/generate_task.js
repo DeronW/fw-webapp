@@ -33,7 +33,7 @@ function generate_task(project_name, configs) {
                 enable_revision: false
             }, configs);
 
-    gulp.task(configs.cmd_prefix + PROJECT_NAME,
+    gulp.task(CONFIG.cmd_prefix + PROJECT_NAME,
       gulp.series(compile_html, compile_styles, compile_commonjs, compile_images));
 
     if (CONFIG.enable_watch)
@@ -102,7 +102,6 @@ function generate_task(project_name, configs) {
       }
 
       function monitor(){
-        console.log('apps/' + PROJECT_NAME + '/**')
           gulp.watch('apps/' + PROJECT_NAME + '/**', gulp.parallel(PROJECT_NAME));
       }
 
