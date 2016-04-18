@@ -6,42 +6,56 @@ const API_PATH = document.getElementById('api-path').value;
 const DeliverAddress = React.createClass({
     getInitialState: function () {
         return {
-            current: 1
+            cur_index: 0
         }
     },
-    clickHandler: function (id) {
-        this.setState({address_id: id})
+    clickHandler: function (id,index) {
+        this.setState({
+        	address_id: id.address_id,
+        	cur_index:index
+        	
+        });
+
     },
     render: function () {
         let _this = this;
         let address = function (i, index) {
             return (
-                <div key={index} className={index == _this.state.cur_index ? "address-panel on" :"address-panel"}
-                     onClick={function(){_this.clickHandler(i.id)}}
-                >
-                    <div className="username">{i.username}</div>
-                    <div className="phone">{i.phone}</div>
-                    <div className="address">{i.address}</div>
+                <div key={index} className="address-panel"
+                     onClick={function(){_this.clickHandler(i,index)}}
+                      style={{background:"#fff url("+STATIC_PATH+"images/"+(index == _this.state.cur_index ? "checked-circle" :"check-circle")+".png) no-repeat 20px 67px"}}
+                ><a href={"../../order-confirm/html/index.html?address_id="+i.address_id+""}>
+	                    <div className="username">{i.username}</div>
+	                    <div className="phone">{i.phone}</div>
+	                    <div className="address">{i.address}</div>
+                    </a>
                 </div>
             )
         };
 
         return (
             <div>
-                {this.props.address.map(address)}
+            	<header className="header">
+                    选择收货地址
+                    <a href="#" className="btn-back"
+                       style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}> </a>
+                </header>
+                <div className="address-list">
+                	{this.props.address.map(address)}
+                </div>
                 <div className="bottom-panel">
-                    <a className="create-address">新建收货地址</a>
+                    <a href="../../new-deliver-address/html/index.html" className="create-address">+新建地址</a>
                 </div>
             </div>
         )
     }
 });
 
-$FW.DOMReady(function () {
-    $FW.Ajax({
-        url: API_PATH + 'mall/api/v1/delivery_address.json',
-        success: function (data) {
-            ReactDOM.render(<DeliverAddress address={data.deliveryAddress}/>, document.getElementById('cnt'));
-        }
-    })
+
+ $FW.DOMReady(function () {
+    $FW.BatchGet([
+     API_PATH + 'mall/api/v1/address.json'       
+    ], function (data) {
+         ReactDOM.render(<DeliverAddress address={data[0].address_list}/>, document.getElementById('cnt'));
+    });
 });
