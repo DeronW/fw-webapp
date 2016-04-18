@@ -30,7 +30,7 @@ function generate_task(project_name, configs) {
             static_path: '../',
             enable_watch: true,
             enable_server: false,
-            enable_revision: true
+            enable_revision: false
         }, configs);
 
     gulp.task(CONFIG.cmd_prefix + PROJECT_NAME,

@@ -2,12 +2,7 @@
   "name": "frontend",
   "private": true,
   "dependencies": {
-    "jshint": ">=2.9",
-
-    "material-ui": ">=0.14",
-    "react": ">=0.14",
-    "react-dom": ">=0.14",
-    "react-tap-event-plugin": ">=0.2"
+    "jshint": ">=2.9"
   },
   "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",

@@ -182,7 +182,7 @@ VIP专区页 [http://m.mall.9888.cn/vip](http://m.mall.9888.cn/vip)
 
 商品列表页 [http://m.mall.9888.cn/products](http://m.mall.9888.cn/products)
 
-商品详情页 [http://m.mall.9888.cn/product/uid](http://m.mall.9888.cn/product/[uid])
+商品详情页 [http://m.mall.9888.cn/product?bizNo=id](http://m.mall.9888.cn/product/[uid])
 
 确认订单页 [http://m.mall.9888.cn/order/confirm](http://m.mall.9888.cn/order/confirm)
 
@@ -190,7 +190,7 @@ VIP专区页 [http://m.mall.9888.cn/vip](http://m.mall.9888.cn/vip)
 
 我的订单页 [http://m.mall.9888.cn/order/mine](http://m.mall.9888.cn/order/mine)
 
-订单详情页 [http://m.mall.9888.cn/order/uid](http://m.mall.9888.cn/order/uid)
+订单详情页 [http://m.mall.9888.cn/order?bizNo=id](http://m.mall.9888.cn/order/uid)
 
 我的商城页 [http://m.mall.9888.cn/user](http://m.mall.9888.cn/user)
 
@@ -198,3 +198,34 @@ VIP专区页 [http://m.mall.9888.cn/vip](http://m.mall.9888.cn/vip)
 
 新建收货地址页 [http://m.mall.9888.cn/delivery_address/create](http://m.mall.9888.cn/delivery_address/create)
 
+
+### 环境配置
+
+安装 Node.js
+
+1. 下载bin包 https://nodejs.org/en/
+2. 安装后配置path（环境变量）
+
+安装 Git
+
+1. 下载Git， https://git-scm.com/downloads
+2. 查看安装帮助文档， https://help.github.com/articles/set-up-git/
+3. 配置Git后 clone 项目，项目地址： http://10.10.100.105/web/webapp
+
+配置项目开发环境
+
+1. 安装Node.js库，在项目根目录下执行 *npm install*
+2. 查看全部可用 gulp 指令： *node node_modules/gulp/bin/gulp.js*
+
+常用指令说明：
+
+    clean 清空生成的打包文件
+    build:mall 构建豆哥商城项目
+    xxx:watch 开发时使用的监控指令
+    xxx 一次性编译文件指令
+    
+添加新页面：
+ 
+1. 在 *apps* 目录下创建新目录，目录结构参考其它目录
+2. 在 *gulp/tasks/mall.js* 文件内,给 *apps* 变量添加一行新数据, 字符串, 跟新建目录同名
+3. 查看 gulp 默认指令, 已经新添加了新页面的指令

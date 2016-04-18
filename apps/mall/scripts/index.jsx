@@ -5,7 +5,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 const Mall = React.createClass({
     render: function () {
-        let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} link={i.link}
+        let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                                       products={i.products} key={index}/>;
         return (
             <div>
@@ -62,12 +62,17 @@ const Carousel = React.createClass({
 const ActivityProduct = React.createClass({
     render: function () {
         let pi = (data, index) => <ProductItem {...data} key={index}/>;
+        let activity_banner = () => {
+            return this.props.img ?
+                (<div className="index-actList-img">
+                    <a href={this.props.link}><img src={this.props.img}/></a>
+                </div>) :
+                null;
+        };
         return (
             <div className="index-actList-box">
-                <TextBar title={this.props.title} link={this.props.link}/>
-                <div className="index-actList-img">
-                    <a href={this.props.link}><img src={this.props.img}/></a>
-                </div>
+                <TextBar title={this.props.title} bizNo={this.props.bizNo}/>
+                {activity_banner()}
                 <ul className="index-actList-list">{this.props.products.map(pi)}</ul>
             </div>
         )
@@ -79,7 +84,7 @@ const TextBar = React.createClass({
         return (
             <div className="index-actList-h">
                 <div className="index-actList-htext">{this.props.title}</div>
-                <a href={this.props.link} className="index-actList-hmore"
+                <a href={'/activity?bizNo=' + this.props.bizNo} className="index-actList-hmore"
                    style={{background:"url(../images/ico-blue-right.png) no-repeat right center"}}>更多</a>
             </div>
         )
@@ -97,7 +102,7 @@ const ProductItem = React.createClass({
 
         return (
             <li>
-                <a href={this.props.link} className="index-actList-a">
+                <a href={'/product?bizNo='+this.props.bizNo} className="index-actList-a">
                     <div className="list-img"><img src={this.props.img}/></div>
                     {Angle}
                     <div className="list-name">{this.props.title}</div>
