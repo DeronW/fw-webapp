@@ -12,7 +12,7 @@ const Mall = React.createClass({
                 <header className="header">豆哥商城</header>
                 <Carousel banners={this.props.banners}/>
                 <div className="header-nav">
-                    <a className="vip" href="/vip/products"
+                    <a className="vip" href="/products/vip"
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-vip.png)'}}>
                         VIP专区</a>
                     <a className="goods" href="/products"

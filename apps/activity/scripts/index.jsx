@@ -35,9 +35,9 @@ MallActivity.Explain = React.createClass({
         let desc = null;
         if (this.state.show) {
             desc = (
-                <ul className="act-explain-cont show">
-                    { this.props.desc.split(/[;|；]/).map((i, index) => <li key={index}>{i}</li>) }
-                </ul>
+                <div className="act-explain-cont show">
+                    { this.props.desc.split(/[;|；]/).map((i, index) => <div key={index}>{index + 1}. {i}</div>) }
+                </div>
             )
         }
 

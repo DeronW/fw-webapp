@@ -161,8 +161,15 @@ const CarouselDetail = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    let bizNo = $FW.Format.urlQuery().bizNo;
+    if (!bizNo) {
+        alert('bizNo is missing');
+        return;
+    }
+
     $FW.Ajax({
-        url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000647',
+        //url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000647',
+        url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=' + bizNo,
         success: function (data) {
             if (!data) {
                 alert('这个产品没有任何详情');

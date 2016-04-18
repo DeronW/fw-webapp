@@ -3,25 +3,37 @@
 const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
-window.FormaData = {
-    count: 1,
-    use_bean: false,
-    captura: null,
-    value: "",
-    couponsUsed: [],
-    CouponPop: false
+var query = $FW.Format.urlQuery();
 
+window.FormaData = {
+    buyNum: 1,
+    payBeanPrice: false,
+    payRmbPrice: null,
+    productBizNo: query.bizNo,
+    useTicket: false,
+    ticket: [],
+    tokenStr: [],
+    useBean: false,
+    addressId: null
 };
+
+function submit() {
+    $FW.Ajax({
+        url: '/mall/api/v1/buy',
+        data: window.FormaData,
+        success: function () {
+            alert("make order success")
+        }
+    })
+}
 
 const ConfirmOrder = React.createClass({
 
     getInitialState: function () {
 
-        console.log(this.props)
-
         return {
             show_modal: true,
-            product_count: this.props.data.products[0].count,
+            product_count: this.props.product.count,
             disable_pay: false,
             checked_voucher: {},
             show_voucher_modal: false
@@ -35,17 +47,30 @@ const ConfirmOrder = React.createClass({
     },
     confirmCheckedVoucherHandler: function (checked_voucher) {
         this.setState({show_voucher_modal: false, checked_voucher: checked_voucher});
-
-        console.log(checked_voucher)
     },
     changeValue: function (e) {
-        this.setState({
-            value: e.target.value
+        this.setState({value: e.target.value})
+    },
+    makeOrderHandler: function () {
+        $FW.Ajax({
+            url: '/mall/api/v1/verify_sms_code',
+            data: {smsCode: window.FormData.sms_code},
+            success: submit
         })
+    },
+    updateProductCountHandler: function (c) {
+        this.setState({product_count: c})
     },
 
     render: function () {
-        let shipping_info = this.props.data.shipping_info;
+        let address = null;
+        let _this = this;
+
+        if (this.props.default_address_id) {
+            this.props.address_list.forEach(function (i) {
+                if (i.id == _this.props.default_address_id) address = i;
+            });
+        }
 
         return (
             <div className="confirm-order">
@@ -55,23 +80,23 @@ const ConfirmOrder = React.createClass({
                        style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}>
                     </a>
                 </header>
-                { shipping_info ? <Address username={shipping_info.username}
-                                           phone={shipping_info.phone}
-                                           address={shipping_info.address}/> : <NewAddr /> }
-                <ConfirmOrder.Product products={this.props.data.products}/>
+                { address ? <Address address={address}/> : <NewAddress /> }
+                <ConfirmOrder.Product product={this.props.product}
+                                      update_product_count_handler={this.updateProductCountHandler}/>
                 <ConfirmOrder.Extra product_count={this.state.product_count}
-                                    product_price={this.props.data.products[0].price}
-                                    product_score={this.props.data.products[0].score}
-                                    user_charge={this.props.user.charge} user_bean={this.props.user.bean}
-                                    user_score={this.props.user.score}
+                                    product_price={this.props.product.price}
+                                    product_score={this.props.product.score}
+                                    user={this.props.user}
                                     show_voucher_modal={this.showVoucherModal}/>
                 <ConfirmOrder.Captcha />
                 <div className="confirm-order-foot">
-                    <a href="#" className={this.state.disable_pay ? "btn-red btn-gray" : "btn-red"}>确认购买</a>
+                    <a onClick={this.makeOrderHandler}
+                       className={this.state.disable_pay ? "btn-red btn-gray" : "btn-red"}>确认购买</a>
                 </div>
                 {this.state.show_voucher_modal ?
                     <ConfirmOrder.VoucherModal hide_voucher_modal={this.hideVoucherModalHandler}
                                                checked_voucher={this.state.checked_voucher}
+                                               voucher_list={this.props.ticket_list}
                                                confirm_checked_voucher={this.confirmCheckedVoucherHandler}/> : null}
             </div>
         )
@@ -80,20 +105,20 @@ const ConfirmOrder = React.createClass({
 
 ConfirmOrder.Product = React.createClass({
     getInitialState: function () {
-        return {
-            count: this.props.products[0].count
-        }
+        return {count: this.props.product.count}
     },
     decreaseHandler: function () {
         let count = this.state.count - 1;
         if (count <= 0) count = 1;
         this.setState({count: count})
+        this.props.update_product_count_handler(count);
     },
     increaseHandler: function () {
-        this.setState({count: this.state.count + 1})
+        this.setState({count: this.state.count + 1});
+        this.props.update_product_count_handler(this.state.count + 1);
     },
     render: function () {
-        let p = this.props.products[0];
+        let p = this.props.product;
 
         return (
             <div className="pro-order">
@@ -148,11 +173,11 @@ ConfirmOrder.Extra = React.createClass({
         let checked_coupon_length = 3;
 
         let selectedVoucher = checked_coupon_length ?
-            <div className="coupons-r">{data.couponsList[0].name} &times; {checked_coupon_length}</div> : null;
+            <div className="coupons-r">{'aaa'} &times; {checked_coupon_length}</div> : null;
 
         let score_used = this.props.product_count * this.props.product_score;
         let total_price = this.props.product_count * this.props.product_price;
-        if (this.state.use_bean) total_price -= this.props.user_bean;
+        if (this.state.use_bean) total_price -= this.props.user.bean / 100;
         if (total_price < 0) total_price = 0;
 
         return (
@@ -165,7 +190,7 @@ ConfirmOrder.Extra = React.createClass({
                     </div>
                     <div className="bean">
                         <div className="bean1">工豆账户</div>
-                        <div className="bean2">&yen;{this.props.user_bean}</div>
+                        <div className="bean2">&yen;{this.props.user.bean}</div>
                         <div className="bean3">
                             <div className={this.state.use_bean ? "btn-circle-box on" : "btn-circle-box"}>
                                 <div className="btn-circle" onClick={this.toggleBeanHandler}>
@@ -175,13 +200,13 @@ ConfirmOrder.Extra = React.createClass({
                     </div>
                     <div className="score">
                         <div className="score1">工分账户</div>
-                        <div className={ 1 < 0 ? "score2 red" : "score2"}>{this.props.user_score}</div>
+                        <div className={ 1 < 0 ? "score2 red" : "score2"}>{this.props.user.score}</div>
                         <div className="score3">{score_used ? score_used : null}</div>
                     </div>
                 </div>
                 <div className="balance-box">
                     <div className="balance1">当前余额</div>
-                    <div className={"balance2 red"}>&yen;{this.props.user_charge}</div>
+                    <div className={"balance2 red"}>&yen;{this.props.user.charge}</div>
                     <div className="balance3">&yen;{total_price}</div>
                     <div className="balance4">总计：</div>
                 </div>
@@ -200,12 +225,13 @@ ConfirmOrder.Captcha = React.createClass({
     getCaptchaHandler: function () {
         if (this.state.remain == 0) {
             this.tick();
-            //$FW.Ajax({
-            //    url: "",
-            //    method: 'post',
-            //    success: function () {
-            //    }
-            //})
+            $FW.Ajax({
+                url: "/mall/api/v1/send_sms_code",
+                method: 'post',
+                success: function () {
+                    alert('验证码已发送, 请查收')
+                }
+            })
         }
     },
     countingDown: function () {
@@ -255,7 +281,7 @@ ConfirmOrder.VoucherModal = React.createClass({
             let checkImg = _this.state.checked_voucher[data.couponId] ? 'red-right' : 'gray-block';
 
             return (
-                <div className="li"
+                <div className="li" key={index}
                      onClick={function(){_this.ToggleCoupons(data.couponId) }}>
                     <div className="chose"
                          style={{background:"url("+STATIC_PATH+"images/"+checkImg+".png) no-repeat 0 center"}}></div>
@@ -279,7 +305,7 @@ ConfirmOrder.VoucherModal = React.createClass({
                         </div>
                         <div className="list-wrap">
                             <div className="list">
-                                { window.data.couponsList.map(voucher)}
+                                { this.props.voucher_list.map(voucher)}
                             </div>
                         </div>
                     </div>
@@ -296,13 +322,13 @@ ConfirmOrder.VoucherModal = React.createClass({
     }
 });
 
-const NewAddr = React.createClass({
+const NewAddress = React.createClass({
     render: function () {
         return (
             <div className="new-adress">
-                <a href="#">收货地址
-                    <div className="btn-new-adress"
-                         style={{background:"url(../images/ico-add.png) no-repeat center"}}></div>
+                <a href="/delivery_address/create">收货地址
+                    <div className="btn-new-address"
+                         style={{background:"url("+STATIC_PATH+"images/ico-add.png) no-repeat center"}}></div>
                 </a>
             </div>
         )
@@ -311,71 +337,56 @@ const NewAddr = React.createClass({
 
 const Address = React.createClass({
     render: function () {
+        let address = this.props.address;
+
         return (
             <div className="goods-adress">
                 <div className="goods-adress-h">收货地址</div>
                 <div className="goods-adress-cnt"
                      style={{background:"#fff url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 30px 30px"}}>
-                    <a href="#"
-                       style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 671px center"}}>
+                    <a style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 671px center"}}>
                         <div className="inf">
-                            <div className="receiver"><span>收货人：</span><span>{this.props.username}</span></div>
-                            <div className="phone">{this.props.phone}</div>
+                            <div className="receiver"><span>收货人：</span><span>{address.receiver}</span></div>
+                            <div className="phone">{address.receiverPhone}</div>
                         </div>
-                        <div className="detail">收货地址：{this.props.detail}</div>
+                        <div className="detail">收货地址：{address.addressDetail}</div>
                     </a>
                 </div>
             </div>
         )
     }
 });
-window.data = {
-    addr: {
-        username: "兰玉玉",
-        phone: 13512345678,
-        detail: "收货地址：北京市西城区金融街街道宣武门西大街129号金隅大厦1201室"
-    },
-    list: {
-        img: "../images/pro-img1.jpg",
-        proId: "1223",
-        title: "Apple / 苹果   iPad Air2  128G   WIFI64g 金色",
-        mark: ["vip1", "限购一件", "限购二件", "限购三件", "限购四件"],
-        price: 19999,
-        score: 200,
-        num: 4
-    },
-    accountBean: 10.00,
-    accountScore: 100,
-    balance: 1000,
-    couponsList: [
-        {
-            couponId: "1",
-            name: "中秋节中秋节中秋节券",
-            dated: "2015-05-03"
-        },
-        {
-            couponId: "2",
-            name: "中秋节中秋节中秋节券",
-            dated: "2015-05-03"
-        },
-        {
-            couponId: "3",
-            name: "中秋节中秋节中秋节券",
-            dated: "2015-05-03"
-        }
-    ]
-};
 
 $FW.DOMReady(function () {
+    let query = $FW.Format.urlQuery();
+    let bizNo = query.bizNo;
+    if (!bizNo) {
+    }
+
     $FW.Ajax({
-        url: API_PATH + 'mall/api/v1/order_detail.json',
+        //url: API_PATH + 'mall/api/v1/order/new.json?bizNo=' + bizNo,
+        url: 'http://10.10.100.112/mockjs/4/api/v1/order/new.json?productBizNo=',
         success: function (data) {
+
             var user = {
-                score: 100,
-                bean: 99,
-                charge: 9999
+                score: data.avaliablePoint,
+                bean: data.avaliableBeanBalanceYuan,
+                charge: data.availableCashBalance
             };
-            ReactDOM.render(<ConfirmOrder data={data} user={user}/>, document.getElementById('cnt'));
+            var product = {
+                img: data.previewTitleImage,
+                title: data.productName,
+                price: data.singleRmb,
+                score: data.singlePoint,
+                tags: data.tags,
+                count: query.count || 1
+            };
+
+            ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList} user={user}
+                                          address_list={data.addressList}
+                                          default_address_id={query.address_id || data.addressId}
+                />,
+                document.getElementById('cnt'));
         }
     });
 });

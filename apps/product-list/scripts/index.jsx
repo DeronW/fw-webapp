@@ -72,7 +72,7 @@ const ProductItem = React.createClass({
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
 
         return (
-            <a href={this.props.link} className="index-actList-a">
+            <a href={'/product?bizNo=' + this.props.bizNo} className="index-actList-a">
                 <div className="list-img"><img src={this.props.img}/></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>

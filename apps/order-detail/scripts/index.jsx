@@ -136,7 +136,7 @@ const OrderStatusBlock = React.createClass({
 const OrderPayInfo = React.createClass({
     render: function () {
         let payment = this.props.payment;
-        
+
         return (
             <div className="order-pay-info">
                 <div className="ui-block-title">
@@ -195,8 +195,13 @@ const OrderNumberList = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    let bizNo = $FW.Format.urlQuery().bizNo;
+    if (!bizNo) {
+        alert('order bizNo is missing');
+        return;
+    }
     $FW.Ajax({
-        url: API_PATH + "mall/api/v1/order_detail.json",
+        url: API_PATH + "mall/api/v1/order_detail.json?bizNo=" + bizNo,
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
         }
