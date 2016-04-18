@@ -5,6 +5,10 @@ const API_PATH = document.getElementById('api-path').value;
 
 const MallActivity = React.createClass({
     render: function () {
+        let img = this.props.activity.img ?
+            <a href="#" className="act-img-detail"><img src={this.props.activity.img}/></a> :
+            null;
+
         return (
             <div>
                 <header className="header">
@@ -12,7 +16,7 @@ const MallActivity = React.createClass({
                     <a href="#" className="btn-back"
                        style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}> </a>
                 </header>
-                <a href="#" className="act-img-detail"><img src={this.props.activity.img}/></a>
+                {img}
                 <MallActivity.Explain desc={this.props.activity.desc}/>
                 <ProductList />
             </div>
@@ -32,7 +36,7 @@ MallActivity.Explain = React.createClass({
         if (this.state.show) {
             desc = (
                 <ul className="act-explain-cont show">
-                    { this.props.desc.split(',').map((i, index) => <li key={index}>{i}</li>) }
+                    { this.props.desc.split(/[;|；]/).map((i, index) => <li key={index}>{i}</li>) }
                 </ul>
             )
         }
@@ -72,7 +76,7 @@ const ProductList = React.createClass({
         return (
             <div className="products-act">
                 <div className="index-actList-list">
-                    { this.state.products.map((p, index) => <ProductItem key={index} {...p} key={p.id}/>) }
+                    { this.state.products.map((p, index) => <ProductItem key={index} {...p} key={p.bizNo}/>) }
                 </div>
             </div>
         )
@@ -86,7 +90,7 @@ const ProductItem = React.createClass({
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
 
         return (
-            <a href={this.props.link} className="index-actList-a">
+            <a href={'/product?bizNo=' + this.props.bizNo} className="index-actList-a">
                 <div className="list-img"><img src={this.props.img}/></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>

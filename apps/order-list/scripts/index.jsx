@@ -8,7 +8,7 @@ const NavTitle = React.createClass({
         return (
             <div className="nav-title">
                 <span className="back-btn">
-                    <img src="../images/back-btn.png"/>
+                    <img src={STATIC_PATH + "images/back-btn.png"}/>
                 </span>
                 <h1 className="title">我的订单</h1>
             </div>
@@ -28,11 +28,12 @@ const MyOrderMain = React.createClass({
             index: index
         });
     },
+
     render: function () {
         var self = this;
 
         var btnVoucher = (v, index) => (
-            <div className={index == this.state.index ? "btn-tab select-li" : "btn-tab"}
+            <div key={index} className={index == this.state.index ? "btn-tab select-li" : "btn-tab"}
                  style={{backgroundImage: "url("+STATIC_PATH+"images/line-icon.png)"}}
                  onClick={ function() { self.clickHandler(index) } }>
                 <span className="tab-text">{self.state.voucherName[index]}</span>
@@ -70,27 +71,19 @@ const OrderList = React.createClass({
         let allBlock = function (s) {
             return (
                 <div className="order-all">
-                    {
-                        self.state[s].map((order) => <OrderBlock key={order.id} dataJson={order}/>)
-                    }
+                    { self.state[s].map((order) => <OrderBlock key={order.bizNo} order={order} dataJson={order}/>) }
                 </div>
             );
         };
 
-        let blockText = function() {
-            return (
-                <div className="no-commodity-block">
-                    对不起没有商品
-                </div>
-            );
-        }
+        let blockText = <div className="no-commodity-block"> 对不起没有商品 </div>;
 
         return (
             <div className="order-area">
-                {this.props.index == 0 ? (this.state.all.length != 0 ? allBlock("all") : blockText()) : null}
-                {this.props.index == 1 ? (this.state.prepare.length != 0 ? allBlock("prepare") : blockText()) : null}
-                {this.props.index == 2 ? (this.state.shipping.length != 0 ? allBlock("shipping") : blockText()) : null}
-                {this.props.index == 3 ? (this.state.complete.length != 0 ? allBlock("complete") : blockText()) : null}
+                {this.props.index == 0 ? (this.state.all.length != 0 ? allBlock("all") : blockText) : null}
+                {this.props.index == 1 ? (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) : null}
+                {this.props.index == 2 ? (this.state.shipping.length != 0 ? allBlock("shipping") : blockText) : null}
+                {this.props.index == 3 ? (this.state.complete.length != 0 ? allBlock("complete") : blockText) : null}
             </div>
         );
     }
@@ -98,33 +91,42 @@ const OrderList = React.createClass({
 
 const OrderBlock = React.createClass({
     render: function () {
-        let tags = function(s) {
-           return (
-             <span className="text">{s}</span>
-            );
+
+        let order = this.props.order;
+        let status_name;
+        switch (order.status) {
+            case 'prepare':
+                status_name = '待发货';
+                break;
+            case 'shipping':
+                status_name = '待收货';
+                break;
+            case 'complete':
+                status_name = '已完成';
+                break;
         }
-        let infoBlock = function (index) {
+
+        let tags = function (s) {
+            return ( <span className="text">{s}</span> );
+        };
+
+        let product_item = function (product, index) {
             return (
-                <a href={index.order_item_detail_url}>
+                <a href={'/order?bizNo=' + order.bizNo} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
-                            <img src={index.img}/>
+                            <img src={product.img}/>
                         </div>
-
                         <div className="commodity-info">
                             <div className="commodity-name">
-                                <h2>{index.title}</h2>
+                                <h2>{product.title}</h2>
                             </div>
-
                             <div className="tag-block">
-                                {
-                                    index.tags.length != 0 ? tags(index.tags) : null
-                                }
+                                { product.tags.length != 0 ? tags(product.tags) : null }
                             </div>
-
                             <div className="commodity-number">
-                                <span className="money-text">￥{index.price} + {index.score}分</span>
-                                <span className="number-text">X{index.count}</span>
+                                <span className="money-text">￥{product.price} + {product.score}分</span>
+                                <span className="number-text">X{product.count}</span>
                             </div>
                         </div>
                     </div>
@@ -132,33 +134,24 @@ const OrderBlock = React.createClass({
             );
         };
 
+        let cost_score = order.score ? '+ ' + order.score + ' 工分' : null;
+
         return (
             <div className="order-block">
                 <div className="title-block">
-                    <span className="time-text">{this.props.dataJson.pay_at}</span>
+                    <span className="time-text">{order.pay_at}</span>
                     <span className="ship-text">
-                        {this.props.dataJson.status == "prepare" ? "待发货" : null}
-                        {this.props.dataJson.status == "shipping" ? "待收货" : null}
-                        {this.props.dataJson.status == "complete" ? "已完成" : null}
-                        
+                        {status_name}
                     </span>
                 </div>
-
                 <div className="info-block">
-                    {
-                        this.props.dataJson.products.map(function (index) {
-                            return infoBlock(index);
-                        })
-                    }
-
+                    { order.products.map((p) => product_item(p)) }
                     <div className="commodity-total">
-                        <span className="commodity-text">共件{this.props.dataJson.orderCount}商品</span>
+                        <span className="commodity-text">共件{order.orderCount}商品</span>
                         <span className="total-text">
                             合计:￥
-                            {this.props.dataJson.orderPrice}
-                            + 
-                            {this.props.dataJson.orderScore}
-                            工分
+                            {order.price}
+                            {cost_score}
                         </span>
                     </div>
                 </div>
