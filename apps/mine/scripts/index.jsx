@@ -57,12 +57,12 @@ const UserInfo = React.createClass({
 
                     <div className="user-info-r">
                         <a href="/user/address">
-                            <div className="user-get-adders">
+                            <a className="user-get-adders" href="/delivery_address">
                                 <i className="adders-icon">
-                                    <img src="../images/address-icon.png"/>
+                                    <img src={STATIC_PATH + "images/address-icon.png"}/>
                                 </i>
                                 <span className="text">收货地址</span>
-                            </div>
+                            </a>
                         </a>
                     </div>
                 </div>
@@ -84,7 +84,7 @@ const MyOderBlock = React.createClass({
             <div>
                 <div className="my-oder-block">
                     <span className="title">我的订单</span>
-                    <a href="/order" className="oder-lick-text">
+                    <a href="/order/mine" className="oder-lick-text">
                         查看全部订单
                     </a>
                 </div>

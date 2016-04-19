@@ -112,7 +112,7 @@ const OrderBlock = React.createClass({
 
         let product_item = function (product, index) {
             return (
-                <a href={'/order?bizNo=' + order.bizNo} key={index}>
+                <a href={'/order/detail?bizNo=' + order.bizNo} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img}/>
