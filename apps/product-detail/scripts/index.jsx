@@ -101,6 +101,11 @@ const PlusMinus = React.createClass({
     changeMinus: function () {
         this.updateCount(this.state.value - 1)
     },
+    buyHandler: function () {
+        if (this.state.value < 1) return;
+        let bizNo = $FW.Format.urlQuery().bizNo;
+        location.href = '/order/confirm?bizNo=' + bizNo + '&count=' + this.state.value
+    },
 
     blur: function (e) {
         this.updateCount(e.target.value)
@@ -123,7 +128,8 @@ const PlusMinus = React.createClass({
                     <span className="stock">{this.props.stock}</span>
                     <span className="unit">件</span>
                 </div>
-                <a className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>立即购买</a>
+                <a onClick={this.buyHandler}
+                   className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>立即购买</a>
             </div>
         )
     }

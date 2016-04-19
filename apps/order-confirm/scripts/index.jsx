@@ -6,31 +6,32 @@ const API_PATH = document.getElementById('api-path').value;
 var query = $FW.Format.urlQuery();
 
 window.FormaData = {
-    buyNum: 1,
-    payBeanPrice: false,
+    buyNum: query.count || 1,
+    useBean: true,
+    payBeanPrice: null,
     payRmbPrice: null,
     productBizNo: query.bizNo,
     useTicket: false,
     ticket: [],
-    tokenStr: [],
-    useBean: false,
+    tokenStr: query.tokenStr,
     addressId: null
 };
 
 function submit() {
-    $FW.Ajax({
-        url: '/mall/api/v1/buy',
-        data: window.FormaData,
-        success: function () {
-            alert("make order success")
-        }
-    })
+    console.log(window.FormData);
+
+    //$FW.Ajax({
+    //    url: '/mall/api/v1/buy',
+    //    data: window.FormaData,
+    //    success: function () {
+    //        alert("make order success")
+    //    }
+    //})
 }
 
 const ConfirmOrder = React.createClass({
 
     getInitialState: function () {
-
         return {
             show_modal: true,
             product_count: this.props.product.count,
@@ -59,7 +60,8 @@ const ConfirmOrder = React.createClass({
         })
     },
     updateProductCountHandler: function (c) {
-        this.setState({product_count: c})
+        this.setState({product_count: c});
+        window.FormData.buyNum = c;
     },
 
     render: function () {
@@ -167,18 +169,27 @@ ConfirmOrder.Extra = React.createClass({
         }
     },
     toggleBeanHandler: function () {
-        this.setState({use_bean: !this.state.use_bean})
+        this.setState({use_bean: !this.state.use_bean});
+        window.FormData.useBean = !this.state.use_bean;
+        window.FormData.payBeanPrice = window.FormData.useBean ? this.props.user.bean : 0;
     },
     render: function () {
-        let checked_coupon_length = 3;
+        let checked_tickets = [];
+        for (var i in this.state.checked_coupons) {
+            if (!this.state.checked_coupons.hasOwnProperty(i)) checked_tickets.push(i);
+        }
 
-        let selectedVoucher = checked_coupon_length ?
-            <div className="coupons-r">{'aaa'} &times; {checked_coupon_length}</div> : null;
+        let selectedVoucher = checked_tickets.length ?
+            <div className="coupons-r">{checked_tickets[0].productName} &times; {checked_tickets.length}</div> : null;
 
         let score_used = this.props.product_count * this.props.product_score;
         let total_price = this.props.product_count * this.props.product_price;
         if (this.state.use_bean) total_price -= this.props.user.bean / 100;
         if (total_price < 0) total_price = 0;
+
+        window.FormData.payRmbPrice = total_price;
+        window.FormData.useTicket = checked_tickets.length > 0;
+        window.FormData.ticket = checked_tickets.map((i) => i.id);
 
         return (
             <div className="balance-wrap">
@@ -207,7 +218,7 @@ ConfirmOrder.Extra = React.createClass({
                 <div className="balance-box">
                     <div className="balance1">当前余额</div>
                     <div className={"balance2 red"}>&yen;{this.props.user.charge}</div>
-                    <div className="balance3">&yen;{total_price}</div>
+                    <div className="balance3">&yen;{$FW.Format.currency(total_price)}</div>
                     <div className="balance4">总计：</div>
                 </div>
             </div>
@@ -277,16 +288,16 @@ ConfirmOrder.VoucherModal = React.createClass({
     render: function () {
         let _this = this;
 
-        let voucher = function (data) {
-            let checkImg = _this.state.checked_voucher[data.couponId] ? 'red-right' : 'gray-block';
+        let voucher = function (data, index) {
+            let checkImg = _this.state.checked_voucher[data.id] ? 'red-right' : 'gray-block';
 
             return (
                 <div className="li" key={index}
-                     onClick={function(){_this.ToggleCoupons(data.couponId) }}>
+                     onClick={function(){_this.ToggleCoupons(data.id) }}>
                     <div className="chose"
                          style={{background:"url("+STATIC_PATH+"images/"+checkImg+".png) no-repeat 0 center"}}></div>
-                    <div className="name">{data.name}</div>
-                    <div className="date">{data.dated}</div>
+                    <div className="name">{data.productName}</div>
+                    <div className="date">{data.endTime}</div>
                 </div>
             )
         };
@@ -381,6 +392,9 @@ $FW.DOMReady(function () {
                 tags: data.tags,
                 count: query.count || 1
             };
+
+            window.FormData.addressId = query.address_id || data.addressId;
+            window.FormData.payBeanPrice = user.bean;
 
             ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList} user={user}
                                           address_list={data.addressList}
