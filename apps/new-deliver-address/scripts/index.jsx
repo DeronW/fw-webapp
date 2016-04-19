@@ -22,8 +22,8 @@ const Address = React.createClass({
                 address: this.state.address,
                 isDefault: this.state.isDefault
             },
-            success: function (d) {
-                alert(d.ret);
+            success: function () {
+                history.back()
             }
         })
     },
