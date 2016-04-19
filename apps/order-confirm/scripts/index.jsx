@@ -19,14 +19,13 @@ window.FormaData = {
 
 function submit() {
     console.log(window.FormData);
-
-    //$FW.Ajax({
-    //    url: '/mall/api/v1/buy',
-    //    data: window.FormaData,
-    //    success: function () {
-    //        alert("make order success")
-    //    }
-    //})
+    $FW.Ajax({
+        url: '/mall/api/v1/buy',
+        data: window.FormaData,
+        success: function () {
+            alert("make order success")
+        }
+    })
 }
 
 const ConfirmOrder = React.createClass({
@@ -375,8 +374,8 @@ $FW.DOMReady(function () {
     }
 
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/v1/order/new.json?bizNo=' + bizNo,
-        url: 'http://10.10.100.112/mockjs/4/api/v1/order/new.json?productBizNo=',
+        url: API_PATH + 'mall/api/v1/order/new.json?bizNo=' + bizNo,
+        //url: 'http://10.10.100.112/mockjs/4/api/v1/order/new.json?productBizNo=',
         success: function (data) {
 
             var user = {

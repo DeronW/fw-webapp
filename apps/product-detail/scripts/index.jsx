@@ -174,7 +174,7 @@ $FW.DOMReady(function () {
     }
 
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000647',
+        //url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000649',
         url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=' + bizNo,
         success: function (data) {
             if (!data) {
