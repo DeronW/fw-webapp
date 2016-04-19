@@ -19,7 +19,7 @@ const MallProducts = React.createClass({
     componentDidMount: function () {
         let _this = this;
         $FW.Ajax({
-            url: API_PATH + 'mall/api/v1/products.json',
+            url: API_PATH + 'mall/api/index/v1/products.json',
             success: function (data) {
                 let products = window.Products.all.concat(data.products);
                 window.Products.all = products;

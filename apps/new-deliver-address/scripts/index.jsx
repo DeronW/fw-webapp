@@ -13,7 +13,6 @@ const Address = React.createClass({
         }
     },
     saveHandler: function () {
-        console.log('asa')
         $FW.Ajax({
             url: API_PATH + 'mall/api/member/v1/delivery_address/create.json',
             method: 'post',
