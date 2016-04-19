@@ -67,7 +67,7 @@ $FW.DOMReady(function () {
         url: API_PATH + 'mall/api/member/v1/delivery_address.json',
         success: function (data) {
             let preview = $FW.Format.urlQuery().preview == 'true';
-            ReactDOM.render(<DeliverAddress address={data.address_list} preview={}/>, document.getElementById('cnt'));
+            ReactDOM.render(<DeliverAddress address={data.address_list} preview={preview}/>, document.getElementById('cnt'));
         }
     });
 });
