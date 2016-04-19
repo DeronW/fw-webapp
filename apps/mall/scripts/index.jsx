@@ -104,7 +104,7 @@ const ProductItem = React.createClass({
 
         return (
             <li>
-                <a href={'/product?bizNo='+this.props.bizNo} className="index-actList-a">
+                <a href={'/productDetail?bizNo='+this.props.bizNo} className="index-actList-a">
                     <div className="list-img"><img src={this.props.img}/></div>
                     {Angle}
                     <div className="list-name">{this.props.title}</div>
