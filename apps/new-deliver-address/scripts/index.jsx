@@ -24,6 +24,10 @@ const Address = React.createClass({
             },
             success: function (d) {
             	alert(d.ret);
+            	window.location.href="../../deliver-address/html/index.html";
+            },
+            fail:function(){
+            	alert("保存失败");
             }
         })
     },
