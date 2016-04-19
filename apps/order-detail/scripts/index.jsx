@@ -127,7 +127,7 @@ const OrderStatusBlock = React.createClass({
         };
         return (
             <div className="order-all">
-                { this.props.products.map((d) => orderBlock(d)) }
+                { this.props.products.map((d, index) => orderBlock(d, index)) }
             </div>
         );
     }
