@@ -201,7 +201,7 @@ $FW.DOMReady(function () {
         return;
     }
     $FW.Ajax({
-        url: API_PATH + "mall/api/v1/order_detail.json?bizNo=" + bizNo,
+        url: API_PATH + "mall/api/member/v1/order_detail.json?bizNo=" + bizNo,
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
         }

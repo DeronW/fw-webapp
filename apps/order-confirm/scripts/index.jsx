@@ -20,7 +20,7 @@ window.FormaData = {
 function submit() {
     console.log(window.FormData);
     $FW.Ajax({
-        url: '/mall/api/v1/buy',
+        url: '/mall/api/order/v1/commit_pay_order.json',
         data: window.FormaData,
         success: function () {
             alert("make order success")
@@ -53,7 +53,7 @@ const ConfirmOrder = React.createClass({
     },
     makeOrderHandler: function () {
         $FW.Ajax({
-            url: '/mall/api/v1/verify_sms_code',
+            url: '/mall/api/order/v1/validatePaySmsCode.json',
             data: {smsCode: window.FormData.sms_code},
             success: submit
         })
@@ -111,7 +111,7 @@ ConfirmOrder.Product = React.createClass({
     decreaseHandler: function () {
         let count = this.state.count - 1;
         if (count <= 0) count = 1;
-        this.setState({count: count})
+        this.setState({count: count});
         this.props.update_product_count_handler(count);
     },
     increaseHandler: function () {
@@ -236,7 +236,7 @@ ConfirmOrder.Captcha = React.createClass({
         if (this.state.remain == 0) {
             this.tick();
             $FW.Ajax({
-                url: "/mall/api/v1/send_sms_code",
+                url: "/mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'post',
                 success: function () {
                     alert('验证码已发送, 请查收')
@@ -374,7 +374,7 @@ $FW.DOMReady(function () {
     }
 
     $FW.Ajax({
-        url: API_PATH + 'mall/api/v1/order/new.json?bizNo=' + bizNo,
+        url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + bizNo + '&buyNum=1',
         //url: 'http://10.10.100.112/mockjs/4/api/v1/order/new.json?productBizNo=',
         success: function (data) {
 

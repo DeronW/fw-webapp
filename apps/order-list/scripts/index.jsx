@@ -162,7 +162,7 @@ const OrderBlock = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: API_PATH + "mall/api/v1/order_list.json",
+        url: API_PATH + "mall/api/member/v1/order_list.json",
         success: function (data) {
             ReactDOM.render(<MyOrderMain orders={data.orders}/>, document.getElementById("cnt")
             );

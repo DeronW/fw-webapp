@@ -274,7 +274,7 @@ const Voucher = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: API_PATH + 'mall/api/v1/user.json',
+        url: API_PATH + 'mall/api/member/v1/user.json',
         success: function (data) {
             ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
         }
