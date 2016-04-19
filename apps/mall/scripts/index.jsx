@@ -19,7 +19,7 @@ const Mall = React.createClass({
                     <a className="goods" href="/products"
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-goods.png)'}}>
                         豆哥商品</a>
-                    <a className="mine" href="/mine"
+                    <a className="mine" href="/user"
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-shop.png)'}}>
                         我的商城</a>
                 </div>
