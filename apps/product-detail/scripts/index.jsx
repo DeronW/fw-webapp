@@ -13,8 +13,17 @@ const Product = React.createClass({
         let data = this.props.data;
         let score = data.score ? <span className="score"> + {data.score}分</span> : "";
         let markList = (list, index)=><div key={index}>{list}</div>;
-        let descData = data.desc.split(/[;|；]/);
-        let desc = descData.map((i, index) => <div key={index}>{i}</div>);
+        let desc = null;
+
+        if (data.desc) {
+            let text = (i, index) => <div key={index}>{i}</div>;
+            desc = (
+                <div className="detail-explain">
+                    <div className="detail-explain-h">活动说明</div>
+                    <div className="detail-explain-cont">{data.desc.split(/[;|；]/).map(text)}</div>
+                </div>
+            )
+        }
 
         return (
             <div className="detail-box">
@@ -57,10 +66,7 @@ const Product = React.createClass({
                 <div className="detail-mark">
                     {data.tags.map(markList)}
                 </div>
-                <div className="detail-explain">
-                    <div className="detail-explain-h">活动说明</div>
-                    <div className="detail-explain-cont">{desc}</div>
-                </div>
+                {desc}
                 <div className="detail-des">
                     {data.rich_detail}
                 </div>
@@ -175,7 +181,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         //url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000649',
-        url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=' + bizNo,
+        url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         success: function (data) {
             if (!data) {
                 alert('这个产品没有任何详情');

@@ -115,8 +115,9 @@ ConfirmOrder.Product = React.createClass({
         this.props.update_product_count_handler(count);
     },
     increaseHandler: function () {
-        this.setState({count: this.state.count + 1});
-        this.props.update_product_count_handler(this.state.count + 1);
+        let c = parseInt(this.state.count);
+        this.setState({count: c + 1});
+        this.props.update_product_count_handler(c + 1);
     },
     render: function () {
         let p = this.props.product;
@@ -354,7 +355,7 @@ const Address = React.createClass({
                 <div className="goods-adress-h">收货地址</div>
                 <div className="goods-adress-cnt"
                      style={{background:"#fff url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 30px 30px"}}>
-                    <a style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 671px center"}}>
+                    <a href="/delivery_address" style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 671px center"}}>
                         <div className="inf">
                             <div className="receiver"><span>收货人：</span><span>{address.receiver}</span></div>
                             <div className="phone">{address.receiverPhone}</div>
@@ -375,7 +376,6 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + bizNo + '&buyNum=1',
-        //url: 'http://10.10.100.112/mockjs/4/api/v1/order/new.json?productBizNo=',
         success: function (data) {
 
             var user = {
@@ -388,7 +388,7 @@ $FW.DOMReady(function () {
                 title: data.productName,
                 price: data.singleRmb,
                 score: data.singlePoint,
-                tags: data.tags,
+                tags: data.tags || [],
                 count: query.count || 1
             };
 

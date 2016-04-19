@@ -6,6 +6,7 @@ const API_PATH = document.getElementById('api-path').value;
 const Mall = React.createClass({
     render: function () {
         let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
+                                                      activity_id={i.activity_id}
                                                       products={i.products} key={index}/>;
         return (
             <div>
@@ -65,13 +66,13 @@ const ActivityProduct = React.createClass({
         let activity_banner = () => {
             return this.props.img ?
                 (<div className="index-actList-img">
-                    <a href={this.props.link}><img src={this.props.img}/></a>
+                    <a><img src={this.props.img}/></a>
                 </div>) :
                 null;
         };
         return (
             <div className="index-actList-box">
-                <TextBar title={this.props.title} bizNo={this.props.bizNo}/>
+                <TextBar title={this.props.title} bizNo={this.props.bizNo} activity_id={this.props.activity_id}/>
                 {activity_banner()}
                 <ul className="index-actList-list">{this.props.products.map(pi)}</ul>
             </div>
@@ -84,7 +85,8 @@ const TextBar = React.createClass({
         return (
             <div className="index-actList-h">
                 <div className="index-actList-htext">{this.props.title}</div>
-                <a href={'/activity?bizNo=' + this.props.bizNo} className="index-actList-hmore"
+                <a href={'/activity?bizNo=' + this.props.bizNo + '&activity_id=' + this.props.activity_id}
+                   className="index-actList-hmore"
                    style={{background:"url(../images/ico-blue-right.png) no-repeat right center"}}>更多</a>
             </div>
         )
@@ -128,8 +130,8 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.BatchGet([
-        API_PATH + 'mall/api/v1/banners.json', // banner轮播图数据
-        API_PATH + 'mall/api/v1/activities.json' // 明前活动的数据
+        API_PATH + 'mall/api/index/v1/banners.json', // banner轮播图数据
+        API_PATH + 'mall/api/index/v1/activities.json' // 明前活动的数据
     ], function (data) {
         var banners = data[0].banners, activities = data[1].activities;
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));

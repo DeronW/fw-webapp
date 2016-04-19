@@ -5,17 +5,13 @@ const API_PATH = document.getElementById('api-path').value;
 
 const DeliverAddress = React.createClass({
     getInitialState: function () {
-        return {
-            cur_index: 0
-        }
+        return {cur_index: 0}
     },
     clickHandler: function (id, index) {
         this.setState({
             address_id: id.address_id,
             cur_index: index
-
         });
-
     },
     render: function () {
         let _this = this;
@@ -57,9 +53,9 @@ const DeliverAddress = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: API_PATH + 'mall/api/member/v1/address.json',
+        url: API_PATH + 'mall/api/member/v1/delivery_address.json',
         success: function (data) {
-            ReactDOM.render(<DeliverAddress address={data[0].address_list}/>, document.getElementById('cnt'));
+            ReactDOM.render(<DeliverAddress address={data.address_list}/>, document.getElementById('cnt'));
         }
     });
 });
