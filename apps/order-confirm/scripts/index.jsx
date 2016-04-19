@@ -217,7 +217,7 @@ ConfirmOrder.Extra = React.createClass({
                 </div>
                 <div className="balance-box">
                     <div className="balance1">当前余额</div>
-                    <div className={"balance2 red"}>&yen;{this.props.user.charge}</div>
+                    <div className={"balance2 red"}>&yen;{$FW.Format.currency(this.props.user.charge)}</div>
                     <div className="balance3">&yen;{$FW.Format.currency(total_price)}</div>
                     <div className="balance4">总计：</div>
                 </div>
