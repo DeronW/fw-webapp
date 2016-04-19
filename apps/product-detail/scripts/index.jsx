@@ -68,7 +68,7 @@ const Product = React.createClass({
                 </div>
                 {desc}
                 <div className="detail-des">
-                    {data.rich_detail}
+                    {data.rich_detail.map((i, index) => <img src={i} key={index} />)}
                 </div>
                 <PlusMinus stock={data.stock}/>
             </div>
