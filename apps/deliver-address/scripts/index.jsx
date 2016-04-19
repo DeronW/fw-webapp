@@ -23,7 +23,7 @@ const DeliverAddress = React.createClass({
             return (
                 <div key={index} className="address-panel"
                      onClick={function(){_this.clickHandler(i,index)}}
-                      style={{background:"#fff url("+STATIC_PATH+"images/"+(index == _this.state.cur_index ? "checked-circle" :"check-circle")+".png) no-repeat 20px 67px"}}
+                      style={{background:"#fff url("+STATIC_PATH+"images/"+(index == _this.state.cur_index ? "checked-circle" :"check-circle")+".png) no-repeat 20px center"}}
                 ><a href={"../../order-confirm/html/index.html?address_id="+i.address_id+""}>
 	                    <div className="username">{i.username}</div>
 	                    <div className="phone">{i.phone}</div>
