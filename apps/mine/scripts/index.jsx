@@ -56,7 +56,7 @@ const UserInfo = React.createClass({
                     </div>
 
                     <div className="user-info-r">
-                        <a className="user-get-adders" href="/delivery_address">
+                        <a className="user-get-adders" href="/delivery_address?preview=true">
                             <i className="adders-icon">
                                 <img src={STATIC_PATH + "images/address-icon.png"}/>
                             </i>
