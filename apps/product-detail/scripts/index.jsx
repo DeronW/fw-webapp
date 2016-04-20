@@ -68,7 +68,7 @@ const Product = React.createClass({
                 </div>
                 {desc}
                 <div className="detail-des">
-                    {data.rich_detail.map((i, index) => <img src={i} key={index} />)}
+                    {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
                 </div>
                 <PlusMinus stock={data.stock}/>
             </div>
@@ -110,7 +110,7 @@ const PlusMinus = React.createClass({
     buyHandler: function () {
         if (this.state.value < 1) return;
         let bizNo = $FW.Format.urlQuery().bizNo;
-        location.href = '/order/confirm?bizNo=' + bizNo + '&count=' + this.state.value
+        location.href = '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value
     },
 
     blur: function (e) {

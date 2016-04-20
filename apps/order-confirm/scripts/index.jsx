@@ -337,7 +337,7 @@ const NewAddress = React.createClass({
     render: function () {
         return (
             <div className="new-adress">
-                <a href="/delivery_address/create">收货地址
+                <a href={"/delivery_address/create?productBizNo=" + getProductBizNo()}>收货地址
                     <div className="btn-new-address"
                          style={{background:"url("+STATIC_PATH+"images/ico-add.png) no-repeat center"}}></div>
                 </a>
@@ -355,7 +355,8 @@ const Address = React.createClass({
                 <div className="goods-adress-h">收货地址</div>
                 <div className="goods-adress-cnt"
                      style={{background:"#fff url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 30px 30px"}}>
-                    <a href="/delivery_address" style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 671px center"}}>
+                    <a href={"/delivery_address?productBizNo="+ getProductBizNo()}
+                       style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 671px center"}}>
                         <div className="inf">
                             <div className="receiver"><span>收货人：</span><span>{address.receiver}</span></div>
                             <div className="phone">{address.receiverPhone}</div>
@@ -369,13 +370,8 @@ const Address = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    let query = $FW.Format.urlQuery();
-    let bizNo = query.bizNo;
-    if (!bizNo) {
-    }
-
     $FW.Ajax({
-        url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + bizNo + '&buyNum=1',
+        url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + getProductBizNo() + '&buyNum=1',
         success: function (data) {
 
             var user = {
@@ -403,3 +399,9 @@ $FW.DOMReady(function () {
         }
     });
 });
+
+function getProductBizNo() {
+    let bizNo = $FW.Format.urlQuery().productBizNo;
+    if (!bizNo) alert('product bizNo not in url query');
+    return bizNo;
+}
