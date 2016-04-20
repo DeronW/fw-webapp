@@ -27,8 +27,6 @@ const Product = React.createClass({
 
         return (
             <div className="detail-box">
-                <header className="header">商品详情
-                </header>
                 <CarouselDetail data={this.props.data}/>
                 <div className="detail-inf">
                     <div className="detail-inf-name">{data.title}</div>

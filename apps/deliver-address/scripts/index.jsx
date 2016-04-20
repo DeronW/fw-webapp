@@ -47,11 +47,6 @@ const DeliverAddress = React.createClass({
 
         return (
             <div>
-                <header className="header">
-                    选择收货地址
-                    <a href="#" className="btn-back"
-                       style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}> </a>
-                </header>
                 <div className="address-list">
                     {this.props.address.map(address)}
                 </div>

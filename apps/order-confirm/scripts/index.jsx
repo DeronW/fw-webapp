@@ -75,12 +75,6 @@ const ConfirmOrder = React.createClass({
 
         return (
             <div className="confirm-order">
-                <header className="header">
-                    确认订单
-                    <a href="#" className="btn-back"
-                       style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}>
-                    </a>
-                </header>
                 { address ? <Address address={address}/> : <NewAddress /> }
                 <ConfirmOrder.Product product={this.props.product}
                                       update_product_count_handler={this.updateProductCountHandler}/>

@@ -44,11 +44,6 @@ const Address = React.createClass({
         let setDefaultImg = this.state.isDefault ? "ico-set-default" : "ico-noset-default";
         return (
             <div>
-                <header className="header">
-                    收货地址
-                    <a href="#" className="btn-back"
-                       style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}> </a>
-                </header>
                 <div className="new-deliver-address">
                     <div className="deliver input-div"
                          style={{background:"#fff url("+STATIC_PATH+"images/ico-person.png) no-repeat 24px center"}}>

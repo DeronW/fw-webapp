@@ -26,22 +26,16 @@ const MallVip = React.createClass({
         let that = this;
 
         let btn_vip = (name, index) => (
-            <li key={index}
+            <div key={index}
                 className={index == this.state.index ? "on" : ""}
                 onClick={function(){that.handleClickTab(index)}}
                 style={{background:"#fff url(" + STATIC_PATH + "images/tab-gray-dot.png) no-repeat right 0"}}>
                 <span>{name.title}</span>
-            </li>
+            </div>
         );
 
         return (
             <div>
-                <header className="header">
-                    VIP专区
-                    <a className="btn-back"
-                       style={{background:"url(" + STATIC_PATH + "images/ico-blue-back.png) no-repeat 30px center"}}> </a>
-                </header>
-
                 <div className="vip-box">
                     <MallVip.UserLevel level={this.props.vip_level}/>
 
@@ -52,9 +46,9 @@ const MallVip = React.createClass({
                     </div>
 
                     <div className="vip-cont">
-                        <ul className="index-actList-list show">
+                        <div className="index-actList-list show">
                             {this.state.products.map((data, index) => <ProductItem {...data} key={index}/>)}
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>

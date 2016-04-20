@@ -48,15 +48,9 @@ const MallProducts = React.createClass({
 
         return (
             <div>
-                <header className="header">
-                    豆哥商品
-                    <a className="btn-back"
-                       style={{background:"url(" + STATIC_PATH + "images/ico-blue-back.png) no-repeat 30px center"}}> </a>
-                </header>
                 <div className="productsTab">
                     {this.state.tabs.map(tab)}
                 </div>
-
                 <div className="products-list">
                     { this.state.products.map((p) => <ProductItem {...p} key={p.bizNo}/>) }
                 </div>

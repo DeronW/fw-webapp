@@ -10,7 +10,6 @@ const Mall = React.createClass({
                                                       products={i.products} key={index}/>;
         return (
             <div>
-                <header className="header">豆哥商城</header>
                 <Carousel banners={this.props.banners}/>
                 <div className="header-nav">
                     <a className="vip" href="/products/vip"

@@ -42,7 +42,6 @@ const MyOrderMain = React.createClass({
 
         return (
             <div>
-                <NavTitle/>
                 <div className="ui-tab">
                     <div> {this.state.voucherName.map(btnVoucher)} </div>
                 </div>

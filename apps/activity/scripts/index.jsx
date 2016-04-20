@@ -11,11 +11,6 @@ const MallActivity = React.createClass({
 
         return (
             <div>
-                <header className="header">
-                    {this.props.activity.title}
-                    <a href="#" className="btn-back"
-                       style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}> </a>
-                </header>
                 {img}
                 <MallActivity.Explain desc={this.props.activity.desc}/>
                 <ProductList />

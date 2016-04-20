@@ -1,25 +1,23 @@
 'use strict';
 
+const STATIC_PATH = document.getElementById('static-path').value;
+const API_PATH = document.getElementById('api-path').value;
 
 const Success = React.createClass({
     render: function () {
         let data = this.props.data;
         return (
             <div>
-                <header className="header">
-                    交易成功
-                    <a href="#" className="btn-back"
-                       style={{background:"url(../images/ico-blue-back.png) no-repeat 30px center"}}> </a>
-                </header>
                 <div className="success-banner"
-                     style={{background:"url(../images/success-banner.jpg) no-repeat center 99px"}}>
+                     style={{background:"url("+STATIC_PATH+"images/success-banner.jpg) no-repeat center 99px"}}>
                     <div className="success-text"
-                         style={{background:"url(../images/circle-white-right.png) no-repeat 80px 80px"}}>订单状态:已付款
+                         style={{background:"url("+STATIC_PATH+"images/circle-white-right.png) no-repeat 80px 80px"}}>
+                        订单状态:已付款
                     </div>
                 </div>
                 <div className="success-addr">
                     <div className="addr-box"
-                         style={{background:"url(../images/ico-blue-location.png) no-repeat 10px 27px"}}>
+                         style={{background:"url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 10px 27px"}}>
                         <div className="addr">
                             <div className="receiver">收货人:{data.name}</div>
                             <div className="phone">{data.phone}</div>

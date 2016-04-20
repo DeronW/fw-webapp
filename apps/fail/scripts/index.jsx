@@ -46,10 +46,6 @@ const Fail = React.createClass({
         }
         return (
             <div>
-                <header className="header"> 交易失败
-                    <a href="#" className="btn-back"
-                       style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}> </a>
-                </header>
                 <div className="fail-img"><img src="../images/ico-fail.png"/></div>
                 <div className="fail-text">
                     { failText }
@@ -63,5 +59,5 @@ let failTextData = 10;
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Fail failText={failTextData}/>, document.getElementById('cnt'));
-    NativeBridge.setTitle('加载失败');
+    NativeBridge.setTitle('交易失败');
 });
