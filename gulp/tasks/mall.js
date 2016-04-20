@@ -4,24 +4,25 @@ var gt = require('../util/generate_task.js');
 var apps = [
     'mall',
     'activity',
-    'mine',
+    'user',
     'order-list',
     'order-detail',
     'order-confirm',
     'product-detail',
     'product-list',
     'product-vip',
-    'vip',
     'fail',
     'success',
     'deliver-address',
     'new-deliver-address',
+
+    'vip',
     'vip-grade'
 ];
 
 apps.forEach(function (i) {
     gt(i, {
-        //api_path: 'http://m2.mall.9888.cn/'
+        api_path: 'http://m2.mall.9888.cn/'
     });
     gt(i, {
         cmd_prefix: 'pack:',
