@@ -127,7 +127,7 @@ const OrderStatusBlock = React.createClass({
         };
         return (
             <div className="order-all">
-                { this.props.products.map((d) => orderBlock(d)) }
+                { this.props.products.map((d, index) => orderBlock(d, index)) }
             </div>
         );
     }
@@ -137,28 +137,45 @@ const OrderPayInfo = React.createClass({
     render: function () {
         let payment = this.props.payment;
 
+        let score, bean, ticket;
+        if (payment.score) {
+            score = (
+                <div className="info-block">
+                    <span className="text">工分消耗</span>
+                    <span className="data-text">{payment.score}</span>
+                </div>
+            )
+        }
+        if (payment.bean) {
+            bean = (
+                <div className="info-block">
+                    <span className="text">工豆支付</span>
+                    <span className="data-text">￥{payment.bean}</span>
+                </div>
+            )
+        }
+        if (payment.ticket_price) {
+            ticket = (
+                <div className="info-block">
+                    <span className="text">兑换券支付</span>
+                    <span className="data-text">{payment.ticket_price}</span>
+                </div>
+            )
+        }
+
         return (
             <div className="order-pay-info">
                 <div className="ui-block-title">
                     <h3 className="text">支付信息</h3>
                 </div>
                 <div className="l-r-text">
-                    <div className="info-block">
-                        <span className="text">兑换券支付</span>
-                        <span className="data-text">{payment.ticket_price}</span>
-                    </div>
+                    {ticket}
                     <div className="info-block">
                         <span className="text">余额支付</span>
                         <span className="data-text">￥{payment.money}</span>
                     </div>
-                    <div className="info-block">
-                        <span className="text">工豆支付</span>
-                        <span className="data-text">￥{payment.bean}</span>
-                    </div>
-                    <div className="info-block">
-                        <span className="text">工分消耗</span>
-                        <span className="data-text">{payment.score}</span>
-                    </div>
+                    {bean}
+                    {score}
                 </div>
             </div>
         );
@@ -201,7 +218,7 @@ $FW.DOMReady(function () {
         return;
     }
     $FW.Ajax({
-        url: API_PATH + "mall/api/v1/order_detail.json?bizNo=" + bizNo,
+        url: API_PATH + "mall/api/member/v1/order_detail.json?bizNo=" + bizNo,
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
         }

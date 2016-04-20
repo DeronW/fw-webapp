@@ -122,7 +122,7 @@ const NavTitle = React.createClass({
         return (
             <div className="nav-title">
                 <span className="back-btn">
-                    <img src="../images/back-btn.png"/>
+                    <img src={STATIC_PATH + "images/back-btn.png"}/>
                 </span>
                 <h1 className="title">{this.props.title}</h1>
             </div>
@@ -135,12 +135,12 @@ const PrivilegePageContent = React.createClass({
         return (
             <div>
                 <div className="privilege-banner">
-                    <img src="../images/banner.jpg"/>
+                    <img src={STATIC_PATH + "images/banner.jpg"}/>
                 </div>
 
                 <div className="privilege-introduction t-b-content">
                     <div className="title">
-                        <h2 className="text"><img src="../images/privilege-icon.png"/> 特权介绍</h2>
+                        <h2 className="text"><img src={STATIC_PATH + "images/privilege-icon.png"}/> 特权介绍</h2>
                     </div>
 
                     <div className="content-block">
@@ -150,12 +150,12 @@ const PrivilegePageContent = React.createClass({
 
                 <div className="privilege-reward t-b-content">
                     <div className="title">
-                        <h2 className="text"><img src="../images/privilege-icon-1.png"/> 特权奖励</h2>
+                        <h2 className="text"><img src={STATIC_PATH + "images/privilege-icon-1.png"}/> 特权奖励</h2>
                     </div>
 
                     <div className="content-block">
                         <p className="content-text">
-                            <img src="../images/point.png"/>
+                            <img src={STATIC_PATH + "images/point.png"}/>
                             <em className="c-fe606b">100</em>元返现券
                         </p>
                     </div>
@@ -170,7 +170,6 @@ const PrivilegePage = React.createClass({
         return (
             <div>
                 <NavTitle title="特权详情"/>
-
                 <PrivilegePageContent/>
             </div>
         );
@@ -178,7 +177,4 @@ const PrivilegePage = React.createClass({
 });
 
 
-ReactDOM.render(
-    <PrivilegePage/>,
-    document.getElementById("main")
-);
+ReactDOM.render(<PrivilegePage/>, document.getElementById("main"));

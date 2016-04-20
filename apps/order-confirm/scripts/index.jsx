@@ -5,7 +5,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 var query = $FW.Format.urlQuery();
 
-window.FormaData = {
+window.OrderFormData = {
     buyNum: query.count || 1,
     useBean: true,
     payBeanPrice: null,
@@ -18,15 +18,14 @@ window.FormaData = {
 };
 
 function submit() {
-    console.log(window.FormData);
-
-    //$FW.Ajax({
-    //    url: '/mall/api/v1/buy',
-    //    data: window.FormaData,
-    //    success: function () {
-    //        alert("make order success")
-    //    }
-    //})
+    console.log(window.OrderFormData);
+    $FW.Ajax({
+        url: '/mall/api/order/v1/commit_pay_order.json',
+        data: window.OrderFormData,
+        success: function () {
+            alert("make order success")
+        }
+    })
 }
 
 const ConfirmOrder = React.createClass({
@@ -54,14 +53,14 @@ const ConfirmOrder = React.createClass({
     },
     makeOrderHandler: function () {
         $FW.Ajax({
-            url: '/mall/api/v1/verify_sms_code',
-            data: {smsCode: window.FormData.sms_code},
+            url: '/mall/api/order/v1/validatePaySmsCode.json',
+            data: {smsCode: window.OrderFormData.sms_code},
             success: submit
         })
     },
     updateProductCountHandler: function (c) {
         this.setState({product_count: c});
-        window.FormData.buyNum = c;
+        window.OrderFormData.buyNum = c;
     },
 
     render: function () {
@@ -112,12 +111,13 @@ ConfirmOrder.Product = React.createClass({
     decreaseHandler: function () {
         let count = this.state.count - 1;
         if (count <= 0) count = 1;
-        this.setState({count: count})
+        this.setState({count: count});
         this.props.update_product_count_handler(count);
     },
     increaseHandler: function () {
-        this.setState({count: this.state.count + 1});
-        this.props.update_product_count_handler(this.state.count + 1);
+        let c = parseInt(this.state.count);
+        this.setState({count: c + 1});
+        this.props.update_product_count_handler(c + 1);
     },
     render: function () {
         let p = this.props.product;
@@ -170,8 +170,8 @@ ConfirmOrder.Extra = React.createClass({
     },
     toggleBeanHandler: function () {
         this.setState({use_bean: !this.state.use_bean});
-        window.FormData.useBean = !this.state.use_bean;
-        window.FormData.payBeanPrice = window.FormData.useBean ? this.props.user.bean : 0;
+        window.OrderFormData.useBean = !this.state.use_bean;
+        window.OrderFormData.payBeanPrice = window.OrderFormData.useBean ? this.props.user.bean : 0;
     },
     render: function () {
         let checked_tickets = [];
@@ -187,9 +187,9 @@ ConfirmOrder.Extra = React.createClass({
         if (this.state.use_bean) total_price -= this.props.user.bean / 100;
         if (total_price < 0) total_price = 0;
 
-        window.FormData.payRmbPrice = total_price;
-        window.FormData.useTicket = checked_tickets.length > 0;
-        window.FormData.ticket = checked_tickets.map((i) => i.id);
+        window.OrderFormData.payRmbPrice = total_price;
+        window.OrderFormData.useTicket = checked_tickets.length > 0;
+        window.OrderFormData.ticket = checked_tickets.map((i) => i.id);
 
         return (
             <div className="balance-wrap">
@@ -217,7 +217,7 @@ ConfirmOrder.Extra = React.createClass({
                 </div>
                 <div className="balance-box">
                     <div className="balance1">当前余额</div>
-                    <div className={"balance2 red"}>&yen;{this.props.user.charge}</div>
+                    <div className={"balance2 red"}>&yen;{$FW.Format.currency(this.props.user.charge)}</div>
                     <div className="balance3">&yen;{$FW.Format.currency(total_price)}</div>
                     <div className="balance4">总计：</div>
                 </div>
@@ -237,7 +237,7 @@ ConfirmOrder.Captcha = React.createClass({
         if (this.state.remain == 0) {
             this.tick();
             $FW.Ajax({
-                url: "/mall/api/v1/send_sms_code",
+                url: "/mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'post',
                 success: function () {
                     alert('验证码已发送, 请查收')
@@ -337,7 +337,7 @@ const NewAddress = React.createClass({
     render: function () {
         return (
             <div className="new-adress">
-                <a href="/delivery_address/create">收货地址
+                <a href={"/delivery_address/create?productBizNo=" + getProductBizNo()}>收货地址
                     <div className="btn-new-address"
                          style={{background:"url("+STATIC_PATH+"images/ico-add.png) no-repeat center"}}></div>
                 </a>
@@ -355,7 +355,8 @@ const Address = React.createClass({
                 <div className="goods-adress-h">收货地址</div>
                 <div className="goods-adress-cnt"
                      style={{background:"#fff url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 30px 30px"}}>
-                    <a style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 671px center"}}>
+                    <a href={"/delivery_address?productBizNo="+ getProductBizNo()}
+                       style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 671px center"}}>
                         <div className="inf">
                             <div className="receiver"><span>收货人：</span><span>{address.receiver}</span></div>
                             <div className="phone">{address.receiverPhone}</div>
@@ -369,14 +370,10 @@ const Address = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    let query = $FW.Format.urlQuery();
-    let bizNo = query.bizNo;
-    if (!bizNo) {
-    }
+    var query = $FW.Format.urlQuery();
 
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/v1/order/new.json?bizNo=' + bizNo,
-        url: 'http://10.10.100.112/mockjs/4/api/v1/order/new.json?productBizNo=',
+        url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + getProductBizNo() + '&buyNum=1',
         success: function (data) {
 
             var user = {
@@ -389,12 +386,12 @@ $FW.DOMReady(function () {
                 title: data.productName,
                 price: data.singleRmb,
                 score: data.singlePoint,
-                tags: data.tags,
+                tags: data.tags || [],
                 count: query.count || 1
             };
 
-            window.FormData.addressId = query.address_id || data.addressId;
-            window.FormData.payBeanPrice = user.bean;
+            window.OrderFormData.addressId = query.address_id || data.addressId;
+            window.OrderFormData.payBeanPrice = user.bean;
 
             ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList} user={user}
                                           address_list={data.addressList}
@@ -404,3 +401,9 @@ $FW.DOMReady(function () {
         }
     });
 });
+
+function getProductBizNo() {
+    let bizNo = $FW.Format.urlQuery().productBizNo;
+    if (!bizNo) alert('product bizNo not in url query');
+    return bizNo;
+}

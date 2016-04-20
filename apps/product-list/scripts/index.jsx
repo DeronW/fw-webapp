@@ -19,7 +19,7 @@ const MallProducts = React.createClass({
     componentDidMount: function () {
         let _this = this;
         $FW.Ajax({
-            url: API_PATH + 'mall/api/v1/products.json',
+            url: API_PATH + 'mall/api/index/v1/products.json',
             success: function (data) {
                 let products = window.Products.all.concat(data.products);
                 window.Products.all = products;
@@ -72,7 +72,7 @@ const ProductItem = React.createClass({
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
 
         return (
-            <a href={'/product?bizNo=' + this.props.bizNo} className="index-actList-a">
+            <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
                 <div className="list-img"><img src={this.props.img}/></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>

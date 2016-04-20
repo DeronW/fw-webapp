@@ -14,7 +14,7 @@ const Address = React.createClass({
     },
     saveHandler: function () {
         $FW.Ajax({
-            url: API_PATH + 'mall/api/v1/delivery_address/create.json',
+            url: API_PATH + 'mall/api/member/v1/delivery_address/create.json',
             method: 'post',
             data: {
                 username: this.state.username,
@@ -22,12 +22,9 @@ const Address = React.createClass({
                 address: this.state.address,
                 isDefault: this.state.isDefault
             },
-            success: function (d) {
-            	alert(d.ret);
-            	window.location.href="../../deliver-address/html/index.html";
-            },
-            fail:function(){
-            	alert("保存失败");
+
+            success: function () {
+                history.back()
             }
         })
     },
@@ -44,31 +41,35 @@ const Address = React.createClass({
         this.setState({isDefault: !this.state.isDefault})
     },
     render: function () {
-    	let setDefaultImg=this.state.isDefault?"ico-set-default":"ico-noset-default";
+        let setDefaultImg = this.state.isDefault ? "ico-set-default" : "ico-noset-default";
         return (
             <div>
-            	<header className="header">
+                <header className="header">
                     收货地址
                     <a href="#" className="btn-back"
                        style={{background:"url("+STATIC_PATH+"images/ico-blue-back.png) no-repeat 30px center"}}> </a>
                 </header>
                 <div className="new-deliver-address">
-	                <div className="deliver input-div" style={{background:"#fff url("+STATIC_PATH+"images/ico-person.png) no-repeat 24px center"}}>
-	                    <input value={this.state.username} onChange={this.onUsernameChangeHandler} placeholder="收货人"/>
-	                </div>
-	                <div className="phone input-div" style={{background:"#fff url("+STATIC_PATH+"images/ico-phone.png) no-repeat 27px center"}}>
-	                    <input value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="联系方式"/>
-	                </div>
-	                <div className="address input-div" style={{background:"#fff url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 26px center"}}>
-	                    <input value={this.state.address} onChange={this.onAddressChangeHandler} placeholder="详细地址"/>
-	                </div>
-	
-	                <div className="default" onClick={this.onDefaultChangeHandler} style={{background:"url("+STATIC_PATH+"images/"+setDefaultImg+".png) no-repeat 2px 1px"}}>
-	               		设为默认
-	                </div>
-	                <div className="btn">
-	                    <a onClick={this.saveHandler}>保存</a>
-	                </div>
+                    <div className="deliver input-div"
+                         style={{background:"#fff url("+STATIC_PATH+"images/ico-person.png) no-repeat 24px center"}}>
+                        <input value={this.state.username} onChange={this.onUsernameChangeHandler} placeholder="收货人"/>
+                    </div>
+                    <div className="phone input-div"
+                         style={{background:"#fff url("+STATIC_PATH+"images/ico-phone.png) no-repeat 27px center"}}>
+                        <input value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="联系方式"/>
+                    </div>
+                    <div className="address input-div"
+                         style={{background:"#fff url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 26px center"}}>
+                        <input value={this.state.address} onChange={this.onAddressChangeHandler} placeholder="详细地址"/>
+                    </div>
+
+                    <div className="default" onClick={this.onDefaultChangeHandler}
+                         style={{background:"url("+STATIC_PATH+"images/"+setDefaultImg+".png) no-repeat 2px 1px"}}>
+                        设为默认
+                    </div>
+                    <div className="btn">
+                        <a onClick={this.saveHandler}>保存</a>
+                    </div>
                 </div>
             </div>
         )
