@@ -78,4 +78,5 @@ const Address = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Address />, document.getElementById('cnt'));
+    NativeBridge.setTitle('创建收货地址');
 });

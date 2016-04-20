@@ -70,4 +70,6 @@ $FW.DOMReady(function () {
             ReactDOM.render(<DeliverAddress address={data.address_list} preview={preview}/>, document.getElementById('cnt'));
         }
     });
+
+    NativeBridge.setTitle('我的收货地址');
 });

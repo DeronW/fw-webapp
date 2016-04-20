@@ -137,4 +137,6 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
         //sendMessageToNative('loading:complete');
     });
+
+    NativeBridge.setTitle('豆哥商城');
 });

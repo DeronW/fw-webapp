@@ -103,4 +103,5 @@ window.Products = {
 
 $FW.DOMReady(function () {
     ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
+    NativeBridge.setTitle('产品列表');
 });

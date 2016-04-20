@@ -222,7 +222,9 @@ $FW.DOMReady(function () {
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
         }
-    })
+    });
+
+    NativeBridge.setTitle('订单详情');
 });
 
 function severStr(str, n, symbol) {

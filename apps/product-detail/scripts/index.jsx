@@ -180,7 +180,6 @@ $FW.DOMReady(function () {
     }
 
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/v1/item_detail.json?bizNo=A0000000649',
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         success: function (data) {
             if (!data) {
@@ -190,4 +189,5 @@ $FW.DOMReady(function () {
             ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
         }
     });
+    NativeBridge.setTitle('产品详情');
 });

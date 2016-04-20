@@ -137,4 +137,5 @@ $FW.DOMReady(function () {
             ReactDOM.render(<MallVip vip_level={data.vip_level}/>, document.getElementById('cnt'));
         }
     });
+    NativeBridge.setTitle('VIP专区');
 });

@@ -400,6 +400,8 @@ $FW.DOMReady(function () {
                 document.getElementById('cnt'));
         }
     });
+
+    NativeBridge.setTitle('确认订单');
 });
 
 function getProductBizNo() {

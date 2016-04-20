@@ -123,5 +123,6 @@ $FW.DOMReady(function () {
         success: function (arr) {
             ReactDOM.render(<MallActivity activity={arr}/>, document.getElementById('cnt'));
         }
-    })
+    });
+    NativeBridge.setTitle('专题活动');
 });

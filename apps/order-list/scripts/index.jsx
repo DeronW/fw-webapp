@@ -168,6 +168,7 @@ $FW.DOMReady(function () {
             );
         }
     });
+    NativeBridge.setTitle('订单列表');
 });
 
 function severStr(str, n, symbol) {

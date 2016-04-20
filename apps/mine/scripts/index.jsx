@@ -277,4 +277,6 @@ $FW.DOMReady(function () {
             ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
         }
     });
+
+    NativeBridge.setTitle('我的商城');
 });
