@@ -30,6 +30,47 @@ const Mall = React.createClass({
     }
 });
 
+const Header = React.createClass({
+    backClickHandler: function () {
+        location.back();
+    },
+    render: function () {
+        let style_a = {
+            height: "100px"
+        };
+
+        let style_b = {
+            position: "fixed",
+            top: "0",
+            width: "100%",
+            height: "100px",
+            textAlign: "center",
+            lineHeight: "100px",
+            fontSize: "30px"
+        };
+
+        let style_c = {
+            display: "block",
+            position: "absolute",
+            width: "100px",
+            height: "100px",
+            lineHeight: "100px",
+            fontSize: "40px",
+            left: "0",
+            top: "0"
+        };
+
+        return (
+            <div style={style_a}>
+                <div style={style_b}>
+                    <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
+                    TITLE
+                </div>
+            </div>
+        )
+    }
+});
+
 const Carousel = React.createClass({
     getInitialState: function () {
         return {
@@ -43,7 +84,8 @@ const Carousel = React.createClass({
     },
 
     render: function () {
-        let banner = (dot, index) => <div key={index} className={(this.state.cur_index == index - 1) ? "on" : ''}></div>;
+        let banner = (dot, index) => <div key={index}
+                                          className={(this.state.cur_index == index - 1) ? "on" : ''}></div>;
         let ba = (d, index) => <div key={index}><a href={d.href}><img src={d.img}/></a></div>;
 
         return (
