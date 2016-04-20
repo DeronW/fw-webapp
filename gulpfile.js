@@ -15,10 +15,11 @@ gulp.task('clean', function () {
 
 // package mall file
 gulp.task('build:mall', gulp.series(
-    ['clean',
+    [
+        'clean',
         'pack:mall',
         'pack:activity',
-        'pack:mine',
+        'pack:user',
         'pack:order-list',
         'pack:order-detail',
         'pack:order-confirm',

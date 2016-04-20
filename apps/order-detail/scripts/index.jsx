@@ -212,6 +212,9 @@ const OrderNumberList = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    NativeBridge.ajaxStart();
+    NativeBridge.setTitle('订单详情');
+
     let order_id = $FW.Format.urlQuery().order_id;
     if (!order_id) {
         alert('url query order_id is missing');
@@ -221,11 +224,14 @@ $FW.DOMReady(function () {
         url: API_PATH + "mall/api/member/v1/order_detail.json?orderId=" + order_id,
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
+            NativeBridge.ajaxComplete();
         }
     });
-
-    NativeBridge.setTitle('订单详情');
 });
+
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back') location.href = '/order/list';
+};
 
 function severStr(str, n, symbol) {
     var returnStr = "";

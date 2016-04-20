@@ -271,12 +271,14 @@ const Voucher = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('我的商城');
+
+    NativeBridge.ajaxStart();
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/user.json',
         success: function (data) {
             ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
+            NativeBridge.ajaxComplete();
         }
     });
-
-    NativeBridge.setTitle('我的商城');
 });

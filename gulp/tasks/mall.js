@@ -14,10 +14,7 @@ var apps = [
     'fail',
     'success',
     'deliver-address',
-    'new-deliver-address',
-
-    'vip',
-    'vip-grade'
+    'new-deliver-address'
 ];
 
 apps.forEach(function (i) {

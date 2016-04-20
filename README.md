@@ -100,14 +100,9 @@ POST
 
 - 60201 支付失败...
 
-### APP消息互传
+### APP和Native消息互传
 
 #### webview给native发消息
-
-全部字母小写,
-第一个参数固定为all,
-第二个参数是动作关键字,
-第三个参数是动作参数
 
 消息格式:
 
@@ -116,7 +111,11 @@ POST
         value: ""
     }
 
-例子:
+action 消息指令
+
+value 消息格式
+
+#### 发给Native例子
 
 去登录
 
@@ -128,14 +127,14 @@ POST
 
     {
         action: "login",
-        value: "mall"
+        value: "url"
     }
 
-后退页面
+跳转到指定页面页面
 
     {
-        action: "backward",
-        value: "level"
+        action: "goto",
+        value: "url"
     }
 
 关闭当前页面
@@ -146,45 +145,65 @@ POST
 
 显示后退按钮
 
-show_back_button
+    {
+        action: "show_back_button"
+    }
 
 隐藏后退按钮
 
-hide_back_button
+    {
+        action: "hide_back_button"
+    }
 
 显示关闭按钮
 
-show_close_button
+    {
+        action: "show_close_button"
+    }
 
 隐藏关闭按钮
 
-hide_close_button
+    {
+        action: "hide_close_button"
+    }
 
 页面加载动画
 
-显示
+ajax开始
 
-loading:show_cover
+    {
+        action: "ajax_start"
+    }
 
-隐藏
+ajax完成
 
-loading:hide_cover
+    {
+        action: "ajax_complete"
+    }
 
-加载完成
-
-loading:complete
 
 设置标题
 
-set_title:[xxx]
+    {
+        action: "set_title",
+        value: "xxx"
+    }
+
+#### 发给webview
+
+后退消息
+
+  "history:back"
+
 
 #### native给webview发消息
 
 调用全局的js方法
 
-onNativeMessageReceive('action', 'params')
+设置网页标题
+NativeBridge.setTitle('new title')
 
-设置登录用的token 
+设置登录用的token
 
 onNativeMessageReceive('login_token', 'params')
 
@@ -240,9 +259,9 @@ VIP专区页 [http://m.mall.9888.cn/vip](http://m.mall.9888.cn/vip)
     build:mall 构建豆哥商城项目
     xxx:watch 开发时使用的监控指令
     xxx 一次性编译文件指令
-    
+
 添加新页面：
- 
+
 1. 在 *apps* 目录下创建新目录，目录结构参考其它目录
 2. 在 *gulp/tasks/mall.js* 文件内,给 *apps* 变量添加一行新数据, 字符串, 跟新建目录同名
 3. 查看 gulp 默认指令, 已经新添加了新页面的指令

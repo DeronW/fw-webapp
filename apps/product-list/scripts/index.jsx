@@ -18,12 +18,15 @@ const MallProducts = React.createClass({
 
     componentDidMount: function () {
         let _this = this;
+
+        NativeBridge.ajaxStart();
         $FW.Ajax({
             url: API_PATH + 'mall/api/index/v1/products.json',
             success: function (data) {
                 let products = window.Products.all.concat(data.products);
                 window.Products.all = products;
                 _this.setState({products: products});
+                NativeBridge.ajaxComplete();
             }
         })
     },
@@ -96,6 +99,10 @@ window.Products = {
 };
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
     NativeBridge.setTitle('产品列表');
+    ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
 });
+
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back') location.href = '/';
+};

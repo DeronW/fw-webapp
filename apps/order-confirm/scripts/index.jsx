@@ -364,6 +364,9 @@ const Address = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    NativeBridge.ajaxStart();
+    NativeBridge.setTitle('确认订单');
+
     var query = $FW.Format.urlQuery();
 
     $FW.Ajax({
@@ -392,11 +395,16 @@ $FW.DOMReady(function () {
                                           default_address_id={query.address_id || data.addressId}
                 />,
                 document.getElementById('cnt'));
+
+            NativeBridge.ajaxComplete();
         }
     });
 
-    NativeBridge.setTitle('确认订单');
 });
+
+window.onNativeMessageReceive = function(msg){
+    if(msg == 'history:back') location.back();
+};
 
 function getProductBizNo() {
     let bizNo = $FW.Format.urlQuery().productBizNo;

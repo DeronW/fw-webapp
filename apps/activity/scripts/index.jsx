@@ -111,13 +111,19 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    NativeBridge.ajaxStart();
+    NativeBridge.setTitle('专题活动');
+
     let bizNo = $FW.Format.urlQuery().bizNo;
     $FW.Ajax({
-        //url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=D0000000239',
         url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=' + bizNo,
         success: function (arr) {
             ReactDOM.render(<MallActivity activity={arr}/>, document.getElementById('cnt'));
+            NativeBridge.ajaxComplete();
         }
     });
-    NativeBridge.setTitle('专题活动');
 });
+
+window.onNativeMessageReceive = function(msg){
+    if(msg == 'history:back') location.href = '/user';
+};

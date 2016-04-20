@@ -58,13 +58,19 @@ const DeliverAddress = React.createClass({
 
 
 $FW.DOMReady(function () {
+    NativeBridge.ajaxStart();
+    NativeBridge.setTitle('我的收货地址');
+
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/delivery_address.json',
         success: function (data) {
             let preview = $FW.Format.urlQuery().preview == 'true';
             ReactDOM.render(<DeliverAddress address={data.address_list} preview={preview}/>, document.getElementById('cnt'));
+            NativeBridge.ajaxComplete();
         }
     });
-
-    NativeBridge.setTitle('我的收货地址');
 });
+
+window.onNativeMessageReceive = function(msg){
+    if(msg == 'history:back') location.href = '/user';
+};

@@ -177,6 +177,9 @@ $FW.DOMReady(function () {
         return;
     }
 
+    NativeBridge.ajaxStart();
+    NativeBridge.setTitle('产品详情');
+
     $FW.Ajax({
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         success: function (data) {
@@ -185,7 +188,11 @@ $FW.DOMReady(function () {
                 return;
             }
             ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
+            NativeBridge.ajaxComplete();
         }
     });
-    NativeBridge.setTitle('产品详情');
 });
+
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back') location.back();
+};
