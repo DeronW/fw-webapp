@@ -5,7 +5,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 var query = $FW.Format.urlQuery();
 
-window.FormaData = {
+window.OrderFormData = {
     buyNum: query.count || 1,
     useBean: true,
     payBeanPrice: null,
@@ -18,10 +18,10 @@ window.FormaData = {
 };
 
 function submit() {
-    console.log(window.FormData);
+    console.log(window.OrderFormData);
     $FW.Ajax({
         url: '/mall/api/order/v1/commit_pay_order.json',
-        data: window.FormaData,
+        data: window.OrderFormData,
         success: function () {
             alert("make order success")
         }
@@ -54,13 +54,13 @@ const ConfirmOrder = React.createClass({
     makeOrderHandler: function () {
         $FW.Ajax({
             url: '/mall/api/order/v1/validatePaySmsCode.json',
-            data: {smsCode: window.FormData.sms_code},
+            data: {smsCode: window.OrderFormData.sms_code},
             success: submit
         })
     },
     updateProductCountHandler: function (c) {
         this.setState({product_count: c});
-        window.FormData.buyNum = c;
+        window.OrderFormData.buyNum = c;
     },
 
     render: function () {
@@ -170,8 +170,8 @@ ConfirmOrder.Extra = React.createClass({
     },
     toggleBeanHandler: function () {
         this.setState({use_bean: !this.state.use_bean});
-        window.FormData.useBean = !this.state.use_bean;
-        window.FormData.payBeanPrice = window.FormData.useBean ? this.props.user.bean : 0;
+        window.OrderFormData.useBean = !this.state.use_bean;
+        window.OrderFormData.payBeanPrice = window.OrderFormData.useBean ? this.props.user.bean : 0;
     },
     render: function () {
         let checked_tickets = [];
@@ -187,9 +187,9 @@ ConfirmOrder.Extra = React.createClass({
         if (this.state.use_bean) total_price -= this.props.user.bean / 100;
         if (total_price < 0) total_price = 0;
 
-        window.FormData.payRmbPrice = total_price;
-        window.FormData.useTicket = checked_tickets.length > 0;
-        window.FormData.ticket = checked_tickets.map((i) => i.id);
+        window.OrderFormData.payRmbPrice = total_price;
+        window.OrderFormData.useTicket = checked_tickets.length > 0;
+        window.OrderFormData.ticket = checked_tickets.map((i) => i.id);
 
         return (
             <div className="balance-wrap">
@@ -370,6 +370,8 @@ const Address = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    var query = $FW.Format.urlQuery();
+
     $FW.Ajax({
         url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + getProductBizNo() + '&buyNum=1',
         success: function (data) {
@@ -388,8 +390,8 @@ $FW.DOMReady(function () {
                 count: query.count || 1
             };
 
-            window.FormData.addressId = query.address_id || data.addressId;
-            window.FormData.payBeanPrice = user.bean;
+            window.OrderFormData.addressId = query.address_id || data.addressId;
+            window.OrderFormData.payBeanPrice = user.bean;
 
             ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList} user={user}
                                           address_list={data.addressList}
