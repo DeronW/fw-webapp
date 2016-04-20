@@ -11,6 +11,7 @@ var apps = [
     'product-detail',
     'product-list',
     'product-vip',
+    'waiting',
     'fail',
     'success',
     'deliver-address',

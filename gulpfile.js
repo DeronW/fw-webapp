@@ -28,6 +28,7 @@ gulp.task('build:mall', gulp.series(
         'pack:product-vip',
         'pack:deliver-address',
         'pack:new-deliver-address',
+        'pack:waiting',
         'pack:fail',
         'pack:success'
     ],
