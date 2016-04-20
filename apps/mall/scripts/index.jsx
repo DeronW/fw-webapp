@@ -44,7 +44,7 @@ const Carousel = React.createClass({
     },
 
     render: function () {
-        let banner = (dot, index) => <div key={index} className={(this.state.cur_index == index) ? "on" : ''}></div>;
+        let banner = (dot, index) => <div key={index} className={(this.state.cur_index == index - 1) ? "on" : ''}></div>;
         let ba = (d, index) => <div key={index}><a href={d.href}><img src={d.img}/></a></div>;
 
         return (
