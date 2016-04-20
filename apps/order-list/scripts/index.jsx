@@ -70,7 +70,7 @@ const OrderList = React.createClass({
         let allBlock = function (s) {
             return (
                 <div className="order-all">
-                    { self.state[s].map((order) => <OrderBlock key={order.bizNo} order={order} dataJson={order}/>) }
+                    { self.state[s].map((order) => <OrderBlock key={order.id} order={order} dataJson={order}/>) }
                 </div>
             );
         };
@@ -111,7 +111,7 @@ const OrderBlock = React.createClass({
 
         let product_item = function (product, index) {
             return (
-                <a href={'/order/detail?bizNo=' + order.bizNo} key={index}>
+                <a href={'/order/detail?order_id=' + order.id} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img}/>
@@ -163,8 +163,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/order_list.json",
         success: function (data) {
-            ReactDOM.render(<MyOrderMain orders={data.orders}/>, document.getElementById("cnt")
-            );
+            ReactDOM.render(<MyOrderMain orders={data.orders}/>, document.getElementById("cnt"));
         }
     });
     NativeBridge.setTitle('订单列表');

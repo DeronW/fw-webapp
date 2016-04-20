@@ -111,29 +111,38 @@ POST
 
 消息格式:
 
-  keywork[:params]
+    {
+        action: "",
+        value: ""
+    }
 
 例子:
 
 去登录
 
-login
+    {
+        action: "login"
+    }
 
 登录后跳转到商城页面
 
-login:mall
+    {
+        action: "login",
+        value: "mall"
+    }
 
 后退页面
 
-backward
-
-backward:level
+    {
+        action: "backward",
+        value: "level"
+    }
 
 关闭当前页面
 
-close
-
-close:next_view
+    {
+        action: "close"
+    }
 
 显示后退按钮
 

@@ -212,13 +212,13 @@ const OrderNumberList = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    let bizNo = $FW.Format.urlQuery().bizNo;
-    if (!bizNo) {
-        alert('order bizNo is missing');
+    let order_id = $FW.Format.urlQuery().order_id;
+    if (!order_id) {
+        alert('url query order_id is missing');
         return;
     }
     $FW.Ajax({
-        url: API_PATH + "mall/api/member/v1/order_detail.json?bizNo=" + bizNo,
+        url: API_PATH + "mall/api/member/v1/order_detail.json?orderId=" + order_id,
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
         }
