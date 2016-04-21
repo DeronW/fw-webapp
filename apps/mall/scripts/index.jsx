@@ -3,27 +3,42 @@
 const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
+function gotoHandler(i) {
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(i)
+    } else {
+        location.href = i;
+    }
+}
+
 const Mall = React.createClass({
+    clickHandler: function (link) {
+        gotoHandler(link)
+    },
     render: function () {
         let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                                       activity_id={i.activity_id}
                                                       products={i.products} key={index}/>;
+        let _this = this;
+
         return (
             <div>
+                {$FW.Browser.inApp() ? null : <Header/>}
                 <Carousel banners={this.props.banners}/>
                 <div className="header-nav">
-                    <a className="vip" href="/products/vip"
+                    <a className="vip" onClick={function(){ _this.clickHandler("/products/vip") }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-vip.png)'}}>
                         VIP专区</a>
-                    <a className="goods" href="/products"
+                    <a className="goods" onClick={function(){ _this.clickHandler("/products") }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-goods.png)'}}>
                         豆哥商品</a>
-                    <a className="mine" href="/user"
+                    <a className="mine" onClick={function(){ _this.clickHandler("/user") }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-shop.png)'}}>
                         我的商城</a>
                 </div>
                 <div className="index-actList-wrap">
                     { (this.props.activities || []).map(activity) }
+                    {this.props.activities.length ? null : <div className="empty">暂无活动</div>}
                 </div>
             </div>
         )
@@ -41,12 +56,13 @@ const Header = React.createClass({
 
         let style_b = {
             position: "fixed",
+            zIndex: "99",
             top: "0",
             width: "100%",
             height: "100px",
             textAlign: "center",
             lineHeight: "100px",
-            fontSize: "30px"
+            fontSize: "40px"
         };
 
         let style_c = {
@@ -64,7 +80,7 @@ const Header = React.createClass({
             <div style={style_a}>
                 <div style={style_b}>
                     <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
-                    TITLE
+                    豆哥商城
                 </div>
             </div>
         )
@@ -84,9 +100,9 @@ const Carousel = React.createClass({
     },
 
     render: function () {
-        let banner = (dot, index) => <div key={index}
-                                          className={(this.state.cur_index == index - 1) ? "on" : ''}></div>;
-        let ba = (d, index) => <div key={index}><a href={d.href}><img src={d.img}/></a></div>;
+        let point = (dot, index) => <div key={index}
+                                         className={(this.state.cur_index == index - 1) ? "on" : ''}></div>;
+        let ba = (d, index) => <div key={index}><a onClick={function(){gotoHandler(d.href)}}><img src={d.img}/></a></div>;
 
         return (
             <div className="banner-carousel">
@@ -94,7 +110,7 @@ const Carousel = React.createClass({
                     {this.state.banners.map(ba) }
                 </ReactSwipe>
                 <div className="points">
-                    {this.state.banners.map(banner)}
+                    {this.state.banners.map(point)}
                 </div>
             </div>
         );
@@ -115,7 +131,7 @@ const ActivityProduct = React.createClass({
             <div className="index-actList-box">
                 <TextBar title={this.props.title} bizNo={this.props.bizNo} activity_id={this.props.activity_id}/>
                 {activity_banner()}
-                <ul className="index-actList-list">{this.props.products.map(pi)}</ul>
+                <div className="index-actList-list">{this.props.products.map(pi)}</div>
             </div>
         )
     }
@@ -123,12 +139,13 @@ const ActivityProduct = React.createClass({
 
 const TextBar = React.createClass({
     render: function () {
+        let _this = this;
         return (
             <div className="index-actList-h">
                 <div className="index-actList-htext">{this.props.title}</div>
-                <a href={'/activity?bizNo=' + this.props.bizNo + '&activity_id=' + this.props.activity_id}
+                <a onClick={function(){gotoHandler('/activity?bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
                    className="index-actList-hmore"
-                   style={{background:"url(../images/ico-blue-right.png) no-repeat right center"}}>更多</a>
+                   style={{background:"url("+STATIC_PATH+"images/ico-blue-right.png) no-repeat right center"}}>更多</a>
             </div>
         )
     }
@@ -142,10 +159,11 @@ const ProductItem = React.createClass({
         let Angle = this.props.angle_text ?
             <div className={"list-label " + this.props.angle_type}>{this.props.angle_text}</div> :
             null;
+        let _this = this;
 
         return (
-            <li>
-                <a href={'/productDetail?bizNo='+this.props.bizNo} className="index-actList-a">
+                <a onClick={function(){gotoHandler('/productDetail?bizNo='+ _this.props.bizNo)}}
+                   className="index-actList-a">
                     <div className="list-img"><img src={this.props.img}/></div>
                     {Angle}
                     <div className="list-name">{this.props.title}</div>
@@ -164,7 +182,6 @@ const ProductItem = React.createClass({
                         </div>
                     </div>
                 </a>
-            </li>
         )
     }
 });

@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   background-color: #ebebee;
 }
+
 img {
   width: 100%;
   height: auto;
@@ -26,6 +27,12 @@ ul, ol, li {
 .index-actList-wrap {
   width: 100%;
   margin-top: 20px;
+
+  .empty {
+    font-size: 40px;
+    text-align: center;
+    padding-top: 100px;
+  }
 }
 
 .index-actList-box {
@@ -63,98 +70,95 @@ ul, ol, li {
 .index-actList-list {
   padding: 0 0 0 20px;
   background-color: #fff;
-  li {
+
+  & > div {
     border-bottom: 1px solid #e3e5ea;
     &:last-child {
       border-bottom: none;
     }
-    a {
-      display: block;
-      position: relative;
-      padding: 15px 20px 18px 200px;
-      height: 185px;
-      .list-img {
-        position: absolute;
-        top: 20px;
-        left: 0px;
-        width: 180px;
-        height: 180px;
-      }
-      .list-label {
-        position: absolute;
-        left: -10px;
-        top: 10px;
-        height: 60px;
-        line-height: 60px;
-        width: 60px;
-        text-align: center;
-        border-radius: 30px;
-        color: #fff;
-        font-size: 30px;
-        background-color: #fd4d4c;
-      }
-      .list-price-box {
-        position: absolute;
-        bottom: 1px;
-        left: 200px;
-        width: 480px;
-        height: 55px;
-        line-height: 50px;
-        display: table;
-        .list-price {
-          float: left;
-          height: 55px;
-          line-height: 50px;
-          color: #fd4d4c;
-          font-size: 28px;
-          .list-price-num {
-            font-size: 38px;
-          }
-          .list-price-scorehide {
-            display: none;
-          }
-        }
-      }
-      .list-sold {
-        float: right;
-        height: 55px;
-        line-height: 50px;
-        color: #999;
-        font-size: 24px;
-      }
-
-    }
-    .list-name {
-      line-height: 38px;
-      max-height: 76px;
-      margin-bottom: 14px;
-      font-size: 30px;
-      color: #333;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .list-mark {
-      color: #6280a8;
-      font-size: 20px;
-      line-height: 28px;
-      *zoom: 1;
-      &:after {
-        content: '';
-        display: block;
-        height: 0;
-        clear: both;
-      }
-      div {
-        float: left;
-        padding: 0 10px;
-        margin: 0 10px 4px 0;
-        border: 2px solid #6280a8;
-        border-radius: 4px;
-      }
-
-    }
   }
 
+  a {
+    display: block;
+    position: relative;
+    padding: 15px 20px 18px 200px;
+    height: 185px;
+    .list-img {
+      position: absolute;
+      top: 20px;
+      left: 0px;
+      width: 180px;
+      height: 180px;
+    }
+    .list-label {
+      position: absolute;
+      left: -10px;
+      top: 10px;
+      height: 60px;
+      line-height: 60px;
+      width: 60px;
+      text-align: center;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 30px;
+      background-color: #fd4d4c;
+    }
+    .list-price-box {
+      position: absolute;
+      bottom: 1px;
+      left: 200px;
+      width: 480px;
+      height: 55px;
+      line-height: 50px;
+      display: table;
+      .list-price {
+        float: left;
+        height: 55px;
+        line-height: 50px;
+        color: #fd4d4c;
+        font-size: 28px;
+        .list-price-num {
+          font-size: 38px;
+        }
+        .list-price-scorehide {
+          display: none;
+        }
+      }
+    }
+    .list-sold {
+      float: right;
+      height: 55px;
+      line-height: 50px;
+      color: #999;
+      font-size: 24px;
+    }
+
+  }
+  .list-name {
+    line-height: 38px;
+    max-height: 76px;
+    margin-bottom: 14px;
+    font-size: 30px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .list-mark {
+    color: #6280a8;
+    font-size: 20px;
+    line-height: 28px;
+    display: table;
+    width: 100%;
+
+    div {
+      float: left;
+      padding: 0 10px;
+      margin: 0 10px 4px 0;
+      border: 2px solid #6280a8;
+      border-radius: 4px;
+    }
+  }
 }
 
 .banner-carousel {

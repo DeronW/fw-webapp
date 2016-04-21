@@ -16,7 +16,7 @@ const NavTitle = React.createClass({
     }
 });
 
-const MyOrderMain = React.createClass({
+const OrderMain = React.createClass({
     getInitialState: function () {
         return {
             index: 0,
@@ -42,12 +42,56 @@ const MyOrderMain = React.createClass({
 
         return (
             <div>
+                {$FW.Browser.inApp() ? null : <Header title={'订单详情'}/>}
                 <div className="ui-tab">
                     <div> {this.state.voucherName.map(btnVoucher)} </div>
                 </div>
                 <OrderList index={this.state.index} orders={this.props.orders}/>
             </div>
         );
+    }
+});
+
+const Header = React.createClass({
+    backClickHandler: function () {
+        this.props.back_handler ? this.props.back_handler() : history.back();
+    },
+    render: function () {
+        let style_a = {
+            height: "100px"
+        };
+
+        let style_b = {
+            position: "fixed",
+            zIndex: "99",
+            top: "0",
+            width: "100%",
+            height: "100px",
+            textAlign: "center",
+            lineHeight: "100px",
+            fontSize: "40px"
+        };
+
+        let style_c = {
+            fontFamily: "serif",
+            display: "block",
+            position: "absolute",
+            width: "100px",
+            height: "100px",
+            lineHeight: "100px",
+            fontSize: "40px",
+            left: "0",
+            top: "0"
+        };
+
+        return (
+            <div style={style_a}>
+                <div style={style_b}>
+                    <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
+                    {this.props.title}
+                </div>
+            </div>
+        )
     }
 });
 
@@ -111,7 +155,7 @@ const OrderBlock = React.createClass({
 
         let product_item = function (product, index) {
             return (
-                <a href={'/order/detail?order_id=' + order.order_id} key={index}>
+                <a href={'/order/detail?order_id=' + order.orderId} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img}/>
@@ -148,7 +192,7 @@ const OrderBlock = React.createClass({
                     <div className="commodity-total">
                         <span className="commodity-text">共件{order.orderCount}商品</span>
                         <span className="total-text">
-                            合计:￥
+                            合计:&yen;
                             {order.price}
                             {cost_score}
                         </span>
@@ -166,7 +210,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/order_list.json",
         success: function (data) {
-            ReactDOM.render(<MyOrderMain orders={data.orders}/>, document.getElementById("cnt"));
+            ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));
             NativeBridge.ajaxComplete();
         }
     });

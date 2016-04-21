@@ -5,6 +5,17 @@ const API_PATH = document.getElementById('api-path').value;
 
 var query = $FW.Format.urlQuery();
 
+function submit() {
+    console.log(window.OrderFormData);
+    $FW.Ajax({
+        url: '/mall/api/order/v1/commit_pay_order.json',
+        data: window.OrderFormData,
+        success: function () {
+            alert("make order success")
+        }
+    })
+}
+
 window.OrderFormData = {
     buyNum: query.count || 1,
     useBean: true,
@@ -17,16 +28,48 @@ window.OrderFormData = {
     addressId: null
 };
 
-function submit() {
-    console.log(window.OrderFormData);
-    $FW.Ajax({
-        url: '/mall/api/order/v1/commit_pay_order.json',
-        data: window.OrderFormData,
-        success: function () {
-            alert("make order success")
-        }
-    })
-}
+const Header = React.createClass({
+    backClickHandler: function () {
+        this.props.back_handler ? this.props.back_handler() : history.back();
+    },
+    render: function () {
+        let style_a = {
+            height: "100px"
+        };
+
+        let style_b = {
+            position: "fixed",
+            zIndex: "99",
+            top: "0",
+            width: "100%",
+            height: "100px",
+            textAlign: "center",
+            lineHeight: "100px",
+            fontSize: "40px"
+        };
+
+        let style_c = {
+            fontFamily: "serif",
+            display: "block",
+            position: "absolute",
+            width: "100px",
+            height: "100px",
+            lineHeight: "100px",
+            fontSize: "40px",
+            left: "0",
+            top: "0"
+        };
+
+        return (
+            <div style={style_a}>
+                <div style={style_b}>
+                    <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
+                    {this.props.title}
+                </div>
+            </div>
+        )
+    }
+});
 
 const ConfirmOrder = React.createClass({
 
@@ -75,6 +118,7 @@ const ConfirmOrder = React.createClass({
 
         return (
             <div className="confirm-order">
+                {$FW.Browser.inApp() ? null : <Header title={'确认订单'}/>}
                 { address ? <Address address={address}/> : <NewAddress /> }
                 <ConfirmOrder.Product product={this.props.product}
                                       update_product_count_handler={this.updateProductCountHandler}/>
@@ -133,10 +177,10 @@ ConfirmOrder.Product = React.createClass({
                     <div className="num-text">商品数量</div>
                     <div className="num">
                         <div className="minus" onClick={this.decreaseHandler}
-                             style={{background:"url("+STATIC_PATH+"images/gray-minus.png) no-repeat center"}}></div>
+                             style={{background:"url("+STATIC_PATH+"images/gray-minus.png) no-repeat center", display: "none"}}></div>
                         <div className="value">{this.state.count}</div>
                         <div className="plus" onClick={this.increaseHandler}
-                             style={{background:"url("+STATIC_PATH+"images/gray-plus.png) no-repeat center"}}></div>
+                             style={{background:"url("+STATIC_PATH+"images/gray-plus.png) no-repeat center", display: "none"}}></div>
                     </div>
                 </div>
                 <div className="total-box">
@@ -195,7 +239,7 @@ ConfirmOrder.Extra = React.createClass({
                     </div>
                     <div className="bean">
                         <div className="bean1">工豆账户</div>
-                        <div className="bean2">&yen;{this.props.user.bean}</div>
+                        <div className="bean2">&yen;{this.props.user.bean / 100.0}</div>
                         <div className="bean3">
                             <div className={this.state.use_bean ? "btn-circle-box on" : "btn-circle-box"}>
                                 <div className="btn-circle" onClick={this.toggleBeanHandler}>
@@ -402,8 +446,8 @@ $FW.DOMReady(function () {
 
 });
 
-window.onNativeMessageReceive = function(msg){
-    if(msg == 'history:back') location.back();
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back') history.back();
 };
 
 function getProductBizNo() {

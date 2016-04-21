@@ -8,12 +8,7 @@ const OrderDetail = React.createClass({
 
         return (
             <div>
-                <div className="nav-title">
-                <span className="back-btn">
-                    <img src={STATIC_PATH+"images/back-btn.png"}/>
-                </span>
-                    <h1 className="title">订单详情</h1>
-                </div>
+                {$FW.Browser.inApp() ? null : <Header title={'创建收货地址'}/>}
                 <OrderStatusList
                     shippingInfo={this.props.shipping_info}
                     distributionName={this.props.distribution}
@@ -25,6 +20,49 @@ const OrderDetail = React.createClass({
                 <OrderNumberList order={this.props.order}/>
             </div>
         );
+    }
+});
+
+const Header = React.createClass({
+    backClickHandler: function () {
+        this.props.back_handler ? this.props.back_handler() : location.back();
+    },
+    render: function () {
+        let style_a = {
+            height: "100px"
+        };
+
+        let style_b = {
+            position: "fixed",
+            zIndex: "99",
+            top: "0",
+            width: "100%",
+            height: "100px",
+            textAlign: "center",
+            lineHeight: "100px",
+            fontSize: "40px"
+        };
+
+        let style_c = {
+            fontFamily: "serif",
+            display: "block",
+            position: "absolute",
+            width: "100px",
+            height: "100px",
+            lineHeight: "100px",
+            fontSize: "40px",
+            left: "0",
+            top: "0"
+        };
+
+        return (
+            <div style={style_a}>
+                <div style={style_b}>
+                    <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
+                    {this.props.title}
+                </div>
+            </div>
+        )
     }
 });
 

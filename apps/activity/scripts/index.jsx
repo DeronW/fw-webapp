@@ -11,9 +11,52 @@ const MallActivity = React.createClass({
 
         return (
             <div>
+                {$FW.Browser.inApp() ? null : <Header title={this.props.title}/>}
                 {img}
                 <MallActivity.Explain desc={this.props.activity.desc}/>
                 <ProductList />
+            </div>
+        )
+    }
+});
+
+const Header = React.createClass({
+    backClickHandler: function () {
+        location.back();
+    },
+    render: function () {
+        let style_a = {
+            height: "100px"
+        };
+
+        let style_b = {
+            position: "fixed",
+            zIndex: "99",
+            top: "0",
+            width: "100%",
+            height: "100px",
+            textAlign: "center",
+            lineHeight: "100px",
+            fontSize: "40px"
+        };
+
+        let style_c = {
+            display: "block",
+            position: "absolute",
+            width: "100px",
+            height: "100px",
+            lineHeight: "100px",
+            fontSize: "40px",
+            left: "0",
+            top: "0"
+        };
+
+        return (
+            <div style={style_a}>
+                <div style={style_b}>
+                    <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
+                    {this.props.title}
+                </div>
             </div>
         )
     }
@@ -112,14 +155,14 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.ajaxStart();
-    NativeBridge.setTitle('专题活动');
 
     let bizNo = $FW.Format.urlQuery().bizNo;
     $FW.Ajax({
         url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=' + bizNo,
-        success: function (arr) {
-            ReactDOM.render(<MallActivity activity={arr}/>, document.getElementById('cnt'));
+        success: function (data) {
+            ReactDOM.render(<MallActivity activity={data} title={data.title}/>, document.getElementById('cnt'));
             NativeBridge.ajaxComplete();
+            NativeBridge.setTitle(data.title);
         }
     });
 });

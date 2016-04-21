@@ -10,6 +10,7 @@ const HomePage = React.createClass({
     render: function () {
         return (
             <div>
+                {$FW.Browser.inApp() ? null : <Header title={'我的商城'}/>}
                 <UserInfo
                     userAvatar={this.props.avatar}
                     userInfo={this.props.vip_level}
@@ -31,6 +32,49 @@ const HomePage = React.createClass({
                 <MyVoucher cxchangeCert={this.props.exchange_cert}/>
             </div>
         );
+    }
+});
+
+const Header = React.createClass({
+    backClickHandler: function () {
+        this.props.back_handler ? this.props.back_handler() : history.back();
+    },
+    render: function () {
+        let style_a = {
+            height: "100px"
+        };
+
+        let style_b = {
+            position: "fixed",
+            zIndex: "99",
+            top: "0",
+            width: "100%",
+            height: "100px",
+            textAlign: "center",
+            lineHeight: "100px",
+            fontSize: "40px"
+        };
+
+        let style_c = {
+            fontFamily: "serif",
+            display: "block",
+            position: "absolute",
+            width: "100px",
+            height: "100px",
+            lineHeight: "100px",
+            fontSize: "40px",
+            left: "0",
+            top: "0"
+        };
+
+        return (
+            <div style={style_a}>
+                <div style={style_b}>
+                    <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
+                    {this.props.title}
+                </div>
+            </div>
+        )
     }
 });
 
@@ -199,7 +243,7 @@ const MyVoucher = React.createClass({
         let normal_voucher = function () {
             return (
                 <div className="my-voucher-not-used">
-                    { self.props.cxchangeCert.dated.map(voucher) }
+                    { (self.props.cxchangeCert.dated || []).map(voucher) }
                 </div>)
         };
 
@@ -247,7 +291,7 @@ const Voucher = React.createClass({
                 <div className={this.props.data.mark >= 2 ? "t-info b-color" : "t-info"}>
                     <div className="title-info">
                         <h2 className="title-text">{this.props.data.title}</h2>
-                        <span className="money-text">￥{this.props.data.price}</span>
+                        <span className="money-text">&yen;{this.props.data.price}</span>
                     </div>
                     <div className="clear-info">
                         <span className="text">来源 {this.props.data.type}</span>
@@ -272,8 +316,8 @@ const Voucher = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('我的商城');
-
     NativeBridge.ajaxStart();
+
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/user.json',
         success: function (data) {

@@ -27,6 +27,7 @@ const Product = React.createClass({
 
         return (
             <div className="detail-box">
+                {$FW.Browser.inApp() ? null : <Header title={'商品详情'}/>}
                 <CarouselDetail data={this.props.data}/>
                 <div className="detail-inf">
                     <div className="detail-inf-name">{data.title}</div>
@@ -139,6 +140,48 @@ const PlusMinus = React.createClass({
     }
 });
 
+const Header = React.createClass({
+    backClickHandler: function () {
+        this.props.back_handler ? this.props.back_handler() : location.back();
+    },
+    render: function () {
+        let style_a = {
+            height: "100px"
+        };
+
+        let style_b = {
+            position: "fixed",
+            zIndex: "99",
+            top: "0",
+            width: "100%",
+            height: "100px",
+            textAlign: "center",
+            lineHeight: "100px",
+            fontSize: "40px"
+        };
+
+        let style_c = {
+            display: "block",
+            position: "absolute",
+            width: "100px",
+            height: "100px",
+            lineHeight: "100px",
+            fontSize: "40px",
+            left: "0",
+            top: "0"
+        };
+
+        return (
+            <div style={style_a}>
+                <div style={style_b}>
+                    <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
+                    {this.props.title}
+                </div>
+            </div>
+        )
+    }
+});
+
 const CarouselDetail = React.createClass({
     getInitialState: function () {
         return {
@@ -152,7 +195,7 @@ const CarouselDetail = React.createClass({
     },
 
     render: function () {
-        let banner = (dot, index) => <div key={index} className={(this.state.cur_index == index - 1) ? "on" : ''}></div>;
+        let point = (dot, index) => <div key={index} className={(this.state.cur_index == index - 1) ? "on" : ''}></div>;
         let ba = (i, index) => <div key={index}><a href={i.href}><img src={i}/></a>
             <div className="label"></div>
         </div>;
@@ -163,7 +206,7 @@ const CarouselDetail = React.createClass({
                     {this.state.banners.map(ba) }
                 </ReactSwipe>
                 <div className="points">
-                    {this.state.banners.map(banner)}
+                    {this.state.banners.map(point)}
                 </div>
             </div>
         );
