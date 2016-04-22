@@ -5,58 +5,107 @@ const API_PATH = document.getElementById('api-path').value;
 
 const MallProducts = React.createClass({
     getInitialState: function () {
+        this.tabs = ['all', 'virtual', 'reality'];
+        this.pageCount = 20;
+
         return {
-            index: 0,
-            tabs: ['all', 'virtual', 'reality'],
+            tab: 'all',
+            page: {
+                all: 1,
+                virtual: 1,
+                reality: 1
+            },
             products: []
         }
     },
 
-    tabClickHandler: function (index) {
-        this.setState({index: index});
+    tabClickHandler: function (tab) {
+        this.setState({tab: tab, products: window.Products[tab]});
+        if (window.Products[tab].length == 0) {
+            setTimeout(function () {
+                this.loadMoreProductHandler(null);
+            }.bind(this), 500)
+        }
     },
 
-    componentDidMount: function () {
-        let _this = this;
+    loadMoreProductHandler: function (done) {
+        console.log('load more product');
+        console.log(done);
+
+        let page = this.state.page[this.state.tab];
+        if (page == 0) return; // 如果page=0 表示没有更多页内容可以加载了
+        let is_reality;
+        if (this.state.tab == 'reality') {
+            is_reality = 1
+        } else if (this.state.tab == 'virtual') {
+            is_reality = 2
+        } else {
+            is_reality = 0
+        }
 
         NativeBridge.ajaxStart();
         $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/products.json',
+            url: API_PATH + 'mall/api/index/v1/products.json?count=' + this.pageCount + '&page=' + page + '&is_virtual=' + is_reality,
             success: function (data) {
-                let products = window.Products.all.concat(data.products);
-                window.Products.all = products;
-                _this.setState({products: products});
+                // isVirtual	0全部 1实体 2虚拟
+                let tab;
+                if (data.isVirtual == 0) {
+                    tab = 'all'
+                } else if (data.isVirtual == 1) {
+                    tab = 'reality'
+                } else if (data.isVirtual == 2) {
+                    tab = 'virtual'
+                } else {
+                    done && done();
+                    return;
+                }
+
+                window.Products[tab] = window.Products[tab].concat(data.products);
+                let products = window.Products[this.state.tab];
+
+                let new_page = this.state.page;
+                new_page[this.state.tab] = new_page[this.state.tab] + 1;
+                if (data.totalCount < 20) new_page[this.state.tab] = 0;
+
+                this.setState({products: products, page: new_page});
                 NativeBridge.ajaxComplete();
-            }
-        })
+                done && done();
+            }.bind(this)
+        });
+
+    },
+
+    componentDidMount: function () {
+        this.loadMoreProductHandler(null);
+        $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
 
     render: function () {
         let _this = this;
 
-        let tab = function (i, index) {
+        let tab = function (i) {
             let name = {
                 all: '全部',
                 virtual: '虚拟商品',
                 reality: '实物商品'
             };
             return (
-                <div key={index}
-                     className={index==_this.state.index ? "act" : null}
-                     onClick={function(){_this.tabClickHandler(index)}}>
+                <div key={i} className={i==_this.state.tab ? "act" : null}
+                     onClick={function(){_this.tabClickHandler(i)}}>
                     <span>{name[i]}</span>
                 </div>
             )
         };
 
+        // { this.state.products.map((p, index) => <ProductItem {...p} key={p.bizNo}/>) }
         return (
             <div>
                 {$FW.Browser.inApp() ? null : <Header title={'产品列表'}/>}
                 <div className="productsTab" style={{top:$FW.Browser.inApp() ? "0" : "100px" }}>
-                    {this.state.tabs.map(tab)}
+                    {this.tabs.map(tab)}
                 </div>
                 <div className="products-list">
-                    { this.state.products.map((p) => <ProductItem {...p} key={p.bizNo}/>) }
+                    { this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
                 </div>
             </div>
         )
@@ -139,7 +188,7 @@ const ProductItem = React.createClass({
 window.Products = {
     all: [],
     virtual: [],
-    real: []
+    reality: []
 };
 
 $FW.DOMReady(function () {
