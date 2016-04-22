@@ -188,6 +188,8 @@ const ProductItem = React.createClass({
     }
 });
 
+	
+
 $FW.DOMReady(function () {
     NativeBridge.ajaxStart();
     NativeBridge.setTitle('豆哥商城');
