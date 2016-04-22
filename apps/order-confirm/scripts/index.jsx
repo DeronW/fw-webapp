@@ -8,7 +8,7 @@ var query = $FW.Format.urlQuery();
 function submit() {
     console.log(window.OrderFormData);
     $FW.Ajax({
-        url: '/mall/api/order/v1/commit_pay_order.json',
+        url: API_PATH + '/mall/api/order/v1/commit_pay_order.json',
         data: window.OrderFormData,
         success: function () {
             alert("make order success")
@@ -96,7 +96,7 @@ const ConfirmOrder = React.createClass({
     },
     makeOrderHandler: function () {
         $FW.Ajax({
-            url: '/mall/api/order/v1/validatePaySmsCode.json',
+            url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
             data: {smsCode: window.OrderFormData.sms_code},
             success: submit
         })
