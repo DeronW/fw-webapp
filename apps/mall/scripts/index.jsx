@@ -14,7 +14,7 @@ function gotoHandler(i) {
 const Mall = React.createClass({
     clickHandler: function (link) {
 		if(link.indexOf('://') < 0) {
-			link = location.protocol + location.hostname + link;
+			link = location.protocol + '//' + location.hostname + link;
 		}
         gotoHandler(link)
     },
@@ -188,7 +188,7 @@ const ProductItem = React.createClass({
     }
 });
 
-	
+	alert(navigator.userAgent)
 
 $FW.DOMReady(function () {
     NativeBridge.ajaxStart();
