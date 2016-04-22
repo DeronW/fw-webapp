@@ -45,7 +45,7 @@ const MallProducts = React.createClass({
 
         NativeBridge.ajaxStart();
         $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/products.json?count=' + this.pageCount + '&page=' + page + '&is_virtual=' + is_reality,
+            url: API_PATH + 'mall/api/index/v1/products.json?count=' + this.pageCount + '&page=' + page + '&isVirtual=' + is_reality,
             success: function (data) {
                 // isVirtual	0全部 1实体 2虚拟
                 let tab;

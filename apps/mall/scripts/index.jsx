@@ -20,7 +20,6 @@ const Mall = React.createClass({
                                                       activity_id={i.activity_id}
                                                       products={i.products} key={index}/>;
         let _this = this;
-
         return (
             <div>
                 {$FW.Browser.inApp() ? null : <Header/>}
@@ -189,7 +188,6 @@ const ProductItem = React.createClass({
 $FW.DOMReady(function () {
     NativeBridge.ajaxStart();
     NativeBridge.setTitle('豆哥商城');
-
     $FW.BatchGet([
         API_PATH + 'mall/api/index/v1/banners.json', // banner轮播图数据
         API_PATH + 'mall/api/index/v1/activities.json' // 明前活动的数据
