@@ -25,7 +25,7 @@ const OrderDetail = React.createClass({
 
 const Header = React.createClass({
     backClickHandler: function () {
-        this.props.back_handler ? this.props.back_handler() : location.back();
+        this.props.back_handler ? this.props.back_handler() : history.back();
     },
     render: function () {
         let style_a = {

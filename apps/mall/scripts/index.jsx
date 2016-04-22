@@ -47,7 +47,7 @@ const Mall = React.createClass({
 
 const Header = React.createClass({
     backClickHandler: function () {
-        location.back();
+        history.back();
     },
     render: function () {
         let style_a = {
