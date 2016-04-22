@@ -13,6 +13,9 @@ function gotoHandler(i) {
 
 const Mall = React.createClass({
     clickHandler: function (link) {
+		if(link.indexOf('://') < 0) {
+			link = location.protocol + location.hostname + link;
+		}
         gotoHandler(link)
     },
     render: function () {

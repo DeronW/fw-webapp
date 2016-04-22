@@ -314,6 +314,7 @@ const Voucher = React.createClass({
     }
 });
 
+	
 $FW.DOMReady(function () {
     NativeBridge.setTitle('我的商城');
     NativeBridge.ajaxStart();
