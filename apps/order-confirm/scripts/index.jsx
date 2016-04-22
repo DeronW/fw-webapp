@@ -275,7 +275,7 @@ ConfirmOrder.Captcha = React.createClass({
         if (this.state.remain == 0) {
             this.tick();
             $FW.Ajax({
-                url: "/mall/api/order/v1/SendPhoneVerifyPay.json",
+                url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'post',
                 success: function () {
                     alert('验证码已发送, 请查收')
