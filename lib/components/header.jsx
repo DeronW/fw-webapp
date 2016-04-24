@@ -1,32 +1,45 @@
+/*
+	parameters
+	
+	<Header title={} height={} background={} />
+*/
+
 const Header = React.createClass({
     getInitialState: function () {
-        return {}
+		let height = parseInt(this.props.height) || 100;
+        return {
+			height: height,
+			background: this.props.background,
+			title: this.props.title
+		}
     },
     backClickHandler: function () {
         this.props.back_handler ? this.props.back_handler() : history.back();
     },
     render: function () {
+		let fontSize = '40px';
         let style_a = {
-            height: "100px"
+            height: this.state.height + 'px'
         };
 
         let style_b = {
             position: "fixed",
             top: "0",
             width: "100%",
-            height: "100px",
+            height: this.state.height + 'px',
             textAlign: "center",
-            lineHeight: "100px",
-            fontSize: "40px"
+            lineHeight: this.state.height + 'px',
+			background: this.state.background,
+            fontSize: fontSize
         };
 
         let style_c = {
             display: "block",
             position: "absolute",
-            width: "100px",
-            height: "100px",
-            lineHeight: "100px",
-            fontSize: "40px",
+            width: this.state.height + "px",
+            height: this.state.height + "px",
+            lineHeight: this.state.height + "px",
+            fontSize: fontSize,
             left: "0",
             top: "0"
         };
@@ -35,7 +48,7 @@ const Header = React.createClass({
             <div style={style_a}>
                 <div style={style_b}>
                     <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
-                    {this.props.title}
+                    {this.state.title}
                 </div>
             </div>
         )

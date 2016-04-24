@@ -214,11 +214,11 @@ onNativeMessageReceive('login_token', 'params')
 
 专题活动页 [http://m.mall.9888.cn/activity](http://m.mall.9888.cn/activity)
 
-VIP专区页 [http://m.mall.9888.cn/vip](http://m.mall.9888.cn/vip)
+VIP专区页 [http://m.mall.9888.cn/product-vip](http://m.mall.9888.cn/product-vip)
 
 商品列表页 [http://m.mall.9888.cn/products](http://m.mall.9888.cn/products)
 
-商品详情页 [http://m.mall.9888.cn/product?bizNo=id](http://m.mall.9888.cn/product/[uid])
+商品详情页 [http://m.mall.9888.cn/product?bizNo=id](http://m.mall.9888.cn/product/bizNo=[uid])
 
 确认订单页 [http://m.mall.9888.cn/order/confirm](http://m.mall.9888.cn/order/confirm)
 
@@ -226,7 +226,7 @@ VIP专区页 [http://m.mall.9888.cn/vip](http://m.mall.9888.cn/vip)
 
 我的订单页 [http://m.mall.9888.cn/order/mine](http://m.mall.9888.cn/order/mine)
 
-订单详情页 [http://m.mall.9888.cn/order?bizNo=id](http://m.mall.9888.cn/order/uid)
+订单详情页 [http://m.mall.9888.cn/order?bizNo=id](http://m.mall.9888.cn/order/bizNo=id)
 
 我的商城页 [http://m.mall.9888.cn/user](http://m.mall.9888.cn/user)
 
