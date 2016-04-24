@@ -1,3 +1,4 @@
+;(function(){
 'use strict';
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -57,7 +58,7 @@ var styles = {
     }
 };
 
-const ReactSwipe = React.createClass({
+window.ReactSwipe = React.createClass({
     displayName: 'ReactSwipe',
 
     // https://github.com/thebird/Swipe#config-options
@@ -91,19 +92,18 @@ const ReactSwipe = React.createClass({
     },
 
     render: function () {
-        return React.createElement('div', React.__spread({}, {
-                style: objectAssign({}, styles.container, this.props.containerStyles),
-                className: this.props.containerClassName
-            }, this.props),
-            React.createElement('div', {
-                style: objectAssign({}, styles.wrapper, this.props.wrapperStyles),
-                className: this.props.wrapperClassName
-            }, React.Children.map(this.props.children, function (child) {
-                return React.cloneElement(child, {
-                    style: styles.child
-                });
-            }))
-        );
+
+        let child = (element, index) => React.cloneElement(element, {style: styles.child});
+
+        return (
+            <div {...this.props} className={this.props.containerClassName}
+                style={objectAssign({}, styles.container, this.props.containerStyles)} >
+                <div className={this.props.wrapperStyles}
+                    style={objectAssign({}, styles.wrapper, this.props.wrapperStyles)}>
+                    {this.props.children.map(child)}
+                </div>
+            </div>
+        )
     },
 
     next: function () {
@@ -114,3 +114,5 @@ const ReactSwipe = React.createClass({
         this.swipe.prev();
     }
 });
+
+})();

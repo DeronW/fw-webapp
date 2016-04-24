@@ -23,9 +23,10 @@ const Mall = React.createClass({
                                                       activity_id={i.activity_id}
                                                       products={i.products} key={index}/>;
         let _this = this;
+
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header/>}
+                {$FW.Browser.inApp() ? null : <Header title={"豆哥商城"}/>}
                 <Carousel banners={this.props.banners}/>
                 <div className="header-nav">
                     <a className="vip" onClick={function(){ _this.clickHandler("/products/vip") }}
@@ -39,50 +40,8 @@ const Mall = React.createClass({
                         我的商城</a>
                 </div>
                 <div className="index-actList-wrap">
-                    { (this.props.activities || []).map(activity) }
+                    { this.props.activities.map(activity) }
                     {this.props.activities.length ? null : <div className="empty">暂无活动</div>}
-                </div>
-            </div>
-        )
-    }
-});
-
-const Header = React.createClass({
-    backClickHandler: function () {
-        history.back();
-    },
-    render: function () {
-        let style_a = {
-            height: "100px"
-        };
-
-        let style_b = {
-            position: "fixed",
-            zIndex: "99",
-            top: "0",
-            width: "100%",
-            height: "100px",
-            textAlign: "center",
-            lineHeight: "100px",
-            fontSize: "40px"
-        };
-
-        let style_c = {
-            display: "block",
-            position: "absolute",
-            width: "100px",
-            height: "100px",
-            lineHeight: "100px",
-            fontSize: "40px",
-            left: "0",
-            top: "0"
-        };
-
-        return (
-            <div style={style_a}>
-                <div style={style_b}>
-                    <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
-                    豆哥商城
                 </div>
             </div>
         )
@@ -103,7 +62,7 @@ const Carousel = React.createClass({
 
     render: function () {
         let point = (dot, index) => <div key={index}
-                                         className={(this.state.cur_index == index - 1) ? "on" : ''}></div>;
+                                         className={(this.state.cur_index == index) ? "on" : ''}></div>;
         let ba = (d, index) => <div key={index}><a onClick={function(){gotoHandler(d.href)}}><img src={d.img}/></a></div>;
 
         return (

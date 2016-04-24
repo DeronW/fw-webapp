@@ -67,6 +67,7 @@ function generate_task(project_name, configs) {
 
     function compile_scripts() {
         return gulp.src([
+                LIB_PATH + 'components/header.jsx',
                 APP_PATH + 'scripts/components/*.jsx',
                 APP_PATH + 'scripts/index.jsx'
             ])
@@ -84,8 +85,8 @@ function generate_task(project_name, configs) {
         // common library
         var lib_files = [
             LIB_PATH + 'financial-workspace-0.1.0.js',
-            LIB_PATH + 'react-0.14.1/react.js',
-            LIB_PATH + 'react-0.14.1/react-dom.js',
+            LIB_PATH + 'react-15.0.1/react.js',
+            LIB_PATH + 'react-15.0.1/react-dom.js',
             LIB_PATH + 'native-bridge-0.1.0.js',
             LIB_PATH + 'swipe.js'
         ];

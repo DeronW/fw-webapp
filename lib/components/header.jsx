@@ -1,6 +1,5 @@
 /*
 	parameters
-	
 	<Header title={} height={} background={} />
 */
 
@@ -24,7 +23,7 @@ const Header = React.createClass({
 
         let style_b = {
             position: "fixed",
-            top: "0",
+            top: "0px",
             width: "100%",
             height: this.state.height + 'px',
             textAlign: "center",
@@ -40,8 +39,8 @@ const Header = React.createClass({
             height: this.state.height + "px",
             lineHeight: this.state.height + "px",
             fontSize: fontSize,
-            left: "0",
-            top: "0"
+            left: "0px",
+            top: "0px"
         };
 
         return (
