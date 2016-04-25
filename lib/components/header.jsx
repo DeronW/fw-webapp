@@ -47,14 +47,12 @@ const Header = React.createClass({
             top: "0px"
         };
 
-        let style_btn_bg = {
-            position: 'absolute'
-        };
-
         return (
             <div style={style_a}>
                 <div style={style_b}>
-                    <div style={style_c} onClick={this.backClickHandler}>&lt;<div style={style_btn_bg}></div></div>
+                    <div style={style_c} onClick={this.backClickHandler}>&lt;
+                        <div style={style_btn_bg}></div>
+                    </div>
                     {this.state.title}
                 </div>
             </div>

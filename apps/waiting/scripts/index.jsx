@@ -20,7 +20,7 @@ const Waiting = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'敬请期待'}/>}
+                {$FW.Browser.inApp() ? null : <Header title={'敬请期待'} background={'transparent'}/>}
                 <img style={style_a} src={STATIC_PATH + "images/working.png"}/>
                 <div style={style_b}>
                     敬请期待
