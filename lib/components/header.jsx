@@ -41,15 +41,20 @@ const Header = React.createClass({
             lineHeight: this.state.height + "px",
             fontFamily: "serif",
             fontSize: fontSize,
+            fontWeight: 'bold',
             color: "#536f95",
             left: "0px",
             top: "0px"
         };
 
+        let style_btn_bg = {
+            position: 'absolute'
+        };
+
         return (
             <div style={style_a}>
                 <div style={style_b}>
-                    <b style={style_c} onClick={this.backClickHandler}>&lt;</b>
+                    <div style={style_c} onClick={this.backClickHandler}>&lt;<div style={style_btn_bg}></div></div>
                     {this.state.title}
                 </div>
             </div>
