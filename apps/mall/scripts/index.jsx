@@ -27,7 +27,9 @@ const Mall = React.createClass({
         return (
             <div>
                 {$FW.Browser.inApp() ? null : <Header title={"豆哥商城"}/>}
-                <Carousel banners={this.props.banners}/>
+                {this.props.banners.length ?
+                    <Carousel banners={this.props.banners}/> :
+                    <div className="no-banner" style={{backgroundImage: 'url(' + STATIC_PATH + 'images/default-banner.jpg)'}}></div>}
                 <div className="header-nav">
                     <a className="vip" onClick={function(){ _this.clickHandler("/waiting") }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-vip.png)'}}>
@@ -86,7 +88,7 @@ const ActivityProduct = React.createClass({
         let activity_banner = () => {
             return this.props.img ?
                 (<div className="index-actList-img">
-                    <a><img src={this.props.img}/></a>
+                    <a><img src={this.props.img || STATIC_PATH + 'images/default-banner.jpg'}/></a>
                 </div>) :
                 null;
         };
@@ -127,7 +129,7 @@ const ProductItem = React.createClass({
         return (
             <a onClick={function(){gotoHandler('/productDetail?bizNo='+ _this.props.bizNo)}}
                className="index-actList-a">
-                <div className="list-img"><img src={this.props.img}/></div>
+                <div className="list-img"><img src={null || STATIC_PATH + 'images/default-product.jpg'}/></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
                 <div className="list-mark">

@@ -6,7 +6,7 @@ const API_PATH = document.getElementById('api-path').value;
 const MallActivity = React.createClass({
     render: function () {
         let img = this.props.activity.img ?
-            <a href="#" className="act-img-detail"><img src={this.props.activity.img}/></a> :
+            <a href="#" className="act-img-detail"><img src={this.props.activity.img || STATIC_PATH + 'images/default-banner.jpg'}/></a> :
             null;
 
         return (

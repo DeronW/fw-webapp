@@ -72,7 +72,6 @@ const MallProducts = React.createClass({
                 done && done();
             }.bind(this)
         });
-
     },
 
     componentDidMount: function () {
@@ -120,7 +119,7 @@ const ProductItem = React.createClass({
 
         return (
             <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
-                <div className="list-img"><img src={this.props.img}/></div>
+                <div className="list-img"><img src={this.props.img || STATIC_PATH + 'images/default-product.jpg'}/></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
                 <div className="list-mark">

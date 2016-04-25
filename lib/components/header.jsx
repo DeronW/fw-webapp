@@ -29,6 +29,7 @@ const Header = React.createClass({
             textAlign: "center",
             lineHeight: this.state.height + 'px',
             background: this.state.background,
+            zIndex: '9',
             fontSize: fontSize
         };
 
