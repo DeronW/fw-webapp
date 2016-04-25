@@ -13,9 +13,9 @@ function gotoHandler(i) {
 
 const Mall = React.createClass({
     clickHandler: function (link) {
-		if(link.indexOf('://') < 0) {
-			link = location.protocol + '//' + location.hostname + link;
-		}
+        if (link.indexOf('://') < 0) {
+            link = location.protocol + '//' + location.hostname + link;
+        }
         gotoHandler(link)
     },
     render: function () {
@@ -61,9 +61,11 @@ const Carousel = React.createClass({
     },
 
     render: function () {
-        let point = (dot, index) => <div key={index}
-                                         className={(this.state.cur_index == index) ? "on" : ''}></div>;
-        let ba = (d, index) => <div key={index}><a onClick={function(){gotoHandler(d.href)}}><img src={d.img}/></a></div>;
+        let point = (dot, index) => <div key={index} className={(this.state.cur_index == index) ? "on" : ''}></div>;
+        let ba = (d, index) => <div key={index}>
+            <div><a onClick={function(){gotoHandler(d.href)}}>
+                <img src={d.img}/></a></div>
+        </div>;
 
         return (
             <div className="banner-carousel">
@@ -123,26 +125,26 @@ const ProductItem = React.createClass({
         let _this = this;
 
         return (
-                <a onClick={function(){gotoHandler('/productDetail?bizNo='+ _this.props.bizNo)}}
-                   className="index-actList-a">
-                    <div className="list-img"><img src={this.props.img}/></div>
-                    {Angle}
-                    <div className="list-name">{this.props.title}</div>
-                    <div className="list-mark">
-                        { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
+            <a onClick={function(){gotoHandler('/productDetail?bizNo='+ _this.props.bizNo)}}
+               className="index-actList-a">
+                <div className="list-img"><img src={this.props.img}/></div>
+                {Angle}
+                <div className="list-name">{this.props.title}</div>
+                <div className="list-mark">
+                    { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
+                </div>
+                <div className="list-price-box">
+                    <div className="list-price">
+                        <span className="list-price-mark">&yen;</span>
+                        <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
+                        { price }
                     </div>
-                    <div className="list-price-box">
-                        <div className="list-price">
-                            <span className="list-price-mark">&yen;</span>
-                            <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
-                            { price }
-                        </div>
-                        <div className="list-sold">
-                            <span>累计销量 </span>
-                            <span>{this.props.sales}</span>
-                        </div>
+                    <div className="list-sold">
+                        <span>累计销量 </span>
+                        <span>{this.props.sales}</span>
                     </div>
-                </a>
+                </div>
+            </a>
         )
     }
 });
