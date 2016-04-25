@@ -157,14 +157,14 @@ const CarouselDetail = React.createClass({
     },
 
     render: function () {
-        let point = (dot, index) => <div key={index} className={(this.state.cur_index == index - 1) ? "on" : ''}></div>;
+        let point = (dot, index) => <div key={index} className={(this.state.cur_index == index) ? "on" : ''}></div>;
         let ba = (i, index) => <div key={index}><a href={i.href}><img src={i}/></a>
             <div className="label"></div>
         </div>;
 
         return (
             <div className="banner-carousel-detail">
-                <ReactSwipe wrapperClassName={'wrap'} auto={3000} speed={1000} callback={this.changeCurrentIndex}>
+                <ReactSwipe wrapperClassName={'wrap'} speed={1000} callback={this.changeCurrentIndex}>
                     {this.state.banners.map(ba) }
                 </ReactSwipe>
                 <div className="points">
