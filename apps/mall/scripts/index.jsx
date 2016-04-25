@@ -29,7 +29,7 @@ const Mall = React.createClass({
                 {$FW.Browser.inApp() ? null : <Header title={"豆哥商城"}/>}
                 <Carousel banners={this.props.banners}/>
                 <div className="header-nav">
-                    <a className="vip" onClick={function(){ _this.clickHandler("/products/vip") }}
+                    <a className="vip" onClick={function(){ _this.clickHandler("/waiting") }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-vip.png)'}}>
                         VIP专区</a>
                     <a className="goods" onClick={function(){ _this.clickHandler("/products") }}

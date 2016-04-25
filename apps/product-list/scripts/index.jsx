@@ -97,7 +97,6 @@ const MallProducts = React.createClass({
             )
         };
 
-        // { this.state.products.map((p, index) => <ProductItem {...p} key={p.bizNo}/>) }
         return (
             <div>
                 {$FW.Browser.inApp() ? null : <Header title={'产品列表'}/>}
@@ -106,6 +105,7 @@ const MallProducts = React.createClass({
                 </div>
                 <div className="products-list">
                     { this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
+                    {this.state.products.length == 0 ? <div className="empty-list">暂无商品</div> : null}
                 </div>
             </div>
         )
