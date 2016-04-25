@@ -20,11 +20,11 @@ var apps = [
 
 apps.forEach(function (i) {
     gt(i, {
-        api_path: 'http://m2.mall.9888.cn/'
+        api_path: 'http://m2mall.9888.cn/'
     });
     gt(i, {
         cmd_prefix: 'pack:',
-        api_path: 'http://m.mall.9888.cn/',
+        api_path: 'http://mmall.9888.cn/',
         static_path: '/pages/' + i + '/',
         enable_watch: false,
         enable_server: false,
