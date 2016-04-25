@@ -25,6 +25,7 @@ window.OrderFormData = {
     useTicket: false,
     ticket: [],
     tokenStr: query.tokenStr,
+    sms_code: null,
     addressId: null
 };
 
@@ -54,6 +55,7 @@ const ConfirmOrder = React.createClass({
     makeOrderHandler: function () {
         $FW.Ajax({
             url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
+            method: 'post',
             data: {smsCode: window.OrderFormData.sms_code},
             success: submit
         })
@@ -84,7 +86,7 @@ const ConfirmOrder = React.createClass({
                                     product_score={this.props.product.score}
                                     user={this.props.user}
                                     show_voucher_modal={this.showVoucherModal}/>
-                <ConfirmOrder.Captcha />
+                <ConfirmOrder.SMSVerifyCode />
                 <div className="confirm-order-foot">
                     <a onClick={this.makeOrderHandler}
                        className={this.state.disable_pay ? "btn-red btn-gray" : "btn-red"}>确认购买</a>
@@ -221,21 +223,24 @@ ConfirmOrder.Extra = React.createClass({
     }
 });
 
-ConfirmOrder.Captcha = React.createClass({
+ConfirmOrder.SMSVerifyCode = React.createClass({
     getInitialState: function () {
         return {value: '', remain: 0}
     },
     changeValueHandler: function (e) {
-        this.setState({value: e.target.value})
+        this.setState({value: e.target.value});
+        window.OrderFormData.sms_code = e.target.value;
     },
-    getCaptchaHandler: function () {
+    getSmsCodeHandler: function () {
         if (this.state.remain == 0) {
             this.tick();
             $FW.Ajax({
                 url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'post',
-                success: function () {
-                    alert('验证码已发送, 请查收')
+                success: function (data) {
+                    alert('验证码已发送, 请查收');
+                    if (data.validateCode)
+                        alert('原来你在测试, 那就直接告诉你验证码\n ' + data.validateCode);
                 }
             })
         }
@@ -258,7 +263,7 @@ ConfirmOrder.Captcha = React.createClass({
                                placeholder="请输入验证码"/>
                     </div>
                     <div className={1 ? "btn-test-blue" : "btn-test-blue btn-test-gray"}
-                         onClick={this.getCaptchaHandler}>
+                         onClick={this.getSmsCodeHandler}>
                         {this.state.remain ? this.state.remain + 's' : '获取验证码'}
                     </div>
                 </div>

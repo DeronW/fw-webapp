@@ -27,8 +27,12 @@ const Product = React.createClass({
 
         return (
             <div className="detail-box">
-                {$FW.Browser.inApp() ? null : <Header title={'商品详情'}/>}
-                <CarouselDetail data={this.props.data}/>
+                {$FW.Browser.inApp() ? null : <Header title={'商品详情'} background={'transparent'}/>}
+
+                {this.props.data.head_images.length ?
+                    <CarouselDetail head_images={this.props.data.head_images}/> :
+                    <div className="no-head-images">暂无图片</div>}
+
                 <div className="detail-inf">
                     <div className="detail-inf-name">{data.title}</div>
                     <div className="detail-inf-des">{data.sub_title} </div>
@@ -143,7 +147,7 @@ const PlusMinus = React.createClass({
 const CarouselDetail = React.createClass({
     getInitialState: function () {
         return {
-            banners: this.props.data.head_images,
+            banners: this.props.head_images,
             cur_index: 0
         }
     },

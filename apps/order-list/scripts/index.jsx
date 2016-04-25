@@ -71,12 +71,12 @@ const OrderList = React.createClass({
         let allBlock = function (s) {
             return (
                 <div className="order-all">
-                    { self.state[s].map((order) => <OrderBlock key={order.id} order={order} dataJson={order}/>) }
+                    { self.state[s].map((order) => <OrderBlock key={order.orderId} order={order} dataJson={order}/>) }
                 </div>
             );
         };
 
-        let blockText = <div className="no-commodity-block"> 对不起没有商品 </div>;
+        let blockText = <div className="no-commodity-block">暂无记录</div>;
 
         return (
             <div className="order-area">
