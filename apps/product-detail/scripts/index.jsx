@@ -25,6 +25,13 @@ const Product = React.createClass({
             )
         }
 
+        let rich_detail = null;
+        if (data.rich_detail && data.rich_detail.length) {
+            rich_detail = <div className="detail-des">
+                {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
+            </div>
+        }
+
         return (
             <div className="detail-box">
                 {$FW.Browser.inApp() ? null : <Header title={'商品详情'} background={'transparent'}/>}
@@ -70,9 +77,7 @@ const Product = React.createClass({
                     {data.tags.map(markList)}
                 </div>
                 {desc}
-                <div className="detail-des">
-                    {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
-                </div>
+                {rich_detail}
                 <PlusMinus stock={data.stock}/>
             </div>
         )

@@ -30,6 +30,7 @@ const Header = React.createClass({
             lineHeight: this.state.height + 'px',
             background: this.state.background,
             zIndex: '9',
+            textShadow: "0 0 8px white",
             fontSize: fontSize
         };
 

@@ -10,8 +10,12 @@ function submit() {
     $FW.Ajax({
         url: API_PATH + '/mall/api/order/v1/commit_pay_order.json',
         data: window.OrderFormData,
-        success: function () {
-            alert("make order success")
+        success: function (data) {
+            if (data.errMsg) {
+                alert(data.errMsg)
+            } else {
+                console.log("make order success", data)
+            }
         }
     })
 }
@@ -21,7 +25,7 @@ window.OrderFormData = {
     useBean: true,
     payBeanPrice: null,
     payRmbPrice: null,
-    productBizNo: query.bizNo,
+    productBizNo: query.productBizNo,
     useTicket: false,
     ticket: [],
     tokenStr: query.tokenStr,
