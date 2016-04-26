@@ -12,6 +12,7 @@ plugins.cssnano = require('gulp-cssnano');
 plugins.rev_all = require('gulp-rev-all');
 plugins.concat = require('gulp-concat');
 plugins.del = require('del');
+plugins.swig = require('gulp-swig');
 plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
 plugins.sourcemaps = require('gulp-sourcemaps');
@@ -51,6 +52,7 @@ function generate_task(project_name, configs) {
     function compile_html() {
         return gulp.src([APP_PATH + '**/*.html'])
             .pipe(plugins.changed(BUILD_PATH))
+            .pipe(plugins.swig())
             //.pipe(plugins.htmlmin({collapseWhitespace: true}))
             .pipe(plugins.replace('{API_PATH}', CONFIG.api_path))
             .pipe(plugins.replace('{STATIC_PATH}', CONFIG.static_path))

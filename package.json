@@ -7,7 +7,7 @@
   "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",
     "gulp-data": ">=1",
-    "gulp-swig": ">=0.7",
+    "gulp-swig": ">=0.8",
     "gulp-imagemin": ">=2",
     "gulp-concat": ">=2",
     "gulp-jshint": ">=2",

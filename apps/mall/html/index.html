@@ -1,20 +1,3 @@
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=720, user-scalable=no">
-    <title>Mall</title>
-    <link type="text/css" rel="stylesheet" href="{STATIC_PATH}css/all.css"/>
-</head>
-<body>
-<!--图片引用的路径前缀,结尾需要添加斜线-->
-<input type="hidden" id="static-path" value="{STATIC_PATH}"/>
-<!--接口地址前缀,结尾需要添加斜线-->
-<input type="hidden" id="api-path" value="{API_PATH}"/>
+{% extends '../../../lib/templates/mall_base.swig.html' %}
 
-<div id="cnt"></div>
-<script src="{STATIC_PATH}scripts/lib.js"></script>
-<script src="{STATIC_PATH}scripts/bundle.js"></script>
-
-</body>
-</html>
+{% block title %}豆哥商城{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=720, minimal-ui">
+    <title>{% block title %}Mall{% endblock %}</title>
+    <link type="text/css" rel="stylesheet" href="{STATIC_PATH}css/all.css"/>
+</head>
+<body>
+
+{% block content %}{% endblock %}
+
+<!--图片引用的路径前缀,结尾需要添加斜线-->
+<input type="hidden" id="static-path" value="{STATIC_PATH}"/>
+<!--接口地址前缀,结尾需要添加斜线-->
+<input type="hidden" id="api-path" value="{API_PATH}"/>
+
+<div id="cnt"></div>
+<script src="{STATIC_PATH}scripts/lib.js"></script>
+<script src="{STATIC_PATH}scripts/bundle.js"></script>
+
+</body>
+</html>
