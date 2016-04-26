@@ -360,7 +360,7 @@ const Address = React.createClass({
                 <div className="goods-adress-cnt"
                      style={{background:"#fff url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 30px 30px"}}>
                     <a href={"/delivery_address?productBizNo="+ getProductBizNo()}
-                       style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 671px center"}}>
+                       style={{background:"url("+STATIC_PATH+"images/ico-gray-right.jpg) no-repeat 671px center"}}>
                         <div className="inf">
                             <div className="receiver"><span>收货人：</span><span>{address.receiver}</span></div>
                             <div className="phone">{address.receiverPhone}</div>
