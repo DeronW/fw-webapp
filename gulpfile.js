@@ -23,14 +23,14 @@ gulp.task('build:mall', gulp.series(
         'pack:order-list',
         'pack:order-detail',
         'pack:order-confirm',
+        'pack:order-complete',
         'pack:product-detail',
         'pack:product-list',
         'pack:product-vip',
         'pack:deliver-address',
         'pack:new-deliver-address',
         'pack:waiting',
-        'pack:fail',
-        'pack:success'
+        'pack:fail'
     ],
     function (done) {
         gulp.src(['build/**']).pipe(gulp.dest('cdn'));

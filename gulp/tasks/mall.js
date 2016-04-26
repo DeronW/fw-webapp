@@ -8,12 +8,12 @@ var apps = [
     'order-list',
     'order-detail',
     'order-confirm',
+    'order-complete',
     'product-detail',
     'product-list',
     'product-vip',
     'waiting',
     'fail',
-    'success',
     'deliver-address',
     'new-deliver-address'
 ];
