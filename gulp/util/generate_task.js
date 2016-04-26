@@ -25,6 +25,7 @@ function generate_task(project_name, configs) {
         BUILD_PATH = 'build/' + project_name + '/',
         LIB_PATH = 'lib/',
         CONFIG = Object.assign({
+            debug: true,
             cmd_prefix: '', // 通用指令前缀，比如 pack:
             api_path: 'http://m.mall.9888.cn/',
             static_path: '../',
@@ -83,13 +84,16 @@ function generate_task(project_name, configs) {
 
     function compile_commonjs() {
         // common library
-        var lib_files = [
-            LIB_PATH + 'financial-workspace-0.1.0.js',
-            LIB_PATH + 'react-15.0.1/react.js',
-            LIB_PATH + 'react-15.0.1/react-dom.js',
-            LIB_PATH + 'native-bridge-0.1.0.js',
-            LIB_PATH + 'swipe.js'
-        ];
+        var lib_files = [LIB_PATH + 'financial-workspace-0.1.0.js'];
+        if (CONFIG.debug) {
+            lib_files.push(LIB_PATH + 'react-15.0.1/react.js');
+            lib_files.push(LIB_PATH + 'react-15.0.1/react-dom.js');
+        } else {
+            lib_files.push(LIB_PATH + 'react-15.0.1/react.min.js');
+            lib_files.push(LIB_PATH + 'react-15.0.1/react-dom.min.js');
+        }
+        lib_files.push(LIB_PATH + 'native-bridge-0.1.0.js');
+        lib_files.push(LIB_PATH + 'swipe.js');
 
         return gulp.src(lib_files)
             .pipe(plugins.changed(BUILD_PATH + 'scripts'))

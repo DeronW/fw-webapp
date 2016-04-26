@@ -384,9 +384,9 @@ $FW.DOMReady(function () {
         success: function (data) {
 
             var user = {
-                score: data.avaliablePoint,
+                score: data.avaliablePoint || 0,
                 bean: data.avaliableBeanBalanceYuan,
-                charge: data.availableCashBalance
+                charge: data.availableCashBalance || 0
             };
             var product = {
                 img: data.previewTitleImage,

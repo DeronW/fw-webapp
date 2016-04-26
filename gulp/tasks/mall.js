@@ -23,6 +23,7 @@ apps.forEach(function (i) {
         api_path: 'http://m2mall.9888.cn/'
     });
     gt(i, {
+        debug: false,
         cmd_prefix: 'pack:',
         api_path: 'http://mmall.9888.cn/',
         static_path: '/pages/' + i + '/',
