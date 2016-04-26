@@ -6,7 +6,6 @@ const API_PATH = document.getElementById('api-path').value;
 var query = $FW.Format.urlQuery();
 
 function submit() {
-    console.log(window.OrderFormData);
     $FW.Ajax({
         url: API_PATH + '/mall/api/order/v1/commit_pay_order.json',
         data: window.OrderFormData,
@@ -21,6 +20,7 @@ function submit() {
 }
 
 window.OrderFormData = {
+    sourceType: $FW.Browser.inIOS() ? 2 : ($FW.Browser.inAndroid() ? 1 : 0),
     buyNum: query.count || 1,
     useBean: true,
     payBeanPrice: null,
