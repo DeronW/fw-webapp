@@ -356,9 +356,10 @@ const Address = React.createClass({
 
         return (
             <div className="goods-adress">
-                <div className="goods-adress-h">收货地址</div>
-                <div className="goods-adress-cnt"
-                     style={{background:"#fff url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 30px 30px"}}>
+                <div className="goods-adress-h">
+                    收货地址
+                </div>
+                <div className="goods-adress-cnt">
                     <a href={"/delivery_address?productBizNo="+ getProductBizNo()}
                        style={{background:"url("+STATIC_PATH+"images/ico-gray-right.jpg) no-repeat 671px center"}}>
                         <div className="inf">
