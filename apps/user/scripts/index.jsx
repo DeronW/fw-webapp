@@ -10,7 +10,7 @@ const HomePage = React.createClass({
     render: function () {
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'我的商城'}/>}
+                {$FW.Browser.inApp() ? null : <Header title={'我的商城'} back_handler={function(){location.href = '/'}}/>}
                 <UserInfo
                     userAvatar={this.props.avatar}
                     userInfo={this.props.vip_level}
