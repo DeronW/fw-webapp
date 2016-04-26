@@ -98,7 +98,7 @@ const MallProducts = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'产品列表'}/>}
+                {$FW.Browser.inApp() ? null : <Header title={'豆哥商品'}/>}
                 <div className="productsTab" style={{top:$FW.Browser.inApp() ? "0" : "100px" }}>
                     {this.tabs.map(tab)}
                 </div>
@@ -148,7 +148,7 @@ window.Products = {
 };
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('产品列表');
+    NativeBridge.setTitle('豆哥商品');
     ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
 });
 
