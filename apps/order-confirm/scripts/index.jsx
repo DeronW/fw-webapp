@@ -14,7 +14,7 @@ function submit() {
             if (data.errMsg) {
                 alert(data.errMsg)
             } else {
-                console.log("make order success", data)
+                location.href = '/order/complete?id=' + data.orderId
             }
         }
     })

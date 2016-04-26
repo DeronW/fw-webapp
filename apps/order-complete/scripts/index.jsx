@@ -5,11 +5,11 @@ const API_PATH = document.getElementById('api-path').value;
 
 const Success = React.createClass({
     render: function () {
-        let data = this.props.data;
         return (
             <div>
+                {$FW.Browser.inApp() ? null : <Header title={'交易完成'}/>}
                 <div className="success-banner"
-                     style={{background:"url("+STATIC_PATH+"images/success-banner.jpg) no-repeat center 99px"}}>
+                     style={{background:"url("+STATIC_PATH+"images/success-banner.jpg) no-repeat center center"}}>
                     <div className="success-text"
                          style={{background:"url("+STATIC_PATH+"images/circle-white-right.png) no-repeat 80px 80px"}}>
                         订单状态:已付款
@@ -19,35 +19,43 @@ const Success = React.createClass({
                     <div className="addr-box"
                          style={{background:"url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 10px 27px"}}>
                         <div className="addr">
-                            <div className="receiver">收货人:{data.name}</div>
-                            <div className="phone">{data.phone}</div>
+                            <div className="receiver">收货人:{this.props.receiver}</div>
+                            <div className="phone">{this.props.phone}</div>
                         </div>
-                        <div className="detail">收货地址：{data.addr}</div>
+                        <div className="detail">收货地址：{this.props.addr}</div>
                     </div>
                     <div className="pay">
-                        支付：<span>&yen;{data.price}</span>{data.score ?
-                        <span className="score"> + {data.score}工分</span> : ""}{data.coupon ?
-                        <span className="coupons"> + 兑换券 X{data.coupon}</span> : ""}
+                        支付：<span>&yen;{this.props.price}</span>
+                        {this.props.score ? <span className="score"> + {this.props.score}工分</span> : null}
+                        {this.props.voucher_count ?
+                            <span className="coupons"> + 兑换券 &times; {this.props.voucher_count}</span> : null}
                     </div>
                 </div>
                 <div className="success-btn">
-                    <a href="#" className="success-btn1">查看订单</a>
-                    <a href="#" className="success-btn2">返回商城</a>
+                    <a href={"/order/detail?order_id=" + this.props.order_id} className="success-btn1">查看订单</a>
+                    <a href="/" className="success-btn2" style={{display: "none"}}>返回商城</a>
                 </div>
             </div>
         )
     }
 });
-var data = {
-    receiver: "阿卡了解到",
-    phone: 13512345678,
-    addr: "北京市西城区金融街街道宣武门西大街129号金隅大厦1201室",
-    price: 100,
-    score: 200,
-    coupon: 4
-};
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Success data={data}/>, document.getElementById('cnt'));
-    NativeBridge.setTitle('成功');
+    NativeBridge.setTitle('交易成功');
+    let order_id = $FW.Format.urlQuery().id;
+
+    $FW.Ajax({
+        url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
+        success: function (data) {
+            ReactDOM.render(<Success
+                order_id={order_id}
+                receiver={data.shipping_info.username}
+                phone={data.shipping_info.phone}
+                address={data.shipping_info.address}
+                price={data.payment.money}
+                score={data.payment.score}
+                voucher_count={data.order.ticket_num}
+            />, document.getElementById('cnt'));
+        }
+    });
 });
