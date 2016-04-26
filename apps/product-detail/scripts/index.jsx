@@ -11,7 +11,7 @@ const Product = React.createClass({
 
     render: function () {
         let data = this.props.data;
-        let score = data.score ? <span className="score"> + {data.score}分</span> : "";
+        let score = data.score ? <span className="score"> + {data.score}工分</span> : "";
         let markList = (list, index)=><div key={index}>{list}</div>;
         let desc = null;
 
