@@ -57,6 +57,11 @@ const ConfirmOrder = React.createClass({
         this.setState({value: e.target.value})
     },
     makeOrderHandler: function () {
+        if (!window.OrderFormData.sms_code) {
+            alert('请新填写手机验证码');
+            return;
+        }
+
         $FW.Ajax({
             url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
             method: 'post',
