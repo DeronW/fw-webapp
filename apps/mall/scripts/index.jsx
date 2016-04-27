@@ -161,6 +161,7 @@ $FW.DOMReady(function () {
         API_PATH + 'mall/api/index/v1/activities.json' // 明前活动的数据
     ], function (data) {
         var banners = data[0].banners, activities = data[1].activities;
+        if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') alert('error: empty data received');
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
         NativeBridge.ajaxComplete();
     });
