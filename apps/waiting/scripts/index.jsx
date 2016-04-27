@@ -4,6 +4,9 @@ const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const Waiting = React.createClass({
+    getInitialState: function () {
+        return {}
+    },
     render: function () {
         let style_a = {
             display: "block",

@@ -71,6 +71,7 @@ function generate_task(project_name, configs) {
     function compile_scripts() {
         return gulp.src([
                 LIB_PATH + 'components/header.jsx',
+                LIB_PATH + 'components/alert.jsx',
                 APP_PATH + 'scripts/components/*.jsx',
                 APP_PATH + 'scripts/index.jsx'
             ])
