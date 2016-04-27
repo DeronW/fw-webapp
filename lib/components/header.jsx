@@ -37,7 +37,7 @@ const Header = React.createClass({
         let style_c = {
             display: "block",
             position: "absolute",
-            width: this.state.height * 0.8 + "px",
+            width: this.state.height + "px",
             height: this.state.height + "px",
             lineHeight: this.state.height + "px",
             fontFamily: "serif",
@@ -54,7 +54,7 @@ const Header = React.createClass({
             width: "6px",
             height: this.state.height / 4 + "px",
             transform: "rotate(45deg)",
-            top: "28px",
+            top: "30px",
             left: "50px",
             background: "#536f95"
         };
@@ -63,7 +63,7 @@ const Header = React.createClass({
             width: "6px",
             height: this.state.height / 4 + "px",
             transform: "rotate(135deg)",
-            top: "42px",
+            top: "44px",
             left: "50px",
             background: '#536f95'
         };
