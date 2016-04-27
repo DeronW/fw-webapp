@@ -37,21 +37,44 @@ const Header = React.createClass({
         let style_c = {
             display: "block",
             position: "absolute",
-            width: this.state.height + "px",
+            width: this.state.height * 0.8 + "px",
             height: this.state.height + "px",
             lineHeight: this.state.height + "px",
             fontFamily: "serif",
             fontSize: fontSize,
             fontWeight: 'bold',
             color: "#536f95",
+            overflow: "hidden",
             left: "0px",
             top: "0px"
+        };
+
+        let style_arm_up = {
+            position: "absolute",
+            width: "6px",
+            height: this.state.height / 4 + "px",
+            transform: "rotate(45deg)",
+            top: "28px",
+            left: "50px",
+            background: "#536f95"
+        };
+        let style_arm_down = {
+            position: "absolute",
+            width: "6px",
+            height: this.state.height / 4 + "px",
+            transform: "rotate(135deg)",
+            top: "42px",
+            left: "50px",
+            background: '#536f95'
         };
 
         return (
             <div style={style_a}>
                 <div style={style_b}>
-                    <div style={style_c} onClick={this.backClickHandler}>&lt;</div>
+                    <div style={style_c} onClick={this.backClickHandler}>
+                        <div style={style_arm_up}></div>
+                        <div style={style_arm_down}></div>
+                    </div>
                     {this.state.title}
                 </div>
             </div>
