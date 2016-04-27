@@ -23,9 +23,10 @@ const HomePage = React.createClass({
 
                 <Account
                     money={this.props.money}
-
                     voucher_count={this.props.voucher_count}
                     score={this.props.score}
+                    disable_score={this.props.disable_score}
+                    show_score={this.props.isOpenJiFenLevel}
                     bean={this.props.bean}
                 />
 
@@ -130,6 +131,18 @@ const DeliveryProcessList = React.createClass({
 
 const Account = React.createClass({
     render: function () {
+
+        let score = null;
+        if (this.props.show_score) {
+            return (
+                <div>
+                    <span className="l-text">工分</span>
+                    {this.props.disable_score ?
+                        <span className="r-text" style={{color: "red"}}>(已禁用)</span> : null}
+                    <span className="r-text">{$FW.Format.currency(this.props.score)}工分</span>
+                </div>
+            )
+        }
         return (
             <div>
                 <div className="my-account-block">
@@ -143,15 +156,10 @@ const Account = React.createClass({
                             <span className="l-text">优惠券</span>
                             <span className="r-text">{this.props.voucher_count}张</span>
                         </div>
-                        <div>
-                            <span className="l-text">工分</span>
-                            {this.props.disable_score || true ?
-                                <span className="r-text" style={{color: "red"}}>(已禁用)</span> : null}
-                            <span className="r-text">{$FW.Format.currency(this.props.score)}工分</span>
-                        </div>
+                        {score}
                         <div>
                             <span className="l-text">工豆</span>
-                            <span className="r-text">￥{$FW.Format.currency(this.props.bean)}</span>
+                            <span className="r-text">&yen;{$FW.Format.currency(this.props.bean)}</span>
                         </div>
                     </div>
                 </div>

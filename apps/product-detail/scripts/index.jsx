@@ -32,12 +32,20 @@ const Product = React.createClass({
             </div>
         }
 
+        let operators = null;
+        if (data.operators) {
+            operators = <div className="detail-inf1">
+                <div className="operators">运营商：</div>
+                <div className="operators-name">{data.operators}</div>
+            </div>
+        }
+
         return (
             <div className="detail-box">
                 {$FW.Browser.inApp() ? null : <Header title={'商品详情'} background={'transparent'}/>}
 
-                {this.props.data.head_images.length ?
-                    <CarouselDetail head_images={this.props.data.head_images}/> :
+                {data.head_images && data.head_images.length ?
+                    <CarouselDetail head_images={data.head_images}/> :
                     <div className="no-head-images">暂无图片</div>}
 
                 <div className="detail-inf">
@@ -68,13 +76,10 @@ const Product = React.createClass({
                             <span>全国</span>
                         </div>
                     </div>
-                    <div className="detail-inf1">
-                        <div className="operators">运营商：</div>
-                        <div className="operators-name">{data.operators}</div>
-                    </div>
+                    {operators}
                 </div>
                 <div className="detail-mark">
-                    {data.tags.map(markList)}
+                    {(data.tags ? data.tags : []).map(markList)}
                 </div>
                 {desc}
                 {rich_detail}
@@ -193,10 +198,8 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         success: function (data) {
-            if (!data) {
-                alert('这个产品没有任何详情');
-                return;
-            }
+            if (!data.title) alert('这个产品没有任何详情');
+
             ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
             NativeBridge.ajaxComplete();
         }
