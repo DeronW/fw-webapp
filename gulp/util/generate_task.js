@@ -96,7 +96,7 @@ function generate_task(project_name, configs) {
             lib_files.push(LIB_PATH + 'react-15.0.1/react-dom.min.js');
         }
         lib_files.push(LIB_PATH + 'native-bridge-0.1.0.js');
-        lib_files.push(LIB_PATH + 'swipe.js');
+        lib_files.push(LIB_PATH + 'javascripts/swipe-2.0.0.js');
 
         return gulp.src(lib_files)
             .pipe(plugins.changed(BUILD_PATH + 'scripts'))

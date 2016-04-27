@@ -18,6 +18,9 @@ const Mall = React.createClass({
         }
         gotoHandler(link)
     },
+    redirectToHomeHandler: function () {
+        location.href = 'http://m.9888.cn'
+    },
     render: function () {
         let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                                       activity_id={i.activity_id}
@@ -26,7 +29,7 @@ const Mall = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={"豆哥商城"}/>}
+                {$FW.Browser.inApp() ? null : <Header title={"豆哥商城"} back_handler={this.redirectToHomeHandler}/>}
                 {this.props.banners.length ?
                     <Carousel banners={this.props.banners}/> :
                     <div className="no-banner"
@@ -60,6 +63,7 @@ const Carousel = React.createClass({
     },
 
     changeCurrentIndex: function (index) {
+        if (this.state.banners.length == 2) index = index % 2;
         this.setState({cur_index: index})
     },
 
@@ -72,7 +76,7 @@ const Carousel = React.createClass({
 
         return (
             <div className="banner-carousel">
-                <ReactSwipe wrapperClassName={'wrap'} auto={3000} speed={1000} callback={this.changeCurrentIndex}>
+                <ReactSwipe wrapperClassName={'wrap'} speed={1000} callback={this.changeCurrentIndex}>
                     {this.state.banners.map(ba) }
                 </ReactSwipe>
                 <div className="points">
