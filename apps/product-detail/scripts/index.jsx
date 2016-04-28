@@ -13,21 +13,22 @@ const Product = React.createClass({
         let data = this.props.data;
         let score = data.score ? <span className="score"> + {data.score}工分</span> : "";
         let markList = (list, index)=><div key={index}>{list}</div>;
-        let desc = null;
+        let activity_desc = null;
 
-        if (data.desc) {
+        if (data.activity_desc) {
             let text = (i, index) => <div key={index}>{i}</div>;
-            desc = (
+            activity_desc = (
                 <div className="detail-explain">
                     <div className="detail-explain-h">活动说明</div>
-                    <div className="detail-explain-cont">{data.desc.split(/[;|；]/).map(text)}</div>
+                    <div className="detail-explain-cont">{data.activity_desc.split(/[;|；]/).map(text)}</div>
                 </div>
             )
         }
 
         let rich_detail = null;
-        if (data.rich_detail && data.rich_detail.length) {
+        if (data.desc || (data.rich_detail && data.rich_detail.length)) {
             rich_detail = <div className="detail-des">
+                {data.desc ? <div className="desc">{data.desc}</div> : null}
                 {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
             </div>
         }
@@ -81,7 +82,7 @@ const Product = React.createClass({
                 <div className="detail-mark">
                     {(data.tags ? data.tags : []).map(markList)}
                 </div>
-                {desc}
+                {activity_desc}
                 {rich_detail}
                 <PlusMinus stock={data.stock}/>
             </div>
@@ -200,7 +201,6 @@ $FW.DOMReady(function () {
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         success: function (data) {
             if (!data.title) alert('这个产品没有任何详情');
-
             ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
             NativeBridge.ajaxComplete();
         }
