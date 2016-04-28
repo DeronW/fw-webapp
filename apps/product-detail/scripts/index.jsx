@@ -20,7 +20,7 @@ const Product = React.createClass({
             activity_desc = (
                 <div className="detail-explain">
                     <div className="detail-explain-h">活动说明</div>
-                    <div className="detail-explain-cont">{data.activity_desc.split(/[;|；]/).map(text)}</div>
+                    <div className="detail-explain-cont">{data.activity_desc.toString().split(/[;|；]/).map(text)}</div>
                 </div>
             )
         }

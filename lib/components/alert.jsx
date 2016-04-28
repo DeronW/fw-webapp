@@ -8,7 +8,7 @@
  hide_callback 隐藏之后的回调
  */
 
-const Alert = React.createClass({
+const GlobalAlert = React.createClass({
     getInitialState: function () {
         return {
             show: true
