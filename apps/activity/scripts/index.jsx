@@ -6,7 +6,8 @@ const API_PATH = document.getElementById('api-path').value;
 const MallActivity = React.createClass({
     render: function () {
         let img = this.props.activity.img ?
-            <a href="#" className="act-img-detail"><img src={this.props.activity.img || STATIC_PATH + 'images/default-banner.jpg'}/></a> :
+            <a href="#" className="act-img-detail"><img
+                src={this.props.activity.img || STATIC_PATH + 'images/default-banner.jpg'}/></a> :
             null;
 
         return (
@@ -61,7 +62,7 @@ const ProductList = React.createClass({
         let aid = $FW.Format.urlQuery().activity_id;
 
         $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/products.json?activityId='+aid+'&count=20&page=' + this.state.page,
+            url: API_PATH + 'mall/api/index/v1/products.json?activityId=' + aid + '&count=20&page=' + this.state.page,
             success: function (data) {
                 this.setState({
                     products: this.state.products.concat(data.products),
@@ -86,10 +87,11 @@ const ProductItem = React.createClass({
         var price = (parseFloat(this.props.score) > 0) ? (
             <span className="list-price-score">&#43;{this.props.score}分</span>) : null;
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
+        var cover_bg = 'url(' + (this.props.img || STATIC_PATH + 'images/default-product.jpg') + ')';
 
         return (
             <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
-                <div className="list-img"><img src={this.props.img}/></div>
+                <div className="list-img" style={{backgroundImage: cover_bg}}></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
                 <div className="list-mark">
@@ -125,6 +127,6 @@ $FW.DOMReady(function () {
     });
 });
 
-window.onNativeMessageReceive = function(msg){
-    if(msg == 'history:back') location.href = '/user';
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back') location.href = '/user';
 };

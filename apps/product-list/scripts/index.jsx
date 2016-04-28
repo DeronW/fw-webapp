@@ -116,10 +116,11 @@ const ProductItem = React.createClass({
         var price = (parseFloat(this.props.score) > 0) ? (
             <span className="list-price-score">&#43;{this.props.score}分</span>) : null;
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
+        var cover_bg = 'url(' + (this.props.img || STATIC_PATH + 'images/default-product.jpg') + ')';
 
         return (
             <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
-                <div className="list-img"><img src={this.props.img || STATIC_PATH + 'images/default-product.jpg'}/></div>
+                <div className="list-img" style={{backgroundImage: cover_bg}}></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
                 <div className="list-mark">
