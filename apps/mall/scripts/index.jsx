@@ -124,7 +124,7 @@ const TextBar = React.createClass({
 const ProductItem = React.createClass({
     render: function () {
         var price = (parseFloat(this.props.score) > 0) ? (
-            <span className="list-price-score">&#43;{this.props.score}分</span>) : "";
+            <span className="list-price-score">&#43;{this.props.score}工分</span>) : "";
 
         let Angle = this.props.angle_text ?
             <div className={"list-label " + this.props.angle_type}>{this.props.angle_text}</div> :
