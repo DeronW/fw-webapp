@@ -8,9 +8,9 @@ const GlobalLoading = React.createClass({
     getInitialState: function () {
         return {}
     },
-    hideHandler: function () {
+    componentWillUnmount: function () {
+        this.props.unMountHandler && this.props.unMountHandler();
     },
-
     render: function () {
         return (
             <div className="global-ajax-loading">
