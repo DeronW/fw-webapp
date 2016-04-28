@@ -14,6 +14,7 @@ const GlobalLoading = React.createClass({
     render: function () {
         return (
             <div className="global-ajax-loading">
+                <div className="bg"></div>
                 <div className="loader">Loading...</div>
             </div>
         )

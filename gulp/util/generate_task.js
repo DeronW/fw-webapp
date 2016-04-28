@@ -16,7 +16,7 @@ plugins.swig = require('gulp-swig');
 plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
 plugins.sourcemaps = require('gulp-sourcemaps');
-plugins.rename = require('gulp-rename');
+//plugins.rename = require('gulp-rename');
 plugins.replace = require('gulp-replace');
 
 // project_name 每次使用新项目时, 只需要更换项目名称
@@ -61,13 +61,13 @@ function generate_task(project_name, configs) {
 
     function compile_styles() {
         return gulp.src([
-                //LIB_PATH + 'less/loading.less',
+                LIB_PATH + 'less/loading.less',
                 APP_PATH + 'less/index.less'
             ])
             .pipe(plugins.changed(BUILD_PATH + 'css'))
             .pipe(plugins.less())
             .pipe(plugins.cssnano())
-            .pipe(plugins.rename('all.css'))
+            .pipe(plugins.concat('all.css'))
             .pipe(gulp.dest(BUILD_PATH + 'css'));
     }
 
