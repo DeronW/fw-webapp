@@ -16,7 +16,7 @@ const Product = React.createClass({
         let activity_desc = null;
 
         if (data.activity_desc) {
-            let text = (i, index) => <div key={index}>{i}</div>;
+            let text = (i, index) => <div key={index}>{trim(i)}</div>;
             activity_desc = (
                 <div className="detail-explain">
                     <div className="detail-explain-h">活动说明</div>
@@ -213,3 +213,7 @@ $FW.DOMReady(function () {
 window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') history.back();
 };
+
+function trim(s) {
+    return s.replace(/(^\s*)|(\s*$)/g, '')
+}

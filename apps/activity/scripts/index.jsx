@@ -33,7 +33,7 @@ MallActivity.Explain = React.createClass({
         if (this.state.show) {
             desc = (
                 <div className="act-explain-cont show">
-                    { this.props.desc.split(/[;|；]/).map((i, index) => <div key={index}>{i}</div>) }
+                    { this.props.desc.split(/[;|；]/).map((i, index) => <div key={index}>{trim(i)}</div>) }
                 </div>
             )
         }
@@ -130,3 +130,7 @@ $FW.DOMReady(function () {
 window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') location.href = '/user';
 };
+
+function trim(s){
+    return s.replace(/(^\s*)|(\s*$)/g, '')
+}
