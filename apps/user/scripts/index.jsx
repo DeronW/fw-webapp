@@ -255,32 +255,31 @@ const MyVoucher = React.createClass({
 
 const Voucher = React.createClass({
     render: function () {
-        let img = (src) => <img src={STATIC_PATH + src}/>;
+        // data.mark, 兑换券状态  0-未上架 1-已上架 2-已下架 3是已删除
+
+        let data = this.props.data;
 
         return (
             <div className="my-voucher-cont-list">
-                <div className={this.props.data.mark >= 2 ? "t-info b-color" : "t-info"}>
+                <div className={data.mark >= 2 ? "t-info b-color" : "t-info"}>
                     <div className="title-info">
-                        <h2 className="title-text">{this.props.data.title}</h2>
-                        <span className="money-text">&yen;{this.props.data.price}</span>
+                        <h2 className="title-text">{data.title}</h2>
+                        <span className="money-text">&yen;{data.price}</span>
                     </div>
                     <div className="clear-info">
-                        <span className="text">来源 {this.props.data.type}</span>
-                        <span className="text-timer">有效目期<em>{this.props.data.indate}</em></span>
+                        <span className="text">来源 {data.type}</span>
+                        <span className="text-timer">有效目期<em>{data.indate}</em></span>
                     </div>
                 </div>
 
                 <div className="b-info">
-                    <span className="text">备注:<em>{this.props.data.comment}</em></span>
+                    <span className="text">备注:<em>{data.comment}</em></span>
                 </div>
 
                 <div className="my-vorcher-mark">
-                    {this.props.data.mark == 0 ? img("images/mark-delete.png") : null}
-                    {this.props.data.mark == 2 ? img("images/mark-used.png") : null}
-                    {this.props.data.mark == 3 ? img("images/mark-expired.png") : null}
+                    <img src={STATIC_PATH + 'images/mark-' + data.mark + '.png'}/>
                 </div>
             </div>
-
         )
     }
 });
