@@ -134,7 +134,7 @@ const Account = React.createClass({
 
         let score = null;
         if (this.props.show_score) {
-            return (
+            score = (
                 <div>
                     <span className="l-text">工分</span>
                     {this.props.disable_score ?
