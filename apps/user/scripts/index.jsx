@@ -13,7 +13,7 @@ const HomePage = React.createClass({
                 {$FW.Browser.inApp() ? null : <Header title={'我的商城'} back_handler={function(){location.href = '/'}}/>}
                 <UserInfo
                     userAvatar={this.props.avatar}
-                    userInfo={this.props.vip_level}
+                    user_level={this.props.vip_level}
                     userName={this.props.username}
 
                     prepareCount={this.props.prepare_count}
@@ -38,6 +38,10 @@ const HomePage = React.createClass({
 
 const UserInfo = React.createClass({
     render: function () {
+        let user_level = this.props.user_level == 1 ?
+            <span style={{color: 'gray'}}>普通用户</span> :
+            <em className="vip-text">VIP{this.props.user_level - 1}</em>;
+
         return (
             <div>
                 <div className="user-area">
@@ -52,7 +56,7 @@ const UserInfo = React.createClass({
                             </div>
 
                             <div className="usr-info-vip">
-                                <span className="text">会员等级<em className="vip-text">VIP{this.props.userInfo}</em></span>
+                                <span className="text">会员等级{user_level}</span>
                             </div>
                         </div>
                     </div>
