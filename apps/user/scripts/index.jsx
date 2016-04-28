@@ -259,6 +259,13 @@ const Voucher = React.createClass({
 
         let data = this.props.data;
 
+        let watermark = null;
+        if (data.mark) {
+            watermark = <div className="my-vorcher-mark">
+                <img src={STATIC_PATH + 'images/mark-' + data.mark + '.png'}/>
+            </div>;
+        }
+
         return (
             <div className="my-voucher-cont-list">
                 <div className={data.mark >= 2 ? "t-info b-color" : "t-info"}>
@@ -275,10 +282,7 @@ const Voucher = React.createClass({
                 <div className="b-info">
                     <span className="text">备注:<em>{data.comment}</em></span>
                 </div>
-
-                <div className="my-vorcher-mark">
-                    <img src={STATIC_PATH + 'images/mark-' + data.mark + '.png'}/>
-                </div>
+                {watermark}
             </div>
         )
     }
