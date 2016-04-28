@@ -125,7 +125,7 @@ const OrderBlock = React.createClass({
                                 { product.tags.length != 0 ? tags(product.tags) : null }
                             </div>
                             <div className="commodity-number">
-                                <span className="money-text">￥{product.price} + {product.score}分</span>
+                                <span className="money-text">&yen;{product.price} + {product.score}工分</span>
                                 <span className="number-text">X{product.count}</span>
                             </div>
                         </div>

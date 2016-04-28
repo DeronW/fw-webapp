@@ -85,7 +85,7 @@ const ProductList = React.createClass({
 const ProductItem = React.createClass({
     render: function () {
         var price = (parseFloat(this.props.score) > 0) ? (
-            <span className="list-price-score">&#43;{this.props.score}分</span>) : null;
+            <span className="list-price-score">&#43;{this.props.score}工分</span>) : null;
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
         var cover_bg = 'url(' + (this.props.img || STATIC_PATH + 'images/default-product.jpg') + ')';
 
