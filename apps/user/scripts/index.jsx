@@ -159,7 +159,7 @@ const Account = React.createClass({
                         {score}
                         <div>
                             <span className="l-text">工豆</span>
-                            <span className="r-text">&yen;{$FW.Format.currency(this.props.bean)}</span>
+                            <span className="r-text">&yen;{$FW.Format.currency(this.props.bean / 100.0)}</span>
                         </div>
                     </div>
                 </div>
