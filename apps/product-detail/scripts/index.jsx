@@ -28,8 +28,11 @@ const Product = React.createClass({
         let rich_detail = null;
         if (data.desc || (data.rich_detail && data.rich_detail.length)) {
             rich_detail = <div className="detail-des">
-                {data.desc ? <div className="desc">{data.desc}</div> : null}
-                {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
+                <div className="title">商品详情</div>
+                <div className="product-content">
+                    {data.desc ? <div className="desc">{data.desc}</div> : null}
+                    {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
+                </div>
             </div>
         }
 
