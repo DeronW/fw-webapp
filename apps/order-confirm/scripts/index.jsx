@@ -298,14 +298,15 @@ ConfirmOrder.VoucherModal = React.createClass({
 
         let voucher = function (data, index) {
             let checkImg = _this.state.checked_voucher[data.id] ? 'red-right' : 'gray-block';
-
+            let date = new Date(parseInt(data.endTime));
+            date = date.toLocaleDateString().replace('/', '-');
             return (
                 <div className="li" key={index}
                      onClick={function(){_this.ToggleCoupons(data.id) }}>
                     <div className="chose"
                          style={{background:"url("+STATIC_PATH+"images/"+checkImg+".png) no-repeat 0 center"}}></div>
                     <div className="name">{data.productName}</div>
-                    <div className="date">{data.endTime}</div>
+                    <div className="date">{date}</div>
                 </div>
             )
         };
