@@ -267,16 +267,18 @@ const Voucher = React.createClass({
 
         return (
             <div className="my-voucher-cont-list">
-                <div className={data.mark >= 2 ? "t-info b-color" : "t-info"}>
-                    <div className="title-info">
-                        <h2 className="title-text">{data.title}</h2>
-                        <span className="money-text">&yen;{data.price}</span>
+                <a href={data.product_biz_no ?  '/productDetail?bizNo=' + data.product_biz_no : null}>
+                    <div className={data.mark >= 2 ? "t-info b-color" : "t-info"}>
+                        <div className="title-info">
+                            <h2 className="title-text">{data.title}</h2>
+                            <span className="money-text">&yen;{data.price}</span>
+                        </div>
+                        <div className="clear-info">
+                            <span className="text">来源 {data.type}</span>
+                            <span className="text-timer">有效目期<em>{data.indate}</em></span>
+                        </div>
                     </div>
-                    <div className="clear-info">
-                        <span className="text">来源 {data.type}</span>
-                        <span className="text-timer">有效目期<em>{data.indate}</em></span>
-                    </div>
-                </div>
+                </a>
 
                 <div className="b-info">
                     <span className="text">备注:<em>{data.comment}</em></span>

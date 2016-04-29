@@ -28,7 +28,7 @@ const DeliverAddress = React.createClass({
                      style={{background:"#fff url("+STATIC_PATH+"images/"+(index == _this.state.cur_index ? "checked-circle" :"check-circle")+".png) no-repeat 20px center"}}
                 >
                     <a href={link}>
-                        <div className="username">{i.username}</div>
+                        <div className="username">{i.username} {i.isDefault ? <span>(默认)</span> : null}</div>
                         <div className="phone">{i.phone}</div>
                         <div className="address">{i.address}</div>
                     </a>
@@ -57,15 +57,16 @@ const DeliverAddress = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.ajaxStart();
     NativeBridge.setTitle('我的收货地址');
 
+    $FW.Component.showAjaxLoading();
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/delivery_address.json',
         success: function (data) {
+            $FW.Component.hideAjaxLoading();
             let preview = $FW.Format.urlQuery().preview == 'true';
-            ReactDOM.render(<DeliverAddress address={data.address_list} preview={preview}/>, document.getElementById('cnt'));
-            NativeBridge.ajaxComplete();
+            ReactDOM.render(<DeliverAddress address={data.address_list} preview={preview}/>,
+                document.getElementById('cnt'));
         }
     });
 
@@ -74,6 +75,6 @@ $FW.DOMReady(function () {
     }
 });
 
-window.onNativeMessageReceive = function(msg){
-    if(msg == 'history:back') location.href = '/user';
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back') location.href = '/user';
 };
