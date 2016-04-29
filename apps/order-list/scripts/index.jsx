@@ -18,15 +18,21 @@ const NavTitle = React.createClass({
 
 const OrderMain = React.createClass({
     getInitialState: function () {
+        var index = 0;
+        if (location.hash == '#prepare') {
+            index = 1
+        } else if (location.hash == '#shipping') {
+            index = 2
+        } else if (location.hash == '#complete') {
+            index = 3
+        }
         return {
-            index: 0,
+            index: index,
             voucherName: ["全部", "待发货", "待收货", "已完成"]
         };
     },
     clickHandler: function (index) {
-        this.setState({
-            index: index
-        });
+        this.setState({index: index});
     },
 
     render: function () {

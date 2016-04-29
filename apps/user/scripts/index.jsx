@@ -103,28 +103,25 @@ const DeliveryProcessList = React.createClass({
         return (
             <div className="delivery-list">
                 <div className="info-block">
-                    <i className="icon">
+                    <a className="icon" href="/order/mine#prepare">
                         <img src={STATIC_PATH + "images/shopping-ship-icon.png"}/>
-                    </i>
-
-                    {this.props.perpareCount >= 1 ? marKion(this.props.perpareCount) : null }
-                    <span className="text">待发货</span>
+                        {this.props.perpareCount >= 1 ? marKion(this.props.perpareCount) : null }
+                        <span className="text">待发货</span>
+                    </a>
                 </div>
                 <div className="info-block">
-                    <i className="icon">
+                    <a className="icon" href="/order/mine#shipping">
                         <img src={STATIC_PATH +"images/shopping-conduct-icon.png"}/>
-                    </i>
-
-                    {this.props.shippingCount >= 1 ? marKion(this.props.shippingCount) : null }
-                    <span className="text">待收货</span>
+                        {this.props.shippingCount >= 1 ? marKion(this.props.shippingCount) : null }
+                        <span className="text">待收货</span>
+                    </a>
                 </div>
                 <div className="info-block">
-                    <i className="icon">
+                    <a className="icon" href="/order/mine#complete">
                         <img src={STATIC_PATH +"images/shopping-complete-icon.png"}/>
-                    </i>
-
-                    {this.props.completeCount >= 1 ? marKion(this.props.completeCount) : null }
-                    <span className="text">已完成</span>
+                        {this.props.completeCount >= 1 ? marKion(this.props.completeCount) : null }
+                        <span className="text">已完成</span>
+                    </a>
                 </div>
             </div>
         );
