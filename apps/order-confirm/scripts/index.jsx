@@ -6,10 +6,12 @@ const API_PATH = document.getElementById('api-path').value;
 var query = $FW.Format.urlQuery();
 
 function submit() {
+    $FW.Component.showAjaxLoading();
     $FW.Ajax({
         url: API_PATH + '/mall/api/order/v1/commit_pay_order.json',
         data: window.OrderFormData,
         success: function (data) {
+            $FW.Component.hideAjaxLoading();
             if (data.errMsg) {
                 alert(data.errMsg)
             } else {
