@@ -38,7 +38,7 @@ const HomePage = React.createClass({
 const UserInfo = React.createClass({
     render: function () {
         let user_level = this.props.user_level == 1 ?
-            <span style={{color: 'gray'}}>普通用户</span> :
+            <span style={{color: 'gray'}}>VIP1</span> :
             <em className="vip-text">VIP{this.props.user_level - 1}</em>;
 
         return (

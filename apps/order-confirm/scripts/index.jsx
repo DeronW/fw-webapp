@@ -137,7 +137,8 @@ ConfirmOrder.Product = React.createClass({
                     </div>
                     <div className="price-box">
                         <span>&yen;</span><span>{p.price}</span>
-                        { p.score ? <span> + {p.score}工分</span> : null }
+                        { p.score ? <span>+</span> : null }
+                        { p.score ? <span>{p.score}工分</span> : null }
                     </div>
                 </div>
                 <div className="num-box">
