@@ -238,7 +238,7 @@ $FW.DOMReady(function () {
     });
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"商品详情"} background={'transparent'}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"商品详情"} />, document.getElementById('header'));
     }
 });
 

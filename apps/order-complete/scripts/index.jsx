@@ -21,7 +21,7 @@ const Success = React.createClass({
                             <div className="receiver">收货人:{this.props.receiver}</div>
                             <div className="phone">{this.props.phone}</div>
                         </div>
-                        <div className="detail">收货地址：{this.props.addr}</div>
+                        <div className="detail">收货地址：{this.props.address}</div>
                     </div>
                     <div className="pay">
                         支付：<span>&yen;{this.props.price}</span>

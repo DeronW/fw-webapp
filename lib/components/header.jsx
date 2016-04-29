@@ -8,7 +8,7 @@ const Header = React.createClass({
         let height = parseInt(this.props.height) || 100;
         return {
             height: height,
-            background: this.props.background || "#ebebee",
+            background: this.props.background || 'white',
             title: this.props.title
         }
     },
