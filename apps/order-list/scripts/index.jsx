@@ -42,7 +42,6 @@ const OrderMain = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'订单详情'}/>}
                 <div className="ui-tab">
                     <div> {this.state.voucherName.map(btnVoucher)} </div>
                 </div>
@@ -171,6 +170,11 @@ $FW.DOMReady(function () {
             NativeBridge.ajaxComplete();
         }
     });
+
+
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={"我的订单"}/>, document.getElementById('header'));
+    }
 });
 
 window.onNativeMessageReceive = function (msg) {

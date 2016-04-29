@@ -98,7 +98,6 @@ const MallProducts = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'豆哥商品'}/>}
                 <div className="productsTab" style={{top:$FW.Browser.inApp() ? "0" : "100px" }}>
                     {this.tabs.map(tab)}
                 </div>
@@ -151,6 +150,10 @@ window.Products = {
 $FW.DOMReady(function () {
     NativeBridge.setTitle('豆哥商品');
     ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
+
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={"豆哥商品"}/>, document.getElementById('header'));
+    }
 });
 
 window.onNativeMessageReceive = function (msg) {

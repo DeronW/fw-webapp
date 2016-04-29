@@ -8,7 +8,6 @@ const OrderDetail = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'创建收货地址'}/>}
                 <OrderStatusList
                     shippingInfo={this.props.shipping_info}
                     distributionName={this.props.distribution}
@@ -222,6 +221,11 @@ $FW.DOMReady(function () {
             NativeBridge.ajaxComplete();
         }
     });
+
+
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={"订单详情"}/>, document.getElementById('header'));
+    }
 });
 
 window.onNativeMessageReceive = function (msg) {

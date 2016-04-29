@@ -18,9 +18,6 @@ const Mall = React.createClass({
         }
         gotoHandler(link)
     },
-    redirectToHomeHandler: function () {
-        location.href = 'http://m.9888.cn'
-    },
     render: function () {
         let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                                       activity_id={i.activity_id}
@@ -29,7 +26,6 @@ const Mall = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={"豆哥商城"} back_handler={this.redirectToHomeHandler}/>}
                 {this.props.banners.length ?
                     <Carousel banners={this.props.banners}/> :
                     <div className="no-banner"
@@ -169,4 +165,9 @@ $FW.DOMReady(function () {
         if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') alert('error: empty data received');
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
     });
+
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={"豆哥商城"} back_handler={ () => location.href = 'http://m.9888.cn' }/>,
+            document.getElementById('header'));
+    }
 });

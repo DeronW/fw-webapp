@@ -46,8 +46,6 @@ const Product = React.createClass({
 
         return (
             <div className="detail-box">
-                {$FW.Browser.inApp() ? null : <Header title={'商品详情'} background={'transparent'}/>}
-
                 {data.head_images && data.head_images.length ?
                     <Carousel head_images={data.head_images}/> :
                     <div className="no-head-images">暂无图片</div>}
@@ -73,7 +71,7 @@ const Product = React.createClass({
                     <div className="detail-inf1">
                         <div className="market-price">
                             <span>快递：</span>
-                            <span>免快递费</span>
+                            <span>免运费</span>
                         </div>
                         <div className="total">
                             <span>配送范围：</span>
@@ -208,6 +206,10 @@ $FW.DOMReady(function () {
             NativeBridge.ajaxComplete();
         }
     });
+
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={"商品详情"} background={'transparent'}/>, document.getElementById('header'));
+    }
 });
 
 window.onNativeMessageReceive = function (msg) {

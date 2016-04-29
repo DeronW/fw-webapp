@@ -47,7 +47,6 @@ const DeliverAddress = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'我的收货地址'}/>}
                 <div className="address-list">
                     {this.props.address.map(address)}
                 </div>
@@ -69,6 +68,10 @@ $FW.DOMReady(function () {
             NativeBridge.ajaxComplete();
         }
     });
+
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={"我的收货地址"}/>, document.getElementById('header'));
+    }
 });
 
 window.onNativeMessageReceive = function(msg){

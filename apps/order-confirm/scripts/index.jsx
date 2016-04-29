@@ -86,7 +86,6 @@ const ConfirmOrder = React.createClass({
 
         return (
             <div className="confirm-order">
-                {$FW.Browser.inApp() ? null : <Header title={'确认订单'}/>}
                 { address ? <Address address={address}/> : <NewAddress /> }
                 <ConfirmOrder.Product product={this.props.product}
                                       update_product_count_handler={this.updateProductCountHandler}/>
@@ -138,7 +137,7 @@ ConfirmOrder.Product = React.createClass({
                     </div>
                     <div className="price-box">
                         <span>&yen;</span><span>{p.price}</span>
-                        { p.score ? <span> + {p.score}</span> : null }
+                        { p.score ? <span> + {p.score}工分</span> : null }
                     </div>
                 </div>
                 <div className="num-box">
@@ -155,8 +154,7 @@ ConfirmOrder.Product = React.createClass({
                     <div className="total-money">
                         <span>合计：</span>
                         <span>&yen;{$FW.Format.currency(this.state.count * p.price)}</span>
-                        {p.score ? <span> </span> : null}
-                        {p.score ? p.score * this.state.count : null}
+                        {p.score ? <span> + {p.score * this.state.count}工分</span> : null}
                     </div>
                     <div className="total-text">
                         共{this.state.count}件商品
@@ -416,6 +414,9 @@ $FW.DOMReady(function () {
         }
     });
 
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
+    }
 });
 
 window.onNativeMessageReceive = function (msg) {

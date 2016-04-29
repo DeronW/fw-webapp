@@ -10,7 +10,6 @@ const HomePage = React.createClass({
     render: function () {
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'我的商城'} back_handler={function(){location.href = '/'}}/>}
                 <UserInfo
                     userAvatar={this.props.avatar}
                     user_level={this.props.vip_level}
@@ -300,6 +299,11 @@ $FW.DOMReady(function () {
             ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
         }
     });
+
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={"我的商城"} back_handler={() => location.href = '/'}/>,
+            document.getElementById('header'));
+    }
 });
 
 window.onNativeMessageReceive = function (msg) {
