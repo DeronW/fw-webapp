@@ -160,14 +160,14 @@ const OrderBlock = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.ajaxStart();
     NativeBridge.setTitle('订单列表');
+    $FW.Component.showAjaxLoading();
 
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/order_list.json",
         success: function (data) {
+            $FW.Component.hideAjaxLoading();
             ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));
-            NativeBridge.ajaxComplete();
         }
     });
 

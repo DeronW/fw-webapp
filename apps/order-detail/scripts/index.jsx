@@ -206,7 +206,7 @@ const OrderNumberList = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.ajaxStart();
+    $FW.Component.showAjaxLoading();
     NativeBridge.setTitle('订单详情');
 
     let order_id = $FW.Format.urlQuery().order_id;
@@ -217,11 +217,10 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/order_detail.json?orderId=" + order_id,
         success: function (data) {
+            $FW.Component.hideAjaxLoading();
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
-            NativeBridge.ajaxComplete();
         }
     });
-
 
     if (!$FW.Browser.inApp()) {
         ReactDOM.render(<Header title={"订单详情"}/>, document.getElementById('header'));

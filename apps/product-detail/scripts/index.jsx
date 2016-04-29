@@ -195,15 +195,16 @@ $FW.DOMReady(function () {
         return;
     }
 
-    NativeBridge.ajaxStart();
+    $FW.Component.showAjaxLoading();
     NativeBridge.setTitle('产品详情');
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         success: function (data) {
+            $FW.Component.hideAjaxLoading();
+
             if (!data.title) alert('这个产品没有任何详情');
             ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
-            NativeBridge.ajaxComplete();
         }
     });
 

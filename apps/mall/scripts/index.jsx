@@ -66,7 +66,7 @@ const Carousel = React.createClass({
     render: function () {
         let point = (dot, index) => <div key={index} className={(this.state.cur_index == index) ? "on" : ''}></div>;
         let ba = (d, index) => <div key={index}>
-            <div><a onClick={function(){gotoHandler(d.href)}}>
+            <div><a onClick={function(){gotoHandler(d.link)}}>
                 <img src={d.img}/></a></div>
         </div>;
 

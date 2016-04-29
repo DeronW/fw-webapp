@@ -7,7 +7,6 @@ const Success = React.createClass({
     render: function () {
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'交易完成'}/>}
                 <div className="success-banner"
                      style={{background:"url("+STATIC_PATH+"images/success-banner.jpg) no-repeat center center"}}>
                     <div className="success-text"
@@ -43,10 +42,12 @@ const Success = React.createClass({
 $FW.DOMReady(function () {
     NativeBridge.setTitle('交易成功');
     let order_id = $FW.Format.urlQuery().id;
+    $FW.Component.showAjaxLoading();
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
         success: function (data) {
+            $FW.Component.hideAjaxLoading();
             ReactDOM.render(<Success
                 order_id={order_id}
                 receiver={data.shipping_info.username}
@@ -58,4 +59,8 @@ $FW.DOMReady(function () {
             />, document.getElementById('cnt'));
         }
     });
+
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={"交易成功"}/>, document.getElementById('header'));
+    }
 });

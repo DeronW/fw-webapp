@@ -362,7 +362,8 @@ const Address = React.createClass({
                 <div className="goods-adress-h">
                     收货地址
                 </div>
-                <div className="goods-adress-cnt">
+                <div className="goods-adress-cnt"
+                     style={{backgroundImage: 'url(' + STATIC_PATH + 'images/icon-address.png)'}}>
                     <a href={"/delivery_address?productBizNo="+ getProductBizNo()}
                        style={{background:"url("+STATIC_PATH+"images/ico-gray-right.jpg) no-repeat 671px center"}}>
                         <div className="inf">
@@ -378,14 +379,16 @@ const Address = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.ajaxStart();
     NativeBridge.setTitle('确认订单');
+    $FW.Component.showAjaxLoading();
 
     var query = $FW.Format.urlQuery();
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + getProductBizNo() + '&buyNum=1',
         success: function (data) {
+
+            $FW.Component.hideAjaxLoading();
 
             var user = {
                 score: data.avaliablePoint || 0,
@@ -409,8 +412,6 @@ $FW.DOMReady(function () {
                                           default_address_id={query.address_id || data.addressId}
                 />,
                 document.getElementById('cnt'));
-
-            NativeBridge.ajaxComplete();
         }
     });
 
