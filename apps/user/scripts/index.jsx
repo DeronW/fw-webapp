@@ -131,7 +131,6 @@ const DeliveryProcessList = React.createClass({
     }
 });
 
-
 const Account = React.createClass({
     render: function () {
 
@@ -202,9 +201,7 @@ const MyVoucher = React.createClass({
             <div key={index}
                  className={index == this.state.index ? "select-li" : ""}
                  onClick={function(){self.clickHandler(index)}}>
-				<span className="tab-text">
-					{voucher_name(v)}
-				</span>
+                <span className="tab-text"> {voucher_name(v)} </span>
             </div>
         );
 
@@ -213,21 +210,21 @@ const MyVoucher = React.createClass({
         let normal_voucher = function () {
             return (
                 <div className="my-voucher-not-used">
-                    { (self.props.cxchangeCert.dated || []).map(voucher) }
+                    { (self.props.cxchangeCert.normal).map(voucher) }
                 </div>)
         };
 
         let used_voucher = function () {
             return (
                 <div className="my-voucher-not-used">
-                    { self.props.cxchangeCert.normal.map(voucher) }
+                    { self.props.cxchangeCert.used.map(voucher) }
                 </div>)
         };
 
         let dated_voucher = function () {
             return (
                 <div className="my-voucher-not-used">
-                    { self.props.cxchangeCert.used.map(voucher) }
+                    { self.props.cxchangeCert.dated.map(voucher) }
                 </div>)
         };
 
