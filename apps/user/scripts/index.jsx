@@ -119,7 +119,6 @@ const DeliveryProcessList = React.createClass({
                 <div className="info-block">
                     <a className="icon" href="/order/mine#complete">
                         <img src={STATIC_PATH +"images/shopping-complete-icon.png"}/>
-                        {this.props.completeCount >= 1 ? marKion(this.props.completeCount) : null }
                         <span className="text">已完成</span>
                     </a>
                 </div>

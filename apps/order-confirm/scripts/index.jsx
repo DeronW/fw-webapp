@@ -206,6 +206,17 @@ ConfirmOrder.Extra = React.createClass({
         if (this.state.use_bean) total_price -= this.props.user.bean / 100;
         if (total_price < 0) total_price = 0;
 
+        let user_score = null;
+        if (this.props.user.score > 0) {
+            user_score = (
+                <div className="score">
+                    <div className="score1">工分账户</div>
+                    <div className={ 1 < 0 ? "score2 red" : "score2"}>{this.props.user.score}</div>
+                    <div className="score3">{score_used ? score_used : null}</div>
+                </div>
+            )
+        }
+
         window.OrderFormData.payRmbPrice = total_price;
         window.OrderFormData.useTicket = checked_tickets.length > 0;
         window.OrderFormData.ticket = checked_tickets.map((i) => i.id);
@@ -228,11 +239,7 @@ ConfirmOrder.Extra = React.createClass({
                             </div>
                         </div>
                     </div>
-                    <div className="score">
-                        <div className="score1">工分账户</div>
-                        <div className={ 1 < 0 ? "score2 red" : "score2"}>{this.props.user.score}</div>
-                        <div className="score3">{score_used ? score_used : null}</div>
-                    </div>
+                    {user_score}
                 </div>
                 <div className="balance-box">
                     <div className="balance1">当前余额</div>
@@ -435,7 +442,7 @@ $FW.DOMReady(function () {
                 }
             ];
             //data.ticketList;
-            ReactDOM.render(<ConfirmOrder product={product} ticket_list={ttt_list} user={user}
+            ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList} user={user}
                                           address_list={data.addressList}
                                           default_address_id={query.address_id || data.addressId}
                 />,
