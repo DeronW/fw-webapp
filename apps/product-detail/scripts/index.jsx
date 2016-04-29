@@ -15,7 +15,7 @@ const Product = React.createClass({
         let markList = (list, index)=><div key={index}>{list}</div>;
         let activity_desc = null;
 
-        if (data.activity_desc) {
+        if (data.activity_desc && data.activity_desc.length) {
             let text = (i, index) => <div key={index}>{trim(i)}</div>;
             activity_desc = (
                 <div className="detail-explain">

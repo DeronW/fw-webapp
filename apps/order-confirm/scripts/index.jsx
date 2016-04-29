@@ -61,6 +61,10 @@ const ConfirmOrder = React.createClass({
             alert('请新填写手机验证码');
             return;
         }
+        if (!window.OrderFormData.addressId) {
+            alert('请选择收货地址');
+            return
+        }
 
         $FW.Ajax({
             url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
@@ -299,7 +303,7 @@ ConfirmOrder.VoucherModal = React.createClass({
         let voucher = function (data, index) {
             let checkImg = _this.state.checked_voucher[data.id] ? 'red-right' : 'gray-block';
             let date = new Date(parseInt(data.endTime));
-            date = date.toLocaleDateString().replace('/', '-');
+            date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
             return (
                 <div className="li" key={index}
                      onClick={function(){_this.ToggleCoupons(data.id) }}>
