@@ -98,6 +98,8 @@ const ConfirmOrder = React.createClass({
                 <ConfirmOrder.Extra product_count={this.state.product_count}
                                     product_price={this.props.product.price}
                                     product_score={this.props.product.score}
+                                    voucher_list={this.props.ticket_list}
+                                    checked_voucher={this.state.checked_voucher}
                                     user={this.props.user}
                                     show_voucher_modal={this.showVoucherModal}/>
                 <ConfirmOrder.SMSVerifyCode />
@@ -175,9 +177,12 @@ ConfirmOrder.Product = React.createClass({
 ConfirmOrder.Extra = React.createClass({
     getInitialState: function () {
         return {
-            checked_coupons: {},
+            checked_voucher: this.props.checked_voucher,
             use_bean: true
         }
+    },
+    componentWillReceiveProps: function (nextProps) {
+        this.setState({checked_voucher: nextProps.checked_voucher})
     },
     toggleBeanHandler: function () {
         this.setState({use_bean: !this.state.use_bean});
@@ -186,8 +191,11 @@ ConfirmOrder.Extra = React.createClass({
     },
     render: function () {
         let checked_tickets = [];
-        for (var i in this.state.checked_coupons) {
-            if (!this.state.checked_coupons.hasOwnProperty(i)) checked_tickets.push(i);
+        for (var i in this.state.checked_voucher) {
+            for (var j = 0; j < this.props.voucher_list.length; j++) {
+                if (this.props.voucher_list[j].id == i && this.state.checked_voucher[i])
+                    checked_tickets.push(this.props.voucher_list[j])
+            }
         }
 
         let selectedVoucher = checked_tickets.length ?
@@ -288,12 +296,10 @@ ConfirmOrder.SMSVerifyCode = React.createClass({
 
 ConfirmOrder.VoucherModal = React.createClass({
     getInitialState: function () {
-        return {
-            checked_voucher: this.props.checked_voucher
-        }
+        return {checked_voucher: this.props.checked_voucher}
     },
 
-    ToggleCoupons: function (id) {
+    ToggleVoucher: function (id) {
         var checked_voucher = this.state.checked_voucher;
         this.state.checked_voucher[id] = !this.state.checked_voucher[id];
         this.setState({checked_voucher: checked_voucher});
@@ -308,7 +314,7 @@ ConfirmOrder.VoucherModal = React.createClass({
             date = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
             return (
                 <div className="li" key={index}
-                     onClick={function(){_this.ToggleCoupons(data.id) }}>
+                     onClick={function(){_this.ToggleVoucher(data.id) }}>
                     <div className="chose"
                          style={{background:"url("+STATIC_PATH+"images/"+checkImg+".png) no-repeat 0 center"}}></div>
                     <div className="name">{data.productName}</div>
@@ -338,6 +344,7 @@ ConfirmOrder.VoucherModal = React.createClass({
                     <div className="btn">
                         <div className="btn-cancel" onClick={this.props.hide_voucher_modal}>取消</div>
                         <div className="btn-confirm" onClick={function(){
+                        //console.log(_this.state.checked_voucher)
                             _this.props.confirm_checked_voucher(_this.state.checked_voucher)
                         }}>确认
                         </div>
@@ -415,7 +422,20 @@ $FW.DOMReady(function () {
             window.OrderFormData.addressId = query.address_id || data.addressId;
             window.OrderFormData.payBeanPrice = user.bean;
 
-            ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList} user={user}
+            var ttt_list = [
+                {
+                    id: "54aa61e511bb4570a5f3fb2bfdb9fc8f",
+                    endTime: 1462031999000,
+                    productName: "永辉衬衫男长袖白衬衣商务休闲修身纯色职业装春秋季棉3C3"
+                },
+                {
+                    id: "7b0d5781610f4ccca40ade681f25b591",
+                    endTime: 1462723199000,
+                    productName: "永辉衬衫"
+                }
+            ];
+            //data.ticketList;
+            ReactDOM.render(<ConfirmOrder product={product} ticket_list={ttt_list} user={user}
                                           address_list={data.addressList}
                                           default_address_id={query.address_id || data.addressId}
                 />,
