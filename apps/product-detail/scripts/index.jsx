@@ -188,6 +188,32 @@ const Carousel = React.createClass({
     }
 });
 
+const EmptyProduct = React.createClass({
+    render: function () {
+        return (
+            <div style={{
+            position: "absolute",
+            top: "0px",
+            bottom: "0px",
+            width: "100%",
+            zIndex: "-1"
+            }}>
+                <img style={{
+                display: "block",
+                maxWidth: "80%",
+                margin: "20% auto 50px"
+                }} src={STATIC_PATH + 'images/outdate.jpg'}/>
+                <div style={{
+                fontSize: "30px",
+                color: "#8591b3",
+                textAlign: "center"
+                }}>抱歉, 没有找到相关商品!
+                </div>
+            </div>
+        )
+    }
+});
+
 $FW.DOMReady(function () {
     let bizNo = $FW.Format.urlQuery().bizNo;
     if (!bizNo) {
@@ -203,8 +229,11 @@ $FW.DOMReady(function () {
         success: function (data) {
             $FW.Component.hideAjaxLoading();
 
-            if (!data.title) alert('这个产品没有任何详情');
-            ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
+            if (data.title) {
+                ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'))
+            } else {
+                ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
+            }
         }
     });
 
