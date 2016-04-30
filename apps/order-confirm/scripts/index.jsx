@@ -201,7 +201,7 @@ ConfirmOrder.Extra = React.createClass({
         let selectedVoucher = checked_tickets.length ?
             <div className="coupons-r">{checked_tickets[0].productName} &times; {checked_tickets.length}</div> : null;
 
-        let score_used = this.props.product_count * this.props.product_score;
+        let score_used = (this.props.product_count - checked_tickets.length) * this.props.product_score;
         let total_price = this.props.product_count * this.props.product_price;
         if (this.state.use_bean) total_price -= this.props.user.bean / 100;
         if (total_price < 0) total_price = 0;

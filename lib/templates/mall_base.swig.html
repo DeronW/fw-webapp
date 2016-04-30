@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="target-densitydpi=device-dpi, width=720, ">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>{% block title %}Mall{% endblock %}</title>
     <link type="text/css" rel="stylesheet" href="{STATIC_PATH}css/all.css"/>
@@ -23,13 +23,15 @@
 <script src="{STATIC_PATH}scripts/bundle.js"></script>
 
 <script>
-    var _hmt = _hmt || [];
-    (function () {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?e391750a29ff01f211e985d2c71ac538";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
+    if(location.protocol.indexOf('http') < 0) {
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?e391750a29ff01f211e985d2c71ac538";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    }
 </script>
 
 </body>
