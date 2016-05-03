@@ -116,6 +116,8 @@ const OrderBlock = React.createClass({
         };
 
         let product_item = function (product, index) {
+            let pay_score = null;
+            if (product.score) pay_score = ' + ' + product.score + '工分';
             return (
                 <a href={'/order/detail?order_id=' + order.orderId} key={index}>
                     <div className="t-info">
@@ -130,7 +132,7 @@ const OrderBlock = React.createClass({
                                 { product.tags.length != 0 ? tags(product.tags) : null }
                             </div>
                             <div className="commodity-number">
-                                <span className="money-text">&yen;{product.price} + {product.score}工分</span>
+                                <span className="money-text">&yen;{product.price}{pay_score}</span>
                                 <span className="number-text">X{product.count}</span>
                             </div>
                         </div>
