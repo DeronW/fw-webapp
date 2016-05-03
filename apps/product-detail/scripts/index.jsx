@@ -44,6 +44,16 @@ const Product = React.createClass({
             </div>
         }
 
+        let market_price = null;
+        if (data.market_price) {
+            market_price = (
+                <div className="market-price">
+                    <span>市价：</span>
+                    <span className="market-price-num">&yen;{data.market_price}</span>
+                </div>
+            )
+        }
+
         return (
             <div className="detail-box">
                 {data.head_images && data.head_images.length ?
@@ -59,10 +69,8 @@ const Product = React.createClass({
                         {score}
                     </div>
                     <div className="detail-inf1">
-                        <div className="market-price">
-                            <span>市价：</span>
-                            <span className="market-price-num">&yen;{data.market_price}</span>
-                        </div>
+                        {market_price}
+
                         <div className="total">
                             <span>累计销量</span>
                             <span className="total-num">{data.sales}</span>

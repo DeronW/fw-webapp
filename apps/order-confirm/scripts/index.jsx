@@ -226,11 +226,13 @@ ConfirmOrder.Extra = React.createClass({
         return (
             <div className="balance-wrap">
                 <div className="account-box">
+
                     <div className="coupons" onClick={this.props.show_voucher_modal}
                          style={{background:"url("+STATIC_PATH+"images/ico-gray-right.png) no-repeat 653px 27px"}}>
                         <div className="coupons-l">兑换券支付</div>
                         {selectedVoucher}
                     </div>
+
                     <div className="bean">
                         <div className="bean1">工豆账户</div>
                         <div className="bean2">&yen;{this.props.user.bean / 100.0}</div>
