@@ -89,7 +89,9 @@ const ActivityProduct = React.createClass({
         let activity_banner = () => {
             return this.props.img ?
                 (<div className="index-actList-img">
-                    <a><img src={this.props.img || STATIC_PATH + 'images/default-banner.jpg'}/></a>
+                    <a href={"/activity?bizNo=" + this.props.bizNo + '&activity_id=' + this.props.activity_id}>
+                        <img src={this.props.img || STATIC_PATH + 'images/default-banner.jpg'}/>
+                    </a>
                 </div>) :
                 null;
         };
