@@ -23,7 +23,7 @@ function submit() {
 
 window.OrderFormData = {
     sourceType: $FW.Browser.inIOS() ? 2 : ($FW.Browser.inAndroid() ? 1 : 0),
-    buyNum: query.count || 1,
+    buyNum: parseInt(query.count) || 1,
     useBean: true,
     payBeanPrice: null,
     payRmbPrice: null,
@@ -63,10 +63,6 @@ const ConfirmOrder = React.createClass({
             alert('请新填写手机验证码');
             return;
         }
-        if (!window.OrderFormData.addressId) {
-            alert('请选择收货地址');
-            return
-        }
 
         $FW.Ajax({
             url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
@@ -80,6 +76,22 @@ const ConfirmOrder = React.createClass({
         window.OrderFormData.buyNum = c;
     },
     validateScoreAndChargeHandler: function () {
+        let product = this.props.product;
+
+        if (!window.OrderFormData.addressId) {
+            alert('请选择收货地址');
+            return
+        }
+
+        if (product.score * parseInt(window.OrderFormData.buyNum) > this.props.user.score) {
+            alert('积分不足, 不能购买');
+            return;
+        }
+
+        if (product.price * parseInt(window.OrderFormData.buyNum) > this.props.user.charge) {
+            alert('余额不足, 不能购买');
+            return;
+        }
         return true
     },
     render: function () {
