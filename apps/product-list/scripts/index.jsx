@@ -43,9 +43,9 @@ const MallProducts = React.createClass({
             is_reality = 0
         }
 
-        NativeBridge.ajaxStart();
         $FW.Ajax({
             url: API_PATH + 'mall/api/index/v1/products.json?count=' + this.pageCount + '&page=' + page + '&isVirtual=' + is_reality,
+            enable_loading: true,
             success: function (data) {
                 // isVirtual	0全部 1实体 2虚拟
                 let tab;
@@ -68,7 +68,6 @@ const MallProducts = React.createClass({
                 if (data.totalCount < 20) new_page[this.state.tab] = 0;
 
                 this.setState({products: products, page: new_page});
-                NativeBridge.ajaxComplete();
                 done && done();
             }.bind(this)
         });
