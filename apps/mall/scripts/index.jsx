@@ -69,7 +69,7 @@ const Carousel = React.createClass({
 
         return (
             <div className="banner-carousel">
-                <ReactSwipe wrapperClassName={'wrap'} speed={1000} callback={this.changeCurrentIndex}>
+                <ReactSwipe wrapperClassName={'wrap'} auto={3000} speed={1000} callback={this.changeCurrentIndex}>
                     {this.state.banners.map(ba) }
                 </ReactSwipe>
                 <div className="points">
