@@ -3,21 +3,18 @@
 const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
-function gotoHandler(i) {
+function gotoHandler(link) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
     if ($FW.Browser.inApp()) {
-        NativeBridge.goto('http://mmall.9888.cn' + i)
+        NativeBridge.goto(link)
     } else {
-        location.href = i;
+        location.href = link;
     }
 }
 
 const Mall = React.createClass({
-    clickHandler: function (link) {
-        if (link.indexOf('://') < 0) {
-            link = location.protocol + '//' + location.hostname + link;
-        }
-        gotoHandler(link)
-    },
     render: function () {
         let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                                       activity_id={i.activity_id}
@@ -31,13 +28,13 @@ const Mall = React.createClass({
                     <div className="no-banner"
                          style={{backgroundImage: 'url(' + STATIC_PATH + 'images/default-banner.jpg)'}}></div>}
                 <div className="header-nav">
-                    <a className="vip" onClick={function(){ _this.clickHandler("/waiting") }}
+                    <a className="vip" onClick={function(){ gotoHandler("/waiting") }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-vip.png)'}}>
                         VIP专区</a>
-                    <a className="goods" onClick={function(){ _this.clickHandler("/products") }}
+                    <a className="goods" onClick={function(){ gotoHandler("/products") }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-goods.png)'}}>
                         豆哥商品</a>
-                    <a className="mine" onClick={function(){ _this.clickHandler("/user") }}
+                    <a className="mine" onClick={function(){ gotoHandler("/user") }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-shop.png)'}}>
                         我的商城</a>
                 </div>
