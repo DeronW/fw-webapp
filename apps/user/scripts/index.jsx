@@ -268,7 +268,7 @@ const Voucher = React.createClass({
                         </div>
                         <div className="clear-info">
                             <span className="text">来源 {data.type}</span>
-                            <span className="text-timer">有效目期<em>{data.indate}</em></span>
+                            <span className="text-timer">有效日期<em>{data.indate}</em></span>
                         </div>
                     </div>
                 </a>
