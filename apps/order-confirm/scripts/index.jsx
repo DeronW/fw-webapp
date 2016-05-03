@@ -79,7 +79,9 @@ const ConfirmOrder = React.createClass({
         this.setState({product_count: c});
         window.OrderFormData.buyNum = c;
     },
-
+    validateScoreAndChargeHandler: function () {
+        return true
+    },
     render: function () {
         let address = null;
         let _this = this;
@@ -102,7 +104,7 @@ const ConfirmOrder = React.createClass({
                                     checked_voucher={this.state.checked_voucher}
                                     user={this.props.user}
                                     show_voucher_modal={this.showVoucherModal}/>
-                <ConfirmOrder.SMSVerifyCode />
+                <ConfirmOrder.SMSVerifyCode validate_score_and_charge={this.validateScoreAndChargeHandler}/>
                 <div className="confirm-order-foot">
                     <a onClick={this.makeOrderHandler}
                        className={this.state.disable_pay ? "btn-red btn-gray" : "btn-red"}>确认购买</a>
@@ -261,6 +263,7 @@ ConfirmOrder.SMSVerifyCode = React.createClass({
         window.OrderFormData.sms_code = e.target.value;
     },
     getSmsCodeHandler: function () {
+        if (!this.props.validate_score_and_charge()) return;
         if (this.state.remain == 0) {
             this.tick();
             $FW.Ajax({

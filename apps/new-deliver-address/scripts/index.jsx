@@ -9,7 +9,7 @@ const Address = React.createClass({
             username: '',
             phone: '',
             address: '',
-            isDefault: false
+            isDefault: true
         }
     },
     saveHandler: function () {
@@ -24,7 +24,8 @@ const Address = React.createClass({
             },
 
             success: function () {
-                history.back()
+                //history.back()
+                location.href = '/delivery_address'
             }
         })
     },
