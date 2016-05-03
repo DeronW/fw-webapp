@@ -85,11 +85,12 @@ const Carousel = React.createClass({
 
 const ActivityProduct = React.createClass({
     render: function () {
+        let _this = this;
         let pi = (data, index) => <ProductItem {...data} key={index}/>;
         let activity_banner = () => {
             return this.props.img ?
                 (<div className="index-actList-img">
-                    <a href={"/activity?bizNo=" + this.props.bizNo + '&activity_id=' + this.props.activity_id}>
+                    <a onClick={function(){gotoHandler("/activity?bizNo=" + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}>
                         <img src={this.props.img || STATIC_PATH + 'images/default-banner.jpg'}/>
                     </a>
                 </div>) :
