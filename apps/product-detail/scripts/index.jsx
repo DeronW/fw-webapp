@@ -149,8 +149,9 @@ const PlusMinus = React.createClass({
                     <span className="stock">{this.props.stock}</span>
                     <span className="unit">件</span>
                 </div>
-                <a onClick={this.buyHandler}
-                   className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>立即购买</a>
+                <a onClick={this.buyHandler} className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>
+                    {this.props.stock < 1 ? '售罄' : '立即购买'}
+                </a>
             </div>
         )
     }
@@ -228,7 +229,6 @@ $FW.DOMReady(function () {
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         success: function (data) {
             $FW.Component.hideAjaxLoading();
-
             if (data.title) {
                 ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'))
             } else {
@@ -238,7 +238,7 @@ $FW.DOMReady(function () {
     });
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"商品详情"} />, document.getElementById('header'));
+        ReactDOM.render(<Header title={"商品详情"}/>, document.getElementById('header'));
     }
 });
 
