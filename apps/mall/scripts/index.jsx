@@ -5,7 +5,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 function gotoHandler(i) {
     if ($FW.Browser.inApp()) {
-        NativeBridge.goto(i)
+        NativeBridge.goto('http://mmall.9888.cn' + i)
     } else {
         location.href = i;
     }
