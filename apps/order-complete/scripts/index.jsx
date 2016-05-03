@@ -39,6 +39,8 @@ const Success = React.createClass({
     }
 });
 
+window.ProductBizNo = null;
+
 $FW.DOMReady(function () {
     NativeBridge.setTitle('交易成功');
     let order_id = $FW.Format.urlQuery().id;
@@ -57,10 +59,20 @@ $FW.DOMReady(function () {
                 score={data.payment.score}
                 voucher_count={data.order.ticket_num}
             />, document.getElementById('cnt'));
+
+            window.ProductBizNo = data.products.bizNo;
         }
     });
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"交易成功"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"交易成功"} back_handler={back2pre_page}/>, document.getElementById('header'));
     }
 });
+
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back') back2pre_page()
+};
+
+function back2pre_page() {
+    location.href = '/productDetail?bizNo=' + window.ProductBizNo;
+}
