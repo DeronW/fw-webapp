@@ -10,12 +10,14 @@
 
 const GlobalAlert = React.createClass({
     getInitialState: function () {
-        return {
-            show: true
-        }
+        return {show: true}
     },
     hideHandler: function () {
-        this.setState({show: false})
+        ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
+    },
+
+    componentWillUnmount: function () {
+        this.props.unMountHandler && this.props.unMountHandler();
     },
 
     render: function () {
@@ -100,7 +102,7 @@ const GlobalAlert = React.createClass({
                     <div style={style_close} onClick={this.hideHandler}>&times;</div>
                     <div style={style_text}>{this.props.title || 'YO'}</div>
                     {this.props.confirm_text && !this.props.cancel_btn ?
-                        <a style={style_one_big}  onClick={this.hideHandler}>{this.props.confirm_text}</a> : null}
+                        <a style={style_one_big} onClick={this.hideHandler}>{this.props.confirm_text}</a> : null}
                     {this.props.confirm_btn ? <a style={style_confirm} onClick={this.hideHandler}>CONFIRM</a> : null}
                     {this.props.cancel_btn ? <a style={style_cancel} onClick={this.hideHandler}>CANCEL</a> : null}
                 </div>

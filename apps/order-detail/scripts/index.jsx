@@ -12,7 +12,8 @@ const OrderDetail = React.createClass({
                     shippingInfo={this.props.shipping_info}
                     distributionName={this.props.distribution}
                     status={this.props.status}
-                    distributionCode={this.props.distribution_code}
+                    send_order_no={this.props.sendOrderNo}
+                    send_channel={this.props.sendChannel}
                 />
                 <OrderStatusBlock order={this.props.order} products={this.props.products}/>
                 <OrderPayInfo payment={this.props.payment}/>
@@ -48,11 +49,11 @@ const OrderStatusList = React.createClass({
                 </div>
                 <div className="info-block">
                     <span className="text">物流名称</span>
-                    <span className="data-text">{this.props.distributionName}</span>
+                    <span className="data-text">{this.props.send_channel}</span>
                 </div>
                 <div className="info-block">
                     <span className="text">物流编号</span>
-                    <span className="data-text">{this.props.distributionCode}</span>
+                    <span className="data-text">{this.props.send_order_no}</span>
                 </div>
                 <div className="address-list">
                     <div className="address-icon">
