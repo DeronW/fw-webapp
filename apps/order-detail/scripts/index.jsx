@@ -98,7 +98,7 @@ const OrderStatusBlock = React.createClass({
                                     <h2>{d.title}</h2>
                                 </div>
                                 <div className="tag-block">
-                                    { d.tags.length != 0 ? products.tags.map((s, index) =>
+                                    { d.tags.length != 0 ? products[0].tags.map((s, index) =>
                                         <span key={index} className="text">{s}</span>) : null }
                                 </div>
                                 <div className="commodity-number">
