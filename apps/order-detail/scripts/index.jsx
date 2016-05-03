@@ -62,11 +62,11 @@ const OrderStatusList = React.createClass({
 
                     <div className="address-info">
                         <div className="my-info-text">
-                            <span className="receipt-name">收货人:{this.props.shippingInfo.address}</span>
+                            <span className="receipt-name">收货人:{this.props.shippingInfo.username}</span>
                             <span className="phone-number">{this.props.shippingInfo.phone}</span>
                         </div>
                         <div className="address-text">
-                            <p>收货地址: {this.props.shippingInfo.username}</p>
+                            <p>收货地址: {this.props.shippingInfo.address}</p>
                         </div>
                     </div>
                 </div>
