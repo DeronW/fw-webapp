@@ -60,7 +60,7 @@ $FW.DOMReady(function () {
                 voucher_count={data.order.ticket_num}
             />, document.getElementById('cnt'));
 
-            window.ProductBizNo = data.products.bizNo;
+            window.ProductBizNo = data.products[0].bizNo;
         }
     });
 
