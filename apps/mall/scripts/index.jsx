@@ -19,8 +19,6 @@ const Mall = React.createClass({
         let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                                       activity_id={i.activity_id}
                                                       products={i.products} key={index}/>;
-        let _this = this;
-
         return (
             <div>
                 {this.props.banners.length ?
