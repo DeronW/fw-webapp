@@ -6,12 +6,11 @@ const API_PATH = document.getElementById('api-path').value;
 var query = $FW.Format.urlQuery();
 
 function submit() {
-    $FW.Component.showAjaxLoading();
     $FW.Ajax({
         url: API_PATH + '/mall/api/order/v1/commit_pay_order.json',
+        enable_loading: true,
         data: window.OrderFormData,
         success: function (data) {
-            $FW.Component.hideAjaxLoading();
             if (data.errMsg) {
                 alert(data.errMsg)
             } else {
@@ -66,6 +65,7 @@ const ConfirmOrder = React.createClass({
 
         $FW.Ajax({
             url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
+            enable_loading: true,
             method: 'post',
             data: {smsCode: window.OrderFormData.sms_code},
             success: submit
@@ -282,6 +282,7 @@ ConfirmOrder.SMSVerifyCode = React.createClass({
             this.tick();
             $FW.Ajax({
                 url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
+                enable_loading: true,
                 method: 'post',
                 success: function (data) {
                     alert('验证码已发送, 请查收');
@@ -419,15 +420,13 @@ const Address = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('确认订单');
-    $FW.Component.showAjaxLoading();
 
     var query = $FW.Format.urlQuery();
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + getProductBizNo() + '&buyNum=1',
+        enable_loading: true,
         success: function (data) {
-
-            $FW.Component.hideAjaxLoading();
 
             var user = {
                 score: data.avaliablePoint || 0,
