@@ -430,7 +430,7 @@ $FW.DOMReady(function () {
 
             var user = {
                 score: data.avaliablePoint || 0,
-                bean: data.avaliableBeanBalanceYuan,
+                bean: data.avaliableBean,
                 charge: data.availableCashBalance || 0
             };
             var product = {
