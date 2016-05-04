@@ -169,7 +169,6 @@ const Account = React.createClass({
 const MyVoucher = React.createClass({
     getInitialState: function () {
         return {
-            selectClass: "select-li",
             index: 0,
             voucher: ['normal', 'used', 'dated']
         };
@@ -201,28 +200,14 @@ const MyVoucher = React.createClass({
             </div>
         );
 
-        let voucher = (i, index) => <Voucher key={index} data={i}/>;
-
-        let normal_voucher = function () {
-            return (
-                <div className="my-voucher-not-used">
-                    { (self.props.cxchangeCert.normal).map(voucher) }
-                </div>)
-        };
-
-        let used_voucher = function () {
-            return (
-                <div className="my-voucher-not-used">
-                    { self.props.cxchangeCert.used.map(voucher) }
-                </div>)
-        };
-
-        let dated_voucher = function () {
-            return (
-                <div className="my-voucher-not-used">
-                    { self.props.cxchangeCert.dated.map(voucher) }
-                </div>)
-        };
+        let voucher_list = [];
+        if (this.state.index == 0) {
+            voucher_list = this.props.cxchangeCert.normal
+        } else if (this.state.index == 1) {
+            voucher_list = this.props.cxchangeCert.used
+        } else if (this.state.index == 2) {
+            voucher_list = this.props.cxchangeCert.dated
+        }
 
         return (
             <div>
@@ -235,9 +220,8 @@ const MyVoucher = React.createClass({
                     </div>
 
                     <div className="my-voucher-cont">
-                        {this.state.index == 0 ? normal_voucher() : null}
-                        {this.state.index == 1 ? used_voucher() : null}
-                        {this.state.index == 2 ? dated_voucher() : null}
+                        {voucher_list.length == 0 ? <img src={STATIC_PATH + 'images/empty.jpg'}/> : null}
+                        { voucher_list.map((i, index) => <Voucher key={index} data={i}/>) }
                     </div>
                 </div>
             </div>
