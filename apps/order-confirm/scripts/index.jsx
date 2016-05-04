@@ -286,10 +286,12 @@ ConfirmOrder.SMSVerifyCode = React.createClass({
                 enable_loading: true,
                 method: 'post',
                 success: function (data) {
-                    _this.setState({remain: 0});
                     alert('验证码已发送, 请查收');
                     if (data.validateCode)
                         alert('原来你在测试, 那就直接告诉你验证码\n ' + data.validateCode);
+                },
+                fail: function () {
+                    _this.setState({remain: 0});
                 }
             })
         }
