@@ -277,6 +277,7 @@ ConfirmOrder.SMSVerifyCode = React.createClass({
         window.OrderFormData.sms_code = e.target.value;
     },
     getSmsCodeHandler: function () {
+        var _this = this;
         if (!this.props.validate_score_and_charge()) return;
         if (this.state.remain == 0) {
             this.tick();
@@ -285,6 +286,7 @@ ConfirmOrder.SMSVerifyCode = React.createClass({
                 enable_loading: true,
                 method: 'post',
                 success: function (data) {
+                    _this.setState({remain: 0});
                     alert('验证码已发送, 请查收');
                     if (data.validateCode)
                         alert('原来你在测试, 那就直接告诉你验证码\n ' + data.validateCode);
