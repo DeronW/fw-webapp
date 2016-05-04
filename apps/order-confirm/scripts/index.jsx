@@ -445,18 +445,18 @@ $FW.DOMReady(function () {
             window.OrderFormData.addressId = query.address_id || data.addressId;
             window.OrderFormData.payBeanPrice = user.bean;
 
-            var ttt_list = [
-                {
-                    id: "54aa61e511bb4570a5f3fb2bfdb9fc8f",
-                    endTime: 1462031999000,
-                    productName: "永辉衬衫男长袖白衬衣商务休闲修身纯色职业装春秋季棉3C3"
-                },
-                {
-                    id: "7b0d5781610f4ccca40ade681f25b591",
-                    endTime: 1462723199000,
-                    productName: "永辉衬衫"
-                }
-            ];
+            //var ttt_list = [
+            //    {
+            //        id: "54aa61e511bb4570a5f3fb2bfdb9fc8f",
+            //        endTime: 1462031999000,
+            //        productName: "永辉衬衫男长袖白衬衣商务休闲修身纯色职业装春秋季棉3C3"
+            //    },
+            //    {
+            //        id: "7b0d5781610f4ccca40ade681f25b591",
+            //        endTime: 1462723199000,
+            //        productName: "永辉衬衫"
+            //    }
+            //];
             //data.ticketList;
             ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList} user={user}
                                           address_list={data.addressList}

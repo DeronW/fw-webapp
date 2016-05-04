@@ -111,10 +111,6 @@ const OrderBlock = React.createClass({
                 break;
         }
 
-        let tags = function (s) {
-            return ( <span className="text">{s}</span> );
-        };
-
         let product_item = function (product, index) {
             let pay_score = null;
             if (product.score) pay_score = ' + ' + product.score + '工分';
@@ -129,7 +125,8 @@ const OrderBlock = React.createClass({
                                 <h2>{product.title}</h2>
                             </div>
                             <div className="tag-block">
-                                { product.tags.length != 0 ? tags(product.tags) : null }
+                                { product.tags.length != 0 ? product.tags.map(
+                                    (i, index) => <span key={index} className="text">{i}</span>) : null }
                             </div>
                             <div className="commodity-number">
                                 <span className="money-text">&yen;{product.price}{pay_score}</span>

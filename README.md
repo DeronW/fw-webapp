@@ -167,21 +167,6 @@ value 消息格式
         action: "hide_close_button"
     }
 
-页面加载动画
-
-ajax开始
-
-    {
-        action: "ajax_start"
-    }
-
-ajax完成
-
-    {
-        action: "ajax_complete"
-    }
-
-
 设置标题
 
     {

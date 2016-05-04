@@ -247,7 +247,7 @@ const MyVoucher = React.createClass({
 
 const Voucher = React.createClass({
     render: function () {
-        // data.mark, 兑换券状态  0-未上架 1-已上架 2-已下架 3是已删除
+        // data.mark, 兑换券状态  0-未上架 1-已上架 2-已下架 3已删除
 
         let data = this.props.data;
 

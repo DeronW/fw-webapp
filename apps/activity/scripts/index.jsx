@@ -114,14 +114,13 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.ajaxStart();
 
     let bizNo = $FW.Format.urlQuery().bizNo;
     $FW.Ajax({
         url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=' + bizNo,
+        enable_loading: true,
         success: function (data) {
             ReactDOM.render(<MallActivity activity={data} title={data.title}/>, document.getElementById('cnt'));
-            NativeBridge.ajaxComplete();
             NativeBridge.setTitle(data.title);
         }
     });
