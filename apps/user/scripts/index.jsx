@@ -221,7 +221,8 @@ const MyVoucher = React.createClass({
 
                     <div className="my-voucher-cont">
                         {voucher_list.length == 0 ? <img src={STATIC_PATH + 'images/empty.jpg'}/> : null}
-                        { voucher_list.map((i, index) => <Voucher key={index} data={i}/>) }
+                        { voucher_list.map((i, index) =>
+                            <Voucher key={index} data={i} state={this.state.voucher[this.state.index]}/>) }
                     </div>
                 </div>
             </div>
@@ -235,19 +236,25 @@ const Voucher = React.createClass({
 
         let data = this.props.data;
 
-        let watermark = null;
-        if (data.mark) {
-            watermark = <div className="my-vorcher-mark">
-                <img src={STATIC_PATH + 'images/mark-' + data.mark + '.png'}/>
-            </div>;
+        let mark_name;
+        if (this.props.state == 'used') {
+            mark_name = 'used'
+        } else if (this.props.state == 'dated') {
+            mark_name = 'dated'
+        } else {
+            if (data.mark != 1) mark_name = data.mark;
         }
+
+        let watermark_img = mark_name ?
+            <img className="watermark" src={STATIC_PATH + 'images/mark-' + mark_name + '.png'}/> : null;
+        let gray_bg = this.props.state != 'normal';
 
         return (
             <div className="my-voucher-cont-list">
                 <a href={data.product_biz_no ?  '/productDetail?bizNo=' + data.product_biz_no : null}>
-                    <div className={data.mark >= 2 ? "t-info b-color" : "t-info"}>
+                    <div className={gray_bg ? "t-info b-color" : "t-info"}>
                         <div className="title-info">
-                            <h2 className="title-text">{data.title}</h2>
+                            <span className="title-text">{data.title}</span>
                             <span className="money-text">&yen;{data.price}</span>
                         </div>
                         <div className="clear-info">
@@ -260,7 +267,7 @@ const Voucher = React.createClass({
                 <div className="b-info">
                     <span className="text">备注:<em>{data.comment}</em></span>
                 </div>
-                {watermark}
+                {watermark_img}
             </div>
         )
     }

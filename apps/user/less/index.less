@@ -408,11 +408,6 @@ em, i {
 
 .my-voucher-cont {
   .border-t(1px, solid, #d8d8d8);
-
-  img {
-    display: block;
-    margin: 50px auto;
-  }
 }
 
 .my-voucher-cont-list {
@@ -423,6 +418,13 @@ em, i {
   .border-radius-als(5px);
   .back-color(#fff);
   .border(1px, solid, #d8d8d8);
+  overflow: hidden;
+
+  .watermark {
+    position: absolute;
+    right: -25px;
+    bottom: -25px;
+  }
 
   .t-info {
     .height(96px);
@@ -471,13 +473,4 @@ em, i {
     font-size: 18px;
   }
 
-}
-
-.my-vorcher-mark {
-  .position(absolute);
-  bottom: 0;
-  right: 0;
-  .width(102px);
-  .height(105px);
-  overflow: hidden;
 }
