@@ -22,7 +22,7 @@ function submit() {
 
 window.OrderFormData = {
     sourceType: $FW.Browser.inIOS() ? 3 : ($FW.Browser.inAndroid() ? 4 : 2),
-    buyNum: parseInt(query.count) || 1,
+    buyNum: null,
     useBean: true,
     payBeanPrice: null,
     payRmbPrice: null,
@@ -445,6 +445,21 @@ $FW.DOMReady(function () {
                 tags: data.tags || [],
                 count: query.count || 1
             };
+            // 同商品判断最大购买数量
+            if (data.productLimit && product.count > data.productLimit)
+                product.count = data.productLimit;
+            if (product.count) {
+                $FW.Component.Alert('对不起,此商品每人只能购买' + data.productLimit + '件')
+            }
+
+            // 同标签最大购买数量
+            if (data.labelLimit && product.count > data.labelLimit)
+                product.count = data.labelLimit;
+            if (product.count) {
+                $FW.Component.Alert('对不起,此此标签下商品每人只能购买' + data.productLimit + '件')
+            }
+
+            window.OrderFormData.count = data.productLimit;
 
             window.OrderFormData.addressId = query.address_id || data.addressId;
             window.OrderFormData.payBeanPrice = user.bean;
