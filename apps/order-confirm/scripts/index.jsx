@@ -190,6 +190,7 @@ ConfirmOrder.Product = React.createClass({
 
 ConfirmOrder.Extra = React.createClass({
     getInitialState: function () {
+        this.used_bean = 0;
         return {
             checked_voucher: this.props.checked_voucher,
             use_bean: true
@@ -201,7 +202,7 @@ ConfirmOrder.Extra = React.createClass({
     toggleBeanHandler: function () {
         this.setState({use_bean: !this.state.use_bean});
         window.OrderFormData.useBean = !this.state.use_bean;
-        window.OrderFormData.payBeanPrice = window.OrderFormData.useBean ? this.props.user.bean : 0;
+        window.OrderFormData.payBeanPrice = window.OrderFormData.useBean ? this.used_bean : 0;
     },
     render: function () {
         let checked_tickets = [];
@@ -217,8 +218,11 @@ ConfirmOrder.Extra = React.createClass({
 
         let score_used = (this.props.product_count - checked_tickets.length) * this.props.product_score;
         let total_price = (this.props.product_count - checked_tickets.length) * this.props.product_price;
-        if (this.state.use_bean) total_price -= this.props.user.bean / 100;
-        if (total_price < 0) total_price = 0;
+        if (this.state.use_bean && total_price > 0) total_price -= this.props.user.bean / 100;
+        if (total_price < 0) {
+            this.used_bean = parseInt(total_price * 100);
+            total_price = 0;
+        }
 
         let user_score = null;
         if (this.props.user.score > 0 || true) {
@@ -462,7 +466,6 @@ $FW.DOMReady(function () {
             window.OrderFormData.count = data.productLimit;
 
             window.OrderFormData.addressId = query.address_id || data.addressId;
-            window.OrderFormData.payBeanPrice = user.bean;
 
             //var ttt_list = [
             //    {
