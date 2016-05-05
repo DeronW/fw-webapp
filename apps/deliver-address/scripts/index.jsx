@@ -21,7 +21,7 @@ const DeliverAddress = React.createClass({
         let address = function (i, index) {
             let link;
             if (!_this.props.preview) {
-                link = "/order/confirm?address_id=" + i.address_id + "&productBizNo=" + productBizNo
+                link = "/order/confirm?address_id=" + i.address_id + "&productBizNo=" + productBizNo + '&count=' + productCount;
             }
             return (
                 <div key={index} className="address-panel"
