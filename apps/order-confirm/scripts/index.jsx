@@ -297,7 +297,7 @@ ConfirmOrder.SMSVerifyCode = React.createClass({
         }
     },
     countingDown: function () {
-        if (this.state.remain == 1) window.clearInterval(this._timer);
+        if (this.state.remain <= 1) window.clearInterval(this._timer);
         this.setState({remain: this.state.remain - 1});
     },
     tick: function () {
