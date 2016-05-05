@@ -78,7 +78,7 @@ const ConfirmOrder = React.createClass({
     validateScoreAndChargeHandler: function () {
         let product = this.props.product;
 
-        if (!window.OrderFormData.addressId) {
+        if (!window.OrderFormData.addressId || window.OrderFormData.addressId == 'undefined') {
             $FW.Component.Alert('请选择收货地址');
             return
         }
