@@ -211,7 +211,7 @@ $FW.DOMReady(function () {
 
     let order_id = $FW.Format.urlQuery().order_id;
     if (!order_id) {
-        alert('url query order_id is missing');
+        $FW.Component.Alert('url query order_id is missing');
         return;
     }
     $FW.Ajax({

@@ -12,7 +12,7 @@ function submit() {
         data: window.OrderFormData,
         success: function (data) {
             if (data.errMsg) {
-                alert(data.errMsg)
+                $FW.Component.Alert(data.errMsg)
             } else {
                 location.href = '/order/complete?id=' + data.orderId
             }
@@ -59,7 +59,7 @@ const ConfirmOrder = React.createClass({
     },
     makeOrderHandler: function () {
         if (!window.OrderFormData.sms_code) {
-            alert('请新填写手机验证码');
+            $FW.Component.Alert('请填写手机验证码');
             return;
         }
 
@@ -79,17 +79,17 @@ const ConfirmOrder = React.createClass({
         let product = this.props.product;
 
         if (!window.OrderFormData.addressId) {
-            alert('请选择收货地址');
+            $FW.Component.Alert('请选择收货地址');
             return
         }
 
         if (product.score * parseInt(window.OrderFormData.buyNum) > this.props.user.score) {
-            alert('积分不足, 不能购买');
+            $FW.Component.Alert('积分不足, 不能购买');
             return;
         }
 
         if (product.price * parseInt(window.OrderFormData.buyNum) > this.props.user.charge) {
-            alert('余额不足, 不能购买');
+            $FW.Component.Alert('余额不足, 不能购买');
             return;
         }
         return true
@@ -215,18 +215,18 @@ ConfirmOrder.Extra = React.createClass({
         let selectedVoucher = checked_tickets.length ?
             <div className="coupons-r">{checked_tickets[0].productName} &times; {checked_tickets.length}</div> : null;
 
-        let score_used = this.props.product_count * this.props.product_score;
+        let score_used = (this.props.product_count - checked_tickets.length) * this.props.product_score;
         let total_price = (this.props.product_count - checked_tickets.length) * this.props.product_price;
         if (this.state.use_bean) total_price -= this.props.user.bean / 100;
         if (total_price < 0) total_price = 0;
 
         let user_score = null;
-        if (this.props.user.score > 0) {
+        if (this.props.user.score > 0 || true) {
             user_score = (
                 <div className="score">
                     <div className="score1">工分账户</div>
                     <div className={ 1 < 0 ? "score2 red" : "score2"}>{this.props.user.score}</div>
-                    <div className="score3">{score_used ? score_used : null}</div>
+                    <div className="score3">{score_used > 0 ? score_used : 0}</div>
                 </div>
             )
         }
@@ -286,9 +286,9 @@ ConfirmOrder.SMSVerifyCode = React.createClass({
                 enable_loading: true,
                 method: 'post',
                 success: function (data) {
-                    alert('验证码已发送, 请查收');
+                    $FW.Component.Alert('验证码已发送, 请查收');
                     if (data.validateCode)
-                        alert('原来你在测试, 那就直接告诉你验证码\n ' + data.validateCode);
+                        $FW.Component.Alert('原来你在测试, 那就直接告诉你验证码\n ' + data.validateCode);
                 },
                 fail: function () {
                     _this.setState({remain: 0});
@@ -461,7 +461,7 @@ $FW.DOMReady(function () {
             //        productName: "永辉衬衫"
             //    }
             //];
-            //data.ticketList;
+            //data.ticketList = ttt_list;
             ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList} user={user}
                                           address_list={data.addressList}
                                           default_address_id={query.address_id || data.addressId}
@@ -481,6 +481,6 @@ window.onNativeMessageReceive = function (msg) {
 
 function getProductBizNo() {
     let bizNo = $FW.Format.urlQuery().productBizNo;
-    if (!bizNo) alert('product bizNo not in url query');
+    if (!bizNo) $FW.Component.Alert('product bizNo not in url query');
     return bizNo;
 }

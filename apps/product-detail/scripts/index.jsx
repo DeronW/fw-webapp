@@ -226,7 +226,7 @@ const EmptyProduct = React.createClass({
 $FW.DOMReady(function () {
     let bizNo = $FW.Format.urlQuery().bizNo;
     if (!bizNo) {
-        alert('bizNo is missing');
+        $FW.Component.Alert('bizNo is missing');
         return;
     }
 

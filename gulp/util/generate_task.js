@@ -61,6 +61,7 @@ function generate_task(project_name, configs) {
 
     function compile_styles() {
         return gulp.src([
+                LIB_PATH + 'css/common.css',
                 LIB_PATH + 'less/loading.less',
                 APP_PATH + 'less/index.less'
             ])

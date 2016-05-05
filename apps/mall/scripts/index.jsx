@@ -160,7 +160,7 @@ $FW.DOMReady(function () {
     ], function (data) {
         //$FW.Component.hideAjaxLoading();
         var banners = data[0].banners, activities = data[1].activities;
-        if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') alert('error: empty data received');
+        if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') $FW.Component.Alert('error: empty data received');
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
     }, true);
 
