@@ -388,7 +388,7 @@ const NewAddress = React.createClass({
     render: function () {
         return (
             <div className="new-adress">
-                <a href={"/delivery_address/create?productBizNo=" + getProductBizNo()}>收货地址
+                <a href={"/delivery_address/create?productBizNo=" + getProductBizNo() + "&count=" + window.OrderFormData.buyNum}>收货地址
                     <div className="btn-new-address"
                          style={{background:"url("+STATIC_PATH+"images/ico-add.png) no-repeat center"}}></div>
                 </a>

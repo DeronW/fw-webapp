@@ -23,9 +23,9 @@ const Address = React.createClass({
                 isDefault: this.state.isDefault
             },
 
-            success: function () {
-                //history.back()
-                location.href = '/delivery_address'
+            success: function (data) {
+                var query = $FW.Format.urlQuery();
+                location.href = '/order/confirm?address_id=' + data.address_id + '&productBizNo=' + query.productBizNo + '&count=' + query.count;
             }
         })
     },
@@ -77,3 +77,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Address />, document.getElementById('cnt'));
     NativeBridge.setTitle('创建收货地址');
 });
+
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back') location.href = '/deliver_address';
+};

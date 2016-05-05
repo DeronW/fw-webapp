@@ -16,6 +16,7 @@ const DeliverAddress = React.createClass({
     render: function () {
         let _this = this;
         let productBizNo = $FW.Format.urlQuery().productBizNo;
+        let productCount = $FW.Format.urlQuery().count || 1;
 
         let address = function (i, index) {
             let link;
@@ -40,7 +41,8 @@ const DeliverAddress = React.createClass({
         if (!this.props.preview) {
             create_address = (
                 <div className="bottom-panel">
-                    <a href="/delivery_address/create" className="create-address">+新建地址</a>
+                    <a href={"/delivery_address/create?productBizNo=" + productBizNo + '&count=' + productCount}
+                       className="create-address">+新建地址</a>
                 </div>
             )
         }
