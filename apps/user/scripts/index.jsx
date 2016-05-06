@@ -145,7 +145,7 @@ const Account = React.createClass({
             <div>
                 <div className="my-account-block">
                     <div className="my-account-title">
-                        <span className="l-text">我的账户</span>
+                        <span className="l-text">我的余额</span>
                         <span className="r-text money-number">￥{$FW.Format.currency(this.props.money)}</span>
                     </div>
 

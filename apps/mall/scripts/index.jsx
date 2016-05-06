@@ -3,12 +3,12 @@
 const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
-function gotoHandler(link) {
+function gotoHandler(link, need_login) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
     if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link)
+        NativeBridge.goto(link, need_login)
     } else {
         location.href = link;
     }
@@ -32,7 +32,7 @@ const Mall = React.createClass({
                     <a className="goods" onClick={function(){ gotoHandler("/products") }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-goods.png)'}}>
                         豆哥商品</a>
-                    <a className="mine" onClick={function(){ gotoHandler("/user") }}
+                    <a className="mine" onClick={function(){ gotoHandler("/user", true) }}
                        style={{backgroundImage: 'url(' + STATIC_PATH + 'images/ico-shop.png)'}}>
                         我的商城</a>
                 </div>

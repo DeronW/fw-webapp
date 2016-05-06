@@ -250,10 +250,13 @@ $FW.DOMReady(function () {
     }
 });
 
-function backPage(msg) {
-    if (msg == 'history:back') location.href = '/products';
+function backPage() {
+    location.href = '/products'
 }
-window.onNativeMessageReceive = backPage;
+
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back')backPage()
+};
 
 function trim(s) {
     return s.replace(/(^\s*)|(\s*$)/g, '')
