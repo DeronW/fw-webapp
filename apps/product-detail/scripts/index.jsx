@@ -54,11 +54,14 @@ const Product = React.createClass({
             )
         }
 
+        let empty_img = () => (
+            <div className="no-head-images"
+                 style={{ backgroundImage: 'url(' + STATIC_PATH + "images/empty.png)"} }></div> );
+
         return (
             <div className="detail-box">
                 {data.head_images && data.head_images.length ?
-                    <Carousel head_images={data.head_images}/> :
-                    <div className="no-head-images">暂无图片</div>}
+                    <Carousel head_images={data.head_images}/> : empty_img() }
 
                 <div className="detail-inf">
                     <div className="detail-inf-name">{data.title}</div>
@@ -134,7 +137,7 @@ const PlusMinus = React.createClass({
         if (this.state.value < 1) return;
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
-        
+
         if ($FW.Browser.inApp()) {
             NativeBridge.login(link)
         } else {
