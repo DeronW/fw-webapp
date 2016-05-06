@@ -454,7 +454,8 @@ $FW.DOMReady(function () {
             let product_remain = data.productLimit - data.persionProductLimit;
             if (data.productLimit && product.count > product_remain)
                 product.count = product_remain;
-            if (product.count) {
+
+            if (product.count == 0) {
                 $FW.Component.Alert('对不起,此商品每人只能购买' + product_remain + '件')
             }
 
@@ -462,7 +463,8 @@ $FW.DOMReady(function () {
             let label_remain = data.labelLimit - data.persionLabelLimit;
             if (data.labelLimit && product.count > label_remain)
                 product.count = label_remain;
-            if (product.count) {
+
+            if (product.count == 0) {
                 $FW.Component.Alert('对不起,此此标签下商品每人只能购买' + label_remain + '件')
             }
 
