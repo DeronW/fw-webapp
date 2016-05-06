@@ -13,6 +13,13 @@ const Address = React.createClass({
         }
     },
     saveHandler: function () {
+        if (!this.state.username)
+            return $FW.Component.Alert('请填写收货人姓名');
+        if (!this.state.phone)
+            return $FW.Component.Alert('请填写联系方式');
+        if (!this.state.address)
+            return $FW.Component.Alert('请填写收收货地址');
+
         $FW.Ajax({
             url: API_PATH + 'mall/api/member/v1/delivery_address/create.json',
             method: 'post',
@@ -43,6 +50,7 @@ const Address = React.createClass({
     },
     render: function () {
         let setDefaultImg = this.state.isDefault ? "ico-set-default" : "ico-noset-default";
+
         return (
             <div>
                 {$FW.Browser.inApp() ? null : <Header title={'创建收货地址'}/>}
