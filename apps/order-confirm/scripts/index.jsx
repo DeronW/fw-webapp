@@ -412,7 +412,7 @@ const Address = React.createClass({
                 </div>
                 <div className="goods-adress-cnt"
                      style={{backgroundImage: 'url(' + STATIC_PATH + 'images/icon-address.png)'}}>
-                    <a href={"/delivery_address?productBizNo="+ getProductBizNo()}
+                    <a href={"/delivery_address?productBizNo="+ getProductBizNo() + '&count=' + $FW.Format.urlQuery().count }
                        style={{background:"url("+STATIC_PATH+"images/ico-gray-right.jpg) no-repeat 671px center"}}>
                         <div className="inf">
                             <div className="receiver"><span>收货人：</span><span>{address.receiver}</span></div>

@@ -43,15 +43,16 @@ const GlobalAlert = React.createClass({
         };
         let style_panel = {
             display: "table",
-            margin: "40% auto 0",
+            margin: "50% auto 0",
             position: "relative",
             padding: "20px",
             width: window.innerWidth * 0.8 + "px",
-            borderRadius: "16px",
+            borderRadius: "8px",
             paddingTop: "10px",
             background: "white"
         };
         let style_close = {
+            display: "none",
             position: "absolute",
             top: "-20px",
             right: "-20px",
@@ -83,12 +84,12 @@ const GlobalAlert = React.createClass({
         };
         let style_one_big = {
             display: "block",
-            width: "80%",
+            width: "92%",
             height: "80px",
             lineHeight: "80px",
             textAlign: "center",
             color: "white",
-            background: "red",
+            background: "#f9655a",
             borderRadius: '8px',
             margin: '10px auto'
         };
