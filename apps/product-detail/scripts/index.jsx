@@ -133,7 +133,13 @@ const PlusMinus = React.createClass({
     buyHandler: function () {
         if (this.state.value < 1) return;
         let bizNo = $FW.Format.urlQuery().bizNo;
-        location.href = '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value
+        let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
+        
+        if ($FW.Browser.inApp()) {
+            NativeBridge.login(link)
+        } else {
+            location.href = link;
+        }
     },
 
     blur: function (e) {
@@ -230,13 +236,12 @@ $FW.DOMReady(function () {
         return;
     }
 
-    $FW.Component.showAjaxLoading();
     NativeBridge.setTitle('产品详情');
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
+        enable_loading: true,
         success: function (data) {
-            $FW.Component.hideAjaxLoading();
             if (data.title) {
                 ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'))
             } else {
