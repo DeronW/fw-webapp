@@ -37,11 +37,15 @@ window.OrderFormData = {
 const ConfirmOrder = React.createClass({
 
     getInitialState: function () {
+        let checked_voucher = {};
+        if (this.props.ticket_list.length) {
+            checked_voucher[this.props.ticket_list[0].id] = true
+        }
         return {
             show_modal: true,
             product_count: this.props.product.count,
             disable_pay: false,
-            checked_voucher: {},
+            checked_voucher: checked_voucher,
             show_voucher_modal: false
         }
     },
@@ -125,6 +129,7 @@ const ConfirmOrder = React.createClass({
                     <ConfirmOrder.VoucherModal hide_voucher_modal={this.hideVoucherModalHandler}
                                                checked_voucher={this.state.checked_voucher}
                                                voucher_list={this.props.ticket_list}
+                                               product_count={this.props.product.count}
                                                confirm_checked_voucher={this.confirmCheckedVoucherHandler}/> : null}
             </div>
         )
@@ -223,6 +228,7 @@ ConfirmOrder.Extra = React.createClass({
             this.used_bean = parseInt(total_price * 100);
             total_price = 0;
         }
+        window.OrderFormData.payBeanPrice = this.used_bean;
 
         let user_score = null;
         if (this.props.user.score > 0 || true) {
@@ -334,8 +340,14 @@ ConfirmOrder.VoucherModal = React.createClass({
 
     ToggleVoucher: function (id) {
         var checked_voucher = this.state.checked_voucher;
-        this.state.checked_voucher[id] = !this.state.checked_voucher[id];
-        this.setState({checked_voucher: checked_voucher});
+        checked_voucher[id] = !this.state.checked_voucher[id];
+
+        if ($FW.Utils.jsonLength(checked_voucher, (i) => checked_voucher[i]) > this.props.product_count) {
+            $FW.Component.Alert('兑换券数量不能大于购买商品数量');
+            checked_voucher[id] = !this.state.checked_voucher[id];
+        } else {
+            this.setState({checked_voucher: checked_voucher});
+        }
     },
 
     render: function () {
@@ -471,19 +483,31 @@ $FW.DOMReady(function () {
             window.OrderFormData.buyNum = product.count;
             window.OrderFormData.addressId = query.address_id || data.addressId;
 
-            //var ttt_list = [
-            //    {
-            //        id: "54aa61e511bb4570a5f3fb2bfdb9fc8f",
-            //        endTime: 1462031999000,
-            //        productName: "永辉衬衫男长袖白衬衣商务休闲修身纯色职业装春秋季棉3C3"
-            //    },
-            //    {
-            //        id: "7b0d5781610f4ccca40ade681f25b591",
-            //        endTime: 1462723199000,
-            //        productName: "永辉衬衫"
-            //    }
-            //];
-            //data.ticketList = ttt_list;
+            var ttt_list = [
+                {
+                    id: "54aa61e511bb4570a5f3fb2bfdb9fc8f",
+                    endTime: 1462031999000,
+                    productName: "永辉衬衫男长袖白衬"
+                },
+                {
+                    id: "7b0d5781610f4ccca40ade681f25b591",
+                    endTime: 1462723199000,
+                    productName: "永辉衬衫"
+                },
+                {
+                    id: "7b0d5781610f4ccca40ade681f25b59",
+                    endTime: 1462723199000,
+                    productName: "永辉衬衫111"
+                }
+            ];
+            data.ticketList = ttt_list;
+
+            // 是否有默认兑换券, 如果有提用户选择一张
+            if (data.ticketList.length > 0) {
+                window.OrderFormData.useTicket = true;
+                window.OrderFormData.ticket = [data.ticketList[0].id];
+            }
+
             ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList} user={user}
                                           address_list={data.addressList}
                                           default_address_id={query.address_id || data.addressId}
