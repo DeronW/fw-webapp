@@ -483,24 +483,24 @@ $FW.DOMReady(function () {
             window.OrderFormData.buyNum = product.count;
             window.OrderFormData.addressId = query.address_id || data.addressId;
 
-            var ttt_list = [
-                {
-                    id: "54aa61e511bb4570a5f3fb2bfdb9fc8f",
-                    endTime: 1462031999000,
-                    productName: "永辉衬衫男长袖白衬"
-                },
-                {
-                    id: "7b0d5781610f4ccca40ade681f25b591",
-                    endTime: 1462723199000,
-                    productName: "永辉衬衫"
-                },
-                {
-                    id: "7b0d5781610f4ccca40ade681f25b59",
-                    endTime: 1462723199000,
-                    productName: "永辉衬衫111"
-                }
-            ];
-            data.ticketList = ttt_list;
+            //var ttt_list = [
+            //    {
+            //        id: "54aa61e511bb4570a5f3fb2bfdb9fc8f",
+            //        endTime: 1462031999000,
+            //        productName: "永辉衬衫男长袖白衬"
+            //    },
+            //    {
+            //        id: "7b0d5781610f4ccca40ade681f25b591",
+            //        endTime: 1462723199000,
+            //        productName: "永辉衬衫"
+            //    },
+            //    {
+            //        id: "7b0d5781610f4ccca40ade681f25b59",
+            //        endTime: 1462723199000,
+            //        productName: "永辉衬衫111"
+            //    }
+            //];
+            //data.ticketList = ttt_list;
 
             // 是否有默认兑换券, 如果有提用户选择一张
             if (data.ticketList.length > 0) {
