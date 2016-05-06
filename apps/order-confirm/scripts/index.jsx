@@ -21,7 +21,7 @@ function submit() {
 }
 
 window.OrderFormData = {
-    sourceType: $FW.Browser.inIOS() ? 3 : ($FW.Browser.inAndroid() ? 4 : 2),
+    sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
     buyNum: null,
     useBean: true,
     payBeanPrice: null,
