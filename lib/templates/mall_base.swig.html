@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no"/>
     <title>{% block title %}Mall{% endblock %}</title>
     <link type="text/css" rel="stylesheet" href="{STATIC_PATH}css/all.css"/>
 </head>
@@ -23,7 +24,7 @@
 <script src="{STATIC_PATH}scripts/bundle.js"></script>
 
 <script>
-    if(location.protocol.indexOf('http') > -1) {
+    if (location.protocol.indexOf('http') > -1) {
         var _hmt = _hmt || [];
         (function () {
             var hm = document.createElement("script");

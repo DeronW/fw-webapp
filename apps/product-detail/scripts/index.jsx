@@ -246,12 +246,12 @@ $FW.DOMReady(function () {
     });
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"商品详情"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"商品详情"} back_handler={backPage}/>, document.getElementById('header'));
     }
 });
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') history.back();
+window.onNativeMessageReceive = function backPage(msg) {
+    if (msg == 'history:back') location.href = '/products';
 };
 
 function trim(s) {

@@ -449,22 +449,24 @@ $FW.DOMReady(function () {
                 tags: data.tags || [],
                 count: query.count || 1
             };
+
             // 同商品判断最大购买数量
-            if (data.productLimit && product.count > data.productLimit)
-                product.count = data.productLimit;
+            let product_remain = data.productLimit - data.persionProductLimit;
+            if (data.productLimit && product.count > product_remain)
+                product.count = product_remain;
             if (product.count) {
-                $FW.Component.Alert('对不起,此商品每人只能购买' + data.productLimit + '件')
+                $FW.Component.Alert('对不起,此商品每人只能购买' + product_remain + '件')
             }
 
             // 同标签最大购买数量
-            if (data.labelLimit && product.count > data.labelLimit)
-                product.count = data.labelLimit;
+            let label_remain = data.labelLimit - data.persionLabelLimit;
+            if (data.labelLimit && product.count > label_remain)
+                product.count = label_remain;
             if (product.count) {
-                $FW.Component.Alert('对不起,此此标签下商品每人只能购买' + data.productLimit + '件')
+                $FW.Component.Alert('对不起,此此标签下商品每人只能购买' + label_remain + '件')
             }
 
-            window.OrderFormData.count = data.productLimit;
-
+            window.OrderFormData.buyNum = product.count;
             window.OrderFormData.addressId = query.address_id || data.addressId;
 
             //var ttt_list = [
