@@ -220,7 +220,7 @@ const MyVoucher = React.createClass({
                     </div>
 
                     <div className="my-voucher-cont">
-                        {voucher_list.length == 0 ? <img src={STATIC_PATH + 'images/empty.jpg'}/> : null}
+                        {voucher_list.length == 0 ? <img className="empty-voucher" src={STATIC_PATH + 'images/empty.jpg'}/> : null}
                         { voucher_list.map((i, index) =>
                             <Voucher key={index} data={i} state={this.state.voucher[this.state.index]}/>) }
                     </div>
