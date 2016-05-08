@@ -1,0 +1,63 @@
+const AddressPanel = React.createClass({
+    getInitialState: function(){
+        return {}
+    },
+    render: function(){
+        var data = {
+            address: this.props.address,
+            product_biz_no: this.props.product_biz_no,
+            product_count: this.props.product_count
+        };
+        return this.props.address ?
+                <AddressPanel.List {...data} /> :
+                <AddressPanel.New {...data}/>;
+    }
+})
+
+AddressPanel.New = React.createClass({
+    render: function () {
+        let new_link = "/delivery_address/create?productBizNo=" +
+                        this.props.product_biz_no + "&count=" +
+                        this.props.product_count;
+        return (
+            <div className="new-adress">
+                <a href={new_link}>收货地址
+                    <div className="btn-new-address"
+                        style={{backgroundImage:"url("+STATIC_PATH+"images/ico-add.png)"}}>
+                     </div>
+                </a>
+            </div>
+        )
+    }
+});
+
+
+AddressPanel.List = React.createClass({
+    render: function () {
+        let address = this.props.address;
+        let address_list_link = "/delivery_address?productBizNo="+
+                this.props.product_biz_no + '&count=' + this.props.product_count;
+
+        return (
+            <div className="goods-adress">
+                <div className="goods-adress-h">
+                    收货地址
+                </div>
+                <div className="goods-address-cnt"
+                     style={{backgroundImage: 'url(' + STATIC_PATH + 'images/icon-address.png)'}}>
+                    <a href={address_list_link}
+                       style={{backgroundImage:"url("+STATIC_PATH+"images/ico-gray-right.jpg)"}}>
+                        <div className="inf">
+                            <div className="receiver">
+                                <span>收货人：</span>
+                                <span>{address.receiver}</span>
+                            </div>
+                            <div className="phone">{address.receiverPhone}</div>
+                        </div>
+                        <div className="detail">收货地址：{address.addressDetail}</div>
+                    </a>
+                </div>
+            </div>
+        )
+    }
+});
