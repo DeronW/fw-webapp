@@ -230,36 +230,3 @@ $FW.DOMReady(function () {
 window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') location.href = '/order/list';
 };
-
-function severStr(str, n, symbol) {
-    var returnStr = "";
-    var c = 0;
-    var newFloorStr = "";
-    if (str[0] == "-") {
-        c = 1;
-        newFloorStr = Math.floor(str.substring(1, str.length)).toString();
-    } else {
-        newFloorStr = Math.floor(str).toString();
-    }
-    var a = newFloorStr.length % n;
-    var b = 0;
-    var poin = str.substr(newFloorStr.length, str.length);
-    returnStr = (a != 0) ? (newFloorStr.substring(0, a) + symbol) : "";
-    var newStr = newFloorStr.substring(a, newFloorStr.length);
-    for (var i = 1; i < newStr.length + 1; i++) {
-        if (i == b + n) {
-            if (i == newStr.length) {
-                returnStr = returnStr + newStr.substring(b, i - c) + poin;
-            } else {
-                returnStr = returnStr + newStr.substring(b, i) + symbol;
-            }
-            b = i;
-        }
-    }
-
-    if (c == 1) {
-        return "-" + returnStr;
-    } else {
-        return returnStr;
-    }
-}

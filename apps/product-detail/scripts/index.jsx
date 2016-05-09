@@ -135,13 +135,12 @@ const PlusMinus = React.createClass({
     },
     buyHandler: function () {
         if (this.state.value < 1) return;
-        let bizNo = $FW.Format.urlQuery().bizNo;
-        let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
         if ($FW.Browser.inApp()) {
-            NativeBridge.login(link)
+            NativeBridge.login(location.href)
         } else {
-            location.href = link;
+            let bizNo = $FW.Format.urlQuery().bizNo;
+            location.href = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
         }
     },
 
