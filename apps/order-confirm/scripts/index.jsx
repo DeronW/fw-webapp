@@ -157,8 +157,8 @@ $FW.DOMReady(function () {
     if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
     $FW.Ajax({
-        url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + getProductBizNo() + '&buyNum=1',
-        //url: 'http://localhost/pre_pay_order.json',
+        //url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + query.productBizNo + '&buyNum=' + query.count,
+        url: 'http://localhost/pre_pay_order.json',
         enable_loading: true,
         success: function (data) {
 
@@ -219,9 +219,3 @@ $FW.DOMReady(function () {
 window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') history.back();
 };
-
-function getProductBizNo() {
-    let bizNo = $FW.Format.urlQuery().productBizNo;
-    if (!bizNo) $FW.Component.Alert('product bizNo not in url query');
-    return bizNo;
-}

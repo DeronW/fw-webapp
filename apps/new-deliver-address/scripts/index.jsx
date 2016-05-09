@@ -32,7 +32,13 @@ const Address = React.createClass({
 
             success: function (data) {
                 var query = $FW.Format.urlQuery();
-                location.href = '/order/confirm?address_id=' + data.address_id + '&productBizNo=' + query.productBizNo + '&count=' + query.count;
+                var link;
+                if (data.address_count > 1) {
+                    link = '/delivery_address?' + 'productBizNo=' + query.productBizNo + '&count=' + query.count;
+                } else {
+                    link = '/order/confirm?address_id=' + data.address_id + '&productBizNo=' + query.productBizNo + '&count=' + query.count;
+                }
+                location.href = link
             }
         })
     },

@@ -7,11 +7,11 @@ const PaymentPanel = React.createClass({
 
         let cc = $FW.Utils.length(voucher_list, (i) => i.checked);
 
+        this.used_bean_count = 0;
         return {
             voucher_list: voucher_list,
             show_voucher_modal: false,
             use_bean: this.props.user.use_bean,
-            used_bean_count: 0,
             checked_voucher_count: cc,
             score_used: (this.props.product_count - cc) * this.props.product.score
         }
@@ -37,12 +37,14 @@ const PaymentPanel = React.createClass({
 
         let total_price = (this.props.product_count - this.state.checked_voucher_count) *
             this.props.product.price;
-        if (this.state.use_bean && total_price > 0) total_price -= this.props.user.bean / 100;
-        if (total_price < 0) {
-            this.used_bean_count = parseInt(total_price * 100);
-            total_price = 0;
-        } else {
-            this.used_bean_count = this.props.user.bean;
+        if (this.state.use_bean && total_price > 0) {
+            if (this.props.user.bean > (total_price * 100)) {
+                this.used_bean_count = total_price * 100;
+                total_price = 0;
+            } else {
+                total_price -= this.props.user.bean / 100;
+                this.used_bean_count = this.props.user.bean;
+            }
         }
 
         return total_price;
