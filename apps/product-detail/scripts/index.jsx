@@ -39,7 +39,7 @@ const Product = React.createClass({
         let operators = null;
         if (data.operators) {
             operators = <div className="detail-inf1">
-                <div className="operators">运营商：</div>
+                <div className="operators">供应商：</div>
                 <div className="operators-name">{data.operators}</div>
             </div>
         }
