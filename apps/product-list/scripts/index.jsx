@@ -111,8 +111,9 @@ const MallProducts = React.createClass({
 
 const ProductItem = React.createClass({
     render: function () {
-        var price = (parseFloat(this.props.score) > 0) ? (
-            <span className="list-price-score">&#43;{this.props.score}工分</span>) : null;
+        var show_price = this.props.price != 0 || this.props.score == 0;
+        var score = (parseFloat(this.props.score) > 0) ? (
+            <span className="list-price-score">{show_price ? <span>&#43;</span> : null}{this.props.score}工分</span>) : null;
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
         var cover_bg = 'url(' + (this.props.img || STATIC_PATH + 'images/default-product.jpg') + ')';
 
@@ -126,9 +127,9 @@ const ProductItem = React.createClass({
                 </div>
                 <div className="list-price-box">
                     <div className="list-price">
-                        <span className="list-price-mark">&yen;</span>
-                        <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
-                        { price }
+                        {show_price ? <span className="list-price-mark">&yen;</span> : null}
+                        {show_price ? <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span> : null}
+                        { score }
                     </div>
                     <div className="list-sold">
                         <span>累计销量 </span>
@@ -151,10 +152,14 @@ $FW.DOMReady(function () {
     ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"豆哥商品"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"豆哥商品"} back_handler={backward}/>, document.getElementById('header'));
     }
 });
 
+function backward(){
+    location.href = '/';
+}
+
 window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/';
+    if (msg == 'history:back') backward()
 };

@@ -5,6 +5,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 const Success = React.createClass({
     render: function () {
+
         return (
             <div>
                 <div className="success-banner"
@@ -24,7 +25,8 @@ const Success = React.createClass({
                         <div className="detail">收货地址：{this.props.address}</div>
                     </div>
                     <div className="pay">
-                        支付：<span>&yen;{this.props.price}</span>
+                        支付：
+                        {this.props.price ? <span>&yen;{this.props.price}</span> : null}
                         {this.props.score ? <span className="score"> + {this.props.score}工分</span> : null}
                         {this.props.voucher_count ?
                             <span className="coupons"> + 兑换券 &times; {this.props.voucher_count}</span> : null}

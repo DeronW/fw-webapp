@@ -16,7 +16,7 @@ const OrderDetail = React.createClass({
                     send_channel={this.props.sendChannel}
                 />
                 <OrderStatusBlock order={this.props.order} products={this.props.products}/>
-                <OrderPayInfo payment={this.props.payment}/>
+                <OrderPayInfo payment={this.props.payment} order={this.props.order}/>
                 <OrderNumberList order={this.props.order}/>
             </div>
         );
@@ -131,6 +131,7 @@ const OrderStatusBlock = React.createClass({
 const OrderPayInfo = React.createClass({
     render: function () {
         let payment = this.props.payment;
+        let order = this.props.order;
 
         let score, bean, ticket;
         if (payment.score) {
@@ -149,11 +150,11 @@ const OrderPayInfo = React.createClass({
                 </div>
             )
         }
-        if (payment.ticket_price) {
+        if (order.ticket_count) {
             ticket = (
                 <div className="info-block">
                     <span className="text">兑换券支付</span>
-                    <span className="data-text">{payment.ticket_price}</span>
+                    <span className="data-text"> 兑换券 &times; {order.ticket_count}</span>
                 </div>
             )
         }

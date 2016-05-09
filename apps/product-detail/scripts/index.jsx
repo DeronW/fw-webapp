@@ -154,12 +154,13 @@ const PlusMinus = React.createClass({
         let btnMinusBg = "url(" + STATIC_PATH + "images/" + (this.state.minus ? "blue-minus" : "gray-minus") + ".png)";
         let btnPlusBg = "url(" + STATIC_PATH + "images/" + (this.state.plus ? "blue-plus" : "gray-plus") + ".png)";
 
+// <input type="text" value={this.state.value} onChange={this.changeValue} onBlur={this.blur}/>
         return (
             <div className="detail-foot">
                 <div className="detail-num-change">
                     <div className="minus" onClick={this.changeMinus} style={{background:btnMinusBg}}></div>
                     <div className="input-num">
-                        <input type="text" value={this.state.value} onChange={this.changeValue} onBlur={this.blur}/>
+                        {this.state.value}
                     </div>
                     <div className="plus" onClick={this.changePlus} style={{background:btnPlusBg}}></div>
                 </div>
