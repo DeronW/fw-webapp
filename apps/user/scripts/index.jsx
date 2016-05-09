@@ -251,7 +251,7 @@ const Voucher = React.createClass({
 
         return (
             <div className="my-voucher-cont-list">
-                <a href={data.product_biz_no ?  '/productDetail?bizNo=' + data.product_biz_no : null}>
+                <a href = { (this.props.state == 'used' || this.props.state == 'dated') ? 'javascript:void(0)' : '/productDetail?bizNo=' + data.product_biz_no}>
                     <div className={gray_bg ? "t-info b-color" : "t-info"}>
                         <div className="title-info">
                             <span className="title-text">{data.title}</span>
