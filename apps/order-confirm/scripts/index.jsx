@@ -79,7 +79,7 @@ const ConfirmOrder = React.createClass({
             })
         }
     },
-    updateSMSCodeHandler: function(code){
+    updateSMSCodeHandler: function (code) {
         this.FormData.sms_code = code;
     },
     updatePaymentHandler: function (options) {
@@ -137,7 +137,8 @@ const ConfirmOrder = React.createClass({
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
                 />
-                <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler} update_sms_code_handler={this.updateSMSCodeHandler}/>
+                <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
+                         update_sms_code_handler={this.updateSMSCodeHandler}/>
                 <div className="confirm-order-foot">
                     <a onClick={this.makeOrderHandler}
                        className={this.can_buy() ? "btn-red" : "btn-red btn-gray"}>确认购买</a>

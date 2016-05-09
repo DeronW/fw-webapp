@@ -2,7 +2,8 @@ const PaymentPanel = React.createClass({
     getInitialState: function () {
 
         let voucher_list = this.props.voucher_list;
-        if(voucher_list[0]) voucher_list[0].checked = true;
+        // 默认为用户选择一个兑换券
+        //if (voucher_list[0]) voucher_list[0].checked = true;
 
         let cc = $FW.Utils.length(voucher_list, (i) => i.checked);
 
@@ -15,24 +16,24 @@ const PaymentPanel = React.createClass({
             score_used: (this.props.product_count - cc) * this.props.product.score
         }
     },
-    componentDidMount: function(){
+    componentDidMount: function () {
         this.updateFormDataHandler()
     },
-    componentDidUpdate: function(){
+    componentDidUpdate: function () {
         this.updateFormDataHandler()
     },
     componentWillReceiveProps: function (nextProps) {
         this.setState({checked_voucher: nextProps.checked_voucher})
     },
-    updateFormDataHandler: function(){
+    updateFormDataHandler: function () {
         this.props.update_payment_handler({
             use_bean: this.state.use_bean,
-            used_bean_count: this.state.used_bean_count,
+            used_bean_count: this.state.use_bean ? this.used_bean_count : 0,
             voucher_list: this.state.voucher_list,
             total_price: this.computeTotalPrice()
         });
     },
-    computeTotalPrice: function(){
+    computeTotalPrice: function () {
 
         let total_price = (this.props.product_count - this.state.checked_voucher_count) *
             this.props.product.price;
@@ -40,24 +41,26 @@ const PaymentPanel = React.createClass({
         if (total_price < 0) {
             this.used_bean_count = parseInt(total_price * 100);
             total_price = 0;
+        } else {
+            this.used_bean_count = this.props.user.bean;
         }
 
         return total_price;
     },
-    toggleVoucherModal: function(){
+    toggleVoucherModal: function () {
         this.setState({show_voucher_modal: !this.state.show_voucher_modal})
     },
     toggleBeanHandler: function () {
         this.setState({use_bean: !this.state.use_bean});
     },
-    cancelVoucherModalHandler: function(){
+    cancelVoucherModalHandler: function () {
         this.setState({show_voucher_modal: false})
     },
-    confirmCheckedVoucherHandler: function(new_voucher_list){
+    confirmCheckedVoucherHandler: function (new_voucher_list) {
         let cc = $FW.Utils.length(new_voucher_list, (i) => i.checked);
 
         let score_used = (this.props.product_count - cc) * this.props.product.score;
-        if(score_used > this.props.user.score) {
+        if (score_used > this.props.user.score) {
             $FW.Component.Alert('score is not enough')
         }
 
@@ -70,12 +73,10 @@ const PaymentPanel = React.createClass({
     },
     render: function () {
 
-        let product = this.props.product;
-
         let checked_voucher = () => {
             let voucher_name;
-            for(var i = 0; i < this.state.voucher_list.length; i++){
-                if(this.state.voucher_list[i].checked) {
+            for (var i = 0; i < this.state.voucher_list.length; i++) {
+                if (this.state.voucher_list[i].checked) {
                     voucher_name = this.state.voucher_list[i].productName;
                     break;
                 }
@@ -85,7 +86,7 @@ const PaymentPanel = React.createClass({
                     {voucher_name} &times; {this.state.checked_voucher_count}
                 </div>) :
                 null;
-        }
+        };
 
         let user_score = null;
         if (this.props.user.score > 0) {
@@ -127,11 +128,11 @@ const PaymentPanel = React.createClass({
                     <div className="balance4">总计：</div>
                 </div>
                 {this.state.show_voucher_modal ? <VoucherModal
-                           voucher_list={this.props.voucher_list}
-                           product_count={this.props.product_count}
-                           cancel_voucher_handler={this.cancelVoucherModalHandler}
-                           confirm_voucher_handler={this.confirmCheckedVoucherHandler}
-                           /> : null}
+                    voucher_list={this.props.voucher_list}
+                    product_count={this.props.product_count}
+                    cancel_voucher_handler={this.cancelVoucherModalHandler}
+                    confirm_voucher_handler={this.confirmCheckedVoucherHandler}
+                /> : null}
             </div>
         )
     }

@@ -34,10 +34,10 @@ const ProductPanel = React.createClass({
                     <div className="num-text">商品数量</div>
                     <div className="num">
                         <div className="minus" onClick={this.decreaseHandler}
-                             style={{backgroundImage:"url("+STATIC_PATH+"images/gray-minus.png)"}}></div>
+                             style={{backgroundImage:"url("+STATIC_PATH+"images/gray-minus.png)", display: "none"}}></div>
                         <div className="value">{this.state.count}</div>
                         <div className="plus" onClick={this.increaseHandler}
-                             style={{backgroundImage:"url("+STATIC_PATH+"images/gray-plus.png)"}}></div>
+                             style={{backgroundImage:"url("+STATIC_PATH+"images/gray-plus.png)", display: "none"}}></div>
                     </div>
                 </div>
                 <div className="total-box">
