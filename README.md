@@ -251,5 +251,6 @@ VIP专区页 [http://m.mall.9888.cn/product-vip](http://m.mall.9888.cn/product-v
 2. 在 *gulp/tasks/mall.js* 文件内,给 *apps* 变量添加一行新数据, 字符串, 跟新建目录同名
 3. 查看 gulp 默认指令, 已经新添加了新页面的指令
 
-测试添加
+测试添加1
 测试添加2
+测试添加3
