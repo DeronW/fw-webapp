@@ -4,7 +4,7 @@ const SMSCode = React.createClass({
     },
     changeValueHandler: function (e) {
         this.setState({value: e.target.value});
-        window.OrderFormData.sms_code = e.target.value;
+        this.props.update_sms_code_handler(e.target.value);
     },
     getSmsCodeHandler: function () {
         var _this = this;

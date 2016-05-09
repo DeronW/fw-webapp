@@ -79,6 +79,9 @@ const ConfirmOrder = React.createClass({
             })
         }
     },
+    updateSMSCodeHandler: function(code){
+        this.FormData.sms_code = code;
+    },
     updatePaymentHandler: function (options) {
         if (typeof(options.use_bean) == 'boolean')
             this.FormData.useBean = options.use_bean;
@@ -134,7 +137,7 @@ const ConfirmOrder = React.createClass({
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
                 />
-                <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}/>
+                <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler} update_sms_code_handler={this.updateSMSCodeHandler}/>
                 <div className="confirm-order-foot">
                     <a onClick={this.makeOrderHandler}
                        className={this.can_buy() ? "btn-red" : "btn-red btn-gray"}>确认购买</a>
@@ -178,7 +181,7 @@ $FW.DOMReady(function () {
                 product_limit: data.productLimit,
                 label_bought: data.labelLimit,
                 label_limit: data.persionLabelLimit
-            }
+            };
             // var ttt_list = [
             //     {
             //         id: "54aa61e511bb4570a5f3fb2bfdb9fc8f",
