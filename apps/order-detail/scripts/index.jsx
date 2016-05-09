@@ -82,7 +82,7 @@ const OrderStatusBlock = React.createClass({
 
         let orderBlock = function (d, index) {
 
-            let score_cost = d.score ? '+ ' + d.score + '分' : null;
+            let score_cost = d.score ? '+ ' + d.score + '工分' : null;
             let ticket_num = d.ticket_num ? '+ 兑换券*' + d.ticket_num : null;
 
             return (
@@ -103,7 +103,7 @@ const OrderStatusBlock = React.createClass({
                                 </div>
                                 <div className="commodity-number">
                                     <span className="money-text">
-                                        ￥{$FW.Format.currency(d.price)}
+                                        &yen;{$FW.Format.currency(d.price)}
                                         {score_cost}</span>
                                     <span className="number-text">&times;{d.count}</span>
                                 </div>
@@ -113,7 +113,7 @@ const OrderStatusBlock = React.createClass({
                         <div className="order-commodity-total">
                             <span className="commodity-text">共{self.props.order.count}件商品</span>
                             <span className="total-text">
-                                合计: ￥{$FW.Format.currency(self.props.order.price)}
+                                合计: &yen;{$FW.Format.currency(self.props.order.price)}
                                 {score_cost} {ticket_num}</span>
                         </div>
                     </div>
@@ -145,7 +145,7 @@ const OrderPayInfo = React.createClass({
             bean = (
                 <div className="info-block">
                     <span className="text">工豆支付</span>
-                    <span className="data-text">￥{payment.bean}</span>
+                    <span className="data-text">&yen;{payment.bean / 100.0}</span>
                 </div>
             )
         }
@@ -167,7 +167,7 @@ const OrderPayInfo = React.createClass({
                     {ticket}
                     <div className="info-block">
                         <span className="text">余额支付</span>
-                        <span className="data-text">￥{payment.money}</span>
+                        <span className="data-text">&yen;{payment.money}</span>
                     </div>
                     {bean}
                     {score}
