@@ -9,7 +9,7 @@ const ConfirmOrder = React.createClass({
         var query = $FW.Format.urlQuery();
         let product_count = this.can_buy_count(this.props.product.count);
 
-        window.form_data = this.FormData = {
+        window._form_data = this.FormData = {
             sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
             buyNum: product_count,
             useBean: null,
@@ -21,37 +21,37 @@ const ConfirmOrder = React.createClass({
             tokenStr: query.tokenStr,
             sms_code: null,
             addressId: this.props.default_address_id
-        }
+        };
 
-        return { product_count: product_count }
+        return {product_count: product_count}
     },
-    componentDidUpdate: function(){
+    componentDidUpdate: function () {
         this.can_buy(true)
     },
-    can_buy: function(with_warning){
+    can_buy: function (with_warning) {
         return this.can_buy_count(this.state.product_count, with_warning) == this.state.product_count;
     },
-    can_buy_count: function(count, with_warning){
+    can_buy_count: function (count, with_warning) {
         let cnd = this.props.pay_condiation;
         let product_count = count;
 
         // 同商品判断最大购买数量
         let product_remain = cnd.product_limit - cnd.product_bought;
-        if (cnd.product_limit && count > product_remain){
-            if(with_warning) $FW.Component.Alert('对不起,此商品每人只能购买' + cnd.product_limit + '件');
+        if (cnd.product_limit && count > product_remain) {
+            if (with_warning) $FW.Component.Alert('对不起,此商品每人只能购买' + cnd.product_limit + '件');
             count = product_remain;
         }
 
         // 同标签最大购买数量
         let label_remain = cnd.label_limit - cnd.label_bought;
-        if (cnd.label_limit && count > label_remain){
-            if(with_warning) $FW.Component.Alert('对不起,此此标签下商品每人只能购买' + label_remain + '件');
+        if (cnd.label_limit && count > label_remain) {
+            if (with_warning) $FW.Component.Alert('对不起,此此标签下商品每人只能购买' + label_remain + '件');
             count = label_remain;
         }
         return count
     },
     makeOrderHandler: function () {
-        if(!this.can_buy(true)) return; // $FW.Component.Alert('您现在不能购买这件商品');
+        if (!this.can_buy(true)) return; // $FW.Component.Alert('您现在不能购买这件商品');
         if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
 
         $FW.Ajax({
@@ -60,10 +60,11 @@ const ConfirmOrder = React.createClass({
             method: 'post',
             data: {smsCode: this.FormData.sms_code},
             success: submit
-        })
+        });
 
         let _this = this;
-        function submit(){
+
+        function submit() {
             $FW.Ajax({
                 url: API_PATH + '/mall/api/order/v1/commit_pay_order.json',
                 enable_loading: true,
@@ -78,20 +79,20 @@ const ConfirmOrder = React.createClass({
             })
         }
     },
-    updatePaymentHandler: function(options){
-        if(typeof(options.use_bean) == 'boolean')
+    updatePaymentHandler: function (options) {
+        if (typeof(options.use_bean) == 'boolean')
             this.FormData.useBean = options.use_bean;
-        if(typeof(options.used_bean_count) == 'number')
+        if (typeof(options.used_bean_count) == 'number')
             this.FormData.payBeanPrice = options.used_bean_count;
-        if(typeof(options.voucher_list) == 'object') {
+        if (typeof(options.voucher_list) == 'object') {
             this.FormData.ticket = [];
-            for(var i = 0; i < options.voucher_list.length; i++) {
+            for (var i = 0; i < options.voucher_list.length; i++) {
                 var e = options.voucher_list[i];
-                if(e.checked) this.FormData.ticket.push(e.id)
+                if (e.checked) this.FormData.ticket.push(e.id)
             }
             this.FormData.useTicket = !!this.FormData.ticket.length;
         }
-        if(typeof(options.total_price) == 'number')
+        if (typeof(options.total_price) == 'number')
             this.FormData.payRmbPrice = options.total_price;
     },
     updateProductCountHandler: function (c) {
@@ -123,16 +124,16 @@ const ConfirmOrder = React.createClass({
         return (
             <div className="confirm-order">
                 <AddressPanel address={address} product_biz_no={this.product_biz_no}
-                    product_count={this.state.product_count}/>
+                              product_count={this.state.product_count}/>
                 <ProductPanel product={this.props.product}
-                    product_count={this.state.product_count}
-                    update_product_count_handler={this.updateProductCountHandler}/>
+                              product_count={this.state.product_count}
+                              update_product_count_handler={this.updateProductCountHandler}/>
                 <PaymentPanel product={this.props.product}
-                                product_count={this.state.product_count}
-                                    voucher_list={this.props.ticket_list}
-                                    user={this.props.user}
-                                    update_payment_handler={this.updatePaymentHandler}
-                                    />
+                              product_count={this.state.product_count}
+                              voucher_list={this.props.ticket_list}
+                              user={this.props.user}
+                              update_payment_handler={this.updatePaymentHandler}
+                />
                 <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}/>
                 <div className="confirm-order-foot">
                     <a onClick={this.makeOrderHandler}
@@ -152,8 +153,8 @@ $FW.DOMReady(function () {
     if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
     $FW.Ajax({
-        // url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + getProductBizNo() + '&buyNum=1',
-        url: 'http://localhost/pre_pay_order.json',
+        url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + getProductBizNo() + '&buyNum=1',
+        //url: 'http://localhost/pre_pay_order.json',
         enable_loading: true,
         success: function (data) {
 
@@ -198,8 +199,8 @@ $FW.DOMReady(function () {
             // data.ticketList = ttt_list;
 
             ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList}
-                                        user={user} address_list={data.addressList}
-                                        pay_condiation={pay_condiation}
+                                          user={user} address_list={data.addressList}
+                                          pay_condiation={pay_condiation}
                                           default_address_id={query.address_id || data.addressId}
                 />,
                 document.getElementById('cnt'));
