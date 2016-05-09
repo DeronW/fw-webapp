@@ -25,6 +25,7 @@ function generate_task(project_name, configs) {
     var PROJECT_NAME = project_name,
         APP_PATH = 'apps/' + project_name + '/',
         BUILD_PATH = 'build/' + project_name + '/',
+        PUBLIC_PATH = 'public/',
         LIB_PATH = 'lib/',
         CONFIG = Object.assign({
             debug: true,
@@ -37,11 +38,15 @@ function generate_task(project_name, configs) {
         }, configs);
 
     gulp.task(CONFIG.cmd_prefix + PROJECT_NAME,
-        gulp.series(compile_html,
+        gulp.series(
+            compile_html,
             compile_styles,
             compile_commonjs,
             compile_scripts,
-            compile_images));
+            compile_images,
+            insert_common_assets
+        )
+    );
 
     if (CONFIG.enable_watch) {
         gulp.task(PROJECT_NAME + ':watch', gulp.series(PROJECT_NAME, monitor));
@@ -117,6 +122,12 @@ function generate_task(project_name, configs) {
                 APP_PATH + 'images/**/*.gif'])
             .pipe(plugins.changed(BUILD_PATH + 'images'))
             .pipe(CONFIG.debug ? plugins.empty() : plugins.imagemin())
+            .pipe(gulp.dest(BUILD_PATH + 'images'));
+    }
+
+    function insert_common_assets() {
+        return gulp.src([PUBLIC_PATH + 'common/images/*'])
+            .pipe(plugins.changed(BUILD_PATH + 'images'))
             .pipe(gulp.dest(BUILD_PATH + 'images'));
     }
 
