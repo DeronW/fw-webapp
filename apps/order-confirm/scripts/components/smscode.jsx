@@ -9,7 +9,7 @@ const SMSCode = React.createClass({
     getSmsCodeHandler: function () {
         var _this = this;
         if (!this.props.validate_before_sms_handler()) return;
-        if (this.state.remain == 0) {
+        if (this.state.remain <= 0) {
             this.tick();
             $FW.Ajax({
                 url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
@@ -45,7 +45,7 @@ const SMSCode = React.createClass({
                     </div>
                     <div className={1 ? "btn-test-blue" : "btn-test-blue btn-test-gray"}
                          onClick={this.getSmsCodeHandler}>
-                        {this.state.remain ? this.state.remain + 's' : '获取验证码'}
+                        {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}
                     </div>
                 </div>
             </div>
