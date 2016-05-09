@@ -30,7 +30,8 @@ gulp.task('build:mall', gulp.series(
         'pack:deliver-address',
         'pack:new-deliver-address',
         'pack:waiting',
-        'pack:fail'
+        'pack:fail',
+        'pack:not-support'
     ],
     function (done) {
         gulp.src(['build/**']).pipe(gulp.dest('cdn'));

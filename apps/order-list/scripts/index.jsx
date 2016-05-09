@@ -38,9 +38,9 @@ const OrderMain = React.createClass({
     render: function () {
         var self = this;
 
+        // style={{backgroundImage: "url("+STATIC_PATH+"images/line-icon.png)"}}
         var btnVoucher = (v, index) => (
             <div key={index} className={index == this.state.index ? "btn-tab select-li" : "btn-tab"}
-                 style={{backgroundImage: "url("+STATIC_PATH+"images/line-icon.png)"}}
                  onClick={ function() { self.clickHandler(index) } }>
                 <span className="tab-text">{self.state.voucherName[index]}</span>
             </div>

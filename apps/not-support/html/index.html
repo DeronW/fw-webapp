@@ -1,0 +1,29 @@
+{% extends '../../../lib/templates/mall_base.swig.html' %}
+
+{% block title %}不支持当前环境{% endblock %}
+{% block css %}
+<style>
+    body {
+        margin: 0;
+        background: #e9eaee;
+    }
+
+    img {
+        display: block;
+        margin: 40% auto 0;
+    }
+
+    .summary {
+        font-size: 40px;
+        font-size: 5vw;
+        color: #8591b3;
+        text-align: center;
+        margin-top: 50px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<img src="{STATIC_PATH}images/bg.jpg">
+<div class="summary">您的安卓版本过低，请升级后重试！</div>
+{% endblock %}

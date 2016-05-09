@@ -14,6 +14,7 @@ var apps = [
     'product-vip',
     'waiting',
     'fail',
+    'not-support',
     'deliver-address',
     'new-deliver-address'
 ];
