@@ -252,3 +252,4 @@ VIP专区页 [http://m.mall.9888.cn/product-vip](http://m.mall.9888.cn/product-v
 3. 查看 gulp 默认指令, 已经新添加了新页面的指令
 
 测试添加
+测试添加2
