@@ -55,7 +55,7 @@ const UserInfo = React.createClass({
                             </div>
 
                             <div className="usr-info-vip">
-                                <span className="text">会员等级{user_level}</span>
+                                <span className="text">会员等级 {user_level}</span>
                             </div>
                         </div>
                     </div>
