@@ -32,13 +32,19 @@ const Address = React.createClass({
 
             success: function (data) {
                 var query = $FW.Format.urlQuery();
-                var link;
-                if (data.address_count > 1) {
-                    link = '/delivery_address?' + 'productBizNo=' + query.productBizNo + '&count=' + query.count;
+                // 需要判断页面来源, 如果从 "我的商城" 进入到这个页面, 怎要后退页面
+                if (query.preview == 'true') {
+                    history.back()
                 } else {
-                    link = '/order/confirm?address_id=' + data.address_id + '&productBizNo=' + query.productBizNo + '&count=' + query.count;
+                    // 如果是从下单页面进入, 则需要回到下单页面或下单页的收获地址
+                    var link;
+                    if (data.address_count > 1) {
+                        link = '/delivery_address?' + 'productBizNo=' + query.productBizNo + '&count=' + query.count;
+                    } else {
+                        link = '/order/confirm?address_id=' + data.address_id + '&productBizNo=' + query.productBizNo + '&count=' + query.count;
+                    }
+                    location.href = link
                 }
-                location.href = link
             }
         })
     },

@@ -9,6 +9,14 @@ const DeliverAddress = React.createClass({
     },
     markDefaultHandler: function (address_id) {
         console.log(address_id);
+        $FW.Ajax({
+            url: API_PATH + '/api/v1/address/set_default.json',
+            method: 'post',
+            data: {id: address_id},
+            success: function () {
+                location.reload()
+            }
+        });
     },
     render: function () {
         let _this = this;
@@ -49,22 +57,19 @@ const DeliverAddress = React.createClass({
             )
         };
 
-        let create_address;
-        if (!preview) {
-            create_address = (
-                <div className="bottom-panel">
-                    <a href={"/delivery_address/create?productBizNo=" + productBizNo + '&count=' + productCount}
-                       className="create-address">+新建地址</a>
-                </div>
-            )
-        }
+        let create_link = preview ?
+            "/delivery_address/create?preview=true" :
+            ("/delivery_address/create?productBizNo=" + productBizNo + '&count=' + productCount);
 
         return (
             <div>
                 <div className={preview ? "address-list preview" : "address-list"}>
                     {this.props.address.map(address)}
                 </div>
-                {create_address}
+
+                <div className="bottom-panel">
+                    <a href={create_link} className="create-address">+ 新建地址</a>
+                </div>
             </div>
         )
     }
@@ -86,10 +91,14 @@ $FW.DOMReady(function () {
     });
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"我的收货地址"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"我的收货地址"} back_handler={back_handler}/>, document.getElementById('header'));
     }
 });
 
+function back_handler() {
+    history.back();
+}
+
 window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') history.back();
+    if (msg == 'history:back') back_handler()
 };
