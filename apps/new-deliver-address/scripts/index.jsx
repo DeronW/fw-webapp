@@ -18,7 +18,7 @@ const Address = React.createClass({
         if (!this.state.phone)
             return $FW.Component.Alert('请填写联系方式');
         if (!this.state.address)
-            return $FW.Component.Alert('请填写收收货地址');
+            return $FW.Component.Alert('请填写收货地址');
 
         $FW.Ajax({
             url: API_PATH + 'mall/api/member/v1/delivery_address/create.json',
