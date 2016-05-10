@@ -26,7 +26,7 @@ const Success = React.createClass({
                     </div>
                     <div className="pay">
                         支付：
-                        {this.props.price ? <span>&yen;{this.props.price}</span> : null}
+                        {parseInt(this.props.price) ? <span>&yen;{this.props.price}</span> : null}
                         {this.props.score ? <span className="score"> + {this.props.score}工分</span> : null}
                         {this.props.voucher_count ?
                             <span className="coupons"> + 兑换券 &times; {this.props.voucher_count}</span> : null}
@@ -57,7 +57,7 @@ $FW.DOMReady(function () {
                 receiver={data.shipping_info.username}
                 phone={data.shipping_info.phone}
                 address={data.shipping_info.address}
-                price={data.payment.money}
+                price={data.order.price}
                 score={data.payment.score}
                 voucher_count={data.order.ticket_num}
             />, document.getElementById('cnt'));
