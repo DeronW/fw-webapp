@@ -35,7 +35,7 @@ const Success = React.createClass({
                 </div>
                 <div className="success-btn">
                     <a href={"/order/detail?order_id=" + this.props.order_id} className="success-btn1">查看订单</a>
-                    <a href="/" className="success-btn2" style={{display: "none"}}>返回商城</a>
+                    <a href="/" className="success-btn2">返回商城</a>
                 </div>
             </div>
         )

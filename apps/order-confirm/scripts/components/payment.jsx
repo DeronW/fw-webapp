@@ -39,7 +39,7 @@ const PaymentPanel = React.createClass({
             this.props.product.price;
         if (this.state.use_bean && total_price > 0) {
             if (this.props.user.bean > (total_price * 100)) {
-                this.used_bean_count = total_price * 100;
+                this.used_bean_count = parseInt(total_price * 100);
                 total_price = 0;
             } else {
                 total_price -= this.props.user.bean / 100;

@@ -49,12 +49,16 @@ const Address = React.createClass({
         })
     },
     onUsernameChangeHandler: function (e) {
+        if(e.target.value.length < 50)
         this.setState({username: e.target.value})
     },
     onPhoneChangeHandler: function (e) {
+        var v = e.target.value;
+        if(v.length < 12 && !isNaN(v))
         this.setState({phone: e.target.value})
     },
     onAddressChangeHandler: function (e) {
+        if(e.target.value.length < 100)
         this.setState({address: e.target.value})
     },
     onDefaultChangeHandler: function (e) {
