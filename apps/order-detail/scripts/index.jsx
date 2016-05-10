@@ -113,7 +113,7 @@ const OrderStatusBlock = React.createClass({
                         <div className="order-commodity-total">
                             <span className="commodity-text">共{self.props.order.count}件商品</span>
                             <span className="total-text">
-                                合计: &yen;{$FW.Format.currency(self.props.order.price)}
+                                实付款: &yen;{$FW.Format.currency(self.props.order.price)}
                                 {score_cost} {ticket_num}</span>
                         </div>
                     </div>
