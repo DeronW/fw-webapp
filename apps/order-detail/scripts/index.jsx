@@ -79,11 +79,12 @@ const OrderStatusBlock = React.createClass({
     render: function () {
         var self = this;
         let products = this.props.products;
+        let order = this.props.order;
 
         let orderBlock = function (d, index) {
 
             let score_cost = d.score ? '+ ' + d.score + '工分' : null;
-            let ticket_num = d.ticket_num ? '+ 兑换券*' + d.ticket_num : null;
+            let ticket_num = order.ticket_num ? ' 兑换券 x' + order.ticket_num : null;
 
             return (
                 <div className="order-block" key={index}>
@@ -111,10 +112,12 @@ const OrderStatusBlock = React.createClass({
                         </div>
 
                         <div className="order-commodity-total">
-                            <span className="commodity-text">共{self.props.order.count}件商品</span>
+                            <span className="commodity-text">共{order.count}件商品</span>
                             <span className="total-text">
-                                实付款: &yen;{$FW.Format.currency(self.props.order.price)}
-                                {score_cost} {ticket_num}</span>
+                                实付款:
+                                {order.price > 0 ? <span>&yen; {$FW.Format.currency(order.price)} </span> : null}
+                                {order.price > 0 && order.score ? '+' : null}
+                                {order.score ? order.score + '工分' : null} {ticket_num}</span>
                         </div>
                     </div>
                 </div>
@@ -217,6 +220,7 @@ $FW.DOMReady(function () {
     }
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/order_detail.json?orderId=" + order_id,
+        //url: 'http://localhost/order-detail.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));

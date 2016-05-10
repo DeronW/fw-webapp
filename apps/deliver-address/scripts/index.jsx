@@ -75,8 +75,8 @@ $FW.DOMReady(function () {
 
     $FW.Component.showAjaxLoading();
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/member/v1/delivery_address.json',
-        url: 'http://localhost/address.json',
+        url: API_PATH + 'mall/api/member/v1/delivery_address.json',
+        //url: 'http://localhost/address.json',
         success: function (data) {
             $FW.Component.hideAjaxLoading();
             let preview = $FW.Format.urlQuery().preview == 'true';
