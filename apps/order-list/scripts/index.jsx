@@ -153,7 +153,7 @@ const OrderBlock = React.createClass({
                     <div className="commodity-total">
                         <span className="commodity-text">共件{order.orderCount}商品</span>
                         <span className="total-text">
-                            实付款:&yen;
+                            实付款: &yen;
                             {order.price}
                             {cost_score}
                         </span>

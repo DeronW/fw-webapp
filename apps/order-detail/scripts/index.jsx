@@ -117,7 +117,8 @@ const OrderStatusBlock = React.createClass({
                                 实付款:
                                 {order.price > 0 ? <span>&yen; {$FW.Format.currency(order.price)} </span> : null}
                                 {order.price > 0 && order.score ? '+' : null}
-                                {order.score ? order.score + '工分' : null} {ticket_num}</span>
+                                {order.score ? order.score + '工分' : null}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -153,11 +154,11 @@ const OrderPayInfo = React.createClass({
                 </div>
             )
         }
-        if (order.ticket_count) {
+        if (order.ticket_num) {
             ticket = (
                 <div className="info-block">
                     <span className="text">兑换券支付</span>
-                    <span className="data-text"> 兑换券 &times; {order.ticket_count}</span>
+                    <span className="data-text"> 兑换券 &times; {order.ticket_num}</span>
                 </div>
             )
         }

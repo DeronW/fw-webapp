@@ -27,7 +27,8 @@ const Success = React.createClass({
                     <div className="pay">
                         支付：
                         {parseInt(this.props.price) ? <span>&yen;{this.props.price}</span> : null}
-                        {this.props.score ? <span className="score"> + {this.props.score}工分</span> : null}
+                        {parseInt(this.props.price) && this.props.score ? '+' : null}
+                        {this.props.score ? <span className="score"> {this.props.score}工分</span> : null}
                         {this.props.voucher_count ?
                             <span className="coupons"> + 兑换券 &times; {this.props.voucher_count}</span> : null}
                     </div>

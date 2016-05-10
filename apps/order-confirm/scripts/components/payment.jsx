@@ -127,7 +127,7 @@ const PaymentPanel = React.createClass({
                     <div className="balance1">当前余额</div>
                     <div className={"balance2 red"}>&yen;{$FW.Format.currency(this.props.user.charge)}</div>
                     <div className="balance3">&yen;{$FW.Format.currency(this.computeTotalPrice())}</div>
-                    <div className="balance4">总计：</div>
+                    <div className="balance4">余额支付：</div>
                 </div>
                 {this.state.show_voucher_modal ? <VoucherModal
                     voucher_list={this.props.voucher_list}
