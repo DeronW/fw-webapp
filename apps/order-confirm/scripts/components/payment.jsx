@@ -63,7 +63,7 @@ const PaymentPanel = React.createClass({
 
         let score_used = (this.props.product_count - cc) * this.props.product.score;
         if (score_used > this.props.user.score) {
-            $FW.Component.Alert('score is not enough')
+            $FW.Component.Alert('工分通道已关闭')
         }
 
         this.setState({
