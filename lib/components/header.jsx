@@ -24,7 +24,8 @@ const Header = React.createClass({
         let style_b = {
             position: "fixed",
             top: "0px",
-            width: "100%",
+            left: "0px",
+            right: "0px",
             height: this.state.height + 'px',
             textAlign: "center",
             lineHeight: this.state.height + 'px',
