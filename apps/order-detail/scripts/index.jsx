@@ -244,7 +244,7 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-    location.href = '/order/list';
+    location.href = '/order/mine';
 }
 
 window.onNativeMessageReceive = function (msg) {
