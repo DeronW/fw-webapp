@@ -4,6 +4,9 @@ const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const Success = React.createClass({
+    backToMallHandler: function () {
+        $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+    },
     render: function () {
 
         return (
@@ -36,7 +39,7 @@ const Success = React.createClass({
                 </div>
                 <div className="success-btn">
                     <a href={"/order/detail?order_id=" + this.props.order_id} className="success-btn1">查看订单</a>
-                    <a href="/" className="success-btn2">返回商城</a>
+                    <a onClick={this.backToMallHandler} className="success-btn2">返回商城</a>
                 </div>
             </div>
         )
