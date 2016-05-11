@@ -8,11 +8,13 @@ const ConfirmOrder = React.createClass({
     getInitialState: function () {
         var query = $FW.Format.urlQuery();
         let product_count = this.can_buy_count(this.props.product.count);
+        let use_bean = product_count > this.props.ticket_list.length;
+        this.props.user.use_bean = use_bean;
 
         window._form_data = this.FormData = {
             sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
             buyNum: product_count,
-            useBean: null,
+            useBean: use_bean,
             payBeanPrice: null,
             payRmbPrice: null,
             productBizNo: query.productBizNo,
@@ -34,7 +36,7 @@ const ConfirmOrder = React.createClass({
         return this.can_buy_count(this.state.product_count, with_warning) // == this.state.product_count;
     },
     can_buy_count: function (count, with_warning) {
-        let cnd = this.props.pay_condiation;
+        let cnd = this.props.pay_condition;
         // let origin_count = count;
         let voucher_count = this.props.ticket_list.length;
 
@@ -185,7 +187,7 @@ $FW.DOMReady(function () {
                 tags: data.tags || [],
                 count: parseInt(query.count) || 1
             };
-            var pay_condiation = {
+            var pay_condition = {
                 product_bought: data.persionProductLimit,
                 product_limit: data.productLimit,
                 label_bought: data.labelLimit,
@@ -194,7 +196,7 @@ $FW.DOMReady(function () {
 
             ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList}
                                           user={user} address_list={data.addressList}
-                                          pay_condiation={pay_condiation}
+                                          pay_condition={pay_condition}
                                           default_address_id={query.address_id || data.addressId}
                 />,
                 document.getElementById('cnt'));

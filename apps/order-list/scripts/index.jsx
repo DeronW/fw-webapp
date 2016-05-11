@@ -177,10 +177,12 @@ $FW.DOMReady(function () {
 
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"我的订单"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"我的订单"} back_handler={back_handler}/>, document.getElementById('header'));
     }
 });
-
+function back_handler() {
+    location.href = '/user';
+}
 window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/user';
+    if (msg == 'history:back') back_handler()
 };

@@ -237,10 +237,14 @@ $FW.DOMReady(function () {
     });
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"订单详情"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"订单详情"} back_handler={back_handler}/>, document.getElementById('header'));
     }
 });
 
+function back_handler() {
+    location.href = '/order/list';
+}
+
 window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/order/list';
+    if (msg == 'history:back') back_handler()
 };

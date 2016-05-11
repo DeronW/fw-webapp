@@ -306,11 +306,15 @@ $FW.DOMReady(function () {
     });
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"我的商城"} back_handler={() => location.href = '/'}/>,
+        ReactDOM.render(<Header title={"我的商城"} back_handler={back_handler}/>,
             document.getElementById('header'));
     }
 });
 
+function back_handler() {
+    location.href = '/';
+}
+
 window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/';
+    if (msg == 'history:back') back_handler()
 };
