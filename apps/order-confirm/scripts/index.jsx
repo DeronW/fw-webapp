@@ -25,7 +25,7 @@ const ConfirmOrder = React.createClass({
 
         return {product_count: product_count}
     },
-    componentDidMount: function(){
+    componentDidMount: function () {
     },
     componentDidUpdate: function () {
         this.can_buy(true)
@@ -40,7 +40,7 @@ const ConfirmOrder = React.createClass({
 
         // 同商品判断最大购买数量
         let product_remain = cnd.product_limit - cnd.product_bought;
-        if(product_remain < 0) product_remain = 0;
+        if (product_remain < 0) product_remain = 0;
         product_remain += voucher_count;
         if (cnd.product_limit && count > product_remain) {
             if (with_warning) $FW.Component.Alert('该商品限购' + cnd.product_limit + '件');
@@ -49,7 +49,7 @@ const ConfirmOrder = React.createClass({
 
         // 同标签最大购买数量
         let label_remain = cnd.label_limit - cnd.label_bought;
-        if(label_remain < 0) label_remain = 0;
+        if (label_remain < 0) label_remain = 0;
         label_remain += voucher_count;
         if (cnd.label_limit && count > label_remain) {
             if (with_warning) $FW.Component.Alert('该标签下商品限购' + label_remain + '件');
@@ -165,8 +165,8 @@ $FW.DOMReady(function () {
     if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
     $FW.Ajax({
-        // url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + query.productBizNo + '&buyNum=' + (query.count || 1),
-        url: 'http://localhost/pre_pay_order.json',
+        url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + query.productBizNo + '&buyNum=' + (query.count || 1),
+        //url: 'http://localhost/pre_pay_order.json',
         enable_loading: true,
         success: function (data) {
 

@@ -13,6 +13,7 @@ const HomePage = React.createClass({
                 <UserInfo
                     userAvatar={this.props.avatar}
                     user_level={this.props.vip_level}
+                    show_user_level={this.props.isOpenJiFenLevel}
                     userName={this.props.username}
 
                     prepareCount={this.props.prepare_count}
@@ -37,9 +38,12 @@ const HomePage = React.createClass({
 
 const UserInfo = React.createClass({
     render: function () {
-        let user_level = this.props.user_level == 1 ?
-            <span style={{color: 'gray'}}>VIP1</span> :
-            <em className="vip-text">VIP{this.props.user_level - 1}</em>;
+        let user_level = null;
+        if (this.props.show_user_level) {
+            user_level = this.props.user_level == 1 ?
+                <span style={{color: 'gray'}}>VIP1</span> :
+                <em className="vip-text">VIP{this.props.user_level - 1}</em>;
+        }
 
         return (
             <div>

@@ -84,7 +84,7 @@ const OrderStatusBlock = React.createClass({
         let orderBlock = function (d, index) {
 
             let score_cost = d.score ? '+ ' + d.score + '工分' : null;
-            let ticket_num = order.ticket_num ? ' 兑换券 x' + order.ticket_num : null;
+            //let ticket_num = order.ticket_num ? ' 兑换券 x' + order.ticket_num : null;
 
             return (
                 <div className="order-block" key={index}>
@@ -115,7 +115,7 @@ const OrderStatusBlock = React.createClass({
                             <span className="commodity-text">共{order.count}件商品</span>
                             <span className="total-text">
                                 实付款:
-                                {order.price > 0 ? <span>&yen; {$FW.Format.currency(order.price)} </span> : null}
+                                <span>&yen; {$FW.Format.currency(order.price)} </span>
                                 {order.price > 0 && order.score ? '+' : null}
                                 {order.score ? order.score + '工分' : null}
                             </span>
@@ -137,20 +137,23 @@ const OrderPayInfo = React.createClass({
         let payment = this.props.payment;
         let order = this.props.order;
 
-        let score, bean, ticket;
+        let score, bean, ticket, money;
         if (payment.score) {
             score = (
                 <div className="info-block">
                     <span className="text">工分消耗</span>
-                    <span className="data-text">{payment.score}</span>
+                    <span className="data-text">{payment.score}工分</span>
                 </div>
             )
         }
         if (payment.bean) {
+            var format_bean = parseInt(payment.bean / 100);
+            var sub = '00' + payment.bean % 100;
+            format_bean += '.' + sub.substr(sub.length - 2);
             bean = (
                 <div className="info-block">
                     <span className="text">工豆支付</span>
-                    <span className="data-text">&yen;{payment.bean / 100.0}</span>
+                    <span className="data-text">&yen;{format_bean}</span>
                 </div>
             )
         }
@@ -162,6 +165,14 @@ const OrderPayInfo = React.createClass({
                 </div>
             )
         }
+        if (payment.money > 0) {
+            money = (
+                <div className="info-block">
+                    <span className="text">余额支付</span>
+                    <span className="data-text">&yen;{payment.money}</span>
+                </div>
+            )
+        }
 
         return (
             <div className="order-pay-info">
@@ -170,10 +181,7 @@ const OrderPayInfo = React.createClass({
                 </div>
                 <div className="l-r-text">
                     {ticket}
-                    <div className="info-block">
-                        <span className="text">余额支付</span>
-                        <span className="data-text">&yen;{payment.money}</span>
-                    </div>
+                    {money}
                     {bean}
                     {score}
                 </div>
