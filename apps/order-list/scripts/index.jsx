@@ -141,7 +141,8 @@ const OrderBlock = React.createClass({
                         <span className="commodity-text">共件{order.orderCount}商品</span>
                         <span className="total-text">
                             实付款:
-                            {order.price > 0 ? <span>&yen;{$FW.Format.currency(order.price)}</span> : null}
+                            {(order.price > 0 || order.score == 0) ?
+                                <span>&yen;{$FW.Format.currency(order.price)}</span> : null}
                             {order.price > 0 && order.score ? ' + ' : null}
                             {order.score ? order.score + '工分' : null}
                         </span>
