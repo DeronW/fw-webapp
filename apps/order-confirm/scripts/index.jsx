@@ -204,6 +204,8 @@ $FW.DOMReady(function () {
     if (!$FW.Browser.inApp()) {
         ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
     }
+
+    $FW.setLoginRedirect('/productDetail?bizNo=' + query.productBizNo);
 });
 
 window.onNativeMessageReceive = function (msg) {

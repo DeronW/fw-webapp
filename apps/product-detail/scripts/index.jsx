@@ -67,8 +67,8 @@ const Product = React.createClass({
                     <div className="detail-inf-name">{data.title}</div>
                     <div className="detail-inf-des">{data.sub_title} </div>
                     <div className="detail-inf-price">
-                        <span className="money">&yen;</span>
-                        <span className="price">{$FW.Format.currency(data.price)}</span>
+                        {data.price > 0 ? <span className="money">&yen;</span> : null}
+                        {data.price > 0 ? <span className="price">{$FW.Format.currency(data.price)}</span> : null}
                         {score}
                     </div>
                     <div className="detail-inf1">
@@ -154,7 +154,6 @@ const PlusMinus = React.createClass({
         let btnMinusBg = "url(" + STATIC_PATH + "images/" + (this.state.minus ? "blue-minus" : "gray-minus") + ".png)";
         let btnPlusBg = "url(" + STATIC_PATH + "images/" + (this.state.plus ? "blue-plus" : "gray-plus") + ".png)";
 
-// <input type="text" value={this.state.value} onChange={this.changeValue} onBlur={this.blur}/>
         return (
             <div className="detail-foot">
                 <div className="detail-num-change">
