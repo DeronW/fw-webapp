@@ -27,10 +27,11 @@ const Success = React.createClass({
                     <div className="pay">
                         支付：
                         {this.props.price > 0 ? <span>&yen;{this.props.price}</span> : null}
-                        {this.props.price > 0 && this.props.score ? '+' : null}
-                        {this.props.score ? <span className="score"> {this.props.score}工分</span> : null}
+                        {this.props.price > 0 && this.props.score ? ' + ' : null}
+                        {this.props.score ? <span className="score">{this.props.score}工分</span> : null}
+                        {(this.props.price > 0 || this.props.score) && this.props.voucher_count ? ' + ' : null}
                         {this.props.voucher_count ?
-                            <span className="coupons"> + 兑换券 &times; {this.props.voucher_count}</span> : null}
+                            <span className="coupons">兑换券 &times; {this.props.voucher_count}</span> : null}
                     </div>
                 </div>
                 <div className="success-btn">
@@ -51,6 +52,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
+        //url: 'http://localhost/order-detail.json',
         success: function (data) {
             $FW.Component.hideAjaxLoading();
             ReactDOM.render(<Success
