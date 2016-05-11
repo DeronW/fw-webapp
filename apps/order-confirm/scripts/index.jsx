@@ -121,7 +121,7 @@ const ConfirmOrder = React.createClass({
         if (product.score * parseInt(this.FormData.buyNum) > this.props.user.score)
             return $FW.Component.Alert('工分不足, 不能购买');
 
-        if (product.price * parseInt(this.FormData.buyNum) > this.props.user.charge)
+        if (product.price * (parseInt(this.FormData.buyNum) - this.FormData.ticket.length) > this.props.user.charge)
             return $FW.Component.Alert('余额不足, 不能购买');
         return true
     },
