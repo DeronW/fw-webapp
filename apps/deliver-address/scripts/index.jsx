@@ -10,7 +10,7 @@ const DeliverAddress = React.createClass({
     markDefaultHandler: function (address_id) {
         console.log(address_id);
         $FW.Ajax({
-            url: API_PATH + '/api/v1/address/set_default.json',
+            url: API_PATH + 'mall/api/member/v1/address/set_default.json',
             method: 'post',
             data: {id: address_id},
             success: function () {

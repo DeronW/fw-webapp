@@ -3,19 +3,6 @@
 const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
-const NavTitle = React.createClass({
-    render: function () {
-        return (
-            <div className="nav-title">
-                <span className="back-btn">
-                    <img src={STATIC_PATH + "images/back-btn.png"}/>
-                </span>
-                <h1 className="title">我的订单</h1>
-            </div>
-        );
-    }
-});
-
 const OrderMain = React.createClass({
     getInitialState: function () {
         var index = 0;
@@ -38,7 +25,6 @@ const OrderMain = React.createClass({
     render: function () {
         var self = this;
 
-        // style={{backgroundImage: "url("+STATIC_PATH+"images/line-icon.png)"}}
         var btnVoucher = (v, index) => (
             <div key={index} className={index == this.state.index ? "btn-tab select-li" : "btn-tab"}
                  onClick={ function() { self.clickHandler(index) } }>
@@ -129,7 +115,7 @@ const OrderBlock = React.createClass({
                             </div>
                             <div className="commodity-number">
                                 <span className="money-text">
-                                    {product.price > 0 ? <span>&yen;{product.price}</span> : null}
+                                    {product.price > 0 ? <span>&yen;{$FW.Format.currency(product.price)}</span> : null}
                                     {product.price > 0 && product.score ? ' + ' : null}
                                     {product.score ? product.score + '工分' : null}
                                 </span>
@@ -155,7 +141,7 @@ const OrderBlock = React.createClass({
                         <span className="commodity-text">共件{order.orderCount}商品</span>
                         <span className="total-text">
                             实付款:
-                            {order.price > 0 ? <span>&yen;{order.price}</span> : null}
+                            {order.price > 0 ? <span>&yen;{$FW.Format.currency(order.price)}</span> : null}
                             {order.price > 0 && order.score ? ' + ' : null}
                             {order.score ? order.score + '工分' : null}
                         </span>
