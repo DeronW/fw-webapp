@@ -77,14 +77,13 @@ const OrderStatusList = React.createClass({
 
 const OrderStatusBlock = React.createClass({
     render: function () {
-        var self = this;
         let products = this.props.products;
         let order = this.props.order;
 
         let orderBlock = function (d, index) {
 
             let pay_price = d.price > 0 ? <span> &yen;{$FW.Format.currency(d.price)}</span> : null;
-            let score_cost = d.score ? '+ ' + d.score + '工分' : null;
+            let score_cost = d.score ? d.score + '工分' : null;
             //let ticket_num = order.ticket_num ? ' 兑换券 x' + order.ticket_num : null;
 
             return (
@@ -106,6 +105,7 @@ const OrderStatusBlock = React.createClass({
                                 <div className="commodity-number">
                                     <span className="money-text">
                                         {pay_price}
+                                        {d.price > 0 && d.score ? ' + ' : null}
                                         {score_cost}
                                     </span>
                                     <span className="number-text">&times;{d.count}</span>

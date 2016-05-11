@@ -112,8 +112,7 @@ const OrderBlock = React.createClass({
         }
 
         let product_item = function (product, index) {
-            let pay_score = null;
-            if (product.score) pay_score = ' + ' + product.score + '工分';
+
             return (
                 <a href={'/order/detail?order_id=' + order.orderId} key={index}>
                     <div className="t-info">
@@ -129,16 +128,18 @@ const OrderBlock = React.createClass({
                                     (i, index) => <span key={index} className="text">{i}</span>) : null }
                             </div>
                             <div className="commodity-number">
-                                <span className="money-text">&yen;{product.price}{pay_score}</span>
-                                <span className="number-text">X{product.count}</span>
+                                <span className="money-text">
+                                    {product.price > 0 ? <span>&yen;{product.price}</span> : null}
+                                    {product.price > 0 && product.score ? ' + ' : null}
+                                    {product.score ? product.score + '工分' : null}
+                                </span>
+                                <span className="number-text">&times; {product.count}</span>
                             </div>
                         </div>
                     </div>
                 </a>
             );
         };
-
-        let cost_score = order.score ? '+ ' + order.score + ' 工分' : null;
 
         return (
             <div className="order-block">
@@ -153,9 +154,10 @@ const OrderBlock = React.createClass({
                     <div className="commodity-total">
                         <span className="commodity-text">共件{order.orderCount}商品</span>
                         <span className="total-text">
-                            实付款: &yen;
-                            {order.price}
-                            {cost_score}
+                            实付款:
+                            {order.price > 0 ? <span>&yen;{order.price}</span> : null}
+                            {order.price > 0 && order.score ? ' + ' : null}
+                            {order.score ? order.score + '工分' : null}
                         </span>
                     </div>
                 </div>

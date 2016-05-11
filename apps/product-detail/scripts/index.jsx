@@ -11,7 +11,7 @@ const Product = React.createClass({
 
     render: function () {
         let data = this.props.data;
-        let score = data.score ? <span className="score"> + {data.score}工分</span> : "";
+        let score = data.score ? <span className="score">{data.score}工分</span> : "";
         let markList = (list, index)=><div key={index}>{list}</div>;
         let activity_desc = null;
 
@@ -69,6 +69,7 @@ const Product = React.createClass({
                     <div className="detail-inf-price">
                         {data.price > 0 ? <span className="money">&yen;</span> : null}
                         {data.price > 0 ? <span className="price">{$FW.Format.currency(data.price)}</span> : null}
+                        {data.price > 0 && data.score ? '+' : null}
                         {score}
                     </div>
                     <div className="detail-inf1">

@@ -273,7 +273,11 @@ const Voucher = React.createClass({
                     <div className={gray_bg ? "t-info b-color" : "t-info"}>
                         <div className="title-info">
                             <span className="title-text">{data.title}</span>
-                            <span className="money-text">{voucher_price} {voucher_score}</span>
+                            <span className="money-text">
+                                {voucher_price}
+                                {data.price > 0 && data.score ? ' + ' : null}
+                                {voucher_score}
+                            </span>
                         </div>
                         <div className="clear-info">
                             <span className="text">来源 {data.type}</span>
