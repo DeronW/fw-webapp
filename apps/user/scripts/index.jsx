@@ -250,9 +250,22 @@ const Voucher = React.createClass({
             if (data.mark != 1) mark_name = data.mark.toString();
         }
 
+        let date_text;
+        if (this.props.state == 'used') {
+            date_text = '使用日期'
+        } else if (this.props.state == 'dated') {
+            date_text = '过期时间'
+        } else {
+            date_text = '有效期至'
+        }
+
         let watermark_img = mark_name ?
             <img className="watermark" src={STATIC_PATH + 'images/mark-' + mark_name + '.png'}/> : null;
         let gray_bg = this.props.state != 'normal';
+        let exchange_btn = mark_name ? null : <span className="btn-exchange">点我兑换</span>;
+
+        let voucher_score = data.score ? <span>{data.score}工分</span> : null;
+        let voucher_price = data.price > 0 ? <span>&yen;{data.price}</span> : null;
 
         return (
             <div className="my-voucher-cont-list">
@@ -260,17 +273,18 @@ const Voucher = React.createClass({
                     <div className={gray_bg ? "t-info b-color" : "t-info"}>
                         <div className="title-info">
                             <span className="title-text">{data.title}</span>
-                            <span className="money-text">&yen;{data.price}</span>
+                            <span className="money-text">{voucher_price} {voucher_score}</span>
                         </div>
                         <div className="clear-info">
                             <span className="text">来源 {data.type}</span>
-                            <span className="text-timer">有效日期<em>{data.indate}</em></span>
+                            <span className="text-timer">{date_text} <em>{data.indate}</em></span>
                         </div>
                     </div>
                 </a>
 
                 <div className="b-info">
                     <span className="text">备注:<em>{data.comment}</em></span>
+                    {exchange_btn}
                 </div>
                 {watermark_img}
             </div>
@@ -284,6 +298,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/user.json',
+        //url: 'http://localhost/user.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
