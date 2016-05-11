@@ -11,7 +11,7 @@ const DeliverAddress = React.createClass({
         console.log(address_id);
         $FW.Ajax({
             url: API_PATH + 'mall/api/member/v1/address/set_default.json',
-            method: 'post',
+            method: 'POST',
             data: {id: address_id},
             success: function () {
                 location.reload()
@@ -40,7 +40,7 @@ const DeliverAddress = React.createClass({
                          style={{backgroundImage: 'url(' + STATIC_PATH + 'images/default-address.png)'}}>
                     </div>
                 ) : (
-                    <div className="set-default" onClick={() => _this.markDefaultHandler(address.id)}>设为默认</div>
+                    <div className="set-default" onClick={() => _this.markDefaultHandler(address.address_id)}>设为默认</div>
                 );
 
             return (
