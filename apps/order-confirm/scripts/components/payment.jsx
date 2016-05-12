@@ -62,9 +62,6 @@ const PaymentPanel = React.createClass({
         let cc = $FW.Utils.length(new_voucher_list, (i) => i.checked);
 
         let score_used = (this.props.product_count - cc) * this.props.product.score;
-        if (score_used > this.props.user.score) {
-            $FW.Component.Alert('工分通道已关闭')
-        }
 
         this.setState({
             voucher_list: new_voucher_list,

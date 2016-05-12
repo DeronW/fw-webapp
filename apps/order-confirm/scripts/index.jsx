@@ -114,14 +114,21 @@ const ConfirmOrder = React.createClass({
     },
     validateBeforeSMSCodeHandler: function () {
         let product = this.props.product;
+        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.ticket.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请选择收货地址');
 
-        if (product.score * parseInt(this.FormData.buyNum) > this.props.user.score)
-            return $FW.Component.Alert('工分不足, 不能购买');
+        if (should_pay_count > 0 && product.score && this.props.close_score_func)
+            return $FW.Component.Alert('下单失败，工分通道已关闭');
 
-        if (product.price * (parseInt(this.FormData.buyNum) - this.FormData.ticket.length) > this.props.user.charge)
+        if (should_pay_count > 0 && product.score && this.props.user.disable_score)
+            return $FW.Component.Alert('下单失败，账户工分禁用');
+
+        if (product.score * should_pay_count > this.props.user.score)
+            return $FW.Component.Alert('工分不足，不能购买');
+
+        if (product.price * should_pay_count > this.props.user.charge)
             return $FW.Component.Alert('余额不足, 不能购买');
         return true
     },
@@ -176,6 +183,7 @@ $FW.DOMReady(function () {
                 score: data.avaliablePoints || 0,
                 bean: data.avaliableBean,
                 use_bean: true,
+                disable_score: data.isPointForbidden,
                 charge: data.availableCashBalance || 0
             };
             var product = {
@@ -193,10 +201,12 @@ $FW.DOMReady(function () {
                 label_bought: data.labelLimit,
                 label_limit: data.persionLabelLimit
             };
+            var close_score_func = !data.isOpenJiFenLevel;
 
             ReactDOM.render(<ConfirmOrder product={product} ticket_list={data.ticketList}
                                           user={user} address_list={data.addressList}
                                           pay_condition={pay_condition}
+                                          close_score_func={close_score_func}
                                           default_address_id={query.address_id || data.addressId}
                 />,
                 document.getElementById('cnt'));

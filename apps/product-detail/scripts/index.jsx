@@ -146,7 +146,7 @@ const PlusMinus = React.createClass({
             return
         }
         if (this.props.ticket_count && this.props.voucher_only) {
-            $FW.Component.Alert('该商品近支持兑换券购买');
+            $FW.Component.Alert('该商品仅限兑换券购买');
             return
         }
 

@@ -197,6 +197,26 @@ const OrderNumberList = React.createClass({
     render: function () {
         let order = this.props.order;
 
+        let deliver_at = null;
+        if (order.deliver_at) {
+            deliver_at = (
+                <div className="sequence-text">
+                    <span className="text">发货时间:</span>
+                    <span className="time-text">{order.deliver_at}</span>
+                </div>
+            )
+        }
+
+        let receive_at = null;
+        if (order.receive_at) {
+            receive_at = (
+                <div className="sequence-text">
+                    <span className="text">收货时间:</span>
+                    <span className="time-text">{order.receive_at}</span>
+                </div>
+            )
+        }
+
         return (
             <div className="order-number">
                 <div className="title">
@@ -208,14 +228,8 @@ const OrderNumberList = React.createClass({
                         <span className="text">付款时间:</span>
                         <span className="time-text">{order.pay_at}</span>
                     </div>
-                    <div className="sequence-text">
-                        <span className="text">发货时间:</span>
-                        <span className="time-text">{order.deliver_at}</span>
-                    </div>
-                    <div className="sequence-text">
-                        <span className="text">收货时间:</span>
-                        <span className="time-text">{order.receive_at}</span>
-                    </div>
+                    {deliver_at}
+                    {receive_at}
                 </div>
             </div>
         );
