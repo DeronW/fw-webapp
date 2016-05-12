@@ -33,11 +33,11 @@ const ConfirmOrder = React.createClass({
         this.can_buy(true)
     },
     can_buy: function (with_warning) {
-        return this.can_buy_count(this.state.product_count, with_warning) // == this.state.product_count;
+        return this.can_buy_count(this.state.product_count, with_warning); // == this.state.product_count;
     },
     can_buy_count: function (count, with_warning) {
         let cnd = this.props.pay_condition;
-        // let origin_count = count;
+        //let origin_count = count;
         let voucher_count = this.props.ticket_list.length;
 
         // 同商品判断最大购买数量
@@ -56,6 +56,10 @@ const ConfirmOrder = React.createClass({
         if (cnd.label_limit && count > label_remain) {
             if (with_warning) $FW.Component.Alert('该标签下商品限购' + label_remain + '件');
             count = label_remain;
+        }
+
+        if (count == 0) {
+            $FW.Component.Alert('您已超过了限购数量');
         }
 
         return count
