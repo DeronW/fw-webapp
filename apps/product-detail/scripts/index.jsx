@@ -97,7 +97,9 @@ const Product = React.createClass({
                 </div>
                 {activity_desc}
                 {rich_detail}
-                <PlusMinus stock={data.stock}/>
+                <PlusMinus stock={data.stock} ticket_count={data.ticketList}
+                           check_messages={data.checkMessages}
+                           voucher_only={data.supportTicket}/>
             </div>
         )
     }
@@ -136,6 +138,16 @@ const PlusMinus = React.createClass({
     },
     buyHandler: function () {
         if (this.state.value < 1) return;
+
+        // 检查当前用户(或未登录用户)是否可以点这个按钮
+        if (this.props.ticket_count && this.props.check_messages.length) {
+            $FW.Component.Alert(this.props.check_messages.join(', '));
+            return
+        }
+        if (this.props.ticket_count && this.props.voucher_only) {
+            $FW.Component.Alert('该商品近支持兑换券购买');
+            return
+        }
 
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
@@ -246,6 +258,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
+        //url: "http://localhost/product-detail.json",
         enable_loading: true,
         success: function (data) {
             if (data.title) {
