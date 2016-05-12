@@ -40,10 +40,10 @@ const UserInfo = React.createClass({
     render: function () {
         let user_level = null;
         if (this.props.show_user_level) {
-            user_level = <span className="text">会员等级 {
-                this.props.user_level == 1 ?
-                    <span style={{color: 'gray'}}>VIP1</span> :
-                    <em className="vip-text">VIP{this.props.user_level - 1}</em>}</span>
+            user_level = <span className="text">会员等级
+                {this.props.user_level == 1 ? <span style={{color: 'gray'}}>VIP1</span> : null}
+                {this.props.user_level > 1 ? <em className="vip-text">VIP{this.props.user_level - 1}</em> : null}
+            </span>
         }
 
         return (
