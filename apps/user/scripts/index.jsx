@@ -263,7 +263,8 @@ const Voucher = React.createClass({
         let exchange_btn = mark_name ? null : <span className="btn-exchange">点我兑换</span>;
 
         let voucher_score = data.score ? <span>{data.score}工分</span> : null;
-        let voucher_price = (data.price > 0 || data.score == 0) ? <span>&yen;{data.price}</span> : null;
+        let voucher_price = (data.price > 0 || data.score == 0) ?
+            <span>&yen;{$FW.Format.currency(data.price)}</span> : null;
 
         return (
             <div className="my-voucher-cont-list">
