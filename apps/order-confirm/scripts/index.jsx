@@ -202,8 +202,8 @@ $FW.DOMReady(function () {
             var pay_condition = {
                 product_bought: data.persionProductLimit,
                 product_limit: data.productLimit,
-                label_bought: data.labelLimit,
-                label_limit: data.persionLabelLimit
+                label_bought: data.persionLabelLimit,
+                label_limit: data.labelLimit
             };
             var close_score_func = !data.isOpenJiFenLevel;
 
