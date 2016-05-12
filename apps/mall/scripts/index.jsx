@@ -165,7 +165,8 @@ $FW.DOMReady(function () {
     }, true);
 
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={"豆哥商城"} back_handler={ () => location.href = 'http://m.9888.cn' }/>,
+        ReactDOM.render(<Header title_img={STATIC_PATH + 'images/dg-mall-title.png'}
+                                back_handler={ () => location.href = 'http://m.9888.cn' }/>,
             document.getElementById('header'));
     }
 });

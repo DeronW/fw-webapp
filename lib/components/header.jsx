@@ -1,6 +1,6 @@
 /*
  parameters
- <Header title={} height={} background={} />
+ <Header title={} title_img={} height={} background={} />
  */
 
 const Header = React.createClass({
@@ -9,7 +9,8 @@ const Header = React.createClass({
         return {
             height: height,
             background: this.props.background || 'white',
-            title: this.props.title
+            title: this.props.title,
+            title_img: this.props.title_img
         }
     },
     backClickHandler: function () {
@@ -71,6 +72,11 @@ const Header = React.createClass({
             background: '#536f95'
         };
 
+        let title = this.state.title;
+        if (this.state.title_img)
+            title = <img src={this.state.title_img}
+                         style={{ display: 'block', margin: '0 auto', width: "168px", position: "relative", top: "30px" }}/>;
+
         return (
             <div style={style_a}>
                 <div style={style_b}>
@@ -78,7 +84,7 @@ const Header = React.createClass({
                         <div style={style_arm_up}></div>
                         <div style={style_arm_down}></div>
                     </div>
-                    {this.state.title}
+                    {title}
                 </div>
             </div>
         )
