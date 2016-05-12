@@ -124,6 +124,7 @@ const PlusMinus = React.createClass({
         c = parseInt(c) || 1;
         if (c < 1) c = 1;
         if (c > this.props.stock) c = this.props.stock;
+
         this.setState({
             value: c,
             minus: c > 1,
@@ -145,7 +146,7 @@ const PlusMinus = React.createClass({
             $FW.Component.Alert(this.props.check_messages.join(', '));
             return
         }
-        if (this.props.ticket_count && this.props.voucher_only) {
+        if (this.props.ticket_count < 1 && this.props.voucher_only) {
             $FW.Component.Alert('该商品仅限兑换券购买');
             return
         }
