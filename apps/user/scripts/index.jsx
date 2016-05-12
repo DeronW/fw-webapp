@@ -318,6 +318,8 @@ function back_handler() {
     location.href = '/';
 }
 
+$FW.setLoginRedirect('/');
+
 window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') back_handler()
 };
