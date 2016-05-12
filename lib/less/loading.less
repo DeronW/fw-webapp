@@ -2,12 +2,18 @@
 .global-ajax-loading {
   z-index: 99;
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /*
   width: 400px;
   height: 300px;
   top: 36%;
   left: 50%;
   margin-left: -200px;
   padding-bottom: 40px;
+  */
 
   .bg {
     position: absolute;
@@ -17,16 +23,18 @@
     bottom: 0;
     background: black;
     opacity: 0.3;
-    border-radius: 4%;
+    //border-radius: 4%;
   }
 
   .loader-img {
-    position: relative;
+    position: absolute;
     z-index: 1;
     display: block;
     width: 300px;
     height: 300px;
-    margin: 0 auto;
+    top: 35%;
+    left: 50%;
+    margin-left: -150px;
     background: transparent url('') no-repeat center center;
   }
 

@@ -153,12 +153,10 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('豆哥商城');
-    //$FW.Component.showAjaxLoading();
     $FW.BatchGet([
         API_PATH + 'mall/api/index/v1/banners.json', // banner轮播图数据
         API_PATH + 'mall/api/index/v1/activities.json' // 明前活动的数据
     ], function (data) {
-        //$FW.Component.hideAjaxLoading();
         var banners = data[0].banners, activities = data[1].activities;
         if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') $FW.Component.Alert('error: empty data received');
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));

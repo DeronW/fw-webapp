@@ -67,8 +67,9 @@ const Product = React.createClass({
                     <div className="detail-inf-name">{data.title}</div>
                     <div className="detail-inf-des">{data.sub_title} </div>
                     <div className="detail-inf-price">
-                        {data.price > 0 ? <span className="money">&yen;</span> : null}
-                        {data.price > 0 ? <span className="price">{$FW.Format.currency(data.price)}</span> : null}
+                        {data.price > 0 || data.score == 0 ? <span className="money">&yen;</span> : null}
+                        {data.price > 0 || data.score == 0 ?
+                            <span className="price">{$FW.Format.currency(data.price)}</span> : null}
                         {data.price > 0 && data.score ? '+' : null}
                         {score}
                     </div>
