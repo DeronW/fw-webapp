@@ -282,7 +282,7 @@ $FW.DOMReady(function () {
 });
 
 function backPage() {
-    location.href = '/products'
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
 
 window.onNativeMessageReceive = function (msg) {
