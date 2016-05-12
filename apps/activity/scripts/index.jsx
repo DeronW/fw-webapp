@@ -6,8 +6,8 @@ const API_PATH = document.getElementById('api-path').value;
 const MallActivity = React.createClass({
     render: function () {
         let img = this.props.activity.img ?
-            <a href="#" className="act-img-detail"><img
-                src={this.props.activity.img || STATIC_PATH + 'images/default-banner.jpg'}/></a> :
+            <a href="#" className="act-img-detail">
+                <img src={this.props.activity.img || STATIC_PATH + 'images/default-banner.jpg'}/></a> :
             null;
 
         return (
@@ -30,7 +30,7 @@ MallActivity.Explain = React.createClass({
     },
     render: function () {
         let desc = null;
-        if (this.state.show) {
+        if (this.state.show && this.props.desc) {
             desc = (
                 <div className="act-explain-cont show">
                     { this.props.desc.split(/[;|；]/).map((i, index) => <div key={index}>{trim(i)}</div>) }
@@ -130,6 +130,6 @@ window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') location.href = '/user';
 };
 
-function trim(s){
+function trim(s) {
     return s.replace(/(^\s*)|(\s*$)/g, '')
 }
