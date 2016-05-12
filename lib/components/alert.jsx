@@ -96,12 +96,19 @@ const GlobalAlert = React.createClass({
 
         if (!this.state.show) return null;
 
+        let title = null;
+        if(this.props.title instanceof Array){
+            title = <div> {this.props.title.map((i, index)=><div key={index}>{i}</div>)} </div> ;
+        } else {
+            title = this.props.title || 'YO'
+        }
+
         return (
             <div style={style_pop}>
                 <div style={style_bg} onClick={this.hideHandler}></div>
                 <div style={style_panel}>
                     <div style={style_close} onClick={this.hideHandler}>&times;</div>
-                    <div style={style_text}>{this.props.title || 'YO'}</div>
+                    <div style={style_text}>{title}</div>
                     {this.props.confirm_text && !this.props.cancel_btn ?
                         <a style={style_one_big} onClick={this.hideHandler}>{this.props.confirm_text}</a> : null}
                     {this.props.confirm_btn ? <a style={style_confirm} onClick={this.hideHandler}>CONFIRM</a> : null}

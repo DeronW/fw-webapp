@@ -115,7 +115,7 @@ const OrderBlock = React.createClass({
                             </div>
                             <div className="commodity-number">
                                 <span className="money-text">
-                                    {product.price > 0 ? <span>&yen;{$FW.Format.currency(product.price)}</span> : null}
+                                    {product.price > 0 || product.score == 0 ? <span>&yen;{$FW.Format.currency(product.price)}</span> : null}
                                     {product.price > 0 && product.score ? ' + ' : null}
                                     {product.score ? product.score + '工分' : null}
                                 </span>

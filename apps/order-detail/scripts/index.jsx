@@ -82,7 +82,7 @@ const OrderStatusBlock = React.createClass({
 
         let orderBlock = function (d, index) {
 
-            let pay_price = d.price > 0 ? <span> &yen;{$FW.Format.currency(d.price)}</span> : null;
+            let pay_price = d.price > 0 || d.score == 0 ? <span> &yen;{$FW.Format.currency(d.price)}</span> : null;
             let score_cost = d.score ? d.score + '工分' : null;
             //let ticket_num = order.ticket_num ? ' 兑换券 x' + order.ticket_num : null;
 

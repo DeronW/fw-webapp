@@ -143,7 +143,7 @@ const PlusMinus = React.createClass({
 
         // 检查当前用户(或未登录用户)是否可以点这个按钮
         if (this.props.ticket_count == 0 && this.props.check_messages.length) {
-            $FW.Component.Alert(this.props.check_messages.join(', '));
+            $FW.Component.Alert(this.props.check_messages);
             return
         }
         if (this.props.ticket_count < 1 && this.props.voucher_only) {
