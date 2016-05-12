@@ -151,6 +151,11 @@ const PlusMinus = React.createClass({
             return
         }
 
+        if (this.props.ticket_count < this.state.value && this.props.voucher_only) {
+            $FW.Component.Alert('您有' + this.props.ticket_count + '张兑换券, 限购' + this.props.ticket_count + '件商品');
+            return
+        }
+
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
