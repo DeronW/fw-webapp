@@ -133,13 +133,15 @@ const Account = React.createClass({
     render: function () {
 
         let score = null;
-        if (this.props.show_score && this.props.score != '') {
+        if (this.props.show_score) {
             score = (
                 <div>
                     <span className="l-text">工分</span>
                     {this.props.disable_score ?
                         <span className="r-text" style={{color: "red"}}>禁用</span> : null}
-                    <span className="r-text">{$FW.Format.currency(this.props.score)}工分</span>
+
+                    {this.props.score == '' ? null :
+                        <span className="r-text">{$FW.Format.currency(this.props.score)}工分</span>}
                 </div>
             )
         }
