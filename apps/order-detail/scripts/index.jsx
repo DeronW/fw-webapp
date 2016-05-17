@@ -197,6 +197,16 @@ const OrderNumberList = React.createClass({
     render: function () {
         let order = this.props.order;
 
+        let pay_at = null;
+        if (order.pay_at) {
+            pay_at = (
+                <div className="sequence-text">
+                    <span className="text">付款时间:</span>
+                    <span className="time-text">{order.pay_at}</span>
+                </div>
+            )
+        }
+
         let deliver_at = null;
         if (order.deliver_at) {
             deliver_at = (
@@ -224,10 +234,7 @@ const OrderNumberList = React.createClass({
                 </div>
 
                 <div className="sequence">
-                    <div className="sequence-text">
-                        <span className="text">付款时间:</span>
-                        <span className="time-text">{order.pay_at}</span>
-                    </div>
+                    {pay_at}
                     {deliver_at}
                     {receive_at}
                 </div>
