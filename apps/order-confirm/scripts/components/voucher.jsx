@@ -49,7 +49,8 @@ const VoucherModal = React.createClass({
                     <div className="coupon-pop-cont">
                         <div className="head">
                             <div className="chose"
-                                 style={{background:"url("+STATIC_PATH+"images/gray-block.png) no-repeat 0 center"}}></div>
+                                 style={{background:"url("+STATIC_PATH+"images/gray-block.png) no-repeat 0 center", display: "none"}}>
+                            </div>
                             <div className="name">兑换券名称</div>
                             <div className="date">有效期</div>
                         </div>
