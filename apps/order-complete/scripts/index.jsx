@@ -5,7 +5,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 const Success = React.createClass({
     backToMallHandler: function () {
-        $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+        $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/'
     },
     render: function () {
 
