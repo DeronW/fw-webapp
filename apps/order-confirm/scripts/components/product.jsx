@@ -44,7 +44,8 @@ const ProductPanel = React.createClass({
                     <div className="total-money">
                         <span>合计：</span>
                         {p.price > 0 || p.score == 0 ? <span>&yen;{$FW.Format.currency(this.state.count * p.price)}</span> : null}
-                        {p.score ? <span> + {p.score * this.state.count}工分</span> : null}
+                        {p.price > 0 || p.score ? ' + ' : null}
+                        {p.score ? <span>{p.score * this.state.count}工分</span> : null}
                     </div>
                     <div className="total-text">
                         共{this.state.count}件商品
