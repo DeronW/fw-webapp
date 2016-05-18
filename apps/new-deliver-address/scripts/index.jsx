@@ -9,7 +9,7 @@ const Address = React.createClass({
             username: '',
             phone: '',
             address: '',
-            isDefault: true
+            isDefault: false
         }
     },
     saveHandler: function () {
