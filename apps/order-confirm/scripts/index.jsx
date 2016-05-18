@@ -126,8 +126,12 @@ const ConfirmOrder = React.createClass({
         if (should_pay_count > 0 && product.score && this.props.close_score_func)
             return $FW.Component.Alert('下单失败，工分通道已关闭');
 
+        if (this.props.user.score_server_error && should_pay_count > 0 && product.score){
+            return $FW.Component.Alert('工分通道关闭，暂不能购买');
+        }
+
         if (should_pay_count > 0 && product.score && this.props.user.disable_score)
-            return $FW.Component.Alert('下单失败，账户工分禁用');
+            return $FW.Component.Alert('账户工分已禁用，暂不能购买');
 
         if (product.score * should_pay_count > this.props.user.score)
             return $FW.Component.Alert('工分不足，不能购买');
@@ -185,6 +189,7 @@ $FW.DOMReady(function () {
 
             var user = {
                 score: data.avaliablePoints || 0,
+                score_server_error: data.avaliablePoints == '',
                 bean: data.avaliableBean,
                 use_bean: true,
                 disable_score: data.isPointForbidden,
