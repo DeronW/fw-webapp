@@ -2,6 +2,7 @@ const PaymentPanel = React.createClass({
     getInitialState: function () {
 
         let voucher_list = this.props.voucher_list;
+
         // 默认为用户选择一个兑换券
         //if (voucher_list[0]) voucher_list[0].checked = true;
 
@@ -80,6 +81,7 @@ const PaymentPanel = React.createClass({
                     break;
                 }
             }
+
             return this.state.checked_voucher_count ?
                 (<div className="coupons-r">
                     {voucher_name} &times; {this.state.checked_voucher_count}
@@ -127,7 +129,7 @@ const PaymentPanel = React.createClass({
                     <div className="balance4">余额支付：</div>
                 </div>
                 {this.state.show_voucher_modal ? <VoucherModal
-                    voucher_list={this.props.voucher_list}
+                    voucher_list={JSON.parse(JSON.stringify(this.state.voucher_list))}
                     product_count={this.props.product_count}
                     cancel_voucher_handler={this.cancelVoucherModalHandler}
                     confirm_voucher_handler={this.confirmCheckedVoucherHandler}

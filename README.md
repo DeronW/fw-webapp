@@ -100,6 +100,8 @@ POST
 
 - 60201 支付失败...
 
+- 603xx 市场专题活动相关错误码
+
 ### APP和Native消息互传
 
 #### webview给native发消息

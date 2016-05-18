@@ -1,4 +1,3 @@
-
 const VoucherModal = React.createClass({
     getInitialState: function () {
         return {voucher_list: this.props.voucher_list}
@@ -16,7 +15,12 @@ const VoucherModal = React.createClass({
         }
     },
 
-    confirmVoucherHandler: function(){
+    cancelVoucherHandler: function () {
+        this.setState({voucher_list: this.props.voucher_list});
+        this.props.cancel_voucher_handler()
+    },
+
+    confirmVoucherHandler: function () {
         this.props.confirm_voucher_handler(this.state.voucher_list)
     },
 
@@ -56,8 +60,8 @@ const VoucherModal = React.createClass({
                         </div>
                     </div>
                     <div className="btn">
-                        <div className="btn-cancel" onClick={this.props.cancel_voucher_handler}>取消</div>
-                        <div className="btn-confirm" onClick={this.confirmVoucherHandler} >确认</div>
+                        <div className="btn-cancel" onClick={this.cancelVoucherHandler}>取消</div>
+                        <div className="btn-confirm" onClick={this.confirmVoucherHandler}>确认</div>
                     </div>
                 </div>
             </div>
