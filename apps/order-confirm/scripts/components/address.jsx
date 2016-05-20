@@ -36,7 +36,7 @@ AddressPanel.List = React.createClass({
     render: function () {
         let address = this.props.address;
         let address_list_link = "/delivery_address?productBizNo="+
-                this.props.product_biz_no + '&count=' + this.props.product_count;
+                this.props.product_biz_no + '&count=' + this.props.product_count + '&address_id=' + this.props.address.id;
 
         return (
             <div className="goods-adress">

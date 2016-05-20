@@ -93,9 +93,8 @@ const Product = React.createClass({
                     </div>
                     {operators}
                 </div>
-                <div className="detail-mark">
-                    {(data.tags ? data.tags : []).map(markList)}
-                </div>
+                {data.tags.length > 0 ? <div className="detail-mark">{(data.tags ? data.tags : []).map(markList)}</div> : null}
+                {/*<div className="detail-mark">{(data.tags ? data.tags : []).map(markList)}</div>*/}
                 {activity_desc}
                 {rich_detail}
                 <PlusMinus stock={data.stock} ticket_count={data.ticketList}
@@ -255,17 +254,17 @@ const EmptyProduct = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    let bizNo = $FW.Format.urlQuery().bizNo;
-    if (!bizNo) {
-        $FW.Component.Alert('bizNo is missing');
-        return;
-    }
+    //let bizNo = $FW.Format.urlQuery().bizNo;
+    //if (!bizNo) {
+    //    $FW.Component.Alert('bizNo is missing');
+    //    return;
+    //}
 
     NativeBridge.setTitle('产品详情');
 
     $FW.Ajax({
-        url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
-        //url: "http://localhost/product-detail.json",
+        //url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
+        url: "http://localhost/product-detail.json",
         enable_loading: true,
         success: function (data) {
             if (data.title) {

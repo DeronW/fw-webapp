@@ -33,7 +33,8 @@ const Header = React.createClass({
             background: this.state.background,
             zIndex: '9',
             textShadow: "0 0 8px white",
-            fontSize: fontSize
+            fontSize: fontSize,
+            borderBottom:"1px solid #d8d8d8"
         };
 
         let style_c = {

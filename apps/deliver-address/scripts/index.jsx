@@ -30,8 +30,10 @@ const DeliverAddress = React.createClass({
                 link = "/order/confirm?address_id=" + address.address_id + "&productBizNo=" + productBizNo + '&count=' + productCount;
             }
             let checked_flag = null;
-            if (!preview)
-                checked_flag = ( <div className="checked-flag"> {address.isDefault ? <div></div> : null} </div> );
+            if (!preview) {
+                let aid = $FW.Format.urlQuery().address_id;
+                checked_flag = ( <div className="checked-flag"> {aid && aid == address.address_id ? <div></div> : null} </div> );
+            }
 
             let set_default = null;
             if (preview)
@@ -80,8 +82,8 @@ $FW.DOMReady(function () {
 
     $FW.Component.showAjaxLoading();
     $FW.Ajax({
-        url: API_PATH + 'mall/api/member/v1/delivery_address.json',
-        //url: 'http://localhost/address.json',
+        //url: API_PATH + 'mall/api/member/v1/delivery_address.json',
+        url: 'http://10.105.7.71/delivery_address.json',
         success: function (data) {
             $FW.Component.hideAjaxLoading();
             let preview = $FW.Format.urlQuery().preview == 'true';
