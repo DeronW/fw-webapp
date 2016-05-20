@@ -84,7 +84,7 @@ const PaymentPanel = React.createClass({
 
             return this.state.checked_voucher_count ?
                 (<div className="coupons-r">
-                    {voucher_name} &times; {this.state.checked_voucher_count}
+                    <span className="coupons-name">{voucher_name}</span><span>&times; {this.state.checked_voucher_count}</span>
                 </div>) :
                 null;
         };
