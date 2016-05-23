@@ -105,7 +105,7 @@ const PaymentPanel = React.createClass({
                 <div className="account-box">
 
                     <div className="coupons" onClick={this.toggleVoucherModal}
-                         style={{background:"url("+STATIC_PATH+"images/ico-gray-right.jpg) no-repeat center right"}}>
+                         style={{background:"url("+STATIC_PATH+"images/ico-gray-right.jpg) no-repeat 660px 50%"}}>
                         <div className="coupons-l">兑换券支付</div>
                         {checked_voucher()}
                     </div>
@@ -123,7 +123,7 @@ const PaymentPanel = React.createClass({
                     {user_score}
                 </div>
                 <div className="balance-box">
-                    <div className="balance1">当前余额</div>
+                    <div className="balance1">可用余额</div>
                     <div className={"balance2 red"}>&yen;{$FW.Format.currency(this.props.user.charge)}</div>
                     <div className="balance3">&yen;{$FW.Format.currency(this.computeTotalPrice())}</div>
                     <div className="balance4">余额支付：</div>
