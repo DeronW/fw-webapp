@@ -3,6 +3,7 @@
  <Alert title={'这个是标题'} confirm_text={'CONFIRM'} show_callback={} hide_callback={} />
 
  title 显示标题
+ header Show big header text
  confirm_text 是否显示确认按钮, 及其提示文字
  show_callback 显示之后的回调
  hide_callback 隐藏之后的回调
@@ -41,14 +42,12 @@ const GlobalAlert = React.createClass({
             background: "black",
             opacity: "0.3"
         };
-        let style_panel = {
+        let _alert_style_panel = {
             display: "table",
             margin: "50% auto 0",
             position: "relative",
-            padding: "20px",
             width: window.innerWidth * 0.8 + "px",
             borderRadius: "8px",
-            paddingTop: "10px",
             background: "white"
         };
         let style_close = {
@@ -67,8 +66,12 @@ const GlobalAlert = React.createClass({
             fontWeight: 'bold'
         };
         let style_text = {
-            textAlign: "center",
-            margin: "50px auto"
+            textAlign: "left",
+            margin: "20px auto",
+            fontSize:"24px",
+            lineHeight:"40px",
+            color:"#555555",
+            padding: "0 36px"
         };
         let style_confirm = {
             display: "block",
@@ -91,23 +94,53 @@ const GlobalAlert = React.createClass({
             color: "white",
             background: "#f9655a",
             borderRadius: '8px',
-            margin: '10px auto'
+            margin: '10px auto 20px'
+        };
+        let style_header = {
+            width:"610px",
+            height:"100px",
+            fontSize:"32px",
+            color:"#333333",
+            lineHeight:"100px",
+            borderBottom:"1px solid #d8d8d8",
+            backgroundColor:"#eee",
+            paddingLeft:"38px"
+        };
+        let title_index = {
+            width:"36px",
+            display:"inline-block",
+            float:"left"
+        };
+        let title_content = {
+            width:"540px",
+            display:"inline-block",
+            float:"left"
+        };
+        let title_wrap = {
+            clear:"both",
+            overflow:"hidden"
         };
 
         if (!this.state.show) return null;
 
         let title = null;
         if(this.props.title instanceof Array){
-            title = <div> {this.props.title.map((i, index)=><div key={index}>{i}</div>)} </div> ;
+            title = <div> {this.props.title.map((i, index)=><div key={index} style={title_wrap}><span style={title_index}>{index}、</span><span style={title_content}>{i}</span></div>)} </div> ;
         } else {
             title = this.props.title || 'YO'
+        }
+
+        let header = null;
+        if(this.props.header) {
+            header =  <div style={style_header}>{this.props.header}</div>
         }
 
         return (
             <div style={style_pop}>
                 <div style={style_bg} onClick={this.hideHandler}></div>
-                <div style={style_panel}>
+                <div className="_alert_style_panel" style={_alert_style_panel}>
                     <div style={style_close} onClick={this.hideHandler}>&times;</div>
+                    {header}
                     <div style={style_text}>{title}</div>
                     {this.props.confirm_text && !this.props.cancel_btn ?
                         <a style={style_one_big} onClick={this.hideHandler}>{this.props.confirm_text}</a> : null}

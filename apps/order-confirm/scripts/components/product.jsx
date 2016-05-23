@@ -28,9 +28,10 @@ const ProductPanel = React.createClass({
                         { p.price > 0 || p.score == 0 ? <span>&yen;{p.price}</span> : null}
                         { p.price > 0 && p.score ? <span>+</span> : null }
                         { p.score ? <span>{p.score}工分</span> : null }
+                        <span className="num-modifyBox"><span className="num-quantity">商品数量</span>{this.state.count}</span>
                     </div>
                 </div>
-                <div className="num-box">
+                {/*<div className="num-box">
                     <div className="num-text">商品数量</div>
                     <div className="num">
                         <div className="minus" onClick={this.decreaseHandler}
@@ -39,7 +40,7 @@ const ProductPanel = React.createClass({
                         <div className="plus" onClick={this.increaseHandler}
                              style={{backgroundImage:"url("+STATIC_PATH+"images/gray-plus.png)", display: "none"}}></div>
                     </div>
-                </div>
+                </div>*/}
                 <div className="total-box">
                     <div className="total-money">
                         <span>合计：</span>
