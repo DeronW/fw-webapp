@@ -103,7 +103,7 @@ const OrderBlock = React.createClass({
                 <a href={'/order/detail?order_id=' + order.orderId} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
-                            <img src={product.img}/>
+                            <img src={product.img || STATIC_PATH + 'images/default-product.jpg'}/>
                         </div>
                         <div className="commodity-info">
                             <div className="commodity-name">
@@ -115,7 +115,8 @@ const OrderBlock = React.createClass({
                             </div>
                             <div className="commodity-number">
                                 <span className="money-text">
-                                    {product.price > 0 || product.score == 0 ? <span>&yen;{$FW.Format.currency(product.price)}</span> : null}
+                                    {product.price > 0 || product.score == 0 ?
+                                        <span>&yen;{$FW.Format.currency(product.price)}</span> : null}
                                     {product.price > 0 && product.score ? ' + ' : null}
                                     {product.score ? product.score + '工分' : null}
                                 </span>
