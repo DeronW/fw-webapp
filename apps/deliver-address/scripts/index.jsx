@@ -12,6 +12,7 @@ const DeliverAddress = React.createClass({
         $FW.Ajax({
             url: API_PATH + 'mall/api/member/v1/address/set_default.json',
             method: 'POST',
+            enable_loading: true,
             data: {id: address_id},
             success: function () {
                 location.reload()
@@ -82,8 +83,9 @@ $FW.DOMReady(function () {
 
     $FW.Component.showAjaxLoading();
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/member/v1/delivery_address.json',
-        url: 'http://10.105.7.71/delivery_address.json',
+        url: API_PATH + 'mall/api/member/v1/delivery_address.json',
+        //url: 'http://10.105.7.71/delivery_address.json',
+        enable_loading: true,
         success: function (data) {
             $FW.Component.hideAjaxLoading();
             let preview = $FW.Format.urlQuery().preview == 'true';
@@ -98,7 +100,11 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-    history.back();
+    if ($FW.Format.urlQuery().preview == 'true') {
+        location.href = '/user'
+    } else {
+        history.back();
+    }
 }
 
 window.onNativeMessageReceive = function (msg) {

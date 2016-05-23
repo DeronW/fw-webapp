@@ -29,12 +29,14 @@ const Address = React.createClass({
                 address: this.state.address,
                 isDefault: this.state.isDefault
             },
+            enable_loading: true,
 
             success: function (data) {
                 var query = $FW.Format.urlQuery();
                 // 需要判断页面来源, 如果从 "我的商城" 进入到这个页面, 怎要后退页面
                 if (query.preview == 'true') {
-                    history.back()
+                     location.href = '/delivery_address?preview=true';
+                    //history.back()
                 } else {
                     // 如果是从下单页面进入, 则需要回到下单页面或下单页的收获地址
                     var link;
@@ -49,17 +51,17 @@ const Address = React.createClass({
         })
     },
     onUsernameChangeHandler: function (e) {
-        if(e.target.value.length < 50)
-        this.setState({username: e.target.value})
+        if (e.target.value.length < 50)
+            this.setState({username: e.target.value})
     },
     onPhoneChangeHandler: function (e) {
         var v = e.target.value;
-        if(v.length < 12 && !isNaN(v))
-        this.setState({phone: e.target.value})
+        if (v.length < 12 && !isNaN(v))
+            this.setState({phone: e.target.value})
     },
     onAddressChangeHandler: function (e) {
-        if(e.target.value.length < 100)
-        this.setState({address: e.target.value})
+        if (e.target.value.length < 100)
+            this.setState({address: e.target.value})
     },
     onDefaultChangeHandler: function (e) {
         this.setState({isDefault: !this.state.isDefault})
