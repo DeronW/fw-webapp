@@ -126,7 +126,7 @@ const ConfirmOrder = React.createClass({
         if (should_pay_count > 0 && product.score && this.props.close_score_func)
             return $FW.Component.Alert('下单失败，工分通道已关闭');
 
-        if (this.props.user.score_server_error && should_pay_count > 0 && product.score){
+        if (this.props.user.score_server_error && should_pay_count > 0 && product.score) {
             return $FW.Component.Alert('工分通道关闭，暂不能购买');
         }
 

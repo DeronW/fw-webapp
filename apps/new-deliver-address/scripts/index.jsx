@@ -35,8 +35,11 @@ const Address = React.createClass({
                 var query = $FW.Format.urlQuery();
                 // 需要判断页面来源, 如果从 "我的商城" 进入到这个页面, 怎要后退页面
                 if (query.preview == 'true') {
-                     location.href = '/delivery_address?preview=true';
-                    //history.back()
+                    if ($FW.Browser.inApp()) {
+                        history.back()
+                    } else {
+                        location.href = '/delivery_address?preview=true';
+                    }
                 } else {
                     // 如果是从下单页面进入, 则需要回到下单页面或下单页的收获地址
                     var link;

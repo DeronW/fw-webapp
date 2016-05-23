@@ -19,7 +19,7 @@ const ProductPanel = React.createClass({
         return (
             <div className="pro-order">
                 <div className="list">
-                    <img src={p.img} className="list-img"/>
+                    <img src={p.img || STATIC_PATH + 'images/default-product.jpg'} className="list-img"/>
                     <div className="title">{p.title}</div>
                     <div className="mark">
                         { p.tags.map((d, index) => <div key={index}>{d}</div>) }
@@ -43,7 +43,8 @@ const ProductPanel = React.createClass({
                 <div className="total-box">
                     <div className="total-money">
                         <span>合计：</span>
-                        {p.price > 0 || p.score == 0 ? <span>&yen;{$FW.Format.currency(this.state.count * p.price)}</span> : null}
+                        {p.price > 0 || p.score == 0 ?
+                            <span>&yen;{$FW.Format.currency(this.state.count * p.price)}</span> : null}
                         {p.price > 0 && p.score ? ' + ' : null}
                         {p.score ? <span>{p.score * this.state.count}工分</span> : null}
                     </div>
