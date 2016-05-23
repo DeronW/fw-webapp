@@ -98,7 +98,7 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-    if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
+    if ($FW.Format.urlQuery().preview == 'true') {
         location.href = '/user'
     } else {
         history.back();
