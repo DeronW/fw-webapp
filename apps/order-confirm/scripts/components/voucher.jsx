@@ -56,6 +56,7 @@ const VoucherModal = React.createClass({
                         </div>
                         <div className="list-wrap">
                             <div className="list">
+                                { this.state.voucher_list.length ? null : <span className="empty-voucher-pic"><img src={STATIC_PATH + "images/empty.png"}/></span>}
                                 {this.state.voucher_list.map(voucher)}
                             </div>
                         </div>
