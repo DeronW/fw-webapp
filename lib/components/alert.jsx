@@ -30,7 +30,6 @@ const GlobalAlert = React.createClass({
             bottom: "0px",
             width: "100%",
             zIndex: '99',
-            textShadow: "0 0 8px white",
             fontSize: fontSize
         };
         let style_bg = {

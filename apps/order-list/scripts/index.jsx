@@ -82,18 +82,34 @@ const OrderList = React.createClass({
 
 const OrderBlock = React.createClass({
     render: function () {
+        let prepare_color = {
+            color:"#fd4d4c",
+            float:"right"
+        };
+        let shipping_color = {
+            color:"#4aaef9",
+            float:"right"
+        };
+        let complete_color = {
+            color:"#999999",
+            float:"right"
+        };
 
         let order = this.props.order;
         let status_name;
+        let status_color;
         switch (order.status) {
             case 'prepare':
                 status_name = '待发货';
+                status_color = prepare_color;
                 break;
             case 'shipping':
                 status_name = '待收货';
+                status_color = shipping_color;
                 break;
             case 'complete':
                 status_name = '已完成';
+                status_color = complete_color;
                 break;
         }
 
@@ -131,7 +147,7 @@ const OrderBlock = React.createClass({
             <div className="order-block">
                 <div className="title-block">
                     <span className="time-text">{order.pay_at}</span>
-                    <span className="ship-text">
+                    <span style={status_color}>
                         {status_name}
                     </span>
                 </div>
@@ -157,7 +173,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单列表');
 
     $FW.Ajax({
-        url: API_PATH + "mall/api/member/v1/order_list.json",
+        //url: API_PATH + "mall/api/member/v1/order_list.json",
+        url: "http://localhost/order_list.json",
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));

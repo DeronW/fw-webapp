@@ -71,7 +71,7 @@ const Address = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'创建收货地址'}/>}
+                {$FW.Browser.inApp() ? null : <Header title={'新建收货地址'}/>}
                 <div className="new-deliver-address">
                     <div className="deliver input-div"
                          style={{background:"#fff url("+STATIC_PATH+"images/ico-person.png) no-repeat 24px center"}}>
@@ -101,7 +101,7 @@ const Address = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Address />, document.getElementById('cnt'));
-    NativeBridge.setTitle('创建收货地址');
+    NativeBridge.setTitle('新建收货地址');
 });
 
 window.onNativeMessageReceive = function (msg) {

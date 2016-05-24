@@ -201,7 +201,7 @@ const OrderNumberList = React.createClass({
         if (order.pay_at) {
             pay_at = (
                 <div className="sequence-text">
-                    <span className="text">付款时间:</span>
+                    <span className="text">付款时间：</span>
                     <span className="time-text">{order.pay_at}</span>
                 </div>
             )
@@ -211,7 +211,7 @@ const OrderNumberList = React.createClass({
         if (order.deliver_at) {
             deliver_at = (
                 <div className="sequence-text">
-                    <span className="text">发货时间:</span>
+                    <span className="text">发货时间：</span>
                     <span className="time-text">{order.deliver_at}</span>
                 </div>
             )
@@ -221,7 +221,7 @@ const OrderNumberList = React.createClass({
         if (order.receive_at) {
             receive_at = (
                 <div className="sequence-text">
-                    <span className="text">完成时间:</span>
+                    <span className="text">完成时间：</span>
                     <span className="time-text">{order.receive_at}</span>
                 </div>
             )
@@ -230,7 +230,7 @@ const OrderNumberList = React.createClass({
         return (
             <div className="order-number">
                 <div className="title">
-                    订单号: {order.bizNo}
+                    订单号：{order.bizNo}
                 </div>
 
                 <div className="sequence">

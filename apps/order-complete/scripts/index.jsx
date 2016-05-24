@@ -20,9 +20,9 @@ const Success = React.createClass({
                 </div>
                 <div className="success-addr">
                     <div className="addr-box"
-                         style={{background:"url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 10px 27px"}}>
+                         style={{background:"url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 10px 67px"}}>
                         <div className="addr">
-                            <div className="receiver">收货人:{this.props.receiver}</div>
+                            <div className="receiver">收货人：{this.props.receiver}</div>
                             <div className="phone">{this.props.phone}</div>
                         </div>
                         <div className="detail">收货地址：{this.props.address}</div>
