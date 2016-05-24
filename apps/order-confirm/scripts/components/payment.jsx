@@ -38,12 +38,14 @@ const PaymentPanel = React.createClass({
 
         let total_price = (this.props.product_count - this.state.checked_voucher_count) *
             this.props.product.price;
+
         if (this.state.use_bean && total_price > 0) {
             if (this.props.user.bean > (total_price * 100)) {
                 this.used_bean_count = parseInt(total_price * 100);
                 total_price = 0;
             } else {
-                total_price -= this.props.user.bean / 100;
+                // notice: 可能出现浮点数精度问题, 比如 100 - 99.9 = 0.09999999999999432
+                total_price = (total_price * 100 - this.props.user.bean) / 100;
                 this.used_bean_count = this.props.user.bean;
             }
         }
@@ -84,7 +86,8 @@ const PaymentPanel = React.createClass({
 
             return this.state.checked_voucher_count ?
                 (<div className="coupons-r">
-                    <span className="coupons-name">{voucher_name}</span><span>&times; {this.state.checked_voucher_count}</span>
+                    <span
+                        className="coupons-name">{voucher_name}</span><span>&times; {this.state.checked_voucher_count}</span>
                 </div>) :
                 null;
         };
@@ -112,7 +115,7 @@ const PaymentPanel = React.createClass({
 
                     <div className="bean">
                         <div className="bean1">工豆账户</div>
-                        <div className="bean2">&yen;{this.props.user.bean / 100.0}</div>
+                        <div className="bean2">&yen;{$FW.Format.currency(this.props.user.bean / 100.0)}</div>
                         <div className="bean3">
                             <div className={this.state.use_bean ? "btn-circle-box on" : "btn-circle-box"}>
                                 <div className="btn-circle" onClick={this.toggleBeanHandler}>
