@@ -18,9 +18,8 @@ const Success = React.createClass({
                         订单状态:已付款
                     </div>
                 </div>
-                <div className="success-addr">
-                    <div className="addr-box"
-                         style={{background:"url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 10px 67px"}}>
+                <div className="success-addr" style={{backgroundImage:"url("+STATIC_PATH+"images/ico-blue-location.png)"}}>
+                    <div className="addr-box">
                         <div className="addr">
                             <div className="receiver">收货人：{this.props.receiver}</div>
                             <div className="phone">{this.props.phone}</div>
@@ -54,8 +53,8 @@ $FW.DOMReady(function () {
     $FW.Component.showAjaxLoading();
 
     $FW.Ajax({
-        url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
-        //url: 'http://localhost/order-detail.json',
+        //url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
+        url: 'http://localhost/order-detail.json',
         success: function (data) {
             $FW.Component.hideAjaxLoading();
             ReactDOM.render(<Success
