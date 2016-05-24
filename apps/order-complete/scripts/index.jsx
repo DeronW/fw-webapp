@@ -53,8 +53,8 @@ $FW.DOMReady(function () {
     $FW.Component.showAjaxLoading();
 
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
-        url: 'http://localhost/order-detail.json',
+        url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
+        //url: 'http://localhost/order-detail.json',
         success: function (data) {
             $FW.Component.hideAjaxLoading();
             ReactDOM.render(<Success
