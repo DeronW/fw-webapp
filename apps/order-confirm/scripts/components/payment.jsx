@@ -1,11 +1,6 @@
 const PaymentPanel = React.createClass({
     getInitialState: function () {
-
         let voucher_list = this.props.voucher_list;
-
-        // 默认为用户选择一个兑换券
-        //if (voucher_list[0]) voucher_list[0].checked = true;
-
         let cc = $FW.Utils.length(voucher_list, (i) => i.checked);
 
         this.used_bean_count = 0;
