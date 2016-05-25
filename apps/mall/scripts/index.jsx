@@ -40,6 +40,7 @@ const Mall = React.createClass({
                     { this.props.activities.map(activity) }
                     {this.props.activities.length ? null : <div className="empty">暂无活动</div>}
                 </div>
+                <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
             </div>
         )
     }

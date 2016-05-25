@@ -77,6 +77,7 @@ const ProductList = React.createClass({
                 <div className="index-actList-list">
                     { this.state.products.map((p, index) => <ProductItem key={index} {...p} key={p.bizNo}/>) }
                 </div>
+                <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
             </div>
         )
     }
