@@ -18,11 +18,9 @@ const Header = React.createClass({
     },
     render: function () {
         let fontSize = '40px';
-        let style_a = {
-            height: this.state.height + 'px'
-        };
 
-        let style_b = {
+        let _style_header_fixed = {
+            transform: 'translate3d(0, 0, 0)',
             position: "fixed",
             top: "0px",
             left: "0px",
@@ -34,10 +32,10 @@ const Header = React.createClass({
             zIndex: '9',
             textShadow: "0 0 8px white",
             fontSize: fontSize,
-            borderBottom:"1px solid #d8d8d8"
+            borderBottom: "1px solid #d8d8d8"
         };
 
-        let style_c = {
+        let _style_header_arrow = {
             display: "block",
             position: "absolute",
             width: this.state.height + "px",
@@ -52,7 +50,7 @@ const Header = React.createClass({
             top: "0px"
         };
 
-        let style_arm_up = {
+        let _style_header_arm_up = {
             position: "absolute",
             width: "6px",
             height: this.state.height / 4 + "px",
@@ -62,7 +60,7 @@ const Header = React.createClass({
             left: "50px",
             background: "#536f95"
         };
-        let style_arm_down = {
+        let _style_header_arm_down = {
             position: "absolute",
             width: "6px",
             height: this.state.height / 4 + "px",
@@ -79,11 +77,11 @@ const Header = React.createClass({
                          style={{ display: 'block', margin: '0 auto', width: "168px", position: "relative", top: "30px" }}/>;
 
         return (
-            <div style={style_a}>
-                <div style={style_b}>
-                    <div style={style_c} onClick={this.backClickHandler}>
-                        <div style={style_arm_up}></div>
-                        <div style={style_arm_down}></div>
+            <div style={{height: this.state.height + 'px'}}>
+                <div className="_style_header_fixed" style={_style_header_fixed}>
+                    <div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
+                        <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
+                        <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
                     </div>
                     {title}
                 </div>
