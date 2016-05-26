@@ -6,7 +6,11 @@ const API_PATH = document.getElementById('api-path').value;
 const Product = React.createClass({
 
     getInitialState: function () {
-        return {}
+        return {show:true}
+    },
+
+    toggleHandler: function () {
+        this.setState({show: !this.state.show});
     },
 
     render: function () {
@@ -17,10 +21,19 @@ const Product = React.createClass({
 
         if (data.activity_desc && data.activity_desc.length) {
             let text = (i, index) => <div key={index}>{trim(i)}</div>;
+
+            let detail_explain_cont = null;
+            if(this.state.show){
+                 detail_explain_cont = (<div className="detail-explain-cont">{data.activity_desc.map(text)}</div>);
+            }
             activity_desc = (
                 <div className="detail-explain">
-                    <div className="detail-explain-h">活动说明</div>
-                    <div className="detail-explain-cont">{data.activity_desc.map(text)}</div>
+                    <div className="act-explain-head" onClick={this.toggleHandler}>
+                        <div className="detail-explain-h">活动说明</div>
+                        <div className={this.state.show ? "act-explain-btn on" : "act-explain-btn"}
+                             style={{background:"url("+STATIC_PATH+"images/ico-grap-down.png) no-repeat center"}}></div>
+                    </div>
+                    {detail_explain_cont}
                 </div>
             )
         }

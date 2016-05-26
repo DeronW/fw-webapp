@@ -18,7 +18,7 @@ const Header = React.createClass({
     },
     render: function () {
         let fontSize = '40px';
-
+        if(this.props.title && this.props.title.length > 7) fontSize  = '32px';
         let _style_header_fixed = {
             transform: 'translate3d(0, 0, 0)',
             position: "fixed",
@@ -74,7 +74,7 @@ const Header = React.createClass({
         let title = this.state.title;
         if (this.state.title_img)
             title = <img src={this.state.title_img}
-                         style={{ display: 'block', margin: '0 auto', width: "168px", position: "relative", top: "30px" }}/>;
+                         style={{ display: 'block', margin: '0 auto', width: "182px", position: "relative", top: "30px" }}/>;
 
         return (
             <div style={{height: this.state.height + 'px'}}>
