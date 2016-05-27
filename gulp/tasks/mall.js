@@ -16,7 +16,7 @@ var apps = [
     'fail',
     'not-support',
     'deliver-address',
-    'new-deliver-address'
+    'new-deliver-address',
 ];
 
 apps.forEach(function (i) {
