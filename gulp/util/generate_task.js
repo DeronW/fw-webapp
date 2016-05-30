@@ -30,7 +30,7 @@ function generate_task(project_name, configs) {
         CONFIG = Object.assign({
             debug: true,
             cmd_prefix: '', // 通用指令前缀，比如 pack:
-            api_path: 'http://m.mall.9888.cn/',
+            api_path: '',
             static_path: '../',
             enable_watch: true,
             enable_server: false,

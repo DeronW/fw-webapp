@@ -40,15 +40,21 @@ const UserInfo = React.createClass({
     render: function () {
         let user_level = null;
         if (this.props.show_user_level) {
+            let img_path = STATIC_PATH + "images/usercenter_vip" +(this.props.user_level  -1 )+ "_icon.png";
             user_level = <span className="text">
                 {/*{this.props.user_level == '' ? <span style={{color: 'gray'}}>VIP</span> : null}*/}
                 {/*{this.props.user_level == 1 ? <span style={{color: 'gray'}}>VIP1</span> : null}*/}
                 {/*{this.props.user_level > 1 ? <em className="vip-text">VIP{this.props.user_level - 1}</em> : null}*/}
+
+                /*
                 {this.props.user_level == 5 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_vip4_icon.png"}/></span> : null}
                 {this.props.user_level == 4 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_vip3_icon.png"}/></span> : null}
                 {this.props.user_level == 3 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_vip2_icon.png"}/></span> : null}
                 {this.props.user_level == 2 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_vip1_icon.png"}/></span> : null}
-                {this.props.user_level == 1 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_novip_icon"}/></span> : null}
+                {this.props.user_level == 1 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_novip_icon.png"}/></span> : null}
+*/
+
+                <span className="vip-text-icon"><img src={img_path}/></span>
             </span>
         }
 
