@@ -6,6 +6,7 @@ html, body {
 img {
   width: 100%;
   height: auto;
+  vertical-align: top;
 }
 
 a {
@@ -212,7 +213,6 @@ ul, ol, li {
       background: rgba(255, 255, 255, 0.25);
       border-radius: 50%;
       margin-right: 18px;
-      border: 1px solid #979797;
       &:last-child {
         margin-right: 0;
       }
@@ -247,4 +247,13 @@ ul, ol, li {
     width: 33%;
     background: transparent url() no-repeat center 10px;
   }
+}
+
+.vertical-line{
+  display:inline-block;
+  width:8px;
+  height:32px;
+  background:#fd4d4c;
+  margin-right:10px;
+  vertical-align: text-bottom;
 }
