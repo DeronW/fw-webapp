@@ -28,7 +28,7 @@ const ProductPanel = React.createClass({
                         { p.price > 0 || p.score == 0 ? <span>&yen;{p.price}</span> : null}
                         { p.price > 0 && p.score ? <span>+</span> : null }
                         { p.score ? <span>{p.score}工分</span> : null }
-                        <span className="num-modifyBox"><span className="num-quantity">商品数量</span>{this.state.count}</span>
+                        <span className="num-modifyBox"><span className="num-quantity">×</span>{this.state.count}</span>
                     </div>
                 </div>
                 {/*<div className="num-box">

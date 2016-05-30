@@ -66,11 +66,12 @@ const GlobalAlert = React.createClass({
         };
         let style_text = {
             textAlign: "left",
-            margin: "20px auto",
+            margin: "30px auto",
             fontSize:"24px",
             lineHeight:"40px",
             color:"#555555",
-            padding: "0 36px"
+            padding: "0 36px",
+            fontSize:"28px"
         };
         let style_confirm = {
             display: "block",
@@ -86,24 +87,27 @@ const GlobalAlert = React.createClass({
         };
         let style_one_big = {
             display: "block",
-            width: "92%",
-            height: "80px",
-            lineHeight: "80px",
+            width: "516px",
+            height: "74px",
+            lineHeight: "74px",
             textAlign: "center",
             color: "white",
             background: "#f9655a",
-            borderRadius: '8px',
-            margin: '10px auto 20px'
+            borderRadius: '4px',
+            margin: '0 auto 30px',
+            fontSize:"34px"
         };
         let style_header = {
-            width:"610px",
-            height:"100px",
+            width:"538px",
+            height:"88px",
             fontSize:"32px",
             color:"#333333",
-            lineHeight:"100px",
+            lineHeight:"88px",
             borderBottom:"1px solid #d8d8d8",
             backgroundColor:"#eee",
-            paddingLeft:"38px"
+            paddingLeft:"38px",
+            borderTopLeftRadius:"8px",
+            borderTopRightRadius:"8px"
         };
         let title_index = {
             width:"36px",
@@ -111,7 +115,7 @@ const GlobalAlert = React.createClass({
             float:"left"
         };
         let title_content = {
-            width:"540px",
+            width:"468px",
             display:"inline-block",
             float:"left"
         };
@@ -124,7 +128,7 @@ const GlobalAlert = React.createClass({
 
         let title = null;
         if(this.props.title instanceof Array){
-            title = <div> {this.props.title.map((i, index)=><div key={index} style={title_wrap}><span style={title_index}>{index}、</span><span style={title_content}>{i}</span></div>)} </div> ;
+            title = <div> {this.props.title.map((i, index)=><div key={index} style={title_wrap}><span style={title_index}>{index+1}、</span><span style={title_content}>{i}</span></div>)} </div> ;
         } else {
             title = this.props.title || 'YO'
         }

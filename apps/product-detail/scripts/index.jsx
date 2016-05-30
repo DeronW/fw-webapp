@@ -184,7 +184,7 @@ const PlusMinus = React.createClass({
         this.updateCount(e.target.value)
     },
     render: function () {
-        let btnMinusBg = "url(" + STATIC_PATH + "images/" + (this.state.minus ? "blue-minus" : "gray-minus") + ".png)";
+        let btnMinusBg = "url(" + STATIC_PATH + "images/" + (this.state.minus > 1 ? "blue-minus" : "gray-minus") + ".png)";
         let btnPlusBg = "url(" + STATIC_PATH + "images/" + (this.state.plus ? "blue-plus" : "gray-plus") + ".png)";
 
         return (
