@@ -189,7 +189,7 @@ $FW.DOMReady(function () {
 
             var user = {
                 score: data.avaliablePoints || 0,
-                score_server_error: data.avaliablePoints == '',
+                score_server_error: data.avaliablePoints === '',
                 bean: data.avaliableBean,
                 use_bean: true,
                 disable_score: data.isPointForbidden,
