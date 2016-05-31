@@ -45,15 +45,6 @@ const UserInfo = React.createClass({
                 {/*{this.props.user_level == '' ? <span style={{color: 'gray'}}>VIP</span> : null}*/}
                 {/*{this.props.user_level == 1 ? <span style={{color: 'gray'}}>VIP1</span> : null}*/}
                 {/*{this.props.user_level > 1 ? <em className="vip-text">VIP{this.props.user_level - 1}</em> : null}*/}
-
-                {/*
-                {this.props.user_level == 5 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_vip4_icon.png"}/></span> : null}
-                {this.props.user_level == 4 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_vip3_icon.png"}/></span> : null}
-                {this.props.user_level == 3 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_vip2_icon.png"}/></span> : null}
-                {this.props.user_level == 2 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_vip1_icon.png"}/></span> : null}
-                {this.props.user_level == 1 ? <span className="vip-text-icon"><img src={STATIC_PATH + "images/usercenter_novip_icon.png"}/></span> : null}
-*/}
-
                 <span className="vip-text-icon"><img src={img_path}/></span>
             </span>
         }
@@ -153,7 +144,7 @@ const Account = React.createClass({
                         <span className="r-text" style={{color: "red"}}>禁用</span> : null}
 
                     {this.props.score == '' ? null :
-                        <span className="r-text">{$FW.Format.currency(this.props.score)}工分</span>}
+                        <span className="r-text">{this.props.score}工分</span>}
                 </div>
             )
         }
