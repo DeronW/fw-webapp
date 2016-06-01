@@ -100,7 +100,7 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-    if ($FW.Format.urlQuery().preview == 'true') {
+    if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
         location.href = '/user'
     } else {
         history.back();

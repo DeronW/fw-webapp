@@ -91,7 +91,7 @@ const OrderStatusBlock = React.createClass({
                     <div className="info-block">
                         <div className="order-block-info">
                             <div className="commodity-img">
-                                <img src={d.img}/>
+                                <img src={d.img || STATIC_PATH + 'images/default-product.jpg'}/>
                             </div>
 
                             <div className="commodity-info">
