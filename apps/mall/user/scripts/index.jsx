@@ -317,8 +317,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('我的商城');
 
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/member/v1/user.json',
-        url: 'http://localhost/user.json',
+        url: API_PATH + 'mall/api/member/v1/user.json',
+        //url: 'http://localhost/user.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
