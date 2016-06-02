@@ -1,0 +1,1 @@
+var gt = require('../generate_task.js');

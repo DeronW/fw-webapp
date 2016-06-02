@@ -9,6 +9,8 @@
  hide_callback 隐藏之后的回调
  */
 
+'use strict';
+
 const GlobalAlert = React.createClass({
     getInitialState: function () {
         return {show: true}
@@ -67,7 +69,6 @@ const GlobalAlert = React.createClass({
         let style_text = {
             textAlign: "left",
             margin: "30px auto",
-            fontSize:"24px",
             lineHeight:"40px",
             color:"#555555",
             padding: "0 36px",

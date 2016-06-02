@@ -15,8 +15,7 @@ const GlobalLoading = React.createClass({
         return (
             <div className="global-ajax-loading">
                 <div className="loader-text"></div>
-                <div className="loader-img"
-                     style={{backgroundImage: 'url(' + STATIC_PATH + 'images/common-ajax-loading.gif)'}}></div>
+                <div className="loader-img"></div>
                 <div className="loading-info">全力加载中</div>
                 <div className="bg"></div>
             </div>

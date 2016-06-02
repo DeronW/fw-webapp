@@ -1,8 +1,10 @@
 var gulp = require('gulp');
-var gt = require('../util/generate_task.js');
+var gt = require('../generate_task.js');
 
-var apps = [
-    'mall',
+const SITE_NAME = 'mall';
+
+const APP_NAMES = [
+    'home',
     'activity',
     'user',
     'order-list',
@@ -19,17 +21,26 @@ var apps = [
     'new-deliver-address'
 ];
 
-apps.forEach(function (i) {
-    gt(i, {
+APP_NAMES.forEach(function (i) {
+    gt(SITE_NAME, i, {
         api_path: 'http://m2mall.9888.cn/'
     });
-    gt(i, {
+    gt(SITE_NAME, i, {
         debug: false,
-        cmd_prefix: 'pack:',
+        cmd_prefix: 'pack',
         api_path: 'http://mmall.9888.cn/',
-        static_path: '/pages/' + i + '/',
+        cdn_prefix: '/pages/' + i + '/',
         enable_watch: false,
         enable_server: false,
-        enable_revision: false
+        enable_revision: true
     });
 });
+
+var pack_tasks = [];
+APP_NAMES.forEach(function (name) {
+    pack_tasks.push(SITE_NAME + ':pack:' + name + ':revision');
+});
+
+
+exports.APP_NAMES = APP_NAMES;
+exports.PACK_TASKS = pack_tasks;

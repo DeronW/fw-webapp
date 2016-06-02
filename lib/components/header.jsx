@@ -3,6 +3,8 @@
  <Header title={} title_img={} height={} background={} />
  */
 
+'use strict';
+
 const Header = React.createClass({
     getInitialState: function () {
         let height = parseInt(this.props.height) || 100;

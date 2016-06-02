@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no"/>
     <title>{% block title %}Mall{% endblock %}</title>
-    <link type="text/css" rel="stylesheet" href="{STATIC_PATH}css/all.css"/>
+    <link type="text/css" rel="stylesheet" href="{STATIC_PATH}stylesheets/all.css"/>
     {% block css %}{% endblock %}
 </head>
 <body>
@@ -22,8 +22,8 @@
 <div id="header"></div>
 <div id="cnt"></div>
 
-<script src="{STATIC_PATH}scripts/lib.js"></script>
-<script src="{STATIC_PATH}scripts/bundle.js"></script>
+<script src="{STATIC_PATH}javascripts/lib.js"></script>
+<script src="{STATIC_PATH}javascripts/bundle.js"></script>
 
 <script>
     if (location.protocol.indexOf('http') > -1) {
