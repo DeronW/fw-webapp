@@ -1,6 +1,5 @@
 'use strict';
 
-const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const Fail = React.createClass({
@@ -46,7 +45,7 @@ const Fail = React.createClass({
         }
         return (
             <div>
-                <div className="fail-img"><img src="../images/ico-fail.png"/></div>
+                <div className="fail-img"><img src="images/ico-fail.png"/></div>
                 <div className="fail-text">
                     { failText }
                 </div>

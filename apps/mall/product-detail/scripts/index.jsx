@@ -259,8 +259,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('产品详情');
 
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
-        url: "http://localhost/product-detail.json",
+        url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
+        //url: "http://localhost/product-detail.json",
         enable_loading: true,
         success: function (data) {
             if (data.title) {

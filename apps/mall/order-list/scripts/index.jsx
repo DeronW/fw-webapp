@@ -1,6 +1,5 @@
 'use strict';
 
-const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const OrderMain = React.createClass({
@@ -119,7 +118,7 @@ const OrderBlock = React.createClass({
                 <a href={'/order/detail?order_id=' + order.orderId} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
-                            <img src={product.img || STATIC_PATH + 'images/default-product.jpg'}/>
+                            <img src={product.img || 'images/default-product.jpg'}/>
                         </div>
                         <div className="commodity-info">
                             <div className="commodity-name">

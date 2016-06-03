@@ -1,6 +1,5 @@
 'use strict';
 
-const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const Address = React.createClass({
@@ -77,20 +76,20 @@ const Address = React.createClass({
                 {$FW.Browser.inApp() ? null : <Header title={'新建收货地址'}/>}
                 <div className="new-deliver-address">
                     <div className="deliver input-div"
-                         style={{background:"#fff url("+STATIC_PATH+"images/ico-person.png) no-repeat 24px center"}}>
+                         style={{background:"#fff url(images/ico-person.png) no-repeat 24px center"}}>
                         <input value={this.state.username} onChange={this.onUsernameChangeHandler} placeholder="收货人"/>
                     </div>
                     <div className="phone input-div"
-                         style={{background:"#fff url("+STATIC_PATH+"images/ico-phone.png) no-repeat 27px center"}}>
+                         style={{background:"#fff url(images/ico-phone.png) no-repeat 27px center"}}>
                         <input value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="联系方式"/>
                     </div>
                     <div className="address input-div"
-                         style={{background:"#fff url("+STATIC_PATH+"images/ico-blue-location.png) no-repeat 26px center"}}>
+                         style={{background:"#fff url(images/ico-blue-location.png) no-repeat 26px center"}}>
                         <input value={this.state.address} onChange={this.onAddressChangeHandler} placeholder="详细地址"/>
                     </div>
 
                     <div className="default" onClick={this.onDefaultChangeHandler}
-                         style={{background:"url("+STATIC_PATH+"images/"+setDefaultImg+".png) no-repeat 2px 1px"}}>
+                         style={{background:"url(images/"+setDefaultImg+".png) no-repeat 2px 1px"}}>
                         设为默认
                     </div>
                     <div className="btn">

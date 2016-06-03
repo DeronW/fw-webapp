@@ -18,7 +18,8 @@ const APP_NAMES = [
     'fail',
     'not-support',
     'deliver-address',
-    'new-deliver-address'
+    'new-deliver-address',
+    'error-page'
 ];
 
 APP_NAMES.forEach(function (i) {

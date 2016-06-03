@@ -1,6 +1,5 @@
 'use strict';
 
-const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const MallVip = React.createClass({
@@ -29,7 +28,7 @@ const MallVip = React.createClass({
             <div key={index}
                 className={index == this.state.index ? "on" : ""}
                 onClick={function(){that.handleClickTab(index)}}
-                style={{background:"#fff url(" + STATIC_PATH + "images/tab-gray-dot.png) no-repeat right 0"}}>
+                style={{background:"#fff url(images/tab-gray-dot.png) no-repeat right 0"}}>
                 <span>{name.title}</span>
             </div>
         );
@@ -75,7 +74,7 @@ MallVip.UserLevel = React.createClass({
                         <span className="vip-tip-mylevel">{this.props.level}</span>
                         ，可购买该等级及以下等级商品！
                         <div className="vip-tip-close" onClick={this.hideHandler}
-                             style={{background:"url(" + STATIC_PATH + "images/ico-white-close.png) no-repeat center"}}></div>
+                             style={{background:"url(images/ico-white-close.png) no-repeat center"}}></div>
                     </div>
                 </div>
             </div>

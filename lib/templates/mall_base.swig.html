@@ -7,35 +7,21 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no"/>
     <title>{% block title %}Mall{% endblock %}</title>
-    <link type="text/css" rel="stylesheet" href="{STATIC_PATH}stylesheets/all.css"/>
+    <link type="text/css" rel="stylesheet" href="stylesheets/all.css"/>
     {% block css %}{% endblock %}
 </head>
 <body>
 
 {% block content %}{% endblock %}
 
-<!--图片引用的路径前缀,结尾需要添加斜线-->
-<input type="hidden" id="static-path" value="{STATIC_PATH}"/>
 <!--接口地址前缀,结尾需要添加斜线-->
 <input type="hidden" id="api-path" value="{API_PATH}"/>
 
 <div id="header"></div>
 <div id="cnt"></div>
 
-<script src="{STATIC_PATH}javascripts/lib.js"></script>
-<script src="{STATIC_PATH}javascripts/bundle.js"></script>
-
-<script>
-    if (location.protocol.indexOf('http') > -1) {
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?e391750a29ff01f211e985d2c71ac538";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    }
-</script>
+<script src="javascripts/lib.js"></script>
+<script src="javascripts/bundle.js"></script>
 
 </body>
 </html>

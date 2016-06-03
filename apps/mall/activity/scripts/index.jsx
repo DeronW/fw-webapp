@@ -1,13 +1,12 @@
 'use strict';
 
-const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const MallActivity = React.createClass({
     render: function () {
         let img = this.props.activity.img ?
             <a href="#" className="act-img-detail">
-                <img src={this.props.activity.img || STATIC_PATH + 'images/default-banner.jpg'}/></a> :
+                <img src={this.props.activity.img || 'images/default-banner.jpg'}/></a> :
             null;
 
         return (
@@ -43,7 +42,7 @@ MallActivity.Explain = React.createClass({
                 <div className="act-explain-head" onClick={this.toggleHandler}>
                     <div className="act-explain-h">活动说明</div>
                     <div className={this.state.show ? "act-explain-btn on" : "act-explain-btn"}
-                         style={{background:"url("+STATIC_PATH+"images/ico-grap-down.png) no-repeat center"}}></div>
+                         style={{background:"url(images/ico-grap-down.png) no-repeat center"}}></div>
                 </div>
                 {desc}
             </div>
@@ -88,7 +87,7 @@ const ProductItem = React.createClass({
         var price = (parseFloat(this.props.score) > 0) ? (
             <span className="list-price-score">&#43;{this.props.score}工分</span>) : null;
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
-        var cover_bg = 'url(' + (this.props.img || STATIC_PATH + 'images/default-product.jpg') + ')';
+        var cover_bg = 'url(' + (this.props.img || 'images/default-product.jpg') + ')';
 
         return (
             <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
@@ -119,6 +118,7 @@ $FW.DOMReady(function () {
     let bizNo = $FW.Format.urlQuery().bizNo;
     $FW.Ajax({
         url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=' + bizNo,
+        //url:'http://localhost/activities.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<MallActivity activity={data} title={data.title}/>, document.getElementById('cnt'));

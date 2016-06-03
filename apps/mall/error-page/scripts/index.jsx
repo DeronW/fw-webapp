@@ -1,6 +1,5 @@
 'use strict';
 
-const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const Waiting = React.createClass({
@@ -24,7 +23,7 @@ const Waiting = React.createClass({
         return (
             <div>
                 {$FW.Browser.inApp() ? null : <Header title={'页面异常'}/>}
-                <img style={style_a} src={STATIC_PATH + "images/404.png"}/>
+                <img style={style_a} src="images/404.png"/>
                 <br />
                 <div style={style_b}>豆哥生病了</div>
                 <div style={style_b}>页面加载不出来啦!</div>

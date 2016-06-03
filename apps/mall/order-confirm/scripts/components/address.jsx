@@ -23,7 +23,7 @@ AddressPanel.New = React.createClass({
             <div className="new-adress">
                 <a href={new_link}>收货地址
                     <div className="btn-new-address"
-                        style={{backgroundImage:"url("+STATIC_PATH+"images/ico-add.png)"}}>
+                        style={{backgroundImage:"url(images/ico-add.png)"}}>
                      </div>
                 </a>
             </div>
@@ -44,9 +44,9 @@ AddressPanel.List = React.createClass({
                     收货地址
                 </div>
                 <div className="goods-address-cnt"
-                     style={{backgroundImage: 'url(' + STATIC_PATH + 'images/icon-address.png)'}}>
+                     style={{backgroundImage: 'url(images/icon-address.png)'}}>
                     <a href={address_list_link}
-                       style={{backgroundImage:"url("+STATIC_PATH+"images/ico-gray-right.jpg)"}}>
+                       style={{backgroundImage:"url(images/ico-gray-right.jpg)"}}>
                         <div className="inf">
                             <div className="receiver">
                                 <span>收货人：</span>

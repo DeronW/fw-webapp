@@ -1,6 +1,5 @@
 'use strict';
 
-const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const Success = React.createClass({
@@ -12,13 +11,13 @@ const Success = React.createClass({
         return (
             <div>
                 <div className="success-banner"
-                     style={{background:"url("+STATIC_PATH+"images/success-banner.jpg) no-repeat center center"}}>
+                     style={{background:"url(images/success-banner.jpg) no-repeat center center"}}>
                     <div className="success-text"
-                         style={{background:"url("+STATIC_PATH+"images/circle-white-right.png) no-repeat 80px 80px"}}>
+                         style={{background:"url(images/circle-white-right.png) no-repeat 80px 80px"}}>
                         订单状态:已付款
                     </div>
                 </div>
-                <div className="success-addr" style={{backgroundImage:"url("+STATIC_PATH+"images/ico-blue-location.png)"}}>
+                <div className="success-addr" style={{backgroundImage:"url(images/ico-blue-location.png)"}}>
                     <div className="addr-box">
                         <div className="addr">
                             <div className="receiver">收货人：{this.props.receiver}</div>

@@ -34,7 +34,7 @@ const VoucherModal = React.createClass({
                 <div className="li" key={index}
                      onClick={() => this.toggleVoucher(index) }>
                     <div className="choose"
-                         style={{backgroundImage:"url("+STATIC_PATH+"images/"+checkImg+".png)"}}></div>
+                         style={{backgroundImage:"url(images/"+checkImg+".png)"}}></div>
                     <div className="name">{data.productName}</div>
                     <div className="date">{date}</div>
                 </div>
@@ -49,7 +49,7 @@ const VoucherModal = React.createClass({
                     <div className="coupon-pop-cont">
                         <div className="head">
                             <div className="chose"
-                                 style={{background:"url("+STATIC_PATH+"images/gray-block.png) no-repeat 0 center", display: "none"}}>
+                                 style={{background:"url(images/gray-block.png) no-repeat 0 center", display: "none"}}>
                             </div>
                             <div className="name">兑换券名称</div>
                             <div className="date">有效期</div>

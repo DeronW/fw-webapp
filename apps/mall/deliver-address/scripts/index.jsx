@@ -1,6 +1,5 @@
 'use strict';
 
-const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const DeliverAddress = React.createClass({
@@ -40,7 +39,7 @@ const DeliverAddress = React.createClass({
             if (preview)
                 set_default = address.isDefault ? (
                     <div className="set-default"
-                         style={{backgroundImage: 'url(' + STATIC_PATH + 'images/default-address.png)'}}>
+                         style={{backgroundImage: 'url(images/default-address.png)'}}>
                     </div>
                 ) : (
                     <div className="set-default" onClick={() => _this.markDefaultHandler(address.address_id)}>设为默认</div>
@@ -83,8 +82,8 @@ $FW.DOMReady(function () {
 
     $FW.Component.showAjaxLoading();
     $FW.Ajax({
-        url: API_PATH + 'mall/api/member/v1/delivery_address.json',
-        //url: 'http://10.105.7.71/delivery_address.json',
+        //url: API_PATH + 'mall/api/member/v1/delivery_address.json',
+        url: 'http://localhost/delivery_address.json',
         enable_loading: true,
         success: function (data) {
             $FW.Component.hideAjaxLoading();

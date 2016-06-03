@@ -1,6 +1,5 @@
 'use strict';
 
-const STATIC_PATH = document.getElementById('static-path').value;
 const API_PATH = document.getElementById('api-path').value;
 
 const OrderDetail = React.createClass({
@@ -57,7 +56,7 @@ const OrderStatusList = React.createClass({
                 </div>
                 <div className="address-list">
                     <div className="address-icon">
-                        <img src={STATIC_PATH+"images/ico-blue-location.png"}/>
+                        <img src="images/ico-blue-location.png"/>
                     </div>
 
                     <div className="address-info">
@@ -91,7 +90,7 @@ const OrderStatusBlock = React.createClass({
                     <div className="info-block">
                         <div className="order-block-info">
                             <div className="commodity-img">
-                                <img src={d.img || STATIC_PATH + 'images/default-product.jpg'}/>
+                                <img src={d.img || 'images/default-product.jpg'}/>
                             </div>
 
                             <div className="commodity-info">
