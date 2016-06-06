@@ -17,7 +17,6 @@ const SMSCode = React.createClass({
                 enable_loading: true,
                 method: 'post',
                 success: function (data) {
-                    $FW.Component.Alert('验证码已发送, 请查收');
                     if (data.validateCode)
                         $FW.Component.Alert('原来你在测试, 那就直接告诉你验证码\n ' + data.validateCode);
                 },
