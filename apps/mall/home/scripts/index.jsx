@@ -144,7 +144,7 @@ const ProductItem = React.createClass({
                     <div className="list-price">
                         {this.props.price > 0 ? <span className="list-price-mark">&yen;</span> : null}
                         {price}
-                        { score }
+                        {score}
                     </div>
                     <div className="list-sold">
                         <span>累计销量 </span>
