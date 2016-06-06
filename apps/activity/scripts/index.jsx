@@ -85,8 +85,14 @@ const ProductList = React.createClass({
 
 const ProductItem = React.createClass({
     render: function () {
-        var price = (parseFloat(this.props.score) > 0) ? (
-            <span className="list-price-score">&#43;{this.props.score}工分</span>) : null;
+        var price = this.props.price > 0 ?
+            <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span> : null;
+        var score = (parseFloat(this.props.score) > 0) ?
+            ( <span className="list-price-score">
+                {this.props.price > 0 ? <span>&#43</span> : null}
+                {this.props.score}工分
+            </span>) : "";
+
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
         var cover_bg = 'url(' + (this.props.img || STATIC_PATH + 'images/default-product.jpg') + ')';
 
@@ -100,9 +106,9 @@ const ProductItem = React.createClass({
                 </div>
                 <div className="list-price-box">
                     <div className="list-price">
-                        <span className="list-price-mark">&yen;</span>
-                        <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
-                        { price }
+                        {this.props.price > 0 ? <span className="list-price-mark">&yen;</span> : null}
+                        {price}
+                        {score}
                     </div>
                     <div className="list-sold">
                         <span>累计销量 </span>
