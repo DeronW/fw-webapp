@@ -33,6 +33,8 @@ function generate_task(site_name, project_name, configs) {
             api_path: '',
             static_path: '',
             cdn_prefix: '',
+            include_components: [],
+            main_jsx: 'scripts/index.jsx',
             enable_watch: true,
             enable_server: false,
             enable_revision: false
@@ -81,18 +83,15 @@ function generate_task(site_name, project_name, configs) {
     }
 
     function compile_scripts() {
-        return gulp.src([
-                LIB_PATH + 'components/header.jsx',
-                LIB_PATH + 'components/loading.jsx',
-                LIB_PATH + 'components/alert.jsx',
-                APP_PATH + 'scripts/components/*.jsx',
-                APP_PATH + 'scripts/index.jsx'
-            ])
+        let paths = [];
+        CONFIG.include_components.forEach((i) => paths.push(`${LIB_PATH}components/${i}`));
+        paths.push(APP_PATH + 'scripts/components/*.jsx');
+        paths.push(APP_PATH + CONFIG.main_jsx);
+
+        return gulp.src(paths)
             .pipe(plugins.changed(BUILD_PATH + 'javascripts'))
             .pipe(plugins.plumber())
-            .pipe(plugins.babel({
-                presets: ['es2015', 'react']
-            }))
+            .pipe(plugins.babel({presets: ['es2015', 'react']}))
             .pipe(CONFIG.debug ? plugins.empty() : plugins.js_uglify())
             .pipe(plugins.concat('bundle.js', {newLine: ';'}))
             .pipe(gulp.dest(BUILD_PATH + 'javascripts'));

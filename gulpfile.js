@@ -11,9 +11,7 @@ gulp.task('default', function (done) {
     done();
 });
 
-gulp.task('clean', function () {
-    return del(['build', 'dest', 'dist', 'cdn'])
-});
+gulp.task('clean', () => del(['build', 'dest', 'dist', 'cdn']));
 
 gulp.task('build:mall', gulp.series(['clean'].concat(task_mall.PACK_TASKS)));
 gulp.task('build:main', gulp.series(['clean'].concat(task_main.PACK_TASKS)));

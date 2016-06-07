@@ -8,14 +8,13 @@ const APP_NAMES = [
 ];
 
 APP_NAMES.forEach(function (i) {
-    gt(SITE_NAME, i, {
-        api_path: 'http://m2mall.9888.cn/'
-    });
+    gt(SITE_NAME, i);
     gt(SITE_NAME, i, {
         debug: false,
         cmd_prefix: 'pack',
         api_path: '',
         cdn_prefix: '/pages/' + i + '/',
+        include_components: ['main/header.jsx', 'loading.jsx', 'alert.jsx'],
         enable_watch: false,
         enable_server: false,
         enable_revision: true
@@ -27,6 +26,4 @@ APP_NAMES.forEach(function (name) {
     pack_tasks.push(SITE_NAME + ':pack:' + name + ':revision');
 });
 
-
-//exports.APP_NAMES = APP_NAMES;
 exports.PACK_TASKS = pack_tasks;
