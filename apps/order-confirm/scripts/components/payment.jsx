@@ -108,7 +108,7 @@ const PaymentPanel = React.createClass({
                         {checked_voucher()}
                     </div>
 
-                    <div className="bean">
+                    <div className="bean" style={{display:'none'}}>
                         <div className="bean1">工豆账户</div>
                         <div className="bean2">&yen;{$FW.Format.currency(this.props.user.bean / 100.0)}</div>
                         <div className="bean3">

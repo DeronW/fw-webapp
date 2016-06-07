@@ -2,7 +2,6 @@
   "name": "frontend",
   "private": true,
   "dependencies": {
-    "jshint": ">=2.9"
   },
   "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",
