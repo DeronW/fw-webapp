@@ -50,6 +50,7 @@
   "scripts": {
     "clean": "node node_modules/gulp/bin/gulp.js clean",
     "gulp": "node node_modules/gulp/bin/gulp.js",
-    "build:mall": "node node_modules/gulp/bin/gulp.js build:mall"
+    "build:mall": "node node_modules/gulp/bin/gulp.js build:mall",
+    "build:main": "node node_modules/gulp/bin/gulp.js build:main"
   }
 }

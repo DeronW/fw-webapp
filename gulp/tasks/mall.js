@@ -42,6 +42,5 @@ APP_NAMES.forEach(function (name) {
     pack_tasks.push(SITE_NAME + ':pack:' + name + ':revision');
 });
 
-
-exports.APP_NAMES = APP_NAMES;
+//exports.APP_NAMES = APP_NAMES;
 exports.PACK_TASKS = pack_tasks;
