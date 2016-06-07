@@ -89,9 +89,9 @@ const PaymentPanel = React.createClass({
 
         let user_score = (
             <div className="score">
-                <div className="score1">工分账户</div>
+                <div className="score1">可用工分</div>
                 <div className="score2">{this.props.user.score}</div>
-                <div className="score3">{this.state.score_used > 0 ? this.state.score_used : 0}</div>
+                <div className="score3">支付: {this.state.score_used > 0 ? this.state.score_used : 0}</div>
             </div>
         );
 
