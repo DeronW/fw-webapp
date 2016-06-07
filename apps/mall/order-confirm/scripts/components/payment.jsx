@@ -87,16 +87,13 @@ const PaymentPanel = React.createClass({
                 null;
         };
 
-        let user_score = null;
-        if (this.props.user.score > 0) {
-            user_score = (
-                <div className="score">
-                    <div className="score1">工分账户</div>
-                    <div className="score2">{this.props.user.score}</div>
-                    <div className="score3">{this.state.score_used > 0 ? this.state.score_used : 0}</div>
-                </div>
-            )
-        }
+        let user_score = (
+            <div className="score">
+                <div className="score1">工分账户</div>
+                <div className="score2">{this.props.user.score}</div>
+                <div className="score3">{this.state.score_used > 0 ? this.state.score_used : 0}</div>
+            </div>
+        );
 
         return (
             <div className="balance-wrap">
@@ -120,7 +117,7 @@ const PaymentPanel = React.createClass({
                     </div>
                     {user_score}
                 </div>
-                <div className="balance-box">
+                <div className="balance-box" style={{display: 'none'}}>
                     <div className="balance1">可用余额</div>
                     <div className={"balance2 red"}>&yen;{$FW.Format.currency(this.props.user.charge)}</div>
                     <div className="balance3">&yen;{$FW.Format.currency(this.computeTotalPrice())}</div>
