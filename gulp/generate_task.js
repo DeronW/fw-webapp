@@ -83,7 +83,7 @@ function generate_task(site_name, project_name, configs) {
     }
 
     function compile_scripts() {
-        let paths = [];
+        var paths = [];
         CONFIG.include_components.forEach((i) => paths.push(`${LIB_PATH}components/${i}`));
         paths.push(APP_PATH + 'scripts/components/*.jsx');
         paths.push(APP_PATH + CONFIG.main_jsx);
