@@ -101,7 +101,7 @@ const ProductItem = React.createClass({
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
                 <div className="list-mark">
-                    { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
+                    { (this.props.tags || []).map((d, index) => <div key={index}>{d}</div>) }
                 </div>
                 <div className="list-price-box">
                     <div className="list-price">
