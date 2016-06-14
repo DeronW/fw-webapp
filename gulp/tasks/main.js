@@ -12,6 +12,7 @@ APP_NAMES.forEach(function (i) {
     gt(SITE_NAME, i, {
         debug: false,
         cmd_prefix: 'pack',
+        cdn_prefix: '/pages/' + i + '/',
         enable_revision: true
     });
 });
