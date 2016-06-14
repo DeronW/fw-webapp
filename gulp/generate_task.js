@@ -35,16 +35,20 @@ function generate_task(site_name, project_name, configs) {
             cdn_prefix: '',
             include_components: [],
             main_jsx: 'scripts/index.jsx',
+            with_swipe: true,
             enable_watch: true,
             enable_server: false,
             enable_revision: false
         }, configs);
 
     const TASK_NAME = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + PROJECT_NAME;
+
     gulp.task(TASK_NAME,
         gulp.series(
             compile_html,
+            compile_css,
             compile_styles,
+            compile_javascripts,
             compile_commonjs,
             compile_scripts,
             compile_images,
@@ -61,12 +65,19 @@ function generate_task(site_name, project_name, configs) {
 
     function compile_html() {
         return gulp.src([APP_PATH + '**/*.html'])
-            .pipe(plugins.changed(BUILD_PATH))
+            //.pipe(plugins.changed(BUILD_PATH))
             .pipe(plugins.swig())
             .pipe(CONFIG.debug ? plugins.empty() : plugins.htmlmin({collapseWhitespace: true}))
             .pipe(plugins.replace('{API_PATH}', CONFIG.api_path))
             .pipe(plugins.replace('{STATIC_PATH}', CONFIG.static_path))
             .pipe(gulp.dest(BUILD_PATH));
+    }
+
+    function compile_css() {
+        return gulp.src([APP_PATH + 'css/*.css'])
+            .pipe(plugins.changed(BUILD_PATH + 'stylesheets'))
+            .pipe(plugins.cssnano())
+            .pipe(gulp.dest(BUILD_PATH + 'stylesheets'));
     }
 
     function compile_styles() {
@@ -80,6 +91,15 @@ function generate_task(site_name, project_name, configs) {
             .pipe(plugins.cssnano())
             .pipe(plugins.concat('all.css'))
             .pipe(gulp.dest(BUILD_PATH + 'stylesheets'));
+    }
+
+    function compile_javascripts() {
+        return gulp.src([APP_PATH + 'javascripts/*.js'])
+            .pipe(plugins.changed(BUILD_PATH + 'javascripts'))
+            .pipe(plugins.plumber())
+            .pipe(plugins.babel({presets: ['es2015']}))
+            .pipe(CONFIG.debug ? plugins.empty() : plugins.js_uglify())
+            .pipe(gulp.dest(BUILD_PATH + 'javascripts'));
     }
 
     function compile_scripts() {
@@ -109,7 +129,7 @@ function generate_task(site_name, project_name, configs) {
         }
 
         lib_files.push(LIB_PATH + 'native-bridge-0.1.0.js');
-        lib_files.push(LIB_PATH + 'javascripts/swipe-2.0.0.js');
+        if (CONFIG.with_swipe) lib_files.push(LIB_PATH + 'javascripts/swipe-2.0.0.js');
 
         return gulp.src(lib_files)
             .pipe(plugins.changed(BUILD_PATH + 'javascripts'))
@@ -134,10 +154,12 @@ function generate_task(site_name, project_name, configs) {
     }
 
     function monitor() {
-        gulp.watch('apps/' + PROJECT_NAME + '/html/**', gulp.parallel(compile_html));
-        gulp.watch('apps/' + PROJECT_NAME + '/images/**', gulp.parallel(compile_images));
-        gulp.watch('apps/' + PROJECT_NAME + '/less/**', gulp.parallel(compile_styles));
-        gulp.watch('apps/' + PROJECT_NAME + '/scripts/**', gulp.parallel(compile_scripts));
+        gulp.watch(APP_PATH + '/*.html', gulp.parallel(compile_html));
+        gulp.watch(APP_PATH + '/images/**', gulp.parallel(compile_images));
+        gulp.watch(APP_PATH + '/less/**', gulp.parallel(compile_styles));
+        gulp.watch(APP_PATH + '/scripts/**', gulp.parallel(compile_scripts));
+        gulp.watch(APP_PATH + '/css/**', gulp.parallel(compile_css));
+        gulp.watch(APP_PATH + '/javascripts/**', gulp.parallel(compile_javascripts));
     }
 
     function revision() {

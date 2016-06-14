@@ -25,7 +25,8 @@ const APP_NAMES = [
 APP_NAMES.forEach(function (i) {
     gt(SITE_NAME, i, {
         api_path: 'http://m2mall.9888.cn/',
-        include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx']
+        include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx'],
+        width_swipe: true
     });
     gt(SITE_NAME, i, {
         debug: false,
@@ -33,6 +34,7 @@ APP_NAMES.forEach(function (i) {
         api_path: 'http://mmall.9888.cn/',
         cdn_prefix: '/pages/' + i + '/',
         include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx'],
+        width_swipe: true,
         enable_watch: false,
         enable_server: false,
         enable_revision: true

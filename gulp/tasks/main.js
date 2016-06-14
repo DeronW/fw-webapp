@@ -4,7 +4,7 @@ var gt = require('../generate_task.js');
 const SITE_NAME = 'main';
 
 const APP_NAMES = [
-    'vip'
+    'user-level'
 ];
 
 APP_NAMES.forEach(function (i) {
@@ -12,11 +12,6 @@ APP_NAMES.forEach(function (i) {
     gt(SITE_NAME, i, {
         debug: false,
         cmd_prefix: 'pack',
-        api_path: '',
-        cdn_prefix: '/pages/' + i + '/',
-        include_components: ['main/header.jsx', 'loading.jsx', 'alert.jsx'],
-        enable_watch: false,
-        enable_server: false,
         enable_revision: true
     });
 });
