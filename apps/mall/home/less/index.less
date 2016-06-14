@@ -19,16 +19,10 @@ a {
   }
 }
 
-ul, ol, li {
-  list-style: none outside none;
-  padding: 0;
-  margin: 0;
-}
-
-.auth-info{
-  font-size:24px;
-  color:#999;
-  margin:20px 0;
+.auth-info {
+  font-size: 24px;
+  color: #999;
+  margin: 20px 0;
   text-align: center;
 }
 
@@ -61,8 +55,8 @@ ul, ol, li {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    position:relative;
-    padding-left:20px;
+    position: relative;
+    padding-left: 20px;
   }
   .index-actList-hmore {
     display: block;
@@ -74,6 +68,7 @@ ul, ol, li {
     line-height: 84px;
     color: #4aa1f9;
     font-size: 28px;
+    background: url(../images/ico-blue-right.png) no-repeat right center;
   }
 }
 
@@ -120,7 +115,8 @@ ul, ol, li {
     position: relative;
     padding: 15px 20px 18px 200px;
     height: 185px;
-    border-bottom:1px solid #e3e5ea;
+    border-bottom: 1px solid #e3e5ea;
+    box-sizing: content-box;
 
     .list-price-box {
       position: absolute;
@@ -161,7 +157,7 @@ ul, ol, li {
     color: #333;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top:3px;
+    margin-top: 3px;
   }
 
   .list-mark {
@@ -185,7 +181,7 @@ ul, ol, li {
   height: 260px;
   text-align: center;
   font-size: 5vw;
-  background: transparent url() no-repeat center center;
+  background: transparent url('../images/default-banner.jpg') no-repeat center center;
 }
 
 .banner-carousel {
@@ -246,16 +242,24 @@ ul, ol, li {
 
   .vip, .goods, .mine {
     width: 33%;
-    background: transparent url() no-repeat center 10px;
+  }
+  .vip {
+    background: transparent url('../images/ico-vip.png') no-repeat center 10px;
+  }
+  .goods {
+    background: transparent url('../images/ico-goods.png') no-repeat center 10px;
+  }
+  .mine {
+    background: transparent url('../images/ico-shop.png') no-repeat center 10px;
   }
 }
 
-.vertical-line{
-  display:inline-block;
-  width:8px;
-  height:32px;
-  background:#fd4d4c;
-  position:absolute;
-  top:26px;
-  left:0;
+.vertical-line {
+  display: inline-block;
+  width: 8px;
+  height: 32px;
+  background: #fd4d4c;
+  position: absolute;
+  top: 26px;
+  left: 0;
 }

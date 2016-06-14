@@ -22,18 +22,11 @@ const Mall = React.createClass({
             <div>
                 {this.props.banners.length ?
                     <Carousel banners={this.props.banners}/> :
-                    <div className="no-banner"
-                         style={{backgroundImage: 'url(' + STATIC_PATH + 'images/default-banner.jpg)'}}></div>}
+                    <div className="no-banner"></div>}
                 <div className="header-nav">
-                    <a className="vip" onClick={function(){ gotoHandler("/waiting") }}
-                       style={{backgroundImage: 'url(images/ico-vip.png)'}}>
-                        VIP专区</a>
-                    <a className="goods" onClick={function(){ gotoHandler("/products") }}
-                       style={{backgroundImage: 'url(images/ico-goods.png)'}}>
-                        豆哥商品</a>
-                    <a className="mine" onClick={function(){ gotoHandler("/user", true) }}
-                       style={{backgroundImage: 'url(images/ico-shop.png)'}}>
-                        我的商城</a>
+                    <a className="vip" onClick={function(){ gotoHandler("/waiting") }}>VIP专区</a>
+                    <a className="goods" onClick={function(){ gotoHandler("/products") }}>豆哥商品</a>
+                    <a className="mine" onClick={function(){ gotoHandler("/user", true) }}>我的商城</a>
                 </div>
                 <div className="index-actList-wrap">
                     { this.props.activities.map(activity) }
@@ -108,8 +101,7 @@ const TextBar = React.createClass({
             <div className="index-actList-h">
                 <div className="index-actList-htext"><span className="vertical-line"></span>{this.props.title}</div>
                 <a onClick={function(){gotoHandler('/activity?bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
-                   className="index-actList-hmore"
-                   style={{background:"url(images/ico-blue-right.png) no-repeat right center"}}>更多</a>
+                   className="index-actList-hmore">更多</a>
             </div>
         )
     }
