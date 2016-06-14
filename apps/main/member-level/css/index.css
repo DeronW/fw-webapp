@@ -1,0 +1,53 @@
+#header{position:fixed;left:0;top:0;height:5rem;width:100%;z-index:99;line-height:5rem;border-bottom:1px solid #d8d8d8;text-align:center;background:#fff;font-size: 1.8rem;color:#333;-webkit-box-sizing: border-box;box-sizing: border-box;}
+#header .back{position: absolute;left: 1.9rem;top: 1.5rem;width:2rem;height:2rem;text-indent:-999rem;background:url(../images/ico-back.png) no-repeat 0 center;-webkit-background-size:auto 100%;background-size:auto 100%;}
+.level-notice{display:block;height:3.5rem;line-height:3.5rem;font-size:1.2rem;padding-left:1.7rem;background:#5b6993;position:fixed;top:5rem;left:0;right:0;z-index:2;}
+.level-notice span{display:block;font-size:1.2rem;color:#fff;}
+.level-notice span i{display:block;background:url(../images/ico-rwhite.png) no-repeat;background-size:100% 100%;width:0.9rem;height:1.5rem;position:absolute;top:1rem;right:1.7rem;}
+.slider-block{margin-top:8.5rem;padding-bottom:1rem;background:#fff;border-bottom:1px solid #ddd;}
+.slider{width: 100%;}
+.slick-list{overflow:hidden;}
+.slick-slide{margin: 0px 8px;}
+.slick-slide img{width: 100%;}
+.slick-prev:before, .slick-next:before {color: black;}
+.slider .img-box{width:100%;position:relative;}
+.slide-txt{opacity:0;-webkit-transition:opacity ease 0.5s;transition:opacity ease 0.5s;}
+.slide-txt.show{display:block;opacity:1;}
+.slick-dots li {position: relative;display: inline-block;width:0.6rem;height: 0.6rem;margin: 0 0.25rem;padding: 0;}
+.slick-dots li button {font-size: 0;line-height: 0;display: block;width: 0.6rem;height: 0.6rem;color: #dde2ea;border: 0;outline: none; background: #dde2ea;
+    border-radius: 50%;padding:0;}
+.slick-dots li.slick-active button{background:#fd4d4c;}
+.level-progress-box{position:absolute;bottom:1.5rem;left:1.5rem;}
+.level-img{ padding: 6% 6% 0;}
+.level-img img{float: left;width: 29%;padding: 0 6.5% 6.6% 0;}
+.level-img img:nth-child(3) {width: 29%;padding: 0 0 6.6% 0;}
+.change-img-gray{ -webkit-filter:grayscale(1);-moz-filter:grayscale(1);filter:grayscale(1);}
+.level-progress{position:relative;border:1px solid #76749c;height:6px;background-color:#76749c;width:120px;border-radius:4px ;}
+.level-progress-red{position:relative;width:0%;height:6px;background:#1be9d8;border-radius:3px ;transition: all 1s;}
+.level-progress-bar{position: absolute;left:0px;bottom:0px;width:0%;height: 6px;border-radius: 3px;background-color:#e73f3e;transition: all 1.2s;}
+.level-progress-line{background-color:rgba(0,0,0,.5);width:1px;height:6px;position:absolute;left:26px;top:0;}
+.level-progress-line1{left:24px;}
+.level-progress-line2{left:48px;}
+.level-progress-line3{left:72px;}
+.level-progress-line4{left:96px;}
+.level-progress-text{color:#fff;line-height:18px;font-size:10px;}
+.level-progress-ico{position:absolute;top:-20px;margin-right:-10px;right:0;width:17px;height:17px;background:url(../images/ico-level-vip0.png) no-repeat center bottom;-webkit-background-size:100% ;background-size:100% ;;}
+.level-progress-box1 .level-progress{border:1px solid #203278;background-color:#203278;}
+.level-progress-box1 .level-progress-ico{background:url(../images/ico-level-vip1.png) no-repeat center bottom;-webkit-background-size:100% ;background-size:100% ;}
+.level-progress-box2 .level-progress{border:1px solid #0f123a;background-color:#0f123a;}
+.level-progress-box2 .level-progress-ico{background:url(../images/ico-level-vip2.png) no-repeat center bottom;-webkit-background-size:100% ;background-size:100% ;;}
+.level-progress-box3 .level-progress{border:1px solid #400925;background-color:#400925;}
+.level-progress-box3 .level-progress-ico{background:url(../images/ico-level-vip3.png) no-repeat center bottom;-webkit-background-size:100% ;background-size:100% ;;}
+.level-progress-box4 .level-progress{border:1px solid #4c090f;background-color:#4c090f;}
+.level-progress-box4 .level-progress-ico{background:url(../images/ico-level-vip4.png) no-repeat center bottom;-webkit-background-size:100% ;background-size:100% ;;}
+.level-progress-box4 .level-progress-ico1{position:absolute;bottom:0.8rem;right:0;width:1.7rem;height:1.7rem;left:0;margin:0;background:url(../images/ico-level-vip41.png) no-repeat center bottom;-webkit-background-size:100% ;background-size:100% ;}
+.change-img-gray{ -webkit-filter:grayscale(1);-moz-filter:grayscale(1);filter:grayscale(1);}
+.gray-class .level-progress{background-color:#b5b5b5;border:1px solid #b5b5b5;}
+.gray-class .level-progress-box{background-color:#b5b5b5;}
+.gray-class .level-progress-bar{background-color:#e5e5e5;}
+.gray-class .level-progress-red{background-color:#eeeeee;}
+.gray-class .level-progress-line{background-color:#9e9e9e;}
+.gray-class .level-progress-ico{-webkit-filter:grayscale(1);-moz-filter:grayscale(1);filter:grayscale(1);}
+.gray-class .level-progress-ico1{position:absolute;bottom:0.8rem;right:0;width:1.7rem;height:1.7rem;left:0;margin:0;background:url(../images/ico-level-vip41.png) no-repeat center bottom;-webkit-background-size:100% 100%;background-size:100% 100%;-webkit-filter:grayscale(1);-moz-filter:grayscale(1);filter:grayscale(1);}
+.leave-btn{z-index:2;position:fixed;bottom:0;left:0;width:100%;padding:10px 15px;-webkit-box-sizing:border-box;box-sizing:border-box;background-color:#fff ;-webkit-box-shadow:0 -0.5rem 0.5rem rgba(50,50,50,0.1);box-shadow:0 -0.5rem 0.5rem rgba(50,50,50,0.1);}
+.leave-btn .btn-red{margin:0 ;}
+.btn-red{display:block;width:100%;height:4.2rem;margin-top:1.5rem;line-height:4.2rem;text-align:center;font-size:1.8rem;-webkit-border-radius:0.3rem;-moz-border-radius:0.3rem;border-radius:0.3rem;color:#fff;background:#fd4d4c;}
