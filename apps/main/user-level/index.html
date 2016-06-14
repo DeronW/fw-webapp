@@ -19,7 +19,7 @@
     <a href="#" class="back">返回</a>会员等级
 </div>
 <a class="level-notice" href=""><span>距一下等级还差A贡献值，加油呀~<i></i></span></a>
-<div class="slider-block">
+<div class="slider-block" style="display: none">
     <section class="center slider">
         <div>
             <div class="img-box" data-tab="0">
@@ -175,11 +175,12 @@
 
         $.ajax({
             type: "GET",
-            url: "http://10.105.7.71/level.json",
+            url: "http://localhost/level.json",
             dataType: "json",
             success: function (data) {
+console.log(data)
 
-                $(".slider-block").show();
+                $(".slider-block").css('display', 'block');
 
                 var num = data.data.userLevel - 1;
                 var value = data.data.contributePercent;
@@ -273,7 +274,9 @@
                     arrows: false,
                     initialSlide: num
                 });
+
                 txt.hide().eq(num).show().addClass("show");
+
                 $(".center").on("afterChange", function () {
                     var t = $(".slider .slick-active .img-box").attr("data-tab");
                     txt.removeClass("show").hide();
