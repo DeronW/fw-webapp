@@ -16,7 +16,7 @@ plugins.swig = require('gulp-swig');
 plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
 plugins.sourcemaps = require('gulp-sourcemaps');
-plugins.empty = require('gulp-empty');
+plugins.util = require('gulp-util');
 //plugins.rename = require('gulp-rename');
 plugins.replace = require('gulp-replace');
 
@@ -67,7 +67,7 @@ function generate_task(site_name, project_name, configs) {
         return gulp.src([APP_PATH + '**/*.html'])
             //.pipe(plugins.changed(BUILD_PATH))
             .pipe(plugins.swig())
-            .pipe(CONFIG.debug ? plugins.empty() : plugins.htmlmin({collapseWhitespace: true}))
+            .pipe(CONFIG.debug ? plugins.util.noop() : plugins.htmlmin({collapseWhitespace: true}))
             .pipe(plugins.replace('{API_PATH}', CONFIG.api_path))
             .pipe(plugins.replace('{STATIC_PATH}', CONFIG.static_path))
             .pipe(gulp.dest(BUILD_PATH));
@@ -98,7 +98,7 @@ function generate_task(site_name, project_name, configs) {
             .pipe(plugins.changed(BUILD_PATH + 'javascripts'))
             .pipe(plugins.plumber())
             .pipe(plugins.babel({presets: ['es2015']}))
-            .pipe(CONFIG.debug ? plugins.empty() : plugins.js_uglify())
+            .pipe(CONFIG.debug ? plugins.util.noop() : plugins.js_uglify())
             .pipe(gulp.dest(BUILD_PATH + 'javascripts'));
     }
 
@@ -112,7 +112,7 @@ function generate_task(site_name, project_name, configs) {
             .pipe(plugins.changed(BUILD_PATH + 'javascripts'))
             .pipe(plugins.plumber())
             .pipe(plugins.babel({presets: ['es2015', 'react']}))
-            .pipe(CONFIG.debug ? plugins.empty() : plugins.js_uglify())
+            .pipe(CONFIG.debug ? plugins.util.noop() : plugins.js_uglify())
             .pipe(plugins.concat('bundle.js', {newLine: ';'}))
             .pipe(gulp.dest(BUILD_PATH + 'javascripts'));
     }
@@ -133,7 +133,7 @@ function generate_task(site_name, project_name, configs) {
 
         return gulp.src(lib_files)
             .pipe(plugins.changed(BUILD_PATH + 'javascripts'))
-            .pipe(CONFIG.debug ? plugins.empty() : plugins.js_uglify())
+            .pipe(CONFIG.debug ? plugins.util.noop() : plugins.js_uglify())
             .pipe(plugins.concat('lib.js'))
             .pipe(gulp.dest(BUILD_PATH + 'javascripts'));
     }
