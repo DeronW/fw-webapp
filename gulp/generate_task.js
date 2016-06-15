@@ -1,5 +1,4 @@
 var gulp = require('gulp');
-var react = require('gulp-react');
 var babel = require('gulp-babel');
 var plugins = require('gulp-load-plugins')();
 var fs = require('fs');
