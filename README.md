@@ -244,8 +244,9 @@ VIP专区页 [http://m.mall.9888.cn/product-vip](http://m.mall.9888.cn/product-v
 
     clean 清空生成的打包文件
     build:mall 构建豆哥商城项目
-    xxx:watch 开发时使用的监控指令
-    xxx 一次性编译文件指令
+    build:main 构建移动端网站项目
+    project:xxx:watch 开发时使用的监控指令
+    project:xxx 一次性编译文件指令
 
 添加新页面：
 
