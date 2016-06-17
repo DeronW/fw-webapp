@@ -5,16 +5,18 @@
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no"/>
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
     <title>{% block title %}Mall{% endblock %}</title>
     <link type="text/css" rel="stylesheet" href="stylesheets/all.css"/>
     {% block css %}{% endblock %}
 </head>
 <body>
 
-{% block content %}{% endblock %}
-
 <!--接口地址前缀,结尾需要添加斜线-->
 <input type="hidden" id="api-path" value="{API_PATH}"/>
+
+{% block content %}{% endblock %}
 
 <div id="header"></div>
 <div id="cnt"></div>

@@ -30,7 +30,6 @@ function generate_task(site_name, project_name, configs) {
             debug: true,
             cmd_prefix: '', // 通用指令前缀，比如 pack:
             api_path: '',
-            static_path: '',
             cdn_prefix: '',
             include_components: [],
             main_jsx: 'scripts/index.jsx',
@@ -72,7 +71,6 @@ function generate_task(site_name, project_name, configs) {
                 plugins.htmlmin({collapseWhitespace: true}) :
                 plugins.htmlbeautify({indentSize: 2}))
             .pipe(plugins.replace('{API_PATH}', CONFIG.api_path))
-            .pipe(plugins.replace('{STATIC_PATH}', CONFIG.static_path))
             .pipe(gulp.dest(BUILD_PATH));
     }
 
