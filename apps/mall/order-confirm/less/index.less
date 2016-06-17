@@ -40,7 +40,7 @@ a {
       right: 30px;
       width: 31px;
       height: 83px;
-      background: transparent url('') no-repeat center center;
+      background: transparent url('../images/ico-add.png') no-repeat center center;
     }
   }
 }
@@ -49,7 +49,7 @@ a {
   border-top: 1px solid #d8d8d8;
   border-bottom: 1px solid #d8d8d8;
   display: block;
-  margin-top:20px;
+  margin-top: 20px;
 
   .goods-adress-h {
     padding: 0 30px;
@@ -62,13 +62,13 @@ a {
   }
 
   .goods-address-cnt {
-    background: #fff url('') no-repeat center left;
+    background: #fff url('../images/icon-address.png') no-repeat center left;
 
     a {
       display: block;
       padding: 24px 68px 23px 80px;
       color: #333;
-      background: transparent url('') no-repeat 660px center;
+      background: transparent url('../images/ico-gray-right.jpg') no-repeat 660px center;
     }
     .inf {
       display: table;
@@ -199,19 +199,18 @@ a {
   }
 }
 
-.num-modifyBox{
-  display:inline-block;
-  position:absolute;
-  right:20px;
-  bottom:0;
-  color:#333;
+.num-modifyBox {
+  display: inline-block;
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+  color: #333;
 }
 
-.num-quantity{
-  display:inline-block;
-  margin-right:10px;
+.num-quantity {
+  display: inline-block;
+  margin-right: 10px;
 }
-
 
 .account-box {
   margin-top: 20px;
@@ -219,13 +218,14 @@ a {
   border-top: 1px solid #d8d8d8;
   .coupons {
     display: table;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     border-bottom: 1px solid #e3e5ea;
     height: 84px;
     line-height: 83px;
     width: 100%;
     padding: 0 75px 0 0;
+    background: url(../images/ico-gray-right.jpg) no-repeat 660px 50%;
+
     .coupons-l {
       padding-left: 30px;
       float: left;
@@ -237,15 +237,15 @@ a {
       font-size: 26px;
       color: #999;
     }
-    .coupons-r span.coupons-name{
-      float:left;
-      display:inline-block;
+    .coupons-r span.coupons-name {
+      float: left;
+      display: inline-block;
       width: 305px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
     }
-    }
+  }
   .bean {
     display: table;
     -webkit-box-sizing: border-box;
@@ -435,7 +435,7 @@ a {
       background-color: #cccccc;
       font-size: 28px;
     }
-    .btn-countdown{
+    .btn-countdown {
       position: absolute;
       top: 22px;
       right: 30px;
@@ -447,7 +447,7 @@ a {
       font-size: 32px;
       color: #fff;
       border-radius: 4px;
-      background-color:#cccccc;
+      background-color: #cccccc;
     }
   }
 }
@@ -462,7 +462,7 @@ a {
   width: 100%;
   padding: 22px 30px;
   background-color: #fff;
-  box-shadow: 0 -5px 10px 0 rgba(50,50,50,.1);
+  box-shadow: 0 -5px 10px 0 rgba(50, 50, 50, .1);
   .btn-red {
     display: block;
     height: 83px;
@@ -527,6 +527,8 @@ a {
         }
         .chose {
           width: 40px;
+          background: url(../images/gray-block.png) no-repeat 0 center;
+          display: none;
         }
         .name {
           padding: 0 0 0 36px;
@@ -560,7 +562,11 @@ a {
             }
             .choose {
               width: 40px;
-              background: transparent url('') no-repeat 0 center;
+              background: transparent url('../images/gray-block.png') no-repeat 0 center;
+
+              &.checked {
+                background-image: url('../images/red-right.png');
+              }
             }
             .name {
               padding: 0 0 0 36px;
@@ -608,8 +614,8 @@ a {
   display: none;
 }
 
-.empty-voucher-pic{
-  display:block;
-  width:360px;
-  margin:0 auto;
+.empty-voucher-pic {
+  display: block;
+  width: 360px;
+  margin: 0 auto;
 }

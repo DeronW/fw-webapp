@@ -1,30 +1,28 @@
 const AddressPanel = React.createClass({
-    getInitialState: function(){
+    getInitialState: function () {
         return {}
     },
-    render: function(){
+    render: function () {
         var data = {
             address: this.props.address,
             product_biz_no: this.props.product_biz_no,
             product_count: this.props.product_count
         };
         return this.props.address ?
-                <AddressPanel.List {...data} /> :
-                <AddressPanel.New {...data}/>;
+            <AddressPanel.List {...data} /> :
+            <AddressPanel.New {...data}/>;
     }
-})
+});
 
 AddressPanel.New = React.createClass({
     render: function () {
         let new_link = "/delivery_address/create?productBizNo=" +
-                        this.props.product_biz_no + "&count=" +
-                        this.props.product_count;
+            this.props.product_biz_no + "&count=" +
+            this.props.product_count;
         return (
             <div className="new-adress">
                 <a href={new_link}>收货地址
-                    <div className="btn-new-address"
-                        style={{backgroundImage:"url(images/ico-add.png)"}}>
-                     </div>
+                    <div className="btn-new-address"></div>
                 </a>
             </div>
         )
@@ -35,18 +33,16 @@ AddressPanel.New = React.createClass({
 AddressPanel.List = React.createClass({
     render: function () {
         let address = this.props.address;
-        let address_list_link = "/delivery_address?productBizNo="+
-                this.props.product_biz_no + '&count=' + this.props.product_count + '&address_id=' + this.props.address.id;
+        let address_list_link = "/delivery_address?productBizNo=" +
+            this.props.product_biz_no + '&count=' + this.props.product_count + '&address_id=' + this.props.address.id;
 
         return (
             <div className="goods-adress">
                 <div className="goods-adress-h">
                     收货地址
                 </div>
-                <div className="goods-address-cnt"
-                     style={{backgroundImage: 'url(images/icon-address.png)'}}>
-                    <a href={address_list_link}
-                       style={{backgroundImage:"url(images/ico-gray-right.jpg)"}}>
+                <div className="goods-address-cnt">
+                    <a href={address_list_link}>
                         <div className="inf">
                             <div className="receiver">
                                 <span>收货人：</span>

@@ -27,14 +27,12 @@ const VoucherModal = React.createClass({
     render: function () {
 
         let voucher = (data, index) => {
-            let checkImg = data.checked ? 'red-right' : 'gray-block';
             let date = new Date(parseInt(data.endTime));
             date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
             return (
                 <div className="li" key={index}
                      onClick={() => this.toggleVoucher(index) }>
-                    <div className="choose"
-                         style={{backgroundImage:"url(images/"+checkImg+".png)"}}></div>
+                    <div className={data.checked ? "choose checked" : "choose"}></div>
                     <div className="name">{data.productName}</div>
                     <div className="date">{date}</div>
                 </div>
@@ -48,15 +46,14 @@ const VoucherModal = React.createClass({
                     <div className="coupon-pop-h">使用兑换券</div>
                     <div className="coupon-pop-cont">
                         <div className="head">
-                            <div className="chose"
-                                 style={{background:"url(images/gray-block.png) no-repeat 0 center", display: "none"}}>
-                            </div>
+                            <div className="chose"></div>
                             <div className="name">兑换券名称</div>
                             <div className="date">有效期</div>
                         </div>
                         <div className="list-wrap">
                             <div className="list">
-                                { this.state.voucher_list.length ? null : <span className="empty-voucher-pic"><img src="images/empty.png"/></span>}
+                                { this.state.voucher_list.length ? null :
+                                    <span className="empty-voucher-pic"><img src="images/empty.png"/></span>}
                                 {this.state.voucher_list.map(voucher)}
                             </div>
                         </div>
