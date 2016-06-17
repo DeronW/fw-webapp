@@ -1,20 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>金融工场-会员等级</title>
-    <meta name="viewport" content="width=device-width, initial-scale=0.5, user-scalable=no"/>
-    <meta name="screen-orientation" content="portrait">
-    <meta name="x5-orientation" content="portrait">
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="format-detection" content="email=no"/>
-    <script src="javascripts/jquery-2.1.4.min.js"></script>
-    <!--<link rel="stylesheet" href="stylesheets/base.css"/>-->
-    <link rel="stylesheet" href="stylesheets/slick.css"/>
-    <link rel="stylesheet" href="stylesheets/slick-theme.css"/>
-    <link rel="stylesheet" href="stylesheets/index.css"/>
-</head>
-<body id="level">
+{% extends '../../../lib/templates/main_base.swig.html' %}
+
+{% block title %}用户等级{% endblock %}
+
+{% block head_javascripts %}
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+
+{% block container %}{% endblock %}
+{% block content %}
+
+<script src="javascripts/jquery-2.1.4.min.js"></script>
+
 <div id="header" class="clearfix">
     <a href="#" class="back">返回</a>用户等级
 </div>
@@ -145,5 +143,4 @@
 
 <script src="javascripts/slick.js"></script>
 <script src="javascripts/index.js"></script>
-</body>
-</html>
+{% endblock %}

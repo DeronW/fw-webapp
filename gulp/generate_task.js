@@ -7,6 +7,7 @@ plugins.less = require('gulp-less');
 plugins.changed = require('gulp-changed');
 plugins.js_uglify = require('gulp-uglify');
 plugins.htmlmin = require('gulp-htmlmin');
+plugins.htmlbeautify = require('gulp-html-beautify');
 plugins.cssnano = require('gulp-cssnano');
 plugins.rev_all = require('gulp-rev-all');
 plugins.concat = require('gulp-concat');
@@ -16,7 +17,6 @@ plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
 plugins.sourcemaps = require('gulp-sourcemaps');
 plugins.util = require('gulp-util');
-//plugins.rename = require('gulp-rename');
 plugins.replace = require('gulp-replace');
 
 // project_name 每次使用新项目时, 只需要更换项目名称
@@ -30,10 +30,11 @@ function generate_task(site_name, project_name, configs) {
             debug: true,
             cmd_prefix: '', // 通用指令前缀，比如 pack:
             api_path: '',
-            static_path: '',
             cdn_prefix: '',
             include_components: [],
             main_jsx: 'scripts/index.jsx',
+            html_engine: 'swig',
+            html_minify: false,
             with_swipe: true,
             enable_watch: true,
             enable_server: false,
@@ -64,11 +65,12 @@ function generate_task(site_name, project_name, configs) {
 
     function compile_html() {
         return gulp.src([APP_PATH + '**/*.html'])
-            //.pipe(plugins.changed(BUILD_PATH))
-            .pipe(plugins.swig())
-            .pipe(CONFIG.debug ? plugins.util.noop() : plugins.htmlmin({collapseWhitespace: true}))
+            .pipe(plugins.changed(BUILD_PATH))
+            .pipe(CONFIG.html_engine == 'swig' ? plugins.swig() : plugins.util.noop())
+            .pipe(CONFIG.html_minify ?
+                plugins.htmlmin({collapseWhitespace: true}) :
+                plugins.htmlbeautify({indentSize: 2}))
             .pipe(plugins.replace('{API_PATH}', CONFIG.api_path))
-            .pipe(plugins.replace('{STATIC_PATH}', CONFIG.static_path))
             .pipe(gulp.dest(BUILD_PATH));
     }
 
@@ -142,7 +144,7 @@ function generate_task(site_name, project_name, configs) {
                 APP_PATH + 'images/**/*.png',
                 APP_PATH + 'images/**/*.gif'])
             .pipe(plugins.changed(BUILD_PATH + 'images'))
-            .pipe(plugins.imagemin())
+            //.pipe(plugins.imagemin())
             .pipe(gulp.dest(BUILD_PATH + 'images'));
     }
 

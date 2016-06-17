@@ -25,7 +25,7 @@ var imageList = [
     ]
 ];
 
-$(document).on('ready', function () {
+$(function () {
 
     $.ajax({
         type: "GET",
@@ -41,22 +41,37 @@ $(document).on('ready', function () {
             var contribute = data.data.contributeTotal;
             $(".level-progress-text").find("span").text(contribute);
 
-            imageList[0].forEach(function (i) {
-                $(".level-img0").append('<img src="' + i + '" />');
-            });
-            imageList[1].forEach(function (i) {
-                $(".level-img1").append('<img src="' + i + '" />');
-            });
-            imageList[2].forEach(function (i) {
-                $(".level-img2").append('<img src="' + i + '" />');
-            });
-            imageList[3].forEach(function (i) {
-                $(".level-img3").append('<img src="' + i + '" />');
-            });
-            imageList[4].forEach(function (i) {
-                $(".level-img4").append('<img src="' + i + '" />');
+            [0, 1, 2, 3, 4].forEach(function (k) {
+                imageList[k].forEach(function (i) {
+                    $(".level-img" + k).append('<img src="' + i + '" />');
+                });
             });
 
+            /*
+             imageList[0].forEach(function (i) {
+             $(".level-img0").append('<img src="' + i + '" />');
+             });
+             imageList[1].forEach(function (i) {
+             $(".level-img1").append('<img src="' + i + '" />');
+             });
+             imageList[2].forEach(function (i) {
+             $(".level-img2").append('<img src="' + i + '" />');
+             });
+             imageList[3].forEach(function (i) {
+             $(".level-img3").append('<img src="' + i + '" />');
+             });
+             imageList[4].forEach(function (i) {
+             $(".level-img4").append('<img src="' + i + '" />');
+             });
+             */
+
+            $("#vip0, #vip1, #vip2, #vip3, #vip4").attr("class", "change-img-gray");
+            $("#vip0-jindutiao, #vip1-jindutiao, #vip2-jindutiao, #vip3-jindutiao, #vip4-jindutiao").addClass("gray-class");
+
+            $("#vip" + num).removeClass("change-img-gray");
+            $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
+
+            /*
             if (num == 0) {
                 $("#vip0").removeClass("change-img-gray");
                 $("#vip1").attr("class", "change-img-gray");
@@ -118,6 +133,8 @@ $(document).on('ready', function () {
                 $("#vip4-jindutiao").removeClass("gray-class");
                 $(".level-img").not(".level-img4").find("img").addClass("change-img-gray");
             }
+            */
+
             var txt = $("#about_swiper_txt .slide-txt");
 
             $(".center").slick({
@@ -128,10 +145,18 @@ $(document).on('ready', function () {
                 slidesToScroll: 1,
                 arrows: false,
                 initialSlide: num
+            }).on("afterChange", function () {
+                var t = $(".slider .slick-active .img-box").attr("data-tab");
+                txt.removeClass("show").hide();
+                txt.eq(t).show();
+                setTimeout(function () {
+                    txt.eq(t).addClass("show")
+                }, 10)
             });
 
             txt.hide().eq(num).show().addClass("show");
 
+            /*
             $(".center").on("afterChange", function () {
                 var t = $(".slider .slick-active .img-box").attr("data-tab");
                 txt.removeClass("show").hide();
@@ -140,6 +165,7 @@ $(document).on('ready', function () {
                     txt.eq(t).addClass("show")
                 }, 10)
             });
+            */
 
             var barNum0 = (num + 1) * 20;
             var redNum0 = value;
