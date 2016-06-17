@@ -1,11 +1,6 @@
-* {
-    padding: 0;
-    margin: 0;
-}
 
 body {
     font-size: 28px;
-    font-height: 1.4;
     background-color: #ebebeb;
 }
 
@@ -26,27 +21,6 @@ ul, ol, li {
 
 em, i {
     font-style: normal;
-}
-
-@fl: left;
-
-@fr: right;
-
-@color-ff: #fff;
-
-@back-color: #fff;
-
-@block: block;
-
-@center: center;
-
-
-.fl() {
-    float: @fl;
-}
-
-.fr() {
-    float: @fr;
 }
 
 .header {
@@ -94,7 +68,7 @@ em, i {
 }
 
 .top-info-l {
-    .fl();
+    float: left;
 
     .sum-block {
         font-size: 24px;
@@ -112,12 +86,13 @@ em, i {
         font-size: 26px;
         .text {
             line-height: 30px;
+            margin: 0;
         }
     }
 }
 
 .top-info-r {
-    .fr();
+    float: right;
 
     .vip-block {
         width: 120px;
