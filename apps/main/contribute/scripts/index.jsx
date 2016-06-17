@@ -10,7 +10,7 @@ const Header = React.createClass({
                     </div>
 
                     <div className="header-title">
-                        我的贡献值
+                        {this.props.title}
                     </div>
                 </div>
             </div>
@@ -20,6 +20,8 @@ const Header = React.createClass({
 
 const Contribute = React.createClass({
     render: function() {
+        var myInfoData = this.props.myInfoData;
+
         return (
             <div>
                 <div className="top-info">
@@ -29,18 +31,18 @@ const Contribute = React.createClass({
                         </div>
 
                         <div className="money-block">
-                            <span className="text">5000</span>
+                            <span className="text">{myInfoData.data.contributeValue}</span>
                         </div>
 
                         <div className="text-block">
-                            <p className="text">投资贡献值40000+邀友贡献值1000</p> 
+                            <p className="text">投资贡献值{myInfoData.data.inviteContributeValue}+邀友贡献值1000</p> 
                         </div>
                     </div>
 
                     <div className="top-info-r">
                         <div className="vip-block">
                             <span className="img">
-                                vip1
+                                vip{myInfoData.data.userLevel}
                             </span>
                             <span className="user-vip-text">
                                 用户等级
@@ -55,25 +57,35 @@ const Contribute = React.createClass({
 
 const InvestTab = React.createClass({
     render: function() {
-        return (
-            <div className="invest-block">
-                <div className="cont-block">
+        var investTabData = this.props.investTabList;
+        
+        var objDiv = (value, index) => (
+                <div key={index} className="cont-block">
                     <div className="top-block">
-                        <span className="fl">投资利随享2345</span>
-                        <span className="rl">贡献值: <em className="mark-c">5000</em></span>
+                        <span className="fl">投资利随享{value.title}</span>
+                        <span className="rl">贡献值: <em className="mark-c">{value.contributeValue}</em></span>
                     </div>
 
                     <div className="cont-info">
                         <div className="fl">
-                            <span className="text">本金: 5,000.00</span>
-                            <span className="text">投资日期2016-1-1</span>
+                            <span className="text">本金: {value.money}</span>
+                            <span className="text">投资日期{value.apply_date}</span>
                         </div>
                         <div className="rl">
-                            <span className="text">年化投资额度: 8,000.00</span>
-                            <span className="text">回款日期2014-03-21</span>
+                            <span className="text">年化投资额度: {value.money2}</span>
+                            <span className="text">回款日期{value.returned_date}</span>
                         </div>
                     </div>
                 </div>
+        );
+
+        return (
+            <div className="invest-block">
+                {
+                    investTabData.data.invest_list.map(function(value, index) {
+                        return objDiv(value, index);
+                    })
+                }
             </div>
         );         
     }
@@ -81,23 +93,35 @@ const InvestTab = React.createClass({
 
 const InviteTab = React.createClass({
     render: function() {
-        return (
-            <div className="invite-block">
-                <div className="cont-block">
+        var inviteData = this.props.inviteTabList;
+
+        var objDiv = (value, index) => (
+                <div key={index} className="cont-block">
                     <div className="top-block">
-                        <span className="fl">好友136***1244首投</span>
-                        <span className="rl">贡献值: <em className="mark-c">5000</em></span>
+                        <span className="fl">好友{value.title}首投</span>
+                        <span className="rl">贡献值: <em className="mark-c">{value.contributeValue}</em></span>
                     </div>
 
                     <div className="cont-info">
                         <div className="fl">
-                            <span className="text">投资日期2016-03-21</span>
+                            <span className="text">投资日期{value.apply_date}</span>
                         </div>
                         <div className="rl">
-                            <span className="text">回款日期2016-03-21</span>
+                            <span className="text">回款日期{value.returned_date}</span>
                         </div>
                     </div>
                 </div>
+
+        );
+
+        return (
+            <div className="invite-block">
+                {
+                    inviteData.data.invest_list.map(function(value, index) {
+                        return objDiv(value, index);
+                    })
+                }
+
             </div>
            
         );   
@@ -107,38 +131,38 @@ const InviteTab = React.createClass({
 const ContributeTab = React.createClass({
     getInitialState: function() {
         return {
-            index: 0,
-            value: ['投资贡献值', '邀友贡献值']
+            index: 0
         };   
     },
-    clickHandler: function(index) {
+    checkToInvestHandler: function() {
         this.setState({
-            index: index
+            index: 0
+        }); 
+    },
+    checkToInviteHandler: function() {
+        this.setState({
+            index: 1
         });
     },
     render: function() {
         var tabValue = this.state.value;
         var _this = this;
 
-        var liTab = tabValue.map(function(value, index) {
-                return  <li key={index} className={index == _this.state.index ? "select-li": ""} 
-                            onClick={function() {_this.clickHandler(index)}}>
-                                <span className="text" >{value}</span>
-                        </li>;
-            });
-       
         return (
             <div className="contribute-cnt">
                 <div className="contribute-tab">
                     <ul>
-                        {
-                            liTab
-                        }
+                        <li className={this.state.index == 0 ? "select-li" : ""}>
+                            <span className="text" onClick={this.checkToInvestHandler}>投资贡献值</span>
+                        </li>
+                        <li className={this.state.index == 1 ? "select-li" :  ""}>
+                            <span className="text" onClick={this.checkToInviteHandler}>邀友贡献值</span>
+                        </li>                        
                     </ul>
                 </div>
 
                <div className="contribute-tab-cnt">
-                    {this.state.index == 0 ? <InvestTab /> : <InviteTab />}
+                    {this.state.index == 0 ? <InvestTab investTabList={this.props.investTabData}/> : <InviteTab inviteTabList={this.props.inviteTabData} />}
                </div>
             </div>
         );
@@ -151,20 +175,62 @@ const HomePage = React.createClass({
     render: function() {
         return (
             <div>
-                <Contribute/>
-                <ContributeTab/>
+                <Contribute myInfoData={this.props.myInfoData} />
+                <ContributeTab investTabData={this.props.investTabData} inviteTabData={this.props.inviteTabData} />
             </div>
         );
     }
 });
 
+var investTabAjax = {
+    code: 200,
+    message: " ",
+    data: {
+        invest_list: [
+            {
+                apply_date: "测试内容yi78",
+                contributeValue: 15333,
+                money: 87738,
+                money2: 75844,
+                returned_date: "测试内容h36v",
+                title: "测试内容48io"
+            }
+        ]
+    }
+};
+
+
+var inviteTabAjax = {
+    code: 200,
+    message: " ",
+    data: {
+        invest_list: [
+            {
+                apply_date: "测试内容yi78",
+                contributeValue: 15333,
+                returned_date: "测试内容h36v",
+                title: "测试内容48io"
+            }
+        ]
+    }
+};
+
+var myInfoAjax = {
+    code: 200,
+    message: " ",
+    data: {
+        contributeValue: 14311,
+        inviteContributeValue: 14168,
+        userLevel: 3
+    }
+};
 
 ReactDOM.render(
-    <Header />,
+    <Header title={"我的贡献值"}/>,
     document.getElementById("header")
 );
 
 ReactDOM.render(
-    <HomePage/>,
+    <HomePage myInfoData= {myInfoAjax} investTabData={investTabAjax} inviteTabData={inviteTabAjax}/>,
     document.getElementById("cnt")
 );
