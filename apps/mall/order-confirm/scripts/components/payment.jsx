@@ -99,8 +99,7 @@ const PaymentPanel = React.createClass({
             <div className="balance-wrap">
                 <div className="account-box">
 
-                    <div className="coupons" onClick={this.toggleVoucherModal}
-                         style={{background:"url(images/ico-gray-right.jpg) no-repeat 660px 50%"}}>
+                    <div className="coupons" onClick={this.toggleVoucherModal}>
                         <div className="coupons-l">兑换券支付</div>
                         {checked_voucher()}
                     </div>
