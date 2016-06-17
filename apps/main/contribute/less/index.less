@@ -1,0 +1,253 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-size: 28px;
+    font-height: 1.4;
+    background-color: #ebebeb;
+}
+
+a {
+    text-decoration: none;
+    &:active {
+        outline: 0;
+    }
+
+    &:focus {
+        outline: 0;
+    }
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+em, i {
+    font-style: normal;
+}
+
+@fl: left;
+
+@fr: right;
+
+@color-ff: #fff;
+
+@back-color: #fff;
+
+@block: block;
+
+@center: center;
+
+
+.fl() {
+    float: @fl;
+}
+
+.fr() {
+    float: @fr;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100px;
+    background-color: #fff;
+    border-bottom: 1px solid #d8d8d8;
+
+    .header-cont {
+        position: relative;
+
+        .up-btn {
+            position: absolute;
+            top: 18px;
+            left: 22px;
+            float: left;
+            width: 70px;
+            height: 70px;
+
+            img {
+                margin: 14px 0 0 20px;
+            }
+        }
+
+        .header-title {
+            line-height: 100px;
+            text-align: center;
+            color: #333;
+            font-size: 40px;
+        }
+    }
+
+}
+
+
+.top-info {
+    height: 130px;
+    margin: 101px 0 0 0;
+    padding: 20px 42px;
+    background-color: #5b6993;
+    color: #fff;
+}
+
+.top-info-l {
+    .fl();
+
+    .sum-block {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .money-block {
+        margin: 10px 0;
+        line-height: 50px;
+        font-size: 42px;
+        font-family: HelveticaNeue-UltraLight;
+    }
+
+    .text-block {
+        font-size: 26px;
+        .text {
+            line-height: 30px;
+        }
+    }
+}
+
+.top-info-r {
+    .fr();
+
+    .vip-block {
+        width: 120px;
+        text-align: center;
+
+        .img {
+            display: block;
+            width: 64px;
+            height: 32px;
+            padding: 36px 0 0 0;
+            margin: 20px auto 0;
+            line-height: 22px;
+            text-align: center;
+            font-size: 20px;
+            background: url(../images/vip-back.png) no-repeat;
+        }
+
+        .user-vip-text {
+            font-size: 24px;
+            line-height: 26px;
+        }
+
+    }
+}
+
+.contribute-tab {
+    height: 90px;
+    background-color: #fff;
+    border-bottom: 3px solid #ebebeb;
+
+    ul {
+        height: 93px;
+        border-bottom: 1px solid #d8d8d8;
+
+        li {
+            float: left;
+            width: 50%;
+            background: url(../images/line-icon.png) no-repeat right 0 ;
+            background-size: 2px 80px;
+
+            .text {
+                display: block;
+                width: 162px;
+                height: 90px;
+                line-height: 90px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            &:last-child {
+                background: none;
+            }
+        }
+
+        .select-li .text {
+            color: #fd4d4c;
+            border-bottom: 4px solid #fd4d4c;
+        }
+    }
+}
+
+
+.contribute-tab-cnt {
+    margin: 16px 0 0 0;
+
+    .cont-block {
+        height: 172px;
+        margin: 0 0 20px 0;
+        border-top: 1px solid #d8d8d8;
+        border-bottom: 1px solid #d8d8d8;
+
+        .mark-c {
+            color:#fd4d4c;
+        }
+
+        .top-block {
+            height: 74px;
+            padding: 0 30px;
+            line-height: 74px;
+            border-bottom: 1px solid #eff0f3;
+            background-color: #f9f9f9;
+            color: #555;
+
+            .fl {
+                float: left;
+            }
+
+            .rl {
+                float: right;
+            }
+        }
+
+        .cont-info {
+            height: 77px;
+            padding: 10px 30px;
+            color: #999;
+            background-color: #fff;
+
+            .fl .text,
+            .rl .text {
+                display: block;
+                line-height: 40px;
+            }
+
+            .fl {
+                float: left;
+
+                .text {
+                }
+            } 
+
+
+            .rl {
+                float: right;
+
+                .text {
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    .invite-block {
+        .cont-block {
+            height: 135px;
+
+            .cont-info {
+                height: 40px;
+            }
+        }
+    }
+}
+

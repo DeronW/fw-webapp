@@ -4,7 +4,8 @@ var gt = require('../generate_task.js');
 const SITE_NAME = 'main';
 
 const APP_NAMES = [
-    'user-level'
+    'user-level',
+    'contribute'
 ];
 
 APP_NAMES.forEach(function (i) {
