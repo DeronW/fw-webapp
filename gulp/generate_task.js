@@ -15,7 +15,7 @@ plugins.del = require('del');
 plugins.swig = require('gulp-swig');
 plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
-plugins.sourcemaps = require('gulp-sourcemaps');
+//plugins.sourcemaps = require('gulp-sourcemaps');
 plugins.util = require('gulp-util');
 plugins.replace = require('gulp-replace');
 

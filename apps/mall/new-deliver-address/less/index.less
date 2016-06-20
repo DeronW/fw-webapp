@@ -29,6 +29,18 @@ input {
   margin-top: 25px;
   padding: 0 40px;
 
+  .deliver {
+    background: #fff url(../images/ico-person.png) no-repeat 24px center;
+  }
+
+  .phone {
+    background: #fff url(../images/ico-phone.png) no-repeat 27px center;
+  }
+
+  .address {
+    background: #fff url(../images/ico-blue-location.png) no-repeat 26px center;
+  }
+
   .input-div {
     margin-bottom: 30px;
     padding: 0 30px 0 79px;
@@ -51,6 +63,11 @@ input {
     line-height: 42px;
     color: #999;
     font-size: 32px;
+    background: url(../images/ico-noset-default.png) no-repeat 2px 1px;
+
+    &.checked {
+      background-image: url(../images/ico-set-default.png);
+    }
   }
   .btn {
     padding: 30px 0 0;
