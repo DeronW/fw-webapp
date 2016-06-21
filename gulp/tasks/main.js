@@ -9,12 +9,17 @@ const APP_NAMES = [
 ];
 
 APP_NAMES.forEach(function (i) {
-    gt(SITE_NAME, i);
+    gt(SITE_NAME, i, {
+        include_components: ['loading.jsx', 'alert.jsx'],
+        include_common_js: ['javascripts/main/fw-ajax-error-handler.js']
+    });
     gt(SITE_NAME, i, {
         debug: false,
         html_minify: true,
         cmd_prefix: 'pack',
-        cdn_prefix: '/pages/' + i + '/',
+        cdn_prefix: '/static/wap/' + i + '/',
+        include_components: ['loading.jsx', 'alert.jsx'],
+        include_common_js: ['javascripts/main/fw-ajax-error-handler.js'],
         enable_revision: true
     });
 });
