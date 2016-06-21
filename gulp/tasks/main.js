@@ -10,10 +10,12 @@ const APP_NAMES = [
 
 APP_NAMES.forEach(function (i) {
     gt(SITE_NAME, i, {
+        api_path: "http://m.9888.cn:8080",
         include_components: ['loading.jsx', 'alert.jsx'],
         include_common_js: ['javascripts/main/fw-ajax-error-handler.js']
     });
     gt(SITE_NAME, i, {
+        api_path: "http://m.9888.cn",
         debug: false,
         html_minify: true,
         cmd_prefix: 'pack',

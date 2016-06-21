@@ -1,5 +1,7 @@
 'use strict';
 
+const AIP_PATH = document.getElementById("aip-path").value;
+
 const Header = React.createClass({
     render: function() {
         return (
@@ -68,7 +70,7 @@ const InvestTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: "http://m.9888.cn:8080/api/v1/user/contribute/invest.shtml?page="+ _this.state.page  + "&rows=" + _this.state.rows  + "&type=0",
+            url: API_PATH + "/api/v1/user/contribute/invest.shtml?page="+ _this.state.page  + "&rows=" + _this.state.rows  + "&type=0",
             success: function(data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
@@ -140,7 +142,7 @@ const InviteTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: "http://m.9888.cn:8080/api/v1/user/contribute/invite.shtml?page="+ _this.state.page  + "&rows=" + _this.state.rows  + "&type=0",
+            url: API_PATH + "/api/v1/user/contribute/invite.shtml?page="+ _this.state.page  + "&rows=" + _this.state.rows  + "&type=0",
             success: function(data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
@@ -252,7 +254,7 @@ const HomePage = React.createClass({
 
 $FW.DOMReady(function() {
     $FW.BatchGet([
-        "http://m.9888.cn:8080/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
+        API_PATH + "/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
     ], function(data) {
         ReactDOM.render(
             <HomePage myInfoData = {data[0]} />,
