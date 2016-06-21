@@ -75,7 +75,7 @@ const InvestTab = React.createClass({
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
                     page: ++_this.state.page,
-                    hasMore: data.data.length >= 10 ? true : false
+                    hasMore: data.data.length >= 10
                 });
             }
         });
@@ -115,7 +115,7 @@ const InvestTab = React.createClass({
         return (
             <div className="invest-block">
                 {
-                     data.map(objDiv(value, index))
+                     data.map(objDiv)
                 }
 
                 {
@@ -145,7 +145,7 @@ const InviteTab = React.createClass({
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
                     page: ++_this.state.page,
-                    hasMore: data.data.length >= 10 ? true : false
+                    hasMore: data.data.length >= 10 
                 });
             }
         });
