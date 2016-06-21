@@ -1,6 +1,6 @@
 'use strict';
 
-const AIP_PATH = document.getElementById("aip-path").value;
+const AIP_PATH = document.getElementById("api-path").value;
 
 const Header = React.createClass({
     render: function() {

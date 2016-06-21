@@ -5,7 +5,7 @@ const SITE_NAME = 'main';
 
 const APP_NAMES = [
     'user-level',
-    'contribute'
+    'user-contribute'
 ];
 
 APP_NAMES.forEach(function (i) {
