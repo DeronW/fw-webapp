@@ -15,7 +15,6 @@ plugins.del = require('del');
 plugins.swig = require('gulp-swig');
 plugins.plumber = require('gulp-plumber');
 plugins.imagemin = require('gulp-imagemin');
-//plugins.sourcemaps = require('gulp-sourcemaps');
 plugins.util = require('gulp-util');
 plugins.replace = require('gulp-replace');
 
@@ -32,6 +31,7 @@ function generate_task(site_name, project_name, configs) {
             api_path: '',
             cdn_prefix: '',
             include_components: [],
+            include_common_js: [],
             main_jsx: 'scripts/index.jsx',
             html_engine: 'swig',
             html_minify: false,
@@ -120,7 +120,7 @@ function generate_task(site_name, project_name, configs) {
 
     function compile_commonjs() {
         // common library
-        var lib_files = [LIB_PATH + 'financial-workspace-0.1.0.js'];
+        var lib_files = [LIB_PATH + 'fw-0.1.0.js'];
         if (CONFIG.debug) {
             lib_files.push(LIB_PATH + 'react-15.0.1/react.js');
             lib_files.push(LIB_PATH + 'react-15.0.1/react-dom.js');
@@ -131,6 +131,10 @@ function generate_task(site_name, project_name, configs) {
 
         lib_files.push(LIB_PATH + 'native-bridge-0.1.0.js');
         if (CONFIG.with_swipe) lib_files.push(LIB_PATH + 'javascripts/swipe-2.0.0.js');
+
+        CONFIG.include_common_js.forEach(function (i) {
+            lib_files.push(LIB_PATH + i);
+        });
 
         return gulp.src(lib_files)
             .pipe(plugins.changed(BUILD_PATH + 'javascripts'))

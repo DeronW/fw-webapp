@@ -17,8 +17,6 @@
     "gulp-rename": ">=1.2",
     "gulp-uglify": ">=1.5",
     "gulp-cached": ">=1.1",
-    "gulp-sourcemap": ">=1.0",
-    "gulp-sourcemaps": ">=1.6",
     "gulp-rev-all": ">=0.8",
     "gulp-babel": ">=6.1",
     "gulp-util": ">= 3",

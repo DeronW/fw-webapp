@@ -27,6 +27,7 @@ APP_NAMES.forEach(function (i) {
         api_path: 'http://m2mall.9888.cn/',
         html_engine: 'swig',
         include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx'],
+        include_common_js: ['javascripts/mall/fw-ajax-error-handler.js'],
         width_swipe: true
     });
     gt(SITE_NAME, i, {
@@ -37,6 +38,7 @@ APP_NAMES.forEach(function (i) {
         cdn_prefix: '/pages/' + i + '/',
         html_minify: true,
         include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx'],
+        include_common_js: ['javascripts/mall/fw-ajax-error-handler.js'],
         width_swipe: true,
         enable_watch: false,
         enable_server: false,
