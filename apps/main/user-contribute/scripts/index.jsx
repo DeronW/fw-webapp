@@ -1,6 +1,6 @@
 'use strict';
 
-const AIP_PATH = document.getElementById("api-path").value;
+const API_PATH = document.getElementById("api-path").value;
 
 const Header = React.createClass({
     render: function() {
@@ -115,13 +115,11 @@ const InvestTab = React.createClass({
         return (
             <div className="invest-block">
                 {
-                     data.map(function(value, index) {
-                        return objDiv(value, index);
-                     })
+                     data.map(objDiv(value, index))
                 }
 
                 {
-                    (_this.state.hasMore == true) ? btnMore : null
+                    _this.state.hasMore == true ? btnMore : null
                 }
 
             </div>
