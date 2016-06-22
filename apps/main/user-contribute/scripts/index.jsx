@@ -3,12 +3,12 @@
 const API_PATH = document.getElementById("api-path").value;
 
 const Header = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="header">
                 <div className="header-cont">
                     <div className="up-btn">
-                        <img src="images/ico-blue-back.png"/> 
+                        <img src="images/ico-blue-back.png"/>
                     </div>
 
                     <div className="header-title">
@@ -21,7 +21,7 @@ const Header = React.createClass({
 });
 
 const Contribute = React.createClass({
-    render: function() {
+    render: function () {
         var myInfoData = this.props.myInfoData;
 
         return (
@@ -29,7 +29,7 @@ const Contribute = React.createClass({
                 <div className="top-info">
                     <div className="top-info-l">
                         <div className="sum-block">
-                             <span className="text">总贡献值</span>
+                            <span className="text">总贡献值</span>
                         </div>
 
                         <div className="money-block">
@@ -37,7 +37,7 @@ const Contribute = React.createClass({
                         </div>
 
                         <div className="text-block">
-                            <p className="text">投资贡献值{myInfoData.inviteContributeValue}+邀友贡献值1000</p> 
+                            <p className="text">投资贡献值{myInfoData.inviteContributeValue}+邀友贡献值1000</p>
                         </div>
                     </div>
 
@@ -58,20 +58,20 @@ const Contribute = React.createClass({
 });
 
 const InvestTab = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             page: 1,
             rows: 10,
             hasMore: false,
-            listData: [] 
+            listData: []
         };
     },
-    ajaxHandler: function(){
+    ajaxHandler: function () {
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "/api/v1/user/contribute/invest.shtml?page="+ _this.state.page  + "&rows=" + _this.state.rows  + "&type=0",
-            success: function(data) {
+            url: API_PATH + "/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
+            success: function (data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
                     page: ++_this.state.page,
@@ -80,42 +80,42 @@ const InvestTab = React.createClass({
             }
         });
     },
-    componentDidMount: function(){
+    componentDidMount: function () {
         this.ajaxHandler()
     },
-    render: function() {
-        var _this = this; 
+    render: function () {
+        var _this = this;
 
         var data = _this.state.listData;
 
         var objDiv = (value, index) => (
-                <div key={index} className="cont-block">
-                    <div className="top-block">
-                        <span className="fl">投资利随享{value.title}</span>
-                        <span className="rl">贡献值: <em className="mark-c">{value.contributeValue}</em></span>
-                    </div>
+            <div key={index} className="cont-block">
+                <div className="top-block">
+                    <span className="fl">投资利随享{value.title}</span>
+                    <span className="rl">贡献值: <em className="mark-c">{value.contributeValue}</em></span>
+                </div>
 
-                    <div className="cont-info">
-                        <div className="fl">
-                            <span className="text">本金: {value.money}</span>
-                            <span className="text">投资日期{value.apply_date}</span>
-                        </div>
-                        <div className="rl">
-                            <span className="text">年化投资额度: {value.earn_money}</span>
-                            <span className="text">回款日期{value.returned_date}</span>
-                        </div>
+                <div className="cont-info">
+                    <div className="fl">
+                        <span className="text">本金: {value.money}</span>
+                        <span className="text">投资日期{value.apply_date}</span>
+                    </div>
+                    <div className="rl">
+                        <span className="text">年化投资额度: {value.earn_money}</span>
+                        <span className="text">回款日期{value.returned_date}</span>
                     </div>
                 </div>
+            </div>
         );
 
-        var btnMore = <div className="loading-more" onClick={_this.ajaxHandler} >
-                        加载更多
-                        </div>;
+        var btnMore = <div className="loading-more" onClick={_this.ajaxHandler}>
+            加载更多
+        </div>;
 
         return (
             <div className="invest-block">
                 {
-                     data.map(objDiv)
+                    data.map(objDiv)
                 }
 
                 {
@@ -123,12 +123,12 @@ const InvestTab = React.createClass({
                 }
 
             </div>
-        );         
+        );
     }
 });
 
 const InviteTab = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             page: 1,
             rows: 10,
@@ -136,54 +136,54 @@ const InviteTab = React.createClass({
             listData: []
         };
     },
-    ajaxHandler: function(){
+    ajaxHandler: function () {
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "/api/v1/user/contribute/invite.shtml?page="+ _this.state.page  + "&rows=" + _this.state.rows  + "&type=0",
-            success: function(data) {
+            url: API_PATH + "/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
+            success: function (data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
                     page: ++_this.state.page,
-                    hasMore: data.data.length >= 10 
+                    hasMore: data.data.length >= 10
                 });
             }
         });
     },
-    componentDidMount: function(){
+    componentDidMount: function () {
         this.ajaxHandler()
     },
 
-    render: function() {
+    render: function () {
         var _this = this;
         var data = _this.state.listData;
 
         var objDiv = (value, index) => (
-                <div key={index} className="cont-block">
-                    <div className="top-block">
-                        <span className="fl">好友{value.title}首投</span>
-                        <span className="rl">贡献值: <em className="mark-c">{value.contributeValue}</em></span>
-                    </div>
+            <div key={index} className="cont-block">
+                <div className="top-block">
+                    <span className="fl">好友{value.title}首投</span>
+                    <span className="rl">贡献值: <em className="mark-c">{value.contributeValue}</em></span>
+                </div>
 
-                    <div className="cont-info">
-                        <div className="fl">
-                            <span className="text">投资日期{value.apply_date}</span>
-                        </div>
-                        <div className="rl">
-                            <span className="text">回款日期{value.returned_date}</span>
-                        </div>
+                <div className="cont-info">
+                    <div className="fl">
+                        <span className="text">投资日期{value.apply_date}</span>
+                    </div>
+                    <div className="rl">
+                        <span className="text">回款日期{value.returned_date}</span>
                     </div>
                 </div>
+            </div>
         );
 
-        var btnMore = <div className="loading-more" onClick={_this.ajaxHandler} >
-                        加载更多
-                        </div>;
+        var btnMore = <div className="loading-more" onClick={_this.ajaxHandler}>
+            加载更多
+        </div>;
 
         return (
             <div className="invite-block">
                 {
-                    data.map(function(value, index) {
+                    data.map(function (value, index) {
                         return objDiv(value, index);
                     })
                 }
@@ -193,28 +193,28 @@ const InviteTab = React.createClass({
                 }
 
             </div>
-           
-        );   
+
+        );
     }
 });
 
 const ContributeTab = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             index: 0
-        };   
+        };
     },
-    checkToInvestHandler: function() {
+    checkToInvestHandler: function () {
         this.setState({
             index: 0
-        }); 
+        });
     },
-    checkToInviteHandler: function() {
+    checkToInviteHandler: function () {
         this.setState({
             index: 1
         });
     },
-    render: function() {
+    render: function () {
         var tabValue = this.state.value;
         var _this = this;
 
@@ -227,42 +227,41 @@ const ContributeTab = React.createClass({
                         </li>
                         <li className={this.state.index == 1 ? "select-li" :  ""}>
                             <span className="text" onClick={this.checkToInviteHandler}>邀友贡献值</span>
-                        </li>                        
+                        </li>
                     </ul>
                 </div>
 
-               <div className="contribute-tab-cnt">
+                <div className="contribute-tab-cnt">
                     {this.state.index == 0 ? <InvestTab /> : <InviteTab />}
-               </div>
+                </div>
             </div>
         );
     }
 });
 
 const HomePage = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div>
-                <Contribute myInfoData={this.props.myInfoData} />
+                <Contribute myInfoData={this.props.myInfoData}/>
                 <ContributeTab />
             </div>
         );
     }
 });
 
-$FW.DOMReady(function() {
+$FW.DOMReady(function () {
     $FW.BatchGet([
         API_PATH + "/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
-    ], function(data) {
+    ], function (data) {
         ReactDOM.render(
-            <HomePage myInfoData = {data[0]} />,
+            <HomePage myInfoData={data[0]}/>,
             document.getElementById("cnt")
         );
     })
 });
 
 ReactDOM.render(
-    <Header title={"我的贡献值"}  />,
+    <Header title={"我的贡献值"}/>,
     document.getElementById("header")
 );
-
