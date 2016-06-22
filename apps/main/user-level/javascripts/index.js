@@ -41,8 +41,8 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        //url: "/mpwap/api/v1/user/level-info.shtml",
-        url: "http://localhost/xxxxx.json",
+        url: "/mpwap/api/v1/user/level-info.shtml",
+        //url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
             if(data.code == 40101) {
