@@ -37,7 +37,7 @@ const Contribute = React.createClass({
                         </div>
 
                         <div className="text-block">
-                            <p className="text">投资贡献值{myInfoData.inviteContributeValue}+邀友贡献值1000</p>
+                            <p className="text">投资贡献值{myInfoData.investmentContribution}+邀友贡献值{myInfoData.inviteContributeValue}</p>
                         </div>
                     </div>
 
