@@ -41,8 +41,8 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        //url: "/mpwap/api/v1/user/level-info.shtml",
-        url: "http://localhost/xxxxx.json",
+        url: "/mpwap/api/v1/user/level-info.shtml",
+        //url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
             if(data.code == 40101) {
@@ -89,6 +89,9 @@ $(function () {
             $("#vip" + num).removeClass("change-img-gray");
             $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
 
+            $("#vip1").click(function() {
+                redirectToAppUserContribute();
+            });
             /*
              if (num == 0) {
              $("#vip0").removeClass("change-img-gray");
