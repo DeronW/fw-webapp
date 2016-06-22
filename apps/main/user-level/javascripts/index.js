@@ -33,16 +33,25 @@ function redirectToAppUserContribute() {
     }
 }
 
+function inApp (){
+    return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+}
+
 $(function () {
 
     $.ajax({
         type: "GET",
-        url: "/mpwap/api/v1/user/level-info.shtml",
-        //url: "http://localhost/xxxxx.json",
+        //url: "/mpwap/api/v1/user/level-info.shtml",
+        url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
-            console.log(data);
-
+            if(data.code == 40101) {
+                if (inApp()) {
+                    NativeBridge.login()
+                } else {
+                    location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=' + location.pathname + location.search;
+                }  
+            }
             $(".slider-block").css('display', 'block');
 
             var num = data.data.userLevel - 1;
