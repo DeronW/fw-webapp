@@ -41,8 +41,8 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        url: "/mpwap/api/v1/user/level-info.shtml",
-        //url: "http://localhost/xxxxx.json",
+        //url: "/mpwap/api/v1/user/level-info.shtml",
+        url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
             if(data.code == 40101) {
@@ -52,6 +52,9 @@ $(function () {
                     location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=' + location.pathname + location.search;
                 }  
             }
+
+            $("#vipText").text(data.data.leveHint);
+
             $(".slider-block").css('display', 'block');
 
             var num = data.data.userLevel - 1;
