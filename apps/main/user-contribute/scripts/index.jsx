@@ -140,7 +140,7 @@ const InviteTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
+            url: API_PATH + "/mpwap/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
             success: function (data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
