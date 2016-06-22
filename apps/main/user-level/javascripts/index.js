@@ -25,12 +25,20 @@ var imageList = [
     ]
 ];
 
+function redirectToAppUserContribute() {
+    if (navigator.userAgent.indexOf('FinancialWorkshop') > -1) {
+        NativeBridge.toNative('app_contribute_detail');
+    } else {
+        location.href = '/static/wap/user-contribute/index.html'
+    }
+}
+
 $(function () {
 
     $.ajax({
         type: "GET",
-        // url: "http://m.9888.cn/api/user/level.json",
-        url: "http://localhost/level.json",
+        url: "/api/v1/user/level-info.shtml",
+        //url: "http://localhost/level.json",
         dataType: "json",
         success: function (data) {
 
@@ -72,68 +80,68 @@ $(function () {
             $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
 
             /*
-            if (num == 0) {
-                $("#vip0").removeClass("change-img-gray");
-                $("#vip1").attr("class", "change-img-gray");
-                $("#vip2").attr("class", "change-img-gray");
-                $("#vip3").attr("class", "change-img-gray");
-                $("#vip4").attr("class", "change-img-gray");
-                $("#vip0-jindutiao").removeClass("gray-class");
-                $("#vip1-jindutiao").addClass("gray-class");
-                $("#vip2-jindutiao").addClass("gray-class");
-                $("#vip3-jindutiao").addClass("gray-class");
-                $("#vip4-jindutiao").addClass("gray-class");
-                $(".level-img").not(".level-img0").find("img").addClass("change-img-gray");
-            } else if (num == 1) {
-                $("#vip0").attr("class", "change-img-gray");
-                $("#vip1").removeClass("change-img-gray");
-                $("#vip2").attr("class", "change-img-gray");
-                $("#vip3").attr("class", "change-img-gray");
-                $("#vip4").attr("class", "change-img-gray");
-                $("#vip0-jindutiao").addClass("gray-class");
-                $("#vip1-jindutiao").removeClass("gray-class");
-                $("#vip2-jindutiao").addClass("gray-class");
-                $("#vip3-jindutiao").addClass("gray-class");
-                $("#vip4-jindutiao").addClass("gray-class");
-                $(".level-img").not(".level-img1").find("img").addClass("change-img-gray");
-            } else if (num == 2) {
-                $("#vip0").attr("class", "change-img-gray");
-                $("#vip1").attr("class", "change-img-gray");
-                $("#vip2").removeClass("change-img-gray");
-                $("#vip3").attr("class", "change-img-gray");
-                $("#vip4").attr("class", "change-img-gray");
-                $("#vip0-jindutiao").addClass("gray-class");
-                $("#vip1-jindutiao").addClass("gray-class");
-                $("#vip2-jindutiao").removeClass("gray-class");
-                $("#vip3-jindutiao").addClass("gray-class");
-                $("#vip4-jindutiao").addClass("gray-class");
-                $(".level-img").not(".level-img2").find("img").addClass("change-img-gray");
-            } else if (num == 3) {
-                $("#vip0").attr("class", "change-img-gray");
-                $("#vip1").attr("class", "change-img-gray");
-                $("#vip2").attr("class", "change-img-gray");
-                $("#vip3").removeClass("change-img-gray");
-                $("#vip4").attr("class", "change-img-gray");
-                $("#vip0-jindutiao").addClass("gray-class");
-                $("#vip1-jindutiao").addClass("gray-class");
-                $("#vip2-jindutiao").addClass("gray-class");
-                $("#vip3-jindutiao").removeClass("gray-class");
-                $("#vip4-jindutiao").addClass("gray-class");
-                $(".level-img").not(".level-img3").find("img").addClass("change-img-gray");
-            } else if (num == 4) {
-                $("#vip0").attr("class", "change-img-gray");
-                $("#vip1").attr("class", "change-img-gray");
-                $("#vip2").attr("class", "change-img-gray");
-                $("#vip3").attr("class", "change-img-gray");
-                $("#vip4").removeClass("change-img-gray");
-                $("#vip0-jindutiao").addClass("gray-class");
-                $("#vip1-jindutiao").addClass("gray-class");
-                $("#vip2-jindutiao").addClass("gray-class");
-                $("#vip3-jindutiao").addClass("gray-class");
-                $("#vip4-jindutiao").removeClass("gray-class");
-                $(".level-img").not(".level-img4").find("img").addClass("change-img-gray");
-            }
-            */
+             if (num == 0) {
+             $("#vip0").removeClass("change-img-gray");
+             $("#vip1").attr("class", "change-img-gray");
+             $("#vip2").attr("class", "change-img-gray");
+             $("#vip3").attr("class", "change-img-gray");
+             $("#vip4").attr("class", "change-img-gray");
+             $("#vip0-jindutiao").removeClass("gray-class");
+             $("#vip1-jindutiao").addClass("gray-class");
+             $("#vip2-jindutiao").addClass("gray-class");
+             $("#vip3-jindutiao").addClass("gray-class");
+             $("#vip4-jindutiao").addClass("gray-class");
+             $(".level-img").not(".level-img0").find("img").addClass("change-img-gray");
+             } else if (num == 1) {
+             $("#vip0").attr("class", "change-img-gray");
+             $("#vip1").removeClass("change-img-gray");
+             $("#vip2").attr("class", "change-img-gray");
+             $("#vip3").attr("class", "change-img-gray");
+             $("#vip4").attr("class", "change-img-gray");
+             $("#vip0-jindutiao").addClass("gray-class");
+             $("#vip1-jindutiao").removeClass("gray-class");
+             $("#vip2-jindutiao").addClass("gray-class");
+             $("#vip3-jindutiao").addClass("gray-class");
+             $("#vip4-jindutiao").addClass("gray-class");
+             $(".level-img").not(".level-img1").find("img").addClass("change-img-gray");
+             } else if (num == 2) {
+             $("#vip0").attr("class", "change-img-gray");
+             $("#vip1").attr("class", "change-img-gray");
+             $("#vip2").removeClass("change-img-gray");
+             $("#vip3").attr("class", "change-img-gray");
+             $("#vip4").attr("class", "change-img-gray");
+             $("#vip0-jindutiao").addClass("gray-class");
+             $("#vip1-jindutiao").addClass("gray-class");
+             $("#vip2-jindutiao").removeClass("gray-class");
+             $("#vip3-jindutiao").addClass("gray-class");
+             $("#vip4-jindutiao").addClass("gray-class");
+             $(".level-img").not(".level-img2").find("img").addClass("change-img-gray");
+             } else if (num == 3) {
+             $("#vip0").attr("class", "change-img-gray");
+             $("#vip1").attr("class", "change-img-gray");
+             $("#vip2").attr("class", "change-img-gray");
+             $("#vip3").removeClass("change-img-gray");
+             $("#vip4").attr("class", "change-img-gray");
+             $("#vip0-jindutiao").addClass("gray-class");
+             $("#vip1-jindutiao").addClass("gray-class");
+             $("#vip2-jindutiao").addClass("gray-class");
+             $("#vip3-jindutiao").removeClass("gray-class");
+             $("#vip4-jindutiao").addClass("gray-class");
+             $(".level-img").not(".level-img3").find("img").addClass("change-img-gray");
+             } else if (num == 4) {
+             $("#vip0").attr("class", "change-img-gray");
+             $("#vip1").attr("class", "change-img-gray");
+             $("#vip2").attr("class", "change-img-gray");
+             $("#vip3").attr("class", "change-img-gray");
+             $("#vip4").removeClass("change-img-gray");
+             $("#vip0-jindutiao").addClass("gray-class");
+             $("#vip1-jindutiao").addClass("gray-class");
+             $("#vip2-jindutiao").addClass("gray-class");
+             $("#vip3-jindutiao").addClass("gray-class");
+             $("#vip4-jindutiao").removeClass("gray-class");
+             $(".level-img").not(".level-img4").find("img").addClass("change-img-gray");
+             }
+             */
 
             var txt = $("#about_swiper_txt .slide-txt");
 
@@ -157,15 +165,15 @@ $(function () {
             txt.hide().eq(num).show().addClass("show");
 
             /*
-            $(".center").on("afterChange", function () {
-                var t = $(".slider .slick-active .img-box").attr("data-tab");
-                txt.removeClass("show").hide();
-                txt.eq(t).show();
-                setTimeout(function () {
-                    txt.eq(t).addClass("show")
-                }, 10)
-            });
-            */
+             $(".center").on("afterChange", function () {
+             var t = $(".slider .slick-active .img-box").attr("data-tab");
+             txt.removeClass("show").hide();
+             txt.eq(t).show();
+             setTimeout(function () {
+             txt.eq(t).addClass("show")
+             }, 10)
+             });
+             */
 
             var barNum0 = (num + 1) * 20;
             var redNum0 = value;

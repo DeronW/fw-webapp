@@ -129,7 +129,7 @@ function generate_task(site_name, project_name, configs) {
             lib_files.push(LIB_PATH + 'react-15.0.1/react-dom.min.js');
         }
 
-        lib_files.push(LIB_PATH + 'native-bridge-0.1.0.js');
+        lib_files.push(LIB_PATH + 'native-bridge-0.2.0.js');
         if (CONFIG.with_swipe) lib_files.push(LIB_PATH + 'javascripts/swipe-2.0.0.js');
 
         CONFIG.include_common_js.forEach(function (i) {
