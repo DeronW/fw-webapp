@@ -37,10 +37,11 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        url: "/api/v1/user/level-info.shtml",
-        //url: "http://localhost/level.json",
+        url: "http://m.9888.cn/mpwap/api/v1/user/level-info.shtml",
+        //url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
+            console.log(data);
 
             $(".slider-block").css('display', 'block');
 
