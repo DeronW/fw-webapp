@@ -37,7 +37,7 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        url: "http://m.9888.cn/mpwap/api/v1/user/level-info.shtml",
+        url: "/mpwap/api/v1/user/level-info.shtml",
         //url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {

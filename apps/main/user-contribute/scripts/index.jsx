@@ -252,7 +252,7 @@ const HomePage = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.BatchGet([
-        API_PATH + "/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
+        API_PATH + "/mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
     ], function (data) {
         ReactDOM.render(
             <HomePage myInfoData={data[0]}/>,
