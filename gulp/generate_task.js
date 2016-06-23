@@ -61,7 +61,7 @@ function generate_task(site_name, project_name, configs) {
     }
 
     if (CONFIG.enable_revision)
-        gulp.task(TASK_NAME + ':revision', gulp.series(TASK_NAME, revision));
+        gulp.task(TASK_NAME + ':revision', gulp.series(TASK_NAME, copy2cdn, revision));
 
     function compile_html() {
         return gulp.src([APP_PATH + '**/*.html'])
@@ -148,7 +148,7 @@ function generate_task(site_name, project_name, configs) {
                 APP_PATH + 'images/**/*.png',
                 APP_PATH + 'images/**/*.gif'])
             .pipe(plugins.changed(BUILD_PATH + 'images'))
-            //.pipe(plugins.imagemin())
+            .pipe(plugins.imagemin())
             .pipe(gulp.dest(BUILD_PATH + 'images'));
     }
 
@@ -165,6 +165,11 @@ function generate_task(site_name, project_name, configs) {
         gulp.watch(APP_PATH + '/scripts/**', gulp.parallel(compile_scripts));
         gulp.watch(APP_PATH + '/css/**', gulp.parallel(compile_css));
         gulp.watch(APP_PATH + '/javascripts/**', gulp.parallel(compile_javascripts));
+    }
+
+    function copy2cdn() {
+        const CDN_PATH = `cdn/${site_name}/${PROJECT_NAME}/`;
+        return gulp.src([BUILD_PATH + '/**']).pipe(gulp.dest(CDN_PATH));
     }
 
     function revision() {
