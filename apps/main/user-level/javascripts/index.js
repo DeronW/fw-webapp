@@ -1,30 +1,3 @@
-var imageList = [
-    [
-        'images/level-1-1.png',
-        'images/level-1-2.png',
-        'images/level-1-3.png'
-    ],
-    [
-        'images/level-2-1.png',
-        'images/level-2-3.png',
-        'images/level-2-3.png'
-    ],
-    [
-        'images/level-3-1.png',
-        'images/level-3-3.png',
-        'images/level-3-3.png'
-    ],
-    [
-        'images/level-4-1.png',
-        'images/level-4-2.png',
-        'images/level-4-3.png'
-    ],
-    [
-        'images/level-5-1.png',
-        'images/level-5-2.png'
-    ]
-];
-
 function redirectToAppUserContribute() {
     if (navigator.userAgent.indexOf('FinancialWorkshop') > -1) {
         NativeBridge.toNative('app_contribute_detail');
@@ -41,8 +14,8 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        url: "/mpwap/api/v1/user/level-info.shtml",
-        //url: "http://localhost/xxxxx.json",
+        //url: "/mpwap/api/v1/user/level-info.shtml",
+        url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
             if(data.code == 40101) {
@@ -52,6 +25,8 @@ $(function () {
                     location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=' + location.pathname + location.search;
                 }  
             }
+            
+            $(".level-progress-text span").text(data.data.contributeValue);
 
             $("#vipText").text(data.data.leveHint);
 
@@ -62,11 +37,38 @@ $(function () {
             var contribute = data.data.contributeTotal;
             $(".level-progress-text").find("span").text(contribute);
 
-            [0, 1, 2, 3, 4].forEach(function (k) {
+            /*[0, 1, 2, 3, 4].forEach(function (k) {
                 imageList[k].forEach(function (i) {
                     $(".level-img" + k).append('<img src="' + i + '" />');
                 });
-            });
+            });*/
+
+            /*data.data.levelGifts.forEach(function(k) {
+                console.log(k.lvGiftIdMap);
+                k.lvGiftIdMap.forEach(function(i) {
+                    $(".level-img" + k).append(
+                            "<a href=''>+
+                                "<img src='images/level-" + 1 + "-" + 1 +".png'/>"+
+                            "</a>"
+                            );
+                })
+            })*/
+
+            var levelGiftsData = data.data.levelGifts;
+
+            for(var i = 0; i < levelGiftsData.length; i++) {
+                for(var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
+                    console.log(levelGiftsData[i].lvGiftIdMap[j].bagType)
+                    $(".level-img" + i).append(
+                            "<a href=''>"+
+                                "<img src='images/level-" + (i+1) + "-" + levelGiftsData[i].lvGiftIdMap[j].bagType +".png'/>"+
+                            "</a>"
+                            );
+                }
+            }
+
+
+
 
             /*
              imageList[0].forEach(function (i) {
@@ -90,74 +92,13 @@ $(function () {
             $("#vip0-jindutiao, #vip1-jindutiao, #vip2-jindutiao, #vip3-jindutiao, #vip4-jindutiao").addClass("gray-class");
 
             $("#vip" + num).removeClass("change-img-gray");
+            $("#vip" + num +"-jindutiao").removeClass("gray-class");
+
             $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
 
             $("#vip1").click(function() {
                 redirectToAppUserContribute();
             });
-            /*
-             if (num == 0) {
-             $("#vip0").removeClass("change-img-gray");
-             $("#vip1").attr("class", "change-img-gray");
-             $("#vip2").attr("class", "change-img-gray");
-             $("#vip3").attr("class", "change-img-gray");
-             $("#vip4").attr("class", "change-img-gray");
-             $("#vip0-jindutiao").removeClass("gray-class");
-             $("#vip1-jindutiao").addClass("gray-class");
-             $("#vip2-jindutiao").addClass("gray-class");
-             $("#vip3-jindutiao").addClass("gray-class");
-             $("#vip4-jindutiao").addClass("gray-class");
-             $(".level-img").not(".level-img0").find("img").addClass("change-img-gray");
-             } else if (num == 1) {
-             $("#vip0").attr("class", "change-img-gray");
-             $("#vip1").removeClass("change-img-gray");
-             $("#vip2").attr("class", "change-img-gray");
-             $("#vip3").attr("class", "change-img-gray");
-             $("#vip4").attr("class", "change-img-gray");
-             $("#vip0-jindutiao").addClass("gray-class");
-             $("#vip1-jindutiao").removeClass("gray-class");
-             $("#vip2-jindutiao").addClass("gray-class");
-             $("#vip3-jindutiao").addClass("gray-class");
-             $("#vip4-jindutiao").addClass("gray-class");
-             $(".level-img").not(".level-img1").find("img").addClass("change-img-gray");
-             } else if (num == 2) {
-             $("#vip0").attr("class", "change-img-gray");
-             $("#vip1").attr("class", "change-img-gray");
-             $("#vip2").removeClass("change-img-gray");
-             $("#vip3").attr("class", "change-img-gray");
-             $("#vip4").attr("class", "change-img-gray");
-             $("#vip0-jindutiao").addClass("gray-class");
-             $("#vip1-jindutiao").addClass("gray-class");
-             $("#vip2-jindutiao").removeClass("gray-class");
-             $("#vip3-jindutiao").addClass("gray-class");
-             $("#vip4-jindutiao").addClass("gray-class");
-             $(".level-img").not(".level-img2").find("img").addClass("change-img-gray");
-             } else if (num == 3) {
-             $("#vip0").attr("class", "change-img-gray");
-             $("#vip1").attr("class", "change-img-gray");
-             $("#vip2").attr("class", "change-img-gray");
-             $("#vip3").removeClass("change-img-gray");
-             $("#vip4").attr("class", "change-img-gray");
-             $("#vip0-jindutiao").addClass("gray-class");
-             $("#vip1-jindutiao").addClass("gray-class");
-             $("#vip2-jindutiao").addClass("gray-class");
-             $("#vip3-jindutiao").removeClass("gray-class");
-             $("#vip4-jindutiao").addClass("gray-class");
-             $(".level-img").not(".level-img3").find("img").addClass("change-img-gray");
-             } else if (num == 4) {
-             $("#vip0").attr("class", "change-img-gray");
-             $("#vip1").attr("class", "change-img-gray");
-             $("#vip2").attr("class", "change-img-gray");
-             $("#vip3").attr("class", "change-img-gray");
-             $("#vip4").removeClass("change-img-gray");
-             $("#vip0-jindutiao").addClass("gray-class");
-             $("#vip1-jindutiao").addClass("gray-class");
-             $("#vip2-jindutiao").addClass("gray-class");
-             $("#vip3-jindutiao").addClass("gray-class");
-             $("#vip4-jindutiao").removeClass("gray-class");
-             $(".level-img").not(".level-img4").find("img").addClass("change-img-gray");
-             }
-             */
 
             var txt = $("#about_swiper_txt .slide-txt");
 
