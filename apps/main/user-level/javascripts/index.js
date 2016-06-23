@@ -14,8 +14,8 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        //url: "/mpwap/api/v1/user/level-info.shtml",
-        url: "http://localhost/xxxxx.json",
+        url: "/mpwap/api/v1/user/level-info.shtml",
+        //url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
             if(data.code == 40101) {
@@ -36,23 +36,6 @@ $(function () {
             var value = data.data.contributePercent;
             var contribute = data.data.contributeTotal;
             $(".level-progress-text").find("span").text(contribute);
-
-            /*[0, 1, 2, 3, 4].forEach(function (k) {
-                imageList[k].forEach(function (i) {
-                    $(".level-img" + k).append('<img src="' + i + '" />');
-                });
-            });*/
-
-            /*data.data.levelGifts.forEach(function(k) {
-                console.log(k.lvGiftIdMap);
-                k.lvGiftIdMap.forEach(function(i) {
-                    $(".level-img" + k).append(
-                            "<a href=''>+
-                                "<img src='images/level-" + 1 + "-" + 1 +".png'/>"+
-                            "</a>"
-                            );
-                })
-            })*/
 
             var levelGiftsData = data.data.levelGifts;
 
