@@ -148,7 +148,7 @@ function generate_task(site_name, project_name, configs) {
                 APP_PATH + 'images/**/*.png',
                 APP_PATH + 'images/**/*.gif'])
             .pipe(plugins.changed(BUILD_PATH + 'images'))
-            .pipe(plugins.imagemin())
+            //.pipe(plugins.imagemin())
             .pipe(gulp.dest(BUILD_PATH + 'images'));
     }
 
