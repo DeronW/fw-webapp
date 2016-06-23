@@ -44,7 +44,7 @@ const Contribute = React.createClass({
                     <div className="top-info-r">
                         <div className="vip-block">
                             <span className="img">
-                                vip{myInfoData.userLevel}
+                                <img src={"images/vip" + (myInfoData.userLevel -1) +  "_icon.png"}/>
                             </span>
                             <span className="user-vip-text">
                                 用户等级
@@ -71,6 +71,7 @@ const InvestTab = React.createClass({
 
         $FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
+            //url: "http://10.105.7.69/xxxxx.json?page=1&rows=10&type=0",
             success: function (data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
@@ -102,7 +103,7 @@ const InvestTab = React.createClass({
                     </div>
                     <div className="rl">
                         <span className="text">年化投资额度: {value.earn_money}</span>
-                        <span className="text">回款日期{value.returned_date}</span>
+                        <span className="text">计划回款日{value.returned_date}</span>
                     </div>
                 </div>
             </div>
@@ -170,7 +171,7 @@ const InviteTab = React.createClass({
                         <span className="text">投资日期{value.apply_date}</span>
                     </div>
                     <div className="rl">
-                        <span className="text">回款日期{value.returned_date}</span>
+                        <span className="text">过期时间{value.returned_date}</span>
                     </div>
                 </div>
             </div>
@@ -253,6 +254,7 @@ const HomePage = React.createClass({
 $FW.DOMReady(function () {
     $FW.BatchGet([
         API_PATH + "/mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
+        //"http://10.105.7.69/my.json",
     ], function (data) {
         ReactDOM.render(
             <HomePage myInfoData={data[0]}/>,
