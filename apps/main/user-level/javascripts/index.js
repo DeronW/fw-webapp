@@ -10,6 +10,28 @@ function inApp (){
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
 
+var qryDetail = function(giftBagId,level,bagType){
+            console.log("aaa");
+            //var app_login_sign = '${sessionScope.app_login_sign}';
+            var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
+            if(app_login_sign != null && app_login_sign != ''){
+                jsPost("/mawap", 'mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
+            }else{
+                jsPost("/mpwap", '/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
+            }
+        }
+
+
+var jsPost = function(action, values) {
+    var id = Math.random();
+    document.write('<form id="post' + id + '" name="post'+ id +'" action="' + action + '" method="post">');
+    for (var key in values) {
+        document.write('<input type="hidden" name="' + key + '" value="' + values[key] + '" />');
+    }
+    document.write('</form>');    
+    document.getElementById('post' + id).submit();
+}
+
 $(function () {
 
     $.ajax({
@@ -40,16 +62,28 @@ $(function () {
             var levelGiftsData = data.data.levelGifts;
 
             for(var i = 0; i < levelGiftsData.length; i++) {
+                var level = levelGiftsData[i].level;
+
                 for(var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
-                    console.log(levelGiftsData[i].lvGiftIdMap[j].bagType)
                     $(".level-img" + i).append(
-                            "<a href=''>"+
+                            //"<a href=''onclick='"qryDetail(" a + , level, levelGiftsData[i].lvGiftIdMap[j].bagType)'>"+
+                            "<a onclick='qryDetail(" + levelGiftsData[i].lvGiftIdMap[j].giftBagId + "," + level + "," + levelGiftsData[i].lvGiftIdMap[j].bagType  + ")'>"+
                                 "<img src='images/level-" + (i+1) + "-" + levelGiftsData[i].lvGiftIdMap[j].bagType +".png'/>"+
                             "</a>"
                             );
                 }
+                
+
+                $(".level-img" + i).append(
+                        "<a href=''>"+
+                            "<img src='images/waiting.png'/>"+
+                        "</a>"
+                        );
+
             }
 
+
+            //qryDetail(levelGiftsData[i].lvGiftIdMap[j].giftBagId, level, levelGiftsData[i].lvGiftIdMap[j].bagType);
 
 
 
