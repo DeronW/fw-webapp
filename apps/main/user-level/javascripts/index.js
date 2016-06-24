@@ -6,48 +6,55 @@ function redirectToAppUserContribute() {
     }
 }
 
-function inApp (){
+function inApp() {
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
 
-var qryDetail = function(giftBagId,level,bagType){
-            console.log("aaa");
-            //var app_login_sign = '${sessionScope.app_login_sign}';
-            var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
-            if(app_login_sign != null && app_login_sign != ''){
-                jsPost("/mawap", 'mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
-            }else{
-                jsPost("/mpwap", '/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
-            }
-        }
+var qryDetail = function (giftBagId, level, bagType) {
+    if (inApp) {
+        jsPost("/mawap", 'mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml', {
+            'level': level,
+            'giftBagId': giftBagId,
+            'bagType': bagType
+        });
+    } else {
+        jsPost("/mpwap", '/vipTeQuan/qryVipTeQuanDetail.shtml', {
+            'level': level,
+            'giftBagId': giftBagId,
+            'bagType': bagType
+        });
+    }
+};
 
 
-var jsPost = function(action, values) {
+var jsPost = function (action, values) {
     var id = Math.random();
-    document.write('<form id="post' + id + '" name="post'+ id +'" action="' + action + '" method="post">');
+    document.write('<form id="post' + id + '" name="post' + id + '" action="' + action + '" method="post">');
     for (var key in values) {
         document.write('<input type="hidden" name="' + key + '" value="' + values[key] + '" />');
     }
-    document.write('</form>');    
+    document.write('</form>');
     document.getElementById('post' + id).submit();
-}
+};
 
 $(function () {
 
+    $("#vip0, #vip1, #vip2, #vip3, #vip4").click(redirectToAppUserContribute);
+    
     $.ajax({
         type: "GET",
         url: "/mpwap/api/v1/user/level-info.shtml",
         //url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
-            if(data.code == 40101) {
+            if (data.code == 40101) {
                 if (inApp()) {
                     NativeBridge.login()
                 } else {
                     location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=' + location.pathname + location.search;
-                }  
+                }
             }
-            
+
             $(".level-progress-text span").text(data.data.contributeValue);
 
             $("#vipText").text(data.data.leveHint);
@@ -61,30 +68,29 @@ $(function () {
 
             var levelGiftsData = data.data.levelGifts;
 
-            for(var i = 0; i < levelGiftsData.length; i++) {
+            for (var i = 0; i < levelGiftsData.length; i++) {
                 var level = levelGiftsData[i].level;
 
-                for(var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
+                for (var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
                     $(".level-img" + i).append(
-                            //"<a href=''onclick='"qryDetail(" a + , level, levelGiftsData[i].lvGiftIdMap[j].bagType)'>"+
-                            "<a onclick='qryDetail(" + levelGiftsData[i].lvGiftIdMap[j].giftBagId + "," + level + "," + levelGiftsData[i].lvGiftIdMap[j].bagType  + ")'>"+
-                                "<img src='images/level-" + (i+1) + "-" + levelGiftsData[i].lvGiftIdMap[j].bagType +".png'/>"+
-                            "</a>"
-                            );
+                        //"<a href=''onclick='"qryDetail(" a + , level, levelGiftsData[i].lvGiftIdMap[j].bagType)'>"+
+                        "<a onclick='qryDetail(" + levelGiftsData[i].lvGiftIdMap[j].giftBagId + "," + level + "," + levelGiftsData[i].lvGiftIdMap[j].bagType + ")'>" +
+                        "<img src='images/level-" + (i + 1) + "-" + levelGiftsData[i].lvGiftIdMap[j].bagType + ".png'/>" +
+                        "</a>"
+                    );
                 }
-                
+
 
                 $(".level-img" + i).append(
-                        "<a href=''>"+
-                            "<img src='images/waiting.png'/>"+
-                        "</a>"
-                        );
+                    "<a>" +
+                    "<img src='images/waiting.png'/>" +
+                    "</a>"
+                );
 
             }
 
 
             //qryDetail(levelGiftsData[i].lvGiftIdMap[j].giftBagId, level, levelGiftsData[i].lvGiftIdMap[j].bagType);
-
 
 
             /*
@@ -109,13 +115,10 @@ $(function () {
             $("#vip0-jindutiao, #vip1-jindutiao, #vip2-jindutiao, #vip3-jindutiao, #vip4-jindutiao").addClass("gray-class");
 
             $("#vip" + num).removeClass("change-img-gray");
-            $("#vip" + num +"-jindutiao").removeClass("gray-class");
+            $("#vip" + num + "-jindutiao").removeClass("gray-class");
 
             $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
 
-            $("#vip1").click(function() {
-                redirectToAppUserContribute();
-            });
 
             var txt = $("#about_swiper_txt .slide-txt");
 
@@ -143,8 +146,7 @@ $(function () {
              var t = $(".slider .slick-active .img-box").attr("data-tab");
              txt.removeClass("show").hide();
              txt.eq(t).show();
-             setTimeout(function () {
-             txt.eq(t).addClass("show")
+             setTimeout(function () {             txt.eq(t).addClass("show")
              }, 10)
              });
              */
@@ -172,4 +174,8 @@ $(function () {
              */
         }
     });
+});
+
+$(function () {
+    NativeBridge.setTitle('用户等级')
 });
