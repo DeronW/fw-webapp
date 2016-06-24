@@ -51,7 +51,7 @@ const Contribute = React.createClass({
                                 <img src={"images/vip" + (myInfoData.userLevel -1) +  "_icon.png"}/>
                             </span>
                             <span className="user-vip-text">
-                                用户等级
+                                会员等级
                             </span>
                         </div>
                     </div>
