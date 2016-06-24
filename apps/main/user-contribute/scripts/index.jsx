@@ -2,12 +2,15 @@
 
 const API_PATH = document.getElementById("api-path").value;
 
+function historyBack() {
+    window.history.back();
+}
 const Header = React.createClass({
     render: function () {
         return (
             <div className="header">
                 <div className="header-cont">
-                    <div className="up-btn">
+                    <div className="up-btn" onClick={historyBack}>
                         <img src="images/ico-blue-back.png"/>
                     </div>
 
