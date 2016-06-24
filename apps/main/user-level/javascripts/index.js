@@ -39,6 +39,8 @@ var jsPost = function (action, values) {
 
 $(function () {
 
+    $("#vip0, #vip1, #vip2, #vip3, #vip4").click(redirectToAppUserContribute);
+    
     $.ajax({
         type: "GET",
         url: "/mpwap/api/v1/user/level-info.shtml",
@@ -117,7 +119,6 @@ $(function () {
 
             $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
 
-            $("#vip0, #vip1, #vip2, #vip3, #vip4").click(redirectToAppUserContribute);
 
             var txt = $("#about_swiper_txt .slide-txt");
 

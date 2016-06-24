@@ -4,7 +4,7 @@ const API_PATH = document.getElementById("api-path").value;
 
 const Header = React.createClass({
     backHandler: function () {
-        location.back()
+        history.back()
     },
     render: function () {
         return (
