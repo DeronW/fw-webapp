@@ -3,11 +3,14 @@
 const API_PATH = document.getElementById("api-path").value;
 
 const Header = React.createClass({
+    backHandler: function () {
+        location.back()
+    },
     render: function () {
         return (
             <div className="header">
                 <div className="header-cont">
-                    <div className="up-btn">
+                    <div className="up-btn" onClick={this.backHandler}>
                         <img src="images/ico-blue-back.png"/>
                     </div>
 
@@ -37,7 +40,8 @@ const Contribute = React.createClass({
                         </div>
 
                         <div className="text-block">
-                            <p className="text">投资贡献值{myInfoData.investmentContribution}+邀友贡献值{myInfoData.inviteContributeValue}</p>
+                            <p className="text">
+                                投资贡献值{myInfoData.investmentContribution}+邀友贡献值{myInfoData.inviteContributeValue}</p>
                         </div>
                     </div>
 
@@ -72,6 +76,7 @@ const InvestTab = React.createClass({
         $FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
             //url: "http://10.105.7.69/xxxxx.json?page=1&rows=10&type=0",
+            enable_loading: true,
             success: function (data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
@@ -142,6 +147,7 @@ const InviteTab = React.createClass({
 
         $FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=1",
+            enable_loading: true,
             success: function (data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
