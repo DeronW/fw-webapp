@@ -102,7 +102,7 @@ const InvestTab = React.createClass({
         var objDiv = (value, index) => (
             <div key={index} className="cont-block">
                 <div className="top-block">
-                    <span className="fl">投资{value.title}</span>
+                    <span className="fl">{value.title}</span>
                     <span className="rl">贡献值: <em className="mark-c">{value.contributeValue}</em></span>
                 </div>
 
