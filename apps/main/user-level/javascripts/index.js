@@ -40,6 +40,7 @@ $(function () {
         //url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
+            console.log($("#header").text(data));
             if(data.code == 40101) {
                 if (inApp()) {
                     NativeBridge.login()
