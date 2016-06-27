@@ -88,13 +88,12 @@ $(function () {
             $("#vip0-jindutiao, #vip1-jindutiao, #vip2-jindutiao, #vip3-jindutiao, #vip4-jindutiao").addClass("gray-class");
 
             $("#vip" + num).removeClass("change-img-gray");
+
             $("#vip" + num +"-jindutiao").removeClass("gray-class");
 
             $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
 
-            $("#vip1").click(function() {
-                redirectToAppUserContribute();
-            });
+            $("#vip" + num).click(redirectToAppUserContribute);
 
             var txt = $("#about_swiper_txt .slide-txt");
 
@@ -136,6 +135,10 @@ $(function () {
 
 $(function(){
 
-    if(inApp()) $("#header").hide();
+    if(inApp()) {
+        $("#header").hide();
+
+        NativeBridge.setTitle('会员等级');
+    }
 
 });
