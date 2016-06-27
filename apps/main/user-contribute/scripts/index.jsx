@@ -211,7 +211,7 @@ const InviteTab = React.createClass({
                 {!this.state.hasMore && data.length > 0 ? btnComplete : null}
 
                 {
-                    data.length == 0 ? wulistImg : null
+                    this.state.page == 2 && data.length == 0 ? wulistImg : null
                 }
             </div>
 
