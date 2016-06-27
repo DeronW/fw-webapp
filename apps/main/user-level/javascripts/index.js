@@ -36,8 +36,8 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        url: "/mpwap/api/v1/user/level-info.shtml",
-        //url: "http://localhost/xxxxx.json",
+        //url: "/mpwap/api/v1/user/level-info.shtml",
+        url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
             if(data.code == 40101) {
@@ -63,7 +63,6 @@ $(function () {
 
             for(var i = 0; i < levelGiftsData.length; i++) {
                 var level = levelGiftsData[i].level;
-                console.log(levelGiftsData[i].lvGiftIdMap);
 
                 for(var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
                     if(levelGiftsData[i].lvGiftIdMap[j].giftBagId !== "") {
@@ -125,7 +124,7 @@ $(function () {
             [0, 1, 2, 3, 4].forEach(function (i) {
                 $(".level-progress-box" + i + " .level-progress-red").css("width", parseInt(data.data.contributePercent) + "%");
                 //$(".level-progress-box" + i + " .level-progress-bar").css("width", barNum0 + "%");
-                $(".level-progress-box" + i + " .level-progress-bar").css("width", (data.data.userLevel * 20)+ "%");
+                $(".level-progress-box" + i + " .level-progress-bar").css("width", ((data.data.userLevel-1) * 20)+ "%");
             });
 
                    
