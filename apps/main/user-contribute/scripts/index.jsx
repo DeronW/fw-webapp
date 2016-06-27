@@ -177,7 +177,7 @@ const InviteTab = React.createClass({
         var objDiv = (value, index) => (
             <div key={index} className="cont-block">
                 <div className="top-block">
-                    <span className="fl">好友{value.title}首投</span>
+                    <span className="fl">{value.title}</span>
                     <span className="rl">贡献值: <em className="mark-c">{value.contributeValue}</em></span>
                 </div>
 
