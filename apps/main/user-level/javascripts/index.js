@@ -36,8 +36,8 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        url: "/mpwap/api/v1/user/level-info.shtml",
-        //url: "http://localhost/xxxxx.json",
+        //url: "/mpwap/api/v1/user/level-info.shtml",
+        url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
             if(data.code == 40101) {
@@ -63,14 +63,17 @@ $(function () {
 
             for(var i = 0; i < levelGiftsData.length; i++) {
                 var level = levelGiftsData[i].level;
+                console.log(levelGiftsData[i].lvGiftIdMap);
 
                 for(var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
-                    $(".level-img" + i).append(
+                    if(levelGiftsData[i].lvGiftIdMap[j].giftBagId !== "") {
+                        $(".level-img" + i).append(
                             //"<a href=''onclick='"qryDetail(" a + , level, levelGiftsData[i].lvGiftIdMap[j].bagType)'>"+
                             "<a onclick='qryDetail(" + levelGiftsData[i].lvGiftIdMap[j].giftBagId + "," + level + "," + levelGiftsData[i].lvGiftIdMap[j].bagType  + ")'>"+
                                 "<img src='images/level-" + (i+1) + "-" + levelGiftsData[i].lvGiftIdMap[j].bagType +".png'/>"+
                             "</a>"
                             );
+                    }
                 }
 
                 $(".level-img" + i).append(
