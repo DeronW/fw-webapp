@@ -4,6 +4,18 @@
 a:active,a:focus{outline:0;}
 a{text-decoration: none;}
 
+.clear-fix::after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.about_swiper_txt {
+    margin: 0 0 100px 0;
+}
+
 #header{position:fixed;left:0;top:0;height:5rem;width:100%;z-index:99;line-height:5rem;border-bottom:1px solid #d8d8d8;text-align:center;background:#fff;font-size: 1.8rem;color:#333;-webkit-box-sizing: border-box;box-sizing: border-box;}
 #header .back{position: absolute;left: 1.9rem;top: 1.5rem;width:2rem;height:2rem;text-indent:-999rem;background:url(../images/ico-back.png) no-repeat 0 center;-webkit-background-size:auto 100%;background-size:auto 100%;}
 .level-notice{display:block;height:3.5rem;line-height:3.5rem;font-size:1.2rem;padding-left:1.7rem;background:#5b6993;position:fixed;top:5rem;left:0;right:0;z-index:2;}
