@@ -140,3 +140,9 @@ $(function () {
         }
     });
 });
+
+$(function(){
+
+    if(inApp()) $("#header").hide();
+
+});
