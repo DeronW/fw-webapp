@@ -40,7 +40,13 @@ $(function () {
         //url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
-            console.log($("#header").text(data));
+            if(data.code == 200) {
+                console.log(data.code);
+                console.log($("#header").text(data.data.leveHint));
+            } else {
+                console.log("loding");
+            }
+
             if(data.code == 40101) {
                 if (inApp()) {
                     NativeBridge.login()
@@ -83,29 +89,6 @@ $(function () {
 
             }
 
-
-            //qryDetail(levelGiftsData[i].lvGiftIdMap[j].giftBagId, level, levelGiftsData[i].lvGiftIdMap[j].bagType);
-
-
-
-            /*
-             imageList[0].forEach(function (i) {
-             $(".level-img0").append('<img src="' + i + '" />');
-             });
-             imageList[1].forEach(function (i) {
-             $(".level-img1").append('<img src="' + i + '" />');
-             });
-             imageList[2].forEach(function (i) {
-             $(".level-img2").append('<img src="' + i + '" />');
-             });
-             imageList[3].forEach(function (i) {
-             $(".level-img3").append('<img src="' + i + '" />');
-             });
-             imageList[4].forEach(function (i) {
-             $(".level-img4").append('<img src="' + i + '" />');
-             });
-             */
-
             $("#vip0, #vip1, #vip2, #vip3, #vip4").attr("class", "change-img-gray");
             $("#vip0-jindutiao, #vip1-jindutiao, #vip2-jindutiao, #vip3-jindutiao, #vip4-jindutiao").addClass("gray-class");
 
@@ -139,17 +122,7 @@ $(function () {
 
             txt.hide().eq(num).show().addClass("show");
 
-            /*
-             $(".center").on("afterChange", function () {
-             var t = $(".slider .slick-active .img-box").attr("data-tab");
-             txt.removeClass("show").hide();
-             txt.eq(t).show();
-             setTimeout(function () {
-             txt.eq(t).addClass("show")
-             }, 10)
-             });
-             */
-
+            
             var barNum0 = (num + 1) * 20;
             var redNum0 = value;
 
@@ -163,19 +136,7 @@ $(function () {
                 $(".level-progress-box" + i + " .level-progress-bar").css("width", (data.data.userLevel * 20)+ "%");
             });
 
-            /*
-             $(".level-progress-box0 .level-progress-bar").css("width", barNum0 + "%");
-             $(".level-progress-box1 .level-progress-bar").css("width", barNum0 + "%");
-             $(".level-progress-box2 .level-progress-bar").css("width", barNum0 + "%");
-             $(".level-progress-box3 .level-progress-bar").css("width", barNum0 + "%");
-             $(".level-progress-box4 .level-progress-bar").css("width", barNum0 + "%");
-
-             $(".level-progress-box0 .level-progress-red").css("width", redNum0 + "%");
-             $(".level-progress-box1 .level-progress-red").css("width", redNum0 + "%");
-             $(".level-progress-box2 .level-progress-red").css("width", redNum0 + "%");
-             $(".level-progress-box3 .level-progress-red").css("width", redNum0 + "%");
-             $(".level-progress-box4 .level-progress-red").css("width", redNum0 + "%");
-             */
+                   
         }
     });
 });
