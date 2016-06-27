@@ -124,7 +124,7 @@ const InvestTab = React.createClass({
             加载更多
         </div>;
 
-        var btnComplete = <div className="complete-btn">加载完成</div>;
+        var btnComplete = <div className="complete-btn">已全部加载完毕</div>;
 
         var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/></div>;
 
@@ -196,7 +196,7 @@ const InviteTab = React.createClass({
             加载更多
         </div>;
 
-        var btnComplete = <div className="complete-btn">加载完成</div>;
+        var btnComplete = <div className="complete-btn">已全部加载完毕</div>;
 
         var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/></div>;
 
