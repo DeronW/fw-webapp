@@ -196,18 +196,19 @@ const InviteTab = React.createClass({
             加载更多
         </div>;
 
+        var btnComplete = <div className="complete-btn">加载完成</div>;
+
+        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/></div>;
+
         return (
             <div className="invite-block">
-                {
-                    data.map(function (value, index) {
-                        return objDiv(value, index);
-                    })
-                }
+                { data.map(objDiv) }
+                {this.state.hasMore ? btnMore : null}
+                {!this.state.hasMore && data.length > 0 ? btnComplete : null}
 
                 {
-                    (_this.state.hasMore == true) ? btnMore : null
+                    data.length == 0 ? wulistImg : null
                 }
-
             </div>
 
         );
