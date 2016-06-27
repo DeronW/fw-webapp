@@ -39,14 +39,7 @@ $(function () {
         url: "/mpwap/api/v1/user/level-info.shtml",
         //url: "http://localhost/xxxxx.json",
         dataType: "json",
-        beforeSend: function() {
-            console.log("loding...");
-        },
         success: function (data) {
-                console.log(data.code);
-                console.log($("#header").text(data.data.leveHint));
-                console.log("loding");
-
             if(data.code == 40101) {
                 if (inApp()) {
                     NativeBridge.login()
