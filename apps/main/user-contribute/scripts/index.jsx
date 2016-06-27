@@ -2,6 +2,10 @@
 
 const API_PATH = document.getElementById("api-path").value;
 
+function inApp (){                                                                                                                                                            
+    return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+}
+
 const Header = React.createClass({
     backHandler: function () {
         history.back()
@@ -74,8 +78,8 @@ const InvestTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
-            //url: "http://10.105.7.69/xxxxx.json?page=1&rows=10&type=0",
+            //url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
+            url: "http://10.105.7.69/xxxxx.json?page=1&rows=10&type=0",
             enable_loading: true,
             success: function (data) {
                 _this.setState({
@@ -83,21 +87,24 @@ const InvestTab = React.createClass({
                     page: ++_this.state.page,
                     hasMore: data.data.length >= 10
                 });
+
             }
         });
     },
-    componentDidMount: function () {
-        this.ajaxHandler()
+    componentDidMount: function (list) {
+        this.ajaxHandler();
     },
     render: function () {
         var _this = this;
 
         var data = _this.state.listData;
+    
+        console.log(data.length);
 
         var objDiv = (value, index) => (
             <div key={index} className="cont-block">
                 <div className="top-block">
-                    <span className="fl">投资利随享{value.title}</span>
+                    <span className="fl">投资{value.title}</span>
                     <span className="rl">贡献值: <em className="mark-c">{value.contributeValue}</em></span>
                 </div>
 
@@ -118,16 +125,19 @@ const InvestTab = React.createClass({
             加载更多
         </div>;
 
+        var btnComplete = <div className="complete-btn">加载完成</div>;
+
+        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/></div>;
+
         return (
             <div className="invest-block">
-                {
-                    data.map(objDiv)
-                }
+                { data.map(objDiv) }
+                {this.state.hasMore ? btnMore : null}
+                {!this.state.hasMore && data.length > 0 ? btnComplete : null}
 
                 {
-                    _this.state.hasMore == true ? btnMore : null
+                    data.length == 0 ? wulistImg : null
                 }
-
             </div>
         );
     }
@@ -259,8 +269,8 @@ const HomePage = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.BatchGet([
-        API_PATH + "/mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
-        //"http://10.105.7.69/my.json",
+        //API_PATH + "/mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
+        "http://10.105.7.69/my.json",
     ], function (data) {
         ReactDOM.render(
             <HomePage myInfoData={data[0]}/>,
@@ -269,7 +279,10 @@ $FW.DOMReady(function () {
     })
 });
 
-ReactDOM.render(
-    <Header title={"我的贡献值"}/>,
-    document.getElementById("header")
-);
+
+if(!inApp()) {
+    ReactDOM.render(
+        <Header title={"我的贡献值"}/>,
+        document.getElementById("header")
+    );
+}
