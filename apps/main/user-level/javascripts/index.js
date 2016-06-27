@@ -19,7 +19,7 @@ var qryDetail = function(giftBagId,level,bagType){
             }else{
                 jsPost("/mpwap", '/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
             }
-        }
+        };
 
 
 var jsPost = function(action, values) {
@@ -30,7 +30,7 @@ var jsPost = function(action, values) {
     }
     document.write('</form>');    
     document.getElementById('post' + id).submit();
-}
+};
 
 $(function () {
 
@@ -40,12 +40,8 @@ $(function () {
         //url: "http://localhost/xxxxx.json",
         dataType: "json",
         beforeSend: function() {
-            console.log("loding...");
         },
         success: function (data) {
-                console.log(data.code);
-                console.log($("#header").text(data.data.leveHint));
-                console.log("loding");
 
             if(data.code == 40101) {
                 if (inApp()) {
@@ -79,7 +75,6 @@ $(function () {
                             "</a>"
                             );
                 }
-                
 
                 $(".level-img" + i).append(
                         "<a href=''>"+
@@ -122,10 +117,8 @@ $(function () {
 
             txt.hide().eq(num).show().addClass("show");
 
-            
             var barNum0 = (num + 1) * 20;
             var redNum0 = value;
-
             
             console.log(data.data.contributePercent);
             console.log(data.data.userLevel);
