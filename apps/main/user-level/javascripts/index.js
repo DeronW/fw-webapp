@@ -136,8 +136,12 @@ $(function(){
 
     if(inApp()) {
         $("#header").hide();
+
+        $(".level-notice").css({
+            top: 0
+        });
         $(".slider-block").css({
-            marginTop: "0"
+            marginTop: "4rem"
         });
         NativeBridge.setTitle('会员等级');
     }
