@@ -133,7 +133,7 @@ $(function () {
                 $(".level-progress-box" + i + " .level-progress-bar").css("width", ((data.data.userLevel - 1) * 20) + "%");
             });
 
-            $(".slider-block").css('display', 'block');
+            $(".slider-block").css('visibility', 'visible');
         }
     });
 });
