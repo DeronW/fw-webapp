@@ -19,7 +19,7 @@ var qryDetail = function(giftBagId,level,bagType){
             }else{
                 jsPost("/mpwap", '/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
             }
-        }
+        };
 
 
 var jsPost = function(action, values) {
@@ -30,7 +30,7 @@ var jsPost = function(action, values) {
     }
     document.write('</form>');    
     document.getElementById('post' + id).submit();
-}
+};
 
 $(function () {
 
@@ -72,7 +72,6 @@ $(function () {
                             "</a>"
                             );
                 }
-                
 
                 $(".level-img" + i).append(
                         "<a href=''>"+
@@ -86,13 +85,12 @@ $(function () {
             $("#vip0-jindutiao, #vip1-jindutiao, #vip2-jindutiao, #vip3-jindutiao, #vip4-jindutiao").addClass("gray-class");
 
             $("#vip" + num).removeClass("change-img-gray");
+
             $("#vip" + num +"-jindutiao").removeClass("gray-class");
 
             $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
 
-            $("#vip1").click(function() {
-                redirectToAppUserContribute();
-            });
+            $("#vip" + num).click(redirectToAppUserContribute);
 
             var txt = $("#about_swiper_txt .slide-txt");
 
@@ -115,10 +113,8 @@ $(function () {
 
             txt.hide().eq(num).show().addClass("show");
 
-            
             var barNum0 = (num + 1) * 20;
             var redNum0 = value;
-
             
             console.log(data.data.contributePercent);
             console.log(data.data.userLevel);
@@ -132,4 +128,14 @@ $(function () {
                    
         }
     });
+});
+
+$(function(){
+
+    if(inApp()) {
+        $("#header").hide();
+
+        NativeBridge.setTitle('会员等级');
+    }
+
 });
