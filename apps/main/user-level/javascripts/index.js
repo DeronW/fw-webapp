@@ -39,13 +39,13 @@ $(function () {
         url: "/mpwap/api/v1/user/level-info.shtml",
         //url: "http://localhost/xxxxx.json",
         dataType: "json",
+        beforeSend: function() {
+            console.log("loding...");
+        },
         success: function (data) {
-            if(data.code == 200) {
                 console.log(data.code);
                 console.log($("#header").text(data.data.leveHint));
-            } else {
                 console.log("loding");
-            }
 
             if(data.code == 40101) {
                 if (inApp()) {
