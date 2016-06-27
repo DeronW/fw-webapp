@@ -11,11 +11,11 @@ function inApp (){
 }
 
 var qryDetail = function(giftBagId,level,bagType){
-            console.log("aaa");
+            
             //var app_login_sign = '${sessionScope.app_login_sign}';
             var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
             if(app_login_sign != null && app_login_sign != ''){
-                jsPost("/mawap", 'mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
+                jsPost("/mawap", '/app/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
             }else{
                 jsPost("/mpwap", '/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
             }
