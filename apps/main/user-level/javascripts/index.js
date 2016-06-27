@@ -136,7 +136,9 @@ $(function(){
 
     if(inApp()) {
         $("#header").hide();
-
+        $(".slider-block").css({
+            marginTop: "0"
+        });
         NativeBridge.setTitle('会员等级');
     }
 
