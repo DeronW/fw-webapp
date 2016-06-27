@@ -15,7 +15,6 @@ const Header = React.createClass({
             <div className="header">
                 <div className="header-cont">
                     <div className="up-btn" onClick={this.backHandler}>
-                        <img src="images/ico-blue-back.png"/>
                     </div>
 
                     <div className="header-title">
@@ -79,7 +78,7 @@ const InvestTab = React.createClass({
 
         $FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
-            //url: "http://10.105.7.124/xxxxx.json?page=1&rows=10&type=0",
+           // url: "http://10.105.7.124/xxxxx.json?page=1&rows=10&type=0",
             enable_loading: true,
             success: function (data) {
                 _this.setState({
@@ -109,11 +108,11 @@ const InvestTab = React.createClass({
 
                 <div className="cont-info">
                     <div className="fl">
-                        <span className="text">本金: {value.money}</span>
+                        <span className="text">本金: ¥{value.money}</span>
                         <span className="text">投资日期{value.apply_date}</span>
                     </div>
                     <div className="rl">
-                        <span className="text">年化投资额度: {value.earn_money}</span>
+                        <span className="text">年化投资额度: ¥{value.earn_money}</span>
                         <span className="text">计划回款日{value.returned_date}</span>
                     </div>
                 </div>
@@ -127,10 +126,6 @@ const InvestTab = React.createClass({
         var btnComplete = <div className="complete-btn">已全部加载完毕</div>;
 
         var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/></div>;
-
-        console.log(this.state.hasMore);
-        console.log(data.length);
-        console.log(this.state.page);
 
         return (
             <div className="invest-block">
