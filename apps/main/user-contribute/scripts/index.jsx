@@ -2,7 +2,7 @@
 
 const API_PATH = document.getElementById("api-path").value;
 
-function inApp (){                                                                                                                                                            
+function inApp() {
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
 
@@ -97,7 +97,7 @@ const InvestTab = React.createClass({
         var _this = this;
 
         var data = _this.state.listData;
-    
+
 
         var objDiv = (value, index) => (
             <div key={index} className="cont-block">
@@ -125,7 +125,8 @@ const InvestTab = React.createClass({
 
         var btnComplete = <div className="complete-btn">已全部加载完毕</div>;
 
-        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/><span className="text">暂无投资贡献值</span></div>;
+        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/><span
+            className="text">暂无投资贡献值</span></div>;
 
         return (
             <div className="invest-block">
@@ -197,7 +198,8 @@ const InviteTab = React.createClass({
 
         var btnComplete = <div className="complete-btn">已全部加载完毕</div>;
 
-        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/><span className="text">暂无邀友贡献值</span></div>;
+        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/><span
+            className="text">暂无邀友贡献值</span></div>;
 
         return (
             <div className="invite-block">
@@ -279,9 +281,6 @@ $FW.DOMReady(function () {
 });
 
 
-if(!inApp()) {
-    ReactDOM.render(
-        <Header title={"我的贡献值"}/>,
-        document.getElementById("header")
-    );
+if (!inApp()) {
+    ReactDOM.render(<Header title={"我的贡献值"}/>, document.getElementById("header"));
 }

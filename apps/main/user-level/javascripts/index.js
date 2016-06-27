@@ -6,29 +6,37 @@ function redirectToAppUserContribute() {
     }
 }
 
-function inApp (){
+function inApp() {
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
 
-var qryDetail = function(giftBagId,level,bagType){
-            
-            //var app_login_sign = '${sessionScope.app_login_sign}';
-            var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
-            if(app_login_sign != null && app_login_sign != ''){
-                jsPost('http://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
-            }else{
-                jsPost('http://m.9888.cn/mpwap/vipTeQuan/qryVipTeQuanDetail.shtml',{'level':level,'giftBagId':giftBagId,'bagType':bagType});
-            }
-        };
+var qryDetail = function (giftBagId, level, bagType) {
+
+    //var app_login_sign = '${sessionScope.app_login_sign}';
+    var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
+    if (app_login_sign != null && app_login_sign != '') {
+        jsPost('http://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml', {
+            'level': level,
+            'giftBagId': giftBagId,
+            'bagType': bagType
+        });
+    } else {
+        jsPost('http://m.9888.cn/mpwap/vipTeQuan/qryVipTeQuanDetail.shtml', {
+            'level': level,
+            'giftBagId': giftBagId,
+            'bagType': bagType
+        });
+    }
+};
 
 
-var jsPost = function(action, values) {
+var jsPost = function (action, values) {
     var id = Math.random();
-    document.write('<form id="post' + id + '" name="post'+ id +'" action="' + action + '" method="post">');
+    document.write('<form id="post' + id + '" name="post' + id + '" action="' + action + '" method="post">');
     for (var key in values) {
         document.write('<input type="hidden" name="' + key + '" value="' + values[key] + '" />');
     }
-    document.write('</form>');    
+    document.write('</form>');
     document.getElementById('post' + id).submit();
 };
 
@@ -40,19 +48,17 @@ $(function () {
         //url: "http://localhost/xxxxx.json",
         dataType: "json",
         success: function (data) {
-            if(data.code == 40101) {
+            if (data.code == 40101) {
                 if (inApp()) {
                     NativeBridge.login()
                 } else {
                     location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=' + location.pathname + location.search;
-                }  
+                }
             }
-            
+
             $(".level-progress-text span").text(data.data.contributeValue);
 
             $("#vipText").text(data.data.leveHint);
-
-            $(".slider-block").css('display', 'block');
 
             var num = data.data.userLevel - 1;
             var value = data.data.contributePercent;
@@ -61,25 +67,25 @@ $(function () {
 
             var levelGiftsData = data.data.levelGifts;
 
-            for(var i = 0; i < levelGiftsData.length; i++) {
+            for (var i = 0; i < levelGiftsData.length; i++) {
                 var level = levelGiftsData[i].level;
 
-                for(var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
-                    if(levelGiftsData[i].lvGiftIdMap[j].giftBagId !== "") {
+                for (var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
+                    if (levelGiftsData[i].lvGiftIdMap[j].giftBagId !== "") {
                         $(".level-img" + i).append(
                             //"<a href=''onclick='"qryDetail(" a + , level, levelGiftsData[i].lvGiftIdMap[j].bagType)'>"+
-                            "<a onclick='qryDetail(" + levelGiftsData[i].lvGiftIdMap[j].giftBagId + "," + level + "," + levelGiftsData[i].lvGiftIdMap[j].bagType  + ")'>"+
-                                "<img src='images/level-" + (i+1) + "-" + levelGiftsData[i].lvGiftIdMap[j].bagType +".png'/>"+
+                            "<a onclick='qryDetail(" + levelGiftsData[i].lvGiftIdMap[j].giftBagId + "," + level + "," + levelGiftsData[i].lvGiftIdMap[j].bagType + ")'>" +
+                            "<img src='images/level-" + (i + 1) + "-" + levelGiftsData[i].lvGiftIdMap[j].bagType + ".png'/>" +
                             "</a>"
-                            );
+                        );
                     }
                 }
 
                 $(".level-img" + i).append(
-                        "<a href=''>"+
-                            "<img src='images/waiting.png'/>"+
-                        "</a>"
-                        );
+                    "<a href=''>" +
+                    "<img src='images/waiting.png'/>" +
+                    "</a>"
+                );
 
             }
 
@@ -88,7 +94,7 @@ $(function () {
 
             $("#vip" + num).removeClass("change-img-gray");
 
-            $("#vip" + num +"-jindutiao").removeClass("gray-class");
+            $("#vip" + num + "-jindutiao").removeClass("gray-class");
 
             $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
 
@@ -117,24 +123,24 @@ $(function () {
 
             var barNum0 = (num + 1) * 20;
             var redNum0 = value;
-            
+
             console.log(data.data.contributePercent);
             console.log(data.data.userLevel);
 
             [0, 1, 2, 3, 4].forEach(function (i) {
                 $(".level-progress-box" + i + " .level-progress-red").css("width", parseInt(data.data.contributePercent) + "%");
                 //$(".level-progress-box" + i + " .level-progress-bar").css("width", barNum0 + "%");
-                $(".level-progress-box" + i + " .level-progress-bar").css("width", ((data.data.userLevel-1) * 20)+ "%");
+                $(".level-progress-box" + i + " .level-progress-bar").css("width", ((data.data.userLevel - 1) * 20) + "%");
             });
 
-                   
+            $(".slider-block").css('visibility', 'visible');
         }
     });
 });
 
-$(function(){
+$(function () {
 
-    if(inApp()) {
+    if (inApp()) {
         $("#header").hide();
 
         $(".level-notice").css({
