@@ -78,7 +78,7 @@ const InvestTab = React.createClass({
 
         $FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
-           // url: "http://10.105.7.124/xxxxx.json?page=1&rows=10&type=0",
+            //url: "http://10.105.7.124/xxxxx.json?page=1&rows=10&type=0",
             enable_loading: true,
             success: function (data) {
                 _this.setState({
@@ -125,7 +125,7 @@ const InvestTab = React.createClass({
 
         var btnComplete = <div className="complete-btn">已全部加载完毕</div>;
 
-        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/></div>;
+        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/><span className="text">暂无投资贡献值</span></div>;
 
         return (
             <div className="invest-block">
@@ -197,7 +197,7 @@ const InviteTab = React.createClass({
 
         var btnComplete = <div className="complete-btn">已全部加载完毕</div>;
 
-        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/></div>;
+        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/><span className="text">暂无邀友贡献值</span></div>;
 
         return (
             <div className="invite-block">
