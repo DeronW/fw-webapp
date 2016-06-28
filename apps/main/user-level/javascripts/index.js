@@ -46,6 +46,7 @@ $(function () {
         type: "GET",
         url: "/mpwap/api/v1/user/level-info.shtml",
         //url: "http://10.105.7.124/xxxxx.json",
+        //url: "http://localhost/user-level.json",
         dataType: "json",
         success: function (data) {
             if (data.code == 40101) {
@@ -122,16 +123,15 @@ $(function () {
 
             txt.hide().eq(num).show().addClass("show");
 
-            var barNum0 = (num + 1) * 20;
-            var redNum0 = value;
 
-            console.log(data.data.contributePercent);
-            console.log(data.data.userLevel);
+            var userLevel = parseInt(data.data.userLevel);
+            if (data.data.contributeValue == 0) userLevel = 0;
+
 
             [0, 1, 2, 3, 4].forEach(function (i) {
                 $(".level-progress-box" + i + " .level-progress-red").css("width", parseInt(data.data.contributePercent) + "%");
                 //$(".level-progress-box" + i + " .level-progress-bar").css("width", barNum0 + "%");
-                $(".level-progress-box" + i + " .level-progress-bar").css("width", ((data.data.userLevel - 1) * 20) + "%");
+                $(".level-progress-box" + i + " .level-progress-bar").css("width", (userLevel * 20) + "%");
             });
 
             $(".slider-block").css("visibility", "visible");
