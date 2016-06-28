@@ -45,7 +45,7 @@ $(function () {
     $.ajax({
         type: "GET",
         url: "/mpwap/api/v1/user/level-info.shtml",
-        //url: "http://localhost/xxxxx.json",
+        //url: "http://10.105.7.124/xxxxx.json",
         dataType: "json",
         success: function (data) {
             if (data.code == 40101) {
@@ -109,7 +109,8 @@ $(function () {
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 arrows: false,
-                initialSlide: num
+                initialSlide: num,
+                centerPadding: "30px"
             }).on("afterChange", function () {
                 var t = $(".slider .slick-active .img-box").attr("data-tab");
                 txt.removeClass("show").hide();
