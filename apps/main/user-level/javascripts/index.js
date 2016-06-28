@@ -46,6 +46,7 @@ $(function () {
         type: "GET",
         url: "/mpwap/api/v1/user/level-info.shtml",
         //url: "http://10.105.7.124/xxxxx.json",
+        //url: "http://localhost/user-level.json",
         dataType: "json",
         success: function (data) {
             if (data.code == 40101) {

@@ -2,6 +2,8 @@
 
 const API_PATH = document.getElementById("api-path").value;
 
+const PAGE_COUNT = 20;
+
 function inApp() {
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
@@ -68,7 +70,6 @@ const InvestTab = React.createClass({
     getInitialState: function () {
         return {
             page: 1,
-            rows: 10,
             hasMore: false,
             listData: []
         };
@@ -77,14 +78,14 @@ const InvestTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=0",
+            url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=0",
             //url: "http://10.105.7.124/xxxxx.json?page=1&rows=10&type=0",
             enable_loading: true,
             success: function (data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
                     page: ++_this.state.page,
-                    hasMore: data.data.length >= 10
+                    hasMore: data.data.length >= PAGE_COUNT
                 });
 
             }
@@ -146,7 +147,6 @@ const InviteTab = React.createClass({
     getInitialState: function () {
         return {
             page: 1,
-            rows: 10,
             hasMore: true,
             listData: []
         };
@@ -155,13 +155,13 @@ const InviteTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + _this.state.rows + "&type=1",
+            url: API_PATH + "/mpwap/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=1",
             enable_loading: true,
             success: function (data) {
                 _this.setState({
                     listData: _this.state.listData.concat(data.data),
                     page: ++_this.state.page,
-                    hasMore: data.data.length >= 10
+                    hasMore: data.data.length >= PAGE_COUNT
                 });
             }
         });
