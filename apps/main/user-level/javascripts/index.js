@@ -1,18 +1,17 @@
+function inApp() {
+    return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+}
+
 function redirectToAppUserContribute() {
-    if (navigator.userAgent.indexOf('FinancialWorkshop') > -1) {
+    if (inApp()) {
         NativeBridge.toNative('app_contribute_detail');
     } else {
         location.href = '/static/wap/user-contribute/index.html'
     }
 }
 
-function inApp() {
-    return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-}
-
 var qryDetail = function (giftBagId, level, bagType) {
 
-    //var app_login_sign = '${sessionScope.app_login_sign}';
     var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
     if (app_login_sign != null && app_login_sign != '') {
         jsPost('http://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml', {
@@ -28,7 +27,6 @@ var qryDetail = function (giftBagId, level, bagType) {
         });
     }
 };
-
 
 var jsPost = function (action, values) {
     var id = Math.random();
@@ -75,19 +73,14 @@ $(function () {
                     if (levelGiftsData[i].lvGiftIdMap[j].giftBagId !== "") {
                         $(".level-img" + i).append(
                             //"<a href=''onclick='"qryDetail(" a + , level, levelGiftsData[i].lvGiftIdMap[j].bagType)'>"+
-                            "<a onclick='qryDetail(" + levelGiftsData[i].lvGiftIdMap[j].giftBagId + "," + level + "," + levelGiftsData[i].lvGiftIdMap[j].bagType + ")'>" +
+                            "<a onclick='qryDetail(" + levelGiftsData[i].lvGiftIdMap[j].giftBagId + "," + level + "," +
+                            levelGiftsData[i].lvGiftIdMap[j].bagType + ")'>" +
                             "<img src='images/level-" + (i + 1) + "-" + levelGiftsData[i].lvGiftIdMap[j].bagType + ".png'/>" +
                             "</a>"
                         );
                     }
                 }
-
-                $(".level-img" + i).append(
-                    "<a  href='javascript:void(0)'>" +
-                    "<img src='images/waiting.png'/>" +
-                    "</a>"
-                );
-
+                $(".level-img" + i).append("<a href='javascript:void(0)'><img src='images/waiting.png'/></a>");
             }
 
             $("#vip0, #vip1, #vip2, #vip3, #vip4").attr("class", "change-img-gray");
@@ -123,15 +116,12 @@ $(function () {
 
             txt.hide().eq(num).show().addClass("show");
 
-
             var userLevel = parseInt(data.data.userLevel);
             if (data.data.contributeValue == 0) userLevel = 0;
 
-
             [0, 1, 2, 3, 4].forEach(function (i) {
                 $(".level-progress-box" + i + " .level-progress-red").css("width", parseInt(data.data.contributePercent) + "%");
-                //$(".level-progress-box" + i + " .level-progress-bar").css("width", barNum0 + "%");
-                $(".level-progress-box" + i + " .level-progress-bar").css("width", (userLevel * 20) + "%");
+                $(".level-progress-box" + i + " .level-progress-bar").css("width", ((userLevel - 1) * 20) + "%");
             });
 
             $(".slider-block").css("visibility", "visible");
@@ -140,7 +130,6 @@ $(function () {
 });
 
 $(function () {
-
     if (inApp()) {
         $("#header").hide();
 
@@ -152,5 +141,4 @@ $(function () {
         });
         NativeBridge.setTitle('会员等级');
     }
-
 });
