@@ -47,6 +47,11 @@ $(function () {
         //url: "http://localhost/user-level.json",
         dataType: "json",
         success: function (data) {
+
+            if (data.code == 50001) {
+                alert(data.message)
+            }
+
             if (data.code == 40101) {
                 if (inApp()) {
                     NativeBridge.login()
