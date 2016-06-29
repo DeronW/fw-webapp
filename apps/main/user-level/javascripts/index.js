@@ -117,7 +117,7 @@ $(function () {
             txt.hide().eq(num).show().addClass("show");
 
             var userLevel = parseInt(data.data.userLevel);
-            if (data.data.contributeValue == 0) userLevel = 0;
+            if (data.data.contributeValue == 0 && userLevel == 1) userLevel = 0;
 
             [0, 1, 2, 3, 4].forEach(function (i) {
                 $(".level-progress-box" + i + " .level-progress-red").css("width", parseInt(data.data.contributePercent) + "%");
