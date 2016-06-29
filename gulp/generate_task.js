@@ -194,23 +194,6 @@ function generate_task(site_name, project_name, configs) {
             .pipe(gulp.dest(CDN_PATH));
     }
 
-    //gulp.task(PROJECT_NAME + ':server', [PROJECT_NAME], function () {
-    //    browserSync.init({
-    //        server: {
-    //            baseDir: BUILD_PATH,
-    //            middleware: function (req, res, next) {
-    //                console.log('got request:' + req.method + ': ' + req.url);
-    //                res.setHeader('Access-Control-Allow-Origin', '*');
-    //                res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    //                res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    //                next();
-    //            }
-    //        }
-    //    });
-    //    gulp.watch('apps/' + PROJECT_NAME + '/**', [PROJECT_NAME]);
-    //    //gulp.watch('apps/' + PROJECT_NAME + '/**/*.html').on('change', browserSync.reload);
-    //});
-
 }
 
 module.exports = generate_task;
