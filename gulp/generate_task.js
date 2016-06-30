@@ -7,7 +7,6 @@ plugins.less = require('gulp-less');
 plugins.changed = require('gulp-changed');
 plugins.js_uglify = require('gulp-uglify');
 plugins.htmlmin = require('gulp-htmlmin');
-plugins.htmlbeautify = require('gulp-html-beautify');
 plugins.cssnano = require('gulp-cssnano');
 plugins.rev_all = require('gulp-rev-all');
 plugins.concat = require('gulp-concat');
@@ -64,13 +63,12 @@ function generate_task(site_name, project_name, configs) {
         gulp.task(TASK_NAME + ':revision', gulp.series(TASK_NAME, copy2cdn, revision));
 
     function compile_html() {
-        return gulp.src([APP_PATH + '**/*.html'])
-            .pipe(plugins.changed(BUILD_PATH))
-            .pipe(CONFIG.html_engine == 'swig' ? plugins.swig() : plugins.util.noop())
-            .pipe(CONFIG.html_minify ?
-                plugins.htmlmin({collapseWhitespace: true}) :
-                plugins.htmlbeautify({indentSize: 2}))
+        return gulp.src([APP_PATH + '*.html'])
+            .pipe(CONFIG.html_engine == 'swig' ?
+                plugins.swig({defaults: {cache: false}}) :
+                plugins.util.noop())
             .pipe(plugins.replace('{API_PATH}', CONFIG.api_path))
+            .pipe(plugins.htmlmin({collapseWhitespace: true}))
             .pipe(gulp.dest(BUILD_PATH));
     }
 
