@@ -56,7 +56,7 @@ $(function () {
                 if (inApp()) {
                     NativeBridge.login()
                 } else {
-                    location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=' + location.pathname + location.search;
+                    location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=2&redirect_url=' + location.pathname + location.search;
                 }
             }
 
