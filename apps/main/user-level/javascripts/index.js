@@ -91,33 +91,40 @@ $(function () {
             $("#vip0, #vip1, #vip2, #vip3, #vip4").attr("class", "change-img-gray");
             $("#vip0-jindutiao, #vip1-jindutiao, #vip2-jindutiao, #vip3-jindutiao, #vip4-jindutiao").addClass("gray-class");
 
-            $("#vip" + num).removeClass("change-img-gray");
-
             $("#vip" + num + "-jindutiao").removeClass("gray-class");
 
             $(".level-img").not(".level-img" + num).find("img").addClass("change-img-gray");
 
-            $("#vip" + num).click(redirectToAppUserContribute);
+            $("#vip" + num).removeClass("change-img-gray").click(redirectToAppUserContribute);
 
             var txt = $("#about_swiper_txt .slide-txt");
 
-            $(".center").slick({
-                dots: true,
-                infinite: true,
-                centerMode: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: false,
-                initialSlide: num,
-                centerPadding: "30px"
-            }).on("afterChange", function () {
-                var t = $(".slider .slick-active .img-box").attr("data-tab");
-                txt.removeClass("show").hide();
-                txt.eq(t).show();
-                setTimeout(function () {
-                    txt.eq(t).addClass("show")
-                }, 10)
-            });
+            var ua = navigator.userAgent;
+            // hack 针对华为B199 机型的兼容, 不使用滑动功能
+            if (ua.match(/FinancialWorkshop/) && ua.match(/HuaweiB199/)) {
+                [0, 1, 2, 3, 4].forEach(function (i) {
+                    if (i != num)
+                        $(".center.slider > div:eq(" + i + ")").hide()
+                })
+            } else {
+                $(".center").slick({
+                    dots: true,
+                    infinite: true,
+                    centerMode: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false,
+                    initialSlide: num,
+                    centerPadding: "30px"
+                }).on("afterChange", function () {
+                    var t = $(".slider .slick-active .img-box").attr("data-tab");
+                    txt.removeClass("show").hide();
+                    txt.eq(t).show();
+                    setTimeout(function () {
+                        txt.eq(t).addClass("show")
+                    }, 10)
+                });
+            }
 
             txt.hide().eq(num).show().addClass("show");
 
