@@ -19,7 +19,8 @@ const APP_NAMES = [
     'not-support',
     'deliver-address',
     'new-deliver-address',
-    'error-page'
+    'error-page',
+    'recharge'
 ];
 
 APP_NAMES.forEach(function (i) {
