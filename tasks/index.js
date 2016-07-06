@@ -94,8 +94,6 @@ module.exports = generate_task = function (site_name, project_name, configs) {
 
     function compile_revision() {
         return revision([`${build_path}/**`], `cdn/${project_name}/`, {
-            dontRenameFile: [/^\/favicon.ico$/g, 'index.html'],
-            //prefix: CONFIG.cdn_prefix,
             transformPath: function (rev, source, path) {
                 // 在css中, 采用的是相对的图片路径, 但是在加入版本和前缀域名后不能再使用相对路径
                 if (rev.startsWith('../')) rev = rev.substr(3);
