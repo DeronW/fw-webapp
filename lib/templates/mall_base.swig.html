@@ -8,13 +8,13 @@
     <meta name="screen-orientation" content="portrait">
     <meta name="x5-orientation" content="portrait">
     <title>{% block title %}Mall{% endblock %}</title>
-    <link type="text/css" rel="stylesheet" href="stylesheets/all.css"/>
+    <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css"/>
     {% block css %}{% endblock %}
 </head>
 <body>
 
 <!--接口地址前缀,结尾需要添加斜线-->
-<input type="hidden" id="api-path" value="{API_PATH}"/>
+<input type="hidden" id="api-path" value="{{ API_PATH }}"/>
 
 {% block content %}{% endblock %}
 

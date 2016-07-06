@@ -20,7 +20,8 @@ const APP_NAMES = [
     'deliver-address',
     'new-deliver-address',
     'error-page',
-    'product-vip-list'
+    'product-vip-list',
+    'recharge'
 ];
 
 APP_NAMES.forEach(function (i) {

@@ -7,7 +7,6 @@ plugins.less = require('gulp-less');
 plugins.changed = require('gulp-changed');
 plugins.js_uglify = require('gulp-uglify');
 plugins.htmlmin = require('gulp-htmlmin');
-plugins.htmlbeautify = require('gulp-html-beautify');
 plugins.cssnano = require('gulp-cssnano');
 plugins.rev_all = require('gulp-rev-all');
 plugins.concat = require('gulp-concat');
@@ -64,13 +63,12 @@ function generate_task(site_name, project_name, configs) {
         gulp.task(TASK_NAME + ':revision', gulp.series(TASK_NAME, copy2cdn, revision));
 
     function compile_html() {
-        return gulp.src([APP_PATH + '**/*.html'])
-            .pipe(plugins.changed(BUILD_PATH))
-            .pipe(CONFIG.html_engine == 'swig' ? plugins.swig() : plugins.util.noop())
-            .pipe(CONFIG.html_minify ?
-                plugins.htmlmin({collapseWhitespace: true}) :
-                plugins.htmlbeautify({indentSize: 2}))
+        return gulp.src([APP_PATH + '*.html'])
+            .pipe(CONFIG.html_engine == 'swig' ?
+                plugins.swig({defaults: {cache: false}}) :
+                plugins.util.noop())
             .pipe(plugins.replace('{API_PATH}', CONFIG.api_path))
+            .pipe(plugins.htmlmin({collapseWhitespace: true}))
             .pipe(gulp.dest(BUILD_PATH));
     }
 
@@ -193,23 +191,6 @@ function generate_task(site_name, project_name, configs) {
             .pipe(RevAll.versionFile())
             .pipe(gulp.dest(CDN_PATH));
     }
-
-    //gulp.task(PROJECT_NAME + ':server', [PROJECT_NAME], function () {
-    //    browserSync.init({
-    //        server: {
-    //            baseDir: BUILD_PATH,
-    //            middleware: function (req, res, next) {
-    //                console.log('got request:' + req.method + ': ' + req.url);
-    //                res.setHeader('Access-Control-Allow-Origin', '*');
-    //                res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    //                res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    //                next();
-    //            }
-    //        }
-    //    });
-    //    gulp.watch('apps/' + PROJECT_NAME + '/**', [PROJECT_NAME]);
-    //    //gulp.watch('apps/' + PROJECT_NAME + '/**/*.html').on('change', browserSync.reload);
-    //});
 
 }
 
