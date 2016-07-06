@@ -105,17 +105,17 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function monitor() {
-        gulp.watch(`apps/${project_name}/index.html`,
+        gulp.watch(`apps/${site_name}/${project_name}/index.html`,
             gulp.parallel(compile_html));
-        gulp.watch(`apps/${project_name}/images/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/images/**`,
             gulp.parallel(compile_images));
-        gulp.watch(`apps/${project_name}/stylesheets/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/stylesheets/**`,
             gulp.parallel(compile_stylesheets));
-        gulp.watch(`apps/${project_name}/less/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/less/**`,
             gulp.parallel(compile_less));
-        gulp.watch(`apps/${project_name}/javascripts/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/javascripts/**`,
             gulp.parallel(compile_javascripts));
-        gulp.watch(`apps/${project_name}/jsx/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/scripts/**`,
             gulp.parallel(compile_react));
     }
 
