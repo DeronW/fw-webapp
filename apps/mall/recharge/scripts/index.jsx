@@ -8,6 +8,7 @@ const Recharge = React.createClass({
             <div>
                 <Chargetab/>
                 <Telchargecon/>
+                <Confirmpop/>
             </div>
         );
     }
@@ -54,6 +55,29 @@ const Telpayment = React.createClass({
     }
 })
 
+const Confirmpop = React.createClass({
+    getInitialState: function () {
+        return {show: false}
+    },
+    hideHandler : function(){
+        ReactDOM.unmountComponentAtNode(document.getElementById("pop-wrap"));
+    },
+    render : function(){
+        return (
+            <div className="pop-wrap" id="pop-wrap">
+                <div className="confirm-pop">
+                    <div className="pop-header">输入验证码<span className="pop-close" onclick={this.hideHandler}></span></div>
+                    <div className="pop-content">
+                        <div className="confirm-sms-code"><input type="text" placeholder="请输入验证码" className="sms-input"/><span className="sms-btn">获取验证码</span></div>
+                        <a href="javascript:void(0)" className="pop-confirm-btn">确认</a>
+                        <div className="pop-tip">充值后1~10分钟到账</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+});
+
 const Telchargecon = React.createClass({
     getInitialState : function(){
         return {
@@ -63,19 +87,20 @@ const Telchargecon = React.createClass({
         }
     },
     clickHandler: function(){
-
+        this.setState({selected : !selected});
     },
     render : function(){
         let card = (data, index) => {
+            var selected = this.state.selected ? "selected" : null;
             if(index==0){
                 return <div className="value-box" onclick={this.clickHandler}>
-                    <span>{data+"元"}</span>
-                    <span className="limited-sale"></span>
+                    <span className="value-num">{data+"元"}</span>
+                    <span className="limited-sale">限时抢购</span>
                 </div>
             }else{
-            return <div className="value-box" onclick={this.clickHandler}>
-                <span>{data+"元"}</span>
-            </div>
+                return <div className="value-box" onclick={this.clickHandler}>
+                    <span className="value-num">{data+"元"}</span>
+                </div>
             }
         };
         return (
@@ -86,7 +111,7 @@ const Telchargecon = React.createClass({
                 </div>
                 <Telpayment/>
                 <div className="telconfirm-btn">
-                    <a>立即充值</a>
+                    <a href="javascript:void(0)">立即充值</a>
                 </div>
             </div>
         );
@@ -98,6 +123,14 @@ $FW.DOMReady(function () {
     if (!$FW.Browser.inApp()) {
         ReactDOM.render(<Header title={"充值专区"}/>, document.getElementById('header'));
     }
+    $FW.BatchGet([
+        'http://localhost/banners.json',
+        'http://localhost/activities.json'
+    ], function (data) {
+        var banners = data[0].banners, activities = data[1].activities;
+        if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') $FW.Component.Alert('error: empty data received');
+        ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
+    }, true);
     ReactDOM.render(<Recharge/>,document.getElementById('cnt'));
 });
 
