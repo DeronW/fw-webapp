@@ -47,7 +47,7 @@ const Telpayment = React.createClass({
             <div className="payment-wrap">
                 <div className="payment-way">支付方式<span>工分支付</span></div>
                 <div className="avail-gongfeng-wrap">
-                    <div className="avail-gonfeng">可用工分：<span></span></div>
+                    <div className="avail-gonfeng">可用工分：<span>{this.props.user_data.is_login ? "--" : this.props.user_data.score}</span></div>
                     <div className="total-gonfeng">总计：<span>100工分</span></div>
                 </div>
             </div>
@@ -124,24 +124,28 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Header title={"充值专区"}/>, document.getElementById('header'));
     }
     $FW.Ajax({
-        url: 'http://10.10.100.112/mockjs/4/api/v1/user-state.json',
+        url: 'http://10.10.100.112/mockjs/4/api/v1/phone/fee/recharge.json',
         method: 'get',
+        enable_loading: true,
         success : function(data){
             console.log(data);
-            var code0 = data.code, islogin = data.is_login, score = data.score;
-            ReactDOM.render(<Telpayment user_data={data} />,
+            //var code1 = data.code, bizNo = data.charge.bizNo, price = data.charge.price, subtitle = data.charge.sub_title, title = data.charge.title;
+            ReactDOM.render(<Telchargecon commodity_data={data}/>,
                 document.getElementById('cnt'));
         }
     });
     $FW.Ajax({
-        url: 'http://10.10.100.112/mockjs/4/api/v1/phone/fee/recharge.json',
+        url: 'http://10.10.100.112/mockjs/4/api/v1/user-state.json',
         method: 'get',
+        enable_loading: true,
         success : function(data){
             console.log(data);
-            var code1 = data.code, bizNo = data.charge.bizNo, price = data.charge.price, subtitle = data.charge.sub_title, title = data.charge.title;
-            ReactDOM.render(<Recharge commodity_data={data}/>,
+            //var code0 = data.code, islogin = data.is_login, score = data.score;
+            console.log(data.is_login);
+            ReactDOM.render(<Telpayment user_data={data} />,
                 document.getElementById('cnt'));
         }
     });
+    ReactDOM.render(<Recharge/>, document.getElementById('cnt'));
 });
 
