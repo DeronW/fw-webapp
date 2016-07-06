@@ -44,6 +44,8 @@ const MALL_APP_NAMES = [
     'not-support',
     'deliver-address',
     'new-deliver-address',
+    'product-vip-list',
+    'recharge',
     'error-page'
 ];
 
