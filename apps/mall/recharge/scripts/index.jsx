@@ -47,7 +47,7 @@ const Telpayment = React.createClass({
             <div className="payment-wrap">
                 <div className="payment-way">支付方式<span>工分支付</span></div>
                 <div className="avail-gongfeng-wrap">
-                    <div className="avail-gonfeng">可用工分：<span>100</span></div>
+                    <div className="avail-gonfeng">可用工分：<span></span></div>
                     <div className="total-gonfeng">总计：<span>100工分</span></div>
                 </div>
             </div>
@@ -123,14 +123,25 @@ $FW.DOMReady(function () {
     if (!$FW.Browser.inApp()) {
         ReactDOM.render(<Header title={"充值专区"}/>, document.getElementById('header'));
     }
-    $FW.BatchGet([
-        'http://localhost/banners.json',
-        'http://localhost/activities.json'
-    ], function (data) {
-        var banners = data[0].banners, activities = data[1].activities;
-        if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') $FW.Component.Alert('error: empty data received');
-        ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
-    }, true);
-    ReactDOM.render(<Recharge/>,document.getElementById('cnt'));
+    $FW.Ajax({
+        url: 'http://10.10.100.112/mockjs/4/api/v1/user-state.json',
+        method: 'get',
+        success : function(data){
+            console.log(data);
+            var code0 = data.code, islogin = data.is_login, score = data.score;
+            ReactDOM.render(<Telpayment user_data={data} />,
+                document.getElementById('cnt'));
+        }
+    });
+    $FW.Ajax({
+        url: 'http://10.10.100.112/mockjs/4/api/v1/phone/fee/recharge.json',
+        method: 'get',
+        success : function(data){
+            console.log(data);
+            var code1 = data.code, bizNo = data.charge.bizNo, price = data.charge.price, subtitle = data.charge.sub_title, title = data.charge.title;
+            ReactDOM.render(<Recharge commodity_data={data}/>,
+                document.getElementById('cnt'));
+        }
+    });
 });
 

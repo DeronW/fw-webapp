@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 
 const html = require('./html.js');
@@ -10,7 +12,7 @@ const copy = require('./copy.js');
 const revision = require('./revision.js');
 
 // project_name 每次使用新项目时, 只需要更换项目名称
-module.exports = generate_task = function (site_name, project_name, configs) {
+module.exports = function (site_name, project_name, configs) {
 
     var app_path = `apps/${site_name}/${project_name}/`,
         build_path = `build/${site_name}/${project_name}/`,
