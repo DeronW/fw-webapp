@@ -123,8 +123,8 @@ $FW.DOMReady(function () {
 
     let bizNo = $FW.Format.urlQuery().bizNo;
     $FW.Ajax({
-        //url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=' + bizNo,
-        url:'http://localhost/activities.json',
+        url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=' + bizNo,
+        //url:'http://localhost/activities.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<MallActivity activity={data} title={data.title}/>, document.getElementById('cnt'));
