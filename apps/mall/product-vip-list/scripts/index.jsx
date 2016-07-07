@@ -80,6 +80,10 @@ const Cnt = React.createClass({
 			marginLeft: _this.state.x + 'px'
 		};
 
+		let cntStyle = {
+			width: window.innerWidth * 10 + "px"
+		};
+
 
 		return (
 			<div className="content">
@@ -105,7 +109,7 @@ const Cnt = React.createClass({
 
 				<div className="vip-commodity-area"> 
 					<div className="vip-commodity-area-list">
-						<div className="ui-commodity-list">
+						<div className="ui-commodity-list" style={cntStyle}>
 							<div className="li">
 								<div className="l">
 									<div className="img">

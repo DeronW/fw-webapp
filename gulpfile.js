@@ -44,7 +44,8 @@ const MALL_APP_NAMES = [
     'not-support',
     'deliver-address',
     'new-deliver-address',
-    'error-page'
+    'error-page',
+    'product-vip-list'
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
