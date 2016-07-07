@@ -18,6 +18,7 @@ module.exports = function (site_name, project_name, configs) {
         build_path = `build/${site_name}/${project_name}/`,
         public_path = 'public/',
         lib_path = 'lib/',
+        cdn_path = `cdn/${site_name}/${project_name}/`,
         CONFIG = Object.assign({
             debug: true,
             cmd_prefix: '', // 通用指令前缀，比如 pack:
@@ -91,11 +92,11 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function copy2cdn() {
-        return copy([`${build_path}/**`], `cdn/${project_name}/`)
+        return copy([`${build_path}/**`], cdn_path)
     }
 
     function compile_revision() {
-        return revision([`${build_path}/**`], `cdn/${project_name}/`, {
+        return revision([`${build_path}/**`], cdn_path, {
             transformPath: function (rev, source, path) {
                 // 在css中, 采用的是相对的图片路径, 但是在加入版本和前缀域名后不能再使用相对路径
                 if (rev.startsWith('../')) rev = rev.substr(3);
