@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 
 const html = require('./html.js');
@@ -10,7 +12,7 @@ const copy = require('./copy.js');
 const revision = require('./revision.js');
 
 // project_name 每次使用新项目时, 只需要更换项目名称
-module.exports = generate_task = function (site_name, project_name, configs) {
+module.exports = function (site_name, project_name, configs) {
 
     var app_path = `apps/${site_name}/${project_name}/`,
         build_path = `build/${site_name}/${project_name}/`,
@@ -103,17 +105,17 @@ module.exports = generate_task = function (site_name, project_name, configs) {
     }
 
     function monitor() {
-        gulp.watch(`apps/${project_name}/index.html`,
+        gulp.watch(`apps/${site_name}/${project_name}/index.html`,
             gulp.parallel(compile_html));
-        gulp.watch(`apps/${project_name}/images/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/images/**`,
             gulp.parallel(compile_images));
-        gulp.watch(`apps/${project_name}/stylesheets/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/stylesheets/**`,
             gulp.parallel(compile_stylesheets));
-        gulp.watch(`apps/${project_name}/less/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/less/**`,
             gulp.parallel(compile_less));
-        gulp.watch(`apps/${project_name}/javascripts/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/javascripts/**`,
             gulp.parallel(compile_javascripts));
-        gulp.watch(`apps/${project_name}/jsx/**`,
+        gulp.watch(`apps/${site_name}/${project_name}/scripts/**`,
             gulp.parallel(compile_react));
     }
 
