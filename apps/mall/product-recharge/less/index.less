@@ -90,6 +90,25 @@ html,body{
      margin-bottom:19px;
      position:relative;
 }
+
+.value-box.selected{
+     border:1px solid #fd4d4d;
+}
+
+.value-box.selected .value-num{
+     border:1px solid #fd4d4d;
+}
+
+.default-selected{
+     display:block;
+     background:url(../images/selected-icon.png) no-repeat;
+     width:61px;
+     height:56px;
+     position:absolute;
+     right:0;
+     bottom:0;
+}
+
 .payment-wrap{
      height:177px;
      border-top:1px solid #d6d7d9;
@@ -154,7 +173,7 @@ html,body{
    height:40px;
    line-height:40px;
    position:absolute;
-   bottom:0px;
+   top:0px;
    right:0px;
    font-size:23px;
    color:#fff;
@@ -167,7 +186,7 @@ html,body{
      position:fixed;
      top:0;
      left:0;
-     display:none;
+     z-index:100000;
 }
 .confirm-pop{
      width:595px;

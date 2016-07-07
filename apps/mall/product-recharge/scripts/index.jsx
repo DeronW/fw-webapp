@@ -8,7 +8,8 @@ const Recharge = React.createClass({
             tab: 'fee',
             product_fee: [],
             user_score: this.props.is_login ? this.props.user_score : '--',
-            pay_score: 0
+            pay_score: 100,
+            selected: ""
         }
     },
     componentDidMount: function () {
@@ -16,7 +17,7 @@ const Recharge = React.createClass({
             $FW.Ajax({
                 url: 'http://localhost/recharge.json',
                 success: function (data) {
-                    this.setState({product_fee: data.fee})
+                    this.setState({product_fee: data.fee, selected: data.default})
                 }.bind(this)
             });
         }
@@ -48,14 +49,19 @@ const Recharge = React.createClass({
             function check() {
                 _this.setState({
                     bizNo: data.bizNo,
-                    pay_score: data.score
+                    pay_score: data.score,
+                    selected: ""
                 })
             }
 
-            return <div className="value-box" key={index} onClick={check}>
+            return <div className={data.default ? "value-box selected" : "value-box"} key={index} onClick={check}>
                 <span className="value-num">{data.title}</span>
                 {data.sub_title ?
                     <span className="limited-sale">{data.sub_title}</span> :
+                    null
+                }
+                {data.default ?
+                    <span className="default-selected"></span> :
                     null
                 }
             </div>
