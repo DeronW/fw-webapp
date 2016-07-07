@@ -39,13 +39,13 @@ const MALL_APP_NAMES = [
     'product-detail',
     'product-list',
     'product-vip',
+    'product-recharge',
     'waiting',
     'fail',
     'not-support',
     'deliver-address',
     'new-deliver-address',
     'product-vip-list',
-    'recharge',
     'error-page'
 ];
 
