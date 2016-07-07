@@ -105,18 +105,16 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function monitor() {
-        gulp.watch(`apps/${site_name}/${project_name}/index.html`,
-            gulp.parallel(compile_html));
-        gulp.watch(`apps/${site_name}/${project_name}/images/**`,
-            gulp.parallel(compile_images));
-        gulp.watch(`apps/${site_name}/${project_name}/stylesheets/**`,
-            gulp.parallel(compile_stylesheets));
-        gulp.watch(`apps/${site_name}/${project_name}/less/**`,
-            gulp.parallel(compile_less));
-        gulp.watch(`apps/${site_name}/${project_name}/javascripts/**`,
-            gulp.parallel(compile_javascripts));
-        gulp.watch(`apps/${site_name}/${project_name}/scripts/**`,
-            gulp.parallel(compile_react));
+        let project_path = `apps/${site_name}/${project_name}/`;
+        gulp.watch(`${project_path}index.html`, gulp.parallel(compile_html));
+        gulp.watch(`${project_path}images/**`, gulp.parallel(compile_images));
+        gulp.watch(`${project_path}stylesheets/**`, gulp.parallel(compile_stylesheets));
+        gulp.watch(`${project_path}less/**`, gulp.parallel(compile_less));
+        gulp.watch(`${project_path}javascripts/**`, gulp.parallel(compile_javascripts));
+        gulp.watch(`${project_path}scripts/**`, gulp.parallel(compile_react));
+
+        gulp.watch(`lib/templates/**/*.html`, gulp.parallel(compile_html));
+        gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));
     }
 
     gulp.task(task_name,
