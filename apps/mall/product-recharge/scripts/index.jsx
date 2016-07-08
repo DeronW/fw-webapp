@@ -167,10 +167,25 @@ const ConfirmPop = React.createClass({
                 bizNo: form_data.bizNo
             },
             success:function(data){
-                
+                validateFormData();
             }
         })
     },
+
+    validateFormData : function(){
+        $FW.Ajax({
+            url: "http://localhost/validatePaySmsCode.json",
+            method: 'get',
+            success : function(data){
+                if(data.code = 10000){
+                    $FW.Component.Alert("充值成功！");
+                }else{
+                    $FW.Component.Alert("充值失败！");
+                }
+            }
+        });
+    },
+
     render: function () {
         if (!this.state.show) return null;
 
