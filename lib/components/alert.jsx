@@ -67,7 +67,7 @@ const GlobalAlert = React.createClass({
             fontWeight: 'bold'
         };
         let style_text = {
-            textAlign: "left",
+            textAlign: "center",
             margin: "30px auto",
             lineHeight:"40px",
             color:"#555555",

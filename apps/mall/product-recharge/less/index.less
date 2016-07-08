@@ -186,7 +186,7 @@ html,body{
      position:fixed;
      top:0;
      left:0;
-     z-index:100000;
+     z-index:10
 }
 .confirm-pop{
      width:595px;
@@ -226,6 +226,7 @@ html,body{
      background:#fff;
      border-bottom-left-radius: 10px;
      border-bottom-right-radius: 10px;
+     position:relative;
 }
 .sms-input{
      width:289px;
@@ -268,4 +269,63 @@ html,body{
      font-size:24px;
      color:#999;
      margin-top:10px;
+}
+.wrong-tip{
+     font-size:24px;
+     color:#fd4d4c;
+     position:absolute;
+     top:139px;
+     left:52px;
+}
+.confirm-success-pop{
+     width:595px;
+     height:220px;
+     padding-top:73px;
+     background:#fff;
+     border-radius:5px;
+     position:fixed;
+     top:50%;
+     left:50%;
+     -webkit-transform:translate(-50%,-50%);
+     transform:translate(-50%,-50%);
+}
+.success-tip{
+     font-size:36px;
+     color:#333;
+     line-height:42px;
+     text-align:center;
+}
+.success-mark{
+     display:inline-block;
+     background:url(../images/success-mark.jpg) no-repeat;
+     width:42px;
+     height:42px;
+     vertical-align:bottom;
+     margin-right:10px;
+}
+.success-confirm-btn{
+     width:534px;
+     height:67px;
+     line-height:67px;
+     text-align:center;
+     font-size:28px;
+     color:#fff;
+     background:#fd4d4c;
+     border-radius:3px;
+     margin:80px auto 0;
+}
+.btn-countdown{
+     display:inline-block;
+     width:200px;
+     height:74px;
+     line-height:74px;
+     text-align:center;
+     background:#ccc;
+     font-size:32px;
+     color:#fff;
+     border-radius:3px;
+     margin-left:20px;
+}
+.hide{
+     display:none;
 }

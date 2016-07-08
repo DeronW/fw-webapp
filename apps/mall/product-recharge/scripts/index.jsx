@@ -9,7 +9,8 @@ const Recharge = React.createClass({
             product_fee: [],
             user_score: this.props.is_login ? this.props.user_score : '--',
             pay_score: 100,
-            selected: ""
+            bizNo: 5,
+            login : this.props.is_login
         }
     },
     componentDidMount: function () {
@@ -17,21 +18,29 @@ const Recharge = React.createClass({
             $FW.Ajax({
                 url: 'http://localhost/recharge.json',
                 success: function (data) {
-                    this.setState({product_fee: data.fee, selected: data.default})
+                    this.setState({product_fee: data.fee})
                 }.bind(this)
             });
         }
     },
     getSMSCodeHandler: function () {
-        $FW.Ajax({
-            url: 'http://localhost/user-state.json',
-            success: confirmPanel.show()
-        })
+
+        if(this.state.login){
+            if(this.state.user_score < this.state.pay_score){
+                $FW.Component.Alert("充值失败，工分不足！");
+            }else{
+                $FW.Ajax({
+                    url: 'http://localhost/send_sms_code.json',
+                    success: confirmPanel.show()
+                });
+            }
+        }
     },
     getFormData: function () {
         return {
             bizNo: this.state.bizNo,
-            phone: ''
+            phone: '',
+            sms_code: null
         }
     },
     render: function () {
@@ -49,18 +58,17 @@ const Recharge = React.createClass({
             function check() {
                 _this.setState({
                     bizNo: data.bizNo,
-                    pay_score: data.score,
-                    selected: ""
+                    pay_score: data.score
                 })
             }
 
-            return <div className={data.default ? "value-box selected" : "value-box"} key={index} onClick={check}>
+            return <div className={_this.state.bizNo == data.bizNo ? "value-box selected" : "value-box"} key={index} onClick={check}>
                 <span className="value-num">{data.title}</span>
                 {data.sub_title ?
                     <span className="limited-sale">{data.sub_title}</span> :
                     null
                 }
-                {data.default ?
+                {_this.state.bizNo == data.bizNo ?
                     <span className="default-selected"></span> :
                     null
                 }
@@ -97,6 +105,7 @@ const Recharge = React.createClass({
                 <div className="telconfirm-btn">
                     <div onClick={this.getSMSCodeHandler}>立即充值</div>
                 </div>
+
             </div>
         );
     }
@@ -104,27 +113,61 @@ const Recharge = React.createClass({
 
 const ConfirmPop = React.createClass({
     getInitialState: function () {
-        return {show: false}
-    },
-    hideHandler: function () {
-        ReactDOM.unmountComponentAtNode(document.getElementById("pop-wrap"));
+        return {
+            show: false,
+            value: '',
+            remain: 0
+        }
     },
     show: function () {
         this.setState({show: true})
     },
     hide: function () {
-        this.setState({show: false})
+        this.setState({
+            show: false,
+            remain: 0
+        })
+    },
+    changeValueHandler: function (e) {
+        this.setState({value: e.target.value});
+    },
+    countingDown: function () {
+        if (this.state.remain <= 1) window.clearInterval(this._timer);
+        this.setState({remain: this.state.remain - 1});
+    },
+    tick: function () {
+        this.setState({remain: 60});
+        this._timer = setInterval(this.countingDown, 1000);
+    },
+    getSmsCodeHandler: function () {
+        var _this = this;
+        if (this.state.remain <= 0) {
+            this.tick();
+            $FW.Ajax({
+                url: "http://localhost/SendPhoneVerifyPay.json",
+                method: 'get',
+                success: function (data) {
+                    if (data.validateCode)
+                        $FW.Component.Alert(data.validateCode);
+                },
+                fail: function () {
+                    _this.setState({remain: 0});
+                }
+            })
+        }
     },
     submitHandler: function () {
         var form_data = rechargePanel.getFormData();
-
         $FW.Ajax({
-            url: '',
+            url: "",
             method: 'post',
             data: {
                 phone: form_data.phone,
                 sms_code: this.state.sms_code,
                 bizNo: form_data.bizNo
+            },
+            success:function(data){
+                
             }
         })
     },
@@ -134,12 +177,15 @@ const ConfirmPop = React.createClass({
         return (
             <div className="pop-wrap">
                 <div className="confirm-pop">
-                    <div className="pop-header">输入验证码<span className="pop-close" onclick={this.hideHandler}></span>
+                    <div className="pop-header">输入验证码<span className="pop-close" onClick={this.hide}></span>
                     </div>
                     <div className="pop-content">
-                        <div className="confirm-sms-code"><input type="text" placeholder="请输入验证码"
-                                                                 className="sms-input"/><span
-                            className="sms-btn">获取验证码</span></div>
+                        <div className="confirm-sms-code">
+                            <input type="text" placeholder="请输入验证码" className="sms-input" value={this.state.value} onChange={this.changeValueHandler}/>
+                            <span className={this.state.remain>0 ? "btn-countdown" : "sms-btn"}
+                            onClick={this.getSmsCodeHandler}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
+                        </div>
+                        <div className={this.state.show ? "hide" : "wrong-tip"}>验证码输入错误</div>
                         <div className="pop-confirm-btn" onClick={this.submitHandler}>确认</div>
                         <div className="pop-tip">充值后1~10分钟到账</div>
                     </div>
@@ -162,6 +208,5 @@ $FW.DOMReady(function () {
                 document.getElementById('cnt'));
         }
     });
-
     window.confirmPanel = ReactDOM.render(<ConfirmPop />, document.getElementById('dialog'));
 });
