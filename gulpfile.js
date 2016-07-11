@@ -52,7 +52,7 @@ MALL_APP_NAMES.forEach(function (i) {
     gt('mall', i, {
         api_path: 'http://m2mall.9888.cn/',
         html_engine: 'swig',
-        include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx'],
+        include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx'],
         include_common_js: ['javascripts/mall/fw-ajax-error-handler.js'],
         width_swipe: true
     });
