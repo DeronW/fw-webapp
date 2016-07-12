@@ -1,6 +1,7 @@
 'use strict';
 
 const API_PATH = document.getElementById('api-path').value;
+const test_api = "http://10.105.6.73:8081";
 
 const Recharge = React.createClass({
     getInitialState: function () {
@@ -10,37 +11,48 @@ const Recharge = React.createClass({
             user_score: this.props.is_login ? this.props.user_score : '--',
             pay_score: 100,
             bizNo: 5,
-            login : this.props.is_login
+            login : this.props.is_login,
+            phone:''
         }
     },
     componentDidMount: function () {
         if (this.state.tab == 'fee') {
             $FW.Ajax({
-                url: 'http://localhost/recharge.json',
+                url: test_api + '/api/v1/phone/fee/recharge.json',
+                enable_loading: true,
                 success: function (data) {
                     this.setState({product_fee: data.fee})
                 }.bind(this)
             });
         }
     },
-    getSMSCodeHandler: function () {
 
+    changeValueHandler: function (e) {
+        this.setState({phone: e.target.value});
+    },
+
+    getSMSCodeHandler: function () {
         if(this.state.login){
             if(this.state.user_score < this.state.pay_score){
                 $FW.Component.Alert("充值失败，工分不足！");
+            }else if(this.state.phone == ''){
+                $FW.Component.Alert("手机号码不能为空！");
             }else{
                 $FW.Ajax({
-                    url: 'http://localhost/send_sms_code.json',
+                    url: test_api + "/mall/api/order/v1/SendPhoneVerifyPay.json",
+                    method: 'post',
                     success: confirmPanel.show()
                 });
             }
         }
     },
+
+
     getFormData: function () {
         return {
             bizNo: this.state.bizNo,
             phone: '',
-            sms_code: null
+            sms_code: ''
         }
     },
     render: function () {
@@ -49,7 +61,7 @@ const Recharge = React.createClass({
 
         let phoneInput = (
             <div className="phonenumber-wrap">
-                <input className="phone-input" placeholder="请输入手机号" number="true"/>
+                <input className="phone-input" placeholder="请输入手机号" number="true" onChange={this.changeValueHandler}/>
                 <span className="phone-icon"></span>
             </div>
         );
@@ -74,6 +86,7 @@ const Recharge = React.createClass({
                 }
             </div>
         }
+
 
         let fee_panel = this.state.tab == 'fee' ?
             ( <div className="value-wrap"> {this.state.product_fee.map(fee_card)} </div> ) : null;
@@ -120,7 +133,8 @@ const ConfirmPop = React.createClass({
         }
     },
     show: function () {
-        this.setState({show: true})
+        this.setState({show: true});
+        this.tick();
     },
     hide: function () {
         this.setState({
@@ -144,7 +158,7 @@ const ConfirmPop = React.createClass({
         if (this.state.remain <= 0) {
             this.tick();
             $FW.Ajax({
-                url: "http://localhost/SendPhoneVerifyPay.json",
+                url: test_api + "/mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'get',
                 success: function (data) {
                     if (data.validateCode)
@@ -159,31 +173,19 @@ const ConfirmPop = React.createClass({
     submitHandler: function () {
         var form_data = rechargePanel.getFormData();
         $FW.Ajax({
-            url: "",
+            url: test_api + '/api/v1/phone/recharge-order.json',
+            enable_loading: true,
             method: 'post',
             data: {
                 phone: form_data.phone,
                 sms_code: this.state.sms_code,
                 bizNo: form_data.bizNo
             },
-            success:function(data){
-                validateFormData();
+            success:function(){
+                this.setState({show:false});
+                $FW.Component.Alert("充值成功！");
             }
         })
-    },
-
-    validateFormData : function(){
-        $FW.Ajax({
-            url: "http://localhost/validatePaySmsCode.json",
-            method: 'get',
-            success : function(data){
-                if(data.code = 10000){
-                    $FW.Component.Alert("充值成功！");
-                }else{
-                    $FW.Component.Alert("充值失败！");
-                }
-            }
-        });
     },
 
     render: function () {
@@ -214,10 +216,11 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('充值专区');
 
     if (!$FW.Browser.inApp())
-        ReactDOM.render(<Header title={"充值专区"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"充值专区"} back_handler={back_handler}/>, document.getElementById('header'));
 
     $FW.Ajax({
-        url: 'http://localhost/user-state.json',
+        url: test_api + '/api/v1/user-state.json',
+        enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
                 document.getElementById('cnt'));
@@ -225,3 +228,11 @@ $FW.DOMReady(function () {
     });
     window.confirmPanel = ReactDOM.render(<ConfirmPop />, document.getElementById('dialog'));
 });
+
+function back_handler() {
+    if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
+        location.href = '/user'
+    } else {
+        history.back();
+    }
+}
