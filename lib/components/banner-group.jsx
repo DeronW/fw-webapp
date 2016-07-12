@@ -50,6 +50,9 @@ const BannerGroup = React.createClass({
             height: elem.offsetHeight,
             left: -1 * w * this.state.index
         });
+        if (this.props.auto) {
+            //this._timer = setInterval()
+        }
     },
 
     touchStartHandler: function (event) {

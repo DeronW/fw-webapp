@@ -18,6 +18,7 @@ module.exports = function (site_name, project_name, configs) {
         build_path = `build/${site_name}/${project_name}/`,
         public_path = 'public/',
         lib_path = 'lib/',
+        cdn_path = `cdn/${site_name}/${project_name}/`,
         CONFIG = Object.assign({
             debug: true,
             cmd_prefix: '', // 通用指令前缀，比如 pack:
@@ -91,11 +92,12 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function copy2cdn() {
-        return copy([`${build_path}/**`], `cdn/${project_name}/`)
+        return copy([`${build_path}/**`], cdn_path)
     }
 
     function compile_revision() {
-        return revision([`${build_path}/**`], `cdn/${project_name}/`, {
+        return revision([`${build_path}/**`], cdn_path, {
+            dontRenameFile: [/^\/favicon.ico$/g, 'index.html'],
             transformPath: function (rev, source, path) {
                 // 在css中, 采用的是相对的图片路径, 但是在加入版本和前缀域名后不能再使用相对路径
                 if (rev.startsWith('../')) rev = rev.substr(3);
@@ -105,18 +107,16 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function monitor() {
-        gulp.watch(`apps/${site_name}/${project_name}/index.html`,
-            gulp.parallel(compile_html));
-        gulp.watch(`apps/${site_name}/${project_name}/images/**`,
-            gulp.parallel(compile_images));
-        gulp.watch(`apps/${site_name}/${project_name}/stylesheets/**`,
-            gulp.parallel(compile_stylesheets));
-        gulp.watch(`apps/${site_name}/${project_name}/less/**`,
-            gulp.parallel(compile_less));
-        gulp.watch(`apps/${site_name}/${project_name}/javascripts/**`,
-            gulp.parallel(compile_javascripts));
-        gulp.watch(`apps/${site_name}/${project_name}/scripts/**`,
-            gulp.parallel(compile_react));
+        let project_path = `apps/${site_name}/${project_name}/`;
+        gulp.watch(`${project_path}index.html`, gulp.parallel(compile_html));
+        gulp.watch(`${project_path}images/**`, gulp.parallel(compile_images));
+        gulp.watch(`${project_path}stylesheets/**`, gulp.parallel(compile_stylesheets));
+        gulp.watch(`${project_path}less/**`, gulp.parallel(compile_less));
+        gulp.watch(`${project_path}javascripts/**`, gulp.parallel(compile_javascripts));
+        gulp.watch(`${project_path}scripts/**`, gulp.parallel(compile_react));
+
+        gulp.watch(`lib/templates/**/*.html`, gulp.parallel(compile_html));
+        gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));
     }
 
     gulp.task(task_name,
