@@ -66,10 +66,15 @@ const Product = React.createClass({
             )
         }
 
+        let old_component = data.head_images && data.head_images.length ?
+            <Carousel head_images={data.head_images}/> : <div className="no-head-images"></div>;
+
         return (
             <div className="detail-box">
+
                 {data.head_images && data.head_images.length ?
-                    <Carousel head_images={data.head_images}/> : <div className="no-head-images"></div> }
+                    <BannerGroup className="head-images" images={data.head_images}/> :
+                    <div className="no-head-images"></div> }
 
                 <div className="detail-inf">
                     <div className="detail-inf-name">{data.title}</div>
@@ -259,8 +264,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('产品详情');
 
     $FW.Ajax({
-        url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
-        //url: "http://localhost/product-detail.json",
+        //url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
+        url: "http://localhost/product-detail.json",
         enable_loading: true,
         success: function (data) {
             if (data.title) {

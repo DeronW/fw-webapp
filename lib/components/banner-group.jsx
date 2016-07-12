@@ -27,12 +27,19 @@ const BannerGroup = React.createClass({
 
         this._onAnimate = false;
         this._onTouching = false;
-        let loop = typeof(this.props.loop) == 'undefined' ? true : this.props.loop;
+
+        let images = this.props.images || [];
+
+        let loop = true;
+        if (this.props.loop === false || images.length <= 1) loop = false;
+
+        let autoPlay = this.props.autoPlay || 0;
+        autoPlay = images.length <= 1 ? false : (autoPlay < 3000 ? 3000 : autoPlay);
 
         return {
             index: this.props.startIndex || 1,
-            images: this.props.images || [],
-            autoPlay: this.props.autoPlay > 3000 ? this.props.autoPlay : 3000,
+            images: images,
+            autoPlay: autoPlay,
             loop: loop,
             show: false,
             left: 0,
@@ -59,6 +66,7 @@ const BannerGroup = React.createClass({
     },
 
     resetTimer: function () {
+        if (!this.state.autoPlay) return;
         clearInterval(this._auto_timer);
         this._auto_timer = setInterval(function () {
             if (!this._onTouching && !this._onAnimate) this.animateTo(this.state.index + 1)
@@ -165,7 +173,6 @@ const BannerGroup = React.createClass({
         }
 
         let dot = (_, index) => {
-            console.log(this.state.index, index);
             return <div className={index + 1 == this.state.index ? "dot active" : "dot"} key={index}></div>
         };
 

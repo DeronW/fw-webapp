@@ -26,7 +26,7 @@ module.exports = function (site_name, project_name, configs) {
             cdn_prefix: '',
             include_components: [],
             include_common_js: [],
-            main_jsx: 'scripts/index.jsx',
+            main_jsx: 'react/index.jsx',
             html_engine: 'swig',
             with_swipe: true
         }, configs);
@@ -40,7 +40,7 @@ module.exports = function (site_name, project_name, configs) {
     ];
 
     var jsx_files = CONFIG.include_components.map((i)=> `${lib_path}components/${i}`);
-    jsx_files.push(`${app_path}scripts/components/*.jsx`);
+    jsx_files.push(`${app_path}react/components/*.jsx`);
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
     var common_javascript_files = [
@@ -113,7 +113,7 @@ module.exports = function (site_name, project_name, configs) {
         gulp.watch(`${project_path}stylesheets/**`, gulp.parallel(compile_stylesheets));
         gulp.watch(`${project_path}less/**`, gulp.parallel(compile_less));
         gulp.watch(`${project_path}javascripts/**`, gulp.parallel(compile_javascripts));
-        gulp.watch(`${project_path}scripts/**`, gulp.parallel(compile_react));
+        gulp.watch(`${project_path}react/**`, gulp.parallel(compile_react));
 
         gulp.watch(`lib/templates/**/*.html`, gulp.parallel(compile_html));
         gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));

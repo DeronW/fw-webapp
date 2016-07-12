@@ -34,6 +34,29 @@ a {
   background: url(../images/ico-grap-down.png) no-repeat center;
 }
 
+.head-images.global-banner-group {
+  height: 720px;
+  .dots {
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+
+    .dot {
+      display: inline-block;
+      height: 18px;
+      width: 18px;
+      margin-left: 18px;
+      border-radius: 50%;
+      background-color: #ebebeb;
+      &.active {
+        background-color: #fd4d4c;
+      }
+    }
+  }
+}
+
 .on {
   transform: rotate(180deg);
   -webkit-transform: rotate(180deg);
