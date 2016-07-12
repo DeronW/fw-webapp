@@ -255,7 +255,7 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('充值专区');
 
     if (!$FW.Browser.inApp())
-        ReactDOM.render(<Header title={"充值专区"} back_handler={back_handler}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
         url: test_api + '/api/v1/user-state.json',
@@ -268,10 +268,10 @@ $FW.DOMReady(function () {
     window.confirmPanel = ReactDOM.render(<ConfirmPop />, document.getElementById('dialog'));
 });
 
-function back_handler() {
-    if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
-        location.href = '/home'
-    } else {
-        history.back();
-    }
+function backward(){
+    location.href = '/';
 }
+
+window.onNativeMessageReceive = function (msg) {
+    if (msg == 'history:back') backward()
+};
