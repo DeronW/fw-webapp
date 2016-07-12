@@ -27,6 +27,7 @@ const Mall = React.createClass({
                     <div className="no-banner"></div>}
 
                 <div className="header-nav">
+                    <a className="recharge" onClick={function(){ gotoHandler("/recharge") }}>话费充值</a>
                     <a className="vip" onClick={function(){ gotoHandler("/waiting") }}>VIP专区</a>
                     <a className="goods" onClick={function(){ gotoHandler("/products") }}>豆哥商品</a>
                     <a className="mine" onClick={function(){ gotoHandler("/user", true) }}>我的商城</a>
@@ -156,8 +157,8 @@ $FW.DOMReady(function () {
     $FW.BatchGet([
         API_PATH + 'mall/api/index/v1/banners.json', // banner轮播图数据
         API_PATH + 'mall/api/index/v1/activities.json' // 明前活动的数据
-        //'http://localhost/banners.json',
-        //'http://localhost/activities.json'
+        //'http://127.0.0.1/banners.json',
+        //'http://127.0.0.1/activities.json'
     ], function (data) {
         var banners = data[0].banners, activities = data[1].activities;
         if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') $FW.Component.Alert('error: empty data received');

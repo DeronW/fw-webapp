@@ -9,11 +9,11 @@ const Recharge = React.createClass({
             tab: 'fee',
             product_fee: [],
             user_score: this.props.is_login ? this.props.user_score : '--',
-            pay_score: 100,
-            bizNo: 5,
-            login : this.props.is_login,
-            phone:'',
-            price:''
+            pay_score: null,
+            bizNo: null,
+            login: this.props.is_login,
+            phone: '',
+            price: ''
         }
     },
     componentDidMount: function () {
@@ -22,7 +22,19 @@ const Recharge = React.createClass({
                 url: test_api + '/api/v1/phone/fee/recharge.json',
                 enable_loading: true,
                 success: function (data) {
-                    this.setState({product_fee: data.fee})
+                    let pay_score;
+                    data.fee.forEach((i)=> {
+                        if (i.bizNo == data.defaultBizNo)
+                            pay_score = i.score;
+                    })
+
+                    if (!pay_score) console.log('no match default bizNo', data);
+
+                    this.setState({
+                        pay_score: pay_score,
+                        bizNo: data.defaultBizNo,
+                        product_fee: data.fee
+                    })
                 }.bind(this)
             });
         }
@@ -33,17 +45,17 @@ const Recharge = React.createClass({
     },
 
     getSMSCodeHandler: function () {
-        if(this.state.login){
-            if(this.state.user_score < this.state.pay_score){
+        if (this.state.login) {
+            if (this.state.user_score < this.state.pay_score) {
                 $FW.Component.Alert("充值失败，工分不足！");
-            }else if(this.state.phone == ''){
+            } else if (this.state.phone == '') {
                 $FW.Component.Alert("手机号码不能为空！");
-            }else{
+            } else {
                 $FW.Ajax({
                     url: test_api + "/mall/api/order/v1/SendPhoneVerifyPay.json",
                     method: 'get',
                     enable_loading: true,
-                    success: function(data){
+                    success: function (data) {
                         $FW.Component.Alert(data.validateCode);
                         confirmPanel.show();
                     }
@@ -61,7 +73,7 @@ const Recharge = React.createClass({
         }
     },
 
-    tab2handler: function(){
+    tab2handler: function () {
         $FW.Component.Alert("正在建设中，敬请期待！");
     },
     render: function () {
@@ -84,7 +96,8 @@ const Recharge = React.createClass({
                 })
             }
 
-            return <div className={_this.state.bizNo == data.bizNo ? "value-box selected" : "value-box"} key={index} onClick={check}>
+            return <div className={_this.state.bizNo == data.bizNo ? "value-box selected" : "value-box"} key={index}
+                        onClick={check}>
                 <span className="value-num">{data.title}</span>
                 {data.sub_title ?
                     <span className="limited-sale">{data.sub_title}</span> :
@@ -106,7 +119,8 @@ const Recharge = React.createClass({
                 <div className="tab-wrap">
                     <div className="recharge-wrap">
                         <span className={this.state.tab == 'fee' ? "recharge-tab active" : 'recharge-tab'}>话费充值</span>
-                        <span className={this.state.tab == 'net' ? "recharge-tab2 active" : 'recharge-tab2'} onClick={this.tab2handler}>流量充值</span>
+                        <span className={this.state.tab == 'net' ? "recharge-tab2 active" : 'recharge-tab2'}
+                              onClick={this.tab2handler}>流量充值</span>
                     </div>
                 </div>
 
@@ -183,9 +197,9 @@ const ConfirmPop = React.createClass({
         var _this = this;
         var form_data = rechargePanel.getFormData();
         $FW.Ajax({
-            url:test_api +  '/mall/api/v1/getToken.json',
+            url: test_api + '/mall/api/v1/getToken.json',
             method: "get",
-            success: function(data){
+            success: function (data) {
                 var token = data.token;
                 $FW.Ajax({
                     url: test_api + '/api/v1/phone/recharge-order.json',
@@ -193,18 +207,18 @@ const ConfirmPop = React.createClass({
                     method: 'get',
                     data: {
                         phone: form_data.phone,
-                        price: form_data.price,
+                        //price: form_data.price,
                         sms_code: _this.state.value,
                         bizNo: form_data.bizNo,
                         sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
                         tokenStr: token
                     },
-                    success:function(){
-                        _this.setState({show:false});
+                    success: function () {
+                        _this.setState({show: false});
                         $FW.Component.Alert("充值成功！");
                     },
-                    fail: function(){
-                        _this.setState({show:false});
+                    fail: function () {
+                        _this.setState({show: false});
                         $FW.Component.Alert("充值失败！");
                     }
                 })
@@ -222,9 +236,10 @@ const ConfirmPop = React.createClass({
                     </div>
                     <div className="pop-content">
                         <div className="confirm-sms-code">
-                            <input type="text" placeholder="请输入验证码" className="sms-input" value={this.state.value} onChange={this.changeValueHandler}/>
+                            <input type="text" placeholder="请输入验证码" className="sms-input" value={this.state.value}
+                                   onChange={this.changeValueHandler}/>
                             <span className={this.state.remain>0 ? "btn-countdown" : "sms-btn"}
-                            onClick={this.getSmsCodeHandler}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
+                                  onClick={this.getSmsCodeHandler}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
                         <div className={this.state.show ? "hide" : "wrong-tip"}>验证码输入错误</div>
                         <div className="pop-confirm-btn" onClick={this.submitHandler}>确认</div>
