@@ -40,7 +40,7 @@ const MALL_APP_NAMES = [
     'order-complete',
     'product-detail',
     'product-list',
-    'product-vip-list',
+    'product-vip-zone',
     'product-recharge',
     'waiting',
     'fail',
