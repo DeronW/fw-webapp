@@ -1,7 +1,6 @@
 'use strict';
 
 const API_PATH = document.getElementById('api-path').value;
-const test_api = "http://10.105.6.73:8081";
 
 const Recharge = React.createClass({
     getInitialState: function () {
@@ -19,7 +18,7 @@ const Recharge = React.createClass({
     componentDidMount: function () {
         if (this.state.tab == 'fee') {
             $FW.Ajax({
-                url: test_api + '/api/v1/phone/fee/recharge.json',
+                url: API_PATH + '/api/v1/phone/fee/recharge.json',
                 enable_loading: true,
                 success: function (data) {
                     let pay_score;
@@ -52,7 +51,7 @@ const Recharge = React.createClass({
                 $FW.Component.Alert("手机号码不能为空！");
             } else {
                 $FW.Ajax({
-                    url: test_api + "/mall/api/order/v1/SendPhoneVerifyPay.json",
+                    url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
                     method: 'get',
                     enable_loading: true,
                     success: function (data) {
@@ -182,7 +181,7 @@ const ConfirmPop = React.createClass({
         if (this.state.remain <= 0) {
             this.tick();
             $FW.Ajax({
-                url: test_api + "/mall/api/order/v1/SendPhoneVerifyPay.json",
+                url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'get',
                 success: function (data) {
                     if (data.validateCode) $FW.Component.Alert(data.validateCode);
@@ -197,12 +196,12 @@ const ConfirmPop = React.createClass({
         var _this = this;
         var form_data = rechargePanel.getFormData();
         $FW.Ajax({
-            url: test_api + '/mall/api/v1/getToken.json',
+            url: API_PATH + '/mall/api/v1/getToken.json',
             method: "get",
             success: function (data) {
                 var token = data.token;
                 $FW.Ajax({
-                    url: test_api + '/api/v1/phone/recharge-order.json',
+                    url: API_PATH + '/api/v1/phone/recharge-order.json',
                     enable_loading: true,
                     method: 'get',
                     data: {
@@ -258,7 +257,7 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
-        url: test_api + '/api/v1/user-state.json',
+        url: API_PATH + '/api/v1/user-state.json',
         enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
