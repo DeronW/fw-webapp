@@ -12,7 +12,8 @@ const Recharge = React.createClass({
             pay_score: 100,
             bizNo: 5,
             login : this.props.is_login,
-            phone:''
+            phone:'',
+            price:''
         }
     },
     componentDidMount: function () {
@@ -51,13 +52,17 @@ const Recharge = React.createClass({
         }
     },
 
-
     getFormData: function () {
         return {
             bizNo: this.state.bizNo,
             phone: this.state.phone,
-            sms_code: ''
+            sms_code: '',
+            price: this.state.price
         }
+    },
+
+    tab2handler: function(){
+        $FW.Component.Alert("正在建设中，敬请期待！");
     },
     render: function () {
 
@@ -74,6 +79,7 @@ const Recharge = React.createClass({
             function check() {
                 _this.setState({
                     bizNo: data.bizNo,
+                    price: data.price,
                     pay_score: data.score
                 })
             }
@@ -100,7 +106,7 @@ const Recharge = React.createClass({
                 <div className="tab-wrap">
                     <div className="recharge-wrap">
                         <span className={this.state.tab == 'fee' ? "recharge-tab active" : 'recharge-tab'}>话费充值</span>
-                        <span className={this.state.tab == 'net' ? "recharge-tab2 active" : 'recharge-tab2'}>流量充值</span>
+                        <span className={this.state.tab == 'net' ? "recharge-tab2 active" : 'recharge-tab2'} onClick={this.tab2handler}>流量充值</span>
                     </div>
                 </div>
 
@@ -176,7 +182,6 @@ const ConfirmPop = React.createClass({
     submitHandler: function () {
         var _this = this;
         var form_data = rechargePanel.getFormData();
-
         $FW.Ajax({
             url:test_api +  '/mall/api/v1/getToken.json',
             method: "get",
@@ -188,15 +193,19 @@ const ConfirmPop = React.createClass({
                     method: 'get',
                     data: {
                         phone: form_data.phone,
+                        price: form_data.price,
                         sms_code: _this.state.value,
                         bizNo: form_data.bizNo,
                         sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
                         tokenStr: token
                     },
-                    success:function(data){
-                        console.log(data);
-                        this.setState({show:false});
+                    success:function(){
+                        _this.setState({show:false});
                         $FW.Component.Alert("充值成功！");
+                    },
+                    fail: function(){
+                        _this.setState({show:false});
+                        $FW.Component.Alert("充值失败！");
                     }
                 })
             }
@@ -246,7 +255,7 @@ $FW.DOMReady(function () {
 
 function back_handler() {
     if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
-        location.href = '/user'
+        location.href = '/home'
     } else {
         history.back();
     }
