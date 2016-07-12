@@ -11,20 +11,22 @@ const MAIN_APP_NAMES = [
     'user-contribute'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
+
+    let common_components = ['loading.jsx', 'alert.jsx'];
+    let common_js = ['javascripts/main/fw-ajax-error-handler.js'];
+
     gt('main', i, {
+        debug: true,
         api_path: "http://m.9888.cn:8080",
-        include_components: ['loading.jsx', 'alert.jsx'],
-        include_common_js: ['javascripts/main/fw-ajax-error-handler.js']
+        include_components: common_components,
+        include_common_js: common_js
     });
     gt('main', i, {
         api_path: "http://m.9888.cn",
-        debug: false,
-        html_minify: true,
         cmd_prefix: 'pack',
         cdn_prefix: '/static/wap/' + i + '/',
-        include_components: ['loading.jsx', 'alert.jsx'],
-        include_common_js: ['javascripts/main/fw-ajax-error-handler.js'],
-        enable_revision: true
+        include_components: common_components,
+        include_common_js: common_js
     });
 });
 
@@ -49,26 +51,23 @@ const MALL_APP_NAMES = [
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
+    let common_components = ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx'];
+    let common_js = ['javascripts/mall/fw-ajax-error-handler.js'];
+
     gt('mall', i, {
+        debug: true,
         api_path: 'http://m2mall.9888.cn/',
-        html_engine: 'swig',
-        include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx'],
-        include_common_js: ['javascripts/mall/fw-ajax-error-handler.js'],
+        include_components: common_components,
+        include_common_js: common_js,
         width_swipe: true
     });
     gt('mall', i, {
-        debug: false,
         cmd_prefix: 'pack',
-        html_engine: 'swig',
         api_path: 'http://mmall.9888.cn/',
         cdn_prefix: '/pages/' + i + '/',
-        html_minify: true,
-        include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx'],
-        include_common_js: ['javascripts/mall/fw-ajax-error-handler.js'],
-        width_swipe: true,
-        enable_watch: false,
-        enable_server: false,
-        enable_revision: true
+        include_components: common_components,
+        include_common_js: common_js,
+        width_swipe: true
     });
 });
 

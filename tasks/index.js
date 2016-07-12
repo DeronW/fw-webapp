@@ -20,7 +20,7 @@ module.exports = function (site_name, project_name, configs) {
         lib_path = 'lib/',
         cdn_path = `cdn/${site_name}/${project_name}/`,
         CONFIG = Object.assign({
-            debug: true,
+            debug: false,
             cmd_prefix: '', // 通用指令前缀，比如 pack:
             api_path: '',
             cdn_prefix: '',
@@ -130,6 +130,9 @@ module.exports = function (site_name, project_name, configs) {
             compile_images,
             compile_common_assets));
 
-    gulp.task(`${task_name}:watch`, gulp.series(task_name, monitor));
-    gulp.task(`${task_name}:revision`, gulp.series(task_name, copy2cdn, compile_revision));
+    if (CONFIG.debug)
+        gulp.task(`${task_name}:watch`, gulp.series(task_name, monitor));
+
+    if (!CONFIG.debug)
+        gulp.task(`${task_name}:revision`, gulp.series(task_name, copy2cdn, compile_revision));
 };
