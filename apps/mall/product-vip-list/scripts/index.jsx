@@ -1,5 +1,7 @@
 'use strict';
 
+const API_PATH = document.getElementById('api-path').value;
+
 const Header = React.createClass({
 	render: function() {
 		return (	
@@ -31,148 +33,68 @@ const VipMsg = React.createClass({
 const Cnt = React.createClass({
 	getInitialState: function() {
 		return {
-			initialX: 0,
-			endX: 0,
-			x: 0
-		}
-	},
-	handleTouchStart: function(event) {
-		var _this = this;
-
-		_this.setState({
-			initialX: event.targetTouches[0].pageX	
-		});
-
-	},
-	handleTouchMove: function(event) {
-		var _this = this;
-
-		_this.setState({
-			x: _this.state.endX + (event.targetTouches[0].pageX - _this.state.initialX)
-		});	
-
-	},
-	handleTouchEnd: function(event) {
-		var _this = this;
-		var objWidth = (window.innerWidth * 1.1) - window.innerWidth;
-
-		_this.setState({
-			endX: _this.state.x		
-		});
-
-		if(_this.state.x > 0) {
-			_this.setState({
-				x: 0,		
-				endX: 0
-			});
-		} else if (-(_this.state.x) > objWidth ) {
-			_this.setState({
-				x: -(objWidth),		
-				endX: -(objWidth)
-			});
-		} 
-
+			page: 1,
+			count: 5,	
+			data: [] 
+		};
 	},
 	render: function() {
-		var _this = this;
+		var data = this.props.products;
 
-		let marginStyle = {
-			marginLeft: _this.state.x + 'px'
-		};
+		var tags = (value, index) => (
+			<span className="tag-text" key={index}>{value}</span>
+		);
 
-		let cntStyle = {
-			width: window.innerWidth * 10 + "px"
-		};
+		var listDom = (value, index) => (
+			<div className="ui-commodity-list" key={index}>
+				<div className="li">
+					<div className="l">
+						<div className="img">
+							<img src={value.img} />
+						</div>
+					</div>
 
+					<div className="r">
+						<div className="ui-commodity-list-name">
+							{value.title}	
+						</div>
 
-		return (
-			<div className="content">
-				<div className="ui-tab" onTouchMove={_this.handleTouchMove} onTouchEnd={_this.handleTouchEnd} onTouchStart={_this.handleTouchStart}>
-					<div className="ui-tab-block" style={marginStyle}>
-						<div className="ui-tab-li ui-select-li">
-							<span className="text">全部</span>
+						<div className="ui-commodity-list-tag">
+							{
+								data[index].tags.map(tags)	
+							}
 						</div>
-						<div className="ui-tab-li">
-							<span className="text">vip1</span>
-						</div>
-						<div className="ui-tab-li">
-							<span className="text">vip2</span>
-						</div>
-						<div className="ui-tab-li">
-							<span className="text">vip3</span>
-						</div>
-						<div className="ui-tab-li">
-							<span className="text">vip4</span>
+
+						<div className="ui-commodity-vip-msg">
+							<div className="mark-text">
+								<span className="text">{value.score}工分</span>	
+							</div>
+
+							<div className="sales-text">
+								<span className="text">累计销量 {value.sales}</span>
+							</div>
 						</div>
 					</div>
 				</div>
 
-				<div className="vip-commodity-area"> 
-					<div className="vip-commodity-area-list">
-						<div className="ui-commodity-list" style={cntStyle}>
-							<div className="li">
-								<div className="l">
-									<div className="img">
-										<img src="" />
-									</div>
-								</div>
+			</div>
+		);
 
-								<div className="r">
-									<div className="ui-commodity-list-name">
-										Apple / 苹果   iPad Air2  128G   WIFI 64g 金色		
-									</div>
-
-									<div className="ui-commodity-list-tag">
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-									</div>
-
-									<div className="ui-commodity-vip-msg">
-										<div className="mark-text">
-											<span className="text">268700工分</span>	
-										</div>
-
-										<div className="sales-text">
-											<span className="text">累计销量 199</span>
-										</div>
-									</div>
-								</div>
-							</div>
+		return (
+			<div className="content">
+				<div className="ui-tab">
+					<div className="ui-tab-block">
+						<div className="ui-tab-li ui-select-li">
+							<span className="text">全部</span>
 						</div>
-						
-						<div className="ui-commodity-list">
-							<div className="li">
-								<div className="l">
-									<div className="img">
-										<img src="" />
-									</div>
-								</div>
+					</div>
+				</div>
 
-								<div className="r">
-									<div className="ui-commodity-list-name">
-										Apple / 苹果   iPad Air2  128G   WIFI 64g 金色		
-									</div>
-
-									<div className="ui-commodity-list-tag">
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-									</div>
-
-									<div className="ui-commodity-vip-msg">
-										<div className="mark-text">
-											<span className="text">268700工分</span>	
-										</div>
-
-										<div className="sales-text">
-											<span className="text">累计销量 199</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
+				<div className="vip-commodity-area">
+					<div className="ui-commodity-list">
+						{
+							data.map(listDom)
+						}
 					</div>
 				</div>
 			</div>	
@@ -181,22 +103,53 @@ const Cnt = React.createClass({
 }); 
 
 const Body = React.createClass({
+	getInitialState: function(){
+		return {
+			vip_level: 1,
+			products: [],
+			level_1_page: 1,
+			level_2_page: 3,
+			page: 1,
+			count: 20
+		}
+	},
+	loadMoreProductHandler: function(){
+		var _this = this;
+	
+		$FW.Ajax({
+			//url: API_PATH + 'mall/api/index/v1/vip_all_list.json',
+			url: 'http://10.105.6.76:8083/mall/api/index/v1/vip_all_list.json?page=' + _this.state.page + '&count=' + _this.state.count,
+			success: function(data) {
+				 _this.setState({
+				 	page: ++_this.state.page,
+				 	products: _this.state.products.concat(data.products)
+				 });
+			}
+		});
+	},
+	componentDidMount: function(){
+		this.loadMoreProductHandler();		
+
+        $FW.Event.touchBottom(this.loadMoreProductHandler);
+	},
 	render: function() {
 		return (
 			<div>
 				<VipMsg />
-				<Cnt />
+				<Cnt  products={this.state.products}/>
 			</div>	
 		);
 	}		
 });
 
-ReactDOM.render(
-	<Body />,
-	document.getElementById('cnt')	
-);
+ReactDOM.render( 
+	<Body/>, 
+	document.getElementById('cnt')   
+);  
+
 
 ReactDOM.render(
 	<Header title={'VIP专区'}/>,
 	document.getElementById('header')	
 );
+
