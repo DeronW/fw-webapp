@@ -16,7 +16,7 @@ const Waiting = React.createClass({
         let style_b = {
             textAlign: "center",
             PaddingTop: "40px",
-            paddingBottom:"450px",
+            paddingBottom: "450px",
             fontSize: "36px",
             color: "#8591b3"
         };

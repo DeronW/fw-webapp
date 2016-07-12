@@ -15,14 +15,17 @@ function gotoHandler(link, need_login) {
 
 const Mall = React.createClass({
     render: function () {
-        let activity = (i, index) => <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
-                                                      activity_id={i.activity_id}
-                                                      products={i.products} key={index}/>;
+        let activity = (i, index) => {
+            return <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
+                                    activity_id={i.activity_id} products={i.products} key={index}/>;
+        };
+
         return (
             <div>
                 {this.props.banners.length ?
                     <Carousel banners={this.props.banners}/> :
                     <div className="no-banner"></div>}
+
                 <div className="header-nav">
                     <a className="vip" onClick={function(){ gotoHandler("/waiting") }}>VIP专区</a>
                     <a className="goods" onClick={function(){ gotoHandler("/products") }}>豆哥商品</a>

@@ -9,8 +9,7 @@ const BannerGroup = React.createClass({
 
     propTypes: {
         startIndex: React.PropTypes.number,
-        speed: React.PropTypes.number,
-        auto: React.PropTypes.number,
+        autoPlay: React.PropTypes.number,
         loop: React.PropTypes.bool,
         className: React.PropTypes.string,
         afterIndexChange: React.PropTypes.func,
@@ -26,9 +25,22 @@ const BannerGroup = React.createClass({
         };
         this._timer = null;
 
+        this._onAnimate = false;
+        this._onTouching = false;
+
+        let images = this.props.images || [];
+
+        let loop = true;
+        if (this.props.loop === false || images.length <= 1) loop = false;
+
+        let autoPlay = this.props.autoPlay || 0;
+        autoPlay = images.length <= 1 ? false : (autoPlay < 3000 ? 3000 : autoPlay);
+
         return {
             index: this.props.startIndex || 1,
-            loop: this.props.loop,
+            images: images,
+            autoPlay: autoPlay,
+            loop: loop,
             show: false,
             left: 0,
             width: 0,
@@ -50,14 +62,49 @@ const BannerGroup = React.createClass({
             height: elem.offsetHeight,
             left: -1 * w * this.state.index
         });
-        if (this.props.auto) {
-            //this._timer = setInterval()
-        }
+        this.resetTimer();
+    },
+
+    resetTimer: function () {
+        if (!this.state.autoPlay) return;
+        clearInterval(this._auto_timer);
+        this._auto_timer = setInterval(function () {
+            if (!this._onTouching && !this._onAnimate) this.animateTo(this.state.index + 1)
+        }.bind(this), this.state.autoPlay)
+    },
+
+    animateTo: function (targetIndex) {
+        let ti = targetIndex;
+        let lastIndex = this.state.images.length;
+        let targetLeft = -this.state.width * ti;
+        let step = (targetLeft - this.state.left) / 15.0;
+        this._onAnimate = true;
+
+        this._timer = setInterval(function () {
+            if (Math.abs(this.state.left - targetLeft) <= Math.abs(step * 1.5)) {
+                clearInterval(this._timer);
+
+                if (ti == 0) {
+                    ti = lastIndex;
+                    targetLeft = -this.state.width * ti;
+                } else if (ti == lastIndex + 1) {
+                    ti = 1;
+                    targetLeft = -this.state.width * ti;
+                }
+                if (this.state.index != ti) this.props.afterIndexChange && this.props.afterIndexChange(ti);
+
+                this._onAnimate = false;
+                this.setState({left: targetLeft, index: ti});
+            } else {
+                this.setState({left: this.state.left + step})
+            }
+        }.bind(this), 20)
     },
 
     touchStartHandler: function (event) {
         this._touch.startX = event.changedTouches[0].pageX;
         this._touch.originLeft = this.state.left;
+        this._onTouching = true;
         clearInterval(this._timer);
     },
 
@@ -65,13 +112,14 @@ const BannerGroup = React.createClass({
         let left = this._touch.originLeft + event.changedTouches[0].pageX - this._touch.startX;
         this.setState({left: left})
     },
+
     touchEndHandler: function (event) {
-        let _this = this;
+        this._onTouching = false;
 
         let delta = event.changedTouches[0].pageX - this._touch.startX;
 
         let ti = this.state.index;
-        let lastIndex = this.props.images.length;
+        let lastIndex = this.state.images.length;
 
         if (Math.abs(delta) > this.state.width / 8) {
             if (delta > 0) {
@@ -86,29 +134,7 @@ const BannerGroup = React.createClass({
             }
         }
 
-        let targetLeft = -this.state.width * ti;
-
-        let step = (targetLeft - this.state.left) / 15.0;
-
-        this._timer = setInterval(function () {
-            if (Math.abs(_this.state.left - targetLeft) <= Math.abs(step * 1.5)) {
-                clearInterval(_this._timer);
-
-                if (ti == 0) {
-                    ti = lastIndex;
-                    targetLeft = -_this.state.width * ti;
-                } else if (ti == lastIndex + 1) {
-                    ti = 1;
-                    targetLeft = -_this.state.width * ti;
-                }
-                if (_this.state.index != ti) _this.props.afterIndexChange && _this.props.afterIndexChange(ti);
-
-                _this.setState({left: targetLeft, index: ti});
-            } else {
-                _this.setState({left: _this.state.left + step})
-            }
-        }, 20)
-
+        this.animateTo(ti);
     },
 
     imageClickHandler: function (index) {
@@ -142,16 +168,18 @@ const BannerGroup = React.createClass({
         let imitateFirst = <div style={imitateStyle}></div>;
         let imitateLast = <div style={imitateStyle}></div>;
         if (this.state.loop) {
-            imitateFirst = image(this.props.images[this.props.images.length - 1], 99);
-            imitateLast = image(this.props.images[0], 100)
+            imitateFirst = image(this.state.images[this.state.images.length - 1], 99);
+            imitateLast = image(this.state.images[0], 100)
         }
 
+        let dot = (_, index) => {
+            return <div className={index + 1 == this.state.index ? "dot active" : "dot"} key={index}></div>
+        };
+
         return (
-            <div className={this.props.className + " global-banner-group"}
-                 style={style}
-            >
+            <div className={this.props.className + " global-banner-group"} style={style}>
                 <div style={{
-                    width: this.state.width * (this.props.images.length + 2),
+                    width: this.state.width * (this.state.images.length + 2),
                     position: 'absolute',
                     height: '100%',
                     left: this.state.left
@@ -161,8 +189,11 @@ const BannerGroup = React.createClass({
                      onTouchEnd={this.touchEndHandler}
                 >
                     {imitateFirst}
-                    {this.props.images.map(image) }
+                    {this.state.images.map(image)}
                     {imitateLast}
+                </div>
+                <div className="dots">
+                    {this.state.images.map(dot)}
                 </div>
             </div>
         )
