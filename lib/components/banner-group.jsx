@@ -27,12 +27,13 @@ const BannerGroup = React.createClass({
 
         this._onAnimate = false;
         this._onTouching = false;
+        let loop = typeof(this.props.loop) == 'undefined' ? true : this.props.loop;
 
         return {
             index: this.props.startIndex || 1,
             images: this.props.images || [],
             autoPlay: this.props.autoPlay > 3000 ? this.props.autoPlay : 3000,
-            loop: this.props.loop,
+            loop: loop,
             show: false,
             left: 0,
             width: 0,
@@ -65,7 +66,6 @@ const BannerGroup = React.createClass({
     },
 
     animateTo: function (targetIndex) {
-        let _this = this;
         let ti = targetIndex;
         let lastIndex = this.state.images.length;
         let targetLeft = -this.state.width * ti;
@@ -164,6 +164,11 @@ const BannerGroup = React.createClass({
             imitateLast = image(this.state.images[0], 100)
         }
 
+        let dot = (_, index) => {
+            console.log(this.state.index, index);
+            return <div className={index + 1 == this.state.index ? "dot active" : "dot"} key={index}></div>
+        };
+
         return (
             <div className={this.props.className + " global-banner-group"} style={style}>
                 <div style={{
@@ -177,8 +182,11 @@ const BannerGroup = React.createClass({
                      onTouchEnd={this.touchEndHandler}
                 >
                     {imitateFirst}
-                    {this.state.images.map(image) }
+                    {this.state.images.map(image)}
                     {imitateLast}
+                </div>
+                <div className="dots">
+                    {this.state.images.map(dot)}
                 </div>
             </div>
         )

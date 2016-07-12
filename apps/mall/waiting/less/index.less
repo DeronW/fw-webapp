@@ -1,12 +1,42 @@
 html, body {
   margin: 0;
-  width:100%;
-  height:100%;
-  overflow-y:hidden;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
 }
 
-.waiting-wrap{
-  width:100%;
-  height:100%;
-  background-color:#ebebeb;
+.waiting-wrap {
+  width: 100%;
+  height: 100%;
+  background-color: #ebebeb;
+}
+
+.xxx {
+  height: 400px;
+  background: black;
+}
+
+.global-banner-group {
+
+  .dots {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+
+    .dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: gray;
+      display: inline-block;
+      margin: 0 10px;
+
+      &.active {
+        background: white;
+      }
+    }
+  }
+
 }
