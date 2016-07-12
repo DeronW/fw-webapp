@@ -12,8 +12,8 @@ const MAIN_APP_NAMES = [
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
-    let common_components = ['loading.jsx', 'alert.jsx'];
-    let common_js = ['javascripts/main/fw-ajax-error-handler.js'];
+    var common_components = ['loading.jsx', 'alert.jsx'];
+    var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
     gt('main', i, {
         debug: true,
@@ -51,8 +51,8 @@ const MALL_APP_NAMES = [
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
-    let common_components = ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx'];
-    let common_js = ['javascripts/mall/fw-ajax-error-handler.js'];
+    var common_components = ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx'];
+    var common_js = ['javascripts/mall/fw-ajax-error-handler.js'];
 
     gt('mall', i, {
         debug: true,
