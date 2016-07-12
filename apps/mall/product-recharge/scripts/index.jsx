@@ -40,8 +40,12 @@ const Recharge = React.createClass({
             }else{
                 $FW.Ajax({
                     url: test_api + "/mall/api/order/v1/SendPhoneVerifyPay.json",
-                    method: 'post',
-                    success: confirmPanel.show()
+                    method: 'get',
+                    enable_loading: true,
+                    success: function(data){
+                        $FW.Component.Alert(data.validateCode);
+                        confirmPanel.show();
+                    }
                 });
             }
         }
@@ -51,7 +55,7 @@ const Recharge = React.createClass({
     getFormData: function () {
         return {
             bizNo: this.state.bizNo,
-            phone: '',
+            phone: this.state.phone,
             sms_code: ''
         }
     },
@@ -161,8 +165,7 @@ const ConfirmPop = React.createClass({
                 url: test_api + "/mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'get',
                 success: function (data) {
-                    if (data.validateCode)
-                        $FW.Component.Alert(data.validateCode);
+                    if (data.validateCode) $FW.Component.Alert(data.validateCode);
                 },
                 fail: function () {
                     _this.setState({remain: 0});
@@ -171,21 +174,33 @@ const ConfirmPop = React.createClass({
         }
     },
     submitHandler: function () {
+        var _this = this;
         var form_data = rechargePanel.getFormData();
+
         $FW.Ajax({
-            url: test_api + '/api/v1/phone/recharge-order.json',
-            enable_loading: true,
-            method: 'post',
-            data: {
-                phone: form_data.phone,
-                sms_code: this.state.sms_code,
-                bizNo: form_data.bizNo
-            },
-            success:function(){
-                this.setState({show:false});
-                $FW.Component.Alert("充值成功！");
+            url:test_api +  '/mall/api/v1/getToken.json',
+            method: "get",
+            success: function(data){
+                var token = data.token;
+                $FW.Ajax({
+                    url: test_api + '/api/v1/phone/recharge-order.json',
+                    enable_loading: true,
+                    method: 'get',
+                    data: {
+                        phone: form_data.phone,
+                        sms_code: _this.state.value,
+                        bizNo: form_data.bizNo,
+                        sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
+                        tokenStr: token
+                    },
+                    success:function(data){
+                        console.log(data);
+                        this.setState({show:false});
+                        $FW.Component.Alert("充值成功！");
+                    }
+                })
             }
-        })
+        });
     },
 
     render: function () {

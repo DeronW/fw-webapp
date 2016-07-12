@@ -2,24 +2,6 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
-const Header = React.createClass({
-	render: function() {
-		return (	
-			<div className="header">
-				<div className="header-cnt">
-					<span className="back-btn">
-						<img src="images/ico-blue-back.png" />
-					</span>
-
-					<h1 className="title">
-						{this.props.title}
-					</h1>
-				</div>	
-			</div>			
-		);
-	}		
-});
-
 const VipMsg = React.createClass({
 	render: function() {
 		return (
@@ -142,14 +124,18 @@ const Body = React.createClass({
 	}		
 });
 
-ReactDOM.render( 
-	<Body/>, 
-	document.getElementById('cnt')   
-);  
+$FW.DOMReady(function(){
+	NativeBridge.setTitle('VIP专区');
+	if (!$FW.Browser.inApp())
+		ReactDOM.render(<Header title={"VIP专区"} back_handler={back_handler}/>, document.getElementById('header'));
+	ReactDOM.render(<Body/>, document.getElementById('cnt'));
+});
 
-
-ReactDOM.render(
-	<Header title={'VIP专区'}/>,
-	document.getElementById('header')	
-);
+function back_handler() {
+	if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
+		location.href = '/user'
+	} else {
+		history.back();
+	}
+}
 
