@@ -1,6 +1,22 @@
 'use strict';
 
-const API_PATH = document.getElementById('api-path').value;
+const Header = React.createClass({
+	render: function() {
+		return (	
+			<div className="header">
+				<div className="header-cnt">
+					<span className="back-btn">
+						<img src="images/ico-blue-back.png" />
+					</span>
+
+					<h1 className="title">
+						{this.props.title}
+					</h1>
+				</div>	
+			</div>			
+		);
+	}		
+});
 
 const VipMsg = React.createClass({
 	render: function() {
@@ -15,68 +31,238 @@ const VipMsg = React.createClass({
 const Cnt = React.createClass({
 	getInitialState: function() {
 		return {
-			page: 1,
-			count: 5,	
-			data: [] 
-		};
+			n: 3,
+			counter: 1,
+			initialX: 0,
+			cntInitialX: 0,
+			endX: 0,
+			cntEndX: 0,
+			x: 0,
+			cntX: 0
+		}
+	},
+	handleTouchStart: function(event) {
+		var _this = this;
+
+		_this.setState({
+			initialX: event.targetTouches[0].pageX	
+		});
+
+	},
+	handleTouchMove: function(event) {
+		var _this = this;
+
+		_this.setState({
+			x: _this.state.endX + (event.targetTouches[0].pageX - _this.state.initialX)
+		});	
+
+	},
+	handleTouchEnd: function(event) {
+		var _this = this;
+		var objWidth = (window.innerWidth * 1.1) - window.innerWidth;
+
+		_this.setState({
+			endX: _this.state.x		
+		});
+
+		if(_this.state.x > 0) {
+			_this.setState({
+				x: 0,		
+				endX: 0
+			});
+		} else if (-(_this.state.x) > objWidth ) {
+			_this.setState({
+				x: -(objWidth),		
+				endX: -(objWidth)
+			});
+		} 
+
+	},
+	cntTouchStart: function(event) {
+		var _this = this;
+
+		_this.setState({
+			cntInitialX: event.targetTouches[0].pageX	
+		});
+	},
+	cntTouchMove: function(event) {
+		var _this = this;
+
+		_this.setState({
+			cntX: _this.state.cntEndX + (event.targetTouches[0].pageX - _this.state.cntInitialX)
+		});	
+				  
+	},
+	cntTouchEnd: function() {
+		var _this = this;
+		var objWidth = (window.innerWidth * _this.state.n);
+		var goldLine = window.innerWidth / 8; 
+
+		_this.setState({
+			cntEndX: _this.state.cntX		
+		});
+
+		if(_this.state.cntX > 0) {
+			_this.setState({
+				cntX: 0,
+				cntEndX: 0		
+			});
+		} else if(-(_this.state.cntX) > goldLine) {
+			console.log("goldLine");
+			_this.setState({
+				cntX: -(window.innerWidth * _this.state.counter),
+				cntEndX: -(window.innerWidth * _this.state.counter), 
+				counter: ++_this.state.counter
+			});	
+				
+		} 
+		
+		if (-(_this.state.cntX) > window.innerWidth *  (_this.state.n -1)) {
+			console.log("aaaaaa");
+			_this.setState({
+				cntX: -(window.innerWidth * (_this.state.n - 1)),	
+				cntEndX: -(window.innerWidth * (_this.state.n - 1))	
+			});
+		}
+
+
 	},
 	render: function() {
-		var data = this.props.products;
+		var _this = this;
 
-		var tags = (value, index) => (
-			<span className="tag-text" key={index}>{value}</span>
-		);
+		let marginStyle = {
+			marginLeft: _this.state.x + 'px'
+		};
+		
+		let cntStyle = {
+			width: window.innerWidth * _this.state.n + "px",
+			marginLeft: _this.state.cntX + "px"
+		};
 
-		var listDom = (value, index) => (
-			<div className="ui-commodity-list" key={index}>
-				<div className="li">
-					<div className="l">
-						<div className="img">
-							<img src={value.img} />
-						</div>
-					</div>
-
-					<div className="r">
-						<div className="ui-commodity-list-name">
-							{value.title}	
-						</div>
-
-						<div className="ui-commodity-list-tag">
-							{
-								data[index].tags.map(tags)	
-							}
-						</div>
-
-						<div className="ui-commodity-vip-msg">
-							<div className="mark-text">
-								<span className="text">{value.score}工分</span>	
-							</div>
-
-							<div className="sales-text">
-								<span className="text">累计销量 {value.sales}</span>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		);
+		let windowWidth = {
+			width: window.innerWidth
+		};
 
 		return (
 			<div className="content">
-				<div className="ui-tab">
-					<div className="ui-tab-block">
+				<div className="ui-tab" onTouchMove={_this.handleTouchMove} onTouchEnd={_this.handleTouchEnd} onTouchStart={_this.handleTouchStart}>
+					<div className="ui-tab-block" style={marginStyle}>
 						<div className="ui-tab-li ui-select-li">
 							<span className="text">全部</span>
+						</div>
+						<div className="ui-tab-li">
+							<span className="text">vip1</span>
+						</div>
+						<div className="ui-tab-li">
+							<span className="text">vip2</span>
+						</div>
+						<div className="ui-tab-li">
+							<span className="text">vip3</span>
+						</div>
+						<div className="ui-tab-li">
+							<span className="text">vip4</span>
 						</div>
 					</div>
 				</div>
 
-				<div className="vip-commodity-area">
-					<div className="ui-commodity-list">
-						{
-							data.map(listDom)
-						}
+				<div className="vip-commodity-area"  onTouchMove={_this.cntTouchMove} onTouchEnd={_this.cntTouchEnd} onTouchStart={_this.cntTouchStart} > 
+					<div className="vip-commodity-area-list"style={cntStyle} >
+						<div className="ui-commodity-list" style={windowWidth} >
+							<div className="li">
+								<div className="l">
+									<div className="img">
+										<img src="" />
+									</div>
+								</div>
+
+								<div className="r">
+									<div className="ui-commodity-list-name">
+										Apple / 苹果   iPad Air2  128G   WIFI 64g 金色		
+									</div>
+
+									<div className="ui-commodity-list-tag">
+										<span className="tag-text">端午浓情</span>
+										<span className="tag-text">端午浓情</span>
+										<span className="tag-text">端午浓情</span>
+									</div>
+
+									<div className="ui-commodity-vip-msg">
+										<div className="mark-text">
+											<span className="text">268700工分</span>	
+										</div>
+
+										<div className="sales-text">
+											<span className="text">累计销量 199</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div className="ui-commodity-list" style={windowWidth}>
+							<div className="li">
+								<div className="l">
+									<div className="img">
+										<img src="" />
+									</div>
+								</div>
+
+								<div className="r">
+									<div className="ui-commodity-list-name">
+										222222222222222222
+									</div>
+
+									<div className="ui-commodity-list-tag">
+										<span className="tag-text">端午浓情</span>
+										<span className="tag-text">端午浓情</span>
+										<span className="tag-text">端午浓情</span>
+									</div>
+
+									<div className="ui-commodity-vip-msg">
+										<div className="mark-text">
+											<span className="text">268700工分</span>	
+										</div>
+
+										<div className="sales-text">
+											<span className="text">累计销量 199</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="ui-commodity-list" style={windowWidth}>
+							<div className="li">
+								<div className="l">
+									<div className="img">
+										<img src="" />
+									</div>
+								</div>
+
+								<div className="r">
+									<div className="ui-commodity-list-name">
+										333333333333	
+									</div>
+
+									<div className="ui-commodity-list-tag">
+										<span className="tag-text">端午浓情</span>
+										<span className="tag-text">端午浓情</span>
+										<span className="tag-text">端午浓情</span>
+									</div>
+
+									<div className="ui-commodity-vip-msg">
+										<div className="mark-text">
+											<span className="text">268700工分</span>	
+										</div>
+
+										<div className="sales-text">
+											<span className="text">累计销量 199</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>	
@@ -85,57 +271,22 @@ const Cnt = React.createClass({
 }); 
 
 const Body = React.createClass({
-	getInitialState: function(){
-		return {
-			vip_level: 1,
-			products: [],
-			level_1_page: 1,
-			level_2_page: 3,
-			page: 1,
-			count: 20
-		}
-	},
-	loadMoreProductHandler: function(){
-		var _this = this;
-	
-		$FW.Ajax({
-			//url: API_PATH + 'mall/api/index/v1/vip_all_list.json',
-			url: 'http://10.105.6.76:8083/mall/api/index/v1/vip_all_list.json?page=' + _this.state.page + '&count=' + _this.state.count,
-			success: function(data) {
-				 _this.setState({
-				 	page: ++_this.state.page,
-				 	products: _this.state.products.concat(data.products)
-				 });
-			}
-		});
-	},
-	componentDidMount: function(){
-		this.loadMoreProductHandler();		
-
-        $FW.Event.touchBottom(this.loadMoreProductHandler);
-	},
 	render: function() {
 		return (
 			<div>
 				<VipMsg />
-				<Cnt  products={this.state.products}/>
+				<Cnt />
 			</div>	
 		);
 	}		
 });
 
-$FW.DOMReady(function(){
-	NativeBridge.setTitle('VIP专区');
-	if (!$FW.Browser.inApp())
-		ReactDOM.render(<Header title={"VIP专区"} back_handler={back_handler}/>, document.getElementById('header'));
-	ReactDOM.render(<Body/>, document.getElementById('cnt'));
-});
+ReactDOM.render(
+	<Body />,
+	document.getElementById('cnt')	
+);
 
-function back_handler() {
-	if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
-		location.href = '/user'
-	} else {
-		history.back();
-	}
-}
-
+ReactDOM.render(
+	<Header title={'VIP专区'}/>,
+	document.getElementById('header')	
+);
