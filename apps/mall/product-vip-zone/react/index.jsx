@@ -1,23 +1,5 @@
 'use strict';
 
-const Header = React.createClass({
-	render: function() {
-		return (	
-			<div className="header">
-				<div className="header-cnt">
-					<span className="back-btn">
-						<img src="images/ico-blue-back.png" />
-					</span>
-
-					<h1 className="title">
-						{this.props.title}
-					</h1>
-				</div>	
-			</div>			
-		);
-	}		
-});
-
 const VipMsg = React.createClass({
 	render: function() {
 		return (
@@ -165,8 +147,8 @@ const Cnt = React.createClass({
 					</div>
 				</div>
 
-				<div className="vip-commodity-area"  onTouchMove={_this.cntTouchMove} onTouchEnd={_this.cntTouchEnd} onTouchStart={_this.cntTouchStart} > 
-					<div className="vip-commodity-area-list"style={cntStyle} >
+				<div className="vip-commodity-area">
+					<div className="vip-commodity-area-list">
 						<div className="ui-commodity-list" style={windowWidth} >
 							<div className="li">
 								<div className="l">
@@ -187,76 +169,14 @@ const Cnt = React.createClass({
 									</div>
 
 									<div className="ui-commodity-vip-msg">
-										<div className="mark-text">
-											<span className="text">268700工分</span>	
-										</div>
+										<div className="ui-commodity-vip-msg-wrap">
+											<div className="mark-text">
+												<span className="text">268700000工分</span>
+											</div>
 
-										<div className="sales-text">
-											<span className="text">累计销量 199</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div className="ui-commodity-list" style={windowWidth}>
-							<div className="li">
-								<div className="l">
-									<div className="img">
-										<img src="" />
-									</div>
-								</div>
-
-								<div className="r">
-									<div className="ui-commodity-list-name">
-										222222222222222222
-									</div>
-
-									<div className="ui-commodity-list-tag">
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-									</div>
-
-									<div className="ui-commodity-vip-msg">
-										<div className="mark-text">
-											<span className="text">268700工分</span>	
-										</div>
-
-										<div className="sales-text">
-											<span className="text">累计销量 199</span>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div className="ui-commodity-list" style={windowWidth}>
-							<div className="li">
-								<div className="l">
-									<div className="img">
-										<img src="" />
-									</div>
-								</div>
-
-								<div className="r">
-									<div className="ui-commodity-list-name">
-										333333333333	
-									</div>
-
-									<div className="ui-commodity-list-tag">
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-									</div>
-
-									<div className="ui-commodity-vip-msg">
-										<div className="mark-text">
-											<span className="text">268700工分</span>	
-										</div>
-
-										<div className="sales-text">
-											<span className="text">累计销量 199</span>
+											<div className="sales-text">
+												<span className="text">累计销量 1990000</span>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -281,12 +201,22 @@ const Body = React.createClass({
 	}		
 });
 
-ReactDOM.render(
-	<Body />,
-	document.getElementById('cnt')	
-);
+$FW.DOMReady(function(){
+	NativeBridge.setTitle('VIP专区');
+	if (!$FW.Browser.inApp())
+		ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
 
-ReactDOM.render(
-	<Header title={'VIP专区'}/>,
-	document.getElementById('header')	
-);
+
+
+
+
+	ReactDOM.render(<Body/>, document.getElementById('cnt'));
+});
+
+function backward(){
+	location.href = '/';
+}
+
+window.onNativeMessageReceive = function (msg) {
+	if (msg == 'history:back') backward()
+};

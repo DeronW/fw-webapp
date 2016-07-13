@@ -27,7 +27,7 @@ const Mall = React.createClass({
                     <div className="no-banner"></div>}
 
                 <div className="header-nav">
-                    <a className="recharge" onClick={function(){ gotoHandler("/recharge") }}>话费充值</a>
+                    <a className="recharge" onClick={function(){ gotoHandler("/recharge_phone") }}>话费充值</a>
                     <a className="vip" onClick={function(){ gotoHandler("/waiting") }}>VIP专区</a>
                     <a className="goods" onClick={function(){ gotoHandler("/products") }}>豆哥商品</a>
                     <a className="mine" onClick={function(){ gotoHandler("/user", true) }}>我的商城</a>
