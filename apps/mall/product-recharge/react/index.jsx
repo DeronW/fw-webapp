@@ -187,7 +187,7 @@ const ConfirmPop = React.createClass({
                 success: function(data){
                     $FW.Component.Alert(data.validateCode);
                 },
-                fail: function (_, message, _){
+                fail: function (code,message,response){
                     _this.setState({
                         show_warn:true,
                         show_text:message,
