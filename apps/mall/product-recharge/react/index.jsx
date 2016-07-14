@@ -224,9 +224,14 @@ const ConfirmPop = React.createClass({
                         _this.setState({show: false});
                         $FW.Component.Alert("充值成功！");
                     },
-                    fail: function () {
-                        _this.setState({show: false});
-                        $FW.Component.Alert("充值失败！");
+                    fail: function (code,message,response) {
+                        _this.setState({
+                            show:false,
+                            show_warn:true,
+                            show_text:message
+                        });
+                        return true;
+                        //$FW.Component.Alert("充值失败！");
                     }
                 })
             }

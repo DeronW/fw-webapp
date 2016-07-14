@@ -122,6 +122,59 @@ const VipZone = React.createClass({
 		}
 	},
 
+	loadMoreProductHandler: function (done) {
+		console.log('load more product');
+		console.log(done);
+
+		let page = this.state.page[this.state.tab];
+		if (page == 0) return; // 如果page=0 表示没有更多页内容可以加载了
+		let is_reality;
+		if (this.state.tab == 'vipLevel0') {
+			is_reality = 1
+		} else if (this.state.tab == 'vipLevel1') {
+			is_reality = 2
+		} else if(this.state.tab == 'vipLevel2'){
+			is_reality = 0
+		} else if(this.state.tab == 'vipLevel3'){
+			is_reality = 0
+		} else if(this.state.tab == 'vipLevel4'){
+			is_reality = 0
+		}
+
+		$FW.Ajax({
+			url: API_PATH + 'mall/api/index/v1/products.json?count=' + this.pageCount + '&page=' + page + '&isVirtual=' + is_reality,
+			enable_loading: true,
+			success: function (data) {
+				// isVirtual	0全部 1实体 2虚拟
+				let tab;
+				if (data.isVirtual == 0) {
+					tab = 'all'
+				} else if (data.isVirtual == 1) {
+					tab = 'reality'
+				} else if (data.isVirtual == 2) {
+					tab = 'virtual'
+				} else {
+					done && done();
+					return;
+				}
+
+				window.Products[tab] = window.Products[tab].concat(data.products);
+				let products = window.Products[this.state.tab];
+
+				let new_page = this.state.page;
+				new_page[this.state.tab] = new_page[this.state.tab] + 1;
+				if (data.totalCount < 20) new_page[this.state.tab] = 0;
+
+				this.setState({products: products, page: new_page});
+				done && done();
+			}.bind(this)
+		});
+	},
+
+	componentDidMount: function () {
+		this.loadMoreProductHandler(null);
+		$FW.Event.touchBottom(this.loadMoreProductHandler);
+	},
 
 	render: function() {
 		var _this = this;
