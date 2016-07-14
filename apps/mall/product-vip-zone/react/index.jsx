@@ -10,8 +10,10 @@ const VipMsg = React.createClass({
 	}		
 });
 
-const Cnt = React.createClass({
+const VipZone = React.createClass({
 	getInitialState: function() {
+		this.tabs = ['all', 'vipLevel0', 'vipLevel1', 'vipLevel2', 'vipLevel3', 'vipLevel4'];
+		this.pageCount = 20;
 		return {
 			n: 3,
 			counter: 1,
@@ -20,7 +22,18 @@ const Cnt = React.createClass({
 			endX: 0,
 			cntEndX: 0,
 			x: 0,
-			cntX: 0
+			cntX: 0,
+			tab: 'all',
+			page: {
+				all: 1,
+				vipLevel0: 1,
+				vipLevel1: 1,
+				vipLevel2: 1,
+				vipLevel3: 1,
+				vipLevel4: 1
+			},
+			products: [],
+			show:false
 		}
 	},
 	handleTouchStart: function(event) {
@@ -41,7 +54,7 @@ const Cnt = React.createClass({
 	},
 	handleTouchEnd: function(event) {
 		var _this = this;
-		var objWidth = (window.innerWidth * 1.1) - window.innerWidth;
+		var objWidth = (window.innerWidth * 1.3) - window.innerWidth;
 
 		_this.setState({
 			endX: _this.state.x		
@@ -109,6 +122,17 @@ const Cnt = React.createClass({
 
 
 	},
+
+	tabClickHandler: function (tab) {
+		this.setState({tab: tab, products: window.Products[tab]});
+		if (window.Products[tab].length == 0) {
+			setTimeout(function () {
+				this.loadMoreProductHandler(null);
+			}.bind(this), 500)
+		}
+	},
+
+
 	render: function() {
 		var _this = this;
 
@@ -125,92 +149,88 @@ const Cnt = React.createClass({
 			width: window.innerWidth
 		};
 
-		return (
-			<div className="content">
-				<div className="ui-tab" onTouchMove={_this.handleTouchMove} onTouchEnd={_this.handleTouchEnd} onTouchStart={_this.handleTouchStart}>
-					<div className="ui-tab-block" style={marginStyle}>
-						<div className="ui-tab-li ui-select-li">
-							<span className="text">全部</span>
-						</div>
-						<div className="ui-tab-li">
-							<span className="text">vip1</span>
-						</div>
-						<div className="ui-tab-li">
-							<span className="text">vip2</span>
-						</div>
-						<div className="ui-tab-li">
-							<span className="text">vip3</span>
-						</div>
-						<div className="ui-tab-li">
-							<span className="text">vip4</span>
-						</div>
-					</div>
+		let tab = function (i) {
+			let name = {
+				all: '全部',
+				vipLevel0: '普通会员',
+				vipLevel1: 'vip1',
+				vipLevel2: 'vip2',
+				vipLevel3: 'vip3',
+				vipLevel4: 'vip4',
+			};
+			return (
+				<div key={i} className={i==_this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
+					 onClick={function(){_this.tabClickHandler(i)}}>
+					<span className="text">{name[i]}</span>
 				</div>
+			)
+		};
 
-				<div className="vip-commodity-area">
-					<div className="vip-commodity-area-list">
-						<div className="ui-commodity-list" style={windowWidth} >
-							<div className="li">
-								<div className="l">
-									<div className="img">
-										<img src="" />
-									</div>
-								</div>
+		let VipMsg = _this.state.show ? (<div className="vip-msg">
+			<p className="text">您当前等级是<em className="c">VIP2</em>，可用工分 <em className="c">269562</em></p>
+		</div>) : null;
 
-								<div className="r">
-									<div className="ui-commodity-list-name">
-										Apple / 苹果   iPad Air2  128G   WIFI 64g 金色		
-									</div>
-
-									<div className="ui-commodity-list-tag">
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-										<span className="tag-text">端午浓情</span>
-									</div>
-
-									<div className="ui-commodity-vip-msg">
-										<div className="ui-commodity-vip-msg-wrap">
-											<div className="mark-text">
-												<span className="text">268700000工分</span>
-											</div>
-
-											<div className="sales-text">
-												<span className="text">累计销量 1990000</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>	
-		);
-	}		
-}); 
-
-const Body = React.createClass({
-	render: function() {
 		return (
 			<div>
-				<VipMsg />
-				<Cnt />
-			</div>	
+				{VipMsg}
+				<div className="ui-tab" onTouchMove={_this.handleTouchMove} onTouchEnd={_this.handleTouchEnd} onTouchStart={_this.handleTouchStart}>
+					<div className="ui-tab-block" style={marginStyle}>
+						this.tabs.map(tab)}
+					</div>
+				</div>
+				<div className="products-list">
+					{ this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
+					{this.state.products.length == 0 && this.state.page[this.state.tab] == 0 ? <div className="empty-list">暂无商品</div> : null}
+				</div>
+		</div>
 		);
 	}		
 });
+
+
+const ProductItem = React.createClass({
+	render: function () {
+		var show_price = this.props.price != 0 || this.props.score == 0;
+		var score = (parseFloat(this.props.score) > 0) ? (
+			<span className="list-price-score">{show_price ? <span>&#43;</span> : null}{this.props.score}工分</span>) : null;
+		var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
+		var cover_bg = 'url(' + (this.props.img || 'images/default-product.jpg') + ')';
+
+		return (
+			<a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
+				<div className="list-img" style={{backgroundImage: cover_bg}}></div>
+				{Angle}
+				<div className="list-name">{this.props.title}</div>
+				<div className="list-mark">
+					{ (this.props.tags || []).map((d, index) => <div key={index}>{d}</div>) }
+				</div>
+				<div className="list-price-box">
+					<div className="list-price">
+						{show_price ? <span className="list-price-mark">&yen;</span> : null}
+						{show_price ? <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span> : null}
+						{ score }
+					</div>
+					<div className="list-sold">
+						<span>累计销量 </span>
+						<span>{this.props.sales}</span>
+					</div>
+				</div>
+			</a>
+		)
+	}
+});
+
+window.Products = {
+	all: [],
+	virtual: [],
+	reality: []
+};
 
 $FW.DOMReady(function(){
 	NativeBridge.setTitle('VIP专区');
 	if (!$FW.Browser.inApp())
 		ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
-
-
-
-
-
-	ReactDOM.render(<Body/>, document.getElementById('cnt'));
+	ReactDOM.render(<VipZone/>, document.getElementById('cnt'));
 });
 
 function backward(){

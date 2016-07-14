@@ -166,6 +166,10 @@ const ConfirmPop = React.createClass({
         })
     },
     changeValueHandler: function (e) {
+        let v = e.target.value;
+        if(isNaN(v) || v.length != 11 || v[0] != 1) {
+            $FW.Component.Alert("您输入的号码不正确！");
+        }
         this.setState({value: e.target.value});
     },
     countingDown: function () {
