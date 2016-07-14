@@ -19,6 +19,7 @@ const Recharge = React.createClass({
         if (this.state.tab == 'fee') {
             $FW.Ajax({
                 url: API_PATH + '/api/v1/phone/fee/recharge.json',
+                //url: "http://10.10.100.112/mockjs/4/api/v1/phone/fee/recharge.json",
                 enable_loading: true,
                 success: function (data) {
                     let pay_score;
@@ -44,21 +45,16 @@ const Recharge = React.createClass({
     },
 
     getSMSCodeHandler: function () {
+        let v = this.state.phone;
         if (this.state.login) {
             if (this.state.user_score < this.state.pay_score) {
                 $FW.Component.Alert("充值失败，工分不足！");
-            } else if (this.state.phone == '') {
+            } else if (v == '') {
                 $FW.Component.Alert("手机号码不能为空！");
-            } else {
-                $FW.Ajax({
-                    url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
-                    method: 'get',
-                    enable_loading: true,
-                    success: function (data) {
-                        $FW.Component.Alert(data.validateCode);
-                        confirmPanel.show();
-                    }
-                });
+            }else if(v == isNaN(v) || v.length != 11 || v[0] != 1){
+                    $FW.Component.Alert("您输入的号码不正确！");
+            }else{
+                   confirmPanel.show();
             }
         }else{
             $FW.Utils.loginMall();
@@ -154,7 +150,9 @@ const ConfirmPop = React.createClass({
         return {
             show: false,
             value: '',
-            remain: 0
+            remain: 0,
+            show_warn:false,
+            show_text:''
         }
     },
     show: function () {
@@ -168,10 +166,6 @@ const ConfirmPop = React.createClass({
         })
     },
     changeValueHandler: function (e) {
-        let v = e.target.value;
-        if(isNaN(v) || v.length != 11 || v[0] != 1) {
-            $FW.Component.Alert("您输入的号码不正确！");
-        }
         this.setState({value: e.target.value});
     },
     countingDown: function () {
@@ -188,12 +182,18 @@ const ConfirmPop = React.createClass({
             this.tick();
             $FW.Ajax({
                 url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
+                //url: "http://10.10.100.112/mockjs/4/mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'get',
-                success: function (data) {
-                    if (data.validateCode) $FW.Component.Alert(data.validateCode);
+                success: function(data){
+                    $FW.Component.Alert(data.validateCode);
                 },
-                fail: function () {
-                    _this.setState({remain: 0});
+                fail: function (_, message, _){
+                    _this.setState({
+                        show_warn:true,
+                        show_text:message,
+                        remain: 0
+                    });
+                    return true;
                 }
             })
         }
@@ -203,11 +203,13 @@ const ConfirmPop = React.createClass({
         var form_data = rechargePanel.getFormData();
         $FW.Ajax({
             url: API_PATH + '/mall/api/v1/getToken.json',
+            //url : "http://10.10.100.112/mockjs/4/mall/api/v1/getToken.json",
             method: "get",
             success: function (data) {
                 var token = data.token;
                 $FW.Ajax({
                     url: API_PATH + '/api/v1/phone/recharge-order.json',
+                    //url: "http://10.10.100.112/mockjs/4/api/v1/phone/recharge-order.json",
                     enable_loading: true,
                     method: 'get',
                     data: {
@@ -233,7 +235,7 @@ const ConfirmPop = React.createClass({
 
     render: function () {
         if (!this.state.show) return null;
-
+        let frequent_tip = this.state.show_warn ? (<div className="wrong-tip">{this.state.show_text}</div>) : null;
         return (
             <div className="pop-wrap">
                 <div className="confirm-pop">
@@ -246,7 +248,7 @@ const ConfirmPop = React.createClass({
                             <span className={this.state.remain>0 ? "btn-countdown" : "sms-btn"}
                                   onClick={this.getSmsCodeHandler}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
-                        <div className={this.state.show ? "hide" : "wrong-tip"}>验证码输入错误</div>
+                        {frequent_tip}
                         <div className="pop-confirm-btn" onClick={this.submitHandler}>确认</div>
                         <div className="pop-tip">充值后1~10分钟到账</div>
                     </div>
@@ -264,6 +266,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + '/api/v1/user-state.json',
+        //url: "http://10.10.100.112/mockjs/4/api/v1/user-state.json",
         enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
