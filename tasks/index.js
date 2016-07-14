@@ -44,7 +44,7 @@ module.exports = function (site_name, project_name, configs) {
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
     var common_javascript_files = [
-        `${lib_path}fw-0.1.0.js`,
+        `${lib_path}fw-1.0.0.js`,
         `${lib_path}native-bridge-0.2.0.js`
     ];
     if (CONFIG.debug) {

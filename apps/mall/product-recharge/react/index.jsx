@@ -60,6 +60,8 @@ const Recharge = React.createClass({
                     }
                 });
             }
+        }else{
+            $FW.Utils.loginMall();
         }
     },
 
@@ -157,7 +159,7 @@ const ConfirmPop = React.createClass({
     },
     show: function () {
         this.setState({show: true});
-        this.tick();
+        //this.tick();
     },
     hide: function () {
         this.setState({
