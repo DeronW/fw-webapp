@@ -1,15 +1,5 @@
 'use strict';
 
-const VipMsg = React.createClass({
-	render: function() {
-		return (
-			<div className="vip-msg">
-				<p className="text">您当前等级是<em className="c">VIP2</em>，可用工分 <em className="c">269562</em></p>
-			</div>	
-		);
-	}		
-});
-
 const VipZone = React.createClass({
 	getInitialState: function() {
 		this.tabs = ['all', 'vipLevel0', 'vipLevel1', 'vipLevel2', 'vipLevel3', 'vipLevel4'];
@@ -33,7 +23,7 @@ const VipZone = React.createClass({
 				vipLevel4: 1
 			},
 			products: [],
-			show:false
+			show:true
 		}
 	},
 	handleTouchStart: function(event) {
@@ -167,7 +157,7 @@ const VipZone = React.createClass({
 		};
 
 		let VipMsg = _this.state.show ? (<div className="vip-msg">
-			<p className="text">您当前等级是<em className="c">VIP2</em>，可用工分 <em className="c">269562</em></p>
+			<p className="text">您当前等级是<em className="c">VIP2</em>，可用工分 <em className="c">269562</em><span className="closeBtn"></span></p>
 		</div>) : null;
 
 		return (
@@ -175,11 +165,11 @@ const VipZone = React.createClass({
 				{VipMsg}
 				<div className="ui-tab" onTouchMove={_this.handleTouchMove} onTouchEnd={_this.handleTouchEnd} onTouchStart={_this.handleTouchStart}>
 					<div className="ui-tab-block" style={marginStyle}>
-						this.tabs.map(tab)}
+						{this.tabs.map(tab)}
 					</div>
 				</div>
 				<div className="products-list">
-					{ this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
+					{this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
 					{this.state.products.length == 0 && this.state.page[this.state.tab] == 0 ? <div className="empty-list">暂无商品</div> : null}
 				</div>
 		</div>
@@ -222,8 +212,11 @@ const ProductItem = React.createClass({
 
 window.Products = {
 	all: [],
-	virtual: [],
-	reality: []
+	vipLevel0: [],
+	vipLevel1: [],
+	vipLevel2: [],
+	vipLevel3: [],
+	vipLevel4: []
 };
 
 $FW.DOMReady(function(){
