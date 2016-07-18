@@ -162,8 +162,7 @@ const ConfirmPop = React.createClass({
     },
     hide: function () {
         this.setState({
-            show: false,
-            remain: 0
+            show: false
         })
     },
     changeValueHandler: function (e) {
@@ -222,7 +221,10 @@ const ConfirmPop = React.createClass({
                         tokenStr: token
                     },
                     success: function () {
-                        _this.setState({show: false});
+                        _this.setState({
+                            show: false,
+                            user_score: _this.state.user_score - _this.state.pay_score
+                        });
                         $FW.Component.Alert("充值成功！");
                     },
                     fail: function (code,message,response) {
