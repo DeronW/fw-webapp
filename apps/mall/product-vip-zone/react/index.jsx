@@ -1,9 +1,31 @@
 'use strict';
+const API_PATH = document.getElementById('api-path').value;
+const test_api = "http://10.105.6.76:8083/";
+
+const VipMsg = React.createClass({
+	getInitialState: function(){
+		return {
+			show:true,
+			vipLevel:this.props.user_level,
+			score:this.props.user_score
+		}
+	},
+	closeHandler: function(){
+		this.setState({show:false});
+	},
+	render: function() {
+		return (
+			<div className="vip-msg">
+				<p className="text">您当前等级是<em className="c">{this.state.vipLevel}</em>，可用工分<em className="c">{this.state.score}</em><span className="closeBtn" onClick={this.closeHandler}></span></p>
+			</div>
+		);
+	}
+});
 
 const VipZone = React.createClass({
 	getInitialState: function() {
 		this.tabs = ['all', 'vipLevel0', 'vipLevel1', 'vipLevel2', 'vipLevel3', 'vipLevel4'];
-		this.pageCount = 20;
+		this.count = 20;
 		return {
 			n: 3,
 			counter: 1,
@@ -22,8 +44,7 @@ const VipZone = React.createClass({
 				vipLevel3: 1,
 				vipLevel4: 1
 			},
-			products: [],
-			show:true
+			products: []
 		}
 	},
 	handleTouchStart: function(event) {
@@ -93,7 +114,6 @@ const VipZone = React.createClass({
 				cntEndX: 0		
 			});
 		} else if(-(_this.state.cntX) > goldLine) {
-			console.log("goldLine");
 			_this.setState({
 				cntX: -(window.innerWidth * _this.state.counter),
 				cntEndX: -(window.innerWidth * _this.state.counter), 
@@ -103,7 +123,6 @@ const VipZone = React.createClass({
 		} 
 		
 		if (-(_this.state.cntX) > window.innerWidth *  (_this.state.n -1)) {
-			console.log("aaaaaa");
 			_this.setState({
 				cntX: -(window.innerWidth * (_this.state.n - 1)),	
 				cntEndX: -(window.innerWidth * (_this.state.n - 1))	
@@ -128,31 +147,39 @@ const VipZone = React.createClass({
 
 		let page = this.state.page[this.state.tab];
 		if (page == 0) return; // 如果page=0 表示没有更多页内容可以加载了
-		let is_reality;
-		if (this.state.tab == 'vipLevel0') {
-			is_reality = 1
-		} else if (this.state.tab == 'vipLevel1') {
-			is_reality = 2
+		let is_Level;
+		if (this.state.tab == 'all') {
+			is_Level = -1
+		} else if(this.state.tab == 'vipLevel0'){
+			is_Level = 1
+		}else if (this.state.tab == 'vipLevel1') {
+			is_Level = 2
 		} else if(this.state.tab == 'vipLevel2'){
-			is_reality = 0
+			is_Level = 3
 		} else if(this.state.tab == 'vipLevel3'){
-			is_reality = 0
+			is_Level = 4
 		} else if(this.state.tab == 'vipLevel4'){
-			is_reality = 0
+			is_Level = 5
 		}
 
 		$FW.Ajax({
-			url: API_PATH + 'mall/api/index/v1/products.json?count=' + this.pageCount + '&page=' + page + '&isVirtual=' + is_reality,
+			//url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.pageCount + '&page=' + page + '&vipLevel=' + is_Level,
+			url: test_api + 'mall/api/index/v1/vip_list.json?count=' + this.count + '&page=' + page + '&vipLevel=' + is_Level,
 			enable_loading: true,
 			success: function (data) {
-				// isVirtual	0全部 1实体 2虚拟
 				let tab;
-				if (data.isVirtual == 0) {
+				if (data.vipLevel == -1) {
 					tab = 'all'
-				} else if (data.isVirtual == 1) {
-					tab = 'reality'
-				} else if (data.isVirtual == 2) {
-					tab = 'virtual'
+				} else if (data.vipLevel == 1) {
+					tab = 'vipLevel0'
+				} else if (data.vipLevel == 2) {
+					tab = 'vipLevel1'
+				} else if (data.vipLevel == 3) {
+					tab = 'vipLevel2'
+				} else if (data.vipLevel == 4) {
+					tab = 'vipLevel3'
+				} else if (data.vipLevel == 5) {
+					tab = 'vipLevel4'
 				} else {
 					done && done();
 					return;
@@ -209,13 +236,8 @@ const VipZone = React.createClass({
 			)
 		};
 
-		let VipMsg = _this.state.show ? (<div className="vip-msg">
-			<p className="text">您当前等级是<em className="c">VIP2</em>，可用工分 <em className="c">269562</em><span className="closeBtn"></span></p>
-		</div>) : null;
-
 		return (
 			<div>
-				{VipMsg}
 				<div className="ui-tab" onTouchMove={_this.handleTouchMove} onTouchEnd={_this.handleTouchEnd} onTouchStart={_this.handleTouchStart}>
 					<div className="ui-tab-block" style={marginStyle}>
 						{this.tabs.map(tab)}
@@ -274,8 +296,17 @@ window.Products = {
 
 $FW.DOMReady(function(){
 	NativeBridge.setTitle('VIP专区');
+
 	if (!$FW.Browser.inApp())
 		ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
+
+    $FW.Ajax({
+		url:test_api + "mall/api/member/v1/user_level_points.json",
+		enable_loading: true,
+		success:function(data){
+			ReactDOM.render(<VipMsg user_level={data.vip_level} user_score={data.score}/>, document.getElementById('cnt'));
+		}
+	});
 	ReactDOM.render(<VipZone/>, document.getElementById('cnt'));
 });
 

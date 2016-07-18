@@ -227,7 +227,6 @@ const ConfirmPop = React.createClass({
                     },
                     fail: function (code,message,response) {
                         _this.setState({
-                            show:false,
                             show_warn:true,
                             show_text:message
                         });
