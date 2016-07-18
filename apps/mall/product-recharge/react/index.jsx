@@ -71,6 +71,11 @@ const Recharge = React.createClass({
         }
     },
 
+    costPayScore: function(){
+        this.setState({
+            user_score: this.state.user_score - this.state.pay_score
+        })
+    },
     tab2handler: function () {
         $FW.Component.Alert("正在建设中，敬请期待！");
     },
@@ -96,7 +101,7 @@ const Recharge = React.createClass({
 
             return <div className={_this.state.bizNo == data.bizNo ? "value-box selected" : "value-box"} key={index}
                         onClick={check}>
-                <span className="value-num">{data.title}</span>
+                <span className="value-num">{data.title}<span className="price-unit">元</span></span>
                 {data.sub_title ?
                     <span className="limited-sale">{data.sub_title}</span> :
                     null
@@ -221,10 +226,9 @@ const ConfirmPop = React.createClass({
                         tokenStr: token
                     },
                     success: function () {
-                        _this.setState({
-                            show: false,
-                            user_score: _this.state.user_score - _this.state.pay_score
-                        });
+                        _this.setState({ show: false});
+
+                        window.rechargePanel.costPayScore()
                         $FW.Component.Alert("充值成功！");
                     },
                     fail: function (code,message,response) {
