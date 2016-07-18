@@ -51,9 +51,9 @@ const Recharge = React.createClass({
             if (this.state.user_score < this.state.pay_score) {
                 $FW.Component.Alert("充值失败，工分不足！");
             } else if (v == '') {
-                $FW.Component.Alert("手机号码不能为空！");
+                $FW.Component.Alert("请输入手机号！");
             }else if(!myreg.test(v)){
-                    $FW.Component.Alert("您输入的号码不正确！");
+                $FW.Component.Alert("手机号格式不正确！");
             }else{
                    confirmPanel.show();
             }
