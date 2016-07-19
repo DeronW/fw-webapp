@@ -47,11 +47,11 @@ const Recharge = React.createClass({
         if(isNaN(v)) return;
         if(v.length > 3) v = v.substr(0, 3) + ' ' + v.substr(3);
         if(v.length > 8) v = v.substr(0, 8) + ' ' + v.substring(8, 12);
-        this.setState({phone: e.target.value, format_phone: v});
+        this.setState({phone: v.replace(/ /g, ''), format_phone: v});
     },
 
     getSMSCodeHandler: function () {
-        let v = this.state.phone.replace(/ /g, '');
+        let v = this.state.phone;
         let myreg = /^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/;
         if (this.state.login) {
             if (this.state.user_score < this.state.pay_score) {
