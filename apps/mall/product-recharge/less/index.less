@@ -5,6 +5,14 @@
 a{
      text-decoration: none;
 }
+input{
+     border: 0;
+     -webkit-appearance: none;
+}
+input::-webkit-input-placeholder{
+     font-size:36px;
+     color:#ccc;
+}
 html,body{
      width:100%;
      height:100%;
@@ -54,7 +62,8 @@ html,body{
      width:595px;
      padding-left:30px;
      height:104px;
-     font-size:36px;
+     font-size:50px;
+     color:#4b4d4c;
      line-height:104px;
      -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
@@ -72,8 +81,8 @@ html,body{
 }
 .value-box .value-num{
      display:inline-block;
-     width:202px;
-     height:146px;
+     width:200px;
+     height:144px;
      border:1px solid #fff;
      font-size:42px;
      color:#666666;
@@ -336,4 +345,11 @@ html,body{
 }
 .price-unit{
      font-size:24px;
+}
+.limited-sale-title{
+    position:absolute;
+    bottom:-2px;
+    left:30px;
+    display:block;
+    width:96px;
 }

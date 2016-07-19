@@ -41,7 +41,12 @@ const Recharge = React.createClass({
     },
 
     changeValueHandler: function (e) {
-        this.setState({phone: e.target.value});
+        var v = e.target.value + '';
+        v = v.replace(/ /g, '');
+        if(isNaN(v)) return;
+        if(v.length > 3) v = v.substr(0, 3) + ' ' + v.substr(3);
+        if(v.length > 8) v = v.substr(0, 8) + ' ' + v.substring(8, 12);
+        this.setState({phone: v});
     },
 
     getSMSCodeHandler: function () {
@@ -85,7 +90,9 @@ const Recharge = React.createClass({
 
         let phoneInput = (
             <div className="phonenumber-wrap">
-                <input className="phone-input" placeholder="请输入手机号" number="true" onChange={this.changeValueHandler}/>
+                <input className="phone-input" placeholder="请输入手机号" number="true"
+                       value={this.state.phone}
+                       onChange={this.changeValueHandler}/>
                 <span className="phone-icon"></span>
             </div>
         );
@@ -103,7 +110,7 @@ const Recharge = React.createClass({
                         onClick={check}>
                 <span className="value-num">{data.title}<span className="price-unit">元</span></span>
                 {data.sub_title ?
-                    <span className="limited-sale"><span className="limited-sale-icon"></span>{data.sub_title}</span> :
+                    <span className="limited-sale"><span className="limited-sale-icon"></span><span className="limited-sale-title">{data.sub_title}</span></span> :
                     null
                 }
                 {_this.state.bizNo == data.bizNo ?
