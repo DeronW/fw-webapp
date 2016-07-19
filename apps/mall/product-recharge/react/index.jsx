@@ -226,8 +226,11 @@ const ConfirmPop = React.createClass({
                         tokenStr: token
                     },
                     success: function () {
-                        _this.setState({ show: false});
-
+                        _this.setState({
+                            show: false,
+                            show_warn:false,
+                            remain:0
+                        });
                         window.rechargePanel.costPayScore()
                         $FW.Component.Alert("充值成功！");
                     },
