@@ -12,6 +12,7 @@ const Recharge = React.createClass({
             bizNo: null,
             login: this.props.is_login,
             phone: '',
+            format_phone: '',
             price: ''
         }
     },
@@ -46,7 +47,7 @@ const Recharge = React.createClass({
         if(isNaN(v)) return;
         if(v.length > 3) v = v.substr(0, 3) + ' ' + v.substr(3);
         if(v.length > 8) v = v.substr(0, 8) + ' ' + v.substring(8, 12);
-        this.setState({phone: v});
+        this.setState({phone: e.target.value, format_phone: v});
     },
 
     getSMSCodeHandler: function () {
@@ -91,7 +92,7 @@ const Recharge = React.createClass({
         let phoneInput = (
             <div className="phonenumber-wrap">
                 <input className="phone-input" placeholder="请输入手机号" number="true"
-                       value={this.state.phone}
+                       value={this.state.format_phone}
                        onChange={this.changeValueHandler}/>
                 <span className="phone-icon"></span>
             </div>
