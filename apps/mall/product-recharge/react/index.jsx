@@ -51,7 +51,7 @@ const Recharge = React.createClass({
     },
 
     getSMSCodeHandler: function () {
-        let v = this.state.phone;
+        let v = this.state.phone.replace(/ /g, '');
         let myreg = /^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/;
         if (this.state.login) {
             if (this.state.user_score < this.state.pay_score) {
