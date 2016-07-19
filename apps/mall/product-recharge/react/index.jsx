@@ -241,8 +241,8 @@ const ConfirmPop = React.createClass({
                             value:''
                         });
                         window.rechargePanel.costPayScore();
-                        _this.reloadFeeHandler();
                         $FW.Component.Alert("充值成功！");
+                        //_this.reloadFeeHandler();
                     },
                     fail: function (code,message,response) {
                         _this.setState({
