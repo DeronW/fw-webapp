@@ -61,6 +61,7 @@ MALL_APP_NAMES.forEach(function (i) {
         include_common_js: common_js,
         width_swipe: true
     });
+
     gt('mall', i, {
         cmd_prefix: 'pack',
         api_path: 'http://mmall.9888.cn/',

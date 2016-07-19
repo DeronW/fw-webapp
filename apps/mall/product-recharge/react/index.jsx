@@ -18,27 +18,30 @@ const Recharge = React.createClass({
     },
     componentDidMount: function () {
         if (this.state.tab == 'fee') {
-            $FW.Ajax({
-                url: API_PATH + '/api/v1/phone/fee/recharge.json',
-                //url: "http://10.10.100.112/mockjs/4/api/v1/phone/fee/recharge.json",
-                enable_loading: true,
-                success: function (data) {
-                    let pay_score;
-                    data.fee.forEach((i)=> {
-                        if (i.bizNo == data.defaultBizNo)
-                            pay_score = i.score;
-                    })
-
-                    if (!pay_score) console.log('no match default bizNo', data);
-
-                    this.setState({
-                        pay_score: pay_score,
-                        bizNo: data.defaultBizNo,
-                        product_fee: data.fee
-                    })
-                }.bind(this)
-            });
+            this.reloadFeeHandler();
         }
+    },
+
+    reloadFeeHandler: function(){
+        $FW.Ajax({
+            url: API_PATH + '/api/v1/phone/fee/recharge.json',
+            enable_loading: true,
+            success: function (data) {
+                let pay_score;
+                data.fee.forEach((i)=> {
+                    if (i.bizNo == data.defaultBizNo)
+                        pay_score = i.score;
+                })
+
+                if (!pay_score) console.log('no match default bizNo', data);
+
+                this.setState({
+                    pay_score: pay_score,
+                    bizNo: data.defaultBizNo,
+                    product_fee: data.fee
+                })
+            }.bind(this)
+        });
     },
 
     changeValueHandler: function (e) {
@@ -195,7 +198,6 @@ const ConfirmPop = React.createClass({
             this.tick();
             $FW.Ajax({
                 url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
-                //url: "http://10.10.100.112/mockjs/4/mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'get',
                 success: function(data){
                     $FW.Component.Alert(data.validateCode);
@@ -216,13 +218,11 @@ const ConfirmPop = React.createClass({
         var form_data = rechargePanel.getFormData();
         $FW.Ajax({
             url: API_PATH + '/mall/api/v1/getToken.json',
-            //url : "http://10.10.100.112/mockjs/4/mall/api/v1/getToken.json",
             method: "get",
             success: function (data) {
                 var token = data.token;
                 $FW.Ajax({
                     url: API_PATH + '/api/v1/phone/recharge-order.json',
-                    //url: "http://10.10.100.112/mockjs/4/api/v1/phone/recharge-order.json",
                     enable_loading: true,
                     method: 'get',
                     data: {
@@ -237,9 +237,11 @@ const ConfirmPop = React.createClass({
                         _this.setState({
                             show: false,
                             show_warn:false,
-                            remain:0
+                            remain:0,
+                            value:''
                         });
-                        window.rechargePanel.costPayScore()
+                        window.rechargePanel.costPayScore();
+                        _this.reloadFeeHandler();
                         $FW.Component.Alert("充值成功！");
                     },
                     fail: function (code,message,response) {
@@ -288,7 +290,6 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + '/api/v1/user-state.json',
-        //url: "http://10.10.100.112/mockjs/4/api/v1/user-state.json",
         enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
