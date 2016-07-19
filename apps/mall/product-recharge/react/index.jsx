@@ -103,7 +103,7 @@ const Recharge = React.createClass({
                         onClick={check}>
                 <span className="value-num">{data.title}<span className="price-unit">元</span></span>
                 {data.sub_title ?
-                    <span className="limited-sale">{data.sub_title}</span> :
+                    <span className="limited-sale"><span className="limited-sale-icon"></span>{data.sub_title}</span> :
                     null
                 }
                 {_this.state.bizNo == data.bizNo ?
