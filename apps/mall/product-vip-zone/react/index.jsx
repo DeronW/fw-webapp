@@ -14,9 +14,16 @@ const VipMsg = React.createClass({
 		this.setState({show:false});
 	},
 	render: function() {
+		let _this = this;
+		let user_level_manifest;
+		if(this.state.vipLevel == 1) user_level_manifest = "普通用户";
+		if(this.state.vipLevel == 2) user_level_manifest = "VIP1";
+		if(this.state.vipLevel == 3) user_level_manifest = "VIP2";
+		if(this.state.vipLevel == 4) user_level_manifest = "VIP3";
+		if(this.state.vipLevel == 5) user_level_manifest = "VIP4";
 		return (
 			<div className="vip-msg">
-				<p className="text">您当前等级是<em className="c">{this.state.vipLevel}</em>，可用工分<em className="c">{this.state.score}</em><span className="closeBtn" onClick={this.closeHandler}></span></p>
+				<p className="text">您当前等级是<em className="c">{user_level_manifest}</em>，可用工分<em className="c">{this.state.score}</em><span className="closeBtn" onClick={_this.closeHandler}></span></p>
 			</div>
 		);
 	}
@@ -238,10 +245,11 @@ $FW.DOMReady(function(){
 		ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
-		url:test_api + "mall/api/member/v1/user_level_points.json",
+		//url:test_api + "mall/api/member/v1/user_level_points.json",
+		url:"http://127.0.0.1/user_level_points.json",
 		enable_loading: true,
 		success:function(data){
-			if(data.is_login){
+			if(data.loginOk){
 				ReactDOM.render(<VipMsg user_level={data.vip_level} user_score={data.score}/>, document.getElementById('msg'));
 			}
 		}
