@@ -21,7 +21,7 @@ const VipMsg = React.createClass({
 		if(this.state.vipLevel == 4) user_level_manifest = "VIP3";
 		if(this.state.vipLevel == 5) user_level_manifest = "VIP4";
 		return (
-			<div className={this.state.show ? "vip-msg" : "hide"} >
+			<div className={this.state.show ? "vip-msg" : "hide"}>
 				<p className="text">您当前等级是<em className="c">{user_level_manifest}</em>，可用工分<em className="c">{this.state.score}</em><span className="closeBtn" onClick={this.closeHandler}></span></p>
 			</div>
 		);
