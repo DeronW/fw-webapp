@@ -5,7 +5,7 @@ const test_api = "http://10.105.6.76:8083/";
 const VipMsg = React.createClass({
 	getInitialState: function(){
 		return {
-			show:false,
+			show:true,
 			vipLevel:this.props.user_level,
 			score:this.props.user_score
 		}
@@ -14,7 +14,6 @@ const VipMsg = React.createClass({
 		this.setState({show:false});
 	},
 	render: function() {
-		let _this = this;
 		let user_level_manifest;
 		if(this.state.vipLevel == 1) user_level_manifest = "普通用户";
 		if(this.state.vipLevel == 2) user_level_manifest = "VIP1";
@@ -22,8 +21,8 @@ const VipMsg = React.createClass({
 		if(this.state.vipLevel == 4) user_level_manifest = "VIP3";
 		if(this.state.vipLevel == 5) user_level_manifest = "VIP4";
 		return (
-			<div className="vip-msg">
-				<p className="text">您当前等级是<em className="c">{user_level_manifest}</em>，可用工分<em className="c">{this.state.score}</em><span className="closeBtn" onClick={_this.closeHandler}></span></p>
+			<div className={this.state.show ? "vip-msg" : "hide"} >
+				<p className="text">您当前等级是<em className="c">{user_level_manifest}</em>，可用工分<em className="c">{this.state.score}</em><span className="closeBtn" onClick={this.closeHandler}></span></p>
 			</div>
 		);
 	}
@@ -251,6 +250,7 @@ $FW.DOMReady(function(){
 		success:function(data){
 			if(data.loginOk){
 				ReactDOM.render(<VipMsg user_level={data.vip_level} user_score={data.score}/>, document.getElementById('msg'));
+
 			}
 		}
 	});
