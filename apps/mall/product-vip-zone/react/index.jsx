@@ -5,7 +5,7 @@ const test_api = "http://10.105.6.76:8083/";
 const VipMsg = React.createClass({
 	getInitialState: function(){
 		return {
-			show:true,
+			show:false,
 			vipLevel:this.props.user_level,
 			score:this.props.user_score
 		}
@@ -47,88 +47,26 @@ const VipZone = React.createClass({
 			products: []
 		}
 	},
+
 	handleTouchStart: function(event) {
-		var _this = this;
-
-		_this.setState({
-			initialX: event.targetTouches[0].pageX	
-		});
-
+		this.setState({ initialX: event.targetTouches[0].pageX});
 	},
 	handleTouchMove: function(event) {
-		var _this = this;
-
-		_this.setState({
-			x: _this.state.endX + (event.targetTouches[0].pageX - _this.state.initialX)
-		});	
-
+		this.setState({ x: this.state.endX + (event.targetTouches[0].pageX - this.state.initialX)});
 	},
 	handleTouchEnd: function(event) {
-		var _this = this;
 		var objWidth = (window.innerWidth * 1.3) - window.innerWidth;
 
-		_this.setState({
-			endX: _this.state.x		
-		});
+		this.setState({ endX: this.state.x});
 
-		if(_this.state.x > 0) {
-			_this.setState({
-				x: 0,		
-				endX: 0
-			});
-		} else if (-(_this.state.x) > objWidth ) {
-			_this.setState({
+		if(this.state.x > 0) {
+			this.setState({ x: 0, endX: 0});
+		} else if (-(this.state.x) > objWidth ) {
+			this.setState({
 				x: -(objWidth),		
 				endX: -(objWidth)
 			});
 		} 
-
-	},
-	cntTouchStart: function(event) {
-		var _this = this;
-
-		_this.setState({
-			cntInitialX: event.targetTouches[0].pageX	
-		});
-	},
-	cntTouchMove: function(event) {
-		var _this = this;
-
-		_this.setState({
-			cntX: _this.state.cntEndX + (event.targetTouches[0].pageX - _this.state.cntInitialX)
-		});	
-				  
-	},
-	cntTouchEnd: function() {
-		var _this = this;
-		var objWidth = (window.innerWidth * _this.state.n);
-		var goldLine = window.innerWidth / 8; 
-
-		_this.setState({
-			cntEndX: _this.state.cntX		
-		});
-
-		if(_this.state.cntX > 0) {
-			_this.setState({
-				cntX: 0,
-				cntEndX: 0		
-			});
-		} else if(-(_this.state.cntX) > goldLine) {
-			_this.setState({
-				cntX: -(window.innerWidth * _this.state.counter),
-				cntEndX: -(window.innerWidth * _this.state.counter), 
-				counter: ++_this.state.counter
-			});	
-				
-		} 
-		
-		if (-(_this.state.cntX) > window.innerWidth *  (_this.state.n -1)) {
-			_this.setState({
-				cntX: -(window.innerWidth * (_this.state.n - 1)),	
-				cntEndX: -(window.innerWidth * (_this.state.n - 1))	
-			});
-		}
-
 
 	},
 
@@ -142,9 +80,6 @@ const VipZone = React.createClass({
 	},
 
 	loadMoreProductHandler: function (done) {
-		console.log('load more product');
-		console.log(done);
-
 		let page = this.state.page[this.state.tab];
 		if (page == 0) return; // 如果page=0 表示没有更多页内容可以加载了
 		let is_Level;
@@ -191,7 +126,6 @@ const VipZone = React.createClass({
 				let new_page = this.state.page;
 				new_page[this.state.tab] = new_page[this.state.tab] + 1;
 				if (data.totalCount < 20) new_page[this.state.tab] = 0;
-
 				this.setState({products: products, page: new_page});
 				done && done();
 			}.bind(this)
@@ -238,7 +172,11 @@ const VipZone = React.createClass({
 
 		return (
 			<div>
-				<div className="ui-tab" onTouchMove={_this.handleTouchMove} onTouchEnd={_this.handleTouchEnd} onTouchStart={_this.handleTouchStart}>
+				<div className="ui-tab"
+					 onTouchStart={_this.handleTouchStart}
+					 onTouchMove={_this.handleTouchMove}
+					 onTouchEnd={_this.handleTouchEnd}
+				>
 					<div className="ui-tab-block" style={marginStyle}>
 						{this.tabs.map(tab)}
 					</div>
@@ -251,7 +189,6 @@ const VipZone = React.createClass({
 		);
 	}		
 });
-
 
 const ProductItem = React.createClass({
 	render: function () {
@@ -304,7 +241,9 @@ $FW.DOMReady(function(){
 		url:test_api + "mall/api/member/v1/user_level_points.json",
 		enable_loading: true,
 		success:function(data){
-			ReactDOM.render(<VipMsg user_level={data.vip_level} user_score={data.score}/>, document.getElementById('cnt'));
+			if(data.is_login){
+				ReactDOM.render(<VipMsg user_level={data.vip_level} user_score={data.score}/>, document.getElementById('msg'));
+			}
 		}
 	});
 	ReactDOM.render(<VipZone/>, document.getElementById('cnt'));
