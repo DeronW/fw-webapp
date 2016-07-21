@@ -240,8 +240,7 @@ $FW.DOMReady(function(){
 		ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
-		//url:test_api + "mall/api/member/v1/user_level_points.json",
-		url:"http://127.0.0.1/user_level_points.json",
+		url:test_api + "mall/api/member/v1/user_level_points.json",
 		enable_loading: true,
 		success:function(data){
 			if(data.loginOk){

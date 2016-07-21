@@ -184,7 +184,11 @@ const ConfirmPop = React.createClass({
     },
     hide: function () {
         this.setState({
-            show: false
+            show: false,
+            value: '',
+            remain: 0,
+            show_warn:false,
+            show_text:''
         })
     },
     changeValueHandler: function (e) {
