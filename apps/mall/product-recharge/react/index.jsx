@@ -52,7 +52,7 @@ const Recharge = React.createClass({
         if(v.length > 8) v = v.substr(0, 8) + ' ' + v.substring(8, 12);
         this.setState({phone: v.replace(/ /g, ''), format_phone: v});
         setTimeout(function(){
-            e.target.setSelectionRange(12, 12)
+            //e.target.setSelectionRange(12, 12)
         }, 100)
     },
 
