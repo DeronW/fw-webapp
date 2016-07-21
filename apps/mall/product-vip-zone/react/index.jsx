@@ -1,6 +1,5 @@
 'use strict';
 const API_PATH = document.getElementById('api-path').value;
-const test_api = "http://10.105.6.76:8083/";
 
 const VipMsg = React.createClass({
 	getInitialState: function(){
@@ -104,8 +103,7 @@ const VipZone = React.createClass({
 		}
 
 		$FW.Ajax({
-			//url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.pageCount + '&page=' + page + '&vipLevel=' + is_Level,
-			url: test_api + 'mall/api/index/v1/vip_list.json?count=' + this.count + '&page=' + page + '&vipLevel=' + is_Level,
+			url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.pageCount + '&page=' + page + '&vipLevel=' + is_Level,
 			enable_loading: true,
 			success: function (data) {
 				let tab;
@@ -240,7 +238,7 @@ $FW.DOMReady(function(){
 		ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
-		url:test_api + "mall/api/member/v1/user_level_points.json",
+		url: API_PATH + "mall/api/member/v1/user_level_points.json",
 		enable_loading: true,
 		success:function(data){
 			if(data.loginOk){

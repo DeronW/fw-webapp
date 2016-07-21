@@ -69,6 +69,15 @@ const Product = React.createClass({
         let old_component = data.head_images && data.head_images.length ?
             <Carousel head_images={data.head_images}/> : <div className="no-head-images"></div>;
 
+        let user_level_manifest;
+        if(data.vipLevel == 1) user_level_manifest = "普通用户";
+        if(data.vipLevel == 2) user_level_manifest = "VIP1";
+        if(data.vipLevel == 3) user_level_manifest = "VIP2";
+        if(data.vipLevel == 4) user_level_manifest = "VIP3";
+        if(data.vipLevel == 5) user_level_manifest = "VIP4";
+
+        let vip_tag = data.vipConfigUuid ? (data.vipLevel ? (<span className="vip-tag">{user_level_manifest}</span>) : null) : null;
+
         return (
             <div className="detail-box">
 
@@ -85,10 +94,10 @@ const Product = React.createClass({
                             <span className="price">{$FW.Format.currency(data.price)}</span> : null}
                         {data.price > 0 && data.score ? '+' : null}
                         {score}
+                        {vip_tag}
                     </div>
                     <div className="detail-inf1">
                         {market_price}
-
                         <div className="total">
                             <span>累计销量</span>
                             <span className="total-num">{data.sales}</span>
@@ -255,17 +264,17 @@ const EmptyProduct = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    let bizNo = $FW.Format.urlQuery().bizNo;
-    if (!bizNo) {
-        $FW.Component.Alert('bizNo is missing');
-        return;
-    }
+    //let bizNo = $FW.Format.urlQuery().bizNo;
+    //if (!bizNo) {
+    //    $FW.Component.Alert('bizNo is missing');
+    //    return;
+    //}
 
     NativeBridge.setTitle('产品详情');
 
     $FW.Ajax({
-        url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
-        //url: "http://localhost/product-detail.json",
+        //url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
+        url: API_PATH + 'item_detail.json',
         enable_loading: true,
         success: function (data) {
             if (data.title) {
