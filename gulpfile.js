@@ -56,7 +56,7 @@ MALL_APP_NAMES.forEach(function (i) {
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://m2mall.9888.cn/',
+        api_path: 'http://m2mall.9888.cn',
         include_components: common_components,
         include_common_js: common_js,
         width_swipe: true
@@ -64,7 +64,7 @@ MALL_APP_NAMES.forEach(function (i) {
 
     gt('mall', i, {
         cmd_prefix: 'pack',
-        api_path: 'http://mmall.9888.cn/',
+        api_path: 'http://mmall.9888.cn',
         cdn_prefix: '/pages/' + i + '/',
         include_components: common_components,
         include_common_js: common_js,

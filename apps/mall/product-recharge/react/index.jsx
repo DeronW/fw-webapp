@@ -214,6 +214,9 @@ const ConfirmPop = React.createClass({
                         show_text:message,
                         remain: 0
                     });
+                    if(code == 40101){
+                        $FW.Utils.loginMall();
+                    }
                     return true;
                 }
             })
@@ -255,9 +258,6 @@ const ConfirmPop = React.createClass({
                             show_warn:true,
                             show_text:message
                         });
-                        if(code == 40101){
-                            $FW.Utils.loginMall();
-                        }
                         return true;
                         //$FW.Component.Alert("充值失败！");
                     }
