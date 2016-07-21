@@ -149,11 +149,6 @@ const VipZone = React.createClass({
 		let marginStyle = {
 			marginLeft: _this.state.x + 'px'
 		};
-		
-		let cntStyle = {
-			width: window.innerWidth * _this.state.n + "px",
-			marginLeft: _this.state.cntX + "px"
-		};
 
 		let windowWidth = {
 			width: window.innerWidth
@@ -185,6 +180,7 @@ const VipZone = React.createClass({
 				>
 					<div className="ui-tab-block" style={marginStyle}>
 						{this.tabs.map(tab)}
+						<span className="tab-line"></span>
 					</div>
 				</div>
 				<div className="products-list">
@@ -250,7 +246,6 @@ $FW.DOMReady(function(){
 		success:function(data){
 			if(data.loginOk){
 				ReactDOM.render(<VipMsg user_level={data.vip_level} user_score={data.score}/>, document.getElementById('msg'));
-
 			}
 		}
 	});
