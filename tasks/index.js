@@ -60,7 +60,10 @@ module.exports = function (site_name, project_name, configs) {
         CONFIG.include_common_js.map(i => `${lib_path}${i}`));
 
     function compile_html() {
-        return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {API_PATH: CONFIG.api_path})
+        return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
+            API_PATH: CONFIG.api_path,
+            DEBUG: CONFIG.debug
+        })
     }
 
     function compile_stylesheets() {
