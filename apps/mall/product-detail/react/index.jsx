@@ -182,10 +182,12 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
-
-        // 注意: 这里有个hole
         if ($FW.Browser.inApp()) {
-            NativeBridge.login(link)
+            // 注意: 这里有个hole
+            // 非种cookie 用这种
+            //NativeBridge.login(link)
+            // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
+            NativeBridge.goto(link, true)
         } else {
             location.href = link
         }
