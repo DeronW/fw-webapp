@@ -289,8 +289,7 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('产品详情');
 
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
-        url: API_PATH + 'item_detail.json',
+        url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         enable_loading: true,
         success: function (data) {
             if (data.title) {
