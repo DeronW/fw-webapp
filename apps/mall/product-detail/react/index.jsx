@@ -182,6 +182,7 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
+
         // 注意: 这里有个hole
         if ($FW.Browser.inApp()) {
             NativeBridge.login(link)
@@ -284,6 +285,8 @@ $FW.DOMReady(function () {
             }
         }
     });
+
+    $FW
 
     if (!$FW.Browser.inApp()) {
         ReactDOM.render(<Header title={"商品详情"} back_handler={backPage}/>, document.getElementById('header'));
