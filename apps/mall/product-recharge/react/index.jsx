@@ -210,7 +210,7 @@ const ConfirmPop = React.createClass({
                 url: API_PATH + "mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'get',
                 success: function(data){
-                    $FW.Component.Alert(data.validateCode);
+                    //$FW.Component.Alert(data.validateCode);
                 },
                 fail: function (code,message,response){
                     _this.setState({
