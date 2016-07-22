@@ -25,6 +25,7 @@ const Recharge = React.createClass({
     reloadFeeHandler: function(){
         $FW.Ajax({
             url: API_PATH + 'api/v1/phone/fee/recharge.json',
+            //url:"http://localhost/recharge.json",
             enable_loading: true,
             success: function (data) {
                 let pay_score;
@@ -303,6 +304,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'api/v1/user-state.json',
+        //url: "http://localhost/user-state.json",
         enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,

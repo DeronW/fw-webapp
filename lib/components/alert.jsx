@@ -131,7 +131,7 @@ const GlobalAlert = React.createClass({
         if(this.props.title instanceof Array){
             title = <div> {this.props.title.map((i, index)=><div key={index} style={title_wrap}><span style={title_index}>{index+1}、</span><span style={title_content}>{i}</span></div>)} </div> ;
         } else {
-            title = this.props.title || 'YO'
+            title = this.props.title;
         }
 
         let header = null;
