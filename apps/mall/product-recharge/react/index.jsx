@@ -24,7 +24,7 @@ const Recharge = React.createClass({
 
     reloadFeeHandler: function(){
         $FW.Ajax({
-            url: API_PATH + '/api/v1/phone/fee/recharge.json',
+            url: API_PATH + 'api/v1/phone/fee/recharge.json',
             enable_loading: true,
             success: function (data) {
                 let pay_score;
@@ -184,7 +184,11 @@ const ConfirmPop = React.createClass({
     },
     hide: function () {
         this.setState({
-            show: false
+            show: false,
+            value: '',
+            remain: 0,
+            show_warn:false,
+            show_text:''
         })
     },
     changeValueHandler: function (e) {
@@ -203,7 +207,7 @@ const ConfirmPop = React.createClass({
         if (this.state.remain <= 0) {
             this.tick();
             $FW.Ajax({
-                url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
+                url: API_PATH + "mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'get',
                 success: function(data){
                     $FW.Component.Alert(data.validateCode);
@@ -226,12 +230,12 @@ const ConfirmPop = React.createClass({
         var _this = this;
         var form_data = rechargePanel.getFormData();
         $FW.Ajax({
-            url: API_PATH + '/mall/api/v1/getToken.json',
+            url: API_PATH + 'mall/api/v1/getToken.json',
             method: "get",
             success: function (data) {
                 var token = data.token;
                 $FW.Ajax({
-                    url: API_PATH + '/api/v1/phone/recharge-order.json',
+                    url: API_PATH + 'api/v1/phone/recharge-order.json',
                     enable_loading: true,
                     method: 'get',
                     data: {
@@ -298,7 +302,7 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
-        url: API_PATH + '/api/v1/user-state.json',
+        url: API_PATH + 'api/v1/user-state.json',
         enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
