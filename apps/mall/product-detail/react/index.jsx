@@ -122,7 +122,7 @@ const Product = React.createClass({
                 <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
                 <PlusMinus stock={data.stock} ticket_count={data.ticketList}
                            check_messages={data.checkMessages}
-                           voucher_only={data.supportTicket}/>
+                           voucher_only={data.supportTicket} vip_level={data.vipLevel}/>
             </div>
         )
     }
@@ -182,15 +182,28 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
-        if ($FW.Browser.inApp()) {
-            // 注意: 这里有个hole
-            // 非种cookie 用这种
-            //NativeBridge.login(link)
-            // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
-            NativeBridge.goto(link, true)
-        } else {
-            location.href = link
-        }
+        let vip_level = data.vipLevel;
+
+        $FW.Ajax({
+            url: API_PATH + 'api/v1/user-state.json',
+            enable_loading:true,
+            success:function(data){
+                if(data.is_login && (data.userLevel < vip_level) ){
+                    $FW.Component.Alert("您的会员等级不足，暂无法购买！");
+                }else{
+                    if ($FW.Browser.inApp()) {
+                        // 注意: 这里有个hole
+                        // 非种cookie 用这种
+                        //NativeBridge.login(link)
+                        // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
+                        NativeBridge.goto(link, true)
+                    } else {
+                        location.href = link
+                    }
+                }
+            }
+        });
+
     },
 
     blur: function (e) {
@@ -267,11 +280,11 @@ const EmptyProduct = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    //let bizNo = $FW.Format.urlQuery().bizNo;
-    //if (!bizNo) {
-    //    $FW.Component.Alert('bizNo is missing');
-    //    return;
-    //}
+    let bizNo = $FW.Format.urlQuery().bizNo;
+    if (!bizNo) {
+        $FW.Component.Alert('bizNo is missing');
+        return;
+    }
 
     NativeBridge.setTitle('产品详情');
 
@@ -281,14 +294,12 @@ $FW.DOMReady(function () {
         enable_loading: true,
         success: function (data) {
             if (data.title) {
-                ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'))
+                ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
             } else {
                 ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
             }
         }
     });
-
-    $FW
 
     if (!$FW.Browser.inApp()) {
         ReactDOM.render(<Header title={"商品详情"} back_handler={backPage}/>, document.getElementById('header'));
