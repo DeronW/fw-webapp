@@ -176,7 +176,8 @@ const ConfirmPop = React.createClass({
             value: '',
             remain: 0,
             show_warn:false,
-            show_text:''
+            show_text:'',
+            loading: false
         }
     },
     show: function () {
@@ -230,6 +231,9 @@ const ConfirmPop = React.createClass({
     submitHandler: function () {
         var _this = this;
         var form_data = rechargePanel.getFormData();
+        if(this.state.loading)
+            return;
+        this.setState({loading: true})
         $FW.Ajax({
             url: API_PATH + 'mall/api/v1/getToken.json',
             method: "get",
@@ -246,6 +250,9 @@ const ConfirmPop = React.createClass({
                         bizNo: form_data.bizNo,
                         sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
                         tokenStr: token
+                    },
+                    complete:function(){
+                        _this.setState({loading: true});
                     },
                     success: function () {
                         _this.setState({
@@ -287,7 +294,7 @@ const ConfirmPop = React.createClass({
                                   onClick={this.getSmsCodeHandler}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
                         {frequent_tip}
-                        <div className="pop-confirm-btn" onClick={this.submitHandler}>确认</div>
+                        <div className={this.state.loading ? "pop-confirm-btn gray" : "pop-confirm-btn"} onClick={this.submitHandler}>确认</div>
                         <div className="pop-tip">充值后1~10分钟到账</div>
                     </div>
                 </div>
