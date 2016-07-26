@@ -156,10 +156,10 @@ const VipZone = React.createClass({
 			let name = {
 				all: '全部',
 				vipLevel0: '普通会员',
-				vipLevel1: 'vip1',
-				vipLevel2: 'vip2',
-				vipLevel3: 'vip3',
-				vipLevel4: 'vip4',
+				vipLevel1: 'VIP1',
+				vipLevel2: 'VIP2',
+				vipLevel3: 'VIP3',
+				vipLevel4: 'VIP4'
 			};
 			return (
 				<div key={i} className={i==_this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
