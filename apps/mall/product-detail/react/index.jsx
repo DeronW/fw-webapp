@@ -182,7 +182,7 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
-        let vip_level = this.props.data.vipLevel;
+        let vip_level = this.props.data.vip_level;
 
         $FW.Ajax({
             url: API_PATH + 'api/v1/user-state.json',

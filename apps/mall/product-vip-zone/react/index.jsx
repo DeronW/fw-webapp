@@ -103,7 +103,7 @@ const VipZone = React.createClass({
 		}
 
 		$FW.Ajax({
-			url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.pageCount + '&page=' + page + '&vipLevel=' + is_Level,
+			url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.count + '&page=' + page + '&vipLevel=' + is_Level,
 			enable_loading: true,
 			success: function (data) {
 				let tab;
