@@ -325,7 +325,7 @@ $FW.DOMReady(function () {
         }
     });
 
-    if (!$FW.Browser.inApp()) {
+    if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"我的商城"} back_handler={back_handler}/>,
             document.getElementById('header'));
     }

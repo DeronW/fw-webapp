@@ -151,7 +151,7 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('豆哥商品');
     ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
 
-    if (!$FW.Browser.inApp()) {
+    if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"豆哥商品"} back_handler={backward}/>, document.getElementById('header'));
     }
 });

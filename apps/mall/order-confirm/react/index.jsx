@@ -225,7 +225,7 @@ $FW.DOMReady(function () {
         }
     });
 
-    if (!$FW.Browser.inApp()) {
+    if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
     }
 

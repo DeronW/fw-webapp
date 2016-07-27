@@ -234,7 +234,7 @@ window.Products = {
 $FW.DOMReady(function(){
 	NativeBridge.setTitle('VIP专区');
 
-	if (!$FW.Browser.inApp())
+	if ($FW.Utils.shouldShowHeader())
 		ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({

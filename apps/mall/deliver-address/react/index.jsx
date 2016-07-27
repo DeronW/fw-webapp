@@ -93,7 +93,7 @@ $FW.DOMReady(function () {
         }
     });
 
-    if (!$FW.Browser.inApp() || $FW.Browser.appVersion() >= '2.2.20') {
+    if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"我的收货地址"} back_handler={back_handler}/>, document.getElementById('header'));
     }
 });

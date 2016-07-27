@@ -11,7 +11,7 @@ const MallActivity = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={this.props.title}/>}
+                <Header title={this.props.title}/>
                 {img}
                 <MallActivity.Explain desc={this.props.activity.desc}/>
                 <ProductList />

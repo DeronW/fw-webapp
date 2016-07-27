@@ -22,7 +22,7 @@ const Waiting = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.inApp() ? null : <Header title={'页面异常'}/>}
+                <Header title={'页面异常'}/>
                 <img style={style_a} src="images/404.png"/>
                 <br />
                 <div style={style_b}>豆哥生病了</div>

@@ -307,7 +307,7 @@ const ConfirmPop = React.createClass({
 $FW.DOMReady(function () {
     NativeBridge.setTitle('充值专区');
 
-    if (!$FW.Browser.inApp())
+    if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
