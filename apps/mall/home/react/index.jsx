@@ -166,7 +166,7 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
     }, true);
 
-    if (!$FW.Browser.inApp()) {
+    if (!$FW.Browser.inApp() || $FW.Browser.appVersion() >= '2.2.20') {
         ReactDOM.render(<Header title_img='images/dg-mall-title.png'
                                 back_handler={ () => location.href = 'http://m.9888.cn' }/>,
             document.getElementById('header'));

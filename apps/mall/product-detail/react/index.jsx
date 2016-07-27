@@ -294,7 +294,7 @@ $FW.DOMReady(function () {
         }
     });
 
-    if (!$FW.Browser.inApp()) {
+    if (!$FW.Browser.inApp() || $FW.Browser.appVersion() >= '2.2.20') {
         ReactDOM.render(<Header title={"商品详情"} back_handler={backPage}/>, document.getElementById('header'));
     }
 });
