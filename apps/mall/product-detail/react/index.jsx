@@ -184,25 +184,15 @@ const PlusMinus = React.createClass({
 
         let vip_level = this.props.vip_level;
 
-        $FW.Ajax({
-            url: API_PATH + 'api/v1/user-state.json',
-            enable_loading:true,
-            success:function(data){
-                if(data.isCanBuy == false){
-                    $FW.Component.Alert("您的会员等级不足，暂无法购买！");
-                }else{
-                    if ($FW.Browser.inApp()) {
-                        // 注意: 这里有个hole
-                        // 非种cookie 用这种
-                        //NativeBridge.login(link)
-                        // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
-                        NativeBridge.goto(link, true)
-                    } else {
-                        location.href = link
-                    }
-                }
-            }
-        });
+        if ($FW.Browser.inApp()) {
+            // 注意: 这里有个hole
+            // 非种cookie 用这种
+            //NativeBridge.login(link)
+            // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
+            NativeBridge.goto(link, true)
+        } else {
+            location.href = link
+        }
 
     },
 
@@ -296,6 +286,9 @@ $FW.DOMReady(function () {
                 ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
             } else {
                 ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
+            }
+            if(data.isCanBuy == false){
+                $FW.Component.Alert("您的会员等级不足，暂无法购买！");
             }
         }
     });
