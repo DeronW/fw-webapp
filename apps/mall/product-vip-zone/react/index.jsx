@@ -53,27 +53,27 @@ const VipZone = React.createClass({
 		}
 	},
 
-	handleTouchStart: function(event) {
-		this.setState({ initialX: event.targetTouches[0].pageX});
-	},
-	handleTouchMove: function(event) {
-		this.setState({ x: this.state.endX + (event.targetTouches[0].pageX - this.state.initialX)});
-	},
-	handleTouchEnd: function(event) {
-		var objWidth = (window.innerWidth * 1.3) - window.innerWidth;
-
-		this.setState({ endX: this.state.x});
-
-		if(this.state.x > 0) {
-			this.setState({ x: 0, endX: 0});
-		} else if (-(this.state.x) > objWidth ) {
-			this.setState({
-				x: -(objWidth),		
-				endX: -(objWidth)
-			});
-		} 
-
-	},
+	//handleTouchStart: function(event) {
+	//	this.setState({ initialX: event.targetTouches[0].pageX});
+	//},
+	//handleTouchMove: function(event) {
+	//	this.setState({ x: this.state.endX + (event.targetTouches[0].pageX - this.state.initialX)});
+	//},
+	//handleTouchEnd: function(event) {
+	//	var objWidth = (window.innerWidth * 1.3) - window.innerWidth;
+    //
+	//	this.setState({ endX: this.state.x});
+    //
+	//	if(this.state.x > 0) {
+	//		this.setState({ x: 0, endX: 0});
+	//	} else if (-(this.state.x) > objWidth ) {
+	//		this.setState({
+	//			x: -(objWidth),
+	//			endX: -(objWidth)
+	//		});
+	//	}
+    //
+	//},
 
 	tabClickHandler: function (tab) {
 		this.setState({tab: tab, products: window.Products[tab]});
@@ -155,7 +155,7 @@ const VipZone = React.createClass({
 		let tab = function (i) {
 			let name = {
 				all: '全部',
-				vipLevel0: '普通会员',
+				vipLevel0: '普通',
 				vipLevel1: 'VIP1',
 				vipLevel2: 'VIP2',
 				vipLevel3: 'VIP3',
