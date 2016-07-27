@@ -122,7 +122,7 @@ const Product = React.createClass({
                 <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
                 <PlusMinus stock={data.stock} ticket_count={data.ticketList}
                            check_messages={data.checkMessages}
-                           voucher_only={data.supportTicket} vip_level={data.vipLevel}/>
+                           voucher_only={data.supportTicket} vip_level={data.isCanBuy}/>
             </div>
         )
     }
@@ -182,7 +182,11 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
-        let vip_level = this.props.vip_level;
+        let isCanBuy = this.props.isCanBuy;
+
+        if(isCanBuy == false){
+            $FW.Component.Alert("您的会员等级不足，暂无法购买！");
+        }
 
         if ($FW.Browser.inApp()) {
             // 注意: 这里有个hole
@@ -286,9 +290,6 @@ $FW.DOMReady(function () {
                 ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
             } else {
                 ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
-            }
-            if(data.isCanBuy == false){
-                $FW.Component.Alert("您的会员等级不足，暂无法购买！");
             }
         }
     });
