@@ -21,7 +21,9 @@ const ConfirmOrder = React.createClass({
             ticket: [],
             tokenStr: query.tokenStr,
             sms_code: null,
-            addressId: this.props.default_address_id
+            addressId: this.props.default_address_id,
+            vipLevel: this.props.vipLevel,
+            vipConfigUuid: this.props.vipConfigUuid
         };
 
         return {product_count: product_count}
@@ -216,6 +218,8 @@ $FW.DOMReady(function () {
                                           pay_condition={pay_condition}
                                           close_score_func={close_score_func}
                                           default_address_id={query.address_id || data.addressId}
+                                          vipLevel={data.vipLevel}
+                                          vipConfigUuid={data.vipConfigUuid}
                 />,
                 document.getElementById('cnt'));
         }
