@@ -122,7 +122,7 @@ const Product = React.createClass({
                 <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
                 <PlusMinus stock={data.stock} ticket_count={data.ticketList}
                            check_messages={data.checkMessages}
-                           voucher_only={data.supportTicket} vip_level={data.isCanBuy}/>
+                           voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
             </div>
         )
     }
@@ -184,18 +184,18 @@ const PlusMinus = React.createClass({
 
         let isCanBuy = this.props.isCanBuy;
 
-        if(isCanBuy == false){
+        if(!isCanBuy){
             $FW.Component.Alert("您的会员等级不足，暂无法购买！");
-        }
-
-        if ($FW.Browser.inApp()) {
-            // 注意: 这里有个hole
-            // 非种cookie 用这种
-            //NativeBridge.login(link)
-            // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
-            NativeBridge.goto(link, true)
-        } else {
-            location.href = link
+        }else{
+            if ($FW.Browser.inApp()) {
+                // 注意: 这里有个hole
+                // 非种cookie 用这种
+                //NativeBridge.login(link)
+                // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
+                NativeBridge.goto(link, true)
+            } else {
+                location.href = link
+            }
         }
 
     },
