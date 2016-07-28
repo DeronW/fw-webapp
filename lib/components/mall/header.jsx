@@ -8,11 +8,16 @@
 const Header = React.createClass({
     getInitialState: function () {
         let height = parseInt(this.props.height) || 100;
+
+        // compatible with iPhone state bar, move down 22px
+        if(this.props.leave_state_bar) height += 22;
+
         return {
             height: height,
             background: this.props.background || 'white',
             title: this.props.title,
-            title_img: this.props.title_img
+            title_img: this.props.title_img,
+            show_back_btn: this.props.show_back_btn !== false
         }
     },
     backClickHandler: function () {
@@ -78,13 +83,15 @@ const Header = React.createClass({
             title = <img src={this.state.title_img}
                          style={{ display: 'block', margin: '0 auto', width: "182px", position: "relative", top: "30px" }}/>;
 
+        let back_btn = (<div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
+            <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
+            <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
+        </div>);
+
         return (
             <div style={{height: this.state.height + 'px'}}>
                 <div className="_style_header_fixed" style={_style_header_fixed}>
-                    <div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
-                        <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
-                        <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
-                    </div>
+                    {this.state.show_back_btn ? back_btn : null}
                     {title}
                 </div>
             </div>

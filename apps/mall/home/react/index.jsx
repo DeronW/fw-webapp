@@ -167,7 +167,8 @@ $FW.DOMReady(function () {
     }, true);
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title_img='images/dg-mall-title.png'
+        ReactDOM.render(<Header title_img='images/dg-mall-title.png' show_back_btn={!$FW.Browser.inApp()}
+                                leave_state_bar={$FW.Browser.inIOS()}
                                 back_handler={ () => location.href = 'http://m.9888.cn' }/>,
             document.getElementById('header'));
     }
