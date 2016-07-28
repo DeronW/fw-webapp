@@ -87,7 +87,13 @@ const Header = React.createClass({
         }
 
         if($FW.Browser.inIOS() && $FW.Browser.inApp()){
-            _img_style = {top:"52px"};
+            _img_style = {
+                display: 'block',
+                margin: '0 auto',
+                width: "182px",
+                position: "relative",
+                top: "52px"
+            }
         }
 
         let title = this.state.title;
