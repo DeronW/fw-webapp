@@ -95,9 +95,11 @@ const MallProducts = React.createClass({
             )
         };
 
+        let product_tab_style = {top:$FW.Browser.inApp() && $FW.Browser.inIOS() ? "122px" : "100px" }
+
         return (
             <div>
-                <div className="productsTab" style={{top:$FW.Browser.inApp() ? "0" : "100px" }}>
+                <div className="productsTab" style={product_tab_style}>
                     {this.tabs.map(tab)}
                 </div>
                 <div className="products-list">
