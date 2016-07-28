@@ -8,13 +8,16 @@
 const Header = React.createClass({
     getInitialState: function () {
         let height = parseInt(this.props.height) || 100;
+        let lineHeight = parseInt(this.props.height) || 100;
         // compatible with iPhone state bar, move down 22px
         if($FW.Browser.inIOS() && $FW.Browser.inApp()) {
             height += 22;
+            lineHeight = 144;
         }
 
         return {
             height: height,
+            lineHeight: lineHeight,
             background: this.props.background || 'white',
             title: this.props.title,
             title_img: this.props.title_img,
@@ -35,7 +38,7 @@ const Header = React.createClass({
             right: "0px",
             height: this.state.height + 'px',
             textAlign: "center",
-            lineHeight: this.state.height + 'px',
+            lineHeight: this.state.lineHeight + 'px',
             background: this.state.background,
             zIndex: '9',
             textShadow: "0 0 8px white",
@@ -43,7 +46,7 @@ const Header = React.createClass({
             borderBottom: "1px solid #d8d8d8"
         };
 
-        let _style_header_arrow = {
+        var _style_header_arrow = {
             display: "block",
             position: "absolute",
             width: this.state.height + "px",
@@ -94,6 +97,20 @@ const Header = React.createClass({
                 position: "relative",
                 top: "52px"
             }
+            _style_header_arrow = {
+                display: "block",
+                position: "absolute",
+                width: this.state.height + "px",
+                height: this.state.height + "px",
+                lineHeight: this.state.height + "px",
+                fontFamily: "serif",
+                fontSize: fontSize,
+                fontWeight: 'bold',
+                color: "#536f95",
+                overflow: "hidden",
+                left: "0px",
+                top: "22px"
+            };
         }
 
         let title = this.state.title;
