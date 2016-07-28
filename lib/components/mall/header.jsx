@@ -12,7 +12,7 @@ const Header = React.createClass({
         // compatible with iPhone state bar, move down 22px
         if($FW.Browser.inIOS() && $FW.Browser.inApp()) {
             height += 22;
-            lineHeight = 144;
+            lineHeight = 152;
         }
 
         return {
@@ -71,7 +71,7 @@ const Header = React.createClass({
             left: "50px",
             background: "#536f95"
         };
-        let _style_header_arm_down = {
+        var _style_header_arm_down = {
             position: "absolute",
             width: "6px",
             height: this.state.height / 4 + "px",
@@ -96,7 +96,7 @@ const Header = React.createClass({
                 width: "182px",
                 position: "relative",
                 top: "52px"
-            }
+            };
             _style_header_arrow = {
                 display: "block",
                 position: "absolute",
@@ -110,6 +110,16 @@ const Header = React.createClass({
                 overflow: "hidden",
                 left: "0px",
                 top: "22px"
+            };
+            _style_header_arm_down = {
+                position: "absolute",
+                width: "6px",
+                height: this.state.height / 4 + "px",
+                WebkitTransform: "rotate(135deg)",
+                transform: "rotate(135deg)",
+                top: "49px",
+                left: "50px",
+                background: '#536f95'
             };
         }
 
