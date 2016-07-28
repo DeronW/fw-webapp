@@ -8,9 +8,10 @@
 const Header = React.createClass({
     getInitialState: function () {
         let height = parseInt(this.props.height) || 100;
-
         // compatible with iPhone state bar, move down 22px
-        if(this.props.leave_state_bar) height += 22;
+        if($FW.Browser.inIOS() && $FW.Browser.inApp()) {
+            height += 22;
+        }
 
         return {
             height: height,
@@ -77,11 +78,21 @@ const Header = React.createClass({
             left: "50px",
             background: '#536f95'
         };
+        var _img_style = {
+            display: 'block',
+            margin: '0 auto',
+            width: "182px",
+            position: "relative",
+            top: "30px"
+        }
+
+        if($FW.Browser.inIOS() && $FW.Browser.inApp()){
+            _img_style = {top:"52px"};
+        }
 
         let title = this.state.title;
         if (this.state.title_img)
-            title = <img src={this.state.title_img}
-                         style={{ display: 'block', margin: '0 auto', width: "182px", position: "relative", top: "30px" }}/>;
+            title = <img src={this.state.title_img} style={_img_style}/>;
 
         let back_btn = (<div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
             <div className="_style_header_arm_up" style={_style_header_arm_up}></div>

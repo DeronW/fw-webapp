@@ -198,7 +198,7 @@ const PlusMinus = React.createClass({
                 $FW.Component.Alert("所在等级不符合购买此商品特权");
             }
         }
-        
+
     },
 
     blur: function (e) {
