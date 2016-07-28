@@ -185,7 +185,7 @@ const PlusMinus = React.createClass({
         let isCanBuy = this.props.isCanBuy;
 
         if(!isCanBuy){
-            $FW.Component.Alert("您的会员等级不足，暂无法购买！");
+            $FW.Component.Alert("所在等级不符合购买此商品特权");
         }else{
             if ($FW.Browser.inApp()) {
                 // 注意: 这里有个hole
