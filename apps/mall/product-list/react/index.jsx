@@ -157,7 +157,7 @@ $FW.DOMReady(function () {
 });
 
 function backward(){
-    location.href = '/';
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/';
 }
 
 window.onNativeMessageReceive = function (msg) {

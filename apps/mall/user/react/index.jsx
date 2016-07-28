@@ -332,7 +332,8 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-    location.href = '/';
+
+    $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/';
 }
 
 $FW.setLoginRedirect('/');

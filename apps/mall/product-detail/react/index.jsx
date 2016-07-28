@@ -183,10 +183,7 @@ const PlusMinus = React.createClass({
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
-
-        if(!isCanBuy){
-            $FW.Component.Alert("所在等级不符合购买此商品特权");
-        }else{
+        if(!this.props.is_login){
             if ($FW.Browser.inApp()) {
                 // 注意: 这里有个hole
                 // 非种cookie 用这种
@@ -196,8 +193,12 @@ const PlusMinus = React.createClass({
             } else {
                 location.href = link
             }
+        }else{
+            if(!isCanBuy){
+                $FW.Component.Alert("所在等级不符合购买此商品特权");
+            }
         }
-
+        
     },
 
     blur: function (e) {
