@@ -9,12 +9,13 @@ const Header = React.createClass({
     getInitialState: function () {
         let height = parseInt(this.props.height) || 100;
         let lineHeight = parseInt(this.props.height) || 100;
+        let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+        let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
         // compatible with iPhone state bar, move down 22px
-        if($FW.Browser.inIOS() && $FW.Browser.inApp()) {
+        if(inIOS && inApp) {
             height += 22;
             lineHeight = 152;
         }
-
         return {
             height: height,
             lineHeight: lineHeight,
@@ -26,6 +27,8 @@ const Header = React.createClass({
     },
     backClickHandler: function () {
         this.props.back_handler ? this.props.back_handler() : history.back();
+        //App里面后退不起作用 判断在App环境当中关掉当前webview
+        NativeBridge.isReady && NativeBridge.close();
     },
     render: function () {
         let fontSize = '40px';
