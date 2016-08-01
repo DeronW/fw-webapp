@@ -8,7 +8,8 @@ gulp.task('default', function (done) {
 
 const MAIN_APP_NAMES = [
     'user-level',
-    'user-contribute'
+    'user-contribute',
+    'hui-shang-bank'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
