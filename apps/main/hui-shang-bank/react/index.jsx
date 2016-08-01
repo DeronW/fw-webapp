@@ -1,7 +1,7 @@
-var Body = React.createClass({
+/*var Body = React.createClass({
     render: function() {
         return (
-            <HeadNav />
+            <Header title={"升级存管账户"} />
         );
     }
 });
@@ -14,12 +14,12 @@ var HeadNav = React.createClass({
             </div>
         );
     }
-});
+});*/
 
 
 ReactDOM.render(
-    <Body />,
+    <Header title={"升级存管账户"} />,
 
-    document.getElementById("cnt")
+    document.getElementById("header")
 );
 
