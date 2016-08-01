@@ -133,21 +133,24 @@ const ProductItem = React.createClass({
                 <div className="list-img"><img src={this.props.img || 'images/default-product.jpg'}/>
                 </div>
                 {Angle}
-                <div className="list-name">{this.props.title}</div>
-                <div className="list-mark">
-                    { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
-                </div>
-                <div className="list-price-box">
-                    <div className="list-price">
-                        {this.props.price > 0 ? <span className="list-price-mark">&yen;</span> : null}
-                        {price}
-                        {score}
+                <div className="product-content-wrap">
+                    <div className="list-name">{this.props.title}</div>
+                    <div className="list-mark">
+                        { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
                     </div>
-                    <div className="list-sold">
-                        <span>累计销量 </span>
-                        <span>{this.props.sales}</span>
+                    <div className="list-price-box">
+                            <div className="list-price">
+                                {this.props.price > 0 ? <span className="list-price-mark">&yen;</span> : null}
+                                {price}
+                                {score}
+                            </div>
+                            <div className="list-sold">
+                                <span>累计销量 </span>
+                                <span>{this.props.sales}</span>
+                            </div>
                     </div>
                 </div>
+
             </a>
         )
     }
