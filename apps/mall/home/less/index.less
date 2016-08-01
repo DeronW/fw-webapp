@@ -73,7 +73,6 @@ a {
 }
 
 .index-actList-list {
-  padding: 0 0 0 20px;
   background-color: #fff;
 
   & > div {
@@ -84,11 +83,9 @@ a {
   }
 
   .list-img {
-    position: absolute;
-    top: 20px;
-    left: 0;
     width: 180px;
     height: 180px;
+    float: left;
 
     img {
       width: 180px;
@@ -110,18 +107,20 @@ a {
     background-color: #fd4d4c;
   }
 
-  a {
-    display: block;
+  a.index-actList-a{
+    display: table;
+    width: 100%;
     position: relative;
-    padding: 15px 20px 18px 200px;
-    height: 185px;
+    padding: 15px 20px 18px;
+    height: 219px;
     border-bottom: 1px solid #e3e5ea;
-    box-sizing: content-box;
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
 
     .list-price-box {
       position: absolute;
       bottom: 8px;
-      left: 200px;
+      left: 220px;
       width: 480px;
       height: 55px;
       line-height: 50px;
@@ -265,4 +264,10 @@ a {
   position: absolute;
   top: 26px;
   left: 0;
+}
+
+.product-content-wrap{
+  width: 480px;
+  float: left;
+  margin-left: 20px;
 }
