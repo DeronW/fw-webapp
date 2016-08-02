@@ -6,42 +6,6 @@ function backward(){
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
 
-const Cover = React.createClass({
-	render : function(){
-		return (
-			<div className="black"></div>
-		)
-	}
-})
-ReactDOM.render(<Cover  />,document.getElementById('layer'));
-
-const Bomb = React.createClass({
-	render : function(){
-		return (
-			<div className="boun">
-				<div className="resp">尊敬的张先生，您好！</div>
-				<div className="beca">由于您的身份信息无法通过系统验证，为了保证您的账户资金安全，您当前无法进行线上充值、投资、更换银行卡等交易。您当前的账户资金安全无虞，若有可用余额，可自行发起提现申请。</div>
-				<div className="ever">有任何问题，请联系客服：<span>400-0322-988</span></div>
-				<div className="close">关闭</div>
-			</div>
-		)
-	}
-})
-ReactDOM.render(<Bomb  />,document.getElementById('box'));
-
-const Invalid = React.createClass({
-	render : function(){
-		return (
-			<div className="upgrade">
-				<div className="dep clearfix">
-					<div className="pdlf">银行卡已失效，升级银行存管账户重新激活</div>
-					<div className="pdrt"><a href=""><img src="images/card-a.png"/></a></div>
-				</div>
-			</div>
-		)
-	}
-})
-ReactDOM.render(<Invalid />,document.getElementById('invad'));
 
 const Attract = React.createClass({
 		render : function(){
@@ -67,9 +31,16 @@ ReactDOM.render(<Sup />,document.getElementById('support'));
 const Branch = React.createClass({
 	render : function(){
 		return (
-			<div className="pure">
-				<div className="xuanwu">北京招商银行宣武门支行</div>
-				<div className="choice"><div className="pleas">请选择</div></div>
+			<div className="modify">
+				<div className="pure">
+					<div className="xuanwu">修改绑定银行卡</div>
+					<div className="choice"><div className="pleas">申请修改</div></div>
+				</div>
+				<div className="wire"></div>
+				<div className="pure">
+					<div className="xuanwu">北京招商银行宣武门支行</div>
+					<div className="choice"><div className="pleas">请选择</div></div>
+				</div>
 			</div>
 		)
 	}
