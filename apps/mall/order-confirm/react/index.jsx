@@ -27,8 +27,8 @@ const ConfirmOrder = React.createClass({
         };
 
         return {
-            product_count: product_count,
-            isVirtualProduct:this.props.isVirtualProduct
+            product_count: product_count
+            //isVirtualProduct:this.props.isVirtualProduct
         }
     },
     componentDidMount: function () {
@@ -72,15 +72,23 @@ const ConfirmOrder = React.createClass({
         if (!this.can_buy(true)) return; // $FW.Component.Alert('您现在不能购买这件商品');
         if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
 
-        if(this.state.isVirtualProduct){
-            $FW.Ajax({
-                url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
-                enable_loading: true,
-                method: 'post',
-                data: {smsCode: this.FormData.sms_code},
-                success: submit
-            });
-        }
+        //if(this.state.isVirtualProduct){
+        //    $FW.Ajax({
+        //        url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
+        //        enable_loading: true,
+        //        method: 'post',
+        //        data: {smsCode: this.FormData.sms_code},
+        //        success: submit
+        //    });
+        //}
+
+        $FW.Ajax({
+            url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
+            enable_loading: true,
+            method: 'post',
+            data: {smsCode: this.FormData.sms_code},
+            success: submit
+        });
 
         let _this = this;
 
@@ -157,8 +165,10 @@ const ConfirmOrder = React.createClass({
 
         return (
             <div className="confirm-order">
-                {this.props.isVirtualProduct ? <AddressPanel address={address} product_biz_no={this.FormData.productBizNo}
-                              product_count={this.state.product_count}/> : null}
+                {/*{this.props.isVirtualProduct ? <AddressPanel address={address} product_biz_no={this.FormData.productBizNo}
+                              product_count={this.state.product_count}/> : null}*/}
+                <AddressPanel address={address} product_biz_no={this.FormData.productBizNo}
+                              product_count={this.state.product_count}/>
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}
                               update_product_count_handler={this.updateProductCountHandler}/>
@@ -168,8 +178,10 @@ const ConfirmOrder = React.createClass({
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
                 />
-                {this.props.isVirtualProduct ? <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
-                         update_sms_code_handler={this.updateSMSCodeHandler}/> : null}
+                {/*{this.props.isVirtualProduct ? <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
+                         update_sms_code_handler={this.updateSMSCodeHandler}/> : null}*/}
+                <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
+                         update_sms_code_handler={this.updateSMSCodeHandler}/>
                 <div className="confirm-order-foot">
                     <a onClick={this.makeOrderHandler}
                        className={this.can_buy() ? "btn-red" : "btn-red btn-gray"}>确认购买</a>
@@ -225,7 +237,7 @@ $FW.DOMReady(function () {
                                           default_address_id={query.address_id || data.addressId}
                                           vipLevel={data.vipLevel}
                                           vipConfigUuid={data.vipConfigUuid}
-                                          isVirtualProduct={data.is_virtual_product}
+                                          //isVirtualProduct={data.is_virtual_product}
                 />,
                 document.getElementById('cnt'));
         }
