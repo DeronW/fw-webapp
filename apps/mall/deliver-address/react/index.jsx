@@ -100,7 +100,7 @@ $FW.DOMReady(function () {
 
 function back_handler() {
     if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
-        location.href = '/user'
+        location.href = '/static/mall/user/index.html'
     } else {
         history.back();
     }

@@ -134,7 +134,7 @@ $FW.DOMReady(function () {
 });
 
 window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/user';
+    if (msg == 'history:back') location.href = '/static/mall/user/index.html';
 };
 
 function trim(s) {
