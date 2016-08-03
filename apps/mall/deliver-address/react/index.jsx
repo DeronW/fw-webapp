@@ -27,7 +27,7 @@ const DeliverAddress = React.createClass({
         let address = function (address, index) {
             let link;
             if (!preview) {
-                link = "/order/confirm?address_id=" + address.address_id + "&productBizNo=" + productBizNo + '&count=' + productCount;
+                link = "/static/mall/order-confirm/index.html?address_id=" + address.address_id + "&productBizNo=" + productBizNo + '&count=' + productCount;
             }
             let checked_flag = null;
             if (!preview) {
@@ -60,8 +60,8 @@ const DeliverAddress = React.createClass({
         };
 
         let create_link = preview ?
-            "/delivery_address/create?preview=true" :
-            ("/delivery_address/create?productBizNo=" + productBizNo + '&count=' + productCount);
+            "/static/mall/new-deliver-address/index.html?preview=true" :
+            ("/static/mall/new-deliver-address/index.html?productBizNo=" + productBizNo + '&count=' + productCount);
 
         return (
             <div>
