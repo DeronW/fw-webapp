@@ -72,7 +72,7 @@ const Address = React.createClass({
 
         return (
             <div>
-                <Header title={'新建收货地址'}/>
+                {$FW.Browser.appVersion() >= $FW.AppVersion.show_header ? <Header title={'新建收货地址'}/> : null}
                 <div className="new-deliver-address">
                     <div className="deliver input-div">
                         <input value={this.state.username} onChange={this.onUsernameChangeHandler} placeholder="收货人"/>
