@@ -39,5 +39,5 @@ $FW.DOMReady(function () {
 });
 
 window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/';
+    if (msg == 'history:back') location.href = '/static/mall/home/index.html';
 };

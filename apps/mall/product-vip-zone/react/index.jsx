@@ -250,7 +250,7 @@ $FW.DOMReady(function(){
 });
 
 function backward(){
-	$FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+	$FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html'
 }
 
 window.onNativeMessageReceive = function (msg) {

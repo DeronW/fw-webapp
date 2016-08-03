@@ -36,7 +36,7 @@ const Success = React.createClass({
                     </div>
                 </div>
                 <div className="success-btn">
-                    <a href={"/order/detail?order_id=" + this.props.order_id} className="success-btn1">查看订单</a>
+                    <a href={"/static/mall/order-detail/index.html?order_id=" + this.props.order_id} className="success-btn1">查看订单</a>
                     <a onClick={this.backToMallHandler} className="success-btn2">返回商城</a>
                 </div>
             </div>
@@ -80,5 +80,5 @@ window.onNativeMessageReceive = function (msg) {
 };
 
 function back2pre_page() {
-    location.href = '/productDetail?bizNo=' + window.ProductBizNo;
+    location.href = '/static/mall/product-detail/index.html?bizNo=' + window.ProductBizNo;
 }

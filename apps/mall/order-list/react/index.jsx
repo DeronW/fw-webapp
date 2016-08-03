@@ -115,7 +115,7 @@ const OrderBlock = React.createClass({
         let product_item = function (product, index) {
 
             return (
-                <a href={'/order/detail?order_id=' + order.orderId} key={index}>
+                <a href={'/static/mall/order-detail/index.html?order_id=' + order.orderId} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
@@ -187,7 +187,7 @@ $FW.DOMReady(function () {
     }
 });
 function back_handler() {
-    location.href = '/user';
+    location.href = '/static/mall/user/index.html';
 }
 window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') back_handler()

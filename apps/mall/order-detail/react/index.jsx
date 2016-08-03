@@ -265,7 +265,7 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-    location.href = '/order/mine';
+    location.href = '/static/mall/order-list/index.html';
 }
 
 window.onNativeMessageReceive = function (msg) {
