@@ -11,6 +11,7 @@ const MAIN_APP_NAMES = [
     'user-contribute',
     'bind-bank-card',
     'hui-shang-bank',
+    'hui-shang-user',
     'bind-card',
     'before-input',
     'after-input',
