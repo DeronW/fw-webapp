@@ -200,29 +200,18 @@ onNativeMessageReceive('login_token', 'params')
 
 ### url定义
 
-商城首页 [http://m.mall.9888.cn](http://m.mall.9888.cn)
-
-专题活动页 [http://m.mall.9888.cn/activity](http://m.mall.9888.cn/activity)
-
-VIP专区页 [http://m.mall.9888.cn/product-vip](http://m.mall.9888.cn/product-vip)
-
-商品列表页 [http://m.mall.9888.cn/products](http://m.mall.9888.cn/products)
-
-商品详情页 [http://m.mall.9888.cn/product?bizNo=id](http://m.mall.9888.cn/product/bizNo=[uid])
-
-确认订单页 [http://m.mall.9888.cn/order/confirm](http://m.mall.9888.cn/order/confirm)
-
-交易成功页 [http://m.mall.9888.cn/order/complete](http://m.mall.9888.cn/order/complete)
-
-我的订单页 [http://m.mall.9888.cn/order/mine](http://m.mall.9888.cn/order/mine)
-
-订单详情页 [http://m.mall.9888.cn/order?bizNo=id](http://m.mall.9888.cn/order/bizNo=id)
-
-我的商城页 [http://m.mall.9888.cn/user](http://m.mall.9888.cn/user)
-
-收货地址列表页 [http://m.mall.9888.cn/delivery_address](http://m.mall.9888.cn/delivery_address)
-
-新建收货地址页 [http://m.mall.9888.cn/delivery_address/create](http://m.mall.9888.cn/delivery_address/create)
+* 商城首页       [http://mmall.9888.cn]
+* 专题活动页     [http://mmall.9888.cn/static/mall/activity/index.html]
+* VIP专区页      [http://mmall.9888.cn/static/mall/product-vip/index.html]
+* 商品列表页     [http://mmall.9888.cn/static/mall/products/index.html]
+* 商品详情页     [http://mmall.9888.cn/static/mall/product/index.html?bizNo=id]
+* 确认订单页     [http://mmall.9888.cn/static/mall/order-confirm/index.html]
+* 交易成功页     [http://mmall.9888.cn/static/mall/order-complete/index.html]
+* 我的订单页     [http://mmall.9888.cn/static/mall/order-mine/index.html]
+* 订单详情页     [http://mmall.9888.cn/static/mall/order/index.html?bizNo=id]
+* 我的商城页     [http://mmall.9888.cn/static/mall/user/index.html]
+* 收货地址列表页 [http://mmall.9888.cn/static/mall/delivery_address/index.html]
+* 新建收货地址页 [http://mmall.9888.cn/static/mall/delivery_address/create/index.html]
 
 
 ### 环境配置

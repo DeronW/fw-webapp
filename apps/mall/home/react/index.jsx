@@ -28,10 +28,12 @@ const Mall = React.createClass({
 
                 <div className="header-nav">
                     {/* <a className="recharge" onClick={function(){ gotoHandler("/static/mall/product-recharge/index.html",true) }}>话费充值</a>*/}
-                    <a className="recharge" onClick={function(){ gotoHandler("/recharge_phone",true) }}>话费充值</a>
-                    <a className="vip" onClick={function(){ gotoHandler("/vip_zone") }}>VIP专区</a>
-                    <a className="goods" onClick={function(){ gotoHandler("/products") }}>豆哥商品</a>
-                    <a className="mine" onClick={function(){ gotoHandler("/user", true) }}>我的商城</a>
+                    <a className="recharge"
+                       onClick={function(){ gotoHandler("/static/mall/product-recharge/index.html",true) }}>话费充值</a>
+                    <a className="vip" onClick={function(){ gotoHandler("/static/mall/product-vip-zone/index.html") }}>VIP专区</a>
+                    <a className="goods" onClick={function(){ gotoHandler("/static/mall/product-list/index.html") }}>豆哥商品</a>
+                    <a className="mine"
+                       onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}>我的商城</a>
                 </div>
                 <div className="index-actList-wrap">
                     { this.props.activities.map(activity) }
@@ -83,7 +85,7 @@ const ActivityProduct = React.createClass({
         let activity_banner = () => {
             return this.props.img ?
                 (<div className="index-actList-img">
-                    <a onClick={function(){gotoHandler("/activity?bizNo=" + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}>
+                    <a onClick={function(){gotoHandler("/static/mall/activity/index.html?bizNo=" + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}>
                         <img src={this.props.img || 'images/default-banner.jpg'}/>
                     </a>
                 </div>) :
@@ -105,7 +107,7 @@ const TextBar = React.createClass({
         return (
             <div className="index-actList-h">
                 <div className="index-actList-htext"><span className="vertical-line"></span>{this.props.title}</div>
-                <a onClick={function(){gotoHandler('/activity?bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
+                <a onClick={function(){gotoHandler('/static/mall/activity/index.html?bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
                    className="index-actList-hmore">更多</a>
             </div>
         )
@@ -128,7 +130,7 @@ const ProductItem = React.createClass({
         let _this = this;
 
         return (
-            <a onClick={function(){gotoHandler('/productDetail?bizNo='+ _this.props.bizNo)}}
+            <a onClick={function(){gotoHandler('/static/mall/product-detail/index.html?bizNo='+ _this.props.bizNo)}}
                className="index-actList-a">
                 <div className="list-img"><img src={this.props.img || 'images/default-product.jpg'}/>
                 </div>
@@ -139,15 +141,15 @@ const ProductItem = React.createClass({
                         { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
                     </div>
                     <div className="list-price-box">
-                            <div className="list-price">
-                                {this.props.price > 0 ? <span className="list-price-mark">&yen;</span> : null}
-                                {price}
-                                {score}
-                            </div>
-                            <div className="list-sold">
-                                <span>累计销量 </span>
-                                <span>{this.props.sales}</span>
-                            </div>
+                        <div className="list-price">
+                            {this.props.price > 0 ? <span className="list-price-mark">&yen;</span> : null}
+                            {price}
+                            {score}
+                        </div>
+                        <div className="list-sold">
+                            <span>累计销量 </span>
+                            <span>{this.props.sales}</span>
+                        </div>
                     </div>
                 </div>
 
@@ -161,8 +163,6 @@ $FW.DOMReady(function () {
     $FW.BatchGet([
         API_PATH + 'mall/api/index/v1/banners.json', // banner轮播图数据
         API_PATH + 'mall/api/index/v1/activities.json' // 明前活动的数据
-        //'http://127.0.0.1/banners.json',
-        //'http://127.0.0.1/activities.json'
     ], function (data) {
         var banners = data[0].banners, activities = data[1].activities;
         if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') $FW.Component.Alert('error: empty data received');
