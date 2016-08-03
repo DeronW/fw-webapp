@@ -13,8 +13,9 @@ const MAIN_APP_NAMES = [
     'hui-shang-bank',
     'bind-card',
     'before-input',
-    'after-input',
-    'recharge'
+    'personal-center',
+    'recharge',
+    'first-page'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
