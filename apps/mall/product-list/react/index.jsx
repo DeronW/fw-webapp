@@ -100,7 +100,7 @@ const MallProducts = React.createClass({
             product_tab_style = {top:"122px"};
         }
         if($FW.Browser.inApp() && ($FW.Browser.appVersion() < $FW.AppVersion.show_header)) {
-            product_tab_style = {top:"0"};
+            product_tab_style = {top:"0px"};
         }
 
         return (
