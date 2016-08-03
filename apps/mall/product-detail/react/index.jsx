@@ -70,13 +70,14 @@ const Product = React.createClass({
             <Carousel head_images={data.head_images}/> : <div className="no-head-images"></div>;
 
         let user_level_manifest;
-        if(data.vipLevel == 1) user_level_manifest = "普通用户";
-        if(data.vipLevel == 2) user_level_manifest = "VIP1";
-        if(data.vipLevel == 3) user_level_manifest = "VIP2";
-        if(data.vipLevel == 4) user_level_manifest = "VIP3";
-        if(data.vipLevel == 5) user_level_manifest = "VIP4";
+        if (data.vipLevel == 1) user_level_manifest = "普通用户";
+        if (data.vipLevel == 2) user_level_manifest = "VIP1";
+        if (data.vipLevel == 3) user_level_manifest = "VIP2";
+        if (data.vipLevel == 4) user_level_manifest = "VIP3";
+        if (data.vipLevel == 5) user_level_manifest = "VIP4";
 
-        let vip_tag = data.vipConfigUuid ? (data.vipLevel ? (<span className="vip-tag">{user_level_manifest}</span>) : null) : null;
+        let vip_tag = data.vipConfigUuid ? (data.vipLevel ? (
+            <span className="vip-tag">{user_level_manifest}</span>) : null) : null;
 
         return (
             <div className="detail-box">
@@ -183,18 +184,23 @@ const PlusMinus = React.createClass({
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
-        if(!this.props.is_login){
+        if (!this.props.is_login) {
             if ($FW.Browser.inApp()) {
                 // 注意: 这里有个hole
                 // 非种cookie 用这种
                 //NativeBridge.login(link)
                 // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
-                NativeBridge.goto(link, true)
+                //NativeBridge.goto(link, true)
+
+                $FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
+                    NativeBridge.goto(link, true) :
+                    NativeBridge.login(link);
+
             } else {
                 location.href = link
             }
-        }else{
-            if(!isCanBuy){
+        } else {
+            if (!isCanBuy) {
                 $FW.Component.Alert("所在等级不符合购买此商品特权");
             }
         }

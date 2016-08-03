@@ -9,7 +9,12 @@ gulp.task('default', function (done) {
 const MAIN_APP_NAMES = [
     'user-level',
     'user-contribute',
-    'hui-shang-bank'
+    'bind-bank-card',
+    'hui-shang-bank',
+    'bind-card',
+    'before-input',
+    'after-input',
+    'recharge'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
