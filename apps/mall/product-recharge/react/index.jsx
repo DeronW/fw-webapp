@@ -96,7 +96,7 @@ const Recharge = React.createClass({
         let v = this.state.phone;
         let myreg = /^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/;
         if (this.state.login) {
-            if (this.state.user_score < this.state.pay_score) {
+            if (this.state.user_score < this.state.fee_pay_score || this.state.user_score < this.state.net_pay_score) {
                 $FW.Component.Alert("充值失败，工分不足！");
             } else if (v == '') {
                 $FW.Component.Alert("请输入手机号！");
@@ -203,7 +203,7 @@ const Recharge = React.createClass({
         let tab = function (i) {
             let name = {
                 fee: '话费充值',
-                net: '流量充值',
+                net: '流量充值'
             };
 
             return (
