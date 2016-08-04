@@ -4,11 +4,13 @@ const API_PATH = document.getElementById('api-path').value;
 
 const Recharge = React.createClass({
     getInitialState: function () {
+        this.tabs = ['fee', 'net'];
         return {
             tab: 'fee',
             product_fee: [],
             user_score: this.props.is_login ? this.props.user_score : '--',
-            pay_score: null,
+            fee_pay_score: null,
+            net_pay_score: null,
             bizNo: null,
             login: this.props.is_login,
             phone: '',
@@ -17,8 +19,19 @@ const Recharge = React.createClass({
         }
     },
     componentDidMount: function () {
+       this.switchState();
+    },
+
+    tabClickHandler: function(tab){
+        this.setState({tab:tab}, ()=>this.switchState());
+    },
+
+    switchState: function(){
         if (this.state.tab == 'fee') {
             this.reloadFeeHandler();
+        }
+        if (this.state.tab == 'net') {
+            this.reloadNetHandler();
         }
     },
 
@@ -37,7 +50,29 @@ const Recharge = React.createClass({
                 if (!pay_score) console.log('no match default bizNo', data);
 
                 this.setState({
-                    pay_score: pay_score,
+                    fee_pay_score: pay_score,
+                    bizNo: data.defaultBizNo,
+                    product_fee: data.fee
+                })
+            }.bind(this)
+        });
+    },
+
+    reloadNetHandler: function(){
+        $FW.Ajax({
+            url: API_PATH + 'api/v1/phone/fee/recharge2.json',
+            enable_loading: true,
+            success: function (data) {
+                let pay_score;
+                data.fee.forEach((i)=> {
+                    if (i.bizNo == data.defaultBizNo)
+                        pay_score = i.score;
+                })
+
+                if (!pay_score) console.log('no match default bizNo', data);
+
+                this.setState({
+                    net_pay_score: pay_score,
                     bizNo: data.defaultBizNo,
                     product_fee: data.fee
                 })
@@ -56,9 +91,6 @@ const Recharge = React.createClass({
             //e.target.setSelectionRange(12, 12)
         }, 100)
     },
-
-
-
 
     getSMSCodeHandler: function () {
         let v = this.state.phone;
@@ -92,16 +124,14 @@ const Recharge = React.createClass({
             user_score: this.state.user_score - this.state.pay_score
         })
     },
-    tab2handler: function () {
-        $FW.Component.Alert("正在建设中，敬请期待！");
-    },
     render: function () {
 
         let _this = this;
 
-        function emptyHandler(){
-            _this.setState({phone:''});
-            
+        function emptyHandler() {
+            _this.setState({phone: ''});
+        }
+
         let phoneInput = (
             <div className="phonenumber-wrap">
                 <span className="phone-icon"></span>
@@ -118,7 +148,7 @@ const Recharge = React.createClass({
                 _this.setState({
                     bizNo: data.bizNo,
                     price: data.price,
-                    pay_score: data.score
+                    fee_pay_score: data.score
                 })
             }
 
@@ -136,22 +166,67 @@ const Recharge = React.createClass({
             </div>
         }
 
+        function net_card(data, index) {
+            function check() {
+                _this.setState({
+                    bizNo: data.bizNo,
+                    price: data.price,
+                    net_pay_score: data.score
+                })
+            }
+
+            return <div className={_this.state.bizNo == data.bizNo ? "value-box selected" : "value-box"} key={index}
+                        onClick={check}>
+                <span className="value-num">{data.title}</span>
+                {data.sub_title ?
+                    <span className="limited-sale"><span className="limited-sale-icon"></span><span className="limited-sale-title">{data.sub_title}</span></span> :
+                    null
+                }
+                {_this.state.bizNo == data.bizNo ?
+                    <span className="default-selected"></span> :
+                    null
+                }
+            </div>
+        }
+
 
         let fee_panel = this.state.tab == 'fee' ?
-            ( <div className="value-wrap"> {this.state.product_fee.map(fee_card)} </div> ) : null;
+            ( <div className="value-wrap">{this.state.product_fee.map(fee_card)}</div> ) : null;
+
+        let net_panel = this.state.tab == 'net' ?
+            ( <div className="value-wrap"> {this.state.product_fee.map(net_card)} </div> ) : null;
+
+        let fee_pay_score = this.state.tab == 'fee' ? this.state.fee_pay_score : null;
+        let net_pay_score = this.state.tab == 'net' ? this.state.net_pay_score : null;
+
+
+        let tab = function (i) {
+            let name = {
+                fee: '话费充值',
+                net: '流量充值',
+            };
+
+            return (
+                <div className="tab-innerwrap">
+                    <span key={i} className={i==_this.state.tab ? "recharge-tab active" : "recharge-tab"}
+                         onClick={function(){_this.tabClickHandler(i)}}>
+                        <span>{name[i]}</span>
+                    </span>
+               </div>
+            )
+        };
 
         return (
             <div>
                 <div className="tab-wrap">
                     <div className="recharge-wrap">
-                        <span className={this.state.tab == 'fee' ? "recharge-tab active" : 'recharge-tab'}>话费充值</span>
-                        <span className={this.state.tab == 'net' ? "recharge-tab2 active" : 'recharge-tab2'}
-                              onClick={this.tab2handler}>流量充值</span>
+                        {this.tabs.map(tab)}
                     </div>
                 </div>
 
                 {phoneInput}
                 {fee_panel}
+                {net_panel}
 
                 <div className="payment-wrap">
                     <div className="payment-way">支付方式<span>工分支付</span></div>
@@ -160,7 +235,7 @@ const Recharge = React.createClass({
                             可用工分：<span> {this.state.user_score}</span>
                         </div>
                         <div className="total-gonfeng">
-                            总计： <span>{this.state.pay_score}工分</span>
+                            总计： <span>{fee_pay_score}{net_pay_score}工分</span>
                         </div>
                     </div>
                 </div>
@@ -330,7 +405,3 @@ $FW.DOMReady(function () {
 function backward(){
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
-
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') backward()
-};
