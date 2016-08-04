@@ -30,7 +30,7 @@ const Mall = React.createClass({
                     {/* <a className="recharge" onClick={function(){ gotoHandler("/static/mall/product-recharge/index.html",true) }}>话费充值</a>*/}
                     <a className="recharge" onClick={function(){ gotoHandler("/recharge_phone",true) }}>话费充值</a>
                     <a className="vip" onClick={function(){ gotoHandler("/vip_zone") }}>VIP专区</a>
-                    <a className="goods" onClick={function(){ gotoHandler("/products") }}>豆哥商品</a>
+                    <a className="goods" onClick={function(){ gotoHandler("/products") }}>全部商品</a>
                     <a className="mine" onClick={function(){ gotoHandler("/user", true) }}>我的商城</a>
                 </div>
                 <div className="index-actList-wrap">
