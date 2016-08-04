@@ -70,7 +70,7 @@ $FW.DOMReady(function () {
         }
     });
 
-    if (!$FW.Browser.inApp()) {
+    if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"交易成功"} back_handler={back2pre_page}/>, document.getElementById('header'));
     }
 });

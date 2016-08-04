@@ -25,6 +25,7 @@ const Recharge = React.createClass({
     reloadFeeHandler: function(){
         $FW.Ajax({
             url: API_PATH + 'api/v1/phone/fee/recharge.json',
+            //url:"http://localhost/recharge.json",
             enable_loading: true,
             success: function (data) {
                 let pay_score;
@@ -175,7 +176,8 @@ const ConfirmPop = React.createClass({
             value: '',
             remain: 0,
             show_warn:false,
-            show_text:''
+            show_text:'',
+            loading: false
         }
     },
     show: function () {
@@ -229,6 +231,9 @@ const ConfirmPop = React.createClass({
     submitHandler: function () {
         var _this = this;
         var form_data = rechargePanel.getFormData();
+        if(this.state.loading)
+            return;
+        this.setState({loading: true})
         $FW.Ajax({
             url: API_PATH + 'mall/api/v1/getToken.json',
             method: "get",
@@ -246,6 +251,9 @@ const ConfirmPop = React.createClass({
                         sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
                         tokenStr: token
                     },
+                    complete:function(){
+                        _this.setState({loading: true});
+                    },
                     success: function () {
                         _this.setState({
                             show: false,
@@ -260,7 +268,8 @@ const ConfirmPop = React.createClass({
                     fail: function (code,message,response) {
                         _this.setState({
                             show_warn:true,
-                            show_text:message
+                            show_text:message,
+                            loading: false
                         });
                         return true;
                         //$FW.Component.Alert("充值失败！");
@@ -286,7 +295,7 @@ const ConfirmPop = React.createClass({
                                   onClick={this.getSmsCodeHandler}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
                         {frequent_tip}
-                        <div className="pop-confirm-btn" onClick={this.submitHandler}>确认</div>
+                        <div className={this.state.loading ? "pop-confirm-btn gray" : "pop-confirm-btn"} onClick={this.submitHandler}>确认</div>
                         <div className="pop-tip">充值后1~10分钟到账</div>
                     </div>
                 </div>
@@ -298,11 +307,12 @@ const ConfirmPop = React.createClass({
 $FW.DOMReady(function () {
     NativeBridge.setTitle('充值专区');
 
-    if (!$FW.Browser.inApp())
+    if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
         url: API_PATH + 'api/v1/user-state.json',
+        //url: "http://localhost/user-state.json",
         enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
@@ -313,7 +323,7 @@ $FW.DOMReady(function () {
 });
 
 function backward(){
-    location.href = '/';
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
 
 window.onNativeMessageReceive = function (msg) {

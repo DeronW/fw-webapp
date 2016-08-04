@@ -8,11 +8,19 @@ gulp.task('default', function (done) {
 
 const MAIN_APP_NAMES = [
     'user-level',
-    'user-contribute'
+    'user-contribute',
+    'bind-bank-card',
+    'hui-shang-bank',
+    'hui-shang-user',
+    'bind-card',
+    'before-input',
+    'personal-center',
+    'recharge',
+    'first-page'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
-    var common_components = ['loading.jsx', 'alert.jsx'];
+    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx'];
     var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
     gt('main', i, {
@@ -56,7 +64,7 @@ MALL_APP_NAMES.forEach(function (i) {
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://10.105.6.73:8081/',
+        api_path: 'http://10.105.7.71/',
         include_components: common_components,
         include_common_js: common_js,
         width_swipe: true

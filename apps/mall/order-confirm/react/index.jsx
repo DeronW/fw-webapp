@@ -21,10 +21,15 @@ const ConfirmOrder = React.createClass({
             ticket: [],
             tokenStr: query.tokenStr,
             sms_code: null,
-            addressId: this.props.default_address_id
+            addressId: this.props.default_address_id,
+            vipLevel: this.props.vipLevel,
+            vipConfigUuid: this.props.vipConfigUuid
         };
 
-        return {product_count: product_count}
+        return {
+            product_count: product_count
+            //isVirtualProduct:this.props.isVirtualProduct
+        }
     },
     componentDidMount: function () {
     },
@@ -66,6 +71,16 @@ const ConfirmOrder = React.createClass({
     makeOrderHandler: function () {
         if (!this.can_buy(true)) return; // $FW.Component.Alert('您现在不能购买这件商品');
         if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
+
+        //if(this.state.isVirtualProduct){
+        //    $FW.Ajax({
+        //        url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
+        //        enable_loading: true,
+        //        method: 'post',
+        //        data: {smsCode: this.FormData.sms_code},
+        //        success: submit
+        //    });
+        //}
 
         $FW.Ajax({
             url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
@@ -150,6 +165,8 @@ const ConfirmOrder = React.createClass({
 
         return (
             <div className="confirm-order">
+                {/*{this.props.isVirtualProduct ? <AddressPanel address={address} product_biz_no={this.FormData.productBizNo}
+                              product_count={this.state.product_count}/> : null}*/}
                 <AddressPanel address={address} product_biz_no={this.FormData.productBizNo}
                               product_count={this.state.product_count}/>
                 <ProductPanel product={this.props.product}
@@ -161,6 +178,8 @@ const ConfirmOrder = React.createClass({
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
                 />
+                {/*{this.props.isVirtualProduct ? <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
+                         update_sms_code_handler={this.updateSMSCodeHandler}/> : null}*/}
                 <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
                          update_sms_code_handler={this.updateSMSCodeHandler}/>
                 <div className="confirm-order-foot">
@@ -182,7 +201,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + query.productBizNo + '&buyNum=' + (query.count || 1),
-        //url: 'http://localhost/pre_pay_order.json',
+        //url: 'http://localhost/pre_pay_order.json?productBizNo=B0000001337&buyNum=1',
         enable_loading: true,
         success: function (data) {
 
@@ -216,12 +235,15 @@ $FW.DOMReady(function () {
                                           pay_condition={pay_condition}
                                           close_score_func={close_score_func}
                                           default_address_id={query.address_id || data.addressId}
+                                          vipLevel={data.vipLevel}
+                                          vipConfigUuid={data.vipConfigUuid}
+                                          //isVirtualProduct={data.is_virtual_product}
                 />,
                 document.getElementById('cnt'));
         }
     });
 
-    if (!$FW.Browser.inApp()) {
+    if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
     }
 

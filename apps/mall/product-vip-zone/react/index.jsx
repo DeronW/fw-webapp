@@ -1,6 +1,5 @@
 'use strict';
 const API_PATH = document.getElementById('api-path').value;
-const test_api = "http://10.105.6.76:8083/";
 
 const VipMsg = React.createClass({
 	getInitialState: function(){
@@ -54,27 +53,27 @@ const VipZone = React.createClass({
 		}
 	},
 
-	handleTouchStart: function(event) {
-		this.setState({ initialX: event.targetTouches[0].pageX});
-	},
-	handleTouchMove: function(event) {
-		this.setState({ x: this.state.endX + (event.targetTouches[0].pageX - this.state.initialX)});
-	},
-	handleTouchEnd: function(event) {
-		var objWidth = (window.innerWidth * 1.3) - window.innerWidth;
-
-		this.setState({ endX: this.state.x});
-
-		if(this.state.x > 0) {
-			this.setState({ x: 0, endX: 0});
-		} else if (-(this.state.x) > objWidth ) {
-			this.setState({
-				x: -(objWidth),		
-				endX: -(objWidth)
-			});
-		} 
-
-	},
+	//handleTouchStart: function(event) {
+	//	this.setState({ initialX: event.targetTouches[0].pageX});
+	//},
+	//handleTouchMove: function(event) {
+	//	this.setState({ x: this.state.endX + (event.targetTouches[0].pageX - this.state.initialX)});
+	//},
+	//handleTouchEnd: function(event) {
+	//	var objWidth = (window.innerWidth * 1.3) - window.innerWidth;
+    //
+	//	this.setState({ endX: this.state.x});
+    //
+	//	if(this.state.x > 0) {
+	//		this.setState({ x: 0, endX: 0});
+	//	} else if (-(this.state.x) > objWidth ) {
+	//		this.setState({
+	//			x: -(objWidth),
+	//			endX: -(objWidth)
+	//		});
+	//	}
+    //
+	//},
 
 	tabClickHandler: function (tab) {
 		this.setState({tab: tab, products: window.Products[tab]});
@@ -104,8 +103,7 @@ const VipZone = React.createClass({
 		}
 
 		$FW.Ajax({
-			//url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.pageCount + '&page=' + page + '&vipLevel=' + is_Level,
-			url: test_api + 'mall/api/index/v1/vip_list.json?count=' + this.count + '&page=' + page + '&vipLevel=' + is_Level,
+			url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.count + '&page=' + page + '&vipLevel=' + is_Level,
 			enable_loading: true,
 			success: function (data) {
 				let tab;
@@ -157,11 +155,11 @@ const VipZone = React.createClass({
 		let tab = function (i) {
 			let name = {
 				all: '全部',
-				vipLevel0: '普通会员',
-				vipLevel1: 'vip1',
-				vipLevel2: 'vip2',
-				vipLevel3: 'vip3',
-				vipLevel4: 'vip4',
+				vipLevel0: '普通',
+				vipLevel1: 'VIP1',
+				vipLevel2: 'VIP2',
+				vipLevel3: 'VIP3',
+				vipLevel4: 'VIP4'
 			};
 			return (
 				<div key={i} className={i==_this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
@@ -236,11 +234,11 @@ window.Products = {
 $FW.DOMReady(function(){
 	NativeBridge.setTitle('VIP专区');
 
-	if (!$FW.Browser.inApp())
+	if ($FW.Utils.shouldShowHeader())
 		ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
-		url:test_api + "mall/api/member/v1/user_level_points.json",
+		url: API_PATH + "mall/api/member/v1/user_level_points.json",
 		enable_loading: true,
 		success:function(data){
 			if(data.loginOk){
@@ -252,7 +250,7 @@ $FW.DOMReady(function(){
 });
 
 function backward(){
-	location.href = '/';
+	$FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
 
 window.onNativeMessageReceive = function (msg) {

@@ -69,6 +69,16 @@ const Product = React.createClass({
         let old_component = data.head_images && data.head_images.length ?
             <Carousel head_images={data.head_images}/> : <div className="no-head-images"></div>;
 
+        let user_level_manifest;
+        if (data.vipLevel == 1) user_level_manifest = "普通用户";
+        if (data.vipLevel == 2) user_level_manifest = "VIP1";
+        if (data.vipLevel == 3) user_level_manifest = "VIP2";
+        if (data.vipLevel == 4) user_level_manifest = "VIP3";
+        if (data.vipLevel == 5) user_level_manifest = "VIP4";
+
+        let vip_tag = data.vipConfigUuid ? (data.vipLevel ? (
+            <span className="vip-tag">{user_level_manifest}</span>) : null) : null;
+
         return (
             <div className="detail-box">
 
@@ -85,10 +95,10 @@ const Product = React.createClass({
                             <span className="price">{$FW.Format.currency(data.price)}</span> : null}
                         {data.price > 0 && data.score ? '+' : null}
                         {score}
+                        {vip_tag}
                     </div>
                     <div className="detail-inf1">
                         {market_price}
-
                         <div className="total">
                             <span>累计销量</span>
                             <span className="total-num">{data.sales}</span>
@@ -113,7 +123,7 @@ const Product = React.createClass({
                 <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
                 <PlusMinus stock={data.stock} ticket_count={data.ticketList}
                            check_messages={data.checkMessages}
-                           voucher_only={data.supportTicket}/>
+                           voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
             </div>
         )
     }
@@ -173,12 +183,28 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
 
-        // 注意: 这里有个hole
-        if ($FW.Browser.inApp()) {
-            NativeBridge.login(link)
+        let isCanBuy = this.props.isCanBuy;
+        if (!this.props.is_login) {
+            if ($FW.Browser.inApp()) {
+                // 注意: 这里有个hole
+                // 非种cookie 用这种
+                //NativeBridge.login(link)
+                // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
+                //NativeBridge.goto(link, true)
+
+                $FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
+                    NativeBridge.goto(link, true) :
+                    NativeBridge.login(link);
+
+            } else {
+                location.href = link
+            }
         } else {
-            location.href = link
+            if (!isCanBuy) {
+                $FW.Component.Alert("所在等级不符合购买此商品特权");
+            }
         }
+
     },
 
     blur: function (e) {
@@ -265,18 +291,17 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
-        //url: "http://localhost/product-detail.json",
         enable_loading: true,
         success: function (data) {
             if (data.title) {
-                ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'))
+                ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
             } else {
                 ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
             }
         }
     });
 
-    if (!$FW.Browser.inApp()) {
+    if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"商品详情"} back_handler={backPage}/>, document.getElementById('header'));
     }
 });

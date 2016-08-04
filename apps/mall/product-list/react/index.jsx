@@ -95,9 +95,17 @@ const MallProducts = React.createClass({
             )
         };
 
+        var product_tab_style = {top:"100px"};
+        if($FW.Browser.inApp() && $FW.Browser.inIOS() && ($FW.Browser.appVersion() >= $FW.AppVersion.show_header)) {
+            product_tab_style = {top:"122px"};
+        }
+        if($FW.Browser.inApp() && ($FW.Browser.appVersion() < $FW.AppVersion.show_header)) {
+            product_tab_style = {top:"0px"};
+        }
+
         return (
             <div>
-                <div className="productsTab" style={{top:$FW.Browser.inApp() ? "0" : "100px" }}>
+                <div className="productsTab" style={product_tab_style}>
                     {this.tabs.map(tab)}
                 </div>
                 <div className="products-list">
@@ -151,13 +159,13 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('豆哥商品');
     ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
 
-    if (!$FW.Browser.inApp()) {
+    if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"豆哥商品"} back_handler={backward}/>, document.getElementById('header'));
     }
 });
 
 function backward(){
-    location.href = '/';
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/';
 }
 
 window.onNativeMessageReceive = function (msg) {

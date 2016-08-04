@@ -27,8 +27,9 @@ const Mall = React.createClass({
                     <div className="no-banner"></div>}
 
                 <div className="header-nav">
+                    {/* <a className="recharge" onClick={function(){ gotoHandler("/static/mall/product-recharge/index.html",true) }}>话费充值</a>*/}
                     <a className="recharge" onClick={function(){ gotoHandler("/recharge_phone",true) }}>话费充值</a>
-                    <a className="vip" onClick={function(){ gotoHandler("/waiting") }}>VIP专区</a>
+                    <a className="vip" onClick={function(){ gotoHandler("/vip_zone") }}>VIP专区</a>
                     <a className="goods" onClick={function(){ gotoHandler("/products") }}>豆哥商品</a>
                     <a className="mine" onClick={function(){ gotoHandler("/user", true) }}>我的商城</a>
                 </div>
@@ -132,21 +133,24 @@ const ProductItem = React.createClass({
                 <div className="list-img"><img src={this.props.img || 'images/default-product.jpg'}/>
                 </div>
                 {Angle}
-                <div className="list-name">{this.props.title}</div>
-                <div className="list-mark">
-                    { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
-                </div>
-                <div className="list-price-box">
-                    <div className="list-price">
-                        {this.props.price > 0 ? <span className="list-price-mark">&yen;</span> : null}
-                        {price}
-                        {score}
+                <div className="product-content-wrap">
+                    <div className="list-name">{this.props.title}</div>
+                    <div className="list-mark">
+                        { this.props.tags.map((d, index) => <div key={index}>{d}</div>) }
                     </div>
-                    <div className="list-sold">
-                        <span>累计销量 </span>
-                        <span>{this.props.sales}</span>
+                    <div className="list-price-box">
+                            <div className="list-price">
+                                {this.props.price > 0 ? <span className="list-price-mark">&yen;</span> : null}
+                                {price}
+                                {score}
+                            </div>
+                            <div className="list-sold">
+                                <span>累计销量 </span>
+                                <span>{this.props.sales}</span>
+                            </div>
                     </div>
                 </div>
+
             </a>
         )
     }
@@ -165,8 +169,8 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
     }, true);
 
-    if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title_img='images/dg-mall-title.png'
+    if ($FW.Utils.shouldShowHeader()) {
+        ReactDOM.render(<Header title_img='images/dg-mall-title.png' show_back_btn={!$FW.Browser.inApp()}
                                 back_handler={ () => location.href = 'http://m.9888.cn' }/>,
             document.getElementById('header'));
     }

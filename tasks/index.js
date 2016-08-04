@@ -44,7 +44,7 @@ module.exports = function (site_name, project_name, configs) {
     jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
 
     var common_javascript_files = [
-        `${lib_path}fw-1.0.0.js`,
+        `${lib_path}fw-1.0.1.js`,
         `${lib_path}native-bridge-0.2.0.js`
     ];
     if (CONFIG.debug) {
@@ -60,7 +60,10 @@ module.exports = function (site_name, project_name, configs) {
         CONFIG.include_common_js.map(i => `${lib_path}${i}`));
 
     function compile_html() {
-        return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {API_PATH: CONFIG.api_path})
+        return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
+            API_PATH: CONFIG.api_path,
+            DEBUG: CONFIG.debug
+        })
     }
 
     function compile_stylesheets() {
