@@ -74,7 +74,9 @@ const List = React.createClass({
 								<span>利随享8531</span>
 								<em className="ico-danbao1"></em>
 								<em className="ico-redgu"></em>
+								<em className="ico-blueling"></em>
 							</div>
+							<div className="type">限时抢购</div>
 							<div className="list-cont1">
 								<span className="year-income">
 									9.2
@@ -114,11 +116,54 @@ const List = React.createClass({
 });
 ReactDOM.render(<List />,document.getElementById('list'));
 
+const Load = React.createClass({
+	render : function(){
+		return (
+			<div className="">
+				<div className="shouye-foot">
+					<div className="more">点击加载更多</div>
+					<div className="foot-a">
+						<a href="javascript:toWebVersion();">PC首页</a>
+						<a href="javascript:toFamily();">工友之家</a>
+						<a href="javascript:toAppLoad();">下载App</a>
+						<a href="http://m.9888.cn:80/mpwap/about/aboutUs.shtml">关于我们</a>
+					</div>
+					<div className="copyRight">©2016 金融工场版权所有</div>
+					<div className="copyRight-down">北京凤凰信用管理有限公司</div>
+				</div>
+			</div>
+		)
+	}
+})
+ReactDOM.render(<Load />,document.getElementById('bottom'));
 
+const Flutter = React.createClass({
+	render : function(){
+		return (
+			<div className="loadApp">
+				<img src="images/ico-loadapp.png"/>
+				<a className="btn-app"></a>
+			</div>
+		)
+	}
+})
+ReactDOM.render(<Flutter />,document.getElementById('susp'));
 
-
-
-
+const Top = React.createClass({
+	render : function(){ 
+		var style = {
+			display: 'block'
+		}
+		return (
+			<div className="top-computer">
+				<div className="g-fly" style={style}>
+					<img src="images/ico-top.png" />
+				</div>
+			</div>
+		)
+	}
+})
+ReactDOM.render(<Top />,document.getElementById('go'));
 
 
 

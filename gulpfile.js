@@ -16,7 +16,9 @@ const MAIN_APP_NAMES = [
     'before-input',
     'personal-center',
     'recharge',
-    'first-page'
+    'first-page',
+    'cash',
+    'special-cash'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
