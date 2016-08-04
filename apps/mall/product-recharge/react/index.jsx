@@ -99,14 +99,19 @@ const Recharge = React.createClass({
 
         let _this = this;
 
+        function emptyHandler(){
+            _this.setState({phone:''});
+            
         let phoneInput = (
             <div className="phonenumber-wrap">
+                <span className="phone-icon"></span>
                 <input type="number" className="phone-input" placeholder="请输入手机号" number="true"
                        value={this.state.phone}
                        onChange={this.changeValueHandler}/>
-                <span className="phone-icon"></span>
+                <span className="phone-empty" onClick={emptyHandler}></span>
             </div>
         );
+
 
         function fee_card(data, index) {
             function check() {
