@@ -1,3 +1,14 @@
+var numberFormat = {
+    val: "",
+    format: function(val) {
+        if(!isNaN(val.replace(/[0-9]/g,""))){
+            this.val = val.replace(/\s/g,'').replace(/(\d{4})(?=\d)/g,"$1 ");//四位数字一组，以空格分割
+        }
+
+        return this.val;
+    }
+};
+
 var Nav = React.createClass({
     render: function() {
         return (
@@ -8,8 +19,73 @@ var Nav = React.createClass({
     }
 });
 
-var From = React.createClass({
+var Btn = React.createClass({
     render: function() {
+        return (
+            <div className="btn-area">
+                <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>{this.props.btnText}</div>
+            </div>
+        );
+    }
+});
+
+var From = React.createClass({
+    getInitialState: function() {
+        return {
+            showInput: 0,
+            account: "",
+            code: 0,
+            countdown: 10
+        };
+    },
+    amendId: function() {
+        this.setState({
+            showInput: 1
+        });
+    },
+    onInputChangeHandler: function(event){
+        //　....　data
+        this.props.callbackParent(event.target.value);
+
+        this.setState({
+            account: numberFormat.format(event.target.value)
+        });
+    },
+    handlerBank: function() {
+        this.props.callbackBank("中国银行");
+    },
+    headlerCode: function() {
+        var _this = this;
+
+        this.setState({
+            code: 1
+        });
+
+        this.interval = setInterval(function() {
+            _this.setState({
+                countdown: --_this.state.countdown
+            });
+
+            if(_this.state.countdown == 0) {
+                clearInterval(_this.interval);
+
+                _this.setState({
+                    code: 0
+                });
+            }
+        }, 1000);
+    },
+    render: function() {
+        var _this = this;
+
+        var focus = function(input) {
+                        if (input != null) {
+                            input.focus();
+                        }
+                    };
+
+        //var f = input => input && input.focus();
+
         return (
             <div className="from-block">
                 <div className="input-block">
@@ -28,32 +104,43 @@ var From = React.createClass({
 
                 <div className="input-block">
                     <span className="icon id-icon"></span>
-                    <div className="text-block">
-                        <input type="text" placeholder="输入身份证" />
+                    <div className="text-block" >
+                        {
+                            this.state.showInput == 1 ?
+                                <input type="text" value={this.state.account} placeholder="输入账号"  ref={focus}  onChange={this.onInputChangeHandler} /> :
+                                <span className="text id-text" onClick={this.amendId}>6222 3659 5985 1254 478</span>
+                        }
+
                     </div>
                 </div>
 
-                <div className="input-block">
+                <div className="input-block" onClick={this.handlerBank}>
                     <span className="bank-name">开户银行</span>
                     <img src="images/right-icon.png" className="r-icon" />
 
                     <span className="bank-logo">
-                            <span className="bank-text">招商银行</span>
-                            <span className="img">
-                                <img src="images/logl.png" />
-                            </span>
+                        <span className="bank-text">招商银行</span>
+                        <span className="img">
+                            <img src="images/logl.png" />
                         </span>
+                    </span>
                 </div>
 
                 <div className="input-block code-block">
-                        <span className="input">
-                            <input type="text" placeholder="请输入验证码" />
-                        </span>
+                    <span className="input">
+                        <input type="text" placeholder="请输入验证码" />
+                    </span>
 
                     <span className="btn-code">
-                            <span className="line"></span>
-                            <span className="btn">获取短信验证码</span>
-                        </span>
+                        <span className="line"></span>
+
+                        {
+                            this.state.code ?
+                                <span className="timing-text">{this.state.countdown}倒计时</span> :
+                                <span className="btn" onClick={this.headlerCode}>获取短信验证码</span>
+                        }
+
+                    </span>
                 </div>
             </div>
 
@@ -61,15 +148,6 @@ var From = React.createClass({
     }
 });
 
-var Btn = React.createClass({
-    render: function() {
-        return (
-            <div className="btn-area">
-                <div className="ui-btn ui-red-btn">{this.props.btnText}</div>
-            </div>
-        );
-    }
-});
 
 var Text = React.createClass({
     render: function() {
@@ -85,6 +163,10 @@ var SelectBank = React.createClass({
     render: function() {
         var style = {
             zIndex: "100000"
+        };
+
+        var shortcutPay = function() {
+            
         };
 
         return (
@@ -168,17 +250,54 @@ var SelectBank = React.createClass({
 });
 
 var Body = React.createClass({
+    getInitialState: function() {
+        return {
+            errorWindow: null,
+            selectBankWindow: null,
+            loading: null
+        };
+    },
+    fromData: function(dataText) {
+        this.dataText　=　dataText;
+    },
+    clickFun: function() {
+        this.fromData;
+
+        if(this.dataText.length <= 0) {
+            this.setState({
+                errorWindow: <ErrorTip text={"不能为空"}/>
+            });
+        } else {
+            this.setState({
+                loading: <GlobalLoading />
+            });
+        }
+    },
+    selectBank: function(bankName) {
+        console.log(bankName);
+        this.setState({
+            selectBankWindow: <SelectBank />
+        });
+
+    },
     render: function() {
+        var _this = this;
+
         return (
             <div className="cnt">
                 <Nav />
 
-                <From />
+                <From callbackParent={this.fromData} callbackBank={this.selectBank} />
 
-                <Btn />
+                <Btn btnText={"同意"} Fun={this.clickFun}/>
 
                 <Text />
 
+                {this.state.errorWindow}
+
+                {this.state.selectBankWindow}
+
+                {this.state.loading}
             </div>
 
         );
@@ -464,7 +583,7 @@ ReactDOM.render(
 
 
 ReactDOM.render(
-    <SucceedOpenBody />,
+    <Body />,
     document.getElementById("cnt")
 );
 
