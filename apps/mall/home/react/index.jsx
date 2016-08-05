@@ -114,7 +114,7 @@ const TextBar = React.createClass({
 
 const ProductItem = React.createClass({
     render: function () {
-        var price = this.props.price > 0 ?
+        var price = this.props.price >= 0 ?
             <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span> : null;
         var score = (parseFloat(this.props.score) > 0) ?
             ( <span className="list-price-score">
