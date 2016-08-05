@@ -18,7 +18,8 @@ const MAIN_APP_NAMES = [
     'recharge',
     'first-page',
     'cash',
-    'special-cash'
+    'special-cash',
+    'verify-identity'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
