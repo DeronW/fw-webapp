@@ -28,7 +28,7 @@ const ConfirmOrder = React.createClass({
 
         return {
             product_count: product_count,
-            isVirtualProduct:this.props.isVirtualProduct
+            isVirtualProduct: this.props.isVirtualProduct
         }
     },
     componentDidMount: function () {
@@ -70,34 +70,12 @@ const ConfirmOrder = React.createClass({
     },
     makeOrderHandler: function () {
         if (!this.can_buy(true)) return; // $FW.Component.Alert('您现在不能购买这件商品');
-        //if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
 
-        if(!this.state.isVirtualProduct){
-            if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
-            $FW.Ajax({
-                url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
-                enable_loading: true,
-                method: 'post',
-                data: {smsCode: this.FormData.sms_code},
-                success: submit
-            });
-        }
-
-        //$FW.Ajax({
-        //    url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
-        //    enable_loading: true,
-        //    method: 'post',
-        //    data: {smsCode: this.FormData.sms_code},
-        //    success: submit
-        //});
-
-        let _this = this;
-
-        function submit() {
+        let submit = function submit() {
             $FW.Ajax({
                 url: API_PATH + '/mall/api/order/v1/commit_pay_order.json',
                 enable_loading: true,
-                data: _this.FormData,
+                data: this.FormData,
                 success: function (data) {
                     if (data.errMsg) {
                         $FW.Component.Alert(data.errMsg)
@@ -106,7 +84,22 @@ const ConfirmOrder = React.createClass({
                     }
                 }
             })
+        }.bind(this);
+
+        if (!this.state.isVirtualProduct) {
+            if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
+
+            $FW.Ajax({
+                url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
+                enable_loading: true,
+                method: 'post',
+                data: {smsCode: this.FormData.sms_code},
+                success: submit
+            });
+        } else {
+            submit()
         }
+
     },
     updateSMSCodeHandler: function (code) {
         this.FormData.sms_code = code;
@@ -166,10 +159,10 @@ const ConfirmOrder = React.createClass({
 
         return (
             <div className="confirm-order">
-                {this.props.isVirtualProduct ? null : <AddressPanel address={address} product_biz_no={this.FormData.productBizNo}
-                              product_count={this.state.product_count}/>}
-                {/*<AddressPanel address={address} product_biz_no={this.FormData.productBizNo}
-                              product_count={this.state.product_count}/>*/}
+                {this.props.isVirtualProduct ? null :
+                    <AddressPanel address={address}
+                                  product_biz_no={this.FormData.productBizNo}
+                                  product_count={this.state.product_count}/>}
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}
                               update_product_count_handler={this.updateProductCountHandler}/>
@@ -179,10 +172,9 @@ const ConfirmOrder = React.createClass({
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
                 />
-                {this.props.isVirtualProduct ? null : <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
-                         update_sms_code_handler={this.updateSMSCodeHandler}/>}
-                {/*<SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
-                         update_sms_code_handler={this.updateSMSCodeHandler}/>*/}
+                {this.props.isVirtualProduct ? null :
+                    <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
+                             update_sms_code_handler={this.updateSMSCodeHandler}/>}
                 <div className="confirm-order-foot">
                     <a onClick={this.makeOrderHandler}
                        className={this.can_buy() ? "btn-red" : "btn-red btn-gray"}>确认购买</a>
