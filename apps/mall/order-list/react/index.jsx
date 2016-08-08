@@ -189,6 +189,7 @@ $FW.DOMReady(function () {
 function back_handler() {
     location.href = '/static/mall/user/index.html';
 }
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') back_handler()
-};
+
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') back_handler()
+//};

@@ -318,7 +318,6 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/user.json',
-        //url: 'http://localhost/user.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
@@ -338,6 +337,6 @@ function back_handler() {
 
 $FW.setLoginRedirect('/static/mall/home/index.html');
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') back_handler()
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') back_handler()
+//};

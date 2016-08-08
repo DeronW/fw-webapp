@@ -101,6 +101,6 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('新建收货地址');
 });
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/static/mall/deliver-address/index.html';
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') location.href = '/static/mall/deliver-address/index.html';
+//};

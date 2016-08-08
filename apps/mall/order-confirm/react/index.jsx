@@ -243,6 +243,6 @@ $FW.DOMReady(function () {
     $FW.setLoginRedirect('/static/mall/product-detail/index.html?bizNo=' + query.productBizNo);
 });
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') history.back();
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') history.back();
+//};

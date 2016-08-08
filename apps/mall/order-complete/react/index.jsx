@@ -53,7 +53,6 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
-        //url: 'http://localhost/order-detail.json',
         success: function (data) {
             $FW.Component.hideAjaxLoading();
             ReactDOM.render(<Success
@@ -75,9 +74,9 @@ $FW.DOMReady(function () {
     }
 });
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') back2pre_page()
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') back2pre_page()
+//};
 
 function back2pre_page() {
     location.href = '/static/mall/product-detail/index.html?bizNo=' + window.ProductBizNo;

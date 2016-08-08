@@ -310,9 +310,9 @@ function backPage() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back')backPage()
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back')backPage()
+//};
 
 function trim(s) {
     return s.replace(/(^\s*)|(\s*$)/g, '')

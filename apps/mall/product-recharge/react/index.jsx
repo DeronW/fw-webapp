@@ -38,14 +38,13 @@ const Recharge = React.createClass({
     reloadFeeHandler: function(){
         $FW.Ajax({
             url: API_PATH + 'api/v1/phone/fee/recharge.json',
-            //url:"http://localhost/recharge.json",
             enable_loading: true,
             success: function (data) {
                 let pay_score;
                 data.fee.forEach((i)=> {
                     if (i.bizNo == data.defaultBizNo)
                         pay_score = i.score;
-                })
+                });
 
                 if (!pay_score) console.log('no match default bizNo', data);
 
@@ -67,7 +66,7 @@ const Recharge = React.createClass({
                 data.fee.forEach((i)=> {
                     if (i.bizNo == data.defaultBizNo)
                         pay_score = i.score;
-                })
+                });
 
                 if (!pay_score) console.log('no match default bizNo', data);
 
@@ -390,7 +389,6 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>, document.getElementById('header'));
     $FW.Ajax({
         url: API_PATH + 'api/v1/user-state.json',
-        //url: "http://localhost/user-state.json",
         enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
