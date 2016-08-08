@@ -13,3 +13,21 @@
         })();
     })();
 </script>
+<script>
+    // catch global js error
+    window.onerror = function (msg, file, line) {
+        console.log(msg, file, line);
+
+        var img = document.createElement('img');
+        var st = (new Date).getTime(), info = 'msg=' + file + ':' + line + ';' + msg;
+        img.src = 'http://api.9888.cn/bridge/api/1/session_user.json?msg=' + info + '&st=' + parseInt(st / 1000);
+        img.width = '0';
+        img.height = '0';
+        img.style.display = 'none';
+        img.id = 'err-' + st;
+        setTimeout(function () {
+            document.body.removeChild(document.getElementById('err-' + st))
+        }, 3000);
+        document.body.appendChild(img);
+    }
+</script>
