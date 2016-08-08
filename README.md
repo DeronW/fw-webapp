@@ -245,3 +245,6 @@ onNativeMessageReceive('login_token', 'params')
 1. 在 *apps* 目录下创建新目录，目录结构参考其它目录
 2. 在 *gulp/tasks/mall.js* 文件内,给 *apps* 变量添加一行新数据, 字符串, 跟新建目录同名
 3. 查看 gulp 默认指令, 已经新添加了新页面的指令
+本地启动项目
+商城：npm run gulp mall：文件名：watch
+wap站：npm run gulp main：文件名：watch

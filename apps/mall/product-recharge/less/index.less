@@ -1,7 +1,3 @@
-*{
-     padding:0;
-     margin:0;
-}
 a{
      text-decoration: none;
 }
@@ -9,10 +5,14 @@ input{
      border: 0;
      -webkit-appearance: none;
 }
+input.sms-input::-webkit-input-placeholder{
+     line-height:normal;
+}
 html,body{
      width:100%;
      height:100%;
      background:#ebebee;
+     margin: 0;
 }
 .tab-wrap{
      height:88px;
@@ -26,22 +26,14 @@ html,body{
      position:relative;
 }
 .recharge-tab{
-     position:absolute;
-     left:114px;
-     display:inline-block;
-     font-size:28px;
-     color:#fd4d4c;
-     padding:0 10px;
-     border-bottom:3px solid #fd4d4c;
-}
-.recharge-tab2{
-     position:absolute;
-     right:114px;
      display:inline-block;
      font-size:28px;
      color:#555;
      padding:0 10px;
-     margin-left:229px;
+}
+.active{
+     color:#fd4d4c;
+     border-bottom:3px solid #fd4d4c;
 }
 .phonenumber-wrap{
      background:#fff;
@@ -56,7 +48,7 @@ html,body{
      outline:none;
      width:595px;
      font-size:36px;
-     padding:32px 20px 26px;
+     padding:32px 20px 26px 80px;
      color:#4b4d4c;
      line-height:normal;
      -webkit-tap-highlight-color:rgba(0,0,0,0);
@@ -64,11 +56,20 @@ html,body{
 .phone-icon{
      position:absolute;
      top:32px;
-     right:35px;
+     left:31px;
      display:inline-block;
      background:url(../images/phone-icon.png) no-repeat;
      width:29px;
      height:42px;
+}
+.phone-empty{
+     position:absolute;
+     top:32px;
+     right:31px;
+     display:inline-block;
+     background:url(../images/empty.png) no-repeat;
+     width:44px;
+     height:44px;
 }
 .value-wrap{
      padding-left:30px;
@@ -89,7 +90,7 @@ html,body{
      width:204px;
      height:148px;
      border:1px solid #d8d8d8;
-     margin-right:21px;
+     margin-right:22px;
      margin-bottom:19px;
      position:relative;
      box-sizing: border-box;
@@ -350,4 +351,9 @@ html,body{
     left:30px;
     display:block;
     width:96px;
+}
+.tab-innerwrap{
+     width:50%;
+     float:left;
+     text-align:center;
 }
