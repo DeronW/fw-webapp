@@ -166,7 +166,7 @@ var SelectBank = React.createClass({
         };
 
         var shortcutPay = function() {
-            
+
         };
 
         return (
