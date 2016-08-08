@@ -7,6 +7,24 @@ function backward(){
 }
 
 
+const Mask = React.createClass({
+	render : function(){
+		return (
+			<div className="cang">
+				<div className="masker"></div>
+				<div className="boun">
+					<div className="resp">尊敬的张先生，您好！</div>
+					<div className="beca">由于您的身份信息无法通过系统验证，为了保证您的账户资金安全，您当前无法进行线上充值、投资、更换银行卡等交易。您当前的账户资金安全无虞，若有可用余额，可自行发起提现申请。</div>
+					<div className="ever">有任何问题，请联系客服：<span>400-0322-988</span></div>
+					<div className="close">关闭</div>
+				</div>
+			</div>
+		)
+	}
+})
+ReactDOM.render(<Mask />,document.getElementById('masker'));
+
+
 const Attract = React.createClass({
 		render : function(){
 			return (

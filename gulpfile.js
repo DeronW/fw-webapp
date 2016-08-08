@@ -16,11 +16,14 @@ const MAIN_APP_NAMES = [
     'before-input',
     'personal-center',
     'recharge',
-    'first-page'
+    'first-page',
+    'cash',
+    'special-cash',
+    'verify-identity'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
-    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx'];
+    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'error-tip.jsx'];
     var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
     gt('main', i, {
@@ -83,3 +86,4 @@ MALL_APP_NAMES.forEach(function (i) {
 
 gulp.task('build:main', gulp.series(MAIN_APP_NAMES.map((name) => `main:pack:${name}:revision`)));
 gulp.task('build:mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:pack:${name}:revision`)));
+gulp.task('build:test-mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:${name}`)));

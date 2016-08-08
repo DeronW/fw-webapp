@@ -44,16 +44,37 @@ const Invalid = React.createClass({
 ReactDOM.render(<Invalid />,document.getElementById('invad'));
 
 const Attract = React.createClass({
+		getInitialState : function(){
+			return {name : "",ID : ""};
+		},
+		
+		componentDidMount : function(){
+			$.get("","",function(data){
+				this.setState({
+					name: '',
+				})
+			}.bind(this));
+		},
+	
 		render : function(){
+			var name=this.state.name;
+			var ID=this.state.id;
 			return (
 				<div className="bank">
-					<div className="name">{this.props.name}</div>
-					<div className="num">{this.props.num}</div>
+					<div className="name">{name}</div>
+					<div className="num">{ID}</div>
 				</div>
 			)
 		}
 	})
-ReactDOM.render(<Attract name="张克川" num="6225********1726" />,document.getElementById('bind'));
+ReactDOM.render(<Attract />,document.getElementById('bind'));
+
+
+
+
+
+
+
 
 const Sup = React.createClass({
 	render : function(){
