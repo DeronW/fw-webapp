@@ -6,8 +6,7 @@ const NineActivity = React.createClass({
 	getInitialState: function () {
         return {}
     },
-    render: function () {
-       
+    render: function () {       
         return (
             <div className="nine-box" style={{backgroundImage:'url(images/bg.jpg)'}}>
         		 <Ninehead/>   
@@ -153,6 +152,18 @@ $FW.DOMReady(function () {
 	NativeBridge.setTitle('豆哥玩玩乐');
 	if ($FW.Utils.shouldShowHeader())
 	ReactDOM.render(<Header title={"豆哥玩玩乐"} back_handler={backward}/>, document.getElementById('header'));
+//	$FW.BatchGet([
+//      API_PATH + 'mall/api/index/v1/nineUse.json', // banner轮播图数据
+//      API_PATH + 'mall/api/index/v1/activities.json' // 明前活动的数据
+//      //'http://127.0.0.1/banners.json',
+//      //'http://127.0.0.1/activities.json'
+//  ], function (data) {
+//      var banners = data[0].banners, activities = data[1].activities;
+//      if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined') $FW.Component.Alert('error: empty data received');
+//      ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
+//  }, true);
+
+
 //  $FW.Ajax({
 //      url: API_PATH + 'mall/api/index/v1/activity.json?bizNo=' + bizNo,
 //      enable_loading: true,
