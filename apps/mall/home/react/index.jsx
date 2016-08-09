@@ -166,6 +166,10 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
+
+    // just for dev
+    if(location.pathname == '/') location.href = '/static/mall/home/index.html';
+
     NativeBridge.setTitle('豆哥商城');
     $FW.BatchGet([
         API_PATH + 'mall/api/index/v1/banners.json', // banner轮播图数据
