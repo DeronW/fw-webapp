@@ -14,9 +14,7 @@ const AddrSelect = React.createClass({
         this.props.onUserSelect(this.refs.addrSelect.value);
     },
     render: function () {
-
         let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
-
         return (
             <li className="clearfix">
                 <div className="fl b">
@@ -106,32 +104,49 @@ const CascadingAddressForm = React.createClass({
         return arr;
     },
 
-    provinceChangeHandler: function (e) {
-        console.log(e)
-    },
+    //provinceChangeHandler: function (e) {
+    //    console.log(e)
+    //},
 
     render: function () {
         var newCities = (this.state.province != 0 ? this.getAddressArray(this.state.province) : []);
         var newDistricts = (this.state.city != 0 ? this.getAddressArray(this.state.city) : []);
 
-        let generateSelectPanel = function (addresses, value, changeHandler, title) {
-
-            let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
-
-            return (
-                <select className="select-31" value={value} onChange={changeHandler}>
-                    <option value=''> 请选择{title} </option>
-                    {addresses.map(option)}
-                </select>
-            )
-        }.bind(this);
+        //let generateSelectPanel = function (addresses, value, changeHandler, title) {
+        //
+        //    let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
+        //
+        //    return (
+        //        <select className="select-31" value={value} onChange={changeHandler}>
+        //            <option value=''> 请选择{title} </option>
+        //            {addresses.map(option)}
+        //        </select>
+        //    )
+        //}.bind(this);
 
         return (
             <ul>
-                {generateSelectPanel(PROVINCES, this.state.province, this.provinceChangeHandler, '省份')}
-                {generateSelectPanel(newCities, this.state.city, this.provinceChangeHandler, '城市')}
-                {generateSelectPanel(newDistricts, this.state.district, this.provinceChangeHandler, '地区')}
-
+                {/*{generateSelectPanel(PROVINCES, this.state.province, this.provinceChangeHandler, '省份')}*/}
+                {/*{generateSelectPanel(newCities, this.state.city, this.provinceChangeHandler, '城市')}*/}
+                {/*{generateSelectPanel(newDistricts, this.state.district, this.provinceChangeHandler, '地区')}*/}
+                <AddrSelect
+                    addrs={PROVINCES}
+                    initSelectedValue={this.state.provSelectedValue}
+                    onUserSelect={this.handleUserProvSelect}
+                    addrCNTitle={"省份"}
+                />
+                <AddrSelect
+                    addrs={newCities}
+                    initSelectedValue={this.state.citySelectedValue}
+                    onUserSelect={this.handleUserCitySelect}
+                    addrCNTitle={"城市"}
+                />
+                <AddrSelect
+                    addrs={newDistricts}
+                    initSelectedValue={this.state.distSelectedValue}
+                    onUserSelect={this.handleUserDistSelect}
+                    addrCNTitle={"地区"}
+                />
                 <li className="clearfix">
                     <div className="fl b">
                         <textarea className="text" onChange={this.onChangeHandler} placeholder="详细地址"
@@ -150,9 +165,6 @@ const Address = React.createClass({
             username: '',
             phone: '',
             address: '',
-            province: '',
-            city: '',
-            district: '',
             isDefault: false
         }
     },
@@ -233,9 +245,9 @@ const Address = React.createClass({
                     <CascadingAddressForm
                         address={''}
                         setFormData={this.setFormData}
-                        initProvSelectedValue={0}//初始选择0空，1北京，2天津等等
-                        initCitySelectedValue={0}//初始选择城市0空
-                        initDistSelectedValue={0}//初始选择区域0空
+                        initProvSelectedValue={0}
+                        initCitySelectedValue={0}
+                        initDistSelectedValue={0}
                     />
                     <div className={this.state.isDefault ? "default checked" : "default"}
                          onClick={this.onDefaultChangeHandler}> 设为默认
