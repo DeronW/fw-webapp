@@ -31,7 +31,7 @@ const Recharge = React.createClass({
             this.reloadFeeHandler();
         }
         if (this.state.tab == 'net') {
-            this.reloadNetHandler();
+            $FW.Component.Alert("正在建设中，敬请期待！");
         }
     },
 
