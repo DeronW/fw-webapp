@@ -31,7 +31,7 @@ const Recharge = React.createClass({
             this.reloadFeeHandler();
         }
         if (this.state.tab == 'net') {
-            this.reloadNetHandler();
+            $FW.Component.Alert("正在建设中，敬请期待！");
         }
     },
 
@@ -291,7 +291,7 @@ const ConfirmPop = React.createClass({
                 url: API_PATH + "mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'get',
                 success: function(data){
-                    //$FW.Component.Alert(data.validateCode);
+                    $FW.Component.Alert("这是用于测试的验证"+data.validateCode);
                 },
                 fail: function (code,message,response){
                     _this.setState({
