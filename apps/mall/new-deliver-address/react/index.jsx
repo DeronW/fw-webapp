@@ -4,26 +4,18 @@ const API_PATH = document.getElementById('api-path').value;
 
 var PROVINCES = [];
 
-window.ADDRESS_DATA[0].forEach(function(prov){
-    PROVINCES.push({value:prov[0],name:prov[1]});
+window.ADDRESS_DATA[0].forEach(function (prov) {
+    PROVINCES.push({value: prov[0], name: prov[1]});
 });
 
-function getAddrsArrayById(key){
-    var arr=[];
-    window.ADDRESS_DATA[key].forEach(function(subArr){
-        arr.push({value:subArr[0],name:subArr[1]});
-    });
-    return arr;
-}
 
 const AddrSelect = React.createClass({
-    handleChange: function() {
+    handleChange: function () {
         this.props.onUserSelect(this.refs.addrSelect.value);
     },
-    render: function() {
+    render: function () {
 
-        let option = (item, index) =>
-            <option key={index}>{item.name}</option>;
+        let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
 
         return (
             <li className="clearfix">
@@ -46,58 +38,105 @@ const AddrSelect = React.createClass({
 });
 
 const CascadingAddressForm = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
-            provSelectedValue: this.props.initProvSelectedValue,
-            citySelectedValue: this.props.initCitySelectedValue,
-            distSelectedValue: this.props.initDistSelectedValue
+            address: '',
+            province: this.props.initProvSelectedValue,
+            city: this.props.initCitySelectedValue,
+            district: this.props.initDistSelectedValue
         };
     },
-    handleUserProvSelect: function(provSelectedValue) {
+    handleUserProvSelect: function (province) {
         this.setState({
-            provSelectedValue: provSelectedValue,
-            citySelectedValue: 0,
-            distSelectedValue: 0
+            province: province,
+            city: 0,
+            district: 0
         });
     },
-    handleUserCitySelect: function(citySelectedValue) {
+    handleUserCitySelect: function (city) {
         this.setState({
-            citySelectedValue: citySelectedValue,
-            distSelectedValue: 0
+            city: city,
+            district: 0
         });
     },
-    handleUserDistSelect: function(distSelectedValue) {
-        this.setState({
-            distSelectedValue: distSelectedValue
-        });
+    handleUserDistSelect: function (district) {
+        this.setState({district: district}, this.setParentFormData);
     },
 
-    render: function() {
-        var newCities = (this.state.provSelectedValue !=0 ? getAddrsArrayById(this.state.provSelectedValue) : []);
-        var newDistricts = (this.state.citySelectedValue!=0 ? getAddrsArrayById(this.state.citySelectedValue) : []);
+    setParentFormData: function () {
+        let i, prov, address, city, dist;
+
+        for (i = 0; i < ADDRESS_DATA[0].length; i++) {
+            if (ADDRESS_DATA[0][i][0] == this.state.province) {
+                prov = ADDRESS_DATA[0][i][1];
+                break;
+            }
+        }
+
+        for (i = 0; i < ADDRESS_DATA[this.state.province].length; i++) {
+            if (ADDRESS_DATA[this.state.province][i][0] == this.state.city) {
+                city = ADDRESS_DATA[this.state.province][i][1];
+                break;
+            }
+        }
+
+        for (i = 0; i < ADDRESS_DATA[this.state.city].length; i++) {
+            if (ADDRESS_DATA[this.state.city][i][0] == this.state.district) {
+                dist = ADDRESS_DATA[this.state.city][i][1];
+                break;
+            }
+        }
+
+        address = [prov, city, dist, this.state.address].join(' ');
+
+        this.props.setFormData({address: address})
+    },
+
+    onChangeHandler: function (e) {
+        this.setState({
+            address: e.target.value
+        }, this.setParentFormData);
+    },
+
+    getAddressArray: function (key) {
+        var arr = [];
+        window.ADDRESS_DATA[key].forEach(function (subArr) {
+            arr.push({value: subArr[0], name: subArr[1]});
+        });
+        return arr;
+    },
+
+    provinceChangeHandler: function (e) {
+        console.log(e)
+    },
+
+    render: function () {
+        var newCities = (this.state.province != 0 ? this.getAddressArray(this.state.province) : []);
+        var newDistricts = (this.state.city != 0 ? this.getAddressArray(this.state.city) : []);
+
+        let generateSelectPanel = function (addresses, value, changeHandler, title) {
+
+            let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
+
+            return (
+                <select className="select-31" value={value} onChange={changeHandler}>
+                    <option value=''> 请选择{title} </option>
+                    {addresses.map(option)}
+                </select>
+            )
+        }.bind(this);
+
         return (
             <ul>
-                <AddrSelect
-                    addrs={PROVINCES}
-                    initSelectedValue={this.state.provSelectedValue}
-                    onUserSelect={this.handleUserProvSelect}
-                    addrCNTitle={"省份"}
-                />
-                <AddrSelect
-                    addrs={newCities}
-                    initSelectedValue={this.state.citySelectedValue}
-                    onUserSelect={this.handleUserCitySelect}
-                    addrCNTitle={"城市"}
-                />
-                <AddrSelect
-                    addrs={newDistricts}
-                    initSelectedValue={this.state.distSelectedValue}
-                    onUserSelect={this.handleUserDistSelect}
-                    addrCNTitle={"地区"}
-                />
+                {generateSelectPanel(PROVINCES, this.state.province, this.provinceChangeHandler, '省份')}
+                {generateSelectPanel(newCities, this.state.city, this.provinceChangeHandler, '城市')}
+                {generateSelectPanel(newDistricts, this.state.district, this.provinceChangeHandler, '地区')}
+
                 <li className="clearfix">
                     <div className="fl b">
-                        <textarea id="address" name="address" className="text" placeholder="详细地址" required="" defaultValue={this.props.address}></textarea>
+                        <textarea className="text" onChange={this.onChangeHandler} placeholder="详细地址"
+                                  value={this.state.address}>
+                        </textarea>
                     </div>
                 </li>
             </ul>
@@ -111,9 +150,9 @@ const Address = React.createClass({
             username: '',
             phone: '',
             address: '',
-            province:'',
-            city:'',
-            district:'',
+            province: '',
+            city: '',
+            district: '',
             isDefault: false
         }
     },
@@ -131,7 +170,7 @@ const Address = React.createClass({
             data: {
                 username: this.state.username,
                 phone: this.state.phone,
-                address: this.state.province + this.state.city + this.state.district + this.state.address,
+                address: this.state.address,
                 isDefault: this.state.isDefault
             },
             enable_loading: true,
@@ -167,12 +206,16 @@ const Address = React.createClass({
         if (v.length < 12 && !isNaN(v))
             this.setState({phone: e.target.value})
     },
-    onAddressChangeHandler: function (e) {
-        if (e.target.value.length < 100)
-            this.setState({address: e.target.value})
-    },
     onDefaultChangeHandler: function (e) {
         this.setState({isDefault: !this.state.isDefault})
+    },
+    setFormData: function (data) {
+        [
+            'address'
+        ].forEach((i) => {
+            if (data[i]) this.setState({i: data[i]})
+        });
+        console.log(data)
     },
     render: function () {
         return (
@@ -189,13 +232,11 @@ const Address = React.createClass({
                     <div className="deliver-info">详细收货地址：</div>
                     <CascadingAddressForm
                         address={''}
+                        setFormData={this.setFormData}
                         initProvSelectedValue={0}//初始选择0空，1北京，2天津等等
                         initCitySelectedValue={0}//初始选择城市0空
                         initDistSelectedValue={0}//初始选择区域0空
                     />
-                    {/*<div className="address input-div">
-                       <input value={this.state.address} onChange={this.onAddressChangeHandler} placeholder="详细地址"/>
-                    </div>*/}
                     <div className={this.state.isDefault ? "default checked" : "default"}
                          onClick={this.onDefaultChangeHandler}> 设为默认
                     </div>
@@ -209,10 +250,6 @@ const Address = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Address />, document.getElementById('cnt'));
     NativeBridge.setTitle('新建收货地址');
+    ReactDOM.render(<Address />, document.getElementById('cnt'));
 });
-
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/deliver_address';
-};
