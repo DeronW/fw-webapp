@@ -88,10 +88,11 @@ const CascadingAddressForm = React.createClass({
 
     provinceChangeHandler: function (e) {
         var province = e.target.value;
+        var city_list = province == 'empty' ? [] : this.getAddressArray(province);
         this.setState({
             province: province,
             city: 'not_exist',
-            city_list: this.getAddressArray(province),
+            city_list: city_list,
             district_list: []
         })
     },
@@ -118,7 +119,7 @@ const CascadingAddressForm = React.createClass({
 
             return (
                 <select className="select-31" value={value} onChange={changeHandler}>
-                    <option value=''> 请选择{title} </option>
+                    <option value='empty'> 请选择{title} </option>
                     {addresses.map(option)}
                 </select>
             )
@@ -214,10 +215,10 @@ const Address = React.createClass({
                 <div className="new-deliver-address">
                     <div className="deliver-info">收货人信息：</div>
                     <div className="deliver input-div">
-                        <input value={this.state.username} onChange={this.onUsernameChangeHandler} placeholder="收货人"/>
+                        <input value={this.state.username} onChange={this.onUsernameChangeHandler} placeholder="收货人姓名"/>
                     </div>
                     <div className="phone input-div">
-                        <input type="tel" value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="联系方式"/>
+                        <input type="tel" value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="手机号码"/>
                     </div>
                     <div className="deliver-info">详细收货地址：</div>
                     <CascadingAddressForm

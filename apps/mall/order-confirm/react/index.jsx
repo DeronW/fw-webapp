@@ -129,7 +129,7 @@ const ConfirmOrder = React.createClass({
         let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.ticket.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
-            return $FW.Component.Alert('请选择收货地址');
+            return $FW.Component.Alert('请添加收货地址');
 
         if (should_pay_count > 0 && product.score && this.props.close_score_func)
             return $FW.Component.Alert('下单失败，工分通道已关闭');
