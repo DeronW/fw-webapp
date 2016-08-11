@@ -2,26 +2,6 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
-const AddrSelect = React.createClass({
-    handleChange: function () {
-        this.props.onUserSelect(this.refs.addrSelect.value);
-    },
-    render: function () {
-        let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
-        return (
-            <select
-                className="select-31"
-                value={this.props.initSelectedValue}
-                ref="addrSelect"
-                onChange={this.handleChange}
-            >
-                <option value='' className="select-item"> 请选择{this.props.addrCNTitle} </option>
-                {this.props.addrs.map(option)}
-            </select>
-        );
-    }
-});
-
 const CascadingAddressForm = React.createClass({
     getInitialState: function () {
 
@@ -67,7 +47,7 @@ const CascadingAddressForm = React.createClass({
             }
         }
 
-        address = [prov, city, dist, this.state.address].join(' ');
+        address = [prov, city, dist, this.state.address].join('');
 
         this.props.setFormData({address: address})
     },
@@ -204,7 +184,9 @@ const Address = React.createClass({
         [
             'address'
         ].forEach((i) => {
-            if (data[i]) this.setState({i: data[i]})
+            if (data[i]) {
+                this.setState({address: data[i]})
+            }
         });
         console.log(data)
     },
