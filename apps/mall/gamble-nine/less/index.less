@@ -18,7 +18,9 @@ a {
     outline: 0;
   }
 }
-
+div{
+-webkit-tap-highlight-color:rgba(0, 0, 0, 0);-webkit-tap-highlight-color:transparent;
+}
 ul, ol, li {
   list-style: none outside none;
   padding: 0;
@@ -27,27 +29,27 @@ ul, ol, li {
 .nine-box{
     position:relative;
     min-height:1140px;
-    background:#054875 url('') no-repeat 0 0;
-    -webkit-background-size:100%;
-    background-size:100%;
+    background:#054875 url(../images/bg.jpg) no-repeat center 0;
+
 }
-.Ninehead{
-    display:inline-table ;
+.Ninehead{    
     width:100%;
     padding:37px 0 99px;
+    height:52px;    
     .usable-score{
         float:left;
-        height:51px;
-        padding:0 125px 0 121px;
+        height:46px;
+        padding:6px 125px 0 121px;
         width:160px;
-        line-height:51px;
+        line-height:46px;
         color:#fff;
         font-size:26px;
     }
     .my-level{
         float:left;
-        height:51px;
-        line-height:51px;
+        padding:6px 0 0;
+        height:46px;
+        line-height:46px;
         color:#fff;
         font-size:26px;
     }
@@ -57,7 +59,7 @@ ul, ol, li {
     .tip{
         height:58px;
         line-height:58px;
-        font-size:24px;
+        font-size:22px;
         color:#fffcee;
         text-align: center;        
         div{
@@ -91,7 +93,9 @@ ul, ol, li {
                 left:0;
                 width:180px;
                 height:180px;
-                background:url('') no-repeat 0 0;
+                background:url('') no-repeat center;
+                -webkit-background-size:100% ;
+                background-size:100% ;
                 
             }
             .prize1{
@@ -126,54 +130,59 @@ ul, ol, li {
                 left:0;
                 width:180px;
                 height:180px;
-                background:url(../images/masker-on.png) no-repeat 0 0;
+                background:url(../images/masker-on.png) no-repeat center;
+                -webkit-background-size:100%;
+                background-size:100%;
+                
             }
             .on{
                display:block;
             }
         }
         .prize-li1{
-            top:52px;
+            top:50px;
             left:79px;
         }
         .prize-li2{
-            top:52px;
+            top:50px;
             left:270px;
         }
         .prize-li3{
-            top:52px;
+            top:50px;
             left:461px;
         }
         .prize-li4{
-            top:243px;
-            left:79px;
+            top:241px;
+            left:461px;
+            
         }
         .prize-li5{
-            top:243px;
-            left:461px;
+           top:432px;
+           left:461px; 
         }
         .prize-li6{
-            top:434px;
-            left:79px;
+            top:432px;
+            left:270px;
+            
         }
         .prize-li7{
-            top:434px;
-            left:270px;
+           top:432px;
+           left:79px; 
         }
         .prize-li8{
-            top:434px;
-            left:461px;
+           top:241px;
+           left:79px; 
         }        
     }
     .prize-btn{
         z-index:5;
         position:absolute;
-        top:300px;
+        top:299px;
         left:270px;
         width: 180px;
         height:180px;
         img{
-            display:none;
+           display:none; 
         }
     }
     .off{
@@ -191,11 +200,7 @@ ul, ol, li {
     box-shadow: inset 0 4px 0px #02304e;
     overflow: hidden;
     .Nine-list-ul{
-        position:absolute;
-        top:0;
-        left:0;
-        width:594px;
-        
+        width:594px;        
         .Nine-list-li{
            display:inline-table;
            width:594px;
@@ -213,16 +218,16 @@ ul, ol, li {
            }
            .name{
                width:122px;
-               font-size:20px;
+               font-size:24px;
                color:#5395e7;
             }
             .get-prize{
-               width:258px;
-               font-size:20px;
+               width:238px;
+               font-size:24px;
                color:#fee46e;
             }
             .time{
-               font-size:20px;
+               font-size:24px;
                color:#0c66a3;
             }
         }
@@ -378,6 +383,8 @@ ul, ol, li {
           text-align: center;          
       }
       .pop-inf-cnt{
+          height:560px;
+          overflow: auto;
           padding:0 25px 30px;
           background-color:#fff ;
           border-radius:0 0 24px 24px;
