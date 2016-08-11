@@ -59,7 +59,7 @@ const MALL_APP_NAMES = [
     'deliver-address',
     'new-deliver-address',
     'error-page',
-    'nine20160804'
+    'gamble-nine'
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
