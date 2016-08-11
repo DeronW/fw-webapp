@@ -75,7 +75,7 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function compile_react() {
-        return react(jsx_files, `${build_path}javascripts`, 'bundle.js')
+        return react(jsx_files, `${build_path}javascripts`, 'bundle.js', CONFIG.debug)
     }
 
     function compile_javascripts() {
