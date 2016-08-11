@@ -25,7 +25,7 @@ const AddrSelect = React.createClass({
                             ref="addrSelect"
                             onChange={this.handleChange}
                         >
-                            <option value=''> 请选择{this.props.addrCNTitle} </option>
+                            <option value='' className="select-item"> 请选择{this.props.addrCNTitle} </option>
                             {this.props.addrs.map(option)}
                         </select>
                     </div>
