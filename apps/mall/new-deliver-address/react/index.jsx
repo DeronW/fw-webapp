@@ -2,6 +2,141 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
+const AddrSelect = React.createClass({
+    handleChange: function () {
+        this.props.onUserSelect(this.refs.addrSelect.value);
+    },
+    render: function () {
+        let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
+        return (
+            <select
+                className="select-31"
+                value={this.props.initSelectedValue}
+                ref="addrSelect"
+                onChange={this.handleChange}
+            >
+                <option value='' className="select-item"> 请选择{this.props.addrCNTitle} </option>
+                {this.props.addrs.map(option)}
+            </select>
+        );
+    }
+});
+
+const CascadingAddressForm = React.createClass({
+    getInitialState: function () {
+
+        var province_list = [];
+        window.ADDRESS_DATA[0].forEach(function (prov) {
+            province_list.push({value: prov[0], name: prov[1]});
+        }.bind(this));
+
+
+        return {
+            address: '',
+            province: this.props.initProvSelectedValue,
+            city: this.props.initCitySelectedValue,
+            district: this.props.initDistSelectedValue,
+
+            province_list: province_list,
+            city_list: [],
+            district_list: []
+        };
+    },
+
+    setParentFormData: function () {
+        let i, prov, address, city, dist;
+
+        for (i = 0; i < ADDRESS_DATA[0].length; i++) {
+            if (ADDRESS_DATA[0][i][0] == this.state.province) {
+                prov = ADDRESS_DATA[0][i][1];
+                break;
+            }
+        }
+
+        for (i = 0; i < ADDRESS_DATA[this.state.province].length; i++) {
+            if (ADDRESS_DATA[this.state.province][i][0] == this.state.city) {
+                city = ADDRESS_DATA[this.state.province][i][1];
+                break;
+            }
+        }
+
+        for (i = 0; i < ADDRESS_DATA[this.state.city].length; i++) {
+            if (ADDRESS_DATA[this.state.city][i][0] == this.state.district) {
+                dist = ADDRESS_DATA[this.state.city][i][1];
+                break;
+            }
+        }
+
+        address = [prov, city, dist, this.state.address].join(' ');
+
+        this.props.setFormData({address: address})
+    },
+
+    onChangeHandler: function (e) {
+        this.setState({
+            address: e.target.value
+        }, this.setParentFormData);
+    },
+
+    getAddressArray: function (key) {
+        var arr = [];
+        window.ADDRESS_DATA[key].forEach(function (subArr) {
+            arr.push({value: subArr[0], name: subArr[1]});
+        });
+        return arr;
+    },
+
+    provinceChangeHandler: function (e) {
+        var province = e.target.value;
+        this.setState({
+            province: province,
+            city: 'not_exist',
+            city_list: this.getAddressArray(province),
+            district_list: []
+        })
+    },
+
+    cityChangeHandler: function (e) {
+        var city = e.target.value;
+        this.setState({
+            city: city,
+            district_list: this.getAddressArray(city)
+        })
+    },
+
+    districtChangeHandler: function (e) {
+        var district = e.target.value;
+        this.setState({
+            district: district
+        }, this.setParentFormData)
+    },
+
+    render: function () {
+        let generateSelectPanel = function (addresses, value, changeHandler, title) {
+
+            let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
+
+            return (
+                <select className="select-31" value={value} onChange={changeHandler}>
+                    <option value=''> 请选择{title} </option>
+                    {addresses.map(option)}
+                </select>
+            )
+        }.bind(this);
+
+        return (
+            <div>
+                {generateSelectPanel(this.state.province_list, this.state.province, this.provinceChangeHandler, '省份')}
+                {generateSelectPanel(this.state.city_list, this.state.city, this.cityChangeHandler, '城市')}
+                {generateSelectPanel(this.state.district_list, this.state.district, this.districtChangeHandler, '地区')}
+                <textarea className="text" onChange={this.onChangeHandler} placeholder="详细地址"
+                          value={this.state.address}>
+                </textarea>
+            </div>
+        );
+    }
+});
+
 const Address = React.createClass({
     getInitialState: function () {
         return {
@@ -61,29 +196,37 @@ const Address = React.createClass({
         if (v.length < 12 && !isNaN(v))
             this.setState({phone: e.target.value})
     },
-    onAddressChangeHandler: function (e) {
-        if (e.target.value.length < 100)
-            this.setState({address: e.target.value})
-    },
     onDefaultChangeHandler: function (e) {
         this.setState({isDefault: !this.state.isDefault})
     },
+    setFormData: function (data) {
+        [
+            'address'
+        ].forEach((i) => {
+            if (data[i]) this.setState({i: data[i]})
+        });
+        console.log(data)
+    },
     render: function () {
-
         return (
             <div>
                 {$FW.Browser.appVersion() >= $FW.AppVersion.show_header ? <Header title={'新建收货地址'}/> : null}
                 <div className="new-deliver-address">
+                    <div className="deliver-info">收货人信息：</div>
                     <div className="deliver input-div">
                         <input value={this.state.username} onChange={this.onUsernameChangeHandler} placeholder="收货人"/>
                     </div>
                     <div className="phone input-div">
-                        <input value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="联系方式"/>
+                        <input type="tel" value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="联系方式"/>
                     </div>
-                    <div className="address input-div">
-                        <input value={this.state.address} onChange={this.onAddressChangeHandler} placeholder="详细地址"/>
-                    </div>
-
+                    <div className="deliver-info">详细收货地址：</div>
+                    <CascadingAddressForm
+                        address={''}
+                        setFormData={this.setFormData}
+                        initProvSelectedValue={0}
+                        initCitySelectedValue={0}
+                        initDistSelectedValue={0}
+                    />
                     <div className={this.state.isDefault ? "default checked" : "default"}
                          onClick={this.onDefaultChangeHandler}> 设为默认
                     </div>
@@ -97,10 +240,6 @@ const Address = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Address />, document.getElementById('cnt'));
     NativeBridge.setTitle('新建收货地址');
+    ReactDOM.render(<Address />, document.getElementById('cnt'));
 });
-
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/deliver_address';
-};
