@@ -9,21 +9,15 @@ const AddrSelect = React.createClass({
     render: function () {
         let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
         return (
-            <li className="clearfix">
-                <div className="fl b">
-                    <div className="new-select-wp">
-                        <select
-                            className="select-31"
-                            value={this.props.initSelectedValue}
-                            ref="addrSelect"
-                            onChange={this.handleChange}
-                        >
-                            <option value='' className="select-item"> 请选择{this.props.addrCNTitle} </option>
-                            {this.props.addrs.map(option)}
-                        </select>
-                    </div>
-                </div>
-            </li>
+            <select
+                className="select-31"
+                value={this.props.initSelectedValue}
+                ref="addrSelect"
+                onChange={this.handleChange}
+            >
+                <option value='' className="select-item"> 请选择{this.props.addrCNTitle} </option>
+                {this.props.addrs.map(option)}
+            </select>
         );
     }
 });
@@ -48,22 +42,6 @@ const CascadingAddressForm = React.createClass({
             district_list: []
         };
     },
-    //handleUserProvSelect: function (province) {
-    //    this.setState({
-    //        province: province,
-    //        city: 0,
-    //        district: 0
-    //    });
-    //},
-    //handleUserCitySelect: function (city) {
-    //    this.setState({
-    //        city: city,
-    //        district: 0
-    //    });
-    //},
-    //handleUserDistSelect: function (district) {
-    //    this.setState({district: district}, this.setParentFormData);
-    //},
 
     setParentFormData: function () {
         let i, prov, address, city, dist;
@@ -134,9 +112,6 @@ const CascadingAddressForm = React.createClass({
     },
 
     render: function () {
-        //var newCities = (this.state.province != 0 ? this.getAddressArray(this.state.province) : []);
-        //var newDistricts = (this.state.city != 0 ? this.getAddressArray(this.state.city) : []);
-
         let generateSelectPanel = function (addresses, value, changeHandler, title) {
 
             let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
@@ -149,36 +124,14 @@ const CascadingAddressForm = React.createClass({
             )
         }.bind(this);
 
-        //<AddrSelect
-        //    addrs={PROVINCES}
-        //    initSelectedValue={this.state.provSelectedValue}
-        //    onUserSelect={this.handleUserProvSelect}
-        //    addrCNTitle={"省份"}
-        ///>
-        //<AddrSelect
-        //addrs={newCities}
-        //initSelectedValue={this.state.citySelectedValue}
-        //onUserSelect={this.handleUserCitySelect}
-        //addrCNTitle={"城市"}
-        //    />
-        //    <AddrSelect
-        //addrs={newDistricts}
-        //initSelectedValue={this.state.distSelectedValue}
-        //onUserSelect={this.handleUserDistSelect}
-        //addrCNTitle={"地区"}
-        //    />
-
         return (
             <div>
                 {generateSelectPanel(this.state.province_list, this.state.province, this.provinceChangeHandler, '省份')}
                 {generateSelectPanel(this.state.city_list, this.state.city, this.cityChangeHandler, '城市')}
                 {generateSelectPanel(this.state.district_list, this.state.district, this.districtChangeHandler, '地区')}
-
-                <div className="fl b">
-                        <textarea className="text" onChange={this.onChangeHandler} placeholder="详细地址"
-                                  value={this.state.address}>
-                        </textarea>
-                </div>
+                <textarea className="text" onChange={this.onChangeHandler} placeholder="详细地址"
+                          value={this.state.address}>
+                </textarea>
             </div>
         );
     }
@@ -264,7 +217,7 @@ const Address = React.createClass({
                         <input value={this.state.username} onChange={this.onUsernameChangeHandler} placeholder="收货人"/>
                     </div>
                     <div className="phone input-div">
-                        <input value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="联系方式"/>
+                        <input type="tel" value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="联系方式"/>
                     </div>
                     <div className="deliver-info">详细收货地址：</div>
                     <CascadingAddressForm
