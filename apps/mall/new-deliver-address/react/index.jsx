@@ -2,13 +2,6 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
-var PROVINCES = [];
-
-window.ADDRESS_DATA[0].forEach(function (prov) {
-    PROVINCES.push({value: prov[0], name: prov[1]});
-});
-
-
 const AddrSelect = React.createClass({
     handleChange: function () {
         this.props.onUserSelect(this.refs.addrSelect.value);
@@ -37,29 +30,40 @@ const AddrSelect = React.createClass({
 
 const CascadingAddressForm = React.createClass({
     getInitialState: function () {
+
+        var province_list = [];
+        window.ADDRESS_DATA[0].forEach(function (prov) {
+            province_list.push({value: prov[0], name: prov[1]});
+        }.bind(this));
+
+
         return {
             address: '',
             province: this.props.initProvSelectedValue,
             city: this.props.initCitySelectedValue,
-            district: this.props.initDistSelectedValue
+            district: this.props.initDistSelectedValue,
+
+            province_list: province_list,
+            city_list: [],
+            district_list: []
         };
     },
-    handleUserProvSelect: function (province) {
-        this.setState({
-            province: province,
-            city: 0,
-            district: 0
-        });
-    },
-    handleUserCitySelect: function (city) {
-        this.setState({
-            city: city,
-            district: 0
-        });
-    },
-    handleUserDistSelect: function (district) {
-        this.setState({district: district}, this.setParentFormData);
-    },
+    //handleUserProvSelect: function (province) {
+    //    this.setState({
+    //        province: province,
+    //        city: 0,
+    //        district: 0
+    //    });
+    //},
+    //handleUserCitySelect: function (city) {
+    //    this.setState({
+    //        city: city,
+    //        district: 0
+    //    });
+    //},
+    //handleUserDistSelect: function (district) {
+    //    this.setState({district: district}, this.setParentFormData);
+    //},
 
     setParentFormData: function () {
         let i, prov, address, city, dist;
@@ -104,57 +108,78 @@ const CascadingAddressForm = React.createClass({
         return arr;
     },
 
-    //provinceChangeHandler: function (e) {
-    //    console.log(e)
-    //},
+    provinceChangeHandler: function (e) {
+        var province = e.target.value;
+        this.setState({
+            province: province,
+            city: 'not_exist',
+            city_list: this.getAddressArray(province),
+            district_list: []
+        })
+    },
+
+    cityChangeHandler: function (e) {
+        var city = e.target.value;
+        this.setState({
+            city: city,
+            district_list: this.getAddressArray(city)
+        })
+    },
+
+    districtChangeHandler: function (e) {
+        var district = e.target.value;
+        this.setState({
+            district: district
+        }, this.setParentFormData)
+    },
 
     render: function () {
-        var newCities = (this.state.province != 0 ? this.getAddressArray(this.state.province) : []);
-        var newDistricts = (this.state.city != 0 ? this.getAddressArray(this.state.city) : []);
+        //var newCities = (this.state.province != 0 ? this.getAddressArray(this.state.province) : []);
+        //var newDistricts = (this.state.city != 0 ? this.getAddressArray(this.state.city) : []);
 
-        //let generateSelectPanel = function (addresses, value, changeHandler, title) {
-        //
-        //    let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
-        //
-        //    return (
-        //        <select className="select-31" value={value} onChange={changeHandler}>
-        //            <option value=''> 请选择{title} </option>
-        //            {addresses.map(option)}
-        //        </select>
-        //    )
-        //}.bind(this);
+        let generateSelectPanel = function (addresses, value, changeHandler, title) {
+
+            let option = (item, index) => <option key={index} value={item.value}>{item.name}</option>;
+
+            return (
+                <select className="select-31" value={value} onChange={changeHandler}>
+                    <option value=''> 请选择{title} </option>
+                    {addresses.map(option)}
+                </select>
+            )
+        }.bind(this);
+
+        //<AddrSelect
+        //    addrs={PROVINCES}
+        //    initSelectedValue={this.state.provSelectedValue}
+        //    onUserSelect={this.handleUserProvSelect}
+        //    addrCNTitle={"省份"}
+        ///>
+        //<AddrSelect
+        //addrs={newCities}
+        //initSelectedValue={this.state.citySelectedValue}
+        //onUserSelect={this.handleUserCitySelect}
+        //addrCNTitle={"城市"}
+        //    />
+        //    <AddrSelect
+        //addrs={newDistricts}
+        //initSelectedValue={this.state.distSelectedValue}
+        //onUserSelect={this.handleUserDistSelect}
+        //addrCNTitle={"地区"}
+        //    />
 
         return (
-            <ul>
-                {/*{generateSelectPanel(PROVINCES, this.state.province, this.provinceChangeHandler, '省份')}*/}
-                {/*{generateSelectPanel(newCities, this.state.city, this.provinceChangeHandler, '城市')}*/}
-                {/*{generateSelectPanel(newDistricts, this.state.district, this.provinceChangeHandler, '地区')}*/}
-                <AddrSelect
-                    addrs={PROVINCES}
-                    initSelectedValue={this.state.provSelectedValue}
-                    onUserSelect={this.handleUserProvSelect}
-                    addrCNTitle={"省份"}
-                />
-                <AddrSelect
-                    addrs={newCities}
-                    initSelectedValue={this.state.citySelectedValue}
-                    onUserSelect={this.handleUserCitySelect}
-                    addrCNTitle={"城市"}
-                />
-                <AddrSelect
-                    addrs={newDistricts}
-                    initSelectedValue={this.state.distSelectedValue}
-                    onUserSelect={this.handleUserDistSelect}
-                    addrCNTitle={"地区"}
-                />
-                <li className="clearfix">
-                    <div className="fl b">
+            <div>
+                {generateSelectPanel(this.state.province_list, this.state.province, this.provinceChangeHandler, '省份')}
+                {generateSelectPanel(this.state.city_list, this.state.city, this.cityChangeHandler, '城市')}
+                {generateSelectPanel(this.state.district_list, this.state.district, this.districtChangeHandler, '地区')}
+
+                <div className="fl b">
                         <textarea className="text" onChange={this.onChangeHandler} placeholder="详细地址"
                                   value={this.state.address}>
                         </textarea>
-                    </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         );
     }
 });
