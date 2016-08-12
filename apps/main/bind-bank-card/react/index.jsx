@@ -87,7 +87,7 @@ const Attract = React.createClass({
 					<div className="belon">
 						<div className="name">{name}</div>
 						<div className="num">{ID}</div>
-						{validate ? <div className="card-e" handleEvent={this.handleEvent}></div> : null}
+						{validate ? <div className="card-e"></div> : null}
 					</div>
 				</div>
 			)
