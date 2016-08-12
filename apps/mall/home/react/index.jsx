@@ -114,8 +114,16 @@ const TextBar = React.createClass({
 
 const ProductItem = React.createClass({
     render: function () {
-        var price = this.props.price >= 0 ?
-            <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span> : null;
+        var price = 0;
+        if(this.props.price==0&&this.props.score==0){
+        	price=<span className="list-price-num">¥0</span>
+        }else if(this.props.price==0){
+        	price=<span className="list-price-num"></span>
+        }else if(this.props.price>=0){
+        	price=<span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
+        }else{
+        	price=null
+        }
         var score = (parseFloat(this.props.score) > 0) ?
             ( <span className="list-price-score">
                 {this.props.price > 0 ? <span>+</span> : null}
