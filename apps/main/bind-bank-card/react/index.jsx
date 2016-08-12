@@ -15,6 +15,7 @@ const Cover = React.createClass({
 })
 ReactDOM.render(<Cover  />,document.getElementById('layer'));
 
+//弹层
 const Bomb = React.createClass({
 	render : function(){
 		return (
@@ -45,24 +46,49 @@ ReactDOM.render(<Invalid />,document.getElementById('invad'));
 
 const Attract = React.createClass({
 		getInitialState : function(){
-			return {name : "",ID : ""};
+			return {
+				logo :"",
+				bankName :"",
+				name : "",
+				ID : "",
+				validate :""
+			};
 		},
 		
 		componentDidMount : function(){
-			$.get("","",function(data){
-				this.setState({
-					name: '',
-				})
-			}.bind(this));
+			var _this = this;
+			$FW.Ajax({
+				url:"http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
+				success : function(data){
+					_this.setState({
+						logo:data.bankLogo,
+						bankName:data.bankName,
+						name: data.username,
+						ID: data.cardNumber,
+						validate: data.validate
+					})
+				}
+				
+			});
 		},
 	
 		render : function(){
+			var logo=this.state.logo;
+			var bankName=this.state.bankName;
 			var name=this.state.name;
-			var ID=this.state.id;
+			var ID=this.state.ID;
+			var validate=this.state.validate;
 			return (
 				<div className="bank">
-					<div className="name">{name}</div>
-					<div className="num">{ID}</div>
+					<div className="ash clearfix">
+						<div className="img"><img src="{logo}" /></div>
+						<div className="bankname">{bankName}</div>
+					</div>
+					<div className="belon">
+						<div className="name">{name}</div>
+						<div className="num">{ID}</div>
+						{validate ? <div className="card-e" handleEvent={this.handleEvent}></div> : null}
+					</div>
 				</div>
 			)
 		}
@@ -110,73 +136,4 @@ const Warm = React.createClass({
 	}
 })
 ReactDOM.render(<Warm />,document.getElementById('warm'))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
