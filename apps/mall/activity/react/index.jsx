@@ -88,7 +88,7 @@ const ProductItem = React.createClass({
             <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span> : null;
         var score = (parseFloat(this.props.score) > 0) ?
             ( <span className="list-price-score">
-                {this.props.price > 0 ? <span>&#43</span> : null}
+                {this.props.price > 0 ? <span>+</span> : null}
                 {this.props.score}工分
             </span>) : "";
 

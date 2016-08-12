@@ -23,7 +23,7 @@ const MAIN_APP_NAMES = [
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
-    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'error-tip.jsx'];
+    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx'];
     var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
     gt('main', i, {
@@ -58,7 +58,8 @@ const MALL_APP_NAMES = [
     'not-support',
     'deliver-address',
     'new-deliver-address',
-    'error-page'
+    'error-page',
+    'gamble-nine'
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
@@ -67,7 +68,7 @@ MALL_APP_NAMES.forEach(function (i) {
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://pengyan.9888.cn/',
+        api_path: 'http://localhost/fake-api/',
         include_components: common_components,
         include_common_js: common_js,
         width_swipe: true

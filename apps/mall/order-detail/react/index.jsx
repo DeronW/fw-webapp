@@ -265,7 +265,8 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-    location.href = '/order/mine';
+    $FW.Browser.inApp() && $FW.Browser.inIOS() ? NativeBridge.close() : location.href = '/order/mine';
+    //location.href = '/order/mine';
 }
 
 window.onNativeMessageReceive = function (msg) {

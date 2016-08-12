@@ -31,7 +31,7 @@ const Recharge = React.createClass({
             this.reloadFeeHandler();
         }
         if (this.state.tab == 'net') {
-            this.reloadNetHandler();
+            $FW.Component.Alert("正在建设中，敬请期待！");
         }
     },
 
@@ -121,7 +121,7 @@ const Recharge = React.createClass({
 
     costPayScore: function(){
         this.setState({
-            user_score: this.state.user_score - this.state.pay_score
+            user_score: this.state.user_score - this.state.fee_pay_score
         })
     },
     render: function () {
@@ -292,7 +292,7 @@ const ConfirmPop = React.createClass({
                 url: API_PATH + "mall/api/order/v1/SendPhoneVerifyPay.json",
                 method: 'get',
                 success: function(data){
-                    //$FW.Component.Alert(data.validateCode);
+                    $FW.Component.Alert("这是用于测试的验证"+data.validateCode);
                 },
                 fail: function (code,message,response){
                     _this.setState({
@@ -386,10 +386,8 @@ const ConfirmPop = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('充值专区');
-
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>, document.getElementById('header'));
-
     $FW.Ajax({
         url: API_PATH + 'api/v1/user-state.json',
         //url: "http://localhost/user-state.json",
