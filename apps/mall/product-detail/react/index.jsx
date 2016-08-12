@@ -66,9 +66,6 @@ const Product = React.createClass({
             )
         }
 
-        let old_component = data.head_images && data.head_images.length ?
-            <Carousel head_images={data.head_images}/> : <div className="no-head-images"></div>;
-
         let user_level_manifest;
         if (data.vipLevel == 1) user_level_manifest = "普通用户";
         if (data.vipLevel == 2) user_level_manifest = "VIP1";
@@ -232,38 +229,6 @@ const PlusMinus = React.createClass({
                 </a>
             </div>
         )
-    }
-});
-
-const Carousel = React.createClass({
-    getInitialState: function () {
-        return {
-            banners: this.props.head_images,
-            cur_index: 0
-        }
-    },
-
-    changeCurrentIndex: function (index) {
-        if (this.state.banners.length == 2) index = index % 2;
-        this.setState({cur_index: index});
-    },
-
-    render: function () {
-        let point = (dot, index) => <div key={index} className={(this.state.cur_index == index) ? "on" : ''}></div>;
-        let ba = (i, index) => <div key={index}><a href={i.href}><img src={i}/></a>
-            <div className="label"></div>
-        </div>;
-
-        return (
-            <div className="banner-carousel-detail">
-                <ReactSwipe wrapperClassName={'wrap'} speed={1000} callback={this.changeCurrentIndex}>
-                    {this.state.banners.map(ba) }
-                </ReactSwipe>
-                <div className="points">
-                    {this.state.banners.map(point)}
-                </div>
-            </div>
-        );
     }
 });
 
