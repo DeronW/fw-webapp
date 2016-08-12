@@ -1,10 +1,32 @@
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"绑定银行卡"} back_handler={backward}/>, document.getElementById('header'));
+	$FW.Ajax({
+		url:"http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
+		success : function(data){
+			if(data.validate){
+				ReactDOM.render(<Invalid/>,document.getElementById('invad'));
+			}
+			   ReactDOM.render(<BindBankCard item={data}/>,document.getElementById('layer'));
+			}
+	});
 });
 
 function backward(){
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
+
+const BindBankCard = React.createClass({
+	render : function(){
+		return (
+			<div>
+				<Attract/>
+				<Sup/>
+				<Branch/>
+				<Warm/>
+			</div>
+		)
+	}
+});
 
 const Cover = React.createClass({
 	render : function(){
@@ -13,7 +35,7 @@ const Cover = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Cover  />,document.getElementById('layer'));
+
 
 //弹层
 const Bomb = React.createClass({
@@ -28,7 +50,7 @@ const Bomb = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Bomb  />,document.getElementById('box'));
+
 
 const Invalid = React.createClass({
 	render : function(){
@@ -42,7 +64,7 @@ const Invalid = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Invalid />,document.getElementById('invad'));
+
 
 const Attract = React.createClass({
 		getInitialState : function(){
@@ -54,27 +76,10 @@ const Attract = React.createClass({
 				validate :""
 			};
 		},
-		
-		componentDidMount : function(){
-			var _this = this;
-			$FW.Ajax({
-				url:"http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
-				success : function(data){
-					_this.setState({
-						logo:data.bankLogo,
-						bankName:data.bankName,
-						name: data.username,
-						ID: data.cardNumber,
-						validate: data.validate
-					})
-				}
-				
-			});
-		},
 	
 		render : function(){
-			var logo=this.state.logo;
-			var bankName=this.state.bankName;
+			var logo= this.props.item.logo;
+			var bankName=this.props.item.bankName;
 			var name=this.state.name;
 			var ID=this.state.ID;
 			var validate=this.state.validate;
@@ -93,13 +98,6 @@ const Attract = React.createClass({
 			)
 		}
 	})
-ReactDOM.render(<Attract />,document.getElementById('bind'));
-
-
-
-
-
-
 
 
 const Sup = React.createClass({
@@ -109,7 +107,7 @@ const Sup = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Sup />,document.getElementById('support'));
+
 
 const Branch = React.createClass({
 	render : function(){
@@ -121,7 +119,7 @@ const Branch = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Branch />,document.getElementById('bran'));
+
 
 const Warm = React.createClass({
 	render : function(){
@@ -135,5 +133,4 @@ const Warm = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Warm />,document.getElementById('warm'))
 
