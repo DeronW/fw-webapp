@@ -23,7 +23,7 @@ const MAIN_APP_NAMES = [
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
-    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'error-tip.jsx'];
+    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx'];
     var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
     gt('main', i, {
