@@ -1,8 +1,8 @@
-const ErrorTip = React.createClass({
+const GlobalToast = React.createClass({
     getInitialState: function() {
         return {
             objW: 0,
-            oTimer: 0
+            oTimer: false
         };
     },
     componentDidMount: function() {
@@ -10,9 +10,11 @@ const ErrorTip = React.createClass({
 
         this.timeoutId = setTimeout(function() {
             _this.setState({
-                oTimer: 1
+                oTimer: true
             });
 
+            _this.props.unMountToast();    
+            ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
         }, 1500);
 
         this.setState({
@@ -38,9 +40,10 @@ const ErrorTip = React.createClass({
             borderRadius: "5px"
         };
 
+
         return (
             <div className="">
-                {this.state.oTimer ? null : <div className="error-tip" style={style} ref="wDom">{this.props.text}</div>}
+                {this.state.oTimer ? null : <div className="error-tip" style={style} ref="wDom">{this.props.info_text}</div>}
             </div>
         );
     }

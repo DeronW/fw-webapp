@@ -1,10 +1,34 @@
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"绑定银行卡"} back_handler={backward}/>, document.getElementById('header'));
+	$FW.Ajax({
+		url:"http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
+		success : function(data){
+			if(data.validate){
+				ReactDOM.render(<Invalid/>,document.getElementById('wrap'));
+			}
+			ReactDOM.render(<BindBankCard item={data}/>,document.getElementById('cnt'));	
+		}
+	});
 });
 
 function backward(){
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
+
+const BindBankCard = React.createClass({
+	render : function(){
+		return (
+			<div>
+				<Cover item={this.props.item} />
+				<Bomb item={this.props.item}/>
+				<Attract item={this.props.item}/>
+				<Sup item={this.props.item}/>
+				<Branch item={this.props.item}/>
+				<Warm item={this.props.item}/>
+			</div>
+		)
+	}
+})
 
 const Cover = React.createClass({
 	render : function(){
@@ -13,8 +37,8 @@ const Cover = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Cover  />,document.getElementById('layer'));
 
+//弹层
 const Bomb = React.createClass({
 	render : function(){
 		return (
@@ -27,7 +51,7 @@ const Bomb = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Bomb  />,document.getElementById('box'));
+
 
 const Invalid = React.createClass({
 	render : function(){
@@ -41,39 +65,30 @@ const Invalid = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Invalid />,document.getElementById('invad'));
+
 
 const Attract = React.createClass({
-		getInitialState : function(){
-			return {name : "",ID : ""};
-		},
-		
-		componentDidMount : function(){
-			$.get("","",function(data){
-				this.setState({
-					name: '',
-				})
-			}.bind(this));
-		},
-	
 		render : function(){
-			var name=this.state.name;
-			var ID=this.state.id;
+			var logo=this.props.item.bankLogo;
+			var bankName=this.props.item.bankName;
+			var name=this.props.item.username;
+			var ID=this.props.item.cardNumber;
+			var validate=this.props.item.validate;
 			return (
 				<div className="bank">
-					<div className="name">{name}</div>
-					<div className="num">{ID}</div>
+					<div className="ash clearfix">
+						<div className="img"><img src={logo} /></div>
+						<div className="bankname">{bankName}</div>
+					</div>
+					<div className="belon">
+						<div className="name">{name}</div>
+						<div className="num">{ID}</div>
+						<div className="card-e"></div>
+					</div>
 				</div>
 			)
 		}
 	})
-ReactDOM.render(<Attract />,document.getElementById('bind'));
-
-
-
-
-
-
 
 
 const Sup = React.createClass({
@@ -83,7 +98,7 @@ const Sup = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Sup />,document.getElementById('support'));
+
 
 const Branch = React.createClass({
 	render : function(){
@@ -95,7 +110,7 @@ const Branch = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Branch />,document.getElementById('bran'));
+
 
 const Warm = React.createClass({
 	render : function(){
@@ -109,74 +124,4 @@ const Warm = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Warm />,document.getElementById('warm'))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

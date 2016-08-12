@@ -23,7 +23,7 @@ const MAIN_APP_NAMES = [
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
-    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'error-tip.jsx'];
+    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx'];
     var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
     gt('main', i, {
@@ -68,7 +68,7 @@ MALL_APP_NAMES.forEach(function (i) {
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://localhost/fake-api/',
+        api_path: 'http://10.105.6.73:8081/',
         include_components: common_components,
         include_common_js: common_js,
         width_swipe: true
