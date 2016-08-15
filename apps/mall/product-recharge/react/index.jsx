@@ -15,7 +15,8 @@ const Recharge = React.createClass({
             login: this.props.is_login,
             phone: '',
             format_phone: '',
-            price: ''
+            price: '',
+            operator: 'union'
         }
     },
     componentDidMount: function () {
@@ -31,7 +32,8 @@ const Recharge = React.createClass({
             this.reloadFeeHandler();
         }
         if (this.state.tab == 'net') {
-            $FW.Component.Alert("正在建设中，敬请期待！");
+            this.reloadNetHandler();
+            //$FW.Component.Alert("正在建设中，敬请期待！");
         }
     },
 
@@ -58,10 +60,12 @@ const Recharge = React.createClass({
         });
     },
 
-    reloadNetHandler: function(){
+    reloadNetHandler: function(operator){
+        var code = operator == 'union' ? 1032 : (operator == 'mobile' ? 1034 : 1033)
         $FW.Ajax({
-            url: API_PATH + 'api/v1/phone/fee/recharge2.json',
+            url: API_PATH + 'api/v1/phone/net/recharge.json',
             enable_loading: true,
+            data:{ operator: code},
             success: function (data) {
                 let pay_score;
                 data.fee.forEach((i)=> {
@@ -74,10 +78,34 @@ const Recharge = React.createClass({
                 this.setState({
                     net_pay_score: pay_score,
                     bizNo: data.defaultBizNo,
-                    product_fee: data.fee
+                    product_fee: data.fee,
+                    operator: operator
                 })
             }.bind(this)
         });
+    },
+
+    switchNetData: function(phone){
+
+        var mobile_reg = /^1(3[4-9]|4[7]|5[012789]|7[8]|8[23478])\d{8}$/;
+        var union_reg = /^1(3[0-2]|4[5]|5[56]|7[156]|8[56])\d{8}$/;
+        var tele_reg = /^1(3[3]|4[9]|5[3]|7[37]|8[019])\d{8}$/;
+        var virtual_reg = /^170\d{8}$/;
+
+        console.log(mobile_reg.test(phone))
+        console.log(phone)
+
+        if(mobile_reg.test(phone)){
+            this.reloadNetHandler('mobile')
+        } else if(union_reg.test(phone)){
+            this.reloadNetHandler('union')
+        } else if(tele_reg.test(phone)){
+            this.reloadNetHandler('tele')
+        } else if(virtual_reg.test(phone)){
+            $FW.Component.Alert("暂不支持虚拟运营商号段！");
+        } else {if(phone.length == 11)
+            $FW.Component.Alert("该号码不能识别！");
+        }
     },
 
     changeValueHandler: function (e) {
@@ -86,10 +114,11 @@ const Recharge = React.createClass({
         if(isNaN(v)) return;
         if(v.length > 3) v = v.substr(0, 3) + ' ' + v.substr(3);
         if(v.length > 8) v = v.substr(0, 8) + ' ' + v.substring(8, 12);
-        this.setState({phone: v.replace(/ /g, ''), format_phone: v});
-        setTimeout(function(){
-            //e.target.setSelectionRange(12, 12)
-        }, 100)
+
+        let phone = v.replace(/ /g, '');
+        this.setState({phone: phone, format_phone: v});
+
+        this.switchNetData(phone);
     },
 
     getSMSCodeHandler: function () {
@@ -339,7 +368,8 @@ const ConfirmPop = React.createClass({
                             show: false,
                             show_warn:false,
                             remain:0,
-                            value:''
+                            value:'',
+                            loading: false
                         });
                         window.rechargePanel.costPayScore();
                         $FW.Component.Alert("充值成功！");

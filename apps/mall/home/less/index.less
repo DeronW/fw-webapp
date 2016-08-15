@@ -19,6 +19,31 @@ a {
   }
 }
 
+.head-images {
+  height: 260px;
+
+  .dots {
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    text-align: center;
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: hsla(0,0%,100%,.25);
+      border-radius: 50%;
+      margin-right: 18px;
+
+      &.active {
+        background-color: white;
+      }
+    }
+  }
+}
+
 .auth-info {
   font-size: 24px;
   color: #999;
@@ -107,7 +132,7 @@ a {
     background-color: #fd4d4c;
   }
 
-  a.index-actList-a{
+  a.index-actList-a {
     display: table;
     width: 100%;
     position: relative;
@@ -115,7 +140,7 @@ a {
     height: 219px;
     border-bottom: 1px solid #e3e5ea;
     box-sizing: border-box;
-    -webkit-box-sizing:border-box;
+    -webkit-box-sizing: border-box;
 
     .list-price-box {
       position: absolute;
@@ -242,7 +267,7 @@ a {
   .recharge, .vip, .goods, .mine {
     width: 25%;
   }
-  .recharge{
+  .recharge {
     background: transparent url('../images/ico-recharge.png') no-repeat center 10px;
   }
   .vip {
@@ -266,7 +291,7 @@ a {
   left: 0;
 }
 
-.product-content-wrap{
+.product-content-wrap {
   width: 480px;
   float: left;
   margin-left: 20px;

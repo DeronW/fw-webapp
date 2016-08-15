@@ -27,8 +27,7 @@ module.exports = function (site_name, project_name, configs) {
             include_components: [],
             include_common_js: [],
             main_jsx: 'react/index.jsx',
-            html_engine: 'swig',
-            with_swipe: true
+            html_engine: 'swig'
         }, configs);
 
     let task_name = site_name + ':' + (CONFIG.cmd_prefix ? CONFIG.cmd_prefix + ':' : '') + project_name;
@@ -55,7 +54,6 @@ module.exports = function (site_name, project_name, configs) {
         common_javascript_files.push(`${lib_path}react-15.0.1/react-dom.min.js`);
     }
 
-    if (CONFIG.with_swipe) common_javascript_files.push(`${lib_path}javascripts/swipe-2.0.0.js`);
     common_javascript_files = common_javascript_files.concat(
         CONFIG.include_common_js.map(i => `${lib_path}${i}`));
 
