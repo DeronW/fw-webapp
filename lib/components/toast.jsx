@@ -1,20 +1,16 @@
 const GlobalToast = React.createClass({
     getInitialState: function() {
         return {
-            objW: 0,
-            oTimer: false
+            objW: 0
         };
     },
     componentDidMount: function() {
         var _this = this;
 
         this.timeoutId = setTimeout(function() {
-            _this.setState({
-                oTimer: true
-            });
-
+            ReactDOM.unmountComponentAtNode(document.getElementById(_this.props.id));
             _this.props.unMountToast();    
-            ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
+            
         }, 1500);
 
         this.setState({
@@ -42,9 +38,7 @@ const GlobalToast = React.createClass({
 
 
         return (
-            <div className="">
-                {this.state.oTimer ? null : <div className="error-tip" style={style} ref="wDom">{this.props.info_text}</div>}
-            </div>
+            <div className="error-tip" style={style} ref="wDom">{this.props.info_text}</div>            
         );
     }
 });
