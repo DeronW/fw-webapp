@@ -12,7 +12,8 @@ const China = React.createClass({
 			</div>
 		)
 	}
-})
+});
+
 ReactDOM.render(<China />,document.getElementById('head'));
 
 const Change = React.createClass({
