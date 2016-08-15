@@ -32,7 +32,9 @@ const Recharge = React.createClass({
             this.reloadFeeHandler();
         }
         if (this.state.tab == 'net') {
-            this.reloadNetHandler();
+            var opt = this.getOperator(this.state.phone);
+            if(opt == 'unknown' || opt == 'invalid') opt = 'union';
+            setTimeout(()=>this.reloadNetHandler(opt),2000);
             //$FW.Component.Alert("正在建设中，敬请期待！");
         }
     },
@@ -61,7 +63,8 @@ const Recharge = React.createClass({
     },
 
     reloadNetHandler: function(operator){
-        var code = operator == 'union' ? 1032 : (operator == 'mobile' ? 1034 : 1033)
+        console.log(operator);
+        var code = operator == 'union' ? 1032 : (operator == 'mobile' ? 1034 : 1033);
         $FW.Ajax({
             url: API_PATH + 'api/v1/phone/net/recharge.json',
             enable_loading: true,
@@ -85,26 +88,38 @@ const Recharge = React.createClass({
         });
     },
 
-    switchNetData: function(phone){
-
+    getOperator: function(phone){
         var mobile_reg = /^1(3[4-9]|4[7]|5[012789]|7[8]|8[23478])\d{8}$/;
         var union_reg = /^1(3[0-2]|4[5]|5[56]|7[156]|8[56])\d{8}$/;
         var tele_reg = /^1(3[3]|4[9]|5[3]|7[37]|8[019])\d{8}$/;
         var virtual_reg = /^170\d{8}$/;
-
-        console.log(mobile_reg.test(phone))
-        console.log(phone)
+        var r;
 
         if(mobile_reg.test(phone)){
-            this.reloadNetHandler('mobile')
+            r = 'mobile'
         } else if(union_reg.test(phone)){
-            this.reloadNetHandler('union')
+            r ='union'
         } else if(tele_reg.test(phone)){
-            this.reloadNetHandler('tele')
+            r ='tele'
         } else if(virtual_reg.test(phone)){
-            $FW.Component.Alert("暂不支持虚拟运营商号段！");
-        } else {if(phone.length == 11)
+            r = 'virtual'
+        } else if(phone.length == 11){
+            r = 'unknown'
+        } else {
+            r = 'invalid'
+        }
+        return r
+    },
+
+    switchNetData: function(phone){
+        var operator = this.getOperator(phone);
+        if(operator == 'unknown') {
             $FW.Component.Alert("该号码不能识别！");
+        } else if (operator == 'virtual') {
+            $FW.Component.Alert("暂不支持虚拟运营商号段！");
+        } else {
+            if(operator != this.state.operator && operator != 'unknow' && operator != 'invalid' )
+            this.reloadNetHandler(operator);
         }
     },
 
@@ -117,7 +132,7 @@ const Recharge = React.createClass({
 
         let phone = v.replace(/ /g, '');
         this.setState({phone: phone, format_phone: v});
-
+        if(this.state.tab == 'net')
         this.switchNetData(phone);
     },
 
@@ -368,8 +383,7 @@ const ConfirmPop = React.createClass({
                             show: false,
                             show_warn:false,
                             remain:0,
-                            value:'',
-                            loading: false
+                            value:''
                         });
                         window.rechargePanel.costPayScore();
                         $FW.Component.Alert("充值成功！");

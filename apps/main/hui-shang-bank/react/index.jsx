@@ -43,192 +43,6 @@ var PhoneCodePrompt = React.createClass({
     }
 });
 
-var From = React.createClass({
-    getInitialState: function() {
-        return {
-            showInput: 0,
-            account: "",
-            code: 0,
-            countdown: 20,
-            userData: {},
-            identifyingCode: null,
-            blur: true
-        };
-    },
-    componentDidMount: function() {
-        var _this = this;
-
-        $FW.Ajax({
-            url: "http://xjb.9888.cn/test-json/json-use.json",
-            success: function(data) {
-                _this.props.callbackGetUserInfo(data);
-                
-                _this.setState({
-                    userData: data
-                });                                                                     
-            }
-        });
-
-        
-    },
-    amendId: function() {
-        this.setState({
-            showInput: 1
-        });     
-    },
-    componentDidUpdate: function(a, params) {
-        if(this.state.blur) {
-            if(ReactDOM.findDOMNode(this.refs.number) !== null) {
-                ReactDOM.findDOMNode(this.refs.number).focus();
-            }   
-        }    
-    },
-    onInputChangeHandler: function(event){
-        //　....　data
-        this.props.callbackParent(event.target.value);
-
-        this.setState({
-            account: numberFormat.format(event.target.value)
-        });
-    },
-    inputBlur: function() {
-        this.setState({
-            blur: false  
-        });
-    },
-    inputFocus: function() {
-        this.setState({
-            blur: true
-        });
-    },
-    //选择开户行
-    handlerBank: function() {
-        this.props.callbackBank(true);
-    },
-    headlerCode: function() {
-        var _this = this;
-
-        this.setState({
-            code: 1
-        });
-
-       this.props.callbackPleaseCode(false);     
-
-        this.interval = setInterval(function() {
-            _this.setState({
-                countdown: --_this.state.countdown
-            });
-
-            if(_this.state.countdown == 0) {
-                clearInterval(_this.interval);
-
-                _this.setState({
-                    code: 0,
-                    countdown: 20
-                });                
-            }
-        }, 1000);
-
-        //在5分钟后 才能获取
-        this.againCode = setTimeout(function() {
-            
-            _this.props.callbackPleaseCode(true);
-
-        }, 20000);
-
-        $FW.Ajax({
-            url: "http://xjb.9888.cn/test-json/identifying-code.json",
-            success: function(data) {
-                console.log(data);
-                _this.setState({
-                    identifyingCode: data.identifyingCode
-                });
-            }
-        });
-    },
-    validateCodeChangeHandler: function(event) {
-        this.props.validateCode(event.target.value);
-    },
-    render: function() {
-        var _this = this;
-
-        return (
-            <div className="">
-                <div className="from-block">
-                    <div className="input-block">
-                        <span className="icon name-icon"></span>
-                        <div className="text-block">
-                            <span className="text name-text">{this.state.userData.name}</span>
-                        </div>
-                    </div>
-
-                    <div className="input-block">
-                        <span className="icon number-icon"></span>
-                        <div className="text-block">
-                            <span className="text number-text">{this.state.userData.bankCardNum}</span>
-                        </div>
-                    </div>
-
-                    <div className="input-block">
-                        <span className="icon id-icon"></span>
-                        <div className="text-block" >
-                            {
-                                this.state.showInput == 1 ?
-                                    <input type="text" 
-                                        value={this.state.account} 
-                                        placeholder="输入账号" 
-                                        ref="number" 
-                                        onFocus={this.inputFocus}
-                                        onBlur={this.inputBlur}
-                                        onChange={this.onInputChangeHandler} /> :
-                                    <span className="text id-text" onClick={this.amendId}>{this.state.userData.id}</span>
-                            }
-
-                        </div>
-                    </div>
-
-                    <div className="input-block" onClick={this.handlerBank}>
-                        <span className="bank-name">开户银行</span>                
-
-                        <span className="bank-logo">
-                            <span className="bank-text">
-                                {
-                                    this.props.alreadyBankData == null ? this.state.userData.pretermissionBankName : this.props.alreadyBankData.bankName                                   
-                                }
-                            </span>
-                            <span className="img">
-                                <img src={
-                                    this.props.alreadyBankData == null ? this.state.userData.pretermissionBankLogo : this.props.alreadyBankData.bankLogo
-                                } className="r-icon" />
-                            </span>
-                        </span>
-                    </div>
-
-                    <div className="input-block code-block">
-                        <span className="input">
-                            <input type="text" placeholder="请输入验证码" onChange={this.validateCodeChangeHandler} />
-                        </span>
-
-                        <span className="btn-code">
-                            <span className="line"></span>
-
-                            {
-                                this.state.code ?
-                                    <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                    <span className="btn" onClick={this.headlerCode}>获取短信验证码</span>
-                            }
-
-                        </span>
-                    </div>
-                </div>
-
-                <PhoneCodePrompt />
-            </div>
-            
-
-        );
-    }
-});
 
 
 var Text = React.createClass({
@@ -340,146 +154,6 @@ var SelectBank = React.createClass({
     }
 });
 
-var Body = React.createClass({
-    getInitialState: function() {
-        return {
-            errorWindow: true,
-            selectBankWindow: null,
-            loading: null,
-            backSelect: false,
-            alreadyBank: null,
-            validateCode: null,
-            pleaseCode: true,
-            userInfo: {
-                name: null,
-                account: null,
-                id: null,
-                pretermissionBankName: null,
-                pretermissionBankLogo: null 
-            }
-        };
-    },
-    fromData: function(dataText) {
-        this.dataText　=　dataText;
-
-        var newUserInfo = this.state.userInfo;
-
-        newUserInfo.id = space(dataText); 
-
-        this.setState({
-            userInfo: 
-                 newUserInfo
-        });
-    },
-    clickFun: function() {
-        this.fromData;
-        var _this = this;
-
-        this.setState({
-            userInfo: {
-                name: this.state.userInfo.name,
-                account: this.state.userInfo.account,
-                id: this.state.userInfo.id,
-                pretermissionBankName: this.state.userInfo.bankName,
-                pretermissionBankLogo: this.state.userInfo.bankLogo 
-            }
-        });
-
-        if(this.dataText !== undefined) {
-            if(this.dataText.length <= 0) {
-                this.setState({
-                    errorWindow: <ErrorTip text={"不能为空"}/>
-                });
-
-                return false;
-            } 
-        }
-
-        if(this.state.pleaseCode) {
-            this.setState({
-                errorWindow: false
-            });
-
-            return false;
-        }
-        
-
-        if(this.state.validateCode == null) {
-            this.setState({
-                errorWindow: <ErrorTip text={"验证码不能为空"}/>
-            });
-
-            return false;     
-        }   
-
-        this.props.callbackBodyPage(1);    
-    },
-    selectBank: function(show) {
-        this.setState({
-            backSelect: show
-        });
-    },
-    alreadySelectBank: function(data) {
-        console.log(data);
-        this.setState({
-            alreadyBank: data
-        });
-    },
-    getValidateCode: function(code) {
-        //console.log(code);
-        this.setState({
-            validateCode: code
-        });
-    },
-    getUserInfo: function(data) {        
-        this.setState({
-            userInfo: {
-                name: data.name,
-                account: data.bankCardNum,
-                id: data.id,
-                pretermissionBankName: data.pretermissionBankName,
-                pretermissionBankLogo: data.pretermissionBankLogo 
-            }
-        });
-    },
-    pleaseValidateCode: function(data) {
-        //console.log(data);
-        this.setState({
-            pleaseCode: data
-        });
-    },
-    render: function() {
-        var _this = this;
-
-        return (
-            <div className="cnt">
-                <TopNav title={"升级存管账户"} backBtn={true} />    
-
-                <Nav imgUrl={"images/nav-2.png"}/>
-
-                <From callbackGetUserInfo={this.getUserInfo} 
-                      callbackParent={this.fromData} 
-                      callbackBank={this.selectBank} 
-                      alreadyBankData={this.state.alreadyBank} 
-                      validateCode={this.getValidateCode}
-                      callbackPleaseCode={this.pleaseValidateCode}
-                      />
-
-                <Btn btnText={"同意"} Fun={this.clickFun} />
-
-                <Text />
-
-                {
-                    this.state.backSelect ? <SelectBank callbackBtn={this.selectBank} callbackAlreadyBank={this.alreadySelectBank}/> : null  
-                }
-                
-
-                {this.state.loading}
-            </div>
-
-        );
-    }
-});
 
 
 var TopNav = React.createClass({
@@ -544,11 +218,31 @@ var SucceedBody = React.createClass({
 });
 
 
-//
-var PswFrom = React.createClass({
+//设置交易密码 from
+var SettingTradingFrom = React.createClass({
+    getInitialState: function() {
+        return {
+            countdown: 60,
+            code: false
+        };
+    },
+    handerIdentifyingCode: function() {
+        var _this = this;
+
+        this.setState({
+            code: true
+        })
+
+        this.interval = setInterval(function() {
+            _this.setState({
+                countdown: --_this.state.countdown
+            });
+
+        }, 1000);
+    },
     render: function() {
         return (
-            <div className="from-block">
+            <div className="from-block setting-trading-from">
                 <div className="input-block">
                     <span className="icon phone-n-icon"></span>
                     <div className="text-block">
@@ -562,35 +256,13 @@ var PswFrom = React.createClass({
                     </span>
 
                     <span className="btn-code">
-                        <span className="line"></span>
-                        <span className="btn">获取短信验证码</span>
+                        {
+                            this.state.code ?
+                                    <span className="timing-text">{this.state.countdown}倒计时</span> :
+                                    <span className="btn" onClick={this.handerIdentifyingCode}>获取短信验证码</span>
+                        }
                     </span>
                 </div>
-            </div>
-
-        );
-    }
-});
-
-var MerchandisePsw = React.createClass({
-    getInitialState: function() {
-        return {
-            
-        };
-    },
-    btnHandler: function() {
-        this.props.callbackBodyPage(2);
-    },
-    render: function() {
-        return (
-            <div className="">
-                <TopNav title={"设置交易密码"} backBtn={true} />
-
-                <Nav imgUrl={this.props.imgUrl}/>
-
-                <PswFrom />
-
-                <Btn btnText={"设置交易密码"} Fun={this.btnHandler} />
             </div>
         );
     }
@@ -704,7 +376,7 @@ var AccountSucceedBody = React.createClass({
             <div className="">
                 <TopNav title={"开户成功"} btnText={"跳过"} />
 
-                <Nav imgUrl={this.props.imgUrl} />
+                <Nav imgUrl={"images/nav-2.png"}/>
 
                 <PromptBlock imgUrl={"images/account-succeed.png"} title={"成功开通徽商银行存管账户"} text={"交易密码用于投标、提现等操作，为了您的 账户安全，资金操作前请先设置交易密码。"} />
 
@@ -715,32 +387,6 @@ var AccountSucceedBody = React.createClass({
 });
 
 
-//设置交易密码 from
-var SettingTradingFrom = React.createClass({
-    render: function() {
-        return (
-            <div className="from-block setting-trading-from">
-                <div className="input-block">
-                    <span className="icon phone-n-icon"></span>
-                    <div className="text-block">
-                        <span className="text phone-n-text">111XXX999</span>
-                    </div>
-                </div>
-
-                <div className="input-block code-block">
-                    <span className="input">
-                        <input type="text" placeholder="请输入验证码" />
-                    </span>
-
-                    <span className="btn-code">
-                        <span className="line"></span>
-                        <span className="btn">获取短信验证码</span>
-                    </span>
-                </div>
-            </div>
-        );
-    }
-});
 
 //新用户设置交易密码
 var SettingTradingBody = React.createClass({
@@ -789,7 +435,7 @@ var AllPage = React.createClass({
         return {
             ui: [
                 <Body callbackBodyPage={this.bodyPage} />,
-                <AccountSucceedBody callbackBodyPage={this.bodyPage} imgUrl={"images/nav.png"}/>,
+                <AccountSucceedBody callbackBodyPage={this.bodyPage} imgUrl={"images/nav-2.png"}/>,
                 <MerchandisePsw callbackBodyPage={this.bodyPage} imgUrl={"images/nav-1.png"} />
             ],
             index: 0
@@ -799,7 +445,6 @@ var AllPage = React.createClass({
         this.setState({
             index: data
         });
-        
     },
     render: function() {        
         return (
