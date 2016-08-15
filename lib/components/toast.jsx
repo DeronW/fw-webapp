@@ -38,7 +38,7 @@ const GlobalToast = React.createClass({
 
 
         return (
-            <div className="error-tip" style={style} ref="wDom">{this.props.info_text}</div>            
+            <div className="error-tip" style={style} ref="wDom">{this.props.text}</div>            
         );
     }
 });
