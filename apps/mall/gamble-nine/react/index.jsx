@@ -19,26 +19,30 @@ const NineActivity = React.createClass({
             remainTimes: n
        });
     },
+    
     showPopPrize: function () {
         this.setState({
             showPopPrize: true
         });
-        
+        this.bodyScroll();        
     },
     showPopInf: function () {
         this.setState({
             showPopInf: true
         });
+        this.bodyScroll();        
     },
     hidePopInf: function () {
         this.setState({
             showPopInf: false
         });
+        this.bodyScroll();
     },
     hidePopPrize: function () {
         this.setState({
             showPopPrize: false
         });
+        this.bodyScroll();
     },
     addPriceList: function (prize) {
     	
@@ -50,6 +54,19 @@ const NineActivity = React.createClass({
     },
     setMasker:function (n) {        
         this.setState({masker:n});
+    },
+    bodyScroll:function(){    	
+    	var objBody=document.body; 
+    	var _that=this;
+        setTimeout(function(){
+        	if(_that.state.showPopInf||_that.state.showPopPrize){
+	    		objBody.style.overflowY='hidden';
+	    	}else{
+	    		objBody.style.overflowY='auto';
+	    	}
+        },0);
+    	
+    	
     },
     
     render: function () {
