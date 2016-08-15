@@ -33,10 +33,8 @@ const Recharge = React.createClass({
         }
         if (this.state.tab == 'net') {
             var opt = this.getOperator(this.state.phone);
-            console.log(this.state.phone)
-            console.log(opt)
             if(opt == 'unknown' || opt == 'invalid') opt = 'union';
-            this.reloadNetHandler(opt);
+            setTimeout(()=>this.reloadNetHandler(opt),2000);
             //$FW.Component.Alert("正在建设中，敬请期待！");
         }
     },
@@ -120,7 +118,8 @@ const Recharge = React.createClass({
         } else if (operator == 'virtual') {
             $FW.Component.Alert("暂不支持虚拟运营商号段！");
         } else {
-            this.reloadNetHandler(operator)
+            if(operator != this.state.operator && operator != 'unknow' && operator != 'invalid' )
+            this.reloadNetHandler(operator);
         }
     },
 
@@ -133,14 +132,8 @@ const Recharge = React.createClass({
 
         let phone = v.replace(/ /g, '');
         this.setState({phone: phone, format_phone: v});
-
-
         if(this.state.tab == 'net')
         this.switchNetData(phone);
-
-        console.log(phone);
-
-
     },
 
     getSMSCodeHandler: function () {
