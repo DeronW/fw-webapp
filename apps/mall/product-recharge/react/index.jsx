@@ -368,7 +368,8 @@ const ConfirmPop = React.createClass({
                             show: false,
                             show_warn:false,
                             remain:0,
-                            value:''
+                            value:'',
+                            loading: false
                         });
                         window.rechargePanel.costPayScore();
                         $FW.Component.Alert("充值成功！");
