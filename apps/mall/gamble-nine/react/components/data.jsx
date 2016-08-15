@@ -7,44 +7,53 @@
 //                      <div className="pop-inf-li">5、活动最终解释权归金融工场所有，活动详情致电客服热线咨询:400-0322-988。</div>
 //模拟数据
 var data=[
-    {
-        avatar:'images/img4.png',
-        userName:'my**12',
-        userLevel:0,
+    {   code:10000,
+    	data:{
+    		avatar:'images/img4.png',
+	        userName:'1111',
+	        userLevel:0,
+    	}
+        
     },
-    {
-        costScore:3000,
-        remainTimes:30,
-        infinitely:false,
-        usableScore:300
+    {	code:10000,
+    	data:{
+    		costScore:3000,
+	        remainTimes:2,
+	        infinitely:false,
+	        usableScore:30000
+    	}
+        
     },
-    {        
-    	list:[
-            {
-                avatar:'images/img4.png',
-                name:'0',
-                prizeName:'100元返现券',
-                time:'2016.06.08 23:20:08',
-            },
-            {
-                avatar:'images/img1.png',
-                name:'1',
-                prizeName:'5元红包',
-                time:'2016.06.08 23:20:08',
-            },
-            {
-                avatar:'images/img3.png',
-                name:'2',
-                prizeName:'50元红包',
-                time:'2016.06.08 23:20:08',
-            },
-            {
-                avatar:'images/img2.png',
-                name:'my**13',
-                prizeName:'10元红包',
-                time:'2016.06.08 23:20:08',
-            }
-        ]
+    {   code:10000,
+    	data:{
+    		list:[
+	            {
+	                avatar:'images/img4.png',
+	                name:'0',
+	                prizeName:'100元返现券',
+	                time:'2016.06.08 23:20:08',
+	            },
+	            {
+	                avatar:'images/img1.png',
+	                name:'1',
+	                prizeName:'5元红包',
+	                time:'2016.06.08 23:20:08',
+	            },
+	            {
+	                avatar:'images/img3.png',
+	                name:'2',
+	                prizeName:'50元红包',
+	                time:'2016.06.08 23:20:08',
+	            },
+	            {
+	                avatar:'images/img2.png',
+	                name:'my**13',
+	                prizeName:'10元红包',
+	                time:'2016.06.08 23:20:08',
+	            }
+	        ]
+    	}
+    	
 
     }
 ];

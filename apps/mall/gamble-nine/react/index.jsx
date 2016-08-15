@@ -9,13 +9,21 @@ const NineActivity = React.createClass({
             usableDraw: true,
             moveNum: 0,
             prize_list:this.props.list.list,    
-            usableScore:this.props.cost.usableScore
+            usableScore:this.props.cost.usableScore,
+            remainTimes:this.props.cost.remainTimes,
+            masker:null,
         }
+    },
+    setRemainTimes:function(n){
+    	this.setState({
+            remainTimes: n
+       });
     },
     showPopPrize: function () {
         this.setState({
-            PopPrize: true
+            showPopPrize: true
         });
+        
     },
     showPopInf: function () {
         this.setState({
@@ -33,11 +41,15 @@ const NineActivity = React.createClass({
         });
     },
     addPriceList: function (prize) {
-        var price_list = [prize].concat(this.state.price_list);
-        this.setState({price_list: price_list});
+    	
+        var price_list = [prize].concat(this.state.prize_list);
+        this.setState({prize_list: price_list});
     },
     setUsableScore: function (n) {        
         this.setState({usableScore:n});
+    },
+    setMasker:function (n) {        
+        this.setState({masker:n});
     },
     
     render: function () {
@@ -59,14 +71,14 @@ const NineActivity = React.createClass({
                     <div className="usable-score">{this.state.usableScore}</div>
                     <div className="my-level">{myLevel}</div>
                 </div>
-                <NineDraw cost={this.props.cost} infinitely={this.props.cost.infinitely} user={this.props.user} addPriceList={this.addPriceList} showPopPrize={this.showPopPrize}/>
+                <NineDraw cost={this.props.cost} masker={this.setMasker} setUsableScore={this.setUsableScore} infinitely={this.props.cost.infinitely} user={this.props.user} addPriceList={this.addPriceList} showPopPrize={this.showPopPrize} setRemainTimes={this.setRemainTimes}/>
 
                 <NineList prize_list={this.state.prize_list}/>
 
                 {this.state.showPopInf ? <PopInf hidePopInf={this.hidePopInf}/> : null}
 
-                <PopPrize infinitely={this.props.cost.infinitely} setUsableScore={this.setUsableScore} showPopPrize={this.state.showPopPrize} hidePopPrize={this.hidePopPrize}
-                          masker={this.state.masker} remainTimes={this.props.cost.remainTimes}/>
+                <PopPrize infinitely={this.props.cost.infinitely} showPopPrize={this.state.showPopPrize} hidePopPrize={this.hidePopPrize}
+                          masker={this.state.masker} remainTimes={this.state.remainTimes}/>
                 <div className="btn-inf-show" onClick={this.showPopInf}></div>
             </div>
         )
@@ -89,17 +101,17 @@ const NineDraw = React.createClass({
     },
     stopRoll: function (n,myPrize) {
         clearInterval(this._timer);
-        var remain = (7 - this.state.masker) + 8 * 2 + n - 1;
+        var remain = (7 - this.state.masker) + 8*2 + n - 1;
         var orig_remain = remain;
         var myDate = new Date();
-        var year=myDate.getYear();
-        var month=myDate.getMonth()+1>=10?myDate.getMonth()+1:'0'+myDate.getMonth()+1;
-        var Mydate=myDate.getDate();        
+        var year=myDate.getFullYear();
+        var month=(myDate.getMonth()+1)>=10?myDate.getMonth()+1:'0'+(myDate.getMonth()+1);
+        var Mydate=myDate.getDate();  
         var myTime=year+"."+month+"."+Mydate;
         var myPrizeList={
         	avatar:this.props.user.avatar,
         	name:this.props.user.userName,
-        	prizeName:'抽中了'+myPrize,
+        	prizeName:myPrize,
         	time:myTime
         };
         var run = () => {
@@ -108,11 +120,9 @@ const NineDraw = React.createClass({
                     this.setState({masker: (this.state.masker + 1) % 8});
                     run()
                 }
-                console.log(remain);
-                if(remain==0){
-                	console.log(this.props.showPopPrize);
-                	this.props.showPopPrize();
-			        this.props.addPriceList(myPrizeList);
+                if(remain==-1){        			
+                	this.props.showPopPrize();                	
+			        this.props.addPriceList(myPrizeList);			        
 			        this._usable=true;
                 }
             }, 1000 / 8 + (orig_remain - remain) * 10);
@@ -131,22 +141,36 @@ const NineDraw = React.createClass({
         
         
         //$FW.Ajax({
-        //    url: '',
+        //    url: API_PATH + '/mall/api/v1/activity/draw.json',
         //    method: 'post',
-        //    data: {},
-        //    success: () => {
+        //    data: {activityId:''},
+        //    success: (data) => {
+        	
         	var data={
-        		prizeMark:7,
-        		prizeName:'1%返息券',
-        		remainTimes:10,
-        		usableScore:300
+        		code:10000,
+        		data:{
+	        		prizeMark:7,
+	        		prizeName:'100元返现券',
+	        		remainTimes:this.state.remainTimes-1,
+	        		usableScore:300
+        		},
+        		message:""
         	};
-        	setTimeout(()=>this.stopRoll(data.prizeMark,data.prizeName), 2000);
-        	this.setState({   
-        		remainTimes:data.remainTimes
-        	});
-        	//this.props.setUsableScore(data.usableScore)
-        //        this.stopRoll()
+        	if(data.code==10000){
+        		//setTimeout(()=>this.stopRoll(data.prizeMark,data.prizeName), 200);
+	        	this.setState({   
+	        		remainTimes:data.data.remainTimes
+	        	});
+	        	this.props.masker(data.data.prizeMark);
+	        	this.props.setRemainTimes(data.data.remainTimes);
+	        	this.stopRoll(data.data.prizeMark,data.data.prizeName);
+	        	this.props.setUsableScore(data.data.usableScore);
+        	}else{
+        		alert("code:"+data.code+" messages"+data.message);
+        	}
+        	
+        	
+        //        
         //    },
         //    fail: () => {
         //        this.hideRoll()
@@ -166,7 +190,7 @@ const NineDraw = React.createClass({
 
 		let score = () => {
 			if(this.props.infinitely) {
-				return <div className="tip-score">无限制抽奖</div>
+				return <div className="tip-score">不限次抽奖</div>
 			} else {
 				return <div className="tip-score">
 					今日剩<span>{this.state.remainTimes}</span>次
@@ -266,7 +290,17 @@ const PopPrize = React.createClass({
         } else if (this.props.masker == 8) {
             prize = "恭喜您，获得1%返息券！";
         };
-        let popPrizeBtn1=this.props.infinitely?'继续抽奖':'今日还有<span>'+this.props.remainTimes+'</span>次机会'
+        let popPrizeBtn1=()=>{
+        	if(this.props.infinitely){
+        		return <div className="pop-prize-btn1" onClick={this.props.hidePopPrize}>
+                           继续抽奖
+                        </div>
+        	}else{
+        		return <div className="pop-prize-btn1" onClick={this.props.hidePopPrize}>
+                           今日还有<span>{this.props.remainTimes}</span>次机会
+                        </div>
+        	}
+        };
 
         return (
             <div className={this.props.showPopPrize?"pop-prize-box on":"pop-prize-box"}>
@@ -274,9 +308,7 @@ const PopPrize = React.createClass({
                     <div className="pop-prize-cnt">
                         <div className="pop-prize-text1">手气爆棚</div>
                         <div className="pop-prize-text2">{prize}</div>
-                        <div className="pop-prize-btn1" onClick={this.props.hidePopPrize}>
-                            {popPrizeBtn1}
-                        </div>
+                            {popPrizeBtn1()}                       
                         <a className="pop-prize-btn2" onClick={this.props.hidePopPrize}>投资赚工分</a>
                     </div>
                     <div className="pop-prize-close" onClick={this.props.hidePopPrize}></div>
@@ -324,9 +356,9 @@ $FW.DOMReady(function () {
 //      //'http://127.0.0.1/activities.json'
 //  ], function (data) {
         var user = data[0], cost = data[1],list=data[2];
-      
+        console.log(user);console.log(cost);console.log(list);
         if (typeof(user) == 'undefined' || typeof(cost) == 'undefined' || typeof(list) == 'undefined') $FW.Component.Alert('error: empty data received');
-        ReactDOM.render(<NineActivity user={user} cost={cost} list={list}/>,
+        ReactDOM.render(<NineActivity user={user.data} cost={cost.data} list={list.data}/>,
         document.getElementById('cnt'));
 //  }, true);
     
