@@ -37,14 +37,16 @@ const Mall = React.createClass({
         };
 
         return (
-            <div>
+            <div className="head-wrap">
                 {this.props.banners.length ?
                     <BannerGroup className="head-images" images={this.getHeadImages()}
                                  onImageClick={this.onImageClickHandler}/> :
                     <div className="no-banner"></div>}
-
-
-
+                <div className="head-items">
+                    <img src="images/m-logo.png"/>
+                    <input type="text" value=""/>
+                    <a href=""><img src="images/profile-icon.png"/></a>
+                </div>
                 <div className="header-nav">
                     <a className="recharge" onClick={function(){ gotoHandler("/recharge_phone",true) }}>话费充值</a>
                     <a className="vip" onClick={function(){ gotoHandler("/vip_zone") }}>VIP专区</a>
@@ -160,9 +162,4 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
     }, true);
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title_img='images/dg-mall-title.png' show_back_btn={!$FW.Browser.inApp()}
-                                back_handler={ () => location.href = 'http://m.9888.cn' }/>,
-            document.getElementById('header'));
-    }
 });
