@@ -19,7 +19,8 @@ const MAIN_APP_NAMES = [
     'first-page',
     'cash',
     'special-cash',
-    'verify-identity'
+    'verify-identity',
+    'app-download'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
