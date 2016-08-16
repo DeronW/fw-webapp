@@ -65,18 +65,7 @@ const Recharge = React.createClass({
     },
 
     reloadNetHandler: function(operator){
-        var code;
-        switch(this.state.operator) {
-            case 'operator == "mobile"':
-                code = 1034;
-                break;
-            case 'operator == "union"':
-                code = 1032;
-                break;
-            case 'operator == "tele"':
-                code = 1033;
-        }
-
+        var code = operator == 'mobile' ? 1034 : (operator == "union" ? 1032 : 1033);
         $FW.Ajax({
             url: API_PATH + 'api/v1/phone/net/recharge.json',
             enable_loading: true,
@@ -186,7 +175,8 @@ const Recharge = React.createClass({
             this.setState({
                 user_score: this.state.user_score - this.state.fee_pay_score
             })
-        }else if(this.state.tab == 'net'){
+        }
+        if(this.state.tab == 'net'){
             this.setState({
                 user_score: this.state.user_score - this.state.net_pay_score
             })
