@@ -34,7 +34,7 @@ const Recharge = React.createClass({
         if (this.state.tab == 'net') {
             var opt = this.getOperator(this.state.phone);
             if(opt == 'unknown' || opt == 'invalid') opt = 'union';
-            setTimeout(()=>this.reloadNetHandler(opt),2000);
+            this.reloadNetHandler(opt);
             //$FW.Component.Alert("正在建设中，敬请期待！");
         }
     },
