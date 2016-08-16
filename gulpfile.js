@@ -9,6 +9,8 @@ gulp.task('default', function (done) {
 const MAIN_APP_NAMES = [
     'user-level',
     'user-contribute',
+
+    // 徽商相关页面
     'bind-bank-card',
     'hui-shang-bank',
     'hui-shang-user',
@@ -20,6 +22,9 @@ const MAIN_APP_NAMES = [
     'cash',
     'special-cash',
     'verify-identity',
+
+    // 旧页面重构
+    'about-us',
     'app-download'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
