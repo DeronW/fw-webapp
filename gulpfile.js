@@ -9,6 +9,8 @@ gulp.task('default', function (done) {
 const MAIN_APP_NAMES = [
     'user-level',
     'user-contribute',
+
+    // 徽商相关页面
     'bind-bank-card',
     'hui-shang-bank',
     'hui-shang-user',
@@ -19,7 +21,11 @@ const MAIN_APP_NAMES = [
     'first-page',
     'cash',
     'special-cash',
-    'verify-identity'
+    'verify-identity',
+
+    // 旧页面重构
+    'about-us',
+    'app-download'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
@@ -59,11 +65,13 @@ const MALL_APP_NAMES = [
     'deliver-address',
     'new-deliver-address',
     'error-page',
-    'gamble-nine'
+    'gamble-nine',
+    'new-home'
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
-    var common_components = ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx'];
+    var common_components = ['mall/header.jsx', 'loading.jsx',
+        'alert.jsx', 'banner-group.jsx', 'toast.jsx'];
     var common_js = ['javascripts/mall/fw-ajax-error-handler.js'];
 
     gt('mall', i, {

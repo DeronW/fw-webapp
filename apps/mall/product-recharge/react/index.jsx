@@ -16,24 +16,28 @@ const Recharge = React.createClass({
             phone: '',
             format_phone: '',
             price: '',
-            operator: 'union'
+            operator: ''
         }
     },
     componentDidMount: function () {
-       this.switchState();
+       this.switchState('fee');
     },
 
-    tabClickHandler: function(tab){
-        this.setState({tab:tab}, ()=>this.switchState());
-    },
-
-    switchState: function(){
-        if (this.state.tab == 'fee') {
+    switchState: function(tab){
+        if (tab == 'fee') {
             this.reloadFeeHandler();
+        } else if (tab == 'net') {
+            var opt = this.getOperator(this.state.phone);
+            if(opt == 'unknown' || opt == 'invalid') opt = 'mobile';
+            this.reloadNetHandler(opt);
         }
-        if (this.state.tab == 'net') {
-            this.reloadNetHandler();
-            //$FW.Component.Alert("正在建设中，敬请期待！");
+
+        if(tab != this.state.tab) {
+            this.setState({
+                tab: tab,
+                phone: '',
+                operator:''
+            })
         }
     },
 
@@ -61,7 +65,18 @@ const Recharge = React.createClass({
     },
 
     reloadNetHandler: function(operator){
-        var code = operator == 'union' ? 1032 : (operator == 'mobile' ? 1034 : 1033)
+        var code;
+        switch(this.state.operator) {
+            case 'operator == "mobile"':
+                code = 1034;
+                break;
+            case 'operator == "union"':
+                code = 1032;
+                break;
+            case 'operator == "tele"':
+                code = 1033;
+        }
+
         $FW.Ajax({
             url: API_PATH + 'api/v1/phone/net/recharge.json',
             enable_loading: true,
@@ -78,33 +93,44 @@ const Recharge = React.createClass({
                 this.setState({
                     net_pay_score: pay_score,
                     bizNo: data.defaultBizNo,
-                    product_fee: data.fee,
-                    operator: operator
+                    product_fee: data.fee
                 })
             }.bind(this)
         });
     },
 
-    switchNetData: function(phone){
-
+    getOperator: function(phone){
         var mobile_reg = /^1(3[4-9]|4[7]|5[012789]|7[8]|8[23478])\d{8}$/;
         var union_reg = /^1(3[0-2]|4[5]|5[56]|7[156]|8[56])\d{8}$/;
         var tele_reg = /^1(3[3]|4[9]|5[3]|7[37]|8[019])\d{8}$/;
         var virtual_reg = /^170\d{8}$/;
-
-        console.log(mobile_reg.test(phone))
-        console.log(phone)
+        var r;
 
         if(mobile_reg.test(phone)){
-            this.reloadNetHandler('mobile')
+            r = 'mobile'
         } else if(union_reg.test(phone)){
-            this.reloadNetHandler('union')
+            r = 'union'
         } else if(tele_reg.test(phone)){
-            this.reloadNetHandler('tele')
+            r = 'tele'
         } else if(virtual_reg.test(phone)){
-            $FW.Component.Alert("暂不支持虚拟运营商号段！");
-        } else {if(phone.length == 11)
+            r = 'virtual'
+        } else if(phone.length == 11){
+            r = 'unknown'
+        } else {
+            r = 'invalid'
+        }
+        return r
+    },
+
+    switchNetData: function(phone){
+        var operator = this.getOperator(phone);
+        if(operator == 'unknown') {
             $FW.Component.Alert("该号码不能识别！");
+        } else if (operator == 'virtual') {
+            $FW.Component.Alert("暂不支持虚拟运营商号段！");
+        } else {
+            if(operator != this.state.operator && operator != 'unknow' && operator != 'invalid' )
+            this.reloadNetHandler(operator);
         }
     },
 
@@ -116,8 +142,15 @@ const Recharge = React.createClass({
         if(v.length > 8) v = v.substr(0, 8) + ' ' + v.substring(8, 12);
 
         let phone = v.replace(/ /g, '');
-        this.setState({phone: phone, format_phone: v});
+        this.setState({
+            phone: phone,
+            format_phone: v
+        });
 
+        var opt = this.getOperator(phone);
+        if(opt != 'invalid') this.setState({operator: opt});
+
+        if(this.state.tab == 'net')
         this.switchNetData(phone);
     },
 
@@ -149,17 +182,44 @@ const Recharge = React.createClass({
     },
 
     costPayScore: function(){
-        this.setState({
-            user_score: this.state.user_score - this.state.fee_pay_score
-        })
+        if(this.state.tab == 'fee'){
+            this.setState({
+                user_score: this.state.user_score - this.state.fee_pay_score
+            })
+        }else if(this.state.tab == 'net'){
+            this.setState({
+                user_score: this.state.user_score - this.state.net_pay_score
+            })
+        }
     },
+    getOperatorName: function(){
+        var name;
+        if(!this.state.phone) return;
+
+        switch(this.state.operator) {
+            case 'union':
+                name = '中国联通';
+                break;
+            case 'mobile':
+                name = '中国移动';
+                break;
+            case 'tele':
+                name = '中国电信';
+                break;
+            default:
+                name = '';
+        }
+        return name
+    },
+
+    emptyHandler: function() {
+        this.setState({phone: ''});
+    },
+
     render: function () {
 
         let _this = this;
 
-        function emptyHandler() {
-            _this.setState({phone: ''});
-        }
 
         let phoneInput = (
             <div className="phonenumber-wrap">
@@ -167,7 +227,8 @@ const Recharge = React.createClass({
                 <input type="number" className="phone-input" placeholder="请输入手机号" number="true"
                        value={this.state.phone}
                        onChange={this.changeValueHandler}/>
-                <span className="phone-empty" onClick={emptyHandler}></span>
+                <span className="phone-operator">{this.getOperatorName()}</span>
+                <span className="phone-empty" onClick={this.emptyHandler}></span>
             </div>
         );
 
@@ -238,7 +299,7 @@ const Recharge = React.createClass({
             return (
                 <div className="tab-innerwrap">
                     <span key={i} className={i==_this.state.tab ? "recharge-tab active" : "recharge-tab"}
-                         onClick={function(){_this.tabClickHandler(i)}}>
+                         onClick={function(){_this.switchState(i)}}>
                         <span>{name[i]}</span>
                     </span>
                </div>
@@ -368,7 +429,8 @@ const ConfirmPop = React.createClass({
                             show: false,
                             show_warn:false,
                             remain:0,
-                            value:''
+                            value:'',
+                            loading:false
                         });
                         window.rechargePanel.costPayScore();
                         $FW.Component.Alert("充值成功！");

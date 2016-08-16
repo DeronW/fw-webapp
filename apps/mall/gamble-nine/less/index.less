@@ -1,7 +1,11 @@
 html, body {
   margin: 0;
   background-color: #ebebee;
-  font-family: "Microsoft YaHei", Arial, Helvetica, simhei, sans-serif;
+  font-family: "Microsoft YaHei", Arial, Helvetica, simhei, sans-serif;  
+  height:100%;
+}
+html{
+    
 }
 
 img {
@@ -218,9 +222,9 @@ ul, ol, li {
   .Nine-list-ul {
     width: 594px;
     position: absolute;
-
+    top:0;
+    left:0;
     .Nine-list-li {
-      display: inline-table;
       width: 594px;
       height: 76px;
       div {
@@ -252,15 +256,11 @@ ul, ol, li {
         color: #0c66a3;
       }
     }
-
   }
-
 }
-
 .pop-prize-box.on {
   display: block;
 }
-
 .pop-prize-box {
   display: none;
   z-index: 1000;
@@ -430,4 +430,49 @@ ul, ol, li {
   right: 0;
   width: 120px;
   height: 120px;
+}
+.alert-box{
+   z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  .alert-masker{
+    z-index: 1001;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(1, 18, 29, 0.7);
+  }
+  .alert-cont{
+    z-index: 1002;
+    position:absolute;
+    top:300px;
+    left:63px;
+    width:534px; 
+    padding:30px;
+    background-color:#fff;
+    border-radius:10px;
+    .alert-text{
+        padding:30px 0 60px;
+        text-align: center;
+        font-size:36px;
+        color:#333;
+        line-height:56px;
+    }
+    .alert-btn{
+        width:100%;
+        height:66px;
+        line-height:66px;
+        color:#fff;
+        font-size:28px;
+        text-align: center;
+        background-color:#fd4d4c ;
+        border-radius:3px;
+    }
+  }
+    
 }

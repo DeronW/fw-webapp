@@ -1,50 +1,45 @@
 const GlobalToast = React.createClass({
-    getInitialState: function() {
-        return {
-            objW: 0,
-            oTimer: false
-        };
+    getDefaultProps: function () {
+        return {duration: 2000, animation: 200}
     },
-    componentDidMount: function() {
-        var _this = this;
-
-        this.timeoutId = setTimeout(function() {
-            _this.setState({
-                oTimer: true
-            });
-
-            _this.props.unMountToast();    
-            ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
-        }, 1500);
-
+    getInitialState: function () {
+        return {offset: 0, opacity: 0};
+    },
+    componentDidMount: function () {
+        this.timer = setTimeout(this.hideHandler, this.props.duration);
         this.setState({
-            objW: ReactDOM.findDOMNode(this.refs.wDom).offsetWidth
+            offset: ReactDOM.findDOMNode(this.refs.self).offsetWidth,
+            opacity: '1'
         });
     },
-    componentWillUnmount: function() {
-        clearTimeout(this.timeoutId);
+    hideHandler: function () {
+        this.setState({opacity: 0});
+        setTimeout(()=> {
+            ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
+        }, this.props.animation)
     },
-    render: function() {
-        var w = -(this.state.objW / 2);
+    componentWillUnmount: function () {
+        clearTimeout(this.timer);
+        this.props.unMountToast && this.props.unMountToast();
+    },
+    render: function () {
+        var w = -(this.state.offset / 2);
 
         let style = {
             position: "fixed",
             top: "50%",
             left: "50%",
             height: "30px",
-            margin: "-100px 0 0 " + w + 'px',
-            padding: "28px 38px",
+            margin: "-80px 0 0 " + w + 'px',
+            padding: "18px 28px",
             color: "#fff",
-            fontSize: "33px",
+            fontSize: "28px",
             backgroundColor: "rgba(0, 0, 0, 0.6)",
+            transition: "opacity " + this.props.animation + "ms ease-in-out",
+            opacity: this.state.opacity,
             borderRadius: "5px"
         };
 
-
-        return (
-            <div className="">
-                {this.state.oTimer ? null : <div className="error-tip" style={style} ref="wDom">{this.props.info_text}</div>}
-            </div>
-        );
+        return <div className="error-tip" style={style} ref="self">{this.props.text}</div>
     }
 });
