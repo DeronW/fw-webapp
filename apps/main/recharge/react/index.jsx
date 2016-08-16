@@ -1,11 +1,31 @@
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"充值"} back_handler={backward}/>, document.getElementById('header'));
+	$FW.Ajax({
+		url:"http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
+		success : function(data){
+			ReactDOM.render(<CashRech item={data} />,document.getElementById("cnt"))
+		}
+	})
 });
 
 function backward(){
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
 
+
+const CashRech = React.createClass({
+	render : function(){
+		return (
+			<div>
+				<Mask item={this.props.item}/>
+				<Attract item={this.props.item}/>
+				<Sup item={this.props.item}/>
+				<Branch item={this.props.item}/>
+				<Warm item={this.props.item}/>
+			</div>
+		)
+	}
+})
 
 const Mask = React.createClass({
 	render : function(){
@@ -22,20 +42,31 @@ const Mask = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Mask />,document.getElementById('masker'));
+
 
 
 const Attract = React.createClass({
 		render : function(){
+			var logo=this.props.item.bankLogo;
+			var bankName=this.props.item.bankName;
+			var name=this.props.item.username;
+			var ID=this.props.item.cardNumber;
+			var validate=this.props.item.validate;
 			return (
 				<div className="bank">
-					<div className="name">{this.props.name}</div>
-					<div className="num">{this.props.num}</div>
+					<div className="ash clearfix">
+						<div className="img"><img src={logo} /></div>
+						<div className="bankname">{bankName}</div>
+					</div>
+					<div className="belon">
+						<div className="name">{name}</div>
+						<div className="num">{ID}</div>
+					</div>
 				</div>
 			)
 		}
 	})
-ReactDOM.render(<Attract name="张克川" num="6225********1726" />,document.getElementById('bind'));
+
 
 const Sup = React.createClass({
 	render : function(){
@@ -44,16 +75,16 @@ const Sup = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Sup />,document.getElementById('support'));
+
 
 const Branch = React.createClass({
 	render : function(){
 		return (
 			<div className="modify">
-				<div className="money">输入充值金额，最低1元</div>
-				<div className="money hao">输入银行预留手机号</div>
+				<div className="money"><input className="recha" type="text" placeholder="输入充值金额，最低1元" /></div>
+				<div className="money hao"><input className="recha" type="text" placeholder="输入银行预留手机号"/></div>
 				<div className="form clearfix">
-					<div className="srcode">请输入验证码</div>
+					<div className="srcode"><input type="text" className="code" placeholder="请输入验证码"/></div>
 					<div className="gqm">获取验证码</div>
 				</div>
 				<div className="credit">充值</div>
@@ -61,7 +92,7 @@ const Branch = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Branch />,document.getElementById('bran'));
+
 
 const Warm = React.createClass({
 	render : function(){
@@ -78,7 +109,7 @@ const Warm = React.createClass({
 		)
 	}
 })
-ReactDOM.render(<Warm />,document.getElementById('warm'))
+
 
 
 

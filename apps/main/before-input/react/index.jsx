@@ -13,21 +13,21 @@ const Input = React.createClass({
 			<div className="wrap">
 				<div className="name clearfix">
 					<img src="images/bf-a.png"/>
-					<div className="knight">吕骑士</div>
+					<div className="knight"><input type="text" className="textbox" placeholder="吕骑士" /></div>
 				</div>
 				
 				<div className="wire"></div>
 				
 				<div className="name clearfix">
 					<img src="images/bf-b.png"/>
-					<div className="knight">1101**********6353</div>
+					<div className="knight"><input type="text" className="textbox" placeholder="1101**********6353" /></div>
 				</div>
 				
 				<div className="wire"></div>
 				
 				<div className="name clearfix">
 					<img src="images/bf-c.png"/>
-					<div className="knight sr">请输入银行卡号</div>
+					<div className="knight sr"><input type="text" className="textbox" placeholder="请输入银行卡号" /></div>
 				</div>
 				
 				<div className="wire"></div>
@@ -44,7 +44,7 @@ const Input = React.createClass({
 				<div className="wire"></div>
 				
 				<div className="name clearfix">
-					<div className="khy">请输入验证码</div>
+					<div className="khy"><input type="text" className="yzm" placeholder="请输入验证码" /></div>
 					<div className="yzt">
 						<span className="gry">|</span>
 						<span className="zmy">获取验证码</span>
@@ -60,7 +60,7 @@ ReactDOM.render(<Input />,document.getElementById('inpt'));
 const Lv = React.createClass({
 	render : function(){
 		return (
-			<div className="phone">已向手机177****0331发送短信验证码，若收不到，请<a className="dot" href="">点击这里</a>获取语音验证码。</div>
+			<div className="phone">已向手机<span className="">177****0331</span>发送短信验证码，若收不到，请<a className="dot" href="">点击这里</a>获取语音验证码。</div>
 		)
 	}
 })

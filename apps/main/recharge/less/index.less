@@ -3,8 +3,14 @@ body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fo
 body, html{position:relative;margin:0 auto;background-color:#ebebee;}
 body{background-color:#ebebee;color: #555; min-height:100%;height:auto!important; height:100%;}
 body,button,input,select,textarea,h1,h2,h3,h4,h5,h6{font-family:"Microsoft YaHei",Arial,Helvetica,simhei,sans-serif;}
+input[type="submit"],input[type="text"],input[type="tel"],input[type="number"],input[type="button"],input[type="password"]{-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);-webkit-tap-highlight-color:transparent;line-height:normal;}
+input,label,button,textarea,select{border:medium none;font-family:"Microsoft YaHei",Arial,Helvetica,simhei,sans-serif;}
+input:focus{outline:0;}
 a:active,a:focus{outline:0;}
 a{text-decoration: none;}
+input[type=checkbox],input[type=radio] {
+    vertical-align:middle;
+}
 
 .clearfix:after {
     content:'';
@@ -86,15 +92,31 @@ a{text-decoration: none;}
 .bank{
     width: 644px;
     height: 318px;
-    background: url(../images/bind-a.png) no-repeat;
+    background: url(../images/card-b.png) no-repeat;
     margin: 0 auto;
-    margin-top: 138px;
+    margin-top: 80px;
+}
+
+.ash{
+    height: 111px;
+    line-height: 111px;
+}
+
+.img{
+    float: left;
+    margin-left: 39px;
+    margin-right: 19px;
+}
+
+.bankname{
+    font-size: 40px;
+    color: #555555;
 }
 
 .name{
     font-size: 34px;
     color: #555555;
-    padding-top: 194px;
+    padding-top: 76px;
     text-indent: 40px;
 }
 
@@ -129,9 +151,15 @@ a{text-decoration: none;}
     border: 1px solid #d8d8d8;
     background: white;
     border-radius: 12px;
+}
+
+.recha{
+    width: 92%;
     font-size: 32px;
     color: #cccccc;
     text-indent: 19px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .hao{
@@ -150,9 +178,15 @@ a{text-decoration: none;}
     border: 1px solid #d8d8d8;
     background: white;
     border-radius: 12px;
+    
+}
+
+.code{
     font-size: 32px;
     color: #cccccc;
     text-indent: 19px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .gqm{
