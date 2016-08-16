@@ -57,7 +57,9 @@ const NineActivity = React.createClass({
     addPriceList: function (prize) {
     	
         var price_list = [prize].concat(this.state.prize_list);
+        
         this.setState({prize_list: price_list});
+       
     },
     setUsableScore: function (n) {        
         this.setState({usableScore:n});
@@ -140,7 +142,8 @@ const NineDraw = React.createClass({
                 }
                 if(remain==-1){        			
                 	this.props.showPopPrize();                	
-			        this.props.addPriceList(myPrizeList);			        
+			        this.props.addPriceList(myPrizeList);	
+			        
 			        this._usable=true;
                 }
             }, 1000 / 8 + (orig_remain - remain) * 10);
@@ -165,7 +168,7 @@ const NineDraw = React.createClass({
         //    success: (data) => {
         	
         	var data={
-        		code:100001,
+        		code:10000,
         		data:{
 	        		prizeMark:7,
 	        		prizeName:'100元返现券',
@@ -241,26 +244,29 @@ const NineList = React.createClass({
         }
     },
     componentDidMount: function () {
-        this.props.prize_list.length>1?this.startScroll():null;
+        this.startScroll()
+         console.log(this.props.prize_list);
     },
     startScroll: function () {
         this._timer = setInterval(this.moveUp, 2000);
     },
     moveUp: function () {
-        var next_p = this.state.position + 2;
-        this.setState({
-            position: this.state.position + 2,
-            with_animate: true
-        }, ()=> {
-            if (next_p >= this.props.prize_list.length) {
-                setTimeout(function () {
-                    this.setState({
-                        with_animate: false,
-                        position: 0
-                    })
-                }.bind(this), 1000)
-            }
-        });
+    	if(this.props.prize_list.length>2){
+	        var next_p = this.state.position + 2;
+	        this.setState({
+	            position: this.state.position + 2,
+	            with_animate: true
+	        }, ()=> {
+	            if (next_p >= this.props.prize_list.length) {
+	                setTimeout(function () {
+	                    this.setState({
+	                        with_animate: false,
+	                        position: 0
+	                    })
+	                }.bind(this), 1000)
+	            }
+	        });
+        }
     },
     render: function () {
         let prize = (d, index) => {
@@ -281,7 +287,7 @@ const NineList = React.createClass({
                     className={this.state.with_animate ? "Nine-list-ul with-animate" : "Nine-list-ul"}
                     style={{top: -152 * this.state.position / 2+'px'}}>
                     {prize_list.map(prize)}
-                    {prize_list.length>1?[prize_list[0], prize_list[1]].map(prize):null}
+                    {prize_list.length>2?[prize_list[0], prize_list[1]].map(prize):null}
                 </div>
             </div>
         );
