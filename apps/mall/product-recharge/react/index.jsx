@@ -175,7 +175,8 @@ const Recharge = React.createClass({
             this.setState({
                 user_score: this.state.user_score - this.state.fee_pay_score
             })
-        }else if(this.state.tab == 'net'){
+        }
+        if(this.state.tab == 'net'){
             this.setState({
                 user_score: this.state.user_score - this.state.net_pay_score
             })
