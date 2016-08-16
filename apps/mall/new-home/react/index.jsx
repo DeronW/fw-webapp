@@ -14,7 +14,7 @@ function gotoHandler(link, need_login) {
 }
 
 const Mall = React.createClass({
-
+     
 
 
 
