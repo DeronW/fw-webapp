@@ -12,6 +12,8 @@ const NineActivity = React.createClass({
             usableScore:this.props.cost.usableScore,
             remainTimes:this.props.cost.remainTimes,
             masker:null,
+            showAlertMessage:false,
+            alertMessage:''
         }
     },
     setRemainTimes:function(n){
@@ -23,27 +25,35 @@ const NineActivity = React.createClass({
     showPopPrize: function () {
         this.setState({
             showPopPrize: true
-        });
-        this.bodyScroll();        
+        });     
     },
     showPopInf: function () {
         this.setState({
             showPopInf: true
-        });
-        this.bodyScroll();        
+        });      
     },
     hidePopInf: function () {
         this.setState({
             showPopInf: false
         });
-        this.bodyScroll();
     },
     hidePopPrize: function () {
         this.setState({
             showPopPrize: false
         });
-        this.bodyScroll();
     },
+    showAlertMessage: function (message) {
+        this.setState({
+        	alertMessage:message,
+            showAlertMessage: true
+        });
+    },
+    hideAlertMessage: function () {
+        this.setState({
+            showAlertMessage: false
+        });
+    },
+
     addPriceList: function (prize) {
     	
         var price_list = [prize].concat(this.state.prize_list);
@@ -54,19 +64,6 @@ const NineActivity = React.createClass({
     },
     setMasker:function (n) {        
         this.setState({masker:n});
-    },
-    bodyScroll:function(){    	
-    	var objBody=document.body; 
-    	var _that=this;
-        setTimeout(function(){
-        	if(_that.state.showPopInf||_that.state.showPopPrize){
-	    		objBody.style.overflowY='hidden';
-	    	}else{
-	    		objBody.style.overflowY='auto';
-	    	}
-        },0);
-    	
-    	
     },
     
     render: function () {
@@ -88,7 +85,9 @@ const NineActivity = React.createClass({
                     <div className="usable-score">{this.state.usableScore}</div>
                     <div className="my-level">{myLevel}</div>
                 </div>
-                <NineDraw cost={this.props.cost} masker={this.setMasker} setUsableScore={this.setUsableScore} infinitely={this.props.cost.infinitely} user={this.props.user} addPriceList={this.addPriceList} showPopPrize={this.showPopPrize} setRemainTimes={this.setRemainTimes}/>
+                <NineDraw cost={this.props.cost} masker={this.setMasker} setUsableScore={this.setUsableScore} infinitely={this.props.cost.infinitely}
+                user={this.props.user} addPriceList={this.addPriceList} showAlertMessage={this.showAlertMessage}
+                showPopPrize={this.showPopPrize} setRemainTimes={this.setRemainTimes}/>
 
                 <NineList prize_list={this.state.prize_list}/>
 
@@ -97,6 +96,8 @@ const NineActivity = React.createClass({
                 <PopPrize infinitely={this.props.cost.infinitely} showPopPrize={this.state.showPopPrize} hidePopPrize={this.hidePopPrize}
                           masker={this.state.masker} remainTimes={this.state.remainTimes}/>
                 <div className="btn-inf-show" onClick={this.showPopInf}></div>
+                {this.state.showAlertMessage ? <AlertMessage hideAlertMessage={this.hideAlertMessage} showAlertMessage={this.showAlertMessage} alertMessage={this.state.alertMessage} /> : null}
+            	
             </div>
         )
     }
@@ -114,7 +115,7 @@ const NineDraw = React.createClass({
     startRoll: function () {
         this._timer = setInterval(()=> {
             this.setState({masker: (this.state.masker + 1) % 8})
-        }, 1000 / 8);
+        }, 800 / 8);
     },
     stopRoll: function (n,myPrize) {
         clearInterval(this._timer);
@@ -154,7 +155,7 @@ const NineDraw = React.createClass({
         if (!this._usable) return;
         if (this.state.remainTimes < 1) return;
         this._usable=false;
-        this.startRoll();
+        //this.startRoll();
         
         
         //$FW.Ajax({
@@ -164,14 +165,14 @@ const NineDraw = React.createClass({
         //    success: (data) => {
         	
         	var data={
-        		code:10000,
+        		code:100001,
         		data:{
 	        		prizeMark:7,
 	        		prizeName:'100元返现券',
 	        		remainTimes:this.state.remainTimes-1,
 	        		usableScore:300
         		},
-        		message:""
+        		message:"工分不足，请投资后再试哦！"
         	};
         	if(data.code==10000){
         		//setTimeout(()=>this.stopRoll(data.prizeMark,data.prizeName), 200);
@@ -183,10 +184,10 @@ const NineDraw = React.createClass({
 	        	this.stopRoll(data.data.prizeMark,data.data.prizeName);
 	        	this.props.setUsableScore(data.data.usableScore);
         	}else{
-        		alert("code:"+data.code+" messages"+data.message);
+        		this._usable=true;
+        		this.props.showAlertMessage(data.message);
         	}
-        	
-        	
+        	        	
         //        
         //    },
         //    fail: () => {
@@ -354,6 +355,19 @@ const PopInf = React.createClass({
                 </div>
                 <div className="pop-inf-light"></div>
                 <div className="pop-inf-masker"></div>
+            </div>
+        )
+    }
+});
+const AlertMessage = React.createClass({
+    render: function () {
+        return (
+            <div className="alert-box">
+                <div className="alert-cont">
+                    <div className="alert-text">{this.props.alertMessage}</div>
+                    <div className="alert-btn" onClick={this.props.hideAlertMessage}>确定</div>
+                </div>
+                <div className="alert-masker"></div>
             </div>
         )
     }
