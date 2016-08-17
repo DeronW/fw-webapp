@@ -77,7 +77,7 @@ MALL_APP_NAMES.forEach(function (i) {
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://localhost/',
+        api_path: 'http://localhost/fake-api/',
         include_components: common_components,
         include_common_js: common_js,
         width_swipe: true
