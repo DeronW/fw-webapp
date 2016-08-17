@@ -27,30 +27,30 @@ var data=[
     {   code:10000,
     	data:{
     		list:[
-//	            {
-//	                avatar:'images/img4.png',
-//	                name:'0',
-//	                prizeName:'100元返现券',
-//	                time:'2016.06.08 23:20:08',
-//	            },
-//	            {
-//	                avatar:'images/img1.png',
-//	                name:'1',
-//	                prizeName:'5元红包',
-//	                time:'2016.06.08 23:20:08',
-//	            },
-//	            {
-//	                avatar:'images/img3.png',
-//	                name:'2',
-//	                prizeName:'50元红包',
-//	                time:'2016.06.08 23:20:08',
-//	            },
-//	            {
-//	                avatar:'images/img2.png',
-//	                name:'my**13',
-//	                prizeName:'10元红包',
-//	                time:'2016.06.08 23:20:08',
-//	            }
+	            {
+	                avatar:'images/img4.png',
+	                name:'0',
+	                prizeName:'100元返现券',
+	                time:'2016.06.08 23:20:08',
+	            },
+	            {
+	                avatar:'images/img1.png',
+	                name:'1',
+	                prizeName:'5元红包',
+	                time:'2016.06.08 23:20:08',
+	            },
+	            {
+	                avatar:'images/img3.png',
+	                name:'2',
+	                prizeName:'50元红包',
+	                time:'2016.06.08 23:20:08',
+	            },
+	            {
+	                avatar:'images/img2.png',
+	                name:'my**13',
+	                prizeName:'10元红包',
+	                time:'2016.06.08 23:20:08',
+	            }
 	        ]
     	}
     	
