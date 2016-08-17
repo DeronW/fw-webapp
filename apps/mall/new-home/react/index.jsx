@@ -43,9 +43,16 @@ const Mall = React.createClass({
                                  onImageClick={this.onImageClickHandler}/> :
                     <div className="no-banner"></div>}
                 <div className="head-items">
-                    <img src="images/m-logo.png"/>
-                    <input type="text" value=""/>
-                    <a href=""><img src="images/profile-icon.png"/></a>
+                    <img className="m-logo" src="images/m-logo.png"/>
+                    <input className="search-bar" type="text" value="" placeholder="搜索"/>
+                    <img className="search-icon" src="images/search-icon.png"/>
+                    <a className="index-avatar" onClick={function(){ gotoHandler("/user", true) }}><img src="images/profile-icon.png"/></a>
+                </div>
+                <div className="head-user-info">
+                     <div className="my-score"><span className="my-score-icon"></span>我的工分:<span className="score-num">250000000工分</span></div>
+                     <a className="my-exchange" onClick={function(){ gotoHandler("/user") }}><span className="my-exchange-icon"></span>我可兑换</a>
+                     <a className="my-mall" onClick={function(){ gotoHandler("/user", true) }}><span className="my-mall-icon"></span>我的商城</a>
+                     <span className="vertical-line"></span>
                 </div>
                 <div className="header-nav">
                     <a className="recharge" onClick={function(){ gotoHandler("/recharge_phone",true) }}>话费充值</a>

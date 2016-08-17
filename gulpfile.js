@@ -66,7 +66,8 @@ const MALL_APP_NAMES = [
     'new-deliver-address',
     'error-page',
     'gamble-nine',
-    'new-home'
+    'new-home',
+    'product-search'
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
@@ -76,7 +77,7 @@ MALL_APP_NAMES.forEach(function (i) {
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://10.105.6.73:8081/',
+        api_path: 'http://localhost/',
         include_components: common_components,
         include_common_js: common_js,
         width_swipe: true
