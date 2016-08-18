@@ -1,368 +1,447 @@
-a{
-     text-decoration: none;
-}
-input{
-     border: 0;
-     -webkit-appearance: none;
-}
-input.sms-input::-webkit-input-placeholder{
-     line-height:normal;
-}
-html,body{
-     width:100%;
-     height:100%;
-     background:#ebebee;
-     margin: 0;
-}
-.tab-wrap{
-     height:88px;
-     border-bottom:1px solid #dedede;
-}
-.recharge-wrap{
-     height:85px;
-     line-height:85px;
-     background:#fff;
-     margin-bottom:3px;
-     position:relative;
-}
-.recharge-tab{
-     display:inline-block;
-     font-size:28px;
-     color:#555;
-     padding:0 10px;
-}
-.active{
-     color:#fd4d4c;
-     border-bottom:3px solid #fd4d4c;
-}
-.phonenumber-wrap{
-     background:#fff;
-     border-top:1px solid #d8d8d8;
-     border-bottom:1px solid #d8d8d8;
-     margin-top:9px;
-     margin-bottom:19px;
-     position:relative;
-}
-.phone-input{
-     border:none;
-     outline:none;
-     width:595px;
-     font-size:36px;
-     padding:32px 20px 26px 80px;
-     color:#4b4d4c;
-     line-height:normal;
-     -webkit-tap-highlight-color:rgba(0,0,0,0);
-}
-.phone-icon{
-     position:absolute;
-     top:32px;
-     left:31px;
-     display:inline-block;
-     background:url(../images/phone-icon.png) no-repeat;
-     width:29px;
-     height:42px;
-}
-.phone-empty{
-     position:absolute;
-     top:32px;
-     right:31px;
-     display:inline-block;
-     background:url(../images/empty.png) no-repeat;
-     width:44px;
-     height:44px;
-}
-.value-wrap{
-     padding-left:30px;
-}
-.value-box .value-num{
-     display:inline-block;
-     width:200px;
-     height:144px;
-     border:1px solid #fff;
-     font-size:42px;
-     color:#666666;
-     text-align:center;
-     line-height:146px;
-     background:#fff;
-}
-.value-box{
-     display:inline-block;
-     width:204px;
-     height:148px;
-     border:1px solid #d8d8d8;
-     margin-right:22px;
-     margin-bottom:19px;
-     position:relative;
-     box-sizing: border-box;
+a {
+  text-decoration: none;
 }
 
-.value-box.selected{
-     border:1px solid #fd4d4d;
+input {
+  border: 0;
+  -webkit-appearance: none;
 }
 
-.value-box.selected .value-num{
-     border:1px solid #fd4d4d;
+input.sms-input::-webkit-input-placeholder {
+  line-height: normal;
 }
 
-.default-selected{
-     display:block;
-     background:url(../images/selected-icon.png) no-repeat;
-     width:61px;
-     height:56px;
-     position:absolute;
-     right:-1px;
-     bottom:-1px;
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #ebebee;
+  margin: 0;
 }
 
-.payment-wrap{
-     height:177px;
-     border-top:1px solid #d6d7d9;
-     border-bottom:1px solid #d6d7d9;
-     background:#fff;
-     padding:0 30px;
+.tab-wrap {
+  height: 88px;
+  border-bottom: 1px solid #dedede;
 }
-.payment-way{
-     height:88px;
-     line-height:88px;
-     font-size:26px;
-     color:#999;
-     border-bottom:1px solid #e3e5ea;
-     position:relative;
+
+.recharge-wrap {
+  height: 85px;
+  line-height: 85px;
+  background: #fff;
+  margin-bottom: 3px;
+  position: relative;
 }
-.payment-way span{
-     position:absolute;
-     right:0;
-     color:#666;
+
+.recharge-tab {
+  display: inline-block;
+  font-size: 28px;
+  color: #555;
+  padding: 0 10px;
 }
-.avail-gongfeng-wrap{
-     position:relative;
-     height:88px;
-     line-height:88px;
-     font-size:26px;
-     color:#999;
+
+.active {
+  color: #fd4d4c;
+  border-bottom: 3px solid #fd4d4c;
 }
-.avail-gonfeng{
-     position:absolute;
-     left:0;
+
+.phonenumber-wrap {
+  background: #fff;
+  border-top: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
+  margin-top: 9px;
+  margin-bottom: 20px;
+  position: relative;
 }
-.avail-gonfeng span{
-     color:#666;
+
+.phone-input {
+  border: none;
+  outline: none;
+  width: 595px;
+  font-size: 36px;
+  padding: 32px 20px 26px 80px;
+  color: #4b4d4c;
+  line-height: normal;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.total-gonfeng{
-     position:absolute;
-     right:0;
+
+.phone-icon {
+  position: absolute;
+  top: 32px;
+  left: 31px;
+  display: inline-block;
+  background: url(../images/phone-icon.png) no-repeat;
+  width: 29px;
+  height: 42px;
 }
-.total-gonfeng span{
-     font-size:30px;
-     color:#fd5353;
+
+.phone-empty {
+  position: absolute;
+  top: 32px;
+  right: 31px;
+  display: inline-block;
+  background: url(../images/empty.png) no-repeat;
+  width: 44px;
+  height: 44px;
 }
-.telconfirm-btn{
-     width:660px;
-     margin:30px auto 67px;
+
+.value-wrap {
+  padding-left: 30px;
 }
-.telconfirm-btn div{
-     display:block;
-     width:100%;
-     height:74px;
-     line-height:74px;
-     text-align:center;
-     font-size:32px;
-     color:#fff;
-     background:#fd4d4d;
-     border-radius:4px;
+
+.value-box .value-num {
+  display: inline-block;
+  width: 200px;
+  height: 144px;
+  border: 1px solid #fff;
+  font-size: 42px;
+  color: #666666;
+  text-align: center;
+  line-height: 146px;
+  background: #fff;
 }
-.limited-sale{
-   display:block;
-   line-height:24px;
-   position:absolute;
-   top:100px;
-   left:38px;
-   font-size:23px;
-   color:#fd4d4d;
+
+.value-box {
+  display: inline-block;
+  width: 204px;
+  height: 148px;
+  border: 1px solid #d8d8d8;
+  margin-right: 22px;
+  margin-bottom: 19px;
+  position: relative;
+  box-sizing: border-box;
 }
-.limited-sale-icon{
-     display:inline-block;
-     background:url(../images/limited-sale.jpg) no-repeat;
-     width:24px;
-     height:24px;
-     margin-right:6px;
-     vertical-align: bottom;
+
+.value-box.selected {
+  border: 1px solid #fd4d4d;
 }
-.pop-wrap{
-     width:100%;
-     height:100%;
-     background:rgba(0,0,0,.5);
-     position:fixed;
-     top:0;
-     left:0;
-     z-index:10
+
+.value-box.selected .value-num {
+  border: 1px solid #fd4d4d;
 }
-.confirm-pop{
-     width:595px;
-     position:fixed;
-     top:50%;
-     left:50%;
-     -webkit-transform:translate(-50%,-50%);
-     transform:translate(-50%,-50%);
-     background:#fff;
-     border-radius:4px;
+
+.default-selected {
+  display: block;
+  background: url(../images/selected-icon.png) no-repeat;
+  width: 61px;
+  height: 56px;
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
 }
-.pop-header{
-     width:565px;
-     height:83px;
-     line-height:83px;
-     border-bottom:1px solid #eff0f3;
-     background:#f9f9f9;
-     padding-left:30px;
-     font-size:32px;
-     color:#333333;
-     border-top-left-radius:10px;
-     border-top-right-radius: 10px;
-     position:relative;
+
+.payment-wrap {
+  height: 177px;
+  border-top: 1px solid #d6d7d9;
+  border-bottom: 1px solid #d6d7d9;
+  background: #fff;
+  padding: 0 30px;
 }
-.pop-close{
-     display:block;
-     background:url(../images/close.png) no-repeat;
-     width:29px;
-     height:30px;
-     position:absolute;
-     top:27px;
-     right:31px;
+
+.payment-way {
+  height: 88px;
+  line-height: 88px;
+  font-size: 26px;
+  color: #999;
+  border-bottom: 1px solid #e3e5ea;
+  position: relative;
 }
-.pop-content{
-     width:565px;
-     height:295px;
-     padding-top:50px;
-     padding-left:30px;
-     background:#fff;
-     border-bottom-left-radius: 10px;
-     border-bottom-right-radius: 10px;
-     position:relative;
+
+.payment-way span {
+  position: absolute;
+  right: 0;
+  color: #666;
 }
-.sms-input{
-     width:289px;
-     height:70px;
-     padding-left:18px;
-     border:1px solid #d8d8d8;
-     border-radius:5px;
-     background:#f2f2f2;
-     font-size:28px;
-     outline:none;
-     -webkit-tap-highlight-color:rgba(0,0,0,0);
+
+.avail-gongfeng-wrap {
+  position: relative;
+  height: 88px;
+  line-height: 88px;
+  font-size: 26px;
+  color: #999;
 }
-.sms-btn{
-     display:inline-block;
-     width:200px;
-     height:74px;
-     line-height:74px;
-     text-align:center;
-     background:#8296af;
-     font-size:32px;
-     color:#fff;
-     border-radius:3px;
-     margin-left:20px;
+
+.avail-gonfeng {
+  position: absolute;
+  left: 0;
 }
-.pop-confirm-btn{
-     display:block;
-     width:530px;
-     height:74px;
-     text-align:center;
-     line-height:74px;
-     font-size:32px;
-     color:#fff;
-     background:#fd4d4c;
-     border-radius:4px;
-     margin-top:60px;
+
+.avail-gonfeng span {
+  color: #666;
 }
-.pop-confirm-btn.gray{
-     background:#ccc;
+
+.total-gonfeng {
+  position: absolute;
+  right: 0;
 }
-.pop-tip{
-     width:530px;
-     text-align:center;
-     font-size:24px;
-     color:#999;
-     margin-top:10px;
+
+.total-gonfeng span {
+  font-size: 30px;
+  color: #fd5353;
 }
-.wrong-tip{
-     font-size:24px;
-     color:#fd4d4c;
-     position:absolute;
-     top:139px;
-     left:52px;
+
+.telconfirm-btn {
+  width: 660px;
+  margin: 30px auto 67px;
+  display: block;
+  height: 74px;
+  line-height: 74px;
+  text-align: center;
+  font-size: 32px;
+  color: #fff;
+  background: #fd4d4d;
+  border-radius: 4px;
 }
-.confirm-success-pop{
-     width:595px;
-     height:220px;
-     padding-top:73px;
-     background:#fff;
-     border-radius:5px;
-     position:fixed;
-     top:50%;
-     left:50%;
-     -webkit-transform:translate(-50%,-50%);
-     transform:translate(-50%,-50%);
+
+.limited-sale {
+  display: block;
+  line-height: 24px;
+  position: absolute;
+  top: 100px;
+  left: 38px;
+  font-size: 23px;
+  color: #fd4d4d;
 }
-.success-tip{
-     font-size:36px;
-     color:#333;
-     line-height:42px;
-     text-align:center;
+
+.limited-sale-icon {
+  display: inline-block;
+  background: url(../images/limited-sale.jpg) no-repeat;
+  width: 24px;
+  height: 24px;
+  margin-right: 6px;
+  vertical-align: bottom;
 }
-.success-mark{
-     display:inline-block;
-     background:url(../images/success-mark.jpg) no-repeat;
-     width:42px;
-     height:42px;
-     vertical-align:bottom;
-     margin-right:10px;
+
+.pop-wrap {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10
 }
-.success-confirm-btn{
-     width:534px;
-     height:67px;
-     line-height:67px;
-     text-align:center;
-     font-size:28px;
-     color:#fff;
-     background:#fd4d4c;
-     border-radius:3px;
-     margin:80px auto 0;
+
+.confirm-pop {
+  width: 595px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 4px;
 }
-.btn-countdown{
-     display:inline-block;
-     width:200px;
-     height:74px;
-     line-height:74px;
-     text-align:center;
-     background:#ccc;
-     font-size:32px;
-     color:#fff;
-     border-radius:3px;
-     margin-left:20px;
+
+.pop-header {
+  width: 565px;
+  height: 83px;
+  line-height: 83px;
+  border-bottom: 1px solid #eff0f3;
+  background: #f9f9f9;
+  padding-left: 30px;
+  font-size: 32px;
+  color: #333333;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: relative;
 }
-.hide{
-     display:none;
+
+.pop-close {
+  display: block;
+  background: url(../images/close.png) no-repeat;
+  width: 29px;
+  height: 30px;
+  position: absolute;
+  top: 27px;
+  right: 31px;
 }
-.price-unit{
-     font-size:24px;
+
+.pop-content {
+  width: 565px;
+  height: 295px;
+  padding-top: 50px;
+  padding-left: 30px;
+  background: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: relative;
 }
-.limited-sale-title{
-    position:absolute;
-    bottom:-2px;
-    left:30px;
-    display:block;
-    width:96px;
+
+.sms-input {
+  width: 289px;
+  height: 70px;
+  padding-left: 18px;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  background: #f2f2f2;
+  font-size: 28px;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.tab-innerwrap{
-     width:50%;
-     float:left;
-     text-align:center;
+
+.sms-btn {
+  display: inline-block;
+  width: 200px;
+  height: 74px;
+  line-height: 74px;
+  text-align: center;
+  background: #8296af;
+  font-size: 32px;
+  color: #fff;
+  border-radius: 3px;
+  margin-left: 20px;
 }
-.phone-operator{
-     display:block;
-     font-size:32px;
-     color:#555;
-     position:absolute;
-     top:34px;
-     left:320px;
+
+.pop-confirm-btn {
+  display: block;
+  width: 530px;
+  height: 74px;
+  text-align: center;
+  line-height: 74px;
+  font-size: 32px;
+  color: #fff;
+  background: #fd4d4c;
+  border-radius: 4px;
+  margin-top: 60px;
+}
+
+.pop-confirm-btn.gray {
+  background: #ccc;
+}
+
+.pop-tip {
+  width: 530px;
+  text-align: center;
+  font-size: 24px;
+  color: #999;
+  margin-top: 10px;
+}
+
+.wrong-tip {
+  font-size: 24px;
+  color: #fd4d4c;
+  position: absolute;
+  top: 139px;
+  left: 52px;
+}
+
+.confirm-success-pop {
+  width: 595px;
+  height: 220px;
+  padding-top: 73px;
+  background: #fff;
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.success-tip {
+  font-size: 36px;
+  color: #333;
+  line-height: 42px;
+  text-align: center;
+}
+
+.success-mark {
+  display: inline-block;
+  background: url(../images/success-mark.jpg) no-repeat;
+  width: 42px;
+  height: 42px;
+  vertical-align: bottom;
+  margin-right: 10px;
+}
+
+.success-confirm-btn {
+  width: 534px;
+  height: 67px;
+  line-height: 67px;
+  text-align: center;
+  font-size: 28px;
+  color: #fff;
+  background: #fd4d4c;
+  border-radius: 3px;
+  margin: 80px auto 0;
+}
+
+.btn-countdown {
+  display: inline-block;
+  width: 200px;
+  height: 74px;
+  line-height: 74px;
+  text-align: center;
+  background: #ccc;
+  font-size: 32px;
+  color: #fff;
+  border-radius: 3px;
+  margin-left: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+.price-unit {
+  font-size: 24px;
+}
+
+.limited-sale-title {
+  position: absolute;
+  bottom: -2px;
+  left: 30px;
+  display: block;
+  width: 96px;
+}
+
+.tab-innerwrap {
+  width: 50%;
+  float: left;
+  text-align: center;
+}
+
+.phone-operator {
+  display: block;
+  font-size: 28px;
+  color: #ccc;
+  position: absolute;
+  top: 34px;
+  left: 320px;
+}
+
+.recharge-panel-tab {
+  height: 88px;
+  border-bottom: 1px solid #dedede;
+  background: white;
+  box-shadow: inset -3px -3px 0 #dedede;
+
+  div {
+    display: inline-block;
+    //width: 360px;
+    //box-sizing: border-box;
+    margin: 0 100px;
+    width: 139px;
+    height: 85px;
+    line-height: 85px;
+
+    font-size: 28px;
+    color: #555;
+    padding: 0 10px;
+    text-align: center;
+
+    &.active {
+      color: #fd4d4c;
+      border-bottom: 3px solid #fd4d4c;
+    }
+  }
+
+}
+.value-unit{
+  font-size:24px;
+}
+.recharge-tip{
+  font-size:24px;
+  color:#4aaef9;
+  margin-bottom:20px;
+  margin-left:30px;
 }

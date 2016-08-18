@@ -1,3 +1,5 @@
+const API_PATH = document.getElementById("api-path").value;
+
 const Mask = React.createClass({
     render: function () {
         return (
@@ -16,6 +18,7 @@ const Mask = React.createClass({
     }
 });
 
+<<<<<<< HEAD
 const Form = React.createClass({
     getDefaultProps: function () {
         return {
@@ -23,27 +26,20 @@ const Form = React.createClass({
             money: null
         }
     },
+=======
+
+const Recharge = React.createClass({
+>>>>>>> fd58d131c6da7e200d83a20c54fe3d87145ccdb5
     getInitialState: function () {
         return {
-            counting: 0
+            special_user: false,
+            order_state: null  // 有3种,  处理中, 成功, 失败
         }
     },
-    clickHandler: function () {
-        if (this.state.counting != 0) return;
-
-        this.setState({counting: this.props.countingSeconds});
-
-        this.timer = setInterval(()=> {
-            this.setState({counting: this.state.counting - 1});
-            if (this.state.counting < 1) {
-                clearInterval(this.timer)
-            }
-        }, 1000)
+    orderConfirm: function () {
+        this.setState({order_state: 'processing'})
     },
-    moneyChangeHandler: function (e) {
-        var money = e.target.value;
-        this.setState({money: money});
-    },
+<<<<<<< HEAD
     handleChange: function(e){
     	this.setState({value: e.target.value});
     	console.log(this.state.value)
@@ -83,6 +79,10 @@ const Recharge = React.createClass({
         return {
             special_user: true
         }
+=======
+    checkRechargeResult: function () {
+        this.setState({order_state: 'success'})
+>>>>>>> fd58d131c6da7e200d83a20c54fe3d87145ccdb5
     },
     
 	hideMask:function(){
@@ -95,9 +95,16 @@ const Recharge = React.createClass({
 
         return (
             <div>
+<<<<<<< HEAD
                 {this.state.special_user ? 
                 	<Mask username={data.username} handler={this.hideMask}/> : 
                 	null}
+=======
+                {this.state.special_user ? <Mask username={data.username}/> : null}
+                {this.state.order_state == 'processing' ?
+                    <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}/> : null}
+                {this.state.order_state == 'success' ? <Recharge.OrderSuccess /> : null}
+>>>>>>> fd58d131c6da7e200d83a20c54fe3d87145ccdb5
 
                 <div className="bank">
                     <div className="ash clearfix">
@@ -113,7 +120,7 @@ const Recharge = React.createClass({
                 <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服<span className="blue">400-6766-988</span></div>
 
 
-                <Form countingSeconds={30}/>
+                <Form countingSeconds={60} orderConfirm={this.orderConfirm}/>
 
 
                 <div className="rmd">
@@ -141,6 +148,56 @@ const Recharge = React.createClass({
                     </div>
                     <div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">如果充值金额没有及时到账，请<span
                         className="colr">拨打客服</span>查询。</span></div>
+                </div>
+            </div>
+        )
+    }
+});
+
+Recharge.OrderSuccess = React.createClass({
+    render: function () {
+        return (
+            <div className="order-success">
+                <img src="images/order-success.png"/>
+                <div className="text">
+                    成功
+                </div>
+            </div>
+        )
+    }
+});
+
+Recharge.OrderProcessing = React.createClass({
+    getDefaultProps: function () {
+        return {
+            remain: 5
+        }
+    },
+    getInitialState: function () {
+        return {
+            remain: this.props.remain
+        }
+    },
+    componentDidMount: function () {
+        this.tick()
+    },
+    tick: function () {
+        if (this.state.remain < 1) {
+            this.props.checkRechargeResult()
+        } else {
+            this.countdown();
+            setTimeout(this.tick, 1000);
+        }
+    },
+    countdown: function () {
+        this.setState({remain: this.state.remain - 1})
+    },
+    render: function () {
+        return (
+            <div className="order-processing">
+                <img src="images/order-processing.png"/>
+                <div className="text">
+                    {this.state.remain}s 系统查询结果
                 </div>
             </div>
         )
