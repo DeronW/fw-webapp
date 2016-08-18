@@ -9,13 +9,12 @@ const Mask = React.createClass({
                         由于您的身份信息无法通过系统验证，为了保证您的账户资金安全，您当前无法进行线上充值、投资、更换银行卡等交易。您当前的账户资金安全无虞，若有可用余额，可自行发起提现申请。
                     </div>
                     <div className="ever">有任何问题，请联系客服：<span>400-0322-988</span></div>
-                    <div className="close">关闭</div>
+                    <div className="close" onClick={this.props.handler} >关闭</div>
                 </div>
             </div>
         )
     }
 });
-
 
 const Form = React.createClass({
     getDefaultProps: function () {
@@ -45,8 +44,15 @@ const Form = React.createClass({
         var money = e.target.value;
         this.setState({money: money});
     },
+    handleChange: function(e){
+    	this.setState({value: e.target.value});
+    	console.log(this.state.value)
+    },
+    codeHandleChange: function(e){
+    	this.setState({valueA: e.target.value});
+    },
     submitHandler: function () {
-        console.log(this.state.money)
+        
     },
     render: function () {
         return (
@@ -57,10 +63,10 @@ const Form = React.createClass({
                            placeholder="输入充值金额，最低1元"/>
                 </div>
                 <div className="money hao">
-                    <input className="recha" type="text" placeholder="输入银行预留手机号"/></div>
+                    <input className="recha" value={this.state.value} onChange={this.handleChange} placeholder="输入银行预留手机号"/></div>
                 <div className="form clearfix">
                     <div className="srcode">
-                        <input type="text" className="code" placeholder="请输入验证码"/></div>
+                        <input type="text" className="code"  valueA={this.state.code} onChange={this.codeHandleChange} placeholder="请输入验证码"/></div>
                     <div className="gqm" onClick={this.clickHandler}>
                         {this.state.counting ? this.state.counting + 's' : '获取验证码'}
                     </div>
@@ -75,16 +81,23 @@ const Form = React.createClass({
 const Recharge = React.createClass({
     getInitialState: function () {
         return {
-            special_user: false
+            special_user: true
         }
     },
+    
+	hideMask:function(){
+		this.setState({special_user: false});
+	},
+	
     render: function () {
 
         let data = this.props.data;
 
         return (
             <div>
-                {this.state.special_user ? <Mask username={data.username}/> : null}
+                {this.state.special_user ? 
+                	<Mask username={data.username} handler={this.hideMask}/> : 
+                	null}
 
                 <div className="bank">
                     <div className="ash clearfix">
