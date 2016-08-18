@@ -195,7 +195,8 @@ const Recharge = React.createClass({
         this.setState({
             bizNo: bizNo,
             price: price,
-            fee_pay_score: score
+            fee_pay_score: score,
+            net_pay_score: score
         })
     },
     render: function () {
