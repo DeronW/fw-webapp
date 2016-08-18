@@ -214,6 +214,8 @@ const Recharge = React.createClass({
             </div>
         };
 
+        let RechargeTip = this.state.operator == 'union' ? '全国可用，即时生效，当月有效，同档位限充3次' : (this.state.operator == 'tele' ? '全国可用，即时生效，当月有效' : '全国可用，24小时内生效，当月有效');
+
         return (
             <div>
                 <div className="recharge-panel-tab"> {this.tabs.map(tab)} </div>
@@ -227,7 +229,7 @@ const Recharge = React.createClass({
                     <span className="phone-operator">{this.getOperatorName()}</span>
                     <span className="phone-empty" onClick={this.emptyHandler}> </span>
                 </div>
-
+                {this.state.tab == 'net' ? <div className="recharge-tip">{RechargeTip}</div> : null}
                 <Recharge.ProductPanel products={this.state.product_fee} bizNo={this.state.bizNo}
                                        setCheckedBizNo={this.setCheckedBizNo}/>
 
@@ -273,6 +275,7 @@ Recharge.ProductPanel = React.createClass({
             return <div className={class_name} key={index} onClick={check}>
                 <span className="value-num">
                     {data.title}
+                    <span className="value-unit">{data.unit}</span>
                 </span>
                 {data.sub_title ? sub_title : null }
 
