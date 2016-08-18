@@ -11,25 +11,15 @@ const Mask = React.createClass({
                         由于您的身份信息无法通过系统验证，为了保证您的账户资金安全，您当前无法进行线上充值、投资、更换银行卡等交易。您当前的账户资金安全无虞，若有可用余额，可自行发起提现申请。
                     </div>
                     <div className="ever">有任何问题，请联系客服：<span>400-0322-988</span></div>
-                    <div className="close" onClick={this.props.handler} >关闭</div>
+                    <div className="close">关闭</div>
                 </div>
             </div>
         )
     }
 });
 
-<<<<<<< HEAD
-const Form = React.createClass({
-    getDefaultProps: function () {
-        return {
-            countingSeconds: 60,
-            money: null
-        }
-    },
-=======
 
 const Recharge = React.createClass({
->>>>>>> fd58d131c6da7e200d83a20c54fe3d87145ccdb5
     getInitialState: function () {
         return {
             special_user: false,
@@ -39,72 +29,19 @@ const Recharge = React.createClass({
     orderConfirm: function () {
         this.setState({order_state: 'processing'})
     },
-<<<<<<< HEAD
-    handleChange: function(e){
-    	this.setState({value: e.target.value});
-    	console.log(this.state.value)
-    },
-    codeHandleChange: function(e){
-    	this.setState({valueA: e.target.value});
-    },
-    submitHandler: function () {
-        
-    },
-    render: function () {
-        return (
-            <div className="modify">
-                <div className="money">
-                    <input className="recha" value={this.state.money}
-                           onChange={this.moneyChangeHandler}
-                           placeholder="输入充值金额，最低1元"/>
-                </div>
-                <div className="money hao">
-                    <input className="recha" value={this.state.value} onChange={this.handleChange} placeholder="输入银行预留手机号"/></div>
-                <div className="form clearfix">
-                    <div className="srcode">
-                        <input type="text" className="code"  valueA={this.state.code} onChange={this.codeHandleChange} placeholder="请输入验证码"/></div>
-                    <div className="gqm" onClick={this.clickHandler}>
-                        {this.state.counting ? this.state.counting + 's' : '获取验证码'}
-                    </div>
-                </div>
-                <div className="credit" onClick={this.submitHandler}>充值</div>
-            </div>
-        )
-    }
-});
-
-
-const Recharge = React.createClass({
-    getInitialState: function () {
-        return {
-            special_user: true
-        }
-=======
     checkRechargeResult: function () {
         this.setState({order_state: 'success'})
->>>>>>> fd58d131c6da7e200d83a20c54fe3d87145ccdb5
     },
-    
-	hideMask:function(){
-		this.setState({special_user: false});
-	},
-	
     render: function () {
 
         let data = this.props.data;
 
         return (
             <div>
-<<<<<<< HEAD
-                {this.state.special_user ? 
-                	<Mask username={data.username} handler={this.hideMask}/> : 
-                	null}
-=======
                 {this.state.special_user ? <Mask username={data.username}/> : null}
                 {this.state.order_state == 'processing' ?
                     <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}/> : null}
                 {this.state.order_state == 'success' ? <Recharge.OrderSuccess /> : null}
->>>>>>> fd58d131c6da7e200d83a20c54fe3d87145ccdb5
 
                 <div className="bank">
                     <div className="ash clearfix">
