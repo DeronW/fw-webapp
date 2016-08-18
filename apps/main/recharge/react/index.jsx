@@ -1,3 +1,5 @@
+const API_PATH = document.getElementById("api-path").value;
+
 const Mask = React.createClass({
     render: function () {
         return (
@@ -17,66 +19,18 @@ const Mask = React.createClass({
 });
 
 
-const Form = React.createClass({
-    getDefaultProps: function () {
-        return {
-            countingSeconds: 60,
-            money: null
-        }
-    },
-    getInitialState: function () {
-        return {
-            counting: 0
-        }
-    },
-    clickHandler: function () {
-        if (this.state.counting != 0) return;
-
-        this.setState({counting: this.props.countingSeconds});
-
-        this.timer = setInterval(()=> {
-            this.setState({counting: this.state.counting - 1});
-            if (this.state.counting < 1) {
-                clearInterval(this.timer)
-            }
-        }, 1000)
-    },
-    moneyChangeHandler: function (e) {
-        var money = e.target.value;
-        this.setState({money: money});
-    },
-    submitHandler: function () {
-        console.log(this.state.money)
-    },
-    render: function () {
-        return (
-            <div className="modify">
-                <div className="money">
-                    <input className="recha" value={this.state.money}
-                           onChange={this.moneyChangeHandler}
-                           placeholder="输入充值金额，最低1元"/>
-                </div>
-                <div className="money hao">
-                    <input className="recha" type="text" placeholder="输入银行预留手机号"/></div>
-                <div className="form clearfix">
-                    <div className="srcode">
-                        <input type="text" className="code" placeholder="请输入验证码"/></div>
-                    <div className="gqm" onClick={this.clickHandler}>
-                        {this.state.counting ? this.state.counting + 's' : '获取验证码'}
-                    </div>
-                </div>
-                <div className="credit" onClick={this.submitHandler}>充值</div>
-            </div>
-        )
-    }
-});
-
-
 const Recharge = React.createClass({
     getInitialState: function () {
         return {
-            special_user: false
+            special_user: false,
+            order_state: null  // 有3种,  处理中, 成功, 失败
         }
+    },
+    orderConfirm: function () {
+        this.setState({order_state: 'processing'})
+    },
+    checkRechargeResult: function () {
+        this.setState({order_state: 'success'})
     },
     render: function () {
 
@@ -85,6 +39,9 @@ const Recharge = React.createClass({
         return (
             <div>
                 {this.state.special_user ? <Mask username={data.username}/> : null}
+                {this.state.order_state == 'processing' ?
+                    <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}/> : null}
+                {this.state.order_state == 'success' ? <Recharge.OrderSuccess /> : null}
 
                 <div className="bank">
                     <div className="ash clearfix">
@@ -100,7 +57,7 @@ const Recharge = React.createClass({
                 <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服<span className="blue">400-6766-988</span></div>
 
 
-                <Form countingSeconds={30}/>
+                <Form countingSeconds={60} orderConfirm={this.orderConfirm}/>
 
 
                 <div className="rmd">
@@ -128,6 +85,56 @@ const Recharge = React.createClass({
                     </div>
                     <div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">如果充值金额没有及时到账，请<span
                         className="colr">拨打客服</span>查询。</span></div>
+                </div>
+            </div>
+        )
+    }
+});
+
+Recharge.OrderSuccess = React.createClass({
+    render: function () {
+        return (
+            <div className="order-success">
+                <img src="images/order-success.png"/>
+                <div className="text">
+                    成功
+                </div>
+            </div>
+        )
+    }
+});
+
+Recharge.OrderProcessing = React.createClass({
+    getDefaultProps: function () {
+        return {
+            remain: 5
+        }
+    },
+    getInitialState: function () {
+        return {
+            remain: this.props.remain
+        }
+    },
+    componentDidMount: function () {
+        this.tick()
+    },
+    tick: function () {
+        if (this.state.remain < 1) {
+            this.props.checkRechargeResult()
+        } else {
+            this.countdown();
+            setTimeout(this.tick, 1000);
+        }
+    },
+    countdown: function () {
+        this.setState({remain: this.state.remain - 1})
+    },
+    render: function () {
+        return (
+            <div className="order-processing">
+                <img src="images/order-processing.png"/>
+                <div className="text">
+                    {this.state.remain}s 系统查询结果
                 </div>
             </div>
         )
