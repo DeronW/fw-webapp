@@ -31,6 +31,7 @@ const ConfirmPop = React.createClass({
     },
     tick: function () {
         this.setState({remain: 60});
+        window.clearInterval(this._timer);
         this._timer = setInterval(this.countingDown, 1000);
     },
     getSmsCodeHandler: function () {
