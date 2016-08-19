@@ -1,3 +1,5 @@
+@import './icon.less';
+
 .header {
   height: 100px;
 }
@@ -111,15 +113,24 @@
     border-bottom: 1px solid #eff0f3;
     font-size: 28px;
     position: relative;
+    padding-left: 30px;
+
+    i {
+      margin: 0 10px;
+    }
 
     .tag {
       position: absolute;
       width: 150px;
-      height: 60px;
-      background: green;
+      height: 38px;
+      line-height: 38px;
+      font-size: 24px;
+      text-align: center;
+      color: white;
+      background: #648bc2;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
-      top: -20px;
+      top: -11px;
       right: 20px;
 
       &:before {
@@ -127,10 +138,10 @@
         width: 0;
         height: 0;
         display: block;
-        border-top: 20px solid transparent;
-        border-right: 20px solid red;
+        border-top: 10px solid transparent;
+        border-right: 5px solid #4f698c;
         position: absolute;
-        left: -20px;
+        left: -4px;
       }
 
       &:after {
@@ -138,11 +149,70 @@
         width: 0;
         height: 0;
         display: block;
-        border-top: 20px solid transparent;
-        border-left: 20px solid red;
+        border-top: 10px solid transparent;
+        border-left: 5px solid #4f698c;
         position: absolute;
-        right: -20px;
+        right: -4px;
         top: 0;
+      }
+    }
+  }
+
+  .detail {
+    position: relative;
+    height: 180px;
+    padding: 40px 0 0 50px;
+
+    .progress {
+      display: block;
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: white;
+      top: -50px;
+      right: 30px;
+
+      & > svg {
+        position: relative;
+        top: 12px;
+        left: 10px;
+      }
+    }
+
+    .profit {
+      color: #fd4d4c;
+      font-size: 48px;
+      width: 150px;
+      float: left;
+    }
+
+    .duration {
+      float: left;
+      font-size: 30px;
+      width: 150px;
+      padding-top: 14px;
+      color: #555;
+    }
+    .remain {
+      float: left;
+      font-size: 30px;
+      width: 150px;
+      padding-top: 14px;
+      color: #555;
+    }
+
+    .keywords {
+      display: table;
+      width: 100%;
+      margin-top: 60px;
+
+      span {
+        font-size: 24px;
+        color: #999;
+        width: 150px;
+        display: inline-block;
+        text-align: left;
       }
     }
   }

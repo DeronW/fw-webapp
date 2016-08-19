@@ -63,16 +63,20 @@ Content.Invest = React.createClass({
                 <div className="project">
                     <div className="title">
                         利随享8531
-                        <i className="icon-a"> </i>
-                        <i className="icon-b"> </i>
-                        <i className="icon-c"> </i>
+                        <i className="icon-bao"> </i>
+                        <i className="icon-gu"> </i>
+                        <i className="icon-ling"> </i>
+                        <i className="icon-tie"> </i>
 
                         <div className="tag"> 限时抢购</div>
                     </div>
-                    <div className="">
+                    <div className="detail">
+                        <div className="progress">
+                            <SVGCircleProgress radius={70} percent={60} />
+                        </div>
                         <div className="profit">9.8%</div>
                         <div className="duration">6个月</div>
-                        <div className="remain">10W</div>
+                        <div className="remain">剩44.8万</div>
                         <div className="keywords">
                             <span>100元起投</span>
                             <span>一次结清</span>
