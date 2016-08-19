@@ -39,7 +39,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-        api_path: "http://m.9888.cn:8080",
+        api_path: "http://localhost/fake-api/",
         include_components: common_components,
         include_common_js: common_js
     });

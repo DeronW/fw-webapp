@@ -150,7 +150,6 @@ const Recharge = React.createClass({
             return $FW.Component.Alert("充值失败，工分不足！");
         if(this.state.tab == 'net' && this.state.user_score < this.state.net_pay_score)
             return $FW.Component.Alert("充值失败，工分不足！");
-
         window.confirmPanel.show();
     },
 
