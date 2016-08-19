@@ -6,7 +6,7 @@ const Recharge = React.createClass({
     getInitialState: function () {
         this.tabs = ['fee', 'net'];
         return {
-            tab: 'fee',
+            tab: 'no_default_tab',
             product_fee: [],
             user_score: this.props.is_login ? this.props.user_score : '--',
             fee_pay_score: null,
@@ -14,40 +14,41 @@ const Recharge = React.createClass({
             bizNo: null,
             login: this.props.is_login,
             phone: '',
-            format_phone: '',
             price: '',
-            operator: 'union'
+            operator: ''
         }
     },
     componentDidMount: function () {
-       this.switchState();
+        this.switchTabHandler('fee');
     },
 
-    tabClickHandler: function(tab){
-        this.setState({tab:tab}, ()=>this.switchState());
-    },
+    switchTabHandler: function (tab) {
+        if (tab == this.state.tab) return;
 
-    switchState: function(){
-        if (this.state.tab == 'fee') {
+        this.setState({
+            tab: tab,
+            phone: '',
+            operator: ''
+        });
+
+        if (tab == 'fee') {
             this.reloadFeeHandler();
-        }
-        if (this.state.tab == 'net') {
+        } else if (tab == 'net') {
             this.reloadNetHandler();
-            //$FW.Component.Alert("正在建设中，敬请期待！");
         }
+
     },
 
-    reloadFeeHandler: function(){
+    reloadFeeHandler: function () {
         $FW.Ajax({
             url: API_PATH + 'api/v1/phone/fee/recharge.json',
-            //url:"http://localhost/recharge.json",
             enable_loading: true,
             success: function (data) {
                 let pay_score;
                 data.fee.forEach((i)=> {
                     if (i.bizNo == data.defaultBizNo)
                         pay_score = i.score;
-                })
+                });
 
                 if (!pay_score) console.log('no match default bizNo', data);
 
@@ -60,81 +61,97 @@ const Recharge = React.createClass({
         });
     },
 
-    reloadNetHandler: function(operator){
-        var code = operator == 'union' ? 1032 : (operator == 'mobile' ? 1034 : 1033)
+    reloadNetHandler: function () {
+        var opt = this.state.operator;
+        var code = opt == 'union' ? 1032 : (opt == 'tele' ? 1033 : 1034);
+
+        console.log('load net', code)
+
         $FW.Ajax({
             url: API_PATH + 'api/v1/phone/net/recharge.json',
             enable_loading: true,
-            data:{ operator: code},
+            data: {operator: code},
             success: function (data) {
-                let pay_score;
+                let pay_score = 0;
                 data.fee.forEach((i)=> {
                     if (i.bizNo == data.defaultBizNo)
                         pay_score = i.score;
-                })
-
-                if (!pay_score) console.log('no match default bizNo', data);
+                });
 
                 this.setState({
                     net_pay_score: pay_score,
                     bizNo: data.defaultBizNo,
-                    product_fee: data.fee,
-                    operator: operator
+                    product_fee: data.fee
                 })
             }.bind(this)
         });
     },
 
-    switchNetData: function(phone){
-
+    getOperator: function (phone) {
         var mobile_reg = /^1(3[4-9]|4[7]|5[012789]|7[8]|8[23478])\d{8}$/;
         var union_reg = /^1(3[0-2]|4[5]|5[56]|7[156]|8[56])\d{8}$/;
         var tele_reg = /^1(3[3]|4[9]|5[3]|7[37]|8[019])\d{8}$/;
         var virtual_reg = /^170\d{8}$/;
+        var r;
 
-        console.log(mobile_reg.test(phone))
-        console.log(phone)
+        if (mobile_reg.test(phone)) {
+            r = 'mobile'
+        } else if (union_reg.test(phone)) {
+            r = 'union'
+        } else if (tele_reg.test(phone)) {
+            r = 'tele'
+        } else if (virtual_reg.test(phone)) {
+            r = 'virtual'
+        } else if (phone.length == 11) {
+            r = 'unknown'
+        } else {
+            r = 'invalid'
+        }
+        return r
+    },
 
-        if(mobile_reg.test(phone)){
-            this.reloadNetHandler('mobile')
-        } else if(union_reg.test(phone)){
-            this.reloadNetHandler('union')
-        } else if(tele_reg.test(phone)){
-            this.reloadNetHandler('tele')
-        } else if(virtual_reg.test(phone)){
-            $FW.Component.Alert("暂不支持虚拟运营商号段！");
-        } else {if(phone.length == 11)
+    switchNetData: function () {
+        var operator = this.state.operator;
+        if (operator == 'unknown') {
             $FW.Component.Alert("该号码不能识别！");
+        } else if (operator == 'virtual') {
+            $FW.Component.Alert("暂不支持虚拟运营商号段！");
+        } else {
+            this.reloadNetHandler();
         }
     },
 
-    changeValueHandler: function (e) {
-        var v = e.target.value + '';
-        v = v.replace(/ /g, '');
-        if(isNaN(v)) return;
-        if(v.length > 3) v = v.substr(0, 3) + ' ' + v.substr(3);
-        if(v.length > 8) v = v.substr(0, 8) + ' ' + v.substring(8, 12);
+    phoneChangeHandler: function (e) {
+        var phone = e.target.value.toString().substring(0, 11);
+        this.setState({phone: phone});
+        this.setOperator(phone);
+    },
 
-        let phone = v.replace(/ /g, '');
-        this.setState({phone: phone, format_phone: v});
+    setOperator: function (phone) {
+        var opt = this.getOperator(phone);
 
-        this.switchNetData(phone);
+        var cb = () => null;
+
+        if (this.state.tab == 'net' && this.state.operator != opt && opt != 'invalid')
+            cb = () => this.switchNetData();
+
+        this.setState({operator: opt}, cb);
     },
 
     getSMSCodeHandler: function () {
         let v = this.state.phone;
-        let myreg = /^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/;
+
         if (this.state.login) {
             if (this.state.user_score < this.state.fee_pay_score || this.state.user_score < this.state.net_pay_score) {
                 $FW.Component.Alert("充值失败，工分不足！");
             } else if (v == '') {
                 $FW.Component.Alert("请输入手机号！");
-            }else if(!myreg.test(v)){
+            } else if (!/^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/.test(v)) {
                 $FW.Component.Alert("手机号格式不正确！");
-            }else{
-                   confirmPanel.show();
+            } else {
+                window.confirmPanel.show();
             }
-        }else{
+        } else {
             $FW.Utils.loginMall();
         }
     },
@@ -148,114 +165,74 @@ const Recharge = React.createClass({
         }
     },
 
-    costPayScore: function(){
+    costPayScore: function () {
+        if (this.state.tab == 'fee') {
+            this.setState({
+                user_score: this.state.user_score - this.state.fee_pay_score
+            })
+        }
+        if (this.state.tab == 'net') {
+            this.setState({
+                user_score: this.state.user_score - this.state.net_pay_score
+            })
+        }
+    },
+    getOperatorName: function () {
+        var opt = this.state.operator;
+        if (opt == 'union') return '中国联通';
+        if (opt == 'mobile') return '中国移动';
+        if (opt == 'tele') return '中国电信';
+        if (opt == 'virtual') return '虚拟运营商';
+        if (opt == 'unknown') return '未知运营商';
+        if (opt == 'invalid') return '';
+    },
+
+    emptyHandler: function () {
+        this.setState({phone: ''});
+        this.setOperator('');
+    },
+    setCheckedBizNo: function (bizNo, price, score) {
         this.setState({
-            user_score: this.state.user_score - this.state.fee_pay_score
+            bizNo: bizNo,
+            price: price,
+            fee_pay_score: score,
+            net_pay_score: score
         })
     },
     render: function () {
 
-        let _this = this;
-
-        function emptyHandler() {
-            _this.setState({phone: ''});
+        let pay_score;
+        if (this.state.tab == 'fee') {
+            pay_score = this.state.fee_pay_score;
+        } else if (this.state.tab == 'net') {
+            pay_score = this.state.net_pay_score;
         }
 
-        let phoneInput = (
-            <div className="phonenumber-wrap">
-                <span className="phone-icon"></span>
-                <input type="number" className="phone-input" placeholder="请输入手机号" number="true"
-                       value={this.state.phone}
-                       onChange={this.changeValueHandler}/>
-                <span className="phone-empty" onClick={emptyHandler}></span>
+        let tab = (i, index)=> {
+            return <div key={index} className={i == this.state.tab ? 'active' : null}
+                        onClick={()=> this.switchTabHandler(i)}>
+                {i == 'fee' ? '话费' : '流量'}充值
             </div>
-        );
-
-
-        function fee_card(data, index) {
-            function check() {
-                _this.setState({
-                    bizNo: data.bizNo,
-                    price: data.price,
-                    fee_pay_score: data.score
-                })
-            }
-
-            return <div className={_this.state.bizNo == data.bizNo ? "value-box selected" : "value-box"} key={index}
-                        onClick={check}>
-                <span className="value-num">{data.title}<span className="price-unit">元</span></span>
-                {data.sub_title ?
-                    <span className="limited-sale"><span className="limited-sale-icon"></span><span className="limited-sale-title">{data.sub_title}</span></span> :
-                    null
-                }
-                {_this.state.bizNo == data.bizNo ?
-                    <span className="default-selected"></span> :
-                    null
-                }
-            </div>
-        }
-
-        function net_card(data, index) {
-            function check() {
-                _this.setState({
-                    bizNo: data.bizNo,
-                    price: data.price,
-                    net_pay_score: data.score
-                })
-            }
-
-            return <div className={_this.state.bizNo == data.bizNo ? "value-box selected" : "value-box"} key={index}
-                        onClick={check}>
-                <span className="value-num">{data.title}</span>
-                {data.sub_title ?
-                    <span className="limited-sale"><span className="limited-sale-icon"></span><span className="limited-sale-title">{data.sub_title}</span></span> :
-                    null
-                }
-                {_this.state.bizNo == data.bizNo ?
-                    <span className="default-selected"></span> :
-                    null
-                }
-            </div>
-        }
-
-
-        let fee_panel = this.state.tab == 'fee' ?
-            ( <div className="value-wrap">{this.state.product_fee.map(fee_card)}</div> ) : null;
-
-        let net_panel = this.state.tab == 'net' ?
-            ( <div className="value-wrap"> {this.state.product_fee.map(net_card)} </div> ) : null;
-
-        let fee_pay_score = this.state.tab == 'fee' ? this.state.fee_pay_score : null;
-        let net_pay_score = this.state.tab == 'net' ? this.state.net_pay_score : null;
-
-
-        let tab = function (i) {
-            let name = {
-                fee: '话费充值',
-                net: '流量充值'
-            };
-
-            return (
-                <div className="tab-innerwrap">
-                    <span key={i} className={i==_this.state.tab ? "recharge-tab active" : "recharge-tab"}
-                         onClick={function(){_this.tabClickHandler(i)}}>
-                        <span>{name[i]}</span>
-                    </span>
-               </div>
-            )
         };
+
+        let RechargeTip = this.state.operator == 'union' ? '全国可用，即时生效，当月有效，同档位限充3次' : (this.state.operator == 'tele' ? '全国可用，即时生效，当月有效' : '全国可用，24小时内生效，当月有效');
 
         return (
             <div>
-                <div className="tab-wrap">
-                    <div className="recharge-wrap">
-                        {this.tabs.map(tab)}
-                    </div>
-                </div>
+                <div className="recharge-panel-tab"> {this.tabs.map(tab)} </div>
 
-                {phoneInput}
-                {fee_panel}
-                {net_panel}
+                <div className="phonenumber-wrap">
+                    <span className="phone-icon"> </span>
+                    <input type="number" className="phone-input"
+                           placeholder="请输入手机号" number="true"
+                           value={this.state.phone}
+                           onChange={this.phoneChangeHandler}/>
+                    <span className="phone-operator">{this.getOperatorName()}</span>
+                    <span className="phone-empty" onClick={this.emptyHandler}> </span>
+                </div>
+                {this.state.tab == 'net' ? <div className="recharge-tip">{RechargeTip}</div> : null}
+                <Recharge.ProductPanel products={this.state.product_fee} bizNo={this.state.bizNo}
+                                       setCheckedBizNo={this.setCheckedBizNo}/>
 
                 <div className="payment-wrap">
                     <div className="payment-way">支付方式<span>工分支付</span></div>
@@ -264,163 +241,66 @@ const Recharge = React.createClass({
                             可用工分：<span> {this.state.user_score}</span>
                         </div>
                         <div className="total-gonfeng">
-                            总计： <span>{fee_pay_score}{net_pay_score}工分</span>
+                            总计： <span>{pay_score}工分</span>
                         </div>
                     </div>
                 </div>
 
-                <div className="telconfirm-btn">
-                    <div onClick={this.getSMSCodeHandler}>立即充值</div>
-                </div>
-
+                <div className="telconfirm-btn" onClick={this.getSMSCodeHandler}>立即充值</div>
             </div>
         );
     }
 });
 
-const ConfirmPop = React.createClass({
-    getInitialState: function () {
-        return {
-            show: false,
-            value: '',
-            remain: 0,
-            show_warn:false,
-            show_text:'',
-            loading: false
-        }
-    },
-    show: function () {
-        this.setState({show: true});
-        //this.tick();
-    },
-    hide: function () {
-        this.setState({
-            show: false,
-            value: '',
-            remain: 0,
-            show_warn:false,
-            show_text:''
-        })
-    },
-    changeValueHandler: function (e) {
-        this.setState({value: e.target.value});
-    },
-    countingDown: function () {
-        if (this.state.remain <= 1) window.clearInterval(this._timer);
-        this.setState({remain: this.state.remain - 1});
-    },
-    tick: function () {
-        this.setState({remain: 60});
-        this._timer = setInterval(this.countingDown, 1000);
-    },
-    getSmsCodeHandler: function () {
-        var _this = this;
-        if (this.state.remain <= 0) {
-            this.tick();
-            $FW.Ajax({
-                url: API_PATH + "mall/api/order/v1/SendPhoneVerifyPay.json",
-                method: 'get',
-                success: function(data){
-                    $FW.Component.Alert("这是用于测试的验证"+data.validateCode);
-                },
-                fail: function (code,message,response){
-                    _this.setState({
-                        show_warn:true,
-                        show_text:message,
-                        remain: 0
-                    });
-                    if(code == 40101){
-                        $FW.Utils.loginMall();
-                    }
-                    return true;
-                }
-            })
-        }
-    },
-    submitHandler: function () {
-        var _this = this;
-        var form_data = rechargePanel.getFormData();
-        if(this.state.loading)
-            return;
-        this.setState({loading: true})
-        $FW.Ajax({
-            url: API_PATH + 'mall/api/v1/getToken.json',
-            method: "get",
-            success: function (data) {
-                var token = data.token;
-                $FW.Ajax({
-                    url: API_PATH + 'api/v1/phone/recharge-order.json',
-                    enable_loading: true,
-                    method: 'get',
-                    data: {
-                        phone: form_data.phone,
-                        //price: form_data.price,
-                        sms_code: _this.state.value,
-                        bizNo: form_data.bizNo,
-                        sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
-                        tokenStr: token
-                    },
-                    complete:function(){
-                        _this.setState({loading: true});
-                    },
-                    success: function () {
-                        _this.setState({
-                            show: false,
-                            show_warn:false,
-                            remain:0,
-                            value:'',
-                            loading: false
-                        });
-                        window.rechargePanel.costPayScore();
-                        $FW.Component.Alert("充值成功！");
-                        //_this.reloadFeeHandler();
-                    },
-                    fail: function (code,message,response) {
-                        _this.setState({
-                            show_warn:true,
-                            show_text:message,
-                            loading: false
-                        });
-                        return true;
-                        //$FW.Component.Alert("充值失败！");
-                    }
-                })
-            }
-        });
-    },
-
+Recharge.ProductPanel = React.createClass({
     render: function () {
-        if (!this.state.show) return null;
-        let frequent_tip = this.state.show_warn ? (<div className="wrong-tip">{this.state.show_text}</div>) : null;
-        return (
-            <div className="pop-wrap">
-                <div className="confirm-pop">
-                    <div className="pop-header">输入验证码<span className="pop-close" onClick={this.hide}></span>
-                    </div>
-                    <div className="pop-content">
-                        <div className="confirm-sms-code">
-                            <input type="text" placeholder="请输入验证码" className="sms-input" value={this.state.value}
-                                   onChange={this.changeValueHandler}/>
-                            <span className={this.state.remain>0 ? "btn-countdown" : "sms-btn"}
-                                  onClick={this.getSmsCodeHandler}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
-                        </div>
-                        {frequent_tip}
-                        <div className={this.state.loading ? "pop-confirm-btn gray" : "pop-confirm-btn"} onClick={this.submitHandler}>确认</div>
-                        <div className="pop-tip">充值后1~10分钟到账</div>
-                    </div>
-                </div>
+
+        var _this = this;
+        var bizNo = this.props.bizNo;
+
+        function fee_card(data, index) {
+            function check() {
+                _this.props.setCheckedBizNo(data.bizNo, data.price, data.score)
+            }
+
+            let checked = <span className="default-selected"></span>;
+
+            let sub_title = <span className="limited-sale">
+                        <span className="limited-sale-icon"></span>
+                        <span className="limited-sale-title">
+                            {data.sub_title}</span>
+                    </span>;
+
+            let class_name = bizNo == data.bizNo ? "value-box selected" : "value-box";
+
+            return <div className={class_name} key={index} onClick={check}>
+                <span className="value-num">
+                    {data.title}
+                    <span className="value-unit">{data.unit}</span>
+                </span>
+                {data.sub_title ? sub_title : null }
+
+                {bizNo == data.bizNo ? checked : null}
             </div>
-        );
+        }
+
+        return (
+            <div className="value-wrap">
+                {this.props.products.map(fee_card)}
+            </div>
+        )
     }
 });
+
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('充值专区');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>,
+            document.getElementById('header'));
+
     $FW.Ajax({
         url: API_PATH + 'api/v1/user-state.json',
-        //url: "http://localhost/user-state.json",
         enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
@@ -430,6 +310,6 @@ $FW.DOMReady(function () {
     window.confirmPanel = ReactDOM.render(<ConfirmPop />, document.getElementById('dialog'));
 });
 
-function backward(){
+function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }

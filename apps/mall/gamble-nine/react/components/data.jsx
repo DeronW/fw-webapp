@@ -18,7 +18,7 @@ var data=[
     {	code:10000,
     	data:{
     		costScore:3000,
-	        remainTimes:2,
+	        remainTimes:4,
 	        infinitely:false,
 	        usableScore:30000
     	}

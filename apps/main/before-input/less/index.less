@@ -1,11 +1,58 @@
-*{margin: 0; padding: 0;}
-.clearfix{zoom:1}
-.clearfix:after{content:"";display:block;clear:both}
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td{font-family:'微软雅黑'; font-weight: normal;list-style: none;}
-
-body,html{
-    background: #ebebee;
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td, b {
+  margin: 0;
+  padding: 0;
 }
+
+body, html {
+  position: relative;
+  margin: 0 auto;
+  background-color: #ebebee;
+}
+
+body, button, input, select, textarea, h1, h2, h3, h4, h5, h6 {
+  font-family: "Microsoft YaHei", Arial, Helvetica, simhei, sans-serif;
+}
+
+input[type="submit"], input[type="text"], input[type="tel"], input[type="number"], input[type="button"], input[type="password"] {
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  line-height: normal;
+}
+
+input, label, button, textarea, select {
+  border: medium none;
+  font-family: "Microsoft YaHei", Arial, Helvetica, simhei, sans-serif;
+}
+
+input:focus {
+  outline: 0;
+}
+
+a:active, a:focus {
+  outline: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+input[type=checkbox], input[type=radio] {
+  vertical-align: middle;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
 
 
 .wrap{
@@ -13,7 +60,7 @@ body,html{
     border-top: 1px solid #d8d8d8;
     border-bottom: 1px solid #d8d8d8;
     background: white;
-    margin-top: 146px;
+    margin-top: 22px;
 }
 
 .name{
@@ -33,6 +80,14 @@ body,html{
     float: right;
     font-size: 32px;
     color: #999999;
+    vertical-align: middle;
+}
+
+.textbox{
+    font-size: 32px;
+    color: #999999;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .wire{
@@ -53,6 +108,11 @@ body,html{
 
 .khy{
     float: left;
+    font-size: 32px;
+    color: #555555;
+}
+
+.yzm{
     font-size: 32px;
     color: #555555;
 }
@@ -110,23 +170,3 @@ body,html{
     color: #4aa1f9;
     text-decoration: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

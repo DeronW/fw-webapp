@@ -29,7 +29,7 @@
   "scripts": {
     "clean": "node scripts/clean.js",
     "gulp": "node node_modules/gulp/bin/gulp.js",
-    "build:mall": "npm run clean & node node_modules/gulp/bin/gulp.js build:mall",
-    "build:main": "npm run clean & node node_modules/gulp/bin/gulp.js build:main"
+    "build:mall": "npm run clean & npm run gulp build:mall",
+    "build:main": "npm run clean & npm run gulp build:main"
   }
 }
