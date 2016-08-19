@@ -29,17 +29,17 @@ var From = React.createClass({
     componentWillUnmount: function() {
         clearInterval(this.interval);
     },
+    componentDidUpdate: function(a, params) {
+        if(this.state.blur) {
+            if(ReactDOM.findDOMNode(this.refs.number) !== null) {
+                ReactDOM.findDOMNode(this.refs.number).focus();
+            }
+        }
+    },
     amendId: function() {
         this.setState({
             showInput: 1
         });     
-    },
-    componentDidUpdate: function(a, params) {
-        if(this.state.blur) {
-            if(ReactDOM.findDOMNode(this.refs.number) !== null) {
-                ReactDOM.findDOMNode(this.refs.number).focus();            
-            }   
-        }    
     },
     onInputChangeHandler: function(event){
         //　....　data
