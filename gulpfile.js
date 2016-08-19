@@ -6,6 +6,11 @@ gulp.task('default', function (done) {
     done();
 });
 
+
+/*
+ 主站移动端页面配置
+ 包含了主站移动端新增的页面
+ */
 const MAIN_APP_NAMES = [
     'user-level',
     'user-contribute',
@@ -47,6 +52,10 @@ MAIN_APP_NAMES.forEach(function (i) {
     });
 });
 
+
+/*
+ 商城移动端页面
+ */
 const MALL_APP_NAMES = [
     'home',
     'activity',
