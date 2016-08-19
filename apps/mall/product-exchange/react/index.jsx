@@ -90,7 +90,11 @@ const ExchangeZone = React.createClass({
             )
         };
 
+        let gongfeng_array = ['不限','我可兑换','1~100','101~1000','1000~5000','5000以上'];
+        let gongfeng_item = gongfeng_array.map((name,index) => <span className="gongfeng-item-wrap" key={index}><span className="gongfeng-item">{name}</span></span>);
 
+        let viplevel_array = ['不限','普通会员','Vip1专享','Vip2专享','Vip3专享','Vip4专享'];
+        let viplevel_item = viplevel_array.map((name,index) => <span className="viplevel-item-wrap" key={index}><span className="viplevel-item">{name}</span></span>);
 
         return (
             <div>
@@ -104,16 +108,25 @@ const ExchangeZone = React.createClass({
                     </div>
                 </div>
                 <div className="filter-box">
-                    <div className="gongfeng-filter-box">
-                        <div className="filter-title">按工分值</div>
-                        <div className="gongfeng-items">
-                            <input type="text" value="" placeholder="最低工分"/><span className="horizon-line"></span><input type="text" value="" placeholder="最高工分"/>
+                    <div className="filter-box-wrap">
+                        <div className="gongfeng-filter-box">
+                            <div className="filter-title">按工分值</div>
+                            <div className="gongfeng-items">
+                                {gongfeng_item}
+                                <div className="gonfeng-input-wrap">
+                                    <input className="gongfeng-input" type="text" value="" placeholder="最低工分"/><span className="horizon-line"></span><input className="gongfeng-input" type="text" value="" placeholder="最高工分"/>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="viplevel-filter-box">
-                        <div className="filter-title">按工分值</div>
-                        <div className="gongfeng-items">
-                            <input type="text" value="" placeholder="最低工分"/><span className="horizon-line"></span><input type="text" value="" placeholder="最高工分"/>
+                        <div className="viplevel-filter-box">
+                            <div className="filter-title">按会员等级</div>
+                            <div className="viplevel-items">
+                                {viplevel_item}
+                            </div>
+                        </div>
+                        <div className="filter-action">
+                            <span className="clear-items">清空筛选</span>
+                            <span className="complete-btn">完成</span>
                         </div>
                     </div>
                 </div>
