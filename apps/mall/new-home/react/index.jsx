@@ -52,7 +52,7 @@ const Mall = React.createClass({
                      <div className="my-score"><span className="my-score-icon"></span>我的工分:<span className="score-num">250000000工分</span></div>
                      <a className="my-exchange" onClick={function(){ gotoHandler("/user") }}><span className="my-exchange-icon"></span>我可兑换</a>
                      <a className="my-mall" onClick={function(){ gotoHandler("/user", true) }}><span className="my-mall-icon"></span>我的商城</a>
-                     <span className="vertical-line"></span>
+                     <span className="vertical-gray-line"></span>
                 </div>
                 <div className="header-nav">
                     <a className="recharge" onClick={function(){ gotoHandler("/recharge_phone",true) }}>话费充值</a>
