@@ -1,7 +1,7 @@
 html, body {
   margin: 0;
 }
-a {
+a, input {
   text-decoration: none;
   &:active {
     outline: 0;
@@ -55,4 +55,31 @@ a {
   position:absolute;
   top:31px;
   left:629px;
+}
+.search-history{
+  box-sizing: border-box;
+  border:1px solid #e3e5ea;
+  padding-left:30px;
+}
+.search-history-input{
+  width:690px;
+  height:88px;
+  line-height:88px;
+  font-size:28px;
+  border:none;
+  border-bottom:1px solid #e3e5ea;
+}
+.history-item{
+  width:690px;
+  height:88px;
+  line-height:88px;
+  font-size:28px;
+  border-bottom:1px solid #e3e5ea;
+}
+.clear-history{
+  font-size:28px;
+  color:#4aa1f9;
+  line-height:88px;
+  text-align:center;
+  margin-left:-15px;
 }

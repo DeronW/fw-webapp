@@ -12,6 +12,15 @@ const SearchPage = React.createClass({
                     <span className="search-page-icon"></span>
                     <span className="search-cancel">取消</span>
                 </div>
+                <div className="search-history">
+                    <input className="search-history-input" type="text" value="" placeholder="历史搜索"/>
+                    <div className="history-item">甜甜圈饼干</div>
+                    <div className="history-item">甜甜圈饼干</div>
+                    <div className="history-item">甜甜圈饼干</div>
+                    <div className="history-item">甜甜圈饼干</div>
+                    <div className="history-item">甜甜圈饼干</div>
+                    <div className="clear-history">清空历史搜索</div>
+                </div>
             </div>
       )
     }
