@@ -77,7 +77,8 @@ const MALL_APP_NAMES = [
     'gamble-nine',
     'new-home',
     'product-category',
-    'product-exchange'
+    'product-exchange',
+    'product-search'
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
