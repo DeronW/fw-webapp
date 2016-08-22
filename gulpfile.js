@@ -24,12 +24,16 @@ const MAIN_APP_NAMES = [
     'verify-identity',
 
     // 旧页面重构
+    'home',
     'about-us',
     'app-download'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
-    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx'];
+    var common_components = [
+        'loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx',
+        'banner-group.jsx', 'circle-progress.jsx'
+    ];
     var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
     gt('main', i, {
@@ -70,8 +74,10 @@ const MALL_APP_NAMES = [
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
-    var common_components = ['mall/header.jsx', 'loading.jsx',
-        'alert.jsx', 'banner-group.jsx', 'toast.jsx'];
+    var common_components = [
+        'mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx',
+        'toast.jsx'
+    ];
     var common_js = ['javascripts/mall/fw-ajax-error-handler.js'];
 
     gt('mall', i, {

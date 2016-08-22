@@ -1,0 +1,219 @@
+@import './icon.less';
+
+.header {
+  height: 100px;
+}
+
+.header-panel {
+  height: 100px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-size: 16px;
+  border-bottom: 1px solid #d8d8d8;
+
+  .logo {
+    float: left;
+    margin: 29px 0 0 30px;
+  }
+
+  .ver-line {
+    float: right;
+    width: 2px;
+    background: #ebebee;
+    margin: 35px 15px;
+    height: 30px;
+  }
+
+  a {
+    display: block;
+    float: right;
+    font-size: 30px;
+    line-height: 100px;
+  }
+
+  .login {
+    color: #555;
+    margin-right: 30px;
+  }
+
+  .register {
+    color: #fd4d4a;
+  }
+
+  .download-app {
+    color: #7fb5fb;
+  }
+}
+
+.app-download-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 129px;
+
+  img {
+    width: 100%;
+  }
+
+  .back2top {
+    width: 90px;
+    height: 80px;
+    background: transparent url(../images/ico-top.png) no-repeat;
+    background-size: 100%;
+    position: fixed;
+    right: 10px;
+    bottom: 159px;
+  }
+}
+
+.tab-panel {
+  height: 100px;
+}
+
+.fixed-tab-panel {
+  position: fixed;
+  top: 102px;
+  height: 100px;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #ebebee;
+  box-shadow: inset 0px -3px 0 #ebebeb;
+  font-size: 26px;
+  text-align: center;
+
+  & > div {
+    float: left;
+    width: 130px;
+    height: 100px;
+    line-height: 100px;
+    box-sizing: border-box;
+    margin: 0 25px;
+
+    &.active {
+      color: #fd4d4c;
+      border-bottom: 2px solid #fd4d4c;
+    }
+  }
+}
+
+.project {
+
+  position: relative;
+  height: 280px;
+  margin-top: 24px;
+  border-bottom: 1px solid #d8d8d8;
+  border-top: 1px solid #d8d8d8;
+
+  .title {
+    height: 100px;
+    line-height: 100px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eff0f3;
+    font-size: 28px;
+    position: relative;
+    padding-left: 30px;
+
+    i {
+      margin: 0 10px;
+    }
+
+    .tag {
+      position: absolute;
+      width: 150px;
+      height: 38px;
+      line-height: 38px;
+      font-size: 24px;
+      text-align: center;
+      color: white;
+      background: #648bc2;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      top: -11px;
+      right: 20px;
+
+      &:before {
+        content: ' ';
+        width: 0;
+        height: 0;
+        display: block;
+        border-top: 10px solid transparent;
+        border-right: 5px solid #4f698c;
+        position: absolute;
+        left: -4px;
+      }
+
+      &:after {
+        content: ' ';
+        width: 0;
+        height: 0;
+        display: block;
+        border-top: 10px solid transparent;
+        border-left: 5px solid #4f698c;
+        position: absolute;
+        right: -4px;
+        top: 0;
+      }
+    }
+  }
+
+  .detail {
+    position: relative;
+    height: 180px;
+    padding: 40px 0 0 50px;
+
+    .progress {
+      display: block;
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: white;
+      top: -50px;
+      right: 30px;
+
+      & > svg {
+        position: relative;
+        top: 12px;
+        left: 10px;
+      }
+    }
+
+    .profit {
+      color: #fd4d4c;
+      font-size: 48px;
+      width: 150px;
+      float: left;
+    }
+
+    .duration {
+      float: left;
+      font-size: 30px;
+      width: 150px;
+      padding-top: 14px;
+      color: #555;
+    }
+    .remain {
+      float: left;
+      font-size: 30px;
+      width: 150px;
+      padding-top: 14px;
+      color: #555;
+    }
+
+    .keywords {
+      display: table;
+      width: 100%;
+      margin-top: 60px;
+
+      span {
+        font-size: 24px;
+        color: #999;
+        width: 150px;
+        display: inline-block;
+        text-align: left;
+      }
+    }
+  }
+}
