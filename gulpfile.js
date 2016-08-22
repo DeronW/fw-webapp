@@ -77,7 +77,6 @@ const MALL_APP_NAMES = [
     'gamble-nine',
     'new-home',
     'product-category',
-    'product-exchange',
     'product-search'
 ];
 
