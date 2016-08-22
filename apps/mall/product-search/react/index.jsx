@@ -4,7 +4,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 const ResultPage = React.createClass({
     render: function(){
-        let category_img = <a><img src="images/category-ad.jpg"/></a>;
+        let category_img = <a className="category-img"><img src="images/category-img.jpg"/></a>;
         return (
             <div>
                 <SearchBar/>
@@ -22,15 +22,15 @@ const ResultPage = React.createClass({
 const SearchBar = React.createClass({
     render: function(){
             return (
-            <div>
+            <div className="search-bar">
                 <div className="search-page-box">
                     <a className="back-arrow"></a>
                     <input type="text" value="" placeholder="请输入想找的商品"/>
                     <span className="search-page-icon"></span>
-                    <span className="search-cancel">取消</span>
+                    <span className="search-confirm">确认</span>
                 </div>
                 <div className="search-history">
-                    <input className="search-history-input" type="text" value="" placeholder="历史搜索"/>
+                    <div className="search-history-input">历史搜索</div>
                     <div className="history-item">甜甜圈饼干</div>
                     <div className="history-item">甜甜圈饼干</div>
                     <div className="history-item">甜甜圈饼干</div>
@@ -76,7 +76,7 @@ const ExchangeBar = React.createClass({
         let viplevel_item = viplevel_array.map((name,index) => <span className="viplevel-item-wrap" key={index}><span className="viplevel-item">{name}</span></span>);
 
         return (
-            <div>
+            <div className="filter-tab">
                 <div className="ui-tab">
                     <div className="ui-tab-block">
                         {this.tabs.map(tab)}
