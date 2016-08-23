@@ -11,20 +11,20 @@ const MAIN_APP_NAMES = [
     'user-contribute', // 用户贡献值
 
     // 徽商相关页面
-    //'bind-bank-card',
-    //'hui-shang-bank',
-    //'hui-shang-user',
-    //'bind-card',
-    //'before-input',
-    //'personal-center',
-    //'recharge',
-    //'first-page',
-    //'cash',
-    //'special-cash',
-    //'verify-identity',
+    'bind-bank-card',
+    'hui-shang-bank',
+    'hui-shang-user',
+    'bind-card',
+    'before-input',
+    'personal-center',
+    'recharge',
+    'first-page',
+    'cash',
+    'special-cash',
+    'verify-identity',
 
     // 旧页面重构
-    //'home', // 首页
+    'home', // 首页
     'about-us', // 关于我们
     'vip-prerogative', // VIP特权详情页
     'app-download'
