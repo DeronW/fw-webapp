@@ -447,7 +447,7 @@ var AllPage = React.createClass({
             <AccountSucceedBody callbackBodyPage={this.bodyPage} imgUrl={"images/nav-2.png"}/>,
             <MerchandisePsw callbackBodyPage={this.bodyPage} imgUrl={"images/nav-1.png"} />
         ];
-
+            
         return (
             <div>
                 {
