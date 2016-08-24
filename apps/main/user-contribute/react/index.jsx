@@ -78,7 +78,7 @@ const InvestTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=0",
+            url: API_PATH + "mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=0",
             //url: "http://10.105.7.124/xxxxx.json?page=1&rows=10&type=0",
             enable_loading: true,
             success: function (data) {
@@ -155,7 +155,7 @@ const InviteTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=1",
+            url: API_PATH + "mpwap/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=1",
             enable_loading: true,
             success: function (data) {
                 _this.setState({
@@ -270,8 +270,7 @@ const HomePage = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.BatchGet([
-        API_PATH + "/mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
-        //"http://10.105.7.124/my.json",
+        API_PATH + "mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
     ], function (data) {
         ReactDOM.render(
             <HomePage myInfoData={data[0]}/>,

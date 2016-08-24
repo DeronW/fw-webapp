@@ -81,14 +81,20 @@
             贡献值是衡量用户等级的标准，用户可以通过投资或邀请好友投资来获取贡献值。
         </div>
 
-        <div class="paragraph value-formula">贡献值=投资贡献值+邀友贡献值</div>
+        <div class="paragraph value-formula">贡献值 = 投资贡献值 &plus; 邀友贡献值</div>
 
         <div class="value-describe">
             <div>
                 投资贡献值：用户<span>实时待收</span>年化投资额度。
             </div>
             <div>
-                邀友贡献值：<span>30天内</span>，每成功邀请一位好友首投<span>5000元</span>，邀请人获得<span>1000</span>贡献值
+                邀友贡献值：
+                <span id="limitDays2">30</span><span>天内</span>
+                ，每成功邀请一位好友首投
+                <span id="firstInvestAmount2">5000</span><span>元</span>
+                ，邀请人获得
+                <span id="sendStore2">1000</span>
+                贡献值
             </div>
         </div>
     </div>
@@ -106,19 +112,19 @@
             <div class="cell cell-title cell-right">所需贡献值</div>
 
             <div class="cell cell-left cell-odd">普通会员</div>
-            <div class="cell cell-right cell-odd">0-999</div>
+            <div class="cell cell-right cell-odd" id="vip-0">0-999</div>
 
             <div class="cell cell-left cell-even">VIP1</div>
-            <div class="cell cell-right cell-even">1,000-29,999</div>
+            <div class="cell cell-right cell-even" id="vip-1">1,000-29,999</div>
 
             <div class="cell cell-left cell-odd">VIP2</div>
-            <div class="cell cell-right cell-odd">30,000-99,999</div>
+            <div class="cell cell-right cell-odd" id="vip-2">30,000-99,999</div>
 
             <div class="cell cell-left cell-even">VIP3</div>
-            <div class="cell cell-right cell-even">100,000-199,999</div>
+            <div class="cell cell-right cell-even" id="vip-3">100,000-199,999</div>
 
             <div class="cell cell-left cell-odd">VIP4</div>
-            <div class="cell cell-right cell-odd">200,000以上</div>
+            <div class="cell cell-right cell-odd" id="vip-4">200,000以上</div>
         </div>
     </div>
 
@@ -130,7 +136,15 @@
             <div class="formula">计算公式：投资贡献值=投资金额 &times; 投资期限/360</div>
         </div>
         <div class="text text-3">
-            邀友贡献值：30天内，用户每邀请一位好友注册并首投5000元，即可获得1000贡献值。30天内最高可累计100000贡献值（100位好友）。<span>(A码用户不获取邀友贡献值)</span>
+            邀友贡献值：
+            <span id="limitDays">30</span>
+            天内，用户每邀请一位好友注册并首投
+            <span id="firstInvestAmount">5000</span>
+            元，即可获得
+            <span id="sendStore">1000</span>
+            贡献值。30天内最高可累计
+            <span id="maxSendStore">100000</span>
+            贡献值（100位好友）。<span class="red">(A码用户不获取邀友贡献值)</span>
         </div>
         <div class="text text-4">用户回款、债权转让、流标后，您对应产品的投资贡献值会减少。</div>
         <div class="text text-5">若贡献值减少，但距离上次等级变更时间在30天以内，则保持当前等级；若超出30天，则对应实际的等级。</div>
