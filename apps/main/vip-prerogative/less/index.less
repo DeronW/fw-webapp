@@ -1,0 +1,271 @@
+.content {
+  background: #636a8c url(../images/update-banner.jpg) no-repeat top center;
+  padding-top: 622px;
+  padding-bottom: 20px;
+}
+
+.section {
+  position: relative;
+  display: table;
+  margin: 20px auto 0;
+  width: 660px;
+
+  color: #7f849f;
+  font-size: 24px;
+  line-height: 36px;
+
+  background-color: #fff;
+  border-radius: 12px;
+  padding-top: 60px;
+  padding-bottom: 40px;
+
+  .title-img {
+    position: absolute;
+    display: block;
+    top: -2px;
+    left: -10px;
+  }
+
+}
+
+.table {
+  display: table;
+  width: 620px;
+  margin: 20px auto;
+  box-sizing: border-box;
+  border-radius: 16px;
+  overflow: hidden;
+
+  .table-title {
+    border-radius: 6px 6px 0 0;
+    padding: 15px;
+    line-height: 32px;
+    font-size: 20px;
+    background-color: #8ba3e6;
+    text-align: center;
+    color: #fff;
+  }
+
+  .cell {
+    padding: 15px 30px;
+    box-sizing: border-box;
+  }
+  .cell-left {
+    float: left;
+    text-align: right;
+    width: 50%;
+    border-right: 4px solid white;
+    color: #777;
+  }
+  .cell-right {
+    float: right;
+    text-align: left;
+    width: 50%;
+    color: #646a89;
+  }
+
+  .cell-left.cell-even {
+    background-color: #f6f7fa;
+  }
+  .cell-left.cell-odd {
+    background-color: #e6e9f8;
+  }
+  .cell-right.cell-even {
+    background-color: #fff;
+  }
+  .cell-right.cell-odd {
+    background-color: #eceef9;
+  }
+}
+
+.table.table-level {
+  .cell-title {
+    color: white;
+    background-color: #8ba3e6;
+  }
+  .cell {
+    text-align: center !important;
+  }
+}
+
+.section-1 {
+
+  .level-gift {
+    float: left;
+    width: 50%;
+    text-align: center;
+
+    img {
+      display: block;
+      margin: 10px auto;
+    }
+  }
+
+  .gift-title {
+    display: block;
+    margin: 10px auto;
+  }
+
+  .table-gift {
+    border-radius: 12px;
+    width: 615px;
+    margin: 10px auto;
+    font-size: 20px;
+    text-align: center;
+    border-spacing: 0;
+    overflow: hidden;
+
+    tr {
+      height: 60px;
+      line-height: 60px;
+
+      &:first-child {
+        background: #8ba3e6;
+        color: white;
+      }
+    }
+
+    .bg-a {
+      background-color: #f6f7fa;
+    }
+    .bg-b {
+      background-color: #e6e9f8;
+    }
+    .bg-c {
+      background-color: #fff;
+    }
+    .bg-d {
+      background-color: #eceef9;
+    }
+  }
+  .comments {
+    text-align: center;
+  }
+}
+
+.section-2 {
+
+  .paragraph {
+    text-indent: 2em;
+    margin: 20px;
+    font-size: 22px;
+  }
+
+  .value-formula {
+    border-radius: 24px;
+    color: #e84f76;
+    background-color: #e9edfd;
+    text-indent: 2em;
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .value-describe {
+    padding: 18px 15px 14px;
+    border: 1px dashed #c8c0c0;
+    margin: 20px;
+
+    & > div {
+      padding-left: 30px;
+      position: relative;
+
+      &:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 16px;
+        left: 5px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #7f88b2;
+      }
+
+      span {
+        color: #e84f76;
+      }
+    }
+  }
+
+}
+
+.section-3 {
+  .example-img {
+    display: block;
+    margin: 20px auto;
+  }
+}
+
+.section-4 {
+  .table .cell-left {
+    border-right: 0 !important;
+  }
+}
+
+.section-5 {
+  .text {
+    padding: 10px 20px 10px 60px;
+    position: relative;
+    margin: 10px 0;
+    font-size: 20px;
+
+    &:before {
+      content: ' ';
+      display: block;
+      color: white;
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 50%;
+      font-size: 24px;
+      text-align: center;
+      background-color: #8ba3e6;
+    }
+
+    span {
+      color: #e84f76;
+    }
+  }
+
+  .formula {
+    border-radius: 24px;
+    color: #e84f76;
+    background-color: #e9edfd;
+    padding: 10px 0 10px 20px;
+    margin-top: 10px;
+  }
+
+  .text-1 {
+    &:before {
+      content: '1';
+    }
+  }
+  .text-2 {
+    &:before {
+      content: '2';
+    }
+  }
+  .text-3 {
+    &:before {
+      content: '3';
+    }
+  }
+  .text-4 {
+    &:before {
+      content: '4';
+    }
+  }
+  .text-5 {
+    &:before {
+      content: '5';
+    }
+  }
+  .text-6 {
+    &:before {
+      content: '6';
+    }
+  }
+}
