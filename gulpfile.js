@@ -44,7 +44,7 @@ MAIN_APP_NAMES.forEach(function (i) {
         include_common_js: common_js
     });
     gt('main', i, {
-        api_path: "http://m.9888.cn",
+        api_path: "http://m.9888.cn/",
         cmd_prefix: 'pack',
         cdn_prefix: '/static/wap/' + i + '/',
         include_components: common_components,
