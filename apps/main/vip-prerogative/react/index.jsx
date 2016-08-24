@@ -11,22 +11,24 @@ $FW.DOMReady(function () {
         url: API_PATH + 'mpwap/api/v1/upgrade-formula.shtml',
         success: function (data) {
 
+            var F = $FW.Format.currency;
+
             var score = data.levelConfig;
-            g('vip-0').innerText = '0-' + score.maxLv1;
-            g('vip-1').innerText = score.minLv2 + '-' + score.maxLv2;
-            g('vip-2').innerText = score.minLv3 + '-' + score.maxLv3;
-            g('vip-3').innerText = score.minLv4 + '-' + score.maxLv4;
-            g('vip-4').innerText = score.minLv5 + '以上';
+            g('vip-0').innerText = '0-' + F(score.maxLv1);
+            g('vip-1').innerText = F(score.minLv2) + '-' + F(score.maxLv2);
+            g('vip-2').innerText = F(score.minLv3) + '-' + F(score.maxLv3);
+            g('vip-3').innerText = F(score.minLv4) + '-' + F(score.maxLv4);
+            g('vip-4').innerText = F(score.minLv5) + '以上';
 
-            g('limitDays').innerText = data.limitDays;
-            g('firstInvestAmount').innerText = data.firstInvestAmount;
-            g('sendStore').innerText = data.sendStore;
-            g('maxSendStore').innerText = data.sendStore * 100;
+            g('limitDays').innerText = F(data.limitDays);
+            g('firstInvestAmount').innerText = F(data.firstInvestAmount);
+            g('sendStore').innerText = F(data.sendStore);
+            g('maxSendStore').innerText = F(data.sendStore * 100);
 
 
-            g('limitDays2').innerText = data.limitDays;
-            g('firstInvestAmount2').innerText = data.firstInvestAmount;
-            g('sendStore2').innerText = data.sendStore;
+            g('limitDays2').innerText = F(data.limitDays);
+            g('firstInvestAmount2').innerText = F(data.firstInvestAmount);
+            g('sendStore2').innerText = F(data.sendStore);
         }
     });
 
