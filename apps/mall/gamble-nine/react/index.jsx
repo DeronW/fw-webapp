@@ -415,9 +415,6 @@ $FW.DOMReady(function () {
         document.getElementById('cnt'));
   }, true);
     
-    
-    
-
 });
 
 function backward() {
