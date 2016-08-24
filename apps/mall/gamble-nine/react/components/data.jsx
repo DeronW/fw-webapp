@@ -6,54 +6,54 @@
 //                      <div className="pop-inf-li">4、累投年化金额所得奖金将在活动结束后7个工作日内，以工豆形式发放至获奖用户账户内，工豆有效期为15天；</div>
 //                      <div className="pop-inf-li">5、活动最终解释权归金融工场所有，活动详情致电客服热线咨询:400-0322-988。</div>
 //模拟数据
-var data=[
-    {   code:10000,
-    	data:{
-    		avatar:'images/img4.png',
-	        userName:'1111',
-	        userLevel:0,
-    	}
-        
-    },
-    {	code:10000,
-    	data:{
-    		costScore:3000,
-	        remainTimes:4,
-	        infinitely:false,
-	        usableScore:30000
-    	}
-        
-    },
-    {   code:10000,
-    	data:{
-    		list:[
-	            {
-	                avatar:'images/img4.png',
-	                name:'0',
-	                prizeName:'100元返现券',
-	                time:'2016.06.08 23:20:08',
-	            },
-	            {
-	                avatar:'images/img1.png',
-	                name:'1',
-	                prizeName:'5元红包',
-	                time:'2016.06.08 23:20:08',
-	            },
-	            {
-	                avatar:'images/img3.png',
-	                name:'2',
-	                prizeName:'50元红包',
-	                time:'2016.06.08 23:20:08',
-	            },
-	            {
-	                avatar:'images/img2.png',
-	                name:'my**13',
-	                prizeName:'10元红包',
-	                time:'2016.06.08 23:20:08',
-	            }
-	        ]
-    	}
-    	
-
-    }
-];
+//var data=[
+//  {   code:10000,
+//  	data:{
+//  		avatar:'images/img4.png',
+//	        userName:'1111',
+//	        userLevel:0,
+//  	}
+//      
+//  },
+//  {	code:10000,
+//  	data:{
+//  		costScore:3000,
+//	        remainTimes:4,
+//	        infinitely:false,
+//	        usableScore:30000
+//  	}
+//      
+//  },
+//  {   code:10000,
+//  	data:{
+//  		list:[
+//	            {
+//	                avatar:'images/img4.png',
+//	                name:'0',
+//	                prizeName:'100元返现券',
+//	                time:'2016.06.08 23:20:08',
+//	            },
+//	            {
+//	                avatar:'images/img1.png',
+//	                name:'1',
+//	                prizeName:'5元红包',
+//	                time:'2016.06.08 23:20:08',
+//	            },
+//	            {
+//	                avatar:'images/img3.png',
+//	                name:'2',
+//	                prizeName:'50元红包',
+//	                time:'2016.06.08 23:20:08',
+//	            },
+//	            {
+//	                avatar:'images/img2.png',
+//	                name:'my**13',
+//	                prizeName:'10元红包',
+//	                time:'2016.06.08 23:20:08',
+//	            }
+//	        ]
+//  	}
+//  	
+//
+//  }
+//];
