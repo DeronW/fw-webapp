@@ -1,7 +1,9 @@
 body {
     margin: 0;
+    font-family: "Microsoft YaHei";
 }
 
 a {
     -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
 }

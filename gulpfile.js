@@ -12,8 +12,8 @@ gulp.task('default', function (done) {
  包含了主站移动端新增的页面
  */
 const MAIN_APP_NAMES = [
-    'user-level',
-    'user-contribute',
+    'user-level', // 用户等级详情
+    'user-contribute', // 用户贡献值
 
     // 徽商相关页面
     'bind-bank-card',
@@ -29,12 +29,17 @@ const MAIN_APP_NAMES = [
     'verify-identity',
 
     // 旧页面重构
-    'about-us',
+    'home', // 首页
+    'about-us', // 关于我们
+    'vip-prerogative', // VIP特权详情页
     'app-download'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
-    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx'];
+    var common_components = [
+        'loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx',
+        'banner-group.jsx', 'circle-progress.jsx'
+    ];
     var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
     gt('main', i, {
@@ -81,8 +86,10 @@ const MALL_APP_NAMES = [
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
-    var common_components = ['mall/header.jsx', 'loading.jsx',
-        'alert.jsx', 'banner-group.jsx', 'toast.jsx'];
+    var common_components = [
+        'mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx',
+        'toast.jsx'
+    ];
     var common_js = ['javascripts/mall/fw-ajax-error-handler.js'];
 
     gt('mall', i, {
