@@ -161,22 +161,21 @@ const NineDraw = React.createClass({
         //this.startRoll();
         
         
-        //$FW.Ajax({
-        //    url: API_PATH + '/mall/api/v1/activity/draw.json',
-        //    method: 'post',
-        //    data: {activityId:''},
-        //    success: (data) => {
-        	
-        	var data={
-        		code:10000,
-        		data:{
-	        		prizeMark:7,
-	        		prizeName:'100元返现券',
-	        		remainTimes:this.state.remainTimes-1,
-	        		usableScore:300
-        		},
-        		message:"工分不足，请投资后再试哦！"
-        	};
+        $FW.Ajax({
+            url: API_PATH + '/mall/api/v1/activity/draw.json',
+            method: 'post',
+            data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:myBrowerType},
+           success: (data) => {        	
+//      	var data={
+//      		code:10000,
+//      		data:{
+//	        		prizeMark:7,
+//	        		prizeName:'100元返现券',
+//	        		remainTimes:this.state.remainTimes-1,
+//	        		usableScore:300
+//      		},
+//      		message:"工分不足，请投资后再试哦！"
+//      	};
         	if(data.code==10000){
         		//setTimeout(()=>this.stopRoll(data.prizeMark,data.prizeName), 200);
 	        	this.setState({   
@@ -191,12 +190,12 @@ const NineDraw = React.createClass({
         		this.props.showAlertMessage(data.message);
         	}
         	        	
-        //        
-        //    },
-        //    fail: () => {
-        //        this.hideRoll()
-        //    }
-        //});
+                
+            },
+           fail: () => {
+                this.hideRoll()
+            }
+        });
     },
     render: function () {
         let cell = function (n, index) {
@@ -384,20 +383,37 @@ $FW.DOMReady(function () {
 
     if ($FW.Utils.shouldShowHeader()){
     	ReactDOM.render(<Header title={"豆哥玩玩乐"} back_handler={backward}/>, document.getElementById('header'));
-    }            
-//  $FW.BatchGet([
-//      API_PATH + '/mall/api/v1/activity/user.json', //用户信息
-//      API_PATH + '/mall/api/v1/activity/cost.json?activityId=1', //活动消耗工分
-//      API_PATH + '/mall/api/v1/activity/winnersList.json?activityId=1&num=10&page=1',//获奖名单        
-//      //'http://127.0.0.1/banners.json',
-//      //'http://127.0.0.1/activities.json'
-//  ], function (data) {
+    }    
+    var in_mobile = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i)?true:false;
+	var app=navigator.userAgent.match(/FinancialWorkshop/i)?true:false;
+	var ios=navigator.userAgent.match(/iPhone|iPad/i)?true:false;
+	var myBrowerType=1;
+	if(in_mobile){
+		if(app){
+			if(ios){
+				myBrowerType=3
+			}else{
+				myBrowerType=4
+			}
+		}else{
+			myBrowerType=2
+		}
+	}else{
+		myBrowerType=1
+	}
+  $FW.BatchGet([
+      API_PATH + '/mall/api/v1/activity/user.json', //用户信息
+      API_PATH + '/mall/api/v1/activity/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分
+      API_PATH + '/mall/api/v1/activity/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单        
+      //'http://127.0.0.1/banners.json',
+      //'http://127.0.0.1/activities.json'
+  ], function (data) {
         var user = data[0], cost = data[1],list=data[2];
         console.log(user);console.log(cost);console.log(list);
         if (typeof(user) == 'undefined' || typeof(cost) == 'undefined' || typeof(list) == 'undefined') $FW.Component.Alert('error: empty data received');
         ReactDOM.render(<NineActivity user={user.data} cost={cost.data} list={list.data}/>,
         document.getElementById('cnt'));
-//  }, true);
+  }, true);
     
     
     
