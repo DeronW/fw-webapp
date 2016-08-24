@@ -249,6 +249,7 @@ const Recharge = React.createClass({
     }
 });
 
+
 Recharge.ProductPanel = React.createClass({
     render: function () {
 
@@ -293,8 +294,10 @@ Recharge.ProductPanel = React.createClass({
 $FW.DOMReady(function () {
     NativeBridge.setTitle('充值专区');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>,
-            document.getElementById('header'));
+        ReactDOM.render(
+			<Header title={"充值专区"} back_handler={backward}/>,
+            document.getElementById('header')
+		)
 
     $FW.Ajax({
         url: API_PATH + 'api/v1/user-state.json',
@@ -306,6 +309,7 @@ $FW.DOMReady(function () {
     });
     window.confirmPanel = ReactDOM.render(<ConfirmPop />, document.getElementById('dialog'));
 });
+
 
 function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'

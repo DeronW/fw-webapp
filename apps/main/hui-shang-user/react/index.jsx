@@ -152,12 +152,6 @@ var AllJournal = React.createClass({
         return (
             <div className="pop-account">
                 <div className="funds-flow">
-                    <div className="title">
-                        3个月内银行资金流水
-
-                        <span className="see-text">查看全部</span>
-                    </div>
-
                     <div className="info">
 
                         <div className="paragraph">

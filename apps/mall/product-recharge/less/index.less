@@ -11,6 +11,23 @@ input.sms-input::-webkit-input-placeholder {
   line-height: normal;
 }
 
+.phone-input::-webkit-input-placeholder {
+	font-size: 36px;
+}
+
+.phone-input:-moz-placeholder { /* Firefox 18- */
+	font-size: 36px;
+}
+
+.phone-input::-moz-placeholder {  /* Firefox 19+ */
+	font-size: 36px;
+}
+
+.phone-input:-ms-input-placeholder {  
+	font-size: 36px;
+}
+
+
 html, body {
   width: 100%;
   height: 100%;
@@ -44,6 +61,7 @@ html, body {
 }
 
 .phonenumber-wrap {
+  height: 106px;
   background: #fff;
   border-top: 1px solid #d8d8d8;
   border-bottom: 1px solid #d8d8d8;
@@ -53,24 +71,27 @@ html, body {
 }
 
 .phone-input {
-  border: none;
-  outline: none;
-  width: 595px;
-  font-size: 36px;
-  padding: 32px 20px 26px 80px;
-  color: #4b4d4c;
-  line-height: normal;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	border: none;
+	outline: none;
+	width: 576px;
+	font-size: 34px;
+	color: #4b4d4c;
+		   line-height: normal;
+		   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	margin: 34px 0;
+	padding: 0;
 }
 
 .phone-icon {
-  position: absolute;
-  top: 32px;
-  left: 31px;
-  display: inline-block;
+  float: left;
   background: url(../images/phone-icon.png) no-repeat;
-  width: 29px;
-  height: 42px;
+		   /* height: 50px; */
+	height: 106px;
+	width: 70px;
+  background-position: 28px 34px
 }
 
 .phone-empty {
