@@ -162,7 +162,7 @@ const NineDraw = React.createClass({
         
         
         $FW.Ajax({
-            url: API_PATH + '/mall/api/v1/activity/draw.json',
+            url: API_PATH + '/mall/api/magic/v1/draw.json',
             method: 'post',
             data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:myBrowerType},
            success: (data) => {        	
@@ -402,9 +402,9 @@ $FW.DOMReady(function () {
 		myBrowerType=1
 	}
   $FW.BatchGet([
-      API_PATH + '/mall/api/v1/activity/user.json', //用户信息
-      API_PATH + '/mall/api/v1/activity/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分
-      API_PATH + '/mall/api/v1/activity/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单        
+      API_PATH + '/mall/api/magic/v1/user.json', //用户信息
+      API_PATH + '/mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分
+      API_PATH + '/mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单        
       //'http://127.0.0.1/banners.json',
       //'http://127.0.0.1/activities.json'
   ], function (data) {
