@@ -11,7 +11,7 @@ $FW.DOMReady(function () {
         url: API_PATH + 'mpwap/api/v1/upgrade-formula.shtml',
         success: function (data) {
 
-            var score = data.levelScore;
+            var score = data.levelConfig;
             g('vip-0').innerText = '0-' + score.maxLv1;
             g('vip-1').innerText = score.minLv2 + '-' + score.maxLv2;
             g('vip-2').innerText = score.minLv3 + '-' + score.maxLv3;
