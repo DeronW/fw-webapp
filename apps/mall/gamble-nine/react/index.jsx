@@ -255,11 +255,12 @@ const NineList = React.createClass({
     render: function () {
         let prize = (d, index) => {
             if (!d) return null;
+            let time=d.time.substring(0,10);
             return <div key={index} className="Nine-list-li">
                 <div className="avatar"><img src={d.avatar}/></div>
                 <div className="name">{d.name}</div>
                 <div className="get-prize">抽中了{d.prizeName}</div>
-                <div className="time">{d.time.substring(0,10)}</div>
+                <div className="time">{time}</div>
             </div>
         };
 
