@@ -161,7 +161,7 @@ const NineDraw = React.createClass({
         $FW.Ajax({
             url: API_PATH + '/mall/api/magic/v1/draw.json',
             method: 'post',
-            data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:myBrowerType},
+            data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:window.myBrowerType},
            success: (data) => {        	
         	if(data.code==10000){
 	        	this.setState({   
@@ -373,19 +373,19 @@ $FW.DOMReady(function () {
     var in_mobile = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i)?true:false;
 	var app=navigator.userAgent.match(/FinancialWorkshop/i)?true:false;
 	var ios=navigator.userAgent.match(/iPhone|iPad/i)?true:false;
-	var myBrowerType=1;
+	window.myBrowerType=1;
 	if(in_mobile){
 		if(app){
 			if(ios){
-				myBrowerType=3
+				window.myBrowerType=3
 			}else{
-				myBrowerType=4
+				window.myBrowerType=4
 			}
 		}else{
-			myBrowerType=2
+			window.myBrowerType=2
 		}
 	}else{
-		myBrowerType=1
+		window.myBrowerType=1
 	}
   $FW.BatchGet([
       API_PATH + '/mall/api/magic/v1/user.json', //用户信息
