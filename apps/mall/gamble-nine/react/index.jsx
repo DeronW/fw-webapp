@@ -69,15 +69,15 @@ const NineActivity = React.createClass({
     
     render: function () {
     	let myLevel='普通用户';
-    	if(this.props.user.userLevel==0){
+    	if(this.props.user.userLevel==1){
     		myLevel='普通用户'
-    	}else if(this.props.user.userLevel==1){
-    		myLevel='VIP1'
     	}else if(this.props.user.userLevel==2){
-    		myLevel='VIP2'
+    		myLevel='VIP1'
     	}else if(this.props.user.userLevel==3){
-    		myLevel='VIP3'
+    		myLevel='VIP2'
     	}else if(this.props.user.userLevel==4){
+    		myLevel='VIP3'
+    	}else if(this.props.user.userLevel==5){
     		myLevel='VIP4'
     	}
         return (
