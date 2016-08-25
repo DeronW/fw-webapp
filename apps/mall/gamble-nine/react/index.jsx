@@ -8,7 +8,7 @@ const NineActivity = React.createClass({
             showPopPrize: false,
             usableDraw: true,
             moveNum: 0,
-            prize_list:this.props.list.list,    
+            prize_list:this.props.prizeList.list,    
             usableScore:this.props.cost.usableScore,
             remainTimes:this.props.cost.remainTimes,
             masker:null,
@@ -408,10 +408,10 @@ $FW.DOMReady(function () {
       //'http://127.0.0.1/banners.json',
       //'http://127.0.0.1/activities.json'
   ], function (data) {
-        var user = data[0], cost = data[1],list=data[2];
-        console.log(user);console.log(cost);console.log(list);
+        var user = data[0], cost = data[1],prizeList=data[2];
+        console.log(user);console.log(cost);console.log(prizeList);
         if (typeof(user) == 'undefined' || typeof(cost) == 'undefined' || typeof(list) == 'undefined') $FW.Component.Alert('error: empty data received');
-        ReactDOM.render(<NineActivity user={user.data} cost={cost.data} list={list.data}/>,
+        ReactDOM.render(<NineActivity user={user.data} cost={cost.data} prizeList={prizeList.data}/>,
         document.getElementById('cnt'));
   }, true);
     
