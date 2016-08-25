@@ -420,7 +420,6 @@ $FW.DOMReady(function () {
 function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
-
 window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') backward()
 };
