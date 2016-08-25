@@ -159,7 +159,7 @@ const NineDraw = React.createClass({
         this._usable=false;
 
         $FW.Ajax({
-            url: API_PATH + '/mall/api/magic/v1/draw.json',
+            url: API_PATH + 'mall/api/magic/v1/draw.json',
             method: 'post',
             data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:window.myBrowerType},
            success: (data) => {        	
@@ -388,9 +388,9 @@ $FW.DOMReady(function () {
 		window.myBrowerType=1
 	}
   $FW.BatchGet([
-      API_PATH + '/mall/api/magic/v1/user.json', //用户信息
-      API_PATH + '/mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分
-      API_PATH + '/mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单        
+      API_PATH + 'mall/api/magic/v1/user.json', //用户信息
+      API_PATH + 'mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分
+      API_PATH + 'mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单        
   ], function (data) {
         var user = data[0], cost = data[1],prizeList=data[2];
         console.log(user);console.log(cost);console.log(prizeList);
