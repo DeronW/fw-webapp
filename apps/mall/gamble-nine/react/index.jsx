@@ -394,7 +394,7 @@ $FW.DOMReady(function () {
         var user = data[0], cost = data[1],prizeList=data[2];
         console.log(user);console.log(cost);console.log(prizeList);
         if (typeof(user) == 'undefined' || typeof(cost) == 'undefined' || typeof(prizeList) == 'undefined') $FW.Component.Alert('error: empty data received');
-        ReactDOM.render(<NineActivity user={user} cost={cost} prizeList={prizeList.list}/>,
+        ReactDOM.render(<NineActivity user={user} cost={cost} prizeList={prizeList}/>,
         document.getElementById('cnt'));
   }, true);
     
