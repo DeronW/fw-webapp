@@ -79,7 +79,6 @@ const MALL_APP_NAMES = [
     'deliver-address',
     'new-deliver-address',
     'error-page',
-    'gamble-nine',
     'new-home',
     'product-category',
     'product-search'
@@ -109,6 +108,29 @@ MALL_APP_NAMES.forEach(function (i) {
         width_swipe: true
     });
 });
+
+// START
+// 针对九宫格游戏, 单独配置打包过程
+var nine = 'gamble-nine';
+gt('mall', nine, {
+    debug: true,
+    api_path: 'http://localhost/',
+    include_components: common_components,
+    include_common_js: common_js,
+    width_swipe: true
+});
+
+gt('mall', nine, {
+    cmd_prefix: 'pack',
+    api_path: 'http://mmall.9888.cn/',
+    cdn_prefix: '/static/mall/' + i + '/',
+    include_components: common_components,
+    include_common_js: common_js,
+    width_swipe: true
+});
+// 针对九宫格游戏, 单独配置打包过程
+// END
+
 
 gulp.task('build:main', gulp.series(MAIN_APP_NAMES.map((name) => `main:pack:${name}:revision`)));
 gulp.task('build:mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:pack:${name}:revision`)));
