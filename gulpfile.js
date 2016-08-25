@@ -95,8 +95,7 @@ MALL_APP_NAMES.forEach(function (i) {
         debug: true,
         api_path: 'http://localhost/',
         include_components: common_components,
-        include_common_js: common_js,
-        width_swipe: true
+        include_common_js: common_js
     });
 
     gt('mall', i, {
@@ -104,8 +103,7 @@ MALL_APP_NAMES.forEach(function (i) {
         api_path: 'http://mmall.9888.cn/',
         cdn_prefix: '/pages/' + i + '/',
         include_components: common_components,
-        include_common_js: common_js,
-        width_swipe: true
+        include_common_js: common_js
     });
 });
 
@@ -115,24 +113,16 @@ var nine = 'gamble-nine';
 gt('mall', nine, {
     debug: true,
     api_path: 'http://localhost/',
-    include_components: [
-        'mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx',
-        'toast.jsx'
-    ],
-    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js'],
-    width_swipe: true
+    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
+    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
 });
 
 gt('mall', nine, {
     cmd_prefix: 'pack',
     api_path: 'http://mmall.9888.cn/',
     cdn_prefix: '/static/mall/' + nine + '/',
-    include_components: [
-        'mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx',
-        'toast.jsx'
-    ],
-    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js'],
-    width_swipe: true
+    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
+    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
 });
 // 针对九宫格游戏, 单独配置打包过程
 // END
