@@ -126,7 +126,7 @@ gt('mall', nine, {
 gt('mall', nine, {
     cmd_prefix: 'pack',
     api_path: 'http://mmall.9888.cn/',
-    cdn_prefix: '/static/mall/' + i + '/',
+    cdn_prefix: '/static/mall/' + nine + '/',
     include_components: [
         'mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx',
         'toast.jsx'
