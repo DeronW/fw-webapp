@@ -1,5 +1,4 @@
 'use strict';
-
 const API_PATH = document.getElementById('api-path').value;
 const NineActivity = React.createClass({
     getInitialState: function () {
@@ -8,7 +7,7 @@ const NineActivity = React.createClass({
             showPopPrize: false,
             usableDraw: true,
             moveNum: 0,
-            prize_list:this.props.prizeList.list,    
+            prize_list:this.props.prizeList.list,
             usableScore:this.props.cost.usableScore,
             remainTimes:this.props.cost.remainTimes,
             masker:null,
@@ -158,26 +157,13 @@ const NineDraw = React.createClass({
         if (!this._usable) return;
         if (this.state.remainTimes < 1) return;
         this._usable=false;
-        //this.startRoll();
-        
-        
+
         $FW.Ajax({
             url: API_PATH + '/mall/api/magic/v1/draw.json',
             method: 'post',
             data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:myBrowerType},
            success: (data) => {        	
-//      	var data={
-//      		code:10000,
-//      		data:{
-//	        		prizeMark:7,
-//	        		prizeName:'100元返现券',
-//	        		remainTimes:this.state.remainTimes-1,
-//	        		usableScore:300
-//      		},
-//      		message:"工分不足，请投资后再试哦！"
-//      	};
         	if(data.code==10000){
-        		//setTimeout(()=>this.stopRoll(data.prizeMark,data.prizeName), 200);
 	        	this.setState({   
 	        		remainTimes:data.data.remainTimes
 	        	});
@@ -189,8 +175,7 @@ const NineDraw = React.createClass({
         		this._usable=true;
         		this.props.showAlertMessage(data.message);
         	}
-        	        	
-                
+        	        	                
             },
            fail: () => {
                 this.hideRoll()
@@ -405,13 +390,11 @@ $FW.DOMReady(function () {
       API_PATH + '/mall/api/magic/v1/user.json', //用户信息
       API_PATH + '/mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分
       API_PATH + '/mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单        
-      //'http://127.0.0.1/banners.json',
-      //'http://127.0.0.1/activities.json'
   ], function (data) {
         var user = data[0], cost = data[1],prizeList=data[2];
         console.log(user);console.log(cost);console.log(prizeList);
         if (typeof(user) == 'undefined' || typeof(cost) == 'undefined' || typeof(prizeList) == 'undefined') $FW.Component.Alert('error: empty data received');
-        ReactDOM.render(<NineActivity user={user.data} cost={cost.data} prizeList={prizeList.data}/>,
+        ReactDOM.render(<NineActivity user={user} cost={cost} prizeList={prizeList.list}/>,
         document.getElementById('cnt'));
   }, true);
     
@@ -420,7 +403,6 @@ $FW.DOMReady(function () {
 function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
-
 window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') backward()
 };
