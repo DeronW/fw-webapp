@@ -392,8 +392,7 @@ $FW.DOMReady(function () {
         if (typeof(user) == 'undefined' || typeof(cost) == 'undefined' || typeof(prizeList) == 'undefined') $FW.Component.Alert('error: empty data received');
         ReactDOM.render(<NineActivity user={user} cost={cost} prizeList={prizeList}/>,
         document.getElementById('cnt'));
-  }, true);
-    
+  }, true);    
 });
 
 function backward() {
