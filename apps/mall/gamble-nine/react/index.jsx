@@ -19,7 +19,6 @@ const NineActivity = React.createClass({
     	$FW.Ajax({
     		url:API_PATH + 'mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单     
     		success: (data) => {
-    			console.log(data.list);
     			this.setState({prize_list: data.list})
     		},
     		fail: () => {
@@ -30,15 +29,12 @@ const NineActivity = React.createClass({
     	$FW.Ajax({
     		url:API_PATH + 'mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分    
     		success: (data) => {
-    			console.log(data.remainTimes);
-    			window.gambleNineCost=data;
-    			console.log(window.gambleNineCost);
-    			this.props.cost=data;
-    			console.log(this.props.cost);
     			this.setState({
     				usableScore:data.usableScore,
     				remainTimes:data.remainTimes
     			});
+    			window.gambleNineCost=data;
+    			this.props.cost=data;
     			console.log(this.state.remainTimes);
     		},
     		fail: () => {
@@ -176,7 +172,6 @@ const NineDraw = React.createClass({
 			        
 			        this._usable=true;
                 }
-                console.log(remain);
             }, 1000 / 8 + (orig_remain - remain) * 10);
         };
         run();
@@ -256,7 +251,6 @@ const NineList = React.createClass({
     },
     componentDidMount: function () {
         this.startScroll()
-         console.log(this.props.prize_list);
     },
     startScroll: function () {
         this._timer = setInterval(this.moveUp, 2000);
