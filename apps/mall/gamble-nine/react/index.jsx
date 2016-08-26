@@ -30,12 +30,12 @@ const NineActivity = React.createClass({
     	$FW.Ajax({
     		url:API_PATH + 'mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分    
     		success: (data) => {
-    			console.log('cost.json'+data);
+    			console.log('cost.json'+data.remainTimes);
     			window.gambleNineCost=data;
     			this.props.cost=data;
     			this.setState({
     				usableScore:data.usableScore,
-    				remainTimes:data.remainTimes,
+    				remainTimes:data.remainTimes
     			});
     		},
     		fail: () => {
