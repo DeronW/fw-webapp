@@ -115,7 +115,7 @@ const NineActivity = React.createClass({
                     <div className="usable-score">{this.state.usableScore}</div>
                     <div className="my-level">{myLevel}</div>
                 </div>
-                <NineDraw cost={this.props.cost}  masker={this.setMasker} setUsableScore={this.setUsableScore} infinitely={this.props.cost.infinitely}
+                <NineDraw cost={this.props.cost} nineCostRemainTimes={this.state.remainTimes} masker={this.setMasker} setUsableScore={this.setUsableScore} infinitely={this.props.cost.infinitely}
                 user={this.props.user} addPriceList={this.addPriceList} showAlertMessage={this.showAlertMessage}
                 showPopPrize={this.showPopPrize} setRemainTimes={this.setRemainTimes}/>
 
@@ -139,8 +139,13 @@ const NineDraw = React.createClass({
         this._timer = null;
         return {
             masker: null,
-            remainTimes: this.props.cost.remainTimes
+            remainTimes: this.props.nineCostRemainTimes
         }
+    },
+    componentWillReceiveProps: function(props){
+    	this.setState({
+            remainTimes: this.props.nineCostRemainTimes
+    	})
     },
     startRoll: function () {
         this._timer = setInterval(()=> {
@@ -223,7 +228,7 @@ const NineDraw = React.createClass({
 				return <div className="tip-score">不限次抽奖</div>
 			} else {
 				return <div className="tip-score">
-					今日剩<span>{this.props.cost.remainTimes}</span>次
+					今日剩<span>{this.state.remainTimes}</span>次
 					</div>
 			}
 		}
