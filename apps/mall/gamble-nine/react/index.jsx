@@ -145,6 +145,7 @@ const NineDraw = React.createClass({
 			        
 			        this._usable=true;
                 }
+                console.log(remain);
             }, 1000 / 8 + (orig_remain - remain) * 10);
         };
         run();
