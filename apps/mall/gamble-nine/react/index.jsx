@@ -162,26 +162,18 @@ const NineDraw = React.createClass({
             url: API_PATH + 'mall/api/magic/v1/draw.json',
             method: 'post',
             data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:window.myBrowerType},
-           success: (data) => {    
-           	console.log(data);
-           		console.log(data.code);
-        	if(data.code==10000){
+           success: (data) => {  
 	        	this.setState({   
 	        		remainTimes:data.data.remainTimes
 	        	});
 	        	this.props.masker(data.data.prizeMark);
 	        	this.props.setRemainTimes(data.data.remainTimes);
 	        	this.stopRoll(data.data.prizeMark,data.data.prizeName);
-	        	this.props.setUsableScore(data.data.usableScore);
-        	}else{
-        		console.log(data+'error4');
-        		this._usable=true;
-        		this.props.showAlertMessage(data.message);
-        	}
-        	        	                
+	        	this.props.setUsableScore(data.data.usableScore);           	        	                
             },
            fail: () => {
-                this.hideRoll()
+        		this._usable=true;        		        	
+                this.hideRoll();
             }
         });
     },
