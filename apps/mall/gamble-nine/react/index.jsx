@@ -83,8 +83,7 @@ const NineActivity = React.createClass({
 
     addPriceList: function (prize) {
     	
-        var price_list = [prize].concat(this.state.prize_list);
-        
+        var price_list = [prize].concat(this.state.prize_list);        
         this.setState({prize_list: price_list});
        
     },
@@ -342,8 +341,7 @@ const PopPrize = React.createClass({
                     <div className="pop-prize-cnt">
                         <div className="pop-prize-text1">手气爆棚</div>
                         <div className="pop-prize-text2">{prize}</div>
-                            {popPrizeBtn1()}                       
-                        <a className="pop-prize-btn2" onClick={this.props.hidePopPrize}>投资赚工分</a>
+                            {popPrizeBtn1()}                          
                     </div>
                     <div className="pop-prize-close" onClick={this.props.hidePopPrize}></div>
                 </div>
