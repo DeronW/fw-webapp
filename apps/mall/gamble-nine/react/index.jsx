@@ -19,7 +19,6 @@ const NineActivity = React.createClass({
     	$FW.Ajax({
     		url:API_PATH + 'mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单     
     		success: (data) => {
-    			console.log(data.list);
     			this.setState({prize_list: data.list})
     		},
     		fail: () => {
@@ -29,14 +28,17 @@ const NineActivity = React.createClass({
     	});
     	$FW.Ajax({
     		url:API_PATH + 'mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分    
-    		success: (data) => {
-    			console.log('cost.json'+data);
+    		success: (data) => {   
+    			var _that=this;
     			window.gambleNineCost=data;
     			this.props.cost=data;
-    			this.setState({
+    			setTimeout(function(){
+    				_that.setState({
     				usableScore:data.usableScore,
-    				remainTimes:data.remainTimes,
-    			});
+    				remainTimes:data.remainTimes
+    			});   				
+    			},0)
+    			
     		},
     		fail: () => {
         		
@@ -113,7 +115,7 @@ const NineActivity = React.createClass({
                     <div className="usable-score">{this.state.usableScore}</div>
                     <div className="my-level">{myLevel}</div>
                 </div>
-                <NineDraw cost={this.props.cost} masker={this.setMasker} setUsableScore={this.setUsableScore} infinitely={this.props.cost.infinitely}
+                <NineDraw cost={this.props.cost} nineCostRemainTimes={this.state.remainTimes} masker={this.setMasker} setUsableScore={this.setUsableScore} infinitely={this.props.cost.infinitely}
                 user={this.props.user} addPriceList={this.addPriceList} showAlertMessage={this.showAlertMessage}
                 showPopPrize={this.showPopPrize} setRemainTimes={this.setRemainTimes}/>
 
@@ -137,7 +139,7 @@ const NineDraw = React.createClass({
         this._timer = null;
         return {
             masker: null,
-            remainTimes: this.props.cost.remainTimes
+            remainTimes: this.props.nineCostRemainTimes
         }
     },
     startRoll: function () {
@@ -173,7 +175,6 @@ const NineDraw = React.createClass({
 			        
 			        this._usable=true;
                 }
-                console.log(remain);
             }, 1000 / 8 + (orig_remain - remain) * 10);
         };
         run();
@@ -253,7 +254,6 @@ const NineList = React.createClass({
     },
     componentDidMount: function () {
         this.startScroll()
-         console.log(this.props.prize_list);
     },
     startScroll: function () {
         this._timer = setInterval(this.moveUp, 2000);
