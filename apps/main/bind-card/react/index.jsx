@@ -1,21 +1,3 @@
-$FW.DOMReady(function(){
-	ReactDOM.render(<Header title={"绑定银行卡"} back_handler={backward}/>, document.getElementById('header'));
-	$FW.Ajax({
-		url:"http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
-		success : function(data){
-			if(data.validate){
-				ReactDOM.render(<Invalid />,document.getElementById("tie-wrap"))
-			}
-			ReactDOM.render(<BindCard item={data}/>,document.getElementById("cnt"))
-		}
-	})
-});
-
-function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
-}
-
-
 const BindCard = React.createClass({
 	render : function(){
 		return(
@@ -108,7 +90,22 @@ const Warm = React.createClass({
 })
 
 
+$FW.DOMReady(function(){
+	ReactDOM.render(<Header title={"绑定银行卡"} back_handler={backward}/>, document.getElementById('header'));
+	$FW.Ajax({
+		url:"http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
+		success : function(data){
+			if(data.validate){
+				ReactDOM.render(<Invalid />,document.getElementById("tie-wrap"))
+			}
+			ReactDOM.render(<BindCard item={data}/>,document.getElementById("cnt"))
+		}
+	})
+});
 
+function backward(){
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+}
 
 
 
