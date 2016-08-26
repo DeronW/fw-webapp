@@ -6,9 +6,14 @@ gulp.task('default', function (done) {
     done();
 });
 
+
+/*
+ 主站移动端页面配置
+ 包含了主站移动端新增的页面
+ */
 const MAIN_APP_NAMES = [
-    'user-level',
-    'user-contribute',
+    'user-level', // 用户等级详情
+    'user-contribute', // 用户贡献值
 
     // 徽商相关页面
     'bind-bank-card',
@@ -24,12 +29,17 @@ const MAIN_APP_NAMES = [
     'verify-identity',
 
     // 旧页面重构
-    'about-us',
+    'home', // 首页
+    'about-us', // 关于我们
+    'vip-prerogative', // VIP特权详情页
     'app-download'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
-    var common_components = ['loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx'];
+    var common_components = [
+        'loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx',
+        'banner-group.jsx', 'circle-progress.jsx'
+    ];
     var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
     gt('main', i, {
@@ -39,7 +49,7 @@ MAIN_APP_NAMES.forEach(function (i) {
         include_common_js: common_js
     });
     gt('main', i, {
-        api_path: "http://m.9888.cn",
+        api_path: "http://m.9888.cn/",
         cmd_prefix: 'pack',
         cdn_prefix: '/static/wap/' + i + '/',
         include_components: common_components,
@@ -47,6 +57,10 @@ MAIN_APP_NAMES.forEach(function (i) {
     });
 });
 
+
+/*
+ 商城移动端页面
+ */
 const MALL_APP_NAMES = [
     'home',
     'activity',
@@ -65,21 +79,23 @@ const MALL_APP_NAMES = [
     'deliver-address',
     'new-deliver-address',
     'error-page',
-    'gamble-nine',
-    'new-home'
+    'new-home',
+    'product-category',
+    'product-search'
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
-    var common_components = ['mall/header.jsx', 'loading.jsx',
-        'alert.jsx', 'banner-group.jsx', 'toast.jsx'];
+    var common_components = [
+        'mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx',
+        'toast.jsx'
+    ];
     var common_js = ['javascripts/mall/fw-ajax-error-handler.js'];
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://10.105.6.73:8081/',
+        api_path: 'http://localhost/',
         include_components: common_components,
-        include_common_js: common_js,
-        width_swipe: true
+        include_common_js: common_js
     });
 
     gt('mall', i, {
@@ -87,11 +103,31 @@ MALL_APP_NAMES.forEach(function (i) {
         api_path: 'http://mmall.9888.cn/',
         cdn_prefix: '/pages/' + i + '/',
         include_components: common_components,
-        include_common_js: common_js,
-        width_swipe: true
+        include_common_js: common_js
     });
 });
 
+// START
+// 针对九宫格游戏, 单独配置打包过程
+var nine = 'gamble-nine';
+gt('mall', nine, {
+    debug: true,
+    api_path: 'http://localhost/',
+    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
+    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
+});
+
+gt('mall', nine, {
+    cmd_prefix: 'pack',
+    api_path: 'http://mmall.9888.cn/',
+    cdn_prefix: '/static/mall/' + nine + '/',
+    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
+    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
+});
+// 针对九宫格游戏, 单独配置打包过程
+// END
+
+
 gulp.task('build:main', gulp.series(MAIN_APP_NAMES.map((name) => `main:pack:${name}:revision`)));
-gulp.task('build:mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:pack:${name}:revision`)));
+gulp.task('build:mall', gulp.series(MALL_APP_NAMES.concat([nine]).map((name) => `mall:pack:${name}:revision`)));
 gulp.task('build:test-mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:${name}`)));

@@ -1,5 +1,4 @@
 'use strict';
-
 const API_PATH = document.getElementById('api-path').value;
 const NineActivity = React.createClass({
     getInitialState: function () {
@@ -8,13 +7,41 @@ const NineActivity = React.createClass({
             showPopPrize: false,
             usableDraw: true,
             moveNum: 0,
-            prize_list:this.props.list.list,    
+            prize_list:[],
             usableScore:this.props.cost.usableScore,
             remainTimes:this.props.cost.remainTimes,
             masker:null,
             showAlertMessage:false,
             alertMessage:''
         }
+    },
+    componentDidMount: function(){
+    	$FW.Ajax({
+    		url:API_PATH + 'mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单     
+    		success: (data) => {
+    			console.log(data.list);
+    			this.setState({prize_list: data.list})
+    		},
+    		fail: () => {
+        		
+            }
+    		
+    	});
+    	$FW.Ajax({
+    		url:API_PATH + 'mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分    
+    		success: (data) => {
+    			console.log('cost.json'+data);
+    			window.gambleNineCost=data;
+    			this.props.cost=data;
+    			this.setState({
+    				usableScore:data.usableScore,
+    				remainTimes:data.remainTimes,
+    			});
+    		},
+    		fail: () => {
+        		
+            }
+    	})    	    
     },
     setRemainTimes:function(n){
     	this.setState({
@@ -56,8 +83,7 @@ const NineActivity = React.createClass({
 
     addPriceList: function (prize) {
     	
-        var price_list = [prize].concat(this.state.prize_list);
-        
+        var price_list = [prize].concat(this.state.prize_list);        
         this.setState({prize_list: price_list});
        
     },
@@ -70,15 +96,15 @@ const NineActivity = React.createClass({
     
     render: function () {
     	let myLevel='普通用户';
-    	if(this.props.user.userLevel==0){
+    	if(this.props.user.userLevel==1){
     		myLevel='普通用户'
-    	}else if(this.props.user.userLevel==1){
-    		myLevel='VIP1'
     	}else if(this.props.user.userLevel==2){
-    		myLevel='VIP2'
+    		myLevel='VIP1'
     	}else if(this.props.user.userLevel==3){
-    		myLevel='VIP3'
+    		myLevel='VIP2'
     	}else if(this.props.user.userLevel==4){
+    		myLevel='VIP3'
+    	}else if(this.props.user.userLevel==5){
     		myLevel='VIP4'
     	}
         return (
@@ -121,7 +147,8 @@ const NineDraw = React.createClass({
     },
     stopRoll: function (n,myPrize) {
         clearInterval(this._timer);
-        var remain = (7 - this.state.masker) + 8*2 + n - 1;
+        
+        var remain = (7 - this.state.masker) + 8*2 +parseFloat(n) - 1;
         var orig_remain = remain;
         var myDate = new Date();
         var year=myDate.getFullYear();
@@ -146,6 +173,7 @@ const NineDraw = React.createClass({
 			        
 			        this._usable=true;
                 }
+                console.log(remain);
             }, 1000 / 8 + (orig_remain - remain) * 10);
         };
         run();
@@ -158,45 +186,25 @@ const NineDraw = React.createClass({
         if (!this._usable) return;
         if (this.state.remainTimes < 1) return;
         this._usable=false;
-        //this.startRoll();
-        
-        
-        //$FW.Ajax({
-        //    url: API_PATH + '/mall/api/v1/activity/draw.json',
-        //    method: 'post',
-        //    data: {activityId:''},
-        //    success: (data) => {
-        	
-        	var data={
-        		code:10000,
-        		data:{
-	        		prizeMark:7,
-	        		prizeName:'100元返现券',
-	        		remainTimes:this.state.remainTimes-1,
-	        		usableScore:300
-        		},
-        		message:"工分不足，请投资后再试哦！"
-        	};
-        	if(data.code==10000){
-        		//setTimeout(()=>this.stopRoll(data.prizeMark,data.prizeName), 200);
+
+        $FW.Ajax({
+            url: API_PATH + 'mall/api/magic/v1/draw.json',
+            method: 'post',
+            data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:window.myBrowerType},
+           success: (data) => {  
 	        	this.setState({   
-	        		remainTimes:data.data.remainTimes
+	        		remainTimes:data.remainTimes
 	        	});
-	        	this.props.masker(data.data.prizeMark);
-	        	this.props.setRemainTimes(data.data.remainTimes);
-	        	this.stopRoll(data.data.prizeMark,data.data.prizeName);
-	        	this.props.setUsableScore(data.data.usableScore);
-        	}else{
-        		this._usable=true;
-        		this.props.showAlertMessage(data.message);
-        	}
-        	        	
-        //        
-        //    },
-        //    fail: () => {
-        //        this.hideRoll()
-        //    }
-        //});
+	        	this.props.masker(data.prizeMark);
+	        	this.props.setRemainTimes(data.remainTimes);
+	        	this.stopRoll(data.prizeMark,data.prizeName);
+	        	this.props.setUsableScore(data.usableScore);           	        	                
+            },
+           fail: () => {
+        		this._usable=true;        		        	
+                this.hideRoll();
+            }
+        });
     },
     render: function () {
         let cell = function (n, index) {
@@ -271,11 +279,12 @@ const NineList = React.createClass({
     render: function () {
         let prize = (d, index) => {
             if (!d) return null;
+            let time=d.time.substring(0,10);
             return <div key={index} className="Nine-list-li">
                 <div className="avatar"><img src={d.avatar}/></div>
                 <div className="name">{d.name}</div>
                 <div className="get-prize">抽中了{d.prizeName}</div>
-                <div className="time">{d.time.substring(0,10)}</div>
+                <div className="time">{time}</div>
             </div>
         };
 
@@ -332,8 +341,7 @@ const PopPrize = React.createClass({
                     <div className="pop-prize-cnt">
                         <div className="pop-prize-text1">手气爆棚</div>
                         <div className="pop-prize-text2">{prize}</div>
-                            {popPrizeBtn1()}                       
-                        <a className="pop-prize-btn2" onClick={this.props.hidePopPrize}>投资赚工分</a>
+                            {popPrizeBtn1()}                          
                     </div>
                     <div className="pop-prize-close" onClick={this.props.hidePopPrize}></div>
                 </div>
@@ -381,33 +389,52 @@ const AlertMessage = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('豆哥玩玩乐');
-
     if ($FW.Utils.shouldShowHeader()){
     	ReactDOM.render(<Header title={"豆哥玩玩乐"} back_handler={backward}/>, document.getElementById('header'));
-    }            
-//  $FW.BatchGet([
-//      API_PATH + '/mall/api/v1/activity/user.json', //用户信息
-//      API_PATH + '/mall/api/v1/activity/cost.json?activityId=1', //活动消耗工分
-//      API_PATH + '/mall/api/v1/activity/winnersList.json?activityId=1&num=10&page=1',//获奖名单        
-//      //'http://127.0.0.1/banners.json',
-//      //'http://127.0.0.1/activities.json'
-//  ], function (data) {
-        var user = data[0], cost = data[1],list=data[2];
-        console.log(user);console.log(cost);console.log(list);
-        if (typeof(user) == 'undefined' || typeof(cost) == 'undefined' || typeof(list) == 'undefined') $FW.Component.Alert('error: empty data received');
-        ReactDOM.render(<NineActivity user={user.data} cost={cost.data} list={list.data}/>,
-        document.getElementById('cnt'));
-//  }, true);
-    
-    
-    
-
+    }    
+    var in_mobile = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i)?true:false;
+	var app=navigator.userAgent.match(/FinancialWorkshop/i)?true:false;
+	var ios=navigator.userAgent.match(/iPhone|iPad/i)?true:false;
+	window.myBrowerType=1;
+	if(in_mobile){
+		if(app){
+			if(ios){
+				window.myBrowerType=3
+			}else{
+				window.myBrowerType=4
+			}
+		}else{
+			window.myBrowerType=2
+		}
+	}else{
+		window.myBrowerType=1
+	}
+	
+	$FW.Ajax({
+    		url:API_PATH + 'mall/api/magic/v1/user.json', //用户信息
+    		success: (data) => {
+    		  	window.gambleNineCost={
+	        	 costScore:0,
+	        	 infinitely:false,
+	        	 remainTimes:1,
+	        	 usableScore:0        	 
+	        	};
+		        var user = data;
+		        var cost = window.gambleNineCost;
+        		console.log(user);console.log(cost);        
+        		if (typeof(user) == 'undefined') $FW.Component.Alert('error: empty data received');
+        		ReactDOM.render(<NineActivity user={user} cost={cost}/>,
+        		document.getElementById('cnt'));
+    		},
+    		fail: () => {
+        		
+            }
+    	}) 
 });
 
 function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
-
 window.onNativeMessageReceive = function (msg) {
     if (msg == 'history:back') backward()
 };

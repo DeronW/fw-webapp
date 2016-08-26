@@ -140,20 +140,17 @@ const Recharge = React.createClass({
 
     getSMSCodeHandler: function () {
         let v = this.state.phone;
-
-        if (this.state.login) {
-            if (this.state.user_score < this.state.fee_pay_score || this.state.user_score < this.state.net_pay_score) {
-                $FW.Component.Alert("充值失败，工分不足！");
-            } else if (v == '') {
-                $FW.Component.Alert("请输入手机号！");
-            } else if (!/^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/.test(v)) {
-                $FW.Component.Alert("手机号格式不正确！");
-            } else {
-                window.confirmPanel.show();
-            }
-        } else {
-            $FW.Utils.loginMall();
-        }
+        if (!this.state.login)
+            return $FW.Utils.loginMall();
+        if (v == '')
+            return $FW.Component.Alert("请输入手机号！");
+        if (!/^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/.test(v))
+            return $FW.Component.Alert("手机号格式不正确！");
+        if(this.state.tab == 'fee' && this.state.user_score < this.state.fee_pay_score)
+            return $FW.Component.Alert("充值失败，工分不足！");
+        if(this.state.tab == 'net' && this.state.user_score < this.state.net_pay_score)
+            return $FW.Component.Alert("充值失败，工分不足！");
+        window.confirmPanel.show();
     },
 
     getFormData: function () {
@@ -252,6 +249,7 @@ const Recharge = React.createClass({
     }
 });
 
+
 Recharge.ProductPanel = React.createClass({
     render: function () {
 
@@ -296,8 +294,10 @@ Recharge.ProductPanel = React.createClass({
 $FW.DOMReady(function () {
     NativeBridge.setTitle('充值专区');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"充值专区"} back_handler={backward}/>,
-            document.getElementById('header'));
+        ReactDOM.render(
+			<Header title={"充值专区"} back_handler={backward}/>,
+            document.getElementById('header')
+		)
 
     $FW.Ajax({
         url: API_PATH + 'api/v1/user-state.json',
@@ -309,6 +309,7 @@ $FW.DOMReady(function () {
     });
     window.confirmPanel = ReactDOM.render(<ConfirmPop />, document.getElementById('dialog'));
 });
+
 
 function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'

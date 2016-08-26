@@ -433,11 +433,6 @@ ReactDOM.render(
 var AllPage = React.createClass({
     getInitialState: function() {
         return {
-            ui: [
-                <Body callbackBodyPage={this.bodyPage} />,
-                <AccountSucceedBody callbackBodyPage={this.bodyPage} imgUrl={"images/nav-2.png"}/>,
-                <MerchandisePsw callbackBodyPage={this.bodyPage} imgUrl={"images/nav-1.png"} />
-            ],
             index: 0
         };
     },
@@ -446,11 +441,17 @@ var AllPage = React.createClass({
             index: data
         });
     },
-    render: function() {        
+    render: function() {
+        var ui = [
+            <Body callbackBodyPage={this.bodyPage} />,
+            <AccountSucceedBody callbackBodyPage={this.bodyPage} imgUrl={"images/nav-2.png"}/>,
+            <MerchandisePsw callbackBodyPage={this.bodyPage} imgUrl={"images/nav-1.png"} />
+        ];
+            
         return (
             <div>
                 {
-                    this.state.ui[this.state.index]
+                    ui[this.state.index]
                 }
             </div>
                 
