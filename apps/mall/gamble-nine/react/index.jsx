@@ -19,8 +19,8 @@ const NineActivity = React.createClass({
     	$FW.Ajax({
     		url:API_PATH + 'mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单     
     		success: (data) => {
-    			console.log('winnersList'+data);
-    			this.setState({prize_list: data})
+    			console.log(data.list);
+    			this.setState({prize_list: data.list})
     		},
     		fail: () => {
         		
