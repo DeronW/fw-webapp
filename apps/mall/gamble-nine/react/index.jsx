@@ -164,12 +164,12 @@ const NineDraw = React.createClass({
             data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:window.myBrowerType},
            success: (data) => {  
 	        	this.setState({   
-	        		remainTimes:data.data.remainTimes
+	        		remainTimes:data.remainTimes
 	        	});
-	        	this.props.masker(data.data.prizeMark);
-	        	this.props.setRemainTimes(data.data.remainTimes);
-	        	this.stopRoll(data.data.prizeMark,data.data.prizeName);
-	        	this.props.setUsableScore(data.data.usableScore);           	        	                
+	        	this.props.masker(data.prizeMark);
+	        	this.props.setRemainTimes(data.remainTimes);
+	        	this.stopRoll(data.prizeMark,data.prizeName);
+	        	this.props.setUsableScore(data.usableScore);           	        	                
             },
            fail: () => {
         		this._usable=true;        		        	
