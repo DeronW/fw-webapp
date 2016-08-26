@@ -120,7 +120,8 @@ const NineDraw = React.createClass({
     },
     stopRoll: function (n,myPrize) {
         clearInterval(this._timer);
-        var remain = (7 - this.state.masker) + 8*2 + n - 1;
+        
+        var remain = (7 - this.state.masker) + 8*2 +parseFloat(n) - 1;
         var orig_remain = remain;
         var myDate = new Date();
         var year=myDate.getFullYear();
