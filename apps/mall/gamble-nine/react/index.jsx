@@ -7,13 +7,41 @@ const NineActivity = React.createClass({
             showPopPrize: false,
             usableDraw: true,
             moveNum: 0,
-            prize_list:this.props.prizeList.list,
+            prize_list:[],
             usableScore:this.props.cost.usableScore,
             remainTimes:this.props.cost.remainTimes,
             masker:null,
             showAlertMessage:false,
             alertMessage:''
         }
+    },
+    componentDidMount: function(){
+    	$FW.Ajax({
+    		url:API_PATH + 'mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单     
+    		success: (data) => {
+    			console.log('winnersList'+data);
+    			this.setState({prize_list: data})
+    		},
+    		fail: () => {
+        		
+            }
+    		
+    	});
+    	$FW.Ajax({
+    		url:API_PATH + 'mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分    
+    		success: (data) => {
+    			console.log('cost.json'+data);
+    			window.gambleNineCost=data;
+    			this.props.cost=data;
+    			this.setState({
+    				usableScore:data.usableScore,
+    				remainTimes:data.remainTimes,
+    			});
+    		},
+    		fail: () => {
+        		
+            }
+    	})    	    
     },
     setRemainTimes:function(n){
     	this.setState({
@@ -363,7 +391,6 @@ const AlertMessage = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('豆哥玩玩乐');
-
     if ($FW.Utils.shouldShowHeader()){
     	ReactDOM.render(<Header title={"豆哥玩玩乐"} back_handler={backward}/>, document.getElementById('header'));
     }    
@@ -384,17 +411,27 @@ $FW.DOMReady(function () {
 	}else{
 		window.myBrowerType=1
 	}
-  $FW.BatchGet([
-      API_PATH + 'mall/api/magic/v1/user.json', //用户信息
-      API_PATH + 'mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分
-      API_PATH + 'mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单        
-  ], function (data) {
-        var user = data[0], cost = data[1],prizeList=data[2];
-        console.log(user);console.log(cost);console.log(prizeList);
-        if (typeof(user) == 'undefined' || typeof(cost) == 'undefined' || typeof(prizeList) == 'undefined') $FW.Component.Alert('error: empty data received');
-        ReactDOM.render(<NineActivity user={user} cost={cost} prizeList={prizeList}/>,
-        document.getElementById('cnt'));
-  }, true);   
+	
+	$FW.Ajax({
+    		url:API_PATH + 'mall/api/magic/v1/user.json', //用户信息
+    		success: (data) => {
+    		  	window.gambleNineCost={
+	        	 costScore:0,
+	        	 infinitely:false,
+	        	 remainTimes:1,
+	        	 usableScore:0        	 
+	        	};
+		        var user = data;
+		        var cost = window.gambleNineCost;
+        		console.log(user);console.log(cost);        
+        		if (typeof(user) == 'undefined') $FW.Component.Alert('error: empty data received');
+        		ReactDOM.render(<NineActivity user={user} cost={cost}/>,
+        		document.getElementById('cnt'));
+    		},
+    		fail: () => {
+        		
+            }
+    	}) 
 });
 
 function backward() {
