@@ -142,11 +142,6 @@ const NineDraw = React.createClass({
             remainTimes: this.props.nineCostRemainTimes
         }
     },
-    componentWillReceiveProps: function(props){
-    	this.setState({
-            remainTimes: this.props.nineCostRemainTimes
-    	})
-    },
     startRoll: function () {
         this._timer = setInterval(()=> {
             this.setState({masker: (this.state.masker + 1) % 8})
@@ -228,7 +223,7 @@ const NineDraw = React.createClass({
 				return <div className="tip-score">不限次抽奖</div>
 			} else {
 				return <div className="tip-score">
-					今日剩<span>{this.state.remainTimes}</span>次
+					今日剩<span>{this.props.nineCostRemainTimes}</span>次
 					</div>
 			}
 		}
