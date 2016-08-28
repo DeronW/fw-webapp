@@ -7,13 +7,43 @@ const NineActivity = React.createClass({
             showPopPrize: false,
             usableDraw: true,
             moveNum: 0,
-            prize_list:this.props.prizeList.list,
+            prize_list:[],
             usableScore:this.props.cost.usableScore,
             remainTimes:this.props.cost.remainTimes,
             masker:null,
             showAlertMessage:false,
             alertMessage:''
         }
+    },
+    componentDidMount: function(){
+    	$FW.Ajax({
+    		url:API_PATH + 'mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单     
+    		success: (data) => {
+    			this.setState({prize_list: data.list})
+    		},
+    		fail: () => {
+        		
+            }
+    		
+    	});
+    	$FW.Ajax({
+    		url:API_PATH + 'mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分    
+    		success: (data) => {   
+    			var _that=this;
+    			window.gambleNineCost=data;
+    			this.props.cost=data;
+    			setTimeout(function(){
+    				_that.setState({
+    				usableScore:data.usableScore,
+    				remainTimes:data.remainTimes
+    			});   				
+    			},0)
+    			
+    		},
+    		fail: () => {
+        		
+            }
+    	})    	    
     },
     setRemainTimes:function(n){
     	this.setState({
@@ -55,8 +85,7 @@ const NineActivity = React.createClass({
 
     addPriceList: function (prize) {
     	
-        var price_list = [prize].concat(this.state.prize_list);
-        
+        var price_list = [prize].concat(this.state.prize_list);        
         this.setState({prize_list: price_list});
        
     },
@@ -120,7 +149,8 @@ const NineDraw = React.createClass({
     },
     stopRoll: function (n,myPrize) {
         clearInterval(this._timer);
-        var remain = (7 - this.state.masker) + 8*2 + n - 1;
+        
+        var remain = (7 - this.state.masker) + 8*2 +parseFloat(n) - 1;
         var orig_remain = remain;
         var myDate = new Date();
         var year=myDate.getFullYear();
@@ -162,23 +192,18 @@ const NineDraw = React.createClass({
             url: API_PATH + 'mall/api/magic/v1/draw.json',
             method: 'post',
             data: {activityId:'1ead8644a476448e8f71a72da29139ff',source:window.myBrowerType},
-           success: (data) => {        	
-        	if(data.code==10000){
+           success: (data) => {  
 	        	this.setState({   
-	        		remainTimes:data.data.remainTimes
+	        		remainTimes:data.remainTimes
 	        	});
-	        	this.props.masker(data.data.prizeMark);
-	        	this.props.setRemainTimes(data.data.remainTimes);
-	        	this.stopRoll(data.data.prizeMark,data.data.prizeName);
-	        	this.props.setUsableScore(data.data.usableScore);
-        	}else{
-        		this._usable=true;
-        		this.props.showAlertMessage(data.message);
-        	}
-        	        	                
+	        	this.props.masker(data.prizeMark);
+	        	this.props.setRemainTimes(data.remainTimes);
+	        	this.stopRoll(data.prizeMark,data.prizeName);
+	        	this.props.setUsableScore(data.usableScore);           	        	                
             },
            fail: () => {
-                this.hideRoll()
+        		this._usable=true;        		        	
+                this.hideRoll();
             }
         });
     },
@@ -229,7 +254,6 @@ const NineList = React.createClass({
     },
     componentDidMount: function () {
         this.startScroll()
-         console.log(this.props.prize_list);
     },
     startScroll: function () {
         this._timer = setInterval(this.moveUp, 2000);
@@ -317,8 +341,7 @@ const PopPrize = React.createClass({
                     <div className="pop-prize-cnt">
                         <div className="pop-prize-text1">手气爆棚</div>
                         <div className="pop-prize-text2">{prize}</div>
-                            {popPrizeBtn1()}                       
-                        <a className="pop-prize-btn2" onClick={this.props.hidePopPrize}>投资赚工分</a>
+                            {popPrizeBtn1()}                          
                     </div>
                     <div className="pop-prize-close" onClick={this.props.hidePopPrize}></div>
                 </div>
@@ -366,7 +389,6 @@ const AlertMessage = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('豆哥玩玩乐');
-
     if ($FW.Utils.shouldShowHeader()){
     	ReactDOM.render(<Header title={"豆哥玩玩乐"} back_handler={backward}/>, document.getElementById('header'));
     }    
@@ -387,18 +409,27 @@ $FW.DOMReady(function () {
 	}else{
 		window.myBrowerType=1
 	}
-  $FW.BatchGet([
-      API_PATH + 'mall/api/magic/v1/user.json', //用户信息
-      API_PATH + 'mall/api/magic/v1/cost.json?activityId=1ead8644a476448e8f71a72da29139ff', //活动消耗工分
-      API_PATH + 'mall/api/magic/v1/winnersList.json?activityId=1ead8644a476448e8f71a72da29139ff&num=20',//获奖名单        
-  ], function (data) {
-        var user = data[0], cost = data[1],prizeList=data[2];
-        console.log(user);console.log(cost);console.log(prizeList);
-        if (typeof(user) == 'undefined' || typeof(cost) == 'undefined' || typeof(prizeList) == 'undefined') $FW.Component.Alert('error: empty data received');
-        ReactDOM.render(<NineActivity user={user} cost={cost} prizeList={prizeList}/>,
-        document.getElementById('cnt'));
-  }, true);
-    
+	
+	$FW.Ajax({
+    		url:API_PATH + 'mall/api/magic/v1/user.json', //用户信息
+    		success: (data) => {
+    		  	window.gambleNineCost={
+	        	 costScore:0,
+	        	 infinitely:false,
+	        	 remainTimes:1,
+	        	 usableScore:0        	 
+	        	};
+		        var user = data;
+		        var cost = window.gambleNineCost;
+        		console.log(user);console.log(cost);        
+        		if (typeof(user) == 'undefined') $FW.Component.Alert('error: empty data received');
+        		ReactDOM.render(<NineActivity user={user} cost={cost}/>,
+        		document.getElementById('cnt'));
+    		},
+    		fail: () => {
+        		
+            }
+    	}) 
 });
 
 function backward() {
