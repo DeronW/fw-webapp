@@ -14,13 +14,8 @@ const NineActivity = React.createClass({
             usableDraw: true,
             moveNum: 0,
             prize_list: [],
-
             usableScore: null,
-
             masker: null,
-
-            showAlertMessage: false,
-            alertMessage: ''
         }
     },
     componentDidMount: function () {
@@ -32,18 +27,6 @@ const NineActivity = React.createClass({
 
     toggleDetailHandler: function () {
         this.setState({show_detail: !this.state.show_detail})
-    },
-
-    showAlertMessage: function (message) {
-        this.setState({
-            alertMessage: message,
-            showAlertMessage: true
-        });
-    },
-    hideAlertMessage: function () {
-        this.setState({
-            showAlertMessage: false
-        });
     },
 
     addPriceList: function (prizeName) {
@@ -87,26 +70,7 @@ const NineActivity = React.createClass({
 
                 <div className="btn-inf-show" onClick={this.toggleDetailHandler}></div>
 
-                {this.state.showAlertMessage ?
-                    <AlertMessage hideAlertMessage={this.hideAlertMessage}
-                                  showAlertMessage={this.showAlertMessage}
-                                  alertMessage={this.state.alertMessage}/> :
-                    null}
 
-            </div>
-        )
-    }
-});
-
-const AlertMessage = React.createClass({
-    render: function () {
-        return (
-            <div className="alert-box">
-                <div className="alert-cont">
-                    <div className="alert-text">{this.props.alertMessage}</div>
-                    <div className="alert-btn" onClick={this.props.hideAlertMessage}>确定</div>
-                </div>
-                <div className="alert-masker"></div>
             </div>
         )
     }
