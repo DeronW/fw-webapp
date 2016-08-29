@@ -27,6 +27,7 @@ const MAIN_APP_NAMES = [
     'cash',
     'special-cash',
     'verify-identity',
+    'open-bank',
 
     // 旧页面重构
     'home', // 首页

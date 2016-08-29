@@ -1,17 +1,29 @@
 const BindBankCard = React.createClass({
-	hideHandler: function(){
-		var item = this.state;
-		this.props.item.validate = false;
-		this.setState({item: this.props.item.validate})
-	},
+//	hideHandler: function(){
+//		var item = this.state;
+//		this.props.item.validate = false;
+//		this.setState({item: this.props.item.validate})
+//	},
 	
 	render : function(){
 		return (
 			<div>
-			    {this.props.item.validate ? <Invalid  /> : null} 
+			    {this.props.item.data.bankCardStatus ? <Invalid  /> : null} 
 				{this.props.item.validate ? <Cover hide={this.hideHandler} /> : null}
 				{this.props.item.validate ? <Bomb hide={this.hideHandler} username={this.props.item.username} /> : null}
-				<Attract item={this.props.item}/>
+				
+				<div className="bank">
+					<div className="ash clearfix">
+						<div className="img"><img src="http://10.10.100.128:9090/mpapp/staticRe/images/bankicons/3.png" /></div>
+						<div className="bankname">{this.props.item.data.bankName}</div>
+					</div>
+					<div className="belon">
+						<div className="name">{this.props.item.data.realName}</div>
+						<div className="num">{this.props.item.data.bankCard}</div>
+						<div className="card-e"></div>
+					</div>
+				</div>
+				
 				<Sup />
 				{this.props.item.validate ? null : <Bran />}
 				<Branch />
@@ -37,7 +49,7 @@ const Bomb = React.createClass({
 				<div className="resp">尊敬的{this.props.username}，您好！</div>
 				<div className="beca">由于您的身份信息无法通过系统验证，为了保证您的账户资金安全，您当前无法进行线上充值、投资、更换银行卡等交易。您当前的账户资金安全无虞，若有可用余额，可自行发起提现申请。</div>
 				<div className="ever">有任何问题，请联系客服：<span>400-0322-988</span></div>
-				<div className="close"><a onClick={this.props.hide} href="https://www.baidu.com" >关闭</a></div>
+				<div className="close"><a onClick={this.props.hide} >关闭</a></div>
 			</div>
 		)
 	}
@@ -57,31 +69,6 @@ const Invalid = React.createClass({
 	}
 })
 
-
-const Attract = React.createClass({
-		render : function(){
-			var logo=this.props.item.bankLogo;
-			var bankName=this.props.item.bankName;
-			var name=this.props.item.username;
-			var ID=this.props.item.cardNumber;
-			var validate=this.props.item.validate;
-			return (
-				<div className="bank">
-					<div className="ash clearfix">
-						<div className="img"><img src={logo} /></div>
-						<div className="bankname">{bankName}</div>
-					</div>
-					<div className="belon">
-						<div className="name">{name}</div>
-						<div className="num">{ID}</div>
-						<div className="card-e"></div>
-					</div>
-				</div>
-			)
-		}
-	})
-
-
 const Sup = React.createClass({
 	render : function(){
 		return (
@@ -89,7 +76,6 @@ const Sup = React.createClass({
 		)
 	}
 })
-
 
 const Bran = React.createClass({
 	render : function(){
@@ -109,7 +95,6 @@ const Bran = React.createClass({
 	}
 })
 
-
 const Branch = React.createClass({
 	render : function(){
 		return (
@@ -120,7 +105,6 @@ const Branch = React.createClass({
 		)
 	}
 })
-
 
 const Warm = React.createClass({
 	render : function(){
@@ -138,9 +122,10 @@ const Warm = React.createClass({
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"绑定银行卡"} back_handler={backward}/>, document.getElementById('header'));
 	$FW.Ajax({
-		url:"http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
+		url:"http://lxm.9888.cn/mpwap/api/v2/olduser/bankCardInfo.shtml",
 		success : function(data){
-			ReactDOM.render(<BindBankCard item={data}/>,document.getElementById('cnt'));	
+			console.log(data)
+		    ReactDOM.render(<BindBankCard item={data} />,document.getElementById('cnt'));			
 		}
 	});
 });
