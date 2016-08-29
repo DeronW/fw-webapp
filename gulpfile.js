@@ -115,7 +115,7 @@ MALL_APP_NAMES.forEach(function (i) {
 var nine = 'gamble-nine';
 gt('mall', nine, {
     debug: true,
-    api_path: 'http://localhost/',
+    api_path: 'http://localhost/fake-api/',
     include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
     include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
 });
