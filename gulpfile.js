@@ -32,7 +32,10 @@ const MAIN_APP_NAMES = [
     // 旧页面重构
     'home', // 首页
     'about-us', // 关于我们
+
+    // 新增页面
     'vip-prerogative', // VIP特权详情页
+    'guide-cookbook',
     'app-download'
 ];
 MAIN_APP_NAMES.forEach(function (i) {
@@ -113,7 +116,7 @@ MALL_APP_NAMES.forEach(function (i) {
 var nine = 'gamble-nine';
 gt('mall', nine, {
     debug: true,
-    api_path: 'http://localhost/',
+    api_path: 'http://localhost/fake-api/',
     include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
     include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
 });
