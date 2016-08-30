@@ -429,6 +429,7 @@ var Body = React.createClass({
             data: _this.state.userInfo,
             success: function(data) {
                 console.log(data);
+                //location.href = API_PATH + "";
             }
         });
 
