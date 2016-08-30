@@ -30,7 +30,6 @@ input[type=checkbox], input[type=radio] {
 
 
 .select-bank{
-    position: fixed;
     top: 0px;
     bottom: 0;
     width: 100%;
@@ -44,7 +43,7 @@ input[type=checkbox], input[type=radio] {
        border-radius: 6px;
        background: white; 
        position: fixed;
-       top: 168px;
+       top: 136px;
        left: 4%;
        z-index: 10;
     }
@@ -52,7 +51,10 @@ input[type=checkbox], input[type=radio] {
     img{
         display: inline-block;
         vertical-align: middle;
-        margin-left: 26px;
+    }
+    
+    .suo{
+         margin-left: 26px;
     }
     
     .hunt{
@@ -67,26 +69,12 @@ input[type=checkbox], input[type=radio] {
     .list{
         width: 100%;
         position: absolute;
-        top: 280px;
+        top: 258px;
         z-index: 6;
         background: white;
     }
-    
-    .subbranch{
-        height: 67px;
-        line-height: 67px;
-        border: 1px solid #e3e5ea;
-        background: #fafbfc;
-        font-size: 30px;
-        color: #999999;
-        text-indent: 33px;
-    }
-    
-    .digit{
-        color: #64abf7;
-    }
-    
-    .trade{
+  
+    .list li{
         width: 95%;
         height: 98px;
         line-height: 98px;
@@ -96,10 +84,14 @@ input[type=checkbox], input[type=radio] {
         margin-left: 4%;
     }
     
-    .trade img{
+    .list img{
         float: right;
         margin-top: 36px;
         margin-right: 35px;
+    }
+    
+    .false{
+        display: inline-block;
     }
     
 }

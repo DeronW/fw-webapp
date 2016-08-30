@@ -8,7 +8,7 @@ const BindBankCard = React.createClass({
 	render : function(){
 		return (
 			<div>
-			    {this.props.item.data.bankCardStatus ? <Invalid  /> : null} 
+			    {this.props.item.data.bankCardStatus == 0 ? <Invalid  /> : null} 
 				{this.props.item.validate ? <Cover hide={this.hideHandler} /> : null}
 				{this.props.item.validate ? <Bomb hide={this.hideHandler} username={this.props.item.username} /> : null}
 				
@@ -25,8 +25,8 @@ const BindBankCard = React.createClass({
 				</div>
 				
 				<Sup />
-				{this.props.item.validate ? null : <Bran />}
-				<Branch />
+				{this.props.item.data.isCompanyAgent || this.props.item.data.bankCardStatus == 0 ? null : <Bran />}
+				{this.props.item.data.isCompanyAgent ? <Branch /> : null}
 				<Warm />
 			</div>
 		)

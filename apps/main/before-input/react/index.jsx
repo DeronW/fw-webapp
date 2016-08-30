@@ -219,7 +219,13 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"绑定银行卡"}/>, document.getElementById('header'));
 
     $FW.Ajax({
-        url: "http://10.10.100.112/mockjs/12/api/v1/bind/card.json",
+        url: API_PATH +"mpwap/api/v1/changeBankCard.shtml",
+        
+        data:{
+        	bankCard: "6228480402564890018",
+        	bankId: "1"
+        },
+        
         success: function (data) {
             ReactDOM.render(<ReportBox data={data}/>, document.getElementById("cnt"))
         	

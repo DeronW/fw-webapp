@@ -5,9 +5,7 @@ const BankAccount = React.createClass({
 	    return {
 	    	find : true,
 	    	entry : false,
-			fruit : false,
-	    	inputText: "",
-	    	list:[]
+			fruit : false
 	    	}
 	},
 	
@@ -16,35 +14,35 @@ const BankAccount = React.createClass({
 	},
 	
 	inputHandler: function(){
-		this.setState({entry : true}),
-		this.setState({fruit : true})
+		this.setState({entry : true, fruit : true});		
 	},
 	
 	handleChange: function(e) {
-	    this.setState({inputText:this.refs.input.inputText.trim()});
-	    
+	    this.setState({inputText:e.target.value});
 	},
 	
 	handleClear: function(){
-		this.delText();
+		this.setState({inputText: ''});
 	},
-	
-	delText: function() {
-        this.setState({
-            inputText: ''
-        });
-    },
-	
+
 	render : function(){
-		console.log(this.state.find)
+		console.log(this.state.inputText)
+		
+		let list = ()=> {
+			console.log(this.props.data.bankList)
+			var li = (d, index) => <li key={index}>{d.bankName} <img src="images/card-c.png"/></li>;
+			
+			return <ul className="list">{this.props.data.bankList.map(li)}</ul>;
+		}
+		
 		return (
 			<div className="select-bank">
 				<div className="search">
-					{this.state.find ? <img src="images/search.png"/> : null}
+					{this.state.find ? <img className="suo" src="images/search.png"/> : null}
 					
-					<input type="text" value={this.empty} name="txtSearch" 
+					<input type="text" 
 					className="hunt" 
-					onClear={this.state.handlerClear}
+					onClear={this.state.handleClear}
 					find={this.state.find}
 					onFocus={this.focusHandler}
 					entry={this.state.entry}
@@ -52,15 +50,12 @@ const BankAccount = React.createClass({
 					onInput={this.inputHandler}
 					onChange={this.handleChange}
 					filterText={this.state.inputText}
-					ref="input"
 					placeholder="请输入开户支行的关键词" />
 					 
 					{this.state.entry ? <img className="false" onClick={this.handleClear}  src="images/false.jpg"/> : null}
 				</div>
 				
-				{this.state.fruit ? <ul className="list" >
-					<li className="trade" list={this.state.list} >北京交通银行</li>
-				</ul> : null}	
+				{this.state.fruit ? list() : null}	
 				
 			</div>	
 		)
@@ -72,7 +67,12 @@ const BankAccount = React.createClass({
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"选择开户支行"} back_handler={backward}/>, document.getElementById('header'));
 	$FW.Ajax({
-		url:"http://10.10.100.112/mockjs/12/api/v1/bind/card.json",
+		url:API_PATH +　"mpwap/api/v1/getBankList.shtml",
+		data:{    
+			index: "10",
+			keyword: "建设银行",
+			size: "10"
+		},
 		success : function(data){
 			ReactDOM.render(<BankAccount data={data}/>,document.getElementById('cnt'))
 		}

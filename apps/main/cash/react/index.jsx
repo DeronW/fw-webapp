@@ -226,7 +226,7 @@ const Special = React.createClass({
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"提现"} back_handler={backward}/>, document.getElementById('header'));
 	$FW.Ajax({
-        url: "http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
+        url: API_PATH +"mpwap/api/v1/getWithdrawInfo.shtml",
         success: function (data) {
             ReactDOM.render(<Withdrawals data={data}/>, document.getElementById("cnt"))
         }
