@@ -45,8 +45,7 @@ const Form = React.createClass({
             $FW.Component.Alert('请输入验证码')
         } else {
             $FW.Ajax({
-                url: API_PATH + 'api/success.json',
-                method: 'get',
+                url: API_PATH + 'mpwap/api/v1/index.shtml',
                 data: {
                     money: this.state.money,
                     code: this.state.verify_code,
