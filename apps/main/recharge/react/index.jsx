@@ -43,20 +43,19 @@ const Recharge = React.createClass({
 
         return (
             <div>
-                {this.state.special_user ? <Mask username={data.username} handler={this.hideMask} /> : null}
+                {this.state.special_user ? <Mask username={this.props.data.bankInfo.realName} handler={this.hideMask} /> : null}
                 {this.state.order_state == 'processing' ?
                     <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}  inspectResult={this.inspectResult} /> : null}
                 {this.state.order_state == 'success' ? <Recharge.OrderSuccess /> : null}
 				{this.state.order_state == 'fail' ? <Recharge.OrderFail /> : null}
-				
                 <div className="bank">
                     <div className="ash clearfix">
-                        <div className="img"><img src={data.bankLogo}/></div>
-                        <div className="bankname">{data.bankName}</div>
+                        <div className="img"><img src={this.props.data.bankInfo.bankLogo}/></div>
+                        <div className="bankname">{this.props.data.bankInfo.bankName}</div>
                     </div>
                     <div className="belon">
-                        <div className="name">{data.username}</div>
-                        <div className="num">{data.cardNumber}</div>
+                        <div className="name">{this.props.data.bankInfo.realName}</div>
+                        <div className="num">{this.props.data.bankInfo.bankCardNo}</div>
                     </div>
                 </div>
 
@@ -102,8 +101,9 @@ Recharge.OrderSuccess = React.createClass({
         return (
             <div className="order-success">
                 <img src="images/order-success.png"/>
-                <div className="text">
-                    成功
+                <div className="success-btn">
+                    <a className="continue-charge">继续充值</a>
+                    <a className="continue-invest">去投资</a>
                 </div>
             </div>
         )
@@ -112,7 +112,13 @@ Recharge.OrderSuccess = React.createClass({
 
 Recharge.OrderFail = React.createClass({
 	render : function(){
-		
+        return (
+            <div className="order-fail">
+                <img src="images/order-fail.png"/>
+                <div className="fail-tip">银行预留手机号错误</div>
+                <a className="fail-continue-charge">继续充值</a>
+            </div>
+        )
 	}
 });
 
@@ -146,7 +152,7 @@ Recharge.OrderProcessing = React.createClass({
             <div className="order-processing">
                 <img src="images/order-processing.png"/>
                 <div className="text">
-                    {this.state.remain}s 系统查询结果
+                    {this.state.remain}s 后为您呈现投标结果
                 </div>
             </div>
         )
@@ -154,19 +160,9 @@ Recharge.OrderProcessing = React.createClass({
 });
 
 $FW.DOMReady(function () {
-
     ReactDOM.render(<Header title={"充值"}/>, document.getElementById('header'));
-
     $FW.Ajax({
-        url: API_PATH +"mpwap/api/v1/getRechargeInfo.shtml",
-        
-        data:{
-        	payAmount: "100",
-        	phoneNo: "15188254703",
-        	smsCode: "6666",
-        	validateNo: "8888"
-        },
-        
+        url: API_PATH + "mpwap/api/v1/getRechargeInfo.shtml",
         success: function (data) {
         	console.log(data)
             ReactDOM.render(<Recharge data={data}/>, document.getElementById("cnt"))
