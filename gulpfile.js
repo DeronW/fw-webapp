@@ -16,15 +16,18 @@ const MAIN_APP_NAMES = [
     'user-contribute', // 用户贡献值
 
     // 徽商相关页面
-    'bind-bank-card',
+    'bind-bank-card', // 绑定银行卡
     'hui-shang-bank',
+    'open-account', // 原 hui-shang-bank, 新老用户开户页面
     'hui-shang-user',
     'hui-shang-settings-password',
     'hui-shang-succeed',
+    'hui-shang-resultList',
+    'register-success', // 新用户注册成功后跳转落地页
     'bind-card',
     'change-bank-card',
     'personal-center',
-    'recharge',
+    'recharge', // 给金融工场账户充值
     'first-page',
     'cash',
     'special-cash',
@@ -50,7 +53,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-        api_path: "http://pengyan.9888.cn/",
+        api_path: "http://xjb.9888.cn/",
         include_components: common_components,
         include_common_js: common_js
     });

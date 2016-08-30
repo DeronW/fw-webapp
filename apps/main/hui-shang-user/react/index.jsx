@@ -3,6 +3,35 @@
 const API_PATH = document.getElementById('api-path').value;
 
 
+var TopNav = React.createClass({
+    getInitialState: function() {
+        return {
+            backBtn: false
+        }
+    },
+    backBtnClick: function() {
+
+    },
+    render: function() {
+        return (
+            <div className="top-nav">
+                <div className="info">
+                    {
+                        this.props.backBtn ? <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/></div> : null
+                    }
+
+                    <div className="title">{this.props.title}</div>
+                    <span className="r-text">
+                        <img src="images/icon.png"/>
+                    </span>
+                </div>
+            </div>
+        );
+    }
+});
+
+
+
 var Cart = React.createClass({
     getInitialState: function() {
         return {
@@ -169,6 +198,7 @@ var Body = React.createClass({
     render: function() {
         return (
             <div className="">
+                <TopNav title={"徽商银行存管账户"} backBtn={true} btnFun={this.backBtnClick}/>
                 <Cart userHsAccountInfo={this.props.ajaxHsAccountInfo}/>
 
                 <Earnings userIncome={this.props.ajaxHsAccountInfo}/>
