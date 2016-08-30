@@ -7,7 +7,8 @@ const Withdrawals = React.createClass({
 	    	greater_than: false,
 	    	inputText: null,
 	    	verify_code: null,
-	    	alter: false
+	    	alter: false,
+	    	cue: false
 	    }
 	},
 	
@@ -41,13 +42,19 @@ const Withdrawals = React.createClass({
 			$FW.Component.Alert("请输入提现金额")
 		}else if(!_this.state.verify_code){
 			$FW.Component.Alert("请输入验证码")
+		}else{
+			this.setState({cue: true})
 		}
+	},
+	
+	sureHandle: function(){
+		this.setState({cue: false})
 	},
 	
 	render : function(){
 		return (
 			<div>
-				<div className="cang">
+				{this.state.cue ? <div className="cang">
 					<div className="masker"></div>
 					<div className="taine">
 						<div className="his">提示</div>
@@ -68,24 +75,24 @@ const Withdrawals = React.createClass({
 						
 						<div className="ton clearfix">
 							<div className="xiaoqu">取消</div>
-							<div className="ding">确定</div>
+							<div className="ding" onClick={this.sureHandle} >确定</div>
 						</div>
 						
 					</div>
-				</div>
+				</div> : null}
 				
 				<div className="stou clearfix">
-					<div className="zhaoshang"><img className="ico-zhaoshang" src="{this.props.data.bankLogo}"/></div>
+					<div className="zhaoshang"><img className="ico-zhaoshang" src="{this.props.data.bankInfo.bankLogo}"/></div>
 					<div className="wz">
-						<div className="zh">{this.props.data.bankName}</div>
-						<div className="nz">{this.props.data.cardNumber}</div>
+						<div className="zh">{this.props.data.bankInfo.bankName}</div>
+						<div className="nz">{this.props.data.bankInfo.bankCardNo}</div>
 					</div>
 					<div className="kuaijie"><img src="images/ico-kuaijie.png"/></div>
 				</div>
 				
 				<div className="txt-a">
 					<div className="nin">如果您绑定的银行卡暂不支持手机一键支付请联系客服<a href="tel:400-6766-988" className="c-4aa1f9">400-6766-988</a></div>
-					<div className="kx">可提现金额(元)：<span style={{fontSize: '38px',color: '#fd4d4c'}}>3,050.00</span></div>
+					<div className="kx">可提现金额(元)：<span style={{fontSize: '38px',color: '#fd4d4c'}}>{this.props.data.accountAmount}</span></div>
 				</div>
 				
 				<div className="kunag">
@@ -160,12 +167,20 @@ const Neg = React.createClass({
                 clearInterval(this.timer)
             }
         }, 1000)
+		
+		$FW.Ajax({
+	        url: API_PATH +"mpwap/api/v1/sendCode.shtml?destPhoneNo="+ 13167538694 +"&isVms=SMS&type=1",
+	        success: function (data) {
+	            ReactDOM.render(<Withdrawals datem={data}/>, document.getElementById("cnt"))
+	        }
+	    })
+		
 	},
 	
 	render : function(){
 		return (
 			<div>
-				<div className="slip clearfix"><a className="peno">忘记开户行？</a></div>
+				<div className="slip clearfix"><a href="http://www.lianhanghao.com/index.php" className="peno">忘记开户行？</a></div>
 				<div className="qing clearfix">
 					<div className="shyan">
 						<div className="mzysq">请输入验证码</div>

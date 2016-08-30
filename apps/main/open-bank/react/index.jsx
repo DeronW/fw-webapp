@@ -3,10 +3,26 @@ const API_PATH = document.getElementById("api-path").value;
 const BankAccount = React.createClass({
 	getInitialState: function() {
 	    return {
-	    	find : true,
-	    	entry : false,
-			fruit : false
+		    	find : true,
+		    	entry : false,
+				fruit : false,
+				bankList: [],
+				value:''
 	    	}
+	},
+	
+	refreshBankList: function(value){
+		$FW.Ajax({
+			url:API_PATH +　"mpwap/api/v1/getBankList.shtml",
+			data:{    
+				index: "10",
+				keyword: value,
+				size: "10"
+			},
+			success : (data) => {
+				this.setState({bankList: data})
+			}
+		})
 	},
 	
 	focusHandler: function(){
@@ -14,25 +30,27 @@ const BankAccount = React.createClass({
 	},
 	
 	inputHandler: function(){
-		this.setState({entry : true, fruit : true});		
+		this.setState({entry : true, fruit : true});
 	},
 	
 	handleChange: function(e) {
-	    this.setState({inputText:e.target.value});
+		var val=e.target.value;
+	    this.setState({value: val});
+	    this.refreshBankList(val);
 	},
 	
 	handleClear: function(){
-		this.setState({inputText: ''});
+		this.setState({value: '', fruit: false});
 	},
 
 	render : function(){
-		console.log(this.state.inputText)
+		
 		
 		let list = ()=> {
-			console.log(this.props.data.bankList)
-			var li = (d, index) => <li key={index}>{d.bankName} <img src="images/card-c.png"/></li>;
+			console.log(this.state.bankList)
+			var li = (d, index) => <li key={index}><a href="https://www.baidu.com">{d.bankName} <img src="images/card-c.png"/></a></li>;
 			
-			return <ul className="list">{this.props.data.bankList.map(li)}</ul>;
+			return <ul className="list">{this.state.bankList.map(li)}</ul>;
 		}
 		
 		return (
@@ -49,7 +67,7 @@ const BankAccount = React.createClass({
 					fruit={this.state.fruit}
 					onInput={this.inputHandler}
 					onChange={this.handleChange}
-					filterText={this.state.inputText}
+					value={this.state.value}
 					placeholder="请输入开户支行的关键词" />
 					 
 					{this.state.entry ? <img className="false" onClick={this.handleClear}  src="images/false.jpg"/> : null}
@@ -66,17 +84,8 @@ const BankAccount = React.createClass({
 
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"选择开户支行"} back_handler={backward}/>, document.getElementById('header'));
-	$FW.Ajax({
-		url:API_PATH +　"mpwap/api/v1/getBankList.shtml",
-		data:{    
-			index: "10",
-			keyword: "建设银行",
-			size: "10"
-		},
-		success : function(data){
-			ReactDOM.render(<BankAccount data={data}/>,document.getElementById('cnt'))
-		}
-	})
+
+	ReactDOM.render(<BankAccount />,document.getElementById('cnt'))
 });
 
 function backward(){
