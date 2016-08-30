@@ -11,7 +11,7 @@ const Mask = React.createClass({
                         由于您的身份信息无法通过系统验证，为了保证您的账户资金安全，您当前无法进行线上充值、投资、更换银行卡等交易。您当前的账户资金安全无虞，若有可用余额，可自行发起提现申请。
                     </div>
                     <div className="ever">有任何问题，请联系客服：<span>400-0322-988</span></div>
-                    <div className="close" onClick={this.props.handler} >关闭</div>
+                    <div className="close" onClick={this.props.handler}>关闭</div>
                 </div>
             </div>
         )
@@ -25,8 +25,8 @@ const Recharge = React.createClass({
             order_state: null  // 有3种,  处理中, 成功, 失败
         }
     },
-    hideMask: function(){
-    	this.setState({special_user: false})
+    hideMask: function () {
+        this.setState({special_user: false})
     },
     orderConfirm: function () {
         this.setState({order_state: 'processing'})
@@ -34,20 +34,21 @@ const Recharge = React.createClass({
     checkRechargeResult: function () {
         this.setState({order_state: 'success'})
     },
-    inspectResult: function(){
-    	this.setState({order_state: 'fail'})
+    inspectResult: function () {
+        this.setState({order_state: 'fail'})
     },
     render: function () {
 
-        let data = this.props.data;
-
         return (
             <div>
-                {this.state.special_user ? <Mask username={this.props.data.bankInfo.realName} handler={this.hideMask} /> : null}
+                {this.state.special_user ?
+                    <Mask username={this.props.data.bankInfo.realName} handler={this.hideMask}/> : null}
                 {this.state.order_state == 'processing' ?
-                    <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}  inspectResult={this.inspectResult} /> : null}
+                    <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}
+                                              inspectResult={this.inspectResult}/> : null}
                 {this.state.order_state == 'success' ? <Recharge.OrderSuccess /> : null}
-				{this.state.order_state == 'fail' ? <Recharge.OrderFail /> : null}
+                {this.state.order_state == 'fail' ? <Recharge.OrderFail /> : null}
+
                 <div className="bank">
                     <div className="ash clearfix">
                         <div className="img"><img src={this.props.data.bankInfo.bankLogo}/></div>
@@ -59,8 +60,8 @@ const Recharge = React.createClass({
                     </div>
                 </div>
 
-                <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服<span className="blue">400-6766-988</span></div>
-
+                <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服
+                    <span className="blue">400-6766-988</span></div>
 
                 <Form countingSeconds={60} orderConfirm={this.orderConfirm}/>
 
@@ -85,11 +86,12 @@ const Recharge = React.createClass({
                     </div>
                     <div className="atpr">
                         <img className="card-d" src="images/card-d.png"/>
-                        <span className="online">单笔充值不可超过该银行充值限额，<span
-                            className="colr">查看各银行充值限额；</span></span>
+                        <span className="online">单笔充值不可超过该银行充值限额，
+                            <span className="colr">查看各银行充值限额；</span></span>
                     </div>
-                    <div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">如果充值金额没有及时到账，请<span
-                        className="colr">拨打客服</span>查询。</span></div>
+                    <div className="atpr"><img className="card-d" src="images/card-d.png"/>
+                        <span className="online">如果充值金额没有及时到账，请<span
+                            className="colr">拨打客服</span>查询。</span></div>
                 </div>
             </div>
         )
@@ -111,7 +113,7 @@ Recharge.OrderSuccess = React.createClass({
 });
 
 Recharge.OrderFail = React.createClass({
-	render : function(){
+    render: function () {
         return (
             <div className="order-fail">
                 <img src="images/order-fail.png"/>
@@ -119,7 +121,7 @@ Recharge.OrderFail = React.createClass({
                 <a className="fail-continue-charge">继续充值</a>
             </div>
         )
-	}
+    }
 });
 
 Recharge.OrderProcessing = React.createClass({
@@ -164,7 +166,6 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getRechargeInfo.shtml",
         success: function (data) {
-        	console.log(data)
             ReactDOM.render(<Recharge data={data}/>, document.getElementById("cnt"))
         }
     })
