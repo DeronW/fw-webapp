@@ -7,10 +7,9 @@ const ReportBox = React.createClass({
 			jump : false,  //跳转
 			find : true,
 			entry : false,
-			fruit : false,
+			fruit : false
 		}
 	},
-	
 	noneHandle: function(){
 		this.setState({note : true})
 	},
@@ -24,8 +23,8 @@ const ReportBox = React.createClass({
 	},
 	
 	inputHandler: function(){
-		this.setState({entry : true}),
-		this.setState({fruit : true})
+		this.setState({entry : true});
+		this.setState({fruit : true});
 	},
 	
 	submitHandle: function(){
@@ -38,6 +37,9 @@ const ReportBox = React.createClass({
 	},
 	
 	render : function(){
+
+		let acc = this.props.data.hsAccountInfo;
+
 		return (
 			<div>
 				{this.state.jump ? <ReportBox.BankAccount 
@@ -49,14 +51,14 @@ const ReportBox = React.createClass({
 					handlerClear={this.handlerClear} /> : null}
 			
 				<Input note={this.noneHandle} 
-					username={this.props.data.username} 
-					cardNumber={this.props.data.cardNumber} 
-					bankLogo={this.props.data.bankLogo}
+					username={acc.accountName}
+					cardNumber={acc.bankCardNo}
+					bankLogo={''}
 					jump={this.props.jump}
 					handleJump={this.handleJump}
 				/>
 				
-				{this.state.note ? <Note cardNumber={this.props.data.cardNumber} handler={this.noneHandle} /> : null}
+				{this.state.note ? <Note cardNumber={acc.bankCardNo} handler={this.noneHandle} /> : null}
 			
 				<div className="refer" onClick={this.submitHandle} >提交</div>
 			</div>
@@ -69,12 +71,11 @@ ReportBox.BankAccount = React.createClass({
 	    return {
 	    	inputText: "",
 	    	list:[]
-	    	}
+	   }
 	},
 	
 	handleChange: function(e) {
 	    this.setState({inputText:this.refs.input.inputText.trim()});
-	    
 	},
 	
 	handleClear: function(){
@@ -92,7 +93,6 @@ ReportBox.BankAccount = React.createClass({
 			<div className="select-bank">
 				<div className="search">
 					{this.props.find ? <img src="images/search.png"/> : null}
-					
 					<input type="text" value={this.empty} name="txtSearch" 
 					className="hunt" 
 					onClear={this.props.handlerClear}
@@ -125,12 +125,10 @@ const Input = React.createClass({
 	},
 	bankChangeHandler: function(e){
 		this.setState({bankCard: e.target.value});
-		console.log(bankCard)
 	},
 	
 	changeHandler: function(e){
 		this.setState({verify_code:e.target.value});
-		console.log(verify_code)
 	},
 	getInitialState: function(){
 		return {
@@ -195,7 +193,6 @@ const Input = React.createClass({
 						{this.state.seconds ? this.state.seconds + "s后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>}
 					</div>
 				</div>
-				
 			</div>
 		)
 	}
@@ -215,21 +212,19 @@ const Note = React.createClass({
 
 
 $FW.DOMReady(function () {
-
     ReactDOM.render(<Header title={"绑定银行卡"}/>, document.getElementById('header'));
-
     $FW.Ajax({
-        url: API_PATH +"mpwap/api/v1/changeBankCard.shtml",
-        
+        url: API_PATH + "mpwap/api/v1/getHSAccountInfo.shtml",
+
+		//url: API_PATH + "mpwap/api/v1/changeBankCard.shtml",
         data:{
-        	bankCard: "6228480402564890018",
-        	bankId: "1"
+        	//bankCard: "6222022308004509665",
+        	//bankId: "1"
         },
-        
         success: function (data) {
+			console.log(data)
             ReactDOM.render(<ReportBox data={data}/>, document.getElementById("cnt"))
-        	
         }
-    })
+    });
 });
 
