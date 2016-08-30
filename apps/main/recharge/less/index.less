@@ -63,7 +63,7 @@ input[type=checkbox], input[type=radio] {
 
 .masker {
   z-index: 99;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   height: 100%;
@@ -286,7 +286,7 @@ input[type=checkbox], input[type=radio] {
   color: #4aa1f9;
 }
 
-.order-processing, .order-success {
+.order-processing, .order-success, .order-fail {
   position: fixed;
   top: 0px;
   bottom: 0;
@@ -296,17 +296,63 @@ input[type=checkbox], input[type=radio] {
 
   img {
     display: block;
-    margin: 200px auto 50px;
+    margin: 200px auto 0;
   }
 
   .text {
     text-align: center;
-    font-size: 28px;
+    font-size: 36px;
+    color:#8591b3;
+    margin-top:70px;
   }
 }
-
-
-
+.success-btn{
+  width:660px;
+  margin:70px auto 0;
+  overflow:hidden;
+}
+.continue-charge{
+  display:inline-block;
+  width:309px;
+  height:83px;
+  line-height:83px;
+  text-align:center;
+  background:#7c9dc7;
+  font-size:36px;
+  color:#fff;
+  border-radius:4px;
+  float:left;
+}
+.continue-invest{
+  display:inline-block;
+  width:309px;
+  height:83px;
+  line-height:83px;
+  text-align:center;
+  background:#fd4b4c;
+  font-size:36px;
+  color:#fff;
+  border-radius:4px;
+  float:right;
+}
+.fail-tip{
+  text-align:center;
+  font-size:30px;
+  color:#a9b1b5;
+  margin-top:20px;
+}
+.fail-continue-charge{
+  display:block;
+  width:660px;
+  margin:70px auto 0;
+  height:83px;
+  line-height:83px;
+  text-align:center;
+  background:#fd4b4c;
+  font-size:36px;
+  color:#fff;
+  border-radius:4px;
+}
 
 
 
