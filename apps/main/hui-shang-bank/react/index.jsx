@@ -232,7 +232,7 @@ var From = React.createClass({
                         <span className="bank-logo">
                             <span className="bank-text">
                                 {
-                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.logoUrl
+                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.bankName
                                 }
                             </span>
                             <span className="img">
@@ -280,6 +280,7 @@ var SelectBank = React.createClass({
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/getBankListInfo.shtml",
+            enable_loading: true,
             success: function(data) {
                 _this.setState({
                     bankListData: data
@@ -291,10 +292,13 @@ var SelectBank = React.createClass({
         this.props.callbackBtn(false);
     },
     supportQuickPayClick: function(index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
+        console.log(this.state.bankListData);
+
+        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index]);
         this.props.callbackBtn(false);
     },
     notSupportQuickPayClick: function(index) {
+        console.log(this.state.bankListData);
         this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index])
         this.props.callbackBtn(false);
     },
@@ -441,6 +445,8 @@ var Body = React.createClass({
     },
     alreadySelectBank: function(data) {
         var newUserInfo = this.state.userInfo;
+        console.log(data);
+
 
         newUserInfo.bankId = data.bankId;
 
@@ -629,6 +635,7 @@ var MerchandisePsw = React.createClass({
 $FW.DOMReady(function() {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+        enable_loading: true,
         success: function(data) {
             ReactDOM.render(
                 <Body activity={data}/>,
