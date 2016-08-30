@@ -19,6 +19,8 @@ const MAIN_APP_NAMES = [
     'bind-bank-card',
     'hui-shang-bank',
     'hui-shang-user',
+    'hui-shang-settings-password',
+    'hui-shang-succeed',
     'bind-card',
     'before-input',
     'personal-center',

@@ -145,31 +145,30 @@ var From = React.createClass({
     headlerCode: function() {
         var _this = this;
 
-        this.setState({
-            code: 1
-        });
-
-        this.interval = setInterval(function() {
-            _this.setState({
-                countdown: --_this.state.countdown
-            });
-
-            if(_this.state.countdown == 0) {
-                clearInterval(_this.interval);
-
-                _this.setState({
-                    code: 0,
-                    countdown: 20
-                });
-            }
-        }, 1000);
-
-       $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&isVms=SMS&destPhoneNo=13683507870",
+        $FW.Ajax({
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=13683507870&isVms=SMS",
             method: "GET",
-            //url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
             success: function(data) {
                 console.log(data)
+                _this.setState({
+                    code: 1
+                });
+
+                this.interval = setInterval(function() {
+                    _this.setState({
+                        countdown: --_this.state.countdown
+                    });
+
+                    if(_this.state.countdown == 0) {
+                        clearInterval(_this.interval);
+
+                        _this.setState({
+                            code: 0,
+                            countdown: 20
+                        });
+                    }
+                }, 1000);
+
                 /*_this.setState({
                     identifyingCode: data.identifyingCode
                 });
@@ -185,10 +184,8 @@ var From = React.createClass({
     render: function() {
         var _this = this;
 
-        var userAjaxData = this.props.ajaxData.data;
+        var userAjaxData = this.props.ajaxData;
         var idCardNo = userAjaxData.userInfo.idCardNo;
-
-        console.log(userAjaxData.userInfo.bankLogo)
 
         return (
             <div className="">
@@ -201,9 +198,9 @@ var From = React.createClass({
                     </div>
 
                     <div className="input-block">
-                        <span className="icon number-icon"></span>
+                        <span className="icon id-icon"></span>
                         <div className="text-block">
-                            <span className="text number-text">
+                            <span className="text  number-text">
                                 {
                                     idCardNo.substring(0, 4) + "****" + idCardNo.substring((idCardNo.length - 4), idCardNo.length)
                                 }
@@ -212,7 +209,7 @@ var From = React.createClass({
                     </div>
 
                     <div className="input-block">
-                        <span className="icon id-icon"></span>
+                        <span className="icon number-icon"></span>
                         <div className="text-block" >
                             {
                                 this.state.showInput == 1 ?
@@ -235,12 +232,12 @@ var From = React.createClass({
                         <span className="bank-logo">
                             <span className="bank-text">
                                 {
-                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.bankName
+                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.logoUrl
                                 }
                             </span>
                             <span className="img">
                                 <img src={
-                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : this.props.alreadyBankData.bankLogo
+                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : this.props.alreadyBankData.logoUrl
                                 } className="r-icon" />
                             </span>
                         </span>
@@ -282,13 +279,11 @@ var SelectBank = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/getBankList.shtml",
+            url: API_PATH + "mpwap/api/v1/getBankListInfo.shtml",
             success: function(data) {
-                console.log("aaa");
                 _this.setState({
                     bankListData: data
                 });
-
             }
         });
     },
@@ -296,11 +291,11 @@ var SelectBank = React.createClass({
         this.props.callbackBtn(false);
     },
     supportQuickPayClick: function(index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.supportQuickPay[index])
+        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
         this.props.callbackBtn(false);
     },
     notSupportQuickPayClick: function(index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.notSupportQuickPay[index])
+        this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index])
         this.props.callbackBtn(false);
     },
     render: function() {
@@ -311,8 +306,9 @@ var SelectBank = React.createClass({
         };
 
         var quickPayli = function(comment, index) {
+
             return <li key={index} onClick={_this.supportQuickPayClick.bind(this, index)} ref={"item" + index}>
-                <img src={comment.bankLogo} className="logo-img" />
+                <img src={comment.logoUrl} className="logo-img" />
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
                 </div>
@@ -321,7 +317,7 @@ var SelectBank = React.createClass({
 
         var notQuickPayli = function(comment, index) {
             return <li key={index} onClick={_this.notSupportQuickPayClick.bind(this, index)} ref={"item" + index}>
-                <img src={comment.bankLogo} className="logo-img" />
+                <img src={comment.logoUrl} className="logo-img" />
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
                 </div>
@@ -339,7 +335,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.supportQuickPay.map(quickPayli, this) : null
+                                this.state.bankListData != null ? this.state.bankListData.bankList.map(quickPayli, this) : null
                             }
 
                         </ul>
@@ -351,7 +347,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.notSupportQuickPay.map(notQuickPayli, this) : null
+                                this.state.bankListData != null ? this.state.bankListData.quickBankList.map(notQuickPayli, this) : null
                             }
                         </ul>
                     </div>
@@ -375,6 +371,8 @@ var SelectBank = React.createClass({
 
 var Body = React.createClass({
     getInitialState: function() {
+        var getAjaxUserInfo = this.props.activity;
+
         return {
             selectBankWindow: null,
             loading: null,
@@ -383,11 +381,12 @@ var Body = React.createClass({
             validateCode: null,
             pleaseCode: true,
             userInfo: {
-                name: null,
-                account: null,
-                id: null,
-                pretermissionBankName: null,
-                pretermissionBankLogo: null
+                bankCardNo: getAjaxUserInfo.userInfo.bankCard,
+                bankNo: getAjaxUserInfo.userInfo.bankId,
+                idCardNo: getAjaxUserInfo.userInfo.idCardNo,
+                openStatus: getAjaxUserInfo.openStatus,
+                realName: getAjaxUserInfo.userInfo.realName,
+                validateCode: null
             }
         };
     },
@@ -396,44 +395,43 @@ var Body = React.createClass({
 
         var newUserInfo = this.state.userInfo;
 
-        newUserInfo.id = space(dataText);
+        newUserInfo.bankCardNo = space(dataText);
 
         this.setState({
-            userInfo:
-            newUserInfo
+            userInfo: newUserInfo
         });
     },
     clickFun: function() {
         this.fromData;
         var _this = this;
 
-        this.setState({
-            userInfo: {
-                name: this.state.userInfo.name,
-                account: this.state.userInfo.account,
-                id: this.state.userInfo.id,
-                pretermissionBankName: this.state.userInfo.bankName,
-                pretermissionBankLogo: this.state.userInfo.bankLogo
-            }
-        });
+        var getAjaxUserInfo = this.props.activity;
 
         if(this.dataText !== undefined) {
             if((this.dataText.length == 0) || (this.dataText == undefined) ) {
                 $FW.Component.Toast("不能为空");
             }
+
+            return false;
         }
 
         if(this.state.validateCode == null) {
             $FW.Component.Toast("验证码不能为空");
+
+            return false;
         }
 
-        if(parseInt(this.state.validateCode) !== this.state.pleaseCode) {
-            $FW.Component.Toast("验证码不对");
-        } else {
-            this.props.callbackBodyPage(1);
-        }
+        console.log(this.state.userInfo);
 
-        //this.props.callbackBodyPage(1);
+        $FW.Ajax({
+            url: API_PATH + "mpwap/api/v1/bind/card.shtml",
+            method: "POST",
+            data: _this.state.userInfo,
+            success: function(data) {
+                console.log(data);
+            }
+        });
+
     },
     selectBank: function(show) {
         this.setState({
@@ -441,29 +439,28 @@ var Body = React.createClass({
         });
     },
     alreadySelectBank: function(data) {
-        console.log(data);
+        var newUserInfo = this.state.userInfo;
+
+        newUserInfo.bankId = data.bankId;
+
         this.setState({
+            userInfo: newUserInfo,
             alreadyBank: data
         });
     },
     getValidateCode: function(code) {
+        var newUserInfo = this.state.userInfo;
+
+        newUserInfo.validateCode = code;
+
         this.setState({
+            userInfo: newUserInfo,
             validateCode: code
         });
-    },
-    getUserInfo: function(data) {
-        this.setState({
-            userInfo: {
-                name: data.name,
-                account: data.bankCardNum,
-                id: data.id,
-                pretermissionBankName: data.pretermissionBankName,
-                pretermissionBankLogo: data.pretermissionBankLogo
-            }
-        });
+
     },
     pleaseValidateCode: function(data) {
-        //console.log(data);
+
         this.setState({
             pleaseCode: data
         });
@@ -477,7 +474,7 @@ var Body = React.createClass({
 
                 <Nav imgUrl={"images/nav-2.png"}/>
 
-                <From callbackGetUserInfo={this.getUserInfo}
+                <From
                       callbackParent={this.fromData}
                       callbackBank={this.selectBank}
                       alreadyBankData={this.state.alreadyBank}
