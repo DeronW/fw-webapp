@@ -22,7 +22,7 @@ const MAIN_APP_NAMES = [
     'hui-shang-settings-password',
     'hui-shang-succeed',
     'hui-shang-resultList',
-    'hui-shang-new-user-succeed',
+    'register-success', // 新用户注册成功后跳转落地页
     'bind-card',
     'before-input',
     'personal-center',
