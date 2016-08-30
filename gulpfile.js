@@ -21,6 +21,8 @@ const MAIN_APP_NAMES = [
     'hui-shang-user',
     'hui-shang-settings-password',
     'hui-shang-succeed',
+    'hui-shang-resultList',
+    'hui-shang-new-user-succeed',
     'bind-card',
     'before-input',
     'personal-center',
@@ -50,7 +52,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-        api_path: "http://pengyan.9888.cn/",
+        api_path: "http://xjb.9888.cn/",
         include_components: common_components,
         include_common_js: common_js
     });
