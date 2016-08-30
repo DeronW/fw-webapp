@@ -39,7 +39,8 @@ const NineDraw = React.createClass({
 
         var remain = (7 - this.state.masker) + 8 * 2 + parseFloat(n) - 1;
         var orig_remain = remain;
-
+console.log(remain);
+console.log(this.state.masker);
         var run = () => {
             setTimeout(()=> {
                 if (remain-- >= 0) {
