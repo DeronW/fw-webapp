@@ -6,7 +6,6 @@ const NineDraw = React.createClass({
         return {
             masker: null,
             showPopPrize: false,
-
             remainTimes: null,
             infinitely: null,
             costScore: null,
@@ -39,7 +38,6 @@ const NineDraw = React.createClass({
 
         var remain = (7 - this.state.masker) + 8 * 2 + parseFloat(n) - 1;
         var orig_remain = remain;
-
         var run = () => {
             setTimeout(()=> {
                 if (remain-- >= 0) {

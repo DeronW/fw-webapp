@@ -1,22 +1,22 @@
 const PopPrize = React.createClass({
     render: function () {
-        var prize = "谢谢参与！";
-        if (this.props.masker == 1) {
-            prize = "谢谢参与";
+        var prize = "恭喜您，获得5工分！";
+        if (this.props.masker == 0) {
+            prize = "恭喜您，获得Iphone6s（64G）";
+        } else if (this.props.masker == 1) {
+            prize = "恭喜您，获得小辣椒手机！";
         } else if (this.props.masker == 2) {
-            prize = "恭喜您，获得10工分！";
+            prize = "恭喜您，获得经典干红葡萄酒！";
         } else if (this.props.masker == 3) {
-            prize = "恭喜您，获得5元返现券！";
+            prize = "恭喜您，获得爱奇艺月卡！";
         } else if (this.props.masker == 4) {
-            prize = "恭喜您，获得豆哥书包！";
+            prize = "恭喜您，获得爱奇艺周卡！";
         } else if (this.props.masker == 5) {
-            prize = "恭喜您，获得100工分！";
+            prize = "恭喜您，获得5元返现券";
         } else if (this.props.masker == 6) {
-            prize = "谢谢参与！";
+            prize = "恭喜您，获得10工分！";
         } else if (this.props.masker == 7) {
-            prize = "恭喜您，获得100元返现券！";
-        } else if (this.props.masker == 8) {
-            prize = "恭喜您，获得1%返息券！";
+            prize = "恭喜您，获得5工分！";
         }
         let popPrizeBtn1 = ()=> {
             if (this.props.infinitely) {

@@ -158,8 +158,17 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"充值"}/>, document.getElementById('header'));
 
     $FW.Ajax({
-        url: "http://10.10.100.112/mockjs/12/api/v1/bind/card.json?",
+        url: API_PATH +"mpwap/api/v1/getRechargeInfo.shtml",
+        
+        data:{
+        	payAmount: "100",
+        	phoneNo: "15188254703",
+        	smsCode: "6666",
+        	validateNo: "8888"
+        },
+        
         success: function (data) {
+        	console.log(data)
             ReactDOM.render(<Recharge data={data}/>, document.getElementById("cnt"))
         }
     })
