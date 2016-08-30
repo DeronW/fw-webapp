@@ -6,12 +6,21 @@ const PopInf = React.createClass({
                     <div className="pop-inf-title">活动说明</div>
                     <div className="pop-inf-cnt">
                         <div className="pop-inf-li">
-                            1、活动期间，若被邀请人首次投资选择债权转让项目，则该被邀请的好友不计入邀请人奖励统计；且投资人投资债权转让项目，该笔投资不享受活动福利。
+                            <div className="pop-inf-h">1.活动时间:</div>
+                            <div className="pop-inf-detail">2016年9月2日-9月8日</div>
                         </div>
-                        <div className="pop-inf-li">2、返息券每次投标仅可使用一张，每张返息券仅可使用一次；</div>
-                        <div className="pop-inf-li">3、实物奖统一于活动结束后、8月25日之前统一发送所获奖品兑换券至用户账号内，实物奖图片仅供参考；</div>
-                        <div className="pop-inf-li">4、累投年化金额所得奖金将在活动结束后7个工作日内，以工豆形式发放至获奖用户账户内，工豆有效期为15天；</div>
-                        <div className="pop-inf-li">5、活动最终解释权归金融工场所有，活动详情致电客服热线咨询:400-0322-988。</div>
+                        <div className="pop-inf-li">
+                            <div className="pop-inf-h">2.活动奖品:</div>
+                            <div className="pop-inf-detail">phone6s(64G)、小辣椒手机、经典干红葡萄酒、爱奇艺月卡爱奇艺周卡、5元返现券、10工分、5工分</div>
+                        </div>
+                        <div className="pop-inf-li">
+                            <div className="pop-inf-h">3.活动内容:幸运大转盘</div>
+                            <div className="pop-inf-detail">① 普通用户可转动10次/每天;<br/>② V1用户可转动15次/每天;<br/>③ V2用户可转动20次/每天;<br/>④ V3用户可转动25次/每天;<br/>⑤ V4用户可转动30次/每天。</div>
+                        </div>
+                        <div className="pop-inf-li">
+                        	<div className="pop-inf-h">4.活动说明:</div>
+                            <div className="pop-inf-detail">① 10工分即可参与大转盘抽奖一次，100%有奖；<br/>② 抽奖获得任意奖品，均实时发放（实物奖品以兑换券形式实时发放到工场账户，中奖者到豆哥商城自行兑换）；<br/>③ 所获得5元返现券为全场通用券，不限标的（债权转让除外）；<br/>④ 本活动规则解释权归金融工场所有。<br/></div>
+                        </div>                       
                     </div>
                     <div className="pop-inf-close" onClick={this.props.hidePopInf}></div>
                 </div>
