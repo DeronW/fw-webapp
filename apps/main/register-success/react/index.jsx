@@ -12,7 +12,8 @@ var TopNav = React.createClass({
             <div className="top-nav">
                 <div className="info">
                     <div className="title">{this.props.title}</div>
-                    <span className="r-text" onClick={this.skipHandler}>{this.props.btnText}</span>
+                    <span className="r-text" onClick={this.skipHandler}>
+                        {this.props.btnText}</span>
                 </div>
             </div>
         );
@@ -23,7 +24,9 @@ var Btn = React.createClass({
     render: function () {
         return (
             <div className="btn-area">
-                <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>{this.props.btnText}</div>
+                <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>
+                    {this.props.btnText}
+                </div>
             </div>
         );
     }
@@ -36,11 +39,7 @@ var PromptBlock = React.createClass({
                 <div className="img">
                     <img src={this.props.imgUrl}/>
                 </div>
-
-                <div className="title">
-                    {this.props.title}
-                </div>
-
+                <div className="title"> {this.props.title} </div>
                 <div className="ui-prompt-text">
                     {this.props.text}
                 </div>
