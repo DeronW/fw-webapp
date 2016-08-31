@@ -165,29 +165,31 @@ var From = React.createClass({
         var _this = this
         var phoneNo = this.props.ajaxData.userInfo.phoneNum;
 
+        _this.setState({
+            code: 1
+        });
+
+        this.interval = setInterval(function() {
+            _this.setState({
+                countdown: --_this.state.countdown
+            });
+
+            if(_this.state.countdown == 0) {
+                clearInterval(_this.interval);
+
+                _this.setState({
+                    code: 0,
+                    countdown: 20
+                });
+            }
+        }, 1000);
+
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo="+ phoneNo +"&isVms=SMS",
             method: "GET",
             success: function(data) {
                 console.log(data)
-                _this.setState({
-                    code: 1
-                });
 
-                this.interval = setInterval(function() {
-                    _this.setState({
-                        countdown: --_this.state.countdown
-                    });
-
-                    if(_this.state.countdown == 0) {
-                        clearInterval(_this.interval);
-
-                        _this.setState({
-                            code: 0,
-                            countdown: 20
-                        });
-                    }
-                }, 1000);
 
                 /*_this.setState({
                     identifyingCode: data.identifyingCode
