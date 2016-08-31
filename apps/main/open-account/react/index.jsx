@@ -559,7 +559,7 @@ var Body = React.createClass({
 
         return (
             <div className="cnt">
-                <TopNav title={"升级存管账户"} backBtn={true} />
+                <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} />
 
                 <Nav imgUrl={"images/nav-2.png"}/>
 
