@@ -1,3 +1,5 @@
+const API_PATH = document.getElementById("api-path").value;
+
 const BindBankCard = React.createClass({
 //	hideHandler: function(){
 //		var item = this.state;
@@ -6,27 +8,28 @@ const BindBankCard = React.createClass({
 //	},
 	
 	render : function(){
+		let prohibited = this.props.item.openStatus;
 		return (
 			<div>
-			    {this.props.item.data.bankCardStatus == 0 ? <Invalid  /> : null} 
-				{this.props.item.validate ? <Cover hide={this.hideHandler} /> : null}
-				{this.props.item.validate ? <Bomb hide={this.hideHandler} username={this.props.item.username} /> : null}
+				{prohibited < 3 ? <Invalid  /> : null}
+				{prohibited == 5 ? <Cover hide={this.hideHandler} /> : null}
+				{prohibited == 5 ? <Bomb hide={this.hideHandler} username={this.props.item.realName} /> : null}
 				
-				<div className="bank">
+				<div className={prohibited < 3 ? "bank bank-top1" : "bank bank-top2"}>
 					<div className="ash clearfix">
-						<div className="img"><img src="http://10.10.100.128:9090/mpapp/staticRe/images/bankicons/3.png" /></div>
-						<div className="bankname">{this.props.item.data.bankName}</div>
+						<div className={prohibited < 3 ? "img gray-img" : "img"}><img src={this.props.item.userInfo.bankLogo}/></div>
+						<div className="bankname">{this.props.item.userInfo.bankName}</div>
 					</div>
 					<div className="belon">
-						<div className="name">{this.props.item.data.realName}</div>
-						<div className="num">{this.props.item.data.bankCard}</div>
-						<div className="card-e"></div>
+						<div className="name">{this.props.item.userInfo.realName}</div>
+						<div className="num">{this.props.item.userInfo.bankCard}</div>
+						{prohibited < 3 ? <div className="card-e"></div> : null}
 					</div>
+					<div className={prohibited < 3 ? "instant-icon gray-img" : "instant-icon"}></div>
 				</div>
-				
-				<Sup />
-				{this.props.item.data.isCompanyAgent || this.props.item.data.bankCardStatus == 0 ? null : <Bran />}
-				{this.props.item.data.isCompanyAgent ? <Branch /> : null}
+				<Sup/>
+				{prohibited == 3 || prohibited == 4 ? <Bran /> : null}
+				{prohibited < 3 ? <Branch /> : null}
 				<Warm />
 			</div>
 		)
@@ -122,7 +125,8 @@ const Warm = React.createClass({
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"绑定银行卡"} back_handler={backward}/>, document.getElementById('header'));
 	$FW.Ajax({
-		url:"http://lxm.9888.cn/mpwap/api/v2/olduser/bankCardInfo.shtml",
+		//url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+		url: "http://localhost/info.json",
 		success : function(data){
 			console.log(data)
 		    ReactDOM.render(<BindBankCard item={data} />,document.getElementById('cnt'));			
