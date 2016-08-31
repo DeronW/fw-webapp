@@ -3,15 +3,31 @@ const API_PATH = document.getElementById("api-path").value;
 const Withdrawals = React.createClass({
 	getInitialState: function() {
 	    return {
+	    	entry : false,
+			fruit : false,
+			bankList: [],
+			value:'',
+	    	jump: false,
+	    	
+	    	
 	    	less_than: false,
 	    	greater_than: false,
 	    	inputText: null,
 	    	verify_code: null,
 	    	alter: false,
-	    	cue: false
+	    	enable :this.props.data.isFeeEnable,
+	    	
+            order_state: null  // 有3种,  处理中, 成功, 失败
 	    }
 	},
 	
+	
+	
+	handleJump: function(){
+		this.setState({jump: true})
+	},
+	
+
 	handlerChange: function(e){
 		this.setState({inputText: e.target.value});
 		this.setState({alter: true})
@@ -21,10 +37,10 @@ const Withdrawals = React.createClass({
 	textInput: function(){
 		var isNum=/^(([1-9][0-9]*)|(([0]\.\d{1,2}|[1-9][0-9]*\.\d{1,2})))$/;
 		if(isNum.test(this.state.inputText)){
-			if(this.state.inputText.length>=6){
+			if(this.state.inputText.length>=this.props.data.criticalValue){
 				this.setState({greater_than: true});
 				this.setState({less_than: false})
-			}else{
+			}else if(this.state.inputText.length<=this.props.data.minAmt){
 				this.setState({less_than: true});
 				this.setState({greater_than: false});
 			}
@@ -37,24 +53,52 @@ const Withdrawals = React.createClass({
 	},
 	
 	submitHandle: function(){
+
 		var _this = this;
 		if(!_this.state.inputText ){
 			$FW.Component.Alert("请输入提现金额")
 		}else if(!_this.state.verify_code){
 			$FW.Component.Alert("请输入验证码")
 		}else{
-			this.setState({cue: true})
+			$FW.Ajax({
+		        url: API_PATH +"mpwap/api/v1/withDraw.shtml",
+		        type: 'get',
+				sucess:function(code){
+					if(code =="处理中"){
+			        	success: () => this.props.orderConfirm()
+			        }else if(code == "成功"){
+			        	success: () => this.props.checkRechargeResult()
+			        }else{
+			        	success: () => this.props.inspectResult()
+			        }
+				}
+		         
+		    })
 		}
 	},
 	
 	sureHandle: function(){
-		this.setState({cue: false})
+		this.setState({enable: false})
 	},
+	
+	
+    orderConfirm: function () {
+        this.setState({order_state: 'processing'})
+    },
+    checkRechargeResult: function () {
+        this.setState({order_state: 'success'})
+    },
+    inspectResult: function () {
+        this.setState({order_state: 'fail'})
+    },
+	
+	
+	
 	
 	render : function(){
 		return (
 			<div>
-				{this.state.cue ? <div className="cang">
+				{this.state.enable ? <div className="cang">
 					<div className="masker"></div>
 					<div className="taine">
 						<div className="his">提示</div>
@@ -65,7 +109,7 @@ const Withdrawals = React.createClass({
 							</div>
 							<div className="pot-a">
 								<span className="iner">提现金额</span>
-								<span className="zeor">¥3,003,000.00</span>
+								<span className="zeor">¥33,000.00</span>
 							</div>
 							<div className="pot-b">
 								<span className="iner">提现手续费</span>
@@ -80,6 +124,15 @@ const Withdrawals = React.createClass({
 						
 					</div>
 				</div> : null}
+				
+				
+				{this.state.order_state == 'processing' ?
+                    <Withdrawals.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}
+                                              inspectResult={this.inspectResult}/> : null}
+                {this.state.order_state == 'success' ? <Withdrawals.OrderSuccess /> : null}
+                {this.state.order_state == 'fail' ? <Withdrawals.OrderFail /> : null}
+				
+				
 				
 				<div className="stou clearfix">
 					<div className="zhaoshang"><img className="ico-zhaoshang" src="{this.props.data.bankInfo.bankLogo}"/></div>
@@ -102,9 +155,24 @@ const Withdrawals = React.createClass({
 					</div>
 				</div>
 				
-				{this.state.greater_than ? <Greater /> : null}
+				{this.state.greater_than ? <Greater
+					jump={this.state.jump}
+					handleJump={this.handleJump} /> : null}
+				
 				{this.state.greater_than ? <Neg /> : null}
 				{this.state.less_than ? <Special /> : null}
+				
+				{this.state.jump ? <Withdrawals.BankAccount
+					
+					onClear={this.state.handleClear}
+					find={this.state.find}
+					onFocus={this.focusHandler}
+					entry={this.state.entry}
+					fruit={this.state.fruit}
+					onInput={this.inputHandler}
+					value={this.state.value}
+					
+					setInputValue={this.setInputValueHandler}/> : null}
 				
 				<div className="xt" onClick={this.submitHandle} >提现</div>
 				
@@ -125,14 +193,119 @@ const Withdrawals = React.createClass({
 	}
 })
 
+Withdrawals.BankAccount = React.createClass({
+	
+	getInitialState: function(){
+		return {
+			typing: false,
+			entry : false,
+			fruit : false,
+			bankList: [],
+			value:'',
+		}
+	},
+	
+	refreshBankList: function(value){
+		let fn = () => {
+			$FW.Ajax({
+				url:API_PATH +　"mpwap/api/v1/getBankList.shtml",
+				data:{    
+					index: "10",
+					keyword: value,
+					size: "10"
+				},
+				success : (data) => {
+					this.setState({bankList: data.bankList})
+				}
+			})
+		}
+		
+		clearTimeout(this._timer);
+		if(value) this._timer = setTimeout(fn, 500);
+	},
+	
+	
+	focusHandler: function(){
+		this.setState({find : false})
+	},
+	
+	inputHandler: function(){
+		this.setState({entry : true, fruit : true});
+	},
+	
+	handleClear: function(){
+		this.setState({value: '', fruit: false});
+	},
+	
+	
+	
+	setInputValueHandler: function(){
+		this.setState({inputText: this.props.data.bankList.bankName})
+	},
+	
+	
+	typingHandler: function(){
+		this.setState({typing:　true})
+	},
+	
+	handleChange: function(e) {
+		var val=e.target.value;
+	    this.setState({value: val});
+	    this.refreshBankList(val);
+	},
+	
+	render : function(){
+		
+		console.log(this.props.find)
+		
+		let list = ()=> {
+			var li = (d, index) => <li key={index} onClick={this.props.setInputValue} ><a>{d.bankName} <img src="images/card-c.png"/></a></li>;
+			
+			return <ul className="list">{this.state.bankList.map(li)}</ul>;
+		};
+		
+		let icon = <img className="suo" src="images/search.png"/>;
+		if(this.state.typing) icon = null;
+		
+		return (
+			<div className="select-bank">
+				<div className="search">
+					{icon}
+					
+					<input type="text" 
+					className="hunt" 
+					onClear={this.props.handleClear}
+					onFocus={this.typingHandler}
+					entry={this.state.entry}
+					fruit={this.props.fruit}
+					onInput={this.props.inputHandler}
+					onChange={this.handleChange}
+					value={this.state.value}
+					placeholder="请输入开户支行的关键词" />
+					 
+					{this.props.entry ? <img className="false" onClick={this.handleClear}  src="images/false.jpg"/> : null}
+				</div>
+				
+				{this.props.fruit ? list() : null}	
+				
+			</div>
+		)
+	}
+})
+
+
+
+
+
+
 const Greater = React.createClass({  
 	render : function(){
 		return (
-			<div className="modify">
+			<div className="modify" onClick={this.props.handleJump} >
 				<div className="wire"></div>
 				<div className="pure">
 					<div className="xuanwu" style={{fontSize:'32px'}}>开户银行</div>
-					<div className="choice"><div className="pleas" style={{color:'#555555'}}>请选择</div></div>
+					<div className="choice"><div className="pleas" style={{color:'#555555'}}  >请选择</div></div>
 				</div>
 			</div>
 		)
@@ -169,7 +342,7 @@ const Neg = React.createClass({
         }, 1000)
 		
 		$FW.Ajax({
-	        url: API_PATH +"mpwap/api/v1/sendCode.shtml?destPhoneNo="+ 13167538694 +"&isVms=SMS&type=1",
+	        url: API_PATH +"mpwap/api/v1/sendCode.shtml?=isVms=SMS=type=1",
 	        success: function (data) {
 	            ReactDOM.render(<Withdrawals datem={data}/>, document.getElementById("cnt"))
 	        }
@@ -183,7 +356,7 @@ const Neg = React.createClass({
 				<div className="slip clearfix"><a href="http://www.lianhanghao.com/index.php" className="peno">忘记开户行？</a></div>
 				<div className="qing clearfix">
 					<div className="shyan">
-						<div className="mzysq">请输入验证码</div>
+						<div className="mzysq"><input className="odec" type="text" placeholder="请输入手机验证码"/></div>
 					</div>
 					<div className="miaoh" style={{background:'#d4d4d4'}}>
 						{this.state.seconds ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerCodeClick} >获取验证码</span>}
@@ -227,7 +400,7 @@ const Special = React.createClass({
 			<div>
 				<div className="qing clearfix">
 					<div className="shyan">
-						<div className="mzysq" value={this.props.verify_code} onCodeChange={this.changeHandler}>请输入验证码</div>
+						<div className="mzysq" value={this.props.verify_code} onCodeChange={this.changeHandler}><input className="odec" type="text" placeholder="请输入手机验证码"/></div>
 					</div>
 					<div className="miaoh">
 						{this.state.seconds ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>}
@@ -237,6 +410,72 @@ const Special = React.createClass({
 		)
 	}
 })
+
+
+
+
+Withdrawals.OrderSuccess = React.createClass({
+    render: function () {
+        return (
+            <div className="order-success">
+                <img src="images/order-success.png"/>
+                <div className="success-btn">
+                    <a className="continue-charge">继续充值</a>
+                    <a className="continue-invest">去投资</a>
+                </div>
+            </div>
+        )
+    }
+});
+
+Withdrawals.OrderFail = React.createClass({
+    render: function () {
+        return (
+            <div className="order-fail">
+                <img src="images/order-fail.png"/>
+                <div className="fail-tip">银行预留手机号错误</div>
+                <a className="fail-continue-charge">继续充值</a>
+            </div>
+        )
+    }
+});
+
+Withdrawals.OrderProcessing = React.createClass({
+    getDefaultProps: function () {
+        return {
+            remain: 5
+        }
+    },
+    getInitialState: function () {
+        return {
+            remain: this.props.remain
+        }
+    },
+    componentDidMount: function () {
+        this.tick()
+    },
+    tick: function () {
+        if (this.state.remain < 1) {
+            this.props.checkRechargeResult()
+        } else {
+            this.countdown();
+            setTimeout(this.tick, 1000);
+        }
+    },
+    countdown: function () {
+        this.setState({remain: this.state.remain - 1})
+    },
+    render: function () {
+        return (
+            <div className="order-processing">
+                <img src="images/order-processing.png"/>
+                <div className="text">
+                    {this.state.remain}s 后为您呈现投标结果
+                </div>
+            </div>
+        )
+    }
+});
 
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"提现"} back_handler={backward}/>, document.getElementById('header'));
@@ -251,73 +490,3 @@ $FW.DOMReady(function(){
 function backward(){
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -20,7 +20,7 @@ const BankAccount = React.createClass({
 				size: "10"
 			},
 			success : (data) => {
-				this.setState({bankList: data})
+				this.setState({bankList: data.bankList})
 			}
 		})
 	},
