@@ -25,9 +25,9 @@ const MAIN_APP_NAMES = [
     'register-success', // 新用户注册成功后跳转落地页
     'bind-card',
     'change-bank-card',
-    'personal-center',
     'recharge', // 给金融工场账户充值
-    'first-page',
+    // 'personal-center',
+    // 'first-page',
     'cash',
     'special-cash',
     'verify-identity',
