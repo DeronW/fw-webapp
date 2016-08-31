@@ -62,7 +62,7 @@ var PhoneCodePrompt = React.createClass({
 
         return (
             <div className="old-user-prompt-text">
-                已向手机{this.state.getUserInfo.userInfo.phoneNum}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
+                已向手机{idCarNoNntercept}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
             </div>
         );
     }
@@ -165,29 +165,30 @@ var From = React.createClass({
         var _this = this
         var phoneNo = this.props.ajaxData.userInfo.phoneNum;
 
+        _this.setState({
+            code: 1
+        });
+
+        this.interval = setInterval(function() {
+            _this.setState({
+                countdown: --_this.state.countdown
+            });
+
+            if(_this.state.countdown == 0) {
+                clearInterval(_this.interval);
+
+                _this.setState({
+                    code: 0,
+                    countdown: 20
+                });
+            }
+        }, 1000);
+
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo="+ phoneNo +"&isVms=SMS",
             method: "GET",
             success: function(data) {
-                console.log(data)
-                _this.setState({
-                    code: 1
-                });
 
-                this.interval = setInterval(function() {
-                    _this.setState({
-                        countdown: --_this.state.countdown
-                    });
-
-                    if(_this.state.countdown == 0) {
-                        clearInterval(_this.interval);
-
-                        _this.setState({
-                            code: 0,
-                            countdown: 20
-                        });
-                    }
-                }, 1000);
 
                 /*_this.setState({
                     identifyingCode: data.identifyingCode

@@ -130,7 +130,7 @@ var FundsFlow = React.createClass({
                             <span className="text data-text">{cnt.createDate}</span>
                         </div>
                         <div className="r">
-                            <span className="money-text c-4db94f">{cnt.amount}</span>
+                            <span className={"money-text " +  (cnt.amount.substring(0, 1) !== "-" ? "c-4db94f" : "")} >{cnt.amount}</span>
                         </div>
                     </div>;
         };

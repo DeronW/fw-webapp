@@ -59,31 +59,32 @@ var PswFrom = React.createClass({
     handerIdentifyingCode: function () {
         var _this = this;
 
+        _this.setState({
+            code: true
+        })
 
+        _this.interval = setInterval(function () {
+            _this.setState({
+                countdown: --_this.state.countdown
+            });
+
+            if (_this.state.countdown == 0) {
+                clearInterval(_this.interval);
+
+                _this.setState({
+                    countdown: 10,
+                    code: false
+                });
+            }
+
+        }, 1000);
+        
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=5&destPhoneNo=" + this.state.phoneNumber + "&isVms=SMS",
             method: "GET",
             success: function (data) {
 
-                _this.setState({
-                    code: true
-                })
 
-                _this.interval = setInterval(function () {
-                    _this.setState({
-                        countdown: --_this.state.countdown
-                    });
-
-                    if (_this.state.countdown == 0) {
-                        clearInterval(_this.interval);
-
-                        _this.setState({
-                            countdown: 10,
-                            code: false
-                        });
-                    }
-
-                }, 1000);
             }
         })
 
