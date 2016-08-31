@@ -485,7 +485,7 @@ var Body = React.createClass({
             data: _this.state.userInfo,
             success: function(data) {
                 console.log(data);
-                location.href = "m.9888.cn";
+                location.href = "/static/wap/set-deal-password/index.html";
             }
         });
 
@@ -497,7 +497,7 @@ var Body = React.createClass({
     },
     alreadySelectBank: function(data) {
         var newUserInfo = this.state.userInfo;
-        
+
         newUserInfo.bankNo = data.bankId;
 
         this.setState({
