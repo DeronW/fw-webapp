@@ -51,7 +51,7 @@ var PromptBlock = React.createClass({
 //开户成功
 var AccountSucceedBody = React.createClass({
     clickHandler: function () {
-        location.href = '/static/wap/open-bank/index.html'
+        location.href = '/static/wap/open-account/index.html'
     },
     render: function () {
         return (

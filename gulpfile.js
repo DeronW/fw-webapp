@@ -12,13 +12,20 @@ gulp.task('default', function (done) {
  包含了主站移动端新增的页面
  */
 const MAIN_APP_NAMES = [
-    // 新增页面
-    'vip-prerogative', // VIP特权详情页
-    'guide-cookbook',
-    'app-download',
-    'user-level', // 用户等级详情
-    'user-contribute', // 用户贡献值
 
+    /* 测试徽商, 不发布其他页面, 加速发布过程
+     // 旧页面重构
+     'home', // 首页
+     'about-us', // 关于我们
+
+     // 新增页面
+     'vip-prerogative', // VIP特权详情页
+     'guide-cookbook',
+     'app-download',
+     'user-level', // 用户等级详情
+     'user-contribute', // 用户贡献值
+     */
+    
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
     'open-account', // 原 hui-shang-bank, 新老用户开户页面
@@ -42,9 +49,6 @@ const MAIN_APP_NAMES = [
     'trusteeship-pact', // 资金托管协议
     'counseling-pact', // 咨询服务协议
 
-    // 旧页面重构
-    'home', // 首页
-    'about-us' // 关于我们
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
