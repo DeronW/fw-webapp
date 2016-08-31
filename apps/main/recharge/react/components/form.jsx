@@ -4,7 +4,8 @@ const Form = React.createClass({
             countingSeconds: 60,
             money: null,
             phone: null,
-            verify_code: null
+            verify_code: null,
+            token: null
         }
     },
     getInitialState: function () {
@@ -22,7 +23,18 @@ const Form = React.createClass({
             if (this.state.counting < 1) {
                 clearInterval(this.timer)
             }
-        }, 1000)
+        }, 1000);
+
+        $FW.Ajax({
+            url: API_PATH + 'mpwap/api/v1/getRechargeCode.shtml',
+            method: 'POST',
+            data: {
+                phoneNo: this.state.phone
+            },
+            success: (data) => {
+                this.setState({token: data.smsSerialNo})
+            }
+        })
     },
     moneyChangeHandler: function (e) {
         var money = e.target.value;
@@ -47,9 +59,10 @@ const Form = React.createClass({
             $FW.Ajax({
                 url: API_PATH + 'mpwap/api/v1/index.shtml',
                 data: {
-                    money: this.state.money,
-                    code: this.state.verify_code,
-                    phone: this.state.phone
+                    payAmount: this.state.money,
+                    smsCode: this.state.verify_code,
+                    phoneNo: this.state.phone,
+                    validateNo: this.state.token
                 },
                 success: () => this.props.orderConfirm()
             })
@@ -63,8 +76,10 @@ const Form = React.createClass({
                            onChange={this.moneyChangeHandler}
                            placeholder="输入充值金额，最低1元"/>
                 </div>
-                <div className="money hao" value={this.state.phone} onChange={this.phoneChangeHandler}>
-                    <input className="recha" type="text" placeholder="输入银行预留手机号"/></div>
+                <div className="money hao">
+                    <input className="recha" type="text" placeholder="输入银行预留手机号"
+                           value={this.state.phone} onChange={this.phoneChangeHandler}
+                    /></div>
                 <div className="form clearfix">
                     <div className="srcode">
                         <input type="text" className="code" value={this.state.verify_code}

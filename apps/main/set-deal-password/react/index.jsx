@@ -48,7 +48,7 @@ var PswFrom = React.createClass({
         var userInfoData = this.props.propsUserInfo;
 
         return {
-            countdown: 10,
+            countdown: 60,
             code: false,
             phoneNumber: userInfoData.userInfo.phoneNum
         };
@@ -72,13 +72,13 @@ var PswFrom = React.createClass({
                 clearInterval(_this.interval);
 
                 _this.setState({
-                    countdown: 10,
+                    countdown: 60,
                     code: false
                 });
             }
 
         }, 1000);
-        
+
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=5&destPhoneNo=" + this.state.phoneNumber + "&isVms=SMS",
             method: "GET",

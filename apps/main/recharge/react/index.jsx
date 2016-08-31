@@ -29,7 +29,8 @@ const Recharge = React.createClass({
         this.setState({special_user: false})
     },
     orderConfirm: function () {
-        this.setState({order_state: 'processing'})
+        this.setState({order_state: 'processing'});
+        setTimeout(this.checkRechargeResult, 2000)
     },
     checkRechargeResult: function () {
         this.setState({order_state: 'success'})
@@ -166,7 +167,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getRechargeInfo.shtml",
         success: function (data) {
-            ReactDOM.render(<Recharge data={data}/>, document.getElementById("cnt"))
+            window._Recharge = ReactDOM.render(<Recharge data={data}/>, document.getElementById("cnt"))
         }
     })
 });

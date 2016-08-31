@@ -61,8 +61,7 @@ const ReportBox = React.createClass({
     setBankCard: function (v) {
         this.setState({bankCardNum: v})
     },
-    setParentStateHandler: function(obj){
-        console.log(obj)
+    setParentStateHandler: function (obj) {
         this.setState(obj)
     },
     render: function () {

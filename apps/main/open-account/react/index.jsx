@@ -112,7 +112,7 @@ var From = React.createClass({
             showInput: 0,
             account: "",
             code: 0,
-            countdown: 20,
+            countdown: 60,
             userData: {},
             identifyingCode: null,
             blur: true
@@ -179,7 +179,7 @@ var From = React.createClass({
 
                 _this.setState({
                     code: 0,
-                    countdown: 20
+                    countdown: 60
                 });
             }
         }, 1000);
@@ -190,12 +190,6 @@ var From = React.createClass({
             success: function(data) {
 
 
-                /*_this.setState({
-                    identifyingCode: data.identifyingCode
-                });
-
-                _this.props.callbackPleaseCode(data.identifyingCode);
-                */
             }
         });
     },
@@ -227,6 +221,17 @@ var From = React.createClass({
                        onBlur={_this.inputBlur}
                        onChange={_this.onInputChangeHandler} /> :
                 <span className="text id-text" onClick={_this.amendId}>{userAjaxData.userInfo.bankCard}</span>
+        };
+
+        var selectEml = function() {
+            return  <span className="bank-text">
+                        {
+                            this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.bankName
+                        }
+                    </span> +
+                    <span className="img">
+                        <img src={this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : this.props.alreadyBankData.logoUrl} className="r-icon" />
+                    </span>
         };
 
         return (
@@ -265,16 +270,7 @@ var From = React.createClass({
                         <span className="bank-name">开户银行</span>
 
                         <span className="bank-logo">
-                            <span className="bank-text">
-                                {
-                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.bankName
-                                }
-                            </span>
-                            <span className="img">
-                                <img src={
-                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : this.props.alreadyBankData.logoUrl
-                                } className="r-icon" />
-                            </span>
+                            {selectEml}
                         </span>
                     </div>
 
