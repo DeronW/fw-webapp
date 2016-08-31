@@ -223,6 +223,17 @@ var From = React.createClass({
                 <span className="text id-text" onClick={_this.amendId}>{userAjaxData.userInfo.bankCard}</span>
         };
 
+        var selectEml = function() {
+            return  <span className="bank-text">
+                        {
+                            this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.bankName
+                        }
+                    </span> +
+                    <span className="img">
+                        <img src={this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : this.props.alreadyBankData.logoUrl} className="r-icon" />
+                    </span>
+        };
+
         return (
             <div className="">
                 <div className="from-block">
@@ -259,16 +270,7 @@ var From = React.createClass({
                         <span className="bank-name">开户银行</span>
 
                         <span className="bank-logo">
-                            <span className="bank-text">
-                                {
-                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.bankName
-                                }
-                            </span>
-                            <span className="img">
-                                <img src={
-                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : this.props.alreadyBankData.logoUrl
-                                } className="r-icon" />
-                            </span>
+                            {selectEml}
                         </span>
                     </div>
 

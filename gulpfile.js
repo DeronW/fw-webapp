@@ -35,6 +35,7 @@ const MAIN_APP_NAMES = [
     'open-account-complete', // 原 'hui-shang-succeed' 徽商开户成功页面
     'hui-shang-cash-flow', // 原 'hui-shang-resultList', // 徽商资金流水列表
     'register-success', // 新用户注册成功后跳转落地页
+    'open-account-fail', //开户失败
     'bind-card',
     'change-bank-card',
     'recharge-recording', // 充值记录, 暂未启用
