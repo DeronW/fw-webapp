@@ -125,8 +125,7 @@ const Warm = React.createClass({
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"绑定银行卡"} back_handler={backward}/>, document.getElementById('header'));
 	$FW.Ajax({
-		//url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
-		url: "http://localhost/info.json",
+		url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
 		success : function(data){
 			console.log(data)
 		    ReactDOM.render(<BindBankCard item={data} />,document.getElementById('cnt'));			
