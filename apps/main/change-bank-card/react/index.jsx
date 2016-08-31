@@ -47,7 +47,7 @@ const ReportBox = React.createClass({
                 validateCode: this.state.validateCode
             },
             success: function (data) {
-console.log(data)
+                console.log(data)
             }
         });
     },
@@ -61,8 +61,7 @@ console.log(data)
     setBankCard: function (v) {
         this.setState({bankCardNum: v})
     },
-    setParentStateHandler: function(obj){
-        console.log(obj)
+    setParentStateHandler: function (obj) {
         this.setState(obj)
     },
     render: function () {
