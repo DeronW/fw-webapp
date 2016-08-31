@@ -37,6 +37,8 @@ const MAIN_APP_NAMES = [
     'verify-identity',
     'open-bank',
     'hs-topic', //徽商专题页面
+    'trusteeship-pact', // 资金托管协议
+    'counseling-pact', // 咨询服务协议
 
     // 旧页面重构
     'home', // 首页
