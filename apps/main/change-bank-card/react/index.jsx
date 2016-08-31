@@ -65,9 +65,7 @@ const ReportBox = React.createClass({
         this.setState(obj)
     },
     render: function () {
-
         var user = this.props.data.userInfo;
-
         return (
             <div>
                 {this.state.jump ? <ReportBox.SelectBankList
@@ -87,7 +85,7 @@ const ReportBox = React.createClass({
                        handleJump={this.handleJump}
                        setParentState={this.setParentStateHandler}
                 />
-                {this.state.note ? <Note cardNumber={user.bankCard} handler={this.noneHandle}/> : null}
+                {this.state.note ? <Note cardNumber={user.phoneNum} handler={this.noneHandle}/> : null}
                 <div className="refer" onClick={this.submitHandle}>提交</div>
             </div>
         )
