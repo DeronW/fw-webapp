@@ -4,7 +4,8 @@ const Form = React.createClass({
             countingSeconds: 60,
             money: null,
             phone: null,
-            verify_code: null
+            verify_code: null,
+            token: null
         }
     },
     getInitialState: function () {
@@ -25,11 +26,13 @@ const Form = React.createClass({
         }, 1000);
 
         $FW.Ajax({
-            url: API_PATH + 'mpwap/api/v1/sendCode.shtml',
+            url: API_PATH + '/mpwap/api/v1/getRechargeCode.shtml',
+            method: 'POST',
             data: {
-                destPhoneNo: this.state.phone,
-                isVms: 'SMS',
-                // type: 1
+                phoneNo: this.state.phone
+            },
+            success: (data) => {
+                this.setState({token: data.smsSerialNo})
             }
         })
     },
@@ -59,7 +62,7 @@ const Form = React.createClass({
                     payAmount: this.state.money,
                     smsCode: this.state.verify_code,
                     phoneNo: this.state.phone,
-                    validateNo: this.state.verify_code
+                    validateNo: this.state.token
                 },
                 success: () => this.props.orderConfirm()
             })
