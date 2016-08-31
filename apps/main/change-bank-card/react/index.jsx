@@ -2,14 +2,18 @@ const API_PATH = document.getElementById("api-path").value;
 
 const ReportBox = React.createClass({
     getInitialState: function () {
+        var ui = this.props.data.userInfo;
         return {
             note: false,
             find: true,
             entry: false,
             fruit: false,
             jump: false,
-            bankLogo: this.props.userInfo.bankLogo,
-            bankName: this.props.userInfo.bankName
+            bankLogo: ui.bankLogo,
+            bankName: ui.bankName,
+            bankId: null,
+            bankCardNum: null,
+            validateCode: null
         }
     },
     noneHandle: function () {
@@ -37,23 +41,34 @@ const ReportBox = React.createClass({
         }
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/changeBankCard.shtml",
-            data: {},
+            data: {
+                bankCard: this.state.bankCardNum,
+                bankId: this.state.bankId,
+                validateCode: this.state.validateCode
+            },
             success: function (data) {
-
+console.log(data)
             }
         });
     },
     getBankIndex: function (data) {
-        console.log(data.bankName);
         this.setState({
-            acc: data.bankName,
+            bankName: data.bankName,
+            bankId: data.bankNo,
             jump: false
         });
     },
+    setBankCard: function (v) {
+        this.setState({bankCardNum: v})
+    },
+    setParentStateHandler: function(obj){
+        console.log(obj)
+        this.setState(obj)
+    },
     render: function () {
-        
-        var user = this.props.userInfo;
-        
+
+        var user = this.props.data.userInfo;
+
         return (
             <div>
                 {this.state.jump ? <ReportBox.SelectBankList
@@ -71,6 +86,7 @@ const ReportBox = React.createClass({
                        bankBranch={this.state.bankName}
                        bankLogo={this.state.bankLogo}
                        handleJump={this.handleJump}
+                       setParentState={this.setParentStateHandler}
                 />
                 {this.state.note ? <Note cardNumber={user.bankCard} handler={this.noneHandle}/> : null}
                 <div className="refer" onClick={this.submitHandle}>提交</div>
@@ -90,10 +106,15 @@ const Input = React.createClass({
     },
     bankChangeHandler: function (e) {
         this.setState({bankCard: e.target.value});
+        this.props.setParentState({bankCardNum: e.target.value});
     },
 
     changeHandler: function (e) {
         this.setState({verify_code: e.target.value});
+        console.log(e.target.value)
+        this.props.setParentState({
+            validateCode: e.target.value
+        });
     },
     getInitialState: function () {
         return {
@@ -114,6 +135,17 @@ const Input = React.createClass({
                 clearInterval(this.timer)
             }
         }, 1000)
+
+        $FW.Ajax({
+            url: API_PATH + 'mpwap/api/v1/sendCode.shtml',
+            data: {
+                isVms: 'SMS',
+                type: 3
+            },
+            success: function (data) {
+            }
+        })
+
     },
 
     render: function () {
@@ -135,9 +167,10 @@ const Input = React.createClass({
 
                 <div className="name clearfix">
                     <img src="images/bf-c.png"/>
-                    <div className="knight sr"><input type="text" value={this.state.bankCard}
-                                                      onChange={this.bankChangeHandler} className="textbox"
-                                                      placeholder="请输入银行卡号"/></div>
+                    <div className="knight sr">
+                        <input type="text" value={this.state.bankCard}
+                               onChange={this.bankChangeHandler} className="textbox"
+                               placeholder="请输入银行卡号"/></div>
                 </div>
 
                 <div className="wire"></div>
@@ -154,8 +187,9 @@ const Input = React.createClass({
                 <div className="wire"></div>
 
                 <div className="name clearfix">
-                    <div className="khy"><input type="text" className="yzm" placeholder="请输入验证码"
-                                                value={this.state.verify_code} onCodeChange={this.changeHandler}/></div>
+                    <div className="khy">
+                        <input type="text" className="yzm" placeholder="请输入验证码"
+                               value={this.state.verify_code} onChange={this.changeHandler}/></div>
                     <div className="yzt">
                         <span className="gry">|</span>
                         {this.state.seconds ? this.state.seconds + "s后重新获取" :
@@ -191,19 +225,21 @@ ReportBox.SelectBankList = React.createClass({
     },
 
     refreshBankList: function (value) {
-        var _this = this;
-
-        $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/getBankList.shtml",
-            data: {
-                index: "10",
-                keyword: value,
-                size: "10"
-            },
-            success: (data) => {
-                this.setState({bankList: data.bankList})
-            }
-        })
+        let fn = () => {
+            $FW.Ajax({
+                url: API_PATH + "mpwap/api/v1/getBankList.shtml",
+                data: {
+                    index: "10",
+                    keyword: value,
+                    size: "10"
+                },
+                success: (data) => {
+                    this.setState({bankList: data.bankList})
+                }
+            })
+        }
+        clearTimeout(this._timer);
+        if (value)  this._timer = setTimeout(fn, 500);
     },
 
     focusHandler: function () {
