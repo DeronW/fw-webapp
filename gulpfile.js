@@ -33,6 +33,7 @@ const MAIN_APP_NAMES = [
     'special-cash',
     'verify-identity',
     'open-bank',
+    'hs-topic', //徽商专题页面
 
     // 旧页面重构
     'home', // 首页
