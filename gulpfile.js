@@ -17,7 +17,6 @@ const MAIN_APP_NAMES = [
 
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
-    'hui-shang-bank',
     'open-account', // 原 hui-shang-bank, 新老用户开户页面
     'hui-shang-user',
     'hui-shang-settings-password',
