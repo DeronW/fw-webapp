@@ -4,20 +4,16 @@ const ReportBox = React.createClass({
 	getInitialState: function(){
 		return {
 			note : false,
-			jump : false,  //跳转
 			find : true,
 			entry : false,
-			fruit : false
+			fruit : false,
+			jump : false
 		}
 	},
 	noneHandle: function(){
 		this.setState({note : true})
 	},
-	
-	handleJump: function(){
-		this.setState({jump: true})
-	},
-	
+
 	focusHandler: function(){
 		this.setState({find : false})
 	},
@@ -25,6 +21,10 @@ const ReportBox = React.createClass({
 	inputHandler: function(){
 		this.setState({entry : true});
 		this.setState({fruit : true});
+	},
+
+	handleJump: function(){
+		this.setState({jump: true})
 	},
 	
 	submitHandle: function(){
@@ -34,86 +34,42 @@ const ReportBox = React.createClass({
 		}else if(!_this.props.verify_code){
 			$FW.Component.Alert("请输入验证码")
 		}
+		$FW.Ajax({
+			url:API_PATH + "mpwap/api/v1/changeBankCard.shtml",
+			data:{
+
+			},
+			success: function(data){
+
+			}
+		});
 	},
 	
 	render : function(){
-
 		let acc = this.props.data.hsAccountInfo;
-
 		return (
 			<div>
-				{this.state.jump ? <ReportBox.BankAccount 
+				{this.state.jump ? <ReportBox.SelectBankList
 					find={this.state.find}
 					entry={this.state.entry}
 					fruit={this.state.fruit} 
 					focusHandler={this.focusHandler}
 					inputHandler={this.inputHandler}
 					handlerClear={this.handlerClear} /> : null}
-			
+
 				<Input note={this.noneHandle} 
 					username={acc.accountName}
 					cardNumber={acc.bankCardNo}
 					bankLogo={''}
-					jump={this.props.jump}
 					handleJump={this.handleJump}
 				/>
-				
 				{this.state.note ? <Note cardNumber={acc.bankCardNo} handler={this.noneHandle} /> : null}
-			
 				<div className="refer" onClick={this.submitHandle} >提交</div>
 			</div>
 		)
 	}
 })
 
-ReportBox.BankAccount = React.createClass({
-	getInitialState: function() {
-	    return {
-	    	inputText: "",
-	    	list:[]
-	   }
-	},
-	
-	handleChange: function(e) {
-	    this.setState({inputText:this.refs.input.inputText.trim()});
-	},
-	
-	handleClear: function(){
-		this.delText();
-	},
-	
-	delText: function() {
-        this.setState({
-            inputText: ''
-        });
-    },
-	
-	render : function(){
-		return (
-			<div className="select-bank">
-				<div className="search">
-					{this.props.find ? <img src="images/search.png"/> : null}
-					<input type="text" value={this.empty} name="txtSearch" 
-					className="hunt" 
-					onClear={this.props.handlerClear}
-					onFocus={this.props.focusHandler}
-					onInput={this.props.inputHandler}
-					onChange={this.handleChange}
-					filterText={this.props.inputText}
-					ref="input"
-					placeholder="请输入开户支行的关键词" />
-					 
-					{this.props.entry ? <img className="false" onClick={this.handleClear}  src="images/false.jpg"/> : null}
-				</div>
-				
-				{this.props.fruit ? <ul className="list" >
-					<li className="trade" list={this.props.list} >北京交通银行</li>
-				</ul> : null}	
-				
-			</div>	
-		)
-	}
-})
 
 const Input = React.createClass({
 	getDefaultProps: function(){
@@ -198,7 +154,6 @@ const Input = React.createClass({
 	}
 })
 
-
 const Note = React.createClass({
 	render : function(){
 		return (
@@ -210,6 +165,80 @@ const Note = React.createClass({
 	}
 })
 
+ReportBox.SelectBankList = React.createClass({
+	getInitialState: function() {
+		return {
+			find : true,
+			entry : false,
+			fruit : false,
+			bankList: [],
+			value:''
+		}
+	},
+
+	refreshBankList: function(value){
+		$FW.Ajax({
+			url:API_PATH +　"mpwap/api/v1/getBankList.shtml",
+			data:{
+				index: "10",
+				keyword: value,
+				size: "10"
+			},
+			success : (data) => {
+				console.log(data)
+				this.setState({bankList: data.bankList})
+			}
+		})
+	},
+
+	focusHandler: function(){
+		this.setState({find : false})
+	},
+
+	inputHandler: function(){
+		this.setState({entry : true, fruit : true});
+	},
+
+	handleChange: function(e) {
+		var val=e.target.value;
+		this.setState({value: val});
+		this.refreshBankList(val);
+	},
+
+	handleClear: function(){
+		this.setState({value: '', fruit: false});
+	},
+
+	render : function(){
+		let list = ()=> {
+			console.log(this.state.bankList)
+			var li = (d, index) => <li key={index}><a href="">{d.bankName} <img src="images/card-c.png"/></a></li>;
+
+			return <ul className="list">{this.state.bankList.map(li)}</ul>;
+		}
+
+		return (
+			<div className="select-bank">
+				<div className="search">
+					{this.state.find ? <img className="suo" src="images/search.png"/> : null}
+					<input type="text"
+						   className="hunt"
+						   onClear={this.state.handleClear}
+						   find={this.state.find}
+						   onFocus={this.focusHandler}
+						   entry={this.state.entry}
+						   fruit={this.state.fruit}
+						   onInput={this.inputHandler}
+						   onChange={this.handleChange}
+						   value={this.state.value}
+						   placeholder="请输入开户支行的关键词" />
+					{this.state.entry ? <img className="false" onClick={this.handleClear}  src="images/false.jpg"/> : null}
+				</div>
+				{this.state.fruit ? list() : null}
+			</div>
+		)
+	}
+})
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"绑定银行卡"}/>, document.getElementById('header'));

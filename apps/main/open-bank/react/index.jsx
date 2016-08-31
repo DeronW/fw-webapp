@@ -20,7 +20,8 @@ const BankAccount = React.createClass({
 				size: "10"
 			},
 			success : (data) => {
-				this.setState({bankList: data})
+				console.log(data)
+				this.setState({bankList: data.bankList})
 			}
 		})
 	},
@@ -44,11 +45,9 @@ const BankAccount = React.createClass({
 	},
 
 	render : function(){
-		
-		
 		let list = ()=> {
 			console.log(this.state.bankList)
-			var li = (d, index) => <li key={index}><a href="https://www.baidu.com">{d.bankName} <img src="images/card-c.png"/></a></li>;
+			var li = (d, index) => <li key={index}><a href="">{d.bankName} <img src="images/card-c.png"/></a></li>;
 			
 			return <ul className="list">{this.state.bankList.map(li)}</ul>;
 		}
@@ -57,7 +56,6 @@ const BankAccount = React.createClass({
 			<div className="select-bank">
 				<div className="search">
 					{this.state.find ? <img className="suo" src="images/search.png"/> : null}
-					
 					<input type="text" 
 					className="hunt" 
 					onClear={this.state.handleClear}
@@ -69,22 +67,16 @@ const BankAccount = React.createClass({
 					onChange={this.handleChange}
 					value={this.state.value}
 					placeholder="请输入开户支行的关键词" />
-					 
 					{this.state.entry ? <img className="false" onClick={this.handleClear}  src="images/false.jpg"/> : null}
 				</div>
-				
-				{this.state.fruit ? list() : null}	
-				
+				{this.state.fruit ? list() : null}
 			</div>	
 		)
 	}
 })
 
-
-
 $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"选择开户支行"} back_handler={backward}/>, document.getElementById('header'));
-
 	ReactDOM.render(<BankAccount />,document.getElementById('cnt'))
 });
 
