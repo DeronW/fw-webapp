@@ -86,6 +86,7 @@ var Body = React.createClass({
 $FW.DOMReady(function() {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getHSAccountInfo.shtml",
+        enable_loading: true,
         success: function(data) {
             ReactDOM.render(
                 <Body activity={data} />,
