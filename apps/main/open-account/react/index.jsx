@@ -112,7 +112,7 @@ var From = React.createClass({
             showInput: 0,
             account: "",
             code: 0,
-            countdown: 20,
+            countdown: 60,
             userData: {},
             identifyingCode: null,
             blur: true
@@ -179,7 +179,7 @@ var From = React.createClass({
 
                 _this.setState({
                     code: 0,
-                    countdown: 20
+                    countdown: 60
                 });
             }
         }, 1000);
@@ -190,12 +190,6 @@ var From = React.createClass({
             success: function(data) {
 
 
-                /*_this.setState({
-                    identifyingCode: data.identifyingCode
-                });
-
-                _this.props.callbackPleaseCode(data.identifyingCode);
-                */
             }
         });
     },
