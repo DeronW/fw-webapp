@@ -497,10 +497,8 @@ var Body = React.createClass({
     },
     alreadySelectBank: function(data) {
         var newUserInfo = this.state.userInfo;
-        console.log(data);
-
-
-        newUserInfo.bankId = data.bankId;
+        
+        newUserInfo.bankNo = data.bankId;
 
         this.setState({
             userInfo: newUserInfo,
