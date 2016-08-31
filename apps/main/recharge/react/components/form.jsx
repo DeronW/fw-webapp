@@ -26,7 +26,7 @@ const Form = React.createClass({
         }, 1000);
 
         $FW.Ajax({
-            url: API_PATH + '/mpwap/api/v1/getRechargeCode.shtml',
+            url: API_PATH + 'mpwap/api/v1/getRechargeCode.shtml',
             method: 'POST',
             data: {
                 phoneNo: this.state.phone
