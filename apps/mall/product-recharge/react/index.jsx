@@ -292,10 +292,10 @@ Recharge.ProductPanel = React.createClass({
 
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('充值专区');
+    NativeBridge.setTitle('充值中心');
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(
-			<Header title={"充值专区"} back_handler={backward}/>,
+			<Header title={"充值中心"} back_handler={backward}/>,
             document.getElementById('header')
 		)
 

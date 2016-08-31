@@ -38,22 +38,41 @@ var Btn = React.createClass({
 });
 
 var PhoneCodePrompt = React.createClass({
+    getInitialState: function() {
+        return {
+          getUserInfo: this.props.getGetPorpsUserInfo
+        };
+    },
+    handlerVoice: function() {
+        var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
+
+        console.log(phoneNo);
+
+        $FW.Ajax({
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
+            method: "GET",
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    },
     render: function() {
+        var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
+        var idCarNoNntercept = phoneNo.substring(0, 3) + "****" + phoneNo.substring((phoneNo.length - 4), phoneNo.length);
+
         return (
             <div className="old-user-prompt-text">
-                已向手机177****0331发送短信验证码，若收不到，请 <a href="" className="c">点击这里</a> 获取语音验证码。
+                已向手机{idCarNoNntercept}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
             </div>
         );
     }
 });
 
-
-
 var Text = React.createClass({
     render: function() {
         return (
             <div className="text-area">
-                马上升级徽商存管并且迁移资金，<br/>升级即视为我已阅读并同意<span className="text">《资金存管三方协议》</span>
+                马上升级徽商存管并且迁移资金，<br/>升级即视为我已阅读并同意<a href="http://m.9888.cn/static/wap/trusteeship-pact/index.html" className="text">《资金存管三方协议》</a>
             </div>
         );
     }
@@ -93,7 +112,7 @@ var From = React.createClass({
             showInput: 0,
             account: "",
             code: 0,
-            countdown: 20,
+            countdown: 60,
             userData: {},
             identifyingCode: null,
             blur: true
@@ -143,49 +162,89 @@ var From = React.createClass({
         this.props.callbackBank(true);
     },
     headlerCode: function() {
-        var _this = this;
+        var _this = this
+        var phoneNo = this.props.ajaxData.userInfo.phoneNum;
+
+        _this.setState({
+            code: 1
+        });
+
+        this.interval = setInterval(function() {
+            _this.setState({
+                countdown: --_this.state.countdown
+            });
+
+            if(_this.state.countdown == 0) {
+                clearInterval(_this.interval);
+
+                _this.setState({
+                    code: 0,
+                    countdown: 60
+                });
+            }
+        }, 1000);
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=13683507870&isVms=SMS",
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo="+ phoneNo +"&isVms=SMS",
             method: "GET",
             success: function(data) {
-                console.log(data)
-                _this.setState({
-                    code: 1
-                });
 
-                this.interval = setInterval(function() {
-                    _this.setState({
-                        countdown: --_this.state.countdown
-                    });
 
-                    if(_this.state.countdown == 0) {
-                        clearInterval(_this.interval);
-
-                        _this.setState({
-                            code: 0,
-                            countdown: 20
-                        });
-                    }
-                }, 1000);
-
-                /*_this.setState({
-                    identifyingCode: data.identifyingCode
-                });
-
-                _this.props.callbackPleaseCode(data.identifyingCode);
-                */
             }
         });
     },
     validateCodeChangeHandler: function(event) {
         this.props.validateCode(event.target.value);
     },
+    changeUserName: function(event) {
+        this.props.callbackUserName(event.target.value);
+    },
+    changeId: function(event) {
+        this.props.callbackUserId(event.target.value);
+    },
+    changeBankCard: function(event) {
+        this.props.callbackBankCardNo(event.target.value);
+    },
     render: function() {
         var _this = this;
 
         var userAjaxData = this.props.ajaxData;
         var idCardNo = userAjaxData.userInfo.idCardNo;
+        var idCarNoNntercept = idCardNo.substring(0, 4) + "****" + idCardNo.substring((idCardNo.length - 4), idCardNo.length);
+        var accountInput = function() {
+            return _this.state.showInput == 1 ?
+                <input type="text"
+                       value={_this.state.account}
+                       placeholder="输入账号"
+                       ref="number"
+                       onFocus={_this.inputFocus}
+                       onBlur={_this.inputBlur}
+                       onChange={_this.onInputChangeHandler} /> :
+                <span className="text id-text" onClick={_this.amendId}>{userAjaxData.userInfo.bankCard}</span>
+        };
+
+        var selectEml = function() {
+            return <div className="">
+                        <span className="bank-text">
+                            {
+                                _this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
+                            }
+                        </span>
+                        <span className="img">
+                            <img src={_this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl} className="r-icon" />
+                        </span>
+                    </div>
+        };
+
+        var showSelectBtn = function() {
+            if(userAjaxData.userInfo.bankName === "") {
+                return "请选择银行";
+            } else if (userAjaxData.userInfo.bankName !== "") {
+                return selectEml();
+            }
+
+        };
+
 
         return (
             <div className="">
@@ -193,18 +252,20 @@ var From = React.createClass({
                     <div className="input-block">
                         <span className="icon name-icon"></span>
                         <div className="text-block">
-                            <span className="text name-text">{userAjaxData.userInfo.realName}</span>
+                            {
+                                userAjaxData.userInfo.realName === "" ? <input type="text" placeholder="输入用户名" onChange={this.changeUserName}/> : <span className="text name-text">{userAjaxData.userInfo.realName}</span>
+                            }
+
                         </div>
                     </div>
 
                     <div className="input-block">
                         <span className="icon id-icon"></span>
                         <div className="text-block">
-                            <span className="text  number-text">
-                                {
-                                    idCardNo.substring(0, 4) + "****" + idCardNo.substring((idCardNo.length - 4), idCardNo.length)
-                                }
-                            </span>
+                            {
+                                idCardNo === "" ? <input type="text" placeholder="输入身份证" onChange={this.changeId}/> : <span className="text number-text">{idCarNoNntercept}</span>
+                            }
+
                         </div>
                     </div>
 
@@ -212,17 +273,8 @@ var From = React.createClass({
                         <span className="icon number-icon"></span>
                         <div className="text-block" >
                             {
-                                this.state.showInput == 1 ?
-                                    <input type="text"
-                                           value={this.state.account}
-                                           placeholder="输入账号"
-                                           ref="number"
-                                           onFocus={this.inputFocus}
-                                           onBlur={this.inputBlur}
-                                           onChange={this.onInputChangeHandler} /> :
-                                    <span className="text id-text" onClick={this.amendId}>{userAjaxData.userInfo.bankCard}</span>
+                                userAjaxData.userInfo.bankCard === "" ? <input type="text" placeholder="输入银行卡号" onChange={this.changeBankCard}/> : accountInput()
                             }
-
                         </div>
                     </div>
 
@@ -230,16 +282,7 @@ var From = React.createClass({
                         <span className="bank-name">开户银行</span>
 
                         <span className="bank-logo">
-                            <span className="bank-text">
-                                {
-                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.bankName
-                                }
-                            </span>
-                            <span className="img">
-                                <img src={
-                                    this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : this.props.alreadyBankData.logoUrl
-                                } className="r-icon" />
-                            </span>
+                            {selectEml()}
                         </span>
                     </div>
 
@@ -261,7 +304,7 @@ var From = React.createClass({
                     </div>
                 </div>
 
-                <PhoneCodePrompt />
+                <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/>
             </div>
 
         );
@@ -292,15 +335,14 @@ var SelectBank = React.createClass({
         this.props.callbackBtn(false);
     },
     supportQuickPayClick: function(index) {
-        console.log(this.state.bankListData);
-
         this.props.callbackAlreadyBank(this.state.bankListData.bankList[index]);
         this.props.callbackBtn(false);
+        //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayClick: function(index) {
-        console.log(this.state.bankListData);
         this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index])
         this.props.callbackBtn(false);
+        //this.props.callbackSelectBankNullOderIs(false);
     },
     render: function() {
         var _this = this;
@@ -384,6 +426,7 @@ var Body = React.createClass({
             alreadyBank: null,
             validateCode: null,
             pleaseCode: true,
+            nueOldUser: true,
             userInfo: {
                 bankCardNo: getAjaxUserInfo.userInfo.bankCard,
                 bankNo: getAjaxUserInfo.userInfo.bankId,
@@ -411,6 +454,28 @@ var Body = React.createClass({
 
         var getAjaxUserInfo = this.props.activity;
 
+        console.log(this.state.userInfo);
+
+        if(this.state.userInfo.realName === "") {
+            $FW.Component.Toast("用户名不能为空");
+            return false;
+        }
+
+        if(this.state.userInfo.idCardNo === "") {
+            $FW.Component.Toast("身份证不能为空");
+            return false;
+        }
+
+        if(this.state.userInfo.bankCardNo === "") {
+            $FW.Component.Toast("银行账号不能为空");
+            return false;
+        }
+
+        if(this.state.userInfo.bankId === null) {
+            $FW.Component.Toast("请选择银行");
+            return false;
+        }
+
         if(this.dataText !== undefined) {
             if((this.dataText.length == 0) || (this.dataText == undefined) ) {
                 $FW.Component.Toast("不能为空");
@@ -425,7 +490,6 @@ var Body = React.createClass({
             return false;
         }
 
-        console.log(this.state.userInfo);
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/bind/card.shtml",
@@ -433,7 +497,7 @@ var Body = React.createClass({
             data: _this.state.userInfo,
             success: function(data) {
                 console.log(data);
-                //location.href = API_PATH + "";
+                location.href = "/static/wap/set-deal-password/index.html";
             }
         });
 
@@ -445,10 +509,8 @@ var Body = React.createClass({
     },
     alreadySelectBank: function(data) {
         var newUserInfo = this.state.userInfo;
-        console.log(data);
 
-
-        newUserInfo.bankId = data.bankId;
+        newUserInfo.bankNo = data.bankId;
 
         this.setState({
             userInfo: newUserInfo,
@@ -472,22 +534,56 @@ var Body = React.createClass({
             pleaseCode: data
         });
     },
+    getUserName: function(val) {
+        var newUserInfo = this.state.userInfo;
+
+        newUserInfo.realName = val;
+
+        this.setState({
+            userInfo: newUserInfo
+        });
+
+    },
+    getUserId: function(val) {
+        var newUserInfo = this.state.userInfo;
+
+        newUserInfo.idCardNo = val;
+
+        this.setState({
+            userInfo: newUserInfo
+        });
+
+    },
+    getBankCardNo: function(val) {
+        var newUserInfo = this.state.userInfo;
+
+        newUserInfo.bankCardNo = val;
+
+        this.setState({
+            userInfo: newUserInfo
+        });
+
+    },
     render: function() {
         var _this = this;
 
         return (
             <div className="cnt">
-                <TopNav title={"升级存管账户"} backBtn={true} />
+                <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} />
 
                 <Nav imgUrl={"images/nav-2.png"}/>
 
                 <From
                       callbackParent={this.fromData}
                       callbackBank={this.selectBank}
+
                       alreadyBankData={this.state.alreadyBank}
                       validateCode={this.getValidateCode}
                       callbackPleaseCode={this.pleaseValidateCode}
                       ajaxData={this.props.activity}
+                      callbackUserName={this.getUserName}
+                      callbackUserId={this.getUserId}
+                      callbackBankCardNo={this.getBankCardNo}
                 />
 
                 <Btn btnText={"同意"} Fun={this.clickFun} />
@@ -502,131 +598,6 @@ var Body = React.createClass({
                 {this.state.loading}
             </div>
 
-        );
-    }
-});
-
-
-//设置交易密码 from
-var PswFrom = React.createClass({
-    getInitialState: function() {
-        return {
-            countdown: 10,
-            code: false
-        };
-    },
-    componentWillUnmount: function() {
-        clearInterval(this.interval);
-    },
-    handerIdentifyingCode: function() {
-        var _this = this;
-
-        this.setState({
-            code: true
-        })
-
-        this.interval = setInterval(function() {
-            _this.setState({
-                countdown: --_this.state.countdown
-            });
-
-            if(_this.state.countdown == 0) {
-                clearInterval(_this.interval);
-
-                _this.setState({
-                    countdown: 10,
-                    code: false
-                });
-            }
-
-        }, 1000);
-
-        $FW.Ajax({
-            url: "http://xjb.9888.cn/test-json/identifying-code.json",
-            success: function(data) {
-                console.log(data.identifyingCode);
-                _this.props.callbackIdentifyingCode(data.identifyingCode);
-            }
-        });
-
-    },
-    handerChangeInput: function(event) {
-        this.props.callbackInputCode(event.target.value);
-    },
-    render: function() {
-        return (
-            <div className="from-block setting-trading-from">
-                <div className="input-block">
-                    <span className="icon phone-n-icon"></span>
-                    <div className="text-block">
-                        <span className="text phone-n-text">111XXX999</span>
-                    </div>
-                </div>
-
-                <div className="input-block code-block">
-                    <span className="input">
-                        <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput} />
-                    </span>
-
-                    <span className="btn-code">
-                        {
-                            this.state.code ?
-                                <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                <span className="btn" onClick={this.handerIdentifyingCode}>获取短信验证码</span>
-                        }
-                    </span>
-                </div>
-            </div>
-        );
-    }
-});
-
-
-
-var MerchandisePsw = React.createClass({
-    getInitialState: function() {
-        return {
-            identifyingCode: null,
-            inputCode: null
-        };
-    },
-    btnHandler: function() {
-
-        console.log(this.state.identifyingCode);
-        console.log(this.state.inputCode);
-
-        if(parseInt(this.state.inputCode) !== this.state.identifyingCode) {
-            $FW.Component.Toast("验证码不能为空");
-        } else {
-
-        }
-
-        //this.props.callbackBodyPage(2);
-    },
-    getIdentifyingCode: function(code) {
-        this.setState({
-            identifyingCode: code
-        });
-    },
-    getInputCode: function(code) {
-        this.setState({
-            inputCode: code
-        });
-    },
-    render: function() {
-        return (
-            <div className="">
-                <TopNav title={"设置交易密码"} backBtn={true} />
-
-                <Nav imgUrl={"images/process-2.png"}/>
-
-                <PswFrom
-                    callbackIdentifyingCode={this.getIdentifyingCode}
-                    callbackInputCode={this.getInputCode}
-                />
-
-                <Btn btnText={"设置交易密码"} Fun={this.btnHandler} />
-            </div>
         );
     }
 });

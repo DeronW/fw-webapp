@@ -120,7 +120,7 @@ var FundsFlow = React.createClass({
     },
     handlerAll: function() {
         //console.log(this.props.callbackIndex);
-        this.props.callbackIndex(1);
+        location.href = "/static/wap/hui-shang-cash-flow/index.html"
     },
     render: function() {
         var list = function(cnt, index) {
@@ -130,7 +130,7 @@ var FundsFlow = React.createClass({
                             <span className="text data-text">{cnt.createDate}</span>
                         </div>
                         <div className="r">
-                            <span className="money-text c-4db94f">{cnt.amount}</span>
+                            <span className={"money-text " +  (cnt.amount.substring(0, 1) !== "-" ? "c-4db94f" : "")} >{cnt.amount}</span>
                         </div>
                     </div>;
         };
@@ -148,47 +148,6 @@ var FundsFlow = React.createClass({
                         this.props.userPageData.resultList.map(list, this)
                     }
                 </div>
-            </div>
-        );
-    }
-});
-
-var AllJournal = React.createClass({
-    getInitialState: function() {
-        return {
-
-        };
-    },
-    componentDidMount: function() {
-
-    },
-    render: function() {
-        return (
-            <div className="pop-account">
-                <div className="funds-flow">
-                    <div className="info">
-
-                        <div className="paragraph">
-                            <div className="l">
-                                <span className="text info-title">sdasfas</span>
-                                <span className="text data-text">safasf</span>
-                            </div>
-                            <div className="r">
-                                <span className="money-text c-4db94f">￥afasfas</span>
-                            </div>
-                        </div>
-                        <div className="paragraph">
-                            <div className="l">
-                                <span className="text info-title">sdasfas</span>
-                                <span className="text data-text">safasf</span>
-                            </div>
-                            <div className="r">
-                                <span className="money-text c-4db94f">￥afasfas</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         );
     }
@@ -229,7 +188,6 @@ var AllPage = React.createClass({
                 ajaxHsAccountInfo={userAjaxData.hsAccountInfo}
                 ajaxPageData={userAjaxData.pageData}
             />,
-            <AllJournal callbackPage={this.page}/>
         ];
 
         return (
@@ -247,6 +205,7 @@ var AllPage = React.createClass({
 $FW.DOMReady(function() {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getHSAccountInfo.shtml",
+        enable_loading: true,
         success: function(data) {
             ReactDOM.render(
                 <AllPage activity={data} />,
