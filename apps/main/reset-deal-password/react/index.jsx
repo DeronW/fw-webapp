@@ -192,13 +192,15 @@ var Body = React.createClass({
 
         var idCardNo = this.state.getAjaxUserInfo.userInfo.idCardNo;
 
-        $FW.Ajax({
+        location.href = API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code;
+
+        /*$FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code,
             method: "GET",
             success: function(data) {
                 console.log(data);
             }
-        })
+        })*/
 
     },
     getCallbackInputVal: function(val) {
