@@ -31,7 +31,7 @@ var TopNav = React.createClass({
 var AllJournal = React.createClass({
     getInitialState: function() {
         return {
-
+            resultList: this.props.getAjaxResultList
         };
     },
     componentDidMount: function() {
@@ -50,14 +50,12 @@ var AllJournal = React.createClass({
             </div>;
         };
 
-        console.log(this.data.getAjaxResultList);
-
         return (
             <div className="pop-account">
                 <div className="funds-flow">
                     <div className="info">
                         {
-                            this.props.userPageData.resultList.map(list, this)
+                            this.state.resultList.pageData.resultList.map(list, this)
                         }
                     </div>
                 </div>
@@ -68,13 +66,16 @@ var AllJournal = React.createClass({
 });
 
 var Body = React.createClass({
+    backBtnClick: function() {
+        window.history.back();
+    },
     render: function() {
 
         return (
             <div className="">
                 <TopNav title={"徽商银行存管账户"} backBtn={true} btnFun={this.backBtnClick}/>
 
-                <AllJournal getAjaxResultList={this.stata.activity}
+                <AllJournal getAjaxResultList={this.props.activity}
             />
             </div>
         );
