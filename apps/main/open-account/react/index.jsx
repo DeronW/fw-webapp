@@ -217,15 +217,15 @@ var From = React.createClass({
         var idCardNo = userAjaxData.userInfo.idCardNo;
         var idCarNoNntercept = idCardNo.substring(0, 4) + "****" + idCardNo.substring((idCardNo.length - 4), idCardNo.length);
         var accountInput = function() {
-            this.state.showInput == 1 ?
+            return _this.state.showInput == 1 ?
                 <input type="text"
-                       value={this.state.account}
+                       value={_this.state.account}
                        placeholder="输入账号"
                        ref="number"
-                       onFocus={this.inputFocus}
-                       onBlur={this.inputBlur}
-                       onChange={this.onInputChangeHandler} /> :
-                <span className="text id-text" onClick={this.amendId}>{userAjaxData.userInfo.bankCard}</span>
+                       onFocus={_this.inputFocus}
+                       onBlur={_this.inputBlur}
+                       onChange={_this.onInputChangeHandler} /> :
+                <span className="text id-text" onClick={_this.amendId}>{userAjaxData.userInfo.bankCard}</span>
         };
 
         return (
@@ -255,7 +255,7 @@ var From = React.createClass({
                         <span className="icon number-icon"></span>
                         <div className="text-block" >
                             {
-                                userAjaxData.userInfo.bankCard === "" ? <input type="text" placeholder="输入银行卡号" onChange={this.changeBankCard}/> : accountInput
+                                userAjaxData.userInfo.bankCard === "" ? <input type="text" placeholder="输入银行卡号" onChange={this.changeBankCard}/> : accountInput()
                             }
                         </div>
                     </div>
