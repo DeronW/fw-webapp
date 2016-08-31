@@ -14,7 +14,7 @@ const VipMsg = React.createClass({
 	},
 	render: function() {
 		let user_level_manifest;
-		if(this.state.vipLevel == 1) user_level_manifest = "普通用户";
+		if(this.state.vipLevel == 1) user_level_manifest = "普通会员";
 		if(this.state.vipLevel == 2) user_level_manifest = "VIP1";
 		if(this.state.vipLevel == 3) user_level_manifest = "VIP2";
 		if(this.state.vipLevel == 4) user_level_manifest = "VIP3";
