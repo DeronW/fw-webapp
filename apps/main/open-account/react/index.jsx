@@ -224,15 +224,27 @@ var From = React.createClass({
         };
 
         var selectEml = function() {
-            return  <span className="bank-text">
-                        {
-                            this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : this.props.alreadyBankData.bankName
-                        }
-                    </span> +
-                    <span className="img">
-                        <img src={this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : this.props.alreadyBankData.logoUrl} className="r-icon" />
-                    </span>
+            return <div className="">
+                        <span className="bank-text">
+                            {
+                                _this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
+                            }
+                        </span>
+                        <span className="img">
+                            <img src={_this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl} className="r-icon" />
+                        </span>
+                    </div>
         };
+
+        var showSelectBtn = function() {
+            if(userAjaxData.userInfo.bankName === "") {
+                return "请选择银行";
+            } else if (userAjaxData.userInfo.bankName !== "") {
+                return selectEml();
+            }
+
+        };
+
 
         return (
             <div className="">
@@ -270,7 +282,7 @@ var From = React.createClass({
                         <span className="bank-name">开户银行</span>
 
                         <span className="bank-logo">
-                            {selectEml}
+                            {selectEml()}
                         </span>
                     </div>
 
@@ -325,10 +337,12 @@ var SelectBank = React.createClass({
     supportQuickPayClick: function(index) {
         this.props.callbackAlreadyBank(this.state.bankListData.bankList[index]);
         this.props.callbackBtn(false);
+        //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayClick: function(index) {
         this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index])
         this.props.callbackBtn(false);
+        //this.props.callbackSelectBankNullOderIs(false);
     },
     render: function() {
         var _this = this;
@@ -412,6 +426,7 @@ var Body = React.createClass({
             alreadyBank: null,
             validateCode: null,
             pleaseCode: true,
+            nueOldUser: true,
             userInfo: {
                 bankCardNo: getAjaxUserInfo.userInfo.bankCard,
                 bankNo: getAjaxUserInfo.userInfo.bankId,
@@ -561,6 +576,7 @@ var Body = React.createClass({
                 <From
                       callbackParent={this.fromData}
                       callbackBank={this.selectBank}
+
                       alreadyBankData={this.state.alreadyBank}
                       validateCode={this.getValidateCode}
                       callbackPleaseCode={this.pleaseValidateCode}
