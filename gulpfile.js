@@ -23,13 +23,14 @@ const MAIN_APP_NAMES = [
     'bind-bank-card', // 绑定银行卡
     'open-account', // 原 hui-shang-bank, 新老用户开户页面
     'hui-shang-account', // 徽商存管帐户
-    'config-deal-password', // 原 'hui-shang-settings-password', 设置交易密码
-    'second-config-deal-password', //第二次设置交易密码
+    'set-deal-password', // 原 'hui-shang-settings-password', 设置交易密码
+    'reset-deal-password', //第二次设置交易密码
     'open-account-complete', // 原 'hui-shang-succeed' 徽商开户成功页面
     'hui-shang-cash-flow', // 原 'hui-shang-resultList', // 徽商资金流水列表
     'register-success', // 新用户注册成功后跳转落地页
     'bind-card',
     'change-bank-card',
+    'recharge-recording', // 充值记录, 暂未启用
     'recharge', // 给金融工场账户充值
     // 'personal-center',
     // 'first-page',

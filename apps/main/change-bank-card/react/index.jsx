@@ -7,7 +7,8 @@ const ReportBox = React.createClass({
 			find : true,
 			entry : false,
 			fruit : false,
-			jump : false
+			jump : false,
+			acc: this.props.data.hsAccountInfo.bankBranch
 		}
 	},
 	noneHandle: function(){
@@ -19,8 +20,7 @@ const ReportBox = React.createClass({
 	},
 	
 	inputHandler: function(){
-		this.setState({entry : true});
-		this.setState({fruit : true});
+		this.setState({entry : true, fruit : true});
 	},
 
 	handleJump: function(){
@@ -44,9 +44,15 @@ const ReportBox = React.createClass({
 			}
 		});
 	},
-	
+	getBankIndex: function(data) {
+		console.log(data.bankName);
+		this.setState({
+            acc: data.bankName,
+			jump: false
+		});
+	},
 	render : function(){
-		let acc = this.props.data.hsAccountInfo;
+		var acc = this.props.data.hsAccountInfo;
 		return (
 			<div>
 				{this.state.jump ? <ReportBox.SelectBankList
@@ -55,11 +61,13 @@ const ReportBox = React.createClass({
 					fruit={this.state.fruit} 
 					focusHandler={this.focusHandler}
 					inputHandler={this.inputHandler}
+					callbackBankIndex= {this.getBankIndex}
 					handlerClear={this.handlerClear} /> : null}
 
 				<Input note={this.noneHandle} 
 					username={acc.accountName}
 					cardNumber={acc.bankCardNo}
+					bankBranch={this.state.acc}
 					bankLogo={''}
 					handleJump={this.handleJump}
 				/>
@@ -133,10 +141,10 @@ const Input = React.createClass({
 				
 				<div className="name clearfix" onClick={this.props.handleJump} >
 					<div className="khy">开户银行</div>
+					<img className="bank-arrow" src="images/card-c.png"/>
 					<div className="yzt">
-						<span className="shang">招商银行</span>
+						<span className="shang">{this.props.bankBranch}</span>
 						<img className="bf-d" src={this.props.bankLogo}/>
-						<img src="images/card-c.png"/>
 					</div>
 				</div>
 				
@@ -172,11 +180,14 @@ ReportBox.SelectBankList = React.createClass({
 			entry : false,
 			fruit : false,
 			bankList: [],
-			value:''
+			value:'',
+			bankIndex: null,
 		}
 	},
 
 	refreshBankList: function(value){
+		var _this = this;
+
 		$FW.Ajax({
 			url:API_PATH +　"mpwap/api/v1/getBankList.shtml",
 			data:{
@@ -185,7 +196,6 @@ ReportBox.SelectBankList = React.createClass({
 				size: "10"
 			},
 			success : (data) => {
-				console.log(data)
 				this.setState({bankList: data.bankList})
 			}
 		})
@@ -209,11 +219,13 @@ ReportBox.SelectBankList = React.createClass({
 		this.setState({value: '', fruit: false});
 	},
 
+	bankHandler: function(index){
+		this.props.callbackBankIndex(this.state.bankList[index]);
+	},
+
 	render : function(){
 		let list = ()=> {
-			console.log(this.state.bankList)
-			var li = (d, index) => <li key={index}><a href="">{d.bankName} <img src="images/card-c.png"/></a></li>;
-
+			var li = (d, index) => <li key={index} onClick={this.bankHandler.bind(this, index)}><span>{d.bankName}</span><img src="images/card-c.png"/></li>;
 			return <ul className="list">{this.state.bankList.map(li)}</ul>;
 		}
 
@@ -244,12 +256,6 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"绑定银行卡"}/>, document.getElementById('header'));
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getHSAccountInfo.shtml",
-
-		//url: API_PATH + "mpwap/api/v1/changeBankCard.shtml",
-        data:{
-        	//bankCard: "6222022308004509665",
-        	//bankId: "1"
-        },
         success: function (data) {
 			console.log(data)
             ReactDOM.render(<ReportBox data={data}/>, document.getElementById("cnt"))

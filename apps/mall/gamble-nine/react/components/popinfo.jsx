@@ -7,7 +7,7 @@ const PopInf = React.createClass({
                     <div className="pop-inf-cnt">
                         <div className="pop-inf-li">
                             <div className="pop-inf-h">1.活动时间:</div>
-                            <div className="pop-inf-detail">2016年9月2日-9月8日</div>
+                            <div className="pop-inf-detail">2016年9月5日-9月11日</div>
                         </div>
                         <div className="pop-inf-li">
                             <div className="pop-inf-h">2.活动奖品:</div>
@@ -19,7 +19,7 @@ const PopInf = React.createClass({
                         </div>
                         <div className="pop-inf-li">
                         	<div className="pop-inf-h">4.活动说明:</div>
-                            <div className="pop-inf-detail">① 10工分即可参与大转盘抽奖一次，100%有奖；<br/>② 抽奖获得任意奖品，均实时发放（实物奖品以兑换券形式实时发放到工场账户，中奖者到豆哥商城自行兑换）；<br/>③ 所获得5元返现券为全场通用券，不限标的（债权转让除外）；<br/>④ 本活动规则解释权归金融工场所有。<br/></div>
+                            <div className="pop-inf-detail">① 10工分即可参与大转盘抽奖一次，100%有奖；<br/>② 抽奖获得任意奖品，均实时发放（实物奖品以兑换券形式实时发放到工场账户，兑换券有效期30天。请中奖者收到兑换券后30天内到豆哥商城自行兑换，过期按自动放弃领取奖品对待）；<br/>③ 所获得5元返现券为全场通用券，不限标的（债权转让除外）；<br/>④ 本活动规则解释权归金融工场所有。<br/></div>
                         </div>                       
                     </div>
                     <div className="pop-inf-close" onClick={this.props.hidePopInf}></div>
