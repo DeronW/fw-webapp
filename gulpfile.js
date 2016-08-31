@@ -30,7 +30,7 @@ const MAIN_APP_NAMES = [
     'register-success', // 新用户注册成功后跳转落地页
     'bind-card',
     'change-bank-card',
-    'recharge-recording', // 充值记录
+    'recharge-recording', // 充值记录, 暂未启用
     'recharge', // 给金融工场账户充值
     // 'personal-center',
     // 'first-page',
