@@ -12,12 +12,15 @@ gulp.task('default', function (done) {
  包含了主站移动端新增的页面
  */
 const MAIN_APP_NAMES = [
+    // 新增页面
+    'vip-prerogative', // VIP特权详情页
+    'guide-cookbook',
+    'app-download',
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
 
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
-    'hui-shang-bank',
     'open-account', // 原 hui-shang-bank, 新老用户开户页面
     'hui-shang-user',
     'hui-shang-settings-password',
@@ -26,22 +29,18 @@ const MAIN_APP_NAMES = [
     'register-success', // 新用户注册成功后跳转落地页
     'bind-card',
     'change-bank-card',
-    'personal-center',
     'recharge', // 给金融工场账户充值
-    'first-page',
+    // 'personal-center',
+    // 'first-page',
     'cash',
     'special-cash',
     'verify-identity',
     'open-bank',
+    'hs-topic', //徽商专题页面
 
     // 旧页面重构
     'home', // 首页
-    'about-us', // 关于我们
-
-    // 新增页面
-    'vip-prerogative', // VIP特权详情页
-    'guide-cookbook',
-    'app-download'
+    'about-us' // 关于我们
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
