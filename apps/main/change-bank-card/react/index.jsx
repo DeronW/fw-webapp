@@ -118,7 +118,7 @@ ReportBox.BankAccount = React.createClass({
 const Input = React.createClass({
 	getDefaultProps: function(){
 		return {
-			countSeconds:3,
+			countSeconds:60,
 			bankCard: null,
 			verify_code: null
 		}
