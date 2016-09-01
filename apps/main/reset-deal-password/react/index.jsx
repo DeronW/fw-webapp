@@ -209,11 +209,14 @@ var Body = React.createClass({
             code: val
         });
     },
+    backBtnClick: function() {
+        window.history.back();
+    },
     render: function() {
 
         return (
             <div>
-                <TopNav title={"升级存管账户"} backBtn={true}  btnText={"跳过"}/>
+                <TopNav title={"升级存管账户"} backBtn={true} btnFun={this.backBtnClick}  btnText={"跳过"}/>
                 <Nav imgUrl={"images/process-2.png"}/>
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}

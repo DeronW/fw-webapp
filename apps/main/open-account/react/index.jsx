@@ -564,12 +564,15 @@ var Body = React.createClass({
         });
 
     },
+    backBtnClick: function() {
+        window.history.back();
+    },
     render: function() {
         var _this = this;
 
         return (
             <div className="cnt">
-                <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} />
+                <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnFun={this.backBtnClick} />
 
                 <Nav imgUrl={"images/nav-2.png"}/>
 
