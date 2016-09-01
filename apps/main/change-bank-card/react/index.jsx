@@ -486,7 +486,7 @@ var Body = React.createClass({
             url: API_PATH + "mpwap/api/v1/changeBankCard.shtml?bankCard=" + space(bankCard) + "&bankId=" + idCardNo + "&validateCode=" + validateCode,
             success: function(data) {
                 console.log(data);
-                //location.href = "/static/wap/set-deal-password/index.html";
+                location.href = "/static/wap/bind-bank-card/index.html";
             }
         });
 

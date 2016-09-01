@@ -1,12 +1,22 @@
 const API_PATH = document.getElementById("api-path").value;
 
 const BindBankCard = React.createClass({
-//	hideHandler: function(){
-//		var item = this.state;
-//		this.props.item.validate = false;
-//		this.setState({item: this.props.item.validate})
-//	},
-	
+	getInitialState:function(){
+		return {
+			popShow: false,
+			bankName: {}
+		}
+	},
+	getPopShow: function(boolVal) {
+		this.setState({
+			popShow: boolVal
+		})
+	},
+	getBankName: function(val) {
+		this.setState({
+			bankName: val
+		})
+	},
 	render : function(){
 		let prohibited = this.props.item.openStatus;
 		let bankCardNum = this.props.item.userInfo.bankCard;
@@ -30,9 +40,11 @@ const BindBankCard = React.createClass({
 					<div className={prohibited < 3 ? "instant-icon gray-img" : "instant-icon"}></div>
 				</div>
 				<Sup/>
-				{prohibited == 3 || prohibited == 4 ? <Bran /> : null}
+				{this.state.popShow ? <SelectBankList callbackSelectBankHide={this.getPopShow} callbackBankName={this.getBankName}/> :　null }
+				{prohibited == 3 || prohibited == 4 ? <Bran propsBankName={this.state.bankName} callbackPopShow={this.getPopShow} /> : null}
 				{prohibited < 3 ? <Branch /> : null}
 				<Warm />
+
 			</div>
 		)
 	}
@@ -60,7 +72,6 @@ const Bomb = React.createClass({
 	}
 })
 
-
 const Invalid = React.createClass({
 	render : function(){
 		return (
@@ -83,16 +94,20 @@ const Sup = React.createClass({
 })
 
 const Bran = React.createClass({
+	handleJump: function() {
+		this.props.callbackPopShow(true);
+	},
 	render : function(){
+		console.log(this.props.propsBankName.bankName)
 		return (
 			<div className="modify">
-				<div className="pure-a">
-					<div className="xuanwu-a">修改绑定银行卡</div>
+				<a className="pure-a" href="/static/wap/change-bank-card/index.html">
+					<div className="xuanwu-a">修改绑定银行卡></div>
 					<div className="choice-a"><div className="pleas-a">申请修改</div></div>
-				</div>
+				</a>
 				<div className="wire-a"></div>
-				<div className="pure-a">
-					<div className="xuanwu-a">北京招商银行宣武门支行</div>
+				<div className="pure-a" onClick={this.handleJump}>
+					<div className="xuanwu-a">{this.props.propsBankName.bankName}</div>
 					<div className="choice-a"><div className="pleas-a">请选择</div></div>
 				</div>
 			</div>
