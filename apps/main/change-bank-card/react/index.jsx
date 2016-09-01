@@ -1,5 +1,20 @@
 const API_PATH = document.getElementById("api-path").value;
 
+var numberFormat = {
+    val: "",
+    format: function(val) {
+        if(!isNaN(val.replace(/[0-9]/g,""))){
+            this.val = val.replace(/\s/g,'').replace(/(\d{4})(?=\d)/g,"$1 ");//四位数字一组，以空格分割
+        }
+
+        return this.val;
+    }
+};
+
+function space(str) {
+    return str.replace(/ /g, "");
+}
+
 const ReportBox = React.createClass({
     getInitialState: function () {
         var ui = this.props.data.userInfo;
@@ -98,12 +113,13 @@ const Input = React.createClass({
         return {
             countSeconds: 60,
             bankCard: null,
+            format_bankCard:null,
             verify_code: null
         }
     },
     bankChangeHandler: function (e) {
-        this.setState({bankCard: e.target.value});
-        this.props.setParentState({bankCardNum: e.target.value});
+        this.setState({bankCard: e.target.value, format_bankCard:numberFormat.format(e.target.value)});
+        this.props.setParentState({bankCardNum: space(e.target.value)});
     },
 
     changeHandler: function (e) {
@@ -146,6 +162,8 @@ const Input = React.createClass({
     },
 
     render: function () {
+        let cardNum = this.props.cardNumber;
+        let idCarNoNntercept = cardNum.substring(0, 4) + "**********" + cardNum.substring((cardNum.length - 4), cardNum.length);
         return (
             <div className="wrap">
                 <div className="name clearfix">
@@ -157,7 +175,7 @@ const Input = React.createClass({
 
                 <div className="name clearfix">
                     <img src="images/bf-b.png"/>
-                    <div className="knight">{this.props.cardNumber}</div>
+                    <div className="knight">{idCarNoNntercept}</div>
                 </div>
 
                 <div className="wire"></div>
@@ -165,7 +183,7 @@ const Input = React.createClass({
                 <div className="name clearfix">
                     <img src="images/bf-c.png"/>
                     <div className="knight sr">
-                        <input type="text" value={this.state.bankCard}
+                        <input type="text" value={this.state.format_bankCard}
                                onChange={this.bankChangeHandler} className="textbox"
                                placeholder="请输入银行卡号"/></div>
                 </div>
@@ -199,11 +217,23 @@ const Input = React.createClass({
 })
 
 const Note = React.createClass({
+    handlerVoice: function() {
+        var phoneNo = this.props.cardNumber;
+        $FW.Ajax({
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
+            method: "GET",
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    },
     render: function () {
+        var phoneNo = this.props.cardNumber;
+        var idCarNoNntercept = phoneNo.substring(0, 3) + "****" + phoneNo.substring((phoneNo.length - 4), phoneNo.length);
         return (
             <div className="phone">
                 已向手机
-                <span className="">{this.props.cardNumber}</span>发送短信验证码，若收不到，请<a className="dot">点击这里</a>获取语音验证码。
+                <span className="">{idCarNoNntercept}</span>发送短信验证码，若收不到，请<a className="dot" onClick={this.handlerVoice}>点击这里</a>获取语音验证码。
             </div>
         )
     }
@@ -231,6 +261,7 @@ ReportBox.SelectBankList = React.createClass({
                     size: "10"
                 },
                 success: (data) => {
+                    console.log(data)
                     this.setState({bankList: data.bankList})
                 }
             })
@@ -294,7 +325,6 @@ ReportBox.SelectBankList = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"绑定银行卡"}/>, document.getElementById('header'));
-
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {

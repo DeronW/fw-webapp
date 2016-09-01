@@ -9,6 +9,8 @@ const BindBankCard = React.createClass({
 	
 	render : function(){
 		let prohibited = this.props.item.openStatus;
+		let bankCardNum = this.props.item.userInfo.bankCard;
+		let idCarNoNntercept = bankCardNum.substring(0, 4) + "********" + bankCardNum.substring((bankCardNum.length - 4), bankCardNum.length);
 		return (
 			<div>
 				{prohibited < 3 ? <Invalid  /> : null}
@@ -22,7 +24,7 @@ const BindBankCard = React.createClass({
 					</div>
 					<div className="belon">
 						<div className="name">{this.props.item.userInfo.realName}</div>
-						<div className="num">{this.props.item.userInfo.bankCard}</div>
+						<div className="num">{idCarNoNntercept}</div>
 						{prohibited < 3 ? <div className="card-e"></div> : null}
 					</div>
 					<div className={prohibited < 3 ? "instant-icon gray-img" : "instant-icon"}></div>
@@ -123,7 +125,7 @@ const Warm = React.createClass({
 })
 
 $FW.DOMReady(function(){
-	ReactDOM.render(<Header title={"绑定银行卡"} back_handler={backward}/>, document.getElementById('header'));
+	ReactDOM.render(<Header title={"绑定银行卡"}/>, document.getElementById('header'));
 	$FW.Ajax({
 		url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
 		success : function(data){
@@ -132,7 +134,3 @@ $FW.DOMReady(function(){
 		}
 	});
 });
-
-function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
-}
