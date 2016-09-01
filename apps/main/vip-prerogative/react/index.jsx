@@ -53,7 +53,7 @@ $FW.DOMReady(function () {
                 g("birthday-text-" + i).innerHTML = birthday.describe;
             }
 
-            var levelUp = rule[i].birthdayBag;
+            var levelUp = rule[i].levelUpBag;
             if (levelUp) {
                 g("level-text-" + i).innerHTML = levelUp.describe;
             }
