@@ -25,7 +25,7 @@ const MAIN_APP_NAMES = [
      'user-level', // 用户等级详情
      'user-contribute', // 用户贡献值
      */
-    
+
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
     'open-account', // 原 hui-shang-bank, 新老用户开户页面
@@ -49,7 +49,6 @@ const MAIN_APP_NAMES = [
     'hs-topic', //徽商专题页面
     'trusteeship-pact', // 资金托管协议
     'counseling-pact', // 咨询服务协议
-
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
@@ -61,7 +60,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-        api_path: "http://xjb.9888.cn/",
+        api_path: "http://lxm.9888.cn/",
         include_components: common_components,
         include_common_js: common_js
     });

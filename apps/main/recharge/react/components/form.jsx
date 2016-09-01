@@ -31,9 +31,9 @@ const Form = React.createClass({
             data: {
                 phoneNo: this.state.phone
             },
-            success: (data) => {
+            success: function (data) {
                 this.setState({token: data.smsSerialNo})
-            }
+            }.bind(this)
         })
     },
     moneyChangeHandler: function (e) {

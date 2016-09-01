@@ -29,8 +29,9 @@ const Recharge = React.createClass({
         this.setState({special_user: false})
     },
     orderConfirm: function () {
-        this.setState({order_state: 'processing'});
-        setTimeout(this.checkRechargeResult, 2000)
+        // this.setState({order_state: 'processing'});
+        // setTimeout(this.checkRechargeResult, 2000)
+        this.checkRechargeResult();
     },
     checkRechargeResult: function () {
         this.setState({order_state: 'success'})
