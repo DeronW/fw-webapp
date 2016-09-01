@@ -154,6 +154,9 @@ var FundsFlow = React.createClass({
 });
 
 var Body = React.createClass({
+    backBtnClick: function() {
+        window.history.back();
+    },
     render: function() {
         return (
             <div className="">
