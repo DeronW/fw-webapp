@@ -29,7 +29,8 @@ $FW.DOMReady(function () {
             g('limitDays2').innerText = F(data.limitDays);
             g('firstInvestAmount2').innerText = F(data.firstInvestAmount);
             g('sendStore2').innerText = F(data.sendStore);
-        }
+        },
+        fail: () => true
     });
 
     function g(id) {
