@@ -264,7 +264,7 @@ var Body = React.createClass({
                 <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword} />
 
                 {
-                    !this.state.popShow ? <Pop callbackCloseInfo={this.getCloseInfo}/> : "null"
+                    this.state.popShow ? <Pop callbackCloseInfo={this.getCloseInfo}/> : "null"
                 }
 
             </div>
