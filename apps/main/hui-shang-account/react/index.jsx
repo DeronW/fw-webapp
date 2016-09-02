@@ -50,7 +50,7 @@ var Cart = React.createClass({
         return (
             <div className="hui-bank-cart">
                 <div className="hui-shang-logo">
-                    <img src={this.state.userInfo.bankLogo} />
+                    <img src="images/hui-shang-logo.png" />
                 </div>
 
                 <div className="bank-id">
@@ -64,7 +64,7 @@ var Cart = React.createClass({
                 </div>
 
                 <div className="info">
-                    <span>开户行：</span>{this.state.userInfo.bankDeposit}
+                    <span>开户行：</span>{dataInfo.bankBranch}
                 </div>
             </div>
         );
