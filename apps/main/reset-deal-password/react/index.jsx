@@ -82,6 +82,7 @@ var Btn = React.createClass({
 var Pop = React.createClass({
     handlerCloseBtn: function() {
         this.props.callbackCloseInfo(false);
+
     },
     render: function() {
         return (
@@ -263,7 +264,7 @@ var Body = React.createClass({
                 <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword} />
 
                 {
-                    !this.state.popShow ? <Pop callbackCloseInfo={this.state.getCloseInfo}/> : "null"
+                    !this.state.popShow ? <Pop callbackCloseInfo={this.getCloseInfo}/> : "null"
                 }
 
             </div>
