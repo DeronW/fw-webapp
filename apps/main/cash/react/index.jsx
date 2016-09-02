@@ -158,8 +158,6 @@ const Withdrawals = React.createClass({
 				
 				{this.state.jump ? <Withdrawals.BankAccount
 					
-					opt={this.props.opt}
-					
 					onClear={this.state.handleClear}
 					onFocus={this.focusHandler}
 					entry={this.state.entry}
@@ -287,7 +285,7 @@ const Greater = React.createClass({
 			<div className="modify" onClick={this.props.handleJump} >
 				<div className="wire"></div>
 				<div className="pure">
-					<div className="xuanwu" style={{fontSize:'32px'}}>{this.props.name}</div>
+					<div className="xuanwu" style={{fontSize:'32px'}}>{this.props.name ? this.props.name : '开户银行'}</div>
 					<div className="choice"><div className="pleas" style={{color:'#555555'}}  >请选择</div></div>
 				</div>
 			</div>

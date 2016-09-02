@@ -62,8 +62,6 @@ MAIN_APP_NAMES.forEach(function (i) {
 
         api_path: "http://lxm.9888.cn/",
 
-        api_path: "http://xjb.9888.cn/",
-
         include_components: common_components,
         include_common_js: common_js
     });
