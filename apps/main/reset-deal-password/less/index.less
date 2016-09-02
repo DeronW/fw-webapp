@@ -172,86 +172,6 @@ body {
 }
 
 
-
-.select-bank-area {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    background-color: #ebebee;
-}
-
-.select-bank-content-block {
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-    margin: 20px 0 0 0;
-    border-bottom: 1px solid #d8d8d8;
-
-    .select-list {
-
-    }
-
-    .select-list {
-        .title-text {
-            height: 68px;
-            padding: 0 30px;
-            line-height: 68px;
-            font-size: 28px;
-            background-color: #f9f9f9;
-            border-top: 1px solid #d8d8d8;
-            border-bottom: 1px solid #d8d8d8;
-        }
-
-        .list {
-            background-color: #fff;
-
-            li {
-                height: 98px;
-                margin: 0 0 0 30px;
-                border-bottom: 1px solid #d8d8d8;
-                list-style: none;
-
-                .info-block {
-                    font-size: 30px;
-
-                    span {
-                        float: left;
-                    }
-
-                    .text {
-                        line-height: 98px;
-                    }
-
-                    .img {
-                        margin: 30px 0 0 10px;
-                    }
-                }
-
-                .logo-img {
-                    float: left;
-                    width: 60px;
-                    height: 60px;
-                    margin: 21px 10px 0 0;
-                }
-            }
-
-            li:last-child {
-                border-bottom: none;
-            }
-
-            .last-li {
-                border-bottom: none;
-            }
-        }
-    }
-}
-
-
 .prompt-block {
     padding: 25px 55px;
 
@@ -373,4 +293,64 @@ body {
     line-height: 50px;
     font-size: 42px;
     color: #5799e8;
+}
+
+
+.pop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .pop-back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .pop-cnt {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 536px;
+        height: 260px;
+        padding: 0 32px;
+        margin: -98px 0 0 -300px;
+        border-radius: 5px;
+        background-color: #fff;
+
+        .pop-title {
+            line-height: 24px;
+            text-align: center;
+        }
+
+        .pop-btn {
+
+            .btn {
+                float: left;
+                width: 248px;
+                height: 74px;
+                line-height: 74px;
+                text-align: center;
+                color: #fff;
+                border-radius: 5px;
+            }
+
+            .ok-btn {
+                background-color: #fd4d4c;
+            }
+
+            .close-btn {
+                float: right;
+                background-color: #8296af;
+            }
+
+        }
+
+    }
+
 }
