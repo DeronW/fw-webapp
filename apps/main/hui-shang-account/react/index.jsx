@@ -145,7 +145,7 @@ var FundsFlow = React.createClass({
 
                 <div className="info">
                     {
-                        this.props.userPageData.resultList.map(list, this)
+                        this.props.userPageData.result.map(list, this)
                     }
                 </div>
             </div>

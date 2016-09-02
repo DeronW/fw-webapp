@@ -122,14 +122,14 @@ const ConfirmPop = React.createClass({
                         <div className="confirm-sms-code">
                             <input type="text" placeholder="请输入验证码" className="sms-input" value={this.state.value}
                                    onChange={this.changeValueHandler}/>
-                            <span className={this.state.remain>0 ? "btn-countdown" : "sms-btn"}
+                            <span className={this.state.remain > 0 ? "btn-countdown" : "sms-btn"}
                                   onClick={this.getSmsCodeHandler}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
                         {frequent_tip}
                         <div className={this.state.loading ? "pop-confirm-btn gray" : "pop-confirm-btn"}
                              onClick={this.submitHandler}>确认
                         </div>
-                        <div className="pop-tip">充值后1~10分钟到账</div>
+                        <div className="pop-tip"></div>
                     </div>
                 </div>
             </div>
