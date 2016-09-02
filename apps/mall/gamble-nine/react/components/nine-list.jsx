@@ -43,7 +43,7 @@ const NineList = React.createClass({
 
         let prize_list = this.props.prize_list;
         let no_data=() => {
-        	return <div className="Nine-list-no">暂无兑换记录</div>
+        	return <div className="Nine-list-no">暂无抽奖记录</div>
         }
 
         return (
