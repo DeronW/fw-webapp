@@ -13,18 +13,17 @@ gulp.task('default', function (done) {
  */
 const MAIN_APP_NAMES = [
 
-    /* 测试徽商, 不发布其他页面, 加速发布过程
-     // 旧页面重构
-     'home', // 首页
-     'about-us', // 关于我们
+    /* 测试徽商, 不发布其他页面, 加速发布过程 */
+    // 旧页面重构
+    'home', // 首页
+    'about-us', // 关于我们
 
-     // 新增页面
-     'vip-prerogative', // VIP特权详情页
-     'guide-cookbook',
-     'app-download',
-     'user-level', // 用户等级详情
-     'user-contribute', // 用户贡献值
-     */
+    // 新增页面
+    'vip-prerogative', // VIP特权详情页
+    'guide-cookbook',
+    'app-download',
+    'user-level', // 用户等级详情
+    'user-contribute', // 用户贡献值
 
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡

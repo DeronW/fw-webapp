@@ -29,7 +29,8 @@ $FW.DOMReady(function () {
             g('limitDays2').innerText = F(data.limitDays);
             g('firstInvestAmount2').innerText = F(data.firstInvestAmount);
             g('sendStore2').innerText = F(data.sendStore);
-        }
+        },
+        fail: () => true
     });
 
     function g(id) {
@@ -52,7 +53,7 @@ $FW.DOMReady(function () {
                 g("birthday-text-" + i).innerHTML = birthday.describe;
             }
 
-            var levelUp = rule[i].birthdayBag;
+            var levelUp = rule[i].levelUpBag;
             if (levelUp) {
                 g("level-text-" + i).innerHTML = levelUp.describe;
             }

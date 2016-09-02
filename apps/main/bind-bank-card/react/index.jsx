@@ -102,7 +102,7 @@ const Bran = React.createClass({
 		return (
 			<div className="modify">
 				<a className="pure-a" href="/static/wap/change-bank-card/index.html">
-					<div className="xuanwu-a">修改绑定银行卡></div>
+					<div className="xuanwu-a">修改绑定银行卡</div>
 					<div className="choice-a"><div className="pleas-a">申请修改</div></div>
 				</a>
 				<div className="wire-a"></div>
