@@ -62,7 +62,7 @@ var TopNav = React.createClass({
                     }
 
                     <div className="title">{this.props.title}</div>
-                    <span className="r-text"><a href="/">{this.props.btnText}</a></span>
+                    <span className="r-text" onClick={this.props.skipFun}>{this.props.btnText}</span>
                 </div>
             </div>
         );
@@ -74,6 +74,28 @@ var Btn = React.createClass({
         return (
             <div className="btn-area">
                 <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>{this.props.btnText}</div>
+            </div>
+        );
+    }
+});
+
+var Pop = React.createClass({
+    handlerCloseBtn: function() {
+        this.props.callbackCloseInfo(false);
+
+    },
+    render: function() {
+        return (
+            <div className="pop">
+                <div className="pop-back"></div>
+                <div className="pop-cnt">
+                    <div className="pop-title">确定要跳过吗？</div>
+                    <div className="pop-btn">
+                        <a href="/" className="btn ok-btn">确定</a>
+                        <span onClick={this.handlerCloseBtn} className="btn close-btn">关闭</span>
+                    </div>
+                </div>
+
             </div>
         );
     }
@@ -185,7 +207,8 @@ var Body = React.createClass({
         return {
             getAjaxUserInfo: userInfoData,
             phoneNumber: userInfoData.userInfo.phoneNum,
-            code: null
+            code: null,
+            popShow: false
         };
     },
     handlerSettingsPassword: function() {
@@ -212,11 +235,26 @@ var Body = React.createClass({
     backBtnClick: function() {
         window.history.back();
     },
+    handlerSkipBtn: function() {
+        this.setState({
+            popShow: true
+        });
+    },
+    getCloseInfo: function(booleanVal) {
+        this.setState({
+            popShow: booleanVal
+        });
+    },
     render: function() {
 
         return (
             <div>
-                <TopNav title={"升级存管账户"} backBtn={true} btnFun={this.backBtnClick}  btnText={"跳过"}/>
+                <TopNav title={"升级存管账户"}
+                        backBtn={true}
+                        btnFun={this.backBtnClick}
+                        skipFun={this.handlerSkipBtn}
+                        btnText={"跳过"}
+                />
                 <Nav imgUrl={"images/process-2.png"}/>
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
@@ -224,6 +262,11 @@ var Body = React.createClass({
                 />
                 <PhoneCodePrompt getGetPorpsUserInfo={this.state.getAjaxUserInfo} />
                 <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword} />
+
+                {
+                    this.state.popShow ? <Pop callbackCloseInfo={this.getCloseInfo}/> : "null"
+                }
+
             </div>
         );
     }
