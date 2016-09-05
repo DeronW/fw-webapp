@@ -122,6 +122,8 @@ var PswFrom = React.createClass({
             code: true
         })
 
+        this.props.callbackPhoneCodePromptShow(true);
+
         _this.interval = setInterval(function() {
             _this.setState({
                 countdown: --_this.state.countdown
@@ -208,7 +210,8 @@ var Body = React.createClass({
             getAjaxUserInfo: userInfoData,
             phoneNumber: userInfoData.userInfo.phoneNum,
             code: null,
-            popShow: false
+            popShow: false,
+            phoneCodePromptShow: false
         };
     },
     handlerSettingsPassword: function() {
@@ -245,6 +248,11 @@ var Body = React.createClass({
             popShow: booleanVal
         });
     },
+    getPhoneCodePromptShow: function(booleanVal) {
+        this.setState({
+            phoneCodePromptShow: booleanVal
+        });
+    },
     render: function() {
 
         return (
@@ -259,8 +267,16 @@ var Body = React.createClass({
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
                     callbackInputVal={this.getCallbackInputVal}
+                    callbackPhoneCodePromptShow={this.getPhoneCodePromptShow}
                 />
-                <PhoneCodePrompt getGetPorpsUserInfo={this.state.getAjaxUserInfo} />
+
+                <div className="phone-code-prompt">
+                    {
+                        this.state.phoneCodePromptShow ? <PhoneCodePrompt getGetPorpsUserInfo={this.state.getAjaxUserInfo} /> : null
+                    }
+
+                </div>
+
                 <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword} />
 
                 {
@@ -272,6 +288,8 @@ var Body = React.createClass({
     }
 });
 
+
+console.log(API_PATH);
 
 
 $FW.Ajax({
