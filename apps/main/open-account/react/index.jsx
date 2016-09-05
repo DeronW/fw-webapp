@@ -116,7 +116,8 @@ var From = React.createClass({
             countdown: 60,
             userData: {},
             identifyingCode: null,
-            blur: true
+            blur: true,
+            phoneCodePromptShow: false
         };
     },
     componentDidMount: function() {
@@ -168,6 +169,10 @@ var From = React.createClass({
 
         _this.setState({
             code: 1
+        });
+
+        this.setState({
+            phoneCodePromptShow: true
         });
 
         this.interval = setInterval(function() {
@@ -305,7 +310,12 @@ var From = React.createClass({
                     </div>
                 </div>
 
-                <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/>
+                <div className="phone-code-prompt">
+                    {
+                        this.state.phoneCodePromptShow ? <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/> : null
+                    }
+                </div>
+
             </div>
 
         );
@@ -606,7 +616,7 @@ var Body = React.createClass({
     }
 });
 
-
+console.log(API_PATH);
 $FW.DOMReady(function() {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
