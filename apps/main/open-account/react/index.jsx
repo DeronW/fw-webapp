@@ -116,7 +116,9 @@ var From = React.createClass({
             countdown: 60,
             userData: {},
             identifyingCode: null,
-            blur: true
+            blur: true,
+            phoneCodePromptShow: false,
+            showSelectBtn: this.props.ajaxData.userInfo.bankLogo
         };
     },
     componentDidMount: function() {
@@ -161,6 +163,10 @@ var From = React.createClass({
     //选择开户行
     handlerBank: function() {
         this.props.callbackBank(true);
+
+        this.setState({
+            showSelectBtn: true
+        });
     },
     headlerCode: function() {
         var _this = this
@@ -168,6 +174,10 @@ var From = React.createClass({
 
         _this.setState({
             code: 1
+        });
+
+        this.setState({
+            phoneCodePromptShow: true
         });
 
         this.interval = setInterval(function() {
@@ -237,16 +247,6 @@ var From = React.createClass({
                     </div>
         };
 
-        var showSelectBtn = function() {
-            if(userAjaxData.userInfo.bankName === "") {
-                return "请选择银行";
-            } else if (userAjaxData.userInfo.bankName !== "") {
-                return selectEml();
-            }
-
-        };
-
-
         return (
             <div className="">
                 <div className="from-block">
@@ -254,7 +254,7 @@ var From = React.createClass({
                         <span className="icon name-icon"></span>
                         <div className="text-block">
                             {
-                                userAjaxData.userInfo.realName === "" ? <input type="text" placeholder="输入用户名" onChange={this.changeUserName}/> : <span className="text name-text">{userAjaxData.userInfo.realName}</span>
+                                userAjaxData.userInfo.realName === "" ? <input type="text" placeholder="真实姓名" onChange={this.changeUserName}/> : <span className="text name-text">{userAjaxData.userInfo.realName}</span>
                             }
 
                         </div>
@@ -264,7 +264,7 @@ var From = React.createClass({
                         <span className="icon id-icon"></span>
                         <div className="text-block">
                             {
-                                idCardNo === "" ? <input type="text" placeholder="输入身份证" onChange={this.changeId}/> : <span className="text number-text">{idCarNoNntercept}</span>
+                                idCardNo === "" ? <input type="text" placeholder="身份证号" onChange={this.changeId}/> : <span className="text number-text">{idCarNoNntercept}</span>
                             }
 
                         </div>
@@ -274,7 +274,7 @@ var From = React.createClass({
                         <span className="icon number-icon"></span>
                         <div className="text-block" >
                             {
-                                userAjaxData.userInfo.bankCard === "" ? <input type="text" placeholder="输入银行卡号" onChange={this.changeBankCard}/> : accountInput()
+                                userAjaxData.userInfo.bankCard === "" ? <input type="text" placeholder="银行卡号" onChange={this.changeBankCard}/> : accountInput()
                             }
                         </div>
                     </div>
@@ -283,7 +283,9 @@ var From = React.createClass({
                         <span className="bank-name">开户银行</span>
 
                         <span className="bank-logo">
-                            {selectEml()}
+                            {
+                                this.state.showSelectBtn === ""  ? null : selectEml()
+                            }
                         </span>
                     </div>
 
@@ -305,7 +307,12 @@ var From = React.createClass({
                     </div>
                 </div>
 
-                <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/>
+                <div className="phone-code-prompt">
+                    {
+                        this.state.phoneCodePromptShow ? <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/> : null
+                    }
+                </div>
+
             </div>
 
         );
@@ -606,7 +613,7 @@ var Body = React.createClass({
     }
 });
 
-
+console.log(API_PATH);
 $FW.DOMReady(function() {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",

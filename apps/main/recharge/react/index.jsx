@@ -26,7 +26,8 @@ const Recharge = React.createClass({
         }
     },
     hideMask: function () {
-        this.setState({special_user: false})
+        this.setState({special_user: false});
+        window.history.back();
     },
     orderConfirm: function () {
         // this.setState({order_state: 'processing'});
