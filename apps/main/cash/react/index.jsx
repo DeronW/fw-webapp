@@ -32,7 +32,8 @@ const Withdrawals = React.createClass({
 			popShow: false,
 			inputBlur: false,
 			bankAccountId: "",
-			code: null
+			code: null,
+			inputVal: ""
 	    }
 	},
 	
@@ -43,6 +44,10 @@ const Withdrawals = React.createClass({
 	handlerChange: function(e){
 		this.setState({inputText: numberFormat.format(e.target.value)});
 		this.setState({alter: true})
+
+		this.setState({
+			inputVal: e.target.value
+		});
 
 	},
 		
@@ -62,6 +67,11 @@ const Withdrawals = React.createClass({
 	submitHandle: function(){
 		if(this.props.data.accountAmount === 0) {
 			$FW.Component.Toast("可提现金额0元");
+			return false;
+		}
+
+		if(this.state.inputText < 10) {
+			$FW.Component.Toast("提现金额必须大于10元");
 			return false;
 		}
 
@@ -93,7 +103,6 @@ const Withdrawals = React.createClass({
 		}
 
 		this.setState({enable: false});
-
 
 		var inputVal = this.state.inputText;
 		var code = this.state.code;
@@ -226,7 +235,7 @@ const Withdrawals = React.createClass({
 					handleJump={this.handleJump} /> : null}
 				
 				{this.state.greater_than ? <Neg accountAmout={this.props.data.accountAmount} /> : null}
-				{this.state.less_than ? <Special accountAmout={this.props.data.accountAmount}  callbackCode={this.getCallbackCode}/> : null}
+				{this.state.inputVal !== "" ? <Special accountAmout={this.props.data.accountAmount}  callbackCode={this.getCallbackCode}/> : null}
 				
 				{this.state.jump ? <Withdrawals.BankAccount
 					
