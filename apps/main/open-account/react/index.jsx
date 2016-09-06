@@ -118,7 +118,12 @@ var From = React.createClass({
             identifyingCode: null,
             blur: true,
             phoneCodePromptShow: false,
-            showSelectBtn: this.props.ajaxData.userInfo.bankLogo
+            showSelectBtn: this.props.ajaxData.userInfo.bankLogo,
+            inputValFirst: this.props.ajaxData.userInfo.bankId,
+            nameVal: false,
+            userId: false,
+            bankCard: false,
+            userOpenStatus: this.props.ajaxData.openStatus
         };
     },
     componentDidMount: function() {
@@ -172,6 +177,13 @@ var From = React.createClass({
         var _this = this
         var phoneNo = this.props.ajaxData.userInfo.phoneNum;
 
+        if(this.state.userOpenStatus === "1") {
+            if(this.state.nameVal === false) {
+                return false;
+            }
+        }
+
+
         _this.setState({
             code: 1
         });
@@ -206,15 +218,75 @@ var From = React.createClass({
     },
     validateCodeChangeHandler: function(event) {
         this.props.validateCode(event.target.value);
+
     },
     changeUserName: function(event) {
         this.props.callbackUserName(event.target.value);
+
+
+        this.setState({
+            inputValFirst: ""
+        });
+
+        if(event.target.value === "") {
+            this.setState({
+                nameVal: false
+            });
+        } else {
+            this.setState({
+                nameVal: true
+            });
+        }
     },
     changeId: function(event) {
         this.props.callbackUserId(event.target.value);
+
+        this.setState({
+            inputValFirst: ""
+        });
+
+        if(event.target.value === "") {
+            this.setState({
+                userId: false
+            });
+        } else {
+            this.setState({
+                userId: true
+            });
+        }
     },
     changeBankCard: function(event) {
         this.props.callbackBankCardNo(event.target.value);
+
+        this.setState({
+            inputValFirst: ""
+        });
+
+        if(event.target.value === "") {
+            this.setState({
+                bankCard: false
+            });
+        } else {
+            this.setState({
+                bankCard: true
+            });
+        }
+    },
+    inputIfImport: function(obj, val) {
+        console.log(obj);
+        this.setState({
+            inputValFirst: ""
+        });
+
+        if(val === "") {
+            this.setState({
+                obj: false
+            });
+        } else {
+            this.setState({
+                obj: true
+            });
+        }
     },
     render: function() {
         var _this = this;
@@ -246,6 +318,31 @@ var From = React.createClass({
                         </span>
                     </div>
         };
+
+        var inputNullFun = function() {
+            var a = _this.state.inputValFirst;
+            var b = _this.state.nameVal;
+            var c = _this.state.userId;
+            var d = _this.state.bankCard;
+            var e = _this.state.showSelectBtn;
+
+            if(_this.state.userOpenStatus === "1") {
+                if ( a === null) {
+                    return true;
+                } else {
+                    if((b === true) && (c === true) && (d === true) && (e === true)) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+
+                }
+            } else {
+                return false;
+            }
+
+        };
+
 
         return (
             <div className="">
@@ -300,7 +397,7 @@ var From = React.createClass({
                             {
                                 this.state.code ?
                                     <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                    <span className="btn" onClick={this.headlerCode}>获取短信验证码</span>
+                                    <span className={inputNullFun() ? "timing-text" : "btn"} onClick={this.headlerCode}>获取短信验证码</span>
                             }
 
                         </span>
@@ -462,7 +559,6 @@ var Body = React.createClass({
 
         var getAjaxUserInfo = this.props.activity;
 
-        console.log(this.state.userInfo);
 
         if(this.state.userInfo.realName === "") {
             $FW.Component.Toast("用户名不能为空");
@@ -613,7 +709,6 @@ var Body = React.createClass({
     }
 });
 
-console.log(API_PATH);
 $FW.DOMReady(function() {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
