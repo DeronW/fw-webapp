@@ -1,6 +1,9 @@
 const API_PATH = document.getElementById("api-path").value;
 
 const Mask = React.createClass({
+    clickHandler: function () {
+        window.history.back();
+    },
     render: function () {
         return (
             <div className="cang">
@@ -11,7 +14,7 @@ const Mask = React.createClass({
                         由于您的身份信息无法通过系统验证，为了保证您的账户资金安全，您当前无法进行线上充值、投资、更换银行卡等交易。您当前的账户资金安全无虞，若有可用余额，可自行发起提现申请。
                     </div>
                     <div className="ever">有任何问题，请联系客服：<span>400-0322-988</span></div>
-                    <div className="close" onClick={this.props.handler}>关闭</div>
+                    <div className="close" onClick={this.clickHandler}>关闭</div>
                 </div>
             </div>
         )
@@ -36,10 +39,6 @@ const Recharge = React.createClass({
             }
         })
     },
-    hideMask: function () {
-        window.history.back();
-        this.setState({special_user: false});
-    },
     orderConfirm: function () {
         // this.setState({order_state: 'processing'});
         // setTimeout(this.checkRechargeResult, 2000)
@@ -53,7 +52,7 @@ const Recharge = React.createClass({
     },
     render: function () {
 
-        var deny = <Mask username={this.props.data.bankInfo.realName} handler={this.hideMask}/>;
+        var deny = <Mask username={this.props.data.bankInfo.realName}/>;
 
         return (
             <div>
