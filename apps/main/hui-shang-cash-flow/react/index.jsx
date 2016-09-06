@@ -55,7 +55,7 @@ var AllJournal = React.createClass({
                 <div className="funds-flow">
                     <div className="info">
                         {
-                            this.state.resultList.pageData.resultList.map(list, this)
+                            this.state.resultList.pageData.result.map(list, this)
                         }
                     </div>
                 </div>
