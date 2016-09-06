@@ -1,3 +1,5 @@
+'use strict';
+
 const API_PATH = document.getElementById("api-path").value;
 
 var numberFormat = {
@@ -28,7 +30,9 @@ const Withdrawals = React.createClass({
 	    	enable :this.props.data.isFeeEnable,
             order_state: null,  // 有3种,  处理中, 成功, 失败,
 			popShow: false,
-			inputBlur: false
+			inputBlur: false,
+			bankAccountId: "",
+			code: null
 	    }
 	},
 	
@@ -56,25 +60,20 @@ const Withdrawals = React.createClass({
 	},
 	
 	submitHandle: function(){
+		if(this.props.data.accountAmount === 0) {
+			$FW.Component.Toast("可提现金额0元");
+			return false;
+		}
 
 		var _this = this;
 		if(!_this.state.inputText ){
 			$FW.Component.Alert("请输入提现金额")
-		}else if(!_this.state.verify_code){
+		}else if(!_this.state.code){
 			$FW.Component.Alert("请输入验证码")
-		}else if(!_this.state.enable){
-			this.setState({enable: !this.props.data.isFeeEnable})
 		}else{
-			$FW.Ajax({
-		        url: API_PATH +"mpwap/api/v1/withDraw.shtml",
-		        type: 'get',
-				data: {
-                    reflectAmount: this.state.inputText,
-                    validateCode: this.state.verify_code
-                },
-                success: () => this.props.orderConfirm()
-		         
-		    })
+			this.setState({
+				popShow: true
+			});
 		}
 	},
 	
@@ -83,12 +82,29 @@ const Withdrawals = React.createClass({
         this.setState({
             bankName: data.bankName,
             bankId: data.bankNo,
-            jump: false
+            jump: false,
+			bankAccountId: data.bankNo
         });
     },
 	
 	sureHandle: function(){
-		this.setState({enable: false})
+		if(this.props.data.accountAmount=== 0) {
+			return false;
+		}
+
+		this.setState({enable: false});
+
+
+		var inputVal = this.state.inputText;
+		var code = this.state.code;
+
+		$FW.Ajax({
+			url: API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + inputVal + "&validateCode=" + code + "&bankNo=" + this.state.bankAccountId,
+			success: function(data) {
+
+			}
+
+		})
 	},
 	
     orderConfirm: function () {
@@ -107,7 +123,7 @@ const Withdrawals = React.createClass({
 	},
 	colseBtn: function() {
 		this.setState({
-			popShow: null
+			popShow: false
 		});
 
 	},
@@ -116,10 +132,19 @@ const Withdrawals = React.createClass({
 			inputBlur: false
 		});
 	},
+	getCallbackCode: function(val) {
+		console.log(val);
+		this.setState({
+			code: val
+		});
+	},
 	render : function(){
+		var _this = this;
 		var fee = this.props.data.fee;
 
-		var commissionCharge = ((fee.slice(0, fee.length - 1) * 100) * (this.state.inputText * 100)) / 100
+		var commissionCharge = ((fee.slice(0, fee.length - 1) * 10) * (this.state.inputText * 100)) / 100000
+		//var commissionCharge = ((fee.slice(0, fee.length - 1)) * (this.state.inputText * 100)) / 100
+
 
 		var pop = function() {
 			return <div className="cang">
@@ -129,11 +154,11 @@ const Withdrawals = React.createClass({
 						<div className="fact">
 							<div className="">
 								<span className="acti">实际到账金额</span>
-								<span className="san">{this.state.inputText - commissionCharge}</span>
+								<span className="san">{_this.state.inputText - commissionCharge}</span>
 							</div>
 							<div className="pot-a">
 								<span className="iner">提现金额</span>
-								<span className="zeor">{this.state.inputText}</span>
+								<span className="zeor">{_this.state.inputText}</span>
 							</div>
 							<div className="pot-b">
 								<span className="iner">提现手续费</span>
@@ -142,8 +167,8 @@ const Withdrawals = React.createClass({
 						</div>
 
 						<div className="ton clearfix">
-							<div className="xiaoqu" onClick={this.colseBtn}>取消</div>
-							<div className="ding" onClick={this.sureHandle} >确定</div>
+							<div className="xiaoqu" onClick={_this.colseBtn}>取消</div>
+							<div className="ding" onClick={_this.sureHandle} >确定</div>
 						</div>
 
 					</div>
@@ -155,15 +180,12 @@ const Withdrawals = React.createClass({
 				{
 					this.state.popShow ? pop() : null
 				}
-				
-				
+
 				{this.state.order_state == 'processing' ?
                     <Withdrawals.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}
                                               inspectResult={this.inspectResult}/> : null}
                 {this.state.order_state == 'success' ? <Withdrawals.OrderSuccess /> : null}
                 {this.state.order_state == 'fail' ? <Withdrawals.OrderFail /> : null}
-				
-				
 				
 				<div className="stou clearfix">
 					<div className="zhaoshang"><img className="ico-zhaoshang" src={this.props.data.bankInfo.bankLogo}/></div>
@@ -197,14 +219,14 @@ const Withdrawals = React.createClass({
 					</div>
 				</div>
 				
-				{this.state.greater_than ? <Greater
+				{(this.state.inputText >= 100000) ? <Greater
 					name={this.state.bankName}
 					opt={this.props.opt}
 					jump={this.state.jump}
 					handleJump={this.handleJump} /> : null}
 				
-				{this.state.greater_than ? <Neg  /> : null}
-				{this.state.less_than ? <Special /> : null}
+				{this.state.greater_than ? <Neg accountAmout={this.props.data.accountAmount} /> : null}
+				{this.state.less_than ? <Special accountAmout={this.props.data.accountAmount}  callbackCode={this.getCallbackCode}/> : null}
 				
 				{this.state.jump ? <Withdrawals.BankAccount
 					
@@ -251,15 +273,17 @@ Withdrawals.BankAccount = React.createClass({
     },
 	
 	refreshBankList: function(value){
+		console.log(value);
 		let fn = () => {
 			$FW.Ajax({
 				url:API_PATH +　"mpwap/api/v1/getBankList.shtml",
 				data:{    
-					index: "10",
+					index: "0",
 					keyword: value,
-					size: "10"
+					size: "10000"
 				},
 				success : (data) => {
+					console.log(data);
 					this.setState({bankList: data.bankList})
 				}
 			})
@@ -368,7 +392,11 @@ const Neg = React.createClass({
 	handlerCodeClick: function(){
 		console.log("a");
 		if(this.state.seconds !=0) return;
-		
+
+		if(this.props.accountAmout === 0) {
+			return false;
+		}
+
 		this.setState({seconds: this.props.countSeconds});
 		
 		this.setState({note : true});
@@ -395,8 +423,10 @@ const Neg = React.createClass({
 				<div className="slip clearfix"><a href="http://www.lianhanghao.com/index.php" className="peno">忘记开户行？</a></div>
 				<div className="qing clearfix">
 					<div className="shyan">
-						<div className="mzysq"><input className="odec" type="text" 
-						value={this.state.verify_code} onChange={this.changeHandler} placeholder="请输入手机验证码"/></div>
+						<div className="mzysq">
+							<input className="odec" type="text"
+								value={this.state.verify_code}
+								   onChange={this.changeHandler} placeholder="请输入手机验证码"/></div>
 					</div>
 					<div className="miaoh" style={{background:'#d4d4d4'}}>
 						{this.state.seconds ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerCodeClick} >获取验证码</span>}
@@ -423,6 +453,11 @@ const Special = React.createClass({
 	},
 	
 	handlerTestClick: function(){
+		if(this.props.accountAmout === 0) {
+			$FW.Component.Toast("可提现金额0元");
+			return false;
+		}
+
 		if(this.state.seconds !=0) return;
 		
 		this.setState({seconds: this.props.countSeconds});
@@ -441,13 +476,20 @@ const Special = React.createClass({
 			}
 		})
 	},
+	inputCodeOnChange: function(e) {
+		//e.target.value
+		//console.log(e.target.value);
+		this.props.callbackCode(e.target.value);
+	},
 	
 	render : function(){
 		return (
 			<div>
 				<div className="qing clearfix">
 					<div className="shyan">
-						<div className="mzysq" value={this.props.verify_code} onCodeChange={this.changeHandler}><input className="odec" type="text" placeholder="请输入手机验证码"/></div>
+						<div className="mzysq" value={this.props.verify_code} onCodeChange={this.changeHandler}>
+							<input className="odec" type="text" onChange={this.inputCodeOnChange} placeholder="请输入手机验证码"/>
+						</div>
 					</div>
 					<div className="miaoh">
 						{this.state.seconds ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>}
