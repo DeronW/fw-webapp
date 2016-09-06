@@ -83,8 +83,6 @@ var PswFrom = React.createClass({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=5&destPhoneNo=" + this.state.phoneNumber + "&isVms=SMS",
             method: "GET",
             success: function (data) {
-
-
             }
         })
 
