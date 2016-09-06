@@ -1,5 +1,19 @@
 const API_PATH = document.getElementById("api-path").value;
 
+var numberFormat = {
+	val: "",
+	format: function(val) {
+		this.val = val.replace(/[^\d.]/g, "").
+		//只允许一个小数点
+		replace(/^\./g, "").replace(/\.{2,}/g, ".").
+		//只能输入小数点后两位
+		replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+
+		return this.val;
+	}
+};
+
+
 const Withdrawals = React.createClass({
 	getInitialState: function() {
 	    return {
@@ -12,7 +26,9 @@ const Withdrawals = React.createClass({
 	    	verify_code: null,
 	    	alter: false,
 	    	enable :this.props.data.isFeeEnable,
-            order_state: null  // 有3种,  处理中, 成功, 失败
+            order_state: null,  // 有3种,  处理中, 成功, 失败,
+			popShow: false,
+			inputBlur: false
 	    }
 	},
 	
@@ -21,9 +37,9 @@ const Withdrawals = React.createClass({
 	},
 
 	handlerChange: function(e){
-		this.setState({inputText: e.target.value});
+		this.setState({inputText: numberFormat.format(e.target.value)});
 		this.setState({alter: true})
-		console.log(e.target.value)
+
 	},
 		
 	textInput: function(){
@@ -84,20 +100,36 @@ const Withdrawals = React.createClass({
     inspectResult: function () {
         this.setState({order_state: 'fail'})
     },
-	
+	inputBlur: function() {
+		this.setState({
+			inputBlur: true
+		});
+	},
+	colseBtn: function() {
+		this.setState({
+			popShow: null
+		});
 
+	},
+	modifyBtn: function() {
+		this.setState({
+			inputBlur: false
+		});
+	},
 	render : function(){
-		
-		return (
-			<div>
-				{this.state.enable ? <div className="cang">
+		var fee = this.props.data.fee;
+
+		var commissionCharge = ((fee.slice(0, fee.length - 1) * 100) * (this.state.inputText * 100)) / 100
+
+		var pop = function() {
+			return <div className="cang">
 					<div className="masker"></div>
 					<div className="taine">
 						<div className="his">提示</div>
 						<div className="fact">
 							<div className="">
 								<span className="acti">实际到账金额</span>
-								<span className="san">{this.state.inputText}-{this.state.inputText*this.props.data.fee}</span>
+								<span className="san">{this.state.inputText - commissionCharge}</span>
 							</div>
 							<div className="pot-a">
 								<span className="iner">提现金额</span>
@@ -105,17 +137,24 @@ const Withdrawals = React.createClass({
 							</div>
 							<div className="pot-b">
 								<span className="iner">提现手续费</span>
-								<span className="zeor">{this.state.inputText*this.props.data.fee}</span>
+								<span className="zeor">{commissionCharge}</span>
 							</div>
 						</div>
-						
+
 						<div className="ton clearfix">
-							<div className="xiaoqu">取消</div>
+							<div className="xiaoqu" onClick={this.colseBtn}>取消</div>
 							<div className="ding" onClick={this.sureHandle} >确定</div>
 						</div>
-						
+
 					</div>
-				</div> : null}
+				</div>
+		};
+
+		return (
+			<div>
+				{
+					this.state.popShow ? pop() : null
+				}
 				
 				
 				{this.state.order_state == 'processing' ?
@@ -127,7 +166,7 @@ const Withdrawals = React.createClass({
 				
 				
 				<div className="stou clearfix">
-					<div className="zhaoshang"><img className="ico-zhaoshang" src="{this.props.data.bankInfo.bankLogo}"/></div>
+					<div className="zhaoshang"><img className="ico-zhaoshang" src={this.props.data.bankInfo.bankLogo}/></div>
 					<div className="wz">
 						<div className="zh">{this.props.data.bankInfo.bankName}</div>
 						<div className="nz">{this.props.data.bankInfo.bankCardNo}</div>
@@ -142,8 +181,19 @@ const Withdrawals = React.createClass({
 				
 				<div className="kunag">
 					<div className="pure">
-						<div className="xuanwu"><input value={this.state.inputText} onInput={this.textInput} onChange={this.handlerChange} className="moneyTxt" type="text" placeholder="请输入提现金额" /></div>
-						{this.state.alter ? <div className="choice"><div className="pleas">修改</div></div> : null}
+						<div className="xuanwu">
+							{
+								this.state.inputBlur ? <div className="">{this.state.inputText}</div> : <input
+										value={this.state.inputText}
+										onInput={this.textInput}
+										onChange={this.handlerChange}
+										onBlur={this.inputBlur}
+										className="moneyTxt" type="text" placeholder="请输入提现金额"
+								    />
+							}
+
+						</div>
+						{this.state.alter ? <div className="choice"><div className="pleas" onClick={this.modifyBtn}>修改</div></div> : null}
 					</div>
 				</div>
 				
@@ -297,7 +347,7 @@ const Greater = React.createClass({
 const Neg = React.createClass({
 	getDefaultProps: function(){
 		return {
-			countSeconds:3,
+			countSeconds: 60,
 			verify_code: null
 		}
 	},
@@ -316,6 +366,7 @@ const Neg = React.createClass({
     },
 	
 	handlerCodeClick: function(){
+		console.log("a");
 		if(this.state.seconds !=0) return;
 		
 		this.setState({seconds: this.props.countSeconds});
@@ -330,12 +381,9 @@ const Neg = React.createClass({
         }, 1000)
 		
 		$FW.Ajax({
-	        url: API_PATH +"mpwap/api/v1/sendCode.shtml",
-	        data: {
-                isVms: 'SMS',
-                type: 1
-            },
+	        url: API_PATH +"mpwap/api/v1/sendCode.shtml?isVms=SMS&type=1",
             success: function (data) {
+				console.log(data);
             }
 	    })
 		
@@ -364,7 +412,7 @@ const Neg = React.createClass({
 const Special = React.createClass({
 	getDefaultProps: function(){
 		return {
-			countSeconds:3
+			countSeconds: 60
 		}
 	},
 	
@@ -385,6 +433,13 @@ const Special = React.createClass({
                 clearInterval(this.timer)
             }
         }, 1000)
+
+		$FW.Ajax({
+			url: API_PATH +"mpwap/api/v1/sendCode.shtml?isVms=SMS&type=1",
+			success: function (data) {
+				console.log(data);
+			}
+		})
 	},
 	
 	render : function(){
@@ -473,6 +528,7 @@ $FW.DOMReady(function(){
 	ReactDOM.render(<Header title={"提现"} back_handler={backward}/>, document.getElementById('header'));
 	$FW.Ajax({
         url: API_PATH +"mpwap/api/v1/getWithdrawInfo.shtml",
+		enable_loading: true,
         success: function (data) {
             ReactDOM.render(<Withdrawals data={data}/>, document.getElementById("cnt"))
         }
