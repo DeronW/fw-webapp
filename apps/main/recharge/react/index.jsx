@@ -21,13 +21,24 @@ const Mask = React.createClass({
 const Recharge = React.createClass({
     getInitialState: function () {
         return {
-            special_user: true,
+            special_user: false,
             order_state: null  // 有3种,  处理中, 成功, 失败
         }
     },
+    componentDidMount: function () {
+        $FW.Ajax({
+            url: API_PATH + 'mpwap/api/v1/getOpenAccountInfo.shtml',
+            success: (data) => {
+                // 当前开户用户是特殊用户, 不能充值
+                if (data.openStatus == 5) {
+                    this.setState({special_user: true})
+                }
+            }
+        })
+    },
     hideMask: function () {
-        this.setState({special_user: false});
         window.history.back();
+        this.setState({special_user: false});
     },
     orderConfirm: function () {
         // this.setState({order_state: 'processing'});
@@ -42,10 +53,11 @@ const Recharge = React.createClass({
     },
     render: function () {
 
+        var deny = <Mask username={this.props.data.bankInfo.realName} handler={this.hideMask}/>;
+
         return (
             <div>
-                {this.state.special_user ?
-                    <Mask username={this.props.data.bankInfo.realName} handler={this.hideMask}/> : null}
+                {this.state.special_user ? deny : null}
                 {this.state.order_state == 'processing' ?
                     <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}
                                               inspectResult={this.inspectResult}/> : null}
@@ -67,7 +79,6 @@ const Recharge = React.createClass({
                     <span className="blue">400-6766-988</span></div>
 
                 <Form countingSeconds={60} orderConfirm={this.orderConfirm}/>
-
 
                 <div className="rmd">
                     <div className="remin">温馨提醒</div>
@@ -166,10 +177,12 @@ Recharge.OrderProcessing = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"充值"}/>, document.getElementById('header'));
+
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getRechargeInfo.shtml",
         success: function (data) {
-            window._Recharge = ReactDOM.render(<Recharge data={data}/>, document.getElementById("cnt"))
+            window._Recharge = ReactDOM.render(<Recharge data={data}/>,
+                document.getElementById("cnt"))
         }
     })
 });
