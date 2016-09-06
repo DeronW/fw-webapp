@@ -178,7 +178,8 @@ const PlusMinus = React.createClass({
         }
 
         let bizNo = $FW.Format.urlQuery().bizNo;
-        let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
+        let link = location.protocol + '//' + location.hostname +
+            '/static/mall/order-confirm/index.html?productBizNo=' + bizNo + '&count=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
         if (!this.props.is_login) {
@@ -274,10 +275,6 @@ $FW.DOMReady(function () {
 function backPage() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
 }
-
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back')backPage()
-};
 
 function trim(s) {
     return s.replace(/(^\s*)|(\s*$)/g, '')

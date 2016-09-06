@@ -1,6 +1,9 @@
 const API_PATH = document.getElementById("api-path").value;
 
 const Mask = React.createClass({
+    clickHandler: function () {
+        window.history.back();
+    },
     render: function () {
         return (
             <div className="cang">
@@ -11,7 +14,7 @@ const Mask = React.createClass({
                         由于您的身份信息无法通过系统验证，为了保证您的账户资金安全，您当前无法进行线上充值、投资、更换银行卡等交易。您当前的账户资金安全无虞，若有可用余额，可自行发起提现申请。
                     </div>
                     <div className="ever">有任何问题，请联系客服：<span>400-0322-988</span></div>
-                    <div className="close" onClick={this.props.handler}>关闭</div>
+                    <div className="close" onClick={this.clickHandler}>关闭</div>
                 </div>
             </div>
         )
@@ -21,13 +24,20 @@ const Mask = React.createClass({
 const Recharge = React.createClass({
     getInitialState: function () {
         return {
-            special_user: true,
+            special_user: false,
             order_state: null  // 有3种,  处理中, 成功, 失败
         }
     },
-    hideMask: function () {
-        this.setState({special_user: false});
-        window.history.back();
+    componentDidMount: function () {
+        $FW.Ajax({
+            url: API_PATH + 'mpwap/api/v1/getOpenAccountInfo.shtml',
+            success: (data) => {
+                // 当前开户用户是特殊用户, 不能充值
+                if (data.openStatus == 5) {
+                    this.setState({special_user: true})
+                }
+            }
+        })
     },
     orderConfirm: function () {
         // this.setState({order_state: 'processing'});
@@ -42,10 +52,11 @@ const Recharge = React.createClass({
     },
     render: function () {
 
+        var deny = <Mask username={this.props.data.bankInfo.realName}/>;
+
         return (
             <div>
-                {this.state.special_user ?
-                    <Mask username={this.props.data.bankInfo.realName} handler={this.hideMask}/> : null}
+                {this.state.special_user ? deny : null}
                 {this.state.order_state == 'processing' ?
                     <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}
                                               inspectResult={this.inspectResult}/> : null}
@@ -67,7 +78,6 @@ const Recharge = React.createClass({
                     <span className="blue">400-6766-988</span></div>
 
                 <Form countingSeconds={60} orderConfirm={this.orderConfirm}/>
-
 
                 <div className="rmd">
                     <div className="remin">温馨提醒</div>
@@ -166,10 +176,12 @@ Recharge.OrderProcessing = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"充值"}/>, document.getElementById('header'));
+
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getRechargeInfo.shtml",
         success: function (data) {
-            window._Recharge = ReactDOM.render(<Recharge data={data}/>, document.getElementById("cnt"))
+            window._Recharge = ReactDOM.render(<Recharge data={data}/>,
+                document.getElementById("cnt"))
         }
     })
 });
