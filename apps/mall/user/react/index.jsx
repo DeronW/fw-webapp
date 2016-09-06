@@ -69,7 +69,7 @@ const UserInfo = React.createClass({
                     </div>
 
                     <div className="user-info-r">
-                        <a className="user-get-adders" href="/delivery_address?preview=true">
+                        <a className="user-get-adders" href="/static/mall/delivery-address/index.html?preview=true">
                             <i className="adders-icon">
                                 <img src="images/address-icon.png"/>
                             </i>
@@ -95,7 +95,7 @@ const MyOderBlock = React.createClass({
             <div>
                 <div className="my-oder-block">
                     <span className="title">我的订单</span>
-                    <a href="/order/mine" className="oder-lick-text">
+                    <a href="/static/mall/order-list/index.html" className="oder-lick-text">
                         查看全部订单
                     </a>
                 </div>
@@ -111,21 +111,21 @@ const DeliveryProcessList = React.createClass({
         return (
             <div className="delivery-list">
                 <div className="info-block">
-                    <a className="icon" href="/order/mine#prepare">
+                    <a className="icon" href="/static/mall/order-list/index.html#prepare">
                         <img src="images/shopping-ship-icon.png"/>
                         {this.props.perpareCount >= 1 ? marKion(this.props.perpareCount) : null }
                         <span className="text">待发货</span>
                     </a>
                 </div>
                 <div className="info-block">
-                    <a className="icon" href="/order/mine#shipping">
+                    <a className="icon" href="/static/mall/order-list/index.html#shipping">
                         <img src="images/shopping-conduct-icon.png"/>
                         {this.props.shippingCount >= 1 ? marKion(this.props.shippingCount) : null }
                         <span className="text">待收货</span>
                     </a>
                 </div>
                 <div className="info-block">
-                    <a className="icon" href="/order/mine#complete">
+                    <a className="icon" href="/static/mall/order-list/index.html#complete">
                         <img src="images/shopping-complete-icon.png"/>
                         <span className="text">已完成</span>
                     </a>
@@ -285,7 +285,7 @@ const Voucher = React.createClass({
 
         return (
             <div className="my-voucher-cont-list">
-                <a href={ (this.props.state == 'used' || this.props.state == 'dated') ? 'javascript:void(0)' : '/productDetail?bizNo=' + data.product_biz_no}>
+                <a href={ (this.props.state == 'used' || this.props.state == 'dated') ? 'javascript:void(0)' : '/static/mall/product-detail/index.html?bizNo=' + data.product_biz_no}>
                     <div className={gray_bg ? "t-info b-color" : "t-info"}>
                         <div className="title-info">
                             <span className="title-text">{data.title}</span>
@@ -318,7 +318,6 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/user.json',
-        //url: 'http://localhost/user.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
@@ -333,11 +332,11 @@ $FW.DOMReady(function () {
 
 function back_handler() {
 
-    $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/';
+    $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/static/mall/home/index.html';
 }
 
-$FW.setLoginRedirect('/');
+$FW.setLoginRedirect('/static/mall/home/index.html');
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') back_handler()
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') back_handler()
+//};

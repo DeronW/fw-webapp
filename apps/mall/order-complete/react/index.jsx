@@ -36,7 +36,7 @@ const Success = React.createClass({
                     </div>
                 </div>
                 <div className="success-btn">
-                    <a href={"/order/detail?order_id=" + this.props.order_id} className="success-btn1">查看订单</a>
+                    <a href={"/static/mall/order-detail/index.html?order_id=" + this.props.order_id} className="success-btn1">查看订单</a>
                     <a onClick={this.backToMallHandler} className="success-btn2">返回商城</a>
                 </div>
             </div>
@@ -53,7 +53,6 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
-        //url: 'http://localhost/order-detail.json',
         success: function (data) {
             $FW.Component.hideAjaxLoading();
             ReactDOM.render(<Success
@@ -75,10 +74,10 @@ $FW.DOMReady(function () {
     }
 });
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') back2pre_page()
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') back2pre_page()
+//};
 
 function back2pre_page() {
-    location.href = '/productDetail?bizNo=' + window.ProductBizNo;
+    location.href = '/static/mall/product-detail/index.html?bizNo=' + window.ProductBizNo;
 }

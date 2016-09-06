@@ -80,7 +80,7 @@ const ConfirmOrder = React.createClass({
                     if (data.errMsg) {
                         $FW.Component.Alert(data.errMsg)
                     } else {
-                        location.href = '/order/complete?id=' + data.orderId
+                        location.href = '/static/mall/order-complete/index.html?id=' + data.orderId
                     }
                 }
             })
@@ -240,9 +240,9 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
     }
 
-    $FW.setLoginRedirect('/productDetail?bizNo=' + query.productBizNo);
+    $FW.setLoginRedirect('/static/mall/product-detail/index.html?bizNo=' + query.productBizNo);
 });
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') history.back();
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') history.back();
+//};

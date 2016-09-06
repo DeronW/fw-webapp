@@ -126,7 +126,7 @@ const ProductItem = React.createClass({
         var cover_bg = 'url(' + (this.props.img || 'images/default-product.jpg') + ')';
 
         return (
-            <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
+            <a href={'/static/mall/product-detail/index.html?bizNo=' + this.props.bizNo} className="index-actList-a">
                 <div className="list-img" style={{backgroundImage: cover_bg}}></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
@@ -168,6 +168,6 @@ function backward(){
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/';
 }
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') backward()
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') backward()
+//};

@@ -5,8 +5,8 @@ const API_PATH = document.getElementById('api-path').value;
 const MallActivity = React.createClass({
     render: function () {
         let img = this.props.activity.img ?
-            <a href="#" className="act-img-detail">
-                <img src={this.props.activity.img || 'images/default-banner.jpg'}/></a> :
+            <a href="#" className="act-img-detail"><img
+                src={this.props.activity.img || 'images/default-banner.jpg'}/></a> :
             null;
 
         return (
@@ -30,11 +30,9 @@ MallActivity.Explain = React.createClass({
     render: function () {
         let desc = null;
         if (this.state.show && this.props.desc) {
-            desc = (
-                <div className="act-explain-cont show">
-                    { this.props.desc.split(/[;|；]/).map((i, index) => <div key={index}>{trim(i)}</div>) }
-                </div>
-            )
+            desc = ( <div className="act-explain-cont show">
+                { this.props.desc.split(/[;|；]/).map((i, index) => <div key={index}>{trim(i)}</div>) }
+            </div> )
         }
 
         return (
@@ -96,7 +94,7 @@ const ProductItem = React.createClass({
         var cover_bg = 'url(' + (this.props.img || 'images/default-product.jpg') + ')';
 
         return (
-            <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
+            <a href={'/static/mall/product-detail/index.html?bizNo=' + this.props.bizNo} className="index-actList-a">
                 <div className="list-img" style={{backgroundImage: cover_bg}}></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
@@ -134,7 +132,7 @@ $FW.DOMReady(function () {
 });
 
 window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/user';
+    if (msg == 'history:back') location.href = '/static/mall/user/index.html';
 };
 
 function trim(s) {

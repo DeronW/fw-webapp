@@ -83,7 +83,6 @@ const OrderStatusBlock = React.createClass({
 
             let pay_price = d.price > 0 || d.score == 0 ? <span> &yen;{$FW.Format.currency(d.price)}</span> : null;
             let score_cost = d.score ? d.score + '工分' : null;
-            //let ticket_num = order.ticket_num ? ' 兑换券 x' + order.ticket_num : null;
 
             return (
                 <div className="order-block" key={index}>
@@ -252,7 +251,6 @@ $FW.DOMReady(function () {
     }
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/order_detail.json?orderId=" + order_id,
-        //url: 'http://localhost/order-detail.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
@@ -265,8 +263,7 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-    $FW.Browser.inApp() && $FW.Browser.inIOS() ? NativeBridge.close() : location.href = '/order/mine';
-    //location.href = '/order/mine';
+    location.href = '/static/mall/order-list/index.html';
 }
 
 window.onNativeMessageReceive = function (msg) {
