@@ -112,13 +112,16 @@ const Recharge = React.createClass({
 });
 
 Recharge.OrderSuccess = React.createClass({
+    clickHandler: function () {
+        location.reload()
+    },
     render: function () {
         return (
             <div className="order-success">
                 <img src="images/order-success.png"/>
                 <div className="success-btn">
-                    <a className="continue-charge">继续充值</a>
-                    <a className="continue-invest">去投资</a>
+                    <a className="continue-charge" onClick={this.clickHandler}>继续充值</a>
+                    <a className="continue-invest" href="/">去投资</a>
                 </div>
             </div>
         )
