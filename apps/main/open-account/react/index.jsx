@@ -318,6 +318,7 @@ var From = React.createClass({
                         </span>
                     </div>
         };
+        
 
         var inputNullFun = function() {
             var a = _this.state.inputValFirst;
@@ -326,11 +327,11 @@ var From = React.createClass({
             var d = _this.state.bankCard;
             var e = _this.state.showSelectBtn;
 
-            if(_this.state.userOpenStatus === "1") {
+            if(_this.state.userOpenStatus === "1" ) {
                 if ( a === null) {
                     return true;
                 } else {
-                    if((b === true) && (c === true) && (d === true) && (e === true)) {
+                    if(((b === true) && (c === true) && (d === true) && (e === true)) || ((d === true) && (e === true)) ) {
                         return false;
                     } else {
                         return true;
