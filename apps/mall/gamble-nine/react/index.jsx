@@ -21,7 +21,10 @@ const NineActivity = React.createClass({
     componentDidMount: function () {
         $FW.Ajax({
             url: `${API_PATH}mall/api/magic/v1/winnersList.json?activityId=${ACTIVITY_ID}&num=20`,//获奖名单
-            success: (data) => this.setState({prize_list: data.list})
+            success: (data) =>{
+            	data.list=data.list||[];
+            	this.setState({prize_list: data.list})
+            } 
         });
     },
 
