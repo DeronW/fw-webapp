@@ -107,13 +107,16 @@ const Withdrawals = React.createClass({
 		var inputVal = this.state.inputText;
 		var code = this.state.code;
 
-		$FW.Ajax({
+		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + inputVal + "&validateCode=" + code + "&bankNo=" + this.state.bankAccountId;
+
+		/*$FW.Ajax({
 			url: API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + inputVal + "&validateCode=" + code + "&bankNo=" + this.state.bankAccountId,
 			success: function(data) {
-
+				location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + inputVal + "&validateCode=" + code + "&bankNo=" + this.state.bankAccountId;
+				console.log(API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + inputVal + "&validateCode=" + code + "&bankNo=" + this.state.bankAccountId);
 			}
 
-		})
+		})*/
 	},
 	
     orderConfirm: function () {

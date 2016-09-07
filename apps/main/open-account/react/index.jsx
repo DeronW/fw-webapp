@@ -318,7 +318,7 @@ var From = React.createClass({
                         </span>
                     </div>
         };
-        
+
 
         var inputNullFun = function() {
             var a = _this.state.inputValFirst;

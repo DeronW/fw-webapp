@@ -57,6 +57,8 @@ var PswFrom = React.createClass({
         clearInterval(this.interval);
     },
     handerIdentifyingCode: function () {
+        this.props.callbackPromptShow(true);
+
         var _this = this;
 
         _this.setState({
@@ -130,7 +132,8 @@ var Body = React.createClass({
         return {
             getAjaxUserInfo: userInfoData,
             phoneNumber: userInfoData.userInfo.phoneNum,
-            code: null
+            code: null,
+            promptShow: false
         };
     },
     handlerSettingsPassword: function () {
@@ -143,6 +146,11 @@ var Body = React.createClass({
             code: val
         });
     },
+    getPromptShow: function(booleanVal) {
+        this.setState({
+            promptShow: booleanVal
+        });
+    },
     render: function () {
 
         return (
@@ -152,14 +160,22 @@ var Body = React.createClass({
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
                     callbackInputVal={this.getCallbackInputVal}
+                    callbackPromptShow={this.getPromptShow}
                 />
-                <div className="old-user-prompt-text">
-                    已向手机
+
+                <div className="phone-code-prompt">
                     {
-                        this.state.phoneNumber.substring(0, 3) + "****" + this.state.phoneNumber.substring((this.state.phoneNumber.length - 4), this.state.phoneNumber.length)
+                        this.state.promptShow ?
+                            <div className="old-user-prompt-text">
+                                已向手机
+                                {
+                                    this.state.phoneNumber.substring(0, 3) + "****" + this.state.phoneNumber.substring((this.state.phoneNumber.length - 4), this.state.phoneNumber.length)
+                                }
+                                发送短信验证码，若收不到，请 <a href="" className="c">点击这里</a> 获取语音验证码。
+                            </div> : null
                     }
-                    发送短信验证码，若收不到，请 <a href="" className="c">点击这里</a> 获取语音验证码。
                 </div>
+
                 <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword}/>
             </div>
         );
