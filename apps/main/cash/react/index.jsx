@@ -56,13 +56,11 @@ const Withdrawals = React.createClass({
 			return false;
 		}
 
-
 		if(e.target.value >= 100000) {
 			this.setState({
 				inputBlur: true
 			});
 		}
-
 
 		if(e.target.value === "0" ) {
 			$FW.Component.Toast("第一位不能为0");
@@ -205,7 +203,13 @@ const Withdrawals = React.createClass({
 		var _this = this;
 		var fee = this.props.data.fee;
 
-		var commissionCharge = ((fee.slice(0, fee.length - 1) * 10) * (this.state.inputText * 100)) / 100000;
+		var commissionCharge = function() {
+			if(this.props.data.isFeeEnable) {
+				return 0;
+			} else {
+				return ((fee.slice(0, fee.length - 1) * 10) * (this.state.inputText * 100)) / 100000;
+			}
+		};
 
 		var pop = function() {
 			return <div className="cang">
@@ -215,7 +219,7 @@ const Withdrawals = React.createClass({
 						<div className="fact">
 							<div className="">
 								<span className="acti">实际到账金额</span>
-								<span className="san">{_this.state.inputText - commissionCharge}</span>
+								<span className="san">{_this.state.inputText - commissionCharge()}</span>
 							</div>
 							<div className="pot-a">
 								<span className="iner">提现金额</span>
@@ -223,7 +227,7 @@ const Withdrawals = React.createClass({
 							</div>
 							<div className="pot-b">
 								<span className="iner">提现手续费</span>
-								<span className="zeor">{commissionCharge}</span>
+								<span className="zeor">{commissionCharge()}</span>
 							</div>
 						</div>
 
