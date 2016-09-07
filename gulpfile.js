@@ -59,9 +59,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-
-        api_path: "http://xjb.9888.cn/",
-
+        api_path: "http://pengyan.9888.cn/",
         include_components: common_components,
         include_common_js: common_js
     });
@@ -97,8 +95,8 @@ const MALL_APP_NAMES = [
     'new-deliver-address',
     'error-page',
     'new-home',
-    'product-category',
-    'product-search'
+    'gamble-nine',
+    'product-category'
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
@@ -124,27 +122,5 @@ MALL_APP_NAMES.forEach(function (i) {
     });
 });
 
-// START
-// 针对九宫格游戏, 单独配置打包过程
-var nine = 'gamble-nine';
-gt('mall', nine, {
-    debug: true,
-    api_path: 'http://localhost/fake-api/',
-    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
-    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
-});
-
-gt('mall', nine, {
-    cmd_prefix: 'pack',
-    api_path: 'http://mmall.9888.cn/',
-    cdn_prefix: '/static/mall/' + nine + '/',
-    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
-    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
-});
-// 针对九宫格游戏, 单独配置打包过程
-// END
-
-
 gulp.task('build:main', gulp.series(MAIN_APP_NAMES.map((name) => `main:pack:${name}:revision`)));
-gulp.task('build:mall', gulp.series(MALL_APP_NAMES.concat([nine]).map((name) => `mall:pack:${name}:revision`)));
-gulp.task('build:test-mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:${name}`)));
+gulp.task('build:mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:pack:${name}:revision`)));
