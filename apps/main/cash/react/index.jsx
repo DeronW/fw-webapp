@@ -33,21 +33,59 @@ const Withdrawals = React.createClass({
 			inputBlur: false,
 			bankAccountId: "",
 			code: null,
-			inputVal: ""
+			inputVal: "",
+			selectBankShow: false,
+			createShow: false,
+			cashInputShow: false
 	    }
 	},
-	
+	componentDidUpdate: function() {
+		if(ReactDOM.findDOMNode(this.refs.withdrawalInput) !== null) {
+			ReactDOM.findDOMNode(this.refs.withdrawalInput).focus();
+		}
+	},
 	handleJump: function(){
-		this.setState({jump: true})
+		this.setState({
+			jump: true
+		})
 	},
 
 	handlerChange: function(e){
-		this.setState({inputText: numberFormat.format(e.target.value)});
-		this.setState({alter: true})
+	/*	if(e.target.value > this.props.data.accountAmount) {
+			$FW.Component.Toast("输入的金额大于可提现的金额");
+			return false;
+		}*/
 
-		this.setState({
-			inputVal: e.target.value
-		});
+
+		if(e.target.value >= 100000) {
+			this.setState({
+				inputBlur: true
+			});
+		}
+
+
+		if(e.target.value === "0" ) {
+			$FW.Component.Toast("第一位不能为0");
+			this.setState({
+				inputText: ""
+			});
+			return false;
+		} else {
+			this.setState({
+				inputText: numberFormat.format(e.target.value)
+			});
+			this.setState({alter: true})
+
+			this.setState({
+				inputVal: numberFormat.format(e.target.value),
+			});
+		}
+
+		if(e.target.value === "") {
+			this.setState({
+				inputBlur: false
+			});
+		}
 
 	},
 		
@@ -65,6 +103,8 @@ const Withdrawals = React.createClass({
 	},
 	
 	submitHandle: function(){
+		console.log("submitHandle");
+
 		if(this.props.data.accountAmount === 0) {
 			$FW.Component.Toast("可提现金额0元");
 			return false;
@@ -129,9 +169,13 @@ const Withdrawals = React.createClass({
         this.setState({order_state: 'fail'})
     },
 	inputBlur: function() {
-		this.setState({
-			inputBlur: true
-		});
+		if(this.state.inputText > 10000) {
+			this.setState({
+				inputBlur: true,
+				cashInputShow: true
+			});
+		}
+
 	},
 	colseBtn: function() {
 		this.setState({
@@ -141,22 +185,27 @@ const Withdrawals = React.createClass({
 	},
 	modifyBtn: function() {
 		this.setState({
-			inputBlur: false
+			inputBlur: false,
+			selectBankShow: false,
+			cashInputShow: false,
+			inputVal: ''
 		});
 	},
 	getCallbackCode: function(val) {
-		console.log(val);
 		this.setState({
 			code: val
+		});
+	},
+	getCreateShow: function(booleanVal) {
+		this.setState({
+			createShow: booleanVal
 		});
 	},
 	render : function(){
 		var _this = this;
 		var fee = this.props.data.fee;
 
-		var commissionCharge = ((fee.slice(0, fee.length - 1) * 10) * (this.state.inputText * 100)) / 100000
-		//var commissionCharge = ((fee.slice(0, fee.length - 1)) * (this.state.inputText * 100)) / 100
-
+		var commissionCharge = ((fee.slice(0, fee.length - 1) * 10) * (this.state.inputText * 100)) / 100000;
 
 		var pop = function() {
 			return <div className="cang">
@@ -217,9 +266,10 @@ const Withdrawals = React.createClass({
 					<div className="pure">
 						<div className="xuanwu">
 							{
-								this.state.inputBlur ? <div className="">{this.state.inputText}</div> : <input
+								this.state.cashInputShow ? <div className="">{this.state.inputText}</div> : <input
 										value={this.state.inputText}
 										onInput={this.textInput}
+										ref="withdrawalInput"
 										onChange={this.handlerChange}
 										onBlur={this.inputBlur}
 										className="moneyTxt" type="text" placeholder="请输入提现金额"
@@ -231,23 +281,23 @@ const Withdrawals = React.createClass({
 					</div>
 				</div>
 				
-				{(this.state.inputText >= 100000) ? <Greater
+				{this.state.inputBlur? <Greater
 					name={this.state.bankName}
 					opt={this.props.opt}
-					jump={this.state.jump}
+					callbackCreateShow={this.getCreateShow}
 					handleJump={this.handleJump} /> : null}
 				
 				{this.state.greater_than ? <Neg accountAmout={this.props.data.accountAmount} /> : null}
 				{this.state.inputVal !== "" ? <Special accountAmout={this.props.data.accountAmount}  callbackCode={this.getCallbackCode}/> : null}
 				
-				{this.state.jump ? <Withdrawals.BankAccount
+				{this.state.createShow ? <Withdrawals.BankAccount
 					
 					onClear={this.state.handleClear}
 					onFocus={this.focusHandler}
 					entry={this.state.entry}
 					onInput={this.inputHandler}
 					value={this.state.value}
-					
+					callbackSlectBank={this.getCreateShow}
 					callbackBankIndex={this.getBankIndex}
 					
 					/> : null}
@@ -324,7 +374,8 @@ Withdrawals.BankAccount = React.createClass({
 	},
 	
 	bankHandler: function (index) {
-		
+		this.props.callbackSlectBank(false);
+
         this.props.callbackBankIndex(this.state.bankList[index]);
     },
 	
@@ -365,10 +416,12 @@ Withdrawals.BankAccount = React.createClass({
 })
 
 const Greater = React.createClass({  
-	
+	popClickShow: function() {
+		this.props.callbackCreateShow(true);
+	},
 	render : function(){
 		return (
-			<div className="modify" onClick={this.props.handleJump} >
+			<div className="modify" onClick={this.popClickShow} >
 				<div className="wire"></div>
 				<div className="pure">
 					<div className="xuanwu" style={{fontSize:'32px'}}>{this.props.name ? this.props.name : '开户银行'}</div>
@@ -579,7 +632,7 @@ Withdrawals.OrderProcessing = React.createClass({
 });
 
 $FW.DOMReady(function(){
-	ReactDOM.render(<Header title={"提现"} back_handler={backward}/>, document.getElementById('header'));
+	ReactDOM.render(<Header title={"提现"} />, document.getElementById('header'));
 	$FW.Ajax({
         url: API_PATH +"mpwap/api/v1/getWithdrawInfo.shtml",
 		enable_loading: true,
@@ -589,6 +642,3 @@ $FW.DOMReady(function(){
     })
 });
 
-function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
-}
