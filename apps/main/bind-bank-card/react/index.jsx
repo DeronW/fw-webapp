@@ -75,12 +75,12 @@ const Bomb = React.createClass({
 const Invalid = React.createClass({
 	render : function(){
 		return (
-			<div className="upgrade">
+			<a className="upgrade" href="/static/wap/open-account/index.html">
 				<div className="dep clearfix">
 					<div className="pdlf">银行卡已失效，升级银行存管账户重新激活</div>
 					<div className="pdrt"><a href=""><img src="images/card-a.png"/></a></div>
 				</div>
-			</div>
+			</a>
 		)
 	}
 })
