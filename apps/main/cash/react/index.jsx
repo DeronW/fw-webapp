@@ -51,10 +51,10 @@ const Withdrawals = React.createClass({
 	},
 
 	handlerChange: function(e){
-	/*	if(e.target.value > this.props.data.accountAmount) {
+		if(e.target.value > this.props.data.accountAmount) {
 			$FW.Component.Toast("输入的金额大于可提现的金额");
 			return false;
-		}*/
+		}
 
 
 		if(e.target.value >= 100000) {
