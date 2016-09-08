@@ -98,10 +98,10 @@ const SearchBar = React.createClass({
 
 const ExchangeBar = React.createClass({
     getInitialState: function () {
-        this.tabs = ['proceeds', 'salestime', 'pricerank', 'filter'];
+        this.tabs = ['defaultSort','proceeds', 'salestime', 'scorerank', 'filter'];
         this.count = 20;
         return {
-            tab: 'proceeds',
+            tab: 'defaultSort',
             sort: -1,
             vipLevel: 0
         }
@@ -113,20 +113,83 @@ const ExchangeBar = React.createClass({
         };
         search(options, true);
     },
+    tabClickHandler: function(tabName){        
+        if(tabName=='defaultSort'){
+        	this.setState({
+	        	sort: -1,
+	        	tab: tabName,
+	        });
+        	var options = {
+	            sort: this.state.sort,
+	        };
+        	search(options, true);
+        }else if(tabName=='proceeds'){
+        	this.state.sort==3 ? this.setState({sort:4}) : this.setState({sort:3});      	
+        	var options = {
+	            sort: this.state.sort,
+	        };
+        	search(options, true);
+        }else if(tabName=='salestime'){
+        	this.state.sort==5 ? this.setState({sort:0}) : this.setState({sort:5});      	
+        	var options = {
+	            sort: this.state.sort,
+	        };
+        	search(options, true);
+        }else if(tabName=='scorerank'){
+        	this.state.sort==1 ? this.setState({sort:2}) : this.setState({sort:1});      	
+        	var options = {
+	            sort: this.state.sort,
+	        };
+        	search(options, true);
+        }else if(tabName=='filter'){
+        	
+        }
+        this.setState({tab: tabName});
+    },
     render: function () {
         var _this = this;
 
         let tab = function (i) {
             let name = {
+            	defaultSort:'默认',
                 proceeds: '销量',
                 salestime: '上架时间',
-                pricerank: '价格',
+                scorerank: '工分',
                 filter: '筛选'
+            };
+            let rank_icon=(j)=>{
+            	if(j=='proceeds'){
+            		if(_this.state.sort==3){
+            			return 'rank-icon-up'
+            		}else if(_this.state.sort==4){
+            			return 'rank-icon-down'
+            		}else{
+            			return 'rank-icon'
+            		}
+            	}else if(j=='salestime'){
+            		if(_this.state.sort==5){
+            			return 'rank-icon-up'
+            		}else if(_this.state.sort==0){
+            			return 'rank-icon-down'
+            		}else{
+            			return 'rank-icon'
+            		}
+            	}else if(j=='scorerank'){
+            		if(_this.state.sort==1){
+            			return 'rank-icon-up'
+            		}else if(_this.state.sort==2){
+            			return 'rank-icon-down'
+            		}else{
+            			return 'rank-icon'
+            		}
+            	}else{
+            		return 'rank-icon-no'
+            	}
             };
             return (
                 <div key={i} className={i==_this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
                      onClick={function(){_this.tabClickHandler(i)}}>
-                    <span className="text">{name[i]}</span>
+                    {name[i]}<span className={rank_icon(i)}></span>
                 </div>
             )
         };
@@ -138,16 +201,11 @@ const ExchangeBar = React.createClass({
         let viplevel_array = ['不限', '普通会员', 'Vip1专享', 'Vip2专享', 'Vip3专享', 'Vip4专享'];
         let viplevel_item = viplevel_array.map((name, index) => <span className="viplevel-item-wrap" key={index}><span
             className="viplevel-item">{name}</span></span>);
-
         return (
             <div className="filter-tab">
                 <div className="ui-tab">
                     <div className="ui-tab-block">
                         {this.tabs.map(tab)}
-                        <span className="pricerank-icon"></span>
-                        <span className="line-icon line-icon1"></span>
-                        <span className="line-icon line-icon2"></span>
-                        <span className="line-icon line-icon3"></span>
                     </div>
                 </div>
                 <div className="filter-box">
@@ -253,7 +311,7 @@ function search(options, refresh) {
 
 
     $FW.Ajax({
-        url: API_PATH + '',
+        url: API_PATH + 'mall/api/index/v1/search.json',
         data: _searchOptions,
         enable_loading: true,
         success: (data) => {

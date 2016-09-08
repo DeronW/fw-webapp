@@ -30,27 +30,42 @@ a, input {
     height: 88px;
     border-bottom: 1px solid #d8d8d8;
     position:relative;
-
-
-    .ui-tab-li {
+    .ui-tab-li{
+      position: relative;
       float: left;
-      width: 25%;
       height: 88px;
       text-align: center;
       background: #fff;
-      .text {
-        line-height: 88px;
-        font-size: 30px;
-      }
+      line-height: 88px;
+      font-size: 30px;
     }
-
+    .ui-tab-li:nth-child(1){
+        width:122px;
+        background:url(../images/line-icon.jpg) no-repeat right 30px;  
+    }
+    .ui-tab-li:nth-child(2){
+        width:141px;
+        text-indent:28px;
+        text-align:left;
+        background:url(../images/line-icon.jpg) no-repeat right 30px;  
+    }
+    .ui-tab-li:nth-child(3){
+        width:201px;
+        text-indent:30px;
+        text-align:left;
+        background:url(../images/line-icon.jpg) no-repeat right 30px;  
+    }
+    .ui-tab-li:nth-child(4){
+        width:142px;
+        background:url(../images/line-icon.jpg) no-repeat right 30px; 
+        text-indent:30px;
+        text-align:left;         
+    }
+    .ui-tab-li:nth-child(5){
+        width:114px;  
+    }
     .ui-select-li {
-      .text {
-        display: block;
-        width: 120px;
-        margin: 0 auto;
         color: #fd4d4c;
-      }
     }
   }
 }
@@ -262,31 +277,37 @@ a, input {
   left:0;
   bottom:0;
 }
-.line-icon{
-  display:block;
-  background:url(../images/line-icon.jpg) no-repeat;
-  width:4px;
-  height:28px;
-  position:absolute;
-  top:30px;
-}
-.line-icon1{
-  left:163px;
-}
-.line-icon2{
-  left:369px;
-}
-.line-icon3{
-  left:537px;
-}
-.pricerank-icon{
+
+
+.rank-icon{
   display:block;
   background:url(../images/exchange-icon.jpg) no-repeat;
   width:14px;
   height:26px;
   position:absolute;
   top:31px;
-  left:491px;
+  right:34px;
+}
+.rank-icon-up{
+  display:block;
+  background:url(../images/exchange-icon-up.jpg) no-repeat;
+  width:14px;
+  height:26px;
+  position:absolute;
+  top:31px;
+  right:34px;
+}
+.rank-icon-down{
+  display:block;
+  background:url(../images/exchange-icon-down.jpg) no-repeat;
+  width:14px;
+  height:26px;
+  position:absolute;
+  top:31px;
+  right:34px;
+}
+.rank-icon-no{
+    display:none;
 }
 .filter-box{
   width:720px;
