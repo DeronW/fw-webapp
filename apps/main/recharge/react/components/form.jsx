@@ -10,6 +10,7 @@ const Form = React.createClass({
     },
     getInitialState: function () {
         return {
+            phone:this.props.phone,
             counting: 0
         }
     },

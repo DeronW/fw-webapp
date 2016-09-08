@@ -443,10 +443,7 @@ em, i {
   background:url(../images/avail-ticket.png) no-repeat;
   background-size:100% 100%;
 }
-.gray-bg{
-  background:url(../images/unvail-ticket.png) no-repeat;
-  background-size:100% 100%;
-}
+
 .my-voucher-cont-list {
   .position(relative);
   max-width: 658px;
@@ -454,14 +451,12 @@ em, i {
   height:184px;
   margin: 20px auto;
   .border-radius-als(14px);
-  .back-color(#fff);
-  .border(1px, solid, #d8d8d8);
   overflow: hidden;
 
   .watermark {
     position: absolute;
-    right: -25px;
-    bottom: -25px;
+    right: -15px;
+    bottom: -15px;
   }
 
   .t-info {
@@ -477,7 +472,7 @@ em, i {
         .fl();
         font-size:26px;
         font-weight: normal;
-        max-width: 412px;
+        max-width: 426px;
         text-overflow: ellipsis;
         height: 80px;
         overflow: hidden;
@@ -515,16 +510,28 @@ em, i {
     .text{
       position:absolute;
       left:20px;
-      bottom:13px;
+      bottom:3px;
+      line-height:38px;
     }
 
     .btn-exchange {
       float: right;
       display:block;
       width:124px;
-      height:40px;
+      height:0px;
       background:red;
     }
   }
 
+}
+.gray-bg{
+  background:url(../images/unvail-ticket.png) no-repeat;
+  background-size:100% 100%;
+  .t-info{
+    .clear-info {
+      .text-timer {
+        color:#999;
+      }
+    }  
+  }  
 }

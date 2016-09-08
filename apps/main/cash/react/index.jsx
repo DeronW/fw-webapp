@@ -307,7 +307,7 @@ const Withdrawals = React.createClass({
 					
 					/> : null}
 				
-				<div className="xt" onClick={this.submitHandle} >提现</div>
+				<div className="xt" onClick={this.submitHandle} >下一步</div>
 				
 				<div>
 					<div className="hsuo">提现说明</div>
