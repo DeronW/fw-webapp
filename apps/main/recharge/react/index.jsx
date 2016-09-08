@@ -53,7 +53,8 @@ const Recharge = React.createClass({
     render: function () {
 
         var deny = <Mask username={this.props.data.bankInfo.realName}/>;
-
+        var bankCardNo = this.props.data.bankInfo.bankCardNo;
+        let idCarNoNntercept = bankCardNo.substring(0, 4) + "********" + bankCardNo.substring((bankCardNo.length - 4), bankCardNo.length);
         return (
             <div>
                 {this.state.special_user ? deny : null}
@@ -70,7 +71,7 @@ const Recharge = React.createClass({
                     </div>
                     <div className="belon">
                         <div className="name">{this.props.data.bankInfo.realName}</div>
-                        <div className="num">{this.props.data.bankInfo.bankCardNo}</div>
+                        <div className="num">{idCarNoNntercept}</div>
                     </div>
                     <div className="instant-icon"></div>
                 </div>
