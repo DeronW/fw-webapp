@@ -50,11 +50,11 @@ module.exports = function (site_name, project_name, configs) {
         `${lib_path}native-bridge-0.2.0.js`
     ];
     if (CONFIG.debug) {
-        common_javascript_files.push(`${lib_path}react-15.0.1/react.js`);
-        common_javascript_files.push(`${lib_path}react-15.0.1/react-dom.js`);
+        common_javascript_files.push(`${lib_path}react-15.3.1/react.min.js`);
+        common_javascript_files.push(`${lib_path}react-15.3.1/react-dom.min.js`);
     } else {
-        common_javascript_files.push(`${lib_path}react-15.0.1/react.min.js`);
-        common_javascript_files.push(`${lib_path}react-15.0.1/react-dom.min.js`);
+        common_javascript_files.push(`${lib_path}react-15.3.1/react.min.js`);
+        common_javascript_files.push(`${lib_path}react-15.3.1/react-dom.min.js`);
     }
 
     common_javascript_files = common_javascript_files.concat(

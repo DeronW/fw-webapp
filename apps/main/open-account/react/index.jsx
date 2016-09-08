@@ -13,6 +13,13 @@ var numberFormat = {
     }
 };
 
+// 验证身份证
+function isCardNo(card) {
+    var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    return pattern.test(card);
+}
+
+
 function space(str) {
     return str.replace(/ /g, "");
 }
@@ -555,6 +562,9 @@ var Body = React.createClass({
         });
     },
     clickFun: function() {
+        console.log(this.dataText)
+
+
         this.fromData;
         var _this = this;
 
@@ -584,9 +594,9 @@ var Body = React.createClass({
         if(this.dataText !== undefined) {
             if((this.dataText.length == 0) || (this.dataText == undefined) ) {
                 $FW.Component.Toast("不能为空");
-            }
 
-            return false;
+                return false;
+            }
         }
 
         if(this.state.validateCode == null) {
@@ -596,9 +606,18 @@ var Body = React.createClass({
         }
 
 
+        if(!isCardNo(this.state.userInfo.idCardNo)) {
+            $FW.Component.Toast("身份证不格式不正确");
+            return false;
+        }
+
+
+        console.log(_this.state.userInfo);
+
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/bind/card.shtml",
             method: "POST",
+            enable_loading: true,
             data: _this.state.userInfo,
             success: function(data) {
                 console.log(data);
