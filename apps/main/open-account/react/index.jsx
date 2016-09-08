@@ -597,8 +597,6 @@ var Body = React.createClass({
 
                 return false;
             }
-            console.log("aaaaa");
-
         }
 
         if(this.state.validateCode == null) {

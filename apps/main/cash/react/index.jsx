@@ -167,13 +167,13 @@ const Withdrawals = React.createClass({
         this.setState({order_state: 'fail'})
     },
 	inputBlur: function() {
-		//if(this.state.inputText > 10000) {
+		if(this.state.inputText > 10000) {
 			this.setState({
 				inputBlur: true,
 				cashInputShow: true,
 				alter: false
 			});
-		//}
+		}
 
 	},
 	colseBtn: function() {
@@ -205,10 +205,10 @@ const Withdrawals = React.createClass({
 		var fee = this.props.data.fee;
 
 		var commissionCharge = function() {
-			if(this.props.data.isFeeEnable) {
+			if(_this.props.data.isFeeEnable) {
 				return 0;
 			} else {
-				return ((fee.slice(0, fee.length - 1) * 10) * (this.state.inputText * 100)) / 100000;
+				return ((fee.slice(0, fee.length - 1) * 10) * (_this.state.inputText * 100)) / 100000;
 			}
 		};
 
