@@ -184,12 +184,15 @@ var From = React.createClass({
         var _this = this
         var phoneNo = this.props.ajaxData.userInfo.phoneNum;
 
-        if(this.state.userOpenStatus === "1") {
-            if(this.state.nameVal === false) {
+        //console.log("1");
+
+        //console.log(this.props.alreadyBankData)
+
+        //if(this.state.userOpenStatus === "1") {
+            if(this.props.alreadyBankData === null) {
                 return false;
             }
-        }
-
+        //}
 
         _this.setState({
             code: 1
@@ -313,7 +316,11 @@ var From = React.createClass({
                 <span className="text id-text" onClick={_this.amendId}>{userAjaxData.userInfo.bankCard}</span>
         };
 
+
+        //console.log(_this.props.alreadyBankData);
+
         var selectEml = function() {
+
             return <div className="">
                         <span className="bank-text">
                             {
@@ -333,6 +340,7 @@ var From = React.createClass({
             var c = _this.state.userId;
             var d = _this.state.bankCard;
             var e = _this.state.showSelectBtn;
+            var f = _this.props.alreadyBankData;
 
             if(_this.state.userOpenStatus === "1" ) {
                 if ( a === null) {
@@ -346,6 +354,7 @@ var From = React.createClass({
 
                 }
             } else {
+                console.log("4");
                 return false;
             }
 
@@ -389,7 +398,7 @@ var From = React.createClass({
 
                         <span className="bank-logo">
                             {
-                                this.state.showSelectBtn === ""  ? null : selectEml()
+                                this.props.alreadyBankData === null  ? null : selectEml()
                             }
                         </span>
                     </div>
@@ -405,7 +414,7 @@ var From = React.createClass({
                             {
                                 this.state.code ?
                                     <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                    <span className={inputNullFun() ? "timing-text" : "btn"} onClick={this.headlerCode}>获取短信验证码</span>
+                                    <span className={_this.props.alreadyBankData === null ? "timing-text" : "btn"} onClick={this.headlerCode}>获取短信验证码</span>
                             }
 
                         </span>
@@ -445,7 +454,8 @@ var SelectBank = React.createClass({
         });
     },
     backBtnClick: function() {
-        this.props.callbackBtn(false);
+        //this.props.callbackBtn(false);
+        this.props.callbackBtnVal();
     },
     supportQuickPayClick: function(index) {
         this.props.callbackAlreadyBank(this.state.bankListData.bankList[index]);
@@ -547,7 +557,8 @@ var Body = React.createClass({
                 openStatus: getAjaxUserInfo.openStatus,
                 realName: getAjaxUserInfo.userInfo.realName,
                 validateCode: null
-            }
+            },
+            getCallbackBtnVal: false
         };
     },
     fromData: function(dataText) {
@@ -631,6 +642,11 @@ var Body = React.createClass({
             backSelect: show
         });
     },
+    getCallbackBtn: function() {
+        this.setState({
+            backSelect: false
+        });
+    },
     alreadySelectBank: function(data) {
         var newUserInfo = this.state.userInfo;
 
@@ -694,6 +710,7 @@ var Body = React.createClass({
     render: function() {
         var _this = this;
 
+
         return (
             <div className="cnt">
                 <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnFun={this.backBtnClick} />
@@ -703,7 +720,6 @@ var Body = React.createClass({
                 <From
                       callbackParent={this.fromData}
                       callbackBank={this.selectBank}
-
                       alreadyBankData={this.state.alreadyBank}
                       validateCode={this.getValidateCode}
                       callbackPleaseCode={this.pleaseValidateCode}
@@ -711,6 +727,7 @@ var Body = React.createClass({
                       callbackUserName={this.getUserName}
                       callbackUserId={this.getUserId}
                       callbackBankCardNo={this.getBankCardNo}
+                      transmittalCallbackBtnVal={this.state.getCallbackBtnVal}
                 />
 
                 <Btn btnText={"同意"} Fun={this.clickFun} />
@@ -718,7 +735,12 @@ var Body = React.createClass({
                 <Text />
 
                 {
-                    this.state.backSelect ? <SelectBank callbackBtn={this.selectBank} callbackAlreadyBank={this.alreadySelectBank}/> : null
+                    _this.state.backSelect  ? <SelectBank
+                        callbackBtn={this.selectBank}
+                        callbackBtnVal={this.getCallbackBtn}
+                        callbackAlreadyBank={this.alreadySelectBank}
+
+                    /> : null
                 }
 
 
