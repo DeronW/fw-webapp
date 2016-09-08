@@ -62,6 +62,7 @@ const Withdrawals = React.createClass({
 			});
 		}
 
+
 		if(e.target.value === "0" ) {
 			$FW.Component.Toast("第一位不能为0");
 			this.setState({
@@ -109,7 +110,7 @@ const Withdrawals = React.createClass({
 		}
 
 		if(this.state.inputText < 10) {
-			$FW.Component.Toast("提现金额必须大于10元");
+			$FW.Component.Toast("提现金额不能低于10元");
 			return false;
 		}
 
