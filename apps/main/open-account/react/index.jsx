@@ -184,15 +184,11 @@ var From = React.createClass({
         var _this = this
         var phoneNo = this.props.ajaxData.userInfo.phoneNum;
 
-        //console.log("1");
+        console.log(this.userInfoAllVal());
 
-        //console.log(this.props.alreadyBankData)
-
-        //if(this.state.userOpenStatus === "1") {
-            if(this.props.alreadyBankData === null) {
-                return false;
-            }
-        //}
+        if(this.userInfoAllVal()) {
+            return false;
+        }
 
         _this.setState({
             code: 1
@@ -298,6 +294,21 @@ var From = React.createClass({
             });
         }
     },
+
+    userInfoAllVal: function() {
+        var _this = this;
+
+        var val = _this.props.transmittalInputAllVal;
+
+        if(val.realName !== "" && val.idCardNo !== "" && val.bankCardNo !== "" && val.bankNo !== null) {
+            console.log("1");
+            return false;
+        } else {
+            console.log("2");
+            return true;
+        }
+
+    },
     render: function() {
         var _this = this;
 
@@ -316,50 +327,19 @@ var From = React.createClass({
                 <span className="text id-text" onClick={_this.amendId}>{userAjaxData.userInfo.bankCard}</span>
         };
 
-
-        //console.log(_this.props.alreadyBankData);
-
         var selectEml = function() {
 
             return <div className="">
                         <span className="bank-text">
                             {
-                                _this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
+                                _this.props.alreadyBankData === null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
                             }
                         </span>
                         <span className="img">
-                            <img src={_this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl} className="r-icon" />
+                            <img src={_this.props.alreadyBankData === null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl} className="r-icon" />
                         </span>
                     </div>
         };
-
-
-        var inputNullFun = function() {
-            var a = _this.state.inputValFirst;
-            var b = _this.state.nameVal;
-            var c = _this.state.userId;
-            var d = _this.state.bankCard;
-            var e = _this.state.showSelectBtn;
-            var f = _this.props.alreadyBankData;
-
-            if(_this.state.userOpenStatus === "1" ) {
-                if ( a === null) {
-                    return true;
-                } else {
-                    if(((b === true) && (c === true) && (d === true) && (e === true)) || ((d === true) && (e === true)) ) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-
-                }
-            } else {
-                console.log("4");
-                return false;
-            }
-
-        };
-
 
         return (
             <div className="">
@@ -398,7 +378,7 @@ var From = React.createClass({
 
                         <span className="bank-logo">
                             {
-                                this.props.alreadyBankData === null  ? null : selectEml()
+                                _this.props.transmittalInputAllVal.bankNo == null  ? null : selectEml()
                             }
                         </span>
                     </div>
@@ -414,7 +394,7 @@ var From = React.createClass({
                             {
                                 this.state.code ?
                                     <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                    <span className={_this.props.alreadyBankData === null ? "timing-text" : "btn"} onClick={this.headlerCode}>获取短信验证码</span>
+                                    <span className={this.userInfoAllVal() ? "timing-text" : "btn"} onClick={this.headlerCode}>获取短信验证码</span>
                             }
 
                         </span>
@@ -721,6 +701,7 @@ var Body = React.createClass({
                       callbackParent={this.fromData}
                       callbackBank={this.selectBank}
                       alreadyBankData={this.state.alreadyBank}
+                      transmittalInputAllVal={this.state.userInfo}
                       validateCode={this.getValidateCode}
                       callbackPleaseCode={this.pleaseValidateCode}
                       ajaxData={this.props.activity}

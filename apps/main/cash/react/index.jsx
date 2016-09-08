@@ -40,9 +40,12 @@ const Withdrawals = React.createClass({
 	    }
 	},
 	componentDidUpdate: function() {
-		if(ReactDOM.findDOMNode(this.refs.withdrawalInput) !== null) {
-			ReactDOM.findDOMNode(this.refs.withdrawalInput).focus();
+		if(this.state.inputBlur) {
+			if(ReactDOM.findDOMNode(this.refs.withdrawalInput) !== null) {
+				ReactDOM.findDOMNode(this.refs.withdrawalInput).focus();
+			}
 		}
+
 	},
 	handleJump: function(){
 		this.setState({
@@ -52,7 +55,7 @@ const Withdrawals = React.createClass({
 
 	handlerChange: function(e){
 		if(e.target.value > this.props.data.accountAmount) {
-			$FW.Component.Toast("输入的金额大于可提现的金额");
+			$FW.Component.Toast("可提现余额不足");
 			return false;
 		}
 
