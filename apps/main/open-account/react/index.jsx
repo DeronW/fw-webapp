@@ -562,6 +562,9 @@ var Body = React.createClass({
         });
     },
     clickFun: function() {
+        console.log(this.dataText)
+
+
         this.fromData;
         var _this = this;
 
@@ -591,9 +594,11 @@ var Body = React.createClass({
         if(this.dataText !== undefined) {
             if((this.dataText.length == 0) || (this.dataText == undefined) ) {
                 $FW.Component.Toast("不能为空");
-            }
 
-            return false;
+                return false;
+            }
+            console.log("aaaaa");
+
         }
 
         if(this.state.validateCode == null) {
@@ -608,7 +613,6 @@ var Body = React.createClass({
             return false;
         }
 
-        console.log(isCardNo(this.state.userInfo.idCardNo))
 
         console.log(_this.state.userInfo);
 
