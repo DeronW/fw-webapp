@@ -26,7 +26,7 @@ const Withdrawals = React.createClass({
 	    	greater_than: false,
 	    	inputText: null,
 	    	verify_code: null,
-	    	alter: false,
+	    	alter: true,
 	    	enable :this.props.data.isFeeEnable,
             order_state: null,  // 有3种,  处理中, 成功, 失败,
 			popShow: false,
@@ -167,12 +167,13 @@ const Withdrawals = React.createClass({
         this.setState({order_state: 'fail'})
     },
 	inputBlur: function() {
-		if(this.state.inputText > 10000) {
+		//if(this.state.inputText > 10000) {
 			this.setState({
 				inputBlur: true,
-				cashInputShow: true
+				cashInputShow: true,
+				alter: false
 			});
-		}
+		//}
 
 	},
 	colseBtn: function() {
@@ -281,7 +282,7 @@ const Withdrawals = React.createClass({
 							}
 
 						</div>
-						{this.state.alter ? <div className="choice"><div className="pleas" onClick={this.modifyBtn}>修改</div></div> : null}
+						{this.state.alter ? null : <div className="choice"><div className="pleas" onClick={this.modifyBtn}>修改</div></div> }
 					</div>
 				</div>
 				

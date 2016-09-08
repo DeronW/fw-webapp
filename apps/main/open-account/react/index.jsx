@@ -13,6 +13,13 @@ var numberFormat = {
     }
 };
 
+// 验证身份证
+function isCardNo(card) {
+    var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    return pattern.test(card);
+}
+
+
 function space(str) {
     return str.replace(/ /g, "");
 }
@@ -596,9 +603,19 @@ var Body = React.createClass({
         }
 
 
+        if(!isCardNo(this.state.userInfo.idCardNo)) {
+            $FW.Component.Toast("身份证不格式不正确");
+            return false;
+        }
+
+        console.log(isCardNo(this.state.userInfo.idCardNo))
+
+        console.log(_this.state.userInfo);
+
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/bind/card.shtml",
             method: "POST",
+            enable_loading: true,
             data: _this.state.userInfo,
             success: function(data) {
                 console.log(data);
