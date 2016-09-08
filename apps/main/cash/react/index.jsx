@@ -26,7 +26,7 @@ const Withdrawals = React.createClass({
 	    	greater_than: false,
 	    	inputText: null,
 	    	verify_code: null,
-	    	alter: false,
+	    	alter: true,
 	    	enable :this.props.data.isFeeEnable,
             order_state: null,  // 有3种,  处理中, 成功, 失败,
 			popShow: false,
@@ -170,7 +170,8 @@ const Withdrawals = React.createClass({
 		if(this.state.inputText > 10000) {
 			this.setState({
 				inputBlur: true,
-				cashInputShow: true
+				cashInputShow: true,
+				alter: false
 			});
 		}
 
@@ -204,10 +205,10 @@ const Withdrawals = React.createClass({
 		var fee = this.props.data.fee;
 
 		var commissionCharge = function() {
-			if(this.props.data.isFeeEnable) {
+			if(_this.props.data.isFeeEnable) {
 				return 0;
 			} else {
-				return ((fee.slice(0, fee.length - 1) * 10) * (this.state.inputText * 100)) / 100000;
+				return ((fee.slice(0, fee.length - 1) * 10) * (_this.state.inputText * 100)) / 100000;
 			}
 		};
 
@@ -281,7 +282,7 @@ const Withdrawals = React.createClass({
 							}
 
 						</div>
-						{this.state.alter ? <div className="choice"><div className="pleas" onClick={this.modifyBtn}>修改</div></div> : null}
+						{this.state.alter ? null : <div className="choice"><div className="pleas" onClick={this.modifyBtn}>修改</div></div> }
 					</div>
 				</div>
 				
