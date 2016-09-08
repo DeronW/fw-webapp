@@ -40,9 +40,12 @@ const Withdrawals = React.createClass({
 	    }
 	},
 	componentDidUpdate: function() {
-		if(ReactDOM.findDOMNode(this.refs.withdrawalInput) !== null) {
-			ReactDOM.findDOMNode(this.refs.withdrawalInput).focus();
+		if(this.state.inputBlur) {
+			if(ReactDOM.findDOMNode(this.refs.withdrawalInput) !== null) {
+				ReactDOM.findDOMNode(this.refs.withdrawalInput).focus();
+			}
 		}
+
 	},
 	handleJump: function(){
 		this.setState({
@@ -52,7 +55,7 @@ const Withdrawals = React.createClass({
 
 	handlerChange: function(e){
 		if(e.target.value > this.props.data.accountAmount) {
-			$FW.Component.Toast("输入的金额大于可提现的金额");
+			$FW.Component.Toast("可提现余额不足");
 			return false;
 		}
 
@@ -61,6 +64,7 @@ const Withdrawals = React.createClass({
 				inputBlur: true
 			});
 		}
+
 
 		if(e.target.value === "0" ) {
 			$FW.Component.Toast("第一位不能为0");
@@ -109,7 +113,7 @@ const Withdrawals = React.createClass({
 		}
 
 		if(this.state.inputText < 10) {
-			$FW.Component.Toast("提现金额必须大于10元");
+			$FW.Component.Toast("提现金额不能低于10元");
 			return false;
 		}
 
@@ -307,7 +311,7 @@ const Withdrawals = React.createClass({
 					
 					/> : null}
 				
-				<div className="xt" onClick={this.submitHandle} >提现</div>
+				<div className="xt" onClick={this.submitHandle} >下一步</div>
 				
 				<div>
 					<div className="hsuo">提现说明</div>

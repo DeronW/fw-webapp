@@ -184,12 +184,11 @@ var From = React.createClass({
         var _this = this
         var phoneNo = this.props.ajaxData.userInfo.phoneNum;
 
-        if(this.state.userOpenStatus === "1") {
-            if(this.state.nameVal === false) {
-                return false;
-            }
-        }
+        console.log(this.userInfoAllVal());
 
+        if(this.userInfoAllVal()) {
+            return false;
+        }
 
         _this.setState({
             code: 1
@@ -295,6 +294,21 @@ var From = React.createClass({
             });
         }
     },
+
+    userInfoAllVal: function() {
+        var _this = this;
+
+        var val = _this.props.transmittalInputAllVal;
+
+        if(val.realName !== "" && val.idCardNo !== "" && val.bankCardNo !== "" && val.bankNo !== null) {
+            console.log("1");
+            return false;
+        } else {
+            console.log("2");
+            return true;
+        }
+
+    },
     render: function() {
         var _this = this;
 
@@ -314,43 +328,18 @@ var From = React.createClass({
         };
 
         var selectEml = function() {
+
             return <div className="">
                         <span className="bank-text">
                             {
-                                _this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
+                                _this.props.alreadyBankData === null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
                             }
                         </span>
                         <span className="img">
-                            <img src={_this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl} className="r-icon" />
+                            <img src={_this.props.alreadyBankData === null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl} className="r-icon" />
                         </span>
                     </div>
         };
-
-
-        var inputNullFun = function() {
-            var a = _this.state.inputValFirst;
-            var b = _this.state.nameVal;
-            var c = _this.state.userId;
-            var d = _this.state.bankCard;
-            var e = _this.state.showSelectBtn;
-
-            if(_this.state.userOpenStatus === "1" ) {
-                if ( a === null) {
-                    return true;
-                } else {
-                    if(((b === true) && (c === true) && (d === true) && (e === true)) || ((d === true) && (e === true)) ) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-
-                }
-            } else {
-                return false;
-            }
-
-        };
-
 
         return (
             <div className="">
@@ -389,7 +378,7 @@ var From = React.createClass({
 
                         <span className="bank-logo">
                             {
-                                this.state.showSelectBtn === ""  ? null : selectEml()
+                                _this.props.transmittalInputAllVal.bankNo == null  ? null : selectEml()
                             }
                         </span>
                     </div>
@@ -405,7 +394,7 @@ var From = React.createClass({
                             {
                                 this.state.code ?
                                     <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                    <span className={inputNullFun() ? "timing-text" : "btn"} onClick={this.headlerCode}>获取短信验证码</span>
+                                    <span className={this.userInfoAllVal() ? "timing-text" : "btn"} onClick={this.headlerCode}>获取短信验证码</span>
                             }
 
                         </span>
@@ -445,7 +434,8 @@ var SelectBank = React.createClass({
         });
     },
     backBtnClick: function() {
-        this.props.callbackBtn(false);
+        //this.props.callbackBtn(false);
+        this.props.callbackBtnVal();
     },
     supportQuickPayClick: function(index) {
         this.props.callbackAlreadyBank(this.state.bankListData.bankList[index]);
@@ -547,7 +537,8 @@ var Body = React.createClass({
                 openStatus: getAjaxUserInfo.openStatus,
                 realName: getAjaxUserInfo.userInfo.realName,
                 validateCode: null
-            }
+            },
+            getCallbackBtnVal: false
         };
     },
     fromData: function(dataText) {
@@ -631,6 +622,11 @@ var Body = React.createClass({
             backSelect: show
         });
     },
+    getCallbackBtn: function() {
+        this.setState({
+            backSelect: false
+        });
+    },
     alreadySelectBank: function(data) {
         var newUserInfo = this.state.userInfo;
 
@@ -694,6 +690,7 @@ var Body = React.createClass({
     render: function() {
         var _this = this;
 
+
         return (
             <div className="cnt">
                 <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnFun={this.backBtnClick} />
@@ -703,14 +700,15 @@ var Body = React.createClass({
                 <From
                       callbackParent={this.fromData}
                       callbackBank={this.selectBank}
-
                       alreadyBankData={this.state.alreadyBank}
+                      transmittalInputAllVal={this.state.userInfo}
                       validateCode={this.getValidateCode}
                       callbackPleaseCode={this.pleaseValidateCode}
                       ajaxData={this.props.activity}
                       callbackUserName={this.getUserName}
                       callbackUserId={this.getUserId}
                       callbackBankCardNo={this.getBankCardNo}
+                      transmittalCallbackBtnVal={this.state.getCallbackBtnVal}
                 />
 
                 <Btn btnText={"同意"} Fun={this.clickFun} />
@@ -718,7 +716,12 @@ var Body = React.createClass({
                 <Text />
 
                 {
-                    this.state.backSelect ? <SelectBank callbackBtn={this.selectBank} callbackAlreadyBank={this.alreadySelectBank}/> : null
+                    _this.state.backSelect  ? <SelectBank
+                        callbackBtn={this.selectBank}
+                        callbackBtnVal={this.getCallbackBtn}
+                        callbackAlreadyBank={this.alreadySelectBank}
+
+                    /> : null
                 }
 
 

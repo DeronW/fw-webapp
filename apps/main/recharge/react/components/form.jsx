@@ -10,31 +10,37 @@ const Form = React.createClass({
     },
     getInitialState: function () {
         return {
-            counting: 0
+            phone:this.props.phone,
+            money:null,
+            counting: 0,
+            complete: false
         }
     },
     clickHandler: function () {
-        if (this.state.counting != 0) return;
+        console.log(this.state.money)
+        console.log(this.state.phone)
+        if(this.state.money && this.state.phone) {
+            this.setState({complete: true});
+            if (this.state.counting != 0) return;
+            this.setState({counting: this.props.countingSeconds});
+            this.timer = setInterval(()=> {
+                this.setState({counting: this.state.counting - 1});
+                if (this.state.counting < 1) {
+                    clearInterval(this.timer)
+                }
+            }, 1000);
 
-        this.setState({counting: this.props.countingSeconds});
-
-        this.timer = setInterval(()=> {
-            this.setState({counting: this.state.counting - 1});
-            if (this.state.counting < 1) {
-                clearInterval(this.timer)
-            }
-        }, 1000);
-
-        $FW.Ajax({
-            url: API_PATH + 'mpwap/api/v1/getRechargeCode.shtml',
-            method: 'POST',
-            data: {
-                phoneNo: this.state.phone
-            },
-            success: function (data) {
-                this.setState({token: data.smsSerialNo})
-            }.bind(this)
-        })
+            $FW.Ajax({
+                url: API_PATH + 'mpwap/api/v1/getRechargeCode.shtml',
+                method: 'POST',
+                data: {
+                    phoneNo: this.state.phone
+                },
+                success: function (data) {
+                    this.setState({token: data.smsSerialNo})
+                }.bind(this)
+            })
+        }
     },
     moneyChangeHandler: function (e) {
         var money = e.target.value;
@@ -86,7 +92,7 @@ const Form = React.createClass({
                                onChange={this.codeChangeHandler}
                                placeholder="请输入验证码"/>
                     </div>
-                    <div className="gqm" onClick={this.clickHandler}>
+                    <div className={this.state.complete ? "gqm blued" : "gqm gray"} onClick={this.clickHandler}>
                         {this.state.counting ? this.state.counting + 's' : '获取验证码'}
                     </div>
                 </div>

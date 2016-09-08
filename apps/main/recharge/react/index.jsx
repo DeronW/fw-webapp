@@ -72,12 +72,13 @@ const Recharge = React.createClass({
                         <div className="name">{this.props.data.bankInfo.realName}</div>
                         <div className="num">{this.props.data.bankInfo.bankCardNo}</div>
                     </div>
+                    <div className="instant-icon"></div>
                 </div>
 
                 <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服
                     <span className="blue">400-6766-988</span></div>
 
-                <Form countingSeconds={60} orderConfirm={this.orderConfirm}/>
+                <Form countingSeconds={60} orderConfirm={this.orderConfirm} phone={this.props.data.bankInfo.bankPhone}/>
 
                 <div className="rmd">
                     <div className="remin">温馨提醒</div>
