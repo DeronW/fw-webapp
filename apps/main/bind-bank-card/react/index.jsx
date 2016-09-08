@@ -24,6 +24,7 @@ const BindBankCard = React.createClass({
 		return (
 			<div>
 				{prohibited < 3 ? <Invalid  /> : null}
+				{prohibited == 3 ? <Valid  /> : null}
 				{prohibited == 5 ? <Cover hide={this.hideHandler} /> : null}
 				{prohibited == 5 ? <Bomb hide={this.hideHandler} username={this.props.item.realName} /> : null}
 				
@@ -84,6 +85,19 @@ const Invalid = React.createClass({
 		)
 	}
 })
+
+const Valid = React.createClass({
+	render : function(){
+		return (
+			<a className="upgrade" href="/static/wap/set-deal-password/index.html">
+				<div className="dep clearfix">
+					<div className="pdlf">点击设置交易密码</div>
+					<div className="pdrt"><a href=""><img src="images/card-a.png"/></a></div>
+				</div>
+			</a>
+		)
+	}
+});
 
 const Sup = React.createClass({
 	render : function(){
