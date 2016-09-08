@@ -217,8 +217,7 @@ var From = React.createClass({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo="+ phoneNo +"&isVms=SMS",
             method: "GET",
             success: function(data) {
-
-
+                
             }
         });
     },
