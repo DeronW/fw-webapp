@@ -604,7 +604,7 @@ var Body = React.createClass({
 
         console.log(this.state.userInfo.idCardNo);
 
-        if(this.props.activity.openStatus === "4" || this.props.activity.openStatus === "2" || this.props.activity.openStatus === "3") {
+        if (this.props.activity.openStatus === "4" || this.props.activity.openStatus === "2" || this.props.activity.openStatus === "3") {
 
         } else {
             if (!isCardNo(this.state.userInfo.idCardNo)) {
@@ -612,8 +612,6 @@ var Body = React.createClass({
                 return false;
             }
         }
-
-
 
 
         $FW.Ajax({
@@ -749,9 +747,9 @@ $FW.DOMReady(function () {
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         enable_loading: true,
         success: function (data) {
-
             var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
-            ReactDOM.render(<Header title={title} sub_text={'跳过'} sub_url={'/'}/>,
+            ReactDOM.render(
+                <Header title={title} sub_text={'跳过'} sub_url={'javascript:history.back()'}/>,
                 document.getElementById('header'));
 
             ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
