@@ -256,7 +256,7 @@ var Body = React.createClass({
     },
     handlerSettingsPassword: function() {
         var _this = this;
-        
+
         if(this.state.cardId === "") {
             $FW.Component.Toast("身份证不能为空");
             return false;
