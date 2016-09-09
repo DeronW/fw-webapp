@@ -604,7 +604,7 @@ var Body = React.createClass({
 
         console.log(this.state.userInfo.idCardNo);
 
-        if(this.props.activity.openStatus === "4" || this.props.activity.openStatus === "2") {
+        if(this.props.activity.openStatus === "4" || this.props.activity.openStatus === "2" || this.props.activity.openStatus === "3") {
 
         } else {
             if (!isCardNo(this.state.userInfo.idCardNo)) {
