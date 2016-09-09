@@ -39,15 +39,13 @@ const MAIN_APP_NAMES = [
     'change-bank-card',
     'recharge-recording', // 充值记录, 暂未启用
     'recharge', // 给金融工场账户充值
-    // 'personal-center',
-    // 'first-page',
     'cash',
     'special-cash',
     'verify-identity',
     'open-bank',
     'hs-topic', //徽商专题页面
-    'trusteeship-pact', // 资金托管协议
-    'counseling-pact', // 咨询服务协议
+    'protocol-trusteeship', // 资金托管协议
+    'protocol-counseling', // 咨询服务协议
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 

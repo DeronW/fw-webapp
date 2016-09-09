@@ -4,7 +4,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: '',
         success: function (data) {
-            document.getElementById('cnt').innerHTML = data;
+            document.getElementById('cnt').innerHTML = '暂无内容, 需求未定';
         }
     })
 });
