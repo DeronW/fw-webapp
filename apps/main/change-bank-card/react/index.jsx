@@ -103,7 +103,8 @@ var From = React.createClass({
             userData: {},
             identifyingCode: null,
             blur: true,
-            format_bankCard: null
+            format_bankCard: null,
+            showPhoneCodePrompt: false
         };
     },
     componentDidMount: function() {
@@ -152,7 +153,7 @@ var From = React.createClass({
     headlerCode: function() {
         var _this = this
         var phoneNo = this.props.ajaxData.userInfo.phoneNum;
-
+        this.setState({showPhoneCodePrompt:true});
         _this.setState({
             code: 1
         });
@@ -294,7 +295,7 @@ var From = React.createClass({
                     </div>
                 </div>
 
-                <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/>
+                {this.state.showPhoneCodePrompt ? <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/> : null}
             </div>
 
         );
