@@ -562,9 +562,6 @@ var Body = React.createClass({
         });
     },
     clickFun: function () {
-        console.log(this.dataText)
-
-
         this.fromData;
         var _this = this;
 
@@ -605,14 +602,14 @@ var Body = React.createClass({
             return false;
         }
 
-
-        if (!isCardNo(this.state.userInfo.idCardNo)) {
-            $FW.Component.Toast("身份证不格式不正确");
-            return false;
+        if(this.props.activity.openStatus !== "4") {
+            console.log("a");
+            if (!isCardNo(this.state.userInfo.idCardNo)) {
+                $FW.Component.Toast("身份证不格式不正确");
+                return false;
+            }
         }
 
-
-        console.log(_this.state.userInfo);
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/bind/card.shtml",
