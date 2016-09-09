@@ -2,7 +2,6 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
-
 var TopNav = React.createClass({
     getInitialState: function() {
         return {
@@ -11,6 +10,9 @@ var TopNav = React.createClass({
     },
     backBtnClick: function() {
 
+    },
+    showHandler:function(){
+        this.props.callbackPopShow(true);
     },
     render: function() {
         return (
@@ -21,7 +23,7 @@ var TopNav = React.createClass({
                     }
 
                     <div className="title">{this.props.title}</div>
-                    <span className="r-text">
+                    <span className="r-text" onClick={this.showHandler}>
                         <img src="images/icon.png"/>
                     </span>
                 </div>
@@ -154,20 +156,61 @@ var FundsFlow = React.createClass({
 });
 
 var Body = React.createClass({
+    getInitialState: function() {
+        return {
+            popShow: false
+        };
+    },
     backBtnClick: function() {
         window.history.back();
+    },
+    getPopShow: function(booleanVal) {
+        console.log(booleanVal);
+        this.setState({
+            popShow: booleanVal
+        });
     },
     render: function() {
         return (
             <div className="">
-                <TopNav title={"徽商银行存管账户"} backBtn={true} btnFun={this.backBtnClick}/>
+                <TopNav title={"徽商银行存管账户"} backBtn={true}
+                        btnFun={this.backBtnClick}
+                    callbackPopShow={this.getPopShow}
+                />
                 <Cart userHsAccountInfo={this.props.ajaxHsAccountInfo}/>
 
                 <Earnings userIncome={this.props.ajaxHsAccountInfo}/>
 
                 <FundsFlow userPageData={this.props.ajaxPageData} callbackIndex={this.props.callbackPage}/>
+
+                {
+                    !this.state.popShow ? null : <Pop callbackPopShow={this.getPopShow}/>
+                }
             </div>
         );
+    }
+});
+
+var Pop = React.createClass({
+    closeHandler: function() {
+        this.props.callbackPopShow(false);
+    },
+    render: function() {
+        return (
+            <div className="mask">
+                <div className="close-btn" onClick={this.closeHandler}></div>
+                <div className="instruction-title">说明</div>
+                <div className="instruction-item">• 为了使您的理财收益最大化，您账户中的剩余金额系统将自动为您购买国寿货币基金。</div>
+                <div className="instruction-item">• 您持有的基金总额可直接用于投资任意金融工场理财产品，以此使您的理财收益最大化。</div>
+                <div className="instruction-item">• 18岁以下用户无法享受货币基金收益，将按银行活期存款利率计算，在提现第二日发放。</div>
+                <div className="instruction-item">• 每日15:00前转入账户的资金会在第二个工作日（节假日顺延）计算收益，建议您在每日15:00前转入；</div>
+                <div className="instruction-item">• 计算收益后的第二天会进行收益发放；</div>
+                <div className="instruction-item">• 资金转出当日不计算收益；</div>
+                <div className="instruction-item">• 如果当天收益不足0.01元，则向后累计；</div>
+                <div className="instruction-item">• 为了保证您的收益最大化，建议您在每周四15:00前转入；</div>
+                <div className="instruction-item">• 每周四15:00后建议您下周一15:00前再进行转入，可以多获取三天的活期收益哦。</div>
+            </div>
+        )
     }
 });
 
@@ -182,6 +225,9 @@ var AllPage = React.createClass({
             index: index
         });
     },
+    closeHandler:function(){
+
+    },
     render: function() {
         var userAjaxData = this.props.activity;
 
@@ -194,16 +240,17 @@ var AllPage = React.createClass({
         ];
 
         return (
+
             <div>   
                 {
                     ui[this.state.index]
                 }
+
+
             </div>
         );
     }
 });
-
-
 
 $FW.DOMReady(function() {
     $FW.Ajax({
