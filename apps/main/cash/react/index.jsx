@@ -15,6 +15,33 @@ var numberFormat = {
 	}
 };
 
+var TopNav = React.createClass({
+	getInitialState: function () {
+		return {
+			backBtn: false
+		}
+	},
+	backBtnClick: function () {
+
+	},
+	render: function () {
+		return (
+			<div className="top-nav">
+				<div className="info">
+					{
+						this.props.backBtn ?
+							<div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/>
+							</div> : null
+					}
+
+					<div className="title">{this.props.title}</div>
+					<span className="r-text">{this.props.btnText}</span>
+				</div>
+			</div>
+		);
+	}
+});
+
 
 var BankAccount = React.createClass({
 	getInitialState: function () {
@@ -25,7 +52,8 @@ var BankAccount = React.createClass({
 			bankList: [],
 			value: '',
 			bankIndex: null,
-			jump: false
+			jump: false,
+			promptBankNoShow: false
 		}
 	},
 
@@ -42,6 +70,16 @@ var BankAccount = React.createClass({
 				success : (data) => {
 					console.log(data);
 					this.setState({bankList: data.bankList})
+
+					if(data.bankList.length === 0) {
+						this.setState({
+							promptBankNoShow: true
+						});
+					} else {
+						this.setState({
+							promptBankNoShow: false
+						});
+					}
 				}
 			})
 		}
@@ -74,6 +112,10 @@ var BankAccount = React.createClass({
 		//this.props.callbackBankIndex(this.state.bankList[index]);
 	},
 
+	callbackOpenBankBtn: function() {
+		this.props.callbackOpenBank(false);
+	},
+
 	render : function(){
 
 		let list = ()=> {
@@ -86,29 +128,33 @@ var BankAccount = React.createClass({
 		if(this.state.typing) icon = null;
 
 		return (
-			<div className="select-bank">
-				<div className="search">
-					{icon}
+			<div className="pop-open-bank">
+				<TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}/>
 
-					<input type="text"
-						   className="hunt"
-						   onClear={this.props.handleClear}
-						   onFocus={this.typingHandler}
-						   entry={this.state.entry}
-						   onInput={this.inputHandler}
-						   onChange={this.handleChange}
-						   value={this.state.value}
-						   placeholder="请输入开户支行的关键词" />
+				<div className="select-bank">
+					<div className="search">
+						{icon}
 
-					{this.state.entry ? <img className="false" onClick={this.handleClear}  src="images/false.jpg"/> : null}
+						<input type="text"
+							   className="hunt"
+							   onClear={this.props.handleClear}
+							   onFocus={this.typingHandler}
+							   entry={this.state.entry}
+							   onInput={this.inputHandler}
+							   onChange={this.handleChange}
+							   value={this.state.value}
+							   placeholder="请输入开户支行的关键词" />
+
+						{this.state.entry ? <img className="false" onClick={this.handleClear}  src="images/false.jpg"/> : null}
+					</div>
+
+					{this.state.bankList.length ? list() : null}
+
+					{
+						this.state.promptBankNoShow ? <div className="promptBankNo">请尝试更换搜索关键词或拨打客服电话<span className="number-text">400-0322-988</span>寻求帮助</div> :null
+					}
+
 				</div>
-
-				{this.state.bankList.length ? list() : null}
-
-				<div className="">
-					请尝试更换搜索关键词或拨打客服电话<span>400-0322-988寻求帮助</span>400-0322-988寻求帮助。
-				</div>
-
 			</div>
 		)
 	}
@@ -123,14 +169,14 @@ const Withdrawals = React.createClass({
 			specialShow: false,
 			choiceShow: false,
 			selectBank: false,
-			inputVal: "",
-			propsAccountAmountVal: this.props.data.accountAmount,
-			codeVal: "",
-			selectBankName: "",
-			selectBankId: "",
 			btn: false, //判断 是否大于10万或小于10万
 			popShow: false,
 			moneyInput: false,
+			inputVal: "",
+			codeVal: "",
+			selectBankName: "",
+			selectBankId: "",
+			propsAccountAmountVal: this.props.data.accountAmount,
 			propsUserInfo: this.props.data
 	    }
 	},
@@ -268,16 +314,21 @@ const Withdrawals = React.createClass({
 		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + this.state.selectBankId;
 
 	},
+	getCode: function(code) {
+		this.setState({
+			codeVal: code
+		});
+	},
+	getOpenBankShow: function(booleanVal) {
+		this.setState({
+			selectBank: booleanVal
+		});
+	},
 	getSelectBankInfo: function(hide, bankInfo) {
 		this.setState({
 			selectBank: hide,
 			selectBankName: bankInfo.bankName,
 			selectBankId: bankInfo.bankNo
-		});
-	},
-	getCode: function(code) {
-		this.setState({
-			codeVal: code
 		});
 	},
 	render : function(){
@@ -322,6 +373,8 @@ const Withdrawals = React.createClass({
 
 		return (
 			<div>
+				<TopNav title={"提现"} backBtn={true} />
+
 				<div className="stou clearfix">
 					<div className="zhaoshang"><img className="ico-zhaoshang" src={this.props.data.bankInfo.bankLogo}/></div>
 					<div className="wz">
@@ -401,6 +454,7 @@ const Withdrawals = React.createClass({
 				{
 					this.state.selectBank ? <BankAccount
 						callbackSelectBankInfo={this.getSelectBankInfo}
+						callbackOpenBank={this.getOpenBankShow}
 					/> : null
 				}
 
@@ -572,7 +626,7 @@ const Special = React.createClass({
 
 
 $FW.DOMReady(function(){
-	ReactDOM.render(<Header title={"提现"} />, document.getElementById('header'));
+
 	$FW.Ajax({
         url: API_PATH +"mpwap/api/v1/getWithdrawInfo.shtml",
 		enable_loading: true,
