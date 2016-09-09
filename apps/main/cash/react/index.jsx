@@ -129,7 +129,10 @@ var BankAccount = React.createClass({
 
 		return (
 			<div className="pop-open-bank">
-				<TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}/>
+
+					<TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}/>	
+				
+				
 
 				<div className="select-bank">
 					<div className="search">
