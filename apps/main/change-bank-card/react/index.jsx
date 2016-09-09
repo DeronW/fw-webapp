@@ -270,11 +270,10 @@ var From = React.createClass({
                     </div>
 
                     <div className="input-block" onClick={this.handlerBank}>
-                        <span className="bank-name">开户银行</span>
-
                         <span className="bank-logo">
                             {selectEml()}
                         </span>
+                        <span className="bank-name">选择开户银行></span>
                     </div>
 
                     <div className="input-block code-block">
