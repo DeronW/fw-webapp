@@ -123,10 +123,31 @@ const Withdrawals = React.createClass({
 			propsAccountAmountVal: this.props.data.accountAmount,
 			codeVal: "",
 			selectBankName: "",
-			selectBankId: ""
+			selectBankId: "",
+			btn: false, //判断 是否大于10万或小于10万
+			popShow: false,
+			moneyInput: false,
+			propsUserInfo: this.props.data
 	    }
 	},
+	componentDidUpdate: function(a, params) {
+		if(this.state.moneyInput) {
+			if(ReactDOM.findDOMNode(this.refs.refsMoney) !== null) {
+				ReactDOM.findDOMNode(this.refs.refsMoney).focus();
+			}
+		}
+	},
 	handlerOnChange: function(e) {
+		if(numberFormat.format(e.target.value)[0] === "0") {
+			console.log("a");
+			this.setState({
+				inputVal: ""
+			});
+
+			return false;
+		}
+
+
 		if(e.target.value > this.state.propsAccountAmountVal) {
 			$FW.Component.Toast("可提现余额不足");
 			return false;
@@ -158,9 +179,13 @@ const Withdrawals = React.createClass({
 		}
 	},
 	handlerOnBlur: function() {
-		this.setState({
-			choiceShow: true
-		});
+		if(this.state.inputVal !== "") {
+			this.setState({
+				choiceShow: true,
+				moneyInput: true
+			});
+		}
+
 	},
 	handlerOnFocus: function() {
 		this.setState({
@@ -171,30 +196,73 @@ const Withdrawals = React.createClass({
 		this.setState({
 			specialShow: false,
 			modifyShow: false,
-			choiceShow: false
+			choiceShow: false,
+			btn: true,
+			codeVal: ""
 		});
 	},
 	handlerPost: function() {
 		if(this.state.inputVal < 10) {
 			$FW.Component.Toast("提现金额不能低于10元");
 			return false;
+		} else {
+
 		}
+
+		if(this.state.inputVal >= 100000) {
+			if(!this.state.modifyShow) {
+				this.setState({
+					specialShow: true,
+					modifyShow: true
+				});
+				console.log("1");
+				return false;
+			}
+
+		} else {
+			if(!this.state.specialShow) {
+				this.setState({
+					specialShow: true,
+				});
+				return false;
+			}
+		}
+
+		if(this.state.modifyShow) {
+			if(this.state.selectBankName === "") {
+				$FW.Component.Toast("请选择银行");
+				return false;
+			}
+		}
+
+		console.log(this.state.codeVal);
 
 		if(this.state.codeVal === "") {
 			$FW.Component.Toast("请输入验证码");
 			return false;
 		}
 
-		var val = this.state.inputVal;
-		var codeV = this.state.codeVal;
-
-		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + this.state.selectBankId;
+		this.setState({
+			popShow: true
+		});
 
 	},
 	handlerSelectPopFun: function() {
 		this.setState({
 			selectBank: true
 		});
+	},
+	handlerColseBtn: function() {
+		this.setState({
+			popShow: false
+		});
+	},
+	handlerSureBtn: function() {
+		var val = this.state.inputVal;
+		var codeV = this.state.codeVal;
+
+		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + this.state.selectBankId;
+
 	},
 	getSelectBankInfo: function(hide, bankInfo) {
 		this.setState({
@@ -209,33 +277,45 @@ const Withdrawals = React.createClass({
 		});
 	},
 	render : function(){
+		var _this = this;
+
+
+
+		var commissionCharge = function() {
+			if(_this.state.propsUserInfo.isFeeEnable) {
+				return 0;
+			} else {
+				return ((_this.state.propsUserInfo.fee.slice(0, _this.state.propsUserInfo.fee.length - 1) * 10) * (_this.state.inputVal * 100)) / 100000;
+			}
+		};
+
 		var pop = function() {
 			return <div className="cang">
-					<div className="masker"></div>
-					<div className="taine">
-						<div className="his">提示</div>
-						<div className="fact">
-							<div className="">
-								<span className="acti">实际到账金额</span>
-								<span className="san">{_this.state.inputText - commissionCharge()}</span>
-							</div>
-							<div className="pot-a">
-								<span className="iner">提现金额</span>
-								<span className="zeor">{_this.state.inputText}</span>
-							</div>
-							<div className="pot-b">
-								<span className="iner">提现手续费</span>
-								<span className="zeor">{commissionCharge()}</span>
-							</div>
+				<div className="masker"></div>
+				<div className="taine">
+					<div className="his">提示</div>
+					<div className="fact">
+						<div className="">
+							<span className="acti">实际到账金额</span>
+							<span className="san">{_this.state.inputVal - commissionCharge()}</span>
 						</div>
-
-						<div className="ton clearfix">
-							<div className="xiaoqu" onClick={_this.colseBtn}>取消</div>
-							<div className="ding" onClick={_this.sureHandle} >确定</div>
+						<div className="pot-a">
+							<span className="iner">提现金额</span>
+							<span className="zeor">{_this.state.inputVal}</span>
 						</div>
-
+						<div className="pot-b">
+							<span className="iner">提现手续费</span>
+							<span className="zeor">{commissionCharge()}</span>
+						</div>
 					</div>
+
+					<div className="ton clearfix">
+						<div className="xiaoqu" onClick={_this.handlerColseBtn}>取消</div>
+						<div className="ding" onClick={_this.handlerSureBtn} >确定</div>
+					</div>
+
 				</div>
+			</div>
 		};
 
 		return (
@@ -257,13 +337,17 @@ const Withdrawals = React.createClass({
 				<div className="kunag">
 					<div className="pure">
 						<div className="xuanwu">
-							<input className="moneyTxt"
-								   value={this.state.inputVal}
-								   onChange={this.handlerOnChange}
-								   onBlur={this.handlerOnBlur}
-								   onFocus={this.handlerOnFocus}
-								   type="text" placeholder="请输入提现金额"
-							/>
+							{
+								!this.state.choiceShow ? <input className="moneyTxt"
+															   value={this.state.inputVal}
+															   onChange={this.handlerOnChange}
+															   onBlur={this.handlerOnBlur}
+															   onFocus={this.handlerOnFocus}
+															   ref="refsMoney"
+															   type="text" placeholder="请输入提现金额"
+								/> : <div className="input-text">{this.state.inputVal}</div>
+							}
+
 						</div>
 						<div className="choice">
 							{
@@ -293,7 +377,11 @@ const Withdrawals = React.createClass({
 					/> : null
 				}
 
-				<div className="xt" onClick={this.handlerPost}>下一步</div>
+				<div className="xt" onClick={this.handlerPost}>
+
+						下一步
+
+				</div>
 				
 				<div>
 					<div className="hsuo">提现说明</div>
@@ -312,6 +400,10 @@ const Withdrawals = React.createClass({
 					this.state.selectBank ? <BankAccount
 						callbackSelectBankInfo={this.getSelectBankInfo}
 					/> : null
+				}
+
+				{
+					this.state.popShow ? pop() : null
 				}
 
 			</div>
