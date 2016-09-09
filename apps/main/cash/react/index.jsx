@@ -112,6 +112,10 @@ var BankAccount = React.createClass({
 		//this.props.callbackBankIndex(this.state.bankList[index]);
 	},
 
+	callbackOpenBankBtn: function() {
+		this.props.callbackOpenBank(false);
+	},
+
 	render : function(){
 
 		let list = ()=> {
@@ -125,7 +129,7 @@ var BankAccount = React.createClass({
 
 		return (
 			<div className="pop-open-bank">
-				<TopNav title={"开户支行"} backBtn={true} />
+				<TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}/>
 
 				<div className="select-bank">
 					<div className="search">
@@ -310,16 +314,21 @@ const Withdrawals = React.createClass({
 		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + this.state.selectBankId;
 
 	},
+	getCode: function(code) {
+		this.setState({
+			codeVal: code
+		});
+	},
+	getOpenBankShow: function(booleanVal) {
+		this.setState({
+			selectBank: booleanVal
+		});
+	},
 	getSelectBankInfo: function(hide, bankInfo) {
 		this.setState({
 			selectBank: hide,
 			selectBankName: bankInfo.bankName,
 			selectBankId: bankInfo.bankNo
-		});
-	},
-	getCode: function(code) {
-		this.setState({
-			codeVal: code
 		});
 	},
 	render : function(){
@@ -445,6 +454,7 @@ const Withdrawals = React.createClass({
 				{
 					this.state.selectBank ? <BankAccount
 						callbackSelectBankInfo={this.getSelectBankInfo}
+						callbackOpenBank={this.getOpenBankShow}
 					/> : null
 				}
 
