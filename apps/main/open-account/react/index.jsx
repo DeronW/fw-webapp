@@ -602,13 +602,18 @@ var Body = React.createClass({
             return false;
         }
 
-        if(this.props.activity.openStatus !== "4" || this.props.activity.openStatus !== "2") {
-            console.log("a");
+        console.log(this.state.userInfo.idCardNo);
+
+        if(this.props.activity.openStatus === "4" || this.props.activity.openStatus === "2") {
+
+        } else {
             if (!isCardNo(this.state.userInfo.idCardNo)) {
                 $FW.Component.Toast("身份证不格式不正确");
                 return false;
             }
         }
+
+
 
 
         $FW.Ajax({
