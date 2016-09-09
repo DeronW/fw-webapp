@@ -13,6 +13,13 @@ var Nav = React.createClass({
     }
 });
 
+// 验证身份证
+function isCardNo(card) {
+    var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    return pattern.test(card);
+}
+
+
 var PhoneCodePrompt = React.createClass({
     getInitialState: function() {
         return {
@@ -109,7 +116,9 @@ var PswFrom = React.createClass({
         return {
             countdown: 60,
             code: false,
-            phoneNumber: userInfoData.userInfo.phoneNum
+            phoneNumber: userInfoData.userInfo.phoneNum,
+            userId: "",
+            codeClickable: false
         };
     },
     componentWillUnmount: function() {
@@ -117,6 +126,10 @@ var PswFrom = React.createClass({
     },
     handerIdentifyingCode: function() {
         var _this = this;
+
+        if(!this.state.codeClickable) {
+            return false;
+        }
 
         _this.setState({
             code: true
@@ -140,6 +153,7 @@ var PswFrom = React.createClass({
 
         }, 1000);
 
+
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=5&destPhoneNo="+ this.state.phoneNumber +"&isVms=SMS",
             method: "GET",
@@ -152,6 +166,28 @@ var PswFrom = React.createClass({
     },
     handerChangeInput: function(event) {
         this.props.callbackInputVal(event.target.value)
+    },
+    handlerOnChangeInputId: function(e) {
+/*        if(!isCardNo(e.target.value)) {
+            $FW.Component.Toast("身份证不格式不正确");
+            return false;
+        }*/
+
+        if(e.target.value !== "") {
+            this.setState({
+                codeClickable: true
+            });
+        } else {
+            this.setState({
+                codeClickable: false
+            });
+        }
+
+        this.props.callbackCardNo(e.target.value);
+
+        this.setState({
+            userId: e.target.value
+        });
     },
     render: function() {
         var userInfoData = this.props.propsUserInfo.userInfo;
@@ -168,7 +204,10 @@ var PswFrom = React.createClass({
                 <div className="input-block">
                     <span className="icon id-icon"></span>
                     <div className="text-block">
-                        {userInfoData.idCardNo.substring(0, 4) + "****" + userInfoData.idCardNo.substring((userInfoData.idCardNo.length - 4), userInfoData.idCardNo.length)}
+                        <input type="text" placeholder="请输入身份证"
+                            onChange={this.handlerOnChangeInputId}
+                            value={this.state.userId}
+                        />
                     </div>
                 </div>
 
@@ -193,7 +232,7 @@ var PswFrom = React.createClass({
                         {
                             this.state.code ?
                                 <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                <span className="btn" onClick={this.handerIdentifyingCode}>获取短信验证码</span>
+                                <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取短信验证码</span>
                         }
                     </span>
                 </div>
@@ -211,15 +250,24 @@ var Body = React.createClass({
             phoneNumber: userInfoData.userInfo.phoneNum,
             code: null,
             popShow: false,
-            phoneCodePromptShow: false
+            phoneCodePromptShow: false,
+            cardId: ""
         };
     },
     handlerSettingsPassword: function() {
         var _this = this;
+        
+        if(this.state.cardId === "") {
+            $FW.Component.Toast("身份证不能为空");
+            return false;
+        }
 
-        var idCardNo = this.state.getAjaxUserInfo.userInfo.idCardNo;
+        if(this.state.code === null) {
+            $FW.Component.Toast("验证码不能为空");
+            return false;
+        }
 
-        location.href = API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code;
+        location.href = API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId + "&validateCode=" + _this.state.code;
 
         /*$FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code,
@@ -253,6 +301,11 @@ var Body = React.createClass({
             phoneCodePromptShow: booleanVal
         });
     },
+    getCardNo: function(cardVal) {
+        this.setState({
+            cardId: cardVal
+        });
+    },
     render: function() {
 
         return (
@@ -268,6 +321,7 @@ var Body = React.createClass({
                     propsUserInfo={this.state.getAjaxUserInfo}
                     callbackInputVal={this.getCallbackInputVal}
                     callbackPhoneCodePromptShow={this.getPhoneCodePromptShow}
+                    callbackCardNo={this.getCardNo}
                 />
 
                 <div className="phone-code-prompt">
