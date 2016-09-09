@@ -80,7 +80,7 @@ var Text = React.createClass({
     render: function () {
         return (
             <div className="text-area">
-                马上升级徽商存管并且迁移资金，<br/>升级即视为我已阅读并同意
+                马上升级徽商存管并且迁移资金，<br/>升级即视为我已阅读并同意: <br/>
                 <a href="/static/wap/protocol-trusteeship/index.html" className="text">
                     《资金存管三方协议》</a>
                 &nbsp;
