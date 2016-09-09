@@ -4,7 +4,9 @@ const BindBankCard = React.createClass({
     getInitialState: function () {
         return {
             popShow: false,
-            bankName: {}
+            bankName: {
+                bankZone:this.props.item.userInfo.bankzone
+            }
         }
     },
     getPopShow: function (boolVal) {
@@ -14,8 +16,22 @@ const BindBankCard = React.createClass({
     },
     getBankName: function (val) {
         this.setState({
-            bankName: val
-        })
+            bankName: {
+                bankZone:val.bankName
+            }
+        });
+        $FW.Ajax({
+            url: API_PATH + "mpwap/api/v1/updateBankZone.shtml",
+            data:{
+                relevBankCard:val.bankNo
+            },
+            success:function(data){
+                $FW.Component.Alert('修改成功');
+            },
+            fail: function(data){
+                $FW.Component.Alert('修改失败，请再试一次');
+            }
+        });
     },
     render: function () {
         let prohibited = this.props.item.openStatus;
@@ -45,8 +61,8 @@ const BindBankCard = React.createClass({
                 {this.state.popShow ? <SelectBankList callbackSelectBankHide={this.getPopShow}
                                                       callbackBankName={this.getBankName}/> : null }
                 {prohibited == 3 || prohibited == 4 ?
-                    <Bran propsBankName={this.state.bankName} callbackPopShow={this.getPopShow}/> : null}
-                {prohibited < 3 ? <Branch /> : null}
+                    <Bran propsBankName={this.state.bankName.bankZone} callbackPopShow={this.getPopShow}/> : null}
+                {prohibited < 3 ? <Branch propsBankZone={this.props.item.userInfo.bankzone}/> : null}
                 <Warm />
 
             </div>
@@ -117,7 +133,6 @@ const Bran = React.createClass({
         this.props.callbackPopShow(true);
     },
     render: function () {
-        console.log(this.props.propsBankName.bankName)
         return (
             <div className="modify">
                 <a className="pure-a" href="/static/wap/change-bank-card/index.html">
@@ -128,7 +143,7 @@ const Bran = React.createClass({
                 </a>
                 <div className="wire-a"></div>
                 <div className="pure-a" onClick={this.handleJump}>
-                    <div className="xuanwu-a">{this.props.propsBankName.bankName}</div>
+                    <div className="xuanwu-a">{this.props.propsBankName}</div>
                     <div className="choice-a">
                         <div className="pleas-a">请选择</div>
                     </div>
@@ -142,7 +157,7 @@ const Branch = React.createClass({
     render: function () {
         return (
             <div className="pure">
-                <div className="xuanwu">北京招商银行宣武门支行</div>
+                <div className="xuanwu">{this.props.propsBankZone}</div>
                 <div className="choice">
                     <div className="pleas">请选择</div>
                 </div>
