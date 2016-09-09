@@ -702,8 +702,7 @@ var Body = React.createClass({
 
         return (
             <div className="cnt">
-                <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true}
-                        btnFun={this.backBtnClick}/>
+                {/*<TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnFun={this.backBtnClick}/>*/}
 
                 <Nav imgUrl={"images/nav-2.png"}/>
 
@@ -743,18 +742,18 @@ var Body = React.createClass({
 });
 
 $FW.DOMReady(function () {
+
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         enable_loading: true,
         success: function (data) {
-            ReactDOM.render(
-                <Body activity={data}/>,
-                document.getElementById("cnt")
-            );
+
+            var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
+            ReactDOM.render(<Header title={title} sub_text={'跳过'} sub_url={'/'}/>,
+                document.getElementById('header'));
+
+            ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
         }
     });
 
 });
-
-
-
