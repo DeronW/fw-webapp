@@ -28,7 +28,7 @@ const BindBankCard = React.createClass({
 				{prohibited == 5 ? <Cover hide={this.hideHandler} /> : null}
 				{prohibited == 5 ? <Bomb hide={this.hideHandler} username={this.props.item.realName} /> : null}
 				
-				<div className={prohibited < 3 ? "bank bank-top1" : "bank bank-top2"}>
+				<div className={prohibited <= 3 ? "bank bank-top1" : "bank bank-top2"}>
 					<div className="ash clearfix">
 						<div className={prohibited < 3 ? "img gray-img" : "img"}><img src={this.props.item.userInfo.bankLogo}/></div>
 						<div className="bankname">{this.props.item.userInfo.bankName}</div>
