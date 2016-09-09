@@ -17,9 +17,9 @@ const Form = React.createClass({
         }
     },
     clickHandler: function () {
-        console.log(this.state.money)
-        console.log(this.state.phone)
-        if(this.state.money && this.state.phone) {
+        if(this.state.money<1){
+            $FW.Component.Alert('充值金额不能低于1元')
+        }else if(this.state.money && this.state.phone) {
             this.setState({complete: true});
             if (this.state.counting != 0) return;
             this.setState({counting: this.props.countingSeconds});
