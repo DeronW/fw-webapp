@@ -103,8 +103,9 @@ var From = React.createClass({
             userData: {},
             identifyingCode: null,
             blur: true,
-            format_bankCard: null,
-            showPhoneCodePrompt: false
+            format_bankCard: "",
+            showPhoneCodePrompt: false,
+            bankCardNumber: false
         };
     },
     componentDidMount: function() {
@@ -150,7 +151,12 @@ var From = React.createClass({
         this.props.callbackBank(true);
     },
     headlerCode: function() {
-        var _this = this
+        var _this = this;
+
+        if(this.state.format_bankCard === "") {
+            return false;
+        }
+
         var phoneNo = this.props.ajaxData.userInfo.phoneNum;
         this.setState({showPhoneCodePrompt:true});
         _this.setState({
@@ -196,6 +202,7 @@ var From = React.createClass({
         this.setState({
             format_bankCard: numberFormat.format(event.target.value)
         });
+
     },
     render: function() {
         var _this = this;
@@ -235,6 +242,8 @@ var From = React.createClass({
                 return selectEml();
             }
         };
+
+        console.log(this.state.format_bankCard);
 
         return (
             <div className="">
@@ -283,8 +292,8 @@ var From = React.createClass({
 
                             {
                                 this.state.code ?
-                                    <span className="timing-text">{this.state.countdown}s后重新获取</span> :
-                                    <span className="btn" onClick={this.headlerCode}>获取短信验证码</span>
+                                    <span className="btn">{this.state.countdown}s后重新获取</span> :
+                                    <span className={this.state.format_bankCard === "" ? "btn" : "timing-text"} onClick={this.headlerCode}>获取短信验证码</span>
                             }
 
                         </span>
