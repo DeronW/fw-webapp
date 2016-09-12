@@ -568,8 +568,6 @@ var Body = React.createClass({
         var getAjaxUserInfo = this.props.activity;
 
 
-        console.log(this.state.userInfo.bankCardNo);
-
         if (this.state.userInfo.realName === "") {
             $FW.Component.Toast("用户名不能为空");
             return false;
@@ -760,7 +758,7 @@ $FW.DOMReady(function () {
         success: function (data) {
             var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
             ReactDOM.render(
-                <Header title={title} sub_text={'跳过'} sub_url={'javascript:history.back()'}/>,
+                <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
                 document.getElementById('header'));
 
             ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
