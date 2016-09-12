@@ -129,7 +129,10 @@ var BankAccount = React.createClass({
 
 		return (
 			<div className="pop-open-bank">
-				<TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}/>
+
+					<TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}/>	
+				
+				
 
 				<div className="select-bank">
 					<div className="search">
@@ -331,6 +334,9 @@ const Withdrawals = React.createClass({
 			selectBankId: bankInfo.bankNo
 		});
 	},
+	callbackOpenBankBtn: function() {
+		window.history.back();
+	},
 	render : function(){
 		var _this = this;
 
@@ -373,7 +379,7 @@ const Withdrawals = React.createClass({
 
 		return (
 			<div>
-				<TopNav title={"提现"} backBtn={true} />
+				<TopNav title={"提现"} backBtn={true}  btnFun={this.callbackOpenBankBtn}/>
 
 				<div className="stou clearfix">
 					<div className="zhaoshang"><img className="ico-zhaoshang" src={this.props.data.bankInfo.bankLogo}/></div>
@@ -432,10 +438,12 @@ const Withdrawals = React.createClass({
 					/> : null
 				}
 
+				<div className="forget-open-bank-link">
+					<a href="http://www.lianhanghao.com/index.php">忘记开户支行</a>
+				</div>
+
 				<div className="xt" onClick={this.handlerPost}>
-
 						下一步
-
 				</div>
 				
 				<div>
