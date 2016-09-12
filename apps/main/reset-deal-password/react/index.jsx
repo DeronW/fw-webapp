@@ -307,16 +307,20 @@ var Body = React.createClass({
         });
     },
     render: function() {
-
+        console.log(this.props.activity);
         return (
             <div>
-                <TopNav title={"升级存管账户"}
+                <TopNav title={"验证身份"}
                         backBtn={true}
                         btnFun={this.backBtnClick}
                         skipFun={this.handlerSkipBtn}
                         btnText={"跳过"}
                 />
-                <Nav imgUrl={"images/process-2.png"}/>
+
+                {
+                    this.props.activity.openStatus > 4 ? <Nav imgUrl={"images/process-2.png"}/> : null
+                }
+
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
                     callbackInputVal={this.getCallbackInputVal}
@@ -342,8 +346,6 @@ var Body = React.createClass({
     }
 });
 
-
-console.log(API_PATH);
 
 
 $FW.Ajax({

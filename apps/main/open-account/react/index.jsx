@@ -741,9 +741,84 @@ var Body = React.createClass({
     }
 });
 
+var InputDom = React.createClass({
+    render: function() {
+        return (
+            <div className="">
+                <div className="topDom">
+                    aa
+                </div>
+
+                <div className="from-block">
+                    <div className="input-block">
+                        <span className="icon name-icon"></span>
+                        <div className="text-block">
+                          <input type="text" placeholder="真实姓名"/>
+
+                        </div>
+                    </div>
+
+                    <div className="input-block">
+                        <span className="icon id-icon"></span>
+                        <div className="text-block">
+                            <input type="text" placeholder="身份证号"/>
 
 
+                        </div>
+                    </div>
 
+                    <div className="input-block">
+                        <span className="icon number-icon"></span>
+                        <div className="text-block">
+                           <input type="text" placeholder="银行卡号" />
+                        </div>
+                    </div>
+
+                    <div className="input-block" onClick={this.handlerBank}>
+                        <span className="bank-name">开户银行</span>
+
+                        <span className="bank-logo">
+
+                        </span>
+                    </div>
+
+                    <div className="input-block code-block">
+                        <span className="input">
+                            <input type="text" placeholder="请输入验证码" />
+                        </span>
+
+                        <span className="btn-code">
+                            <span className="line"></span>
+
+                                    <span className="bt" >获取短信验证码</span>
+
+
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+        );
+    }
+});
+
+
+/*
+ReactDOM.render(
+    <Header title="b"/>,
+    document.getElementById('header'));
+
+*/
+
+ReactDOM.render(
+    <InputDom />,
+    document.getElementById("cnt")
+);
+
+
+/*
 $FW.DOMReady(function () {
 
     $FW.Ajax({
@@ -759,4 +834,4 @@ $FW.DOMReady(function () {
         }
     });
 
-});
+});*/
