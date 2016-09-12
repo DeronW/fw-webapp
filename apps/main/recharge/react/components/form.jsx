@@ -12,15 +12,13 @@ const Form = React.createClass({
         return {
             phone:this.props.phone,
             money:null,
-            counting: 0,
-            complete: false
+            counting: 0
         }
     },
     clickHandler: function () {
         if(this.state.money<1){
             $FW.Component.Alert('充值金额不能低于1元')
         }else if(this.state.money && this.state.phone) {
-            this.setState({complete: true});
             if (this.state.counting != 0) return;
             this.setState({counting: this.props.countingSeconds});
             this.timer = setInterval(()=> {
@@ -75,6 +73,9 @@ const Form = React.createClass({
         }
     },
     render: function () {
+
+        let btn_class = this.state.money >= 1 && this.state.phone ? "gqm blued" : "gqm gray";
+
         return (
             <div className="modify">
                 <div className="money">
@@ -92,7 +93,7 @@ const Form = React.createClass({
                                onChange={this.codeChangeHandler}
                                placeholder="请输入验证码"/>
                     </div>
-                    <div className={this.state.complete ? "gqm blued" : "gqm gray"} onClick={this.clickHandler}>
+                    <div className={btn_class} onClick={this.clickHandler}>
                         {this.state.counting ? this.state.counting + 's' : '获取验证码'}
                     </div>
                 </div>
