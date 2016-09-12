@@ -21,7 +21,7 @@ const MAIN_APP_NAMES = [
     // 新增页面
     'vip-prerogative', // VIP特权详情页
     'guide-cookbook',
-    'app-download',
+    'app-download', // app 下载页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
 
@@ -36,12 +36,14 @@ const MAIN_APP_NAMES = [
     'hui-shang-cash-flow', // 徽商资金流水列表
     'register-success', // 新用户注册成功后跳转落地页
     'open-account-fail', //开户失败
-    'recharge-recording', // 充值记录, 暂未启用
     'recharge', // 给金融工场账户充值
-    'cash',
+    'cash', // 用户提现
     'hs-topic', //徽商专题页面
     'protocol-trusteeship', // 资金托管协议
     'protocol-counseling', // 咨询服务协议
+
+    // 专题页面
+    'topic-hui-shang', // 徽商专题页面
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
