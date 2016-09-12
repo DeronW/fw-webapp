@@ -39,7 +39,6 @@ const MAIN_APP_NAMES = [
     'recharge-recording', // 充值记录, 暂未启用
     'recharge', // 给金融工场账户充值
     'cash',
-    'verify-identity',
     'hs-topic', //徽商专题页面
     'protocol-trusteeship', // 资金托管协议
     'protocol-counseling', // 咨询服务协议
