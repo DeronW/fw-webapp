@@ -129,7 +129,6 @@ var From = React.createClass({
     onInputChangeHandler: function(event){
         //　....　data
         this.props.callbackParent(event.target.value);
-
         this.setState({
             account: numberFormat.format(event.target.value)
         });
@@ -235,9 +234,7 @@ var From = React.createClass({
             } else if (userAjaxData.userInfo.bankName !== "") {
                 return selectEml();
             }
-
         };
-
 
         return (
             <div className="">
