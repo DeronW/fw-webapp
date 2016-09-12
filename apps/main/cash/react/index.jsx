@@ -437,10 +437,7 @@ const Withdrawals = React.createClass({
 						callbackCode={this.getCode}
 					/> : null
 				}
-
-				<div className="forget-open-bank-link">
-					<a href="http://www.lianhanghao.com/index.php">忘记开户支行</a>
-				</div>
+				
 
 				<div className="xt" onClick={this.handlerPost}>
 						下一步
