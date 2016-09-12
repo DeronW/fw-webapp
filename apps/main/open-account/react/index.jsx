@@ -568,6 +568,8 @@ var Body = React.createClass({
         var getAjaxUserInfo = this.props.activity;
 
 
+        console.log(this.state.userInfo.bankCardNo);
+
         if (this.state.userInfo.realName === "") {
             $FW.Component.Toast("用户名不能为空");
             return false;
@@ -580,6 +582,11 @@ var Body = React.createClass({
 
         if (this.state.userInfo.bankCardNo === "") {
             $FW.Component.Toast("银行账号不能为空");
+            return false;
+        }
+
+        if (this.state.userInfo.bankCardNo.length < 16 || this.state.userInfo.bankCardNo.length > 19) {
+            $FW.Component.Toast("请输入16位到19位的银行卡号");
             return false;
         }
 
