@@ -146,7 +146,7 @@ var Body = React.createClass({
             code: val
         });
     },
-    getPromptShow: function(booleanVal) {
+    getPromptShow: function (booleanVal) {
         this.setState({
             promptShow: booleanVal
         });
@@ -155,7 +155,6 @@ var Body = React.createClass({
 
         return (
             <div>
-                <TopNav title={"设置交易密码"} backBtn={true} btnText={"跳过"}/>
                 <Nav imgUrl={"images/process-2.png"}/>
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
@@ -182,13 +181,18 @@ var Body = React.createClass({
     }
 });
 
+$FW.DOMReady(function () {
+    ReactDOM.render(<Header title={"设置交易密码"} sub_text={'跳过'} sub_url={'/'}/>,
+        document.getElementById('header'));
 
-$FW.Ajax({
-    url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
-    success: function (data) {
-        ReactDOM.render(
-            <Body activity={data}/>,
-            document.getElementById("cnt")
-        );
-    }
+    $FW.Ajax({
+        url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+        success: function (data) {
+            ReactDOM.render(
+                <Body activity={data}/>,
+                document.getElementById("cnt")
+            );
+        }
+    });
 });
+

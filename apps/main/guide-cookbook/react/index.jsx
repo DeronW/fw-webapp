@@ -6,9 +6,13 @@ $FW.DOMReady(function () {
     } else {
         ReactDOM.render(<Header title={'玩赚攻略'}/>, document.getElementById('header'));
     }
+
+    if (!$FW.Browser.inIOS()) {
+        document.getElementById('apple-limit').style.display = 'none';
+    }
 });
 
-function register(){
+function register() {
     if ($FW.Browser.inApp()) {
         NativeBridge.toNative('app_register');
     } else {

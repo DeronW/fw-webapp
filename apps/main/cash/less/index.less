@@ -139,7 +139,7 @@ input[type=checkbox],input[type=radio] {
     height: 114px;
     position: relative;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 130px;
     box-sizing: border-box;
     background: #fff;
     border-top: 1px solid #d8d8d8;
@@ -370,30 +370,42 @@ input[type=checkbox],input[type=radio] {
 }
 
 .moneyTxt{
-    font-size: 31px;
-    color: #cccccc;
+    font-size: 30px;
+    height: 30px;
+    color: #000;
     width: 98%;
     display: inline-block;
 }
 
+.input-text {
+  font-size: 30px;
+  height: 30px;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+
+  color: #ccc;
+}
+
+.bank-height {
+  height: 100px;
+}
+
+
 .select-bank{
-    position: absolute;
-    top: 0px;
-    bottom: 0;
     width: 100%;
-    z-index: 1;
+
     background: #ebebee;
     
     .search{
        width: 90%;
        height: 81px;
+       margin: 10px auto 0;
        line-height: 81px;
        border:1px solid #dddddd;
        border-radius: 6px;
-       background: white; 
-       position: fixed;
-       top: 136px;
-       left: 4%;
+       background: white;
        z-index: 10;
     }
     
@@ -417,9 +429,7 @@ input[type=checkbox],input[type=radio] {
     
     .list{
         width: 100%;
-        position: absolute;
-        top: 258px;
-        z-index: 6;
+        margin-top: 40px;
         background: white;
     }
   
@@ -443,6 +453,89 @@ input[type=checkbox],input[type=radio] {
         display: inline-block;
     }
     
+}
+
+.forget-open-bank-link {
+    margin: 20px 0 0;
+    height: 50px;
+
+    a {
+        float: right;
+        color: #4aa1f9;
+        font-size: 30px;
+        line-height: 50px;
+        height: 50px;
+    }
+}
+
+.pop-open-bank {
+  position: absolute;
+  top: 0;
+  left:0;
+  background: #ebebee;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100px;
+
+  .info {
+      position: fixed;
+      width: 100%;
+      height: 100px;
+      background-color: #fff;
+
+      .back-btn {
+          position: absolute;
+          left: 0;
+          right: 0;
+          width: 80px;
+          height: 100px;
+
+          img {
+              margin: 27px 0 0 14px;
+          }
+      }
+
+      .title {
+          line-height: 100px;
+          text-align: center;
+          font-size: 40px;
+          color: #333;
+      }
+
+      .r-text {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 80px;
+          color: #999;
+          font-size: 28px;
+          line-height: 100px;
+          text-align: center;
+      }
+  }
+
+}
+
+.promptBankNo {
+    margin: 310px 0 0 0;
+    padding: 0 150px;
+    font-size: 26px;
+    line-height: 44px;
+    text-align: center;
+    color: #ccc;
+
+    .number-text {
+        color: #4aa1f9;
+    }
 }
 
 .order-processing, .order-success, .order-fail {

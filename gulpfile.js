@@ -21,33 +21,28 @@ const MAIN_APP_NAMES = [
     // 新增页面
     'vip-prerogative', // VIP特权详情页
     'guide-cookbook',
-    'app-download',
+    'app-download', // app 下载页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
 
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
-    'open-account', // 原 hui-shang-bank, 新老用户开户页面
+    'change-bank-card', // 修改绑定银行卡
+    'open-account', // 新老用户开户页面
     'hui-shang-account', // 徽商存管帐户
-    'set-deal-password', // 原 'hui-shang-settings-password', 设置交易密码
+    'set-deal-password', // 设置交易密码
     'reset-deal-password', //第二次设置交易密码
-    'open-account-complete', // 原 'hui-shang-succeed' 徽商开户成功页面
-    'hui-shang-cash-flow', // 原 'hui-shang-resultList', // 徽商资金流水列表
+    'open-account-complete', // 徽商开户成功页面
+    'hui-shang-cash-flow', // 徽商资金流水列表
     'register-success', // 新用户注册成功后跳转落地页
     'open-account-fail', //开户失败
-    'bind-card',
-    'change-bank-card',
-    'recharge-recording', // 充值记录, 暂未启用
     'recharge', // 给金融工场账户充值
-    // 'personal-center',
-    // 'first-page',
-    'cash',
-    'special-cash',
-    'verify-identity',
-    'open-bank',
-    'hs-topic', //徽商专题页面
-    'trusteeship-pact', // 资金托管协议
-    'counseling-pact', // 咨询服务协议
+    'cash', // 用户提现
+    'protocol-trusteeship', // 资金托管协议
+    'protocol-counseling', // 咨询服务协议
+
+    // 专题页面
+    'topic-hui-shang', // 徽商专题页面
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
@@ -59,7 +54,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-        api_path: "http://pengyan.9888.cn/",
+        api_path: "http://xjb.9888.cn/",
         include_components: common_components,
         include_common_js: common_js
     });

@@ -103,7 +103,9 @@ var From = React.createClass({
             userData: {},
             identifyingCode: null,
             blur: true,
-            format_bankCard: null
+            format_bankCard: "",
+            showPhoneCodePrompt: false,
+            bankCardNumber: false
         };
     },
     componentDidMount: function() {
@@ -128,7 +130,6 @@ var From = React.createClass({
     onInputChangeHandler: function(event){
         //　....　data
         this.props.callbackParent(event.target.value);
-
         this.setState({
             account: numberFormat.format(event.target.value)
         });
@@ -150,9 +151,14 @@ var From = React.createClass({
         this.props.callbackBank(true);
     },
     headlerCode: function() {
-        var _this = this
-        var phoneNo = this.props.ajaxData.userInfo.phoneNum;
+        var _this = this;
 
+        if(this.state.format_bankCard === "") {
+            return false;
+        }
+
+        var phoneNo = this.props.ajaxData.userInfo.phoneNum;
+        this.setState({showPhoneCodePrompt:true});
         _this.setState({
             code: 1
         });
@@ -196,6 +202,7 @@ var From = React.createClass({
         this.setState({
             format_bankCard: numberFormat.format(event.target.value)
         });
+
     },
     render: function() {
         var _this = this;
@@ -234,9 +241,9 @@ var From = React.createClass({
             } else if (userAjaxData.userInfo.bankName !== "") {
                 return selectEml();
             }
-
         };
 
+        console.log(this.state.format_bankCard);
 
         return (
             <div className="">
@@ -269,11 +276,10 @@ var From = React.createClass({
                     </div>
 
                     <div className="input-block" onClick={this.handlerBank}>
-                        <span className="bank-name">开户银行</span>
-
                         <span className="bank-logo">
                             {selectEml()}
                         </span>
+                        <span className="bank-name">选择开户银行></span>
                     </div>
 
                     <div className="input-block code-block">
@@ -286,15 +292,15 @@ var From = React.createClass({
 
                             {
                                 this.state.code ?
-                                    <span className="timing-text">{this.state.countdown}s后重新获取</span> :
-                                    <span className="btn" onClick={this.headlerCode}>获取短信验证码</span>
+                                    <span className="btn">{this.state.countdown}s后重新获取</span> :
+                                    <span className={this.state.format_bankCard === "" ? "btn" : "timing-text"} onClick={this.headlerCode}>获取短信验证码</span>
                             }
 
                         </span>
                     </div>
                 </div>
 
-                <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/>
+                {this.state.showPhoneCodePrompt ? <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/> : null}
             </div>
 
         );
@@ -404,7 +410,6 @@ var SelectBank = React.createClass({
     }
 });
 
-
 var Body = React.createClass({
     getInitialState: function() {
         var getAjaxUserInfo = this.props.activity;
@@ -479,11 +484,11 @@ var Body = React.createClass({
         }
 
         let bankCard = this.state.userInfo.bankCardNo;
-        let idCardNo = this.state.userInfo.idCardNo;
+        let bankNo = this.state.userInfo.bankId;
         let validateCode = this.state.userInfo.validateCode;
 
        $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/changeBankCard.shtml?bankCard=" + space(bankCard) + "&bankId=" + idCardNo + "&validateCode=" + validateCode,
+            url: API_PATH + "mpwap/api/v1/changeBankCard.shtml?bankCard=" + space(bankCard) + "&bankId=" + bankNo + "&validateCode=" + validateCode,
             success: function(data) {
                 console.log(data);
                 location.href = "/static/wap/bind-bank-card/index.html";

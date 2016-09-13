@@ -5,22 +5,18 @@ const Form = React.createClass({
             money: null,
             phone: null,
             verify_code: null,
-            token: null
+            token: ""
         }
     },
     getInitialState: function () {
         return {
             phone:this.props.phone,
-            money:null,
-            counting: 0,
-            complete: false
+            money: "",
+            counting: 0
         }
     },
     clickHandler: function () {
-        console.log(this.state.money)
-        console.log(this.state.phone)
         if(this.state.money && this.state.phone) {
-            this.setState({complete: true});
             if (this.state.counting != 0) return;
             this.setState({counting: this.props.countingSeconds});
             this.timer = setInterval(()=> {
@@ -44,9 +40,20 @@ const Form = React.createClass({
     },
     moneyChangeHandler: function (e) {
         var money = e.target.value;
-        this.setState({money: money});
+
+        if(money[0] === "0" ) {
+            this.setState({
+                money: ""
+            });
+            return false;
+        }
+
+        this.setState({
+            money: numberFormat.format(money)
+        });
     },
     phoneChangeHandler: function (e) {
+
         this.setState({phone: e.target.value});
     },
 
@@ -55,6 +62,12 @@ const Form = React.createClass({
     },
 
     submitHandler: function () {
+        if(this.state.money < 1) {
+            $FW.Component.Toast("充值金额不能低于1元");
+            return false;
+        }
+
+
         if (!this.state.money) {
             $FW.Component.Alert('请输入充值金额')
         } else if (!this.state.phone) {
@@ -75,6 +88,9 @@ const Form = React.createClass({
         }
     },
     render: function () {
+
+        let btn_class = this.state.money >= 1 && this.state.phone ? "gqm blued" : "gqm gray";
+
         return (
             <div className="modify">
                 <div className="money">
@@ -92,7 +108,7 @@ const Form = React.createClass({
                                onChange={this.codeChangeHandler}
                                placeholder="请输入验证码"/>
                     </div>
-                    <div className={this.state.complete ? "gqm blued" : "gqm gray"} onClick={this.clickHandler}>
+                    <div className={btn_class} onClick={this.clickHandler}>
                         {this.state.counting ? this.state.counting + 's' : '获取验证码'}
                     </div>
                 </div>
