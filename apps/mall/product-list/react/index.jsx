@@ -18,8 +18,8 @@ const ResultPage = React.createClass({
     },
     render: function () {
         return (
-            <div>
-                <SearchBar/>
+            <div onClick={this.searchFocus}>
+                {$FW.Format.urlQuery().searchSourceType? <SearchBar/>:null}
                 <ResultPage.CategoryBanner />
                 <ExchangeBar/>
                 <div className="products-list">
@@ -69,28 +69,43 @@ const SearchBar = React.createClass({
             method: 'post'
         })
     },
+    backHandler: function () {
+       history.back();
+    },
     render: function () {
         let item = (d) => {
             let click = () => this.setState({value: d}, this.searchHandler);
             return <div className="history-item" key={d} onClick={click}>{d}</div>;
-        }
-
-        return (
-            <div className="search-bar">
-                <div className="search-page-box">
-                    <a className="back-arrow"></a>
-                    <input type="text" value={this.state.value}
-                           placeholder="请输入想找的商品"
-                           onChange={this.changeHandler}
-                    />
-                    <span className="search-page-icon"></span>
-                    <span className="search-confirm" onClick={this.searchHandler}>确认</span>
-                </div>
-                <div className="search-history">
+        };
+		let searchHistory = () => {
+           let showSearchHistory=false;
+           if(this.state.value){
+           		showSearchHistory=true;
+           }else{
+           		showSearchHistory=false;
+           }
+            return (
+            	showSearchHistory?
+            	<div className="search-history">
                     <div className="search-history-input">历史搜索</div>
                     {this.state.history.map(item)}
                     <div className="clear-history" onClick={this.clearHistoryHandler}>清空历史搜索</div>
+                </div>:null
+            )
+        };
+        return (
+            <div className="search-bar">
+                <div className="search-page-box">
+                    <a className="back-arrow" onClick={this.backHandler}></a>
+                    <input type="text" value={this.state.value}
+                           placeholder="请输入想找的商品"
+                           onChange={this.changeHandler}
+                           id='searchInput'
+                    />
+                    <span className="search-page-icon" onClick={this.searchHandler}></span>
+                    <span className="search-confirm" onClick={this.searchHandler}>取消</span>
                 </div>
+                {searchHistory()}
             </div>
         )
     }
@@ -103,7 +118,10 @@ const ExchangeBar = React.createClass({
         return {
             tab: 'defaultSort',
             sort: -1,
-            vipLevel: 0
+            vipLevel: 0,
+            showFilterPop:false,
+            filterScore:'不限',
+            filterLevel:'不限',
         }
     },
     searchHandler: function(){
@@ -142,9 +160,15 @@ const ExchangeBar = React.createClass({
 	        };
         	search(options, true);
         }else if(tabName=='filter'){
-        	
+        	this.state.showFilterPop=true;
         }
         this.setState({tab: tabName});
+    },
+    filterScoreHandler: function(name){
+        this.setState({filterScore:name});
+    },
+    filterLevelHandler: function(name){
+        this.setState({filterLevel:name});
     },
     render: function () {
         var _this = this;
@@ -194,13 +218,20 @@ const ExchangeBar = React.createClass({
             )
         };
 
-        let gongfeng_array = ['不限', '我可兑换', '1~100', '101~1000', '1000~5000', '5000以上'];
-        let gongfeng_item = gongfeng_array.map((name, index) => <span className="gongfeng-item-wrap" key={index}><span
-            className="gongfeng-item">{name}</span></span>);
-
+        let gongfeng_array = ['不限', '我可兑换', '1-100', '101-1000', '1000-5000', '5000以上'];
+        let gongfeng_item = gongfeng_array.map((name, index) =>{        	
+	        	return (
+	        		<span className={this.state.filterScore==name?"gongfeng-item-wrap on":"gongfeng-item-wrap"} key={index}><span className="gongfeng-item" onClick={function(){_this.filterScoreHandler(name)}}>{name}</span></span>	           
+	        	)        	
+        	} 
+		);
         let viplevel_array = ['不限', '普通会员', 'Vip1专享', 'Vip2专享', 'Vip3专享', 'Vip4专享'];
-        let viplevel_item = viplevel_array.map((name, index) => <span className="viplevel-item-wrap" key={index}><span
-            className="viplevel-item">{name}</span></span>);
+        let viplevel_item = viplevel_array.map((name, index) =>{        	
+	        	return (
+	        		<span className={this.state.filterLevel==name?"viplevel-item-wrap on":"viplevel-item-wrap"} key={index}><span className="viplevel-item" onClick={function(){_this.filterLevelHandler(name)}}>{name}</span></span>	           
+	        	)        	
+        	} 
+		); 
         return (
             <div className="filter-tab">
                 <div className="ui-tab">
@@ -208,7 +239,7 @@ const ExchangeBar = React.createClass({
                         {this.tabs.map(tab)}
                     </div>
                 </div>
-                <div className="filter-box">
+                <div className="filter-box" style={{zIndex:"10"}}>
                     <div className="filter-box-wrap">
                         <div className="gongfeng-filter-box">
                             <div className="filter-title">按工分值</div>
@@ -273,10 +304,21 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
+	
     var title = $FW.Format.urlQuery().title || '商品列表';
-    NativeBridge.setTitle(title);
-    if ($FW.Utils.shouldShowHeader())
+    if($FW.Format.urlQuery().searchSourceType==1){
+    	title='我可兑换'
+    }
+    if($FW.Format.urlQuery().searchSourceType){
+    	
+    }else{
+    	NativeBridge.setTitle(title);
+    	if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={title} back_handler={backward}/>, document.getElementById('header'));
+    }
+    console.log($FW.Format.urlQuery());
+    
+    
 
     window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
 });
