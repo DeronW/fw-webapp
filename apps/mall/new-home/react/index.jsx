@@ -51,7 +51,9 @@ const Mall = React.createClass({
             return <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                     activity_id={i.activity_id} products={i.products} key={index}/>;
         };
-
+		let backFactory=()=>{
+			return $FW.Browser.inApp() ?<img className="m-logo" src="images/m-logo.png"/>:<a className="back-factory" href="http://m.9888.cn/mpwap/">回到工场</a>
+		};
         return (
             <div className="head-wrap">
                 {this.props.banners.length ?
@@ -59,21 +61,21 @@ const Mall = React.createClass({
                                  onImageClick={this.onImageClickHandler}/> :
                     <div className="no-banner"></div>}
                 <div className="head-items">
-                    <img className="m-logo" src="images/m-logo.png"/>
-                    <a onClick={function(){ gotoHandler("/static/mall/product-list/index.html", true) }} className="search-bar-a"><input className="search-bar" type="text" value="" placeholder="搜索"/></a>
+                    {backFactory()}
+                    <a onClick={function(){ gotoHandler("/static/mall/product-list/index.html") }} className="search-bar-a"><input className="search-bar" type="text" value="" placeholder="搜索"/></a>
                     <img className="search-icon" src="images/search-icon.png"/>
                     <a className="index-avatar" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><img src="images/profile-icon.png"/></a>
                 </div>
                 <div className="head-user-info">
                      <div className="my-score"><span className="my-score-icon"></span>我的工分:<span className="score-num">{this.state.user_score}工分</span></div>
-                     <a className="my-exchange" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><span className="my-exchange-icon"></span>我可兑换</a>
+                     <a className="my-exchange" onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true) }}><span className="my-exchange-icon"></span>我可兑换</a>
                      <a className="my-mall" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><span className="my-mall-icon"></span>我的商城</a>
                      <span className="vertical-gray-line"></span>
                 </div>
                 <div className="header-nav">
                     <a className="recharge" onClick={function(){ gotoHandler("/static/mall/product-recharge/index.html",true) }}>充值中心</a>
                     <a className="vip" onClick={function(){ gotoHandler("/static/mall/product-vip-zone/index.html") }}>VIP专区</a>
-                    <a className="goods" onClick={function(){ gotoHandler("/static/mall/gamble-nine/index.html?c", true) }}>玩玩乐</a>
+                    <a className="goods" onClick={function(){ gotoHandler("/static/mall/gamble-nine/index.html?"+(+new Date()), true) }}>玩玩乐</a>
                     <a className="mine" onClick={function(){ gotoHandler("/user", true) }}>品类</a>
                 </div>
                 <div className="index-actList-wrap">
