@@ -15,9 +15,9 @@ const SelectBankList = React.createClass({
             $FW.Ajax({
                 url: API_PATH + "mpwap/api/v1/getBankList.shtml",
                 data: {
-                    index: "10",
+                    index: "1",
                     keyword: value,
-                    size: "10"
+                    size: "20"
                 },
                 success: (data) => {
                     console.log(data)
