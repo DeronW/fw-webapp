@@ -293,7 +293,7 @@ var From = React.createClass({
                             {
                                 this.state.code ?
                                     <span className="btn">{this.state.countdown}s后重新获取</span> :
-                                    <span className={this.state.format_bankCard === "" ? "btn" : "timing-text"} onClick={this.headlerCode}>获取短信验证码</span>
+                                    <span className={this.state.format_bankCard === "" ? "btn" : "timing-text"} onClick={this.headlerCode}>获取验证码</span>
                             }
 
                         </span>
