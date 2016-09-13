@@ -5,20 +5,18 @@ const Form = React.createClass({
             money: null,
             phone: null,
             verify_code: null,
-            token: null
+            token: ""
         }
     },
     getInitialState: function () {
         return {
             phone:this.props.phone,
-            money:null,
+            money: "",
             counting: 0
         }
     },
     clickHandler: function () {
-        if(this.state.money<1){
-            $FW.Component.Alert('充值金额不能低于1元')
-        }else if(this.state.money && this.state.phone) {
+        if(this.state.money && this.state.phone) {
             if (this.state.counting != 0) return;
             this.setState({counting: this.props.countingSeconds});
             this.timer = setInterval(()=> {
@@ -42,9 +40,20 @@ const Form = React.createClass({
     },
     moneyChangeHandler: function (e) {
         var money = e.target.value;
-        this.setState({money: money});
+
+        if(money[0] === "0" ) {
+            this.setState({
+                money: ""
+            });
+            return false;
+        }
+
+        this.setState({
+            money: numberFormat.format(money)
+        });
     },
     phoneChangeHandler: function (e) {
+
         this.setState({phone: e.target.value});
     },
 
@@ -53,6 +62,12 @@ const Form = React.createClass({
     },
 
     submitHandler: function () {
+        if(this.state.money < 1) {
+            $FW.Component.Toast("充值金额不能低于1元");
+            return false;
+        }
+
+
         if (!this.state.money) {
             $FW.Component.Alert('请输入充值金额')
         } else if (!this.state.phone) {

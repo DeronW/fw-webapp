@@ -1,5 +1,18 @@
 const API_PATH = document.getElementById("api-path").value;
 
+var numberFormat = {
+    val: "",
+    format: function(val) {
+        this.val = val.replace(/[^\d.]/g, "").
+        //只允许一个小数点
+        replace(/^\./g, "").replace(/\.{2,}/g, ".").
+        //只能输入小数点后两位
+        replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+
+        return this.val;
+    }
+};
+
 const Mask = React.createClass({
     clickHandler: function () {
         window.history.back();
