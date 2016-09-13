@@ -314,7 +314,7 @@ var Body = React.createClass({
                         backBtn={true}
                         btnFun={this.backBtnClick}
                         skipFun={this.handlerSkipBtn}
-                        btnText={"跳过"}
+                        btnText={""}
                 />
 
                 {
