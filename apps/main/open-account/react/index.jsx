@@ -583,6 +583,11 @@ var Body = React.createClass({
             return false;
         }
 
+        if (this.state.userInfo.bankCardNo.length < 16 || this.state.userInfo.bankCardNo.length > 19) {
+            $FW.Component.Toast("请输入16位到19位的银行卡号");
+            return false;
+        }
+
         if (this.state.userInfo.bankId === null) {
             $FW.Component.Toast("请选择银行");
             return false;
@@ -744,6 +749,7 @@ var Body = React.createClass({
 
 
 
+
 $FW.DOMReady(function () {
 
     $FW.Ajax({
@@ -752,7 +758,7 @@ $FW.DOMReady(function () {
         success: function (data) {
             var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
             ReactDOM.render(
-                <Header title={title} sub_text={'跳过'} sub_url={'javascript:history.back()'}/>,
+                <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
                 document.getElementById('header'));
 
             ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
