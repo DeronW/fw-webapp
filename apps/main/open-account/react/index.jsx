@@ -116,14 +116,18 @@ var PhoneCodePrompt = React.createClass({
 
 var Text = React.createClass({
     render: function () {
+        console.log(this.props.userOpenStatusCode);
+
         return (
             <div className="text-area">
                 马上升级徽商存管并且迁移资金，<br/>升级即视为我已阅读并同意: <br/>
                 <a href="/static/wap/protocol-trusteeship/index.html" className="text">
                     《资金存管三方协议》</a>
                 &nbsp;
-                <a href="/static/wap/protocol-counseling/index.html" className="text">
-                    《信息咨询服务协议》</a>
+                {
+                    this.props.userOpenStatusCode === "1" ? <a href="/static/wap/protocol-counseling/index.html" className="text">《信息咨询服务协议》</a> : null
+                }
+
             </div>
         );
     }
@@ -834,7 +838,7 @@ var Body = React.createClass({
 
                 <Btn btnText={"同意"} Fun={this.clickFun}/>
 
-                <Text />
+                <Text userOpenStatusCode={this.props.activity.openStatus}/>
 
                 {
                     _this.state.backSelect ? <SelectBank
