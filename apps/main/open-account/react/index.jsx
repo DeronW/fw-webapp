@@ -47,19 +47,57 @@ var Btn = React.createClass({
 var PhoneCodePrompt = React.createClass({
     getInitialState: function () {
         return {
-            getUserInfo: this.props.getGetPorpsUserInfo
+            getUserInfo: this.props.getGetPorpsUserInfo,
+            countdown: 60
         };
+    },
+    componentWillUnmount: function() {
+        clearInterval(this.interval);
     },
     handlerVoice: function () {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
+        var n = 60;
+        var _this = this;
 
-        console.log(phoneNo);
+        if(this.props.callbackCountdown === n) {
+            console.log(this.state.countdown);
+            this.props.callbackCode(1);
+
+            this.interval = setInterval(function () {
+                _this.setState({
+                    countdown: --_this.state.countdown
+                });
+
+                _this.props.callbackCountdownVal(_this.state.countdown);
+
+                if (_this.state.countdown == 0) {
+                    clearInterval(_this.interval);
+
+                    _this.props.callbackCode(0);
+                    _this.props.callbackCountdownVal(n);
+                    _this.setState({
+
+                        countdown: 60
+                    });
+                }
+            }, 1000);
+
+        }else if(this.props.callbackCountdown < n) {
+            $FW.Component.Toast(this.props.callbackCountdown + "后才能获取");
+            return false;
+        }
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
             method: "GET",
-            success: function (data) {
+            success: function(data) {
                 console.log(data);
+            },
+            fail: function(code, msg){
+                _this.props.callbackCode(0);
+
+                clearInterval(_this.interval);
+                _this.interval = null;
             }
         });
     },
@@ -112,7 +150,7 @@ var TopNav = React.createClass({
                     }
 
                     <div className="title">{this.props.title}</div>
-                    <span className="r-text">{this.props.btnText}</span>
+                    <span className="r-text" onClick={this.props.callbackLeapfrogBtn}>{this.props.btnText}</span>
                 </div>
             </div>
         );
@@ -136,7 +174,8 @@ var From = React.createClass({
             nameVal: false,
             userId: false,
             bankCard: false,
-            userOpenStatus: this.props.ajaxData.openStatus
+            userOpenStatus: this.props.ajaxData.openStatus,
+            failShow: false
         };
     },
     componentDidMount: function () {
@@ -190,8 +229,6 @@ var From = React.createClass({
         var _this = this
         var phoneNo = this.props.ajaxData.userInfo.phoneNum;
 
-        console.log(this.userInfoAllVal());
-
         if (this.userInfoAllVal()) {
             return false;
         }
@@ -221,7 +258,18 @@ var From = React.createClass({
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=SMS",
-            method: "GET"
+            method: "GET",
+            success: function(data) {
+                console.log(data);
+            },
+            fail: function(code, msg){
+                _this.setState({
+                    code: 0
+                });
+
+                clearInterval(_this.interval);
+                _this.interval = null;
+            }
         });
     },
     validateCodeChangeHandler: function (event) {
@@ -302,14 +350,25 @@ var From = React.createClass({
 
         var val = _this.props.transmittalInputAllVal;
 
+
         if (val.realName !== "" && val.idCardNo !== "" && val.bankCardNo !== "" && val.bankNo !== null) {
-            console.log("1");
+
             return false;
         } else {
-            console.log("2");
+
             return true;
         }
 
+    },
+    getCode: function(booleanVal) {
+        this.setState({
+            code: booleanVal
+        });
+    },
+    getCountdownVal: function(timerVal) {
+        this.setState({
+            countdown: timerVal
+        });
     },
     render: function () {
         var _this = this;
@@ -412,7 +471,12 @@ var From = React.createClass({
 
                 <div className="phone-code-prompt">
                     {
-                        this.state.phoneCodePromptShow ? <PhoneCodePrompt getGetPorpsUserInfo={userAjaxData}/> : null
+                        this.state.phoneCodePromptShow ? <PhoneCodePrompt
+                            getGetPorpsUserInfo={userAjaxData}
+                            callbackCountdown={this.state.countdown}
+                            callbackCode={this.getCode}
+                            callbackCountdownVal={this.getCountdownVal}
+                        /> : null
                     }
                 </div>
 
@@ -422,6 +486,25 @@ var From = React.createClass({
     }
 });
 
+
+var Pop = React.createClass({
+    render: function() {
+        return (
+            <div className="pop-body">
+                <div className="pop-back"></div>
+                <div className="pop-cnt">
+                    <div className="pop-info">
+                        <p>{this.props.propsPopInfo}</p>
+                    </div>
+                    <div className="pop-btn">
+                        <div className="cancel-btn btn l-btn" onClick={this.props.callbackCancelBtn}>取消</div>
+                        <div className="confirm-btn btn r-btn" onClick={this.props.callbackConfirmBtn}>确认</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+});
 
 var SelectBank = React.createClass({
     getInitialState: function () {
@@ -539,6 +622,7 @@ var Body = React.createClass({
             validateCode: null,
             pleaseCode: true,
             nueOldUser: true,
+            popShow: false,
             userInfo: {
                 bankCardNo: getAjaxUserInfo.userInfo.bankCard,
                 bankNo: getAjaxUserInfo.userInfo.bankId,
@@ -701,13 +785,36 @@ var Body = React.createClass({
     backBtnClick: function () {
         window.history.back();
     },
+    getLeapfrogBtn: function() {
+        this.setState({
+            popShow: true
+        });
+    },
+    getCancelBtn: function() {
+        this.setState({
+            popShow: false
+        });
+    },
+    getConfirmBtn: function() {
+        window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+
+        this.setState({
+            popShow: false
+        });
+    },
     render: function () {
         var _this = this;
 
 
         return (
             <div className="cnt">
-                {/*<TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnFun={this.backBtnClick}/>*/}
+
+                {
+                    <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnText="跳过"
+                         btnFun={this.backBtnClick}
+                         callbackLeapfrogBtn={this.getLeapfrogBtn}
+                    />
+                }
 
                 <Nav imgUrl={"images/nav-2.png"}/>
 
@@ -740,6 +847,14 @@ var Body = React.createClass({
 
 
                 {this.state.loading}
+
+                {
+                    this.state.popShow ? <Pop
+                        propsPopInfo={"未开通徽商存管不能投标、提现、充值."}
+                        callbackCancelBtn={this.getCancelBtn}
+                        callbackConfirmBtn={this.getConfirmBtn}
+                    /> : null
+                }
             </div>
 
         );
@@ -756,10 +871,10 @@ $FW.DOMReady(function () {
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         enable_loading: true,
         success: function (data) {
-            var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
+            /*var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
             ReactDOM.render(
                 <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
-                document.getElementById('header'));
+                document.getElementById('header'));*/
 
             ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
         }

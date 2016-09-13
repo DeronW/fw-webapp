@@ -34,11 +34,31 @@ const Mask = React.createClass({
     }
 });
 
+const Pop = React.createClass({
+    render: function() {
+        return (
+            <div className="pop-body">
+                <div className="pop-back"></div>
+                <div className="pop-cnt">
+                    <div className="pop-info">
+                        <p>{this.props.propsPopInfo}</p>
+                    </div>
+                    <div className="pop-btn">
+                        <div className="cancel-btn btn l-btn" onClick={this.props.callbackCancelBtn}>取消</div>
+                        <div className="confirm-btn btn r-btn" onClick={this.props.callbackConfirmBtn}>确认</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+});
+
 const Recharge = React.createClass({
     getInitialState: function () {
         return {
             special_user: false,
-            order_state: null  // 有3种,  处理中, 成功, 失败
+            order_state: null,  // 有3种,  处理中, 成功, 失败
+            popShow: false
         }
     },
     componentDidMount: function () {
@@ -63,6 +83,22 @@ const Recharge = React.createClass({
     inspectResult: function () {
         this.setState({order_state: 'fail'})
     },
+    handlerPhone: function() {
+        this.setState({
+            popShow: true
+        });
+    },
+    getCancelBtn: function() {
+        this.setState({
+            popShow: false
+        });
+    },
+    getConfirmBtn: function() {
+        this.setState({
+            popShow: false
+        });
+        window.location.href = "tel:400-0322-988";
+    },
     render: function () {
 
         var deny = <Mask username={this.props.data.bankInfo.realName}/>;
@@ -70,6 +106,14 @@ const Recharge = React.createClass({
         let idCarNoNntercept = bankCardNo.substring(0, 4) + "********" + bankCardNo.substring((bankCardNo.length - 4), bankCardNo.length);
         return (
             <div>
+                {
+                    this.state.popShow ? <Pop
+                        propsPopInfo={"拨打电话400-0322-988"}
+                        callbackCancelBtn={this.getCancelBtn}
+                        callbackConfirmBtn={this.getConfirmBtn}
+                    /> : null
+                }
+
                 {this.state.special_user ? deny : null}
                 {this.state.order_state == 'processing' ?
                     <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}
@@ -119,7 +163,7 @@ const Recharge = React.createClass({
                     </div>
                     <div className="atpr"><img className="card-d" src="images/card-d.png"/>
                         <span className="online">如果充值金额没有及时到账，请<span
-                            className="colr">拨打客服</span>查询。</span></div>
+                            className="colr" onClick={this.handlerPhone}>拨打客服</span>查询。</span></div>
                 </div>
             </div>
         )

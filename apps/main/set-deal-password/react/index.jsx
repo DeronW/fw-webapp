@@ -151,6 +151,16 @@ var Body = React.createClass({
             promptShow: booleanVal
         });
     },
+    handlerVoice: function() {
+
+        $FW.Ajax({
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + this.state.phoneNumber + "&isVms=VMS",
+            method: "GET",
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    },
     render: function () {
 
         return (
@@ -170,7 +180,7 @@ var Body = React.createClass({
                                 {
                                     this.state.phoneNumber.substring(0, 3) + "****" + this.state.phoneNumber.substring((this.state.phoneNumber.length - 4), this.state.phoneNumber.length)
                                 }
-                                发送短信验证码，若收不到，请 <a href="" className="c">点击这里</a> 获取语音验证码。
+                                发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
                             </div> : null
                     }
                 </div>

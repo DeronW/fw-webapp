@@ -23,13 +23,58 @@ function isCardNo(card) {
 var PhoneCodePrompt = React.createClass({
     getInitialState: function() {
         return {
-            getUserInfo: this.props.getGetPorpsUserInfo
+            getUserInfo: this.props.getGetPorpsUserInfo,
+            countdown: 60
         };
     },
     handlerVoice: function() {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
 
-        console.log(phoneNo);
+        var n = 60;
+        var _this = this;
+
+        if(this.props.callbackCountdown === n) {
+            console.log(this.state.countdown);
+            this.props.callbackCode(true);
+
+            this.interval = setInterval(function () {
+                _this.setState({
+                    countdown: --_this.state.countdown
+                });
+
+                _this.props.callbackCountdownVal(_this.state.countdown);
+
+                if (_this.state.countdown == false) {
+                    clearInterval(_this.interval);
+
+                    _this.props.callbackCode(false);
+                    _this.props.callbackCountdownVal(n);
+                    _this.setState({
+
+                        countdown: 60
+                    });
+                }
+            }, 1000);
+
+        }else if(this.props.callbackCountdown < n) {
+            $FW.Component.Toast(this.props.callbackCountdown + "后才能获取");
+            return false;
+        }
+
+        $FW.Ajax({
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
+            method: "GET",
+            success: function(data) {
+                console.log(data);
+            },
+            fail: function(code, msg){
+                _this.props.callbackCode(0);
+
+                clearInterval(_this.interval);
+                _this.interval = null;
+            }
+        });
+
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
@@ -159,7 +204,14 @@ var PswFrom = React.createClass({
             method: "GET",
             success: function(data) {
 
+            },
+            fail: function(code, msg){
+                clearInterval(_this.interval);
+                _this.interval = null;
 
+                _this.setState({
+                    code: false
+                });
             }
         })
 
@@ -189,54 +241,80 @@ var PswFrom = React.createClass({
             userId: e.target.value
         });
     },
+    getCode: function(booleanVal) {
+        this.setState({
+            code: booleanVal
+        });
+    },
+    getCountdownVal: function(timerVal) {
+        this.setState({
+            countdown: timerVal
+        });
+    },
     render: function() {
         var userInfoData = this.props.propsUserInfo.userInfo;
 
         return (
-            <div className="from-block setting-trading-from">
-                <div className="input-block">
-                    <span className="icon name-icon"></span>
-                    <div className="text-block">
-                        {userInfoData.realName}
+            <div className="">
+                <div className="from-block setting-trading-from">
+                    <div className="input-block">
+                        <span className="icon name-icon"></span>
+                        <div className="text-block">
+                            {userInfoData.realName}
+                        </div>
                     </div>
-                </div>
 
-                <div className="input-block">
-                    <span className="icon id-icon"></span>
-                    <div className="text-block">
-                        <input type="text" placeholder="请输入身份证"
-                            onChange={this.handlerOnChangeInputId}
-                            value={this.state.userId}
-                        />
+                    <div className="input-block">
+                        <span className="icon id-icon"></span>
+                        <div className="text-block">
+                            <input type="text" placeholder="请输入身份证"
+                                   onChange={this.handlerOnChangeInputId}
+                                   value={this.state.userId}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <div className="input-block">
-                    <span className="icon phone-n-icon"></span>
-                    <div className="text-block">
+                    <div className="input-block">
+                        <span className="icon phone-n-icon"></span>
+                        <div className="text-block">
                         <span className="text phone-n-text">
                             {
                                 this.state.phoneNumber.substring(0, 3) + "****" + this.state.phoneNumber.substring((this.state.phoneNumber.length - 4), this.state.phoneNumber.length)
+                            }
+                        </span>
+                        </div>
+                    </div>
+
+
+                    <div className="input-block code-block">
+                        <span className="input">
+                            <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput} />
+                        </span>
+
+                        <span className="btn-code">
+                            {
+                                this.state.code ?
+                                    <span className="timing-text">{this.state.countdown}倒计时</span> :
+                                    <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取短信验证码</span>
                             }
                         </span>
                     </div>
                 </div>
 
 
-                <div className="input-block code-block">
-                    <span className="input">
-                        <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput} />
-                    </span>
+                <div className="phone-code-prompt">
+                    {
+                        this.state.phoneCodePromptShow ? <PhoneCodePrompt
+                            getGetPorpsUserInfo={this.state.getAjaxUserInfo}
+                            callbackCountdown={this.state.countdown}
+                            callbackCode={this.getCode}
+                            callbackCountdownVal={this.getCountdownVal}
+                        /> : null
+                    }
 
-                    <span className="btn-code">
-                        {
-                            this.state.code ?
-                                <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取短信验证码</span>
-                        }
-                    </span>
                 </div>
             </div>
+
         );
     }
 });
@@ -314,7 +392,7 @@ var Body = React.createClass({
                         backBtn={true}
                         btnFun={this.backBtnClick}
                         skipFun={this.handlerSkipBtn}
-                        btnText={"跳过"}
+                        btnText={""}
                 />
 
                 {
@@ -328,12 +406,7 @@ var Body = React.createClass({
                     callbackCardNo={this.getCardNo}
                 />
 
-                <div className="phone-code-prompt">
-                    {
-                        this.state.phoneCodePromptShow ? <PhoneCodePrompt getGetPorpsUserInfo={this.state.getAjaxUserInfo} /> : null
-                    }
 
-                </div>
 
                 <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword} />
 

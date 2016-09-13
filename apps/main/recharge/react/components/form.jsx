@@ -64,11 +64,7 @@ const Form = React.createClass({
     submitHandler: function () {
         if(this.state.money < 1) {
             $FW.Component.Toast("充值金额不能低于1元");
-            return false;
-        }
-
-
-        if (!this.state.money) {
+        } else if (!this.state.money) {
             $FW.Component.Alert('请输入充值金额')
         } else if (!this.state.phone) {
             $FW.Component.Alert('请输入银行预留手机号')
