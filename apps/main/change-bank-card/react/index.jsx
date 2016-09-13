@@ -410,7 +410,6 @@ var SelectBank = React.createClass({
     }
 });
 
-
 var Body = React.createClass({
     getInitialState: function() {
         var getAjaxUserInfo = this.props.activity;
@@ -485,11 +484,11 @@ var Body = React.createClass({
         }
 
         let bankCard = this.state.userInfo.bankCardNo;
-        let idCardNo = this.state.userInfo.idCardNo;
+        let bankNo = this.state.userInfo.bankId;
         let validateCode = this.state.userInfo.validateCode;
 
        $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/changeBankCard.shtml?bankCard=" + space(bankCard) + "&bankId=" + idCardNo + "&validateCode=" + validateCode,
+            url: API_PATH + "mpwap/api/v1/changeBankCard.shtml?bankCard=" + space(bankCard) + "&bankId=" + bankNo + "&validateCode=" + validateCode,
             success: function(data) {
                 console.log(data);
                 location.href = "/static/wap/bind-bank-card/index.html";
