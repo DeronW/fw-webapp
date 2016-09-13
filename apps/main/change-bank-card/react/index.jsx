@@ -484,7 +484,7 @@ var Body = React.createClass({
         }
 
         let bankCard = this.state.userInfo.bankCardNo;
-        let bankNo = this.state.userInfo.bankId;
+        let bankNo = this.state.userInfo.bankNo;
         let validateCode = this.state.userInfo.validateCode;
 
        $FW.Ajax({
