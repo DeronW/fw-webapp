@@ -46,7 +46,7 @@ const Mall = React.createClass({
                 <div className="header-nav">
                     <a className="recharge" onClick={function(){ gotoHandler("/static/mall/product-recharge/index.html",true) }}>话费充值</a>
                     <a className="vip" onClick={function(){ gotoHandler("/static/mall/product-vip-zone/index.html") }}>VIP专区</a>
-                    <a className="play" onClick={function(){ gotoHandler("/static/mall/gamble-nine/index.html?c", true) }}>玩玩乐</a>
+                    <a className="play" onClick={function(){ gotoHandler("/static/mall/gamble-nine/index.html?"+(+new Date()), true) }}>玩玩乐</a>
                     <a className="goods" onClick={function(){ gotoHandler("/static/mall/product-list/index.html") }}>全部商品</a>
                     <a className="mine" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}>我的商城</a>
                 </div>

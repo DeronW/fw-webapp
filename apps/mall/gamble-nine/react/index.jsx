@@ -85,10 +85,10 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Header title={"豆哥玩玩乐"} back_handler={backward}/>, document.getElementById('header'));
     }
 
-    $FW.Ajax({
-        url: API_PATH + 'mall/api/magic/v1/user.json', //用户信息
-        success: (data) => {
-            ReactDOM.render(<NineActivity user={data}/>, document.getElementById('cnt'));
+  $FW.Ajax({
+      url: API_PATH + 'mall/api/magic/v1/user.json', //用户信息
+      success: (data) => {
+           ReactDOM.render(<NineActivity user={data}/>, document.getElementById('cnt'));
         }
     })
 });

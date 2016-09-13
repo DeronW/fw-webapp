@@ -9,14 +9,14 @@ const NineDraw = React.createClass({
             remainTimes: null,
             infinitely: null,
             costScore: null,
-            usableScore: null
+            usableScore: null,
+            popPrizeName:''
         }
     },
     componentDidMount: function () {
-
-        $FW.Ajax({
-            url: `${API_PATH}mall/api/magic/v1/cost.json?activityId=${ACTIVITY_ID}`, //活动消耗工分
-            success: (data) => {
+      $FW.Ajax({
+          url: `${API_PATH}mall/api/magic/v1/cost.json?activityId=${ACTIVITY_ID}`, //活动消耗工分
+          success: (data) => {
                 this.setState({
                     infinitely: data.infinitely,
                     costScore: data.costScore,
@@ -25,8 +25,8 @@ const NineDraw = React.createClass({
                 });
 
                 this.props.setUsableScore(data.usableScore);
-            }
-        })
+          }
+      })
     },
     startRoll: function () {
         this._timer = setInterval(()=> {
@@ -35,19 +35,21 @@ const NineDraw = React.createClass({
     },
     stopRoll: function (n, prizeName) {
         clearInterval(this._timer);
-
+		this.setState({popPrizeName:prizeName});
         var remain = (7 - this.state.masker) + 8 * 2 + parseFloat(n) - 1;
         var orig_remain = remain;
-        var run = () => {
+        var run = () => {        	
             setTimeout(()=> {
                 if (remain-- >= 0) {
                     this.setState({masker: (this.state.masker + 1) % 8});
                     run()
                 }
                 if (remain == -1) {
-                    this.setState({showPopPrize: true});
-                    this.props.addPriceList(prizeName);
-                    this._usable = true;
+                	setTimeout(()=> {
+                		this.setState({showPopPrize: true});
+                		this._usable = true;
+                	},500);                    
+                    this.props.addPriceList(prizeName);                    
                 }
             }, 1000 / 8 + (orig_remain - remain) * 10);
         };
@@ -66,21 +68,21 @@ const NineDraw = React.createClass({
         this._usable = false;
 
         $FW.Ajax({
-            url: API_PATH + 'mall/api/magic/v1/draw.json',
-            method: 'post',
-            data: {activityId: '1ead8644a476448e8f71a72da29139ff', source: getBrowserType()},
-            success: (data) => {
+          url: API_PATH + 'mall/api/magic/v1/draw.json',
+          method: 'post',
+          data: {activityId: '1ead8644a476448e8f71a72da29139ff', source: getBrowserType()},
+          success: (data) => {
                 this.setState({
                     remainTimes: data.remainTimes
                 });
                 this.stopRoll(data.prizeMark, data.prizeName);
                 this.props.setUsableScore(data.usableScore);
-            },
-            fail: () => {
-                this._usable = true;
-                this.hideRoll();
-            }
-        });
+          },
+          fail: () => {
+              this._usable = true;
+              this.hideRoll();
+          }
+      });
     },
     render: function () {
         let cell = function (n, index) {
@@ -120,9 +122,8 @@ const NineDraw = React.createClass({
                 {this.state.showPopPrize ?
                     <PopPrize infinitely={this.props.infinitely}
                               hidePopPrize={this.hidePopPrize}
-                              masker={this.state.masker}
+                              popPrizeName={this.state.popPrizeName}
                               remainTimes={this.state.remainTimes}/> : null}
-
             </div>
         )
     }
