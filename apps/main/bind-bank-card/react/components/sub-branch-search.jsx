@@ -9,15 +9,18 @@ const SelectBankList = React.createClass({
             bankIndex: null,
         }
     },
+    componentDidMount: function () {
+        //$FW.Event.touchBottom(this.refreshBankList);
+    },
 
     refreshBankList: function (value) {
         let fn = () => {
             $FW.Ajax({
                 url: API_PATH + "mpwap/api/v1/getBankList.shtml",
                 data: {
-                    index: "10",
+                    index: "1",
                     keyword: value,
-                    size: "10"
+                    size: "20"
                 },
                 success: (data) => {
                     console.log(data)

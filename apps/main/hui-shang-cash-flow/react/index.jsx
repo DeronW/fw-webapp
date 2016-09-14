@@ -85,7 +85,7 @@ var Body = React.createClass({
 
 $FW.DOMReady(function() {
     $FW.Ajax({
-        url: API_PATH + "mpwap/api/v1/getHSAccountInfo.shtml?page=1&pageSize=20",
+        url: API_PATH + "mpwap/api/v1/getHSAccountInfoBill.shtml?page=1&pageSize=100",
         enable_loading: true,
         success: function(data) {
             ReactDOM.render(

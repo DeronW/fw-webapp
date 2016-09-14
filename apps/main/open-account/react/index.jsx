@@ -116,14 +116,18 @@ var PhoneCodePrompt = React.createClass({
 
 var Text = React.createClass({
     render: function () {
+        console.log(this.props.userOpenStatusCode);
+
         return (
             <div className="text-area">
                 马上升级徽商存管并且迁移资金，<br/>升级即视为我已阅读并同意: <br/>
                 <a href="/static/wap/protocol-trusteeship/index.html" className="text">
                     《资金存管三方协议》</a>
                 &nbsp;
-                <a href="/static/wap/protocol-counseling/index.html" className="text">
-                    《信息咨询服务协议》</a>
+                {
+                    this.props.userOpenStatusCode === "1" ? <a href="/static/wap/protocol-counseling/index.html" className="text">《信息咨询服务协议》</a> : null
+                }
+
             </div>
         );
     }
@@ -462,7 +466,7 @@ var From = React.createClass({
                                 this.state.code ?
                                     <span className="timing-text">{this.state.countdown}倒计时</span> :
                                     <span className={this.userInfoAllVal() ? "timing-text" : "btn"}
-                                          onClick={this.headlerCode}>获取短信验证码</span>
+                                          onClick={this.headlerCode}>获取验证码</span>
                             }
 
                         </span>
@@ -576,7 +580,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.bankList.map(quickPayli, this) : null
+                                this.state.bankListData != null ? this.state.bankListData.quickBankList.map(quickPayli, this) : null
                             }
 
                         </ul>
@@ -588,7 +592,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.quickBankList.map(notQuickPayli, this) : null
+                                this.state.bankListData != null ? this.state.bankListData.bankList.map(notQuickPayli, this) : null
                             }
                         </ul>
                     </div>
@@ -668,7 +672,7 @@ var Body = React.createClass({
         }
 
         if (this.state.userInfo.bankCardNo.length < 16 || this.state.userInfo.bankCardNo.length > 19) {
-            $FW.Component.Toast("请输入16位到19位的银行卡号");
+            $FW.Component.Alert("请输入16位到19位的银行卡号");
             return false;
         }
 
@@ -834,7 +838,7 @@ var Body = React.createClass({
 
                 <Btn btnText={"同意"} Fun={this.clickFun}/>
 
-                <Text />
+                <Text userOpenStatusCode={this.props.activity.openStatus}/>
 
                 {
                     _this.state.backSelect ? <SelectBank

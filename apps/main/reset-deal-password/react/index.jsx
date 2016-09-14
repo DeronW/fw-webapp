@@ -260,7 +260,7 @@ var PswFrom = React.createClass({
                     <div className="input-block">
                         <span className="icon name-icon"></span>
                         <div className="text-block">
-                            {userInfoData.realName}
+                            {userInfoData.realName.substring(0, 1) + (userInfoData.gender === "0" ? "女士" : "先生")}
                         </div>
                     </div>
 
@@ -295,7 +295,7 @@ var PswFrom = React.createClass({
                             {
                                 this.state.code ?
                                     <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                    <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取短信验证码</span>
+                                    <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取验证码</span>
                             }
                         </span>
                     </div>
