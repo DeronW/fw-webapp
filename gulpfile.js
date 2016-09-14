@@ -140,6 +140,26 @@ gt('mall', nine, {
     include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
 });
 // 针对九宫格游戏, 单独配置打包过程
+
+
+var zhuan = 'zhuan-pan';
+gt('mall', zhuan, {
+    debug: true,
+    api_path: 'http://localhost/fake-api/',
+    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
+    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
+});
+
+gt('mall', zhuan, {
+    cmd_prefix: 'pack',
+    api_path: 'http://mmall.9888.cn/',
+    cdn_prefix: '/static/mall/' + zhuan + '/',
+    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
+    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
+});
+// 针对九宫格游戏, 单独配置打包过程
+
+
 // END
 
 
