@@ -164,5 +164,5 @@ gt('mall', zhuan, {
 
 
 gulp.task('build:main', gulp.series(MAIN_APP_NAMES.map((name) => `main:pack:${name}:revision`)));
-gulp.task('build:mall', gulp.series(MALL_APP_NAMES.concat([nine]).map((name) => `mall:pack:${name}:revision`)));
+gulp.task('build:mall', gulp.series(MALL_APP_NAMES.concat([nine, zhuan]).map((name) => `mall:pack:${name}:revision`)));
 gulp.task('build:test-mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:${name}`)));
