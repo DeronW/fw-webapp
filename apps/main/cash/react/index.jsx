@@ -15,6 +15,10 @@ var numberFormat = {
 	}
 };
 
+function isInteger(obj) {
+	return Math.floor(obj) === obj
+}
+
 var TopNav = React.createClass({
 	getInitialState: function () {
 		return {
@@ -340,15 +344,21 @@ const Withdrawals = React.createClass({
 	render : function(){
 		var _this = this;
 
+		var feeVal = this.state.propsUserInfo.fee;
+
 		var commissionCharge = function() {
-			if(!_this.state.propsUserInfo.isFeeEnable) {
+			if(_this.state.propsUserInfo.isFeeEnable) {
 				return 0;
 			} else {
-				return ((_this.state.propsUserInfo.fee.slice(0, _this.state.propsUserInfo.fee.length - 1) * 10) * (_this.state.inputVal * 100)) / 100000;
+				return ((parseFloat(feeVal) * 10) * (_this.state.inputVal * 100)) / 100000;
 			}
 		};
 
 		var pop = function() {
+			var commissionChargeVal = _this.state.inputVal - commissionCharge();
+			var commissionChargeText = commissionCharge();
+
+
 			return <div className="cang">
 				<div className="masker"></div>
 				<div className="taine">
@@ -356,15 +366,15 @@ const Withdrawals = React.createClass({
 					<div className="fact">
 						<div className="">
 							<span className="acti">实际到账金额</span>
-							<span className="san">{_this.state.inputVal - commissionCharge()}</span>
+							<span className="san">¥{isInteger(parseFloat(commissionChargeVal)) ? commissionChargeVal + ".00" : commissionChargeVal.toFixed(2)}</span>
 						</div>
 						<div className="pot-a">
 							<span className="iner">提现金额</span>
-							<span className="zeor">{_this.state.inputVal}</span>
+							<span className="zeor">¥{_this.state.inputVal}</span>
 						</div>
 						<div className="pot-b">
 							<span className="iner">提现手续费</span>
-							<span className="zeor">{commissionCharge()}</span>
+							<span className="zeor">¥{isInteger(parseFloat(commissionChargeText)) ? commissionChargeText + ".00" : commissionChargeText.toFixed(2)}</span>
 						</div>
 					</div>
 
@@ -437,7 +447,7 @@ const Withdrawals = React.createClass({
 						callbackCode={this.getCode}
 					/> : null
 				}
-				
+
 
 				<div className="xt" onClick={this.handlerPost}>
 						下一步

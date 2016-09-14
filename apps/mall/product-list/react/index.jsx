@@ -45,7 +45,8 @@ const SearchBar = React.createClass({
     getInitialState: function () {
         return {
             value: '',
-            history: []
+            history: [],
+
         }
     },
     componentDidMount: function () {
@@ -72,6 +73,7 @@ const SearchBar = React.createClass({
     backHandler: function () {
        history.back();
     },
+
     render: function () {
         let item = (d) => {
             let click = () => this.setState({value: d}, this.searchHandler);
@@ -118,18 +120,34 @@ const ExchangeBar = React.createClass({
         return {
             tab: 'defaultSort',
             sort: -1,
-            vipLevel: 0,
+            vipLevel: -1,
             showFilterPop:false,
             filterScore:'不限',
             filterLevel:'不限',
+            maxPoints:'',
+            minPoints:'',
+            maxValue:'',
+            minValue:'',
+            myScore:0,
         }
     },
     searchHandler: function(){
         var options = {
-            sort: this.state.sort,
+            order: this.state.sort,
             vipLevel: this.state.vipLevel
         };
         search(options, true);
+    },
+    componentDidMount: function () {
+        $FW.Ajax({
+            url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
+            success: (data) =>{
+            	if(data.is_login){
+            		this.setState({myScore:data.score})
+            	}
+            	
+            } 
+        });
     },
     tabClickHandler: function(tabName){        
         if(tabName=='defaultSort'){
@@ -138,25 +156,25 @@ const ExchangeBar = React.createClass({
 	        	tab: tabName,
 	        });
         	var options = {
-	            sort: this.state.sort,
+	            order: this.state.sort,
 	        };
         	search(options, true);
         }else if(tabName=='proceeds'){
         	this.state.sort==3 ? this.setState({sort:4}) : this.setState({sort:3});      	
         	var options = {
-	            sort: this.state.sort,
+	            order: this.state.sort,
 	        };
         	search(options, true);
         }else if(tabName=='salestime'){
         	this.state.sort==5 ? this.setState({sort:0}) : this.setState({sort:5});      	
         	var options = {
-	            sort: this.state.sort,
+	            order: this.state.sort,
 	        };
         	search(options, true);
         }else if(tabName=='scorerank'){
         	this.state.sort==1 ? this.setState({sort:2}) : this.setState({sort:1});      	
         	var options = {
-	            sort: this.state.sort,
+	            order: this.state.sort,
 	        };
         	search(options, true);
         }else if(tabName=='filter'){
@@ -165,14 +183,105 @@ const ExchangeBar = React.createClass({
         this.setState({tab: tabName});
     },
     filterScoreHandler: function(name){
+    	this.setState({minValue:''});
+    	this.setState({maxValue:''});
         this.setState({filterScore:name});
+        if(name=='不限'){
+        	this.setState({
+        		maxPoints:'',
+        		minPoints:'',
+        	});
+        }else if(name=='我可兑换'){
+        	this.setState({        		
+        		minPoints:'',
+        		maxPoints:this.state.myScore,
+        	});
+        }else if(name=='1-100'){
+        	this.setState({        		
+        		minPoints:100,
+        		maxPoints:1,
+        	});
+        }else if(name=='101-1000'){
+        	this.setState({
+        		minPoints:101,
+        		maxPoints:1000,
+        	});
+        }else if(name=='1000-5000'){
+        	this.setState({
+        		minPoints:1000,
+        		maxPoints:5000,
+        	});
+        }else if(name=='5000以上'){
+        	this.setState({
+        		minPoints:5000,
+        		maxPoints:'',
+        	});
+        }
     },
     filterLevelHandler: function(name){
         this.setState({filterLevel:name});
+        if(name=='不限'){
+        	this.setState({vipLevel:-1});
+        }else if(name=='普通会员'){
+        	this.setState({vipLevel:1});
+        }else if(name=='Vip1专享'){
+        	this.setState({vipLevel:2});
+        }else if(name=='Vip2专享'){
+        	this.setState({vipLevel:3});
+        }else if(name=='Vip3专享'){
+        	this.setState({vipLevel:4});
+        }else if(name=='Vip4专享'){
+        	this.setState({vipLevel:5});
+        }
+    },
+    maxValueHandler: function (e) {
+       this.setState({maxValue: e.target.value});
+       if(e.target.value||this.state.minValue){
+       	this.setState({filterScore:''});
+       }
+       if(e.target.value==''&&this.state.minValue==''){
+       		this.setState({filterScore:'不限'});
+       }
+    },
+    minValueHandler: function (e) {    	
+       this.setState({minValue: e.target.value});
+       if(this.state.maxValue||e.target.value){
+       	this.setState({filterScore:''});
+       }
+       if(e.target.value==''&&this.state.maxValue==''){
+       		this.setState({filterScore:'不限'});
+       }
+    },
+    clearFilterHandler: function () {    	
+       this.setState({
+       		vipLevel: -1,
+            showFilterPop:true,
+            filterScore:'不限',
+            filterLevel:'不限',
+            maxPoints:'',
+            minPoints:'',
+            maxValue:'',
+            minValue:''      		
+       });              
+    },
+    filterFinishHandler: function () {   
+    	var options = {
+            vipLevel: this.state.vipLevel,
+            minPoints:this.state.minPoints,
+			maxPoints:this.state.maxPoints
+        };
+    	if(this.state.maxValue&&this.state.minValue){
+    		options = {
+	            vipLevel: this.state.vipLevel,
+	            minPoints:this.state.minValue,
+				maxPoints:this.state.maxValue
+	        };
+    	}         	
+        this.setState({showFilterPop:false});
+        search(options, true);
     },
     render: function () {
         var _this = this;
-
         let tab = function (i) {
             let name = {
             	defaultSort:'默认',
@@ -232,23 +341,18 @@ const ExchangeBar = React.createClass({
 	        	)        	
         	} 
 		); 
-        return (
-            <div className="filter-tab">
-                <div className="ui-tab">
-                    <div className="ui-tab-block">
-                        {this.tabs.map(tab)}
-                    </div>
-                </div>
-                <div className="filter-box" style={{zIndex:"10"}}>
+		let filterPop=()=>{
+			return (
+				<div className="filter-box" style={{zIndex:"10"}}>
                     <div className="filter-box-wrap">
                         <div className="gongfeng-filter-box">
                             <div className="filter-title">按工分值</div>
                             <div className="gongfeng-items">
                                 {gongfeng_item}
                                 <div className="gonfeng-input-wrap">
-                                    <input className="gongfeng-input" type="text" value="" placeholder="最低工分"/><span
+                                    <input className="gongfeng-input" type="text" value={this.state.minValue} placeholder="最低工分" onChange={this.minValueHandler} /><span
                                     className="horizon-line"></span><input className="gongfeng-input" type="text"
-                                                                           value="" placeholder="最高工分"/>
+                                                                           value={this.state.maxValue} placeholder="最高工分" onChange={this.maxValueHandler}/>
                                 </div>
                             </div>
                         </div>
@@ -259,11 +363,22 @@ const ExchangeBar = React.createClass({
                             </div>
                         </div>
                         <div className="filter-action">
-                            <span className="clear-items">清空筛选</span>
-                            <span className="complete-btn" onClick={this.searchHandler}>完成</span>
+                            <span className="clear-items" onClick={this.clearFilterHandler}>清空筛选</span>
+                            <span className="complete-btn" onClick={this.filterFinishHandler}>完成</span>
                         </div>
                     </div>
                 </div>
+			)
+		}
+        return (
+            <div className="filter-tab">
+                <div className="ui-tab">
+                    <div className="ui-tab-block">
+                        {this.tabs.map(tab)}
+                    </div>
+                </div>
+                {this.state.showFilterPop ? filterPop():null}
+
             </div>
         );
     }
@@ -303,23 +418,17 @@ const ProductItem = React.createClass({
     }
 });
 
-$FW.DOMReady(function () {
-	
+$FW.DOMReady(function () {	
     var title = $FW.Format.urlQuery().title || '商品列表';
-    if($FW.Format.urlQuery().searchSourceType==1){
-    	title='我可兑换'
-    }
-    if($FW.Format.urlQuery().searchSourceType){
+    window._searchOptions.searchSourceType=$FW.Format.urlQuery().searchSourceType||1
+    if($FW.Format.urlQuery().searchSourceType==1||$FW.Format.urlQuery().searchSourceType==0){
     	
     }else{
     	NativeBridge.setTitle(title);
     	if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={title} back_handler={backward}/>, document.getElementById('header'));
     }
-    console.log($FW.Format.urlQuery());
-    
-    
-
+	search({}, true);
     window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
 });
 
@@ -329,15 +438,15 @@ function backward() {
 
 window._searchOptions = {
     page: 1,
-    vipLevel: null,
-    productName: null, // keyword
-    categoryName: null,
-    actIds: null,
-    searchSourceType: null,
+    vipLevel: '',
+    productName: '', // keyword
+    categoryName: '',
+    actIds: '',
+    searchSourceType: '',
     prefectureType: 0,
     order: -1,
-    minPoints: 0,
-    maxPoints: null
+    minPoints: '',
+    maxPoints: ''
 };
 
 function search(options, refresh) {
@@ -350,7 +459,6 @@ function search(options, refresh) {
     } else {
         _searchOptions.page++;
     }
-
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/index/v1/search.json',

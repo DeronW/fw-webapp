@@ -120,7 +120,11 @@ var Text = React.createClass({
 
         return (
             <div className="text-area">
-                马上升级徽商存管并且迁移资金，<br/>升级即视为我已阅读并同意: <br/>
+                {
+                    this.props.userOpenStatusCode === "1" ? "开通即视为我已阅读并同意: " :  "升级即视为我已阅读并同意: "
+                }
+
+                <br/>
                 <a href="/static/wap/protocol-trusteeship/index.html" className="text">
                     《资金存管三方协议》</a>
                 &nbsp;
@@ -394,6 +398,8 @@ var From = React.createClass({
 
         var selectEml = function () {
 
+            console.log(_this.props.alreadyBankData);
+
             return <div className="">
                         <span className="bank-text">
                             {
@@ -534,12 +540,12 @@ var SelectBank = React.createClass({
         this.props.callbackBtnVal();
     },
     supportQuickPayClick: function (index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index]);
+        this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index]);
         this.props.callbackBtn(false);
         //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayClick: function (index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index])
+        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
         this.props.callbackBtn(false);
         //this.props.callbackSelectBankNullOderIs(false);
     },
@@ -814,7 +820,7 @@ var Body = React.createClass({
             <div className="cnt">
 
                 {
-                    <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnText="跳过"
+                    <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnText="关闭"
                          btnFun={this.backBtnClick}
                          callbackLeapfrogBtn={this.getLeapfrogBtn}
                     />
