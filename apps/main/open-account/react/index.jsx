@@ -672,7 +672,7 @@ var Body = React.createClass({
         }
 
         if (this.state.userInfo.bankCardNo.length < 16 || this.state.userInfo.bankCardNo.length > 19) {
-            $FW.Component.Toast("请输入16位到19位的银行卡号");
+            $FW.Component.Alert("请输入16位到19位的银行卡号");
             return false;
         }
 
