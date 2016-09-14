@@ -333,7 +333,7 @@ var Body = React.createClass({
 
         return (
             <div>
-                <TopNav title={"验证身份"}
+                <TopNav title={this.props.activity.openStatus < 4 ? "设置交易密码" : "验证身份"}
                         backBtn={true}
                         btnFun={this.backBtnClick}
                         skipFun={this.handlerSkipBtn}
@@ -341,7 +341,7 @@ var Body = React.createClass({
                 />
 
                 {
-                    this.props.activity.openStatus > 4 ? <Nav imgUrl={"images/process-2.png"}/> : null
+                    this.props.activity.openStatus < 4 ? <Nav imgUrl={"images/process-2.png"}/> : null
                 }
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}

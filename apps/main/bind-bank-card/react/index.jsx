@@ -110,7 +110,7 @@ const Invalid = React.createClass({
 const Valid = React.createClass({
     render: function () {
         return (
-            <a className="upgrade" href="/static/wap/set-deal-password/index.html">
+            <a className="upgrade" href="/static/wap/reset-deal-password/index.html">
                 <div className="dep clearfix">
                     <div className="pdlf">点击设置交易密码</div>
                     <div className="pdrt"><a href=""><img src="images/card-a.png"/></a></div>
