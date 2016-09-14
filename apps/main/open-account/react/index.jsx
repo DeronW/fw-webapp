@@ -820,7 +820,7 @@ var Body = React.createClass({
             <div className="cnt">
 
                 {
-                    <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnText="跳过"
+                    <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnText="关闭"
                          btnFun={this.backBtnClick}
                          callbackLeapfrogBtn={this.getLeapfrogBtn}
                     />
