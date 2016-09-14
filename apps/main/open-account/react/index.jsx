@@ -394,6 +394,8 @@ var From = React.createClass({
 
         var selectEml = function () {
 
+            console.log(_this.props.alreadyBankData);
+
             return <div className="">
                         <span className="bank-text">
                             {
@@ -534,12 +536,12 @@ var SelectBank = React.createClass({
         this.props.callbackBtnVal();
     },
     supportQuickPayClick: function (index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index]);
+        this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index]);
         this.props.callbackBtn(false);
         //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayClick: function (index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index])
+        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
         this.props.callbackBtn(false);
         //this.props.callbackSelectBankNullOderIs(false);
     },
