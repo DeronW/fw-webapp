@@ -65,12 +65,9 @@ const NineDraw = React.createClass({
         this.setState({showPopPrize: false})
     },
     clickHandler: function () {
-    	$FW.Component.Alert('活动未开始') ;
-    	return
         if (!this._usable) return;
         if (this.state.remainTimes < 1) return;
-        this._usable = false;
-		
+        this._usable = false;		
         $FW.Ajax({
             url: API_PATH + 'mall/api/magic/v1/draw.json',
             method: 'post',
