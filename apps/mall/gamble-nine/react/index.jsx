@@ -1,7 +1,7 @@
 'use strict';
 
 const API_PATH = document.getElementById('api-path').value;
-const ACTIVITY_ID = '1ead8644a476448e8f71a72da29139ff';
+const ACTIVITY_ID = 'acff1784df2540c4b41adc9f5587b717';
 
 const NineActivity = React.createClass({
     getDefaultProps: function () {

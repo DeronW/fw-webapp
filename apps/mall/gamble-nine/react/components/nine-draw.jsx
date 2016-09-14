@@ -9,7 +9,8 @@ const NineDraw = React.createClass({
             remainTimes: null,
             infinitely: null,
             costScore: null,
-            usableScore: null
+            usableScore: null,
+            popPrizeName:''
         }
     },
     componentDidMount: function () {
@@ -22,6 +23,7 @@ const NineDraw = React.createClass({
                     costScore: data.costScore,
                     usableScore: data.usableScore,
                     remainTimes: data.remainTimes
+                    
                 });
 
                 this.props.setUsableScore(data.usableScore);
@@ -35,20 +37,21 @@ const NineDraw = React.createClass({
     },
     stopRoll: function (n, prizeName) {
         clearInterval(this._timer);
-
+		this.setState({popPrizeName:prizeName});
         var remain = (7 - this.state.masker) + 8 * 2 + parseFloat(n) - 1;
         var orig_remain = remain;
-        var run = () => {
+        var run = () => {        	
             setTimeout(()=> {
                 if (remain-- >= 0) {
                     this.setState({masker: (this.state.masker + 1) % 8});
                     run()
                 }
                 if (remain == -1) {
-                    this.setState({showPopPrize: true});
-                    this.props.addPriceList(prizeName);
-
-                    this._usable = true;
+                	setTimeout(()=> {
+                		this.setState({showPopPrize: true});
+                		this._usable = true;
+                	},500);                    
+                    this.props.addPriceList(prizeName);                    
                 }
             }, 1000 / 8 + (orig_remain - remain) * 10);
         };
@@ -69,7 +72,7 @@ const NineDraw = React.createClass({
         $FW.Ajax({
             url: API_PATH + 'mall/api/magic/v1/draw.json',
             method: 'post',
-            data: {activityId: '1ead8644a476448e8f71a72da29139ff', source: getBrowserType()},
+            data: {activityId:ACTIVITY_ID, source: getBrowserType()},
             success: (data) => {
                 this.setState({
                     remainTimes: data.remainTimes
@@ -121,7 +124,7 @@ const NineDraw = React.createClass({
                 {this.state.showPopPrize ?
                     <PopPrize infinitely={this.props.infinitely}
                               hidePopPrize={this.hidePopPrize}
-                              masker={this.state.masker}
+                              popPrizeName={this.state.popPrizeName}
                               remainTimes={this.state.remainTimes}/> : null}
 
             </div>
