@@ -9,6 +9,9 @@ const SelectBankList = React.createClass({
             bankIndex: null,
         }
     },
+    componentDidMount: function () {
+        //$FW.Event.touchBottom(this.refreshBankList);
+    },
 
     refreshBankList: function (value) {
         let fn = () => {

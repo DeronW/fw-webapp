@@ -48,41 +48,58 @@ var PswFrom = React.createClass({
         var userInfoData = this.props.propsUserInfo;
 
         return {
-            countdown: 60,
+            countdown: 0,
             code: false,
-            phoneNumber: userInfoData.userInfo.phoneNum
+            phoneNumber: userInfoData.userInfo.phoneNum,
+            codeType: 5,
+            isVmsType: "SMS"
         };
     },
     componentWillUnmount: function () {
         clearInterval(this.interval);
     },
-    handerIdentifyingCode: function () {
+    componentWillReceiveProps: function(nextProps) {
+        if(this.state.countdown == 0 && (+new Date())　-　nextProps.callVoicePhone  < 10) {
+            this.setState({
+                codeType: 3,
+                isVmsType: "VMS"
+            });
+            this.handerIdentifyingCode();
+        } else {
+            if(this.state.countdown > 0 && this.state.countdown !== 10) {
+                $FW.Component.Toast(this.state.countdown + "s后才能获取");
+            }
+        }
+
+    },
+    handerIdentifyingCode: function (url) {
         this.props.callbackPromptShow(true);
 
         var _this = this;
 
-        _this.setState({
-            code: true
-        })
+        this.setState({
+            code: true,
+            countdown: 10
+        });
 
-        _this.interval = setInterval(function () {
-            _this.setState({
-                countdown: --_this.state.countdown
+
+        this.interval = setInterval(function () {
+            this.setState({
+                countdown: this.state.countdown - 1
             });
 
-            if (_this.state.countdown == 0) {
-                clearInterval(_this.interval);
+            if (this.state.countdown == 0) {
+                clearInterval(this.interval);
 
-                _this.setState({
-                    countdown: 60,
+                this.setState({
                     code: false
                 });
             }
 
-        }, 1000);
+        }.bind(this), 1000);
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=5&destPhoneNo=" + this.state.phoneNumber + "&isVms=SMS",
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
             method: "GET",
             success: function (data) {
             }
@@ -115,7 +132,7 @@ var PswFrom = React.createClass({
                     <span className="btn-code">
                         {
                             this.state.code ?
-                                <span className="timing-text">{this.state.countdown}倒计时</span> :
+                                <span className="timing-text">{this.state.countdown}s倒计时</span> :
                                 <span className="btn" onClick={this.handerIdentifyingCode}>获取验证码</span>
                         }
                     </span>
@@ -130,11 +147,18 @@ var Body = React.createClass({
         var userInfoData = this.props.activity;
 
         return {
+            voice: false,
             getAjaxUserInfo: userInfoData,
             phoneNumber: userInfoData.userInfo.phoneNum,
             code: null,
-            promptShow: false
+            promptShow: false,
+            callbackCountdownInfo: null,
+            countdown: 10,
+            countdownVal: false
         };
+    },
+    componentWillUnmount: function() {
+        clearInterval(this.interval);
     },
     handlerSettingsPassword: function () {
         var idCardNo = this.state.getAjaxUserInfo.userInfo.idCardNo;
@@ -152,13 +176,21 @@ var Body = React.createClass({
         });
     },
     handlerVoice: function() {
+        this.setState({voice: +new Date()})
 
-        $FW.Ajax({
+        var _this = this;
+
+    /*    $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + this.state.phoneNumber + "&isVms=VMS",
             method: "GET",
             success: function(data) {
                 console.log(data);
             }
+        });*/
+    },
+    getCountdownVal: function(val) {
+        this.setState({
+            callbackCountdownInfo: val
         });
     },
     render: function () {
@@ -170,6 +202,8 @@ var Body = React.createClass({
                     propsUserInfo={this.state.getAjaxUserInfo}
                     callbackInputVal={this.getCallbackInputVal}
                     callbackPromptShow={this.getPromptShow}
+                    callVoicePhone={this.state.voice}
+                    propsAjaxUrl={"mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + this.state.phoneNumber + "&isVms=VMS"}
                 />
 
                 <div className="phone-code-prompt">
