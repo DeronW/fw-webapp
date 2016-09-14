@@ -118,15 +118,16 @@ var Text = React.createClass({
     render: function () {
         console.log(this.props.userOpenStatusCode);
 
+
+
         return (
             <div className="text-area">
                 {
-                    this.props.userOpenStatusCode === "1" ? "开通即视为我已阅读并同意: " :  "升级即视为我已阅读并同意: "
+                    this.props.userOpenStatusCode === "1" ? "开通即视为我已阅读并同意: " :  "马上升级徽商存管并且迁移资金,升级即视为我已阅读并同意:"
                 }
 
                 <br/>
-                <a href="/static/wap/protocol-trusteeship/index.html" className="text">
-                    《资金存管三方协议》</a>
+                <a href="/static/wap/protocol-trusteeship/index.html" className="text">《资金存管三方协议》</a>
                 &nbsp;
                 {
                     this.props.userOpenStatusCode === "1" ? <a href="/static/wap/protocol-counseling/index.html" className="text">《信息咨询服务协议》</a> : null
