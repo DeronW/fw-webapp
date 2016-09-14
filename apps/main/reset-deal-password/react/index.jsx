@@ -23,66 +23,21 @@ function isCardNo(card) {
 var PhoneCodePrompt = React.createClass({
     getInitialState: function() {
         return {
-            getUserInfo: this.props.getGetPorpsUserInfo,
-            countdown: 60
+            getUserInfo: this.props.getGetPorpsUserInfo
         };
     },
     handlerVoice: function() {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
 
-        var n = 60;
-        var _this = this;
+        this.props.callbackVoice(+new Date);
 
-        if(this.props.callbackCountdown === n) {
-            console.log(this.state.countdown);
-            this.props.callbackCode(true);
-
-            this.interval = setInterval(function () {
-                _this.setState({
-                    countdown: --_this.state.countdown
-                });
-
-                _this.props.callbackCountdownVal(_this.state.countdown);
-
-                if (_this.state.countdown == false) {
-                    clearInterval(_this.interval);
-
-                    _this.props.callbackCode(false);
-                    _this.props.callbackCountdownVal(n);
-                    _this.setState({
-
-                        countdown: 60
-                    });
-                }
-            }, 1000);
-
-        }else if(this.props.callbackCountdown < n) {
-            $FW.Component.Toast(this.props.callbackCountdown + "后才能获取");
-            return false;
-        }
-
-        $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
-            method: "GET",
-            success: function(data) {
-                console.log(data);
-            },
-            fail: function(code, msg){
-                _this.props.callbackCode(0);
-
-                clearInterval(_this.interval);
-                _this.interval = null;
-            }
-        });
-
-
-        $FW.Ajax({
+/*        $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
             method: "GET",
             success: function(data) {
                 console.log(data);
             }
-        });
+        });*/
     },
     render: function() {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
@@ -159,15 +114,31 @@ var PswFrom = React.createClass({
         var userInfoData = this.props.propsUserInfo;
 
         return {
-            countdown: 60,
+            countdown: 0,
             code: false,
             phoneNumber: userInfoData.userInfo.phoneNum,
             userId: "",
-            codeClickable: false
+            codeClickable: false,
+            codeType: 5,
+            isVmsType: "SMS"
         };
     },
     componentWillUnmount: function() {
         clearInterval(this.interval);
+    },
+    componentWillReceiveProps: function(nextProps) {
+        if(this.state.countdown == 0 && (+new Date())　-　nextProps.propsVoice  < 10) {
+            this.setState({
+                codeType: 3,
+                isVmsType: "VMS"
+            },this.handerIdentifyingCode);
+
+        } else {
+            if(this.state.countdown > 0 && this.state.countdown !== 60) {
+                $FW.Component.Toast(this.state.countdown + "s后才能获取");
+            }
+        }
+
     },
     handerIdentifyingCode: function() {
         var _this = this;
@@ -177,21 +148,21 @@ var PswFrom = React.createClass({
         }
 
         _this.setState({
-            code: true
+            code: true,
+            countdown: 60
         })
 
         this.props.callbackPhoneCodePromptShow(true);
 
         _this.interval = setInterval(function() {
             _this.setState({
-                countdown: --_this.state.countdown
+                countdown: _this.state.countdown - 1
             });
 
             if(_this.state.countdown == 0) {
                 clearInterval(_this.interval);
 
                 _this.setState({
-                    countdown: 60,
                     code: false
                 });
             }
@@ -200,18 +171,11 @@ var PswFrom = React.createClass({
 
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=5&destPhoneNo="+ this.state.phoneNumber +"&isVms=SMS",
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
             method: "GET",
             success: function(data) {
 
-            },
-            fail: function(code, msg){
-                clearInterval(_this.interval);
-                _this.interval = null;
 
-                _this.setState({
-                    code: false
-                });
             }
         })
 
@@ -220,10 +184,10 @@ var PswFrom = React.createClass({
         this.props.callbackInputVal(event.target.value)
     },
     handlerOnChangeInputId: function(e) {
-/*        if(!isCardNo(e.target.value)) {
-            $FW.Component.Toast("身份证不格式不正确");
-            return false;
-        }*/
+        /*        if(!isCardNo(e.target.value)) {
+         $FW.Component.Toast("身份证不格式不正确");
+         return false;
+         }*/
 
         if(e.target.value !== "") {
             this.setState({
@@ -241,80 +205,54 @@ var PswFrom = React.createClass({
             userId: e.target.value
         });
     },
-    getCode: function(booleanVal) {
-        this.setState({
-            code: booleanVal
-        });
-    },
-    getCountdownVal: function(timerVal) {
-        this.setState({
-            countdown: timerVal
-        });
-    },
     render: function() {
         var userInfoData = this.props.propsUserInfo.userInfo;
 
         return (
-            <div className="">
-                <div className="from-block setting-trading-from">
-                    <div className="input-block">
-                        <span className="icon name-icon"></span>
-                        <div className="text-block">
-                            {userInfoData.realName.substring(0, 1) + (userInfoData.gender === "0" ? "女士" : "先生")}
-                        </div>
+            <div className="from-block setting-trading-from">
+                <div className="input-block">
+                    <span className="icon name-icon"></span>
+                    <div className="text-block">
+                        {userInfoData.realName}
                     </div>
+                </div>
 
-                    <div className="input-block">
-                        <span className="icon id-icon"></span>
-                        <div className="text-block">
-                            <input type="text" placeholder="请输入身份证"
-                                   onChange={this.handlerOnChangeInputId}
-                                   value={this.state.userId}
-                            />
-                        </div>
+                <div className="input-block">
+                    <span className="icon id-icon"></span>
+                    <div className="text-block">
+                        <input type="text" placeholder="请输入身份证"
+                               onChange={this.handlerOnChangeInputId}
+                               value={this.state.userId}
+                        />
                     </div>
+                </div>
 
-                    <div className="input-block">
-                        <span className="icon phone-n-icon"></span>
-                        <div className="text-block">
+                <div className="input-block">
+                    <span className="icon phone-n-icon"></span>
+                    <div className="text-block">
                         <span className="text phone-n-text">
                             {
                                 this.state.phoneNumber.substring(0, 3) + "****" + this.state.phoneNumber.substring((this.state.phoneNumber.length - 4), this.state.phoneNumber.length)
                             }
                         </span>
-                        </div>
-                    </div>
-
-
-                    <div className="input-block code-block">
-                        <span className="input">
-                            <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput} />
-                        </span>
-
-                        <span className="btn-code">
-                            {
-                                this.state.code ?
-                                    <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                    <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取验证码</span>
-                            }
-                        </span>
                     </div>
                 </div>
 
 
-                <div className="phone-code-prompt">
-                    {
-                        this.state.phoneCodePromptShow ? <PhoneCodePrompt
-                            getGetPorpsUserInfo={this.state.getAjaxUserInfo}
-                            callbackCountdown={this.state.countdown}
-                            callbackCode={this.getCode}
-                            callbackCountdownVal={this.getCountdownVal}
-                        /> : null
-                    }
+                <div className="input-block code-block">
+                    <span className="input">
+                        <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput} />
+                    </span>
 
+                    <span className="btn-code">
+                        {
+                            this.state.code ?
+                                <span className="timing-text">{this.state.countdown}倒计时</span> :
+                                <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取短信验证码</span>
+                        }
+                    </span>
                 </div>
             </div>
-
         );
     }
 });
@@ -329,7 +267,8 @@ var Body = React.createClass({
             code: null,
             popShow: false,
             phoneCodePromptShow: false,
-            cardId: ""
+            cardId: "",
+            voice: false
         };
     },
     handlerSettingsPassword: function() {
@@ -348,12 +287,12 @@ var Body = React.createClass({
         location.href = API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId + "&validateCode=" + _this.state.code;
 
         /*$FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code,
-            method: "GET",
-            success: function(data) {
-                console.log(data);
-            }
-        })*/
+         url: API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code,
+         method: "GET",
+         success: function(data) {
+         console.log(data);
+         }
+         })*/
 
     },
     getCallbackInputVal: function(val) {
@@ -384,29 +323,40 @@ var Body = React.createClass({
             cardId: cardVal
         });
     },
+    getVoice: function(boolnaeVal) {
+        console.log(boolnaeVal);
+          this.setState({
+              voice: boolnaeVal
+          });
+    },
     render: function() {
-        console.log(this.props.activity);
+
         return (
             <div>
-                <TopNav title={"验证身份"}
+                <TopNav title={"升级存管账户"}
                         backBtn={true}
                         btnFun={this.backBtnClick}
                         skipFun={this.handlerSkipBtn}
-                        btnText={""}
+                        btnText={"跳过"}
                 />
-
-                {
-                    this.props.activity.openStatus > 4 ? <Nav imgUrl={"images/process-2.png"}/> : null
-                }
-
+                <Nav imgUrl={"images/process-2.png"}/>
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
                     callbackInputVal={this.getCallbackInputVal}
                     callbackPhoneCodePromptShow={this.getPhoneCodePromptShow}
                     callbackCardNo={this.getCardNo}
+                    propsVoice={this.state.voice}
                 />
 
+                <div className="phone-code-prompt">
+                    {
+                        this.state.phoneCodePromptShow ? <PhoneCodePrompt
+                            getGetPorpsUserInfo={this.state.getAjaxUserInfo}
+                            callbackVoice={this.getVoice}
+                        /> : null
+                    }
 
+                </div>
 
                 <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword} />
 
@@ -420,6 +370,8 @@ var Body = React.createClass({
 });
 
 
+console.log(API_PATH);
+
 
 $FW.Ajax({
     url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
@@ -430,4 +382,6 @@ $FW.Ajax({
         );
     }
 });
+
+
 
