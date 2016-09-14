@@ -333,13 +333,16 @@ var Body = React.createClass({
 
         return (
             <div>
-                <TopNav title={"升级存管账户"}
+                <TopNav title={"验证身份"}
                         backBtn={true}
                         btnFun={this.backBtnClick}
                         skipFun={this.handlerSkipBtn}
-                        btnText={"跳过"}
+                        btnText={""}
                 />
-                <Nav imgUrl={"images/process-2.png"}/>
+
+                {
+                    this.props.activity.openStatus > 4 ? <Nav imgUrl={"images/process-2.png"}/> : null
+                }
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
                     callbackInputVal={this.getCallbackInputVal}
