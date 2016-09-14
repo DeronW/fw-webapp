@@ -80,9 +80,9 @@ const NineActivity = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('豆哥玩玩乐');
+    NativeBridge.setTitle('豆哥大转盘');
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"豆哥玩玩乐"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"豆哥大转盘"} back_handler={backward}/>, document.getElementById('header'));
     }
 
     $FW.Ajax({
