@@ -376,7 +376,7 @@ body,html{
 
 }*/
 .select-bank {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
@@ -391,7 +391,7 @@ body,html{
     border:1px solid #dddddd;
     border-radius: 6px;
     background: white;
-    position: fixed;
+    position: absolute;
     top: 136px;
     left: 4%;
     z-index: 10;
@@ -426,27 +426,26 @@ img{
 
 .list li{
     width: 95%;
-    height: 98px;
-    line-height: 98px;
     border-bottom: 1px solid #e3e5ea;
     margin-left: 4%;
     color: #555555;
     font-size: 32px;
+    position:relative;
 }
 
 .list li span{
     display:inline-block;
     width:88%;
-    height:98px;
-    overflow:hidden;
+    padding:28px 0;
 }
 
 .list img{
-    float: right;
-    margin-top: 36px;
-    margin-right: 35px;
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
-
 .false{
     display: inline-block;
     position: absolute;
