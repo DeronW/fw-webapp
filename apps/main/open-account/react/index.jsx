@@ -580,7 +580,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.bankList.map(quickPayli, this) : null
+                                this.state.bankListData != null ? this.state.bankListData.quickBankList.map(quickPayli, this) : null
                             }
 
                         </ul>
@@ -592,7 +592,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.quickBankList.map(notQuickPayli, this) : null
+                                this.state.bankListData != null ? this.state.bankListData.bankList.map(notQuickPayli, this) : null
                             }
                         </ul>
                     </div>
