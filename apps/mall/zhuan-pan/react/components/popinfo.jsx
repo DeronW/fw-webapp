@@ -11,7 +11,7 @@ const PopInf = React.createClass({
                         </div>
                         <div className="pop-inf-li">
                             <div className="pop-inf-h">二.活动奖品:</div>
-                            <div className="pop-inf-detail">iPhone7 （128G）、5工分、10元返现券、瑞士拉24寸杆箱、1.5%返息券、5元返现券、20工分、0.6返息券</div>
+                            <div className="pop-inf-detail">iPhone7 （128G）、5工分、10元返现券、瑞士24寸拉杆箱、1.5%返息券、5元返现券、20工分、0.6%返息券</div>
                         </div>
                         <div className="pop-inf-li">
                             <div className="pop-inf-h">三.活动内容:幸运大转盘</div>
