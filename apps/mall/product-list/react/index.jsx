@@ -119,7 +119,7 @@ const SearchBar = React.createClass({
                           
                     />
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
-                    <span className="search-confirm" onClick={this.searchHandler}>取消</span>
+                    <span className="search-confirm">取消</span>
                 </div>
                 {searchHistory()}
             </div>

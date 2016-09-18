@@ -62,13 +62,13 @@ const Mall = React.createClass({
                     <div className="no-banner"></div>}
                 <div className="head-items">
                     {backFactory()}
-                    <a onClick={function(){ gotoHandler("/static/mall/product-list/index.html") }} className="search-bar-a"><input className="search-bar" type="text" value="" placeholder="搜索"/></a>
+                    <a onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceType=2") }} className="search-bar-a"><input className="search-bar" type="text" value="" placeholder="搜索"/></a>
                     <img className="search-icon" src="images/search-icon.png"/>
                     <a className="index-avatar" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><img src="images/profile-icon.png"/></a>
                 </div>
                 <div className="head-user-info">
                      <div className="my-score"><span className="my-score-icon"></span>我的工分:<span className="score-num">{this.state.user_score}工分</span></div>
-                     <a className="my-exchange" onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true) }}><span className="my-exchange-icon"></span>我可兑换</a>
+                     <a className="my-exchange" onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceType=1&title=我可兑换", true) }}><span className="my-exchange-icon"></span>我可兑换</a>
                      <a className="my-mall" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><span className="my-mall-icon"></span>我的商城</a>
                      <span className="vertical-gray-line"></span>
                 </div>
