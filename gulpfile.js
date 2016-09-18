@@ -43,6 +43,7 @@ const MAIN_APP_NAMES = [
 
     // 专题页面
     'topic-hui-shang', // 徽商专题页面
+    'topic-score', // 玩转工分
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
