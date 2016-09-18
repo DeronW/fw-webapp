@@ -53,7 +53,7 @@ const Contribute = React.createClass({
                     <div className="top-info-r">
                         <div className="vip-block">
                             <span className="img">
-                                <img src={"images/vip" + (myInfoData.userLevel -1) +  "_icon.png"}/>
+                                <img src={"images/vip" + (myInfoData.userLevel - 1) + "_icon.png"}/>
                             </span>
                             <span className="user-vip-text">
                                 会员等级
@@ -243,7 +243,7 @@ const ContributeTab = React.createClass({
                         <li className={this.state.index == 0 ? "select-li" : ""}>
                             <span className="text" onClick={this.checkToInvestHandler}>投资贡献值</span>
                         </li>
-                        <li className={this.state.index == 1 ? "select-li" :  ""}>
+                        <li className={this.state.index == 1 ? "select-li" : ""}>
                             <span className="text" onClick={this.checkToInviteHandler}>邀友贡献值</span>
                         </li>
                     </ul>
@@ -269,6 +269,12 @@ const HomePage = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    if ($FW.Browser.inApp()) {
+        NativeBridge.setTitle('我的贡献值');
+    } else {
+        ReactDOM.render(<Header title={"我的贡献值"}/>, document.getElementById("header"));
+    }
+
     $FW.BatchGet([
         API_PATH + "mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
     ], function (data) {
@@ -278,8 +284,3 @@ $FW.DOMReady(function () {
         );
     })
 });
-
-
-if (!inApp()) {
-    ReactDOM.render(<Header title={"我的贡献值"}/>, document.getElementById("header"));
-}
