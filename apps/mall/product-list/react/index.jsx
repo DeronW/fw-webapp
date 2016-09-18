@@ -18,14 +18,13 @@ const ResultPage = React.createClass({
     	
         var list = this.state.products.slice();
         var newList=list.concat(data.products);
-        console.log(newList);
         this.setState({products: newList})
         
     },
     render: function () {
         return (
             <div onClick={this.searchFocus}>
-                {$FW.Format.urlQuery().searchSourceType? <SearchBar/>:null}
+                {$FW.Format.urlQuery().searchSourceType==2? <SearchBar/>:null}
                 <ResultPage.CategoryBanner />
                 <ExchangeBar/>
                 <div className="products-list">
@@ -43,7 +42,7 @@ ResultPage.CategoryBanner = React.createClass({
     render: function () {
         let c = $FW.Format.urlQuery().category;
         if (!c) return null;
-        return <a className="category-img"><img src={"images/category-"+c+".jpg"}/></a>;
+        return <a className="category-img"><img src={"images/"+c+".jpg"}/></a>;
     }
 });
 
@@ -52,14 +51,17 @@ const SearchBar = React.createClass({
         return {
             value: '',
             history: [],
-
+            showSearchHistory:false
         }
     },
     componentDidMount: function () {
         $FW.Ajax({
-            url: API_PATH + '',
+            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
+            data:{searchOpType:0,page:1},
             success: (data) => {
-                this.setState({history: data.history})
+            	console.log(data+'asd');
+                this.setState({history: data.searchRecords||[]});
+    
             }
         })
     },
@@ -67,36 +69,40 @@ const SearchBar = React.createClass({
         this.setState({value: e.target.value})
     },
     searchHandler: function () {
-        search(this.state.value, true)
+        search(this.state.value, true);
+        this.setState({showSearchHistory:false})
     },
-    clearHistoryHandler: function () {
-        this.setState({history: []});
+    clearHistoryHandler: function () {    	
         $FW.Ajax({
-            url: API_PATH + '',
-            method: 'post'
+            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
+            data:{searchOpType:1,page:1},
+           	success: (data) => {
+           		console.log(data+'asd');
+                this.setState({history: data.searchRecords||[]})
+            }
         })
     },
     backHandler: function () {
        history.back();
     },
+    showSearchHistoryHandler: function () {
+       this.setState({showSearchHistory:true})
+    },
+    hideSearchHistoryHandler: function () {
+       this.setState({showSearchHistory:false})
+    },
 
     render: function () {
         let item = (d) => {
-            let click = () => this.setState({value: d}, this.searchHandler);
-            return <div className="history-item" key={d} onClick={click}>{d}</div>;
+            let click = () => this.setState({value: d.keyWord}, this.searchHandler);
+            return <div className="history-item" key={d.keyWord} onClick={click}>{d.keyWord}</div>;
         };
 		let searchHistory = () => {
-           let showSearchHistory=false;
-           if(this.state.value){
-           		showSearchHistory=true;
-           }else{
-           		showSearchHistory=false;
-           }
             return (
-            	showSearchHistory?
+            	this.state.showSearchHistory?
             	<div className="search-history">
                     <div className="search-history-input">历史搜索</div>
-                    {this.state.history.map(item)}
+                    {this.state.history.length>0?this.state.history.map(item):null}
                     <div className="clear-history" onClick={this.clearHistoryHandler}>清空历史搜索</div>
                 </div>:null
             )
@@ -108,7 +114,9 @@ const SearchBar = React.createClass({
                     <input type="text" value={this.state.value}
                            placeholder="请输入想找的商品"
                            onChange={this.changeHandler}
-                           id='searchInput'
+                           onBlur={this.hideSearchHistoryHandler} 
+                           onFocus={this.showSearchHistoryHandler} 
+                          
                     />
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
                     <span className="search-confirm" onClick={this.searchHandler}>取消</span>
@@ -426,8 +434,8 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {	
     var title = $FW.Format.urlQuery().title || '商品列表';
-    window._searchOptions.searchSourceType=$FW.Format.urlQuery().searchSourceType||1
-    if($FW.Format.urlQuery().searchSourceType==1||$FW.Format.urlQuery().searchSourceType==0){
+    window._searchOptions.searchSourceType=$FW.Format.urlQuery().searchSourceType||'';
+    if($FW.Format.urlQuery().searchSourceType==2){
     	
     }else{
     	NativeBridge.setTitle(title);
