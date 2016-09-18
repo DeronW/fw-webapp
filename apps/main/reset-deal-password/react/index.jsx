@@ -93,6 +93,9 @@ var Pop = React.createClass({
         this.props.callbackCloseInfo(false);
 
     },
+    handlerConfirmBtn: function() {
+        window.history.back();
+    },
     render: function() {
         return (
             <div className="pop">
@@ -100,7 +103,7 @@ var Pop = React.createClass({
                 <div className="pop-cnt">
                     <div className="pop-title">确定要跳过吗？</div>
                     <div className="pop-btn">
-                        <a href="/" className="btn ok-btn">确定</a>
+                        <span className="btn ok-btn" onClick={this.handlerConfirmBtn}>确定</span>
                         <span onClick={this.handlerCloseBtn} className="btn close-btn">关闭</span>
                     </div>
                 </div>
@@ -380,9 +383,6 @@ var Body = React.createClass({
         );
     }
 });
-
-
-console.log(API_PATH);
 
 
 $FW.Ajax({
