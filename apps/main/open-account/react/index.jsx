@@ -508,8 +508,8 @@ var Pop = React.createClass({
                         <p>{this.props.propsPopInfo}</p>
                     </div>
                     <div className="pop-btn">
-                        <div className="cancel-btn btn l-btn" onClick={this.props.callbackCancelBtn}>取消</div>
-                        <div className="confirm-btn btn r-btn" onClick={this.props.callbackConfirmBtn}>确认</div>
+                        <div className="confirm-btn btn l-btn" onClick={this.props.callbackConfirmBtn}>确认</div>
+                        <div className="cancel-btn btn r-btn" onClick={this.props.callbackCancelBtn}>取消</div>
                     </div>
                 </div>
             </div>
@@ -861,7 +861,7 @@ var Body = React.createClass({
 
                 {
                     this.state.popShow ? <Pop
-                        propsPopInfo={"未开通徽商存管不能投标、提现、充值."}
+                        propsPopInfo={"未开通徽商存管不能投标、提现、充值。"}
                         callbackCancelBtn={this.getCancelBtn}
                         callbackConfirmBtn={this.getConfirmBtn}
                     /> : null
