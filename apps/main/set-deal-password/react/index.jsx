@@ -63,10 +63,9 @@ var PswFrom = React.createClass({
             this.setState({
                 codeType: 3,
                 isVmsType: "VMS"
-            });
-            this.handerIdentifyingCode();
+            }, this.handerIdentifyingCode);
         } else {
-            if(this.state.countdown > 0 && this.state.countdown !== 10) {
+            if(this.state.countdown > 0 && this.state.countdown !== 60) {
                 $FW.Component.Toast(this.state.countdown + "s后才能获取");
             }
         }
@@ -79,7 +78,7 @@ var PswFrom = React.createClass({
 
         this.setState({
             code: true,
-            countdown: 10
+            countdown: 60
         });
 
 
