@@ -122,7 +122,8 @@ var PswFrom = React.createClass({
             userId: "",
             codeClickable: false,
             codeType: 5,
-            isVmsType: "SMS"
+            isVmsType: "SMS",
+            codeNoClick: false
         };
     },
     componentWillUnmount: function() {
@@ -136,14 +137,20 @@ var PswFrom = React.createClass({
             },this.handerIdentifyingCode);
 
         } else {
-            if(this.state.countdown > 0 && this.state.countdown !== 60) {
-                $FW.Component.Toast(this.state.countdown + "s后才能获取");
+            if((+new Date())　-　nextProps.propsVoice  < 10) {
+                if(this.state.countdown > 0 && this.state.countdown !== 60) {
+                    $FW.Component.Toast(this.state.countdown + "s后才能获取");
+                }
             }
         }
 
     },
     handerIdentifyingCode: function() {
         var _this = this;
+
+        this.setState({
+            codeNoClick: true
+        });
 
         if(!this.state.codeClickable) {
             return false;
