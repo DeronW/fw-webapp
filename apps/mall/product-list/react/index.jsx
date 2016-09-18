@@ -8,13 +8,19 @@ const ResultPage = React.createClass({
             products: []
         }
     },
-    updateProducts: function (products) {
-        this.setState({products: []}, () => this.appendProducts(products))
+     componentDidMount: function () {
+     	search({}, true);       
+    },   
+    updateProducts: function (data) {    	
+        this.setState({products: []}, () => this.appendProducts(data))
     },
-    appendProducts: function (products) {
+    appendProducts: function (data) {
+    	
         var list = this.state.products.slice();
-        list.concat(products)
-        this.setState({products: list})
+        var newList=list.concat(data.products);
+        console.log(newList);
+        this.setState({products: newList})
+        
     },
     render: function () {
         return (
@@ -428,7 +434,7 @@ $FW.DOMReady(function () {
     	if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={title} back_handler={backward}/>, document.getElementById('header'));
     }
-	search({}, true);
+	
     window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
 });
 
