@@ -43,9 +43,11 @@ var PhoneCodePrompt = React.createClass({
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
         var idCarNoNntercept = phoneNo.substring(0, 3) + "****" + phoneNo.substring((phoneNo.length - 4), phoneNo.length);
 
+        console.log(idCarNoNntercept);
+
         return (
             <div className="old-user-prompt-text">
-                已向手机{this.state.getUserInfo.userInfo.phoneNum}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
+                已向手机{idCarNoNntercept}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
             </div>
         );
     }
