@@ -347,10 +347,12 @@ const Withdrawals = React.createClass({
 		var feeVal = this.state.propsUserInfo.fee;
 
 		var commissionCharge = function() {
-			if(_this.state.propsUserInfo.isFeeEnable) {
-				return 0;
-			} else {
+			console.log(_this.state.propsUserInfo.isFeeEnable);
+
+			if(_this.state.propsUserInfo.isFeeEnable == true) {
 				return ((parseFloat(feeVal) * 10) * (_this.state.inputVal * 100)) / 100000;
+			} else {
+				return 0;
 			}
 		};
 

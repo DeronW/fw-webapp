@@ -14,9 +14,6 @@ var Nav = React.createClass({
 });
 
 var TopNav = React.createClass({
-    skipHandler: function () {
-        location.href = '/'
-    },
     render: function () {
         return (
             <div className="top-nav">
@@ -25,7 +22,7 @@ var TopNav = React.createClass({
                         <img src="images/back.png"/>
                     </div>
                     <div className="title">{this.props.title}</div>
-                    <span className="r-text" onClick={this.skipHandler}>{this.props.btnText}</span>
+                    <span className="r-text" onClick={this.props.btnFun}>{this.props.btnText}</span>
                 </div>
             </div>
         );
@@ -153,7 +150,8 @@ var Body = React.createClass({
             promptShow: false,
             callbackCountdownInfo: null,
             countdown: 10,
-            countdownVal: false
+            countdownVal: false,
+            popShow: false
         };
     },
     componentWillUnmount: function() {
@@ -192,10 +190,26 @@ var Body = React.createClass({
             callbackCountdownInfo: val
         });
     },
+    getCancelBtn: function() {
+        this.setState({
+            popShow: false
+        });
+    },
+    getConfirmBtn: function() {
+        window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+
+    },
+    rightBtnFun: function() {
+        this.setState({
+            popShow: true
+        });
+    },
     render: function () {
 
         return (
             <div>
+                <TopNav title={"设置交易密码" } backBtn={true} btnText="关闭" btnFun={this.rightBtnFun}/>
+
                 <Nav imgUrl={"images/process-2.png"}/>
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
@@ -219,14 +233,41 @@ var Body = React.createClass({
                 </div>
 
                 <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword}/>
+
+                {
+                    this.state.popShow ? <Pop
+                        callbackCancelBtn={this.getCancelBtn}
+                        callbackConfirmBtn={this.getConfirmBtn}
+                    /> : null
+                }
             </div>
         );
     }
 });
 
+var Pop = React.createClass({
+    render: function() {
+        return (
+            <div className="pop-body">
+                <div className="pop-back"></div>
+                <div className="pop-cnt">
+                    <div className="pop-info">
+                        <p>未设置交易密码不能投标、提现。</p>
+                    </div>
+                    <div className="pop-btn">
+                        <div className="confirm-btn btn l-btn" onClick={this.props.callbackConfirmBtn}>确认</div>
+                        <div className="cancel-btn btn r-btn" onClick={this.props.callbackCancelBtn}>取消</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+});
+
+
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"设置交易密码"} sub_text={'跳过'} sub_url={'/'}/>,
-        document.getElementById('header'));
+/*    ReactDOM.render(<Header title={"设置交易密码"} sub_text={'关闭'} sub_url={'javascript:popFun()'}/>,
+        document.getElementById('header'));*/
 
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
