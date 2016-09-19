@@ -37,6 +37,9 @@ const BindBankCard = React.createClass({
         let prohibited = this.props.item.openStatus;
         let bankCardNum = this.props.item.userInfo.bankCard;
         let idCarNoNntercept = bankCardNum.substring(0, 4) + "********" + bankCardNum.substring((bankCardNum.length - 4), bankCardNum.length);
+
+        console.log(this.props.item.userInfo.bankName);
+
         return (
             <div>
                 {prohibited < 3 ? <Invalid  /> : null}
@@ -133,6 +136,7 @@ const Bran = React.createClass({
         this.props.callbackPopShow(true);
     },
     render: function () {
+
         return (
             <div className="modify">
                 <a className="pure-a" href="/static/wap/change-bank-card/index.html">
@@ -143,7 +147,7 @@ const Bran = React.createClass({
                 </a>
                 <div className="wire-a"></div>
                 <div className="pure-a" onClick={this.handleJump}>
-                    <div className="xuanwu-a">{this.props.propsBankName}</div>
+                    <div className="xuanwu-a">{this.props.propsBankName === "" ? "开户支行" : this.props.propsBankName}</div>
                     <div className="choice-a">
                         <div className="pleas-a">请选择</div>
                     </div>
