@@ -93,6 +93,9 @@ var Pop = React.createClass({
         this.props.callbackCloseInfo(false);
 
     },
+    handlerConfirmBtn: function() {
+        window.history.back();
+    },
     render: function() {
         return (
             <div className="pop">
@@ -100,7 +103,7 @@ var Pop = React.createClass({
                 <div className="pop-cnt">
                     <div className="pop-title">确定要跳过吗？</div>
                     <div className="pop-btn">
-                        <a href="/" className="btn ok-btn">确定</a>
+                        <span className="btn ok-btn" onClick={this.handlerConfirmBtn}>确定</span>
                         <span onClick={this.handlerCloseBtn} className="btn close-btn">关闭</span>
                     </div>
                 </div>
@@ -256,8 +259,8 @@ var PswFrom = React.createClass({
                     <span className="btn-code">
                         {
                             this.state.code ?
-                                <span className="timing-text">{this.state.countdown}倒计时</span> :
-                                <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取短信验证码</span>
+                                <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
+                                <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取验证码</span>
                         }
                     </span>
                 </div>
@@ -346,7 +349,7 @@ var Body = React.createClass({
                         backBtn={true}
                         btnFun={this.backBtnClick}
                         skipFun={this.handlerSkipBtn}
-                        btnText={""}
+                        btnText={"关闭"}
                 />
 
                 {
@@ -380,9 +383,6 @@ var Body = React.createClass({
         );
     }
 });
-
-
-console.log(API_PATH);
 
 
 $FW.Ajax({

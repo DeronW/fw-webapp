@@ -345,12 +345,15 @@ const Withdrawals = React.createClass({
 		var _this = this;
 
 		var feeVal = this.state.propsUserInfo.fee;
+		var bankId = this.props.data.bankInfo.bankCardNo;
 
 		var commissionCharge = function() {
-			if(_this.state.propsUserInfo.isFeeEnable) {
-				return 0;
-			} else {
+			console.log(_this.state.propsUserInfo.isFeeEnable);
+
+			if(_this.state.propsUserInfo.isFeeEnable == true) {
 				return ((parseFloat(feeVal) * 10) * (_this.state.inputVal * 100)) / 100000;
+			} else {
+				return 0;
 			}
 		};
 
@@ -387,7 +390,11 @@ const Withdrawals = React.createClass({
 			</div>
 		};
 
+		console.log(this.props.data);
+
 		return (
+
+
 			<div>
 				<TopNav title={"提现"} backBtn={true}  btnFun={this.callbackOpenBankBtn}/>
 
@@ -395,7 +402,11 @@ const Withdrawals = React.createClass({
 					<div className="zhaoshang"><img className="ico-zhaoshang" src={this.props.data.bankInfo.bankLogo}/></div>
 					<div className="wz">
 						<div className="zh">{this.props.data.bankInfo.bankName}</div>
-						<div className="nz">{this.props.data.bankInfo.bankCardNo}</div>
+						<div className="nz">
+							{
+								bankId.substring(0, 4) + "********" + bankId.substring((bankId.length - 4), bankId.length)
+							}
+						</div>
 					</div>
 					<div className="kuaijie"><img src="images/ico-kuaijie.png"/></div>
 				</div>
@@ -434,7 +445,7 @@ const Withdrawals = React.createClass({
 							<div className="wire"></div>
 							<div className="pure">
 							<div className="xuanwu" style={{fontSize:'32px'}}>
-								{this.state.selectBankName === "" ? "开户银行" : this.state.selectBankName}
+								{this.state.selectBankName === "" ? this.props.data.bankInfo.bankBranchName : this.state.selectBankName}
 							</div>
 							<div className="choice">
 								<div className="pleas" style={{color:'#555555'}}  >请选择</div></div>
@@ -448,6 +459,8 @@ const Withdrawals = React.createClass({
 					/> : null
 				}
 
+
+				
 
 				<div className="xt" onClick={this.handlerPost}>
 						下一步
@@ -559,7 +572,8 @@ const Neg = React.createClass({
 						<div className="mzysq">
 							<input className="odec" type="text"
 								value={this.state.verify_code}
-								   onChange={this.changeHandler} placeholder="请输入手机验证码"/></div>
+								onChange={this.changeHandler} placeholder="请输入手机验证码"/>
+						</div>
 					</div>
 					<div className="miaoh" style={{background:'#d4d4d4'}}>
 						{this.state.seconds ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerCodeClick} >获取验证码</span>}
