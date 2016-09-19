@@ -5,34 +5,49 @@ const API_PATH = document.getElementById('api-path').value;
 const ResultPage = React.createClass({
     getInitialState: function () {
         return {
-            products: []
+            products: [],
+            showExchangeBar:$FW.Format.urlQuery().searchSourceType==2?false:true            
         }
     },
      componentDidMount: function () {
-     	search({}, true);       
+     	if($FW.Format.urlQuery().searchSourceType==2){
+     		this.setState({showExchangeBar:false});
+     	} else{
+     		search({},true)
+     	}     
     },   
     updateProducts: function (data) {    	
         this.setState({products: []}, () => this.appendProducts(data))
     },
-    appendProducts: function (data) {
-    	
+    appendProducts: function (data) {    	
         var list = this.state.products.slice();
         var newList=list.concat(data.products);
-        this.setState({products: newList})
-        
+        this.setState({products: newList})        
+    },
+    searchFocus: function () {
+     	this.setState({showExchangeBar:false});
+    },
+    searchBlur: function () {    	 
+    	this.setState({showExchangeBar:true});   
     },
     render: function () {
-        return (
-            <div onClick={this.searchFocus}>
-                {$FW.Format.urlQuery().searchSourceType==2? <SearchBar/>:null}
-                <ResultPage.CategoryBanner />
-                <ExchangeBar/>
-                <div className="products-list">
+    	let productsList=()=>{
+    		return (
+    			 <div className="products-list">
                     {this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
                     {this.state.products.length ?
                         null :
                         <div className="empty-list">暂无商品</div>}
                 </div>
+    		)
+    	}
+        return (
+            <div>
+                {$FW.Format.urlQuery().searchSourceType==2? <SearchBar searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
+                <ResultPage.CategoryBanner />
+                {this.state.showExchangeBar?<ExchangeBar/>:null}
+                {this.state.showExchangeBar?productsList():null}
+               
             </div>
         )
     }
@@ -85,11 +100,16 @@ const SearchBar = React.createClass({
     backHandler: function () {
        history.back();
     },
-    showSearchHistoryHandler: function () {
-       this.setState({showSearchHistory:true})
+    onBlurHandler: function () {
+       this.setState({showSearchHistory:false});
+       this.props.searchBlur();
     },
-    hideSearchHistoryHandler: function () {
-       this.setState({showSearchHistory:false})
+    onFocusHandler: function () {
+    	this.setState({showSearchHistory:true});       
+    	this.props.searchFocus();
+    },
+    onKeyDownHandler: function (e) {
+    	if(e.keyCode==13)search(options, true);
     },
 
     render: function () {
@@ -111,13 +131,15 @@ const SearchBar = React.createClass({
             <div className="search-bar">
                 <div className="search-page-box">
                     <a className="back-arrow" onClick={this.backHandler}></a>
-                    <input type="text" value={this.state.value}
+                    <form><input type="text" value={this.state.value}
                            placeholder="请输入想找的商品"
                            onChange={this.changeHandler}
-                           onBlur={this.hideSearchHistoryHandler} 
-                           onFocus={this.showSearchHistoryHandler} 
+                           onBlur={this.onBlurHandler} 
+                           onFocus={this.onFocusHandler}
+                           onKeyDown={this.onKeyDownHandler}
+                           
                           
-                    />
+                    /></form>
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
                     <span className="search-confirm">取消</span>
                 </div>
@@ -170,26 +192,56 @@ const ExchangeBar = React.createClass({
 	        	tab: tabName,
 	        });
         	var options = {
-	            order: this.state.sort,
+	            order: -1,
 	        };
         	search(options, true);
         }else if(tabName=='proceeds'){
-        	this.state.sort==3 ? this.setState({sort:4}) : this.setState({sort:3});      	
         	var options = {
 	            order: this.state.sort,
 	        };
+        	if(this.state.sort==3){
+        		this.setState({sort:4});
+        		options = {
+		            order: 4,
+		        };
+        	}else{
+        		this.setState({sort:3});
+        		options = {
+		            order: 3,
+		        };
+        	}       	        	
         	search(options, true);
-        }else if(tabName=='salestime'){
-        	this.state.sort==5 ? this.setState({sort:0}) : this.setState({sort:5});      	
+        }else if(tabName=='salestime'){   	
         	var options = {
 	            order: this.state.sort,
 	        };
+        	if(this.state.sort==5){
+        		this.setState({sort:0});
+        		options = {
+		            order: 0,
+		        };
+        	}else{
+        		this.setState({sort:5});
+        		options = {
+		            order: 5,
+		        };
+        	} 
         	search(options, true);
         }else if(tabName=='scorerank'){
-        	this.state.sort==1 ? this.setState({sort:2}) : this.setState({sort:1});      	
         	var options = {
 	            order: this.state.sort,
 	        };
+        	if(this.state.sort==1){
+        		this.setState({sort:2});
+        		options = {
+		            order: 2,
+		        };
+        	}else{
+        		this.setState({sort:1});
+        		options = {
+		            order: 1,
+		        };
+        	} 
         	search(options, true);
         }else if(tabName=='filter'){
         	this.state.showFilterPop=true;
