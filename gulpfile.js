@@ -41,6 +41,10 @@ const MAIN_APP_NAMES = [
     'protocol-trusteeship', // 资金托管协议
     'protocol-counseling', // 咨询服务协议
 
+    'protocol-special-recharge', // 特殊用户充值协议
+    'protocol-special-cash', // 特殊提现协议
+    'protocol-special-bind', // 特殊绑定银行卡协议
+
     // 专题页面
     'topic-hui-shang', // 徽商专题页面
     'topic-score', // 玩转工分
