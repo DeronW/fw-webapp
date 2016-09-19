@@ -96,7 +96,8 @@ const MALL_APP_NAMES = [
     'error-page',
     'new-home',
     'gamble-nine',
-    'product-category'
+    'product-category',
+    'zhuan-pan',
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
