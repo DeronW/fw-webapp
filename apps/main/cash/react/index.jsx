@@ -389,7 +389,11 @@ const Withdrawals = React.createClass({
 			</div>
 		};
 
+		console.log(this.props.data);
+
 		return (
+
+
 			<div>
 				<TopNav title={"提现"} backBtn={true}  btnFun={this.callbackOpenBankBtn}/>
 
@@ -450,6 +454,8 @@ const Withdrawals = React.createClass({
 					/> : null
 				}
 
+
+				
 
 				<div className="xt" onClick={this.handlerPost}>
 						下一步
@@ -561,7 +567,8 @@ const Neg = React.createClass({
 						<div className="mzysq">
 							<input className="odec" type="text"
 								value={this.state.verify_code}
-								   onChange={this.changeHandler} placeholder="请输入手机验证码"/></div>
+								onChange={this.changeHandler} placeholder="请输入手机验证码"/>
+						</div>
 					</div>
 					<div className="miaoh" style={{background:'#d4d4d4'}}>
 						{this.state.seconds ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerCodeClick} >获取验证码</span>}

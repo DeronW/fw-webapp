@@ -128,7 +128,7 @@ var PswFrom = React.createClass({
                     <span className="btn-code">
                         {
                             this.state.code ?
-                                <span className="timing-text">{this.state.countdown}s倒计时</span> :
+                                <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
                                 <span className="btn" onClick={this.handerIdentifyingCode}>获取验证码</span>
                         }
                     </span>

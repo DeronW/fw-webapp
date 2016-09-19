@@ -471,7 +471,7 @@ var From = React.createClass({
 
                             {
                                 this.state.code ?
-                                    <span className="timing-text">{this.state.countdown}倒计时</span> :
+                                    <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
                                     <span className={this.userInfoAllVal() ? "timing-text" : "btn"}
                                           onClick={this.headlerCode}>获取验证码</span>
                             }
