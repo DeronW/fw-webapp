@@ -331,12 +331,12 @@ var SelectBank = React.createClass({
         this.props.callbackBtn(false);
     },
     supportQuickPayClick: function(index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index]);
+        this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index]);
         this.props.callbackBtn(false);
         //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayClick: function(index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index])
+        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
         this.props.callbackBtn(false);
         //this.props.callbackSelectBankNullOderIs(false);
     },
@@ -377,7 +377,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.bankList.map(quickPayli, this) : null
+                                this.state.bankListData != null ? this.state.bankListData.quickBankList.map(quickPayli, this) : null
                             }
 
                         </ul>
@@ -389,7 +389,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.quickBankList.map(notQuickPayli, this) : null
+                                this.state.bankListData != null ? this.state.bankListData.bankList.map(notQuickPayli, this) : null
                             }
                         </ul>
                     </div>
