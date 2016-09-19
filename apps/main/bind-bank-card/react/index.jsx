@@ -67,7 +67,7 @@ const BindBankCard = React.createClass({
                     <Bran propsBankName={this.state.bankName.bankZone} callbackPopShow={this.getPopShow}/> : null}
                 {prohibited < 3 ? <Branch propsBankZone={this.props.item.userInfo.bankzone}/> : null}
                 <Warm />
-
+                
             </div>
         )
     }
