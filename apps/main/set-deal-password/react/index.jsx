@@ -62,8 +62,10 @@ var PswFrom = React.createClass({
                 isVmsType: "VMS"
             }, this.handerIdentifyingCode);
         } else {
-            if(this.state.countdown > 0 && this.state.countdown !== 60) {
-                $FW.Component.Toast(this.state.countdown + "s后才能获取");
+            if((+new Date())　-　nextProps.callVoicePhone  < 10) {
+                if(this.state.countdown > 0 && this.state.countdown !== 60) {
+                    $FW.Component.Toast(this.state.countdown + "s后才能获取");
+                }
             }
         }
 
