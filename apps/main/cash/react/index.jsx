@@ -345,6 +345,7 @@ const Withdrawals = React.createClass({
 		var _this = this;
 
 		var feeVal = this.state.propsUserInfo.fee;
+		var bankId = this.props.data.bankInfo.bankCardNo;
 
 		var commissionCharge = function() {
 			console.log(_this.state.propsUserInfo.isFeeEnable);
@@ -401,7 +402,11 @@ const Withdrawals = React.createClass({
 					<div className="zhaoshang"><img className="ico-zhaoshang" src={this.props.data.bankInfo.bankLogo}/></div>
 					<div className="wz">
 						<div className="zh">{this.props.data.bankInfo.bankName}</div>
-						<div className="nz">{this.props.data.bankInfo.bankCardNo}</div>
+						<div className="nz">
+							{
+								bankId.substring(0, 4) + "********" + bankId.substring((bankId.length - 4), bankId.length)
+							}
+						</div>
 					</div>
 					<div className="kuaijie"><img src="images/ico-kuaijie.png"/></div>
 				</div>
