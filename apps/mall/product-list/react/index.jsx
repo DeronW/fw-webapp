@@ -162,7 +162,7 @@ const ExchangeBar = React.createClass({
             filterLevel:'不限',
             maxPoints:'',
             minPoints:'',
-            maxValue:'',
+            maxValue:$FW.Format.urlQuery().searchSourceType==1?-1:'',
             minValue:'',
             myScore:0,
         }
@@ -253,10 +253,17 @@ const ExchangeBar = React.createClass({
     	this.setState({maxValue:''});
         this.setState({filterScore:name});
         if(name=='不限'){
-        	this.setState({
-        		maxPoints:'',
-        		minPoints:'',
-        	});
+        	if($FW.Format.urlQuery().searchSourceType==1){
+        		this.setState({
+	        		maxPoints:-1,
+	        		minPoints:'',
+	        	});
+        	}else{
+        		this.setState({
+	        		maxPoints:'',
+	        		minPoints:'',
+	        	});
+        	}        	
         }else if(name=='我可兑换'){
         	this.setState({        		
         		minPoints:'',
@@ -282,6 +289,18 @@ const ExchangeBar = React.createClass({
         		minPoints:5000,
         		maxPoints:'',
         	});
+        }else{
+        	if($FW.Format.urlQuery().searchSourceType==1){
+        		this.setState({
+	        		minPoints:'',
+	        		maxPoints:-1,
+	        	});
+        	}else{
+        		this.setState({
+	        		minPoints:'',
+	        		maxPoints:'',
+	        	});
+        	}
         }
     },
     filterLevelHandler: function(name){
@@ -318,17 +337,31 @@ const ExchangeBar = React.createClass({
        		this.setState({filterScore:'不限'});
        }
     },
-    clearFilterHandler: function () {    	
-       this.setState({
-       		vipLevel: -1,
-            showFilterPop:true,
-            filterScore:'不限',
-            filterLevel:'不限',
-            maxPoints:'',
-            minPoints:'',
-            maxValue:'',
-            minValue:''      		
-       });              
+    clearFilterHandler: function () {    
+    	    if($FW.Format.urlQuery().searchSourceType==1){
+				this.setState({
+		       		vipLevel: -1,
+		            showFilterPop:true,
+		            filterScore:'不限',
+		            filterLevel:'不限',
+		            maxPoints:-1,
+		            minPoints:'',
+		            maxValue:'',
+		            minValue:''      		
+		       });
+        	}else{
+        		this.setState({
+		       		vipLevel: -1,
+		            showFilterPop:true,
+		            filterScore:'不限',
+		            filterLevel:'不限',
+		            maxPoints:'',
+		            minPoints:'',
+		            maxValue:'',
+		            minValue:''      		
+		       });
+        	}   
+                     
     },
     filterFinishHandler: function () {   
     	var options = {
@@ -487,7 +520,21 @@ const ProductItem = React.createClass({
 $FW.DOMReady(function () {	
     var title = $FW.Format.urlQuery().title || '商品列表';
     window._searchOptions.searchSourceType=$FW.Format.urlQuery().searchSourceType||'';
-    if($FW.Format.urlQuery().searchSourceType==2){
+    if($FW.Format.urlQuery().searchSourceType==1){    	
+    	 $FW.Ajax({
+            url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
+            success: (data) =>{
+	            if(data.is_login){
+					window._searchOptions.maxPoints=data.score;
+	        	}else{
+	        		window._searchOptions.maxPoints=-1;
+	        	};
+            } 
+        });
+    	
+
+    	
+    }else if($FW.Format.urlQuery().searchSourceType==2){
     	
     }else{
     	NativeBridge.setTitle(title);
