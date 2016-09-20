@@ -56,24 +56,25 @@ const Mall = React.createClass({
 			return $FW.Browser.inApp() ?<img className="m-logo" src="images/m-logo.png"/>:<a className="back-factory" href="http://m.9888.cn/mpwap/">回到工场</a>
 		};
 		let appIosTopWhite=()=>{
-			let appIos=false;
 			
+			let appIos=false;			
 			if($FW.Browser.inApp()&&$FW.Browser.inIOS()){
 				appIos=true;
 			}else{
 				appIos=false;
 			}
+			alert()
 			return (
-				appIos?"head-images head-images-ios":"head-images"
+				appIos?"head-items head-images-ios":"head-items";
 			)
 		};
         return (
             <div className="head-wrap">
                 {this.props.banners.length ?
-                    <BannerGroup className={appIosTopWhite()} images={this.getHeadImages()}
+                    <BannerGroup className="head-images" images={this.getHeadImages()}
                                  onImageClick={this.onImageClickHandler}/> :
                     <div className="no-banner"></div>}
-                <div className="head-items">
+                <div className={appIosTopWhite()}>
                     {backFactory()}
                     <a onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceType=2") }} className="search-bar-a"><img className="search-icon" src="images/search-icon.png"/><div className="search-bar">搜索</div></a>                   
                     <a className="index-avatar" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><img src="images/profile-icon.png"/></a>
