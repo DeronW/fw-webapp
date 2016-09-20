@@ -320,16 +320,27 @@ a, input {
   height:56px;
 }
 
-.search-bar{
-  width:402px;
-  padding-left:48px;
-  height:54px;
-  border:none;
-  background:#fff;
-  border-radius:4px;
-  font-size:26px;
-  color:#555;
-  line-height:normal;
+.search-bar-a{
+    float:left;
+    height:56px;
+    position:relative;
+    .search-bar{
+      width:402px;
+      padding-left:48px;
+      height:56px;
+      background:#fff;
+      border-radius:4px;
+      font-size:26px;
+      color:#999;
+      line-height:54px;
+    }
+    .search-icon{
+      width:48px;
+      height:56px;
+      position:absolute;
+      top:0;
+      left:0px;
+    }
 }
 .index-avatar{
   display:block;
@@ -342,13 +353,7 @@ a, input {
 .index-avatar img{
   width:100%;
 }
-.search-icon{
-  width:48px;
-  height:56px;
-  position:absolute;
-  top:0;
-  left:188px;
-}
+
 .head-user-info{
   height:88px;
   border-bottom:1px solid #e3e5ea;
