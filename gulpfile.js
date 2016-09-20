@@ -82,7 +82,7 @@ const MALL_APP_NAMES = [
     'user',
     'order-list',
     'order-detail',
-    'order-confirm',
+    'order-confirm',    
     'order-complete',
     'product-detail',
     'product-list',
@@ -94,9 +94,9 @@ const MALL_APP_NAMES = [
     'deliver-address',
     'new-deliver-address',
     'error-page',
-    'new-home',
     'gamble-nine',
-    'product-category'
+    'product-category',
+    'zhuan-pan',
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
