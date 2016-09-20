@@ -23,12 +23,13 @@ const Mall = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
             success: (data) =>{
-            	alert(data);
+            	alert(data.is_login);
+            	alert(data.score);
             	console.log(data);
             	if(data.is_login){
-            		this.setState({user_score:data.score})
+            		this.setState({user_score:data.score});
             	}
-            	
+            	alert(this.state.score);
             } 
         });
     },
