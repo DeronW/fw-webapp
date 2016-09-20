@@ -82,7 +82,7 @@ const MALL_APP_NAMES = [
     'user',
     'order-list',
     'order-detail',
-    'order-confirm',
+    'order-confirm',    
     'order-complete',
     'product-detail',
     'product-list',
