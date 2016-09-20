@@ -37,7 +37,7 @@ const ResultPage = React.createClass({
                     {this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
                     {this.state.products.length ?
                         null :
-                        <div className="empty-list">暂无商品</div>}
+                        <div href="http://mmall.9888.cn/" className="empty-list">暂无商品</div>}
                 </div>
     		)
     	}
