@@ -76,7 +76,7 @@ const Mall = React.createClass({
                     <a className="recharge" onClick={function(){ gotoHandler("/static/mall/product-recharge/index.html",true) }}>充值中心</a>
                     <a className="vip" onClick={function(){ gotoHandler("/static/mall/product-vip-zone/index.html") }}>VIP专区</a>
                     <a className="goods" onClick={function(){ gotoHandler("/static/mall/zhuan-pan/index.html?"+(+new Date()), true) }}>大转盘</a>
-                    <a className="mine" onClick={function(){ gotoHandler("/user", true) }}>品类</a>
+                    <a className="mine" onClick={function(){ gotoHandler("/static/mall/product-category/index.html", true) }}>品类</a>
                 </div>
                 <div className="index-actList-wrap">
                     { this.props.activities.map(activity) }
