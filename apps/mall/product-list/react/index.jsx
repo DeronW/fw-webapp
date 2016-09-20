@@ -560,7 +560,12 @@ $FW.DOMReady(function () {
 });
 
 function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+	if($FW.Format.urlQuery().searchSourceType==0){
+		location.href = 'http://mmall.9888.cn/static/mall/product-category/index.html'
+	}else{
+		$FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+	}
+    
 }
 
 window._searchOptions = {
