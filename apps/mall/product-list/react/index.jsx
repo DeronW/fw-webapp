@@ -99,6 +99,8 @@ const SearchBar = React.createClass({
     },
     backHandler: function () {
        history.back();
+       //App里面后退不起作用 判断在App环境当中关掉当前webview
+        NativeBridge.isReady && NativeBridge.close();
     },
     onBlurHandler: function () {
        this.setState({showSearchHistory:false});
@@ -141,7 +143,7 @@ const SearchBar = React.createClass({
                           
                     /></form>
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
-                    <span className="search-confirm">取消</span>
+                    <a href="#" className="search-confirm">取消</a>
                 </div>
                 {searchHistory()}
             </div>

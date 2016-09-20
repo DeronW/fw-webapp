@@ -54,10 +54,22 @@ const Mall = React.createClass({
 		let backFactory=()=>{
 			return $FW.Browser.inApp() ?<img className="m-logo" src="images/m-logo.png"/>:<a className="back-factory" href="http://m.9888.cn/mpwap/">回到工场</a>
 		};
+		let appIosTopWhite=()=>{
+			let appIos=false;
+			
+			if($FW.Browser.inApp()&&$FW.Browser.inIOS()){
+				appIos=true;
+			}else{
+				appIos=false;
+			}
+			return (
+				appIos?"head-images head-images-ios":"head-images"
+			)
+		};
         return (
             <div className="head-wrap">
                 {this.props.banners.length ?
-                    <BannerGroup className="head-images" images={this.getHeadImages()}
+                    <BannerGroup className={appIosTopWhite()} images={this.getHeadImages()}
                                  onImageClick={this.onImageClickHandler}/> :
                     <div className="no-banner"></div>}
                 <div className="head-items">
