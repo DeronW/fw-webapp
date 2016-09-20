@@ -63,7 +63,6 @@ const Mall = React.createClass({
 			}else{
 				appIos=false;
 			}
-			alert()
 			return (
 				appIos?"head-items head-images-ios":"head-items"
 			)
