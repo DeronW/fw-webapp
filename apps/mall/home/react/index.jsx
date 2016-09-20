@@ -65,7 +65,7 @@ const Mall = React.createClass({
 			}
 			alert()
 			return (
-				appIos?"head-items head-images-ios":"head-items";
+				appIos?"head-items head-images-ios":"head-items"
 			)
 		};
         return (
