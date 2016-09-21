@@ -17,13 +17,17 @@ const ResultPage = React.createClass({
      		search({page:1},true);
      		this.setState({page:1});
      	}
+     	
      	this.loadMoreProductHandler(null);
         $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
     loadMoreProductHandler: function () {    
     	let newPage=this.state.page+1;
+    	this.setState({page:newPage});
     	search({page:newPage},false);
-        this.setState({page:newPage});
+    	alert('this.state.page'+this.state.page);
+    	alert("newPage"+newPage);
+        
     },
     setInitialPage: function () {    	
         this.setState({page:1});
@@ -34,8 +38,6 @@ const ResultPage = React.createClass({
     appendProducts: function (data) {    	
         var list = this.state.products.slice();
         var newList=list.concat(data.products);
-        console.log(data.products);
-        console.log(newList);
         this.setState({products: newList})        
     },
     searchFocus: function () {
@@ -88,7 +90,6 @@ const SearchBar = React.createClass({
             url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
             data:{searchOpType:0,page:1},
             success: (data) => {
-            	console.log(data+'asd');
                 this.setState({history: data.searchRecords||[]});
     
             }
@@ -101,8 +102,7 @@ const SearchBar = React.createClass({
     	var options = {
             productName: this.state.value,
             page:1
-        };
-    	console.log("this.state.value"+this.state.value);
+       };
         search(options, true);
         this.props.setInitialPage();
         this.setState({showSearchHistory:false})
