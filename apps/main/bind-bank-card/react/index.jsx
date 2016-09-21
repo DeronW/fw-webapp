@@ -136,7 +136,6 @@ const Bran = React.createClass({
         this.props.callbackPopShow(true);
     },
     render: function () {
-
         return (
             <div className="modify">
                 <a className="pure-a" href="/static/wap/change-bank-card/index.html">
@@ -147,7 +146,7 @@ const Bran = React.createClass({
                 </a>
                 <div className="wire-a"></div>
                 <div className="pure-a" onClick={this.handleJump}>
-                    <div className="xuanwu-a">{this.props.propsBankName === "" ? "开户支行" : this.props.propsBankName}</div>
+                    <div className="xuanwu-a">{this.props.propsBankName == "" ? "开户支行" : this.props.propsBankName}</div>
                     <div className="choice-a">
                         <div className="pleas-a">请选择</div>
                     </div>
@@ -161,7 +160,7 @@ const Branch = React.createClass({
     render: function () {
         return (
             <div className="pure">
-                <div className="xuanwu">{this.props.propsBankZone}</div>
+                <div className="xuanwu">{this.props.propsBankZone === "" ? "开户开行" : this.props.propsBankZone}</div>
                 <div className="choice">
                     <div className="pleas">请选择</div>
                 </div>
