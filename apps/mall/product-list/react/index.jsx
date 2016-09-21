@@ -20,9 +20,9 @@ const ResultPage = React.createClass({
         $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
     loadMoreProductHandler: function () {    
-    	let newPage=this.state.page+1;
-    	this.setState({page:newPage});
+    	let newPage=this.state.page+1;    	
     	search({page:newPage},false);
+    	this.setState({page:newPage});
     	alert('this.state.page'+this.state.page);
     	alert("newPage"+newPage);
         
