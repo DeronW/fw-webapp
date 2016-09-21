@@ -60,7 +60,6 @@ var PhoneCodePrompt = React.createClass({
         var _this = this;
 
         if(this.props.callbackCountdown === n) {
-            console.log(this.state.countdown);
             this.props.callbackCode(1);
 
             this.interval = setInterval(function () {
@@ -388,6 +387,12 @@ var From = React.createClass({
         var userAjaxData = this.props.ajaxData;
         var idCardNo = userAjaxData.userInfo.idCardNo;
         var idCarNoNntercept = idCardNo.substring(0, 4) + "****" + idCardNo.substring((idCardNo.length - 4), idCardNo.length);
+        var bankCardNum = userAjaxData.userInfo.bankCard;
+        var realNameVal = userAjaxData.userInfo.realName;
+        var genderVal = userAjaxData.userInfo.gender;
+
+        console.log(realNameVal.substring(0, 1));
+
         var accountInput = function () {
             return _this.state.showInput == 1 ?
                 <input type="text"
@@ -397,7 +402,7 @@ var From = React.createClass({
                        onFocus={_this.inputFocus}
                        onBlur={_this.inputBlur}
                        onChange={_this.onInputChangeHandler}/> :
-                <span className="text id-text" onClick={_this.amendId}>{userAjaxData.userInfo.bankCard}</span>
+                <span className="text id-text" onClick={_this.amendId}>{bankCardNum.substring(0, 4) + "********" + bankCardNum.substring((bankCardNum.length - 4), bankCardNum.length)}</span>
         };
 
         var selectEml = function () {
@@ -424,7 +429,7 @@ var From = React.createClass({
                             {
                                 userAjaxData.userInfo.realName === "" ?
                                     <input type="text" placeholder="真实姓名" onChange={this.changeUserName}/> :
-                                    <span className="text name-text">{userAjaxData.userInfo.realName}</span>
+                                    <span className="text name-text">{realNameVal.substring(0, 1) + (genderVal == "0" ? "先生" : "女士")}</span>
                             }
 
                         </div>
