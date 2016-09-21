@@ -28,3 +28,11 @@ $FW.DOMReady(function () {
         }
     })
 });
+
+function gotoInvest() {
+    if ($FW.Browser.inApp()) {
+        NativeBridge.toNative('app_invest_immediately');
+    } else {
+        location.href = '/'
+    }
+}
