@@ -320,6 +320,10 @@ var From = React.createClass({
         }
     },
     changeBankCard: function (event) {
+        this.setState({
+            account: numberFormat.format(event.target.value)
+        });
+
         this.props.callbackBankCardNo(event.target.value);
 
         this.setState({
@@ -397,8 +401,6 @@ var From = React.createClass({
         };
 
         var selectEml = function () {
-
-
             return <div className="">
                         <span className="bank-text">
                             {
@@ -444,6 +446,7 @@ var From = React.createClass({
                         <div className="text-block">
                             {
                                 userAjaxData.userInfo.bankCard === "" ? <input type="text" placeholder="银行卡号"
+                                                                               value={this.state.account}
                                                                                onChange={this.changeBankCard}/> : accountInput()
                             }
                         </div>
@@ -670,6 +673,8 @@ var Body = React.createClass({
         };
     },
     fromData: function (dataText) {
+        console.log(dataText);
+
         this.dataText = dataText;
 
         var newUserInfo = this.state.userInfo;
@@ -726,8 +731,6 @@ var Body = React.createClass({
             return false;
         }
 
-        console.log(this.state.userInfo.idCardNo);
-
         if (this.props.activity.openStatus === "4" || this.props.activity.openStatus === "2" || this.props.activity.openStatus === "3") {
 
         } else {
@@ -737,6 +740,7 @@ var Body = React.createClass({
             }
         }
 
+        console.log(this.state.userInfo);
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/bind/card.shtml",
@@ -744,7 +748,6 @@ var Body = React.createClass({
             enable_loading: true,
             data: _this.state.userInfo,
             success: function (data) {
-                console.log(data);
                 location.href = "/static/wap/set-deal-password/index.html";
             }
         });
@@ -810,7 +813,7 @@ var Body = React.createClass({
     getBankCardNo: function (val) {
         var newUserInfo = this.state.userInfo;
 
-        newUserInfo.bankCardNo = val;
+        newUserInfo.bankCardNo = space(val);
 
         this.setState({
             userInfo: newUserInfo
