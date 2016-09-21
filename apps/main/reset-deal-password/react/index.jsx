@@ -134,10 +134,13 @@ var PswFrom = React.createClass({
     },
     componentWillReceiveProps: function(nextProps) {
         if(this.state.countdown == 0 && (+new Date())　-　nextProps.propsVoice  < 10) {
-            this.setState({
-                codeType: 3,
-                isVmsType: "VMS"
-            },this.handerIdentifyingCode);
+            console.log("x");
+            this.setState(
+                {
+                    codeType: 3,
+                    isVmsType: "VMS"
+                },this.handerIdentifyingCode
+            );
 
         } else {
             if((+new Date())　-　nextProps.propsVoice  < 10) {
@@ -187,6 +190,8 @@ var PswFrom = React.createClass({
             method: "GET",
             success: function(data) {
 
+            },
+            fail: function() {
 
             }
         })

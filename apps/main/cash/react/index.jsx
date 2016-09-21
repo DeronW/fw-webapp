@@ -184,7 +184,9 @@ const Withdrawals = React.createClass({
 			selectBankName: "",
 			selectBankId: "",
 			propsAccountAmountVal: this.props.data.accountAmount,
-			propsUserInfo: this.props.data
+			propsUserInfo: this.props.data,
+			promptShow: false,
+			voice: null
 	    }
 	},
 	componentDidUpdate: function(a, params) {
@@ -321,6 +323,11 @@ const Withdrawals = React.createClass({
 		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + this.state.selectBankId;
 
 	},
+	handlerVoice: function() {
+		this.setState({
+			voice: +new Date()
+		})
+	},
 	getCode: function(code) {
 		this.setState({
 			codeVal: code
@@ -338,6 +345,11 @@ const Withdrawals = React.createClass({
 			selectBankId: bankInfo.bankNo
 		});
 	},
+	getPromptShow: function(booleanVal) {
+		this.setState({
+			promptShow: booleanVal
+		});
+	},
 	callbackOpenBankBtn: function() {
 		window.history.back();
 	},
@@ -346,6 +358,8 @@ const Withdrawals = React.createClass({
 
 		var feeVal = this.state.propsUserInfo.fee;
 		var bankId = this.props.data.bankInfo.bankCardNo;
+		var phone = this.props.data.bankInfo.phoneNo;
+		var phoneVal = phone.substring(0, 3) + "****" + phone.substring((phone.length - 4), phone.length);
 
 		var commissionCharge = function() {
 			console.log(_this.state.propsUserInfo.isFeeEnable);
@@ -390,7 +404,6 @@ const Withdrawals = React.createClass({
 			</div>
 		};
 
-		console.log(this.props.data);
 
 		return (
 
@@ -416,51 +429,60 @@ const Withdrawals = React.createClass({
 					<div className="kx">可提现金额(元)：<span style={{fontSize: '38px',color: '#fd4d4c'}}>{this.props.data.accountAmount}</span></div>
 				</div>
 
-				<div className="kunag">
-					<div className="pure">
-						<div className="xuanwu">
-							{
-								!this.state.choiceShow ? <input className="moneyTxt"
-															   value={this.state.inputVal}
-															   onChange={this.handlerOnChange}
-															   onBlur={this.handlerOnBlur}
-															   onFocus={this.handlerOnFocus}
-															   ref="refsMoney"
-															   type="text" placeholder="请输入提现金额"
-								/> : <div className="input-text">{this.state.inputVal}</div>
-							}
+				<div className="select-bank-area">
+					<div className="kunag">
+						<div className="pure">
+							<div className="xuanwu">
+								{
+									!this.state.choiceShow ? <input className="moneyTxt"
+																	value={this.state.inputVal}
+																	onChange={this.handlerOnChange}
+																	onBlur={this.handlerOnBlur}
+																	onFocus={this.handlerOnFocus}
+																	ref="refsMoney"
+																	type="text" placeholder="请输入提现金额"
+									/> : <div className="input-text">{this.state.inputVal}</div>
+								}
 
-						</div>
-						<div className="choice">
-							{
-								this.state.choiceShow ? <div className="pleas" onClick={this.handlerPleasBtn}>修改</div> : null
-							}
+							</div>
+							<div className="choice">
+								{
+									this.state.choiceShow ? <div className="pleas" onClick={this.handlerPleasBtn}>修改</div> : null
+								}
 
+							</div>
 						</div>
 					</div>
+
+					{
+						this.state.modifyShow ? <div className="modify" onClick={this.handlerSelectPopFun} >
+							<div className="wire"></div>
+							<div className="pure">
+								<div className="xuanwu" style={{fontSize:'32px'}}>
+									{this.state.selectBankName === "" ? this.props.data.bankInfo.bankBranchName : this.state.selectBankName}
+								</div>
+								<div className="choice">
+									<div className="pleas" style={{color:'#555555'}}  >请选择</div></div>
+							</div>
+						</div> : null
+					}
+
+					{
+						this.state.specialShow ? <Special
+							callbackCode={this.getCode}
+							callbackPromptShow={this.getPromptShow}
+							callbackVoice={+new Date()}
+							propsPhone={phone}
+						/> : null
+					}
+
+
 				</div>
 
 				{
-					this.state.modifyShow ? <div className="modify" onClick={this.handlerSelectPopFun} >
-							<div className="wire"></div>
-							<div className="pure">
-							<div className="xuanwu" style={{fontSize:'32px'}}>
-								{this.state.selectBankName === "" ? this.props.data.bankInfo.bankBranchName : this.state.selectBankName}
-							</div>
-							<div className="choice">
-								<div className="pleas" style={{color:'#555555'}}  >请选择</div></div>
-							</div>
-						</div> : null
+					this.state.promptShow ?
+						<div className="old-user-prompt-text">已向手机{phoneVal}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span>获取语音验证码。</div> : null
 				}
-
-				{
-					this.state.specialShow ? <Special
-						callbackCode={this.getCode}
-					/> : null
-				}
-
-
-				
 
 				<div className="xt" onClick={this.handlerPost}>
 						下一步
@@ -483,6 +505,7 @@ const Withdrawals = React.createClass({
 					this.state.selectBank ? <BankAccount
 						callbackSelectBankInfo={this.getSelectBankInfo}
 						callbackOpenBank={this.getOpenBankShow}
+
 					/> : null
 				}
 
@@ -587,46 +610,81 @@ const Neg = React.createClass({
 
 
 const Special = React.createClass({
-	getDefaultProps: function(){
-		return {
-			countSeconds: 60
-		}
-	},
 	getInitialState: function() {
 		return {
 			seconds:0,
-			forbid: true
+			forbid: true,
+			codeType: 5,
+			isVmsType: "SMS"
 		}
+	},
+	componentWillReceiveProps: function(nextProps) {
+
+		if(this.state.seconds == 0 && (+new Date()) - nextProps.callbackVoice < 10 ) {
+			this.setState(
+				{
+					codeType: 3,
+					isVmsType: "VMS"
+				},
+				this.handlerTestClick
+			);
+		} else {
+			if((+new Date())　-　nextProps.callbackVoice  < 10) {
+				if(this.state.seconds > 0 && this.state.seconds !== 5) {
+					$FW.Component.Toast(this.state.seconds + "s后才能获取");
+				}
+			}
+		}
+
+	},
+	componentWillUnmount: function() {
+		clearInterval(this.timer);
 	},
 	handlerTestClick: function(){
 		var _this = this;
 
+		this.props.callbackPromptShow(true);
+
 		this.setState({
-			forbid: false
+			forbid: false,
+			seconds: 5
 		});
 
-		if(this.state.seconds !=0) return;
-		
-		this.setState({seconds: this.props.countSeconds});
-		
 		this.timer = setInterval(()=> {
-            this.setState({seconds: this.state.seconds - 1});
-            if (this.state.seconds < 1) {
+            this.setState(
+				{
+					seconds: this.state.seconds - 1
+				}
+			);
+
+			console.log(this.state.seconds);
+
+            if (this.state.seconds == 0) {
+				clearInterval(this.timer)
+
 				_this.setState({
 					forbid: true
 				});
-
-				clearInterval(this.timer)
-
             }
-        }, 1000)
+        }, 1000);
 
-		$FW.Ajax({
-			url: API_PATH +"mpwap/api/v1/sendCode.shtml?isVms=SMS&type=1",
+		/*$FW.Ajax({
+			url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.props.propsPhone + "&isVms=" + this.state.isVmsType,
 			success: function (data) {
 				console.log(data);
+			},
+			fail: function() {
+				_this.setState(
+					{
+						seconds: 0,
+						forbid: true
+					}
+				);
+
+				clearInterval(_this.timer);
+				_this.timer = null;
 			}
-		})
+		})*/
 	},
 	inputCodeOnChange: function(e) {
 		this.props.callbackCode(e.target.value);
@@ -636,13 +694,16 @@ const Special = React.createClass({
 		return (
 			<div>
 				<div className="qing clearfix">
+
 					<div className="shyan">
 						<div className="mzysq" value={this.props.verify_code} onCodeChange={this.changeHandler}>
 							<input className="odec" type="text" onChange={this.inputCodeOnChange} placeholder="请输入手机验证码"/>
 						</div>
 					</div>
 					<div className={this.state.forbid ? "miaoh" : "miaoh c"}>
-						{this.state.seconds ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>}
+						{
+							this.state.seconds ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>
+						}
 					</div>
 				</div>
 			</div>
