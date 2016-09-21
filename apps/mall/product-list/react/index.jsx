@@ -20,11 +20,14 @@ const ResultPage = React.createClass({
         $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
     loadMoreProductHandler: function () {    
-    	let newPage=this.state.page+1;    	
+    	let newPage=this.state.page+1;   
+    	console.log(newPage+"newPage");
     	search({page:newPage},false);
-    	this.setState({page:newPage});
-    	alert('this.state.page'+this.state.page);
-    	alert("newPage"+newPage);
+    	console.log(this.state.page+"this.state.page");
+    	 setTimeout(function(){
+    	 	this.setState({page:newPage});
+    	 },10);    	
+    	console.log(this.state.page+'this.setState');
         
     },
     setInitialPage: function () {    	
@@ -612,7 +615,7 @@ window._searchOptions = {
     page: 1,
     vipLevel: '',
     productName: '', // keyword
-    categoryName: '',
+    categoryName:'',
     actIds: '',
     searchSourceType: '',
     prefectureType: 0,
