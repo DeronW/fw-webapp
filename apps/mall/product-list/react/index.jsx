@@ -24,8 +24,9 @@ const ResultPage = React.createClass({
     	console.log(newPage+"newPage");
     	search({page:newPage},false);
     	console.log(this.state.page+"this.state.page");
+    	var _this=this;
     	 setTimeout(function(){
-    	 	this.setState({page:newPage});
+    	 	_this.setState({page:newPage});
     	 },10);    	
     	console.log(this.state.page+'this.setState');
         
