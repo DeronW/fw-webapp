@@ -137,7 +137,6 @@ const DeliveryProcessList = React.createClass({
 
 const Account = React.createClass({
     render: function () {
-
         let score = null;
         if (this.props.show_score) {
             score = (
@@ -154,11 +153,6 @@ const Account = React.createClass({
         return (
             <div>
                 <div className="my-account-block">
-                    <div className="my-account-title">
-                        <span className="l-text">可用余额</span>
-                        <span className="r-text money-number">&yen;{$FW.Format.currency(this.props.money)}</span>
-                    </div>
-
                     <div className="voucher-list">
                         <div>
                             <span className="l-text">优惠券</span>

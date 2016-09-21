@@ -150,9 +150,7 @@ const SearchBar = React.createClass({
                            onChange={this.changeHandler}
                            onBlur={this.onBlurHandler} 
                            onFocus={this.onFocusHandler}
-                           onKeyDown={this.onKeyDownHandler}
-                           
-                          
+                           onKeyDown={this.onKeyDownHandler}                          
                     /></form>
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
                     <a href="#" className="search-confirm">取消</a>
