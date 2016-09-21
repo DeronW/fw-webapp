@@ -17,8 +17,6 @@ const ResultPage = React.createClass({
      		search({page:1},true);
      		this.setState({page:1});
      	}
-     	
-     	this.loadMoreProductHandler(null);
         $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
     loadMoreProductHandler: function () {    
