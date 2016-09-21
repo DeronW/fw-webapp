@@ -57,7 +57,7 @@ var Cart = React.createClass({
 
                 <div className="bank-id">
                     {
-                        dataInfo.bankCardNo.substring(0, 4) + "****" +  dataInfo.bankCardNo.substring((dataInfo.bankCardNo.length - 4),  dataInfo.bankCardNo.length)
+                        dataInfo.bankCardNo
                     }
                 </div>
 
