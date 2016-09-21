@@ -48,6 +48,7 @@ const MAIN_APP_NAMES = [
     // 专题页面
     'topic-hui-shang', // 徽商专题页面
     'topic-score', // 玩转工分
+    'topic-interest-reward', // 年化加息奖励
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
@@ -82,7 +83,7 @@ const MALL_APP_NAMES = [
     'user',
     'order-list',
     'order-detail',
-    'order-confirm',    
+    'order-confirm',
     'order-complete',
     'product-detail',
     'product-list',
