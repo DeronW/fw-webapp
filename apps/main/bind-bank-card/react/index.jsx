@@ -5,7 +5,7 @@ const BindBankCard = React.createClass({
         return {
             popShow: false,
             bankName: {
-                bankZone:this.props.item.userInfo.bankzone
+                bankZone: this.props.item.bankInfoDetail.bankzone
             }
         }
     },
@@ -34,40 +34,47 @@ const BindBankCard = React.createClass({
         });
     },
     render: function () {
-        let prohibited = this.props.item.openStatus;
-        let bankCardNum = this.props.item.userInfo.bankCard;
-        let idCarNoNntercept = bankCardNum.substring(0, 4) + "********" + bankCardNum.substring((bankCardNum.length - 4), bankCardNum.length);
-
-        console.log(this.props.item.userInfo.bankName);
+        let prohibited = this.props.item.bankInfoDetail.openStatus;
 
         return (
             <div>
                 {prohibited < 3 ? <Invalid  /> : null}
                 {prohibited == 3 ? <Valid  /> : null}
                 {prohibited == 5 ? <Cover hide={this.hideHandler}/> : null}
-                {prohibited == 5 ? <Bomb hide={this.hideHandler} username={this.props.item.realName}/> : null}
+                {prohibited == 5 ? <Bomb hide={this.hideHandler} username={this.props.item.bankInfoDetail.realName}/> : null}
 
                 <div className={prohibited < 3 ? "bank bank-top1" : "bank bank-top2"}>
                     <div className="ash clearfix">
                         <div className={prohibited < 3 ? "img gray-img" : "img"}><img
-                            src={this.props.item.userInfo.bankLogo}/></div>
-                        <div className="bankname">{this.props.item.userInfo.bankName}</div>
+                            src={this.props.item.bankInfoDetail.bankLogo}/></div>
+                        <div className="bankname">{this.props.item.bankInfoDetail.bankName}</div>
                     </div>
                     <div className="belon">
-                        <div className="name">{this.props.item.userInfo.realName}</div>
-                        <div className="num">{idCarNoNntercept}</div>
+                        <div className="name">{this.props.item.bankInfoDetail.realName}</div>
+                        <div className="num">{this.props.item.bankInfoDetail.bankCard}</div>
                         {prohibited < 3 ? <div className="card-e"></div> : null}
                     </div>
                     <div className={prohibited < 3 ? "instant-icon gray-img" : "instant-icon"}></div>
                 </div>
+
                 <Sup/>
-                {this.state.popShow ? <SelectBankList callbackSelectBankHide={this.getPopShow}
-                                                      callbackBankName={this.getBankName}/> : null }
-                {prohibited == 3 || prohibited == 4 ?
-                    <Bran propsBankName={this.state.bankName.bankZone} callbackPopShow={this.getPopShow}/> : null}
-                {prohibited < 3 ? <Branch propsBankZone={this.props.item.userInfo.bankzone}/> : null}
+                {
+                    this.state.popShow ? <SelectBankList
+                                        callbackSelectBankHide={this.getPopShow}
+                                        callbackBankName={this.getBankName}/> : null
+                }
+                {
+                    prohibited == 3 || prohibited == 4 ?
+                    <Bran propsBankName={this.state.bankName.bankZone}
+                          callbackPopShow={this.getPopShow}
+                          propsIsUpdateBank={this.props.item.isUpdateBank}
+                    /> : null
+                }
+
+                {
+                    prohibited < 3 ? <Branch propsBankZone={this.props.item.bankInfoDetail.bankzone}/> : null
+                }
                 <Warm />
-                
             </div>
         )
     }
@@ -136,18 +143,20 @@ const Bran = React.createClass({
         this.props.callbackPopShow(true);
     },
     render: function () {
-
         return (
             <div className="modify">
-                <a className="pure-a" href="/static/wap/change-bank-card/index.html">
-                    <div className="xuanwu-a">修改绑定银行卡</div>
-                    <div className="choice-a">
-                        <div className="pleas-a">申请修改</div>
-                    </div>
-                </a>
+                {
+                    this.props.propsIsUpdateBank == 1 ?
+                        <a className="pure-a" href="/static/wap/change-bank-card/index.html">
+                            <div className="xuanwu-a">修改绑定银行卡</div>
+                            <div className="choice-a">
+                            <div className="pleas-a">申请修改</div>
+                            </div>
+                        </a> : null
+                }
                 <div className="wire-a"></div>
                 <div className="pure-a" onClick={this.handleJump}>
-                    <div className="xuanwu-a">{this.props.propsBankName === "" ? "开户支行" : this.props.propsBankName}</div>
+                    <div className="xuanwu-a">{this.props.propsBankName == "" ? "开户支行" : this.props.propsBankName}</div>
                     <div className="choice-a">
                         <div className="pleas-a">请选择</div>
                     </div>
@@ -161,7 +170,7 @@ const Branch = React.createClass({
     render: function () {
         return (
             <div className="pure">
-                <div className="xuanwu">{this.props.propsBankZone}</div>
+                <div className="xuanwu">{this.props.propsBankZone === "" ? "开户开行" : this.props.propsBankZone}</div>
                 <div className="choice">
                     <div className="pleas">请选择</div>
                 </div>
@@ -188,10 +197,19 @@ const Warm = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"绑定银行卡"}/>, document.getElementById('header'));
-    $FW.Ajax({
+/*    $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+        success: function (data) {
+
+        }
+    });*/
+
+    $FW.Ajax({
+        url: API_PATH + "/mpwap/api/v1/showBankCardMess.shtml",
+        enable_loading: true,
         success: function (data) {
             ReactDOM.render(<BindBankCard item={data}/>, document.getElementById('cnt'));
         }
     });
+
 });

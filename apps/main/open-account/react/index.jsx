@@ -116,10 +116,6 @@ var PhoneCodePrompt = React.createClass({
 
 var Text = React.createClass({
     render: function () {
-        console.log(this.props.userOpenStatusCode);
-
-
-
         return (
             <div className="text-area">
                 {
@@ -148,6 +144,9 @@ var TopNav = React.createClass({
     backBtnClick: function () {
 
     },
+    handlerPop: function() {
+        this.props.callbackLeapfrogBtn(1);
+    },
     render: function () {
         return (
             <div className="top-nav">
@@ -159,7 +158,7 @@ var TopNav = React.createClass({
                     }
 
                     <div className="title">{this.props.title}</div>
-                    <span className="r-text" onClick={this.props.callbackLeapfrogBtn}>{this.props.btnText}</span>
+                    <span className="r-text" onClick={this.handlerPop}>{this.props.btnText}</span>
                 </div>
             </div>
         );
@@ -321,6 +320,10 @@ var From = React.createClass({
         }
     },
     changeBankCard: function (event) {
+        this.setState({
+            account: numberFormat.format(event.target.value)
+        });
+
         this.props.callbackBankCardNo(event.target.value);
 
         this.setState({
@@ -398,9 +401,6 @@ var From = React.createClass({
         };
 
         var selectEml = function () {
-
-            console.log(_this.props.alreadyBankData);
-
             return <div className="">
                         <span className="bank-text">
                             {
@@ -446,6 +446,7 @@ var From = React.createClass({
                         <div className="text-block">
                             {
                                 userAjaxData.userInfo.bankCard === "" ? <input type="text" placeholder="银行卡号"
+                                                                               value={this.state.account}
                                                                                onChange={this.changeBankCard}/> : accountInput()
                             }
                         </div>
@@ -501,15 +502,15 @@ var From = React.createClass({
 var Pop = React.createClass({
     render: function() {
         return (
-            <div className="pop-body">
+            <div className="pop-body" style={{zIndex: 1000000}}>
                 <div className="pop-back"></div>
                 <div className="pop-cnt">
                     <div className="pop-info">
                         <p>{this.props.propsPopInfo}</p>
                     </div>
                     <div className="pop-btn">
-                        <div className="confirm-btn btn l-btn" onClick={this.props.callbackConfirmBtn}>确认</div>
-                        <div className="cancel-btn btn r-btn" onClick={this.props.callbackCancelBtn}>取消</div>
+                        <div className="confirm-btn btn l-btn" onClick={this.props.callbackConfirmBtn}>{this.props.callbackBtnText[0]}</div>
+                        <div className="cancel-btn btn r-btn" onClick={this.props.callbackCancelBtn}>{this.props.callbackBtnText[1]}</div>
                     </div>
                 </div>
             </div>
@@ -520,7 +521,9 @@ var Pop = React.createClass({
 var SelectBank = React.createClass({
     getInitialState: function () {
         return {
-            bankListData: null
+            bankListData: null,
+            impede: false,
+            notSupportQuickPayList: null
         };
     },
     componentDidMount: function () {
@@ -536,6 +539,13 @@ var SelectBank = React.createClass({
             }
         });
     },
+    componentWillReceiveProps: function(nextPorps) {
+        if(nextPorps.callbackPopBtnBank) {
+            this.setState({
+                impede: nextPorps.callbackPopBtnBank
+            }, this.notSupportQuickPayClick);
+        }
+    },
     backBtnClick: function () {
         //this.props.callbackBtn(false);
         this.props.callbackBtnVal();
@@ -546,9 +556,21 @@ var SelectBank = React.createClass({
         //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayClick: function (index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
+        //this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
+        //this.props.callbackBtn(false);
+
+        console.log("1");
+        this.props.callbackAlreadyBank(this.state.notSupportQuickPayList);
         this.props.callbackBtn(false);
+
         //this.props.callbackSelectBankNullOderIs(false);
+    },
+    notSupportQuickPayList: function(index) {
+        this.props.callbackLeapfrogBtn(2);
+
+        this.setState({
+            notSupportQuickPayList: this.state.bankListData.bankList[index]
+        })
     },
     render: function () {
         var _this = this;
@@ -568,7 +590,7 @@ var SelectBank = React.createClass({
         };
 
         var notQuickPayli = function (comment, index) {
-            return <li key={index} onClick={_this.notSupportQuickPayClick.bind(this, index)} ref={"item" + index}>
+            return <li key={index} onClick={_this.notSupportQuickPayList.bind(this, index)} ref={"item" + index}>
                 <img src={comment.logoUrl} className="logo-img"/>
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
@@ -642,10 +664,17 @@ var Body = React.createClass({
                 realName: getAjaxUserInfo.userInfo.realName,
                 validateCode: null
             },
-            getCallbackBtnVal: false
+            getCallbackBtnVal: false,
+            popCntText: "",
+            btnText: [],
+            popSelect: null,
+            propsPopBtnBank: false
+
         };
     },
     fromData: function (dataText) {
+        console.log(dataText);
+
         this.dataText = dataText;
 
         var newUserInfo = this.state.userInfo;
@@ -702,8 +731,6 @@ var Body = React.createClass({
             return false;
         }
 
-        console.log(this.state.userInfo.idCardNo);
-
         if (this.props.activity.openStatus === "4" || this.props.activity.openStatus === "2" || this.props.activity.openStatus === "3") {
 
         } else {
@@ -713,6 +740,7 @@ var Body = React.createClass({
             }
         }
 
+        console.log(this.state.userInfo);
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/bind/card.shtml",
@@ -720,7 +748,6 @@ var Body = React.createClass({
             enable_loading: true,
             data: _this.state.userInfo,
             success: function (data) {
-                console.log(data);
                 location.href = "/static/wap/set-deal-password/index.html";
             }
         });
@@ -786,7 +813,7 @@ var Body = React.createClass({
     getBankCardNo: function (val) {
         var newUserInfo = this.state.userInfo;
 
-        newUserInfo.bankCardNo = val;
+        newUserInfo.bankCardNo = space(val);
 
         this.setState({
             userInfo: newUserInfo
@@ -796,7 +823,25 @@ var Body = React.createClass({
     backBtnClick: function () {
         window.history.back();
     },
-    getLeapfrogBtn: function() {
+    getLeapfrogBtn: function(val) {
+        // 1 跳过按钮
+        // 2 不支持快捷支付
+        if(val === 1) {
+            //跳过按钮
+            this.setState({
+                popCntText: "未开通徽商存管不能投标、提现、充值。",
+                btnText: ["确定", "取消"],
+                popSelect: val
+            });
+        } else if (val === 2) {
+            this.setState({
+                popCntText: "您填写的银行卡不支持快捷充值，只能用于提现，确认要提交吗",
+                btnText: ["确定", "修改"],
+                popSelect: val,
+                propsPopBtnBank: false
+            });
+        }
+
         this.setState({
             popShow: true
         });
@@ -807,7 +852,13 @@ var Body = React.createClass({
         });
     },
     getConfirmBtn: function() {
-        window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+        if(this.state.popSelect === 1) {
+            window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+        } else if (this.state.popSelect === 2) {
+            this.setState({
+                propsPopBtnBank: true
+            });
+        }
 
         this.setState({
             popShow: false
@@ -815,7 +866,6 @@ var Body = React.createClass({
     },
     render: function () {
         var _this = this;
-
 
         return (
             <div className="cnt">
@@ -852,6 +902,8 @@ var Body = React.createClass({
                         callbackBtn={this.selectBank}
                         callbackBtnVal={this.getCallbackBtn}
                         callbackAlreadyBank={this.alreadySelectBank}
+                        callbackLeapfrogBtn={this.getLeapfrogBtn}
+                        callbackPopBtnBank={this.state.propsPopBtnBank}
 
                     /> : null
                 }
@@ -861,9 +913,10 @@ var Body = React.createClass({
 
                 {
                     this.state.popShow ? <Pop
-                        propsPopInfo={"未开通徽商存管不能投标、提现、充值。"}
+                        propsPopInfo={this.state.popCntText}
                         callbackCancelBtn={this.getCancelBtn}
                         callbackConfirmBtn={this.getConfirmBtn}
+                        callbackBtnText={this.state.btnText}
                     /> : null
                 }
             </div>

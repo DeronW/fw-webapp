@@ -411,12 +411,14 @@ a, input {
 }
 .back-arrow{
   display:block;
-  background:url(../images/back-arrow.png) no-repeat;
-  width:30px;
-  height:54px;
+  background:url(../images/back-arrow.png) no-repeat 35px 44px;
+  -webkit-background-size:auto 35px;
+  background-size:auto 35px; 
+  width:80px;
+  height:114px;
   position:absolute;
-  left:34px;
-  top:38px;
+  left:0px;
+  top:0px;
 }
 .search-page-box input{
   width:465px;
@@ -440,6 +442,7 @@ a, input {
   left:94px;
 }
 .search-confirm{
+  display: block;
   font-size:32px;
   color:#4aa1f9;
   height:64px;
@@ -478,6 +481,9 @@ a, input {
 }
 .search-bar{
   background:#fff;
+}
+.search-bar.search-bar-ios{
+  padding:40px 0 0;
 }
 .category-img{
     display:block;
