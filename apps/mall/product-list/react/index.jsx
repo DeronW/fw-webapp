@@ -178,7 +178,6 @@ const SearchBar = React.createClass({
                            onKeyDown={this.onKeyDownHandler}                          
                     /></form>
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
-                    <a href="#" className="search-confirm">取消</a>
                 </div>
                 {searchHistory()}
             </div>
