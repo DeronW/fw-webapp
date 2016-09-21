@@ -106,7 +106,6 @@ const VipZone = React.createClass({
 
                 window.Products[tab] = window.Products[tab].concat(data.products);
                 let products = window.Products[this.state.tab];
-
                 let new_page = this.state.page;
                 new_page[this.state.tab] = new_page[this.state.tab] + 1;
                 if (data.totalCount < 20) new_page[this.state.tab] = 0;

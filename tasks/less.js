@@ -7,8 +7,8 @@ const less = require('gulp-less');
 
 module.exports = less2css = function (src_path, build_path, name) {
     return gulp.src(src_path)
-        .pipe(changed(build_path))
         .pipe(plumber())
+        .pipe(changed(build_path))
         .pipe(less())
         .pipe(cssnano())
         .pipe(concat(name))
