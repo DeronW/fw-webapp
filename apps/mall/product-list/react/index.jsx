@@ -5,17 +5,29 @@ const API_PATH = document.getElementById('api-path').value;
 const ResultPage = React.createClass({
     getInitialState: function () {
         return {
+        	page:1,
             products: [],
-            showExchangeBar:$FW.Format.urlQuery().searchSourceType==2?false:true            
+            showExchangeBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true            
         }
     },
-     componentDidMount: function () {
-     	if($FW.Format.urlQuery().searchSourceType==2){
+    componentDidMount: function () {
+     	if($FW.Format.urlQuery().searchSourceTypeUrl==2){
      		this.setState({showExchangeBar:false});
      	} else{
-     		search({},true)
-     	}     
-    },   
+     		search({page:1},true);
+     		this.setState({page:1});
+     	}
+     	this.loadMoreProductHandler(null);
+        $FW.Event.touchBottom(this.loadMoreProductHandler);
+    },
+    loadMoreProductHandler: function () {    
+    	let newPage=this.state.page+1;
+    	search({page:newPage},false);
+        this.setState({page:newPage});
+    },
+    setInitialPage: function () {    	
+        this.setState({page:1});
+    },
     updateProducts: function (data) {    	
         this.setState({products: []}, () => this.appendProducts(data))
     },
@@ -36,7 +48,7 @@ const ResultPage = React.createClass({
     	let productsList=()=>{
     		return (
     			 <div className="products-list">
-                    {this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
+                    {this.state.products.map((p, index) => <ProductItem setInitialPage={this.setInitialPage} {...p} key={index}/>) }
                     {this.state.products.length ?
                         null :
                         <div className="empty-list">暂无商品</div>}
@@ -45,9 +57,9 @@ const ResultPage = React.createClass({
     	}
         return (
             <div>
-                {$FW.Format.urlQuery().searchSourceType==2? <SearchBar searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
-                <ResultPage.CategoryBanner />
-                {this.state.showExchangeBar?<ExchangeBar/>:null}
+                {$FW.Format.urlQuery().searchSourceTypeUrl==2? <SearchBar setInitialPage={this.setInitialPage} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
+                <ResultPage.CategoryBanner setInitialPage={this.setInitialPage} />
+                {this.state.showExchangeBar?<ExchangeBar setInitialPage={this.setInitialPage} />:null}
                 {this.state.showExchangeBar?productsList():null}
                
             </div>
@@ -87,10 +99,12 @@ const SearchBar = React.createClass({
     },
     searchHandler: function () {
     	var options = {
-            productName: this.state.value
+            productName: this.state.value,
+            page:1
         };
     	console.log("this.state.value"+this.state.value);
         search(options, true);
+        this.props.setInitialPage();
         this.setState({showSearchHistory:false})
     },
     clearHistoryHandler: function () {    	
@@ -117,7 +131,10 @@ const SearchBar = React.createClass({
     	this.props.searchFocus();
     },
     onKeyDownHandler: function (e) {
-    	if(e.keyCode==13)search(options, true);
+    	if(e.keyCode==13){
+    		search({page:1}, true);
+    		this.props.setInitialPage();
+    	}
     },
 
     render: function () {
@@ -180,7 +197,7 @@ const ExchangeBar = React.createClass({
             filterLevel:'不限',
             maxPoints:'',
             minPoints:'',
-            maxValue:$FW.Format.urlQuery().searchSourceType==1?-1:'',
+            maxValue:$FW.Format.urlQuery().searchSourceTypeUrl==1?-1:'',
             minValue:'',
             myScore:0,
         }
@@ -188,9 +205,11 @@ const ExchangeBar = React.createClass({
     searchHandler: function(){
         var options = {
             order: this.state.sort,
-            vipLevel: this.state.vipLevel
+            vipLevel: this.state.vipLevel,
+            page:1
         };
         search(options, true);
+        this.props.setInitialPage();
     },
     componentDidMount: function () {
         $FW.Ajax({
@@ -211,56 +230,70 @@ const ExchangeBar = React.createClass({
 	        });
         	var options = {
 	            order: -1,
+	            page:1
 	        };
         	search(options, true);
+        	this.props.setInitialPage();
         }else if(tabName=='proceeds'){
         	var options = {
 	            order: this.state.sort,
+	            page:1
 	        };
         	if(this.state.sort==3){
         		this.setState({sort:4});
         		options = {
 		            order: 4,
+		            page:1
 		        };
         	}else{
         		this.setState({sort:3});
         		options = {
 		            order: 3,
+		            page:1
 		        };
         	}       	        	
         	search(options, true);
+        	this.props.setInitialPage();
         }else if(tabName=='salestime'){   	
         	var options = {
 	            order: this.state.sort,
+	            page:1
 	        };
         	if(this.state.sort==5){
         		this.setState({sort:0});
         		options = {
 		            order: 0,
+		            page:1
 		        };
         	}else{
         		this.setState({sort:5});
         		options = {
 		            order: 5,
+		            page:1
 		        };
         	} 
         	search(options, true);
+        	this.props.setInitialPage();
         }else if(tabName=='scorerank'){
         	var options = {
 	            order: this.state.sort,
+	            page:1
 	        };
         	if(this.state.sort==1){
         		this.setState({sort:2});
         		options = {
 		            order: 2,
+		            page:1
 		        };
         	}else{
         		this.setState({sort:1});
         		options = {
 		            order: 1,
+		            page:1
 		        };
         	} 
         	search(options, true);
+        	this.props.setInitialPage();
         }else if(tabName=='filter'){
         	this.state.showFilterPop=true;
         }
@@ -271,7 +304,7 @@ const ExchangeBar = React.createClass({
     	this.setState({maxValue:''});
         this.setState({filterScore:name});
         if(name=='不限'){
-        	if($FW.Format.urlQuery().searchSourceType==1){
+        	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
         		this.setState({
 	        		maxPoints:-1,
 	        		minPoints:'',
@@ -308,7 +341,7 @@ const ExchangeBar = React.createClass({
         		maxPoints:'',
         	});
         }else{
-        	if($FW.Format.urlQuery().searchSourceType==1){
+        	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
         		this.setState({
 	        		minPoints:'',
 	        		maxPoints:-1,
@@ -356,7 +389,7 @@ const ExchangeBar = React.createClass({
        }
     },
     clearFilterHandler: function () {    
-    	    if($FW.Format.urlQuery().searchSourceType==1){
+    	    if($FW.Format.urlQuery().searchSourceTypeUrl==1){
 				this.setState({
 		       		vipLevel: -1,
 		            showFilterPop:true,
@@ -385,17 +418,20 @@ const ExchangeBar = React.createClass({
     	var options = {
             vipLevel: this.state.vipLevel,
             minPoints:this.state.minPoints,
-			maxPoints:this.state.maxPoints
+			maxPoints:this.state.maxPoints,
+			page:1
         };
     	if(this.state.maxValue&&this.state.minValue){
     		options = {
 	            vipLevel: this.state.vipLevel,
 	            minPoints:this.state.minValue,
-				maxPoints:this.state.maxValue
+				maxPoints:this.state.maxValue,
+				page:1
 	        };
     	}         	
         this.setState({showFilterPop:false});
         search(options, true);
+        this.props.setInitialPage();
     },
     render: function () {
         var _this = this;
@@ -537,8 +573,8 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {	
     var title = $FW.Format.urlQuery().title || '商品列表';
-    window._searchOptions.searchSourceType=$FW.Format.urlQuery().searchSourceType||'';
-    if($FW.Format.urlQuery().searchSourceType==1){    	
+    window._searchOptions.searchSourceType=$FW.Format.urlQuery().searchSourceTypeUrl||'';
+    if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
     	 $FW.Ajax({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
             success: (data) =>{
@@ -552,7 +588,7 @@ $FW.DOMReady(function () {
     	
 
     	
-    }else if($FW.Format.urlQuery().searchSourceType==2){
+    }else if($FW.Format.urlQuery().searchSourceTypeUrl==2){
     	
     }else{
     	NativeBridge.setTitle(title);
@@ -564,12 +600,11 @@ $FW.DOMReady(function () {
 });
 
 function backward() {
-	if($FW.Format.urlQuery().searchSourceType==0){
+	if($FW.Format.urlQuery().searchSourceTypeUrl==0){
 		location.href = 'http://mmall.9888.cn/static/mall/product-category/index.html'
 	}else{
 		$FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
-	}
-    
+	}    
 }
 
 window._searchOptions = {
