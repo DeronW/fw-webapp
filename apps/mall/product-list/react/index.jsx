@@ -235,6 +235,7 @@ const ExchangeBar = React.createClass({
 	        };
         	search(options, true);
         	this.props.setInitialPage();
+        	this.setState({showFilterPop:false});
         }else if(tabName=='proceeds'){
         	var options = {
 	            order: this.state.sort,
@@ -255,6 +256,7 @@ const ExchangeBar = React.createClass({
         	}       	        	
         	search(options, true);
         	this.props.setInitialPage();
+        	this.setState({showFilterPop:false});
         }else if(tabName=='salestime'){   	
         	var options = {
 	            order: this.state.sort,
@@ -275,6 +277,7 @@ const ExchangeBar = React.createClass({
         	} 
         	search(options, true);
         	this.props.setInitialPage();
+        	this.setState({showFilterPop:false});
         }else if(tabName=='scorerank'){
         	var options = {
 	            order: this.state.sort,
@@ -295,8 +298,9 @@ const ExchangeBar = React.createClass({
         	} 
         	search(options, true);
         	this.props.setInitialPage();
+        	this.setState({showFilterPop:false});
         }else if(tabName=='filter'){
-        	this.state.showFilterPop=true;
+        	this.setState({showFilterPop:!this.state.showFilterPop});
         }
         this.setState({tab: tabName});
     },
