@@ -84,7 +84,11 @@ const SearchBar = React.createClass({
         this.setState({value: e.target.value})
     },
     searchHandler: function () {
-        search(this.state.value, true);
+    	var options = {
+            productName: this.state.value
+        };
+    	console.log("this.state.value"+this.state.value);
+        search(options, true);
         this.setState({showSearchHistory:false})
     },
     clearHistoryHandler: function () {    	
