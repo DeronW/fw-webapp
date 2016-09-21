@@ -68,6 +68,7 @@ const BindBankCard = React.createClass({
                     <Bran propsBankName={this.state.bankName.bankZone}
                           callbackPopShow={this.getPopShow}
                           propsIsUpdateBank={this.props.item.isUpdateBank}
+                          propsBankInfoDetail={this.props.item.bankInfoDetail}
                     /> : null
                 }
 
@@ -144,24 +145,30 @@ const Bran = React.createClass({
     },
     render: function () {
         return (
-            <div className="modify">
+            <div>
                 {
-                    this.props.propsIsUpdateBank == 1 ?
-                        <a className="pure-a" href="/static/wap/change-bank-card/index.html">
-                            <div className="xuanwu-a">修改绑定银行卡</div>
+                    !this.props.propsBankInfoDetail.isCompanyAgent ? <div className="modify">
+                        {
+                            this.props.propsIsUpdateBank == 1 ?
+                                <a className="pure-a" href="/static/wap/change-bank-card/index.html">
+                                    <div className="xuanwu-a">修改绑定银行卡</div>
+                                    <div className="choice-a">
+                                        <div className="pleas-a">申请修改</div>
+                                    </div>
+                                </a> : null
+                        }
+                        <div className="wire-a"></div>
+                        <div className="pure-a" onClick={this.handleJump}>
+                            <div className="xuanwu-a">{this.props.propsBankName == "" ? "开户支行" : this.props.propsBankName}</div>
                             <div className="choice-a">
-                            <div className="pleas-a">申请修改</div>
+                                <div className="pleas-a">请选择</div>
                             </div>
-                        </a> : null
+                        </div>
+                    </div> : null
                 }
-                <div className="wire-a"></div>
-                <div className="pure-a" onClick={this.handleJump}>
-                    <div className="xuanwu-a">{this.props.propsBankName == "" ? "开户支行" : this.props.propsBankName}</div>
-                    <div className="choice-a">
-                        <div className="pleas-a">请选择</div>
-                    </div>
-                </div>
             </div>
+
+
         )
     }
 });

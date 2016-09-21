@@ -402,7 +402,7 @@ var From = React.createClass({
                        onFocus={_this.inputFocus}
                        onBlur={_this.inputBlur}
                        onChange={_this.onInputChangeHandler}/> :
-                <span className="text id-text" onClick={_this.amendId}>{bankCardNum.substring(0, 4) + "********" + bankCardNum.substring((bankCardNum.length - 4), bankCardNum.length)}</span>
+                <span className="text id-text" onClick={_this.amendId}>{bankCardNum}</span>
         };
 
         var selectEml = function () {
