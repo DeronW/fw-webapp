@@ -22,6 +22,8 @@ const ResultPage = React.createClass({
     appendProducts: function (data) {    	
         var list = this.state.products.slice();
         var newList=list.concat(data.products);
+        console.log(data.products);
+        console.log(newList);
         this.setState({products: newList})        
     },
     searchFocus: function () {

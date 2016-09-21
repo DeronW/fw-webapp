@@ -74,7 +74,7 @@ const Mall = React.createClass({
                     <div className="no-banner"></div>}
                 <div className={appIosTopWhite()}>
                     {backFactory()}
-                    <a onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceType=2") }} className="search-bar-a"><img className="search-icon" src="images/search-icon.png"/><div className="search-bar">搜索</div></a>                   
+                    <a onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceType=2",false)}} className="search-bar-a"><img className="search-icon" src="images/search-icon.png"/><div className="search-bar">搜索</div></a>                   
                     <a className="index-avatar" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><img src="images/profile-icon.png"/></a>
                 </div>
                 <div className="head-user-info">
