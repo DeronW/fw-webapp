@@ -26,7 +26,6 @@ const Mall = React.createClass({
             	if(data.is_login){
             		this.setState({user_score:data.score});
             	}
-				alert('is_login:'+data.is_login+',data.score:'+data.score);
             } 
         });
     },
