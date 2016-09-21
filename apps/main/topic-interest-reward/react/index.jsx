@@ -1,4 +1,4 @@
-const API_PATH = document.getElementById('api-path');
+const API_PATH = document.getElementById('api-path').value;
 
 $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
@@ -10,9 +10,9 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + '/mpwap/api/v1/user/level-info.shtml',
         success: (data)=> {
-            var level = data.userLevel > 1 ? 'VIP' + (data.userLevel - 1) : '普通会员';
+            var level = data.userLevel - 1;
 
-            document.getElementById('level').innerText = level;
+            document.getElementById('level').innerText = level > 1 ? 'VIP' + (level - 1) : '普通会员';
 
             var interest = '无';
             if (level == 1) {
