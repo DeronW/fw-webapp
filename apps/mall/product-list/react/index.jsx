@@ -66,7 +66,7 @@ const SearchBar = React.createClass({
         return {
             value: '',
             history: [],
-            showSearchHistory:false
+            showSearchHistory:true
         }
     },
     componentDidMount: function () {
@@ -99,6 +99,8 @@ const SearchBar = React.createClass({
     },
     backHandler: function () {
        history.back();
+       //App里面后退不起作用 判断在App环境当中关掉当前webview
+        NativeBridge.isReady && NativeBridge.close();
     },
     onBlurHandler: function () {
        this.setState({showSearchHistory:false});
@@ -127,11 +129,23 @@ const SearchBar = React.createClass({
                 </div>:null
             )
         };
+        let appIosTopWhite=()=>{
+			
+			let appIos=false;			
+			if($FW.Browser.inApp()&&$FW.Browser.inIOS()){
+				appIos=true;
+			}else{
+				appIos=false;
+			}
+			return (
+				appIos?"search-bar search-bar-ios":"search-bar"
+			)
+		};
         return (
-            <div className="search-bar">
+            <div className={appIosTopWhite()}>
                 <div className="search-page-box">
                     <a className="back-arrow" onClick={this.backHandler}></a>
-                    <form><input type="text" value={this.state.value}
+                    <form><input autofocus="autofocus" type="text" value={this.state.value}
                            placeholder="请输入想找的商品"
                            onChange={this.changeHandler}
                            onBlur={this.onBlurHandler} 
@@ -141,7 +155,7 @@ const SearchBar = React.createClass({
                           
                     /></form>
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
-                    <span className="search-confirm">取消</span>
+                    <a href="#" className="search-confirm">取消</a>
                 </div>
                 {searchHistory()}
             </div>
@@ -546,7 +560,12 @@ $FW.DOMReady(function () {
 });
 
 function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+	if($FW.Format.urlQuery().searchSourceType==0){
+		location.href = 'http://mmall.9888.cn/static/mall/product-category/index.html'
+	}else{
+		$FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+	}
+    
 }
 
 window._searchOptions = {

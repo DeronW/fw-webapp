@@ -22,11 +22,10 @@ const Mall = React.createClass({
     componentDidMount: function () {
         $FW.Ajax({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
-            success: (data) =>{
+            success: (data) =>{        	
             	if(data.is_login){
-            		this.setState({user_score:data.score})
+            		this.setState({user_score:data.score});
             	}
-            	
             } 
         });
     },
@@ -54,16 +53,27 @@ const Mall = React.createClass({
 		let backFactory=()=>{
 			return $FW.Browser.inApp() ?<img className="m-logo" src="images/m-logo.png"/>:<a className="back-factory" href="http://m.9888.cn/mpwap/">回到工场</a>
 		};
+		let appIosTopWhite=()=>{
+			
+			let appIos=false;			
+			if($FW.Browser.inApp()&&$FW.Browser.inIOS()){
+				appIos=true;
+			}else{
+				appIos=false;
+			}
+			return (
+				appIos?"head-items head-images-ios":"head-items"
+			)
+		};
         return (
             <div className="head-wrap">
                 {this.props.banners.length ?
                     <BannerGroup className="head-images" images={this.getHeadImages()}
                                  onImageClick={this.onImageClickHandler}/> :
                     <div className="no-banner"></div>}
-                <div className="head-items">
+                <div className={appIosTopWhite()}>
                     {backFactory()}
-                    <a onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceType=2") }} className="search-bar-a"><input className="search-bar" type="text" value="" placeholder="搜索"/></a>
-                    <img className="search-icon" src="images/search-icon.png"/>
+                    <a onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceType=2") }} className="search-bar-a"><img className="search-icon" src="images/search-icon.png"/><div className="search-bar">搜索</div></a>                   
                     <a className="index-avatar" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><img src="images/profile-icon.png"/></a>
                 </div>
                 <div className="head-user-info">
