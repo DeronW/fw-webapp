@@ -572,6 +572,9 @@ const ProductItem = React.createClass({
 $FW.DOMReady(function () {	
     var title = $FW.Format.urlQuery().title || '商品列表';
     window._searchOptions.searchSourceType=$FW.Format.urlQuery().searchSourceTypeUrl||'';
+    if($FW.Format.urlQuery().category){
+    	window._searchOptions.categoryName=$FW.Format.urlQuery().category;
+    };
     if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
     	 $FW.Ajax({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
