@@ -1,3 +1,5 @@
+const API_PATH = document.getElementById('api-path');
+
 $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('年化加息奖励')
