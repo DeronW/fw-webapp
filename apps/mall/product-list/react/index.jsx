@@ -134,9 +134,10 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
-    		window.location.href=window.location.href;
-    		this.props.filterProducts({});
-    		
+    		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
+    			location.href='http://mmall.9888.cn/static/mall/product-list/index.html?searchSourceTypeUrl=2';
+    			this.props.filterProducts({});
+    		}    		    		
     	}
     },
 
