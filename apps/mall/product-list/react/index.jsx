@@ -42,6 +42,11 @@ const ResultPage = React.createClass({
     			page: 1,
     			hasData:data.hasData
     		});
+    		alert('13'+location.search);
+    		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
+    			alert('14'+location.search);
+    			location.search='?searchSourceTypeUrl=2';
+    		}
     	});     
     },
     appendProducts: function (data) {    	
@@ -134,9 +139,13 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
+    		alert('11'+location.search);
+    		location.search='?searchSourceTypeUrl=2';
     		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
-    			location.href='http://mmall.9888.cn/static/mall/product-list/index.html?searchSourceTypeUrl=2';
+    			alert('12'+location.search);
+    			location.search='?searchSourceTypeUrl=2';
     			this.props.filterProducts({});
+    			
     		}    		    		
     	}
     },
@@ -172,7 +181,7 @@ const SearchBar = React.createClass({
             <div className={appIosTopWhite()}>
                 <div className="search-page-box">
                     <a className="back-arrow" onClick={this.backHandler}></a>
-                    <form><input autofocus="autofocus" type="text" value={this.state.value}
+                    <form autocomplete="off"><input autofocus="autofocus" type="search" value={this.state.value}
                            placeholder="请输入想找的商品"
                            onChange={this.changeHandler}
                            onBlur={this.onBlurHandler} 
