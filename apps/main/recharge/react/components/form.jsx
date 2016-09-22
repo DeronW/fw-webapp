@@ -12,7 +12,17 @@ const Form = React.createClass({
         return {
             phone:this.props.phone,
             money: "",
-            counting: 0
+            counting: 0,
+            inputPhoneShow: false,
+            phoneBlur: true,
+            modifyPhoneShow: false
+        }
+    },
+    componentDidUpdate: function() {
+        if (this.state.phoneBlur) {
+            if (ReactDOM.findDOMNode(this.refs.phoneRef) !== null) {
+                ReactDOM.findDOMNode(this.refs.phoneRef).focus();
+            }
         }
     },
     clickHandler: function () {
@@ -55,14 +65,17 @@ const Form = React.createClass({
         });
     },
     phoneChangeHandler: function (e) {
+        let v = numberFormat.phoneFun(e.target.value);
+        if(v.length > 11) return;
 
-        this.setState({phone: e.target.value});
+        this.setState({
+            modifyPhoneShow: v.length == 11,
+            phone: numberFormat.phoneFun(v)
+        })
     },
-
     codeChangeHandler: function (e) {
         this.setState({verify_code: e.target.value});
     },
-
     submitHandler: function () {
         if(this.state.money < 1) {
             $FW.Component.Toast("充值金额不能低于1元");
@@ -88,12 +101,45 @@ const Form = React.createClass({
         }
     },
     handlerModifyPhone: function() {
-
+        this.setState({
+            phone: "",
+            inputPhoneShow: true,
+        });
+    },
+    handlerSave: function() {
+        $FW.Ajax({
+            url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?=phoneNum' + this.state.phone,
+            success: (data) => {
+                this.setState({
+                    modifyPhoneShow: false,
+                })
+            }
+        })
+    },
+    handlerOnBlur: function() {
+        this.setState({
+            phoneBlur: false
+        });
     },
     render: function () {
+        var _this = this;
+
         let btn_class = this.state.money >= 1 && this.state.phone ? "gqm blued" : "gqm gray";
 
         var propsPhone = this.props.phone;
+
+        var modifyPhone = function() {
+            if(propsPhone == "") {
+                return null
+            } else {
+                if(_this.state.modifyPhoneShow) {
+                    return <span className="modify-phone-btn" onClick={_this.handlerSave}>保存</span>
+                } else {
+                    return <span className="modify-phone-btn" onClick={_this.handlerModifyPhone}>修改</span>
+                }
+
+            }
+        };
 
         return (
             <div className="modify">
@@ -104,16 +150,18 @@ const Form = React.createClass({
                 </div>
                 <div className="money hao">
                     {
-                        propsPhone == "" ?
-                            <input className="recha phone-input" type="text"
+                        propsPhone == "" || this.state.inputPhoneShow ?
+                            <input className="recha phone-input" type="number"
                                 placeholder="输入银行预留手机号"
                                 value={this.state.phone}
                                 onChange={this.phoneChangeHandler}
-                            /> : null
+                                onBlur={this.handlerOnBlur}
+                                ref="phoneRef"
+                            /> : <div className="bank-phone-text">{propsPhone}</div>
                     }
 
                     {
-                        propsPhone == "" ? null : <span className="modify-phone-btn" onClick="modifyPhoneBtn">修改</span>
+                        modifyPhone()
                     }
 
                 </div>

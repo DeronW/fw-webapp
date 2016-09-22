@@ -2,6 +2,7 @@ const API_PATH = document.getElementById("api-path").value;
 
 var numberFormat = {
     val: "",
+    phone: "",
     format: function(val) {
         this.val = val.replace(/[^\d.]/g, "").
         //只允许一个小数点
@@ -10,6 +11,11 @@ var numberFormat = {
         replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
 
         return this.val;
+    },
+    phoneFun: function(phoneVal) {
+        this.phone = phoneVal.replace(/[^\d.]/g, "");
+
+        return this.phone;
     }
 };
 
