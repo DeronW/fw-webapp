@@ -607,6 +607,7 @@ $FW.DOMReady(function () {
 });
 
 function backward() {
+	alert($FW.Format.urlQuery().searchSourceTypeUrl);
 	if($FW.Format.urlQuery().searchSourceTypeUrl==0){
 		location.href = 'http://mmall.9888.cn/static/mall/product-category/index.html'
 	}else{
