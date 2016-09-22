@@ -7,6 +7,7 @@ const ResultPage = React.createClass({
         return {
         	page:0,
             products: [],
+            hasData:true,
             showExchangeBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true            
         }
     },
@@ -19,28 +20,33 @@ const ResultPage = React.createClass({
         $FW.Event.touchBottom(this.loadMoreProductHandler);
         
     },
-    loadMoreProductHandler: function (done) {        	
+    loadMoreProductHandler: function (done) {      
+    	this.state.hasData?
     	Filter.search({page: this.state.page +1}, (data)=>{
     		this.appendProducts(data);
-    		this.setState({page: this.state.page + 1});
+    		this.setState({
+    			page: this.state.page + 1,
+    			hasData:data.hasData
+    		});
     		done && done()
-    	});     
+    	}):null;     
     },
     setInitialPage: function () {    	
         this.setState({page:1});
     },
-    
-    
     filterProducts: function (options) {    	
-    	options.page = 1
+    	options.page = 1;
     	Filter.search(options, (data)=>{
         	this.setState({products: []}, () => this.appendProducts(data))
-    		this.setState({page: 1});
+    		this.setState({
+    			page: 1,
+    			hasData:data.hasData
+    		});
     	});     
     },
     appendProducts: function (data) {    	
         var list = this.state.products.slice();
-        var newList=list.concat(data.products);
+        var newList=list.concat(data.products||[]);
         this.setState({products: newList})        
     },
     searchFocus: function () {
@@ -53,9 +59,7 @@ const ResultPage = React.createClass({
     	let productsList=()=>{
     		return (
     			 <div className="products-list">
-                    {this.state.products.map((p, index) => <ProductItem filterProducts={this.filterProducts} {...p} key={index}/>) }
-                    {this.state.products.length ?
-                        null :
+                    {this.state.products.length ?this.state.products.map((p, index) => <ProductItem filterProducts={this.filterProducts} {...p} key={index}/>):
                         <div className="empty-list">暂无商品</div>}
                 </div>
     		)
@@ -591,8 +595,7 @@ $FW.DOMReady(function () {
     	NativeBridge.setTitle(title);
     	if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
-    }
-	
+    }	
     window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
 });
 
