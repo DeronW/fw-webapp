@@ -73,7 +73,9 @@ const BindBankCard = React.createClass({
                 }
 
                 {
-                    prohibited < 3 ? <Branch propsBankZone={this.props.item.bankInfoDetail.bankzone}/> : null
+                    prohibited < 3 ? <Branch propsBankZone={this.props.item.bankInfoDetail.bankzone}
+                                             callbackPopShow={this.getPopShow}
+                    /> : null
                 }
                 <Warm />
             </div>
@@ -174,9 +176,12 @@ const Bran = React.createClass({
 });
 
 const Branch = React.createClass({
+    handleJump: function () {
+        this.props.callbackPopShow(true);
+    },
     render: function () {
         return (
-            <div className="pure">
+            <div className="pure"  onClick={this.handleJump}>
                 <div className="xuanwu">{this.props.propsBankZone === "" ? "开户开行" : this.props.propsBankZone}</div>
                 <div className="choice">
                     <div className="pleas">请选择</div>
