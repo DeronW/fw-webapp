@@ -514,8 +514,8 @@ var Pop = React.createClass({
                         <p>{this.props.propsPopInfo}</p>
                     </div>
                     <div className="pop-btn">
-                        <div className="confirm-btn btn l-btn" onClick={this.props.callbackConfirmBtn}>{this.props.callbackBtnText[0]}</div>
-                        <div className="cancel-btn btn r-btn" onClick={this.props.callbackCancelBtn}>{this.props.callbackBtnText[1]}</div>
+                        <div className="cancel-btn btn l-btn" onClick={this.props.callbackCancelBtn}>{this.props.callbackBtnText[1]}</div>
+                        <div className="confirm-btn btn r-btn" onClick={this.props.callbackConfirmBtn}>{this.props.callbackBtnText[0]}</div>
                     </div>
                 </div>
             </div>
