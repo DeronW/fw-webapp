@@ -172,7 +172,7 @@ const SearchBar = React.createClass({
             <div className={appIosTopWhite()}>
                 <div className="search-page-box">
                     <a className="back-arrow" onClick={this.backHandler}></a>
-                    <form><input autofocus="autofocus" type="text" value={this.state.value}
+                    <form autocomplete="off"><input autofocus="autofocus" type="search" value={this.state.value}
                            placeholder="请输入想找的商品"
                            onChange={this.changeHandler}
                            onBlur={this.onBlurHandler} 
