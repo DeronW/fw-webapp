@@ -756,7 +756,7 @@ var Body = React.createClass({
                 location.href = "/static/wap/set-deal-password/index.html";
             },
             fail: function() {
-                
+
             }
         });
 

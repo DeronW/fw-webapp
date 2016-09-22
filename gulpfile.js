@@ -38,6 +38,7 @@ const MAIN_APP_NAMES = [
     'open-account-fail', //开户失败
     'recharge', // 给金融工场账户充值
     'cash', // 用户提现
+    'cash-records', // 用户提现记录
     'protocol-trusteeship', // 资金托管协议
     'protocol-counseling', // 咨询服务协议
 
@@ -62,7 +63,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-        api_path: "http://xjb.9888.cn/",
+        api_path: "http://localhost/fake-api/",
         include_components: common_components,
         include_common_js: common_js
     });
