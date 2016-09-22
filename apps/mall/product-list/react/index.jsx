@@ -42,6 +42,9 @@ const ResultPage = React.createClass({
     			page: 1,
     			hasData:data.hasData
     		});
+    		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
+    			location.search='?searchSourceTypeUrl=2';
+    		}
     	});     
     },
     appendProducts: function (data) {    	
@@ -134,9 +137,11 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
+    		location.search='?searchSourceTypeUrl=2';
     		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
-    			location.href='http://mmall.9888.cn/static/mall/product-list/index.html?searchSourceTypeUrl=2';
+    			location.search='?searchSourceTypeUrl=2';
     			this.props.filterProducts({});
+    			
     		}    		    		
     	}
     },
