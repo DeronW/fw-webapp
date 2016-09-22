@@ -94,17 +94,18 @@ var Pop = React.createClass({
 
     },
     handlerConfirmBtn: function() {
-        window.history.back();
+        //window.history.back();
+
     },
     render: function() {
         return (
             <div className="pop">
                 <div className="pop-back"></div>
                 <div className="pop-cnt">
-                    <div className="pop-title">确定要跳过吗？</div>
+                    <div className="pop-title">未设置交易密码不能投标、提现。</div>
                     <div className="pop-btn">
+                        <span onClick={this.handlerCloseBtn} className="btn close-btn">取消</span>
                         <span className="btn ok-btn" onClick={this.handlerConfirmBtn}>确定</span>
-                        <span onClick={this.handlerCloseBtn} className="btn close-btn">关闭</span>
                     </div>
                 </div>
 

@@ -118,7 +118,7 @@ var Text = React.createClass({
         return (
             <div className="text-area">
                 {
-                    this.props.userOpenStatusCode === "1" ? "开通即视为我已阅读并同意: " :  "马上升级徽商存管并且迁移资金,升级即视为我已阅读并同意:"
+                    this.props.userOpenStatusCode === "1" ? "开通即视为我已阅读并同意: " :  "马上开通徽商存管并且迁移资金,开通即视为我已阅读并同意:"
                 }
 
                 <br/>
@@ -514,8 +514,8 @@ var Pop = React.createClass({
                         <p>{this.props.propsPopInfo}</p>
                     </div>
                     <div className="pop-btn">
-                        <div className="confirm-btn btn l-btn" onClick={this.props.callbackConfirmBtn}>{this.props.callbackBtnText[0]}</div>
-                        <div className="cancel-btn btn r-btn" onClick={this.props.callbackCancelBtn}>{this.props.callbackBtnText[1]}</div>
+                        <div className="cancel-btn btn l-btn" onClick={this.props.callbackCancelBtn}>{this.props.callbackBtnText[1]}</div>
+                        <div className="confirm-btn btn r-btn" onClick={this.props.callbackConfirmBtn}>{this.props.callbackBtnText[0]}</div>
                     </div>
                 </div>
             </div>
@@ -876,7 +876,7 @@ var Body = React.createClass({
             <div className="cnt">
 
                 {
-                    <TopNav title={this.props.activity.userInfo.bankId === null ? "升级存管账户" : "开通存管账户" } backBtn={true} btnText="关闭"
+                    <TopNav title={"开通存管账户"} backBtn={true} btnText="关闭"
                          btnFun={this.backBtnClick}
                          callbackLeapfrogBtn={this.getLeapfrogBtn}
                     />
