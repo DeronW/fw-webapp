@@ -94,7 +94,7 @@ var Pop = React.createClass({
 
     },
     handlerConfirmBtn: function() {
-        //window.history.back();
+        window.history.back();
 
     },
     render: function() {
