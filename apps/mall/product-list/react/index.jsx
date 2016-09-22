@@ -5,7 +5,7 @@ const API_PATH = document.getElementById('api-path').value;
 const ResultPage = React.createClass({
     getInitialState: function () {
         return {
-        	page:1,
+        	page:0,
             products: [],
             showExchangeBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true            
         }
@@ -14,27 +14,29 @@ const ResultPage = React.createClass({
      	if($FW.Format.urlQuery().searchSourceTypeUrl==2){
      		this.setState({showExchangeBar:false});
      	} else{
-     		search({page:1},true);
-     		this.setState({page:1});
+     		this.loadMoreProductHandler()
      	}
         $FW.Event.touchBottom(this.loadMoreProductHandler);
+        
     },
-    loadMoreProductHandler: function () {    
-    	let newPage=this.state.page+1;   
-    	console.log(newPage+"newPage");
-    	search({page:newPage},false);
-    	console.log(this.state.page+"this.state.page");
-    	var _this=this;
-    	 setTimeout(function(){
-    	 	_this.setState({page:newPage});
-    	 },10);    	
-    	console.log(this.state.page+'this.setState');        
+    loadMoreProductHandler: function (done) {        	
+    	Filter.search({page: this.state.page +1}, (data)=>{
+    		this.appendProducts(data);
+    		this.setState({page: this.state.page + 1});
+    		done && done()
+    	});     
     },
     setInitialPage: function () {    	
         this.setState({page:1});
     },
-    updateProducts: function (data) {    	
-        this.setState({products: []}, () => this.appendProducts(data))
+    
+    
+    filterProducts: function (options) {    	
+    	options.page = 1
+    	Filter.search(options, (data)=>{
+        	this.setState({products: []}, () => this.appendProducts(data))
+    		this.setState({page: 1});
+    	});     
     },
     appendProducts: function (data) {    	
         var list = this.state.products.slice();
@@ -51,7 +53,7 @@ const ResultPage = React.createClass({
     	let productsList=()=>{
     		return (
     			 <div className="products-list">
-                    {this.state.products.map((p, index) => <ProductItem setInitialPage={this.setInitialPage} {...p} key={index}/>) }
+                    {this.state.products.map((p, index) => <ProductItem filterProducts={this.filterProducts} {...p} key={index}/>) }
                     {this.state.products.length ?
                         null :
                         <div className="empty-list">暂无商品</div>}
@@ -60,9 +62,9 @@ const ResultPage = React.createClass({
     	}
         return (
             <div>
-                {$FW.Format.urlQuery().searchSourceTypeUrl==2? <SearchBar setInitialPage={this.setInitialPage} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
-                <ResultPage.CategoryBanner setInitialPage={this.setInitialPage} />
-                {this.state.showExchangeBar?<ExchangeBar setInitialPage={this.setInitialPage} />:null}
+                {$FW.Format.urlQuery().searchSourceTypeUrl==2? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
+                <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
+                {this.state.showExchangeBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
                 {this.state.showExchangeBar?productsList():null}
                
             </div>
@@ -99,13 +101,8 @@ const SearchBar = React.createClass({
     changeHandler: function (e) {
         this.setState({value: e.target.value})
     },
-    searchHandler: function () {
-    	var options = {
-            productName: this.state.value,
-            page:1
-       };
-        search(options, true);
-        this.props.setInitialPage();
+    searchHandler: function () {       
+        this.props.filterProducts({productName: this.state.value});
         this.setState({showSearchHistory:false})
     },
     clearHistoryHandler: function () {    	
@@ -133,8 +130,7 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
-    		search({page:1}, true);
-    		this.props.setInitialPage();
+    		this.props.filterProducts({});
     	}
     },
 
@@ -208,8 +204,7 @@ const ExchangeBar = React.createClass({
             vipLevel: this.state.vipLevel,
             page:1
         };
-        search(options, true);
-        this.props.setInitialPage();
+        this.props.filterProducts(options);
     },
     componentDidMount: function () {
         $FW.Ajax({
@@ -232,8 +227,7 @@ const ExchangeBar = React.createClass({
 	            order: -1,
 	            page:1
 	        };
-        	search(options, true);
-        	this.props.setInitialPage();
+			this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='proceeds'){
         	var options = {
@@ -253,8 +247,7 @@ const ExchangeBar = React.createClass({
 		            page:1
 		        };
         	}       	        	
-        	search(options, true);
-        	this.props.setInitialPage();
+        	this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='salestime'){   	
         	var options = {
@@ -274,8 +267,7 @@ const ExchangeBar = React.createClass({
 		            page:1
 		        };
         	} 
-        	search(options, true);
-        	this.props.setInitialPage();
+        	this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='scorerank'){
         	var options = {
@@ -295,8 +287,7 @@ const ExchangeBar = React.createClass({
 		            page:1
 		        };
         	} 
-        	search(options, true);
-        	this.props.setInitialPage();
+        	this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='filter'){
         	this.setState({showFilterPop:!this.state.showFilterPop});
@@ -434,8 +425,7 @@ const ExchangeBar = React.createClass({
 	        };
     	}         	
         this.setState({showFilterPop:false});
-        search(options, true);
-        this.props.setInitialPage();
+        this.props.filterProducts(options);
     },
     render: function () {
         var _this = this;
@@ -577,18 +567,18 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {	
     var title = $FW.Format.urlQuery().title || '商品列表';
-    window._searchOptions.searchSourceType=$FW.Format.urlQuery().searchSourceTypeUrl||'';
+    Filter.options.searchSourceType=$FW.Format.urlQuery().searchSourceTypeUrl||'';
     if($FW.Format.urlQuery().category){
-    	window._searchOptions.categoryName=$FW.Format.urlQuery().category;
+    	Filter.options.categoryName=$FW.Format.urlQuery().category;
     };
     if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
     	 $FW.Ajax({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
             success: (data) =>{
 	            if(data.is_login){
-					window._searchOptions.maxPoints=data.score;
+					Filter.options.maxPoints=data.score;
 	        	}else{
-	        		window._searchOptions.maxPoints=-1;
+	        		Filter.options.maxPoints=-1;
 	        	};
             } 
         });
@@ -600,44 +590,39 @@ $FW.DOMReady(function () {
     }else{
     	NativeBridge.setTitle(title);
     	if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={title}}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
     }
 	
     window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
 });
 
-window._searchOptions = {
-    page: 1,
-    vipLevel: '',
-    productName: '', // keyword
-    categoryName:'',
-    actIds: '',
-    searchSourceType: '',
-    prefectureType: 0,
-    order: -1,
-    minPoints: '',
-    maxPoints: ''
-};
+let Filter = {
+	options: {
+		page: 1,
+		vipLevel: '',
+		productName: '', // keyword
+		categoryName: '',
+		actIds: '',
+		searchSourceType: '',
+		prefectureType: 0,
+		order: -1,
+		minPoints: '',
+		maxPoints: ''
+	},
 
-function search(options, refresh) {
-    for (var i in options) {
-        _searchOptions[i] = options[i]
-    }
+	mix: function(opts) {
+		for(var i in opts) {
+			Filter.options[i] = opts[i]
+		}
+	},
 
-    if(refresh) {
-        _searchOptions.page = 1;
-    } else {
-        _searchOptions.page++;
-    }
-
-    $FW.Ajax({
-        url: API_PATH + 'mall/api/index/v1/search.json',
-        data: _searchOptions,
-        enable_loading: true,
-        success: (data) => {
-            refresh ?
-                window._ResultPage.updateProducts(data) :
-                window._ResultPage.appendProducts(data)
-        }
-    })
+	search: function(options, callback){
+		Filter.mix(options);		
+		$FW.Ajax({
+	        url: API_PATH + 'mall/api/index/v1/search.json',
+	        data: Filter.options,
+	        enable_loading: true,
+	        success: data => callback(data)
+	    })
+	}
 }
