@@ -327,6 +327,20 @@ input[type=checkbox],input[type=radio] {
     font-size: 36px;
     margin-left: 30px;
     color: #555555;
+    height: 90px;
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+    text-overflow: ellipsis;/* IE/Safari */
+
+    -ms-text-overflow: ellipsis;
+
+    -o-text-overflow: ellipsis;/* Opera */
+
+    -moz-binding: url("ellipsis.xml#ellipsis");/*FireFox*/
 }
 
 .choice{
@@ -516,8 +530,8 @@ textarea::-webkit-input-placeholder {
       .r-text {
           position: absolute;
           top: 0;
-          right: 0;
-          width: 80px;
+          right: 20px;
+          min-width: 80px;
           color: #999;
           font-size: 28px;
           line-height: 100px;

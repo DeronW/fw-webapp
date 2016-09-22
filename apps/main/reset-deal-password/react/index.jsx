@@ -134,6 +134,8 @@ var PswFrom = React.createClass({
         clearInterval(this.interval);
     },
     componentWillReceiveProps: function(nextProps) {
+        console.log(nextProps.propsVoice);
+        
         if(this.state.countdown == 0 && (+new Date())　-　nextProps.propsVoice  < 10) {
             console.log("x");
             this.setState(
@@ -145,7 +147,7 @@ var PswFrom = React.createClass({
 
         } else {
             if((+new Date())　-　nextProps.propsVoice  < 10) {
-                if(this.state.countdown > 0 && this.state.countdown !== 60) {
+                if(this.state.countdown > 0 && this.state.countdown !== 10) {
                     $FW.Component.Toast(this.state.countdown + "s后才能获取");
                 }
             }
@@ -165,7 +167,7 @@ var PswFrom = React.createClass({
 
         _this.setState({
             code: true,
-            countdown: 60
+            countdown: 10
         })
 
         this.props.callbackPhoneCodePromptShow(true);
@@ -185,7 +187,7 @@ var PswFrom = React.createClass({
 
         }, 1000);
 
-
+/*
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
             method: "GET",
@@ -195,7 +197,7 @@ var PswFrom = React.createClass({
             fail: function() {
 
             }
-        })
+        })*/
 
     },
     handerChangeInput: function(event) {
