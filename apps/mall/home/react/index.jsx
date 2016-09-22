@@ -78,7 +78,7 @@ const Mall = React.createClass({
                 </div>
                 <div className="head-user-info">
                      <div className="my-score"><span className="my-score-icon"></span>我的工分:<span className="score-num">{this.state.user_score}工分</span></div>
-                     <a className="my-exchange" onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceTypeUrl=1&title=我可兑换", true) }}><span className="my-exchange-icon"></span>我可兑换</a>
+                     <a className="my-exchange" onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceTypeUrl=1", true) }}><span className="my-exchange-icon"></span>我可兑换</a>
                      <a className="my-mall" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><span className="my-mall-icon"></span>我的商城</a>
                      <span className="vertical-gray-line"></span>
                 </div>
@@ -127,7 +127,7 @@ const TextBar = React.createClass({
         return (
             <div className="index-actList-h">
                 <div className="index-actList-htext"><span className="vertical-line"></span>{this.props.title}</div>
-                <a onClick={function(){gotoHandler('/static/mall/activity/index.html?bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
+                <a onClick={function(){gotoHandler('/static/mall/activity/index.html?title='+_this.props.title+'&bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
                    className="index-actList-hmore">更多</a>
             </div>
         )

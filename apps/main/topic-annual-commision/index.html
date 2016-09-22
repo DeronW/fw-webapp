@@ -1,0 +1,44 @@
+{% extends '../../../lib/templates/main_base.swig.html' %}
+
+{% block title %}年化佣金小贴士{% endblock %}
+
+{% block content %}
+<div class="header"></div>
+<div class="part1">
+    <div class="part1-tip1">年化佣金<br/>固定1.25%返利</div>
+    <div class="part1-tip2">年化佣金<br/>按实际投资期限返利</div>
+</div>
+<div class="part2">
+    <div class="invest-period">
+        <span>30天及以下</span><span>31-90天</span><span>91-180天</span>
+    </div>
+    <div class="invest-period">
+        <span>0.25%</span><span>0.25%</span><span>0.75%</span>
+    </div>
+    <div class="invest-period invest-period-margin-top">
+        <span>181-360天</span><span>361-540天</span><span>361-540天</span>
+    </div>
+    <div class="invest-period">
+        <span>1.25%</span><span>1.7%</span><span>2.00%</span>
+    </div>
+</div>
+<div class="part3">
+    <div class="commision-formula">年化佣金=投资金额×(投资期限/360)×对应年化佣金比例</div>
+    <div class="invest-table"><span>180天</span><span>10000元</span><span>0.75%</span></div>
+    <div class="commision-data">年化佣金=10000×(180/360)×0.75%=37.5元</div>
+    <div class="invest-condition invest-margin-top1">(1) 实际投资天数≤锁定期：</div>
+    <div class="invest-formula">年化佣金=投资金额×(锁定期天数/360)×对应年化佣金比例</div>
+    <div class="example-table"><span>60-180天</span><span>36天提前回款</span><span>10000元</span><span>0.75%</span></div>
+    <div class="commision-data">年化佣金=10000×(<span>60</span>/360)×0.75%=12.5元</div>
+    <div class="invest-condition invest-margin-top2">(2) 实际投资天数＞锁定期：</div>
+    <div class="invest-formula">年化佣金=锁定期年化佣金+剩余年化佣金=投资金额×(锁定期天数/360)×对应年化佣金比例+投资金额×(剩余天数/360)×对应年化佣金比例</div>
+    <div class="example-table"><span>60-180天</span><span>106天</span><span>10000元</span><span>0.75%</span></div>
+    <div class="commision-data">年化佣金=锁定期年化佣金+剩余年化佣金=10000×(<span>60</span>/360)×10000×0.75%+10000×(<span>46</span>/360)×10000×0.75%=12.5+9.58=22.08元</div>
+</div>
+<div class="part4">
+    <div class="standard-table"><span>A码人员标准</span><span>10万</span><span>5</span><span>30</span></div>
+</div>
+<div class="part5">
+    <div class="warm-tip">*以上活动由金融工场主办 与Apple Inc. 无关</div>
+</div>
+{% endblock %}

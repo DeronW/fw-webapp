@@ -118,6 +118,10 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
+		var title = $FW.Format.urlQuery().title || '商品列表';
+		NativeBridge.setTitle(title);
+    	if ($FW.Utils.shouldShowHeader())
+        ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
 
     let bizNo = $FW.Format.urlQuery().bizNo;
     $FW.Ajax({
