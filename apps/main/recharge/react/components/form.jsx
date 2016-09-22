@@ -26,6 +26,8 @@ const Form = React.createClass({
                 }
             }, 1000);
 
+            console.log(this.state.phone);
+
             $FW.Ajax({
                 url: API_PATH + 'mpwap/api/v1/getRechargeCode.shtml',
                 method: 'POST',
@@ -68,6 +70,8 @@ const Form = React.createClass({
             $FW.Component.Alert('请输入充值金额')
         } else if (!this.state.phone) {
             $FW.Component.Alert('请输入银行预留手机号')
+        } else if (!isMobilePhone(this.state.phone)) {
+            $FW.Component.Alert('手机号格式不对');
         } else if (!this.state.verify_code) {
             $FW.Component.Alert('请输入验证码')
         } else {
@@ -83,9 +87,13 @@ const Form = React.createClass({
             })
         }
     },
-    render: function () {
+    handlerModifyPhone: function() {
 
+    },
+    render: function () {
         let btn_class = this.state.money >= 1 && this.state.phone ? "gqm blued" : "gqm gray";
+
+        var propsPhone = this.props.phone;
 
         return (
             <div className="modify">
@@ -95,9 +103,20 @@ const Form = React.createClass({
                            placeholder="输入充值金额，最低1元"/>
                 </div>
                 <div className="money hao">
-                    <input className="recha" type="text" placeholder="输入银行预留手机号"
-                           value={this.state.phone} onChange={this.phoneChangeHandler}
-                    /></div>
+                    {
+                        propsPhone == "" ?
+                            <input className="recha phone-input" type="text"
+                                placeholder="输入银行预留手机号"
+                                value={this.state.phone}
+                                onChange={this.phoneChangeHandler}
+                            /> : null
+                    }
+
+                    {
+                        propsPhone == "" ? null : <span className="modify-phone-btn" onClick="modifyPhoneBtn">修改</span>
+                    }
+
+                </div>
                 <div className="form clearfix">
                     <div className="srcode">
                         <input type="text" className="code" value={this.state.verify_code}
