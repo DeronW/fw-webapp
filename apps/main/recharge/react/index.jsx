@@ -13,6 +13,11 @@ var numberFormat = {
     }
 };
 
+function isMobilePhone (phone) {
+    return /^1(3|4|5|7|8)\d{9}$/.test(phone)
+}
+
+
 const Mask = React.createClass({
     clickHandler: function () {
         window.history.back();
@@ -136,7 +141,11 @@ const Recharge = React.createClass({
                 <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服
                     <span className="blue">400-6766-988</span></div>
 
-                <Form countingSeconds={60} orderConfirm={this.orderConfirm} phone={this.props.data.bankInfo.bankPhone}/>
+                <Form countingSeconds={60} 
+                      orderConfirm={this.orderConfirm}
+                      phone={this.props.data.bankInfo.bankPhone}
+                        
+                />
 
                 <div className="rmd">
                     <div className="remin">温馨提醒</div>
