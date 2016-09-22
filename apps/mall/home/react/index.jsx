@@ -127,7 +127,7 @@ const TextBar = React.createClass({
         return (
             <div className="index-actList-h">
                 <div className="index-actList-htext"><span className="vertical-line"></span>{this.props.title}</div>
-                <a onClick={function(){gotoHandler('/static/mall/activity/index.html?bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
+                <a onClick={function(){gotoHandler('/static/mall/activity/index.html?title='+_this.props.title+'&bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
                    className="index-actList-hmore">更多</a>
             </div>
         )
