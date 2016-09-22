@@ -7,6 +7,7 @@ const ResultPage = React.createClass({
         return {
         	page:0,
             products: [],
+            showSearch:$FW.Format.urlQuery().searchSourceTypeUrl==2?true:false,
             hasData:true,
             showExchangeBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true            
         }
@@ -42,11 +43,6 @@ const ResultPage = React.createClass({
     			page: 1,
     			hasData:data.hasData
     		});
-    		alert('13'+location.search);
-    		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
-    			alert('14'+location.search);
-    			location.search='?searchSourceTypeUrl=2';
-    		}
     	});     
     },
     appendProducts: function (data) {    	
@@ -71,7 +67,7 @@ const ResultPage = React.createClass({
     	}
         return (
             <div>
-                {$FW.Format.urlQuery().searchSourceTypeUrl==2? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
+                {$FW.Format.urlQuery().searchSourceTypeUrl==2||this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
                 {this.state.showExchangeBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
                 {this.state.showExchangeBar?productsList():null}
@@ -139,11 +135,7 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
-    		alert('11'+location.search);
-    		location.search='?searchSourceTypeUrl=2';
     		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
-    			alert('12'+location.search);
-    			location.search='?searchSourceTypeUrl=2';
     			this.props.filterProducts({});
     			
     		}    		    		
