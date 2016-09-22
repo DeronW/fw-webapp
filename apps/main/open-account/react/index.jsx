@@ -429,7 +429,7 @@ var From = React.createClass({
                             {
                                 userAjaxData.userInfo.realName === "" ?
                                     <input type="text" placeholder="真实姓名" onChange={this.changeUserName}/> :
-                                    <span className="text name-text">{realNameVal.substring(0, 1) + (genderVal == "0" ? "先生" : "女士")}</span>
+                                    <span className="text name-text">{realNameVal}</span>
                             }
 
                         </div>
