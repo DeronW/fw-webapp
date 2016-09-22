@@ -409,7 +409,7 @@ const Withdrawals = React.createClass({
 				</div>
 			</div>
 		};
-		
+
 
 		return (
 
