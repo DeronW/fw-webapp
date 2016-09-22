@@ -39,7 +39,7 @@ var TopNav = React.createClass({
 					}
 
 					<div className="title">{this.props.title}</div>
-					<span className="r-text">{this.props.btnText}</span>
+					<span className="r-text" onClick={this.props.callbackInfoBtn}>{this.props.btnText}</span>
 				</div>
 			</div>
 		);
@@ -120,6 +120,7 @@ var BankAccount = React.createClass({
 		this.props.callbackOpenBank(false);
 	},
 
+
 	render : function(){
 
 		let list = ()=> {
@@ -134,7 +135,9 @@ var BankAccount = React.createClass({
 		return (
 			<div className="pop-open-bank">
 
-					<TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}/>	
+					<TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}
+
+					/>
 				
 				
 
@@ -353,6 +356,9 @@ const Withdrawals = React.createClass({
 	callbackOpenBankBtn: function() {
 		window.history.back();
 	},
+	getInfoBtn: function() {
+		window.location.href = "http://m.9888.cn/static/wap/cash-records/index.html";
+	},
 	render : function(){
 		var _this = this;
 
@@ -403,13 +409,15 @@ const Withdrawals = React.createClass({
 				</div>
 			</div>
 		};
-
+		
 
 		return (
 
 
 			<div>
-				<TopNav title={"提现"} backBtn={true}  btnFun={this.callbackOpenBankBtn}/>
+				<TopNav title={"提现"} backBtn={true}  btnFun={this.callbackOpenBankBtn}  btnText={"提现记录"}
+						callbackInfoBtn={this.getInfoBtn}
+				/>
 
 				<div className="stou clearfix">
 					<div className="zhaoshang"><img className="ico-zhaoshang" src={this.props.data.bankInfo.bankLogo}/></div>
@@ -471,7 +479,7 @@ const Withdrawals = React.createClass({
 						this.state.specialShow ? <Special
 							callbackCode={this.getCode}
 							callbackPromptShow={this.getPromptShow}
-							callbackVoice={+new Date()}
+							callbackVoice={this.state.voice}
 							propsPhone={phone}
 						/> : null
 					}
@@ -611,16 +619,18 @@ const Neg = React.createClass({
 
 const Special = React.createClass({
 	getInitialState: function() {
+		this._timing = false;
+
 		return {
-			seconds:0,
+			seconds: null,
 			forbid: true,
 			codeType: 5,
 			isVmsType: "SMS"
 		}
 	},
 	componentWillReceiveProps: function(nextProps) {
-
-		if(this.state.seconds == 0 && (+new Date()) - nextProps.callbackVoice < 10 ) {
+		if(!this._timing && (+new Date()) - nextProps.callbackVoice < 10 ) {
+			console.log("a");
 			this.setState(
 				{
 					codeType: 3,
@@ -643,6 +653,7 @@ const Special = React.createClass({
 	handlerTestClick: function(){
 		var _this = this;
 
+
 		this.props.callbackPromptShow(true);
 
 		this.setState({
@@ -650,6 +661,7 @@ const Special = React.createClass({
 			seconds: 5
 		});
 
+		this._timing = true;
 		this.timer = setInterval(()=> {
             this.setState(
 				{
@@ -657,18 +669,18 @@ const Special = React.createClass({
 				}
 			);
 
-			console.log(this.state.seconds);
-
             if (this.state.seconds == 0) {
 				clearInterval(this.timer)
 
+				_this._timing = false;
 				_this.setState({
+					seconds: null,
 					forbid: true
 				});
             }
         }, 1000);
 
-		/*$FW.Ajax({
+		$FW.Ajax({
 			url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.props.propsPhone + "&isVms=" + this.state.isVmsType,
 			success: function (data) {
 				console.log(data);
@@ -684,7 +696,7 @@ const Special = React.createClass({
 				clearInterval(_this.timer);
 				_this.timer = null;
 			}
-		})*/
+		})
 	},
 	inputCodeOnChange: function(e) {
 		this.props.callbackCode(e.target.value);
@@ -702,7 +714,7 @@ const Special = React.createClass({
 					</div>
 					<div className={this.state.forbid ? "miaoh" : "miaoh c"}>
 						{
-							this.state.seconds ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>
+							this.state.seconds !== null ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>
 						}
 					</div>
 				</div>
