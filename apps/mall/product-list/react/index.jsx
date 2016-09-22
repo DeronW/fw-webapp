@@ -42,7 +42,9 @@ const ResultPage = React.createClass({
     			page: 1,
     			hasData:data.hasData
     		});
+    		alert('13'+location.search);
     		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
+    			alert('14'+location.search);
     			location.search='?searchSourceTypeUrl=2';
     		}
     	});     
@@ -137,8 +139,10 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
+    		alert('11'+location.search);
     		location.search='?searchSourceTypeUrl=2';
     		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
+    			alert('12'+location.search);
     			location.search='?searchSourceTypeUrl=2';
     			this.props.filterProducts({});
     			
