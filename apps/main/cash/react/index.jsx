@@ -640,7 +640,7 @@ const Special = React.createClass({
 			);
 		} else {
 			if((+new Date())　-　nextProps.callbackVoice  < 10) {
-				if(this.state.seconds > 0 && this.state.seconds !== 5) {
+				if(this.state.seconds > 0 && this.state.seconds !== 60) {
 					$FW.Component.Toast(this.state.seconds + "s后才能获取");
 				}
 			}
@@ -658,7 +658,7 @@ const Special = React.createClass({
 
 		this.setState({
 			forbid: false,
-			seconds: 5
+			seconds: 60
 		});
 
 		this._timing = true;

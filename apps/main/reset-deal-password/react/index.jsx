@@ -127,17 +127,15 @@ var PswFrom = React.createClass({
             codeClickable: false,
             codeType: 5,
             isVmsType: "SMS",
-            codeNoClick: false
+            codeNoClick: false,
+            noCode: false
         };
     },
     componentWillUnmount: function() {
         clearInterval(this.interval);
     },
     componentWillReceiveProps: function(nextProps) {
-        console.log(nextProps.propsVoice);
-        
         if(this.state.countdown == 0 && (+new Date())　-　nextProps.propsVoice  < 10) {
-            console.log("x");
             this.setState(
                 {
                     codeType: 3,
@@ -147,14 +145,14 @@ var PswFrom = React.createClass({
 
         } else {
             if((+new Date())　-　nextProps.propsVoice  < 10) {
-                if(this.state.countdown > 0 && this.state.countdown !== 10) {
+                if(this.state.countdown > 0 && this.state.countdown !== 60) {
                     $FW.Component.Toast(this.state.countdown + "s后才能获取");
                 }
             }
         }
 
     },
-    handerIdentifyingCode: function() {
+    handerIdentifyingCode: function(codeBoolean) {
         var _this = this;
 
         this.setState({
@@ -167,10 +165,13 @@ var PswFrom = React.createClass({
 
         _this.setState({
             code: true,
-            countdown: 10
+            countdown: 60
         })
 
-        this.props.callbackPhoneCodePromptShow(true);
+        if(codeBoolean == "VMSCode") {
+            this.props.callbackPhoneCodePromptShow(true);
+        }
+
 
         _this.interval = setInterval(function() {
             _this.setState({
@@ -187,7 +188,7 @@ var PswFrom = React.createClass({
 
         }, 1000);
 
-/*
+
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
             method: "GET",
@@ -197,7 +198,7 @@ var PswFrom = React.createClass({
             fail: function() {
 
             }
-        })*/
+        })
 
     },
     handerChangeInput: function(event) {
@@ -268,7 +269,7 @@ var PswFrom = React.createClass({
                         {
                             this.state.code ?
                                 <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
-                                <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode}>获取验证码</span>
+                                <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
                         }
                     </span>
                 </div>
