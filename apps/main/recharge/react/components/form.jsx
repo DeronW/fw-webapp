@@ -36,8 +36,6 @@ const Form = React.createClass({
                 }
             }, 1000);
 
-            console.log(this.state.phone);
-
             $FW.Ajax({
                 url: API_PATH + 'mpwap/api/v1/getRechargeCode.shtml',
                 method: 'POST',
@@ -77,13 +75,17 @@ const Form = React.createClass({
         this.setState({verify_code: e.target.value});
     },
     submitHandler: function () {
+        var phoneVal = this.props.phone;
+
+        console.log(phoneVal);
+
         if(this.state.money < 1) {
             $FW.Component.Toast("充值金额不能低于1元");
         } else if (!this.state.money) {
             $FW.Component.Alert('请输入充值金额')
         } else if (!this.state.phone) {
             $FW.Component.Alert('请输入银行预留手机号')
-        } else if (!isMobilePhone(this.state.phone)) {
+        } else if (phoneVal.length == 11 ?  false : !isMobilePhone(this.state.phone)) {
             $FW.Component.Alert('手机号格式不对');
         } else if (!this.state.verify_code) {
             $FW.Component.Alert('请输入验证码')
