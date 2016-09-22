@@ -179,7 +179,7 @@ const SearchBar = React.createClass({
                            onBlur={this.onBlurHandler} 
                            onFocus={this.onFocusHandler}
                            onKeyDown={this.onKeyDownHandler}                          
-                    /></form>
+                    /> <input type="text"  className="hide-input"/></form>
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
                 </div>
                 {searchHistory()}
