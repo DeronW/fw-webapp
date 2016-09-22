@@ -175,7 +175,10 @@ const Form = React.createClass({
                         {this.state.counting ? this.state.counting + 's' : '获取验证码'}
                     </div>
                 </div>
+
                 <div className="credit" onClick={this.submitHandler}>充值</div>
+
+
             </div>
         )
     }
