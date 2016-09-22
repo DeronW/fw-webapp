@@ -134,7 +134,9 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
+    		window.location.href=window.location.href;
     		this.props.filterProducts({});
+    		
     	}
     },
 
@@ -571,6 +573,9 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {	
     var title = $FW.Format.urlQuery().title || '商品列表';
+    if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
+    	title='我可兑换'
+    }
     Filter.options.searchSourceType=$FW.Format.urlQuery().searchSourceTypeUrl||'';
     if($FW.Format.urlQuery().category){
     	Filter.options.categoryName=$FW.Format.urlQuery().category;
