@@ -67,7 +67,7 @@ const ResultPage = React.createClass({
     	}
         return (
             <div>
-                {$FW.Format.urlQuery().searchSourceTypeUrl==2||this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
+                {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
                 {this.state.showExchangeBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
                 {this.state.showExchangeBar?productsList():null}
@@ -173,7 +173,7 @@ const SearchBar = React.createClass({
             <div className={appIosTopWhite()}>
                 <div className="search-page-box">
                     <a className="back-arrow" onClick={this.backHandler}></a>
-                    <input autofocus="autofocus" type="search" value={this.state.value}
+                    <input autofocus="autofocus" type="text" value={this.state.value}
                            placeholder="请输入想找的商品"
                            onChange={this.changeHandler}
                            onBlur={this.onBlurHandler} 
