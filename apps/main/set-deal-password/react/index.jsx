@@ -70,8 +70,10 @@ var PswFrom = React.createClass({
         }
 
     },
-    handerIdentifyingCode: function (url) {
-        this.props.callbackPromptShow(true);
+    handerIdentifyingCode: function (codeBoolean) {
+        if(codeBoolean == "VMSCode") {
+            this.props.callbackPromptShow(true);
+        }
 
         var _this = this;
 
@@ -131,7 +133,7 @@ var PswFrom = React.createClass({
                         {
                             this.state.code ?
                                 <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
-                                <span className="btn" onClick={this.handerIdentifyingCode}>获取验证码</span>
+                                <span className="btn" onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
                         }
                     </span>
                 </div>
