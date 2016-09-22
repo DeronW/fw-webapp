@@ -28,8 +28,7 @@ const ResultPage = React.createClass({
     	 setTimeout(function(){
     	 	_this.setState({page:newPage});
     	 },10);    	
-    	console.log(this.state.page+'this.setState');
-        
+    	console.log(this.state.page+'this.setState');        
     },
     setInitialPage: function () {    	
         this.setState({page:1});
