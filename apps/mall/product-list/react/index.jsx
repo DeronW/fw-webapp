@@ -28,8 +28,7 @@ const ResultPage = React.createClass({
     	 setTimeout(function(){
     	 	_this.setState({page:newPage});
     	 },10);    	
-    	console.log(this.state.page+'this.setState');
-        
+    	console.log(this.state.page+'this.setState');        
     },
     setInitialPage: function () {    	
         this.setState({page:1});
@@ -601,19 +600,11 @@ $FW.DOMReady(function () {
     }else{
     	NativeBridge.setTitle(title);
     	if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={title} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={title}}/>, document.getElementById('header'));
     }
 	
     window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
 });
-
-function backward() {
-	if($FW.Format.urlQuery().searchSourceTypeUrl==0){
-		location.href = 'http://mmall.9888.cn/static/mall/product-category/index.html'
-	}else{
-		$FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
-	}    
-}
 
 window._searchOptions = {
     page: 1,
