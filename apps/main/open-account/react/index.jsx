@@ -754,6 +754,9 @@ var Body = React.createClass({
             data: _this.state.userInfo,
             success: function (data) {
                 location.href = "/static/wap/set-deal-password/index.html";
+            },
+            fail: function() {
+                
             }
         });
 
