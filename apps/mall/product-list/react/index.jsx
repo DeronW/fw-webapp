@@ -253,7 +253,7 @@ const ExchangeBar = React.createClass({
 	            order: -1,
 	            page:1
 	        };
-	        this.props.searchFilterProductHide();
+	        this.props.searchFilterProductShow();
 			this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='proceeds'){
@@ -274,7 +274,7 @@ const ExchangeBar = React.createClass({
 		            page:1
 		        };
         	}   
-        	this.props.searchFilterProductHide();
+        	this.props.searchFilterProductShow();
         	this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='salestime'){   	
@@ -295,7 +295,7 @@ const ExchangeBar = React.createClass({
 		            page:1
 		        };
         	} 
-        	this.props.searchFilterProductHide();
+        	this.props.searchFilterProductShow();
         	this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='scorerank'){
@@ -316,7 +316,7 @@ const ExchangeBar = React.createClass({
 		            page:1
 		        };
         	} 
-        	this.props.searchFilterProductHide();
+        	this.props.searchFilterProductShow();
         	this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='filter'){
@@ -442,7 +442,7 @@ const ExchangeBar = React.createClass({
                      
     },
     filterFinishHandler: function () { 
-    	this.props.searchFilterProductHide();
+    	this.props.searchFilterProductShow();
     	var options = {
             vipLevel: this.state.vipLevel,
             minPoints:this.state.minPoints,
