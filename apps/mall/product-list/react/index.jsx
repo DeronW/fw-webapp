@@ -135,10 +135,7 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
-    		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
-    			this.props.filterProducts({});
-    			
-    		}    		    		
+    		this.props.filterProducts({productName: this.state.value});  		    		
     	}
     },
 
