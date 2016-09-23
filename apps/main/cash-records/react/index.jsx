@@ -39,10 +39,11 @@ const CashRecords = React.createClass({
             // "2016-09-23 11:03:25"
             // TODO: should use timestamp directly
             var r = record.happenTime.split(' ')[0].split('-');
-            var d = new Date(r[0], r[1] + 1, r[2]);
+            var d = new Date(r[0], r[1] - 1, r[2]);
             return {
                 money: record.reflectAmount,
                 timestamp: d.getTime(),
+                datetime: record.happenTime,
                 state: parseInt(record.handleState),
                 order_id: record.indentNo
             }
@@ -50,7 +51,7 @@ const CashRecords = React.createClass({
 
         function get_date(time) {
             var d = new Date(time);
-            return d.getFullYear() + '年' + d.getMonth() + '月'
+            return d.getFullYear() + '年' + (d.getMonth() + 1) + '月'
         }
 
         function insertRecord(month, record) {
@@ -116,7 +117,7 @@ const CashRecords = React.createClass({
                     <div className="sep-line"></div>
                     <div className="third-line">
                         发生时间
-                        <div className="time">{'sdfsdf'}</div>
+                        <div className="time">{data.datetime}</div>
                     </div>
                 </div>
             )
