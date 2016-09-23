@@ -114,8 +114,9 @@ const SearchBar = React.createClass({
     	if(this.state.value){
         	this.props.filterProducts({productName: this.state.value});
         	this.props.setShowExchangeBar();
+        	this.setState({showSearchHistory:false});
         }
-        this.setState({showSearchHistory:false});
+        
     },
     clearHistoryHandler: function () {    	
         $FW.Ajax({
@@ -145,9 +146,10 @@ const SearchBar = React.createClass({
     		if(this.state.value){
     			this.props.filterProducts({productName:this.state.value});
     			this.props.setShowExchangeBar();
+    			this.setState({showSearchHistory:false});
     		}    		  
     		this.refs.searchInput.blur();
-    		this.setState({showSearchHistory:false});
+    		
     	}
     },
 
