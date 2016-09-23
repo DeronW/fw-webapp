@@ -39,7 +39,7 @@ const CashRecords = React.createClass({
             // "2016-09-23 11:03:25"
             // TODO: should use timestamp directly
             var r = record.happenTime.split(' ')[0].split('-');
-            var d = new Date(r[0], r[1] + 1, r[2]);
+            var d = new Date(r[0], r[1] - 1, r[2]);
             return {
                 money: record.reflectAmount,
                 timestamp: d.getTime(),
