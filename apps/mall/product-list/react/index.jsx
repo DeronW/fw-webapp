@@ -181,6 +181,7 @@ const SearchBar = React.createClass({
                            ref="searchInput"
                     />
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
+                    <span className="search-confirm" onClick={this.searchHandler}>搜索</span>
                 </div>
                 {searchHistory()}
             </div>
