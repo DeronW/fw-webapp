@@ -715,7 +715,7 @@ const Special = React.createClass({
 					</div>
 					<div className={this.state.forbid ? "miaoh" : "miaoh c"}>
 						{
-							this.state.seconds !== null ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>
+							this.state.seconds !== null ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} ><span className="text">获取验证码</span></span>
 						}
 					</div>
 				</div>
