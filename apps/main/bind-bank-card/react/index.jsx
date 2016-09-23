@@ -71,7 +71,7 @@ const BindBankCard = React.createClass({
                           propsBankInfoDetail={this.props.item.bankInfoDetail}
                     /> : null
                 }
-                
+
 
                 {
                     prohibited < 3 ? <Branch propsBankZone={this.props.item.bankInfoDetail.bankzone}
