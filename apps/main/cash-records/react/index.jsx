@@ -43,6 +43,7 @@ const CashRecords = React.createClass({
             return {
                 money: record.reflectAmount,
                 timestamp: d.getTime(),
+                datetime: record.happenTime,
                 state: parseInt(record.handleState),
                 order_id: record.indentNo
             }
@@ -116,7 +117,7 @@ const CashRecords = React.createClass({
                     <div className="sep-line"></div>
                     <div className="third-line">
                         发生时间
-                        <div className="time">{'sdfsdf'}</div>
+                        <div className="time">{data.datetime}</div>
                     </div>
                 </div>
             )
