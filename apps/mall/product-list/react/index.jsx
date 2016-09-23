@@ -46,6 +46,9 @@ const ResultPage = React.createClass({
     		});
     	});     
     },
+    setShowExchangeBar: function () {    	
+        this.setState({showExchangeBar:true});      
+    },
     appendProducts: function (data) {    	
         var list = this.state.products.slice();
         var newList=list.concat(data.products||[]);
@@ -55,7 +58,7 @@ const ResultPage = React.createClass({
      	this.setState({showExchangeBar:false});
     },
     searchBlur: function () {    	 
-    	this.setState({showExchangeBar:true});   
+    	 
     },
     render: function () {
     	let productsList=()=>{
@@ -68,9 +71,9 @@ const ResultPage = React.createClass({
     	}
         return (
             <div>
-                {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
+                {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}  setShowExchangeBar={this.setShowExchangeBar} />:null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
-                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
+                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar filterProducts={this.filterProducts}/>:null}
                 {this.state.showExchangeBar?productsList():null}
                
             </div>
@@ -107,9 +110,13 @@ const SearchBar = React.createClass({
     changeHandler: function (e) {
         this.setState({value: e.target.value})
     },
-    searchHandler: function () {       
-        this.props.filterProducts({productName: this.state.value});
-        this.setState({showSearchHistory:false})
+    searchHandler: function () {   
+    	if(this.state.value){
+        	this.props.filterProducts({productName: this.state.value});
+        	this.props.setShowExchangeBar();
+        	this.setState({showSearchHistory:false});
+        }
+        
     },
     clearHistoryHandler: function () {    	
         $FW.Ajax({
@@ -127,7 +134,6 @@ const SearchBar = React.createClass({
         //NativeBridge.isReady && NativeBridge.close();
     },
     onBlurHandler: function () {
-       this.setState({showSearchHistory:false});
        this.props.searchBlur();
     },
     onFocusHandler: function () {
@@ -136,9 +142,13 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
-    		this.props.filterProducts({productName:this.state.value});  
+    		if(this.state.value){
+    			this.props.filterProducts({productName:this.state.value});
+    			this.props.setShowExchangeBar();
+    			this.setState({showSearchHistory:false});
+    		}    		  
     		this.refs.searchInput.blur();
-    		this.setState({showSearchHistory:false});
+    		
     	}
     },
 
@@ -325,8 +335,8 @@ const ExchangeBar = React.createClass({
         	});
         }else if(name=='1-100'){
         	this.setState({        		
-        		minPoints:100,
-        		maxPoints:1,
+        		minPoints:1,
+        		maxPoints:100,
         	});
         }else if(name=='101-1000'){
         	this.setState({
@@ -506,7 +516,7 @@ const ExchangeBar = React.createClass({
                                 {gongfeng_item}
                                 <div className="gonfeng-input-wrap">
                                     <input className="gongfeng-input" type="text" value={this.state.minValue} placeholder="最低工分" onChange={this.minValueHandler} /><span
-                                    className="horizon-line"></span><input className="gongfeng-input" type="text"
+                                    className="horizon-line"></span><input className="gongfeng-input gongfeng-input1" type="text"
                                                                            value={this.state.maxValue} placeholder="最高工分" onChange={this.maxValueHandler}/>
                                 </div>
                             </div>
