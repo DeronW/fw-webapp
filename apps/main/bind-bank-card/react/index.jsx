@@ -72,6 +72,7 @@ const BindBankCard = React.createClass({
                     /> : null
                 }
                 
+
                 {
                     prohibited < 3 ? <Branch propsBankZone={this.props.item.bankInfoDetail.bankzone}
                                              callbackPopShow={this.getPopShow}
