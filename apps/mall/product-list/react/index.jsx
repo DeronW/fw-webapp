@@ -134,7 +134,6 @@ const SearchBar = React.createClass({
         //NativeBridge.isReady && NativeBridge.close();
     },
     onBlurHandler: function () {
-       this.setState({showSearchHistory:false});
        this.props.searchBlur();
     },
     onFocusHandler: function () {
