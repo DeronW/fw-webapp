@@ -135,7 +135,7 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
-    		alert(13);
+    		alert(this.state.value);
     		this.props.filterProducts({productName:this.state.value});  		    		
     	}
     },
