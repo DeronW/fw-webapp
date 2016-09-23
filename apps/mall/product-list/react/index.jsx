@@ -10,7 +10,8 @@ const ResultPage = React.createClass({
             showSearch:$FW.Format.urlQuery().searchSourceTypeUrl==2?true:false,
             hasData:true,
             showExchangeBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true,
-            showFilterBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true
+            showFilterBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true,
+            searchFilterProductShow:true
         }
     },
     componentDidMount: function () {
@@ -21,6 +22,13 @@ const ResultPage = React.createClass({
      	}
         $FW.Event.touchBottom(this.loadMoreProductHandler);
         
+    },
+    searchFilterProductShow: function () {
+     	this.setState({searchFilterProductShow:true});
+        
+    },
+    searchFilterProductHide: function () {
+     	this.setState({searchFilterProductShow:false});        
     },
     loadMoreProductHandler: function (done) {      
     	this.state.hasData?
@@ -73,8 +81,8 @@ const ResultPage = React.createClass({
             <div>
                 {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}  setShowExchangeBar={this.setShowExchangeBar} />:null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
-                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar filterProducts={this.filterProducts}/>:null}
-                {this.state.showExchangeBar?productsList():null}
+                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar filterProducts={this.filterProducts} searchFilterProductShow={this.searchFilterProductShow} searchFilterProductHide={this.searchFilterProductHide}/>:null}
+                {this.state.showExchangeBar&&this.state.searchFilterProductShow?productsList():null}
                
             </div>
         )
@@ -245,6 +253,7 @@ const ExchangeBar = React.createClass({
 	            order: -1,
 	            page:1
 	        };
+	        this.props.searchFilterProductShow();
 			this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='proceeds'){
@@ -264,7 +273,8 @@ const ExchangeBar = React.createClass({
 		            order: 3,
 		            page:1
 		        };
-        	}       	        	
+        	}   
+        	this.props.searchFilterProductShow();
         	this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='salestime'){   	
@@ -285,6 +295,7 @@ const ExchangeBar = React.createClass({
 		            page:1
 		        };
         	} 
+        	this.props.searchFilterProductShow();
         	this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='scorerank'){
@@ -305,10 +316,13 @@ const ExchangeBar = React.createClass({
 		            page:1
 		        };
         	} 
+        	this.props.searchFilterProductShow();
         	this.props.filterProducts(options);
         	this.setState({showFilterPop:false});
         }else if(tabName=='filter'){
+        	this.state.showFilterPop?this.props.searchFilterProductShow():this.props.searchFilterProductHide();
         	this.setState({showFilterPop:!this.state.showFilterPop});
+        	
         }
         this.setState({tab: tabName});
     },
@@ -427,7 +441,8 @@ const ExchangeBar = React.createClass({
         	}   
                      
     },
-    filterFinishHandler: function () {   
+    filterFinishHandler: function () { 
+    	this.props.searchFilterProductShow();
     	var options = {
             vipLevel: this.state.vipLevel,
             minPoints:this.state.minPoints,
