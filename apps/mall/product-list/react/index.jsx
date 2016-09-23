@@ -516,7 +516,7 @@ const ExchangeBar = React.createClass({
                                 {gongfeng_item}
                                 <div className="gonfeng-input-wrap">
                                     <input className="gongfeng-input" type="text" value={this.state.minValue} placeholder="最低工分" onChange={this.minValueHandler} /><span
-                                    className="horizon-line"></span><input className="gongfeng-input" type="text"
+                                    className="horizon-line"></span><input className="gongfeng-input gongfeng-input1" type="text"
                                                                            value={this.state.maxValue} placeholder="最高工分" onChange={this.maxValueHandler}/>
                                 </div>
                             </div>
