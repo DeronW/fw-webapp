@@ -935,16 +935,14 @@ var Body = React.createClass({
 
 
 
-
-
 $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         enable_loading: true,
         success: function (data) {
-            /*var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
-            ReactDOM.render(
+            var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
+            /*ReactDOM.render(
                 <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
                 document.getElementById('header'));*/
 

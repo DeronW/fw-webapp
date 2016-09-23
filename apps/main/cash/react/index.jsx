@@ -362,7 +362,7 @@ const Withdrawals = React.createClass({
 		var _this = this;
 
 		var feeVal = this.state.propsUserInfo.fee;
-		var bankId = this.props.data.bankInfo.bankCardNo;
+		var bankId = this.props.data.bankInfo.bankCardNo||'';
 		var phone = this.props.data.bankInfo.phoneNo;
 		var phoneVal = phone.substring(0, 3) + "****" + phone.substring((phone.length - 4), phone.length);
 
@@ -687,7 +687,7 @@ const Special = React.createClass({
 			fail: function() {
 				_this.setState(
 					{
-						seconds: 0,
+						seconds: null,
 						forbid: true
 					}
 				);
