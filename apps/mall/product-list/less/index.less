@@ -420,7 +420,7 @@ a, input {
   top:0px;
 }
 .search-page-box input{
-  width:545px;
+  width:520px;
   height:62px;
   border:1px solid #ddd;
   border-radius:10px;
@@ -430,9 +430,12 @@ a, input {
   position:absolute;
   top:31px;
   left:83px;
+  display:block;
 }
 input[type="search"]{-webkit-appearance:none;}
-.search-page-box .hide-input{display:none;}
+input::-webkit-search-cancel-button {display: none;}
+input::-webkit-search-decoration
+
 .filter-tab{
     position:relative;
 }
