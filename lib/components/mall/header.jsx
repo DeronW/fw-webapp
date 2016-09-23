@@ -28,14 +28,13 @@ const Header = React.createClass({
     backClickHandler: function () {
         this.props.back_handler ? this.props.back_handler() : history.back();
         //App里面后退不起作用 判断在App环境当中关掉当前webview
-        setTimeout(()=> NativeBridge.isReady && NativeBridge.close(), 300);
+        NativeBridge.isReady && NativeBridge.close();
     },
     render: function () {
         let fontSize = '40px';
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
         if (this.props.title && this.props.title.length > 7) fontSize = '32px';
-
         let _style_header_fixed = {
             transform: 'translate3d(0, 0, 0)',
             position: "fixed",

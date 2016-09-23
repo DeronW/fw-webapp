@@ -14,7 +14,7 @@ function gotoHandler(link, need_login) {
 }
 
 const Mall = React.createClass({
-	getInitialState: function () {
+    getInitialState: function () {
         return {
             user_score: '--'
         }
@@ -22,11 +22,11 @@ const Mall = React.createClass({
     componentDidMount: function () {
         $FW.Ajax({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
-            success: (data) =>{         	
-            	if(data.is_login){
-            		this.setState({user_score:data.score});
-            	}
-            } 
+            success: (data) => {
+                if (data.is_login) {
+                    this.setState({user_score: data.score});
+                }
+            }
         });
     },
     getHeadImages: function () {
@@ -50,21 +50,22 @@ const Mall = React.createClass({
             return <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                     activity_id={i.activity_id} products={i.products} key={index}/>;
         };
-		let backFactory=()=>{
-			return $FW.Browser.inApp() ?<img className="m-logo" src="images/m-logo.png"/>:<a className="back-factory" href="http://m.9888.cn/mpwap/">金融工场</a>
-		};
-		let appIosTopWhite=()=>{
-			
-			let appIos=false;			
-			if($FW.Browser.inApp()&&$FW.Browser.inIOS()){
-				appIos=true;
-			}else{
-				appIos=false;
-			}
-			return (
-				appIos?"head-items head-images-ios":"head-items"
-			)
-		};
+        let backFactory = ()=> {
+            return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png"/> :
+                <a className="back-factory" href="http://m.9888.cn/mpwap/">金融工场</a>
+        };
+        let appIosTopWhite = ()=> {
+
+            let appIos = false;
+            if ($FW.Browser.inApp() && $FW.Browser.inIOS()) {
+                appIos = true;
+            } else {
+                appIos = false;
+            }
+            return (
+                appIos ? "head-items head-images-ios" : "head-items"
+            )
+        };
         return (
             <div className="head-wrap">
                 {this.props.banners.length ?
@@ -73,20 +74,38 @@ const Mall = React.createClass({
                     <div className="no-banner"></div>}
                 <div className={appIosTopWhite()}>
                     {backFactory()}
-                    <a href="http://mmall.9888.cn/static/mall/product-list/index.html?searchSourceTypeUrl=2" className="search-bar-a"><img className="search-icon" src="images/search-icon.png"/><div className="search-bar">搜索</div></a>                   
-                    <a className="index-avatar" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><img src="images/profile-icon.png"/></a>
+                    <a href="http://mmall.9888.cn/static/mall/product-list/index.html?searchSourceTypeUrl=2"
+                       className="search-bar-a"><img className="search-icon" src="images/search-icon.png"/>
+                        <div className="search-bar">搜索</div>
+                    </a>
+                    <a className="index-avatar" onClick={function () {
+                        gotoHandler("/static/mall/user/index.html", true)
+                    }}><img src="images/profile-icon.png"/></a>
                 </div>
                 <div className="head-user-info">
-                     <div className="my-score"><span className="my-score-icon"></span>我的工分:<span className="score-num">{this.state.user_score}工分</span></div>
-                     <a className="my-exchange" onClick={function(){ gotoHandler("/static/mall/product-list/index.html?searchSourceTypeUrl=1", true) }}><span className="my-exchange-icon"></span>我可兑换</a>
-                     <a className="my-mall" onClick={function(){ gotoHandler("/static/mall/user/index.html", true) }}><span className="my-mall-icon"></span>我的商城</a>
-                     <span className="vertical-gray-line"></span>
+                    <div className="my-score"><span className="my-score-icon"></span>我的工分:<span
+                        className="score-num">{this.state.user_score}工分</span></div>
+                    <a className="my-exchange" onClick={function () {
+                        gotoHandler("/static/mall/product-list/index.html?searchSourceTypeUrl=1", true)
+                    }}><span className="my-exchange-icon"></span>我可兑换</a>
+                    <a className="my-mall" onClick={function () {
+                        gotoHandler("/static/mall/user/index.html", true)
+                    }}><span className="my-mall-icon"></span>我的商城</a>
+                    <span className="vertical-gray-line"></span>
                 </div>
                 <div className="header-nav">
-                    <a className="recharge" onClick={function(){ gotoHandler("/static/mall/product-recharge/index.html",true) }}>充值中心</a>
-                    <a className="vip" onClick={function(){ gotoHandler("/static/mall/product-vip-zone/index.html") }}>VIP专区</a>
-                    <a className="goods" onClick={function(){ gotoHandler("/static/mall/zhuan-pan/index.html?"+(+new Date()), true) }}>大转盘</a>
-                    <a className="mine" onClick={function(){ gotoHandler("/static/mall/product-category/index.html", true) }}>品类</a>
+                    <a className="recharge" onClick={function () {
+                        gotoHandler("/static/mall/product-recharge/index.html", true)
+                    }}>充值中心</a>
+                    <a className="vip" onClick={function () {
+                        gotoHandler("/static/mall/product-vip-zone/index.html")
+                    }}>VIP专区</a>
+                    <a className="goods" onClick={function () {
+                        gotoHandler("/static/mall/zhuan-pan/index.html?" + (+new Date()), true)
+                    }}>大转盘</a>
+                    <a className="mine" onClick={function () {
+                        gotoHandler("/static/mall/product-category/index.html", true)
+                    }}>品类</a>
                 </div>
                 <div className="index-actList-wrap">
                     { this.props.activities.map(activity) }
@@ -105,7 +124,9 @@ const ActivityProduct = React.createClass({
         let activity_banner = () => {
             return this.props.img ?
                 (<div className="index-actList-img">
-                    <a onClick={function(){gotoHandler("/static/mall/activity/index.html?bizNo=" + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}>
+                    <a onClick={function () {
+                        gotoHandler("/static/mall/activity/index.html?bizNo=" + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)
+                    }}>
                         <img src={this.props.img || 'images/default-banner.jpg'}/>
                     </a>
                 </div>) :
@@ -127,8 +148,10 @@ const TextBar = React.createClass({
         return (
             <div className="index-actList-h">
                 <div className="index-actList-htext"><span className="vertical-line"></span>{this.props.title}</div>
-                <a onClick={function(){gotoHandler('/static/mall/activity/index.html?title='+_this.props.title+'&bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
-                   className="index-actList-hmore">更多</a>
+                <a onClick={function () {
+                    gotoHandler('/static/mall/activity/index.html?title=' + _this.props.title + '&bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)
+                }}
+                   className="index-actList-hmore" id={this.props.activity_id}>更多</a>
             </div>
         )
     }
@@ -158,7 +181,9 @@ const ProductItem = React.createClass({
         let _this = this;
 
         return (
-            <a onClick={function(){gotoHandler('/static/mall/product-detail/index.html?bizNo='+ _this.props.bizNo)}}
+            <a onClick={function () {
+                gotoHandler('/static/mall/product-detail/index.html?bizNo=' + _this.props.bizNo)
+            }}
                className="index-actList-a">
                 <div className="list-img"><img src={this.props.img || 'images/default-product.jpg'}/>
                 </div>
