@@ -107,9 +107,11 @@ const SearchBar = React.createClass({
     changeHandler: function (e) {
         this.setState({value: e.target.value})
     },
-    searchHandler: function () {       
-        this.props.filterProducts({productName: this.state.value});
-        this.setState({showSearchHistory:false})
+    searchHandler: function () {   
+    	if(this.state.value){
+        	this.props.filterProducts({productName: this.state.value});
+        }
+        this.setState({showSearchHistory:false});
     },
     clearHistoryHandler: function () {    	
         $FW.Ajax({
@@ -136,7 +138,9 @@ const SearchBar = React.createClass({
     },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
-    		this.props.filterProducts({productName:this.state.value});  
+    		if(this.state.value){
+    			this.props.filterProducts({productName:this.state.value});
+    		}    		  
     		this.refs.searchInput.blur();
     		this.setState({showSearchHistory:false});
     	}

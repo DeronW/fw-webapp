@@ -51,7 +51,7 @@ const Mall = React.createClass({
                                     activity_id={i.activity_id} products={i.products} key={index}/>;
         };
 		let backFactory=()=>{
-			return $FW.Browser.inApp() ?<img className="m-logo" src="images/m-logo.png"/>:<a className="back-factory" href="http://m.9888.cn/mpwap/">回到工场</a>
+			return $FW.Browser.inApp() ?<img className="m-logo" src="images/m-logo.png"/>:<a className="back-factory" href="http://m.9888.cn/mpwap/">金融工场</a>
 		};
 		let appIosTopWhite=()=>{
 			
