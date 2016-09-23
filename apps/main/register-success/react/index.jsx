@@ -91,7 +91,7 @@ var AccountSucceedBody = React.createClass({
         });
     },
     getConfirmBtn: function() {
-        window.history.back();
+        window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
     },
     render: function () {
         return (
