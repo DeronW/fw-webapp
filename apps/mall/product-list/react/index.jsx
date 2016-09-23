@@ -46,6 +46,9 @@ const ResultPage = React.createClass({
     		});
     	});     
     },
+    setShowExchangeBar: function () {    	
+        this.setState({showExchangeBar:true});      
+    },
     appendProducts: function (data) {    	
         var list = this.state.products.slice();
         var newList=list.concat(data.products||[]);
@@ -55,7 +58,7 @@ const ResultPage = React.createClass({
      	this.setState({showExchangeBar:false});
     },
     searchBlur: function () {    	 
-    	this.setState({showExchangeBar:true});   
+    	 
     },
     render: function () {
     	let productsList=()=>{
@@ -68,9 +71,9 @@ const ResultPage = React.createClass({
     	}
         return (
             <div>
-                {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
+                {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}  setShowExchangeBar={this.setShowExchangeBar} />:null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
-                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
+                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar filterProducts={this.filterProducts}/>:null}
                 {this.state.showExchangeBar?productsList():null}
                
             </div>
@@ -110,6 +113,7 @@ const SearchBar = React.createClass({
     searchHandler: function () {   
     	if(this.state.value){
         	this.props.filterProducts({productName: this.state.value});
+        	this.props.setShowExchangeBar();
         }
         this.setState({showSearchHistory:false});
     },
@@ -140,6 +144,7 @@ const SearchBar = React.createClass({
     	if(e.keyCode==13){
     		if(this.state.value){
     			this.props.filterProducts({productName:this.state.value});
+    			this.props.setShowExchangeBar();
     		}    		  
     		this.refs.searchInput.blur();
     		this.setState({showSearchHistory:false});
