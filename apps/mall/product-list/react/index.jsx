@@ -221,8 +221,7 @@ const ExchangeBar = React.createClass({
             success: (data) =>{
             	if(data.is_login){
             		this.setState({myScore:data.score})
-            	}
-            	
+            	}            	
             } 
         });
     },
@@ -448,25 +447,25 @@ const ExchangeBar = React.createClass({
             };
             let rank_icon=(j)=>{
             	if(j=='proceeds'){
-            		if(_this.state.sort==3){
+            		if(_this.state.sort==4){
             			return 'rank-icon-up'
-            		}else if(_this.state.sort==4){
+            		}else if(_this.state.sort==3){
             			return 'rank-icon-down'
             		}else{
             			return 'rank-icon'
             		}
             	}else if(j=='salestime'){
-            		if(_this.state.sort==5){
+            		if(_this.state.sort==0){
             			return 'rank-icon-up'
-            		}else if(_this.state.sort==0){
+            		}else if(_this.state.sort==5){
             			return 'rank-icon-down'
             		}else{
             			return 'rank-icon'
             		}
             	}else if(j=='scorerank'){
-            		if(_this.state.sort==1){
+            		if(_this.state.sort==2){
             			return 'rank-icon-up'
-            		}else if(_this.state.sort==2){
+            		}else if(_this.state.sort==1){
             			return 'rank-icon-down'
             		}else{
             			return 'rank-icon'
