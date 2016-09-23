@@ -214,7 +214,7 @@ const ExchangeBar = React.createClass({
         return {
             tab: 'defaultSort',
             sort: -1,
-            vipLevel: -1,
+            vipLevel:'',
             showFilterPop:false,
             filterScore:'不限',
             filterLevel:'不限',
@@ -384,7 +384,7 @@ const ExchangeBar = React.createClass({
     filterLevelHandler: function(name){
         this.setState({filterLevel:name});
         if(name=='不限'){
-        	this.setState({vipLevel:-1});
+        	this.setState({vipLevel:''});
         }else if(name=='普通会员'){
         	this.setState({vipLevel:1});
         }else if(name=='Vip1专享'){
@@ -418,7 +418,7 @@ const ExchangeBar = React.createClass({
     clearFilterHandler: function () {    
     	    if($FW.Format.urlQuery().searchSourceTypeUrl==1){
 				this.setState({
-		       		vipLevel: -1,
+		       		vipLevel:'',
 		            showFilterPop:true,
 		            filterScore:'不限',
 		            filterLevel:'不限',
@@ -429,7 +429,7 @@ const ExchangeBar = React.createClass({
 		       });
         	}else{
         		this.setState({
-		       		vipLevel: -1,
+		       		vipLevel:'',
 		            showFilterPop:true,
 		            filterScore:'不限',
 		            filterLevel:'不限',
@@ -600,7 +600,7 @@ const ProductItem = React.createClass({
 let Filter = {
 	options: {
 		page: 1,
-		vipLevel: '',
+		vipLevel:'',
 		productName: '', // keyword
 		categoryName: '',
 		actIds: '',
