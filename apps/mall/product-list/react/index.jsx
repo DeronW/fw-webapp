@@ -577,7 +577,10 @@ const ProductItem = React.createClass({
 $FW.DOMReady(function () {	
     var title = $FW.Format.urlQuery().title || '商品列表';
     if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
-    	title='我可兑换'
+    	title='我可兑换';
+    	NativeBridge.setTitle(title);
+    	if ($FW.Utils.shouldShowHeader())
+        ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
     }
     Filter.options.searchSourceType=$FW.Format.urlQuery().searchSourceTypeUrl||'';
     if($FW.Format.urlQuery().category){
@@ -593,10 +596,7 @@ $FW.DOMReady(function () {
 	        		Filter.options.maxPoints=-1;
 	        	};
             } 
-        });
-    	
-
-    	
+        });    			    	
     }else if($FW.Format.urlQuery().searchSourceTypeUrl==2){
     	
     }else{
