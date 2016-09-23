@@ -33,12 +33,21 @@
     <div class="invest-condition invest-margin-top2">(2) 实际投资天数＞锁定期：</div>
     <div class="invest-formula">年化佣金=锁定期年化佣金+剩余年化佣金=投资金额×(锁定期天数/360)×对应年化佣金比例+投资金额×(剩余天数/360)×对应年化佣金比例</div>
     <div class="example-table"><span>60-180天</span><span>106天</span><span>10000元</span><span>0.75%</span></div>
-    <div class="commision-data">年化佣金=锁定期年化佣金+剩余年化佣金=10000×(<span>60</span>/360)×10000×0.75%+10000×(<span>46</span>/360)×10000×0.75%=12.5+9.58=22.08元</div>
+    <div class="commision-data">年化佣金=锁定期年化佣金+剩余年化佣金=10000×(<span>60</span>/360)×10000×0.75%+10000×(<span>46</span>/360)×10000×0.75%=12.5+9.58=22.08元
+    </div>
 </div>
 <div class="part4">
     <div class="standard-table"><span>A码人员标准</span><span>10万</span><span>5</span><span>30</span></div>
 </div>
-<div class="part5">
+
+<div class="part5" id="apple-limit">
     <div class="warm-tip">*以上活动由金融工场主办 与Apple Inc. 无关</div>
 </div>
+<script>
+    $FW.DOMReady(function () {
+        if (!$FW.Browser.inApp() || !$FW.Browser.inIOS()) {
+            document.getElementById('apple-limit').style.display = 'none'
+        }
+    })
+</script>
 {% endblock %}
