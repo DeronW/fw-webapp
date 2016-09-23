@@ -9,7 +9,8 @@ const ResultPage = React.createClass({
             products: [],
             showSearch:$FW.Format.urlQuery().searchSourceTypeUrl==2?true:false,
             hasData:true,
-            showExchangeBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true            
+            showExchangeBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true,
+            showFilterBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true
         }
     },
     componentDidMount: function () {
@@ -69,7 +70,7 @@ const ResultPage = React.createClass({
             <div>
                 {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
-                {this.state.showExchangeBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
+                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
                 {this.state.showExchangeBar?productsList():null}
                
             </div>
@@ -134,10 +135,10 @@ const SearchBar = React.createClass({
     	this.props.searchFocus();
     },
     onKeyDownHandler: function (e) {
-    	alert("e.keyCode&"+e.keyCode);
     	if(e.keyCode==13){
-    		alert(this.state.value);
-    		this.props.filterProducts({productName:this.state.value});  		    		
+    		this.props.filterProducts({productName:this.state.value});  
+    		this.refs.searchInput.blur();
+    		this.setState({showSearchHistory:false});
     	}
     },
 
@@ -156,8 +157,7 @@ const SearchBar = React.createClass({
                 </div>:null
             )
         };
-        let appIosTopWhite=()=>{
-			
+        let appIosTopWhite=()=>{			
 			let appIos=false;			
 			if($FW.Browser.inApp()&&$FW.Browser.inIOS()){
 				appIos=true;
@@ -172,14 +172,16 @@ const SearchBar = React.createClass({
             <div className={appIosTopWhite()}>
                 <div className="search-page-box">
                     <a className="back-arrow" onClick={this.backHandler}></a>
-                    <input autofocus="autofocus" type="text" value={this.state.value}
+                    <input autofocus="autofocus" type="search" value={this.state.value}
                            placeholder="请输入想找的商品"
                            onChange={this.changeHandler}
                            onBlur={this.onBlurHandler} 
                            onFocus={this.onFocusHandler}
-                           onKeyDown={this.onKeyDownHandler}                          
+                           onKeyDown={this.onKeyDownHandler}  
+                           ref="searchInput"
                     />
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
+                    <span className="search-confirm" onClick={this.searchHandler}>搜索</span>
                 </div>
                 {searchHistory()}
             </div>
@@ -571,40 +573,6 @@ const ProductItem = React.createClass({
         )
     }
 });
-
-$FW.DOMReady(function () {	
-    var title = $FW.Format.urlQuery().title || '商品列表';
-    if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
-    	title='我可兑换'
-    }
-    Filter.options.searchSourceType=$FW.Format.urlQuery().searchSourceTypeUrl||'';
-    if($FW.Format.urlQuery().category){
-    	Filter.options.categoryName=$FW.Format.urlQuery().category;
-    };
-    if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
-    	 $FW.Ajax({
-            url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
-            success: (data) =>{
-	            if(data.is_login){
-					Filter.options.maxPoints=data.score;
-	        	}else{
-	        		Filter.options.maxPoints=-1;
-	        	};
-            } 
-        });
-    	
-
-    	
-    }else if($FW.Format.urlQuery().searchSourceTypeUrl==2){
-    	
-    }else{
-    	NativeBridge.setTitle(title);
-    	if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
-    }	
-    window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
-});
-
 let Filter = {
 	options: {
 		page: 1,
@@ -624,7 +592,6 @@ let Filter = {
 			Filter.options[i] = opts[i]
 		}
 	},
-
 	search: function(options, callback){
 		Filter.mix(options);		
 		$FW.Ajax({
@@ -635,3 +602,36 @@ let Filter = {
 	    })
 	}
 }
+$FW.DOMReady(function () {	
+    var title = $FW.Format.urlQuery().title || '商品列表';
+    if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
+    	title='我可兑换';
+    	NativeBridge.setTitle(title);
+    	if ($FW.Utils.shouldShowHeader())
+        ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
+    }
+    Filter.options.searchSourceType=$FW.Format.urlQuery().searchSourceTypeUrl||'';
+    if($FW.Format.urlQuery().category){
+    	Filter.options.categoryName=$FW.Format.urlQuery().category;
+    };
+    if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
+    	 $FW.Ajax({
+            url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
+            success: (data) =>{
+	            if(data.is_login){
+					Filter.options.maxPoints=data.score;
+	        	}else{
+	        		Filter.options.maxPoints=-1;
+	        	};
+            } 
+        });    			    	
+    }else if($FW.Format.urlQuery().searchSourceTypeUrl==2){
+    	
+    }else{
+    	NativeBridge.setTitle(title);
+    	if ($FW.Utils.shouldShowHeader())
+        ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
+    }	
+    window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
+});
+

@@ -184,7 +184,7 @@ const Withdrawals = React.createClass({
 			moneyInput: false,
 			inputVal: "",
 			codeVal: "",
-			selectBankName: "",
+			selectBankName: this.props.data.bankInfo.bankBranchName,
 			selectBankId: "",
 			propsAccountAmountVal: this.props.data.accountAmount,
 			propsUserInfo: this.props.data,
@@ -291,13 +291,11 @@ const Withdrawals = React.createClass({
 		}
 
 		if(this.state.modifyShow) {
-			if(this.state.selectBankName === "") {
+			if(this.state.selectBankName === null) {
 				$FW.Component.Toast("请选择银行");
 				return false;
 			}
 		}
-
-		console.log(this.state.codeVal);
 
 		if(this.state.codeVal === "") {
 			$FW.Component.Toast("请输入验证码");
@@ -310,6 +308,9 @@ const Withdrawals = React.createClass({
 
 	},
 	handlerSelectPopFun: function() {
+		document.body.scrollTop  = 0;
+		document.documentElement.scrollTop  = 0;
+
 		this.setState({
 			selectBank: true
 		});
@@ -467,7 +468,7 @@ const Withdrawals = React.createClass({
 							<div className="wire"></div>
 							<div className="pure">
 								<div className="xuanwu" style={{fontSize:'32px'}}>
-									{this.state.selectBankName === "" ? this.props.data.bankInfo.bankBranchName : this.state.selectBankName}
+									{this.state.selectBankName === null ? "开户支行" : this.state.selectBankName}
 								</div>
 								<div className="choice">
 									<div className="pleas" style={{color:'#555555'}}  >请选择</div></div>
@@ -714,7 +715,7 @@ const Special = React.createClass({
 					</div>
 					<div className={this.state.forbid ? "miaoh" : "miaoh c"}>
 						{
-							this.state.seconds !== null ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>
+							this.state.seconds !== null ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} ><span className="text">获取验证码</span></span>
 						}
 					</div>
 				</div>
