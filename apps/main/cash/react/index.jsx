@@ -139,8 +139,6 @@ var BankAccount = React.createClass({
 
 					/>
 				
-				
-
 				<div className="select-bank">
 					<div className="search">
 						{icon}
@@ -292,7 +290,7 @@ const Withdrawals = React.createClass({
 
 		if(this.state.modifyShow) {
 			if(this.state.selectBankName === null) {
-				$FW.Component.Toast("请选择银行");
+				$FW.Component.Toast("请选择开户支行");
 				return false;
 			}
 		}
