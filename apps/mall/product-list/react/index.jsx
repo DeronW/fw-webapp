@@ -9,7 +9,8 @@ const ResultPage = React.createClass({
             products: [],
             showSearch:$FW.Format.urlQuery().searchSourceTypeUrl==2?true:false,
             hasData:true,
-            showExchangeBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true            
+            showExchangeBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true,
+            showFilterBar:$FW.Format.urlQuery().searchSourceTypeUrl==2?false:true
         }
     },
     componentDidMount: function () {
@@ -69,7 +70,7 @@ const ResultPage = React.createClass({
             <div>
                 {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
-                {this.state.showExchangeBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
+                {this.state.showExchangeBar||showFilterBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
                 {this.state.showExchangeBar?productsList():null}
                
             </div>
@@ -156,8 +157,7 @@ const SearchBar = React.createClass({
                 </div>:null
             )
         };
-        let appIosTopWhite=()=>{
-			
+        let appIosTopWhite=()=>{			
 			let appIos=false;			
 			if($FW.Browser.inApp()&&$FW.Browser.inIOS()){
 				appIos=true;
@@ -573,7 +573,35 @@ const ProductItem = React.createClass({
         )
     }
 });
+let Filter = {
+	options: {
+		page: 1,
+		vipLevel: '',
+		productName: '', // keyword
+		categoryName: '',
+		actIds: '',
+		searchSourceType: '',
+		prefectureType: 0,
+		order: -1,
+		minPoints: '',
+		maxPoints: ''
+	},
 
+	mix: function(opts) {
+		for(var i in opts) {
+			Filter.options[i] = opts[i]
+		}
+	},
+	search: function(options, callback){
+		Filter.mix(options);		
+		$FW.Ajax({
+	        url: API_PATH + 'mall/api/index/v1/search.json',
+	        data: Filter.options,
+	        enable_loading: true,
+	        success: data => callback(data)
+	    })
+	}
+}
 $FW.DOMReady(function () {	
     var title = $FW.Format.urlQuery().title || '商品列表';
     if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
@@ -607,33 +635,3 @@ $FW.DOMReady(function () {
     window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
 });
 
-let Filter = {
-	options: {
-		page: 1,
-		vipLevel: '',
-		productName: '', // keyword
-		categoryName: '',
-		actIds: '',
-		searchSourceType: '',
-		prefectureType: 0,
-		order: -1,
-		minPoints: '',
-		maxPoints: ''
-	},
-
-	mix: function(opts) {
-		for(var i in opts) {
-			Filter.options[i] = opts[i]
-		}
-	},
-
-	search: function(options, callback){
-		Filter.mix(options);		
-		$FW.Ajax({
-	        url: API_PATH + 'mall/api/index/v1/search.json',
-	        data: Filter.options,
-	        enable_loading: true,
-	        success: data => callback(data)
-	    })
-	}
-}
