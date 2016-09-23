@@ -134,11 +134,11 @@ const SearchBar = React.createClass({
     	this.props.searchFocus();
     },
     onKeyDownHandler: function (e) {
+    	alert("e.keyCode&"+e.keyCode);
     	if(e.keyCode==13){
-    		if($FW.Format.urlQuery().searchSourceTypeUrl==2){
-    			this.props.filterProducts({});
-    			
-    		}    		    		
+    		this.props.filterProducts({productName:this.state.value});  
+    		this.refs.searchInput.blur();
+    		this.setState({showSearchHistory:false});
     	}
     },
 
@@ -178,7 +178,8 @@ const SearchBar = React.createClass({
                            onChange={this.changeHandler}
                            onBlur={this.onBlurHandler} 
                            onFocus={this.onFocusHandler}
-                           onKeyDown={this.onKeyDownHandler}                          
+                           onKeyDown={this.onKeyDownHandler}  
+                           ref="searchInput"
                     />
                     <span className="search-page-icon" onClick={this.searchHandler}></span>
                 </div>
