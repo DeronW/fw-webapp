@@ -335,8 +335,8 @@ const ExchangeBar = React.createClass({
         	});
         }else if(name=='1-100'){
         	this.setState({        		
-        		minPoints:100,
-        		maxPoints:1,
+        		minPoints:1,
+        		maxPoints:100,
         	});
         }else if(name=='101-1000'){
         	this.setState({
