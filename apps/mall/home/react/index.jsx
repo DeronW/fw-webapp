@@ -122,11 +122,14 @@ const ActivityProduct = React.createClass({
         let _this = this;
         let pi = (data, index) => <ProductItem {...data} key={index}/>;
         let activity_banner = () => {
+            function click() {
+                gotoHandler("/static/mall/activity/index.html?bizNo=" +
+                    _this.props.bizNo + '&activity_id=' + _this.props.activity_id)
+            }
+
             return this.props.img ?
                 (<div className="index-actList-img">
-                    <a onClick={function () {
-                        gotoHandler("/static/mall/activity/index.html?bizNo=" + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)
-                    }}>
+                    <a onClick={click}>
                         <img src={this.props.img || 'images/default-banner.jpg'}/>
                     </a>
                 </div>) :
@@ -144,13 +147,23 @@ const ActivityProduct = React.createClass({
 
 const TextBar = React.createClass({
     render: function () {
-        let _this = this;
+        var props = this.props;
+
+        function click() {
+            var url = '/static/mall/activity/index.html?';
+            url += `title=${props.title}`;
+            url += `&bizNo=${props.bizNo}`;
+            url += `&activity_id= ${props.activity_id}`;
+            gotoHandler(url)
+        }
+
         return (
             <div className="index-actList-h">
-                <div className="index-actList-htext"><span className="vertical-line"></span>{this.props.title}</div>
-                <a onClick={function () {
-                    gotoHandler('/static/mall/activity/index.html?title=' + _this.props.title + '&bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)
-                }}
+                <div className="index-actList-htext">
+                    <span className="vertical-line"> </span>
+                    {this.props.title}
+                </div>
+                <a onClick={click}
                    className="index-actList-hmore" id={this.props.activity_id}>更多</a>
             </div>
         )
@@ -178,12 +191,9 @@ const ProductItem = React.createClass({
         let Angle = this.props.angle_text ?
             <div className={"list-label " + this.props.angle_type}>{this.props.angle_text}</div> :
             null;
-        let _this = this;
 
         return (
-            <a onClick={function () {
-                gotoHandler('/static/mall/product-detail/index.html?bizNo=' + _this.props.bizNo)
-            }}
+            <a onClick={ () => gotoHandler(`/static/mall/product-detail/index.html?bizNo=${this.props.bizNo}`) }
                className="index-actList-a">
                 <div className="list-img"><img src={this.props.img || 'images/default-product.jpg'}/>
                 </div>
