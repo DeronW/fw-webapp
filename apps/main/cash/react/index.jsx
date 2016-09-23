@@ -465,7 +465,7 @@ const Withdrawals = React.createClass({
 							<div className="wire"></div>
 							<div className="pure">
 								<div className="xuanwu" style={{fontSize:'32px'}}>
-									{this.state.selectBankName === "" ? this.props.data.bankInfo.bankBranchName : this.state.selectBankName}
+									{this.state.selectBankName === null ? "开户支行" : this.state.selectBankName}
 								</div>
 								<div className="choice">
 									<div className="pleas" style={{color:'#555555'}}  >请选择</div></div>
