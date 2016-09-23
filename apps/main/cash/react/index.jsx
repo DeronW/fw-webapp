@@ -184,7 +184,7 @@ const Withdrawals = React.createClass({
 			moneyInput: false,
 			inputVal: "",
 			codeVal: "",
-			selectBankName: "",
+			selectBankName: this.props.data.bankInfo.bankBranchName,
 			selectBankId: "",
 			propsAccountAmountVal: this.props.data.accountAmount,
 			propsUserInfo: this.props.data,
@@ -291,13 +291,11 @@ const Withdrawals = React.createClass({
 		}
 
 		if(this.state.modifyShow) {
-			if(this.state.selectBankName === "") {
+			if(this.state.selectBankName === null) {
 				$FW.Component.Toast("请选择银行");
 				return false;
 			}
 		}
-
-		console.log(this.state.codeVal);
 
 		if(this.state.codeVal === "") {
 			$FW.Component.Toast("请输入验证码");
