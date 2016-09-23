@@ -70,7 +70,7 @@ const ResultPage = React.createClass({
             <div>
                 {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}/>:null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
-                {this.state.showExchangeBar||showFilterBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
+                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar filterProducts={this.filterProducts} />:null}
                 {this.state.showExchangeBar?productsList():null}
                
             </div>
