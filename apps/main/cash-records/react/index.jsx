@@ -51,7 +51,7 @@ const CashRecords = React.createClass({
 
         function get_date(time) {
             var d = new Date(time);
-            return d.getFullYear() + '年' + d.getMonth() + '月'
+            return d.getFullYear() + '年' + (d.getMonth() + 1) + '月'
         }
 
         function insertRecord(month, record) {
