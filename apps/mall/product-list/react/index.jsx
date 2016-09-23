@@ -134,6 +134,7 @@ const SearchBar = React.createClass({
     	this.props.searchFocus();
     },
     onKeyDownHandler: function (e) {
+    	alert("e.keyCode&"+e.keyCode);
     	if(e.keyCode==13){
     		alert(this.state.value);
     		this.props.filterProducts({productName:this.state.value});  		    		
