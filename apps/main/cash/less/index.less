@@ -259,9 +259,13 @@ input[type=checkbox],input[type=radio] {
 
     .zmy {
         display: inline-block;
-        padding-left: 20px;
-        line-height: 38px;
-        border-left: 1px solid #ccc;
+        height: 84px;
+
+        .text {
+            line-height: 38px;
+            padding-left: 20px;
+            border-left: 1px solid #ccc;
+        }
     }
 }
 
@@ -341,6 +345,11 @@ input[type=checkbox],input[type=radio] {
     -o-text-overflow: ellipsis;/* Opera */
 
     -moz-binding: url("ellipsis.xml#ellipsis");/*FireFox*/
+
+    input {
+        height: 60px;
+        line-height: 60px;
+    }
 }
 
 .choice{

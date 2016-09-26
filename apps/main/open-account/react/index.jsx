@@ -861,7 +861,8 @@ var Body = React.createClass({
     },
     getConfirmBtn: function() {
         if(this.state.popSelect === 1) {
-            window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+            window.history.back();
+            //window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
         } else if (this.state.popSelect === 2) {
             this.setState({
                 propsPopBtnBank: true
@@ -935,16 +936,14 @@ var Body = React.createClass({
 
 
 
-
-
 $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         enable_loading: true,
         success: function (data) {
-            /*var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
-            ReactDOM.render(
+            var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
+            /*ReactDOM.render(
                 <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
                 document.getElementById('header'));*/
 

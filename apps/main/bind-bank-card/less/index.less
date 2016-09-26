@@ -195,6 +195,10 @@ body,html{
     background: white;
 }
 
+a.pure-a {
+    display: block;
+}
+
 .pure-a{
     height: 80px;
     line-height: 80px;
@@ -206,11 +210,20 @@ body,html{
     font-size: 30px;
     margin-left: 30px;
     color:#555;
-    white-space: nowrap;
     width:470px;
     height:80px;
     overflow:hidden;
+    white-space:nowrap;
+
     text-overflow:ellipsis;
+
+    text-overflow: ellipsis;/* IE/Safari */
+
+    -ms-text-overflow: ellipsis;
+
+    -o-text-overflow: ellipsis;/* Opera */
+
+    -moz-binding: url("ellipsis.xml#ellipsis");/*FireFox*/
 }
 
 .choice-a{

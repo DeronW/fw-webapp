@@ -9,7 +9,7 @@ var TopNav = React.createClass({
     },
     render: function () {
         return (
-            <div className="top-nav">
+            <div className="top-nav" style={{zIndex: 10000000}}>
                 <div className="info">
                     {
                         this.props.backBtn ?

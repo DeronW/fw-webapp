@@ -139,8 +139,6 @@ var BankAccount = React.createClass({
 
 					/>
 				
-				
-
 				<div className="select-bank">
 					<div className="search">
 						{icon}
@@ -184,7 +182,7 @@ const Withdrawals = React.createClass({
 			moneyInput: false,
 			inputVal: "",
 			codeVal: "",
-			selectBankName: "",
+			selectBankName: this.props.data.bankInfo.bankBranchName,
 			selectBankId: "",
 			propsAccountAmountVal: this.props.data.accountAmount,
 			propsUserInfo: this.props.data,
@@ -291,13 +289,11 @@ const Withdrawals = React.createClass({
 		}
 
 		if(this.state.modifyShow) {
-			if(this.state.selectBankName === "") {
-				$FW.Component.Toast("请选择银行");
+			if(this.state.selectBankName === null) {
+				$FW.Component.Toast("请选择开户支行");
 				return false;
 			}
 		}
-
-		console.log(this.state.codeVal);
 
 		if(this.state.codeVal === "") {
 			$FW.Component.Toast("请输入验证码");
@@ -310,6 +306,9 @@ const Withdrawals = React.createClass({
 
 	},
 	handlerSelectPopFun: function() {
+		document.body.scrollTop  = 0;
+		document.documentElement.scrollTop  = 0;
+
 		this.setState({
 			selectBank: true
 		});
@@ -363,7 +362,7 @@ const Withdrawals = React.createClass({
 		var _this = this;
 
 		var feeVal = this.state.propsUserInfo.fee;
-		var bankId = this.props.data.bankInfo.bankCardNo;
+		var bankId = this.props.data.bankInfo.bankCardNo||'';
 		var phone = this.props.data.bankInfo.phoneNo;
 		var phoneVal = phone.substring(0, 3) + "****" + phone.substring((phone.length - 4), phone.length);
 
@@ -467,7 +466,7 @@ const Withdrawals = React.createClass({
 							<div className="wire"></div>
 							<div className="pure">
 								<div className="xuanwu" style={{fontSize:'32px'}}>
-									{this.state.selectBankName === "" ? this.props.data.bankInfo.bankBranchName : this.state.selectBankName}
+									{this.state.selectBankName === null ? "开户支行" : this.state.selectBankName}
 								</div>
 								<div className="choice">
 									<div className="pleas" style={{color:'#555555'}}  >请选择</div></div>
@@ -688,7 +687,7 @@ const Special = React.createClass({
 			fail: function() {
 				_this.setState(
 					{
-						seconds: 0,
+						seconds: null,
 						forbid: true
 					}
 				);
@@ -714,7 +713,7 @@ const Special = React.createClass({
 					</div>
 					<div className={this.state.forbid ? "miaoh" : "miaoh c"}>
 						{
-							this.state.seconds !== null ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} >获取验证码</span>
+							this.state.seconds !== null ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} ><span className="text">获取验证码</span></span>
 						}
 					</div>
 				</div>

@@ -236,9 +236,9 @@ const PlusMinus = React.createClass({
 const EmptyProduct = React.createClass({
     render: function () {
         return (
-            <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
-                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg'/>
-                <div style={{ fontSize: "30px", color: "#8591b3", textAlign: "center" }}>
+            <div style={{position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1"}}>
+                <img style={{display: "block", maxWidth: "80%", margin: "20% auto 50px"}} src='images/outdate.jpg'/>
+                <div style={{fontSize: "30px", color: "#8591b3", textAlign: "center"}}>
                     抱歉, 没有找到相关商品!
                 </div>
             </div>
@@ -268,13 +268,9 @@ $FW.DOMReady(function () {
     });
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"商品详情"} back_handler={backPage}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"商品详情"}/>, document.getElementById('header'));
     }
 });
-
-function backPage() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
-}
 
 function trim(s) {
     return s.replace(/(^\s*)|(\s*$)/g, '')
