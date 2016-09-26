@@ -15,13 +15,29 @@ const ResultPage = React.createClass({
         }
     },
     componentDidMount: function () {
-     	if($FW.Format.urlQuery().searchSourceTypeUrl==2){
-     		this.setState({showExchangeBar:false});
-     	} else{
-     		this.loadMoreProductHandler()
+    	if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
+	    	 $FW.Ajax({
+	            url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
+	            success: (data) =>{
+		            if(data.is_login){
+						Filter.options.maxPoints=data.score;
+						Filter.myConvertibleScore=data.score;
+						this.loadMoreProductHandler();
+		        	}else{
+		        		Filter.options.maxPoints=Filter.myConvertibleScore||'';
+		        	};
+	            } 
+	        });    			    	
+	    }else if($FW.Format.urlQuery().searchSourceTypeUrl==2){
+	    	this.setState({showExchangeBar:false});
+	    }else{
+     		this.loadMoreProductHandler();
      	}
         $FW.Event.touchBottom(this.loadMoreProductHandler);
         
+    },
+    setMyConvertibleScore: function (num) {
+     	this.setState({myConvertibleScore:num});        
     },
     searchFilterProductShow: function () {
      	this.setState({searchFilterProductShow:true});
@@ -81,9 +97,8 @@ const ResultPage = React.createClass({
             <div>
                 {this.state.showSearch? <SearchBar filterProducts={this.filterProducts} searchBlur={this.searchBlur} searchFocus={this.searchFocus}  setShowExchangeBar={this.setShowExchangeBar} />:null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
-                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar filterProducts={this.filterProducts} searchFilterProductShow={this.searchFilterProductShow} searchFilterProductHide={this.searchFilterProductHide}/>:null}
-                {this.state.showExchangeBar&&this.state.searchFilterProductShow?productsList():null}
-               
+                {this.state.showExchangeBar||this.state.showFilterBar?<ExchangeBar setMyConvertibleScore={this.setMyConvertibleScore} filterProducts={this.filterProducts} searchFilterProductShow={this.searchFilterProductShow} searchFilterProductHide={this.searchFilterProductHide}/>:null}
+                {this.state.showExchangeBar&&this.state.searchFilterProductShow?productsList():null}               
             </div>
         )
     }
@@ -214,15 +229,15 @@ const ExchangeBar = React.createClass({
         return {
             tab: 'defaultSort',
             sort: -1,
-            vipLevel: -1,
+            vipLevel:'',
             showFilterPop:false,
             filterScore:'不限',
             filterLevel:'不限',
-            maxPoints:'',
+            maxPoints:$FW.Format.urlQuery().searchSourceTypeUrl==1?Filter.myConvertibleScore:'',
             minPoints:'',
-            maxValue:$FW.Format.urlQuery().searchSourceTypeUrl==1?-1:'',
+            maxValue:$FW.Format.urlQuery().searchSourceTypeUrl==1?Filter.myConvertibleScore:'',
             minValue:'',
-            myScore:0,
+            myScore:$FW.Format.urlQuery().searchSourceTypeUrl==1?Filter.myConvertibleScore:0,
         }
     },
     searchHandler: function(){
@@ -238,7 +253,8 @@ const ExchangeBar = React.createClass({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
             success: (data) =>{
             	if(data.is_login){
-            		this.setState({myScore:data.score})
+            		Filter.myConvertibleScore=data.score;
+            		this.setState({myScore:data.score});
             	}            	
             } 
         });
@@ -321,57 +337,80 @@ const ExchangeBar = React.createClass({
         	this.setState({showFilterPop:false});
         }else if(tabName=='filter'){
         	this.state.showFilterPop?this.props.searchFilterProductShow():this.props.searchFilterProductHide();
-        	this.setState({showFilterPop:!this.state.showFilterPop});
-        	
+        	this.setState({showFilterPop:!this.state.showFilterPop});        	
         }
         this.setState({tab: tabName});
     },
     filterScoreHandler: function(name){
     	this.setState({minValue:''});
-    	this.setState({maxValue:''});
+    	this.setState({maxValue:$FW.Format.urlQuery().searchSourceTypeUrl==1?Filter.myConvertibleScore:''});
         this.setState({filterScore:name});
         if(name=='不限'){
-        	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
-        		this.setState({
-	        		maxPoints:-1,
-	        		minPoints:'',
-	        	});
-        	}else{
-        		this.setState({
-	        		maxPoints:'',
-	        		minPoints:'',
-	        	});
-        	}        	
+    		this.setState({
+        		maxPoints:$FW.Format.urlQuery().searchSourceTypeUrl==1?Filter.myConvertibleScore:'',
+        		minPoints:'',
+        	});    	
         }else if(name=='我可兑换'){
         	this.setState({        		
         		minPoints:'',
         		maxPoints:this.state.myScore,
         	});
         }else if(name=='1-100'){
-        	this.setState({        		
-        		minPoints:1,
-        		maxPoints:100,
-        	});
+        	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
+        		this.setState({        		
+	        		minPoints:Filter.myConvertibleScore>=1?1:0,
+	        		maxPoints:Filter.myConvertibleScore<=100?Filter.myConvertibleScore:100
+	        	});
+        	}else{
+        		this.setState({        		
+	        		minPoints:1,
+	        		maxPoints:100
+	        	});
+        	}
+        	
         }else if(name=='101-1000'){
-        	this.setState({
-        		minPoints:101,
-        		maxPoints:1000,
-        	});
+        	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
+        		this.setState({        		
+	        		minPoints:Filter.myConvertibleScore>=101?101:0,
+	        		maxPoints:Filter.myConvertibleScore<=1000?Filter.myConvertibleScore:1000,
+	        	});
+        	}else{
+        		this.setState({
+	        		minPoints:101,
+	        		maxPoints:1000
+	        	});
+        	}        	
         }else if(name=='1000-5000'){
-        	this.setState({
-        		minPoints:1000,
-        		maxPoints:5000,
-        	});
+        	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
+        		this.setState({        		
+	        		minPoints:Filter.myConvertibleScore>=1000?1000:0,
+	        		maxPoints:Filter.myConvertibleScore<=5000?Filter.myConvertibleScore:5000,
+	        	});
+        	}else{
+        		this.setState({
+	        		minPoints:1000,
+	        		maxPoints:5000
+	        	});
+        	}  
+        	
         }else if(name=='5000以上'){
-        	this.setState({
-        		minPoints:5000,
-        		maxPoints:'',
-        	});
+        	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
+        		this.setState({        		
+	        		minPoints:Filter.myConvertibleScore>=5000?5000:0,
+	        		maxPoints:Filter.myConvertibleScore,
+	        	});
+        	}else{
+        		this.setState({
+	        		minPoints:5000,
+	        		maxPoints:Filter.myConvertibleScore,
+	        	});
+        	}  
+        	
         }else{
         	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
         		this.setState({
 	        		minPoints:'',
-	        		maxPoints:-1,
+	        		maxPoints:Filter.myConvertibleScore,
 	        	});
         	}else{
         		this.setState({
@@ -384,7 +423,7 @@ const ExchangeBar = React.createClass({
     filterLevelHandler: function(name){
         this.setState({filterLevel:name});
         if(name=='不限'){
-        	this.setState({vipLevel:-1});
+        	this.setState({vipLevel:''});
         }else if(name=='普通会员'){
         	this.setState({vipLevel:1});
         }else if(name=='Vip1专享'){
@@ -398,7 +437,11 @@ const ExchangeBar = React.createClass({
         }
     },
     maxValueHandler: function (e) {
-       this.setState({maxValue: e.target.value});
+    	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
+    		this.setState({maxValue: e.target.value>Filter.myConvertibleScore?Filter.myConvertibleScore:e.target.value});
+    	}else{
+    		this.setState({maxValue: e.target.value});
+    	}       
        if(e.target.value||this.state.minValue){
        	this.setState({filterScore:''});
        }
@@ -407,7 +450,11 @@ const ExchangeBar = React.createClass({
        }
     },
     minValueHandler: function (e) {    	
-       this.setState({minValue: e.target.value});
+    	if($FW.Format.urlQuery().searchSourceTypeUrl==1){
+    		this.setState({minValue: e.target.value>Filter.myConvertibleScore?Filter.myConvertibleScore:e.target.value});
+    	}else{
+    		this.setState({minValue: e.target.value});
+    	}  
        if(this.state.maxValue||e.target.value){
        	this.setState({filterScore:''});
        }
@@ -418,18 +465,18 @@ const ExchangeBar = React.createClass({
     clearFilterHandler: function () {    
     	    if($FW.Format.urlQuery().searchSourceTypeUrl==1){
 				this.setState({
-		       		vipLevel: -1,
+		       		vipLevel:'',
 		            showFilterPop:true,
 		            filterScore:'不限',
 		            filterLevel:'不限',
-		            maxPoints:-1,
+		            maxPoints:Filter.myConvertibleScore,
 		            minPoints:'',
 		            maxValue:'',
 		            minValue:''      		
 		       });
         	}else{
         		this.setState({
-		       		vipLevel: -1,
+		       		vipLevel:'',
 		            showFilterPop:true,
 		            filterScore:'不限',
 		            filterLevel:'不限',
@@ -572,21 +619,20 @@ const ProductItem = React.createClass({
                 <span>&#43;</span> : null}{this.props.score}工分</span>) : null;
         var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
         var cover_bg = 'url(' + (this.props.img || 'images/default-product.jpg') + ')';
-
         return (
             <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
                 <div className="list-img" style={{backgroundImage: cover_bg}}></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
                 <div className="list-mark">
-                    { (this.props.tags || []).map((d, index) => <div key={index}>{d}</div>) }
+                    {(this.props.tags || []).map((d, index) => <div key={index}>{d}</div>) }
                 </div>
                 <div className="list-price-box">
                     <div className="list-price">
                         {show_price ? <span className="list-price-mark">&yen;</span> : null}
                         {show_price ?
                             <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span> : null}
-                        { score }
+                        {score}   
                     </div>
                     <div className="list-sold">
                         <span>累计销量 </span>
@@ -600,7 +646,7 @@ const ProductItem = React.createClass({
 let Filter = {
 	options: {
 		page: 1,
-		vipLevel: '',
+		vipLevel:'',
 		productName: '', // keyword
 		categoryName: '',
 		actIds: '',
@@ -610,7 +656,7 @@ let Filter = {
 		minPoints: '',
 		maxPoints: ''
 	},
-
+	myConvertibleScore:0,
 	mix: function(opts) {
 		for(var i in opts) {
 			Filter.options[i] = opts[i]
@@ -638,18 +684,7 @@ $FW.DOMReady(function () {
     if($FW.Format.urlQuery().category){
     	Filter.options.categoryName=$FW.Format.urlQuery().category;
     };
-    if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
-    	 $FW.Ajax({
-            url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
-            success: (data) =>{
-	            if(data.is_login){
-					Filter.options.maxPoints=data.score;
-	        	}else{
-	        		Filter.options.maxPoints=-1;
-	        	};
-            } 
-        });    			    	
-    }else if($FW.Format.urlQuery().searchSourceTypeUrl==2){
+	if($FW.Format.urlQuery().searchSourceTypeUrl==2){
     	
     }else{
     	NativeBridge.setTitle(title);
