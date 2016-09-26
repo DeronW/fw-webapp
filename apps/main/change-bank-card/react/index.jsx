@@ -354,6 +354,7 @@ var SelectBank = React.createClass({
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
                 </div>
+                <img src="images/fash-bank.png" className="quick-pay-icon"/>
             </li>
         };
 
