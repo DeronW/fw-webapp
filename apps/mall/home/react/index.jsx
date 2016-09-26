@@ -74,7 +74,9 @@ const Mall = React.createClass({
                     <div className="no-banner"></div>}
                 <div className={appIosTopWhite()}>
                     {backFactory()}
-                    <a href="http://mmall.9888.cn/static/mall/product-list/index.html?searchSourceTypeUrl=2"
+                    <a onClick={function () {
+                        gotoHandler("/static/mall/product-list/index.html?searchSourceTypeUrl=2", false)
+                    }}
                        className="search-bar-a"><img className="search-icon" src="images/search-icon.png"/>
                         <div className="search-bar">搜索</div>
                     </a>
