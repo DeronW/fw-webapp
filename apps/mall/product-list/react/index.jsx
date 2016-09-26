@@ -24,7 +24,7 @@ const ResultPage = React.createClass({
 						Filter.myConvertibleScore=data.score;
 						this.loadMoreProductHandler();
 		        	}else{
-		        		Filter.options.maxPoints=-1;
+		        		Filter.options.maxPoints=Filter.myConvertibleScore||'';
 		        	};
 	            } 
 	        });    			    	
@@ -235,7 +235,7 @@ const ExchangeBar = React.createClass({
             filterLevel:'不限',
             maxPoints:$FW.Format.urlQuery().searchSourceTypeUrl==1?Filter.myConvertibleScore:'',
             minPoints:'',
-            maxValue:$FW.Format.urlQuery().searchSourceTypeUrl==1?-1:'',
+            maxValue:$FW.Format.urlQuery().searchSourceTypeUrl==1?Filter.myConvertibleScore:'',
             minValue:'',
             myScore:$FW.Format.urlQuery().searchSourceTypeUrl==1?Filter.myConvertibleScore:0,
         }
