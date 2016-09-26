@@ -85,14 +85,14 @@ const Mall = React.createClass({
                     }}><img src="images/profile-icon.png"/></a>
                 </div>
                 <div className="head-user-info">
-                    <div className="my-score"><span className="my-score-icon"></span>我的工分:<span
+                    <div className="my-score">我的工分:<span
                         className="score-num">{this.state.user_score}工分</span></div>
                     <a className="my-exchange" onClick={function () {
                         gotoHandler("/static/mall/product-list/index.html?searchSourceTypeUrl=1", true)
-                    }}><span className="my-exchange-icon"></span>我可兑换</a>
+                    }}>我可兑换</a>
                     <a className="my-mall" onClick={function () {
                         gotoHandler("/static/mall/user/index.html", true)
-                    }}><span className="my-mall-icon"></span>我的商城</a>
+                    }}>我的商城</a>
                     <span className="vertical-gray-line"></span>
                 </div>
                 <div className="header-nav">

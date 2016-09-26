@@ -89,7 +89,7 @@ const ResultPage = React.createClass({
     		return (
     			 <div className="products-list">
                     {this.state.products.length ?this.state.products.map((p, index) => <ProductItem filterProducts={this.filterProducts} {...p} key={index}/>):
-                        <div className="empty-list">暂无商品</div>}
+                        <div className="empty-list"><img src="images/no-products.png"/></div>}
                 </div>
     		)
     	}
