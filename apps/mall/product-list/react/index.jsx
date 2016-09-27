@@ -178,8 +178,7 @@ const SearchBar = React.createClass({
     			this.setState({showSearchHistory:false});
     			
     		}    		  
-    		this.refs.searchInput.blur();
-    		
+    		this.refs.searchInput.blur();    		
     	}
     },
 
