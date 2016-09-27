@@ -52,7 +52,8 @@ const MAIN_APP_NAMES = [
     'topic-score', // 玩转工分
     'topic-interest-reward', // 年化加息奖励
     'topic-recommender-recruitment', //推荐人页面
-    'topic-annual-commision'//年化佣金页面
+    'topic-annual-commision',//年化佣金页面
+    'topic-invite',//邀请返利, 邀请人
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
