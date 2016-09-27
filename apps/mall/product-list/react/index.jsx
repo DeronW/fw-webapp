@@ -17,15 +17,11 @@ const ResultPage = React.createClass({
     componentDidMount: function () {
     	if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
 	    	 $FW.Ajax({
-	            url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
-	            success: (data) =>{
-		            if(data.is_login){
-						Filter.options.maxPoints=data.score;
-						Filter.myConvertibleScore=data.score;
-						this.loadMoreProductHandler();
-		        	}else{
-		        		Filter.options.maxPoints=Filter.myConvertibleScore||'';
-		        	};
+	            url: `${API_PATH}/api/v1/user-state-convertible.json`,//登录状态及工分
+	            success: (data) =>{		           
+					Filter.options.maxPoints=data.score;
+					Filter.myConvertibleScore=data.score;
+		        	this.loadMoreProductHandler();
 	            } 
 	        });    			    	
 	    }else if($FW.Format.urlQuery().searchSourceTypeUrl==2){
@@ -128,7 +124,8 @@ const SearchBar = React.createClass({
                 this.setState({history: data.searchRecords||[]});
     
             }
-        })
+        });
+        this.refs.searchInput.focus();
     },
     changeHandler: function (e) {
         this.setState({value: e.target.value})
@@ -138,16 +135,7 @@ const SearchBar = React.createClass({
         	this.props.filterProducts({productName: this.state.value});
         	this.props.setShowExchangeBar();
         	this.setState({showSearchHistory:false});
-        	$FW.Ajax({
-	            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
-	            data:{searchOpType:0,page:1},
-	            success: (data) => {
-	                this.setState({history: data.searchRecords||[]});
-	    
-	            }
-	        });
-        }
-        
+       }        
     },
     clearHistoryHandler: function () {    	
         $FW.Ajax({
@@ -171,23 +159,26 @@ const SearchBar = React.createClass({
     	this.setState({showSearchHistory:true});       
     	this.props.searchFocus();
     },
+    clickHistoryHandler: function () {
+    	this.setState({showSearchHistory:true});       
+    	this.props.searchFocus();
+    	$FW.Ajax({
+            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
+            data:{searchOpType:0,page:1},
+            success: (data) => {
+                this.setState({history: data.searchRecords||[]});    
+            }
+        });
+    },
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
     		if(this.state.value){
     			this.props.filterProducts({productName:this.state.value});    			
     			this.props.setShowExchangeBar();
     			this.setState({showSearchHistory:false});
-    			$FW.Ajax({
-		            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
-		            data:{searchOpType:0,page:1},
-		            success: (data) => {
-		                this.setState({history: data.searchRecords||[]});
-		    
-		            }
-		        });
+    			
     		}    		  
-    		this.refs.searchInput.blur();
-    		
+    		this.refs.searchInput.blur();    		
     	}
     },
 
@@ -224,6 +215,7 @@ const SearchBar = React.createClass({
                     <input autofocus="autofocus" type="search" value={this.state.value}
                            placeholder="请输入想找的商品"
                            onChange={this.changeHandler}
+                           onClick={this.clickHistoryHandler}
                            onBlur={this.onBlurHandler} 
                            onFocus={this.onFocusHandler}
                            onKeyDown={this.onKeyDownHandler}  
@@ -687,8 +679,9 @@ let Filter = {
 	        success: data => callback(data)
 	    })
 	}
-}
-$FW.DOMReady(function () {	
+};
+
+$FW.DOMReady(function () {		
     var title = $FW.Format.urlQuery().title || '商品列表';
     if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
     	title='我可兑换';

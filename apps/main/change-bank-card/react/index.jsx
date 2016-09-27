@@ -17,6 +17,12 @@ function space(str) {
     return str.replace(/ /g, "");
 }
 
+// 验证身份证
+function isCardNo(card) {
+    var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    return pattern.test(card);
+}
+
 var Nav = React.createClass({
     render: function() {
         return (
@@ -486,6 +492,7 @@ var Body = React.createClass({
         this.fromData;
         var _this = this;
 
+
         var getAjaxUserInfo = this.props.activity
 
         if(this.state.userInfo.realName === "") {
@@ -497,6 +504,12 @@ var Body = React.createClass({
             $FW.Component.Toast("身份证不能为空");
             return false;
         }
+
+        if(space(this.state.userInfo.bankCardNo).length != 18) {
+            $FW.Component.Toast("身份证不格式不正确");
+            return false;
+        }
+
 
         if(this.state.userInfo.bankCardNo === "") {
             $FW.Component.Toast("银行账号不能为空");
@@ -516,11 +529,13 @@ var Body = React.createClass({
             return false;
         }
 
-        if(this.state.validateCode == null) {
+        if(this.state.validateCode == null || this.state.validateCode == "") {
             $FW.Component.Toast("验证码不能为空");
 
             return false;
         }
+
+        console.log(this.state.validateCode);
 
         let bankCard = this.state.userInfo.bankCardNo;
         let bankNo = this.state.userInfo.bankNo;
@@ -643,6 +658,7 @@ var Body = React.createClass({
 });
 
 
+
 $FW.DOMReady(function() {
     ReactDOM.render(<Header title={"修改绑定银行卡"}/>, document.getElementById('header'));
     $FW.Ajax({
@@ -656,6 +672,47 @@ $FW.DOMReady(function() {
         }
     });
 });
+
+
+/*
+var ForEl = React.createClass({
+    getInitialState: function() {
+        return {
+            val: ""
+        };
+    },
+    inputChange: function(e) {
+        //console.log(e.target.value.length + " x");
+        console.log(numberFormat.format(e.target.value).length + " bbbbbbbbbb");
+        console.log(this.state.val.length + " x");
+
+        if(e.target.value.length) {
+
+        }
+
+        this.setState({
+            val: numberFormat.format(e.target.value)
+        });
+    },
+    render: function() {
+        return (
+            <div className="elm">
+                <input type="text" onChange={this.inputChange} value={this.state.val}/>
+
+            </div>
+        );
+    }
+});
+
+
+ReactDOM.render(
+    <ForEl/>,
+    document.getElementById("cnt")
+);
+
+*/
+
+
 
 
 

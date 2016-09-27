@@ -1,3 +1,5 @@
+
+
 const Form = React.createClass({
     getDefaultProps: function () {
         return {
@@ -13,14 +15,11 @@ const Form = React.createClass({
             phone:this.props.phone,
             money: "",
             counting: 0,
-            inputPhoneShow: false,
             phoneBlur: true,
             modifyPhoneShow: false
         }
     },
     componentDidUpdate: function() {
-        console.log(this.state.phoneBlur)
-
         if (this.state.phoneBlur) {
             if (ReactDOM.findDOMNode(this.refs.phoneRef) !== null) {
                 ReactDOM.findDOMNode(this.refs.phoneRef).focus();
@@ -53,10 +52,6 @@ const Form = React.createClass({
     moneyChangeHandler: function (e) {
         var money = e.target.value;
 
-        this.setState({
-            phoneBlur: false
-        });
-
         if(money[0] === "0" ) {
             this.setState({
                 money: ""
@@ -83,6 +78,8 @@ const Form = React.createClass({
     submitHandler: function () {
         var phoneVal = this.props.phone;
 
+        console.log(phoneVal);
+
         if(this.state.money < 1) {
             $FW.Component.Toast("充值金额不能低于1元");
         } else if (!this.state.money) {
@@ -107,15 +104,11 @@ const Form = React.createClass({
         }
     },
     handlerModifyPhone: function() {
-        this.setState({
-            phone: "",
-            inputPhoneShow: true,
-            phoneBlur: true
-        });
+        this.props.callbackPopModifyPhone(true);
     },
     handlerSave: function() {
         $FW.Ajax({
-            url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?=phoneNum' + this.state.phone,
+            url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?phoneNum=' + this.state.phone,
             success: (data) => {
                 this.setState({
                     modifyPhoneShow: false,
@@ -134,6 +127,7 @@ const Form = React.createClass({
         let btn_class = this.state.money >= 1 && this.state.phone ? "gqm blued" : "gqm gray";
 
         var propsPhone = this.props.phone;
+        var popModifyPhoneVal = this.props.addPopModifyPhone;
 
         var modifyPhone = function() {
             if(propsPhone == "") {
@@ -148,6 +142,8 @@ const Form = React.createClass({
             }
         };
 
+        console.log(this.props.addPopModifyPhone);
+
         return (
             <div className="modify">
                 <div className="money">
@@ -156,16 +152,13 @@ const Form = React.createClass({
                            placeholder="输入充值金额，最低1元"/>
                 </div>
                 <div className="money hao">
-                    {
-                        propsPhone == "" || this.state.inputPhoneShow ?
-                            <input className="recha phone-input" type="number"
-                                placeholder="输入银行预留手机号"
-                                value={this.state.phone}
-                                onChange={this.phoneChangeHandler}
-                                onBlur={this.handlerOnBlur}
-                                ref="phoneRef"
-                            /> : <div className="bank-phone-text">{propsPhone}</div>
-                    }
+                    <div className="bank-phone-text">
+                        {
+
+                            popModifyPhoneVal == "" ?  propsPhone :  popModifyPhoneVal.substring(0, 3) + "****" + popModifyPhoneVal.substring((popModifyPhoneVal.length - 4), popModifyPhoneVal.length)
+
+                        }
+                    </div>
 
                     {
                         modifyPhone()
