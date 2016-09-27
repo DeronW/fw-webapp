@@ -72,18 +72,6 @@ const CashRecords = React.createClass({
                 })
             }
         }
-
-        // this.setState({
-        //     month: [{
-        //         title: '2016年8月',
-        //         records: [{
-        //             money: '425',
-        //             time: (+new Date()) / 1000,
-        //             state: 0,
-        //             order_id: 'ETEN201608120000'
-        //         }]
-        //     }]
-        // })
     },
     stateText: function (n) {
         // 0：未处理；1：出纳通过；2：出纳拒绝；3：会计通过；4：会计拒绝；5：预审拒绝；6：退款会计审核中；7：退款会计批准；8：退款会计拒绝；9：提现成功；10：提现失败；11：处理中
@@ -132,8 +120,13 @@ const CashRecords = React.createClass({
             )
         };
 
+        let empty = this.state.month.length ? null : <div className="empty-records">暂无记录</div>;
+
         return (
-            <div> {this.state.month.map(month)} </div>
+            <div>
+                {this.state.month.map(month)}
+                {empty}
+            </div>
         )
     }
 });
