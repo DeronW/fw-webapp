@@ -22,10 +22,11 @@ const ResultPage = React.createClass({
 		            if(data.is_login){
 						Filter.options.maxPoints=data.score;
 						Filter.myConvertibleScore=data.score;
-						this.loadMoreProductHandler();
+						
 		        	}else{
 		        		Filter.options.maxPoints=Filter.myConvertibleScore||'';
 		        	};
+		        	this.loadMoreProductHandler();
 	            } 
 	        });    			    	
 	    }else if($FW.Format.urlQuery().searchSourceTypeUrl==2){
