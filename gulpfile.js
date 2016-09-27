@@ -48,6 +48,7 @@ const MAIN_APP_NAMES = [
 
     // 专题页面
     'topic-hui-shang', // 徽商专题页面
+    'topic-hui-shang-guide',//徽商用户引导页面
     'topic-score', // 玩转工分
     'topic-interest-reward', // 年化加息奖励
     'topic-recommender-recruitment', //推荐人页面
@@ -63,7 +64,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-        api_path: "http://xjb.9888.cn/",
+        api_path: "http://localhost/fake-api/",
         include_components: common_components,
         include_common_js: common_js
     });
