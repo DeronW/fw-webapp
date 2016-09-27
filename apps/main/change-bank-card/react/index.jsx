@@ -68,6 +68,31 @@ var PhoneCodePrompt = React.createClass({
     }
 });
 
+var Pop = React.createClass({
+    handlerCancel: function() {
+        this.props.callbackPopShow(false);
+    },
+    handlerConfirm: function() {
+        this.props.callbackPopShow(false);
+    },
+    render: function() {
+        return (
+            <div className="pop-body" style={{zIndex: 1000000}}>
+                <div className="pop-back"></div>
+                <div className="pop-cnt">
+                    <div className="pop-info">
+                        <p>您填写的银行卡不支持快捷充值，只能用于提现，确认要提交吗</p>
+                    </div>
+                    <div className="pop-btn">
+                        <div className="cancel-btn btn l-btn" onClick={this.handlerCancel} >修改</div>
+                        <div className="confirm-btn btn r-btn" onClick={this.handlerConfirm}>确定</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+});
+
 
 var TopNav = React.createClass({
     getInitialState: function() {
@@ -243,8 +268,6 @@ var From = React.createClass({
             }
         };
 
-        console.log(this.state.format_bankCard);
-
         return (
             <div className="">
                 <div className="from-block">
@@ -311,7 +334,8 @@ var From = React.createClass({
 var SelectBank = React.createClass({
     getInitialState: function() {
         return {
-            bankListData: null
+            bankListData: null,
+            notSupportQuickPayList: null
         };
     },
     componentDidMount: function() {
@@ -327,6 +351,11 @@ var SelectBank = React.createClass({
             }
         });
     },
+    componentWillReceiveProps: function(nextProps) {
+        if(!nextProps.callbackPopShowConfirm) {
+            this.notSupportQuickPayClick();
+        }
+    },
     backBtnClick: function() {
         this.props.callbackBtn(false);
     },
@@ -336,9 +365,17 @@ var SelectBank = React.createClass({
         //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayClick: function(index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
+        this.props.callbackAlreadyBank(this.state.notSupportQuickPayList)
         this.props.callbackBtn(false);
+
         //this.props.callbackSelectBankNullOderIs(false);
+    },
+    notSupportQuickPayList: function(index) {
+        this.props.callbackPopShow(true);
+
+        this.setState({
+            notSupportQuickPayList: this.state.bankListData.bankList[index]
+        })
     },
     render: function() {
         var _this = this;
@@ -359,7 +396,7 @@ var SelectBank = React.createClass({
         };
 
         var notQuickPayli = function(comment, index) {
-            return <li key={index} onClick={_this.notSupportQuickPayClick.bind(this, index)} ref={"item" + index}>
+            return <li key={index} onClick={_this.notSupportQuickPayList.bind(this, index)} ref={"item" + index}>
                 <img src={comment.logoUrl} className="logo-img" />
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
@@ -423,6 +460,7 @@ var Body = React.createClass({
             validateCode: null,
             pleaseCode: true,
             nueOldUser: true,
+            popShow: false,
             userInfo: {
                 bankCardNo: getAjaxUserInfo.userInfo.bankCard,
                 bankNo: getAjaxUserInfo.userInfo.bankId,
@@ -557,6 +595,11 @@ var Body = React.createClass({
         });
 
     },
+    getPopShow: function(booleanVal) {
+        this.setState({
+            popShow: booleanVal
+        });
+    },
     render: function() {
         var _this = this;
 
@@ -579,11 +622,20 @@ var Body = React.createClass({
 
 
                 {
-                    this.state.backSelect ? <SelectBank callbackBtn={this.selectBank} callbackAlreadyBank={this.alreadySelectBank}/> : null
+                    this.state.backSelect ? <SelectBank callbackPopShow={this.getPopShow}
+                                                        callbackBtn={this.selectBank}
+                                                        callbackAlreadyBank={this.alreadySelectBank}
+                                                        callbackPopShowConfirm={this.state.popShow}
+                                            /> : null
                 }
 
 
                 {this.state.loading}
+
+                {
+                    this.state.popShow ? <Pop callbackPopShow={this.getPopShow}
+                                              /> : null
+                }
             </div>
 
         );
