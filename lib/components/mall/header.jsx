@@ -31,7 +31,7 @@ const Header = React.createClass({
         NativeBridge.isReady && NativeBridge.close();
     },
     render: function () {
-        let fontSize = '40px';
+        let fontSize = '36px';
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
         if (this.props.title && this.props.title.length > 7) fontSize = '32px';
