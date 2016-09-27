@@ -19,7 +19,7 @@ function space(str) {
 
 // 验证身份证
 function isCardNo(card) {
-    var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    var pattern = /(^\d{15}$)|(^\d{19}$)|(^\d{17}(\d|X|x)$)/;
     return pattern.test(card);
 }
 
