@@ -2,17 +2,6 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
-
-var Nav = React.createClass({
-    render: function () {
-        return (
-            <div className="nav-block">
-                <img src={this.props.imgUrl}/>
-            </div>
-        );
-    }
-});
-
 var TopNav = React.createClass({
     render: function () {
         return (
@@ -24,16 +13,6 @@ var TopNav = React.createClass({
                     <div className="title">{this.props.title}</div>
                     <span className="r-text" onClick={this.props.btnFun}>{this.props.btnText}</span>
                 </div>
-            </div>
-        );
-    }
-});
-
-var Btn = React.createClass({
-    render: function () {
-        return (
-            <div className="btn-area">
-                <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>{this.props.btnText}</div>
             </div>
         );
     }
@@ -55,15 +34,15 @@ var PswFrom = React.createClass({
     componentWillUnmount: function () {
         clearInterval(this.interval);
     },
-    componentWillReceiveProps: function(nextProps) {
-        if(this.state.countdown == 0 && (+new Date())　-　nextProps.callVoicePhone  < 10) {
+    componentWillReceiveProps: function (nextProps) {
+        if (this.state.countdown == 0 && (+new Date()) - nextProps.callVoicePhone < 10) {
             this.setState({
                 codeType: 3,
                 isVmsType: "VMS"
             }, this.handerIdentifyingCode);
         } else {
-            if((+new Date())　-　nextProps.callVoicePhone  < 10) {
-                if(this.state.countdown > 0 && this.state.countdown !== 60) {
+            if ((+new Date()) - nextProps.callVoicePhone < 10) {
+                if (this.state.countdown > 0 && this.state.countdown !== 60) {
                     $FW.Component.Toast(this.state.countdown + "s后才能获取");
                 }
             }
@@ -71,40 +50,33 @@ var PswFrom = React.createClass({
 
     },
     handerIdentifyingCode: function (codeBoolean) {
-        if(codeBoolean == "VMSCode") {
+        if (codeBoolean == "VMSCode") {
             this.props.callbackPromptShow(true);
         }
-
-        var _this = this;
 
         this.setState({
             code: true,
             countdown: 60
         });
 
-
         this.interval = setInterval(function () {
-            this.setState({
-                countdown: this.state.countdown - 1
-            });
-
+            this.setState({countdown: this.state.countdown - 1});
             if (this.state.countdown == 0) {
                 clearInterval(this.interval);
-
-                this.setState({
-                    code: false
-                });
+                this.setState({code: false});
             }
-
         }.bind(this), 1000);
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml",
             method: "GET",
-            success: function (data) {
-            }
+            data: {
+                type: this.state.codeType,
+                destPhoneNo: this.state.phoneNumber,
+                isVms: this.state.isVmsType
+            },
+            success: ()=> null
         })
-
     },
     handerChangeInput: function (event) {
         this.props.callbackInputVal(event.target.value)
@@ -114,12 +86,10 @@ var PswFrom = React.createClass({
         return (
             <div className="from-block setting-trading-from">
                 <div className="input-block">
-                    <span className="icon phone-n-icon"></span>
+                    <span className="icon phone-n-icon"> </span>
                     <div className="text-block">
                         <span className="text phone-n-text">
-                            {
-                                this.state.phoneNumber.substring(0, 3) + "****" + this.state.phoneNumber.substring((this.state.phoneNumber.length - 4), this.state.phoneNumber.length)
-                            }
+                            {pocketPhoneNumber(this.state.phoneNumber)}
                         </span>
                     </div>
                 </div>
@@ -133,7 +103,8 @@ var PswFrom = React.createClass({
                         {
                             this.state.code ?
                                 <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
-                                <span className="btn" onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
+                                <span className="btn"
+                                      onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
                         }
                     </span>
                 </div>
@@ -152,13 +123,13 @@ var Body = React.createClass({
             phoneNumber: userInfoData.userInfo.phoneNum,
             code: null,
             promptShow: false,
-            callbackCountdownInfo: null,
+            // callbackCountdownInfo: null,
             countdown: 10,
             countdownVal: false,
             popShow: false
         };
     },
-    componentWillUnmount: function() {
+    componentWillUnmount: function () {
         clearInterval(this.interval);
     },
     handlerSettingsPassword: function () {
@@ -167,46 +138,25 @@ var Body = React.createClass({
             idCardNo + "&validateCode=" + this.state.code;
     },
     getCallbackInputVal: function (val) {
-        this.setState({
-            code: val
-        });
+        this.setState({code: val});
     },
     getPromptShow: function (booleanVal) {
-        this.setState({
-            promptShow: booleanVal
-        });
+        this.setState({promptShow: booleanVal});
     },
-    handlerVoice: function() {
-        this.setState({voice: +new Date()})
-
-        var _this = this;
-
-    /*    $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + this.state.phoneNumber + "&isVms=VMS",
-            method: "GET",
-            success: function(data) {
-                console.log(data);
-            }
-        });*/
+    handlerVoice: function () {
+        this.setState({voice: +new Date()});
     },
-    getCountdownVal: function(val) {
-        this.setState({
-            callbackCountdownInfo: val
-        });
+    // getCountdownVal: function (val) {
+    //     this.setState({callbackCountdownInfo: val});
+    // },
+    getCancelBtn: function () {
+        this.setState({popShow: false});
     },
-    getCancelBtn: function() {
-        this.setState({
-            popShow: false
-        });
-    },
-    getConfirmBtn: function() {
+    getConfirmBtn: function () {
         window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
-
     },
-    rightBtnFun: function() {
-        this.setState({
-            popShow: true
-        });
+    rightBtnFun: function () {
+        this.setState({popShow: true});
     },
     render: function () {
 
@@ -214,7 +164,9 @@ var Body = React.createClass({
             <div>
                 <TopNav title={"设置交易密码" } backBtn={true} btnText="关闭" btnFun={this.rightBtnFun}/>
 
-                <Nav imgUrl={"images/process-2.png"}/>
+                <div className="nav-block">
+                    <img src="images/process-2.png"/>
+                </div>
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
                     callbackInputVal={this.getCallbackInputVal}
@@ -228,15 +180,16 @@ var Body = React.createClass({
                         this.state.promptShow ?
                             <div className="old-user-prompt-text">
                                 已向手机
-                                {
-                                    this.state.phoneNumber.substring(0, 3) + "****" + this.state.phoneNumber.substring((this.state.phoneNumber.length - 4), this.state.phoneNumber.length)
-                                }
-                                发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
+                                {pocketPhoneNumber(this.state.phoneNumber)}
+                                发送短信验证码，若收不到，请
+                                <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
                             </div> : null
                     }
                 </div>
 
-                <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword}/>
+                <div className="btn-area">
+                    <div className="ui-btn ui-red-btn" onClick={this.handlerSettingsPassword}>设置交易密码</div>
+                </div>
 
                 {
                     this.state.popShow ? <Pop
@@ -250,7 +203,7 @@ var Body = React.createClass({
 });
 
 var Pop = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="pop-body">
                 <div className="pop-back"></div>
@@ -268,10 +221,7 @@ var Pop = React.createClass({
     }
 });
 
-
 $FW.DOMReady(function () {
-/*    ReactDOM.render(<Header title={"设置交易密码"} sub_text={'关闭'} sub_url={'javascript:popFun()'}/>,
-        document.getElementById('header'));*/
 
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
@@ -284,3 +234,7 @@ $FW.DOMReady(function () {
     });
 });
 
+function pocketPhoneNumber(phone) {
+    phone += '';
+    return `${phone.substr(0, 3)}****${phone.substr(phone.length - 4)}`;
+}
