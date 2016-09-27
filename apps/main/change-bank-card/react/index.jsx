@@ -19,7 +19,7 @@ function space(str) {
 
 // 验证身份证
 function isCardNo(card) {
-    var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    var pattern = /(^\d{15}$)|(^\d{19}$)|(^\d{17}(\d|X|x)$)/;
     return pattern.test(card);
 }
 
@@ -313,7 +313,6 @@ var From = React.createClass({
                         <div className="text-block">
                             <input type="text" placeholder="请输入银行卡号"
                                    onClick={this.bankInputEndHandler}
-                                   onBlur={this.bankInputEndHandler}
                                    onChange={this.changeBankCard} value={this.state.format_bankCard}/>
                         </div>
                     </div>
@@ -508,6 +507,8 @@ var Body = React.createClass({
         var _this = this;
 
 
+        console.log(isCardNo(space(this.state.userInfo.bankCardNo)));
+
         var getAjaxUserInfo = this.props.activity
 
         if (this.state.userInfo.realName === "") {
@@ -520,8 +521,8 @@ var Body = React.createClass({
             return false;
         }
 
-        if (space(this.state.userInfo.bankCardNo).length != 18) {
-            $FW.Component.Toast("身份证不格式不正确");
+        if (!isCardNo(space(this.state.userInfo.bankCardNo))) {
+            $FW.Component.Toast("银行账号格式不正确");
             return false;
         }
 
