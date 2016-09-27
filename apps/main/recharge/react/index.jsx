@@ -3,23 +3,21 @@ const API_PATH = document.getElementById("api-path").value;
 var numberFormat = {
     val: "",
     phone: "",
-    format: function(val) {
-        this.val = val.replace(/[^\d.]/g, "").
-        //只允许一个小数点
-        replace(/^\./g, "").replace(/\.{2,}/g, ".").
-        //只能输入小数点后两位
+    format: function (val) {
+        this.val = val.replace(/[^\d.]/g, "").//只允许一个小数点
+        replace(/^\./g, "").replace(/\.{2,}/g, ".").//只能输入小数点后两位
         replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
 
         return this.val;
     },
-    phoneFun: function(phoneVal) {
-        this.phone = val.replace(/[^\d.]/g, "");
+    phoneFun: function (phoneVal) {
+        this.phone = phoneVal.replace(/[^\d.]/g, "");
 
         return this.phone;
     }
 };
 
-function isMobilePhone (phone) {
+function isMobilePhone(phone) {
     return /^1(3|4|5|7|8)\d{9}$/.test(phone)
 }
 
@@ -46,7 +44,7 @@ const Mask = React.createClass({
 });
 
 const Pop = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="pop-body">
                 <div className="pop-back"></div>
@@ -94,17 +92,17 @@ const Recharge = React.createClass({
     inspectResult: function () {
         this.setState({order_state: 'fail'})
     },
-    handlerPhone: function() {
+    handlerPhone: function () {
         this.setState({
             popShow: true
         });
     },
-    getCancelBtn: function() {
+    getCancelBtn: function () {
         this.setState({
             popShow: false
         });
     },
-    getConfirmBtn: function() {
+    getConfirmBtn: function () {
         this.setState({
             popShow: false
         });
@@ -170,11 +168,6 @@ const Recharge = React.createClass({
                     <div className="atpr">
                         <img className="card-d" src="images/card-d.png"/>
                         <span className="online">充值需开通银行卡网上支付功 能，如有疑问请咨询开户行客服；</span>
-                    </div>
-                    <div className="atpr">
-                        <img className="card-d" src="images/card-d.png"/>
-                        <span className="online">单笔充值不可超过该银行充值限额，
-                            <span className="colr">查看各银行充值限额；</span></span>
                     </div>
                     <div className="atpr"><img className="card-d" src="images/card-d.png"/>
                         <span className="online">如果充值金额没有及时到账，请<span

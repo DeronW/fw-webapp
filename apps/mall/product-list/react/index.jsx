@@ -89,7 +89,7 @@ const ResultPage = React.createClass({
     		return (
     			 <div className="products-list">
                     {this.state.products.length ?this.state.products.map((p, index) => <ProductItem filterProducts={this.filterProducts} {...p} key={index}/>):
-                        <div className="empty-list">暂无商品</div>}
+                        <div className="empty-list"><img src="images/no-products.png"/></div>}
                 </div>
     		)
     	}
@@ -134,10 +134,18 @@ const SearchBar = React.createClass({
         this.setState({value: e.target.value})
     },
     searchHandler: function () {   
-    	if(this.state.value){
+    	if(this.state.value){    		
         	this.props.filterProducts({productName: this.state.value});
         	this.props.setShowExchangeBar();
         	this.setState({showSearchHistory:false});
+        	$FW.Ajax({
+	            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
+	            data:{searchOpType:0,page:1},
+	            success: (data) => {
+	                this.setState({history: data.searchRecords||[]});
+	    
+	            }
+	        });
         }
         
     },
@@ -166,9 +174,17 @@ const SearchBar = React.createClass({
     onKeyDownHandler: function (e) {
     	if(e.keyCode==13){
     		if(this.state.value){
-    			this.props.filterProducts({productName:this.state.value});
+    			this.props.filterProducts({productName:this.state.value});    			
     			this.props.setShowExchangeBar();
     			this.setState({showSearchHistory:false});
+    			$FW.Ajax({
+		            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
+		            data:{searchOpType:0,page:1},
+		            success: (data) => {
+		                this.setState({history: data.searchRecords||[]});
+		    
+		            }
+		        });
     		}    		  
     		this.refs.searchInput.blur();
     		
