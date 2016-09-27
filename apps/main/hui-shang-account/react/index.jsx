@@ -88,8 +88,10 @@ var Earnings = React.createClass({
         return (
             <div className="hui-shang-earnings">
                 <div className="earnings-title">
-                    <div className="text">昨日收益(元)</div>
-                    <div className="number-text">{dataInfo.lastIncome}</div>
+                    <div className="text">累计收益(元)</div>
+                    <div className="number-text">
+                        {dataInfo.totalIncome}
+                    </div>
                 </div>
 
                 <div className="info">
@@ -97,13 +99,9 @@ var Earnings = React.createClass({
                         <div className="number-text c-fb6455">{dataInfo.availableBalance}</div>
                         <div className="text">可用余额(元)</div>
                     </div>
-                    <div className="paragraph">
-                        <div className="number-text">{dataInfo.sevenDayRate}%</div>
-                        <div className="text">七日年化收益率</div>
-                    </div>
                     <div className="paragraph last">
-                        <div className="number-text">{dataInfo.totalIncome}</div>
-                        <div className="text">累计收益(元)</div>
+                        <div className="number-text">{dataInfo.frozenBalance}</div>
+                        <div className="text">冻结金额(元)</div>
                     </div>
                 </div>
             </div>

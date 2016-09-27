@@ -124,7 +124,7 @@ var BankAccount = React.createClass({
 	render : function(){
 
 		let list = ()=> {
-			var li = (d, index) => <li key={index} onClick={this.bankHandler.bind(this, index)} >{d.bankName} <img src="images/card-c.png"/></li>;
+			var li = (d, index) => <li key={index} onClick={this.bankHandler.bind(this, index)} ><span className="">{d.bankName}</span> <img src="images/card-c.png"/></li>;
 
 			return <ul className="list">{this.state.bankList.map(li)}</ul>;
 		};

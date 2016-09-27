@@ -19,6 +19,8 @@ const Form = React.createClass({
         }
     },
     componentDidUpdate: function() {
+        console.log(this.state.phoneBlur)
+
         if (this.state.phoneBlur) {
             if (ReactDOM.findDOMNode(this.refs.phoneRef) !== null) {
                 ReactDOM.findDOMNode(this.refs.phoneRef).focus();
@@ -51,6 +53,10 @@ const Form = React.createClass({
     moneyChangeHandler: function (e) {
         var money = e.target.value;
 
+        this.setState({
+            phoneBlur: false
+        });
+
         if(money[0] === "0" ) {
             this.setState({
                 money: ""
@@ -76,8 +82,6 @@ const Form = React.createClass({
     },
     submitHandler: function () {
         var phoneVal = this.props.phone;
-
-        console.log(phoneVal);
 
         if(this.state.money < 1) {
             $FW.Component.Toast("充值金额不能低于1元");
@@ -106,11 +110,12 @@ const Form = React.createClass({
         this.setState({
             phone: "",
             inputPhoneShow: true,
+            phoneBlur: true
         });
     },
     handlerSave: function() {
         $FW.Ajax({
-            url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?phoneNum=' + this.state.phone,
+            url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?=phoneNum' + this.state.phone,
             success: (data) => {
                 this.setState({
                     modifyPhoneShow: false,
