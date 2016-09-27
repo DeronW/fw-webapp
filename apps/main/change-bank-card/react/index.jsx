@@ -17,6 +17,12 @@ function space(str) {
     return str.replace(/ /g, "");
 }
 
+// 验证身份证
+function isCardNo(card) {
+    var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    return pattern.test(card);
+}
+
 var Nav = React.createClass({
     render: function() {
         return (
@@ -63,6 +69,31 @@ var PhoneCodePrompt = React.createClass({
         return (
             <div className="old-user-prompt-text">
                 已向手机{idCarNoNntercept}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
+            </div>
+        );
+    }
+});
+
+var Pop = React.createClass({
+    handlerCancel: function() {
+        this.props.callbackPopShow(false);
+    },
+    handlerConfirm: function() {
+        this.props.callbackPopShow(false);
+    },
+    render: function() {
+        return (
+            <div className="pop-body" style={{zIndex: 1000000}}>
+                <div className="pop-back"></div>
+                <div className="pop-cnt">
+                    <div className="pop-info">
+                        <p>您填写的银行卡不支持快捷充值，只能用于提现，确认要提交吗</p>
+                    </div>
+                    <div className="pop-btn">
+                        <div className="cancel-btn btn l-btn" onClick={this.handlerCancel} >修改</div>
+                        <div className="confirm-btn btn r-btn" onClick={this.handlerConfirm}>确定</div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -243,8 +274,6 @@ var From = React.createClass({
             }
         };
 
-        console.log(this.state.format_bankCard);
-
         return (
             <div className="">
                 <div className="from-block">
@@ -311,7 +340,8 @@ var From = React.createClass({
 var SelectBank = React.createClass({
     getInitialState: function() {
         return {
-            bankListData: null
+            bankListData: null,
+            notSupportQuickPayList: null
         };
     },
     componentDidMount: function() {
@@ -327,6 +357,11 @@ var SelectBank = React.createClass({
             }
         });
     },
+    componentWillReceiveProps: function(nextProps) {
+        if(!nextProps.callbackPopShowConfirm) {
+            this.notSupportQuickPayClick();
+        }
+    },
     backBtnClick: function() {
         this.props.callbackBtn(false);
     },
@@ -336,9 +371,17 @@ var SelectBank = React.createClass({
         //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayClick: function(index) {
-        this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
+        this.props.callbackAlreadyBank(this.state.notSupportQuickPayList)
         this.props.callbackBtn(false);
+
         //this.props.callbackSelectBankNullOderIs(false);
+    },
+    notSupportQuickPayList: function(index) {
+        this.props.callbackPopShow(true);
+
+        this.setState({
+            notSupportQuickPayList: this.state.bankListData.bankList[index]
+        })
     },
     render: function() {
         var _this = this;
@@ -359,7 +402,7 @@ var SelectBank = React.createClass({
         };
 
         var notQuickPayli = function(comment, index) {
-            return <li key={index} onClick={_this.notSupportQuickPayClick.bind(this, index)} ref={"item" + index}>
+            return <li key={index} onClick={_this.notSupportQuickPayList.bind(this, index)} ref={"item" + index}>
                 <img src={comment.logoUrl} className="logo-img" />
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
@@ -423,6 +466,7 @@ var Body = React.createClass({
             validateCode: null,
             pleaseCode: true,
             nueOldUser: true,
+            popShow: false,
             userInfo: {
                 bankCardNo: getAjaxUserInfo.userInfo.bankCard,
                 bankNo: getAjaxUserInfo.userInfo.bankId,
@@ -448,6 +492,7 @@ var Body = React.createClass({
         this.fromData;
         var _this = this;
 
+
         var getAjaxUserInfo = this.props.activity
 
         if(this.state.userInfo.realName === "") {
@@ -459,6 +504,12 @@ var Body = React.createClass({
             $FW.Component.Toast("身份证不能为空");
             return false;
         }
+
+        if(space(this.state.userInfo.bankCardNo).length != 18) {
+            $FW.Component.Toast("身份证不格式不正确");
+            return false;
+        }
+
 
         if(this.state.userInfo.bankCardNo === "") {
             $FW.Component.Toast("银行账号不能为空");
@@ -478,11 +529,13 @@ var Body = React.createClass({
             return false;
         }
 
-        if(this.state.validateCode == null) {
+        if(this.state.validateCode == null || this.state.validateCode == "") {
             $FW.Component.Toast("验证码不能为空");
 
             return false;
         }
+
+        console.log(this.state.validateCode);
 
         let bankCard = this.state.userInfo.bankCardNo;
         let bankNo = this.state.userInfo.bankNo;
@@ -557,6 +610,11 @@ var Body = React.createClass({
         });
 
     },
+    getPopShow: function(booleanVal) {
+        this.setState({
+            popShow: booleanVal
+        });
+    },
     render: function() {
         var _this = this;
 
@@ -579,11 +637,20 @@ var Body = React.createClass({
 
 
                 {
-                    this.state.backSelect ? <SelectBank callbackBtn={this.selectBank} callbackAlreadyBank={this.alreadySelectBank}/> : null
+                    this.state.backSelect ? <SelectBank callbackPopShow={this.getPopShow}
+                                                        callbackBtn={this.selectBank}
+                                                        callbackAlreadyBank={this.alreadySelectBank}
+                                                        callbackPopShowConfirm={this.state.popShow}
+                                            /> : null
                 }
 
 
                 {this.state.loading}
+
+                {
+                    this.state.popShow ? <Pop callbackPopShow={this.getPopShow}
+                                              /> : null
+                }
             </div>
 
         );
