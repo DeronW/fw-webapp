@@ -150,7 +150,7 @@ const SearchBar = React.createClass({
     backHandler: function () {
        history.back();
        //App里面后退不起作用 判断在App环境当中关掉当前webview
-        //NativeBridge.isReady && NativeBridge.close();
+        NativeBridge.isReady && NativeBridge.close();
     },
     onBlurHandler: function () {
        this.props.searchBlur();

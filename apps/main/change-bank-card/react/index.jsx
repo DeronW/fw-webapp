@@ -238,7 +238,7 @@ var From = React.createClass({
         });
 
     },
-    bankInputClickHandler: function (e) {
+    bankInputEndHandler: function (e) {
         e.target.setSelectionRange(99, 99);
     },
     render: function () {
@@ -312,7 +312,7 @@ var From = React.createClass({
                         <span className="icon number-icon"></span>
                         <div className="text-block">
                             <input type="text" placeholder="请输入银行卡号"
-                                   onClick={this.bankInputClickHandler}
+                                   onClick={this.bankInputEndHandler}
                                    onChange={this.changeBankCard} value={this.state.format_bankCard}/>
                         </div>
                     </div>
