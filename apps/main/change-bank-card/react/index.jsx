@@ -239,7 +239,7 @@ var From = React.createClass({
 
     },
     bankInputClickHandler: function (e) {
-        e.target.setSelection(99, 99);
+        e.target.setSelectionRange(99, 99);
     },
     render: function () {
         var _this = this;
