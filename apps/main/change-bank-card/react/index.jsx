@@ -313,7 +313,6 @@ var From = React.createClass({
                         <div className="text-block">
                             <input type="text" placeholder="请输入银行卡号"
                                    onClick={this.bankInputEndHandler}
-                                   onBlur={this.bankInputEndHandler}
                                    onChange={this.changeBankCard} value={this.state.format_bankCard}/>
                         </div>
                     </div>
