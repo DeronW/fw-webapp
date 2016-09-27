@@ -110,7 +110,7 @@ const Form = React.createClass({
     },
     handlerSave: function() {
         $FW.Ajax({
-            url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?phoneNum=' + this.state.phone,
+            url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?=phoneNum' + this.state.phone,
             success: (data) => {
                 this.setState({
                     modifyPhoneShow: false,

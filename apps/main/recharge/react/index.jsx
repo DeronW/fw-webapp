@@ -13,7 +13,7 @@ var numberFormat = {
         return this.val;
     },
     phoneFun: function(phoneVal) {
-        this.phone = phoneVal.replace(/[^\d.]/g, "");
+        this.phone = val.replace(/[^\d.]/g, "");
 
         return this.phone;
     }
@@ -147,10 +147,10 @@ const Recharge = React.createClass({
                 <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服
                     <span className="blue">400-6766-988</span></div>
 
-                <Form countingSeconds={60} 
+                <Form countingSeconds={60}
                       orderConfirm={this.orderConfirm}
                       phone={this.props.data.bankInfo.bankPhone}
-                        
+
                 />
 
                 <div className="rmd">
