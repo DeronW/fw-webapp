@@ -680,15 +680,7 @@ let Filter = {
 	    })
 	}
 };
-if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
-	$FW.Ajax({
-        url: `${API_PATH}/api/v1/user-state-convertible.json`,//登录状态及工分
-        success: (data) =>{	           
-			Filter.options.maxPoints=data.score;
-			Filter.myConvert6ibleScore=data.score;	        	
-        } 
-    });    			    	
-};
+
 $FW.DOMReady(function () {		
     var title = $FW.Format.urlQuery().title || '商品列表';
     if($FW.Format.urlQuery().searchSourceTypeUrl==1){    	
