@@ -540,7 +540,7 @@ const ExchangeBar = React.createClass({
             		}else if(_this.state.sort==3){
             			return 'rank-icon-down'
             		}else{
-            			return 'rank-icon'
+            			return ''
             		}
             	}else if(j=='salestime'){
             		if(_this.state.sort==0){
@@ -548,7 +548,7 @@ const ExchangeBar = React.createClass({
             		}else if(_this.state.sort==5){
             			return 'rank-icon-down'
             		}else{
-            			return 'rank-icon'
+            			return ''
             		}
             	}else if(j=='scorerank'){
             		if(_this.state.sort==2){
@@ -556,7 +556,7 @@ const ExchangeBar = React.createClass({
             		}else if(_this.state.sort==1){
             			return 'rank-icon-down'
             		}else{
-            			return 'rank-icon'
+            			return ''
             		}
             	}else{
             		return 'rank-icon-no'
@@ -565,7 +565,7 @@ const ExchangeBar = React.createClass({
             return (
                 <div key={i} className={i==_this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
                      onClick={function(){_this.tabClickHandler(i)}}>
-                    {name[i]}<span className={rank_icon(i)}></span>
+                    {name[i]}<span className={"rank-icon "+rank_icon(i)}></span>
                 </div>
             )
         };
