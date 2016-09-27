@@ -7,7 +7,8 @@ const CashRecords = React.createClass({
         return {
             page: 0,
             totalPage: null,
-            month: []
+            month: [],
+            listFalse: false
         }
     },
     componentDidMount: function () {
@@ -24,6 +25,14 @@ const CashRecords = React.createClass({
             enable_loading: true,
             success: (data) => {
                 let month = this.state.month;
+
+                if(data.pageData.result.length == 0) {
+                    this.setState({
+                        listFalse: true
+                    });
+                }
+
+                console.log(data.pageData.result);
 
                 data.pageData.result.forEach((i)=>insertRecord(month, format_record(i)));
 
@@ -120,7 +129,7 @@ const CashRecords = React.createClass({
             )
         };
 
-        let empty = this.state.month.length ? null : <div className="empty-records">暂无记录</div>;
+        let empty = this.state.listFalse ? <div className="empty-records">暂无记录</div> : null ;
 
         return (
             <div>
