@@ -16,8 +16,8 @@ const Header = React.createClass({
         }
     },
     backClickHandler: function () {
-        alert("a");
-        this.props.back_handler ? this.props.back_handler() : history.back();
+        alert(this.props.back_handler);
+        this.props.back_handler ? this.props.back_handler() : window.history.back();
     },
     render: function () {
         let fontSize = '40px';
