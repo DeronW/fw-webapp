@@ -675,6 +675,7 @@ var Body = React.createClass({
 });
 
 
+
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"修改绑定银行卡"}/>, document.getElementById('header'));
     $FW.Ajax({
@@ -688,45 +689,6 @@ $FW.DOMReady(function () {
         }
     });
 });
-
-
-/*
- var ForEl = React.createClass({
- getInitialState: function() {
- return {
- val: ""
- };
- },
- inputChange: function(e) {
- //console.log(e.target.value.length + " x");
- console.log(numberFormat.format(e.target.value).length + " bbbbbbbbbb");
- console.log(this.state.val.length + " x");
-
- if(e.target.value.length) {
-
- }
-
- this.setState({
- val: numberFormat.format(e.target.value)
- });
- },
- render: function() {
- return (
- <div className="elm">
- <input type="text" onChange={this.inputChange} value={this.state.val}/>
-
- </div>
- );
- }
- });
-
-
- ReactDOM.render(
- <ForEl/>,
- document.getElementById("cnt")
- );
-
- */
 
 
 

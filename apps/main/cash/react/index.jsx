@@ -409,6 +409,7 @@ const Withdrawals = React.createClass({
 			</div>
 		};
 
+		console.log(!this.props.data.bankInfo.isSpecial);
 
 		return (
 
@@ -462,7 +463,7 @@ const Withdrawals = React.createClass({
 					</div>
 
 					{
-						this.state.modifyShow ? <div className="modify" onClick={this.handlerSelectPopFun} >
+						this.state.modifyShow || this.props.data.bankInfo.isSpecial ? <div className="modify" onClick={this.handlerSelectPopFun} >
 							<div className="wire"></div>
 							<div className="pure">
 								<div className="xuanwu" style={{fontSize:'32px'}}>
