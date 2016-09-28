@@ -59,7 +59,7 @@
 <script>
     function gotoInvest() {
         if ($FW.Browser.inApp()) {
-            NativeBridge.toNative('app_invest_immediately');
+            NativeBridge.close();
         } else {
             location.href = 'http://m.9888.cn/mpwap'
         }
