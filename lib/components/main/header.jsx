@@ -17,7 +17,7 @@ const Header = React.createClass({
     },
     backClickHandler: function () {
         //alert(this.props.back_handler);
-        window.history.back()
+        window.history.back(-1);
 
         this.props.back_handler ? this.props.back_handler() : window.history.back();
     },
