@@ -16,12 +16,7 @@ const Header = React.createClass({
         }
     },
     backClickHandler: function () {
-        window.history.back();
-
-        //alert("1");
-        //window.history.go(-1);
-
-        //this.props.back_handler ? this.props.back_handler() : window.history.back(-1);
+        this.props.back_handler ? this.props.back_handler() : window.history.back(-1);
     },
     render: function () {
         let fontSize = '40px';
@@ -104,10 +99,10 @@ const Header = React.createClass({
         return (
             <div style={{height: this.state.height + 'px'}}>
                 <div className="_style_header_fixed" style={_style_header_fixed}>
-                    <a className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
+                    <div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
                         <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
                         <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
-                    </a>
+                    </div>
                     {title}
                     {link}
                 </div>
