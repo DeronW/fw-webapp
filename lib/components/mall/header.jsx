@@ -28,7 +28,7 @@ const Header = React.createClass({
     backClickHandler: function () {
         this.props.back_handler ? this.props.back_handler() : history.back();
         //App里面后退不起作用 判断在App环境当中关掉当前webview
-        NativeBridge.isReady && NativeBridge.close();
+        history.length < 2 && NativeBridge.isReady && NativeBridge.close();
     },
     render: function () {
         let fontSize = '36px';

@@ -40,7 +40,7 @@ MallActivity.Explain = React.createClass({
                 <div className="act-explain-head" onClick={this.toggleHandler}>
                     <div className="act-explain-h">活动说明</div>
                     <div className={this.state.show ? "act-explain-btn on" : "act-explain-btn"}
-                         style={{background:"url(images/ico-grap-down.png) no-repeat center"}}></div>
+                         style={{background: "url(images/ico-grap-down.png) no-repeat center"}}></div>
                 </div>
                 {desc}
             </div>
@@ -69,12 +69,16 @@ const ProductList = React.createClass({
         })
     },
     render: function () {
+        var apple_limit = null;
+        if ($FW.Browser.inApp() && $FW.Browser.inIOS())
+            apple_limit = <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>;
+
         return (
             <div className="products-act">
                 <div className="index-actList-list">
-                    { this.state.products.map((p, index) => <ProductItem key={index} {...p} key={p.bizNo}/>) }
+                    { this.state.products.map((p, index) => <ProductItem {...p} key={p.bizNo}/>) }
                 </div>
-                <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
+                {apple_limit}
             </div>
         )
     }
@@ -118,15 +122,15 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
-		var title = $FW.Format.urlQuery().title || '商品列表';
-		NativeBridge.setTitle(title);
-    	if ($FW.Utils.shouldShowHeader())
+    var title = $FW.Format.urlQuery().title || '商品列表';
+    NativeBridge.setTitle(title);
+
+    if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
 
     let bizNo = $FW.Format.urlQuery().bizNo;
     $FW.Ajax({
         url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=' + bizNo,
-        //url:'http://localhost/activities.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<MallActivity activity={data} title={data.title}/>, document.getElementById('cnt'));
@@ -134,10 +138,6 @@ $FW.DOMReady(function () {
         }
     });
 });
-
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/static/mall/user/index.html';
-};
 
 function trim(s) {
     return s.replace(/(^\s*)|(\s*$)/g, '')
