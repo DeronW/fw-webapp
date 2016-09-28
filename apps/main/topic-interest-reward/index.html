@@ -12,7 +12,7 @@
     <div class="interest">
         <div class="interest-text">年化加息奖励为</div>
         <div class="interest-value">
-            <b id="interest">0.1</b>
+            <b id="interest"></b>
             <span>%</span>
         </div>
     </div>
@@ -55,4 +55,14 @@
 <a class="invest" onClick="gotoInvest()">
     <img src="images/img-4.png">
 </a>
+
+<script>
+    function gotoInvest() {
+        if ($FW.Browser.inApp()) {
+            NativeBridge.close();
+        } else {
+            location.href = 'http://m.9888.cn/mpwap'
+        }
+    }
+</script>
 {% endblock %}
