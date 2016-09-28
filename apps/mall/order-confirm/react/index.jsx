@@ -19,7 +19,7 @@ const ConfirmOrder = React.createClass({
             productBizNo: query.productBizNo,
             useTicket: null,
             ticket: [],
-            tokenStr: query.tokenStr,
+            tokenStr: '',
             sms_code: null,
             addressId: this.props.default_address_id,
             vipLevel: this.props.vipLevel,
@@ -32,6 +32,12 @@ const ConfirmOrder = React.createClass({
         }
     },
     componentDidMount: function () {
+    	$FW.Ajax({
+	        url: API_PATH + '/mall/api/order/v1/getTokenStr.json',
+	        success: function (data) {
+	        	window._form_data.tokenStr=data.tokenStr;
+	        }
+		});
     },
     componentDidUpdate: function () {
         this.can_buy(true)
