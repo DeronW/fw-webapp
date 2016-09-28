@@ -73,6 +73,15 @@ const PopPhone = React.createClass({
     getHandlerCode: function() {
         var _this = this;
 
+        if(this.state.changePhoneVal == "") {
+            $FW.Component.Toast("手机号不能为空");
+            return false;
+        } else if (!isMobilePhone(this.state.changePhoneVal)) {
+            $FW.Component.Toast("手机号格式不对");
+            return false;
+        }
+
+
         this.setState({
             code: true,
             countdown: 60

@@ -22,7 +22,6 @@ a, input {
 .ui-tab {
   height: 88px;
   overflow: hidden;
-  border-top: 1px solid #d8d8d8;
   margin-bottom:20px;
   background:#fff;
   .ui-tab-block {
@@ -160,16 +159,17 @@ a, input {
 .products-list {
   padding: 0 10px;
   background-color: #fff;
-
+  border-top:1px solid #d8d8d8;
   .empty-list {
     text-align: center;
     padding: 15px;
     font-size: 5vw;
-    padding: 0 0 74%;
+    padding: 20% 0 74%;
     background-color:#fff;
     img{
-        width:100%;
-        height:auto;
+        width: 70%;
+        height: auto;
+        margin: 0 auto;
     }
   }
 
@@ -364,10 +364,11 @@ a, input {
 .gongfeng-item-wrap:nth-child(3n), .viplevel-item-wrap:nth-child(3n){
   margin-right:0;
 }
-.gongfeng-input{    
+.gongfeng-input-box{
   width:288px;
-  height:62px;
-  line-height:62px;
+  height:32px;
+  padding:15px 0;
+  line-height:32px;
   border:1px solid #ccc;
   background:#f5f5f5;
   font-size:26px;
@@ -375,8 +376,22 @@ a, input {
   border-radius:4px;
   outline:none;
 }
-.gongfeng-input1{
-  float:right;
+.gongfeng-input-box1{
+    float:left;
+}
+.gongfeng-input-box2{
+    float:right;
+}
+.gongfeng-input{   
+  display:block; 
+  width:288px;
+  height:32px;
+  line-height:32px;
+  background:#f5f5f5;
+  font-size:26px;
+  border:none;
+  outline:none;
+  text-align:center;
 }
 .horizon-line{
   position: absolute;
@@ -386,6 +401,7 @@ a, input {
   background:#999;
   top:30px;
   left:314px;
+  max-height:9999px;
 }
 .gonfeng-input-wrap{
   position: relative;

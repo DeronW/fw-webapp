@@ -150,7 +150,7 @@ const SearchBar = React.createClass({
     backHandler: function () {
        history.back();
        //App里面后退不起作用 判断在App环境当中关掉当前webview
-        //NativeBridge.isReady && NativeBridge.close();
+        NativeBridge.isReady && NativeBridge.close();
     },
     onBlurHandler: function () {
        this.props.searchBlur();
@@ -585,9 +585,10 @@ const ExchangeBar = React.createClass({
                             <div className="gongfeng-items">
                                 {gongfeng_item}
                                 <div className="gonfeng-input-wrap">
-                                    <input className="gongfeng-input" type="text" value={this.state.minValue} placeholder="最低工分" onChange={this.minValueHandler} /><span
-                                    className="horizon-line"></span><input className="gongfeng-input gongfeng-input1" type="text"
-                                                                           value={this.state.maxValue} placeholder="最高工分" onChange={this.maxValueHandler}/>
+                                	
+                                    <div className="gongfeng-input-box gongfeng-input-box1"><input className="gongfeng-input" type="text" value={this.state.minValue} placeholder="最低工分" onChange={this.minValueHandler} /></div><span
+                                    className="horizon-line"></span><div className="gongfeng-input-box gongfeng-input-box2"><input className="gongfeng-input gongfeng-input1" type="text"
+                                                                           value={this.state.maxValue} placeholder="最高工分" onChange={this.maxValueHandler}/></div>
                                 </div>
                             </div>
                         </div>

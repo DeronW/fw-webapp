@@ -20,6 +20,8 @@ const Form = React.createClass({
         }
     },
     componentDidUpdate: function() {
+        console.log(this.state.phoneBlur);
+
         if (this.state.phoneBlur) {
             if (ReactDOM.findDOMNode(this.refs.phoneRef) !== null) {
                 ReactDOM.findDOMNode(this.refs.phoneRef).focus();
@@ -50,6 +52,10 @@ const Form = React.createClass({
         }
     },
     moneyChangeHandler: function (e) {
+        this.setState({
+            phoneBlur: false
+        });
+
         var money = e.target.value;
 
         if(money[0] === "0" ) {
@@ -64,6 +70,8 @@ const Form = React.createClass({
         });
     },
     phoneChangeHandler: function (e) {
+
+
         let v = numberFormat.phoneFun(e.target.value);
         if(v.length > 11) return;
 
@@ -77,8 +85,6 @@ const Form = React.createClass({
     },
     submitHandler: function () {
         var phoneVal = this.props.phone;
-
-        console.log(phoneVal);
 
         if(this.state.money < 1) {
             $FW.Component.Toast("充值金额不能低于1元");
@@ -142,7 +148,27 @@ const Form = React.createClass({
             }
         };
 
-        console.log(this.props.addPopModifyPhone);
+        var modifyElm = function() {
+            if(propsPhone == "") {
+                return <input className="recha phone-input" type="number"
+                              placeholder="输入银行预留手机号"
+                              value={_this.state.phone}
+                              onChange={_this.phoneChangeHandler}
+                              onBlur={_this.handlerOnBlur}
+                              ref="phoneRef"
+                        />;
+            } else {
+                if(popModifyPhoneVal == "" ) {
+                    return <div className="bank-phone-text">{propsPhone}</div>;
+                } else {
+                    return <div className="bank-phone-text">
+                                {
+                                    popModifyPhoneVal.substring(0, 3) + "****" + popModifyPhoneVal.substring((popModifyPhoneVal.length - 4), popModifyPhoneVal.length)
+                                }
+                            </div>;
+                }
+            }
+        };
 
         return (
             <div className="modify">
@@ -152,13 +178,9 @@ const Form = React.createClass({
                            placeholder="输入充值金额，最低1元"/>
                 </div>
                 <div className="money hao">
-                    <div className="bank-phone-text">
-                        {
-
-                            popModifyPhoneVal == "" ?  propsPhone :  popModifyPhoneVal.substring(0, 3) + "****" + popModifyPhoneVal.substring((popModifyPhoneVal.length - 4), popModifyPhoneVal.length)
-
-                        }
-                    </div>
+                    {
+                        modifyElm()
+                    }
 
                     {
                         modifyPhone()
