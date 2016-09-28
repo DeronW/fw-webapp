@@ -102,10 +102,10 @@ const Header = React.createClass({
         return (
             <div style={{height: this.state.height + 'px'}}>
                 <div className="_style_header_fixed" style={_style_header_fixed}>
-                    <div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
+                    <a className="_style_header_arrow" style={_style_header_arrow} onClick={window.history.back()}>
                         <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
                         <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
-                    </div>
+                    </a>
                     {title}
                     {link}
                 </div>
