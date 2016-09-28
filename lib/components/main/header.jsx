@@ -19,7 +19,7 @@ const Header = React.createClass({
         //alert(this.props.back_handler);
         window.history.back(-1);
 
-        this.props.back_handler ? this.props.back_handler() : window.history.back();
+        //this.props.back_handler ? this.props.back_handler() : window.history.back(-1);
     },
     render: function () {
         let fontSize = '40px';
