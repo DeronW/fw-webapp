@@ -320,8 +320,9 @@ const Recharge = React.createClass({
                     </div>
                     <div className="atpr">
                         <img className="card-d" src="images/card-d.png"/>
-                        <span className="online">单笔充值不可超过该银行充值限额，
-                            <span className="colr">查看各银行充值限额；</span></span>
+                        <span className="online">单笔充值不可超过该银行充值限额。
+
+                        </span>
                     </div>
                     <div className="atpr"><img className="card-d" src="images/card-d.png"/>
                         <span className="online">如果充值金额没有及时到账，请<span

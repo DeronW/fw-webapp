@@ -228,7 +228,7 @@ const Withdrawals = React.createClass({
 			inputVal: numberFormat.format(e.target.value)
 		});
 
-		if(numberFormat.format(e.target.value) >= 100000) {
+		if(numberFormat.format(e.target.value) > 100000) {
 			this.setState({
 				modifyShow: true
 			});
@@ -319,10 +319,30 @@ const Withdrawals = React.createClass({
 		});
 	},
 	handlerSureBtn: function() {
+		var _this = this;
+
 		var val = this.state.inputVal;
 		var codeV = this.state.codeVal;
 
-		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + this.state.selectBankId;
+		var bankNoVal = function() {
+			if(_this.state.inputVal < 100000) {
+				return ""
+			} else {
+				if(_this.props.data.bankInfo.lianhangNo == null) {
+					return _this.state.selectBankId;
+				}else {
+					if(_this.state.selectBankId == "") {
+						return _this.props.data.bankInfo.lianhangNo;
+					} else {
+						return _this.state.selectBankId;
+					}
+				}
+			}
+		};
+
+
+
+		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + bankNoVal();
 
 	},
 	handlerVoice: function() {
@@ -367,7 +387,6 @@ const Withdrawals = React.createClass({
 		var phoneVal = phone.substring(0, 3) + "****" + phone.substring((phone.length - 4), phone.length);
 
 		var commissionCharge = function() {
-			console.log(_this.state.propsUserInfo.isFeeEnable);
 
 			if(_this.state.propsUserInfo.isFeeEnable == true) {
 				return ((parseFloat(feeVal) * 10) * (_this.state.inputVal * 100)) / 100000;
@@ -409,7 +428,6 @@ const Withdrawals = React.createClass({
 			</div>
 		};
 
-		console.log(!this.props.data.bankInfo.isSpecial);
 
 		return (
 
