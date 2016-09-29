@@ -391,7 +391,6 @@ var From = React.createClass({
         var realNameVal = userAjaxData.userInfo.realName;
         var genderVal = userAjaxData.userInfo.gender;
 
-        console.log(realNameVal.substring(0, 1));
 
         var accountInput = function () {
             return _this.state.showInput == 1 ?
@@ -402,7 +401,9 @@ var From = React.createClass({
                        onFocus={_this.inputFocus}
                        onBlur={_this.inputBlur}
                        onChange={_this.onInputChangeHandler}/> :
-                <span className="text id-text" onClick={_this.amendId}>{bankCardNum}</span>
+                <span className="text id-text" onClick={_this.amendId}>{
+                    numberFormat.format(bankCardNum)
+                }</span>
         };
 
         var selectEml = function () {
@@ -862,7 +863,8 @@ var Body = React.createClass({
     },
     getConfirmBtn: function() {
         if(this.state.popSelect === 1) {
-            window.history.back();
+            //window.history.back(0);
+            window.history.go(-1);
             //window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
         } else if (this.state.popSelect === 2) {
             this.setState({
