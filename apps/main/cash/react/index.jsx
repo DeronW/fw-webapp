@@ -288,8 +288,8 @@ const Withdrawals = React.createClass({
 			}
 		}
 
-		if(this.state.modifyShow) {
-			if(this.state.selectBankName === null) {
+		if(this.state.modifyShow || this.props.data.bankInfo.isSpecial) {
+			if(this.state.selectBankName == null) {
 				$FW.Component.Toast("请选择开户支行");
 				return false;
 			}
@@ -326,7 +326,12 @@ const Withdrawals = React.createClass({
 
 		var bankNoVal = function() {
 			if(_this.state.inputVal < 100000) {
-				return ""
+				if(_this.props.data.bankInfo.isSpecial) {
+					return _this.state.selectBankId;
+				} else {
+					return "";
+				}
+
 			} else {
 				if(_this.props.data.bankInfo.lianhangNo == null) {
 					return _this.state.selectBankId;
@@ -340,9 +345,9 @@ const Withdrawals = React.createClass({
 			}
 		};
 
+		console.log(bankNoVal());
 
-
-		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + bankNoVal();
+		//window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + bankNoVal();
 
 	},
 	handlerVoice: function() {
