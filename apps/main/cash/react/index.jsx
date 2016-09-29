@@ -344,10 +344,9 @@ const Withdrawals = React.createClass({
 				}
 			}
 		};
+		
 
-		console.log(bankNoVal());
-
-		//window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + bankNoVal();
+		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + bankNoVal();
 
 	},
 	handlerVoice: function() {
