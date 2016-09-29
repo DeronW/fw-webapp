@@ -386,7 +386,7 @@ var From = React.createClass({
 
         var userAjaxData = this.props.ajaxData;
         var idCardNo = userAjaxData.userInfo.idCardNo;
-        var idCarNoNntercept = idCardNo.substring(0, 4) + "****" + idCardNo.substring((idCardNo.length - 4), idCardNo.length);
+        var idCarNoNntercept = idCardNo.substring(0, 3) + "****" + idCardNo.substring((idCardNo.length - 4), idCardNo.length);
         var bankCardNum = userAjaxData.userInfo.bankCard;
         var realNameVal = userAjaxData.userInfo.realName;
         var genderVal = userAjaxData.userInfo.gender;
