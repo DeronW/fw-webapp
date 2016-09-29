@@ -864,8 +864,10 @@ var Body = React.createClass({
     getConfirmBtn: function() {
         if(this.state.popSelect === 1) {
             //window.history.back(0);
-            window.history.go(-1);
-            return false;
+            //window.history.go(-1);
+            //return false;
+
+            location.href = document.referrer
 
             //window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
         } else if (this.state.popSelect === 2) {
