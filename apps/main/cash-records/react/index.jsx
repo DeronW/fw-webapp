@@ -26,7 +26,7 @@ const CashRecords = React.createClass({
             success: (data) => {
                 let month = this.state.month;
 
-                if(data.pageData.result.length == 0) {
+                if (data.pageData.result.length == 0) {
                     this.setState({
                         listFalse: true
                     });
@@ -129,11 +129,14 @@ const CashRecords = React.createClass({
             )
         };
 
-        let empty = this.state.listFalse ? <div className="empty-records">暂无记录</div> : null ;
+        let empty = this.state.listFalse ? <div className="empty-records">暂无记录</div> : null;
+        let noMore = this.state.page == this.state.totalPage ?
+            <div className="all-shown">已全部展示</div> : null;
 
         return (
             <div>
                 {this.state.month.map(month)}
+                {noMore}
                 {empty}
             </div>
         )
