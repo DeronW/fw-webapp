@@ -32,6 +32,9 @@ const ConfirmOrder = React.createClass({
         }
     },
     componentDidMount: function () {
+    	this.refreshTokenStr()
+    },
+    refreshTokenStr: function(){
     	$FW.Ajax({
 	        url: API_PATH + '/mall/api/order/v1/getTokenStr.json',
 	        success: function (data) {
@@ -82,9 +85,10 @@ const ConfirmOrder = React.createClass({
                 url: API_PATH + '/mall/api/order/v1/commit_pay_order.json',
                 enable_loading: true,
                 data: this.FormData,
-                success: function (data) {
+                success:  (data) => {
                     if (data.errMsg) {
                         $FW.Component.Alert(data.errMsg)
+                        this.refreshTokenStr()
                     } else {
                         location.href = '/static/mall/order-complete/index.html?id=' + data.orderId
                     }
