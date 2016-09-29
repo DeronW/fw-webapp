@@ -96,7 +96,8 @@ const MALL_APP_NAMES = [
     'error-page',
     'new-home',
     'product-category',
-    'product-search'
+    'product-search',
+    'guoqing'
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
