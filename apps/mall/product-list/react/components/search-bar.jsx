@@ -38,7 +38,7 @@ const SearchBar = React.createClass({
     backHandler: function () {
         history.back();
         //App里面后退不起作用 判断在App环境当中关掉当前webview
-        NativeBridge.isReady && NativeBridge.close();
+        setTimeout(()=> NativeBridge.isReady && NativeBridge.close(), 500);
     },
     onFocusHandler: function () {
         this.setState({showSearchHistory: true});
