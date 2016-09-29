@@ -831,7 +831,8 @@ var Body = React.createClass({
 
     },
     backBtnClick: function () {
-        window.history.back();
+        location.href = document.referrer;
+        //window.history.back();
     },
     getLeapfrogBtn: function(val) {
         // 1 跳过按钮
@@ -867,7 +868,7 @@ var Body = React.createClass({
             //window.history.go(-1);
             //return false;
 
-            location.href = document.referrer
+            location.href = document.referrer;
 
             //window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
         } else if (this.state.popSelect === 2) {
