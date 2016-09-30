@@ -16,7 +16,7 @@ const ResultPage = React.createClass({
         }
     },
     componentDidMount: function () {
-        if ($FW.Format.urlQuery().searchSourceType == 1) {
+        if (Filter.options.searchSourceType == 1) {
             $FW.Ajax({
                 url: `${API_PATH}/api/v1/user-state-convertible.json`,//登录状态及工分
                 success: (data) => {
@@ -25,7 +25,7 @@ const ResultPage = React.createClass({
                     this.loadMoreProductHandler();
                 }
             });
-        } else if ($FW.Format.urlQuery().searchSourceType == 2) {
+        } else if (Filter.options.searchSourceType == 2) {
             this.setState({showExchangeBar: false});
         } else {
             this.loadMoreProductHandler();
@@ -144,37 +144,30 @@ let Filter = {
     	Filter.mix($FW.Format.urlQuery());
     },
     setParamsToQuery: function () {
-    	var newOptionsUrl="";
-    	for (var j in Filter.options){
-    		if(j!="maxPoints"){
-    			newOptionsUrl+=j+"="+Filter.options[j]+"&";
-    		}else{
-    			newOptionsUrl+=j+"="+Filter.options[j];
-    		}
-    		
+    	var search = [];
+    	for(var i in Filter.options){
+    		search.push(`${i}=${Filter.options[i]}`)
     	}
-    	var newHref=window.location.href.split("?")[0]+"?"+newOptionsUrl;
-    	console.log(newHref);
-    	history.pushState({}, null, newHref);
+    	history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
     }
 };
 Filter.readParamsFromQuery();
 $FW.DOMReady(function () {
     var title = $FW.Format.urlQuery().title || '商品列表';
 
-    if ($FW.Format.urlQuery().searchSourceType== 1) {
+    if (Filter.options.searchSourceType== 1) {
         title = '我可兑换';
         NativeBridge.setTitle(title);
         if ($FW.Utils.shouldShowHeader())
             ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
     }
 
-    Filter.options.searchSourceType = $FW.Format.urlQuery().searchSourceType || '';
+    //Filter.options.searchSourceType = Filter.options.searchSourceType || '';
 
     if ($FW.Format.urlQuery().category) {
         Filter.options.categoryName = $FW.Format.urlQuery().category;
     }
-    if ($FW.Format.urlQuery().searchSourceType == 2) {
+    if (Filter.options.searchSourceType == 2) {
 
     } else {
         NativeBridge.setTitle(title);

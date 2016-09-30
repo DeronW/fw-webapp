@@ -9,11 +9,11 @@ const ExchangeBar = React.createClass({
             showFilterPop: false,
             filterScore: '不限',
             filterLevel: '不限',
-            maxPoints: $FW.Format.urlQuery().searchSourceType == 1 ? Filter.myConvertibleScore : '',
+            maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
             minPoints: '',
-            maxValue: $FW.Format.urlQuery().searchSourceType == 1 ? Filter.myConvertibleScore : '',
+            maxValue: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
             minValue: '',
-            myScore: $FW.Format.urlQuery().searchSourceType == 1 ? Filter.myConvertibleScore : 0,
+            myScore: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : 0,
         }
     },
     searchHandler: function () {
@@ -122,13 +122,13 @@ const ExchangeBar = React.createClass({
     filterScoreHandler: function (name) {
         this.setState({minValue: ''});
         this.setState({
-            maxValue: $FW.Format.urlQuery().searchSourceType == 1 ?
+            maxValue: Filter.options.searchSourceType == 1 ?
                 Filter.myConvertibleScore : ''
         });
         this.setState({filterScore: name});
         if (name == '不限') {
             this.setState({
-                maxPoints: $FW.Format.urlQuery().searchSourceType == 1 ?
+                maxPoints: Filter.options.searchSourceType == 1 ?
                     Filter.myConvertibleScore : '',
                 minPoints: '',
             });
@@ -138,7 +138,7 @@ const ExchangeBar = React.createClass({
                 maxPoints: this.state.myScore,
             });
         } else if (name == '1-100') {
-            if ($FW.Format.urlQuery().searchSourceType == 1) {
+            if (Filter.options.searchSourceType == 1) {
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 1 ? 1 : 0,
                     maxPoints: Filter.myConvertibleScore <= 100 ? Filter.myConvertibleScore : 100
@@ -151,7 +151,7 @@ const ExchangeBar = React.createClass({
             }
 
         } else if (name == '101-1000') {
-            if ($FW.Format.urlQuery().searchSourceType == 1) {
+            if (Filter.options.searchSourceType == 1) {
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 101 ? 101 : 0,
                     maxPoints: Filter.myConvertibleScore <= 1000 ? Filter.myConvertibleScore : 1000,
@@ -163,7 +163,7 @@ const ExchangeBar = React.createClass({
                 });
             }
         } else if (name == '1000-5000') {
-            if ($FW.Format.urlQuery().searchSourceType == 1) {
+            if (Filter.options.searchSourceType == 1) {
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 1000 ? 1000 : 0,
                     maxPoints: Filter.myConvertibleScore <= 5000 ? Filter.myConvertibleScore : 5000,
@@ -176,7 +176,7 @@ const ExchangeBar = React.createClass({
             }
 
         } else if (name == '5000以上') {
-            if ($FW.Format.urlQuery().searchSourceType == 1) {
+            if (Filter.options.searchSourceType == 1) {
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 5000 ? 5000 : 0,
                     maxPoints: Filter.myConvertibleScore,
@@ -188,7 +188,7 @@ const ExchangeBar = React.createClass({
                 });
             }
         } else {
-            if ($FW.Format.urlQuery().searchSourceType == 1) {
+            if (Filter.options.searchSourceType == 1) {
                 this.setState({
                     minPoints: '',
                     maxPoints: Filter.myConvertibleScore,
@@ -218,7 +218,7 @@ const ExchangeBar = React.createClass({
         }
     },
     maxValueHandler: function (e) {
-        if ($FW.Format.urlQuery().searchSourceType == 1) {
+        if (Filter.options.searchSourceType == 1) {
             this.setState({
                 maxValue: e.target.value > Filter.myConvertibleScore ?
                     Filter.myConvertibleScore : e.target.value
@@ -234,7 +234,7 @@ const ExchangeBar = React.createClass({
         }
     },
     minValueHandler: function (e) {
-        if ($FW.Format.urlQuery().searchSourceType == 1) {
+        if (Filter.options.searchSourceType == 1) {
             this.setState({
                 minValue: e.target.value > Filter.myConvertibleScore ?
                     Filter.myConvertibleScore : e.target.value
@@ -250,7 +250,7 @@ const ExchangeBar = React.createClass({
         }
     },
     clearFilterHandler: function () {
-        if ($FW.Format.urlQuery().searchSourceType == 1) {
+        if (Filter.options.searchSourceType == 1) {
             this.setState({
                 vipLevel: '',
                 showFilterPop: true,
