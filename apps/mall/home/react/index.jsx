@@ -75,7 +75,7 @@ const Mall = React.createClass({
                 <div className={appIosTopWhite()}>
                     {backFactory()}
                     <a onClick={function () {
-                        gotoHandler("/static/mall/product-list/index.html?searchSourceTypeUrl=2", false)
+                        gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false)
                     }}
                        className="search-bar-a"><img className="search-icon" src="images/search-icon.png"/>
                         <div className="search-bar">搜索</div>
@@ -88,7 +88,7 @@ const Mall = React.createClass({
                     <div className="my-score">我的工分:<span
                         className="score-num">{this.state.user_score}工分</span></div>
                     <a className="my-exchange" onClick={function () {
-                        gotoHandler("/static/mall/product-list/index.html?searchSourceTypeUrl=1", true)
+                        gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)
                     }}>我可兑换</a>
                     <a className="my-mall" onClick={function () {
                         gotoHandler("/static/mall/user/index.html", true)

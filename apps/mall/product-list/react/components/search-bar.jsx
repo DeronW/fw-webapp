@@ -24,6 +24,7 @@ const SearchBar = React.createClass({
             this.props.filterProducts({productName: this.state.value});
             this.props.setShowExchangeBar();
             this.setState({showSearchHistory: false});
+			Filter.setParamsToQuery();
         }
     },
     clearHistoryHandler: function () {
@@ -62,6 +63,7 @@ const SearchBar = React.createClass({
                 this.props.filterProducts({productName: this.state.value});
                 this.props.setShowExchangeBar();
                 this.setState({showSearchHistory: false});
+                Filter.setParamsToQuery();
             }
             this.refs.searchInput.blur();
         }
