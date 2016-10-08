@@ -26,7 +26,7 @@ const Header = React.createClass({
         }
     },
     backClickHandler: function () {
-        this.props.back_handler ? this.props.back_handler() : history.back();
+        this.props.back_handler ? this.props.back_handler() : history.go(-1);
         //App里面后退不起作用 判断在App环境当中关掉当前webview
         setTimeout(()=> NativeBridge.isReady && NativeBridge.close(), 500)
     },
