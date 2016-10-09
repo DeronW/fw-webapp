@@ -65,7 +65,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-        api_path: "http://localhost/fake-api/",
+        api_path: "http://xjb.9888.cn/",
         include_components: common_components,
         include_common_js: common_js
     });
@@ -114,7 +114,7 @@ MALL_APP_NAMES.forEach(function (i) {
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://pengyan.9888.cn/',
+        api_path: 'http://xjb.9888.cn/',
         include_components: common_components,
         include_common_js: common_js
     });
