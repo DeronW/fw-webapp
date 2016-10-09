@@ -8,15 +8,15 @@ const ResultPage = React.createClass({
         return {
             page: 0,
             products: [],
-            showSearch: query.searchSourceTypeUrl == 2,
+            showSearch: query.searchSourceType == 2,
             hasData: true,
-            showExchangeBar: query.searchSourceTypeUrl != 2,
-            showFilterBar: query.searchSourceTypeUrl != 2,
+            showExchangeBar: query.searchSourceType != 2,
+            showFilterBar: query.searchSourceType != 2,
             searchFilterProductShow: true
         }
     },
     componentDidMount: function () {
-        if ($FW.Format.urlQuery().searchSourceTypeUrl == 1) {
+        if (Filter.options.searchSourceType == 1) {
             $FW.Ajax({
                 url: `${API_PATH}/api/v1/user-state-convertible.json`,//登录状态及工分
                 success: (data) => {
@@ -25,7 +25,7 @@ const ResultPage = React.createClass({
                     this.loadMoreProductHandler();
                 }
             });
-        } else if ($FW.Format.urlQuery().searchSourceTypeUrl == 2) {
+        } else if (Filter.options.searchSourceType == 2) {
             this.setState({showExchangeBar: false});
         } else {
             this.loadMoreProductHandler();
@@ -117,7 +117,7 @@ let Filter = {
         productName: '', // keyword
         categoryName: '',
         actIds: '',
-        searchSourceType: '',
+        searchSourceType:'',
         prefectureType: 0,
         order: -1,
         minPoints: '',
@@ -126,7 +126,9 @@ let Filter = {
     myConvertibleScore: 0,
     mix: function (opts) {
         for (var i in opts) {
-            Filter.options[i] = opts[i]
+        	if(typeof(Filter.options[i]) != 'undefined') {
+            	Filter.options[i] = opts[i];
+        	}
         }
     },
     search: function (options, callback) {
@@ -139,27 +141,33 @@ let Filter = {
         })
     },
     readParamsFromQuery: function () {
+    	Filter.mix($FW.Format.urlQuery());
     },
     setParamsToQuery: function () {
+    	var search = [];
+    	for(var i in Filter.options){
+    		search.push(`${i}=${Filter.options[i]}`)
+    	}
+    	history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
     }
 };
-
+Filter.readParamsFromQuery();
 $FW.DOMReady(function () {
     var title = $FW.Format.urlQuery().title || '商品列表';
 
-    if ($FW.Format.urlQuery().searchSourceTypeUrl == 1) {
+    if (Filter.options.searchSourceType== 1) {
         title = '我可兑换';
         NativeBridge.setTitle(title);
         if ($FW.Utils.shouldShowHeader())
             ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
     }
 
-    Filter.options.searchSourceType = $FW.Format.urlQuery().searchSourceTypeUrl || '';
+    //Filter.options.searchSourceType = Filter.options.searchSourceType || '';
 
     if ($FW.Format.urlQuery().category) {
         Filter.options.categoryName = $FW.Format.urlQuery().category;
     }
-    if ($FW.Format.urlQuery().searchSourceTypeUrl == 2) {
+    if (Filter.options.searchSourceType == 2) {
 
     } else {
         NativeBridge.setTitle(title);
