@@ -40,7 +40,7 @@ const NineList = React.createClass({
                 <div className="time">{time}</div>
             </div>
         };
-
+		
         let prize_list = this.props.prize_list;
         let no_data=() => {
         	return <div className="Nine-list-no">暂无抽奖记录</div>
@@ -48,11 +48,27 @@ const NineList = React.createClass({
         let end_data=() => {
         	return <div className="Nine-list-end">活动已结束</div>
         };
-		let show_list=()=>{
-			console.log(2);
+        
+		
+		let data_list=() => {
+			if(1){
+				return (<div
+                    className={"Nine-list-ul"}
+                    style={{top: "0px"}}>
+                    {show_list()}
+                </div>)
+			}else{
+				return (<div
+                    className={this.state.with_animate ? "Nine-list-ul with-animate" : "Nine-list-ul"}
+                    style={{top: -152 * this.state.position / 2 + 'px'}}>
+                    {show_list()}
+                </div>)
+			}
+        	
+        };
+        let show_list=()=>{
 			if(1){
 				end_data();
-				console.log(1);
 			}else if(prize_list.length==0){
 				no_data();
 			}else{
@@ -64,11 +80,7 @@ const NineList = React.createClass({
 		};
         return (
             <div className="Nine-list-box">            
-                <div
-                    className={this.state.with_animate ? "Nine-list-ul with-animate" : "Nine-list-ul"}
-                    style={{top: -152 * this.state.position / 2 + 'px'}}>
-                    {show_list()}
-                </div>
+                {data_list()}
             </div>
         );
     }
