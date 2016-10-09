@@ -17,6 +17,7 @@ const MAIN_APP_NAMES = [
     // 旧页面重构
     'home', // 首页
     'about-us', // 关于我们
+    'faq', // 帮助中心
 
     // 新增页面
     'vip-prerogative', // VIP特权详情页
