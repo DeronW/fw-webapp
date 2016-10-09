@@ -502,6 +502,7 @@ const Withdrawals = React.createClass({
 							callbackCode={this.getCode}
 							callbackPromptShow={this.getPromptShow}
 							callbackVoice={this.state.voice}
+							propsMoneyValue={this.state.inputVal}
 							propsPhone={phone}
 						/> : null
 					}
@@ -675,50 +676,60 @@ const Special = React.createClass({
 	handlerTestClick: function(){
 		var _this = this;
 
-
-		this.props.callbackPromptShow(true);
-
-		this.setState({
-			forbid: false,
-			seconds: 60
-		});
-
-		this._timing = true;
-		this.timer = setInterval(()=> {
-            this.setState(
-				{
-					seconds: this.state.seconds - 1
-				}
-			);
-
-            if (this.state.seconds == 0) {
-				clearInterval(this.timer)
-
-				_this._timing = false;
-				_this.setState({
-					seconds: null,
-					forbid: true
-				});
-            }
-        }, 1000);
-
 		$FW.Ajax({
-			url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.props.propsPhone + "&isVms=" + this.state.isVmsType,
+			url: API_PATH + "/mpwap/api/v1/validate.shtml?reflectAmount=" + this.props.propsMoneyValue,
 			success: function (data) {
-				console.log(data);
+				_this.props.callbackPromptShow(true);
+
+				_this.setState({
+					forbid: false,
+					seconds: 60
+				});
+
+				_this._timing = true;
+				_this.timer = setInterval(()=> {
+					_this.setState(
+						{
+							seconds: _this.state.seconds - 1
+						}
+					);
+
+					if (_this.state.seconds == 0) {
+						clearInterval(_this.timer)
+
+						_this._timing = false;
+						_this.setState({
+							seconds: null,
+							forbid: true
+						});
+					}
+				}, 1000);
+
+				$FW.Ajax({
+					url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.props.propsPhone + "&isVms=" + this.state.isVmsType,
+					success: function (data) {
+						console.log(data);
+					},
+					fail: function() {
+						_this.setState(
+							{
+								seconds: null,
+								forbid: true
+							}
+						);
+
+						clearInterval(_this.timer);
+						_this.timer = null;
+					}
+				})
 			},
 			fail: function() {
-				_this.setState(
-					{
-						seconds: null,
-						forbid: true
-					}
-				);
 
-				clearInterval(_this.timer);
-				_this.timer = null;
 			}
 		})
+
+
+
 	},
 	inputCodeOnChange: function(e) {
 		this.props.callbackCode(e.target.value);
@@ -736,7 +747,9 @@ const Special = React.createClass({
 					</div>
 					<div className={this.state.forbid ? "miaoh" : "miaoh c"}>
 						{
-							this.state.seconds !== null ? this.state.seconds + "秒后重新获取" : <span className="zmy" onClick={this.handlerTestClick} ><span className="text">获取验证码</span></span>
+							this.state.seconds !== null ?
+								this.state.seconds + "秒后重新获取" :
+								<span className="zmy" onClick={this.handlerTestClick} ><span className="text">获取验证码</span></span>
 						}
 					</div>
 				</div>
