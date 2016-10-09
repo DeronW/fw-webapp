@@ -60,7 +60,7 @@ const NineList = React.createClass({
                     className={this.state.with_animate ? "Nine-list-ul with-animate" : "Nine-list-ul"}
                     style={{top: -152 * this.state.position / 2 + 'px'}}>
                     {prize_list.length==0?no_data():prize_list.map(prize)}
-                    {prize_list.length > 2?:[prize_list[0], prize_list[1]].map(prize)}
+                    {prize_list.length > 2?[prize_list[0], prize_list[1]].map(prize):null}
                 </div>)
 			}
         	
