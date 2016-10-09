@@ -47,9 +47,19 @@ const NineList = React.createClass({
         };
         let end_data=() => {
         	return <div className="Nine-list-end">活动已结束</div>
-        };
-        
-		
+        };        
+		 let show_list=()=>{
+			if(1){
+				end_data();
+			}else if(prize_list.length==0){
+				no_data();
+			}else{
+				 prize_list.map(prize);
+				 if(prize_list.length > 2){
+				 	[prize_list[0], prize_list[1]].map(prize);
+				 }
+			}
+		};
 		let data_list=() => {
 			if(1){
 				return (<div
@@ -65,19 +75,7 @@ const NineList = React.createClass({
                 </div>)
 			}
         	
-        };
-        let show_list=()=>{
-			if(1){
-				end_data();
-			}else if(prize_list.length==0){
-				no_data();
-			}else{
-				 prize_list.map(prize);
-				 if(prize_list.length > 2){
-				 	[prize_list[0], prize_list[1]].map(prize);
-				 }
-			}
-		};
+       };
         return (
             <div className="Nine-list-box">            
                 {data_list()}
