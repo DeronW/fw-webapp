@@ -208,9 +208,20 @@ var From = React.createClass({
         //　....　data
         this.props.callbackParent(event.target.value);
 
-        this.setState({
-            account: numberFormat.format(event.target.value)
-        });
+        if(numberFormat.format(event.target.value).length < this.state.account.length) {
+            this.setState({
+                account: event.target.value
+            });
+        } else {
+            this.setState({
+                account: numberFormat.format(event.target.value)
+            });
+        }
+
+        /*
+         this.setState({
+         account: numberFormat.format(event.target.value)
+         });*/
     },
     inputBlur: function () {
         this.setState({
@@ -889,8 +900,8 @@ var Body = React.createClass({
 
                 {
                     <TopNav title={"开通存管账户"} backBtn={true} btnText="关闭"
-                         btnFun={this.backBtnClick}
-                         callbackLeapfrogBtn={this.getLeapfrogBtn}
+                            btnFun={this.backBtnClick}
+                            callbackLeapfrogBtn={this.getLeapfrogBtn}
                     />
                 }
 
@@ -945,18 +956,17 @@ var Body = React.createClass({
 
 
 $FW.DOMReady(function () {
-
-    $FW.Ajax({
-        url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
-        enable_loading: true,
-        success: function (data) {
+     $FW.Ajax({
+         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+         enable_loading: true,
+         success: function (data) {
             var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
-            /*ReactDOM.render(
-                <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
-                document.getElementById('header'));*/
+             /*ReactDOM.render(
+             <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
+             document.getElementById('header'));*/
 
             ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
-        }
-    });
+         }
+     });
 
-});
+ });

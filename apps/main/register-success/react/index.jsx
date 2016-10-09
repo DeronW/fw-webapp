@@ -60,8 +60,12 @@ var PromptBlock = React.createClass({
                 <div className="img">
                     <img src={this.props.imgUrl}/>
                 </div>
-                <div className="title"> {this.props.title} </div>
+                <div className="title">
+
+                    {this.props.title}
+                </div>
                 <div className="ui-prompt-text">
+                    <span className="number-text">{this.props.numberText}</span>
                     {this.props.text}
                 </div>
             </div>
@@ -73,9 +77,24 @@ var PromptBlock = React.createClass({
 var AccountSucceedBody = React.createClass({
     getInitialState: function() {
         return {
-            popShow: false
+            popShow: false,
+            registResultData: ""
         }
+    },
+    componentWillMount: function() {
+        var _this = this;
 
+        $FW.Ajax({
+            url: API_PATH + "mpwap/new/userLogin/registResult.shtml",
+            success: function (data) {
+                _this.setState({
+                    registResultData: data
+                });
+            },
+            fail: function() {
+
+            }
+        });
     },
     clickHandler: function () {
         location.href = '/static/wap/open-account/index.html'
@@ -101,8 +120,10 @@ var AccountSucceedBody = React.createClass({
                     <img src="images/process.png"/>
                 </div>
                 <PromptBlock imgUrl={"images/succeed-1.png"} title={"注册成功"}
-                             text={"建议您立即开通徽商银行存管账户为金融工场资金保驾护航"}/>
-                <Btn btnText={"马上开通"} Fun={this.clickHandler}/>
+                             text={"元返现券已经转入您的账户中"}
+                             numberText={this.state.registResultData.resvalue}
+                />
+                <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler}/>
 
                 {
                     this.state.popShow ? <Pop  callbackCancelBtn={this.getCancelBtn}
@@ -114,6 +135,7 @@ var AccountSucceedBody = React.createClass({
         );
     }
 });
+
 
 
 $FW.DOMReady(() => {
