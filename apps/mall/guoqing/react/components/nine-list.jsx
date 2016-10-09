@@ -44,16 +44,29 @@ const NineList = React.createClass({
         let prize_list = this.props.prize_list;
         let no_data=() => {
         	return <div className="Nine-list-no">暂无抽奖记录</div>
-        }
-
+        };
+        let end_data=() => {
+        	return <div className="Nine-list-end">活动已结束</div>
+        };
+		let show_list=()=>{
+			if(1){
+				end_data();
+			}else if(prize_list.length==0){
+				no_data();
+			}else{
+				 prize_list.map(prize);
+				 if(prize_list.length > 2){
+				 	[prize_list[0], prize_list[1]].map(prize);
+				 }
+			}
+		}
         return (
             <div className="Nine-list-box">
             
                 <div
                     className={this.state.with_animate ? "Nine-list-ul with-animate" : "Nine-list-ul"}
                     style={{top: -152 * this.state.position / 2 + 'px'}}>
-                    {prize_list.length==0 ? no_data() : prize_list.map(prize)}
-                    {prize_list.length > 2 ? [prize_list[0], prize_list[1]].map(prize) : null}
+                    {show_list()}
                 </div>
             </div>
         );
