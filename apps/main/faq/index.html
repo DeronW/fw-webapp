@@ -1,0 +1,110 @@
+{% extends '../../../lib/templates/main_base.swig.html' %}
+
+{% block head_javascripts %}
+<script>
+    var TEXT = [
+        {
+            group_title: '新手上路',
+            group_items: [{
+                topic_title: '注册登录',
+                icon: 'user',
+                topic_items: [{
+                    q: '注册需要您提供哪些相关材料？',
+                    a: '提供个人常用手机号，短信验证码提交通过后，设置用户名、密码即可注册。'
+                }, {
+                    q: '身份认证可以修改吗？',
+                    a: '一个账号只可身份认证一次，一旦认证成功将无法修改。'
+                }, {
+                    q: '身份认证总是失败，该如何解决？',
+                    a: '请检查身份证号和真实姓名是否匹配，输入是否正确。如输入正确但无法认证成功，请拨打客服电话 <a href="tel:400-0322-988" >400-0322-988</a> ，客服人员会审核您的身份信息后协助您完成身份认证操作。'
+                }]
+            }, {
+                topic_title: '身份认证流程',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '绑定银行卡',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '还款方式及收益率计算',
+                icon: '',
+                topic_items: []
+            }]
+        }, {
+            group_title: '我要投资',
+            group_items: [{
+                topic_title: '投资流程',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '债权转让',
+                icon: '',
+                topic_items: []
+            }]
+        }, {
+            group_title: '常见问题',
+            group_items: [{
+                topic_title: '违约金',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '红包',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '工豆',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '返现券',
+                icon: '',
+                topic_items: []
+            }]
+        }, {
+            group_title: '了解项目品牌',
+            group_items: [{
+                topic_title: '易车享',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '利随享',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '友局贷',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '易赚盈',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '易收宝',
+                icon: '',
+                topic_items: []
+            }, {
+                topic_title: '埠贸通',
+                icon: '',
+                topic_items: []
+            }]
+        }, {
+            group_title: '工分',
+            group_items: [{
+                topic_title: '工分',
+                icon: '',
+                topic_items: []
+            }]
+        }, {
+            group_title: '会员等级',
+            group_items: [{
+                topic_title: '会员等级',
+                icon: '',
+                topic_items: []
+            }]
+        }
+    ];
+</script>
+{% endblock %}
+
+{% block title %}帮助中心{% endblock %}
