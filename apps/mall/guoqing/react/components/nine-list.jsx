@@ -49,8 +49,10 @@ const NineList = React.createClass({
         	return <div className="Nine-list-end">活动已结束</div>
         };
 		let show_list=()=>{
+			console.log(2);
 			if(1){
 				end_data();
+				console.log(1);
 			}else if(prize_list.length==0){
 				no_data();
 			}else{
@@ -59,10 +61,9 @@ const NineList = React.createClass({
 				 	[prize_list[0], prize_list[1]].map(prize);
 				 }
 			}
-		}
+		};
         return (
-            <div className="Nine-list-box">
-            
+            <div className="Nine-list-box">            
                 <div
                     className={this.state.with_animate ? "Nine-list-ul with-animate" : "Nine-list-ul"}
                     style={{top: -152 * this.state.position / 2 + 'px'}}>
