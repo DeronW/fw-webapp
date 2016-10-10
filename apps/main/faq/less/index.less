@@ -27,6 +27,15 @@ body {
     &:last-child {
       border-bottom: 0;
     }
+
+    .arrow {
+      float: right;
+      width: 80px;
+      height: 80px;
+      display: inline-block;
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
   }
 }
 
@@ -46,10 +55,16 @@ body {
   .qa {
     div {
       line-height: 80px;
-      padding: 0 30px;
       border-bottom: 1px solid #ccc;
       &:last-child {
         border-bottom: 0;
+      }
+    }
+
+    &.show .q {
+      .icon-down-arrow {
+        transform: rotate(180deg);
+        background-position: left center;
       }
     }
 
@@ -59,13 +74,22 @@ body {
   }
 
   .q {
-
+    margin: 0 30px;
+    .icon-down-arrow {
+      float: right;
+      display: inline-block;
+      height: 80px;
+      width: 40px;
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
   }
 
   .a {
     overflow: hidden;
     background: #f9f9f9;
-    padding: 30px;
+    padding: 0 30px;
     height: 0;
+    font-size: 24px;
   }
 }

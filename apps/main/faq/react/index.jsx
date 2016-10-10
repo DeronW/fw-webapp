@@ -9,9 +9,6 @@ const Content = React.createClass({
         history.pushState(null, {}, `/static/wap/faq/index.html?${group_title}`);
         this.setState({topic: group_title})
     },
-    backToIndex: function () {
-        // this.setState({group: 'index'})
-    },
     getCurrentTopic: function () {
         let topic, cnt = this.props.content;
 
@@ -34,6 +31,7 @@ const Content = React.createClass({
                 <div className="topic" key={index} onClick={
                     ()=>this.topicClickHandler(data.topic_title)}>
                     <div className={`icon icon-${data.icon}`}></div>
+                    <div className="arrow icon-right-arrow"></div>
                     {data.topic_title}
                 </div>
             )
@@ -75,10 +73,14 @@ Content.Page = React.createClass({
     render: function () {
         let qa = (data, index) => {
             var cn = this.state.items[index] == 'show' ? 'qa show' : 'qa';
+
             return (
                 <div className={cn} key={index} onClick={()=>this.toggleHandler(index)}>
-                    <div className="q">{data.q}</div>
-                    <div className="a">{data.a}</div>
+                    <div className="q">
+                        <div className="icon-down-arrow"></div>
+                        {data.q}
+                    </div>
+                    <div className="a" dangerouslySetInnerHTML={{__html: data.a}}></div>
                 </div>
             )
         };
@@ -86,7 +88,7 @@ Content.Page = React.createClass({
         let topic = this.props.topic;
         return (
             <div className="topic">
-                <div className="topic-title">{topic.topic_title}</div>
+                <div className="topic-title"> {topic.topic_title}</div>
                 <div className="topic-content">
                     {topic.topic_items.map(qa)}
                 </div>
