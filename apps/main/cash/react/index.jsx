@@ -346,7 +346,7 @@ const Withdrawals = React.createClass({
 		};
 		
 
-		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + bankNoVal();
+		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.withdrawToken;
 
 	},
 	handlerVoice: function() {
