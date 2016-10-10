@@ -88,7 +88,7 @@ var Earnings = React.createClass({
         return (
             <div className="hui-shang-earnings">
                 <div className="earnings-title">
-                    <div className="text">累计收益(元)</div>
+                    <div className="text">累计余额收益(元)</div>
                     <div className="number-text">
                         {dataInfo.totalIncome}
                     </div>

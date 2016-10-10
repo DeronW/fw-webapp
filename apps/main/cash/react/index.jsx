@@ -394,7 +394,8 @@ const Withdrawals = React.createClass({
 		});
 	},
 	callbackOpenBankBtn: function() {
-		window.history.back();
+		//window.history.back();
+		window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
 	},
 	getInfoBtn: function() {
 		window.location.href = "http://m.9888.cn/static/wap/cash-records/index.html";
