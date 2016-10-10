@@ -16,7 +16,7 @@ const AddressPanel = React.createClass({
 
 AddressPanel.New = React.createClass({
     render: function () {
-        let new_link = "/static/mall/new-delivery-address/index.html?productBizNo=" +
+        let new_link = "/static/mall/new-deliver-address/index.html?productBizNo=" +
             this.props.product_biz_no + "&count=" +
             this.props.product_count;
         return (

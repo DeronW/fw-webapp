@@ -16,7 +16,8 @@ function gotoHandler(link, need_login) {
 const Mall = React.createClass({
     getInitialState: function () {
         return {
-            user_score: '--'
+            user_score: '--',
+            popularRecommendData:[]
         }
     },
     componentDidMount: function () {
@@ -24,9 +25,16 @@ const Mall = React.createClass({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
             success: (data) => {
                 if (data.is_login) {
-                    this.setState({user_score: data.score});
+                    this.setState({user_score: data.score||'--'});
                 }
             }
+        });
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/index/v1/recommendProducts.json`,//人气推荐列表
+            data:{recommendBizNo:"TJ0026901",totalCount:5},
+            success: (data) =>{            	
+            	this.setState({popularRecommendData:data.products||[]});
+            } 
         });
     },
     getHeadImages: function () {
@@ -109,6 +117,7 @@ const Mall = React.createClass({
                         gotoHandler("/static/mall/product-category/index.html", true)
                     }}>品类</a>
                 </div>
+                {this.state.popularRecommendData.length>0?<PopularRecommend popularRecommendData={this.state.popularRecommendData}/>:null}
                 <div className="index-actList-wrap">
                     { this.props.activities.map(activity) }
                     {this.props.activities.length ? null : <div className="empty">暂无活动</div>}
@@ -150,7 +159,6 @@ const ActivityProduct = React.createClass({
 const TextBar = React.createClass({
     render: function () {
         var props = this.props;
-
         function click() {
             var url = '/static/mall/activity/index.html?';
             url += `title=${props.title}`;
@@ -167,6 +175,30 @@ const TextBar = React.createClass({
                 </div>
                 <a onClick={click}
                    className="index-actList-hmore" id={this.props.activity_id}>更多</a>
+            </div>
+        )
+    }
+});
+
+const PopularRecommend = React.createClass({	
+    render: function () {
+        let _this = this;
+        let popularRecommendData=this.props.popularRecommendData||[];
+        let cont=(product,index)=>{
+        	return (
+        		<a onClick={function(){gotoHandler('/productDetail?bizNo='+ product.bizNo)}} className={"popular-recommend-a popular-recommend-a"+index}>
+            		<img src={product.img || 'images/default-product.jpg'}/>
+            		<div className="popular-recommend-title">{product.title}</div>
+            		<div className="popular-recommend-score">{product.score?product.score:0}工分</div>
+                </a>
+        	)
+        };                
+        return (
+            <div className="popular-recommend">
+            	<div className="popular-recommend-h"><div className="popular-recommend-line"></div>人气热卖</div>
+                <div className="popular-recommend-cont">
+                	{popularRecommendData.map(cont)}
+                </div>                
             </div>
         )
     }
