@@ -1,11 +1,12 @@
 const Content = React.createClass({
     getInitialState: function () {
-        return {
-            topic: 'index'
-        }
+        return {topic: 'index'}
+    },
+    componentDidMount: function () {
+        window.addEventListener('popstate', () => this.setState({topic: 'index'}))
     },
     topicClickHandler: function (group_title) {
-        // history.pushState({}, '', '/' + group_title);
+        history.pushState(null, {}, `/static/wap/faq/index.html?${group_title}`);
         this.setState({topic: group_title})
     },
     backToIndex: function () {
