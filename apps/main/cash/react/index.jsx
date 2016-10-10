@@ -705,8 +705,10 @@ const Special = React.createClass({
 					}
 				}, 1000);
 
+				console.log("1");
+
 				$FW.Ajax({
-					url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.props.propsPhone + "&isVms=" + this.state.isVmsType,
+					url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ _this.state.codeType +"&destPhoneNo=" + _this.props.propsPhone + "&isVms=" + _this.state.isVmsType,
 					success: function (data) {
 						console.log(data);
 					},
@@ -722,6 +724,8 @@ const Special = React.createClass({
 						_this.timer = null;
 					}
 				})
+
+				console.log("2");
 			},
 			fail: function() {
 
