@@ -31,7 +31,7 @@ const Mall = React.createClass({
         });
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/recommendProducts.json`,//人气推荐列表
-            data:{recommendBizNo:"TJ0026901",totalCount:5},
+            data:{recommendBizNo:"TJ0000005",totalCount:5},
             success: (data) =>{            	
             	this.setState({popularRecommendData:data.products||[]});
             } 
