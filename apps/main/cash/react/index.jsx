@@ -46,6 +46,21 @@ var TopNav = React.createClass({
 	}
 });
 
+//设置光标位置函数
+function setCursorPosition(ctrl, pos){
+    if(ctrl.setSelectionRange){
+        ctrl.focus();
+        ctrl.setSelectionRange(pos,pos);
+    }
+    else if (ctrl.createTextRange) {
+        var range = ctrl.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', pos);
+        range.moveStart('character', pos);
+        range.select();
+    }
+}
+
 
 var BankAccount = React.createClass({
 	getInitialState: function () {
@@ -193,7 +208,9 @@ const Withdrawals = React.createClass({
 	componentDidUpdate: function(a, params) {
 		if(this.state.moneyInput) {
 			if(ReactDOM.findDOMNode(this.refs.refsMoney) !== null) {
+
 				ReactDOM.findDOMNode(this.refs.refsMoney).focus();
+				setCursorPosition(ReactDOM.findDOMNode(this.refs.refsMoney), this.state.inputVal.length);
 			}
 		}
 	},
