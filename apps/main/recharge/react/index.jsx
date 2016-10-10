@@ -39,6 +39,7 @@ const PopPhone = React.createClass({
         this.props.callbackPopModifyPhoneCancelBtn(false);
     },
     handlerConfirm: function() {
+
         if(this.state.changePhoneVal == "") {
             $FW.Component.Toast("手机号不能为空");
         } else if (!isMobilePhone(this.state.changePhoneVal)) {
@@ -49,7 +50,7 @@ const PopPhone = React.createClass({
             this.props.callbackPopModifyPhoneConfirmBtn(false);
 
             $FW.Ajax({
-                url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?phoneNum=' + this.state.changePhoneVal,
+                url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?phoneNum=' + this.state.changePhoneVal + "&validateCode=" + this.state.codeVal,
                 enable_loading: true,
                 success: (data) => {
                     this.props.callbackPopModifyPhoneVal(this.state.changePhoneVal);
