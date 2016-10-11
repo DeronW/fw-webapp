@@ -31,7 +31,7 @@ const Mall = React.createClass({
         });
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/recommendProducts.json`,//人气推荐列表
-            data:{recommendBizNo:"TJ0000005",totalCount:5},
+            data:{recommendBizNo:"TJ0000022",totalCount:5},
             success: (data) =>{            	
             	this.setState({popularRecommendData:data.products||[]});
             } 
@@ -60,7 +60,7 @@ const Mall = React.createClass({
         };
         let backFactory = ()=> {
             return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png"/> :
-                <a className="back-factory" href="http://m.9888.cn/mpwap/">金融工场</a>
+                <a className="back-factory" href="http://m.9888.cn/mpwap/"><img src="images/wap_shop_gong_logo.png"/></a>
         };
         let appIosTopWhite = ()=> {
 
@@ -161,9 +161,9 @@ const TextBar = React.createClass({
         var props = this.props;
         function click() {
             var url='/static/mall/activity/index.html?';
-            url += `title=${props.title}`;
-            url += `&bizNo=${props.bizNo}`;
-            url += `&activity_id=${props.activity_id}`;
+            url += "title="+encodeURIComponent(props.title);
+            url += "&bizNo=${props.bizNo}";
+            url += "&activity_id=${props.activity_id}";
             gotoHandler(url)
         }
 

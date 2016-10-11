@@ -31,6 +31,28 @@ const ResultPage = React.createClass({
             this.loadMoreProductHandler();
         }
         $FW.Event.touchBottom(this.loadMoreProductHandler);
+        window.addEventListener('popstate', () => {
+            function getUrlVars() {
+                var newSearch = {};
+                var hash = [];
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < hashes.length; i++) {
+                    hash = hashes[i].split('=');
+                    if (hash[0] == "page") {
+                        newSearch[hash[0]] = 1;
+                    } else {
+                        newSearch[hash[0]] = hash[1];
+                    }
+                }
+                return newSearch;
+            }
+
+            Filter.search(getUrlVars(), (data)=> {
+                this.setState({
+                    products: data.products || []
+                });
+            })
+        });
     },
     setMyConvertibleScore: function (num) {
         this.setState({myConvertibleScore: num});
@@ -117,7 +139,7 @@ let Filter = {
         productName: '', // keyword
         categoryName: '',
         actIds: '',
-        searchSourceType:'',
+        searchSourceType: '',
         prefectureType: 0,
         order: -1,
         minPoints: '',
@@ -126,9 +148,9 @@ let Filter = {
     myConvertibleScore: 0,
     mix: function (opts) {
         for (var i in opts) {
-        	if(typeof(Filter.options[i]) != 'undefined') {
-            	Filter.options[i] = opts[i];
-        	}
+            if (typeof(Filter.options[i]) != 'undefined') {
+                Filter.options[i] = opts[i];
+            }
         }
     },
     search: function (options, callback) {
@@ -141,21 +163,21 @@ let Filter = {
         })
     },
     readParamsFromQuery: function () {
-    	Filter.mix($FW.Format.urlQuery());
+        Filter.mix($FW.Format.urlQuery());
     },
     setParamsToQuery: function () {
-    	var search = [];
-    	for(var i in Filter.options){
-    		search.push(`${i}=${Filter.options[i]}`)
-    	}
-    	history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
+        var search = [];
+        for (var i in Filter.options) {
+            search.push(`${i}=${Filter.options[i]}`)
+        }
+        history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
     }
 };
 Filter.readParamsFromQuery();
 $FW.DOMReady(function () {
     var title = $FW.Format.urlQuery().title || '商品列表';
 
-    if (Filter.options.searchSourceType== 1) {
+    if (Filter.options.searchSourceType == 1) {
         title = '我可兑换';
         NativeBridge.setTitle(title);
         if ($FW.Utils.shouldShowHeader())
