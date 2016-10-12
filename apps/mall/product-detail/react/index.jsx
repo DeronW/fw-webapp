@@ -253,7 +253,7 @@ $FW.DOMReady(function () {
         return;
     }
 
-    NativeBridge.setTitle('产品详情');
+    NativeBridge.setTitle('商品详情');
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
