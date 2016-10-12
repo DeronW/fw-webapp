@@ -1,0 +1,95 @@
+@import "icon.less";
+
+body {
+  background-color: #ebebee;
+  color: #333;
+  padding-bottom: 30px;
+}
+
+.group {
+  font-size: 30px;
+
+  .group-title {
+    line-height: 80px;
+    height: 80px;
+    padding: 0 30px;
+  }
+
+  .topics {
+    background: white;
+    padding: 0 30px;
+  }
+
+  .topic {
+    line-height: 80px;
+    border-bottom: 1px solid #ccc;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    .arrow {
+      float: right;
+      width: 80px;
+      height: 80px;
+      display: inline-block;
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
+  }
+}
+
+.topic {
+  font-size: 30px;
+
+  .topic-title {
+    line-height: 80px;
+    height: 80px;
+    padding: 0 30px;
+  }
+
+  .topic-content {
+    background: white;
+  }
+
+  .qa {
+    div {
+      line-height: 80px;
+      border-bottom: 1px solid #ccc;
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    &.show .q {
+      .icon-down-arrow {
+        transform: rotate(180deg);
+        background-position: left center;
+      }
+    }
+
+    &.show .a {
+      height: auto;
+    }
+  }
+
+  .q {
+    margin: 0 30px;
+    .icon-down-arrow {
+      float: right;
+      display: inline-block;
+      height: 80px;
+      width: 40px;
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
+  }
+
+  .a {
+    overflow: hidden;
+    background: #f9f9f9;
+    padding: 0 30px;
+    height: 0;
+    font-size: 24px;
+  }
+}
