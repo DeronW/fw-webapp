@@ -854,8 +854,8 @@ var Body = React.createClass({
 
     },
     backBtnClick: function () {
-        location.href = document.referrer;
-        //window.history.back();
+        //location.href = document.referrer;
+        window.history.back();
     },
     getLeapfrogBtn: function(val) {
         // 1 跳过按钮
