@@ -32,12 +32,13 @@
     <a id="moreBtn" href="http://m.9888.cn/static/wap/topic-hui-shang-guide/index.html" class="part4-btn more">了解更多</a>
 </div>
 <script>
-    window.onload = function() {
+    $FW.DOMReady(function() {
         if($FW.Browser.inApp()) {
             document.getElementById("header").style.display = "none";
             document.getElementById("openUserBtn").style.display = "none";
         }        
-    };
+    });
     
 </script>
 {% endblock %}
+
