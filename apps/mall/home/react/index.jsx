@@ -17,7 +17,7 @@ const Mall = React.createClass({
     getInitialState: function () {
         return {
             user_score: '--',
-            popularRecommendData:[]
+            popularRecommendData: []
         }
     },
     componentDidMount: function () {
@@ -25,16 +25,16 @@ const Mall = React.createClass({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
             success: (data) => {
                 if (data.is_login) {
-                    this.setState({user_score: data.score||'--'});
+                    this.setState({user_score: data.score || '--'});
                 }
             }
         });
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/recommendProducts.json`,//人气推荐列表
-            data:{recommendBizNo:"TJ0000022",totalCount:5},
-            success: (data) =>{            	
-            	this.setState({popularRecommendData:data.products||[]});
-            } 
+            data: {recommendBizNo: "TJ0000022", totalCount: 5},
+            success: (data) => {
+                this.setState({popularRecommendData: data.products || []});
+            }
         });
     },
     getHeadImages: function () {
@@ -60,7 +60,8 @@ const Mall = React.createClass({
         };
         let backFactory = ()=> {
             return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png"/> :
-                <a className="back-factory" href="http://m.9888.cn/mpwap/"><img src="images/wap_shop_gong_logo.png"/></a>
+                <a className="back-factory" href="http://m.9888.cn/mpwap/"><img
+                    src="images/wap_shop_gong_logo.png"/></a>
         };
         let appIosTopWhite = ()=> {
 
@@ -117,12 +118,13 @@ const Mall = React.createClass({
                         gotoHandler("/static/mall/product-category/index.html", true)
                     }}>品类</a>
                 </div>
-                {this.state.popularRecommendData.length>0?<PopularRecommend popularRecommendData={this.state.popularRecommendData}/>:null}
+                {this.state.popularRecommendData.length > 0 ?
+                    <PopularRecommend popularRecommendData={this.state.popularRecommendData}/> : null}
                 <div className="index-actList-wrap">
                     { this.props.activities.map(activity) }
                     {this.props.activities.length ? null : <div className="empty">暂无活动</div>}
                 </div>
-                <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
+                <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
             </div>
         )
     }
@@ -159,11 +161,12 @@ const ActivityProduct = React.createClass({
 const TextBar = React.createClass({
     render: function () {
         var props = this.props;
+
         function click() {
-            var url='/static/mall/activity/index.html?';
-            url +='title='+encodeURIComponent(props.title);
-            url +='&bizNo='+props.bizNo;
-            url +='&activity_id='+props.activity_id;
+            var url = '/static/mall/activity/index.html?';
+            url += 'title=' + encodeURIComponent(props.title);
+            url += '&bizNo=' + props.bizNo;
+            url += '&activity_id=' + props.activity_id;
             gotoHandler(url)
         }
 
@@ -180,25 +183,30 @@ const TextBar = React.createClass({
     }
 });
 
-const PopularRecommend = React.createClass({	
+const PopularRecommend = React.createClass({
     render: function () {
         let _this = this;
-        let popularRecommendData=this.props.popularRecommendData||[];
-        let cont=(product,index)=>{
-        	return (
-        		<a onClick={function(){gotoHandler('/productDetail?bizNo='+ product.bizNo)}} className={"popular-recommend-a popular-recommend-a"+index}>
-            		<img src={product.img || 'images/default-product.jpg'}/>
-            		<div className="popular-recommend-title">{product.title}</div>
-            		<div className="popular-recommend-score">{product.score?product.score:0}工分</div>
+        let popularRecommendData = this.props.popularRecommendData || [];
+        let cont = (product, index)=> {
+            return (
+                <a onClick={function () {
+                    gotoHandler('/productDetail?bizNo=' + product.bizNo)
+                }} className={"popular-recommend-a popular-recommend-a" + index}>
+                    <img src={product.img || 'images/default-product.jpg'}/>
+                    <div className="popular-recommend-title">{product.title}</div>
+                    <div className="popular-recommend-score">{product.score ? product.score : 0}工分</div>
                 </a>
-        	)
-        };                
+            )
+        };
         return (
             <div className="popular-recommend">
-            	<div className="popular-recommend-h"><div className="popular-recommend-line"></div>人气热卖</div>
+                <div className="popular-recommend-h">
+                    <div className="popular-recommend-line"></div>
+                    人气热卖
+                </div>
                 <div className="popular-recommend-cont">
-                	{popularRecommendData.map(cont)}
-                </div>                
+                    {popularRecommendData.map(cont)}
+                </div>
             </div>
         )
     }
