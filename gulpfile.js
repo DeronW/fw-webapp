@@ -111,7 +111,10 @@ MALL_APP_NAMES.forEach(function (i) {
         'mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx',
         'toast.jsx'
     ];
-    var common_js = ['javascripts/mall/fw-ajax-error-handler.js'];
+    var common_js = [
+        'javascripts/mall/fw-ajax-error-handler.js',
+        'javascripts/mall/fw-common.js'
+    ];
 
     gt('mall', i, {
         debug: true,
