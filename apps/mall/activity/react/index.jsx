@@ -122,7 +122,7 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    var title = decodeuricomponent($FW.Format.urlQuery().title) || '商品列表';
+    var title = decodeURIComponent($FW.Format.urlQuery().title) || '商品列表';
     NativeBridge.setTitle(title);
 
     if ($FW.Utils.shouldShowHeader())
