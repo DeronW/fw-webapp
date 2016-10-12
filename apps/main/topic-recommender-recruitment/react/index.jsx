@@ -7,10 +7,6 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Header title={'推荐人招募计划'}/>, document.getElementById('header'))
     }
 
-    if ($FW.Browser.inIOS()) {
-        document.querySelector('apple-limit')[0].style.display = 'block';
-    }
-
     $FW.Ajax({
         url : "${ctx}/parttimeFinancialer/apply.do",
         contentType:'application/x-www-form-urlencoded; charset=UTF-8',
