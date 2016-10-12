@@ -403,6 +403,7 @@ var From = React.createClass({
         var genderVal = userAjaxData.userInfo.gender;
 
 
+
         var accountInput = function () {
             return _this.state.showInput == 1 ?
                 <input type="text"
@@ -417,6 +418,9 @@ var From = React.createClass({
                 }</span>
         };
 
+        console.log(_this.props.alreadyBankData);
+        console.log(userAjaxData.userInfo.bankLogo);
+
         var selectEml = function () {
             return <div className="">
                         <span className="bank-text">
@@ -424,11 +428,19 @@ var From = React.createClass({
                                 _this.props.alreadyBankData === null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
                             }
                         </span>
-                <span className="img">
-                            <img
-                                src={_this.props.alreadyBankData === null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl}
-                                className="r-icon"/>
-                        </span>
+                    <span className="img">
+                        
+                        <img 
+                            src={_this.props.alreadyBankData === null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl} 
+                            style={
+                                (_this.props.alreadyBankData == null && userAjaxData.userInfo.bankLogo == "") ?
+                                 {"display": "none"} : {"display" : "block"}
+                            }
+                            className="r-icon"
+                        />
+                    
+                        
+                    </span>
             </div>
         };
 
