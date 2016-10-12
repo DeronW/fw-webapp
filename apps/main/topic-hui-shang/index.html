@@ -33,7 +33,9 @@
 </div>
 <script>
     $FW.DOMReady(function() {
+        alert("1");
         if($FW.Browser.inApp()) {
+            alert("2");
             document.getElementById("header").style.display = "none";
             document.getElementById("openUserBtn").style.display = "none";
         }        
