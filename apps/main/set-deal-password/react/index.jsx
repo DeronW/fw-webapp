@@ -227,7 +227,7 @@ $FW.DOMReady(function () {
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {
             console.log(data);
-            if(openStatus !=3 ) {
+            if(data.openStatus !=3 ) {
                 window.location.href = "http://m.9888.cn/mpwap/top/index.do"
             } else {
                 ReactDOM.render(

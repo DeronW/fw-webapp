@@ -418,9 +418,6 @@ var From = React.createClass({
                 }</span>
         };
 
-        console.log(_this.props.alreadyBankData);
-        console.log(userAjaxData.userInfo.bankLogo);
-
         var selectEml = function () {
             return <div className="">
                         <span className="bank-text">
@@ -721,6 +718,8 @@ var Body = React.createClass({
 
         var getAjaxUserInfo = this.props.activity;
 
+        console.log(this.state.userInfo.bankNo);
+
         if (this.state.userInfo.realName === "") {
             $FW.Component.Toast("用户名不能为空");
             return false;
@@ -741,7 +740,7 @@ var Body = React.createClass({
             return false;
         }
 
-        if (this.state.userInfo.bankId === null) {
+        if (this.state.userInfo.bankNo === "") {
             $FW.Component.Toast("请选择银行");
             return false;
         }
@@ -984,13 +983,13 @@ $FW.DOMReady(function () {
              <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
              document.getElementById('header'));*/
 
-             console.log(data.openStatus);
+             ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
 
-             if(data.openStatus > 3) {
-                window.location.href = "http://m.9888.cn/mpwap/top/index.do";                    
-             } else {
-                ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
-             }
+            //  if(data.openStatus >= 3) {
+            //     window.location.href = "http://m.9888.cn/mpwap/top/index.do";                    
+            //  } else {
+               
+            //  }
          },
          fail: function hander(code, msg, responseText) {
 
