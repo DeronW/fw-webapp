@@ -983,13 +983,11 @@ $FW.DOMReady(function () {
              <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
              document.getElementById('header'));*/
 
-             ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
-
-            //  if(data.openStatus >= 3) {
-            //     window.location.href = "http://m.9888.cn/mpwap/top/index.do";                    
-            //  } else {
-               
-            //  }
+             if(data.openStatus >= 3) {
+                window.location.href = "http://m.9888.cn/mpwap/top/index.do";                    
+             } else {
+                ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
+             }
          },
          fail: function hander(code, msg, responseText) {
 
