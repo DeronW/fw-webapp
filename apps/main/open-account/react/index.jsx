@@ -721,7 +721,6 @@ var Body = React.createClass({
 
         var getAjaxUserInfo = this.props.activity;
 
-
         if (this.state.userInfo.realName === "") {
             $FW.Component.Toast("用户名不能为空");
             return false;
@@ -770,7 +769,9 @@ var Body = React.createClass({
             }
         }
 
-        console.log(this.state.userInfo);
+        if(getAjaxUserInfo.userInfo.notSupportDes == "") {
+
+        }
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/bind/card.shtml",
@@ -917,6 +918,10 @@ var Body = React.createClass({
                     />
                 }
 
+                {
+                    this.props.activity.userInfo.notSupportDes != "" ? <div className="modily-bank-info">请更改为指定开户银行范围的银行卡, 否则无法提现</div> : null 
+                }
+                
                 <Nav imgUrl={"images/nav-2.png"}/>
 
                 <From
@@ -933,7 +938,9 @@ var Body = React.createClass({
                     transmittalCallbackBtnVal={this.state.getCallbackBtnVal}
                 />
 
-                <Btn btnText={"同意"} Fun={this.clickFun}/>
+                <Btn btnText={"同意"} Fun={this.clickFun}
+                    
+                />
 
                 <Text userOpenStatusCode={this.props.activity.openStatus}/>
 
@@ -977,7 +984,13 @@ $FW.DOMReady(function () {
              <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
              document.getElementById('header'));*/
 
-            ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
+             console.log(data.openStatus);
+
+             if(data.openStatus > 3) {
+                window.location.href = "http://m.9888.cn/mpwap/top/index.do";                    
+             } else {
+                ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
+             }
          }
      });
 
