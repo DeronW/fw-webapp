@@ -29,6 +29,10 @@ $FW.DOMReady(function() {
     };
 });
 
+function backURL () {
+    window.location.href = "http://m.9888.cn"
+}
+
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'徽商专题'}/>, document.getElementById('header'))
+    ReactDOM.render(<Header title={'徽商专题'} back_handler={backURL}/>, document.getElementById('header'))
 });
