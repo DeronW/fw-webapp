@@ -54,7 +54,8 @@ const MAIN_APP_NAMES = [
     'topic-interest-reward', // 年化加息奖励
     'topic-recommender-recruitment', //推荐人页面
     'topic-annual-commision',//年化佣金页面
-    'topic-invite',//邀请返利, 邀请人
+    'topic-invite',//邀请返利, 邀请人,
+    'topic-hui-shang-updating' //徽商升级页面提示
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 

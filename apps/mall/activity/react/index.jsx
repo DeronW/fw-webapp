@@ -136,7 +136,7 @@ $FW.DOMReady(function () {
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<MallActivity activity={data} title={data.title}/>, document.getElementById('cnt'));
-            NativeBridge.setTitle(data.title);
+            NativeBridge.setTitle(data.title||'商品列表');
         }
     });
 });
