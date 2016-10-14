@@ -17,7 +17,7 @@ $FW.DOMReady(function() {
              if(data.openStatus < 3) {
                 window.location.href = "http://m.9888.cn/static/wap/open-account/index.html"
              } else if(data.openStatus == 3) {
-                window.location.href = "http://m.9888.cn/static/wap/set-deal-password/index.html"
+                window.location.href = "http://m.9888.cn/static/wap/reset-deal-password/index.html"
              } else if (data.openStatus > 3) {
                 $FW.Component.Alert("已经开户成功");
              } else {
