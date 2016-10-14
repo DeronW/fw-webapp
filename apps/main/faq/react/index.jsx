@@ -98,6 +98,8 @@ Content.Page = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'帮助中心'}/>, document.getElementById('header'));
+    if(!$FW.Browser.inApp()){
+       ReactDOM.render(<Header title={'帮助中心'}/>, document.getElementById('header'));
+	}
     ReactDOM.render(<Content content={TEXT}/>, document.getElementById('cnt'));
 });

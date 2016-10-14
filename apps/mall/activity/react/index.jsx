@@ -123,8 +123,10 @@ const ProductItem = React.createClass({
 
 $FW.DOMReady(function () {
     var title = decodeURIComponent($FW.Format.urlQuery().title) || '商品列表';
+    if(decodeURIComponent($FW.Format.urlQuery().title)=="undefined"){
+    	title='商品列表';
+    }
     NativeBridge.setTitle(title);
-
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
 
@@ -134,7 +136,7 @@ $FW.DOMReady(function () {
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<MallActivity activity={data} title={data.title}/>, document.getElementById('cnt'));
-            NativeBridge.setTitle(data.title);
+            NativeBridge.setTitle(data.title||'商品列表');
         }
     });
 });
