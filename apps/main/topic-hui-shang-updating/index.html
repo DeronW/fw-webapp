@@ -6,7 +6,7 @@
 body {margin: 0}
 .cnt {
 	height: 1280px;
-	background: transparent url(./bg.jpg) no-repeat center top;
+	background: transparent url(images/bg.jpg) no-repeat center top;
 	padding-top: 930px;
     box-sizing: border-box;
 }
@@ -30,15 +30,15 @@ body {margin: 0}
 <body>
 
 <div id="cnt" class="cnt">
-	<div class="p1">系统迁移中 &nbsp; 2016-10-18 00:00</div>
-	<div id="p2" class="p2">系统内测中 &nbsp; 2016-10-19 23:59</div>
+	<div class="p1">系统迁移中 &nbsp; 2016/10/17 中午12:00</div>
+	<div id="p2" class="p2">系统内测中 &nbsp; 2016/10/20 凌晨05:00</div>
 	<div class="p3">完成</div>
 </div>	
 
 <script>
 if(location.search == '?phase2') {
 	document.getElementById('p2').style.color = '#ccc';
-	document.getElementById('cnt').style.background = 'transparent url(./bg2.jpg) no-repeat center top';
+	document.getElementById('cnt').style.background = 'transparent url(images/bg2.jpg) no-repeat center top';
 }
 </script>
 </body>
