@@ -132,10 +132,13 @@ $FW.DOMReady(function () {
             if(data.title){
             	title=data.title;
             }
-            if ($FW.Utils.shouldShowHeader())ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
-            NativeBridge.setTitle(title);
+                        
         }
     });
+    NativeBridge.setTitle(title);
+    if ($FW.Utils.shouldShowHeader()){
+    	ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
+    }
 });
 
 function trim(s) {
