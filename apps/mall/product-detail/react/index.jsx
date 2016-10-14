@@ -117,7 +117,7 @@ const Product = React.createClass({
                     <div className="detail-mark">{(data.tags ? data.tags : []).map(markList)}</div> : null}
                 {activity_desc}
                 {rich_detail}
-                <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
+                <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
                 <PlusMinus stock={data.stock} ticket_count={data.ticketList}
                            check_messages={data.checkMessages}
                            voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
@@ -253,7 +253,7 @@ $FW.DOMReady(function () {
         return;
     }
 
-    NativeBridge.setTitle('产品详情');
+    NativeBridge.setTitle('商品详情');
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,

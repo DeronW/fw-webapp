@@ -212,8 +212,8 @@ var Pop = React.createClass({
                         <p>未设置交易密码不能投标、提现。</p>
                     </div>
                     <div className="pop-btn">
-                        <div className="confirm-btn btn l-btn" onClick={this.props.callbackConfirmBtn}>确认</div>
-                        <div className="cancel-btn btn r-btn" onClick={this.props.callbackCancelBtn}>取消</div>
+                        <div className="cancel-btn btn l-btn" onClick={this.props.callbackCancelBtn}>取消</div>
+                        <div className="confirm-btn btn r-btn" onClick={this.props.callbackConfirmBtn}>确认</div>
                     </div>
                 </div>
             </div>
@@ -226,10 +226,15 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {
-            ReactDOM.render(
-                <Body activity={data}/>,
-                document.getElementById("cnt")
-            );
+            console.log(data);
+            if(data.openStatus !=3 ) {
+                window.location.href = "http://m.9888.cn/mpwap/top/index.do"
+            } else {
+                ReactDOM.render(
+                    <Body activity={data}/>,
+                    document.getElementById("cnt")
+                );
+            }        
         }
     });
 });

@@ -7,3 +7,15 @@ a {
     -webkit-tap-highlight-color: transparent;
     text-decoration: none;
 }
+
+/*
+做一些通用的处理, 在iOS的app审核中, 与商品相关的都必须注明 "该商品与Apple Inc. 无关"
+这条记录不应该在 非iOS应用中显示, 为此做特殊样式处理
+*/
+.only-in-ios-app {
+    display: none;
+}
+
+.html-in-app.html-in-ios .only-in-ios-app {
+    display: block;
+}

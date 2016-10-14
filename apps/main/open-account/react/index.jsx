@@ -403,6 +403,7 @@ var From = React.createClass({
         var genderVal = userAjaxData.userInfo.gender;
 
 
+
         var accountInput = function () {
             return _this.state.showInput == 1 ?
                 <input type="text"
@@ -424,11 +425,19 @@ var From = React.createClass({
                                 _this.props.alreadyBankData === null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
                             }
                         </span>
-                <span className="img">
-                            <img
-                                src={_this.props.alreadyBankData === null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl}
-                                className="r-icon"/>
-                        </span>
+                    <span className="img">
+                        
+                        <img 
+                            src={_this.props.alreadyBankData === null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl} 
+                            style={
+                                (_this.props.alreadyBankData == null && userAjaxData.userInfo.bankLogo == "") ?
+                                 {"display": "none"} : {"display" : "block"}
+                            }
+                            className="r-icon"
+                        />
+                    
+                        
+                    </span>
             </div>
         };
 
@@ -709,6 +718,7 @@ var Body = React.createClass({
 
         var getAjaxUserInfo = this.props.activity;
 
+        console.log(this.state.userInfo.bankNo);
 
         if (this.state.userInfo.realName === "") {
             $FW.Component.Toast("用户名不能为空");
@@ -730,7 +740,7 @@ var Body = React.createClass({
             return false;
         }
 
-        if (this.state.userInfo.bankId === null) {
+        if (this.state.userInfo.bankNo === "") {
             $FW.Component.Toast("请选择银行");
             return false;
         }
@@ -758,7 +768,9 @@ var Body = React.createClass({
             }
         }
 
-        console.log(this.state.userInfo);
+        if(getAjaxUserInfo.userInfo.notSupportDes == "") {
+
+        }
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/bind/card.shtml",
@@ -842,8 +854,9 @@ var Body = React.createClass({
 
     },
     backBtnClick: function () {
-        location.href = document.referrer;
+        //location.href = document.referrer;
         //window.history.back();
+        window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
     },
     getLeapfrogBtn: function(val) {
         // 1 跳过按钮
@@ -879,7 +892,7 @@ var Body = React.createClass({
             //window.history.go(-1);
             //return false;
 
-            location.href = document.referrer;
+            window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
 
             //window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
         } else if (this.state.popSelect === 2) {
@@ -905,6 +918,10 @@ var Body = React.createClass({
                     />
                 }
 
+                {
+                    this.props.activity.userInfo.notSupportDes != "" ? <div className="modily-bank-info">请更改为指定开户银行范围的银行卡, 否则无法提现</div> : null 
+                }
+                
                 <Nav imgUrl={"images/nav-2.png"}/>
 
                 <From
@@ -921,7 +938,9 @@ var Body = React.createClass({
                     transmittalCallbackBtnVal={this.state.getCallbackBtnVal}
                 />
 
-                <Btn btnText={"同意"} Fun={this.clickFun}/>
+                <Btn btnText={"同意"} Fun={this.clickFun}
+                    
+                />
 
                 <Text userOpenStatusCode={this.props.activity.openStatus}/>
 
@@ -965,8 +984,37 @@ $FW.DOMReady(function () {
              <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
              document.getElementById('header'));*/
 
-            ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
-         }
+             ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
+
+            //  if(data.openStatus >= 3) {
+            //     window.location.href = "http://m.9888.cn/mpwap/top/index.do";                    
+            //  } else {
+            //     ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
+            //  }
+         },
+         fail: function hander(code, msg, responseText) {
+
+            // if (code == 10000 || code == 0) {
+            //     $FW.Component.Alert('it seems OK');
+            // } else if (code == 40101) {
+            //     if (FinancialWorkspace.Browser.inApp() && NativeBridge) {
+            //         NativeBridge.login()
+            //     } else {
+            //         location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?redirect_url=' + FinancialWorkspace.getLoginRedirect();
+            //     }
+            // } else if (code == 60000) {
+            //     $FW.Component.Alert(msg)
+            // } else if (code >= 50000 && code < 60000) {
+            //     // 服务器内部错误
+            //     $FW.Component.Alert('异常:' + msg)
+            // } else {
+            //     $FW.Component.Alert(msg);
+            //     console.log(responseText)
+            // }
+
+            // return true;
+        }
+
      });
 
  });

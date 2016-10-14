@@ -1,7 +1,8 @@
 {% extends '../../../lib/templates/main_base.swig.html' %}
 
-{% block title %}推荐人招募计划{% endblock %}
+{% block disable_telephone%}{% endblock %}
 
+{% block title %}推荐人招募计划{% endblock %}
 {% block content %}
 <div id="header"></div>
 <div class="banner"><img src="images/bg1.jpg"/></div>
@@ -9,7 +10,7 @@
 <div class="welfare"><img src="images/bg3.jpg"/></div>
 <div class="register">
    <div class="register-tip">您可拨打客服电话400-0322-988 转 0，咨询客服。也可直接登录PC版金融工场在“个人中心 - 工场码”页面进行申请。</div>
-   <span class="confirm-register-btn">立即拨打客服电话</span>
+   <a class="confirm-register-btn" href="tel:400-0322-988">立即拨打客服电话</a>
 </div>
 <div class="information">
    <div class="info-title">特别说明：</div>

@@ -71,7 +71,7 @@ const ProductList = React.createClass({
     render: function () {
         var apple_limit = null;
         if ($FW.Browser.inApp() && $FW.Browser.inIOS())
-            apple_limit = <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>;
+            apple_limit = <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>;
 
         return (
             <div className="products-act">
