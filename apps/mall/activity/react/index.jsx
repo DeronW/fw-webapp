@@ -11,7 +11,6 @@ const MallActivity = React.createClass({
 
         return (
             <div>
-                {$FW.Browser.appVersion() >= $FW.AppVersion.show_header ? <Header title={this.props.title}/> : null}
                 {img}
                 <MallActivity.Explain desc={this.props.activity.desc}/>
                 <ProductList />
