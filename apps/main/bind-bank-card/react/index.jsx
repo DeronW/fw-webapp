@@ -26,7 +26,7 @@ const BindBankCard = React.createClass({
                 relevBankCard:val.bankNo
             },
             success:function(data){
-                $FW.Component.Alert('修改成功');
+                //$FW.Component.Alert('修改成功');
             },
             fail: function(data){
                 $FW.Component.Alert('修改失败，请再试一次');
