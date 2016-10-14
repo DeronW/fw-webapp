@@ -122,21 +122,18 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    var title = decodeURIComponent($FW.Format.urlQuery().title) || '商品列表';
-    if(decodeURIComponent($FW.Format.urlQuery().title)=="undefined"){
-    	title='商品列表';
-    }
-    NativeBridge.setTitle(title);
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
-
+    var title = decodeURIComponent($FW.Format.urlQuery().title)=="undefined"?'商品列表':decodeURIComponent($FW.Format.urlQuery().title);
     let bizNo = $FW.Format.urlQuery().bizNo;
     $FW.Ajax({
         url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=' + bizNo,
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<MallActivity activity={data} title={data.title}/>, document.getElementById('cnt'));
-            NativeBridge.setTitle(data.title||'商品列表');
+            if(data.title){
+            	title=data.title;
+            }
+            if ($FW.Utils.shouldShowHeader())ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
+            NativeBridge.setTitle(title);
         }
     });
 });
