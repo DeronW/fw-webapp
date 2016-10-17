@@ -49,7 +49,7 @@ const NineList = React.createClass({
         	return <div className="Nine-list-end">活动已结束</div>
         };        
 		let data_list=() => {
-			if(true){
+			if(false){
 				return (<div
                     className={"Nine-list-ul"}
                     style={{top: "0px"}}>
