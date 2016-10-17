@@ -198,15 +198,10 @@ var Pop = React.createClass({
             <div className="mask">
                 <div className="close-btn" onClick={this.closeHandler}></div>
                 <div className="instruction-title">说明</div>
-                <div className="instruction-item">• 为了使您的理财收益最大化，您账户中的剩余金额系统将自动为您购买国寿货币基金。</div>
-                <div className="instruction-item">• 您持有的基金总额可直接用于投资任意金融工场理财产品，以此使您的理财收益最大化。</div>
-                <div className="instruction-item">• 18岁以下用户无法享受货币基金收益，将按银行活期存款利率计算，在提现第二日发放。</div>
-                <div className="instruction-item">• 每日15:00前转入账户的资金会在第二个工作日（节假日顺延）计算收益，建议您在每日15:00前转入；</div>
-                <div className="instruction-item">• 计算收益后的第二天会进行收益发放；</div>
-                <div className="instruction-item">• 资金转出当日不计算收益；</div>
-                <div className="instruction-item">• 如果当天收益不足0.01元，则向后累计；</div>
-                <div className="instruction-item">• 为了保证您的收益最大化，建议您在每周四15:00前转入；</div>
-                <div className="instruction-item">• 每周四15:00后建议您下周一15:00前再进行转入，可以多获取三天的活期收益哦。</div>
+                <div className="instruction-item">• 充值后，您的资金将会转入您的徽商银行电子账户，全程监管，安全无忧；</div>
+                <div className="instruction-item">• 充值后，您在徽商账户内的可用资金，每天按照银行的靠档计息规则计息，当资金变动日终时，进行收益结算；</div>
+                <div className="instruction-item">• 仅可查看3个月的资金流水；</div>
+                <div className="instruction-item">• 如遇问题，请联系客服400-0322-988</div>
             </div>
         )
     }

@@ -258,7 +258,7 @@ $FW.DOMReady(function () {
     });
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"订单详情"} back_handler={back_handler}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"订单详情"} />, document.getElementById('header'));
     }
 });
 
