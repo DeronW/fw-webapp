@@ -16,17 +16,6 @@ const ProductPanel = React.createClass({
     render: function () {
         let p = this.props.product;
 
-        /*<div className="num-box">
-         <div className="num-text">商品数量</div>
-         <div className="num">
-         <div className="minus" onClick={this.decreaseHandler}
-         style={{backgroundImage:"url("+STATIC_PATH+"images/gray-minus.png)", display: "none"}}></div>
-         <div className="value">{this.state.count}</div>
-         <div className="plus" onClick={this.increaseHandler}
-         style={{backgroundImage:"url("+STATIC_PATH+"images/gray-plus.png)", display: "none"}}></div>
-         </div>
-         </div>*/
-
         return (
             <div className="pro-order">
                 <div className="list">
@@ -42,7 +31,6 @@ const ProductPanel = React.createClass({
                         <span className="num-modifyBox"><span className="num-quantity">×</span>{this.state.count}</span>
                     </div>
                 </div>
-                {/* 商品数量 */}
                 <div className="total-box">
                     <div className="total-money">
                         <span>合计：</span>

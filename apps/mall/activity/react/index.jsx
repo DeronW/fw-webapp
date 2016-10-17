@@ -5,13 +5,12 @@ const API_PATH = document.getElementById('api-path').value;
 const MallActivity = React.createClass({
     render: function () {
         let img = this.props.activity.img ?
-            <a href="#" className="act-img-detail">
-                <img src={this.props.activity.img || 'images/default-banner.jpg'}/></a> :
+            <a href="#" className="act-img-detail"><img
+                src={this.props.activity.img || 'images/default-banner.jpg'}/></a> :
             null;
 
         return (
             <div>
-                {$FW.Browser.appVersion() >= $FW.AppVersion.show_header ? <Header title={this.props.title}/> : null}
                 {img}
                 <MallActivity.Explain desc={this.props.activity.desc}/>
                 <ProductList />
@@ -30,11 +29,9 @@ MallActivity.Explain = React.createClass({
     render: function () {
         let desc = null;
         if (this.state.show && this.props.desc) {
-            desc = (
-                <div className="act-explain-cont show">
-                    { this.props.desc.split(/[;|；]/).map((i, index) => <div key={index}>{trim(i)}</div>) }
-                </div>
-            )
+            desc = ( <div className="act-explain-cont show">
+                { this.props.desc.split(/[;|；]/).map((i, index) => <div key={index}>{trim(i)}</div>) }
+            </div> )
         }
 
         return (
@@ -42,7 +39,7 @@ MallActivity.Explain = React.createClass({
                 <div className="act-explain-head" onClick={this.toggleHandler}>
                     <div className="act-explain-h">活动说明</div>
                     <div className={this.state.show ? "act-explain-btn on" : "act-explain-btn"}
-                         style={{background:"url(images/ico-grap-down.png) no-repeat center"}}></div>
+                         style={{background: "url(images/ico-grap-down.png) no-repeat center"}}></div>
                 </div>
                 {desc}
             </div>
@@ -71,12 +68,16 @@ const ProductList = React.createClass({
         })
     },
     render: function () {
+        var apple_limit = null;
+        if ($FW.Browser.inApp() && $FW.Browser.inIOS())
+            apple_limit = <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>;
+
         return (
             <div className="products-act">
                 <div className="index-actList-list">
-                    { this.state.products.map((p, index) => <ProductItem key={index} {...p} key={p.bizNo}/>) }
+                    { this.state.products.map((p, index) => <ProductItem {...p} key={p.bizNo}/>) }
                 </div>
-                <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
+                {apple_limit}
             </div>
         )
     }
@@ -96,7 +97,7 @@ const ProductItem = React.createClass({
         var cover_bg = 'url(' + (this.props.img || 'images/default-product.jpg') + ')';
 
         return (
-            <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
+            <a href={'/static/mall/product-detail/index.html?bizNo=' + this.props.bizNo} className="index-actList-a">
                 <div className="list-img" style={{backgroundImage: cover_bg}}></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
@@ -120,22 +121,24 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
-
+    var title = decodeURIComponent($FW.Format.urlQuery().title)=="undefined"?'商品列表':decodeURIComponent($FW.Format.urlQuery().title);
     let bizNo = $FW.Format.urlQuery().bizNo;
     $FW.Ajax({
         url: API_PATH + '/mall/api/index/v1/activity.json?bizNo=' + bizNo,
-        //url:'http://localhost/activities.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<MallActivity activity={data} title={data.title}/>, document.getElementById('cnt'));
-            NativeBridge.setTitle(data.title);
+            if(data.title){
+            	title=data.title;
+            }
+                        
         }
     });
+    NativeBridge.setTitle(title);
+    if ($FW.Utils.shouldShowHeader()){
+    	ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
+    }
 });
-
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') location.href = '/user';
-};
 
 function trim(s) {
     return s.replace(/(^\s*)|(\s*$)/g, '')

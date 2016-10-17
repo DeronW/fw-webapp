@@ -1,6 +1,6 @@
 /*
  parameters
- <Header title={} title_img={} height={} background={} />
+ <Header title={} title_img={} height={} background={} sub_text={} sub_url={} />
  */
 
 'use strict';
@@ -16,11 +16,11 @@ const Header = React.createClass({
         }
     },
     backClickHandler: function () {
-        this.props.back_handler ? this.props.back_handler() : history.back();
+        this.props.back_handler ? this.props.back_handler() : window.history.back();
     },
     render: function () {
         let fontSize = '40px';
-        if(this.props.title && this.props.title.length > 7) fontSize  = '32px';
+        if (this.props.title && this.props.title.length > 7) fontSize = '32px';
         let _style_header_fixed = {
             transform: 'translate3d(0, 0, 0)',
             position: "fixed",
@@ -76,7 +76,25 @@ const Header = React.createClass({
         let title = this.state.title;
         if (this.state.title_img)
             title = <img src={this.state.title_img}
-                         style={{ display: 'block', margin: '0 auto', width: "182px", position: "relative", top: "30px" }}/>;
+                         style={{
+                             display: 'block',
+                             margin: '0 auto',
+                             width: "182px",
+                             position: "relative",
+                             top: "30px"
+                         }}/>;
+
+        let link = null;
+        if (this.props.sub_text) {
+            link = <a href={this.props.sub_url} style={{
+                display: 'block',
+                position: 'absolute',
+                fontSize: '30px',
+                right: '20px',
+                color: '#555',
+                top: '0'
+            }}>{this.props.sub_text}</a>
+        }
 
         return (
             <div style={{height: this.state.height + 'px'}}>
@@ -86,6 +104,7 @@ const Header = React.createClass({
                         <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
                     </div>
                     {title}
+                    {link}
                 </div>
             </div>
         )

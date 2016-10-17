@@ -2,13 +2,17 @@ const API_PATH = document.getElementById('api-path').value;
 
 $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
-        NativeBridge.setTitle('玩赚攻略');
+        NativeBridge.setTitle('新手福利');
     } else {
         ReactDOM.render(<Header title={'玩赚攻略'}/>, document.getElementById('header'));
     }
+
+    if (!$FW.Browser.inIOS()) {
+        document.getElementById('apple-limit').style.display = 'none';
+    }
 });
 
-function register(){
+function register() {
     if ($FW.Browser.inApp()) {
         NativeBridge.toNative('app_register');
     } else {

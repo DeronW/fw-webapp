@@ -27,7 +27,7 @@ const DeliverAddress = React.createClass({
         let address = function (address, index) {
             let link;
             if (!preview) {
-                link = "/order/confirm?address_id=" + address.address_id + "&productBizNo=" + productBizNo + '&count=' + productCount;
+                link = "/static/mall/order-confirm/index.html?address_id=" + address.address_id + "&productBizNo=" + productBizNo + '&count=' + productCount;
             }
             let checked_flag = null;
             if (!preview) {
@@ -60,8 +60,8 @@ const DeliverAddress = React.createClass({
         };
 
         let create_link = preview ?
-            "/delivery_address/create?preview=true" :
-            ("/delivery_address/create?productBizNo=" + productBizNo + '&count=' + productCount);
+            "/static/mall/new-deliver-address/index.html?preview=true" :
+            ("/static/mall/new-deliver-address/index.html?productBizNo=" + productBizNo + '&count=' + productCount);
 
         return (
             <div>
@@ -83,7 +83,6 @@ $FW.DOMReady(function () {
     $FW.Component.showAjaxLoading();
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/delivery_address.json',
-        //url: 'http://localhost/delivery_address.json',
         enable_loading: true,
         success: function (data) {
             $FW.Component.hideAjaxLoading();
@@ -100,7 +99,7 @@ $FW.DOMReady(function () {
 
 function back_handler() {
     if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
-        location.href = '/user'
+        location.href = '/static/mall/user/index.html'
     } else {
         history.back();
     }

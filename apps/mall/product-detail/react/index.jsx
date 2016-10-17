@@ -117,7 +117,7 @@ const Product = React.createClass({
                     <div className="detail-mark">{(data.tags ? data.tags : []).map(markList)}</div> : null}
                 {activity_desc}
                 {rich_detail}
-                <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
+                <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
                 <PlusMinus stock={data.stock} ticket_count={data.ticketList}
                            check_messages={data.checkMessages}
                            voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
@@ -178,7 +178,8 @@ const PlusMinus = React.createClass({
         }
 
         let bizNo = $FW.Format.urlQuery().bizNo;
-        let link = location.protocol + '//' + location.hostname + '/order/confirm?productBizNo=' + bizNo + '&count=' + this.state.value;
+        let link = location.protocol + '//' + location.hostname +
+            '/static/mall/order-confirm/index.html?productBizNo=' + bizNo + '&count=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
         if (!this.props.is_login) {
@@ -235,9 +236,9 @@ const PlusMinus = React.createClass({
 const EmptyProduct = React.createClass({
     render: function () {
         return (
-            <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
-                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg'/>
-                <div style={{ fontSize: "30px", color: "#8591b3", textAlign: "center" }}>
+            <div style={{position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1"}}>
+                <img style={{display: "block", maxWidth: "80%", margin: "20% auto 50px"}} src='images/outdate.jpg'/>
+                <div style={{fontSize: "30px", color: "#8591b3", textAlign: "center"}}>
                     抱歉, 没有找到相关商品!
                 </div>
             </div>
@@ -252,7 +253,7 @@ $FW.DOMReady(function () {
         return;
     }
 
-    NativeBridge.setTitle('产品详情');
+    NativeBridge.setTitle('商品详情');
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
@@ -267,17 +268,9 @@ $FW.DOMReady(function () {
     });
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"商品详情"} back_handler={backPage}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"商品详情"}/>, document.getElementById('header'));
     }
 });
-
-function backPage() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
-}
-
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back')backPage()
-};
 
 function trim(s) {
     return s.replace(/(^\s*)|(\s*$)/g, '')

@@ -14,10 +14,9 @@ const NineDraw = React.createClass({
         }
     },
     componentDidMount: function () {
-
-        $FW.Ajax({
-            url: `${API_PATH}mall/api/magic/v1/cost.json?activityId=${ACTIVITY_ID}`, //活动消耗工分
-            success: (data) => {
+      $FW.Ajax({
+          url: `${API_PATH}mall/api/magic/v1/cost.json?activityId=${ACTIVITY_ID}`, //活动消耗工分
+          success: (data) => {
                 this.setState({
                     infinitely: data.infinitely,
                     costScore: data.costScore,
@@ -27,8 +26,8 @@ const NineDraw = React.createClass({
                 });
 
                 this.props.setUsableScore(data.usableScore);
-            }
-        })
+          }
+      })
     },
     startRoll: function () {
         this._timer = setInterval(()=> {
@@ -78,12 +77,12 @@ const NineDraw = React.createClass({
                 });
                 this.stopRoll(data.prizeMark, data.prizeName);
                 this.props.setUsableScore(data.usableScore);
-            },
-            fail: () => {
-                this._usable = true;
-                this.hideRoll();
-            }
-        });
+          },
+          fail: () => {
+              this._usable = true;
+              this.hideRoll();
+          }
+      });
     },
     render: function () {
         let cell = function (n, index) {
@@ -125,7 +124,6 @@ const NineDraw = React.createClass({
                               hidePopPrize={this.hidePopPrize}
                               popPrizeName={this.state.popPrizeName}
                               remainTimes={this.state.remainTimes}/> : null}
-
             </div>
         )
     }

@@ -439,20 +439,24 @@ em, i {
   }
 }
 
+.color-bg{
+  background:url(../images/avail-ticket.png) no-repeat;
+  background-size:100% 100%;
+}
+
 .my-voucher-cont-list {
   .position(relative);
   max-width: 658px;
   min-width: 318px;
+  height:184px;
   margin: 20px auto;
   .border-radius-als(14px);
-  .back-color(#fff);
-  .border(1px, solid, #d8d8d8);
   overflow: hidden;
 
   .watermark {
     position: absolute;
-    right: -25px;
-    bottom: -25px;
+    right: -15px;
+    bottom: -15px;
   }
 
   .t-info {
@@ -460,19 +464,17 @@ em, i {
     .color(#fff);
     .padding(20px, 20px, 0, 20px);
     .border-radius-l-r(14px, 14px);
-    background-color: #ff8758;
 
     .title-info {
       .height(40px);
       .line-height(40px);
       .title-text {
         .fl();
-        font-size: 30px;
+        font-size:26px;
         font-weight: normal;
-        max-width: 50%;
+        max-width: 426px;
         text-overflow: ellipsis;
-        height: 40px;
-        white-space: nowrap;
+        height: 80px;
         overflow: hidden;
       }
 
@@ -489,28 +491,47 @@ em, i {
       }
 
       .text-timer {
-        .fr();
+        position:absolute;
+        top:100px;
+        left:20px;
+        font-size:18px;
+        color:#c57400;
       }
     }
 
   }
 
-  .b-color {
-    background-color: #ccc;
-  }
 
   .b-info {
-    .height(44px);
-    .line-height(44px);
     .padding-l-r(20px, 20px);
-    .color(#999);
-    font-size: 22px;
+    .color(#fff);
+    font-size: 18px;
+
+    .text{
+      position:absolute;
+      left:20px;
+      bottom:3px;
+      line-height:38px;
+    }
 
     .btn-exchange {
       float: right;
-      color: #4aa1f9;
-      font-size:26px;
+      display:block;
+      width:124px;
+      height:0px;
+      background:red;
     }
   }
 
+}
+.gray-bg{
+  background:url(../images/unvail-ticket.png) no-repeat;
+  background-size:100% 100%;
+  .t-info{
+    .clear-info {
+      .text-timer {
+        color:#999;
+      }
+    }  
+  }  
 }

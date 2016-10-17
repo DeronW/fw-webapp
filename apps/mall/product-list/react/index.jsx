@@ -2,172 +2,200 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
-const MallProducts = React.createClass({
+const ResultPage = React.createClass({
     getInitialState: function () {
-        this.tabs = ['all', 'virtual', 'reality'];
-        this.pageCount = 20;
-
+        let query = $FW.Format.urlQuery();
         return {
-            tab: 'all',
-            page: {
-                all: 1,
-                virtual: 1,
-                reality: 1
-            },
-            products: []
+            page: 0,
+            products: [],
+            showSearch: query.searchSourceType == 2,
+            hasData: true,
+            showExchangeBar: query.searchSourceType != 2,
+            showFilterBar: query.searchSourceType != 2,
+            searchFilterProductShow: true
         }
     },
-
-    tabClickHandler: function (tab) {
-        this.setState({tab: tab, products: window.Products[tab]});
-        if (window.Products[tab].length == 0) {
-            setTimeout(function () {
-                this.loadMoreProductHandler(null);
-            }.bind(this), 500)
-        }
-    },
-
-    loadMoreProductHandler: function (done) {
-        console.log('load more product');
-        console.log(done);
-
-        let page = this.state.page[this.state.tab];
-        if (page == 0) return; // 如果page=0 表示没有更多页内容可以加载了
-        let is_reality;
-        if (this.state.tab == 'reality') {
-            is_reality = 1
-        } else if (this.state.tab == 'virtual') {
-            is_reality = 2
-        } else {
-            is_reality = 0
-        }
-
-        $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/products.json?count=' + this.pageCount + '&page=' + page + '&isVirtual=' + is_reality,
-            //url: 'http://localhost/products.json',
-            enable_loading: true,
-            success: function (data) {
-                // isVirtual	0全部 1实体 2虚拟
-                let tab;
-                if (data.isVirtual == 0) {
-                    tab = 'all'
-                } else if (data.isVirtual == 1) {
-                    tab = 'reality'
-                } else if (data.isVirtual == 2) {
-                    tab = 'virtual'
-                } else {
-                    done && done();
-                    return;
+    componentDidMount: function () {
+        if (Filter.options.searchSourceType == 1) {
+            $FW.Ajax({
+                url: `${API_PATH}/api/v1/user-state-convertible.json`,//登录状态及工分
+                success: (data) => {
+                    Filter.options.maxPoints = data.score;
+                    Filter.myConvertibleScore = data.score;
+                    this.loadMoreProductHandler();
                 }
+            });
+        } else if (Filter.options.searchSourceType == 2) {
+            this.setState({showExchangeBar: false});
+        } else {
+            this.loadMoreProductHandler();
+        }
+        $FW.Event.touchBottom(this.loadMoreProductHandler);
+        window.addEventListener('popstate', () => {
+            function getUrlVars() {
+                var newSearch = {};
+                var hash = [];
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < hashes.length; i++) {
+                    hash = hashes[i].split('=');
+                    if (hash[0] == "page") {
+                        newSearch[hash[0]] = 1;
+                    } else {
+                        newSearch[hash[0]] = hash[1];
+                    }
+                }
+                return newSearch;
+            }
 
-                window.Products[tab] = window.Products[tab].concat(data.products);
-                let products = window.Products[this.state.tab];
-
-                let new_page = this.state.page;
-                new_page[this.state.tab] = new_page[this.state.tab] + 1;
-                if (data.totalCount < 20) new_page[this.state.tab] = 0;
-
-                this.setState({products: products, page: new_page});
-                done && done();
-            }.bind(this)
+            Filter.search(getUrlVars(), (data)=> {
+                this.setState({
+                    products: data.products || []
+                });
+            })
         });
     },
-
-    componentDidMount: function () {
-        this.loadMoreProductHandler(null);
-        $FW.Event.touchBottom(this.loadMoreProductHandler);
+    setMyConvertibleScore: function (num) {
+        this.setState({myConvertibleScore: num});
     },
-
+    searchFilterProductShow: function () {
+        this.setState({searchFilterProductShow: true});
+    },
+    searchFilterProductHide: function () {
+        this.setState({searchFilterProductShow: false});
+    },
+    loadMoreProductHandler: function (done) {
+        this.state.hasData ?
+            Filter.search({page: this.state.page + 1}, (data)=> {
+                this.appendProducts(data);
+                this.setState({
+                    page: this.state.page + 1,
+                    hasData: data.hasData
+                });
+                done && done()
+            }) : null;
+    },
+    filterProducts: function (options) {
+        options.page = 1;
+        Filter.search(options, (data)=> {
+            this.setState({products: []}, () => this.appendProducts(data))
+            this.setState({
+                page: 1,
+                hasData: data.hasData
+            });
+        });
+    },
+    setShowExchangeBar: function () {
+        this.setState({showExchangeBar: true});
+    },
+    appendProducts: function (data) {
+        var list = this.state.products.slice();
+        var newList = list.concat(data.products || []);
+        this.setState({products: newList})
+    },
+    searchFocus: function () {
+        this.setState({showExchangeBar: false});
+    },
     render: function () {
-        let _this = this;
-
-        let tab = function (i) {
-            let name = {
-                all: '全部',
-                virtual: '虚拟商品',
-                reality: '实物商品'
-            };
+        let productsList = ()=> {
             return (
-                <div key={i} className={i==_this.state.tab ? "act" : null}
-                     onClick={function(){_this.tabClickHandler(i)}}>
-                    <span>{name[i]}</span>
+                <div className="products-list">
+                    {this.state.products.length ? this.state.products.map((p, index) => <ProductItem
+                        filterProducts={this.filterProducts} {...p} key={index}/>) :
+                        <div className="empty-list"><img src="images/no-products.png"/></div>}
                 </div>
             )
         };
 
-        var product_tab_style = {top:"100px"};
-        if($FW.Browser.inApp() && $FW.Browser.inIOS() && ($FW.Browser.appVersion() >= $FW.AppVersion.show_header)) {
-            product_tab_style = {top:"122px"};
-        }
-        if($FW.Browser.inApp() && ($FW.Browser.appVersion() < $FW.AppVersion.show_header)) {
-            product_tab_style = {top:"0px"};
-        }
-
         return (
             <div>
-                <div className="productsTab" style={product_tab_style}>
-                    {this.tabs.map(tab)}
-                </div>
-                <div className="products-list">
-                    { this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
-                    {this.state.products.length == 0 && this.state.page[this.state.tab] == 0 ? <div className="empty-list">暂无商品</div> : null}
-                </div>
+                {this.state.showSearch ? <SearchBar filterProducts={this.filterProducts}
+                                                    searchFocus={this.searchFocus}
+                                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
+                <ResultPage.CategoryBanner filterProducts={this.filterProducts}/>
+
+                {this.state.showExchangeBar || this.state.showFilterBar ?
+                    <ExchangeBar setMyConvertibleScore={this.setMyConvertibleScore}
+                                 filterProducts={this.filterProducts}
+                                 searchFilterProductShow={this.searchFilterProductShow}
+                                 searchFilterProductHide={this.searchFilterProductHide}/> : null}
+                {this.state.showExchangeBar && this.state.searchFilterProductShow ? productsList() : null}
             </div>
         )
     }
 });
 
-const ProductItem = React.createClass({
+ResultPage.CategoryBanner = React.createClass({
     render: function () {
-        var show_price = this.props.price != 0 || this.props.score == 0;
-        var score = (parseFloat(this.props.score) > 0) ? (
-            <span className="list-price-score">{show_price ? <span>&#43;</span> : null}{this.props.score}工分</span>) : null;
-        var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
-        var cover_bg = 'url(' + (this.props.img || 'images/default-product.jpg') + ')';
-
-        return (
-            <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
-                <div className="list-img" style={{backgroundImage: cover_bg}}></div>
-                {Angle}
-                <div className="list-name">{this.props.title}</div>
-                <div className="list-mark">
-                    { (this.props.tags || []).map((d, index) => <div key={index}>{d}</div>) }
-                </div>
-                <div className="list-price-box">
-                    <div className="list-price">
-                        {show_price ? <span className="list-price-mark">&yen;</span> : null}
-                        {show_price ? <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span> : null}
-                        { score }
-                    </div>
-                    <div className="list-sold">
-                        <span>累计销量 </span>
-                        <span>{this.props.sales}</span>
-                    </div>
-                </div>
-            </a>
-        )
+        let c = $FW.Format.urlQuery().category;
+        if (!c) return null;
+        return <a className="category-img"><img src={"images/" + c + ".jpg"}/></a>;
     }
 });
 
-window.Products = {
-    all: [],
-    virtual: [],
-    reality: []
+let Filter = {
+    options: {
+        page: 1,
+        vipLevel: '',
+        productName: '', // keyword
+        categoryName: '',
+        actIds: '',
+        searchSourceType: '',
+        prefectureType: 0,
+        order: -1,
+        minPoints: '',
+        maxPoints: ''
+    },
+    myConvertibleScore: 0,
+    mix: function (opts) {
+        for (var i in opts) {
+            if (typeof(Filter.options[i]) != 'undefined') {
+                Filter.options[i] = opts[i];
+            }
+        }
+    },
+    search: function (options, callback) {
+        Filter.mix(options);
+        $FW.Ajax({
+            url: API_PATH + 'mall/api/index/v1/search.json',
+            data: Filter.options,
+            enable_loading: true,
+            success: data => callback(data)
+        })
+    },
+    readParamsFromQuery: function () {
+        Filter.mix($FW.Format.urlQuery());
+    },
+    setParamsToQuery: function () {
+        var search = [];
+        for (var i in Filter.options) {
+            search.push(`${i}=${Filter.options[i]}`)
+        }
+        history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
+    }
 };
-
+Filter.readParamsFromQuery();
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('豆哥商品');
-    ReactDOM.render(<MallProducts />, document.getElementById('cnt'));
+    var title = $FW.Format.urlQuery().title || '商品列表';
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"豆哥商品"} back_handler={backward}/>, document.getElementById('header'));
+    if (Filter.options.searchSourceType == 1) {
+        title = '我可兑换';
+        NativeBridge.setTitle(title);
+        if ($FW.Utils.shouldShowHeader())
+            ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
     }
+
+    //Filter.options.searchSourceType = Filter.options.searchSourceType || '';
+
+    if ($FW.Format.urlQuery().category) {
+        Filter.options.categoryName = $FW.Format.urlQuery().category;
+    }
+    if (Filter.options.searchSourceType == 2) {
+
+    } else {
+        NativeBridge.setTitle(title);
+        if ($FW.Utils.shouldShowHeader())
+            ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
+    }
+
+    window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
 });
-
-function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/';
-}
-
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') backward()
-};

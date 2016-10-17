@@ -1,8 +1,22 @@
 {% extends '../../../lib/templates/main_base.swig.html' %}
 
-{% block title %}玩赚攻略{% endblock %}
+{% block title %}新手福利{% endblock %}
 
 {% block content %}
+
+<script>
+    // hack, 如果app内, 页面被强制进行了比例调整, 那就再调整一次页面缩放级别
+    if (window.innerWidth < 600) {
+        var ss = document.getElementsByTagName('meta');
+        var meta;
+        for (var i = 0; i < ss.length; i++) {
+            if (ss[i].getAttribute('name') == 'viewport') meta = ss[i];
+        }
+        if (meta) meta.setAttribute('content', 'initial-scale=0.5');
+        document.getElementsByTagName('body')[0].style.zoom = 0.5
+    }
+</script>
+
 <div id="header"></div>
 <img src="images/1.png">
 
@@ -90,5 +104,5 @@
     </div>
 </div>
 
-<img src="images/9.png"/>
+<img id="apple-limit" src="images/9.png"/>
 {% endblock %}

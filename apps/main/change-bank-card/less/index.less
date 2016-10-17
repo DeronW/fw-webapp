@@ -2,6 +2,10 @@ body {
   background-color: #ebebee;
 }
 
+._style_header_fixed {
+  width: 720px;
+}
+
 .nav-block {
   height: 101px;
 }
@@ -71,13 +75,13 @@ body {
 
 
     .bank-name {
-      float: left;
+      float: right;
       line-height: 96px;
-
+      margin-right:30px;
     }
 
     .bank-logo {
-      float: right;
+      float: left;
       line-height: 96px;
       padding-right: 30px;
 
@@ -123,8 +127,7 @@ body {
       float: right;
       padding: 0 30px 0 0;
       line-height: 96px;
-      color: #4aa1f9;
-
+      color: #d4d4d4;
       .line {
         float: left;
         width: 1px;
@@ -134,7 +137,7 @@ body {
       }
 
       .timing-text {
-        color: #d4d4d4;
+        color: #4aa1f9;
       }
     }
   }
@@ -232,6 +235,10 @@ body {
           .img {
             margin: 30px 0 0 10px;
           }
+        }
+
+        .quick-pay-icon {
+          margin: 32px 0 0 30px;
         }
 
         .logo-img {
@@ -376,3 +383,77 @@ body {
   font-size: 42px;
   color: #5799e8;
 }
+
+.pop-body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+}
+
+.pop-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.pop-cnt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 536px;
+  height: 260px;
+  margin: -100px 0 0 -300px;
+  padding: 0 32px;
+  background-color: #fff;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.pop-info {
+  display:table;
+  width: 100%;
+  height: 100px;
+  padding: 20px 0;
+}
+
+.pop-info p {
+  display:table-cell;
+  vertical-align:middle;
+  margin: 0;
+  line-height: 36px;
+  font-size: 28px;
+}
+
+.pop-btn .btn {
+  float: left;
+  width: 248px;
+  height: 74px;
+  font-size: 30px;
+  line-height: 74px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.pop-btn .cancel-btn {
+  background-color: #8296af;
+}
+
+.pop-btn .confirm-btn {
+  background-color: #fd4c4e;
+}
+
+.pop-btn .l-btn {
+  float: left;
+}
+
+.pop-btn .r-btn {
+  float: right;
+}
+
+

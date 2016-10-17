@@ -92,12 +92,11 @@ body,html{
 }
 
 .upgrade{
+    display:block;
     width: 100%;
     height: 78px;
     line-height: 78px;
     background: #fff6c7;
-    position: absolute;
-    top: 100px;
 }
 
 .dep{
@@ -129,7 +128,7 @@ body,html{
 }
 
 .bank-top1{
-    margin-top:120px;
+    margin-top: 40px;
 }
 
 .bank-top2{
@@ -190,11 +189,14 @@ body,html{
 }
 
 .modify{
-    height: 164px;
     border-top: 1px solid #d8d8d8;
     border-bottom: 1px solid #d8d8d8;
     margin-top: 53px;
     background: white;
+}
+
+a.pure-a {
+    display: block;
 }
 
 .pure-a{
@@ -208,11 +210,20 @@ body,html{
     font-size: 30px;
     margin-left: 30px;
     color:#555;
-    white-space: nowrap;
     width:470px;
     height:80px;
     overflow:hidden;
+    white-space:nowrap;
+
     text-overflow:ellipsis;
+
+    text-overflow: ellipsis;/* IE/Safari */
+
+    -ms-text-overflow: ellipsis;
+
+    -o-text-overflow: ellipsis;/* Opera */
+
+    -moz-binding: url("ellipsis.xml#ellipsis");/*FireFox*/
 }
 
 .choice-a{
@@ -300,7 +311,7 @@ body,html{
     right:44px;
     bottom:43px;
 }
-.select-bank{
+/*.select-bank{
     position: fixed;
     top: 0px;
     bottom: 0;
@@ -373,7 +384,16 @@ body,html{
         margin-right: 35px;
     }
 
+}*/
+.select-bank {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ebebee;
 }
+
 .search{
     width: 90%;
     height: 81px;
@@ -381,7 +401,7 @@ body,html{
     border:1px solid #dddddd;
     border-radius: 6px;
     background: white;
-    position: fixed;
+    position: absolute;
     top: 136px;
     left: 4%;
     z-index: 10;
@@ -411,31 +431,31 @@ img{
     top: 258px;
     z-index: 6;
     background: white;
+    overflow-y: scroll;
 }
 
 .list li{
     width: 95%;
-    height: 98px;
-    line-height: 98px;
     border-bottom: 1px solid #e3e5ea;
     margin-left: 4%;
     color: #555555;
     font-size: 32px;
+    position:relative;
 }
 
 .list li span{
     display:inline-block;
     width:88%;
-    height:98px;
-    overflow:hidden;
+    padding:28px 0;
 }
 
 .list img{
-    float: right;
-    margin-top: 36px;
-    margin-right: 35px;
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
-
 .false{
     display: inline-block;
     position: absolute;
@@ -443,5 +463,61 @@ img{
     top: 18px;
 }
 
+.promptBankNo {
+    margin: 310px 0 0 0;
+    padding: 0 150px;
+    font-size: 26px;
+    line-height: 44px;
+    text-align: center;
+    color: #ccc;
 
+    .number-text {
+        color: #4aa1f9;
+    }
+}
+
+
+.top-nav {
+    position: relative;
+    width: 100%;
+    height: 100px;
+
+    .info {
+        position: fixed;
+        width: 100%;
+        height: 100px;
+        background-color: #fff;
+
+        .back-btn {
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 80px;
+            height: 100px;
+
+            img {
+                margin: 27px 0 0 14px;
+            }
+        }
+
+        .title {
+            line-height: 100px;
+            text-align: center;
+            font-size: 40px;
+            color: #333;
+        }
+
+        .r-text {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            color: #999;
+            font-size: 28px;
+            line-height: 100px;
+            text-align: center;
+        }
+    }
+
+}
 
