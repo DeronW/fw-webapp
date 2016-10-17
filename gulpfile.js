@@ -102,7 +102,6 @@ const MALL_APP_NAMES = [
     'deliver-address',
     'new-deliver-address',
     'error-page',
-    'gamble-nine',
     'product-category',
     'product-search',
 
