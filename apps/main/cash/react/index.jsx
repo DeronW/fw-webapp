@@ -665,7 +665,7 @@ const Special = React.createClass({
 		return {
 			seconds: null,
 			forbid: true,
-			codeType: 5,
+			codeType: 1,
 			isVmsType: "SMS"
 		}
 	},
