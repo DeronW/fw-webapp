@@ -69,7 +69,7 @@ const UserInfo = React.createClass({
                     </div>
 
                     <div className="user-info-r">
-                        <a className="user-get-adders" href="/static/mall/new-deliver-address/index.html?preview=true">
+                        <a className="user-get-adders" href="/static/mall/deliver-address/index.html?preview=true">
                             <i className="adders-icon">
                                 <img src="images/address-icon.png"/>
                             </i>
