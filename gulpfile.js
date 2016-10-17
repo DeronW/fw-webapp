@@ -132,6 +132,21 @@ MALL_APP_NAMES.forEach(function (i) {
         include_common_js: common_js
     });
 });
+var guoqing = 'guoqing';
+gt('mall', guoqing, {
+    debug: true,
+    api_path: 'http://localhost/fake-api/',
+    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
+    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
+});
+
+gt('mall', guoqing, {
+    cmd_prefix: 'pack',
+    api_path: 'http://mmall.9888.cn/',
+    cdn_prefix: '/static/mall/' + guoqing + '/',
+    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
+    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
+});
 
 gulp.task('build:main', gulp.series(MAIN_APP_NAMES.map((name) => `main:pack:${name}:revision`)));
 gulp.task('build:mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:pack:${name}:revision`)));
