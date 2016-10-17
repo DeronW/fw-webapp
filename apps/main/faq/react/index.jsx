@@ -75,9 +75,9 @@ Content.Page = React.createClass({
             var cn = this.state.items[index] == 'show' ? 'qa show' : 'qa';
 
             return (
-                <div className={cn} key={index} onClick={()=>this.toggleHandler(index)}>
-                    <div className="q">
-                        <div className="icon-down-arrow"></div>
+                <div className={cn} key={index}>
+                    <div className="q" onClick={()=>this.toggleHandler(index)}>
+                        <div className="icon-down-arrow clearfix"></div>
                         {data.q}
                     </div>
                     <div className="a" dangerouslySetInnerHTML={{__html: data.a}}></div>
