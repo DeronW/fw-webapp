@@ -24,7 +24,8 @@ const MAIN_APP_NAMES = [
     'app-download',
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
-    'faq'
+    'faq',
+    'topic-hui-shang-updating'
 
     // // 徽商相关页面
     // 'bind-bank-card', // 绑定银行卡
