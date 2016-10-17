@@ -112,7 +112,7 @@ const Mall = React.createClass({
                         gotoHandler("/static/mall/product-vip-zone/index.html")
                     }}>VIP专区</a>
                     <a className="goods" onClick={function () {
-                        gotoHandler("/static/mall/zhuan-pan/index.html?" + (+new Date()), true)
+                        gotoHandler("/static/mall/guoqing/index.html?" + (+new Date()), true)
                     }}>大转盘</a>
                     <a className="mine" onClick={function () {
                         gotoHandler("/static/mall/product-category/index.html", true)
