@@ -77,7 +77,6 @@ const Recharge = React.createClass({
                     if (i.bizNo == data.defaultBizNo)
                         pay_score = i.score;
                 });
-
                 this.setState({
                     net_pay_score: pay_score,
                     bizNo: data.defaultBizNo,
@@ -311,6 +310,6 @@ $FW.DOMReady(function () {
 });
 
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+function backward(){
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html';
 }

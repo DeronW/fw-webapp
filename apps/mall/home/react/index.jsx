@@ -14,6 +14,29 @@ function gotoHandler(link, need_login) {
 }
 
 const Mall = React.createClass({
+    getInitialState: function () {
+        return {
+            user_score: '--',
+            popularRecommendData: []
+        }
+    },
+    componentDidMount: function () {
+        $FW.Ajax({
+            url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
+            success: (data) => {
+                if (data.is_login) {
+                    this.setState({user_score: data.score || '--'});
+                }
+            }
+        });
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/index/v1/recommendProducts.json`,//人气推荐列表
+            data: {recommendBizNo: "TJ0000022", totalCount: 5},
+            success: (data) => {
+                this.setState({popularRecommendData: data.products || []});
+            }
+        });
+    },
     getHeadImages: function () {
         var images = [];
         var bs = this.props.banners;
@@ -35,26 +58,73 @@ const Mall = React.createClass({
             return <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                     activity_id={i.activity_id} products={i.products} key={index}/>;
         };
+        let backFactory = ()=> {
+            return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png"/> :
+                <a className="back-factory" href="http://m.9888.cn/mpwap/"><img
+                    src="images/wap_shop_gong_logo.png"/></a>
+        };
+        let appIosTopWhite = ()=> {
 
+            let appIos = false;
+            if ($FW.Browser.inApp() && $FW.Browser.inIOS()) {
+                appIos = true;
+            } else {
+                appIos = false;
+            }
+            return (
+                appIos ? "head-items head-images-ios" : "head-items"
+            )
+        };
         return (
-            <div>
+            <div className="head-wrap">
                 {this.props.banners.length ?
                     <BannerGroup className="head-images" images={this.getHeadImages()}
                                  onImageClick={this.onImageClickHandler}/> :
                     <div className="no-banner"></div>}
-
-                <div className="header-nav">
-                    <a className="recharge" onClick={function(){ gotoHandler("/recharge_phone",true) }}>充值中心</a>
-                    <a className="vip" onClick={function(){ gotoHandler("/vip_zone") }}>VIP专区</a>
-                    <a className="play" onClick={function(){ gotoHandler("/static/mall/gamble-nine/index.html?c", true) }}>玩玩乐</a>
-                    <a className="goods" onClick={function(){ gotoHandler("/products") }}>全部商品</a>
-                    <a className="mine" onClick={function(){ gotoHandler("/user", true) }}>我的商城</a>
+                <div className={appIosTopWhite()}>
+                    {backFactory()}
+                    <a onClick={function () {
+                        gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false)
+                    }}
+                       className="search-bar-a"><img className="search-icon" src="images/search-icon.png"/>
+                        <div className="search-bar">搜索</div>
+                    </a>
+                    <a className="index-avatar" onClick={function () {
+                        gotoHandler("/static/mall/user/index.html", true)
+                    }}><img src="images/profile-icon.png"/></a>
                 </div>
+                <div className="head-user-info">
+                    <div className="my-score">我的工分:<span
+                        className="score-num">{this.state.user_score}工分</span></div>
+                    <a className="my-exchange" onClick={function () {
+                        gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)
+                    }}>我可兑换</a>
+                    <a className="my-mall" onClick={function () {
+                        gotoHandler("/static/mall/user/index.html", true)
+                    }}>我的商城</a>
+                    <span className="vertical-gray-line"></span>
+                </div>
+                <div className="header-nav">
+                    <a className="recharge" onClick={function () {
+                        gotoHandler("/static/mall/product-recharge/index.html", true)
+                    }}>充值中心</a>
+                    <a className="vip" onClick={function () {
+                        gotoHandler("/static/mall/product-vip-zone/index.html")
+                    }}>VIP专区</a>
+                    <a className="goods" onClick={function () {
+                        gotoHandler("/static/mall/zhuan-pan/index.html?" + (+new Date()), true)
+                    }}>大转盘</a>
+                    <a className="mine" onClick={function () {
+                        gotoHandler("/static/mall/product-category/index.html", true)
+                    }}>品类</a>
+                </div>
+                {this.state.popularRecommendData.length > 0 ?
+                    <PopularRecommend popularRecommendData={this.state.popularRecommendData}/> : null}
                 <div className="index-actList-wrap">
                     { this.props.activities.map(activity) }
                     {this.props.activities.length ? null : <div className="empty">暂无活动</div>}
                 </div>
-                <div className="auth-info">以上活动由金融工场主办 与Apple Inc.无关</div>
+                <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
             </div>
         )
     }
@@ -65,9 +135,14 @@ const ActivityProduct = React.createClass({
         let _this = this;
         let pi = (data, index) => <ProductItem {...data} key={index}/>;
         let activity_banner = () => {
+            function click() {
+                gotoHandler("/static/mall/activity/index.html?bizNo=" +
+                    _this.props.bizNo + '&activity_id=' + _this.props.activity_id)
+            }
+
             return this.props.img ?
                 (<div className="index-actList-img">
-                    <a onClick={function(){gotoHandler("/activity?bizNo=" + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}>
+                    <a onClick={click}>
                         <img src={this.props.img || 'images/default-banner.jpg'}/>
                     </a>
                 </div>) :
@@ -85,12 +160,53 @@ const ActivityProduct = React.createClass({
 
 const TextBar = React.createClass({
     render: function () {
-        let _this = this;
+        var props = this.props;
+
+        function click() {
+            var url = '/static/mall/activity/index.html?';
+            url += 'title=' + encodeURIComponent(props.title);
+            url += '&bizNo=' + props.bizNo;
+            url += '&activity_id=' + props.activity_id;
+            gotoHandler(url)
+        }
+
         return (
             <div className="index-actList-h">
-                <div className="index-actList-htext"><span className="vertical-line"></span>{this.props.title}</div>
-                <a onClick={function(){gotoHandler('/activity?bizNo=' + _this.props.bizNo + '&activity_id=' + _this.props.activity_id)}}
-                   className="index-actList-hmore">更多</a>
+                <div className="index-actList-htext">
+                    <span className="vertical-line"> </span>
+                    {this.props.title}
+                </div>
+                <a onClick={click}
+                   className="index-actList-hmore" id={this.props.activity_id}>更多</a>
+            </div>
+        )
+    }
+});
+
+const PopularRecommend = React.createClass({
+    render: function () {
+        let _this = this;
+        let popularRecommendData = this.props.popularRecommendData || [];
+        let cont = (product, index)=> {
+            return (
+                <a onClick={function () {
+                    gotoHandler('/productDetail?bizNo=' + product.bizNo)
+                }} className={"popular-recommend-a popular-recommend-a" + index}>
+                    <img src={product.img || 'images/default-product.jpg'}/>
+                    <div className="popular-recommend-title">{product.title}</div>
+                    <div className="popular-recommend-score">{product.score ? product.score : 0}工分</div>
+                </a>
+            )
+        };
+        return (
+            <div className="popular-recommend">
+                <div className="popular-recommend-h">
+                    <div className="popular-recommend-line"></div>
+                    人气热卖
+                </div>
+                <div className="popular-recommend-cont">
+                    {popularRecommendData.map(cont)}
+                </div>
             </div>
         )
     }
@@ -117,10 +233,9 @@ const ProductItem = React.createClass({
         let Angle = this.props.angle_text ?
             <div className={"list-label " + this.props.angle_type}>{this.props.angle_text}</div> :
             null;
-        let _this = this;
 
         return (
-            <a onClick={function(){gotoHandler('/productDetail?bizNo='+ _this.props.bizNo)}}
+            <a onClick={ () => gotoHandler(`/static/mall/product-detail/index.html?bizNo=${this.props.bizNo}`) }
                className="index-actList-a">
                 <div className="list-img"><img src={this.props.img || 'images/default-product.jpg'}/>
                 </div>
@@ -159,9 +274,4 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
     }, true);
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title_img='images/dg-mall-title.png' show_back_btn={!$FW.Browser.inApp()}
-                                back_handler={ () => location.href = 'http://m.9888.cn' }/>,
-            document.getElementById('header'));
-    }
 });

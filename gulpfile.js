@@ -17,39 +17,44 @@ const MAIN_APP_NAMES = [
     // 旧页面重构
     'home', // 首页
     'about-us', // 关于我们
+    'faq', // 帮助中心
 
     // 新增页面
     'vip-prerogative', // VIP特权详情页
     'guide-cookbook',
-    'app-download',
+    'app-download', // app 下载页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
-    'faq',
-    'topic-hui-shang-updating'
+    // 徽商相关页面
+    'bind-bank-card', // 绑定银行卡
+    'change-bank-card', // 修改绑定银行卡
+    'open-account', // 新老用户开户页面
+    'hui-shang-account', // 徽商存管帐户
+    'set-deal-password', // 设置交易密码
+    'reset-deal-password', //第二次设置交易密码
+    'open-account-complete', // 徽商开户成功页面
+    'hui-shang-cash-flow', // 徽商资金流水列表
+    'register-success', // 新用户注册成功后跳转落地页
+    'open-account-fail', //开户失败
+    'recharge', // 给金融工场账户充值
+    'cash', // 用户提现
+    'cash-records', // 用户提现记录
+    'protocol-trusteeship', // 资金托管协议
+    'protocol-counseling', // 咨询服务协议
 
-    // // 徽商相关页面
-    // 'bind-bank-card', // 绑定银行卡
-    // 'open-account', // 原 hui-shang-bank, 新老用户开户页面
-    // 'hui-shang-account', // 徽商存管帐户
-    // 'set-deal-password', // 原 'hui-shang-settings-password', 设置交易密码
-    // 'reset-deal-password', //第二次设置交易密码
-    // 'open-account-complete', // 原 'hui-shang-succeed' 徽商开户成功页面
-    // 'hui-shang-cash-flow', // 原 'hui-shang-resultList', // 徽商资金流水列表
-    // 'register-success', // 新用户注册成功后跳转落地页
-    // 'open-account-fail', //开户失败
-    // 'bind-card',
-    // 'change-bank-card',
-    // 'recharge-recording', // 充值记录, 暂未启用
-    // 'recharge', // 给金融工场账户充值
-    // // 'personal-center',
-    // // 'first-page',
-    // 'cash',
-    // 'special-cash',
-    // 'verify-identity',
-    // 'open-bank',
-    // 'hs-topic', //徽商专题页面
-    // 'trusteeship-pact', // 资金托管协议
-    // 'counseling-pact', // 咨询服务协议
+    'protocol-special-recharge', // 特殊用户充值协议
+    'protocol-special-cash', // 特殊提现协议
+    'protocol-special-bind', // 特殊绑定银行卡协议
+
+    // 专题页面
+    'topic-hui-shang', // 徽商专题页面
+    'topic-hui-shang-guide',//徽商用户引导页面
+    'topic-score', // 玩转工分
+    'topic-interest-reward', // 年化加息奖励
+    'topic-recommender-recruitment', //推荐人页面
+    'topic-annual-commision',//年化佣金页面
+    'topic-invite',//邀请返利, 邀请人,
+    'topic-hui-shang-updating' //徽商升级页面提示
 ];
 MAIN_APP_NAMES.forEach(function (i) {
 
@@ -61,9 +66,7 @@ MAIN_APP_NAMES.forEach(function (i) {
 
     gt('main', i, {
         debug: true,
-
         api_path: "http://xjb.9888.cn/",
-
         include_components: common_components,
         include_common_js: common_js
     });
@@ -98,9 +101,9 @@ const MALL_APP_NAMES = [
     'deliver-address',
     'new-deliver-address',
     'error-page',
-    'new-home',
+    'gamble-nine',
     'product-category',
-    'product-search'
+    'zhuan-pan',
 ];
 
 MALL_APP_NAMES.forEach(function (i) {
@@ -108,11 +111,14 @@ MALL_APP_NAMES.forEach(function (i) {
         'mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx',
         'toast.jsx'
     ];
-    var common_js = ['javascripts/mall/fw-ajax-error-handler.js'];
+    var common_js = [
+        'javascripts/mall/fw-ajax-error-handler.js',
+        'javascripts/mall/fw-common.js'
+    ];
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://localhost/',
+        api_path: 'http://xjb.9888.cn/',
         include_components: common_components,
         include_common_js: common_js
     });
@@ -120,32 +126,11 @@ MALL_APP_NAMES.forEach(function (i) {
     gt('mall', i, {
         cmd_prefix: 'pack',
         api_path: 'http://mmall.9888.cn/',
-        cdn_prefix: '/pages/' + i + '/',
+        cdn_prefix: '/static/mall/' + i + '/',
         include_components: common_components,
         include_common_js: common_js
     });
 });
 
-// START
-// 针对九宫格游戏, 单独配置打包过程
-var nine = 'gamble-nine';
-gt('mall', nine, {
-    debug: true,
-    api_path: 'http://localhost/fake-api/',
-    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
-    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
-});
-
-gt('mall', nine, {
-    cmd_prefix: 'pack',
-    api_path: 'http://mmall.9888.cn/',
-    cdn_prefix: '/static/mall/' + nine + '/',
-    include_components: ['mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'],
-    include_common_js: ['javascripts/mall/fw-ajax-error-handler.js']
-});
-// 针对九宫格游戏, 单独配置打包过程
-// END
-
-
 gulp.task('build:main', gulp.series(MAIN_APP_NAMES.map((name) => `main:pack:${name}:revision`)));
-gulp.task('build:mall', gulp.series(MALL_APP_NAMES.concat([nine]).map((name) => `mall:pack:${name}:revision`)));
+gulp.task('build:mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:pack:${name}:revision`)));

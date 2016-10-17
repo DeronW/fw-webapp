@@ -12,7 +12,7 @@ const Header = React.createClass({
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
         // compatible with iPhone state bar, move down 22px
-        if(inIOS && inApp) {
+        if (inIOS && inApp) {
             height += 22;
             lineHeight = 152;
         }
@@ -26,15 +26,15 @@ const Header = React.createClass({
         }
     },
     backClickHandler: function () {
-        this.props.back_handler ? this.props.back_handler() : history.back();
+        this.props.back_handler ? this.props.back_handler() : history.go(-1);
         //App里面后退不起作用 判断在App环境当中关掉当前webview
-        NativeBridge.isReady && NativeBridge.close();
+        setTimeout(()=> NativeBridge.isReady && NativeBridge.close(), 500)
     },
     render: function () {
-        let fontSize = '40px';
+        let fontSize = '36px';
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-        if(this.props.title && this.props.title.length > 7) fontSize  = '32px';
+        if (this.props.title && this.props.title.length > 7) fontSize = '32px';
         let _style_header_fixed = {
             transform: 'translate3d(0, 0, 0)',
             position: "fixed",
@@ -68,21 +68,21 @@ const Header = React.createClass({
 
         let _style_header_arm_up = {
             position: "absolute",
-            width: "6px",
+            width: "3px",
             height: this.state.height / 4 + "px",
             WebkitTransform: "rotate(45deg)",
             transform: "rotate(45deg)",
-            top: "30px",
+            top: "29px",
             left: "50px",
             background: "#536f95"
         };
         var _style_header_arm_down = {
             position: "absolute",
-            width: "6px",
+            width: "3px",
             height: this.state.height / 4 + "px",
             WebkitTransform: "rotate(135deg)",
             transform: "rotate(135deg)",
-            top: "44px",
+            top: "46px",
             left: "50px",
             background: '#536f95'
         };
@@ -94,7 +94,7 @@ const Header = React.createClass({
             top: "30px"
         }
 
-        if(inIOS && inApp){
+        if (inIOS && inApp) {
             _img_style = {
                 display: 'block',
                 margin: '0 auto',
@@ -132,10 +132,11 @@ const Header = React.createClass({
         if (this.state.title_img)
             title = <img src={this.state.title_img} style={_img_style}/>;
 
-        let back_btn = (<div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
-            <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
-            <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
-        </div>);
+        let back_btn = (
+            <div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
+                <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
+                <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
+            </div>);
 
         return (
             <div style={{height: this.state.height + 'px'}}>

@@ -73,7 +73,7 @@ var AccountSucceedBody = React.createClass({
     render: function() {
         return (
             <div className="">
-                <TopNav title={"开户成功"} btnText={"跳过"} />
+                <TopNav title={"开户成功"} btnText={"关闭"} />
 
                 <Nav imgUrl={"images/nav-2.png"}/>
 

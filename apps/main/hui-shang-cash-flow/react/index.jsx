@@ -45,7 +45,7 @@ var AllJournal = React.createClass({
                     <span className="text data-text">{cnt.createDate}</span>
                 </div>
                 <div className="r">
-                    <span className={"money-text " +  (cnt.amount.substring(0, 1) !== "-" ? "c-4db94f" : "")} >{cnt.amount}</span>
+                    <span className={"money-text " +  (cnt.amount.substring(0, 1) !== "-" ? "" : "c-4db94f")} >{cnt.amount}</span>
                 </div>
             </div>;
         };
@@ -55,7 +55,7 @@ var AllJournal = React.createClass({
                 <div className="funds-flow">
                     <div className="info">
                         {
-                            this.state.resultList.pageData.resultList.map(list, this)
+                            this.state.resultList.pageData.result.map(list, this)
                         }
                     </div>
                 </div>
@@ -85,7 +85,7 @@ var Body = React.createClass({
 
 $FW.DOMReady(function() {
     $FW.Ajax({
-        url: API_PATH + "mpwap/api/v1/getHSAccountInfo.shtml",
+        url: API_PATH + "mpwap/api/v1/getHSAccountInfoBill.shtml?page=1&pageSize=100",
         enable_loading: true,
         success: function(data) {
             ReactDOM.render(
