@@ -88,22 +88,26 @@ const MALL_APP_NAMES = [
     'home',
     'activity',
     'user',
+
+    // 订单页面
     'order-list',
     'order-detail',
     'order-confirm',
     'order-complete',
+
+    // 产品相关页面
     'product-detail',
     'product-list',
     'product-vip-zone',
     'product-recharge',
+    'product-category',
+
     'waiting',
     'fail',
     'not-support',
     'deliver-address',
     'new-deliver-address',
     'error-page',
-    'product-category',
-    'product-search',
 
     // 特殊页面
     'guoqing'
