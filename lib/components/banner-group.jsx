@@ -106,6 +106,7 @@ const BannerGroup = React.createClass({
         this._touch.originLeft = this.state.left;
         this._onTouching = true;
         clearInterval(this._timer);
+        event.preventDefault();
     },
 
     touchMoveHandler: function (event) {
@@ -137,6 +138,7 @@ const BannerGroup = React.createClass({
         }
 
         this.animateTo(ti);
+        event.preventDefault();
     },
 
     imageClickHandler: function (index) {
