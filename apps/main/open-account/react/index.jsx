@@ -87,7 +87,7 @@ var PhoneCodePrompt = React.createClass({
         }
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=6&destPhoneNo=" + phoneNo + "&isVms=VMS",
             method: "GET",
             success: function(data) {
                 console.log(data);
@@ -275,7 +275,7 @@ var From = React.createClass({
         }, 1000);
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=SMS",
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=6&destPhoneNo=" + phoneNo + "&isVms=SMS",
             method: "GET",
             success: function(data) {
                 console.log(data);
@@ -983,8 +983,6 @@ $FW.DOMReady(function () {
              /*ReactDOM.render(
              <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
              document.getElementById('header'));*/
-
-            
 
              if(data.openStatus >= 3) {
                 window.location.href = "http://m.9888.cn/mpwap/top/index.do";                    

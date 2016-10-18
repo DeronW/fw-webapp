@@ -37,7 +37,7 @@ var PswFrom = React.createClass({
     componentWillReceiveProps: function (nextProps) {
         if (this.state.countdown == 0 && (+new Date()) - nextProps.callVoicePhone < 10) {
             this.setState({
-                codeType: 3,
+                codeType: 5,
                 isVmsType: "VMS"
             }, this.handerIdentifyingCode);
         } else {
@@ -172,7 +172,7 @@ var Body = React.createClass({
                     callbackInputVal={this.getCallbackInputVal}
                     callbackPromptShow={this.getPromptShow}
                     callVoicePhone={this.state.voice}
-                    propsAjaxUrl={"mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + this.state.phoneNumber + "&isVms=VMS"}
+                    propsAjaxUrl={"mpwap/api/v1/sendCode.shtml?type=5&destPhoneNo=" + this.state.phoneNumber + "&isVms=VMS"}
                 />
 
                 <div className="phone-code-prompt">
@@ -223,10 +223,11 @@ var Pop = React.createClass({
 
 $FW.DOMReady(function () {
 
+
+
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {
-            console.log(data);
             if(data.openStatus !=3 ) {
                 window.location.href = "http://m.9888.cn/mpwap/top/index.do"
             } else {

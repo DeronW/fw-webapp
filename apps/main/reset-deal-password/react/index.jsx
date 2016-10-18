@@ -138,7 +138,7 @@ var PswFrom = React.createClass({
         if(this.state.countdown == 0 && (+new Date())　-　nextProps.propsVoice  < 10) {
             this.setState(
                 {
-                    codeType: 3,
+                    codeType: 5,
                     isVmsType: "VMS"
                 },this.handerIdentifyingCode
             );
