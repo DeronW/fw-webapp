@@ -63,25 +63,13 @@ const Mall = React.createClass({
                 <a className="back-factory" href="http://m.9888.cn/mpwap/"><img
                     src="images/wap_shop_gong_logo.png"/></a>
         };
-        let appIosTopWhite = ()=> {
-
-            let appIos = false;
-            if ($FW.Browser.inApp() && $FW.Browser.inIOS()) {
-                appIos = true;
-            } else {
-                appIos = false;
-            }
-            return (
-                appIos ? "head-items head-images-ios" : "head-items"
-            )
-        };
         return (
             <div className="head-wrap">
                 {this.props.banners.length ?
-                    <BannerGroup className="head-images" images={this.getHeadImages()}
+                    <BannerGroup className={appIos?"head-images head-images-ios":"head-images"} images={this.getHeadImages()}
                                  onImageClick={this.onImageClickHandler}/> :
                     <div className="no-banner"></div>}
-                <div className={appIosTopWhite()}>
+                <div className={appIos?"head-items head-images-ios":"head-items"}>
                     {backFactory()}
                     <a onClick={function () {
                         gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false)
@@ -264,6 +252,12 @@ const ProductItem = React.createClass({
 });
 
 $FW.DOMReady(function () {
+	let appIos = false;
+    if ($FW.Browser.inApp() && $FW.Browser.inIOS()) {
+        appIos = true;
+    } else {
+        appIos = false;
+    }
     NativeBridge.setTitle('豆哥商城');
     $FW.BatchGet([
         API_PATH + 'mall/api/index/v1/banners.json', // banner轮播图数据
