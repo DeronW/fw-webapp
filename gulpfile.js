@@ -25,7 +25,6 @@ const MAIN_APP_NAMES = [
     'app-download', // app 下载页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
-
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
     'change-bank-card', // 修改绑定银行卡
@@ -125,7 +124,7 @@ MALL_APP_NAMES.forEach(function (i) {
 
     gt('mall', i, {
         debug: true,
-        api_path: 'http://wenlong.9888.cn/fake-api/',
+        api_path: 'http://localhost/fake-api/',
         include_components: common_components,
         include_common_js: common_js
     });
