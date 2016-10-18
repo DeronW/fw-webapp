@@ -107,6 +107,7 @@ const BannerGroup = React.createClass({
         this._onTouching = true;
         clearInterval(this._timer);
         event.preventDefault();
+        event.stopPropagation();
     },
 
     touchMoveHandler: function (event) {
