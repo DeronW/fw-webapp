@@ -189,7 +189,7 @@ $FW.DOMReady(function () {
     if ($FW.Format.urlQuery().category) {
         Filter.options.categoryName = $FW.Format.urlQuery().category;
     }
-    if (Filter.options.searchSourceType == 2) {
+    if (Filter.options.searchSourceType == 2&&!$FW.Format.urlQuery().productName) {
 
     } else {
         NativeBridge.setTitle(title);

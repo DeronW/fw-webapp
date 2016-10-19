@@ -45,7 +45,7 @@ const Mall = React.createClass({
         }
         return images;
     },
-    onImageClickHandler: function (index) {
+   onImageClickHandler: function (index) {
         var link = null;
         var bs = this.props.banners;
         for (var i = 0; i < bs.length; i++) {
@@ -124,8 +124,7 @@ const ActivityProduct = React.createClass({
         let pi = (data, index) => <ProductItem {...data} key={index}/>;
         let activity_banner = () => {
             function click() {
-                gotoHandler("/static/mall/activity/index.html?bizNo=" +
-                    _this.props.bizNo + '&activity_id=' + _this.props.activity_id)
+                gotoHandler(`/static/mall/activity/index.html?bizNo=${_this.props.bizNo}&activity_id=${_this.props.activity_id}`)
             }
 
             return this.props.img ?
@@ -178,7 +177,7 @@ const PopularRecommend = React.createClass({
         let cont = (product, index)=> {
             return (
                 <a onClick={function () {
-                    gotoHandler('/product-detail?bizNo=' + product.bizNo)
+                    gotoHandler(`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`)
                 }} className={"popular-recommend-a popular-recommend-a" + index}>
                     <img src={product.img || 'images/default-product.jpg'}/>
                     <div className="popular-recommend-title">{product.title}</div>
@@ -250,14 +249,13 @@ const ProductItem = React.createClass({
         )
     }
 });
-
+let appIos = false;
+if ($FW.Browser.inApp() && $FW.Browser.inIOS()) {
+    appIos = true;
+} else {
+    appIos = false;
+}
 $FW.DOMReady(function () {
-	let appIos = false;
-    if ($FW.Browser.inApp() && $FW.Browser.inIOS()) {
-        appIos = true;
-    } else {
-        appIos = false;
-    }
     NativeBridge.setTitle('豆哥商城');
     $FW.BatchGet([
         API_PATH + 'mall/api/index/v1/banners.json', // banner轮播图数据
