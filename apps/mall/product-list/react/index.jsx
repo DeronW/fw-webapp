@@ -27,10 +27,15 @@ const ResultPage = React.createClass({
             });
         } else if (Filter.options.searchSourceType == 2) {
             this.setState({showExchangeBar: false});
+            if($FW.Format.urlQuery().productName){
+				document.querySelector('.search-confirm').click()
+            	this.loadMoreProductHandler();
+            }
         } else {
             this.loadMoreProductHandler();
         }
         $FW.Event.touchBottom(this.loadMoreProductHandler);
+        
         window.addEventListener('popstate', () => {
             function getUrlVars() {
                 var newSearch = {};
@@ -46,11 +51,9 @@ const ResultPage = React.createClass({
                 }
                 return newSearch;
             }
-
+            
             Filter.search(getUrlVars(), (data)=> {
-                this.setState({
-                    products: data.products || []
-                });
+            	this.setState({products: data||[]})
             })
         });
     },
@@ -109,8 +112,8 @@ const ResultPage = React.createClass({
         return (
             <div>
                 {this.state.showSearch ? <SearchBar filterProducts={this.filterProducts}
-                                                    searchFocus={this.searchFocus}
-                                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
+                                    searchFocus={this.searchFocus}
+                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts}/>
 
                 {this.state.showExchangeBar || this.state.showFilterBar ?
@@ -160,7 +163,7 @@ let Filter = {
             data: Filter.options,
             enable_loading: true,
             success: data => callback(data)
-        })
+        });
     },
     readParamsFromQuery: function () {
         Filter.mix($FW.Format.urlQuery());
@@ -170,13 +173,15 @@ let Filter = {
         for (var i in Filter.options) {
             search.push(`${i}=${Filter.options[i]}`)
         }
-        history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
+        if(!window.__push_flag) {
+        	window.__push_flag = true;
+	        history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
+        }
     }
 };
 Filter.readParamsFromQuery();
 $FW.DOMReady(function () {
     var title = $FW.Format.urlQuery().title || '商品列表';
-
     if (Filter.options.searchSourceType == 1) {
         title = '我可兑换';
         NativeBridge.setTitle(title);
@@ -189,7 +194,7 @@ $FW.DOMReady(function () {
     if ($FW.Format.urlQuery().category) {
         Filter.options.categoryName = $FW.Format.urlQuery().category;
     }
-    if (Filter.options.searchSourceType == 2&&!$FW.Format.urlQuery().productName) {
+    if (Filter.options.searchSourceType == 2) {
 
     } else {
         NativeBridge.setTitle(title);
