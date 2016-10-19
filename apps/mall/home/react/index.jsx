@@ -45,12 +45,24 @@ const Mall = React.createClass({
         }
         return images;
     },
-    onImageClickHandler: function (index) {
+   onImageClickHandler: function (index) {
         var link = null;
         var bs = this.props.banners;
-        for (var i = 0; i < bs.length; i++) {
-            if (i == index) link = bs[i].link;
+        for (var i = 0; i < bs.length;j++) {
+            if (i == index) {
+            	var newbs=bs[i].link.split("?")[1].split('&');
+            	var newString='';
+            	for(var j=0;j<newbs.length;i++){
+            		if(newbs[0].split("=")[0]=="title"){
+            			newString=encodeURIComponent(newbs[0].split("=")[1]);
+            			newbs[0]="title="+newString;
+            		}
+            	}
+            	var newSearch=newbs.join('&');
+            } 
+            link=bs[i].link.split("?")[0]+'?'+newSearch;
         }
+        console.log(link);
         link ? gotoHandler(link) : console.log('no link set');
     },
     render: function () {
