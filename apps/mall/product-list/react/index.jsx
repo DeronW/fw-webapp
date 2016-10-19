@@ -28,13 +28,14 @@ const ResultPage = React.createClass({
         } else if (Filter.options.searchSourceType == 2) {
             this.setState({showExchangeBar: false});
             if($FW.Format.urlQuery().productName){
-            	console.log($FW.Format.urlQuery().productName);
+				document.querySelector('.search-confirm').click()
             	this.loadMoreProductHandler();
             }
         } else {
             this.loadMoreProductHandler();
         }
         $FW.Event.touchBottom(this.loadMoreProductHandler);
+        
         window.addEventListener('popstate', () => {
             function getUrlVars() {
                 var newSearch = {};
@@ -50,8 +51,10 @@ const ResultPage = React.createClass({
                 }
                 return newSearch;
             }
-            if(getUrlVars().searchSourceType==2)
-				document.querySelector('.search-confirm').click()
+            
+            Filter.search(getUrlVars(), (data)=> {
+            	this.setState({products: data||[]})
+            })
         });
     },
     setMyConvertibleScore: function (num) {
