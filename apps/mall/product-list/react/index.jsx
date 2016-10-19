@@ -36,26 +36,26 @@ const ResultPage = React.createClass({
         }
         $FW.Event.touchBottom(this.loadMoreProductHandler);
         
-        window.addEventListener('popstate', () => {
-            function getUrlVars() {
-                var newSearch = {};
-                var hash = [];
-                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-                for (var i = 0; i < hashes.length; i++) {
-                    hash = hashes[i].split('=');
-                    if (hash[0] == "page") {
-                        newSearch[hash[0]] = 1;
-                    } else {
-                        newSearch[hash[0]] = hash[1];
-                    }
-                }
-                return newSearch;
-            }
-            
-            Filter.search(getUrlVars(), (data)=> {
-            	this.setState({products: data||[]})
-            })
-        });
+//      window.addEventListener('popstate', () => {
+//          function getUrlVars() {
+//              var newSearch = {};
+//              var hash = [];
+//              var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+//              for (var i = 0; i < hashes.length; i++) {
+//                  hash = hashes[i].split('=');
+//                  if (hash[0] == "page") {
+//                      newSearch[hash[0]] = 1;
+//                  } else {
+//                      newSearch[hash[0]] = hash[1];
+//                  }
+//              }
+//              return newSearch;
+//          }
+//          
+//          Filter.search(getUrlVars(), (data)=> {
+//          	this.setState({products: data||[]})
+//          })
+//      });
     },
     setMyConvertibleScore: function (num) {
         this.setState({myConvertibleScore: num});
