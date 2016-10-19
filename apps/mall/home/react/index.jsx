@@ -179,6 +179,7 @@ const PopularRecommend = React.createClass({
                 <a onClick={function () {
                     gotoHandler(`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`)
                 }} className={"popular-recommend-a popular-recommend-a" + index}>
+                	
                     <img src={product.img || 'images/default-product.jpg'}/>
                     <div className="popular-recommend-title">{product.title}</div>
                     <div className="popular-recommend-score">{product.score ? product.score : 0}工分</div>
@@ -187,10 +188,7 @@ const PopularRecommend = React.createClass({
         };
         return (
             <div className="popular-recommend">
-                <div className="popular-recommend-h">
-                    <div className="popular-recommend-line"></div>
-                    人气热卖
-                </div>
+                <img src="images/popular-recommend-ico.png" className="popular-recommend-ico"/>
                 <div className="popular-recommend-cont">
                     {popularRecommendData.map(cont)}
                 </div>
