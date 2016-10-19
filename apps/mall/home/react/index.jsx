@@ -178,7 +178,7 @@ const PopularRecommend = React.createClass({
         let cont = (product, index)=> {
             return (
                 <a onClick={function () {
-                    gotoHandler('/product-detail?bizNo=' + product.bizNo)
+                    gotoHandler('/static/mall/product-detail?bizNo=' + product.bizNo)
                 }} className={"popular-recommend-a popular-recommend-a" + index}>
                     <img src={product.img || 'images/default-product.jpg'}/>
                     <div className="popular-recommend-title">{product.title}</div>
