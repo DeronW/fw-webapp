@@ -124,7 +124,7 @@ const ActivityProduct = React.createClass({
         let pi = (data, index) => <ProductItem {...data} key={index}/>;
         let activity_banner = () => {
             function click() {
-                gotoHandler("/static/mall/activity/index.html?bizNo=" +
+                gotoHandler('/static/mall/activity/index.html?bizNo='+
                     _this.props.bizNo + '&activity_id=' + _this.props.activity_id)
             }
 
