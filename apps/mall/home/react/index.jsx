@@ -45,7 +45,7 @@ const Mall = React.createClass({
         }
         return images;
     },
-    onImageClickHandler: function (index) {
+   onImageClickHandler: function (index) {
         var link = null;
         var bs = this.props.banners;
         for (var i = 0; i < bs.length; i++) {

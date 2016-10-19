@@ -14,7 +14,7 @@ const ProductItem = React.createClass({
         let marks = (this.props.tags || []).map((d, index) => <div key={index}>{d}</div>);
 
         return (
-            <a href={'/productDetail?bizNo=' + this.props.bizNo} className="index-actList-a">
+            <a href={'/static/mall/product-detail/index.html?bizNo=' + this.props.bizNo} className="index-actList-a">
                 <div className="list-img" style={{backgroundImage: cover_bg}}></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
