@@ -137,7 +137,7 @@ const Valid = React.createClass({
 const Sup = React.createClass({
     render: function () {
         return (
-            <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服<span className="blue">400-6766-988</span></div>
+            <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服<span className="blue">400-0322-988</span></div>
         )
     }
 });
