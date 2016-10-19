@@ -50,16 +50,8 @@ const ResultPage = React.createClass({
                 }
                 return newSearch;
             }
-            
-
-//          this.filterProducts(getUrlVars())
-            this._search_bar.searchHandler()
-            
-//          Filter.search(getUrlVars(), (data)=> {
-//              this.setState({
-//                  products: data.products || []
-//              });
-//          })
+            if(getUrlVars().searchSourceType==2)
+				document.querySelector('.search-confirm').click()
         });
     },
     setMyConvertibleScore: function (num) {
@@ -114,13 +106,11 @@ const ResultPage = React.createClass({
             )
         };
 
-		this._search_bar = <SearchBar filterProducts={this.filterProducts}
-                                    searchFocus={this.searchFocus}
-                                    setShowExchangeBar={this.setShowExchangeBar}/>
-
         return (
             <div>
-                {this.state.showSearch ? this._search_bar : null}
+                {this.state.showSearch ? <SearchBar filterProducts={this.filterProducts}
+                                    searchFocus={this.searchFocus}
+                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts}/>
 
                 {this.state.showExchangeBar || this.state.showFilterBar ?
@@ -186,7 +176,6 @@ let Filter = {
 Filter.readParamsFromQuery();
 $FW.DOMReady(function () {
     var title = $FW.Format.urlQuery().title || '商品列表';
-
     if (Filter.options.searchSourceType == 1) {
         title = '我可兑换';
         NativeBridge.setTitle(title);
