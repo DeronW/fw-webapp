@@ -473,7 +473,7 @@ const Withdrawals = React.createClass({
 				</div>
 
 				<div className="txt-a">
-					<div className="nin">如果您绑定的银行卡暂不支持手机一键支付请联系客服<a href="tel:400-6766-988" className="c-4aa1f9">400-0322-988</a></div>
+					<div className="nin">如果您绑定的银行卡暂不支持手机一键支付请联系客服<a href="tel:400-0322-988" className="c-4aa1f9">400-0322-988</a></div>
 					<div className="kx">可提现金额(元)：<span style={{fontSize: '38px',color: '#fd4d4c'}}>{this.props.data.accountAmount}</span></div>
 				</div>
 
