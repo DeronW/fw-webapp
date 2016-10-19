@@ -47,6 +47,7 @@ const NineDraw = React.createClass({
                 if (remain == -1) {
                     this.setState({showPopPrize: true});
                     this.props.addPriceList(prizeName);
+
                     this._usable = true;
                 }
             }, 1000 / 8 + (orig_remain - remain) * 10);
