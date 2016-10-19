@@ -250,14 +250,13 @@ const ProductItem = React.createClass({
         )
     }
 });
-
+let appIos = false;
+if ($FW.Browser.inApp() && $FW.Browser.inIOS()) {
+    appIos = true;
+} else {
+    appIos = false;
+}
 $FW.DOMReady(function () {
-	let appIos = false;
-    if ($FW.Browser.inApp() && $FW.Browser.inIOS()) {
-        appIos = true;
-    } else {
-        appIos = false;
-    }
     NativeBridge.setTitle('豆哥商城');
     $FW.BatchGet([
         API_PATH + 'mall/api/index/v1/banners.json', // banner轮播图数据
