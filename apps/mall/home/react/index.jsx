@@ -9,7 +9,7 @@ function gotoHandler(link, need_login) {
     if ($FW.Browser.inApp()) {
         NativeBridge.goto(link, need_login)
     } else {
-        location.href = link;
+        location.href = encodeURI(link);
     }
 }
 
@@ -45,7 +45,7 @@ const Mall = React.createClass({
         }
         return images;
     },
-   onImageClickHandler: function (index) {
+    onImageClickHandler: function (index) {
         var link = null;
         var bs = this.props.banners;
         for (var i = 0; i < bs.length; i++) {
@@ -66,10 +66,11 @@ const Mall = React.createClass({
         return (
             <div className="head-wrap">
                 {this.props.banners.length ?
-                    <BannerGroup className={appIos?"head-images head-images-ios":"head-images"} images={this.getHeadImages()}
+                    <BannerGroup className={appIos ? "head-images head-images-ios" : "head-images"}
+                                 images={this.getHeadImages()}
                                  onImageClick={this.onImageClickHandler}/> :
                     <div className="no-banner"></div>}
-                <div className={appIos?"head-items head-images-ios":"head-items"}>
+                <div className={appIos ? "head-items head-images-ios" : "head-items"}>
                     {backFactory()}
                     <a onClick={function () {
                         gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false)
@@ -179,7 +180,7 @@ const PopularRecommend = React.createClass({
                 <a onClick={function () {
                     gotoHandler(`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`)
                 }} className={"popular-recommend-a popular-recommend-a" + index}>
-                	
+
                     <img src={product.img || 'images/default-product.jpg'}/>
                     <div className="popular-recommend-title">{product.title}</div>
                     <div className="popular-recommend-score">{product.score ? product.score : 0}工分</div>
