@@ -69,7 +69,7 @@ const UserInfo = React.createClass({
                     </div>
 
                     <div className="user-info-r">
-                        <a className="user-get-adders" href="/delivery_address?preview=true">
+                        <a className="user-get-adders" href="/static/mall/deliver-address/index.html?preview=true">
                             <i className="adders-icon">
                                 <img src="images/address-icon.png"/>
                             </i>
@@ -95,7 +95,7 @@ const MyOderBlock = React.createClass({
             <div>
                 <div className="my-oder-block">
                     <span className="title">我的订单</span>
-                    <a href="/order/mine" className="oder-lick-text">
+                    <a href="/static/mall/order-list/index.html" className="oder-lick-text">
                         查看全部订单
                     </a>
                 </div>
@@ -111,21 +111,21 @@ const DeliveryProcessList = React.createClass({
         return (
             <div className="delivery-list">
                 <div className="info-block">
-                    <a className="icon" href="/order/mine#prepare">
+                    <a className="icon" href="/static/mall/order-list/index.html#prepare">
                         <img src="images/shopping-ship-icon.png"/>
                         {this.props.perpareCount >= 1 ? marKion(this.props.perpareCount) : null }
                         <span className="text">待发货</span>
                     </a>
                 </div>
                 <div className="info-block">
-                    <a className="icon" href="/order/mine#shipping">
+                    <a className="icon" href="/static/mall/order-list/index.html#shipping">
                         <img src="images/shopping-conduct-icon.png"/>
                         {this.props.shippingCount >= 1 ? marKion(this.props.shippingCount) : null }
                         <span className="text">待收货</span>
                     </a>
                 </div>
                 <div className="info-block">
-                    <a className="icon" href="/order/mine#complete">
+                    <a className="icon" href="/static/mall/order-list/index.html#complete">
                         <img src="images/shopping-complete-icon.png"/>
                         <span className="text">已完成</span>
                     </a>
@@ -137,7 +137,6 @@ const DeliveryProcessList = React.createClass({
 
 const Account = React.createClass({
     render: function () {
-
         let score = null;
         if (this.props.show_score) {
             score = (
@@ -154,11 +153,6 @@ const Account = React.createClass({
         return (
             <div>
                 <div className="my-account-block">
-                    <div className="my-account-title">
-                        <span className="l-text">可用余额</span>
-                        <span className="r-text money-number">&yen;{$FW.Format.currency(this.props.money)}</span>
-                    </div>
-
                     <div className="voucher-list">
                         <div>
                             <span className="l-text">优惠券</span>
@@ -277,26 +271,20 @@ const Voucher = React.createClass({
             <img className="watermark" src={mark_images[mark_name]}/> : null;
 
         let gray_bg = this.props.state != 'normal';
-        let exchange_btn = mark_name ? null : <span className="btn-exchange">点我兑换</span>;
+        let exchange_btn = mark_name ? null : <span className="btn-exchange"></span>;
 
         let voucher_score = data.score ? <span>{data.score}工分</span> : null;
         let voucher_price = (data.price > 0 || data.score == 0) ?
             <span>&yen;{$FW.Format.currency(data.price)}</span> : null;
 
         return (
-            <div className="my-voucher-cont-list">
-                <a href={ (this.props.state == 'used' || this.props.state == 'dated') ? 'javascript:void(0)' : '/productDetail?bizNo=' + data.product_biz_no}>
+            <div className={ this.props.state == "used" || this.props.state == "dated" ? "my-voucher-cont-list gray-bg" : "my-voucher-cont-list color-bg"}>
+                <a href={ (this.props.state == 'used' || this.props.state == 'dated') ? 'javascript:void(0)' : '/static/mall/product-detail/index.html?bizNo=' + data.product_biz_no}>
                     <div className={gray_bg ? "t-info b-color" : "t-info"}>
                         <div className="title-info">
                             <span className="title-text">{data.title}</span>
-                            <span className="money-text">
-                                {voucher_price}
-                                {data.price > 0 && data.score ? ' + ' : null}
-                                {voucher_score}
-                            </span>
                         </div>
                         <div className="clear-info">
-                            <span className="text">来源 {data.type}</span>
                             <span className="text-timer">{date_text} <em>{data.indate}</em></span>
                         </div>
                     </div>
@@ -318,7 +306,6 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/user.json',
-        //url: 'http://localhost/user.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<HomePage {...data}/>, document.getElementById("cnt"));
@@ -333,11 +320,11 @@ $FW.DOMReady(function () {
 
 function back_handler() {
 
-    $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/';
+    $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/static/mall/home/index.html';
 }
 
-$FW.setLoginRedirect('/');
+$FW.setLoginRedirect('/static/mall/home/index.html');
 
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') back_handler()
-};
+//window.onNativeMessageReceive = function (msg) {
+//    if (msg == 'history:back') back_handler()
+//};

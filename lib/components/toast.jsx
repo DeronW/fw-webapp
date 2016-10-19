@@ -37,7 +37,8 @@ const GlobalToast = React.createClass({
             backgroundColor: "rgba(0, 0, 0, 0.6)",
             transition: "opacity " + this.props.animation + "ms ease-in-out",
             opacity: this.state.opacity,
-            borderRadius: "5px"
+            borderRadius: "5px",
+            zIndex: "1000000000"
         };
 
         return <div className="error-tip" style={style} ref="self">{this.props.text}</div>

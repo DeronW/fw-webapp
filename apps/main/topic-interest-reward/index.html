@@ -1,0 +1,68 @@
+{% extends '../../../lib/templates/main_base.swig.html' %}
+
+{% block title %}VIP等级加息{% endblock %}
+
+{% block content %}
+
+<div id="header"></div>
+
+<div class="user-level">
+    <div class="text"> 您当前的会员等级是</div>
+    <span class="level" id="level"></span>
+    <div class="interest">
+        <div class="interest-text">年化加息奖励为</div>
+        <div class="interest-value">
+            <b id="interest"></b>
+            <span>%</span>
+        </div>
+    </div>
+</div>
+<img class="img" src="images/img-2.png">
+
+<div class="table">
+    <div>
+        <span class="yellow">年化加息奖励</span>
+        是一项VIP特权。用户投资时，根据用户投资后的VIP等级，来给用户加息。
+    </div>
+
+    <div class="row row-a row-first">
+        等级
+        <div>年化加息奖励</div>
+    </div>
+    <div class="row row-b">
+        普通会员
+        <div id="add-interest-text-0">-</div>
+    </div>
+    <div class="row row-c">
+        VIP1
+        <div id="add-interest-text-1">-</div>
+    </div>
+    <div class="row row-b">
+        VIP2
+        <div id="add-interest-text-2">0.2</div>
+    </div>
+    <div class="row row-c">
+        VIP3
+        <div id="add-interest-text-3">0.4</div>
+    </div>
+    <div class="row row-b row-last">
+        VIP4
+        <div id="add-interest-text-4">0.6</div>
+    </div>
+</div>
+<img class="img" src="images/img-3.png">
+
+<a class="invest" onClick="gotoInvest()">
+    <img src="images/img-4.png">
+</a>
+
+<script>
+    function gotoInvest() {
+        if ($FW.Browser.inApp()) {
+            NativeBridge.close();
+        } else {
+            location.href = 'http://m.9888.cn/mpwap'
+        }
+    }
+</script>
+{% endblock %}

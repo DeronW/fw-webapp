@@ -77,7 +77,6 @@ const Recharge = React.createClass({
                     if (i.bizNo == data.defaultBizNo)
                         pay_score = i.score;
                 });
-
                 this.setState({
                     net_pay_score: pay_score,
                     bizNo: data.defaultBizNo,
@@ -292,10 +291,10 @@ Recharge.ProductPanel = React.createClass({
 
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('充值专区');
+    NativeBridge.setTitle('充值中心');
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(
-			<Header title={"充值专区"} back_handler={backward}/>,
+			<Header title={"充值中心"} back_handler={backward}/>,
             document.getElementById('header')
 		)
 
@@ -311,6 +310,6 @@ $FW.DOMReady(function () {
 });
 
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+function backward(){
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html';
 }
