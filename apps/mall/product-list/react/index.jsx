@@ -27,10 +27,10 @@ const ResultPage = React.createClass({
             });
         } else if (Filter.options.searchSourceType == 2) {
             this.setState({showExchangeBar: false});
-            if($FW.Format.urlQuery().productName){
+            //if($FW.Format.urlQuery().productName){
 				//document.querySelector('.search-confirm').click()
-            	this.loadMoreProductHandler();
-            }
+            	//this.loadMoreProductHandler();
+            //}
         } else {
             this.loadMoreProductHandler();
         }
