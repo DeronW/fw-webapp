@@ -163,7 +163,7 @@ let Filter = {
             data: Filter.options,
             enable_loading: true,
             success: data => callback(data)
-        })
+        });
     },
     readParamsFromQuery: function () {
         Filter.mix($FW.Format.urlQuery());
@@ -173,7 +173,10 @@ let Filter = {
         for (var i in Filter.options) {
             search.push(`${i}=${Filter.options[i]}`)
         }
-        history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
+        if(!window.__push_flag) {
+        	window.__push_flag = true;
+	        history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
+        }
     }
 };
 Filter.readParamsFromQuery();
