@@ -27,6 +27,9 @@ const ResultPage = React.createClass({
             });
         } else if (Filter.options.searchSourceType == 2) {
             this.setState({showExchangeBar: false});
+            if($FW.Format.urlQuery().productName){
+            	this.loadMoreProductHandler();
+            }
         } else {
             this.loadMoreProductHandler();
         }
@@ -189,7 +192,7 @@ $FW.DOMReady(function () {
     if ($FW.Format.urlQuery().category) {
         Filter.options.categoryName = $FW.Format.urlQuery().category;
     }
-    if (Filter.options.searchSourceType == 2&&!$FW.Format.urlQuery().productName) {
+    if (Filter.options.searchSourceType == 2) {
 
     } else {
         NativeBridge.setTitle(title);
