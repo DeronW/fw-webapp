@@ -28,6 +28,7 @@ const ResultPage = React.createClass({
         } else if (Filter.options.searchSourceType == 2) {
             this.setState({showExchangeBar: false});
             if($FW.Format.urlQuery().productName){
+            	console.log($FW.Format.urlQuery().productName);
             	this.loadMoreProductHandler();
             }
         } else {
@@ -49,12 +50,16 @@ const ResultPage = React.createClass({
                 }
                 return newSearch;
             }
+            
 
-            Filter.search(getUrlVars(), (data)=> {
-                this.setState({
-                    products: data.products || []
-                });
-            })
+//          this.filterProducts(getUrlVars())
+            this._search_bar.searchHandler()
+            
+//          Filter.search(getUrlVars(), (data)=> {
+//              this.setState({
+//                  products: data.products || []
+//              });
+//          })
         });
     },
     setMyConvertibleScore: function (num) {
@@ -109,11 +114,13 @@ const ResultPage = React.createClass({
             )
         };
 
+		this._search_bar = <SearchBar filterProducts={this.filterProducts}
+                                    searchFocus={this.searchFocus}
+                                    setShowExchangeBar={this.setShowExchangeBar}/>
+
         return (
             <div>
-                {this.state.showSearch ? <SearchBar filterProducts={this.filterProducts}
-                                                    searchFocus={this.searchFocus}
-                                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
+                {this.state.showSearch ? this._search_bar : null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts}/>
 
                 {this.state.showExchangeBar || this.state.showFilterBar ?
