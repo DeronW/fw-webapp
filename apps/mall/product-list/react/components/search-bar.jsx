@@ -1,7 +1,7 @@
 const SearchBar = React.createClass({
     getInitialState: function () {
         return {
-            value: '',
+            value: $FW.Format.urlQuery().productName?:'',
             history: [],
             showSearchHistory: true
         }
