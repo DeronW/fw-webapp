@@ -48,11 +48,11 @@ const Mall = React.createClass({
     onImageClickHandler: function (index) {
         var link = null;
         var bs = this.props.banners;
-        for (var i = 0; i < bs.length;j++) {
+        for (var i = 0; i < bs.length;i++) {
             if (i == index) {
             	var newbs=bs[i].link.split("?")[1].split('&');
             	var newString='';
-            	for(var j=0;j<newbs.length;i++){
+            	for(var j=0;j<newbs.length;j++){
             		if(newbs[0].split("=")[0]=="title"){
             			newString=encodeURIComponent(newbs[0].split("=")[1]);
             			newbs[0]="title="+newString;
