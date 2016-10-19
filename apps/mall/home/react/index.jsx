@@ -124,8 +124,7 @@ const ActivityProduct = React.createClass({
         let pi = (data, index) => <ProductItem {...data} key={index}/>;
         let activity_banner = () => {
             function click() {
-                gotoHandler('/static/mall/activity/index.html?bizNo='+
-                    _this.props.bizNo + '&activity_id=' + _this.props.activity_id)
+                gotoHandler(`/static/mall/activity/index.html?bizNo=${_this.props.bizNo}&activity_id=${_this.props.activity_id}`)
             }
 
             return this.props.img ?
@@ -178,7 +177,7 @@ const PopularRecommend = React.createClass({
         let cont = (product, index)=> {
             return (
                 <a onClick={function () {
-                    gotoHandler('/static/mall/product-detail?bizNo=' + product.bizNo)
+                    gotoHandler(`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`)
                 }} className={"popular-recommend-a popular-recommend-a" + index}>
                     <img src={product.img || 'images/default-product.jpg'}/>
                     <div className="popular-recommend-title">{product.title}</div>
