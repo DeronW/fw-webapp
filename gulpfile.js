@@ -6,15 +6,25 @@ gulp.task('default', function (done) {
     console.log(require('archy')(gulp.tree()));
     done();
 });
+
+// 从当前环境中加载配置选项, 如果没有加载到就是用默认配置
+let CONSTANTS; // 本地配置选项
 try {
-    const constants = require('/a.js');
+    CONSTANTS = require('/gulpfile.constants.js');
 } catch (e) {
-    console.log('error')
+    CONSTANTS = {
+        main: {
+            dev_api_path: 'http://localhost/fake-api/'
+        },
+        mall: {
+            dev_api_path: 'http://localhost/fake-api/'
+        }
+    }
 }
 
 // gulpfile 本地扩展配置
-require('./gulpfile.main.js')(gulp, gt);
-require('./gulpfile.mall.js')(gulp, gt);
+require('./gulpfile.main.js')(gulp, gt, CONSTANTS);
+require('./gulpfile.mall.js')(gulp, gt, CONSTANTS);
 
 // fs.access(LOCAL_CONFIG, (err) => {
 //     if (!err) {

@@ -48,7 +48,7 @@ const MAIN_APP_NAMES = [
     'topic-hui-shang-updating' //徽商升级页面提示
 ];
 
-module.exports = function (gulp, generate_task) {
+module.exports = function (gulp, generate_task, CONSTANTS) {
     MAIN_APP_NAMES.forEach(function (i) {
         var common_components = [
             'loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx',
@@ -58,7 +58,7 @@ module.exports = function (gulp, generate_task) {
 
         generate_task('main', i, {
             debug: true,
-            api_path: "http://xjb.9888.cn/",
+            api_path: CONSTANTS.main.dev_api_path,
             include_components: common_components,
             include_common_js: common_js
         });
