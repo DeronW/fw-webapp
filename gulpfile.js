@@ -1,3 +1,5 @@
+'use strict';
+
 let gulp = require('gulp');
 const gt = require('./tasks');
 
