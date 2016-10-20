@@ -2,7 +2,7 @@
  主站移动端页面配置
  包含了主站移动端新增的页面
  */
-const MAIN_APP_NAMES2 = [
+const MAIN_APP_NAMES = [
 
     /* 测试徽商, 不发布其他页面, 加速发布过程 */
     // 旧页面重构
@@ -46,9 +46,6 @@ const MAIN_APP_NAMES2 = [
     'topic-annual-commision',//年化佣金页面
     'topic-invite'//邀请返利, 邀请人,
 ];
-
-
-const MAIN_APP_NAMES = ['faq']
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     MAIN_APP_NAMES.forEach(function (i) {
