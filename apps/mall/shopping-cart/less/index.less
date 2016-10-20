@@ -1,0 +1,135 @@
+body {
+  background-color: #ebebee;
+}
+*{
+  margin:0;
+  padding:0;
+}
+a{
+  text-decoration: none;
+}
+.shopping-item{
+  overflow:hidden;
+  padding:30px;
+  background:#fff;
+  margin-top:15px;
+  border-top:1px solid #d8d8d8;
+  border-bottom:1px solid #d8d8d8;
+}
+.checked-icon{
+  width:50px;
+  height:50px;
+  float:left;
+  margin-top:67px;
+  margin-right:20px;
+}
+.unchecked-circle{
+  display:block;
+  width:50px;
+  height:50px;
+  background:url(../images/unchecked.jpg) no-repeat;
+}
+.total-unchecked-circle{
+  display:inline-block;
+  width:50px;
+  height:50px;
+  background:url(../images/unchecked.jpg) no-repeat;
+}
+.product-img{
+  width:180px;
+  height:180px;
+  float:left;
+  margin-right:20px;
+}
+.product-item{
+  float:left;
+  width:330px;
+}
+.product-name{
+  font-size:26px;
+  width:330px;
+  color:#333;
+  text-align:justify;
+}
+.product-price{
+  font-size:28px;
+  color:#fd4d4c;
+  margin-top:5px;
+  margin-bottom:5px;
+}
+.detail-num-change {
+  float: left;
+  display: table;
+  padding: 6px 0 0;
+  div {
+    float: left;
+    height: 52px;
+    width: 52px;
+    line-height: 68px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    border-top: 2px solid #ddd;
+    font-size: 40px;
+    color: #a0aab6;
+  }
+  .plus {
+    border-left: 2px solid #ddd;
+    border-right: 2px solid #ddd;
+    background-image: url(../images/blue-plus.png);
+    background-size:100% 100%;
+    &.gray {
+      background-image: url(../images/gray-plus.png);
+    }
+  }
+  .minus {
+    border-left: 2px solid #ddd;
+    border-right: 2px solid #ddd;
+    background-image: url(../images/blue-minus.png);
+    background-size:100% 100%;
+    &.gray {
+      background-image: url(../images/gray-minus.png);
+    }
+  }
+  .input-num {
+    height: 52px;
+    line-height: 52px;
+    width: 100px;
+    text-align: center;
+    input {
+      display: block;
+      height: 48px;
+      line-height: 48px;
+      width: 100px;
+      border: none;
+      background-color: #fff;
+      text-align: center;
+      color: #333;
+      font-size: 32px;
+    }
+  }
+}
+.product-delete{
+  float:right;
+  background:url(../images/delete.jpg) no-repeat;
+  width:50px;
+  height:50px;
+  margin-top:127px;
+}
+.calculation-bar{
+  overflow:hidden;
+  height:86px;
+  background:#fff;
+  padding:0 30px;
+}
+.all-chosen{
+  float:left;
+}
+.all-price{
+  float:right;
+  font-size:28px;
+  color:#555;
+  line-height:86px;
+}
+.total-price{
+  color:#fd4d4c;
+}
