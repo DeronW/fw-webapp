@@ -12,6 +12,7 @@ Thumbs.db
 
 !build/.git
 .project
+gulpfile.constants.js
 
 
 *swp

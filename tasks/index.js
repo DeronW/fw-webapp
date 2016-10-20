@@ -47,7 +47,8 @@ module.exports = function (site_name, project_name, configs) {
 
     var common_javascript_files = [
         `${lib_path}fw-1.1.1.js`,
-        `${lib_path}native-bridge-0.2.0.js`
+        `${lib_path}native-bridge-0.2.0.js`,
+        `${lib_path}redux-3.6.0.min.js`
     ];
     if (CONFIG.debug) {
         common_javascript_files.push(`${lib_path}react-15.3.1/react.min.js`);
