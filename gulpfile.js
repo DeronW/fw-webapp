@@ -1,5 +1,4 @@
-var gulp = require('gulp');
-const fs = require('fs');
+let gulp = require('gulp');
 const gt = require('./tasks');
 
 gulp.task('default', function (done) {
@@ -25,10 +24,3 @@ try {
 // gulpfile 本地扩展配置
 require('./gulpfile.main.js')(gulp, gt, CONSTANTS);
 require('./gulpfile.mall.js')(gulp, gt, CONSTANTS);
-
-// fs.access(LOCAL_CONFIG, (err) => {
-//     if (!err) {
-//         let main = require(LOCAL_CONFIG);
-//         main.task(main.names, gulp, gt);
-//     }
-// });
