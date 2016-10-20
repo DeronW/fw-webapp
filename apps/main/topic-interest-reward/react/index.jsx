@@ -15,7 +15,7 @@ $FW.DOMReady(function () {
             url: API_PATH + 'mpwap/api/v1/user/level-info.shtml',
             success: (data)=> {
                 var level = data.userLevel - 1;
-                document.getElementById('level').innerText = level > 1 ? 'VIP' + (level - 1) : '普通会员';
+                document.getElementById('level').innerText = level > 0 ? 'VIP' + level : '普通会员';
                 document.getElementById('interest').innerText = interest_list[level] ? parseFloat(interest_list[level].describe) : '无';
             }
         });
