@@ -12,6 +12,8 @@ const MALL_APP_NAMES = [
     'order-confirm',
     'order-complete',
     'shopping-cart',
+    'payment',
+    'new-order-detail',
 
     // 产品相关页面
     'product-detail',

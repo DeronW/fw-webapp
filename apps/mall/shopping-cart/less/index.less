@@ -34,6 +34,7 @@ a{
   width:50px;
   height:50px;
   background:url(../images/unchecked.jpg) no-repeat;
+  margin-top:17px;
 }
 .product-img{
   width:180px;
@@ -48,6 +49,9 @@ a{
 .product-name{
   font-size:26px;
   width:330px;
+  height:70px;
+  overflow:hidden;
+  text-overflow:ellipsis;
   color:#333;
   text-align:justify;
 }
@@ -124,6 +128,13 @@ a{
 .all-chosen{
   float:left;
 }
+.chosenTip{
+  float:right;
+  margin-left:20px;
+  font-size:28px;
+  color:#555;
+  line-height:86px;
+}
 .all-price{
   float:right;
   font-size:28px;
@@ -132,4 +143,28 @@ a{
 }
 .total-price{
   color:#fd4d4c;
+}
+.pay-bar{
+  width:720px;
+  padding-top:22px;
+  height:106px;
+  position:fixed;
+  bottom:0;
+  background:#fff;
+  box-shadow: 0 -5px 10px 0 rgba(50,50,50,.1);
+}
+.pay-btn{
+  display:block;
+  width: 660px;
+  height:84px;
+  background:#fd4d4c;
+  font-size: 36px;
+  color:#fff;
+  line-height:84px;
+  text-align:center;
+  border-radius:4px;
+  margin:0 auto;
+}
+.shopping-cart{
+  margin-bottom:148px;
 }

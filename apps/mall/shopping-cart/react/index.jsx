@@ -8,8 +8,11 @@ const ShoppingCart = React.createClass({
                <ShoppingItem/>
                <ShoppingItem/>
                <ShoppingItem/>
+               <ShoppingItem/>
+               <ShoppingItem/>
+               <ShoppingItem/>
                <div className="calculation-bar">
-                   <div className="all-chosen"><span className="total-unchecked-circle"></span>全选</div>
+                   <div className="all-chosen"><span className="total-unchecked-circle"></span><span className="chosenTip">全选</span></div>
                    <div className="all-price">合计：<span className="total-price">¥2.199+22233320工分</span></div>
                </div>
                <div className="pay-bar">
@@ -30,7 +33,7 @@ const ShoppingItem = React.createClass({
                 <div className="product-img"><img src="images/product.jpg"/></div>
                 <div className="product-item">
                     <div className="product-info">
-                        <div className="product-name">Apple / 苹果   iPad Air2 128G  WIFI 64g 金色</div>
+                        <div className="product-name">Apple / 苹果   iPad Air2 128G  WIFI 64g 金色Apple / 苹果   iPad Air2 128G  WIFI 64g 金色</div>
                         <div className="product-price">¥2.199+22233320工分</div>
                         <div className="detail-num-change">
                             <div className="minus"></div>
