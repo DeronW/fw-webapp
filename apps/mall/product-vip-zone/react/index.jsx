@@ -82,37 +82,85 @@ const VipZone = React.createClass({
             is_Level = 5
         }
 
-        $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.count + '&page=' + page + '&vipLevel=' + is_Level,
-            enable_loading: true,
-            success: function (data) {
-                let tab;
-                if (data.vipLevel == -1) {
-                    tab = 'all'
-                } else if (data.vipLevel == 1) {
-                    tab = 'vipLevel0'
-                } else if (data.vipLevel == 2) {
-                    tab = 'vipLevel1'
-                } else if (data.vipLevel == 3) {
-                    tab = 'vipLevel2'
-                } else if (data.vipLevel == 4) {
-                    tab = 'vipLevel3'
-                } else if (data.vipLevel == 5) {
-                    tab = 'vipLevel4'
-                } else {
-                    done && done();
-                    return;
-                }
+//      $FW.Ajax({
+//          url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.count + '&page=' + page + '&vipLevel=' + is_Level,
+//          enable_loading: true,
+//          success: function (data) {
+//              let tab;
+//              if (data.vipLevel == -1) {
+//                  tab = 'all'
+//              } else if (data.vipLevel == 1) {
+//                  tab = 'vipLevel0'
+//              } else if (data.vipLevel == 2) {
+//                  tab = 'vipLevel1'
+//              } else if (data.vipLevel == 3) {
+//                  tab = 'vipLevel2'
+//              } else if (data.vipLevel == 4) {
+//                  tab = 'vipLevel3'
+//              } else if (data.vipLevel == 5) {
+//                  tab = 'vipLevel4'
+//              } else {
+//                  done && done();
+//                  return;
+//              }
+//
+//              window.Products[tab] = window.Products[tab].concat(data.products);
+//              let products = window.Products[this.state.tab];
+//              let new_page = this.state.page;
+//              new_page[this.state.tab] = new_page[this.state.tab] + 1;
+//              if (data.totalCount < 20) new_page[this.state.tab] = 0;
+//              this.setState({products: products, page: new_page});
+//              done && done();
+//          }.bind(this)
+//      });
 
-                window.Products[tab] = window.Products[tab].concat(data.products);
-                let products = window.Products[this.state.tab];
-                let new_page = this.state.page;
-                new_page[this.state.tab] = new_page[this.state.tab] + 1;
-                if (data.totalCount < 20) new_page[this.state.tab] = 0;
-                this.setState({products: products, page: new_page});
-                done && done();
-            }.bind(this)
-        });
+
+	$FW.Ajax({
+	            url: API_PATH + 'mall/api/index/v1/search.json',
+	            data: {
+	            	page: page,
+			        vipLevel:is_Level,
+			        productName: '',
+			        categoryName: '',
+			        actIds: '',
+			        searchSourceType:4,
+			        prefectureType:3,
+			        order:0,
+			        minPoints: '',
+			        maxPoints: ''
+	            },
+	            enable_loading: true,
+	            success: function (data) {
+	            	
+		              let tab;
+		              console.log(1);
+		              if (is_Level== -1) {
+		                  tab = 'all'
+		                  
+		              } else if (is_Level == 1) {
+		                  tab = 'vipLevel0'
+		              } else if (is_Level == 2) {
+		                  tab = 'vipLevel1'
+		              } else if (is_Level == 3) {
+		                  tab = 'vipLevel2'
+		              } else if (is_Level == 4) {
+		                  tab = 'vipLevel3'
+		              } else if (is_Level == 5) {
+		                  tab = 'vipLevel4'
+		              } else {
+		                  done && done();
+		                  return;
+		              }		
+		              
+		              window.Products[tab] = window.Products[tab].concat(data.products);
+		              let products = window.Products[this.state.tab];
+		              let new_page = this.state.page;
+		              new_page[this.state.tab] = new_page[this.state.tab] + 1;
+		              if (data.totalCount < 20) new_page[this.state.tab] = 0;
+		              this.setState({products: products, page: new_page});
+		              done && done();
+		          }.bind(this)
+	        });
     },
 
     componentDidMount: function () {

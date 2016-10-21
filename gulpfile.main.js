@@ -44,7 +44,13 @@ const MAIN_APP_NAMES = [
     'topic-interest-reward', // 年化加息奖励
     'topic-recommender-recruitment', //推荐人页面
     'topic-annual-commision',//年化佣金页面
-    'topic-invite'//邀请返利, 邀请人,
+    'topic-invite',//邀请返利, 邀请人,
+
+    //圈子相关页面
+    'circle-tender-complete',//直融标成功
+    'circle-transfer-complete',//债券转让成功
+    'circle-register-complete',//签到成功
+    'circle-team-data',//小队数据
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
