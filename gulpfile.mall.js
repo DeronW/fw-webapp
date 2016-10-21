@@ -16,6 +16,7 @@ const MALL_APP_NAMES = [
     'new-order-detail',
 
     // 产品相关页面
+	'new-product-detail',
     'product-detail',
     'product-list',
     'product-vip-zone',
