@@ -1,5 +1,3 @@
-'use strict';
-
 let gulp = require('gulp');
 const gt = require('./tasks');
 
@@ -14,9 +12,9 @@ try {
     CONSTANTS = require('./gulpfile.settings.js');
 } catch (e) {
     CONSTANTS = {
-        main: {
+        main: {    
             dev_api_path: 'http://localhost/fake-api/'
-        },
+        },                                        
         mall: {
             dev_api_path: 'http://localhost/fake-api/'
         }
