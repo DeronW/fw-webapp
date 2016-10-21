@@ -8,6 +8,10 @@ const OrderDetail = React.createClass({
                <div className="order-status">
                    <img src="images/order-cancel.png"/>
                </div>
+               <div className="logistic-info">
+                   <div className="pay-item"><span class="pay-item-title">物流名称</span><span className="pay-item-amount">韵达物流</span></div>
+                   <div className="pay-item"><span class="pay-item-title">物流编号</span><span className="pay-item-amount">881476676357276035</span></div>
+               </div>
                <div className="order-address">
                    <div className="goods-address-cnt">
                        <div className="address-wrap">
@@ -42,6 +46,13 @@ const OrderDetail = React.createClass({
                        </div>
                    </div>
                </div>
+               <div className="pay-info">
+                   <div className="pay-info-title"><span>支付信息</span></div>
+                   <div className="pay-item"><span class="pay-item-title">兑换券支付</span><span className="pay-item-amount">¥100.00</span></div>
+                   <div className="pay-item"><span class="pay-item-title">微信支付</span><span className="pay-item-amount">¥100.00</span></div>
+                   <div className="pay-item"><span class="pay-item-title">工分支付</span><span className="pay-item-amount">100.00</span></div>
+               </div>
+
                <div className="order-details">
                    <div className="order-number">
                        <div className="title">订单号：46611362006</div>

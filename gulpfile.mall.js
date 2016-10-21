@@ -5,6 +5,7 @@ const MALL_APP_NAMES = [
     'home',
     'activity',
     'user',
+    'new-user',
 
     // 订单页面
     'order-list',
