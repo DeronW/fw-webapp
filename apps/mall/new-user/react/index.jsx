@@ -8,79 +8,79 @@ const User = React.createClass({
                <div className="header">
                    <a className="user-back-arrow"></a>
                    <span className="user-title">我的商城</span>
-                   <span className="notification"></span>
-                   <span className="news-tip"></span>
                </div>
                <div className="user-info">
                    <img className="profile-img" src="images/boy.jpg"/>
-                   <div className="user-name">蓝月<span className="user-level"></span></div>
-                   <div className="available-score">可用工分<span className="gongfeng">99858</span></div>
+                   <div className="user-name">蓝月蓝月<span className="user-level"><img src="images/usercenter_vip1_icon.png"/></span></div>
+                   <div className="available-score">可用工分<span className="gongfeng">998544448</span></div>
                    <a className="account-setting">账户设置</a>
                </div>
                <div className="product-status">
-                   <div className="product-status-item">
-                       <img src="images/icon-1.jpg"/>
+                   <a className="product-status-item">
+                       <img src="images/icon1.jpg"/>
                        <span className="status-name">待付款</span>
                        <span className="remind-circle">2</span>
-                   </div>
-                   <div className="product-status-item">
-                       <img src="images/icon-2.jpg"/>
+                   </a>
+                   <a className="product-status-item">
+                       <img src="images/icon2.jpg"/>
                        <span className="status-name">待发货</span>
                        <span className="remind-circle">2</span>
-                   </div>
-                   <div className="product-status-item">
-                       <img src="images/icon-3.jpg"/>
+                   </a>
+                   <a className="product-status-item">
+                       <img src="images/icon3.jpg"/>
                        <span className="status-name">待收货</span>
                        <span className="remind-circle">2</span>
-                   </div>
-                   <div className="product-status-item">
-                       <img src="images/icon-4.jpg"/>
+                   </a>
+                   <a className="product-status-item">
+                       <img src="images/icon4.jpg"/>
                        <span className="status-name">已完成</span>
-                       <span className="remind-circle">2</span>
-                   </div>
-                   <div className="product-status-item">
-                       <img src="images/icon-5.jpg"/>
+                   </a>
+                   <a className="all-orders">
+                       <img src="images/icon5.jpg"/>
                        <span className="status-name">全部订单</span>
-                   </div>
+                   </a>
+                   <div className="seperate-line"></div>
                </div>
                <div className="user-personal-items">
-                   <div className="personal-item">
+                   <a className="personal-item">
                        <span className="item-name item-icon6">收货地址</span>
                        <span className="jump-arrow"></span>
-                   </div>
-                   <div className="personal-item">
+                   </a>
+                   <a className="personal-item">
                        <span className="item-name item-icon7">兑换券</span>
                        <span className="jump-arrow"></span>
-                   </div>
-                   <div className="personal-item">
-                       <span className="item-name item-icon8">收货地址</span>
-                       <span className="jump-arrow">已绑定</span>
-                   </div>
+                   </a>
+                   <a className="personal-item">
+                       <span className="item-name item-icon8">银行卡</span>
+                       <span className="jump-arrow"></span>
+                       <span className="bank-card-status">已绑定</span>
+                   </a>
                </div>
                <div className="icon-list">
-                   <div className="list-box">
-                       <img src="images/icon-9.jpg"/>
-                       <span>抽奖记录</span>
-                   </div>
-                   <div className="list-box">
-                       <img src="images/icon-10.jpg"/>
-                       <span>我的评价</span>
-                   </div>
-                   <div className="list-box">
-                       <img src="images/icon-11.jpg"/>
-                       <span>足迹</span>
-                   </div>
-                   <div className="list-box">
-                       <img src="images/icon-12.jpg"/>
-                       <span>分享有礼</span>
-                   </div>
-                   <div className="list-box">
-                       <img src="images/icon-13.jpg"/>
-                       <span>在线客服</span>
-                   </div>
-                   <div className="list-box">
-                       <img src="images/icon-14.jpg"/>
-                       <span>帮助中心</span>
+                   <a className="list-box">
+                       <img src="images/icon9.jpg"/>
+                       <span className="box-title1">抽奖记录</span>
+                   </a>
+                   <a className="list-box">
+                       <img src="images/icon11.jpg"/>
+                       <span className="box-title2">我的足迹</span>
+                   </a>
+                   <a className="list-box">
+                       <img src="images/icon13.jpg"/>
+                       <span className="box-title3">客服热线</span>
+                   </a>
+                   <a className="list-box">
+                       <img src="images/icon14.jpg"/>
+                       <span className="box-title4">帮助中心</span>
+                   </a>
+               </div>
+               <div className="hot-sales">
+                   <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
+                   <div className="product-list">
+                       <HotProduct/>
+                       <HotProduct/>
+                       <HotProduct/>
+                       <HotProduct/>
                    </div>
                </div>
            </div>
@@ -88,10 +88,20 @@ const User = React.createClass({
     }
 });
 
-
+const HotProduct = React.createClass({
+    render:function(){
+        return (
+            <a className="product-wrap">
+                 <img src="images/product.jpg"/>
+                 <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
+                 <span className="product-price">12267工分</span>
+            </a>
+        )
+    }
+});
 
 $FW.DOMReady(function() {
-    NativeBridge.setTitle('订单详情');
+    NativeBridge.setTitle('我的商城');
     ReactDOM.render(<User/>, document.getElementById('cnt'));
 });
 
