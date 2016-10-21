@@ -123,9 +123,9 @@ const VipZone = React.createClass({
 			        productName: '',
 			        categoryName: '',
 			        actIds: '',
-			        searchSourceType: 4,
-			        prefectureType: 3,
-			        order: -1,
+			        searchSourceType:4,
+			        prefectureType:3,
+			        order:0,
 			        minPoints: '',
 			        maxPoints: ''
 	            },
