@@ -56,7 +56,6 @@ const ProductList = React.createClass({
     },
     componentDidMount: function () {
         let aid = $FW.Format.urlQuery().activity_id;
-
 //      $FW.Ajax({
 //          url: API_PATH + 'mall/api/index/v1/products.json?activityId=' + aid + '&count=20&page=' + this.state.page,
 //          success: function (data) {
