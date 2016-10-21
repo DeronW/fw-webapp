@@ -34,5 +34,5 @@ function backURL () {
 }
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'徽商专题'} back_handler={backURL}/>, document.getElementById('header'))
+    ReactDOM.render(<Header title={'金融工场徽商银行存管上线'} back_handler={backURL}/>, document.getElementById('header'))
 });
