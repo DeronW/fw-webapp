@@ -5,12 +5,16 @@ const MALL_APP_NAMES = [
     'home',
     'activity',
     'user',
+    'new-user',
 
     // 订单页面
     'order-list',
     'order-detail',
     'order-confirm',
     'order-complete',
+    'shopping-cart',
+    'payment',
+    'new-order-detail',
 
     // 产品相关页面
     'product-detail',

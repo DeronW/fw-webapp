@@ -1,8 +1,8 @@
 $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
-        NativeBridge.setTitle('年化佣金小贴士')
+        NativeBridge.setTitle('正在建设中')
     } else {
-        ReactDOM.render(<Header title={'年化佣金小贴士'}/>, document.getElementById('header'))
+        ReactDOM.render(<Header title={'正在建设中'}/>, document.getElementById('header'))
     }
 
     if ($FW.Browser.inIOS()) {
