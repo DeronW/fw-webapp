@@ -57,15 +57,38 @@ const ProductList = React.createClass({
     componentDidMount: function () {
         let aid = $FW.Format.urlQuery().activity_id;
 
-        $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/products.json?activityId=' + aid + '&count=20&page=' + this.state.page,
-            success: function (data) {
-                this.setState({
-                    products: this.state.products.concat(data.products),
-                    page: this.state.page++
-                })
-            }.bind(this)
-        })
+//      $FW.Ajax({
+//          url: API_PATH + 'mall/api/index/v1/products.json?activityId=' + aid + '&count=20&page=' + this.state.page,
+//          success: function (data) {
+//              this.setState({
+//                  products: this.state.products.concat(data.products),
+//                  page: this.state.page++
+//              })
+//          }.bind(this)
+//      });
+        	$FW.Ajax({
+	            url: API_PATH + 'mall/api/index/v1/search.json',
+	            data: {
+	            	page: this.state.page,
+			        vipLevel:'',
+			        productName: '',
+			        categoryName: '',
+			        actIds: aid,
+			        searchSourceType: 5,
+			        prefectureType: 5,
+			        order: -1,
+			        minPoints: '',
+			        maxPoints: ''
+	            },
+	            enable_loading: true,
+	            success: function (data) {		            	
+		            	this.setState({
+	                    products: this.state.products.concat(data.products),
+	                    page: this.state.page++
+	                })
+	            }.bind(this)
+
+	        });                                
     },
     render: function () {
         var apple_limit = null;
