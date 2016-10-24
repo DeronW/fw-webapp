@@ -7,8 +7,11 @@ const MALL_APP_NAMES = [
     'user',
     'new-user',
     'account-setting',
+    'add-bank-card',
     'bind-bank-card',
-
+    'verify-bank-card',
+    'send-phone-msg',
+    'new-order-confirm',
     // 订单页面
     'order-list',
     'order-detail',
@@ -19,6 +22,7 @@ const MALL_APP_NAMES = [
     'new-order-detail',
 
     // 产品相关页面
+	'new-product-detail',
     'product-detail',
     'product-list',
     'product-vip-zone',
@@ -33,7 +37,8 @@ const MALL_APP_NAMES = [
     'error-page',
 
     // 特殊页面
-    'guoqing'
+    'guoqing',
+    'zhuanpan20161024'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {

@@ -13,6 +13,31 @@ const revision = require('./revision.js');
 
 let COMMON_JAVASCRIPTS_TASK = {};
 
+function get_common_javascript_files(lib_path, extend_files, debug) {
+    let files = [
+        `${lib_path}fw-1.1.1.js`,
+        `${lib_path}native-bridge-0.2.0.js`];
+
+    if (debug) {
+        files.push(...[
+            `${lib_path}react-15.3.2/react.js`,
+            `${lib_path}react-15.3.2/react-dom.js`,
+            `${lib_path}redux-3.6.0.js`,
+            `${lib_path}redux-thunk-2.1.0.js`,
+            `${lib_path}react-redux-5.0.0-beta3.js`])
+    } else {
+        files.push(...[
+            `${lib_path}react-15.3.2/react.min.js`,
+            `${lib_path}react-15.3.2/react-dom.min.js`,
+            `${lib_path}redux-3.6.0.min.js`,
+            `${lib_path}redux-thunk-2.1.0.min.js`,
+            `${lib_path}react-redux-5.0.0-beta3.min.js`])
+    }
+
+    files.push(...extend_files);
+    return files;
+}
+
 // project_name 每次使用新项目时, 只需要更换项目名称
 module.exports = function (site_name, project_name, configs) {
 
@@ -42,24 +67,16 @@ module.exports = function (site_name, project_name, configs) {
     ];
 
     var jsx_files = CONFIG.include_components.map((i)=> `${lib_path}components/${i}`);
-    jsx_files.push(`${app_path}react/components/*.jsx`);
-    jsx_files.push(`${app_path}${CONFIG.main_jsx}`);
+    jsx_files.push(...[
+        `${app_path}react/components/*.+(js|jsx)`,
+        `${app_path}react/actions/*.+(js|jsx)`,
+        `${app_path}react/reducers/*.+(js|jsx)`,
+        `${app_path}react/containers/*.+(js|jsx)`,
+        `${app_path}${CONFIG.main_jsx}`
+    ]);
 
-    var common_javascript_files = [
-        `${lib_path}fw-1.1.1.js`,
-        `${lib_path}native-bridge-0.2.0.js`,
-        `${lib_path}redux-3.6.0.min.js`
-    ];
-    if (CONFIG.debug) {
-        common_javascript_files.push(`${lib_path}react-15.3.1/react.min.js`);
-        common_javascript_files.push(`${lib_path}react-15.3.1/react-dom.min.js`);
-    } else {
-        common_javascript_files.push(`${lib_path}react-15.3.1/react.min.js`);
-        common_javascript_files.push(`${lib_path}react-15.3.1/react-dom.min.js`);
-    }
-
-    common_javascript_files = common_javascript_files.concat(
-        CONFIG.include_common_js.map(i => `${lib_path}${i}`));
+    let common_javascript_files = get_common_javascript_files(
+        lib_path, CONFIG.include_common_js.map(i => `${lib_path}${i}`), CONFIG.debug);
 
     function compile_html() {
         return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
@@ -89,7 +106,7 @@ module.exports = function (site_name, project_name, configs) {
     }
 
     function compile_common_javascripts() {
-        return javascripts(common_javascript_files, `${build_path}javascripts`, 'lib.js')
+        return javascripts(common_javascript_files, `${build_path}javascripts`, 'lib.js', CONFIG.debug)
     }
 
     function compile_images() {

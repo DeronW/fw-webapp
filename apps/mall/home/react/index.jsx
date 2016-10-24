@@ -63,14 +63,22 @@ const Mall = React.createClass({
                 <a className="back-factory" href="http://m.9888.cn/mpwap/"><img
                     src="images/wap_shop_gong_logo.png"/></a>
         };
+
+        let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();
+
+        let banner;
+        if (this.props.banners.length) {
+            banner = <BannerGroup className={iOSApp ? "head-images head-images-ios" : "head-images"}
+                                  images={this.getHeadImages()}
+                                  onImageClick={this.onImageClickHandler}/>
+        } else {
+            banner = <div className="no-banner"></div>
+        }
+
         return (
             <div className="head-wrap">
-                {this.props.banners.length ?
-                    <BannerGroup className={appIos ? "head-images head-images-ios" : "head-images"}
-                                 images={this.getHeadImages()}
-                                 onImageClick={this.onImageClickHandler}/> :
-                    <div className="no-banner"></div>}
-                <div className={appIos ? "head-items head-images-ios" : "head-items"}>
+                {banner}
+                <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
                     {backFactory()}
                     <a onClick={function () {
                         gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false)
@@ -108,7 +116,7 @@ const Mall = React.createClass({
                     }}>品类</a>
                 </div>
                 {this.state.popularRecommendData.length > 0 ?
-                    <PopularRecommend popularRecommendData={this.state.popularRecommendData}/> : null}
+                    <PopularRecommend products={this.state.popularRecommendData}/> : null}
                 <div className="index-actList-wrap">
                     { this.props.activities.map(activity) }
                     {this.props.activities.length ? null : <div className="empty">暂无活动</div>}
@@ -173,14 +181,13 @@ const TextBar = React.createClass({
 
 const PopularRecommend = React.createClass({
     render: function () {
-        let _this = this;
-        let popularRecommendData = this.props.popularRecommendData || [];
+        let products = this.props.products || [];
+
         let cont = (product, index)=> {
             return (
-                <a onClick={function () {
-                    gotoHandler(`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`)
-                }} className={"popular-recommend-a popular-recommend-a" + index}>
-
+                <a key={index}
+                   onClick={ () => gotoHandler(`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`) }
+                   className={"popular-recommend-a popular-recommend-a" + index}>
                     <img src={product.img || 'images/default-product.jpg'}/>
                     <div className="popular-recommend-title">{product.title}</div>
                     <div className="popular-recommend-score">{product.score ? product.score : 0}工分</div>
@@ -191,7 +198,7 @@ const PopularRecommend = React.createClass({
             <div className="popular-recommend">
                 <img src="images/popular-recommend-ico.png" className="popular-recommend-ico"/>
                 <div className="popular-recommend-cont">
-                    {popularRecommendData.map(cont)}
+                    {products.map(cont)}
                 </div>
             </div>
         )
@@ -204,7 +211,7 @@ const ProductItem = React.createClass({
         if (this.props.price == 0 && this.props.score == 0) {
             price = <span className="list-price-num">¥0</span>
         } else if (this.props.price == 0) {
-            price = <span className="list-price-num"></span>
+            price = <span className="list-price-num"> </span>
         } else if (this.props.price >= 0) {
             price = <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>
         } else {
@@ -248,12 +255,7 @@ const ProductItem = React.createClass({
         )
     }
 });
-let appIos = false;
-if ($FW.Browser.inApp() && $FW.Browser.inIOS()) {
-    appIos = true;
-} else {
-    appIos = false;
-}
+
 $FW.DOMReady(function () {
     NativeBridge.setTitle('豆哥商城');
     $FW.BatchGet([
