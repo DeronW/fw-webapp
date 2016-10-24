@@ -9,8 +9,8 @@
 
             $FW.Event.touchBottom((done)=> {
                 if (this.props.page < this.props.total_page) {
-                    dispatch(fetchProducts(this.props.page + 1));
-                    setTimeout(done, 1000);
+                    dispatch(fetchProducts(this.props.page + 1, done));
+                    // setTimeout(done, 1000);
                 }
             });
         },
