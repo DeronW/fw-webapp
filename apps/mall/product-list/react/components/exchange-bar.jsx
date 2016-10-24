@@ -9,9 +9,9 @@ const ExchangeBar = React.createClass({
             showFilterPop: false,
             filterScore: '不限',
             filterLevel: '不限',
-            maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
-            minPoints: '',
-            maxValue: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
+            maxPoints:'',
+            minPoints:'',
+            maxValue:'',
             minValue: '',
             myScore: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : 0,
         }
