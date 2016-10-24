@@ -7,7 +7,7 @@ const PopInf = React.createClass({
                     <div className="pop-inf-cnt">
                         <div className="pop-inf-li">
                             <div className="pop-inf-h">一.活动时间:</div>
-                            <div className="pop-inf-detail">2016年10月25日00:00:00</div>
+                            <div className="pop-inf-detail">2016年10月25日</div>
                         </div>
                         <div className="pop-inf-li">
                             <div className="pop-inf-h">二.活动奖品:</div>
