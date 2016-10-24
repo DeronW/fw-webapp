@@ -3,7 +3,7 @@
 
     let ProductItem = (props, index)=> {
         let price, score, angle;
-        if (props.price) {
+        if (props.price > 0) {
             price = <span className="list-price-num">{$FW.Format.currency(props.price)}</span>
         }
 
