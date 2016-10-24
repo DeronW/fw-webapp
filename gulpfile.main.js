@@ -47,7 +47,10 @@ const MAIN_APP_NAMES = [
     'topic-invite',//邀请返利, 邀请人,
 
     //圈子相关页面
-    'circle-tender-complete',
+    'circle-tender-complete',//直融标成功
+    'circle-transfer-complete',//债券转让成功
+    'circle-register-complete',//签到成功
+    'circle-team-data',//小队数据
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
