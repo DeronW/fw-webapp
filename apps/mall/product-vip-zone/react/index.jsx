@@ -123,32 +123,35 @@ const VipZone = React.createClass({
 			        productName: '',
 			        categoryName: '',
 			        actIds: '',
-			        searchSourceType: 4,
-			        prefectureType: 3,
-			        order: -1,
+			        searchSourceType:4,
+			        prefectureType:3,
+			        order:0,
 			        minPoints: '',
 			        maxPoints: ''
 	            },
 	            enable_loading: true,
 	            success: function (data) {
+	            	
 		              let tab;
-		              if (data.vipLevel == -1) {
+		              console.log(1);
+		              if (is_Level== -1) {
 		                  tab = 'all'
-		              } else if (data.vipLevel == 1) {
+		                  
+		              } else if (is_Level == 1) {
 		                  tab = 'vipLevel0'
-		              } else if (data.vipLevel == 2) {
+		              } else if (is_Level == 2) {
 		                  tab = 'vipLevel1'
-		              } else if (data.vipLevel == 3) {
+		              } else if (is_Level == 3) {
 		                  tab = 'vipLevel2'
-		              } else if (data.vipLevel == 4) {
+		              } else if (is_Level == 4) {
 		                  tab = 'vipLevel3'
-		              } else if (data.vipLevel == 5) {
+		              } else if (is_Level == 5) {
 		                  tab = 'vipLevel4'
 		              } else {
 		                  done && done();
 		                  return;
-		              }
-		
+		              }		
+		              
 		              window.Products[tab] = window.Products[tab].concat(data.products);
 		              let products = window.Products[this.state.tab];
 		              let new_page = this.state.page;
