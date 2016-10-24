@@ -10,7 +10,7 @@ $FW.DOMReady(function () {
 
     let store = Redux.createStore(reducer, Redux.applyMiddleware(...[ReduxThunk.default]));
 
-    window._store = store;
+    window.__store = store;
 
     let cnt = (
         <ReactRedux.Provider store={store}>
@@ -20,7 +20,3 @@ $FW.DOMReady(function () {
 
     ReactDOM.render(cnt, document.getElementById('cnt'));
 });
-
-function trim(s) {
-    return s.replace(/(^\s*)|(\s*$)/g, '')
-}

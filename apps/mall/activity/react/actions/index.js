@@ -32,7 +32,7 @@
         }
     };
 
-    global.fetchProducts = (page) => {
+    global.fetchProducts = (page, done) => {
         return (dispatch) => {
             let bizNo = $FW.Format.urlQuery().bizNo;
             $FW.Ajax({
@@ -45,7 +45,10 @@
                     order: -1,
                 },
                 enable_loading: true,
-                success: (data) => dispatch(addProducts(data))
+                success: (data) => {
+                    dispatch(addProducts(data));
+                    done && typeof(done) == 'function' && done();
+                }
             });
         }
     }
