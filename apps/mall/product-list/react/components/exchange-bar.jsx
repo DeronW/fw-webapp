@@ -28,9 +28,12 @@ const ExchangeBar = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
             success: (data) => {
-                if (data.is_login) {
+                if (data.is_login) {                   	
                     Filter.myConvertibleScore = data.score;
                     this.setState({myScore: data.score});
+                    if(Filter.options.searchSourceType == 1){
+                    	Filter.options.maxPoints=data.score;
+                    }
                 }
             }
         });
