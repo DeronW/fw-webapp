@@ -132,13 +132,13 @@ const ExchangeBar = React.createClass({
                     Filter.myConvertibleScore : '',
                 minPoints: '',
             });
-            refs.maxScore.value='';
+            this.refs.maxScore.value='';
         } else if (name == '我可兑换') {
             this.setState({
                 minPoints: '',
                 maxPoints: this.state.myScore,
             });
-            refs.maxScore.value='';
+            this.refs.maxScore.value='';
         } else if (name == '1-100') {
             if (Filter.options.searchSourceType == 1) {
                 this.setState({
@@ -152,7 +152,7 @@ const ExchangeBar = React.createClass({
                     maxPoints: 100
                 });
             }
-			refs.maxScore.value='';
+			this.refs.maxScore.value='';
         } else if (name == '101-1000') {
             if (Filter.options.searchSourceType == 1) {
                 this.setState({
@@ -165,7 +165,7 @@ const ExchangeBar = React.createClass({
                     maxPoints: 1000
                 });
             }
-            refs.maxScore.value='';
+            this.refs.maxScore.value='';
         } else if (name == '1000-5000') {
             if (Filter.options.searchSourceType == 1) {
                 this.setState({
@@ -178,7 +178,7 @@ const ExchangeBar = React.createClass({
                     maxPoints: 5000
                 });
             }
-            refs.maxScore.value='';
+            this.refs.maxScore.value='';
 
         } else if (name == '5000以上') {
             if (Filter.options.searchSourceType == 1) {
@@ -192,7 +192,7 @@ const ExchangeBar = React.createClass({
                     maxPoints: Filter.myConvertibleScore,
                 });
             }
-            refs.maxScore.value='';
+            this.refs.maxScore.value='';
         } else {
             if (Filter.options.searchSourceType == 1) {
                 this.setState({
