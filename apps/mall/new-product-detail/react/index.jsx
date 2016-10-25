@@ -5,14 +5,22 @@ const API_PATH = document.getElementById('api-path').value;
 const Product = React.createClass({
 
     getInitialState: function () {
-        return {show: true}
+        return {
+			show: true,
+			showOverlayDef:false,
+			showOverlay:false
+			}
     },
 
     toggleHandler: function () {
         this.setState({show: !this.state.show});
     },
-
-    render: function () {
+	
+	childEventHandler: function(params){
+		this.setState({showOverlayDef:true,showOverlay: params})
+	},
+	
+	render: function () {
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
         let markList = (list, index)=><div key={index}>{list}</div>;
@@ -82,10 +90,15 @@ const Product = React.createClass({
 
         let vip_tag = data.vipConfigUuid ? (data.vipLevel ? (
             <span className="vip-tag">{user_level_manifest}</span>) : null) : null;
-
-        return (
+		
+		let shop_card_prompt = null;	
+		if (this.state.showOverlayDef)
+                shop_card_prompt = (<div className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>加入购物车成功</div>);
+			   
+		return (
            <div className="detail-box">
-               <div className="_style_buy_cart" style={{zIndex:'10'}}>
+			  {shop_card_prompt}
+			   <div className="_style_buy_cart" style={{zIndex:'10'}}>
                    <span className="_style_buy_cart_span"></span>
                </div>
                 {data.head_images && data.head_images.length ?
@@ -130,8 +143,8 @@ const Product = React.createClass({
                 {activity_desc}
                 {rich_detail}
                 <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
-                <PlusMinus stock={data.stock} ticket_count={data.ticketList}
-                           check_messages={data.checkMessages}
+                <PlusMinus stock={data.stock} ticket_count={data.ticketList} parentCallback={this.childEventHandler}
+                           check_messages={data.checkMessages} 
                            voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
             </div>
         )
@@ -147,6 +160,13 @@ const PlusMinus = React.createClass({
             minus: stock > 0,
             plus: stock > 0
         }
+    },
+	
+	toggleOverlay: function () {
+		this.props.parentCallback(true);
+		setTimeout(function() {
+		  this.props.parentCallback(false);
+		}.bind(this), 1500);
     },
 
     changeValue: function (e) {
@@ -232,7 +252,7 @@ const PlusMinus = React.createClass({
                     <div className={this.state.value < this.props.stock ? "plus" : "plus gray"}
                          onClick={this.changePlus}></div>
                 </div>
-                <a className="btn-buy btn-buy-card">加入购物车</a>
+                <a className="btn-buy btn-buy-card" onClick={this.toggleOverlay}>加入购物车</a>
                 <a onClick={this.buyHandler} className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>
                     {this.props.stock < 1 ? '售罄' : '立即购买'}
                 </a>
