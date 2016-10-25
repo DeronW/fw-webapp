@@ -2,8 +2,8 @@
  商城移动端页面
  */
 const MALL_APP_NAMES = [
-    'home',
-    'activity',
+    'home', // 首页
+    'activity', // 专题活动页
     'user',
     'new-user',
     'account-setting',
@@ -34,7 +34,6 @@ const MALL_APP_NAMES = [
     'not-support',
     'deliver-address',
     'new-deliver-address',
-    'error-page',
 
     // 特殊页面
     'guoqing',
@@ -54,7 +53,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
         generate_task('mall', i, {
             debug: true,
-            api_path: CONSTANTS.main.dev_api_path,
+            api_path: CONSTANTS.mall.dev_api_path,
             include_components: common_components,
             include_common_js: common_js
         });
