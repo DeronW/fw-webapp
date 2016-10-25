@@ -9,13 +9,12 @@ const MAIN_APP_NAMES = [
     'home', // 首页
     'about-us', // 关于我们
     'faq', // 帮助中心
+    'invest', // 投资页面
 
     // 新增页面
-    'vip-prerogative', // VIP特权详情页
-    'guide-cookbook',
-    'app-download', // app 下载页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
+
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
     'change-bank-card', // 修改绑定银行卡
@@ -45,6 +44,9 @@ const MAIN_APP_NAMES = [
     'topic-recommender-recruitment', //推荐人页面
     'topic-annual-commision',//年化佣金页面
     'topic-invite',//邀请返利, 邀请人,
+    'vip-prerogative', // VIP特权详情页
+    'guide-cookbook', // 用户使用引导页面
+    'app-download', // app 下载页面
 
     //圈子相关页面
     'circle-tender-complete',//直融标成功
