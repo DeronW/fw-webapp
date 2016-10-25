@@ -30,7 +30,8 @@ const MALL_APP_NAMES = [
     'error-page',
 
     // 特殊页面
-    'guoqing'
+    'guoqing',
+    'zhuanpan20161024'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
