@@ -54,7 +54,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
         generate_task('mall', i, {
             debug: true,
-            api_path: CONSTANTS.main.dev_api_path,
+            api_path: CONSTANTS.mall.dev_api_path,
             include_components: common_components,
             include_common_js: common_js
         });
