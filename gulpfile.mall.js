@@ -2,8 +2,8 @@
  商城移动端页面
  */
 const MALL_APP_NAMES = [
-    'home',
-    'activity',
+    'home', // 首页
+    'activity', // 专题活动页
     'user',
     'new-user',
     'account-setting',
@@ -34,7 +34,6 @@ const MALL_APP_NAMES = [
     'not-support',
     'deliver-address',
     'new-deliver-address',
-    'error-page',
 
     // 特殊页面
     'guoqing',
