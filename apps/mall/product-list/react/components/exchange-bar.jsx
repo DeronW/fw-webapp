@@ -31,6 +31,8 @@ const ExchangeBar = React.createClass({
                     Filter.myConvertibleScore = data.score;
                     if(Filter.options.searchSourceType == 1){
                     	Filter.options.maxPoints=data.score;
+                    	console.log(Filter.myConvertibleScore);
+                    	this.setState({maxPoints:data.score});
                     }
                 }
             }
