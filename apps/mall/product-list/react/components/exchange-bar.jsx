@@ -11,7 +11,8 @@ const ExchangeBar = React.createClass({
             filterLevel: '不限',
             maxPoints:Filter.options.searchSourceType == 1?Filter.myConvertibleScore : '',
             minPoints:'',
-            myScore: Filter.options.searchSourceType == 1?Filter.myConvertibleScore : 0,
+            maxValue:'',
+            minValue:'',
         }
     },
     searchHandler: function () {
@@ -28,7 +29,6 @@ const ExchangeBar = React.createClass({
             success: (data) => {
                 if (data.is_login) {                   	
                     Filter.myConvertibleScore = data.score;
-                    this.setState({myScore: data.score});
                     if(Filter.options.searchSourceType == 1){
                     	Filter.options.maxPoints=data.score;
                     }
