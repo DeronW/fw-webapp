@@ -20,6 +20,10 @@ const Product = React.createClass({
 		this.setState({showOverlayDef:true,showOverlay: params})
 	},
 	
+	shopHandler: function (e) {
+		location.href = location.protocol + '//' + location.hostname + '/static/mall/shopping-cart/index.html'
+	},
+	
 	render: function () {
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
@@ -98,7 +102,7 @@ const Product = React.createClass({
 		return (
            <div className="detail-box">
 			  {shop_card_prompt}
-			   <div className="_style_buy_cart" style={{zIndex:'10'}}>
+			   <div onClick={this.shopHandler} className="_style_buy_cart" style={{zIndex:'10'}}>
                    <span className="_style_buy_cart_span"></span>
                </div>
                 {data.head_images && data.head_images.length ?
@@ -163,10 +167,20 @@ const PlusMinus = React.createClass({
     },
 	
 	toggleOverlay: function () {
-		this.props.parentCallback(true);
-		setTimeout(function() {
-		  this.props.parentCallback(false);
-		}.bind(this), 1500);
+		let _this=this;
+		$FW.Ajax({
+			url: './shoppingcart.json?bizNo=A0000000370',
+			enable_loading: true,
+			success: function (data) {
+			if(data.product.length==1){
+			 _this.props.parentCallback(true);
+			 setTimeout(function() {
+			   _this.props.parentCallback(false);
+			 }.bind(_this), 1500);
+			}
+		}
+		});
+		
     },
 
     changeValue: function (e) {
@@ -236,7 +250,7 @@ const PlusMinus = React.createClass({
         }
 
     },
-
+	
     blur: function (e) {
         this.updateCount(e.target.value)
     },
