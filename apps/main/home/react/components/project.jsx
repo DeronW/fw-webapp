@@ -8,7 +8,8 @@ const Project = React.createClass({
         }
     },
     componentDidMount: function () {
-        this.loadBids()
+        this.loadBids();
+        window.loadMoreBids = () => this.loadBids()
     },
     loadBids: function () {
         let url = this.state.tab == 'new' ?
@@ -28,41 +29,32 @@ const Project = React.createClass({
             fail: () => true
         })
     },
-    clickHandler: function () {
-        this.setState({tab: this.state.tab == 'new' ? 'transfer' : 'new'})
+    toggleHandler: function () {
+        this.setState({
+            tab: this.state.tab == 'new' ? 'transfer' : 'new',
+            page: 0,
+            total_page: 1,
+            bids: []
+        }, this.loadBids)
+    },
+    linkHandler: function (value) {
+        let g = (id) => document.getElementById(id);
+        g('prdID').value = value;
+        g('form').submit();
     },
     render: function () {
 
-        let bid = (data) => {
-            return (
-                <div className="bid" key={data.prdNum}>
-                    <div className="title">
-                        {data.prdName}
-                        <i className="icon "> </i>
-                    </div>
-                    <div className="detail">
-                        <div className="interest">13</div>
-                        <div className="">20~90 day</div>
-                        <div className="">按月等额</div>
-                        <div className="">100元起</div>
-                        <div className="">可够301,123,234元</div>
-                        <div className="progress">
-                            <SVGCircleProgress percent={78}/>
-                        </div>
-                    </div>
-                </div>
-            )
-        };
 
-        console.log(this.state.bids[0]);
+
+        // let bids = this.state.bids.length ? [this.state.bids[0]] : [];
 
         return (
             <div className="project">
-                <div className="tabs" onClick={this.clickHandler}>
+                <div className="tabs" onClick={this.toggleHandler}>
                     <a className={this.state.tab == "new" ? "active" : ""}>最新项目</a>
                     <a className={this.state.tab == "new" ? "" : "active"}>债券转让</a>
                 </div>
-                <div> {this.state.bids.map(bid)} </div>
+                <div> {this.state.bids.map((b)=> <Bid bid={b} key={b.prdNum}/>)} </div>
             </div>
         )
     }
