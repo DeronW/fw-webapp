@@ -257,7 +257,7 @@ const Recharge = React.createClass({
         });
     },
     render: function () {
-
+        // console.log(this.props.data);
         var deny = <Mask username={this.props.data.bankInfo.realName}/>;
         var bankCardNo = this.props.data.bankInfo.bankCardNo;
         let idCarNoNntercept = bankCardNo.substring(0, 4) + "********" + bankCardNo.substring((bankCardNo.length - 4), bankCardNo.length);
@@ -290,9 +290,9 @@ const Recharge = React.createClass({
                     <div className="instant-icon"></div>
                 </div>
 
-                <div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服
-                    <span className="blue">400-0322-988</span>
-                </div>
+                {/*<div className="port">如果您绑定的银行卡暂不支持手机一键支付请联系客服*/}
+                    {/*<span className="blue">400-0322-988</span>*/}
+                {/*</div>*/}
 
                 <Form countingSeconds={60}
                       orderConfirm={this.orderConfirm}
@@ -309,7 +309,7 @@ const Recharge = React.createClass({
                     </div>
                     <div className="atpr">
                         <img className="card-d" src="images/card-d.png"/>
-                        <span className="online">对充值后无投资的提现，由第三方平台收取0.4%的手续费；</span>
+                        <span className="online">对首次充值后无投资的提现，平台收取{this.props.data.fee}%的手续费；</span>
                     </div>
                     <div className="atpr">
                         <img className="card-d" src="images/card-d.png"/>
