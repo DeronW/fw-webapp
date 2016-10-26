@@ -42,6 +42,14 @@ const Product = React.createClass({
             rich_detail = <div className="detail-des">
                 <div className="title">商品详情</div>
                 <div className="product-content">
+                	<div className="product-inf">
+                		<div className="product-inf-title">【温馨提示】</div>
+	                	<div className="product-inf-list">1、工分兑换礼品不支持开具发票；</div>
+	                	<div className="product-inf-list">2、工分兑换礼品非质量问题不支持退换货；</div>
+	                	<div className="product-inf-list">3、礼品图片仅供参考请以收到实物为准；</div>
+	                	<div className="product-inf-list">4、兑换即视为认同此规则。</div>
+                	</div>
+                	
                     {data.desc ? <div className="desc">{data.desc}</div> : null}
                     {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
                 </div>

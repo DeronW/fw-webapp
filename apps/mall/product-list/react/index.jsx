@@ -190,7 +190,6 @@ $FW.DOMReady(function () {
     }
 
     //Filter.options.searchSourceType = Filter.options.searchSourceType || '';
-
     if ($FW.Format.urlQuery().category) {
         Filter.options.categoryName = $FW.Format.urlQuery().category;
     }

@@ -9,10 +9,8 @@ const ExchangeBar = React.createClass({
             showFilterPop: false,
             filterScore: '不限',
             filterLevel: '不限',
-            maxPoints:Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
+            maxPoints:Filter.options.searchSourceType == 1?Filter.myConvertibleScore : '',
             minPoints:'',
-            maxValue:'',
-            minValue: '',
             myScore: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : 0,
         }
     },
@@ -28,9 +26,12 @@ const ExchangeBar = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
             success: (data) => {
-                if (data.is_login) {
+                if (data.is_login) {                   	
                     Filter.myConvertibleScore = data.score;
                     this.setState({myScore: data.score});
+                    if(Filter.options.searchSourceType == 1){
+                    	Filter.options.maxPoints=data.score;
+                    }
                 }
             }
         });
@@ -141,6 +142,7 @@ const ExchangeBar = React.createClass({
             this.refs.maxScore.value='';
         } else if (name == '1-100') {
             if (Filter.options.searchSourceType == 1) {
+            	console.log("1-100");
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 1 ? 1 : 0,
                     maxPoints: Filter.myConvertibleScore <= 100 ? Filter.myConvertibleScore : 100
@@ -155,6 +157,7 @@ const ExchangeBar = React.createClass({
 			this.refs.maxScore.value='';
         } else if (name == '101-1000') {
             if (Filter.options.searchSourceType == 1) {
+            	console.log("101-1000");
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 101 ? 101 : 0,
                     maxPoints: Filter.myConvertibleScore <= 1000 ? Filter.myConvertibleScore : 1000,
@@ -168,6 +171,7 @@ const ExchangeBar = React.createClass({
             this.refs.maxScore.value='';
         } else if (name == '1000-5000') {
             if (Filter.options.searchSourceType == 1) {
+            	console.log("1000-5000");
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 1000 ? 1000 : 0,
                     maxPoints: Filter.myConvertibleScore <= 5000 ? Filter.myConvertibleScore : 5000,
@@ -182,6 +186,7 @@ const ExchangeBar = React.createClass({
 
         } else if (name == '5000以上') {
             if (Filter.options.searchSourceType == 1) {
+            	console.log("5000以上");
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 5000 ? 5000 : 0,
                     maxPoints: Filter.myConvertibleScore,

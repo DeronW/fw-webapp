@@ -52,6 +52,7 @@ const MAIN_APP_NAMES = [
     'circle-transfer-complete',//债券转让成功
     'circle-register-complete',//签到成功
     'circle-team-data',//小队数据
+    'circle-person-data',//个人数据
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {

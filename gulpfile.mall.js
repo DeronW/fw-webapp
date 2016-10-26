@@ -20,6 +20,9 @@ const MALL_APP_NAMES = [
     'shopping-cart',
     'payment',
     'new-order-detail',
+    'new-order-list',
+    'logistics',
+    'coupon',
 
     // 产品相关页面
 	'new-product-detail',
