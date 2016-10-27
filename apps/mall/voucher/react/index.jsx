@@ -1,6 +1,16 @@
 'use strict';
 const API_PATH = document.getElementById('api-path').value;
 
+const HomePage = React.createClass({
+    render : function(){
+        return (
+            <div>
+                <MyVoucher cxchangeCert={this.props.exchange_cert}/>
+            </div>
+        )
+    }
+});
+
 const MyVoucher = React.createClass({
     getInitialState: function () {
         return {
@@ -48,9 +58,10 @@ const MyVoucher = React.createClass({
             <div>
                 <div className="my-voucher">
                     <div className="my-voucher-title">
-                        <span className="title-text">我的兑换券</span>
                         <div className="my-voucher-tab">
                             {this.state.voucher.map(btn_voucher)}
+                            <div className="tab-vertical-line tab-line-position1"></div>
+                            <div className="tab-vertical-line tab-line-position2"></div>
                         </div>
                     </div>
 
@@ -135,7 +146,15 @@ $FW.DOMReady(function() {
     NativeBridge.setTitle('兑换券');
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"兑换券"} back_handler={backward}/>, document.getElementById('header'));
-    ReactDOM.render(<MyVoucher/>, document.getElementById('cnt'));
+    $FW.Ajax({
+        //url: API_PATH + 'mall/api/member/v1/user.json',
+        url:"http://localhost/nginx-1.9.12/html/user.json",
+        enable_loading: true,
+        success: function (data) {
+            console.log(data)
+            ReactDOM.render(<HomePage {...data}/>, document.getElementById('cnt'));
+        }
+    });
 });
 
 function backward() {

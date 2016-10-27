@@ -178,6 +178,198 @@ em, i {
   color: @color;
 }
 
+.user-area {
+  .height(125px);
+  .padding-tb-lr(28px, 30px);
+  background-color: #fd4d4c;
+  color: @back-color;
+}
+
+.user-info {
+  .fl;
+}
+
+.user-portrait,
+.user-portrait img {
+  .border-radius(50%, 50%, 50%, 50%);
+}
+
+.user-portrait {
+  .fl;
+  .width(120px);
+  .height(120px);
+  .padding(2px, 2px, 2px, 2px);
+  background-color: @back-color;
+}
+
+.user-portrait img {
+  .width(100%);
+}
+
+.usr-info-block {
+  .padding(22px 0 0 140px);
+}
+
+.user-name {
+  width:100px;
+  text-align: center;
+  .line-height(40px);
+
+}
+
+.user-name-text{
+  font-size:30px;
+}
+
+.display (@display) {
+  display: @display;
+}
+
+.usr-info-vip {
+  .line-height(28px);
+  .text {
+    display:inline-block;
+    font-size: 22px;
+  }
+
+  .vip-text {
+    .margin(0 0 0 6px);
+    font-size: 22px;
+    .color(#fff048);
+  }
+
+  .vip-text-icon{
+    display:inline-block;
+    width:100px;
+  }
+
+  .vip-text-icon img{
+    width:100%;
+  }
+
+}
+
+.user-info-r {
+  .fr;
+  .padding(0 0 0 32px);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.user-get-adders {
+  display: block;
+  color: white;
+  .adders-icon {
+    .display(block);
+    .text-align(center);
+  }
+
+  .text {
+    font-size:26px;
+    .line-height(28px);
+  }
+}
+
+.my-oder-block {
+  .height(84px);
+  .padding-l-r(30px, 30px);
+  .line-height(84px);
+  .back-color(#fff);
+
+  .title {
+    .fl;
+  }
+
+  .oder-lick-text {
+    .fr;
+    .color(#999);
+    background:url(../images/list_icon_arrow.png) no-repeat 175px 25px;
+    display: inline-block;
+    padding-right: 30px;
+
+    .text {
+      .fl();
+    }
+
+    .icon {
+      .fl();
+      .margin-t(10px);
+    }
+  }
+}
+
+.delivery-list {
+  .height(116px);
+  .back-color(#f9f9f9);
+  .padding-t-b(12px, 5px);
+
+  .border-t-b (1px, solid, #e3e5ea, #d8d8d8);
+  display: table;
+  width: 100%;
+
+  & > div {
+    .fl;
+    .width(33.3%);
+    .text-align(center);
+  }
+
+  .info-block {
+
+    .position(relative);
+    margin: 0 auto;
+
+    .icon {
+      .display(block);
+    }
+
+    .mark-icon {
+      .position(absolute);
+      top: 6px;
+      left: 50%;
+      margin-left: 34px;
+      .width(30px);
+      .height(30px);
+      font-size: 20px;
+      .line-height(30px);
+      .back-color(#fd4d4c);
+      .color(#fff);
+      .border-radius-als(50%);
+    }
+
+    .text {
+      font-size:24px;
+      color: black;
+      .display(block);
+      .margin-t (-10px);
+      .line-height(30px);
+    }
+
+
+  }
+}
+
+.my-account-block {
+  .margin-t-b (20px, 20px);
+  .back-color(#fff);
+  .border-t-b(1px, solid, #d8d8d8, #d8d8d8);
+}
+
+.my-account-title {
+  .height(84px);
+  .line-height(84px);
+  .padding-l-r(30px, 30px);
+
+  .border-b(1px, solid, #d8d8d8);
+
+  .l-text {
+    .fl();
+  }
+
+  .money-number {
+    .fr();
+    .color(#fd4d4c);
+  }
+}
+
 .voucher-list {
   .padding-l(30px);
   .back-color (#f9f9f9);
@@ -202,7 +394,6 @@ em, i {
   .height(80px);
   .line-height(80px);
   .back-color(#fff);
-  .padding-l-r(30px, 0);
   .border-t(1px, solid, #d8d8d8);
   .border-b(3px, solid, #ebebee);
 
@@ -212,18 +403,12 @@ em, i {
 }
 
 .my-voucher-tab {
-  .fr();
-
+  overflow:hidden;
+  position:relative;
   & > div {
     .fl();
-    .width(96px);
-    .padding-l-r(16px, 16px);
+    .width(33.33%);
     .text-align(center);
-    background: url(../images/line-icon.png) no-repeat center right;
-
-    &:last-child {
-      background: none;
-    }
   }
 
   .tab-text {
@@ -231,7 +416,9 @@ em, i {
   }
 
   .select-li .tab-text {
-    .display(block);
+    .display(inline-block);
+    .padding-l(12px);
+    .padding-r(12px);
     .line-height(80px);
     .color(#fd4d4c);
     .border-b(4px, solid, #fd4d4c);
@@ -342,4 +529,19 @@ em, i {
       }
     }
   }
+}
+
+.tab-vertical-line{
+  display:block;
+  background:url(../images/line.jpg) no-repeat;
+  width:4px;
+  height:28px;
+  position:absolute;
+  top:29px;
+}
+.tab-line-position1{
+  left:238px;
+}
+.tab-line-position2{
+  left:477px;
 }
