@@ -231,6 +231,7 @@ const ExchangeBar = React.createClass({
             });
             this.setState({minPoints: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value});
         } else {
+        	this.setState({minValue:e.target.value});
             this.setState({minPoints:e.target.value});
         }        
         if (e.target.value == '' && this.state.maxValue == '') {
