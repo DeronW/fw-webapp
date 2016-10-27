@@ -34,8 +34,6 @@ a, input,ul,li,p {
   }
   .headerConText{
     display: inline-block;
-    width: 150px;
-    height: 40px;
     font-size: 36px;
     margin: auto;
     color: @color3;
@@ -282,10 +280,14 @@ a, input,ul,li,p {
       margin-top: 36px;
     }
   }
-  .teamCenterProportionSelf{
+  .teamCenterProportion:nth-child(1){
     height: 268px;
+    .teamCenterProportionFoot{
+      display: block;
+    }
   }
   .teamCenterProportionFoot{
+    display: none;
     height: 112px;
     background: @colorF9;
     margin-top: 125px;

@@ -9,7 +9,6 @@ const MAIN_APP_NAMES = [
     'home', // 首页
     'about-us', // 关于我们
     'faq', // 帮助中心
-    'invest', // 投资页面
 
     // 新增页面
     'user-level', // 用户等级详情
@@ -54,6 +53,7 @@ const MAIN_APP_NAMES = [
     'circle-register-complete',//签到成功
     'circle-team-data',//小队数据
     'circle-person-data',//个人数据
+    'circle-score-stream',//工分流水
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
