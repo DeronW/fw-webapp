@@ -273,7 +273,6 @@ const ExchangeBar = React.createClass({
             maxPoints: this.state.maxPoints,
             page: 1
         };
-        console.log(this.state);
         this.setState({showFilterPop: false});
         this.props.filterProducts(options);
     },
