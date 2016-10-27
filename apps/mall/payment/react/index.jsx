@@ -2,11 +2,18 @@
 const API_PATH = document.getElementById('api-path').value;
 
 const Payment = React.createClass({
+    getInitialState:function(){
+        return {
+        }
+    },
+    componentDidMount:function(){
+
+    },
     render : function(){
         return (
             <div className="order-payment">
                 <div className="order-status">
-                    <div className="pay-tip">请在0小时30分59秒内完成支付</div>
+                    <div className="pay-tip">请在23小时59分59秒内完成支付</div>
                     <div className="pay-price">金额:<span>￥299元</span></div>
                 </div>
                 <div className="order-products">
