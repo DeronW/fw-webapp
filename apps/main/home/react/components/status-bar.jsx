@@ -10,7 +10,7 @@ const StatusBar = React.createClass({
 
     checkHash: function () {
         console.log(location.hash == '#home');
-        this.setState({tab: location.hash == '#home' ? 'home' : 'invest'})
+        this.setState({tab: location.hash == '#invest' ? 'invest' : 'home'})
     },
 
     homeLink: function () {

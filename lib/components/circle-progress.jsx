@@ -25,7 +25,10 @@ const SVGCircleProgress = React.createClass({
         }
     },
     getInitialState: function () {
-        let max_unfinish_percent = 99.9 - 100 * this.props.weight / (Math.PI * 2 * (this.props.radius - this.props.weight / 2));
+        this.STEP_PERCENT = 1.2;
+        let minLineWeightWidth = 100 * this.props.weight / (Math.PI * 2 * (this.props.radius - this.props.weight / 2));
+        this.MAX_UNFINISHED_PERCENT = 99.9 - minLineWeightWidth;
+        this.MIN_START_PERCENT = Math.min(minLineWeightWidth, this.STEP_PERCENT);
 
         return {
             radius: this.props.radius,
@@ -34,7 +37,6 @@ const SVGCircleProgress = React.createClass({
             weight: this.props.weight,
             current_percent: 0,
             target_percent: this.props.percent,
-            max_unfinish_percent: max_unfinish_percent,
             animate: this.props.animate,
             padding: this.props.padding
         }
@@ -45,7 +47,7 @@ const SVGCircleProgress = React.createClass({
     },
 
     setProgress: function (p) {
-        if (p > this.state.max_unfinish_percent && p < 100) p = this.state.max_unfinish_percent;
+        if (p > this.MAX_UNFINISHED_PERCENT && p < 100) p = this.MAX_UNFINISHED_PERCENT;
         // 一旦进度条到达100%, 就不能再重新设置进度了
         if (p >= 100) {
             p = 100;
@@ -56,8 +58,8 @@ const SVGCircleProgress = React.createClass({
 
     animate: function () {
         if (this.state.current_percent < this.state.target_percent) {
-            var p = this.state.current_percent + 1.2;
-            if (p > this.state.max_unfinish_percent && this.state.target_percent == 100) {
+            var p = this.state.current_percent + this.STEP_PERCENT;
+            if (p > this.MAX_UNFINISHED_PERCENT && this.state.target_percent == 100) {
                 p = 100;
             } else {
             }
@@ -87,8 +89,7 @@ const SVGCircleProgress = React.createClass({
         let circle = <circle cx={center.x} cy={center.y}
                              r={this.state.radius - this.state.weight / 2}
                              fill="white" stroke={circleColor}
-                             strokeWidth={this.state.weight}>
-        </circle>;
+                             strokeWidth={this.state.weight}></circle>;
 
         let p2 = {
             x: center.x + Math.sin(Math.PI * 2 * percent) * this.state.radius,
@@ -109,7 +110,9 @@ const SVGCircleProgress = React.createClass({
             f6 = ['Z'];
 
         let d = [].concat(f1).concat(f2).concat(f3).concat(f4).concat(f5).concat(f6).join(' ');
-        let path = percent === 1 ? null : <path fill={this.state.progressColor} d={d}></path>
+
+        let path = <path fill={this.state.progressColor} d={d}></path>;
+        if (this.state.current_percent === 100 || this.state.current_percent < this.MIN_START_PERCENT) path = null;
 
         return (
             <svg width={sideLength} height={sideLength}
