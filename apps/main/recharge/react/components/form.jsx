@@ -99,6 +99,7 @@ const Form = React.createClass({
         } else {
             $FW.Ajax({
                 url: API_PATH + 'mpwap/api/v1/index.shtml',
+                enable_loading: true,
                 data: {
                     payAmount: this.state.money,
                     smsCode: this.state.verify_code,

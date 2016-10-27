@@ -1,0 +1,348 @@
+@import "./common.less";
+html,body{
+  margin: 0;
+  background-color: #ebebee;
+}
+a, input,ul,li,p {
+  text-decoration: none;
+  &:active {
+    outline: 0;
+  }
+  &:focus {
+    outline: 0;
+  }
+  margin: 0;
+  padding: 0;
+  list-style: none ;
+}
+.container{
+  width: 100%;
+  height: 100%;
+}
+.headerCon{
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  line-height: 80px;
+  text-align: center;
+  position: relative;
+  img{
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .headerConText{
+    display: inline-block;
+    font-size: 36px;
+    margin: auto;
+    color: @color3;
+  }
+}
+.teamTop{
+  width: 100%;
+  height: 372px;
+  background-color:@color5c;
+  .teamTopUp{
+    width: 100%;
+    height: 254px;
+    display: table;
+    .teamUpLeft{
+      float: left;
+      width: 136px;
+      height: 136px;
+      background: url('../images/portrait.png') no-repeat;
+      margin: 55px 16px 0 30px;
+      img{
+        display: block;
+        width: 132px;
+        height: 132px;
+        border-radius: 50%;
+        margin: 2px;
+      }
+    }
+  }
+  .teamUpRight{
+    float: left;
+    padding-top: 60px;
+    .teamUpName{
+      width: 500px;
+      display: table;
+      .teamUpNameText{
+        float: left;
+        font-size: @fontSize36;
+        color: #fff;
+        margin-right: 4px;
+      }
+      .teamUpNameImg{
+        float: left;
+        margin-top: 6px;
+      }
+    }
+    .teamUpId{
+      font-size: @fontSize28;
+      color: @color9;
+      margin: 2px 0;
+    }
+    .teamUpScore{
+      font-size: @fontSize28;
+      color: @colorWhite;
+      span{
+        color: @colorFf;
+      }
+    }
+  }
+  .teamTopDown{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 118px;
+    width: 100%;
+    background: #4d5b88;
+    .teamDownCom{
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid #344066;
+      p{
+        font-size: @fontSize24;
+        color: #8494c7;
+      }
+    }
+    .teamDownCom:last-child{
+      border-right: 1px solid transparent;
+    }
+    .teamDownMark{
+      font-size: @fontSize32;
+      color: @colorWhite;
+    }
+    .teamDownCen{
+      .teamDownMark{
+        color: #53d44c;
+      }
+    }
+  }
+}
+.teamUpgrade{
+  height: 80px;
+  background:#fff6c7;
+  line-height: 80px;
+  font-size: @fontSize28;
+  padding: 0 30px;
+  margin-bottom: 20px;
+  span{
+    color: #6b4508;
+  }
+  img{
+    display: inline-block;
+    width: 16px;
+    height: 28px;
+    vertical-align: middle;
+    margin-left: 220px;
+  }
+}
+.teamCenterPool{
+  height: 80px;
+  background: @colorF9;
+
+  border-bottom: 1px solid #efefef;
+  line-height: 80px;
+  padding: 0 30px;
+  font-size: @fontSize32;
+  color: @color5;
+  .teamPoolLeft{
+    float: left;
+  }
+  .teamPoolRight{
+    float: right;
+    color: @colorRed;
+  }
+}
+.teamCenter{
+  width: 100%;
+  //height: 954px;
+  border-top: 1px solid @colorD8;
+  border-bottom: 1px solid @colorD8;
+  background: @colorWhite;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
+  //ÖùÐÎÍ¼
+  .teamCenterColumn{
+    width: 100%;
+    height: 420px;
+  }
+  .teamCenterDescribe{
+    font-size: @fontSize26;
+    padding: 0 0 20px 30px;
+    .teamDescribeTitle{
+      img{
+        display: inline-block;
+      }
+      .teamDescribeTitleText{
+        display: inline-block;
+        color: @color66;
+        margin-left: 14px;
+      }
+      .teamDescribeTitleScore{
+        display: inline-block;
+        color: @color83;
+        float: right;
+        margin-right: 30px;
+      }
+      .teamDescribeTitleScore2{
+        color: @colorFcb;
+      }
+      .teamDescribeTitleScore3{
+        color: @colorFc8;
+      }
+    }
+    .teamDescribeCon{
+      color:@color99;
+      font-size: @fontSize24;
+      margin: 6px 0 20px 36px;
+      line-height: 34px;
+    }
+  }
+  .teamCenterBtn{
+    width: 660px;
+    height: 85px;
+    text-align: center;
+    line-height: 85px;
+    font-size: @fontSize36;
+    color: @colorWhite;
+    background: @colorRed;
+    margin: auto;
+    border-radius: 4px;
+  }
+}
+.teamMiddle{
+  width: 100%;
+  border-top: 1px solid @colorD8;
+  border-bottom: 1px solid @colorD8;
+  background: @colorWhite;
+  margin-bottom: 20px;
+  //ÇúÏßÍ¼
+  .teamCenterCurve{
+    width: 100%;
+    height: 510px;
+  }
+}
+
+.teamCenterScale{
+  border-bottom: 2px solid #efefef;
+}
+.teamFooter{
+  width: 100%;
+  border-top: 1px solid @colorD8;
+  border-bottom: 1px solid @colorD8;
+  background: @colorWhite;
+  .teamCenterProportion{
+    background: @colorWhite;
+    padding: 28px 0px;
+    margin: 0 30px;
+    height: 88px;
+    border-bottom: 1px solid #e3e5ea;
+    .teamCenterProportionTop{
+      width: 100%;
+      display: table;
+    }
+    .teamProportionLeft{
+      float: left;
+      color: @colorRed;
+      font-size: @fontSize40;
+      margin-right: 20px;
+      margin-top: 20px;
+    }
+    .teamProportionCenter{
+      float: left;
+      .teamProportionCenterText{
+        .teamProportionCenterName{
+          display: inline-block;
+          font-size: @fontSize32;
+          color: @color3;
+        }
+        img{
+          vertical-align: middle;
+          display: inline-block;
+          margin-top: -12px;
+        }
+      }
+      .teamProportionCenterDes{
+        font-size: @fontSize22;
+        color: @color5;
+        margin-top: 16px;
+      }
+
+    }
+    .teamProportionRight{
+      float: right;
+      margin-top: 36px;
+    }
+  }
+  .teamCenterProportion:nth-child(1){
+    height: 268px;
+    .teamCenterProportionFoot{
+      display: block;
+    }
+  }
+  .teamCenterProportionFoot{
+    display: none;
+    height: 112px;
+    background: @colorF9;
+    margin-top: 125px;
+    border-radius: 4px;
+    font-size: @fontSize22;
+    color: @color99;
+    padding: 30px 20px 0px 20px;
+    div{
+      width: 100%;
+      display: table;
+      img{
+        float: left;
+        display: block;
+        margin-top: 2px;
+      }
+      span{
+        display: block;
+        float: left;
+        margin-left: 20px;
+        margin-top: -10px;
+      }
+    }
+    .teamCenterProportionFoot2{
+      img{
+        margin-top: 20px;
+      }
+      span{
+        margin-top: -14px;
+      }
+    }
+  }
+}
+.loadMore{
+  width: 100%;
+  height: 56px;
+  background: linear-gradient(to bottom , #ebebee 60%,#d4d3d6 100%);
+  text-align: center;
+  line-height: 56px;
+  font-size: @fontSize28;
+  color: @color99;
+}
+.teamUpdateBtn{
+  width: 100%;
+  height: 112px;
+  background: @colorWhite;
+  padding-top: 1px;
+  p{
+    width: 660px;
+    height: 75px;
+    line-height: 75px;
+    text-align: center;
+    margin:18px auto;
+    font-size: @fontSize32;
+    color: @colorWhite;
+    background: @colorRed;
+    border-radius: 4px;
+  }
+}

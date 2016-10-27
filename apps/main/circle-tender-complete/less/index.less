@@ -1,0 +1,206 @@
+@import "./common.less";
+html,body{
+  margin: 0;
+  background-color: #ebebee;
+}
+a, input,ul,li,p {
+  text-decoration: none;
+  &:active {
+    outline: 0;
+  }
+  &:focus {
+    outline: 0;
+  }
+  margin: 0;
+  padding: 0;
+  list-style: none ;
+}
+.container{
+  width: 100%;
+  height: 100%;
+}
+.headerCon{
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  line-height: 80px;
+  text-align: center;
+  position: relative;
+  img{
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .headerConText{
+    display: inline-block;
+    font-size: 36px;
+    margin: auto;
+    color: @color3;
+  }
+}
+.banner{
+  margin-bottom: 20px;
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+.smallTitle{
+  width: 100%;
+  height: 59px;
+  background: @colorF9;
+  border-bottom: 1px solid #e3e5ea;
+  font-size: @fontSize30;
+  position: relative;
+  line-height: 59px;
+  p{
+    margin-left: 30px;
+    color: @color3;
+  }
+}
+.interest{
+  width: 100%;
+  height: 100%;
+  background: @colorWhite;
+  border-bottom: 1px solid #e3e5ea;
+  margin-bottom: 20px;
+}
+.money{
+  height: 89px;
+  margin-left: 30px;
+  background: @colorWhite;
+  border-bottom: 1px solid #e3e5ea;
+  font-size: @fontSize28;
+  line-height: 89px;
+  color: @color5;
+  position: relative;
+  .moneyLeft{
+    float: left;
+  }
+  .moneyRight{
+    float: right;
+    margin-right: 80px;
+    color: @colorRed;
+  }
+  img{
+    float: right;
+    position: absolute;
+    right: 30px;
+    top: 42%;
+    //transform:rotate(180deg);
+  }
+}
+.moneyNoBorder{
+  border-bottom: transparent;
+}
+.hideInterest{
+  height: 100%;
+  background: @colorF9;
+  .hideMsg{
+    background: @colorF9;
+    margin-left: 54px;
+    font-size: @fontSize26;
+    border-bottom: 1px solid #e3e5ea;
+    height: 60px;
+    line-height: 60px;
+    .moneyRight{
+      margin-right: 80px;
+      color: @color3;
+    }
+  }
+}
+.imgMove{
+  width: 100%;
+  height: 168px;
+  background: @colorWhite;
+  border-bottom: 1px solid #e3e5ea;
+  margin-bottom: 20px;
+  ul{
+    display: table;
+    width: 100%;
+  }
+  li{
+    width: 25%;
+    margin-top: 28px;
+    float: left;
+    text-align: center;
+    .imgMoveImg{
+      display: block;
+      margin: auto;
+      width: 78px;
+      height: 70px;
+    }
+    .popScore{
+      color: @colorRed;
+      font-size: @fontSize26;
+      margin-top: 15px;
+    }
+  }
+}
+.reward{
+  color: @color3;
+  p{
+    float: left;
+  }
+  span{
+    display: block;
+    float: right;
+    margin-right: 20px;
+    color: @color6;
+    img{
+      display: inline-block;
+      transform: rotate(90deg);
+      margin-left: 30px;
+    }
+  }
+}
+.circleReward{
+  .moneyRight{
+    margin-right: 30px;
+  }
+}
+.level{
+  .moneyRight{
+    margin-right: 30px;
+    img{
+      transform:translateY(-50%);
+    }
+  }
+}
+.fontColor{
+  color: @color3;
+}
+.popular{
+  height: 214px;
+  margin-bottom: 0;
+  li {
+    margin-top: 0;
+    p {
+      margin-top: 10px;
+    }
+  }
+}
+.tranColor{
+  width: 100%;
+  height: 24px;
+  background: linear-gradient(to bottom , #ebebee 0%,#d3d2d5 100%);
+  border-bottom: 1px solid #e3e5ea;
+}
+.seeReward{
+  width: 100%;
+  padding-top: 22px;
+  height: 98px;
+  background: @colorWhite;
+  .seeRewardText{
+    margin:0 auto;
+    width: 660px;
+    height: 72px;
+    text-align: center;
+    line-height: 72px;
+    background: @colorRed;
+    color: @colorWhite;
+    font-size: @fontSize32;
+    border-radius: 4px;
+  }
+}

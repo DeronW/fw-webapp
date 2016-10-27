@@ -181,7 +181,6 @@ $FW.DOMReady(function () {
         }
     });
 
-
     if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"我的订单"} back_handler={back_handler}/>, document.getElementById('header'));
     }

@@ -1,7 +1,6 @@
 'use strict';
 
 const API_PATH = document.getElementById('api-path').value;
-
 const ResultPage = React.createClass({
     getInitialState: function () {
         let query = $FW.Format.urlQuery();
@@ -190,7 +189,6 @@ $FW.DOMReady(function () {
     }
 
     //Filter.options.searchSourceType = Filter.options.searchSourceType || '';
-
     if ($FW.Format.urlQuery().category) {
         Filter.options.categoryName = $FW.Format.urlQuery().category;
     }

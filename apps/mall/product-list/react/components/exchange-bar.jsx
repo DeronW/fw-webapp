@@ -9,11 +9,10 @@ const ExchangeBar = React.createClass({
             showFilterPop: false,
             filterScore: '不限',
             filterLevel: '不限',
-            maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
-            minPoints: '',
-            maxValue: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
-            minValue: '',
-            myScore: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : 0,
+            maxPoints:Filter.options.searchSourceType == 1?Filter.myConvertibleScore : '',
+            minPoints:'',
+            maxValue:'',
+            minValue:'',
         }
     },
     searchHandler: function () {
@@ -28,9 +27,13 @@ const ExchangeBar = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
             success: (data) => {
-                if (data.is_login) {
+                if (data.is_login) {                   	
                     Filter.myConvertibleScore = data.score;
-                    this.setState({myScore: data.score});
+                    if(Filter.options.searchSourceType == 1){
+                    	Filter.options.maxPoints=data.score;
+                    	console.log(Filter.myConvertibleScore);
+                    	this.setState({maxPoints:data.score});
+                    }
                 }
             }
         });
@@ -120,41 +123,30 @@ const ExchangeBar = React.createClass({
         this.setState({tab: tabName});
     },
     filterScoreHandler: function (name) {
-        this.setState({minValue: ''});
-        this.setState({
-            maxValue: Filter.options.searchSourceType == 1 ?
-                Filter.myConvertibleScore : ''
-        });
+        this.setState({minValue:''});
+        this.setState({maxValue:''});
         this.setState({filterScore: name});
         if (name == '不限') {
             this.setState({
-                maxPoints: Filter.options.searchSourceType == 1 ?
-                    Filter.myConvertibleScore : '',
-                minPoints: '',
+                maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore :'',
+                minPoints: ''
             });
         } else if (name == '我可兑换') {
             this.setState({
                 minPoints: '',
-                maxPoints: this.state.myScore,
+                maxPoints:Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore :''
             });
         } else if (name == '1-100') {
-            if (Filter.options.searchSourceType == 1) {
-                this.setState({
-                    minPoints: Filter.myConvertibleScore >= 1 ? 1 : 0,
-                    maxPoints: Filter.myConvertibleScore <= 100 ? Filter.myConvertibleScore : 100
-                });
-            } else {
-                this.setState({
-                    minPoints: 1,
-                    maxPoints: 100
-                });
-            }
-
+            this.setState({
+                minPoints: Filter.options.searchSourceType == 1&&Filter.myConvertibleScore >= 1 ? 1 : 0,
+                maxPoints: Filter.options.searchSourceType == 1&&Filter.myConvertibleScore <= 100 ? Filter.myConvertibleScore : 100
+            });
+                
         } else if (name == '101-1000') {
             if (Filter.options.searchSourceType == 1) {
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 101 ? 101 : 0,
-                    maxPoints: Filter.myConvertibleScore <= 1000 ? Filter.myConvertibleScore : 1000,
+                    maxPoints: Filter.myConvertibleScore <= 1000 ? Filter.myConvertibleScore : 1000
                 });
             } else {
                 this.setState({
@@ -174,29 +166,16 @@ const ExchangeBar = React.createClass({
                     maxPoints: 5000
                 });
             }
-
         } else if (name == '5000以上') {
             if (Filter.options.searchSourceType == 1) {
                 this.setState({
                     minPoints: Filter.myConvertibleScore >= 5000 ? 5000 : 0,
-                    maxPoints: Filter.myConvertibleScore,
+                    maxPoints: Filter.myConvertibleScore
                 });
             } else {
                 this.setState({
                     minPoints: 5000,
-                    maxPoints: Filter.myConvertibleScore,
-                });
-            }
-        } else {
-            if (Filter.options.searchSourceType == 1) {
-                this.setState({
-                    minPoints: '',
-                    maxPoints: Filter.myConvertibleScore,
-                });
-            } else {
-                this.setState({
-                    minPoints: '',
-                    maxPoints: '',
+                    maxPoints: 99999999
                 });
             }
         }
@@ -217,36 +196,47 @@ const ExchangeBar = React.createClass({
             this.setState({vipLevel: 5});
         }
     },
-    maxValueHandler: function (e) {
+    maxValueHandler: function (e) {    	
+    	if(e.target.value!=''&&isNaN(e.target.value)) return false 
+    	if(this.state.minValue==''){
+    		this.setState({
+                minPoints:0,
+            });
+    	}
         if (Filter.options.searchSourceType == 1) {
             this.setState({
-                maxValue: e.target.value > Filter.myConvertibleScore ?
-                    Filter.myConvertibleScore : e.target.value
+                maxValue: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value
             });
+            this.setState({maxPoints:e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value});
         } else {
-            this.setState({maxValue: e.target.value});
-        }
-        if (e.target.value || this.state.minValue) {
-            this.setState({filterScore: ''});
-        }
+            this.setState({maxValue:e.target.value});
+            this.setState({maxPoints:e.target.value});
+        }        
         if (e.target.value == '' && this.state.minValue == '') {
             this.setState({filterScore: '不限'});
+        }else{
+        	this.setState({filterScore:''});
         }
     },
     minValueHandler: function (e) {
+      if(e.target.value!=''&&isNaN(e.target.value)) return false 
+    	if(this.state.maxValue==''){
+    		this.setState({
+                maxPoints:Filter.options.searchSourceType == 1?Filter.myConvertibleScore:99999999,
+            });
+    	}
         if (Filter.options.searchSourceType == 1) {
             this.setState({
-                minValue: e.target.value > Filter.myConvertibleScore ?
-                    Filter.myConvertibleScore : e.target.value
+                minValue: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value
             });
+            this.setState({minPoints: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value});
         } else {
-            this.setState({minValue: e.target.value});
-        }
-        if (this.state.maxValue || e.target.value) {
-            this.setState({filterScore: ''});
-        }
+            this.setState({minPoints:e.target.value});
+        }        
         if (e.target.value == '' && this.state.maxValue == '') {
             this.setState({filterScore: '不限'});
+        }else{
+        	this.setState({filterScore:''});
         }
     },
     clearFilterHandler: function () {
@@ -276,21 +266,13 @@ const ExchangeBar = React.createClass({
 
     },
     filterFinishHandler: function () {
-        this.props.searchFilterProductShow();
+        this.props.searchFilterProductShow();        
         var options = {
             vipLevel: this.state.vipLevel,
             minPoints: this.state.minPoints,
             maxPoints: this.state.maxPoints,
             page: 1
         };
-        if (this.state.maxValue && this.state.minValue) {
-            options = {
-                vipLevel: this.state.vipLevel,
-                minPoints: this.state.minValue,
-                maxPoints: this.state.maxValue,
-                page: 1
-            };
-        }
         this.setState({showFilterPop: false});
         this.props.filterProducts(options);
     },
@@ -382,7 +364,8 @@ const ExchangeBar = React.createClass({
                                         className="horizon-line"></span>
                                     <div className="gongfeng-input-box gongfeng-input-box2"><input
                                         className="gongfeng-input gongfeng-input1" type="text"
-                                        value={this.state.maxValue} placeholder="最高工分" onChange={this.maxValueHandler}/>
+                                        value={this.state.maxValue} placeholder="最高工分" onChange={this.maxValueHandler}
+                                        ref="maxScore"/>
                                     </div>
                                 </div>
                             </div>
