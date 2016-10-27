@@ -83,78 +83,7 @@ const TeamData = React.createClass({
                    <div className="teamCenterPool teamCenterScale">
                        <div className="teamPoolLeft">当月工分池构成</div>
                    </div>
-                   <div className="teamCenterProportion teamCenterProportionSelf">
-                       <div className="teamProportionLeft">
-                           <span>11</span>%
-                       </div>
-                       <div className="teamProportionCenter">
-                           <div className="teamProportionCenterText">
-                               <div className="teamProportionCenterName">张继科</div>
-                               <img src="./images/vip4.png" alt="div"/>
-                           </div>
-                           <div className="teamProportionCenterDes">
-                               预期结算<span>200300</span>工分 / 累计结算<span>33333123</span>工分
-                           </div>
-                       </div>
-                       <div className="teamProportionRight">
-                           <img src="./images/arrow-right.png" alt=""/>
-                       </div>
-                        <div className="teamCenterProportionFoot">
-                            <div className="teamCenterProportionFoot1"><img src="./images/point.png" alt=""/><span>个人团队占比精度有偏差，最终请以实际结算工分为准。</span></div>
-                            <div className="teamCenterProportionFoot2"><img src="./images/point.png" alt=""/><span>个人团队占比=个人任务贡献工分/当月小队全员个人任务贡献 工分总和 。</span></div>
-                        </div>
-                   </div>
-                   <div className="teamCenterProportion">
-                       <div className="teamProportionLeft">
-                           <span>11</span>%
-                       </div>
-                       <div className="teamProportionCenter">
-                           <div className="teamProportionCenterText">
-                               <div className="teamProportionCenterName">刘诗诗</div>
-                               <img src="./images/vip3.png" alt="div"/>
-                           </div>
-                           <div className="teamProportionCenterDes">
-                               预期结算<span>200300</span>工分 / 累计结算<span>33333123</span>工分
-                           </div>
-                       </div>
-                       <div className="teamProportionRight">
-                           <img src="./images/arrow-right.png" alt=""/>
-                       </div>
-                   </div>
-                   <div className="teamCenterProportion">
-                       <div className="teamProportionLeft">
-                           <span>11</span>%
-                       </div>
-                       <div className="teamProportionCenter">
-                           <div className="teamProportionCenterText">
-                               <div className="teamProportionCenterName">马龙</div>
-                               <img src="./images/vip2.png" alt="div"/>
-                           </div>
-                           <div className="teamProportionCenterDes">
-                               预期结算<span>200300</span>工分 / 累计结算<span>33333123</span>工分
-                           </div>
-                       </div>
-                       <div className="teamProportionRight">
-                           <img src="./images/arrow-right.png" alt=""/>
-                       </div>
-                   </div>
-                   <div className="teamCenterProportion">
-                       <div className="teamProportionLeft">
-                           <span>11</span>%
-                       </div>
-                       <div className="teamProportionCenter">
-                           <div className="teamProportionCenterText">
-                               <div className="teamProportionCenterName">李四</div>
-                               <img src="./images/vip1.png" alt="div"/>
-                           </div>
-                           <div className="teamProportionCenterDes">
-                               预期结算<span>200300</span>工分 / 累计结算<span>33333123</span>工分
-                           </div>
-                       </div>
-                       <div className="teamProportionRight">
-                           <img src="./images/arrow-right.png" alt=""/>
-                       </div>
-                   </div>
+                   <Proportion />
                    <div className="loadMore">
                        向上滑动加载更多
                    </div>
@@ -210,6 +139,72 @@ const Describe = React.createClass({
             }
         </div>
     }
+});
+
+const Proportion = React.createClass({
+   render: function () {
+       var proData = [
+           {
+               leftText:'11',
+               name:'张继科',
+               img:'./images/vip4.png',
+               des1:'200300',
+               des2:'33333123',
+               imgArrow:'./images/arrow-right.png'
+           },
+           {
+               leftText:'12',
+               name:'刘诗诗',
+               img:'./images/vip3.png',
+               des1:'200300',
+               des2:'33333123',
+               imgArrow:'./images/arrow-right.png'
+           },
+           {
+               leftText:'13',
+               name:'马龙',
+               img:'./images/vip2.png',
+               des1:'200300',
+               des2:'33333123',
+               imgArrow:'./images/arrow-right.png'
+           },
+           {
+               leftText:'14',
+               name:'张三',
+               img:'./images/vip1.png',
+               des1:'200300',
+               des2:'33333123',
+               imgArrow:'./images/arrow-right.png'
+           }
+       ];
+       return <div>
+           {
+               proData.map((proportion,index) => {
+                   return <div className="teamCenterProportion" key={index}>
+                       <div className="teamProportionLeft">
+                           <span>{proportion.leftText}</span>%
+                       </div>
+                       <div className="teamProportionCenter">
+                           <div className="teamProportionCenterText">
+                               <div className="teamProportionCenterName">{proportion.name}</div>
+                               <img src={proportion.img} alt="div"/>
+                           </div>
+                           <div className="teamProportionCenterDes">
+                               预期结算<span>{proportion.des1}</span>工分 / 累计结算<span>{proportion.des2}</span>工分
+                           </div>
+                       </div>
+                       <div className="teamProportionRight">
+                           <img src={proportion.imgArrow} alt=""/>
+                       </div>
+                       <div className="teamCenterProportionFoot">
+                           <div className="teamCenterProportionFoot1"><img src="./images/point.png" alt=""/><span>个人团队占比精度有偏差，最终请以实际结算工分为准。</span></div>
+                           <div className="teamCenterProportionFoot2"><img src="./images/point.png" alt=""/><span>个人团队占比=个人任务贡献工分/当月小队全员个人任务贡献 工分总和 。</span></div>
+                       </div>
+                   </div>
+               })
+           }
+       </div>
+   }
 });
 ReactDOM.render(
   <TeamData />,
