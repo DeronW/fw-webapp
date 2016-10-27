@@ -6,7 +6,8 @@ const ScoreStream = React.createClass({
     getInitialState: function () {
       return {
           isChange:'true',
-          isListShow:'false'
+          isListShow:'false',
+          isMonth:'12月'
       }
     },
     handleChange:function(){
@@ -19,11 +20,19 @@ const ScoreStream = React.createClass({
           isListShow:!this.state.isListShow
       })
     },
+    getElementValue: function (event) {
+      this.setState({
+          isListShow:!this.state.isListShow,
+          isMonth:event.target.id
+      })
+    },
     render: function () {
+        console.log(this.state.isListShow);
         var listShowStyle = {
           display:this.state.isListShow ? 'none':'block'
         };
         var imgChange = !this.state.isListShow ? './images/arrowRotate.png' : './images/arrow.png';
+        var month = this.state.isMonth;
         return (
             <div className="container">
                 <div className='headerCon'>
@@ -36,16 +45,16 @@ const ScoreStream = React.createClass({
                     <div className="streamMonth">
                         <div className="MonthLeft">
                             <div className="MonthLeftShow" onClick={this.handleShowList}>
-                                <span>12月</span>
+                                <span>{month}</span>
                                 <img src={imgChange} alt=""/>
                             </div>
                             <div className="MonthLeftHide" style={listShowStyle}>
-                                <ul>
-                                    <li className="hideSelf">12月</li>
-                                    <li>4月</li>
-                                    <li>3月</li>
-                                    <li>2月</li>
-                                    <li>1月</li>
+                                <ul onClick={this.getElementValue} style={listShowStyle}>
+                                    <li className="hideSelf" id="12月">12月</li>
+                                    <li id="4月">4月</li>
+                                    <li id="3月">3月</li>
+                                    <li id="2月">2月</li>
+                                    <li id="1月">1月</li>
                                 </ul>
                             </div>
                         </div>
@@ -58,6 +67,9 @@ const ScoreStream = React.createClass({
                     </div>
                     <div className="streamList">
                         <Item />
+                        <div className="streamMore">
+                            向上滑动加载更多
+                        </div>
                     </div>
                 </div>
             </div>)

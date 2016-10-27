@@ -23,6 +23,7 @@ const MALL_APP_NAMES = [
     'new-order-list',
     'logistics',
     'coupon',
+    'voucher',
 
     // 产品相关页面
 	'new-product-detail',

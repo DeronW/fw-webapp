@@ -1,0 +1,547 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-size: 28px;
+  line-height:1.4;
+  background-color: #ebebee;
+}
+
+a {
+  text-decoration: none;
+  &:active {
+    outline: 0;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+
+ul, ol, li {
+  list-style: none outside none;
+}
+
+em, i {
+  font-style: normal;
+}
+
+@fl: left;
+
+@fr: right;
+
+@color-ff: #fff;
+
+@back-color: #fff;
+
+@block: block;
+
+@center: center;
+
+.fl () {
+  float: @fl;
+}
+
+.fr () {
+  float: @fr;
+}
+
+.border-radius-als (@r) {
+  -webkit-border-radius: @r;
+  -moz-border-radius: @r;
+  border-radius: @r;
+}
+
+.border-radius (@u: 0, @r: 0, @d: 0, @l: 0) {
+  -webkit-border-radius: @u @r @d @l;
+  -moz-border-radius: @u @r @d @l;
+  border-radius: @u @r @d @l;
+}
+
+.border-radius-l-r(@l, @r) {
+  -webkit-border-radius: @l @r 0 0;
+  -moz-border-radius: @l @r 0 0;
+  border-radius: @l @r 0 0;
+}
+
+.width (@w) {
+  width: @w;
+}
+
+.height (@h) {
+  height: @h;
+}
+
+.line-height (@lh) {
+  line-height: @lh;
+}
+
+.padding (@t: 0, @r: 0, @b: 0, @l: 0) {
+  padding: @t @r @b @l;
+}
+
+.padding-t (@t) {
+  padding-top: @u;
+}
+
+.padding-r (@r) {
+  padding-right: @r;
+}
+
+.padding-b (@b) {
+  padding-bottom: @b;
+}
+
+.padding-l (@l) {
+  padding-left: @l;
+}
+
+.padding-l-r (@l, @r) {
+  padding-left: @l;
+  padding-right: @r;
+}
+
+.padding-t-b (@t, @b) {
+  padding-top: @t;
+  padding-bottom: @b;
+}
+
+.padding-tb-lr(@tb, @lr) {
+  padding: @tb @lr;
+}
+
+.margin (@t: 0, @r: 0, @b: 0, @l: 0) {
+  margin: @t @r @b @l;
+}
+
+.margin-t (@t) {
+  margin-top: @t;
+}
+
+.margin-r (@r) {
+  margin-right: @r;
+}
+
+.margin-b (@b) {
+  margin-bottom: @b;
+}
+
+.margin-l (@l) {
+  margin-left: @l;
+}
+
+.margin-t-b (@t, @b) {
+  margin-top: @t;
+  margin-bottom: @b;
+}
+
+.margin-l-r (@l, @r) {
+  margin-left: @l;
+  margin-right: @r;
+}
+
+.back-color(@bc) {
+  background-color: @bc;
+}
+
+.border (@w, @style, @color) {
+  border: @w @style @color;
+}
+
+.border-t (@w, @style @color)
+{
+  border-top: @w @style @color
+;
+}
+
+.border-b (@w, @style @color)
+{
+  border-bottom: @w @style @color
+;
+}
+
+.border-t-b(@w, @style, @color-t, @color-b) {
+  border-top: @w @style @color-t;
+  border-bottom: @w @style @color-b;
+}
+
+.text-align (@p) {
+  text-align: @p;
+}
+
+.position (@pos) {
+  position: @pos;
+}
+
+.color(@color) {
+  color: @color;
+}
+
+.user-area {
+  .height(125px);
+  .padding-tb-lr(28px, 30px);
+  background-color: #fd4d4c;
+  color: @back-color;
+}
+
+.user-info {
+  .fl;
+}
+
+.user-portrait,
+.user-portrait img {
+  .border-radius(50%, 50%, 50%, 50%);
+}
+
+.user-portrait {
+  .fl;
+  .width(120px);
+  .height(120px);
+  .padding(2px, 2px, 2px, 2px);
+  background-color: @back-color;
+}
+
+.user-portrait img {
+  .width(100%);
+}
+
+.usr-info-block {
+  .padding(22px 0 0 140px);
+}
+
+.user-name {
+  width:100px;
+  text-align: center;
+  .line-height(40px);
+
+}
+
+.user-name-text{
+  font-size:30px;
+}
+
+.display (@display) {
+  display: @display;
+}
+
+.usr-info-vip {
+  .line-height(28px);
+  .text {
+    display:inline-block;
+    font-size: 22px;
+  }
+
+  .vip-text {
+    .margin(0 0 0 6px);
+    font-size: 22px;
+    .color(#fff048);
+  }
+
+  .vip-text-icon{
+    display:inline-block;
+    width:100px;
+  }
+
+  .vip-text-icon img{
+    width:100%;
+  }
+
+}
+
+.user-info-r {
+  .fr;
+  .padding(0 0 0 32px);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.user-get-adders {
+  display: block;
+  color: white;
+  .adders-icon {
+    .display(block);
+    .text-align(center);
+  }
+
+  .text {
+    font-size:26px;
+    .line-height(28px);
+  }
+}
+
+.my-oder-block {
+  .height(84px);
+  .padding-l-r(30px, 30px);
+  .line-height(84px);
+  .back-color(#fff);
+
+  .title {
+    .fl;
+  }
+
+  .oder-lick-text {
+    .fr;
+    .color(#999);
+    background:url(../images/list_icon_arrow.png) no-repeat 175px 25px;
+    display: inline-block;
+    padding-right: 30px;
+
+    .text {
+      .fl();
+    }
+
+    .icon {
+      .fl();
+      .margin-t(10px);
+    }
+  }
+}
+
+.delivery-list {
+  .height(116px);
+  .back-color(#f9f9f9);
+  .padding-t-b(12px, 5px);
+
+  .border-t-b (1px, solid, #e3e5ea, #d8d8d8);
+  display: table;
+  width: 100%;
+
+  & > div {
+    .fl;
+    .width(33.3%);
+    .text-align(center);
+  }
+
+  .info-block {
+
+    .position(relative);
+    margin: 0 auto;
+
+    .icon {
+      .display(block);
+    }
+
+    .mark-icon {
+      .position(absolute);
+      top: 6px;
+      left: 50%;
+      margin-left: 34px;
+      .width(30px);
+      .height(30px);
+      font-size: 20px;
+      .line-height(30px);
+      .back-color(#fd4d4c);
+      .color(#fff);
+      .border-radius-als(50%);
+    }
+
+    .text {
+      font-size:24px;
+      color: black;
+      .display(block);
+      .margin-t (-10px);
+      .line-height(30px);
+    }
+
+
+  }
+}
+
+.my-account-block {
+  .margin-t-b (20px, 20px);
+  .back-color(#fff);
+  .border-t-b(1px, solid, #d8d8d8, #d8d8d8);
+}
+
+.my-account-title {
+  .height(84px);
+  .line-height(84px);
+  .padding-l-r(30px, 30px);
+
+  .border-b(1px, solid, #d8d8d8);
+
+  .l-text {
+    .fl();
+  }
+
+  .money-number {
+    .fr();
+    .color(#fd4d4c);
+  }
+}
+
+.voucher-list {
+  .padding-l(30px);
+  .back-color (#f9f9f9);
+
+  & > div {
+    .height(70px);
+    .line-height(70px);
+    .border-b (1px, solid, #e3e5ea);
+    .padding-r(30px);
+
+    .r-text {
+      .fr();
+    }
+  }
+
+  & > div:last-child {
+    border-bottom: none;
+  }
+}
+
+.my-voucher-title {
+  .height(80px);
+  .line-height(80px);
+  .back-color(#fff);
+  .border-t(1px, solid, #d8d8d8);
+  .border-b(3px, solid, #ebebee);
+
+  .title-text {
+    .fl();
+  }
+}
+
+.my-voucher-tab {
+  overflow:hidden;
+  position:relative;
+  & > div {
+    .fl();
+    .width(33.33%);
+    .text-align(center);
+  }
+
+  .tab-text {
+
+  }
+
+  .select-li .tab-text {
+    .display(inline-block);
+    .padding-l(12px);
+    .padding-r(12px);
+    .line-height(80px);
+    .color(#fd4d4c);
+    .border-b(4px, solid, #fd4d4c);
+  }
+}
+
+.my-voucher-cont {
+  .border-t(1px, solid, #d8d8d8);
+
+  .empty-voucher {
+    display: block;
+    margin: 20px auto;
+  }
+}
+
+.color-bg{
+  background:url(../images/avail-ticket.png) no-repeat;
+  background-size:100% 100%;
+}
+
+.my-voucher-cont-list {
+  .position(relative);
+  max-width: 658px;
+  min-width: 318px;
+  height:184px;
+  margin: 20px auto;
+  .border-radius-als(14px);
+  overflow: hidden;
+
+  .watermark {
+    position: absolute;
+    right: -15px;
+    bottom: -15px;
+  }
+
+  .t-info {
+    .height(96px);
+    .color(#fff);
+    .padding(20px, 20px, 0, 20px);
+    .border-radius-l-r(14px, 14px);
+
+    .title-info {
+      .height(40px);
+      .line-height(40px);
+      .title-text {
+        .fl();
+        font-size:26px;
+        font-weight: normal;
+        max-width: 426px;
+        text-overflow: ellipsis;
+        height: 80px;
+        overflow: hidden;
+      }
+
+      .money-text {
+        .fr();
+      }
+    }
+
+    .clear-info {
+      .line-height(40px);
+      font-size: 22px;
+      .text {
+        .fl();
+      }
+
+      .text-timer {
+        position:absolute;
+        top:100px;
+        left:20px;
+        font-size:18px;
+        color:#c57400;
+      }
+    }
+
+  }
+
+
+  .b-info {
+    .padding-l-r(20px, 20px);
+    .color(#fff);
+    font-size: 18px;
+
+    .text{
+      position:absolute;
+      left:20px;
+      bottom:3px;
+      line-height:38px;
+    }
+
+    .btn-exchange {
+      float: right;
+      display:block;
+      width:124px;
+      height:0px;
+      background:red;
+    }
+  }
+
+}
+.gray-bg{
+  background:url(../images/unvail-ticket.png) no-repeat;
+  background-size:100% 100%;
+  .t-info{
+    .clear-info {
+      .text-timer {
+        color:#999;
+      }
+    }
+  }
+}
+
+.tab-vertical-line{
+  display:block;
+  background:url(../images/line.jpg) no-repeat;
+  width:4px;
+  height:28px;
+  position:absolute;
+  top:29px;
+}
+.tab-line-position1{
+  left:238px;
+}
+.tab-line-position2{
+  left:477px;
+}
