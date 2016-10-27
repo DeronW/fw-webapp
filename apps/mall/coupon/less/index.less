@@ -11,3 +11,196 @@ a{
 img{
   vertical-align: middle;
 }
+ul, ol, li {
+  list-style: none outside none;
+}
+
+em, i {
+  font-style: normal;
+}
+
+@fl: left;
+
+@fr: right;
+
+@color-ff: #fff;
+
+@back-color: #fff;
+
+@block: block;
+
+@center: center;
+
+@c-d8d8d8: #d8d8d8;
+
+.fl () {
+  float: @fl;
+}
+
+.fr () {
+  float: @fr;
+}
+
+.border-radius-als (@r) {
+  -webkit-border-radius: @r;
+  -moz-border-radius: @r;
+  border-radius: @r;
+}
+
+.border-radius (@u: 0, @r: 0, @d: 0, @l: 0) {
+  -webkit-border-radius: @u @r @d @l;
+  -moz-border-radius: @u @r @d @l;
+  border-radius: @u @r @d @l;
+}
+
+.border-radius-l-r(@l, @r) {
+  -webkit-border-radius: @l @r 0 0;
+  -moz-border-radius: @l @r 0 0;
+  border-radius: @l @r 0 0;
+}
+
+.width (@w) {
+  width: @w;
+}
+
+.height (@h) {
+  height: @h;
+}
+
+.line-height (@lh) {
+  line-height: @lh;
+}
+
+.padding (@t: 0, @r: 0, @b: 0, @l: 0) {
+  padding: @t @r @b @l;
+}
+
+.padding-t (@t) {
+  padding-top: @t;
+}
+
+.padding-r (@r) {
+  padding-right: @r;
+}
+
+.padding-b (@b) {
+  padding-bottom: @b;
+}
+
+.padding-l (@l) {
+  padding-left: @l;
+}
+
+.padding-l-r (@l, @r) {
+  padding-left: @l;
+  padding-right: @r;
+}
+
+.padding-t-b (@t, @b) {
+  padding-top: @t;
+  padding-bottom: @b;
+}
+
+.padding-tb-lr(@tb, @lr) {
+  padding: @tb  @lr;
+}
+
+.margin (@t: 0, @r: 0, @b: 0, @l: 0) {
+  margin: @t @r @b @l;
+}
+
+.margin-t (@t) {
+  margin-top: @t;
+}
+
+.margin-r (@r) {
+  margin-right: @r;
+}
+
+.margin-b (@b) {
+  margin-bottom: @b;
+}
+
+.margin-l (@l) {
+  margin-left: @l;
+}
+
+.margin-t-b (@t, @b){
+  margin-top: @t;
+  margin-bottom: @b;
+}
+
+.margin-l-r (@l, @r) {
+  margin-left: @l;
+  margin-right: @r;
+}
+
+.back-color(@bc) {
+  background-color: @bc;
+}
+
+.border (@w, @style, @color) {
+  border: @w @style @color;
+}
+
+.border-t (@w, @style @color){
+  border-top: @w @style @color;
+}
+
+.border-b (@w, @style @color){
+  border-bottom: @w @style @color;
+}
+
+.border-t-b(@w, @style, @color-t, @color-b) {
+  border-top: @w @style @color-t;
+  border-bottom: @w @style @color-b;
+}
+
+.text-align (@p) {
+  text-align: @p;
+}
+
+.position (@pos) {
+  position: @pos;
+}
+
+.display (@p) {
+  display: @p;
+}
+
+.color(@color) {
+  color: @color;
+}
+.l-r-text {
+  .back-color(#fff);
+  font-size:28px;
+  margin-top: 20px;
+  border-top:1px solid #d8d8d8;
+  border-bottom:1px solid #d8d8d8;
+
+  .info-block {
+    .height(82px);
+    .line-height(82px);
+    .margin-l(30px);
+    .padding-r(30px);
+    .border-b(1px, solid, #e3e5ea);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .text {
+      .fl();
+    }
+
+    .data-text {
+      .fr();
+      .color(#999);
+    }
+
+    .stake-text {
+      .color(#fd4d4c);
+    }
+  }
+
+}
