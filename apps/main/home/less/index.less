@@ -106,7 +106,114 @@ body {
   }
 }
 
-.project {
+.home-panel {
+  .head-images {
+    height: 278px;
+    img {
+      height: 278px;
+    }
+  }
+
+  .panel-title {
+    height: 80px;
+    line-height: 80px;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+    background: white;
+    margin: 20px 0;
+    font-size: 32px;
+    color: #4aa1f9;
+    padding: 0 30px;
+
+    .icon-new-bid {
+      position: relative;
+      top: 3px;
+      margin-right: 20px;
+    }
+    .icon-transfer {
+      position: relative;
+      top: 5px;
+      margin-right: 16px;
+    }
+
+    .icon-right-arrow {
+      float: right;
+      margin-top: 26px;
+    }
+  }
+
+  .notice {
+    height: 70px;
+    line-height: 70px;
+    font-size: 24px;
+    color: white;
+    background: #5b6993;
+    padding: 0 30px;
+    a {
+      float: right;
+      font-weight: bold;
+      padding: 0 10px;
+    }
+  }
+
+  .information {
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    background: white;
+
+    .info-title {
+      height: 80px;
+      line-height: 80px;
+      padding-left: 30px;
+      font-size: 32px;
+      color: #333333;
+      border-bottom: 1px solid #ebebee;
+    }
+
+    .scroll-panel {
+      height: 210px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .scroll-container {
+      height: 100%;
+      position: absolute;
+      left: -100px;
+    }
+
+    .event {
+      display: block;
+      height: 170px;
+      width: 306px;
+      margin: 20px 0 20px 20px;
+      position: relative;
+      float: left;
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .event-title {
+        font-size: 24px;
+        color: white;
+        height: 45px;
+        line-height: 45px;
+        background: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding-left: 5px;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+.projects {
   padding: 1px 0;
   background: #ebebee;
 
@@ -158,7 +265,7 @@ body {
 
       div {
         position: absolute;
-        font-size: 22px;
+        font-size: 26px;
       }
 
       .interest {
@@ -204,7 +311,11 @@ body {
         border-radius: 50%;
         padding: 10px;
         box-sizing: border-box;
-        background: transparent url(../images/ico-circle.png) no-repeat center center;
+        background: white;
+
+        &.completed {
+          background: white url(../images/ico-circle.png) no-repeat center center;
+        }
 
         div {
           position: absolute;
@@ -273,6 +384,7 @@ body {
   font-size: 24px;
   text-align: center;
   color: #999;
+  margin: 15px;
 }
 
 .company {

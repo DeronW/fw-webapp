@@ -29,6 +29,10 @@ const Bid = React.createClass({
             remain = `共${bid.borrowAmount / 10000}万`
         }
 
+        let svg = percent > 0 ? <SVGCircleProgress percent={percent} radius={70}/> : null;
+        let progressClassName = 'progress';
+        if (!percent % 100) progressClassName += ' completed';
+
         return (
             <a className="bid" onClick={()=>this.linkHandler(bid.id)}>
                 <div className="title">
@@ -41,9 +45,9 @@ const Bid = React.createClass({
                     <div className="remain">{remain}</div   >
                     <div className="start">100元起</div>
                     <div className="way">按月等额</div>
-                    <div className="progress">
+                    <div className={progressClassName}>
                         <div className={state_text == '投资' ? null : "full"}>{state_text}</div>
-                        <SVGCircleProgress percent={percent} radius={70} animate={false}/>
+                        {svg}
                     </div>
                 </div>
             </a>

@@ -1,7 +1,8 @@
-const Project = React.createClass({
+const InvestPanel = React.createClass({
     getInitialState: function () {
+
         return {
-            tab: 'new',
+            tab: location.hash == '#invest-transfer' ? 'transfer' : 'new',
             page: 0,
             total_page: 1,
             bids: []
@@ -9,7 +10,6 @@ const Project = React.createClass({
     },
     componentDidMount: function () {
         this.loadBids();
-        window.loadMoreBids = () => this.loadBids()
     },
     loadBids: function () {
         let url = this.state.tab == 'new' ?
@@ -24,7 +24,11 @@ const Project = React.createClass({
                 let page = data.pageData.pagination;
                 let bids = this.state.bids;
                 bids = bids.concat(data.pageData.result);
-                this.setState({page: page.pageNo, total_page: page.totalPage, bids: bids});
+                this.setState({
+                    page: page.pageNo,
+                    total_page: page.totalPage,
+                    bids: bids
+                });
             },
             fail: () => true
         })
@@ -35,7 +39,11 @@ const Project = React.createClass({
             page: 0,
             total_page: 1,
             bids: []
-        }, this.loadBids)
+        }, ()=> {
+            this.loadBids();
+            location.hash = `#invest-${this.state.tab}`;
+        });
+
     },
     linkHandler: function (value) {
         let g = (id) => document.getElementById(id);
@@ -43,18 +51,14 @@ const Project = React.createClass({
         g('form').submit();
     },
     render: function () {
-
-
-
-        // let bids = this.state.bids.length ? [this.state.bids[0]] : [];
-
         return (
-            <div className="project">
+            <div className="projects">
                 <div className="tabs" onClick={this.toggleHandler}>
                     <a className={this.state.tab == "new" ? "active" : ""}>最新项目</a>
                     <a className={this.state.tab == "new" ? "" : "active"}>债券转让</a>
                 </div>
                 <div> {this.state.bids.map((b)=> <Bid bid={b} key={b.prdNum}/>)} </div>
+                <a onClick={this.loadBids} className="btn-load-more">点击加载更多</a>
             </div>
         )
     }

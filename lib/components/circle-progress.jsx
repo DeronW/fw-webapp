@@ -46,6 +46,10 @@ const SVGCircleProgress = React.createClass({
         return this.state.current_percent < this.state.target_percent;
     },
 
+    componentWillUnmount: function () {
+        clearInterval(this._animate_timer);
+    },
+
     setProgress: function (p) {
         if (p > this.MAX_UNFINISHED_PERCENT && p < 100) p = this.MAX_UNFINISHED_PERCENT;
         // 一旦进度条到达100%, 就不能再重新设置进度了
@@ -88,7 +92,7 @@ const SVGCircleProgress = React.createClass({
         let circleColor = percent === 1 ? this.state.progressColor : this.state.bgColor;
         let circle = <circle cx={center.x} cy={center.y}
                              r={this.state.radius - this.state.weight / 2}
-                             fill="white" stroke={circleColor}
+                             fill="transparent" stroke={circleColor}
                              strokeWidth={this.state.weight}></circle>;
 
         let p2 = {
