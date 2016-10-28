@@ -23,9 +23,9 @@ const Logistics = React.createClass({
             <div className="logistics">
                 <div className="product-info">
                     <div className="logistics-info">
-                        <div className="logistics-item logistics-margin-top-space">物流状态：运输中</div>
+                        <div className="logistics-item logistics-margin-top-space">物流状态：{this.props.data.state}</div>
                         <div className="logistics-item">物流名称：{query.sendChannel}</div>
-                        <div className="logistics-item">物流编号：40989666892359</div>
+                        <div className="logistics-item">物流编号：{this.props.data.sendOrderNo}</div>
                     </div>
                 </div>
                 <div className="logistics-wrap">
