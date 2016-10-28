@@ -143,7 +143,10 @@ const OrderBlock = React.createClass({
             );
         };
 
-        let check_link = <a className="link-btn">查看券码</a>;
+        let sendOrderNo = order.sendOrderNo;
+        let sendChannel = order.sendChannel;
+        let sendChannelEnum = order.sendChannelEnum;
+        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + sendChannel+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid}>查看券码</a> : null);
 
         return (
             <div className="order-block">
@@ -178,10 +181,11 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单列表');
 
     $FW.Ajax({
-        //url: API_PATH + "mall/api/member/v1/order_list.json",
+        //url: API_PATH + "mall/api/order/v1/order_list.json",
         url: "http://localhost/nginx-1.9.12/html/order_list.json",
         enable_loading: true,
         success: function (data) {
+            console.log(data);
             ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));
         }
     });
