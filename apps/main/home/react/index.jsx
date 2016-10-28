@@ -1,118 +1,78 @@
+const API_PATH = document.getElementById('api-path').value;
+
+/*
+ 通过hash来判断当前页面处于哪种状态
+ #home 首页
+ #invest-new 投资页面 - 新项目
+ #invest-transfer 投资页面 - 债权转让
+ 默认是首页
+ */
+
 const Content = React.createClass({
+
     getInitialState: function () {
-        var tab = location.hash == '#transfer' ? '债权转让' : '最新投资';
-        return {
-            tab: tab
-        }
-    },
-    componentDidMount: function () {
-    },
-    tabClickHandler: function (name) {
-        if (name == '豆哥商城') {
-            location.href = 'http://mmall.9888.cn'
-        } else if (name == '个人中心') {
-            location.href = '/mpwap/orderuser/getUserInfo.shtml'
+        let hash = location.hash, tab;
+        if (hash == '' || hash == '#home') {
+            tab = 'home'
         } else {
-            this.setState({tab: name})
+            tab = hash
         }
+        return {tab: tab}
     },
-    render: function () {
-        let tab = (name, index) => {
-            var cn = this.state.tab == name ? 'active' : null;
-            return <div className={cn} key={index} onClick={()=>this.tabClickHandler(name)}>{name}</div>;
-        };
 
-        return (
-            <div>
-                <div className="tab-panel">
-                    <div className="fixed-tab-panel">
-                        {['最新投资', '债权转让', '豆哥商城', '个人中心'].map(tab)}
-                    </div>
-                </div>
-                <div>
-
-                </div>
-                {this.state.tab == '最新投资' ? <Content.Invest /> : null}
-                {this.state.tab == '债权转让' ? <Content.Transfer /> : null}
-            </div>
-        )
-    }
-});
-
-Content.Invest = React.createClass({
-    getInitialState: function () {
-        return {
-            items: []
-        }
-    },
     componentDidMount: function () {
     },
-    render: function () {
-        let item = (i, index) => {
-            return (
-                <div key={index}>
-                    {i}
-                </div>
-            )
-        };
-        return (
-            <div>
-                <BannerGroup images={[]}/>
-                {this.state.items.map(item)}
 
-                <div className="project">
-                    <div className="title">
-                        利随享8531
-                        <i className="icon-bao"> </i>
-                        <i className="icon-gu"> </i>
-                        <i className="icon-ling"> </i>
-                        <i className="icon-tie"> </i>
-
-                        <div className="tag"> 限时抢购</div>
-                    </div>
-                    <div className="detail">
-                        <div className="progress">
-                            <SVGCircleProgress radius={70} percent={60} />
-                        </div>
-                        <div className="profit">9.8%</div>
-                        <div className="duration">6个月</div>
-                        <div className="remain">剩44.8万</div>
-                        <div className="keywords">
-                            <span>100元起投</span>
-                            <span>一次结清</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        )
-    }
-});
-
-Content.Transfer = React.createClass({
-    getInitialState: function () {
-        return {
-            items: []
-        }
+    switchHomePanel: function () {
+        if (this.state.tab == 'home') return;
+        history.pushState({}, '', `${location.pathname}#home`);
+        this.setState({tab: 'home'});
     },
+
+    switchInvestPanel: function (invest_type = 'new') {
+        history.pushState({}, '', `${location.pathname}#invest-${invest_type}`);
+        this.setState({tab: `invest-${invest_type}`});
+    },
+
     render: function () {
-        let item = (i, index) => {
-            return (
-                <div key={index}>
-                    {i}
-                </div>
-            )
-        };
+
+        let panel = this.state.tab == 'home' ?
+            <HomePanel switchInvestPanel={this.switchInvestPanel}/> :
+            <InvestPanel />;
+
         return (
             <div>
-                <BannerGroup images={[]}/>
-                {this.state.items.map(item)}
+                <div className="status-bar">
+                    <div className="status-bar-fixed">
+                        <div className="top">
+                            <img src="./images/ico-logo.png"/>
+                            <a className="d" href="/mpwap/orderuser/toLogin.shtml">登录</a>
+                            <div className="v-line"></div>
+                            <a className="z" href="http://m.9888.cn:80/mpwap/orderuser/toRegister.shtml?source=0">注册</a>
+                            <div className="v-line"></div>
+                            <a className="x" href="/static/wap/app-download/index.html">下载APP</a>
+                        </div>
+
+                        <div className="nav">
+                            <a className={this.state.tab == 'home' ? 'active' : null}
+                               onClick={this.switchHomePanel}>首页</a>
+                            <a className={this.state.tab != 'home' ? 'active' : null}
+                               onClick={()=>this.switchInvestPanel('new')}>投资</a>
+                            <a href="http://mmall.9888.cn">豆哥商城</a>
+                            <a className="user-center has-unread-msg" href="/mpwap/orderuser/getUserInfo.shtml">
+                                <div className="red-dot"></div>
+                                个人中心
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {panel}
             </div>
         )
     }
 });
+
 
 $FW.DOMReady(function () {
-
     ReactDOM.render(<Content />, document.getElementById('cnt'));
 });

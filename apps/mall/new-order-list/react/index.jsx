@@ -14,7 +14,7 @@ const OrderMain = React.createClass({
         }
         return {
             index: index,
-            voucherName: ["全部", "待发货", "待收货", "已完成"]
+            voucherName: ["全部", "待付款", "待发货", "待收货", "已完成"]
         };
     },
     clickHandler: function (index) {
@@ -173,8 +173,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单列表');
 
     $FW.Ajax({
-        url: API_PATH + "mall/api/member/v1/order_list.json",
-        //url: "http://localhost/order_list.json",
+       // url: API_PATH + "mall/api/member/v1/order_list.json",
+        url: "./order_list.json",
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));

@@ -53,6 +53,11 @@ const BannerGroup = React.createClass({
         window.addEventListener('resize', this.initHandler)
     },
 
+    componentWillUnmount: function () {
+        clearInterval(this._auto_timer);
+        clearInterval(this._timer);
+    },
+
     initHandler: function () {
         let elem = ReactDOM.findDOMNode(this);
         let w = elem.offsetWidth;
@@ -102,12 +107,11 @@ const BannerGroup = React.createClass({
     },
 
     touchStartHandler: function (event) {
+        if (this._onTouching) return;
         this._touch.startX = event.changedTouches[0].pageX;
         this._touch.originLeft = this.state.left;
         this._onTouching = true;
         clearInterval(this._timer);
-        // event.preventDefault();
-        // event.stopPropagation();
     },
 
     touchMoveHandler: function (event) {
@@ -139,11 +143,22 @@ const BannerGroup = React.createClass({
         }
 
         this.animateTo(ti);
-        // event.preventDefault();
     },
 
     imageClickHandler: function (index) {
         this.props.onImageClick && this.props.onImageClick(index);
+    },
+
+    getDotStyle: function (active) {
+        let bg = active ? 'white' : 'hsla(0, 0%, 100%, .25)';
+        return {
+            display: 'inline-block',
+            width: '10px',
+            height: '10px',
+            background: bg,
+            borderRadius: '50%',
+            marginRight: '18px'
+        };
     },
 
     render: function () {
@@ -162,10 +177,10 @@ const BannerGroup = React.createClass({
                      onClick={() => _this.imageClickHandler(index) }
                      className={index + 1 == this.state.index ? 'active' : null}
                      style={{
-                        display: 'block',
-                        float: 'left',
-                        width: _this.state.width + 'px'
-                    }} src={img}/>
+                         display: 'block',
+                         float: 'left',
+                         width: _this.state.width + 'px'
+                     }} src={img}/>
             )
         };
 
@@ -178,7 +193,8 @@ const BannerGroup = React.createClass({
         }
 
         let dot = (_, index) => {
-            return <div className={index + 1 == this.state.index ? "dot active" : "dot"} key={index}></div>
+            let active = index + 1 == this.state.index;
+            return <div className={active ? "dot active" : "dot"} style={this.getDotStyle(active)} key={index}></div>
         };
 
         return (
@@ -197,7 +213,13 @@ const BannerGroup = React.createClass({
                     {this.state.images.map(image)}
                     {imitateLast}
                 </div>
-                <div className="dots">
+                <div className="dots" style={{
+                    position: 'absolute',
+                    bottom: '0',
+                    height: '30px',
+                    width: '100%',
+                    textAlign: 'center'
+                }}>
                     {this.state.images.map(dot)}
                 </div>
             </div>

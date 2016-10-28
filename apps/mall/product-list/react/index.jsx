@@ -1,7 +1,6 @@
 'use strict';
 
 const API_PATH = document.getElementById('api-path').value;
-
 const ResultPage = React.createClass({
     getInitialState: function () {
         let query = $FW.Format.urlQuery();

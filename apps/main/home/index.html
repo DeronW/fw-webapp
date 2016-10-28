@@ -1,27 +1,25 @@
 {% extends '../../../lib/templates/main_base.swig.html' %}
 
-{% block title %}首页{% endblock %}
+{% block title %}投资 - 金融工场{% endblock %}
 
 {% block content %}
-<div class="header">
-    <div class="header-panel">
-        <img class="logo" src="images/ico-logo.png"/>
-
-        <a href="/mpwap/orderuser/toLogin.shtml" class="login">登录</a>
-        <div class="ver-line"></div>
-        <a href="/mpwap/orderuser/toRegister.shtml?source=0" class="register">注册</a>
-        <div class="ver-line"></div>
-        <a href="/static/wap/app-download/index.html" class="download-app">下载APP</a>
-
-    </div>
-</div>
-
+<div id="header"></div>
 <div id="cnt"></div>
 
-<div class="app-download-bar">
-    <a href="/static/wap/app-download/index.html">
-        <img src="images/ico-loadapp.png">
-    </a>
-    <a class="back2top"></a>
+<div class="bottom-link">
+    <a href="http://www.9888.cn/top/index.do?pc=1">PC首页</a>
+    <a href="http://bbs.9888.cn/">工友之家</a>
+    <a href="/static/wap/app-download/index.html">下载APP</a>
+    <a href="/static/wap/about-us/index.html">关于我们</a>
 </div>
+<div style="width: 90%; margin: 10px auto; height: 1px; background: #d8d8d8"></div>
+<div class="copyright"> &copy;2016 金融工场版权所有</div>
+<div class="company">北京凤凰信用管理有限公司</div>
+
+<a class="app-download-link" href="/static/wap/app-download/index.html"></a>
+
+<form style="display: none" id="form" method="post" action="/mpwap/newPrdClaims/getDetail.shtml">
+    <input name="id" id="prdID"/>
+</form>
+
 {% endblock %}
