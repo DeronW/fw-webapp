@@ -20,6 +20,7 @@ const MyBankCard = React.createClass({
 const CardList = React.createClass({
     render: function () {
 	let bankCards = this.props.bankCards;
+	let 
 	/*
 	if(bankCards.cardName==''){}
 	else if(bankCards.cardName){}
