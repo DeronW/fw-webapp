@@ -146,7 +146,7 @@ const OrderBlock = React.createClass({
         let sendOrderNo = order.sendOrderNo;
         let sendChannel = order.sendChannel;
         let sendChannelEnum = order.sendChannelEnum;
-        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + sendChannel+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid}>查看券码</a> : null);
+        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid}>查看券码</a> : null);
 
         return (
             <div className="order-block">
