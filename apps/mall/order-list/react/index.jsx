@@ -181,8 +181,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单列表');
 
     $FW.Ajax({
-        //url: API_PATH + "mall/api/order/v1/order_list.json",
-        url: "http://localhost/nginx-1.9.12/html/order_list.json",
+        url: API_PATH + "mall/api/member/v1/order_list.json",
+        //url: "http://localhost/nginx-1.9.12/html/order_list.json",
         enable_loading: true,
         success: function (data) {
             console.log(data);
