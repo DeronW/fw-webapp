@@ -28,10 +28,10 @@ const Coupon = React.createClass({
 $FW.DOMReady(function() {
     NativeBridge.setTitle('爱奇艺兑换券');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"爱奇艺兑换券"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"爱奇艺兑换券"} back_handler={back_handler}/>, document.getElementById('header'));
     ReactDOM.render(<Coupon/>, document.getElementById('cnt'));
 });
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
+function back_handler() {
+    location.href = '/static/mall/order-list/index.html';
 }

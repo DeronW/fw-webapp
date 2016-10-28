@@ -40,7 +40,7 @@ const Logistics = React.createClass({
 $FW.DOMReady(function() {
     NativeBridge.setTitle('查看物流');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"查看物流"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"查看物流"} back_handler={back_handler}/>, document.getElementById('header'));
     var query = $FW.Format.urlQuery();
     $FW.Ajax({
         //url: "http://localhost/nginx-1.9.12/html/logistics.json",
@@ -61,6 +61,6 @@ $FW.DOMReady(function() {
     });
 });
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
+function back_handler() {
+    location.href = '/static/mall/order-list/index.html';
 }
