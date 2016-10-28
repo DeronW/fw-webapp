@@ -9,8 +9,79 @@
 <div class="introduction"><img src="images/bg2.png"/></div>
 <div class="welfare"><img src="images/bg3.jpg"/></div>
 <div class="register">
-   <div class="register-tip">您可拨打客服电话400-0322-988 转 0，咨询客服。也可直接登录PC版金融工场在“个人中心 - 工场码”页面进行申请。</div>
-   <a class="confirm-register-btn" href="tel:400-0322-988">立即拨打客服电话</a>
+   <!--<div class="register-tip">您可拨打客服电话400-0322-988 转 0，咨询客服。也可直接登录PC版金融工场在“个人中心 - 工场码”页面进行申请。</div>-->
+
+   <div class="applyfor">
+      <div id="namep">
+         <div  class="name">
+            <span class="compellation">姓名</span>
+            <span class="star">*</span>
+            <span class="frame" id="namePart"></span>
+         </div>
+      </div>
+      <div id="phonep">
+         <div  class="phone">
+            <span class="phonecompellation">手机号</span>
+            <span class="phonestar">*</span>
+            <span class="phoneframe" id="phonePart"></span>
+         </div>
+      </div>
+
+      <div class="wechatNumberPart">
+         <label for="wechatNumber">
+            微信号
+         </label>
+         <span>*</span>
+         <input type="text" id="wechatNumber" required="required"/>
+      </div>
+      <div class="mailPart">
+         <label for="mailPart">
+            邮箱
+         </label>
+         <span>*</span>
+         <input type="text" id="mailPart" required="required" ref="mailNumber"/>
+
+      </div>
+
+      <div class="cityPart">
+         <label for="cityPart">
+            所在城市
+         </label>
+         <span>*</span>
+         <input type="text" id="cityPart" required="required" />
+
+      </div>
+      <div class="submitPart">
+         <a class="confirm-register-btn" href="tel:400-0322-988" id="submitButton">确认申请</a>
+      </div>
+   </div>
+
+   <!--表单注释部分-->
+   <div class="Comments">
+         <div class="commentsTitle">
+            <h2>提示信息：</h2>
+         </div>
+         <div class="commentContent">
+            <div class="line">
+               1、自动提取姓名、手机号，不可修改
+            </div>
+            <div class="line">
+               2、微信号：必填，未输入弹框提示：微信必填
+            </div>
+            <div class="line">
+               3、邮箱：必填，未输入弹框提示：微信必填，邮箱格式校验,输入错误，弹框提示：请输入正确的邮箱地址
+            </div>
+            <div class="line">
+               4、所在城市：必填，未输入弹框提示：所在城市必填
+            </div>
+            <div class="line">
+               5、成功提交，弹框提示：申请成功，请耐心等待审核，关闭后，停留在申请页
+            </div>
+            <div class="line">
+               6、提交一次之后，再次点击“确认申请”，弹窗提示“请重复提交!（确定）”
+            </div>
+         </div>
+   </div>
 </div>
 <div class="information">
    <div class="info-title">特别说明：</div>
