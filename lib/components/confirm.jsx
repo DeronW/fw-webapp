@@ -1,9 +1,14 @@
 /*
-    *
-*/
+ */
 
 const GlobalConfirm = React.createClass({
-    render: function() {
+    componentWillUnmount: function () {
+        this.props.unMountConfirm && this.props.unMountConfirm();
+    },
+    confirmHandler: function () {
+        this.props.confirmCallback && this.props.confirmCallback()
+    },
+    render: function () {
         let popStyle = {
             position: "fixed",
             top: "0",
@@ -48,7 +53,7 @@ const GlobalConfirm = React.createClass({
             margin: "0",
             lineHeight: "36px",
             fontSize: "28px"
-        }
+        };
 
         let popBtnBtn = {
             width: "248px",
@@ -57,39 +62,39 @@ const GlobalConfirm = React.createClass({
             lineHeight: "74px",
             color: "#fff",
             borderRadius: "5px"
-        }
+        };
 
         let popBtnCancelBtn = {
             backgroundColor: "#8296af",
             float: "left"
-        }
+        };
 
         let popBtnConfirmBtn = {
             backgroundColor: "#fd4c4e",
             float: "right"
-        }
+        };
 
-        return (            
+        let _style_cancel = Object.assign({}, popBtnBtn, popBtnCancelBtn);
+        let _style_confirm = Object.assign({}, popBtnBtn, popBtnConfirmBtn);
+
+        return (
             <div style={popStyle}>
                 <div style={popBack}></div>
                 <div style={popCnt}>
                     <div style={popInfo}>
-                        <p style={popInfoP}>{this.props.text}</p>
+                        <p style={popInfoP}>{this.props.title}</p>
                     </div>
                     <div>
-                        <div style={Object.assign({}, popBtnBtn, popBtnCancelBtn)}
-                            onClick={this.props.lBtnFun}
-                        >
-                            {this.props.btnTextArr[0]}
-                        </div>
-                        <div style={Object.assign({}, popBtnBtn, popBtnConfirmBtn)}
-                             onClick={this.props.rBtnFun}
-                        >
-                            {this.props.btnTextArr[1]}
-                        </div>
+                        <div style={_style_cancel}> 取消</div>
+                        <div style={_style_confirm} onClick={this.confirmHandler}> 确认</div>
                     </div>
                 </div>
             </div>
         )
     }
 });
+
+GlobalConfirm.propTypes = {
+    title: React.PropTypes.string.isRequired,
+    confirmCallback: React.PropTypes.func
+};
