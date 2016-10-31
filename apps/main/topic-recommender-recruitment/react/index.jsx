@@ -81,7 +81,7 @@ $FW.DOMReady(function () {
                 },
                 success: function(data) {
                     console.log(data);
-
+                    $FW.Component.Alert('申请成功，请耐心等待审核！');
                 }
             });
 
