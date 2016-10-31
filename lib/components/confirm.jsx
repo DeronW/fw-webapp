@@ -6,7 +6,11 @@ const GlobalConfirm = React.createClass({
         this.props.unMountConfirm && this.props.unMountConfirm();
     },
     confirmHandler: function () {
-        this.props.confirmCallback && this.props.confirmCallback()
+        this.props.confirmCallback && this.props.confirmCallback();
+        ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
+    },
+    clearHandler: function() {
+        ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
     },
     render: function () {
         let popStyle = {
@@ -85,7 +89,7 @@ const GlobalConfirm = React.createClass({
                         <p style={popInfoP}>{this.props.title}</p>
                     </div>
                     <div>
-                        <div style={_style_cancel}> 取消</div>
+                        <div style={_style_cancel} onClick={this.clearHandler}> 取消</div>
                         <div style={_style_confirm} onClick={this.confirmHandler}> 确认</div>
                     </div>
                 </div>
