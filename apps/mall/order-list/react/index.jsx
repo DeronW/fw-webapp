@@ -143,6 +143,11 @@ const OrderBlock = React.createClass({
             );
         };
 
+        let sendOrderNo = order.sendOrderNo;
+        let sendChannel = order.sendChannel;
+        let sendChannelEnum = order.sendChannelEnum;
+        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid}>查看券码</a> : null);
+
         return (
             <div className="order-block">
                 <div className="title-block">
@@ -153,15 +158,18 @@ const OrderBlock = React.createClass({
                 </div>
                 <div className="info-block">
                     { order.products.map((p, index) => product_item(p, index)) }
-                    <div className="commodity-total">
-                        <span className="commodity-text">共件{order.orderCount}商品</span>
-                        <span className="total-text">
-                            实付款:
-                            {(order.price > 0 || order.score == 0) ?
-                                <span>&yen;{$FW.Format.currency(order.price)}</span> : null}
-                            {order.price > 0 && order.score ? ' + ' : null}
-                            {order.score ? order.score + '工分' : null}
-                        </span>
+                    <div className="commodity-wrap">
+                        <div className="commodity-total">
+                            <span className="commodity-text">共件{order.orderCount}商品</span>
+                            <span className="total-text">
+                                实付款:
+                                {(order.price > 0 || order.score == 0) ?
+                                    <span>&yen;{$FW.Format.currency(order.price)}</span> : null}
+                                {order.price > 0 && order.score ? ' + ' : null}
+                                {order.score ? order.score + '工分' : null}
+                            </span>
+                        </div>
+                        {check_link}
                     </div>
                 </div>
             </div>
@@ -174,9 +182,10 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/order_list.json",
-        //url: "http://localhost/order_list.json",
+        //url: "http://localhost/nginx-1.9.12/html/order_list.json",
         enable_loading: true,
         success: function (data) {
+            console.log(data);
             ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));
         }
     });
