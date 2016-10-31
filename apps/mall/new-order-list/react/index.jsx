@@ -5,12 +5,15 @@ const API_PATH = document.getElementById('api-path').value;
 const OrderMain = React.createClass({
     getInitialState: function () {
         var index = 0;
-        if (location.hash == '#prepare') {
-            index = 1
-        } else if (location.hash == '#shipping') {
+		if(location.hash == '#pay'){
+			index = 1
+		}
+        else if (location.hash == '#prepare') {
             index = 2
-        } else if (location.hash == '#complete') {
+        } else if (location.hash == '#shipping') {
             index = 3
+        } else if (location.hash == '#complete') {
+            index = 4
         }
         return {
             index: index,
@@ -46,6 +49,7 @@ const OrderList = React.createClass({
     getInitialState: function () {
         var state = {
             all: [],
+			pay: [],
             prepare: [],
             shipping: [],
             complete: []
@@ -71,16 +75,33 @@ const OrderList = React.createClass({
         return (
             <div className="order-area">
                 {this.props.index == 0 ? (this.state.all.length != 0 ? allBlock("all") : blockText) : null}
-                {this.props.index == 1 ? (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) : null}
-                {this.props.index == 2 ? (this.state.shipping.length != 0 ? allBlock("shipping") : blockText) : null}
-                {this.props.index == 3 ? (this.state.complete.length != 0 ? allBlock("complete") : blockText) : null}
+				{this.props.index == 1 ? (this.state.pay.length != 0 ? allBlock("pay") : blockText) : null}
+                {this.props.index == 2 ? (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) : null}
+                {this.props.index == 3 ? (this.state.shipping.length != 0 ? allBlock("shipping") : blockText) : null}
+                {this.props.index == 4 ? (this.state.complete.length != 0 ? allBlock("complete") : blockText) : null}
             </div>
         );
     }
 });
 
 const OrderBlock = React.createClass({
+	clickPay: function (index) {
+        location.href = '/static/mall/user/index.html';
+    },
+	
+	clickCancel: function (index) {
+	    confirmPanel.show()
+    },
+	
+	clickCancelNo: function (index) {
+	    confirmPanel.hide()
+    },
+	
     render: function () {
+		let pay_color = {
+            color:"#fd4d4c",
+            float:"right"
+        };
         let prepare_color = {
             color:"#fd4d4c",
             float:"right"
@@ -98,6 +119,10 @@ const OrderBlock = React.createClass({
         let status_name;
         let status_color;
         switch (order.status) {
+			case 'pay':
+                status_name = '待付款';
+                status_color = pay_color;
+                break;
             case 'prepare':
                 status_name = '待发货';
                 status_color = prepare_color;
@@ -162,10 +187,29 @@ const OrderBlock = React.createClass({
                             {order.price > 0 && order.score ? ' + ' : null}
                             {order.score ? order.score + '工分' : null}
                         </span>
-                    </div>
+					</div>
+					{order.status== "pay" ? <div className="pay-order"><div className="btn-pay" onClick={this.clickPay}>立即支付</div><div className="btn-cancel" onClick={this.clickCancel}>取消订单</div></div> : null}
                 </div>
             </div>
         );
+    }
+});
+
+const ConfAlert = React.createClass({
+	getInitialState: function () {
+        return {showcAlert: false}
+    },
+	show: function () {
+        this.setState({showcAlert: true});
+    },
+	hide: function () {
+        this.setState({showcAlert: false});
+    },
+	render: function () {
+	   if (!this.state.showcAlert) return null;
+	   return (
+	      <div className="alert-block"><div className="alert-bg"></div><div className="alert-panel"><div className="alert-text">是否取消订单？</div><div className="alert-btn"></div><div className="alert-btn-y">是</div><div onClick={this.hide} className="alert-btn-n">否</div></div></div>
+       );
     }
 });
 
@@ -178,7 +222,8 @@ $FW.DOMReady(function () {
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));
-        }
+			window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
+	    }
     });
 
 
