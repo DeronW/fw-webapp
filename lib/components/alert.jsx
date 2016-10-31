@@ -20,7 +20,7 @@ const GlobalAlert = React.createClass({
     },
 
     componentWillUnmount: function () {
-        this.props.unMountHandler && this.props.unMountHandler();
+        this.props.unMountAlert && this.props.unMountAlert();
     },
 
     render: function () {
@@ -69,10 +69,10 @@ const GlobalAlert = React.createClass({
         let style_text = {
             textAlign: "left",
             margin: "30px auto",
-            lineHeight:"40px",
-            color:"#555555",
+            lineHeight: "40px",
+            color: "#555555",
             padding: "0 36px",
-            fontSize:"28px"
+            fontSize: "28px"
         };
         let style_confirm = {
             display: "block",
@@ -96,47 +96,48 @@ const GlobalAlert = React.createClass({
             background: "#f9655a",
             borderRadius: '4px',
             margin: '0 auto 30px',
-            fontSize:"34px"
+            fontSize: "34px"
         };
         let style_header = {
-            width:"538px",
-            height:"88px",
-            fontSize:"32px",
-            color:"#333333",
-            lineHeight:"88px",
-            borderBottom:"1px solid #d8d8d8",
-            backgroundColor:"#eee",
-            paddingLeft:"38px",
-            borderTopLeftRadius:"8px",
-            borderTopRightRadius:"8px"
+            width: "538px",
+            height: "88px",
+            fontSize: "32px",
+            color: "#333333",
+            lineHeight: "88px",
+            borderBottom: "1px solid #d8d8d8",
+            backgroundColor: "#eee",
+            paddingLeft: "38px",
+            borderTopLeftRadius: "8px",
+            borderTopRightRadius: "8px"
         };
         let title_index = {
-            width:"36px",
-            display:"inline-block",
-            float:"left"
+            width: "36px",
+            display: "inline-block",
+            float: "left"
         };
         let title_content = {
-            width:"468px",
-            display:"inline-block",
-            float:"left"
+            width: "468px",
+            display: "inline-block",
+            float: "left"
         };
         let title_wrap = {
-            clear:"both",
-            overflow:"hidden"
+            clear: "both",
+            overflow: "hidden"
         };
 
         if (!this.state.show) return null;
 
         let title = null;
-        if(this.props.title instanceof Array){
-            title = <div> {this.props.title.map((i, index)=><div key={index} style={title_wrap}><span style={title_index}>{index+1}、</span><span style={title_content}>{i}</span></div>)} </div> ;
+        if (this.props.title instanceof Array) {
+            title = <div> {this.props.title.map((i, index)=><div key={index} style={title_wrap}><span
+                style={title_index}>{index + 1}、</span><span style={title_content}>{i}</span></div>)} </div>;
         } else {
             title = this.props.title;
         }
 
         let header = null;
-        if(this.props.header) {
-            header =  <div style={style_header}>{this.props.header}</div>
+        if (this.props.header) {
+            header = <div style={style_header}>{this.props.header}</div>
         }
 
         return (
@@ -155,3 +156,7 @@ const GlobalAlert = React.createClass({
         )
     }
 });
+
+GlobalAlert.propTypes = {
+    title: React.PropTypes.string.isRequired
+};

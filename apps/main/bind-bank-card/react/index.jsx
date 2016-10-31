@@ -57,7 +57,7 @@ const BindBankCard = React.createClass({
                     <div className={prohibited < 3 ? "instant-icon gray-img" : "instant-icon"}></div>
                 </div>
 
-                <Sup/>
+                {/*<Sup/>*/}
                 {
                     this.state.popShow ? <SelectBankList
                                         callbackSelectBankHide={this.getPopShow}
@@ -197,7 +197,7 @@ const Warm = React.createClass({
         return (
             <div className="rmd">
                 <div className="remin">温馨提醒</div>
-                <div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">目前官网上可绑定的部分银行暂不支持手机一键支付。</span>
+                <div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">目前官网上可绑定的部分银行暂不支持手机快捷支付。</span>
                 </div>
                 <div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">银行卡账户信息一旦提交绑定，不可自行修改。</span>
                 </div>
