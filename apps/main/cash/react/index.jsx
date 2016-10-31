@@ -541,10 +541,10 @@ const Withdrawals = React.createClass({
 				<div>
 					<div className="hsuo">提现说明</div>
 					<div className="danbi">
-						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">充值后无投资提现将由第三方平台收取{this.props.data.fee}%手续费。</span></div>
+						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">充值后无投资提现将由平台收取{this.props.data.fee}%手续费。</span></div>
 						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">{this.props.data.criticalValue} 万及以下提现，7*24小时实时到帐；{this.props.data.criticalValue}万元以上提现，工作日{this.props.data.doTime}，最快30分钟内到帐，实际到帐时间以发卡行为准，其它时间或节假日发起的提现，不予受理；中国银行和南京银行，单笔仅支持5万及以下金额提现。
 </span></div>
-						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">单笔提现金额不低于{this.props.data.criticalValue}元。</span></div>
+						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">单笔提现金额不低于10元。</span></div>
 						{/*<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">{this.props.data.workingDay}个工作日之内到账。</span></div>*/}
 						{/*<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">在双休日和法定节假日期间，也可申请提现。</span></div>*/}
 						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">填写的提现信息不正确导致提现失败，由此产生的提现费用不予退还。</span></div>
