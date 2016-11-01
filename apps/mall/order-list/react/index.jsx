@@ -123,8 +123,7 @@ const OrderBlock = React.createClass({
                             <img src={product.img || 'images/default-product.jpg'}/>
                         </div>
                         <div className="commodity-info">
-                            <div className="commodity-name">
-                                <h2>{product.title}</h2>
+                            <div className="commodity-name">{product.title}
                             </div>
                             {/*<div className="tag-block">
                                 { product.tags.length != 0 ? product.tags.map(

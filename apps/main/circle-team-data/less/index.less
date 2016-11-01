@@ -26,11 +26,16 @@ a, input,ul,li,p {
   line-height: 80px;
   text-align: center;
   position: relative;
-  img{
+  .imgBtn{
+    width: 100px;
+    height: 80px;
     position: absolute;
-    left: 30px;
-    top: 50%;
-    transform: translateY(-50%);
+    img{
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
   .headerConText{
     display: inline-block;
@@ -64,7 +69,7 @@ a, input,ul,li,p {
   }
   .teamUpRight{
     float: left;
-    padding-top: 60px;
+    padding-top: 66px;
     .teamUpName{
       width: 500px;
       display: table;
@@ -190,18 +195,22 @@ a, input,ul,li,p {
         float: right;
         margin-right: 30px;
       }
-      .teamDescribeTitleScore2{
-        color: @colorFcb;
-      }
-      .teamDescribeTitleScore3{
-        color: @colorFc8;
-      }
     }
     .teamDescribeCon{
       color:@color99;
       font-size: @fontSize24;
       margin: 6px 0 20px 36px;
       line-height: 34px;
+    }
+  }
+  .teamCenterDescribe:nth-child(2){
+    .teamDescribeTitleScore{
+      color: @colorFcb;
+    }
+  }
+  .teamCenterDescribe:nth-child(3){
+    .teamDescribeTitleScore{
+      color: @colorFc8;
     }
   }
   .teamCenterBtn{
@@ -230,7 +239,7 @@ a, input,ul,li,p {
 }
 
 .teamCenterScale{
-  border-bottom: 2px solid #efefef;
+  //border-bottom: 2px solid #efefef;
 }
 .teamFooter{
   width: 100%;
@@ -288,13 +297,13 @@ a, input,ul,li,p {
   }
   .teamCenterProportionFoot{
     display: none;
-    height: 112px;
+    height: 102px;
     background: @colorF9;
     margin-top: 125px;
     border-radius: 4px;
     font-size: @fontSize22;
     color: @color99;
-    padding: 30px 20px 0px 20px;
+    padding: 40px 20px 0px 20px;
     div{
       width: 100%;
       display: table;
