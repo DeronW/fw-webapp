@@ -70,7 +70,7 @@ const OrderStatusList = React.createClass({
                 break;
         }
 
-        let shipping = this.props.sendChannel ? (<div>
+        let shipping = this.props.send_channel ? (<div>
                             <div className="info-block">
                                 <span className="text">物流名称</span>
                                 <span className="data-text">{this.props.send_channel}</span>
