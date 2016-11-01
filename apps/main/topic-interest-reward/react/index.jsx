@@ -15,8 +15,24 @@ $FW.DOMReady(function () {
             url: API_PATH + 'mpwap/api/v1/user/level-info.shtml',
             success: (data)=> {
                 var level = data.userLevel - 1;
+                // console.log(level);
+                // console.log(interest_list[level]);
+                // console.log(interest_list[level].describe);
                 document.getElementById('level').innerText = level > 0 ? 'VIP' + level : '普通会员';
-                document.getElementById('interest').innerText = interest_list[level] ? parseFloat(interest_list[level].describe) : '无';
+                let v = interest_list[level] ? parseFloat(interest_list[level].describe) : '无';
+                document.getElementById('interest').innerText = v;
+
+                if(v == '无') {
+                    let e = document.removeElem('percent');
+                    e.parentNode.removeChild(node);
+                }
+
+                // if(level>1){
+                //     document.getElementById("percent").style.visibility="visible";
+                // }
+                // if(level==1||level==0){
+                //     document.getElementById('interest').innerText="无";
+                // }
             }
         });
     }
@@ -29,8 +45,11 @@ $FW.DOMReady(function () {
         try {
             for (var i = 0; i < rule.length; i++) {
                 var interest = rule[i].addInterest;
+                console.log(interest);//4个
                 interest_list.push(rule[i].addInterest);
-                document.getElementById("add-interest-text-" + i).innerHTML = interest ? interest.describe : '无';
+                document.getElementById("add-interest-text-" + i).innerHTML = interest ? interest.describe : '-';
+                // document.getElementById("add-interest-text-1").innerHTML="-";
+
             }
         } catch (e) {
 

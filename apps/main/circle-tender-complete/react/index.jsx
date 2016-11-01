@@ -2,7 +2,93 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
-const HeaderTitle = React.createClass({
+const HeaderTop = React.createClass({
+    getInitialState: function () {
+        return {
+            backBtn:true
+        }
+    },
+    render:function(){
+      return  (
+          <div className='headerCon' >
+              {
+                  this.state.backBtn ? <div className="imgBtn" onClick ={this.props.backBtn}><img src="./images/back.png" alt="" /></div> : null
+              }
+              <div className='headerConText'>
+                  {this.props.title}
+              </div>
+          </div>
+      )
+    }
+});
+
+var SmallTitle = React.createClass({
+    render:function(){
+        return (
+            <div className="smallTitle">
+                 <p>{this.props.smallTitle}</p>
+                {
+                    this.props.more ? <span>
+                                        {this.props.moreText}
+                                        <img src="./images/arrow.png" alt=""/>
+                                      </span> : null
+                }
+            </div>
+
+        )
+    }
+});
+
+const ContentMoney = React.createClass({
+   render: function () {
+       return(
+           <div className='money' onClick={this.props.handlerTab}>
+               <div className='moneyLeft'>{this.props.moneyText}</div>
+               {
+                   this.props.isImg ? <img src="./images/arrow.png" alt="" style={this.props.rotateStyle}/> : null
+               }
+               <div className='moneyRight'>
+                   {
+                       this.props.money.indexOf("/")>0 ? <img src={this.props.money} alt=""/> :
+                           <span>{this.props.money}</span>
+                   }
+               </div>
+           </div>
+       )
+   }
+});
+
+const ProductList = React.createClass({
+   clickFun: function (index) {
+        console.log(index);
+   },
+   render: function () {
+       var _this = this;
+       var list = function (item,index) {
+           return <li key={index}>
+                   <a><img src={item.img} alt=""/></a>
+                   <div className='popScore'><span>{item.score}</span>{_this.props.scoreText? "工分" : null}</div>
+               </li>
+       };
+       return(
+           <ul>
+               {
+                   this.props.products.map(list,this)
+               }
+           </ul>
+       )
+   }
+});
+
+const TenderProduct = React.createClass({
+    render: function () {
+        return(
+            <ProductList products={this.props.products} scoreText={this.props.scoreText}/>
+        )
+    }
+});
+
+const Tender = React.createClass({
     getInitialState: function() {
         return {
             tabShow: false,
@@ -14,6 +100,9 @@ const HeaderTitle = React.createClass({
             tabShow: !this.state.tabShow,
             deg: !this.state.tabShow ? "180" : "0"
         });
+    },
+    backFun: function () {
+        window.history.back();
     },
     render:function(){
         var tabBlock = function() {
@@ -41,118 +130,99 @@ const HeaderTitle = React.createClass({
             transform: "rotate("+ this.state.deg + "deg)"
         };
 
+        var ticketData = [
+            {
+                img:"./images/move1.png",
+                score:"￥50返现券"
+            },
+            {
+                img:"./images/move2.png",
+                score:"5%返息券"
+            },
+            {
+                img:"./images/move3.png",
+                score:"2个兑换券"
+            },
+            {
+                img:"./images/move4.png",
+                score:"+20000工分"
+            }
+        ];
+
+        var productData = [
+            {
+                img:"./images/pop1.png",
+                score:"399",
+            },
+            {
+                img:"./images/pop2.png",
+                score:"3999",
+            },
+            {
+                img:"./images/pop3.png",
+                score:"399",
+            },
+            {
+                img:"./images/pop4.png",
+                score:"3999",
+            }
+        ];
 
         return (
             <div className='container'>
-                <div className='headerCon'>
-                    <img src="./images/back.png" alt=""/>
-                    <div className='headerConText'>
-                        投标成功
-                    </div>
-                </div>
+                <HeaderTop title={"投标成功"}
+                           backBtn={this.backFun}/>
+
                 <div className='banner'>
                     <img src="./images/banner.png" alt=""/>
                 </div>
-                <div className='smallTitle'>
-                    <p>投资获利</p>
-                </div>
+
+                <SmallTitle smallTitle={"投资获利"}/>
+
                 <div className='interest'>
-                    <div className='money'>
-                        <div className='moneyLeft'> 投资金额</div>
-                        <div className='moneyRight'>￥<span>10.00</span></div>
-                    </div>
-                    <div className='money' onClick={this.handlerTab}>
-                        <div className='moneyLeft'> 总收益</div>
-                        <img src="./images/arrow.png" alt="" style={rotateStyle}/>
-                        <div className='moneyRight'>￥<span>10.00</span></div>
-                    </div>
+                    <ContentMoney moneyText={"投资金额"}
+                                  money={"￥10.00"} />
+                    <ContentMoney moneyText={"总收益"}
+                                  money={"￥20.00"}
+                                  isImg={true}
+                                  handlerTab={this.handlerTab}
+                                  rotateStyle={rotateStyle} />
                     {
                         this.state.tabShow ? tabBlock() : null
                     }
                 </div>
-                <div className='smallTitle'>
-                    <p>投资奖励</p>
-                </div>
+                <SmallTitle smallTitle={"投资奖励"} />
+
                 <div className='imgMove'>
-                    <ul>
-                        <li>
-                            <div className='imgMoveImg'><img src="./images/move1.png" alt=""/></div>
-                            <div className='popScore'>￥<span>50返现券</span></div>
-                        </li>
-                        <li>
-                            <div className='imgMoveImg'><img src="./images/move2.png" alt=""/></div>
-                            <div className='popScore'><span>5%返息券</span></div>
-                        </li>
-                        <li>
-                            <div className='imgMoveImg'><img src="./images/move3.png" alt=""/></div>
-                            <div className='popScore'><span>2个兑换券</span></div>
-                        </li>
-                        <li>
-                            <div className='imgMoveImg'><img src="./images/move4.png" alt=""/></div>
-                            <div className='popScore'><span>+2000</span>工分</div>
-                        </li>
-                    </ul>
+                    <TenderProduct products={ticketData} />
                 </div>
-                <div className='smallTitle reward'>
-                    <p>圈子奖励</p>
-                    <span>
-                        小队数据页面
-                        <img src="./images/arrow.png" alt=""/>
-                    </span>
-                </div>
+
+                <SmallTitle smallTitle={"圈子奖励"}
+                            more={true}
+                            moreText={"小队数据页面"}/>
                 <div className='interest circleReward'>
-                    <div className='money'>
-                        <div className='moneyLeft'> 获得个人任务贡献分</div>
-                        <div className='moneyRight'><span>+3000</span></div>
-                    </div>
-                    <div className='money moneyNoBorder'>
-                        <div className='moneyLeft'> 获得小队奖励工分</div>
-                        <div className='moneyRight'><span>+3000</span></div>
-                    </div>
+                    <ContentMoney moneyText={"获得个人任务贡献分"}
+                                  money={"+3000"}/>
+                    <ContentMoney moneyText={"获得小队奖励工分"}
+                                  money={"+3000"}/>
                 </div>
-                <div className='smallTitle'>
-                    <p>会员等级</p>
-                </div>
+
+                <SmallTitle smallTitle={"会员等级"}/>
                 <div className='interest level'>
-                    <div className='money'>
-                        <div className='moneyLeft'> 获得贡献值</div>
-                        <div className='moneyRight'><span>+3000</span></div>
-                    </div>
-                    <div className='money'>
-                        <div className='moneyLeft'> 当前会员等级</div>
-                        <div className='moneyRight'><img src="./images/vip.png" alt=""/></div>
-                    </div>
-                    <div className='money'>
-                        <div className='moneyLeft'> 年化加息奖励</div>
-                        <div className='moneyRight'><span className='fontColor'>3.5%</span></div>
-                    </div>
+                    <ContentMoney moneyText={"获得贡献值"}
+                                  money={"+3000"} />
+                    <ContentMoney moneyText={"当前会员等级"}
+                                  money={"./images/vip.png"} />
+                    <ContentMoney moneyText={"年化加息奖励"}
+                                  money={"3.5%"} />
                 </div>
-                <div className='smallTitle reward'>
-                    <p>人气兑换</p>
-                    <span>
-                        赚了工分？去商城转转
-                        <img src="./images/arrow.png" alt=""/>
-                    </span>
-                </div>
+
+                <SmallTitle smallTitle={"人气兑换"}
+                            more={true}
+                            moreText={"赚了工分？去商城转转"}/>
+
                 <div className='imgMove popular'>
-                    <ul>
-                        <li>
-                            <img src="./images/pop1.png" alt=""/>
-                            <div className='popScore'><span>399</span>工分</div>
-                        </li>
-                        <li>
-                            <img src="./images/pop2.png" alt=""/>
-                            <div className='popScore'><span>3999</span>工分</div>
-                        </li>
-                        <li>
-                            <img src="./images/pop3.png" alt=""/>
-                            <div className='popScore'><span>399</span>工分</div>
-                        </li>
-                        <li>
-                            <img src="./images/pop4.png" alt=""/>
-                            <div className='popScore'><span>3399</span>工分</div>
-                        </li>
-                    </ul>
+                    <TenderProduct products={productData} scoreText={true}/>
                 </div>
                 <div className="tranColor">
                 </div>
@@ -165,6 +235,6 @@ const HeaderTitle = React.createClass({
 });
 
 ReactDOM.render(
-    <HeaderTitle />,
+    <Tender />,
     document.getElementById("cnt")
 );
