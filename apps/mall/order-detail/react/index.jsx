@@ -15,7 +15,7 @@ const OrderDetail = React.createClass({
                     send_channel={this.props.sendChannel}
                 />
                 <OrderStatusBlock order={this.props.order} products={this.props.products}/>
-                <Coupon/>
+                <Coupon coupon={this.props.coupon}/>
                 <OrderPayInfo payment={this.props.payment} order={this.props.order}/>
                 <OrderNumberList order={this.props.order}/>
             </div>
@@ -25,7 +25,7 @@ const OrderDetail = React.createClass({
 
 const Coupon = React.createClass({
     render:function(){
-        let ls = this.props.data.coupon;
+        let ls = this.props.coupon;
         let coupon = (l,index) => {
             return (
                 <div className="coupon">
@@ -276,7 +276,6 @@ const OrderNumberList = React.createClass({
 $FW.DOMReady(function () {
     NativeBridge.setTitle('订单详情');
     let order_id = $FW.Format.urlQuery().order_id;
-    //let order_id = "401dcbbf3ad2435bb1ff4f39d256e0a8";
     if (!order_id) {
         $FW.Component.Alert('url query order_id is missing');
         return;
@@ -286,21 +285,6 @@ $FW.DOMReady(function () {
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
-        }
-    });
-    var query = $FW.Format.urlQuery();
-    $FW.Ajax({
-        url: API_PATH + "mall/api/order/v1/viewCardPass.json",
-        enable_loading: true,
-        data:{
-            bizNo:query.bizNo,
-            cardUuid:query.cardUuid
-            //bizNo:"42943117085",
-            //cardUuid:"ca7fc3971a3347c3a22e53fb25f9fea8;e91e725e053c44478ec89325cf848cfe;a9796d2735c34fa4804ec590b9a2b7d5"
-        },
-        success: function (data) {
-            console.log(data);
-            ReactDOM.render(<Coupon data={data}/>, document.getElementById('coupon-list'));
         }
     });
     if ($FW.Utils.shouldShowHeader()) {
