@@ -176,7 +176,7 @@ const OrderPayInfo = React.createClass({
         let score, bean, ticket, money;
         if (payment.score) {
             score = (
-                <div className="gongfeng-info-block">
+                <div className="info-block">
                     <span className="text">工分消耗</span>
                     <span className="data-text">{payment.score}工分</span>
                 </div>
