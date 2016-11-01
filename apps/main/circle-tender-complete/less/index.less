@@ -26,11 +26,16 @@ a, input,ul,li,p {
   line-height: 80px;
   text-align: center;
   position: relative;
-  img{
+  .imgBtn{
+    width: 100px;
+    height: 80px;
     position: absolute;
-    left: 30px;
-    top: 50%;
-    transform: translateY(-50%);
+    img{
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
   .headerConText{
     display: inline-block;
@@ -48,15 +53,29 @@ a, input,ul,li,p {
 }
 .smallTitle{
   width: 100%;
-  height: 59px;
+  height: 45px;
   background: @colorF9;
   border-bottom: 1px solid #e3e5ea;
   font-size: @fontSize30;
   position: relative;
-  line-height: 59px;
+  padding-top: 15px;
   p{
+    float: left;
     margin-left: 30px;
     color: @color3;
+  }
+  span{
+    display: block;
+    float: right;
+    margin-right: 20px;
+    color: @color6;
+    img{
+      display: inline-block;
+      vertical-align: middle;
+      margin-top: -4px;
+      transform: rotate(90deg);
+      margin-left: 30px;
+    }
   }
 }
 .interest{
@@ -138,23 +157,6 @@ a, input,ul,li,p {
     }
   }
 }
-.reward{
-  color: @color3;
-  p{
-    float: left;
-  }
-  span{
-    display: block;
-    float: right;
-    margin-right: 20px;
-    color: @color6;
-    img{
-      display: inline-block;
-      transform: rotate(90deg);
-      margin-left: 30px;
-    }
-  }
-}
 .circleReward{
   .moneyRight{
     margin-right: 30px;
@@ -167,6 +169,12 @@ a, input,ul,li,p {
       transform:translateY(-50%);
     }
   }
+  .money:nth-child(3){
+    .moneyRight{
+      color: @color3;
+    }
+  }
+
 }
 .fontColor{
   color: @color3;

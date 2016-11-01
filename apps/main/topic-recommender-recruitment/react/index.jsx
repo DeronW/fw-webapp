@@ -28,7 +28,7 @@ $FW.DOMReady(function () {
         wechatblurHandel:function () {
             formdata.wechat.onblur=function () {
                 if(this.value==""){
-                    $FW.Component.Toast("微信必填");
+                    $FW.Component.Alert("微信必填");
 
                 }
             }
@@ -36,16 +36,16 @@ $FW.DOMReady(function () {
         mailblurHandel:function () {
             formdata.mailPart.onblur=function () {
                 if(this.value==""){
-                    $FW.Component.Toast("邮箱必填");
+                    $FW.Component.Alert("邮箱必填");
                 }else if(!CheckMail(this.value)){
-                    $FW.Component.Toast("请输入正确的邮箱地址");
+                    $FW.Component.Alert("请输入正确的邮箱地址");
                 }
             }
         },
         cityblurHandel:function () {
             formdata.city.onblur=function () {
                 if(this.value==""){
-                    $FW.Component.Toast("所在城市必填");
+                    $FW.Component.Alert("所在城市必填");
                 }
             }
         }
@@ -60,13 +60,13 @@ $FW.DOMReady(function () {
     
     submitButton.onclick=function () {
         if(formdata.wechat.value==""){
-            $FW.Component.Toast("微信必填");
+            $FW.Component.Alert("微信必填");
         }else if(formdata.mailPart.value==""){
-            $FW.Component.Toast("邮箱必填");
+            $FW.Component.Alert("邮箱必填");
         }else if(!CheckMail(formdata.mailPart.value)){
-            $FW.Component.Toast("请输入正确的邮箱地址");
+            $FW.Component.Alert("请输入正确的邮箱地址");
         }else if(formdata.city.value==""){
-            $FW.Component.Toast("所在城市必填");
+            $FW.Component.Alert("所在城市必填");
         }else{
 
             $FW.Ajax({
@@ -81,7 +81,7 @@ $FW.DOMReady(function () {
                 },
                 success: function(data) {
                     console.log(data);
-
+                    $FW.Component.Alert('申请成功，请耐心等待审核！');
                 }
             });
 

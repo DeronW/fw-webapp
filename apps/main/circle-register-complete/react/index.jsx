@@ -5,14 +5,8 @@ const API_PATH = document.getElementById('api-path').value;
 const  Register = React.createClass({
     getInitialState: function () {
         return{
-            isTeam:false,
             openFalse: false
         }
-    },
-    joinTeam: function () {
-      this.setState({
-          isTeam:true
-      })
     },
     closeNotice: function () {
         this.setState({
@@ -32,14 +26,14 @@ const  Register = React.createClass({
                 <div className="registerFirstTop">
                     <img className='firstMedal' src="./images/medal.png" alt=""/>
                     <div className="registerScore">
-                        +<span>2</span>
+                        +<span>{_this.props.registerData.score}</span>
                     </div>
                     <div className="registerText">
                         签到成功
                     </div>
                 </div>
                 <div className="firstBigText">
-                    已连续签到<span>3</span>天，明日签到奖励<p>2</p>工分
+                    已连续签到<span>{_this.props.registerData.day}</span>天，明日签到奖励<p>{_this.props.registerData.score}</p>工分
                 </div>
                 <div className="firstSmallText">
                     连续签到7天可额外获得10工分
@@ -54,7 +48,7 @@ const  Register = React.createClass({
                <div className="registerFirstTop">
                    <img className='firstMedal' src="./images/medal.png" alt=""/>
                    <div className="registerScore">
-                       +<span>2</span>
+                       +<span>{_this.props.registerData.score}</span>
                    </div>
                    <div className="registerText">
                        签到成功
@@ -64,7 +58,7 @@ const  Register = React.createClass({
                    已完成“入队签到任务”，为小队工分池贡献<span>Y</span>工分
                </div>
                <div className="firstBigText">
-                   已连续签到<span>3</span>天，明日签到奖励<p>2</p>工分
+                   已连续签到<span>{_this.props.registerData.day}</span>天，明日签到奖励<p>{_this.props.registerData.score}</p>工分
                </div>
                <div className="alreadyFooter">
                    连续签到7天可额外获得10工分
@@ -106,13 +100,34 @@ const  Register = React.createClass({
                    }
                </div>
 
-
            </div>
        )
    }
 });
 
+const RegisterSucc = React.createClass({
+   getInitialState: function () {
+     return{
+         isTeam:false
+     }
+   },
+   joinTeam: function () {
+    this.setState({
+        isTeam:true
+    })
+   },
+   render: function () {
+       var registerData = {
+         day:"3",
+         score:"2"
+       };
+       return(
+           <Register registerData={registerData}/>
+       )
+   }
+});
+
 ReactDOM.render(
-  <Register />,
+  <RegisterSucc />,
     document.getElementById("cnt")
 );

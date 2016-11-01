@@ -112,22 +112,23 @@ const OrderBlock = React.createClass({
                 break;
         }
 
+        let href = order.cardUuid ? '/static/mall/order-detail/index.html?order_id=' + order.orderId + '&cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo : '/static/mall/order-detail/index.html?order_id=' + order.orderId;
+
         let product_item = function (product, index) {
 
             return (
-                <a href={'/static/mall/order-detail/index.html?order_id=' + order.orderId} key={index}>
+                <a href={href} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
                         </div>
                         <div className="commodity-info">
-                            <div className="commodity-name">
-                                <h2>{product.title}</h2>
+                            <div className="commodity-name">{product.title}
                             </div>
-                            <div className="tag-block">
+                            {/*<div className="tag-block">
                                 { product.tags.length != 0 ? product.tags.map(
                                     (i, index) => <span key={index} className="text">{i}</span>) : null }
-                            </div>
+                            </div>*/}
                             <div className="commodity-number">
                                 <span className="money-text">
                                     {product.price > 0 || product.score == 0 ?
@@ -146,7 +147,7 @@ const OrderBlock = React.createClass({
         let sendOrderNo = order.sendOrderNo;
         let sendChannel = order.sendChannel;
         let sendChannelEnum = order.sendChannelEnum;
-        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid}>查看券码</a> : null);
+        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
 
         return (
             <div className="order-block">
@@ -181,8 +182,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单列表');
 
     $FW.Ajax({
-        url: API_PATH + "mall/api/member/v1/order_list.json",
-        //url: "http://localhost/nginx-1.9.12/html/order_list.json",
+        //url: API_PATH + "mall/api/member/v1/order_list.json",
+        url: "http://localhost/nginx-1.9.12/html/order_list.json",
         enable_loading: true,
         success: function (data) {
             console.log(data);

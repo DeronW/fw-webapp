@@ -60,7 +60,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     MAIN_APP_NAMES.forEach(function (i) {
         var common_components = [
             'loading.jsx', 'alert.jsx', 'main/header.jsx', 'toast.jsx',
-            'banner-group.jsx', 'circle-progress.jsx'
+            'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
         ];
         var common_js = ['javascripts/main/fw-ajax-error-handler.js'];
 
