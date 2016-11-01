@@ -112,7 +112,7 @@ const OrderBlock = React.createClass({
                 break;
         }
 
-        let href = order.cardUuid ? '/static/mall/coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo : '/static/mall/order-detail/index.html?order_id=' + order.orderId;
+        let href = order.cardUuid ? '/static/mall/order-detail/index.html?order_id=' + order.orderId + '&cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo : '/static/mall/order-detail/index.html?order_id=' + order.orderId;
 
         let product_item = function (product, index) {
 
