@@ -277,23 +277,33 @@ em, i {
     .padding-t(30px);
      a{
        display:block;
-       height:180px;
      }
     .t-info {
+      position:relative;
       overflow:hidden;
+      padding-bottom:30px;
+      .border-b(1px, solid, #efefef);
       .commodity-img,
       .commodity-img img {
         .fl();
         .width(180px);
         .height(180px)
       }
-
       .commodity-info {
+        .money-text{
+          position:absolute;
+          bottom:30px;
+          left:200px;
+        }
+        .number-text{
+          position:absolute;
+          bottom:30px;
+          right:30px;
+        }
         .padding-b(30px);
         .padding-l-r(200px, 20px);
-        .border-b(1px, solid, #efefef);
-
         .commodity-name {
+          .color(#333);
           .height(80px);
           h2 {
             .line-height(40px);
