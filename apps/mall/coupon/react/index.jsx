@@ -25,7 +25,7 @@ const Coupon = React.createClass({
             )
         };
         return (
-            <div>
+            <div className="coupon-list">
                 {ls.map((l, index) => coupon(l, index)) }
             </div>
         )
