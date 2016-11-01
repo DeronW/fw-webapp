@@ -275,6 +275,7 @@ const OrderNumberList = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('订单详情');
+    let query = $FW.Format.urlQuery();
     let order_id = $FW.Format.urlQuery().order_id;
     if (!order_id) {
         $FW.Component.Alert('url query order_id is missing');
@@ -282,6 +283,10 @@ $FW.DOMReady(function () {
     }
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/order_detail.json?orderId=" + order_id,
+        data:{
+            bizNo:query.bizNo,
+            cardUuid:query.cardUuid
+        },
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
