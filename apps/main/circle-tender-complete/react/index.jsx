@@ -8,11 +8,6 @@ const HeaderTop = React.createClass({
             backBtn:true
         }
     },
-    backFun: function () {
-      this.setState({
-          backBtn:true
-      })
-    },
     render:function(){
       return  (
           <div className='headerCon' >
@@ -68,10 +63,11 @@ const ProductList = React.createClass({
         console.log(index);
    },
    render: function () {
+       var _this = this;
        var list = function (item,index) {
            return <li key={index}>
                    <a><img src={item.img} alt=""/></a>
-                   <div className='popScore'><span>{item.score}</span>{this.props.scoreText? "工分" : null}</div>
+                   <div className='popScore'><span>{item.score}</span>{_this.props.scoreText? "工分" : null}</div>
                </li>
        };
        return(
