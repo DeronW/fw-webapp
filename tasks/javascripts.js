@@ -8,7 +8,7 @@ const babel = require('gulp-babel');
 module.exports = javascripts = function (src_path, build_path, name, debug) {
     return gulp.src(src_path)
         .pipe(changed(build_path))
-        .pipe(babel({presets: ['es2015']}))
+        //.pipe(babel({presets: ['es2015']}))
         .pipe(debug ? plugins.util.noop() : js_uglify())
         .pipe(name ? concat(name, {newLine: ';'}) : plugins.util.noop())
         .pipe(gulp.dest(build_path));

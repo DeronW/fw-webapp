@@ -15,10 +15,42 @@ const OrderDetail = React.createClass({
                     send_channel={this.props.sendChannel}
                 />
                 <OrderStatusBlock order={this.props.order} products={this.props.products}/>
+                <Coupon coupon={this.props.coupon}/>
                 <OrderPayInfo payment={this.props.payment} order={this.props.order}/>
                 <OrderNumberList order={this.props.order}/>
             </div>
         );
+    }
+});
+
+const Coupon = React.createClass({
+    render:function(){
+        let ls = this.props.coupon;
+        let coupon = (l,index) => {
+            return (
+                <div className="coupon">
+                    <div className="l-r-text">
+                        <div className="info-block">
+                            <span className="text">券码</span>
+                            <span className="data-text">{ls[index].cardNum}</span>
+                        </div>
+                        <div className="info-block">
+                            <span className="text">密码</span>
+                            <span className="data-text">{ls[index].cardPwd}</span>
+                        </div>
+                        <div className="info-block">
+                            <span className="text">有效期</span>
+                            <span className="data-text">{ls[index].tillDate}</span>
+                        </div>
+                    </div>
+                </div>
+            )
+        };
+        return (
+            <div className="coupon-list" id="coupon-list">
+                {ls.map((l, index) => coupon(l, index)) }
+            </div>
+        )
     }
 });
 
@@ -243,7 +275,6 @@ const OrderNumberList = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('订单详情');
-
     let order_id = $FW.Format.urlQuery().order_id;
     if (!order_id) {
         $FW.Component.Alert('url query order_id is missing');
@@ -256,7 +287,6 @@ $FW.DOMReady(function () {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
         }
     });
-
     if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"订单详情"} />, document.getElementById('header'));
     }
