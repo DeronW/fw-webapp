@@ -15,10 +15,42 @@ const OrderDetail = React.createClass({
                     send_channel={this.props.sendChannel}
                 />
                 <OrderStatusBlock order={this.props.order} products={this.props.products}/>
+                <Coupon/>
                 <OrderPayInfo payment={this.props.payment} order={this.props.order}/>
                 <OrderNumberList order={this.props.order}/>
             </div>
         );
+    }
+});
+
+const Coupon = React.createClass({
+    render:function(){
+        let ls = this.props.data.coupon;
+        let coupon = (l,index) => {
+            return (
+                <div className="coupon">
+                    <div className="l-r-text">
+                        <div className="info-block">
+                            <span className="text">券码</span>
+                            <span className="data-text">{ls[index].cardNum}</span>
+                        </div>
+                        <div className="info-block">
+                            <span className="text">密码</span>
+                            <span className="data-text">{ls[index].cardPwd}</span>
+                        </div>
+                        <div className="info-block">
+                            <span className="text">有效期</span>
+                            <span className="data-text">{ls[index].tillDate}</span>
+                        </div>
+                    </div>
+                </div>
+            )
+        };
+        return (
+            <div className="coupon-list" id="coupon-list">
+                {ls.map((l, index) => coupon(l, index)) }
+            </div>
+        )
     }
 });
 
@@ -243,8 +275,8 @@ const OrderNumberList = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('订单详情');
-
     let order_id = $FW.Format.urlQuery().order_id;
+    //let order_id = "401dcbbf3ad2435bb1ff4f39d256e0a8";
     if (!order_id) {
         $FW.Component.Alert('url query order_id is missing');
         return;
@@ -256,7 +288,21 @@ $FW.DOMReady(function () {
             ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
         }
     });
-
+    var query = $FW.Format.urlQuery();
+    $FW.Ajax({
+        url: API_PATH + "mall/api/order/v1/viewCardPass.json",
+        enable_loading: true,
+        data:{
+            bizNo:query.bizNo,
+            cardUuid:query.cardUuid
+            //bizNo:"42943117085",
+            //cardUuid:"ca7fc3971a3347c3a22e53fb25f9fea8;e91e725e053c44478ec89325cf848cfe;a9796d2735c34fa4804ec590b9a2b7d5"
+        },
+        success: function (data) {
+            console.log(data);
+            ReactDOM.render(<Coupon data={data}/>, document.getElementById('coupon-list'));
+        }
+    });
     if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"订单详情"} />, document.getElementById('header'));
     }
