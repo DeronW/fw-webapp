@@ -34,9 +34,9 @@ const Coupon = React.createClass({
 
 
 $FW.DOMReady(function() {
-    NativeBridge.setTitle('爱奇艺兑换券');
+    NativeBridge.setTitle('查看券码');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"爱奇艺兑换券"} back_handler={back_handler}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"查看券码"} back_handler={back_handler}/>, document.getElementById('header'));
     var query = $FW.Format.urlQuery();
     $FW.Ajax({
         url: API_PATH + "mall/api/order/v1/viewCardPass.json",

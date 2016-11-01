@@ -112,10 +112,12 @@ const OrderBlock = React.createClass({
                 break;
         }
 
+        let href = order.cardUuid ? '/static/mall/coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo : '/static/mall/order-detail/index.html?order_id=' + order.orderId;
+
         let product_item = function (product, index) {
 
             return (
-                <a href={'/static/mall/order-detail/index.html?order_id=' + order.orderId} key={index}>
+                <a href={href} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
@@ -124,10 +126,10 @@ const OrderBlock = React.createClass({
                             <div className="commodity-name">
                                 <h2>{product.title}</h2>
                             </div>
-                            <div className="tag-block">
+                            {/*<div className="tag-block">
                                 { product.tags.length != 0 ? product.tags.map(
                                     (i, index) => <span key={index} className="text">{i}</span>) : null }
-                            </div>
+                            </div>*/}
                             <div className="commodity-number">
                                 <span className="money-text">
                                     {product.price > 0 || product.score == 0 ?
