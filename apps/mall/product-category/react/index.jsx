@@ -3,9 +3,9 @@
 const API_PATH = document.getElementById('api-path').value;
 
 const SearchPage = React.createClass({
-    render: function(){
-        let category = ['虚拟类','饮食','家居生活','汽车用品','户外用品','手机数码','豆哥周边','品质生活','母婴','工场券','全部商品'];
-        let category_link_name = ['virtualCard','diet','living','automobile','outdoor','mobileDigital','fantasy','qualityLife','workshop','maternalInfantEducation',''];
+    render: function(){        
+        let category = ['工场券','豆哥周边','虚拟类','饮食','家居生活','汽车用品','户外用品','手机数码','母婴教育','品质生活','全部商品'];        
+        let category_link_name = ['workshop','fantasy','virtualCard','diet','living','automobile','outdoor','mobileDigital','maternalInfantEducation','qualityLife',''];
         
         let category_item = category.map((name,index) =>{
         	let category_link='http://mmall.9888.cn/static/mall/product-list/index.html?searchSourceType=0&category='+category_link_name[index]+'&title='+category[index];
