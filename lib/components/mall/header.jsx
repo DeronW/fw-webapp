@@ -68,21 +68,21 @@ const Header = React.createClass({
 
         let _style_header_arm_up = {
             position: "absolute",
-            width: "3px",
-            height: this.state.height / 4 + "px",
+            width: "2px",
+            height: this.state.height / 3 + "px",
             WebkitTransform: "rotate(45deg)",
             transform: "rotate(45deg)",
-            top: "29px",
+            top: "25px",
             left: "50px",
             background: "#536f95"
         };
         var _style_header_arm_down = {
             position: "absolute",
-            width: "3px",
-            height: this.state.height / 4 + "px",
+            width: "2px",
+            height: this.state.height / 3 + "px",
             WebkitTransform: "rotate(135deg)",
             transform: "rotate(135deg)",
-            top: "46px",
+            top: "45px",
             left: "50px",
             background: '#536f95'
         };
