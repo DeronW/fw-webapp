@@ -4,7 +4,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 const OrderDetail = React.createClass({
     render: function () {
-
+        var card = $FW.Format.urlQuery().cardUuid;
         return (
             <div>
                 <OrderStatusList
@@ -15,7 +15,7 @@ const OrderDetail = React.createClass({
                     send_channel={this.props.sendChannel}
                 />
                 <OrderStatusBlock order={this.props.order} products={this.props.products}/>
-                <Coupon coupon={this.props.coupon}/>
+                {card?<Coupon coupon={this.props.coupon}/>:null}
                 <OrderPayInfo payment={this.props.payment} order={this.props.order}/>
                 <OrderNumberList order={this.props.order}/>
             </div>
@@ -70,6 +70,31 @@ const OrderStatusList = React.createClass({
                 break;
         }
 
+        let shipping = this.props.send_channel ? (<div>
+                            <div className="info-block">
+                                <span className="text">物流名称</span>
+                                <span className="data-text">{this.props.send_channel}</span>
+                            </div>
+                            <div className="info-block">
+                                <span className="text">物流编号</span>
+                                <span className="data-text">{this.props.send_order_no}</span>
+                            </div>
+                            <div className="address-list">
+                                <div className="address-icon">
+                                    <img src="images/ico-blue-location.png"/>
+                                </div>
+                                <div className="address-info">
+                                    <div className="my-info-text">
+                                        <span className="receipt-name">收货人:{this.props.shippingInfo.username}</span>
+                                        <span className="phone-number">{this.props.shippingInfo.phone}</span>
+                                    </div>
+                                    <div className="address-text">
+                                        <p>收货地址: {this.props.shippingInfo.address}</p>
+                                    </div>
+                                </div>
+                            </div>
+                      </div>) : null;
+
         return (
             <div className="l-r-text">
                 <div className="info-block">
@@ -78,29 +103,7 @@ const OrderStatusList = React.createClass({
                         {status_name}
                     </span>
                 </div>
-                <div className="info-block">
-                    <span className="text">物流名称</span>
-                    <span className="data-text">{this.props.send_channel}</span>
-                </div>
-                <div className="info-block">
-                    <span className="text">物流编号</span>
-                    <span className="data-text">{this.props.send_order_no}</span>
-                </div>
-                <div className="address-list">
-                    <div className="address-icon">
-                        <img src="images/ico-blue-location.png"/>
-                    </div>
-
-                    <div className="address-info">
-                        <div className="my-info-text">
-                            <span className="receipt-name">收货人:{this.props.shippingInfo.username}</span>
-                            <span className="phone-number">{this.props.shippingInfo.phone}</span>
-                        </div>
-                        <div className="address-text">
-                            <p>收货地址: {this.props.shippingInfo.address}</p>
-                        </div>
-                    </div>
-                </div>
+                {shipping}
             </div>
         );
     }
