@@ -7,7 +7,7 @@ const Success = React.createClass({
         $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/'
     },
     render: function () {
-
+        let href = this.props.cardUuid ? "/static/mall/order-detail/index.html?order_id=" + this.props.order_id + '&cardUuid=' + this.props.cardUuid + '&bizNo=' + this.props.bizNo : "/static/mall/order-detail/index.html?order_id=" + this.props.order_id;
         return (
             <div>
                 <div className="success-banner"
@@ -36,7 +36,7 @@ const Success = React.createClass({
                     </div>
                 </div>
                 <div className="success-btn">
-                    <a href={"/static/mall/order-detail/index.html?order_id=" + this.props.order_id} className="success-btn1">查看订单</a>
+                    <a href={href} className="success-btn1">查看订单</a>
                     <a onClick={this.backToMallHandler} className="success-btn2">返回商城</a>
                 </div>
             </div>
@@ -57,6 +57,8 @@ $FW.DOMReady(function () {
             $FW.Component.hideAjaxLoading();
             ReactDOM.render(<Success
                 order_id={order_id}
+                cardUuid={data.cardUuid}
+                bizNo={data.order.bizNo}
                 receiver={data.shipping_info.username}
                 phone={data.shipping_info.phone}
                 address={data.shipping_info.address}
