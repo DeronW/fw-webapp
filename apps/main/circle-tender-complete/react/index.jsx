@@ -172,7 +172,6 @@ const Tender = React.createClass({
             <div className='container'>
                 <HeaderTop title={"投标成功"}
                            backBtn={this.backFun}/>
-
                 <div className='banner'>
                     <img src="./images/banner.png" alt=""/>
                 </div>
