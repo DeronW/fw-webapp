@@ -170,16 +170,16 @@ a, input,ul,li,p {
   border-top: 1px solid @colorD8;
   border-bottom: 1px solid @colorD8;
   background: @colorWhite;
-  padding-bottom: 30px;
   margin-bottom: 20px;
-  //ÖùÐÎÍ¼
+  margin-top: 100px;
+  //æŸ±çŠ¶å›¾
   .teamCenterColumn{
     width: 100%;
     height: 420px;
   }
   .teamCenterDescribe{
     font-size: @fontSize26;
-    padding: 0 0 20px 30px;
+    padding: 0 0 10px 30px;
     .teamDescribeTitle{
       img{
         display: inline-block;
@@ -203,46 +203,44 @@ a, input,ul,li,p {
       line-height: 34px;
     }
   }
-  .teamCenterDescribe:nth-child(2){
+  .teamCenterDescribe:nth-child(4){
     .teamDescribeTitleScore{
       color: @colorFcb;
     }
   }
-  .teamCenterDescribe:nth-child(3){
+  .teamCenterDescribe:nth-child(5){
     .teamDescribeTitleScore{
       color: @colorFc8;
     }
   }
-  .teamCenterBtn{
-    width: 660px;
-    height: 85px;
-    text-align: center;
-    line-height: 85px;
-    font-size: @fontSize36;
-    color: @colorWhite;
-    background: @colorRed;
-    margin: auto;
-    border-radius: 4px;
+  .btnContent {
+    padding: 0px 20px;
+    p{
+      height: 85px;
+      text-align: center;
+      line-height: 85px;
+    }
   }
 }
 .teamMiddle{
-  width: 100%;
   border-top: 1px solid @colorD8;
   border-bottom: 1px solid @colorD8;
   background: @colorWhite;
   margin-bottom: 20px;
-  //ÇúÏßÍ¼
+  //æ›²çº¿å›¾
   .teamCenterCurve{
-    width: 100%;
     height: 510px;
   }
-}
 
+}
+.btnContent p{
+  height: 85px;
+  line-height: 85px;
+}
 .teamCenterScale{
   //border-bottom: 2px solid #efefef;
 }
 .teamFooter{
-  width: 100%;
   border-top: 1px solid @colorD8;
   border-bottom: 1px solid @colorD8;
   background: @colorWhite;
@@ -253,7 +251,6 @@ a, input,ul,li,p {
     height: 88px;
     border-bottom: 1px solid #e3e5ea;
     .teamCenterProportionTop{
-      width: 100%;
       display: table;
     }
     .teamProportionLeft{
@@ -289,7 +286,7 @@ a, input,ul,li,p {
       margin-top: 36px;
     }
   }
-  .teamCenterProportion:nth-child(1){
+  .teamCenterProportion:nth-child(2){
     height: 268px;
     .teamCenterProportionFoot{
       display: block;
@@ -309,11 +306,9 @@ a, input,ul,li,p {
       display: table;
       img{
         float: left;
-        display: block;
         margin-top: 2px;
       }
       span{
-        display: block;
         float: left;
         margin-left: 20px;
         margin-top: -10px;
@@ -330,7 +325,6 @@ a, input,ul,li,p {
   }
 }
 .loadMore{
-  width: 100%;
   height: 56px;
   background: linear-gradient(to bottom , #ebebee 60%,#d4d3d6 100%);
   text-align: center;
@@ -338,13 +332,11 @@ a, input,ul,li,p {
   font-size: @fontSize28;
   color: @color99;
 }
-.teamUpdateBtn{
-  width: 100%;
+.btnContent{
   height: 112px;
   background: @colorWhite;
-  padding-top: 1px;
+  padding: 10px 20px;
   p{
-    width: 660px;
     height: 75px;
     line-height: 75px;
     text-align: center;

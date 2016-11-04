@@ -13,6 +13,7 @@ const MAIN_APP_NAMES = [
     // 新增页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
+	'notice-safeguard',// 资金安全保障
 
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡

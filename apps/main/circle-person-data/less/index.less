@@ -26,11 +26,16 @@ a, input,ul,li,p {
   line-height: 80px;
   text-align: center;
   position: relative;
-  img{
+  .imgBtn{
+    width: 100px;
+    height: 80px;
     position: absolute;
-    left: 30px;
-    top: 50%;
-    transform: translateY(-50%);
+    img{
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
   .headerConText{
     display: inline-block;
@@ -66,7 +71,7 @@ a, input,ul,li,p {
   }
   .teamUpCenter{
     float: left;
-    padding-top: 80px;
+    padding-top: 85px;
     .teamUpName{
       width: 400px;
       display: table;
@@ -97,7 +102,7 @@ a, input,ul,li,p {
   .teamUpRight{
     float: right;
     margin-right: 20px;
-    padding-top: 80px;
+    padding-top: 85px;
   }
   .teamTopDown{
     height: 118px;
@@ -133,11 +138,10 @@ a, input,ul,li,p {
 }
 .teamCenter{
   width: 100%;
-  //height: 954px;
   border-top: 1px solid @colorD8;
   border-bottom: 1px solid @colorD8;
   background: @colorWhite;
-  padding-bottom: 28px;
+  margin-bottom: 20px;
   //ÖùÐÎÍ¼
   .teamCenterColumn{
     width: 100%;
@@ -176,7 +180,7 @@ a, input,ul,li,p {
   line-height: 80px;
   font-size: @fontSize28;
   padding: 0 30px;
-  margin-bottom: 20px;
+  margin-top: 20px;
   span{
     color: #6b4508;
   }
@@ -192,19 +196,17 @@ a, input,ul,li,p {
   }
 }
 .teamSettle{
-  height: 966px;
   border-bottom: 1px solid @colorD8;
   border-top: 1px solid @colorD8;
   background: @colorWhite;
-  margin-bottom: 20px;
   .teamSettleTitle{
     padding: 22px 30px;
-    height: 96px;
     background: @colorF9;
     border-bottom: 1px solid #e3e5ea;
     .teamSettleTitleText{
       font-size: @fontSize32;
       color: @color3;
+      margin-bottom: 10px;
     }
     .teamSettleTitleCon{
       font-size: @fontSize22;
@@ -296,7 +298,7 @@ a, input,ul,li,p {
     }
   }
 }
-.teamHistoryScore{
+.teamSettle{
   //height: 750px;
   width: 100%;
   background: @colorWhite;
