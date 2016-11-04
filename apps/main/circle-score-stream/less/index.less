@@ -20,20 +20,25 @@ a, input,ul,li,p ,strong{
   width: 100%;
   height: 100%;
 }
-.headerCon {
+.headerCon{
   width: 100%;
   height: 80px;
   background: #fff;
   line-height: 80px;
   text-align: center;
   position: relative;
-  img {
+  .imgBtn{
+    width: 100px;
+    height: 80px;
     position: absolute;
-    left: 30px;
-    top: 50%;
-    transform: translateY(-50%);
+    img{
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
-  .headerConText {
+  .headerConText{
     display: inline-block;
     font-size: 36px;
     margin: auto;
@@ -228,15 +233,16 @@ a, input,ul,li,p ,strong{
     div{
       display: table-cell;
       vertical-align:middle;
+      line-height: 36px;
     }
   }
-  .streamMore{
-    width: 100%;
-    height: 76px;
-    background: #ebebee;
-    text-align: center;
-    line-height: 76px;
-    font-size: @fontSize28;
-    color: @color9;
-  }
+}
+.streamMore{
+  width: 100%;
+  height: 76px;
+  background: #ebebee;
+  text-align: center;
+  line-height: 76px;
+  font-size: @fontSize28;
+  color: @color9;
 }

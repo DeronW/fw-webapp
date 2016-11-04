@@ -2,75 +2,95 @@
 
 const API_PATH = document.getElementById('api-path').value;
 
-const ScoreStream = React.createClass({
+const HeaderTop = React.createClass({
     getInitialState: function () {
-      return {
-          isChange:'true',
-          isListShow:'false',
-          isMonth:'12月'
-      }
+        return({
+            backBtn:true
+        })
+    },
+    render:function(){
+        return(
+            <div className='headerCon'>
+                {
+                    this.state.backBtn ? <div className="imgBtn" onClick ={this.props.backBtn}><img src="./images/back.png" alt=""/></div> : null
+                }
+                <div className='headerConText'>
+                    {this.props.title}
+                </div>
+            </div>
+        )
+    }
+});
+const MonthStream = React.createClass({
+    getInitialState: function () {
+        return {
+            isChange:'true',
+            isListShow:'false',
+            isMonth:'12月'
+        }
     },
     handleChange:function(){
-      this.setState({
-          isChange: !this.state.isChange
-      })
+        this.setState({
+            isChange: !this.state.isChange
+        })
     },
     handleShowList: function () {
-      this.setState({
-          isListShow:!this.state.isListShow
-      })
+        this.setState({
+            isListShow:!this.state.isListShow
+        })
     },
     getElementValue: function (event) {
-      this.setState({
-          isListShow:!this.state.isListShow,
-          isMonth:event.target.id
-      })
+        this.setState({
+            isListShow:!this.state.isListShow,
+            isMonth:event.target.id
+        })
     },
+   render: function () {
+       console.log(this.state.isListShow);
+       var listShowStyle = {
+           display:this.state.isListShow ? 'none':'block'
+       };
+       var imgChange = !this.state.isListShow ? './images/arrowRotate.png' : './images/arrow.png';
+       var month = this.state.isMonth;
+       return(
+           <div className="streamMonth">
+               <div className="MonthLeft">
+                   <div className="MonthLeftShow" onClick={this.handleShowList}>
+                       <span>{month}</span>
+                       <img src={imgChange} alt=""/>
+                   </div>
+                   <div className="MonthLeftHide" style={listShowStyle}>
+                       <ul onClick={this.getElementValue} style={listShowStyle}>
+                           <li className="hideSelf" id="12月">12月</li>
+                           <li id="4月">4月</li>
+                           <li id="3月">3月</li>
+                           <li id="2月">2月</li>
+                           <li id="1月">1月</li>
+                       </ul>
+                   </div>
+               </div>
+               <div className="MonthRight">
+                   <div className="MonthRightText">显示全部</div>
+                   <div className={this.state.isChange ? 'MonthRightBtn' : 'MonthRightBtnRed'} onClick={this.handleChange}>
+                       <div className="MonthRightBtnChange"></div>
+                   </div>
+               </div>
+           </div>
+       )
+   }
+});
+
+const ScoreStream = React.createClass({
     render: function () {
-        console.log(this.state.isListShow);
-        var listShowStyle = {
-          display:this.state.isListShow ? 'none':'block'
-        };
-        var imgChange = !this.state.isListShow ? './images/arrowRotate.png' : './images/arrow.png';
-        var month = this.state.isMonth;
         return (
             <div className="container">
-                <div className='headerCon'>
-                    <img src="./images/back.png" alt=""/>
-                    <div className='headerConText'>
-                        工分池流水
-                    </div>
-                </div>
+                <HeaderTop title={"小队数据"} backBtn={this.backFun}/>
                 <div className="stream">
-                    <div className="streamMonth">
-                        <div className="MonthLeft">
-                            <div className="MonthLeftShow" onClick={this.handleShowList}>
-                                <span>{month}</span>
-                                <img src={imgChange} alt=""/>
-                            </div>
-                            <div className="MonthLeftHide" style={listShowStyle}>
-                                <ul onClick={this.getElementValue} style={listShowStyle}>
-                                    <li className="hideSelf" id="12月">12月</li>
-                                    <li id="4月">4月</li>
-                                    <li id="3月">3月</li>
-                                    <li id="2月">2月</li>
-                                    <li id="1月">1月</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="MonthRight">
-                            <div className="MonthRightText">显示全部</div>
-                            <div className={this.state.isChange ? 'MonthRightBtn' : 'MonthRightBtnRed'} onClick={this.handleChange}>
-                                <div className="MonthRightBtnChange"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="streamList">
-                        <Item />
-                        <div className="streamMore">
-                            向上滑动加载更多
-                        </div>
-                    </div>
+                    <MonthStream />
+                    <Item />
+                </div>
+                <div className="streamMore">
+                    向上滑动加载更多
                 </div>
             </div>)
     }
@@ -108,7 +128,7 @@ const Item = React.createClass({
            }
        ];
        return(
-           <div>
+           <div className="streamList">
                {
                    itemData.map((item,index) => {
                        return  <div className="ListItem" key={index}>
