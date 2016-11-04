@@ -205,10 +205,19 @@ const ConfAlert = React.createClass({
 	hide: function () {
         this.setState({showcAlert: false});
     },
+	cancelY: function () {
+       $FW.Ajax({
+        url: "./order_list.json",
+        enable_loading: true,
+		success: function (data) {
+		
+		}
+		});
+    },
 	render: function () {
 	   if (!this.state.showcAlert) return null;
 	   return (
-	      <div className="alert-block"><div className="alert-bg"></div><div className="alert-panel"><div className="alert-text">是否取消订单？</div><div className="alert-btn"></div><div className="alert-btn-y">是</div><div onClick={this.hide} className="alert-btn-n">否</div></div></div>
+	      <div className="alert-block"><div className="alert-bg"></div><div className="alert-panel"><div className="alert-text">是否取消订单？</div><div className="alert-btn"></div><div onClick={this.cancelY} className="alert-btn-y">是</div><div onClick={this.hide} className="alert-btn-n">否</div></div></div>
        );
     }
 });
@@ -217,7 +226,6 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单列表');
 
     $FW.Ajax({
-       // url: API_PATH + "mall/api/member/v1/order_list.json",
         url: "./order_list.json",
         enable_loading: true,
         success: function (data) {
