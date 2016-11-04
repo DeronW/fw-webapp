@@ -67,7 +67,7 @@ const Mall = React.createClass({
 
          let theme_product_item =
              <a className="theme-product-item">
-                 <img src="images/product-img1.png"/>
+                 <img className="theme-1-img" src="images/product-img1.png"/>
                  <span className="theme-product-item-name">随手泡</span>
              </a>;
          
@@ -160,15 +160,24 @@ const Mall = React.createClass({
                  </div>
                  <div className="theme-1">
                      <a href="" className="activity-theme"><img src="images/food-theme-img.png"/></a>
-                     {theme_product_item}
-                     {theme_product_item}
-                     {theme_product_item}
-                     {theme_product_item}
-                     {theme_product_item}
-                     {theme_product_item}
-                     {theme_product_item}
-                     {theme_product_item}
+                     <div className="theme-product-wrap">
+                         {theme_product_item}
+                         {theme_product_item}
+                         {theme_product_item}
+                         {theme_product_item}
+                         {theme_product_item}
+                         {theme_product_item}
+                         {theme_product_item}
+                         {theme_product_item}
+                     </div>
                  </div>
+                 <div className="theme-2">
+                     <a href="" className="activity-theme"><img src="images/education-theme-img.png"/></a>
+                     <div className="theme-product-wrap">
+
+                     </div>
+                 </div>
+
                  <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
              </div>
          )
