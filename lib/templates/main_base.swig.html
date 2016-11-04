@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     {% block viewport %}
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
+    {% include 'fix-viewport.html' %}
     {% endblock %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="screen-orientation" content="portrait">
@@ -49,7 +50,7 @@
     })();
 </script>
 {% endif %}
-{% if !DEBUG %}{% include 'exception_handler.html' %}{% endif %}
+{% if !DEBUG %}{% include 'exception-handler.html' %}{% endif %}
 
 </body>
 </html>
