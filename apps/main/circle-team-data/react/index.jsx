@@ -25,7 +25,7 @@ const HeaderTop = React.createClass({
 const FooterBtn = React.createClass({
    render: function () {
        return(
-           <div className="teamUpdateBtn">
+           <div className="btnContent">
                <p>{this.props.btnContent}</p>
            </div>
        )
@@ -156,7 +156,9 @@ const TeamPool = React.createClass({
             {
                 desData.map(scoreItem)
             }
-            <div className="teamCenterBtn">查看流水</div>
+            <div className="btnContent">
+                <p>查看流水</p>
+            </div>
         </div>
 
         )

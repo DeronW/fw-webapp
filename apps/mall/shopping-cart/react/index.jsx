@@ -4,9 +4,10 @@ const API_PATH = document.getElementById('api-path').value;
 const ShoppingCart = React.createClass({
     getInitialState: function () {
         var ps = this.props.products;
+        ps.map(i=>i.checked=true);
         return {
             products: ps,
-            changeAll:false
+            changeAll:true
         }
     },
     checkHandler: function (index) {
