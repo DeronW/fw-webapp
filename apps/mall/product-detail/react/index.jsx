@@ -44,10 +44,10 @@ const Product = React.createClass({
                 <div className="product-content">
                 	<div className="product-inf">
                 		<div className="product-inf-title">【温馨提示】</div>
-	                	<div className="product-inf-list">1、工分兑换礼品不支持开具发票；</div>
-	                	<div className="product-inf-list">2、工分兑换礼品非质量问题不支持退换货；</div>
-	                	<div className="product-inf-list">3、礼品图片仅供参考请以收到实物为准；</div>
-	                	<div className="product-inf-list">4、兑换即视为认同此规则。</div>
+	                	<div className="product-inf-list">1.工分兑换礼品不支持开具发票；</div>
+	                	<div className="product-inf-list">2.图片仅供参考请以收到实物为准，非质量问题不支持退换；</div>
+	                	<div className="product-inf-list">3.实物礼品3-7个工作日内发货，暂不支持指定快递，请谅解；</div>
+	                	<div className="product-inf-list">4.请您根据需要谨慎兑换，下单即说明您认可以上规则。</div>
                 	</div>
                 	
                     {data.desc ? <div className="desc">{data.desc}</div> : null}
