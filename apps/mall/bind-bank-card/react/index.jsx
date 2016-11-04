@@ -1,5 +1,6 @@
 'use strict';
 const API_PATH = document.getElementById('api-path').value;
+const bankName = ['工商银行','农业银行','中国银行','建设银行','平安银行','兴业银行','光大银行','浦发银行','华夏银行','北京银行','中信银行','广发银行'];
 
 const MyBankCard = React.createClass({
 
@@ -19,14 +20,17 @@ const MyBankCard = React.createClass({
 
 const CardList = React.createClass({
     render: function () {
+    var bgColor='my-bank-card';
 	let bankCards = this.props.bankCards;
-	/*
-	if(bankCards.cardName==''){}
-	else if(bankCards.cardName){}
-	else if(bankCards.cardName){}
-	else{}*/
+	for(var j=0;j<12;j++){
+	   if(bankCards.cardName==bankName[j]){
+		   if(j==0||j==2||j==8){ bgColor = 'my-bank-card bankColor1'; }
+		   else if(j==1){ bgColor = 'my-bank-card bankColor2'; }
+		   else{bgColor = 'my-bank-card bankColor3';}
+		}
+	}
         return (
-            <div className="my-bank-card">
+            <div className={bgColor}>
                 <div className="bank-tit"><img src={bankCards.cardImg}/><span className="bank-name">{bankCards.cardName}</span><span className="bank-type">{bankCards.cardType}</span></div>
                 <div className="bank-desc">
                     <div className="owner-name">{bankCards.ownerName}</div>
