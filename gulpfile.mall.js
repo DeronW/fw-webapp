@@ -24,6 +24,7 @@ const MALL_APP_NAMES = [
     'logistics',
     'coupon',
     'voucher',
+    'new-home',
 
     // 产品相关页面
 	'new-product-detail',
