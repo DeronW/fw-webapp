@@ -23,7 +23,8 @@ const ConfirmOrder = React.createClass({
             sms_code: null,
             addressId: this.props.default_address_id,
             vipLevel: this.props.vipLevel,
-            vipConfigUuid: this.props.vipConfigUuid
+            vipConfigUuid: this.props.vipConfigUuid,
+            isVirtualProduct:this.props.isVirtualProduct
         };
 
         return {
