@@ -72,13 +72,13 @@ const Mall = React.createClass({
              </a>;
 
          let theme2_top_product_item = <a className="theme2-top-product-item">
-             <div className="theme2-top-product-title">家有宝贝</div>
+             <div className="theme2-top-product-title theme2-top-product-title-color1">家有宝贝</div>
              <div className="theme2-top-product-price">￥30234+2111100工分</div>
              <img className="product-img2" src="images/product-img2.png"/>
          </a>
 
-         let theme2_btm_product_item = <a>
-             <div className="theme2-btm-product-item">
+         let theme2_btm_product_item = <a className="theme2-btm-product-item">
+             <div className="theme2-btm-product-wrap">
                   <img className ="theme2-product-img" src="images/product-img1.png"/>
                   <div className="theme2-btm-product-info">
                       <span className="theme2-btm-product-title">随手泡</span>
@@ -196,6 +196,11 @@ const Mall = React.createClass({
                               {theme2_top_product_item}
                           </div>
                          <div className="theme2-btm-product-list">
+                             {theme2_btm_product_item}
+                             {theme2_btm_product_item}
+                             {theme2_btm_product_item}
+                             {theme2_btm_product_item}
+                             {theme2_btm_product_item}
                              {theme2_btm_product_item}
                          </div>
                      </div>

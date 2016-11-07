@@ -98,19 +98,19 @@ const ConfirmOrder = React.createClass({
             })
         }.bind(this);
 
-        if (!this.state.isVirtualProduct) {
-            if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
-
-            $FW.Ajax({
-                url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
-                enable_loading: true,
-                method: 'post',
-                data: {smsCode: this.FormData.sms_code},
-                success: submit
-            });
-        } else {
-            submit()
-        }
+        //if (!this.state.isVirtualProduct) {
+        //    if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
+        //
+        //    $FW.Ajax({
+        //        url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
+        //        enable_loading: true,
+        //        method: 'post',
+        //        data: {smsCode: this.FormData.sms_code},
+        //        success: submit
+        //    });
+        //} else {
+        //    submit()
+        //}
 
     },
     updateSMSCodeHandler: function (code) {
