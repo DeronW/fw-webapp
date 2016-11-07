@@ -92,12 +92,15 @@ const Mall = React.createClass({
                  <div className="theme3-top-product-info">
                      <span className="theme3-top-product-title">随手泡</span>
                      <span className="theme3-top-product-price">￥666+39999工分</span>
+                     <span className="product-purchase">点击抢购<span className="tri"></span></span>
                  </div>
                  <img className ="theme3-product-img" src="images/product-img2.png"/>
              </div>
          </a>;
 
          let theme3_btm_product_item = <a className="theme3-btm-product-item">
+             <img className="theme3-btm-product-img" src="images/product-img2.png"/>
+             <span className="theme3-btm-product-title">宝宝体温计</span>
          </a>;
          
          return (
