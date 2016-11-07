@@ -102,6 +102,12 @@ const Mall = React.createClass({
              <img className="theme3-btm-product-img" src="images/product-img2.png"/>
              <span className="theme3-btm-product-title">宝宝体温计</span>
          </a>;
+
+         let theme4_top_product_item = <a className="theme4-top-product-item">
+             <span className="theme4-top-product-title">潮妈必备</span>
+             <span className="theme4-top-product-price">￥2000+20工分</span>
+             <img className="theme4-top-product-img" src="images/product-img2.png"/>
+         </a>;
          
          return (
              <div className="head-wrap">
@@ -221,7 +227,7 @@ const Mall = React.createClass({
                          </div>
                      </div>
                  </div>
-                 <div className="theme-2">
+                 <div className="theme-3">
                      <a href="" className="activity-theme"><img src="images/life-theme-img.png"/></a>
                      <div className="theme3-product-wrap">
                          <div className="theme3-top-product-list">
@@ -237,6 +243,22 @@ const Mall = React.createClass({
                              {theme3_btm_product_item}
                              {theme3_btm_product_item}
                              {theme3_btm_product_item}
+                         </div>
+                     </div>
+                 </div>
+                 <div className="theme-4">
+                     <a href="" className="activity-theme"><img src="images/outdoor-theme-img.png"/></a>
+                     <div className="theme4-product-wrap">
+                         <div className="theme4-top-product-list">
+                             {theme4_top_product_item}
+                             {theme4_top_product_item}
+                             {theme4_top_product_item}
+                             {theme4_top_product_item}
+                         </div>
+                         <div className="theme4-btm-product-list">
+                             <div className="theme4-btm-left-product-item">
+                                 <a className="theme4-btm-left-product-wrap">
+                             </div>
                          </div>
                      </div>
                  </div>
