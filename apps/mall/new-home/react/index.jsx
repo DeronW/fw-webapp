@@ -75,7 +75,7 @@ const Mall = React.createClass({
              <div className="theme2-top-product-title theme2-top-product-title-color1">家有宝贝</div>
              <div className="theme2-top-product-price">￥30234+2111100工分</div>
              <img className="product-img2" src="images/product-img2.png"/>
-         </a>
+         </a>;
 
          let theme2_btm_product_item = <a className="theme2-btm-product-item">
              <div className="theme2-btm-product-wrap">
@@ -85,6 +85,19 @@ const Mall = React.createClass({
                       <span className="theme2-btm-product-price">￥666+39999工分</span>
                   </div>
               </div>
+         </a>;
+
+         let theme3_top_product_item = <a className="theme3-top-product-item">
+             <div className="theme3-top-product-wrap">
+                 <div className="theme3-top-product-info">
+                     <span className="theme3-top-product-title">随手泡</span>
+                     <span className="theme3-top-product-price">￥666+39999工分</span>
+                 </div>
+                 <img className ="theme3-product-img" src="images/product-img2.png"/>
+             </div>
+         </a>;
+
+         let theme3_btm_product_item = <a className="theme3-btm-product-item">
          </a>;
          
          return (
@@ -202,6 +215,25 @@ const Mall = React.createClass({
                              {theme2_btm_product_item}
                              {theme2_btm_product_item}
                              {theme2_btm_product_item}
+                         </div>
+                     </div>
+                 </div>
+                 <div className="theme-2">
+                     <a href="" className="activity-theme"><img src="images/life-theme-img.png"/></a>
+                     <div className="theme3-product-wrap">
+                         <div className="theme3-top-product-list">
+                             {theme3_top_product_item}
+                             {theme3_top_product_item}
+                             {theme3_top_product_item}
+                             {theme3_top_product_item}
+                             {theme3_top_product_item}
+                             {theme3_top_product_item}
+                         </div>
+                         <div className="theme3-btm-product-list">
+                             {theme3_btm_product_item}
+                             {theme3_btm_product_item}
+                             {theme3_btm_product_item}
+                             {theme3_btm_product_item}
                          </div>
                      </div>
                  </div>
