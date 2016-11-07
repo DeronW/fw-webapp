@@ -70,6 +70,22 @@ const Mall = React.createClass({
                  <img className="theme-1-img" src="images/product-img1.png"/>
                  <span className="theme-product-item-name">随手泡</span>
              </a>;
+
+         let theme2_top_product_item = <a className="theme2-top-product-item">
+             <div className="theme2-top-product-title">家有宝贝</div>
+             <div className="theme2-top-product-price">￥30234+2111100工分</div>
+             <img className="product-img2" src="images/product-img2.png"/>
+         </a>
+
+         let theme2_btm_product_item = <a>
+             <div className="theme2-btm-product-item">
+                  <img className ="theme2-product-img" src="images/product-img1.png"/>
+                  <div className="theme2-btm-product-info">
+                      <span className="theme2-btm-product-title">随手泡</span>
+                      <span className="theme2-btm-product-price">￥666+39999工分</span>
+                  </div>
+              </div>
+         </a>;
          
          return (
              <div className="head-wrap">
@@ -173,8 +189,15 @@ const Mall = React.createClass({
                  </div>
                  <div className="theme-2">
                      <a href="" className="activity-theme"><img src="images/education-theme-img.png"/></a>
-                     <div className="theme-product-wrap">
-
+                     <div className="theme2-product-wrap">
+                          <div className="theme2-top-product-list">
+                              {theme2_top_product_item}
+                              {theme2_top_product_item}
+                              {theme2_top_product_item}
+                          </div>
+                         <div className="theme2-btm-product-list">
+                             {theme2_btm_product_item}
+                         </div>
                      </div>
                  </div>
 

@@ -93,7 +93,8 @@ const ConfirmOrder = React.createClass({
                     } else {
                         location.href = '/static/mall/order-complete/index.html?id=' + data.orderId
                     }
-                }
+                },
+                fail: x => true
             })
         }.bind(this);
 
