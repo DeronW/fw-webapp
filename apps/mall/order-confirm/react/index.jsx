@@ -94,7 +94,7 @@ const ConfirmOrder = React.createClass({
                         location.href = '/static/mall/order-complete/index.html?id=' + data.orderId
                     }
                 },
-                fail: x => true
+                fail: $FW.Component.Alert('手机验证码错误')
             })
         }.bind(this);
 
