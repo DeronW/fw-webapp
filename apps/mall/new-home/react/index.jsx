@@ -14,6 +14,11 @@ function gotoHandler(link, need_login) {
 }
 
 const Mall = React.createClass({
+    getInitialState:function(){
+        return {
+            background:"transparent"
+        }
+    },
     getHeadImages: function () {
         var images = [];
         var bs = this.props.banners;
@@ -115,19 +120,46 @@ const Mall = React.createClass({
              <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
              <span className="product-price">12267工分</span>
          </a>;
-         
+
+         var head_nav_wrap = {
+             background:this.state.background,
+             width:"100%",
+             height:"56px",
+             paddingTop:"20px",
+             paddingBottom:"20px",
+             transition:"1s"
+         };
+         var _this = this;
+         window.onscroll = function(){
+             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+             if(scrollTop > 100) {
+                 return false;
+             }
+             if(scrollTop > 0){
+                 console.log("a");
+                _this.setState({
+                    background:"rgba(255,255,255,.7)"
+                })
+             }else{
+                 _this.setState({
+                     background:"transparent"
+                 })
+             }
+         }
          return (
              <div className="head-wrap">
                  {banner}
                  <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                     {backFactory()}
-                     <a onClick={ ()=> gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
-                        className="search-bar-a">
-                         <img className="search-icon" src="images/search-icon.png"/>
-                         <div className="search-bar">搜索</div>
-                     </a>
-                     <a className="index-avatar" onClick={ ()=> gotoHandler("/static/mall/user/index.html", true) }>
-                         <img src="images/list-icon.png"/></a>
+                     <div style={head_nav_wrap}>
+                         {backFactory()}
+                         <a onClick={ ()=> gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
+                            className="search-bar-a">
+                             <img className="search-icon" src="images/search-icon.png"/>
+                             <div className="search-bar">搜索</div>
+                         </a>
+                         <a className="index-avatar" onClick={ ()=> gotoHandler("/static/mall/user/index.html", true) }>
+                             <img src="images/list-icon.png"/></a>
+                     </div>
                  </div>
                  <div className="head-nav">
                      <a className=""><img src="images/nav-1.png"/><span>VIP专区</span></a>
@@ -317,7 +349,6 @@ const Mall = React.createClass({
                          {hotProduct}
                      </div>
                  </div>
-                 <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
                  <div className="fixed-nav">
                      <a className="fixed-nav-link fixed-nav-link1 active"></a>
                      <a className="fixed-nav-link fixed-nav-link2"></a>
@@ -329,6 +360,7 @@ const Mall = React.createClass({
          )
      }
 });
+
 
 $FW.DOMReady(function () {
     $FW.BatchGet([
