@@ -54,7 +54,7 @@ $FW.DOMReady(function () {
                 //     t =  interest.describe;
                 // }
                 var n = parseFloat(interest && interest.describe);
-                document.getElementById("add-interest-text-" + i).innerHTML = n?n:"-";
+                document.getElementById("add-interest-text-" + i).innerHTML = n?n+'%':"-";
                 // document.getElementById("add-interest-text-1").innerHTML="-";
                 // var item=interest_list[i];
                 // if(item)){
