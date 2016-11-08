@@ -102,6 +102,19 @@ const Mall = React.createClass({
              <img className="theme3-btm-product-img" src="images/product-img2.png"/>
              <span className="theme3-btm-product-title">宝宝体温计</span>
          </a>;
+
+         let theme4_top_product_item = <a className="theme4-top-product-item">
+             <span className="theme4-top-product-title">潮妈必备</span>
+             <span className="theme4-top-product-price">￥2000+20工分</span>
+             <span className="horizon-line"></span>
+             <img className="theme4-top-product-img" src="images/product-img2.png"/>
+         </a>;
+
+         let hotProduct = <a className="product-wrap">
+             <img src="images/product-img3.png"/>
+             <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
+             <span className="product-price">12267工分</span>
+         </a>;
          
          return (
              <div className="head-wrap">
@@ -221,7 +234,7 @@ const Mall = React.createClass({
                          </div>
                      </div>
                  </div>
-                 <div className="theme-2">
+                 <div className="theme-3">
                      <a href="" className="activity-theme"><img src="images/life-theme-img.png"/></a>
                      <div className="theme3-product-wrap">
                          <div className="theme3-top-product-list">
@@ -240,8 +253,78 @@ const Mall = React.createClass({
                          </div>
                      </div>
                  </div>
-
+                 <div className="theme-4">
+                     <a href="" className="activity-theme"><img src="images/outdoor-theme-img.png"/></a>
+                     <div className="theme4-product-wrap">
+                         <div className="theme4-top-product-list">
+                             {theme4_top_product_item}
+                             {theme4_top_product_item}
+                             {theme4_top_product_item}
+                             {theme4_top_product_item}
+                         </div>
+                         <div className="theme4-btm-product-list">
+                             <div className="theme4-btm-left-product-item">
+                                 <a className="theme4-btm-left-product-wrap">
+                                     <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                     <span className="theme4-btm-product-title">潮人装备</span>
+                                     <span className="theme4-btm-product-price">￥5060+540工分</span>
+                                     <span className="product-purchase">点击抢购<span className="tri"></span></span>
+                                 </a>
+                             </div>
+                             <div className="theme4-btm-middle-product-wrap">
+                                 <a className="theme4-btm-middle-product-item">
+                                     <div className="theme4-btm-middle-top-product-wrap">
+                                         <div className="theme4-btm-img-wrap">
+                                             <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                         </div>
+                                         <div className="theme4-btm-middle-top-info">
+                                             <span className="theme4-btm-product-title">潮人装备</span>
+                                             <span className="theme4-btm-product-price">￥5060+540工分</span>
+                                             <span className="product-purchase">点击抢购<span className="tri"></span></span>
+                                         </div>
+                                     </div>
+                                 </a>
+                                 <a className="theme4-btm-middle-product-item">
+                                     <div className="theme4-btm-middle-top-product-wrap">
+                                         <div className="theme4-btm-img-wrap">
+                                             <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                         </div>
+                                         <div className="theme4-btm-middle-top-info">
+                                             <span className="theme4-btm-product-title">潮人装备</span>
+                                             <span className="theme4-btm-product-price">￥5060+540工分</span>
+                                             <span className="product-purchase">点击抢购<span className="tri"></span></span>
+                                         </div>
+                                     </div>
+                                 </a>
+                             </div>
+                             <div className="theme4-btm-right-product-wrap">
+                                  <a>
+                                      <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                  </a>
+                                 <a>
+                                     <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                 </a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div className="hot-sales">
+                     <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
+                     <div className="product-list">
+                         {hotProduct}
+                         {hotProduct}
+                         {hotProduct}
+                         {hotProduct}
+                     </div>
+                 </div>
                  <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
+                 <div className="fixed-nav">
+                     <a className="fixed-nav-link fixed-nav-link1 active"></a>
+                     <a className="fixed-nav-link fixed-nav-link2"></a>
+                     <a className="backToIndex"></a>
+                     <a className="fixed-nav-link fixed-nav-link3"></a>
+                     <a className="fixed-nav-link fixed-nav-link4"></a>
+                 </div>
              </div>
          )
      }

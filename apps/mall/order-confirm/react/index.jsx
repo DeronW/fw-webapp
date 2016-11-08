@@ -93,25 +93,23 @@ const ConfirmOrder = React.createClass({
                     } else {
                         location.href = '/static/mall/order-complete/index.html?id=' + data.orderId
                     }
-                },
-                fail: x => true
+                }
             })
         }.bind(this);
 
-        submit();
-        //if (!this.state.isVirtualProduct) {
-        //    if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
-        //
-        //    $FW.Ajax({
-        //        url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
-        //        enable_loading: true,
-        //        method: 'post',
-        //        data: {smsCode: this.FormData.sms_code},
-        //        success: submit
-        //    });
-        //} else {
-        //    submit()
-        //}
+        if (!this.state.isVirtualProduct) {
+            if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
+
+            $FW.Ajax({
+                url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
+                enable_loading: true,
+                method: 'post',
+                data: {smsCode: this.FormData.sms_code},
+                success: submit
+            });
+        } else {
+            submit()
+        }
 
     },
     updateSMSCodeHandler: function (code) {
