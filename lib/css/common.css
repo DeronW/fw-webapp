@@ -1,6 +1,8 @@
 body {
     margin: 0;
-    fonr-family: 'Microsoft Yahei', 'HanHei SC', 'PingFang SC', 'STHeitiSC-Light';
+    /*fonr-family: 'Microsoft Yahei', 'HanHei SC', 'PingFang SC', 'STHeitiSC-Light';*/
+    /*fonr-family: 'San Francisco';*/
+    font-family: 'San Francisco', 'PingFang SC', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a {
