@@ -19,94 +19,24 @@ const MyPrizeRecord = React.createClass({
         this.setState({products: newList})
     },
     loadMoreProductHandler: function (done) {
-        // this.state.hasNextPage ? $FW.Ajax({
-        //     url: `${API_PATH}mall/api/v1/MyPrizeRecordList.json`, //获得中奖记录
-        //     //url:http://10.10.100.112/mockjs/4/mall/api/v1/MyPrizeRecordList.json,
-        //     data: {
-        //         num:20,
-        //         pages:this.state.page
-        //     },
-        //     enable_loading: true,
-        //     success: data => {
-        //         this.appendProducts(data);
-        //         this.setState({
-        //             page: this.state.page + 1,
-        //             hasNextPage: data.hasNextPage
-        //         });
-        //         done && done();
-        //     }
-        // }):null;
-        let mydata={
-            hasNextPage:true,
-            myPrizeList:[
-                {
-                    activity:"1大转盘",
-                    score:20,
-                    time:"2015-04-11 17:35:31",
-                    title:"获得的奖品名称"
-                },
-                {
-                    activity:"2大转盘",
-                    score:20,
-                    time:"2015-04-11 17:35:31",
-                    title:"获得的奖品名称"
-                },
-                {
-                    activity:"3大转盘",
-                    score:20,
-                    time:"2015-04-11 17:35:31",
-                    title:"获得的奖品名称"
-                },
-                {
-                    activity:"1大转盘",
-                    score:20,
-                    time:"2015-04-11 17:35:31",
-                    title:"获得的奖品名称"
-                },
-                {
-                    activity:"2大转盘",
-                    score:20,
-                    time:"2015-04-11 17:35:31",
-                    title:"获得的奖品名称"
-                },
-                {
-                    activity:"3大转盘",
-                    score:20,
-                    time:"2015-04-11 17:35:31",
-                    title:"获得的奖品名称"
-                },
-                {
-                    activity:"1大转盘",
-                    score:20,
-                    time:"2015-04-11 17:35:31",
-                    title:"获得的奖品名称"
-                },
-                {
-                    activity:"2大转盘",
-                    score:20,
-                    time:"2015-04-11 17:35:31",
-                    title:"获得的奖品名称"
-                },
-                {
-                    activity:"3大转盘",
-                    score:20,
-                    time:"2015-04-11 17:35:31",
-                    title:"获得的奖品名称"
-                }
-        ],
+        this.state.hasNextPage ? $FW.Ajax({
+            url: `${API_PATH}mall/api/v1/MyPrizeRecordList.json`, //获得中奖记录
+            //url:"http://10.10.100.112/mockjs/4/mall/api/v1/MyPrizeRecordList.json",
+            data: {
+                num:20,
+                pages:this.state.page
+            },
+            enable_loading: true,
+            success: data => {
+                this.appendProducts(data);
+                this.setState({
+                    page: this.state.page + 1,
+                    hasNextPage: data.hasNextPage
+                });
+                done && done();
+            }
+        }):null;
 
-            page:1,
-            totalPages:20
-        };
-        let nowAjax=(data )=> {
-            this.appendProducts(data);
-            this.setState({
-                page: this.state.page + 1,
-                hasNextPage: data.hasNextPage
-            });
-            done && done();
-        };
-        this.state.hasNextPage?nowAjax(mydata) :null;
     },
     render:function(){
         let productsList = (name,index)=>{
