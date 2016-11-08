@@ -1,0 +1,69 @@
+html, body {
+  margin: 0;
+  background-color: #ebebee;
+}
+.prize-record-list.no{background-color: transparent;}
+.prize-record-list{
+  margin:20px 0 0;
+  border-top:1px solid #d8d8d8;
+  border-bottom:1px solid #d8d8d8;
+  padding:0 0 0 30px;
+  background-color: #fff;
+  .prize-record-no{
+    padding:20% 0 0;
+    text-align: center;
+    font-size:28px;
+    color:#999;
+    line-height:50px;
+  }
+  .prize-record-li{
+    position:relative;
+    padding:39px 30px 12px 0;
+    border-bottom:1px solid #e3e5ea;
+    .title{
+      width:442px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+      height:40px;
+      line-height:40px;
+      font-size:32px;
+      color:#555;
+    }
+    .score{
+      position: absolute;
+      right:30px;
+      top:0;
+      height:40px;
+      line-height:40px;
+      font-size:32px;
+      color:#999;
+      padding:39px 0 0;
+
+
+    }
+    .activity{
+      width:442px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+      height:26px;
+      line-height:26px;
+      font-size:20px;
+      color:#c8c8c8;
+
+    }
+    .time{
+      position: absolute;
+      right:30px;
+      top:79px;
+      height:26px;
+      line-height:26px;
+      font-size:22px;
+      color:#c8c8c8;
+    }
+  }
+  &:last-child{
+    border:none;
+  }
+}
