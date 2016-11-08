@@ -43,7 +43,7 @@ const MALL_APP_NAMES = [
     // 特殊页面
     'guoqing',
     'zhuanpan20161024',
-    'my-prize-record'
+    'user-prize-record'
 
 ];
 
