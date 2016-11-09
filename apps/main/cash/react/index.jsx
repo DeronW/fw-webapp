@@ -2,6 +2,30 @@
 
 const API_PATH = document.getElementById("api-path").value;
 
+function fmOpt () {
+    var _fmOpt = function() {
+        bd: true,
+        partner: 'jrgc',
+        appName: 'jrgc_web',
+        token: sessionId
+    };
+
+    var cimg = new Image(1,1);
+	
+    cimg.onload = function() {
+        _fmOpt.imgLoaded = true;
+    };
+
+    cimg.src = "https://fp.fraudmetrix.cn/fp/clear.png?partnerCode=jrgc&appName=jrgc_web&tokenId=" + _fmOpt.token;
+    
+	var fm = document.createElement('script'); fm.type = 'text/javascript'; fm.async = true;
+    
+	fm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'static.fraudmetrix.cn/fm.js?ver=0.1&t=' + (new Date().getTime()/3600000).toFixed(0);
+    
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fm, s);
+
+}
+
 var numberFormat = {
 	val: "",
 	format: function(val) {
@@ -793,6 +817,8 @@ $FW.DOMReady(function(){
 		enable_loading: true,
         success: function (data) {
             ReactDOM.render(<Withdrawals data={data}/>, document.getElementById("cnt"))
+
+			//fmOpt 	
         }
     })
 });
