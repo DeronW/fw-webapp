@@ -43,7 +43,7 @@ const MyPrizeRecord = React.createClass({
             return(
                 <div className="prize-record-li" key={index}>
                     <div className="title">{name.title}</div>
-                    <div className="score">-{name.score}工分</div>
+                    <div className="score">0123456789-{name.score}工分</div>
                     <div className="activity">{name.activity}</div>
                     <div className="time">{name.time}</div>
                 </div>
