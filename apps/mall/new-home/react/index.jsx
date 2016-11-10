@@ -14,6 +14,11 @@ function gotoHandler(link, need_login) {
 }
 
 const Mall = React.createClass({
+    getInitialState:function(){
+        return {
+            background:"transparent"
+        }
+    },
     getHeadImages: function () {
         var images = [];
         var bs = this.props.banners;
@@ -106,31 +111,64 @@ const Mall = React.createClass({
          let theme4_top_product_item = <a className="theme4-top-product-item">
              <span className="theme4-top-product-title">潮妈必备</span>
              <span className="theme4-top-product-price">￥2000+20工分</span>
+             <span className="horizon-line"></span>
              <img className="theme4-top-product-img" src="images/product-img2.png"/>
          </a>;
-         
+
+         let hotProduct = <a className="product-wrap">
+             <img src="images/product-img3.png"/>
+             <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
+             <span className="product-price">12267工分</span>
+         </a>;
+
+         var head_nav_wrap = {
+             background:this.state.background,
+             width:"100%",
+             height:"56px",
+             paddingTop:"20px",
+             paddingBottom:"20px",
+             transition:"1s"
+         };
+         var _this = this;
+         window.onscroll = function(){
+             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+             if(scrollTop > 100) {
+                 return false;
+             }
+             if(scrollTop > 0){
+                _this.setState({
+                    background:"rgba(255,255,255,.7)"
+                })
+             }else{
+                 _this.setState({
+                     background:"transparent"
+                 })
+             }
+         }
          return (
              <div className="head-wrap">
                  {banner}
                  <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                     {backFactory()}
-                     <a onClick={ ()=> gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
-                        className="search-bar-a">
-                         <img className="search-icon" src="images/search-icon.png"/>
-                         <div className="search-bar">搜索</div>
-                     </a>
-                     <a className="index-avatar" onClick={ ()=> gotoHandler("/static/mall/user/index.html", true) }>
-                         <img src="images/list-icon.png"/></a>
+                     <div style={head_nav_wrap}>
+                         {backFactory()}
+                         <a onClick={ ()=> gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
+                            className="search-bar-a">
+                             <img className="search-icon" src="images/search-icon.png"/>
+                             <div className="search-bar">搜索</div>
+                         </a>
+                         <a className="index-avatar" onClick={ ()=> gotoHandler("/static/mall/user/index.html", true) }>
+                             <img src="images/list-icon.png"/></a>
+                     </div>
                  </div>
                  <div className="head-nav">
-                     <a className=""><img src="images/nav-1.png"/><span>VIP专区</span></a>
+                     <a onClick={()=> gotoHandler("/static/mall/product-vip-zone/index.html")}><img src="images/nav-1.png"/><span>VIP专区</span></a>
                      <a className=""><img src="images/nav-2.png"/><span>豆哥周边</span></a>
                      <a className=""><img src="images/nav-3.png"/><span>工场券</span></a>
                      <a className=""><img src="images/nav-4.png"/><span>热门活动</span></a>
                      <a className=""><img src="images/nav-5.png"/><span>生活服务</span></a>
-                     <a className=""><img src="images/nav-6.png"/><span>充值中心</span></a>
-                     <a className=""><img src="images/nav-7.png"/><span>玩玩乐</span></a>
-                     <a className=""><img src="images/nav-8.png"/><span>我可兑换</span></a>
+                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img src="images/nav-6.png"/><span>充值中心</span></a>
+                     <a onClick={() => gotoHandler("/static/mall/zhuanpan20161024/index.html?" + (+new Date()), true)}><img src="images/nav-7.png"/><span>玩玩乐</span></a>
+                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img src="images/nav-8.png"/><span>我可兑换</span></a>
                  </div>
                  <div className="new-product-list">
                      <div className="new-title"><img className="new-title-img" src="images/new-title.png"/></div>
@@ -258,16 +296,70 @@ const Mall = React.createClass({
                          <div className="theme4-btm-product-list">
                              <div className="theme4-btm-left-product-item">
                                  <a className="theme4-btm-left-product-wrap">
+                                     <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                     <span className="theme4-btm-product-title">潮人装备</span>
+                                     <span className="theme4-btm-product-price">￥5060+540工分</span>
+                                     <span className="product-purchase">点击抢购<span className="tri"></span></span>
+                                 </a>
+                             </div>
+                             <div className="theme4-btm-middle-product-wrap">
+                                 <a className="theme4-btm-middle-product-item">
+                                     <div className="theme4-btm-middle-top-product-wrap">
+                                         <div className="theme4-btm-img-wrap">
+                                             <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                         </div>
+                                         <div className="theme4-btm-middle-top-info">
+                                             <span className="theme4-btm-product-title">潮人装备</span>
+                                             <span className="theme4-btm-product-price">￥5060+540工分</span>
+                                             <span className="product-purchase">点击抢购<span className="tri"></span></span>
+                                         </div>
+                                     </div>
+                                 </a>
+                                 <a className="theme4-btm-middle-product-item">
+                                     <div className="theme4-btm-middle-top-product-wrap">
+                                         <div className="theme4-btm-img-wrap">
+                                             <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                         </div>
+                                         <div className="theme4-btm-middle-top-info">
+                                             <span className="theme4-btm-product-title">潮人装备</span>
+                                             <span className="theme4-btm-product-price">￥5060+540工分</span>
+                                             <span className="product-purchase">点击抢购<span className="tri"></span></span>
+                                         </div>
+                                     </div>
+                                 </a>
+                             </div>
+                             <div className="theme4-btm-right-product-wrap">
+                                  <a>
+                                      <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                  </a>
+                                 <a>
+                                     <img className="theme4-btm-product-img" src="images/product-img2.png"/>
+                                 </a>
                              </div>
                          </div>
                      </div>
                  </div>
-
-                 <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
+                 <div className="hot-sales">
+                     <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
+                     <div className="product-list">
+                         {hotProduct}
+                         {hotProduct}
+                         {hotProduct}
+                         {hotProduct}
+                     </div>
+                 </div>
+                 <div className="fixed-nav">
+                     <a className="fixed-nav-link fixed-nav-link1 active"></a>
+                     <a className="fixed-nav-link fixed-nav-link2"></a>
+                     <a className="backToIndex"></a>
+                     <a className="fixed-nav-link fixed-nav-link3"></a>
+                     <a className="fixed-nav-link fixed-nav-link4"></a>
+                 </div>
              </div>
          )
      }
 });
+
 
 $FW.DOMReady(function () {
     $FW.BatchGet([

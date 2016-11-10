@@ -1,12 +1,15 @@
 const API_PATH = document.getElementById('api-path').value;
 
 $FW.DOMReady(function () {
-    let title = decodeURIComponent($FW.Format.urlQuery().title);
-    if (title == "undefined") title = '商品列表';
 
-    NativeBridge.setTitle(title);
-
-    ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
+    let bizNo = $FW.Format.urlQuery().bizNo;
+    $FW.Ajax({
+        url: `${API_PATH}/mall/api/index/v1/activity.json?bizNo=${bizNo}`,
+        success: (data)=> {
+            NativeBridge.setTitle(data.title);
+            ReactDOM.render(<Header title={data.title}/>, document.getElementById('header'));
+        }
+    });
 
     let store = Redux.createStore(reducer, Redux.applyMiddleware(...[ReduxThunk.default]));
 

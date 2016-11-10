@@ -42,7 +42,9 @@ const MALL_APP_NAMES = [
 
     // 特殊页面
     'guoqing',
-    'zhuanpan20161024'
+    'zhuanpan20161024',
+    'user-prize-record'
+
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
