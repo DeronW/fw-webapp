@@ -1,7 +1,7 @@
 const API_PATH = document.getElementById("api-path").value;
 
-function fmOpt () {
-    var _fmOpt = function() {
+function fmOpt (sessionId) {
+    window._fmOpt = {
         bd: true,
         partner: 'jrgc',
         appName: 'jrgc_web',
@@ -446,7 +446,7 @@ $FW.DOMReady(function () {
             window._Recharge = ReactDOM.render(<Recharge data={data}/>,
                 document.getElementById("cnt"))
 
- 			//fmOpt 
+			fmOpt(data.sessionId);
         }
     })
 });

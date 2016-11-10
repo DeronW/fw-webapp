@@ -2,8 +2,8 @@
 
 const API_PATH = document.getElementById("api-path").value;
 
-function fmOpt () {
-    var _fmOpt = function() {
+function fmOpt (sessionId) {
+      window._fmOpt = {
         bd: true,
         partner: 'jrgc',
         appName: 'jrgc_web',
@@ -808,8 +808,6 @@ const Special = React.createClass({
 
 
 
-
-
 $FW.DOMReady(function(){
 
 	$FW.Ajax({
@@ -818,7 +816,8 @@ $FW.DOMReady(function(){
         success: function (data) {
             ReactDOM.render(<Withdrawals data={data}/>, document.getElementById("cnt"))
 
-			//fmOpt 	
+			fmOpt(data.sessionId);
+				
         }
     })
 });
