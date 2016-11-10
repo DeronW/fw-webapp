@@ -35,7 +35,7 @@ ActivityProduct.TextBar = React.createClass({
 
         function click() {
             var url = '/static/mall/activity/index.html?';
-            url += 'title=' + encodeURIComponent(props.title);
+            // url += 'title=' + encodeURIComponent(props.title);
             url += '&bizNo=' + props.bizNo;
             url += '&activity_id=' + props.activity_id;
             gotoHandler(url)

@@ -131,12 +131,11 @@ const Mall = React.createClass({
          };
          var _this = this;
          window.onscroll = function(){
-             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
              if(scrollTop > 100) {
                  return false;
              }
              if(scrollTop > 0){
-                 console.log("a");
                 _this.setState({
                     background:"rgba(255,255,255,.7)"
                 })
