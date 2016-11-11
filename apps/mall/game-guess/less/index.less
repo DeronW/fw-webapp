@@ -1,0 +1,228 @@
+html, body {
+  margin: 0;
+  background-color:#2bc0fc;
+  //font-family: "Microsoft YaHei", Arial, Helvetica, simhei, sans-serif;
+  height:100%;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+div {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+.inf-result{
+  z-index:4;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  .inf-close{
+    position:absolute;
+    top:50px;
+    right:20px;
+    width:100px;
+    height:100px;
+    background-color: #ff1041;
+  }
+  .inf-box{
+    position:absolute;
+    top:100px;
+    left:20px;
+    width:630px;
+    padding:25px;
+    background:rgba(255,255,255,1);
+    border-radius: 10px;
+    .inf-title{
+      font-size:36px;
+      height:60px;
+      padding:20px 0;
+      text-align: center;
+      color:#333;
+      line-height:40px;
+    }
+    .inf-cnt{
+      height:460px;
+      overflow: auto;
+      .inf-cnt-li {
+        color: #555;
+        font-size: 30px;
+        line-height: 50px;
+      }
+    }
+  }
+}
+
+.pop-result{
+  z-index:4;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  .pop-result-cnt{
+    position:absolute;
+    top:200px;
+    left:20px;
+    width:680px;
+    background:rgba(255,255,255,1);
+    border-radius: 10px;
+    .pop-result-text{
+      padding:40px 20px 10px;
+      font-size:36px;
+      height:60px;
+      line-height:40px;
+      text-align: center;
+    }
+    .pop-result-btn{
+      width:640px;
+      text-align: center;
+      padding:20px;
+      color:#fff;
+      height:70px;
+      line-height:70px;
+      .go-on{
+        border-radius: 10px;
+        float: left;
+        width:300px;
+        font-size:32px;
+        height:70px;
+        background:#fd4b4c;
+      }
+      .go-next{
+        border-radius: 10px;
+        float:right;
+        width:300px;
+        font-size:32px;
+        height:70px;
+        background: rgb(33, 194, 255);
+      }
+      .go-next.off{
+        background-color: #999;
+      }
+    }
+  }
+}
+.game-guess{
+  position: relative;
+  width:100%;
+  height:1280px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  .game-guess-head {
+    position: relative;
+      height:102px;
+      width:100%;
+      .game-guess-back{
+        position: absolute;
+        top:14px;
+        left:42px;
+        display: block;
+        height:62px;
+        width:62px;
+      }
+      .total-score {
+        position: absolute;
+        top:14px;
+        right:45px;
+        width:174px;
+        height:62px;
+        line-height:62px;
+        color:#fff;
+        text-align: center;
+        font-weight: bold;
+        font-size:34px;
+
+      }
+  }
+  .record{
+    z-index:3;
+    position: absolute;
+    top:162px;
+    right:32px;
+    width:110px;
+    height:110px;
+  }
+  .inf{
+    z-index:3;
+    position: absolute;
+    top:320px;
+    right:32px;
+    width:110px;
+    height:110px;
+  }
+  .cost{
+    position: absolute;
+    top:953px;
+    left:0;
+    height:62px;
+    line-height:62px;
+    width:100%;
+    font-size:26px;
+    color:#fff;
+    text-align: center;
+    .pass-num{
+      color:#fff;
+    }
+    .cost-score{
+      color:#ffd56b;
+    }
+  }
+  .guess-cont{
+    position: relative;
+    width:100%;
+    height:836px;
+    .guess-up{
+      position: absolute;
+      top:86px;
+      left:234px;
+      height:244px;
+      width:244px;
+
+    }
+    .guess-down{
+      position: absolute;
+      top:564px;
+      left:234px;
+      height:244px;
+      width:244px;
+    }
+
+  }
+  .guess-check{
+    position: absolute;
+    top:1049px;
+    left:0;
+    height:173px;
+    width:100%;
+    .check{
+      position: absolute;
+      top:0;
+      width:209px;
+      height:173px;
+    }
+    .check0{
+      left:41px;
+    }
+    .check1{
+      left:254px;
+    }
+    .check2{
+      left:466px;
+    }
+  }
+}
+.bg0 {
+  background-image: url(../images/bg0.jpg);
+}
+.bg1 {
+  background-image: url(../images/bg1.jpg);
+}
+.bg2 {
+  background-image: url(../images/bg2.jpg);
+}
+
