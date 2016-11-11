@@ -175,7 +175,7 @@ const GameGuess = React.createClass({
                    <a href="#" className="game-guess-back">&nbsp;</a>
                    <div className="total-score">{this.state.total_score}</div>
                </div>
-                <a href="http://10.105.6.217:8047/mallmain/build/mall/user-prize-record/index.html?_ijt=c3cdc0c3eo3ocr56ghpeh235ce" className="record">&nbsp;</a>
+                <a href="../user-prize-record/index.html?_ijt=c3cdc0c3eo3ocr56ghpeh235ce" className="record">&nbsp;</a>
                 <a href="#" className="inf" onClick={this.changeInfHandler}>&nbsp;</a>
                     {cost_tip(this.state.level,this.state.cost_score)}
                 <div className="guess-cont">
