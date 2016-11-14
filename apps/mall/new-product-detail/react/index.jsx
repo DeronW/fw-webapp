@@ -298,7 +298,7 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('商品详情');
 
     $FW.Ajax({
-        url: './item_detail.json?bizNo=A0000000370',
+        url: 'http://localhost/nginx-1.9.12/html/item_detail.json?bizNo=A0000000370',
         enable_loading: true,
         success: function (data) {
             if (data.title) {

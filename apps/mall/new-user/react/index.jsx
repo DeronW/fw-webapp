@@ -2,13 +2,48 @@
 const API_PATH = document.getElementById('api-path').value;
 
 const User = React.createClass({
+    getInitialState:function(){
+        return {
+            background:"#ff3a38",
+            color:'#fff'
+        }
+    },
     render:function(){
+        var header = {
+            background:this.state.background,
+            color:this.state.color,
+            width:"100%",
+            height:"100px",
+            textAlign:"center",
+            transition:"1s",
+            position:"fixed",
+            top:"0px",
+            left:"0px",
+            fontSize:"36px",
+            lineHeight:"100px",
+            zIndex:"1000"
+        };
+        var _this = this;
+        window.onscroll = function(){
+            var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+            if(scrollTop > 100) {
+                return false;
+            }
+            if(scrollTop > 0){
+                _this.setState({
+                    background:"rgba(255,255,255,.7)",
+                    color:"#333"
+                })
+            }else{
+                _this.setState({
+                    background:"#ff3a38",
+                    color:"#fff"
+                })
+            }
+        }
         return (
-           <div>
-               <div className="header">
-                   <a className="user-back-arrow"></a>
-                   <span className="user-title">我的商城</span>
-               </div>
+           <div className="user-wrap">
+               <div style={header}>我的商城</div>
                <div className="user-info">
                    <img className="profile-img" src="images/boy.jpg"/>
                    <div className="user-name">蓝月蓝月<span className="user-level"><img src="images/usercenter_vip1_icon.png"/></span></div>
@@ -82,6 +117,13 @@ const User = React.createClass({
                        <HotProduct/>
                        <HotProduct/>
                    </div>
+               </div>
+               <div className="fixed-nav">
+                   <a className="fixed-nav-link fixed-nav-link1"></a>
+                   <a className="fixed-nav-link fixed-nav-link2"></a>
+                   <a className="backToIndex"></a>
+                   <a className="fixed-nav-link fixed-nav-link3"></a>
+                   <a className="fixed-nav-link fixed-nav-link4 active"></a>
                </div>
            </div>
         )
