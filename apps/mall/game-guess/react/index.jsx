@@ -210,10 +210,8 @@ const GameGuess = React.createClass({
                         get_prize:this.state.get_prize,
                         hideResultHandLer:this.hideResultHandLer,
                         nextHandler:this.nextHandler,
-                        objParent:this,
                         next_get_prize:this.state.next_get_prize,
                         next_cost_score:this.state.next_cost_score
-
                     }
                 } />:null}
             </div>
