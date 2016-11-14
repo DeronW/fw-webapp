@@ -10,7 +10,6 @@ const GameGuess = React.createClass({
         return {
             show_inf: false,
             show_pop: false,
-            init_roll: false,
             level: 0,
             checked:-1,
             cost_score:10,
@@ -19,7 +18,9 @@ const GameGuess = React.createClass({
             can_click:true,
             total_score:12000,
             result:false,
-            getPrize:''
+            get_prize:'',
+            next_get_prize:'',
+            next_cost_score:''
         }
     },
     componentDidMount: function () {
@@ -43,11 +44,11 @@ const GameGuess = React.createClass({
         // });
     },
     changeInfHandler:function(){
-        console.log(1);
         this.setState({show_inf:!this.state.show_inf});
     },
     checkHandler:function(value){
-        if(this.state.can_click){
+        if(!this.state.can_click)return false;
+        this.setState({can_click:false});
             // $FW.Ajax({
             //     url: `${API_PATH}/mall/api/v1/activity/guessDraw.json,//获奖结果
             //     data:{activityId:ActivityId,level:this.state.level},
@@ -55,12 +56,16 @@ const GameGuess = React.createClass({
                     var data={
                         getPrize:"20工分",
                         remainScore:930400,
-                        result:Math.floor(Math.random()*2)
+                        result:Math.floor(Math.random()*2),
+                        nextCostScore:20,
+                        nextGetPrize:'40工分'
                     };
                     this.setState({
                         checked:value,
                         can_click:false,
-                        getPrize:data.getPrize
+                        get_prize:data.getPrize,
+                        next_get_prize:data.nextGetPrize,
+                        next_cost_score:data.nextCostScore
                     });
                     let upValue=0;
                     console.log(data.result);
@@ -95,11 +100,15 @@ const GameGuess = React.createClass({
                     });
                     this.stopUpRoll(upValue,data.remainScore);
                     this.stopDownRoll(value);
+            //     },
+            //     error:()=>{
+            //         this.setState({can_click:true});
             //     }
+
             // });
-        }
     },
     initDownRoll:function(value){
+        this.setState({checked:-1});
         this.myDowntime=setInterval(()=>{
             this.setState({down_mark:(this.state.down_mark+1)%3})
         },200)
@@ -114,14 +123,18 @@ const GameGuess = React.createClass({
         this.initUpRoll();
         setTimeout(()=>{
             clearInterval(this.myUptime);
+                setTimeout(()=>{
+                this.setState({
+                    show_pop:true,
+                    can_click:true
+                });
+                },1000);
             this.setState({
                 up_mark:value,
-                can_click:true,
                 total_score:newScore,
-                show_pop:true
             });
 
-        },1200)
+        },600)
     },
     stopDownRoll:function(value){
         clearInterval(this.myDowntime);
@@ -129,11 +142,10 @@ const GameGuess = React.createClass({
             down_mark:value
         });
     },
-    nextHandler:function(){
-        console.log(11111);
+    nextHandler:function(level){
         this.setState({
             show_pop:false,
-            level:this.state.level+1
+            level:level%3
         });
         // $FW.Ajax({
         //     url: `${API_PATH}/mall/api/v1/activity/guessCost.json`,//一上来获取
@@ -145,17 +157,22 @@ const GameGuess = React.createClass({
             costScore:100,
             totalScore:3324320
         };
+
         this.setState({
             cost_score: mydata.costScore,
             total_score: mydata.totalScore,
         });
+        this.initUpRoll();
+        this.initDownRoll();
         //     }
         // });
     },
     hideResultHandLer:function(){
-    this.setState({
-        show_pop:false
-    });
+        this.setState({
+            show_pop:false
+        });
+        this.initUpRoll();
+        this.initDownRoll();
     },
     render: function () {
         let cost_tip=(level,cost)=>{
@@ -190,9 +207,13 @@ const GameGuess = React.createClass({
                     {
                         result:this.state.result,
                         level:this.state.level,
-                        getPrize:this.state.getPrize,
+                        get_prize:this.state.get_prize,
                         hideResultHandLer:this.hideResultHandLer,
-                        nextHandler:this.nextHandler
+                        nextHandler:this.nextHandler,
+                        objParent:this,
+                        next_get_prize:this.state.next_get_prize,
+                        next_cost_score:this.state.next_cost_score
+
                     }
                 } />:null}
             </div>
