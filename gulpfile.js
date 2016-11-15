@@ -18,5 +18,5 @@ try {
 const CONSTANTS = Object.assign({}, require('./gulpfile.settings.default.js'), settings);
 
 // gulpfile 本地扩展配置
-require('./gulpfile.main.js')(gulp, gt, CONSTANTS);
+require('./gulpfile.wap.js')(gulp, gt, CONSTANTS);
 require('./gulpfile.mall.js')(gulp, gt, CONSTANTS);

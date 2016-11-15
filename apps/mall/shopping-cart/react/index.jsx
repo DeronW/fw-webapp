@@ -97,14 +97,22 @@ const ShoppingCart = React.createClass({
         this.state.products.map((p, index) => total(p, index));
         return (
             <div className="shopping-cart">
-                {this.state.products.map((p, index) => product_item(p, index)) }
-                <div className="calculation-bar">
+                <div className="cart-header">
                     <div className="all-chosen" onClick={this.allChoseHandler}><span className={this.state.changeAll?"total-checked-circle":"total-unchecked-circle"}></span><span
                         className="chosenTip">全选</span></div>
-                    <div className="all-price">合计：<span className="total-price">¥{total_price}+{total_score}工分</span></div>
+                    <div className="cart-title">购物车</div>
                 </div>
+                {this.state.products.map((p, index) => product_item(p, index)) }
                 <div className="pay-bar">
+                    <div className="all-price">合计：<span className="total-price">¥{total_price}+{total_score}工分</span></div>
                     <a className="pay-btn">结算</a>
+                </div>
+                <div className="fixed-nav">
+                    <a className="fixed-nav-link fixed-nav-link1"></a>
+                    <a className="fixed-nav-link fixed-nav-link2"></a>
+                    <a className="backToIndex"></a>
+                    <a className="fixed-nav-link fixed-nav-link3 active"></a>
+                    <a className="fixed-nav-link fixed-nav-link4"></a>
                 </div>
             </div>
         )
@@ -113,8 +121,6 @@ const ShoppingCart = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('购物车');
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"购物车"} back_handler={backward}/>, document.getElementById('header'));
     $FW.Ajax({
         url: "http://localhost/nginx-1.9.12/html/shoppingcart.json",
         enable_loading: true,

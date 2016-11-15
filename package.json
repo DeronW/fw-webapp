@@ -30,6 +30,6 @@
     "clean": "node scripts/clean.js",
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build:mall": "npm run clean && npm run gulp mall:common_js && npm run gulp build:mall",
-    "build:main": "npm run clean && npm run gulp main:common_js && npm run gulp build:main"
+    "build:wap": "npm run clean && npm run gulp wap:common_js && npm run gulp build:wap"
   }
 }

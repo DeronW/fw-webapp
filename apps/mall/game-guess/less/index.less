@@ -1,0 +1,315 @@
+html, body {
+  margin: 0;
+  background-color:#2bc0fc;
+  //font-family: "Microsoft YaHei", Arial, Helvetica, simhei, sans-serif;
+  height:100%;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+div {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+.inf-result{
+  z-index:4;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  .inf-close{
+    position:absolute;
+    top:50px;
+    right:20px;
+    width:100px;
+    height:100px;
+    background-color: #ff1041;
+  }
+  .inf-box{
+    position:absolute;
+    top:100px;
+    left:20px;
+    width:630px;
+    padding:25px;
+    background:rgba(255,255,255,1);
+    border-radius: 10px;
+    .inf-title{
+      font-size:36px;
+      height:60px;
+      padding:20px 0;
+      text-align: center;
+      color:#333;
+      line-height:40px;
+    }
+    .inf-cnt{
+      height:460px;
+      overflow: auto;
+      .inf-cnt-li {
+        color: #555;
+        font-size: 30px;
+        line-height: 50px;
+      }
+    }
+  }
+}
+
+.pop-result{
+  z-index:4;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  .pop-lose-box{
+    position:absolute;
+    top:50%;
+    left:85px;
+    width:550px;
+    padding:310px 0 0;
+    margin:-368px auto 0;
+    background:url("../images/pop-lose1.png") no-repeat center 0;
+    border-radius: 0 0 30px 30px;
+    .pop-lose-cnt {
+      height: 426px;
+      background-color: #f5f2ee;
+      border-radius: 0 0 30px 30px;
+      text-align: center;
+      .pop-lose-title1{
+        color:#4b4c4d;
+        font-size: 50px;
+        height: 70px;
+        line-height: 70px;
+      }
+      .pop-lose-title2{
+        color:#6f7267;
+        font-size:34px;
+        height:54px;
+        line-height:54px;
+      }
+      .pop-lose-btn{
+        .lose-go-buy{
+          margin:0 auto;
+          width:340px;
+          height:64px;
+          line-height:64px;
+          font-size:24px;
+          color:#763d00;
+          border-radius:32px;
+          background-color:#ffd149;
+          display: block;
+        }
+        .lose-int{
+          margin:116px auto 20px;
+          width:340px;
+          height:64px;
+          line-height:64px;
+          font-size:24px;
+          color:#fff;
+          border-radius:32px;
+          background-color:#27c2ee;
+        }
+      }
+    }
+  }
+  .pop-win-box{
+    position:absolute;
+    top:50%;
+    left:85px;
+    width:550px;
+    padding:310px 0 0;
+    margin:-368px auto 0;
+    background:url("../images/pop-win1.png") no-repeat center 0;
+    border-radius: 0 0 30px 30px;
+    .pop-win-cnt{
+      height:426px;
+      background-color:#27c2ee;
+      border-radius: 0 0 30px 30px;
+      text-align: center;
+      .pop-win-title{
+        color:#fff;
+        font-size:50px;
+        height:70px;
+        line-height:70px;
+      }
+      .pop-win-get{
+        color:#fff;
+        font-size:34px;
+        height:54px;
+        line-height:54px;
+        span{
+          color:#fff477;
+        }
+      }
+    }
+    .pop-win-btn{
+      padding:56px 0 0;
+      .win-on{
+        width:340px;
+        height:64px;
+        line-height:64px;
+        margin:14px auto 20px;
+        font-size:24px;
+        color:#d83462;
+        border-radius:32px;
+        background-color:#ffe03b ;
+      }
+      .win-int{
+        width:340px;
+        height:64px;
+        line-height:64px;
+        margin:0 auto;
+        font-size:24px;
+        color:#fff;
+        border-radius:32px;
+        background-color:#d1486f;
+      }
+      .win-tip{
+        position: relative;
+        height:46px;
+        line-height:46px;
+        font-size:22px;
+        color:#fff;
+        padding:0 20px;
+        margin:0 auto;
+        display: inline-block;
+        background-color: rgba(27,63,101,0.3);
+        border-radius:4px;
+        .win-tip-triangle{
+          position: absolute;
+          bottom:-20px;
+          right:70px;
+          height:0;
+          width:0;
+          font-size:0;
+          border:10px solid rgba(27,63,101,0.3);
+          border-left-color: transparent;
+          border-right-color: transparent;
+          border-bottom-color: transparent;
+        }
+      }
+    }
+  }
+}
+.game-guess{
+  position: relative;
+  width:100%;
+  height:1280px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  .game-guess-head {
+    position: relative;
+      height:102px;
+      width:100%;
+      .game-guess-back{
+        position: absolute;
+        top:14px;
+        left:42px;
+        display: block;
+        height:62px;
+        width:62px;
+      }
+      .total-score {
+        position: absolute;
+        top:14px;
+        right:45px;
+        width:174px;
+        height:62px;
+        line-height:62px;
+        color:#fff;
+        text-align: center;
+        font-weight: bold;
+        font-size:34px;
+
+      }
+  }
+  .record{
+    z-index:3;
+    position: absolute;
+    top:162px;
+    right:32px;
+    width:110px;
+    height:110px;
+  }
+  .inf{
+    z-index:3;
+    position: absolute;
+    top:320px;
+    right:32px;
+    width:110px;
+    height:110px;
+  }
+  .cost{
+    position: absolute;
+    top:953px;
+    left:0;
+    height:62px;
+    line-height:62px;
+    width:100%;
+    font-size:26px;
+    color:#fff;
+    text-align: center;
+    .pass-num{
+      color:#fff;
+    }
+    .cost-score{
+      color:#ffd56b;
+    }
+  }
+  .guess-cont{
+    position: relative;
+    width:100%;
+    height:836px;
+    .guess-up{
+      position: absolute;
+      top:86px;
+      left:234px;
+      height:244px;
+      width:244px;
+
+    }
+    .guess-down{
+      position: absolute;
+      top:564px;
+      left:234px;
+      height:244px;
+      width:244px;
+    }
+
+  }
+  .guess-check{
+    position: absolute;
+    top:1049px;
+    left:0;
+    height:173px;
+    width:100%;
+    .check{
+      position: absolute;
+      top:0;
+      width:209px;
+      height:173px;
+    }
+    .check0{
+      left:41px;
+    }
+    .check1{
+      left:254px;
+    }
+    .check2{
+      left:466px;
+    }
+  }
+}
+.bg0 {
+  background-image: url(../images/bg0.jpg);
+}
+.bg1 {
+  background-image: url(../images/bg1.jpg);
+}
+.bg2 {
+  background-image: url(../images/bg2.jpg);
+}
+
