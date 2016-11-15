@@ -24,19 +24,9 @@ const ExchangeBar = React.createClass({
         this.props.filterProducts(options);
     },
     componentDidMount: function () {
-        $FW.Ajax({
-            url: `${API_PATH}/api/v1/user-state.json`,//登录状态及工分
-            success: (data) => {
-                if (data.is_login) {                   	
-                    Filter.myConvertibleScore = data.score;
-                    if(Filter.options.searchSourceType == 1){
-                    	Filter.options.maxPoints=data.score;
-                    	console.log(Filter.myConvertibleScore);
-                    	this.setState({maxPoints:data.score});
-                    }
-                }
-            }
-        });
+        if(Filter.options.searchSourceType == 1) {
+            this.setState({maxPoints: Filter.myConvertibleScore});
+        }
     },
     tabClickHandler: function (tabName) {
         if (tabName == 'defaultSort') {
