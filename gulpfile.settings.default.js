@@ -1,5 +1,5 @@
 const CONSTANTS = {
-    main: {
+    wap: {
         dev_api_path: 'http://localhost/fake-api/'
     },
     mall: {
