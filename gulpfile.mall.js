@@ -44,8 +44,8 @@ const MALL_APP_NAMES = [
     'guoqing',
     'zhuanpan20161024',
     'user-prize-record',
-    'game-guess',
-    'test-game-guess'
+    'game-guess'
+
 
 
 ];
