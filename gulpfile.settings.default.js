@@ -1,7 +1,6 @@
 const CONSTANTS = {
-    main: {
-        // dev_api_path: 'https://fe.9888.cn/fake-api/'
-        dev_api_path: 'https://fe.9888.cn/api/test-a/main/'
+    wap: {
+        dev_api_path: 'http://localhost/fake-api/'
     },
     mall: {
         // dev_api_path: 'https://fe.9888.cn/fake-api/'
