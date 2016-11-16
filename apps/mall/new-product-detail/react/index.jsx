@@ -8,7 +8,8 @@ const Product = React.createClass({
         return {
 			show: true,
 			showOverlayDef:false,
-			showOverlay:false
+			showOverlay:false,
+            value:1
 			}
     },
 
@@ -16,8 +17,8 @@ const Product = React.createClass({
         this.setState({show: !this.state.show});
     },
 	
-	childEventHandler: function(params){
-		this.setState({showOverlayDef:true,showOverlay: params})
+	childEventHandler: function(params,value){
+		this.setState({showOverlayDef:true,showOverlay: params,value:value})
 	},
 	
 	shopHandler: function (e) {
@@ -102,9 +103,9 @@ const Product = React.createClass({
 		return (
            <div className="detail-box">
 			  {shop_card_prompt}
-			   <div onClick={this.shopHandler} className="_style_buy_cart" style={{zIndex:'10'}}>
-                   <span className="_style_buy_cart_span"></span>
-               </div>
+			   <a onClick={this.shopHandler} className="_style_buy_cart" style={{zIndex:'10'}}>
+                   <span className="_style_buy_cart_span">{this.state.value}</span>
+               </a>
                 {data.head_images && data.head_images.length ?
                     <BannerGroup className="head-images" images={data.head_images}/> :
                     <div className="no-head-images"></div> }
@@ -168,17 +169,21 @@ const PlusMinus = React.createClass({
 	
 	toggleOverlay: function () {
 		let _this=this;
+        let bizNo = $FW.Format.urlQuery().bizNo;
 		$FW.Ajax({
-			url: './shoppingcart.json?bizNo=A0000000370',
+			url:  API_PATH + 'mall/api/cart/v1/insertCart.json?bizNo=' + bizNo,
 			enable_loading: true,
+            data:{
+                buyNum:this.state.value,
+                productBizNo:bizNo
+            },
 			success: function (data) {
-			if(data.product.length==1){
-			 _this.props.parentCallback(true);
+                console.log(data);
+			 _this.props.parentCallback(true,_this.state.value);
 			 setTimeout(function() {
-			   _this.props.parentCallback(false);
+			   _this.props.parentCallback(false,_this.state.value);
 			 }.bind(_this), 1500);
-			}
-		}
+		   }
 		});
 		
     },
@@ -290,17 +295,19 @@ const EmptyProduct = React.createClass({
 
 $FW.DOMReady(function () {
     let bizNo = $FW.Format.urlQuery().bizNo;
-    /*if (!bizNo) {
-      //  $FW.Component.Alert('bizNo is missing');
-       // return;
-    }*/
+    ///*if (!bizNo) {
+    //  //  $FW.Component.Alert('bizNo is missing');
+    //   // return;
+    //}*/
 
     NativeBridge.setTitle('商品详情');
 
     $FW.Ajax({
-        url: 'http://localhost/nginx-1.9.12/html/item_detail.json?bizNo=A0000000370',
+        //url: 'http://localhost/nginx-1.9.12/html/item_detail.json?bizNo=A0000000370',
+        url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         enable_loading: true,
         success: function (data) {
+            console.log(data);
             if (data.title) {
                 ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
             } else {
