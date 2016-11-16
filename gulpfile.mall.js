@@ -13,6 +13,7 @@ const MALL_APP_NAMES = [
     'send-phone-msg',
     'new-order-confirm',
     'life-service',
+    'service-bill',
     // 订单页面
     'order-list',
     'order-detail',
