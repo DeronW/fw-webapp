@@ -63,12 +63,6 @@ const Mall = React.createClass({
          //    )
          //};
 
-         let hot_product_item =
-                 <a className="hot-product-item hot-product-item-bg-1">
-                         <img className="hot-img" src="images/hot-img.png"/>
-                         <span className="hot-img-title hot-img-title-color-1">儿童体温计</span>
-                         <span className="hot-img-price">1280元起</span>
-                 </a>;
 
          let theme_product_item =
              <a className="theme-product-item">
@@ -170,70 +164,8 @@ const Mall = React.createClass({
                      <a onClick={() => gotoHandler("/static/mall/zhuanpan20161024/index.html?" + (+new Date()), true)}><img src="images/nav-7.png"/><span>玩玩乐</span></a>
                      <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img src="images/nav-8.png"/><span>我可兑换</span></a>
                  </div>
-                 <div className="new-product-list">
-                     <div className="new-title"><img className="new-title-img" src="images/new-title.png"/></div>
-                     <div className="new-product-wrap">
-                         <div className="new-left-product">
-                             <a href="" className="new-bg-1">
-                                 <img className="new-img1" src="images/new-img1.png"/>
-                                 <span className="new-img1-title">IPHONE6S</span>
-                                 <span className="new-img1-price">￥128</span>
-                             </a>
-                         </div>
-                         <div className="new-right-product">
-                             <div className="new-right-top-product">
-                                 <a href="" className="new-bg-2">
-                                     <div className="new-right-top-wrap">
-                                         <img className="new-img2" src="images/new-img2.png"/>
-                                         <div className="new-right-top-product-info">
-                                             <span className="new-img2-title">乐视TV</span>
-                                             <span className="new-img2-price">1280元起</span>
-                                         </div>
-                                     </div>
-                                 </a>
-                                 <a href="" className="new-bg-3">
-                                     <div className="new-right-top-wrap">
-                                         <img className="new-img2" src="images/new-img2.png"/>
-                                         <div className="new-right-top-product-info">
-                                             <span className="new-img2-title">乐视TV</span>
-                                             <span className="new-img2-price">1280元起</span>
-                                         </div>
-                                     </div>
-                                 </a>
-                             </div>
-                             <div className="new-right-btm-product">
-                                 <a href="" className="new-bg-4">
-                                     <img className="new-img2" src="images/new-img2.png"/>
-                                     <span className="new-img2-title">乐视TV</span>
-                                     <span className="new-img2-price">1280元起</span>
-                                 </a>
-                                 <a href="" className="new-bg-5">
-                                     <img className="new-img2" src="images/new-img2.png"/>
-                                     <span className="new-img2-title">乐视TV</span>
-                                     <span className="new-img2-price">1280元起</span>
-                                 </a>
-                                 <a href="" className="new-bg-6">
-                                     <img className="new-img2" src="images/new-img2.png"/>
-                                     <span className="new-img2-title">乐视TV</span>
-                                     <span className="new-img2-price">1280元起</span>
-                                 </a>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-                 <div className="hot-product-list">
-                     <div className="hot-title"><img className="hot-title-img" src="images/hot-title.png"/></div>
-                     <div className="hot-product-wrap">
-                         {hot_product_item}
-                         {hot_product_item}
-                         {hot_product_item}
-                         {hot_product_item}
-                         {hot_product_item}
-                         {hot_product_item}
-                         {hot_product_item}
-                         {hot_product_item}
-                     </div>
-                 </div>
+                 <NewProduct/>
+                 <HotProduct/>
                  <div className="theme-1">
                      <a href="" className="activity-theme"><img src="images/food-theme-img.png"/></a>
                      <div className="theme-product-wrap">
@@ -360,13 +292,99 @@ const Mall = React.createClass({
      }
 });
 
+const NewProduct = React.createClass({
+    componentDidMount:function(){
+
+    },
+    render: function(){
+        return (
+            <div className="new-product-list">
+                <div className="new-title"><img className="new-title-img" src="images/new-title.png"/></div>
+                <div className="new-product-wrap">
+                    <div className="new-left-product">
+                        <a href="" className="new-bg-1">
+                            <img className="new-img1" src="images/new-img1.png"/>
+                            <span className="new-img1-title">IPHONE6S</span>
+                            <span className="new-img1-price">￥128</span>
+                        </a>
+                    </div>
+                    <div className="new-right-product">
+                        <div className="new-right-top-product">
+                            <a href="" className="new-bg-2">
+                                <div className="new-right-top-wrap">
+                                    <img className="new-img2" src="images/new-img2.png"/>
+                                    <div className="new-right-top-product-info">
+                                        <span className="new-img2-title">乐视TV</span>
+                                        <span className="new-img2-price">1280元起</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="" className="new-bg-3">
+                                <div className="new-right-top-wrap">
+                                    <img className="new-img2" src="images/new-img2.png"/>
+                                    <div className="new-right-top-product-info">
+                                        <span className="new-img2-title">乐视TV</span>
+                                        <span className="new-img2-price">1280元起</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="new-right-btm-product">
+                            <a href="" className="new-bg-4">
+                                <img className="new-img2" src="images/new-img2.png"/>
+                                <span className="new-img2-title">乐视TV</span>
+                                <span className="new-img2-price">1280元起</span>
+                            </a>
+                            <a href="" className="new-bg-5">
+                                <img className="new-img2" src="images/new-img2.png"/>
+                                <span className="new-img2-title">乐视TV</span>
+                                <span className="new-img2-price">1280元起</span>
+                            </a>
+                            <a href="" className="new-bg-6">
+                                <img className="new-img2" src="images/new-img2.png"/>
+                                <span className="new-img2-title">乐视TV</span>
+                                <span className="new-img2-price">1280元起</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+});
+
+const HotProduct = React.createClass({
+    render: function(){
+        let hot_product_item =
+            <a className="hot-product-item hot-product-item-bg-1">
+                <img className="hot-img" src="images/hot-img.png"/>
+                <span className="hot-img-title hot-img-title-color-1">儿童体温计</span>
+                <span className="hot-img-price">1280元起</span>
+            </a>;
+        return (
+            <div className="hot-product-list">
+                <div className="hot-title"><img className="hot-title-img" src="images/hot-title.png"/></div>
+                <div className="hot-product-wrap">
+                    {hot_product_item}
+                    {hot_product_item}
+                    {hot_product_item}
+                    {hot_product_item}
+                    {hot_product_item}
+                    {hot_product_item}
+                    {hot_product_item}
+                    {hot_product_item}
+                </div>
+            </div>
+        )
+    }
+});
 
 $FW.DOMReady(function () {
     $FW.BatchGet([
         //`${API_PATH}mall/api/index/v1/banners.json`, // banner轮播图数据
         //`${API_PATH}mall/api/index/v1/activities.json` // 明前活动的数据
         'http://localhost/nginx-1.9.12/html/banners.json',
-        'http://localhost/nginx-1.9.12/html/activities.json'
+        'http://localhost/nginx-1.9.12/html/activities.json',
     ], function (data) {
         var banners = data[0].banners, activities = data[1].activities;
         if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined')

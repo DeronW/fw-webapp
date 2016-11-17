@@ -198,7 +198,7 @@ const PlusMinus = React.createClass({
                 }
             });
         }
-        
+
     },
 
     changeValue: function (e) {
