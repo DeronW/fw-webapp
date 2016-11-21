@@ -55,7 +55,8 @@ const WAP_APP_NAMES = [
     'circle-team-data',//小队数据
     'circle-person-data',//个人数据
     'circle-score-stream',//工分流水
-    'notice-corporate-structure'
+    'notice-corporate-structure',
+    'risk'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
