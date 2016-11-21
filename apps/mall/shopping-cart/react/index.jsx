@@ -72,14 +72,14 @@ const ShoppingCart = React.createClass({
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
                         <span className={product.checked ? "checked-circle" : "unchecked-circle"}></span>
                     </div>
-                    <div className="product-img"><img src={product[index].img}/></div>
+                    <div className="product-img"><img src={product.reserved}/></div>
                     <div className="product-item">
                         <div className="product-info">
-                            <div className="product-name">{product[index].title}</div>
-                            <div className="product-price">¥{product[index].price*product[index].amount}+{product[index].score*product[index].amount}工分</div>
+                            <div className="product-name">{product.ProductName}</div>
+                            <div className="product-price">¥{product.price*product.amount}+{product.score*product.amount}工分</div>
                             <div className="detail-num-change">
                                 <div className="minus" onClick={()=>this.changeMinus(index)}></div>
-                                <div className="input-num">{product[index].amount}</div>
+                                <div className="input-num">{product.amount}</div>
                                 <div className="plus" onClick={()=>this.changePlus(index)}></div>
                             </div>
                         </div>
