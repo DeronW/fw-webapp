@@ -3,7 +3,6 @@
  包含了主站移动端新增的页面
  */
 const WAP_APP_NAMES = [
-
     /* 测试徽商, 不发布其他页面, 加速发布过程 */
     // 旧页面重构
     'home', // 首页
@@ -59,16 +58,20 @@ const WAP_APP_NAMES = [
     // 内容展示页面
     'notice-corporate-structure', // 信息披露 公司结构
     'notice-safeguard',// 资金安全保障
-    'notice-risk-prompt' // 风险揭示
+    {// 风险揭示
+        name: 'notice-risk-prompt',
+        include_components: [],
+        include_common_js: []
+    }
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     WAP_APP_NAMES.forEach(function (i) {
-        var common_components = [
+        let common_components = [
             'loading.jsx', 'alert.jsx', 'wap/header.jsx', 'toast.jsx',
             'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
         ];
-        var common_js = ['javascripts/wap/fw-ajax-error-handler.js'];
+        let common_js = ['javascripts/wap/fw-ajax-error-handler.js'];
 
         generate_task('wap', i, {
             debug: true,
@@ -85,5 +88,6 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         });
     });
 
-    gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((name) => `wap:pack:${name}:revision`)));
+    gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((page) =>
+        `wap:pack:${typeof(page) == 'string' ? page : page.name}:revision`)));
 };
