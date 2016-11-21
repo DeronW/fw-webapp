@@ -13,7 +13,6 @@ const WAP_APP_NAMES = [
     // 新增页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
-	'notice-safeguard',// 资金安全保障
 
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
@@ -29,9 +28,10 @@ const WAP_APP_NAMES = [
     'recharge', // 给金融工场账户充值
     'cash', // 用户提现
     'cash-records', // 用户提现记录
+
+    // 协议页面
     'protocol-trusteeship', // 资金托管协议
     'protocol-counseling', // 咨询服务协议
-
     'protocol-special-recharge', // 特殊用户充值协议
     'protocol-special-cash', // 特殊提现协议
     'protocol-special-bind', // 特殊绑定银行卡协议
@@ -55,7 +55,11 @@ const WAP_APP_NAMES = [
     'circle-team-data',//小队数据
     'circle-person-data',//个人数据
     'circle-score-stream',//工分流水
-    'notice-corporate-structure'
+
+    // 内容展示页面
+    'notice-corporate-structure', // 信息披露 公司结构
+    'notice-safeguard',// 资金安全保障
+    'notice-risk-prompt' // 风险揭示
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
