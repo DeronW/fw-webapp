@@ -16,7 +16,9 @@ function gotoHandler(link, need_login) {
 const Mall = React.createClass({
     getInitialState:function(){
         return {
-            background:"transparent"
+            background:"transparent",
+            logoImage:"images/logo.png",
+            avatarImage:"images/list-icon.png"
         }
     },
     getHeadImages: function () {
@@ -45,12 +47,6 @@ const Mall = React.createClass({
              banner = <div className="no-banner"></div>
          }
 
-         let backFactory = ()=> {
-             return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png"/> :
-                 <a className="back-factory" href="http://m.9888.cn/mpwap/"><img
-                     src="images/wap_shop_gong_logo.png"/></a>
-         };
-
          let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();
 
          //let hot_product_item = (name, index) => {
@@ -68,7 +64,7 @@ const Mall = React.createClass({
              height:"56px",
              paddingTop:"20px",
              paddingBottom:"20px",
-             transition:"1s"
+             transition:"1s all"
          };
          var _this = this;
          window.onscroll = function(){
@@ -78,11 +74,15 @@ const Mall = React.createClass({
              }
              if(scrollTop > 0){
                 _this.setState({
-                    background:"rgba(255,255,255,.7)"
+                    background:"rgba(255,255,255,.9)",
+                    logoImage:"images/m-logo.png",
+                    avatarImage:"images/m-list-icon.png"
                 })
              }else{
                  _this.setState({
-                     background:"transparent"
+                     background:"transparent",
+                     logoImage:"images/logo.png",
+                     avatarImage:"images/list-icon.png"
                  })
              }
          }
@@ -91,14 +91,14 @@ const Mall = React.createClass({
                  {banner}
                  <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
                      <div style={head_nav_wrap}>
-                         {backFactory()}
+                         <img className="m-logo" src={this.state.logoImage}/>
                          <a onClick={ ()=> gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
                             className="search-bar-a">
                              <img className="search-icon" src="images/search-icon.png"/>
                              <div className="search-bar">搜索</div>
                          </a>
                          <a className="index-avatar" onClick={ ()=> gotoHandler("/static/mall/user/index.html", true) }>
-                             <img src="images/list-icon.png"/></a>
+                             <img src={this.state.avatarImage}/></a>
                      </div>
                  </div>
                  <div className="head-nav">

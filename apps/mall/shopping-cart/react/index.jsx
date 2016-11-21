@@ -23,18 +23,19 @@ const ShoppingCart = React.createClass({
     },
     deleteHandler: function (index) {
         let ps = this.state.products;
-        ps.splice(index,1);
+        var _this = this;
         $FW.Ajax({
             url:API_PATH + 'mall/api/cart/v1/deleteCartProduct.json',
             data:{
-                productId:ps[index].bizNo
+                productId:ps[index].productId
             },
             enable_loading: true,
             success:function(data){
-
+                ps.splice(index,1);
+                _this.setState({products: ps});
             }
         });
-        this.setState({products: ps});
+
     },
     allChoseHandler:function(){
         let products=this.state.products;
@@ -49,20 +50,30 @@ const ShoppingCart = React.createClass({
     },
     updateCount: function (index,newAmount) {
         var ps = this.state.products;
+        var _this = this;
         var c = newAmount;
         c = parseInt(c) || 1;
         if (c < 1) c = 1;
-        if (c > ps[index].stock) c = ps[index].stock;
-        ps[index].amount=c;
-        this.setState({products:ps});
+        if (c > ps[index].productStock) c = ps[index].productStock;
+        ps[index].productNumber=c;
+        $FW.Ajax({
+            url:API_PATH + 'mall/api/cart/v1/updateCartNumber.json',
+            data:{
+                buyNum:ps[index].productNumber,
+                productBizNo:ps[index].bizNo
+            },
+            success:function(data){
+                _this.setState({products: ps});
+            }
+        });
     },
     changeMinus:function(index){
         let ps = this.state.products;
-        this.updateCount(index,ps[index].amount - 1)
+        this.updateCount(index,ps[index].productNumber - 1);
     },
     changePlus:function(index){
         let ps = this.state.products;
-        this.updateCount(index,ps[index].amount + 1)
+        this.updateCount(index,ps[index].productNumber + 1);
     },
     render: function () {
         var _this = this;
@@ -72,14 +83,14 @@ const ShoppingCart = React.createClass({
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
                         <span className={product.checked ? "checked-circle" : "unchecked-circle"}></span>
                     </div>
-                    <div className="product-img"><img src={product.reserved}/></div>
+                    <div className="product-img"><img src={product.img}/></div>
                     <div className="product-item">
                         <div className="product-info">
-                            <div className="product-name">{product.ProductName}</div>
-                            <div className="product-price">¥{product.price*product.amount}+{product.score*product.amount}工分</div>
+                            <div className="product-name">{product.productName}</div>
+                            <div className="product-price">¥{product.productPrice*product.productNumber}+{product.beanPrice*product.productNumber}工分</div>
                             <div className="detail-num-change">
                                 <div className="minus" onClick={()=>this.changeMinus(index)}></div>
-                                <div className="input-num">{product.amount}</div>
+                                <div className="input-num">{product.productNumber}</div>
                                 <div className="plus" onClick={()=>this.changePlus(index)}></div>
                             </div>
                         </div>
@@ -91,8 +102,8 @@ const ShoppingCart = React.createClass({
         let total_price=0;
         let total_score=0;
         let total=(product, index)=>{
-            product.checked ? total_price+=product.price*product.amount:total_price;
-            product.checked ? total_score+=product.score*product.amount:total_score;
+            product.checked ? total_price+=product.productPrice*product.productNumber:total_price;
+            product.checked ? total_score+=product.beanPrice*product.productNumber:total_score;
         };
         this.state.products.map((product, index) => total(product, index));
         return (
@@ -126,7 +137,6 @@ $FW.DOMReady(function () {
         url:API_PATH + 'mall/api/cart/v1/shoppingCart.json',
         enable_loading: true,
         success: function (data) {
-            console.log(data);
             ReactDOM.render(<ShoppingCart products={data.cartList}/>, document.getElementById('cnt'));
         }
     });
