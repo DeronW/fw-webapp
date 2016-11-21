@@ -23,7 +23,8 @@ const ConfirmOrder = React.createClass({
             sms_code: null,
             addressId: this.props.default_address_id,
             vipLevel: this.props.vipLevel,
-            vipConfigUuid: this.props.vipConfigUuid
+            vipConfigUuid: this.props.vipConfigUuid,
+            note:''
         };
 
         return {
@@ -158,6 +159,9 @@ const ConfirmOrder = React.createClass({
             return $FW.Component.Alert('余额不足, 不能购买');
         return true
     },
+    changeValueHandler: function (e) {
+        this.setState({note: e.target.value});
+    },
     render: function () {
         let address = null;
 
@@ -169,10 +173,9 @@ const ConfirmOrder = React.createClass({
 
         return (
             <div className="confirm-order">
-                {this.props.isVirtualProduct ? null :
                     <AddressPanel address={address}
                                   product_biz_no={this.FormData.productBizNo}
-                                  product_count={this.state.product_count}/>}
+                                  product_count={this.state.product_count}/>
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}
                               update_product_count_handler={this.updateProductCountHandler}/>
@@ -183,7 +186,7 @@ const ConfirmOrder = React.createClass({
                               update_payment_handler={this.updatePaymentHandler}
                 />
                 <div className="custom-note">
-                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"/>
+                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言" value={this.state.note} onChange={this.changeValueHandler}/>
                 </div>
                 <div className="total-price">
                     <div className="price-item">
@@ -199,9 +202,9 @@ const ConfirmOrder = React.createClass({
                 <div className="total-price-item">
                     <span className="total-item-name">实付款</span><span className="total-item-detail">¥599.00+100工分</span>
                 </div>
-                {this.props.isVirtualProduct ? null :
+
                     <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
-                             update_sms_code_handler={this.updateSMSCodeHandler}/>}
+                             update_sms_code_handler={this.updateSMSCodeHandler}/>
                 <div className="confirm-order-foot">
                     <a onClick={this.makeOrderHandler}
                        className={this.can_buy() ? "btn-red" : "btn-red btn-gray"}>提交订单</a>
