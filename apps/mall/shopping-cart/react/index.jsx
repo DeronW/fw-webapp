@@ -1,6 +1,17 @@
 'use strict';
 const API_PATH = document.getElementById('api-path').value;
 
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 const ShoppingCart = React.createClass({
     getInitialState: function () {
         var ps = this.props.products;
@@ -31,11 +42,10 @@ const ShoppingCart = React.createClass({
             },
             enable_loading: true,
             success:function(data){
-                ps.splice(index,1);
                 _this.setState({products: ps});
             }
         });
-
+        ps.splice(index,1);
     },
     allChoseHandler:function(){
         let products=this.state.products;
@@ -109,21 +119,21 @@ const ShoppingCart = React.createClass({
         return (
             <div className="shopping-cart">
                 <div className="cart-header">
-                    <div className="all-chosen" onClick={this.allChoseHandler}><span className={this.state.changeAll?"total-checked-circle":"total-unchecked-circle"}></span><span
-                        className="chosenTip">全选</span></div>
+                    {this.props.products.length !=0 ? <div className="all-chosen" onClick={this.allChoseHandler}><span className={this.state.changeAll?"total-checked-circle":"total-unchecked-circle"}></span><span
+                        className="chosenTip">全选</span></div> : null}
                     <div className="cart-title">购物车</div>
                 </div>
-                {this.state.products.map((product, index) => product_item(product, index)) }
-                <div className="pay-bar">
+                {this.props.products.length !=0  ? this.state.products.map((product, index) => product_item(product, index)) : <div className="empty-cart-icon"></div>}
+                {this.props.products.length !=0  ?  <div className="pay-bar">
                     <div className="all-price">合计：<span className="total-price">¥{total_price}+{total_score}工分</span></div>
                     <a className="pay-btn">结算</a>
-                </div>
+                </div> : null}
                 <div className="fixed-nav">
                     <a className="fixed-nav-link fixed-nav-link1"></a>
                     <a className="fixed-nav-link fixed-nav-link2"></a>
                     <a className="backToIndex"></a>
-                    <a className="fixed-nav-link fixed-nav-link3 active"></a>
-                    <a className="fixed-nav-link fixed-nav-link4"></a>
+                    <a className="fixed-nav-link fixed-nav-link3 active" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
                 </div>
             </div>
         )
@@ -142,6 +152,3 @@ $FW.DOMReady(function () {
     });
 });
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
-}
