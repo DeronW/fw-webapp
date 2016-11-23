@@ -58,8 +58,8 @@ const WAP_APP_NAMES = [
     // 内容展示页面
     'notice-corporate-structure', // 信息披露 公司结构
     'notice-safeguard',// 资金安全保障
-    {// 风险揭示
-        name: 'notice-risk-prompt',
+    {
+        name: 'notice-risk-prompt', // 风险揭示
         include_components: [],
         include_common_js: []
     }
@@ -82,7 +82,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         generate_task('wap', i, {
             api_path: "http://m.9888.cn/",
             cmd_prefix: 'pack',
-            cdn_prefix: '/static/wap/' + i + '/',
+            cdn_prefix: `/static/wap/${i.name || i}/`,
             include_components: common_components,
             include_common_js: common_js
         });
