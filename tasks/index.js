@@ -68,7 +68,7 @@ module.exports = function (site_name, page_name, configs) {
     let less_files = [
         `${lib_path}css/common.css`,
         `${lib_path}less/loading.less`,
-        `${app_path}less/index.less`
+        `${app_path}less/*.less`
     ];
 
     let jsx_files = CONFIG.include_components.map((i) => `${lib_path}components/${i}`);
