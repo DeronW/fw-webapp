@@ -20,175 +20,253 @@ div {
   width:100%;
   height:100%;
   background:rgba(0,0,0,0.7);
-  .inf-close{
-    position:absolute;
-    top:50px;
-    right:20px;
-    width:100px;
-    height:100px;
-    background-color: #ff1041;
-  }
   .inf-box{
     position:absolute;
-    top:100px;
-    left:20px;
-    width:630px;
-    padding:25px;
-    background:rgba(255,255,255,1);
-    border-radius: 10px;
-    .inf-title{
-      font-size:36px;
-      height:60px;
-      padding:20px 0;
-      text-align: center;
-      color:#333;
-      line-height:40px;
+    top:60px;
+    left:85px;
+    width:550px;
+    padding:257px 0 0;
+    background:url("../images/inf.png") no-repeat 0 -10px;
+    border-radius:0 0 30px 30px;
+    overflow: hidden;
+    .inf-close{
+      position:absolute;
+      top:78px;
+      right:0;
+      width:43px;
+      height:43px;
+      background-color: transparent;
+    }
+    .inf-cnt-box{
+      padding:0 0 43px;
+      border-radius: 0 0 30px 30px;
+      background-color:#f5f2ee;
     }
     .inf-cnt{
-      height:460px;
-      overflow: auto;
+      height:610px;
+      padding:0 40px;
+      overflow:auto;
+      .inf-cnt-title{
+        width:118px;
+        text-align: center;
+        height:42px;
+        line-height:42px;
+        padding:0 28px 0 52px;
+        margin:43px auto 17px;
+        font-size:26px;
+        color:#fff;
+        border-radius:21px;
+      }
+      .inf-cnt-title1{
+        margin:0 auto 17px;
+        background:#49caff url("../images/inf-time-ico.png") no-repeat 30px center ;
+      }
+      .inf-cnt-title2{
+        background:#49caff url("../images/inf-prize-ico.png") no-repeat 30px center ;
+      }
+      .inf-cnt-title3{
+        background:#49caff url("../images/inf-cnt-ico.png") no-repeat 30px center ;
+      }
       .inf-cnt-li {
         color: #555;
-        font-size: 30px;
-        line-height: 50px;
+        font-size: 26px;
+        line-height: 36px;
       }
+
     }
   }
 }
 
-.pop-result{
-  z-index:4;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.7);
-  .pop-lose-box{
-    position:absolute;
-    top:50%;
-    left:85px;
-    width:550px;
-    padding:310px 0 0;
-    margin:-368px auto 0;
-    background:url("../images/pop-lose1.png") no-repeat center 0;
+.pop-result {
+  z-index: 4;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  .pop-lose-box {
+    position: absolute;
+    top: 50%;
+    left: 85px;
+    width: 550px;
+    padding: 310px 0 0;
+    margin: -368px auto 0;
+    background: url("../images/pop-lose1.png") no-repeat center 0;
     border-radius: 0 0 30px 30px;
     .pop-lose-cnt {
       height: 426px;
+      width: 550px;
+      overflow: hidden;
+      margin-top: -2px;
       background-color: #f5f2ee;
       border-radius: 0 0 30px 30px;
       text-align: center;
-      .pop-lose-title1{
-        color:#4b4c4d;
+      .pop-lose-title1 {
+        color: #4b4c4d;
         font-size: 50px;
         height: 70px;
         line-height: 70px;
       }
-      .pop-lose-title2{
-        color:#6f7267;
-        font-size:34px;
-        height:54px;
-        line-height:54px;
+      .pop-lose-title2 {
+        color: #6f7267;
+        font-size: 34px;
+        height: 54px;
+        line-height: 54px;
       }
-      .pop-lose-btn{
-        .lose-go-buy{
-          margin:0 auto;
-          width:340px;
-          height:64px;
-          line-height:64px;
-          font-size:24px;
-          color:#763d00;
-          border-radius:32px;
-          background-color:#ffd149;
+      .pop-lose-btn {
+        .lose-go-buy {
+          margin: 0 auto;
+          width: 340px;
+          height: 64px;
+          line-height: 64px;
+          font-size: 24px;
+          color: #763d00;
+          border-radius: 32px;
+          background-color: #ffd149;
           display: block;
         }
-        .lose-int{
-          margin:116px auto 20px;
-          width:340px;
-          height:64px;
-          line-height:64px;
-          font-size:24px;
-          color:#fff;
-          border-radius:32px;
-          background-color:#27c2ee;
+        .lose-int {
+          margin: 116px auto 20px;
+          width: 340px;
+          height: 64px;
+          line-height: 64px;
+          font-size: 24px;
+          color: #fff;
+          border-radius: 32px;
+          background-color: #27c2ee;
         }
       }
     }
   }
-  .pop-win-box{
-    position:absolute;
-    top:50%;
-    left:85px;
-    width:550px;
-    padding:310px 0 0;
-    margin:-368px auto 0;
-    background:url("../images/pop-win1.png") no-repeat center 0;
+  .pop-win-box {
+    position: absolute;
+    top: 50%;
+    left: 85px;
+    width: 550px;
+    padding: 310px 0 0;
+    margin: -368px auto 0;
+    background: url("../images/win-bg0.png") no-repeat center 0;
     border-radius: 0 0 30px 30px;
-    .pop-win-cnt{
-      height:426px;
-      background-color:#27c2ee;
+    .pop-win-cnt {
+      margin-top: -2px;
+      height: 426px;
+      background-color: #27c2ee;
       border-radius: 0 0 30px 30px;
       text-align: center;
-      .pop-win-title{
-        color:#fff;
-        font-size:50px;
-        height:70px;
-        line-height:70px;
+      width: 550px;
+      overflow: hidden;
+      .pop-win-title {
+        color: #fff;
+        font-size: 50px;
+        height: 70px;
+        line-height: 70px;
       }
-      .pop-win-get{
-        color:#fff;
-        font-size:34px;
-        height:54px;
-        line-height:54px;
-        span{
-          color:#fff477;
+      .pop-win-get {
+        color: #bdf0ff;
+        font-size: 34px;
+        height: 54px;
+        line-height: 54px;
+        span {
+          color: #fff477;
         }
       }
     }
-    .pop-win-btn{
-      padding:56px 0 0;
-      .win-on{
-        width:340px;
-        height:64px;
-        line-height:64px;
-        margin:14px auto 20px;
-        font-size:24px;
-        color:#d83462;
-        border-radius:32px;
-        background-color:#ffe03b ;
+    .pop-win-btn {
+      padding: 56px 0 0;
+      .win-on {
+        width: 340px;
+        height: 64px;
+        line-height: 64px;
+        margin: 14px auto 20px;
+        font-size: 24px;
+        color: #d83462;
+        border-radius: 32px;
+        background-color: #ffe03b;
       }
-      .win-int{
-        width:340px;
-        height:64px;
-        line-height:64px;
-        margin:0 auto;
-        font-size:24px;
-        color:#fff;
-        border-radius:32px;
-        background-color:#d1486f;
+      .win-int {
+        width: 340px;
+        height: 64px;
+        line-height: 64px;
+        margin: 0 auto;
+        font-size: 24px;
+        color: #fff;
+        border-radius: 32px;
+        background-color: #d1486f;
       }
-      .win-tip{
+      .win-tip {
         position: relative;
-        height:46px;
-        line-height:46px;
-        font-size:22px;
-        color:#fff;
-        padding:0 20px;
-        margin:0 auto;
+        height: 46px;
+        line-height: 46px;
+        font-size: 22px;
+        color: #fff;
+        padding: 0 20px;
+        margin: 0 auto;
         display: inline-block;
-        background-color: rgba(27,63,101,0.3);
-        border-radius:4px;
-        .win-tip-triangle{
+        background-color: rgba(27, 63, 101, 0.3);
+        border-radius: 4px;
+        .win-tip-triangle {
           position: absolute;
-          bottom:-20px;
-          right:70px;
-          height:0;
-          width:0;
-          font-size:0;
-          border:10px solid rgba(27,63,101,0.3);
+          bottom: -20px;
+          right: 70px;
+          height: 0;
+          width: 0;
+          font-size: 0;
+          border: 10px solid rgba(27, 63, 101, 0.3);
           border-left-color: transparent;
           border-right-color: transparent;
           border-bottom-color: transparent;
+        }
+      }
+    }
+  }
+  .pop-win-box1 {
+    background: url("../images/win-bg1.png") no-repeat center 0;
+    .pop-win-cnt {
+      background-color: #92c936;
+      .pop-win-get {
+        color: #edffcf;
+      }
+      .pop-win-btn {
+        .win-tip {
+          background-color: #7cae28;
+          .win-tip-triangle {
+            border-top-color: #7cae28;
+          }
+        }
+        .win-on {
+          background-color: #fff715;
+          color: #d73d26;
+        }
+        .win-int {
+          background-color: #fe654e;
+          color: #fff;
+        }
+      }
+    }
+
+  }
+  .pop-win-box2 {
+    background: url("../images/win-bg2.png") no-repeat center 0;
+    .pop-win-cnt {
+      background-color: #f64d5d;
+      .pop-win-get {
+        color: #ffa5ae;
+      }
+      .pop-win-btn {
+        .win-tip {
+          background-color: #d43846;
+          .win-tip-triangle {
+            border-top-color: #d43846;
+          }
+        }
+        .win-on {
+          background-color: #ffe03b;
+          color: #9d1139;
+        }
+        .win-int {
+          background-color: #fbc67b;
+          color: #7f2801;
         }
       }
     }
