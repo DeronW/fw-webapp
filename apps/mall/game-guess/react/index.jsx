@@ -26,22 +26,23 @@ const GameGuess = React.createClass({
     componentDidMount: function () {
         this.initUpRoll();
         this.initDownRoll();
-        // $FW.Ajax({
+         $FW.Ajax({
         //     url: `${API_PATH}/mall/api/v1/activity/guessCost.json`,//一上来获取
-            // method:post,
-            // data:{activityId:ActivityId,level:this.state.level},
-            //      success: (data) =>{
-            //     	data.list=data.list||[];
-                    let mydata={
-                        costScore:100,
-                        totalScore:3324320
-                    };
+             url: "http://10.10.100.112/mockjs/4/mall/api/v1/activity/guessCost.json",
+             method:'POST',
+             data:{activityId:ActivityId,level:this.state.level},
+                  success: (data) =>{
+                 	data.list=data.list||[];
+                    // let mydata={
+                    //     costScore:100,
+                    //     totalScore:3324320
+                    // };
                  	this.setState({
-                     cost_score: mydata.costScore,
-                     total_score: mydata.totalScore,
+                     cost_score: data.costScore,
+                     total_score: data.totalScore,
                   });
-            //     }
-        // });
+                 }
+         });
     },
     changeInfHandler:function(){
         this.setState({show_inf:!this.state.show_inf});
@@ -49,17 +50,18 @@ const GameGuess = React.createClass({
     checkHandler:function(value){
         if(!this.state.can_click)return false;
         this.setState({can_click:false});
-            // $FW.Ajax({
+             $FW.Ajax({
             //     url: `${API_PATH}/mall/api/v1/activity/guessDraw.json,//获奖结果
-            //     data:{activityId:ActivityId,level:this.state.level},
-            //     success: (data) =>{
-                    var data={
-                        getPrize:"20工分",
-                        remainScore:930400,
-                        result:Math.floor(Math.random()*2),
-                        nextCostScore:20,
-                        nextGetPrize:'40工分'
-                    };
+                 url:"http://10.10.100.112/mockjs/4/mall/api/v1/activity/guessDraw.json",
+                 data:{activityId:ActivityId,level:this.state.level},
+                 success: (data) =>{
+                    // var data={
+                    //     getPrize:"20工分",
+                    //     remainScore:930400,
+                    //     result:1,
+                    //     nextCostScore:20,
+                    //     nextGetPrize:'40工分'
+                    // };
                     this.setState({
                         checked:value,
                         can_click:false,
@@ -100,23 +102,23 @@ const GameGuess = React.createClass({
                     });
                     this.stopUpRoll(upValue,data.remainScore);
                     this.stopDownRoll(value);
-            //     },
-            //     error:()=>{
-            //         this.setState({can_click:true});
-            //     }
+                 },
+                 error:()=>{
+                     this.setState({can_click:true});
+                 }
 
-            // });
+             });
     },
     initDownRoll:function(value){
         this.setState({checked:-1});
         this.myDowntime=setInterval(()=>{
             this.setState({down_mark:(this.state.down_mark+1)%3})
-        },200)
+        },150)
     },
     initUpRoll:function(value){
         this.myUptime=setInterval(()=>{
             this.setState({up_mark:(this.state.up_mark+1)%3})
-        },100)
+        },150)
     },
     stopUpRoll:function(value,newScore){
         clearInterval(this.myUptime);
@@ -147,25 +149,26 @@ const GameGuess = React.createClass({
             show_pop:false,
             level:level%3
         });
-        // $FW.Ajax({
+         $FW.Ajax({
         //     url: `${API_PATH}/mall/api/v1/activity/guessCost.json`,//一上来获取
-        // method:post,
-        // data:{activityId:ActivityId,level:this.state.level},
-        //      success: (data) =>{
+        url: "http://10.10.100.112/mockjs/4/mall/api/v1/activity/guessCost.json",
+         method:'POST',
+         data:{activityId:ActivityId,level:level%3},
+              success: (data) =>{
         //     	data.list=data.list||[];
-        let mydata={
-            costScore:100,
-            totalScore:3324320
-        };
+        // let mydata={
+        //     costScore:100,
+        //     totalScore:3324320
+        // };
 
         this.setState({
-            cost_score: mydata.costScore,
-            total_score: mydata.totalScore,
+            cost_score: data.costScore,
+            total_score: data.totalScore,
         });
         this.initUpRoll();
         this.initDownRoll();
-        //     }
-        // });
+             }
+         });
     },
     hideResultHandLer:function(){
         this.setState({
@@ -177,7 +180,7 @@ const GameGuess = React.createClass({
     render: function () {
         let cost_tip=(level,cost)=>{
             return (
-                <div className="cost">第<span className="pass-num">{level+1}</span>关仅<span className="cost-score">{cost}</span>工分，选手势赢翻倍积分! </div>
+                <div className="cost">第<span className="pass-num">{(level%3)+1}</span>关仅<span className="cost-score">{cost}</span>工分，选手势赢翻倍积分! </div>
             )
         };
         let check_img=[0,1,2].map((value,index)=>{
@@ -228,6 +231,7 @@ $FW.DOMReady(function () {
     // $FW.Ajax({
     //     url: API_PATH + 'mall/api/magic/v1/user.json', //用户信息
     //     success: (data) => {
+
     let data={"isLogin":true,"sex":"1","userCode":"A362006","userLevel":2,"userName":"13**62","realName":"李建光","avatar":"http://mall.9888.cn/img//boy.jpg"};
     ReactDOM.render(<GameGuess user={data}/>, document.getElementById('cnt'));
     //     }
