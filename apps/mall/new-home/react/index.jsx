@@ -88,7 +88,7 @@ const Mall = React.createClass({
                          <a onClick={ ()=> gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
                             className="search-bar-a">
                              <img className="search-icon" src="images/search-icon.png"/>
-                             <div className="search-bar">搜索</div>
+                             <div className="search-bar">请输入关键字</div>
                          </a>
                          <a className="index-avatar" onClick={ ()=> gotoHandler("/static/mall/user/index.html", true) }>
                              <img src={this.state.avatarImage}/></a>
@@ -112,11 +112,11 @@ const Mall = React.createClass({
                  <Grid_4_5/>
                  <HotSale/>
                  <div className="fixed-nav">
-                     <a className="fixed-nav-link fixed-nav-link1 active"></a>
-                     <a className="fixed-nav-link fixed-nav-link2"></a>
+                     <a className="fixed-nav-link fixed-nav-link1 active" onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
+                     <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
                      <a className="backToIndex"></a>
-                     <a className="fixed-nav-link fixed-nav-link3"></a>
-                     <a className="fixed-nav-link fixed-nav-link4"></a>
+                     <a className="fixed-nav-link fixed-nav-link3" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
+                     <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
                  </div>
              </div>
          )
