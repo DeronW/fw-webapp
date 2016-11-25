@@ -21,7 +21,6 @@ function fmOpt (sessionId) {
 	fm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'static.fraudmetrix.cn/fm.js?ver=0.1&t=' + (new Date().getTime()/3600000).toFixed(0);
     
 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fm, s);
-
 }
 
 

@@ -3,7 +3,6 @@
  包含了主站移动端新增的页面
  */
 const WAP_APP_NAMES = [
-
     /* 测试徽商, 不发布其他页面, 加速发布过程 */
     // 旧页面重构
     'home', // 首页
@@ -13,7 +12,6 @@ const WAP_APP_NAMES = [
     // 新增页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
-	'notice-safeguard',// 资金安全保障
 
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
@@ -29,9 +27,10 @@ const WAP_APP_NAMES = [
     'recharge', // 给金融工场账户充值
     'cash', // 用户提现
     'cash-records', // 用户提现记录
+
+    // 协议页面
     'protocol-trusteeship', // 资金托管协议
     'protocol-counseling', // 咨询服务协议
-
     'protocol-special-recharge', // 特殊用户充值协议
     'protocol-special-cash', // 特殊提现协议
     'protocol-special-bind', // 特殊绑定银行卡协议
@@ -55,16 +54,24 @@ const WAP_APP_NAMES = [
     'circle-team-data',//小队数据
     'circle-person-data',//个人数据
     'circle-score-stream',//工分流水
-    'notice-corporate-structure'
+
+    // 内容展示页面
+    'notice-corporate-structure', // 信息披露 公司结构
+    'notice-safeguard',// 资金安全保障
+    {
+        name: 'notice-risk-prompt', // 风险揭示
+        include_components: [],
+        include_common_js: []
+    }
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     WAP_APP_NAMES.forEach(function (i) {
-        var common_components = [
+        let common_components = [
             'loading.jsx', 'alert.jsx', 'wap/header.jsx', 'toast.jsx',
             'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
         ];
-        var common_js = ['javascripts/wap/fw-ajax-error-handler.js'];
+        let common_js = ['javascripts/wap/fw-ajax-error-handler.js'];
 
         generate_task('wap', i, {
             debug: true,
@@ -75,11 +82,12 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         generate_task('wap', i, {
             api_path: "http://m.9888.cn/",
             cmd_prefix: 'pack',
-            cdn_prefix: '/static/wap/' + i + '/',
+            cdn_prefix: `/static/wap/${i.name || i}/`,
             include_components: common_components,
             include_common_js: common_js
         });
     });
 
-    gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((name) => `wap:pack:${name}:revision`)));
+    gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((page) =>
+        `wap:pack:${typeof(page) == 'string' ? page : page.name}:revision`)));
 };

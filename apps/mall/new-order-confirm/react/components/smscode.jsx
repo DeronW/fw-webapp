@@ -36,7 +36,6 @@ const SMSCode = React.createClass({
     render: function () {
         return (
             <div className="test">
-                <div className="test-h">手机验证码</div>
                 <div className="test-cnt">
                     <div className="test-input">
                         <input type="text" value={this.state.value} onChange={this.changeValueHandler}

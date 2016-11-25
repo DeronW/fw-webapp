@@ -12,6 +12,8 @@ const MALL_APP_NAMES = [
     'verify-bank-card',
     'send-phone-msg',
     'new-order-confirm',
+    'life-service',
+    'service-bill',
     // 订单页面
     'order-list',
     'order-detail',

@@ -1,5 +1,6 @@
-body {
+html,body {
   background-color: #ebebee;
+  overflow-x:hidden;
 }
 *{
   margin:0;
@@ -70,7 +71,6 @@ a{
   overflow:hidden;
   text-overflow:ellipsis;
   color:#333;
-  text-align:justify;
 }
 .product-price{
   font-size:28px;
@@ -266,5 +266,14 @@ a{
   left:50%;
   -webkit-transform:translate(-50%,-50%);
   -moz-transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%);
+}
+.empty-cart-icon{
+  background:url(../images/empty.png) no-repeat;
+  width:219px;
+  height:212px;
+  position:absolute;
+  top:50%;
+  left:50%;
   transform:translate(-50%,-50%);
 }

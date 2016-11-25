@@ -3,7 +3,7 @@
 const API_PATH = document.getElementById("api-path").value;
 
 function fmOpt (sessionId) {
-      window._fmOpt = {
+	  window._fmOpt = {
         bd: true,
         partner: 'jrgc',
         appName: 'jrgc_web',
@@ -23,7 +23,6 @@ function fmOpt (sessionId) {
 	fm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'static.fraudmetrix.cn/fm.js?ver=0.1&t=' + (new Date().getTime()/3600000).toFixed(0);
     
 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fm, s);
-
 }
 
 var numberFormat = {
