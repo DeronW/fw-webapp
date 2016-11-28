@@ -1,5 +1,3 @@
-'use strict';
-const API_PATH = document.getElementById('api-path').value;
 
 function gotoHandler(link, need_login) {
     if (link.indexOf('://') < 0) {
@@ -13,11 +11,11 @@ function gotoHandler(link, need_login) {
 }
 
 const Mall = React.createClass({
-    getInitialState:function(){
+    getInitialState: function () {
         return {
-            background:"transparent",
-            logoImage:"images/logo.png",
-            avatarImage:"images/list-icon.png"
+            background: "transparent",
+            logoImage: "images/logo.png",
+            avatarImage: "images/list-icon.png"
         }
     },
     getHeadImages: function () {
@@ -36,95 +34,100 @@ const Mall = React.createClass({
         }
         link ? gotoHandler(link) : console.log('no link set');
     },
-    componentDidMount:function(){
-        var _this = this;
-        window.onscroll = function(){
+    componentDidMount: function () {
+        window.onscroll = function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-            if(scrollTop > 100) {
-                return false;
+
+            if (scrollTop > 100) return false;
+
+            let style = scrollTop > 0 ? {
+                background: "rgba(255,255,255,.9)",
+                logoImage: "images/m-logo.png",
+                avatarImage: "images/m-list-icon.png"
+            } : {
+                background: "transparent",
+                logoImage: "images/logo.png",
+                avatarImage: "images/list-icon.png"
             }
-            if(scrollTop > 0){
-                _this.setState({
-                    background:"rgba(255,255,255,.9)",
-                    logoImage:"images/m-logo.png",
-                    avatarImage:"images/m-list-icon.png"
-                })
-            }else{
-                _this.setState({
-                    background:"transparent",
-                    logoImage:"images/logo.png",
-                    avatarImage:"images/list-icon.png"
-                })
-            }
-        }
+
+            this.setState(style);
+        }.bind(this);
     },
-     render: function(){
-         let banner;
-         if (this.props.banners.length) {
-             banner = <BannerGroup className={iOSApp ? "head-images head-images-ios" : "head-images"}
-                                   images={this.getHeadImages()}
-                                   onImageClick={this.onImageClickHandler}/>
-         } else {
-             banner = <div className="no-banner"></div>
-         }
+    render: function () {
+        let banner;
+        let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();
 
-         let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();
+        if (this.props.banners.length) {
+            banner = <BannerGroup className={iOSApp ? "head-images head-images-ios" : "head-images"}
+                                  images={this.getHeadImages()}
+                                  onImageClick={this.onImageClickHandler}/>
+        } else {
+            banner = <div className="no-banner"></div>
+        }
 
-         var head_nav_wrap = {
-             background:this.state.background,
-             width:"100%",
-             height:"56px",
-             paddingTop:"20px",
-             paddingBottom:"20px",
-             transition:"1s all"
-         };
+        var head_nav_wrap = {
+            background: this.state.background,
+            width: "100%",
+            height: "56px",
+            paddingTop: "20px",
+            paddingBottom: "20px",
+            transition: "1s all"
+        };
 
-         return (
-             <div className="head-wrap">
-                 {banner}
-                 <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                     <div style={head_nav_wrap}>
-                         <img className="m-logo" src={this.state.logoImage}/>
-                         <a onClick={ ()=> gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
-                            className="search-bar-a">
-                             <img className="search-icon" src="images/search-icon.png"/>
-                             <div className="search-bar">请输入关键字</div>
-                         </a>
-                         <a className="index-avatar" onClick={ ()=> gotoHandler("/static/mall/user/index.html", true) }>
-                             <img src={this.state.avatarImage}/></a>
-                     </div>
-                 </div>
-                 <div className="head-nav">
-                     <a onClick={()=> gotoHandler("/static/mall/product-vip-zone/index.html")}><img src="images/nav-1.png"/><span>VIP专区</span></a>
-                     <a className=""><img src="images/nav-2.png"/><span>豆哥周边</span></a>
-                     <a className=""><img src="images/nav-3.png"/><span>工场券</span></a>
-                     <a className=""><img src="images/nav-4.png"/><span>热门活动</span></a>
-                     <a className=""><img src="images/nav-5.png"/><span>生活服务</span></a>
-                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img src="images/nav-6.png"/><span>充值中心</span><span className="hot-tag"></span></a>
-                     <a onClick={() => gotoHandler("/static/mall/zhuanpan20161024/index.html?" + (+new Date()), true)}><img src="images/nav-7.png"/><span>玩玩乐</span></a>
-                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img src="images/nav-8.png"/><span>我可兑换</span></a>
-                 </div>
-                 <NewProduct/>
-                 <HotProduct/>
-                 <Grid_4_4/>
-                 <Grid_3_6/>
-                 <Grid_6_4/>
-                 <Grid_4_5/>
-                 <HotSale/>
-                 <div className="fixed-nav">
-                     <a className="fixed-nav-link fixed-nav-link1 active" onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
-                     <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-                     <a className="backToIndex"></a>
-                     <a className="fixed-nav-link fixed-nav-link3" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                     <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
-                 </div>
-             </div>
-         )
-     }
+        return (
+            <div className="head-wrap">
+                {banner}
+                <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
+                    <div style={head_nav_wrap}>
+                        <img className="m-logo" src={this.state.logoImage}/>
+                        <a onClick={ () => gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
+                           className="search-bar-a">
+                            <img className="search-icon" src="images/search-icon.png"/>
+                            <div className="search-bar">请输入关键字</div>
+                        </a>
+                        <a className="index-avatar" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }>
+                            <img src={this.state.avatarImage}/></a>
+                    </div>
+                </div>
+                <div className="head-nav">
+                    <a onClick={() => gotoHandler("/static/mall/product-vip-zone/index.html")}><img
+                        src="images/nav-1.png"/><span>VIP专区</span></a>
+                    <a className=""><img src="images/nav-2.png"/><span>豆哥周边</span></a>
+                    <a className=""><img src="images/nav-3.png"/><span>工场券</span></a>
+                    <a className=""><img src="images/nav-4.png"/><span>热门活动</span></a>
+                    <a className=""><img src="images/nav-5.png"/><span>生活服务</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img
+                        src="images/nav-6.png"/><span>充值中心</span><span className="hot-tag"></span></a>
+                    <a onClick={() => gotoHandler("/static/mall/zhuanpan20161024/index.html?" + (+new Date()), true)}><img
+                        src="images/nav-7.png"/><span>玩玩乐</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
+                        src="images/nav-8.png"/><span>我可兑换</span></a>
+                </div>
+                <NewProduct/>
+                <HotProduct/>
+                <Grid_4_4/>
+                <Grid_3_6/>
+                <Grid_6_4/>
+                <Grid_4_5/>
+                <HotSale/>
+                <div className="fixed-nav">
+                    <a className="fixed-nav-link fixed-nav-link1 active"
+                       onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
+                    <a className="fixed-nav-link fixed-nav-link2"
+                       onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
+                    <a className="backToIndex"></a>
+                    <a className="fixed-nav-link fixed-nav-link3"
+                       onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link4"
+                       onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
+                </div>
+            </div>
+        )
+    }
 });
 
 const HotSale = React.createClass({
-    render:function(){
+    render: function () {
         let hotProduct = <a className="product-wrap">
             <img src="images/product-img3.png"/>
             <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
@@ -146,15 +149,10 @@ const HotSale = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    $FW.BatchGet([
-        //`${API_PATH}mall/api/index/v1/banners.json`, // banner轮播图数据
-        //`${API_PATH}mall/api/index/v1/activities.json` // 明前活动的数据
-        'http://localhost/nginx-1.9.12/html/banners.json'
-    ], function (data) {
-        var banners = data[0].banners;
-        if (typeof(banners) == 'undefined')
-            $FW.Component.Alert('error: empty data received');
-        ReactDOM.render(<Mall banners={banners}/>, document.getElementById('cnt'));
-    }, true);
-
+    $FW.Ajax({
+        url: `${API_PATH}mall/api/index/v1/banners.json`,
+        success: function (data) {
+            ReactDOM.render(<Mall banners={data.banners}/>, document.getElementById('cnt'));
+        }
+    })
 });
