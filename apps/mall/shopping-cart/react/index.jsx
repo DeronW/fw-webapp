@@ -1,6 +1,3 @@
-'use strict';
-const API_PATH = document.getElementById('api-path').value;
-
 function gotoHandler(link, need_login) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
@@ -23,15 +20,23 @@ const ShoppingCart = React.createClass({
     },
     checkHandler: function (index) {
         let ps = this.state.products;
-        ps[index].checked = !ps[index].checked;
-        this.setState({changeAll:true});
-        for(var i=0;i<ps.length;i++){
-            if(!ps[i].checked){
-                this.setState({changeAll:false});
+        $FW.Ajax({
+            url:API_PATH + 'mall/api/cart/v1/isChecked.json',
+            data:{
+                flag:ps[index].checked = !ps[index].checked,
+                productBizNo:ps[index].bizNo
+            },
+            success:function(data){
+                this.setState({products: ps}).bind(this);
+                for(var i=0;i<ps.length;i++){
+                    if(!ps[i].checked){
+                        this.setState({changeAll:false}).bind(this);
+                    }else{
+                        this.setState({changeAll:true}).bind(this);
+                    }
+                }
             }
-        }
-        this.setState({products: ps});
-        console.log(this.state.products);
+       });
     },
     deleteHandler: function (index) {
         let ps = this.state.products;
@@ -127,7 +132,7 @@ const ShoppingCart = React.createClass({
                 {this.props.products.length !=0  ? this.state.products.map((product, index) => product_item(product, index)) : <div className="empty-cart-icon"></div>}
                 {this.props.products.length !=0  ?  <div className="pay-bar">
                     <div className="all-price">合计：<span className="total-price">¥{total_price}+{total_score}工分</span></div>
-                    <a className="pay-btn" onClick={() => gotoHandler("/static/mall/order-confirm/index.html")}>结算</a>
+                    <a className="pay-btn" onClick={() => gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&productBizNo=null&buyNum=null")}>结算</a>
                 </div> : null}
                 <div className="fixed-nav">
                     <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
@@ -148,6 +153,7 @@ $FW.DOMReady(function () {
         url:API_PATH + 'mall/api/cart/v1/shoppingCart.json',
         enable_loading: true,
         success: function (data) {
+            console.log(data)
             ReactDOM.render(<ShoppingCart products={data.cartList}/>, document.getElementById('cnt'));
         }
     });
