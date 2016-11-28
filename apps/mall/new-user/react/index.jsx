@@ -119,11 +119,11 @@ const User = React.createClass({
                    </div>
                </div>
                <div className="fixed-nav">
-                   <a className="fixed-nav-link fixed-nav-link1"></a>
-                   <a className="fixed-nav-link fixed-nav-link2"></a>
+                   <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
+                   <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
                    <a className="backToIndex"></a>
-                   <a className="fixed-nav-link fixed-nav-link3"></a>
-                   <a className="fixed-nav-link fixed-nav-link4 active"></a>
+                   <a className="fixed-nav-link fixed-nav-link3" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
+                   <a className="fixed-nav-link fixed-nav-link4 active" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
                </div>
            </div>
         )
