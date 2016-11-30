@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
 const ConfirmOrder = React.createClass({
 
     getInitialState: function () {
@@ -220,14 +216,16 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
 
-    if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
+    //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
+
+    var requestUrl = query.cartFlag ? (API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=true&productBizNo=null&buyNum=null' ) :
+    (API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=false&productBizNo=' + query.productBizNo + '&buyNum=' + (query.count || 1));
 
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?productBizNo=' + query.productBizNo + '&buyNum=' + (query.count || 1),
-        url: 'http://localhost/nginx-1.9.12/html/pre_pay_order.json',
+        url: requestUrl,
         enable_loading: true,
         success: function (data) {
-
+            console.log(data)
             var user = {
                 score: data.avaliablePoints || 0,
                 score_server_error: data.avaliablePoints === '',
@@ -237,13 +235,13 @@ $FW.DOMReady(function () {
                 charge: data.availableCashBalance || 0
             };
             var product = {
-                biz_no: query.productBizNo,
+                biz_no: query.productBizNo || null,
                 img: data.previewTitleImage,
                 title: data.productName,
                 price: data.singleRmb,
                 score: data.singlePoint,
                 tags: data.tags || [],
-                count: parseInt(query.count) || 1
+                count: (parseInt(query.count) || 1) || null
             };
             var pay_condition = {
                 product_bought: data.persionProductLimit,
