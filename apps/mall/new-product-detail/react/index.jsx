@@ -183,7 +183,7 @@ const PlusMinus = React.createClass({
             }
         }else{
             $FW.Ajax({
-                url:  API_PATH + 'mall/api/cart/v1/insertCart.json?bizNo=' + bizNo,
+                url:  API_PATH + 'mreturnall/api/cart/v1/insertCart.json?bizNo=' + bizNo,
                 enable_loading: true,
                 data:{
                     buyNum:this.state.value,
