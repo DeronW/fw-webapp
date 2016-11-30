@@ -1,6 +1,4 @@
 'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
 const ActivityId='huodongid';
 const GameGuess = React.createClass({
     getDefaultProps: function () {
