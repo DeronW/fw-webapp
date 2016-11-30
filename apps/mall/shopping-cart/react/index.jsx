@@ -27,16 +27,15 @@ const ShoppingCart = React.createClass({
                 productBizNo:ps[index].bizNo
             },
             success:function(data){
-                this.setState({products: ps}).bind(this);
-                for(var i=0;i<ps.length;i++){
-                    if(!ps[i].checked){
-                        this.setState({changeAll:false}).bind(this);
-                    }else{
-                        this.setState({changeAll:true}).bind(this);
-                    }
-                }
+                 this.setState({products: ps}).bind(this);
             }
        });
+        this.setState({changeAll:true});
+        for(var i=0;i<ps.length;i++){
+            if(!ps[i].checked){
+                this.setState({changeAll:false});
+            }
+        }
     },
     deleteHandler: function (index) {
         let ps = this.state.products;
