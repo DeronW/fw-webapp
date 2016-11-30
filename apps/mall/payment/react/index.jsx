@@ -4,7 +4,7 @@ const API_PATH = document.getElementById('api-path').value;
 const Payment = React.createClass({
     getInitialState:function(){
         return {
-            index:1
+            index:"quick_pay"
         }
     },
     componentDidMount:function(){
@@ -13,9 +13,80 @@ const Payment = React.createClass({
     payCheck:function(arg){
         this.setState({index: arg});
     },
+    split:function(str){
+       return str.substr(str.length-4,4);
+    },
+    payHandler: function () {
+        if (this.state.index != "quick_pay") {
+            var FormData = {
+                sevice: "REQ_PAY_QUICK_APPLY",
+                merchantNo: '2',
+                amount: '2',
+                certificateNo: '2',
+                accountNo: '2',
+                accountName: '2',
+                mobileNo: '15010984876',
+                bankId: '2',
+                bankName: '2',
+                productName:'2',
+                productInfo:'2',
+                noticeUrl: '2',
+                expireTime: '2'
+            };
+            $FW.Ajax({
+                url:  './ucf_pay.json',
+                enable_loading: true,
+                data: FormData,
+                success: function (data) {
+                    if (1) {
+                        $FW.Component.Alert('成功');
+                        setTimeout(function(){
+                            window.location.href="/static/mall/send-msg-pay/index.html?merchantNo="+data.merchantNo+"&mobileNo="+FormData.mobileNo
+                        },1500);
+
+                    } else {
+                        $FW.Component.Alert('失败');
+                    }
+                }
+            })
+        }
+        else{
+            let link = location.protocol + '//' + location.hostname +
+                '/static/mall/add-bank-card/index.html?userNo= &count=' + this.state.index;
+            alert(link);
+            location.href = link;
+        }
+    },
     render : function(){
+       let data = this.props.data;
+
+       var quick_pay = (
+            <div className="pay-item" onClick={this.payCheck.bind(this,"quick_pay")}>
+                <div className="pay-icon"><img src="images/quickpay.jpg"/></div>
+                <div className="pay-name">
+                    <div className="pay-title">快捷支付</div>
+                    <div className="pay-subtitle">支付服务由先锋金融提供，无需开通网银</div>
+                </div>
+                <div className={this.state.index=="quick_pay" ? "pay-check active" : "pay-check"}></div>
+            </div>
+        );
+
+        var payMethods = data.bankCards? data.bankCards.map((n, index) => {
+            let accountNo = this.split(n.accountNo);
+            return (
+                 <div className="pay-item" onClick={this.payCheck.bind(this,index+1)}>
+                     <div className="pay-icon"><img src="images/bankpay.jpg"/></div>
+                         <div className="pay-name">
+                             <div className="pay-title">{n.bankCardName} 尾号{accountNo}</div>
+                             <div className="pay-subtitle">已绑定银行卡（支付服务由先锋金融提供）</div>
+                         </div>
+                     <div className={this.state.index==index+1 ? "pay-check active" : "pay-check"} ></div>
+                 </div>
+            )
+        }):quick_pay;
+
         return (
-            <div className="order-payment">
+             <div className="order-payment">
                 <div className="order-status">
                     <div className="pay-tip">请在23小时59分59秒内完成支付</div>
                     <div className="pay-price">金额:<span>￥299元</span></div>
@@ -31,14 +102,8 @@ const Payment = React.createClass({
                     </div>
                 </div>
                 <div className="pay-way">
-                    <div className="pay-item" onClick={this.payCheck.bind(this,1)}>
-                        <div className="pay-icon"><img src="images/bankpay.jpg"/></div>
-                        <div className="pay-name">
-                            <div className="pay-title">招商银行储蓄卡  尾号8412</div>
-                            <div className="pay-subtitle">已绑定银行卡（支付服务由先锋金融提供）</div>
-                        </div>
-                        <div className={this.state.index==1 ? "pay-check active" : "pay-check"} ></div>
-                    </div>
+                    {payMethods}
+                    {/*
                     <div className="pay-item" onClick={this.payCheck.bind(this,2)}>
                         <div className="pay-icon"><img src="images/wechat.jpg"/></div>
                         <div className="pay-name">
@@ -55,17 +120,12 @@ const Payment = React.createClass({
                         </div>
                         <div className={this.state.index==3 ? "pay-check active" : "pay-check"}></div>
                     </div>
-                    <div className="pay-item" onClick={this.payCheck.bind(this,4)}>
-                        <div className="pay-icon"><img src="images/quickpay.jpg"/></div>
-                        <div className="pay-name">
-                            <div className="pay-title">快捷支付</div>
-                            <div className="pay-subtitle">支付服务由先锋金融提供，无需开通网银</div>
-                        </div>
-                        <div className={this.state.index==4 ? "pay-check active" : "pay-check"}></div>
-                    </div>
+
+
+                     */}
                 </div>
                 <div className="pay-bar">
-                    <a className="pay-btn">确认支付</a>
+                    <a className="pay-btn" onClick={this.payHandler}>确认支付</a>
                 </div>
             </div>
         );
@@ -76,7 +136,16 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单结算');
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"订单结算"} back_handler={backward}/>, document.getElementById('header'));
-    ReactDOM.render(<Payment/>, document.getElementById('cnt'));
+
+
+        $FW.Ajax({
+            url:  './bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
+            enable_loading: true,
+            success: function (data) {
+                 ReactDOM.render(<Payment data={data}/>, document.getElementById('cnt'));
+                 console.log(JSON.stringify(data));
+                }
+         })
 });
 
 function backward() {
