@@ -12,30 +12,41 @@ function gotoHandler(link, need_login) {
 const ShoppingCart = React.createClass({
     getInitialState: function () {
         var ps = this.props.products;
-        ps.map(i=>i.checked=true);
+        //ps.map(i=>i.checked=true);
         return {
             products: ps,
-            changeAll:true
+            //changeAll:true
         }
+    },
+    componentDidMount:function(){
+        //var ps = this.state.products;
+        //for(var i=0;i<ps.length;i++){
+        //    if(!ps[i].isChecked){
+        //        this.setState({changeAll:false});
+        //    }
+        //}
     },
     checkHandler: function (index) {
         let ps = this.state.products;
+        var _this = this;
         $FW.Ajax({
             url:API_PATH + 'mall/api/cart/v1/isChecked.json',
             data:{
-                flag:ps[index].checked = !ps[index].checked,
+                flag:ps[index].isChecked = !ps[index].isChecked,
                 productBizNo:ps[index].bizNo
             },
             success:function(data){
-                 this.setState({products: ps}).bind(this);
+                 _this.setState({products: ps});
+                //for(var i=0;i<ps.length;i++){
+                //    if(!ps[i].checked){
+                //        _this.setState({changeAll:false});
+                //    }else if(ps[i].checked){
+                //        _this.setState({changeAll:true});
+                //    }
+                //}
             }
        });
-        this.setState({changeAll:true});
-        for(var i=0;i<ps.length;i++){
-            if(!ps[i].checked){
-                this.setState({changeAll:false});
-            }
-        }
+
     },
     deleteHandler: function (index) {
         let ps = this.state.products;
@@ -53,15 +64,24 @@ const ShoppingCart = React.createClass({
         ps.splice(index,1);
     },
     allChoseHandler:function(){
-        let products=this.state.products;
-        let newChangeAll=!this.state.changeAll;
-            for(var i= 0;i<this.state.products.length;i++){
-                products[i].checked=this.state.changeAll?false:true;
+        //let products=this.state.products;
+        //let newChangeAll=!this.state.changeAll;
+        //for(var i= 0;i<this.state.products.length;i++){
+        //    products[i].isChecked=this.state.changeAll?false:true;
+        //}
+        //this.setState({
+        //    products: products,
+        //    changeAll:newChangeAll
+        //});
+        $FW.Ajax({
+            url:API_PATH + 'mall/api/cart/v1/isChecked.json',
+            data:{
+
+            },
+            success:()=>{
+                this.setState({products: ps});
             }
-            this.setState({
-                products: products,
-                changeAll:newChangeAll
-            });
+        });
     },
     updateCount: function (index,newAmount) {
         var ps = this.state.products;
@@ -91,12 +111,13 @@ const ShoppingCart = React.createClass({
         this.updateCount(index,ps[index].productNumber + 1);
     },
     render: function () {
-        var _this = this;
+        let {products} = this.state;
+
         let product_item =  (product, index) => {
             return (
                 <div className="shopping-item" key={index}>
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
-                        <span className={product.checked ? "checked-circle" : "unchecked-circle"}></span>
+                        <span className={product.isChecked ? "checked-circle" : "unchecked-circle"}></span>
                     </div>
                     <div className="product-img"><img src={product.img}/></div>
                     <div className="product-item">
@@ -117,15 +138,39 @@ const ShoppingCart = React.createClass({
         let total_price=0;
         let total_score=0;
         let total=(product, index)=>{
-            product.checked ? total_price+=product.productPrice*product.productNumber:total_price;
-            product.checked ? total_score+=product.beanPrice*product.productNumber:total_score;
+            product.isChecked ? total_price+=product.productPrice*product.productNumber:total_price;
+            product.isChecked ? total_score+=product.beanPrice*product.productNumber:total_score;
         };
         this.state.products.map((product, index) => total(product, index));
+
+        //for(var i=0;i<ps.length;i++){
+        //    if(!ps[i].checked){
+        //        _this.setState({changeAll:false});
+        //    }else if(ps[i].checked){
+        //        _this.setState({changeAll:true});
+        //    }
+        //}
+
+
+        //let checkAllCN = "total-checked-circle";
+        //
+        //for(let i = 0; i < products.length;i++) {
+        //    if(!i.isChecked) {
+        //        checkAllCN = 'total-unchecked-circle';
+        //        break;
+        //    }
+        //}
+
+        let checkAllCN =  products.reduce((a, b) => a && b.isChecked, true) ?
+            "total-checked-circle" :
+            'total-unchecked-circle';
+
         return (
             <div className="shopping-cart">
                 <div className="cart-header">
-                    {this.props.products.length !=0 ? <div className="all-chosen" onClick={this.allChoseHandler}><span className={this.state.changeAll?"total-checked-circle":"total-unchecked-circle"}></span><span
-                        className="chosenTip">全选</span></div> : null}
+                    {this.props.products.length !=0 ? <div className="all-chosen" onClick={this.allChoseHandler}>
+                        <span className={checkAllCN}></span>
+                        <span                        className="chosenTip">全选</span></div> : null}
                     <div className="cart-title">购物车</div>
                 </div>
                 {this.props.products.length !=0  ? this.state.products.map((product, index) => product_item(product, index)) : <div className="empty-cart-icon"></div>}
@@ -144,7 +189,6 @@ const ShoppingCart = React.createClass({
         )
     }
 });
-
 $FW.DOMReady(function () {
     NativeBridge.setTitle('购物车');
     $FW.Ajax({
