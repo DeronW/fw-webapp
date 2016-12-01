@@ -1,6 +1,3 @@
-'use strict';
-const API_PATH = document.getElementById('api-path').value;
-
 const BankInfo = React.createClass({
     getInitialState:function(){
         var query = $FW.Format.urlQuery();

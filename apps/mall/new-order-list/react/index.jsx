@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
 const OrderMain = React.createClass({
     getInitialState: function () {
         var index = 0;
@@ -140,7 +136,7 @@ const OrderBlock = React.createClass({
         let product_item = function (product, index) {
 
             return (
-                <a href={'/static/mall/order-detail/index.html?order_id=' + order.orderId} key={index}>
+                <a href={'/static/mall/new-order-detail/index.html?order_id=' + order.orderId} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
