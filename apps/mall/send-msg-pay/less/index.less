@@ -13,46 +13,48 @@ img{
 }
 ::-webkit-input-placeholder{color:#999;}
 input[type="text"],input[type="password"]{-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0);border-radius:0;}
-.add-bank-card{
-  margin-top:50px;
-}
-.add-bank-card-tip{
+.phone-tip{
   font-size:28px;
   color:#999;
+  margin-top:50px;
   margin-left:30px;
-  margin-bottom:20px;
 }
-.card-info{
-  font-size: 28px;
-  color: #999;
-  margin-left: 30px;
-  margin-bottom: 20px;
-  display: block;
+.phone-tip span{
+  color:#4aa1f9;
 }
-.input-box{
+.input-wrap{
+  margin-top:20px;
   height:98px;
-  background:#fff;
   border-top:1px solid #d8d8d8;
   border-bottom:1px solid #d8d8d8;
-  padding-left:93px;
+  background:#fff;
   position:relative;
-  margin-bottom:20px;
 }
-.input-box input{
-  border:none;
-  width:100%;
-  height:98px;
+.input-wrap input{
+  width:403px;
+  border:0;
+  padding-left:30px;
   font-size:30px;
+  height:98px;
   line-height:normal;
 }
-.card-icon{
+.msg-tip{
   display:inline-block;
-  background:url(../images/card-icon.jpg) no-repeat;
-  width:37px;
-  height:28px;
+  width:287px!important;
+  text-align:center;
+  font-size:30px!important;
+  color:#4aa1f9;
+  background: transparent;
+  outline: none;
+}
+.vertical-line{
+  display:block;
+  width:1px;
+  height:34px;
+  background:#e3e5ea;
   position:absolute;
-  top:35px;
-  left:29px;
+  top:32px;
+  left:403px;
 }
 .next-step{
   display:block;
@@ -65,7 +67,7 @@ input[type="text"],input[type="password"]{-webkit-appearance:none;appearance:non
   color:#fff;
   text-align:center;
   line-height:84px;
-  margin:0 auto;
+  margin:20px auto 0;
 }
 .next-step.active{
   background: #fd4d4c;
