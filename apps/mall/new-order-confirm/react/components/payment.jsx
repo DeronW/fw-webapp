@@ -105,7 +105,7 @@ const PaymentPanel = React.createClass({
                         {checked_voucher()}
                     </div>
 
-                    <div className="coupons">
+                    {/*<div className="coupons">
                         <div className="coupons-l">立减券<span className="avail-coupon">11张可用</span></div>
                         <div className="coupons-r">－30</div>
                     </div>
@@ -113,7 +113,7 @@ const PaymentPanel = React.createClass({
                     <div className="coupons">
                         <div className="coupons-l">打折券<span className="avail-coupon">11张可用</span></div>
                         <div className="coupons-r">95%</div>
-                    </div>
+                    </div>*/}
 
                 </div>
                 {this.state.show_voucher_modal ? <VoucherModal
