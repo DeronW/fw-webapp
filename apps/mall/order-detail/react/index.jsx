@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
 const OrderDetail = React.createClass({
     render: function () {
         var card = $FW.Format.urlQuery().cardUuid;

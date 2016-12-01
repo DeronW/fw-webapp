@@ -1,6 +1,3 @@
-'use strict';
-const API_PATH = document.getElementById('api-path').value;
-
 var numberFormat = {
     val: "",
     format: function (val) {
