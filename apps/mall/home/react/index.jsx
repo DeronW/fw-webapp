@@ -106,7 +106,7 @@ const Mall = React.createClass({
                        onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true) }>充值中心</a>
                     <a className="vip" onClick={()=> gotoHandler("/static/mall/product-vip-zone/index.html") }>VIP专区</a>
                     <a className="goods"
-                       onClick={() => gotoHandler("/static/mall/zhuanpan20161024/index.html?" + (+new Date()), true) }>大转盘</a>
+                       onClick={() => gotoHandler("http://game.9888.cn/index.php?r=polymerization/info&tag=tag1", true) }>玩玩乐</a>
                     <a className="mine" onClick={ () => gotoHandler("/static/mall/product-category/index.html", true) }>品类</a>
                 </div>
                 {recommended}
