@@ -1,6 +1,6 @@
 'use strict';
 
-const API_PATH = document.getElementById('api-path').value;
+
 const ACTIVITY_ID = 'a01be225e8324e2280cf268462d897c6';
 
 const NineActivity = React.createClass({
