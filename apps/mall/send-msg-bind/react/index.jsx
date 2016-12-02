@@ -23,10 +23,8 @@ const SendCode = React.createClass({
     getInitialState:function(){
         var query = $FW.Format.urlQuery();
         var mobileNo = query.mobileNo;
-        var merchantNo = query.merchantNo;
         return {
             mobileNo:mobileNo,
-            merchantNo:merchantNo,
             reSend:false,
             value:60,
             active:false,
@@ -40,15 +38,10 @@ const SendCode = React.createClass({
 
     //重新发送验证码
     reSend: function() {
-        var FormData = {
-            service: 2,
-            merchantNo: this.state.merchantNo
-        }
 
         $FW.Ajax({
-            url:  '/mall/api/payment/v1//SendPhoneVerifyPay.json',
+            url:  '/mall/api/payment/v1/SendPhoneVerifyPay.json',
             enable_loading: true,
-            data: this.FormData,
             success: function (data) {
                 if(data.code=10000){
                     if(!this.state.reSend) return;
@@ -90,12 +83,10 @@ const SendCode = React.createClass({
     nextStep:function() {
         if(!this.state.active) return;
         var FormData = {
-            service: 2,
-            merchantNo: this.state.merchantNo,
-            checkCode: this.state.code
+            smsCode: this.state.code
         }
         $FW.Ajax({
-            url:  './validatePaySmsCode.json',
+            url:  '/mall/api/payment/v1/validatePaySmsCode.json',
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
