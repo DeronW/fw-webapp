@@ -4,11 +4,9 @@ var numberFormat = {
         if (!isNaN(val.replace(/[0-9]/g, ""))) {
             this.val = val.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");//四位数字一组，以空格分割
         }
-
         return this.val;
     }
 };
-
 
 function space(str) {
     return str.replace(/ /g, "");
@@ -48,7 +46,7 @@ const SendCode = React.createClass({
         }
 
         $FW.Ajax({
-            url:  './SendPhoneVerifyPay.json',
+            url:  '/mall/api/payment/v1//SendPhoneVerifyPay.json',
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
