@@ -1,4 +1,3 @@
-
 const Recommended = React.createClass({
     render: function () {
         let products = this.props.products || [];
