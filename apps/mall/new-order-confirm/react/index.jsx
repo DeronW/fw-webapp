@@ -87,7 +87,7 @@ const ConfirmOrder = React.createClass({
                         $FW.Component.Alert(data.errMsg);
                         this.refreshTokenStr()
                     } else {
-                        location.href = '/static/mall/order-complete/index.html?id=' + data.orderId
+                        location.href = '/static/mall/new-order-complete/index.html?id=' + data.orderId
                     }
                 }
             })
