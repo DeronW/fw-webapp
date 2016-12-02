@@ -58,7 +58,7 @@ const Mall = React.createClass({
                                     activity_id={i.activity_id} products={i.products} key={index}/>;
         };
         let backFactory = ()=> {
-            return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png" onClick={backAppHandler}/> :
+            return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png" onClick={this.backAppHandler}/> :
                 <a className="back-factory" href="http://m.9888.cn/mpwap/"><img
                     src="images/wap_shop_gong_logo.png"/></a>
         };
@@ -105,7 +105,7 @@ const Mall = React.createClass({
                        onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true) }>充值中心</a>
                     <a className="vip" onClick={()=> gotoHandler("/static/mall/product-vip-zone/index.html") }>VIP专区</a>
                     <a className="goods"
-                       onClick={() => gotoHandler("http://game.9888.cn/index.php?r=polymerization/info&tag=tag1&from=shop", true) }>游戏中心</a>
+                       onClick={() => gotoHandler("http://game.9888.cn/index.php?r=polymerization/info&tag=tag1&fr=shop", true) }>游戏中心</a>
                     <a className="mine" onClick={ () => gotoHandler("/static/mall/product-category/index.html", true) }>品类</a>
                 </div>
                 {recommended}
