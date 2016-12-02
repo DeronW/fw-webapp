@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
 const Recharge = React.createClass({
     getInitialState: function () {
         this.tabs = ['fee', 'net'];

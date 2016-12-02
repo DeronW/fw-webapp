@@ -1,6 +1,3 @@
-'use strict';
-
-
 const ACTIVITY_ID = 'a01be225e8324e2280cf268462d897c6';
 
 const NineActivity = React.createClass({

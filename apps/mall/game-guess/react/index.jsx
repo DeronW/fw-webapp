@@ -1,5 +1,3 @@
-'use strict';
-const ActivityId='huodongid';
 const GameGuess = React.createClass({
     getDefaultProps: function () {
         return {}

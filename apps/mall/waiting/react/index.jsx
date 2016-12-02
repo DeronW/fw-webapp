@@ -1,5 +1,3 @@
-'use strict';
-
 const Waiting = React.createClass({
     getInitialState: function () {
         return {}

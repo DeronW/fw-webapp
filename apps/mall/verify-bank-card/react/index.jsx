@@ -83,7 +83,7 @@ const BankInfo = React.createClass({
             bankName: this.state.bankName
         };
            $FW.Ajax({
-                url:  './binding_bank_card.json',
+                url:  '/mall/api/payment/v1/binding_bank_card.json',
                 enable_loading: true,
                 data: FormData,
                 success: function (data) {

@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
 const Fail = React.createClass({
     render: function () {
         let failText = "";
