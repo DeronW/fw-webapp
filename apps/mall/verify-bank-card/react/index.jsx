@@ -3,7 +3,8 @@ const BankInfo = React.createClass({
         var query = $FW.Format.urlQuery();
         var accountNo= query.accountNo;
         var bankName= query.bankName;
-
+        var bankCardName= query.bankCardName;
+        var bankId= query.bankId;
         return {
             name: "",
             idNum: "",
@@ -16,6 +17,8 @@ const BankInfo = React.createClass({
             pass3:0,
             accountNo:accountNo,
             bankName:bankName,
+            bankCardName:bankCardName,
+            bankId:bankId,
             active:false
         };
     },
@@ -69,21 +72,20 @@ const BankInfo = React.createClass({
     nextStep:function() {
         if(!this.state.active) return;
         var query = $FW.Format.urlQuery();
-        var bankCardName= query.bankCardName;
-        var bankId= query.bankId;
+
         let FormData = {
             certificateNo: this.state.val2,
             accountNo: this.state.accountNo,
-            bankCardName: bankCardName,
+            bankCardName: this.state.bankCardName,
             bankCardType: 1,
             certificateType: 0,
             accountName: this.state.val1,
             mobileNo: this.state.val3,
-            bankId: bankId,
+            bankId: this.state.bankId,
             bankName: this.state.bankName
         };
            $FW.Ajax({
-                url:  './binding_bank_card.json',
+                url:  '/mall/api/payment/v1/binding_bank_card.json',
                 enable_loading: true,
                 data: FormData,
                 success: function (data) {

@@ -1,6 +1,3 @@
-'use strict';
-const API_PATH = document.getElementById('api-path').value;
-
 const User = React.createClass({
     getInitialState:function(){
         return {

@@ -46,6 +46,7 @@ const WAP_APP_NAMES = [
     'vip-prerogative', // VIP特权详情页
     'guide-cookbook', // 用户使用引导页面
     'app-download', // app 下载页面
+    'topic-worker',//工友会专题页面
 
     //圈子相关页面
     'circle-tender-complete',//直融标成功

@@ -1,5 +1,3 @@
-'use strict';
-const API_PATH = document.getElementById('api-path').value;
 const AddBankCard = React.createClass({
     getInitialState:function(){
         return {
@@ -36,12 +34,18 @@ const AddBankCard = React.createClass({
     nextStep:function() {
          if(!this.state.active) return;
           $FW.Ajax({
-            url:  './bank_card_info.json',
+            url:  '/mall/api/payment/v1/bank_card_info.json?accountNo='+this.state.val,
             enable_loading: true,
             success: function (data) {
-                var data= data.bankCards;
-                window.location.href="/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId
-              }
+                if(data.code==1)
+                {
+                    var data= data.bankCards;
+                    window.location.href="/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId
+                }
+                else{
+                    $FW.Component.Alert(data.msg);
+                }
+            }
           })
     },
     render:function(){
