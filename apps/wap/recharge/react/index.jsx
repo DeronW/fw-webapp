@@ -343,11 +343,13 @@ const Recharge = React.createClass({
                         <img className="card-d" src="images/card-d.png"/>
                         <span className="online">充值需开通银行卡网上支付功 能，如有疑问请咨询开户行客服；</span>
                     </div>
+					<div className="atpr">
+                        <img className="card-d" src="images/card-d.png"/>
+                        <span className="online">如手机快捷支付充值失败，可尝试在电脑上进行<span className="text">网银</span>转账，或使用<span className="text">支付宝</span>进行转账操作</span>
+                    </div>
                     <div className="atpr">
                         <img className="card-d" src="images/card-d.png"/>
-                        <span className="online">单笔充值不可超过该银行充值限额。
-
-                        </span>
+                        <span className="online">单笔充值不可超过该银行充值限额。</span>
                     </div>
                     <div className="atpr"><img className="card-d" src="images/card-d.png"/>
                         <span className="online">如果充值金额没有及时到账，请<span

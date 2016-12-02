@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
 const OrderMain = React.createClass({
     getInitialState: function () {
         var index = 0;
