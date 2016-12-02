@@ -68,7 +68,7 @@ const Payment = React.createClass({
             </div>
         );
 
-        var payMethods = data.bankCards? data.bankCards.map((n, index) => {
+        var payMethods = data.bankCards==null? data.bankCards.map((n, index) => {
             let accountNo = this.split(n.accountNo);
             return (
                  <div className="pay-item" onClick={this.payCheck.bind(this,index+1)}>
