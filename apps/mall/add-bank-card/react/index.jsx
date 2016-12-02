@@ -37,13 +37,13 @@ const AddBankCard = React.createClass({
             url:  '/mall/api/payment/v1/bank_card_info.json?accountNo='+this.state.val,
             enable_loading: true,
             success: function (data) {
-                if(data.data.code==1)
+                if(data.code==1)
                 {
                     var data= data.bankCards;
                     window.location.href="/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId
                 }
                 else{
-                    $FW.Component.Alert(data.data.msg);
+                    $FW.Component.Alert(data.msg);
                 }
             }
           })
