@@ -48,7 +48,7 @@ const MALL_APP_NAMES = [
     'zhuanpan20161024',
     'user-prize-record',
     'game-guess',
-    'game-center'
+    'game'
 
 
 
