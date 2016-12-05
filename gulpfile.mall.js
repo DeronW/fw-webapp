@@ -15,6 +15,7 @@ const MALL_APP_NAMES = [
     'new-order-confirm',
     'life-service',
     'service-bill',
+    'hot-activity',
     // 订单页面
     'order-list',
     'order-detail',
@@ -28,7 +29,6 @@ const MALL_APP_NAMES = [
     'coupon',
     'voucher',
     'new-home',
-
     // 产品相关页面
 	'new-product-detail',
     'product-detail',
@@ -47,7 +47,8 @@ const MALL_APP_NAMES = [
     'guoqing',
     'zhuanpan20161024',
     'user-prize-record',
-    'game-guess'
+    'game-guess',
+    'game-center'
 
 
 
