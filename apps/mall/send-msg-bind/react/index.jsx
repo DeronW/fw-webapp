@@ -95,8 +95,10 @@ const SendCode = React.createClass({
             data: this.FormData,
             success: function (data) {
                 $FW.Component.Alert('您已经完成绑定');
+                var query = $FW.Format.urlQuery();
+                var bizNo = query.bizNo;
                 setTimeout(function(){
-                    window.location.href="/static/mall/payment/index.html?bizNo=A0000002746"
+                    window.location.href="/static/mall/payment/index.html?bizNo="+bizNo
                 },2000)
             }
         })

@@ -10,7 +10,7 @@ const MALL_APP_NAMES = [
     'add-bank-card',
     'bind-bank-card',
     'verify-bank-card',
-	'send-msg-pay',
+    'send-msg-pay',
     'send-msg-bind',
     'new-order-confirm',
     'life-service',
@@ -30,7 +30,7 @@ const MALL_APP_NAMES = [
     'voucher',
     'new-home',
     // 产品相关页面
-	'new-product-detail',
+    'new-product-detail',
     'product-detail',
     'product-list',
     'product-vip-zone',
@@ -49,9 +49,6 @@ const MALL_APP_NAMES = [
     'user-prize-record',
     'game-guess',
     'game'
-
-
-
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
