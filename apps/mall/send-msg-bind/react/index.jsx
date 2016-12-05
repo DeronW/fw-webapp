@@ -25,7 +25,7 @@ const SendCode = React.createClass({
         var mobileNo = query.mobileNo;
         return {
             mobileNo:mobileNo,
-            reSend:false,
+            reSend:true,
             value:60,
             active:false,
             code:""
@@ -60,7 +60,7 @@ const SendCode = React.createClass({
 
     //加载完成之后立刻倒计时
     componentDidMount: function() {
-                 this.reSend()
+        this.setState({reSend: false});  this.reSend();
     },
 
     //倒计时完成终止
@@ -94,8 +94,9 @@ const SendCode = React.createClass({
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
+                if(data) alert(1)
                 //var data= data.bankCards;
-                window.location.href="/static/mall/order-complete/index.html"
+                //window.location.href="/static/mall/order-complete/index.html"
             }
         })
     },
