@@ -64,7 +64,7 @@ const GameCenter = React.createClass({
 
 $FW.DOMReady(function(){
     NativeBridge.setTitle('游戏中心');
-    if($FW.Format.urlQuery().mallHead==true){
+    if($FW.Format.urlQuery().mallHead=="true"){
         if ($FW.Utils.shouldShowHeader())
             ReactDOM.render(<Header title={"游戏中心"} back_handler={backward}/>, document.getElementById('header'));
     }
