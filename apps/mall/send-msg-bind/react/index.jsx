@@ -94,8 +94,9 @@ const SendCode = React.createClass({
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
+                if(data) alert(1)
                 //var data= data.bankCards;
-                window.location.href="/static/mall/order-complete/index.html"
+                //window.location.href="/static/mall/order-complete/index.html"
             }
         })
     },
