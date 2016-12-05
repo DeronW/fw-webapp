@@ -89,13 +89,13 @@ const BankInfo = React.createClass({
                 enable_loading: true,
                 data: FormData,
                 success: function (data) {
-                    if (1) {
-                        $FW.Component.Alert('成功');
+                    if (data.code==1) {
+                        $FW.Component.Alert(data.msg);
                         setTimeout(function(){
                             window.location.href="/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo;
-                        },1000)
+                        },2000)
                      } else {
-                        $FW.Component.Alert('失败');
+                        $FW.Component.Alert(data.msg);
                     }
                 }
            })

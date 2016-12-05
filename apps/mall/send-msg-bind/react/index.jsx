@@ -60,7 +60,7 @@ const SendCode = React.createClass({
 
     //加载完成之后立刻倒计时
     componentDidMount: function() {
-                 this.tick()
+                 this.reSend()
     },
 
     //倒计时完成终止
