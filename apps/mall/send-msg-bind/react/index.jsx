@@ -32,38 +32,42 @@ const SendCode = React.createClass({
         }
     },
 
-    tick: function() {
+    //倒计时递减
+    decline: function() {
         this.setState({value: this.state.value - 1});
+    },
+    //倒计时
+    tick: function() {
+        this.interval = setInterval(this.decline, 1000);
+    },
+
+    stopTick: function() {
+        clearInterval(this.interval);
     },
 
     //重新发送验证码
     reSend: function() {
-
-        $FW.Ajax({
+         $FW.Ajax({
             url:  '/mall/api/payment/v1/SendPhoneVerifyPay.json',
             enable_loading: true,
             success: function (data) {
-                if(data.code=10000){
                     if(!this.state.reSend) return;
-                    this.setState({value: 60});
-                    this.setState({reSend: false});
-                    this.interval = setInterval(this.tick, 1000);
-                }
+                    this.setState({value: 60,reSend: false});
+                    this.tick()
              }.bind(this)
         })
     },
 
     //加载完成之后立刻倒计时
     componentDidMount: function() {
-        this.interval = setInterval(this.tick, 1000);
+                 this.tick()
     },
 
     //倒计时完成终止
     componentDidUpdate:function() {
         if(this.state.value==55){
-            clearInterval(this.interval);
-            this.setState({value: "获取验证码"});
-            this.setState({reSend: true});
+            this.stopTick();
+            this.setState({value: "获取验证码",reSend: true});
         }
     },
 
@@ -96,9 +100,19 @@ const SendCode = React.createClass({
         })
     },
     render : function(){
+        let veri_code_tip = null;
+
+        if (!this.state.reSend){
+            veri_code_tip = (
+                <div className="phone-tip">
+                    验证码已发送至手机
+                    <span>{this.state.mobileNo}</span>
+                </div>
+            )
+        }
         return (
             <div>
-                {!this.state.reSend?<div className="phone-tip">验证码已发送至手机<span>{this.state.mobileNo}</span></div>:null}
+                {veri_code_tip}
                 <div className="input-wrap">
                     <input type="text" defaultValue="" placeholder="请输入验证码" onChange={this.changeVal}/>
                     <input type="button" className="msg-tip" value={!this.state.reSend ? "重新发送("+this.state.value+")":this.state.value} onClick={this.reSend} />

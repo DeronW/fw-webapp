@@ -37,9 +37,9 @@ const AddBankCard = React.createClass({
             url:  '/mall/api/payment/v1/bank_card_info.json?accountNo='+this.state.val,
             enable_loading: true,
             success: function (data) {
-                if(data.code==1)
+                if(data.bankInfo)
                 {
-                    var data= data.bankCards;
+                    var data= data.bankInfo;
                     window.location.href="/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId
                 }
                 else{
