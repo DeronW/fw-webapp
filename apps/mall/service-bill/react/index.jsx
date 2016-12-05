@@ -1,6 +1,3 @@
-'use strict';
-const API_PATH = document.getElementById('api-path').value;
-
 const Bill = React.createClass({
     render:function(){
         return (

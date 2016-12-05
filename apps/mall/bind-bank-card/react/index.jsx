@@ -1,5 +1,3 @@
-'use strict';
-const API_PATH = document.getElementById('api-path').value;
 const bankName = ['工商银行','农业银行','中国银行','建设银行','平安银行','兴业银行','光大银行','浦发银行','华夏银行','北京银行','中信银行','广发银行'];
 
 const MyBankCard = React.createClass({

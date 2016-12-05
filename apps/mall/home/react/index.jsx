@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
 function gotoHandler(link, need_login) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
@@ -106,7 +102,7 @@ const Mall = React.createClass({
                        onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true) }>充值中心</a>
                     <a className="vip" onClick={()=> gotoHandler("/static/mall/product-vip-zone/index.html") }>VIP专区</a>
                     <a className="goods"
-                       onClick={() => gotoHandler("/static/mall/zhuanpan20161024/index.html?" + (+new Date()), true) }>大转盘</a>
+                       onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true", true) }>游戏中心</a>
                     <a className="mine" onClick={ () => gotoHandler("/static/mall/product-category/index.html", true) }>品类</a>
                 </div>
                 {recommended}
