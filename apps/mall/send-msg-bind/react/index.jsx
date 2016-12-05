@@ -25,7 +25,7 @@ const SendCode = React.createClass({
         var mobileNo = query.mobileNo;
         return {
             mobileNo:mobileNo,
-            reSend:false,
+            reSend:true,
             value:60,
             active:false,
             code:""
@@ -60,7 +60,7 @@ const SendCode = React.createClass({
 
     //加载完成之后立刻倒计时
     componentDidMount: function() {
-                 this.reSend()
+            this.reSend(); this.setState({reSend: false});
     },
 
     //倒计时完成终止
