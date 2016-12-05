@@ -6,7 +6,7 @@ const GameCenter = React.createClass({
     },
     componentDidMount: function () {
         $FW.Ajax({
-            url: `http://game.9888.cn/index.php?r=polymerization/gamelist`,//游戏中心列表
+            url: `http://game.9888.cn/index.php?r=polymerization/gamelist&fr=shop`,//游戏中心列表
             success: (data) => {
                     this.setState({gameList:data.list});
             }
@@ -64,12 +64,12 @@ const GameCenter = React.createClass({
 
 $FW.DOMReady(function(){
     NativeBridge.setTitle('游戏中心');
-    if($FW.Format.urlQuery().mallHead==true){
+    if($FW.Format.urlQuery().mallHead=="true"){
         if ($FW.Utils.shouldShowHeader())
             ReactDOM.render(<Header title={"游戏中心"} back_handler={backward}/>, document.getElementById('header'));
     }
     $FW.Ajax({
-        url: `http://game.9888.cn/index.php?r=polymerization/gamebanner&tag=tag1`,//banner
+        url: `http://game.9888.cn/index.php?r=polymerization/gamebanner&fr=shop&tag=tag1`,//banner
         success: (data) => {
             ReactDOM.render(<GameCenter bannerList={data.list}/>, document.getElementById('cnt'));
         }
