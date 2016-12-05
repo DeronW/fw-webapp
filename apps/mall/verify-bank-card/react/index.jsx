@@ -90,9 +90,11 @@ const BankInfo = React.createClass({
                 data: FormData,
                 success: function (data) {
                     if (data.code==1) {
+                        var query = $FW.Format.urlQuery();
+                        var bizNo = query.bizNo;
                         $FW.Component.Alert(data.msg);
                         setTimeout(function(){
-                            window.location.href="/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo;
+                            window.location.href="/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo+"&bizNo"+bizNo;
                         },2000)
                      } else {
                         $FW.Component.Alert(data.msg);
