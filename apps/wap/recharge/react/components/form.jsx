@@ -16,7 +16,8 @@ const Form = React.createClass({
             money: "",
             counting: 0,
             phoneBlur: true,
-            modifyPhoneShow: false
+            modifyPhoneShow: false,
+            getValidateNoInfo: ''
         }
     },
     componentDidUpdate: function() {
@@ -46,7 +47,10 @@ const Form = React.createClass({
                     phoneNo: this.state.phone
                 },
                 success: function (data) {
-                    this.setState({token: data.smsSerialNo})
+                    this.setState({
+                        token: data.smsSerialNo,
+                        getValidateNoInfo: data.rechargeToken
+                    })
                 }.bind(this)
             })
         }
@@ -104,7 +108,8 @@ const Form = React.createClass({
                     payAmount: this.state.money,
                     smsCode: this.state.verify_code,
                     phoneNo: this.state.phone,
-                    validateNo: this.state.token
+                    validateNo: this.state.token,
+                    rechargeToken: this.state.getValidateNoInfo
                 },
                 success: () => this.props.orderConfirm()
             })

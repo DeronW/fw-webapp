@@ -16,14 +16,14 @@ const AddBankCard = React.createClass({
             }.bind(this),2000);
             this.setState({active: false});
         }
-        else if(length < 19){
+        else if(length < 20){
             this.setState({"info":"不能输入小于19位数字!"});
             /*setTimeout(function(){
                 this.setState({"info":""});
             }.bind(this),2000);*/
             this.setState({active: false});
         }
-        else if(length ==19){
+        else if(length ==20){
             this.setState({"info":""});
             this.setState({active: true});
             return;
@@ -33,14 +33,16 @@ const AddBankCard = React.createClass({
     },
     nextStep:function() {
          if(!this.state.active) return;
+		  var query = $FW.Format.urlQuery();
+		  var bizNo = query.bizNo;
           $FW.Ajax({
             url:  '/mall/api/payment/v1/bank_card_info.json?accountNo='+this.state.val,
             enable_loading: true,
             success: function (data) {
-                if(data.code==1)
+                if(data.bankInfo)
                 {
-                    var data= data.bankCards;
-                    window.location.href="/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId
+                    var data= data.bankInfo;
+                    window.location.href="/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId+"&bizNo="+bizNo
                 }
                 else{
                     $FW.Component.Alert(data.msg);

@@ -10,11 +10,12 @@ const MALL_APP_NAMES = [
     'add-bank-card',
     'bind-bank-card',
     'verify-bank-card',
-	'send-msg-pay',
+    'send-msg-pay',
     'send-msg-bind',
     'new-order-confirm',
     'life-service',
     'service-bill',
+    'hot-activity',
     // 订单页面
     'order-list',
     'order-detail',
@@ -28,9 +29,8 @@ const MALL_APP_NAMES = [
     'coupon',
     'voucher',
     'new-home',
-
     // 产品相关页面
-	'new-product-detail',
+    'new-product-detail',
     'product-detail',
     'product-list',
     'product-vip-zone',
@@ -47,10 +47,8 @@ const MALL_APP_NAMES = [
     'guoqing',
     'zhuanpan20161024',
     'user-prize-record',
-    'game-guess'
-
-
-
+    'game-guess',
+    'game'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {

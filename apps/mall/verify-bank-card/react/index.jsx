@@ -89,13 +89,15 @@ const BankInfo = React.createClass({
                 enable_loading: true,
                 data: FormData,
                 success: function (data) {
-                    if (1) {
-                        $FW.Component.Alert('成功');
+                    if (data.code==1) {
+                        var query = $FW.Format.urlQuery();
+                        var bizNo = query.bizNo;
+                        $FW.Component.Alert(data.msg);
                         setTimeout(function(){
-                            window.location.href="/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo;
-                        },1000)
+                            window.location.href="/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo+"&bizNo"+bizNo;
+                        },2000)
                      } else {
-                        $FW.Component.Alert('失败');
+                        $FW.Component.Alert(data.msg);
                     }
                 }
            })

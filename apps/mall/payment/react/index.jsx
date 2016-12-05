@@ -1,11 +1,8 @@
 const Payment = React.createClass({
     getInitialState:function(){
-        return {
+		return {
             index:"quick_pay"
         }
-    },
-    componentDidMount:function(){
-
     },
     payCheck:function(arg){
         this.setState({index: arg});
@@ -48,9 +45,10 @@ const Payment = React.createClass({
             })
         }
         else{
+			var query = $FW.Format.urlQuery();
+			var bizNo = query.bizNo;
             let link = location.protocol + '//' + location.hostname +
-                '/static/mall/add-bank-card/index.html?userNo= &count=' + this.state.index;
-            alert(link);
+                '/static/mall/add-bank-card/index.html?bizNo=' + bizNo;
             location.href = link;
         }
     },

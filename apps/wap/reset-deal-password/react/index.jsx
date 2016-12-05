@@ -210,6 +210,9 @@ var PswFrom = React.createClass({
          return false;
          }*/
 
+        var reg = /^[\da-zA-Z]+$/;
+
+
         if(e.target.value !== "") {
             this.setState({
                 codeClickable: true
@@ -220,11 +223,38 @@ var PswFrom = React.createClass({
             });
         }
 
-        this.props.callbackCardNo(e.target.value);
+        if(this.props.propsUserInfo.userInfo.isCompanyAgent) {
+            if(e.target.value == '') {
+                this.setState({
+                    userId:''
+                });
+            }
+
+            if(!reg.test(e.target.value)) {
+                $FW.Component.Toast("输入正确的企业信息");
+                return false;
+            } else if(e.target.value.length > 18) {
+                $FW.Component.Toast("不能超过18位");
+                return false;
+            }
+
+            this.props.callbackCardNo(e.target.value);
+        } else {
+             this.props.callbackCardNo(e.target.value);
+        }
 
         this.setState({
             userId: e.target.value
         });
+
+    },
+    blurOnChangeInputId: function(e) {
+        if(this.props.propsUserInfo.userInfo.isCompanyAgent) {
+            if(e.target.value.length < 9) {
+                $FW.Component.Toast("企业信息不能小于9位");
+                return false;
+            }
+        }
     },
     render: function() {
         var userInfoData = this.props.propsUserInfo.userInfo;
@@ -241,8 +271,9 @@ var PswFrom = React.createClass({
                 <div className="input-block">
                     <span className="icon id-icon"></span>
                     <div className="text-block">
-                        <input type="text" placeholder="请输入身份证"
+                        <input type="text" placeholder={userInfoData.isCompanyAgent ?  "输入企业信息" : "请输入身份证" }
                                onChange={this.handlerOnChangeInputId}
+                               onBlur={this.blurOnChangeInputId}
                                value={this.state.userId}
                         />
                     </div>
