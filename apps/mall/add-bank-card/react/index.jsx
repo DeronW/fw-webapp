@@ -16,14 +16,14 @@ const AddBankCard = React.createClass({
             }.bind(this),2000);
             this.setState({active: false});
         }
-        else if(length < 19){
+        else if(length < 20){
             this.setState({"info":"不能输入小于19位数字!"});
             /*setTimeout(function(){
                 this.setState({"info":""});
             }.bind(this),2000);*/
             this.setState({active: false});
         }
-        else if(length ==19){
+        else if(length ==20){
             this.setState({"info":""});
             this.setState({active: true});
             return;
