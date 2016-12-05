@@ -64,7 +64,9 @@ const GameCenter = React.createClass({
 
 $FW.DOMReady(function(){
     NativeBridge.setTitle('游戏中心');
-    if($FW.Format.urlQuery().mallHead=="true"){
+    var ua = window.navigator.userAgent.toLowerCase();
+    var wxBrower=ua.match(/MicroMessenger/i) == 'micromessenger'?true:false;
+    if($FW.Format.urlQuery().mallHead=="true"&&!wxBrower){
         if ($FW.Utils.shouldShowHeader())
             ReactDOM.render(<Header title={"游戏中心"} back_handler={backward}/>, document.getElementById('header'));
     }
