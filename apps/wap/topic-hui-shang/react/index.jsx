@@ -1,7 +1,5 @@
 
-const API_PATH = document.getElementById('api-path').value;
-
-$FW.DOMReady(function() {    
+$FW.DOMReady(function() {
     if($FW.Browser.inApp()) {    
         document.getElementById("header").style.display = "none";
         document.getElementById("openUserBtn").style.display = "none";

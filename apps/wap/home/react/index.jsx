@@ -1,5 +1,3 @@
-const API_PATH = document.getElementById('api-path').value;
-
 /*
  通过hash来判断当前页面处于哪种状态
  #home 首页

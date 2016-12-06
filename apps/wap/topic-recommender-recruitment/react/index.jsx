@@ -1,5 +1,3 @@
-const API_PATH = document.getElementById('api-path').value;
-
 $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('推荐人招募计划')
