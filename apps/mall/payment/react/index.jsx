@@ -28,15 +28,16 @@ const Payment = React.createClass({
                 expireTime: '2'
             };
             $FW.Ajax({
-                url:  '/mall/api/payment/v1/bank_card_list.json',
+                url:  '/mall/api/payment/v1/ucf_pay.json',
                 enable_loading: true,
                 data: FormData,
                 success: function (data) {
+                    console.log(data);
                     if (1) {
                         $FW.Component.Alert('成功');
                         setTimeout(function(){
                             window.location.href="/static/mall/send-msg-pay/index.html?merchantNo="+data.merchantNo+"&mobileNo="+FormData.mobileNo
-                        },1500);
+                        },10000500);
 
                     } else {
                         $FW.Component.Alert('失败');
