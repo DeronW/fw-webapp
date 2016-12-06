@@ -8,7 +8,7 @@ const GameCenter = React.createClass({
         $FW.Ajax({
             url: `http://game.9888.cn/index.php?r=polymerization/gamelist&fr=shop`,//游戏中心列表
             success: (data) => {
-                    this.setState({gameList:data.list});
+                this.setState({gameList:data.list});
             }
         });
     },
@@ -37,7 +37,6 @@ const GameCenter = React.createClass({
         } else {
             banner = <div className="no-banner"></div>
         }
-        console.log(this.state.gameList);
         let listDiv = (list, index)=> {
             return (<div className="removeBox" key={index}>
                     <a href={list.game_url} className="removeMain">
@@ -61,12 +60,14 @@ const GameCenter = React.createClass({
         );
     }
 });
-
 $FW.DOMReady(function(){
     NativeBridge.setTitle('游戏中心');
-    if($FW.Format.urlQuery().mallHead=="true"){
+    var ua = window.navigator.userAgent.toLowerCase();
+    var wxBrower=ua.match(/MicroMessenger/i) == 'micromessenger'?true:false;
+    if($FW.Format.urlQuery().mallHead=="true"&&!wxBrower){
         if ($FW.Utils.shouldShowHeader())
-            ReactDOM.render(<Header title={"游戏中心"} back_handler={backward}/>, document.getElementById('header'));
+            ReactDOM.render(<Header title={"游戏中心"} back_handler={backward}/>, document.getElementById
+            ('header'));
     }
     $FW.Ajax({
         url: `http://game.9888.cn/index.php?r=polymerization/gamebanner&fr=shop&tag=tag1`,//banner
