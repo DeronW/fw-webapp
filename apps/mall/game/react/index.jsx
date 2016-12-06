@@ -7,6 +7,7 @@ const GameCenter = React.createClass({
     componentDidMount: function () {
         $FW.Ajax({
             url: `http://game.9888.cn/index.php?r=polymerization/gamelist&fr=shop`,//游戏中心列表
+            withCredentials: true,
             success: (data) => {
                     this.setState({gameList:data.list});
             }
@@ -70,6 +71,7 @@ $FW.DOMReady(function(){
     }
     $FW.Ajax({
         url: `http://game.9888.cn/index.php?r=polymerization/gamebanner&fr=shop&tag=tag1`,//banner
+        withCredentials: true,
         success: (data) => {
             ReactDOM.render(<GameCenter bannerList={data.list}/>, document.getElementById('cnt'));
         }
