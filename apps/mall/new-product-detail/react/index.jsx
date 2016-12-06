@@ -27,13 +27,14 @@ const Product = React.createClass({
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             if (scrollTop > 100) return false;
+            let id = document.querySelector('._style_header_fixed');
+            let style = scrollTop > 0 ?
+                id.style.cssText="background:rgba(255,255,255,1)!important"; id.innerHTML ="商品详情"
+				
+             :
+				document.querySelector('._style_header_fixed').style.cssText="background:transparent!important"; id.innerHTML =""
 
-            let style = scrollTop > 0 ? {
-                background: "rgba(255,255,255,.9)"
-            } : {
-                background: "transparent"
-            }
-			document.querySelector('._style_header_fixed').style.cssText=style
+			
             //this.setState(style);
         }.bind(this);
     },
