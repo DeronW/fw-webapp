@@ -21,6 +21,25 @@ const Product = React.createClass({
 		location.href = location.protocol + '//' + location.hostname + '/static/mall/shopping-cart/index.html'
 	},
 	
+	componentDidMount: function () {
+        window.onscroll = function () {
+            var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+
+            if (scrollTop > 100) return false;
+
+            let style = scrollTop > 0 ? {
+                background: "rgba(255,255,255,.9)",
+                logoImage: "images/m-logo.png",
+                avatarImage: "images/m-list-icon.png"
+            } : {
+                background: "transparent",
+                logoImage: "images/logo.png",
+                avatarImage: "images/list-icon.png"
+            }
+
+            this.setState(style);
+        }.bind(this);
+    },
 	render: function () {
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";

@@ -9,27 +9,20 @@ const AddBankCard = React.createClass({
     changeVal:function(e){
         var val = e.target.value;
         var length = val.length;
+		console.log(length);
+		var reg = /^\d{16}|\d{19}$/;
         if(isNaN(val)){
             this.setState({"info":"只能输入数字!"});
-            setTimeout(function(){
-                this.setState({"info":""});
-            }.bind(this),2000);
             this.setState({active: false});
         }
-        else if(length < 20){
-            this.setState({"info":"不能输入小于19位数字!"});
-            /*setTimeout(function(){
-                this.setState({"info":""});
-            }.bind(this),2000);*/
-            this.setState({active: false});
-        }
-        else if(length ==20){
+        else if(length==16||length==19){
             this.setState({"info":""});
             this.setState({active: true});
-            return;
         }
-        else{}
-        this.setState({"val":val});
+        else{
+            this.setState({"info":"请输入正确的银行卡号!"});
+            this.setState({active: false});
+        }
     },
     nextStep:function() {
          if(!this.state.active) return;
@@ -56,7 +49,7 @@ const AddBankCard = React.createClass({
                 <div className="add-bank-card-tip">请绑定账户本人的银行卡</div>
                 <div className="input-box">
                     <span className="card-icon"></span>
-                    <input type="text" placeholder="请输入银行卡号" name="title" defaultValue="" value={this.state.val} onChange={this.changeVal}/>
+                    <input type="text" placeholder="请输入银行卡号" name="title" defaultValue="" onChange={this.changeVal}/>
                 </div>
                 <label htmlFor="title" className="card-info">{this.state.info}</label>
                 <a className={this.state.active ? "next-step active":"next-step"} onClick={this.nextStep}>下一步</a>

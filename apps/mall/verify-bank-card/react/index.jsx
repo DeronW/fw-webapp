@@ -94,7 +94,7 @@ const BankInfo = React.createClass({
                         var bizNo = query.bizNo;
                         $FW.Component.Alert(data.msg);
                         setTimeout(function(){
-                            window.location.href="/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo+"&bizNo"+bizNo;
+                            window.location.href="/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo+"&bizNo="+bizNo;
                         },2000)
                      } else {
                         $FW.Component.Alert(data.msg);

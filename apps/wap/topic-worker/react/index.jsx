@@ -1,4 +1,58 @@
 const Worker = React.createClass({
+    getInitialState: function () {
+        return{
+            wealthImg:[],
+            northImg:[],
+            eastImg:[]
+        }
+    },
+    componentDidMount: function () {
+        this.ajaxWealthImg();
+        this.ajaxNorthImg();
+        this.ajaxEastImg();
+    },
+    ajaxWealthImg: function () {
+        $FW.Ajax({
+            url:'http://fore.9888.cn/cms/api/gyh_banner.php',
+            data:{
+                key:'0ca175b9c0f726a831d895e',
+                id:'28'
+            },
+            method:'GET',
+            success: function (data) {
+                console.log(data);
+                this.setState({wealthImg: data})
+            }
+        });
+    },
+    ajaxNorthImg: function () {
+        $FW.Ajax({
+            url:'http://fore.9888.cn/cms/api/gyh_banner.php',
+            data:{
+                key:'0ca175b9c0f726a831d895e',
+                id:'29'
+            },
+            method:'GET',
+            success: function (data) {
+                console.log(data);
+                this.setState({northImg: data})
+            }
+        });
+    },
+    ajaxEastImg: function () {
+        $FW.Ajax({
+            url:'http://fore.9888.cn/cms/api/gyh_banner.php',
+            data:{
+                key:'0ca175b9c0f726a831d895e',
+                id:'30'
+            },
+            method:'GET',
+            success: function (data) {
+                console.log(data);
+                this.setState({eastImg: data})
+            }
+        });
+    },
    render: function () {
        var introduction = [
            {
@@ -55,10 +109,11 @@ const Worker = React.createClass({
                            期间，四位高管还对诸如公司背景、产品逻辑、安全保障、用户体验和信息安全等用户关心的话题与到场用户进行了面对面的交流。</div>
                    </div>
                    <div className="wealthImg">
-                       <img src="./images/img1.png" alt=""/>
-                       <img src="./images/img1.png" alt=""/>
-                       <img src="./images/img1.png" alt=""/>
-                       <img src="./images/img1.png" alt=""/>
+                       {
+                           this.state.wealthImg.map((index,item) => {
+                               return <img key={index} src={item.thumb} alt=""/>
+                           })
+                       }
                    </div>
                    <a href="#" className="moreBtn">了解更多现场情况</a>
                </div>
@@ -92,8 +147,9 @@ const Worker = React.createClass({
        )
    } 
 });
-
-ReactDOM.render(
-   <Worker />,
-   document.getElementById('cnt')
-);
+$FW.DOMReady(function () {
+    ReactDOM.render(
+        <Worker />,
+        document.getElementById('cnt')
+    );
+});
