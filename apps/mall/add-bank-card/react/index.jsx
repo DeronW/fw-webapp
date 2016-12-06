@@ -9,7 +9,6 @@ const AddBankCard = React.createClass({
     changeVal:function(e){
         var val = e.target.value;
         var length = val.length;
-		console.log(length);
 		var reg = /^\d{16}|\d{19}$/;
         if(isNaN(val)){
             this.setState({"info":"只能输入数字!"});
