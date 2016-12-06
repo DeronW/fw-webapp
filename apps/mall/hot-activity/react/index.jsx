@@ -2,14 +2,14 @@ const HotActivity = React.createClass({
     render: function(){
         let data=this.props.data.activities;
         let list=(pro,key)=>{
-            return <a href={''+pro.bizNo}><img src={pro.img}/></a>
+            return <a href={`/static/mall/product-detail/index.html?bizNo=${pro.bizNo}`} key={key}><img src={pro.img||'images/default-product.jpg'}/></a>
         };
         let li=(li,index)=>{
                 return (
                         <div className="hot-li" key={index}>
-                            <a href={'?'+li.activity_id} className="hot-banner"><img src={li.img}/> </a>
-                            <div className="hot-list">{li.products(list)} </div>
-                            <a href={'?'+li.activity_id} className="hot-all">查看全部>></a>
+                            <a href={`/static/mall/activity/index.html?&bizNo=${li.bizNo}&activity_id=${li.activity_id}`} className="hot-banner"><img src={li.img}/> </a>
+                            <div className="hot-list">{li.products.map(list)}</div>
+                            <a href={`/static/mall/activity/index.html?&bizNo=${li.bizNo}&activity_id=${li.activity_id}`} className="hot-all">查看全部>></a>
                         </div>
                     )
             };
