@@ -2,7 +2,9 @@ const HotActivity = React.createClass({
     render: function(){
         let data=this.props.data.activities;
         let list=(pro,key)=>{
-            return <a href={`/static/mall/product-detail/index.html?bizNo=${pro.bizNo}`} key={key}><img src={pro.img||'images/default-product.jpg'}/></a>
+            if(key<3){
+                return <a href={`/static/mall/product-detail/index.html?bizNo=${pro.bizNo}`} key={key}><img src={pro.img||'images/default-product.jpg'}/></a>
+            }
         };
         let li=(li,index)=>{
                 return (
