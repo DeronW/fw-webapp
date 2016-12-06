@@ -1,5 +1,3 @@
-const API_PATH = document.getElementById("api-path").value;
-
 function fmOpt (sessionId) {
     window._fmOpt = {
         bd: true,

@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
 var Pop = React.createClass({
     render: function() {
         return (

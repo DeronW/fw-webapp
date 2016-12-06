@@ -69,10 +69,14 @@ const WAP_APP_NAMES = [
 module.exports = function (gulp, generate_task, CONSTANTS) {
     WAP_APP_NAMES.forEach(function (i) {
         let common_components = [
-            'loading.jsx', 'alert.jsx', 'wap/header.jsx', 'toast.jsx',
+            'use_strict.jsx', 'loading.jsx', 'alert.jsx', 'wap/header.jsx', 'toast.jsx',
             'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
         ];
-        let common_js = ['javascripts/wap/fw-ajax-error-handler.js'];
+
+        let common_js = [
+            'javascripts/wap/fw-ajax-error-handler.js',
+            'javascripts/wap/fw-common.js'
+        ];
 
         generate_task('wap', i, {
             debug: true,
@@ -81,7 +85,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             include_common_js: common_js
         });
         generate_task('wap', i, {
-            api_path: "http://m.9888.cn/",
+            api_path: "//m.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/wap/${i.name || i}/`,
             include_components: common_components,

@@ -54,10 +54,11 @@ const MALL_APP_NAMES = [
 module.exports = function (gulp, generate_task, CONSTANTS) {
     MALL_APP_NAMES.forEach(function (i) {
         var common_components = [
-            'mall/header.jsx', 'loading.jsx', 'alert.jsx', 'banner-group.jsx',
-            'toast.jsx'
+            'use_strict.jsx', 'mall/header.jsx', 'loading.jsx',
+            'alert.jsx', 'banner-group.jsx', 'toast.jsx'
         ];
-        var common_js = [
+
+        let common_js = [
             'javascripts/mall/fw-ajax-error-handler.js',
             'javascripts/mall/fw-common.js'
         ];
