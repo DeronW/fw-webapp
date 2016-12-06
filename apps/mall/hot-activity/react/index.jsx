@@ -1,29 +1,36 @@
 const HotActivity = React.createClass({
-    render: function(){        
-        let category = ['工场券','豆哥周边','虚拟类','饮食','家居生活','汽车用品','户外用品','手机数码','母婴教育','品质生活','全部商品'];        
-        let category_link_name = ['workshop','fantasy','virtualCard','diet','living','automobile','outdoor','mobileDigital','maternalInfantEducation','qualityLife',''];
-        
-        let category_item = category.map((name,index) =>{
-        	let category_link='http://mmall.9888.cn/static/mall/product-list/index.html?searchSourceType=0&category='+category_link_name[index]+'&title='+category[index];
-        	console.log(category_link);
-        	return (
-        		<a href={category_link} key={index}><img className="category-img" src={"images/icon-" + (index+1) + ".png"}/><span className="category-name">{name}</span></a>
-        	)
-        	
-        });
+    render: function(){
+        let data=this.props.data.activities;
+        let list=(pro,key)=>{
+            return <a href={''+pro.bizNo}><img src={pro.img}/></a>
+        };
+        let li=(li,index)=>{
             return (
-                <div className="category-items">
-                    {category_item}
-                </div>
+                    <div className="hot-li" key={index}>
+                        <a href={'?'+li.activity_id} className="hot-banner"><img src={li.img}/> </a>
+                        <div className="hot-list">{li.products(list)} </div>
+                        <a href={'?'+li.activity_id} className="hot-all">查看全部>></a>
+                    </div>
+                )
+        };
+
+            return (
+               <div className="hot-activity">
+                   {data.map(li)}
+               </div>
       )
     }
 });
-
 $FW.DOMReady(function(){
     NativeBridge.setTitle('热门活动');
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"热门活动"}/>, document.getElementById('header'));
-    ReactDOM.render(<HotActivity/>, document.getElementById('cnt'));
+    $FW.Ajax({
+        url: `${API_PATH}api/index/v1/activities.json`,//热门活动
+        success: (data) => {
+            ReactDOM.render(<HotActivity data={dataAjax} />, document.getElementById('cnt'));
+        }
+    });
 });
 
 function backward(){
