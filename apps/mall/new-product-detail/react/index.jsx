@@ -29,10 +29,10 @@ const Product = React.createClass({
             if (scrollTop > 100) return false;
             let id = document.querySelector('._style_header_fixed');
             if(scrollTop > 0) {
-                id.style.cssText="background:rgba(255,255,255,1)!important";
+                id.setAttribute("class", "no_clarity");
             }
             else{
-                id.style.cssText="background:transparent!important";
+                id.setAttribute("class", "clarity");
             }
         }.bind(this);
     },
