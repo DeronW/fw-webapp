@@ -37,7 +37,6 @@ const GameCenter = React.createClass({
         } else {
             banner = <div className="no-banner"></div>
         }
-        console.log(this.state.gameList);
         let listDiv = (list, index)=> {
             return (<div className="removeBox" key={index}>
                     <a href={list.game_url} className="removeMain">
@@ -61,7 +60,6 @@ const GameCenter = React.createClass({
         );
     }
 });
-
 $FW.DOMReady(function(){
     NativeBridge.setTitle('游戏中心');
     var ua = window.navigator.userAgent.toLowerCase();
