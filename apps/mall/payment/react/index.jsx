@@ -66,19 +66,20 @@ const Payment = React.createClass({
             </div>
         );
 
-        var payMethods = data.bankCards==null? data.bankCards.map((n, index) => {
-            let accountNo = this.split(n.accountNo);
-            return (
-                 <div className="pay-item" onClick={this.payCheck.bind(this,index+1)}>
-                     <div className="pay-icon"><img src="images/bankpay.jpg"/></div>
-                         <div className="pay-name">
-                             <div className="pay-title">{n.bankCardName} 尾号{accountNo}</div>
-                             <div className="pay-subtitle">已绑定银行卡（支付服务由先锋金融提供）</div>
-                         </div>
-                     <div className={this.state.index==index+1 ? "pay-check active" : "pay-check"} ></div>
-                 </div>
-            )
-        }):quick_pay;
+        var payMethods = data.bankCards==null? quick_pay:
+            data.bankCards.map((n, index) => {
+                let accountNo = this.split(n.accountNo);
+                return (
+                    <div className="pay-item" onClick={this.payCheck.bind(this,index+1)}>
+                        <div className="pay-icon"><img src="images/bankpay.jpg"/></div>
+                        <div className="pay-name">
+                            <div className="pay-title">{n.bankCardName} 尾号{accountNo}</div>
+                            <div className="pay-subtitle">已绑定银行卡（支付服务由先锋金融提供）</div>
+                        </div>
+                        <div className={this.state.index==index+1 ? "pay-check active" : "pay-check"} ></div>
+                    </div>
+                )
+            });
 
         return (
              <div className="order-payment">
