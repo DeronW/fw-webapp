@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById("api-path").value;
-
 const PAGE_COUNT = 20;
 
 function inApp() {

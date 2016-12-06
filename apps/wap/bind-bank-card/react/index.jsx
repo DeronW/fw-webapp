@@ -1,5 +1,3 @@
-const API_PATH = document.getElementById("api-path").value;
-
 const BindBankCard = React.createClass({
     getInitialState: function () {
         return {

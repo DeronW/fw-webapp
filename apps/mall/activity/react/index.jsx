@@ -1,5 +1,3 @@
-const API_PATH = document.getElementById('api-path').value;
-
 $FW.DOMReady(function () {
 
     let bizNo = $FW.Format.urlQuery().bizNo;

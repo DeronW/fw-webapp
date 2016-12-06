@@ -1,7 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
 var TopNav = React.createClass({
     render: function () {
         return (
@@ -75,7 +71,7 @@ var PswFrom = React.createClass({
                 destPhoneNo: this.state.phoneNumber,
                 isVms: this.state.isVmsType
             },
-            success: ()=> null
+            success: () => null
         })
     },
     handerChangeInput: function (event) {
@@ -224,18 +220,17 @@ var Pop = React.createClass({
 $FW.DOMReady(function () {
 
 
-
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {
-            if(data.openStatus !=3 ) {
+            if (data.openStatus != 3) {
                 window.location.href = "http://m.9888.cn/mpwap/top/index.do"
             } else {
                 ReactDOM.render(
                     <Body activity={data}/>,
                     document.getElementById("cnt")
                 );
-            }        
+            }
         }
     });
 });

@@ -9,7 +9,6 @@ const AddBankCard = React.createClass({
     changeVal:function(e){
         var val = e.target.value;
         var length = val.length;
-		console.log(length);
 		var reg = /^\d{16}|\d{19}$/;
         if(isNaN(val)){
             this.setState({"info":"只能输入数字!"});
@@ -29,7 +28,7 @@ const AddBankCard = React.createClass({
 		  var query = $FW.Format.urlQuery();
 		  var bizNo = query.bizNo;
           $FW.Ajax({
-            url:  '/mall/api/payment/v1/bank_card_info.json?accountNo='+this.state.val,
+            url:  API_PATH +'/mall/api/payment/v1/bank_card_info.json?accountNo='+this.state.val,
             enable_loading: true,
             success: function (data) {
                 if(data.bankInfo)

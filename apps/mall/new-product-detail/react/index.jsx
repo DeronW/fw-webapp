@@ -5,7 +5,8 @@ const Product = React.createClass({
 			show: true,
 			showOverlayDef:false,
 			showOverlay:false,
-            value:1
+            value:1,
+            background: "transparent"
 			}
     },
 
@@ -26,18 +27,13 @@ const Product = React.createClass({
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             if (scrollTop > 100) return false;
-
-            let style = scrollTop > 0 ? {
-                background: "rgba(255,255,255,.9)",
-                logoImage: "images/m-logo.png",
-                avatarImage: "images/m-list-icon.png"
-            } : {
-                background: "transparent",
-                logoImage: "images/logo.png",
-                avatarImage: "images/list-icon.png"
+            let id = document.querySelector('._style_header_fixed');
+            if(scrollTop > 10) {
+                id.setAttribute("class", "no_clarity _style_header_fixed");
             }
-
-            this.setState(style);
+            else{
+                id.setAttribute("class", "clarity _style_header_fixed");
+            }
         }.bind(this);
     },
 	render: function () {

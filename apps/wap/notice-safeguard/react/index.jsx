@@ -1,6 +1,3 @@
-'use strict';
-const API_PATH = document.getElementById('api-path').value;
-
 const NotSafeGuar =React.createClass({
     render: function () {
         var safeBox1=<div className="safe-box1"><img src="images/img1@safe.png"/></div>;
