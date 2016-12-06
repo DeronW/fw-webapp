@@ -28,11 +28,11 @@ const Payment = React.createClass({
                 expireTime: '2'
             };
             $FW.Ajax({
-                url:  '/mall/api/payment/v1/ucf_pay.json',
+                url:  API_PATH +'/mall/api/payment/v1/ucf_pay.json',
                 enable_loading: true,
                 data: FormData,
                 success: function (data) {
-                    console.log(data);
+                    alert(data);
                     if (1) {
                         $FW.Component.Alert('成功');
                         setTimeout(function(){
@@ -136,11 +136,10 @@ $FW.DOMReady(function () {
 
 
         $FW.Ajax({
-            url:  '/mall/api/payment/v1/bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
+            url: API_PATH + '/mall/api/payment/v1/bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
             enable_loading: true,
             success: function (data) {
                  ReactDOM.render(<Payment data={data}/>, document.getElementById('cnt'));
-                 console.log(JSON.stringify(data));
                 }
          })
 });
