@@ -27,7 +27,7 @@ $FW.DOMReady(function(){
     $FW.Ajax({
         url: `${API_PATH}api/index/v1/activities.json`,//热门活动
         success: (data) => {
-            ReactDOM.render(<HotActivity data={dataAjax} />, document.getElementById('cnt'));
+            ReactDOM.render(<HotActivity data={data} />, document.getElementById('cnt'));
         }
     });
 });
