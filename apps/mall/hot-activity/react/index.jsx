@@ -25,7 +25,7 @@ $FW.DOMReady(function(){
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"热门活动"}/>, document.getElementById('header'));
     $FW.Ajax({
-        url: `${API_PATH}api/index/v1/activities.json`,//热门活动
+        url: `${API_PATH}mall/api/index/v1/activities.json`,//热门活动
         success: (data) => {
             ReactDOM.render(<HotActivity data={data} />, document.getElementById('cnt'));
         }
