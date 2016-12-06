@@ -31,23 +31,23 @@ a {
     color:#4aa1f9;
   }
     .hot-list{
+      display:table;
       width:680px;
       height:220px;
       padding:20px 20px 3px;
       overflow: hidden;
       a{
-        display:inline-block;
+        float:left;
         height:220px;
         width:220px;
         &:nth-child(2){
           margin:0 20px;
-          img{
-            height:218px;
-            width:218px;
-            border:1px solid #eee;
-          }
         }
-
+        img{
+          height:218px;
+          width:218px;
+          border:1px solid #eee;
+        }
       }
     }
   }
