@@ -28,11 +28,11 @@ const Product = React.createClass({
 
             if (scrollTop > 100) return false;
             let id = document.querySelector('._style_header_fixed');
-            if(scrollTop > 0) {
-                id.setAttribute("class", "no_clarity");
+            if(scrollTop > 10) {
+                id.setAttribute("class", "no_clarity _style_header_fixed");
             }
             else{
-                id.setAttribute("class", "clarity");
+                id.setAttribute("class", "clarity _style_header_fixed");
             }
         }.bind(this);
     },
