@@ -1,4 +1,4 @@
-const Worker = React.createClass({
+const WorkerBox = React.createClass({
     getInitialState: function () {
         return{
             wealthImg:[],
@@ -12,46 +12,29 @@ const Worker = React.createClass({
         this.ajaxEastImg();
     },
     ajaxWealthImg: function () {
-        $FW.Ajax({
-            url:'http://fore.9888.cn/cms/api/gyh_banner.php',
-            data:{
-                key:'0ca175b9c0f726a831d895e',
-                id:'28'
-            },
-            method:'GET',
-            success: function (data) {
-                console.log(data);
-                this.setState({wealthImg: data})
-            }
-        });
+        //$FW.Ajax({
+        //    url:'http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=28',
+        //    method:'GET',
+        //    success: (data) => {
+        //        this.setState({wealthImg: data});
+        //    }
+        //});
+        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=28&callback=', function (data) {
+            //console.log(data);
+            this.setState({wealthImg: data});
+        }.bind(this))
     },
     ajaxNorthImg: function () {
-        $FW.Ajax({
-            url:'http://fore.9888.cn/cms/api/gyh_banner.php',
-            data:{
-                key:'0ca175b9c0f726a831d895e',
-                id:'29'
-            },
-            method:'GET',
-            success: function (data) {
-                console.log(data);
-                this.setState({northImg: data})
-            }
-        });
+        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=29&callback=', function (data) {
+            //console.log(data);
+            this.setState({northImg: data});
+        }.bind(this))
     },
     ajaxEastImg: function () {
-        $FW.Ajax({
-            url:'http://fore.9888.cn/cms/api/gyh_banner.php',
-            data:{
-                key:'0ca175b9c0f726a831d895e',
-                id:'30'
-            },
-            method:'GET',
-            success: function (data) {
-                console.log(data);
-                this.setState({eastImg: data})
-            }
-        });
+        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=30&callback=', function (data) {
+            //console.log(data);
+            this.setState({eastImg: data});
+        }.bind(this))
     },
    render: function () {
        var introduction = [
@@ -110,7 +93,7 @@ const Worker = React.createClass({
                    </div>
                    <div className="wealthImg">
                        {
-                           this.state.wealthImg.map((index,item) => {
+                           this.state.wealthImg.map((item,index) => {
                                return <img key={index} src={item.thumb} alt=""/>
                            })
                        }
@@ -121,18 +104,20 @@ const Worker = React.createClass({
                    <div className="northEastTitle">大连站、哈尔滨站——走进东北</div>
                    <div className="northTitle">12月8日，“工友汇”第二站走进美丽的海港城市——大连。</div>
                    <div className="northImg">
-                       <img src="./images/img1.png" alt=""/>
-                       <img src="./images/img1.png" alt=""/>
-                       <img src="./images/img1.png" alt=""/>
-                       <img src="./images/img1.png" alt=""/>
+                       {
+                           this.state.northImg.map((item,index) => {
+                               return <img key={index} src={item.thumb} alt=""/>
+                           })
+                       }
                    </div>
                    <a href="#" className="moreBtn">了解更多现场情况</a>
                    <div className="northTitle">12月10日，工友汇”第三站走进童话的冰雪之城——哈尔滨。</div>
                    <div className="northImg">
-                       <img src="./images/img1.png" alt=""/>
-                       <img src="./images/img1.png" alt=""/>
-                       <img src="./images/img1.png" alt=""/>
-                       <img src="./images/img1.png" alt=""/>
+                       {
+                           this.state.eastImg.map((item,index) => {
+                               return <img key={index} src={item.thumb} alt=""/>
+                           })
+                       }
                    </div>
                    <a href="#" className="moreBtn">了解更多现场情况</a>
                </div>
@@ -149,7 +134,7 @@ const Worker = React.createClass({
 });
 $FW.DOMReady(function () {
     ReactDOM.render(
-        <Worker />,
-        document.getElementById('cnt')
+        <WorkerBox />,
+        document.getElementById("cnt")
     );
 });
