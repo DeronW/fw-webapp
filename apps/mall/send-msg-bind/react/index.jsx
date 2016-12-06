@@ -60,7 +60,7 @@ const SendCode = React.createClass({
 
     //加载完成之后立刻倒计时
     componentDidMount: function() {
-        this.setState({reSend: false});  this.reSend();
+         this.reSend();this.setState({reSend: false});
     },
 
     //倒计时完成终止
@@ -94,9 +94,12 @@ const SendCode = React.createClass({
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
-                if(data) alert(1)
-                //var data= data.bankCards;
-                //window.location.href="/static/mall/order-complete/index.html"
+                $FW.Component.Alert('您已经完成绑定');
+                var query = $FW.Format.urlQuery();
+                var bizNo = query.bizNo;
+                setTimeout(function(){
+                    window.location.href="/static/mall/payment/index.html?bizNo="+bizNo
+                },2000)
             }
         })
     },

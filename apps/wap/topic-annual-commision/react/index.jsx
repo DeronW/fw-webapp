@@ -4,10 +4,6 @@ $FW.DOMReady(function () {
     } else {
         ReactDOM.render(<Header title={'年化佣金小贴士'}/>, document.getElementById('header'))
     }
-
-    if ($FW.Browser.inIOS()) {
-        document.querySelector('apple-limit')[0].style.display = 'block';
-    }
 });
 
 function gotoMall() {
