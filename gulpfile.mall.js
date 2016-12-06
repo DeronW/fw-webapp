@@ -71,7 +71,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
         generate_task('mall', i, {
             cmd_prefix: 'pack',
-            api_path: 'http://mmall.9888.cn/',
+            api_path: 'https://mmall.9888.cn/',
             cdn_prefix: '/static/mall/' + i + '/',
             include_components: common_components,
             include_common_js: common_js
