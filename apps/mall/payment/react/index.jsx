@@ -37,7 +37,7 @@ const Payment = React.createClass({
                         $FW.Component.Alert('成功');
                         setTimeout(function(){
                             window.location.href="/static/mall/send-msg-pay/index.html?merchantNo="+data.merchantNo+"&mobileNo="+FormData.mobileNo
-                        },10000500);
+                        },2500);
 
                     } else {
                         $FW.Component.Alert('失败');
