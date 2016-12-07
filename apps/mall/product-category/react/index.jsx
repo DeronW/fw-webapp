@@ -1,3 +1,14 @@
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 const SearchPage = React.createClass({
     render: function(){        
         let category = ['工场券','豆哥周边','虚拟类','饮食','家居生活','汽车用品','户外用品','手机数码','母婴教育','品质生活','全部商品'];        
