@@ -98,7 +98,8 @@ const SendCode = React.createClass({
                 var query = $FW.Format.urlQuery();
                 var bizNo = query.bizNo;
                 setTimeout(function(){
-                    window.location.href="/static/mall/payment/index.html?bizNo="+bizNo
+                    location.href = location.protocol + '//' + location.hostname +
+					"/static/mall/payment/index.html?bizNo="+bizNo
                 },2000)
             }
         })

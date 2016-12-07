@@ -85,7 +85,7 @@ const BankInfo = React.createClass({
             bankName: this.state.bankName
         };
            $FW.Ajax({
-                url:  '/mall/api/payment/v1/binding_bank_card.json',
+                url:  API_PATH +'/mall/api/payment/v1/binding_bank_card.json',
                 enable_loading: true,
                 data: FormData,
                 success: function (data) {
@@ -94,7 +94,8 @@ const BankInfo = React.createClass({
                         var bizNo = query.bizNo;
                         $FW.Component.Alert(data.msg);
                         setTimeout(function(){
-                            window.location.href="/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo+"&bizNo="+bizNo;
+                            location.href = location.protocol + '//' + location.hostname +
+							"/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo+"&bizNo="+bizNo;
                         },2000)
                      } else {
                         $FW.Component.Alert(data.msg);
