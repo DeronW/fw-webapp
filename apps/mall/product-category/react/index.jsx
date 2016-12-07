@@ -51,7 +51,7 @@ $FW.DOMReady(function(){
 });
 
 function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://mmall.9888.cn/static/mall/new-home/index.html'
 }
 
 

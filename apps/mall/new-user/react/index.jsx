@@ -1,3 +1,14 @@
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 const User = React.createClass({
     getInitialState:function(){
         return {
@@ -74,15 +85,15 @@ const User = React.createClass({
                    <div className="seperate-line"></div>
                </div>
                <div className="user-personal-items">
-                   <a className="personal-item">
+                   <a className="personal-item" href="/static/mall/new-deliver-address/index.html?preview=true">
                        <span className="item-name item-icon6">收货地址</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item">
+                   <a className="personal-item" href="/static/mall/voucher/index.html">
                        <span className="item-name item-icon7">兑换券</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item">
+                   <a className="personal-item" href="/static/mall/voucher/index.html">
                        <span className="item-name item-icon8">银行卡</span>
                        <span className="jump-arrow"></span>
                        <span className="bank-card-status">已绑定</span>

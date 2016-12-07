@@ -36,6 +36,7 @@ const SendCode = React.createClass({
     decline: function() {
         this.setState({value: this.state.value - 1});
     },
+	
     //倒计时
     tick: function() {
         this.interval = setInterval(this.decline, 1000);
