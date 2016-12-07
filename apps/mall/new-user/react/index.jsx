@@ -93,7 +93,7 @@ const User = React.createClass({
                        <span className="item-name item-icon7">兑换券</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item" href="/static/mall/voucher/index.html">
+                   <a className="personal-item" href="/static/mall/my-bank-card/index.html">
                        <span className="item-name item-icon8">银行卡</span>
                        <span className="jump-arrow"></span>
                        <span className="bank-card-status">已绑定</span>
@@ -141,7 +141,7 @@ const User = React.createClass({
 const HotProduct = React.createClass({
     render:function(){
         return (
-            <a className="product-wrap">
+            <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo='>
                  <img src="images/product.jpg"/>
                  <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
                  <span className="product-price">12267工分</span>

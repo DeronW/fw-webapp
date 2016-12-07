@@ -145,7 +145,7 @@ $FW.DOMReady(function() {
         ReactDOM.render(<Header title={"兑换券"} back_handler={backward}/>, document.getElementById('header'));
     $FW.Ajax({
         //url: API_PATH + 'mall/api/member/v1/user.json',
-        url:"http://localhost/nginx-1.9.12/html/user.json",
+        url:API_PATH + 'mall/api/member/v1/user.json,
         enable_loading: true,
         success: function (data) {
             console.log(data)
