@@ -1,8 +1,8 @@
 {
   "name": "webapp",
+  "author": "web front group",
   "private": true,
   "dependencies": {
-
   },
   "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",
