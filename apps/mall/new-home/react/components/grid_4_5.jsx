@@ -89,7 +89,7 @@ const Grid_4_5 = React.createClass({
                                     </div>
                                     <div className="theme4-btm-middle-top-info">
                                         <span className="theme4-btm-product-title theme4-btm-product-title-color2">{this.state.productSixthTitle}</span>
-                                        <span className="theme4-btm-product-price">{this.state.productSixthPrice==0.00? null:"&yen;"+this.state.productSixthPrice+"+"}+{this.state.productSixthScore}工分</span>
+                                        <span className="theme4-btm-product-price">{this.state.productSixthPrice==0.00? null:"&yen;"+this.state.productSixthPrice+"+"}{this.state.productSixthScore}工分</span>
                                         <span className="product-purchase theme4-btm-product-title-color2">点击抢购<span className="tri tri-btm-color2"></span></span>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@ const Grid_4_5 = React.createClass({
                                     </div>
                                     <div className="theme4-btm-middle-top-info">
                                         <span className="theme4-btm-product-title theme4-btm-product-title-color3">{this.state.productSeventhTitle}</span>
-                                        <span className="theme4-btm-product-price">&yen;{this.state.productSeventhPrice==0.00? null:"&yen;"+this.state.productSeventhPrice+"+"}+{this.state.productSeventhScore}工分</span>
+                                        <span className="theme4-btm-product-price">&yen;{this.state.productSeventhPrice==0.00? null:"&yen;"+this.state.productSeventhPrice+"+"}{this.state.productSeventhScore}工分</span>
                                         <span className="product-purchase theme4-btm-product-title-color3">点击抢购<span className="tri tri-btm-color3"></span></span>
                                     </div>
                                 </div>

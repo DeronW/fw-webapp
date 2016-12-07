@@ -84,7 +84,7 @@ const Mall = React.createClass({
                             <img className="search-icon" src="images/search-icon.png"/>
                             <div className="search-bar">请输入关键字</div>
                         </a>
-                        <a className="index-avatar" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }>
+                        <a className="index-avatar" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }>
                             <img src={this.state.avatarImage}/></a>
                     </div>
                 </div>
