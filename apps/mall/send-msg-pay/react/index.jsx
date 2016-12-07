@@ -53,8 +53,7 @@ const SendCode = React.createClass({
             success: function (data) {
                 if(data.code=10000){
                     if(!this.state.reSend) return;
-                    this.setState({value: 60});
-                    this.setState({reSend: false});
+                    this.setState({value: 60,reSend: false});
                     this.interval = setInterval(this.tick, 1000);
                 }
              }.bind(this)
@@ -70,8 +69,7 @@ const SendCode = React.createClass({
     componentDidUpdate:function() {
         if(this.state.value==55){
             clearInterval(this.interval);
-            this.setState({value: "获取验证码"});
-            this.setState({reSend: true});
+            this.setState({value: "获取验证码",reSend: true});
         }
     },
 
@@ -96,13 +94,14 @@ const SendCode = React.createClass({
             checkCode: this.state.code
         }
         $FW.Ajax({
-            url:  './ucf_pay.json',
+            url:  API_PATH +'/mall/api/payment/v1/ucf_pay.json',
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
                 alert(data.code);
                 //var data= data.bankCards;
-                window.location.href="/static/mall/order-complete/index.html"
+                window.location.href = location.protocol + '//' + location.hostname +
+				"/static/mall/order-complete/index.html"
             }
         })
     },
