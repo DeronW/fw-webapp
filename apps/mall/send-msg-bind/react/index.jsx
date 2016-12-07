@@ -48,7 +48,7 @@ const SendCode = React.createClass({
     //重新发送验证码
     reSend: function() {
          $FW.Ajax({
-            url:  '/mall/api/payment/v1/SendPhoneVerifyPay.json',
+            url:  API_PATH + '/mall/api/payment/v1/SendPhoneVerifyPay.json',
             enable_loading: true,
             success: function (data) {
                     if(!this.state.reSend) return;
