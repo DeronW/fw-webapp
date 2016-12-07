@@ -34,7 +34,8 @@ const AddBankCard = React.createClass({
                 if(data.bankInfo)
                 {
                     var data= data.bankInfo;
-                    window.location.href="/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId+"&bizNo="+bizNo
+                    location.href = location.protocol + '//' + location.hostname +
+					"/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId+"&bizNo="+bizNo
                 }
                 else{
                     $FW.Component.Alert(data.msg);
