@@ -56,31 +56,31 @@ const User = React.createClass({
                    <img className="profile-img" src="images/boy.jpg"/>
                    <div className="user-name">蓝月蓝月<span className="user-level"><img src="images/usercenter_vip1_icon.png"/></span></div>
                    <div className="available-score">可用工分<span className="gongfeng">998544448</span></div>
-                   <a className="account-setting">账户设置</a>
+                   <a className="account-setting" href="/static/mall/account-setting/index.html#shipping">账户设置</a>
                </div>
                <div className="product-status">
-                   <a className="product-status-item">
+                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#unpaid">
                        <img src="images/icon1.jpg"/>
                        <span className="status-name">待付款</span>
                        <span className="remind-circle">2</span>
                    </a>
-                   <a className="product-status-item">
+                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#prepare">
                        <img src="images/icon2.jpg"/>
                        <span className="status-name">待发货</span>
                        <span className="remind-circle">2</span>
                    </a>
-                   <a className="product-status-item">
+                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#shipping">
                        <img src="images/icon3.jpg"/>
                        <span className="status-name">待收货</span>
                        <span className="remind-circle">2</span>
                    </a>
-                   <a className="product-status-item">
+                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#complete">
                        <img src="images/icon4.jpg"/>
                        <span className="status-name">已完成</span>
                    </a>
                    <a className="all-orders">
                        <img src="images/icon5.jpg"/>
-                       <span className="status-name">全部订单</span>
+                       <span className="status-name" href="/static/mall/new-order-list/index.html#all">全部订单</span>
                    </a>
                    <div className="seperate-line"></div>
                </div>
@@ -99,7 +99,7 @@ const User = React.createClass({
                        <span className="bank-card-status">已绑定</span>
                    </a>
                </div>
-               <div className="icon-list">
+               <div className="icon-list" href="/static/mall/user-prize-record/index.html">
                    <a className="list-box">
                        <img src="images/icon9.jpg"/>
                        <span className="box-title1">抽奖记录</span>
