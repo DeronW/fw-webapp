@@ -32,11 +32,10 @@ const Payment = React.createClass({
                 enable_loading: true,
                 data: FormData,
                 success: function (data) {
-                    alert(data);
                     if (1) {
                         $FW.Component.Alert('成功');
                         setTimeout(function(){
-                            window.location.href="/static/mall/send-msg-pay/index.html?merchantNo="+data.merchantNo+"&mobileNo="+FormData.mobileNo
+                            window.location.href= API_PATH +"/static/mall/send-msg-pay/index.html?merchantNo="+data.merchantNo+"&mobileNo="+FormData.mobileNo
                         },2500);
 
                     } else {
