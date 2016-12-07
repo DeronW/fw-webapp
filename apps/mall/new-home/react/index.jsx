@@ -94,7 +94,7 @@ const Mall = React.createClass({
                     <a className=""><img src="images/nav-2.png"/><span>豆哥周边</span></a>
                     <a className=""><img src="images/nav-3.png"/><span>工场券</span></a>
                     <a onClick={() => gotoHandler("/static/mall/hot-activity/index.html", true)}><img src="images/nav-4.png"/><span>热门活动</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}><span>生活服务</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}><img src="images/nav-5.png"/><span>生活服务</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img
                         src="images/nav-6.png"/><span>充值中心</span><span className="hot-tag"></span></a>
                     <a onClick={() => gotoHandler("/static/mall/zhuanpan20161024/index.html?" + (+new Date()), true)}><img
