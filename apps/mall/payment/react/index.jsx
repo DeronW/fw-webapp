@@ -32,17 +32,12 @@ const Payment = React.createClass({
                 enable_loading: true,
                 data: FormData,
                 success: function (data) {
-                    if (1) {
                         $FW.Component.Alert('成功');
                         setTimeout(function(){
                             location.href= location.protocol + '//' + location.hostname +
 							"/static/mall/send-msg-pay/index.html?merchantNo="+data.merchantNo+"&mobileNo="+FormData.mobileNo
                         },2500);
-
-                    } else {
-                        $FW.Component.Alert('失败');
-                    }
-                }
+                 }
             })
         }
         else{
@@ -117,9 +112,7 @@ const Payment = React.createClass({
                         </div>
                         <div className={this.state.index==3 ? "pay-check active" : "pay-check"}></div>
                     </div>
-
-
-                     */}
+                    */}
                 </div>
                 <div className="pay-bar">
                     <a className="pay-btn" onClick={this.payHandler}>确认支付</a>

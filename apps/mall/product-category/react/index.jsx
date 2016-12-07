@@ -1,3 +1,14 @@
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 const SearchPage = React.createClass({
     render: function(){        
         let category = ['工场券','豆哥周边','虚拟类','饮食','家居生活','汽车用品','户外用品','手机数码','母婴教育','品质生活','全部商品'];        
@@ -12,8 +23,21 @@ const SearchPage = React.createClass({
         	
         });
             return (
-                <div className="category-items">
-                    {category_item}
+                <div>
+                    <div className="category-items">
+                        {category_item}
+                    </div>
+                    <div className="fixed-nav">
+                        <a className="fixed-nav-link fixed-nav-link1 active"
+                           onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
+                        <a className="fixed-nav-link fixed-nav-link2"
+                           onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
+                        <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
+                        <a className="fixed-nav-link fixed-nav-link3"
+                           onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
+                        <a className="fixed-nav-link fixed-nav-link4"
+                           onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
+                    </div>
                 </div>
       )
     }
@@ -27,7 +51,7 @@ $FW.DOMReady(function(){
 });
 
 function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://mmall.9888.cn/static/mall/new-home/index.html'
 }
 
 
