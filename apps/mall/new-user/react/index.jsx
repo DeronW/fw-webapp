@@ -141,7 +141,7 @@ const User = React.createClass({
 const HotProduct = React.createClass({
     render:function(){
         return (
-            <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo='>
+            <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=')}>
                  <img src="images/product.jpg"/>
                  <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
                  <span className="product-price">12267工分</span>
