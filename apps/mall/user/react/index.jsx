@@ -320,7 +320,7 @@ function back_handler() {
 }
 
 
-//$FW.setLoginRedirect('/static/mall/home/index.html');
+$FW.setLoginRedirect('/static/mall/home/index.html');
 
 
 //window.onNativeMessageReceive = function (msg) {
