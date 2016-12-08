@@ -84,17 +84,17 @@ const Mall = React.createClass({
                             <img className="search-icon" src="images/search-icon.png"/>
                             <div className="search-bar">请输入关键字</div>
                         </a>
-                        <a className="index-avatar" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }>
+                        <a className="index-avatar" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }>
                             <img src={this.state.avatarImage}/></a>
                     </div>
                 </div>
                 <div className="head-nav">
                     <a onClick={() => gotoHandler("/static/mall/product-vip-zone/index.html")}><img
                         src="images/nav-1.png"/><span>VIP专区</span></a>
-                    <a className=""><img src="images/nav-2.png"/><span>豆哥周边</span></a>
-                    <a className=""><img src="images/nav-3.png"/><span>工场券</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=豆哥周边")}><img src="images/nav-2.png"/><span>豆哥周边</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=工场券")}><img src="images/nav-3.png"/><span>工场券</span></a>
                     <a onClick={() => gotoHandler("/static/mall/hot-activity/index.html", true)}><img src="images/nav-4.png"/><span>热门活动</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}/><span>生活服务</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}><img src="images/nav-5.png"/><span>生活服务</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img
                         src="images/nav-6.png"/><span>充值中心</span><span className="hot-tag"></span></a>
                     <a onClick={() => gotoHandler("/static/mall/zhuanpan20161024/index.html?" + (+new Date()), true)}><img

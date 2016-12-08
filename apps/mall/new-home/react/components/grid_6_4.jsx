@@ -21,7 +21,7 @@ const Grid_6_4 = React.createClass({
                     <div className="theme3-top-product-wrap">
                         <div className="theme3-top-product-info">
                             <span className={"theme3-top-product-title theme3-top-product-title-color"+parseInt(index+1)}>{product.abbreviation}</span>
-                            <span className="theme3-top-product-price">&yen;{product.rmbPrice}+{product.score}工分</span>
+                            <span className="theme3-top-product-price">{product.rmbPrice==0.00? null:"¥"+product.rmbPrice+"+"}{product.score}工分</span>
                             <span className={"product-purchase theme3-top-product-title-color"+parseInt(index+1)}>点击抢购<span className={"tri tri-color"+parseInt(index+1)}></span></span>
                         </div>
                         <img className ="theme3-product-img" src={product.img}/>

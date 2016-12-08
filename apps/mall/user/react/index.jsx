@@ -319,7 +319,9 @@ function back_handler() {
     $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/static/mall/home/index.html';
 }
 
-$FW.setLoginRedirect('/static/mall/home/index.html');
+
+//$FW.setLoginRedirect('/static/mall/home/index.html');
+
 
 //window.onNativeMessageReceive = function (msg) {
 //    if (msg == 'history:back') back_handler()

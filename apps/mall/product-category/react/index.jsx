@@ -28,9 +28,9 @@ const SearchPage = React.createClass({
                         {category_item}
                     </div>
                     <div className="fixed-nav">
-                        <a className="fixed-nav-link fixed-nav-link1 active"
+                        <a className="fixed-nav-link fixed-nav-link1"
                            onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
-                        <a className="fixed-nav-link fixed-nav-link2"
+                        <a className="fixed-nav-link fixed-nav-link2 active"
                            onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
                         <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
                         <a className="fixed-nav-link fixed-nav-link3"
@@ -44,9 +44,9 @@ const SearchPage = React.createClass({
 });
 
 $FW.DOMReady(function(){
-    NativeBridge.setTitle('商城品类');
+    NativeBridge.setTitle('品类中心');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"商城品类"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"品类中心"} back_handler={backward}/>, document.getElementById('header'));
     ReactDOM.render(<SearchPage/>, document.getElementById('cnt'));
 });
 

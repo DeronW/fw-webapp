@@ -49,13 +49,31 @@ const User = React.createClass({
                 })
             }
         }
+        var  vip;
+        switch (this.props.vip_level)
+            {
+                case 2:
+                    vip=1;
+                    break;
+                case 3:
+                    vip=2;
+                    break;
+                case 4:
+                    vip=3;
+                    break;
+                case 5:
+                    vip=4;
+                    break;
+            }
+
         return (
-           <div className="user-wrap">
+            <div className="user-wrap">
                <div style={header}>我的商城</div>
                <div className="user-info">
                    <img className="profile-img" src="images/boy.jpg"/>
-                   <div className="user-name">蓝月蓝月<span className="user-level"><img src="images/usercenter_vip1_icon.png"/></span></div>
-                   <div className="available-score">可用工分<span className="gongfeng">998544448</span></div>
+                   <div className="user-name">{this.props.realName}
+                       {this.props.vip_level==1?<span className="user-level"><img src="images/usercenter_vip`${vip}`_icon.png"/></span>:null}</div>
+                   <div className="available-score">可用工分<span className="gongfeng">{this.props.score}</span></div>
                    <a className="account-setting" href="/static/mall/account-setting/index.html#shipping">账户设置</a>
                </div>
                <div className="product-status">
@@ -152,9 +170,17 @@ const HotProduct = React.createClass({
 
 $FW.DOMReady(function() {
     NativeBridge.setTitle('我的商城');
-    ReactDOM.render(<User/>, document.getElementById('cnt'));
+    $FW.Ajax({
+        url: API_PATH + 'mall/api/member/v1/user.json',
+        enable_loading: true,
+        success: function (data) {
+            ReactDOM.render(<User banners={...data}/>, document.getElementById('cnt'));
+        }
+    })
 });
 
 function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
 }
+
+$FW.setLoginRedirect('/static/mall/new-home/index.html');
