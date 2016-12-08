@@ -148,7 +148,6 @@ const HotSale = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Footer title={"豆哥商城"}/>, document.getElementById('footer'));
 
     $FW.Ajax({
         url: `${API_PATH}mall/api/index/v1/banners.json`,
