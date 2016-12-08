@@ -182,3 +182,5 @@ $FW.DOMReady(function() {
 function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
 }
+
+$FW.setLoginRedirect('/static/mall/new-home/index.html');
