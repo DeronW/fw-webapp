@@ -316,7 +316,7 @@ $FW.DOMReady(function () {
 
 function back_handler() {
 
-    $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/static/mall/home/index.html';
+    $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/static/mall/new-home/index.html';
 }
 
 $FW.setLoginRedirect('/static/mall/home/index.html');

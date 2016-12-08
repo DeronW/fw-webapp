@@ -8,7 +8,7 @@ const MALL_APP_NAMES = [
     'new-user',
     'account-setting',
     'add-bank-card',
-    'bind-bank-card',
+    'my-bank-card',
     'verify-bank-card',
     'send-msg-pay',
     'send-msg-bind',

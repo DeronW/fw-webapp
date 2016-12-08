@@ -36,6 +36,7 @@ const SendCode = React.createClass({
     decline: function() {
         this.setState({value: this.state.value - 1});
     },
+	
     //倒计时
     tick: function() {
         this.interval = setInterval(this.decline, 1000);
@@ -48,7 +49,7 @@ const SendCode = React.createClass({
     //重新发送验证码
     reSend: function() {
          $FW.Ajax({
-            url:  '/mall/api/payment/v1/SendPhoneVerifyPay.json',
+            url:  API_PATH + '/mall/api/payment/v1/SendPhoneVerifyPay.json',
             enable_loading: true,
             success: function (data) {
                     if(!this.state.reSend) return;
