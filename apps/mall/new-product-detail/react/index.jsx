@@ -341,7 +341,7 @@ $FW.DOMReady(function () {
     });
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"商品详情"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={""}/>, document.getElementById('header'));
     }
 });
 
