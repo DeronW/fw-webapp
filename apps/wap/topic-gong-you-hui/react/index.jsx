@@ -13,17 +13,17 @@ const WorkerBox = React.createClass({
     },
     ajaxWealthImg: function () {
         $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=28', function (data) {
-            this.setState({wealthImg: data});
+            this.setState({ wealthImg: data });
         }.bind(this))
     },
     ajaxNorthImg: function () {
         $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=29', function (data) {
-            this.setState({northImg: data});
+            this.setState({ northImg: data });
         }.bind(this))
     },
     ajaxEastImg: function () {
         $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=30', function (data) {
-            this.setState({eastImg: data});
+            this.setState({ eastImg: data });
         }.bind(this))
     },
     gotoHandle: function (link, need_login) {
@@ -62,7 +62,7 @@ const WorkerBox = React.createClass({
         return (
             <div className="workerBox">
                 <div className="banner">
-                    <img src="./images/banner.png" alt=""/>
+                    <img src="./images/banner.png" alt="" />
                 </div>
                 <div className="question">
                     <div className="questionTitle">什么是工友汇？</div>
@@ -73,13 +73,13 @@ const WorkerBox = React.createClass({
                 <div className="wealth">
                     <div className="wealthTitle">
                         <span>自律创造财富</span>
-                        <img src="./images/city.png" alt=""/>
+                        <img src="./images/city.png" alt="" />
                     </div>
                     <div className="wealthContent">
                         {
                             introduction.map((item, index) => {
                                 return <div key={index} className="wealthContentPerson">
-                                    <img src={item.pic} alt=""/>
+                                    <img src={item.pic} alt="" />
 
                                     <div className="name">{item.name}</div>
                                     <div className="job">{item.job}</div>
@@ -87,6 +87,7 @@ const WorkerBox = React.createClass({
                             })
                         }
                     </div>
+                    <br />
                     <div className="wealthText">
                         <div>10月29日，工场“工友汇”第一站在北京正式启动。50多位工友齐聚一堂，与金融工场高级管理人员面对面交流探讨。金融工场董事长魏薇、CEO崔海晨、首席风控官邹晓东、副总裁李建光出席活动，并对金融工场上线银行存管、风控体系、监管政策、行业发展以及日常服务，进行交流答疑。
                         </div>
@@ -97,11 +98,11 @@ const WorkerBox = React.createClass({
                     <div className="wealthImg">
                         {
                             this.state.wealthImg.map((item, index) => {
-                                return <img key={index} src={item.thumb} alt=""/>
+                                return <img key={index} src={item.thumb} alt="" />
                             })
                         }
                     </div>
-                    <a onClick={() => {this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615",true)}} className="moreBtn">了解更多现场情况</a>
+                    <a onClick={() => { this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615", true) } } className="moreBtn">了解更多现场情况</a>
                 </div>
                 <div className="northEast">
                     <div className="northEastTitle">大连站、哈尔滨站——走进东北</div>
@@ -109,25 +110,25 @@ const WorkerBox = React.createClass({
                     <div className="northImg">
                         {
                             this.state.northImg.map((item, index) => {
-                                return <img key={index} src={item.thumb} alt=""/>
+                                return <img key={index} src={item.thumb} alt="" />
                             })
                         }
                     </div>
-                    <a onClick={() => {this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615",true)}} className="moreBtn">了解更多现场情况</a>
+                    <a onClick={() => { this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615", true) } } className="moreBtn">了解更多现场情况</a>
 
                     <div className="northTitle">12月10日，工友汇”第三站走进童话的冰雪之城——哈尔滨。</div>
                     <div className="northImg">
                         {
                             this.state.eastImg.map((item, index) => {
-                                return <img key={index} src={item.thumb} alt=""/>
+                                return <img key={index} src={item.thumb} alt="" />
                             })
                         }
                     </div>
-                    <a onClick={() => {this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615",true)}} className="moreBtn">了解更多现场情况</a>
+                    <a onClick={() => { this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615", true) } } className="moreBtn">了解更多现场情况</a>
                 </div>
                 <div className="aboutMe">
                     <div className="aboutTitle">关于我们</div>
-                    <img src="./images/logo.png" alt=""/>
+                    <img src="./images/logo.png" alt="" />
 
                     <div className="aboutText">
                         金融工场是由香港上市公司——中国信贷科技控股有限公司(Credit
