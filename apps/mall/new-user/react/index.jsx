@@ -49,6 +49,7 @@ const User = React.createClass({
                 })
             }
         }
+        /*
         var  vip;
         switch (this.props.vip_level)
             {
@@ -65,15 +66,15 @@ const User = React.createClass({
                     vip=4;
                     break;
             }
-
+*/
         return (
             <div className="user-wrap">
                <div style={header}>我的商城</div>
                <div className="user-info">
                    <img className="profile-img" src="images/boy.jpg"/>
-                   <div className="user-name">{this.props.realName}
-                       {this.props.vip_level==1?<span className="user-level"><img src="images/usercenter_vip`${vip}`_icon.png"/></span>:null}</div>
-                   <div className="available-score">可用工分<span className="gongfeng">{this.props.score}</span></div>
+                   <div className="user-name">lanyue
+                       <span className="user-level"><img src="images/usercenter_vip1_icon.png"/></span></div>
+                   <div className="available-score">可用工分<span className="gongfeng">11</span></div>
                    <a className="account-setting" href="/static/mall/account-setting/index.html#shipping">账户设置</a>
                </div>
                <div className="product-status">
