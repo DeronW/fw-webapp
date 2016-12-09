@@ -21,7 +21,7 @@ const CardList = React.createClass({
     var bgColor='my-bank-card';
 	let bankCards = this.props.bankCards;
 	for(var j=0;j<12;j++){
-	   if(bankCards.cardName==bankName[j]){
+	   if(bankCards.bankCardName==bankName[j]){
 		   if(j==0||j==2||j==8){ bgColor = 'my-bank-card bankColor1'; }
 		   else if(j==1){ bgColor = 'my-bank-card bankColor2'; }
 		   else{bgColor = 'my-bank-card bankColor3';}
@@ -29,10 +29,10 @@ const CardList = React.createClass({
 	}
         return (
             <div className={bgColor}>
-                <div className="bank-tit"><img src={bankCards.cardImg}/><span className="bank-name">{bankCards.cardName}</span><span className="bank-type">{bankCards.cardType}</span></div>
+                <div className="bank-tit"><img src={bankCards.cardImg}/><span className="bank-name">{bankCards.bankCardName}</span><span className="bank-type">{bankCards.bankCardType}</span></div>
                 <div className="bank-desc">
-                    <div className="owner-name">{bankCards.ownerName}</div>
-                    <div>{bankCards.cardNo}</div>
+                    <div className="owner-name">{bankCards.accountName}</div>
+                    <div>{bankCards.accountNo}</div>
                 </div>
              </div>
         );
