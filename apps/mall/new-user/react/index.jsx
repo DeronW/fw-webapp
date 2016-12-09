@@ -175,7 +175,7 @@ $FW.DOMReady(function() {
         url: API_PATH + 'mall/api/member/v1/user.json',
         enable_loading: true,
         success: function (data) {
-            ReactDOM.render(<User banners={...data}/>, document.getElementById('cnt'));
+            ReactDOM.render(<User {...data}/>, document.getElementById("cnt"));
         }
     })
 });
