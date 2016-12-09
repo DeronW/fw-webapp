@@ -53,7 +53,7 @@ const User = React.createClass({
 
         return (
             <div className="user-wrap">
-               <div style={header}>我的商城</div>
+                {/*<div style={header}>我的商城</div>*/}
                <div className="user-info">
                    <img className="profile-img" src="images/boy.jpg"/>
                    <div className="user-name">{data.username}
@@ -62,7 +62,7 @@ const User = React.createClass({
                    <a className="account-setting" href="/static/mall/account-setting/index.html#shipping">账户设置</a>
                </div>
                <div className="product-status">
-                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#unpaid">
+                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#pay">
                        <img src="images/icon1.jpg"/>
                        <span className="status-name">待付款</span>
                        <span className="remind-circle">2</span>
