@@ -97,7 +97,7 @@ const Mall = React.createClass({
                     <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}><img src="images/nav-5.png"/><span>生活服务</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img
                         src="images/nav-6.png"/><span>充值中心</span><span className="hot-tag"></span></a>
-                    <a onClick={() => gotoHandler("/static/mall/zhuanpan20161024/index.html?" + (+new Date()), true)}><img
+                    <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true?" + (+new Date()), true)}><img
                         src="images/nav-7.png"/><span>游戏中心</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
                         src="images/nav-8.png"/><span>我可兑换</span></a>
@@ -109,17 +109,6 @@ const Mall = React.createClass({
                 <Grid_6_4/>
                 <Grid_4_5/>
                 <HotSale/>
-                <div className="fixed-nav">
-                    <a className="fixed-nav-link fixed-nav-link1 active"
-                       onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
-                    <a className="fixed-nav-link fixed-nav-link2"
-                       onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-                    <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
-                    <a className="fixed-nav-link fixed-nav-link3"
-                       onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                    <a className="fixed-nav-link fixed-nav-link4"
-                       onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
-                </div>
             </div>
         )
     }
@@ -148,6 +137,7 @@ const HotSale = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    ReactDOM.render(<NavBar/>, document.getElementById('navbar'));
     $FW.Ajax({
         url: `${API_PATH}mall/api/index/v1/banners.json`,
         success: function (data) {

@@ -54,7 +54,7 @@ const User = React.createClass({
         return (
             <div className="user-wrap">
                 {/*<div style={header}>我的商城</div>*/}
-               <div className="user-info">
+               <div className="user-info" style={{ marginTop: '-70px' }}>
                    <img className="profile-img" src="images/boy.jpg"/>
                    <div className="user-name">{data.username}
                        {data.vip_level==1?null:<span className="user-level"><img src={`images/usercenter_vip${data.vip_level-1}_icon.png`}/></span>}</div>
@@ -81,14 +81,14 @@ const User = React.createClass({
                        <img src="images/icon4.jpg"/>
                        <span className="status-name">已完成</span>
                    </a>
-                   <a className="all-orders">
+                   <a className="all-orders" href="/static/mall/new-order-list/index.html#all">
                        <img src="images/icon5.jpg"/>
-                       <span className="status-name" href="/static/mall/new-order-list/index.html#all">全部订单</span>
+                       <span className="status-name">全部订单</span>
                    </a>
                    <div className="seperate-line"></div>
                </div>
                <div className="user-personal-items">
-                   <a className="personal-item" href="/static/mall/new-deliver-address/index.html?preview=true">
+                   <a className="personal-item" href="/static/mall/deliver-address/index.html?preview=true">
                        <span className="item-name item-icon6">收货地址</span>
                        <span className="jump-arrow"></span>
                    </a>
@@ -102,8 +102,8 @@ const User = React.createClass({
                        <span className="bank-card-status">已绑定</span>
                    </a>
                </div>
-               <div className="icon-list" href="/static/mall/user-prize-record/index.html">
-                   <a className="list-box">
+               <div className="icon-list">
+                   <a className="list-box" href="/static/mall/user-prize-record/index.html">
                        <img src="images/icon9.jpg"/>
                        <span className="box-title1">抽奖记录</span>
                    </a>
