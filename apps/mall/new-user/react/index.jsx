@@ -57,7 +57,7 @@ const User = React.createClass({
                <div className="user-info">
                    <img className="profile-img" src="images/boy.jpg"/>
                    <div className="user-name">{data.username}
-                       {data.vip_level==1?null:<span className="user-level"><img src="images/usercenter_vip${data.vip_level-1}_icon.png"/></span>}</div>
+                       {data.vip_level==1?null:<span className="user-level"><img src={`images/usercenter_vip${data.vip_level-1}_icon.png`}/></span>}</div>
                    <div className="available-score">可用工分<span className="gongfeng">{data.score}</span></div>
                    <a className="account-setting" href="/static/mall/account-setting/index.html#shipping">账户设置</a>
                </div>
