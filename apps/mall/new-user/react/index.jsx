@@ -126,11 +126,11 @@ const User = React.createClass({
                        <img src="images/icon11.jpg"/>
                        <span className="box-title2">我的足迹</span>
                    </a>
-                   <a className="list-box">
+                   <a className="list-box" href="tel:400-0322-988">
                        <img src="images/icon13.jpg"/>
                        <span className="box-title3">客服热线</span>
                    </a>
-                   <a className="list-box">
+                   <a className="list-box" href="http://m.9888.cn/static/wap/faq/index.html">
                        <img src="images/icon14.jpg"/>
                        <span className="box-title4">帮助中心</span>
                    </a>
@@ -183,4 +183,3 @@ function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
 }
 
-//$FW.setLoginRedirect('/static/mall/new-home/index.html');
