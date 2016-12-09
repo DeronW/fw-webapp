@@ -17,6 +17,7 @@ const User = React.createClass({
         }
     },
     render:function(){
+        let data = this.props.data;
         var header = {
             background:this.state.background,
             color:this.state.color,
@@ -49,32 +50,15 @@ const User = React.createClass({
                 })
             }
         }
-        /*
-        var  vip;
-        switch (this.props.vip_level)
-            {
-                case 2:
-                    vip=1;
-                    break;
-                case 3:
-                    vip=2;
-                    break;
-                case 4:
-                    vip=3;
-                    break;
-                case 5:
-                    vip=4;
-                    break;
-            }
-*/
+
         return (
             <div className="user-wrap">
                <div style={header}>我的商城</div>
                <div className="user-info">
                    <img className="profile-img" src="images/boy.jpg"/>
-                   <div className="user-name">lanyue
-                       <span className="user-level"><img src="images/usercenter_vip1_icon.png"/></span></div>
-                   <div className="available-score">可用工分<span className="gongfeng">11</span></div>
+                   <div className="user-name">{data.username}
+                       {data.vip_level==1?null:<span className="user-level"><img src="images/usercenter_vip${data.vip_level-1}_icon.png"/></span>}</div>
+                   <div className="available-score">可用工分<span className="gongfeng">{data.score}</span></div>
                    <a className="account-setting" href="/static/mall/account-setting/index.html#shipping">账户设置</a>
                </div>
                <div className="product-status">
@@ -175,7 +159,7 @@ $FW.DOMReady(function() {
         url: API_PATH + 'mall/api/member/v1/user.json',
         enable_loading: true,
         success: function (data) {
-            ReactDOM.render(<User {...data}/>, document.getElementById("cnt"));
+            ReactDOM.render(<User data={data}/>, document.getElementById("cnt"));
         }
     })
 });
