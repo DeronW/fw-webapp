@@ -28,14 +28,11 @@ const WorkerBox = React.createClass({
     },
     gotoHandle: function (link, need_login) {
         if (link.indexOf('://') < 0) {
-            alert(1);
             link = location.protocol + '//' + location.hostname + link;
         }
         if (navigator.userAgent.indexOf('FinancialWorkshop') >= 0) {
-            alert(2);
             NativeBridge.goto(link, need_login)
         } else {
-            alert(3);
             location.href = link;
         }
     },
@@ -104,7 +101,7 @@ const WorkerBox = React.createClass({
                             })
                         }
                     </div>
-                    <a onClick={() => {this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615",true)}} className="moreBtn">了解更多现场情况</a>
+                    <a href="http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615" className="moreBtn">了解更多现场情况</a>
                 </div>
                 <div className="northEast">
                     <div className="northEastTitle">大连站、哈尔滨站——走进东北</div>
