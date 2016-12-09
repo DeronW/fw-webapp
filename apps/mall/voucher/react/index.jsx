@@ -155,5 +155,5 @@ $FW.DOMReady(function() {
 });
 
 function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/new-user/index.html';
 }

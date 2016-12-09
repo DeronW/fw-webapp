@@ -47,7 +47,7 @@ $FW.DOMReady(function() {
 	}
 
     $FW.Ajax({
-        url: './bankCard.json',
+        url: '/mall/api/payment/v1/bank_card_list.json',
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<MyBankCard bankCards={data.bankCards}/>, document.getElementById('cnt'));

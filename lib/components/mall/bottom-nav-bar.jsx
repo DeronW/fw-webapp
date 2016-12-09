@@ -56,7 +56,7 @@ const BottomNavBar = React.createClass({
 			top: "60px",
 			left: "51px",
 			display: "block",
-			background: "url('/static/mall/new-home/images/nav.png') no-repeat",
+			background: "url('/static/mall/new-home/images/nav.png') no-repeat 0px 0px",
 			position: "absolute"
 		}
 
@@ -67,7 +67,7 @@ const BottomNavBar = React.createClass({
 			top: "60px",
 			left: "195px",
 			display: "block",
-			background: "url('/static/mall/new-home/images/nav.png') no-repeat",
+			background: "url('/static/mall/new-home/images/nav.png') no-repeat -145px 0px",
 			position: "absolute"
 
 		}
@@ -79,7 +79,7 @@ const BottomNavBar = React.createClass({
 			top: "60px",
 			left: "472px",
 			display: "block",
-			background: "url('/static/mall/new-home/images/nav.png') no-repeat",
+			background: "url('/static/mall/new-home/images/nav.png') no-repeat -422px 0px",
 			position: "absolute"
 		}
 
@@ -90,7 +90,7 @@ const BottomNavBar = React.createClass({
 			top: "60px",
 			left: "610px",
 			display: "block",
-			background: "url('/static/mall/new-home/images/nav.png') no-repeat",
+			background: "url('/static/mall/new-home/images/nav.png') no-repeat -560px 0px",
 			position: "absolute"
 		}
 
