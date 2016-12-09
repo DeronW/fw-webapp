@@ -22,6 +22,7 @@ const AddBankCard = React.createClass({
             this.setState({"info":"请输入正确的银行卡号!"});
             this.setState({active: false});
         }
+        this.setState({val:val});
     },
     nextStep:function() {
          if(!this.state.active) return;
