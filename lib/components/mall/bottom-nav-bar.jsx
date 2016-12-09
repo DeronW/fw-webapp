@@ -40,7 +40,7 @@ const BottomNavBar = React.createClass({
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
         if (this.props.title && this.props.title.length > 7) fontSize = '32px';
         let _style_footer_fixed = {
-            background: "('/static/mall/new-home/images/fixed-nav.png') no-repeat",
+            background: "url('/static/mall/new-home/images/fixed-nav.png') no-repeat",
 			width: "720px",
 			height: "143px",
 			position: "fixed",
@@ -52,7 +52,7 @@ const BottomNavBar = React.createClass({
 		var _style_footer_item1 = {
 		    width: "42px",
 			height: "70px",
-			backgroundPosition: "0 0",
+            backgroundPosition: "0px 0px",
 			top: "60px",
 			left: "51px",
 			display: "block",
@@ -63,7 +63,7 @@ const BottomNavBar = React.createClass({
 		var _style_footer_item2 = {
 		    width: "42px",
 			height: "70px",
-			backgroundPosition: "-145px 0",
+			backgroundPosition: "-145px 0px",
 			top: "60px",
 			left: "195px",
 			display: "block",
@@ -75,7 +75,7 @@ const BottomNavBar = React.createClass({
 		var _style_footer_item3 = {
 			width: "65px",
 			height: "70px",
-			backgroundPosition: "-422px 0",
+			backgroundPosition: "-422px 0px",
 			top: "60px",
 			left: "472px",
 			display: "block",
@@ -86,7 +86,7 @@ const BottomNavBar = React.createClass({
 		var _style_footer_item4 = {
 		    width: "87px",
 			height: "70px",
-			backgroundPosition: "-560px 0",
+			backgroundPosition: "-560px 0px",
 			top: "60px",
 			left: "610px",
 			display: "block",
