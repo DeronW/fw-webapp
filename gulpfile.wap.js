@@ -69,11 +69,12 @@ const WAP_APP_NAMES = [
 module.exports = function (gulp, generate_task, CONSTANTS) {
     WAP_APP_NAMES.forEach(function (i) {
         let common_components = [
-            'use_strict.jsx', 'loading.jsx', 'alert.jsx', 'wap/header.jsx', 'toast.jsx',
-            'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
+            'use-strict.jsx', 'loading.jsx', 'alert.jsx', 'wap/header.jsx',
+            'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
         ];
 
         let common_js = [
+            'javascripts/use-strict.js',
             'javascripts/wap/fw-ajax-error-handler.js',
             'javascripts/wap/fw-common.js'
         ];
@@ -94,5 +95,5 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     });
 
     gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((page) =>
-        `wap:pack:${typeof(page) == 'string' ? page : page.name}:revision`)));
+        `wap:pack:${typeof (page) == 'string' ? page : page.name}:revision`)));
 };

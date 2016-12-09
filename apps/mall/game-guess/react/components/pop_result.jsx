@@ -1,4 +1,4 @@
-'use strict';
+
 const GameGuess_popResult = React.createClass({
     render:function(){
         let data=this.props.data;
