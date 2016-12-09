@@ -137,7 +137,7 @@ const HotSale = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<NavBar/>, document.getElementById('navbar'));
+    ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
     $FW.Ajax({
         url: `${API_PATH}mall/api/index/v1/banners.json`,
         success: function (data) {

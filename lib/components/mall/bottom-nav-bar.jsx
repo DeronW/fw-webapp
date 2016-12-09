@@ -14,7 +14,7 @@ function gotoHandler(link, need_login) {
     }
 }
 
-const NavBar = React.createClass({
+const BottomNavBar = React.createClass({
     getInitialState: function () {
         let height = parseInt(this.props.height) || 100;
         let lineHeight = parseInt(this.props.height) || 100;
