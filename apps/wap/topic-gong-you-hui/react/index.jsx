@@ -28,14 +28,11 @@ const WorkerBox = React.createClass({
     },
     gotoHandle: function (link, need_login) {
         if (link.indexOf('://') < 0) {
-            alert(1);
             link = location.protocol + '//' + location.hostname + link;
         }
         if (navigator.userAgent.indexOf('FinancialWorkshop') >= 0) {
-            alert(2);
             NativeBridge.goto(link, need_login)
         } else {
-            alert(3);
             location.href = link;
         }
     },
