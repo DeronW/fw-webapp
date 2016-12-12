@@ -49,7 +49,7 @@ const SendCode = React.createClass({
     //重新发送验证码
     reSend: function() {
          $FW.Ajax({
-            url:  API_PATH + '/mall/api/payment/v1/SendPhoneVerifyPay.json',
+            url:  API_PATH + 'mall/api/payment/v1/SendPhoneVerifyPay.json',
             enable_loading: true,
             success: function (data) {
                     if(!this.state.reSend) return;
@@ -61,7 +61,7 @@ const SendCode = React.createClass({
 
     //加载完成之后立刻倒计时
     componentDidMount: function() {
-         this.reSend();this.setState({reSend: false});
+         this.reSend();
     },
 
     //倒计时完成终止
