@@ -6,7 +6,6 @@ const MALL_APP_NAMES = [
     'activity', // 专题活动页
     'user',
     'new-user',
-    'account-setting',
     'add-bank-card',
     'my-bank-card',
     'verify-bank-card',
@@ -37,7 +36,6 @@ const MALL_APP_NAMES = [
     'product-recharge',
     'product-category',
 
-    'waiting',
     'fail',
     'not-support',
     'deliver-address',
@@ -48,7 +46,13 @@ const MALL_APP_NAMES = [
     'zhuanpan20161024',
     'user-prize-record',
     'game-guess',
-    'game'
+    'game',
+    {
+        name: 'waiting',
+        describe: '建设中 页面',
+        include_components: ['mall/header.jsx'],
+        include_common_js: []
+    }
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
@@ -74,11 +78,11 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         generate_task('mall', i, {
             cmd_prefix: 'pack',
             api_path: '//mmall.9888.cn/',
-            cdn_prefix: '/static/mall/' + i + '/',
+            cdn_prefix: `/static/mall/${i.name || i}/`,
             include_components: common_components,
             include_common_js: common_js
         });
     });
 
-    gulp.task('build:mall', gulp.series(MALL_APP_NAMES.map((name) => `mall:pack:${name}:revision`)));
+    gulp.task('build:mall', gulp.series(MALL_APP_NAMES.map((i) => `mall:pack:${i.name || i}:revision`)));
 };

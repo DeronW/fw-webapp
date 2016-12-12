@@ -43,7 +43,7 @@ $FW.DOMReady(function() {
     NativeBridge.setTitle('我的银行卡');
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"我的银行卡"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"我的银行卡"} back_handler={back_handler}/>, document.getElementById('header'));
 	}
 
     $FW.Ajax({
@@ -54,3 +54,7 @@ $FW.DOMReady(function() {
         }
     });
 });
+
+function back_handler() {
+    location.href = '/static/mall/new-user/index.html'
+}

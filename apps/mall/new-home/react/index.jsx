@@ -42,7 +42,8 @@ const Mall = React.createClass({
             let style = scrollTop > 0 ? {
                 background: "rgba(255,255,255,.9)",
                 logoImage: "images/m-logo.png",
-                avatarImage: "images/m-list-icon.png"
+                avatarImage: "images/m-list-icon.png",
+                borderBottom:"1px solid #ece2e2"
             } : {
                 background: "transparent",
                 logoImage: "images/logo.png",
@@ -97,7 +98,7 @@ const Mall = React.createClass({
                     <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}><img src="images/nav-5.png"/><span>生活服务</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img
                         src="images/nav-6.png"/><span>充值中心</span><span className="hot-tag"></span></a>
-                    <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true?" + (+new Date()), true)}><img
+                    <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true?", true)}><img
                         src="images/nav-7.png"/><span>游戏中心</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
                         src="images/nav-8.png"/><span>我可兑换</span></a>
