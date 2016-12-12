@@ -36,7 +36,7 @@ const SendCode = React.createClass({
     decline: function() {
         this.setState({value: this.state.value - 1});
     },
-	
+
     //倒计时
     tick: function() {
         this.interval = setInterval(this.decline, 1000);
@@ -84,6 +84,39 @@ const SendCode = React.createClass({
         this.setState({"code":val});
     },
 
+    //绑定银行卡
+     bindCard:function(){
+        var query = $FW.Format.urlQuery();
+
+        let FormData = {
+            certificateNo: query.certificateNo,
+            accountNo: query.accountNo,
+            bankCardName: query.bankCardName,
+            bankCardType: 1,
+            certificateType: 0,
+            accountName: query.accountName,
+            mobileNo: query.mobileNo,
+            bankId: query.bankId,
+            bankName: query.bankName
+        };
+
+        $FW.Ajax({
+            url:  API_PATH +'/mall/api/payment/v1/binding_bank_card.json',
+            enable_loading: true,
+            data: FormData,
+            success: function (data) {
+                if (data.code==1) {
+                    //var query = $FW.Format.urlQuery();
+                    //var bizNo = query.bizNo;
+                    $FW.Component.Alert(data.msg);
+
+                } else {
+                    $FW.Component.Alert(data.msg);
+                }
+            }
+        })
+    },
+
     //短信验证码验证完成绑定
     nextStep:function() {
         if(!this.state.active) return;
@@ -95,16 +128,19 @@ const SendCode = React.createClass({
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
-                $FW.Component.Alert('您已经完成绑定');
-                var query = $FW.Format.urlQuery();
-                var bizNo = query.bizNo;
-                setTimeout(function(){
-                    location.href = location.protocol + '//' + location.hostname +
-					"/static/mall/payment/index.html?bizNo="+bizNo
-                },2000)
+                this.bindCard();
+                /*
+                 var query = $FW.Format.urlQuery();
+                 var bizNo = query.bizNo;
+                 setTimeout(function(){
+                 location.href = location.protocol + '//' + location.hostname +
+                 "/static/mall/payment/index.html?bizNo="+bizNo
+                 },2000)
+                 */
             }
         })
     },
+
     render : function(){
         let veri_code_tip = null;
 

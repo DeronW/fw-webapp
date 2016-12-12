@@ -84,24 +84,10 @@ const BankInfo = React.createClass({
             bankId: this.state.bankId,
             bankName: this.state.bankName
         };
-           $FW.Ajax({
-                url:  API_PATH +'/mall/api/payment/v1/binding_bank_card.json',
-                enable_loading: true,
-                data: FormData,
-                success: function (data) {
-                    if (data.code==1) {
-                        var query = $FW.Format.urlQuery();
-                        var bizNo = query.bizNo;
-                        $FW.Component.Alert(data.msg);
-                        setTimeout(function(){
-                            location.href = location.protocol + '//' + location.hostname +
-							"/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo+"&bizNo="+bizNo;
-                        },2000)
-                     } else {
-                        $FW.Component.Alert(data.msg);
-                    }
-                }
-           })
+        setTimeout(function(){
+            location.href = location.protocol + '//' + location.hostname+
+			"/static/mall/send-msg-bind/index.html?mobileNo="+FormData.mobileNo+"&certificateNo="+FormData.certificateNo+"&accountNo="+FormData.accountNo+"&bankId="+FormData.bankId+"&bankName="+FormData.bankName+"&bankCardName="+FormData.bankCardName+"&accountName="+FormData.accountName
+        })
     },
     render : function(){
         return (
