@@ -94,6 +94,5 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         });
     });
 
-    gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((page) =>
-        `wap:pack:${typeof (page) == 'string' ? page : page.name}:revision`)));
+    gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((i) => `wap:pack:${i.name || i}:revision`)));
 };
