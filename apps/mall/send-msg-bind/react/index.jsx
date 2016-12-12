@@ -138,7 +138,7 @@ const SendCode = React.createClass({
                  "/static/mall/payment/index.html?bizNo="+bizNo
                  },2000)
                  */
-            }
+            }.bind(this)
         })
     },
 
