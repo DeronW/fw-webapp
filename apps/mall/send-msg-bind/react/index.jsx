@@ -127,7 +127,7 @@ const SendCode = React.createClass({
         $FW.Ajax({
             url:  '/mall/api/payment/v1/validatePaySmsCode.json',
             enable_loading: true,
-            data: this.FormData,
+            data: FormData,
             success: function (data) {
                 this.bindCard();
                 /*
