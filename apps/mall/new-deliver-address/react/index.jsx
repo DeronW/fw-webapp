@@ -229,5 +229,5 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-        location.href = '/static/mall/new-user/index.html'
+        location.href = '/static/mall/deliver-address/index.html?preview=true'
 }
