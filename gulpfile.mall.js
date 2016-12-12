@@ -6,7 +6,6 @@ const MALL_APP_NAMES = [
     'activity', // 专题活动页
     'user',
     'new-user',
-    'account-setting',
     'add-bank-card',
     'my-bank-card',
     'verify-bank-card',
