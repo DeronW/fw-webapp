@@ -1,7 +1,6 @@
 const Account = React.createClass({
     render : function(){
         var data = $FW.Format.urlQuery();
-        console.log(data);
         return (
             <div className="account-wrap">
                 <div className="account-first-item">
@@ -24,7 +23,7 @@ const Account = React.createClass({
                     <div className="right-arrow"></div>
                     <div className="item-right-info">蓝月</div>
                 </div>
-                <a className="account-item" href="/static/mall/deliver-address/index.html?preview=true">
+                <a className="account-item" href="/static/mall/deliver-address/index.html">
                     <div className="item-title">收货地址</div>
                     <div className="right-arrow"></div>
                 </a>

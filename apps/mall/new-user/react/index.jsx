@@ -96,7 +96,7 @@ const User = React.createClass({
                        <span className="item-name item-icon7">兑换券</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item" href="/static/mall/my-bank-card/index.html">
+                   <a className="personal-item" href="/static/mall/my-bank-card/index.html?id=user">
                        <span className="item-name item-icon8">银行卡</span>
                        <span className="jump-arrow"></span>
                        <span className="bank-card-status">已绑定</span>
@@ -156,7 +156,7 @@ const HotProduct = React.createClass({
 $FW.DOMReady(function() {
     NativeBridge.setTitle('我的商城');
     $FW.Ajax({
-        url: API_PATH + 'mall/api/member/v1/user.json',
+        url: `${API_PATH}mall/api/member/v1/user.json`,
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<User data={data}/>, document.getElementById("cnt"));
