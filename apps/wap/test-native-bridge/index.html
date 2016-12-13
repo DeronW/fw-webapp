@@ -17,6 +17,10 @@
   <button onClick="action('close')">关闭页面</button>
 </div>
 
+<div id="logs">
+  <p></p>
+</div>
+
 {% endblock %} {% block extra_javascripts %}
 <script>
   function toNative(name){
@@ -27,5 +31,8 @@
   }
   function setTitle(){
     NativeBridge.setTitle(document.getElementById('title').value)
+  }
+  function log(){
+    var logs = document.getElementById('logs');
   }
 </script> {% endblock %}
