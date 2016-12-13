@@ -54,8 +54,8 @@ const Service = React.createClass({
                      <input type="text" value="" placeholder="请输入客户编号"/>
                      </div>
                      </div>
-                     */}
                     <a className="check-info-btn">查询</a>
+                     */}
                 </div>
 
             </div>

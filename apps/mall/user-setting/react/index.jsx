@@ -1,0 +1,49 @@
+const Account = React.createClass({
+    render : function(){
+        return (
+            <div className="account-wrap">
+                <div className="account-first-item">
+                    <div className="item-title">头像</div>
+                    <div className="right-arrow"></div>
+                    <img className="account-img" src="images/boy.jpg"/>
+                </div>
+                <div className="account-item">
+                    <div className="item-title">用户名</div>
+                    <div className="right-arrow"></div>
+                    <div className="item-right-info">lanyue</div>
+                </div>
+                <div className="account-item">
+                    <div className="item-title">手机号</div>
+                    <div className="right-arrow"></div>
+                    <div className="item-right-info">18612451585</div>
+                </div>
+                <div className="account-item">
+                    <div className="item-title">实名认证</div>
+                    <div className="right-arrow"></div>
+                    <div className="item-right-info">蓝月</div>
+                </div>
+                <a className="account-item" href="/static/mall/deliver-address/index.html?preview=true">
+                    <div className="item-title">收货地址</div>
+                    <div className="right-arrow"></div>
+                </a>
+                <a className="account-item" href="/static/mall/my-bank-card/index.html">
+                    <div className="item-title">银行卡</div>
+                    <div className="right-arrow"></div>
+                    <div className="item-right-info">已绑定</div>
+                </a>
+            </div>
+        )
+    }
+});
+
+
+$FW.DOMReady(function() {
+    NativeBridge.setTitle('账户设置');
+    if ($FW.Utils.shouldShowHeader())
+        ReactDOM.render(<Header title={"账户设置"} back_handler={backward}/>, document.getElementById('header'));
+    ReactDOM.render(<Account/>, document.getElementById('cnt'));
+});
+
+function backward() {
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/new-user/index.html';
+}

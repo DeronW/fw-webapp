@@ -33,6 +33,7 @@ const CardList = React.createClass({
                 <div className="bank-desc">
                     <div className="owner-name">{bankCards.accountName}</div>
                     <div>{bankCards.accountNo}</div>
+                    <div className="unbind-btn">解绑</div>
                 </div>
              </div>
         );
