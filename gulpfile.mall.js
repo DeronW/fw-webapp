@@ -15,6 +15,7 @@ const MALL_APP_NAMES = [
     'life-service',
     'service-bill',
     'hot-activity',
+	'user-setting',
     // 订单页面
     'order-list',
     'order-detail',
