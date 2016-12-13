@@ -59,7 +59,7 @@ const User = React.createClass({
                    <div className="user-name">{data.username}
                        {data.vip_level==1?null:<span className="user-level"><img src={`images/usercenter_vip${data.vip_level-1}_icon.png`}/></span>}</div>
                    <div className="available-score">可用工分<span className="gongfeng">{data.score}</span></div>
-                   <a className="account-setting" href="/static/mall/user-setting/index.html#shipping">账户设置</a>
+                   <a className="account-setting" href={`/static/mall/user-setting/index.html?username=${data.username}&avatar=${data.avatar}`}>账户设置</a>
                </div>
                <div className="product-status">
                    <a className="product-status-item" href="/static/mall/new-order-list/index.html#pay">

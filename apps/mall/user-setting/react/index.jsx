@@ -1,16 +1,18 @@
 const Account = React.createClass({
     render : function(){
+        var data = $FW.Format.urlQuery();
+        console.log(data);
         return (
             <div className="account-wrap">
                 <div className="account-first-item">
                     <div className="item-title">头像</div>
                     <div className="right-arrow"></div>
-                    <img className="account-img" src="images/boy.jpg"/>
+                    <img className="account-img" src={`${data.avatar}`}/>
                 </div>
                 <div className="account-item">
                     <div className="item-title">用户名</div>
                     <div className="right-arrow"></div>
-                    <div className="item-right-info">lanyue</div>
+                    <div className="item-right-info">{`${data.username}`}</div>
                 </div>
                 <div className="account-item">
                     <div className="item-title">手机号</div>
@@ -41,6 +43,7 @@ $FW.DOMReady(function() {
     NativeBridge.setTitle('账户设置');
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"账户设置"} back_handler={backward}/>, document.getElementById('header'));
+
     ReactDOM.render(<Account/>, document.getElementById('cnt'));
 });
 
