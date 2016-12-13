@@ -43,11 +43,12 @@ const Mall = React.createClass({
                 background: "rgba(255,255,255,.9)",
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png",
-                borderBottom:"1px solid #ece2e2"
+                borderBottom:"1px solid #d8d8d8"
             } : {
                 background: "transparent",
                 logoImage: "images/logo.png",
-                avatarImage: "images/list-icon.png"
+                avatarImage: "images/list-icon.png",
+                borderBottom:"none"
             }
 
             this.setState(style);
@@ -67,6 +68,7 @@ const Mall = React.createClass({
 
         var head_nav_wrap = {
             background: this.state.background,
+            borderBottom:this.state.borderBottom,
             width: "100%",
             height: "56px",
             paddingTop: "20px",

@@ -110,7 +110,9 @@ const SendCode = React.createClass({
                     //var query = $FW.Format.urlQuery();
                     //var bizNo = query.bizNo;
                     $FW.Component.Alert(data.msg);
-
+                    setTimeout(function(){
+                        location.href="/static/mall/my-bank-card/index.html"
+                    },2000)
                 } else {
                     $FW.Component.Alert(data.msg);
                 }
