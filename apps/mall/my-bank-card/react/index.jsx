@@ -33,6 +33,7 @@ const CardList = React.createClass({
                 <div className="bank-desc">
                     <div className="owner-name">{bankCards.accountName}</div>
                     <div>{bankCards.accountNo}</div>
+                    <div className="unbind-btn">解绑</div>
                 </div>
              </div>
         );
@@ -43,7 +44,7 @@ $FW.DOMReady(function() {
     NativeBridge.setTitle('我的银行卡');
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"我的银行卡"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"我的银行卡"} back_handler={back_handler}/>, document.getElementById('header'));
 	}
 
     $FW.Ajax({
@@ -54,3 +55,13 @@ $FW.DOMReady(function() {
         }
     });
 });
+
+function back_handler() {
+    var query = $FW.Format.urlQuery();
+    if(query.id=='user'){
+        location.href = '/static/mall/new-user/index.html'
+    }
+    else{
+        history.back();
+    }
+}

@@ -17,7 +17,7 @@ const Grid_6_4 = React.createClass({
     render:function(){
         let theme3_top_product_item = (product,index) => {
             return (
-                <a className="theme3-top-product-item" key={index} onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + product.bizNo)}>
+                <a className="theme3-top-product-item" key={index} onClick={ () => gotoHandler('/static/mall/new-product-detail/index.html?bizNo=' + product.bizNo)}>
                     <div className="theme3-top-product-wrap">
                         <div className="theme3-top-product-info">
                             <span className={"theme3-top-product-title theme3-top-product-title-color"+parseInt(index+1)}>{product.abbreviation}</span>
@@ -32,7 +32,7 @@ const Grid_6_4 = React.createClass({
 
         let theme3_btm_product_item = (product,index) => {
             return (
-                <a className="theme3-btm-product-item" key={index} onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + product.bizNo)}>
+                <a className="theme3-btm-product-item" key={index} onClick={ () => gotoHandler('/static/mall/new-product-detail/index.html?bizNo=' + product.bizNo)}>
                     <img className="theme3-btm-product-img" src={product.img}/>
                     <span className="theme3-btm-product-title">{product.abbreviation}</span>
                 </a>

@@ -50,7 +50,7 @@ const BottomNavBar = React.createClass({
         };
 
 		var _style_footer_item1 = {
-		    width: "42px",
+		    width: "46px",
 			height: "70px",
             backgroundPosition: "0px 0px",
 			top: "60px",

@@ -51,7 +51,7 @@ const WorkerBox = React.createClass({
             {
                 pic: './images/pic3.png',
                 name: '邹晓东',
-                job: '首席风控'
+                job: '首席风险'
             },
             {
                 pic: './images/pic4.png',
@@ -89,9 +89,9 @@ const WorkerBox = React.createClass({
                     </div>
                     <br />
                     <div className="wealthText">
-                        <div>10月29日，工场“工友汇”第一站在北京正式启动。50多位工友齐聚一堂，与金融工场高级管理人员面对面交流探讨。金融工场董事长魏薇、CEO崔海晨、首席风控官邹晓东、副总裁李建光出席活动，并对金融工场上线银行存管、风控体系、监管政策、行业发展以及日常服务，进行交流答疑。
+                        <div>10月29日，工场“工友汇”第一站在北京正式启动。50多位工友齐聚一堂，与金融工场高级管理人员面对面交流探讨。金融工场董事长魏薇、CEO崔海晨、首席风险官邹晓东、副总裁李建光出席活动，并对金融工场上线银行存管、风控体系、监管政策、行业发展以及日常服务，进行交流答疑。
                         </div>
-                        <div>在会上，魏薇从“金融”、“科技”、“安全”、“服务”四个方面分析了行业未来的发展趋势，并阐述了金融工场未来的发展方向。此后，金融工场CEO崔海晨就金融工场的发展作出总结，“成立四年累计完成158亿的交易额，为近百万用户赚取了超过4亿元的收益”。首席风控官邹晓东则从资产结构、流程与制度、资金交易保障和合规化调整四个方面，详细介绍了金融工场风险控制体系。副总裁李建光对于近期上线的徽商银行资金存管系统做出最后精彩分享。
+                        <div>在会上，魏薇从“金融”、“科技”、“安全”、“服务”四个方面分析了行业未来的发展趋势，并阐述了金融工场未来的发展方向。此后，金融工场CEO崔海晨就金融工场的发展作出总结，“成立四年累计完成158亿的交易额，为近百万用户赚取了超过4亿元的收益”。首席风险官邹晓东则从资产结构、流程与制度、资金交易保障和合规化调整四个方面，详细介绍了金融工场风险控制体系。副总裁李建光对于近期上线的徽商银行资金存管系统做出最后精彩分享。
                         期间，四位高管还对诸如公司背景、产品逻辑、安全保障、用户体验和信息安全等用户关心的话题与到场用户进行了面对面的交流。
                         </div>
                     </div>
@@ -114,8 +114,9 @@ const WorkerBox = React.createClass({
                             })
                         }
                     </div>
-                    <a onClick={() => { this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615", true) } } className="moreBtn">了解更多现场情况</a>
-
+                    <a onClick={() => {
+                        this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5923&extra=", true) } } className="moreBtn">了解更多现场情况
+                    </a>
                     <div className="northTitle">12月10日，工友汇”第三站走进童话的冰雪之城——哈尔滨。</div>
                     <div className="northImg">
                         {
@@ -124,7 +125,9 @@ const WorkerBox = React.createClass({
                             })
                         }
                     </div>
-                    <a onClick={() => { this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615", true) } } className="moreBtn">了解更多现场情况</a>
+                    <a onClick={() => {
+                        this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5930&extra=", true) } } className="moreBtn">了解更多现场情况
+                    </a>
                 </div>
                 <div className="aboutMe">
                     <div className="aboutTitle">关于我们</div>

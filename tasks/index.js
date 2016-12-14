@@ -16,7 +16,7 @@ let COMMON_JAVASCRIPTS_TASK = {};
 function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
         `${lib_path}fw-1.2.1.js`,
-        `${lib_path}native-bridge-0.2.0.js`];
+        `${lib_path}native-bridge-0.3.0.js`];
 
     if (debug) {
         files.push(...[
@@ -41,7 +41,7 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
 module.exports = function (site_name, page_name, configs) {
     // 支持单个网页的动态配置
     let singlePageCfg = {};
-    if (typeof(page_name) == 'object') {
+    if (typeof (page_name) == 'object') {
         singlePageCfg = page_name;
         page_name = singlePageCfg.name
     }

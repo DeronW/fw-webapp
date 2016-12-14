@@ -1,0 +1,38 @@
+{% extends '../../../lib/templates/wap_base.swig.html' %}
+
+{% block content %}
+<div id="header"></div>
+
+<div class="buttons">
+  <div>
+    <label><input style="width: 300px" id="title" /> </label>
+    <button onClick="setTitle()">设置标题</button>
+  </div>
+
+  <hr />
+
+  <button onClick="action('hideHeader')">隐藏Native头部导航</button>
+  <button onClick="action('showHeader')">显示Native头部导航</button>
+  <button onClick="action('login')">调用APP登录</button>
+  <button onClick="action('close')">关闭页面</button>
+</div>
+
+<div id="logs">
+  <p></p>
+</div>
+
+{% endblock %} {% block extra_javascripts %}
+<script>
+  function toNative(name){
+    NativeBridge.toNative(name)
+  }
+  function action(name){
+    NativeBridge[name]()
+  }
+  function setTitle(){
+    NativeBridge.setTitle(document.getElementById('title').value)
+  }
+  function log(){
+    var logs = document.getElementById('logs');
+  }
+</script> {% endblock %}

@@ -59,7 +59,7 @@ const User = React.createClass({
                    <div className="user-name">{data.username}
                        {data.vip_level==1?null:<span className="user-level"><img src={`images/usercenter_vip${data.vip_level-1}_icon.png`}/></span>}</div>
                    <div className="available-score">可用工分<span className="gongfeng">{data.score}</span></div>
-                   <a className="account-setting" href="/static/mall/account-setting/index.html#shipping">账户设置</a>
+                   <a className="account-setting" href={`/static/mall/user-setting/index.html?username=${data.username}&avatar=${data.avatar}`}>账户设置</a>
                </div>
                <div className="product-status">
                    <a className="product-status-item" href="/static/mall/new-order-list/index.html#pay">
@@ -96,7 +96,7 @@ const User = React.createClass({
                        <span className="item-name item-icon7">兑换券</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item" href="/static/mall/my-bank-card/index.html">
+                   <a className="personal-item" href="/static/mall/my-bank-card/index.html?id=user">
                        <span className="item-name item-icon8">银行卡</span>
                        <span className="jump-arrow"></span>
                        <span className="bank-card-status">已绑定</span>
@@ -156,7 +156,7 @@ const HotProduct = React.createClass({
 $FW.DOMReady(function() {
     NativeBridge.setTitle('我的商城');
     $FW.Ajax({
-        url: API_PATH + 'mall/api/member/v1/user.json',
+        url: `${API_PATH}mall/api/member/v1/user.json`,
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<User data={data}/>, document.getElementById("cnt"));
