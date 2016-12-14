@@ -16,6 +16,7 @@ const MALL_APP_NAMES = [
     'life-service',
     'service-bill',
     'hot-activity',
+    'footprint',
     // 订单页面
     'order-list',
     'order-detail',
@@ -48,7 +49,8 @@ const MALL_APP_NAMES = [
     'zhuanpan20161024',
     'user-prize-record',
     'game-guess',
-    'game'
+    'game',
+    'new-game'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
