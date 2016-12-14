@@ -35,12 +35,10 @@ const Mall = React.createClass({
         link ? gotoHandler(link) : console.log('no link set');
     },
     componentDidMount: function () {
-
-
         window.addEventListener('touchmove', function() {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
-            if (scrollTop > 100) return false;
+            //if (scrollTop > 100) return false;
 
             let style = scrollTop > 60 ? {
                 background: "rgba(255,255,255,.9)",
