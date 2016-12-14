@@ -42,7 +42,7 @@ const Mall = React.createClass({
 
             if (scrollTop > 100) return false;
 
-            let style = scrollTop > 0 ? {
+            let style = scrollTop > 60 ? {
                 background: "rgba(255,255,255,.9)",
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png",
@@ -83,7 +83,7 @@ const Mall = React.createClass({
             <div className="head-wrap">
                 {banner}
                 <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                    <div style={head_nav_wrap}>
+                    <div style={head_nav_wrap} className="head_nav_wrap">
                         <img className="m-logo" src={this.state.logoImage}/>
                         <a onClick={ () => gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
                            className="search-bar-a">
