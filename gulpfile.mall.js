@@ -15,11 +15,8 @@ const MALL_APP_NAMES = [
     'life-service',
     'service-bill',
     'hot-activity',
-<<<<<<< HEAD
     'footprint',
-=======
 	'user-setting',
->>>>>>> e1c2730cb7110c8ea9333d1f8bc540f44acc3055
     // 订单页面
     'order-list',
     'order-detail',
