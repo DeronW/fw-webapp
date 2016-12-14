@@ -14,7 +14,8 @@ const Mall = React.createClass({
         return {
             background: "transparent",
             logoImage: "images/logo.png",
-            avatarImage: "images/list-icon.png"
+            avatarImage: "images/list-icon.png",
+            borderBottom:"none"
         }
     },
     getHeadImages: function () {
@@ -34,7 +35,9 @@ const Mall = React.createClass({
         link ? gotoHandler(link) : console.log('no link set');
     },
     componentDidMount: function () {
-        window.onscroll = function () {
+
+
+        window.addEventListener('touchmove', function() {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             if (scrollTop > 100) return false;
@@ -52,7 +55,7 @@ const Mall = React.createClass({
             }
 
             this.setState(style);
-        }.bind(this);
+        }.bind(this));
     },
     render: function () {
         let banner;
@@ -143,7 +146,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
     $FW.Ajax({
         url: `${API_PATH}mall/api/index/v1/banners.json`,
-        success: function (data) {
+        success:(data)=> {
             ReactDOM.render(<Mall banners={data.banners}/>, document.getElementById('cnt'));
         }
     })
