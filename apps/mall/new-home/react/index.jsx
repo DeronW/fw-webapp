@@ -119,21 +119,38 @@ const Mall = React.createClass({
 });
 
 const HotSale = React.createClass({
+    getInitialState:function(){
+        return {
+            ps:[]
+        }
+    },
+
+    componentDidMount:function(){
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+            //data: {recommendBizNo: "TJ0000022", totalCount: 8},
+            success: (data) => {
+                this.setState({ps:data.products});
+            }
+        });
+    },
+
     render: function () {
-        let hotProduct = <a className="product-wrap">
-            <img src="images/product-img3.png"/>
-            <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
-            <span className="product-price">12267工分</span>
-        </a>;
+        let hotProduct = (product,index)=>{
+           return(
+                    <a className="product-wrap">
+                        <img src="images/product-img3.png"/>
+                        <span className="product-name">{product.title}</span>
+                        <span className="product-price">{product.score}工分</span>
+                    </a>
+               )
+        }
 
         return (
             <div className="hot-sales">
                 <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
                 <div className="product-list">
-                    {hotProduct}
-                    {hotProduct}
-                    {hotProduct}
-                    {hotProduct}
+                    {this.state.ps.map(hotProduct)}
                 </div>
             </div>
         )
