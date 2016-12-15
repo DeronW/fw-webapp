@@ -1,7 +1,7 @@
 const GameCenter_popNickNameError= React.createClass({
     popErrorBtn:function(){
         this.props.popNickName(true);
-        this.props.popNickName(true);
+        this.props.popError(false);
     },
     render:function(){
         return(

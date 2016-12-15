@@ -122,7 +122,7 @@ const GameCenter = React.createClass({
                                                        onImageClick={this.onImageClickHandler}/>:null}
                 {this.state.newList.length>0?<GameCenter_NewGame data={this.state.newList}/>:null}
                 {this.state.allList.length>0?<GameCenter_AllGame data={this.state.allList}/>:null}
-                {this.state.popError?<GameCenter_popNickNameError data={this.state.errorMessage} popNickName={this.popNickName}/>:null}
+                {this.state.popError?<GameCenter_popNickNameError data={this.state.errorMessage} popNickName={this.popNickName} popError={this.popError}/>:null}
                 {this.state.popNameNick?<GameCenter_popNickname setNameNick={this.setNameNick} popNickName={this.popNickName} popError={this.popError} popErrorMessage={this.setErrorMessage} />:null}
                 {this.state.popAvatar?<GameCenter_popAvatar setAvatar={this.setAvatar} setPopAvatar={this.setPopAvatar} data={this.state.avatarList}/>:null}
             </div>

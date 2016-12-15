@@ -6,7 +6,9 @@ const GameCenter_popNickname = React.createClass({
     },
     popNickConfirm:function(){
         if (str_length(this.state.value) > 12){
-            return alert('您的名字过长');
+            this.props.popNickName(false);
+            this.props.popError(true);
+            this.props.popErrorMessage('您的名字过长');
         }else{
             $FW.Ajax({
                 url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/setnick`,//设置昵称
@@ -16,6 +18,7 @@ const GameCenter_popNickname = React.createClass({
                     nick:this.state.value,
                     token:gameToken
                 },
+                fail: () => true,
                 complete: (data) => {
                     if(data.code==10000){
                         this.props.popNickName(false);
@@ -33,6 +36,7 @@ const GameCenter_popNickname = React.createClass({
     },
     popNickCancel:function(){
         this.props.popNickName(false);
+        this.props.popError(false);
     },
     changeHandler: function (e) {
         this.setState({value: e.target.value})
