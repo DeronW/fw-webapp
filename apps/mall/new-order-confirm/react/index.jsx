@@ -33,7 +33,7 @@ const ConfirmOrder = React.createClass({
     },
     refreshTokenStr: function () {
         $FW.Ajax({
-            url: API_PATH + '/mall/api/order/v1/getTokenStr.json',
+            url: `${API_PATH}/mall/api/order/v1/getTokenStr.json`,
             success: function (data) {
                 window._form_data.tokenStr = data.tokenStr;
             }
