@@ -5,7 +5,11 @@ const GameCenter_popNickname = React.createClass({
         }
     },
     popNickConfirm:function(){
-        if (str_length(this.state.value) > 12){
+        if(str_length(this.state.value) <=0){
+            this.props.popNickName(false);
+            this.props.popError(true);
+            this.props.popErrorMessage('名字不能为空');
+        }else if (str_length(this.state.value) > 12){
             this.props.popNickName(false);
             this.props.popError(true);
             this.props.popErrorMessage('您的名字过长');
