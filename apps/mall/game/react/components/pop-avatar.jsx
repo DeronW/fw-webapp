@@ -1,7 +1,7 @@
 const GameCenter_popAvatar= React.createClass({
     getInitialState: function () {
         return {
-            index:0
+            index:-1
         }
     },
     selectedHandler:function(index){
