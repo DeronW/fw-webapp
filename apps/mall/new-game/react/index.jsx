@@ -1,171 +1,109 @@
 const GameCenter = React.createClass({
     getInitialState: function () {
         return {
-            gameList: []
+            allList: [],
+            newList:[],
+            bannerList:[],
+            avatarList:[],
+            isLogin:this.props.login_status==1?true:false,
+            popNameNick:false,
+            nameValue:'',
+            popAvatar:false,
+            popError:false,
+            avatar:this.props.login_status==1?this.props.user_icon:'',
+            nameNick:this.props.login_status==1?this.props.nameNick:'',
+            errorMessage:''
         }
     },
     componentDidMount: function () {
         $FW.Ajax({
-            url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/gamelist&fr=shop`,//游戏中心列表
+            url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/gamelist&fr=shop`,//游戏中心所有列表
             withCredentials: true,
             success: (data) => {
-                this.setState({gameList:data.list});
+                this.setState({allList:data.list});
             }
+        });
+        $FW.Ajax({
+            url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/newst`,//游戏中心最新游戏
+            withCredentials: true,
+            success: (data) => {
+                this.setState({newList:data.list});
+            }
+        });
+        $FW.Ajax({
+            url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/gamebanner&fr=shop&tag=tag1`,//banner
+            withCredentials: true,
+            success: (data) => {
+                this.setState({bannerList:data.list});
+            }
+        });
+    },
+    clickAvatarHandler:function(){
+        $FW.Ajax({
+            url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/uicons`,//获取头像列表
+            withCredentials: true,
+            success: (data) => {
+                this.setState({
+                    popNameNick:true,
+                    avatarList:data
+                });
+            }
+        });
+    },
+    popNickName:function(a){
+        this.setState({
+            popNameNick:a
+        });
+    },
+
+    setAvatar:function(state){
+        this.setState({
+            avatar:state
+        });
+    },
+    setPopAvatar:function(state){
+        this.setState({
+            popAvatar:state
         });
     },
     onImageClickHandler: function (index) {
         var link = null;
-        var bs = this.props.bannerList;
+        var bs = this.state.bannerList;
         for (var i = 0; i < bs.length; i++) {
             if (i == index) link = bs[i].link;
         }
         link ?location.href =link: console.log('no link set');
     },
+    popError:function(a){
+        this.setState({
+            popError:a
+        });
+    },
+    setErrorMessage:function(msg){
+        this.setState({
+            errorMessage:msg
+        });
+    },
     getHeadImages: function () {
         var images = [];
-        var bs = this.props.bannerList;
+        var bs = this.state.bannerList;
         for (var i = 0; i < bs.length; i++) {
             images.push(bs[i].pic)
         }
         return images;
     },
     render: function(){
-        let banner;
-        if (this.props.bannerList.length) {
-            banner = <BannerGroup className="game-banner"
-                                  images={this.getHeadImages()}
-                                  onImageClick={this.onImageClickHandler}/>
-        } else {
-            banner = <div className="no-banner"></div>
-        }
         return(
             <div className="game-center">
-                <div className="game-head-login">
-                   <div className="avatar"><img src="" /></div>
-                    <div className="name-box">
-                        <div className="nickname-title">游戏昵称</div>
-                        <div className="nickname">未登录</div>
-                    </div>
-                    <div className="login-btn">设置昵称</div>
-                </div>
-                <div className="game-head-unlogin">
-                    <div className="avatar"><img src="" /></div>
-                    <div className="name-box">
-                        <div className="nickname-title">游戏昵称</div>
-                        <div className="nickname">未登录</div>
-                    </div>
-                    <div className="unlogin-btn">登录设置昵称</div>
-                </div>
-                {banner}
-                <div className="new-game">
-                    <div className="new-game-li">
-                        <a href="#" className="new-game-a"><img src=""/> </a>
-                        <div className="new-game-text">我们爱战斗</div>
-                    </div>
-                    <div className="new-game-li">
-                        <a href="#" className="new-game-a"><img src=""/> </a>
-                        <div className="new-game-text">我们爱战斗</div>
-                    </div>
-                    <div className="new-game-li">
-                        <a href="#" className="new-game-a"><img src=""/> </a>
-                        <div className="new-game-text">我们爱战斗</div>
-                    </div>
-                    <div className="new-game-li">
-                        <a href="#" className="new-game-a"><img src=""/> </a>
-                        <div className="new-game-text">我们爱战斗</div>
-                    </div>
-                </div>
-                <div className="all-game">
-                    <div className="all-game-li">
-                        <div className="game-img"><img src=""/></div>
-                        <div className="game-up-img"></div>
-                        <div className="game-name">我们爱战斗</div>
-                        <div className="game-desc">飞行 | 射击</div>
-                    </div>
-                    <div className="all-game-li">
-                        <div className="game-img"><img src=""/></div>
-                        <div className="game-up-img"></div>
-                        <div className="game-name">我们爱战斗</div>
-                        <div className="game-desc">飞行 | 射击</div>
-                    </div>
-                    <div className="all-game-li">
-                        <div className="game-img"><img src=""/></div>
-                        <div className="game-up-img"></div>
-                        <div className="game-name">我们爱战斗</div>
-                        <div className="game-desc">飞行 | 射击</div>
-                    </div>
-                    <div className="all-game-li">
-                        <div className="game-img"><img src=""/></div>
-                        <div className="game-up-img"></div>
-                        <div className="game-name">我们爱战斗</div>
-                        <div className="game-desc">飞行 | 射击</div>
-                    </div>
-                </div>
-                <div className="pop-error-box">
-                    <div className="pop-error">
-                        <div className="pop-error-text">昵称被占啦，再开脑洞起一个吧！</div>
-                        <div className="pop-error-btn">确定</div>
-                    </div>
-                </div>
-                <div className="pop-nickname-box">
-                    <div className="pop-nickname">
-                        <div className="pop-nickname-title"><img src=""/></div>
-                        <div className="nickname-input"><input placeholder="请输入昵称" value='' /></div>
-                        <div className="nickname-tip">不超过12字符，支持中英文、数字</div>
-                        <div className="nickname-btn">
-                            <div className="nickname-cancel">取消</div>
-                            <div className="nickname-confirm">确定</div>
-                        </div>
-                    </div>
-                </div>
-                <div className="pop-avatar-box">
-                    <div className="pop-avatar">
-                        <div className="pop-avatar-title"><img src=""/></div>
-                        <div className="pop-avatar-ul">
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-selected"></div>
-                            </div>
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-unselected"></div>
-                            </div>
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-unselected"></div>
-                            </div>
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-unselected"></div>
-                            </div>
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-unselected"></div>
-                            </div>
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-unselected"></div>
-                            </div>
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-unselected"></div>
-                            </div>
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-unselected"></div>
-                            </div>
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-unselected"></div>
-                            </div>
-                            <div className="pop-avatar">
-                                <img src=""/>
-                                <div className="avatar-unselected"></div>
-                            </div>
-                        </div>
-                        <div className="pop-error-btn">确定</div>
-                    </div>
-                </div>
+                {head}
+                {this.state.banner.length>0?<BannerGroup className="game-banner"
+                                                       images={this.getHeadImages()}
+                                                       onImageClick={this.onImageClickHandler}/>:null}
+                {this.state.newList.length>0?<GameCenter_NewGame data={this.state.newList}/>:null}
+                {this.state.allList.length>0?<GameCenter_AllGame data={this.state.allList}/>:null}
+                {this.state.popError?<GameCenter_popNickNameError data={this.state.errorMessage} popNickName={this.popNickName}/>:null}
+                {this.state.popNameNick?<GameCenter_popNickname popNickName={this.popNickName} popError={this.popError} popErrorMessage={this.setErrorMessage} />:null}
+                {this.state.popAvatar?<GameCenter_popAvatar setAvatar={this.setAvatar} setPopAvatar={this.setPopAvatar} data={this.state.avatarList}/>:null}
             </div>
         );
     }
@@ -179,13 +117,13 @@ $FW.DOMReady(function(){
             ReactDOM.render(<Header title={"游戏中心"} back_handler={backward}/>, document.getElementById
             ('header'));
     }
-    // $FW.Ajax({
-    //     url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/gamebanner&fr=shop&tag=tag1`,//banner
-    //     withCredentials: true,
-    //     success: (data) => {
-            ReactDOM.render(<GameCenter bannerList={[]}/>, document.getElementById('cnt'));
-    //     }
-    // });
+    $FW.Ajax({
+        url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/getuinfo`,//判断登录状态
+        withCredentials: true,
+        success: (data) => {
+            ReactDOM.render(<GameCenter data={data} />, document.getElementById('cnt'));
+        }
+    });
 });
 
 function backward(){
