@@ -49,7 +49,7 @@ const MALL_APP_NAMES = [
     'user-prize-record',
     'game-guess',
     'game',
-    'new-game',
+    'old-game',
     {
         name: 'waiting',
         describe: '建设中 页面',
