@@ -11,7 +11,10 @@ const GameCenter_popAvatar= React.createClass({
         $FW.Ajax({
             url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/seticon`,//确认头像
             method:'post',
-            data:{icon:url},
+            data:{
+                icon:url,
+                token:gameToken
+            },
             withCredentials: true,
             success: (data) => {
                 this.props.setAvatar(url);

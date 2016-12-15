@@ -142,6 +142,10 @@ $FW.DOMReady(function(){
         url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/getuinfo`,//判断登录状态
         withCredentials: true,
         success: (data) => {
+            var gameToken='';
+            if(data.login_status==1){
+                gameToken=data.token;
+            }
             ReactDOM.render(<GameCenter data={data} />, document.getElementById('cnt'));
         }
     });
@@ -150,5 +154,19 @@ $FW.DOMReady(function(){
 function backward(){
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/new-home/index.html'
 }
-
+function str_length(str) {
+    var byteLen = 0, len = str.length;
+    if (str) {
+        for (var i = 0; i < len; i++) {
+            if (str.charCodeAt(i) > 255) {
+                byteLen += 2;
+            } else {
+                byteLen++;
+            }
+        }
+        return byteLen;
+    } else {
+        return 0;
+    }
+}
 

@@ -9,7 +9,10 @@ const GameCenter_popNickname = React.createClass({
             url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/setnick`,//设置昵称
             withCredentials: true,
             method:'post',
-            data:{nick:this.state.value},
+            data:{
+                nick:this.state.value,
+                token:gameToken
+            },
             complete: (data) => {
                 console.log(data);
                 if(data.code==10000){
@@ -28,7 +31,11 @@ const GameCenter_popNickname = React.createClass({
         this.props.popNickName(false);
     },
     changeHandler: function (e) {
-        this.setState({value: e.target.value})
+        if (str_length(this.state.value) > 12){
+            return alert('您的名字过长');
+        }else{
+            this.setState({value: e.target.value})
+        }
     },
     render :function(){
         return (
@@ -45,3 +52,4 @@ const GameCenter_popNickname = React.createClass({
             </div>
         )
     }})
+
