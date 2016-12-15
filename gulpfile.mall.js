@@ -50,6 +50,7 @@ const MALL_APP_NAMES = [
     'game-guess',
     'game',
     'old-game',
+    'zhuanpan20161215',
     {
         name: 'waiting',
         describe: '建设中 页面',
