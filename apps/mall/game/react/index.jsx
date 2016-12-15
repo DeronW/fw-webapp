@@ -104,7 +104,7 @@ const GameCenter = React.createClass({
                 <div className="nickname-title">游戏昵称</div>
                 <div className="nickname">{this.state.nameNick}</div>
             </div>
-            <div className="login-btn" onClick={()=>{this.popNickName(true)}}>设置昵称</div>
+            <div className="login-btn" onClick={()=>{this.popNickName(true)}}>修改昵称</div>
         </div>:
             <div className="game-head-unlogin">
                 <div className="avatar"><img src="images/default-avatar.png" /></div>

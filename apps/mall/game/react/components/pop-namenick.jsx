@@ -43,7 +43,7 @@ const GameCenter_popNickname = React.createClass({
                 <div className="pop-nickname">
                     <div className="pop-nickname-title"><img src="images/title-img-edit.png"/></div>
                     <div className="nickname-input"><input placeholder="请输入昵称" value={this.state.value} maxLength="12" onChange={this.changeHandler} /></div>
-                    <div className="nickname-tip">不超过12字符，支持中英文、数字</div>
+                    <div className="nickname-tip">不超过12字符</div>
                     <div className="nickname-btn">
                         <div className="nickname-cancel" onClick={this.popNickCancel}>取消</div>
                         <div className="nickname-confirm" onClick={this.popNickConfirm}>确定</div>
