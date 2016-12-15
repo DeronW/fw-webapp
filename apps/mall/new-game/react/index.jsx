@@ -112,7 +112,7 @@ const GameCenter = React.createClass({
         return(
             <div className="game-center">
                 {head}
-                {this.state.banner.length>0?<BannerGroup className="game-banner"
+                {this.state.bannerList.length>0?<BannerGroup className="game-banner"
                                                        images={this.getHeadImages()}
                                                        onImageClick={this.onImageClickHandler}/>:null}
                 {this.state.newList.length>0?<GameCenter_NewGame data={this.state.newList}/>:null}
