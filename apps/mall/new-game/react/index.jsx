@@ -5,13 +5,13 @@ const GameCenter = React.createClass({
             newList:[],
             bannerList:[],
             avatarList:[],
-            isLogin:this.props.login_status==1?true:false,
+            isLogin:this.props.data.login_status==1?true:false,
             popNameNick:false,
             nameValue:'',
             popAvatar:false,
             popError:false,
-            avatar:this.props.login_status==1?this.props.user_icon:'',
-            nameNick:this.props.login_status==1?this.props.nameNick:'',
+            avatar:this.props.data.login_status==1?this.props.data.list.user_icon:'',
+            nameNick:this.props.data.login_status==1?this.props.data.list.listnameNick:'',
             errorMessage:''
         }
     },
