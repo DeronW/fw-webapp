@@ -99,7 +99,7 @@ const GameCenter = React.createClass({
     },
     render: function(){
         let head=this.state.isLogin?<div className="game-head-login">
-            <div className="avatar"><img src={this.state.avatar} onClick={()=>{this.setPopAvatar(true)}}/></div>
+            <div className="avatar"><img src={this.state.avatar} onClick={()=>{this.clickAvatarHandler}}/></div>
             <div className="name-box">
                 <div className="nickname-title">游戏昵称</div>
                 <div className="nickname">{this.state.nameNick}</div>
