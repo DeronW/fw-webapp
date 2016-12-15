@@ -11,6 +11,7 @@ const GameCenter_popNickname = React.createClass({
             method:'post',
             data:{nick:this.state.value},
             complete: (data) => {
+                console.log(data);
                 if(data.code==10000){
                     this.props.popNickName(false);
                     this.props.nameNick(this.state.value)
