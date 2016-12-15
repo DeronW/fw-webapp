@@ -5,37 +5,37 @@ const GameCenter_popNickname = React.createClass({
         }
     },
     popNickConfirm:function(){
-        $FW.Ajax({
-            url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/setnick`,//设置昵称
-            withCredentials: true,
-            method:'post',
-            data:{
-                nick:this.state.value,
-                token:gameToken
-            },
-            complete: (data) => {
-                console.log(data);
-                if(data.code==10000){
-                    this.props.popNickName(false);
-                    this.props.setNameNick(this.state.value)
-                }else{
-                    this.props.popNickName(false);
-                    this.props.popError(true);
-                    this.props.popErrorMessage(data.message);
-                }
+        if (str_length(this.state.value) > 12){
+            return alert('您的名字过长');
+        }else{
+            $FW.Ajax({
+                url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/setnick`,//设置昵称
+                withCredentials: true,
+                method:'post',
+                data:{
+                    nick:this.state.value,
+                    token:gameToken
+                },
+                complete: (data) => {
+                    if(data.code==10000){
+                        this.props.popNickName(false);
+                        this.props.setNameNick(this.state.value)
+                    }else{
+                        this.props.popNickName(false);
+                        this.props.popError(true);
+                        this.props.popErrorMessage(data.message);
+                    }
 
-            }
-        });
+                }
+            });
+        }
+
     },
     popNickCancel:function(){
         this.props.popNickName(false);
     },
     changeHandler: function (e) {
-        if (str_length(this.state.value) > 12){
-            return alert('您的名字过长');
-        }else{
-            this.setState({value: e.target.value})
-        }
+        this.setState({value: e.target.value})
     },
     render :function(){
         return (
