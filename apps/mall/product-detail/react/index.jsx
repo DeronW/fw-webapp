@@ -45,7 +45,7 @@ const Product = React.createClass({
 	                	<div className="product-inf-list">3.实物礼品3-7个工作日内发货，暂不支持指定快递，请谅解；</div>
 	                	<div className="product-inf-list">4.请您根据需要谨慎兑换，下单即说明您认可以上规则。</div>
                 	</div>
-                	
+
                     {data.desc ? <div className="desc">{data.desc}</div> : null}
                     {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
                 </div>
@@ -260,7 +260,7 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('商品详情');
 
     $FW.Ajax({
-        url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
+        url: `${API_PATH}mall/api/detail/v1/item_detail.json?bizNo=` + bizNo,
         enable_loading: true,
         success: function (data) {
             if (data.title) {

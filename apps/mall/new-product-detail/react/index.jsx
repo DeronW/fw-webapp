@@ -5,22 +5,37 @@ const Product = React.createClass({
 			show: true,
 			showOverlayDef:false,
 			showOverlay:false,
-            value:1
+            value:1,
+            background: "transparent"
 			}
     },
 
     toggleHandler: function () {
         this.setState({show: !this.state.show});
     },
-	
+
 	childEventHandler: function(params,value){
 		this.setState({showOverlayDef:true,showOverlay: params,value:value})
 	},
-	
+
 	shopHandler: function (e) {
 		location.href = location.protocol + '//' + location.hostname + '/static/mall/shopping-cart/index.html'
 	},
-	
+
+	componentDidMount: function () {
+        window.onscroll = function () {
+            var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+
+            if (scrollTop > 100) return false;
+            let id = document.querySelector('._style_header_fixed');
+            if(scrollTop > 10) {
+                id.setAttribute("class", "no_clarity _style_header_fixed");
+            }
+            else{
+                id.setAttribute("class", "clarity _style_header_fixed");
+            }
+        }.bind(this);
+    },
 	render: function () {
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
@@ -91,11 +106,11 @@ const Product = React.createClass({
 
         let vip_tag = data.vipConfigUuid ? (data.vipLevel ? (
             <span className="vip-tag">{user_level_manifest}</span>) : null) : null;
-		
-		let shop_card_prompt = null;	
+
+		let shop_card_prompt = null;
 		if (this.state.showOverlayDef)
                 shop_card_prompt = (<div className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>加入购物车成功</div>);
-			   
+
 		return (
            <div className="detail-box">
 			  {shop_card_prompt}
@@ -129,7 +144,7 @@ const Product = React.createClass({
                         </div>
                     </div>
                     <div className="detail-inf1">
-                       
+
                     </div>
                 </div>
                 {data.tags.length > 0 ?
@@ -144,8 +159,8 @@ const Product = React.createClass({
                 {activity_desc}
                 {rich_detail}
                 <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
-                <PlusMinus stock={data.stock} ticket_count={data.ticketList} parentCallback={this.childEventHandler}
-                           check_messages={data.checkMessages} 
+                <PlusMinus is_login={data.is_login} stock={data.stock} ticket_count={data.ticketList} parentCallback={this.childEventHandler}
+                           check_messages={data.checkMessages}
                            voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
             </div>
         )
@@ -162,7 +177,7 @@ const PlusMinus = React.createClass({
             plus: stock > 0
         }
     },
-	
+
 	toggleOverlay: function () {
 		let _this=this;
         let bizNo = $FW.Format.urlQuery().bizNo;
@@ -264,7 +279,7 @@ const PlusMinus = React.createClass({
         }
 
     },
-	
+
     blur: function (e) {
         this.updateCount(e.target.value)
     },
@@ -326,7 +341,7 @@ $FW.DOMReady(function () {
     });
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"商品详情"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={""}/>, document.getElementById('header'));
     }
 });
 

@@ -17,10 +17,10 @@ const HotProduct = React.createClass({
     render: function(){
         let hot_product_item = (product,index) => {
             return (
-                <a className={"hot-product-item hot-product-item-bg-"+parseInt(index+1)} key={index} onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + product.bizNo)}>
+                <a className={"hot-product-item hot-product-item-bg-"+parseInt(index+1)} key={index} onClick={ () => gotoHandler('/static/mall/new-product-detail/index.html?bizNo=' + product.bizNo)}>
                     <img className="hot-img" src={product.img}/>
                     <span className={"hot-img-title hot-img-title-color-"+parseInt(index+1)}>{product.abbreviation}</span>
-                    <span className="hot-img-price">&yen;{product.rmbPrice}+{product.score}工分</span>
+                    <span className="hot-img-price">{product.rmbPrice==0.00?null:"¥"+product.rmbPrice+"+"}{product.score}工分</span>
                 </a>
             )
         };

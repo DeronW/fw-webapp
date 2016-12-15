@@ -46,7 +46,7 @@ const WAP_APP_NAMES = [
     'vip-prerogative', // VIP特权详情页
     'guide-cookbook', // 用户使用引导页面
     'app-download', // app 下载页面
-    'topic-worker',//工友会专题页面
+    'topic-gong-you-hui',//工友会专题页面
 
     //圈子相关页面
     'circle-tender-complete',//直融标成功
@@ -63,16 +63,24 @@ const WAP_APP_NAMES = [
         name: 'notice-risk-prompt', // 风险揭示
         include_components: [],
         include_common_js: []
-    }
+    },
+
+    // test page
+    'test-native-bridge'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     WAP_APP_NAMES.forEach(function (i) {
         let common_components = [
-            'loading.jsx', 'alert.jsx', 'wap/header.jsx', 'toast.jsx',
-            'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
+            'use-strict.jsx', 'loading.jsx', 'alert.jsx', 'wap/header.jsx',
+            'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
         ];
-        let common_js = ['javascripts/wap/fw-ajax-error-handler.js'];
+
+        let common_js = [
+            'javascripts/use-strict.js',
+            'javascripts/wap/fw-ajax-error-handler.js',
+            'javascripts/wap/fw-common.js'
+        ];
 
         generate_task('wap', i, {
             debug: true,
@@ -81,7 +89,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             include_common_js: common_js
         });
         generate_task('wap', i, {
-            api_path: "http://m.9888.cn/",
+            api_path: "//m.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/wap/${i.name || i}/`,
             include_components: common_components,
@@ -89,6 +97,5 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         });
     });
 
-    gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((page) =>
-        `wap:pack:${typeof(page) == 'string' ? page : page.name}:revision`)));
+    gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((i) => `wap:pack:${i.name || i}:revision`)));
 };

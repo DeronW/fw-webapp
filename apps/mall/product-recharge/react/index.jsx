@@ -307,5 +307,5 @@ $FW.DOMReady(function () {
 
 
 function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html';
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/new-home/index.html';
 }

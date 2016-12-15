@@ -1,0 +1,153 @@
+@import "common.less";
+.workerBox{
+  width: 100%;
+  height: 100%;
+  background: @colorWhite;
+  .banner{
+    width: 100%;
+    height: 360px;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .question{
+    width: 100%;
+    height: 460px;
+    .questionTitle{
+      width: 100%;
+      text-align: center;
+      font-size: @fontSize36;
+      color: @color3;
+      margin: 60px auto 48px;
+    }
+    .questionText{
+      color: @color4d;
+      font-size: @fontSize24;
+      text-indent: 2em;
+      line-height: 40px;
+      margin: 0 40px;
+    }
+  }
+  .wealth{
+    width: 100%;
+    height: 100%;
+    background: @colorF1;
+    .wealthTitle{
+      font-size: @fontSize36;
+      color: @color3;
+      width: 100%;
+      text-align: center;
+      padding:60px 0 48px 0;
+      img{
+        vertical-align: middle;
+      }
+    }
+    .wealthContent{
+      width: 100%;
+      display: table;
+      padding-bottom: 2px;
+      height: 824px;
+      overflow: hidden;
+      .wealthContentPerson{
+        float: left;
+        width: 50%;
+        text-align: center;
+        margin-bottom: 50px;
+        .name{
+          font-size: @fontSize26;
+          color: @color3;
+          margin: 20px 0 10px 0;
+        }
+        .job {
+          width: 110px;
+          height: 36px;
+          line-height: 36px;
+          text-align: center;
+          color: @colorWhite;
+          background: url('../images/job.png') no-repeat;
+          margin: auto;
+          font-size: @fontSize24;
+        }
+      }
+    }
+    .wealthText{
+      margin-top: 2px;
+      padding: 0 40px 60px 40px;
+      div{
+        background: #f1f1f1;
+        text-indent: 2em;
+        font-size: @fontSize24;
+        color: @color4d;
+        line-height: 40px;
+      }
+    }
+    .wealthImg{
+      margin: 0 40px;
+      img{
+        display: block;
+        margin-bottom: 40px;
+        width: 100%;
+        height: 360px;
+      }
+    }
+  }
+}
+.moreBtn{
+  display: block;
+  width: 280px;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  background: url('../images/more.png') no-repeat;
+  margin: 0 auto 80px;
+  color: @colorWhite;
+  font-size: @fontSize24;
+}
+.northEast{
+  width: 100%;
+  .northEastTitle{
+    width: 100%;
+    text-align: center;
+    font-size: @fontSize36;
+    color: @color3;
+    padding: 60px 0 0;
+  }
+  .northTitle{
+    width: 100%;
+    text-align: center;
+    font-size: @fontSize24;
+    color: @color3;
+    margin:48px 0 40px;
+  }
+  .northImg{
+    margin: 0 40px;
+    img{
+      display: block;
+      margin-bottom: 30px;
+      width: 100%;
+      height: 360px;
+    }
+  }
+}
+.aboutMe{
+  padding: 0 40px 1px;
+  height: 420px;
+  background: @colorF1;
+  text-align: center;
+  .aboutTitle{
+    width: 100%;
+    text-align: center;
+    font-size: @fontSize36;
+    color: @color3;
+    padding: 60px 0 30px;
+  }
+  .aboutText{
+    font-size: @fontSize24;
+    color: @color4d;
+    text-indent: 2em;
+    text-align: left;
+    margin-top: 40px;
+    line-height: 36px;
+  }
+}

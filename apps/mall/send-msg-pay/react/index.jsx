@@ -28,15 +28,25 @@ const SendCode = React.createClass({
         return {
             mobileNo:mobileNo,
             merchantNo:merchantNo,
-            reSend:false,
+            reSend:true,
             value:60,
             active:false,
             code:""
         }
     },
-
-    tick: function() {
+	
+	//倒计时递减
+    decline: function() {
         this.setState({value: this.state.value - 1});
+    },
+	
+    //倒计时
+    tick: function() {
+        this.interval = setInterval(this.decline, 1000);
+    },
+	
+	stopTick: function() {
+        clearInterval(this.interval);
     },
 
     //重新发送验证码
@@ -47,31 +57,27 @@ const SendCode = React.createClass({
         }
 
         $FW.Ajax({
-            url:  './ucf_pay.json',
+            url:  API_PATH + '/mall/api/payment/v1/ucf_pay.json',
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
-                if(data.code=10000){
                     if(!this.state.reSend) return;
-                    this.setState({value: 60});
-                    this.setState({reSend: false});
-                    this.interval = setInterval(this.tick, 1000);
-                }
+                    this.setState({value: 60,reSend: false});
+                    this.tick()
              }.bind(this)
         })
     },
 
     //加载完成之后立刻倒计时
     componentDidMount: function() {
-        this.interval = setInterval(this.tick, 1000);
+        this.reSend();this.setState({reSend: false});
     },
 
     //倒计时完成终止
     componentDidUpdate:function() {
         if(this.state.value==55){
-            clearInterval(this.interval);
-            this.setState({value: "获取验证码"});
-            this.setState({reSend: true});
+			this.stopTick();
+			this.setState({value: "获取验证码",reSend: true});
         }
     },
 
@@ -96,13 +102,14 @@ const SendCode = React.createClass({
             checkCode: this.state.code
         }
         $FW.Ajax({
-            url:  './ucf_pay.json',
+            url:  API_PATH +'/mall/api/payment/v1/ucf_pay.json',
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
                 alert(data.code);
                 //var data= data.bankCards;
-                window.location.href="/static/mall/order-complete/index.html"
+                window.location.href = location.protocol + '//' + location.hostname +
+				"/static/mall/order-complete/index.html"
             }
         })
     },

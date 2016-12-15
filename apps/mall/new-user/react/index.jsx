@@ -1,3 +1,14 @@
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 const User = React.createClass({
     getInitialState:function(){
         return {
@@ -6,6 +17,7 @@ const User = React.createClass({
         }
     },
     render:function(){
+        let data = this.props.data;
         var header = {
             background:this.state.background,
             color:this.state.color,
@@ -38,58 +50,60 @@ const User = React.createClass({
                 })
             }
         }
+
         return (
-           <div className="user-wrap">
-               <div style={header}>我的商城</div>
-               <div className="user-info">
+            <div className="user-wrap">
+                {/*<div style={header}>我的商城</div>*/}
+               <div className="user-info" style={{ marginTop: '-70px' }}>
                    <img className="profile-img" src="images/boy.jpg"/>
-                   <div className="user-name">蓝月蓝月<span className="user-level"><img src="images/usercenter_vip1_icon.png"/></span></div>
-                   <div className="available-score">可用工分<span className="gongfeng">998544448</span></div>
-                   <a className="account-setting">账户设置</a>
+                   <div className="user-name">{data.username}
+                       {data.vip_level==1?null:<span className="user-level"><img src={`images/usercenter_vip${data.vip_level-1}_icon.png`}/></span>}</div>
+                   <div className="available-score">可用工分<span className="gongfeng">{data.score}</span></div>
+                   <a className="account-setting" href={`/static/mall/user-setting/index.html?username=${data.username}&avatar=${data.avatar}`}>账户设置</a>
                </div>
                <div className="product-status">
-                   <a className="product-status-item">
+                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#pay">
                        <img src="images/icon1.jpg"/>
                        <span className="status-name">待付款</span>
                        <span className="remind-circle">2</span>
                    </a>
-                   <a className="product-status-item">
+                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#prepare">
                        <img src="images/icon2.jpg"/>
                        <span className="status-name">待发货</span>
                        <span className="remind-circle">2</span>
                    </a>
-                   <a className="product-status-item">
+                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#shipping">
                        <img src="images/icon3.jpg"/>
                        <span className="status-name">待收货</span>
                        <span className="remind-circle">2</span>
                    </a>
-                   <a className="product-status-item">
+                   <a className="product-status-item" href="/static/mall/new-order-list/index.html#complete">
                        <img src="images/icon4.jpg"/>
                        <span className="status-name">已完成</span>
                    </a>
-                   <a className="all-orders">
+                   <a className="all-orders" href="/static/mall/new-order-list/index.html#all">
                        <img src="images/icon5.jpg"/>
                        <span className="status-name">全部订单</span>
                    </a>
                    <div className="seperate-line"></div>
                </div>
                <div className="user-personal-items">
-                   <a className="personal-item">
+                   <a className="personal-item" href="/static/mall/deliver-address/index.html?preview=true">
                        <span className="item-name item-icon6">收货地址</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item">
+                   <a className="personal-item" href="/static/mall/voucher/index.html">
                        <span className="item-name item-icon7">兑换券</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item">
+                   <a className="personal-item" href="/static/mall/my-bank-card/index.html?id=user">
                        <span className="item-name item-icon8">银行卡</span>
                        <span className="jump-arrow"></span>
                        <span className="bank-card-status">已绑定</span>
                    </a>
                </div>
                <div className="icon-list">
-                   <a className="list-box">
+                   <a className="list-box" href="/static/mall/user-prize-record/index.html">
                        <img src="images/icon9.jpg"/>
                        <span className="box-title1">抽奖记录</span>
                    </a>
@@ -97,11 +111,11 @@ const User = React.createClass({
                        <img src="images/icon11.jpg"/>
                        <span className="box-title2">我的足迹</span>
                    </a>
-                   <a className="list-box">
+                   <a className="list-box" href="tel:400-0322-988">
                        <img src="images/icon13.jpg"/>
                        <span className="box-title3">客服热线</span>
                    </a>
-                   <a className="list-box">
+                   <a className="list-box" href="http://m.9888.cn/static/wap/faq/index.html">
                        <img src="images/icon14.jpg"/>
                        <span className="box-title4">帮助中心</span>
                    </a>
@@ -130,7 +144,7 @@ const User = React.createClass({
 const HotProduct = React.createClass({
     render:function(){
         return (
-            <a className="product-wrap">
+            <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=')}>
                  <img src="images/product.jpg"/>
                  <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
                  <span className="product-price">12267工分</span>
@@ -141,9 +155,16 @@ const HotProduct = React.createClass({
 
 $FW.DOMReady(function() {
     NativeBridge.setTitle('我的商城');
-    ReactDOM.render(<User/>, document.getElementById('cnt'));
+    $FW.Ajax({
+        url: `${API_PATH}mall/api/member/v1/user.json`,
+        enable_loading: true,
+        success: function (data) {
+            ReactDOM.render(<User data={data}/>, document.getElementById("cnt"));
+        }
+    })
 });
 
 function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
 }
+

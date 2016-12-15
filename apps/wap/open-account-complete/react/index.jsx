@@ -1,8 +1,3 @@
-'use strict';
-
-const API_PATH = document.getElementById('api-path').value;
-
-
 var Nav = React.createClass({
     render: function() {
         return (

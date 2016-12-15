@@ -84,15 +84,15 @@ const OrderBlock = React.createClass({
 	clickPay: function (index) {
         location.href = '/static/mall/user/index.html';
     },
-	
+
 	clickCancel: function (index) {
 	    confirmPanel.show()
     },
-	
+
 	clickCancelNo: function (index) {
 	    confirmPanel.hide()
     },
-	
+
     render: function () {
 		let pay_color = {
             color:"#fd4d4c",
@@ -203,10 +203,10 @@ const ConfAlert = React.createClass({
     },
 	cancelY: function () {
        $FW.Ajax({
-        url: "./order_list.json",
+        url: `${API_PATH}mall/api/member/v1/order_list.json`,
         enable_loading: true,
 		success: function (data) {
-		
+
 		}
 		});
     },
@@ -222,7 +222,7 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单列表');
 
     $FW.Ajax({
-        url: "./order_list.json",
+        url: `${API_PATH}/mall/api/member/v1/order_list.json`,
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));
@@ -236,7 +236,7 @@ $FW.DOMReady(function () {
     }
 });
 function back_handler() {
-    location.href = '/static/mall/user/index.html';
+    location.href = '/static/mall/new-user/index.html';
 }
 
 //window.onNativeMessageReceive = function (msg) {

@@ -220,5 +220,14 @@ const Address = React.createClass({
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('新建收货地址');
+
+    if ($FW.Utils.shouldShowHeader()) {
+        ReactDOM.render(<Header title={"新建收货地址"} back_handler={back_handler}/>, document.getElementById('header'));
+    }
+
     ReactDOM.render(<Address />, document.getElementById('cnt'));
 });
+
+function back_handler() {
+        location.href = '/static/mall/deliver-address/index.html?preview=true'
+}
