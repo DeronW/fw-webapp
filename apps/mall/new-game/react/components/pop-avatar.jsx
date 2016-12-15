@@ -35,7 +35,7 @@ const GameCenter_popAvatar= React.createClass({
                     <div className="pop-avatar-ul">
                         {this.props.data.list.map(list)}
                     </div>
-                    <div className="pop-avatar-btn" onClick={()=>{this.confirmAvatar(this.props.data[this.state.index])}}>确定</div>
+                    <div className="pop-avatar-btn" onClick={()=>{this.confirmAvatar(this.props.data.list[this.state.index])}}>确定</div>
                 </div>
             </div>
         )
