@@ -65,7 +65,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'
         ];
 
-        let include_common_js = [
+        let include_javascripts = [
             'javascripts/use-strict.js',
             'javascripts/mall/fw-ajax-error-handler.js',
             'javascripts/mall/fw-common.js'
@@ -75,7 +75,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             debug: true,
             api_path: CONSTANTS.mall.dev_api_path,
             include_components: include_components,
-            include_common_js: include_common_js
+            include_javascripts: include_javascripts
         });
 
         generate_task('mall', i, {
@@ -83,7 +83,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             api_path: '//mmall.9888.cn/',
             cdn_prefix: `/static/mall/${i.name || i}/`,
             include_components: include_components,
-            include_common_js: include_common_js
+            include_javascripts: include_javascripts
         });
     });
 
