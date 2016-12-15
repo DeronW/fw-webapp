@@ -2,10 +2,10 @@ const GameCenter_NewGame = React.createClass({
     render:function(){
 
         let newList=(list,index)=>{
-            let link=(list.game_url==''||list.game_url=='#')?null:href=list.game_url
+            let link=(list.game_url.indexOf('#')>0)?<a href={list.game_url} className="new-game-a"><img src={list.icon}/></a>:<a className="new-game-a"><img src={list.icon}/></a>
             return(
                 <div className="new-game-li" key={index}>
-                    <a {link} className="new-game-a"><img src={list.icon}/></a>
+                    {link}
                     <div className="new-game-text">{list.game_name}</div>
                 </div>
             )
