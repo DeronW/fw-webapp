@@ -76,7 +76,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
         ];
 
-        let common_js = [
+        let include_javascripts = [
             'javascripts/use-strict.js',
             'javascripts/wap/fw-ajax-error-handler.js',
             'javascripts/wap/fw-common.js'
@@ -86,14 +86,14 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             debug: true,
             api_path: CONSTANTS.wap.dev_api_path,
             include_components: common_components,
-            include_common_js: common_js
+            include_javascripts: include_javascripts
         });
         generate_task('wap', i, {
             api_path: "//m.9888.cn/",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/wap/${i.name || i}/`,
             include_components: common_components,
-            include_common_js: common_js
+            include_javascripts: include_javascripts
         });
     });
 
