@@ -10,7 +10,7 @@ const GameCenter = React.createClass({
             nameValue:'',
             popAvatar:false,
             popError:false,
-            avatar:this.props.data.login_status==1?this.props.data.list.user_icon:'',
+            avatar:this.props.data.login_status==1&&this.props.data.list.user_icon?this.props.data.list.user_icon:'images/default-avatar.png',
             nameNick:this.props.data.login_status==1?this.props.data.list.nickname:'',
             errorMessage:''
         }
@@ -107,7 +107,7 @@ const GameCenter = React.createClass({
             <div className="login-btn" onClick={()=>{this.popNickName(true)}}>设置昵称</div>
         </div>:
             <div className="game-head-unlogin">
-                <div className="avatar"><img src="images/头像00.png" /></div>
+                <div className="avatar"><img src="images/default-avatar.png" /></div>
                 <div className="name-box">
                     <div className="nickname-title">游戏昵称</div>
                     <div className="nickname">未登录</div>
