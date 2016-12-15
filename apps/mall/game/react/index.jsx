@@ -152,7 +152,7 @@ $FW.DOMReady(function(){
 });
 
 function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/new-home/index.html'
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html'
 }
 function str_length(str) {
     var byteLen = 0, len = str.length;
