@@ -79,6 +79,11 @@ const GameCenter = React.createClass({
             popError:a
         });
     },
+    setNameNick:function(a){
+    this.setState({
+        nameNick:a
+    });
+},
     setErrorMessage:function(msg){
         this.setState({
             errorMessage:msg
@@ -118,7 +123,7 @@ const GameCenter = React.createClass({
                 {this.state.newList.length>0?<GameCenter_NewGame data={this.state.newList}/>:null}
                 {this.state.allList.length>0?<GameCenter_AllGame data={this.state.allList}/>:null}
                 {this.state.popError?<GameCenter_popNickNameError data={this.state.errorMessage} popNickName={this.popNickName}/>:null}
-                {this.state.popNameNick?<GameCenter_popNickname popNickName={this.popNickName} popError={this.popError} popErrorMessage={this.setErrorMessage} />:null}
+                {this.state.popNameNick?<GameCenter_popNickname setNameNick={this.setNameNick} popNickName={this.popNickName} popError={this.popError} popErrorMessage={this.setErrorMessage} />:null}
                 {this.state.popAvatar?<GameCenter_popAvatar setAvatar={this.setAvatar} setPopAvatar={this.setPopAvatar} data={this.state.avatarList}/>:null}
             </div>
         );
