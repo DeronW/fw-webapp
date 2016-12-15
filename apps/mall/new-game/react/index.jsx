@@ -11,7 +11,7 @@ const GameCenter = React.createClass({
             popAvatar:false,
             popError:false,
             avatar:this.props.data.login_status==1?this.props.data.list.user_icon:'',
-            nameNick:this.props.data.login_status==1?this.props.data.list.listnameNick:'',
+            nameNick:this.props.data.login_status==1?this.props.data.list.nickname:'',
             errorMessage:''
         }
     },
@@ -94,8 +94,8 @@ const GameCenter = React.createClass({
     },
     render: function(){
         let head=this.state.isLogin?<div className="game-head-login">
-            <div className="avatar"><img src={this.state.avatar} onClick={()=>{this.popNickName(true)}}/></div>
-            <div className="name-box">
+            <div className="avatar"><img src={this.state.avatar} onClick={()=>{this.setPopAvatar(true)}}/></div>
+            <div className="name-box" onClick={()=>{this.popNickName(true)}}/>
                 <div className="nickname-title">游戏昵称</div>
                 <div className="nickname">{this.state.nameNick}</div>
             </div>
