@@ -129,6 +129,7 @@ const GameCenter = React.createClass({
         );
     }
 });
+var gameToken='';
 $FW.DOMReady(function(){
     NativeBridge.setTitle('游戏中心');
     var ua = window.navigator.userAgent.toLowerCase();
@@ -142,8 +143,7 @@ $FW.DOMReady(function(){
         url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/getuinfo`,//判断登录状态
         withCredentials: true,
         success: (data) => {
-            var gameToken='';
-            if(data.login_status==1){
+            if(data.login_status ==1){
                 gameToken=data.token;
             }
             ReactDOM.render(<GameCenter data={data} />, document.getElementById('cnt'));
