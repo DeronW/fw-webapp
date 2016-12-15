@@ -60,12 +60,12 @@ const MALL_APP_NAMES = [
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     MALL_APP_NAMES.forEach(function (i) {
-        var common_components = [
+        var include_components = [
             'use-strict.jsx', 'mall/header.jsx', 'mall/bottom-nav-bar.jsx',
             'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'
         ];
 
-        let common_js = [
+        let include_common_js = [
             'javascripts/use-strict.js',
             'javascripts/mall/fw-ajax-error-handler.js',
             'javascripts/mall/fw-common.js'
@@ -74,16 +74,16 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         generate_task('mall', i, {
             debug: true,
             api_path: CONSTANTS.mall.dev_api_path,
-            include_components: common_components,
-            include_common_js: common_js
+            include_components: include_components,
+            include_common_js: include_common_js
         });
 
         generate_task('mall', i, {
             cmd_prefix: 'pack',
             api_path: '//mmall.9888.cn/',
             cdn_prefix: `/static/mall/${i.name || i}/`,
-            include_components: common_components,
-            include_common_js: common_js
+            include_components: include_components,
+            include_common_js: include_common_js
         });
     });
 

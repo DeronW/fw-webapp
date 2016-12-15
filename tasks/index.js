@@ -15,7 +15,7 @@ let COMMON_JAVASCRIPTS_TASK = {};
 
 function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
-        `${lib_path}fw-1.2.1.js`,
+        `${lib_path}fw-1.3.0.js`,
         `${lib_path}native-bridge-0.3.0.js`];
 
     if (debug) {
