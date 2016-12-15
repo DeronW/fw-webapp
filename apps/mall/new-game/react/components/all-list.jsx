@@ -4,7 +4,7 @@ const GameCenter_AllGame=React.createClass({
             return(
                 <div className="all-game-li" key={index}>
                     <div className="game-img"><img src={list.logo}/></div>
-                    <div className="game-up-img"></div>
+                    <div className="game-up-img" href={list.link}></div>
                     <div className="game-name">{list.game_name}</div>
                     <div className="game-desc">{list.tag}</div>
                 </div>

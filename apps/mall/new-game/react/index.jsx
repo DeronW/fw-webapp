@@ -107,7 +107,7 @@ const GameCenter = React.createClass({
                     <div className="nickname-title">游戏昵称</div>
                     <div className="nickname">未登录</div>
                 </div>
-                <div className="unlogin-btn">登录设置昵称</div>
+                <div className="unlogin-btn" onClick={$FW.Utils.loginMall}>登录设置昵称</div>
             </div>
         return(
             <div className="game-center">
