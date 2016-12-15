@@ -110,7 +110,9 @@ const SendCode = React.createClass({
                     //var query = $FW.Format.urlQuery();
                     //var bizNo = query.bizNo;
                     $FW.Component.Alert(data.msg);
-
+                    setTimeout(function(){
+                        location.href="/static/mall/my-bank-card/index.html"
+                    },2000)
                 } else {
                     $FW.Component.Alert(data.msg);
                 }
@@ -125,7 +127,7 @@ const SendCode = React.createClass({
             smsCode: this.state.code
         }
         $FW.Ajax({
-            url:  '/mall/api/payment/v1/validatePaySmsCode.json',
+            url: `${API_PATH}/mall/api/payment/v1/validatePaySmsCode.json`,
             enable_loading: true,
             data: FormData,
             success: function (data) {

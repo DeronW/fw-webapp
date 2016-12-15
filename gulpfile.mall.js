@@ -15,6 +15,8 @@ const MALL_APP_NAMES = [
     'life-service',
     'service-bill',
     'hot-activity',
+    'footprint',
+	'user-setting',
     // 订单页面
     'order-list',
     'order-detail',
@@ -47,6 +49,7 @@ const MALL_APP_NAMES = [
     'user-prize-record',
     'game-guess',
     'game',
+    'new-game',
     {
         name: 'waiting',
         describe: '建设中 页面',

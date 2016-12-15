@@ -33,6 +33,7 @@ const CardList = React.createClass({
                 <div className="bank-desc">
                     <div className="owner-name">{bankCards.accountName}</div>
                     <div>{bankCards.accountNo}</div>
+                    <div className="unbind-btn">解绑</div>
                 </div>
              </div>
         );
@@ -56,5 +57,11 @@ $FW.DOMReady(function() {
 });
 
 function back_handler() {
-    location.href = '/static/mall/new-user/index.html'
+    var query = $FW.Format.urlQuery();
+    if(query.id=='user'){
+        location.href = '/static/mall/new-user/index.html'
+    }
+    else{
+        history.back();
+    }
 }

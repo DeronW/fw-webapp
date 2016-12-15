@@ -63,7 +63,10 @@ const WAP_APP_NAMES = [
         name: 'notice-risk-prompt', // 风险揭示
         include_components: [],
         include_common_js: []
-    }
+    },
+
+    // test page
+    'test-native-bridge'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
