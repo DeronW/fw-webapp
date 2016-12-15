@@ -14,7 +14,7 @@ const GameCenter_popNickname = React.createClass({
                 console.log(data);
                 if(data.code==10000){
                     this.props.popNickName(false);
-                    this.props.nameNick(this.state.value)
+                    this.props.setNameNick(this.state.value)
                 }else{
                     this.props.popNickName(false);
                     this.props.popError(true);
