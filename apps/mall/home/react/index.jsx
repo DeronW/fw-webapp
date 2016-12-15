@@ -62,8 +62,7 @@ const Mall = React.createClass({
                                     activity_id={i.activity_id} products={i.products} key={index}/>;
         };
         let backFactory = ()=> {
-            return $FW.Browser.inApp() ? <a className="back-factory" onClick={this.backNativeApp}><img
-                src="images/wap_shop_gong_logo.png"/></a> :
+            return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png" onClick={this.backNativeHandler}/> :
                 <a className="back-factory" href="http://m.9888.cn/mpwap/"><img
                     src="images/wap_shop_gong_logo.png"/></a>
         };
