@@ -44,7 +44,7 @@ const GameCenter = React.createClass({
             withCredentials: true,
             success: (data) => {
                 this.setState({
-                    popNameNick:true,
+                    popAvatar:true,
                     avatarList:data
                 });
             }
