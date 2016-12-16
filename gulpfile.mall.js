@@ -71,10 +71,10 @@ const APP_NAMES = [
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
-    APP_NAMES.forEach(function (i) {
+    APP_NAMES.forEach(i => {
         generate_task(PROJ, i, {
             debug: true,
-            api_path: CONSTANTS.mall.dev_api_path,
+            api_path: CONSTANTS[PROJ].dev_api_path,
             include_components: INCLUDE_COMPONENTS,
             include_javascripts: INCLUDE_JAVASCRIPTS
         });
