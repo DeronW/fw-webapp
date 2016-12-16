@@ -133,12 +133,6 @@ const HotSale = React.createClass({
                 this.setState({ps:data.products});
             }
         });
-        var elem = document.querySelector('.product-list');
-        var msnry = new Masonry( elem, {
-            // options
-            itemSelector: '.product-wrap',
-            columnWidth: 344
-        });
     },
 
     render: function () {
