@@ -51,7 +51,7 @@ const WorkerBox = React.createClass({
             {
                 pic: './images/pic3.png',
                 name: '邹晓东',
-                job: '首席风险'
+                job: '首席风险官'
             },
             {
                 pic: './images/pic4.png',
