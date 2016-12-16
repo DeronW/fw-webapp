@@ -31,7 +31,9 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
             `${lib_path}react-15.3.2/react-dom.min.js`,
             `${lib_path}redux-3.6.0.min.js`,
             `${lib_path}redux-thunk-2.1.0.min.js`,
-            `${lib_path}react-redux-5.0.0-beta3.min.js`])
+            `${lib_path}react-redux-5.0.0-beta3.min.js`,
+			`${lib_path}masonry.pkgd.min.js`
+			])
     }
 
     files.push(...extend_files);

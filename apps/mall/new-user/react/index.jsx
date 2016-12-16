@@ -148,7 +148,7 @@ const HotSale = React.createClass({
     componentDidMount:function(){
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-            //data: {recommendBizNo: "TJ0000022", totalCount: 8},
+            data: {count: 10},
             success: (data) => {
                 this.setState({ps:data.products});
             }
@@ -159,7 +159,7 @@ const HotSale = React.createClass({
         let hotProduct = (product,index)=>{
             return(
                 <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=')}>
-                    <img src="images/product.jpg"/>
+                    <img src={product.img}/>
                     <span className="product-name">{product.title}</span>
                     <span className="product-price">{product.score}工分</span>
                 </a>
