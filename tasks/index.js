@@ -15,7 +15,7 @@ let COMMON_JAVASCRIPTS_TASK = {};
 
 function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
-        `${lib_path}fw-1.2.1.js`,
+        `${lib_path}fw-1.3.0.js`,
         `${lib_path}native-bridge-0.3.0.js`];
 
     if (debug) {
@@ -58,7 +58,7 @@ module.exports = function (site_name, page_name, configs) {
             api_path: '',
             cdn_prefix: '',
             include_components: [],
-            include_common_js: [],
+            include_javascripts: [],
             main_jsx: 'react/index.jsx',
             html_engine: 'swig'
         }, configs, singlePageCfg);
@@ -81,7 +81,7 @@ module.exports = function (site_name, page_name, configs) {
     ]);
 
     let common_javascript_files = get_common_javascript_files(
-        lib_path, CONFIG.include_common_js.map(i => `${lib_path}${i}`), CONFIG.debug);
+        lib_path, CONFIG.include_javascripts.map(i => `${lib_path}${i}`), CONFIG.debug);
 
     function compile_html() {
         return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
