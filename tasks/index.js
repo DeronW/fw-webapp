@@ -11,6 +11,8 @@ const images = require('./images.js');
 const copy = require('./copy.js');
 const revision = require('./revision.js');
 
+const REACT_PATH = 'react-15.4.1';
+
 let COMMON_JAVASCRIPTS_TASK = {};
 
 function get_common_javascript_files(lib_path, extend_files, debug) {
@@ -21,16 +23,16 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
 
     if (debug) {
         files.push(...[
-            `${lib_path}react-15.3.2/react.js`,
-            `${lib_path}react-15.3.2/react-dom.js`,
+            `${lib_path}${REACT_PATH}/react.js`,
+            `${lib_path}${REACT_PATH}/react-dom.js`,
             `${lib_path}redux-3.6.0.js`,
             `${lib_path}redux-thunk-2.1.0.js`,
             `${lib_path}react-redux-5.0.0-beta3.js`
         ])
     } else {
         files.push(...[
-            `${lib_path}react-15.3.2/react.min.js`,
-            `${lib_path}react-15.3.2/react-dom.min.js`,
+            `${lib_path}${REACT_PATH}/react.min.js`,
+            `${lib_path}${REACT_PATH}/react-dom.min.js`,
             `${lib_path}redux-3.6.0.min.js`,
             `${lib_path}redux-thunk-2.1.0.min.js`,
             `${lib_path}react-redux-5.0.0-beta3.min.js`
