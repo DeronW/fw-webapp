@@ -66,7 +66,8 @@ const WAP_APP_NAMES = [
     },
 
     // test page
-    'test-native-bridge'
+    'test-native-bridge',
+    'statistic-chart'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
