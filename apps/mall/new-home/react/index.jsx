@@ -142,9 +142,8 @@ const HotSale = React.createClass({
         if(document.body.scrollHeight - document.body.scrollTop-1281< 300){
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-                data: {count:4,page:page},
+                data: {count:4,page:this.state.page},
                 success: (data) => {
-                    page++;
                     data.products.map((item, index) => arr.push(item))
 
                     this.setState(prevState=>({
