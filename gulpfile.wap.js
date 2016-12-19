@@ -79,7 +79,9 @@ const APP_NAMES = [
         include_components: [],
         include_common_js: []
     },
-    'test-native-bridge' // test page
+    // test page
+    'test-native-bridge',
+    'statistic-chart'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
