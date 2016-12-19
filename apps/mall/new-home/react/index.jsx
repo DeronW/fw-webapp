@@ -139,7 +139,7 @@ const HotSale = React.createClass({
     },
 
 
-    loadMoreProductHandler:function(){
+    loadMoreProductHandler:function(done){
         this.setState({page:this.state.page+1});
         let arr = [];
         this.state.hasData ?
@@ -149,7 +149,7 @@ const HotSale = React.createClass({
                 enable_loading: true,
                 success: (data) => {
                     if(data.products){
-                    console.log(data);
+                        console.log(data);
                         data.products.map((item, index) => arr.push(item))
                         this.setState(prevState=>({
                             column : prevState.column.concat(arr)
@@ -158,6 +158,7 @@ const HotSale = React.createClass({
                     else{
                         this.setState({hasData:false});
                     }
+                    done && done()
                 }
             }):null
      },
