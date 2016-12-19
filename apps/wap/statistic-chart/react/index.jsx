@@ -2,7 +2,7 @@ const Chart = React.createClass({
     render:function(){
         return (
             <div>
-                <PieChart percent={10} radius={150}/>
+                <PieChart percent={50} percent2={50} radius={150}/>
             </div>
         )
     }
