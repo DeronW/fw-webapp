@@ -143,6 +143,7 @@ const HotSale = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
                 data: {count:4,page:this.state.page},
+                enable_loading: true,
                 success: (data) => {
                     console.log(data);
                     data.products.map((item, index) => arr.push(item))
@@ -153,6 +154,7 @@ const HotSale = React.createClass({
                 }
             });
         }
+        return false;
      },
 
     render: function () {
