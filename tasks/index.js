@@ -17,7 +17,7 @@ let COMMON_JAVASCRIPTS_TASK = {};
 
 function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
-        `${lib_path}promise-2.0.2.js`,
+        `${lib_path}promise-2.0.2.min.js`,
         `${lib_path}fw-1.3.0.js`,
         `${lib_path}native-bridge-0.3.0.js`
     ];
