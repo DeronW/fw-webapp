@@ -122,6 +122,7 @@ const HotSale = React.createClass({
     getInitialState:function(){
         return {
             page:1,
+            hasData:true,
             column:[]
         }
     },
@@ -134,25 +135,32 @@ const HotSale = React.createClass({
                 this.setState({column:data.products});
             }
         });
+        $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
 
-    touchHandle:function(){
+
+    loadMoreProductHandler:function(done){
         this.setState({page:this.state.page+1});
         let arr = [];
-        if(document.body.scrollHeight - document.body.scrollTop-1281< 300){console.log(this.state.page);
+        this.state.hasData ?
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
                 data: {count:4,page:this.state.page},
+                enable_loading: true,
                 success: (data) => {
-                    console.log(data);
-                    data.products.map((item, index) => arr.push(item))
-
-                    this.setState(prevState=>({
-                        column : prevState.column.concat(arr)
-                    }));
+                    if(data.products){
+                        console.log(data);
+                        data.products.map((item, index) => arr.push(item))
+                        this.setState(prevState=>({
+                            column : prevState.column.concat(arr)
+                        }));
+                    }
+                    else{
+                        this.setState({hasData:false});
+                    }
+                    done && done()
                 }
-            });
-        }
+            }):null
      },
 
     render: function () {
@@ -167,7 +175,7 @@ const HotSale = React.createClass({
         }
 
         return (
-            <div className="hot-sales" onTouchMove={this.touchHandle}>
+            <div className="hot-sales">
                 <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
                 <div className="product-list">
                     {this.state.column.map(hotProduct)}
