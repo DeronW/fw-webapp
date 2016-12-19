@@ -139,8 +139,7 @@ const HotSale = React.createClass({
     touchHandle:function(){
         this.setState({page:this.state.page+1});
         let arr = [];
-        if(document.body.scrollHeight - document.body.scrollTop-1281< 300){
-            alert(3);console.log(this.state.page);
+        if(document.body.scrollHeight - document.body.scrollTop-1281< 300){console.log(this.state.page);
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
                 data: {count:4,page:this.state.page},
