@@ -1,7 +1,12 @@
 @import "common.less";
+
+body {
+    padding-bottom: 100px;
+}
+
 .workerBox{
   width: 100%;
-  height: 100%;
+  // height: 100%;
   background: @colorWhite;
   .banner{
     width: 100%;
@@ -31,7 +36,7 @@
   }
   .wealth{
     width: 100%;
-    height: 100%;
+    // height: 100%;
     background: @colorF1;
     .wealthTitle{
       font-size: @fontSize36;
@@ -60,7 +65,7 @@
           margin: 20px 0 10px 0;
         }
         .job {
-          width: 110px;
+          width: 130px;
           height: 36px;
           line-height: 36px;
           text-align: center;
@@ -131,11 +136,13 @@
   }
 }
 .aboutMe{
-  padding: 0 40px;
+  padding: 0 40px 1px;
   height: 420px;
   background: @colorF1;
   text-align: center;
+  // overflow: hidden;
   .aboutTitle{
+    margin-top: 1px;
     width: 100%;
     text-align: center;
     font-size: @fontSize36;

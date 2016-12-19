@@ -14,7 +14,8 @@ const Mall = React.createClass({
         return {
             background: "transparent",
             logoImage: "images/logo.png",
-            avatarImage: "images/list-icon.png"
+            avatarImage: "images/list-icon.png",
+            borderBottom:"none"
         }
     },
     getHeadImages: function () {
@@ -34,12 +35,12 @@ const Mall = React.createClass({
         link ? gotoHandler(link) : console.log('no link set');
     },
     componentDidMount: function () {
-        window.onscroll = function () {
+        window.addEventListener('touchmove', function() {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
-            if (scrollTop > 100) return false;
+            //if (scrollTop > 100) return false;
 
-            let style = scrollTop > 0 ? {
+            let style = scrollTop > 60 ? {
                 background: "rgba(255,255,255,.9)",
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png",
@@ -52,7 +53,7 @@ const Mall = React.createClass({
             }
 
             this.setState(style);
-        }.bind(this);
+        }.bind(this));
     },
     render: function () {
         let banner;
@@ -80,7 +81,7 @@ const Mall = React.createClass({
             <div className="head-wrap">
                 {banner}
                 <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                    <div style={head_nav_wrap}>
+                    <div style={head_nav_wrap} className="head_nav_wrap">
                         <img className="m-logo" src={this.state.logoImage}/>
                         <a onClick={ () => gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false) }
                            className="search-bar-a">
@@ -118,21 +119,59 @@ const Mall = React.createClass({
 });
 
 const HotSale = React.createClass({
+    getInitialState:function(){
+        return {
+            page:1,
+            column:[]
+        }
+    },
+
+    componentDidMount:function(){
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+            data: {count: 4},
+            success: (data) => {
+                this.setState({column:data.products});
+            }
+        });
+    },
+
+    touchHandle:function(){
+        this.setState({page:this.state.page+1});
+        let arr = [];
+        if(document.body.scrollHeight - document.body.scrollTop-1281< 300){
+            alert(3);console.log(this.state.page);
+            $FW.Ajax({
+                url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+                data: {count:4,page:this.state.page},
+                success: (data) => {
+                    console.log(data);
+                    data.products.map((item, index) => arr.push(item))
+
+                    this.setState(prevState=>({
+                        column : prevState.column.concat(arr)
+                    }));
+                }
+            });
+        }
+     },
+
     render: function () {
-        let hotProduct = <a className="product-wrap">
-            <img src="images/product-img3.png"/>
-            <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
-            <span className="product-price">12267工分</span>
-        </a>;
+        let hotProduct = (product,index)=>{
+           return(
+                    <a className="product-wrap" key={index} onClick={ () => gotoHandler('/static/mall/new-product-detail/index.html?bizNo=' + product.bizNo)}>
+                        <img src={product.img}/>
+                        <span className="product-name">{product.title}</span>
+                        <span className="product-price">{product.score}工分</span>
+                    </a>
+               )
+        }
 
         return (
-            <div className="hot-sales">
+            <div className="hot-sales" onTouchMove={this.touchHandle}>
                 <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
                 <div className="product-list">
-                    {hotProduct}
-                    {hotProduct}
-                    {hotProduct}
-                    {hotProduct}
+                    {this.state.column.map(hotProduct)}
                 </div>
             </div>
         )
@@ -143,7 +182,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
     $FW.Ajax({
         url: `${API_PATH}mall/api/index/v1/banners.json`,
-        success: function (data) {
+        success:(data)=> {
             ReactDOM.render(<Mall banners={data.banners}/>, document.getElementById('cnt'));
         }
     })

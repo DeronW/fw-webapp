@@ -1,7 +1,19 @@
-/*
- 商城移动端页面
- */
-const MALL_APP_NAMES = [
+/* 商城移动端页面 */
+const PROJ = 'mall';
+
+var INCLUDE_COMPONENTS = [
+    'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
+    'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'
+];
+
+let INCLUDE_JAVASCRIPTS = [
+    'use-strict.js',
+    `${PROJ}/fw-ajax-error-handler.js`,
+    `${PROJ}/fw-common.js`
+];
+
+
+const APP_NAMES = [
     'home', // 首页
     'activity', // 专题活动页
     'user',
@@ -16,6 +28,7 @@ const MALL_APP_NAMES = [
     'service-bill',
     'hot-activity',
     'footprint',
+    'user-setting',
     // 订单页面
     'order-list',
     'order-detail',
@@ -48,43 +61,32 @@ const MALL_APP_NAMES = [
     'user-prize-record',
     'game-guess',
     'game',
-    'new-game',
-    {
+    'old-game',
+    'zhuanpan20161215', {
         name: 'waiting',
         describe: '建设中 页面',
-        include_components: ['mall/header.jsx'],
+        include_components: [`${PROJ}/header.jsx`],
         include_common_js: []
     }
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
-    MALL_APP_NAMES.forEach(function (i) {
-        var common_components = [
-            'use-strict.jsx', 'mall/header.jsx', 'mall/bottom-nav-bar.jsx',
-            'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'
-        ];
-
-        let common_js = [
-            'javascripts/use-strict.js',
-            'javascripts/mall/fw-ajax-error-handler.js',
-            'javascripts/mall/fw-common.js'
-        ];
-
-        generate_task('mall', i, {
+    APP_NAMES.forEach(i => {
+        generate_task(PROJ, i, {
             debug: true,
-            api_path: CONSTANTS.mall.dev_api_path,
-            include_components: common_components,
-            include_common_js: common_js
+            api_path: CONSTANTS[PROJ].dev_api_path,
+            include_components: INCLUDE_COMPONENTS,
+            include_javascripts: INCLUDE_JAVASCRIPTS
         });
 
-        generate_task('mall', i, {
+        generate_task(PROJ, i, {
             cmd_prefix: 'pack',
             api_path: '//mmall.9888.cn/',
-            cdn_prefix: `/static/mall/${i.name || i}/`,
-            include_components: common_components,
-            include_common_js: common_js
+            cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
+            include_components: INCLUDE_COMPONENTS,
+            include_javascripts: INCLUDE_JAVASCRIPTS
         });
     });
 
-    gulp.task('build:mall', gulp.series(MALL_APP_NAMES.map((i) => `mall:pack:${i.name || i}:revision`)));
+    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
 };
