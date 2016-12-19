@@ -93,7 +93,7 @@ const PieChart = React.createClass({
         let percent = this.state.current_percent / 100;
         let percent2 = this.state.remain_percent / 100;
 
-        let circleColor = percent === 1 ? this.state.progressColor : this.state.bgColor;
+        let circleColor = percent === 1 ? this.state.progressColor : (percent2 ===1 ? this.state. progress2Color : (percent === 0 && percent2 === 0) ? this.state.bgColor : null);
         let circle = <circle cx={center.x} cy={center.y}
                              r={this.state.radius - this.state.weight / 2}
                              fill="transparent" stroke={circleColor}
@@ -132,18 +132,6 @@ const PieChart = React.createClass({
         let path = <path fill={this.state.progressColor} d={d}></path>;
         let path2 = <path fill={this.state.progress2Color} d={d2}></path>;
 
-        if (this.state.current_percent === 100 || this.state.current_percent < this.MIN_START_PERCENT) path = null;
-
-        // let current_percent_num = <span style={{fontSize:"26px",color:"#000",position:"absolute",top:"0",left:"0"}}>{this.state.current_percent}%</span>
-        //
-        // let remain_percent_num = <span style={{fontSize:"26px",color:"#000",position:"absolute",top:"0",left:"0"}}>{this.state.remain_percent}%</span>
-        //
-        // let wrap_div = {
-        //     width:{sideLength},
-        //     height:{sideLength},
-        //     position:"relative"
-        // }
-
         return (
             <div>
                 <svg width={sideLength} height={sideLength}
@@ -157,7 +145,6 @@ const PieChart = React.createClass({
                     {path2}
                 </svg>
             </div>
-
         )
     }
 });
