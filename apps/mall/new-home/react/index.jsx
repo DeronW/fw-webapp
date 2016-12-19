@@ -120,9 +120,9 @@ const Mall = React.createClass({
 
 const HotSale = React.createClass({
     getInitialState:function(){
-        var touchhandle=1;
         return {
             page:1,
+            hasData:true,
             column:[]
         }
     },
@@ -142,22 +142,24 @@ const HotSale = React.createClass({
     loadMoreProductHandler:function(){
         this.setState({page:this.state.page+1});
         let arr = [];
-        if(document.body.scrollHeight - document.body.scrollTop-1281< 300){console.log(this.state.page);
+        this.state.hasData ?
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
                 data: {count:4,page:this.state.page},
                 enable_loading: true,
                 success: (data) => {
+                    if(data.products){
                     console.log(data);
-                    data.products.map((item, index) => arr.push(item))
-
-                    this.setState(prevState=>({
-                        column : prevState.column.concat(arr)
-                    }));
+                        data.products.map((item, index) => arr.push(item))
+                        this.setState(prevState=>({
+                            column : prevState.column.concat(arr)
+                        }));
+                    }
+                    else{
+                        this.setState({hasData:false});
+                    }
                 }
-            });
-        }
-        return false;
+            }):null
      },
 
     render: function () {
