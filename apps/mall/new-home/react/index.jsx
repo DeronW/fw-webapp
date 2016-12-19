@@ -121,24 +121,44 @@ const Mall = React.createClass({
 const HotSale = React.createClass({
     getInitialState:function(){
         return {
-            ps:[]
+            page:1,
+            column:[]
         }
     },
 
     componentDidMount:function(){
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-            data: {count: 8},
+            data: {count: 4},
             success: (data) => {
-                this.setState({ps:data.products});
+                this.setState({column:data.products});
             }
         });
     },
 
+    touchHandle:function(){
+        this.setState({page:page+1});
+        let arr = [];
+        if(document.body.scrollHeight - document.body.scrollTop-1281< 300){
+            $FW.Ajax({
+                url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+                data: {count:4,page:page},
+                success: (data) => {
+                    page++;
+                    data.products.map((item, index) => arr.push(item))
+
+                    this.setState(prevState=>({
+                        column : prevState.column.concat(arr)
+                    }));
+                }
+            });
+        }
+     },
+
     render: function () {
         let hotProduct = (product,index)=>{
            return(
-                    <a className="product-wrap">
+                    <a className="product-wrap" key={index} onClick={ () => gotoHandler('/static/mall/new-product-detail/index.html?bizNo=' + product.bizNo)}>
                         <img src={product.img}/>
                         <span className="product-name">{product.title}</span>
                         <span className="product-price">{product.score}工分</span>
@@ -147,10 +167,10 @@ const HotSale = React.createClass({
         }
 
         return (
-            <div className="hot-sales">
+            <div className="hot-sales" onTouchMove={this.touchHandle}>
                 <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
                 <div className="product-list">
-                    {this.state.ps.map(hotProduct)}
+                    {this.state.column.map(hotProduct)}
                 </div>
             </div>
         )
