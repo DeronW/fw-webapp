@@ -120,6 +120,7 @@ const Mall = React.createClass({
 
 const HotSale = React.createClass({
     getInitialState:function(){
+        var touchhandle=1;
         return {
             page:1,
             column:[]
@@ -134,9 +135,11 @@ const HotSale = React.createClass({
                 this.setState({column:data.products});
             }
         });
+        $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
 
-    touchHandle:function(){
+
+    loadMoreProductHandler:function(){
         this.setState({page:this.state.page+1});
         let arr = [];
         if(document.body.scrollHeight - document.body.scrollTop-1281< 300){console.log(this.state.page);
@@ -169,7 +172,7 @@ const HotSale = React.createClass({
         }
 
         return (
-            <div className="hot-sales" onTouchMove={this.touchHandle}>
+            <div className="hot-sales">
                 <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
                 <div className="product-list">
                     {this.state.column.map(hotProduct)}
