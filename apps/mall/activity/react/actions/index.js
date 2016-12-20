@@ -10,7 +10,9 @@
     };
 
     global.toggleBanner = () => {
-        return {type: 'TOGGLE_BANNER'}
+        return {
+            type: 'TOGGLE_BANNER'
+        }
     };
 
     global.addProducts = (data) => {
@@ -44,11 +46,10 @@
                     prefectureType: 5,
                     order: -1,
                 },
-                enable_loading: true,
-                success: (data) => {
-                    dispatch(addProducts(data));
-                    done && typeof(done) == 'function' && done();
-                }
+                enable_loading: true
+            }).then(data => {
+                dispatch(addProducts(data));
+                done && typeof (done) == 'function' && done();
             });
         }
     }
