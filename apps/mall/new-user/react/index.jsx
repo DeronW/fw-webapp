@@ -123,10 +123,7 @@ const User = React.createClass({
                <div className="hot-sales">
                    <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
                    <div className="product-list">
-                       <HotProduct/>
-                       <HotProduct/>
-                       <HotProduct/>
-                       <HotProduct/>
+                       <HotSale/>
                    </div>
                </div>
                <div className="fixed-nav">
@@ -141,14 +138,38 @@ const User = React.createClass({
     }
 });
 
-const HotProduct = React.createClass({
-    render:function(){
+const HotSale = React.createClass({
+    getInitialState:function(){
+        return {
+            ps:[]
+        }
+    },
+
+    componentDidMount:function(){
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+            data: {count: 10},
+            success: (data) => {
+                this.setState({ps:data.products});
+            }
+        });
+    },
+
+    render: function () {
+        let hotProduct = (product,index)=>{
+            return(
+                <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=')}>
+                    <img src={product.img}/>
+                    <span className="product-name">{product.title}</span>
+                    <span className="product-price">{product.score}工分</span>
+                </a>
+            )
+        }
+
         return (
-            <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=')}>
-                 <img src="images/product.jpg"/>
-                 <span className="product-name">豆哥限量玩偶公仔豆哥限量玩偶公仔豆哥限量玩偶公仔</span>
-                 <span className="product-price">12267工分</span>
-            </a>
+            <div>
+                    {this.state.ps.map(hotProduct)}
+            </div>
         )
     }
 });

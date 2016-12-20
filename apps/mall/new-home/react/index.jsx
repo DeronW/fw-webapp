@@ -121,25 +121,53 @@ const Mall = React.createClass({
 const HotSale = React.createClass({
     getInitialState:function(){
         return {
-            ps:[]
+            page:1,
+            hasData:true,
+            column:[]
         }
     },
 
     componentDidMount:function(){
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-            //data: {recommendBizNo: "TJ0000022", totalCount: 8},
+            data: {count: 4},
             success: (data) => {
-                this.setState({ps:data.products});
+                this.setState({column:data.products});
             }
         });
+        $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
+
+
+    loadMoreProductHandler:function(done){
+        this.setState({page:this.state.page+1});
+        let arr = [];
+        this.state.hasData ?
+            $FW.Ajax({
+                url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+                data: {count:4,page:this.state.page},
+                enable_loading: true,
+                success: (data) => {
+                    if(data.products){
+                        console.log(data);
+                        data.products.map((item, index) => arr.push(item))
+                        this.setState(prevState=>({
+                            column : prevState.column.concat(arr)
+                        }));
+                    }
+                    else{
+                        this.setState({hasData:false});
+                    }
+                    done && done()
+                }
+            }):null
+     },
 
     render: function () {
         let hotProduct = (product,index)=>{
            return(
-                    <a className="product-wrap">
-                        <img src="images/product-img3.png"/>
+                    <a className="product-wrap" key={index} onClick={ () => gotoHandler('/static/mall/new-product-detail/index.html?bizNo=' + product.bizNo)}>
+                        <img src={product.img}/>
                         <span className="product-name">{product.title}</span>
                         <span className="product-price">{product.score}工分</span>
                     </a>
@@ -150,7 +178,7 @@ const HotSale = React.createClass({
             <div className="hot-sales">
                 <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
                 <div className="product-list">
-                    {this.state.ps.map(hotProduct)}
+                    {this.state.column.map(hotProduct)}
                 </div>
             </div>
         )

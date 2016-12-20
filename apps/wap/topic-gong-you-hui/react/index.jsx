@@ -12,7 +12,7 @@ const WorkerBox = React.createClass({
         this.ajaxEastImg();
     },
     ajaxWealthImg: function () {
-        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=28', function (data) {
+        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=24', function (data) {
             this.setState({ wealthImg: data });
         }.bind(this))
     },
@@ -22,7 +22,7 @@ const WorkerBox = React.createClass({
         }.bind(this))
     },
     ajaxEastImg: function () {
-        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=30', function (data) {
+        $FW.getJSONP('http://fore.9888.cn/cms/api/gyh_banner.php?key=0ca175b9c0f726a831d895e&id=26', function (data) {
             this.setState({ eastImg: data });
         }.bind(this))
     },
@@ -51,7 +51,7 @@ const WorkerBox = React.createClass({
             {
                 pic: './images/pic3.png',
                 name: '邹晓东',
-                job: '首席风险'
+                job: '首席风险官'
             },
             {
                 pic: './images/pic4.png',

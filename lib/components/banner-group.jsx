@@ -119,6 +119,7 @@ const BannerGroup = React.createClass({
         this.setState({left: left});
         event.preventDefault();
         event.stopPropagation();
+        event.nativeEvent.stopImmediatePropagation();
     },
 
     touchEndHandler: function (event) {

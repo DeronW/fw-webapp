@@ -2,7 +2,22 @@
  主站移动端页面配置
  包含了主站移动端新增的页面
  */
-const WAP_APP_NAMES = [
+
+const PROJ = 'wap';
+
+const COMMON_COMPONENTS = [
+    'use-strict.jsx', 'loading.jsx', 'alert.jsx', `${PROJ}/header.jsx`,
+    'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
+];
+
+const INCLUDE_JAVASCRIPTS = [
+    'use-strict.js',
+    `${PROJ}/fw-ajax-error-handler.js`,
+    `${PROJ}/fw-common.js`
+];
+
+
+const APP_NAMES = [
     /* 测试徽商, 不发布其他页面, 加速发布过程 */
     // 旧页面重构
     'home', // 首页
@@ -37,65 +52,54 @@ const WAP_APP_NAMES = [
 
     // 专题页面
     'topic-hui-shang', // 徽商专题页面
-    'topic-hui-shang-guide',//徽商用户引导页面
+    'topic-hui-shang-guide', //徽商用户引导页面
     'topic-score', // 玩转工分
     'topic-interest-reward', // 年化加息奖励
     'topic-recommender-recruitment', //推荐人页面
-    'topic-annual-commision',//年化佣金页面
-    'topic-invite',//邀请返利, 邀请人,
+    'topic-annual-commision', //年化佣金页面
+    'topic-invite', //邀请返利, 邀请人,
     'vip-prerogative', // VIP特权详情页
     'guide-cookbook', // 用户使用引导页面
     'app-download', // app 下载页面
-    'topic-gong-you-hui',//工友会专题页面
+    'topic-gong-you-hui', //工友会专题页面
 
     //圈子相关页面
-    'circle-tender-complete',//直融标成功
-    'circle-transfer-complete',//债券转让成功
-    'circle-register-complete',//签到成功
-    'circle-team-data',//小队数据
-    'circle-person-data',//个人数据
-    'circle-score-stream',//工分流水
+    'circle-tender-complete', //直融标成功
+    'circle-transfer-complete', //债券转让成功
+    'circle-register-complete', //签到成功
+    'circle-team-data', //小队数据
+    'circle-person-data', //个人数据
+    'circle-score-stream', //工分流水
 
     // 内容展示页面
     'notice-corporate-structure', // 信息披露 公司结构
-    'notice-safeguard',// 资金安全保障
+    'notice-safeguard', // 资金安全保障
     {
         name: 'notice-risk-prompt', // 风险揭示
         include_components: [],
         include_common_js: []
     },
-
     // test page
-    'test-native-bridge'
+    'test-native-bridge',
+    'statistic-chart'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
-    WAP_APP_NAMES.forEach(function (i) {
-        let common_components = [
-            'use-strict.jsx', 'loading.jsx', 'alert.jsx', 'wap/header.jsx',
-            'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
-        ];
-
-        let include_javascripts = [
-            'javascripts/use-strict.js',
-            'javascripts/wap/fw-ajax-error-handler.js',
-            'javascripts/wap/fw-common.js'
-        ];
-
-        generate_task('wap', i, {
+    APP_NAMES.forEach(i => {
+        generate_task(PROJ, i, {
             debug: true,
-            api_path: CONSTANTS.wap.dev_api_path,
-            include_components: common_components,
-            include_javascripts: include_javascripts
+            api_path: CONSTANTS[PROJ].dev_api_path,
+            include_components: COMMON_COMPONENTS,
+            include_javascripts: INCLUDE_JAVASCRIPTS
         });
-        generate_task('wap', i, {
+        generate_task(PROJ, i, {
             api_path: "//m.9888.cn/",
             cmd_prefix: 'pack',
-            cdn_prefix: `/static/wap/${i.name || i}/`,
-            include_components: common_components,
-            include_javascripts: include_javascripts
+            cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
+            include_components: COMMON_COMPONENTS,
+            include_javascripts: INCLUDE_JAVASCRIPTS
         });
     });
 
-    gulp.task('build:wap', gulp.series(WAP_APP_NAMES.map((i) => `wap:pack:${i.name || i}:revision`)));
+    gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
 };
