@@ -56,15 +56,17 @@ const Mall = React.createClass({
     backNativeApp:function(){
         NativeBridge.close();
     },
+    backNativeHandler: function () {
+        NativeBridge.toNative('app_back_native')
+    },
     render: function () {
         let activity = (i, index) => {
             return <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                     activity_id={i.activity_id} products={i.products} key={index}/>;
         };
         let backFactory = ()=> {
-            return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png" onClick={this.backNativeHandler}/> :
-                <a className="back-factory" href="http://m.9888.cn/mpwap/"><img
-                    src="images/wap_shop_gong_logo.png"/></a>
+            return $FW.Browser.inApp() ? <img className="m-logo" src="images/wap_shop_gong_logo.png" onClick={this.backNativeHandler}/>:
+                <a className="back-factory" href="http://m.9888.cn/mpwap/"><img src="images/wap_shop_gong_logo.png"/></a>
         };
 
         let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();
