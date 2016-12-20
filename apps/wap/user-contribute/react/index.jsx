@@ -273,6 +273,6 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: `${API_PATH}mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0`,
-        success: data => <HomePage myInfoData={data}/>, document.getElementById("cnt")
+        success: data => ReactDOM.render(<HomePage myInfoData={data}/>, document.getElementById("cnt"))
     })
 });
