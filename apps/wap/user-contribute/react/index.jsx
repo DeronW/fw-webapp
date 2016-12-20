@@ -271,12 +271,8 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Header title={"我的贡献值"}/>, document.getElementById("header"));
     }
 
-    $FW.BatchGet([
-        API_PATH + "mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0"
-    ], function (data) {
-        ReactDOM.render(
-            <HomePage myInfoData={data[0]}/>,
-            document.getElementById("cnt")
-        );
+    $FW.Ajax({
+        url: `${API_PATH}mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0`,
+        success: data => <HomePage myInfoData={data}/>, document.getElementById("cnt")
     })
 });
