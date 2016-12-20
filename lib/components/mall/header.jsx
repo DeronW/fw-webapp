@@ -31,7 +31,7 @@ const Header = React.createClass({
         } else {
             history.go(-1);
             //App里面后退不起作用 判断在App环境当中关掉当前webview
-            setTimeout(() => NativeBridge.isReady && NativeBridge.close(), 900)
+            setTimeout(() => NativeBridge.isReady && NativeBridge.close(), 300)
         }
     },
     render: function () {
