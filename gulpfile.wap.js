@@ -81,7 +81,7 @@ const APP_NAMES = [
     },
     // test page
     'test-native-bridge',
-    'statistic-chart'
+    'test-statistic-chart'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
