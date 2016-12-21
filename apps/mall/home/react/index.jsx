@@ -118,10 +118,10 @@ const Mall = React.createClass({
         )
     }
 });
-Mall.propTypes={
-    banners:React.PropTypes.array,
-    activities:React.PropTypes.array
-}
+// Mall.propTypes={
+//     banners:React.PropTypes.array,
+//     activities:React.PropTypes.array
+// }
 
 $FW.DOMReady(function () {
     Promise.all([
