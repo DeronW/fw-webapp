@@ -127,5 +127,5 @@ $FW.DOMReady(function () {
     Promise.all([
         $FW.Ajax(`${API_PATH}mall/api/index/v1/banners.json`),// banner轮播图数据
         $FW.Ajax(`${API_PATH}mall/api/index/v1/activities.json`)// 明前活动的数据
-    ]).then(d => ReactDOM.render(<Mall {...d[0]} {...d[1]}/>, document.getElementById('cnt')))
+    ]).then(d => ReactDOM.render(<Mall {...d[0]} {...d[1]}/>, CONTENT_NODE));
 });
