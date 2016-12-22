@@ -223,12 +223,11 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: `${API_PATH}/mall/api/member/v1/order_list.json`,
-        enable_loading: true,
-        success: function (data) {
-            ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));
-			window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
-	    }
-    });
+        enable_loading: true
+    }).then(data =>{
+        ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);
+        window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
+    })
 
 
     if ($FW.Utils.shouldShowHeader()) {

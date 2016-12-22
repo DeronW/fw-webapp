@@ -132,7 +132,7 @@ const Address = React.createClass({
             return $FW.Component.Alert('请填写收货地址');
 
         $FW.Ajax({
-            url: API_PATH + 'mall/api/member/v1/delivery_address/create.json',
+            url: `${API_PATH}mall/api/member/v1/delivery_address/create.json`,
             method: 'post',
             data: {
                 username: this.state.username,

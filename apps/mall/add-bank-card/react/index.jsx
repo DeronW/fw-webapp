@@ -29,20 +29,19 @@ const AddBankCard = React.createClass({
 		  var query = $FW.Format.urlQuery();
 		  var bizNo = query.bizNo;
           $FW.Ajax({
-            url:  API_PATH +'/mall/api/payment/v1/bank_card_info.json?accountNo='+this.state.val,
-            enable_loading: true,
-            success: function (data) {
-                if(data.bankInfo)
-                {
-                    var data= data.bankInfo;
-                    location.href = location.protocol + '//' + location.hostname +
-					"/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId+"&bizNo="+bizNo
-                }
-                else{
-                    $FW.Component.Alert(data.msg);
-                }
-            }
-          })
+            url:  `${API_PATH}/mall/api/payment/v1/bank_card_info.json?accountNo=`+this.state.val,
+            enable_loading: true
+          }).then(function(data){
+              if(data.bankInfo)
+              {
+                  var data= data.bankInfo;
+                  location.href = location.protocol + '//' + location.hostname +
+                      "/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId+"&bizNo="+bizNo
+              }
+              else{
+                  $FW.Component.Alert(data.msg);
+              }
+          });
     },
     render:function(){
         return (

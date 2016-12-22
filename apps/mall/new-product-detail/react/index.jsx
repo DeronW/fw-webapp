@@ -329,16 +329,14 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         //url: 'http://localhost/nginx-1.9.12/html/item_detail.json?bizNo=A0000000370',
         url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
-        enable_loading: true,
-        success: function (data) {
-            console.log(data);
-            if (data.title) {
-                ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
-            } else {
-                ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
-            }
+        enable_loading: true
+    }).then(data =>{
+        if (data.title) {
+            ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
+        } else {
+            ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
         }
-    });
+    })
 
     if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={""}/>, document.getElementById('header'));

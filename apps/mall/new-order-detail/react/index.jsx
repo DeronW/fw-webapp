@@ -98,12 +98,9 @@ $FW.DOMReady(function() {
         ReactDOM.render(<Header title={"订单详情"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
-        url: "./order_detail.json",
-        enable_loading: true,
-        success: function (data) {
-            ReactDOM.render(<OrderDetail data={data}/>, document.getElementById('cnt'));
-         }
-    })
+        url: `${API_PATH}/mall/api/member/v1/order_detail.json`,
+        enable_loading: true
+    }).then(data => ReactDOM.render(<OrderDetail data={data}/>, CONTENT_NODE));
 
 });
 

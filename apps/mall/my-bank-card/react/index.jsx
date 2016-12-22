@@ -48,12 +48,9 @@ $FW.DOMReady(function() {
 	}
 
     $FW.Ajax({
-        url: '/mall/api/payment/v1/bank_card_list.json',
-        enable_loading: true,
-        success: function (data) {
-            ReactDOM.render(<MyBankCard bankCards={data.bankCards}/>, document.getElementById('cnt'));
-        }
-    });
+        url: `${API_PATH}/mall/api/payment/v1/bank_card_list.json`,
+        enable_loading: true
+    }).then(data => ReactDOM.render(<MyBankCard bankCards={data.bankCards}/>, CONTENT_NODE));
 });
 
 function back_handler() {

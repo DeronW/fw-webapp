@@ -33,11 +33,10 @@ const ConfirmOrder = React.createClass({
     },
     refreshTokenStr: function () {
         $FW.Ajax({
-            url: `${API_PATH}/mall/api/order/v1/getTokenStr.json`,
-            success: function (data) {
-                window._form_data.tokenStr = data.tokenStr;
-            }
-        });
+            url: `${API_PATH}/mall/api/order/v1/getTokenStr.json`
+        }).then(data =>{
+            window._form_data.tokenStr = data.tokenStr;
+        })
     },
     componentDidUpdate: function () {
         this.can_buy(true)
@@ -79,7 +78,7 @@ const ConfirmOrder = React.createClass({
 
         let submit = function submit() {
             $FW.Ajax({
-                url: API_PATH + '/mall/api/order/v1/commit_pay_order.json',
+                url: `${API_PATH}/mall/api/order/v1/commit_pay_order.json`,
                 enable_loading: true,
                 data: this.FormData,
                 success: (data) => {
@@ -225,46 +224,43 @@ $FW.DOMReady(function () {
         //url: requestUrl,
         //url:API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=false&productBizNo=' + query.productBizNo + '&buyNum=' + (query.count || 1),
         url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=false&productBizNo=B0000002875&buyNum=1',
-        enable_loading: true,
-        success: function (data) {
-            console.log(data)
-            var user = {
-                score: data.avaliablePoints || 0,
-                score_server_error: data.avaliablePoints === '',
-                bean: data.avaliableBean,
-                use_bean: true,
-                disable_score: data.isPointForbidden,
-                charge: data.availableCashBalance || 0
-            };
-            //var product = {
-            //    biz_no: query.productBizNo || null,
-            //    img: data.previewTitleImage,
-            //    title: data.productName,
-            //    price: data.singleRmb,
-            //    score: data.singlePoint,
-            //    tags: data.tags || [],
-            //    count: (parseInt(query.count) || 1) || null
-            //};
-            var pay_condition = {
-                product_bought: data.persionProductLimit,
-                product_limit: data.productLimit,
-                label_bought: data.persionLabelLimit,
-                label_limit: data.labelLimit
-            };
-            var close_score_func = !data.isOpenJiFenLevel;
+        enable_loading: true
+    }).then(data =>{
+        var user = {
+            score: data.avaliablePoints || 0,
+            score_server_error: data.avaliablePoints === '',
+            bean: data.avaliableBean,
+            use_bean: true,
+            disable_score: data.isPointForbidden,
+            charge: data.availableCashBalance || 0
+        };
+        //var product = {
+        //    biz_no: query.productBizNo || null,
+        //    img: data.previewTitleImage,
+        //    title: data.productName,
+        //    price: data.singleRmb,
+        //    score: data.singlePoint,
+        //    tags: data.tags || [],
+        //    count: (parseInt(query.count) || 1) || null
+        //};
+        var pay_condition = {
+            product_bought: data.persionProductLimit,
+            product_limit: data.productLimit,
+            label_bought: data.persionLabelLimit,
+            label_limit: data.labelLimit
+        };
+        var close_score_func = !data.isOpenJiFenLevel;
 
-            ReactDOM.render(<ConfirmOrder product={data.productList} ticket_list={data.ticketList || []}
-                                          user={user} address_list={data.addressList}
-                                          pay_condition={pay_condition}
-                                          close_score_func={close_score_func}
-                                          default_address_id={query.address_id || data.addressId}
-                                          vipLevel={data.vipLevel}
-                                          vipConfigUuid={data.vipConfigUuid}
-                                          isVirtualProduct={data.is_virtual_product}
-                />,
-                document.getElementById('cnt'));
-        }
-    });
+        ReactDOM.render(<ConfirmOrder product={data.productList} ticket_list={data.ticketList || []}
+                                      user={user} address_list={data.addressList}
+                                      pay_condition={pay_condition}
+                                      close_score_func={close_score_func}
+                                      default_address_id={query.address_id || data.addressId}
+                                      vipLevel={data.vipLevel}
+                                      vipConfigUuid={data.vipConfigUuid}
+                                      isVirtualProduct={data.is_virtual_product}
+            />,CONTENT_NODE);
+    })
 
     if ($FW.Utils.shouldShowHeader()) {
         ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));

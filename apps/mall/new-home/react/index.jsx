@@ -130,14 +130,11 @@ const HotSale = React.createClass({
     componentDidMount:function(){
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-            data: {count: 6},
-            success: (data) => {
-                this.setState({column:data.products});
-            }
-        });
+            data: {count: 6}
+        }).then(function(data){ this.setState({column:data.products}); });
+
         $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
-
 
     loadMoreProductHandler:function(done){
         this.setState({page:this.state.page+1});
@@ -187,10 +184,6 @@ const HotSale = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
-    $FW.Ajax({
-        url: `${API_PATH}mall/api/index/v1/banners.json`,
-        success:(data)=> {
-            ReactDOM.render(<Mall banners={data.banners}/>, document.getElementById('cnt'));
-        }
-    })
+    $FW.Ajax({url: `${API_PATH}mall/api/index/v1/banners.json` })
+        .then(data => ReactDOM.render(<Mall banners={data.banners}/>,  CONTENT_NODE));
 });
