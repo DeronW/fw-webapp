@@ -1,9 +1,14 @@
 const Success = React.createClass({
     backToMallHandler: function () {
-        $FW.Browser.inApp() ? NativeBridge.gotoMall() : location.href = '/'
+        $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
     },
     render: function () {
-        let href = this.props.cardUuid ? "/static/mall/order-detail/index.html?order_id=" + this.props.order_id + '&cardUuid=' + this.props.cardUuid + '&bizNo=' + this.props.bizNo : "/static/mall/order-detail/index.html?order_id=" + this.props.order_id;
+        let {cardUuid, order_id, bizNo} = this.props;
+        let href = `/static/mall/order-detail/index.html?order_id=${order_id}`;
+        if(cardUuid) href += `&cardUuid=${cardUuid}&bizNo=${bizNo}`;
+
+        let {receiver, phone, address, price, score, voucher_count} = this.props;
+
         return (
             <div>
                 <div className="success-banner"
@@ -16,19 +21,18 @@ const Success = React.createClass({
                 <div className="success-addr" style={{backgroundImage:"url(images/ico-blue-location.png)"}}>
                     <div className="addr-box">
                         <div className="addr">
-                            <div className="receiver">收货人：{this.props.receiver}</div>
-                            <div className="phone">{this.props.phone}</div>
+                            <div className="receiver">收货人：{receiver}</div>
+                            <div className="phone">{phone}</div>
                         </div>
-                        <div className="detail">收货地址：{this.props.address}</div>
+                        <div className="detail">收货地址：{address}</div>
                     </div>
                     <div className="pay">
                         支付：
-                        {this.props.price > 0 ? <span>&yen;{this.props.price}</span> : null}
-                        {this.props.price > 0 && this.props.score ? ' + ' : null}
-                        {this.props.score ? <span className="score">{this.props.score}工分</span> : null}
-                        {(this.props.price > 0 || this.props.score) && this.props.voucher_count ? ' + ' : null}
-                        {this.props.voucher_count ?
-                            <span className="coupons">兑换券 &times; {this.props.voucher_count}</span> : null}
+                        {price > 0 ? <span>&yen;{price}</span> : null}
+                        {price > 0 && score ? ' + ' : null}
+                        {score ? <span className="score">{score}工分</span> : null}
+                        {(price > 0 || score) && voucher_count ? ' + ' : null}
+                        {voucher_count ? <span className="coupons">兑换券 &times; {voucher_count}</span> : null}
                     </div>
                 </div>
                 <div className="success-btn">
@@ -43,14 +47,12 @@ const Success = React.createClass({
 window.ProductBizNo = null;
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('交易成功');
     let order_id = $FW.Format.urlQuery().id;
-    $FW.Component.showAjaxLoading();
 
     $FW.Ajax({
-        url: API_PATH + 'mall/api/member/v1/order_detail.json?orderId=' + order_id,
+        url: `${API_PATH}mall/api/member/v1/order_detail.json?orderId=${order_id}`,
+        enable_loading: true,
         success: function (data) {
-            $FW.Component.hideAjaxLoading();
             ReactDOM.render(<Success
                 order_id={order_id}
                 cardUuid={data.cardUuid}
@@ -67,15 +69,5 @@ $FW.DOMReady(function () {
         }
     });
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"交易成功"} back_handler={back2pre_page} show_back_btn={false}/>, document.getElementById('header'));
-    }
+    ReactDOM.render(<Header title={"交易成功"} show_back_btn={false}/>, document.getElementById('header'));
 });
-
-//window.onNativeMessageReceive = function (msg) {
-//    if (msg == 'history:back') back2pre_page()
-//};
-
-function back2pre_page() {
-    location.href = '/static/mall/product-detail/index.html?bizNo=' + window.ProductBizNo;
-}

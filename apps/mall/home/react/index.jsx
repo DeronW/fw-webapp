@@ -59,9 +59,8 @@ const Mall = React.createClass({
                                     activity_id={i.activity_id} products={i.products} key={index}/>;
         };
         let backFactory = ()=> {
-            return $FW.Browser.inApp() ? <img className="m-logo" src="images/m-logo.png" onClick={this.backNativeHandler}/> :
-                <a className="back-factory" href="http://m.9888.cn/mpwap/"><img
-                    src="images/wap_shop_gong_logo.png"/></a>
+            return $FW.Browser.inApp()?<a className="back-factory" onClick={this.backNativeHandler}><img src="images/wap_shop_gong_logo.png"/></a> :
+                <a className="back-factory" href="http://m.9888.cn/mpwap/"><img src="images/wap_shop_gong_logo.png"/></a>
         };
 
         let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();
@@ -119,16 +118,14 @@ const Mall = React.createClass({
         )
     }
 });
+Mall.propTypes={
+    banners:React.PropTypes.array.isRequired,
+    activities:React.PropTypes.array.isRequired
+}
 
 $FW.DOMReady(function () {
-    $FW.BatchGet([
-        `${API_PATH}mall/api/index/v1/banners.json`, // banner轮播图数据
-        `${API_PATH}mall/api/index/v1/activities.json` // 明前活动的数据
-    ], function (data) {
-        var banners = data[0].banners, activities = data[1].activities;
-        if (typeof(banners) == 'undefined' || typeof(activities) == 'undefined')
-            $FW.Component.Alert('error: empty data received');
-
-        ReactDOM.render(<Mall banners={banners} activities={activities}/>, document.getElementById('cnt'));
-    }, true);
+    Promise.all([
+        $FW.Ajax(`${API_PATH}mall/api/index/v1/banners.json`),// banner轮播图数据
+        $FW.Ajax(`${API_PATH}mall/api/index/v1/activities.json`)// 明前活动的数据
+    ]).then(d => ReactDOM.render(<Mall {...d[0]} {...d[1]}/>, CONTENT_NODE));
 });

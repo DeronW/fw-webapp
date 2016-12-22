@@ -39,7 +39,7 @@ const PieChart = React.createClass({
             weight: this.props.weight,
             current_percent: 0,
             target_percent: this.props.percent,
-            remain_percent: 100-this.props.percent,
+            remain_percent: this.props.percent2,
             animate: this.props.animate,
             padding: this.props.padding
         }
