@@ -23,7 +23,7 @@ const OrderDetail = React.createClass({
 
         let product_item = function (product, index) {
             return (
-                <div className="list">
+                <div className="list" key={index}>
                     <img src={product.img}  className="list-img"/>
                     <div className="title">{product.title}</div>
                     <div className="price-box"><span>{product.score}工分</span><span className="num-modifyBox"><span className="num-quantity">×</span>{product.count}</span></div>

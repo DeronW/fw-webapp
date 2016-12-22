@@ -141,18 +141,45 @@ const User = React.createClass({
 const HotSale = React.createClass({
     getInitialState:function(){
         return {
-            ps:[]
+            page:1,
+            hasData:true,
+            column:[]
         }
     },
 
     componentDidMount:function(){
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-            data: {count: 10},
+            data: {count: 6},
             success: (data) => {
-                this.setState({ps:data.products});
+                this.setState({column:data.products});
             }
         });
+        $FW.Event.touchBottom(this.loadMoreProductHandler);
+    },
+
+    loadMoreProductHandler:function(done){
+        this.setState({page:this.state.page+1});
+        let arr = [];
+        this.state.hasData ?
+            $FW.Ajax({
+                url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+                data: {count:6,page:this.state.page},
+                enable_loading: true,
+                success: (data) => {
+                    if(data.products){
+                        console.log(data);
+                        data.products.map((item, index) => arr.push(item))
+                        this.setState(prevState=>({
+                            column : prevState.column.concat(arr)
+                        }));
+                    }
+                    else{
+                        this.setState({hasData:false});
+                    }
+                    done && done()
+                }
+            }):null
     },
 
     render: function () {
@@ -168,7 +195,7 @@ const HotSale = React.createClass({
 
         return (
             <div>
-                    {this.state.ps.map(hotProduct)}
+                    {this.state.column.map(hotProduct)}
             </div>
         )
     }

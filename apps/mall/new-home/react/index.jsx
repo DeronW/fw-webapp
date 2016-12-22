@@ -130,7 +130,7 @@ const HotSale = React.createClass({
     componentDidMount:function(){
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-            data: {count: 4},
+            data: {count: 6},
             success: (data) => {
                 this.setState({column:data.products});
             }
@@ -145,7 +145,7 @@ const HotSale = React.createClass({
         this.state.hasData ?
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-                data: {count:4,page:this.state.page},
+                data: {count:6,page:this.state.page},
                 enable_loading: true,
                 success: (data) => {
                     if(data.products){
