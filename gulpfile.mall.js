@@ -55,14 +55,13 @@ const APP_NAMES = [
     'deliver-address',
     'new-deliver-address',
 
-    // 特殊页面
-    'guoqing',
-    'zhuanpan20161024',
     'user-prize-record',
+    // 游戏
     'game-guess',
     'game',
-    'old-game',
-    'zhuanpan20161215', {
+    'zhuanpan20161215',
+    // 特殊页面
+    {
         name: 'waiting',
         describe: '建设中 页面',
         include_components: [`${PROJ}/header.jsx`],
