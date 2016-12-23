@@ -77,6 +77,12 @@ const Mall = React.createClass({
             transition: "1s all"
         };
 
+       let charge_nav=<div className="charge-nav">
+           <div className="charge-bill"><img src="images/charge-bill.png"/></div>
+           <div className="charge-flow"><img src="images/charge-flow.png"/></div>
+       </div>
+
+
         return (
             <div className="head-wrap">
                 {banner}
@@ -106,6 +112,7 @@ const Mall = React.createClass({
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
                         src="images/nav-8.png"/><span>我可兑换</span></a>
                 </div>
+                {charge_nav}
                 <NewProduct/>
                 <HotProduct/>
                 <Grid_4_4/>
@@ -131,7 +138,7 @@ const HotSale = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
             data: {count: 6}
-        }).then(function(data){ this.setState({column:data.products}); });
+        }).then((data)=> this.setState({column:data.products}));
 
         $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
@@ -184,6 +191,7 @@ const HotSale = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
-    $FW.Ajax({url: `${API_PATH}mall/api/index/v1/banners.json` })
+    $FW.Ajax({
+        url: `${API_PATH}mall/api/index/v1/banners.json`})
         .then(data => ReactDOM.render(<Mall banners={data.banners}/>,  CONTENT_NODE));
 });

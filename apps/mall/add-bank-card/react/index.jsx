@@ -31,8 +31,8 @@ const AddBankCard = React.createClass({
           $FW.Ajax({
             url:  `${API_PATH}/mall/api/payment/v1/bank_card_info.json?accountNo=`+this.state.val,
             enable_loading: true
-          }).then(function(data){
-              if(data.bankInfo)
+          }).then((data)=>{
+        if(data.bankInfo)
               {
                   var data= data.bankInfo;
                   location.href = location.protocol + '//' + location.hostname +
