@@ -4,7 +4,11 @@ const API_PATH = document.getElementById('api-path').value;
 
 const Success = React.createClass({
     backToMallHandler: function () {
-        $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/'
+        function back2times(){
+            NativeBridge.close()
+            NativeBridge.close()
+        }
+        $FW.Browser.inApp() ? back2times() : location.href = '/'
     },
     render: function () {
         let {cardUuid, order_id, bizNo} = this.props;
