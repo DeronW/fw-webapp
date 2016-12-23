@@ -1,7 +1,7 @@
 const GameCenter_popAvatar= React.createClass({
     getInitialState: function () {
         return {
-            index:0
+            index:-1
         }
     },
     selectedHandler:function(index){
@@ -38,7 +38,10 @@ const GameCenter_popAvatar= React.createClass({
                     <div className="pop-avatar-ul">
                         {this.props.data.list.map(list)}
                     </div>
-                    <div className="pop-avatar-btn" onClick={()=>{this.confirmAvatar(this.props.data.list[this.state.index])}}>确定</div>
+                    <div className="pop-avatar-btn-box">
+                        <div className="pop-avatar-btn" onClick={()=>{this.confirmAvatar(this.props.data.list[this.state.index])}}>确定</div>
+                        <div className="pop-avatar-cancel" onClick={()=>{this.props.setPopAvatar(false)}}>取消</div>
+                    </div>
                 </div>
             </div>
         )
