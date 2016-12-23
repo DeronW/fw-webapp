@@ -53,13 +53,19 @@ const Mall = React.createClass({
         }
         link ? gotoHandler(link) : console.log('no link set');
     },
+    backNativeApp:function(){
+        NativeBridge.close();
+    },
+    backNativeHandler: function () {
+        NativeBridge.toNative('app_back_native')
+    },
     render: function () {
         let activity = (i, index) => {
             return <ActivityProduct title={i.title} img={i.img} bizNo={i.bizNo}
                                     activity_id={i.activity_id} products={i.products} key={index}/>;
         };
         let backFactory = ()=> {
-            return $FW.Browser.inApp()?<a className="back-factory" onClick={this.backNativeHandler}><img src="images/wap_shop_gong_logo.png"/></a> :
+            return $FW.Browser.inApp()?<a className="back-factory" onClick={this.backNativeHandler}><img src="images/wap_shop_gong_logo.png" /></a>:
                 <a className="back-factory" href="http://m.9888.cn/mpwap/"><img src="images/wap_shop_gong_logo.png"/></a>
         };
 
