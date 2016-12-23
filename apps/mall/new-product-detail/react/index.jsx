@@ -257,7 +257,7 @@ const PlusMinus = React.createClass({
             '/static/mall/new-order-confirm/index.html?cartFlag=false&productBizNo=' + bizNo + '&count=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
-        if (!this.props.is_login) {
+        if (this.props.is_login==1) {
             if ($FW.Browser.inApp()) {
                 // 注意: 这里有个hole
                 // 非种cookie 用这种
@@ -327,8 +327,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('商品详情');
 
     $FW.Ajax({
-        //url: 'http://localhost/nginx-1.9.12/html/item_detail.json?bizNo=A0000000370',
-        url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
+        url: './item_detail.json?bizNo=A0000000370',
+        //url: API_PATH + 'mall/api/detail/v1/item_detail.json?bizNo=' + bizNo,
         enable_loading: true
     }).then(data =>{
         if (data.title) {
