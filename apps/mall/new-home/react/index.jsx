@@ -77,7 +77,7 @@ const Mall = React.createClass({
             transition: "1s all"
         };
 
-        let charge_nav = <div className="charge-nav">
+        let Charge_Nav = <div className="charge-nav">
             <div className="charge-bill"><img src="images/charge-bill.png"/></div>
             <div className="charge-flow"><img src="images/charge-flow.png"/></div>
         </div>
@@ -117,13 +117,13 @@ const Mall = React.createClass({
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
                         src="images/nav-8.png"/><span>我可兑换</span></a>
                 </div>
-                {charge_nav}
-                <NewProducts/>
-                <HotProducts/>
-                <Grid_4_4/>
-                <Grid_3_6/>
-                <Grid_6_4/>
-                <Grid_4_5/>
+                {Charge_Nav}
+                <div id="NewProducts"></div>
+                <div id="HotProducts"></div>
+                <div id="Grid_3_6"></div>
+                <div id="Grid_4_4"></div>
+                <div id="Grid_4_5"></div>
+                <div id="Grid_6_4"></div>
                 <HotSales/>
             </div>
         )
@@ -132,6 +132,26 @@ const Mall = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
-    $FW.Ajax(`${API_PATH}mall/api/index/v1/banners.json`)
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
         .then(data => ReactDOM.render(<Mall banners={data.banners}/>, CONTENT_NODE));
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=6`)
+        .then((data)=> ReactDOM.render(<NewProducts data={data.products}/>, document.getElementById('NewProducts')));
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=8`)
+        .then((data)=> {
+            ReactDOM.render(<HotProducts data={data.products}/>, document.getElementById('HotProducts'));
+            ReactDOM.render(<Grid_4_4 data={data.products}/>, document.getElementById('Grid_4_4'))
+        });
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=9`)
+        .then(data => ReactDOM.render(<Grid_3_6 data={data.products}/>, document.getElementById('Grid_3_6')))
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=10`)
+        .then(data => {
+            ReactDOM.render(<Grid_4_5 data={data.products}/>, document.getElementById('Grid_4_5'));
+            ReactDOM.render(<Grid_6_4 data={data.products}/>, document.getElementById('Grid_6_4'))
+        })
+
 });

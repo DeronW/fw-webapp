@@ -1,12 +1,8 @@
 const Grid_3_6 = React.createClass({
     getInitialState: function () {
         return {
-            ps: []
+            ps: this.props.data
         }
-    },
-    componentDidMount: function () {
-        $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=9`)
-        .then(data =>this.setState({ps: data.products}))
     },
     render: function () {
         let theme2_top_product_item = (product, index) => {

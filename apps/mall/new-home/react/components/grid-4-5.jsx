@@ -1,19 +1,8 @@
 const Grid_4_5 = React.createClass({
     getInitialState: function () {
         return {
-            ps: []
+            ps: this.props.data
         }
-    },
-    componentDidMount: function () {
-        $FW.Ajax({
-            url: `${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=10`,//人气推荐列表
-            success: (data) => {
-                this.setState({ps: data.products});
-                this.setState({
-                    ps: data.products
-                });
-            }
-        });
     },
     render: function () {
         let theme4_top_product_item = (product, index) => {

@@ -1,12 +1,8 @@
 const NewProducts = React.createClass({
     getInitialState: function () {
         return {
-            ps: []
+            ps: this.props.data
         }
-    },
-    componentDidMount: function () {
-        $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=6`)
-            .then((data)=> this.setState({ps: data.products}));
     },
     render: function () {
         return (
