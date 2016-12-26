@@ -50,7 +50,6 @@ const APP_NAMES = [
     'product-recharge',
     'product-category',
 
-    'fail',
     'not-support',
     'deliver-address',
     'new-deliver-address',
