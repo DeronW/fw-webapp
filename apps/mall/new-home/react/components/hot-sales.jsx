@@ -23,20 +23,20 @@ const HotSales = React.createClass({
                 data: {count: 6, page: this.state.page},
                 enable_loading: true,
                 success: (data) => {
-                    let products = data;
+                    let products = data.products;
                     this.setState({
                         column: [...this.state.column, ...products],
                         hasData: !!products.length
                     })
-                    /*
-                     if (data.products) {
+
+                    /*if (data.products) {
                      data.products.map((item, index) => arr.push(item))
                      this.setState(prevState=>({
-                     column: prevState.column.concat(arr)
+                        column: prevState.column.concat(arr)
                      }));
                      }
                      else {
-                     this.setState({hasData: false});
+                         this.setState({hasData: false});
                      }*/
                      done && done()
                 }
