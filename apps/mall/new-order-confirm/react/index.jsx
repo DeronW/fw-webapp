@@ -251,7 +251,7 @@ $FW.DOMReady(function () {
         };
         var close_score_func = !data.isOpenJiFenLevel;
 
-        ReactDOM.render(<ConfirmOrder product={data.productList} ticket_list={data.ticketList || []}
+        ReactDOM.render(<ConfirmOrder product={data.productDetails} ticket_list={data.tickets || []}
                                       user={user} address_list={data.addressList}
                                       pay_condition={pay_condition}
                                       close_score_func={close_score_func}
