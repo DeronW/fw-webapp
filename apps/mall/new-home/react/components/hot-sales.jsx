@@ -37,9 +37,8 @@ const HotSales = React.createClass({
                      }
                      else {
                      this.setState({hasData: false});
-                     }
+                     }*/
                      done && done()
-                     */
                 }
             }) : null
     },
