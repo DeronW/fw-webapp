@@ -25,21 +25,21 @@ const HotSales = React.createClass({
                 success: (data) => {
                     let products = data;
                     this.setState({
-                        column:[...this.state.column, ...products],
+                        column: [...this.state.column, ...products],
                         hasData: !!products.length
                     })
                     /*
-                    if (data.products) {
-                        data.products.map((item, index) => arr.push(item))
-                        this.setState(prevState=>({
-                            column: prevState.column.concat(arr)
-                        }));
-                    }
-                    else {
-                        this.setState({hasData: false});
-                    }
-                    done && done()
-                    */
+                     if (data.products) {
+                     data.products.map((item, index) => arr.push(item))
+                     this.setState(prevState=>({
+                     column: prevState.column.concat(arr)
+                     }));
+                     }
+                     else {
+                     this.setState({hasData: false});
+                     }
+                     done && done()
+                     */
                 }
             }) : null
     },

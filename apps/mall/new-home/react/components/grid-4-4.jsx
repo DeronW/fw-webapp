@@ -1,23 +1,18 @@
 const Grid_4_4 = React.createClass({
-    getInitialState:function(){
+    getInitialState: function () {
         return {
-            ps:[]
+            ps: []
         }
     },
-    componentDidMount:function(){
-        $FW.Ajax({
-            url: `${API_PATH}/mall/api/index/v1/recommendProducts.json`,//人气推荐列表
-            data: {recommendBizNo: "TJ0000022", totalCount: 8},
-            success: (data) => {
-                console.log(data)
-                this.setState({ps:data.products});
-            }
-        });
+    componentDidMount: function () {
+        $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=8`)
+            .then(data =>this.setState({ps: data.products}))
     },
-    render:function(){
-        let theme_product_item = (product,index) => {
+    render: function () {
+        let theme_product_item = (product, index) => {
             return (
-                <a className="theme-product-item" key={index} onClick={ () => gotoHandler('/static/mall/new-product-detail/index.html?bizNo=' + product.bizNo)}>
+                <a className="theme-product-item" key={index}
+                   onClick={ () => gotoHandler('/static/mall/new-product-detail/index.html?bizNo=' + product.bizNo)}>
                     <img className="theme-1-img" src={product.img}/>
                     <span className="theme-product-item-name">{product.abbreviation}</span>
                 </a>
