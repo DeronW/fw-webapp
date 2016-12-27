@@ -8,14 +8,17 @@ const RedBag = React.createClass({
         let step = 1;
         let nowId;
         let initAnimation = ()=> {
-            console.log(this.state.num);
-            if (this.state.num >= 10) {
-                step = -step;
-            } else if (this.state.num <= 0) {
-                step = 1;
-            }
-            this.setState({num: (this.state.num + step) > 10 ? 10 : (this.state.num + step)});
-            nowId = requestAnimationFrame(initAnimation);
+            setTimeout(()=>{
+                console.log(this.state.num);
+                if (this.state.num >= 10) {
+                    step = -step;
+                } else if (this.state.num <= 0) {
+                    step = 1;
+                }
+                this.setState({num: (this.state.num + step) > 10 ? 10 : (this.state.num + step)});
+                nowId = requestAnimationFrame(initAnimation);
+            },100)
+
         };
         nowId = requestAnimationFrame(initAnimation);
     },

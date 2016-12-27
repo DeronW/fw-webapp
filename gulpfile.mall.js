@@ -59,8 +59,8 @@ const APP_NAMES = [
     'game-guess',//猜拳
     'game',//游戏中心
     'zhuanpan20161215',//转盘20161215
-    'game-red-rain',//红包雨
-    'test-game-zhuanpan20161230',//20161230转盘活动
+    'game-red-rain',//2017过年红包雨
+    'game-zhuanpan20161230',//20161230转盘活动
     // 特殊页面
     {
         name: 'waiting',

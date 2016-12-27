@@ -69,7 +69,7 @@ const NineDraw = React.createClass({
         if (this.state.remainTimes < 1) return;
         this._usable = false;
         $FW.Ajax({
-            url: API_PATH + 'mall/api/magic/v5/draw.json',
+            url: API_PATH + 'mall/api/magic/v6/draw.json',
             method: 'post',
             data: {activityId:ACTIVITY_ID, source: getBrowserType()},
             success: (data) => {
