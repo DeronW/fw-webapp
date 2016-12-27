@@ -15,7 +15,7 @@ const Mall = React.createClass({
             background: "transparent",
             logoImage: "images/logo.png",
             avatarImage: "images/list-icon.png",
-            borderBottom:"none"
+            borderBottom: "none"
         }
     },
     getHeadImages: function () {
@@ -35,7 +35,7 @@ const Mall = React.createClass({
         link ? gotoHandler(link) : console.log('no link set');
     },
     componentDidMount: function () {
-        window.addEventListener('touchmove', function() {
+        window.addEventListener('touchmove', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             //if (scrollTop > 100) return false;
@@ -44,12 +44,12 @@ const Mall = React.createClass({
                 background: "rgba(255,255,255,.9)",
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png",
-                borderBottom:"1px solid #d8d8d8"
+                borderBottom: "1px solid #d8d8d8"
             } : {
                 background: "transparent",
                 logoImage: "images/logo.png",
                 avatarImage: "images/list-icon.png",
-                borderBottom:"none"
+                borderBottom: "none"
             }
 
             this.setState(style);
@@ -69,7 +69,7 @@ const Mall = React.createClass({
 
         var head_nav_wrap = {
             background: this.state.background,
-            borderBottom:this.state.borderBottom,
+            borderBottom: this.state.borderBottom,
             width: "100%",
             height: "56px",
             paddingTop: "20px",
@@ -77,10 +77,10 @@ const Mall = React.createClass({
             transition: "1s all"
         };
 
-       let charge_nav=<div className="charge-nav">
-           <div className="charge-bill"><img src="images/charge-bill.png"/></div>
-           <div className="charge-flow"><img src="images/charge-flow.png"/></div>
-       </div>
+        let Charge_Nav = <div className="charge-nav">
+            <div className="charge-bill"><img src="images/charge-bill.png"/></div>
+            <div className="charge-flow"><img src="images/charge-flow.png"/></div>
+        </div>
 
 
         return (
@@ -94,17 +94,22 @@ const Mall = React.createClass({
                             <img className="search-icon" src="images/search-icon.png"/>
                             <div className="search-bar">请输入关键字</div>
                         </a>
-                        <a className="index-avatar" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }>
+                        <a className="index-avatar"
+                           onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }>
                             <img src={this.state.avatarImage}/></a>
                     </div>
                 </div>
                 <div className="head-nav">
                     <a onClick={() => gotoHandler("/static/mall/product-vip-zone/index.html")}><img
                         src="images/nav-1.png"/><span>VIP专区</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=豆哥周边")}><img src="images/nav-2.png"/><span>豆哥周边</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=工场券")}><img src="images/nav-3.png"/><span>工场券</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/hot-activity/index.html", true)}><img src="images/nav-4.png"/><span>热门活动</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}><img src="images/nav-5.png"/><span>生活服务</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=豆哥周边")}><img
+                        src="images/nav-2.png"/><span>豆哥周边</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=工场券")}><img
+                        src="images/nav-3.png"/><span>工场券</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/hot-activity/index.html", true)}><img
+                        src="images/nav-4.png"/><span>热门活动</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}><img
+                        src="images/nav-5.png"/><span>生活服务</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img
                         src="images/nav-6.png"/><span>充值中心</span><span className="hot-tag"></span></a>
                     <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true?", true)}><img
@@ -112,78 +117,14 @@ const Mall = React.createClass({
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
                         src="images/nav-8.png"/><span>我可兑换</span></a>
                 </div>
-                {charge_nav}
-                <NewProduct/>
-                <HotProduct/>
-                <Grid_4_4/>
-                <Grid_3_6/>
-                <Grid_6_4/>
-                <Grid_4_5/>
-                <HotSale/>
-            </div>
-        )
-    }
-});
-
-const HotSale = React.createClass({
-    getInitialState:function(){
-        return {
-            page:1,
-            hasData:true,
-            column:[]
-        }
-    },
-
-    componentDidMount:function(){
-        $FW.Ajax({
-            url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-            data: {count: 6}
-        }).then((data)=> this.setState({column:data.products}));
-
-        $FW.Event.touchBottom(this.loadMoreProductHandler);
-    },
-
-    loadMoreProductHandler:function(done){
-        this.setState({page:this.state.page+1});
-        let arr = [];
-        this.state.hasData ?
-            $FW.Ajax({
-                url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-                data: {count:6,page:this.state.page},
-                enable_loading: true,
-                success: (data) => {
-                    if(data.products){
-                        console.log(data);
-                        data.products.map((item, index) => arr.push(item))
-                        this.setState(prevState=>({
-                            column : prevState.column.concat(arr)
-                        }));
-                    }
-                    else{
-                        this.setState({hasData:false});
-                    }
-                    done && done()
-                }
-            }):null
-     },
-
-    render: function () {
-        let hotProduct = (product,index)=>{
-           return(
-                    <a className="product-wrap" key={index} onClick={ () => gotoHandler('/static/mall/new-product-detail/index.html?bizNo=' + product.bizNo)}>
-                        <img src={product.img}/>
-                        <span className="product-name">{product.title}</span>
-                        <span className="product-price">{product.score}工分</span>
-                    </a>
-               )
-        }
-
-        return (
-            <div className="hot-sales">
-                <div className="hot-sales-title"><img src="images/hot-sale.png"/></div>
-                <div className="product-list">
-                    {this.state.column.map(hotProduct)}
-                </div>
+                {Charge_Nav}
+                <div id="NewProducts"></div>
+                <div id="HotProducts"></div>
+                <div id="Grid_3_6"></div>
+                <div id="Grid_4_4"></div>
+                <div id="Grid_4_5"></div>
+                <div id="Grid_6_4"></div>
+                <HotSales/>
             </div>
         )
     }
@@ -191,7 +132,26 @@ const HotSale = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
-    $FW.Ajax({
-        url: `${API_PATH}mall/api/index/v1/banners.json`})
-        .then(data => ReactDOM.render(<Mall banners={data.banners}/>,  CONTENT_NODE));
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
+        .then(data => ReactDOM.render(<Mall banners={data.banners}/>, CONTENT_NODE));
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=6`)
+        .then((data)=> ReactDOM.render(<NewProducts data={data.products}/>, document.getElementById('NewProducts')));
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=8`)
+        .then((data)=> {
+            ReactDOM.render(<HotProducts data={data.products}/>, document.getElementById('HotProducts'));
+            ReactDOM.render(<Grid_4_4 data={data.products}/>, document.getElementById('Grid_4_4'))
+        });
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=9`)
+        .then(data => ReactDOM.render(<Grid_3_6 data={data.products}/>, document.getElementById('Grid_3_6')))
+
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=10`)
+        .then(data => {
+            ReactDOM.render(<Grid_4_5 data={data.products}/>, document.getElementById('Grid_4_5'));
+            ReactDOM.render(<Grid_6_4 data={data.products}/>, document.getElementById('Grid_6_4'))
+        })
+
 });
