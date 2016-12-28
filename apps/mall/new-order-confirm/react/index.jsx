@@ -23,7 +23,7 @@ const ConfirmOrder = React.createClass({
     },
     refreshTokenStr: function () {
         $FW.Ajax({
-            url: `${API_PATH}/mall/api/order/v1/getTokenStr.json`
+            url: `${API_PATH}mall/api/order/v1/getTokenStr.json`
             //url: `./getTokenStr.json`
         }).then(data =>{
             window._form_data.tokenStr = data.tokenStr;
@@ -34,7 +34,7 @@ const ConfirmOrder = React.createClass({
 
         let submit = function submit() {
             $FW.Ajax({
-                url: `${API_PATH}/mall/api/order/v1/commit_pay_order.json`,
+                url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
                 //url: `./commit_pay_order.json`,
                 enable_loading: true,
                 data: this.FormData,
@@ -55,7 +55,7 @@ const ConfirmOrder = React.createClass({
             if (!this.FormData.msgCode) return $FW.Component.Alert('请填写手机验证码');
 
             $FW.Ajax({
-                url: `${API_PATH}/mall/api/order/v1/validatePaySmsCode.json`,
+                url: `${API_PATH}mall/api/order/v1/validatePaySmsCode.json`,
                 //url: `./validatePaySmsCode.json`,
                 enable_loading: true,
                 method: 'post',
