@@ -43,7 +43,7 @@ const Payment = React.createClass({
                 expireTime: ''
             };
             $FW.Ajax({
-                url:  `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
+                url: `${API_PATH}mall/api/payment/v1/ucf_pay.json`,
                 //url: './ucf_pay.json',
                 enable_loading: true,
                 data: FormData,
@@ -91,7 +91,7 @@ const Payment = React.createClass({
                     <div className="pay-tip">请在23小时59分59秒内完成支付</div>
                     <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt}元</span></div>
                 </div>
-                <div className="order-products">
+                /*<div className="order-products">
                     <div className="order-item">
                         <span className="order-item-name">爱奇艺VIP周卡兑换码</span>
                         <span className="order-item-amount">×1</span>
@@ -101,6 +101,7 @@ const Payment = React.createClass({
                         <span className="order-item-amount">×1</span>
                     </div>
                 </div>
+                */
                 <div className="pay-way">
                     {payMethods}
                     {/*
