@@ -155,9 +155,9 @@ const Address = React.createClass({
                     // 如果是从下单页面进入, 则需要回到下单页面或下单页的收获地址
                     var link;
                     if (data.address_count > 1) {
-                        link = '/static/mall/new-deliver-address/index.html?' + 'productBizNo=' + query.productBizNo + '&count=' + query.count;
+                        link = '/static/mall/deliver-address/index.html?' + 'productBizNo=' + query.productBizNo + '&count=' + query.count;
                     } else {
-                        link = '/static/mall/new-order-confirm/index.html?address_id=' + data.address_id + '&productBizNo=' + query.productBizNo + '&count=' + query.count;
+                        link = '/static/mall/order-confirm/index.html?address_id=' + data.address_id + '&productBizNo=' + query.productBizNo + '&count=' + query.count;
                     }
                     location.href = link
                 }

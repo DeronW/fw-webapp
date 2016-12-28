@@ -5,14 +5,13 @@ const DeliverAddress = React.createClass({
     markDefaultHandler: function (address_id) {
         console.log(address_id);
         $FW.Ajax({
-            url: API_PATH + 'mall/api/member/v1/address/set_default.json',
+            url: `${API_PATH}mall/api/member/v1/address/set_default.json`,
             method: 'POST',
             enable_loading: true,
-            data: {id: address_id},
-            success: function () {
-                location.reload()
-            }
-        });
+            data: {id: address_id}
+        }).then(data =>{
+            location.reload()
+        })
     },
     render: function () {
         let _this = this;
@@ -23,7 +22,7 @@ const DeliverAddress = React.createClass({
         let address = function (address, index) {
             let link;
             if (!preview) {
-                link = "/static/mall/order-confirm/index.html?address_id=" + address.address_id + "&productBizNo=" + productBizNo + '&count=' + productCount;
+                link = "/static/mall/new-order-confirm/index.html?address_id=" + address.address_id + "&productBizNo=" + productBizNo + '&count=' + productCount;
             }
             let checked_flag = null;
             if (!preview) {

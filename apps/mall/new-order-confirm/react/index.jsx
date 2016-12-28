@@ -5,8 +5,8 @@ const ConfirmOrder = React.createClass({
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
-            prds: query.productBizNo||[],
-            buyNum: query.buyNum||0,
+            prds: query.productBizNo || [],
+            buyNum: query.buyNum || 0,
             ticket: [],
             msgCode: null,
             addressId: this.props.data.addressId,
@@ -25,7 +25,7 @@ const ConfirmOrder = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/api/order/v1/getTokenStr.json`
             //url: `./getTokenStr.json`
-        }).then(data =>{
+        }).then(data => {
             window._form_data.tokenStr = data.tokenStr;
         })
     },
@@ -35,17 +35,18 @@ const ConfirmOrder = React.createClass({
         let submit = function submit() {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
+                method: 'POST',
                 //url: `./commit_pay_order.json`,
                 enable_loading: true,
                 data: this.FormData,
                 success: (data) => {
                     /*
-                    if (data.errMsg) {
-                        $FW.Component.Alert(data.errMsg);
-                        this.refreshTokenStr()
-                    } else {
-                    */
-                        location.href = '/static/mall/payment/index.html?id='
+                     if (data.errMsg) {
+                     $FW.Component.Alert(data.errMsg);
+                     this.refreshTokenStr()
+                     } else {
+                     */
+                    location.href = '/static/mall/payment/index.html?id='
                     /* } */
                 }
             })
@@ -126,9 +127,9 @@ const ConfirmOrder = React.createClass({
 
         return (
             <div className="confirm-order">
-                    <AddressPanel address={address}
-                                  product_biz_no={this.FormData.productBizNo}
-                                  product_count={this.state.product_count}/>
+                <AddressPanel address={address}
+                              product_biz_no={this.FormData.productBizNo}
+                              product_count={this.state.product_count}/>
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}
                               update_product_count_handler={this.updateProductCountHandler}/>
@@ -140,25 +141,30 @@ const ConfirmOrder = React.createClass({
                               update_payment_handler={this.updatePaymentHandler}
                 />
                 <div className="custom-note">
-                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言" value={this.state.note} onChange={this.changeValueHandler}/>
+                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
+                                                           value={this.state.note} onChange={this.changeValueHandler}/>
                 </div>
                 <div className="total-price">
                     <div className="price-item">
-                        <span className="item-name">商品金额</span><span className="item-detail">￥{this.props.data.payableRmbAmt}+{this.props.data.totalPoints}工分</span>
+                        <span className="item-name">商品金额</span><span
+                        className="item-detail">￥{this.props.data.payableRmbAmt}+{this.props.data.totalPoints}工分</span>
                     </div>
                     <div className="price-item">
-                        <span className="item-name">兑换券</span><span className="item-detail">-{this.props.data.totalPoints-this.props.data.payablePointAmt}工分</span>
+                        <span className="item-name">兑换券</span><span
+                        className="item-detail">-{this.props.data.totalPoints - this.props.data.payablePointAmt}工分</span>
                     </div>
                     <div className="price-item">
-                        <span className="item-name">运费</span><span className="item-detail">+￥{this.props.data.totalFreightPrice}</span>
+                        <span className="item-name">运费</span><span
+                        className="item-detail">+￥{this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
                 <div className="total-price-item">
-                    <span className="total-item-name">实付款</span><span className="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
+                    <span className="total-item-name">实付款</span><span
+                    className="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
                 </div>
 
-                    <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
-                             update_sms_code_handler={this.updateSMSCodeHandler}/>
+                <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
+                         update_sms_code_handler={this.updateSMSCodeHandler}/>
                 <div className="confirm-order-foot">
                     <a onClick={this.makeOrderHandler}
                        className={this.props.data.canBuy ? "btn-red" : "btn-red btn-gray"}>提交订单</a>
@@ -174,8 +180,8 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
-    let prds = query.productBizNo||[];
-    let buyNum = query.buyNum||0;
+    let prds = query.productBizNo || [];
+    let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
@@ -184,10 +190,10 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         //url: requestUrl,
-        url:`${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=`+cartFlag+`&prds=`+prds+`&buyNum=`+buyNum+`&userTicketList=`+userTicketList,
+        url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prds=` + prds + `&buyNum=` + buyNum + `&userTicketList=` + userTicketList,
         //url: `./pre_pay_order.json?cartFlag=`+cartFlag+`&prds=`+prds+`&buyNum=`+buyNum+`&userTicketList=`+userTicketList,
         enable_loading: true
-    }).then(data =>{
+    }).then(data => {
         var user = {
             score: data.avaliablePoints || 0,
             score_server_error: data.avaliablePoints === '',
@@ -212,7 +218,7 @@ $FW.DOMReady(function () {
         };
         var close_score_func = !data.isOpenJiFenLevel;
 
-        ReactDOM.render(<ConfirmOrder  data={data} product={data.productDetails} ticket_list={data.tickets || []}
+        ReactDOM.render(<ConfirmOrder data={data} product={data.productDetails} ticket_list={data.tickets || []}
                                       user={user} address_list={data.addressList}
                                       pay_condition={pay_condition}
                                       close_score_func={close_score_func}
@@ -220,7 +226,7 @@ $FW.DOMReady(function () {
                                       vipLevel={data.vipLevel}
                                       vipConfigUuid={data.vipConfigUuid}
                                       isVirtualProduct={data.is_virtual_product}
-            />,CONTENT_NODE);
+        />, CONTENT_NODE);
     })
 
     if ($FW.Utils.shouldShowHeader()) {
