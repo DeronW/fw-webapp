@@ -16,7 +16,7 @@ const ConfirmOrder = React.createClass({
             useTicket: null,
             ticket: [],
             tokenStr: '',
-            sms_code: null,
+            msgCode: null,
             addressId: this.props.default_address_id,
             vipLevel: this.props.vipLevel,
             vipConfigUuid: this.props.vipConfigUuid,
@@ -93,13 +93,13 @@ const ConfirmOrder = React.createClass({
         }.bind(this);
 
         if (!this.state.isVirtualProduct) {
-            if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
+            if (!this.FormData.msgCode) return $FW.Component.Alert('请填写手机验证码');
 
             $FW.Ajax({
                 url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
                 enable_loading: true,
                 method: 'post',
-                data: {smsCode: this.FormData.sms_code},
+                data: {smsCode: this.FormData.msgCode},
                 success: submit
             });
         } else {
@@ -108,7 +108,7 @@ const ConfirmOrder = React.createClass({
 
     },
     updateSMSCodeHandler: function (code) {
-        this.FormData.sms_code = code;
+        this.FormData.msgCode = code;
     },
     updatePaymentHandler: function (options) {
         if (typeof(options.use_bean) == 'boolean')
