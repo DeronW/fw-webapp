@@ -41,11 +41,13 @@ const MALL_APP_NAMES = [
     'new-deliver-address',
 
     // 特殊页面
-    'guoqing',
-    'zhuanpan20161024',
     'user-prize-record',
-    'game',
-    'zhuanpan20161215'
+
+    //游戏页面game-
+    'game',//游戏中心
+    'zhuanpan20161215',//15号转盘
+    'game-zhuanpan20161230'//2016-12-30号转盘
+
 
 ];
 
