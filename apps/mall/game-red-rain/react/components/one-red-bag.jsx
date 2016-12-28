@@ -2,35 +2,36 @@ const RedBag = React.createClass({
     getInitialState: function () {
         return {
             num: 0,
-            liclass:
+            liclass:"red-bag-li"
         }
     },
     componentDidMount: function () {
         let step = 1;
-        let nowId;
         let initAnimation = ()=> {
-            setTimeout(()=> {
+            let mytimeout=setTimeout(()=> {
                 if (this.state.num >= 10) {
                     step = -step;
                 } else if (this.state.num <= 0) {
                     step = 1;
                 }
                 this.setState({num: (this.state.num + step) > 10 ? 10 : (this.state.num + step)});
-                nowId = requestAnimationFrame(initAnimation);
+                initAnimation();
             }, 150)
 
         };
-        nowId = requestAnimationFrame(initAnimation);
+        initAnimation();
     },
     clickRedBag: function (e) {
-        console.log(this.className);
+        this.setState({liclass:"red-bag-li clicked"});
+        clearTimeout(mytimeout);
+        this.setState({num: 10});
     },
     initialBag: function () {
 
     },
     render: function () {
         return (
-            <div className={} onClick={this.clickRedBag} style={{
+            <div className={this.state.liclass} onClick={this.clickRedBag} style={{
                 left: 200 - 20 * this.state.num/2 + 'px',
                 top: 200 - 20 * this.state.num/2 + 'px',
             }}>
