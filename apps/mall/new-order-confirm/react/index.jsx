@@ -2,25 +2,18 @@ const ConfirmOrder = React.createClass({
 
     getInitialState: function () {
         var query = $FW.Format.urlQuery();
-        let product_count = this.can_buy_count(this.props.product.count);
         let use_bean = product_count > this.props.ticket_list.length;
         this.props.user.use_bean = use_bean;
 
         window._form_data = this.FormData = {
-            sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
-            buyNum: product_count,
-            useBean: use_bean,
-            payBeanPrice: null,
-            payRmbPrice: null,
-            productBizNo: query.productBizNo,
-            useTicket: null,
+            cartFlag: query.cartFlag,
+            prds: query.productBizNo||[],
+            buyNum: query.buyNum||0,
             ticket: [],
+            msgCode: null,
+            addressId: this.props.data.addressId,
             tokenStr: '',
-            sms_code: null,
-            addressId: this.props.default_address_id,
-            vipLevel: this.props.vipLevel,
-            vipConfigUuid: this.props.vipConfigUuid,
-            note:''
+            sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2
         };
 
         return {
@@ -37,41 +30,6 @@ const ConfirmOrder = React.createClass({
         }).then(data =>{
             window._form_data.tokenStr = data.tokenStr;
         })
-    },
-    componentDidUpdate: function () {
-        this.can_buy(true)
-    },
-    can_buy: function (with_warning) {
-        return this.can_buy_count(this.state.product_count, with_warning); // == this.state.product_count;
-    },
-    can_buy_count: function (count, with_warning) {
-        let cnd = this.props.pay_condition;
-        //let origin_count = count;
-        let voucher_count = this.props.ticket_list.length;
-
-        // 同商品判断最大购买数量
-        let product_remain = cnd.product_limit - cnd.product_bought;
-        if (product_remain < 0) product_remain = 0;
-        product_remain += voucher_count;
-        if (cnd.product_limit && count > product_remain) {
-            if (with_warning) $FW.Component.Alert('该商品限购' + cnd.product_limit + '件');
-            count = product_remain;
-        }
-
-        // 同标签最大购买数量
-        let label_remain = cnd.label_limit - cnd.label_bought;
-        if (label_remain < 0) label_remain = 0;
-        label_remain += voucher_count;
-        if (cnd.label_limit && count > label_remain) {
-            if (with_warning) $FW.Component.Alert('该标签下商品限购' + label_remain + '件');
-            count = label_remain;
-        }
-
-        if (count == 0) {
-            $FW.Component.Alert('您已超过了限购数量');
-        }
-
-        return count
     },
     makeOrderHandler: function () {
         if (!this.can_buy(true)) return; // $FW.Component.Alert('您现在不能购买这件商品');
@@ -93,13 +51,13 @@ const ConfirmOrder = React.createClass({
         }.bind(this);
 
         if (!this.state.isVirtualProduct) {
-            if (!this.FormData.sms_code) return $FW.Component.Alert('请填写手机验证码');
+            if (!this.FormData.msgCode) return $FW.Component.Alert('请填写手机验证码');
 
             $FW.Ajax({
                 url: API_PATH + '/mall/api/order/v1/validatePaySmsCode.json',
                 enable_loading: true,
                 method: 'post',
-                data: {smsCode: this.FormData.sms_code},
+                data: {smsCode: this.FormData.msgCode},
                 success: submit
             });
         } else {
@@ -108,7 +66,7 @@ const ConfirmOrder = React.createClass({
 
     },
     updateSMSCodeHandler: function (code) {
-        this.FormData.sms_code = code;
+        this.FormData.msgCode = code;
     },
     updatePaymentHandler: function (options) {
         if (typeof(options.use_bean) == 'boolean')
@@ -214,7 +172,10 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('确认订单');
 
     var query = $FW.Format.urlQuery();
-
+    let cartFlag = query.cartFlag;
+    let prds = query.productBizNo||[];
+    let buyNum = query.buyNum||0;
+    let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
     //var requestUrl = query.cartFlag ? (API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=true&productBizNo=null&buyNum=null' ) :
@@ -223,7 +184,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         //url: requestUrl,
         //url:API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=false&productBizNo=' + query.productBizNo + '&buyNum=' + (query.count || 1),
-        url: API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=false&productBizNo=B0000002875&buyNum=1',
+        url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=`+cartFlag+`&prds=`+prds+`&buyNum=`+buyNum+`&userTicketList=`+userTicketList,
         enable_loading: true
     }).then(data =>{
         var user = {
@@ -251,7 +212,7 @@ $FW.DOMReady(function () {
         };
         var close_score_func = !data.isOpenJiFenLevel;
 
-        ReactDOM.render(<ConfirmOrder product={data.productDetails} ticket_list={data.tickets || []}
+        ReactDOM.render(<ConfirmOrder  data={data} product={data.productDetails} ticket_list={data.tickets || []}
                                       user={user} address_list={data.addressList}
                                       pay_condition={pay_condition}
                                       close_score_func={close_score_func}

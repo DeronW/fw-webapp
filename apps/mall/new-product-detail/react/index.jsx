@@ -254,7 +254,7 @@ const PlusMinus = React.createClass({
 
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname +
-            '/static/mall/new-order-confirm/index.html?cartFlag=false&productBizNo=' + bizNo + '&count=' + this.state.value;
+            '/static/mall/new-order-confirm/index.html?cartFlag=false&productBizNo=' + bizNo + '&buyNum=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
         if (this.props.is_login==1) {
