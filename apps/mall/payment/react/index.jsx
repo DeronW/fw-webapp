@@ -43,8 +43,8 @@ const Payment = React.createClass({
                 expireTime: ''
             };
             $FW.Ajax({
-                //url:  API_PATH +'/mall/api/payment/v1/ucf_pay.json',
-                url: './ucf_pay.json',
+                url:  `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
+                //url: './ucf_pay.json',
                 enable_loading: true,
                 data: FormData,
                 success: function (result) {
@@ -137,7 +137,8 @@ $FW.DOMReady(function () {
 
 
     $FW.Ajax({
-        url: './bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
+        url: `${API_PATH}mall/api/payment/v1/bank_card_list.json`,
+        //url: './bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
         enable_loading: true,
         success: function (data) {
             ReactDOM.render(<Payment data={data.bankCards}/>, document.getElementById('cnt'));
