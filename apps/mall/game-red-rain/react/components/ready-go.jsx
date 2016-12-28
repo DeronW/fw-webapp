@@ -1,7 +1,7 @@
 const ReadyGo = React.createClass({
     getInitialState: function () {
         return {
-            num:3
+            num:0
         }
     },
     componentDidMount: function () {
