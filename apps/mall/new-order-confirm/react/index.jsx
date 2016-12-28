@@ -26,27 +26,28 @@ const ConfirmOrder = React.createClass({
             url: `${API_PATH}mall/api/order/v1/getTokenStr.json`
             //url: `./getTokenStr.json`
         }).then(data => {
-            window._form_data.tokenStr = data.tokenStr;
-        })
+            this.FormData.tokenStr = data.tokenStr;
+         })
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
 
         let submit = function submit() {
+            console.log(this.FormData);
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
-                method: 'POST',
                 //url: `./commit_pay_order.json`,
+                //method: 'POST',
                 enable_loading: true,
                 data: this.FormData,
-                success: (data) => {
+                success: (result) => {
                     /*
                      if (data.errMsg) {
                      $FW.Component.Alert(data.errMsg);
                      this.refreshTokenStr()
                      } else {
                      */
-                    location.href = '/static/mall/payment/index.html?payableRmbAmt='+this.props.data.payableRmbAmt+'&merchantNo'+m_orderNo
+                    location.href = '/static/mall/payment/index.html?payableRmbAmt='+this.props.data.payableRmbAmt+'&merchantNo'+result.m_orderNo
                     /* } */
                 }
             })
@@ -124,7 +125,6 @@ const ConfirmOrder = React.createClass({
                 if (i.id == this.props.default_address_id) address = i
             });
         }
-
         return (
             <div className="confirm-order">
                 <AddressPanel address={address}
