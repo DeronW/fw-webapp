@@ -47,8 +47,6 @@ const ConfirmOrder = React.createClass({
                      this.refreshTokenStr()
                      } else {
                      */
-                    console.log(result);
-                    return;
                     location.href = '/static/mall/payment/index.html?payableRmbAmt='+this.props.data.payableRmbAmt+'&merchantNo='+result.m_orderNo
                     /* } */
                 }
