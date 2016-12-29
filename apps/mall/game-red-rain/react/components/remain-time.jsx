@@ -9,6 +9,7 @@ const RemainTime = React.createClass({
         clearInterval(remainTime);
         remainTime = setInterval(()=> {
             if (this.state.remainTime == 0) {
+                this.props.setFinished(true);
                 clearInterval(remainTime);
             } else {
                 this.setState({
