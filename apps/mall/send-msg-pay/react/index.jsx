@@ -34,17 +34,17 @@ const SendCode = React.createClass({
             code:""
         }
     },
-	
+
 	//倒计时递减
     decline: function() {
         this.setState({value: this.state.value - 1});
     },
-	
+
     //倒计时
     tick: function() {
         this.interval = setInterval(this.decline, 1000);
     },
-	
+
 	stopTick: function() {
         clearInterval(this.interval);
     },

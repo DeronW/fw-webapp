@@ -23,10 +23,10 @@ const ProductPanel = React.createClass({
                         { p.tags.map((d, index) => <div key={index}>{d}</div>) }
                     </div>*/}
                     <div className="price-box">
-                        { p.price > 0 || p.score == 0 ? <span>&yen;{p.price}</span> : null}
-                        { p.price > 0 && p.score ? <span>+</span> : null }
-                        { p.score ? <span>{p.score}工分</span> : null }
-                        <span className="num-modifyBox"><span className="num-quantity">×</span>1</span>
+                        { p.rmbPrice > 0 || p.pointsPrice == 0 ? <span>&yen;{p.rmbPrice}</span> : null}
+                        { p.rmbPrice > 0 && p.pointsPrice ? <span>+</span> : null }
+                        { p.pointsPrice ? <span>{p.pointsPrice}工分</span> : null }
+                        <span className="num-modifyBox"><span className="num-quantity">×</span>{p.tempProductNum}</span>
                     </div>
                 </div>
             )
