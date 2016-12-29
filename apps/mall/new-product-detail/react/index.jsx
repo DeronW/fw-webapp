@@ -15,8 +15,8 @@ const Product = React.createClass({
     },
 
 	childEventHandler: function(params,value){
-		this.setState({showOverlayDef:true,showOverlay: params,value:value})
-	},
+		this.setState({showOverlayDef:true,showOverlay: params,value:value});
+    },
 
 	shopHandler: function (e) {
 		location.href = location.protocol + '//' + location.hostname + '/static/mall/shopping-cart/index.html'
@@ -109,7 +109,7 @@ const Product = React.createClass({
 
 		let shop_card_prompt = null;
 		if (this.state.showOverlayDef)
-                shop_card_prompt = (<div className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>加入购物车成功</div>);
+                shop_card_prompt = (<div className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>添加成功，在购物车等亲~</div>);
 
 		return (
            <div className="detail-box">
@@ -194,7 +194,7 @@ const PlusMinus = React.createClass({
             }
         }else{
             $FW.Ajax({
-                url:  API_PATH + 'mreturnall/api/cart/v1/insertCart.json?bizNo=' + bizNo,
+                url:  API_PATH + 'mall/api/cart/v2/insertCart.json?bizNo=' + bizNo,
                 enable_loading: true,
                 data:{
                     buyNum:this.state.value,
