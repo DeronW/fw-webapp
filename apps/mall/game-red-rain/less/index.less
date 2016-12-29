@@ -40,6 +40,31 @@ html,body{
     position: relative;
     .red-bag-li{
       position: absolute;
+      width:0px;
+      left:100px;
+      top:100px;
+      opacity: 0;
+      animation:li linear 1.5s;
+      @keyframes li{
+        0%{
+          width:0px;
+          left:100px;
+          top:100px;
+          opacity:0;
+        }
+        50%{
+          width:100px;
+          left:50px;
+          top:50px;
+          opacity:1;
+        }
+        100%{
+          width:0;
+          left:100px;
+          top:100px;
+          opacity:0;
+        }
+      }
       .red-bag-text{
         display: none;
         opacity:0;
@@ -54,8 +79,75 @@ html,body{
         line-height:30px;
         transition:0.2s;
       }
+      img{
+        width:100%;
+        height:auto;
+      }
+    }
+    .red-bag-li0{
+        left:200px;
+        top:200px;
+        animation:li0 linear 1.5s 0.5s;
+        @keyframes li0{
+          0%{
+            left:200px;
+            top:200px;
+            opacity:0;
+          }
+          50%{
+            width:100px;
+            left:150px;
+            top:150px;
+            opacity:1;
+          }
+          100%{
+            width:0;
+            left:200px;
+            top:200px;
+            opacity:0;
+          }
+        }
+      }
+    .red-bag-li0{
+      left:200px;
+      top:200px;
+      animation:li0 linear 1.5s 0.5s;
+      @keyframes li0{
+        0%{
+          left:200px;
+          top:200px;
+          opacity:0;
+        }
+        50%{
+          width:100px;
+          left:150px;
+          top:150px;
+          opacity:1;
+        }
+        100%{
+          width:0;
+          left:200px;
+          top:200px;
+          opacity:0;
+        }
+      }
     }
     .red-bag-li.clicked{
+      animation:off linear 0.5s;
+      @keyframes off{
+      0%{
+        width:100px;
+        height:100px;
+      }
+      90%{
+        opacity:1;
+      }
+        100%{
+          width:0px;
+          height:0px;
+          opacity:0;
+        }
+    }
       .red-bag-text{
         display: block;
         top:-30px;
