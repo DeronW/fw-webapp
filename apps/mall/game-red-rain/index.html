@@ -1,2 +1,40 @@
 {% extends '../../../lib/templates/mall_base.swig.html' %}
 {% block title %}红包雨{% endblock %}
+{% block content %}
+
+<div id="cnt">
+    <div class="red-rain-box">
+        <div id="ready">
+            <div class="ready-text1"></div>
+            <div class="ready-text2"></div>
+            <div id="ready-num">3</div>
+        </div>
+        <div id="red-cnt">
+            <div class="remain-time">剩余时间:<span id="remain-time">1</span></div>
+            <div id="red-rain">
+                <div class="bag-li">
+                    <div class="bag-text">+1</div>
+                    <div class="bag-img"><img src="images/default-avatar.png"></div>
+                </div>
+                <div id="bag-bomb">
+                    <div class="bomb-img"><img src="images/ico-avatar-on.png"></div>
+                </div>
+            </div>
+        </div>
+        <div id="pop-success">
+            <div class="success-cnt">
+                <div id="success-text">asdasd</div>
+                <div id="success-btn">抢到</div>
+            </div>
+        </div>
+        <div id="pop-fail">
+            <div class="fail-cnt">                                                                                           ">
+                <div id="fail-text">asdasd</div>
+                <div id="fail-btn">没抢到</div>
+            </div>
+        </div>
+        <div id="close"></div>
+
+    </div>
+</div>
+{% endblock %}
