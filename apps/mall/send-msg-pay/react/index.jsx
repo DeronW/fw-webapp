@@ -63,6 +63,7 @@ const SendCode = React.createClass({
             enable_loading: true,
             data: this.FormData,
             success: function (data) {
+                console.log(data);
                 this.setState({value: 60, reSend: false});
                 this.tick()
                 this.setState({reSend: false});
@@ -113,7 +114,7 @@ const SendCode = React.createClass({
                 alert(data.code);
                 //var data= data.bankCards;
                 window.location.href = location.protocol + '//' + location.hostname +
-                    "/static/mall/order-complete/index.html"
+                    "/static/mall/order-complete/index.html?id="+data.tradeNo
             }
         })
     },

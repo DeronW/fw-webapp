@@ -30,7 +30,7 @@ const ShoppingCart = React.createClass({
         let ps = this.state.products;
         var _this = this;
         $FW.Ajax({
-            url:API_PATH + 'mall/api/cart/v1/isChecked.json',
+            url:`${API_PATH}mall/api/cart/v1/isChecked.json`,
             data:{
                 flag:ps[index].isChecked = !ps[index].isChecked,
                 productBizNo:ps[index].bizNo
@@ -52,7 +52,7 @@ const ShoppingCart = React.createClass({
         let ps = this.state.products;
         var _this = this;
         $FW.Ajax({
-            url:API_PATH + 'mall/api/cart/v1/deleteCartProduct.json',
+                url:`${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
             data:{
                 productId:ps[index].productId
             },
@@ -74,9 +74,10 @@ const ShoppingCart = React.createClass({
         //    changeAll:newChangeAll
         //});
         $FW.Ajax({
-            url:API_PATH + 'mall/api/cart/v1/isChecked.json',
+            url:`${API_PATH}mall/api/cart/v1/isChecked.json`,
             data:{
-
+                flag:ps[index].isChecked = !ps[index].isChecked,
+                productBizNo:ps[index].bizNo
             },
             success:()=>{
                 this.setState({products: ps});
@@ -92,7 +93,7 @@ const ShoppingCart = React.createClass({
         if (c > ps[index].productStock) c = ps[index].productStock;
         ps[index].productNumber=c;
         $FW.Ajax({
-            url:API_PATH + 'mall/api/cart/v1/updateCartNumber.json',
+            url:`${API_PATH}mall/api/cart/v1/updateCartNumber.json`,
             data:{
                 buyNum:ps[index].productNumber,
                 productBizNo:ps[index].bizNo
@@ -193,12 +194,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('购物车');
     $FW.Ajax({
         //url: "http://localhost/nginx-1.9.12/html/shoppingcart.json",
-        url:API_PATH + 'mall/api/cart/v1/shoppingCart.json',
-        enable_loading: true,
-        success: function (data) {
-            console.log(data)
-            ReactDOM.render(<ShoppingCart products={data.cartList}/>, document.getElementById('cnt'));
-        }
-    });
+        url:`${API_PATH}mall/api/cart/v1/shoppingCart.json`,
+        enable_loading: true
+    }).then(data => ReactDOM.render(<ShoppingCart products={data.cartList}/>, CONTENT_NODE));
 });
 
