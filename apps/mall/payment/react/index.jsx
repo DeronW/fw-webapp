@@ -38,9 +38,7 @@ const Payment = React.createClass({
                 bankId: data[index].bankId,
                 bankName: data[index].bankName,
                 productName: '豆哥商城商品',
-                productInfo: '豆哥商城商品',
-                noticeUrl: '',
-                expireTime: ''
+                productInfo: '豆哥商城商品'
             };
             $FW.Ajax({
                 url: `${API_PATH}mall/api/payment/v1/ucf_pay.json`,

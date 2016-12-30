@@ -12,7 +12,7 @@ const SMSCode = React.createClass({
         if (this.state.remain <= 0) {
             this.tick();
             $FW.Ajax({
-                url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
+                url: `${API_PATH}mall/api/order/v1/SendPhoneVerifyPay.json`,
                 enable_loading: true,
                 method: 'post',
                 success: function (data) {
