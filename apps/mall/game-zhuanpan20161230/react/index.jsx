@@ -1,5 +1,5 @@
+const API_PATH = document.getElementById('api-path').value;
 const ACTIVITY_ID = '8a652a6c12b7418f942e4c86289d139a';
-
 const NineActivity = React.createClass({
     getDefaultProps: function () {
         return {}
