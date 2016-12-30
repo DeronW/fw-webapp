@@ -14,11 +14,12 @@ const Play = React.createClass({
         let appendNewLi=()=>{
             setTimeout(()=>{
                 let newbagList=this.state.bagList.concat([{type:0,checked:false}]);
-                console.log(newbagList);
                 this.setState({
                     bagList:newbagList
                 });
-                appendNewLi();
+                if(this.state.bagList.length<90){
+                    appendNewLi();
+                }
             },100)
         };
         appendNewLi();
@@ -26,6 +27,9 @@ const Play = React.createClass({
     clickRedBag:function(index){
         let newli;
         newli=this.state.bagList;
+        console.log("click"+this.props.finished);
+        if(!newli[index].checked&&!this.props.finished){getRedNUM++}
+        console.log(getRedNUM);
         newli[index].checked=true;
         this.setState({
             bagList:newli
@@ -34,17 +38,15 @@ const Play = React.createClass({
     render: function () {
         let li=(value,index)=>{
             return(
-                <div className={value.checked?"clicked red-bag-li red-bag-li"+index%2:"red-bag-li red-bag-li"+index%2} key={index}  onClick={()=>{this.clickRedBag(index)}}>
-                    <div className="red-bag-text" >+1</div>
-                    <div className="red-bag-img"><img src="images/list-img1.png" /></div>
-                </div>
-                )
+                <A/>
+            )
         }
         return (
             <div className="red-cnt">
-                {<RemainTime/>}
+                {<RemainTime setFinished={this.props.setFinished}/>}
                 <div className="red-bag-ul">
                     {this.state.bagList.map(li)}
+
                 </div>
             </div>
         );
