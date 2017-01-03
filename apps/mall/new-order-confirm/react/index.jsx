@@ -71,6 +71,20 @@ const ConfirmOrder = React.createClass({
     updateSMSCodeHandler: function (code) {
         this.FormData.msgCode = code;
     },
+    updatePaymentHandler: function (options) {
+        if (typeof(options.used_bean_count) == 'number')
+            this.FormData.payBeanPrice = options.used_bean_count;
+        if (typeof(options.voucher_list) == 'object') {
+            this.FormData.ticket = [];
+            for (var i = 0; i < options.voucher_list.length; i++) {
+                var e = options.voucher_list[i];
+                if (e.checked) this.FormData.ticket.push(e.id)
+            }
+            this.FormData.useTicket = !!this.FormData.ticket.length;
+        }
+        if (typeof(options.total_price) == 'number')
+            this.FormData.payRmbPrice = options.total_price;
+    },
     updateProductCountHandler: function (c) {
         this.setState({product_count: c});
         this.FormData.buyNum = c;
