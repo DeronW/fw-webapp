@@ -2,6 +2,7 @@
  parameters
  <NavBar title={}  height={} background={} />
  */
+
 const BottomNavBar = React.createClass({
     getInitialState: function () {
         let height = parseInt(this.props.height) || 100;
