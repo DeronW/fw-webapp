@@ -1,7 +1,7 @@
 const PROJ = 'jiemo';
 
 var INCLUDE_COMPONENTS = [
-    'use-strict.jsx', `${PROJ}/header.jsx`,
+    'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
     'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
 ];
 
