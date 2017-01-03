@@ -112,11 +112,11 @@ const User = React.createClass({
                        <span className="box-title2">我的足迹</span>
                    </a>
                    <a className="list-box" href="tel:400-0322-988">
-                       <img src="images/icon13.jpg"/>
+                       <img src="images/icon10.jpg"/>
                        <span className="box-title3">客服热线</span>
                    </a>
                    <a className="list-box" href="http://m.9888.cn/static/wap/faq/index.html">
-                       <img src="images/icon14.jpg"/>
+                       <img src="images/icon12.jpg"/>
                        <span className="box-title4">帮助中心</span>
                    </a>
                </div>
