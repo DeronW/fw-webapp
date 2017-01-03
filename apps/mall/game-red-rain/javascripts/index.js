@@ -40,7 +40,6 @@ $FW.DOMReady(function(){
         this.scale = 0;
         this.positionX = Math.random() *window.innerWith;
         this.positionY = Math.random() *window.innerHeight;
-
         this.clickHandler = function(){
             COUNT++
         }
