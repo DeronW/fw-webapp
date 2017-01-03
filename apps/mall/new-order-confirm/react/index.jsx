@@ -196,10 +196,7 @@ $FW.DOMReady(function () {
     }).then(data => {
         var user = {
             score: data.avaliablePoints || 0,
-            score_server_error: data.avaliablePoints === '',
-            bean: data.avaliableBean,
-            disable_score: data.isPointForbidden,
-            charge: data.availableCashBalance || 0
+            score_server_error: data.avaliablePoints === ''
         };
         //var product = {
         //    biz_no: query.productBizNo || null,
@@ -210,21 +207,12 @@ $FW.DOMReady(function () {
         //    tags: data.tags || [],
         //    count: (parseInt(query.count) || 1) || null
         //};
-        var pay_condition = {
-            product_bought: data.persionProductLimit,
-            product_limit: data.productLimit,
-            label_bought: data.persionLabelLimit,
-            label_limit: data.labelLimit
-        };
         var close_score_func = !data.isOpenJiFenLevel;
 
         ReactDOM.render(<ConfirmOrder data={data} product={data.productDetails} ticket_list={data.tickets || []}
                                       user={user} address_list={data.addressList}
-                                      pay_condition={pay_condition}
                                       close_score_func={close_score_func}
                                       default_address_id={query.address_id || data.addressId}
-                                      vipLevel={data.vipLevel}
-                                      vipConfigUuid={data.vipConfigUuid}
                                       isVirtualProduct={data.is_virtual_product}
         />, CONTENT_NODE);
     })

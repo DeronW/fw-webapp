@@ -1,8 +1,8 @@
 const PROJ = 'jiemo';
 
 var INCLUDE_COMPONENTS = [
-    'use-strict.jsx',
-    'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'
+    'use-strict.jsx', `${PROJ}/header.jsx`,
+    'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
 ];
 
 let INCLUDE_JAVASCRIPTS = [
@@ -11,7 +11,8 @@ let INCLUDE_JAVASCRIPTS = [
 
 
 const APP_NAMES = [
-    'home'
+    'home',
+    'apply-loan'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
