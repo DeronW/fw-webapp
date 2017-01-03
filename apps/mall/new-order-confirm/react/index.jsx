@@ -71,13 +71,27 @@ const ConfirmOrder = React.createClass({
     updateSMSCodeHandler: function (code) {
         this.FormData.msgCode = code;
     },
+    updatePaymentHandler: function (options) {
+        if (typeof(options.used_bean_count) == 'number')
+            //this.FormData.payBeanPrice = options.used_bean_count;
+        if (typeof(options.voucher_list) == 'object') {
+            this.FormData.tickets = [];
+            for (var i = 0; i < options.voucher_list.length; i++) {
+                var e = options.voucher_list[i];
+                if (e.checked) this.FormData.tickets.push(e.id)
+            }
+           //this.FormData.useTicket = !!this.FormData.tickets.length;
+        }
+        if (typeof(options.total_price) == 'number')
+            this.FormData.payRmbPrice = options.total_price;
+    },
     updateProductCountHandler: function (c) {
         this.setState({product_count: c});
         this.FormData.buyNum = c;
     },
     validateBeforeSMSCodeHandler: function () {
         let product = this.props.product;
-        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.ticket.length;
+       let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.tickets.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
@@ -123,6 +137,7 @@ const ConfirmOrder = React.createClass({
                               product_count={this.state.product_count}
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
+                              update_payment_handler={this.updatePaymentHandler}
                 />
                 <div className="custom-note">
                     <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"

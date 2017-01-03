@@ -32,9 +32,6 @@ const BottomNavBar = React.createClass({
 			index:1
         }
     },
-    goClickHandler: function (arg) {
-		this.setState({index: arg});
-    },
     render: function () {
         let fontSize = '36px';
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
