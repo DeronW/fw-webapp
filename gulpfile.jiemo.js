@@ -6,7 +6,9 @@ var INCLUDE_COMPONENTS = [
 ];
 
 let INCLUDE_JAVASCRIPTS = [
-    'use-strict.js'
+    'use-strict.js',
+    `${PROJ}/fw-ajax-error-handler.js`,
+    `${PROJ}/fw-common.js`
 ];
 
 
