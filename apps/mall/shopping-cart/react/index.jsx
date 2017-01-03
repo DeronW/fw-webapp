@@ -179,19 +179,13 @@ const ShoppingCart = React.createClass({
                     <div className="all-price">合计：<span className="total-price">¥{total_price}+{total_score}工分</span></div>
                     <a className="pay-btn" onClick={() => gotoHandler("/static/mall/new-order-confirm/index.html?cartFlag=true")}>结算</a>
                 </div> : null}
-                <div className="fixed-nav">
-                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
-                    <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-                    <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
-                    <a className="fixed-nav-link fixed-nav-link3 active" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                    <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
-                </div>
             </div>
         )
     }
 });
 $FW.DOMReady(function () {
     NativeBridge.setTitle('购物车');
+    ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
     $FW.Ajax({
         //url: "http://localhost/nginx-1.9.12/html/shoppingcart.json",
         url:`${API_PATH}mall/api/cart/v1/shoppingCart.json`,

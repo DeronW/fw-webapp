@@ -126,13 +126,6 @@ const User = React.createClass({
                        <HotSale/>
                    </div>
                </div>
-               <div className="fixed-nav">
-                   <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
-                   <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-                   <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
-                   <a className="fixed-nav-link fixed-nav-link3" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                   <a className="fixed-nav-link fixed-nav-link4 active" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
-               </div>
            </div>
         )
     }
@@ -203,6 +196,7 @@ const HotSale = React.createClass({
 
 $FW.DOMReady(function() {
     NativeBridge.setTitle('我的商城');
+    ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
     $FW.Ajax({
         url: `${API_PATH}mall/api/member/v1/user.json`,
         enable_loading: true,
