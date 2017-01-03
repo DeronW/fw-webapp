@@ -177,14 +177,14 @@ const ShoppingCart = React.createClass({
                 {this.props.products.length !=0  ? this.state.products.map((product, index) => product_item(product, index)) : <div className="empty-cart-icon"></div>}
                 {this.props.products.length !=0  ?  <div className="pay-bar">
                     <div className="all-price">合计：<span className="total-price">¥{total_price}+{total_score}工分</span></div>
-                    <a className="pay-btn" onClick={() => gotoHandler("/static/mall/new-order-confirm/index.html?cartFlag=true")}>结算</a>
+                    <a className="pay-btn" onClick={() => gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true")}>结算</a>
                 </div> : null}
                 <div className="fixed-nav">
-                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
+                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
                     <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
                     <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
                     <a className="fixed-nav-link fixed-nav-link3 active" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                    <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
                 </div>
             </div>
         )

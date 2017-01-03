@@ -12,7 +12,7 @@ const SMSCode = React.createClass({
         if (this.state.remain <= 0) {
             this.tick();
             $FW.Ajax({
-                url: API_PATH + "/mall/api/order/v1/SendPhoneVerifyPay.json",
+                url: `${API_PATH}mall/api/order/v1/SendPhoneVerifyPay.json`,
                 enable_loading: true,
                 method: 'post',
                 success: function (data) {
@@ -36,7 +36,6 @@ const SMSCode = React.createClass({
     render: function () {
         return (
             <div className="test">
-                <div className="test-h">手机验证码</div>
                 <div className="test-cnt">
                     <div className="test-input">
                         <input type="text" value={this.state.value} onChange={this.changeValueHandler}
