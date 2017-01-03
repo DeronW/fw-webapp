@@ -3,10 +3,12 @@ $FW.DOMReady(function () {
     //倒计时准备开始
     fnReady();
     let fnRedBag=setInterval(()=>{
-        let newBag=new Redbag();
-        newBag.fnCreateNode();
-        newBag.fnAnimation();
-
+        if (redRain.nowNum < redRain.totalRed) {
+            let newBag=new Redbag();
+            let node=newBag.fnCreateNode();
+            console.log(node);
+            node.fnAnimation();
+        }
     },redRain.time);
 
 });

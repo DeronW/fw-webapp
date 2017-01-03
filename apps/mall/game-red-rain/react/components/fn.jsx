@@ -29,12 +29,16 @@ let fnReady = (callback)=> {
 let Redbag = ()=> {};
 Redbag.prototype = {
     fnCreateNode: ()=> {
-        if (redRain.nowNum < redRain.totalRed) {
             redRain.idNum = redRain.idNum + 1;
             var box = document.getElementById("red-rain");
-            var li = '<div class="bag-li" id="li' + redRain.idNum + '" style="position:absolute;top:redRain.x;left:redRain.y;"><div class="bag-text">+1</div><div class="bag-img"><img src="images/' + redRain.redImg[parseInt(redRain.redImg.length * Math.random())] + '"></div></div>';
-            box.appendChild(li);
-        }
+            var newNode = document.createElement("div");
+            newNode.className="bag-li";
+            newNode.id='li' + redRain.idNum;
+            newNode.style.left=redRain.x;
+            newNode.style.top=redRain.y;
+            newNode.innerHTML = '<div class="bag-text">+1</div><div class="bag-img"><img src="images/' + redRain.redImg[parseInt(redRain.redImg.length * Math.random())] + '"></div>';
+            box.appendChild(newNode);
+        return newNode
     },
     fnAnimation: (callback)=> {
         var step = 0.1;
