@@ -6,21 +6,24 @@ const ApplyLoan = React.createClass({
                <div className="header">现金贷</div>
                 <div className="loan-num">
                      <div className="max-loan-title">最高借款额度（元）</div>
-                     <div className="max-loan-money">10000.00</div>
+                     <div className="max-loan-money">100000.00</div>
                 </div>
                 <div className="loan-info">
                     <div className="slider-area">
 
                     </div>
-                    <div className="credit-lines">
-                         <div className="credit-money">
-                              <span>信用额度（元）</span>
-                              <span>10000.00</span>
-                         </div>
-                        <div className="loan-duration">
-                            <span>借款期限（天）</span>
-                            <span>21</span>
+                    <div className="loan-info-items">
+                        <div className="credit-lines">
+                            <div className="credit-money">
+                                <span className="credit-money-title">信用额度（元）</span>
+                                <span className="credit-money-num">100000.00</span>
+                            </div>
+                            <div className="loan-duration">
+                                <span className="loan-duration-title">借款期限（天）</span>
+                                <span className="loan-duration-num">210</span>
+                            </div>
                         </div>
+                        <span className="vertical-line"></span>
                     </div>
                 </div>
                 <div className="loan-btn">申请借款</div>
@@ -32,5 +35,6 @@ const ApplyLoan = React.createClass({
 
 $FW.DOMReady(function() {
     ReactDOM.render(<ApplyLoan/>, document.getElementById('cnt'));
+    ReactDOM.render(<BottomNavBar index={4}/>, document.getElementById('bottom-nav-bar'));
 });
 
