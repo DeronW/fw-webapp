@@ -7,7 +7,6 @@ const ConfirmOrder = React.createClass({
             cartFlag: query.cartFlag,
             prds: query.productBizNo || [],
             buyNum: query.buyNum || 0,
-            ticket: [],
             msgCode: null,
             addressId: this.props.data.addressId,
             tokenStr: '',
@@ -72,20 +71,6 @@ const ConfirmOrder = React.createClass({
     updateSMSCodeHandler: function (code) {
         this.FormData.msgCode = code;
     },
-    updatePaymentHandler: function (options) {
-        if (typeof(options.used_bean_count) == 'number')
-            this.FormData.payBeanPrice = options.used_bean_count;
-        if (typeof(options.voucher_list) == 'object') {
-            this.FormData.ticket = [];
-            for (var i = 0; i < options.voucher_list.length; i++) {
-                var e = options.voucher_list[i];
-                if (e.checked) this.FormData.ticket.push(e.id)
-            }
-            this.FormData.useTicket = !!this.FormData.ticket.length;
-        }
-        if (typeof(options.total_price) == 'number')
-            this.FormData.payRmbPrice = options.total_price;
-    },
     updateProductCountHandler: function (c) {
         this.setState({product_count: c});
         this.FormData.buyNum = c;
@@ -138,7 +123,6 @@ const ConfirmOrder = React.createClass({
                               product_count={this.state.product_count}
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
-                              update_payment_handler={this.updatePaymentHandler}
                 />
                 <div className="custom-note">
                     <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
