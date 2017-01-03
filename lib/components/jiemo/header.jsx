@@ -47,7 +47,7 @@ const Header = React.createClass({
             fontFamily: "serif",
             fontSize: fontSize,
             fontWeight: 'bold',
-            color: "#536f95",
+            color: "#50ad9a",
             overflow: "hidden",
             left: "0px",
             top: "0px"
@@ -61,7 +61,7 @@ const Header = React.createClass({
             transform: "rotate(45deg)",
             top: "25px",
             left: "50px",
-            background: "#536f95"
+            background: "#50ad9a"
         };
         let _style_header_arm_down = {
             position: "absolute",
@@ -71,7 +71,7 @@ const Header = React.createClass({
             transform: "rotate(135deg)",
             top: "45px",
             left: "50px",
-            background: '#536f95'
+            background: '#50ad9a'
         };
 
         let title = this.state.title;
