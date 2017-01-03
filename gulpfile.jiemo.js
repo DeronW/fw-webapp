@@ -15,6 +15,10 @@ let INCLUDE_JAVASCRIPTS = [
 const APP_NAMES = [
     'home',
     'apply-loan',
+	'my',
+	'set-cash-card',
+	'verify-identidy',
+	'advice-complaints',
     'want-loan',
     'confirm-loan'
 ];

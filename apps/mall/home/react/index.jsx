@@ -41,7 +41,7 @@ const Mall = React.createClass({
             //if (scrollTop > 100) return false;
 
             let style = scrollTop > 60 ? {
-                background: "rgba(255,255,255,.9)",
+                background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png",
                 borderBottom: "1px solid #d8d8d8"

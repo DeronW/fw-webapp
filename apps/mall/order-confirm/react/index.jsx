@@ -52,7 +52,7 @@ const ConfirmOrder = React.createClass({
             })
         }.bind(this);
 
-        if (!this.state.isVirtualProduct) {
+        if (this.state.isVirtualProduct) {
             if (!this.FormData.msgCode) return $FW.Component.Alert('请填写手机验证码');
 
             $FW.Ajax({
@@ -207,12 +207,13 @@ $FW.DOMReady(function () {
         //    count: (parseInt(query.count) || 1) || null
         //};
         var close_score_func = !data.isOpenJiFenLevel;
-        data.productDetails.map((p, index) => count_f(p, index));
+        let is_virtual_product = true;
+        data.productDetails.map((p, index) => { if(p.virtual==false) is_virtual_product = false    });
         ReactDOM.render(<ConfirmOrder data={data} product={data.productDetails} ticket_list={data.tickets || []}
                                       user={user} address_list={data.addressList}
                                       close_score_func={close_score_func}
                                       default_address_id={query.address_id || data.addressId}
-                                      isVirtualProduct={data.is_virtual_product}
+                                      isVirtualProduct={is_virtual_product}
         />, CONTENT_NODE);
     })
 
