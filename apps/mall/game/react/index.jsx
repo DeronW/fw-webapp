@@ -131,6 +131,9 @@ const GameCenter = React.createClass({
 });
 var gameToken='';
 $FW.DOMReady(function(){
+    if($FW.Browser.inIOS()&&$FW.Browser.appVersion()>="2.3.40"){
+        location.href="/static/mall/waiting/index.html"
+    }
     NativeBridge.setTitle('游戏中心');
     var ua = window.navigator.userAgent.toLowerCase();
     var wxBrower=ua.match(/MicroMessenger/i) == 'micromessenger'?true:false;
