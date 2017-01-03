@@ -64,7 +64,7 @@ $FW.DOMReady(function () {
 function back_handler() {
     var query = $FW.Format.urlQuery();
     if (query.id == 'user') {
-        location.href = '/static/mall/new-user/index.html'
+        location.href = '/static/mall/user/index.html'
     }
     else {
         history.back();
