@@ -123,6 +123,7 @@ const ConfirmOrder = React.createClass({
                               product_count={this.state.product_count}
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
+                              update_payment_handler={this.updatePaymentHandler}
                 />
                 <div className="custom-note">
                     <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
