@@ -134,8 +134,6 @@ $FW.DOMReady(function(){
     if($FW.Browser.inIOS()&&$FW.Browser.appVersion()>="2.3.40"){
         location.href="/static/mall/waiting/index.html";
     }
-    alert($FW.Browser.appVersion());
-    alert($FW.Browser.inIOS()&&$FW.Browser.appVersion()>="2.3.40");
     NativeBridge.setTitle('游戏中心');
     var ua = window.navigator.userAgent.toLowerCase();
     var wxBrower=ua.match(/MicroMessenger/i) == 'micromessenger'?true:false;
