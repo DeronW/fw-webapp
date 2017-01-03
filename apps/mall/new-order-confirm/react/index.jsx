@@ -73,14 +73,14 @@ const ConfirmOrder = React.createClass({
     },
     updatePaymentHandler: function (options) {
         if (typeof(options.used_bean_count) == 'number')
-            this.FormData.payBeanPrice = options.used_bean_count;
+            //this.FormData.payBeanPrice = options.used_bean_count;
         if (typeof(options.voucher_list) == 'object') {
-            this.FormData.ticket = [];
+            this.FormData.tickets = [];
             for (var i = 0; i < options.voucher_list.length; i++) {
                 var e = options.voucher_list[i];
-                if (e.checked) this.FormData.ticket.push(e.id)
+                if (e.checked) this.FormData.tickets.push(e.id)
             }
-            this.FormData.useTicket = !!this.FormData.ticket.length;
+           //this.FormData.useTicket = !!this.FormData.tickets.length;
         }
         if (typeof(options.total_price) == 'number')
             this.FormData.payRmbPrice = options.total_price;
@@ -91,7 +91,7 @@ const ConfirmOrder = React.createClass({
     },
     validateBeforeSMSCodeHandler: function () {
         let product = this.props.product;
-        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.ticket.length;
+       let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.tickets.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
