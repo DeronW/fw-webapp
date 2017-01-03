@@ -4,6 +4,7 @@
  */
 
 function gotoHandler(link, need_login) {
+
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
