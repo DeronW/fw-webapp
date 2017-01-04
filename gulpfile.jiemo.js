@@ -14,17 +14,18 @@ let INCLUDE_JAVASCRIPTS = [
 
 const APP_NAMES = [
     'home',
-    'py-apply-loan',
+    'apply-loan',
 	'my',
 	'set-cash-card',
 	'verify-identidy',
 	'advice-complaints',
-    'py-want-loan',
-    'py-confirm-loan',
-    'py-service-agreement',
-    'py-loan-result',
-    'py-credit-improvement',
-    'py-bill'
+    'apply-want-loan',
+    'apply-confirm-loan',
+    'apply-service-agreement',
+    'apply-loan-result',
+    'credit-improvement',
+    'bill',
+    'bill-history-bill'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
