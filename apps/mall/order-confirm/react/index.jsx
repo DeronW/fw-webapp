@@ -82,35 +82,22 @@ const ConfirmOrder = React.createClass({
             }
            //this.FormData.useTicket = !!this.FormData.tickets.length;
         }
-        if (typeof(options.total_price) == 'number')
-            this.FormData.payRmbPrice = options.total_price;
     },
     updateProductCountHandler: function (c) {
         this.setState({product_count: c});
         this.FormData.buyNum = c;
     },
     validateBeforeSMSCodeHandler: function () {
+        let data = this.props.data;
         let product = this.props.product;
-       let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.tickets.length;
+        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.tickets.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
 
-        if (should_pay_count > 0 && product.score && this.props.close_score_func)
-            return $FW.Component.Alert('下单失败，工分通道已关闭');
-
-        if (this.props.user.score_server_error && should_pay_count > 0 && product.score) {
-            return $FW.Component.Alert('工分通道关闭，暂不能购买');
-        }
-
-        if (should_pay_count > 0 && product.score && this.props.user.disable_score)
-            return $FW.Component.Alert('账户工分已禁用，暂不能购买');
-
-        if (product.score * should_pay_count > this.props.user.score)
+        if (data.payablePointAmt > data.avaliablePoints)
             return $FW.Component.Alert('工分不足，不能购买');
 
-        if (this.FormData.payRmbPrice > this.props.user.charge)
-            return $FW.Component.Alert('余额不足, 不能购买');
         return true
     },
     changeValueHandler: function (e) {
@@ -132,39 +119,38 @@ const ConfirmOrder = React.createClass({
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}
                               update_product_count_handler={this.updateProductCountHandler}/>
+                <div className="custom-note">
+                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
+                                                           value={this.state.note} onChange={this.changeValueHandler}/>
+                </div>
                 <PaymentPanel product={this.props.product}
                               ordersTicketNum={this.props.data.ordersTicketNum}
+                              ordersTicketNum={this.props.data.avaliablePoints}
                               product_count={this.state.product_count}
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
                 />
-                <div className="custom-note">
-                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
-                                                           value={this.state.note} onChange={this.changeValueHandler}/>
-                </div>
                 <div className="total-price">
                     <div className="price-item">
                         <span className="item-name">商品金额</span><span
-                        className="item-detail">￥{this.props.data.payableRmbAmt}+{this.props.data.totalPoints}工分</span>
+                        className="item-detail">￥{this.props.data.totalPrice}+{this.props.data.totalPoints}工分</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">兑换券</span><span
-                        className="item-detail">-{this.props.data.totalPoints - this.props.data.payablePointAmt}工分</span>
+                        className="item-detail">-{this.props.data.ordersTicketPrice}工分</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
                         className="item-detail">+￥{this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
-                <div className="total-price-item">
-                    <span className="total-item-name">实付款</span><span
-                    className="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
-                </div>
 
                 <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
                          update_sms_code_handler={this.updateSMSCodeHandler}/>
                 <div className="confirm-order-foot">
+                    <span class="total-item-name">实付:</span>
+                    <span class="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
                     <a onClick={this.makeOrderHandler}
                        className={this.props.data.canBuy ? "btn-red" : "btn-red btn-gray"}>提交订单</a>
                 </div>

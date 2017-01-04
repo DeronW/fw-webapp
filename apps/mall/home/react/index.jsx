@@ -71,7 +71,7 @@ const Mall = React.createClass({
             background: this.state.background,
             borderBottom: this.state.borderBottom,
             width: "100%",
-            height: "73px",
+            height: "71px",
             paddingTop: "20px",
             paddingBottom: "20px",
             transition: "1s all"
@@ -108,16 +108,16 @@ const Mall = React.createClass({
                         src="images/nav-3.png"/><span>工场券</span></a>
                     <a onClick={() => gotoHandler("/static/mall/hot-activity/index.html", true)}><img
                         src="images/nav-4.png"/><span>热门活动</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}><img
-                        src="images/nav-5.png"/><span>生活服务</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img
-                        src="images/nav-6.png"/><span>充值中心</span><span className="hot-tag"></span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=1", true)}><img
+                        src="images/nav-5.png"/><span>充话费</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=2", true)}><img
+                        src="images/nav-6.png"/><span>充流量</span><span className="hot-tag"></span></a>
                     <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true?", true)}><img
                         src="images/nav-7.png"/><span>游戏中心</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
                         src="images/nav-8.png"/><span>我可兑换</span></a>
                 </div>
-                {Charge_Nav}
+                {/*Charge_Nav */}
                 <div id="NewProducts"></div>
                 <div id="HotProducts"></div>
                 <div id="Grid_3_6"></div>
