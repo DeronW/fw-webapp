@@ -125,7 +125,7 @@ const ConfirmOrder = React.createClass({
                 </div>
                 <PaymentPanel product={this.props.product}
                               ordersTicketNum={this.props.data.ordersTicketNum}
-                              ordersTicketNum={this.props.data.avaliablePoints}
+                              avaliablePoints={this.props.data.avaliablePoints}
                               product_count={this.state.product_count}
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
@@ -165,7 +165,7 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
-    let prds = query.productBizNo || [];
+    let prds = query.productBizNo ||query.prds|| [];
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');

@@ -17,18 +17,22 @@ const APP_NAMES = [
 	'register',
 	'login',
     'home',
-    'py-apply-loan',
+    'apply-loan',
 	'my',
 	'set-cash-card',
 	'verify-identidy',
 	'verify-phone',
 	'advice-complaints',
-    'py-want-loan',
-    'py-confirm-loan',
-    'py-service-agreement',
-    'py-loan-result',
-    'py-credit-improvement',
-    'py-bill'
+    'apply-want-loan',
+    'apply-confirm-loan',
+    'apply-service-agreement',
+    'apply-withhold-service-agreement',
+    'apply-loan-result',
+    'bill',
+    'bill-history-bill',
+    'bill-detail',
+    'bill-payback',
+    'bank-support'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
