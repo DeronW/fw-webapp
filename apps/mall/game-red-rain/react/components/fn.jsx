@@ -26,11 +26,12 @@ let fnStartRedbag = (callback) => {
     show('red-cnt');
     let GAME_TIME = 10 * 1000;
     let ct = G('remain-time'), num = GAME_TIME / 1000;
-    ct.innerHTML = num--;
+    ct.innerHTML = num;
     let timer = setInterval(() => {
         if (num > 0) {
-            ct.innerHTML = num--;
+            ct.innerHTML =--num;
         } else {
+            ct.innerHTML = 0;
             clearInterval(timer);
             endGame();
             callback(getCheckedCount());
