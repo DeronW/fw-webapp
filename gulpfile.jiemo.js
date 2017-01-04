@@ -13,11 +13,15 @@ let INCLUDE_JAVASCRIPTS = [
 
 
 const APP_NAMES = [
+	'register-login-entry',
+	'register',
+	'login',
     'home',
     'py-apply-loan',
 	'my',
 	'set-cash-card',
 	'verify-identidy',
+	'verify-phone',
 	'advice-complaints',
     'py-want-loan',
     'py-confirm-loan',
