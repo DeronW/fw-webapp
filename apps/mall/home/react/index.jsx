@@ -41,7 +41,7 @@ const Mall = React.createClass({
             //if (scrollTop > 100) return false;
 
             let style = scrollTop > 60 ? {
-                background: "rgba(255,255,255,.9)",
+                background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png",
                 borderBottom: "1px solid #d8d8d8"
@@ -71,7 +71,7 @@ const Mall = React.createClass({
             background: this.state.background,
             borderBottom: this.state.borderBottom,
             width: "100%",
-            height: "56px",
+            height: "73px",
             paddingTop: "20px",
             paddingBottom: "20px",
             transition: "1s all"
@@ -108,10 +108,10 @@ const Mall = React.createClass({
                         src="images/nav-3.png"/><span>工场券</span></a>
                     <a onClick={() => gotoHandler("/static/mall/hot-activity/index.html", true)}><img
                         src="images/nav-4.png"/><span>热门活动</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/life-service/index.html", true)}><img
-                        src="images/nav-5.png"/><span>生活服务</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html", true)}><img
-                        src="images/nav-6.png"/><span>充值中心</span><span className="hot-tag"></span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=1", true)}><img
+                        src="images/nav-5.png"/><span>充话费</span></a>
+                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=2", true)}><img
+                        src="images/nav-6.png"/><span>充流量</span><span className="hot-tag"></span></a>
                     <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true?", true)}><img
                         src="images/nav-7.png"/><span>游戏中心</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img

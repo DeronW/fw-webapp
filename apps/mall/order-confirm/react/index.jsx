@@ -82,35 +82,22 @@ const ConfirmOrder = React.createClass({
             }
            //this.FormData.useTicket = !!this.FormData.tickets.length;
         }
-        if (typeof(options.total_price) == 'number')
-            this.FormData.payRmbPrice = options.total_price;
     },
     updateProductCountHandler: function (c) {
         this.setState({product_count: c});
         this.FormData.buyNum = c;
     },
     validateBeforeSMSCodeHandler: function () {
+        let data = this.props.data;
         let product = this.props.product;
-       let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.tickets.length;
+        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.tickets.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
 
-        if (should_pay_count > 0 && product.score && this.props.close_score_func)
-            return $FW.Component.Alert('下单失败，工分通道已关闭');
-
-        if (this.props.user.score_server_error && should_pay_count > 0 && product.score) {
-            return $FW.Component.Alert('工分通道关闭，暂不能购买');
-        }
-
-        if (should_pay_count > 0 && product.score && this.props.user.disable_score)
-            return $FW.Component.Alert('账户工分已禁用，暂不能购买');
-
-        if (product.score * should_pay_count > this.props.user.score)
+        if (data.payablePointAmt > data.avaliablePoints)
             return $FW.Component.Alert('工分不足，不能购买');
 
-        if (this.FormData.payRmbPrice > this.props.user.charge)
-            return $FW.Component.Alert('余额不足, 不能购买');
         return true
     },
     changeValueHandler: function (e) {
