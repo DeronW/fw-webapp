@@ -82,8 +82,6 @@ const ConfirmOrder = React.createClass({
             }
            //this.FormData.useTicket = !!this.FormData.tickets.length;
         }
-        if (typeof(options.total_price) == 'number')
-            this.FormData.payRmbPrice = options.total_price;
     },
     updateProductCountHandler: function (c) {
         this.setState({product_count: c});
