@@ -35,6 +35,6 @@ const ApplyLoan = React.createClass({
 
 $FW.DOMReady(function() {
     ReactDOM.render(<ApplyLoan/>, document.getElementById('cnt'));
-    ReactDOM.render(<BottomNavBar index={4}/>, document.getElementById('bottom-nav-bar'));
+    ReactDOM.render(<BottomNavBar index={1}/>, document.getElementById('bottom-nav-bar'));
 });
 

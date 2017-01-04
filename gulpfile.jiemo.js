@@ -13,14 +13,26 @@ let INCLUDE_JAVASCRIPTS = [
 
 
 const APP_NAMES = [
+	'register-login-entry',
+	'register',
+	'login',
     'home',
     'apply-loan',
 	'my',
 	'set-cash-card',
 	'verify-identidy',
+	'verify-phone',
 	'advice-complaints',
-    'want-loan',
-    'confirm-loan'
+    'apply-want-loan',
+    'apply-confirm-loan',
+    'apply-service-agreement',
+    'apply-withhold-service-agreement',
+    'apply-loan-result',
+    'bill',
+    'bill-history-bill',
+    'bill-detail',
+    'bill-payback',
+    'bank-support'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {

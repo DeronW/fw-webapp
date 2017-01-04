@@ -119,39 +119,38 @@ const ConfirmOrder = React.createClass({
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}
                               update_product_count_handler={this.updateProductCountHandler}/>
+                <div className="custom-note">
+                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
+                                                           value={this.state.note} onChange={this.changeValueHandler}/>
+                </div>
                 <PaymentPanel product={this.props.product}
                               ordersTicketNum={this.props.data.ordersTicketNum}
+                              avaliablePoints={this.props.data.avaliablePoints}
                               product_count={this.state.product_count}
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
                 />
-                <div className="custom-note">
-                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
-                                                           value={this.state.note} onChange={this.changeValueHandler}/>
-                </div>
                 <div className="total-price">
                     <div className="price-item">
                         <span className="item-name">商品金额</span><span
-                        className="item-detail">￥{this.props.data.payableRmbAmt}+{this.props.data.totalPoints}工分</span>
+                        className="item-detail">￥{this.props.data.totalPrice}+{this.props.data.totalPoints}工分</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">兑换券</span><span
-                        className="item-detail">-{this.props.data.totalPoints - this.props.data.payablePointAmt}工分</span>
+                        className="item-detail">-{this.props.data.ordersTicketPrice}工分</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
                         className="item-detail">+￥{this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
-                <div className="total-price-item">
-                    <span className="total-item-name">实付款</span><span
-                    className="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
-                </div>
 
                 <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
                          update_sms_code_handler={this.updateSMSCodeHandler}/>
                 <div className="confirm-order-foot">
+                    <span class="total-item-name">实付:</span>
+                    <span class="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
                     <a onClick={this.makeOrderHandler}
                        className={this.props.data.canBuy ? "btn-red" : "btn-red btn-gray"}>提交订单</a>
                 </div>
@@ -166,7 +165,7 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
-    let prds = query.productBizNo || [];
+    let prds = query.productBizNo ||query.prds|| [];
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
