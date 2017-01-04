@@ -45,7 +45,7 @@ Redbag.prototype = {
         node.style.height = "300px";
         node.style.left = this.width * 0.2 + Math.random() * this.width * 0.6 + 'px';
         node.style.top = this.height * 0.2 + Math.random() * this.height * 0.6 + 'px';
-        let img_list = ["redBag0.png", "redBag1.png", "redBag2.png", "redBag3.png", "redBag4.png", "redBag5.png", "bomb.png"];
+        let img_list = ["redbag0.png", "redbag1.png", "redbag2.png", "redbag3.png", "redbag4.png", "redbag5.png", "bomb.png"];
         let index = parseInt(img_list.length * Math.random());
         if (index == 6 && redRainBombNum < redRainBombTotalNum) {
             redRainBombNum++;

@@ -7,7 +7,7 @@ let hide = id => G(id).className = 'hide';
 //倒计时准备开始
 function readyCounting(callback) {
     let id = 'ready', ct = G('ready-num'), num = 3;
-    let imgReady=["go.png","1.png","2.png","3.png"];
+    let imgReady=["go.png","num1.png","num2.png","num3.png"];
     G('ready-num').className='ready-num';
     show(id)
     let readyTime = setInterval(() => {
