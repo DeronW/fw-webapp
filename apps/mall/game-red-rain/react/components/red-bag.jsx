@@ -1,7 +1,7 @@
 //已经出现的炸弹数目
 let redRainBombNum = 0;
 //炸弹限制数目
-let redRainBombTotalNum = 1;
+let redRainBombTotalNum = 4;
 //单个红包
 const Redbag = function () {
     this.finished = false;
@@ -35,7 +35,7 @@ Redbag.prototype = {
         }
         setTimeout(() => {
             this.element.parentNode.removeChild(this.element);
-        }, this.checked ? 300 : 0);
+        }, this.checked ? 400 : 0);
     },
     createNode: function () {
         var box = document.getElementById("red-cnt");

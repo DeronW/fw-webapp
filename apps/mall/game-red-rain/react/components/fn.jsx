@@ -8,6 +8,7 @@ let hide = id => G(id).className = 'hide';
 function readyCounting(callback) {
     let id = 'ready', ct = G('ready-num'), num = 3;
     let imgReady=["go.png","1.png","2.png","3.png"];
+    G('ready-num').className='ready-num';
     show(id)
     let readyTime = setInterval(() => {
         if (num > 0) {
