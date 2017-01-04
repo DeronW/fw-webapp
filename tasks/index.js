@@ -11,27 +11,34 @@ const images = require('./images.js');
 const copy = require('./copy.js');
 const revision = require('./revision.js');
 
+const REACT_PATH = 'react-15.4.1';
+
 let COMMON_JAVASCRIPTS_TASK = {};
 
 function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
-        `${lib_path}fw-1.3.0.js`,
-        `${lib_path}native-bridge-0.3.0.js`];
+        `${lib_path}request-animation-frame-0.0.23.js`,
+        `${lib_path}promise-2.0.2.min.js`,
+        `${lib_path}fw-1.5.0.js`,
+        `${lib_path}native-bridge-0.3.0.js`
+    ];
 
     if (debug) {
         files.push(...[
-            `${lib_path}react-15.3.2/react.js`,
-            `${lib_path}react-15.3.2/react-dom.js`,
+            `${lib_path}${REACT_PATH}/react.js`,
+            `${lib_path}${REACT_PATH}/react-dom.js`,
             `${lib_path}redux-3.6.0.js`,
             `${lib_path}redux-thunk-2.1.0.js`,
-            `${lib_path}react-redux-5.0.0-beta3.js`])
+            `${lib_path}react-redux-5.0.0-beta3.js`
+        ])
     } else {
         files.push(...[
-            `${lib_path}react-15.3.2/react.min.js`,
-            `${lib_path}react-15.3.2/react-dom.min.js`,
+            `${lib_path}${REACT_PATH}/react.min.js`,
+            `${lib_path}${REACT_PATH}/react-dom.min.js`,
             `${lib_path}redux-3.6.0.min.js`,
             `${lib_path}redux-thunk-2.1.0.min.js`,
-            `${lib_path}react-redux-5.0.0-beta3.min.js`])
+            `${lib_path}react-redux-5.0.0-beta3.min.js`
+        ])
     }
 
     files.push(...extend_files);
@@ -81,7 +88,7 @@ module.exports = function (site_name, page_name, configs) {
     ]);
 
     let common_javascript_files = get_common_javascript_files(
-        lib_path, CONFIG.include_javascripts.map(i => `${lib_path}${i}`), CONFIG.debug);
+        lib_path, CONFIG.include_javascripts.map(i => `${lib_path}/javascripts/${i}`), CONFIG.debug);
 
     function compile_html() {
         return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {

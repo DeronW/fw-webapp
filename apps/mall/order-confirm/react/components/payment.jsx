@@ -100,27 +100,25 @@ const PaymentPanel = React.createClass({
                 <div className="account-box">
 
                     <div className="coupons" onClick={this.toggleVoucherModal}>
-                        <div className="coupons-l">兑换券支付</div>
+                        <div className="coupons-l">兑换券<span className="avail-coupon">{this.props.ordersTicketNum}张可用</span></div>
+                        <div className="coupons-r">未使用</div>
                         {checked_voucher()}
                     </div>
-
-                    <div className="bean" style={{display:'none'}}>
-                        <div className="bean1">工豆账户</div>
-                        <div className="bean2">&yen;{$FW.Format.currency(this.props.user.bean / 100.0)}</div>
-                        <div className="bean3">
-                            <div className={this.state.use_bean ? "btn-circle-box on" : "btn-circle-box"}>
-                                <div className="btn-circle" onClick={this.toggleBeanHandler}>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="aval-points">
+                        <div className="aval-points-l">可用工分</div>
+                        <div className="aval-points-r">{this.props.avaliablePoints}</div>
                     </div>
-                    {user_score}
-                </div>
-                <div className="balance-box" style={{display: 'none'}}>
-                    <div className="balance1">可用余额</div>
-                    <div className={"balance2 red"}>&yen;{$FW.Format.currency(this.props.user.charge)}</div>
-                    <div className="balance3">&yen;{$FW.Format.currency(this.computeTotalPrice())}</div>
-                    <div className="balance4">余额支付：</div>
+
+                    {/*<div className="coupons">
+                        <div className="coupons-l">立减券<span className="avail-coupon">11张可用</span></div>
+                        <div className="coupons-r">－30</div>
+                    </div>
+
+                    <div className="coupons">
+                        <div className="coupons-l">打折券<span className="avail-coupon">11张可用</span></div>
+                        <div className="coupons-r">95%</div>
+                    </div>*/}
+
                 </div>
                 {this.state.show_voucher_modal ? <VoucherModal
                     voucher_list={JSON.parse(JSON.stringify(this.state.voucher_list))}

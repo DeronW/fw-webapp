@@ -136,7 +136,7 @@ const OrderBlock = React.createClass({
         let product_item = function (product, index) {
 
             return (
-                <a href={'/static/mall/new-order-detail/index.html?order_id=' + order.orderId} key={index}>
+                <a href={'/static/mall/order-detail/index.html?order_id=' + order.orderId} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
@@ -223,12 +223,11 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: `${API_PATH}/mall/api/member/v1/order_list.json`,
-        enable_loading: true,
-        success: function (data) {
-            ReactDOM.render(<OrderMain orders={data.orders}/>, document.getElementById("cnt"));
-			window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
-	    }
-    });
+        enable_loading: true
+    }).then(data =>{
+        ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);
+        window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
+    })
 
 
     if ($FW.Utils.shouldShowHeader()) {
@@ -236,7 +235,7 @@ $FW.DOMReady(function () {
     }
 });
 function back_handler() {
-    location.href = '/static/mall/new-user/index.html';
+    location.href = '/static/mall/user/index.html';
 }
 
 //window.onNativeMessageReceive = function (msg) {

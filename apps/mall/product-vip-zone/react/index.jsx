@@ -128,12 +128,12 @@ const VipZone = React.createClass({
 	            },
 	            enable_loading: true,
 	            success: function (data) {
-	            	
+
 		              let tab;
 		              console.log(1);
 		              if (is_Level== -1) {
 		                  tab = 'all'
-		                  
+
 		              } else if (is_Level == 1) {
 		                  tab = 'vipLevel0'
 		              } else if (is_Level == 2) {
@@ -147,8 +147,8 @@ const VipZone = React.createClass({
 		              } else {
 		                  done && done();
 		                  return;
-		              }		
-		              
+		              }
+
 		              window.Products[tab] = window.Products[tab].concat(data.products);
 		              let products = window.Products[this.state.tab];
 		              let new_page = this.state.page;
@@ -278,7 +278,7 @@ $FW.DOMReady(function () {
 });
 
 function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/new-home/index.html'
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html'
 }
 
 //window.onNativeMessageReceive = function (msg) {

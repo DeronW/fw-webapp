@@ -30,10 +30,10 @@ const ShoppingCart = React.createClass({
         let ps = this.state.products;
         var _this = this;
         $FW.Ajax({
-            url:API_PATH + 'mall/api/cart/v1/isChecked.json',
+            url:`${API_PATH}mall/api/cart/v1/isChecked.json`,
             data:{
                 flag:ps[index].isChecked = !ps[index].isChecked,
-                productBizNo:ps[index].bizNo
+                productBizNo:ps[index].productBizno
             },
             success:function(data){
                  _this.setState({products: ps});
@@ -52,7 +52,7 @@ const ShoppingCart = React.createClass({
         let ps = this.state.products;
         var _this = this;
         $FW.Ajax({
-            url:API_PATH + 'mall/api/cart/v1/deleteCartProduct.json',
+                url:`${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
             data:{
                 productId:ps[index].productId
             },
@@ -74,9 +74,10 @@ const ShoppingCart = React.createClass({
         //    changeAll:newChangeAll
         //});
         $FW.Ajax({
-            url:API_PATH + 'mall/api/cart/v1/isChecked.json',
+            url:`${API_PATH}mall/api/cart/v1/isChecked.json`,
             data:{
-
+                flag:ps[index].isChecked = !ps[index].isChecked,
+                productBizNo:ps[index].productBizno
             },
             success:()=>{
                 this.setState({products: ps});
@@ -92,10 +93,10 @@ const ShoppingCart = React.createClass({
         if (c > ps[index].productStock) c = ps[index].productStock;
         ps[index].productNumber=c;
         $FW.Ajax({
-            url:API_PATH + 'mall/api/cart/v1/updateCartNumber.json',
+            url:`${API_PATH}mall/api/cart/v1/updateCartNumber.json`,
             data:{
                 buyNum:ps[index].productNumber,
-                productBizNo:ps[index].bizNo
+                productBizNo:ps[index].productBizno
             },
             success:function(data){
                 _this.setState({products: ps});
@@ -176,14 +177,14 @@ const ShoppingCart = React.createClass({
                 {this.props.products.length !=0  ? this.state.products.map((product, index) => product_item(product, index)) : <div className="empty-cart-icon"></div>}
                 {this.props.products.length !=0  ?  <div className="pay-bar">
                     <div className="all-price">合计：<span className="total-price">¥{total_price}+{total_score}工分</span></div>
-                    <a className="pay-btn" onClick={() => gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&productBizNo=null&buyNum=null")}>结算</a>
+                    <a className="pay-btn" onClick={() => gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true")}>结算</a>
                 </div> : null}
                 <div className="fixed-nav">
-                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
+                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
                     <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
                     <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
                     <a className="fixed-nav-link fixed-nav-link3 active" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                    <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
                 </div>
             </div>
         )
@@ -193,12 +194,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('购物车');
     $FW.Ajax({
         //url: "http://localhost/nginx-1.9.12/html/shoppingcart.json",
-        url:API_PATH + 'mall/api/cart/v1/shoppingCart.json',
-        enable_loading: true,
-        success: function (data) {
-            console.log(data)
-            ReactDOM.render(<ShoppingCart products={data.cartList}/>, document.getElementById('cnt'));
-        }
-    });
+        url:`${API_PATH}mall/api/cart/v1/shoppingCart.json`,
+        enable_loading: true
+    }).then(data => ReactDOM.render(<ShoppingCart products={data.cartList}/>, CONTENT_NODE));
 });
 

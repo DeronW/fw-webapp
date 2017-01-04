@@ -23,7 +23,7 @@ const OrderDetail = React.createClass({
 
         let product_item = function (product, index) {
             return (
-                <div className="list">
+                <div className="list" key={index}>
                     <img src={product.img}  className="list-img"/>
                     <div className="title">{product.title}</div>
                     <div className="price-box"><span>{product.score}工分</span><span className="num-modifyBox"><span className="num-quantity">×</span>{product.count}</span></div>
@@ -98,12 +98,9 @@ $FW.DOMReady(function() {
         ReactDOM.render(<Header title={"订单详情"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
-        url: "./order_detail.json",
-        enable_loading: true,
-        success: function (data) {
-            ReactDOM.render(<OrderDetail data={data}/>, document.getElementById('cnt'));
-         }
-    })
+        url: `${API_PATH}/mall/api/member/v1/order_detail.json`,
+        enable_loading: true
+    }).then(data => ReactDOM.render(<OrderDetail data={data}/>, CONTENT_NODE));
 
 });
 

@@ -1,6 +1,6 @@
 const Service = React.createClass({
     back_handler:function(){
-        location.href = '/static/mall/new-home/index.html';
+        location.href = '/static/mall/home/index.html';
     },
     render: function(){
         return (

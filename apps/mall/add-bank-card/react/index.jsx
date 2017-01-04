@@ -1,50 +1,48 @@
 const AddBankCard = React.createClass({
-    getInitialState:function(){
+    getInitialState: function () {
         return {
-            info:"",
-            val:"",
+            info: "",
+            val: "",
             active: false
         };
     },
-    changeVal:function(e){
+    changeVal: function (e) {
         var val = e.target.value;
         var length = val.length;
-		var reg = /^\d{16}|\d{19}$/;
-        if(isNaN(val)){
-            this.setState({"info":"只能输入数字!"});
+        var reg = /^\d{16}|\d{19}$/;
+        if (isNaN(val)) {
+            this.setState({"info": "只能输入数字!"});
             this.setState({active: false});
         }
-        else if(length==16||length==19){
-            this.setState({"info":""});
+        else if (length == 16 || length == 19) {
+            this.setState({"info": ""});
             this.setState({active: true});
         }
-        else{
-            this.setState({"info":"请输入正确的银行卡号!"});
+        else {
+            this.setState({"info": "请输入正确的银行卡号!"});
             this.setState({active: false});
         }
-        this.setState({val:val});
+        this.setState({val: val});
     },
-    nextStep:function() {
-         if(!this.state.active) return;
-		  var query = $FW.Format.urlQuery();
-		  var bizNo = query.bizNo;
-          $FW.Ajax({
-            url:  API_PATH +'/mall/api/payment/v1/bank_card_info.json?accountNo='+this.state.val,
-            enable_loading: true,
-            success: function (data) {
-                if(data.bankInfo)
-                {
-                    var data= data.bankInfo;
-                    location.href = location.protocol + '//' + location.hostname +
-					"/static/mall/verify-bank-card/index.html?accountNo="+data.accountNo+"&bankCardName="+data.bankCardName+"&bankName="+data.bankName+"&bankId="+data.bankId+"&bizNo="+bizNo
-                }
-                else{
-                    $FW.Component.Alert(data.msg);
-                }
+    nextStep: function () {
+        if (!this.state.active) return;
+        var query = $FW.Format.urlQuery();
+        var bizNo = query.bizNo;
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/payment/v1/bank_card_info.json?accountNo=` + this.state.val,
+            enable_loading: true
+        }).then((data)=> {
+            if (data.bankInfo) {
+                var data = data.bankInfo;
+                location.href = location.protocol + '//' + location.hostname +
+                    "/static/mall/verify-bank-card/index.html?accountNo=" + data.accountNo + "&bankCardName=" + data.bankCardName + "&bankName=" + data.bankName + "&bankId=" + data.bankId + "&bizNo=" + bizNo
             }
-          })
+            else {
+                $FW.Component.Alert(data.msg);
+            }
+        });
     },
-    render:function(){
+    render: function () {
         return (
             <div className="add-bank-card">
                 <div className="add-bank-card-tip">请绑定账户本人的银行卡</div>
@@ -59,7 +57,7 @@ const AddBankCard = React.createClass({
     }
 });
 
-$FW.DOMReady(function() {
+$FW.DOMReady(function () {
     NativeBridge.setTitle('添加银行卡');
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"添加银行卡"} back_handler={backward}/>, document.getElementById('header'));

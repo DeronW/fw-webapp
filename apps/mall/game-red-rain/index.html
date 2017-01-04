@@ -1,0 +1,36 @@
+{% extends '../../../lib/templates/mall_base.swig.html' %}
+{% block title %}红包雨{% endblock %}
+{% block content %}
+
+<div id="cnt">
+
+    <div id="ready" class="hide">
+        <div class="ready-text1"></div>
+        <div class="ready-text2"></div>
+        <div id="ready-num">3</div>
+    </div>
+
+
+    <div id="red-cnt" class="hide">
+        <div class="remain-time">剩余时间:
+            <span id="remain-time">1</span></div>
+    </div>
+
+
+        <div id="pop-success" class="hide">
+            <div class="success-cnt">
+                <div id="success-text">asdasd</div>
+                <div id="success-btn">抢到</div>
+            </div>
+        </div>
+
+
+        <div id="pop-fail" class="hide">
+            <div class="fail-cnt">                                                                                           ">
+                <div id="fail-text">asdasd</div>
+                <div id="fail-btn">没抢到</div>
+            </div>
+        </div>
+
+</div>
+{% endblock %}
