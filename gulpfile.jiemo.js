@@ -20,7 +20,9 @@ const APP_NAMES = [
 	'verify-identidy',
 	'advice-complaints',
     'want-loan',
-    'confirm-loan'
+    'confirm-loan',
+    'service-agreement',
+    'loan-result'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
