@@ -125,7 +125,7 @@ const ConfirmOrder = React.createClass({
                 </div>
                 <PaymentPanel product={this.props.product}
                               ordersTicketNum={this.props.data.ordersTicketNum}
-                              ordersTicketNum={this.props.data.avaliablePoints}
+                              avaliablePoints={this.props.data.avaliablePoints}
                               product_count={this.state.product_count}
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}

@@ -1,3 +1,13 @@
+function getNextElement(node){
+    if(node.nextSibling.nodeType == 1){    //判断下一个节点类型为1则是“元素”节点
+        return node.nextSibling;
+    }
+    if(node.nextSibling.nodeType == 3){      //判断下一个节点类型为3则是“文本”节点  ，回调自身函数
+        return getNextElement(node.nextSibling);
+    }
+    return null;
+}
+
 function gotoHandler(link, need_login) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
@@ -26,8 +36,16 @@ const ShoppingCart = React.createClass({
         //    }
         //}
     },
+    payHandler:function(){
+        let prds=[];
+        document.querySelectorAll('.checked-circle').map((checkDom, index) => {
+            prds.push(getNextElement(checkDom).value);
+        });
+        gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&prds="+prds)
+
+    },
     checkHandler: function (index) {
-        let ps = this.state.products;
+        var ps = this.state.products;
         var _this = this;
         $FW.Ajax({
             url:`${API_PATH}mall/api/cart/v1/isChecked.json`,
@@ -119,6 +137,7 @@ const ShoppingCart = React.createClass({
                 <div className="shopping-item" key={index}>
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
                         <span className={product.isChecked ? "checked-circle" : "unchecked-circle"}></span>
+                        <input type="hidden" className="checked-bizNo" value={product.isChecked ? product.productBizno : null}/>
                     </div>
                     <div className="product-img"><img src={product.img}/></div>
                     <div className="product-item">
@@ -177,7 +196,8 @@ const ShoppingCart = React.createClass({
                 {this.props.products.length !=0  ? this.state.products.map((product, index) => product_item(product, index)) : <div className="empty-cart-icon"></div>}
                 {this.props.products.length !=0  ?  <div className="pay-bar">
                     <div className="all-price">合计：<span className="total-price">¥{total_price}+{total_score}工分</span></div>
-                    <a className="pay-btn" onClick={() => gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true")}>结算</a>
+                    <a className="pay-btn"
+                       onClick={this.payHandler}>结算</a>
                 </div> : null}
                 <div className="fixed-nav">
                     <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
