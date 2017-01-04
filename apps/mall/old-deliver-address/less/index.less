@@ -1,0 +1,122 @@
+
+body {
+  background: #eee;
+  margin: 0;
+}
+
+.address-list {
+  padding: 20px 0 128px;
+  width: 100%;
+
+  .set-default {
+    display: none;
+  }
+}
+
+.address-list.preview {
+  .address-panel a {
+  }
+
+  .set-default {
+    display: block;
+    width: 110px;
+    height: 95px;
+    line-height: 95px;
+    float: right;
+    position: relative;
+    margin-right: 15px;
+    background: transparent url('') no-repeat center center;
+    background-size: contain;
+    font-size: 25px;
+    color: #4aa1f9;
+  }
+
+  .address-panel a {
+    display: table;
+    width: 82%;
+  }
+}
+
+.address-panel {
+  position: relative;
+  display: table;
+  width: 100%;
+  font-size: 32px;
+  padding: 21px 0 23px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #d8d8d8;
+  border-top: 1px solid #d8d8d8;
+  background: white url('') no-repeat 20px center;
+
+  .checked-flag {
+    float: left;
+    position: relative;
+    border: 1px solid #dddddd;
+    display: block;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    border-radius: 50%;
+    margin-top: 28px;
+    margin-left: 20px;
+    font-size: 100px;
+
+    div {
+      width: 24px;
+      height: 24px;
+      background: red;
+      border-radius: 50%;
+      margin: 10px 0 0 10px;
+    }
+  }
+
+  a {
+    display: table;
+  }
+
+  .username {
+    float: left;
+    line-height: 55px;
+    color: #333;
+    padding-left: 20px;
+  }
+
+  .phone {
+    float: right;
+    padding: 0 30px 0 0;
+    color: #333;
+    line-height: 55px;
+    font-size: 30px;
+  }
+
+  .address {
+    padding-left: 20px;
+    line-height: 40px;
+    font-size: 26px;
+    color: #555;
+    float: left;
+    min-width: 80%;
+  }
+}
+
+.bottom-panel {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  -webkit-box-shadow: 2px 0 5px 0 #e9e9e9;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,.15);
+  .create-address {
+    margin: 22px 30px;
+    background-color: #fd4d4c;
+    text-align: center;
+    color: white;
+    display: block;
+    height: 82px;
+    line-height: 82px;
+    font-size: 36px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+}

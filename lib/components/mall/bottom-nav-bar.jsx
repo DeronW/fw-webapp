@@ -38,7 +38,7 @@ const BottomNavBar = React.createClass({
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
         if (this.props.title && this.props.title.length > 7) fontSize = '32px';
         let _style_footer_fixed = {
-            background: "url('/static/mall/new-home/images/fixed-nav.png') no-repeat",
+            background: "url('/static/mall/home/images/fixed-nav.png') no-repeat",
 			width: "720px",
 			height: "143px",
 			position: "fixed",
@@ -54,7 +54,7 @@ const BottomNavBar = React.createClass({
 			top: "60px",
 			left: "51px",
 			display: "block",
-			background: "url('/static/mall/new-home/images/nav.png') no-repeat 0px 0px",
+			background: "url('/static/mall/home/images/nav.png') no-repeat 0px 0px",
 			position: "absolute"
 		}
 
@@ -65,7 +65,7 @@ const BottomNavBar = React.createClass({
 			top: "60px",
 			left: "195px",
 			display: "block",
-			background: "url('/static/mall/new-home/images/nav.png') no-repeat -145px 0px",
+			background: "url('/static/mall/home/images/nav.png') no-repeat -145px 0px",
 			position: "absolute"
 
 		}
@@ -77,7 +77,7 @@ const BottomNavBar = React.createClass({
 			top: "60px",
 			left: "472px",
 			display: "block",
-			background: "url('/static/mall/new-home/images/nav.png') no-repeat -422px 0px",
+			background: "url('/static/mall/home/images/nav.png') no-repeat -422px 0px",
 			position: "absolute"
 		}
 
@@ -88,7 +88,7 @@ const BottomNavBar = React.createClass({
 			top: "60px",
 			left: "610px",
 			display: "block",
-			background: "url('/static/mall/new-home/images/nav.png') no-repeat -560px 0px",
+			background: "url('/static/mall/home/images/nav.png') no-repeat -560px 0px",
 			position: "absolute"
 		}
 
@@ -109,11 +109,11 @@ const BottomNavBar = React.createClass({
 
 		return (
                 <div className="_style_footer_fixed" style={_style_footer_fixed}>
-                    <a className={this.state.index==1 ? "_style_footer_item1 active" : "_style_footer_item1"} style={_style_footer_item1} onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
+                    <a className={this.state.index==1 ? "_style_footer_item1 active" : "_style_footer_item1"} style={_style_footer_item1} onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
                     <a className={this.state.index==2 ? "_style_footer_item2 active" : "_style_footer_item2"}  style={_style_footer_item2} onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-					<a className="_back_to_index"      style={_back_to_index}      onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
+					<a className="_back_to_index"      style={_back_to_index}      onClick={ () => $FW.Browser.inApp() ? NativeBridge.toNative('app_back_native') : location.href = 'http://m.9888.cn'}></a>
 					<a className={this.state.index==3 ? "_style_footer_item3 active" : "_style_footer_item3"}  style={_style_footer_item3} onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-					<a className={this.state.index==4 ? "_style_footer_item4 active" : "_style_footer_item4"}  style={_style_footer_item4} onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
+					<a className={this.state.index==4 ? "_style_footer_item4 active" : "_style_footer_item4"}  style={_style_footer_item4} onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
                 </div>
         )
     }

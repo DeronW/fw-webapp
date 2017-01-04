@@ -1,89 +1,52 @@
-/**
- * Created by Administrator on 2016/12/30.
- */
-let redRain = {
-    totalRed: 10,
-    maxTime: 1000,
-    minTime: 500,
-    idNum: 0,
-    getRed: 0,
-    nowNum: 0,
-    redImg: ["redBag0.png", "redBag1.png", "redBag2.png", "redBag3.png", "redBag4.png", "redBag5.png"],
-    time:500,
-    x:720,
-    y:700,
-};
+
+
+let G = id => document.getElementById(id);
+let show = id => G(id).className = '';
+let hide = id => G(id).className = 'hide';
+
 //倒计时准备开始
-let fnReady = (callback)=> {
-    let readyTime = setInterval(()=> {
-        var num = document.getElementById("ready-num").innerHTML;
+function readyCounting(callback) {
+    let id = 'ready', ct = G('ready-num'), num = 1;
+    show(id)
+    ct.innerHTML = num--;
+    let readyTime = setInterval(() => {
         if (num > 0) {
-            document.getElementById("ready-num").innerHTML = num - 1;
+            ct.innerHTML = num--;
         } else {
+            hide(id)
             clearInterval(readyTime);
             callback && callback();
         }
     }, 1000)
-}
-//单个红包
-let Redbag = ()=> {};
-Redbag.prototype = {
-    fnCreateNode: ()=> {
-            redRain.idNum = redRain.idNum + 1;
-            var box = document.getElementById("red-rain");
-            var newNode = document.createElement("div");
-            newNode.className="bag-li";
-            newNode.id='li' + redRain.idNum;
-            newNode.style.left=Math.random() *redRain.x+'px';
-            newNode.style.top=Math.random() *redRain.y+'px';
-            newNode.innerHTML = '<div class="bag-text">+1</div><div class="bag-img"><img src="images/' + redRain.redImg[parseInt(redRain.redImg.length * Math.random())] + '"></div>';
-            box.appendChild(newNode);
-        return document.getElementById('li' + redRain.idNum);
-    },
-    fnAnimation: (node,callback)=> {
-        console.log(node);
-        var step = 0.1;
-        node.setAttribute("scale",0);
-        node.timer = setInterval(()=> {
-            node.setAttribute("scale",node.getAttribute("scale")+step);
-            if (node.getAttribute("scale") >= 1) {
-                node.setAttribute("scale",1);
-                step = -step;
-                requestAnimationFrame(()=> {
-                    node.style.Transform = scale(node.getAttribute("scale") + step);
-                });
-            } else if (node.getAttribute("scale") <= 0) {
-                node.setAttribute("scale",0);
-                clearInterval(node.timer);
-                callback && callback();
-                node.fnRemoveNode();
-            } else {
-                requestAnimationFrame(()=> {
-                    node.style.Transform = scale(node.getAttribute("scale") + step);
-                });
-            }
-        }), parseInt(redRain.minTime + (redRain.maxTime - redRain.minTime).random())
-    },
-    fnRemoveNode: (time)=> {
-        var time = time || 0;
-        if (this != null) {
-            setTimeout(()=> {
-                this.parentNode.removeChild(this);
-                if(redRain.nowNum>0){
-                    redRain.nowNum--;
-                }
-            }, time)
-        }
-    },
-    fnClickElement: ()=> {
-        if (!this.checked) {
-            redRain.getRed++;
-            this.className = "bag-li bag-li-on";
-            this.fnRemoveNode(100);
-        }
+};
 
+let fnStartRedbag = (callback) => {
+    show('red-cnt')
+
+    let GAME_TIME = 10 * 1000;
+    let ct = G('remain-time'), num = GAME_TIME / 1000;
+
+
+    ct.innerHTML = num--;
+    let timer = setInterval(() => {
+        if (num > 0) {
+            ct.innerHTML = num--;
+        } else {
+            hide('red-cnt')
+            clearInterval(timer);
+            endGame();
+            callback(getCheckedCount());
+        }
+    }, 1000);
+
+    startGame(GAME_TIME);
+}
+
+function fnShowResult(success) {
+    if (success) {
+        G('pop-success').className = '';
+    } else {
+
+        G('pop-fail').className = '';
     }
 }
-
-
-

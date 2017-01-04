@@ -15,7 +15,10 @@ const Recharge = React.createClass({
         }
     },
     componentDidMount: function () {
-        this.switchTabHandler('fee');
+        var query = $FW.Format.urlQuery();
+        var tab= query.tab;
+        if(tab==1){this.switchTabHandler('fee');}
+        else{ this.switchTabHandler('net'); }
     },
 
     switchTabHandler: function (tab) {
@@ -307,5 +310,5 @@ $FW.DOMReady(function () {
 
 
 function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/new-home/index.html';
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html';
 }
