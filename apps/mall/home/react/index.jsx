@@ -71,7 +71,7 @@ const Mall = React.createClass({
             background: this.state.background,
             borderBottom: this.state.borderBottom,
             width: "100%",
-            height: "56px",
+            height: "73px",
             paddingTop: "20px",
             paddingBottom: "20px",
             transition: "1s all"
