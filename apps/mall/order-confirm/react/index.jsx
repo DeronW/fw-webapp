@@ -165,7 +165,7 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
-    let prds = query.productBizNo || [];
+    let prds = query.productBizNo ||query.prds|| [];
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
