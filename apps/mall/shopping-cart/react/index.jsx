@@ -22,29 +22,19 @@ function gotoHandler(link, need_login) {
 const ShoppingCart = React.createClass({
     getInitialState: function () {
         var ps = this.props.products;
-        //ps.map(i=>i.checked=true);
+        ps.map(i=>i.checked=true);
         return {
             products: ps,
-            //changeAll:true
+            changeAll:true
         }
     },
     componentDidMount: function () {
-        //var ps = this.state.products;
-        //for(var i=0;i<ps.length;i++){
-        //    if(!ps[i].isChecked){
-        //        this.setState({changeAll:false});
-        //    }
-        //}
-    },
-    payHandler: function () {
-        let prds = [];
-        let _checkDom = document.querySelectorAll('.checked-circle');
-        _checkDom = Array.prototype.slice.call(_checkDom);
-        _checkDom.map((checkDom, index) => {
-            prds.push(getNextElement(checkDom).value);
-        });
-        gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&prds=" + prds)
-
+        var ps = this.state.products;
+        for(var i=0;i<ps.length;i++){
+            if(!ps[i].isChecked){
+                this.setState({changeAll:false});
+            }
+        }
     },
     checkHandler: function (index) {
         var ps = this.state.products;
@@ -57,13 +47,13 @@ const ShoppingCart = React.createClass({
             },
             success: function (data) {
                 _this.setState({products: ps});
-                //for(var i=0;i<ps.length;i++){
-                //    if(!ps[i].checked){
-                //        _this.setState({changeAll:false});
-                //    }else if(ps[i].checked){
-                //        _this.setState({changeAll:true});
-                //    }
-                //}
+                for(var i=0;i<ps.length;i++){
+                    if(!ps[i].checked){
+                        _this.setState({changeAll:false});
+                    }else if(ps[i].checked){
+                        _this.setState({changeAll:true});
+                    }
+                }
             }
         });
 
@@ -84,20 +74,19 @@ const ShoppingCart = React.createClass({
         ps.splice(index, 1);
     },
     allChoseHandler: function () {
-        //let products=this.state.products;
-        //let newChangeAll=!this.state.changeAll;
-        //for(var i= 0;i<this.state.products.length;i++){
-        //    products[i].isChecked=this.state.changeAll?false:true;
-        //}
-        //this.setState({
-        //    products: products,
-        //    changeAll:newChangeAll
-        //});
+        let products=this.state.products;
+        let newChangeAll=!this.state.changeAll;
+        for(var i= 0;i<this.state.products.length;i++){
+            products[i].isChecked=this.state.changeAll?false:true;
+        }
+        this.setState({
+            products: products,
+            changeAll:newChangeAll
+        });
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/isChecked.json`,
             data: {
-                flag: ps[index].isChecked = !ps[index].isChecked,
-                productBizNo: ps[index].productBizno
+                allFlag: newChangeAll
             },
             success: ()=> {
                 this.setState({products: ps});
@@ -130,6 +119,16 @@ const ShoppingCart = React.createClass({
     changePlus: function (index) {
         let ps = this.state.products;
         this.updateCount(index, ps[index].productNumber + 1);
+    },
+    payHandler: function () {
+        let prds = [];
+        let _checkDom = document.querySelectorAll('.checked-circle');
+        _checkDom = Array.prototype.slice.call(_checkDom);
+        _checkDom.map((checkDom, index) => {
+            prds.push(getNextElement(checkDom).value);
+        });
+        gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&prds=" + prds)
+
     },
     render: function () {
         let {products} = this.state;
