@@ -25,14 +25,12 @@ const VerifyIdentidy = React.createClass({
 		});
 	},
 	changeCode(e) {
-		if (verificationNum(e.target.value)) {
-			//codeVal: this.state.codeVal.length <= 6 ? this.state.codeValue : e.target.value
-			console.log(this.state.codeVal.length)
-
-				console.log("ss");
+		if(e.target.value.length <= 6) {
+			if (verificationNum(e.target.value)) {
 				this.setState({
-					codeVal: this.state.codeVal.length <= 6 ? e.target.value : this.state.codeVal
+					codeVal: e.target.value 
 				});
+			}	
 		}
 	},
 	handleCode() {
