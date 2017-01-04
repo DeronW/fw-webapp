@@ -104,6 +104,10 @@ const PaymentPanel = React.createClass({
                         <div className="coupons-r">未使用</div>
                         {checked_voucher()}
                     </div>
+                    <div className="aval-points">
+                        <div className="aval-points-l">可用工分</div>
+                        <div className="aval-points-r">{this.props.avaliablePoints}</div>
+                    </div>
 
                     {/*<div className="coupons">
                         <div className="coupons-l">立减券<span className="avail-coupon">11张可用</span></div>
