@@ -112,7 +112,7 @@ const Mall = React.createClass({
                         src="images/nav-5.png"/><span>充话费</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=2", true)}><img
                         src="images/nav-6.png"/><span>充流量</span><span className="hot-tag"></span></a>
-                    <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true?", true)}><img
+                    <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true", true)}><img
                         src="images/nav-7.png"/><span>游戏中心</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
                         src="images/nav-8.png"/><span>我可兑换</span></a>
