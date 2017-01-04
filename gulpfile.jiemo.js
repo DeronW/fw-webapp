@@ -22,10 +22,13 @@ const APP_NAMES = [
     'apply-want-loan',
     'apply-confirm-loan',
     'apply-service-agreement',
+    'apply-withhold-service-agreement',
     'apply-loan-result',
-    'credit-improvement',
     'bill',
-    'bill-history-bill'
+    'bill-history-bill',
+    'bill-detail',
+    'bill-payback',
+    'bank-support'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
