@@ -4,26 +4,30 @@ html, body {
   padding: 0;
   margin: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size:50px;
 }
 
-.red-rain-box {
-  width: 720px;
+#cnt {
   height: 100%;
-  overflow: hidden;
-  #red-cnt {
+}
+
+
+.hide {
+  display: none !important;
+}
+
+#red-cnt {
     height: 100%;
     overflow: hidden;
-    #red-rain {
-      position: relative;
-      height: 100%;
+    position: relative;
       .bag-li {
         position: absolute;
+        transform: scale(0);
         .bag-img {
           width: 200px;
           height: 100px;
         }
       }
-    }
-  }
 }
 
