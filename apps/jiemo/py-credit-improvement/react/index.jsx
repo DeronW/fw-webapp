@@ -1,5 +1,5 @@
 
-const ApplyLoan = React.createClass({
+const CreditImprovement= React.createClass({
     render : function(){
         return (
            <div>
@@ -26,7 +26,7 @@ const ApplyLoan = React.createClass({
                         <span className="vertical-line"></span>
                     </div>
                 </div>
-                <div className="loan-btn">申请借款</div>
+                <div className="loan-btn">我要提额</div>
                 <div className="loan-tip">完善授权信息可减免手续费</div>
            </div>
         )
@@ -34,7 +34,7 @@ const ApplyLoan = React.createClass({
 });
 
 $FW.DOMReady(function() {
-    ReactDOM.render(<ApplyLoan/>, document.getElementById('cnt'));
-    ReactDOM.render(<BottomNavBar index={4}/>, document.getElementById('bottom-nav-bar'));
+    ReactDOM.render(<CreditImprovement/>, document.getElementById('cnt'));
+    ReactDOM.render(<BottomNavBar index={3}/>, document.getElementById('bottom-nav-bar'));
 });
 
