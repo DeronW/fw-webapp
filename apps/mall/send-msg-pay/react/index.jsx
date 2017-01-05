@@ -56,7 +56,7 @@ const SendCode = React.createClass({
             service: 2,
             merchantNo: this.state.merchantNo
         }
-
+        console.log(FormData);
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
