@@ -89,7 +89,7 @@ const ShoppingCart = React.createClass({
                 allFlag: newChangeAll
             },
             success: ()=> {
-                this.setState({products: ps});
+                this.setState({products: products});
             }
         });
     },

@@ -19,7 +19,7 @@ const HotProducts = React.createClass({
         };
         return (
             <div className="hot-product-list">
-                <div className="hot-title"><img className="hot-title-img" src="images/hot-title.png"/></div>
+                <div className="hot-title"><img className="hot-title-img" src="images/new-title.png"/></div>
                 <div className="hot-product-wrap">
                     {this.state.ps.map(hot_product_item)}
                 </div>
