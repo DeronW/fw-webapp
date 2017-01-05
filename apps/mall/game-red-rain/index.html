@@ -5,32 +5,34 @@
 <div id="cnt">
 
     <div id="ready" class="hide">
-        <div class="ready-text1"></div>
-        <div class="ready-text2"></div>
-        <div id="ready-num">3</div>
+        <div class="ready-text1"><img src="images/ready-bg.png"/></div>
+        <img src="images/3.png" id="ready-num">
+        <div id="ready-close"></div>
     </div>
-
-
     <div id="red-cnt" class="hide">
         <div class="remain-time">剩余时间:
             <span id="remain-time">1</span></div>
+        <div id="red-cnt-close"></div>
     </div>
-
-
-        <div id="pop-success" class="hide">
-            <div class="success-cnt">
-                <div id="success-text">asdasd</div>
-                <div id="success-btn">抢到</div>
-            </div>
+    <div id="pop-success" class="hide">
+        <div class="pop-success-img"><img src="images/success.png"/></div>
+        <div class="success-cnt">
+            <div class="success-text1">恭喜发财</div>
+            <div class="success-text2">本次共戳中<span id="getNum">10</span>个红包<br/>获得<span id="getPrize">10工分</span></div>
+            <div id="success-btn">去账户查看</div>
+            <div class="success-text3">2017.1.27-2.2 每天均有一次机会呦！</div>
+            <div id="success-close"></div>
         </div>
-
-
-        <div id="pop-fail" class="hide">
-            <div class="fail-cnt">                                                                                           ">
-                <div id="fail-text">asdasd</div>
-                <div id="fail-btn">没抢到</div>
-            </div>
+    </div>
+    <div id="pop-fail" class="hide">
+        <div class="pop-fail-img"><img src="images/fail.png"/></div>
+        <div class="fail-cnt">
+            <div id="fail-text1">很遗憾，没有戳中红包</div>
+            <div id="fail-btn">朕知道了</div>
+            <div id="fail-text2">2017.1.27-2.2 每天均有一次机会呦！</div>
+            <div id="fail-close"></div>
         </div>
+    </div>
 
 </div>
 {% endblock %}
