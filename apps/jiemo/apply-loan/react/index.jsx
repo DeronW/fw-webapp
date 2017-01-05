@@ -27,6 +27,10 @@ const ApplyLoan = React.createClass({
                     </div>
                 </div>
                 <div className="loan-btn">申请借款</div>
+                <div className="credit-btn">
+                    <div className="credit-improvement-btn">我要提额</div>
+                    <div className="credit-apply-btn">我要借款</div>
+                </div>
                 <div className="loan-tip">完善授权信息可减免手续费</div>
            </div>
         )
