@@ -42,6 +42,7 @@ const APP_NAMES = [
     'recharge', // 给金融工场账户充值
     'cash', // 用户提现
     'cash-records', // 用户提现记录
+    'modification-phone', // 修改银行预留手机号
 
     // 协议页面
     'protocol-trusteeship', // 资金托管协议
