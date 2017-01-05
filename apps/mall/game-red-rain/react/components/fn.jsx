@@ -63,20 +63,20 @@ function fnShowResult(num) {
     }
 };
 G('fail-btn').onClick=function(){
-    //NativeBridge.close()
+    NativeBridge.close()
 };
 G('success-btn').onClick=function(){
 //NativeBridge.close()
 };
 G('fail-close').onClick=function(){
-//NativeBridge.close()
+NativeBridge.close()
 };
 G('success-close').onClick=function(){
-//NativeBridge.close()
+NativeBridge.close()
 };
 G('red-cnt-close').onClick=function(){
-//NativeBridge.close()
+NativeBridge.close()
 };
 G('ready-close').onClick=function(){
-//NativeBridge.close()
+NativeBridge.close()
 };
