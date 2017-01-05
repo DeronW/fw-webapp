@@ -100,8 +100,8 @@ const PaymentPanel = React.createClass({
                 <div className="account-box">
 
                     <div className="coupons" onClick={this.toggleVoucherModal}>
-                        <div className="coupons-l">兑换券<span className="avail-coupon">{this.props.ordersTicketNum}张可用</span></div>
-                        <div className="coupons-r">未使用</div>
+                        <div className="coupons-l">兑换券{this.state.checked_voucher_count ?null:<span className="avail-coupon">{this.props.ordersTicketNum}张可用</span>}</div>
+                        {this.state.checked_voucher_count ?null:<div className="coupons-r">未使用</div>}
                         {checked_voucher()}
                     </div>
                     <div className="aval-points">
