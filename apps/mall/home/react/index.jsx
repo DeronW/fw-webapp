@@ -43,13 +43,11 @@ const Mall = React.createClass({
             let style = scrollTop > 60 ? {
                 background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
-                avatarImage: "images/m-list-icon.png",
-                borderBottom: "1px solid #d8d8d8"
+                avatarImage: "images/m-list-icon.png"
             } : {
                 background: "transparent",
                 logoImage: "images/logo.png",
-                avatarImage: "images/list-icon.png",
-                borderBottom: "none"
+                avatarImage: "images/list-icon.png"
             }
 
             this.setState(style);
@@ -69,7 +67,6 @@ const Mall = React.createClass({
 
         var head_nav_wrap = {
             background: this.state.background,
-            borderBottom: this.state.borderBottom,
             width: "100%",
             height: "71px",
             paddingTop: "20px",
