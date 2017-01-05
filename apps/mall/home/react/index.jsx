@@ -40,16 +40,14 @@ const Mall = React.createClass({
 
             //if (scrollTop > 100) return false;
 
-            let style = scrollTop > 100 ? {
+            let style = scrollTop > 400 ? {
                 background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
-                avatarImage: "images/m-list-icon.png",
-                paddingTop: "100px"
+                avatarImage: "images/m-list-icon.png"
             } : {
                 background: "transparent",
                 logoImage: "images/logo.png",
-                avatarImage: "images/list-icon.png",
-                paddingTop: "20px"
+                avatarImage: "images/list-icon.png"
             }
 
             this.setState(style);
@@ -72,7 +70,7 @@ const Mall = React.createClass({
             width: "100%",
             height: "71px",
             paddingTop: "20px",
-            paddingBottom: this.state.paddingTop,
+            paddingBottom: "20px",
             transition: "1s all"
         };
 
@@ -117,8 +115,8 @@ const Mall = React.createClass({
                         src="images/nav-8.png"/><span>我可兑换</span></a>
                 </div>
                 {/*Charge_Nav */}
-                <div id="NewProducts"></div>
                 <div id="HotProducts"></div>
+                <div id="NewProducts"></div>
                 <div id="Grid_3_6"></div>
                 <div id="Grid_4_4"></div>
                 <div id="Grid_4_5"></div>
