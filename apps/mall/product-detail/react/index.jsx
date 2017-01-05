@@ -23,7 +23,7 @@ const Product = React.createClass({
 	},
 
 	componentDidMount: function () {
-        window.onscroll = function () {
+        window.addEventListener('scroll', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             if (scrollTop > 100) return false;
@@ -34,7 +34,7 @@ const Product = React.createClass({
             else{
                 id.setAttribute("class", "clarity _style_header_fixed");
             }
-        }.bind(this);
+        }.bind(this),false);
     },
 	render: function () {
         let data = this.props.data;
