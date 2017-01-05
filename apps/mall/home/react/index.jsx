@@ -35,12 +35,12 @@ const Mall = React.createClass({
         link ? gotoHandler(link) : console.log('no link set');
     },
     componentDidMount: function () {
-        window.addEventListener('touchmove', function () {
+        window.addEventListener('scroll', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             //if (scrollTop > 100) return false;
 
-            let style = scrollTop > 60 ? {
+            let style = scrollTop > 100 ? {
                 background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png"
@@ -51,7 +51,7 @@ const Mall = React.createClass({
             }
 
             this.setState(style);
-        }.bind(this));
+        }.bind(this),false);
     },
     render: function () {
         let banner;
