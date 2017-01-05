@@ -19,7 +19,7 @@ a {
 }
 
 .confirm-order {
-  padding: 0 0 150px;
+  padding: 0 0 130px;
   .new-adress {
     a {
       display: block;
@@ -63,6 +63,8 @@ a {
 
   .goods-address-cnt {
     background: #fff url('../images/icon-address.png') no-repeat center left;
+    background-position: 8px 19px;
+    background-size: 65px;
 
     a {
       display: block;
@@ -186,11 +188,11 @@ a {
   .total-box {
     height: 83px;
     line-height: 83px;
-    color: #999;
+    color: #333;
     font-size: 26px;
     padding: 0 30px 0 0;
     .total-text {
-      float: right;
+      float: left;
       padding-right: 54px;
     }
     .total-money {
@@ -225,6 +227,7 @@ a {
     width: 100%;
     padding: 0 75px 0 0;
     background: url(../images/ico-gray-right.jpg) no-repeat 660px 50%;
+    position:relative;
 
     .coupons-l {
       padding-left: 30px;
@@ -234,8 +237,8 @@ a {
     }
     .coupons-r {
       float: right;
-      font-size: 26px;
-      color: #999;
+      font-size: 28px;
+      color: #333;
     }
     .coupons-r span.coupons-name {
       float: left;
@@ -244,6 +247,27 @@ a {
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+    }
+  }
+  .aval-points{
+    display: table;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e3e5ea;
+    height: 84px;
+    line-height: 83px;
+    width: 100%;
+    padding: 0 75px 0 0;
+    position: relative;
+    .aval-points-l{
+      padding-left: 30px;
+      float: left;
+      font-size: 30px;
+      color: #555;
+    }
+    .aval-points-r{
+      float: right;
+      font-size: 28px;
+      color: #333;
     }
   }
   .bean {
@@ -385,7 +409,7 @@ a {
 }
 
 .test {
-  margin-top: 20px;
+  margin: 20px 0 0;
   .test-h {
     border-top: 1px solid #d8d8d8;
     border-bottom: 1px solid #eff0f3;
@@ -398,37 +422,32 @@ a {
   }
   .test-cnt {
     position: relative;
-    padding: 22px 30px;
     background-color: #fff;
     .test-input {
       width: 390px;
-      height: 74px;
+      height: 84px;
       line-height: 32px;
-      background-color: #f2f2f2;
       font-size: 32px;
-      border: 1px solid #c8c8c8;
       border-radius: 8px;
       input {
         width: 372px;
-        height: 74px;
-        padding: 0 0 0 18px;
+        height: 84px;
+        padding-left:20px;
         color: #999;
-        background-color: #f2f2f2;
         border: none;
         font-size: 32px;
       }
     }
     .btn-test-blue {
       position: absolute;
-      top: 22px;
+      top: 0px;
       right: 30px;
       width: 240px;
-      height: 74px;
-      line-height: 74px;
-      text-align: center;
-      background-color: #8296af;
+      height: 84px;
+      line-height: 84px;
+      text-align: right;
       font-size: 32px;
-      color: #fff;
+      color: #4aa1f9;
       border-radius: 4px;
     }
     .btn-test-gray {
@@ -437,17 +456,15 @@ a {
     }
     .btn-countdown {
       position: absolute;
-      top: 22px;
+      top: 0px;
       right: 30px;
       width: 240px;
-      height: 74px;
-      line-height: 74px;
-      text-align: center;
-      background-color: #8296af;
+      height:84px;
+      line-height: 84px;
+      text-align: right;
       font-size: 32px;
-      color: #fff;
+      color: #ccc;
       border-radius: 4px;
-      background-color: #cccccc;
     }
   }
 }
@@ -460,19 +477,19 @@ a {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-  padding: 22px 30px;
   background-color: #fff;
   box-shadow: 0 -5px 10px 0 rgba(50, 50, 50, .1);
   .btn-red {
     display: block;
-    height: 83px;
-    line-height: 83px;
+    height: 105px;
+    line-height: 105px;
     font-size: 36px;
     color: #fff;
     text-align: center;
-    width: 100%;
+    width: 35%;
     background-color: #fd4d4c;
     border-radius: 4px;
+    float: right;
   }
   .btn-gray {
     background-color: #d4d4d4;
@@ -618,4 +635,89 @@ a {
   display: block;
   width: 360px;
   margin: 0 auto;
+}
+.avail-coupon{
+  display:inline-block;
+  width:97px;
+  height:32px;
+  line-height:32px;
+  background:#fd4d4c;
+  font-size:20px;
+  color:#fff;
+  text-align:center;
+  border-radius:3px;
+  position:absolute;
+  top:26px;
+  left:130px;
+}
+.custom-note{
+  height:84px;
+  line-height:84px;
+  background:#fff;
+  border-bottom:1px solid #d8d8d8;
+  color:#333;
+  font-size:28px;
+  padding-left:30px;
+  overflow:hidden;
+}
+.note{
+  display:block;
+  float:left;
+}
+.custom-note input{
+  border:none;
+  outline:none;
+  width:564px;
+  height:84px;
+  line-height:84px;
+  font-size:28px;
+  margin-left:40px;
+  float:right;
+  margin-right:30px;
+}
+::-webkit-input-placeholder{color:#999;}
+input[type="text"],input[type="password"]{-webkit-appearance:none;appearance:none;outline:none;-webkit-tap-highlight-color:rgba(0,0,0,0);border-radius:0;}
+.total-price{
+  margin-top:18px;
+  padding:14px 30px;
+  background:#fff;
+  border-top:1px solid #d8d8d8;
+  border-bottom:1px solid #d8d8d8;
+}
+.price-item{
+  height:56px;
+  line-height:56px;
+  font-size:28px;
+  color:#333;
+}
+.item-name{
+  float:left;
+}
+.item-detail{
+  float:right;
+}
+.total-price-item{
+  height:84px;
+  line-height:84px;
+  background:#f9f9f9;
+  border-top:1px solid #ebebee;
+  border-bottom:1px solid #ebebee;
+  font-size:30px;
+  color:#333;
+  padding:0 30px;
+}
+.total-item-name{
+  float: left;
+  font-size: 28px;
+  color: #333;
+  line-height: 105px;
+  margin-left: 30px;
+}
+.total-item-detail{
+  float: left;
+  color: #fd4d4c;
+  font-size: 28px;
+  line-height: 105px;
+  margin-left: 30px;
+  letter-spacing: 1px;
 }

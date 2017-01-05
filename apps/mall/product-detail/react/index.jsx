@@ -1,14 +1,42 @@
 const Product = React.createClass({
 
     getInitialState: function () {
-        return {show: true}
+        return {
+			show: true,
+			showOverlayDef:false,
+			showOverlay:false,
+            value:1,
+            background: "transparent"
+			}
     },
 
     toggleHandler: function () {
         this.setState({show: !this.state.show});
     },
 
-    render: function () {
+	childEventHandler: function(params,value){
+		this.setState({showOverlayDef:true,showOverlay: params,value:value});
+    },
+
+	shopHandler: function (e) {
+		location.href = location.protocol + '//' + location.hostname + '/static/mall/shopping-cart/index.html'
+	},
+
+	componentDidMount: function () {
+        window.addEventListener('scroll', function () {
+            var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+
+            if (scrollTop > 100) return false;
+            let id = document.querySelector('._style_header_fixed');
+            if(scrollTop > 10) {
+                id.setAttribute("class", "no_clarity _style_header_fixed");
+            }
+            else{
+                id.setAttribute("class", "clarity _style_header_fixed");
+            }
+        }.bind(this),false);
+    },
+	render: function () {
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
         let markList = (list, index)=><div key={index}>{list}</div>;
@@ -37,15 +65,14 @@ const Product = React.createClass({
         if (data.desc || (data.rich_detail && data.rich_detail.length)) {
             rich_detail = <div className="detail-des">
                 <div className="title">商品详情</div>
+                <div className="remin">【温馨提示】
+                    <p>1、工分兑换礼品不支持开具发票；</p>
+                    <p>2、工分兑换礼品非质量问题不支持退换货；</p>
+                    <p>3、礼品图片仅供参考请以收到实物为准；</p>
+                    <p>4、兑换即视为认同此规则。</p>
+                    <hr/>
+                </div>
                 <div className="product-content">
-                	<div className="product-inf">
-                		<div className="product-inf-title">【温馨提示】</div>
-	                	<div className="product-inf-list">1.工分兑换礼品不支持开具发票；</div>
-	                	<div className="product-inf-list">2.图片仅供参考请以收到实物为准，非质量问题不支持退换；</div>
-	                	<div className="product-inf-list">3.实物礼品3-7个工作日内发货，暂不支持指定快递，请谅解；</div>
-	                	<div className="product-inf-list">4.请您根据需要谨慎兑换，下单即说明您认可以上规则。</div>
-                	</div>
-
                     {data.desc ? <div className="desc">{data.desc}</div> : null}
                     {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
                 </div>
@@ -54,7 +81,7 @@ const Product = React.createClass({
 
         let operators = null;
         if (data.operators) {
-            operators = <div className="detail-inf1">
+            operators = <div className="expl-info">
                 <div className="operators">供应商：</div>
                 <div className="operators-name">{data.operators}</div>
             </div>
@@ -80,9 +107,16 @@ const Product = React.createClass({
         let vip_tag = data.vipConfigUuid ? (data.vipLevel ? (
             <span className="vip-tag">{user_level_manifest}</span>) : null) : null;
 
-        return (
-            <div className="detail-box">
+		let shop_card_prompt = null;
+		if (this.state.showOverlayDef)
+                shop_card_prompt = (<div className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>添加成功，在购物车等亲~</div>);
 
+		return (
+           <div className="detail-box">
+			  {shop_card_prompt}
+			   <a onClick={this.shopHandler} className="_style_buy_cart" style={{zIndex:'10'}}>
+                   <span className="_style_buy_cart_span">{this.state.value}</span>
+               </a>
                 {data.head_images && data.head_images.length ?
                     <BannerGroup className="head-images" images={data.head_images}/> :
                     <div className="no-head-images"></div> }
@@ -100,29 +134,32 @@ const Product = React.createClass({
                     </div>
                     <div className="detail-inf1">
                         {market_price}
+                        <div className="stock-div">
+                            <span>库存：</span>
+                            <span className="stock">{data.stock}</span>
+                        </div>
                         <div className="total">
                             <span>累计销量</span>
                             <span className="total-num">{data.sales}</span>
                         </div>
                     </div>
                     <div className="detail-inf1">
-                        <div className="market-price">
-                            <span>快递：</span>
-                            <span>免运费</span>
-                        </div>
-                        <div className="total">
-                            <span>配送范围：</span>
-                            <span>全国</span>
-                        </div>
+
                     </div>
-                    {operators}
                 </div>
                 {data.tags.length > 0 ?
                     <div className="detail-mark">{(data.tags ? data.tags : []).map(markList)}</div> : null}
+                <div className="expl">
+                    <div className="total">
+                        <span>配送范围：</span>
+                        <span>全国</span>
+                    </div>
+                    {operators}
+                </div>
                 {activity_desc}
                 {rich_detail}
                 <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
-                <PlusMinus stock={data.stock} ticket_count={data.ticketList}
+                <PlusMinus is_login={data.is_login} stock={data.stock} ticket_count={data.ticketList} parentCallback={this.childEventHandler}
                            check_messages={data.checkMessages}
                            voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
             </div>
@@ -139,6 +176,40 @@ const PlusMinus = React.createClass({
             minus: stock > 0,
             plus: stock > 0
         }
+    },
+
+	toggleOverlay: function () {
+		let _this=this;
+        let bizNo = $FW.Format.urlQuery().bizNo;
+        let link = location.protocol + '//' + location.hostname +
+            '/static/mall/order-confirm/index.html?productBizNo=' + bizNo + '&count=' + this.state.value;
+
+        if (!this.props.is_login) {
+            if ($FW.Browser.inApp()) {
+                $FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
+                    NativeBridge.goto(link, true) :
+                    NativeBridge.login(link);
+            } else {
+                location.href = link
+            }
+        }else{
+            $FW.Ajax({
+                url:  API_PATH + 'mall/api/cart/v2/insertCart.json?bizNo=' + bizNo,
+                enable_loading: true,
+                data:{
+                    buyNum:this.state.value,
+                    productBizNo:bizNo
+                },
+                success: function (data) {
+                    console.log(data);
+                    _this.props.parentCallback(true,_this.state.value);
+                    setTimeout(function() {
+                        _this.props.parentCallback(false,_this.state.value);
+                    }.bind(_this), 1500);
+                }
+            });
+        }
+
     },
 
     changeValue: function (e) {
@@ -183,10 +254,10 @@ const PlusMinus = React.createClass({
 
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname +
-            '/static/mall/order-confirm/index.html?productBizNo=' + bizNo + '&count=' + this.state.value;
+            '/static/mall/order-confirm/index.html?cartFlag=false&productBizNo=' + bizNo + '&buyNum=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
-        if (!this.props.is_login) {
+        if (this.props.is_login==1) {
             if ($FW.Browser.inApp()) {
                 // 注意: 这里有个hole
                 // 非种cookie 用这种
@@ -224,11 +295,7 @@ const PlusMinus = React.createClass({
                     <div className={this.state.value < this.props.stock ? "plus" : "plus gray"}
                          onClick={this.changePlus}></div>
                 </div>
-                <div className="stock-box">
-                    <span>库存</span>
-                    <span className="stock">{this.props.stock}</span>
-                    <span className="unit">件</span>
-                </div>
+                <a className="btn-buy btn-buy-card" onClick={this.toggleOverlay}>加入购物车</a>
                 <a onClick={this.buyHandler} className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>
                     {this.props.stock < 1 ? '售罄' : '立即购买'}
                 </a>
@@ -254,25 +321,25 @@ $FW.DOMReady(function () {
     let bizNo = $FW.Format.urlQuery().bizNo;
     if (!bizNo) {
         $FW.Component.Alert('bizNo is missing');
-        return;
+         return;
     }
 
     NativeBridge.setTitle('商品详情');
 
     $FW.Ajax({
+        //url: './item_detail.json?bizNo=A0000000370',
         url: `${API_PATH}mall/api/detail/v1/item_detail.json?bizNo=` + bizNo,
-        enable_loading: true,
-        success: function (data) {
-            if (data.title) {
-                ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
-            } else {
-                ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
-            }
+        enable_loading: true
+    }).then(data =>{
+        if (data.title) {
+            ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
+        } else {
+            ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
         }
-    });
+    })
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"商品详情"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={""}/>, document.getElementById('header'));
     }
 });
 

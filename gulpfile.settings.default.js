@@ -4,6 +4,9 @@ const CONSTANTS = {
     },
     mall: {
         dev_api_path: '//fe.9888.cn/api/test-a/mall/'
+    },
+    jiemo: {
+        dev_api_path: '//fe.9888.cn/api/test-a/jiemo/'
     }
 };
 

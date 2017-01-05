@@ -17,13 +17,11 @@ const APP_NAMES = [
     'home', // 首页
     'activity', // 专题活动页
     'user',
-    'new-user',
     'add-bank-card',
     'my-bank-card',
     'verify-bank-card',
     'send-msg-pay',
     'send-msg-bind',
-    'new-order-confirm',
     'life-service',
     'service-bill',
     'hot-activity',
@@ -36,14 +34,10 @@ const APP_NAMES = [
     'order-complete',
     'shopping-cart',
     'payment',
-    'new-order-detail',
-    'new-order-list',
     'logistics',
     'coupon',
     'voucher',
-    'new-home',
     // 产品相关页面
-    'new-product-detail',
     'product-detail',
     'product-list',
     'product-vip-zone',
@@ -52,13 +46,14 @@ const APP_NAMES = [
 
     'not-support',
     'deliver-address',
-    'new-deliver-address',
 
     'user-prize-record',
     // 游戏
-    'game-guess',
-    'game',
-    'zhuanpan20161215',
+    'game-guess',//猜拳
+    'game',//游戏中心
+    //'zhuanpan20161215',//转盘20161215
+    'game-red-rain',//2017过年红包雨
+    'game-zhuanpan20161230',//20161230转盘活动
     // 特殊页面
     {
         name: 'waiting',
