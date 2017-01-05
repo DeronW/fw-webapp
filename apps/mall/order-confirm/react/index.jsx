@@ -149,8 +149,8 @@ const ConfirmOrder = React.createClass({
                 <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
                          update_sms_code_handler={this.updateSMSCodeHandler}/>
                 <div className="confirm-order-foot">
-                    <span class="total-item-name">实付:</span>
-                    <span class="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
+                    <span className="total-item-name">实付:</span>
+                    <span className="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
                     <a onClick={this.makeOrderHandler}
                        className={this.props.data.canBuy ? "btn-red" : "btn-red btn-gray"}>提交订单</a>
                 </div>
