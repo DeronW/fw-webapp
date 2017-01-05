@@ -47,7 +47,7 @@ const ConfirmOrder = React.createClass({
                      } else {
                      */
                     console.log(result);
-                    //location.href = '/static/mall/payment/index.html?payableRmbAmt='+this.props.data.payableRmbAmt+'&merchantNo='+result.m_orderNo
+                    location.href = '/static/mall/payment/index.html?payableRmbAmt='+this.props.data.payableRmbAmt+'&merchantNo='+result.m_orderNo
                     /* } */
                 }
             })
