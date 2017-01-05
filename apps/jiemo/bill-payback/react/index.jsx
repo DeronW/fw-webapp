@@ -4,6 +4,8 @@ const PayBackWrap = React.createClass({
             <div>
                 <PayBack/>
                 <BankCardList/>
+                <VerifyCode/>
+                <PayBackResult/>
             </div>
         )
     }
@@ -12,7 +14,7 @@ const PayBackWrap = React.createClass({
 const PayBack = React.createClass({
     render:function(){
         return (
-            <div>
+            <div className="payback-box">
                  <div className="loan-num">
                      <div className="loan-money overdue-color">1000000.00</div>
                      <div className="loan-status2">应还总额(元)</div>
@@ -56,7 +58,7 @@ const PayBack = React.createClass({
 const BankCardList = React.createClass({
     render:function(){
         return (
-            <div className="mask">
+            <div className="mask1">
                 <div className="popup">
                     <div className="popup-wrap">
                         <span className="popup-close"></span>
@@ -84,7 +86,44 @@ const BankCardList = React.createClass({
     }
 });
 
+const VerifyCode = React.createClass({
+    render:function(){
+        return (
+            <div className="mask2">
+                <div className="verify-popup">
+                    <div className="verify-popup-wrap">
+                         <div className="verify-popup-close"></div>
+                         <div className="verify-popup-title">短信验证</div>
+                         <div className="verify-popup-tip"> 已向工商银行（2233）银行预留手机号发送短信验证码。</div>
+                         <div className="verify-input">
+                             <input className="sms-input" type="text" value="" placeholder="输入验证码"/>
+                             <span className="btn-countdown">获取验证码</span>
+                         </div>
+                         <div className="confirm-btn">确定</div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+});
 
+const PayBackResult = React.createClass({
+    render:function(){
+        return (
+            <div className="payback-result">
+                 <div className="payback-result-success-img"><img src="images/payback-success.png"/></div>
+                 <div className="payback-result-fail-img"><img src="images/payback-fail.png"/></div>
+                 <div className="payback-result-success-tip">
+                     <div className="tip-top">还有2323.23元未还，请记得准时还款!</div>
+                     <div className="tip-bottom"> 还款金额：<span>212.21</span>元</div>
+                 </div>
+                <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>
+                <div className="credit-btn">提升额度</div>
+                <div className="apply-btn">申请用钱</div>
+            </div>
+        )
+    }
+});
 
 
 $FW.DOMReady(function() {

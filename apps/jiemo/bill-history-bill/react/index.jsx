@@ -14,6 +14,7 @@ const HistoryBill = React.createClass({
                              <span className="bill-status">已还款<img src="images/right-arrow.jpg"/></span>
                          </div>
                      </div>
+                     <div className="data-completion"></div>
                  </div>
                  <div className="no-data-box">
                      <img className="no-data-img" src="images/no-data.png"/>
