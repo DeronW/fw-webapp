@@ -35,23 +35,25 @@ const Mall = React.createClass({
         link ? gotoHandler(link) : console.log('no link set');
     },
     componentDidMount: function () {
-        window.addEventListener('touchmove', function () {
+        window.addEventListener('scroll', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             //if (scrollTop > 100) return false;
 
-            let style = scrollTop > 60 ? {
+            let style = scrollTop > 100 ? {
                 background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
-                avatarImage: "images/m-list-icon.png"
+                avatarImage: "images/m-list-icon.png",
+                paddingTop: "100px"
             } : {
                 background: "transparent",
                 logoImage: "images/logo.png",
-                avatarImage: "images/list-icon.png"
+                avatarImage: "images/list-icon.png",
+                paddingTop: "20px"
             }
 
             this.setState(style);
-        }.bind(this));
+        }.bind(this),false);
     },
     render: function () {
         let banner;
@@ -70,7 +72,7 @@ const Mall = React.createClass({
             width: "100%",
             height: "71px",
             paddingTop: "20px",
-            paddingBottom: "20px",
+            paddingBottom: this.state.paddingTop,
             transition: "1s all"
         };
 
