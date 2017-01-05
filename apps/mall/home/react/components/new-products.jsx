@@ -8,7 +8,7 @@ const NewProducts = React.createClass({
         console.log(this.state.ps);
         return (
             <div className="new-product-list">
-                <div className="new-title"><img className="new-title-img" src="images/hot-title.png"/></div>
+                <div className="new-title"><img className="new-title-img" src="images/new-title.png"/></div>
                 <div className="new-product-wrap">
                     <div className="new-left-product">
                         <a className="new-bg-1"
