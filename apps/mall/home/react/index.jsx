@@ -43,11 +43,13 @@ const Mall = React.createClass({
             let style = scrollTop > 100 ? {
                 background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
-                avatarImage: "images/m-list-icon.png"
+                avatarImage: "images/m-list-icon.png",
+                paddingTop: "100px"
             } : {
                 background: "transparent",
                 logoImage: "images/logo.png",
-                avatarImage: "images/list-icon.png"
+                avatarImage: "images/list-icon.png",
+                paddingTop: "20px"
             }
 
             this.setState(style);
@@ -70,7 +72,7 @@ const Mall = React.createClass({
             width: "100%",
             height: "71px",
             paddingTop: "20px",
-            paddingBottom: "20px",
+            paddingBottom: this.state.paddingTop,
             transition: "1s all"
         };
 
