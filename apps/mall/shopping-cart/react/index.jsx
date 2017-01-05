@@ -21,11 +21,16 @@ function gotoHandler(link, need_login) {
 
 const ShoppingCart = React.createClass({
     getInitialState: function () {
+        let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+        let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+        let appCartHeader=(inIOS && inApp)?".app-cart-header":".cart-header";
+
         var ps = this.props.products;
         ps.map(i=>i.checked=true);
         return {
             products: ps,
-            changeAll:true
+            changeAll:true,
+            appCartHeader:appCartHeader
         }
     },
     componentDidMount: function () {
@@ -191,7 +196,7 @@ const ShoppingCart = React.createClass({
 
         return (
             <div className="shopping-cart">
-                <div className="cart-header">
+                <div className={this.state.appCartHeader}>
                     {this.props.products.length != 0 ? <div className="all-chosen" onClick={this.allChoseHandler}>
                         <span className={checkAllCN}></span>
                         <span className="chosenTip">全选</span></div> : null}
@@ -205,24 +210,13 @@ const ShoppingCart = React.createClass({
                     <a className="pay-btn"
                        onClick={this.payHandler}>结算</a>
                 </div> : null}
-                <div className="fixed-nav">
-                    <a className="fixed-nav-link fixed-nav-link1"
-                       onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
-                    <a className="fixed-nav-link fixed-nav-link2"
-                       onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-                    <a className="backToIndex"
-                       onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
-                    <a className="fixed-nav-link fixed-nav-link3 active"
-                       onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                    <a className="fixed-nav-link fixed-nav-link4"
-                       onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
-                </div>
             </div>
         )
     }
 });
 $FW.DOMReady(function () {
     NativeBridge.setTitle('购物车');
+    ReactDOM.render(<BottomNavBar index={3}/>, document.getElementById('bottom-nav-bar'));
     $FW.Ajax({
         //url: "http://localhost/nginx-1.9.12/html/shoppingcart.json",
         url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,

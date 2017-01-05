@@ -27,17 +27,6 @@ const SearchPage = React.createClass({
                     <div className="category-items">
                         {category_item}
                     </div>
-                    <div className="fixed-nav">
-                        <a className="fixed-nav-link fixed-nav-link1"
-                           onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
-                        <a className="fixed-nav-link fixed-nav-link2 active"
-                           onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-                        <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
-                        <a className="fixed-nav-link fixed-nav-link3"
-                           onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                        <a className="fixed-nav-link fixed-nav-link4"
-                           onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
-                    </div>
                 </div>
       )
     }
@@ -45,6 +34,7 @@ const SearchPage = React.createClass({
 
 $FW.DOMReady(function(){
     NativeBridge.setTitle('品类中心');
+    ReactDOM.render(<BottomNavBar index={2}/>, document.getElementById('bottom-nav-bar'));
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"品类中心"} back_handler={backward}/>, document.getElementById('header'));
     ReactDOM.render(<SearchPage/>, document.getElementById('cnt'));

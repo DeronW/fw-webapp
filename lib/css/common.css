@@ -23,16 +23,16 @@ a {
 }
 
 ._style_footer_item1.active {
-    background-position: 0 -70px;
+    background-position: 0 -70px!important;
 }
 ._style_footer_item2.active {
-    background-position:-145px -70px
+    background-position:-145px -70px!important
 }
 ._style_footer_item3.active {
-    background-position:-422px -70px
+    background-position:-422px -70px!important
 }
 ._style_footer_item4.active {
-    background-position:-560px -70px
+    background-position:-560px -70px!important
 }
 
 .jiemo_style_footer_fixed a {
