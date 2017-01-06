@@ -60,7 +60,7 @@ const Mall = React.createClass({
         };
         let backFactory = ()=> {
             return $FW.Browser.inApp()?<a className="back-factory" onClick={this.backNativeHandler}><img src="images/wap_shop_gong_logo.png"/></a> :
-                <a className="back-factory" href="http://m.9888.cn/mpwap/"><img src="images/wap_shop_gong_logo.png"/></a>
+                <a className="back-factory" href={location.protocol + "//m.9888.cn/mpwap/"}><img src="images/wap_shop_gong_logo.png"/></a>
         };
 
         let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();

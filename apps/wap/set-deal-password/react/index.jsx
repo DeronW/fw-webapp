@@ -149,7 +149,7 @@ var Body = React.createClass({
         this.setState({popShow: false});
     },
     getConfirmBtn: function () {
-        window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+        window.location.href = location.protocol + "//m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
     },
     rightBtnFun: function () {
         this.setState({popShow: true});
@@ -224,7 +224,7 @@ $FW.DOMReady(function () {
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {
             if (data.openStatus != 3) {
-                window.location.href = "http://m.9888.cn/mpwap/top/index.do"
+                window.location.href = location.protocol + "//m.9888.cn/mpwap/top/index.do"
             } else {
                 ReactDOM.render(
                     <Body activity={data}/>,

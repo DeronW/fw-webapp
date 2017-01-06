@@ -113,7 +113,7 @@ const BottomNavBar = React.createClass({
                 <div className="_style_footer_fixed" style={_style_footer_fixed}>
                     <a className={this.state.index==1 ? "_style_footer_item1 active" : "_style_footer_item1"} style={_style_footer_item1} onClick={ () => gotoHandler("/static/mall/new-home/index.html") }></a>
                     <a className={this.state.index==2 ? "_style_footer_item2 active" : "_style_footer_item2"}  style={_style_footer_item2} onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-					<a className="_back_to_index"      style={_back_to_index}      onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
+					<a className="_back_to_index"      style={_back_to_index}      onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = location.protocol + '//m.9888.cn'}></a>
 					<a className={this.state.index==3 ? "_style_footer_item3 active" : "_style_footer_item3"}  style={_style_footer_item3} onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
 					<a className={this.state.index==4 ? "_style_footer_item4 active" : "_style_footer_item4"}  style={_style_footer_item4} onClick={ () => gotoHandler("/static/mall/new-user/index.html", true) }></a>
                 </div>
