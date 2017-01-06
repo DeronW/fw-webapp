@@ -41,14 +41,15 @@ function fnShowResult(num) {
     if (num > 0) {
         let endRandom = parseInt(Math.random() * 100000 + 1000);
         let endTime = new Date().getTime();
-        let endToken = hex_md5(endRandom + '' + endTime);
+        let endToken = hex_md5(endRandom+'' +num+ '' + endTime);
         $FW.Ajax({
             url: `${location.protocol}//game.9888.cn/index.php?r=redrain/rob`,
             data: {
                 nonce: endRandom,
+                red_num: num,
                 time: endTime,
                 token: endToken,
-                red_num: num,
+
             },
             method: 'POST',
             success: data => {
