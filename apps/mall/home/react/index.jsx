@@ -128,7 +128,7 @@ const Mall = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
+    ReactDOM.render(<BottomNavBar index={1}/>, document.getElementById('bottom-nav-bar'));
 
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
         .then(data => ReactDOM.render(<Mall banners={data.banners}/>, CONTENT_NODE));

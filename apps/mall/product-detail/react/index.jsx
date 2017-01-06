@@ -1,5 +1,4 @@
 const Product = React.createClass({
-
     getInitialState: function () {
         return {
 			show: true,
@@ -37,6 +36,10 @@ const Product = React.createClass({
         }.bind(this),false);
     },
 	render: function () {
+        let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+        let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+        let topBuyCart=(inIOS && inApp)?"_style_buy_cart _top_buy_cart":"_style_buy_cart";
+
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
         let markList = (list, index)=><div key={index}>{list}</div>;
@@ -114,7 +117,7 @@ const Product = React.createClass({
 		return (
            <div className="detail-box">
 			  {shop_card_prompt}
-			   <a onClick={this.shopHandler} className="_style_buy_cart" style={{zIndex:'10'}}>
+			   <a onClick={this.shopHandler} className={topBuyCart} style={{zIndex:'10'}}>
                    <span className="_style_buy_cart_span">{this.state.value}</span>
                </a>
                 {data.head_images && data.head_images.length ?

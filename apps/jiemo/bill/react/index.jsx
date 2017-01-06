@@ -1,4 +1,23 @@
 const Bill = React.createClass({
+     getInitialState:function(){
+         var token;
+         $FW.Ajax({
+             url: API_PATH + 'api/userBase/v1/login.json',
+             data:{
+                 mobile:"13811518528",
+                 password:"123456"
+             },
+             success: function (data) {
+                 console.log(data)
+             }
+         });
+         return {
+             token:token
+         }
+     },
+     componentDidMount:function(){
+
+     },
      render:function(){
          return (
              <div>
@@ -49,4 +68,5 @@ const Bill = React.createClass({
 $FW.DOMReady(function() {
     ReactDOM.render(<Bill/>, document.getElementById('cnt'));
     ReactDOM.render(<BottomNavBar index={2}/>, document.getElementById('bottom-nav-bar'));
+
 });
