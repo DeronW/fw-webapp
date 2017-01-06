@@ -8,10 +8,10 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url:`${location.protocol}//game.9888.cn/index.php?r=redrain/trig`,
         data:{
-            rand:startRandom,
+            nonce:startRandom,
             time:startTime,
             token:startToken,
-            trig:'',
+            client_type:$FW.Browser.inIOS()?3:4,
         },
         method:'POST',
         success:data=>{

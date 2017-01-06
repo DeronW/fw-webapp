@@ -37,18 +37,15 @@ let fnStartRedbag = (callback) => {
     }, 1000);
     startGame(GAME_TIME);
 };
-function encryption() {
-
-};
 function fnShowResult(num) {
     if (num > 0) {
         let endRandom = parseInt(Math.random() * 100000 + 1000);
         let endTime = new Date().getTime();
-        let endToken = hex_md5(startRandom + '' + startTime);
+        let endToken = hex_md5(endRandom + '' + endTime);
         $FW.Ajax({
             url: `${location.protocol}//game.9888.cn/index.php?r=redrain/rob`,
             data: {
-                rand: endRandom,
+                nonce: endRandom,
                 time: endTime,
                 token: endToken,
                 red_num: num,
@@ -56,12 +53,11 @@ function fnShowResult(num) {
             method: 'POST',
             success: data => {
                 G('getNum').innerHTML = num;
-                G('getPrize').innerHTML = data.prize;
+                G('getPrize').innerHTML = data.red_name;
                 G('pop-success').className = '';
-                successBtn(data.type);
+                successBtn(data.red_type);
             }
         });
-
     } else {
         G('pop-fail').className = '';
     }
@@ -73,7 +69,7 @@ function successBtn(type) {
     G('success-btn').onClick = function (type) {
         if (type == 1) {
             NativeBridge.toNative('app_scores');
-        } else if (type == 2) {
+        } else if (type == 2||type ==3) {
             NativeBridge.toNative('app_coupon');
         }
     };
