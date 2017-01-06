@@ -5,7 +5,7 @@ $FW.DOMReady(function () {
     let startRandom=parseInt(Math.random()*100000+1000);
     let startTime=new Date().getTime();
     let startToken=hex_md5(startRandom+''+startTime);
-    console.log(startToken);
+    console.log(startRandom+''+startTime);
     $FW.Ajax({
         url:`${location.protocol}//game.9888.cn/index.php?r=redrain/trig`,
         data:{
