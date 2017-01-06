@@ -35,12 +35,12 @@ const Mall = React.createClass({
         link ? gotoHandler(link) : console.log('no link set');
     },
     componentDidMount: function () {
-        window.addEventListener('touchmove', function () {
+        window.addEventListener('scroll', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             //if (scrollTop > 100) return false;
 
-            let style = scrollTop > 60 ? {
+            let style = scrollTop > 400 ? {
                 background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png"
@@ -51,7 +51,7 @@ const Mall = React.createClass({
             }
 
             this.setState(style);
-        }.bind(this));
+        }.bind(this),false);
     },
     render: function () {
         let banner;
@@ -115,8 +115,8 @@ const Mall = React.createClass({
                         src="images/nav-8.png"/><span>我可兑换</span></a>
                 </div>
                 {/*Charge_Nav */}
-                <div id="NewProducts"></div>
                 <div id="HotProducts"></div>
+                <div id="NewProducts"></div>
                 <div id="Grid_3_6"></div>
                 <div id="Grid_4_4"></div>
                 <div id="Grid_4_5"></div>
@@ -128,7 +128,7 @@ const Mall = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
+    ReactDOM.render(<BottomNavBar index={1}/>, document.getElementById('bottom-nav-bar'));
 
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
         .then(data => ReactDOM.render(<Mall banners={data.banners}/>, CONTENT_NODE));

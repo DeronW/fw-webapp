@@ -13,8 +13,8 @@ const Redbag = function () {
     this.element = null;
     this.timer = 'animate timer';
     this.scale = 0;
-    this.width = window.innerWidth - 200;
-    this.height = window.innerHeight-90;
+    this.width = window.innerWidth - 300;
+    this.height = window.innerHeight - 500;
     this.isBoom = false;
     this.initialize();
 }
@@ -30,7 +30,7 @@ Redbag.prototype = {
                 this.element.lastChild.firstChild.src = "images/bomb-after.png";
             } else {
                 this.element.className = "bag-li bag-li-on";
-                this.element.lastChild.firstChild.src = "images/smoke.png";
+                //this.element.lastChild.firstChild.src = "images/smoke.png";
             }
         }
         setTimeout(() => {
@@ -41,10 +41,15 @@ Redbag.prototype = {
         var box = document.getElementById("red-cnt");
         var node = document.createElement("div");
         node.className = "bag-li";
-        node.style.width = "300px";
-        node.style.height = "300px";
-        node.style.left = this.width * 0.2 + Math.random() * this.width * 0.6 + 'px';
-        node.style.top = this.height * 0.2 + Math.random() * this.height * 0.6 + 'px';
+        if (this.bomb) {
+            node.style.width = "400px";
+            node.style.height = "400px";
+        } else {
+            node.style.width = "300px";
+            node.style.height = "300px";
+        }
+        node.style.left = Math.random() * this.width * 1 + 'px';
+        node.style.top = Math.random() * this.height + 100 + 'px';
         let img_list = ["redbag0.png", "redbag1.png", "redbag2.png", "redbag3.png", "redbag4.png", "redbag5.png", "bomb.png"];
         let index = parseInt(img_list.length * Math.random());
         if (index == 6 && redRainBombNum < redRainBombTotalNum) {
@@ -54,9 +59,16 @@ Redbag.prototype = {
             index--;
         }
         let img = img_list[index];
-        node.innerHTML = `
+        if (this.bomb) {
+            node.style.zIndex="4";
+            node.innerHTML = `
+            <div class="bag-img"><img src="images/${img}" style="width:400px;height:400px;"/></div>`;
+        } else {
+            node.innerHTML = `
             <div class="bag-plus"><img src="images/plus.png"/></div>
             <div class="bag-img"><img src="images/${img}" style="width:300px;height:300px;"/></div>`;
+        }
+
         node.onclick = this.clickHandler.bind(this);
         box.appendChild(node);
         this.element = node;
@@ -103,7 +115,7 @@ function startGame(game_time) {
     setTimeout(endGame, game_time);
     window.RedbagTimer = setInterval(function () {
         window.RedbagList.push(new Redbag());
-    }, 300);
+    }, 250);
 }
 
 function endGame() {
