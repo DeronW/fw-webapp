@@ -46,6 +46,7 @@ const PayBack = React.createClass({
                     </div>
                 </div>
                 <div className="payback-tips">
+                    <div>友情提示：</div>
                     <div>1.当前只支持使用储蓄卡还款，请确保卡内余额充足；</div>
                     <div>2.单次还款金额不低于100元。</div>
                 </div>
@@ -58,28 +59,16 @@ const PayBack = React.createClass({
 const BankCardList = React.createClass({
     render:function(){
         return (
-            <div className="mask1">
-                <div className="popup">
-                    <div className="popup-wrap">
-                        <span className="popup-close"></span>
-                        <div className="popup-title">选择银行卡</div>
-                        <div className="bankcard-list">
-                            <div className="bankcard">
-                                <div className="checked"></div>
-                                <div className="bank-name">工商银行（1212）</div>
-                            </div>
-                            <div className="bankcard">
-                                <div className="checked"></div>
-                                <div className="bank-name">工商银行（1212）</div>
-                            </div>
-                            <div className="bankcard">
-                                <div className="checked"></div>
-                                <div className="bank-name">工商银行（1212）</div>
-                            </div>
-                        </div>
-                        <div className="add-bank-card"><img src="images/plus.jpg"/>添加银行卡</div>
-                    </div>
-
+            <div className="bank-card-list">
+                <div className="header">
+                    <div className="arrow-left"></div>
+                    <div className="title">选择还款卡</div>
+                    <div className="history-bill">添加</div>
+                </div>
+                <div className="bank-branch-list">
+                    <div className="list-item"><img src="images/bank-icon.png"/>交通银行（1915）<span className="checked"></span></div>
+                     <div className="list-item"><img src="images/bank-icon.png"/>交通银行（1915）</div>
+                     <div className="list-item"><img src="images/bank-icon.png"/>交通银行（1915）</div>
                 </div>
             </div>
         )
@@ -89,7 +78,7 @@ const BankCardList = React.createClass({
 const VerifyCode = React.createClass({
     render:function(){
         return (
-            <div className="mask2">
+            <div className="mask2" style={{zIndex:10}}>
                 <div className="verify-popup">
                     <div className="verify-popup-wrap">
                          <div className="verify-popup-close"></div>

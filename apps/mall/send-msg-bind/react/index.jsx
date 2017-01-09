@@ -90,19 +90,20 @@ const SendCode = React.createClass({
         var query = $FW.Format.urlQuery();
 
         let FormData = {
+            service: 'REQ_BANKCARD_AUTH',
             certificateNo: query.certificateNo,
             accountNo: query.accountNo,
-            bankCardName: query.bankCardName,
-            bankCardType: 1,
-            certificateType: 0,
             accountName: query.accountName,
             mobileNo: query.mobileNo,
             bankId: query.bankId,
+            bankCardType: 1,
+            certificateType: 0,
+            bankCardName: query.bankCardName,
             bankName: query.bankName
         };
 
         $FW.Ajax({
-            url:  API_PATH +'/mall/api/payment/v1/binding_bank_card.json',
+            url:  API_PATH +'/mall/api/payment/v1/ucf_pay.json',
             enable_loading: true,
             data: FormData,
             success: function (data) {

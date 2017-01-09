@@ -44,11 +44,13 @@ function fnShowResult(num) {
         let endToken = hex_md5(endRandom+'' +num+ '' + endTime);
         $FW.Ajax({
             url: `${location.protocol}//game.9888.cn/index.php?r=redrain/rob`,
+            withCredentials:true,
             data: {
                 nonce: endRandom,
                 red_num: num,
                 time: endTime,
                 token: endToken,
+
 
             },
             method: 'POST',

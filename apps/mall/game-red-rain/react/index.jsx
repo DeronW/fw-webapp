@@ -8,11 +8,12 @@ $FW.DOMReady(function () {
     console.log(Browsertype+''+startRandom+''+startTime);
     $FW.Ajax({
         url:`${location.protocol}//game.9888.cn/index.php?r=redrain/trig`,
+        withCredentials:true,
         data:{
             client_type:Browsertype,
             nonce:startRandom,
             time:startTime,
-            token:startToken,
+            token:startToken
         },
         method:'POST',
         success:data=>{

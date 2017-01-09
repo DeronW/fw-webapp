@@ -1,15 +1,4 @@
 const Bill = React.createClass({
-    getInitialState: function () {
-        var token;
-        $FW.Ajax({
-                url: `${API_PATH}api/userBase/v1/login.json`,
-                method: "post",
-                data: {mobile:"13811518528", password:"123456",sourceType:3}
-            }).then((data) => console.log(data), (error) => console.log(error))
-        return {
-            token: token
-        }
-    },
     componentDidMount: function () {
 
     },
@@ -68,6 +57,18 @@ const Bill = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    $FW.Ajax({
+        url: `${API_PATH}api/userBase/v1/login.json`,
+        method: "post",
+        data: {mobile:"13811518528", password:"123456",sourceType:3}
+    }).then((data) => {
+        //console.log(data);
+        $FW.Ajax({
+            url: `${API_PATH}api/oriole/v1/loanloadpage.json`,
+            method: "post",
+            data: {token:data.userLogin.userToken, userGid:data.userLogin.userGid,userId:data.userLogin.userId, sourceType:3}
+        }).then((data) => console.log(data), (error) => console.log(error))
+    }, (error) => console.log(error));
     ReactDOM.render(<Bill/>, document.getElementById('cnt'));
     ReactDOM.render(<BottomNavBar index={2}/>, document.getElementById('bottom-nav-bar'));
 });

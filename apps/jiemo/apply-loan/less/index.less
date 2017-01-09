@@ -129,24 +129,13 @@ img{
   position:absolute;
   left:23px;
   top:73px;
+  display:none;
 }
-.scale{
+.no-slider-bar{
   width:608px;
-  height:14px;
-  border-top:1px solid #ebeaea;
-  border-bottom:1px solid #ebeaea;
-  position:relative;
-  margin-top:17px;
-  border-radius:8px;
-}
-.scale-progress{
-  width:608px;
-  height:16px;
-  background:#f5b774;
   position:absolute;
-  top:-1px;
-  left:0;
-  border-radius:8px;
+  left:16px;
+  top:73px;
 }
 .start-point{
   background:url(../images/progress_bar_starting.png) no-repeat;
@@ -180,16 +169,45 @@ img{
    top:60px;
    right:0;
  }
-.btn{
-  background:url(../images/progress_bar_current.png) no-repeat;
-  width:65px;
-  height:65px;
-  background-size:100% 100%;
+.slider-area-wrap{
   position:absolute;
-  top:-25px;
-  left:-6px;
-  z-index:100;
+  top:16px;
+  left:0px;
 }
-
+.lineDivWrap{
+  position: relative;
+  height: 14px;
+  border-top:1px solid #ebeaea;
+  border-bottom:1px solid #ebeaea;
+  width: 608px;
+}
+.lineDiv-bar{
+  position: absolute;
+  height: 15px;
+  background: #f5b774;
+  width: 608px;
+  position:absolute;
+  top:0px;
+  left:0;
+  border-radius: 8px;
+}
+.lineDiv {
+  position: absolute;
+  height: 16px;
+  width: 608px;
+  position:absolute;
+  top:0;
+  left:0;
+}
+.lineDiv .minDiv {
+  background: url(../images/progress_bar_current.png) no-repeat;
+  width: 65px;
+  height: 65px;
+  background-size: 100% 100%;
+  position: absolute;
+  top: -25px;
+  left: 550px;
+  z-index: 1;
+}
 
 

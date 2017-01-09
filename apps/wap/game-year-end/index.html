@@ -1,0 +1,166 @@
+{% extends '../../../lib/templates/mall_base.swig.html' %}
+{% block title %}豆尔摩斯{% endblock %}
+{% block content %}
+
+<div id="touchStyleLoading">
+    <div class="percent">0%</div>
+    <div class="spinner"></div>
+</div>
+<div class="main">
+    <!--音乐-->
+    <div id="audio-btn" style="display: block;">
+        <audio id="media" loop="true" autoplay="autoplay">
+            <source src="http://10.105.6.217:8046/jrgc/100/bg1.mp3" type="audio/mpeg" />
+            请使用支持html5的浏览器。
+        </audio>
+        <img src="images/music.png" class="on">
+    </div>
+
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <section class="swiper-slide page0">
+                <div class="page0-2"><img src="images/p0-2.png"/></div>
+                <div class="page0-3"><img src="images/p0-3.png"/></div>
+                <div class="page0-4"><img src="images/p0-4.png"/></div>
+                <div class="page0-5"><img src="images/logo.png"/></div>
+                <div class="pageNum">1/9</div>
+            </section>
+            <section class="swiper-slide page1">
+                <div class="page1-0">
+                    <div class="page1-01">自2012年7月1日</div>
+                    <div class="page1-02">金融工场上线以来已经安全运营</div>
+                    <div class="page1-03"><span>1245</span><em class="c-ffe25c">天</em></div>
+                </div>
+                <div class="page1-1"><img src="images/p1-1.png"/></div>
+                <div class="page1-2"><img src="images/p1-2.png"/></div>
+                <div class="page1-3"><img src="images/p1-3.png"/></div>
+                <div class="page1-4"><img src="images/p1-4.png"/></div>
+                <div class="page1-5"><img src="images/p1-5.png"/></div>
+                <div class="page1-6"><img src="images/p1-6.png"/></div>
+                <div class="page1-7"><img src="images/p1-7.png"/></div>
+                <div class="page1-8"><img src="images/p1-8.png"/></div>
+                <div class="page1-9"><img src="images/p1-9.png"/></div>
+                <div class="page1-10"><img src="images/p1-10.png"/></div>
+                <div class="pageNum">2/9</div>
+            </section>
+            <section class="swiper-slide page2">
+                <div class="page2-text">
+                    <div class="page2-text1">截至2015年12月31日，金融工场累计交易额达</div>
+                    <div class="page2-text2"><em>100.4</em><span>亿元</span></div>
+                    <div class="page2-text3"><em>20</em><span class="c-ffe25c">万</span>工友与你一起相守</div>
+                </div>
+                <div class="page2-0"><img src="images/P2-1.png"/></div>
+                <div class="page2-1"><img src="images/P2-1.png"/></div>
+                <div class="page2-2"><img src="images/p2-2.png"/></div>
+                <div class="page2-3"><img src="images/p2-3.png"/></div>
+                <div class="page2-4"><img src="images/p2-4.png"/></div>
+                <div class="page2-5"><img src="images/p2-5.png"/></div>
+                <div class="page2-6"><img src="images/p2-6.png"/></div>
+                <div class="page2-7"><img src="images/p2-7.png"/></div>
+                <div class="pageNum">3/9</div>
+            </section>
+            <section class="swiper-slide page3">
+                <div class="page3-text">
+                    <div class="page3-text1">截至2015年12月31日</div>
+                    <div class="page3-text2">金融工场累计为工友们赚取收益</div>
+                    <div class="page3-text3"><em>1.8</em><span>亿元</span></div>
+                </div>
+                <div class="page3-1"><img src="images/p3-1.png"/></div>
+                <div class="page3-2"><img src="images/p3-2.png"/></div>
+                <div class="page3-3"><img src="images/p3-3.png"/></div>
+                <div class="page3-4"><img src="images/p3-4.png"/></div>
+                <div class="page3-5"><img src="images/p3-5.png"/></div>
+                <div class="pageNum">4/9</div>
+            </section>
+            <section class="swiper-slide page4">
+                <div class="page4-text">
+                    <div class="page4-text1">我们正在努力长大</div>
+                    <div class="page4-text2">还需再接再厉,不断进取</div>
+                    <div class="page4-text3">明天需要你我共同创造</div>
+                </div>
+                <!--未登录显示btn-page4-->
+                <div class="btn-page4">
+                    <a href="#" class="btn-page41">进入工场理财生涯</a>
+                    <a href="#" class="btn-page42">注册领取<span>120元</span>礼包</a>
+                </div>
+                <!--登录显示sign-page4-->
+                <div class="sign dis">
+                    <div class="sign1"><div>您已登录</div></div>
+                    <div class="sign2">向上滑动，领取<span>100</span>工豆</div>
+                </div>
+                <div class="pageNum">5/9</div>
+            </section>
+            <!--如果未登录 .page5,.page6,.page7隐藏，启动后显示生涯的3页并调用mySwiper.update();-->
+            <section class="swiper-slide page5">
+                <div class="page5-text">
+                    <div class="page5-text1">自2014年12月23日</div>
+                    <div class="page5-text2">您已加入工场<span>356</span><em class="c-ffe25c">天</em></div>
+                    <div class="page5-text3">您比<span>80</span><em>%</em>的工友提前加入了工场！</div>
+                    <div class="page5-text4 date dis">(此数据截止时间为2016年1月7日)</div>
+                    <div class="page5-text5 login">查看个人数据，请先<span class="btn-login">登录</span></div>
+                </div>
+                <div class="page5-1">
+                    <div class="page5-11"><img src="images/p5-1.png"></div>
+                    <div class="page5-12"><span>时间</span>是一种记号，相伴最重要</div>
+                </div>
+                <div class="page5-2"><img src="images/p5-2.png"/></div>
+                <div class="page5-3"><img src="images/p5-3.png"/></div>
+                <div class="page5-4"><img src="images/p5-4.png"/></div>
+                <div class="pageNum">6/9</div>
+            </section>
+            <section class="swiper-slide page6">
+                <div class="page6-text">
+                    <div class="page6-text1">您累计投资共<em>980.34</em><span>万元</span></div>
+                    <div class="page6-text2">已累计获得收益共<em>6800.32</em><span>元</span></div>
+                    <div class="page6-text3">您的收益战胜了<em>56</em><span>%</span>的工友</div>
+                    <div class="page6-text4 date dis">(此数据截止时间为2016年1月7日)</div>
+                    <div class="page6-text5 login">查看个人数据，请先<span class="btn-login">登录</span></div>
+                </div>
+                <div class="page6-1"><img src="images/p6-1.gif"/></div>
+                <div class="page6-2"><img src="images/p6-2.png"/></div>
+                <div class="page6-3"><img src="images/p6-3.png"/>
+                    <div class="page6-4"><span>投资</span>是一种生活方式，舒心才好</div>
+                </div>
+                <div class="pageNum">7/9</div>
+            </section>
+            <section class="swiper-slide page7">
+                <div class="page7-text">
+                    <div class="page7-text1">您在工场累计获得</div>
+                    <div class="page7-text2">返现券<span>500.00</span><em class="c-ffe25c">元</em></div>
+                    <div class="page7-text3">工豆<span>60.00</span><em class="c-ffe25c">元</em></div>
+                    <div class="page7-text4">超过了<em>70</em><span>%</span>的工友，简直就是理财小能手!</div>
+                    <div class="page7-text5 date">(此数据截止时间为2016年1月7日)</div>
+                    <div class="page7-text6 login dis">查看个人数据，请先<span class="btn-login">登录</span></div>
+                </div>
+                <div class="page7-1">
+                    <div class="page7-11"><img src="images/p7-1.png"/></div>
+                    <div class="page7-12"><span>精打细算</span>是一种智慧，机智如我</div>
+                </div>
+                <div class="page7-2"><img src="images/p7-2.png"/></div>
+                <div class="page7-3"><img src="images/p7-3.png"/></div>
+                <div class="page7-4"><img src="images/p7-4.png"/></div>
+                <div class="page7-5"><img src="images/p7-5.png"/></div>
+                <div class="page7-6"><img src="images/p7-6.png"/></div>
+                <div class="pageNum">8/9</div>
+            </section>
+            <section class="swiper-slide page8">
+                <div class="page8-2"><img src="img/p8-1.gif"></div>
+                <div class="page8-3">一路走来，感谢所有支持我们的工友</br>有你有我才完美!</div>
+                <div class="page8-4"><a href="javascript:;" class="btn-get">领取100工豆</a><a href="#" class="btn-zc">注册领取<span class="c-ffe25c">120元</span>礼包</a></div>
+                <div class="page8-5"><img src="images/logo.png"/></div>
+                <div class="pageNum">9/9</div>
+            </section>
+
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="up"><img src="images/up.png"></div>
+</div>
+<!--登录弹窗pop-page4-->
+
+<div class="masker-alert"></div>
+<div class="pop-alert">
+    <p>您的请求太频繁，请稍后再试！</p>
+    <a href="#" class="alert-close">关闭</a>
+</div>
+{% endblock %}
