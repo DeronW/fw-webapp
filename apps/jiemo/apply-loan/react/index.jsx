@@ -79,6 +79,9 @@ const ApplyLoan = React.createClass({
                         <div className="start-point-num">500</div>
                         <div className="end-point-num">{this.state.present_availableLoan}</div>
                     </div>
+                    <div className="no-slider-bar">
+                        <img src="images/no-slider-bar.jpg"/>
+                    </div>
                     <div className="loan-info-items">
                         <div className="credit-lines">
                             <div className="credit-money">
