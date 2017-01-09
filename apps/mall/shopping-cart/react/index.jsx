@@ -36,7 +36,7 @@ const ShoppingCart = React.createClass({
     componentDidMount: function () {
         var ps = this.state.products;
         for(var i=0;i<ps.length;i++){
-            if(!ps[i].isChecked){
+            if(!ps[i].cartStatus==0){
                 this.setState({changeAll:false});
             }
         }
@@ -47,15 +47,17 @@ const ShoppingCart = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/isChecked.json`,
             data: {
-                flag: ps[index].isChecked = !ps[index].isChecked,
-                productBizNo: ps[index].productBizno
+                flag: ps[index].cartStatus==0?true:false,
+                productBizNo: ps[index].productBizNo
             },
             success: function (data) {
+                ps[index].cartStatus = ps[index].cartStatus==0?5:0,
                 _this.setState({products: ps});
                 for(var i=0;i<ps.length;i++){
-                    if(!ps[i].checked){
+                    if(ps[i].cartStatus==5){
+                        ps[index]
                         _this.setState({changeAll:false});
-                    }else if(ps[i].checked){
+                    }else if(ps[i].cartStatus==0){
                         _this.setState({changeAll:true});
                     }
                 }
@@ -82,7 +84,7 @@ const ShoppingCart = React.createClass({
         let products=this.state.products;
         let newChangeAll=!this.state.changeAll;
         for(var i= 0;i<this.state.products.length;i++){
-            products[i].isChecked=this.state.changeAll?false:true;
+            products[i].cartStatus=this.state.changeAll?5:0;
         }
         this.setState({
             products: products,
@@ -91,7 +93,8 @@ const ShoppingCart = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/isChecked.json`,
             data: {
-                allFlag: newChangeAll
+                allFlag: newChangeAll,
+                productBizNo: ''
             },
             success: ()=> {
                 this.setState({products: products});
@@ -104,13 +107,13 @@ const ShoppingCart = React.createClass({
         var c = newAmount;
         c = parseInt(c) || 1;
         if (c < 1) c = 1;
-        if (c > ps[index].productStock) c = ps[index].productStock;
+        if (c > ps[index].prdInventory) c = ps[index].prdInventory;
         ps[index].productNumber = c;
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/updateCartNumber.json`,
             data: {
                 buyNum: ps[index].productNumber,
-                productBizNo: ps[index].productBizno
+                productBizNo: ps[index].productBizNo
             },
             success: function (data) {
                 _this.setState({products: ps});
@@ -140,18 +143,19 @@ const ShoppingCart = React.createClass({
 
         let product_item = (product, index) => {
             return (
+            product.prdStatus==1?
                 <div className="shopping-item" key={index}>
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
-                        <span className={product.isChecked ? "checked-circle" : "unchecked-circle"}></span>
+                        <span className={product.cartStatus==0 ? "checked-circle" : "unchecked-circle"}></span>
                         <input type="hidden" className="checked-bizNo"
-                               value={product.isChecked ? product.productBizno : null}/>
+                               value={product.cartStatus==0 ? product.productBizno : null}/>
                     </div>
                     <div className="product-img"><img src={product.img}/></div>
                     <div className="product-item">
                         <div className="product-info">
                             <div className="product-name">{product.productName}</div>
                             <div className="product-price">
-                                ¥{product.productPrice * product.productNumber}+{product.beanPrice * product.productNumber}工分
+                                ¥{product.subTotalPrice}+{product.subTotalCredit}工分
                             </div>
                             <div className="detail-num-change">
                                 <div className="minus" onClick={()=>this.changeMinus(index)}></div>
@@ -161,14 +165,14 @@ const ShoppingCart = React.createClass({
                         </div>
                     </div>
                     <div className="product-delete" onClick={()=>this.deleteHandler(index)}></div>
-                </div>
+                </div>:null
             )
         };
         let total_price = 0;
         let total_score = 0;
         let total = (product, index)=> {
-            product.isChecked ? total_price += product.productPrice * product.productNumber : total_price;
-            product.isChecked ? total_score += product.beanPrice * product.productNumber : total_score;
+            product.cartStatus==0 ? total_price += product.subTotalPrice * product.productNumber : total_price;
+            product.cartStatus==0 ? total_score += product.subTotalCredit * product.productNumber : total_score;
         };
         this.state.products.map((product, index) => total(product, index));
 
@@ -180,26 +184,25 @@ const ShoppingCart = React.createClass({
         //    }
         //}
 
+        let checkAllCN = "total-checked-circle";
+        for(let i = 0; i < products.length;i++) {
+            if(products[i].cartStatus==5) {
+                checkAllCN = 'total-unchecked-circle';
+                break;
+            }
+        }
 
-        //let checkAllCN = "total-checked-circle";
-        //
-        //for(let i = 0; i < products.length;i++) {
-        //    if(!i.isChecked) {
-        //        checkAllCN = 'total-unchecked-circle';
-        //        break;
-        //    }
-        //}
-
-        let checkAllCN = products.reduce((a, b) => a && b.isChecked, true) ?
-            "total-checked-circle" :
-            'total-unchecked-circle';
+        //let checkAllCN = products.reduce((a, b) => a && b.cartStatus, 0) ?
+        //    "total-checked-circle" :
+        //    'total-unchecked-circle';
 
         return (
             <div className="shopping-cart">
                 <div className={this.state.appCartHeader}>
-                    {this.props.products.length != 0 ? <div className="all-chosen" onClick={this.allChoseHandler}>
+                    {/*{this.props.products.length != 0 ? <div className="all-chosen" onClick={this.allChoseHandler}>
                         <span className={checkAllCN}></span>
                         <span className="chosenTip">全选</span></div> : null}
+                        */}
                     <div className="cart-title">购物车</div>
                 </div>
                 {this.props.products.length != 0 ? this.state.products.map((product, index) => product_item(product, index)) :
