@@ -198,9 +198,10 @@ const ShoppingCart = React.createClass({
         return (
             <div className="shopping-cart">
                 <div className={this.state.appCartHeader}>
-                    {this.props.products.length != 0 ? <div className="all-chosen" onClick={this.allChoseHandler}>
+                    {/*{this.props.products.length != 0 ? <div className="all-chosen" onClick={this.allChoseHandler}>
                         <span className={checkAllCN}></span>
                         <span className="chosenTip">全选</span></div> : null}
+                        */}
                     <div className="cart-title">购物车</div>
                 </div>
                 {this.props.products.length != 0 ? this.state.products.map((product, index) => product_item(product, index)) :
