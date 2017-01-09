@@ -143,6 +143,7 @@ const ShoppingCart = React.createClass({
 
         let product_item = (product, index) => {
             return (
+            product.prdStatus==1?
                 <div className="shopping-item" key={index}>
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
                         <span className={product.cartStatus==0 ? "checked-circle" : "unchecked-circle"}></span>
@@ -164,7 +165,7 @@ const ShoppingCart = React.createClass({
                         </div>
                     </div>
                     <div className="product-delete" onClick={()=>this.deleteHandler(index)}></div>
-                </div>
+                </div>:null
             )
         };
         let total_price = 0;

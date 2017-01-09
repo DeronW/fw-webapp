@@ -102,7 +102,7 @@ const SendCode = React.createClass({
         };
 
         $FW.Ajax({
-            url:  API_PATH +'/mall/api/payment/v1/binding_bank_card.json',
+            url:  API_PATH +'/mall/api/payment/v1/ucf_pay.json',
             enable_loading: true,
             data: FormData,
             success: function (data) {
