@@ -48,7 +48,7 @@ const ShoppingCart = React.createClass({
             url: `${API_PATH}mall/api/cart/v1/isChecked.json`,
             data: {
                 flag: ps[index].cartStatus==0?true:false,
-                productBizNo: ps[index].productBizno
+                productBizNo: ps[index].productBizNo
             },
             success: function (data) {
                 _this.setState({products: ps});
