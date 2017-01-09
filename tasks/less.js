@@ -10,7 +10,7 @@ module.exports = less2css = function (src_path, build_path, name) {
         .pipe(plumber())
         .pipe(changed(build_path))
         .pipe(less())
-        .pipe(cssnano())
         .pipe(concat(name))
+        .pipe(cssnano())
         .pipe(gulp.dest(build_path));
 };
