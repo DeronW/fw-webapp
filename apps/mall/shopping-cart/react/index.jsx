@@ -80,7 +80,7 @@ const ShoppingCart = React.createClass({
     },
     allChoseHandler: function () {
         let products=this.state.products;
-        let newChangeAll=this.state.changeAll;
+        let newChangeAll=!this.state.changeAll;
         for(var i= 0;i<this.state.products.length;i++){
             products[i].cartStatus=this.state.changeAll?5:0;
         }
@@ -181,19 +181,18 @@ const ShoppingCart = React.createClass({
         //    }
         //}
 
+        let checkAllCN = "total-checked-circle";
 
-        //let checkAllCN = "total-checked-circle";
-        //
-        //for(let i = 0; i < products.length;i++) {
-        //    if(!i.isChecked) {
-        //        checkAllCN = 'total-unchecked-circle';
-        //        break;
-        //    }
-        //}
+        for(let i = 0; i < products.length;i++) {
+            if(i.cartStatus==5) {
+                checkAllCN = 'total-unchecked-circle';
+                break;
+            }
+        }
 
-        let checkAllCN = products.reduce((a, b) => a && b.cartStatus, 0) ?
-            "total-checked-circle" :
-            'total-unchecked-circle';
+        //let checkAllCN = products.reduce((a, b) => a && b.cartStatus, 0) ?
+        //    "total-checked-circle" :
+        //    'total-unchecked-circle';
 
         return (
             <div className="shopping-cart">
