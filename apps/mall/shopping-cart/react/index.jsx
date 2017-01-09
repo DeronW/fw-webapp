@@ -51,9 +51,11 @@ const ShoppingCart = React.createClass({
                 productBizNo: ps[index].productBizNo
             },
             success: function (data) {
+                ps[index].cartStatus = ps[index].cartStatus==0?5:0,
                 _this.setState({products: ps});
                 for(var i=0;i<ps.length;i++){
                     if(ps[i].cartStatus==5){
+                        ps[index]
                         _this.setState({changeAll:false});
                     }else if(ps[i].cartStatus==0){
                         _this.setState({changeAll:true});
