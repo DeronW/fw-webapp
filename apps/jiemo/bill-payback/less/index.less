@@ -93,17 +93,6 @@ input{
 .right-arrow{
   margin-top:-6px;
 }
-.mask1{
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,.7);
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  z-index:10000000000;
-  display:none;
-}
 .mask2{
   width:100%;
   height:100%;
@@ -114,70 +103,6 @@ input{
   right:0;
   z-index:10000000000;
   display:none;
-}
-.popup{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-}
-.popup-wrap{
-  width:495px;
-  border:1px solid #c0c0c0;
-  border-radius:10px;
-  background:#fff;
-  position:relative;
-}
-.popup-title{
-  font-size:36px;
-  color:#50ad9a;
-  text-align:center;
-  padding:32px 0;
-}
-.popup-close{
-  display:block;
-  background:url(../images/close.jpg) no-repeat;
-  background-size:100% 100%;
-  width:20px;
-  height:20px;
-  position:absolute;
-  top: 23px;
-  right:23px;
-}
-.bankcard-list{
-  padding:0 68px;
-}
-.bank-name{
-  font-size:27px;
-  color:#333;
-  float:left;
-  line-height:36px;
-  margin-left:10px;
-}
-.bankcard{
-  margin-bottom:25px;
-  overflow:hidden;
-}
-.checked{
-  background:url(../images/checked.jpg) no-repeat;
-  width:36px;
-  height:36px;
-  float:left;
-}
-.add-bank-card{
-  width:495px;
-  height:90px;
-  line-height:90px;
-  background:#fafafa;
-  text-align:center;
-  font-size:27px;
-  color:#999;
-  border-bottom-left-radius:10px;
-  border-bottom-right-radius:10px;
-}
-.add-bank-card img{
-  margin-right:23px;
-  margin-top:-6px;
 }
 .verify-popup{
   position:absolute;
@@ -299,4 +224,63 @@ input{
   border-radius:8px;
   margin:20px auto 0;
   display:none;
+}
+.bank-card-list{
+  width:100%;
+  height:100%;
+  background:#f0f0f0;
+  position:absolute;
+  top:0;
+  left:0;
+  display:none;
+}
+.header{
+  height:100px;
+  line-height:100px;
+  background:#fff;
+  text-align:center;
+  position:relative;
+}
+.title{
+  font-size:36px;
+  color:#333;
+}
+.arrow-left{
+  background:url(../images/arrow-left.jpg) no-repeat;
+  width:19px;
+  height:34px;
+  position:absolute;
+  top:34px;
+  left:33px;
+}
+.history-bill{
+  font-size:32px;
+  color:#50ad9a;
+  position:absolute;
+  top:0px;
+  right:33px;
+}
+.bank-branch-list{
+  background:#fff;
+  padding-left:32px;
+  margin-top:24px;
+}
+.list-item{
+  height:99px;
+  border-bottom:1px solid #e7e8ed;
+  font-size:32px;
+  color:#333;
+  line-height:99px;
+  position:relative;
+}
+.list-item img{
+  margin-right:24px;
+}
+.checked{
+  background:url(../images/checked.jpg) no-repeat;
+  width:40px;
+  height:27px;
+  position:absolute;
+  top:36px;
+  right:32px;
 }

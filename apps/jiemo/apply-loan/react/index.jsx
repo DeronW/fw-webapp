@@ -30,7 +30,7 @@ const ApplyLoan = React.createClass({
                     minDiv_left = -8;
                 }
                 minDiv.style.left = minDiv_left + "px";
-                lineDivBar.style.width = minDiv_left + 10 + "px";
+                lineDivBar.style.width = minDiv_left + 15 + "px";
                 var loanNum = Math.round(parseInt(minDiv_left / (lineDiv.offsetWidth - 58) * al)/100)*100;
                 if(loanNum <= 500){ loanNum = 500}
                 this.setState({availableLoan:loanNum});
@@ -83,7 +83,7 @@ const ApplyLoan = React.createClass({
                         <div className="credit-lines">
                             <div className="credit-money">
                                 <span className="credit-money-title">信用额度（元）</span>
-                                <span className="credit-money-num">100000.00</span>
+                                <span className="credit-money-num">{this.state.present_availableLoan}</span>
                             </div>
                             <div className="loan-duration">
                                 <span className="loan-duration-title">借款期限（天）</span>
