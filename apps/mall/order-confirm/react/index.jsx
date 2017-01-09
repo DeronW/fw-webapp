@@ -171,11 +171,13 @@ $FW.DOMReady(function () {
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
     let prds = query.productBizNo || query.prds;
-    let prds1=[];
+    console.log(prds);
+    /*let prds1=[];
     if(prds.indexOf(',')!=(-1)){
         prds.split(",").map((p, index) => prds1.push(p));
         prds = prds1;
     }
+    console.log(prds1);*/
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
