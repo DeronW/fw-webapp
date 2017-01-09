@@ -82,7 +82,9 @@ const APP_NAMES = [
     },
     // test page
     'test-native-bridge',
-    'test-statistic-chart'
+    'test-statistic-chart',
+    //年终总结豆尔摩斯h5宣传页
+    'game-year-end'//2016豆尔摩斯h5宣传页
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
