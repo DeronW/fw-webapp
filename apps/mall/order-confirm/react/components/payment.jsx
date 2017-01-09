@@ -8,8 +8,7 @@ const PaymentPanel = React.createClass({
             voucher_list: voucher_list,
             show_voucher_modal: false,
             use_bean: this.props.user.use_bean,
-            checked_voucher_count: cc,
-            score_used: (this.props.product_count - cc) * this.props.product.score
+            checked_voucher_count: cc
         }
     },
     componentDidMount: function () {
@@ -57,15 +56,27 @@ const PaymentPanel = React.createClass({
         this.setState({show_voucher_modal: false})
     },
     confirmCheckedVoucherHandler: function (new_voucher_list) {
-        let cc = $FW.Utils.length(new_voucher_list, (i) => i.checked);
-
-        let score_used = (this.props.product_count - cc) * this.props.product.score;
+        let cc = $FW.Utils.length(new_voucher_list, (i) => i.selected);
 
         this.setState({
             voucher_list: new_voucher_list,
             checked_voucher_count: cc,
-            score_used: score_used,
             show_voucher_modal: false
+        })
+
+        let cartFlag = query.cartFlag;
+        let prds = query.productBizNo || [];
+        let buyNum = query.buyNum || 0;
+        let userTicketList = [];
+        for (var i = 0; i < new_voucher_list.length; i++) {
+            userTicketList.push(new_voucher_list[i].id)
+        };
+        $FW.Ajax({
+            url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prds=` + prds + `&buyNum=` + buyNum + `&userTicketList=` + userTicketList,
+            enable_loading: true
+        }).then(data => {
+            document.querySelectorAll('.price-item')[1].innerHTML = '-' + data.ordersTicketPoints + '工分-' + data.ordersTicketPrice + '金额'
+            document.querySelectorAll('.total-item-detail').innerHTML = '¥' + data.payableRmbAmt + '+' + data.payablePointAmt + '工分';
         })
     },
     render: function () {
@@ -87,21 +98,14 @@ const PaymentPanel = React.createClass({
                 null;
         };
 
-        let user_score = (
-            <div className="score">
-                <div className="score1">可用工分</div>
-                <div className="score2">{this.props.user.score}</div>
-                <div className="score3">支付: {this.state.score_used > 0 ? this.state.score_used : 0}</div>
-            </div>
-        );
-
         return (
             <div className="balance-wrap">
                 <div className="account-box">
 
                     <div className="coupons" onClick={this.toggleVoucherModal}>
-                        <div className="coupons-l">兑换券{this.state.checked_voucher_count ?null:<span className="avail-coupon">{this.props.ordersTicketNum}张可用</span>}</div>
-                        {this.state.checked_voucher_count ?null:<div className="coupons-r">未使用</div>}
+                        <div className="coupons-l">兑换券{this.state.checked_voucher_count ? null :
+                            <span className="avail-coupon">{this.props.ordersTicketNum}张可用</span>}</div>
+                        {this.state.checked_voucher_count ? null : <div className="coupons-r">未使用</div>}
                         {checked_voucher()}
                     </div>
                     <div className="aval-points">
@@ -110,19 +114,18 @@ const PaymentPanel = React.createClass({
                     </div>
 
                     {/*<div className="coupons">
-                        <div className="coupons-l">立减券<span className="avail-coupon">11张可用</span></div>
-                        <div className="coupons-r">－30</div>
-                    </div>
+                     <div className="coupons-l">立减券<span className="avail-coupon">11张可用</span></div>
+                     <div className="coupons-r">－30</div>
+                     </div>
 
-                    <div className="coupons">
-                        <div className="coupons-l">打折券<span className="avail-coupon">11张可用</span></div>
-                        <div className="coupons-r">95%</div>
-                    </div>*/}
+                     <div className="coupons">
+                     <div className="coupons-l">打折券<span className="avail-coupon">11张可用</span></div>
+                     <div className="coupons-r">95%</div>
+                     </div>*/}
 
                 </div>
                 {this.state.show_voucher_modal ? <VoucherModal
                     voucher_list={JSON.parse(JSON.stringify(this.state.voucher_list))}
-                    product_count={this.props.product_count}
                     cancel_voucher_handler={this.cancelVoucherModalHandler}
                     confirm_voucher_handler={this.confirmCheckedVoucherHandler}
                 /> : null}
