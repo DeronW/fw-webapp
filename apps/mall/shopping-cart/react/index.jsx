@@ -148,7 +148,7 @@ const ShoppingCart = React.createClass({
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
                         <span className={product.cartStatus==0 ? "checked-circle" : "unchecked-circle"}></span>
                         <input type="hidden" className="checked-bizNo"
-                               value={product.cartStatus==0 ? product.productBizno : null}/>
+                               value={product.cartStatus==0 ? product.productBizNo : null}/>
                     </div>
                     <div className="product-img"><img src={product.img}/></div>
                     <div className="product-item">

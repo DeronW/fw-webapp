@@ -5,7 +5,7 @@ const ConfirmOrder = React.createClass({
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
-            prds: query.productBizNo || [],
+            prds: query.productBizNo ||query.prds|| [],
             buyNum: query.buyNum || 0,
             tickets: [],
             msgCode: null,
@@ -170,7 +170,12 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
-    let prds = query.productBizNo || query.prds || [];
+    let prds = query.productBizNo || query.prds;
+    let prds1=[];
+    if(prds.indexOf(',')!=(-1)){
+        prds.split(",").map((p, index) => prds1.push(p));
+        prds = prds1;
+    }
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
@@ -180,7 +185,13 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         //url: requestUrl,
-        url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prds=` + prds + `&buyNum=` + buyNum + `&userTicketList=` + userTicketList,
+        url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
+        data: {
+            cartFlag:cartFlag,
+            prds: prds,
+            buyNum:buyNum,
+            userTicketList:userTicketList
+        },
         enable_loading: true
     }).then(data => {
         var user = {
