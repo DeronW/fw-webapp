@@ -3,6 +3,7 @@ const changed = require('gulp-changed');
 const cssnano = require('gulp-cssnano');
 const concat = require('gulp-concat');
 const plumber = require('gulp-plumber');
+const plugins = require('gulp-load-plugins')();
 const less = require('gulp-less');
 
 module.exports = less2css = function (src_path, build_path, name, debug) {
