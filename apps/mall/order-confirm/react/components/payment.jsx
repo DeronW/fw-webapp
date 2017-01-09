@@ -76,7 +76,7 @@ const PaymentPanel = React.createClass({
             url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prds=` + prds + `&buyNum=` + buyNum + `&userTicketList=` + userTicketList,
             enable_loading: true
         }).then(data => {
-            document.querySelectorAll('.price-item')[1].innerHTML = '-' + data.ordersTicketPoints + '工分-' + data.ordersTicketPrice + '金额'
+            document.querySelectorAll('.item-detail')[1].innerHTML = '-' + data.ordersTicketPoints + '工分-' + data.ordersTicketPrice + '金额'
             document.querySelectorAll('.total-item-detail').innerHTML = '¥' + data.payableRmbAmt + '+' + data.payablePointAmt + '工分';
         })
     },
@@ -85,7 +85,7 @@ const PaymentPanel = React.createClass({
         let checked_voucher = () => {
             let voucher_name;
             for (var i = 0; i < this.state.voucher_list.length; i++) {
-                if (this.state.voucher_list[i].checked) {
+                if (this.state.voucher_list[i].selected) {
                     voucher_name = this.state.voucher_list[i].productName;
                     break;
                 }
