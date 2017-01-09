@@ -1,6 +1,7 @@
 
 
 $FW.DOMReady(function () {
+    var http=location.href.split("game-year-end")[0]+"images" ;
     //切换音乐模式
     var mediao=$('#media')[0];
     var browser = {
@@ -27,18 +28,17 @@ $FW.DOMReady(function () {
         }
     });
     if(mediao.paused){
-        alert(1);
         mediao.play();
 
     }
     $("#audio-btn img").on("click",function(){
 
         if($(this).hasClass('on')){
-            $(this).attr("src","{$path}img/musicOff.png");
+            //$(this).attr("src",http+"/musicOff.png");
             $(this).removeClass('on');
             mediao.pause();
         }else{
-            $(this).attr("src","{$path}img/music.png");
+            //$(this).attr("src",http+"/music.png");
             $(this).addClass('on');
             mediao.play();
         }
@@ -66,7 +66,7 @@ $FW.DOMReady(function () {
         img.onload = loadComplete;
         img.src = src;
     }
-    var http=
+
     var ImageLoader = {
         loadImage: loadImage,
         loadImages: function(images, callback) {
@@ -96,56 +96,55 @@ $FW.DOMReady(function () {
     };
     var touchStyleLoadingEl = document.getElementById('touchStyleLoading');
     ImageLoader.loadImages([
-        "http://192.168.1.150:8080/100/img/p0-1.png",
-        "http://192.168.1.150:8080/100/img/p0-2.png",
-        "http://192.168.1.150:8080/100/img/p0-3.png",
-        "http://192.168.1.150:8080/100/img/p0-4.png",
-        "http://192.168.1.150:8080/100/img/p1-1.png",
-        "http://192.168.1.150:8080/100/img/p1-2.png",
-        "http://192.168.1.150:8080/100/img/p1-3.png",
-        "http://192.168.1.150:8080/100/img/p1-4.png",
-        "http://192.168.1.150:8080/100/img/p1-5.png",
-        "http://192.168.1.150:8080/100/img/p1-6.png",
-        "http://192.168.1.150:8080/100/img/p1-7.png",
-        "http://192.168.1.150:8080/100/img/p1-8.png",
-        "http://192.168.1.150:8080/100/img/p1-9.png",
-        "http://192.168.1.150:8080/100/img/p1-10.png",
-        "http://192.168.1.150:8080/100/img/P2-1.png",
-        "http://192.168.1.150:8080/100/img/p2-2.png",
-        "http://192.168.1.150:8080/100/img/p2-3.png",
-        "http://192.168.1.150:8080/100/img/p2-4.png",
-        "http://192.168.1.150:8080/100/img/p2-5.png",
-        "http://192.168.1.150:8080/100/img/p2-6.png",
-        "http://192.168.1.150:8080/100/img/p2-7.png",
-        "http://192.168.1.150:8080/100/img/p3-1.png",
-        "http://192.168.1.150:8080/100/img/p3-2.png",
-        "http://192.168.1.150:8080/100/img/p3-3.png",
-        "http://192.168.1.150:8080/100/img/p3-4.png",
-        "http://192.168.1.150:8080/100/img/p3-5.png",
-        "http://192.168.1.150:8080/100/img/p4-1.png",
-        "http://192.168.1.150:8080/100/img/p4-2.png",
-        "http://192.168.1.150:8080/100/img/p5-1.png",
-        "http://192.168.1.150:8080/100/img/p5-2.png",
-        "http://192.168.1.150:8080/100/img/p5-3.png",
-        "http://192.168.1.150:8080/100/img/p5-4.png",
-        "http://192.168.1.150:8080/100/img/p6-1.gif",
-        "http://192.168.1.150:8080/100/img/p6-2.png",
-        "http://192.168.1.150:8080/100/img/p6-3.png",
-        "http://192.168.1.150:8080/100/img/p7-1.png",
-        "http://192.168.1.150:8080/100/img/p7-2.png",
-        "http://192.168.1.150:8080/100/img/p7-3.png",
-        "http://192.168.1.150:8080/100/img/p7-4.png",
-        "http://192.168.1.150:8080/100/img/p7-5.png",
-        "http://192.168.1.150:8080/100/img/p7-6.png",
-        "http://192.168.1.150:8080/100/img/p8-1.gif",
-        "http://192.168.1.150:8080/100/img/share.png",
-        "http://192.168.1.150:8080/100/img/up.png",
-        "http://192.168.1.150:8080/100/img/musicOff.png",
-        "http://192.168.1.150:8080/100/img/close.png",
-        http://10.105.6.217:8046/jrgc/mallmain/build/wap/game-year-end/images/
-        "http://192.168.1.150:8080/100/img/ico-password.png",
-        "http://192.168.1.150:8080/100/img/ico-per.png",
-        "http://192.168.1.150:8080/100/img/logo.png",
+        http+"/p0-1.png",
+        http+"/p0-2.png",
+        http+"/p0-3.png",
+        http+"/p0-4.png",
+        http+"/p1-1.png",
+        http+"/p1-2.png",
+        http+"/p1-3.png",
+        http+"/p1-4.png",
+        http+"/p1-5.png",
+        http+"/p1-6.png",
+        http+"/p1-7.png",
+        http+"/p1-8.png",
+        http+"/p1-9.png",
+        http+"/p1-10.png",
+        http+"/P2-1.png",
+        http+"/p2-2.png",
+        http+"/p2-3.png",
+        http+"/p2-4.png",
+        http+"/p2-5.png",
+        http+"/p2-6.png",
+        http+"/p2-7.png",
+        http+"/p3-1.png",
+        http+"/p3-2.png",
+        http+"/p3-3.png",
+        http+"/p3-4.png",
+        http+"/p3-5.png",
+        http+"/p4-1.png",
+        http+"/p4-2.png",
+        http+"/p5-1.png",
+        http+"/p5-2.png",
+        http+"/p5-3.png",
+        http+"/p5-4.png",
+        http+"/p6-1.gif",
+        http+"/p6-2.png",
+        http+"/p6-3.png",
+        http+"/p7-1.png",
+        http+"/p7-2.png",
+        http+"/p7-3.png",
+        http+"/p7-4.png",
+        http+"/p7-5.png",
+        http+"/p7-6.png",
+        http+"/p8-1.gif",
+        http+"/share.png",
+        http+"/up.png",
+        http+"/musicOff.png",
+        http+"/close.png",
+        http+"/ico-password.png",
+        http+"/ico-per.png",
+        http+"/logo.png",
     ], function(percent) {
         touchStyleLoadingEl.children[0].innerHTML = percent+"%";
         if (percent >= 100) {
