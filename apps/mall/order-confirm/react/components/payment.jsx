@@ -63,14 +63,13 @@ const PaymentPanel = React.createClass({
             checked_voucher_count: cc,
             show_voucher_modal: false
         });
-
         var query = $FW.Format.urlQuery();
         let cartFlag = query.cartFlag;
         let prds = query.productBizNo || [];
         let buyNum = query.buyNum || 0;
         let userTicketList = [];
-        for (var i = 0; i < new_voucher_list.length; i++) {
-            userTicketList.push(new_voucher_list[i].id)
+        for (var i = 0; i < cc; i++) {
+            userTicketList.push($FW.Utils.jsonFilter(new_voucher_list, (i) => i.checked)[i].id)
         };
         $FW.Ajax({
             url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prds=` + prds + `&buyNum=` + buyNum + `&userTicketList=` + userTicketList,
