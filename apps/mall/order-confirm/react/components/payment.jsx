@@ -1,7 +1,7 @@
 const PaymentPanel = React.createClass({
     getInitialState: function () {
         let voucher_list = this.props.voucher_list;
-        let cc = $FW.Utils.length(voucher_list, (i) => i.selected);
+        let cc = $FW.Utils.length(voucher_list, (i) => i.checked);
 
         this.used_bean_count = 0;
         return {
@@ -56,21 +56,20 @@ const PaymentPanel = React.createClass({
         this.setState({show_voucher_modal: false})
     },
     confirmCheckedVoucherHandler: function (new_voucher_list) {
-        let cc = $FW.Utils.length(new_voucher_list, (i) => i.selected);
+        let cc = $FW.Utils.length(new_voucher_list, (i) => i.checked);
 
         this.setState({
             voucher_list: new_voucher_list,
             checked_voucher_count: cc,
             show_voucher_modal: false
         });
-
         var query = $FW.Format.urlQuery();
         let cartFlag = query.cartFlag;
         let prds = query.productBizNo || [];
         let buyNum = query.buyNum || 0;
         let userTicketList = [];
-        for (var i = 0; i < new_voucher_list.length; i++) {
-            userTicketList.push(new_voucher_list[i].id)
+        for (var i = 0; i < cc; i++) {
+            userTicketList.push($FW.Utils.jsonFilter(new_voucher_list, (i) => i.checked)[i].id)
         };
         $FW.Ajax({
             url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prds=` + prds + `&buyNum=` + buyNum + `&userTicketList=` + userTicketList,
@@ -85,7 +84,7 @@ const PaymentPanel = React.createClass({
         let checked_voucher = () => {
             let voucher_name;
             for (var i = 0; i < this.state.voucher_list.length; i++) {
-                if (this.state.voucher_list[i].selected) {
+                if (this.state.voucher_list[i].checked) {
                     voucher_name = this.state.voucher_list[i].productName;
                     break;
                 }

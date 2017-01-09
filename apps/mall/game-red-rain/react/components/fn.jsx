@@ -49,6 +49,7 @@ function fnShowResult(num) {
                 red_num: num,
                 time: endTime,
                 token: endToken,
+                withCredentials:true
 
             },
             method: 'POST',
