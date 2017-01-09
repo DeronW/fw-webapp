@@ -62,8 +62,9 @@ const PaymentPanel = React.createClass({
             voucher_list: new_voucher_list,
             checked_voucher_count: cc,
             show_voucher_modal: false
-        })
+        });
 
+        var query = $FW.Format.urlQuery();
         let cartFlag = query.cartFlag;
         let prds = query.productBizNo || [];
         let buyNum = query.buyNum || 0;
