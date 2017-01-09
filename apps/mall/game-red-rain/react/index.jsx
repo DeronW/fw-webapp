@@ -13,6 +13,7 @@ $FW.DOMReady(function () {
             nonce:startRandom,
             time:startTime,
             token:startToken,
+            withCredentials:true
         },
         method:'POST',
         success:data=>{
