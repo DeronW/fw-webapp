@@ -111,7 +111,7 @@ const ShoppingCart = React.createClass({
             url: `${API_PATH}mall/api/cart/v1/updateCartNumber.json`,
             data: {
                 buyNum: ps[index].productNumber,
-                productBizNo: ps[index].productBizno
+                productBizNo: ps[index].productBizNo
             },
             success: function (data) {
                 _this.setState({products: ps});
