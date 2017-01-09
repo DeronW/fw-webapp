@@ -184,9 +184,8 @@ const ShoppingCart = React.createClass({
         //}
 
         let checkAllCN = "total-checked-circle";
-
         for(let i = 0; i < products.length;i++) {
-            if(i.cartStatus==5) {
+            if(products[i].cartStatus==5) {
                 checkAllCN = 'total-unchecked-circle';
                 break;
             }
