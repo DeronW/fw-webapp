@@ -102,7 +102,7 @@ module.exports = function (site_name, page_name, configs) {
     }
 
     function compile_less() {
-        return less2css(less_files, `${build_path}stylesheets`, 'all.less.css')
+        return less2css(less_files, `${build_path}stylesheets`, 'all.less.css', CONFIG.debug)
     }
 
     function compile_react() {
