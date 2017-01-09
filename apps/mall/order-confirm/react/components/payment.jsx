@@ -1,7 +1,7 @@
 const PaymentPanel = React.createClass({
     getInitialState: function () {
         let voucher_list = this.props.voucher_list;
-        let cc = $FW.Utils.length(voucher_list, (i) => i.checked);
+        let cc = $FW.Utils.length(voucher_list, (i) => i.selected);
 
         this.used_bean_count = 0;
         return {
