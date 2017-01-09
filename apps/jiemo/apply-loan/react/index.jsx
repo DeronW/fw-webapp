@@ -1,16 +1,25 @@
-
 const ApplyLoan = React.createClass({
+    componentDidMount:function(){
+
+    },
     render : function(){
         return (
            <div>
                <div className="header">现金贷</div>
                 <div className="loan-num">
                      <div className="max-loan-title">最高借款额度（元）</div>
-                     <div className="max-loan-money">100000.00</div>
+                     <div className="max-loan-money">10000.00</div>
                 </div>
                 <div className="loan-info">
                     <div className="slider-area">
-
+                        <div className="scale">
+                            <div className="scale-progress"></div>
+                            <span className="btn"></span>
+                        </div>
+                        <div className="start-point"></div>
+                        <div className="end-point"></div>
+                        <div className="start-point-num">500</div>
+                        <div className="end-point-num">10000</div>
                     </div>
                     <div className="loan-info-items">
                         <div className="credit-lines">
