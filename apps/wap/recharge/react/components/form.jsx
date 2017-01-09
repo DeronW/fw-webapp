@@ -117,7 +117,7 @@ const Form = React.createClass({
     },
     handlerModifyPhone: function() {
         //this.props.callbackPopModifyPhone(true);
-        window.location.href = "static/wap/modification-phone/index.html?phone=" + this.props.phone;
+        window.location.href = location.protocol + "m.9888.cn/static/wap/modification-phone/index.html" + this.props.phone;
     },
     handlerSave: function() {
         $FW.Ajax({
