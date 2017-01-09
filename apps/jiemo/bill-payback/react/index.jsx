@@ -59,7 +59,7 @@ const PayBack = React.createClass({
 const BankCardList = React.createClass({
     render:function(){
         return (
-            <div className="bank-card-list" style={{zIndex:10}}>
+            <div className="bank-card-list">
                 <div className="header">
                     <div className="arrow-left"></div>
                     <div className="title">选择还款卡</div>
