@@ -5,7 +5,7 @@ const ConfirmOrder = React.createClass({
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
-            prds: query.productBizNo ||query.prds|| [],
+            prd: query.productBizNo ||query.prds|| [],
             buyNum: query.buyNum || 0,
             tickets: [],
             msgCode: null,
@@ -61,7 +61,7 @@ const ConfirmOrder = React.createClass({
             })
         }.bind(this);
 
-        if (this.state.isVirtualProduct) {
+        if (!this.state.isVirtualProduct) {
             if (!this.FormData.msgCode) return $FW.Component.Alert('请填写手机验证码');
 
             $FW.Ajax({

@@ -1,9 +1,9 @@
 const OrderMain = React.createClass({
     getInitialState: function () {
         var index = 0;
-		if(location.hash == '#pay'){
-			index = 1
-		}
+        if (location.hash == '#pay') {
+            index = 1
+        }
         else if (location.hash == '#prepare') {
             index = 2
         } else if (location.hash == '#shipping') {
@@ -45,14 +45,14 @@ const OrderList = React.createClass({
     getInitialState: function () {
         var state = {
             all: [],
-			pay: [],
+            pay: [],
             prepare: [],
             shipping: [],
             complete: []
         };
         this.props.orders.forEach(function (i) {
             state.all.push(i);
-            if(i.status) state[i.status].push(i);
+            if (i.status) state[i.status].push(i);
         });
         return state
     },
@@ -71,7 +71,7 @@ const OrderList = React.createClass({
         return (
             <div className="order-area">
                 {this.props.index == 0 ? (this.state.all.length != 0 ? allBlock("all") : blockText) : null}
-				{this.props.index == 1 ? (this.state.pay.length != 0 ? allBlock("pay") : blockText) : null}
+                {this.props.index == 1 ? (this.state.pay.length != 0 ? allBlock("pay") : blockText) : null}
                 {this.props.index == 2 ? (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) : null}
                 {this.props.index == 3 ? (this.state.shipping.length != 0 ? allBlock("shipping") : blockText) : null}
                 {this.props.index == 4 ? (this.state.complete.length != 0 ? allBlock("complete") : blockText) : null}
@@ -81,41 +81,57 @@ const OrderList = React.createClass({
 });
 
 const OrderBlock = React.createClass({
-	clickPay: function (index) {
-        location.href = '/static/mall/user/index.html';
+    clickPay: function (orderTime,orderNo, groupNo) {
+        let FormData = {
+            orderTime: orderTime,
+            orderBizNo: orderNo ,
+            orderGroupBizNo: groupNo
+        };
+
+        $FW.Ajax({
+            data: this.FormData,
+            url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
+            enable_loading: true,
+            success: function (result) {
+                location.href =
+                    '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
+                    '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo +
+                    '&totalShouldPayPrice=' + result.totalShouldPayPrice
+             }
+        });
     },
 
-	clickCancel: function (index) {
-	    confirmPanel.show()
+    clickCancel: function (orderNo, groupNo) {
+        confirmPanel.show(orderNo, groupNo)
     },
 
-	clickCancelNo: function (index) {
-	    confirmPanel.hide()
+    clickCancelNo: function (index) {
+        confirmPanel.hide()
     },
 
     render: function () {
-		let pay_color = {
-            color:"#fd4d4c",
-            float:"right"
+        let pay_color = {
+            color: "#fd4d4c",
+            float: "right"
         };
         let prepare_color = {
-            color:"#fd4d4c",
-            float:"right"
+            color: "#fd4d4c",
+            float: "right"
         };
         let shipping_color = {
-            color:"#4aaef9",
-            float:"right"
+            color: "#4aaef9",
+            float: "right"
         };
         let complete_color = {
-            color:"#999999",
-            float:"right"
+            color: "#999999",
+            float: "right"
         };
 
         let order = this.props.order;
         let status_name;
         let status_color;
         switch (order.status) {
-			case 'pay':
+            case 'pay':
                 status_name = '待付款';
                 status_color = pay_color;
                 break;
@@ -183,8 +199,13 @@ const OrderBlock = React.createClass({
                             {order.price > 0 && order.score ? ' + ' : null}
                             {order.score ? order.score + '工分' : null}
                         </span>
-					</div>
-					{order.status== "pay" ? <div className="pay-order"><div className="btn-pay" onClick={this.clickPay}>立即支付</div><div className="btn-cancel" onClick={this.clickCancel}>取消订单</div></div> : null}
+                    </div>
+                    {order.status == "pay" ? <div className="pay-order">
+                        <div className="btn-pay" onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo)}>立即支付</div>
+                        <div className="btn-cancel"
+                             onClick={this.clickCancel.bind(this,order.bizNo,order.orderGroupBizNo)}>取消订单
+                        </div>
+                    </div> : null}
                 </div>
             </div>
         );
@@ -192,29 +213,49 @@ const OrderBlock = React.createClass({
 });
 
 const ConfAlert = React.createClass({
-	getInitialState: function () {
-        return {showcAlert: false}
+    getInitialState: function () {
+        return {
+            orderNo: "",
+            groupNo: "",
+            showcAlert: false
+        }
     },
-	show: function () {
-        this.setState({showcAlert: true});
+    show: function (orderNo, groupNo) {
+        this.setState({
+            orderNo: orderNo,
+            groupNo: groupNo,
+            showcAlert: true
+        });
     },
-	hide: function () {
+    hide: function () {
         this.setState({showcAlert: false});
     },
-	cancelY: function () {
-       $FW.Ajax({
-        url: `${API_PATH}mall/api/member/v1/order_list.json`,
-        enable_loading: true,
-		success: function (data) {
-
-		}
-		});
+    cancelY: function () {
+        console.log(this.state.orderNo);
+        $FW.Ajax({
+            data: {
+                orderBizNo: this.state.orderNo,
+                orderGroupBizNo: this.state.groupNo
+            },
+            url: `${API_PATH}mall/api/cart/v1/cancelOrder.json`,
+            enable_loading: true,
+            success: function (data) {
+            }
+        });
     },
-	render: function () {
-	   if (!this.state.showcAlert) return null;
-	   return (
-	      <div className="alert-block"><div className="alert-bg"></div><div className="alert-panel"><div className="alert-text">是否取消订单？</div><div className="alert-btn"></div><div onClick={this.cancelY} className="alert-btn-y">是</div><div onClick={this.hide} className="alert-btn-n">否</div></div></div>
-       );
+    render: function () {
+        if (!this.state.showcAlert) return null;
+        return (
+            <div className="alert-block">
+                <div className="alert-bg"></div>
+                <div className="alert-panel">
+                    <div className="alert-text">是否取消订单？</div>
+                    <div className="alert-btn"></div>
+                    <div onClick={this.cancelY} className="alert-btn-y">是</div>
+                    <div onClick={this.hide} className="alert-btn-n">否</div>
+                </div>
+            </div>
+        );
     }
 });
 
@@ -224,7 +265,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}mall/api/member/v1/order_list.json`,
         enable_loading: true
-    }).then(data =>{
+    }).then(data => {
         ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);
         window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
     })
