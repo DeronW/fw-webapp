@@ -7,7 +7,7 @@ function readyCounting(callback) {
     let id = 'ready', ct = G('ready-num'), num = 3;
     let imgReady = ["go.png", "num1.png", "num2.png", "num3.png"];
     G('ready-num').className = 'ready-num';
-    show(id)
+    show(id);
     let readyTime = setInterval(() => {
         if (num > 0) {
             num--;
@@ -60,7 +60,6 @@ function fnShowResult(num) {
                 function successBtn(data) {
                     var mygetprize=data;
                     G('success-btn').onclick = function () {
-                        alert(mygetprize);
                         if (mygetprize == 1) {
                             NativeBridge.toNative('app_scores');
                         } else if (mygetprize == 2||mygetprize==3) {
@@ -78,8 +77,6 @@ function fnShowResult(num) {
 G('fail-btn').onclick = function () {
     NativeBridge.close()
 };
-
-
 G('fail-close').onclick = function () {
     NativeBridge.close()
 };
