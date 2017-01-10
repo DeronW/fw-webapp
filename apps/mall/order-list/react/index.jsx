@@ -90,8 +90,8 @@ const OrderBlock = React.createClass({
 
         $FW.Ajax({
             data: this.FormData,
-            url: `./order_to_account.json`,
-            //url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
+            //url: `./order_to_account.json`,
+            url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
             enable_loading: true,
             success: function (result) {
                 location.href =
@@ -243,8 +243,8 @@ const ConfAlert = React.createClass({
                 orderBizNo: this.state.orderNo,
                 orderGroupBizNo: this.state.groupNo
             },
-            url: `./cancelOrder.json`,
-            //url: `${API_PATH}mall/api/cart/v1/cancelOrder.json`,
+            //url: `./cancelOrder.json`,
+            url: `${API_PATH}mall/api/cart/v1/cancelOrder.json`,
             enable_loading: true,
             success: function (data) {
             }
@@ -270,8 +270,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单列表');
 
     $FW.Ajax({
-        url: `./order_list.json`,
-        //url: `${API_PATH}mall/api/member/v1/order_list.json`,
+        //url: `./order_list.json`,
+        url: `${API_PATH}mall/api/member/v1/order_list.json`,
         enable_loading: true
     }).then(data => {
         ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);
