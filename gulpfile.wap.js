@@ -24,9 +24,10 @@ const APP_NAMES = [
     'about-us', // 关于我们
     'faq', // 帮助中心
 
-    // 新增页面
+    // 用户页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
+    'user-evaluate', // 投资风险承受能力评估
 
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
