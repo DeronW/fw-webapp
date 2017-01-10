@@ -5,7 +5,7 @@ const ConfirmOrder = React.createClass({
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
-            prds: query.productBizNo ||query.prds|| [],
+            prd: query.productBizNo ||query.prds|| [],
             buyNum: query.buyNum || 0,
             tickets: [],
             msgCode: null,
