@@ -71,7 +71,7 @@ const ShoppingCart = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
             data: {
-                productId: ps[index].productId
+                productBizNo: ps[index].productBizNo
             },
             enable_loading: true,
             success: function (data) {
