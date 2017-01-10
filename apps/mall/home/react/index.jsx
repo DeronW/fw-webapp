@@ -38,8 +38,6 @@ const Mall = React.createClass({
         window.addEventListener('scroll', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
-            //if (scrollTop > 100) return false;
-
             let style = scrollTop > 400 ? {
                 background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
