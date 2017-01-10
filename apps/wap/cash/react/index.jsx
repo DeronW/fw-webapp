@@ -315,6 +315,11 @@ const Withdrawals = React.createClass({
 			}			
 		}
 
+		if(this.state.inputVal > (this.props.data.criticalValue * 10000) ) {
+			$FW.Component.Toast("实时提现金额不能超过" + this.props.data.criticalValue + "万");
+			return false;
+		}
+
 		// $FW.Ajax({
 		// 	url: API_PATH + "/mpwap/api/v1/validate.shtml?reflectAmount=" + this.state.inputVal,
 		// 	success: function (data) {				
@@ -376,7 +381,7 @@ const Withdrawals = React.createClass({
 		};
 		
 
-		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&validateCode=" + codeV + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.withdrawToken;
+		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.withdrawToken;
 
 	},
 	handlerVoice: function() {
@@ -420,10 +425,10 @@ const Withdrawals = React.createClass({
 	},
 	callbackOpenBankBtn: function() {
 		//window.history.back();
-		window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+		window.location.href = location.protocol + "//m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
 	},
 	getInfoBtn: function() {
-		window.location.href = "http://m.9888.cn/static/wap/cash-records/index.html";
+		window.location.href = location.protocol + "//m.9888.cn/static/wap/cash-records/index.html";
 	},
 	render : function(){
 		var _this = this;
@@ -476,6 +481,9 @@ const Withdrawals = React.createClass({
 		};
 
 		var immediatelyCashMethodEml = function(b) {
+	
+			var valText = _this.props.data.perDayRealTimeAmountLimit;
+
 			return 	<div className="info-list">
 							<div className="info-select-btn">
 								<span onClick={()=>_this.handlerImmediatelyCashMethod(b)} className={
@@ -489,7 +497,11 @@ const Withdrawals = React.createClass({
 									实时提现
 								</div>
 								<div className="detail-text">
-									单笔金额{'<'}=5万，单日{'<'}=20万，7*24小时实时到账。
+									单笔金额{'<'}={_this.props.data.criticalValue}万，
+									{
+										_this.props.data.perDayRealTimeAmountLimit != undefined 
+										? '单日<='+valText+'万，' : null }
+									7*24小时实时到账。
 								</div>							
 							</div>
 						</div>
@@ -512,7 +524,7 @@ const Withdrawals = React.createClass({
 									大额提现
 								</div>
 								<div className="detail-text">
-									单日金额{'<'}=2000万，工作日9:00~17:00受理，最快30分钟之内到账。
+									单日金额{'<'}={_this.props.data.perDayAmountLimit}万，工作日{_this.props.data.doTime}受理，最快30分钟之内到账。
 								</div>							
 							</div>
 						</div>

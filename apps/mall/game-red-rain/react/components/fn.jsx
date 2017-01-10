@@ -7,7 +7,7 @@ function readyCounting(callback) {
     let id = 'ready', ct = G('ready-num'), num = 3;
     let imgReady = ["go.png", "num1.png", "num2.png", "num3.png"];
     G('ready-num').className = 'ready-num';
-    show(id)
+    show(id);
     let readyTime = setInterval(() => {
         if (num > 0) {
             num--;
@@ -44,48 +44,48 @@ function fnShowResult(num) {
         let endToken = hex_md5(endRandom+'' +num+ '' + endTime);
         $FW.Ajax({
             url: `${location.protocol}//game.9888.cn/index.php?r=redrain/rob`,
+            withCredentials:true,
             data: {
                 nonce: endRandom,
                 red_num: num,
                 time: endTime,
                 token: endToken,
-                withCredentials:true
-
             },
             method: 'POST',
-            success: data => {
+            success: (data) => {
                 G('getNum').innerHTML = num;
                 G('getPrize').innerHTML = data.red_name;
                 G('pop-success').className = '';
                 successBtn(data.red_type);
+                function successBtn(data) {
+                    var mygetprize=data;
+                    G('success-btn').onclick = function () {
+                        if (mygetprize == 1) {
+                            NativeBridge.toNative('app_scores');
+                        } else if (mygetprize == 2||mygetprize==3) {
+                            NativeBridge.toNative('app_coupon');
+                        }
+                    };
+                }
+
             }
         });
     } else {
         G('pop-fail').className = '';
     }
 };
-G('fail-btn').onClick = function () {
+G('fail-btn').onclick = function () {
     NativeBridge.close()
 };
-function successBtn(type) {
-    G('success-btn').onClick = function (type) {
-        if (type == 1) {
-            NativeBridge.toNative('app_scores');
-        } else if (type == 2||type ==3) {
-            NativeBridge.toNative('app_coupon');
-        }
-    };
-}
-
-G('fail-close').onClick = function () {
+G('fail-close').onclick = function () {
     NativeBridge.close()
 };
-G('success-close').onClick = function () {
+G('success-close').onclick = function () {
     NativeBridge.close()
 };
-G('red-cnt-close').onClick = function () {
+G('red-cnt-close').onclick = function () {
     NativeBridge.close()
 };
-G('ready-close').onClick = function () {
+G('ready-close').onclick = function () {
     NativeBridge.close()
 };

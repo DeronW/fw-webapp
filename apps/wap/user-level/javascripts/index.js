@@ -14,13 +14,13 @@ var qryDetail = function (giftBagId, level, bagType) {
 
     var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
     if (app_login_sign != null && app_login_sign != '') {
-        jsPost('http://m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml', {
+        jsPost(location.protocol + '//m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml', {
             'level': level,
             'giftBagId': giftBagId,
             'bagType': bagType
         });
     } else {
-        jsPost('http://m.9888.cn/mpwap/vipTeQuan/qryVipTeQuanDetail.shtml', {
+        jsPost(location.protocol + '//m.9888.cn/mpwap/vipTeQuan/qryVipTeQuanDetail.shtml', {
             'level': level,
             'giftBagId': giftBagId,
             'bagType': bagType
@@ -56,7 +56,7 @@ $(function () {
                 if (inApp()) {
                     NativeBridge.login()
                 } else {
-                    location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=2&redirect_url=' + location.pathname + location.search;
+                    location.href = location.protocol + '//m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=2&redirect_url=' + location.pathname + location.search;
                 }
             }
 

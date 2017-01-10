@@ -148,7 +148,7 @@ const ShoppingCart = React.createClass({
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
                         <span className={product.cartStatus==0 ? "checked-circle" : "unchecked-circle"}></span>
                         <input type="hidden" className="checked-bizNo"
-                               value={product.cartStatus==0 ? product.productBizno : null}/>
+                               value={product.cartStatus==0 ? product.productBizNo : null}/>
                     </div>
                     <div className="product-img"><img src={product.img}/></div>
                     <div className="product-item">
@@ -214,16 +214,11 @@ const ShoppingCart = React.createClass({
                        onClick={this.payHandler}>结算</a>
                 </div> : null}
                 <div className="fixed-nav">
-                    <a className="fixed-nav-link fixed-nav-link1"
-                       onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
-                    <a className="fixed-nav-link fixed-nav-link2"
-                       onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-                    <a className="backToIndex"
-                       onClick={ () => $FW.Browser.inApp() ? NativeBridge.toNative('app_back_native') : location.href = 'http://m.9888.cn'}></a>
-                    <a className="fixed-nav-link fixed-nav-link3 active"
-                       onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                    <a className="fixed-nav-link fixed-nav-link4"
-                       onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
+                    <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
+                    <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = location.protocol + '//m.9888.cn'}></a>
+                    <a className="fixed-nav-link fixed-nav-link3 active" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
                 </div>
             </div>
         )

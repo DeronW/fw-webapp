@@ -90,14 +90,15 @@ const SendCode = React.createClass({
         var query = $FW.Format.urlQuery();
 
         let FormData = {
+            service: 'REQ_BANKCARD_AUTH',
             certificateNo: query.certificateNo,
             accountNo: query.accountNo,
-            bankCardName: query.bankCardName,
-            bankCardType: 1,
-            certificateType: 0,
             accountName: query.accountName,
             mobileNo: query.mobileNo,
             bankId: query.bankId,
+            bankCardType: 1,
+            certificateType: 0,
+            bankCardName: query.bankCardName,
             bankName: query.bankName
         };
 
