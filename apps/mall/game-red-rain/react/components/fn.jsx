@@ -56,8 +56,17 @@ function fnShowResult(num) {
                 G('getNum').innerHTML = num;
                 G('getPrize').innerHTML = data.red_name;
                 G('pop-success').className = '';
-
                 successBtn(data.red_type);
+                function successBtn(data) {
+                    G('success-btn').onClick = function (data) {
+                        console.log(data);
+                        if (data == 1) {
+                            NativeBridge.toNative('app_scores');
+                        } else if (data == 2||data==3) {
+                            NativeBridge.toNative('app_coupon');
+                        }
+                    };
+                }
 
             }
         });
@@ -68,16 +77,7 @@ function fnShowResult(num) {
 G('fail-btn').onClick = function () {
     NativeBridge.close()
 };
-function successBtn(type) {
-    G('success-btn').onClick = function (type) {
-        console.log(type);
-        if (type == 1) {
-            NativeBridge.toNative('app_scores');
-        } else if (type == 2||type ==3) {
-            NativeBridge.toNative('app_coupon');
-        }
-    };
-}
+
 
 G('fail-close').onClick = function () {
     NativeBridge.close()
