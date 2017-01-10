@@ -58,11 +58,12 @@ function fnShowResult(num) {
                 G('pop-success').className = '';
                 successBtn(data.red_type);
                 function successBtn(data) {
-                    G('success-btn').onClick = function (data) {
-                        console.log(data);
-                        if (data == 1) {
+                    var mygetprize=data;
+                    G('success-btn').onClick = function () {
+                        alert(mygetprize);
+                        if (mygetprize == 1) {
                             NativeBridge.toNative('app_scores');
-                        } else if (data == 2||data==3) {
+                        } else if (mygetprize == 2||mygetprize==3) {
                             NativeBridge.toNative('app_coupon');
                         }
                     };
