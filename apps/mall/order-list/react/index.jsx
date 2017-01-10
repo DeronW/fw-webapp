@@ -179,6 +179,10 @@ const OrderBlock = React.createClass({
                 </a>
             );
         };
+        let sendOrderNo = order.sendOrderNo;
+        let sendChannel = order.sendChannel;
+        let sendChannelEnum = order.sendChannelEnum;
+        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
 
         return (
             <div className="order-block">
@@ -200,6 +204,7 @@ const OrderBlock = React.createClass({
                             {order.score ? order.score + '工分' : null}
                         </span>
                     </div>
+                    {check_link}
                     {order.status == "pay" ? <div className="pay-order">
                         <div className="btn-pay" onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo)}>立即支付</div>
                         <div className="btn-cancel"
