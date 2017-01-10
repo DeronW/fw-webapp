@@ -145,7 +145,7 @@ const ShoppingCart = React.createClass({
             let img=product.img.split(";")[0];
             return (
             product.prdStatus==1?
-                <div className="shopping-item" key={index}>
+                <div className="shopping-item" key={index} onclick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }>
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
                         <span className={product.cartStatus==0 ? "checked-circle" : "unchecked-circle"}></span>
                         <input type="hidden" className="checked-bizNo"
