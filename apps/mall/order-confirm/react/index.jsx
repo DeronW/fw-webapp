@@ -190,7 +190,7 @@ $FW.DOMReady(function () {
         url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
         data: {
             cartFlag:cartFlag,
-            prds: prd,
+            prd: prds,
             buyNum:buyNum,
             userTicketList:userTicketList
         },
