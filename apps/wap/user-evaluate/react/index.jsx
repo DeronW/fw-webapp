@@ -3,7 +3,6 @@ const Questions = React.createClass({
         return { score: 0, selected: [] }
     },
     clickHandler: function (seq, option) {
-        console.log(seq, option)
         let s = this.state.selected;
         s[seq] = option;
         this.setState({ selected: s }, this.fnSum);
@@ -12,7 +11,6 @@ const Questions = React.createClass({
         let s = 0, {selected} = this.state;
         for (let i = 0; i < QUESTIONS.length; i++) {
             let q = selected[i];
-            console.log('aaa',q, QUESTIONS[i].options, QUESTIONS[i].options[q])
             if (!isNaN(q)) s += QUESTIONS[i].options[q].score
         }
         this.setState({ score: s });
