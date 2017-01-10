@@ -5,7 +5,7 @@ const ConfirmOrder = React.createClass({
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
-            prds: query.productBizNo ||query.prds|| [],
+            prd: query.productBizNo ||query.prds|| [],
             buyNum: query.buyNum || 0,
             tickets: [],
             msgCode: null,
@@ -61,7 +61,7 @@ const ConfirmOrder = React.createClass({
             })
         }.bind(this);
 
-        if (this.state.isVirtualProduct) {
+        if (!this.state.isVirtualProduct) {
             if (!this.FormData.msgCode) return $FW.Component.Alert('请填写手机验证码');
 
             $FW.Ajax({
@@ -89,7 +89,7 @@ const ConfirmOrder = React.createClass({
                 this.FormData.tickets = [];
                 for (var i = 0; i < options.voucher_list.length; i++) {
                     var e = options.voucher_list[i];
-                    if (e.selected) this.FormData.tickets.push(e.id)
+                    if (e.checked) this.FormData.tickets.push(e.id);
                 }
                 //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
@@ -171,11 +171,13 @@ $FW.DOMReady(function () {
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
     let prds = query.productBizNo || query.prds;
-    let prds1=[];
+    console.log(prds);
+    /*let prds1=[];
     if(prds.indexOf(',')!=(-1)){
         prds.split(",").map((p, index) => prds1.push(p));
         prds = prds1;
     }
+    console.log(prds1);*/
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
@@ -188,7 +190,7 @@ $FW.DOMReady(function () {
         url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
         data: {
             cartFlag:cartFlag,
-            prds: prds,
+            prd: prds,
             buyNum:buyNum,
             userTicketList:userTicketList
         },

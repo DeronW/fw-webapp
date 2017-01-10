@@ -1,4 +1,4 @@
-const Grid_3_6 = React.createClass({
+const Grid_5 = React.createClass({
     getInitialState: function () {
         return {
             ps: this.props.data
@@ -36,7 +36,7 @@ const Grid_3_6 = React.createClass({
         };
         return (
             <div className="theme-2">
-                <a href="" className="activity-theme"><img src="images/education-theme-img.png"/></a>
+                <a href="" className="activity-theme"><img src="images/workshop.jpg"/></a>
                 <div className="theme2-product-wrap">
                     <div className="theme2-top-product-list">
                         {this.state.ps.slice(0, 3).map(theme2_top_product_item)}

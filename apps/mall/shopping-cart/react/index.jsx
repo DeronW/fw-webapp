@@ -71,7 +71,7 @@ const ShoppingCart = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
             data: {
-                productId: ps[index].productId
+                productBizNo: ps[index].productBizNo
             },
             enable_loading: true,
             success: function (data) {
@@ -142,6 +142,7 @@ const ShoppingCart = React.createClass({
         let {products} = this.state;
 
         let product_item = (product, index) => {
+            let img=product.img.split(";")[0];
             return (
             product.prdStatus==1?
                 <div className="shopping-item" key={index}>
@@ -150,7 +151,7 @@ const ShoppingCart = React.createClass({
                         <input type="hidden" className="checked-bizNo"
                                value={product.cartStatus==0 ? product.productBizNo : null}/>
                     </div>
-                    <div className="product-img"><img src={product.img}/></div>
+                    <div className="product-img"><img src={img}/></div>
                     <div className="product-item">
                         <div className="product-info">
                             <div className="product-name">{product.productName}</div>
@@ -214,16 +215,11 @@ const ShoppingCart = React.createClass({
                        onClick={this.payHandler}>结算</a>
                 </div> : null}
                 <div className="fixed-nav">
-                    <a className="fixed-nav-link fixed-nav-link1"
-                       onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
-                    <a className="fixed-nav-link fixed-nav-link2"
-                       onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-                    <a className="backToIndex"
-                       onClick={ () => $FW.Browser.inApp() ? NativeBridge.toNative('app_back_native') : location.href = 'http://m.9888.cn'}></a>
-                    <a className="fixed-nav-link fixed-nav-link3 active"
-                       onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                    <a className="fixed-nav-link fixed-nav-link4"
-                       onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
+                    <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
+                    <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = location.protocol + '//m.9888.cn'}></a>
+                    <a className="fixed-nav-link fixed-nav-link3 active" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link4" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
                 </div>
             </div>
         )

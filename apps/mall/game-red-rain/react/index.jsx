@@ -16,7 +16,7 @@ $FW.DOMReady(function () {
             token:startToken
         },
         method:'POST',
-        success:data=>{
+        success:(data)=>{
             //console.log(startToken);
         }
     });

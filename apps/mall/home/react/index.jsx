@@ -38,8 +38,6 @@ const Mall = React.createClass({
         window.addEventListener('scroll', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
-            //if (scrollTop > 100) return false;
-
             let style = scrollTop > 400 ? {
                 background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
@@ -116,11 +114,16 @@ const Mall = React.createClass({
                 </div>
                 {/*Charge_Nav */}
                 <div id="HotProducts"></div>
-                <div id="NewProducts"></div>
-                <div id="Grid_3_6"></div>
-                <div id="Grid_4_4"></div>
-                <div id="Grid_4_5"></div>
-                <div id="Grid_6_4"></div>
+                {/*<div id="NewProducts"></div>*/}
+                <div id="Grid_1"></div>
+                <div id="Grid_2"></div>
+                <div id="Grid_3"></div>
+                <div id="Grid_4"></div>
+                <div id="Grid_5"></div>
+                <div id="Grid_6"></div>
+                <div id="Grid_7"></div>
+                <div id="Grid_8"></div>
+                <div id="Grid_9"></div>
                 <HotSales/>
             </div>
         )
@@ -139,16 +142,23 @@ $FW.DOMReady(function () {
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=8`)
         .then((data)=> {
             ReactDOM.render(<HotProducts data={data.products}/>, document.getElementById('HotProducts'));
-            ReactDOM.render(<Grid_4_4 data={data.products}/>, document.getElementById('Grid_4_4'))
+            ReactDOM.render(<Grid_2 data={data.products}/>, document.getElementById('Grid_2'));
+            ReactDOM.render(<Grid_6 data={data.products}/>, document.getElementById('Grid_6'))
         });
 
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=9`)
-        .then(data => ReactDOM.render(<Grid_3_6 data={data.products}/>, document.getElementById('Grid_3_6')))
+        .then(data => {
+            ReactDOM.render(<Grid_1 data={data.products}/>, document.getElementById('Grid_1'));
+            ReactDOM.render(<Grid_5 data={data.products}/>, document.getElementById('Grid_5'));
+            ReactDOM.render(<Grid_9 data={data.products}/>, document.getElementById('Grid_9'))
+        })
 
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=10`)
         .then(data => {
-            ReactDOM.render(<Grid_4_5 data={data.products}/>, document.getElementById('Grid_4_5'));
-            ReactDOM.render(<Grid_6_4 data={data.products}/>, document.getElementById('Grid_6_4'))
+            ReactDOM.render(<Grid_3 data={data.products}/>, document.getElementById('Grid_3'));
+            ReactDOM.render(<Grid_4 data={data.products}/>, document.getElementById('Grid_4'));
+            ReactDOM.render(<Grid_7 data={data.products}/>, document.getElementById('Grid_7'));
+            ReactDOM.render(<Grid_8 data={data.products}/>, document.getElementById('Grid_8'))
         })
 
 });

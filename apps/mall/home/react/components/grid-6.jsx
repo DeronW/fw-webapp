@@ -1,4 +1,4 @@
-const Grid_4_4 = React.createClass({
+const Grid_6 = React.createClass({
     getInitialState: function () {
         return {
             ps: this.props.data
