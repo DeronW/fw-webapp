@@ -524,20 +524,18 @@ const Withdrawals = React.createClass({
 									大额提现
 								</div>
 								<div className="detail-text">
-									单日金额{'<'}={_this.props.data.perDayAmountLimit}万，工作日{_this.props.data.doTime}受理，最快30分钟之内到账。
+									工作日{_this.props.data.doTime}受理，最快30分钟之内到账。
 								</div>							
 							</div>
 						</div>
 		}
 
 		var blockEml = function() {
-			if(_this.props.data.bankInfo.isCompanyAgent || _this.props.data.bankInfo.isSpecial) {				
+			if(_this.props.data.bankInfo.isCompanyAgent || _this.props.data.bankInfo.isSpecial || (_this.props.data.bankInfo.bankName == undefined || _this.props.data.bankInfo.bankName == "" ))  {				
 				return blockTradeCashMethodEml(false);
 			} else {
 				return <div>{immediatelyCashMethodEml(true)} { blockTradeCashMethodEml(true)}</div>
-			}
-
-			
+			}			
 		}
 
 		return (
@@ -622,13 +620,26 @@ const Withdrawals = React.createClass({
 				<div>
 					<div className="hsuo">提现说明</div>
 					<div className="danbi">
-						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">充值后无投资提现将由平台收取{this.props.data.fee}%手续费。</span></div>
-						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">{this.props.data.criticalValue} 万及以下提现，7*24小时实时到账；{this.props.data.criticalValue}万元以上提现，工作日{this.props.data.doTime}，最快30分钟内到账，实际到时间以发卡行为准，其它时间或节假日发起的提现，不予受理；中国银行和南京银行，单笔仅支持5万及以下金额提现。
-</span></div>
-						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">单笔提现金额不低于10元。</span></div>
-						{/*<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">{this.props.data.workingDay}个工作日之内到账。</span></div>*/}
-						{/*<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">在双休日和法定节假日期间，也可申请提现。</span></div>*/}
-						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">填写的提现信息不正确导致提现失败，由此产生的提现费用不予退还。</span></div>
+					
+						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
+						<div className="atpr">
+							<img className="card-d" src="images/card-d.png"/>
+							<span className="online">
+								对首次充值后无投资的提现，平台收取{this.props.data.fee}%的手续费；
+							</span>
+						</div>
+						<div className="atpr">
+							<img className="card-d" src="images/card-d.png"/>
+							<span className="online">
+								徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
+							</span>
+						</div>
+						<div className="atpr">
+							<img className="card-d" src="images/card-d.png"/>
+							<span className="online">
+								如遇问题请与客服联系，客服电话：400-0322-988
+							</span>
+						</div>
 					</div>
 				</div>
 
