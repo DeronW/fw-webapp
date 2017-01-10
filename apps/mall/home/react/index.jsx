@@ -144,16 +144,23 @@ $FW.DOMReady(function () {
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=8`)
         .then((data)=> {
             ReactDOM.render(<HotProducts data={data.products}/>, document.getElementById('HotProducts'));
-            ReactDOM.render(<Grid_2 data={data.products}/>, document.getElementById('Grid_2'))
+            ReactDOM.render(<Grid_2 data={data.products}/>, document.getElementById('Grid_2'));
+            ReactDOM.render(<Grid_6 data={data.products}/>, document.getElementById('Grid_6'))
         });
 
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=9`)
-        .then(data => ReactDOM.render(<Grid_1 data={data.products}/>, document.getElementById('Grid_1')))
+        .then(data => {
+            ReactDOM.render(<Grid_1 data={data.products}/>, document.getElementById('Grid_1'));
+            ReactDOM.render(<Grid_5 data={data.products}/>, document.getElementById('Grid_5'));
+            ReactDOM.render(<Grid_9 data={data.products}/>, document.getElementById('Grid_9'))
+        })
 
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=10`)
         .then(data => {
             ReactDOM.render(<Grid_3 data={data.products}/>, document.getElementById('Grid_3'));
-            ReactDOM.render(<Grid_4 data={data.products}/>, document.getElementById('Grid_4'))
+            ReactDOM.render(<Grid_4 data={data.products}/>, document.getElementById('Grid_4'));
+            ReactDOM.render(<Grid_7 data={data.products}/>, document.getElementById('Grid_7'));
+            ReactDOM.render(<Grid_8 data={data.products}/>, document.getElementById('Grid_8'))
         })
 
 });
