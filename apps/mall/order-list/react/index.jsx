@@ -150,10 +150,10 @@ const OrderBlock = React.createClass({
                 break;
         }
 
-        let product_item = function (product, index) {
-
+        let product_item = function (order, index) {
+            let product = order.product;
             return (
-                <a href={'/static/mall/order-detail/index.html?order_id=' + order.orderId} key={index}>
+                <a href={'/static/mall/order-detail/index.html?bizNo=' + order.bizNo+'&cardUuid'+order.cardUuid} key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
@@ -194,7 +194,7 @@ const OrderBlock = React.createClass({
                     </span>
                 </div>
                 <div className="info-block">
-                    { order.products.map((p, index) => product_item(p, index)) }
+                    { order.map((p, index) => product_item(p, index)) }
                     <div className="commodity-total">
                         <span className="commodity-text">共件{order.orderCount}商品</span>
                         <span className="total-text">
