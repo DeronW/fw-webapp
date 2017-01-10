@@ -46,7 +46,7 @@ const Content = React.createClass({
                             <img src="./images/ico-logo.png"/>
                             <a className="d" href="/mpwap/orderuser/toLogin.shtml">登录</a>
                             <div className="v-line"></div>
-                            <a className="z" href="http://m.9888.cn:80/mpwap/orderuser/toRegister.shtml?source=0">注册</a>
+                            <a className="z" href={location.protocol + "//m.9888.cn:80/mpwap/orderuser/toRegister.shtml?source=0"}>注册</a>
                             <div className="v-line"></div>
                             <a className="x" href="/static/wap/app-download/index.html">下载APP</a>
                         </div>
