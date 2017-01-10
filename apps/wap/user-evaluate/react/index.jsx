@@ -30,9 +30,9 @@ const Questions = React.createClass({
             }
 
             return (
-                <div key={index}>
-                    <div>{i.q}</div>
-                    <div>
+                <div key={index} className="question-cnt">
+                    <div className="question">{i.q}</div>
+                    <div className="answer">
                         {i.options.map(option, i.seq, 'x')}
                     </div>
                 </div>
@@ -42,7 +42,7 @@ const Questions = React.createClass({
         let {score} = this.state;
 
         return (
-            <div>
+            <div className="question-box">
                 {QUESTIONS.map(question)}
                 score: {score}
             </div>
