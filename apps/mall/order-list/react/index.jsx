@@ -151,7 +151,7 @@ const OrderBlock = React.createClass({
         }
 
         let product_item = function (order, index) {
-            let product = order.product;
+            let product = order.products;
             return (
                 <a href={'/static/mall/order-detail/index.html?bizNo=' + order.bizNo+'&cardUuid'+order.cardUuid} key={index}>
                     <div className="t-info">
