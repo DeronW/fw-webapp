@@ -50,15 +50,15 @@ function fnShowResult(num) {
                 red_num: num,
                 time: endTime,
                 token: endToken,
-
-
             },
             method: 'POST',
-            success: data => {
+            success: (data) => {
                 G('getNum').innerHTML = num;
                 G('getPrize').innerHTML = data.red_name;
                 G('pop-success').className = '';
+
                 successBtn(data.red_type);
+
             }
         });
     } else {
@@ -70,6 +70,7 @@ G('fail-btn').onClick = function () {
 };
 function successBtn(type) {
     G('success-btn').onClick = function (type) {
+        console.log(type);
         if (type == 1) {
             NativeBridge.toNative('app_scores');
         } else if (type == 2||type ==3) {
