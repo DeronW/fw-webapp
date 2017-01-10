@@ -89,7 +89,7 @@ const ConfirmOrder = React.createClass({
                 this.FormData.tickets = [];
                 for (var i = 0; i < options.voucher_list.length; i++) {
                     var e = options.voucher_list[i];
-                    if (e.selected) this.FormData.tickets.push(e.id)
+                    if (e.checked) this.FormData.tickets.push(e.id);
                 }
                 //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
