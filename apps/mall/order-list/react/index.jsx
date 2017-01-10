@@ -109,7 +109,10 @@ const OrderBlock = React.createClass({
     clickCancelNo: function (index) {
         confirmPanel.hide()
     },
-
+    gotoDetail: function (index) {
+        let order = this.props.order;
+        location.href='/static/mall/order-detail/index.html?bizNo=' + order.bizNo+'&cardUuid'+order.cardUuid
+    },
     render: function () {
         let pay_color = {
             color: "#fd4d4c",
@@ -150,10 +153,10 @@ const OrderBlock = React.createClass({
                 break;
         }
 
-        let product_item = function (order, index) {
-            let product = order.products;
+        let product_item = function (product, index) {
+
             return (
-                <a href={'/static/mall/order-detail/index.html?bizNo=' + order.bizNo+'&cardUuid'+order.cardUuid} key={index}>
+                <a  key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
@@ -186,7 +189,7 @@ const OrderBlock = React.createClass({
         let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
 
         return (
-            <div className="order-block">
+            <div className="order-block" onclick={this.gotoDetail}>
                 <div className="title-block">
                     <span className="time-text">{order.pay_at}</span>
                     <span style={status_color}>
@@ -194,7 +197,7 @@ const OrderBlock = React.createClass({
                     </span>
                 </div>
                 <div className="info-block">
-                    { order.map((p, index) => product_item(p, index)) }
+                    { order.products.map((p, index) => product_item(p, index)) }
                     <div className="commodity-total">
                         <span className="commodity-text">共件{order.orderCount}商品</span>
                         <span className="total-text">
