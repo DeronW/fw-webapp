@@ -187,11 +187,10 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         //url: requestUrl,
-        method: 'post',
         url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
         data: {
             cartFlag:cartFlag,
-            prds: prds,
+            prds: prd,
             buyNum:buyNum,
             userTicketList:userTicketList
         },
