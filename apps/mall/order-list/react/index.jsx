@@ -52,7 +52,7 @@ const OrderList = React.createClass({
         };
         this.props.orders.forEach(function (i) {
             state.all.push(i);
-            state[i.status].push(i);
+            if(i.status) state[i.status].push(i);
         });
         return state
     },
