@@ -65,8 +65,8 @@ const PaymentPanel = React.createClass({
         });
         var query = $FW.Format.urlQuery();
         let cartFlag = query.cartFlag;
-        let prds = query.productBizNo || [];
-        let buyNum = query.buyNum || query.prds||0;
+        let prds = query.productBizNo || query.prds||[];
+        let buyNum = query.buyNum || 0;
         let userTicketList = [];
         for (var i = 0; i < cc; i++) {
             userTicketList.push($FW.Utils.jsonFilter(new_voucher_list, (i) => i.checked)[i].id)
