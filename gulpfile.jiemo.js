@@ -32,7 +32,8 @@ const APP_NAMES = [
     'bill-history-bill',
     'bill-detail',
     'bill-payback',
-    'bank-support'
+    'bank-support',
+	'bank-management'
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
