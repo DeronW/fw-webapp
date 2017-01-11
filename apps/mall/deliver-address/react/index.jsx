@@ -94,7 +94,7 @@ $FW.DOMReady(function () {
 
 function back_handler() {
     if ($FW.Format.urlQuery().preview == 'true' && !$FW.Browser.inApp()) {
-        location.href = '/static/mall/new-user/index.html'
+        location.href = '/static/mall/user/index.html'
     } else {
         history.back();
     }

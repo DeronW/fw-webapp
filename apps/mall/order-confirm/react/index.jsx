@@ -125,10 +125,10 @@ const ConfirmOrder = React.createClass({
                               product_count={this.state.product_count}/>
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}/>
-                <div className="custom-note">
+                {/*<div className="custom-note">
                     <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
                                                            value={this.state.note} onChange={this.changeValueHandler}/>
-                </div>
+                </div>*/}
                 <PaymentPanel product={this.props.product}
                               ordersTicketNum={this.props.data.ordersTicketNum}
                               avaliablePoints={this.props.data.avaliablePoints}
