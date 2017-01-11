@@ -31,7 +31,7 @@ AddressPanel.New = React.createClass({
 
 
 AddressPanel.List = React.createClass({
-    render: function () {
+     render: function () {
         let address = this.props.address;
         let address_list_link = "/static/mall/user-deliver-address/index.html?cartFlag="+this.props.cartFlag+"&prd=" +
             this.props.prd + '&buyNum=' + this.props.buyNum + '&address_id=' + this.props.address.id;

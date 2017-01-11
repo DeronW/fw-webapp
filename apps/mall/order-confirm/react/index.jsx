@@ -124,7 +124,7 @@ const ConfirmOrder = React.createClass({
                     <AddressPanel address={address}
                                   cartFlag={this.FormData.cartFlag}
                                   prd={this.FormData.prd}
-                                  product_count={this.FormData.buyNum}/> : null
+                                  buyNum={this.FormData.buyNum}/> : null
                 }
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}/>

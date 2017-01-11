@@ -51,8 +51,10 @@ const PaymentPanel = React.createClass({
             url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prds + `&buyNum=` + buyNum + `&userTickets=` + userTicketList,
             enable_loading: true
         }).then(data => {
+            alert(data.payablePointAmt);
             document.querySelectorAll('.item-detail')[1].innerHTML = '-' + data.ordersTicketPoints + '工分-' + data.ordersTicketPrice + '金额'
-            document.querySelectorAll('.total-item-detail').innerHTML = '¥' + data.payableRmbAmt + '+' + data.payablePointAmt + '工分';
+            document.querySelectorAll('.total-item-detail').innerHTML = '羊' + data.payableRmbAmt + '+' + data.payablePointAmt + '工分';
+        alert(document.querySelectorAll('.total-item-detail').innerHTML);
         })
     },
     render: function () {
