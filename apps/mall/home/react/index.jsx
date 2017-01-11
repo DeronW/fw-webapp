@@ -35,25 +35,21 @@ const Mall = React.createClass({
         link ? gotoHandler(link) : console.log('no link set');
     },
     componentDidMount: function () {
-        window.addEventListener('touchmove', function () {
+        window.addEventListener('scroll', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
-            //if (scrollTop > 100) return false;
-
-            let style = scrollTop > 60 ? {
+            let style = scrollTop > 400 ? {
                 background: "url(images/header-bg.png)",
                 logoImage: "images/m-logo.png",
-                avatarImage: "images/m-list-icon.png",
-                borderBottom: "1px solid #d8d8d8"
+                avatarImage: "images/m-list-icon.png"
             } : {
                 background: "transparent",
                 logoImage: "images/logo.png",
-                avatarImage: "images/list-icon.png",
-                borderBottom: "none"
+                avatarImage: "images/list-icon.png"
             }
 
             this.setState(style);
-        }.bind(this));
+        }.bind(this),false);
     },
     render: function () {
         let banner;
@@ -69,7 +65,6 @@ const Mall = React.createClass({
 
         var head_nav_wrap = {
             background: this.state.background,
-            borderBottom: this.state.borderBottom,
             width: "100%",
             height: "71px",
             paddingTop: "20px",
@@ -106,24 +101,29 @@ const Mall = React.createClass({
                         src="images/nav-2.png"/><span>豆哥周边</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=工场券")}><img
                         src="images/nav-3.png"/><span>工场券</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/hot-activity/index.html", true)}><img
+                    <a onClick={() => gotoHandler("/static/mall/product-hot-activity/index.html", true)}><img
                         src="images/nav-4.png"/><span>热门活动</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=1", true)}><img
                         src="images/nav-5.png"/><span>充话费</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=2", true)}><img
                         src="images/nav-6.png"/><span>充流量</span><span className="hot-tag"></span></a>
-                    <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true?", true)}><img
+                    <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true", true)}><img
                         src="images/nav-7.png"/><span>游戏中心</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
                         src="images/nav-8.png"/><span>我可兑换</span></a>
                 </div>
                 {/*Charge_Nav */}
-                <div id="NewProducts"></div>
                 <div id="HotProducts"></div>
-                <div id="Grid_3_6"></div>
-                <div id="Grid_4_4"></div>
-                <div id="Grid_4_5"></div>
-                <div id="Grid_6_4"></div>
+                {/*<div id="NewProducts"></div>*/}
+                <div id="Grid_1"></div>
+                <div id="Grid_2"></div>
+                <div id="Grid_3"></div>
+                <div id="Grid_4"></div>
+                <div id="Grid_5"></div>
+                <div id="Grid_6"></div>
+                <div id="Grid_7"></div>
+                <div id="Grid_8"></div>
+                <div id="Grid_9"></div>
                 <HotSales/>
             </div>
         )
@@ -131,7 +131,7 @@ const Mall = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<BottomNavBar/>, document.getElementById('bottom-nav-bar'));
+    ReactDOM.render(<BottomNavBar index={1}/>, document.getElementById('bottom-nav-bar'));
 
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
         .then(data => ReactDOM.render(<Mall banners={data.banners}/>, CONTENT_NODE));
@@ -142,16 +142,23 @@ $FW.DOMReady(function () {
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=8`)
         .then((data)=> {
             ReactDOM.render(<HotProducts data={data.products}/>, document.getElementById('HotProducts'));
-            ReactDOM.render(<Grid_4_4 data={data.products}/>, document.getElementById('Grid_4_4'))
+            ReactDOM.render(<Grid_2 data={data.products}/>, document.getElementById('Grid_2'));
+            ReactDOM.render(<Grid_6 data={data.products}/>, document.getElementById('Grid_6'))
         });
 
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=9`)
-        .then(data => ReactDOM.render(<Grid_3_6 data={data.products}/>, document.getElementById('Grid_3_6')))
+        .then(data => {
+            ReactDOM.render(<Grid_1 data={data.products}/>, document.getElementById('Grid_1'));
+            ReactDOM.render(<Grid_5 data={data.products}/>, document.getElementById('Grid_5'));
+            ReactDOM.render(<Grid_9 data={data.products}/>, document.getElementById('Grid_9'))
+        })
 
     $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=10`)
         .then(data => {
-            ReactDOM.render(<Grid_4_5 data={data.products}/>, document.getElementById('Grid_4_5'));
-            ReactDOM.render(<Grid_6_4 data={data.products}/>, document.getElementById('Grid_6_4'))
+            ReactDOM.render(<Grid_3 data={data.products}/>, document.getElementById('Grid_3'));
+            ReactDOM.render(<Grid_4 data={data.products}/>, document.getElementById('Grid_4'));
+            ReactDOM.render(<Grid_7 data={data.products}/>, document.getElementById('Grid_7'));
+            ReactDOM.render(<Grid_8 data={data.products}/>, document.getElementById('Grid_8'))
         })
 
 });

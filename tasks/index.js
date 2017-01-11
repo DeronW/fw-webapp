@@ -19,7 +19,7 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
         `${lib_path}request-animation-frame-0.0.23.js`,
         `${lib_path}promise-2.0.2.min.js`,
-        `${lib_path}fw-1.5.0.js`,
+        `${lib_path}fw-1.5.1.js`,
         `${lib_path}native-bridge-0.3.0.js`
     ];
 
@@ -102,7 +102,7 @@ module.exports = function (site_name, page_name, configs) {
     }
 
     function compile_less() {
-        return less2css(less_files, `${build_path}stylesheets`, 'all.less.css')
+        return less2css(less_files, `${build_path}stylesheets`, 'all.less.css', CONFIG.debug)
     }
 
     function compile_react() {

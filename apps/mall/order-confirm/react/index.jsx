@@ -5,8 +5,9 @@ const ConfirmOrder = React.createClass({
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
-            prds: query.productBizNo || [],
+            prd: query.productBizNo || query.prds || [],
             buyNum: query.buyNum || 0,
+            tickets: [],
             msgCode: null,
             addressId: this.props.data.addressId,
             tokenStr: '',
@@ -26,7 +27,7 @@ const ConfirmOrder = React.createClass({
             //url: `./getTokenStr.json`
         }).then(data => {
             this.FormData.tokenStr = data.tokenStr;
-         })
+        })
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
@@ -46,13 +47,21 @@ const ConfirmOrder = React.createClass({
                      this.refreshTokenStr()
                      } else {
                      */
-                    location.href = '/static/mall/payment/index.html?payableRmbAmt='+this.props.data.payableRmbAmt+'&merchantNo='+result.m_orderNo
+                    console.log(result);
+                    if (result.status == 1) {
+                        location.href =
+                            '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
+                            '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
+                    }
+                    else {
+                        location.href = '/static/mall/order-complete/index.html'
+                    }
                     /* } */
                 }
             })
         }.bind(this);
 
-        if (this.state.isVirtualProduct) {
+        if (!this.state.isVirtualProduct) {
             if (!this.FormData.msgCode) return $FW.Component.Alert('请填写手机验证码');
 
             $FW.Ajax({
@@ -72,20 +81,18 @@ const ConfirmOrder = React.createClass({
         this.FormData.msgCode = code;
     },
     updatePaymentHandler: function (options) {
+
+
         if (typeof(options.used_bean_count) == 'number')
-            //this.FormData.payBeanPrice = options.used_bean_count;
-        if (typeof(options.voucher_list) == 'object') {
-            this.FormData.tickets = [];
-            for (var i = 0; i < options.voucher_list.length; i++) {
-                var e = options.voucher_list[i];
-                if (e.checked) this.FormData.tickets.push(e.id)
+        //this.FormData.payBeanPrice = options.used_bean_count;
+            if (typeof(options.voucher_list) == 'object') {
+                this.FormData.tickets = [];
+                for (var i = 0; i < options.voucher_list.length; i++) {
+                    var e = options.voucher_list[i];
+                    if (e.checked) this.FormData.tickets.push(e.id);
+                }
+                //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
-           //this.FormData.useTicket = !!this.FormData.tickets.length;
-        }
-    },
-    updateProductCountHandler: function (c) {
-        this.setState({product_count: c});
-        this.FormData.buyNum = c;
     },
     validateBeforeSMSCodeHandler: function () {
         let data = this.props.data;
@@ -113,20 +120,20 @@ const ConfirmOrder = React.createClass({
         }
         return (
             <div className="confirm-order">
-                <AddressPanel address={address}
-                              product_biz_no={this.FormData.productBizNo}
-                              product_count={this.state.product_count}/>
+                {this.props.data.showAddressOK ?
+                    <AddressPanel address={address}
+                                  product_biz_no={this.FormData.productBizNo}
+                                  product_count={this.state.product_count}/> : null
+                }
                 <ProductPanel product={this.props.product}
-                              product_count={this.state.product_count}
-                              update_product_count_handler={this.updateProductCountHandler}/>
-                <div className="custom-note">
-                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
-                                                           value={this.state.note} onChange={this.changeValueHandler}/>
-                </div>
+                              product_count={this.state.product_count}/>
+                {/*<div className="custom-note">
+                 <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
+                 value={this.state.note} onChange={this.changeValueHandler}/>
+                 </div>*/}
                 <PaymentPanel product={this.props.product}
                               ordersTicketNum={this.props.data.ordersTicketNum}
                               avaliablePoints={this.props.data.avaliablePoints}
-                              product_count={this.state.product_count}
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
@@ -138,23 +145,24 @@ const ConfirmOrder = React.createClass({
                     </div>
                     <div className="price-item">
                         <span className="item-name">兑换券</span><span
-                        className="item-detail">-{this.props.data.ordersTicketPrice}工分</span>
+                        className="item-detail">-{this.props.data.ordersTicketPoints}工分-{this.props.data.ordersTicketPrice}金额</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
                         className="item-detail">+￥{this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
-
-                <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
-                         update_sms_code_handler={this.updateSMSCodeHandler}/>
+                {this.props.data.showAddressOK ?
+                    <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
+                             update_sms_code_handler={this.updateSMSCodeHandler}/>
+                    : null}
                 <div className="confirm-order-foot">
-                    <span class="total-item-name">实付:</span>
-                    <span class="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
+                    <span className="total-item-name">实付:</span>
+                    <span
+                        className="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
                     <a onClick={this.makeOrderHandler}
                        className={this.props.data.canBuy ? "btn-red" : "btn-red btn-gray"}>提交订单</a>
                 </div>
-
             </div>
         )
     }
@@ -165,36 +173,30 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
-    let prds = query.productBizNo ||query.prds|| [];
+    let prds = query.productBizNo || query.prds;
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
-    //var requestUrl = query.cartFlag ? (API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=true&productBizNo=null&buyNum=null' ) :
-    //(API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=false&productBizNo=' + query.productBizNo + '&buyNum=' + (query.count || 1));
-
     $FW.Ajax({
-        //url: requestUrl,
-        url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prds=` + prds + `&buyNum=` + buyNum + `&userTicketList=` + userTicketList,
-        //url: `./pre_pay_order.json?cartFlag=`+cartFlag+`&prds=`+prds+`&buyNum=`+buyNum+`&userTicketList=`+userTicketList,
+        url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
+        data: {
+            cartFlag: cartFlag,
+            prd: prds,
+            buyNum: buyNum,
+            userTicketList: userTicketList
+        },
         enable_loading: true
     }).then(data => {
         var user = {
             score: data.avaliablePoints || 0,
             score_server_error: data.avaliablePoints === ''
         };
-        //var product = {
-        //    biz_no: query.productBizNo || null,
-        //    img: data.previewTitleImage,
-        //    title: data.productName,
-        //    price: data.singleRmb,
-        //    score: data.singlePoint,
-        //    tags: data.tags || [],
-        //    count: (parseInt(query.count) || 1) || null
-        //};
         var close_score_func = !data.isOpenJiFenLevel;
         let is_virtual_product = true;
-        data.productDetails.map((p, index) => { if(p.virtual==false) is_virtual_product = false    });
+        data.productDetails.map((p, index) => {
+            if (p.virtual == false) is_virtual_product = false
+        });
         ReactDOM.render(<ConfirmOrder data={data} product={data.productDetails} ticket_list={data.tickets || []}
                                       user={user} address_list={data.addressList}
                                       close_score_func={close_score_func}

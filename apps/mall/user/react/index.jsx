@@ -65,17 +65,17 @@ const User = React.createClass({
                    <a className="product-status-item" href="/static/mall/order-list/index.html#pay">
                        <img src="images/icon1.jpg"/>
                        <span className="status-name">待付款</span>
-                       <span className="remind-circle">2</span>
+                       <span className="remind-circle">{data.voucher_count}</span>
                    </a>
                    <a className="product-status-item" href="/static/mall/order-list/index.html#prepare">
                        <img src="images/icon2.jpg"/>
                        <span className="status-name">待发货</span>
-                       <span className="remind-circle">2</span>
+                       <span className="remind-circle">{data.prepare_count}</span>
                    </a>
                    <a className="product-status-item" href="/static/mall/order-list/index.html#shipping">
                        <img src="images/icon3.jpg"/>
                        <span className="status-name">待收货</span>
-                       <span className="remind-circle">2</span>
+                       <span className="remind-circle">{data.shipping_count}</span>
                    </a>
                    <a className="product-status-item" href="/static/mall/order-list/index.html#complete">
                        <img src="images/icon4.jpg"/>
@@ -88,15 +88,15 @@ const User = React.createClass({
                    <div className="seperate-line"></div>
                </div>
                <div className="user-personal-items">
-                   <a className="personal-item" href="/static/mall/deliver-address/index.html?preview=true">
+                   <a className="personal-item" href="/static/mall/order-deliver-address/index.html?preview=true">
                        <span className="item-name item-icon6">收货地址</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item" href="/static/mall/voucher/index.html">
+                   <a className="personal-item" href="/static/mall/user-voucher/index.html">
                        <span className="item-name item-icon7">兑换券</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item" href="/static/mall/my-bank-card/index.html?id=user">
+                   <a className="personal-item" href="/static/mall/pay-bank-card/index.html?id=user">
                        <span className="item-name item-icon8">银行卡</span>
                        <span className="jump-arrow"></span>
                        <span className="bank-card-status">已绑定</span>
@@ -126,14 +126,14 @@ const User = React.createClass({
                        <HotSale/>
                    </div>
                </div>
-               <div className="fixed-nav">
-                   <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
-                   <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-                   <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
-                   <a className="fixed-nav-link fixed-nav-link3" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-                   <a className="fixed-nav-link fixed-nav-link4 active" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
-               </div>
-           </div>
+                <div className="fixed-nav">
+                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
+                    <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
+                    <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
+                    <a className="fixed-nav-link fixed-nav-link3" onClick={ () => gotoHandler("/static/mall/cart-shopping/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link4 active" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
+                </div>
+            </div>
         )
     }
 });
@@ -185,7 +185,7 @@ const HotSale = React.createClass({
     render: function () {
         let hotProduct = (product,index)=>{
             return(
-                <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=')}>
+                <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo='+product.bizNo)}>
                     <img src={product.img}/>
                     <span className="product-name">{product.title}</span>
                     <span className="product-price">{product.score}工分</span>
@@ -203,6 +203,7 @@ const HotSale = React.createClass({
 
 $FW.DOMReady(function() {
     NativeBridge.setTitle('我的商城');
+    //ReactDOM.render(<BottomNavBar index={4}/>, document.getElementById('bottom-nav-bar'));
     $FW.Ajax({
         url: `${API_PATH}mall/api/member/v1/user.json`,
         enable_loading: true,

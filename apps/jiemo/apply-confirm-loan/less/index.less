@@ -11,6 +11,16 @@ a{
 img{
   vertical-align: middle;
 }
+input{
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-appearance: none;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: none;
+  -webkit-touch-callout:none;
+  background:transparent;
+  outline:none;
+  border:none;
+}
 .transfer-box{
   width:100%;
   height:325px;
@@ -80,11 +90,10 @@ img{
 }
 .loan-right-arrow{
   display:block;
-  width:18px;
-  height:34px;
-  background:url(../images/right-arrow.jpg) no-repeat;
+  font-size:32px;
+  color:#50ad9a;
   position:absolute;
-  top:32px;
+  top:0px;
   right:32px;
 }
 .agreement-issue{
@@ -92,11 +101,20 @@ img{
   width:654px;
   margin:20px auto 0;
 }
-.check-box{
+.unchecked-box{
+   display:block;
+   width:34px;
+   height:34px;
+   border:1px solid #ccc;
+   border-radius:50%;
+   float:left;
+   margin-top:5px;
+ }
+.checked-box{
   display:block;
-  background:url(../images/checked.png) no-repeat;
   width:36px;
   height:36px;
+  background:url(../images/checked.png) no-repeat;
   float:left;
   margin-top:5px;
 }
@@ -121,4 +139,176 @@ img{
   border-radius:8px;
   margin:37px auto 0;
 }
-
+.mask{
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,.7);
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:10;
+}
+.detail-pop{
+  width:654px;
+  height:388px;
+  padding-top:67px;
+  border-radius:20px;
+  background:#fff;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.notice-pop{
+  width:654px;
+  border-radius:20px;
+  background:#fff;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.item-wrap{
+  width:583px;
+  border:1px solid #eee;
+  border-radius:10px;
+  margin:0 auto;
+  overflow:hidden;
+}
+.item-list{
+  width:291px;
+  height:78px;
+  float:left;
+  font-size:27px;
+  color:#999;
+  line-height:78px;
+  text-align:center;
+  border-right:1px solid #eee;
+  border-bottom:1px solid #eee;
+}
+.item-list:nth-child(2), .item-list:nth-child(4), .item-list:nth-child(6){
+  border-right:none;
+}
+.item-list:nth-child(5), .item-list:nth-child(6){
+  border-bottom:none;
+}
+.item-left{
+  display:inline-block;
+  width:162px;
+  text-align:right;
+  margin-right:12px;
+}
+.item-right{
+  color:#50ad9a;
+}
+.know-btn{
+  width:583px;
+  height:84px;
+  line-height:84px;
+  background:#50ad9a;
+  text-align:center;
+  font-size:34px;
+  color:#fff;
+  border-radius:8px;
+  margin:35px auto 0;
+}
+.close-icon{
+  background:url(../images/close.jpg) no-repeat;
+  width:20px;
+  height:20px;
+  position:absolute;
+  top:22px;
+  right:22px;
+}
+.notice-title{
+  font-size:32px;
+  color:#50ad9a;
+  margin-top:30px;
+  margin-bottom:15px;
+  text-align:center;
+}
+.notice-content{
+  font-size:24px;
+  line-height:38px;
+  text-indent:2em;
+  color:#666;
+  width:583px;
+  margin:0 auto;
+}
+.notice-btn{
+  width:583px;
+  height:84px;
+  line-height:84px;
+  background:#50ad9a;
+  text-align:center;
+  font-size:34px;
+  color:#fff;
+  border-radius:8px;
+  margin:15px auto 30px;
+}
+.verify-popup{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.verify-popup-wrap{
+  width:594px;
+  padding:30px;
+  background:#fff;
+  border-radius:10px;
+}
+.verify-popup-title{
+  font-size:32px;
+  color:#50ad9a;
+  text-align:center;
+  margin-bottom:15px;
+}
+.verify-popup-close{
+  background:url(../images/close.jpg)  no-repeat;
+  width:20px;
+  height:20px;
+  background-size:100% 100%;
+  position:absolute;
+  top:20px;
+  right:20px;
+}
+.verify-popup-tip{
+  font-size:24px;
+  line-height:38px;
+  color:#666;
+  text-indent:2em;
+  margin-bottom:20px;
+}
+.verify-input{
+  width:572px;
+  padding-left:20px;
+  height:64px;
+  border:1px solid #ebeaea;
+  border-radius:8px;
+  background:#fafafa;
+}
+.sms-input{
+  width:400px;
+  height:64px;
+  line-height:normal;
+  font-size:26px;
+}
+.btn-countdown{
+  display:inline-block;
+  width:152px;
+  font-size:26px;
+  color:#50ad9a;
+  text-align:center;
+}
+.confirm-btn{
+  width:594px;
+  height:74px;
+  line-height:74px;
+  background:#50ad9a;
+  text-align:center;
+  font-size:32px;
+  color:#fff;
+  border-radius:8px;
+  margin:20px auto 0;
+}

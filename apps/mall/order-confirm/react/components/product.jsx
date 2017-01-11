@@ -2,22 +2,11 @@ const ProductPanel = React.createClass({
     //getInitialState: function () {
     //    return {count: this.props.product_count}
     //},
-    //decreaseHandler: function () {
-    //    let count = this.state.count - 1;
-    //    if (count <= 0) count = 1;
-    //    this.setState({count: count});
-    //    this.props.update_product_count_handler(count);
-    //},
-    //increaseHandler: function () {
-    //    let c = parseInt(this.state.count);
-    //    this.setState({count: c + 1});
-    //    this.props.update_product_count_handler(c + 1);
-    //},
     render: function () {
         let product_item = (p,index) => {
             return (
                 <div className="list" key={index}>
-                    <img src={p.previewTitleImage || 'images/default-product.jpg'} className="list-img"/>
+                    <img src={'images'+p.previewTitleImage || 'images/default-product.jpg'} className="list-img"/>
                     <div className="title">{p.productName}</div>
                     {/*<div className="mark">
                         { p.tags.map((d, index) => <div key={index}>{d}</div>) }

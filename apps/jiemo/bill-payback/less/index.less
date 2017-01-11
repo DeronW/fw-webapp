@@ -11,6 +11,16 @@ a{
 img{
   vertical-align: middle;
 }
+input{
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-appearance: none;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: none;
+  -webkit-touch-callout:none;
+  background:transparent;
+  outline:none;
+  border:none;
+}
 .loan-num{
   height:170px;
   padding-top:30px;
@@ -67,14 +77,6 @@ img{
   margin:20px auto 0;
 }
 .pay-back-input{
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
-  -webkit-appearance: none;
-  -webkit-user-select: none;
-  -webkit-text-size-adjust: none;
-  -webkit-touch-callout:none;
-  background:transparent;
-  outline:none;
-  border:none;
   line-height:99px;
   font-size:32px;
   text-align:right;
@@ -99,70 +101,194 @@ img{
   top:0;
   left:0;
   right:0;
-  z-index:10000000000;
+  z-index:10;
 }
-.popup{
+.verify-popup{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
 }
-.popup-wrap{
-  width:495px;
-  border:1px solid #c0c0c0;
-  border-radius:10px;
+.verify-popup-wrap{
+  width:594px;
+  padding:30px;
   background:#fff;
-  position:relative;
+  border-radius:10px;
 }
-.popup-title{
-  font-size:36px;
+.verify-popup-title{
+  font-size:32px;
   color:#50ad9a;
   text-align:center;
-  padding:32px 0;
+  margin-bottom:15px;
 }
-.popup-close{
-  display:block;
-  background:url(../images/close.jpg) no-repeat;
-  background-size:100% 100%;
+.verify-popup-close{
+  background:url(../images/close.jpg)  no-repeat;
   width:20px;
   height:20px;
+  background-size:100% 100%;
   position:absolute;
-  top: 23px;
-  right:23px;
+  top:20px;
+  right:20px;
 }
-.bankcard-list{
-  padding:0 68px;
+.verify-popup-tip{
+  font-size:24px;
+  line-height:38px;
+  color:#666;
+  text-indent:2em;
+  margin-bottom:20px;
 }
-.bank-name{
-  font-size:27px;
+.verify-input{
+  width:572px;
+  padding-left:20px;
+  height:64px;
+  border:1px solid #ebeaea;
+  border-radius:8px;
+  background:#fafafa;
+}
+.sms-input{
+  width:400px;
+  height:64px;
+  line-height:normal;
+  font-size:26px;
+}
+.btn-countdown{
+  display:inline-block;
+  width:152px;
+  font-size:26px;
+  color:#50ad9a;
+  text-align:center;
+}
+.confirm-btn{
+  width:594px;
+  height:74px;
+  line-height:74px;
+  background:#50ad9a;
+  text-align:center;
+  font-size:32px;
+  color:#fff;
+  border-radius:8px;
+  margin:20px auto 0;
+}
+.payback-box{
+}
+.payback-result-success-img{
+  margin-top:122px;
+}
+.payback-result-fail-img{
+  margin-top:122px;
+  display:none;
+}
+.payback-result-ing-img{
+  margin-top:122px;
+  display:none;
+}
+.payback-result-success-tip{
+  margin-top:20px;
+  height:222px;
+  font-size:32px;
+  line-height:48px;
+  color:#666;
+  text-align:center;
+}
+.payback-result-success-tip span{
+  color:#50ad9a;
+}
+.payback-result-fail-tip{
+  margin-top:20px;
+  height:222px;
+  font-size:32px;
+  line-height:48px;
+  color:#666;
+  text-align:center;
+  display:none;
+}
+.payback-result-ing-tip{
+  margin-top:20px;
+  height:222px;
+  font-size:32px;
+  line-height:48px;
+  color:#666;
+  text-align:center;
+  display:none;
+}
+.credit-btn{
+  width:652px;
+  border:1px solid #50ad9a;
+  height:84px;
+  line-height:84px;
+  text-align:center;
+  font-size:34px;
+  color:#50ad9a;
+  border-radius:8px;
+  margin:20px auto 0;
+}
+.apply-btn{
+  width:654px;
+  height:84px;
+  line-height:84px;
+  background:#50ad9a;
+  text-align:center;
+  font-size:34px;
+  color:#fff;
+  border-radius:8px;
+  margin:20px auto 0;
+}
+.bank-card-list{
+  width:100%;
+  height:100%;
+  background:#f0f0f0;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:10;
+}
+.header{
+  height:100px;
+  line-height:100px;
+  background:#fff;
+  text-align:center;
+  position:relative;
+}
+.title{
+  font-size:36px;
   color:#333;
-  float:left;
-  line-height:36px;
-  margin-left:10px;
 }
-.bankcard{
-  margin-bottom:25px;
-  overflow:hidden;
+.arrow-left{
+  background:url(../images/arrow-left.jpg) no-repeat;
+  width:19px;
+  height:34px;
+  position:absolute;
+  top:34px;
+  left:33px;
+}
+.history-bill{
+  font-size:32px;
+  color:#50ad9a;
+  position:absolute;
+  top:0px;
+  right:33px;
+}
+.bank-branch-list{
+  background:#fff;
+  padding-left:32px;
+  margin-top:24px;
+}
+.list-item{
+  height:99px;
+  border-bottom:1px solid #e7e8ed;
+  font-size:32px;
+  color:#333;
+  line-height:99px;
+  position:relative;
+}
+.list-item img{
+  margin-right:24px;
 }
 .checked{
   background:url(../images/checked.jpg) no-repeat;
-  width:36px;
-  height:36px;
-  float:left;
+  width:40px;
+  height:27px;
+  position:absolute;
+  top:36px;
+  right:32px;
 }
-.add-bank-card{
-  width:495px;
-  height:90px;
-  line-height:90px;
-  background:#fafafa;
-  text-align:center;
-  font-size:27px;
-  color:#999;
-  border-bottom-left-radius:10px;
-  border-bottom-right-radius:10px;
-}
-.add-bank-card img{
-  margin-right:23px;
-  margin-top:-6px;
-}
-

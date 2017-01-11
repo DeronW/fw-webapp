@@ -41,7 +41,6 @@ const BottomNavBar = React.createClass({
                     <a className={this.props.index==1 ? "jiemo_style_footer_item1 active" : "jiemo_style_footer_item1"}  onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
                     <a className={this.props.index==2 ? "jiemo_style_footer_item2 active" : "jiemo_style_footer_item2"} onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
 					<a className={this.props.index==3 ? "jiemo_style_footer_item3 active" : "jiemo_style_footer_item3"} onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
-					<a className={this.props.index==4 ? "jiemo_style_footer_item4 active" : "jiemo_style_footer_item4"} onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
                 </div>
         )
     }
