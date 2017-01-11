@@ -94,11 +94,16 @@ const OrderDetail = React.createClass({
 
 $FW.DOMReady(function() {
     NativeBridge.setTitle('订单详情');
+    let query = $FW.Format.urlQuery();
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(<Header title={"订单详情"} back_handler={backward}/>, document.getElementById('header'));
 
     $FW.Ajax({
         url: `${API_PATH}/mall/api/member/v1/order_detail.json`,
+        data:{
+            bizNo:query.bizNo||"",
+            cardUuid:query.cardUuid||""
+        },
         enable_loading: true
     }).then(data => ReactDOM.render(<OrderDetail data={data}/>, CONTENT_NODE));
 

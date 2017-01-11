@@ -71,7 +71,7 @@ const ShoppingCart = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
             data: {
-                productId: ps[index].productId
+                productBizNo: ps[index].productBizNo
             },
             enable_loading: true,
             success: function (data) {
@@ -142,15 +142,16 @@ const ShoppingCart = React.createClass({
         let {products} = this.state;
 
         let product_item = (product, index) => {
+            let img=product.img.split(";")[0];
             return (
             product.prdStatus==1?
-                <div className="shopping-item" key={index}>
+                <div className="shopping-item" key={index} onclick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }>
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
                         <span className={product.cartStatus==0 ? "checked-circle" : "unchecked-circle"}></span>
                         <input type="hidden" className="checked-bizNo"
                                value={product.cartStatus==0 ? product.productBizNo : null}/>
                     </div>
-                    <div className="product-img"><img src={product.img}/></div>
+                    <div className="product-img"><img src={img}/></div>
                     <div className="product-item">
                         <div className="product-info">
                             <div className="product-name">{product.productName}</div>

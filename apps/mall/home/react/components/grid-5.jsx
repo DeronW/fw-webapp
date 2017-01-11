@@ -36,7 +36,7 @@ const Grid_5 = React.createClass({
         };
         return (
             <div className="theme-2">
-                <a href="" className="activity-theme"><img src="images/workshop.jpg"/></a>
+                <a href="" className="activity-theme"><img src="static/mall/product-list/images/automobile.jpg"/></a>
                 <div className="theme2-product-wrap">
                     <div className="theme2-top-product-list">
                         {this.state.ps.slice(0, 3).map(theme2_top_product_item)}

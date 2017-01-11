@@ -90,6 +90,7 @@ const OrderBlock = React.createClass({
 
         $FW.Ajax({
             data: this.FormData,
+            //url: `./order_to_account.json`,
             url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
             enable_loading: true,
             success: function (result) {
@@ -108,7 +109,10 @@ const OrderBlock = React.createClass({
     clickCancelNo: function (index) {
         confirmPanel.hide()
     },
-
+    gotoDetail: function (index) {
+        let order = this.props.order;
+        location.href='/static/mall/order-detail/index.html?bizNo=' + order.bizNo+'&cardUuid='+order.cardUuid
+    },
     render: function () {
         let pay_color = {
             color: "#fd4d4c",
@@ -152,7 +156,7 @@ const OrderBlock = React.createClass({
         let product_item = function (product, index) {
 
             return (
-                <a href={'/static/mall/order-detail/index.html?order_id=' + order.orderId} key={index}>
+                <a  key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
@@ -185,7 +189,7 @@ const OrderBlock = React.createClass({
         let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
 
         return (
-            <div className="order-block">
+            <div className="order-block" onClick={this.gotoDetail}>
                 <div className="title-block">
                     <span className="time-text">{order.pay_at}</span>
                     <span style={status_color}>
@@ -203,8 +207,8 @@ const OrderBlock = React.createClass({
                             {order.price > 0 && order.score ? ' + ' : null}
                             {order.score ? order.score + '工分' : null}
                         </span>
+                        {check_link}
                     </div>
-                    {check_link}
                     {order.status == "pay" ? <div className="pay-order">
                         <div className="btn-pay" onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo)}>立即支付</div>
                         <div className="btn-cancel"
@@ -242,6 +246,7 @@ const ConfAlert = React.createClass({
                 orderBizNo: this.state.orderNo,
                 orderGroupBizNo: this.state.groupNo
             },
+            //url: `./cancelOrder.json`,
             url: `${API_PATH}mall/api/cart/v1/cancelOrder.json`,
             enable_loading: true,
             success: function (data) {
@@ -268,7 +273,8 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('订单列表');
 
     $FW.Ajax({
-        url: `${API_PATH}mall/api/member/v1/order_list.json`,
+        //url: `./order_list.json`,
+        url: `./order_list.json`,
         enable_loading: true
     }).then(data => {
         ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);

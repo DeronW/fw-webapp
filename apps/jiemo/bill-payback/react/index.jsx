@@ -102,11 +102,13 @@ const PayBackResult = React.createClass({
             <div className="payback-result">
                  <div className="payback-result-success-img"><img src="images/payback-success.png"/></div>
                  <div className="payback-result-fail-img"><img src="images/payback-fail.png"/></div>
+                 <div className="payback-result-ing-img"><img src="images/payback-ing.png"/></div>
                  <div className="payback-result-success-tip">
                      <div className="tip-top">还有2323.23元未还，请记得准时还款!</div>
                      <div className="tip-bottom"> 还款金额：<span>212.21</span>元</div>
                  </div>
                 <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>
+                <div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div>
                 <div className="credit-btn">提升额度</div>
                 <div className="apply-btn">申请用钱</div>
             </div>
