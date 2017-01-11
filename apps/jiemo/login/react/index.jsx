@@ -1,4 +1,36 @@
 const Register = React.createClass({
+	getInitialState() {
+		return {
+			pwdVal: ''
+		}	
+	},
+	changePwd(e) {
+		this.setState({
+			pwdVal: e.target.value
+		});
+	},
+	loadingBtn() {
+		let _this = this;
+
+		$FW.Ajax({
+			url: API_PATH + "/api/userBase/v1/login.json",
+			method: "POST",
+			data: {
+				mobile: location.search.split("=")[1],
+				password: _this.state.pwdVal,
+				sourceType: 3
+			},			
+			success: function (data) {
+				localStorage.userGid = data.userLogin.userGid;
+				localStorage.userId = data.userLogin.userId;
+				localStorage.userToken = data.userLogin.userToken;
+
+			},
+			fail: function(code, mes) {
+
+			}
+		})	
+	},
 	render() {
 		return (
 			<div className="login-cnt">
@@ -12,7 +44,7 @@ const Register = React.createClass({
 				</div>
 
 				<div className="get-name-phone">
-					<span className="phone-text">13112121123</span>欢迎登录现金贷!	
+					<span className="phone-text">{location.search.split("=")[1]}</span>欢迎登录现金贷!	
 				</div>
 				
 				<div className="from-cnt">
@@ -20,7 +52,11 @@ const Register = React.createClass({
 						<div className="icon"></div>
 
 						<div className="input">
-							<input  type="text" placeholder="请输入手机号进行注册登录" />
+							<input 
+								type="text"
+		   						placeholder="请输入登录密码" 
+								onChange={this.changePwd}
+							/>
 						</div>
 							
 						<div className="pwd-icon">
@@ -31,7 +67,7 @@ const Register = React.createClass({
 						
 
 				<div className="register-login-btn">
-					<div className="ui-btn">下一步</div>
+					<div className="ui-btn" onClick={this.loadingBtn}>下一步</div>
 				</div>
 
 				<div className="forget-pwd-link">
