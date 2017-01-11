@@ -5,7 +5,7 @@ const ConfirmOrder = React.createClass({
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
-            prd: query.productBizNo ||query.prds|| [],
+            prd: query.productBizNo || query.prds || [],
             buyNum: query.buyNum || 0,
             tickets: [],
             msgCode: null,
@@ -50,8 +50,8 @@ const ConfirmOrder = React.createClass({
                     console.log(result);
                     if (result.status == 1) {
                         location.href =
-                            '/static/mall/payment/index.html?productName='+ result.productName+'&productInfo='+ result.productInfo+'&merchantNo=' + result.merchantNo+
-                            '&amount='+ result.amount +'&orderTime='+ result.orderTime+'&orderBizNo='+ result.orderBizNo +'&orderGroupBizNo='+ result.orderGroupBizNo
+                            '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
+                            '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
                     }
                     else {
                         location.href = '/static/mall/order-complete/index.html'
@@ -120,15 +120,17 @@ const ConfirmOrder = React.createClass({
         }
         return (
             <div className="confirm-order">
-                <AddressPanel address={address}
-                              product_biz_no={this.FormData.productBizNo}
-                              product_count={this.state.product_count}/>
+                {this.props.data.showAddressOK ?
+                    <AddressPanel address={address}
+                                  product_biz_no={this.FormData.productBizNo}
+                                  product_count={this.state.product_count}/> : null
+                }
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}/>
                 {/*<div className="custom-note">
-                    <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
-                                                           value={this.state.note} onChange={this.changeValueHandler}/>
-                </div>*/}
+                 <span className="note">备注</span><input type="text" value="" placeholder="您可以输入买家留言"
+                 value={this.state.note} onChange={this.changeValueHandler}/>
+                 </div>*/}
                 <PaymentPanel product={this.props.product}
                               ordersTicketNum={this.props.data.ordersTicketNum}
                               avaliablePoints={this.props.data.avaliablePoints}
@@ -150,12 +152,14 @@ const ConfirmOrder = React.createClass({
                         className="item-detail">+￥{this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
-
-                <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
-                         update_sms_code_handler={this.updateSMSCodeHandler}/>
+                {this.props.data.showAddressOK ?
+                    <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
+                             update_sms_code_handler={this.updateSMSCodeHandler}/>
+                    : null}
                 <div className="confirm-order-foot">
                     <span className="total-item-name">实付:</span>
-                    <span className="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
+                    <span
+                        className="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
                     <a onClick={this.makeOrderHandler}
                        className={this.props.data.canBuy ? "btn-red" : "btn-red btn-gray"}>提交订单</a>
                 </div>
@@ -171,13 +175,6 @@ $FW.DOMReady(function () {
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
     let prds = query.productBizNo || query.prds;
-    console.log(prds);
-    /*let prds1=[];
-    if(prds.indexOf(',')!=(-1)){
-        prds.split(",").map((p, index) => prds1.push(p));
-        prds = prds1;
-    }
-    console.log(prds1);*/
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
@@ -189,10 +186,10 @@ $FW.DOMReady(function () {
         //url: requestUrl,
         url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
         data: {
-            cartFlag:cartFlag,
+            cartFlag: cartFlag,
             prd: prds,
-            buyNum:buyNum,
-            userTicketList:userTicketList
+            buyNum: buyNum,
+            userTicketList: userTicketList
         },
         enable_loading: true
     }).then(data => {

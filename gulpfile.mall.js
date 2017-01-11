@@ -46,7 +46,8 @@ const APP_NAMES = [
 
     'not-support',
     'deliver-address',
-
+	'new-deliver-address',
+	
     'user-prize-record',
     // 游戏
     'game-guess',//猜拳
