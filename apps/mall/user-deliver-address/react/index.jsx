@@ -23,7 +23,7 @@ const DeliverAddress = React.createClass({
         let address = function (address, index) {
             let link;
             if (!preview) {
-                link = "/static/mall/order-confirm/index.html?cartFlag=" + cartFlag + "&prd=" + prd + '&buyNum=' + buyNum;
+                link = "/static/mall/order-confirm/index.html?address_id=" + address.address_id +"&cartFlag=" + cartFlag + "&prd=" + prd + '&buyNum=' + buyNum;
             }
             let checked_flag = null;
             if (!preview) {
