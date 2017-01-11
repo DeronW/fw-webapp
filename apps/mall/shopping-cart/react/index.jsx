@@ -145,15 +145,15 @@ const ShoppingCart = React.createClass({
             let img=product.img.split(";")[0];
             return (
             product.prdStatus==1?
-                <div className="shopping-item" key={index} onclick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }>
+                <div className="shopping-item" key={index}>
                     <div className="checked-icon" onClick={()=>this.checkHandler(index)}>
                         <span className={product.cartStatus==0 ? "checked-circle" : "unchecked-circle"}></span>
                         <input type="hidden" className="checked-bizNo"
                                value={product.cartStatus==0 ? product.productBizNo : null}/>
                     </div>
-                    <div className="product-img"><img src={img}/></div>
+                    <div className="product-img" onClick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }><img src={img}/></div>
                     <div className="product-item">
-                        <div className="product-info">
+                        <div className="product-info" onClick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }>
                             <div className="product-name">{product.productName}</div>
                             <div className="product-price">
                                 ¥{product.subTotalPrice}+{product.subTotalCredit}工分
