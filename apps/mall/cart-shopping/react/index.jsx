@@ -204,7 +204,7 @@ const ShoppingCart = React.createClass({
                         <span className={checkAllCN}></span>
                         <span className="chosenTip">全选</span></div> : null}
                         */}
-                    <div className="cart-title">购物车</div>
+                    购物车
                 </div>
                 {this.props.products.length != 0 ? this.state.products.map((product, index) => product_item(product, index)) :
                     <div className="empty-cart-icon"></div>}
