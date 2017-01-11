@@ -1,18 +1,46 @@
 const PayBackWrap = React.createClass({
     getInitialState:function(){
-       return {
-           bankListShow:false,
-           verifyCodeShow:false,
-           resultShow:false
-       }
+        return {
+            paybackShow:true,
+            bankCardListShow:false,
+            verifyCodeShow:false,
+            payBackResultShow:false
+        }
+    },
+    getBankCardListShow:function(booleanVal){
+        this.setState({bankCardListShow:booleanVal});
+    },
+    getVerifyCodeShow:function(booleanVal){
+        this.setState({verifyCodeShow:booleanVal});
+    },
+    getPayBackResultShow:function(booleanVal){
+        this.setState({payBackResultShow:booleanVal});
+    },
+    indexItem:function(booleanVal){
+
+    },
+    getPayBackResultShow:function(val1,val2){
+        this.setState({
+            payBackResultShow:val1,
+            paybackShow:val2,
+            verifyCodeShow:val2
+        });
+    },
+    popHideHandler:function(booleanVal){
+        this.setState({bankCardListShow:booleanVal});
+    },
+    closeHandler:function(booleanVal){
+        this.setState({verifyCodeShow:booleanVal});
+    },
+    componentDidMount:function(){
     },
     render:function(){
         return (
             <div>
-                <PayBack/>
-                <BankCardList/>
-                <VerifyCode/>
-                <PayBackResult/>
+                {this.state.paybackShow?<PayBack callbackBankListShow={this.getBankCardListShow} callbackVerifyCodeShow={this.getVerifyCodeShow}/>:null}
+                {this.state.bankCardListShow?<BankCardList bankList={this.props.data.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem} callbackPopHide={this.popHideHandler}/>:null}
+                {this.state.verifyCodeShow?<VerifyCode callbackResultShow={this.getPayBackResultShow} callbackCloseHanler={this.closeHandler}/>:null}
+                {this.state.payBackResultShow?<PayBackResult />:null}
             </div>
         )
     }
@@ -20,10 +48,10 @@ const PayBackWrap = React.createClass({
 
 const PayBack = React.createClass({
     bankListHandler:function(){
-
+        this.props.callbackBankListShow(true);
     },
     paybackHandler:function(){
-
+        this.props.callbackVerifyCodeShow(true);
     },
     render:function(){
         return (
@@ -55,7 +83,7 @@ const PayBack = React.createClass({
                 <div className="loan-detail-box">
                     <div>
                         <span>还款金额</span>
-                        <span><input className="pay-back-input" type="text" value="1500"/></span>
+                        <span>1500</span>
                     </div>
                 </div>
                 <div className="payback-tips">
@@ -70,18 +98,25 @@ const PayBack = React.createClass({
 });
 
 const BankCardList = React.createClass({
+    backHandler:function(){
+       this.props.callbackPopHide(false);
+    },
+    componentDidMount:function(){
+      console.log(this.props.bankList)
+    },
     render:function(){
+        let list_item = (item,index) => {
+            <div className="list-item" key={index}><img src={item.logoUrl}/>{item.bankShortName}（{item.cardNo.slice(-4)}）</div>
+        };
         return (
             <div className="bank-card-list">
                 <div className="header">
-                    <div className="arrow-left"></div>
+                    <div className="arrow-left" onClick={this.backHandler}></div>
                     <div className="title">选择还款卡</div>
                     <div className="history-bill">添加</div>
                 </div>
                 <div className="bank-branch-list">
-                    <div className="list-item"><img src="images/bank-icon.png"/>交通银行（1915）<span className="checked"></span></div>
-                     <div className="list-item"><img src="images/bank-icon.png"/>交通银行（1915）</div>
-                     <div className="list-item"><img src="images/bank-icon.png"/>交通银行（1915）</div>
+                    {this.props.bankList.map(list_item)}
                 </div>
             </div>
         )
@@ -89,19 +124,25 @@ const BankCardList = React.createClass({
 });
 
 const VerifyCode = React.createClass({
+    confirmBtnHandler:function(){
+        this.props.callbackResultShow(true,false);
+    },
+    closePopHandler:function(){
+        this.props.callbackCloseHanler(false);
+    },
     render:function(){
         return (
-            <div className="mask2" style={{zIndex:10}}>
+            <div className="mask">
                 <div className="verify-popup">
                     <div className="verify-popup-wrap">
-                         <div className="verify-popup-close"></div>
+                         <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                          <div className="verify-popup-title">短信验证</div>
                          <div className="verify-popup-tip"> 已向工商银行（2233）银行预留手机号发送短信验证码。</div>
                          <div className="verify-input">
                              <input className="sms-input" type="text" value="" placeholder="输入验证码"/>
                              <span className="btn-countdown">获取验证码</span>
                          </div>
-                         <div className="confirm-btn">确定</div>
+                         <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
                     </div>
                 </div>
             </div>
@@ -129,8 +170,28 @@ const PayBackResult = React.createClass({
     }
 });
 
-
 $FW.DOMReady(function() {
     ReactDOM.render(<Header title={"还款"}/>, document.getElementById('header'));
-    ReactDOM.render(<PayBackWrap/>, document.getElementById('cnt'));
+    var query = $FW.Format.urlQuery();
+    var deductionGid = query.deductionGid;
+    var loanGid = query.loanGid;
+    var loanType = query.loanType;
+    $FW.Ajax({
+        url: `${API_PATH}api/userBase/v1/login.json`,
+        method: "post",
+        data: {mobile:"13811518528", password:"123456",sourceType:3}
+    }).then((data) => {
+        Promise.all([
+            $FW.Ajax({
+                url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
+                method: "post",
+                data: {token:data.userLogin.userToken, userGid:data.userLogin.userGid,userId:data.userLogin.userId, sourceType:3}
+            }),
+            $FW.Ajax({
+                url: `${API_PATH}api/repayment/v1/loandetail.json`,
+                method: "post",
+                data: {deductionGid:deductionGid,loanGid:loanGid,loanType:loanType,token:data.userLogin.userToken, userGid:data.userLogin.userGid,userId:data.userLogin.userId, sourceType:3}
+            })
+        ]).then(d => ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]}/>, document.getElementById('cnt')), (error) => console.log(error));
+    }, (error) => console.log(error));
 });
