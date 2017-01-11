@@ -1,6 +1,7 @@
+
 const Questions = React.createClass({
     getInitialState: function () {
-        return {score: 0, selected: startArr}
+        return {selected: startArr}
     },
     componentDidMount: function () {
     },
@@ -10,10 +11,10 @@ const Questions = React.createClass({
         this.setState({selected: selected});
     },
     fnSumHandler: function () {
-        let newArr = [];
-        let ajaxcan=true;
+        let newJson = {};
+        let ajaxcan = true;
         this.state.selected.map((value, index) => {
-            if(ajaxcan){
+            if (ajaxcan) {
                 for (let x in value) {
                     switch (value[x]) {
                         case 0:
@@ -32,22 +33,21 @@ const Questions = React.createClass({
                             value[x] = 'e';
                             break;
                         case -1:
-                            ajaxcan=false;
-                            alert("第"+(index+1)+"题没有选择");
+                            ajaxcan = false;
+                           $FW.Component.Toast("您还有未填写试题");
                             break;
                     }
+                    newJson[x]=value[x];
                 }
             }
-            newArr.push(value);
+
         });
-        console.log(newArr);
-        if(ajaxcan){
+        if (ajaxcan) {
             $FW.Ajax({
-                url: API_PATH + 'mall/api/magic/v1/user.json', //传参数
-                data:newArr,
-                method:"post",
+                url: API_PATH + 'mpwap/orderuser/riskGradeInto.shtml', //传参数
+                data: newJson,
                 success: (data) => {
-                    location.href=`../user-evaluate-result/index.html?score=${data.score}&text=${data.text}`;
+                    this.props.setResult(true,data.score,data.gradeLevel);
                 }
             })
         }
@@ -89,11 +89,26 @@ const Questions = React.createClass({
     }
 });
 
-const Result = React.createClass({
+const Answer = React.createClass({
+    getInitialState: function () {
+        return {
+            answer:false,
+            score:0,
+            investType: "稳健型",
+        }
+    },
+    setResult: function (answer, score, investType) {
+        this.setState({
+            answer: answer,
+            score: score,
+            investType: investType,
+        })
+    },
     render: function () {
         return (
             <div>
-                aaa
+                {this.state.answer ? <Result investType={this.state.investType} score={this.state.score}/> :
+                    <Questions setResult={this.setResult}/>}
             </div>
         )
     }
@@ -101,7 +116,6 @@ const Result = React.createClass({
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={'风险承受能力评估'}/>, HEADER_NODE);
-
-    ReactDOM.render(<Questions />, CONTENT_NODE)
+    ReactDOM.render(<Answer/>, CONTENT_NODE);
     // React.render(<Result />, CONTENT_NODE)
 })

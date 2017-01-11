@@ -1,28 +1,16 @@
 const PROJ = 'jiemo';
 
-var INCLUDE_COMPONENTS = [
-    'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
-    'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
-];
-
-let INCLUDE_JAVASCRIPTS = [
-    'use-strict.js',
-    `${PROJ}/fw-ajax-error-handler.js`,
-    `${PROJ}/fw-common.js`
-];
-
-
 const APP_NAMES = [
-	'register-login-entry',
-	'register',
-	'login',
+    'register-login-entry',
+    'register',
+    'login',
     'home',
     'apply-loan',
-	'my',
-	'set-cash-card',
-	'verify-identidy',
-	'verify-phone',
-	'advice-complaints',
+    'my',
+    'set-cash-card',
+    'verify-identidy',
+    'verify-phone',
+    'advice-complaints',
     'apply-want-loan',
     'apply-confirm-loan',
     'apply-service-agreement',
@@ -36,6 +24,17 @@ const APP_NAMES = [
 ];
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
+    let INCLUDE_COMPONENTS = [
+        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
+        'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
+    ];
+
+    let INCLUDE_JAVASCRIPTS = [
+        'use-strict.js',
+        `${PROJ}/fw-ajax-error-handler.js`,
+        `${PROJ}/fw-common.js`
+    ];
+
     APP_NAMES.forEach(i => {
         generate_task(PROJ, i, {
             debug: true,
