@@ -16,9 +16,8 @@ const AddressPanel = React.createClass({
 
 AddressPanel.New = React.createClass({
     render: function () {
-        let new_link = "/static/mall/order-deliver-address/index.html?productBizNo=" +
-            this.props.product_biz_no + "&count=" +
-            this.props.product_count;
+        let new_link = "/static/mall/order-deliver-address/index.html?cartFlag="+this.props.cartFlag+"&prd=" +
+            this.props.prd + "&buyNum=" + this.props.buyNum;
         return (
             <div className="new-adress">
                 <a href={new_link}>收货地址
@@ -33,7 +32,7 @@ AddressPanel.New = React.createClass({
 AddressPanel.List = React.createClass({
     render: function () {
         let address = this.props.address;
-        let address_list_link = "/static/mall/order-deliver-address/index.html?productBizNo=" +
+        let address_list_link = "/static/mall/user-deliver-address/index.html?productBizNo=" +
             this.props.product_biz_no + '&count=' + this.props.product_count + '&address_id=' + this.props.address.id;
 
         return (
