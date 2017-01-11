@@ -274,7 +274,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         //url: `./order_list.json`,
-        url: `./order_list.json`,
+        url: `${API_PATH}mall/api/member/v1/order_list.json`,
         enable_loading: true
     }).then(data => {
         ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);
