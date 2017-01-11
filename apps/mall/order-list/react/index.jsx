@@ -186,7 +186,7 @@ const OrderBlock = React.createClass({
         let sendOrderNo = order.sendOrderNo;
         let sendChannel = order.sendChannel;
         let sendChannelEnum = order.sendChannelEnum;
-        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
+        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
 
         return (
             <div className="order-block" onClick={this.gotoDetail}>
@@ -274,7 +274,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         //url: `./order_list.json`,
-        url: `./order_list.json`,
+        url: `${API_PATH}mall/api/member/v1/order_list.json`,
         enable_loading: true
     }).then(data => {
         ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);

@@ -17,26 +17,26 @@ const APP_NAMES = [
     'home', // 首页
     'activity', // 专题活动页
     'user',
-    'add-bank-card',
-    'my-bank-card',
-    'verify-bank-card',
-    'send-msg-pay',
-    'send-msg-bind',
-    'life-service',
-    'service-bill',
-    'hot-activity',
-    'footprint',
+    'pay-add-card',
+    'pay-bank-card',
+    'pay-verify-bank',
+    'pay-msg-pay',
+    'pay-msg-bind',
+    'test-life-service',
+    'test-service-bill',
+    'product-hot-activity',
+    'test-footprint',
     'user-setting',
     // 订单页面
     'order-list',
     'order-detail',
     'order-confirm',
     'order-complete',
-    'shopping-cart',
+    'cart-shopping',
     'payment',
-    'logistics',
-    'coupon',
-    'voucher',
+    'order-logistics',
+    'order-coupon',
+    'user-voucher',
     // 产品相关页面
     'product-detail',
     'product-list',
@@ -44,9 +44,8 @@ const APP_NAMES = [
     'product-recharge',
     'product-category',
 
-    'not-support',
-    'deliver-address',
-	'new-deliver-address',
+    'order-deliver-address',
+	'order-build-deliver',
 	
     'user-prize-record',
     // 游戏
@@ -57,7 +56,7 @@ const APP_NAMES = [
     'game-zhuanpan20161230',//20161230转盘活动
     // 特殊页面
     {
-        name: 'waiting',
+        name: 'user-waiting',
         describe: '建设中 页面',
         include_components: [`${PROJ}/header.jsx`],
         include_common_js: []

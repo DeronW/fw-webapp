@@ -65,7 +65,7 @@ const PaymentPanel = React.createClass({
         });
         var query = $FW.Format.urlQuery();
         let cartFlag = query.cartFlag;
-        let prds = query.productBizNo || [];
+        let prds = query.productBizNo || query.prds||[];
         let buyNum = query.buyNum || 0;
         let userTicketList = [];
         for (var i = 0; i < cc; i++) {
