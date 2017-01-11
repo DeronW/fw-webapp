@@ -185,7 +185,7 @@ $FW.DOMReady(function () {
             cartFlag: cartFlag,
             prd: prds,
             buyNum: buyNum,
-            userTicketList: userTicketList
+            userTickets: userTicketList
         },
         enable_loading: true
     }).then(data => {
