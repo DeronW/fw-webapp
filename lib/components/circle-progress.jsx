@@ -11,8 +11,6 @@
  * @param {string} progressColor - 进度条进度颜色.
  */
 
-'use strict';
-
 const SVGCircleProgress = React.createClass({
     getDefaultProps: function () {
         return {

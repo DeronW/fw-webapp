@@ -9,8 +9,6 @@
  hide_callback 隐藏之后的回调
  */
 
-'use strict';
-
 const GlobalAlert = React.createClass({
     getInitialState: function () {
         return {show: true}

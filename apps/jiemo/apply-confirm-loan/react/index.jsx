@@ -1,5 +1,38 @@
-
+function gotoHandler(link) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }else {
+        location.href = encodeURI(link);
+    }
+}
 const ConfirmLoan = React.createClass({
+    getInitialState:function(){
+        return {
+            noticeShow:false,
+            smsShow:false,
+            itemShow:false,
+            checked:false
+        }
+    },
+    confirmHandler:function(){
+        if(this.state.checked == false){
+            $FW.Component.Toast("请同意芥末借款服务协议和芥末借款协议");
+        }else{
+            this.setState({smsShow:true});
+        }
+    },
+    checkHandler:function(){
+        this.setState({checked:!this.state.checked});
+    },
+    detailHandler:function(){
+        this.setState({itemShow:true});
+    },
+    itemHideHandler:function(){
+        this.setState({itemShow:false});
+    },
+    smsHideHandler:function(){
+        this.setState({smsShow:false});
+    },
     render:function(){
         return (
             <div>
@@ -24,17 +57,17 @@ const ConfirmLoan = React.createClass({
                     <div className="transfer-tip">请按时还款，避免<a href="">逾期费用</a>。</div>
                     <div className="loan-fee">
                         <span className="loan-fee-num">借款费用230.00元</span>
-                        <span className="loan-right-arrow">详情</span>
+                        <span className="loan-right-arrow" onClick={this.detailHandler}>详情</span>
                     </div>
                     <div className="agreement-issue">
-                        <div className="check-box"></div>
+                        <div className={this.state.checked?"checked-box":"unchecked-box"} onClick={this.checkHandler}></div>
                         <div className="check-item">同意<a href="">《芥末借款服务协议》</a>、<a href="">《芥末借款协议》</a>，未按时还款将计入信用卡银行的信用报告</div>
                     </div>
-                    <div className="confirm-btn">确定</div>
+                    <div className="confirm-btn" onClick={this.confirmHandler}>确定</div>
                 </div>
-                <div className="mask1">
+                <div className={this.state.itemShow?"mask1":"mask1 dis"}>
                     <div className="detail-pop">
-                        <div className="close-icon"></div>
+                        <div className="close-icon" onClick={this.itemHideHandler}></div>
                         <div className="item-wrap">
                             <div className="item-list"><span className="item-left">出借人利息</span><span className="item-right">3.12元</span></div>
                             <div className="item-list"><span className="item-left">快递信审费</span><span className="item-right">3.12元</span></div>
@@ -42,10 +75,10 @@ const ConfirmLoan = React.createClass({
                             <div className="item-list"><span className="item-left">账户管理</span><span className="item-right">3.12元</span></div>
                             <div className="item-list"><span className="item-left">代收通道费</span><span className="item-right">3.12元</span></div>
                         </div>
-                        <div className="know-btn">知道了</div>
+                        <div className="know-btn" onClick={this.itemHideHandler}>知道了</div>
                     </div>
                 </div>
-                <div className="mask2">
+                <div className={this.state.noticeShow?"mask2":"mask2 dis"}>
                     <div className="notice-pop">
                         <div className="notice-close"></div>
                         <div className="notice-title">逾期费用说明</div>
@@ -53,10 +86,10 @@ const ConfirmLoan = React.createClass({
                         <div className="notice-btn">知道了</div>
                     </div>
                 </div>
-                <div className="mask3">
+                <div className={this.state.smsShow?"mask3":"mask3 dis"}>
                     <div className="verify-popup">
                         <div className="verify-popup-wrap">
-                            <div className="verify-popup-close"></div>
+                            <div className="verify-popup-close" onClick={this.smsHideHandler}></div>
                             <div className="verify-popup-title">短信验证</div>
                             <div className="verify-popup-tip"> 已向工商银行（2233）银行预留手机号发送短信验证码。</div>
                             <div className="verify-input">
