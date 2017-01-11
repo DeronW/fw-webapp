@@ -8,9 +8,9 @@ function gotoHandler(link) {
 
 function formatDate(now) {
     var now = new Date();
-    var yy = now.getFullYear();      //年
-    var mm = now.getMonth() + 1;     //月
-    var dd = now.getDate();          //日
+    var yy = now.getFullYear();
+    var mm = now.getMonth() + 1;
+    var dd = now.getDate();
     var clock = yy + "-";
     if(mm < 10) clock += "0";
     clock += mm + "-";
@@ -28,7 +28,7 @@ const Bill = React.createClass({
     render: function () {
         let bill_item = (item, index) => {
             return (
-                <div className="bill-item" key={index} onClick={ () => gotoHandler("/static/jiemo/bill-detail/index.html", true) }>
+                <div className="bill-item" key={index} onClick={ () => gotoHandler("/static/jiemo/bill-detail/index.html") }>
                     <div className="bill-detail">
                         <div className="bill-detail-wrap">
                             <span className="bill-money">{item.loanLeftAmount}</span>
@@ -37,7 +37,7 @@ const Bill = React.createClass({
                         <span className="bill-deadline">{formatDate(item.dueTime)}到期</span>
                     </div>
                     <div className="pay-back-btn-wrap">
-                        {item.status == 0 ? <div className="pay-back-btn-status1">打款中</div> : <div className="pay-back-btn-status2">还款</div>}
+                        {item.status == 0 ? <div className="pay-back-btn-status1">打款中</div> : <div className="pay-back-btn-status2" onClick={ () => gotoHandler(`/static/jiemo/bill-payback/index.html?deductionGid=${item.deductionGid}&loanGid=${item.loanGid}&loanType=${item.loanType}`) }>还款</div>}
                     </div>
                 </div>
             )
@@ -88,7 +88,7 @@ $FW.DOMReady(function () {
         $FW.Ajax({
             url: `${API_PATH}api/oriole/v1/loanloadpage.json`,
             method: "post",
-            data: {token:data.userLogin.userToken, userGid:data.userLogin.userGid,userId:data.userLogin.userId, sourceType:3}
+            data: {token:data.userLogin.userToken, userGid:data.userLogin.userGid,userId:data.userLogin.userId, productId:1, sourceType:3}
         }).then((data) => {
             console.log(data)
             ReactDOM.render(<Bill data={data}/>, document.getElementById('cnt'));
