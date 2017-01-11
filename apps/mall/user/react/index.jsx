@@ -65,17 +65,17 @@ const User = React.createClass({
                    <a className="product-status-item" href="/static/mall/order-list/index.html#pay">
                        <img src="images/icon1.jpg"/>
                        <span className="status-name">待付款</span>
-                       <span className="remind-circle">2</span>
+                       <span className="remind-circle">{data.voucher_count}</span>
                    </a>
                    <a className="product-status-item" href="/static/mall/order-list/index.html#prepare">
                        <img src="images/icon2.jpg"/>
                        <span className="status-name">待发货</span>
-                       <span className="remind-circle">2</span>
+                       <span className="remind-circle">{data.prepare_count}</span>
                    </a>
                    <a className="product-status-item" href="/static/mall/order-list/index.html#shipping">
                        <img src="images/icon3.jpg"/>
                        <span className="status-name">待收货</span>
-                       <span className="remind-circle">2</span>
+                       <span className="remind-circle">{data.shipping_count}</span>
                    </a>
                    <a className="product-status-item" href="/static/mall/order-list/index.html#complete">
                        <img src="images/icon4.jpg"/>
@@ -185,7 +185,7 @@ const HotSale = React.createClass({
     render: function () {
         let hotProduct = (product,index)=>{
             return(
-                <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=')}>
+                <a className="product-wrap" onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo='+product.bizNo)}>
                     <img src={product.img}/>
                     <span className="product-name">{product.title}</span>
                     <span className="product-price">{product.score}工分</span>

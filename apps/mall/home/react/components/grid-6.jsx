@@ -16,7 +16,7 @@ const Grid_6 = React.createClass({
         };
         return (
             <div className="theme-1">
-                <a href="" className="activity-theme"><img src="images/food-theme-img.png"/></a>
+                <a href="" className="activity-theme"><img src="static/mall/product-list/images/outdoor.jpg"/></a>
                 <div className="theme-product-wrap">
                     {this.state.ps.map(theme_product_item)}
                 </div>
