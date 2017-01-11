@@ -5,8 +5,9 @@ const AddressPanel = React.createClass({
     render: function () {
         var data = {
             address: this.props.address,
-            product_biz_no: this.props.product_biz_no,
-            product_count: this.props.product_count
+            cartFlag: this.props.cartFlag,
+            prd: this.props.prd,
+            buyNum:this.props.buyNum
         };
         return this.props.address ?
             <AddressPanel.List {...data} /> :
@@ -32,7 +33,7 @@ AddressPanel.New = React.createClass({
 AddressPanel.List = React.createClass({
     render: function () {
         let address = this.props.address;
-        let address_list_link = "/static/mall/user-deliver-address/index.html?cartFlag="+this.props.cartFlag+"prd=" +
+        let address_list_link = "/static/mall/user-deliver-address/index.html?cartFlag="+this.props.cartFlag+"&prd=" +
             this.props.prd + '&buyNum=' + this.props.buyNum + '&address_id=' + this.props.address.id;
 
         return (

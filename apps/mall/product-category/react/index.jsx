@@ -29,7 +29,7 @@ const SearchPage = React.createClass({
                     </div>
                     <div className="fixed-nav">
                         <a className="fixed-nav-link fixed-nav-link1"
-                           onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
+                           onClick={ () => gotoHandler("https://mmall.9888.cn") }></a>
                         <a className="fixed-nav-link fixed-nav-link2 active"
                            onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
                         <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = location.protocol + '//m.9888.cn'}></a>
