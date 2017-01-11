@@ -71,7 +71,7 @@ const ShoppingCart = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
             data: {
-                productId: ps[index].productId
+                productBizNo: ps[index].productBizNo
             },
             enable_loading: true,
             success: function (data) {
@@ -142,6 +142,7 @@ const ShoppingCart = React.createClass({
         let {products} = this.state;
 
         let product_item = (product, index) => {
+            let img=product.img.split(";")[0];
             return (
             product.prdStatus==1?
                 <div className="shopping-item" key={index}>
@@ -150,9 +151,9 @@ const ShoppingCart = React.createClass({
                         <input type="hidden" className="checked-bizNo"
                                value={product.cartStatus==0 ? product.productBizNo : null}/>
                     </div>
-                    <div className="product-img"><img src={product.img}/></div>
+                    <div className="product-img" onClick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }><img src={img}/></div>
                     <div className="product-item">
-                        <div className="product-info">
+                        <div className="product-info" onClick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }>
                             <div className="product-name">{product.productName}</div>
                             <div className="product-price">
                                 ¥{product.subTotalPrice}+{product.subTotalCredit}工分

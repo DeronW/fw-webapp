@@ -23,14 +23,12 @@ const GlobalToast = React.createClass({
         this.props.unMountToast && this.props.unMountToast();
     },
     render: function () {
-        var w = -(this.state.offset / 2);
-
         let style = {
             position: "fixed",
+            textAlign:"center",
             top: "50%",
             left: "50%",
-            height: "30px",
-            margin: "-80px 0 0 " + w + 'px',
+            transform:"translate(-50%,-50%)",
             padding: "18px 28px",
             color: "#fff",
             fontSize: "28px",
