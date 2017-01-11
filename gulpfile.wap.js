@@ -28,7 +28,6 @@ const APP_NAMES = [
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
     'user-evaluate', // 投资风险承受能力评估
-
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
     'change-bank-card', // 修改绑定银行卡
