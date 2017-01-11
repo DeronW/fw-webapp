@@ -129,13 +129,13 @@ const ShoppingCart = React.createClass({
         this.updateCount(index, ps[index].productNumber + 1);
     },
     payHandler: function () {
-        let prds = [];
+        let prd = [];
         let _checkDom = document.querySelectorAll('.checked-circle');
         _checkDom = Array.prototype.slice.call(_checkDom);
         _checkDom.map((checkDom, index) => {
-            prds.push(getNextElement(checkDom).value);
+            prd.push(getNextElement(checkDom).value);
         });
-        gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&prds=" + prds)
+        gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&prd=" + prd)
 
     },
     render: function () {
