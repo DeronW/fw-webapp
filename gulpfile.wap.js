@@ -1,21 +1,4 @@
-/*
- 主站移动端页面配置
- 包含了主站移动端新增的页面
- */
-
 const PROJ = 'wap';
-
-const COMMON_COMPONENTS = [
-    'use-strict.jsx', 'loading.jsx', 'alert.jsx', `${PROJ}/header.jsx`,
-    'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
-];
-
-const INCLUDE_JAVASCRIPTS = [
-    'use-strict.js',
-    `${PROJ}/fw-ajax-error-handler.js`,
-    `${PROJ}/fw-common.js`
-];
-
 
 let APP_NAMES = [
     /* 测试徽商, 不发布其他页面, 加速发布过程 */
@@ -95,11 +78,7 @@ const NOTICE_PAGES = [
     // 内容展示页面
     'notice-corporate-structure', // 信息披露 公司结构
     'notice-safeguard', // 资金安全保障
-    {
-        name: 'notice-risk-prompt', // 风险揭示
-        include_components: [],
-        include_common_js: []
-    },
+    'notice-risk-prompt', // 风险揭示
 ]
 
 APP_NAMES.push(
@@ -111,6 +90,17 @@ APP_NAMES.push(
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
+    const COMMON_COMPONENTS = [
+        'use-strict.jsx', 'loading.jsx', 'alert.jsx', `${PROJ}/header.jsx`,
+        'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
+    ];
+
+    const INCLUDE_JAVASCRIPTS = [
+        'use-strict.js',
+        `${PROJ}/fw-ajax-error-handler.js`,
+        `${PROJ}/fw-common.js`
+    ];
+
     APP_NAMES.forEach(i => {
         generate_task(PROJ, i, {
             debug: true,

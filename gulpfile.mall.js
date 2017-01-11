@@ -1,18 +1,6 @@
 /* 商城移动端页面 */
 const PROJ = 'mall';
 
-var INCLUDE_COMPONENTS = [
-    'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
-    'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'
-];
-
-let INCLUDE_JAVASCRIPTS = [
-    'use-strict.js',
-    `${PROJ}/fw-ajax-error-handler.js`,
-    `${PROJ}/fw-common.js`
-];
-
-
 let APP_NAMES = [
     'home', // 首页
     // 专题/活动 相关页面
@@ -31,8 +19,7 @@ const USER_PAGES = [
     {
         name: 'user-waiting',
         describe: '建设中 页面',
-        include_components: [`${PROJ}/header.jsx`],
-        include_common_js: []
+        include_components: [`${PROJ}/header.jsx`]
     },
 ]
 
@@ -91,6 +78,18 @@ APP_NAMES.push(
 );
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
+
+    let INCLUDE_COMPONENTS = [
+        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
+        'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'
+    ];
+
+    let INCLUDE_JAVASCRIPTS = [
+        'use-strict.js',
+        `${PROJ}/fw-ajax-error-handler.js`,
+        `${PROJ}/fw-common.js`
+    ];
+
     APP_NAMES.forEach(i => {
         generate_task(PROJ, i, {
             debug: true,
