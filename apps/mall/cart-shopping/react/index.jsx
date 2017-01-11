@@ -56,7 +56,6 @@ const ShoppingCart = React.createClass({
                 _this.setState({products: ps});
                 for(var i=0;i<ps.length;i++){
                     if(ps[i].cartStatus==5){
-                        ps[index]
                         _this.setState({changeAll:false});
                     }else if(ps[i].cartStatus==0){
                         _this.setState({changeAll:true});
@@ -154,7 +153,7 @@ const ShoppingCart = React.createClass({
                     </div>
                     <div className="product-img" onClick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }><img src={img}/></div>
                     <div className="product-item">
-                        <div className="product-info" onClick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }>
+                        <div className="product-info">
                             <div className="product-name">{product.productName}</div>
                             <div className="product-price">
                                 ¥{product.subTotalPrice}+{product.subTotalCredit}工分

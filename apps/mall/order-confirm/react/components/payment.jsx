@@ -48,7 +48,7 @@ const PaymentPanel = React.createClass({
             userTicketList.push($FW.Utils.jsonFilter(new_voucher_list, (i) => i.checked)[i].id)
         };
         $FW.Ajax({
-            url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prds=` + prds + `&buyNum=` + buyNum + `&userTicketList=` + userTicketList,
+            url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prds + `&buyNum=` + buyNum + `&userTicketList=` + userTicketList,
             enable_loading: true
         }).then(data => {
             document.querySelectorAll('.item-detail')[1].innerHTML = '-' + data.ordersTicketPoints + '工分-' + data.ordersTicketPrice + '金额'
