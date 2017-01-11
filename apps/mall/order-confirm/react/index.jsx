@@ -163,7 +163,6 @@ const ConfirmOrder = React.createClass({
                     <a onClick={this.makeOrderHandler}
                        className={this.props.data.canBuy ? "btn-red" : "btn-red btn-gray"}>提交订单</a>
                 </div>
-
             </div>
         )
     }
@@ -179,11 +178,7 @@ $FW.DOMReady(function () {
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
-    //var requestUrl = query.cartFlag ? (API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=true&productBizNo=null&buyNum=null' ) :
-    //(API_PATH + 'mall/api/order/v1/pre_pay_order.json?cartFlag=false&productBizNo=' + query.productBizNo + '&buyNum=' + (query.count || 1));
-
     $FW.Ajax({
-        //url: requestUrl,
         url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
         data: {
             cartFlag: cartFlag,
