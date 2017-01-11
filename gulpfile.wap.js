@@ -17,18 +17,63 @@ const INCLUDE_JAVASCRIPTS = [
 ];
 
 
-const APP_NAMES = [
+let APP_NAMES = [
     /* 测试徽商, 不发布其他页面, 加速发布过程 */
     // 旧页面重构
     'home', // 首页
     'about-us', // 关于我们
     'faq', // 帮助中心
+    'app-download', // app 下载页面
 
+    // test page
+    'test-native-bridge',
+    'test-statistic-chart',
+    //年终总结豆尔摩斯h5宣传页
+    'game-year-end'//2016豆尔摩斯h5宣传页
+];
+
+const USER_PAGES = [
     // 用户页面
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
     'user-evaluate', // 投资风险承受能力评估
 
+    'vip-prerogative', // VIP特权详情页
+    'guide-cookbook', // 用户使用引导页面
+]
+
+const PROTOCOL_PAGES = [
+    // 协议页面
+    'protocol-trusteeship', // 资金托管协议
+    'protocol-counseling', // 咨询服务协议
+    'protocol-special-recharge', // 特殊用户充值协议
+    'protocol-special-cash', // 特殊提现协议
+    'protocol-special-bind', // 特殊绑定银行卡协议
+]
+
+const CIRCLE_PAGES = [
+    //圈子相关页面
+    'circle-tender-complete', //直融标成功
+    'circle-transfer-complete', //债券转让成功
+    'circle-register-complete', //签到成功
+    'circle-team-data', //小队数据
+    'circle-person-data', //个人数据
+    'circle-score-stream', //工分流水
+]
+
+const TOPIC_PAGES = [
+    // 专题页面
+    'topic-hui-shang', // 徽商专题页面
+    'topic-hui-shang-guide', //徽商用户引导页面
+    'topic-score', // 玩转工分
+    'topic-interest-reward', // 年化加息奖励
+    'topic-recommender-recruitment', //推荐人页面
+    'topic-annual-commision', //年化佣金页面
+    'topic-invite', //邀请返利, 邀请人,
+    'topic-gong-you-hui', //工友会专题页面
+]
+
+const HUISHANG_PAGES = [
     // 徽商相关页面
     'bind-bank-card', // 绑定银行卡
     'change-bank-card', // 修改绑定银行卡
@@ -44,35 +89,9 @@ const APP_NAMES = [
     'cash', // 用户提现
     'cash-records', // 用户提现记录
     'modification-phone', // 修改银行预留手机号
+]
 
-    // 协议页面
-    'protocol-trusteeship', // 资金托管协议
-    'protocol-counseling', // 咨询服务协议
-    'protocol-special-recharge', // 特殊用户充值协议
-    'protocol-special-cash', // 特殊提现协议
-    'protocol-special-bind', // 特殊绑定银行卡协议
-
-    // 专题页面
-    'topic-hui-shang', // 徽商专题页面
-    'topic-hui-shang-guide', //徽商用户引导页面
-    'topic-score', // 玩转工分
-    'topic-interest-reward', // 年化加息奖励
-    'topic-recommender-recruitment', //推荐人页面
-    'topic-annual-commision', //年化佣金页面
-    'topic-invite', //邀请返利, 邀请人,
-    'vip-prerogative', // VIP特权详情页
-    'guide-cookbook', // 用户使用引导页面
-    'app-download', // app 下载页面
-    'topic-gong-you-hui', //工友会专题页面
-
-    //圈子相关页面
-    'circle-tender-complete', //直融标成功
-    'circle-transfer-complete', //债券转让成功
-    'circle-register-complete', //签到成功
-    'circle-team-data', //小队数据
-    'circle-person-data', //个人数据
-    'circle-score-stream', //工分流水
-
+const NOTICE_PAGES = [
     // 内容展示页面
     'notice-corporate-structure', // 信息披露 公司结构
     'notice-safeguard', // 资金安全保障
@@ -81,12 +100,15 @@ const APP_NAMES = [
         include_components: [],
         include_common_js: []
     },
-    // test page
-    'test-native-bridge',
-    'test-statistic-chart',
-    //年终总结豆尔摩斯h5宣传页
-    'game-year-end'//2016豆尔摩斯h5宣传页
-];
+]
+
+APP_NAMES.push(
+    ...USER_PAGES,
+    ...PROTOCOL_PAGES,
+    ...TOPIC_PAGES,
+    ...HUISHANG_PAGES,
+    ...NOTICE_PAGES
+)
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     APP_NAMES.forEach(i => {

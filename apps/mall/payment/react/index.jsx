@@ -23,7 +23,7 @@ const Payment = React.createClass({
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
             let link = location.protocol + '//' + location.hostname +
-                '/static/mall/add-bank-card/index.html?bizNo=' + bizNo;
+                '/static/mall/pay-add-card/index.html?bizNo=' + bizNo;
             location.href = link;
         }
         else {
@@ -49,7 +49,7 @@ const Payment = React.createClass({
                     $FW.Component.Alert('成功');
                     setTimeout(function () {
                         location.href = location.protocol + '//' + location.hostname +
-                            "/static/mall/send-msg-pay/index.html?merchantNo=" + result.merchantNo + "&mobileNo=" + FormData.mobileNo
+                            "/static/mall/pay-msg-pay/index.html?merchantNo=" + result.merchantNo + "&mobileNo=" + FormData.mobileNo
                     }, 2500);
                 }
             })

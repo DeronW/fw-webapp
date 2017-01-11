@@ -13,55 +13,82 @@ let INCLUDE_JAVASCRIPTS = [
 ];
 
 
-const APP_NAMES = [
+let APP_NAMES = [
     'home', // 首页
+    // 专题/活动 相关页面
     'activity', // 专题活动页
+    // 购物车相关页面
+    'cart-shopping',
+];
+
+const USER_PAGES = [
     'user',
-    'add-bank-card',
-    'my-bank-card',
-    'verify-bank-card',
-    'send-msg-pay',
-    'send-msg-bind',
-    'life-service',
-    'service-bill',
-    'hot-activity',
-    'footprint',
     'user-setting',
-    // 订单页面
-    'order-list',
-    'order-detail',
-    'order-confirm',
-    'order-complete',
-    'shopping-cart',
-    'payment',
-    'logistics',
-    'coupon',
-    'voucher',
+    'user-prize-record',
+    'user-voucher',
+    'user-deliver-address',
+    'user-build-deliver',
+    {
+        name: 'user-waiting',
+        describe: '建设中 页面',
+        include_components: [`${PROJ}/header.jsx`],
+        include_common_js: []
+    },
+]
+
+const PRODUCT_PAGES = [
     // 产品相关页面
     'product-detail',
     'product-list',
     'product-vip-zone',
     'product-recharge',
     'product-category',
+    'product-hot-activity',
+]
 
-    'not-support',
-    'deliver-address',
+const ORDER_PAGES = [
+    // 订单页面
+    'order-list',
+    'order-detail',
+    'order-confirm',
+    'order-complete',
+    'order-logistics',
+    'order-coupon',
+]
 
-    'user-prize-record',
-    // 游戏
-    'game-guess',//猜拳
-    'game',//游戏中心
-    //'zhuanpan20161215',//转盘20161215
-    'game-red-rain',//2017过年红包雨
-    'game-zhuanpan20161230',//20161230转盘活动
-    // 特殊页面
-    {
-        name: 'waiting',
-        describe: '建设中 页面',
-        include_components: [`${PROJ}/header.jsx`],
-        include_common_js: []
-    }
-];
+const PAYMENT_PAGES = [
+    // 支付相关页面
+    'payment',
+    'pay-add-card',
+    'pay-bank-card',
+    'pay-verify-bank',
+    'pay-msg-pay',
+    'pay-msg-bind',
+
+]
+
+const GAME_PAGES = [
+    'game', //游戏中心
+    'game-guess', //猜拳
+    'game-red-rain', //2017过年红包雨
+    'game-zhuanpan20161230', //20161230转盘活动
+]
+
+const DEVELOPING_PAGES = [
+    // 开发中页面, 下一个测试版本
+    'service-livelihood',
+    'service-bill',
+    'user-footprint',
+]
+
+APP_NAMES.push(
+    ...USER_PAGES,
+    ...PRODUCT_PAGES,
+    ...ORDER_PAGES,
+    ...PAYMENT_PAGES,
+    ...GAME_PAGES,
+    ...DEVELOPING_PAGES
+);
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     APP_NAMES.forEach(i => {

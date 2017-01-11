@@ -18,7 +18,7 @@ const Product = React.createClass({
     },
 
 	shopHandler: function (e) {
-		location.href = location.protocol + '//' + location.hostname + '/static/mall/shopping-cart/index.html'
+		location.href = location.protocol + '//' + location.hostname + '/static/mall/cart-shopping/index.html'
 	},
 
 	componentDidMount: function () {

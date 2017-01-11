@@ -88,15 +88,15 @@ const User = React.createClass({
                    <div className="seperate-line"></div>
                </div>
                <div className="user-personal-items">
-                   <a className="personal-item" href="/static/mall/deliver-address/index.html?preview=true">
+                   <a className="personal-item" href="/static/mall/order-deliver-address/index.html?preview=true">
                        <span className="item-name item-icon6">收货地址</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item" href="/static/mall/voucher/index.html">
+                   <a className="personal-item" href="/static/mall/user-voucher/index.html">
                        <span className="item-name item-icon7">兑换券</span>
                        <span className="jump-arrow"></span>
                    </a>
-                   <a className="personal-item" href="/static/mall/my-bank-card/index.html?id=user">
+                   <a className="personal-item" href="/static/mall/pay-bank-card/index.html?id=user">
                        <span className="item-name item-icon8">银行卡</span>
                        <span className="jump-arrow"></span>
                        <span className="bank-card-status">已绑定</span>
@@ -130,7 +130,7 @@ const User = React.createClass({
                     <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
                     <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
                     <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
-                    <a className="fixed-nav-link fixed-nav-link3" onClick={ () => gotoHandler("/static/mall/shopping-cart/index.html", true) }></a>
+                    <a className="fixed-nav-link fixed-nav-link3" onClick={ () => gotoHandler("/static/mall/cart-shopping/index.html", true) }></a>
                     <a className="fixed-nav-link fixed-nav-link4 active" onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
                 </div>
             </div>

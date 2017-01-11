@@ -1,6 +1,8 @@
+let startArr=[];
 const QUESTIONS = [{
-    q: '您的年龄是？',
-    seq: 1,
+    q: 'Q1：您的年龄是？',
+    seq: 0,
+    name:"age",
     options: [{
         a: '18-30岁',
         score: 2
@@ -18,8 +20,9 @@ const QUESTIONS = [{
         score: 0
     }]
 }, {
-    q: '您的家庭年收入为（折合人民币）？',
-    seq: 2,
+    q: 'Q2：您的家庭年收入为（折合人民币）？',
+    seq: 1,
+    name:"income",
     options: [{
         a: '5万元以下',
         score: 0
@@ -37,8 +40,9 @@ const QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: '一般情况下，在您每年的家庭收入中，可用于金融投资（储蓄存款的比例为）？',
-    seq: 3,
+    q: 'Q3：一般情况下，在您每年的家庭收入中，可用于金融投资（储蓄存款的比例为）？',
+    seq: 2,
+    name:"can",
     options: [{
         a: '小于10%',
         score: 0
@@ -56,8 +60,9 @@ const QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: '以下哪项最能说明您的投资经验？',
-    seq: 4,
+    q: 'Q4：以下哪项最能说明您的投资经验？',
+    seq: 3,
+    name:"experience",
     options: [{
         a: '除存款、国债外，我几乎不投资其他金融产品',
         score: 0
@@ -72,8 +77,9 @@ const QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: '您有多少年投资股票、基金、外汇、金融衍生产品等风险投资品的经验？',
-    seq: 5,
+    q: 'Q5：您有多少年投资股票、基金、外汇、金融衍生产品等风险投资品的经验？',
+    seq: 4,
+    name:"experiencePeriod",
     options: [{
         a: '没有经验',
         score: 0
@@ -91,8 +97,9 @@ const QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: '以下哪项描述最符合您的投资态度？',
-    seq: 6,
+    q: 'Q6：以下哪项描述最符合您的投资态度？',
+    seq: 5,
+    name:"attitude",
     options: [{
         a: '厌恶风险，不希望本金损失，希望获得稳定回报',
         score: 0
@@ -107,8 +114,9 @@ const QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: '您计划的投资期限是多久？',
-    seq: 7,
+    q: 'Q7：您计划的投资期限是多久？',
+    seq: 6,
+    name:"investPeriod",
     options: [{
         a: '1年以下，我可能会随时动用投资基金，对其流动性要求比较高',
         score: 4
@@ -123,8 +131,9 @@ const QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: '您的投资目的与期望值是？',
-    seq: 8,
+    q: 'Q8：您的投资目的与期望值是？',
+    seq: 7,
+    name:"hope",
     options: [{
         a: '资产保值，与银行同期存款利率大体相同',
         score: 2
@@ -136,8 +145,9 @@ const QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: '您对期限为半年的产品，投资风险适应度是？',
-    seq: 9,
+    q: 'Q9：您对期限为半年的产品，投资风险适应度是？',
+    seq: 8,
+    name:"riskAjust",
     options: [{
         a: '本金无损失，收益达到定期存款收益',
         score: 0
@@ -155,8 +165,9 @@ const QUESTIONS = [{
         score: 15
     }]
 }, {
-    q: '您投资产品的期限超过一年后，出现何种程度的波动，您会呈现明显的焦虑？',
-    seq: 10,
+    q: 'Q10：您投资产品的期限超过一年后，出现何种程度的波动，您会呈现明显的焦虑？',
+    seq: 9,
+    name:"anxious",
     options: [{
         a: '本金无损失，但收益未达预期',
         score: 0
@@ -174,3 +185,10 @@ const QUESTIONS = [{
         score: 15
     }]
 }];
+if(startArr.length==0){
+    QUESTIONS.map((value,index)=>{
+        let json={};
+        json[value.name]=-1;
+        startArr.push(json);
+    });
+}
