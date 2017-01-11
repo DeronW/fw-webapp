@@ -22,35 +22,11 @@ const PaymentPanel = React.createClass({
     },
     updateFormDataHandler: function () {
         this.props.update_payment_handler({
-            use_bean: this.state.use_bean,
-            used_bean_count: this.state.use_bean ? this.used_bean_count : 0,
-            voucher_list: this.state.voucher_list,
-            total_price: this.computeTotalPrice()
+            voucher_list: this.state.voucher_list
         });
-    },
-    computeTotalPrice: function () {
-
-        let total_price = (this.props.product_count - this.state.checked_voucher_count) *
-            this.props.product.price;
-
-        if (this.state.use_bean && total_price > 0) {
-            if (this.props.user.bean > (total_price * 100)) {
-                this.used_bean_count = parseInt(total_price * 100);
-                total_price = 0;
-            } else {
-                // notice: 可能出现浮点数精度问题, 比如 100 - 99.9 = 0.09999999999999432
-                total_price = (total_price * 100 - this.props.user.bean) / 100;
-                this.used_bean_count = this.props.user.bean;
-            }
-        }
-
-        return total_price;
     },
     toggleVoucherModal: function () {
         this.setState({show_voucher_modal: !this.state.show_voucher_modal})
-    },
-    toggleBeanHandler: function () {
-        this.setState({use_bean: !this.state.use_bean});
     },
     cancelVoucherModalHandler: function () {
         this.setState({show_voucher_modal: false})

@@ -24,13 +24,14 @@ const ShoppingCart = React.createClass({
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
         var appCartHeader=(inIOS && inApp)?"app-cart-header":"cart-header";
-
+        var shoppingCart=(inIOS && inApp)?"app-shopping-cart":"shopping-cart";
         var ps = this.props.products;
         ps.map(i=>i.checked=true);
         return {
             products: ps,
             changeAll:true,
-            appCartHeader:appCartHeader
+            appCartHeader:appCartHeader,
+            shoppingCart:shoppingCart
         }
     },
     componentDidMount: function () {
@@ -198,7 +199,7 @@ const ShoppingCart = React.createClass({
         //    'total-unchecked-circle';
 
         return (
-            <div className="shopping-cart">
+            <div className={this.state.shoppingCart}>
                 <div className={this.state.appCartHeader}>
                     {/*{this.props.products.length != 0 ? <div className="all-chosen" onClick={this.allChoseHandler}>
                         <span className={checkAllCN}></span>
