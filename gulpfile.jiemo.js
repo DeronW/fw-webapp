@@ -6,16 +6,18 @@ let APP_NAMES = [
 
 // 用户模块
 const USER_PAGES = [
-    'register-login-entry',
-    'register',
-    'login',
-    'my',
-    'advice-complaints',
-    'set-cash-card',
-    'verify-identidy',
-    'verify-phone',
-    'bank-support',
-	'bank-management'
+    'user-register-login-entry', //注册登录入口
+    'user-register',//注册入口
+    'user-login', //登录入口
+    'user-apply-loan', //
+    'user-my', //我
+    'user-set-cash-card',//设置提现卡
+    'user-verify-identidy',//
+    'user-verify-phone',
+	'user-aboutus', //关于我们
+	'user-FAQ',//常见问题
+    'user-bank-support',//支持银行卡
+	'user-bank-management'//银行卡管理
 ]
 
 // 账单模块

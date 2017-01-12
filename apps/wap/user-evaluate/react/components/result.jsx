@@ -1,8 +1,5 @@
 
 const Result = React.createClass({
-    quitHandler:function(){
-        window.history.back();
-    },
     render: function () {
         return (
             <div className="question-result">
@@ -47,7 +44,7 @@ const Result = React.createClass({
                     </div>
                 </div>
                 <div className="foot-btn-box">
-                    <div className="foot-btn" onClick={this.quitHandler}>退出</div>
+                    <div className="foot-btn" onClick={()=>{back_handler()}}>退出</div>
                 </div>
             </div>
         )
