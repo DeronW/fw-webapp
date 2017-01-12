@@ -10,9 +10,7 @@ let APP_NAMES = [
 
     // test page
     'test-native-bridge',
-    'test-statistic-chart',
-    //年终总结豆尔摩斯h5宣传页
-    'game-year-end'//2016豆尔摩斯h5宣传页
+    'test-statistic-chart'
 ];
 
 const USER_PAGES = [
@@ -81,12 +79,18 @@ const NOTICE_PAGES = [
     'notice-risk-prompt', // 风险揭示
 ]
 
+const DEVELOPING_PAGES = [
+    //年终总结豆尔摩斯h5宣传页
+    'game-year-end'//2016豆尔摩斯h5宣传页
+]
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...PROTOCOL_PAGES,
     ...TOPIC_PAGES,
     ...HUISHANG_PAGES,
-    ...NOTICE_PAGES
+    ...NOTICE_PAGES,
+    ...DEVELOPING_PAGES
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
