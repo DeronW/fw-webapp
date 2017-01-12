@@ -1,28 +1,46 @@
 const PROJ = 'jiemo';
 
-const APP_NAMES = [
+let APP_NAMES = [
+    'home', // 首页
+    'advice-complaints',
+    'bank-support',
+	'bank-management'
+];
+
+// 用户模块
+const USER_PAGES = [
     'register-login-entry',
     'register',
     'login',
-    'home',
     'apply-loan',
     'my',
     'set-cash-card',
     'verify-identidy',
     'verify-phone',
-    'advice-complaints',
+]
+
+// 账单模块
+const BILL_PAGES = [
+    'bill',
+    'bill-history-bill',
+    'bill-detail',
+    'bill-payback',
+]
+
+// 申请借款模块
+const APPLY_PAGES = [
     'apply-want-loan',
     'apply-confirm-loan',
     'apply-service-agreement',
     'apply-withhold-service-agreement',
     'apply-loan-result',
-    'bill',
-    'bill-history-bill',
-    'bill-detail',
-    'bill-payback',
-    'bank-support',
-	'bank-management'
-];
+]
+
+APP_NAMES.push(
+    ...USER_PAGES,
+    ...BILL_PAGES,
+    ...APP_NAMES
+)
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
