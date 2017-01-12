@@ -41,14 +41,14 @@ const PaymentPanel = React.createClass({
         });
         var query = $FW.Format.urlQuery();
         let cartFlag = query.cartFlag;
-        let prds = query.productBizNo || query.prds||[];
+        let prd = query.prd||[];
         let buyNum = query.buyNum || 0;
         let userTicketList = [];
         for (var i = 0; i < cc; i++) {
             userTicketList.push($FW.Utils.jsonFilter(new_voucher_list, (i) => i.checked)[i].id)
         };
         $FW.Ajax({
-            url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prds + `&buyNum=` + buyNum + `&userTickets=` + userTicketList,
+            url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prd + `&buyNum=` + buyNum + `&userTickets=` + userTicketList,
             enable_loading: true
         }).then(data => {
             document.querySelectorAll('.item-detail')[1].innerHTML = '-' + data.ordersTicketPoints + '工分-' + data.ordersTicketPrice + '金额'

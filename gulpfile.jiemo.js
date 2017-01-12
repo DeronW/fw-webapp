@@ -2,40 +2,40 @@ const PROJ = 'jiemo';
 
 let APP_NAMES = [
     'home', // 首页
-    'advice-complaints',
-    'bank-support',
-	'bank-management'
 ];
 
 // 用户模块
 const USER_PAGES = [
-    'user-register-login-entry',
-    'user-register',
-    'user-login',
-    'user-apply-loan',
-    'user-my',
-    'user-set-cash-card',
-    'user-verify-identidy',
+    'user-register-login-entry', //注册登录入口
+    'user-register',//注册入口
+    'user-login', //登录入口
+    'user-apply-loan', //
+    'user-my', //我
+    'user-set-cash-card',//设置提现卡
+    'user-verify-identidy',//
     'user-verify-phone',
-	'user-aboutus',
-	'user-FAQ'
+	'user-aboutus', //关于我们
+	'user-FAQ',//常见问题
+    'user-bank-support',//支持银行卡
+	'user-bank-management'//银行卡管理
 ]
 
 // 账单模块
 const BILL_PAGES = [
-    'bill',
-    'bill-history-bill',
-    'bill-detail',
-    'bill-payback',
+    'bill', //账单首页
+    'bill-history-bill', //历史账单
+    'bill-detail', //账单详情
+    'bill-payback', //还款页面
 ]
 
 // 申请借款模块
 const APPLY_PAGES = [
-    'apply-want-loan',
-    'apply-confirm-loan',
-    'apply-service-agreement',
-    'apply-withhold-service-agreement',
-    'apply-loan-result',
+    'apply-loan', //借款首页
+    'apply-want-loan', //我要借款页面
+    'apply-confirm-loan', //确认借款页面
+    'apply-service-agreement', //芥末借款页面
+    'apply-withhold-service-agreement', //芥末借款服务协议页面
+    'apply-loan-result', //借款结果页面
 ]
 
 APP_NAMES.push(
