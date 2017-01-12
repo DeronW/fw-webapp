@@ -2,9 +2,6 @@ const PROJ = 'jiemo';
 
 let APP_NAMES = [
     'home', // 首页
-    'advice-complaints',
-    'bank-support',
-	'bank-management'
 ];
 
 // 用户模块
@@ -13,9 +10,12 @@ const USER_PAGES = [
     'register',
     'login',
     'my',
+    'advice-complaints',
     'set-cash-card',
     'verify-identidy',
     'verify-phone',
+    'bank-support',
+	'bank-management'
 ]
 
 // 账单模块
