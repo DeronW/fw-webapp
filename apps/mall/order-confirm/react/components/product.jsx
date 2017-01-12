@@ -6,7 +6,7 @@ const ProductPanel = React.createClass({
         let product_item = (p,index) => {
             return (
                 <div className="list" key={index}>
-                    <img src={'images'+p.previewTitleImage || 'images/default-product.jpg'} className="list-img"/>
+                    <img src={'/images'+p.previewTitleImage || 'images/default-product.jpg'} className="list-img"/>
                     <div className="title">{p.productName}</div>
                     {/*<div className="mark">
                         { p.tags.map((d, index) => <div key={index}>{d}</div>) }

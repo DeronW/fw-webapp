@@ -23,7 +23,7 @@ const Account = React.createClass({
                     <div className="right-arrow"></div>
                     <div className="item-right-info">蓝月</div>
                 </div>
-                <a className="account-item" href="/static/mall/order-deliver-address/index.html">
+                <a className="account-item" href="/static/mall/user-deliver-address/index.html?preview=true">
                     <div className="item-title">收货地址</div>
                     <div className="right-arrow"></div>
                 </a>

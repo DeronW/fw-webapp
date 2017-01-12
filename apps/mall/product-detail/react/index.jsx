@@ -257,7 +257,7 @@ const PlusMinus = React.createClass({
 
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname +
-            '/static/mall/order-confirm/index.html?cartFlag=false&productBizNo=' + bizNo + '&buyNum=' + this.state.value;
+            '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
         if (this.props.is_login==1) {
@@ -268,16 +268,16 @@ const PlusMinus = React.createClass({
                 // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
                 //NativeBridge.goto(link, true)
 
-                $FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
-                    NativeBridge.goto(link, true) :
-                    NativeBridge.login(link);
+                //$FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
+                    NativeBridge.goto(link, true)// :
+                    //NativeBridge.login(link);
 
             } else {
                 location.href = link
             }
         } else {
             if (!isCanBuy) {
-                $FW.Component.Alert("所在等级不符合购买此商品特权");
+                $FW.Component.Alert("请先登录");
             }
         }
 
