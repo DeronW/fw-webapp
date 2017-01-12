@@ -128,7 +128,7 @@ const Product = React.createClass({
            <div className="detail-box">
 			  {shop_card_prompt}
 			   <a onClick={this.shopHandler} className={topBuyCart} style={{zIndex:'10'}}>
-                   <span className="_style_buy_cart_span">{this.state.value}</span>
+                   <span className="_style_buy_cart_span"></span>
                </a>
                 {data.head_images && data.head_images.length ?
                     <BannerGroup className="head-images" images={data.head_images}/> :
