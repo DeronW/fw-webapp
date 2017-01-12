@@ -28,7 +28,7 @@ const Bill = React.createClass({
     render: function () {
         let bill_item = (item, index) => {
             return (
-                <div className="bill-item" key={index} onClick={ () => gotoHandler("/static/jiemo/bill-detail/index.html") }>
+                <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/jiemo/bill-detail/index.html?`) }>
                     <div className="bill-detail">
                         <div className="bill-detail-wrap">
                             <span className="bill-money">{item.loanLeftAmount}</span>
@@ -79,20 +79,13 @@ const Bill = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    $FW.Ajax({
-        url: `${API_PATH}api/userBase/v1/login.json`,
-        method: "post",
-        data: {mobile:"13811518528", password:"123456",sourceType:3}
-    }).then((data) => {
-        //console.log(data);
         $FW.Ajax({
             url: `${API_PATH}api/oriole/v1/loanloadpage.json`,
             method: "post",
-            data: {token:data.userLogin.userToken, userGid:data.userLogin.userGid,userId:data.userLogin.userId, productId:1, sourceType:3}
+            data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
         }).then((data) => {
             console.log(data)
             ReactDOM.render(<Bill data={data}/>, document.getElementById('cnt'));
-        }, (error) => console.log(error))
-    }, (error) => console.log(error));
+        }, (error) => console.log(error));
     ReactDOM.render(<BottomNavBar index={2}/>, document.getElementById('bottom-nav-bar'));
 });
