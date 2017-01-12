@@ -1,4 +1,10 @@
-
+#audio-btn .on{
+animation:audio-btn linear 2s infinite;
+  @keyframes audio-btn{
+    0%{transform:rotate(0); }
+    100%{transform:rotate(360deg); }
+  }
+}
 #touchStyleLoading {
   display: block;
   position: fixed;
@@ -100,7 +106,7 @@
   animation: up linear 1.5s infinite;
   @keyframes up{
     0%{opacity:1;}
-    100%{ transform:translate3d(0,-20px,0);opacity:0; }
+    100%{ transform:translate3d(0,-10px,0);opacity:0; }
   }
   img {
     display: block;
@@ -131,21 +137,55 @@
     position: absolute;
     top: 530px;
     left: 19px;
+    opacity:0;
+    transform-origin:100% 100%;
+    transition:linear 1s 1s;
+    transform:rotate(10deg);
   }
   .p0-3 {
     z-index: 4;
     position: absolute;
     top: 590px;
-    left: 120px;
+    left: 108px;
+    display: none;
+  }
+  .p0-3-1{
+    z-index: 4;
+    position: absolute;
+    top: 590px;
+    left: 108px;
+    display: none;
   }
   .p0-4 {
     z-index: 5;
     position: absolute;
     top: 53px;
     left: 0;
+    opacity: 0;
+    transition:ease 1s;
+    transform:scale(0) translate3d(0, -400px,0);
   }
 }
 
 .swiper-slide.swiper-slide-active {
-
+  .p0-2{
+    opacity:1;
+    transform:rotate(0deg);;
+  }
+  .p0-3{
+    display: block;
+    animation:p0-3 linear 2s infinite;
+    @keyframes p0-3{
+      0%{transform:scale(0) translate3d(0,0px,0)}
+      100%{ transform:scale(2) translate3d(0,-40px,0);opacity:0.2; }
+    }
+  }
+  .p0-3-1{
+    display: block;
+    animation:p0-3 linear 2s 1s infinite;
+  }
+  .p0-4{
+    opacity:1;
+    transform:scale(1) translate3d(0, 0px,0);
+  }
 }

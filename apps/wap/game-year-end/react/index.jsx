@@ -1,8 +1,8 @@
 $FW.DOMReady(function () {
     let str;
     let login=true;
-    music();
-    load();
+    //music();
+    //load();
     $(".swiper-container").css("width", $(window).width());
     $(".swiper-container").css("height", $(window).height());
     let mySwiper = new Swiper('.swiper-container', {
