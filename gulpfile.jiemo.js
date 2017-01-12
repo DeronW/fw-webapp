@@ -9,14 +9,16 @@ let APP_NAMES = [
 
 // 用户模块
 const USER_PAGES = [
-    'register-login-entry',
-    'register',
-    'login',
-    'apply-loan',
-    'my',
-    'set-cash-card',
-    'verify-identidy',
-    'verify-phone',
+    'user-register-login-entry',
+    'user-register',
+    'user-login',
+    'user-apply-loan',
+    'user-my',
+    'user-set-cash-card',
+    'user-verify-identidy',
+    'user-verify-phone',
+	'user-aboutus',
+	'user-FAQ'
 ]
 
 // 账单模块
