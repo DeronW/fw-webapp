@@ -115,7 +115,7 @@ const Answer = React.createClass({
 });
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={'风险承受能力评估'}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={'风险承受能力评估'} back_handler={back_handler} />, HEADER_NODE);
     ReactDOM.render(<Answer/>, CONTENT_NODE);
     // React.render(<Result />, CONTENT_NODE)
 })
