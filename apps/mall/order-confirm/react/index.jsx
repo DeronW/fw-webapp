@@ -84,11 +84,12 @@ const ConfirmOrder = React.createClass({
 
          //this.FormData.payBeanPrice = options.used_bean_count;
             if (typeof(options.voucher_list) == 'object') {
-                this.FormData.tickets = [];
+                this.FormData.userTickets = [];
                 for (var i = 0; i < options.voucher_list.length; i++) {
                     var e = options.voucher_list[i];
-                    if (e.checked) this.FormData.tickets.push(e.id);
+                    if (e.checked) this.FormData.userTickets.push(e.id);
                 }
+                alert(JSON.stringify(this.FormData));
                 //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
 

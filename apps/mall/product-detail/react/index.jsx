@@ -268,9 +268,9 @@ const PlusMinus = React.createClass({
                 // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
                 //NativeBridge.goto(link, true)
 
-                $FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
-                    NativeBridge.goto(link, true) :
-                    NativeBridge.login(link);
+                //$FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
+                    NativeBridge.goto(link, true)// :
+                    //NativeBridge.login(link);
 
             } else {
                 location.href = link
