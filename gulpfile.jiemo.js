@@ -12,7 +12,6 @@ const USER_PAGES = [
     'register-login-entry',
     'register',
     'login',
-    'apply-loan',
     'my',
     'set-cash-card',
     'verify-identidy',
@@ -21,19 +20,20 @@ const USER_PAGES = [
 
 // 账单模块
 const BILL_PAGES = [
-    'bill',
-    'bill-history-bill',
-    'bill-detail',
-    'bill-payback',
+    'bill', //账单首页
+    'bill-history-bill', //历史账单
+    'bill-detail', //账单详情
+    'bill-payback', //还款页面
 ]
 
 // 申请借款模块
 const APPLY_PAGES = [
-    'apply-want-loan',
-    'apply-confirm-loan',
-    'apply-service-agreement',
-    'apply-withhold-service-agreement',
-    'apply-loan-result',
+    'apply-loan', //借款首页
+    'apply-want-loan', //我要借款页面
+    'apply-confirm-loan', //确认借款页面
+    'apply-service-agreement', //芥末借款页面
+    'apply-withhold-service-agreement', //芥末借款服务协议页面
+    'apply-loan-result', //借款结果页面
 ]
 
 APP_NAMES.push(
