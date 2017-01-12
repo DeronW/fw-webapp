@@ -109,7 +109,7 @@ const BottomNavBar = React.createClass({
 
 		return (
                 <div className="_style_footer_fixed" style={_style_footer_fixed}>
-                    <a className={this.props.index==1 ? "_style_footer_item1 active" : "_style_footer_item1"} style={_style_footer_item1} onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
+                    <a className={this.props.index==1 ? "_style_footer_item1 active" : "_style_footer_item1"} style={_style_footer_item1} onClick={ () => gotoHandler("https://mmall.9888.cn") }></a>
                     <a className={this.props.index==2 ? "_style_footer_item2 active" : "_style_footer_item2"}  style={_style_footer_item2} onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
 					<a className="_back_to_index"      style={_back_to_index}      onClick={ () => $FW.Browser.inApp() ? NativeBridge.toNative('app_back_native') : location.href = 'http://m.9888.cn'}></a>
 					<a className={this.props.index==3 ? "_style_footer_item3 active" : "_style_footer_item3"}  style={_style_footer_item3} onClick={ () => gotoHandler("/static/mall/cart-shopping/index.html", true) }></a>
