@@ -9,13 +9,10 @@ const USER_PAGES = [
     'user-register-login-entry', //注册登录入口
     'user-register',//注册入口
     'user-login', //登录入口
-    'user-apply-loan', //
-    'user-my', //我
+    'user', //我
     'user-set-cash-card',//设置提现卡
-    'user-verify-identidy',//
-    'user-verify-phone',
-	'user-aboutus', //关于我们
-	'user-FAQ',//常见问题
+	'user-about-us', //关于我们
+	'user-faq',//常见问题
     'user-bank-support',//支持银行卡
 	'user-bank-management'//银行卡管理
 ]
@@ -38,10 +35,18 @@ const APPLY_PAGES = [
     'apply-loan-result', //借款结果页面
 ]
 
+const DEVELOPING_PAGES = [
+    'user-apply-loan', //
+    'user-verify-identidy',//
+    'user-verify-phone',
+]
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
-    ...APP_NAMES
+    ...APPLY_PAGES,
+    ...APP_NAMES,
+    ...DEVELOPING_PAGES
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
