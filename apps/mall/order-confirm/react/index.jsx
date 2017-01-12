@@ -47,7 +47,7 @@ const ConfirmOrder = React.createClass({
                      this.refreshTokenStr()
                      } else {
                      */
-                    alert(JSON.stringify(this.result));
+                    alert(JSON.stringify(result));
                     return ;
                     if (result.status == 1) {
                         location.href =
