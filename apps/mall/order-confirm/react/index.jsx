@@ -31,7 +31,7 @@ const ConfirmOrder = React.createClass({
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
-alert(JSON.stringify(this.FormData));
+
         let submit = function submit() {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
@@ -46,7 +46,6 @@ alert(JSON.stringify(this.FormData));
                      this.refreshTokenStr()
                      } else {
                      */
-                    console.log(result); return;
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
