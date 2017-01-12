@@ -82,9 +82,7 @@ const ConfirmOrder = React.createClass({
     },
     updatePaymentHandler: function (options) {
 
-
-        if (typeof(options.used_bean_count) == 'number')
-        //this.FormData.payBeanPrice = options.used_bean_count;
+         //this.FormData.payBeanPrice = options.used_bean_count;
             if (typeof(options.voucher_list) == 'object') {
                 this.FormData.tickets = [];
                 for (var i = 0; i < options.voucher_list.length; i++) {
@@ -93,6 +91,7 @@ const ConfirmOrder = React.createClass({
                 }
                 //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
+
     },
     validateBeforeSMSCodeHandler: function () {
         let data = this.props.data;
@@ -180,7 +179,8 @@ $FW.DOMReady(function () {
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
     $FW.Ajax({
-        url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
+        //url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
+        url: `./pre_pay_order.json`,
         data: {
             cartFlag: cartFlag,
             prd: prd,

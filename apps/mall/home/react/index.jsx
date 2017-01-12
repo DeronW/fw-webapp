@@ -97,9 +97,9 @@ const Mall = React.createClass({
                 <div className="head-nav">
                     <a onClick={() => gotoHandler("/static/mall/product-vip-zone/index.html")}><img
                         src="images/nav-1.png"/><span>VIP专区</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=豆哥周边")}><img
+                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=2")}><img
                         src="images/nav-2.png"/><span>豆哥周边</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=工场券")}><img
+                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=3")}><img
                         src="images/nav-3.png"/><span>工场券</span></a>
                     <a onClick={() => gotoHandler("/static/mall/product-hot-activity/index.html", true)}><img
                         src="images/nav-4.png"/><span>热门活动</span></a>

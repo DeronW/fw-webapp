@@ -277,7 +277,7 @@ const PlusMinus = React.createClass({
             }
         } else {
             if (!isCanBuy) {
-                $FW.Component.Alert("所在等级不符合购买此商品特权");
+                $FW.Component.Alert("请先登录");
             }
         }
 
