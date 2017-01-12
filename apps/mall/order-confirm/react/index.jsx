@@ -7,7 +7,7 @@ const ConfirmOrder = React.createClass({
             cartFlag: query.cartFlag,
             prd: query.prd || [],
             buyNum: query.buyNum || 0,
-            tickets: [],
+            userTickets: [],
             msgCode: null,
             addressId: this.props.data.addressId,
             tokenStr: '',
