@@ -192,6 +192,7 @@ const PlusMinus = React.createClass({
     },
 
 	toggleOverlay: function () {
+        if (this.state.value < 1) return;
 		let _this=this;
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname +
