@@ -33,7 +33,7 @@ const ConfirmOrder = React.createClass({
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
 
         let submit = function submit() {
-            console.log(this.FormData);
+            alert(JSON.stringify(this.FormData));
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
                 //url: `./commit_pay_order.json`,
@@ -47,7 +47,8 @@ const ConfirmOrder = React.createClass({
                      this.refreshTokenStr()
                      } else {
                      */
-                    console.log(result);
+                    alert(JSON.stringify(this.result));
+                    return ;
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
@@ -89,7 +90,6 @@ const ConfirmOrder = React.createClass({
                     var e = options.voucher_list[i];
                     if (e.checked) this.FormData.userTickets.push(e.id);
                 }
-                alert(JSON.stringify(this.FormData));
                 //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
 
