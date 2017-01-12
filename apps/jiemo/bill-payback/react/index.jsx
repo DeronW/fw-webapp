@@ -176,22 +176,18 @@ $FW.DOMReady(function() {
     var deductionGid = query.deductionGid;
     var loanGid = query.loanGid;
     var loanType = query.loanType;
-    $FW.Ajax({
-        url: `${API_PATH}api/userBase/v1/login.json`,
-        method: "post",
-        data: {mobile:"13811518528", password:"123456",sourceType:3}
-    }).then((data) => {
         Promise.all([
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
                 method: "post",
-                data: {token:data.userLogin.userToken, userGid:data.userLogin.userGid,userId:data.userLogin.userId, sourceType:3}
+                data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
             }),
             $FW.Ajax({
                 url: `${API_PATH}api/repayment/v1/loandetail.json`,
                 method: "post",
-                data: {deductionGid:deductionGid,loanGid:loanGid,loanType:loanType,token:data.userLogin.userToken, userGid:data.userLogin.userGid,userId:data.userLogin.userId, sourceType:3}
+                data: {deductionGid:deductionGid,loanGid:loanGid,loanType:loanType,token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
             })
-        ]).then(d => ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]}/>, document.getElementById('cnt')), (error) => console.log(error));
-    }, (error) => console.log(error));
+        ]).then(d => {
+            ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]}/>, document.getElementById('cnt'));
+        }, (error) => console.log(error));
 });

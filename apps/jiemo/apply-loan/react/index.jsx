@@ -1,9 +1,19 @@
+function gotoHandler(link) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }else {
+        location.href = encodeURI(link);
+    }
+}
+
 const ApplyLoan = React.createClass({
     getInitialState:function(){
         return {
            availableLoan:this.props.data.creditLine,
-           present_availableLoan:this.props.data.creditLine
-        }
+           present_availableLoan:this.props.data.creditLine,
+           orioleOrderGid:this.props.data.orioleOrderGid,
+           creditLine:this.props.data.canBorrowAmount
+       }
     },
     componentDidMount:function(){
         var sliderBar = document.querySelector('.slider-area');
@@ -96,7 +106,7 @@ const ApplyLoan = React.createClass({
 
         let btn_list = <div className="credit-btn">
             <div className="credit-improvement-btn">我要提额</div>
-            <div className="credit-apply-btn">我要借款</div>
+            <div className="credit-apply-btn" onClick={()=>gotoHandler(`/static/jiemo/apply-want-loan/index.html?loanNum=${this.state.availableLoan}&orioleOrderGid=${this.state.orioleOrderGid}&creditLine=${this.state.creditLine}`)}>我要借款</div>
         </div>;
 
         let borrowBtnStatus = this.props.data.borrowBtnStatus;
@@ -147,22 +157,15 @@ const ApplyLoan = React.createClass({
 });
 
 $FW.DOMReady(function() {
-    $FW.Ajax({
-        url: `${API_PATH}api/userBase/v1/login.json`,
-        method: "post",
-        data: {mobile:"13811518528", password:"123456",sourceType:3}
-    }).then((data) => {
-        //console.log(data);
+    console.log(localStorage.userId)
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/baseinfo.json`,
             method: "post",
-            data: {token:data.userLogin.userToken, userGid:data.userLogin.userGid,userId:data.userLogin.userId, sourceType:3, productId:1}
+            data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, productId:1}
         }).then((data) => {
             console.log(data)
             ReactDOM.render(<ApplyLoan data={data}/>, document.getElementById('cnt'))
-        }, (error) => console.log(error))
-    }, (error) => console.log(error));
-
+        }, (error) => console.log(error));
     ReactDOM.render(<BottomNavBar index={1}/>, document.getElementById('bottom-nav-bar'));
 });
 
