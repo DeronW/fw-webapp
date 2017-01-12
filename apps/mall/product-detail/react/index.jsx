@@ -48,7 +48,7 @@ const Product = React.createClass({
 	render: function () {
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-        let topBuyCart=(inIOS && inApp)?"_style_buy_cart _top_buy_cart":"_style_buy_cart";
+        let topBuyCart=(inApp)?"_style_buy_cart _top_buy_cart":"_style_buy_cart";
 
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";

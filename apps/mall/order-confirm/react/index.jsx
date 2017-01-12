@@ -31,7 +31,7 @@ const ConfirmOrder = React.createClass({
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
-
+alert(JSON.stringify(this.FormData));
         let submit = function submit() {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
@@ -46,6 +46,7 @@ const ConfirmOrder = React.createClass({
                      this.refreshTokenStr()
                      } else {
                      */
+                    console.log(result); return;
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
@@ -94,7 +95,7 @@ const ConfirmOrder = React.createClass({
     validateBeforeSMSCodeHandler: function () {
         let data = this.props.data;
         let product = this.props.product;
-        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.tickets.length;
+        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.userTickets.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
