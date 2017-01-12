@@ -179,8 +179,8 @@ $FW.DOMReady(function () {
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
     $FW.Ajax({
-        //url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
-        url: `./pre_pay_order.json`,
+        url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
+        //url: `./pre_pay_order.json`,
         data: {
             cartFlag: cartFlag,
             prd: prd,
