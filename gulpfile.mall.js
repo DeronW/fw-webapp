@@ -63,9 +63,9 @@ const GAME_PAGES = [
 
 const DEVELOPING_PAGES = [
     // 开发中页面, 下一个测试版本
-    'service-livelihood',
-    'service-bill',
-    'user-footprint',
+    'service-livelihood', // 生活服务
+    'service-bill', //
+    'user-footprint', // 用户足迹, 浏览过的商品页面
 ]
 
 APP_NAMES.push(

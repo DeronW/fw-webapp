@@ -56,7 +56,6 @@ const ShoppingCart = React.createClass({
                 _this.setState({products: ps});
                 for(var i=0;i<ps.length;i++){
                     if(ps[i].cartStatus==5){
-                        ps[index]
                         _this.setState({changeAll:false});
                     }else if(ps[i].cartStatus==0){
                         _this.setState({changeAll:true});
@@ -130,13 +129,13 @@ const ShoppingCart = React.createClass({
         this.updateCount(index, ps[index].productNumber + 1);
     },
     payHandler: function () {
-        let prds = [];
+        let prd = [];
         let _checkDom = document.querySelectorAll('.checked-circle');
         _checkDom = Array.prototype.slice.call(_checkDom);
         _checkDom.map((checkDom, index) => {
-            prds.push(getNextElement(checkDom).value);
+            prd.push(getNextElement(checkDom).value);
         });
-        gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&prds=" + prds)
+        gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&prd=" + prd)
 
     },
     render: function () {
@@ -154,7 +153,7 @@ const ShoppingCart = React.createClass({
                     </div>
                     <div className="product-img" onClick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }><img src={img}/></div>
                     <div className="product-item">
-                        <div className="product-info" onClick={ () => gotoHandler("/static/mall/product-detail/index.html?bizNo="+product.productBizNo) }>
+                        <div className="product-info">
                             <div className="product-name">{product.productName}</div>
                             <div className="product-price">
                                 ¥{product.subTotalPrice}+{product.subTotalCredit}工分
@@ -216,7 +215,7 @@ const ShoppingCart = React.createClass({
                        onClick={this.payHandler}>结算</a>
                 </div> : null}
                 <div className="fixed-nav">
-                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
+                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("https://mmall.9888.cn") }></a>
                     <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
                     <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = location.protocol + '//m.9888.cn'}></a>
                     <a className="fixed-nav-link fixed-nav-link3 active" onClick={ () => gotoHandler("/static/mall/cart-shopping/index.html", true) }></a>

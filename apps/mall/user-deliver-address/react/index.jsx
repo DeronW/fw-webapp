@@ -15,14 +15,15 @@ const DeliverAddress = React.createClass({
     },
     render: function () {
         let _this = this;
-        let productBizNo = $FW.Format.urlQuery().productBizNo;
-        let productCount = $FW.Format.urlQuery().count || 1;
+        let cartFlag = $FW.Format.urlQuery().cartFlag;
+        let prd = $FW.Format.urlQuery().prd;
+        let buyNum = $FW.Format.urlQuery().buyNum;
         let preview = this.props.preview;
 
         let address = function (address, index) {
             let link;
             if (!preview) {
-                link = "/static/mall/order-confirm/index.html?address_id=" + address.address_id + "&productBizNo=" + productBizNo + '&count=' + productCount;
+                link = "/static/mall/order-confirm/index.html?address_id=" + address.address_id +"&cartFlag=" + cartFlag + "&prd=" + prd + '&buyNum=' + buyNum;
             }
             let checked_flag = null;
             if (!preview) {
@@ -56,7 +57,7 @@ const DeliverAddress = React.createClass({
 
         let create_link = preview ?
             "/static/mall/order-build-deliver/index.html?preview=true" :
-            ("/static/mall/order-build-deliver/index.html?productBizNo=" + productBizNo + '&count=' + productCount);
+            ("/static/mall/order-build-deliver/index.html?prd=" + prd + '&buyNum=' + buyNum);
 
         return (
             <div>
