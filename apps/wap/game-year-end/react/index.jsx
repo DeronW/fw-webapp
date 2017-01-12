@@ -1,12 +1,10 @@
 $FW.DOMReady(function () {
     let str;
     let login=true;
-    music();
-    load();
-
+    //music();
+    //load();
     $(".swiper-container").css("width", $(window).width());
     $(".swiper-container").css("height", $(window).height());
-
     let mySwiper = new Swiper('.swiper-container', {
         //watchSlidesProgress: true,
         //watchSlidesVisibility: true,
@@ -22,7 +20,7 @@ $FW.DOMReady(function () {
             if(!login&&swiper.activeIndex==1||swiper.isEnd){
                 swiper.lockSwipeToNext();
             }
-            else if(swiper.activeIndex==0){
+            if(swiper.activeIndex==0){
                 swiper.lockSwipeToPrev();
             }
         }
