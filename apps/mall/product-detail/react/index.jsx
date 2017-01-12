@@ -257,7 +257,7 @@ const PlusMinus = React.createClass({
 
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname +
-            '/static/mall/order-confirm/index.html?cartFlag=false&productBizNo=' + bizNo + '&buyNum=' + this.state.value;
+            '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
         if (this.props.is_login==1) {
@@ -277,7 +277,7 @@ const PlusMinus = React.createClass({
             }
         } else {
             if (!isCanBuy) {
-                $FW.Component.Alert("所在等级不符合购买此商品特权");
+                $FW.Component.Alert("请先登录");
             }
         }
 

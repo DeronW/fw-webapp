@@ -6,7 +6,8 @@ $FW.DOMReady(function () {
     }
 
     if ($FW.Browser.inIOS()) {
-        document.querySelector('apple-limit')[0].style.display = 'block';
+        var es = document.querySelector('apple-limit');
+        es && (es[0].style.display = 'block');
     }
 });
 

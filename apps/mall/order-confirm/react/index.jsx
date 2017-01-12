@@ -5,7 +5,7 @@ const ConfirmOrder = React.createClass({
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
-            prd: query.productBizNo || query.prds || [],
+            prd: query.prd || [],
             buyNum: query.buyNum || 0,
             tickets: [],
             msgCode: null,
@@ -82,9 +82,7 @@ const ConfirmOrder = React.createClass({
     },
     updatePaymentHandler: function (options) {
 
-
-        if (typeof(options.used_bean_count) == 'number')
-        //this.FormData.payBeanPrice = options.used_bean_count;
+         //this.FormData.payBeanPrice = options.used_bean_count;
             if (typeof(options.voucher_list) == 'object') {
                 this.FormData.tickets = [];
                 for (var i = 0; i < options.voucher_list.length; i++) {
@@ -93,6 +91,7 @@ const ConfirmOrder = React.createClass({
                 }
                 //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
+
     },
     validateBeforeSMSCodeHandler: function () {
         let data = this.props.data;
@@ -122,8 +121,9 @@ const ConfirmOrder = React.createClass({
             <div className="confirm-order">
                 {this.props.data.showAddressOK ?
                     <AddressPanel address={address}
-                                  product_biz_no={this.FormData.productBizNo}
-                                  product_count={this.state.product_count}/> : null
+                                  cartFlag={this.FormData.cartFlag}
+                                  prd={this.FormData.prd}
+                                  buyNum={this.FormData.buyNum}/> : null
                 }
                 <ProductPanel product={this.props.product}
                               product_count={this.state.product_count}/>
@@ -173,18 +173,19 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
-    let prds = query.productBizNo || query.prds;
+    let prd =  query.prd||[];
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
     $FW.Ajax({
         url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
+        //url: `./pre_pay_order.json`,
         data: {
             cartFlag: cartFlag,
-            prd: prds,
+            prd: prd,
             buyNum: buyNum,
-            userTicketList: userTicketList
+            userTickets: userTicketList
         },
         enable_loading: true
     }).then(data => {
