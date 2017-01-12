@@ -5,7 +5,7 @@ const ConfirmOrder = React.createClass({
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
-            prd: query.productBizNo || query.prds || [],
+            prd: query.prd || [],
             buyNum: query.buyNum || 0,
             tickets: [],
             msgCode: null,
@@ -174,7 +174,7 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
-    let prds = query.productBizNo || query.prds;
+    let prd =  query.prd||[];
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
@@ -183,7 +183,7 @@ $FW.DOMReady(function () {
         url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
         data: {
             cartFlag: cartFlag,
-            prd: prds,
+            prd: prd,
             buyNum: buyNum,
             userTickets: userTicketList
         },

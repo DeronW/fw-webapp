@@ -127,7 +127,7 @@ const User = React.createClass({
                    </div>
                </div>
                 <div className="fixed-nav">
-                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("/static/mall/home/index.html") }></a>
+                    <a className="fixed-nav-link fixed-nav-link1" onClick={ () => gotoHandler("https://mmall.9888.cn") }></a>
                     <a className="fixed-nav-link fixed-nav-link2" onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
                     <a className="backToIndex" onClick={ () => $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'http://m.9888.cn'}></a>
                     <a className="fixed-nav-link fixed-nav-link3" onClick={ () => gotoHandler("/static/mall/cart-shopping/index.html", true) }></a>
