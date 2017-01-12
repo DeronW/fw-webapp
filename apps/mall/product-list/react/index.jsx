@@ -31,7 +31,7 @@ const ResultPage = React.createClass({
             this.loadMoreProductHandler();
         }
         $FW.Event.touchBottom(this.loadMoreProductHandler);
-        
+
 //      window.addEventListener('popstate', () => {
 //          function getUrlVars() {
 //              var newSearch = {};
@@ -47,7 +47,7 @@ const ResultPage = React.createClass({
 //              }
 //              return newSearch;
 //          }
-//          
+//
 //          Filter.search(getUrlVars(), (data)=> {
 //          	this.setState({products: data||[]})
 //          })
@@ -177,14 +177,19 @@ let Filter = {
 };
 Filter.readParamsFromQuery();
 $FW.DOMReady(function () {
-    var title = $FW.Format.urlQuery().title || '商品列表';
+    var title = $FW.Format.urlQuery().title;
     if (Filter.options.searchSourceType == 1) {
         title = '我可兑换';
-        NativeBridge.setTitle(title);
-        if ($FW.Utils.shouldShowHeader())
-            ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
     }
-
+   else if(Filter.options.searchSourceType == 2){
+        title = '豆哥周边';
+    }
+   else if(Filter.options.searchSourceType == 3){
+        title = '工场券';
+    }
+   else{
+        title = '商品列表';
+    }
     //Filter.options.searchSourceType = Filter.options.searchSourceType || '';
     if ($FW.Format.urlQuery().category) {
         Filter.options.categoryName = $FW.Format.urlQuery().category;

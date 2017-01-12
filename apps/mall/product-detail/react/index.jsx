@@ -1,3 +1,13 @@
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
 const Product = React.createClass({
     getInitialState: function () {
         return {
@@ -38,7 +48,7 @@ const Product = React.createClass({
 	render: function () {
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-        let topBuyCart=(inIOS && inApp)?"_style_buy_cart _top_buy_cart":"_style_buy_cart";
+        let topBuyCart=(inApp)?"_style_buy_cart _top_buy_cart":"_style_buy_cart";
 
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
@@ -260,6 +270,10 @@ const PlusMinus = React.createClass({
             '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
+        console.log(this.props.stock)
+        gotoHandler(link, true);
+
+        /*
         if (this.props.is_login==1) {
             if ($FW.Browser.inApp()) {
                 // 注意: 这里有个hole
@@ -268,18 +282,19 @@ const PlusMinus = React.createClass({
                 // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
                 //NativeBridge.goto(link, true)
 
-                $FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
-                    NativeBridge.goto(link, true) :
-                    NativeBridge.login(link);
+                //$FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
+                    NativeBridge.goto(link, true)// :
+                    //NativeBridge.login(link);
 
             } else {
                 location.href = link
             }
         } else {
             if (!isCanBuy) {
-                $FW.Component.Alert("所在等级不符合购买此商品特权");
+                $FW.Component.Alert("请先登录");
             }
         }
+        */
 
     },
 

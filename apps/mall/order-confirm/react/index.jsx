@@ -7,7 +7,7 @@ const ConfirmOrder = React.createClass({
             cartFlag: query.cartFlag,
             prd: query.prd || [],
             buyNum: query.buyNum || 0,
-            tickets: [],
+            userTickets: [],
             msgCode: null,
             addressId: this.props.data.addressId,
             tokenStr: '',
@@ -31,9 +31,8 @@ const ConfirmOrder = React.createClass({
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
-
+alert(JSON.stringify(this.FormData));
         let submit = function submit() {
-            console.log(this.FormData);
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
                 //url: `./commit_pay_order.json`,
@@ -47,7 +46,7 @@ const ConfirmOrder = React.createClass({
                      this.refreshTokenStr()
                      } else {
                      */
-                    console.log(result);
+                    console.log(result); return;
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
@@ -82,22 +81,21 @@ const ConfirmOrder = React.createClass({
     },
     updatePaymentHandler: function (options) {
 
-
-        if (typeof(options.used_bean_count) == 'number')
-        //this.FormData.payBeanPrice = options.used_bean_count;
+         //this.FormData.payBeanPrice = options.used_bean_count;
             if (typeof(options.voucher_list) == 'object') {
-                this.FormData.tickets = [];
+                this.FormData.userTickets = [];
                 for (var i = 0; i < options.voucher_list.length; i++) {
                     var e = options.voucher_list[i];
-                    if (e.checked) this.FormData.tickets.push(e.id);
+                    if (e.checked) this.FormData.userTickets.push(e.id);
                 }
                 //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
+
     },
     validateBeforeSMSCodeHandler: function () {
         let data = this.props.data;
         let product = this.props.product;
-        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.tickets.length;
+        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.userTickets.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
@@ -181,6 +179,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
+        //url: `./pre_pay_order.json`,
         data: {
             cartFlag: cartFlag,
             prd: prd,
