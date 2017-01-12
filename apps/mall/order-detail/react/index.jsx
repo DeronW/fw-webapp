@@ -101,6 +101,7 @@ $FW.DOMReady(function() {
     $FW.Ajax({
         url: `${API_PATH}/mall/api/member/v1/order_detail.json`,
         data:{
+            orderId:query.orderId||"",
             bizNo:query.bizNo||"",
             cardUuid:query.cardUuid||""
         },
