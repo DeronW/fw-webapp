@@ -120,5 +120,5 @@ $FW.DOMReady(() => {
     // React.render(<Result />, CONTENT_NODE)
 })
 function back_handler(){
-    $FW.Browser.inApp?NativeBridge.close():window.history.back();
+    $FW.Browser.inApp()?NativeBridge.close():window.history.back();
 }

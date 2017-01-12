@@ -2,10 +2,10 @@
 {% block title %}豆尔摩斯{% endblock %}
 {% block content %}
 
-<div id="touchStyleLoading">
-    <div class="percent">0%</div>
-    <div class="spinner"></div>
-</div>
+<!--<div id="touchStyleLoading">-->
+    <!--<div class="percent">0%</div>-->
+    <!--<div class="spinner"></div>-->
+<!--</div>-->
 <div class="main">
     <!--音乐-->
     <div id="audio-btn" style="display: block;">
@@ -15,7 +15,6 @@
         </audio>
         <img src="images/music.png" class="on">
     </div>
-
     <div class="swiper-container">
         <div class="swiper-wrapper" id="swiper-wrapper">
             <section class="swiper-slide page0">
@@ -23,18 +22,13 @@
                 <div class="p0-1"><img src="images/p0-1.png"/></div>
                 <div class="p0-2"><img src="images/p0-2.png"/></div>
                 <div class="p0-3"><img src="images/p0-3.png"/></div>
+                <div class="p0-3-1"><img src="images/p0-3.png"/></div>
                 <div class="p0-4"><img src="images/p0-4.png"/></div>
             </section>
         </div>
         <div class="swiper-pagination"></div>
     </div>
     <div class="up"><img src="images/up.png"></div>
-</div>
-<!--登录弹窗pop-page4-->
-<div class="masker-alert"></div>
-<div class="pop-alert">
-    <p>您的请求太频繁，请稍后再试！</p>
-    <a href="#" class="alert-close">关闭</a>
 </div>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 {% endblock %}
