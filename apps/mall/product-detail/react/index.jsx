@@ -271,7 +271,7 @@ const PlusMinus = React.createClass({
 
         let isCanBuy = this.props.isCanBuy;
         console.log(this.props.stock)
-        if(isCanBuy) gotoHandler(link, true);
+        gotoHandler(link, true);
 
         /*
         if (this.props.is_login==1) {
