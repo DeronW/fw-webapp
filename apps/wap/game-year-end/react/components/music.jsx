@@ -1,120 +1,27 @@
-/**
- * Created by Administrator on 2017/1/12.
- */
-function load(){
-    let http=location.href.split("game-year-end")[0]+"images" ;
-    //加载图片
-    $(".percent").on('touchstart',function(event){
-        event.stopPropagation();
-        event.preventDefault();
-    });
-    $(".spinner").on('touchstart',function(event){
-        event.stopPropagation();
-        event.preventDefault();
-    });
-    $("#touchStyleLoading").on('touchstart',function(event){
-        event.stopPropagation();
-        event.preventDefault();
-    });
-    function loadImage(src, callback) {
-        let img = document.createElement("img");
-        function loadComplete() {
-            img = null;
-            if (callback) callback();
+//切换音乐模式
+function music() {
+    let mediao = $('#media')[0];
+    let n = true;
+    $(document).on("touchstart", function () {
+        if (n && mediao.paused) {
+            alert(mediao.paused);
+            mediao.play();
+            n = false;
         }
-        img.onerror = loadComplete;
-        img.onload = loadComplete;
-        img.src = src;
+    });
+    if (mediao.paused) {
+        mediao.play();
     }
-
-    let ImageLoader = {
-        loadImage: loadImage,
-        loadImages: function(images, callback) {
-            let count = 0,
-                i = 0,
-                len,
-                check;
-
-            if (images && (len = images.length) > 0) {
-                check = function() {
-                    if (count === len) {
-                        setTimeout(function() {
-                            if (callback) callback(100);
-                        }, 3e2);
-                    } else {
-                        ++count;
-                        if (callback) callback(Math.floor(count / len * 100));
-                    }
-                };
-                for (; i < len; ++i) {
-                    loadImage(images[i], check);
-                }
-            } else {
-                if (callback) callback(100);
-            }
-        }
-    };
-    let touchStyleLoadingEl = document.getElementById('touchStyleLoading');
-    ImageLoader.loadImages([
-        http+"/p0-1.png",
-        http+"/p0-2.png",
-        http+"/p0-3.png",
-        http+"/p0-4.png",
-        http+"/p1-1.png",
-        http+"/p1-2.png",
-        http+"/p1-3.png",
-        http+"/p1-4.png",
-        http+"/p1-5.png",
-        http+"/p1-6.png",
-        http+"/p1-7.png",
-        http+"/p1-8.png",
-        http+"/p1-9.png",
-        http+"/p1-10.png",
-        http+"/P2-1.png",
-        http+"/p2-2.png",
-        http+"/p2-3.png",
-        http+"/p2-4.png",
-        http+"/p2-5.png",
-        http+"/p2-6.png",
-        http+"/p2-7.png",
-        http+"/p3-1.png",
-        http+"/p3-2.png",
-        http+"/p3-3.png",
-        http+"/p3-4.png",
-        http+"/p3-5.png",
-        http+"/p4-1.png",
-        http+"/p4-2.png",
-        http+"/p5-1.png",
-        http+"/p5-2.png",
-        http+"/p5-3.png",
-        http+"/p5-4.png",
-        http+"/p6-1.gif",
-        http+"/p6-2.png",
-        http+"/p6-3.png",
-        http+"/p7-1.png",
-        http+"/p7-2.png",
-        http+"/p7-3.png",
-        http+"/p7-4.png",
-        http+"/p7-5.png",
-        http+"/p7-6.png",
-        http+"/p8-1.gif",
-        http+"/share.png",
-        http+"/up.png",
-        http+"/musicOff.png",
-        http+"/close.png",
-        http+"/ico-password.png",
-        http+"/ico-per.png",
-        http+"/logo.png",
-    ], function(percent) {
-        touchStyleLoadingEl.children[0].innerHTML = percent+"%";
-        if (percent >= 100) {
-            touchStyleLoadingEl.style.opacity = '0';
-            //mediao.play();
-            $(".page0").eq(0).removeClass("swiper-slide-active");
-            setTimeout(function() {
-                touchStyleLoadingEl.parentNode.removeChild(touchStyleLoadingEl);
-                $(".page0").eq(0).addClass("swiper-slide-active");
-            }, 5e2);
+    ;
+    $("#audio-btn img").on("click", function () {
+        if ($(this).hasClass('on')) {
+            //$(this).attr("src",http+"/musicOff.png");
+            $(this).removeClass('on');
+            mediao.pause();
+        } else {
+            //$(this).attr("src",http+"/music.png");
+            $(this).addClass('on');
+            mediao.play();
         }
     });
 }

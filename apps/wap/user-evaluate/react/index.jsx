@@ -18,19 +18,19 @@ const Questions = React.createClass({
                 for (let x in value) {
                     switch (value[x]) {
                         case 0:
-                            value[x] = 'a';
+                            value[x] = 'A';
                             break;
                         case 1:
-                            value[x] = 'b';
+                            value[x] = 'B';
                             break;
                         case 2:
-                            value[x] = 'c';
+                            value[x] = 'C';
                             break;
                         case 3:
-                            value[x] = 'd';
+                            value[x] = 'D';
                             break;
                         case 4:
-                            value[x] = 'e';
+                            value[x] = 'E';
                             break;
                         case -1:
                             ajaxcan = false;
@@ -119,3 +119,6 @@ $FW.DOMReady(() => {
     ReactDOM.render(<Answer/>, CONTENT_NODE);
     // React.render(<Result />, CONTENT_NODE)
 })
+function back_handler(){
+    $FW.Browser.inApp?NativeBridge.close():window.history.back();
+}
