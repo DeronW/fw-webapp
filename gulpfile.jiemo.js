@@ -57,6 +57,10 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
     ];
 
+    let INCLUDE_LESS = [
+        `${PROJ}/less/*.less`
+    ];
+
     let INCLUDE_JAVASCRIPTS = [
         'use-strict.js',
         `${PROJ}/fw-ajax-error-handler.js`,
@@ -68,6 +72,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             debug: true,
             api_path: CONSTANTS[PROJ].dev_api_path,
             include_components: INCLUDE_COMPONENTS,
+            include_less:INCLUDE_LESS,
             include_javascripts: INCLUDE_JAVASCRIPTS
         });
 
@@ -76,6 +81,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             api_path: '//jiemodai.com/',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: INCLUDE_COMPONENTS,
+            include_less:INCLUDE_LESS,
             include_javascripts: INCLUDE_JAVASCRIPTS
         });
     });
