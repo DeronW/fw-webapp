@@ -101,6 +101,7 @@ $FW.DOMReady(function() {
     $FW.Ajax({
         url: `${API_PATH}/mall/api/member/v1/order_detail.json`,
         data:{
+            orderId:query.orderId||"",
             bizNo:query.bizNo||"",
             cardUuid:query.cardUuid||""
         },
@@ -110,5 +111,5 @@ $FW.DOMReady(function() {
 });
 
 function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'https://mmall.9888.cn/static/mall/order-list/index.html';
 }

@@ -38,7 +38,6 @@ let fnStartRedbag = (callback) => {
     startGame(GAME_TIME);
 };
 function fnShowResult(num) {
-    if (num > 0) {
         let endRandom = parseInt(Math.random() * 100000 + 1000);
         let endTime = new Date().getTime();
         let endToken = hex_md5(endRandom+'' +num+ '' + endTime);
@@ -53,26 +52,26 @@ function fnShowResult(num) {
             },
             method: 'POST',
             success: (data) => {
-                G('getNum').innerHTML = num;
-                G('getPrize').innerHTML = data.red_name;
-                G('pop-success').className = '';
-                successBtn(data.red_type);
-                function successBtn(data) {
-                    var mygetprize=data;
-                    G('success-btn').onclick = function () {
-                        if (mygetprize == 1) {
-                            NativeBridge.toNative('app_scores');
-                        } else if (mygetprize == 2||mygetprize==3) {
-                            NativeBridge.toNative('app_coupon');
-                        }
-                    };
+                if(num>0){
+                    G('getNum').innerHTML = num;
+                    G('getPrize').innerHTML = data.red_name;
+                    G('pop-success').className = '';
+                    successBtn(data.red_type);
+                    function successBtn(data) {
+                        var mygetprize=data;
+                        G('success-btn').onclick = function () {
+                            if (mygetprize == 1) {
+                                NativeBridge.toNative('app_scores');
+                            } else if (mygetprize == 2||mygetprize==3) {
+                                NativeBridge.toNative('app_coupon');
+                            }
+                        };
+                    }
+                }else{
+                    G('pop-fail').className = '';
                 }
-
             }
         });
-    } else {
-        G('pop-fail').className = '';
-    }
 };
 G('fail-btn').onclick = function () {
     NativeBridge.close()

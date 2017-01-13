@@ -1,3 +1,13 @@
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
 const Product = React.createClass({
     getInitialState: function () {
         return {
@@ -38,7 +48,7 @@ const Product = React.createClass({
 	render: function () {
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-        let topBuyCart=(inIOS && inApp)?"_style_buy_cart _top_buy_cart":"_style_buy_cart";
+        let topBuyCart=(inApp)?"_style_buy_cart _top_buy_cart":"_style_buy_cart";
 
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
@@ -118,7 +128,7 @@ const Product = React.createClass({
            <div className="detail-box">
 			  {shop_card_prompt}
 			   <a onClick={this.shopHandler} className={topBuyCart} style={{zIndex:'10'}}>
-                   <span className="_style_buy_cart_span">{this.state.value}</span>
+                   <span className="_style_buy_cart_span"></span>
                </a>
                 {data.head_images && data.head_images.length ?
                     <BannerGroup className="head-images" images={data.head_images}/> :
@@ -182,6 +192,7 @@ const PlusMinus = React.createClass({
     },
 
 	toggleOverlay: function () {
+        if (this.state.value < 1) return;
 		let _this=this;
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = location.protocol + '//' + location.hostname +
@@ -260,6 +271,10 @@ const PlusMinus = React.createClass({
             '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
+        console.log(this.props.stock)
+        gotoHandler(link, true);
+
+        /*
         if (this.props.is_login==1) {
             if ($FW.Browser.inApp()) {
                 // 注意: 这里有个hole
@@ -280,6 +295,7 @@ const PlusMinus = React.createClass({
                 $FW.Component.Alert("请先登录");
             }
         }
+        */
 
     },
 

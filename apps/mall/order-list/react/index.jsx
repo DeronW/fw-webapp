@@ -111,7 +111,7 @@ const OrderBlock = React.createClass({
     },
     gotoDetail: function (index) {
         let order = this.props.order;
-        location.href='/static/mall/order-detail/index.html?bizNo=' + order.bizNo+'&cardUuid='+order.cardUuid
+        location.href='/static/mall/order-detail/index.html?bizNo=' + order.bizNo+'&cardUuid='+order.cardUuid+'&orderId='+order.orderId
     },
     render: function () {
         let pay_color = {
