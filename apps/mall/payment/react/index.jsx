@@ -50,7 +50,8 @@ const Payment = React.createClass({
                 enable_loading: true,
                 data: FormData,
                 success: function (result) {
-                    $FW.Component.Alert('成功');
+                    alert(JSON.stringify(result));
+                    $FW.Component.Alert('成功');return;
                     setTimeout(function () {
                         location.href = location.protocol + '//' + location.hostname +
                             "/static/mall/pay-msg-pay/index.html?merchantNo=" + FormData.merchantNo + "&mobileNo=" + FormData.mobileNo

@@ -1,9 +1,47 @@
+function phoneMosaic(val) {
+	let frontNum = val.slice(0, 3);
+	let lastNum = val.slice(val.length - 4, val.length);
+
+	return `${frontNum}***${lastNum}`
+
+
+}
+
 const MyCnt = React.createClass({
+	getInitialState() {
+		return {
+			overdueCount: 0,
+			loanCount: 0,
+			totalLoanAmout: 0
+		}
+	},
+	componentDidMount() {
+		$FW.Ajax({
+			url: API_PATH + "/api/oriole/v1/indexloadpage.json",
+			method: "POST",
+			enable_loading: true,
+			data: {
+				token: localStorage.userToken,
+				userGid: localStorage.userGid,
+				userId: localStorage.userId,	
+				sourceType: 3
+			}
+		}).then((data) => {
+			this.setState({
+				overdueCount: data.overdueCount,
+				loanCount: data.loanCount,
+				totalLoanAmout: data.totalLoanAmout
+			});
+			console.log(data);	
+		},(error) => {
+			console.log(error);
+		})
+	},
 	render() {
 		return (
 			<div className="my-cnt">
 				<div className="my-nav">
-					<span className="text">123415235</span>
+					<span className="text">{phoneMosaic(localStorage.phone)}</span>
 				</div>		
 
 
@@ -11,16 +49,20 @@ const MyCnt = React.createClass({
 					<div className="my-info-cnt">
 						<div className="loan-sum-text">
 							<div className="text">累计借款(元)</div>
-							<div className="num-text">1100.10</div>
+							<div className="num-text">
+								{
+									this.state.totalLoanAmout == 0 ? "--" : this.state.totalLoanAmout
+								}
+							</div>
 						</div>
 						<div className="loan-info">
 							<div className="info">
 								<span className="text">借款次数</span>
-								<span className="num-text">12</span>
+								<span className="num-text">{this.state.loanCount}</span>
 							</div>
 							<div className="info">
 								<span className="text">逾期次数</span>
-								<span className="num-text">12</span>
+								<span className="num-text">{this.state.overdueCount}</span>
 							</div>
 						</div>
 					</div>
