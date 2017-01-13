@@ -164,7 +164,7 @@ const ConfirmOrder = React.createClass({
                         className="total-item-detail">
                         {this.props.data.payableRmbAmt==0?"":"¥"+this.props.data.payableRmbAmt}
                         {this.props.data.payableRmbAmt==0||this.props.data.payablePointAmt==0?"":"+"}
-                        {this.props.data.payablePointAmt==0?"":"<span className='paidPoint'>"+this.props.data.payablePointAmt+"</span>工分"}
+                        {this.props.data.payablePointAmt==0?"":<span className='paidPoint'>+this.props.data.payablePointAmt+</span>+"工分"}
                         {/*¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分*/}
                     </span>
                     <a onClick={this.makeOrderHandler}
