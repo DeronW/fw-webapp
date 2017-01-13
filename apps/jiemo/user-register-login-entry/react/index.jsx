@@ -31,18 +31,22 @@ const Register = React.createClass({
 			$FW.Ajax({
 				url: API_PATH + "api/userBase/v1/sendVerifyCode.json",
 				method: "POST",
+				enable_loading: true,
 				data: {
 					mobile: _this.state.val,
 					userOperationType: 3,
 					sourceType: 3
 				},
 				success: function (data) {
-					location.href = location.protocol + "//fe.9888.cn/static/register/index.html?codeToken=" + data.codeToken + "&phone=" + _this.state.val;
+					location.href = location.protocol + "//" + location.host + "/static/user-register/index.html?codeToken=" + data.codeToken + "&phone=" + _this.state.val;
+
+					localStorage.phone = _this.state.val; 
 				},
 				fail: function(code, mes) {
 					if(code == 1029) {
-						location.href = location.protocol + "//fe.9888.cn/static/login/index.html?phone=" + _this.state.val;
-						console.log(code);
+						location.href = location.protocol + "//" + location.host + "/static/user-login/index.html?phone=" + _this.state.val;
+
+						localStorage.phone = _this.state.val; 
 					}
 				}
 			})

@@ -45,18 +45,15 @@ const QUESTIONS = [{
     name:"can",
     options: [{
         a: 'A.小于10%',
-        score: 0
-    }, {
-        a: 'B.5-20万元',
         score: 2
     }, {
-        a: 'C.20-50万元',
-        score: 6
+        a: 'B.10%至25% ',
+        score: 4
     }, {
-        a: 'D.50-100万元',
+        a: 'C.25%至50%',
         score: 8
     }, {
-        a: 'E.100万元以上',
+        a: 'D.大于50%',
         score: 10
     }]
 }, {
