@@ -11,48 +11,48 @@ function gotoHandler(link, need_login) {
 const Product = React.createClass({
     getInitialState: function () {
         return {
-			show: true,
-			showOverlayDef:false,
-			showOverlay:false,
-            value:1,
+            show: true,
+            showOverlayDef: false,
+            showOverlay: false,
+            value: 1,
             background: "transparent"
-			}
+        }
     },
 
     toggleHandler: function () {
-        this.setState({show: !this.state.show});
+        this.setState({ show: !this.state.show });
     },
 
-	childEventHandler: function(params,value){
-		this.setState({showOverlayDef:true,showOverlay: params,value:value});
+    childEventHandler: function (params, value) {
+        this.setState({ showOverlayDef: true, showOverlay: params, value: value });
     },
 
-	shopHandler: function (e) {
-		location.href = location.protocol + '//' + location.hostname + '/static/mall/cart-shopping/index.html'
-	},
+    shopHandler: function (e) {
+        location.href = '/static/mall/cart-shopping/index.html'
+    },
 
-	componentDidMount: function () {
+    componentDidMount: function () {
         window.addEventListener('scroll', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             if (scrollTop > 100) return false;
             let id = document.querySelector('._style_header_fixed');
-            if(scrollTop > 10) {
+            if (scrollTop > 10) {
                 id.setAttribute("class", "no_clarity _style_header_fixed");
             }
-            else{
+            else {
                 id.setAttribute("class", "clarity _style_header_fixed");
             }
-        }.bind(this),false);
+        }.bind(this), false);
     },
-	render: function () {
+    render: function () {
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-        let topBuyCart=(inApp)?"_style_buy_cart _top_buy_cart":"_style_buy_cart";
+        let topBuyCart = (inApp) ? "_style_buy_cart _top_buy_cart" : "_style_buy_cart";
 
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
-        let markList = (list, index)=><div key={index}>{list}</div>;
+        let markList = (list, index) => <div key={index}>{list}</div>;
         let activity_desc = null;
 
         if (data.activity_desc && data.activity_desc.length) {
@@ -67,7 +67,7 @@ const Product = React.createClass({
                     <div className="act-explain-head" onClick={this.toggleHandler}>
                         <div className="detail-explain-h">活动说明</div>
                         <div className={this.state.show ? "act-explain-btn on" : "act-explain-btn"}
-                             style={{}}></div>
+                            style={{}}></div>
                     </div>
                     {detail_explain_cont}
                 </div>
@@ -83,11 +83,11 @@ const Product = React.createClass({
                     <p>2、工分兑换礼品非质量问题不支持退换货；</p>
                     <p>3、礼品图片仅供参考请以收到实物为准；</p>
                     <p>4、兑换即视为认同此规则。</p>
-                    <hr/>
+                    <hr />
                 </div>
                 <div className="product-content">
                     {data.desc ? <div className="desc">{data.desc}</div> : null}
-                    {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
+                    {data.rich_detail.map((i, index) => <img src={i} key={index} />)}
                 </div>
             </div>
         }
@@ -120,19 +120,19 @@ const Product = React.createClass({
         let vip_tag = data.vipConfigUuid ? (data.vipLevel ? (
             <span className="vip-tag">{user_level_manifest}</span>) : null) : null;
 
-		let shop_card_prompt = null;
-		if (this.state.showOverlayDef)
-                shop_card_prompt = (<div className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>添加成功，在购物车等亲~</div>);
+        let shop_card_prompt = null;
+        if (this.state.showOverlayDef)
+            shop_card_prompt = (<div className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>添加成功，在购物车等亲~</div>);
 
-		return (
-           <div className="detail-box">
-			  {shop_card_prompt}
-			   <a onClick={this.shopHandler} className={topBuyCart} style={{zIndex:'10'}}>
-                   <span className="_style_buy_cart_span"></span>
-               </a>
+        return (
+            <div className="detail-box">
+                {shop_card_prompt}
+                <a onClick={this.shopHandler} className={topBuyCart} style={{ zIndex: '10' }}>
+                    <span className="_style_buy_cart_span"></span>
+                </a>
                 {data.head_images && data.head_images.length ?
-                    <BannerGroup className="head-images" images={data.head_images}/> :
-                    <div className="no-head-images"></div> }
+                    <BannerGroup className="head-images" images={data.head_images} /> :
+                    <div className="no-head-images"></div>}
 
                 <div className="detail-inf">
                     <div className="detail-inf-name">{data.title}</div>
@@ -173,8 +173,8 @@ const Product = React.createClass({
                 {rich_detail}
                 <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
                 <PlusMinus is_login={data.is_login} stock={data.stock} ticket_count={data.ticketList} parentCallback={this.childEventHandler}
-                           check_messages={data.checkMessages}
-                           voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
+                    check_messages={data.checkMessages}
+                    voucher_only={data.supportTicket} isCanBuy={data.isCanBuy} />
             </div>
         )
     }
@@ -182,7 +182,7 @@ const Product = React.createClass({
 
 const PlusMinus = React.createClass({
     getInitialState: function () {
-        let stock = this.props.stock;
+        let {stock} = this.props;
 
         return {
             value: stock > 0 ? 1 : 0,
@@ -191,36 +191,30 @@ const PlusMinus = React.createClass({
         }
     },
 
-	toggleOverlay: function () {
+    toggleOverlay: function () {
         if (this.state.value < 1) return;
-		let _this=this;
+
+        let _this = this;
         let bizNo = $FW.Format.urlQuery().bizNo;
+
         let link = location.protocol + '//' + location.hostname +
             '/static/mall/order-confirm/index.html?productBizNo=' + bizNo + '&count=' + this.state.value;
 
         if (!this.props.is_login) {
-            if ($FW.Browser.inApp()) {
-                $FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
-                    NativeBridge.goto(link, true) :
-                    NativeBridge.login(link);
-            } else {
-                location.href = link
-            }
-        }else{
+            $FW.Browser.inApp() ? NativeBridge.goto(link, true) : location.href = link
+        } else {
             $FW.Ajax({
-                url:  API_PATH + 'mall/api/cart/v2/insertCart.json?bizNo=' + bizNo,
+                url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
                 enable_loading: true,
-                data:{
-                    buyNum:this.state.value,
-                    productBizNo:bizNo
-                },
-                success: function (data) {
-                    console.log(data);
-                    _this.props.parentCallback(true,_this.state.value);
-                    setTimeout(function() {
-                        _this.props.parentCallback(false,_this.state.value);
-                    }.bind(_this), 1500);
+                data: {
+                    buyNum: this.state.value,
+                    productBizNo: bizNo
                 }
+            }).then(data => {
+                _this.props.parentCallback(true, _this.state.value);
+                setTimeout(function () {
+                    _this.props.parentCallback(false, _this.state.value);
+                }.bind(_this), 1500);
             });
         }
 
@@ -253,7 +247,7 @@ const PlusMinus = React.createClass({
 
         // 检查当前用户(或未登录用户)是否可以点这个按钮
         if (this.props.ticket_count == 0 && this.props.check_messages.length) {
-            $FW.Component.Alert(this.props.check_messages, {header: '不满足购买条件'});
+            $FW.Component.Alert(this.props.check_messages, { header: '不满足购买条件' });
             return
         }
         if (this.props.ticket_count < 1 && this.props.voucher_only) {
@@ -312,7 +306,7 @@ const PlusMinus = React.createClass({
                         {this.state.value}
                     </div>
                     <div className={this.state.value < this.props.stock ? "plus" : "plus gray"}
-                         onClick={this.changePlus}></div>
+                        onClick={this.changePlus}></div>
                 </div>
                 <a className="btn-buy btn-buy-card" onClick={this.toggleOverlay}>加入购物车</a>
                 <a onClick={this.buyHandler} className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>
@@ -326,9 +320,9 @@ const PlusMinus = React.createClass({
 const EmptyProduct = React.createClass({
     render: function () {
         return (
-            <div style={{position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1"}}>
-                <img style={{display: "block", maxWidth: "80%", margin: "20% auto 50px"}} src='images/outdate.jpg'/>
-                <div style={{fontSize: "30px", color: "#8591b3", textAlign: "center"}}>
+            <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
+                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg' />
+                <div style={{ fontSize: "30px", color: "#8591b3", textAlign: "center" }}>
                     抱歉, 没有找到相关商品!
                 </div>
             </div>
@@ -338,28 +332,19 @@ const EmptyProduct = React.createClass({
 
 $FW.DOMReady(function () {
     let bizNo = $FW.Format.urlQuery().bizNo;
-    if (!bizNo) {
-        $FW.Component.Alert('bizNo is missing');
-         return;
-    }
 
-    NativeBridge.setTitle('商品详情');
+    if (!bizNo) return $FW.Component.Alert('bizNo is missing');
 
     $FW.Ajax({
-        //url: './item_detail.json?bizNo=A0000000370',
-        url: `${API_PATH}mall/api/detail/v1/item_detail.json?bizNo=` + bizNo,
+        url: `${API_PATH}mall/api/detail/v1/item_detail.json?bizNo=${bizNo}`,
         enable_loading: true
-    }).then(data =>{
-        if (data.title) {
-            ReactDOM.render(<Product data={data}/>, document.getElementById('cnt'));
-        } else {
-            ReactDOM.render(<EmptyProduct />, document.getElementById('cnt'))
-        }
+    }).then(data => {
+        data.title ?
+            ReactDOM.render(<Product data={data} />, CONTENT_NODE) :
+            ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
     })
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={""}/>, document.getElementById('header'));
-    }
+    ReactDOM.render(<Header title={""} />, HEADER_NODE);
 });
 
 function trim(s) {

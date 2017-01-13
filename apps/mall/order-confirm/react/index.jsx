@@ -46,6 +46,7 @@ const ConfirmOrder = React.createClass({
                      this.refreshTokenStr()
                      } else {
                      */
+                    console.log(result.status);
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
