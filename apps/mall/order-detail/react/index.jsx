@@ -111,5 +111,5 @@ $FW.DOMReady(function() {
 });
 
 function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'https://mmall.9888.cn/static/mall/order-list/index.html';
 }

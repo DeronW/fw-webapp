@@ -54,17 +54,21 @@ const UserAboutus = React.createClass({
 			return <div key={index} className="li">
 						<div className="title-li" onClick={() => this.handleList(index)}>
 							<p className="text">{todo}</p>
-							<span className="icon"></span>
+							<span className={"icon " + (this.state.selectWhich == index ? "arrow-d" : "")}></span>
 						</div>
 						{
-							this.state.selectWhich == index ? detailText() : ""
+							this.state.selectWhich == index ? detailText(index) : ""
 						}
 					</div>
 		}; 
 
-		let detailText = () => {
+		let detailText = (index) => {
 			return <div className="detail-text">
-						<p>asfasfasdf</p>
+						{
+							DETAIL_TEXT[index].map((todo, index) => {
+								return <p key={index} className="text">{todo}</p>;
+							})	
+						}
 					</div>
 		};
 
@@ -75,7 +79,7 @@ const UserAboutus = React.createClass({
 						TITLE_TEXT.map((todo, index) => {
 							return li(todo, index);
 						})	
-					}
+		}
 				</div>	
 			</div>	
 		)
