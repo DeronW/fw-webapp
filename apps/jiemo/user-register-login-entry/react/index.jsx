@@ -39,11 +39,14 @@ const Register = React.createClass({
 				},
 				success: function (data) {
 					location.href = location.protocol + "//" + location.host + "/static/user-register/index.html?codeToken=" + data.codeToken + "&phone=" + _this.state.val;
+
+					localStorage.phone = _this.state.val; 
 				},
 				fail: function(code, mes) {
 					if(code == 1029) {
 						location.href = location.protocol + "//" + location.host + "/static/user-login/index.html?phone=" + _this.state.val;
-						console.log(code);
+
+						localStorage.phone = _this.state.val; 
 					}
 				}
 			})
