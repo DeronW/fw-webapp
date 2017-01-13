@@ -204,7 +204,7 @@ $FW.DOMReady(function () {
     $FW.Ajax(`${API_PATH}mall/api/cart/v1/shoppingCart.json`)
         .then(data => ReactDOM.render(<ShoppingCart products={data.cartList} />, CONTENT_NODE));
 
-    ReactDOM.render(<Header title={"购物车"} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"购物车"} show_back_btn={true} />, HEADER_NODE);
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 });
 
