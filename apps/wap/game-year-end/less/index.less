@@ -103,14 +103,13 @@ animation:audio-btn linear 2s infinite;
   left: 0;
   width: 100%;
   text-align: center;
-  animation: up linear 1.5s infinite;
-  @keyframes up{
-    0%{opacity:1;}
-    100%{ transform:translate3d(0,-10px,0);opacity:0; }
-  }
-  img {
-    display: block;
-    margin: 0 auto;
+  .up-mark {
+    animation: up linear 1.5s infinite;
+    margin: 0 10px;
+    @keyframes up{
+      0%{opacity:1;transform:translate3d(0,15px,0);}
+      100%{ transform:translate3d(0,-5px,0);opacity:0; }
+    }
   }
 }
 
@@ -174,15 +173,16 @@ animation:audio-btn linear 2s infinite;
   }
   .p0-3{
     display: block;
-    animation:p0-3 linear 2s infinite;
+    animation:p0-3 linear 3s infinite;
     @keyframes p0-3{
       0%{transform:scale(0) translate3d(0,0px,0)}
-      100%{ transform:scale(2) translate3d(0,-40px,0);opacity:0.2; }
+      100%{ transform:scale(2) translate3d(0,-40px,0);opacity:0; }
     }
   }
   .p0-3-1{
     display: block;
-    animation:p0-3 linear 2s 1s infinite;
+    transform: scale(0);
+    animation:p0-3 linear 3s 1.5s infinite;
   }
   .p0-4{
     opacity:1;
