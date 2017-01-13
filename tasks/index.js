@@ -66,6 +66,7 @@ module.exports = function (site_name, page_name, configs) {
             cdn_prefix: '',
             include_components: [],
             include_javascripts: [],
+            include_less: [],
             main_jsx: 'react/index.jsx',
             html_engine: 'swig'
         }, configs, singlePageCfg);
@@ -76,7 +77,7 @@ module.exports = function (site_name, page_name, configs) {
         `${lib_path}css/common.css`,
         `${lib_path}less/loading.less`,
         `${app_path}less/*.less`
-    ];
+    ].concat(CONFIG.include_less);
 
     let jsx_files = CONFIG.include_components.map((i) => `${lib_path}components/${i}`);
     jsx_files.push(...[
