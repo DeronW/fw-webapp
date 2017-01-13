@@ -13,8 +13,9 @@ const BottomNavBar = React.createClass({
         }
 
         let match_url = w => location.pathname.indexOf(`/static/mall/${w}`) >= 0;
+
         let tab = {
-            home: location.pathname === '/',
+            home: location.pathname === '/' || match_url('home'),
             category: match_url('product'),
             cart: match_url('cart'),
             user: match_url('user')
@@ -25,17 +26,6 @@ const BottomNavBar = React.createClass({
             lineHeight: lineHeight,
             tab: tab,
             background: this.props.background || 'white'
-        }
-    },
-
-    gotoHandler: function (link, need_login) {
-        if (link.indexOf('://') < 0) {
-            link = location.protocol + '//' + location.hostname + link;
-        }
-        if ($FW.Browser.inApp()) {
-            NativeBridge.goto(link, need_login)
-        } else {
-            location.href = encodeURI(link);
         }
     },
 
@@ -59,49 +49,52 @@ const BottomNavBar = React.createClass({
             bottom: "0"
         };
 
-        var _style_footer_item1 = {
+        let _style_footer_item_base = {
+            backgroundImage: "url('/static/mall/home/images/nav.png')",
+            backgroundRepeat: 'no-repeat',
+            display: "block",
+            position: "absolute"
+        }
+
+        let _style_footer_item_home = Object.assign({
             width: "46px",
             height: "70px",
-            backgroundPosition: "0px 0px",
             top: "60px",
             left: "51px",
-            display: "block",
-            background: "url('/static/mall/home/images/nav.png') no-repeat 0px 0px",
-            position: "absolute"
-        }
+        }, _style_footer_item_base,
+            tab.home ?
+                { backgroundPosition: '0 -70px' } :
+                { backgroundPosition: "0px 0px" });
 
-        var _style_footer_item2 = {
+        let _style_footer_item_category = Object.assign({
             width: "42px",
             height: "70px",
-            backgroundPosition: "-145px 0px",
             top: "60px",
             left: "195px",
-            display: "block",
-            background: "url('/static/mall/home/images/nav.png') no-repeat -145px 0px",
-            position: "absolute"
-        }
+        }, _style_footer_item_base,
+            tab.category ?
+                { backgroundPosition: '-145px -70px' } :
+                { backgroundPosition: "-145px 0px" });
 
-        var _style_footer_item3 = {
+        let _style_footer_item_cart = Object.assign({
             width: "65px",
             height: "70px",
-            backgroundPosition: "-422px 0px",
             top: "60px",
             left: "472px",
-            display: "block",
-            background: "url('/static/mall/home/images/nav.png') no-repeat -422px 0px",
-            position: "absolute"
-        }
+        }, _style_footer_item_base,
+            tab.cart ?
+                { backgroundPosition: '-422px -70px' } :
+                { backgroundPosition: "-422px 0px" });
 
-        var _style_footer_item4 = {
+        let _style_footer_item_user = Object.assign({
             width: "87px",
             height: "70px",
-            backgroundPosition: "-560px 0px",
             top: "60px",
             left: "610px",
-            display: "block",
-            background: "url('/static/mall/home/images/nav.png') no-repeat -560px 0px",
-            position: "absolute"
-        }
+        }, _style_footer_item_base,
+            tab.user ?
+                { backgroundPosition: '-560px -70px' } :
+                { backgroundPosition: "-560px 0px" });
 
         var _back_to_index = {
             display: "block",
@@ -114,19 +107,15 @@ const BottomNavBar = React.createClass({
 
         return (
             <div className="_style_footer_fixed" style={_style_footer_fixed}>
-                <a className={`_style_footer_item1 ${tab.home ? 'active' : null}`}
-                    style={_style_footer_item1} href={tab.home ? null : "/"}> </a>
-                <a className={`_style_footer_item2 ${tab.category ? 'active' : null}`}
-                    style={_style_footer_item2}
+                <a style={_style_footer_item_home} href={tab.home ? null : "/"}> </a>
+                <a className="_style_footer_item_category" style={_style_footer_item_category}
                     href={tab.category ? null : "/static/mall/product-category/index.html"}>
                 </a>
                 <a className="_back_to_index" style={_back_to_index} onClick={this.exitHandler}> </a>
-                <a className={`_style_footer_item3 ${tab.cart ? 'active' : null}`}
-                    style={_style_footer_item3}
+                <a className="_style_footer_item_cart" style={_style_footer_item_cart}
                     href={tab.cart ? null : "/static/mall/cart/index.html"}>
                 </a>
-                <a className={`_style_footer_item4 ${tab.user ? 'active' : null}`}
-                    style={_style_footer_item4}
+                <a className="_style_footer_item_user" style={_style_footer_item_user}
                     href={tab.user ? null : "/static/mall/user/index.html"}>
                 </a>
             </div>
