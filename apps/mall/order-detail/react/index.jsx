@@ -78,11 +78,11 @@ const OrderDetail = React.createClass({
 
                <div className="order-details">
                    <div className="order-number">
-                       <div className="title">订单号：{data.order.id}</div>
+                       <div className="title">订单号：{data.order.bizNo}</div>
                        <div className="sequence">
                            <div className="sequence-text">
                                <span className="text">下单时间：</span>
-                               <span className="time-text">{data.order.pay_at}</span></div>
+                               <span className="time-text">{data.order.receive_at}</span></div>
                        </div>
                    </div>
                </div>
@@ -111,5 +111,5 @@ $FW.DOMReady(function() {
 });
 
 function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = 'https://mmall.9888.cn/static/mall/order-list/index.html';
+    location.href = 'https://mmall.9888.cn/static/mall/order-list/index.html';
 }
