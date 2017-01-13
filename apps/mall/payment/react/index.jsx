@@ -50,6 +50,7 @@ const Payment = React.createClass({
                 enable_loading: true,
                 data: FormData,
                 success: function (result) {
+                    alert(JSON.stringify(result));
                     $FW.Component.Alert('成功');
                     setTimeout(function () {
                         location.href = location.protocol + '//' + location.hostname +
