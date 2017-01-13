@@ -39,7 +39,8 @@ const APPLY_PAGES = [
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
-    ...APP_NAMES
+    ...APP_NAMES,
+    ...APPLY_PAGES
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
