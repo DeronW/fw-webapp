@@ -66,8 +66,8 @@ $FW.DOMReady(function () {
     //
     // function setShareFriend() {
     //     wx.onMenuShareAppMessage({
-    //         title: "听说你眼神比我好，手速还比我快，来比比？", // 分享标题
-    //         desc: "在消除的世界里停不下来，已晕！", // 分享描述
+    //         title: "豆尔摩斯年度大揭秘，快来查看你的组织身份！", // 分享标题
+    //         desc: "金融工场机密档案大集合，解封时刻，速来围观", // 分享描述
     //         link: gurl, // 分享链接
     //         imgUrl: iurl, // 分享图标
     //         success: function () {
@@ -81,7 +81,7 @@ $FW.DOMReady(function () {
     // }
     // function setShareFriendQuan() {
     //     wx.onMenuShareTimeline({
-    //         title: '听说你眼神比我好，手速还比我快，来比比？', // 分享标题
+    //         title: '豆尔摩斯年度大揭秘，快来查看你的组织身份！', // 分享标题
     //         link: gurl, // 分享链接
     //         imgUrl: iurl, // 分享图标
     //         success: function () {
