@@ -11,6 +11,8 @@ const USER_PAGES = [
     'user-login', //登录入口
     'user', //我
     'user-set-cash-card',//设置提现卡
+    'user-verify-identidy',//
+    'user-verify-phone',
 	'user-about-us', //关于我们
 	'user-faq',//常见问题
     'user-bank-support',//支持银行卡
