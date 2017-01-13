@@ -14,10 +14,12 @@
   <button onClick="action('hideHeader')">隐藏Native头部导航</button>
   <button onClick="action('showHeader')">显示Native头部导航</button>
   <button onClick="action('login')">调用APP登录</button>
+
+  <button onClick="toNative('app_fanxiCoupon')">去返息券页面</button>
   <button onClick="action('close')">关闭页面</button>
 </div>
 
-<div id="logs">
+<div id="logs" class="logs">
   <p></p>
 </div>
 
@@ -25,14 +27,21 @@
 <script>
   function toNative(name){
     NativeBridge.toNative(name)
+    log('跳转到app页面', name)
   }
   function action(name){
-    NativeBridge[name]()
+    NativeBridge[name]();
+    log('发送指令', name)
   }
   function setTitle(){
-    NativeBridge.setTitle(document.getElementById('title').value)
+      var v = document.getElementById('title').value
+    NativeBridge.setTitle(v);
+    log('设置标题', v)
   }
-  function log(){
+  function log(type, cmd){
     var logs = document.getElementById('logs');
+    var p = document.createElement('p');
+    p.innerHTML = (new Date().toTimeString().split(' ')[0]) + ' ' + type + ' <b>' + cmd + '</b>';
+    logs.insertBefore(p, logs.children[0])
   }
 </script> {% endblock %}

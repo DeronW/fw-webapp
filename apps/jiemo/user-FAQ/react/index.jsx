@@ -79,7 +79,7 @@ const UserAboutus = React.createClass({
 						TITLE_TEXT.map((todo, index) => {
 							return li(todo, index);
 						})	
-		}
+					}
 				</div>	
 			</div>	
 		)

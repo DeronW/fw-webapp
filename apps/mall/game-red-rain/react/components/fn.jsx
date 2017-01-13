@@ -41,6 +41,7 @@ function fnShowResult(num) {
         let endRandom = parseInt(Math.random() * 100000 + 1000);
         let endTime = new Date().getTime();
         let endToken = hex_md5(endRandom+'' +num+ '' + endTime);
+        alert("正在请求接口");
         $FW.Ajax({
             url: `${location.protocol}//game.9888.cn/index.php?r=redrain/rob`,
             withCredentials:true,
@@ -52,6 +53,7 @@ function fnShowResult(num) {
             },
             method: 'POST',
             success: (data) => {
+                alert("接口请求成功："+data);
                 if(num>0){
                     G('getNum').innerHTML = num;
                     G('getPrize').innerHTML = data.red_name;

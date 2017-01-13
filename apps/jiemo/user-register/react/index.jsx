@@ -49,6 +49,7 @@ const Register = React.createClass({
 		$FW.Ajax({
 			url: API_PATH + "api/userBase/v1/sendVerifyCode.json",
 			method: "POST",
+			enable_loading: true,
 			data: {
 				mobile: location.search.split('phone=')[1],
 				userOperationType: 3,
@@ -99,6 +100,7 @@ const Register = React.createClass({
 			$FW.Ajax({
 				url: API_PATH + "api/userBase/v1/register.json",
 				method: "POST",
+				enable_loading: true,
 				data: {
 					codeToken: location.search.split("?codeToken=")[1], //_this.state.codeToken ,
 					mobile: location.search.split('phone=')[1],
@@ -107,7 +109,9 @@ const Register = React.createClass({
 					sourceType: 3
 				},			
 				success: function (data) {
-					console.log(data);
+					localStorage.userGid = data.userLogin.userGid;
+					localStorage.userId = data.userLogin.userId;
+					localStorage.userToken = data.userLogin.userToken;
 				}
 			})			
 		}
