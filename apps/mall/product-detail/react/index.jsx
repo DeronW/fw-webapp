@@ -28,7 +28,7 @@ const Product = React.createClass({
     },
 
     shopHandler: function (e) {
-        location.href = '/static/mall/cart-shopping/index.html'
+        location.href = '/static/mall/cart/index.html'
     },
 
     componentDidMount: function () {

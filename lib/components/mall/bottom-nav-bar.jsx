@@ -123,7 +123,7 @@ const BottomNavBar = React.createClass({
                 <a className="_back_to_index" style={_back_to_index} onClick={this.exitHandler}> </a>
                 <a className={`_style_footer_item3 ${tab.cart ? 'active' : null}`}
                     style={_style_footer_item3}
-                    href={tab.cart ? null : "/static/mall/cart-shopping/index.html"}>
+                    href={tab.cart ? null : "/static/mall/cart/index.html"}>
                 </a>
                 <a className={`_style_footer_item4 ${tab.user ? 'active' : null}`}
                     style={_style_footer_item4}
