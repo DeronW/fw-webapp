@@ -137,7 +137,7 @@ const VerifyCode = React.createClass({
                     <div className="verify-popup-wrap">
                          <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                          <div className="verify-popup-title">短信验证</div>
-                         <div className="verify-popup-tip"> 已向工商银行（2233）银行预留手机号发送短信验证码。</div>
+                         <div className="verify-popup-tip"> 已向尾号（2233）发送短信验证码。</div>
                          <div className="verify-input">
                              <input className="sms-input" type="text" value="" placeholder="输入验证码"/>
                              <span className="btn-countdown">获取验证码</span>
