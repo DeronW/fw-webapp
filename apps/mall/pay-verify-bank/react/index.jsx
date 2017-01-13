@@ -1,10 +1,6 @@
 const BankInfo = React.createClass({
     getInitialState:function(){
         var query = $FW.Format.urlQuery();
-        var accountNo= query.accountNo;
-        var bankName= query.bankName;
-        var bankCardName= query.bankCardName;
-        var bankId= query.bankId;
         return {
             name: "",
             idNum: "",
@@ -15,10 +11,10 @@ const BankInfo = React.createClass({
             pass1:0,
             pass2:0,
             pass3:0,
-            accountNo:accountNo,
-            bankName:bankName,
-            bankCardName:bankCardName,
-            bankId:bankId,
+            accountNo:query.accountNo,
+            bankName:query.bankName,
+            bankCardName:query.bankCardName,
+            bankId:query.bankId,
             active:false
         };
     },
