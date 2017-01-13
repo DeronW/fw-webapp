@@ -53,7 +53,7 @@ const SendCode = React.createClass({
     reSend: function () {
         if (!this.state.reSend) return;
         var FormData = {
-            service: 2,
+            service: 'REQ_PAY_QUICK_RESEND',
             merchantNo: this.state.merchantNo
         }
         console.log(FormData);
@@ -61,7 +61,7 @@ const SendCode = React.createClass({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
             enable_loading: true,
-            data: this.FormData,
+            data: FormData,
             success: function (data) {
                 console.log(data);
                 this.setState({value: 60, reSend: false});
@@ -101,7 +101,7 @@ const SendCode = React.createClass({
     nextStep: function () {
         if (!this.state.active) return;
         var FormData = {
-            service: 2,
+            service: 'REQ_PAY_QUICK_CONFIRM',
             merchantNo: this.state.merchantNo,
             checkCode: this.state.code
         }
@@ -109,7 +109,7 @@ const SendCode = React.createClass({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
             enable_loading: true,
-            data: this.FormData,
+            data: FormData,
             success: function (data) {
                 alert(data.code);
                 //var data= data.bankCards;

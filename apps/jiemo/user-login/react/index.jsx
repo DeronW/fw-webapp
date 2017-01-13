@@ -15,6 +15,7 @@ const Register = React.createClass({
 		$FW.Ajax({
 			url: API_PATH + "/api/userBase/v1/login.json",
 			method: "POST",
+			enable_loading: true,
 			data: {
 				mobile: location.search.split("=")[1],
 				password: _this.state.pwdVal,
@@ -25,6 +26,7 @@ const Register = React.createClass({
 				localStorage.userId = data.userLogin.userId;
 				localStorage.userToken = data.userLogin.userToken;
 
+				location.href = `${location.protocol}\/\/${location.host}/static/apply-loan/index.html`;
 			},
 			fail: function(code, mes) {
 
@@ -53,7 +55,7 @@ const Register = React.createClass({
 
 						<div className="input">
 							<input 
-								type="text"
+								type="passwold"
 		   						placeholder="请输入登录密码" 
 								onChange={this.changePwd}
 							/>

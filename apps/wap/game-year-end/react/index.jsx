@@ -2,7 +2,7 @@ $FW.DOMReady(function () {
     let str;
     let login=true;
     $FW.Ajax({
-        url: API_PATH +`/mpwap/api/v1/getUserRanking.shtml`,//第二三页
+        url: `${API_PATH}/mpwap/api/v1/getUserRanking.shtml`,//第二三页
         fail: () => true,
         complete: (data) => {
             if(data.code==10000){
@@ -18,7 +18,6 @@ $FW.DOMReady(function () {
             }else{
 
             }
-
 
         }
     });
@@ -48,94 +47,60 @@ $FW.DOMReady(function () {
     });
 
 
-
-
-    /*
-     * 注意：
-     * 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
-     * 2. 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
-     * 3. 常见问题及完整 JS-SDK 文档地址：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
-     *
-     * 开发中遇到问题详见文档“附录5-常见错误及解决办法”解决，如仍未能解决可通过以下渠道反馈：
-     * 邮箱地址：weixin-open@qq.com
-     * 邮件主题：【微信JS-SDK反馈】具体问题
-     * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
-     */
-    // wx.config({
-    //     debug: false,
-    //     appId: '{$h.signPackage.appId}',
-    //     timestamp: '{$h.signPackage.timestamp}',
-    //     nonceStr: '{$h.signPackage.nonceStr}',
-    //     signature: '{$h.signPackage.signature}',
-    //     jsApiList: [
-    //         // 所有要调用的 API 都要加到这个列表中
-    //         'onMenuShareTimeline',
-    //         'onMenuShareAppMessage',
-    //     ]
-    // });
-    // let texttit='我在金融工场总收益超过了80%的工友！';
-    // wx.ready(function () {
-    //     // 在这里调用 API
-    //     let ShareAppMessage = {
-    //         title:texttit,
-    //         desc: '一分耕耘一分收获！每天看收益的感觉真实让人幸福感爆棚啊~好朋友就该一起来！',
-    //         link: '{$h.index}',
-    //         imgUrl: '{$h.static}',
-    //         success: function () {
-    //             // 用户确认分享后执行的回调函数
-    //             $.ajax({
-    //                 'type' : 'POST',
-    //                 'url' : '{$data.share}',
-    //                 'data' : 'share=1' ,
-    //                 'dataType' : 'json',
-    //                 'async' : false,
-    //                 success : function(data){
-    //                     let res = eval(data);
-    //                     if(res.err == 1)
-    //                     {
-    //                         $(".pop-alert p").html(res.msg);
-    //                         $(".masker-alert").show();
-    //                         $(".pop-alert").show();
-    //                         $(".alert-close").on("click",function(){
-    //                             $(".masker-alert").hide();
-    //                             $(".pop-alert").hide();
-    //                         });
-    //                     }
-    //                 }
-    //             });
-    //         },
-    //     };
-    //     let ShareTimeline = {
-    //         title: '我在金融工场总收益超过了80%的工友！',
-    //         link: '{$h.index}',
-    //         imgUrl: '{$h.static}',
-    //         success: function () {
-    //             // 用户确认分享后执行的回调函数
-    //             $.ajax({
-    //                 'type' : 'POST',
-    //                 'url' : '{$data.share}',
-    //                 'data' : 'share=1' ,
-    //                 'dataType' : 'json',
-    //                 'async' : false,
-    //                 success : function(data){
-    //                     let res = eval(data);
-    //                     if(res.err == 1)
-    //                     {
-    //                         $(".pop-alert p").html(res.msg);
-    //                         $(".masker-alert").show();
-    //                         $(".pop-alert").show();
-    //                         $(".alert-close").on("click",function(){
-    //                             $(".masker-alert").hide();
-    //                             $(".pop-alert").hide();
-    //                         });
-    //                     }
-    //                 }
-    //             });
-    //         },
-    //     };
+    // function setWxConfig(debug, appid, timestamp, noncestr, signature) {
+    //     wx.config({
+    //         debug: debug,
+    //         appId: appid,
+    //         timestamp: timestamp,
+    //         nonceStr: noncestr,
+    //         signature: signature,
+    //         jsApiList: [
+    //             'onMenuShareTimeline',
+    //             'onMenuShareAppMessage'
+    //         ]
+    //     });
+    // }
     //
-    //     wx.onMenuShareAppMessage(ShareAppMessage);//分享朋友
-    //     wx.onMenuShareTimeline(ShareTimeline);//分享到朋友圈
-    // });
+    // var gurl = 'http://game.9888.cn/index.php?r=games/game-notice&gameNo=0pn5m';
+    // var iurl = 'http://game.9888.cn/static/frontend/game/axc/image/axc_share.jpg';
+    //
+    // function setShareFriend() {
+    //     wx.onMenuShareAppMessage({
+    //         title: "听说你眼神比我好，手速还比我快，来比比？", // 分享标题
+    //         desc: "在消除的世界里停不下来，已晕！", // 分享描述
+    //         link: gurl, // 分享链接
+    //         imgUrl: iurl, // 分享图标
+    //         success: function () {
+    //             // 用户确认分享后执行的回调函数
+    //             //alert("喵喵感谢您！");
+    //         },
+    //         cancel: function () {
+    //             // 用户取消分享后执行的回调函数
+    //         }
+    //     });
+    // }
+    // function setShareFriendQuan() {
+    //     wx.onMenuShareTimeline({
+    //         title: '听说你眼神比我好，手速还比我快，来比比？', // 分享标题
+    //         link: gurl, // 分享链接
+    //         imgUrl: iurl, // 分享图标
+    //         success: function () {
+    //             // 用户确认分享后执行的回调函数
+    //         },
+    //         cancel: function () {
+    //             // 用户取消分享后执行的回调函数
+    //         }
+    //     });
+    // }
+    //
+    //
+    // // $.get('http://fore.9888.cn/weixin/jssdk/share', {
+    // $.get('http://game.9888.cn/index.php?r=games/getshare', {
+    //     url: location.href
+    // }, function (data) {
+    //     setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
+    //     setShareFriend()
+    //     setShareFriendQuan()
+    // }, 'json')
 
 });

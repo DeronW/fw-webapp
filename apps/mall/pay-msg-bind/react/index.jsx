@@ -94,12 +94,7 @@ const SendCode = React.createClass({
             certificateNo: query.certificateNo,
             accountNo: query.accountNo,
             accountName: query.accountName,
-            mobileNo: query.mobileNo,
-            bankId: query.bankId,
-            bankCardType: 1,
-            certificateType: 0,
-            bankCardName: query.bankCardName,
-            bankName: query.bankName
+            mobileNo: query.mobileNo
         };
 
         $FW.Ajax({
@@ -107,9 +102,8 @@ const SendCode = React.createClass({
             enable_loading: true,
             data: FormData,
             success: function (data) {
-                if (data.code==1) {
-                    //var query = $FW.Format.urlQuery();
-                    //var bizNo = query.bizNo;
+                alert(JSON.stringify(data));
+                if (data.status=='S') {
                     $FW.Component.Alert(data.msg);
                     setTimeout(function(){
                         location.href="/static/mall/pay-bank-card/index.html"
