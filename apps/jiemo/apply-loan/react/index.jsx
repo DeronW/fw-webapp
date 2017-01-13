@@ -18,7 +18,7 @@ const ApplyLoan = React.createClass({
     componentDidMount:function(){
         var sliderBar = document.querySelector('.slider-area');
         if(sliderBar){
-            var al = this.state.availableLoan;
+            var al = this.state.creditLine;
             var lineDiv = document.querySelector('.lineDiv');
             var minDiv = document.querySelector('.minDiv');
             var lineDivBar = document.querySelector(".lineDiv-bar");
@@ -45,7 +45,7 @@ const ApplyLoan = React.createClass({
                     lineDivBar.style.width = minDiv_left + 15 + "px";
                     var loanNum = Math.round(parseInt(minDiv_left / (lineDiv.offsetWidth - 58) * al)/100)*100;
                     if(loanNum <= 500){ loanNum = 500}
-                    this.setState({availableLoan:loanNum});
+                    this.setState({creditLine:loanNum});
                 }
             });
 
@@ -73,7 +73,7 @@ const ApplyLoan = React.createClass({
     render : function(){
         let available_loan = <div className="available-loan">
             <div className="max-loan-title">最高借款额度（元）</div>
-            <div className="max-loan-money">{this.state.availableLoan}</div>
+            <div className="max-loan-money">{this.state.creditLine}</div>
         </div>;
 
         let unavailable_loan = <div className="unavailable-loan">
@@ -93,7 +93,7 @@ const ApplyLoan = React.createClass({
             <div className="start-point"></div>
             <div className="end-point"></div>
             <div className="start-point-num">500</div>
-            <div className="end-point-num">{this.state.present_availableLoan}</div>
+            <div className="end-point-num">{this.state.creditLine}</div>
         </div>;
 
         let no_slider_bar = <div className="no-slider-bar">

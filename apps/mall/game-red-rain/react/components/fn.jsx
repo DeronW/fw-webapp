@@ -64,8 +64,10 @@ function fnShowResult(num) {
                         G('success-btn').onclick = function () {
                             if (mygetprize == 1) {
                                 NativeBridge.toNative('app_scores');
-                            } else if (mygetprize == 2||mygetprize==3) {
+                            } else if(mygetprize == 2) {
                                 NativeBridge.toNative('app_coupon');
+                            }else if(mygetprize==3) {
+                                NativeBridge.toNative('app_fanxiCoupon');
                             }
                         };
                     }
@@ -78,15 +80,4 @@ function fnShowResult(num) {
 G('fail-btn').onclick = function () {
     NativeBridge.close()
 };
-G('fail-close').onclick = function () {
-    NativeBridge.close()
-};
-G('success-close').onclick = function () {
-    NativeBridge.close()
-};
-G('red-cnt-close').onclick = function () {
-    NativeBridge.close()
-};
-G('ready-close').onclick = function () {
-    NativeBridge.close()
-};
+

@@ -1,10 +1,15 @@
-#audio-btn .on{
-animation:audio-btn linear 2s infinite;
-  @keyframes audio-btn{
-    0%{transform:rotate(0); }
-    100%{transform:rotate(360deg); }
+#audio-btn .on {
+  animation: audio-btn linear 2s infinite;
+  @keyframes audio-btn {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 }
+
 #touchStyleLoading {
   display: block;
   position: fixed;
@@ -106,25 +111,27 @@ animation:audio-btn linear 2s infinite;
   .up-mark {
     animation: up linear 1.5s infinite;
     margin: 0 10px;
-    @keyframes up{
-      0%{opacity:1;transform:translate3d(0,15px,0);}
-      100%{ transform:translate3d(0,-5px,0);opacity:0; }
+    @keyframes up {
+      0% {
+        opacity: 1;
+        transform: translate3d(0, 5px, 0);
+      }
+      100% {
+        transform: translate3d(0, -15px, 0);
+        opacity: 0;
+      }
     }
   }
 }
 
+.swiper-container {
+  background: url("../images/p0-0.jpg") no-repeat center;
+  background-size: 100% 100%;
+  color: #fff;
+}
+
+//第一页
 .swiper-slide {
-  .p0-0 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
   .p0-1 {
     z-index: 3;
     position: absolute;
@@ -136,10 +143,10 @@ animation:audio-btn linear 2s infinite;
     position: absolute;
     top: 530px;
     left: 19px;
-    opacity:0;
-    transform-origin:100% 100%;
-    transition:linear 1s 1s;
-    transform:rotate(10deg);
+    opacity: 0;
+    transform-origin: 100% 100%;
+    transition: linear 1s 1s;
+    transform: rotate(10deg);
   }
   .p0-3 {
     z-index: 4;
@@ -148,7 +155,7 @@ animation:audio-btn linear 2s infinite;
     left: 108px;
     display: none;
   }
-  .p0-3-1{
+  .p0-3-1 {
     z-index: 4;
     position: absolute;
     top: 590px;
@@ -161,31 +168,205 @@ animation:audio-btn linear 2s infinite;
     top: 53px;
     left: 0;
     opacity: 0;
-    transition:ease 1s;
-    transform:scale(0) translate3d(0, -400px,0);
+    transition: ease 1s;
+    transform: scale(0) translate3d(0, -400px, 0);
   }
 }
 
 .swiper-slide.swiper-slide-active {
-  .p0-2{
-    opacity:1;
-    transform:rotate(0deg);;
+  .p0-2 {
+    opacity: 1;
+    transform: rotate(0deg);;
   }
-  .p0-3{
+  .p0-3 {
     display: block;
-    animation:p0-3 linear 3s infinite;
-    @keyframes p0-3{
-      0%{transform:scale(0) translate3d(0,0px,0)}
-      100%{ transform:scale(2) translate3d(0,-40px,0);opacity:0; }
+    animation: p0-3 linear 3s infinite;
+    @keyframes p0-3 {
+      0% {
+        transform: scale(0) translate3d(0, 0px, 0)
+      }
+      100% {
+        transform: scale(2) translate3d(0, -40px, 0);
+        opacity: 0;
+      }
     }
   }
-  .p0-3-1{
+  .p0-3-1 {
     display: block;
     transform: scale(0);
-    animation:p0-3 linear 3s 1.5s infinite;
+    animation: p0-3 linear 3s 1.5s infinite;
   }
-  .p0-4{
-    opacity:1;
-    transform:scale(1) translate3d(0, 0px,0);
+  .p0-4 {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0px, 0);
   }
 }
+
+//第二页
+.swiper-slide {
+  .p1-masker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5)
+  }
+  .p1-0 {
+    z-index: 5;
+    position: absolute;
+    top: 74px;
+    left: 0;
+    text-align: center;
+    width: 100%;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  .p1-text {
+    position: absolute;
+    top: 168px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 26px;
+    line-height: 38px;
+  }
+  .p1-num-box {
+    position: absolute;
+    top: 315px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 42px;
+    line-height: 56px;
+    .p1-num {
+      span {
+        font-size: 82px;
+        line-height: 82px;
+        color: #f3df00;
+      }
+    }
+  }
+  .p1-1 {
+    position: absolute;
+    top: 509px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    img {
+      margin: 0 auto;
+    }
+  }
+  .p1-2 {
+    position: absolute;
+    top: 950px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    .p1-2-1 {
+      margin: 0 auto;
+      img{
+        animation:p1-2-1 linear 1s infinite;
+        @keyframes p1-2-1{
+          0%{transform:scale(1);}
+          100%{transform:scale(1.1);}
+        }
+      }
+    }
+    .p1-2-2 {
+      text-align: center;
+      color: #fdf0e6;
+      line-height: 22px;
+      font-size: 30px;
+    }
+  }
+}
+
+
+
+//第3页
+.swiper-slide {
+  .p2-0 {
+    transform: rotate3d(1,0,0,90deg);
+    transition:linear 2s;
+    transform-origin:50% 0;
+    opacity:0.5;
+    position: absolute;
+    top: 95px;
+    left: 0;
+    width: 100%;
+    color:#574332;
+    .p2-0-0{
+      display:block;
+      margin: 0 auto;
+    }
+    .p2-0-1{
+      position: absolute;
+      top:290px;
+      left:122px;
+      font-size:50px;
+      line-height:65px;
+    }
+    .p2-2-2{
+      position: absolute;
+      top:506px;
+      left:122px;
+      font-size:50px;
+      line-height:58px;
+    }
+    .p2-2-3{
+      position: absolute;
+      top:710px;
+      left:122px;
+      font-size:50px;
+      line-height:62px;
+    }
+
+  }
+}
+
+.swiper-slide.swiper-slide-active {
+  .p2-0 {
+    transform: rotate3d(1,0,0,0deg);
+    opacity:1;
+  }
+}
+
+//第4页
+.swiper-slide {
+
+}
+
+.swiper-slide.swiper-slide-active {
+
+}
+
+//第5页
+.swiper-slide {
+
+}
+
+.swiper-slide.swiper-slide-active {
+
+}
+
+//第6页
+.swiper-slide {
+
+}
+
+.swiper-slide.swiper-slide-active {
+
+}
+
+//第7页
+.swiper-slide {
+
+}
+
+.swiper-slide.swiper-slide-active {
+
+}
+
