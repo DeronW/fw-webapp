@@ -37,8 +37,8 @@ const PayBackWrap = React.createClass({
     render:function(){
         return (
             <div>
-                {this.state.paybackShow?<PayBack callbackBankListShow={this.getBankCardListShow} callbackVerifyCodeShow={this.getVerifyCodeShow}/>:null}
-                {this.state.bankCardListShow?<BankCardList bankList={this.props.data.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem} callbackPopHide={this.popHideHandler}/>:null}
+                {this.state.paybackShow?<PayBack callbackBankListShow={this.getBankCardListShow} callbackVerifyCodeShow={this.getVerifyCodeShow} loanLeftAmount={this.props.loanLeftAmount} loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus} overdueFee={this.props.overdueFee}/>:null}
+                {this.state.bankCardListShow?<BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem} callbackPopHide={this.popHideHandler}/>:null}
                 {this.state.verifyCodeShow?<VerifyCode callbackResultShow={this.getPayBackResultShow} callbackCloseHanler={this.closeHandler}/>:null}
                 {this.state.payBackResultShow?<PayBackResult />:null}
             </div>
@@ -57,22 +57,18 @@ const PayBack = React.createClass({
         return (
             <div className="payback-box">
                  <div className="loan-num">
-                     <div className="loan-money overdue-color">1000000.00</div>
+                     <div className="loan-money overdue-color">{this.props.loanLeftAmount}</div>
                      <div className="loan-status2">应还总额(元)</div>
                  </div>
                  <div className="loan-detail-box">
                      <div>
-                         <span>待还本金（<a className="payback-detail">详情</a>）</span>
-                         <span>2000元</span>
+                         <span>待还本金</span>
+                         <span>{this.props.loanAmount}元</span>
                      </div>
-                     <div>
-                         <span>罚息</span>
-                         <span>2000元</span>
-                     </div>
-                     <div>
-                         <span>账户管理费</span>
-                         <span>2000元</span>
-                     </div>
+                     {this.props.loanStatus == 5 ? ( <div>
+                             <span>逾期</span>
+                             <span>{this.props.overdueFee}元</span>
+                         </div>):null}
                  </div>
                 <div className="loan-detail-box">
                     <div>
@@ -83,7 +79,7 @@ const PayBack = React.createClass({
                 <div className="loan-detail-box">
                     <div>
                         <span>还款金额</span>
-                        <span>1500</span>
+                        <span>{this.props.loanLeftAmount}</span>
                     </div>
                 </div>
                 <div className="payback-tips">
@@ -173,7 +169,6 @@ const PayBackResult = React.createClass({
 $FW.DOMReady(function() {
     ReactDOM.render(<Header title={"还款"}/>, document.getElementById('header'));
     var query = $FW.Format.urlQuery();
-    var deductionGid = query.deductionGid;
     var loanGid = query.loanGid;
     var loanType = query.loanType;
         Promise.all([
@@ -185,7 +180,7 @@ $FW.DOMReady(function() {
             $FW.Ajax({
                 url: `${API_PATH}api/repayment/v1/loandetail.json`,
                 method: "post",
-                data: {deductionGid:deductionGid,loanGid:loanGid,loanType:loanType,token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
+                data: {loanGid:loanGid,loanType:loanType,token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
             })
         ]).then(d => {
             ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]}/>, document.getElementById('cnt'));
