@@ -33,7 +33,7 @@ const PRODUCT_PAGES = [
 
 const CART_PAGES = [
     // 购物车相关页面
-    'cart-shopping'
+    'cart'
 ]
 
 const ORDER_PAGES = [
@@ -86,6 +86,10 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
         'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'
     ];
+
+    let INCLUDE_LESS = [
+        'less/mall/mall.less'
+    ]
 
     let INCLUDE_JAVASCRIPTS = [
         'use-strict.js',

@@ -77,9 +77,9 @@ module.exports = function (site_name, page_name, configs) {
         `${lib_path}css/common.css`,
         `${lib_path}less/loading.less`,
         `${app_path}less/*.less`
-    ].concat(CONFIG.include_less);
+    ].concat(CONFIG.include_less.map(i => `${lib_path}less/${i}`));
 
-    let jsx_files = CONFIG.include_components.map((i) => `${lib_path}components/${i}`);
+    let jsx_files = CONFIG.include_components.map(i => `${lib_path}components/${i}`);
     jsx_files.push(...[
         `${app_path}react/components/*.+(js|jsx)`,
         `${app_path}react/actions/*.+(js|jsx)`,

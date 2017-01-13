@@ -59,7 +59,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     ];
 
     let INCLUDE_LESS = [
-        `${PROJ}/less/*.less`
+        `${PROJ}/*.less`
     ];
 
     let INCLUDE_JAVASCRIPTS = [
