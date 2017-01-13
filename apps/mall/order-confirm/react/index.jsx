@@ -49,7 +49,7 @@ const ConfirmOrder = React.createClass({
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
-                            '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
+                            '&payableRmbAmt=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
                     }
                     else {
                         location.href = '/static/mall/order-complete/index.html'
@@ -139,7 +139,10 @@ const ConfirmOrder = React.createClass({
                 <div className="total-price">
                     <div className="price-item">
                         <span className="item-name">商品金额</span><span
-                        className="item-detail">￥{this.props.data.totalPrice}+{this.props.data.totalPoints}工分</span>
+                        className="item-detail">
+                        {this.props.data.totalPrice==0?"":"¥"+this.props.data.totalPrice}
+                        {this.props.data.totalPrice==0||this.props.data.totalPoints==0?"":"+"}
+                        {this.props.data.totalPoints==0?"":this.props.data.totalPoints+"工分"}</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">兑换券</span><span
@@ -147,7 +150,7 @@ const ConfirmOrder = React.createClass({
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
-                        className="item-detail">+￥{this.props.data.totalFreightPrice}</span>
+                        className="item-detail">+¥{this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
                 {this.props.data.showAddressOK ?

@@ -38,8 +38,12 @@ const Payment = React.createClass({
                 bankId: data[index].bankId,
                 bankName: data[index].bankName,
                 productName: '豆哥商城商品',
-                productInfo: '豆哥商城商品'
+                productInfo: '豆哥商城商品',
+                orderTime:query.orderTime||"",
+                orderBizNo:query.orderBizNoorderBizNo||"",
+                orderGroupBizNo:query.orderGroupBizNo||""
             };
+            alert(JSON.stringify(FormData));console.log(FormData);
             $FW.Ajax({
                 url: `${API_PATH}mall/api/payment/v1/ucf_pay.json`,
                 //url: './ucf_pay.json',
@@ -49,7 +53,7 @@ const Payment = React.createClass({
                     $FW.Component.Alert('成功');
                     setTimeout(function () {
                         location.href = location.protocol + '//' + location.hostname +
-                            "/static/mall/pay-msg-pay/index.html?merchantNo=" + result.merchantNo + "&mobileNo=" + FormData.mobileNo
+                            "/static/mall/pay-msg-pay/index.html?merchantNo=" + FormData.merchantNo + "&mobileNo=" + FormData.mobileNo
                     }, 2500);
                 }
             })
