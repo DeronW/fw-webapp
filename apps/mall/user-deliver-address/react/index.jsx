@@ -56,8 +56,8 @@ const DeliverAddress = React.createClass({
         };
 
         let create_link = preview ?
-            "/static/mall/order-build-deliver/index.html?preview=true" :
-            ("/static/mall/order-build-deliver/index.html?prd=" + prd + '&buyNum=' + buyNum);
+            "/static/mall/user-build-deliver/index.html?preview=true" :
+            ("/static/mall/user-build-deliver/index.html?cartFlag="+cartFlag+"&prd=" + prd + '&buyNum=' + buyNum);
 
         return (
             <div>

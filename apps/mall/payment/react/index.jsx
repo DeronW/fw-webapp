@@ -23,7 +23,7 @@ const Payment = React.createClass({
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
             let link = location.protocol + '//' + location.hostname +
-                '/static/mall/pay-add-card/index.html?bizNo=' + bizNo;
+                '/static/mall/pay-add-card/index.html?info='+location.search;
             location.href = link;
         }
         else {
@@ -73,7 +73,7 @@ const Payment = React.createClass({
             </div>
         );
 
-        var payMethods = data ? quick_pay :
+        var payMethods = data.length == 0 ? quick_pay :
             data.map((n, index) => {
                 let accountNo = this.split(n.accountNo);
                 return (
