@@ -60,6 +60,7 @@ const Payment = React.createClass({
         }
     },
     render: function () {
+        alert(JSON.stringify(data));
         let data = this.props.data;
         var quick_pay = (
             <div className="pay-item" onClick={this.payCheck.bind(this,"quick_pay")}>
@@ -72,7 +73,7 @@ const Payment = React.createClass({
             </div>
         );
 
-        var payMethods = data == null ? quick_pay :
+        var payMethods = data ? quick_pay :
             data.map((n, index) => {
                 let accountNo = this.split(n.accountNo);
                 return (
