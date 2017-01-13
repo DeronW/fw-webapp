@@ -32,9 +32,9 @@ const Bill = React.createClass({
                     <div className="bill-detail">
                         <div className="bill-detail-wrap">
                             <span className="bill-money">{item.loanLeftAmount}</span>
-                            {item.exceedDays? <span className="bill-status"></span>:null}
+                            {item.exceedDays > 0 ? <span className="bill-status"></span>:null}
                         </div>
-                        <span className="bill-deadline">{formatDate(item.dueTime)}到期</span>
+                        <span className="bill-deadline">{item.dueTimeStr}到期</span>
                     </div>
                     <div className="pay-back-btn-wrap">
                         {item.status == 0 ? <div className="pay-back-btn-status1">打款中</div> : <div className="pay-back-btn-status2" onClick={ () => gotoHandler(`/static/jiemo/bill-payback/index.html?deductionGid=${item.deductionGid}&loanGid=${item.loanGid}&loanType=${item.loanType}`) }>还款</div>}
