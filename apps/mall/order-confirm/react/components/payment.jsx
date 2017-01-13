@@ -58,7 +58,8 @@ const PaymentPanel = React.createClass({
             let RmbAmt1= (data.totalPrice-data.payableRmbAmt)==0 ?"-": '¥' + (data.totalPrice-data.payableRmbAmt) + '+'; let PointAmt1= (data.totalPoints-data.payablePointAmt)==0  ?"":(data.totalPoints-data.payablePointAmt) + '工分';
 
             document.querySelectorAll('.item-detail')[1].innerHTML  = RmbAmt1+jia1+PointAmt1;
-            document.querySelector('.total-item-detail').innerHTML = RmbAmt+jia+PointAmt;
+            document.querySelector('.total-item-detail').innerHTML = RmbAmt+jia+PointAmt
+            console.log(document.querySelector('.paidPoint').innerHTML);
         })
     },
     render: function () {

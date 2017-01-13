@@ -100,7 +100,7 @@ const ConfirmOrder = React.createClass({
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
 
-        if (data.payablePointAmt > data.avaliablePoints)
+        if (document.querySelector('.paidPoint').innerHTML> data.avaliablePoints)
             return $FW.Component.Alert('工分不足，不能购买');
 
         return true
