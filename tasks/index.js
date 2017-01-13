@@ -19,7 +19,7 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
         `${lib_path}request-animation-frame-0.0.23.js`,
         `${lib_path}promise-2.0.2.min.js`,
-        `${lib_path}fw-1.5.1.js`,
+        `${lib_path}fw-1.5.2.js`,
         `${lib_path}native-bridge-0.3.0.js`
     ];
 
@@ -66,6 +66,7 @@ module.exports = function (site_name, page_name, configs) {
             cdn_prefix: '',
             include_components: [],
             include_javascripts: [],
+            include_less: [],
             main_jsx: 'react/index.jsx',
             html_engine: 'swig'
         }, configs, singlePageCfg);
@@ -76,7 +77,7 @@ module.exports = function (site_name, page_name, configs) {
         `${lib_path}css/common.css`,
         `${lib_path}less/loading.less`,
         `${app_path}less/*.less`
-    ];
+    ].concat(CONFIG.include_less);
 
     let jsx_files = CONFIG.include_components.map((i) => `${lib_path}components/${i}`);
     jsx_files.push(...[
