@@ -5,6 +5,26 @@ const User = React.createClass({
             color: '#fff'
         }
     },
+    componentDidMount: function () {
+        var _this = this;
+        window.onscroll = function () {
+            var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+            if (scrollTop > 100)  return false;
+
+            if (scrollTop > 0) {
+                _this.setState({
+                    background: "rgba(255,255,255,.7)",
+                    color: "#333"
+                })
+            } else {
+                _this.setState({
+                    background: "#ff3a38",
+                    color: "#fff"
+                })
+            }
+        }
+    },
+
     render: function () {
         let data = this.props.data;
         var header = {
@@ -21,28 +41,9 @@ const User = React.createClass({
             lineHeight: "100px",
             zIndex: "1000"
         };
-        var _this = this;
-        window.onscroll = function () {
-            var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-            if (scrollTop > 100) {
-                return false;
-            }
-            if (scrollTop > 0) {
-                _this.setState({
-                    background: "rgba(255,255,255,.7)",
-                    color: "#333"
-                })
-            } else {
-                _this.setState({
-                    background: "#ff3a38",
-                    color: "#fff"
-                })
-            }
-        }
 
         return (
             <div className="user-wrap">
-                {/*<div style={header}>我的商城</div>*/}
                 <div className="user-info" style={{ marginTop: '-70px' }}>
                     <img className="profile-img" src="images/boy.jpg" />
                     <div className="user-name">{data.username}
@@ -141,45 +142,36 @@ const HotSale = React.createClass({
     },
 
     loadMoreProductHandler: function (done) {
-        this.setState({ page: this.state.page + 1 });
+        let {hasData, page, column} = this.state;
+        if (!hasData) return;
+
         let arr = [];
-        this.state.hasData ?
-            $FW.Ajax({
-                url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-                data: { count: 6, page: this.state.page },
-                enable_loading: true,
-                success: (data) => {
-                    if (data.products) {
-                        console.log(data);
-                        data.products.map((item, index) => arr.push(item))
-                        this.setState(prevState => ({
-                            column: prevState.column.concat(arr)
-                        }));
-                    }
-                    else {
-                        this.setState({ hasData: false });
-                    }
-                    done && done()
-                }
-            }) : null
+
+        //人气热卖列表
+        $FW.Ajax(`${API_PATH}/mall/api/index/v1/hotProducts.json?count=6&page${page}`)
+            .then(data => {
+                this.setState({
+                    column: column.concat(data.products),
+                    hasData: data.products.length
+                })
+                done && done();
+            });
+        this.setState({ page: page + 1 });
     },
 
     render: function () {
         let hotProduct = (product, index) => {
+            let {bizNo, img, title, score} = product;
             return (
-                <a className="product-wrap" href={'/static/mall/product-detail/index.html?bizNo=' + product.bizNo}>
-                    <img src={product.img} />
-                    <span className="product-name">{product.title}</span>
-                    <span className="product-price">{product.score}工分</span>
+                <a className="product-wrap" key={bizNo + index} href={'/static/mall/product-detail/index.html?bizNo=' + bizNo}>
+                    <img src={img} />
+                    <span className="product-name">{title}</span>
+                    <span className="product-price">{score}工分</span>
                 </a>
             )
         }
 
-        return (
-            <div>
-                {this.state.column.map(hotProduct)}
-            </div>
-        )
+        return <div> {this.state.column.map(hotProduct)} </div>
     }
 });
 

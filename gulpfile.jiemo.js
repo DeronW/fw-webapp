@@ -16,7 +16,8 @@ const USER_PAGES = [
 	'user-about-us', //关于我们
 	'user-faq',//常见问题
     'user-bank-support',//支持银行卡
-	'user-bank-management'//银行卡管理
+	'user-bank-management',//银行卡管理
+	'user-more' //更多
 ]
 
 // 账单模块
