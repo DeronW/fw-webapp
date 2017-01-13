@@ -149,15 +149,15 @@ const Address = React.createClass({
                     if ($FW.Browser.inApp()) {
                         history.back()
                     } else {
-                        location.href = '/static/mall/order-deliver-address/index.html?preview=true';
+                        location.href = '/static/mall/user-deliver-address/index.html?preview=true';
                     }
                 } else {
                     // 如果是从下单页面进入, 则需要回到下单页面或下单页的收获地址
                     var link;
                     if (data.address_count > 1) {
-                        link = '/static/mall/order-deliver-address/index.html?' + 'productBizNo=' + query.productBizNo + '&count=' + query.count;
+                        link = '/static/mall/user-deliver-address/index.html?cartFlag='+ query.cartFlag + '&prd=' + query.prd + '&buyNum=' + query.buyNum;
                     } else {
-                        link = '/static/mall/order-confirm/index.html?address_id=' + data.address_id + '&productBizNo=' + query.productBizNo + '&count=' + query.count;
+                        link = '/static/mall/user-confirm/index.html?address_id=' + data.address_id + '&cartFlag=' + query.cartFlag + '&prd=' + query.prd + '&buyNum=' + query.buyNum;
                     }
                     location.href = link
                 }
