@@ -2,7 +2,6 @@ const HistoryBill = React.createClass({
     getInitialState: function () {
         return {
             page: 1,
-            hasData: true,
             column: []
         }
     },
@@ -12,26 +11,27 @@ const HistoryBill = React.createClass({
              method:'POST',
              data:{token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, pageSize:20, pageIndex:1},
          })
-             .then((data)=> this.setState({column: data.products}));
+             .then((data)=> {
+                 this.setState({column:data.loanHistoryList})
+             }, (err)=> console.log(err));
          $FW.Event.touchBottom(this.loadMoreProductHandler);
      },
     loadMoreProductHandler: function (done) {
         this.setState({page: this.state.page + 1});
-        let arr = [];
-        this.state.hasData ?
-            $FW.Ajax({
-                url: `${API_PATH}api/oriole/v1/loanhistory.json`,
-                method:'POST',
-                data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, pageSize:20, pageIndex:this.state.page},
-                success: (data) => {
-                    let products = data.products;
-                    this.setState({
-                        column: [...this.state.column, ...products],
-                        hasData: !!products.length
-                    })
-                    done && done()
-                }
-            }) : null
+        $FW.Ajax({
+            url: `${API_PATH}api/oriole/v1/loanhistory.json`,
+            method:'POST',
+            data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, pageSize:20, pageIndex:this.state.page},
+            success: (data) => {
+                console.log(data)
+                let loanHistoryList = data.loanHistoryList;
+                this.setState({
+                    column: loanHistoryList,
+                    hasData: !!loanHistoryList.length
+                })
+                done && done()
+            }
+        })
     },
     render:function(){
          let item_list = (item,index) => {
@@ -51,13 +51,13 @@ const HistoryBill = React.createClass({
          };
          return (
              <div>
-                 <div className="data-box">
-                     {this.state.column.map(item_list)}
-                     <div className="data-completion">已加载完全部数据</div>
-                 </div>
-                 <div className="no-data-box">
-                     <img className="no-data-img" src="images/no-data.png"/>
-                 </div>
+                 {this.state.column.length == 0 ? (<div className="no-data-box">
+                         <img className="no-data-img" src="images/no-data.png"/>
+                     </div>):
+                     (<div className="data-box">
+                         {this.state.column.map(item_list)}
+                         <div className="data-completion">已加载完全部数据</div>
+                     </div>)}
              </div>
          )
      }
