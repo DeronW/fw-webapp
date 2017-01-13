@@ -40,7 +40,7 @@ const Payment = React.createClass({
                 productName: '豆哥商城商品',
                 productInfo: '豆哥商城商品',
                 orderTime:query.orderTime||"",
-                orderBizNo:query.orderBizNoorderBizNo||"",
+                orderBizNo:query.orderBizNo||"",
                 orderGroupBizNo:query.orderGroupBizNo||""
             };
             alert(JSON.stringify(FormData));console.log(FormData);
@@ -60,6 +60,7 @@ const Payment = React.createClass({
         }
     },
     render: function () {
+        alert(JSON.stringify(data));
         let data = this.props.data;
         var quick_pay = (
             <div className="pay-item" onClick={this.payCheck.bind(this,"quick_pay")}>
@@ -72,7 +73,7 @@ const Payment = React.createClass({
             </div>
         );
 
-        var payMethods = data == null ? quick_pay :
+        var payMethods = data ? quick_pay :
             data.map((n, index) => {
                 let accountNo = this.split(n.accountNo);
                 return (
@@ -91,7 +92,7 @@ const Payment = React.createClass({
             <div className="order-payment">
                 <div className="order-status">
                     <div className="pay-tip">请在23小时59分59秒内完成支付</div>
-                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt}元</span></div>
+                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt/100}元</span></div>
                 </div>
                 {/*<div className="order-products">
                     <div className="order-item">

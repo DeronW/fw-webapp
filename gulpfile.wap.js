@@ -1,8 +1,6 @@
 const PROJ = 'wap';
 
 let APP_NAMES = [
-    /* 测试徽商, 不发布其他页面, 加速发布过程 */
-    // 旧页面重构
     'home', // 首页
     'about-us', // 关于我们
     'faq', // 帮助中心
@@ -18,7 +16,6 @@ const USER_PAGES = [
     'user-level', // 用户等级详情
     'user-contribute', // 用户贡献值
     'user-evaluate', // 投资风险承受能力评估
-
     'vip-prerogative', // VIP特权详情页
     'guide-cookbook', // 用户使用引导页面
 ]

@@ -73,7 +73,9 @@ const SendCode = React.createClass({
 
     //加载完成之后立刻倒计时
     componentDidMount: function () {
-        this.reSend();
+        this.setState({value: 60, reSend: false});
+        this.tick()
+        this.setState({reSend: false});
     },
 
     //倒计时完成终止
@@ -105,6 +107,7 @@ const SendCode = React.createClass({
             merchantNo: this.state.merchantNo,
             checkCode: this.state.code
         }
+        alert(JSONFormData);
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
