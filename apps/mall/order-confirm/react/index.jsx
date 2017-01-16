@@ -21,7 +21,7 @@ const ConfirmOrder = React.createClass({
 
         }
     },
-    componentDidMount: function () {
+    componentWillMount: function () {
         this.refreshTokenStr()
     },
     refreshTokenStr: function () {
@@ -30,10 +30,15 @@ const ConfirmOrder = React.createClass({
             //url: `./getTokenStr.json`
         }).then(data => {
             this.FormData.tokenStr = data.tokenStr;
+            console.log("tokenStr:"+this.FormData.tokenStr)
         })
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
+
+        if (this.state.payablePointAmt > this.state.avaliablePoints){
+            $FW.Component.Alert('工分不足，不能购买');return;
+        }
 
         let submit = function submit() {
             $FW.Ajax({
