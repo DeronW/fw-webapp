@@ -52,7 +52,7 @@ const PaymentPanel = React.createClass({
             enable_loading: true
         }).then(data => {
             let jia=(data.payableRmbAmt==0||data.payablePointAmt==0) ?"0":"+";
-            let RmbAmt= data.payableRmbAmt==0 ?"": '¥' + data.payableRmbAmt + '+'; let PointAmt= data.payablePointAmt==0  ?"":<span className='paidPoint'>+data.payablePointAmt + </span>+"工分";
+            let RmbAmt= data.payableRmbAmt==0 ?"": '¥' + data.payableRmbAmt + '+'; let PointAmt= data.payablePointAmt==0  ?"":"<span className='paidPoint'>"+data.payablePointAmt + "</span>工分";
 
             let jia1=((data.totalPrice-data.payableRmbAmt)==0||(data.totalPoints-data.payablePointAmt)==0) ?"":"+";
             let RmbAmt1= (data.totalPrice-data.payableRmbAmt)==0 ?"-": '¥' + (data.totalPrice-data.payableRmbAmt) + '+'; let PointAmt1= (data.totalPoints-data.payablePointAmt)==0  ?"":(data.totalPoints-data.payablePointAmt) + '工分';
