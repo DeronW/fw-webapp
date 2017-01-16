@@ -12,13 +12,13 @@ function music() {
         mediao.play();
     };
     $("#audio-btn").on("touchstart", function () {
-        if ($("#audio-btn img").hasClass('on')) {
+        if ($("#audio-btn  .music1").hasClass('on')) {
             //$(this).attr("src",http+"/musicOff.png");
-            $("#audio-btn img").removeClass('on');
+            $("#audio-btn .music1").removeClass('on');
             mediao.pause();
         } else {
             //$(this).attr("src",http+"/music.png");
-            $("#audio-btn img").addClass('on');
+            $("#audio-btn .music1").addClass('on');
             mediao.play();
         }
     });
