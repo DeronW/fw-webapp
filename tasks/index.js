@@ -26,18 +26,12 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
     if (debug) {
         files.push(...[
             `${lib_path}${REACT_PATH}/react.js`,
-            `${lib_path}${REACT_PATH}/react-dom.js`,
-            `${lib_path}redux-3.6.0.js`,
-            `${lib_path}redux-thunk-2.1.0.js`,
-            `${lib_path}react-redux-5.0.0-beta3.js`
+            `${lib_path}${REACT_PATH}/react-dom.js`
         ])
     } else {
         files.push(...[
             `${lib_path}${REACT_PATH}/react.min.js`,
-            `${lib_path}${REACT_PATH}/react-dom.min.js`,
-            `${lib_path}redux-3.6.0.min.js`,
-            `${lib_path}redux-thunk-2.1.0.min.js`,
-            `${lib_path}react-redux-5.0.0-beta3.min.js`
+            `${lib_path}${REACT_PATH}/react-dom.min.js`
         ])
     }
 
@@ -82,9 +76,6 @@ module.exports = function (site_name, page_name, configs) {
     let jsx_files = CONFIG.include_components.map(i => `${lib_path}components/${i}`);
     jsx_files.push(...[
         `${app_path}react/components/*.+(js|jsx)`,
-        `${app_path}react/actions/*.+(js|jsx)`,
-        `${app_path}react/reducers/*.+(js|jsx)`,
-        `${app_path}react/containers/*.+(js|jsx)`,
         `${app_path}${CONFIG.main_jsx}`
     ]);
 
