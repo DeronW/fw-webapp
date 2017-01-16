@@ -53,7 +53,7 @@ function fnShowResult(num) {
             },
             method: 'POST',
             success: (data) => {
-                alert("返回数据data："+data);
+                alert(data.red_name+"返回数据类型data："+data.red_type);
                 if(num>0){
                     G('getNum').innerHTML = num;
                     G('getPrize').innerHTML = data.red_name;
@@ -64,13 +64,13 @@ function fnShowResult(num) {
                         G('success-btn').onclick = function () {
                             if (mygetprize == 1) {
                                 NativeBridge.toNative('app_scores');
-                                NativeBridge.close();
+                                $FW.Browser.inIOS()?null:NativeBridge.close();
                             } else if(mygetprize == 2) {
                                 NativeBridge.toNative('app_coupon');
-                                NativeBridge.close();
+                                $FW.Browser.inIOS()?null:NativeBridge.close();
                             }else if(mygetprize==3) {
                                 NativeBridge.toNative('app_fanxiCoupon');
-                                NativeBridge.close();
+                                $FW.Browser.inIOS()?null:NativeBridge.close();
                             }
                         };
                     }

@@ -34,8 +34,7 @@ const APPLY_PAGES = [
     'apply-want-loan', //我要借款页面
     'apply-confirm-loan', //确认借款页面
     'apply-service-agreement', //芥末借款页面
-    'apply-withhold-service-agreement', //芥末借款服务协议页面
-    'apply-loan-result', //借款结果页面
+    'apply-withhold-service-agreement' //芥末借款服务协议页面
 ]
 
 const DEVELOPING_PAGES = [

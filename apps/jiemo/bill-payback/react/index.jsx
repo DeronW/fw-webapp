@@ -1,11 +1,22 @@
 const PayBackWrap = React.createClass({
     getInitialState:function(){
+        let cashBank = this.props.userBankList.withdrawBankcard;
+        function isRealNameBindCard(ele){
+            return ele.isRealNameBindCard == true;
+        }
+        let filtered = cashBank.filter(isRealNameBindCard);
+        let cardGid = filtered[0].cardGid;
         return {
             paybackShow:true,
             bankCardListShow:false,
             verifyCodeShow:false,
-            payBackResultShow:false
+            payBackResultShow:false,
+            cardGid:cardGid,
+            filtered:filtered
         }
+    },
+    componentDidMount:function(){
+        console.log(this.state.cardGid)
     },
     getBankCardListShow:function(booleanVal){
         this.setState({bankCardListShow:booleanVal});
@@ -37,9 +48,9 @@ const PayBackWrap = React.createClass({
     render:function(){
         return (
             <div>
-                {this.state.paybackShow?<PayBack callbackBankListShow={this.getBankCardListShow} callbackVerifyCodeShow={this.getVerifyCodeShow} loanLeftAmount={this.props.loanLeftAmount} loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus} overdueFee={this.props.overdueFee}/>:null}
+                {this.state.paybackShow?<PayBack callbackBankListShow={this.getBankCardListShow} callbackVerifyCodeShow={this.getVerifyCodeShow} loanLeftAmount={this.props.loanLeftAmount} loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus} overdueFee={this.props.overdueFee} filtered={this.state.filtered}/>:null}
                 {this.state.bankCardListShow?<BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem} callbackPopHide={this.popHideHandler}/>:null}
-                {this.state.verifyCodeShow?<VerifyCode callbackResultShow={this.getPayBackResultShow} callbackCloseHanler={this.closeHandler}/>:null}
+                {this.state.verifyCodeShow?<VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid} callbackCloseHanler={this.closeHandler} />:null}
                 {this.state.payBackResultShow?<PayBackResult />:null}
             </div>
         )
@@ -73,7 +84,7 @@ const PayBack = React.createClass({
                 <div className="loan-detail-box">
                     <div>
                         <span>还款卡</span>
-                        <span onClick={this.bankListHandler}>工商银行（2223）<img className="right-arrow" src="images/right-arrow.jpg"/></span>
+                        <span onClick={this.bankListHandler}>工商银行<img className="right-arrow" src="images/right-arrow.jpg"/></span>
                     </div>
                 </div>
                 <div className="loan-detail-box">
@@ -98,11 +109,15 @@ const BankCardList = React.createClass({
        this.props.callbackPopHide(false);
     },
     componentDidMount:function(){
-      console.log(this.props.bankList)
+    },
+    clickHandler:function(){
+
     },
     render:function(){
         let list_item = (item,index) => {
-            <div className="list-item" key={index}><img src={item.logoUrl}/>{item.bankShortName}（{item.cardNo.slice(-4)}）</div>
+            return (
+                <div className="list-item" key={index} onClick={this.clickHandler}><img src={item.logoUrl}/>{item.bankShortName}（{item.cardNo.slice(-4)}）{item. isRealNameBindCard?<div className="checked"></div>:null}</div>
+                )
         };
         return (
             <div className="bank-card-list">
@@ -120,11 +135,28 @@ const BankCardList = React.createClass({
 });
 
 const VerifyCode = React.createClass({
+    getInitialState:function(){
+        return {
+            phoneNum:''
+        }
+    },
     confirmBtnHandler:function(){
         this.props.callbackResultShow(true,false);
     },
     closePopHandler:function(){
         this.props.callbackCloseHanler(false);
+    },
+    componentDidMount:function(){
+        var query = $FW.Format.urlQuery();
+        var loanGid = query.loanGid;
+        $FW.Ajax({
+            url: `${API_PATH}api/repayment/v1/checksmsverifycode.json`,
+            method: "post",
+            data: {loanGid:loanGid,cardGid:this.props.cardGid, token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
+            .then(d => {
+               this.setState({phoneNum:d.mobile});
+            }, (error) => console.log(error))
+        })
     },
     render:function(){
         return (
@@ -133,7 +165,7 @@ const VerifyCode = React.createClass({
                     <div className="verify-popup-wrap">
                          <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                          <div className="verify-popup-title">短信验证</div>
-                         <div className="verify-popup-tip"> 已向尾号（2233）发送短信验证码。</div>
+                         <div className="verify-popup-tip"> 已向尾号（{this.state.phoneNum ? this.state.phoneNum.slice(-4): null}）发送短信验证码。</div>
                          <div className="verify-input">
                              <input className="sms-input" type="text" value="" placeholder="输入验证码"/>
                              <span className="btn-countdown">获取验证码</span>
