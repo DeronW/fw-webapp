@@ -21,3 +21,7 @@ a {
 .html-in-app.html-in-ios .only-in-ios-app {
     display: block;
 }
+
+.hide {
+  display: none !important;
+}

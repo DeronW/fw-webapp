@@ -28,7 +28,7 @@ const Bill = React.createClass({
     render: function () {
         let bill_item = (item, index) => {
             return (
-                <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/jiemo/bill-detail/index.html?`) }>
+                <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/jiemo/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`) }>
                     <div className="bill-detail">
                         <div className="bill-detail-wrap">
                             <span className="bill-money">{item.loanLeftAmount}</span>
@@ -50,29 +50,28 @@ const Bill = React.createClass({
                     <div className="title">账单</div>
                     <div className="history-bill">历史账单</div>
                 </div>
-                <div className="data-box">
-                    <div className="transfer-box">
-                        <div className="transfer-title">当前账单(元)</div>
-                        <div className="transfer-money">100000.00</div>
-                        <div className="loan-info">
-                            <div className="transfer-lines">
-                                <div className="return-money">
-                                    <span className="return-money-title">信用额度(元)</span>
-                                    <span className="return-money-num">{this.props.data.creditLine}</span>
+                {this.props.data.loanList.length == 0 ? (<div className="no-data-box">
+                        <img className="no-data-img" src="images/no-data.png"/>
+                    </div>) : ( <div className="data-box">
+                        <div className="transfer-box">
+                            <div className="transfer-title">当前账单(元)</div>
+                            <div className="transfer-money">{this.props.data.undueAmount}</div>
+                            <div className="loan-info">
+                                <div className="transfer-lines">
+                                    <div className="return-money">
+                                        <span className="return-money-title">信用额度(元)</span>
+                                        <span className="return-money-num">{this.props.data.creditLine}</span>
+                                    </div>
+                                    <div className="return-date">
+                                        <span className="return-date-title">剩余可借(元)</span>
+                                        <span className="return-date-day">{this.props.data.canBorrowAmount}</span>
+                                    </div>
                                 </div>
-                                <div className="return-date">
-                                    <span className="return-date-title">剩余可借(元)</span>
-                                    <span className="return-date-day">{this.props.data.canBorrowAmount}</span>
-                                </div>
+                                <span className="vertical-line"></span>
                             </div>
-                            <span className="vertical-line"></span>
                         </div>
-                    </div>
-                    {this.state.billList.map(bill_item)}
-                </div>
-                <div className="no-data-box">
-                    <img className="no-data-img" src="images/no-data.png"/>
-                </div>
+                        {this.state.billList.map(bill_item)}
+                    </div>)}
             </div>
         )
     }

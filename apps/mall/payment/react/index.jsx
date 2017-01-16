@@ -28,7 +28,7 @@ const Payment = React.createClass({
         }
         else {
             var FormData = {
-                sevice: "REQ_PAY_QUICK_APPLY",
+                service: "REQ_PAY_QUICK_APPLY",
                 merchantNo: query.merchantNo,
                 amount: query.payableRmbAmt,
                 certificateNo: data[index].certificateNo,

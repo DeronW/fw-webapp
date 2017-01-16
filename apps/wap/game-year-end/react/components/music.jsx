@@ -4,23 +4,21 @@ function music() {
     let n = true;
     $(document).on("touchstart", function () {
         if (n && mediao.paused) {
-            alert(mediao.paused);
             mediao.play();
             n = false;
         }
     });
     if (mediao.paused) {
         mediao.play();
-    }
-    ;
-    $("#audio-btn img").on("click", function () {
-        if ($(this).hasClass('on')) {
+    };
+    $("#audio-btn").on("touchstart", function () {
+        if ($("#audio-btn img").hasClass('on')) {
             //$(this).attr("src",http+"/musicOff.png");
-            $(this).removeClass('on');
+            $("#audio-btn img").removeClass('on');
             mediao.pause();
         } else {
             //$(this).attr("src",http+"/music.png");
-            $(this).addClass('on');
+            $("#audio-btn img").addClass('on');
             mediao.play();
         }
     });
