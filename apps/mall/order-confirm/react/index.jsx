@@ -15,7 +15,10 @@ const ConfirmOrder = React.createClass({
         };
 
         return {
-            isVirtualProduct: this.props.isVirtualProduct
+            isVirtualProduct: this.props.isVirtualProduct,
+            avaliablePoints: this.props.data.avaliablePoints,
+            payablePointAmt:this.props.data.payablePointAmt
+
         }
     },
     componentDidMount: function () {
@@ -92,15 +95,22 @@ const ConfirmOrder = React.createClass({
             }
 
     },
+    changeTicketPoints(payablePointAmt) {
+        this.setState({
+            payablePointAmt
+        });
+    },
+
     validateBeforeSMSCodeHandler: function () {
-        let data = this.props.data;
-        let product = this.props.product;
-        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.userTickets.length;
+        //let data = this.props.data;
+        //let product = this.props.product;
+        //let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.userTickets.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
 
-        if (document.querySelector('.paidPoint').innerHTML> data.avaliablePoints)
+        // if (document.querySelector('.paidPoint').innerHTML> data.avaliablePoints)
+        if (this.state.payablePointAmt > this.state.avaliablePoints)
             return $FW.Component.Alert('工分不足，不能购买');
 
         return true
@@ -136,6 +146,7 @@ const ConfirmOrder = React.createClass({
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
+                              changeTicketPoints = {payablePointAmt => this.changeTicketPoints(payablePointAmt)}
                 />
                 <div className="total-price">
                     <div className="price-item">
@@ -146,8 +157,9 @@ const ConfirmOrder = React.createClass({
                         {this.props.data.totalPoints==0?"":this.props.data.totalPoints+"工分"}</span>
                     </div>
                     <div className="price-item">
-                        <span className="item-name">兑换券</span><span
-                        className="item-detail">-{this.props.data.ordersTicketPoints}工分-{this.props.data.ordersTicketPrice}金额</span>
+                        <span className="item-name">兑换券</span><span className="item-detail">
+                        {this.props.data.ordersTicketPoints==0?"":"-"+this.props.data.ordersTicketPoints+"工分"+
+                        this.props.data.ordersTicketPrice?"":"-"+this.props.data.ordersTicketPrice+"金额"}</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
@@ -164,7 +176,7 @@ const ConfirmOrder = React.createClass({
                         className="total-item-detail">
                         {this.props.data.payableRmbAmt==0?"":"¥"+this.props.data.payableRmbAmt}
                         {this.props.data.payableRmbAmt==0||this.props.data.payablePointAmt==0?"":"+"}
-                        {this.props.data.payablePointAmt==0?"":"<span className='paidPoint'>"+this.props.data.payablePointAmt+"</span>工分"}
+                        {this.props.data.payablePointAmt==0?"":this.props.data.payablePointAmt+"工分"}
                         {/*¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分*/}
                     </span>
                     <a onClick={this.makeOrderHandler}
