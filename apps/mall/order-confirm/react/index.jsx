@@ -35,6 +35,9 @@ const ConfirmOrder = React.createClass({
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
 
+        if (this.state.payablePointAmt > this.state.avaliablePoints)
+            return $FW.Component.Alert('工分不足，不能购买');
+
         let submit = function submit() {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
