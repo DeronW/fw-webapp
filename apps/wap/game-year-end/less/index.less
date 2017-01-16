@@ -124,6 +124,75 @@
   }
 }
 
+.pop-detail-box {
+  display: none;
+  z-index: 1001;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  .pop-detail {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin: -390px auto 0;
+    width: 720px;
+    height: 780px;
+    background: url("../images/p3-0.png") no-repeat center 4px;
+    .ul {
+      padding: 216px 156px 0 146px;
+      .li {
+        display: table;
+        width: 100%;
+        height: 80px;
+        line-height: 80px;
+        .li-text {
+          float: left;
+          height: 80px;
+          line-height: 80px;
+          font-size: 28px;
+          color: #a47c47;
+        }
+        .li-r {
+          float: right;
+          height: 80px;
+          line-height: 80px;
+          font-size: 32px;
+          color: #4b3523;
+        }
+      }
+    }
+    .pop-close {
+      position: absolute;
+      top: 0;
+      right: 40px;
+      width: 92px;
+      height: 92px;
+      background: url("../images/p3-close.png") no-repeat center;
+      background-size: 100%;
+    }
+  }
+
+}
+
+.pop-share {
+  display: none;
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  .share-img {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+}
+
 .swiper-container {
   background: url("../images/p0-0.jpg") no-repeat center;
   background-size: 100% 100%;
@@ -267,11 +336,15 @@
     text-align: center;
     .p1-2-1 {
       margin: 0 auto;
-      img{
-        animation:p1-2-1 linear 1s infinite;
-        @keyframes p1-2-1{
-          0%{transform:scale(1);}
-          100%{transform:scale(1.1);}
+      img {
+        animation: p1-2-1 linear 1s infinite;
+        @keyframes p1-2-1 {
+          0% {
+            transform: scale(1);
+          }
+          100% {
+            transform: scale(1.1);
+          }
         }
       }
     }
@@ -284,44 +357,42 @@
   }
 }
 
-
-
 //第3页
 .swiper-slide {
   .p2-0 {
-    transform: rotate3d(1,0,0,90deg);
-    transition:linear 2s;
-    transform-origin:50% 0;
-    opacity:0.5;
+    transform: rotate3d(1, 0, 0, 90deg);
+    transition: linear 1.2s;
+    transform-origin: 50% 0;
+    opacity: 0.5;
     position: absolute;
     top: 95px;
     left: 0;
     width: 100%;
-    color:#574332;
-    .p2-0-0{
-      display:block;
+    color: #574332;
+    .p2-0-0 {
+      display: block;
       margin: 0 auto;
     }
-    .p2-0-1{
+    .p2-0-1 {
       position: absolute;
-      top:290px;
-      left:122px;
-      font-size:50px;
-      line-height:65px;
+      top: 290px;
+      left: 122px;
+      font-size: 50px;
+      line-height: 65px;
     }
-    .p2-2-2{
+    .p2-2-2 {
       position: absolute;
-      top:506px;
-      left:122px;
-      font-size:50px;
-      line-height:58px;
+      top: 506px;
+      left: 122px;
+      font-size: 50px;
+      line-height: 58px;
     }
-    .p2-2-3{
+    .p2-2-3 {
       position: absolute;
-      top:710px;
-      left:122px;
-      font-size:50px;
-      line-height:62px;
+      top: 710px;
+      left: 122px;
+      font-size: 50px;
+      line-height: 62px;
     }
 
   }
@@ -329,31 +400,283 @@
 
 .swiper-slide.swiper-slide-active {
   .p2-0 {
-    transform: rotate3d(1,0,0,0deg);
-    opacity:1;
+    transform: rotate3d(1, 0, 0, 0deg);
+    opacity: 1;
   }
 }
 
 //第4页
 .swiper-slide {
+  .p3-masker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    width: 100%;
+    background: url("../images/p3-masker.png") no-repeat center;
+  }
+  .p3-1, .p3-2, .p3-3 {
+    position: absolute;
+    top: 102px;
+    left: 50px;
+    color: #fff;
+    font-size: 26px;
+    height: 70px;
+    line-height: 70px;
+    span {
+      color: #f7df60;
+      font-size: 54px;
+    }
+  }
+  .p3-2 {
+    top: 151px;
+  }
+  .p3-3 {
+    top: 221px;
+  }
+  .p3-4 {
+    position: absolute;
+    top: 360px;
+    left: 50px;
+    color: #fff;
+    font-size: 36px;
+    height: 70px;
+    line-height: 70px;
+  }
+  .p3-5 {
+    position: absolute;
+    top: 420px;
+    left: 50px;
+    color: #fff;
+    font-size: 36px;
+    height: 70px;
+    line-height: 70px;
+    padding: 0 280px 0 0;
+    span {
+      color: #f7df60;
+      font-size: 54px;
+    }
+    img {
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  .p3-6 {
+    position: absolute;
+    bottom: 108px;
+    left: 0px;
+    opacity: 1;
+  }
+  .p3-7 {
+    opacity: 0;
+    position: absolute;
+    bottom: 108px;
+    left: 0px;
 
+    .p3-7-text {
+      position: absolute;
+      top: 113px;
+      left: 0px;
+      width: 100%;
+      text-align: center;
+      height: 48px;
+      line-height: 48px;
+      font-size: 30px;
+      color: #af8a6e;
+      span {
+        font-size: 30px;
+        color: #f7df60;
+      }
+    }
+  }
 }
 
 .swiper-slide.swiper-slide-active {
-
+  .p3-7 {
+    opacity: 1;
+    animation: p3-7 linear 0.5s;
+    @keyframes p3-7 {
+      0% {
+        opacity: 0;
+      }
+      99% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+  .p3-6 {
+    animation: p3-6 linear 0.5s;
+    @keyframes p3-6 {
+      0% {
+        opacity: 1;
+      }
+      99% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    opacity: 0;
+  }
 }
 
 //第5页
 .swiper-slide {
+  .p4-0, .p4-1, .p4-2 {
+    position: absolute;
+    top: 112px;
+    left: 0px;
+    width: 100%;
+    height: 136px;
+    font-size: 30px;
+    color: #fff;
+    padding: 0 0 0 188px;
+    box-sizing: border-box;
+    background: url("../images/p4-1.png") no-repeat 90px 12px;
+    transition:linear 1s;
+    transform:translate3d(-720px,0,0);
+    opacity:0;
+    .p4-0-1, .p4-1-1, .p4-2-1 {
+      height: 74px;
+      line-height: 74px;
+      color: #fff;
+      font-size: 50px;
+    }
+    .p4-1-1, .p4-2-1 {
+      font-size: 36px;
+    }
+    .p4-0-2, .p4-1-2, .p4-2-2 {
+      height: 44px;
+      line-height: 44px;
+      color: #fff;
+      font-size: 36px;
+      span {
+        color: #f7df60;
+      }
+    }
+  }
+  .p4-1 {
+    top: 311px;
+    padding: 0 0 0 134px;
+    background: url("../images/p4-2.png") no-repeat 31px 12px;
+  }
+  .p4-2 {
+    top: 492px;
+    padding: 0 0 0 180px;
+    background: url("../images/p4-3.png") no-repeat 76px 12px;
+  }
+  .p4-3 {
+    position: absolute;
+    top: 744px;
+    left: 0;
+    width: 100%;
+    padding: 30px 210px 0 0;
+    box-sizing: border-box;
+    .p4-3-1 {
+      z-index: 2;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .p4-3-2 {
+      position: absolute;
+      right: 210px;
+      top: 30px;
+      padding: 40px 110px 40px 16px;
+      background-color: rgba(0, 0, 0, 0.5);
 
+    }
+  }
 }
 
 .swiper-slide.swiper-slide-active {
+  .p4-0{
+    transform:translate3d(0,0,0);
+  }
+  .p4-1{
+    transition-delay:0.4s;
+    transform:translate3d(0,0,0);
+  }
+  .p4-2{
+    transition-delay:0.8s;
+    transform:translate3d(0,0,0);
+  }
 
 }
 
 //第6页
 .swiper-slide {
+  .p5-0 {
+    position: absolute;
+    left: 0px;
+    top: 74px;
+    padding: 0 0 0 50px;
+    box-sizing: border-box;
+    height: 46px;
+    line-height: 46px;
+    font-size: 36px;
+    color: #fff;
+  }
+  .p5-1 {
+    position: absolute;
+    left: 0px;
+    top: 130px;
+    width: 100%;
+    padding: 0 0 0 50px;
+    box-sizing: border-box;
+    height: 70px;
+    line-height: 70px;
+    font-size: 36px;
+    color: #fff;
+    span {
+      font-size: 60px;
+      color: #f7df60;
+    }
+  }
+  .p5-2 {
+    position: absolute;
+    left: 0px;
+    top: 266px;
+    width: 100%;
+    display: table;
+    padding: 0 0 0 50px;
+    box-sizing: border-box;
+    height: 68px;
+    line-height: 68px;
+    font-size: 36px;
+    color: #fff;
+    span {
+      float: left;
+    }
+    img {
+      margin: 0 0 0 10px;
+      float: left;
+    }
+  }
+  .p5-3 {
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    top: 410px;
+  }
+  .p5-4 {
+    z-index: 2;
+    position: absolute;
+    left: 0px;
+    top: 940px;
+  }
+  .p5-5 {
+    z-index: 4;
+    position: absolute;
+    left: 0px;
+    top: 330px;
+  }
 
 }
 
@@ -363,7 +686,56 @@
 
 //第7页
 .swiper-slide {
-
+  .p6-0 {
+    position: absolute;
+    left: 0px;
+    top: 77px;
+    text-align: center;
+    width: 100%;
+    img {
+      margin: 0 auto;
+    }
+  }
+  .p6-1{
+    position: absolute;
+    left:113px;
+    top: 432px;
+  }
+  .p6-2{
+    z-index:2;
+    position: absolute;
+    left:228px;
+    top: 620px;
+  }
+  .p6-3{
+    z-index:3;
+    position: absolute;
+    left:214px;
+    top: 620px;
+  }
+  .p6-4{
+    z-index:4;
+    position: absolute;
+    left:251px;
+    top: 453px;
+  }
+  .p6-5,.p6-6,.p6-7{
+    z-index:5;
+    position: absolute;
+    left:530px;
+    top: 620px;
+  }
+  .p6-8{
+    z-index:5;
+    position: absolute;
+    left:0px;
+    top: 985px;
+    text-align: center;
+    width:100%;
+    img{
+      margin:0 auto;
+    }
+  }
 }
 
 .swiper-slide.swiper-slide-active {

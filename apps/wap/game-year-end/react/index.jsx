@@ -8,7 +8,6 @@ $FW.DOMReady(function () {
             if(data.code==10000){
 
                 $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserIncome.shtml`).then((data)=>{
-
                     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserHabitMess.shtml`).then((data)=>{
 
                     });
@@ -25,6 +24,18 @@ $FW.DOMReady(function () {
     //load();
     $(".swiper-container").css("width", $(window).width());
     $(".swiper-container").css("height", $(window).height());
+    //分享弹层
+    $(".pop-share").on("touchstart",function(){
+        $(".pop-share").hide();
+    });
+    //查看收益弹层
+    $(".pop-close").on("touchstart",function(){
+        $(".pop-detail-box").hide();
+    });
+    $("#p3-5-img").on("touchstart",function(){
+        $(".pop-detail-box").show();
+    });
+
     let mySwiper = new Swiper('.swiper-container', {
         //watchSlidesProgress: true,
         //watchSlidesVisibility: true,
