@@ -13,9 +13,9 @@ $FW.DOMReady(function() {
          enable_loading: true,
          success: function (data) {
              if(data.openStatus < 3) {
-                window.location.href = "http://m.9888.cn/static/wap/open-account/index.html"
+                window.location.href = location.protocol + "//m.9888.cn/static/wap/open-account/index.html"
              } else if(data.openStatus == 3) {
-                window.location.href = "http://m.9888.cn/static/wap/reset-deal-password/index.html"
+                window.location.href = location.protocol + "//m.9888.cn/static/wap/reset-deal-password/index.html"
              } else if (data.openStatus > 3) {
                 $FW.Component.Alert("已经开户成功");
              } else {
@@ -28,7 +28,7 @@ $FW.DOMReady(function() {
 });
 
 function backURL () {
-    window.location.href = "http://m.9888.cn"
+    window.location.href = location.protocol + "//m.9888.cn"
 }
 
 $FW.DOMReady(function () {

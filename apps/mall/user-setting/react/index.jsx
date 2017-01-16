@@ -9,7 +9,7 @@ const Account = React.createClass({
                     <img className="account-img" src={`${data.avatar}`}/>
                 </div>
                 <div className="account-item">
-                    <div className="item-title">用户名</div>
+                    <div className="item-title">姓名</div>
                     <div className="right-arrow"></div>
                     <div className="item-right-info">{`${data.username}`}</div>
                 </div>
@@ -18,16 +18,11 @@ const Account = React.createClass({
                     <div className="right-arrow"></div>
                     <div className="item-right-info">18612451585</div>
                 </div>
-                <div className="account-item">
-                    <div className="item-title">实名认证</div>
-                    <div className="right-arrow"></div>
-                    <div className="item-right-info">蓝月</div>
-                </div>
-                <a className="account-item" href="/static/mall/deliver-address/index.html">
+                <a className="account-item" href="/static/mall/user-deliver-address/index.html?preview=true">
                     <div className="item-title">收货地址</div>
                     <div className="right-arrow"></div>
                 </a>
-                <a className="account-item" href="/static/mall/my-bank-card/index.html">
+                <a className="account-item" href="/static/mall/pay-bank-card/index.html">
                     <div className="item-title">银行卡</div>
                     <div className="right-arrow"></div>
                     <div className="item-right-info">已绑定</div>

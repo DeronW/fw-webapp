@@ -517,10 +517,15 @@ var Body = React.createClass({
             return false;
         }
 
-        if (!isCardNo(space(this.state.userInfo.bankCardNo))) {
+
+        if(space(this.state.userInfo.bankCardNo).length < 16 || space(this.state.userInfo.bankCardNo).length > 19) {
             $FW.Component.Toast("银行账号格式不正确");
             return false;
         }
+        // if (!isCardNo(space(this.state.userInfo.bankCardNo))) {
+        //     $FW.Component.Toast("银行账号格式不正确");
+        //     return false;
+        // }
 
 
         if (this.state.userInfo.bankCardNo === "") {

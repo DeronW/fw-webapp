@@ -1,0 +1,67 @@
+{% extends '../../../lib/templates/mall_base.swig.html' %}
+{% block title %}豆尔摩斯年度大揭秘{% endblock %}
+{% block content %}
+
+<!--<div id="touchStyleLoading">-->
+    <!--<div class="percent">0%</div>-->
+    <!--<div class="spinner"></div>-->
+<!--</div>-->
+<div class="main">
+    <!--音乐-->
+    <div id="audio-btn" style="display: block;">
+        <audio id="media" loop="true" autoplay="autoplay">
+            <source src="http://10.105.6.217:8046/jrgc/100/bg1.mp3" type="audio/mpeg"/>
+            请使用支持html5的浏览器。
+        </audio>
+        <img src="images/music.png" class="on">
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper" id="swiper-wrapper">
+            <section class="swiper-slide page0">
+                <div class="p0-1"><img src="images/p0-1.png"/></div>
+                <div class="p0-2"><img src="images/p0-2.png"/></div>
+                <div class="p0-3"><img src="images/p0-3.png"/></div>
+                <div class="p0-3-1"><img src="images/p0-3.png"/></div>
+                <div class="p0-4"><img src="images/p0-4.png"/></div>
+            </section>
+            <section class="swiper-slide page1">
+                <div class="p1-masker"></div>
+                <div class="p1-0"><img src="images/p1-1.png"/></div>
+                <div class="p1-text">
+                    <div class="p1-text1">一个致力于赚钱的组织</div>
+                    <div class="p1-text1">他们的宗旨是解决钱生钱问题</div>
+                    <div class="p1-text1">圆人民群众的财富梦想</div>
+                </div>
+                <div class="p1-num-box">
+                    <div class="p1-num">截止至今已有<span>938934</span>名</div>
+                    <div class="p1-num-text">优秀的豆尔摩斯加入了我们</div>
+                </div>
+                <div class="p1-1"><img src="images/p1-2.png"/></div>
+                <div class="p1-2">
+                    <a href="#" class="p1-2-1"><img src="images/p1-0.png"/></a>
+                    <div class="p1-2-2">（登录个人账户后继续观看）</div>
+                </div>
+            </section>
+            <section class="swiper-slide page2">
+                <div class="p2-0">
+                    <img src="images/p2-0.png" class="p2-0-0"/>
+                    <div class="p2-0-1">张克川</div>
+                    <div class="p2-2-2">2015年3月30日</div>
+                    <div class="p2-2-3"><img src="images/p2-1.png"/><span>31523</span><img src="images/p2-3.png"/></div>
+                </div>
+            </section>
+            <section class="swiper-slide page6">
+                <div class="p1-masker"></div>
+                <div class="p0-1"><img src="images/p0-1.png"/></div>
+                <div class="p0-2"><img src="images/p0-2.png"/></div>
+                <div class="p0-3"><img src="images/p0-3.png"/></div>
+                <div class="p0-3-1"><img src="images/p0-3.png"/></div>
+                <div class="p0-4"><img src="images/p0-4.png"/></div>
+            </section>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="up"><img src="images/up.png" class="up-mark"><img src="images/up-text1.png" class="up-text"><img src="images/up.png" class="up-mark"></div>
+</div>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+{% endblock %}

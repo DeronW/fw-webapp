@@ -852,7 +852,7 @@ var Body = React.createClass({
     backBtnClick: function () {
         //location.href = document.referrer;
         //window.history.back();
-        window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+        window.location.href = location.protocol + "//m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
     },
     getLeapfrogBtn: function(val) {
         // 1 跳过按钮
@@ -888,7 +888,7 @@ var Body = React.createClass({
             //window.history.go(-1);
             //return false;
 
-            window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+            window.location.href = location.protocol + "//m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
 
             //window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
         } else if (this.state.popSelect === 2) {
@@ -981,7 +981,7 @@ $FW.DOMReady(function () {
              document.getElementById('header'));*/
 
              if(data.openStatus >= 3) {
-                window.location.href = "http://m.9888.cn/mpwap/top/index.do";                    
+                window.location.href = location.protocol + "//m.9888.cn/mpwap/top/index.do";                    
              } else {
                 ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
              }

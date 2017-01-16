@@ -8,8 +8,7 @@ const PaymentPanel = React.createClass({
             voucher_list: voucher_list,
             show_voucher_modal: false,
             use_bean: this.props.user.use_bean,
-            checked_voucher_count: cc,
-            score_used: (this.props.product_count - cc) * this.props.product.score
+            checked_voucher_count: cc
         }
     },
     componentDidMount: function () {
@@ -23,35 +22,11 @@ const PaymentPanel = React.createClass({
     },
     updateFormDataHandler: function () {
         this.props.update_payment_handler({
-            use_bean: this.state.use_bean,
-            used_bean_count: this.state.use_bean ? this.used_bean_count : 0,
-            voucher_list: this.state.voucher_list,
-            total_price: this.computeTotalPrice()
+            voucher_list: this.state.voucher_list
         });
-    },
-    computeTotalPrice: function () {
-
-        let total_price = (this.props.product_count - this.state.checked_voucher_count) *
-            this.props.product.price;
-
-        if (this.state.use_bean && total_price > 0) {
-            if (this.props.user.bean > (total_price * 100)) {
-                this.used_bean_count = parseInt(total_price * 100);
-                total_price = 0;
-            } else {
-                // notice: 可能出现浮点数精度问题, 比如 100 - 99.9 = 0.09999999999999432
-                total_price = (total_price * 100 - this.props.user.bean) / 100;
-                this.used_bean_count = this.props.user.bean;
-            }
-        }
-
-        return total_price;
     },
     toggleVoucherModal: function () {
         this.setState({show_voucher_modal: !this.state.show_voucher_modal})
-    },
-    toggleBeanHandler: function () {
-        this.setState({use_bean: !this.state.use_bean});
     },
     cancelVoucherModalHandler: function () {
         this.setState({show_voucher_modal: false})
@@ -59,13 +34,32 @@ const PaymentPanel = React.createClass({
     confirmCheckedVoucherHandler: function (new_voucher_list) {
         let cc = $FW.Utils.length(new_voucher_list, (i) => i.checked);
 
-        let score_used = (this.props.product_count - cc) * this.props.product.score;
-
         this.setState({
             voucher_list: new_voucher_list,
             checked_voucher_count: cc,
-            score_used: score_used,
             show_voucher_modal: false
+        });
+        var query = $FW.Format.urlQuery();
+        let cartFlag = query.cartFlag;
+        let prd = query.prd||[];
+        let buyNum = query.buyNum || 0;
+        let userTicketList = [];
+        for (var i = 0; i < cc; i++) {
+            userTicketList.push($FW.Utils.jsonFilter(new_voucher_list, (i) => i.checked)[i].id)
+        };
+        $FW.Ajax({
+            url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prd + `&buyNum=` + buyNum + `&userTickets=` + userTicketList,
+            enable_loading: true
+        }).then(data => {
+            let jia=(data.payableRmbAmt==0||data.payablePointAmt==0) ?"0":"+";
+            let RmbAmt= data.payableRmbAmt==0 ?"": '¥' + data.payableRmbAmt + '+'; let PointAmt= data.payablePointAmt==0  ?"":"<span className='paidPoint'>"+data.payablePointAmt + "</span>工分";
+
+            let jia1=((data.totalPrice-data.payableRmbAmt)==0||(data.totalPoints-data.payablePointAmt)==0) ?"":"+";
+            let RmbAmt1= (data.totalPrice-data.payableRmbAmt)==0 ?"-": '¥' + (data.totalPrice-data.payableRmbAmt) + '+'; let PointAmt1= (data.totalPoints-data.payablePointAmt)==0  ?"":(data.totalPoints-data.payablePointAmt) + '工分';
+
+            document.querySelectorAll('.item-detail')[1].innerHTML  = RmbAmt1+jia1+PointAmt1;
+            document.querySelector('.total-item-detail').innerHTML = RmbAmt+jia+PointAmt
+            console.log(document.querySelector('.paidPoint').innerHTML);
         })
     },
     render: function () {
@@ -87,21 +81,14 @@ const PaymentPanel = React.createClass({
                 null;
         };
 
-        let user_score = (
-            <div className="score">
-                <div className="score1">可用工分</div>
-                <div className="score2">{this.props.user.score}</div>
-                <div className="score3">支付: {this.state.score_used > 0 ? this.state.score_used : 0}</div>
-            </div>
-        );
-
         return (
             <div className="balance-wrap">
                 <div className="account-box">
 
                     <div className="coupons" onClick={this.toggleVoucherModal}>
-                        <div className="coupons-l">兑换券<span className="avail-coupon">{this.props.ordersTicketNum}张可用</span></div>
-                        <div className="coupons-r">未使用</div>
+                        <div className="coupons-l">兑换券{this.state.checked_voucher_count ? null :
+                            <span className="avail-coupon">{this.props.ordersTicketNum}张可用</span>}</div>
+                        {this.state.checked_voucher_count ? null : <div className="coupons-r">未使用</div>}
                         {checked_voucher()}
                     </div>
                     <div className="aval-points">
@@ -110,19 +97,18 @@ const PaymentPanel = React.createClass({
                     </div>
 
                     {/*<div className="coupons">
-                        <div className="coupons-l">立减券<span className="avail-coupon">11张可用</span></div>
-                        <div className="coupons-r">－30</div>
-                    </div>
+                     <div className="coupons-l">立减券<span className="avail-coupon">11张可用</span></div>
+                     <div className="coupons-r">－30</div>
+                     </div>
 
-                    <div className="coupons">
-                        <div className="coupons-l">打折券<span className="avail-coupon">11张可用</span></div>
-                        <div className="coupons-r">95%</div>
-                    </div>*/}
+                     <div className="coupons">
+                     <div className="coupons-l">打折券<span className="avail-coupon">11张可用</span></div>
+                     <div className="coupons-r">95%</div>
+                     </div>*/}
 
                 </div>
                 {this.state.show_voucher_modal ? <VoucherModal
                     voucher_list={JSON.parse(JSON.stringify(this.state.voucher_list))}
-                    product_count={this.props.product_count}
                     cancel_voucher_handler={this.cancelVoucherModalHandler}
                     confirm_voucher_handler={this.confirmCheckedVoucherHandler}
                 /> : null}

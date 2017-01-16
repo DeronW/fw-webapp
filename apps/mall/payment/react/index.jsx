@@ -23,12 +23,12 @@ const Payment = React.createClass({
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
             let link = location.protocol + '//' + location.hostname +
-                '/static/mall/add-bank-card/index.html?bizNo=' + bizNo;
+                '/static/mall/pay-add-card/index.html?info='+location.search;
             location.href = link;
         }
         else {
             var FormData = {
-                sevice: "REQ_PAY_QUICK_APPLY",
+                service: "REQ_PAY_QUICK_APPLY",
                 merchantNo: query.merchantNo,
                 amount: query.payableRmbAmt,
                 certificateNo: data[index].certificateNo,
@@ -38,24 +38,30 @@ const Payment = React.createClass({
                 bankId: data[index].bankId,
                 bankName: data[index].bankName,
                 productName: '豆哥商城商品',
-                productInfo: '豆哥商城商品'
+                productInfo: '豆哥商城商品',
+                orderTime:query.orderTime||"",
+                orderBizNo:query.orderBizNo||"",
+                orderGroupBizNo:query.orderGroupBizNo||""
             };
+            alert(JSON.stringify(FormData));console.log(FormData);
             $FW.Ajax({
                 url: `${API_PATH}mall/api/payment/v1/ucf_pay.json`,
                 //url: './ucf_pay.json',
                 enable_loading: true,
                 data: FormData,
                 success: function (result) {
-                    $FW.Component.Alert('成功');
+                    alert(JSON.stringify(result));
+                    $FW.Component.Alert('成功');return;
                     setTimeout(function () {
                         location.href = location.protocol + '//' + location.hostname +
-                            "/static/mall/send-msg-pay/index.html?merchantNo=" + result.merchantNo + "&mobileNo=" + FormData.mobileNo
+                            "/static/mall/pay-msg-pay/index.html?merchantNo=" + FormData.merchantNo + "&mobileNo=" + FormData.mobileNo
                     }, 2500);
                 }
             })
         }
     },
     render: function () {
+        alert(JSON.stringify(data));
         let data = this.props.data;
         var quick_pay = (
             <div className="pay-item" onClick={this.payCheck.bind(this,"quick_pay")}>
@@ -68,7 +74,7 @@ const Payment = React.createClass({
             </div>
         );
 
-        var payMethods = data == null ? quick_pay :
+        var payMethods = data.length == 0 ? quick_pay :
             data.map((n, index) => {
                 let accountNo = this.split(n.accountNo);
                 return (
@@ -87,7 +93,7 @@ const Payment = React.createClass({
             <div className="order-payment">
                 <div className="order-status">
                     <div className="pay-tip">请在23小时59分59秒内完成支付</div>
-                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt}元</span></div>
+                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt/100}元</span></div>
                 </div>
                 {/*<div className="order-products">
                     <div className="order-item">
