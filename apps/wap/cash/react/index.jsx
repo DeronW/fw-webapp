@@ -238,9 +238,8 @@ const Withdrawals = React.createClass({
 		}
 	},
 	handlerOnChange: function(e) {
-
+		console.log(numberFormat.format(e.target.value));
 		if(numberFormat.format(e.target.value)[0] === "0") {
-			console.log("a");
 			this.setState({
 				inputVal: ""
 			});
@@ -249,8 +248,21 @@ const Withdrawals = React.createClass({
 		}
 
 
-		if(e.target.value > this.state.propsAccountAmountVal) {
-			$FW.Component.Toast("可提现余额不足");
+		if(numberFormat.format(e.target.value) > this.state.propsAccountAmountVal) {
+			this.setState({			
+				inputVal: this.state.propsAccountAmountVal,
+				selectWhich: 1,
+				selectCashMethod: !this.state.selectCashMethod
+			});
+			return false;
+		}
+
+		if(numberFormat.format(e.target.value) < (this.props.data.criticalValue * 10000)) {
+			this.setState({			
+				inputVal: numberFormat.format(e.target.value),
+				selectWhich: 0,
+				selectCashMethod: !this.state.selectCashMethod
+			});
 			return false;
 		}
 
@@ -297,6 +309,14 @@ const Withdrawals = React.createClass({
 		this.setState({			
 			inputVal: this.state.propsAccountAmountVal
 		});
+
+		if(this.state.propsAccountAmountVal > (this.props.data.criticalValue * 10000 )) {
+			this.setState({			
+				selectWhich: 1,
+				selectCashMethod: !this.state.selectCashMethod
+			});
+		}
+		
 	},
 	handlerPost: function() {
 		var _this = this;
@@ -308,17 +328,25 @@ const Withdrawals = React.createClass({
 
 		}
 
+		console.log(this.state.selectWhich);
+
+		
 		if(this.state.selectWhich == 1) {
 			if(this.state.selectBankName == null) {
 				$FW.Component.Toast("请选择开户支行");
 				return false;
 			}			
 		}
-
-		if(this.state.inputVal > (this.props.data.criticalValue * 10000) ) {
-			$FW.Component.Toast("实时提现金额不能超过" + this.props.data.criticalValue + "万");
-			return false;
+		
+		if(this.state.selectWhich == 0) {
+			if(this.state.inputVal > (this.props.data.criticalValue * 10000) ) {
+				$FW.Component.Toast("您实时提现单笔已超过" + this.props.data.criticalValue + "万限制，请使用大额提现！");
+				return false;
+			}	
 		}
+
+
+		
 
 		// $FW.Ajax({
 		// 	url: API_PATH + "/mpwap/api/v1/validate.shtml?reflectAmount=" + this.state.inputVal,
@@ -530,10 +558,14 @@ const Withdrawals = React.createClass({
 						</div>
 		}
 
+		
+
 		var blockEml = function() {
-			if(_this.props.data.bankInfo.isCompanyAgent || _this.props.data.bankInfo.isSpecial || (_this.props.data.bankInfo.bankName == undefined || _this.props.data.bankInfo.bankName == "" ))  {				
+			if(_this.props.data.bankInfo.isCompanyAgent || _this.props.data.bankInfo.isSpecial)  {				
 				return blockTradeCashMethodEml(false);
-			} else {
+			} else if (_this.props.data.bankInfo.bankName == undefined || _this.props.data.bankInfo.bankName == "" ) {
+				return immediatelyCashMethodEml(true);
+			}else {
 				return <div>{immediatelyCashMethodEml(true)} { blockTradeCashMethodEml(true)}</div>
 			}			
 		}
