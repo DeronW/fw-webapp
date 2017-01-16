@@ -1,32 +1,42 @@
 $FW.DOMReady(function () {
     let str;
     let login=true;
+    $FW.Ajax(`http://m.9888.cn/mpwap/api/v1/getAllRegistCount.shtml`).then((data)=>{
+        $(".p1-num").html(data.allUserCount);
+    });
     $FW.Ajax({
         url: `${API_PATH}/mpwap/api/v1/getUserRanking.shtml`,//第二三页
         fail: () => true,
         complete: (data) => {
             if(data.code==10000){
-
+                swiper.lockSwipeToNext();
+                $(".p1-2").hide();
                 $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserIncome.shtml`).then((data)=>{
+
                     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserHabitMess.shtml`).then((data)=>{
 
                     });
                 });
             }else if(data.code==40101){
-
+                login=false;
+                swiper.lockSwipeToNext();
+                $(".p1-2").show();
             }else{
 
             }
 
         }
     });
-    //music();
-    //load();
+    music();
+    load();
     $(".swiper-container").css("width", $(window).width());
     $(".swiper-container").css("height", $(window).height());
     //分享弹层
     $(".pop-share").on("touchstart",function(){
         $(".pop-share").hide();
+    });
+    $(".p6-8").on("touchstart",function(){
+        $(".pop-share").show();
     });
     //查看收益弹层
     $(".pop-close").on("touchstart",function(){
@@ -45,11 +55,13 @@ $FW.DOMReady(function () {
 
         },
         onTouchStart: function(swiper,even){
-            console.log(swiper.activeIndex);
             swiper.unlockSwipeToPrev();
             swiper.unlockSwipeToNext();
             if(!login&&swiper.activeIndex==1||swiper.isEnd){
+                $(".up").hide();
                 swiper.lockSwipeToNext();
+            }else{
+                $(".up").show();
             }
             if(swiper.activeIndex==0){
                 swiper.lockSwipeToPrev();
