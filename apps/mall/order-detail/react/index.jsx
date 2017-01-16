@@ -32,11 +32,11 @@ const OrderDetail = React.createClass({
         };
 
         let count=0,score=0;
-        let count_f = function (product, index) { return (count += product.count)}
-        let score_f = function (product, index) { return (score += product.score)}
-        count=data.products.map((p, index) => count_f(p, index));
-        score=data.products.map((p, index) => score_f(p, index));
 
+        let score_f = function (product, index) { }
+        data.products.map((p, index) =>{ return count += p.count;  })
+        data.products.map((p, index) =>{ return score += p.score})
+        
         return (
            <div>
                <div className="order-status">
