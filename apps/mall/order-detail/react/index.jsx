@@ -82,7 +82,7 @@ const OrderDetail = React.createClass({
                        <div className="sequence">
                            <div className="sequence-text">
                                <span className="text">下单时间：</span>
-                               <span className="time-text">{data.order.receive_at}</span></div>
+                               <span className="time-text">{data.order.pay_at}</span></div>
                        </div>
                    </div>
                </div>

@@ -168,7 +168,7 @@ const ConfirmOrder = React.createClass({
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
-                        className="item-detail">+ ¥ {this.props.data.totalFreightPrice}</span>
+                        className="item-detail"> ¥ {this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
                 {this.props.data.showAddressOK ?
@@ -230,11 +230,7 @@ $FW.DOMReady(function () {
         />, CONTENT_NODE);
     })
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
-    }
-
-    //$FW.setLoginRedirect('/static/mall/product-detail/index.html?bizNo=' + query.productBizNo);
+     ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
 });
 
 //window.onNativeMessageReceive = function (msg) {
