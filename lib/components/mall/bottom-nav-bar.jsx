@@ -1,120 +1,124 @@
-/*
- parameters
- <NavBar title={}  height={} background={} />
- */
-
-function gotoHandler(link, need_login) {
-
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
-}
 
 const BottomNavBar = React.createClass({
     getInitialState: function () {
         let height = parseInt(this.props.height) || 100;
         let lineHeight = parseInt(this.props.height) || 100;
+
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+
         if (inIOS && inApp) {
             height += 22;
             lineHeight = 152;
         }
+
+        let match_url = w => location.pathname.indexOf(`/static/mall/${w}`) >= 0;
+
+        let tab = {
+            home: location.pathname === '/' || match_url('home'),
+            category: match_url('product'),
+            cart: match_url('cart'),
+            user: match_url('user')
+        }
+
         return {
             height: height,
             lineHeight: lineHeight,
-            background: this.props.background || 'white',
-			index:1
+            tab: tab,
+            background: this.props.background || 'white'
         }
     },
+
+    exitHandler: function () {
+        $FW.Browser.inApp() ?
+            NativeBridge.toNative('app_back_native') :
+            location.href = 'https://m.9888.cn';
+    },
+
     render: function () {
-        let fontSize = '36px';
-        let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
-        let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-        if (this.props.title && this.props.title.length > 7) fontSize = '32px';
+
+        let {tab} = this.state;
+
         let _style_footer_fixed = {
             background: "url('/static/mall/home/images/fixed-nav.png') no-repeat",
-			width: "720px",
-			height: "143px",
-			position: "fixed",
-			left: "0",
-			right: "0",
-			bottom: "0"
+            width: "720px",
+            height: "143px",
+            position: "fixed",
+            left: "0",
+            right: "0",
+            bottom: "0"
         };
 
-		var _style_footer_item1 = {
-		    width: "46px",
-			height: "70px",
-            backgroundPosition: "0px 0px",
-			top: "60px",
-			left: "51px",
-			display: "block",
-			background: "url('/static/mall/home/images/nav.png') no-repeat 0px 0px",
-			position: "absolute"
-		}
-
-		var _style_footer_item2 = {
-		    width: "42px",
-			height: "70px",
-			backgroundPosition: "-145px 0px",
-			top: "60px",
-			left: "195px",
-			display: "block",
-			background: "url('/static/mall/home/images/nav.png') no-repeat -145px 0px",
-			position: "absolute"
-
-		}
-
-		var _style_footer_item3 = {
-			width: "65px",
-			height: "70px",
-			backgroundPosition: "-422px 0px",
-			top: "60px",
-			left: "472px",
-			display: "block",
-			background: "url('/static/mall/home/images/nav.png') no-repeat -422px 0px",
-			position: "absolute"
-		}
-
-		var _style_footer_item4 = {
-		    width: "87px",
-			height: "70px",
-			backgroundPosition: "-560px 0px",
-			top: "60px",
-			left: "610px",
-			display: "block",
-			background: "url('/static/mall/home/images/nav.png') no-repeat -560px 0px",
-			position: "absolute"
-		}
-
-		var _back_to_index = {
-			display: "block",
-			width: "96px",
-			height: "96px",
-			position: "absolute",
-			top: "31px",
-			left: "312px"
-		}
-
-        if (inIOS && inApp) {
-
+        let _style_footer_item_base = {
+            backgroundImage: "url('/static/mall/home/images/nav.png')",
+            backgroundRepeat: 'no-repeat',
+            display: "block",
+            position: "absolute"
         }
 
-        let title = this.state.title;
+        let _style_footer_item_home = Object.assign({
+            width: "46px",
+            height: "70px",
+            top: "60px",
+            left: "51px",
+        }, _style_footer_item_base,
+            tab.home ?
+                { backgroundPosition: '0 -70px' } :
+                { backgroundPosition: "0px 0px" });
 
-		return (
-                <div className="_style_footer_fixed" style={_style_footer_fixed}>
-                    <a className={this.props.index==1 ? "_style_footer_item1 active" : "_style_footer_item1"} style={_style_footer_item1} onClick={ () => gotoHandler("https://mmall.9888.cn") }></a>
-                    <a className={this.props.index==2 ? "_style_footer_item2 active" : "_style_footer_item2"}  style={_style_footer_item2} onClick={ () => gotoHandler("/static/mall/product-category/index.html") }></a>
-					<a className="_back_to_index"      style={_back_to_index}      onClick={ () => $FW.Browser.inApp() ? NativeBridge.toNative('app_back_native') : location.href = 'http://m.9888.cn'}></a>
-					<a className={this.props.index==3 ? "_style_footer_item3 active" : "_style_footer_item3"}  style={_style_footer_item3} onClick={ () => gotoHandler("/static/mall/cart-shopping/index.html", true) }></a>
-					<a className={this.props.index==4 ? "_style_footer_item4 active" : "_style_footer_item4"}  style={_style_footer_item4} onClick={ () => gotoHandler("/static/mall/user/index.html", true) }></a>
-                </div>
+        let _style_footer_item_category = Object.assign({
+            width: "42px",
+            height: "70px",
+            top: "60px",
+            left: "195px",
+        }, _style_footer_item_base,
+            tab.category ?
+                { backgroundPosition: '-145px -70px' } :
+                { backgroundPosition: "-145px 0px" });
+
+        let _style_footer_item_cart = Object.assign({
+            width: "65px",
+            height: "70px",
+            top: "60px",
+            left: "472px",
+        }, _style_footer_item_base,
+            tab.cart ?
+                { backgroundPosition: '-422px -70px' } :
+                { backgroundPosition: "-422px 0px" });
+
+        let _style_footer_item_user = Object.assign({
+            width: "87px",
+            height: "70px",
+            top: "60px",
+            left: "610px",
+        }, _style_footer_item_base,
+            tab.user ?
+                { backgroundPosition: '-560px -70px' } :
+                { backgroundPosition: "-560px 0px" });
+
+        var _back_to_index = {
+            display: "block",
+            width: "96px",
+            height: "96px",
+            position: "absolute",
+            top: "31px",
+            left: "312px"
+        }
+
+        return (
+            <div className="_style_footer_fixed" style={_style_footer_fixed}>
+                <a style={_style_footer_item_home} href={tab.home ? null : "/"}> </a>
+                <a className="_style_footer_item_category" style={_style_footer_item_category}
+                    href={tab.category ? null : "/static/mall/product-category/index.html"}>
+                </a>
+                <a className="_back_to_index" style={_back_to_index} onClick={this.exitHandler}> </a>
+                <a className="_style_footer_item_cart" style={_style_footer_item_cart}
+                    href={tab.cart ? null : "/static/mall/cart/index.html"}>
+                </a>
+                <a className="_style_footer_item_user" style={_style_footer_item_user}
+                    href={tab.user ? null : "/static/mall/user/index.html"}>
+                </a>
+            </div>
         )
     }
 });

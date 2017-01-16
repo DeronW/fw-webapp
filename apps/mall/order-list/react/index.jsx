@@ -282,14 +282,9 @@ $FW.DOMReady(function () {
     })
 
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"我的订单"} back_handler={back_handler}/>, document.getElementById('header'));
-    }
+    ReactDOM.render(<Header title={"我的订单"} back_handler={back_handler}/>, HEADER_NODE);
 });
+
 function back_handler() {
     location.href = '/static/mall/user/index.html';
 }
-
-//window.onNativeMessageReceive = function (msg) {
-//    if (msg == 'history:back') back_handler()
-//};

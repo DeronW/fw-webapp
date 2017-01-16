@@ -38,24 +38,39 @@ const DETAIL_TEXT = [
 const UserAboutus = React.createClass({
 	getInitialState() {
 		return {
-			
+			detailBoolen: false,
+			liArr: [],
+			selectWhich: Number 
 		}
 	},	
+	handleList(index) {
+		this.setState({
+			detailBoolen: !this.state.detailBoolen,
+			selectWhich: index
+		});	
+	},
 	render() {
 		let li = (todo, index) => {
 			return <div key={index} className="li">
-						<div className="title-li">
+						<div className="title-li" onClick={() => this.handleList(index)}>
 							<p className="text">{todo}</p>
-							<span className="icon"></span>
+							<span className={"icon " + (this.state.selectWhich == index ? "arrow-d" : "")}></span>
 						</div>
-
-						<div className="detail-text">
-						</div>
+						{
+							this.state.selectWhich == index ? detailText(index) : ""
+						}
 					</div>
 		}; 
 
-
-		console.log(TITLE_TEXT);
+		let detailText = (index) => {
+			return <div className="detail-text">
+						{
+							DETAIL_TEXT[index].map((todo, index) => {
+								return <p key={index} className="text">{todo}</p>;
+							})	
+						}
+					</div>
+		};
 
 		return (
 			<div className="user-FAQ-cnt">

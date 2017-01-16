@@ -1,24 +1,63 @@
 const HistoryBill = React.createClass({
-     render:function(){
+    getInitialState: function () {
+        return {
+            page: 1,
+            column: []
+        }
+    },
+     componentDidMount:function(){
+         $FW.Ajax({
+             url:`${API_PATH}api/oriole/v1/loanhistory.json`,
+             method:'POST',
+             data:{token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, pageSize:20, pageIndex:1},
+         })
+             .then((data)=> {
+                 this.setState({column:data.loanHistoryList})
+             }, (err)=> console.log(err));
+         $FW.Event.touchBottom(this.loadMoreProductHandler);
+     },
+    loadMoreProductHandler: function (done) {
+        this.setState({page: this.state.page + 1});
+        $FW.Ajax({
+            url: `${API_PATH}api/oriole/v1/loanhistory.json`,
+            method:'POST',
+            data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, pageSize:20, pageIndex:this.state.page},
+            success: (data) => {
+                console.log(data)
+                let loanHistoryList = data.loanHistoryList;
+                this.setState({
+                    column: loanHistoryList,
+                    hasData: !!loanHistoryList.length
+                })
+                done && done()
+            }
+        })
+    },
+    render:function(){
+         let item_list = (item,index) => {
+             return (
+                 <div className="bill-item" key={index}>
+                     <div className="bill-detail">
+                         <div className="bill-detail-wrap">
+                             <span className="bill-money">{item.loanAmount}</span>
+                         </div>
+                         <span className="bill-deadline">{item.loanTime}</span>
+                     </div>
+                     <div className="pay-back-btn-wrap">
+                         <span className="bill-status">{item.repaymentStatus}<img src="images/right-arrow.jpg"/></span>
+                     </div>
+                 </div>
+             )
+         };
          return (
              <div>
-                 <div className="data-box">
-                     <div className="bill-item">
-                         <div className="bill-detail">
-                             <div className="bill-detail-wrap">
-                                 <span className="bill-money">90000.00</span>
-                             </div>
-                             <span className="bill-deadline">2016-12-22 15:44:38</span>
-                         </div>
-                         <div className="pay-back-btn-wrap">
-                             <span className="bill-status">已还款<img src="images/right-arrow.jpg"/></span>
-                         </div>
-                     </div>
-                     <div className="data-completion"></div>
-                 </div>
-                 <div className="no-data-box">
-                     <img className="no-data-img" src="images/no-data.png"/>
-                 </div>
+                 {this.state.column.length == 0 ? (<div className="no-data-box">
+                         <img className="no-data-img" src="images/no-data.png"/>
+                     </div>):
+                     (<div className="data-box">
+                         {this.state.column.map(item_list)}
+                         <div className="data-completion">已加载完全部数据</div>
+                     </div>)}
              </div>
          )
      }

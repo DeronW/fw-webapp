@@ -5,8 +5,11 @@ let APP_NAMES = [
     'home', // 首页
     // 专题/活动 相关页面
     'activity', // 专题活动页
-    // 购物车相关页面
-    'cart-shopping',
+    {
+        name: 'waiting',
+        describe: '敬请期待页',
+        include_components: [`${PROJ}/header.jsx`]
+    },
 ];
 
 const USER_PAGES = [
@@ -16,11 +19,6 @@ const USER_PAGES = [
     'user-voucher',
     'user-deliver-address',
     'user-build-deliver',
-    {
-        name: 'user-waiting',
-        describe: '建设中 页面',
-        include_components: [`${PROJ}/header.jsx`]
-    },
 ]
 
 const PRODUCT_PAGES = [
@@ -31,6 +29,11 @@ const PRODUCT_PAGES = [
     'product-recharge',
     'product-category',
     'product-hot-activity',
+]
+
+const CART_PAGES = [
+    // 购物车相关页面
+    'cart'
 ]
 
 const ORDER_PAGES = [
@@ -51,7 +54,6 @@ const PAYMENT_PAGES = [
     'pay-verify-bank',
     'pay-msg-pay',
     'pay-msg-bind',
-
 ]
 
 const GAME_PAGES = [
@@ -73,6 +75,7 @@ APP_NAMES.push(
     ...PRODUCT_PAGES,
     ...ORDER_PAGES,
     ...PAYMENT_PAGES,
+    ...CART_PAGES,
     ...GAME_PAGES,
     ...DEVELOPING_PAGES
 );
@@ -83,6 +86,10 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
         'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx'
     ];
+
+    let INCLUDE_LESS = [
+        'less/mall/mall.less'
+    ]
 
     let INCLUDE_JAVASCRIPTS = [
         'use-strict.js',

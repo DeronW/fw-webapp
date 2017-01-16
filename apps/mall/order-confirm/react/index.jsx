@@ -15,10 +15,13 @@ const ConfirmOrder = React.createClass({
         };
 
         return {
-            isVirtualProduct: this.props.isVirtualProduct
+            isVirtualProduct: this.props.isVirtualProduct,
+            avaliablePoints: this.props.data.avaliablePoints,
+            payablePointAmt:this.props.data.payablePointAmt
+
         }
     },
-    componentDidMount: function () {
+    componentWillMount: function () {
         this.refreshTokenStr()
     },
     refreshTokenStr: function () {
@@ -27,11 +30,16 @@ const ConfirmOrder = React.createClass({
             //url: `./getTokenStr.json`
         }).then(data => {
             this.FormData.tokenStr = data.tokenStr;
+            console.log("tokenStr:"+this.FormData.tokenStr)
         })
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
-alert(JSON.stringify(this.FormData));
+
+        if (this.state.payablePointAmt > this.state.avaliablePoints){
+            $FW.Component.Alert('工分不足，不能购买');return;
+        }
+
         let submit = function submit() {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
@@ -46,11 +54,11 @@ alert(JSON.stringify(this.FormData));
                      this.refreshTokenStr()
                      } else {
                      */
-                    console.log(result); return;
+                    console.log(result.status);
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
-                            '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
+                            '&payableRmbAmt=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
                     }
                     else {
                         location.href = '/static/mall/order-complete/index.html'
@@ -92,15 +100,22 @@ alert(JSON.stringify(this.FormData));
             }
 
     },
+    changeTicketPoints(payablePointAmt) {
+        this.setState({
+            payablePointAmt
+        });
+    },
+
     validateBeforeSMSCodeHandler: function () {
-        let data = this.props.data;
-        let product = this.props.product;
-        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.userTickets.length;
+        //let data = this.props.data;
+        //let product = this.props.product;
+        //let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.userTickets.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
 
-        if (data.payablePointAmt > data.avaliablePoints)
+        // if (document.querySelector('.paidPoint').innerHTML> data.avaliablePoints)
+        if (this.state.payablePointAmt > this.state.avaliablePoints)
             return $FW.Component.Alert('工分不足，不能购买');
 
         return true
@@ -136,19 +151,24 @@ alert(JSON.stringify(this.FormData));
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
+                              changeTicketPoints = {payablePointAmt => this.changeTicketPoints(payablePointAmt)}
                 />
                 <div className="total-price">
                     <div className="price-item">
                         <span className="item-name">商品金额</span><span
-                        className="item-detail">￥{this.props.data.totalPrice}+{this.props.data.totalPoints}工分</span>
+                        className="item-detail">
+                        {this.props.data.totalPrice==0?"":"¥"+this.props.data.totalPrice}
+                        {this.props.data.totalPrice==0||this.props.data.totalPoints==0?"":"+"}
+                        {this.props.data.totalPoints==0?"":this.props.data.totalPoints+"工分"}</span>
                     </div>
                     <div className="price-item">
-                        <span className="item-name">兑换券</span><span
-                        className="item-detail">-{this.props.data.ordersTicketPoints}工分-{this.props.data.ordersTicketPrice}金额</span>
+                        <span className="item-name">兑换券</span><span className="item-detail">
+                        {this.props.data.ordersTicketPoints==0?"":"-"+this.props.data.ordersTicketPoints+"工分"+
+                        this.props.data.ordersTicketPrice?"":"-"+this.props.data.ordersTicketPrice+"金额"}</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
-                        className="item-detail">+￥{this.props.data.totalFreightPrice}</span>
+                        className="item-detail">+ ¥ {this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
                 {this.props.data.showAddressOK ?
@@ -158,7 +178,12 @@ alert(JSON.stringify(this.FormData));
                 <div className="confirm-order-foot">
                     <span className="total-item-name">实付:</span>
                     <span
-                        className="total-item-detail">¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分</span>
+                        className="total-item-detail">
+                        {this.props.data.payableRmbAmt==0?"":"¥"+this.props.data.payableRmbAmt}
+                        {this.props.data.payableRmbAmt==0||this.props.data.payablePointAmt==0?"":"+"}
+                        {this.props.data.payablePointAmt==0?"":this.props.data.payablePointAmt+"工分"}
+                        {/*¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分*/}
+                    </span>
                     <a onClick={this.makeOrderHandler}
                        className={this.props.data.canBuy ? "btn-red" : "btn-red btn-gray"}>提交订单</a>
                 </div>

@@ -4,7 +4,7 @@ const Result = React.createClass({
         return (
             <div className="question-result">
                 <div className="result-top">
-                    <div className="result-img"><img src="images/result.png"/></div>
+                    <div className="result-img"><img src="images/result.png" /></div>
                     <div className="result-score">{this.props.score}分</div>
                     <div className="result-text1">评估完成，您的风险承受能力为：</div>
                     <div className="result-text2">{this.props.investType}</div>
@@ -44,7 +44,7 @@ const Result = React.createClass({
                     </div>
                 </div>
                 <div className="foot-btn-box">
-                    <div className="foot-btn" onClick={()=>{back_handler()}}>退出</div>
+                    <div className="foot-btn" onClick={() => { back_handler() } }>退出</div>
                 </div>
             </div>
         )

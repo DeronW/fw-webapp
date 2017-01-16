@@ -26,6 +26,7 @@
 {% block content %}
 <div id="header"></div>
 <div id="cnt"></div>
+<div id="notice"></div>
 <div id="bottom-nav-bar"></div>
 {% endblock %}
 
@@ -52,7 +53,5 @@
     })();
 </script>
 {% endif %}
-{% if !DEBUG %}{% include 'exception-handler.html' %}{% endif %}
-
 </body>
 </html>

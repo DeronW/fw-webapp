@@ -51,10 +51,15 @@ const PaymentPanel = React.createClass({
             url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prd + `&buyNum=` + buyNum + `&userTickets=` + userTicketList,
             enable_loading: true
         }).then(data => {
-            document.querySelectorAll('.item-detail')[1].innerHTML = '-' + (data.totalPrice-data.payableRmbAmt) + '工分-' + (data.totalPoints-data.payablePointAmt) + '金额'
-            document.querySelector('.total-item-detail').innerHTML = '¥' + data.payableRmbAmt + '+' + data.payablePointAmt + '工分';
+            let jia=(data.payableRmbAmt==0||data.payablePointAmt==0) ?"0":"+";
+            let RmbAmt= data.payableRmbAmt==0 ?"": '¥' + data.payableRmbAmt + '+'; let PointAmt= data.payablePointAmt==0  ?"":data.payablePointAmt + '工分';
 
+            let jia1=((data.totalPrice-data.payableRmbAmt)==0||(data.totalPoints-data.payablePointAmt)==0) ?"":"+";
+            let RmbAmt1= (data.totalPrice-data.payableRmbAmt)==0 ?"-": '¥' + (data.totalPrice-data.payableRmbAmt) + '+'; let PointAmt1= (data.totalPoints-data.payablePointAmt)==0  ?"":(data.totalPoints-data.payablePointAmt) + '工分';
 
+            document.querySelectorAll('.item-detail')[1].innerHTML  = RmbAmt1+jia1+PointAmt1;
+            document.querySelector('.total-item-detail').innerHTML = RmbAmt+jia+PointAmt
+            this.props.changeTicketPoints(PointAmt);
         })
     },
     render: function () {

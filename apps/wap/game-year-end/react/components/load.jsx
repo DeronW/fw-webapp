@@ -61,7 +61,54 @@ function load(){
         http+"/p0-2.png",
         http+"/p0-3.png",
         http+"/p0-4.png",
+
+        http+"/p1-0.png",
+        http+"/p1-1.png",
+        http+"/p1-2.png",
+
+        http+"/p2-0.png",
+        http+"/p2-1.png",
+        http+"/p2-3.png",
+
+        http+"/p3-0.png",
+        http+"/p3-1.png",
+        http+"/p3-2.png",
+        http+"/p3-3.png",
+        http+"/p3-close.png",
+        http+"/p3-masker.png",
+
+        http+"/p4-1.png",
+        http+"/p4-2.png",
+        http+"/p4-3.png",
+        http+"/p4-4.png",
+        http+"/p4-text1.png",
+        http+"/p4-text2.png",
+        http+"/p4-text3.png",
+
+        http+"/p5-1.png",
+        http+"/p5-2.png",
+        http+"/p5-3.png",
+        http+"/p5-level-1.png",
+        http+"/p5-level-2.png",
+        http+"/p5-level-3.png",
+        http+"/p5-level-4.png",
+        http+"/p5-level-5.png",
+
+        http+"/p6-0.png",
+        http+"/p6-1.png",
+        http+"/p6-2.png",
+        http+"/p6-3.png",
+        http+"/p6-4.png",
+        http+"/p6-5.png",
+        http+"/p6-6.png",
+        http+"/p6-7.png",
+        http+"/p6-8.png",
+
+        http+"/share.png",
+        http+"/up-text1.png",
         http+"/up.png",
+        http+"/music1.png",
+        http+"/music2.png",
     ], function(percent) {
         touchStyleLoadingEl.children[0].innerHTML = percent+"%";
         if (percent >= 100) {
