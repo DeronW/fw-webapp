@@ -622,7 +622,7 @@ const Withdrawals = React.createClass({
 										{this.state.selectBankName === null ? "开户支行" : this.state.selectBankName}
 									</div>
 									<div className="choice">
-										<div className="pleas" style={{color:'#555555'}}  >请选择</div></div>
+										<div className="pleas" style={{color:'#555555'}}  >请选择开户支行</div></div>
 								</div>
 							</div> : null
 					}
