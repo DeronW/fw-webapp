@@ -20,7 +20,7 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
         `${lib_path}request-animation-frame-0.0.23.js`,
         `${lib_path}promise-2.0.2.min.js`,
         `${lib_path}fw-1.5.2.js`,
-        `${lib_path}native-bridge-0.3.0.js`
+        `${lib_path}native-bridge-0.4.0.js`
     ];
 
     if (debug) {
