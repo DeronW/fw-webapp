@@ -21,8 +21,8 @@ const ConfirmOrder = React.createClass({
 
         }
     },
-    componentDidMount: function () {
-        this.refreshTokenStr()
+    componentWillMount: function () {
+         this.refreshTokenStr()
     },
     refreshTokenStr: function () {
         $FW.Ajax({
@@ -38,7 +38,7 @@ const ConfirmOrder = React.createClass({
         if (this.state.payablePointAmt > this.state.avaliablePoints){
             $FW.Component.Alert('工分不足，不能购买');return;
         }
-        
+
         let submit = function submit() {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
