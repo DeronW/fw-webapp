@@ -22,7 +22,7 @@ const ConfirmOrder = React.createClass({
         }
     },
     componentWillMount: function () {
-         this.refreshTokenStr()
+        this.refreshTokenStr()
     },
     refreshTokenStr: function () {
         $FW.Ajax({
@@ -30,6 +30,7 @@ const ConfirmOrder = React.createClass({
             //url: `./getTokenStr.json`
         }).then(data => {
             this.FormData.tokenStr = data.tokenStr;
+            console.log("tokenStr:"+this.FormData.tokenStr)
         })
     },
     makeOrderHandler: function () {
