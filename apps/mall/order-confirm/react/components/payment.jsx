@@ -1,7 +1,7 @@
 const PaymentPanel = React.createClass({
     getInitialState: function () {
         let voucher_list = this.props.voucher_list;
-        let cc = $FW.Utils.length(voucher_list, (i) => i.checked);
+        let cc = $FW.Utils.length(voucher_list, (i) => i.selected);
 
         this.used_bean_count = 0;
         return {
@@ -33,7 +33,7 @@ const PaymentPanel = React.createClass({
     },
     confirmCheckedVoucherHandler: function (new_voucher_list) {
 
-        let cc = $FW.Utils.length(new_voucher_list, (i) => i.checked);
+        let cc = $FW.Utils.length(new_voucher_list, (i) => i.selected);
 
         this.setState({
             voucher_list: new_voucher_list,
@@ -49,7 +49,7 @@ const PaymentPanel = React.createClass({
         let buyNum = query.buyNum || 0;
         let userTicketList = [];
 
-        let checkedVoucher=$FW.Utils.jsonFilter(new_voucher_list, (i) => i.checked);
+        let checkedVoucher=$FW.Utils.jsonFilter(new_voucher_list, (i) => i.selected);
         for (var key in checkedVoucher) {
             userTicketList.push(checkedVoucher[key].id);
         };
@@ -76,7 +76,7 @@ const PaymentPanel = React.createClass({
             let voucher_name;
 
             for (var i = 0; i < this.state.voucher_list.length; i++) {
-                if (this.state.voucher_list[i].checked) {
+                if (this.state.voucher_list[i].selected) {
                     voucher_name = this.state.voucher_list[i].productName;
                     break;
                 }
