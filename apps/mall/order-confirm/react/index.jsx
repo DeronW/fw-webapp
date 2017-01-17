@@ -88,13 +88,13 @@ const ConfirmOrder = React.createClass({
         this.FormData.msgCode = code;
     },
     updatePaymentHandler: function (options) {
-
          //this.FormData.payBeanPrice = options.used_bean_count;
             if (typeof(options.voucher_list) == 'object') {
                 this.FormData.userTickets = [];
                 for (var i = 0; i < options.voucher_list.length; i++) {
                     var e = options.voucher_list[i];
-                    if (e.checked) this.FormData.userTickets.push(e.id);
+
+                    if (e.selected) this.FormData.userTickets.push(e.id);
                 }
                 //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
@@ -168,7 +168,7 @@ const ConfirmOrder = React.createClass({
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
-                        className="item-detail">+ ¥ {this.props.data.totalFreightPrice}</span>
+                        className="item-detail"> ¥ {this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
                 {this.props.data.showAddressOK ?
@@ -230,11 +230,7 @@ $FW.DOMReady(function () {
         />, CONTENT_NODE);
     })
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
-    }
-
-    //$FW.setLoginRedirect('/static/mall/product-detail/index.html?bizNo=' + query.productBizNo);
+     ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
 });
 
 //window.onNativeMessageReceive = function (msg) {

@@ -86,13 +86,16 @@ const User = React.createClass({
                         <span className="item-name item-icon7">兑换券</span>
                         <span className="jump-arrow"></span>
                     </a>
+                    {/*
                     <a className="personal-item" href="/static/mall/pay-bank-card/index.html?id=user">
                         <span className="item-name item-icon8">银行卡</span>
                         <span className="jump-arrow"></span>
                         <span className="bank-card-status">已绑定</span>
                     </a>
+                     */}
                 </div>
                 <div className="icon-list">
+                    {/*
                     <a className="list-box" href="/static/mall/user-prize-record/index.html">
                         <img src="images/icon9.jpg" />
                         <span className="box-title1">抽奖记录</span>
@@ -101,6 +104,7 @@ const User = React.createClass({
                         <img src="images/icon11.jpg" />
                         <span className="box-title2">我的足迹</span>
                     </a>
+                     */}
                     <a className="list-box" href="tel:400-0322-988">
                         <img src="images/icon10.jpg" />
                         <span className="box-title3">客服热线</span>
@@ -179,6 +183,6 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}mall/api/member/v1/user.json`,
         enable_loading: true
-    }).then(data => ReactDOM.render(<User data={data} />, CONTENT_NODE))
+    }).then(data => ReactDOM.render(<User data={data} />, CONTENT_NODE));
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 });
