@@ -107,6 +107,8 @@ function load(){
         http+"/share.png",
         http+"/up-text1.png",
         http+"/up.png",
+        http+"/music1.png",
+        http+"/music2.png",
     ], function(percent) {
         touchStyleLoadingEl.children[0].innerHTML = percent+"%";
         if (percent >= 100) {

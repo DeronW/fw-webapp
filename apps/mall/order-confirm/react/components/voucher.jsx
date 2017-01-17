@@ -5,11 +5,10 @@ const VoucherModal = React.createClass({
 
     toggleVoucher: function (index) {
         let list = this.state.voucher_list;
-
-        list[index].checked = !list[index].checked;
-        if ($FW.Utils.length(list, (i) => i.checked) > this.props.product_count) {
+        list[index].selected = !list[index].selected;
+        if ($FW.Utils.length(list, (i) => i.selected) > this.props.product_count) {
             $FW.Component.Alert('兑换券数量不能大于购买商品数量');
-            list[index].checked = !list[index].checked;
+            list[index].selected = !list[index].selected;
         } else {
             this.setState({voucher_list: list});
         }
@@ -32,7 +31,7 @@ const VoucherModal = React.createClass({
             return (
                 <div className="li" key={index}
                      onClick={() => this.toggleVoucher(index) }>
-                    <div className={data.checked ? "choose checked" : "choose"}></div>
+                    <div className={data.selected ? "choose checked" : "choose"}></div>
                     <div className="name">{data.productName}</div>
                     <div className="date">{date}</div>
                 </div>
