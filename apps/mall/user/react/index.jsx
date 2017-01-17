@@ -183,6 +183,6 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}mall/api/member/v1/user.json`,
         enable_loading: true
-    }).then(data => ReactDOM.render(<User data={data} />, CONTENT_NODE))
+    }).then(data => ReactDOM.render(<User data={data} />, CONTENT_NODE));
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 });
