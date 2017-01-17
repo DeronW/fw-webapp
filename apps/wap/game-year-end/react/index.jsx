@@ -16,9 +16,9 @@ $FW.DOMReady(function () {
         complete: (data) => {
             if (data.code == 10000) {
                 swiper.lockSwipeToNext();
-                $(".p2-0-1").html(data.userName);
-                $(".p2-2-2").html(data.registDate);
-                $("#p2-2-3").html(data.myRank);
+                $(".p2-0-1").html(data.data.userName);
+                $(".p2-2-2").html(data.data.registDate);
+                $("#p2-2-3").html(data.data.myRank);
                 $(".p1-2").hide();
                 $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserIncome.shtml`).then((data) => {
                     $("#p3-2").html(data.investTimesAll);
@@ -32,7 +32,6 @@ $FW.DOMReady(function () {
                     $("#li-r3").html(data.cashCoupon+"元");
                     $("#li-r4").html(data.beanCount+"元");
                     data.balanceProfit?$("#li-r5").html(data.balanceProfit):null;
-
                     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
                         $("#p4-0").html(data.investTimesYear);
                         $("#p4-1").html(data.monthName);
