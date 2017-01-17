@@ -1,6 +1,6 @@
 $FW.DOMReady(function () {
     let str;
-    let login = true;
+    let login = false;
     $("#p4-3-2").attr("src", "images/p4-text" + parseInt(Math.random() * 3 + 1) + ".png");
     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getAllRegistCount.shtml`).then((data) => {
         let allUserCount = data.allUserCount.split("");
@@ -15,7 +15,7 @@ $FW.DOMReady(function () {
         fail: () => true,
         complete: (data) => {
             if (data.code == 10000) {
-                swiper.lockSwipeToNext();
+                login =true;
                 $(".p2-0-1").html(data.data.userName);
                 $(".p2-2-2").html(data.data.registDate);
                 $("#p2-2-3").html(data.data.myRank);
@@ -57,7 +57,6 @@ $FW.DOMReady(function () {
                 });
             } else if (data.code == 40101) {
                 login = false;
-                swiper.lockSwipeToNext();
                 $(".p1-2").show();
             } else {
                 $FW.Component.Alert(code.message);
