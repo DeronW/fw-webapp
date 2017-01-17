@@ -15,10 +15,13 @@ const ConfirmOrder = React.createClass({
         };
 
         return {
-            isVirtualProduct: this.props.isVirtualProduct
+            isVirtualProduct: this.props.isVirtualProduct,
+            avaliablePoints: this.props.data.avaliablePoints,
+            payablePointAmt:this.props.data.payablePointAmt
+
         }
     },
-    componentDidMount: function () {
+    componentWillMount: function () {
         this.refreshTokenStr()
     },
     refreshTokenStr: function () {
@@ -27,10 +30,15 @@ const ConfirmOrder = React.createClass({
             //url: `./getTokenStr.json`
         }).then(data => {
             this.FormData.tokenStr = data.tokenStr;
+            console.log("tokenStr:"+this.FormData.tokenStr)
         })
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
+
+        if (this.state.payablePointAmt > this.state.avaliablePoints){
+            $FW.Component.Alert('工分不足，不能购买');return;
+        }
 
         let submit = function submit() {
             $FW.Ajax({
@@ -80,27 +88,34 @@ const ConfirmOrder = React.createClass({
         this.FormData.msgCode = code;
     },
     updatePaymentHandler: function (options) {
-
          //this.FormData.payBeanPrice = options.used_bean_count;
             if (typeof(options.voucher_list) == 'object') {
                 this.FormData.userTickets = [];
                 for (var i = 0; i < options.voucher_list.length; i++) {
                     var e = options.voucher_list[i];
-                    if (e.checked) this.FormData.userTickets.push(e.id);
+
+                    if (e.selected) this.FormData.userTickets.push(e.id);
                 }
                 //this.FormData.useTicket = !!this.FormData.tickets.length;
             }
 
     },
+    changeTicketPoints(payablePointAmt) {
+        this.setState({
+            payablePointAmt
+        });
+    },
+
     validateBeforeSMSCodeHandler: function () {
-        let data = this.props.data;
-        let product = this.props.product;
-        let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.userTickets.length;
+        //let data = this.props.data;
+        //let product = this.props.product;
+        //let should_pay_count = parseInt(this.FormData.buyNum) - this.FormData.userTickets.length;
 
         if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
             return $FW.Component.Alert('请添加收货地址');
 
-        if (document.querySelector('.paidPoint').innerHTML> data.avaliablePoints)
+        // if (document.querySelector('.paidPoint').innerHTML> data.avaliablePoints)
+        if (this.state.payablePointAmt > this.state.avaliablePoints)
             return $FW.Component.Alert('工分不足，不能购买');
 
         return true
@@ -136,6 +151,7 @@ const ConfirmOrder = React.createClass({
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
+                              changeTicketPoints = {payablePointAmt => this.changeTicketPoints(payablePointAmt)}
                 />
                 <div className="total-price">
                     <div className="price-item">
@@ -146,12 +162,13 @@ const ConfirmOrder = React.createClass({
                         {this.props.data.totalPoints==0?"":this.props.data.totalPoints+"工分"}</span>
                     </div>
                     <div className="price-item">
-                        <span className="item-name">兑换券</span><span
-                        className="item-detail">-{this.props.data.ordersTicketPoints}工分-{this.props.data.ordersTicketPrice}金额</span>
+                        <span className="item-name">兑换券</span><span className="item-detail">
+                        {this.props.data.ordersTicketPoints==0?"":"-"+this.props.data.ordersTicketPoints+"工分"+
+                        this.props.data.ordersTicketPrice?"":"-"+this.props.data.ordersTicketPrice+"金额"}</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
-                        className="item-detail">+ ¥ {this.props.data.totalFreightPrice}</span>
+                        className="item-detail"> ¥ {this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
                 {this.props.data.showAddressOK ?
@@ -164,7 +181,7 @@ const ConfirmOrder = React.createClass({
                         className="total-item-detail">
                         {this.props.data.payableRmbAmt==0?"":"¥"+this.props.data.payableRmbAmt}
                         {this.props.data.payableRmbAmt==0||this.props.data.payablePointAmt==0?"":"+"}
-                        {this.props.data.payablePointAmt==0?"":"<span className='paidPoint'>"+this.props.data.payablePointAmt+"</span>工分"}
+                        {this.props.data.payablePointAmt==0?"":this.props.data.payablePointAmt+"工分"}
                         {/*¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分*/}
                     </span>
                     <a onClick={this.makeOrderHandler}
@@ -213,11 +230,7 @@ $FW.DOMReady(function () {
         />, CONTENT_NODE);
     })
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
-    }
-
-    //$FW.setLoginRedirect('/static/mall/product-detail/index.html?bizNo=' + query.productBizNo);
+     ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
 });
 
 //window.onNativeMessageReceive = function (msg) {

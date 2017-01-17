@@ -1,7 +1,7 @@
 const PaymentPanel = React.createClass({
     getInitialState: function () {
         let voucher_list = this.props.voucher_list;
-        let cc = $FW.Utils.length(voucher_list, (i) => i.checked);
+        let cc = $FW.Utils.length(voucher_list, (i) => i.selected);
 
         this.used_bean_count = 0;
         return {
@@ -32,42 +32,51 @@ const PaymentPanel = React.createClass({
         this.setState({show_voucher_modal: false})
     },
     confirmCheckedVoucherHandler: function (new_voucher_list) {
-        let cc = $FW.Utils.length(new_voucher_list, (i) => i.checked);
+
+        let cc = $FW.Utils.length(new_voucher_list, (i) => i.selected);
 
         this.setState({
             voucher_list: new_voucher_list,
             checked_voucher_count: cc,
             show_voucher_modal: false
         });
+
+        if(cc==0) return;
+
         var query = $FW.Format.urlQuery();
         let cartFlag = query.cartFlag;
         let prd = query.prd||[];
         let buyNum = query.buyNum || 0;
         let userTicketList = [];
-        for (var i = 0; i < cc; i++) {
-            userTicketList.push($FW.Utils.jsonFilter(new_voucher_list, (i) => i.checked)[i].id)
+
+        let checkedVoucher=$FW.Utils.jsonFilter(new_voucher_list, (i) => i.selected);
+        for (var key in checkedVoucher) {
+            userTicketList.push(checkedVoucher[key].id);
         };
+
         $FW.Ajax({
             url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prd + `&buyNum=` + buyNum + `&userTickets=` + userTicketList,
             enable_loading: true
         }).then(data => {
+
             let jia=(data.payableRmbAmt==0||data.payablePointAmt==0) ?"0":"+";
-            let RmbAmt= data.payableRmbAmt==0 ?"": '¥' + data.payableRmbAmt + '+'; let PointAmt= data.payablePointAmt==0  ?"":"<span className='paidPoint'>"+data.payablePointAmt + "</span>工分";
+            let RmbAmt= data.payableRmbAmt==0 ?"": '¥' + data.payableRmbAmt + '+'; let PointAmt= data.payablePointAmt==0  ?"":data.payablePointAmt + '工分';
 
             let jia1=((data.totalPrice-data.payableRmbAmt)==0||(data.totalPoints-data.payablePointAmt)==0) ?"":"+";
-            let RmbAmt1= (data.totalPrice-data.payableRmbAmt)==0 ?"-": '¥' + (data.totalPrice-data.payableRmbAmt) + '+'; let PointAmt1= (data.totalPoints-data.payablePointAmt)==0  ?"":(data.totalPoints-data.payablePointAmt) + '工分';
+            let RmbAmt1= (data.totalPrice-data.payableRmbAmt)==0 ?"-": '¥' + (data.totalPrice-data.payableRmbAmt); let PointAmt1= (data.totalPoints-data.payablePointAmt)==0  ?"":(data.totalPoints-data.payablePointAmt) + '工分';
 
             document.querySelectorAll('.item-detail')[1].innerHTML  = RmbAmt1+jia1+PointAmt1;
             document.querySelector('.total-item-detail').innerHTML = RmbAmt+jia+PointAmt
-            console.log(document.querySelector('.paidPoint').innerHTML);
+            this.props.changeTicketPoints(PointAmt);
         })
     },
     render: function () {
 
         let checked_voucher = () => {
             let voucher_name;
+
             for (var i = 0; i < this.state.voucher_list.length; i++) {
-                if (this.state.voucher_list[i].checked) {
+                if (this.state.voucher_list[i].selected) {
                     voucher_name = this.state.voucher_list[i].productName;
                     break;
                 }

@@ -7,7 +7,8 @@ function gotoHandler(link, need_login) {
     // } else {
     //     location.href = encodeURI(link);
     // }
-    location.href = encodeURI(link);
+    location.
+        href = encodeURI(link);
 }
 
 const Mall = React.createClass({
