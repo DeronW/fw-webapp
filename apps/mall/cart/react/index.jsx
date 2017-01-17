@@ -213,4 +213,3 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"购物车"} show_back_btn={true} />, HEADER_NODE);
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 });
-
