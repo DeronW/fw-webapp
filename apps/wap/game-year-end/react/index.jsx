@@ -27,11 +27,11 @@ $FW.DOMReady(function () {
                     $("#smoke-num").html(data.pipeCount);
                     $("#cloth-num").html(data.windbreakCount);
 
-                    $("#li-r1").html(data.receivedInterest);
-                    $("#li-r2").html(data.waitedInterest);
-                    $("#li-r3").html(data.cashCoupon);
-                    $("#li-r4").html(data.beanCount);
-                    $("#li-r5").html(data.balanceProfit);
+                    $("#li-r1").html(data.receivedInterest+"元");
+                    $("#li-r2").html(data.waitedInterest+"元");
+                    $("#li-r3").html(data.cashCoupon+"元");
+                    $("#li-r4").html(data.beanCount+"元");
+                    data.balanceProfit?$("#li-r5").html(data.balanceProfit):null;
 
                     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
                         $("#p4-0").html(data.investTimesYear);
@@ -127,7 +127,7 @@ $FW.DOMReady(function () {
     }
 
     var gurl = `${API_PATH}/static/wap/game-year-end/index.html`;
-    var iurl = `${API_PATH}/static/wap/game-year-end/images/share-ico.png`;
+    var iurl = `${API_PATH}/static/wap/game-year-end/images/share-ico.jpg`;
 
     function setShareFriend() {
         wx.onMenuShareAppMessage({
