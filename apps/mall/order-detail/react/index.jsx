@@ -36,7 +36,7 @@ const OrderDetail = React.createClass({
         let score_f = function (product, index) { }
         data.products.map((p, index) =>{ return count += p.count;  })
         data.products.map((p, index) =>{ return score += p.score})
-        
+
         return (
            <div>
                <div className="order-status">
@@ -72,7 +72,7 @@ const OrderDetail = React.createClass({
                <div className="pay-info">
                    <div className="pay-info-title"><span>支付信息</span></div>
                    <div className="pay-item"><span className="pay-item-title">兑换券支付</span><span className="pay-item-amount">{data.order.ticket_num}</span></div>
-                   <div className="pay-item"><span className="pay-item-title">{data.payment.money_source}</span><span className="pay-item-amount">¥{data.payment.money}</span></div>
+                   <div className="pay-item"><span className="pay-item-title">现金支付{/*data.payment.money_source*/}</span><span className="pay-item-amount">¥{data.payment.money}</span></div>
                    <div className="pay-item"><span className="pay-item-title">工分支付</span><span className="pay-item-amount">{data.payment.score}</span></div>
                </div>
 

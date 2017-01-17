@@ -88,12 +88,13 @@ const ConfirmOrder = React.createClass({
         this.FormData.msgCode = code;
     },
     updatePaymentHandler: function (options) {
-
+        console.log(voucher_list);
          //this.FormData.payBeanPrice = options.used_bean_count;
             if (typeof(options.voucher_list) == 'object') {
                 this.FormData.userTickets = [];
                 for (var i = 0; i < options.voucher_list.length; i++) {
                     var e = options.voucher_list[i];
+
                     if (e.checked) this.FormData.userTickets.push(e.id);
                 }
                 //this.FormData.useTicket = !!this.FormData.tickets.length;

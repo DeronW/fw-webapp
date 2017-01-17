@@ -74,8 +74,8 @@ const PaymentPanel = React.createClass({
 
         let checked_voucher = () => {
             let voucher_name;
+
             for (var i = 0; i < this.state.voucher_list.length; i++) {
-                this.state.voucher_list[i].checked;
                 if (this.state.voucher_list[i].checked) {
                     voucher_name = this.state.voucher_list[i].productName;
                     break;
