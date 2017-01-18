@@ -3,9 +3,8 @@ $FW.DOMReady(function () {
     let login = false;
     $("#p4-3-2").attr("src", "images/p4-text" + parseInt(Math.random() * 3 + 1) + ".png");
     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getAllRegistCount.shtml`).then((data) => {
-        let allUserCount = data.allUserCount.split("");
+        let allUserCount = (data.allUserCount+"").split("");
         let s = "";
-        console.log("allUserCount:"+data);
         for (var i = 0; i < allUserCount.length; i++) {
             s += "<span class='p1-num" + i + "' style='transition-delay:" + 0.2 * i + "s ;'>" + allUserCount[i] + "</span>";
         }
@@ -17,7 +16,7 @@ $FW.DOMReady(function () {
         complete: (data) => {
             if (data.code == 10000) {
                 login =true;
-                $(".p2-0-1").html(data.data.userName);
+                $(".p2-0-1").html(data.data.userName?data.data.userName:"豆尔摩斯");
                 $(".p2-2-2").html(data.data.registDate);
                 $("#p2-2-3").html(data.data.myRank);
                 $(".p1-2").hide();
@@ -27,7 +26,6 @@ $FW.DOMReady(function () {
                     $("#p3-5").html(data.allReceipt);
                     $("#smoke-num").html(data.pipeCount);
                     $("#cloth-num").html(data.windbreakCount);
-
                     $("#li-r1").html(data.receivedInterest+"元");
                     $("#li-r2").html(data.waitedInterest+"元");
                     $("#li-r3").html(data.cashCoupon+"元");
@@ -60,7 +58,7 @@ $FW.DOMReady(function () {
                 login = false;
                 $(".p1-2").show();
             } else {
-                $FW.Component.Alert(code.message);
+                $FW.Component.Alert(data.message);
             }
         }
     });
@@ -160,12 +158,12 @@ $FW.DOMReady(function () {
         });
     }
 
-
+let newUrl=location.href.split("?")[0];
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
-        data: {url: location.href},
+        data: {url:newUrl},
         success: (data) => {
-            setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
+            setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
             setShareFriend();
             setShareFriendQuan();
         }
