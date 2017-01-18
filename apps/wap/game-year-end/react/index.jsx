@@ -3,9 +3,9 @@ $FW.DOMReady(function () {
     let login = false;
     $("#p4-3-2").attr("src", "images/p4-text" + parseInt(Math.random() * 3 + 1) + ".png");
     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getAllRegistCount.shtml`).then((data) => {
-        let allUserCount = data.allUserCount.split("");
-        let s = "";
         console.log("allUserCount:"+data);
+        let allUserCount = (data.allUserCount+"").split("");
+        let s = "";
         for (var i = 0; i < allUserCount.length; i++) {
             s += "<span class='p1-num" + i + "' style='transition-delay:" + 0.2 * i + "s ;'>" + allUserCount[i] + "</span>";
         }
@@ -17,7 +17,7 @@ $FW.DOMReady(function () {
         complete: (data) => {
             if (data.code == 10000) {
                 login =true;
-                $(".p2-0-1").html(data.data.userName);
+                $(".p2-0-1").html(data.data.userName?data.data.userName:"金融工场用户");
                 $(".p2-2-2").html(data.data.registDate);
                 $("#p2-2-3").html(data.data.myRank);
                 $(".p1-2").hide();
