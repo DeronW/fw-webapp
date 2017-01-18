@@ -149,7 +149,8 @@ $FW.DOMReady(function () {
 
     var gurl = `${API_PATH}/static/wap/game-year-end/index.html`;
     var iurl = `${API_PATH}/static/wap/game-year-end/images/share-ico.jpg`;
-
+    console.log("onMenuShareAppMessage：gurl："+gurl);
+    console.log("onMenuShareAppMessage：iurl："+iurl);
     function setShareFriend() {
         wx.onMenuShareAppMessage({
             title: "豆尔摩斯年度大揭秘，快来查看你的组织身份！", // 分享标题
