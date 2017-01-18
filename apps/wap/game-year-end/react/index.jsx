@@ -41,15 +41,15 @@ $FW.DOMReady(function () {
                             p5 += "<span class='p5-1-" + j + "' style='transition-delay:" + 0.2 * j + "s ;'>" + investAmountYear[j] + "</span>";
                         }
                         $("#p5-1").html(p5);
-                        if (data.monthName == "实习豆尔摩斯") {
+                        if (data.groupName == "实习豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-1.png");
-                        } else if (data.monthName == "初级豆尔摩斯") {
+                        } else if (data.groupName == "初级豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-2.png");
-                        } else if (data.monthName == "精英豆尔摩斯") {
+                        } else if (data.groupName == "精英豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-3.png");
-                        } else if (data.monthName == "特级豆尔摩斯") {
+                        } else if (data.groupName == "特级豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-4.png");
-                        } else if (data.monthName == "王牌豆尔摩斯") {
+                        } else if (data.groupName == "王牌豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-5.png");
                         }
                     });
