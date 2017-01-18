@@ -33,10 +33,10 @@ const WantLoan = React.createClass({
         }
         let filtered = cashBank.filter(isRealNameBindCard);
 
+        if(this.state.loanNum){
+            location.href = `http://fe.9888.cn/static/apply-confirm-loan/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
+        }
 
-        setTimeout(function(){
-            return location.href = `http://fe.9888.cn/static/apply-confirm-loan/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
-        },2000);
     },
     render:function(){
         let interest = this.props.baseRateDay * 100;

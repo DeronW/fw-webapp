@@ -208,7 +208,9 @@ var BankAccount = React.createClass({
 
 const Withdrawals = React.createClass({
 	getInitialState: function() {
-
+		console.log("a")
+		const i = (this.props.data.bankInfo.isCompanyAgent || this.props.data.bankInfo.isSpecial) ? 1: 0;
+		console.log(i);
 	    return {
 			modifyShow: false,
 			specialShow: false,
@@ -225,7 +227,7 @@ const Withdrawals = React.createClass({
 			promptShow: false,
 			voice: null,
 			selectCashMethod: true,
-			selectWhich: 0
+			selectWhich: this.props.data.bankInfo.isCompanyAgent ? 1 : 0
 	    }
 	},
 	componentDidUpdate: function(a, params) {
@@ -237,8 +239,7 @@ const Withdrawals = React.createClass({
 			}
 		}
 	},
-	handlerOnChange: function(e) {
-		console.log(numberFormat.format(e.target.value));
+	handlerOnChange: function(e) {		
 		if(numberFormat.format(e.target.value)[0] === "0") {
 			this.setState({
 				inputVal: ""
@@ -249,6 +250,7 @@ const Withdrawals = React.createClass({
 
 
 		if(numberFormat.format(e.target.value) > this.state.propsAccountAmountVal) {
+			console.log("ss");
 			this.setState({			
 				inputVal: this.state.propsAccountAmountVal,
 				selectWhich: 1,
@@ -257,6 +259,13 @@ const Withdrawals = React.createClass({
 			return false;
 		}
 
+		if(this.props.data.bankInfo.isCompanyAgent || this.props.data.bankInfo.isSpecial) {
+			this.setState({
+				selectWhich: 1
+			});
+		}
+		
+		
 		if(numberFormat.format(e.target.value) < (this.props.data.criticalValue * 10000)) {
 			this.setState({			
 				inputVal: numberFormat.format(e.target.value),
@@ -265,6 +274,7 @@ const Withdrawals = React.createClass({
 			});
 			return false;
 		}
+		
 
 		if(numberFormat.format(e.target.value) !== "") {
 			this.setState({
@@ -321,6 +331,7 @@ const Withdrawals = React.createClass({
 	handlerPost: function() {
 		var _this = this;
 
+		console.log(this.state.inputVal);
 		if(this.state.inputVal < parseInt(this.props.data.minAmt)) {
 			$FW.Component.Toast("提现金额不能低于10元");
 			return false;
@@ -328,10 +339,8 @@ const Withdrawals = React.createClass({
 
 		}
 
-		console.log(this.state.selectWhich);
-
-		
 		if(this.state.selectWhich == 1) {
+			console.log("1");
 			if(this.state.selectBankName == null) {
 				$FW.Component.Toast("请选择开户支行");
 				return false;
@@ -339,24 +348,14 @@ const Withdrawals = React.createClass({
 		}
 		
 		if(this.state.selectWhich == 0) {
+			console.log("xxxxxxx");
 			if(this.state.inputVal > (this.props.data.criticalValue * 10000) ) {
+		
 				$FW.Component.Toast("您实时提现单笔已超过" + this.props.data.criticalValue + "万限制，请使用大额提现！");
 				return false;
 			}	
 		}
 
-
-		
-
-		// $FW.Ajax({
-		// 	url: API_PATH + "/mpwap/api/v1/validate.shtml?reflectAmount=" + this.state.inputVal,
-		// 	success: function (data) {				
-		
-		// 	},
-		// 	fail: function() {
-
-		// 	}
-		// })
 
 		_this.setState({
 					popShow: true
@@ -459,6 +458,8 @@ const Withdrawals = React.createClass({
 		window.location.href = location.protocol + "//m.9888.cn/static/wap/cash-records/index.html";
 	},
 	render : function(){
+		console.log(this.state.selectWhich);
+
 		var _this = this;
 
 		var feeVal = this.state.propsUserInfo.fee;

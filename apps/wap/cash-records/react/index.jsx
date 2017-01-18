@@ -28,8 +28,6 @@ const CashRecords = React.createClass({
                     });
                 }
 
-                console.log(data.pageData.result);
-
                 data.pageData.result.forEach((i)=>insertRecord(month, format_record(i)));
 
                 this.setState({
@@ -50,7 +48,8 @@ const CashRecords = React.createClass({
                 timestamp: d.getTime(),
                 datetime: record.happenTime,
                 state: parseInt(record.handleState),
-                order_id: record.indentNo
+                order_id: record.indentNo,
+                withdrawMode: parseInt(record.withdrawMode)
             }
         }
 
@@ -107,7 +106,12 @@ const CashRecords = React.createClass({
                         金额
                         <div className="money">&yen;{data.money}</div>
                     </div>
-                    <div className="sep-line"></div>
+                    {
+                        data.withdrawMode != undefined || data.withdrawMode != "" ? 
+                            <div className="second-line">提现方式<div className="money">{data.withdrawMode == 1 ? "实时提现" : "大额提现"}</div></div> : ""
+                    }
+                    
+                    
                     <div className="third-line">
                         发生时间
                         <div className="time">{data.datetime}</div>
