@@ -19,7 +19,7 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
         `${lib_path}request-animation-frame-0.0.23.js`,
         `${lib_path}promise-2.0.2.min.js`,
-        `${lib_path}fw-1.5.2.js`,
+        `${lib_path}fw-1.5.3.js`,
         `${lib_path}native-bridge-0.4.0.js`
     ];
 
@@ -118,7 +118,10 @@ module.exports = function (site_name, page_name, configs) {
     }
 
     function compile_common_assets() {
-        return copy([`${public_path}common/images/*`], `${build_path}images`)
+        return copy([
+            `${public_path}common/images/*`,
+            `${public_path}${site_name}/images/*`,
+        ], `${build_path}images`)
     }
 
     function copy2cdn() {

@@ -41,7 +41,7 @@ const PaymentPanel = React.createClass({
             show_voucher_modal: false
         });
 
-        if(cc==0) return;
+       // if(cc==0) return;
 
         var query = $FW.Format.urlQuery();
         let cartFlag = query.cartFlag;
@@ -59,11 +59,11 @@ const PaymentPanel = React.createClass({
             enable_loading: true
         }).then(data => {
 
-            let jia=(data.payableRmbAmt==0||data.payablePointAmt==0) ?"0":"+";
+            let jia=(data.payableRmbAmt==0&&data.payablePointAmt==0) ?"0":"";
             let RmbAmt= data.payableRmbAmt==0 ?"": '¥' + data.payableRmbAmt + '+'; let PointAmt= data.payablePointAmt==0  ?"":data.payablePointAmt + '工分';
 
             let jia1=((data.totalPrice-data.payableRmbAmt)==0||(data.totalPoints-data.payablePointAmt)==0) ?"":"+";
-            let RmbAmt1= (data.totalPrice-data.payableRmbAmt)==0 ?"-": '¥' + (data.totalPrice-data.payableRmbAmt); let PointAmt1= (data.totalPoints-data.payablePointAmt)==0  ?"":(data.totalPoints-data.payablePointAmt) + '工分';
+            let RmbAmt1= (data.totalPrice-data.payableRmbAmt)==0 ?"-": '- ¥ ' + (data.totalPrice-data.payableRmbAmt); let PointAmt1= (data.totalPoints-data.payablePointAmt)==0  ?"":(data.totalPoints-data.payablePointAmt) + '工分';
 
             document.querySelectorAll('.item-detail')[1].innerHTML  = RmbAmt1+jia1+PointAmt1;
             document.querySelector('.total-item-detail').innerHTML = RmbAmt+jia+PointAmt
@@ -72,25 +72,23 @@ const PaymentPanel = React.createClass({
     },
     render: function () {
 
-        let checked_voucher = () => {
-            let voucher_name;
-
-            for (var i = 0; i < this.state.voucher_list.length; i++) {
-                if (this.state.voucher_list[i].selected) {
-                    voucher_name = this.state.voucher_list[i].productName;
-                    break;
-                }
-            }
-
+        let checked_voucher = (l,index) => {
             return this.state.checked_voucher_count ?
                 (<div className="coupons-r">
                     <span
-                        className="coupons-name">{voucher_name}</span><span>&times; {this.state.checked_voucher_count}</span>
+                        className="coupons-name">{l}</span><span>&times; {1}</span>
                 </div>) :
                 null;
         };
 
-        return (
+        let voucherName=[];
+        var checkedVoucher=$FW.Utils.jsonFilter(this.state.voucher_list, (i) => i.selected);
+
+        for (var key in checkedVoucher) {
+            voucherName.push(checkedVoucher[key].productName);
+         };
+
+         return (
             <div className="balance-wrap">
                 <div className="account-box">
 
@@ -98,7 +96,7 @@ const PaymentPanel = React.createClass({
                         <div className="coupons-l">兑换券{this.state.checked_voucher_count ? null :
                             <span className="avail-coupon">{this.props.ordersTicketNum}张可用</span>}</div>
                         {this.state.checked_voucher_count ? null : <div className="coupons-r">未使用</div>}
-                        {checked_voucher()}
+                        {voucherName.map((l, index) => checked_voucher(l, index)) }
                     </div>
                     <div className="aval-points">
                         <div className="aval-points-l">可用工分</div>
