@@ -5,6 +5,7 @@ $FW.DOMReady(function () {
     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getAllRegistCount.shtml`).then((data) => {
         let allUserCount = data.allUserCount.split("");
         let s = "";
+        console.log("allUserCount:"+data);
         for (var i = 0; i < allUserCount.length; i++) {
             s += "<span class='p1-num" + i + "' style='transition-delay:" + 0.2 * i + "s ;'>" + allUserCount[i] + "</span>";
         }
@@ -63,7 +64,7 @@ $FW.DOMReady(function () {
             }
         }
     });
-    isLoginVist
+
     music();
     load();
     $(".swiper-container").css("width", $(window).width());
@@ -86,7 +87,7 @@ $FW.DOMReady(function () {
     let mySwiper = new Swiper('.swiper-container', {
         loop: false,
         direction: 'vertical',
-        initialSlide :$FW.2?1:),
+        initialSlide :$FW.Format.urlQuery().isLoginVist==1?1:0,
         onSlideChangeEnd: function (swiper) {
             if (swiper.isEnd || !login && swiper.activeIndex == 1) {
                 $(".up").hide();
