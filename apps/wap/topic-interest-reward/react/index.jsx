@@ -26,14 +26,6 @@ $FW.DOMReady(function () {
                     var p = document.getElementById("percent");
                     p.style.visibility = "visible";
                 }
-
-
-                // if(level>1){
-                //     document.getElementById("percent").style.visibility="visible";
-                // }
-                // if(level==1||level==0){
-                //     document.getElementById('interest').innerText="无";
-                // }
             }
         });
     }
@@ -47,24 +39,9 @@ $FW.DOMReady(function () {
             var interest = rule[i].addInterest;
             console.log(interest);//4个
             interest_list.push(rule[i].addInterest);
-            // var t = '-';
-            // if( parseFloat(interest && interest.describe)) {
-            //     t =  interest.describe;
-            // }
             var n = parseFloat(interest && interest.describe);
             document.getElementById("add-interest-text-" + i).innerHTML = n ? n + '%' : "-";
-            // document.getElementById("add-interest-text-1").innerHTML="-";
-            // var item=interest_list[i];
-            // if(item)){
-            //     document.getElementById("add-interest-text-" + i).innerHTML="-";
-            // }
-
         }
-
-        try {
-        } catch (e) {
-        }
-
         getCurrentUserInfo(interest_list);
     });
 });
