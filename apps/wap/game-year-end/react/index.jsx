@@ -10,6 +10,9 @@ function gotoHandler(link, need_login) {
 }
 
 $FW.DOMReady(function () {
+    if ($FW.Browser.inApp()) {
+        NativeBridge.setTitle('豆尔摩斯年度大揭秘');
+    }
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
         data: {url: location.href},
