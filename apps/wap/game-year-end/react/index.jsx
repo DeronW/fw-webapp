@@ -10,6 +10,16 @@ function gotoHandler(link, need_login) {
 }
 
 $FW.DOMReady(function () {
+    $FW.Ajax({
+        url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
+        data: {url: location.href},
+        fail: () => true,
+        complete: (data) => {
+            setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
+            setShareFriend();
+            setShareFriendQuan();
+        }
+    });
     $(".p1-2-1").on("touchstart", function () {
         gotoHandler("https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=4&redirect_url=https://m.9888.cn/static/wap/game-year-end/index.html?isLoginVist=1", true);
     });
@@ -148,7 +158,7 @@ $FW.DOMReady(function () {
             imgUrl: iurl, // 分享图标
             success: function () {
                 // 用户确认分享后执行的回调函数
-                //alert("喵喵感谢您！");
+                alert("onMenuShareAppMessage：iurl："+iurl+",gurl:"+gurl);
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
@@ -162,6 +172,7 @@ $FW.DOMReady(function () {
             link: gurl, // 分享链接
             imgUrl: iurl, // 分享图标
             success: function () {
+                alert("onMenuShareTimeline：iurl："+iurl+",gurl:"+gurl);
                 // 用户确认分享后执行的回调函数
             },
             cancel: function () {
@@ -169,15 +180,4 @@ $FW.DOMReady(function () {
             }
         });
     }
-
-    $FW.Ajax({
-        url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
-        data: {url: location.href},
-        fail: () => true,
-        complete: (data) => {
-            setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
-            setShareFriend();
-            setShareFriendQuan();
-        }
-    })
 });
