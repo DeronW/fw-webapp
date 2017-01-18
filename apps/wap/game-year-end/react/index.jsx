@@ -1,4 +1,19 @@
+
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 $FW.DOMReady(function () {
+    $(".p1-2-1").on("touchstart", function () {
+        gotoHandler("https://m.9888.cn/static/wap/game-year-end/index.html?isLoginVist=1",true);
+    });
     let str;
     let login = false;
     $("#p4-3-2").attr("src", "images/p4-text" + parseInt(Math.random() * 3 + 1) + ".png");
