@@ -1,4 +1,3 @@
-
 function gotoHandler(link, need_login) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
@@ -11,6 +10,16 @@ function gotoHandler(link, need_login) {
 }
 
 $FW.DOMReady(function () {
+    $FW.Ajax({
+        url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
+        data: {url: location.href},
+        fail: () => true,
+        complete: (data) => {
+            setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
+            setShareFriend();
+            setShareFriendQuan();
+        }
+    });
     $(".p1-2-1").on("touchstart", function () {
         gotoHandler("https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=4&redirect_url=https://m.9888.cn/static/wap/game-year-end/index.html?isLoginVist=1", true);
     });
@@ -18,7 +27,7 @@ $FW.DOMReady(function () {
     let login = false;
     $("#p4-3-2").attr("src", "images/p4-text" + parseInt(Math.random() * 3 + 1) + ".png");
     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getAllRegistCount.shtml`).then((data) => {
-        let allUserCount = (data.allUserCount+"").split("");
+        let allUserCount = (data.allUserCount + "").split("");
         let s = "";
         for (var i = 0; i < allUserCount.length; i++) {
             s += "<span class='p1-num" + i + "' style='transition-delay:" + 0.2 * i + "s ;'>" + allUserCount[i] + "</span>";
@@ -30,8 +39,8 @@ $FW.DOMReady(function () {
         fail: () => true,
         complete: (data) => {
             if (data.code == 10000) {
-                login =true;
-                $(".p2-0-1").html(data.data.userName?data.data.userName:"豆尔摩斯");
+                login = true;
+                $(".p2-0-1").html(data.data.userName ? data.data.userName : "豆尔摩斯");
                 $(".p2-2-2").html(data.data.registDate);
                 $("#p2-2-3").html(data.data.myRank);
                 $(".p1-2").hide();
@@ -41,11 +50,11 @@ $FW.DOMReady(function () {
                     $("#p3-5").html(data.allReceipt);
                     $("#smoke-num").html(data.pipeCount);
                     $("#cloth-num").html(data.windbreakCount);
-                    $("#li-r1").html(data.receivedInterest+"元");
-                    $("#li-r2").html(data.waitedInterest+"元");
-                    $("#li-r3").html(data.cashCoupon+"元");
-                    $("#li-r4").html(data.beanCount+"元");
-                    data.balanceProfit?$("#li-r5").html(data.balanceProfit):null;
+                    $("#li-r1").html(data.receivedInterest + "元");
+                    $("#li-r2").html(data.waitedInterest + "元");
+                    $("#li-r3").html(data.cashCoupon + "元");
+                    $("#li-r4").html(data.beanCount + "元");
+                    data.balanceProfit ? $("#li-r5").html(data.balanceProfit) : null;
                     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
                         $("#p4-0").html(data.investTimesYear);
                         $("#p4-1").html(data.monthName);
@@ -99,7 +108,7 @@ $FW.DOMReady(function () {
     let mySwiper = new Swiper('.swiper-container', {
         loop: false,
         direction: 'vertical',
-        initialSlide :$FW.Format.urlQuery().isLoginVist==1?1:0,
+        initialSlide: $FW.Format.urlQuery().isLoginVist == 1 ? 1 : 0,
         onSlideChangeEnd: function (swiper) {
             if (swiper.isEnd || !login && swiper.activeIndex == 1) {
                 $(".up").hide();
@@ -123,6 +132,7 @@ $FW.DOMReady(function () {
             }
         }
     });
+
     function setWxConfig(debug, appid, timestamp, noncestr, signature) {
         wx.config({
             debug: debug,
@@ -136,6 +146,7 @@ $FW.DOMReady(function () {
             ]
         });
     }
+
     var gurl = `${API_PATH}/static/wap/game-year-end/index.html`;
     var iurl = `${API_PATH}/static/wap/game-year-end/images/share-ico.jpg`;
 
@@ -147,7 +158,7 @@ $FW.DOMReady(function () {
             imgUrl: iurl, // 分享图标
             success: function () {
                 // 用户确认分享后执行的回调函数
-                //alert("喵喵感谢您！");
+                alert("onMenuShareAppMessage：iurl："+iurl+",gurl:"+gurl);
             },
             cancel: function () {
                 // 用户取消分享后执行的回调函数
@@ -161,6 +172,7 @@ $FW.DOMReady(function () {
             link: gurl, // 分享链接
             imgUrl: iurl, // 分享图标
             success: function () {
+                alert("onMenuShareTimeline：iurl："+iurl+",gurl:"+gurl);
                 // 用户确认分享后执行的回调函数
             },
             cancel: function () {
@@ -168,14 +180,4 @@ $FW.DOMReady(function () {
             }
         });
     }
-    $FW.Ajax({
-        url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
-        data: {url:location.href},
-        fail: () => true,
-        complete: (data) => {
-            setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
-            setShareFriend();
-            setShareFriendQuan();
-        }
-    })
 });
