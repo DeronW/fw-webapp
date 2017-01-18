@@ -3,9 +3,10 @@ function music() {
     let mediao = $('#media')[0];
     let n = true;
     $(document).on("touchstart", function () {
+        console.log(n);
         if (n && mediao.paused) {
-            mediao.play();
             n = false;
+            mediao.play();
         }
     });
     if (mediao.paused) {

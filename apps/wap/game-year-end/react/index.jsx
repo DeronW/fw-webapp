@@ -35,7 +35,7 @@ $FW.DOMReady(function () {
         $("#p1-num").html(s);
     });
     $FW.Ajax({
-        url: `${API_PATH}/mpwap/api/v1/getUserRanking.shtml`,//第二三页
+        url: `${API_PATH}mpwap/api/v1/getUserRanking.shtml`,//第二三页
         fail: () => true,
         complete: (data) => {
             if (data.code == 10000) {
@@ -44,7 +44,7 @@ $FW.DOMReady(function () {
                 $(".p2-2-2").html(data.data.registDate);
                 $("#p2-2-3").html(data.data.myRank);
                 $(".p1-2").hide();
-                $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserIncome.shtml`).then((data) => {
+                $FW.Ajax(`${API_PATH}mpwap/api/v1/getUserIncome.shtml`).then((data) => {
                     $("#p3-2").html(data.investTimesAll);
                     $("#p3-3").html(data.investAmountAll);
                     $("#p3-5").html(data.allReceipt);
@@ -55,7 +55,7 @@ $FW.DOMReady(function () {
                     $("#li-r3").html(data.cashCoupon + "元");
                     $("#li-r4").html(data.beanCount + "元");
                     data.balanceProfit ? $("#li-r5").html(data.balanceProfit) : null;
-                    $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
+                    $FW.Ajax(`${API_PATH}mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
                         $("#p4-0").html(data.investTimesYear);
                         $("#p4-1").html(data.monthName);
                         $("#p4-2").html(data.investTimeSlot);
@@ -88,8 +88,6 @@ $FW.DOMReady(function () {
     });
     music();
     load();
-    $(".swiper-container").css("width", $(window).width());
-    $(".swiper-container").css("height", $(window).height());
     //分享弹层
     $(".pop-share").on("touchstart", function () {
         $(".pop-share").hide();
@@ -147,8 +145,8 @@ $FW.DOMReady(function () {
         });
     }
 
-    var gurl = `${API_PATH}/static/wap/game-year-end/index.html`;
-    var iurl = `${API_PATH}/static/wap/game-year-end/images/share-ico.jpg`;
+    var gurl = `${API_PATH}static/wap/game-year-end/index.html`;
+    var iurl = `${API_PATH}static/wap/game-year-end/images/share-ico.jpg`;
 
     function setShareFriend() {
         wx.onMenuShareAppMessage({
