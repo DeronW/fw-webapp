@@ -119,7 +119,7 @@ const ApplyLoan = React.createClass({
             moneySlider = no_slider_bar;
             loanStatus = unavailable_loan;
             $FW.Component.Toast(borrowBtnDesc);
-            creditLine = creditNum;
+            creditLine = "--";
         }
         if(borrowBtnStatus==5) btnStatus = btn_list, moneySlider = slider_bar, loanStatus = available_loan, creditLine = creditNum;
 
