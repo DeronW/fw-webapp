@@ -17,8 +17,19 @@ const MyBankCard = React.createClass({
 });
 
 const CardList = React.createClass({
+    unBindCard: function (arg) {
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/payment/v1/forbidden_bank_card.json`,
+            data: {
+                accountNo: arg
+            },
+            enable_loading: true
+        }).then(data => {
+
+        })
+    },
     render: function () {
-        var bgColor = 'my-bank-card';
+        var bgColor = 'my-bank-card bankColor1';
         let bankCards = this.props.bankCards;
         for (var j = 0; j < 12; j++) {
             if (bankCards.bankCardName == bankName[j]) {
@@ -41,7 +52,7 @@ const CardList = React.createClass({
                 <div className="bank-desc">
                     <div className="owner-name">{bankCards.accountName}</div>
                     <div>{bankCards.accountNo}</div>
-                    <div className="unbind-btn">解绑</div>
+                    <div className="unbind-btn" onClick={this.unBindCard.bind(this,bankCards.accountNo)}>解绑</div>
                 </div>
             </div>
         );

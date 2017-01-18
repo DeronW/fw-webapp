@@ -1,3 +1,7 @@
+function gotoHandler(link) {
+    location.href = encodeURI(link);
+}
+
 const HistoryBill = React.createClass({
     getInitialState: function () {
         return {
@@ -30,21 +34,25 @@ const HistoryBill = React.createClass({
                     hasData: !!loanHistoryList.length
                 })
                 done && done()
-            }
+            },
+            fail: ()=>true
         })
     },
     render:function(){
          let item_list = (item,index) => {
+             let repayment;
+             if (item.repaymentStatus == 0) repayment = '借款失败';
+             if (item.repaymentStatus == 1) repayment = '已还款';
              return (
-                 <div className="bill-item" key={index}>
+                 <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/jiemo/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`) }>
                      <div className="bill-detail">
                          <div className="bill-detail-wrap">
                              <span className="bill-money">{item.loanAmount}</span>
                          </div>
-                         <span className="bill-deadline">{item.loanTime}</span>
+                         <span className="bill-deadline">{item.loanTimeStr}</span>
                      </div>
                      <div className="pay-back-btn-wrap">
-                         <span className="bill-status">{item.repaymentStatus}<img src="images/right-arrow.jpg"/></span>
+                         <span className="bill-status">{repayment}<img src="images/right-arrow.jpg"/></span>
                      </div>
                  </div>
              )
