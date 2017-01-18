@@ -159,7 +159,7 @@ const ShoppingCart = React.createClass({
                                 <div className="product-price">
                                     {product.subTotalPrice==0 ?"": '¥' + product.subTotalPrice}
                                     {product.subTotalPrice==0||product.subTotalCredit==0?'':'+'}
-                                    {product.subTotalCredit==0 ?"0工分": product.subTotalCredit+ '工分'}
+                                    {product.subTotalCredit==0 ?"": product.subTotalCredit+ '工分'}
                             </div>
                                 <div className="detail-num-change">
                                     <div className="minus" onClick={() => this.changeMinus(index)}></div>
@@ -194,9 +194,10 @@ const ShoppingCart = React.createClass({
                     <div className="empty-cart-icon"></div>}
                 {this.props.products.length != 0 ? <div className="pay-bar">
                     <div className="all-price">合计：<span className="total-price">
-                        {total_price==0 ?"": '¥' + total_price}
+                        {total_price==0 ?"": '¥' + total_price.toFixed(2)}
                         {total_price==0||total_score==0?'':'+'}
-                        {total_score==0 ?"0工分": total_score+ '工分'}
+                        {total_price==0&&total_score==0?'0':''}
+                        {total_score==0 ?"": total_score+ '工分'}
                     </span>
                     </div>
                     <a className="pay-btn" onClick={this.payHandler}>结算</a>
