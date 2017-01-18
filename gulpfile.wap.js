@@ -23,6 +23,7 @@ const APP_NAMES = [
     'home', // 首页
     'about-us', // 关于我们
     'faq', // 帮助中心
+    'game-year-end',
 
     // 新增页面
     'user-level', // 用户等级详情
