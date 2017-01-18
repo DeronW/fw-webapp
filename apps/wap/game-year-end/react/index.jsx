@@ -1,4 +1,19 @@
+
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 $FW.DOMReady(function () {
+    $(".p1-2-1").on("touchstart", function () {
+        gotoHandler("https://m.9888.cn/static/wap/game-year-end/index.html?isLoginVist=1",true);
+    });
     let str;
     let login = false;
     $("#p4-3-2").attr("src", "images/p4-text" + parseInt(Math.random() * 3 + 1) + ".png");
@@ -41,15 +56,15 @@ $FW.DOMReady(function () {
                             p5 += "<span class='p5-1-" + j + "' style='transition-delay:" + 0.2 * j + "s ;'>" + investAmountYear[j] + "</span>";
                         }
                         $("#p5-1").html(p5);
-                        if (data.monthName == "实习豆尔摩斯") {
+                        if (data.groupName == "实习豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-1.png");
-                        } else if (data.monthName == "初级豆尔摩斯") {
+                        } else if (data.groupName == "初级豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-2.png");
-                        } else if (data.monthName == "精英豆尔摩斯") {
+                        } else if (data.groupName == "精英豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-3.png");
-                        } else if (data.monthName == "特级豆尔摩斯") {
+                        } else if (data.groupName == "特级豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-4.png");
-                        } else if (data.monthName == "王牌豆尔摩斯") {
+                        } else if (data.groupName == "王牌豆尔摩斯") {
                             $("#p5-2").attr("src", "images/p5-level-5.png");
                         }
                     });
@@ -62,7 +77,6 @@ $FW.DOMReady(function () {
             }
         }
     });
-
     music();
     load();
     $(".swiper-container").css("width", $(window).width());
@@ -109,8 +123,6 @@ $FW.DOMReady(function () {
             }
         }
     });
-
-
     function setWxConfig(debug, appid, timestamp, noncestr, signature) {
         wx.config({
             debug: debug,
@@ -124,7 +136,6 @@ $FW.DOMReady(function () {
             ]
         });
     }
-
     var gurl = `${API_PATH}/static/wap/game-year-end/index.html`;
     var iurl = `${API_PATH}/static/wap/game-year-end/images/share-ico.jpg`;
 
@@ -157,12 +168,11 @@ $FW.DOMReady(function () {
             }
         });
     }
-
-let newUrl=location.href.split("?")[0];
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
-        data: {url:newUrl},
-        success: (data) => {
+        data: {url:location.href},
+        fail: () => true,
+        complete: (data) => {
             setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
             setShareFriend();
             setShareFriendQuan();
