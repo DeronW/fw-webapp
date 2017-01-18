@@ -63,6 +63,7 @@ $FW.DOMReady(function () {
             }
         }
     });
+    isLoginVist
     music();
     load();
     $(".swiper-container").css("width", $(window).width());
@@ -85,6 +86,7 @@ $FW.DOMReady(function () {
     let mySwiper = new Swiper('.swiper-container', {
         loop: false,
         direction: 'vertical',
+        initialSlide :$FW.2?1:),
         onSlideChangeEnd: function (swiper) {
             if (swiper.isEnd || !login && swiper.activeIndex == 1) {
                 $(".up").hide();
