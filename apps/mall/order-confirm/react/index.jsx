@@ -17,7 +17,7 @@ const ConfirmOrder = React.createClass({
         return {
             isVirtualProduct: this.props.isVirtualProduct,
             avaliablePoints: this.props.data.avaliablePoints,
-            payablePointAmt:this.props.data.payablePointAmt
+            payablePointAmt: this.props.data.payablePointAmt
 
         }
     },
@@ -30,14 +30,15 @@ const ConfirmOrder = React.createClass({
             //url: `./getTokenStr.json`
         }).then(data => {
             this.FormData.tokenStr = data.tokenStr;
-            console.log("tokenStr:"+this.FormData.tokenStr)
+            console.log("tokenStr:" + this.FormData.tokenStr)
         })
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
 
-        if (this.state.payablePointAmt > this.state.avaliablePoints){
-            $FW.Component.Alert('工分不足，不能购买');return;
+        if (this.state.payablePointAmt > this.state.avaliablePoints) {
+            $FW.Component.Alert('工分不足，不能购买');
+            return;
         }
 
         let submit = function submit() {
@@ -88,16 +89,16 @@ const ConfirmOrder = React.createClass({
         this.FormData.msgCode = code;
     },
     updatePaymentHandler: function (options) {
-         //this.FormData.payBeanPrice = options.used_bean_count;
-            if (typeof(options.voucher_list) == 'object') {
-                this.FormData.userTickets = [];
-                for (var i = 0; i < options.voucher_list.length; i++) {
-                    var e = options.voucher_list[i];
+        //this.FormData.payBeanPrice = options.used_bean_count;
+        if (typeof(options.voucher_list) == 'object') {
+            this.FormData.userTickets = [];
+            for (var i = 0; i < options.voucher_list.length; i++) {
+                var e = options.voucher_list[i];
 
-                    if (e.selected) this.FormData.userTickets.push(e.id);
-                }
-                //this.FormData.useTicket = !!this.FormData.tickets.length;
+                if (e.selected) this.FormData.userTickets.push(e.id);
             }
+            //this.FormData.useTicket = !!this.FormData.tickets.length;
+        }
 
     },
     changeTicketPoints(payablePointAmt) {
@@ -151,20 +152,20 @@ const ConfirmOrder = React.createClass({
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
                               update_payment_handler={this.updatePaymentHandler}
-                              changeTicketPoints = {payablePointAmt => this.changeTicketPoints(payablePointAmt)}
+                              changeTicketPoints={payablePointAmt => this.changeTicketPoints(payablePointAmt)}
                 />
                 <div className="total-price">
                     <div className="price-item">
                         <span className="item-name">商品金额</span><span
                         className="item-detail">
-                        {this.props.data.totalPrice==0?"":"¥"+this.props.data.totalPrice}
-                        {this.props.data.totalPrice==0||this.props.data.totalPoints==0?"":"+"}
-                        {this.props.data.totalPoints==0?"":this.props.data.totalPoints+"工分"}</span>
+                        {this.props.data.totalPrice == 0 ? "" : "¥" + this.props.data.totalPrice}
+                        {this.props.data.totalPrice == 0 || this.props.data.totalPoints == 0 ? "" : "+"}
+                        {this.props.data.totalPoints == 0 ? "" : this.props.data.totalPoints + "工分"}</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">兑换券</span><span className="item-detail">
-                        {this.props.data.ordersTicketPoints==0?"":"-"+this.props.data.ordersTicketPoints+"工分"+
-                        this.props.data.ordersTicketPrice?"":"-"+this.props.data.ordersTicketPrice+"金额"}</span>
+                        {this.props.data.ordersTicketPoints == 0 ? "" : "-" + this.props.data.ordersTicketPoints + "工分" +
+                        this.props.data.ordersTicketPrice ? "" : "-" + this.props.data.ordersTicketPrice + "金额"}</span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
@@ -179,9 +180,9 @@ const ConfirmOrder = React.createClass({
                     <span className="total-item-name">实付:</span>
                     <span
                         className="total-item-detail">
-                        {this.props.data.payableRmbAmt==0?"":"¥"+this.props.data.payableRmbAmt}
-                        {this.props.data.payableRmbAmt==0||this.props.data.payablePointAmt==0?"":"+"}
-                        {this.props.data.payablePointAmt==0?"":this.props.data.payablePointAmt+"工分"}
+                        {this.props.data.payableRmbAmt == 0 ? "" : "¥" + this.props.data.payableRmbAmt}
+                        {this.props.data.payableRmbAmt == 0 || this.props.data.payablePointAmt == 0 ? "" : "+"}
+                        {this.props.data.payablePointAmt == 0 ? "" : this.props.data.payablePointAmt + "工分"}
                         {/*¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分*/}
                     </span>
                     <a onClick={this.makeOrderHandler}
@@ -197,7 +198,7 @@ $FW.DOMReady(function () {
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
-    let prd =  query.prd||[];
+    let prd = query.prd || [];
     let buyNum = query.buyNum || 0;
     let userTicketList = [];
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
@@ -230,7 +231,7 @@ $FW.DOMReady(function () {
         />, CONTENT_NODE);
     })
 
-     ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
+    ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
 });
 
 //window.onNativeMessageReceive = function (msg) {
