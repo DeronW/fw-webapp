@@ -62,7 +62,6 @@ $FW.DOMReady(function () {
             }
         }
     });
-
     music();
     load();
     $(".swiper-container").css("width", $(window).width());
@@ -109,8 +108,6 @@ $FW.DOMReady(function () {
             }
         }
     });
-
-
     function setWxConfig(debug, appid, timestamp, noncestr, signature) {
         wx.config({
             debug: debug,
@@ -124,7 +121,6 @@ $FW.DOMReady(function () {
             ]
         });
     }
-
     var gurl = `${API_PATH}/static/wap/game-year-end/index.html`;
     var iurl = `${API_PATH}/static/wap/game-year-end/images/share-ico.jpg`;
 
@@ -160,7 +156,8 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
         data: {url:location.href},
-        success: (data) => {
+        fail: () => true,
+        complete: (data) => {
             setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
             setShareFriend();
             setShareFriendQuan();
