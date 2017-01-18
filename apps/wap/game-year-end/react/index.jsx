@@ -16,10 +16,47 @@ $FW.DOMReady(function () {
         fail: () => true,
         complete: (data) => {
             setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
-            setShareFriend();
-            setShareFriendQuan();
         }
     });
+    wx.ready(function () {
+        wx.onMenuShareTimeline({
+            title: '豆尔摩斯年度大揭秘，快来查看你的组织身份！', // 分享标题
+            link: 'https://m.9888.cn/static/wap/game-year-end/index.html', // 分享链接
+            imgUrl: 'https://m.9888.cn/static/wap/game-year-end/images/share-ico.jpg', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+        wx.onMenuShareAppMessage({
+            title: '豆尔摩斯年度大揭秘，快来查看你的组织身份！', // 分享标题
+            desc: '金融工场机密档案大集合，解封时刻，速来围观', // 分享描述
+            link: 'https://m.9888.cn/static/wap/game-year-end/index.html', // 分享链接
+            imgUrl: 'https://m.9888.cn/static/wap/game-year-end/images/share-ico.jpg', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+    function setWxConfig(debug, appid, timestamp, noncestr, signature) {
+        wx.config({
+            debug: debug,
+            appId: appid,
+            timestamp: timestamp,
+            nonceStr: noncestr,
+            signature: signature,
+            jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage'
+            ]
+        });
+    }
+
     $(".p1-2-1").on("touchstart", function () {
         gotoHandler("https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=4&redirect_url=https://m.9888.cn/static/wap/game-year-end/index.html?isLoginVist=1", true);
     });
@@ -35,7 +72,7 @@ $FW.DOMReady(function () {
         $("#p1-num").html(s);
     });
     $FW.Ajax({
-        url: `${API_PATH}/mpwap/api/v1/getUserRanking.shtml`,//第二三页
+        url: `${API_PATH}mpwap/api/v1/getUserRanking.shtml`,//第二三页
         fail: () => true,
         complete: (data) => {
             if (data.code == 10000) {
@@ -44,7 +81,7 @@ $FW.DOMReady(function () {
                 $(".p2-2-2").html(data.data.registDate);
                 $("#p2-2-3").html(data.data.myRank);
                 $(".p1-2").hide();
-                $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserIncome.shtml`).then((data) => {
+                $FW.Ajax(`${API_PATH}mpwap/api/v1/getUserIncome.shtml`).then((data) => {
                     $("#p3-2").html(data.investTimesAll);
                     $("#p3-3").html(data.investAmountAll);
                     $("#p3-5").html(data.allReceipt);
@@ -55,7 +92,7 @@ $FW.DOMReady(function () {
                     $("#li-r3").html(data.cashCoupon + "元");
                     $("#li-r4").html(data.beanCount + "元");
                     data.balanceProfit ? $("#li-r5").html(data.balanceProfit) : null;
-                    $FW.Ajax(`${API_PATH}/mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
+                    $FW.Ajax(`${API_PATH}mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
                         $("#p4-0").html(data.investTimesYear);
                         $("#p4-1").html(data.monthName);
                         $("#p4-2").html(data.investTimeSlot);
@@ -88,8 +125,6 @@ $FW.DOMReady(function () {
     });
     music();
     load();
-    $(".swiper-container").css("width", $(window).width());
-    $(".swiper-container").css("height", $(window).height());
     //分享弹层
     $(".pop-share").on("touchstart", function () {
         $(".pop-share").hide();
@@ -132,53 +167,4 @@ $FW.DOMReady(function () {
             }
         }
     });
-
-    function setWxConfig(debug, appid, timestamp, noncestr, signature) {
-        wx.config({
-            debug: debug,
-            appId: appid,
-            timestamp: timestamp,
-            nonceStr: noncestr,
-            signature: signature,
-            jsApiList: [
-                'onMenuShareTimeline',
-                'onMenuShareAppMessage'
-            ]
-        });
-    }
-
-    var gurl = `${API_PATH}static/wap/game-year-end/index.html`;
-    var iurl = `${API_PATH}static/wap/game-year-end/images/share-ico.jpg`;
-    console.log("onMenuShareAppMessage：gurl："+gurl);
-    console.log("onMenuShareAppMessage：iurl："+iurl);
-    function setShareFriend() {
-        wx.onMenuShareAppMessage({
-            title: "豆尔摩斯年度大揭秘，快来查看你的组织身份！", // 分享标题
-            desc: "金融工场机密档案大集合，解封时刻，速来围观", // 分享描述
-            link: gurl, // 分享链接
-            imgUrl: iurl, // 分享图标
-            success: function () {
-                // 用户确认分享后执行的回调函数
-                alert("onMenuShareAppMessage：iurl："+iurl+",gurl:"+gurl);
-            },
-            cancel: function () {
-                // 用户取消分享后执行的回调函数
-            }
-        });
-    }
-
-    function setShareFriendQuan() {
-        wx.onMenuShareTimeline({
-            title: '豆尔摩斯年度大揭秘，快来查看你的组织身份！', // 分享标题
-            link: gurl, // 分享链接
-            imgUrl: iurl, // 分享图标
-            success: function () {
-                alert("onMenuShareTimeline：iurl："+iurl+",gurl:"+gurl);
-                // 用户确认分享后执行的回调函数
-            },
-            cancel: function () {
-                // 用户取消分享后执行的回调函数
-            }
-        });
-    }
 });
