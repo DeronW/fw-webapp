@@ -158,10 +158,10 @@ $FW.DOMReady(function () {
         });
     }
 
-
+let newUrl=location.href.split("?")[0];
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
-        data: {url: location.href.split("?")[0]},
+        data: {url:newUrl },
         success: (data) => {
             setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
             setShareFriend();
