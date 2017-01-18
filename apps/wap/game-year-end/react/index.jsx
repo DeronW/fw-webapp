@@ -11,7 +11,7 @@ function gotoHandler(link, need_login) {
 
 $FW.DOMReady(function () {
     $(".p1-2-1").on("touchstart", function () {
-        gotoHandler("https://m.9888.cn/static/wap/game-year-end/index.html?isLoginVist=1", true);
+        gotoHandler("https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=4&redirect_url=https://m.9888.cn/static/wap/game-year-end/index.html?isLoginVist=1", true);
     });
     let str;
     let login = false;
