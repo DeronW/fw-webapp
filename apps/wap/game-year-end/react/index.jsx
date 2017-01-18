@@ -147,8 +147,8 @@ $FW.DOMReady(function () {
         });
     }
 
-    var gurl = `${API_PATH}/static/wap/game-year-end/index.html`;
-    var iurl = `${API_PATH}/static/wap/game-year-end/images/share-ico.jpg`;
+    var gurl = `${API_PATH}static/wap/game-year-end/index.html`;
+    var iurl = `${API_PATH}static/wap/game-year-end/images/share-ico.jpg`;
     console.log("onMenuShareAppMessage：gurl："+gurl);
     console.log("onMenuShareAppMessage：iurl："+iurl);
     function setShareFriend() {
