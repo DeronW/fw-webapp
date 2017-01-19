@@ -108,7 +108,7 @@ const CashRecords = React.createClass({
                     </div>
                     {
                         data.withdrawMode != undefined || data.withdrawMode != "" ? 
-                            <div className="second-line">提现方式<div className="money">{data.withdrawMode == 1 ? "实时提现" : "大额提现"}</div></div> : ""
+                            <div className="second-line">提现方式<div className="money">{data.withdrawMode == 1 ? "实时到帐" : "大额提现"}</div></div> : ""
                     }
                     
                     

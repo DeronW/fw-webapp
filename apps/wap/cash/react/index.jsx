@@ -172,7 +172,6 @@ var BankAccount = React.createClass({
 
 		return (
 			<div className="pop-open-bank">
-
 					<TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}
 
 					/>
@@ -187,7 +186,9 @@ var BankAccount = React.createClass({
 							   onInput={this.inputHandler}
 							   onChange={this.handleChange}
 							   value={this.state.value}
-							   placeholder="请输入开户支行的关键词" />
+							   placeholder="请输入开户支行的关键词"
+							   ref="bank"
+							    />
 
 						<img className="false" onClick={this.handleClear}  src="images/false.jpg"/>
 					</div>
@@ -208,9 +209,6 @@ var BankAccount = React.createClass({
 
 const Withdrawals = React.createClass({
 	getInitialState: function() {
-		console.log("a")
-		const i = (this.props.data.bankInfo.isCompanyAgent || this.props.data.bankInfo.isSpecial) ? 1: 0;
-		console.log(i);
 	    return {
 			modifyShow: false,
 			specialShow: false,
@@ -248,15 +246,19 @@ const Withdrawals = React.createClass({
 			return false;
 		}
 
-
 		if(numberFormat.format(e.target.value) > this.state.propsAccountAmountVal) {
-			console.log("ss");
 			this.setState({			
 				inputVal: this.state.propsAccountAmountVal,
 				selectWhich: 1,
 				selectCashMethod: !this.state.selectCashMethod
 			});
 			return false;
+		}
+
+		if(numberFormat.format(e.target.value) > (this.props.data.criticalValue * 10000)) {
+			this.setState({			
+				selectWhich: 1
+			});
 		}
 
 		if(this.props.data.bankInfo.isCompanyAgent || this.props.data.bankInfo.isSpecial) {
@@ -267,6 +269,7 @@ const Withdrawals = React.createClass({
 		
 		
 		if(numberFormat.format(e.target.value) < (this.props.data.criticalValue * 10000)) {
+			console.log("b");
 			this.setState({			
 				inputVal: numberFormat.format(e.target.value),
 				selectWhich: 0,
@@ -330,8 +333,7 @@ const Withdrawals = React.createClass({
 	},
 	handlerPost: function() {
 		var _this = this;
-
-		console.log(this.state.inputVal);
+		
 		if(this.state.inputVal < parseInt(this.props.data.minAmt)) {
 			$FW.Component.Toast("提现金额不能低于10元");
 			return false;
@@ -339,16 +341,14 @@ const Withdrawals = React.createClass({
 
 		}
 
-		if(this.state.selectWhich == 1) {
-			console.log("1");
+		if(this.state.selectWhich == 1) {			
 			if(this.state.selectBankName == null) {
 				$FW.Component.Toast("请选择开户支行");
 				return false;
 			}			
 		}
 		
-		if(this.state.selectWhich == 0) {
-			console.log("xxxxxxx");
+		if(this.state.selectWhich == 0) {			
 			if(this.state.inputVal > (this.props.data.criticalValue * 10000) ) {
 		
 				$FW.Component.Toast("您实时提现单笔已超过" + this.props.data.criticalValue + "万限制，请使用大额提现！");
@@ -386,29 +386,35 @@ const Withdrawals = React.createClass({
 
 		var val = this.state.inputVal;
 
-		var bankNoVal = function() {
-			if(_this.state.inputVal < 100000) {
-				if(_this.props.data.bankInfo.isSpecial) {
-					return _this.state.selectBankId;
-				} else {
-					return "";
-				}
-
-			} else {
+		var bankNoVal = () => {
+			if(this.state.selectWhich == 1) {
 				if(_this.props.data.bankInfo.lianhangNo == null) {
 					return _this.state.selectBankId;
-				}else {
-					if(_this.state.selectBankId == "") {
-						return _this.props.data.bankInfo.lianhangNo;
-					} else {
-						return _this.state.selectBankId;
-					}
-				}
+				} else {
+					return _this.props.data.bankInfo.lianhangNo;
+				}	
+			} else {
+				return '';
 			}
-		};
-		
+			
+			// if(_this.props.data.bankInfo.lianhangNo == null) {
+			// 	return _this.state.selectBankId;
+			// }else {
+			// 	if(_this.state.selectBankId == "") {
+			// 		return _this.props.data.bankInfo.lianhangNo;
+			// 	} else {
+			// 		return _this.state.selectBankId;
+			// 	}
 
-		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.withdrawToken;
+			// 	return this.state.selectWhich == 1 ?  _this.props.data.bankInfo.bankNo : '';
+			// } 
+			
+		};
+
+		//console.log(bankNoVal());
+
+
+		window.location.href =  API_PATH +"mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal()  + "&withdrawTicket=" + this.props.data.withdrawToken;
 
 	},
 	handlerVoice: function() {
@@ -458,8 +464,6 @@ const Withdrawals = React.createClass({
 		window.location.href = location.protocol + "//m.9888.cn/static/wap/cash-records/index.html";
 	},
 	render : function(){
-		console.log(this.state.selectWhich);
-
 		var _this = this;
 
 		var feeVal = this.state.propsUserInfo.fee;
@@ -573,110 +577,115 @@ const Withdrawals = React.createClass({
 
 		return (
 			<div>
-				<TopNav title={"提现"} backBtn={true}  btnFun={this.callbackOpenBankBtn}  btnText={"提现记录"}
-						callbackInfoBtn={this.getInfoBtn}
-				/>
+				<div>
+					<TopNav title={"提现"} backBtn={true}  btnFun={this.callbackOpenBankBtn}  btnText={"提现记录"}
+							callbackInfoBtn={this.getInfoBtn}
+					/>
 
-				<div className="stou clearfix">
-					<div className="zhaoshang"><img className="ico-zhaoshang" src={this.props.data.bankInfo.bankLogo}/></div>
-					<div className="wz">
-						<div className="zh">{this.props.data.bankInfo.bankName}</div>
-						<div className="nz">
-							{
-								bankId.substring(0, 4) + "********" + bankId.substring((bankId.length - 4), bankId.length)
-							}
+					<div className="stou clearfix">
+						<div className="zhaoshang"><img className="ico-zhaoshang" src={this.props.data.bankInfo.bankLogo}/></div>
+						<div className="wz">
+							<div className="zh">{this.props.data.bankInfo.bankName}</div>
+							<div className="nz">
+								{
+									bankId.substring(0, 4) + "********" + bankId.substring((bankId.length - 4), bankId.length)
+								}
+							</div>
 						</div>
+						<div className="kuaijie"><img src="images/ico-kuaijie.png"/></div>
 					</div>
-					<div className="kuaijie"><img src="images/ico-kuaijie.png"/></div>
-				</div>
 
-				<div className="txt-a">
-					<div className="nin">如果您绑定的银行卡暂不支持手机快捷支付请联系客服<a href="tel:400-0322-988" className="c-4aa1f9">400-0322-988</a></div>
-					<div className="kx">可提现金额(元)：<span style={{fontSize: '38px',color: '#fd4d4c'}}>{this.props.data.accountAmount}</span></div>
-				</div>
+					<div className="txt-a">
+						<div className="nin">如果您绑定的银行卡暂不支持手机快捷支付请联系客服<a href="tel:400-0322-988" className="c-4aa1f9">400-0322-988</a></div>
+						<div className="kx">可提现金额(元)：<span style={{fontSize: '38px',color: '#fd4d4c'}}>{this.props.data.accountAmount}</span></div>
+					</div>
 
-				<div className="select-bank-area">
-					<div className="kunag">
-						<div className="pure">
-							<div className="xuanwu">							
-									<input className="moneyTxt"
-										value={this.state.inputVal}
-										onChange={this.handlerOnChange}
-										onBlur={this.handlerOnBlur}
-										onFocus={this.handlerOnFocus}
-										ref="refsMoney"
-										type="text" placeholder="请输入提现金额"
-									/> 
-							</div>
-							<div className="choice">
-								<div className="pleas" onClick={this.handlerPleasBtn}>全提</div>
+					<div className="select-bank-area">
+						<div className="kunag">
+							<div className="pure">
+								{
+									!this.state.selectBank ? <div className="xuanwu">							
+										<input className="moneyTxt"
+											value={this.state.inputVal}
+											onChange={this.handlerOnChange}
+											onBlur={this.handlerOnBlur}
+											onFocus={this.handlerOnFocus}
+											ref="refsMoney"
+											type="text" placeholder="请输入提现金额"
+										/> 
+									</div>: ''
+								}
+							
+								<div className="choice">
+									<div className="pleas" onClick={this.handlerPleasBtn}>全提</div>
+								</div>
 							</div>
 						</div>
+
+						{
+							(this.state.selectWhich == 1) || (_this.props.data.bankInfo.isCompanyAgent || _this.props.data.bankInfo.isSpecial) ? 
+								<div className="modify" onClick={this.handlerSelectPopFun} >
+									<div className="wire"></div>
+									<div className="pure">
+										<div className="xuanwu" style={{fontSize:'32px'}}>
+											{this.state.selectBankName === null ? "开户支行" : this.state.selectBankName}
+										</div>
+										<div className="choice">
+											<div className="pleas" style={{color:'#555555'}}  >请选择开户支行</div></div>
+									</div>
+								</div> : null
+						}
+
+
 					</div>
 
 					{
-						(this.state.selectWhich == 1) || (_this.props.data.bankInfo.isCompanyAgent || _this.props.data.bankInfo.isSpecial) ? 
-							<div className="modify" onClick={this.handlerSelectPopFun} >
-								<div className="wire"></div>
-								<div className="pure">
-									<div className="xuanwu" style={{fontSize:'32px'}}>
-										{this.state.selectBankName === null ? "开户支行" : this.state.selectBankName}
-									</div>
-									<div className="choice">
-										<div className="pleas" style={{color:'#555555'}}  >请选择开户支行</div></div>
-								</div>
-							</div> : null
+						this.state.promptShow ?
+							<div className="old-user-prompt-text">已向手机{phoneVal}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span>获取语音验证码。</div> : null
 					}
 
+					<div className="cash-method-block">
+						<div className="title">
+							提现方式
+						</div>
 
-				</div>
-
-				{
-					this.state.promptShow ?
-						<div className="old-user-prompt-text">已向手机{phoneVal}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span>获取语音验证码。</div> : null
-				}
-
-				<div className="cash-method-block">
-					<div className="title">
-						提现方式
+						<div className="info">
+							{blockEml()}
+						</div>
 					</div>
 
-					<div className="info">
-						{blockEml()}
+					<div className="xt" onClick={this.handlerPost}>
+							下一步
 					</div>
-				</div>
+					
+					<div>
+						<div className="hsuo">提现说明</div>
+						<div className="danbi">
+						
+							<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
+							<div className="atpr">
+								<img className="card-d" src="images/card-d.png"/>
+								<span className="online">
+									对首次充值后无投资的提现，平台收取{this.props.data.fee}%的手续费；
+								</span>
+							</div>
+							<div className="atpr">
+								<img className="card-d" src="images/card-d.png"/>
+								<span className="online">
+									徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
+								</span>
+							</div>
+							<div className="atpr">
+								<img className="card-d" src="images/card-d.png"/>
+								<span className="online">
+									如遇问题请与客服联系，客服电话：400-0322-988
+								</span>
+							</div>
+						</div>
+					</div>
 
-				<div className="xt" onClick={this.handlerPost}>
-						下一步
 				</div>
 				
-				<div>
-					<div className="hsuo">提现说明</div>
-					<div className="danbi">
-					
-						<div className="atpr"><img className="card-d" src="images/card-d.png"/><span className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
-						<div className="atpr">
-							<img className="card-d" src="images/card-d.png"/>
-							<span className="online">
-								对首次充值后无投资的提现，平台收取{this.props.data.fee}%的手续费；
-							</span>
-						</div>
-						<div className="atpr">
-							<img className="card-d" src="images/card-d.png"/>
-							<span className="online">
-								徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
-							</span>
-						</div>
-						<div className="atpr">
-							<img className="card-d" src="images/card-d.png"/>
-							<span className="online">
-								如遇问题请与客服联系，客服电话：400-0322-988
-							</span>
-						</div>
-					</div>
-				</div>
-
-
 				{
 					this.state.selectBank ? <BankAccount
 						callbackSelectBankInfo={this.getSelectBankInfo}

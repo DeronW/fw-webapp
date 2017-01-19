@@ -3,7 +3,8 @@ body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fo
 body, html{position:relative;margin:0 auto;background-color:#ebebee;}
 body{background-color:#ebebee;color: #555; min-height:100%;height:auto!important; height:100%;}
 body,button,input,select,textarea,h1,h2,h3,h4,h5,h6{font-family:"Microsoft YaHei",Arial,Helvetica,simhei,sans-serif;}
-input[type="submit"],input[type="text"],input[type="tel"],input[type="number"],input[type="button"],input[type="password"]{-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);-webkit-tap-highlight-color:transparent;line-height:normal;}
+input[type="submit"],input[type="text"],input[type="tel"],input[type="number"],input[type="button"],input[type="password"]
+{-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);-webkit-tap-highlight-color:transparent;line-height:normal;}
 input,label,button,textarea,select{border:medium none;font-family:"Microsoft YaHei",Arial,Helvetica,simhei,sans-serif;}
 input:focus{outline:0;}
 a:active,a:focus{outline:0;}
@@ -327,7 +328,7 @@ input[type=checkbox],input[type=radio] {
 
 .xuanwu{
     float: left;
-    width: 550px;
+    width: 400px;
     font-size: 36px;
     margin-left: 30px;
     color: #555555;
@@ -420,7 +421,7 @@ textarea::-webkit-input-placeholder {
 
 .select-bank{
     width: 100%;
-
+    margin: 120px 0 0 0;
     background: #ebebee;
     
     .search{
@@ -501,13 +502,13 @@ textarea::-webkit-input-placeholder {
 }
 
 .pop-open-bank {
-  position: absolute;
+  position: fixed;;
   top: 0;
   left:0;
   background: #ebebee;
   width: 100%;
   height: 100%;
-  z-index: 1000;
+  z-index: 1000000;
 }
 
 .top-nav {
@@ -653,6 +654,7 @@ textarea::-webkit-input-placeholder {
 
 
 .select-bank-area {
+   
     border-top: 1px solid #d8d8d8;
     border-bottom: 1px solid #d8d8d8;
     background-color: #fff;
