@@ -13,6 +13,12 @@ $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('豆尔摩斯年度大揭秘');
     }
+    let ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'&&$FW.Browser.inApp()){
+        $(".p6-8").show();
+    }else{
+        $(".p6-8").hide();
+    }
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
         data: {url: location.href},
@@ -70,7 +76,7 @@ $FW.DOMReady(function () {
         let allUserCount = (data.allUserCount + "").split("");
         let s = "";
         for (var i = 0; i < allUserCount.length; i++) {
-            s += "<span class='p1-num" + i + "' style='transition-delay:" + 0.2 * i + "s ;'>" + allUserCount[i] + "</span>";
+            s += "<span class='p1-num" + i + "' style='-webkit-transition-delay:" + 0.2 * i + "s ;transition-delay:" + 0.2 * i + "s ;'>" + allUserCount[i] + "</span>";
         }
         $("#p1-num").html(s);
     });
@@ -102,7 +108,7 @@ $FW.DOMReady(function () {
                         let investAmountYear = (data.investAmountYear + "").split("");
                         let p5 = "";
                         for (var j = 0; j < investAmountYear.length; j++) {
-                            p5 += "<span class='p5-1-" + j + "' style='transition-delay:" + 0.2 * j + "s ;'>" + investAmountYear[j] + "</span>";
+                            p5 += "<span class='p5-1-" + j + "' style='-webkit-transition-delay:" + 0.2 * j + "s ;transition-delay:" + 0.2 * j + "s ;'>" + investAmountYear[j] + "</span>";
                         }
                         $("#p5-1").html(p5);
                         if (data.groupName == "实习豆尔摩斯") {
