@@ -105,8 +105,7 @@ const ApplyLoan = React.createClass({
         if(borrowBtnStatus == 2) jumpLink = `https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`;
         let loan_btn = <div className="loan-btn" onClick={()=>gotoHandler(jumpLink)}>申请借款</div>;
 
-        let credit_btn = <div className="loan-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}
-`)}>我要提额</div>;
+        let credit_btn = <div className="loan-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>我要提额</div>;
 
         let btn_list = <div className="credit-btn">
             <div className="credit-improvement-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}
