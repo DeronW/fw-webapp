@@ -53,7 +53,7 @@ const Payment = React.createClass({
                     $FW.Component.Alert('成功');
                     setTimeout(function () {
                         location.href = location.protocol + '//' + location.hostname +
-                            "/static/mall/pay-msg-pay/index.html?merchantNo=" + data.merchantNo + "&mobileNo=" + FormData.mobileNo
+                            "/static/mall/pay-msg-pay/index.html?merchantNo=" + result.merchantNo + "&mobileNo=" + FormData.mobileNo
                     }, 2500);
                 }
             })

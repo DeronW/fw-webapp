@@ -24,7 +24,7 @@ const SendCode = React.createClass({
     getInitialState: function () {
         var query = $FW.Format.urlQuery();
         var mobileNo = query.mobileNo;
-        var merchantNo = query.merchantNo;
+        var merchantNo = query.merchantNo||[];
         return {
             mobileNo: mobileNo,
             merchantNo: merchantNo,
@@ -108,7 +108,7 @@ const SendCode = React.createClass({
             merchantNo: this.state.merchantNo,
             checkCode: this.state.code
         }
-        alert(JSONFormData);
+        alert(JSON.stringify(FormData));
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
