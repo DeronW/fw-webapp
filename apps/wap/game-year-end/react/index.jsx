@@ -97,8 +97,8 @@ $FW.DOMReady(function () {
                     data.balanceProfit ? $("#li-r5").html(data.balanceProfit) : null;
                     $FW.Ajax(`${API_PATH}mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
                         $("#p4-0").html(data.investTimesYear);
-                        $("#p4-1").html(data.monthName);
-                        $("#p4-2").html(data.investTimeSlot);
+                        data.monthName?$("#p4-1").html(data.monthName):$(".p4-1-2").html("你是一个非常谨慎的豆尔摩斯");
+                        data.investTimeSlot?$("#p4-2").html(data.investTimeSlot):$(".p4-2-2").html("深思熟虑后再入手合适的项目");
                         let investAmountYear = (data.investAmountYear + "").split("");
                         let p5 = "";
                         for (var j = 0; j < investAmountYear.length; j++) {
