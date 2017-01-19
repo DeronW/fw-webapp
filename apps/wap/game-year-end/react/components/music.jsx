@@ -4,22 +4,22 @@ function music() {
     let n = true;
     $(document).on("touchstart", function () {
         if (n && mediao.paused) {
-            mediao.play();
             n = false;
+            mediao.play();
         }
     });
     if (mediao.paused) {
         mediao.play();
     };
     $("#audio-btn").on("touchstart", function () {
-        if ($("#audio-btn img").hasClass('on')) {
-            //$(this).attr("src",http+"/musicOff.png");
-            $("#audio-btn img").removeClass('on');
+        if ($("#audio-btn .music1").hasClass('on')) {
+            $("#audio-btn .music1").removeClass('on');
             mediao.pause();
+            n = false;
         } else {
-            //$(this).attr("src",http+"/music.png");
-            $("#audio-btn img").addClass('on');
+            $("#audio-btn .music1").addClass('on');
             mediao.play();
+            n = false;
         }
     });
 }

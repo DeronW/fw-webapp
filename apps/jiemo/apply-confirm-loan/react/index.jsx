@@ -1,9 +1,5 @@
 function gotoHandler(link) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }else {
-        location.href = encodeURI(link);
-    }
+    location.href = encodeURI(link);
 }
 
 const ConfirmLoanWrap = React.createClass({
@@ -155,11 +151,12 @@ const VerifyCode = React.createClass({
             url: `${API_PATH}api/loan/v1/sendSmsverifycode.json`,
             method: "post",
             data: {token:localStorage.userToken , userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, productId:1, orioleOrderGid:orioleOrderGid, loanAmount:loanNum, withdrawCardGid:withdrawCardGid}
-        }).then(d => {
-            this.setState({phoneNum:data.mobile, orderId:data.orderGid});
+        }).then(data => {
+            this.setState({phoneNum:data.mobile, orderGid:data.orderGid});
         }, (error) => console.log(error));
     },
     getSMSCode:function(){
+        console.log(this.state.orderGid)
         if(this.state.remain<=0){
             this.tick();
             $FW.Ajax({

@@ -40,7 +40,7 @@ const BottomNavBar = React.createClass({
         let {tab} = this.state;
 
         let _style_footer_fixed = {
-            background: "url('/static/mall/home/images/fixed-nav.png') no-repeat",
+            background: "url(images/global-bottom-nav-bg.png) no-repeat",
             width: "720px",
             height: "143px",
             position: "fixed",
@@ -50,7 +50,7 @@ const BottomNavBar = React.createClass({
         };
 
         let _style_footer_item_base = {
-            backgroundImage: "url('/static/mall/home/images/nav.png')",
+            backgroundImage: "url(images/global-bottom-nav-icon.png)",
             backgroundRepeat: 'no-repeat',
             display: "block",
             position: "absolute"

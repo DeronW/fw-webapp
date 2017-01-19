@@ -1,3 +1,5 @@
+const eslint = require('gulp-eslint');
+
 const PROJ = 'wap';
 
 let APP_NAMES = [
@@ -5,6 +7,9 @@ let APP_NAMES = [
     'about-us', // 关于我们
     'faq', // 帮助中心
     'app-download', // app 下载页面
+
+    //年终总结豆尔摩斯h5宣传页
+    'game-year-end', //2016豆尔摩斯h5宣传页
 
     // test page
     'test-native-bridge',
@@ -77,8 +82,6 @@ const NOTICE_PAGES = [
 ]
 
 const DEVELOPING_PAGES = [
-    //年终总结豆尔摩斯h5宣传页
-    'game-year-end'//2016豆尔摩斯h5宣传页
 ]
 
 APP_NAMES.push(
@@ -119,4 +122,19 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
+    gulp.task(`lint:${PROJ}`, gulp.series(() => {
+        return gulp.src([
+            `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
+            '!**/jquery.*.js', '!**.min.js'])
+            .pipe(eslint())
+            .pipe(eslint.result(result => {
+                console.log(
+                    `\nESLint result: ${result.filePath}\n`,
+                    `# Messages: ${result.messages.length}\n`,
+                    `# Warnings: ${result.warningCount}\n`,
+                    `# Errors: ${result.errorCount}\n`
+                );
+            }))
+            .pipe(eslint.format())
+    }))
 };

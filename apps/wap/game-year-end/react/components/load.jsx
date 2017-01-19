@@ -2,7 +2,7 @@
  * Created by Administrator on 2017/1/12.
  */
 function load(){
-    let http=location.href.split("game-year-end")[0]+"images" ;
+    let http=location.href.split("game-year-end")[0]+"game-year-end/images" ;
     //加载图片
     $(".percent").on('touchstart',function(event){
         event.stopPropagation();
@@ -107,6 +107,8 @@ function load(){
         http+"/share.png",
         http+"/up-text1.png",
         http+"/up.png",
+        http+"/music1.png",
+        http+"/music2.png",
     ], function(percent) {
         touchStyleLoadingEl.children[0].innerHTML = percent+"%";
         if (percent >= 100) {

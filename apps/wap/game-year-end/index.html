@@ -4,16 +4,14 @@
 
 <div id="touchStyleLoading">
     <div class="percent">0%</div>
-    <div class="spinner"></div>
+    <div class="spinner"><img id="spinner-img1"src="images/music1.png" /> <img id="spinner-img2" src="images/music2.png" /></div>
 </div>
 <div class="main">
     <!--音乐-->
     <div id="audio-btn" style="display: block;">
-        <audio id="media" loop="true" autoplay="autoplay">
-            <source src="https://static.9888.cn/audio/wap/1484533465588.mp3" type="audio/mpeg"/>
-            请使用支持html5的浏览器。
-        </audio>
-        <img src="images/music.png" class="on">
+        <audio id="media" loop="true" autoplay="autoplay" src="https://static.9888.cn/audio/wap/1484533465588.mp3"></audio>
+        <img src="images/music1.png" class="music1 on">
+        <img src="images/music2.png" class="music2">
     </div>
     <div class="swiper-container">
         <div class="swiper-wrapper" id="swiper-wrapper">
@@ -33,44 +31,46 @@
                     <div class="p1-text1">圆人民群众的财富梦想</div>
                 </div>
                 <div class="p1-num-box">
-                    <div class="p1-num">截止至今已有<span id="p1-num">938934</span>名</div>
+                    <div class="p1-num">截止至今已有&nbsp;<span id="p1-num">93</span>&nbsp;名</div>
                     <div class="p1-num-text">优秀的豆尔摩斯加入了我们</div>
                 </div>
                 <div class="p1-1"><img src="images/p1-2.png"/></div>
                 <div class="p1-2">
-                    <a href="#" class="p1-2-1"><img src="images/p1-0.png"/></a>
+                    <a class="p1-2-1"><img src="images/p1-0.png"/></a>
                     <div class="p1-2-2">（登录个人账户后继续观看）</div>
                 </div>
             </section>
             <section class="swiper-slide page2">
+                <div class="p1-masker"></div>
                 <div class="p2-0">
                     <img src="images/p2-0.png" class="p2-0-0"/>
-                    <div class="p2-0-1">张克川</div>
+                    <div class="p2-0-1">张**</div>
                     <div class="p2-2-2">2015年3月30日</div>
-                    <div class="p2-2-3"><img src="images/p2-1.png"/><span>31523</span><img src="images/p2-3.png"/></div>
+                    <div class="p2-2-3"><img src="images/p2-1.png"/><span id="p2-2-3">0</span><img src="images/p2-3.png"/></div>
                 </div>
             </section>
             <section class="swiper-slide page3">
-                <div class="p3-masker"></div>
+                <div class="p1-masker"></div>
                 <div class="p3-1">截止今日</div>
-                <div class="p3-2">你已在组织累计投资 <span>206</span> 笔</div>
-                <div class="p3-3">共计 <span>987261.28</span> 元</div>
+                <div class="p3-2">你已在组织累计投资 <span id="p3-2">0</span> 笔</div>
+                <div class="p3-3">共计 <span id="p3-3">0</span> 元</div>
                 <div class="p3-4">组织共奖励你</div>
-                <div class="p3-5"><span>987261.28</span>元<img src="images/p3-1.png" id="p3-5-img"/></div>
+                <div class="p3-5"><span id="p3-5">0</span>元<img src="images/p3-1.png" id="p3-5-img"/></div>
                 <div class="p3-6"><img src="images/p3-2.png"></div>
                 <div class="p3-7">
                     <img src="images/p3-3.png">
-                    <div class="p3-7-text">这些奖励够买<span>200</span>个烟斗，<span>20</span>件风衣</div>
+                    <div class="p3-7-text">这些奖励够买<span id="smoke-num">20</span>个烟斗，<span id="cloth-num">20</span>件风衣</div>
                 </div>
             </section>
             <section class="swiper-slide page4">
+                <div class="p1-masker"></div>
                 <div class="p4-0">
                     <div class="p4-0-1">2016年</div>
-                    <div class="p4-0-2">你一共进行了<span id="p4-0">39</span>次神秘投资</div>
+                    <div class="p4-0-2">你一共进行了<span id="p4-0">0</span>次神秘投资</div>
                 </div>
                 <div class="p4-1">
                     <div class="p4-1-1">经分析</div>
-                    <div class="p4-1-2">你对期限<span id="p4-1">12月以上</span>的项目情有独钟</div>
+                    <div class="p4-1-2">你对期限<span id="p4-1">3月以上</span>的项目情有独钟</div>
                 </div>
                 <div class="p4-2">
                     <div class="p4-2-1">你更喜欢</div>
@@ -78,18 +78,20 @@
                 </div>
                 <div class="p4-3">
                     <div class="p4-3-1"><img src="images/p4-4.png"></div>
-                    <div class="p4-3-2"><img src="images/p4-text1.png"></div>
+                    <div class="p4-3-2"><img src="images/p4-text1.png" id="p4-3-2"></div>
                 </div>
             </section>
             <section class="swiper-slide page5">
+                <div class="p1-masker"></div>
                 <div class="p5-0">2016年，作为一名合格的豆尔摩斯</div>
-                <div class="p5-1">你一共投资<span id="p5-1">123213.23</span>元</div>
+                <div class="p5-1">你一共投资&nbsp;<span id="p5-1">0</span>&nbsp;元</div>
                 <div class="p5-2"><span>被组织评选为</span><img src="images/p5-level-1.png" id="p5-2"/></div>
                 <div class="p5-3"><img src="images/p5-1.png"/></div>
                 <div class="p5-4"><img src="images/p5-2.png"/></div>
                 <div class="p5-5"><img src="images/p5-3.png"/></div>
             </section>
             <section class="swiper-slide page6">
+                <div class="p1-masker"></div>
                 <div class="p6-0"><img src="images/p6-0.png"/></div>
                 <div class="p6-1"><img src="images/p6-1.png"/></div>
                 <div class="p6-2"><img src="images/p6-2.png"/></div>
@@ -108,23 +110,23 @@
             <div class="ul">
                 <div class="li">
                     <div class="li-text">已收利息</div>
-                    <div class="li-r" id="li-r1">2123.45元</div>
+                    <div class="li-r" id="li-r1">0元</div>
                 </div>
                 <div class="li">
                     <div class="li-text">待收利息</div>
-                    <div class="li-r" id="li-r2">2123.45元</div>
+                    <div class="li-r" id="li-r2">0元</div>
                 </div>
                 <div class="li">
                     <div class="li-text">返现券</div>
-                    <div class="li-r" id="li-r3">2123.45元</div>
+                    <div class="li-r" id="li-r3">0元</div>
                 </div>
                 <div class="li">
                     <div class="li-text">工豆收益</div>
-                    <div class="li-r">2123.45元</div>
+                    <div class="li-r" id="li-r4">0元</div>
                 </div>
                 <div class="li">
                     <div class="li-text">余额收益</div>
-                    <div class="li-r" id="">2123.45元</div>
+                    <div class="li-r"  id="li-r5">0元</div>
                 </div>
             </div>
             <div class="pop-close"></div>
@@ -134,8 +136,8 @@
         src="images/up.png" class="up-mark"></div>
     <div class="pop-share">
         <div class="share-img"><img src="images/share.png"/></div>
-        <div class="share-text">fenxiang</div>
     </div>
 </div>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script id="DS_PRE_JS" type="text/javascript" src="https://tongji.datastory.com.cn/resources/javascripts/pre-ds-min.js?dsTid=bc453c7c-a9bc-48c6-aea3-d020300a1305"></script>
 {% endblock %}

@@ -23,7 +23,7 @@ const Payment = React.createClass({
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
             let link = location.protocol + '//' + location.hostname +
-                '/static/mall/pay-add-card/index.html?info='+location.search;
+                '/static/mall/pay-add-card/index.html'+location.search;
             location.href = link;
         }
         else {
@@ -38,7 +38,6 @@ const Payment = React.createClass({
                 bankId: data[index].bankId,
                 bankName: data[index].bankName,
                 productName: '豆哥商城商品',
-                productInfo: '豆哥商城商品',
                 orderTime:query.orderTime||"",
                 orderBizNo:query.orderBizNo||"",
                 orderGroupBizNo:query.orderGroupBizNo||""
@@ -74,7 +73,7 @@ const Payment = React.createClass({
             </div>
         );
 
-        var payMethods = data.length == 0 ? quick_pay :
+        var payMethods =
             data.map((n, index) => {
                 let accountNo = this.split(n.accountNo);
                 return (
@@ -107,7 +106,7 @@ const Payment = React.createClass({
                 </div>
                 */}
                 <div className="pay-way">
-                    {payMethods}
+                    {payMethods} {quick_pay}
                     {/*
                      <div className="pay-item" onClick={this.payCheck.bind(this,2)}>
                      <div className="pay-icon"><img src="images/wechat.jpg"/></div>

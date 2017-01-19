@@ -1,11 +1,6 @@
 function gotoHandler(link) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }else {
-        location.href = encodeURI(link);
-    }
+    location.href = encodeURI(link);
 }
-
 function formatDate(now) {
     var now = new Date();
     var yy = now.getFullYear();
@@ -43,12 +38,11 @@ const Bill = React.createClass({
             )
         };
 
-
         return (
             <div>
                 <div className="header">
                     <div className="title">账单</div>
-                    <div className="history-bill">历史账单</div>
+                    <div className="history-bill" onClick={ () => gotoHandler(`/static/jiemo/bill-history-bill/index.html`)}>历史账单</div>
                 </div>
                 {this.props.data.loanList.length == 0 ? (<div className="no-data-box">
                         <img className="no-data-img" src="images/no-data.png"/>
