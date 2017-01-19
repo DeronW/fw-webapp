@@ -24,7 +24,7 @@ $FW.DOMReady(function () {
         data: {url: location.href},
         fail: () => true,
         complete: (data) => {
-            setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
+            setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
         }
     });
     wx.ready(function () {
