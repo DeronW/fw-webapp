@@ -8,6 +8,9 @@ let APP_NAMES = [
     'faq', // 帮助中心
     'app-download', // app 下载页面
 
+    //年终总结豆尔摩斯h5宣传页
+    'game-year-end', //2016豆尔摩斯h5宣传页
+
     // test page
     'test-native-bridge',
     'test-statistic-chart'
@@ -79,8 +82,6 @@ const NOTICE_PAGES = [
 ]
 
 const DEVELOPING_PAGES = [
-    //年终总结豆尔摩斯h5宣传页
-    'game-year-end'//2016豆尔摩斯h5宣传页
 ]
 
 APP_NAMES.push(
