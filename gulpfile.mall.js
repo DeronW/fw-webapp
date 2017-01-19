@@ -46,7 +46,8 @@ const MALL_APP_NAMES = [
     //游戏页面game-
     'game',//游戏中心
     'zhuanpan20161215',//15号转盘
-    'game-zhuanpan20161230'//2016-12-30号转盘
+    'game-zhuanpan20161230',//2016-12-30号转盘
+    'game-red-rain'//红包雨
 
 
 ];
