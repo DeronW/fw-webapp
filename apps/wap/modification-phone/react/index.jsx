@@ -28,7 +28,7 @@ const ModificationPhoneFrom = React.createClass({
         });
 
         this.setState({
-            countdown: 5
+            countdown: 60
         })
 
         this.timer = setInterval(() => {
@@ -46,7 +46,7 @@ const ModificationPhoneFrom = React.createClass({
         }, 1000)
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=4&isVms=" + isVms,
+            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9)  +"&isVms=" + isVms,
             method: "GET",
             success: function(data) {
                 
@@ -67,8 +67,7 @@ const ModificationPhoneFrom = React.createClass({
         });
     },
     handlerModificationPhone () {
-        var _this = this;        
-        console.log(checkPhone(this.state.phoneValue));
+        var _this = this;                
 
         if(this.state.codeValue == '') {
             $FW.Component.Toast("验证码不能为空");
