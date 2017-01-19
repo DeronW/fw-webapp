@@ -1,3 +1,17 @@
+var numberFormat = {
+    val: "",
+    format: function (val) {
+        if (!isNaN(val.replace(/[0-9]/g, ""))) {
+            this.val = val.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");//四位数字一组，以空格分割
+        }
+        return this.val;
+    }
+};
+
+function removeAllSpace(str) {
+    return str.replace(/\s+/g, "");
+}
+
 const AddBankCard = React.createClass({
     getInitialState: function () {
         return {
@@ -8,9 +22,9 @@ const AddBankCard = React.createClass({
     },
     changeVal: function (e) {
         var val = e.target.value;
-        var length = val.length;
+        var length = removeAllSpace(val).length;
         var reg = /^\d{16}|\d{19}$/;
-        if (isNaN(val)) {
+        if (isNaN(removeAllSpace(val))) {
             this.setState({"info": "只能输入数字!"});
             this.setState({active: false});
         }
@@ -22,7 +36,7 @@ const AddBankCard = React.createClass({
             this.setState({"info": "请输入正确的银行卡号!"});
             this.setState({active: false});
         }
-        this.setState({val: val});
+        this.setState({val: numberFormat.format(val)});
     },
     nextStep: function () {
         if (!this.state.active) return;
@@ -45,7 +59,7 @@ const AddBankCard = React.createClass({
                 <div className="add-bank-card-tip">请绑定账户本人的银行卡</div>
                 <div className="input-box">
                     <span className="card-icon"></span>
-                    <input type="text" placeholder="请输入银行卡号" name="title" defaultValue="" onChange={this.changeVal}/>
+                    <input type="text" placeholder="请输入银行卡号" name="title" defaultValue="" onChange={this.changeVal} value={this.state.val}/>
                 </div>
                 <label htmlFor="title" className="card-info">{this.state.info}</label>
                 <a className={this.state.active ? "next-step active":"next-step"} onClick={this.nextStep}>下一步</a>
