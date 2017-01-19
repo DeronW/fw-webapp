@@ -255,7 +255,6 @@ body,html,.main{
     position: absolute;
     top: 530px;
     left: 19px;
-    opacity: 0;
     -webkit-transform-origin: 100% 100%;
     -webkit-transition: linear 0.6s 1s;
     -webkit-transform: translate3d(40px, 0, 0);
@@ -269,10 +268,11 @@ body,html,.main{
   .p0-3 {
     z-index: 4;
     position: absolute;
-    top: 590px;
+    top: 580px;
     left: 108px;
     display: none;
     img {
+      display: block;
       width: 87px;
       height: 35px;
     }
@@ -280,10 +280,11 @@ body,html,.main{
   .p0-3-1 {
     z-index: 4;
     position: absolute;
-    top: 590px;
+    top: 580px;
     left: 108px;
     display: none;
     img {
+      display: block;
       width: 87px;
       height: 35px;
     }
@@ -294,9 +295,9 @@ body,html,.main{
     top: 53px;
     left: 0;
     opacity: 0;
-    -webkit-transition: ease 1s;
+    -webkit-transition:1s;
     -webkit-transform: translate3d(0, -400px, 0);
-    transition: ease 1s;
+    transition:1s;
     transform: translate3d(0, -400px, 0);
     img {
       width: 720px;
@@ -313,33 +314,40 @@ body,html,.main{
   }
   .p0-3 {
     display: block;
-    -webkit-animation: p0-3 linear 3s infinite;
-    animation: p0-3 linear 3s infinite;
-    @-webkit-keyframes p0-3 {
-      0% {
-        -webkit-transform: scale(0) translate3d(0, 0px, 0)
-      }
-      100% {
-        -webkit-transform: scale(2) translate3d(0, -40px, 0);
-        opacity: 0;
-      }
-    }
-    @keyframes p0-3 {
-      0% {
-        transform: scale(0) translate3d(0, 0px, 0)
-      }
-      100% {
-        transform: scale(2) translate3d(0, -40px, 0);
-        opacity: 0;
-      }
-    }
+   img{
+     opacity: 0;
+     -webkit-animation: p0-3 linear 3s infinite;
+     animation:p0-3 linear 3s infinite;
+     @-webkit-keyframes p0-3 {
+       0% {
+         -webkit-transform:  translate3d(0, 0px, 0);
+         opacity: 1;
+       }
+       100% {
+         -webkit-transform:  translate3d(0, -80px, 0);
+         opacity: 0;
+       }
+     }
+     @keyframes p0-3 {
+       0% {
+         transform:  translate3d(0, 0px, 0);
+         opacity: 1;
+       }
+       100% {
+         transform:  translate3d(0, -80px, 0);
+         opacity: 0;
+       }
+     }
+   }
   }
   .p0-3-1 {
     display: block;
-    -webkit-transform: scale(0);
-    -webkit-animation: p0-3 linear 3s 1.5s infinite;
-    transform: scale(0);
-    animation: p0-3 linear 3s 1.5s infinite;
+    img{
+      opacity: 0;
+      -webkit-animation: p0-3 linear 3s 1.5s infinite;
+      animation: p0-3 linear 3s 1.5s infinite;
+    }
+
   }
   .p0-4 {
     opacity: 1;
