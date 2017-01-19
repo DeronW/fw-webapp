@@ -1,9 +1,5 @@
 function gotoHandler(link) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }else {
-        location.href = encodeURI(link);
-    }
+    location.href = encodeURI(link);
 }
 
 const ConfirmLoanWrap = React.createClass({

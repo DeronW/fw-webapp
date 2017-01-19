@@ -1,3 +1,7 @@
+function gotoHandler(link) {
+    location.href = encodeURI(link);
+}
+
 const WantLoan = React.createClass({
     getInitialState:function(){
         let query = $FW.Format.urlQuery();
@@ -17,6 +21,7 @@ const WantLoan = React.createClass({
     loanHandler:function(){
         let n = parseInt(this.state.loanNum) || 0, {creditLine} = this.state, err;
 
+
         if(n > creditLine) err = '不能输入大于可借额度';
         if(n % 100 != 0) err = '借款金额必须为100的整数倍';
         if(n < 500) err = '借款金额必须大于等于500';
@@ -26,6 +31,7 @@ const WantLoan = React.createClass({
         err &&  $FW.Component.Toast(err);
         this.setState({loanNum:format(n)});
 
+
         let cashBank = this.props.userBankList.withdrawBankcard;
 
         function isRealNameBindCard(ele){
@@ -33,8 +39,8 @@ const WantLoan = React.createClass({
         }
         let filtered = cashBank.filter(isRealNameBindCard);
 
-        if(this.state.loanNum){
-            location.href = `http://fe.9888.cn/static/apply-confirm-loan/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
+        if(!err){
+            location.href = `/static/jiemo/apply-confirm-loan/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
         }
 
     },

@@ -1,9 +1,5 @@
 function gotoHandler(link) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }else {
         location.href = encodeURI(link);
-    }
 }
 
 const ApplyLoan = React.createClass({
@@ -106,7 +102,7 @@ const ApplyLoan = React.createClass({
 
         let btn_list = <div className="credit-btn">
             <div className="credit-improvement-btn">我要提额</div>
-            <div className="credit-apply-btn" onClick={()=>gotoHandler(`/static/jiemo/apply-want-loan/index.html?loanNum=${this.state.availableLoan}&orioleOrderGid=${this.state.orioleOrderGid}&creditLine=${this.state.creditLine}`)}>我要借款</div>
+            <div className="credit-apply-btn" onClick={()=>gotoHandler(`/static/jiemo/apply-want-loan/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`)}>我要借款</div>
         </div>;
 
         let borrowBtnStatus = this.props.data.borrowBtnStatus;
@@ -123,7 +119,7 @@ const ApplyLoan = React.createClass({
             moneySlider = no_slider_bar;
             loanStatus = unavailable_loan;
             $FW.Component.Toast(borrowBtnDesc);
-            creditLine = creditNum;
+            creditLine = "--";
         }
         if(borrowBtnStatus==5) btnStatus = btn_list, moneySlider = slider_bar, loanStatus = available_loan, creditLine = creditNum;
 

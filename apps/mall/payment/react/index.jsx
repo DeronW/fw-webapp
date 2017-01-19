@@ -38,7 +38,6 @@ const Payment = React.createClass({
                 bankId: data[index].bankId,
                 bankName: data[index].bankName,
                 productName: '豆哥商城商品',
-                productInfo: '豆哥商城商品',
                 orderTime:query.orderTime||"",
                 orderBizNo:query.orderBizNo||"",
                 orderGroupBizNo:query.orderGroupBizNo||""
