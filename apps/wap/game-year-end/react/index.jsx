@@ -14,7 +14,7 @@ $FW.DOMReady(function () {
         NativeBridge.setTitle('豆尔摩斯年度大揭秘');
     }
     let ua = window.navigator.userAgent.toLowerCase();
-    if(ua.match(/MicroMessenger/i) == 'micromessenger'&&$FW.Browser.inApp()){
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'||$FW.Browser.inApp()){
         $(".p6-8").show();
     }else{
         $(".p6-8").hide();
@@ -100,7 +100,7 @@ $FW.DOMReady(function () {
                     $("#li-r2").html(data.waitedInterest + "元");
                     $("#li-r3").html(data.cashCoupon + "元");
                     $("#li-r4").html(data.beanCount + "元");
-                    data.balanceProfit ? $("#li-r5").html(data.balanceProfit) : null;
+                    $("#li-r5").html(data.balanceProfit+ "元");
                     $FW.Ajax(`${API_PATH}mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
                         $("#p4-0").html(data.investTimesYear);
                         data.monthName?$("#p4-1").html(data.monthName):$(".p4-1-2").html("你是一个非常谨慎的豆尔摩斯");
