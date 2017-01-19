@@ -115,7 +115,7 @@ const SendCode = React.createClass({
             enable_loading: true,
             data: FormData,
             success: function (data) {
-                alert(data.code);
+                alert(JSON.stringify(data));
                 //var data= data.bankCards;
                 window.location.href = location.protocol + '//' + location.hostname +
                     "/static/mall/order-complete/index.html?id="+data.tradeNo
