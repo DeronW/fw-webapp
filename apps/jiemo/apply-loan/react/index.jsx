@@ -96,18 +96,25 @@ const ApplyLoan = React.createClass({
             <img src="images/no-slider-bar.jpg"/>
         </div>;
 
-        let loan_btn = <div className="loan-btn">申请借款</div>;
-
-        let credit_btn = <div className="loan-btn">我要提额</div>;
-
-        let btn_list = <div className="credit-btn">
-            <div className="credit-improvement-btn">我要提额</div>
-            <div className="credit-apply-btn" onClick={()=>gotoHandler(`/static/jiemo/apply-want-loan/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`)}>我要借款</div>
-        </div>;
-
         let borrowBtnStatus = this.props.data.borrowBtnStatus;
         let borrowBtnDesc =  this.props.data.borrowBtnDesc;
         let creditNum = this.props.data.creditLine;
+
+        let jumpLink;
+        if(borrowBtnStatus == 1) jumpLink = '/static/jiemo/user-set-cash-card/index.html';
+        if(borrowBtnStatus == 2) jumpLink = `https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`;
+        let loan_btn = <div className="loan-btn" onClick={()=>gotoHandler(jumpLink)}>申请借款</div>;
+
+        let credit_btn = <div className="loan-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}
+`)}>我要提额</div>;
+
+        let btn_list = <div className="credit-btn">
+            <div className="credit-improvement-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}
+`)}>我要提额</div>
+            <div className="credit-apply-btn" onClick={()=>gotoHandler(`/static/jiemo/apply-want-loan/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`)}>我要借款</div>
+        </div>;
+
+
         let btnStatus;
         let moneySlider;
         let loanStatus;
