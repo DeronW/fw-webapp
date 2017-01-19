@@ -87,6 +87,7 @@ const SendCode = React.createClass({
 
     //绑定银行卡
      bindCard:function(){
+         alert(0);
         var query = $FW.Format.urlQuery();
 
         let FormData = {
@@ -100,22 +101,18 @@ const SendCode = React.createClass({
              bankId: query.bankId,
              bankName: query.bankName
         };
-
+        alert(JSON.stringify(FormData));
         $FW.Ajax({
             url:  API_PATH +'/mall/api/payment/v1/binding_bank_card.json',
             enable_loading: true,
             data: FormData,
             success: function (data) {
                 alert(JSON.stringify(data));
-                if (data.status=='S') {
                     $FW.Component.Alert(data.msg);
                     setTimeout(function(){
                         location.href="/static/mall/pay-bank-card/index.html"
-                    },2000)
-                } else {
-                    $FW.Component.Alert(data.msg);
-                }
-            }
+                    },20000)
+             }
         })
     },
 

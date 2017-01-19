@@ -54,7 +54,8 @@ const SendCode = React.createClass({
         if (!this.state.reSend) return;
         var FormData = {
             service: 'REQ_PAY_QUICK_RESEND',
-            merchantNo: this.state.merchantNo
+            merchantNo: this.state.merchantNo,
+            checkCode:this.state.code
         }
         console.log(FormData);
         $FW.Ajax({

@@ -20,6 +20,7 @@ const USER_PAGES = [
     'user-voucher',
     'user-deliver-address',
     'user-build-deliver',
+	'user-help',
 ]
 
 const PRODUCT_PAGES = [
