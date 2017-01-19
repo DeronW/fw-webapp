@@ -43,7 +43,7 @@ const AddBankCard = React.createClass({
         var query = $FW.Format.urlQuery();
         var bizNo = query.bizNo;
         $FW.Ajax({
-            url: `${API_PATH}/mall/api/payment/v1/bank_card_info.json?accountNo=` + this.state.val,
+            url: `${API_PATH}/mall/api/payment/v1/bank_card_info.json?accountNo=` + numberFormat.format(this.state.val),
             enable_loading: true
         }).then((data)=> {
             if (data.bankInfo) {
