@@ -24,18 +24,10 @@ $FW.DOMReady(function () {
         data: {url:encodeURIComponent(location.href)},
         fail: () => true,
         complete: (data) => {
-            setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
+            setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
         }
     });
     wx.ready(function () {
-        wx.checkJsApi({
-            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-            success: function(res) {
-                alert(JSON.stringify(res));
-                // 以键值对的形式返回，可用的api值true，不可用为false
-                // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-            }
-        });
         wx.onMenuShareTimeline({
             title: '豆尔摩斯年度大揭秘，快来查看你的组织身份！', // 分享标题
             link: 'https://m.9888.cn/static/wap/game-year-end/index.html', // 分享链接
