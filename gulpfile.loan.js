@@ -1,6 +1,6 @@
 const eslint = require('gulp-eslint');
 
-const PROJ = 'jiemo';
+const PROJ = 'loan';
 
 let APP_NAMES = [
     'home', // 首页
