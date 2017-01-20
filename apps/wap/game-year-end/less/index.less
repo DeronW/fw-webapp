@@ -252,15 +252,16 @@ body,html,.main{
   }
   .p0-2 {
     z-index: 2;
+    opacity:0;
     position: absolute;
     top: 530px;
     left: 19px;
     -webkit-transform-origin: 100% 100%;
-    -webkit-transition: linear 0.6s 1s;
-    -webkit-transform: translate3d(40px, 0, 0);
     transform-origin: 100% 100%;
-    transition: linear 0.6s 1s;
-    transform: translate3d(40px, 0, 0);
+    -webkit-transition: linear 1s 1s;
+    -webkit-transform: translate3d(90px, 0, 0);
+    transition: linear 1s 1s;
+    transform: translate3d(90px, 0, 0);
     img {
       width: 611px;
     }
@@ -306,7 +307,7 @@ body,html,.main{
   }
 }
 
-.swiper-slide.swiper-slide-active {
+.swiper-slide.swiper-slide-active{
   .p0-2 {
     opacity: 1;
     -webkit-transform:translate3d(0, 0, 0);
@@ -471,7 +472,6 @@ body,html,.main{
     transform: translate3d(0, -3000px, 0);
   }
 }
-
 .swiper-slide.swiper-slide-active {
 
   .bounceInDown {
