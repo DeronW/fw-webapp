@@ -13,7 +13,6 @@ const USER_PAGES = [
     'user-login', //登录入口
     'user', //我
     'user-set-cash-card',//设置提现卡
-    'user-verify-identidy',//
     'user-verify-phone', //获取验证码
 	'user-about-us', //关于我们
 	'user-faq',//常见问题
@@ -40,8 +39,6 @@ const APPLY_PAGES = [
 ]
 
 const DEVELOPING_PAGES = [
-    'user-apply-loan', //
-    'user-verify-identidy',//
     'user-verify-phone',
 ]
 
