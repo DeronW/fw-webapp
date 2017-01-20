@@ -114,6 +114,7 @@ const SetCashCard = React.createClass({
 			$FW.Ajax({
 				url: `${API_PATH}api/bankcard/v1/cardinfo.json`,
             	method: "POST",
+				enable_loading: true,
 				data: {
 					bankCardNo: space(this.state.bankNum),
 					token: localStorage.userToken,
@@ -208,7 +209,10 @@ const SetCashCard = React.createClass({
                 }
 
 			}).then((data) => {
-                console.log(data);
+				let bankCardGid = data.bindBankInfo.bankCardGid;
+				let operatorBankcardGid = data.bindBankInfo.operatorBankcardGid;
+
+				window.location.href = `${location.protocol}\/\/${location.host}/static/user-verify-phone/index.html?bankCardGid=${bankCardGid }&operatorBankcardGid=${operatorBankcardGid}`;
             },(error) => {
                 console.log(error);
             });

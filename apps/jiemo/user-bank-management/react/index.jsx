@@ -1,4 +1,12 @@
 const BankManagement = React.createClass({
+	getInitialState(){
+		return {
+
+		}
+	},
+	componentDidMount() {
+
+	},
 	render() {
 		return (
 			<div className="bank-management-cnt">
@@ -96,7 +104,7 @@ const BankManagement = React.createClass({
 	}
 });
 
-
+ReactDOM.render(<Header title={"银行卡管理"}/>, document.getElementById('header'));
 ReactDOM.render(
 	<BankManagement />,
 	document.getElementById('cnt')

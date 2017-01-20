@@ -70,6 +70,11 @@ body {
 			font-size: 24px;
 		}
 
+		.c {
+			color: #ccc;
+			border: none;
+		}
+
 		&:last-child {
 			border-bottom: none;
 		}
@@ -100,4 +105,49 @@ body {
 	font-size: 30px;
 	background-color: #50ad9a;
 	border-radius: 5px;
+}
+
+
+.pop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.pop-cnt {	
+	position: absolute;;
+	bottom: 50%;
+	left: 50%;
+	width: 100%;
+	text-align: center;
+	-webkit-transform: translate(-50%, 0%);
+	   -moz-transform: translate(-50%, 0%);
+			transform: translate(-50%, 0%);
+}
+
+.pop-info {
+	margin: 0 30px;
+	padding: 0 30px;
+	min-height: 225px;
+	background-color: #fff;
+	border-radius: 5px;
+
+	.pop-text {
+		padding: 40px 0 20px;
+		font-size: 24px;
+		line-height: 50px;
+		color: #666;
+	}
+
+	.btn {
+		height: 74px;
+		line-height: 74px;
+		color: #fff;
+		font-size: 30px;
+		background-color: #50ad9a;
+		border-radius: 5px;
+	}
 }

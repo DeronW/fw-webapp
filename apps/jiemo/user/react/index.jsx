@@ -12,32 +12,54 @@ const MyCnt = React.createClass({
 		return {
 			overdueCount: 0,
 			loanCount: 0,
-			totalLoanAmout: 0
+			totalLoanAmout: 0,
+			indexloadpageData: null,
+			baseinfoData: null
 		}
 	},
 	componentDidMount() {
-		$FW.Ajax({
-			url: API_PATH + "/api/oriole/v1/indexloadpage.json",
-			method: "POST",
-			enable_loading: true,
-			data: {
-				token: localStorage.userToken,
-				userGid: localStorage.userGid,
-				userId: localStorage.userId,	
-				sourceType: 3
-			}
-		}).then((data) => {
+		Promise.all([
+			$FW.Ajax({
+				url: API_PATH + "api/oriole/v1/indexloadpage.json",
+				method: "POST",
+				enable_loading: true,
+				data: {
+					token: localStorage.userToken,
+					userGid: localStorage.userGid,
+					userId: localStorage.userId,	
+					sourceType: 3
+				}
+			}),
+			$FW.Ajax({
+				url: API_PATH + "api/loan/v1/baseinfo.json",
+				method: "POST",
+				enable_loading: true,
+				data: {
+					token: localStorage.userToken,
+					userGid: localStorage.userGid,
+					userId: localStorage.userId,
+					productId: 1,	
+					sourceType: 3
+				}
+			})	
+		]).then((data) => {
+			// this.setState({
+			// 	overdueCount: data.overdueCount,
+			// 	loanCount: data.loanCount,
+			// 	totalLoanAmout: data.totalLoanAmout
+			// });
 			this.setState({
-				overdueCount: data.overdueCount,
-				loanCount: data.loanCount,
-				totalLoanAmout: data.totalLoanAmout
+				indexloadpageData: data[0],
+				baseinfoData: data[1]
 			});
-			console.log(data);	
+			console.log(data[0].overdueCount)	
 		},(error) => {
 			console.log(error);
 		})
 	},
 	render() {
+		
+
 		return (
 			<div className="my-cnt">
 				<div className="my-nav">
@@ -67,35 +89,30 @@ const MyCnt = React.createClass({
 						</div>
 					</div>
 					
-					<div className="my-info-num">
-						<div className="quota-info">
-							<span className="num-text">88.00</span>	
-							<span className="text">信用额度（元）</span>
-						</div>
-						<div className="icon-r">
-								
-						</div>
-					</div>
 				</div>
 
 
 				<div className="my-settings">
 					<div className="list">
 						<div className="list-cnt">
+							<span className="icon credit-icon"></span>	
+							<span className="text">信用额度</span>
+							<span className="arrow-r-icon"></span>
+						</div>
+						<div className="list-cnt">
 							<span className="icon back-icon"></span>	
 							<span className="text">银行卡</span>
-						</div>
-						<div className="list-cnt">
-							<span className="icon huishang-icon"></span>	
-							<span className="text">徽商账户</span>
-						</div>
-						<div className="list-cnt">
-							<span className="icon pws-icon"></span>	
-							<span className="text">交易密码</span>
+							<span className="arrow-r-icon"></span>
 						</div>
 						<div className="list-cnt">
 							<span className="icon feedback-icon"></span>	
 							<span className="text">意见反馈</span>
+							<span className="arrow-r-icon"></span>
+						</div>
+						<div className="list-cnt">
+							<span className="icon more-icon"></span>	
+							<span className="text">更多</span>
+							<span className="arrow-r-icon"></span>
 						</div>
 					</div>
 				</div>
