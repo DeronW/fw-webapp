@@ -1,5 +1,4 @@
-//取消下拉刷新
-$FW.DOMReady($FW.Event.cancelSlideDownRefresh);
+
 let Browsertype=$FW.Browser.inIOS()?3:4;
 $FW.DOMReady(function () {
     let startRandom=parseInt(Math.random()*100000+1000);
@@ -25,4 +24,4 @@ $FW.DOMReady(function () {
             (result) => fnShowResult(result)
         )
     );
-})
+});
