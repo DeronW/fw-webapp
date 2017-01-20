@@ -23,7 +23,7 @@ const Bill = React.createClass({
     render: function () {
         let bill_item = (item, index) => {
             return (
-                <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/jiemo/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`) }>
+                <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/loan/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`) }>
                     <div className="bill-detail">
                         <div className="bill-detail-wrap">
                             <span className="bill-money">{item.loanLeftAmount}</span>
@@ -32,7 +32,7 @@ const Bill = React.createClass({
                         <span className="bill-deadline">{item.dueTimeStr}到期</span>
                     </div>
                     <div className="pay-back-btn-wrap">
-                        {item.status == 0 ? <div className="pay-back-btn-status1">打款中</div> : <div className="pay-back-btn-status2" onClick={ () => gotoHandler(`/static/jiemo/bill-payback/index.html?deductionGid=${item.deductionGid}&loanGid=${item.loanGid}&loanType=${item.loanType}`) }>还款</div>}
+                        {item.status == 0 ? <div className="pay-back-btn-status1">打款中</div> : <div className="pay-back-btn-status2" onClick={ () => gotoHandler(`/static/loan/bill-payback/index.html?deductionGid=${item.deductionGid}&loanGid=${item.loanGid}&loanType=${item.loanType}`) }>还款</div>}
                     </div>
                 </div>
             )
@@ -42,7 +42,7 @@ const Bill = React.createClass({
             <div>
                 <div className="header">
                     <div className="title">账单</div>
-                    <div className="history-bill" onClick={ () => gotoHandler(`/static/jiemo/bill-history-bill/index.html`)}>历史账单</div>
+                    <div className="history-bill" onClick={ () => gotoHandler(`/static/loan/bill-history-bill/index.html`)}>历史账单</div>
                 </div>
                 {this.props.data.loanList.length == 0 ? (<div className="no-data-box">
                         <img className="no-data-img" src="images/no-data.png"/>

@@ -100,7 +100,7 @@ const ApplyLoan = React.createClass({
         let creditNum = this.props.data.creditLine;
 
         let location;
-        if(borrowBtnStatus == 1) location= '/static/jiemo/user-set-cash-card/index.html';
+        if(borrowBtnStatus == 1) location= '/static/loan/user-set-cash-card/index.html';
         if(borrowBtnStatus == 2) location= `https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`;
         let loan_btn = <div className="loan-btn" onClick={()=>{borrowBtnStatus = 101 ? $FW.Component.Toast('设置提现卡申请处理中，请稍等') :location.href = location}}>申请借款</div>;
 
@@ -109,7 +109,7 @@ const ApplyLoan = React.createClass({
         let btn_list = <div className="credit-btn">
             <div className="credit-improvement-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}
 `)}>我要提额</div>
-            <div className="credit-apply-btn" onClick={()=>gotoHandler(`/static/jiemo/apply-want-loan/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`)}>我要借款</div>
+            <div className="credit-apply-btn" onClick={()=>gotoHandler(`/static/loan/apply-want-loan/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`)}>我要借款</div>
         </div>;
 
 

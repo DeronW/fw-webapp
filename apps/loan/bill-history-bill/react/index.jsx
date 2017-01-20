@@ -44,7 +44,7 @@ const HistoryBill = React.createClass({
              if (item.repaymentStatus == 0) repayment = '借款失败';
              if (item.repaymentStatus == 1) repayment = '已还款';
              return (
-                 <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/jiemo/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`) }>
+                 <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/loan/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`) }>
                      <div className="bill-detail">
                          <div className="bill-detail-wrap">
                              <span className="bill-money">{item.loanAmount}</span>

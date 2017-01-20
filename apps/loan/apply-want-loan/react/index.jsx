@@ -40,7 +40,7 @@ const WantLoan = React.createClass({
         let filtered = cashBank.filter(isRealNameBindCard);
 
         if(!err){
-            location.href = `/static/jiemo/apply-confirm-loan/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
+            location.href = `/static/loan/apply-confirm-loan/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
         }
 
     },
