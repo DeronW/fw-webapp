@@ -4,6 +4,7 @@ const PROJ = 'loan';
 
 let APP_NAMES = [
     'home', // 首页
+	'faq',//常见问题
 ];
 
 // 用户模块
@@ -15,7 +16,6 @@ const USER_PAGES = [
     'user-set-cash-card',//设置提现卡
     'user-verify-phone', //获取验证码
 	'user-about-us', //关于我们
-	'user-faq',//常见问题
     'user-bank-support',//支持银行卡
 	'user-bank-management',//银行卡管理
 	'user-more' //更多
