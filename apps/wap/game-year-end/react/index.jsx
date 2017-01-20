@@ -21,7 +21,7 @@ $FW.DOMReady(function () {
     }
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
-        data: {url: location.href},
+        data: {url:encodeURIComponent(location.href)},
         fail: () => true,
         complete: (data) => {
             setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
