@@ -84,7 +84,7 @@ $FW.DOMReady(function () {
         let allUserCount = (data.allUserCount + "").split("");
         let s = "";
         for (var i = 0; i < allUserCount.length; i++) {
-            s += "<span class='p1-num" + i + "' style='-webkit-transition-delay:" + 0.2 * i +1+ "s ;transition-delay:" + 0.2 * i +1+"s ;'>" + allUserCount[i] + "</span>";
+            s += "<span class='p1-num" + i + "' style='-webkit-transition-delay:" + (0.2 * i +2)+ "s ;transition-delay:" + (0.2 * i +2)+"s ;'>" + allUserCount[i] + "</span>";
         }
         $("#p1-num").html(s);
     });
