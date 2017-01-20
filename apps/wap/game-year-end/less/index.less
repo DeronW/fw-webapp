@@ -466,9 +466,24 @@ body,html,.main{
       font-size: 26px;
     }
   }
+  .bounceInDown{
+    transition:cubic-bezier(0.215, .61, .355, 1) 1s ;
+    transform: translate3d(0, -3000px, 0);
+  }
 }
 
 .swiper-slide.swiper-slide-active {
+
+  .bounceInDown {
+    transform: translate3d(0, 0px, 0);
+  }
+  .bounceInDown1 {
+    transition-delay:0.5s ;
+  }
+  .bounceInDown2 {
+    transition-delay:1s ;
+  }
+
   .p1-num-box {
     .p1-num {
       #p1-num span {
@@ -563,7 +578,7 @@ body,html,.main{
     top: 102px;
     left: 50px;
     color: #fff;
-    font-size: 26px;
+    font-size: 36px;
     height: 70px;
     line-height: 70px;
     span {
