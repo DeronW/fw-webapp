@@ -35,6 +35,6 @@
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build:mall": "npm run clean && npm run gulp mall:common_js && npm run gulp build:mall",
     "build:wap": "npm run clean && npm run gulp wap:common_js && npm run gulp build:wap",
-    "build:jiemo": "npm run clean && npm run gulp jiemo:common_js && npm run gulp build:jiemo"
+    "build:loan": "npm run clean && npm run gulp jiemo:common_js && npm run gulp build:loan"
   }
 }
