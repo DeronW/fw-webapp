@@ -30,7 +30,7 @@ $FW.DOMReady(function () {
         });
     }
 
-    $FW.getJSONP('http://www.9888.cn/api/userLevel/v1/giftVO.json', (data) => {
+    $FW.getJSONP('https://www.9888.cn/api/userLevel/v1/giftVO.json', (data) => {
         if (data.code != 10000) throw new Error('接口异常, 无法获取等级反息信息');
 
         var rule = data.data.levelGiftRule, interest_list = [];

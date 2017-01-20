@@ -24,7 +24,7 @@ const SendCode = React.createClass({
     getInitialState: function () {
         var query = $FW.Format.urlQuery();
         var mobileNo = query.mobileNo;
-        var merchantNo = query.merchantNo;
+        var merchantNo = query.merchantNo || [];
         return {
             mobileNo: mobileNo,
             merchantNo: merchantNo,
@@ -99,6 +99,28 @@ const SendCode = React.createClass({
         this.setState({"code": val});
     },
 
+    //查询订单状态
+    queryState: function () {
+        var FormData = {
+            service: 'REQ_QUICK_QUERY_BY_ID',
+            merchantNo: this.state.merchantNo
+        }
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
+            //url:  `./ucf_pay.json`,
+            enable_loading: true,
+            data: FormData,
+            success: function (data) {
+                alert(JSON.stringify(data));
+                //var data= data.bankCards;
+                return;
+                //window.location.href = location.protocol + '//' + location.hostname +
+                //    "/static/mall/order-complete/index.html?id="+data.tradeNo
+            }
+        })
+
+    },
+
     //完成支付确认
     nextStep: function () {
         if (!this.state.active) return;
@@ -107,20 +129,24 @@ const SendCode = React.createClass({
             merchantNo: this.state.merchantNo,
             checkCode: this.state.code
         }
-        alert(JSONFormData);
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
             enable_loading: true,
             data: FormData,
-            success: function (data) {
-                alert(data.code);
-                //var data= data.bankCards;
-                window.location.href = location.protocol + '//' + location.hostname +
-                    "/static/mall/order-complete/index.html?id="+data.tradeNo
+            success: (data) => {
+                alert(JSON.stringify(data));
+                setInterval(() => {
+                    this.queryState();
+                }, 5000);
+                //window.location.href = location.protocol + '//' + location.hostname +
+                //    "/static/mall/order-complete/index.html?id="+data.tradeNo
             }
         })
+
     },
+
+
     render: function () {
         return (
             <div>

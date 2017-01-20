@@ -105,7 +105,7 @@ const User = React.createClass({
                         <img src="images/icon10.jpg" />
                         <span className="box-title3">客服热线</span>
                     </a>
-                    <a className="list-box" href="http://m.9888.cn/static/wap/faq/index.html">
+                    <a className="list-box" href="/static/mall/user-help/index.html">
                         <img src="images/icon12.jpg" />
                         <span className="box-title4">帮助中心</span>
                     </a>

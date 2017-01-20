@@ -14,7 +14,7 @@ $FW.DOMReady(function () {
         NativeBridge.setTitle('豆尔摩斯年度大揭秘');
     }
     let ua = window.navigator.userAgent.toLowerCase();
-    if(ua.match(/MicroMessenger/i) == 'micromessenger'&&$FW.Browser.inApp()){
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'||$FW.Browser.inApp()){
         $(".p6-8").show();
     }else{
         $(".p6-8").hide();
@@ -24,10 +24,18 @@ $FW.DOMReady(function () {
         data: {url: location.href},
         fail: () => true,
         complete: (data) => {
-            setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
+            setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
         }
     });
     wx.ready(function () {
+        wx.checkJsApi({
+            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+            success: function(res) {
+                alert(JSON.stringify(res));
+                // 以键值对的形式返回，可用的api值true，不可用为false
+                // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+            }
+        });
         wx.onMenuShareTimeline({
             title: '豆尔摩斯年度大揭秘，快来查看你的组织身份！', // 分享标题
             link: 'https://m.9888.cn/static/wap/game-year-end/index.html', // 分享链接
@@ -70,13 +78,13 @@ $FW.DOMReady(function () {
         gotoHandler("https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=4&redirect_url=https://m.9888.cn/static/wap/game-year-end/index.html?isLoginVist=1", true);
     });
     let str;
-    let login = false;
+    let login = true;
     $("#p4-3-2").attr("src", "images/p4-text" + parseInt(Math.random() * 3 + 1) + ".png");
     $FW.Ajax(`${API_PATH}/mpwap/api/v1/getAllRegistCount.shtml`).then((data) => {
         let allUserCount = (data.allUserCount + "").split("");
         let s = "";
         for (var i = 0; i < allUserCount.length; i++) {
-            s += "<span class='p1-num" + i + "' style='-webkit-transition-delay:" + 0.2 * i + "s ;transition-delay:" + 0.2 * i + "s ;'>" + allUserCount[i] + "</span>";
+            s += "<span class='p1-num" + i + "' style='-webkit-transition-delay:" + 0.2 * i +1+ "s ;transition-delay:" + 0.2 * i +1+"s ;'>" + allUserCount[i] + "</span>";
         }
         $("#p1-num").html(s);
     });
@@ -100,7 +108,7 @@ $FW.DOMReady(function () {
                     $("#li-r2").html(data.waitedInterest + "元");
                     $("#li-r3").html(data.cashCoupon + "元");
                     $("#li-r4").html(data.beanCount + "元");
-                    data.balanceProfit ? $("#li-r5").html(data.balanceProfit) : null;
+                    $("#li-r5").html(data.balanceProfit+ "元");
                     $FW.Ajax(`${API_PATH}mpwap/api/v1/getUserHabitMess.shtml`).then((data) => {
                         $("#p4-0").html(data.investTimesYear);
                         data.monthName?$("#p4-1").html(data.monthName):$(".p4-1-2").html("你是一个非常谨慎的豆尔摩斯");

@@ -1,8 +1,4 @@
-{% extends '../../../lib/templates/wap_base.swig.html' %}
-
-{% block title %}VIP等级加息{% endblock %}
-
-{% block content %}
+{% extends '../../../lib/templates/wap_base.swig.html' %} {% block title %}VIP等级加息{% endblock %} {% block content %}
 
 <div id="header"></div>
 
@@ -14,15 +10,14 @@
         <div class="interest-value">
             <b id="interest"></b>
             <span id="percent" style="visibility: hidden">%</span>
-        </div>
-    </div>
+</div>
+</div>
 </div>
 <img class="img" src="images/img-2.png">
 
 <div class="table">
     <div>
-        <span class="yellow">年化加息奖励</span>
-        是一项VIP特权。用户投资时，根据用户投资后的VIP等级，来给用户加息。
+        <span class="yellow">年化加息奖励</span> 是一项VIP特权。用户投资时，根据用户投资后的VIP等级，来给用户加息。
     </div>
 
     <div class="row row-a row-first">
@@ -57,7 +52,7 @@
 <img class="img" src="images/img-3.png">
 
 <a class="invest" onClick="gotoInvest()">
-    <img src="images/img-4.png">
+<img src="images/img-4.png">
 </a>
 
 <script>
@@ -69,5 +64,4 @@
         }
     }
 </script>
-<input style="display: none" type="hidden" value="用来测试的"/>
 {% endblock %}

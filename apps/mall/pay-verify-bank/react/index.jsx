@@ -1,3 +1,5 @@
+const bankName = ['工商银行', '农业银行', '中国银行', '建设银行', '平安银行', '兴业银行', '光大银行', '浦发银行', '华夏银行', '北京银行', '中信银行', '广发银行'];
+
 const BankInfo = React.createClass({
     getInitialState:function(){
         var query = $FW.Format.urlQuery();
@@ -15,7 +17,9 @@ const BankInfo = React.createClass({
             bankName:query.bankName,
             bankCardName:query.bankCardName,
             bankId:query.bankId,
-            active:false
+            active:false,
+            bankType:"",
+            bankImage:""
         };
     },
     handleName:function(e){
@@ -50,7 +54,23 @@ const BankInfo = React.createClass({
         if(this.state.pass1!=0 && reg.test(id) && this.state.pass3!=0){this.setState({active:true});}
         else{this.setState({active:false})}
     },
-
+    componentDidMount:function() {
+        let r=this.state.bankName;
+        var b =
+                r=="中国银行" ? "images/zg.png"
+                : r=="工商银行" ? "images/gs.png"
+                : r=="农业银行" ? "images/ny.png"
+                : r=="建设银行" ? "images/js.png"
+                : r=="平安银行" ? "images/pa.png"
+                : r=="兴业银行" ? "images/xy.png"
+                : r=="光大银行" ? "images/gd.png"
+                : r=="浦发银行" ? "images/pf.png"
+                : r=="华兴银行" ? "images/hx.png"
+                : r=="北京银行" ? "images/bj.png"
+                : r=="中信银行" ? "images/zx.png"
+                : "images/gf.png";
+        this.setState({bankImage: b});
+    },
     handlePhone:function(e){
         var phone = e.target.value;
         var reg = /^1[34578]\d{9}$/;
@@ -89,7 +109,7 @@ const BankInfo = React.createClass({
         return (
             <div className="bank-info">
                 <div className="bank-item">
-                    <img className="bank-icon" src="images/bank-icon.png"/>
+                    <img className="bank-icon" src={this.state.bankImage}/>
                     <span className="bank-name">{this.state.bankName}</span>
                     <span className="bank-number">{this.state.accountNo}</span>
                 </div>

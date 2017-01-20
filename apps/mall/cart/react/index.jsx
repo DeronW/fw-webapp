@@ -143,7 +143,6 @@ const ShoppingCart = React.createClass({
         let {products} = this.state;
 
         let product_item = (product, index) => {
-            let img = product.img.split(";")[0];
             return (
                 product.prdStatus == 1 ?
                     <div className="shopping-item" key={index}>
@@ -152,7 +151,7 @@ const ShoppingCart = React.createClass({
                             <input type="hidden" className="checked-bizNo"
                                 value={product.cartStatus == 0 ? product.productBizNo : null} />
                         </div>
-                        <a className="product-img" href={"/static/mall/product-detail/index.html?bizNo=" + product.productBizNo}><img src={img} /></a>
+                        <a className="product-img" href={"/static/mall/product-detail/index.html?bizNo=" + product.productBizNo}><img src={product.img} /></a>
                         <div className="product-item">
                             <div className="product-info">
                                 <div className="product-name">{product.productName}</div>

@@ -127,14 +127,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
             '!**/jquery.*.js', '!**.min.js'])
             .pipe(eslint())
-            .pipe(eslint.result(result => {
-                console.log(
-                    `\nESLint result: ${result.filePath}\n`,
-                    `# Messages: ${result.messages.length}\n`,
-                    `# Warnings: ${result.warningCount}\n`,
-                    `# Errors: ${result.errorCount}\n`
-                );
-            }))
             .pipe(eslint.format())
+            .pipe(eslint.failAfterError());
     }))
 };

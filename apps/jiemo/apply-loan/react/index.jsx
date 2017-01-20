@@ -64,7 +64,6 @@ const ApplyLoan = React.createClass({
                 };
             }
         }
-
     },
     render : function(){
         let available_loan = <div className="available-loan">
@@ -100,13 +99,12 @@ const ApplyLoan = React.createClass({
         let borrowBtnDesc =  this.props.data.borrowBtnDesc;
         let creditNum = this.props.data.creditLine;
 
-        let jumpLink;
-        if(borrowBtnStatus == 1) jumpLink = '/static/jiemo/user-set-cash-card/index.html';
-        if(borrowBtnStatus == 2) jumpLink = `https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`;
-        let loan_btn = <div className="loan-btn" onClick={()=>gotoHandler(jumpLink)}>申请借款</div>;
+        let location;
+        if(borrowBtnStatus == 1) location= '/static/jiemo/user-set-cash-card/index.html';
+        if(borrowBtnStatus == 2) location= `https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`;
+        let loan_btn = <div className="loan-btn" onClick={()=>{borrowBtnStatus = 101 ? $FW.Component.Toast('设置提现卡申请处理中，请稍等') :location.href = location}}>申请借款</div>;
 
-        let credit_btn = <div className="loan-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}
-`)}>我要提额</div>;
+        let credit_btn = <div className="loan-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>我要提额</div>;
 
         let btn_list = <div className="credit-btn">
             <div className="credit-improvement-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}
@@ -119,8 +117,12 @@ const ApplyLoan = React.createClass({
         let moneySlider;
         let loanStatus;
         let creditLine;
-        if(borrowBtnStatus==1) btnStatus = loan_btn, moneySlider = slider_bar, loanStatus = available_loan, creditLine = "--";
-        if(borrowBtnStatus==2) btnStatus = credit_btn, moneySlider = no_slider_bar, loanStatus = unavailable_loan, creditLine = "--";
+        if(borrowBtnStatus==1 || borrowBtnStatus==101){
+            btnStatus = loan_btn, moneySlider = slider_bar, loanStatus = available_loan, creditLine = "--";
+        }
+        if(borrowBtnStatus==2) {
+            btnStatus = credit_btn, moneySlider = no_slider_bar, loanStatus = unavailable_loan, creditLine = "--";
+        }
         if(borrowBtnStatus==3){
             btnStatus = credit_btn;
             moneySlider = no_slider_bar;
@@ -128,7 +130,9 @@ const ApplyLoan = React.createClass({
             $FW.Component.Toast(borrowBtnDesc);
             creditLine = "--";
         }
-        if(borrowBtnStatus==5) btnStatus = btn_list, moneySlider = slider_bar, loanStatus = available_loan, creditLine = creditNum;
+        if(borrowBtnStatus==5){
+            btnStatus = btn_list, moneySlider = slider_bar, loanStatus = available_loan, creditLine = creditNum;
+        }
 
         return (
            <div className="apply-loan">
