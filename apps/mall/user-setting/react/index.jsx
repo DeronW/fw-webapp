@@ -38,7 +38,7 @@ const Account = React.createClass({
 $FW.DOMReady(function() {
     NativeBridge.setTitle('账户设置');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"账户设置"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"账户设置"}/>, document.getElementById('header'));
 
     ReactDOM.render(<Account/>, document.getElementById('cnt'));
 });
