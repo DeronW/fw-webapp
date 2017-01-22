@@ -32,7 +32,7 @@ const BILL_PAGES = [
 
 // 申请借款模块
 const APPLY_PAGES = [
-    'apply-loan', //借款首页
+    // 'apply-loan', //借款首页 改名叫home了
     'apply-want-loan', //我要借款页面
     'apply-confirm-loan', //确认借款页面
     'apply-service-agreement', //芥末借款页面
