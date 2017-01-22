@@ -5,8 +5,8 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url:`${API_PATH}/api/v1/user-state.json`,
         success:(data)=>{
-           if (FinancialWorkspace.Browser.inApp()&&!data.is_login) {
-                NativeBridge.login();
+           if (!data.is_login) {
+               location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=' + FinancialWorkspace.getLoginRedirect();
             }
         }
     });
