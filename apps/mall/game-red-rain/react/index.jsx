@@ -1,6 +1,10 @@
 
 let Browsertype=$FW.Browser.inIOS()?3:4;
 $FW.DOMReady(function () {
+    $FW.Ajax({
+        url:`${API_PATH}/api/v1/user-state.json`,
+        success:()=>{}
+    });
     let startRandom=parseInt(Math.random()*100000+1000);
     let startTime=new Date().getTime();
     let startToken=hex_md5(Browsertype+''+startRandom+''+startTime);
