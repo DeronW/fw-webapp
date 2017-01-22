@@ -21,21 +21,13 @@ $FW.DOMReady(function () {
     }
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=games/getshare`,
-        data: {url: location.href},
+        data: {url:encodeURIComponent(location.href)},
         fail: () => true,
         complete: (data) => {
-            setWxConfig(true, data.appId, data.timestamp, data.nonceStr, data.signature);
+            setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
         }
     });
     wx.ready(function () {
-        wx.checkJsApi({
-            jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-            success: function(res) {
-                alert(JSON.stringify(res));
-                // 以键值对的形式返回，可用的api值true，不可用为false
-                // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-            }
-        });
         wx.onMenuShareTimeline({
             title: '豆尔摩斯年度大揭秘，快来查看你的组织身份！', // 分享标题
             link: 'https://m.9888.cn/static/wap/game-year-end/index.html', // 分享链接
@@ -84,7 +76,7 @@ $FW.DOMReady(function () {
         let allUserCount = (data.allUserCount + "").split("");
         let s = "";
         for (var i = 0; i < allUserCount.length; i++) {
-            s += "<span class='p1-num" + i + "' style='-webkit-transition-delay:" + 0.2 * i +1+ "s ;transition-delay:" + 0.2 * i +1+"s ;'>" + allUserCount[i] + "</span>";
+            s += "<span class='p1-num" + i + "' style='-webkit-transition-delay:" + (0.2 * i +2)+ "s ;transition-delay:" + (0.2 * i +2)+"s ;'>" + allUserCount[i] + "</span>";
         }
         $("#p1-num").html(s);
     });
