@@ -54,7 +54,7 @@ const Payment = React.createClass({
                     setTimeout(function () {
                         location.href = location.protocol + '//' + location.hostname +
                             "/static/mall/pay-msg-pay/index.html?merchantNo=" + result.merchantNo + "&mobileNo=" + FormData.mobileNo
-                    }, 2500);
+                    }, 7000);
                 }
             })
         }

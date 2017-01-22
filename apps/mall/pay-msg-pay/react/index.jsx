@@ -112,10 +112,17 @@ const SendCode = React.createClass({
             data: FormData,
             success: function (data) {
                 alert(JSON.stringify(data));
-                //var data= data.bankCards;
-                return;
-                //window.location.href = location.protocol + '//' + location.hostname +
-                //    "/static/mall/order-complete/index.html?id="+data.tradeNo
+                if(data.status=="I"){
+                    $FW.Component.Alert('正在处理中');
+                }
+                else if(data.status=="F"){
+                    window.location.href = location.protocol + '//' + location.hostname +
+                        "/static/mall/order-complete/index.html?status=F"
+                }
+                else{
+                    window.location.href = location.protocol + '//' + location.hostname +
+                        "/static/mall/order-complete/index.html?status=S"
+                }
             }
         })
 

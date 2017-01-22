@@ -18,6 +18,12 @@ const Success = React.createClass({
         */
     },
     render: function () {
+        let query = $FW.Format.urlQuery();
+        let status = query.status;
+        let statusTex;let seeOrder;
+        if(status=="F"){ statusTex ="支付失败" ;         seeOrder="重新支付"}
+        if(status=="S"){ statusTex ="订单状态:已付款";  seeOrder="查看订单" }
+
         let href = `/static/mall/order-list/index.html`;
 
         return (
@@ -26,11 +32,11 @@ const Success = React.createClass({
                      style={{background:"url(images/success-banner.jpg) no-repeat center center"}}>
                     <div className="success-text"
                          style={{background:"url(images/circle-white-right.png) no-repeat 80px 80px"}}>
-                        订单状态:已付款
+                        {statusTex}
                     </div>
                 </div>
                 <div className="success-btn">
-                    <a href={href} className="success-btn1">查看订单</a>
+                    <a href={href} className="success-btn1">{seeOrder}</a>
                     <a onClick={this.backToMallHandler} className="success-btn2">返回商城</a>
                 </div>
             </div>
@@ -41,6 +47,10 @@ const Success = React.createClass({
 window.ProductBizNo = null;
 
 $FW.DOMReady(function () {
+    let query = $FW.Format.urlQuery();
+    let status = query.status;
+    let title;
+    if(status=="F"){ title ="支付失败" }  if(status=="S"){ title ="交易成功" }
     ReactDOM.render(<Success />, document.getElementById('cnt'));
-    ReactDOM.render(<Header title={"交易成功"} show_back_btn={false}/>, document.getElementById('header'));
+    ReactDOM.render(<Header title={title} show_back_btn={false}/>, document.getElementById('header'));
 });
