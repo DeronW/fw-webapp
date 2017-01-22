@@ -10,7 +10,7 @@ const Register = React.createClass({
 			pwdVal: e.target.value
 		});
 	},
-	handlePlainCode() {		
+	handlePlainCode() {
 		this.setState({
 			plainCode: !this.state.plainCode
 		});
@@ -33,7 +33,7 @@ const Register = React.createClass({
 				localStorage.userToken = data.userLogin.userToken;
 				localStorage.userStatus = data.userLogin.userStatus;
 
-				//location.href = `${location.protocol}\/\/${location.host}/static/apply-loan/index.html`;
+				location.href = `${location.protocol}\/\/${location.host}/static/loan/apply-loan/index.html`;
 			},
 			fail: function(code, mes) {
 
