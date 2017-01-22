@@ -52,6 +52,29 @@ $FW.DOMReady(function () {
             }
         });
     });
+
+    wx.ready(function () {
+        DS.ready(function () {
+            wx.onMenuShareAppMessage({
+                title: '豆尔摩斯年度大揭秘，快来查看你的组织身份！', // 分享标题
+                desc: '金融工场机密档案大集合，解封时刻，速来围观', // 分享描述
+                link: DS.linkChange('https://m.9888.cn/static/wap/game-year-end/index.html'), // 分享链接
+                imgUrl: 'https://m.9888.cn/static/wap/game-year-end/images/share-ico.jpg', // 分享图标
+                success: function () {
+                    DS.sendRepost("appMessage");
+                }
+            });
+            wx.onMenuShareTimeline({
+                title: '豆尔摩斯年度大揭秘，快来查看你的组织身份！', // 分享标题
+                link: DS.linkChange('https://m.9888.cn/static/wap/game-year-end/index.html'), // 分享链接
+                imgUrl: 'https://m.9888.cn/static/wap/game-year-end/images/share-ico.jpg', // 分享图标
+                success: function () {
+                    DS.sendRepost("timeline");
+                }
+            });
+        });
+    });
+
     function setWxConfig(debug, appid, timestamp, noncestr, signature) {
         wx.config({
             debug: debug,
