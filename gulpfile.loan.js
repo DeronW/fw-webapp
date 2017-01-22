@@ -11,6 +11,7 @@ const USER_PAGES = [
     'user-register-login-entry', //注册登录入口
     'user-register',//注册入口
     'user-login', //登录入口
+    'user-set-new-password',
     'user', //我
     'user-set-cash-card',//设置提现卡
     'user-verify-identidy',//

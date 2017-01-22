@@ -13,8 +13,8 @@ const MyCnt = React.createClass({
 			overdueCount: 0,
 			loanCount: 0,
 			totalLoanAmout: 0,
-			indexloadpageData: null,
-			baseinfoData: null
+			indexloadpageData: '',
+			baseinfoData: ''
 		}
 	},
 	componentDidMount() {
@@ -43,22 +43,32 @@ const MyCnt = React.createClass({
 				}
 			})	
 		]).then((data) => {
-			// this.setState({
-			// 	overdueCount: data.overdueCount,
-			// 	loanCount: data.loanCount,
-			// 	totalLoanAmout: data.totalLoanAmout
-			// });
 			this.setState({
 				indexloadpageData: data[0],
 				baseinfoData: data[1]
 			});
-			console.log(data[0].overdueCount)	
 		},(error) => {
 			console.log(error);
 		})
 	},
 	render() {
-		
+		let userStatus = this.state.baseinfoData.borrowBtnStatus; 		
+
+		let creditUrl = () => {
+			if(userStatus == 1) {
+				return "/static/loan/user-set-cash-card/index.html";
+			} else if (userStatus > 2) {
+				return 'http://m.9888.cn'
+			}
+		}
+
+		let bankUrl = () => {
+			if(userStatus == 1) {
+				return "/static/loan/user-set-cash-card/index.html";
+			} else if (userStatus > 2) {
+				return 'http://m.9888.cn'
+			}
+		}
 
 		return (
 			<div className="my-cnt">
@@ -66,53 +76,59 @@ const MyCnt = React.createClass({
 					<span className="text">{phoneMosaic(localStorage.phone)}</span>
 				</div>		
 
-
 				<div className="my-info">
 					<div className="my-info-cnt">
 						<div className="loan-sum-text">
 							<div className="text">累计借款(元)</div>
 							<div className="num-text">
 								{
-									this.state.totalLoanAmout == 0 ? "--" : this.state.totalLoanAmout
+									this.state.indexloadpageData.totalLoanAmout == 0 ? "--" : this.state.indexloadpageData.totalLoanAmout
 								}
 							</div>
 						</div>
 						<div className="loan-info">
 							<div className="info">
 								<span className="text">借款次数</span>
-								<span className="num-text">{this.state.loanCount}</span>
+								<span className="num-text">{this.state.indexloadpageData.loanCount}</span>
 							</div>
 							<div className="info">
 								<span className="text">逾期次数</span>
-								<span className="num-text">{this.state.overdueCount}</span>
+								<span className="num-text">{this.state.indexloadpageData.overdueCount}</span>
 							</div>
 						</div>
 					</div>
 					
 				</div>
 
-
 				<div className="my-settings">
 					<div className="list">
 						<div className="list-cnt">
-							<span className="icon credit-icon"></span>	
-							<span className="text">信用额度</span>
-							<span className="arrow-r-icon"></span>
+							<a href={creditUrl()}>
+								<span className="icon credit-icon"></span>	
+								<span className="text">信用额度</span>
+								<span className="arrow-r-icon"></span>
+							</a>
 						</div>
 						<div className="list-cnt">
-							<span className="icon back-icon"></span>	
-							<span className="text">银行卡</span>
-							<span className="arrow-r-icon"></span>
+							<a href={bankUrl()}>
+								<span className="icon back-icon"></span>	
+								<span className="text">银行卡</span>
+								<span className="arrow-r-icon"></span>
+							</a>
 						</div>
 						<div className="list-cnt">
-							<span className="icon feedback-icon"></span>	
-							<span className="text">意见反馈</span>
-							<span className="arrow-r-icon"></span>
+							<a href="">
+								<span className="icon feedback-icon"></span>	
+								<span className="text">意见反馈</span>
+								<span className="arrow-r-icon"></span>
+							</a>							
 						</div>
 						<div className="list-cnt">
-							<span className="icon more-icon"></span>	
-							<span className="text">更多</span>
-							<span className="arrow-r-icon"></span>
+							<a href="/static/loan/user-more/index.html">
+								<span className="icon more-icon"></span>	
+								<span className="text">更多</span>
+								<span className="arrow-r-icon"></span>
+							</a>							
 						</div>
 					</div>
 				</div>
