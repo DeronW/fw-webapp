@@ -52,7 +52,7 @@ $FW.DOMReady(function() {
     $FW.Ajax({
         url: `${API_PATH}api/repayment/v1/loandetail.json`,
         method: "post",
-        data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, loanType:loanType, loanGid:loanGid}
+        data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3, loanType:loanType, loanGid:loanGid}
     }).then((data) => {
         console.log(data)
         ReactDOM.render(<Detail data={data}/>, document.getElementById('cnt'));

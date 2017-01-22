@@ -75,7 +75,7 @@ $FW.DOMReady(function () {
         $FW.Ajax({
             url: `${API_PATH}api/oriole/v1/loanloadpage.json`,
             method: "post",
-            data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
+            data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(),sourceType:3}
         }).then((data) => {
             console.log(data)
             ReactDOM.render(<Bill data={data}/>, document.getElementById('cnt'));

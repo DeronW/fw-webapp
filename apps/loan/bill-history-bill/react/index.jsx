@@ -13,7 +13,7 @@ const HistoryBill = React.createClass({
          $FW.Ajax({
              url:`${API_PATH}api/oriole/v1/loanhistory.json`,
              method:'POST',
-             data:{token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, pageSize:20, pageIndex:1},
+             data:{token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3, pageSize:20, pageIndex:1},
          })
              .then((data)=> {
                  this.setState({column:data.loanHistoryList})
@@ -25,7 +25,7 @@ const HistoryBill = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/oriole/v1/loanhistory.json`,
             method:'POST',
-            data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, pageSize:20, pageIndex:this.state.page},
+            data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3, pageSize:20, pageIndex:this.state.page},
             success: (data) => {
                 console.log(data)
                 let loanHistoryList = data.loanHistoryList;
