@@ -5,18 +5,18 @@ let More = React.createClass({
 				<div className="more-list">
 					<div className="list">
 						<div className="list-cnt">
-							<a href="/static/user-about-us/index.html">
-								<span className="icon about-icon"></span>	
+							<a href="/static/loan/user-about-us/index.html">
+								<span className="icon about-icon"></span>
 								<span className="text">关于我们</span>
 								<span className="arrow-icon"></span>
-							</a>							
+							</a>
 						</div>
 						<div className="list-cnt">
-							<a href="/static/user-faq/index.html">
-								<span className="icon faq-icon"></span>	
+							<a href="/static/loan/user-faq/index.html">
+								<span className="icon faq-icon"></span>
 								<span className="text">常见问题</span>
 								<span className="arrow-icon"></span>
-							</a>							
+							</a>
 						</div>
 					</div>
 				</div>
@@ -24,8 +24,8 @@ let More = React.createClass({
 
 				<div className="more-btn">
 					<div className="ui-btn">退出登录</div>
-				</div>	
-			</div>	
+				</div>
+			</div>
 		)
 	}
 });
