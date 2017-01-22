@@ -5,7 +5,9 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url:`${API_PATH}/api/v1/user-state.json`,
         success:(data)=>{
-            console.log(data);
+           if (FinancialWorkspace.Browser.inApp()&&!data.is_login) {
+                NativeBridge.login();
+            }
         }
     });
     let startRandom=parseInt(Math.random()*100000+1000);
