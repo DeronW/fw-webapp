@@ -12,7 +12,7 @@ let More = React.createClass({
 							</a>
 						</div>
 						<div className="list-cnt">
-							<a href="/static/loan/user-faq/index.html">
+							<a href="/static/loan/faq/index.html">
 								<span className="icon faq-icon"></span>
 								<span className="text">常见问题</span>
 								<span className="arrow-icon"></span>
