@@ -1,5 +1,6 @@
 
 let Browsertype=$FW.Browser.inIOS()?3:4;
+const API_PATH = document.getElementById('api-path').value;
 $FW.DOMReady(function () {
     $FW.Ajax({
         url:`${API_PATH}/api/v1/user-state.json`,
