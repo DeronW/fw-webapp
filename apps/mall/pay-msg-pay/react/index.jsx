@@ -110,18 +110,17 @@ const SendCode = React.createClass({
             //url:  `./ucf_pay.json`,
             enable_loading: true,
             data: FormData,
-            success: function (data) {
-                if(data.status=="F"){
-                    window.location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/order-complete/index.html?status=F"
-                }
-                else{
-                    window.location.href = location.protocol + '//' + location.hostname +
+            }).then(data => {
+              window.location.href = location.protocol + '//' + location.hostname +
                         "/static/mall/order-complete/index.html?status=S"
-                }
-            }
-        })
-    },
+            }).catch(data => {
+                alert(JSON.stringify(data));
+                setTimeout(() => {
+                  window.location.href = location.protocol + '//' + location.hostname +
+                    "/static/mall/order-complete/index.html?status=F"
+                }, 1500);
+            })
+        },
 
     //完成支付确认
     nextStep: function () {
