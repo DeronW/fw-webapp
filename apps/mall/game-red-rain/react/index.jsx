@@ -3,7 +3,9 @@ let Browsertype=$FW.Browser.inIOS()?3:4;
 $FW.DOMReady(function () {
     $FW.Ajax({
         url:`${API_PATH}/api/v1/user-state.json`,
-        success:()=>{}
+        success:(data)=>{
+            console.log(data);
+        }
     });
     let startRandom=parseInt(Math.random()*100000+1000);
     let startTime=new Date().getTime();
