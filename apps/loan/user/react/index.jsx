@@ -26,7 +26,7 @@ const MyCnt = React.createClass({
 				data: {
 					token: localStorage.userToken,
 					userGid: localStorage.userGid,
-					userId: localStorage.userId,	
+					userId: localStorage.userId,
 					sourceType: 3
 				}
 			}),
@@ -38,10 +38,10 @@ const MyCnt = React.createClass({
 					token: localStorage.userToken,
 					userGid: localStorage.userGid,
 					userId: localStorage.userId,
-					productId: 1,	
+					productId: 1,
 					sourceType: 3
 				}
-			})	
+			})
 		]).then((data) => {
 			this.setState({
 				indexloadpageData: data[0],
@@ -52,7 +52,7 @@ const MyCnt = React.createClass({
 		})
 	},
 	render() {
-		let userStatus = this.state.baseinfoData.borrowBtnStatus; 		
+		let userStatus = this.state.baseinfoData.borrowBtnStatus;
 
 		let creditUrl = () => {
 			if(userStatus == 1) {
@@ -74,7 +74,7 @@ const MyCnt = React.createClass({
 			<div className="my-cnt">
 				<div className="my-nav">
 					<span className="text">{phoneMosaic(localStorage.phone)}</span>
-				</div>		
+				</div>
 
 				<div className="my-info">
 					<div className="my-info-cnt">
@@ -97,38 +97,38 @@ const MyCnt = React.createClass({
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
 
 				<div className="my-settings">
 					<div className="list">
 						<div className="list-cnt">
 							<a href={creditUrl()}>
-								<span className="icon credit-icon"></span>	
+								<span className="icon credit-icon"></span>
 								<span className="text">信用额度</span>
 								<span className="arrow-r-icon"></span>
 							</a>
 						</div>
 						<div className="list-cnt">
 							<a href={bankUrl()}>
-								<span className="icon back-icon"></span>	
+								<span className="icon back-icon"></span>
 								<span className="text">银行卡</span>
 								<span className="arrow-r-icon"></span>
 							</a>
 						</div>
 						<div className="list-cnt">
 							<a href="">
-								<span className="icon feedback-icon"></span>	
+								<span className="icon feedback-icon"></span>
 								<span className="text">意见反馈</span>
 								<span className="arrow-r-icon"></span>
-							</a>							
+							</a>
 						</div>
 						<div className="list-cnt">
 							<a href="/static/loan/user-more/index.html">
-								<span className="icon more-icon"></span>	
+								<span className="icon more-icon"></span>
 								<span className="text">更多</span>
 								<span className="arrow-r-icon"></span>
-							</a>							
+							</a>
 						</div>
 					</div>
 				</div>
@@ -137,16 +137,17 @@ const MyCnt = React.createClass({
 				<div className="my-btn">
 					<div className="ui-btn">退出登录</div>
 				</div>
-			</div>			
+			</div>
 
 
-		)		
+		)
 	}
 });
 
 
 
 ReactDOM.render(
-	<MyCnt />, 
+	<MyCnt />,
 	document.getElementById('cnt')
-)
+);
+ReactDOM.render(<BottomNavBar index={3}/>, document.getElementById('bottom-nav-bar'));
