@@ -20,6 +20,7 @@ const HotSales = React.createClass({
         this.state.hasData ?
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+                enable_loading: true,
                 data: { count: 6, page: this.state.page },
                 success: (data) => {
                     let products = data.products;

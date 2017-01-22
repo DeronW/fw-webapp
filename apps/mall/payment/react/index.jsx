@@ -42,25 +42,21 @@ const Payment = React.createClass({
                 orderBizNo:query.orderBizNo||"",
                 orderGroupBizNo:query.orderGroupBizNo||""
             };
-            alert(JSON.stringify(FormData));console.log(FormData);
             $FW.Ajax({
                 url: `${API_PATH}mall/api/payment/v1/ucf_pay.json`,
                 //url: './ucf_pay.json',
                 enable_loading: true,
                 data: FormData,
                 success: function (result) {
-                    alert(JSON.stringify(result));
-                    $FW.Component.Alert('成功');
                     setTimeout(function () {
                         location.href = location.protocol + '//' + location.hostname +
                             "/static/mall/pay-msg-pay/index.html?merchantNo=" + result.merchantNo + "&mobileNo=" + FormData.mobileNo
-                    }, 2500);
+                    }, 0);
                 }
             })
         }
     },
     render: function () {
-        alert(JSON.stringify(data));
         let data = this.props.data;
         var quick_pay = (
             <div className="pay-item" onClick={this.payCheck.bind(this,"quick_pay")}>

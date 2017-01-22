@@ -164,7 +164,6 @@ alert(JSON.stringify(FormData));
     }
 });
 
-
 $FW.DOMReady(function() {
     NativeBridge.setTitle('手机验证码');
     if ($FW.Utils.shouldShowHeader())
@@ -173,5 +172,5 @@ $FW.DOMReady(function() {
 });
 
 function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : history.back()
+    $FW.Browser.inApp() ? NativeBridge.close() : location.href="/static/mall/user/index.html"
 }
