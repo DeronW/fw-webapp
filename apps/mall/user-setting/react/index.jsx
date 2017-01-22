@@ -42,7 +42,3 @@ $FW.DOMReady(function() {
 
     ReactDOM.render(<Account/>, document.getElementById('cnt'));
 });
-
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/user/index.html';
-}

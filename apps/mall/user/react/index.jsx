@@ -78,7 +78,7 @@ const User = React.createClass({
                     <div className="seperate-line"></div>
                 </div>
                 <div className="user-personal-items">
-                    <a className="personal-item" href="/static/mall/order-deliver-address/index.html?preview=true">
+                    <a className="personal-item" href="/static/mall/user-deliver-address/index.html?preview=true">
                         <span className="item-name item-icon6">收货地址</span>
                         <span className="jump-arrow"></span>
                     </a>
@@ -148,7 +148,9 @@ const HotSale = React.createClass({
         let arr = [];
 
         //人气热卖列表
-        $FW.Ajax(`${API_PATH}/mall/api/index/v1/hotProducts.json?count=6&page${page}`)
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/index/v1/hotProducts.json?count=6&page${page}`,
+            enable_loading: true})
             .then(data => {
                 this.setState({
                     column: column.concat(data.products),
