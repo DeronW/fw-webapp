@@ -101,7 +101,7 @@ const SendCode = React.createClass({
              bankId: query.bankId,
              bankName: query.bankName
         };
-        alert(JSON.stringify(FormData));
+alert(JSON.stringify(FormData));
         $FW.Ajax({
             url:  API_PATH +'/mall/api/payment/v1/binding_bank_card.json',
             enable_loading: true,
@@ -128,14 +128,13 @@ const SendCode = React.createClass({
             data: FormData,
             success: function (data) {
                 this.bindCard();
-                /*
-                 var query = $FW.Format.urlQuery();
+                /*var query = $FW.Format.urlQuery();
                  var bizNo = query.bizNo;
-                 setTimeout(function(){
-                 location.href = location.protocol + '//' + location.hostname +
-                 "/static/mall/payment/index.html?bizNo="+bizNo
-                 },2000)
                  */
+                 setTimeout(function(){
+                     location.href = location.protocol + '//' + location.hostname +
+                     "/static/mall/pay-bank-card/index.html"
+                 },2000)
             }.bind(this)
         })
     },
@@ -143,14 +142,14 @@ const SendCode = React.createClass({
     render : function(){
         let veri_code_tip = null;
 
-        if (!this.state.reSend){
+        //if (!this.state.reSend){
             veri_code_tip = (
                 <div className="phone-tip">
                     验证码已发送至手机
                     <span>{this.state.mobileNo}</span>
                 </div>
             )
-        }
+        //}
         return (
             <div>
                 {veri_code_tip}

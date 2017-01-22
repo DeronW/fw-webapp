@@ -168,7 +168,7 @@ $FW.DOMReady(function() {
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/baseinfo.json`,
             method: "post",
-            data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, productId:1}
+            data: {token:$FW.store.get("localStorage").userToken, userGid:$FW.store.get("localStorage").userGid,userId:$FW.store.get("localStorage").userId, sourceType:3, productId:1}
         }).then((data) => {
             console.log(data)
             ReactDOM.render(<ApplyLoan data={data}/>, document.getElementById('cnt'))

@@ -70,6 +70,7 @@ const GlobalAlert = React.createClass({
             lineHeight: "40px",
             color: "#555555",
             padding: "0 36px",
+            maxWidth: "576px",
             fontSize: "28px"
         };
         let style_confirm = {

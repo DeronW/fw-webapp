@@ -4,6 +4,7 @@ const PROJ = 'loan';
 
 let APP_NAMES = [
     'home', // 首页
+	'faq',//常见问题
 ];
 
 // 用户模块
@@ -14,10 +15,8 @@ const USER_PAGES = [
     'user-set-new-password',
     'user', //我
     'user-set-cash-card',//设置提现卡
-    'user-verify-identidy',//
     'user-verify-phone', //获取验证码
 	'user-about-us', //关于我们
-	'user-faq',//常见问题
     'user-bank-support',//支持银行卡
 	'user-bank-management',//银行卡管理
 	'user-more' //更多
@@ -41,8 +40,6 @@ const APPLY_PAGES = [
 ]
 
 const DEVELOPING_PAGES = [
-    'user-apply-loan', //
-    'user-verify-identidy',//
     'user-verify-phone',
 ]
 
@@ -67,7 +64,8 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_JAVASCRIPTS = [
         'use-strict.js',
         `${PROJ}/fw-ajax-error-handler.js`,
-        `${PROJ}/fw-common.js`
+        `${PROJ}/fw-common.js`,
+        `${PROJ}/fw-plugin-store.js`
     ];
 
     APP_NAMES.forEach(i => {
@@ -81,7 +79,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
         generate_task(PROJ, i, {
             cmd_prefix: 'pack',
-            api_path: '//jiemodai.com/',
+            api_path: '//cashloan.9888.cn/',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: INCLUDE_COMPONENTS,
             include_less:INCLUDE_LESS,
