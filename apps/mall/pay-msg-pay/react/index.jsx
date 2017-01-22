@@ -80,7 +80,7 @@ const SendCode = React.createClass({
 
     //倒计时完成终止
     componentDidUpdate: function () {
-        if (this.state.value == 55) {
+        if (this.state.value == 0) {
             this.stopTick();
             this.setState({value: "获取验证码", reSend: true});
 
@@ -110,16 +110,17 @@ const SendCode = React.createClass({
             //url:  `./ucf_pay.json`,
             enable_loading: true,
             data: FormData,
-            }).then(data => {
-              window.location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/order-complete/index.html?status=S"
-            }).catch(data => {
-                alert(JSON.stringify(data));
+            success: (data) => {
+                window.location.href = location.protocol + '//' + location.hostname +
+                    "/static/mall/order-complete/index.html?status=S"
+            },
+            fail: (data) => {
                 setTimeout(() => {
-                  window.location.href = location.protocol + '//' + location.hostname +
-                    "/static/mall/order-complete/index.html?status=F"
-                }, 1500);
-            })
+                    window.location.href = location.protocol + '//' + location.hostname +
+                        "/static/mall/order-complete/index.html?status=F"
+                }, 1000);
+            }
+        })
         },
 
     //完成支付确认
