@@ -10,6 +10,6 @@ module.exports = javascripts = function (src_path, build_path, name, debug) {
         .pipe(changed(build_path))
         //.pipe(babel({presets: ['es2015']}))
         .pipe(debug ? plugins.util.noop() : js_uglify())
-        .pipe(name ? concat(name, {newLine: ';'}) : plugins.util.noop())
+        .pipe(name ? concat(name, {newLine: ';\n'}) : plugins.util.noop())
         .pipe(gulp.dest(build_path));
 };

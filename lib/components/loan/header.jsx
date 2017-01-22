@@ -75,13 +75,13 @@ const Header = React.createClass({
         let title = this.state.title;
         if (this.state.title_img)
             title = <img src={this.state.title_img}
-                         style={{
-                             display: 'block',
-                             margin: '0 auto',
-                             width: "182px",
-                             position: "relative",
-                             top: "30px"
-                         }}/>;
+                style={{
+                    display: 'block',
+                    margin: '0 auto',
+                    width: "182px",
+                    position: "relative",
+                    top: "30px"
+                }} />;
 
         let link = null;
         if (this.props.sub_text) {
@@ -96,7 +96,7 @@ const Header = React.createClass({
         }
 
         return (
-            <div style={{height: this.state.height + 'px'}}>
+            <div style={{ height: this.state.height + 'px' }}>
                 <div className="_style_header_fixed" style={_style_header_fixed}>
                     <div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
                         <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
