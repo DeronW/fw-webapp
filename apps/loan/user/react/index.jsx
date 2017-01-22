@@ -22,7 +22,6 @@ const MyCnt = React.createClass({
 			$FW.Ajax({
 				url: API_PATH + "api/oriole/v1/indexloadpage.json",
 				method: "POST",
-				enable_loading: true,
 				data: {
 					token: localStorage.userToken,
 					userGid: localStorage.userGid,
@@ -33,7 +32,6 @@ const MyCnt = React.createClass({
 			$FW.Ajax({
 				url: API_PATH + "api/loan/v1/baseinfo.json",
 				method: "POST",
-				enable_loading: true,
 				data: {
 					token: localStorage.userToken,
 					userGid: localStorage.userGid,
