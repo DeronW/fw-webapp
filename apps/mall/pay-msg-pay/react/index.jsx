@@ -143,9 +143,9 @@ const SendCode = React.createClass({
             data: FormData,
             success: (data) => {
                 alert(JSON.stringify(data));
-                setInterval(() => {
+                setTimeout(() => {
                     this.queryState();
-                }, 5000);
+                }, 3000);
                 //window.location.href = location.protocol + '//' + location.hostname +
                 //    "/static/mall/order-complete/index.html?id="+data.tradeNo
             }
