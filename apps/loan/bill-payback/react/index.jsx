@@ -246,12 +246,12 @@ $FW.DOMReady(function() {
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
                 method: "post",
-                data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
+                data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3}
             }),
             $FW.Ajax({
                 url: `${API_PATH}api/repayment/v1/loandetail.json`,
                 method: "post",
-                data: {loanGid:loanGid,loanType:loanType,token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
+                data: {loanGid:loanGid,loanType:loanType,token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3}
             })
         ]).then(d => {
             ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]}/>, document.getElementById('cnt'));

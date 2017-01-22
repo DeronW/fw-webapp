@@ -350,7 +350,7 @@ $FW.DOMReady(function() {
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/tryLoanBudget.json`,
             method: "post",
-            data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, orioleOrderGid:orioleOrderGid, loanAmount:loanNum}
+            data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3, orioleOrderGid:orioleOrderGid, loanAmount:loanNum}
         }).then(d => {
         ReactDOM.render(<ConfirmLoanWrap {...d}/>, document.getElementById('cnt'));
     }, (error) => console.log(error));
@@ -359,7 +359,7 @@ $FW.DOMReady(function() {
             url: `${API_PATH}api/oriole/v1/indexnotice.json`,
             method: "post",
             fail: ()=>true,
-            data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
+            data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3}
         }).then(d => {
         ReactDOM.render(<Notice {...d}/>, document.getElementById('notice'));
     }, (error) => console.log(error));
