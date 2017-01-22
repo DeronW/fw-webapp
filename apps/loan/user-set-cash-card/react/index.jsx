@@ -212,7 +212,7 @@ const SetCashCard = React.createClass({
 				let bankCardGid = data.bindBankInfo.bankCardGid;
 				let operatorBankcardGid = data.bindBankInfo.operatorBankcardGid;
 
-				window.location.href = `${location.protocol}\/\/${location.host}/static/user-verify-phone/index.html?bankCardGid=${bankCardGid }&operatorBankcardGid=${operatorBankcardGid}`;
+				window.location.href = `/static/loan/user-verify-phone/index.html?bankCardGid=${bankCardGid }&operatorBankcardGid=${operatorBankcardGid}`;
             },(error) => {
                 console.log(error);
             });

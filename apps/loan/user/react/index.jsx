@@ -57,7 +57,7 @@ const MyCnt = React.createClass({
 		let creditUrl = () => {
 			if(userStatus == 1) {
 				return "/static/loan/user-set-cash-card/index.html";
-			} else if (userStatus > 2) {
+			} else if (userStatus >= 2) {
 				return 'http://m.9888.cn'
 			}
 		}
@@ -65,8 +65,8 @@ const MyCnt = React.createClass({
 		let bankUrl = () => {
 			if(userStatus == 1) {
 				return "/static/loan/user-set-cash-card/index.html";
-			} else if (userStatus > 2) {
-				return 'http://m.9888.cn'
+			} else if (userStatus >= 2) {
+				return '/static/loan/user-bank-management/index.html'
 			}
 		}
 
