@@ -1,12 +1,18 @@
 const Register = React.createClass({
 	getInitialState() {
 		return {
-			pwdVal: ''
+			pwdVal: '',
+			plainCode: false
 		}
 	},
 	changePwd(e) {
 		this.setState({
 			pwdVal: e.target.value
+		});
+	},
+	handlePlainCode() {		
+		this.setState({
+			plainCode: !this.state.plainCode
 		});
 	},
 	loadingBtn() {
@@ -56,13 +62,13 @@ const Register = React.createClass({
 
 						<div className="input">
 							<input
-								type="passwold"
+								type={this.state.plainCode ? "text" : "password"}
 		   						placeholder="请输入登录密码"
 								onChange={this.changePwd}
 							/>
 						</div>
 
-						<div className="pwd-icon">
+						<div className="pwd-icon" onClick={() => this.handlePlainCode()}>
 
 						</div>
 					</div>
@@ -74,13 +80,15 @@ const Register = React.createClass({
 				</div>
 
 				<div className="forget-pwd-link">
-					<a href="">忘记密码?</a>
+					<a href={"/static/loan/user-set-new-password/index.html?=phone" + location.search.split("=")[1]}>忘记密码?</a>
 				</div>
 
 			</div>
 		)
 	}
 });
+
+
 
 ReactDOM.render(
 	<Register />,
