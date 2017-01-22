@@ -135,27 +135,27 @@ $FW.DOMReady(function () {
 
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 
-    $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
+    $FW.Ajax(`${API_PATH}mall/api/index/v1/banners.json`)
         .then(data => ReactDOM.render(<Mall banners={data.banners} />, CONTENT_NODE));
 
-    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=6`)
+    $FW.Ajax(`${API_PATH}mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=6`)
         .then((data) => ReactDOM.render(<NewProducts data={data.products} />, $g('NewProducts')));
 
-    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=8`)
+    $FW.Ajax(`${API_PATH}mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=8`)
         .then((data) => {
             ReactDOM.render(<HotProducts data={data.products} />, $g('HotProducts'));
             ReactDOM.render(<Grid_2 data={data.products} />, $g('Grid_2'));
             ReactDOM.render(<Grid_6 data={data.products} />, $g('Grid_6'))
         });
 
-    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=9`)
+    $FW.Ajax(`${API_PATH}mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=9`)
         .then(data => {
             ReactDOM.render(<Grid_1 data={data.products} />, $g('Grid_1'));
             ReactDOM.render(<Grid_5 data={data.products} />, $g('Grid_5'));
             ReactDOM.render(<Grid_9 data={data.products} />, $g('Grid_9'))
         })
 
-    $FW.Ajax(`${API_PATH}/mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=10`)
+    $FW.Ajax(`${API_PATH}mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=10`)
         .then(data => {
             ReactDOM.render(<Grid_3 data={data.products} />, $g('Grid_3'));
             ReactDOM.render(<Grid_4 data={data.products} />, $g('Grid_4'));
