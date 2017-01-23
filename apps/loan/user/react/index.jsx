@@ -2,8 +2,11 @@ function phoneMosaic(val) {
 	let frontNum = val.slice(0, 3);
 	let lastNum = val.slice(val.length - 4, val.length);
 
-	return `${frontNum}***${lastNum}`
-
+	if(val == undefined) {
+		return '';
+	} else {
+		return `${frontNum}***${lastNum}`
+	}
 
 }
 
