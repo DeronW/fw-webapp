@@ -114,7 +114,6 @@ const SetCashCard = React.createClass({
 			$FW.Ajax({
 				url: `${API_PATH}api/bankcard/v1/cardinfo.json`,
             	method: "POST",
-				enable_loading: true,
 				data: {
 					bankCardNo: space(this.state.bankNum),
 					token: localStorage.userToken,

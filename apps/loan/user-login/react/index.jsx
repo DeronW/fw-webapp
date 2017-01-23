@@ -21,7 +21,7 @@ const Register = React.createClass({
 		$FW.Ajax({
 			url: API_PATH + "/api/userBase/v1/login.json",
 			method: "POST",
-			enable_loading: true,
+
 			data: {
 				mobile: location.search.split("=")[1],
 				password: _this.state.pwdVal,

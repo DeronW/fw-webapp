@@ -44,42 +44,42 @@ const Register = React.createClass({
 		this.setState({
 			codeBoolean: true,
 			countdown: 5
-		});	
+		});
 
 		$FW.Ajax({
 			url: API_PATH + "api/userBase/v1/sendVerifyCode.json",
 			method: "POST",
-			enable_loading: true,
+
 			data: {
 				mobile: location.search.split('phone=')[1],
 				userOperationType: 2,
 				sourceType: 3
-			},			
+			},
 			success: function (data) {
 				_this.setState({
 					codeToken: data.codeToken
 				});
 			}
 		})
-			
+
 		this.timer = setInterval(() => {
 			this.setState({
 				countdown: this.state.countdown - 1
-			});	
+			});
 
 
 			if(this.state.countdown == 0) {
-				clearInterval(this.timer);	
+				clearInterval(this.timer);
 				this.setState({
 					codeBoolean: false
 				});
-			}	
+			}
 		}, 1000);
 	},
 	handlePlainCode() {
 		this.setState({
 			plainCode: !this.state.plainCode
-		});	
+		});
 	},
 	handleRegisterBtn() {
 		let _this = this;
@@ -98,14 +98,14 @@ const Register = React.createClass({
 			$FW.Ajax({
 				url: API_PATH + "api/userBase/v1/resetPass.json",
 				method: "POST",
-				enable_loading: true,
+
 				data: {
 					codeToken: _this.state.codeToken ,
 					mobile: location.search.split('phone=')[1],
 					password: _this.state.pswVal,
 					verifyCode: _this.state.code,
 					sourceType: 3
-				},			
+				},
 				success: function (data) {
 					localStorage.userGid = data.userPasswordOption.userGid;
 					localStorage.userId = data.userPasswordOption.userId;
@@ -113,7 +113,7 @@ const Register = React.createClass({
 
 					window.location.href = "/static/loan/apply-loan/index.html"
 				}
-			})			
+			})
 		}
 
 	},
@@ -132,8 +132,8 @@ const Register = React.createClass({
 						</div>
 
 						{
-							this.state.codeBoolean ? 
-								<div className="get-code-btn c">{this.state.countdown}倒计时</div> : 
+							this.state.codeBoolean ?
+								<div className="get-code-btn c">{this.state.countdown}倒计时</div> :
 								<div className="get-code-btn" onClick={() => this.handleGetCode()}>获取验证码</div>
 						}
 
@@ -141,23 +141,23 @@ const Register = React.createClass({
 					<div className="list pwd-list">
 						<span className="icon"></span>
 						<div className="input">
-							<input 
-								type={this.state.plainCode ? "text" : "password"} 
-								value={this.state.pswVal} 
-								onChange={this.changePsw} 
+							<input
+								type={this.state.plainCode ? "text" : "password"}
+								value={this.state.pswVal}
+								onChange={this.changePsw}
 								onBlur={this.blurPsw}
-								placeholder="设置8-16位的字母及数字组合密码" 
+								placeholder="设置8-16位的字母及数字组合密码"
 							/>
 						</div>
 
 						<span className="icon-pwd" onClick={this.handlePlainCode}></span>
 					</div>
-				</div>		
+				</div>
 
 				<div className="determine-btn">
 					<div className="ui-btn" onClick={this.handleRegisterBtn}>确定</div>
 				</div>
-			</div>	
+			</div>
 		)
 	}
 });
