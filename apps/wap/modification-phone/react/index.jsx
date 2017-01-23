@@ -16,13 +16,16 @@ const ModificationPhoneFrom = React.createClass({
             next: false,
             phone: location.search.substring(1).split("=")[1],
             phoneValue: '',
-            updatePhoneNoTicket: ''
+            updatePhoneNoTicket: '',
+			bottomPhoneShow: false
         }
     }, 
     componentWillUnmount() {
         clearInterval(this.timer);
     },
 	sountdownFun(isVms) {
+		var _this = this;
+
 	    this.setState({
             showGetCode: false
         });
@@ -48,14 +51,19 @@ const ModificationPhoneFrom = React.createClass({
         $FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9)  +"&isVms=" + isVms,
             method: "GET",
-            success: function(data) {
-        		console.log(data);        
+            success: (data) => {
+
+				if(_this.state.next) {
+					_this.setState({
+						bottomPhoneShow: true,
+						phoneValue: this.state.phoneValue.substring(0, 3) + "****" + this.state.phoneValue.substring((this.state.phoneValue.length - 4), this.state.phoneValue.length)
+					}); 
+				}
             },
             fail: function() {
 
             }
         })
-
 	},
 
     handlerGetCode(isVms) {
@@ -95,7 +103,6 @@ const ModificationPhoneFrom = React.createClass({
                         url: API_PATH + "/mpwap/api/v1/changBankPhone.shtml?updatePhoneNoTicket=" + _this.state.updatePhoneNoTicket + "&phoneNum=" + _this.state.phoneValue + '&validateCode=' + _this.state.codeValue,
                         method: "GET",
                         success: function(data) {
-                            
                         },
                         fail: function() {
                             
@@ -129,6 +136,16 @@ const ModificationPhoneFrom = React.createClass({
  
     },
     render() {  
+		
+
+		let bottomPhone = () => {
+			return <div className="phone-info">已向手机{this.state.phoneValue}发送短信验证码，若收不到请<span className="s" onClick={() => this.codeChange("VMS")}>点击这里</span>获取语音验证码</div>
+		}
+
+		let text = () => {
+            return <div className="phone-info">若注册手机号无法进行验证，请<span className="s">联系客服</span>人工解决</div>  
+		}
+
         return (
             <div className="phone-from">
                 <div className="phone-num">
@@ -147,8 +164,7 @@ const ModificationPhoneFrom = React.createClass({
                 </div>
 
                 {
-                    this.state.next ? <div className="phone-info">已向手机139****4123发送短信验证码，若收不到请<span className="s" onClick={() => this.codeChange("VMS")}>点击这里</span>获取语音验证码</div> :
-                            <div className="phone-info">若注册手机号无法进行验证，请<span className="s">联系客服</span>人工解决</div>  
+                    this.state.next ? (this.state.bottomPhoneShow ? bottomPhone() : <div style={{height: "70px"}}></div> ) : text()
                          
                 }
 
