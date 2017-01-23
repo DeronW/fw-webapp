@@ -61,7 +61,7 @@ const ConfirmOrder = React.createClass({
                             '&payableRmbAmt=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
                     }
                     else {
-                        location.href = '/static/mall/order-complete/index.html'
+                        location.href = '/static/mall/order-complete/index.html?status=S'
                     }
                     /* } */
                 }

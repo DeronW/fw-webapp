@@ -52,7 +52,6 @@ const SendCode = React.createClass({
             url:  API_PATH + 'mall/api/payment/v1/SendPhoneVerifyPay.json',
             enable_loading: true,
             success: function (data) {
-                    alert(JSON.stringify(data));
                     if(!this.state.reSend) return;
                     this.setState({value: 60,reSend: false});
                     this.tick()
@@ -67,7 +66,7 @@ const SendCode = React.createClass({
 
     //倒计时完成终止
     componentDidUpdate:function() {
-        if(this.state.value==55){
+        if(this.state.value==0){
             this.stopTick();
             this.setState({value: "获取验证码",reSend: true});
         }
@@ -87,7 +86,6 @@ const SendCode = React.createClass({
 
     //绑定银行卡
      bindCard:function(){
-         alert(0);
         var query = $FW.Format.urlQuery();
 
         let FormData = {
@@ -101,17 +99,15 @@ const SendCode = React.createClass({
              bankId: query.bankId,
              bankName: query.bankName
         };
-alert(JSON.stringify(FormData));
         $FW.Ajax({
             url:  API_PATH +'/mall/api/payment/v1/binding_bank_card.json',
             enable_loading: true,
             data: FormData,
             success: function (data) {
-                alert(JSON.stringify(data));
                     $FW.Component.Alert(data.msg);
                     setTimeout(function(){
                         location.href="/static/mall/pay-bank-card/index.html"
-                    },20000)
+                    },1500)
              }
         })
     },

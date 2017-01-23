@@ -18,7 +18,6 @@ const BankInfo = React.createClass({
             bankCardName:query.bankCardName,
             bankId:query.bankId,
             active:false,
-            bankType:"",
             bankImage:""
         };
     },

@@ -10,6 +10,18 @@ const Payment = React.createClass({
     payCheck: function (arg) {
         this.setState({index: arg});
     },
+    componentDidMount: function () {
+        var m=29;
+        var s=59;
+        setInterval(function(){
+            document.getElementById("cutdown").innerHTML=(m+'分'+s+"秒内完成支付");
+            s--;
+            if(s<0){
+                s=59;
+                m--;
+            }
+        },1000)
+    },
     split: function (str) {
         return str.substr(str.length - 4, 4);
     },
@@ -87,7 +99,7 @@ const Payment = React.createClass({
         return (
             <div className="order-payment">
                 <div className="order-status">
-                    <div className="pay-tip">请在23小时59分59秒内完成支付</div>
+                    <div className="pay-tip">请在<span id="cutdown"></span></div>
                     <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt/100}元</span></div>
                 </div>
                 {/*<div className="order-products">

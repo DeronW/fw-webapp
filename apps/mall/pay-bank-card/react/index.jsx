@@ -25,7 +25,7 @@ const CardList = React.createClass({
             },
             enable_loading: true
         }).then(data => {
-
+            location.reload()
         })
     },
     render: function () {
