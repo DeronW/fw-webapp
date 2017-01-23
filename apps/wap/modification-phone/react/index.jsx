@@ -49,7 +49,7 @@ const ModificationPhoneFrom = React.createClass({
         }, 1000)
 
         $FW.Ajax({
-			url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9)  +"&isVms=" + isVms + "&phone=" + (this.state.next ? this.state.phoneValue : ""),
+			url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9)  +"&isVms=" + isVms + "&destPhoneNo=" + (this.state.next ? this.state.phoneValue : ""),
             method: "GET",
             success: (data) => {
 
