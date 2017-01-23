@@ -45,7 +45,6 @@ const ModificationPhoneFrom = React.createClass({
             }  
         }, 1000)
 
-		console.log("a");
         $FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9)  +"&isVms=" + isVms,
             method: "GET",
@@ -61,6 +60,7 @@ const ModificationPhoneFrom = React.createClass({
 
     handlerGetCode(isVms) {
 		if(this.state.next) {
+			console.log("a");
 			if(this.state.phoneValue != '') {
 				this.sountdownFun(isVms);				
 			} else {
@@ -111,10 +111,14 @@ const ModificationPhoneFrom = React.createClass({
                         _this.setState({
                             next: true,
                             codeValue: '',
+							countdown: 60,
+							showGetCode: true
                             //updatePhoneNoTicket: data.updatePhoneNoTicket 
                         });
+            			
+						clearInterval(_this.timer);
 
-                        _this.props.callbackNext(true)
+                     	_this.props.callbackNext(true)
                     },
                     fail: function() {
                         
