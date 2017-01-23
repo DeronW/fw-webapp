@@ -56,7 +56,7 @@ const ModificationPhoneFrom = React.createClass({
 				if(_this.state.next) {
 					_this.setState({
 						bottomPhoneShow: true,
-						phoneValue: this.state.phoneValue.substring(0, 3) + "****" + this.state.phoneValue.substring((this.state.phoneValue.length - 4), this.state.phoneValue.length)
+					//	phoneValue: this.state.phoneValue.substring(0, 3) + "****" + this.state.phoneValue.substring((this.state.phoneValue.length - 4), this.state.phoneValue.length)
 					}); 
 				}
             },
@@ -68,6 +68,7 @@ const ModificationPhoneFrom = React.createClass({
 
     handlerGetCode(isVms) {
 		if(this.state.next) {
+			console.log(!checkPhone(this.state.phoneValue));
 			if(this.state.phoneValue != '') {
 				this.sountdownFun(isVms);				
 			} else {
@@ -79,7 +80,6 @@ const ModificationPhoneFrom = React.createClass({
 
     },
     codeChange(e) {        
-		console.log(e);
         this.setState({
             codeValue: e.target.value
         });
@@ -96,7 +96,10 @@ const ModificationPhoneFrom = React.createClass({
             $FW.Component.Toast("验证码不能为空");
         }else {
             if(this.state.next) {                
+                console.log(_this.state.phoneValue);
+                console.log(!checkPhone(_this.state.phoneValue));
                 if (!checkPhone(_this.state.phoneValue)) {
+					
                     $FW.Component.Toast("手机号不对");
                 } else {
                     $FW.Ajax({
@@ -119,8 +122,8 @@ const ModificationPhoneFrom = React.createClass({
                             next: true,
                             codeValue: '',
 							countdown: 60,
-							showGetCode: true
-                            //updatePhoneNoTicket: data.updatePhoneNoTicket 
+							showGetCode: true,
+                            updatePhoneNoTicket: data.updatePhoneNoTicket 
                         });
             			
 						clearInterval(_this.timer);
@@ -136,10 +139,10 @@ const ModificationPhoneFrom = React.createClass({
  
     },
     render() {  
-		
-
+		let phoneText = this.state.bottomPhoneShow ?
+		   				this.state.phoneValue.substring(0, 3) + "****" + this.state.phoneValue.substring((this.state.phoneValue.length - 4), this.state.phoneValue.length) : "";
 		let bottomPhone = () => {
-			return <div className="phone-info">已向手机{this.state.phoneValue}发送短信验证码，若收不到请<span className="s" onClick={() => this.handlerGetCode("VMS")}>点击这里</span>获取语音验证码</div>
+			return <div className="phone-info">已向手机{phoneText}发送短信验证码，若收不到请<span className="s" onClick={() => this.handlerGetCode("VMS")}>点击这里</span>获取语音验证码</div>
 		}
 
 		let text = () => {
