@@ -111,16 +111,17 @@ const SendCode = React.createClass({
             enable_loading: true,
             data: FormData,
             success: (data) => {
-                return false;
-                window.location.href = location.protocol + '//' + location.hostname +
-                    "/static/mall/order-complete/index.html?status=S"
-            },
-            fail: (data) => {
-                setTimeout(() => {
-                    return false;
+                if(data.status=="F"){
                     window.location.href = location.protocol + '//' + location.hostname +
                         "/static/mall/order-complete/index.html?status=F"
-                }, 1000);
+                }
+                if(data.status=="S"){
+                    window.location.href = location.protocol + '//' + location.hostname +
+                        "/static/mall/order-complete/index.html?status=S"
+                }
+            },
+            fail: (data) => {
+                   $FW.Component.Alert(data.msg);
             }
         })
         },
