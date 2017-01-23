@@ -49,7 +49,7 @@ const ModificationPhoneFrom = React.createClass({
         }, 1000)
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9)  +"&isVms=" + isVms,
+			url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9)  +"&isVms=" + isVms + "&phone=" + (this.state.next ? this.state.phoneValue : ""),
             method: "GET",
             success: (data) => {
 
@@ -68,7 +68,6 @@ const ModificationPhoneFrom = React.createClass({
 
     handlerGetCode(isVms) {
 		if(this.state.next) {
-			console.log("a");
 			if(this.state.phoneValue != '') {
 				this.sountdownFun(isVms);				
 			} else {
@@ -80,6 +79,7 @@ const ModificationPhoneFrom = React.createClass({
 
     },
     codeChange(e) {        
+		console.log(e);
         this.setState({
             codeValue: e.target.value
         });
@@ -139,7 +139,7 @@ const ModificationPhoneFrom = React.createClass({
 		
 
 		let bottomPhone = () => {
-			return <div className="phone-info">已向手机{this.state.phoneValue}发送短信验证码，若收不到请<span className="s" onClick={() => this.codeChange("VMS")}>点击这里</span>获取语音验证码</div>
+			return <div className="phone-info">已向手机{this.state.phoneValue}发送短信验证码，若收不到请<span className="s" onClick={() => this.handlerGetCode("VMS")}>点击这里</span>获取语音验证码</div>
 		}
 
 		let text = () => {
