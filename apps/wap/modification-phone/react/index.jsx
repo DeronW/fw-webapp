@@ -92,52 +92,54 @@ const ModificationPhoneFrom = React.createClass({
     handlerModificationPhone () {
         var _this = this;                
 
-        if(this.state.codeValue == '') {
-            $FW.Component.Toast("验证码不能为空");
-        }else {
-            if(this.state.next) {                
-                console.log(_this.state.phoneValue);
-                console.log(!checkPhone(_this.state.phoneValue));
-                if (!checkPhone(_this.state.phoneValue)) {
-					
-                    $FW.Component.Toast("手机号不对");
-                } else {
-                    $FW.Ajax({
-                        url: API_PATH + "/mpwap/api/v1/changBankPhone.shtml?updatePhoneNoTicket=" + _this.state.updatePhoneNoTicket + "&phoneNum=" + _this.state.phoneValue + '&validateCode=' + _this.state.codeValue,
-                        method: "GET",
-                        success: function(data) {
-							window.location.href = "/static/wap/recharge/index.html"
-                        },
-                        fail: function() {
-                            
-                        }
-                    })
-                }
+	
+		if(this.state.next) {                
+			
+			if (!checkPhone(_this.state.phoneValue)) {
+				$FW.Component.Toast("手机号不对");
+			} else if(this.state.codeValue == '') {
+				$FW.Component.Toast("验证码不对");
+			} else {
+				$FW.Ajax({
+					url: API_PATH + "/mpwap/api/v1/changBankPhone.shtml?updatePhoneNoTicket=" + _this.state.updatePhoneNoTicket + "&phoneNum=" + _this.state.phoneValue + '&validateCode=' + _this.state.codeValue,
+					method: "GET",
+					success: function(data) {
+						window.location.href = "/static/wap/recharge/index.html"
+					},
+					fail: function() {
+						
+					}
+				})
+			}
 
-            } else {       
-                $FW.Ajax({
-                    url: API_PATH + "mpwap/api/v1/validateOldPhone.shtml?validateCode=" + _this.state.codeValue,
-                    method: "GET",
-                    success: function(data) {                                    
-                        _this.setState({
-                            next: true,
-                            codeValue: '',
+		} else {       
+			if(this.state.codeValue == '') {
+				$FW.Component.Toast("验证码不对");
+			
+			} else {
+				 $FW.Ajax({
+					url: API_PATH + "mpwap/api/v1/validateOldPhone.shtml?validateCode=" + _this.state.codeValue,
+					method: "GET",
+					success: function(data) {                                    
+						_this.setState({
+							next: true,
+							codeValue: '',
 							countdown: 60,
 							showGetCode: true,
-                            updatePhoneNoTicket: data.updatePhoneNoTicket 
-                        });
-            			
+							updatePhoneNoTicket: data.updatePhoneNoTicket 
+						});
+						
 						clearInterval(_this.timer);
 
-                     	_this.props.callbackNext(true)
-                    },
-                    fail: function() {
-                        
-                    }
-               })
-            }    
-        }
- 
+						_this.props.callbackNext(true)
+					},
+					fail: function() {
+						
+					}
+			   })
+
+			}
+		 }    
     },
     render() {  
 		let phoneText = this.state.bottomPhoneShow ?
