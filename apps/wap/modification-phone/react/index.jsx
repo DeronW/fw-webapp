@@ -106,6 +106,7 @@ const ModificationPhoneFrom = React.createClass({
                         url: API_PATH + "/mpwap/api/v1/changBankPhone.shtml?updatePhoneNoTicket=" + _this.state.updatePhoneNoTicket + "&phoneNum=" + _this.state.phoneValue + '&validateCode=' + _this.state.codeValue,
                         method: "GET",
                         success: function(data) {
+							window.location.href = "/static/wap/recharge/index.html"
                         },
                         fail: function() {
                             
