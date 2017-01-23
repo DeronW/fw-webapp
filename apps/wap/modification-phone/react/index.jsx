@@ -22,7 +22,7 @@ const ModificationPhoneFrom = React.createClass({
     componentWillUnmount() {
         clearInterval(this.timer);
     },
-	sountdownFun() {
+	sountdownFun(isVms) {
 	    this.setState({
             showGetCode: false
         });
@@ -45,11 +45,12 @@ const ModificationPhoneFrom = React.createClass({
             }  
         }, 1000)
 
+		console.log("a");
         $FW.Ajax({
             url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9)  +"&isVms=" + isVms,
             method: "GET",
             success: function(data) {
-                
+        		console.log(data);        
             },
             fail: function() {
 
@@ -61,12 +62,12 @@ const ModificationPhoneFrom = React.createClass({
     handlerGetCode(isVms) {
 		if(this.state.next) {
 			if(this.state.phoneValue != '') {
-				this.sountdownFun();				
+				this.sountdownFun(isVms);				
 			} else {
                $FW.Component.Toast("手机号不对");
 			}
 		} else {
-			this.sountdownFun();				
+			this.sountdownFun(isVms);				
 		}
 
     },
