@@ -22,8 +22,8 @@ const ModificationPhoneFrom = React.createClass({
     componentWillUnmount() {
         clearInterval(this.timer);
     },
-    handlerGetCode(isVms) {
-        this.setState({
+	sountdownFun() {
+	    this.setState({
             showGetCode: false
         });
 
@@ -55,6 +55,20 @@ const ModificationPhoneFrom = React.createClass({
 
             }
         })
+
+	},
+
+    handlerGetCode(isVms) {
+		if(this.state.next) {
+			if(this.state.phoneValue != '') {
+				this.sountdownFun();				
+			} else {
+               $FW.Component.Toast("手机号不对");
+			}
+		} else {
+			this.sountdownFun();				
+		}
+
     },
     codeChange(e) {        
         this.setState({
