@@ -32,6 +32,12 @@
 
 {% block javascripts %}
 <script src="javascripts/lib.js"></script>
+{% if !DEBUG %}
+<script src="https://cdn.ravenjs.com/3.9.1/raven.min.js" crossorigin="anonymous"></script>
+<script>
+Raven.config('https://064ad415a6de48dbbef9c9974ff6a029@sentry.dougemall.com/5').install()
+</script>
+{% endif %}
 <script src="javascripts/bundle.js"></script>
 {% block extra_javascripts %}{% endblock %}
 {% endblock %}
