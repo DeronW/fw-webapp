@@ -24,14 +24,13 @@
 {% endblock %}
 
 <script src="javascripts/lib.js"></script>
-<script src="javascripts/bundle.js"></script>
-
 {% if !DEBUG %}
 <script src="https://cdn.ravenjs.com/3.9.1/raven.min.js" crossorigin="anonymous"></script>
 <script>
 Raven.config('https://33bee169f49442d09c446018023d78b7@sentry.dougemall.com/2').install()
 </script>
 {% endif %}
+<script src="javascripts/bundle.js"></script>
 
 {% if !DEBUG %}
 <script type='text/javascript'>
