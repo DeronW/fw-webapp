@@ -31,10 +31,8 @@
 {% block javascripts %}
 <script src="javascripts/lib.js"></script>
 {% if !DEBUG %}
-<script src="https://cdn.ravenjs.com/3.9.1/raven.min.js" crossorigin="anonymous"></script>
-<script>
-Raven.config('https://6598d6b107674705be86433412e78c3b@sentry.dougemall.com/4').install()
-</script>
+{% include 'partial/expection-handler.swig.html' with
+    {SENTRY_DSN: 'https://6598d6b107674705be86433412e78c3b@sentry.dougemall.com/4'} %}
 {% endif %}
 <script src="javascripts/bundle.js"></script>
 {% block extra_javascripts %}{% endblock %}

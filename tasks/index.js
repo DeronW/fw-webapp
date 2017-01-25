@@ -124,6 +124,10 @@ module.exports = function (site_name, page_name, configs) {
         ], `${build_path}images`)
     }
 
+    function compile_public_javascripts() {
+        return copy([`${public_path}/common/javascripts/*.js`, `${public_path}/${site_name}/javascripts/*.js`], `${build_path}javascripts`)
+    }
+
     function copy2cdn() {
         return copy([`${build_path}/**`], cdn_path)
     }
@@ -163,7 +167,8 @@ module.exports = function (site_name, page_name, configs) {
             compile_react,
             common_javascripts,
             compile_images,
-            compile_common_assets));
+            compile_common_assets,
+            compile_public_javascripts));
 
     CONFIG.debug ?
         gulp.task(`${task_name}:watch`, gulp.series(task_name, monitor)) :
