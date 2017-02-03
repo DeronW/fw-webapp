@@ -65,7 +65,7 @@ module.exports = function (site_name, page_name, configs) {
             html_engine: 'swig'
         }, configs, singlePageCfg);
 
-    let task_name = `${site_name}${CONFIG.cmd_prefix ? ':' + CONFIG.cmd_prefix : ''}:${page_name}`;
+    let task_name = `${site_name}${CONFIG.cmd_prefix ? `:${CONFIG.cmd_prefix}` : ''}:${page_name}`;
 
     let less_files = [
         `${lib_path}css/common.css`,
@@ -80,13 +80,17 @@ module.exports = function (site_name, page_name, configs) {
     ]);
 
     let common_javascript_files = get_common_javascript_files(
-        lib_path, CONFIG.include_javascripts.map(i => `${lib_path}/javascripts/${i}`), CONFIG.debug);
+        lib_path,
+        CONFIG.include_javascripts.map(i => `${lib_path}/javascripts/${i}`),
+        CONFIG.debug);
 
     function compile_html() {
-        return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
-            API_PATH: CONFIG.api_path,
-            DEBUG: CONFIG.debug
-        })
+        return html([`${app_path}index.html`],
+            build_path,
+            CONFIG.html_engine, {
+                API_PATH: CONFIG.api_path,
+                DEBUG: CONFIG.debug
+            })
     }
 
     function compile_stylesheets() {
@@ -125,7 +129,10 @@ module.exports = function (site_name, page_name, configs) {
     }
 
     function compile_public_javascripts() {
-        return copy([`${public_path}/common/javascripts/*.js`, `${public_path}/${site_name}/javascripts/*.js`], `${build_path}javascripts`)
+        return copy([
+            `${public_path}/common/javascripts/*.js`,
+            `${public_path}/${site_name}/javascripts/*.js`
+        ], `${build_path}javascripts`)
     }
 
     function copy2cdn() {
