@@ -41,6 +41,8 @@ const APPLY_PAGES = [
 
 const DEVELOPING_PAGES = [
     'user-verify-phone',
+    'weixin-download',
+    'weixin-invite'
 ]
 
 APP_NAMES.push(
