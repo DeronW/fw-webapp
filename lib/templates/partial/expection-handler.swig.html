@@ -3,7 +3,15 @@
     Raven.config('{{ SENTRY_DSN }}').install()
     // 全局JS异常捕获方法
     window.onerror = function (msg, file, line, column, error) {
-        var err = 'Uncatch Error ' + file + ':' + line + ' -> ' + msg;
+        var err;
+        if (error) {
+            err = error
+        } else {
+            err = 'Uncatch Error in ' + file + ':' + line;
+            if (column) err += ',' + column;
+            err += ' -> ' + msg
+        }
         typeof (Raven) === 'object' && Raven.isSetup() && Raven.captchExpection(err);
     }
+
 </script>
