@@ -1,6 +1,8 @@
 <script src="javascripts/raven-3.9.1.min.js" crossorigin="anonymous"></script>
 <script>
-    Raven.config('{{ SENTRY_DSN }}').install()
+    Raven.config('{{ SENTRY_DSN }}', {
+        autoBreadcrumbs: { xhr: false }
+    }).install()
     // 全局JS异常捕获方法
     window.onerror = function (msg, file, line, column, error) {
         if (typeof (Raven) === 'object' && Raven.isSetup()) {
