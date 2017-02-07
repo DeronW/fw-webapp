@@ -33,7 +33,7 @@ const Register = React.createClass({
 				localStorage.userToken = data.userLogin.userToken;
 				localStorage.userStatus = data.userLogin.userStatus;
 
-				location.href = `${location.protocol}\/\/${location.host}/static/loan/apply-loan/index.html`;
+				location.href = `${location.protocol}\/\/${location.host}/static/loan/home/index.html`;
 			},
 			fail: function(code, mes) {
 

@@ -43,7 +43,7 @@ const Register = React.createClass({
 
 		this.setState({
 			codeBoolean: true,
-			countdown: 5
+			countdown: 60
 		});
 
 		$FW.Ajax({
@@ -110,6 +110,7 @@ const Register = React.createClass({
 					localStorage.userGid = data.userLogin.userGid;
 					localStorage.userId = data.userLogin.userId;
 					localStorage.userToken = data.userLogin.userToken;
+                    location.href = `${location.protocol}\/\/${location.host}/static/loan/home/index.html`;
 				}
 			})
 		}

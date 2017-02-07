@@ -1,7 +1,7 @@
 $FW.DOMReady(function () {
     var ConcertUtilBrowser = {
         versions: (function () {
-            var u = navigator.userAgent, app = navigator.appVersion;
+            var u = navigator.userAgent;
             return {
                 ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
                 android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
