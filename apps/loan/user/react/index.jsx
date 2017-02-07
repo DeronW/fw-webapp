@@ -59,7 +59,7 @@ const MyCnt = React.createClass({
 			if(userStatus == 1) {
 				return "/static/loan/user-set-cash-card/index.html";
 			} else if (userStatus >= 2) {
-				return 'http://m.9888.cn'
+				return `https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`
 			}
 		}
 
@@ -117,13 +117,13 @@ const MyCnt = React.createClass({
 								<span className="arrow-r-icon"></span>
 							</a>
 						</div>
-						<div className="list-cnt">
+                        {/*<div className="list-cnt">
 							<a href="">
 								<span className="icon feedback-icon"></span>
 								<span className="text">意见反馈</span>
 								<span className="arrow-r-icon"></span>
 							</a>
-						</div>
+						</div>*/}
 						<div className="list-cnt">
 							<a href="/static/loan/user-more/index.html">
 								<span className="icon more-icon"></span>
