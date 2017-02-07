@@ -1,3 +1,7 @@
+function gotoHandler(link) {
+    location.href = encodeURI(link);
+}
+
 const Register = React.createClass({
 	getInitialState() {
 		return {
@@ -44,7 +48,7 @@ const Register = React.createClass({
 		return (
 			<div className="login-cnt">
 				<div className="top">
-					<span className="icon"></span>
+					<span className="icon" onClick={()=>gotoHandler(`/static/loan/user-register-login-entry/index.html`)}></span>
 					<span className="title">登录</span>
 				</div>
 
