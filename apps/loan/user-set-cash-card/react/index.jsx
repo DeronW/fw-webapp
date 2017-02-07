@@ -1,3 +1,7 @@
+function gotoHandler(link) {
+    location.href = encodeURI(link);
+}
+
 function isMobilePhone (phone) {
     return /^1(3|4|5|7|8)\d{9}$/.test(phone)
 }
@@ -247,7 +251,7 @@ const SetCashCard = React.createClass({
 						</div>
 
 						<div className="list-bank-li">
-							<span className="prompt-text">
+							<span className="prompt-text" onClick={() => gotoHandler(`/static/loan/user-bank-support/index.html`)}>
 								支持银行
 								<img src="images/prompt-icon.png" />
 							</span>
