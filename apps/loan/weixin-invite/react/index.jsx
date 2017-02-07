@@ -5,6 +5,10 @@ $FW.DOMReady(function () {
         $(this).addClass('selected').siblings().removeClass('selected');
         $(".tab-content-item").eq(index).show().siblings().hide();
     });
-
-
+    $(".get-btn").click(function(){
+        $(".mask").show();
+    });
+    $(".mask").click(function(){
+        $(this).hide();
+    });
 });
