@@ -5,21 +5,21 @@ const PROJ = 'loan';
 let APP_NAMES = [
     'home', // 首页
 	'faq',//常见问题
+	'about-us', //关于我们
 ];
 
 // 用户模块
 const USER_PAGES = [
-    'user-register-login-entry', //注册登录入口
+    'user-entry', // 用户入口, 并非登录或注册, 而是用户的进入入口
     'user-register',//注册入口
     'user-login', //登录入口
     'user-set-new-password',
     'user', //我
     'user-set-cash-card',//设置提现卡
     'user-verify-phone', //获取验证码
-	'user-about-us', //关于我们
     'user-bank-support',//支持银行卡
 	'user-bank-management',//银行卡管理
-	'user-more' //更多
+	'user-settings' //更多
 ]
 
 // 账单模块

@@ -24,7 +24,6 @@ const Register = React.createClass({
 	handleGetCode() {
 		var _this = this;
 
-		console.log("aa");
 		if(!isMobilePhone(this.state.val)) {
 			$FW.Component.Toast("手机号格式不对");
 		} else {

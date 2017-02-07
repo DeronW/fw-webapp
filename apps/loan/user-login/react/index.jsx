@@ -48,7 +48,7 @@ const Register = React.createClass({
 		return (
 			<div className="login-cnt">
 				<div className="top">
-					<span className="icon" onClick={()=>gotoHandler(`/static/loan/user-register-login-entry/index.html`)}></span>
+					<span className="icon" onClick={()=>gotoHandler(`/static/loan/user-entry/index.html`)}></span>
 					<span className="title">登录</span>
 				</div>
 
