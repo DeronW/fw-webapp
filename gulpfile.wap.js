@@ -31,15 +31,15 @@ const PROTOCOL_PAGES = [
     'protocol-special-bind', // 特殊绑定银行卡协议
 ]
 
-const CIRCLE_PAGES = [
-    //圈子相关页面
-    'circle-tender-complete', //直融标成功
-    'circle-transfer-complete', //债券转让成功
-    'circle-register-complete', //签到成功
-    'circle-team-data', //小队数据
-    'circle-person-data', //个人数据
-    'circle-score-stream', //工分流水
-]
+// const CIRCLE_PAGES = [
+//     //圈子相关页面
+//     'circle-tender-complete', //直融标成功
+//     'circle-transfer-complete', //债券转让成功
+//     'circle-register-complete', //签到成功
+//     'circle-team-data', //小队数据
+//     'circle-person-data', //个人数据
+//     'circle-score-stream', //工分流水
+// ]
 
 const TOPIC_PAGES = [
     // 专题页面
