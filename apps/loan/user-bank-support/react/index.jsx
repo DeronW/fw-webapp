@@ -1,8 +1,8 @@
 const BankList = React.createClass({
 	getInitialState() {
 		return {
-			bankList: []	
-		}	
+			bankList: []
+		}
 	},
 	componentDidMount() {
 		$FW.Ajax({
@@ -18,11 +18,11 @@ const BankList = React.createClass({
 			}
 		}).then((data) => {
 			this.setState({
-				bankList: data.pageData.result	
+				bankList: data.pageData.result
 			});
 		}, (error) => {
-			
-		})	
+
+		})
 	},
     render:function(){
 		let bankLi = (todo, index) => {
@@ -41,10 +41,10 @@ const BankList = React.createClass({
 					{
 						this.state.bankList.map((todo, index) => {
 							return bankLi(todo, index)
-						})				
-					}	
+						})
+					}
                 </div>
-                <div className="know-btn">我知道了</div>
+                <a className="know-btn" href={'/static/loan/user-set-cash-card/index.html'}>我知道了</a>
             </div>
         )
     }
