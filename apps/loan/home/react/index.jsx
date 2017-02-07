@@ -175,4 +175,3 @@ $FW.DOMReady(function() {
         }, (error) => console.log(error));
     ReactDOM.render(<BottomNavBar index={1}/>, document.getElementById('bottom-nav-bar'));
 });
-
