@@ -140,10 +140,12 @@ const ApplyLoan = React.createClass({
 
         let btn_list =
             <div className="credit-btn">
-                <a className="credit-improvement-btn" href={`/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`}>
+                <a className="credit-improvement-btn"
+                    href={`/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`}>
                     我要提额
                 </a>
-                <a className="credit-apply-btn" href={`/static/loan/apply-want-loan/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`}>
+                <a className="credit-apply-btn"
+                    href={`/static/loan/apply-want-loan/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`}>
                     我要借款</a>
             </div>;
 
