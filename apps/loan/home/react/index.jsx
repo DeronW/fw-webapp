@@ -8,7 +8,8 @@ const ApplyLoan = React.createClass({
             availableLoan: this.props.data.creditLine,
             present_availableLoan: this.props.data.creditLine,
             orioleOrderGid: this.props.data.orioleOrderGid,
-            creditLine: this.props.data.canBorrowAmount
+            creditLine: this.props.data.canBorrowAmount,
+            present_creditLine:this.props.data.canBorrowAmount
         }
     },
     componentDidMount: function () {
@@ -104,7 +105,7 @@ const ApplyLoan = React.createClass({
                 <div className="start-point"></div>
                 <div className="end-point"></div>
                 <div className="start-point-num">500</div>
-                <div className="end-point-num">{this.state.creditLine}</div>
+                <div className="end-point-num">{this.state.present_creditLine}</div>
             </div>;
 
         let no_slider_bar =
