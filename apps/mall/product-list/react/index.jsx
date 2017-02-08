@@ -24,8 +24,8 @@ const ResultPage = React.createClass({
         } else if (Filter.options.searchSourceType == 2) {
             this.setState({showExchangeBar: false});
             //if($FW.Format.urlQuery().productName){
-				//document.querySelector('.search-confirm').click()
-            	//this.loadMoreProductHandler();
+            //document.querySelector('.search-confirm').click()
+            //this.loadMoreProductHandler();
             //}
         } else {
             this.loadMoreProductHandler();
@@ -108,8 +108,8 @@ const ResultPage = React.createClass({
         return (
             <div>
                 {this.state.showSearch ? <SearchBar filterProducts={this.filterProducts}
-                                    searchFocus={this.searchFocus}
-                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
+                                                    searchFocus={this.searchFocus}
+                                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts}/>
 
                 {this.state.showExchangeBar || this.state.showFilterBar ?
@@ -169,9 +169,9 @@ let Filter = {
         for (var i in Filter.options) {
             search.push(`${i}=${Filter.options[i]}`)
         }
-        if(!window.__push_flag) {
-        	window.__push_flag = true;
-	        history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
+        if (!window.__push_flag) {
+            window.__push_flag = true;
+            history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
         }
     }
 };
@@ -181,13 +181,13 @@ $FW.DOMReady(function () {
     if (Filter.options.searchSourceType == 1) {
         title = '我可兑换';
     }
-   else if(Filter.options.searchSourceType == 2){
+    else if (Filter.options.searchSourceType == 2) {
         title = '豆哥周边';
     }
-   else if(Filter.options.searchSourceType == 3){
+    else if (Filter.options.searchSourceType == 3) {
         title = '工场券';
     }
-   else{
+    else {
         title = '商品列表';
     }
     //Filter.options.searchSourceType = Filter.options.searchSourceType || '';

@@ -10,7 +10,7 @@ const MyBankCard = React.createClass({
         return (
             <div className="detail-box">
                 <div onClick={this.addCardHandler} className="add_card" style={{zIndex:"10"}}></div>
-                {this.props.bankCards.map((card,index) => <CardList key={index}  bankCard={card}/>)}
+                {this.props.bankCards.map((card, index) => <CardList key={index} bankCard={card}/>)}
             </div>
         )
     }
@@ -29,19 +29,19 @@ const CardList = React.createClass({
         })
     },
     render: function () {
-        let r=this.props.bankCard.bankName;
+        let r = this.props.bankCard.bankName;
         var cardImg =
-            r=="中国银行" ? "images/zg.png"
-                : r=="工商银行" ? "images/gs.png"
-                : r=="农业银行" ? "images/ny.png"
-                : r=="建设银行" ? "images/js.png"
-                : r=="平安银行" ? "images/pa.png"
-                : r=="兴业银行" ? "images/xy.png"
-                : r=="光大银行" ? "images/gd.png"
-                : r=="浦发银行" ? "images/pf.png"
-                : r=="华兴银行" ? "images/hx.png"
-                : r=="北京银行" ? "images/bj.png"
-                : r=="中信银行" ? "images/zx.png"
+            r == "中国银行" ? "images/zg.png"
+                : r == "工商银行" ? "images/gs.png"
+                : r == "农业银行" ? "images/ny.png"
+                : r == "建设银行" ? "images/js.png"
+                : r == "平安银行" ? "images/pa.png"
+                : r == "兴业银行" ? "images/xy.png"
+                : r == "光大银行" ? "images/gd.png"
+                : r == "浦发银行" ? "images/pf.png"
+                : r == "华兴银行" ? "images/hx.png"
+                : r == "北京银行" ? "images/bj.png"
+                : r == "中信银行" ? "images/zx.png"
                 : "images/gf.png";
 
         var bgColor = 'my-bank-card bankColor1';
@@ -76,9 +76,9 @@ const CardList = React.createClass({
 
 $FW.DOMReady(function () {
 
-     ReactDOM.render(<Header title={"我的银行卡"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"我的银行卡"}/>, HEADER_NODE);
 
-     $FW.Ajax({
+    $FW.Ajax({
         url: `${API_PATH}/mall/api/payment/v1/bank_card_list.json`,
         enable_loading: true
     }).then(data => ReactDOM.render(<MyBankCard bankCards={data.bankCards}/>, CONTENT_NODE));

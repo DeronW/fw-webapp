@@ -69,7 +69,7 @@ const AddBankCard = React.createClass({
 });
 
 $FW.DOMReady(function () {
-        ReactDOM.render(<Header title={"添加银行卡"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"添加银行卡"}/>, HEADER_NODE);
     ReactDOM.render(<AddBankCard/>, CONTENT_NODE);
 });
 
