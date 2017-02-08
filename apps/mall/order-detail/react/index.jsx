@@ -288,11 +288,11 @@ $FW.DOMReady(function () {
         },
         enable_loading: true,
         success: function (data) {
-            ReactDOM.render(<OrderDetail {...data}/>, document.getElementById("cnt"));
+            ReactDOM.render(<OrderDetail {...data}/>, CONTENT_NODE);
         }
     });
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"订单详情"} />, document.getElementById('header'));
+        ReactDOM.render(<Header title={"订单详情"} />, HEADER_NODE);
     }
 });
 

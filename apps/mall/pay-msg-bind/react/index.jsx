@@ -161,10 +161,9 @@ const SendCode = React.createClass({
 });
 
 $FW.DOMReady(function() {
-    NativeBridge.setTitle('手机验证码');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"手机验证码"} back_handler={backward}/>, document.getElementById('header'));
-    ReactDOM.render(<SendCode/>, document.getElementById('cnt'));
+        ReactDOM.render(<Header title={"手机验证码"} back_handler={backward}/>, HEADER_NODE);
+    ReactDOM.render(<SendCode/>, CONTENT_NODE);
 });
 
 function backward() {

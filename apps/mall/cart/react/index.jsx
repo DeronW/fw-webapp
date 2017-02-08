@@ -8,15 +8,11 @@ function getNextElement(node) {
     return null;
 }
 
-function gotoHandler(link, need_login) {
+function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
         location.href = encodeURI(link);
-    }
 }
 
 const ShoppingCart = React.createClass({

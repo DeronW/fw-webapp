@@ -290,11 +290,10 @@ Recharge.ProductPanel = React.createClass({
 
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('充值中心');
     if ($FW.Utils.shouldShowHeader())
         ReactDOM.render(
 			<Header title={"充值中心"} back_handler={backward}/>,
-            document.getElementById('header')
+            HEADER_NODE
 		)
 
     $FW.Ajax({
@@ -302,7 +301,7 @@ $FW.DOMReady(function () {
         enable_loading: true,
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
-                document.getElementById('cnt'));
+                CONTENT_NODE);
         }
     });
     window.confirmPanel = ReactDOM.render(<ConfirmPop />, document.getElementById('dialog'));

@@ -75,10 +75,8 @@ const CardList = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('我的银行卡');
-
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"我的银行卡"} back_handler={back_handler}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"我的银行卡"} back_handler={back_handler}/>, HEADER_NODE);
     }
 
     $FW.Ajax({

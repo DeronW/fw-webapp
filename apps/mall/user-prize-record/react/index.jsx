@@ -59,6 +59,6 @@ $FW.DOMReady(function () {
     var title =  '中奖记录';
     NativeBridge.setTitle(title);
     if ($FW.Utils.shouldShowHeader())
-    ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
-    ReactDOM.render(<MyPrizeRecord />, document.getElementById('cnt'))
+    ReactDOM.render(<Header title={title}/>, HEADER_NODE);
+    ReactDOM.render(<MyPrizeRecord />, CONTENT_NODE)
 });

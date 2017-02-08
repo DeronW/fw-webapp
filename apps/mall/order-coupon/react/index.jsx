@@ -31,9 +31,8 @@ const Coupon = React.createClass({
 
 
 $FW.DOMReady(function() {
-    NativeBridge.setTitle('查看券码');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"查看券码"} back_handler={back_handler}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"查看券码"} back_handler={back_handler}/>, HEADER_NODE);
     var query = $FW.Format.urlQuery();
     $FW.Ajax({
         url: API_PATH + "mall/api/order/v1/viewCardPass.json",
@@ -44,7 +43,7 @@ $FW.DOMReady(function() {
         },
         success: function (data) {
             console.log(data);
-            ReactDOM.render(<Coupon data={data}/>, document.getElementById('cnt'));
+            ReactDOM.render(<Coupon data={data}/>, CONTENT_NODE);
         }
     });
 });

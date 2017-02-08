@@ -140,16 +140,15 @@ const Voucher = React.createClass({
 });
 
 $FW.DOMReady(function() {
-    NativeBridge.setTitle('兑换券');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"兑换券"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"兑换券"} back_handler={backward}/>, HEADER_NODE);
     $FW.Ajax({
         //url: API_PATH + 'mall/api/member/v1/user.json',
         url:`${API_PATH}mall/api/member/v1/user.json`,
         enable_loading: true,
         success: function (data) {
             console.log(data)
-            ReactDOM.render(<HomePage {...data}/>, document.getElementById('cnt'));
+            ReactDOM.render(<HomePage {...data}/>, CONTENT_NODE);
         }
     });
 });

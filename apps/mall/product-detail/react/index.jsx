@@ -1,12 +1,8 @@
-function gotoHandler(link, need_login) {
+function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
+        location.href = encodeURIComponen(link);
 }
 const Product = React.createClass({
     getInitialState: function () {
@@ -201,7 +197,7 @@ const PlusMinus = React.createClass({
             '/static/mall/order-confirm/index.html?productBizNo=' + bizNo + '&count=' + this.state.value;
 
         if (!this.props.is_login) {
-            $FW.Browser.inApp() ? NativeBridge.goto(link, true) : location.href = link
+            $FW.Browser.inApp() ? NativeBridge.goto(link) : location.href = link
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
@@ -261,12 +257,11 @@ const PlusMinus = React.createClass({
         }
 
         let bizNo = $FW.Format.urlQuery().bizNo;
-        let link = location.protocol + '//' + location.hostname +
-            '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
+        let link = '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
 
         let isCanBuy = this.props.isCanBuy;
         console.log(this.props.stock)
-        gotoHandler(link, true);
+        gotoHandler(link);
 
         /*
         if (this.props.is_login==1) {

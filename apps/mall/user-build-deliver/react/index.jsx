@@ -219,13 +219,11 @@ const Address = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('新建收货地址');
-
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"新建收货地址"} back_handler={back_handler}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"新建收货地址"} back_handler={back_handler}/>, HEADER_NODE);
     }
 
-    ReactDOM.render(<Address />, document.getElementById('cnt'));
+    ReactDOM.render(<Address />, CONTENT_NODE);
 });
 
 function back_handler() {

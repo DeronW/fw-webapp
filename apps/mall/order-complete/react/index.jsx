@@ -1,12 +1,8 @@
-function gotoHandler(link, need_login) {
+function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
         location.href = encodeURI(link);
-    }
 }
 const Success = React.createClass({
     backToMallHandler: function () {
@@ -51,6 +47,6 @@ $FW.DOMReady(function () {
     let status = query.status;
     let title;
     if(status=="F"){ title ="支付失败" }  if(status=="S"){ title ="交易成功" }
-    ReactDOM.render(<Success />, document.getElementById('cnt'));
-    ReactDOM.render(<Header title={title} show_back_btn={false}/>, document.getElementById('header'));
+    ReactDOM.render(<Success />, CONTENT_NODE);
+    ReactDOM.render(<Header title={title} show_back_btn={false}/>, HEADER_NODE);
 });

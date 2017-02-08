@@ -199,8 +199,8 @@ $FW.DOMReady(function () {
     } else {
         NativeBridge.setTitle(title);
         if ($FW.Utils.shouldShowHeader())
-            ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
+            ReactDOM.render(<Header title={title}/>, HEADER_NODE);
     }
 
-    window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
+    window._ResultPage = ReactDOM.render(<ResultPage/>, CONTENT_NODE);
 });

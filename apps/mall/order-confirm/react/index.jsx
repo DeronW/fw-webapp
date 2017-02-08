@@ -193,7 +193,6 @@ const ConfirmOrder = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('确认订单');
 
     var query = $FW.Format.urlQuery();
     let cartFlag = query.cartFlag;
@@ -230,7 +229,7 @@ $FW.DOMReady(function () {
         />, CONTENT_NODE);
     })
 
-     ReactDOM.render(<Header title={"确认订单"}/>, document.getElementById('header'));
+     ReactDOM.render(<Header title={"确认订单"}/>, HEADER_NODE);
 });
 
 //window.onNativeMessageReceive = function (msg) {

@@ -262,7 +262,7 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle('VIP专区');
 
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, HEADER_NODE);
 
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/user_level_points.json",
@@ -274,7 +274,7 @@ $FW.DOMReady(function () {
             }
         }
     });
-    ReactDOM.render(<VipZone/>, document.getElementById('cnt'));
+    ReactDOM.render(<VipZone/>, CONTENT_NODE);
 });
 
 function backward() {

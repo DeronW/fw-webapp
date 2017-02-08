@@ -25,11 +25,11 @@ const HotActivity = React.createClass({
 $FW.DOMReady(function(){
     NativeBridge.setTitle('热门活动');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"热门活动"}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"热门活动"}/>, HEADER_NODE);
     $FW.Ajax({
         url: `${API_PATH}mall/api/index/v1/activities.json`,//热门活动
         success: (data) => {
-            ReactDOM.render(<HotActivity data={data} />, document.getElementById('cnt'));
+            ReactDOM.render(<HotActivity data={data} />, CONTENT_NODE);
         }
     });
 });

@@ -270,8 +270,6 @@ const ConfAlert = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('订单列表');
-
     $FW.Ajax({
         //url: `./order_list.json`,
         url: `${API_PATH}mall/api/member/v1/order_list.json`,

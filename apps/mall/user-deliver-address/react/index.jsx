@@ -74,8 +74,6 @@ const DeliverAddress = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('我的收货地址');
-
     $FW.Component.showAjaxLoading();
     $FW.Ajax({
         url: API_PATH + 'mall/api/member/v1/delivery_address.json',
@@ -89,7 +87,7 @@ $FW.DOMReady(function () {
     });
 
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"我的收货地址"} back_handler={back_handler}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"我的收货地址"} back_handler={back_handler}/>, HEADER_NODE);
     }
 });
 

@@ -15,10 +15,9 @@ const Bill = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('账单');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"账单"} back_handler={backward}/>, document.getElementById('header'));
-    ReactDOM.render(<Bill/>, document.getElementById('cnt'));
+        ReactDOM.render(<Header title={"账单"} back_handler={backward}/>, HEADER_NODE);
+    ReactDOM.render(<Bill/>, CONTENT_NODE);
 });
 
 function backward() {

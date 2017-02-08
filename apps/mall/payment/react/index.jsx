@@ -145,7 +145,7 @@ const Payment = React.createClass({
 $FW.DOMReady(function () {
     NativeBridge.setTitle('订单结算');
     if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"订单结算"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"订单结算"} back_handler={backward}/>, HEADER_NODE);
 
 
     $FW.Ajax({
@@ -153,7 +153,7 @@ $FW.DOMReady(function () {
         //url: './bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
         enable_loading: true,
         success: function (data) {
-            ReactDOM.render(<Payment data={data.bankCards}/>, document.getElementById('cnt'));
+            ReactDOM.render(<Payment data={data.bankCards}/>, CONTENT_NODE);
         }
     })
 });
