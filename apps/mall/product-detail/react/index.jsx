@@ -2,7 +2,7 @@ function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
-    location.href = encodeURIComponent(link);
+    location.href = encodeURI(link);
 }
 const Product = React.createClass({
     getInitialState: function () {
