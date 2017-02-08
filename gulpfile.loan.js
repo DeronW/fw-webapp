@@ -32,11 +32,15 @@ const BILL_PAGES = [
 
 // 申请借款模块
 const APPLY_PAGES = [
-    // 'apply-loan', //借款首页 改名叫home了
     'apply-want-loan', //我要借款页面
     'apply-confirm-loan', //确认借款页面
-    'apply-service-agreement', //芥末借款页面
-    'apply-withhold-service-agreement' //芥末借款服务协议页面
+]
+
+// 借款服务协议页面
+const PROTOCOL_PAGES = [
+    'protocol-cost', // 代扣协议
+    'protocol-register', // APP注册协议
+    'protocol-borrowing', // 借款服务协议
 ]
 
 const DEVELOPING_PAGES = [
@@ -50,6 +54,7 @@ APP_NAMES.push(
     ...BILL_PAGES,
     ...APPLY_PAGES,
     ...APP_NAMES,
+    ...PROTOCOL_PAGES,
     ...DEVELOPING_PAGES
 )
 
