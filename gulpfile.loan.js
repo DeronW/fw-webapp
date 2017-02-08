@@ -41,6 +41,7 @@ const PROTOCOL_PAGES = [
     'protocol-cost', // 代扣协议
     'protocol-register', // APP注册协议
     'protocol-borrowing', // 借款服务协议
+    'protocol-partner', // 借款协议双方
 ]
 
 const DEVELOPING_PAGES = [
