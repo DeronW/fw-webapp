@@ -86,12 +86,8 @@ const Help = React.createClass({
 
 
 $FW.DOMReady(function () {
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"帮助中心"} back_handler={backward}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"帮助中心"}/>, HEADER_NODE);
 
     ReactDOM.render(<Help/>, CONTENT_NODE);
 });
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/user/index.html';
-}

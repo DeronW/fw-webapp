@@ -69,11 +69,7 @@ const AddBankCard = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"添加银行卡"} back_handler={backward}/>, HEADER_NODE);
+        ReactDOM.render(<Header title={"添加银行卡"}/>, HEADER_NODE);
     ReactDOM.render(<AddBankCard/>, CONTENT_NODE);
 });
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/pay-bank-card/index.html';
-}

@@ -182,8 +182,8 @@ const SendCode = React.createClass({
 
 
 $FW.DOMReady(function () {
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"手机验证码"} back_handler={backward}/>, HEADER_NODE);
+
+    ReactDOM.render(<Header title={"手机验证码"}/>, HEADER_NODE);
     ReactDOM.render(<SendCode/>, CONTENT_NODE);
 });
 

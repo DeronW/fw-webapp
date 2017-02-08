@@ -64,6 +64,7 @@ const Service = React.createClass({
 });
 
 $FW.DOMReady(function() {
-    NativeBridge.setTitle('生活服务');
+
+    ReactDOM.render(<Header title={"生活服务"}/>, HEADER_NODE);
     ReactDOM.render(<Service/>, CONTENT_NODE);
 });

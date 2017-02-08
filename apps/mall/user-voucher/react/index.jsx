@@ -1,5 +1,5 @@
 const HomePage = React.createClass({
-    render : function(){
+    render: function () {
         return (
             <div>
                 <MyVoucher cxchangeCert={this.props.exchange_cert}/>
@@ -117,7 +117,8 @@ const Voucher = React.createClass({
             <span>&yen;{$FW.Format.currency(data.price)}</span> : null;
 
         return (
-            <div className={ this.props.state == "used" || this.props.state == "dated" ? "my-voucher-cont-list gray-bg" : "my-voucher-cont-list color-bg"}>
+            <div
+                className={ this.props.state == "used" || this.props.state == "dated" ? "my-voucher-cont-list gray-bg" : "my-voucher-cont-list color-bg"}>
                 <a href={ (this.props.state == 'used' || this.props.state == 'dated') ? 'javascript:void(0)' : '/static/mall/product-detail/index.html?bizNo=' + data.product_biz_no}>
                     <div className={gray_bg ? "t-info b-color" : "t-info"}>
                         <div className="title-info">
@@ -139,12 +140,11 @@ const Voucher = React.createClass({
     }
 });
 
-$FW.DOMReady(function() {
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"兑换券"} back_handler={backward}/>, HEADER_NODE);
+$FW.DOMReady(function () {
+    ReactDOM.render(<Header title={"兑换券"}/>, HEADER_NODE);
     $FW.Ajax({
         //url: API_PATH + 'mall/api/member/v1/user.json',
-        url:`${API_PATH}mall/api/member/v1/user.json`,
+        url: `${API_PATH}mall/api/member/v1/user.json`,
         enable_loading: true,
         success: function (data) {
             console.log(data)
@@ -152,7 +152,3 @@ $FW.DOMReady(function() {
         }
     });
 });
-
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/user/index.html';
-}

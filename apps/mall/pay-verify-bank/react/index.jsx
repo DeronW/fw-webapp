@@ -136,11 +136,8 @@ const BankInfo = React.createClass({
 });
 
 $FW.DOMReady(function() {
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"验证银行卡信息"} back_handler={backward}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"验证银行卡信息"}/>, HEADER_NODE);
+
     ReactDOM.render(<BankInfo/>, CONTENT_NODE);
 });
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/pay-add-card/index.html';
-}

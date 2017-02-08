@@ -75,22 +75,13 @@ const CardList = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"我的银行卡"} back_handler={back_handler}/>, HEADER_NODE);
-    }
 
-    $FW.Ajax({
+     ReactDOM.render(<Header title={"我的银行卡"}/>, HEADER_NODE);
+
+     $FW.Ajax({
         url: `${API_PATH}/mall/api/payment/v1/bank_card_list.json`,
         enable_loading: true
     }).then(data => ReactDOM.render(<MyBankCard bankCards={data.bankCards}/>, CONTENT_NODE));
 });
 
-function back_handler() {
-    var query = $FW.Format.urlQuery();
-    if (query.id == 'user') {
-        location.href = '/static/mall/user/index.html'
-    }
-    else {
-        history.back();
-    }
-}
+

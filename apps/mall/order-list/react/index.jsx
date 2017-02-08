@@ -81,10 +81,10 @@ const OrderList = React.createClass({
 });
 
 const OrderBlock = React.createClass({
-    clickPay: function (orderTime,orderNo, groupNo) {
+    clickPay: function (orderTime, orderNo, groupNo) {
         let FormData = {
             orderTime: orderTime,
-            orderBizNo: orderNo ,
+            orderBizNo: orderNo,
             orderGroupBizNo: groupNo
         };
 
@@ -98,7 +98,7 @@ const OrderBlock = React.createClass({
                     '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
                     '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo +
                     '&totalShouldPayPrice=' + result.totalShouldPayPrice
-             }
+            }
         });
     },
 
@@ -111,7 +111,7 @@ const OrderBlock = React.createClass({
     },
     gotoDetail: function (index) {
         let order = this.props.order;
-        location.href='/static/mall/order-detail/index.html?bizNo=' + order.bizNo+'&cardUuid='+order.cardUuid+'&orderId='+order.orderId
+        location.href = '/static/mall/order-detail/index.html?bizNo=' + order.bizNo + '&cardUuid=' + order.cardUuid + '&orderId=' + order.orderId
     },
     render: function () {
         let pay_color = {
@@ -156,7 +156,7 @@ const OrderBlock = React.createClass({
         let product_item = function (product, index) {
 
             return (
-                <a  key={index}>
+                <a key={index}>
                     <div className="t-info">
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
@@ -186,7 +186,10 @@ const OrderBlock = React.createClass({
         let sendOrderNo = order.sendOrderNo;
         let sendChannel = order.sendChannel;
         let sendChannelEnum = order.sendChannelEnum;
-        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
+        let check_link = order.sendOrderNo ? <a className="link-btn"
+                                                href={'/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ?
+            <a className="link-btn"
+               href={'/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
 
         return (
             <div className="order-block" onClick={this.gotoDetail}>
@@ -210,7 +213,9 @@ const OrderBlock = React.createClass({
                         {check_link}
                     </div>
                     {order.status == "pay" ? <div className="pay-order">
-                        <div className="btn-pay" onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo)}>立即支付</div>
+                        <div className="btn-pay"
+                             onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo)}>立即支付
+                        </div>
                         <div className="btn-cancel"
                              onClick={this.clickCancel.bind(this,order.bizNo,order.orderGroupBizNo)}>取消订单
                         </div>
@@ -280,9 +285,5 @@ $FW.DOMReady(function () {
     })
 
 
-    ReactDOM.render(<Header title={"我的订单"} back_handler={back_handler}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"我的订单"}/>, HEADER_NODE);
 });
-
-function back_handler() {
-    location.href = '/static/mall/user/index.html';
-}

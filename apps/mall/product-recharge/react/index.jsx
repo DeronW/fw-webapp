@@ -290,11 +290,7 @@ Recharge.ProductPanel = React.createClass({
 
 
 $FW.DOMReady(function () {
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(
-			<Header title={"充值中心"} back_handler={backward}/>,
-            HEADER_NODE
-		)
+        ReactDOM.render(<Header title={"充值中心"}/>,HEADER_NODE)
 
     $FW.Ajax({
         url: API_PATH + 'api/v1/user-state.json',
@@ -307,7 +303,3 @@ $FW.DOMReady(function () {
     window.confirmPanel = ReactDOM.render(<ConfirmPop />, document.getElementById('dialog'));
 });
 
-
-function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html';
-}
