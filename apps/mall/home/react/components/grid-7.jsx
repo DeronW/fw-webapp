@@ -8,19 +8,21 @@ const Grid_7 = React.createClass({
         let theme4_top_product_item = (product, index) => {
             return (
                 <a className="theme4-top-product-item" key={index}
-                   onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + product.bizNo)}>
+                    href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
                     <span
-                        className={"theme4-top-product-title theme4-top-product-title-color"+parseInt(index+1)}>{product.abbreviation}</span>
-                    <span
-                        className="theme4-top-product-price">{product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice + "+"}{product.score}工分</span>
-                    <span className={"horizon-line theme4-top-line-color"+parseInt(index+1)}></span>
-                    <img className="theme4-top-product-img" src={product.img}/>
+                        className={"theme4-top-product-title theme4-top-product-title-color" + parseInt(index + 1)}>
+                        {product.abbreviation}</span>
+                    <span className="theme4-top-product-price">
+                        {product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice + "+"}
+                        {product.score}工分</span>
+                    <span className={"horizon-line theme4-top-line-color" + parseInt(index + 1)}></span>
+                    <img className="theme4-top-product-img" src={product.img} />
                 </a>
             )
         };
         return (
             <div className="theme-4">
-                <a href="" className="activity-theme"><img src="static/mall/product-list/images/mobileDigital.jpg"/></a>
+                <a href="" className="activity-theme"><img src="static/mall/product-list/images/mobileDigital.jpg" /></a>
                 <div className="theme4-product-wrap">
                     <div className="theme4-top-product-list">
                         {this.state.ps.slice(0, 4).map(theme4_top_product_item)}
@@ -28,8 +30,8 @@ const Grid_7 = React.createClass({
                     <div className="theme4-btm-product-list">
                         <div className="theme4-btm-left-product-item">
                             <a className="theme4-btm-left-product-wrap"
-                               onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[4].bizNo)}>
-                                <img className="theme4-btm-product-img" src={this.state.ps[4].img}/>
+                                href={`/static/mall/product-detail/index.html?bizNo=${this.state.ps[4].bizNo}`}>
+                                <img className="theme4-btm-product-img" src={this.state.ps[4].img} />
                                 <span
                                     className="theme4-btm-product-title theme4-btm-product-title-color1">{this.state.ps[4].abbreviation}</span>
                                 <span
@@ -40,10 +42,10 @@ const Grid_7 = React.createClass({
                         </div>
                         <div className="theme4-btm-middle-product-wrap">
                             <a className="theme4-btm-middle-product-item"
-                               onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[5].bizNo)}>
+                                onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[5].bizNo)}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
-                                        <img className="theme4-btm-product-img" src={this.state.ps[5].img}/>
+                                        <img className="theme4-btm-product-img" src={this.state.ps[5].img} />
                                     </div>
                                     <div className="theme4-btm-middle-top-info">
                                         <span
@@ -56,10 +58,10 @@ const Grid_7 = React.createClass({
                                 </div>
                             </a>
                             <a className="theme4-btm-middle-product-item"
-                               onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[6].bizNo)}>
+                                onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[6].bizNo)}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
-                                        <img className="theme4-btm-product-img" src={this.state.ps[6].img}/>
+                                        <img className="theme4-btm-product-img" src={this.state.ps[6].img} />
                                     </div>
                                     <div className="theme4-btm-middle-top-info">
                                         <span
@@ -73,11 +75,11 @@ const Grid_7 = React.createClass({
                             </a>
                         </div>
                         <div className="theme4-btm-right-product-wrap">
-                            <a onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[7].bizNo)}>
-                                <img className="theme4-btm-product-img" src={this.state.ps[7].img}/>
+                            <a onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[7].bizNo)}>
+                                <img className="theme4-btm-product-img" src={this.state.ps[7].img} />
                             </a>
-                            <a onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[7].bizNo)}>
-                                <img className="theme4-btm-product-img" src={this.state.ps[7].img}/>
+                            <a onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[7].bizNo)}>
+                                <img className="theme4-btm-product-img" src={this.state.ps[7].img} />
                             </a>
                         </div>
                     </div>

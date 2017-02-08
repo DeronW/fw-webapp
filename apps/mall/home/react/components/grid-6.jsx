@@ -8,15 +8,16 @@ const Grid_6 = React.createClass({
         let theme_product_item = (product, index) => {
             return (
                 <a className="theme-product-item" key={index}
-                   onClick={ () => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + product.bizNo)}>
-                    <img className="theme-1-img" src={product.img}/>
+                    href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
+                    <img className="theme-1-img" src={product.img} />
                     <span className="theme-product-item-name">{product.abbreviation}</span>
                 </a>
             )
         };
         return (
             <div className="theme-1">
-                <a href="" className="activity-theme"><img src="static/mall/product-list/images/outdoor.jpg"/></a>
+                <a className="activity-theme">
+                    <img src="static/mall/product-list/images/outdoor.jpg" /></a>
                 <div className="theme-product-wrap">
                     {this.state.ps.map(theme_product_item)}
                 </div>

@@ -7,8 +7,11 @@ function gotoHandler(link, need_login) {
     // } else {
     //     location.href = encodeURI(link);
     // }
-    location.
-        href = encodeURI(link);
+    location.href = encodeURI(link);
+}
+
+function productLink(bizNo) {
+    return `/static/mall/product-detail/index.html?bizNo=${bizNo}`
 }
 
 const Mall = React.createClass({
@@ -85,7 +88,7 @@ const Mall = React.createClass({
                 <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
                     <div style={head_nav_wrap} className="head_nav_wrap">
                         <img className="m-logo" src={this.state.logoImage} />
-                        <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false)}
+                        <a href="/static/mall/product-list/index.html?searchSourceType=2"
                             className="search-bar-a">
                             <img className="search-icon" src="images/search-icon.png" />
                             <div className="search-bar">请输入关键字</div>
@@ -95,22 +98,23 @@ const Mall = React.createClass({
                     </div>
                 </div>
                 <div className="head-nav">
-                    <a onClick={() => gotoHandler("/static/mall/product-vip-zone/index.html")}><img
-                        src="images/nav-1.png" /><span>VIP专区</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=2")}><img
-                        src="images/nav-2.png" /><span>豆哥周边</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=3")}><img
-                        src="images/nav-3.png" /><span>工场券</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-hot-activity/index.html", true)}><img
-                        src="images/nav-4.png" /><span>热门活动</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=1", true)}><img
-                        src="images/nav-5.png" /><span>充话费</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=2", true)}><img
-                        src="images/nav-6.png" /><span>充流量</span><span className="hot-tag"></span></a>
-                    <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true", true)}><img
-                        src="images/nav-7.png" /><span>游戏中心</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
-                        src="images/nav-8.png" /><span>我可兑换</span></a>
+                    <a href="/static/mall/product-vip-zone/index.html">
+                        <img src="images/nav-1.png" /><span>VIP专区</span></a>
+                    <a href="/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=2">
+                        <img src="images/nav-2.png" /><span>豆哥周边</span></a>
+                    <a href="/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=3">
+                        <img src="images/nav-3.png" /><span>工场券</span></a>
+                    <a href="/static/mall/product-hot-activity/index.html">
+                        <img src="images/nav-4.png" /><span>热门活动</span></a>
+                    <a href="/static/mall/product-recharge/index.html?tab=1">
+                        <img src="images/nav-5.png" /><span>充话费</span></a>
+                    <a href="/static/mall/product-recharge/index.html?tab=2">
+                        <img src="images/nav-6.png" /><span>充流量</span>
+                        <span className="hot-tag"></span></a>
+                    <a href="/static/mall/game/index.html?mallHead=true">
+                        <img src="images/nav-7.png" /><span>游戏中心</span></a>
+                    <a href="/static/mall/product-list/index.html?searchSourceType=1">
+                        <img src="images/nav-8.png" /><span>我可兑换</span></a>
                 </div>
                 <div id="HotProducts"></div>
                 <div id="NewProducts" className="hide"></div>
