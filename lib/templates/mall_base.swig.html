@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
-    {% include 'partial/fix-viewport.html' %}
+    {% if DEBUG %} {% include 'partial/fix-viewport.html' %} {% endif %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no"/>
     <meta name="screen-orientation" content="portrait">
