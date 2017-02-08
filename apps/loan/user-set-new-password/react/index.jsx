@@ -43,7 +43,7 @@ const Register = React.createClass({
 
 		this.setState({
 			codeBoolean: true,
-			countdown: 5
+			countdown: 60
 		});
 
 		$FW.Ajax({
