@@ -16,6 +16,7 @@ const USER_PAGES = [
     'user-set-new-password',
     'user', //我
     'user-set-cash-card',//设置提现卡
+    'user-add-cash-card',//添加提现卡
     'user-verify-phone', //获取验证码
     'user-bank-support',//支持银行卡
 	'user-bank-management',//银行卡管理

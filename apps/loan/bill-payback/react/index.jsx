@@ -1,3 +1,7 @@
+function gotoHandler(link) {
+    location.href = encodeURI(link);
+}
+
 const PayBackWrap = React.createClass({
     getInitialState:function(){
         let cashBank = this.props.userBankList.withdrawBankcard;
@@ -125,7 +129,7 @@ const BankCardList = React.createClass({
                 <div className="header">
                     <div className="arrow-left" onClick={this.backHandler}></div>
                     <div className="title">选择还款卡</div>
-                    <div className="history-bill">添加</div>
+                    <div className="history-bill" onClick={()=>gotoHandler('/static/loan/user-add-cash-card/index.html')}>添加</div>
                 </div>
                 <div className="bank-branch-list">
                     {this.props.bankList.map(list_item)}
@@ -197,7 +201,7 @@ const VerifyCode = React.createClass({
                     <div className="verify-popup-wrap">
                          <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                          <div className="verify-popup-title">短信验证</div>
-                         <div className="verify-popup-tip"> 已向尾号（{this.state.phoneNum ? this.state.phoneNum.slice(-4): null}）发送短信验证码。</div>
+                         <div className="verify-popup-tip"> 已向尾号（{localStorage.phone.slice(-4)}）发送短信验证码。</div>
                          <div className="verify-input">
                              <input className="sms-input" type="number" name="number" value={this.state.value} placeholder="输入验证码" onChange={this.changeValueHandler}/>
                              <span className="btn-countdown" onClick={this.getSMSCode}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>

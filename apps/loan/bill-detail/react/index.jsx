@@ -11,7 +11,7 @@ const Detail = React.createClass({
                  <div className="loan-detail-box">
                      <div>
                          <span>到期还款日</span>
-                         <span>{this.props.data.dueTime}</span>
+                         <span>{this.props.data.dueTimeStr}</span>
                      </div>
                      <div>
                          <span>待还本金</span>
@@ -35,7 +35,7 @@ const Detail = React.createClass({
                 <div className="loan-detail-box">
                     <div>
                         <span>借款时间</span>
-                        <span>{this.props.data.transactionTime}</span>
+                        <span>{this.props.data.loanTimeStr}</span>
                     </div>
                 </div>
                 {loanStatus == 4 || loanStatus == 5 ? <div className="pay-back-btn">立即还款</div> : null}

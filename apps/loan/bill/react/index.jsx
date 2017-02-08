@@ -23,18 +23,21 @@ const Bill = React.createClass({
     render: function () {
         let bill_item = (item, index) => {
             return (
-                <div className="bill-item" key={index} onClick={() => gotoHandler(`/static/loan/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`)}>
-                    <div className="bill-detail">
-                        <div className="bill-detail-wrap">
-                            <span className="bill-money">{item.loanLeftAmount}</span>
-                            {item.exceedDays > 0 ? <span className="bill-status"></span> : null}
+                <div className="bill-item-wrap">
+                    <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/loan/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`) }>
+                        <div className="bill-detail">
+                            <div className="bill-detail-wrap">
+                                <span className="bill-money">{item.loanLeftAmount}</span>
+                                {item.exceedDays > 0 ? <span className="bill-status"></span>:null}
+                            </div>
+                            <span className="bill-deadline">{item.dueTimeStr}到期</span>
                         </div>
-                        <span className="bill-deadline">{item.dueTimeStr}到期</span>
                     </div>
                     <div className="pay-back-btn-wrap">
                         {item.status == 0 ? <div className="pay-back-btn-status1">打款中</div> : <div className="pay-back-btn-status2" onClick={() => gotoHandler(`/static/loan/bill-payback/index.html?deductionGid=${item.deductionGid}&loanGid=${item.loanGid}&loanType=${item.loanType}`)}>还款</div>}
                     </div>
                 </div>
+
             )
         };
 

@@ -44,7 +44,7 @@ const BankList = React.createClass({
 						})
 					}
                 </div>
-                <a className="know-btn" href={'/static/loan/user-set-cash-card/index.html'}>我知道了</a>
+                <div className="know-btn" onClick={()=>{window.history.back()}}>我知道了</div>
             </div>
         )
     }

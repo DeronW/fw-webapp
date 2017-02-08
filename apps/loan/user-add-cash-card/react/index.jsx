@@ -127,6 +127,7 @@ const SetCashCard = React.createClass({
 					sourceType: 3
 				}
 			}).then((data) => {
+			    console.log(data)
 				this.setState({
 					cardinfoBankName: data.cardInfo.bankName,
 					cardinfoLogoUrl: data.cardInfo.logoUrl,
@@ -169,15 +170,9 @@ const SetCashCard = React.createClass({
 		});
 	},
 	handlerNext() {
-        if(this.state.name == '') {
-			$FW.Component.Toast("姓名不能为空");
-		} else if(this.state.name.length > 20) {
-			$FW.Component.Toast("姓名不能超过20个字符");
-		}else if (this.state.id == '') {
-			$FW.Component.Toast("身份证不能为空");
-		} else if(!isCardNo(this.state.id)) {
-			$FW.Component.Toast("身份证格式不对");
-		} else if (this.state.bankNum == '') {
+        console.log(this.state.bankNum);
+
+       if(this.state.bankNum == '') {
 			$FW.Component.Toast("储蓄卡不能为空");
 		} else if(space(this.state.bankNum).length > 19 || space(this.state.bankNum).length < 16) {
 			$FW.Component.Toast("储蓄卡格式不对");
@@ -188,19 +183,19 @@ const SetCashCard = React.createClass({
 		} else if(!this.state.selectClause) {
 			$FW.Component.Toast("请勾选代扣服务协议");
 		} else if(this.state.cardType == 1){
-            $FW.Component.Toast("请绑定借记卡");
-        } else if(this.state.canVerify == 0){
-            $FW.Component.Toast("该银行卡暂不支持绑定");
-        }else {
+           $FW.Component.Toast("请绑定借记卡");
+       } else if(this.state.canVerify == 0){
+           $FW.Component.Toast("该银行卡暂不支持绑定");
+       } else {
 			$FW.Ajax({
 				url: `${API_PATH}api/bankcard/v1/commitinfo.json`,
 				method: 'POST',
                 data: {
                     bankName: this.state.bankName,
-                    cardHolderName: this.state.name,
+                    //cardHolderName: this.state.name,
                     cardNo: space(this.state.bankNum),
                     cardType: this.state.cardType,
-                    idCard: this.state.id,
+                    //idCard: this.state.id,
                     mobile: this.state.phone,
                     operatorType: localStorage.userStatus,
                     token: localStorage.userToken,
@@ -208,12 +203,8 @@ const SetCashCard = React.createClass({
                     userId: localStorage.userId,
                     sourceType: 3
                 }
-
 			}).then((data) => {
-				let bankCardGid = data.bindBankInfo.bankCardGid;
-				let operatorBankcardGid = data.bindBankInfo.operatorBankcardGid;
-
-				window.location.href = `/static/loan/user-verify-phone/index.html?bankCardGid=${bankCardGid }&operatorBankcardGid=${operatorBankcardGid}`;
+				window.location.href = `/static/loan/user-bank-management/index.html`;
             },(error) => {
                 console.log(error);
             });
@@ -226,21 +217,6 @@ const SetCashCard = React.createClass({
 				{
 					this.state.withholdServerPop ? <WithholdServer getWithholdServerPop={this.callbackWithholdServerPop} /> : null
 				}
-				<div className="ui-froms">
-					<div className="list">
-						<span className="text">姓名</span>
-						<div className="input">
-							<input onChange={this.changeName} value={this.state.name} type="text" placeholder="请输入姓名" />
-						</div>
-					</div>
-					<div className="list">
-						<span className="text">身份证号</span>
-						<div className="input">
-							<input onChange={this.changeId} value={this.state.Id} type="text" placeholder="请输入身份证号码" />
-						</div>
-					</div>
-				</div>
-
 				<div className="ui-froms">
 					<div className="list prompt-list">
 						<span className="text">储蓄卡号</span>
@@ -279,7 +255,7 @@ const SetCashCard = React.createClass({
 				</div>
 
 				<div className="next-btn">
-					<div onClick={this.handlerNext} className="ui-btn">下一步</div>
+					<div onClick={this.handlerNext} className="ui-btn">确定</div>
 				</div>
 			</div>
 		)
@@ -288,6 +264,6 @@ const SetCashCard = React.createClass({
 
 
 
-ReactDOM.render(<Header title={"设置提现卡"}/>, document.getElementById('header'));
+ReactDOM.render(<Header title={"添加储蓄卡"}/>, document.getElementById('header'));
 
 ReactDOM.render(<SetCashCard />, document.getElementById('cnt'))
