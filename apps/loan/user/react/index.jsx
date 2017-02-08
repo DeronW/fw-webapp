@@ -135,9 +135,9 @@ const MyCnt = React.createClass({
 				</div>
 
 
-				<div className="my-btn">
+                {/*<div className="my-btn">
 					<div className="ui-btn">退出登录</div>
-				</div>
+				</div>*/}
 			</div>
 
 

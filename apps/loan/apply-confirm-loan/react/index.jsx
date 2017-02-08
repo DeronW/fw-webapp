@@ -11,32 +11,35 @@ const ConfirmLoanWrap = React.createClass({
         }
     },
     itemShow: function (val) {
-        this.setState({ itemShow: val });
+        this.setState({itemShow: val});
     },
     itemDetailHide: function (val) {
-        this.setState({ itemShow: val });
+        this.setState({itemShow: val});
     },
     getVerifyCodeShow: function (val) {
-        this.setState({ verifyCodeShow: val });
+        this.setState({verifyCodeShow: val});
     },
     closeHandler: function (booleanVal) {
-        this.setState({ verifyCodeShow: booleanVal });
+        this.setState({verifyCodeShow: booleanVal});
     },
     resultShow: function (booleanVal) {
-        this.setState({ loanResult: booleanVal });
+        this.setState({loanResult: booleanVal});
     },
     resultHide: function (booleanVal) {
-        this.setState({ loanResult: booleanVal });
+        this.setState({loanResult: booleanVal});
     },
     render: function () {
         return (
             <div>
-                <ConfirmLoan callbackItemShow={this.itemShow} callbackVerifyCodeShow={this.getVerifyCodeShow} accountInAmount
-                    ={this.props.accountInAmount} shouldRepaymentAmount={this.props.shouldRepaymentAmount} dueTime={this.props.dueTimeStr} totalFeeAmount={this.props.totalFeeAmount} />
-                {this.state.itemShow ? <ItemDetail callbackItemDetailHide={this.itemDetailHide} feeExtList={this.props.feeExtList} /> : null}
-                {this.state.verifyCodeShow ? <VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow} /> : null}
-                {this.state.loanResult ? <LoanResult callbackResultHide={this.resultHide} /> : null}
-
+                <ConfirmLoan callbackItemShow={this.itemShow} callbackVerifyCodeShow={this.getVerifyCodeShow}
+                             accountInAmount
+                                 ={this.props.accountInAmount} shouldRepaymentAmount={this.props.shouldRepaymentAmount}
+                             dueTime={this.props.dueTimeStr} totalFeeAmount={this.props.totalFeeAmount}/>
+                {this.state.itemShow ? <ItemDetail callbackItemDetailHide={this.itemDetailHide}
+                                                   feeExtList={this.props.feeExtList}/> : null}
+                {this.state.verifyCodeShow ?
+                    <VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow}/> : null}
+                {this.state.loanResult ? <LoanResult callbackResultHide={this.resultHide}/> : null}
             </div>
         )
     },
@@ -56,7 +59,7 @@ const ConfirmLoan = React.createClass({
         }
     },
     checkHandler: function () {
-        this.setState({ checked: !this.state.checked });
+        this.setState({checked: !this.state.checked});
     },
     detailHandler: function () {
         this.props.callbackItemShow(true);
@@ -87,8 +90,10 @@ const ConfirmLoan = React.createClass({
                     <span className="loan-right-arrow" onClick={this.detailHandler}>详情</span>
                 </div>
                 <div className="agreement-issue">
-                    <div className={this.state.checked ? "checked-box" : "unchecked-box"} onClick={this.checkHandler}></div>
-                    <div className="check-item">同意<a href="">《芥末借款服务协议》</a>、<a href="">《芥末借款协议》</a>，未按时还款将计入信用卡银行的信用报告</div>
+                    <div className={this.state.checked ? "checked-box" : "unchecked-box"}
+                         onClick={this.checkHandler}></div>
+                    <div className="check-item">同意<a href="">《芥末借款服务协议》</a>、<a href="">《芥末借款协议》</a>，未按时还款将计入信用卡银行的信用报告
+                    </div>
                 </div>
                 <div className="confirm-btn" onClick={this.confirmHandler}>确定</div>
             </div>
@@ -108,7 +113,9 @@ const Notice = React.createClass({
                 <div className="notice-pop">
                     <div className="notice-close"></div>
                     <div className="notice-title">逾期费用说明</div>
-                    <div className="notice-content">第三届互联网金融全球峰会北大论坛于4月19-21日在北京召开。近期，互联网金融行业风险频发，很多平台陷入兑付危机，在这样的大环境下，导致很多P2P平台开始逐渐退出市场。金融工场副总裁李建光在接受央广网财经记者的采访时指出，2016年是监管落地的元年，在监管的因素落地之前，一定会有一个大浪淘沙的过程，之前的爆发式野蛮增长的过程中，发展出来的平台里面必然会有沙子，但是总体上看，随着监管的落地，互联网金融行业的趋势一定是良币驱逐劣币。</div>
+                    <div className="notice-content">
+                        第三届互联网金融全球峰会北大论坛于4月19-21日在北京召开。近期，互联网金融行业风险频发，很多平台陷入兑付危机，在这样的大环境下，导致很多P2P平台开始逐渐退出市场。金融工场副总裁李建光在接受央广网财经记者的采访时指出，2016年是监管落地的元年，在监管的因素落地之前，一定会有一个大浪淘沙的过程，之前的爆发式野蛮增长的过程中，发展出来的平台里面必然会有沙子，但是总体上看，随着监管的落地，互联网金融行业的趋势一定是良币驱逐劣币。
+                    </div>
                     <div className="notice-btn">知道了</div>
                 </div>
             </div>
@@ -150,9 +157,18 @@ const VerifyCode = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/sendSmsverifycode.json`,
             method: "post",
-            data: { token: localStorage.userToken, userGid: localStorage.userGid, userId: localStorage.userId, sourceType: 3, productId: 1, orioleOrderGid: orioleOrderGid, loanAmount: loanNum, withdrawCardGid: withdrawCardGid }
+            data: {
+                token: localStorage.userToken,
+                userGid: localStorage.userGid,
+                userId: localStorage.userId,
+                sourceType: 3,
+                productId: 1,
+                orioleOrderGid: orioleOrderGid,
+                loanAmount: loanNum,
+                withdrawCardGid: withdrawCardGid
+            }
         }).then(data => {
-            this.setState({ phoneNum: data.mobile, orderGid: data.orderGid });
+            this.setState({phoneNum: data.mobile, orderGid: data.orderGid});
         }, (error) => console.log(error));
     },
     getSMSCode: function () {
@@ -162,7 +178,13 @@ const VerifyCode = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/loan/v1/resendverifycode.json`,
                 method: "post",
-                data: { token: localStorage.userToken, userGid: localStorage.userGid, userId: localStorage.userId, sourceType: 3, orderGid: this.state.orderGid }
+                data: {
+                    token: localStorage.userToken,
+                    userGid: localStorage.userGid,
+                    userId: localStorage.userId,
+                    sourceType: 3,
+                    orderGid: this.state.orderGid
+                }
             }).then(d => {
                 console.log(d)
             }, (error) => {
@@ -178,12 +200,23 @@ const VerifyCode = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/do.json`,
             method: "post",
-            data: { token: localStorage.userToken, userGid: localStorage.userGid, userId: localStorage.userId, sourceType: 3, orderGid: this.state.orderId, orioleOrderGid: orioleOrderGid, loanAmount: loanNum, withdrawCardGid: withdrawCardGid, verifyCode: this.state.value, transPwd: 123456 }
+            data: {
+                token: localStorage.userToken,
+                userGid: localStorage.userGid,
+                userId: localStorage.userId,
+                sourceType: 3,
+                orderGid: this.state.orderId,
+                orioleOrderGid: orioleOrderGid,
+                loanAmount: loanNum,
+                withdrawCardGid: withdrawCardGid,
+                verifyCode: this.state.value,
+                transPwd: 123456
+            }
         }).then(d => {
             this.props.callbackResultShow(true);
             this.props.callbackCloseHanler(false);
         }, (error) => {
-            this.setState({ show_warn: true });
+            this.setState({show_warn: true});
         });
     },
     render: function () {
@@ -194,10 +227,14 @@ const VerifyCode = React.createClass({
                     <div className="verify-popup-wrap">
                         <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                         <div className="verify-popup-title">短信验证</div>
-                        <div className="verify-popup-tip"> 已向尾号（{this.state.phoneNum ? this.state.phoneNum.slice(-4) : null}）发送短信验证码。</div>
+                        <div className="verify-popup-tip">
+                            已向尾号（{this.state.phoneNum ? this.state.phoneNum.slice(-4) : null}）发送短信验证码。
+                        </div>
                         <div className="verify-input">
-                            <input className="sms-input" type="number" name="number" value={this.state.value} placeholder="输入验证码" onChange={this.changeValueHandler} />
-                            <span className="btn-countdown" onClick={this.getSMSCode}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
+                            <input className="sms-input" type="number" name="number" value={this.state.value}
+                                   placeholder="输入验证码" onChange={this.changeValueHandler}/>
+                            <span className="btn-countdown"
+                                  onClick={this.getSMSCode}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
                         {frequent_tip}
                         <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
@@ -216,7 +253,8 @@ const ItemDetail = React.createClass({
         console.log(this.props.feeExtList)
         let item_list = (item, index) => {
             return (
-                <div className="item-list" key={index}><span className="item-left">{item.feeName}</span><span className="item-right">{item.feeAmoutStr}元</span></div>
+                <div className="item-list" key={index}><span className="item-left">{item.feeName}</span><span
+                    className="item-right">{item.feeAmoutStr}元</span></div>
             )
         };
         return (
@@ -246,7 +284,7 @@ const LoanResult = React.createClass({
         this.props.callbackResultHide(false);
     },
     componentDidMount: function () {
-        this.setState({ successResultShow: true });
+        this.setState({successResultShow: true});
     },
     render: function () {
         return (
@@ -269,7 +307,8 @@ const LoanResult = React.createClass({
                                 </div>
                             </div>
                             <div className="customer-service">
-                                <div className="service-wrap"><img src="images/phone.png" />如有问题请致电：<a href="tel:400-0322-988">400-000-0000</a></div>
+                                <div className="service-wrap"><img src="images/phone.png"/>如有问题请致电：<a
+                                    href="tel:400-0322-988">400-000-0000</a></div>
                             </div>
                         </div>
                     </div>
@@ -289,7 +328,8 @@ const LoanResult = React.createClass({
                                 </div>
                             </div>
                             <div className="customer-service">
-                                <div className="service-wrap"><img src="images/phone.png" />如有问题请致电：<a href="tel:400-0322-988">400-000-0000</a></div>
+                                <div className="service-wrap"><img src="images/phone.png"/>如有问题请致电：<a
+                                    href="tel:400-0322-988">400-000-0000</a></div>
                             </div>
                         </div>
                     </div>
@@ -309,7 +349,8 @@ const LoanResult = React.createClass({
                                 </div>
                             </div>
                             <div className="customer-service">
-                                <div className="service-wrap"><img src="images/phone.png" />如有问题请致电：<a href="tel:400-0322-988">400-000-0000</a></div>
+                                <div className="service-wrap"><img src="images/phone.png"/>如有问题请致电：<a
+                                    href="tel:400-0322-988">400-000-0000</a></div>
                             </div>
                         </div>
                         <div className="credit-btn">去提额</div>
@@ -330,7 +371,8 @@ const LoanResult = React.createClass({
                                 </div>
                             </div>
                             <div className="customer-service">
-                                <div className="service-wrap"><img src="images/phone.png" />如有问题请致电：<a href="tel:400-0322-988">400-000-0000</a></div>
+                                <div className="service-wrap"><img src="images/phone.png"/>如有问题请致电：<a
+                                    href="tel:400-0322-988">400-000-0000</a></div>
                             </div>
                         </div>
                         <div className="apply-btn">重新借款</div>
@@ -342,7 +384,7 @@ const LoanResult = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"确认信息"} />, document.getElementById('header'));
+    ReactDOM.render(<Header title={"确认信息"}/>, document.getElementById('header'));
     let query = $FW.Format.urlQuery();
     let loanNum = query.loanNum;
     let orioleOrderGid = query.orioleOrderGid;
@@ -350,18 +392,29 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}api/loan/v1/tryLoanBudget.json`,
         method: "post",
-        data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3, orioleOrderGid: orioleOrderGid, loanAmount: loanNum }
+        data: {
+            token: $FW.Store.getUserToken(),
+            userGid: $FW.Store.getUserGid(),
+            userId: $FW.Store.getUserId(),
+            sourceType: 3,
+            orioleOrderGid: orioleOrderGid,
+            loanAmount: loanNum
+        }
     }).then(d => {
-        ReactDOM.render(<ConfirmLoanWrap {...d} />, CONTENT_NODE);
-    }, e => console.error(e));
+        ReactDOM.render(<ConfirmLoanWrap {...d}/>, document.getElementById('cnt'));
+    }, (error) => console.log(error));
 
     $FW.Ajax({
         url: `${API_PATH}api/oriole/v1/indexnotice.json`,
         method: "post",
         fail: () => true,
-        data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3 }
+        data: {
+            token: $FW.Store.getUserToken(),
+            userGid: $FW.Store.getUserGid(),
+            userId: $FW.Store.getUserId(),
+            sourceType: 3
+        }
     }).then(d => {
-        ReactDOM.render(<Notice {...d} />, document.getElementById('notice'));
-    }, e => $FW.Event.captureExpection(e));
-
+        ReactDOM.render(<Notice {...d}/>, document.getElementById('notice'));
+    }, (error) => console.log(error));
 });
