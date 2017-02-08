@@ -49,9 +49,8 @@ const Register = React.createClass({
 		$FW.Ajax({
 			url: API_PATH + "api/userBase/v1/sendVerifyCode.json",
 			method: "POST",
-
 			data: {
-				mobile: location.search.split('phone=')[1],
+				mobile: localStorage.phone,
 				userOperationType: 2,
 				sourceType: 3
 			},
