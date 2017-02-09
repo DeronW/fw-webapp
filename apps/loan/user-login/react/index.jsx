@@ -53,7 +53,7 @@ const Register = React.createClass({
 				</div>
 
 				<div className="logo">
-					<img src="images/logo.png" />
+					<img src="http://placehold.it/214x214" />
 				</div>
 
 				<div className="get-name-phone">
