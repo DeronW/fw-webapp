@@ -57,7 +57,7 @@ const MyCnt = React.createClass({
 
         let creditUrl = () => {
             if (userStatus == 1) {
-                return "/static/loan/user-set-cash-card/index.html";
+                return "/static/loan/user-card-set/index.html";
             } else if (userStatus >= 2) {
                 return `https://cashloan.9888.cn/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`
             }
@@ -65,7 +65,7 @@ const MyCnt = React.createClass({
 
         let bankUrl = () => {
             if (userStatus == 1) {
-                return "/static/loan/user-set-cash-card/index.html";
+                return "/static/loan/user-card-set/index.html";
             } else if (userStatus >= 2) {
                 return '/static/loan/user-bank-management/index.html'
             }

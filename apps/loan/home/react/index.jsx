@@ -124,7 +124,7 @@ const ApplyLoan = React.createClass({
 
         let user = $FW.Store.getUserDict();
         let link;
-        if (st == 1) link = '/static/loan/user-set-cash-card/index.html';
+        if (st == 1) link = '/static/loan/user-card-set/index.html';
         if (st == 2) link = `/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`;
 
         let loanBtnClick = () => {
@@ -146,7 +146,7 @@ const ApplyLoan = React.createClass({
                     我要提额
                 </a>
                 <a className="credit-apply-btn"
-                    href={`/static/loan/apply-want-loan/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`}>
+                    href={`/static/loan/apply-want/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`}>
                     我要借款</a>
             </div>;
 

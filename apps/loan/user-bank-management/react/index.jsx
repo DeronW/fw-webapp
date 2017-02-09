@@ -53,7 +53,7 @@ const BankManagement = React.createClass({
             </div>
                 <div className="fixed-bottom-part">
                     <div className="fixed-tip">绑定银行卡越多，信用额度越高！</div>
-                    <a className="add-card-btn" href={'/static/loan/user-add-cash-card/index.html'}>马上添加</a>
+                    <a className="add-card-btn" href={'/static/loan/user-card-add/index.html'}>马上添加</a>
                 </div>
 			</div>
 		)

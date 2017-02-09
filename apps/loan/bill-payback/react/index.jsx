@@ -129,7 +129,7 @@ const BankCardList = React.createClass({
                 <div className="header">
                     <div className="arrow-left" onClick={this.backHandler}></div>
                     <div className="title">选择还款卡</div>
-                    <div className="history-bill" onClick={()=>gotoHandler('/static/loan/user-add-cash-card/index.html')}>添加</div>
+                    <a className="history-bill" href='/static/loan/user-card-add/index.html'>添加</a>
                 </div>
                 <div className="bank-branch-list">
                     {this.props.bankList.map(list_item)}
