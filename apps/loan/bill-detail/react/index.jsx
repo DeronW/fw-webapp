@@ -5,6 +5,8 @@ function gotoHandler(link) {
 const Detail = React.createClass({
     render:function(){
         let loanStatus = this.props.data.loanStatus;
+        let query = $FW.Format.urlQuery();
+        let loanGid = query.loanGid;
         return (
             <div>
                  <div className="loan-num">
@@ -42,7 +44,7 @@ const Detail = React.createClass({
                         <span>{this.props.data.loanTimeStr}</span>
                     </div>
                 </div>
-                {loanStatus == 4 || loanStatus == 5 ? <div className="pay-back-btn" onClick={() => gotoHandler(`/static/loan/bill-payback/index.html?deductionGid=${item.deductionGid}&loanGid=${item.loanGid}&loanType=${item.loanType}`)}>立即还款</div> : null}
+                {loanStatus == 4 || loanStatus == 5 ? <div className="pay-back-btn" onClick={() => gotoHandler(`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${$FW.Store.getUserToken()}&userGid=${$FW.Store.getUserGid()}&userId=${$FW.Store.getUserId()}`)}>立即还款</div> : null}
             </div>
         )
     }

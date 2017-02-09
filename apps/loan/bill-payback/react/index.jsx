@@ -16,7 +16,8 @@ const PayBackWrap = React.createClass({
             verifyCodeShow:false,
             payBackResultShow:false,
             cardGid:cardGid,
-            filtered:filtered
+            filtered:filtered,
+            repaymentAmount:this.props.loanLeftAmount
         }
     },
     componentDidMount:function(){
@@ -54,7 +55,7 @@ const PayBackWrap = React.createClass({
             <div>
                 {this.state.paybackShow?<PayBack callbackBankListShow={this.getBankCardListShow} callbackVerifyCodeShow={this.getVerifyCodeShow} loanLeftAmount={this.props.loanLeftAmount} loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus} overdueFee={this.props.overdueFee} filtered={this.state.filtered}/>:null}
                 {this.state.bankCardListShow?<BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem} callbackPopHide={this.popHideHandler}/>:null}
-                {this.state.verifyCodeShow?<VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid} callbackCloseHanler={this.closeHandler} />:null}
+                {this.state.verifyCodeShow?<VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid} callbackCloseHanler={this.closeHandler} repaymentAmount={this.state.repaymentAmount}/>:null}
                 {this.state.payBackResultShow?<PayBackResult />:null}
             </div>
         )
@@ -159,7 +160,7 @@ const VerifyCode = React.createClass({
             url: `${API_PATH}api/repayment/v1/checksmsverifycode.json`,
             method: "post",
             data: {
-                repaymentAmount:this.props.loanLeftAmount,
+                repaymentAmount:this.props.repaymentAmount,
                 loanGid:loanGid,
                 cardGid:cardGid,
                 token:localStorage.userToken,
@@ -261,8 +262,8 @@ const PayBackResult = React.createClass({
                  </div>*/}
                 {this.state.payback_fail?<div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>:null}
                 {this.state.payback_ing?<div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div>:null}
-                <div className="credit-btn">提升额度</div>
-                <div className="apply-btn">申请用钱</div>
+                <div className="credit-btn" onClick={() => gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>提升额度</div>
+                <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/home/index.html`)}>申请用钱</div>
             </div>
         )
     }
