@@ -177,13 +177,18 @@ const VerifyCode = React.createClass({
         this._timer = setInterval(this.countingDown, 1000);
     },
     getSMSCode:function(){
-        let orderGid = this.state.orderGid;
         if(this.state.remain<=0){
             this.tick();
             $FW.Ajax({
                 url: `${API_PATH}api/repayment/v1/resendverifycode.json`,
                 method: "post",
-                data: {token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3, orderGid:orderGid}
+                data: {
+                    token:localStorage.userToken,
+                    userGid:localStorage.userGid,
+                    userId:localStorage.userId,
+                    sourceType:3,
+                    orderGid:this.state.orderGid
+                }
             }).then(d => {
                 console.log(d)
             }, (error) => {
