@@ -21,28 +21,32 @@ const Register = React.createClass({
 	},
 	loadingBtn() {
 		let _this = this;
+        if(this.state.pwdVal == ''){
+            $FW.Component.Toast("请输入登录密码");
+        }else{
+            $FW.Ajax({
+                url: API_PATH + "/api/userBase/v1/login.json",
+                method: "POST",
 
-		$FW.Ajax({
-			url: API_PATH + "/api/userBase/v1/login.json",
-			method: "POST",
+                data: {
+                    mobile: location.search.split("=")[1],
+                    password: _this.state.pwdVal,
+                    sourceType: 3
+                },
+                success: function (data) {
+                    localStorage.userGid = data.userLogin.userGid;
+                    localStorage.userId = data.userLogin.userId;
+                    localStorage.userToken = data.userLogin.userToken;
+                    localStorage.userStatus = data.userLogin.userStatus;
 
-			data: {
-				mobile: location.search.split("=")[1],
-				password: _this.state.pwdVal,
-				sourceType: 3
-			},
-			success: function (data) {
-				localStorage.userGid = data.userLogin.userGid;
-				localStorage.userId = data.userLogin.userId;
-				localStorage.userToken = data.userLogin.userToken;
-				localStorage.userStatus = data.userLogin.userStatus;
+                    location.href = `${location.protocol}\/\/${location.host}/static/loan/home/index.html`;
+                },
+                fail: function(code, mes) {
 
-				location.href = `${location.protocol}\/\/${location.host}/static/loan/home/index.html`;
-			},
-			fail: function(code, mes) {
+                }
+            })
+        }
 
-			}
-		})
 	},
 	render() {
 		return (
