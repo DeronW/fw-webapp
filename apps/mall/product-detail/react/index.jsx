@@ -204,7 +204,7 @@ const PlusMinus = React.createClass({
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
-                enable_loading: true,
+                enable_loading: 'mini',
                 data: {
                     buyNum: this.state.value,
                     productBizNo: bizNo
@@ -342,7 +342,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: `${API_PATH}mall/api/detail/v1/item_detail.json?bizNo=${bizNo}`,
-        enable_loading: true
+        enable_loading: 'mini'
     }).then(data => {
         data.title ?
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :

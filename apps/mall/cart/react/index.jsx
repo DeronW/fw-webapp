@@ -70,7 +70,7 @@ const ShoppingCart = React.createClass({
             data: {
                 productBizNo: ps[index].productBizNo
             },
-            enable_loading: true,
+            enable_loading: 'mini',
             success: function (data) {
                 _this.setState({products: ps});
             }

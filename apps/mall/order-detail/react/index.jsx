@@ -285,7 +285,7 @@ $FW.DOMReady(function () {
             bizNo: query.bizNo,
             cardUuid: query.cardUuid
         },
-        enable_loading: true,
+        enable_loading: 'mini',
         success: function (data) {
             ReactDOM.render(<OrderDetail {...data}/>, CONTENT_NODE);
         }

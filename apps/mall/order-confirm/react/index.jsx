@@ -45,7 +45,7 @@ const ConfirmOrder = React.createClass({
                 url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
                 //url: `./commit_pay_order.json`,
                 //method: 'POST',
-                enable_loading: true,
+                enable_loading: 'mini',
                 data: this.FormData,
                 success: (result) => {
                     /*
@@ -74,7 +74,7 @@ const ConfirmOrder = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}mall/api/order/v1/validatePaySmsCode.json`,
                 //url: `./validatePaySmsCode.json`,
-                enable_loading: true,
+                enable_loading: 'mini',
                 method: 'post',
                 data: {smsCode: this.FormData.msgCode},
                 success: submit
@@ -210,7 +210,7 @@ $FW.DOMReady(function () {
             buyNum: buyNum,
             userTickets: userTicketList
         },
-        enable_loading: true
+        enable_loading: 'mini'
     }).then(data => {
         var user = {
             score: data.avaliablePoints || 0,

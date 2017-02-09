@@ -35,7 +35,7 @@ $FW.DOMReady(function () {
     var query = $FW.Format.urlQuery();
     $FW.Ajax({
         url: API_PATH + "mall/api/order/v1/viewCardPass.json",
-        enable_loading: true,
+        enable_loading: 'mini',
         data: {
             bizNo: query.bizNo,
             cardUuid: query.cardUuid

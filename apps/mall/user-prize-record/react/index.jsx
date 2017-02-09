@@ -23,7 +23,7 @@ const MyPrizeRecord = React.createClass({
                 num: 20,
                 pages: this.state.page
             },
-            enable_loading: true,
+            enable_loading: 'mini',
             success: data => {
                 this.appendProducts(data);
                 this.setState({

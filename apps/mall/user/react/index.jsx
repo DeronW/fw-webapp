@@ -152,7 +152,7 @@ const HotSale = React.createClass({
         //人气热卖列表
         $FW.Ajax({
                 url: `${API_PATH}/mall/api/index/v1/hotProducts.json?count=6&page${page}`,
-                enable_loading: true
+                enable_loading: 'mini'
             })
             .then(data => {
                 this.setState({
@@ -184,7 +184,7 @@ const HotSale = React.createClass({
 $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}mall/api/member/v1/user.json`,
-        enable_loading: true
+        enable_loading: 'mini'
     }).then(data => ReactDOM.render(<User data={data}/>, CONTENT_NODE));
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 });

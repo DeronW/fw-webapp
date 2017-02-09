@@ -145,7 +145,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         //url: API_PATH + 'mall/api/member/v1/user.json',
         url: `${API_PATH}mall/api/member/v1/user.json`,
-        enable_loading: true,
+        enable_loading: 'mini',
         success: function (data) {
             console.log(data)
             ReactDOM.render(<HomePage {...data}/>, CONTENT_NODE);

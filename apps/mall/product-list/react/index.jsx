@@ -157,7 +157,7 @@ let Filter = {
         $FW.Ajax({
             url: API_PATH + 'mall/api/index/v1/search.json',
             data: Filter.options,
-            enable_loading: true,
+            enable_loading: 'mini',
             success: data => callback(data)
         });
     },
@@ -197,8 +197,6 @@ $FW.DOMReady(function () {
     if (Filter.options.searchSourceType == 2) {
 
     } else {
-        NativeBridge.setTitle(title);
-        if ($FW.Utils.shouldShowHeader())
             ReactDOM.render(<Header title={title}/>, HEADER_NODE);
     }
 

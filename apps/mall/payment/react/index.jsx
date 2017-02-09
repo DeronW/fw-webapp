@@ -148,7 +148,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}mall/api/payment/v1/bank_card_list.json`,
         //url: './bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
-        enable_loading: true,
+        enable_loading: 'mini',
         success: function (data) {
             ReactDOM.render(<Payment data={data.bankCards}/>, CONTENT_NODE);
         }

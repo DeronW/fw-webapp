@@ -126,7 +126,7 @@ const VipZone = React.createClass({
                 minPoints: '',
                 maxPoints: ''
             },
-            enable_loading: true,
+            enable_loading: 'mini',
             success: function (data) {
 
                 let tab;
@@ -263,7 +263,7 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/user_level_points.json",
-        enable_loading: true,
+        enable_loading: 'mini',
         success: function (data) {
             if (data.loginOk) {
                 ReactDOM.render(<VipMsg user_level={data.vip_level}

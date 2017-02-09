@@ -50,7 +50,7 @@ const SendCode = React.createClass({
     reSend: function () {
         $FW.Ajax({
             url: API_PATH + 'mall/api/payment/v1/SendPhoneVerifyPay.json',
-            enable_loading: true,
+            enable_loading: 'mini',
             success: function (data) {
                 if (!this.state.reSend) return;
                 this.setState({value: 60, reSend: false});
@@ -101,7 +101,7 @@ const SendCode = React.createClass({
         };
         $FW.Ajax({
             url: API_PATH + '/mall/api/payment/v1/binding_bank_card.json',
-            enable_loading: true,
+            enable_loading: 'mini',
             data: FormData,
             success: function (data) {
                 $FW.Component.Alert(data.msg);
@@ -120,7 +120,7 @@ const SendCode = React.createClass({
         }
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/validatePaySmsCode.json`,
-            enable_loading: true,
+            enable_loading: 'mini',
             data: FormData,
             success: function (data) {
                 this.bindCard();

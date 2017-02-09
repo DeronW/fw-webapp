@@ -39,7 +39,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         //url: "http://localhost/nginx-1.9.12/html/logistics.json",
         url: API_PATH + "mall/api/order/v1/logistics.json",
-        enable_loading: true,
+        enable_loading: 'mini',
         data: {
             sendOrderNo: query.sendOrderNo,
             sendChannel: query.sendChannel,

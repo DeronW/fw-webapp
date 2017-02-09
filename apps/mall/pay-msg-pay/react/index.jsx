@@ -56,14 +56,14 @@ const SendCode = React.createClass({
             service: 'REQ_PAY_QUICK_RESEND',
             merchantNo: this.state.merchantNo
         }
-        console.log(FormData);
+
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
-            enable_loading: true,
+            enable_loading: 'mini',
             data: FormData,
             success: function (data) {
-                console.log(data);
+
                 this.setState({value: 60, reSend: false});
                 this.tick()
                 this.setState({reSend: false});
@@ -108,7 +108,7 @@ const SendCode = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
-            enable_loading: true,
+            enable_loading: 'mini',
             data: FormData,
             success: (data) => {
                 if(data.status=="F"){
@@ -137,7 +137,7 @@ const SendCode = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
-            enable_loading: true,
+            enable_loading: 'mini',
             data: FormData,
             success: (data) => {
                 if(data.status=="I"){
