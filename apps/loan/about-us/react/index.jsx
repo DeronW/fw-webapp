@@ -27,8 +27,8 @@ const UserAboutus = React.createClass({
 
         return (
             <div className="user-about-us-cnt">
-                <div className="top-cnt"> </div>
-                {isWeiXin() ? list() : null}
+                <img className="bg" src="http://placehold.it/720x400" />
+                {isWeiXin() && list()}
             </div>
         )
     }
