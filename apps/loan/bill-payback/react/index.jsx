@@ -270,7 +270,7 @@ const PayBackResult = React.createClass({
 });
 
 $FW.DOMReady(function() {
-    ReactDOM.render(<Header title={"还款"}/>, document.getElementById('header'));
+    ReactDOM.render(<Header title={"还款"}/>, HEADER_NODE);
     var query = $FW.Format.urlQuery();
     var loanGid = query.loanGid;
     var loanType = query.loanType;
@@ -286,6 +286,6 @@ $FW.DOMReady(function() {
                 data: {loanGid:loanGid,loanType:loanType,token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3}
             })
         ]).then(d => {
-            ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]}/>, document.getElementById('cnt'));
+            ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]}/>, CONTENT_NODE);
         }, (error) => console.log(error));
 });

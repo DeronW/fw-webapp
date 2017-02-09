@@ -72,6 +72,6 @@ const HistoryBill = React.createClass({
 });
 
 $FW.DOMReady(function() {
-    ReactDOM.render(<Header title={"历史账单"}/>, document.getElementById('header'));
-    ReactDOM.render(<HistoryBill/>, document.getElementById('cnt'));
+    ReactDOM.render(<Header title={"历史账单"}/>, HEADER_NODE);
+    ReactDOM.render(<HistoryBill/>, CONTENT_NODE);
 });

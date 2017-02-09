@@ -163,5 +163,5 @@ const Register = React.createClass({
 
 ReactDOM.render(
 	<Register />,
-	document.getElementById('cnt')
+	CONTENT_NODE
 )

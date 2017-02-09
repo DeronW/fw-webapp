@@ -288,6 +288,6 @@ const SetCashCard = React.createClass({
 
 
 
-ReactDOM.render(<Header title={"设置提现卡"}/>, document.getElementById('header'));
+ReactDOM.render(<Header title={"设置提现卡"}/>, HEADER_NODE);
 
-ReactDOM.render(<SetCashCard />, document.getElementById('cnt'))
+ReactDOM.render(<SetCashCard />, CONTENT_NODE)

@@ -79,13 +79,13 @@ const NineActivity = React.createClass({
 $FW.DOMReady(function () {
     NativeBridge.setTitle('大转盘');
     if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"大转盘"} back_handler={backward}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={"大转盘"} back_handler={backward}/>, HEADER_NODE);
     }
 
     $FW.Ajax({
         url: API_PATH + 'mall/api/magic/v1/user.json', //用户信息
         success: (data) => {
-            ReactDOM.render(<NineActivity user={data}/>, document.getElementById('cnt'));
+            ReactDOM.render(<NineActivity user={data}/>, CONTENT_NODE);
         }
     })
 });

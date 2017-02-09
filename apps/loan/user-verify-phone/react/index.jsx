@@ -189,8 +189,8 @@ const VerifyPhone = React.createClass({
 });
 
 
-ReactDOM.render(<Header title={"验证手机号"}/>, document.getElementById('header'));
+ReactDOM.render(<Header title={"验证手机号"}/>, HEADER_NODE);
 ReactDOM.render(
 	<VerifyPhone />,
-	document.getElementById('cnt')	
+	CONTENT_NODE	
 );

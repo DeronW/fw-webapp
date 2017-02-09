@@ -678,7 +678,7 @@ var Body = React.createClass({
 
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"修改绑定银行卡"}/>, document.getElementById('header'));
+    ReactDOM.render(<Header title={"修改绑定银行卡"}/>, HEADER_NODE);
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         enable_loading: true,

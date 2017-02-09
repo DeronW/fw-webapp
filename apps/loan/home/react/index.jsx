@@ -208,6 +208,6 @@ $FW.DOMReady(function () {
         }
     }).then((data) => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
-    }, e => $FW.Event.captureExpection(e));
+    }, e => $FW.Capture(e));
     ReactDOM.render(<BottomNavBar index={1} />, BOTTOM_NAV_NODE);
 });

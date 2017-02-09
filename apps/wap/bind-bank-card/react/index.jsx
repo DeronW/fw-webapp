@@ -207,7 +207,7 @@ const Warm = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"绑定银行卡"}/>, document.getElementById('header'));
+    ReactDOM.render(<Header title={"绑定银行卡"}/>, HEADER_NODE);
 /*    $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {
@@ -219,7 +219,7 @@ $FW.DOMReady(function () {
         url: API_PATH + "/mpwap/api/v1/showBankCardMess.shtml",
         enable_loading: true,
         success: function (data) {
-            ReactDOM.render(<BindBankCard item={data}/>, document.getElementById('cnt'));
+            ReactDOM.render(<BindBankCard item={data}/>, CONTENT_NODE);
         }
     });
 

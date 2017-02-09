@@ -84,7 +84,7 @@ $FW.DOMReady(function () {
             userId: $FW.Store.getUserId(),
             sourceType: 3 }
     }).then((data) => {
-        ReactDOM.render(<Bill data={data} />, document.getElementById('cnt'));
+        ReactDOM.render(<Bill data={data} />, CONTENT_NODE);
     }, (error) => console.log(error));
     ReactDOM.render(<BottomNavBar index={2} />, document.getElementById('bottom-nav-bar'));
 });

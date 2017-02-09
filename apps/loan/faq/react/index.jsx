@@ -86,9 +86,9 @@ const UserAboutus = React.createClass({
 	}
 });
 
-ReactDOM.render(<Header title={"常见问题"}/>, document.getElementById('header'));
+ReactDOM.render(<Header title={"常见问题"}/>, HEADER_NODE);
 
 ReactDOM.render(
 	<UserAboutus />,
-	document.getElementById('cnt')	
+	CONTENT_NODE	
 );

@@ -161,8 +161,8 @@ const Register = React.createClass({
 	}
 });
 
-ReactDOM.render(<Header title={"设置新密码"}/>, document.getElementById('header'));
+ReactDOM.render(<Header title={"设置新密码"}/>, HEADER_NODE);
 ReactDOM.render(
 	<Register />,
-	document.getElementById('cnt')
+	CONTENT_NODE
 )

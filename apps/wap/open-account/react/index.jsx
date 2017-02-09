@@ -978,7 +978,7 @@ $FW.DOMReady(function () {
             var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
              /*ReactDOM.render(
              <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
-             document.getElementById('header'));*/
+             HEADER_NODE);*/
 
              if(data.openStatus >= 3) {
                 window.location.href = location.protocol + "//m.9888.cn/mpwap/top/index.do";                    

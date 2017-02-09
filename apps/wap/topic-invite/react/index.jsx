@@ -1,6 +1,6 @@
 $FW.DOMReady(function () {
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={'邀请返利'}/>, document.getElementById('header'))
+        ReactDOM.render(<Header title={'邀请返利'}/>, HEADER_NODE)
     }
 });
 

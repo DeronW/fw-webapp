@@ -437,7 +437,7 @@ Recharge.OrderProcessing = React.createClass({
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"充值"} sub_text={"充值记录"}
                             sub_url={"/mpwap/orderuser/viewRechargeRecord.shtml"}/>,
-        document.getElementById('header'));
+        HEADER_NODE);
 
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getRechargeInfo.shtml",

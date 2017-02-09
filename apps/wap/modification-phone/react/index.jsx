@@ -208,7 +208,7 @@ const ModificationPhone = React.createClass({
 
 ReactDOM.render(
     <Header title={"修改银行预留手机号"} sub_text={""}/>,
-    document.getElementById('header')
+    HEADER_NODE
 );
 
 ReactDOM.render(<ModificationPhone />, document.getElementById("cnt"))

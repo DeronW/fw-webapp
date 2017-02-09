@@ -264,6 +264,6 @@ const SetCashCard = React.createClass({
 
 
 
-ReactDOM.render(<Header title={"添加储蓄卡"}/>, document.getElementById('header'));
+ReactDOM.render(<Header title={"添加储蓄卡"}/>, HEADER_NODE);
 
-ReactDOM.render(<SetCashCard />, document.getElementById('cnt'))
+ReactDOM.render(<SetCashCard />, CONTENT_NODE)

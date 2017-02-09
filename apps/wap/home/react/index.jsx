@@ -72,5 +72,5 @@ const Content = React.createClass({
 
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Content />, document.getElementById('cnt'));
+    ReactDOM.render(<Content />, CONTENT_NODE);
 });

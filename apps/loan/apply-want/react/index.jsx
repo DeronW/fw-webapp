@@ -100,7 +100,7 @@ const WantLoan = React.createClass({
 
 
 $FW.DOMReady(function() {
-    ReactDOM.render(<Header title={"我要借款"}/>, document.getElementById('header'));
+    ReactDOM.render(<Header title={"我要借款"}/>, HEADER_NODE);
     let query = $FW.Format.urlQuery();
     let orioleOrderGid= query.orioleOrderGid;
     let loanNum = query.loanNum;
@@ -124,7 +124,7 @@ $FW.DOMReady(function() {
         })
     ]).then(d => {
         console.log(d);
-        ReactDOM.render(<WantLoan {...d[0]} {...d[1]}/>, document.getElementById('cnt'));
+        ReactDOM.render(<WantLoan {...d[0]} {...d[1]}/>, CONTENT_NODE);
     }, (error) => console.log(error));
 
 });

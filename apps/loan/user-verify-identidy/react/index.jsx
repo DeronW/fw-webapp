@@ -106,5 +106,5 @@ const VerifyIdentidy = React.createClass({
 
 ReactDOM.render(
 	<VerifyIdentidy />,
-	document.getElementById('cnt')
+	CONTENT_NODE
 )

@@ -378,7 +378,7 @@ const LoanResult = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"确认信息"}/>, document.getElementById('header'));
+    ReactDOM.render(<Header title={"确认信息"}/>, HEADER_NODE);
     let query = $FW.Format.urlQuery();
     let loanNum = query.loanNum;
     let orioleOrderGid = query.orioleOrderGid;
@@ -404,7 +404,7 @@ $FW.DOMReady(function () {
         })
     ]).then(d => {
         console.log(d);
-        ReactDOM.render(<ConfirmLoanWrap {...d[0]} {...d[1]}/>, document.getElementById('cnt'));
+        ReactDOM.render(<ConfirmLoanWrap {...d[0]} {...d[1]}/>, CONTENT_NODE);
     }, (error) => console.log(error));
 
     $FW.Ajax({

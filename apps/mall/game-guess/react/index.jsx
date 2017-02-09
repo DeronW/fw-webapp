@@ -221,7 +221,7 @@ $FW.DOMReady(function () {
     // var title='和豆哥猜拳'
     // NativeBridge.setTitle(title);
     // if ($FW.Utils.shouldShowHeader()) {
-    //     ReactDOM.render(<Header title={title} back_handler={backward}/>, document.getElementById('header'));
+    //     ReactDOM.render(<Header title={title} back_handler={backward}/>, HEADER_NODE);
     // }
     //
     // $FW.Ajax({
@@ -229,7 +229,7 @@ $FW.DOMReady(function () {
     //     success: (data) => {
 
     let data={"isLogin":true,"sex":"1","userCode":"A362006","userLevel":2,"userName":"13**62","realName":"李建光","avatar":"http://mall.9888.cn/img//boy.jpg"};
-    ReactDOM.render(<GameGuess user={data}/>, document.getElementById('cnt'));
+    ReactDOM.render(<GameGuess user={data}/>, CONTENT_NODE);
     //     }
     // })
 });

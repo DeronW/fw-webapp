@@ -2,7 +2,7 @@ $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('推荐人招募计划')
     } else {
-        ReactDOM.render(<Header title={'推荐人招募计划'}/>, document.getElementById('header'))
+        ReactDOM.render(<Header title={'推荐人招募计划'}/>, HEADER_NODE)
     }
     $FW.Ajax({
         url :  API_PATH +"/mpwap/api/v1/getOpenAccountInfo.shtml",

@@ -51,6 +51,6 @@ const BankList = React.createClass({
 });
 
 $FW.DOMReady(function() {
-    ReactDOM.render(<Header title={"支持银行卡"}/>, document.getElementById('header'));
-    ReactDOM.render(<BankList/>, document.getElementById('cnt'));
+    ReactDOM.render(<Header title={"支持银行卡"}/>, HEADER_NODE);
+    ReactDOM.render(<BankList/>, CONTENT_NODE);
 });

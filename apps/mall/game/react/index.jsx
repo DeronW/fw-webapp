@@ -149,7 +149,7 @@ $FW.DOMReady(function () {
             if (data.login_status == 1) {
                 gameToken = data.token;
             }
-            ReactDOM.render(<GameCenter data={data} />, document.getElementById('cnt'));
+            ReactDOM.render(<GameCenter data={data} />, CONTENT_NODE);
         }
     });
 });

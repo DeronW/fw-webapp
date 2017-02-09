@@ -82,7 +82,7 @@ $FW.DOMReady(function () {
             $FW.Component.hideAjaxLoading();
             let preview = $FW.Format.urlQuery().preview == 'true';
             ReactDOM.render(<DeliverAddress address={data.address_list} preview={preview}/>,
-                document.getElementById('cnt'));
+                CONTENT_NODE);
         }
     });
 

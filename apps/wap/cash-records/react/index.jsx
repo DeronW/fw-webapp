@@ -144,7 +144,7 @@ const CashRecords = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'提现记录'}/>, document.getElementById('header'));
+    ReactDOM.render(<Header title={'提现记录'}/>, HEADER_NODE);
     ReactDOM.render(<CashRecords />, document.getElementById("cnt"));
 
     document.body.onscroll = function () {

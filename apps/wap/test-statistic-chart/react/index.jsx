@@ -8,5 +8,5 @@ const Chart = React.createClass({
     }
 });
 $FW.DOMReady(function () {
-    ReactDOM.render(<Chart/>, document.getElementById('cnt'));
+    ReactDOM.render(<Chart/>, CONTENT_NODE);
 });

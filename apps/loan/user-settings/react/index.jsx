@@ -35,10 +35,10 @@ let More = React.createClass({
 });
 
 
-ReactDOM.render(<Header title={"更多"}/>, document.getElementById('header'));
+ReactDOM.render(<Header title={"更多"}/>, HEADER_NODE);
 
 ReactDOM.render(
 	<More />,
-	document.getElementById('cnt')
+	CONTENT_NODE
 );
 
