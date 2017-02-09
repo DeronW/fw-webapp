@@ -1,3 +1,7 @@
+function fmtPrice(v) {
+    return v != 0 && `¥${v}+`
+}
+
 const Grid_3 = React.createClass({
     getInitialState: function () {
         return {
@@ -12,7 +16,7 @@ const Grid_3 = React.createClass({
                     <span className={"theme4-top-product-title theme4-top-product-title-color" + parseInt(index + 1)}>{product.abbreviation}</span>
                     <span
                         className="theme4-top-product-price">
-                        {product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice + "+"}
+                        {fmtPrice(product.rmbPrice)}
                         {product.score}工分</span>
                     <span className={"horizon-line theme4-top-line-color" + parseInt(index + 1)}></span>
                     <img className="theme4-top-product-img" src={product.img} />
@@ -35,7 +39,7 @@ const Grid_3 = React.createClass({
                                     className="theme4-btm-product-title theme4-btm-product-title-color1">{this.state.ps[4].abbreviation}</span>
                                 <span
                                     className="theme4-btm-product-price">
-                                    {this.state.ps[4].rmbPrice == 0.00 ? null : "¥" + this.state.ps[4].rmbPrice + "+"}
+                                    {fmtPrice(this.state.ps[4].rmbPrice)}
                                     {this.state.ps[4].score}工分</span>
                                 <span className="product-purchase theme4-btm-product-title-color1">点击抢购<span
                                     className="tri tri-btm-color1"></span></span>
@@ -53,7 +57,7 @@ const Grid_3 = React.createClass({
                                             className="theme4-btm-product-title theme4-btm-product-title-color2">{this.state.ps[5].abbreviation}</span>
                                         <span
                                             className="theme4-btm-product-price">
-                                            {this.state.ps[5].rmbPrice == 0.00 ? null : "¥" + this.state.ps[5].rmbPrice + "+"}
+                                            {fmtPrice(this.state.ps[5].rmbPrice)}
                                             {this.state.ps[5].score}工分</span>
                                         <span className="product-purchase theme4-btm-product-title-color2">点击抢购<span
                                             className="tri tri-btm-color2"></span></span>
@@ -71,7 +75,7 @@ const Grid_3 = React.createClass({
                                             className="theme4-btm-product-title theme4-btm-product-title-color3">{this.state.productSeventhTitle}</span>
                                         <span
                                             className="theme4-btm-product-price">
-                                            {this.state.ps[6].rmbPrice == 0.00 ? null : "¥" + this.state.ps[6].rmbPrice + "+"}
+                                            {fmtPrice(this.state.ps[6].rmbPrice)}
                                             {this.state.ps[6].score}工分</span>
                                         <span className="product-purchase theme4-btm-product-title-color3">点击抢购<span
                                             className="tri tri-btm-color3"></span></span>
@@ -80,10 +84,10 @@ const Grid_3 = React.createClass({
                             </a>
                         </div>
                         <div className="theme4-btm-right-product-wrap">
-                            <a onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[7].bizNo)}>
+                            <a href={'/static/mall/product-detail/index.html?bizNo=' + this.state.ps[7].bizNo}>
                                 <img className="theme4-btm-product-img" src={this.state.ps[7].img} />
                             </a>
-                            <a onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + this.state.ps[7].bizNo)}>
+                            <a href={'/static/mall/product-detail/index.html?bizNo=' + this.state.ps[7].bizNo}>
                                 <img className="theme4-btm-product-img" src={this.state.ps[7].img} />
                             </a>
                         </div>
