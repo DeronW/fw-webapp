@@ -298,12 +298,18 @@ const PayBackResult = React.createClass({
     render: function () {
         return (
             <div className="payback-result">
-                {this.state.payback_success ?
-                    <div className="payback-result-success-img"><img src="images/payback-success.png" /></div> : null}
-                {this.state.payback_fail ?
-                    <div className="payback-result-fail-img"><img src="images/payback-fail.png" /></div> : null}
-                {this.state.payback_ing ?
-                    <div className="payback-result-ing-img"><img src="images/payback-ing.png" /></div> : null}
+                {this.state.payback_success &&
+                    <div className="payback-result-success-img">
+                        <img src="images/payback-success.png" />
+                    </div>}
+                {this.state.payback_fail &&
+                    <div className="payback-result-fail-img">
+                        <img src="images/payback-fail.png" />
+                    </div>}
+                {this.state.payback_ing &&
+                    <div className="payback-result-ing-img">
+                        <img src="images/payback-ing.png" />
+                    </div>}
                 {/*<div className="payback-result-success-tip">
                  <div className="tip-top">还有2323.23元未还，请记得准时还款!</div>
                  <div className="tip-bottom"> 还款金额：<span>212.21</span>元</div>
