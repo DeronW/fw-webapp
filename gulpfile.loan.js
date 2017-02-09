@@ -13,10 +13,10 @@ const USER_PAGES = [
     'user-entry', // 用户入口, 并非登录或注册, 而是用户的进入入口
     'user-register',//注册入口
     'user-login', //登录入口
-    'user-set-new-password',
+    'user-reset-password',
     'user', //我
-    'user-set-cash-card',//设置提现卡
-    'user-add-cash-card',//添加提现卡
+    'user-card-set',//设置提现卡
+    'user-card-add',//添加提现卡
     'user-verify-phone', //获取验证码
     'user-bank-support',//支持银行卡
 	'user-bank-management',//银行卡管理
@@ -26,15 +26,15 @@ const USER_PAGES = [
 // 账单模块
 const BILL_PAGES = [
     'bill', //账单首页
-    'bill-history-bill', //历史账单
+    'bill-history', //历史账单
     'bill-detail', //账单详情
     'bill-payback', //还款页面
 ]
 
 // 申请借款模块
 const APPLY_PAGES = [
-    'apply-want-loan', //我要借款页面
-    'apply-confirm-loan', //确认借款页面
+    'apply-want', //我要借款页面
+    'apply-confirm', //确认借款页面
 ]
 
 // 借款服务协议页面

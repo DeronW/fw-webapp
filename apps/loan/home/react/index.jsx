@@ -142,7 +142,7 @@ const ApplyLoan = React.createClass({
         let btn_list =
             <div className="credit-btn">
                 <a className="credit-improvement-btn"
-                    href={`/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`}>
+                    href={`https://cashloan.9888.cn/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`}>
                     我要提额
                 </a>
                 <a className="credit-apply-btn"

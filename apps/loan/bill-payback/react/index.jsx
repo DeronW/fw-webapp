@@ -148,9 +148,6 @@ const VerifyCode = React.createClass({
             orderGid:null
         }
     },
-    confirmBtnHandler:function(){
-        this.props.callbackResultShow(true,false);
-    },
     closePopHandler:function(){
         this.props.callbackCloseHanler(false);
     },
@@ -193,6 +190,23 @@ const VerifyCode = React.createClass({
 
             });
         }
+    },
+    confirmBtnHandler:function(){
+        $FW.Ajax({
+            url: `${API_PATH}api/repayment/v1/do.json`,
+            method: "post",
+            data: {
+                orderGid:localStorage.orderGid,
+                token:localStorage.userToken,
+                userGid:localStorage.userGid,
+                userId:localStorage.userId,
+                sourceType:3,
+                verifyCode:this.state.value
+            }
+        }).then(d => {
+            this.props.callbackResultShow(true,false);
+            }, (error) => console.log(error)
+        )
     },
     render:function(){
         return (
