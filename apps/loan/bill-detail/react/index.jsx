@@ -10,7 +10,7 @@ const Detail = React.createClass({
         return (
             <div>
                  <div className="loan-num">
-                     <div className={loanStatus == 1 ? "loan-money pay-back-color" : (loanStatus == 5 ? "loan-money overdue-color" : "loan-money overdue-color marginTop")}>{this.props.data.loanLeftAmount}</div>
+                     <div className={loanStatus == 1 ? "loan-money pay-back-color" : (loanStatus == 5 ? "loan-money overdue-color" : "loan-money overdue-color marginTop")}>{this.props.data.loanAmount}</div>
                      {loanStatus == 5 ?<div className="loan-status1"><img src="images/overdue.jpg"/></div>:null}
                      {loanStatus == 1 ? <div className="loan-status2">已还清</div>:null}
                  </div>
@@ -53,12 +53,11 @@ const Detail = React.createClass({
 $FW.DOMReady(function() {
     ReactDOM.render(<Header title={"详情"}/>, document.getElementById('header'));
     let query = $FW.Format.urlQuery();
-    let loanType = query.loanType;
     let loanGid = query.loanGid;
     $FW.Ajax({
         url: `${API_PATH}api/repayment/v1/loandetail.json`,
         method: "post",
-        data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3, loanType:loanType, loanGid:loanGid}
+        data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3, loanGid:loanGid}
     }).then((data) => {
         console.log(data)
         ReactDOM.render(<Detail data={data}/>, document.getElementById('cnt'));

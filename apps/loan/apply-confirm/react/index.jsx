@@ -29,6 +29,12 @@ const ConfirmLoanWrap = React.createClass({
         this.setState({loanResult: booleanVal});
     },
     render: function () {
+        let cashBank = this.props.userBankList.withdrawBankcard;
+
+        function isRealNameBindCard(ele){
+            return ele.isRealNameBindCard == true;
+        }
+        let filtered = cashBank.filter(isRealNameBindCard);
         return (
             <div>
                 <ConfirmLoan callbackItemShow={this.itemShow} callbackVerifyCodeShow={this.getVerifyCodeShow}
@@ -39,7 +45,7 @@ const ConfirmLoanWrap = React.createClass({
                                                    feeExtList={this.props.feeExtList}/> : null}
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow}/> : null}
-                {this.state.loanResult ? <LoanResult callbackResultHide={this.resultHide}/> : null}
+                {this.state.loanResult ? <LoanResult callbackResultHide={this.resultHide} bankShortName={filtered[0].bankShortName} cardNo={filtered[0].cardNo}/> : null}
             </div>
         )
     },
@@ -308,7 +314,7 @@ const LoanResult = React.createClass({
                             </div>
                             <div className="customer-service">
                                 <div className="service-wrap"><img src="images/phone.png"/>如有问题请致电：<a
-                                    href="tel:400-0322-988">400-000-0000</a></div>
+                                    href="tel:400-102-0066">400-102-0066</a></div>
                             </div>
                         </div>
                     </div>
@@ -329,7 +335,7 @@ const LoanResult = React.createClass({
                             </div>
                             <div className="customer-service">
                                 <div className="service-wrap"><img src="images/phone.png"/>如有问题请致电：<a
-                                    href="tel:400-0322-988">400-000-0000</a></div>
+                                    href="tel:400-102-0066">400-102-0066</a></div>
                             </div>
                         </div>
                     </div>
@@ -344,16 +350,16 @@ const LoanResult = React.createClass({
                                     <div className="icon3"></div>
                                     <div className="icon3-info">
                                         <div className="icon3-info-top">已打款至</div>
-                                        <div className="icon3-info-btm">银行卡（工商银行2233）</div>
+                                        <div className="icon3-info-btm">银行卡（{this.props.bankShortName}{this.props.cardNo.slice(-4)}）</div>
                                     </div>
                                 </div>
                             </div>
                             <div className="customer-service">
                                 <div className="service-wrap"><img src="images/phone.png"/>如有问题请致电：<a
-                                    href="tel:400-0322-988">400-000-0000</a></div>
+                                    href="tel:400-102-0066">400-102-0066</a></div>
                             </div>
                         </div>
-                        <div className="credit-btn">去提额</div>
+                        <div className="credit-btn" onClick={()=>gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>去提额</div>
                     </div>
                     <div className={this.state.failResultShow ? "fail-result-box" : "fail-result-box dis"}>
                         <div className="wrap-box">
@@ -372,7 +378,7 @@ const LoanResult = React.createClass({
                             </div>
                             <div className="customer-service">
                                 <div className="service-wrap"><img src="images/phone.png"/>如有问题请致电：<a
-                                    href="tel:400-0322-988">400-000-0000</a></div>
+                                    href="tel:400-102-0066">400-102-0066</a></div>
                             </div>
                         </div>
                         <div className="apply-btn">重新借款</div>
@@ -389,19 +395,28 @@ $FW.DOMReady(function () {
     let loanNum = query.loanNum;
     let orioleOrderGid = query.orioleOrderGid;
     let withdrawCardGid = query.withdrawCardGid;
-    $FW.Ajax({
-        url: `${API_PATH}api/loan/v1/tryLoanBudget.json`,
-        method: "post",
-        data: {
-            token: $FW.Store.getUserToken(),
-            userGid: $FW.Store.getUserGid(),
-            userId: $FW.Store.getUserId(),
-            sourceType: 3,
-            orioleOrderGid: orioleOrderGid,
-            loanAmount: loanNum
-        }
-    }).then(d => {
-        ReactDOM.render(<ConfirmLoanWrap {...d}/>, document.getElementById('cnt'));
+
+    Promise.all([
+        $FW.Ajax({
+            url: `${API_PATH}api/loan/v1/tryLoanBudget.json`,
+            method: "post",
+            data: {
+                token: $FW.Store.getUserToken(),
+                userGid: $FW.Store.getUserGid(),
+                userId: $FW.Store.getUserId(),
+                sourceType: 3,
+                orioleOrderGid: orioleOrderGid,
+                loanAmount: loanNum
+            }
+        }),
+        $FW.Ajax({
+            url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
+            method: "post",
+            data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3}
+        })
+    ]).then(d => {
+        console.log(d);
+        ReactDOM.render(<ConfirmLoanWrap {...d[0]} {...d[1]}/>, document.getElementById('cnt'));
     }, (error) => console.log(error));
 
     $FW.Ajax({
