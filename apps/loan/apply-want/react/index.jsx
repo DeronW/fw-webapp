@@ -12,7 +12,8 @@ const WantLoan = React.createClass({
            loanNum:loanNum,
            creditLine:creditLine,
            orioleOrderGid:orioleOrderGid,
-           orderGid:null
+           orderGid:null,
+           loanGid:null
         }
     },
     changeHandler:function(e){
@@ -20,6 +21,9 @@ const WantLoan = React.createClass({
         this.setState({loanNum:inputNum});
     },
     loanHandler:function(){
+        let query = $FW.Format.urlQuery();
+        let loanNum = query.loanNum;
+        let orioleOrderGid = query.orioleOrderGid;
         let n = parseInt(this.state.loanNum) || 0, {creditLine} = this.state, err;
 
 
@@ -40,9 +44,27 @@ const WantLoan = React.createClass({
         }
         let filtered = cashBank.filter(isRealNameBindCard);
 
-        if(!err){
-            location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
-        }
+        $FW.Ajax({
+            url: `${API_PATH}api/loan/v1/apply.json`,
+            method: "post",
+            data: {
+                token: $FW.Store.getUserToken(),
+                userGid: $FW.Store.getUserGid(),
+                userId: $FW.Store.getUserId(),
+                loanAmount: loanNum,
+                orioleOrderGid: orioleOrderGid,
+                productId: 1,
+                sourceType: 3,
+                withdrawCardGid: filtered[0].cardGid
+            }
+        }).then((data) => {
+            this.setState({loanGid:data.loanGid,orderGid:data.orderGid});
+            console.log(this.state.loanGid)
+            console.log(this.state.orderGid)
+            if(!err){
+                location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`;
+            }
+        }, (error) => console.log(error));
 
     },
     render:function(){

@@ -156,10 +156,7 @@ const VerifyCode = React.createClass({
     },
     componentDidMount: function () {
         let query = $FW.Format.urlQuery();
-        let loanNum = query.loanNum;
-        let orioleOrderGid = query.orioleOrderGid;
-        let withdrawCardGid = query.withdrawCardGid;
-        let phoneNum;
+        let orderGid = query.orderGid;
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/sendSmsverifycode.json`,
             method: "post",
@@ -168,14 +165,11 @@ const VerifyCode = React.createClass({
                 userGid: localStorage.userGid,
                 userId: localStorage.userId,
                 sourceType: 3,
-                productId: 1,
-                orioleOrderGid: orioleOrderGid,
-                loanAmount: loanNum,
-                withdrawCardGid: withdrawCardGid
+                orderGid:orderGid
             }
         }).then(data => {
-            this.setState({phoneNum: data.mobile, orderGid: data.orderGid});
-        }, (error) => console.log(error));
+            this.setState({orderGid: data.orderGid});
+        }, (err) => $FW.Component.Toast(err));
     },
     getSMSCode: function () {
         console.log(this.state.orderGid)
@@ -200,9 +194,7 @@ const VerifyCode = React.createClass({
     },
     confirmBtnHandler: function () {
         let query = $FW.Format.urlQuery();
-        let loanNum = query.loanNum;
-        let orioleOrderGid = query.orioleOrderGid;
-        let withdrawCardGid = query.withdrawCardGid;
+        let orderGid = query.orderGid;
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/do.json`,
             method: "post",
@@ -211,12 +203,8 @@ const VerifyCode = React.createClass({
                 userGid: localStorage.userGid,
                 userId: localStorage.userId,
                 sourceType: 3,
-                orderGid: this.state.orderId,
-                orioleOrderGid: orioleOrderGid,
-                loanAmount: loanNum,
-                withdrawCardGid: withdrawCardGid,
+                orderGid: orderGid,
                 verifyCode: this.state.value,
-                transPwd: 123456
             }
         }).then(d => {
             this.props.callbackResultShow(true);
@@ -234,7 +222,7 @@ const VerifyCode = React.createClass({
                         <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                         <div className="verify-popup-title">短信验证</div>
                         <div className="verify-popup-tip">
-                            已向尾号（{this.state.phoneNum ? this.state.phoneNum.slice(-4) : null}）发送短信验证码。
+                            已向尾号（{localStorage.phone.slice(-4)}）发送短信验证码。
                         </div>
                         <div className="verify-input">
                             <input className="sms-input" type="number" name="number" value={this.state.value}
