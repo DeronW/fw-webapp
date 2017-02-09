@@ -59,7 +59,7 @@ const MyCnt = React.createClass({
             if (userStatus == 1) {
                 return "/static/loan/user-set-cash-card/index.html";
             } else if (userStatus >= 2) {
-                return `https://cashloan.9888.cn/api/credit/v1/creditlist.html?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`
+                return `https://cashloan.9888.cn/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`
             }
         }
 
@@ -125,7 +125,7 @@ const MyCnt = React.createClass({
 							</a>
 						</div>*/}
                         <div className="list-cnt">
-                            <a href="/static/loan/user-more/index.html">
+                            <a href="/static/loan/user-settings/index.html">
                                 <span className="icon more-icon"></span>
                                 <span className="text">更多</span>
                                 <span className="arrow-r-icon"></span>

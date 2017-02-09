@@ -1,4 +1,8 @@
 let More = React.createClass({
+    logoutHandler(){
+        window.localStorage.clear();
+        location.href='/static/loan/user-entry/index.html';
+    },
 	render() {
 		return (
 			<div className="more-cnt">
@@ -23,7 +27,7 @@ let More = React.createClass({
 
 
 				<div className="more-btn">
-					<div className="ui-btn">退出登录</div>
+					<div className="ui-btn" onClick={this.logoutHandler}>退出登录</div>
 				</div>
 			</div>
 		)
