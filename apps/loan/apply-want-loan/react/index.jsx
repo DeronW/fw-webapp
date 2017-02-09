@@ -63,7 +63,7 @@ const WantLoan = React.createClass({
                         <div className="line2"></div>
                         <div className="line3"></div>
                     </div>
-                    <div className="loan-charge"><img className="icon" src="images/icon.png"/>日综合费率<span>{interest}%</span>，期限<span>{this.props.period}天</span></div>
+                    <div className="loan-charge"><img className="icon" src="images/icon.png"/>日综合费率<span>{this.props.baseRateDayStr}</span>，期限<span>{this.props.period}天</span></div>
                 </div>
                 <div className="withdraw-card">
                     <span className="withdraw-card-title">提现卡</span>

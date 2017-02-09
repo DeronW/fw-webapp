@@ -47,7 +47,7 @@ const HistoryBill = React.createClass({
                  <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/loan/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`) }>
                      <div className="bill-detail">
                          <div className="bill-detail-wrap">
-                             <span className="bill-money">{item.loanAmount}</span>
+                             <span className="bill-money">{item.loanAmount.toFixed(2)}</span>
                          </div>
                          <span className="bill-deadline">{item.loanTimeStr}</span>
                      </div>
