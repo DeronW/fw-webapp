@@ -158,7 +158,15 @@ const VerifyCode = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/repayment/v1/checksmsverifycode.json`,
             method: "post",
-            data: {loanGid:loanGid,cardGid:cardGid, token:localStorage.userToken, userGid:localStorage.userGid,userId:localStorage.userId, sourceType:3}
+            data: {
+                repaymentAmount:this.props.loanLeftAmount,
+                loanGid:loanGid,
+                cardGid:cardGid,
+                token:localStorage.userToken,
+                userGid:localStorage.userGid,
+                userId:localStorage.userId,
+                sourceType:3
+            }
         }).then(d => {
                this.setState({phoneNum:d.mobile, orderGid:d.orderGid});
             }, (error) => console.log(error)
