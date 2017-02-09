@@ -39,9 +39,22 @@ const WantLoan = React.createClass({
         }
         let filtered = cashBank.filter(isRealNameBindCard);
 
-        if(!err){
-            location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
-        }
+        $FW.Ajax({
+            url: `${API_PATH}api/loan/v1/apply.json`,
+            method: "post",
+            data: {
+                token:$FW.Store.getUserToken(),
+                userGid:$FW.Store.getUserGid(),
+                userId:$FW.Store.getUserId(),
+                sourceType:3,
+                orioleOrderGid:orioleOrderGid,
+                loanAmount:loanNum
+            }
+        }).then(d => {
+            if(!err){
+                location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
+            }
+        }, (error) => console.log(error));
 
     },
     render:function(){
@@ -85,7 +98,14 @@ $FW.DOMReady(function() {
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/tryLoanBudget.json`,
             method: "post",
-            data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3, orioleOrderGid:orioleOrderGid, loanAmount:loanNum}
+            data: {
+                token:$FW.Store.getUserToken(),
+                userGid:$FW.Store.getUserGid(),
+                userId:$FW.Store.getUserId(),
+                sourceType:3,
+                orioleOrderGid:orioleOrderGid,
+                loanAmount:loanNum
+            }
         }),
         $FW.Ajax({
             url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,

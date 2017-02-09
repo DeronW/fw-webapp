@@ -84,7 +84,7 @@ const Register = React.createClass({
 				</div>
 
 				<div className="forget-pwd-link">
-					<a href={"/static/loan/user-set-new-password/index.html?=phone" + location.search.split("=")[1]}>忘记密码?</a>
+					<a href={"/static/loan/user-reset-password/index.html?=phone" + location.search.split("=")[1]}>忘记密码?</a>
 				</div>
 
 			</div>

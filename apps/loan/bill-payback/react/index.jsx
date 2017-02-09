@@ -196,7 +196,7 @@ const VerifyCode = React.createClass({
             url: `${API_PATH}api/repayment/v1/do.json`,
             method: "post",
             data: {
-                orderGid:localStorage.orderGid,
+                orderGid:this.state.orderGid,
                 token:localStorage.userToken,
                 userGid:localStorage.userGid,
                 userId:localStorage.userId,
