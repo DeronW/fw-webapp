@@ -147,9 +147,11 @@ const BankCardList = React.createClass({
     },
     backHandler: function () {
         this.props.callbackPopHide(false);
-        this.props.callbackBankName(this.state.bankName);
-        this.props.callbackBankNo(this.state.bankNo);
-        this.props.callbackBankCardGid(this.state.cardGid);
+        if(this.props.bankList.length > 1){
+            this.props.callbackBankName(this.state.bankName);
+            this.props.callbackBankNo(this.state.bankNo);
+            this.props.callbackBankCardGid(this.state.cardGid);
+        }
     },
     componentDidMount: function () {
     },
