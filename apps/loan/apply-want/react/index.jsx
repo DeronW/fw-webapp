@@ -11,7 +11,8 @@ const WantLoan = React.createClass({
         return {
            loanNum:loanNum,
            creditLine:creditLine,
-           orioleOrderGid:orioleOrderGid
+           orioleOrderGid:orioleOrderGid,
+           orderGid:null
         }
     },
     changeHandler:function(e){
@@ -48,9 +49,12 @@ const WantLoan = React.createClass({
                 userId:$FW.Store.getUserId(),
                 sourceType:3,
                 orioleOrderGid:orioleOrderGid,
-                loanAmount:loanNum
+                loanAmount:loanNum,
+                productId:1,
+                withdrawCardGid:filtered[0].cardGid
             }
         }).then(d => {
+            this.setState({orderGid:d.data.orderGid});
             if(!err){
                 location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
             }
