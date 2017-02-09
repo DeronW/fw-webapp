@@ -40,25 +40,9 @@ const WantLoan = React.createClass({
         }
         let filtered = cashBank.filter(isRealNameBindCard);
 
-        $FW.Ajax({
-            url: `${API_PATH}api/loan/v1/apply.json`,
-            method: "post",
-            data: {
-                token:$FW.Store.getUserToken(),
-                userGid:$FW.Store.getUserGid(),
-                userId:$FW.Store.getUserId(),
-                sourceType:3,
-                orioleOrderGid:orioleOrderGid,
-                loanAmount:loanNum,
-                productId:1,
-                withdrawCardGid:filtered[0].cardGid
-            }
-        }).then(d => {
-            this.setState({orderGid:d.data.orderGid});
-            if(!err){
-                location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
-            }
-        }, (error) => console.log(error));
+        if(!err){
+            location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}`;
+        }
 
     },
     render:function(){

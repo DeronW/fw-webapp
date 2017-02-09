@@ -35,5 +35,6 @@ const UserAboutus = React.createClass({
 });
 
 $FW.DOMReady(() => {
+    ReactDOM.render(<Header title={"关于我们"}/>, document.getElementById('header'));
     ReactDOM.render(<UserAboutus />, CONTENT_NODE);
 })
