@@ -47,6 +47,7 @@ const WantLoan = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/apply.json`,
             method: "post",
+            enable_loading:"mini",
             data: {
                 token: $FW.Store.getUserToken(),
                 userGid: $FW.Store.getUserGid(),
