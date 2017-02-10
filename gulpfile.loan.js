@@ -4,23 +4,23 @@ const PROJ = 'loan';
 
 let APP_NAMES = [
     'home', // 首页
-	'faq',//常见问题
-	'about-us', //关于我们
+    'faq', //常见问题
+    'about-us', //关于我们
 ];
 
 // 用户模块
 const USER_PAGES = [
     'user-entry', // 用户入口, 并非登录或注册, 而是用户的进入入口
-    'user-register',//注册入口
+    'user-register', //注册入口
     'user-login', //登录入口
     'user-reset-password',
     'user', //我
-    'user-card-set',//设置提现卡
-    'user-card-add',//添加提现卡
+    'user-card-set', //设置提现卡
+    'user-card-add', //添加提现卡
     'user-verify-phone', //获取验证码
-    'user-bank-support',//支持银行卡
-	'user-bank-management',//银行卡管理
-	'user-settings' //更多
+    'user-bank-support', //支持银行卡
+    'user-bank-management', //银行卡管理
+    'user-settings' //更多
 ]
 
 // 账单模块
@@ -82,7 +82,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             debug: true,
             api_path: CONSTANTS[PROJ].dev_api_path,
             include_components: INCLUDE_COMPONENTS,
-            include_less:INCLUDE_LESS,
+            include_less: INCLUDE_LESS,
             include_javascripts: INCLUDE_JAVASCRIPTS
         });
 
@@ -91,7 +91,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             api_path: '//cashloan.9888.cn/',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: INCLUDE_COMPONENTS,
-            include_less:INCLUDE_LESS,
+            include_less: INCLUDE_LESS,
             include_javascripts: INCLUDE_JAVASCRIPTS
         });
     });
@@ -99,10 +99,13 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-            `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
-            '!**/jquery.*.js', '!**.min.js'])
+                `apps/${PROJ}/**/*.+(js|jsx)`,
+                '!node_modules/**',
+                '!**/jquery.*.js',
+                '!**.min.js'
+            ])
             .pipe(eslint())
             .pipe(eslint.format())
-            // .pipe(eslint.failAfterError());
+        // .pipe(eslint.failAfterError());
     }))
 };
