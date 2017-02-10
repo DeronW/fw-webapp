@@ -8,8 +8,7 @@ const Register = React.createClass({
     },
     changeHandler(e) {
         let v = e.target.value;
-        console.log(v)
-        this.setState({ phone: parseInt(v) || 1 })
+        this.setState({ phone: parseInt(v) || 1 });
     },
 
     handleGetCode() {
@@ -52,7 +51,7 @@ const Register = React.createClass({
                         <div className="from">
                             <div className="icon"></div>
                             <div className="input">
-                                <input type="text" value={this.state.phone}
+                                <input type="number" value={this.state.phone}
                                     onChange={this.changeHandler}
                                     placeholder="请输入手机号进行注册登录" />
                             </div>
