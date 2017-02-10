@@ -26,12 +26,12 @@ const Register = React.createClass({
         }).then(data => {
             localStorage.phone = phone;
             location.href = `/static/loan/user-register/index.html?codeToken=${data.codeToken}&phone=${phone}`;
-        }, (code, msg) => {
-            if (code === 1029) {
+        }, res => {
+            if (res.code === 1029) {
                 localStorage.phone = phone;
                 location.href = `/static/loan/user-login/index.html?phone=${phone}`;
             } else {
-                $FW.Component.Alert(msg)
+                $FW.Component.Alert(res.msg)
             }
         })
 
