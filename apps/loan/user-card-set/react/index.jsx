@@ -119,6 +119,7 @@ const SetCashCard = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/cardinfo.json`,
                 method: "POST",
+                enable_loading:"mini",
                 data: {
                     bankCardNo: space(this.state.bankNum),
                     token: localStorage.userToken,
@@ -195,6 +196,7 @@ const SetCashCard = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/commitinfo.json`,
                 method: 'POST',
+                enable_loading:"mini",
                 data: {
                     bankName: this.state.bankName,
                     cardHolderName: this.state.name,

@@ -394,6 +394,7 @@ $FW.DOMReady(function () {
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/tryLoanBudget.json`,
             method: "post",
+            enable_loading:"mini",
             data: {
                 token: $FW.Store.getUserToken(),
                 userGid: $FW.Store.getUserGid(),
@@ -406,11 +407,13 @@ $FW.DOMReady(function () {
         $FW.Ajax({
             url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
             method: "post",
+            enable_loading:"mini",
             data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3 }
         }),
         $FW.Ajax({
             url: `${API_PATH}api/repayment/v1/latedescription.json`,
             method: "post",
+            enable_loading:"mini",
             data: {
                 token: $FW.Store.getUserToken(),
                 userGid: $FW.Store.getUserGid(),

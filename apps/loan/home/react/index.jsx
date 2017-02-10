@@ -199,6 +199,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}api/loan/v1/baseinfo.json`,
         method: "post",
+        enable_loading:"mini",
         data: {
             token: user.token,
             userGid: user.gid,

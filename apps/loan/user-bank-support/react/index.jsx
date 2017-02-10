@@ -8,6 +8,7 @@ const BankList = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/bankcard/v1/supportbank.json`,
             method: "POST",
+            enable_loading:"mini",
             data: {
                 token: localStorage.userToken,
                 userGid: localStorage.userGid,

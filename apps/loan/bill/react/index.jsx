@@ -78,6 +78,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}api/oriole/v1/loanloadpage.json`,
         method: "post",
+        enable_loading:"mini",
         data: {
             token: $FW.Store.getUserToken(),
             userGid: $FW.Store.getUserGid(),

@@ -25,6 +25,7 @@ const HistoryBill = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/oriole/v1/loanhistory.json`,
             method: 'POST',
+            enable_loading:"mini",
             data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3, pageSize: 20, pageIndex: this.state.page },
             success: (data) => {
                 console.log(data)

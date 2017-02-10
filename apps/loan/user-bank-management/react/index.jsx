@@ -62,6 +62,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
         method: "post",
+        enable_loading:"mini",
         data: {
             token: user.token,
             userGid: user.gid,

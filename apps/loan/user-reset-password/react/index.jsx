@@ -49,6 +49,7 @@ const Register = React.createClass({
         $FW.Ajax({
             url: API_PATH + "api/userBase/v1/sendVerifyCode.json",
             method: "POST",
+            enable_loading:"mini",
             data: {
                 mobile: localStorage.phone,
                 userOperationType: 2,
@@ -97,7 +98,7 @@ const Register = React.createClass({
             $FW.Ajax({
                 url: API_PATH + "api/userBase/v1/resetPass.json",
                 method: "POST",
-
+                enable_loading:"mini",
                 data: {
                     codeToken: _this.state.codeToken,
                     mobile: localStorage.phone,

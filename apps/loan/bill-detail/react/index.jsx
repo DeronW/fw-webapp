@@ -23,10 +23,10 @@ const Detail = React.createClass({
                         <span>待还本金</span>
                         <span>{this.props.data.loanAmount}元</span>
                     </div>
-                    {loanStatus == 5 ? (<div>
+                    <div>
                         <span>逾期费用</span>
                         <span>{this.props.data.overdueFee}元</span>
-                    </div>) : null}
+                    </div>
                 </div>
                 <div className="loan-detail-box">
                     <div>
@@ -57,6 +57,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}api/repayment/v1/loandetail.json`,
         method: "post",
+        enable_loading:"mini",
         data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3, loanGid: loanGid }
     }).then((data) => {
         console.log(data)

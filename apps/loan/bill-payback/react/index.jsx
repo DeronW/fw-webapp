@@ -204,6 +204,7 @@ const VerifyCode = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/repayment/v1/checksmsverifycode.json`,
             method: "post",
+            enable_loading:"mini",
             data: {
                 repaymentAmount: this.props.repaymentAmount,
                 loanGid: loanGid,
@@ -236,6 +237,7 @@ const VerifyCode = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/repayment/v1/resendverifycode.json`,
                 method: "post",
+                enable_loading:"mini",
                 data: {
                     token: localStorage.userToken,
                     userGid: localStorage.userGid,
@@ -254,6 +256,7 @@ const VerifyCode = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/repayment/v1/do.json`,
             method: "post",
+            enable_loading:"mini",
             data: {
                 orderGid: this.state.orderGid,
                 token: localStorage.userToken,
@@ -337,6 +340,7 @@ $FW.DOMReady(function () {
         $FW.Ajax({
             url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
             method: "post",
+            enable_loading:"mini",
             data: {
                 token: $FW.Store.getUserToken(),
                 userGid: $FW.Store.getUserGid(),
@@ -347,6 +351,7 @@ $FW.DOMReady(function () {
         $FW.Ajax({
             url: `${API_PATH}api/repayment/v1/loandetail.json`,
             method: "post",
+            enable_loading:"mini",
             data: {
                 loanGid: loanGid,
                 loanType: loanType,
