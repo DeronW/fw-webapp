@@ -52,7 +52,7 @@ const WantLoan = React.createClass({
                 token: $FW.Store.getUserToken(),
                 userGid: $FW.Store.getUserGid(),
                 userId: $FW.Store.getUserId(),
-                loanAmount: loanNum,
+                loanAmount:this.state.loanNum,
                 orioleOrderGid: orioleOrderGid,
                 productId: 1,
                 sourceType: 3,
