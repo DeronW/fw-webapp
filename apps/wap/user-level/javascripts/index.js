@@ -13,7 +13,7 @@ function redirectToAppUserContribute() {
 var qryDetail = function (giftBagId, level, bagType) {
 
     var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
-    if (app_login_sign != null && app_login_sign != '') {
+    if (app_login_sign !== null && app_login_sign !== '') {
         jsPost(location.protocol + '//m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml', {
             'level': level,
             'giftBagId': giftBagId,
@@ -133,7 +133,7 @@ $(function () {
 
             [0, 1, 2, 3, 4].forEach(function (i) {
                 $(".level-progress-box" + i + " .level-progress-red").css("width", parseInt(data.data.contributePercent) + "%");
-                $(".level-progress-box" + i + " .level-progress-bar").css("width", ((userLevel - 1) * 20) + "%");
+                $(".level-progress-box" + i + " .level-progress-bar").css("width", (userLevel - 1) * 20) + "%";
             });
 
             $(".slider-block").css("visibility", "visible");

@@ -12,7 +12,7 @@ const HomePanel = React.createClass({
         })
     },
     onImageClickHandler: function (index) {
-        console.log(index)
+
     },
     closeNoticeHandler: function () {
         this.setState({notice: null})

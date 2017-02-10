@@ -96,7 +96,7 @@ const InvestTab = React.createClass({
         var data = _this.state.listData;
 
 
-        var objDiv = (value, index) => (
+        var objDiv = (value, index) =>
             <div key={index} className="cont-block">
                 <div className="top-block">
                     <span className="fl">{value.title}</span>
@@ -114,7 +114,7 @@ const InvestTab = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        ;
 
         var btnMore = <div className="loading-more" onClick={_this.ajaxHandler}>
             加载更多
@@ -170,7 +170,7 @@ const InviteTab = React.createClass({
         var _this = this;
         var data = _this.state.listData;
 
-        var objDiv = (value, index) => (
+        var objDiv = (value, index) =>
             <div key={index} className="cont-block">
                 <div className="top-block">
                     <span className="fl">{value.title}</span>
@@ -186,7 +186,7 @@ const InviteTab = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+        ;
 
         var btnMore = <div className="loading-more" onClick={_this.ajaxHandler}>
             加载更多

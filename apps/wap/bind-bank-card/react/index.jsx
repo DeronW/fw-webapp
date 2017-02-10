@@ -15,18 +15,18 @@ const BindBankCard = React.createClass({
     getBankName: function (val) {
         this.setState({
             bankName: {
-                bankZone:val.bankName
+                bankZone: val.bankName
             }
         });
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/updateBankZone.shtml",
-            data:{
-                relevBankCard:val.bankNo
+            data: {
+                relevBankCard: val.bankNo
             },
-            success:function(data){
+            success: function (data) {
                 //$FW.Component.Alert('修改成功');
             },
-            fail: function(data){
+            fail: function (data) {
                 $FW.Component.Alert('修改失败，请再试一次');
             }
         });
@@ -39,7 +39,8 @@ const BindBankCard = React.createClass({
                 {prohibited < 3 ? <Invalid  /> : null}
                 {prohibited == 3 ? <Valid  /> : null}
                 {prohibited == 5 ? <Cover hide={this.hideHandler}/> : null}
-                {prohibited == 5 ? <Bomb hide={this.hideHandler} username={this.props.item.bankInfoDetail.realName}/> : null}
+                {prohibited == 5 ?
+                    <Bomb hide={this.hideHandler} username={this.props.item.bankInfoDetail.realName}/> : null}
 
                 <div className={prohibited < 3 ? "bank bank-top1" : "bank bank-top2"}>
                     <div className="ash clearfix">
@@ -58,23 +59,23 @@ const BindBankCard = React.createClass({
                 {/*<Sup/>*/}
                 {
                     this.state.popShow ? <SelectBankList
-                                        callbackSelectBankHide={this.getPopShow}
-                                        callbackBankName={this.getBankName}/> : null
+                        callbackSelectBankHide={this.getPopShow}
+                        callbackBankName={this.getBankName}/> : null
                 }
                 {
                     prohibited == 3 || prohibited == 4 ?
-                    <Bran propsBankName={this.state.bankName.bankZone}
-                          callbackPopShow={this.getPopShow}
-                          propsIsUpdateBank={this.props.item.isUpdateBank}
-                          propsBankInfoDetail={this.props.item.bankInfoDetail}
-                    /> : null
+                        <Bran propsBankName={this.state.bankName.bankZone}
+                              callbackPopShow={this.getPopShow}
+                              propsIsUpdateBank={this.props.item.isUpdateBank}
+                              propsBankInfoDetail={this.props.item.bankInfoDetail}
+                            /> : null
                 }
 
 
                 {
                     prohibited < 3 ? <Branch propsBankZone={this.props.item.bankInfoDetail.bankzone}
                                              callbackPopShow={this.getPopShow}
-                    /> : null
+                        /> : null
                 }
                 <Warm />
             </div>
@@ -160,7 +161,8 @@ const Bran = React.createClass({
                         }
                         <div className="wire-a"></div>
                         <div className="pure-a" onClick={this.handleJump}>
-                            <div className="xuanwu-a">{this.props.propsBankName == "" ? "开户支行" : this.props.propsBankName}</div>
+                            <div
+                                className="xuanwu-a">{this.props.propsBankName == "" ? "开户支行" : this.props.propsBankName}</div>
                             <div className="choice-a">
                                 <div className="pleas-a">请选择</div>
                             </div>
@@ -180,7 +182,7 @@ const Branch = React.createClass({
     },
     render: function () {
         return (
-            <div className="pure"  onClick={this.handleJump}>
+            <div className="pure" onClick={this.handleJump}>
                 <div className="xuanwu">{this.props.propsBankZone === "" ? "开户开行" : this.props.propsBankZone}</div>
                 <div className="choice">
                     <div className="pleas">请选择</div>
@@ -208,12 +210,12 @@ const Warm = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"绑定银行卡"}/>, HEADER_NODE);
-/*    $FW.Ajax({
-        url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
-        success: function (data) {
+    /*    $FW.Ajax({
+     url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+     success: function (data) {
 
-        }
-    });*/
+     }
+     });*/
 
     $FW.Ajax({
         url: API_PATH + "/mpwap/api/v1/showBankCardMess.shtml",

@@ -68,10 +68,6 @@
     window.NativeBridge = new Bridge();
 })();
 
-window.onNativeMessageReceive = function (msg) {
-    console.log('not define onNativeMessageReceive yet, receive msg: ', msg)
-};
-
 (function (callback) {
 
     // 如果不在app内打开, 不需要加载真实的 js bridge

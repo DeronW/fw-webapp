@@ -48,19 +48,17 @@ var PhoneCodePrompt = React.createClass({
     handlerVoice: function () {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
 
-        console.log(phoneNo);
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
             method: "GET",
             success: function (data) {
-                console.log(data);
             }
         });
     },
     render: function () {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
-        var idCarNoNntercept = phoneNo.substring(0, 3) + "****" + phoneNo.substring((phoneNo.length - 4), phoneNo.length);
+        var idCarNoNntercept = phoneNo.substring(0, 3) + "****" + phoneNo.substring(phoneNo.length - 4, phoneNo.length);
 
         return (
             <div className="old-user-prompt-text">
@@ -158,7 +156,6 @@ var From = React.createClass({
         });
     },
     onInputChangeHandler: function (event) {
-        //　....　data
         this.props.callbackParent(event.target.value);
         this.setState({
             account: numberFormat.format(event.target.value)
@@ -242,7 +239,7 @@ var From = React.createClass({
 
         var userAjaxData = this.props.ajaxData;
         var idCardNo = userAjaxData.userInfo.idCardNo;
-        var idCarNoNntercept = idCardNo.substring(0, 4) + "**********" + idCardNo.substring((idCardNo.length - 4), idCardNo.length);
+        var idCarNoNntercept = idCardNo.substring(0, 4) + "**********" + idCardNo.substring(idCardNo.length - 4, idCardNo.length);
         var accountInput = function () {
             return _this.state.showInput == 1 ?
                 <input type="text"
@@ -259,12 +256,12 @@ var From = React.createClass({
             return <div className="">
                         <span className="bank-text">
                             {
-                                _this.props.alreadyBankData == null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
+                                _this.props.alreadyBankData === null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
                             }
                         </span>
                 <span className="img">
                             <img
-                                src={_this.props.alreadyBankData == null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl}
+                                src={_this.props.alreadyBankData === null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl}
                                 className="r-icon"/>
                         </span>
             </div>
@@ -283,6 +280,7 @@ var From = React.createClass({
                 <div className="from-block">
                     <div className="input-block">
                         <span className="icon name-icon"></span>
+
                         <div className="text-block">
                             {
                                 userAjaxData.userInfo.realName === "" ?
@@ -295,6 +293,7 @@ var From = React.createClass({
 
                     <div className="input-block">
                         <span className="icon id-icon"></span>
+
                         <div className="text-block">
                             {
                                 idCardNo === "" ? <input type="text" placeholder="输入身份证" onChange={this.changeId}/> :
@@ -306,6 +305,7 @@ var From = React.createClass({
 
                     <div className="input-block">
                         <span className="icon number-icon"></span>
+
                         <div className="text-block">
                             <input type="text" placeholder="请输入银行卡号"
                                    onClick={this.bankInputEndHandler}
@@ -404,6 +404,7 @@ var SelectBank = React.createClass({
 
             return <li key={index} onClick={_this.supportQuickPayClick.bind(this, index)} ref={"item" + index}>
                 <img src={comment.logoUrl} className="logo-img"/>
+
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
                 </div>
@@ -414,6 +415,7 @@ var SelectBank = React.createClass({
         var notQuickPayli = function (comment, index) {
             return <li key={index} onClick={_this.notSupportQuickPayList.bind(this, index)} ref={"item" + index}>
                 <img src={comment.logoUrl} className="logo-img"/>
+
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
                 </div>
@@ -431,7 +433,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.quickBankList.map(quickPayli, this) : null
+                                this.state.bankListData !== null ? this.state.bankListData.quickBankList.map(quickPayli, this) : null
                             }
 
                         </ul>
@@ -443,7 +445,7 @@ var SelectBank = React.createClass({
                         </div>
                         <ul className="list">
                             {
-                                this.state.bankListData != null ? this.state.bankListData.bankList.map(notQuickPayli, this) : null
+                                this.state.bankListData !== null ? this.state.bankListData.bankList.map(notQuickPayli, this) : null
                             }
                         </ul>
                     </div>
@@ -452,10 +454,12 @@ var SelectBank = React.createClass({
                 <div className="prompt-block">
                     <div className="text">
                         <span className="circular"></span>
+
                         <div className="prompt-text">添加支持快捷支付的银行卡，可在金融工场对您的资金实现充值、提现操作；</div>
                     </div>
                     <div className="text">
                         <span className="circular"></span>
+
                         <div className="prompt-text">不支持的快捷支付的银行卡仅能提现，不能充值；</div>
                     </div>
                 </div>
@@ -503,8 +507,6 @@ var Body = React.createClass({
         var _this = this;
 
 
-        console.log(isCardNo(space(this.state.userInfo.bankCardNo)));
-
         var getAjaxUserInfo = this.props.activity
 
         if (this.state.userInfo.realName === "") {
@@ -518,7 +520,7 @@ var Body = React.createClass({
         }
 
 
-        if(space(this.state.userInfo.bankCardNo).length < 16 || space(this.state.userInfo.bankCardNo).length > 19) {
+        if (space(this.state.userInfo.bankCardNo).length < 16 || space(this.state.userInfo.bankCardNo).length > 19) {
             $FW.Component.Toast("银行账号格式不正确");
             return false;
         }
@@ -539,20 +541,19 @@ var Body = React.createClass({
         }
 
         if (this.dataText !== undefined) {
-            if ((this.dataText.length == 0) || (this.dataText == undefined)) {
+            if (this.dataText.length == 0 || this.dataText == undefined) {
                 $FW.Component.Toast("不能为空");
             }
 
             return false;
         }
 
-        if (this.state.validateCode == null || this.state.validateCode == "") {
+        if (this.state.validateCode === null || this.state.validateCode == "") {
             $FW.Component.Toast("验证码不能为空");
 
             return false;
         }
 
-        console.log(this.state.validateCode);
 
         let bankCard = this.state.userInfo.bankCardNo;
         let bankNo = this.state.userInfo.bankNo;
@@ -649,7 +650,7 @@ var Body = React.createClass({
                     callbackUserName={this.getUserName}
                     callbackUserId={this.getUserId}
                     callbackBankCardNo={this.getBankCardNo}
-                />
+                    />
 
                 <Btn btnText={"提交"} Fun={this.clickFun}/>
 
@@ -659,7 +660,7 @@ var Body = React.createClass({
                                                         callbackBtn={this.selectBank}
                                                         callbackAlreadyBank={this.alreadySelectBank}
                                                         callbackPopShowConfirm={this.state.popShow}
-                    /> : null
+                        /> : null
                 }
 
 
@@ -667,14 +668,13 @@ var Body = React.createClass({
 
                 {
                     this.state.popShow ? <Pop callbackPopShow={this.getPopShow}
-                    /> : null
+                        /> : null
                 }
             </div>
 
         );
     }
 });
-
 
 
 $FW.DOMReady(function () {
@@ -690,8 +690,3 @@ $FW.DOMReady(function () {
         }
     });
 });
-
-
-
-
-

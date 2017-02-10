@@ -66,7 +66,6 @@ const PieChart = React.createClass({
             var p = this.state.current_percent + this.STEP_PERCENT;
             if (p > this.MAX_UNFINISHED_PERCENT && this.state.target_percent == 100) {
                 p = 100;
-            } else {
             }
             this.setProgress(p)
         } else {
@@ -108,18 +107,18 @@ const PieChart = React.createClass({
 
         // 一共由2段圆弧和2条直线构成
         let f1 = ['M', sideLength / 2, sideLength / 2 - this.state.radius],
-            f2 = ['A', this.state.radius, this.state.radius, 0, (percent > .5 ? 1 : 0), 1, p2.x, p2.y],
+            f2 = ['A', this.state.radius, this.state.radius, 0, percent > .5 ? 1 : 0, 1, p2.x, p2.y],
             f3 = ['L', p2.x, p2.y, p3.x, p3.y],
             f4 = ['A', this.state.radius - this.state.weight, this.state.radius - this.state.weight, '0',
-                (percent > 0.5 ? 1 : 0), '0', sideLength / 2, sideLength / 2 - this.state.radius + this.state.weight],
+                percent > 0.5 ? 1 : 0, '0', sideLength / 2, sideLength / 2 - this.state.radius + this.state.weight],
             f5 = ['L', this.state.radius, '0', this.state.radius, this.state.radius-this.state.weight],
             f6 = ['Z'];
 
         let g1 = ['M', sideLength / 2, sideLength / 2 - this.state.radius],
-            g2 = ['A', this.state.radius, this.state.radius, 0, (percent2 > .5 ? 1 : 0), 0, p2.x, p2.y],
+            g2 = ['A', this.state.radius, this.state.radius, 0, percent2 > .5 ? 1 : 0, 0, p2.x, p2.y],
             g3 = ['L', p2.x, p2.y, p3.x, p3.y],
             g4 = ['A', this.state.radius - this.state.weight, this.state.radius - this.state.weight, '0',
-                (percent2 > 0.5 ? 1 : 0), 1, sideLength / 2, sideLength / 2 - this.state.radius + this.state.weight],
+                percent2 > 0.5 ? 1 : 0, 1, sideLength / 2, sideLength / 2 - this.state.radius + this.state.weight],
             g5 = ['L', this.state.radius, '0', this.state.radius, this.state.radius-this.state.weight],
             g6 = ['Z'];
 

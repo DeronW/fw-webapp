@@ -79,13 +79,7 @@ var AccountSucceedBody = React.createClass({
         );
     }
 });
-
-
-
-
 ReactDOM.render(
     <AccountSucceedBody />,
     document.getElementById("cnt")
 );
-
-

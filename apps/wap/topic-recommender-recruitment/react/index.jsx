@@ -8,9 +8,6 @@ $FW.DOMReady(function () {
         url :  API_PATH +"/mpwap/api/v1/getOpenAccountInfo.shtml",
         method: "GET",
         success: function(data) {
-            console.log(data);
-            console.log(data.userInfo.realName);
-            console.log(data.userInfo.phoneNum);
             document.querySelector("#namePart").innerText=data.userInfo.realName;
             document.querySelector("#phonePart").innerText=data.userInfo.phoneNum;
         },
@@ -49,7 +46,6 @@ $FW.DOMReady(function () {
         }
 
     };
-    console.log(formdata);
     formdata.wechatblurHandel();
     formdata.mailblurHandel();
     formdata.cityblurHandel();
@@ -78,7 +74,6 @@ $FW.DOMReady(function () {
                     weChatNo:formdata.weChatNo.value
                 },
                 success: function(data) {
-                    console.log(data);
                     $FW.Component.Alert('申请成功，请耐心等待审核！');
                 }
             });
@@ -94,16 +89,6 @@ $FW.DOMReady(function () {
         else {
             return false;}
     }
-
-
-
-
-
-
-
-
-
-
 });
 
 function gotoMall() {

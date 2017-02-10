@@ -31,13 +31,13 @@ var PswFrom = React.createClass({
         clearInterval(this.interval);
     },
     componentWillReceiveProps: function (nextProps) {
-        if (this.state.countdown == 0 && (+new Date()) - nextProps.callVoicePhone < 10) {
+        if (this.state.countdown == 0 && +new Date() - nextProps.callVoicePhone < 10) {
             this.setState({
                 codeType: 5,
                 isVmsType: "VMS"
             }, this.handerIdentifyingCode);
         } else {
-            if ((+new Date()) - nextProps.callVoicePhone < 10) {
+            if (+new Date() - nextProps.callVoicePhone < 10) {
                 if (this.state.countdown > 0 && this.state.countdown !== 60) {
                     $FW.Component.Toast(this.state.countdown + "s后才能获取");
                 }

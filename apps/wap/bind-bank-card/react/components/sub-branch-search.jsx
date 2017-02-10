@@ -18,7 +18,7 @@ var TopNav = React.createClass({
                     }
 
                     <div className="title">{this.props.title}</div>
-                    <span className="r-text" ></span>
+                    <span className="r-text"></span>
                 </div>
             </div>
         );
@@ -53,7 +53,7 @@ const SelectBankList = React.createClass({
                 success: (data) => {
                     this.setState({bankList: data.bankList})
 
-                    if(data.bankList.length === 0) {
+                    if (data.bankList.length === 0) {
                         this.setState({
                             promptBankNoShow: true
                         });
@@ -92,7 +92,7 @@ const SelectBankList = React.createClass({
         this.props.callbackSelectBankHide(false);
         this.props.callbackBankName(this.state.bankList[index]);
     },
-    getBackBtn: function() {
+    getBackBtn: function () {
         this.props.callbackSelectBankHide(false);
     },
     render: function () {
@@ -109,7 +109,8 @@ const SelectBankList = React.createClass({
                     backBtn={true}
                     btnText=""
                     callbackBackBtn={this.getBackBtn}
-                />
+                    />
+
                 <div className="search">
                     {this.state.find ? <img className="suo" src="images/search.png"/> : null}
                     <input type="text"
@@ -129,7 +130,9 @@ const SelectBankList = React.createClass({
                 {this.state.show_bank_list ? list() : null}
 
                 {
-                    this.state.promptBankNoShow ? <div className="promptBankNo">请尝试更换搜索关键词或拨打客服电话<span className="number-text">400-0322-988</span>寻求帮助</div> : null
+                    this.state.promptBankNoShow ?
+                        <div className="promptBankNo">请尝试更换搜索关键词或拨打客服电话<span className="number-text">400-0322-988</span>寻求帮助
+                        </div> : null
                 }
 
             </div>

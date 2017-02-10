@@ -18,7 +18,6 @@ $FW.DOMReady(function () {
                 let v = n ? n : "无";
                 // let v = interest_list[level] ? parseFloat(interest_list[level].describe) : '无';
                 document.getElementById('interest').innerText = v;
-                console.log(v);
                 if (v == '无') {
                     let e = document.getElementById('percent');
                     e.parentNode.removeChild(e);
@@ -37,7 +36,6 @@ $FW.DOMReady(function () {
 
         for (var i = 0; i < rule.length; i++) {
             var interest = rule[i].addInterest;
-            console.log(interest);//4个
             interest_list.push(rule[i].addInterest);
             var n = parseFloat(interest && interest.describe);
             document.getElementById("add-interest-text-" + i).innerHTML = n ? n + '%' : "-";
