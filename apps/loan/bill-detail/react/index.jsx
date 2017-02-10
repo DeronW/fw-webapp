@@ -3,31 +3,31 @@ function gotoHandler(link) {
 }
 
 const Detail = React.createClass({
-    render:function(){
+    render: function () {
         let loanStatus = this.props.data.loanStatus;
         let query = $FW.Format.urlQuery();
         let loanGid = query.loanGid;
         return (
             <div>
-                 <div className="loan-num">
-                     <div className={loanStatus == 1 ? "loan-money pay-back-color" : (loanStatus == 5 ? "loan-money overdue-color" : "loan-money overdue-color marginTop")}>{this.props.data.loanAmount}</div>
-                     {loanStatus == 5 ?<div className="loan-status1"><img src="images/overdue.jpg"/></div>:null}
-                     {loanStatus == 1 ? <div className="loan-status2">已还清</div>:null}
-                 </div>
-                 <div className="loan-detail-box">
-                     <div>
-                         <span>到期还款日</span>
-                         <span>{this.props.data.dueTimeStr}</span>
-                     </div>
-                     <div>
-                         <span>待还本金</span>
-                         <span>{this.props.data.loanAmount}元</span>
-                     </div>
-                     {loanStatus == 5 ? (<div>
-                             <span>逾期费用</span>
-                             <span>{this.props.data.overdueFee}元</span>
-                         </div>):null}
-                 </div>
+                <div className="loan-num">
+                    <div className={loanStatus == 1 ? "loan-money pay-back-color" : (loanStatus == 5 ? "loan-money overdue-color" : "loan-money overdue-color marginTop")}>{this.props.data.loanAmount}</div>
+                    {loanStatus == 5 ? <div className="loan-status1"><img src="images/overdue.jpg" /></div> : null}
+                    {loanStatus == 1 ? <div className="loan-status2">已还清</div> : null}
+                </div>
+                <div className="loan-detail-box">
+                    <div>
+                        <span>到期还款日</span>
+                        <span>{this.props.data.dueTimeStr}</span>
+                    </div>
+                    <div>
+                        <span>待还本金</span>
+                        <span>{this.props.data.loanAmount}元</span>
+                    </div>
+                    {loanStatus == 5 ? (<div>
+                        <span>逾期费用</span>
+                        <span>{this.props.data.overdueFee}元</span>
+                    </div>) : null}
+                </div>
                 <div className="loan-detail-box">
                     <div>
                         <span>借入金额</span>
@@ -50,16 +50,16 @@ const Detail = React.createClass({
     }
 });
 
-$FW.DOMReady(function() {
-    ReactDOM.render(<Header title={"详情"}/>, HEADER_NODE);
+$FW.DOMReady(function () {
+    ReactDOM.render(<Header title={"详情"} />, HEADER_NODE);
     let query = $FW.Format.urlQuery();
     let loanGid = query.loanGid;
     $FW.Ajax({
         url: `${API_PATH}api/repayment/v1/loandetail.json`,
         method: "post",
-        data: {token:$FW.Store.getUserToken(), userGid:$FW.Store.getUserGid(),userId:$FW.Store.getUserId(), sourceType:3, loanGid:loanGid}
+        data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3, loanGid: loanGid }
     }).then((data) => {
         console.log(data)
-        ReactDOM.render(<Detail data={data}/>, CONTENT_NODE);
+        ReactDOM.render(<Detail data={data} />, CONTENT_NODE);
     }, (error) => console.log(error));
 });
