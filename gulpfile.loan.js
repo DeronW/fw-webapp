@@ -48,7 +48,7 @@ const PROTOCOL_PAGES = [
 const DEVELOPING_PAGES = [
     'user-verify-phone',
     'weixin-download',
-    'weixin-invite'
+    'weixin-invite',
 ]
 
 APP_NAMES.push(
