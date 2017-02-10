@@ -122,7 +122,6 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
             '!**/jquery.*.js', '!**.min.js'])
             .pipe(eslint())
-            .pipe(eslint.format())
-            .pipe(eslint.failAfterError());
+            .pipe(eslint.format());
     }))
 };

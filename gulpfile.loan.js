@@ -103,6 +103,6 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             '!**/jquery.*.js', '!**.min.js'])
             .pipe(eslint())
             .pipe(eslint.format())
-            .pipe(eslint.failAfterError());
+            // .pipe(eslint.failAfterError());
     }))
 };
