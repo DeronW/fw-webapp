@@ -100,7 +100,7 @@ const Register = React.createClass({
 
                 data: {
                     codeToken: _this.state.codeToken,
-                    mobile: location.search.split('phone=')[1],
+                    mobile: localStorage.phone,
                     password: _this.state.pswVal,
                     verifyCode: _this.state.code,
                     sourceType: 3

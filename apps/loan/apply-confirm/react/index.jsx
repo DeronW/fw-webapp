@@ -403,17 +403,17 @@ $FW.DOMReady(function () {
         ReactDOM.render(<ConfirmLoanWrap {...d[0]} {...d[1]} />, CONTENT_NODE);
     }, (error) => console.error(error));
 
-    $FW.Ajax({
-        url: `${API_PATH}api/oriole/v1/indexnotice.json`,
-        method: "post",
-        fail: () => true,
-        data: {
-            token: $FW.Store.getUserToken(),
-            userGid: $FW.Store.getUserGid(),
-            userId: $FW.Store.getUserId(),
-            sourceType: 3
-        }
-    }).then(d => {
-        ReactDOM.render(<Notice {...d} />, document.getElementById('notice'));
-    }, (error) => console.error(error));
+    // $FW.Ajax({
+    //     url: `${API_PATH}api/oriole/v1/indexnotice.json`,
+    //     method: "post",
+    //     fail: () => true,
+    //     data: {
+    //         token: $FW.Store.getUserToken(),
+    //         userGid: $FW.Store.getUserGid(),
+    //         userId: $FW.Store.getUserId(),
+    //         sourceType: 3
+    //     }
+    // }).then(d => {
+    //     ReactDOM.render(<Notice {...d} />, document.getElementById('notice'));
+    // }, (error) => console.error(error));
 });
