@@ -41,7 +41,7 @@ const ApplyLoan = React.createClass({
                     minDiv.style.left = minDiv_left + "px";
                     lineDivBar.style.width = minDiv_left + 15 + "px";
                     var loanNum = Math.round(parseInt(minDiv_left / (lineDiv.offsetWidth - 58) * al) / 100) * 100;
-                    if (loanNum <= 500) { loanNum = 500 }
+                    if (loanNum <= this.props.data.lowestLoan) { loanNum = this.props.data.lowestLoan }
                     this.setState({ creditLine: loanNum });
                 }
             });
@@ -104,7 +104,7 @@ const ApplyLoan = React.createClass({
                 </div>
                 <div className="start-point"></div>
                 <div className="end-point"></div>
-                <div className="start-point-num">500</div>
+                <div className="start-point-num">{this.props.data.lowestLoan}</div>
                 <div className="end-point-num">{this.state.present_creditLine}</div>
             </div>;
 

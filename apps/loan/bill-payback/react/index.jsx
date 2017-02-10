@@ -106,10 +106,10 @@ const PayBack = React.createClass({
                         <span>待还本金</span>
                         <span>{this.props.loanAmount}元</span>
                     </div>
-                    {this.props.loanStatus == 5 ? (<div>
+                   <div>
                         <span>逾期</span>
                         <span>{this.props.overdueFee}元</span>
-                    </div>) : null}
+                    </div>
                 </div>
                 <div className="loan-detail-box">
                     <div>

@@ -7,7 +7,8 @@ const ConfirmLoanWrap = React.createClass({
         return {
             itemShow: false,
             verifyCodeShow: false,
-            loanResult: false
+            loanResult: false,
+            noticeShow:false
         }
     },
     itemShow: function (val) {
@@ -28,6 +29,12 @@ const ConfirmLoanWrap = React.createClass({
     resultHide: function (booleanVal) {
         this.setState({ loanResult: booleanVal });
     },
+    noticeShow: function (booleanVal) {
+        this.setState({noticeShow: booleanVal});
+    },
+    noticeHide:function (booleanVal) {
+        this.setState({noticeShow: booleanVal});
+    },
     render: function () {
         let cashBank = this.props.userBankList.withdrawBankcard;
 
@@ -40,9 +47,10 @@ const ConfirmLoanWrap = React.createClass({
                 <ConfirmLoan callbackItemShow={this.itemShow} callbackVerifyCodeShow={this.getVerifyCodeShow}
                     accountInAmount
                     ={this.props.accountInAmount} shouldRepaymentAmount={this.props.shouldRepaymentAmount}
-                    dueTime={this.props.dueTimeStr} totalFeeAmount={this.props.totalFeeAmount} />
+                    dueTime={this.props.dueTimeStr} totalFeeAmount={this.props.totalFeeAmount} callbackNoticeShow={this.noticeShow}/>
                 {this.state.itemShow ? <ItemDetail callbackItemDetailHide={this.itemDetailHide}
                     feeExtList={this.props.feeExtList} /> : null}
+                {this.state.noticeShow ? <Notice content={this.props.latedescription} callbackNoticeHide={this.noticeHide}/> : null}
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow} /> : null}
                 {this.state.loanResult ? <LoanResult callbackResultHide={this.resultHide} bankShortName={filtered[0].bankShortName} cardNo={filtered[0].cardNo} /> : null}
@@ -70,6 +78,9 @@ const ConfirmLoan = React.createClass({
     detailHandler: function () {
         this.props.callbackItemShow(true);
     },
+    clickHandler:function(){
+        this.props.callbackNoticeShow(true);
+    },
     render: function () {
         return (
             <div>
@@ -90,7 +101,7 @@ const ConfirmLoan = React.createClass({
                         <span className="vertical-line"></span>
                     </div>
                 </div>
-                <div className="transfer-tip">请按时还款，避免<a href="">逾期费用</a>。</div>
+                <div className="transfer-tip">请按时还款，避免<a onClick={this.clickHandler}>逾期费用</a>。</div>
                 <div className="loan-fee">
                     <span className="loan-fee-num">借款费用{this.props.totalFeeAmount}元</span>
                     <span className="loan-right-arrow" onClick={this.detailHandler}>详情</span>
@@ -108,21 +119,19 @@ const ConfirmLoan = React.createClass({
 });
 
 const Notice = React.createClass({
-    getInitialState: function () {
-        return {
-            noticeShow: this.props.code = 10000 ? true : false
-        }
+    clickHandler:function(){
+         this.props.callbackNoticeHide(false);
     },
     render: function () {
         return (
-            <div className={this.state.noticeShow ? "mask" : "mask dis"}>
+            <div className="mask">
                 <div className="notice-pop">
                     <div className="notice-close"></div>
                     <div className="notice-title">逾期费用说明</div>
                     <div className="notice-content">
-                        第三届互联网金融全球峰会北大论坛于4月19-21日在北京召开。近期，互联网金融行业风险频发，很多平台陷入兑付危机，在这样的大环境下，导致很多P2P平台开始逐渐退出市场。金融工场副总裁李建光在接受央广网财经记者的采访时指出，2016年是监管落地的元年，在监管的因素落地之前，一定会有一个大浪淘沙的过程，之前的爆发式野蛮增长的过程中，发展出来的平台里面必然会有沙子，但是总体上看，随着监管的落地，互联网金融行业的趋势一定是良币驱逐劣币。
+                        {this.props.content}
                     </div>
-                    <div className="notice-btn">知道了</div>
+                    <div className="notice-btn" onClick={this.clickHandler}>知道了</div>
                 </div>
             </div>
         )
@@ -398,22 +407,18 @@ $FW.DOMReady(function () {
             url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
             method: "post",
             data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3 }
+        }),
+        $FW.Ajax({
+            url: `${API_PATH}api/repayment/v1/latedescription.json`,
+            method: "post",
+            data: {
+                token: $FW.Store.getUserToken(),
+                userGid: $FW.Store.getUserGid(),
+                userId: $FW.Store.getUserId(),
+                sourceType: 3
+            }
         })
     ]).then(d => {
-        ReactDOM.render(<ConfirmLoanWrap {...d[0]} {...d[1]} />, CONTENT_NODE);
+        ReactDOM.render(<ConfirmLoanWrap {...d[0]} {...d[1]} {...d[2]}/>, CONTENT_NODE);
     }, (error) => console.error(error));
-
-    // $FW.Ajax({
-    //     url: `${API_PATH}api/oriole/v1/indexnotice.json`,
-    //     method: "post",
-    //     fail: () => true,
-    //     data: {
-    //         token: $FW.Store.getUserToken(),
-    //         userGid: $FW.Store.getUserGid(),
-    //         userId: $FW.Store.getUserId(),
-    //         sourceType: 3
-    //     }
-    // }).then(d => {
-    //     ReactDOM.render(<Notice {...d} />, document.getElementById('notice'));
-    // }, (error) => console.error(error));
 });
