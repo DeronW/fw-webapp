@@ -1,3 +1,11 @@
+$(function () {
+    // 设置全局变量的 API_PATH , 被用作所有接口的前缀地址
+    // 该变量很重要 !!!
+    var p = document.getElementById('api-path').value;
+    if (p.substr(0, 2) != '//') p = '//' + p;
+    window.API_PATH = location.protocol + p;
+    console.log(API_PATH)
+});
 function inApp() {
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
@@ -42,7 +50,7 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        url: "/mpwap/api/v1/user/level-info.shtml",
+        url: API_PATH+"mpwap/api/v1/user/level-info.shtml",
         //url: "http://10.105.7.124/xxxxx.json",
         //url: "http://localhost/user-level.json",
         dataType: "json",
@@ -73,7 +81,8 @@ $(function () {
 
             for (var i = 0; i < levelGiftsData.length; i++) {
                 var level = levelGiftsData[i].level;
-
+                //奖励加息
+                $(".vip1-interest span").text(levelGiftsData[i].levelRate);
                 for (var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
                     if (levelGiftsData[i].lvGiftIdMap[j].giftBagId !== "") {
                         $(".level-img" + i).append(
