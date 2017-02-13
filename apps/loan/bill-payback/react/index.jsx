@@ -20,7 +20,9 @@ const PayBackWrap = React.createClass({
             cardGid: cardGid,
             repaymentAmount: this.props.loanLeftAmount,
             bankName: filtered.bankShortName,
-            bankNo: filtered.cardNo
+            bankNo: filtered.cardNo,
+            selectedBankName:null,
+            index:0
         }
     },
     componentDidMount: function () {
@@ -62,6 +64,13 @@ const PayBackWrap = React.createClass({
     getBankCardGid: function (val) {
         this.setState({ cardGid: val });
     },
+    getBankIndex:function(index){
+        console.log(index);
+        this.setState({
+            index: index
+        })
+    },
+
     render: function () {
         return (
             <div>
@@ -72,7 +81,6 @@ const PayBackWrap = React.createClass({
                     overdueFee={this.props.overdueFee}
                     bankName={this.state.bankName}
                     bankNo={this.state.bankNo}
-
                 /> : null}
                 {this.state.bankCardListShow ?
                     <BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem}
@@ -80,6 +88,9 @@ const PayBackWrap = React.createClass({
                       bankName={this.state.bankName}
                       bankNo={this.state.bankNo}
                       cardGid={this.state.cardGid}
+                      callbackGetBankIndex={this.getBankIndex}
+                      callbackIndex= {this.state.index}
+
                     /> : null}
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid}
@@ -94,6 +105,7 @@ const PayBackWrap = React.createClass({
 const PayBack = React.createClass({
     bankListHandler: function () {
         this.props.callbackBankListShow(true);
+
     },
     paybackHandler: function () {
         this.props.callbackVerifyCodeShow(true);
@@ -143,7 +155,7 @@ const PayBack = React.createClass({
 const BankCardList = React.createClass({
     getInitialState: function () {
         return {
-            checked: 0,
+            checked: this.props.callbackIndex,
             bankName: this.props.bankName,
             bankNo: this.props.bankNo,
             cardGid: this.props.cardGid
@@ -157,6 +169,7 @@ const BankCardList = React.createClass({
         this.props.callbackBankName(this.state.bankName);
         this.props.callbackBankNo(this.state.bankNo);
         this.props.callbackBankCardGid(this.state.cardGid);
+        this.props.callbackGetBankIndex(this.state.checked);
     },
     clickHandler: function (index) {
         this.setState({
@@ -169,9 +182,15 @@ const BankCardList = React.createClass({
     render: function () {
         let list_item = (item, index) => {
             return (
-                <div className="list-item" key={index} onClick={() => { this.clickHandler(index) }}><img
-                    src={item.logoUrl} />{item.bankShortName}（{item.cardNo.slice(-4)}）{this.state.checked == index ?
-                        <div className="checked"></div> : null}</div>
+                <div className="list-item" key={index} onClick={() => { this.clickHandler(index) }}>
+                    <img
+                        src={item.logoUrl} />
+                            {item.bankShortName}（{item.cardNo.slice(-4)}）
+                            {
+                                this.state.checked == index ?
+                                                      <div className="checked"></div> : null
+                            }
+                </div>
             )
         };
         return (
