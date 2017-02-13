@@ -76,13 +76,9 @@ const PopPhone = React.createClass({
 
             $FW.Ajax({
                 url: API_PATH + '/mpwap/api/v1/changBankPhone.shtml?phoneNum=' + this.state.changePhoneVal + "&validateCode=" + this.state.codeVal,
-                enable_loading: true,
-                success: (data) => {
-                    this.props.callbackPopModifyPhoneVal(this.state.changePhoneVal);
-                },
-                fail: function (code, msg) {
-
-                }
+                enable_loading: 'mini',
+            }).then(data => {
+                this.props.callbackPopModifyPhoneVal(this.state.changePhoneVal);
             })
         }
     },
@@ -148,14 +144,14 @@ const PopPhone = React.createClass({
                     <div className="pop-info pop-phone-info">
                         <div className="pop-phone-input">
                             <input type="text" placeholder="请输入新的银行预留手机号"
-                                   onChange={this.changePhone}
-                                   value={this.state.changePhoneVal}
-                                />
+                                onChange={this.changePhone}
+                                value={this.state.changePhoneVal}
+                            />
                         </div>
                         <div className="pop-phone-code">
                             <input type="text" placeholder="验证码"
-                                   onChange={this.changeCode}
-                                />
+                                onChange={this.changeCode}
+                            />
                             {
                                 this.state.code ? <span className="code-btn c">{this.state.countdown}s后才能获取</span> :
                                     <span className="code-btn" onClick={this.getHandlerCode}>获取验证码</span>
@@ -229,7 +225,7 @@ const Recharge = React.createClass({
             success: (data) => {
                 // 当前开户用户是特殊用户, 不能充值
                 if (data.openStatus == 5) {
-                    this.setState({special_user: true})
+                    this.setState({ special_user: true })
                 }
             }
         })
@@ -240,10 +236,10 @@ const Recharge = React.createClass({
         this.checkRechargeResult();
     },
     checkRechargeResult: function () {
-        this.setState({order_state: 'success'})
+        this.setState({ order_state: 'success' })
     },
     inspectResult: function () {
-        this.setState({order_state: 'fail'})
+        this.setState({ order_state: 'fail' })
     },
     handlerPhone: function () {
         this.setState({
@@ -283,7 +279,7 @@ const Recharge = React.createClass({
     },
     render: function () {
         // console.log(this.props.data);
-        var deny = <Mask username={this.props.data.bankInfo.realName}/>;
+        var deny = <Mask username={this.props.data.bankInfo.realName} />;
         var bankCardNo = this.props.data.bankInfo.bankCardNo;
         let idCarNoNntercept = bankCardNo.substring(0, 4) + "********" + bankCardNo.substring(bankCardNo.length - 4, bankCardNo.length);
         return (
@@ -293,19 +289,19 @@ const Recharge = React.createClass({
                         propsPopInfo={"拨打电话400-0322-988"}
                         callbackCancelBtn={this.getCancelBtn}
                         callbackConfirmBtn={this.getConfirmBtn}
-                        /> : null
+                    /> : null
                 }
 
                 {this.state.special_user ? deny : null}
                 {this.state.order_state == 'processing' ?
                     <Recharge.OrderProcessing remain={6} checkRechargeResult={this.checkRechargeResult}
-                                              inspectResult={this.inspectResult}/> : null}
+                        inspectResult={this.inspectResult} /> : null}
                 {this.state.order_state == 'success' ? <Recharge.OrderSuccess /> : null}
                 {this.state.order_state == 'fail' ? <Recharge.OrderFail /> : null}
 
                 <div className="bank">
                     <div className="ash clearfix">
-                        <div className="img"><img src={this.props.data.bankInfo.bankLogo}/></div>
+                        <div className="img"><img src={this.props.data.bankInfo.bankLogo} /></div>
                         <div className="bankname">{this.props.data.bankInfo.bankName}</div>
                     </div>
                     <div className="belon">
@@ -320,40 +316,40 @@ const Recharge = React.createClass({
                 {/*</div>*/}
 
                 <Form countingSeconds={60}
-                      orderConfirm={this.orderConfirm}
-                      phone={this.props.data.bankInfo.bankPhone}
-                      callbackPopModifyPhone={this.getPopModifyPhone}
-                      addPopModifyPhone={this.state.popModifyPhoneVal}
-                    />
+                    orderConfirm={this.orderConfirm}
+                    phone={this.props.data.bankInfo.bankPhone}
+                    callbackPopModifyPhone={this.getPopModifyPhone}
+                    addPopModifyPhone={this.state.popModifyPhoneVal}
+                />
 
                 <div className="rmd">
                     <div className="remin">温馨提醒</div>
                     <div className="atpr">
-                        <img className="card-d" src="images/card-d.png"/>
+                        <img className="card-d" src="images/card-d.png" />
                         <span className="online">使用快捷支付充值最低金额应大于等于1元；</span>
                     </div>
                     <div className="atpr">
-                        <img className="card-d" src="images/card-d.png"/>
+                        <img className="card-d" src="images/card-d.png" />
                         <span className="online">对首次充值后无投资的提现，平台收取{this.props.data.fee}%的手续费；</span>
                     </div>
                     <div className="atpr">
-                        <img className="card-d" src="images/card-d.png"/>
+                        <img className="card-d" src="images/card-d.png" />
                         <span className="online">充值/提现必须为银行借记卡，不支持存折、信用卡充值；</span>
                     </div>
                     <div className="atpr">
-                        <img className="card-d" src="images/card-d.png"/>
+                        <img className="card-d" src="images/card-d.png" />
                         <span className="online">充值需开通银行卡网上支付功 能，如有疑问请咨询开户行客服；</span>
                     </div>
                     <div className="atpr">
-                        <img className="card-d" src="images/card-d.png"/>
+                        <img className="card-d" src="images/card-d.png" />
                         <span className="online">如手机快捷支付充值失败，可尝试在电脑上进行<span className="text">网银</span>转账，或使用<span
                             className="text">支付宝</span>进行转账操作</span>
                     </div>
                     <div className="atpr">
-                        <img className="card-d" src="images/card-d.png"/>
+                        <img className="card-d" src="images/card-d.png" />
                         <span className="online">单笔充值不可超过该银行充值限额。</span>
                     </div>
-                    <div className="atpr"><img className="card-d" src="images/card-d.png"/>
+                    <div className="atpr"><img className="card-d" src="images/card-d.png" />
                         <span className="online">如果充值金额没有及时到账，请<span
                             className="colr" onClick={this.handlerPhone}>拨打客服</span>查询。</span></div>
                 </div>
@@ -363,7 +359,7 @@ const Recharge = React.createClass({
                         callbackPopModifyPhoneCancelBtn={this.getPopModifyPhoneCancelBtn}
                         callbackPopModifyPhoneConfirmBtn={this.getPopModifyPhoneConfirmBtn}
                         callbackPopModifyPhoneVal={this.getPopModifyPhoneVal}
-                        /> : null
+                    /> : null
 
                 }
 
@@ -379,7 +375,7 @@ Recharge.OrderSuccess = React.createClass({
     render: function () {
         return (
             <div className="order-success">
-                <img src="images/order-success.png"/>
+                <img src="images/order-success.png" />
 
                 <div className="success-btn">
                     <a className="continue-charge" onClick={this.clickHandler}>继续充值</a>
@@ -394,7 +390,7 @@ Recharge.OrderFail = React.createClass({
     render: function () {
         return (
             <div className="order-fail">
-                <img src="images/order-fail.png"/>
+                <img src="images/order-fail.png" />
 
                 <div className="fail-tip">银行预留手机号错误</div>
                 <a className="fail-continue-charge">继续充值</a>
@@ -426,12 +422,12 @@ Recharge.OrderProcessing = React.createClass({
         }
     },
     countdown: function () {
-        this.setState({remain: this.state.remain - 1})
+        this.setState({ remain: this.state.remain - 1 })
     },
     render: function () {
         return (
             <div className="order-processing">
-                <img src="images/order-processing.png"/>
+                <img src="images/order-processing.png" />
 
                 <div className="text">
                     {this.state.remain}s 后为您呈现投标结果
@@ -443,13 +439,13 @@ Recharge.OrderProcessing = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"充值"} sub_text={"充值记录"}
-                            sub_url={"/mpwap/orderuser/viewRechargeRecord.shtml"}/>,
+        sub_url={"/mpwap/orderuser/viewRechargeRecord.shtml"} />,
         HEADER_NODE);
 
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getRechargeInfo.shtml",
         success: function (data) {
-            window._Recharge = ReactDOM.render(<Recharge data={data}/>,
+            window._Recharge = ReactDOM.render(<Recharge data={data} />,
                 document.getElementById("cnt"))
 
             fmOpt(data.sessionId);

@@ -25,7 +25,7 @@
         "no-multiple-empty-lines": ["warn"],
         "no-nested-ternary": ["warn"],
         "linebreak-style": [ "error", "unix" ],
-        "indent": [ "warn", 4 ]
+        "indent": [ "warn", 4 , {"SwitchCase": 1}]
     },
     "env": {}
 }

@@ -27,10 +27,7 @@ const ModificationPhoneFrom = React.createClass({
         var _this = this;
 
         this.setState({
-            showGetCode: false
-        });
-
-        this.setState({
+            showGetCode: false,
             countdown: 60
         })
 
@@ -41,10 +38,7 @@ const ModificationPhoneFrom = React.createClass({
 
             if (this.state.countdown == 0) {
                 clearInterval(this.timer);
-
-                this.setState({
-                    showGetCode: true
-                });
+                this.setState({ showGetCode: true });
             }
         }, 1000)
 
@@ -52,16 +46,9 @@ const ModificationPhoneFrom = React.createClass({
             url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9) + "&isVms=" + isVms + "&destPhoneNo=" + (this.state.next ? this.state.phoneValue : ""),
             method: "GET",
             success: (data) => {
-
                 if (_this.state.next) {
-                    _this.setState({
-                        bottomPhoneShow: true,
-                        //	phoneValue: this.state.phoneValue.substring(0, 3) + "****" + this.state.phoneValue.substring((this.state.phoneValue.length - 4), this.state.phoneValue.length)
-                    });
+                    _this.setState({ bottomPhoneShow: true });
                 }
-            },
-            fail: function () {
-
             }
         })
     },
@@ -88,7 +75,7 @@ const ModificationPhoneFrom = React.createClass({
             phoneValue: e.target.value
         });
     },
-    handlerModificationPhone () {
+    handlerModificationPhone() {
         var _this = this;
 
 
@@ -142,10 +129,10 @@ const ModificationPhoneFrom = React.createClass({
     },
     render() {
         let phoneText = this.state.bottomPhoneShow ?
-        this.state.phoneValue.substring(0, 3) + "****" + this.state.phoneValue.substring(this.state.phoneValue.length - 4, this.state.phoneValue.length) : "";
+            this.state.phoneValue.substring(0, 3) + "****" + this.state.phoneValue.substring(this.state.phoneValue.length - 4, this.state.phoneValue.length) : "";
         let bottomPhone = () => {
             return <div className="phone-info">已向手机{phoneText}发送短信验证码，若收不到请<span className="s"
-                                                                                 onClick={() => this.handlerGetCode("VMS")}>点击这里</span>获取语音验证码
+                onClick={() => this.handlerGetCode("VMS")}>点击这里</span>获取语音验证码
             </div>
         }
 
@@ -153,11 +140,22 @@ const ModificationPhoneFrom = React.createClass({
             return <div className="phone-info">若注册手机号无法进行验证，请<span className="s">联系客服</span>人工解决</div>
         }
 
+        let next;
+        if (this.state.next) {
+            if (this.state.bottomPhoneShow) {
+                next = bottomPhone()
+            } else {
+                next = <div style={{ height: "70px" }}></div>
+            }
+        } else {
+            next = text()
+        }
+
         return (
             <div className="phone-from">
                 <div className="phone-num">
                     {
-                        this.state.next ? <input className="phone-input" type="text" onChange={this.phoneChange}/> :
+                        this.state.next ? <input className="phone-input" type="text" onChange={this.phoneChange} /> :
                             <span className="num-text">{this.state.phone}</span>
                     }
 
@@ -165,7 +163,7 @@ const ModificationPhoneFrom = React.createClass({
 
                 <div className="code-from">
                     <input className="code-input" type="text" onChange={this.codeChange} placeholder="请输入验证码"
-                           value={this.state.codeValue}/>
+                        value={this.state.codeValue} />
                     {
                         this.state.showGetCode ?
                             <span className="btn" onClick={() => this.handlerGetCode("SMS")}>获取验证码</span> :
@@ -173,15 +171,10 @@ const ModificationPhoneFrom = React.createClass({
                     }
                 </div>
 
-                {
-                    this.state.next ?
-                        this.state.bottomPhoneShow ?
-                            bottomPhone() :
-                            <div style={{height: "70px"}}></div> : text()
-                }
+                {next}
 
                 <div className="modification-phone-btn"
-                     onClick={this.handlerModificationPhone}>{this.state.next ? '完成' : '下一步'}</div>
+                    onClick={this.handlerModificationPhone}>{this.state.next ? '完成' : '下一步'}</div>
 
             </div>
         )
@@ -204,17 +197,17 @@ const ModificationPhone = React.createClass({
         return (
             <div>
                 <div className="modification-phone-nav">
-                    <img src={"images/nav-" + (this.state.next ? 2 : 1) + ".jpg" }/>
+                    <img src={"images/nav-" + (this.state.next ? 2 : 1) + ".jpg"} />
                 </div>
 
-                <ModificationPhoneFrom callbackNext={this.getCallbackNext}/>
+                <ModificationPhoneFrom callbackNext={this.getCallbackNext} />
             </div>
         )
     }
 })
 
 ReactDOM.render(
-    <Header title={"修改银行预留手机号"} sub_text={""}/>,
+    <Header title={"修改银行预留手机号"} sub_text={""} />,
     HEADER_NODE
 );
 

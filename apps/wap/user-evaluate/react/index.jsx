@@ -35,6 +35,8 @@ const Questions = React.createClass({
                             ajaxcan = false;
                             $FW.Component.Toast("您还有未填写试题");
                             break;
+                        default:
+                        // do nothing
                     }
                     newJson[x] = value[x];
                 }

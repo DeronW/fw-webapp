@@ -56,7 +56,7 @@ var TopNav = React.createClass({
                 <div className="info">
                     {
                         this.props.backBtn ?
-                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/>
+                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png" />
                             </div> : null
                     }
 
@@ -108,7 +108,7 @@ var BankAccount = React.createClass({
                     size: "10000"
                 },
                 success: (data) => {
-                    this.setState({bankList: data.bankList})
+                    this.setState({ bankList: data.bankList })
 
                     if (data.bankList.length === 0) {
                         this.setState({
@@ -128,12 +128,12 @@ var BankAccount = React.createClass({
     },
 
     inputHandler: function () {
-        this.setState({entry: true});
+        this.setState({ entry: true });
     },
 
     handleChange: function (e) {
         var val = e.target.value;
-        this.setState({value: val});
+        this.setState({ value: val });
         this.refreshBankList(val);
     },
 
@@ -146,13 +146,11 @@ var BankAccount = React.createClass({
     },
 
     typingHandler: function () {
-        this.setState({typing: true})
+        this.setState({ typing: true })
     },
 
     bankHandler: function (index) {
         this.props.callbackSelectBankInfo(false, this.state.bankList[index]);
-
-        //this.props.callbackBankIndex(this.state.bankList[index]);
     },
 
     callbackOpenBankBtn: function () {
@@ -162,44 +160,44 @@ var BankAccount = React.createClass({
 
     render: function () {
 
-        let list = ()=> {
+        let list = () => {
             var li = (d, index) => <li key={index} onClick={this.bankHandler.bind(this, index)}><span
-                className="">{d.bankName}</span> <img src="images/card-c.png"/></li>;
+                className="">{d.bankName}</span> <img src="images/card-c.png" /></li>;
 
             return <ul className="list">{this.state.bankList.map(li)}</ul>;
         };
 
-        let icon = <img className="suo" src="images/search.png"/>;
+        let icon = <img className="suo" src="images/search.png" />;
         if (this.state.typing) icon = null;
 
         return (
             <div className="pop-open-bank">
-                <TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn}
-
-                    />
+                <TopNav title={"开户支行"} backBtn={true} btnFun={this.callbackOpenBankBtn} />
 
                 <div className="select-bank">
                     <div className="search">
                         {icon}
 
                         <input type="text"
-                               className="hunt"
-                               onFocus={this.typingHandler}
-                               onInput={this.inputHandler}
-                               onChange={this.handleChange}
-                               value={this.state.value}
-                               placeholder="请输入开户支行的关键词"
-                               ref="bank"
-                            />
+                            className="hunt"
+                            onFocus={this.typingHandler}
+                            onInput={this.inputHandler}
+                            onChange={this.handleChange}
+                            value={this.state.value}
+                            placeholder="请输入开户支行的关键词"
+                            ref="bank"
+                        />
 
-                        <img className="false" onClick={this.handleClear} src="images/false.jpg"/>
+                        <img className="false" onClick={this.handleClear} src="images/false.jpg" />
                     </div>
 
-                    {this.state.bankList.length ? list() : null}
+                    {this.state.bankList.length && list()}
 
                     {
-                        this.state.promptBankNoShow ? <div className="promptBankNo">请尝试更换搜索关键词或拨打客服电话<span
-                            className="number-text">400-0322-988</span>寻求帮助</div> : null
+                        this.state.promptBankNoShow ?
+                            <div className="promptBankNo">
+                                请尝试更换搜索关键词或拨打客服电话
+                            <span className="number-text">400-0322-988</span>寻求帮助</div> : null
                     }
 
                 </div>
@@ -322,7 +320,7 @@ const Withdrawals = React.createClass({
             inputVal: this.state.propsAccountAmountVal
         });
 
-        if (this.state.propsAccountAmountVal > this.props.data.criticalValue * 10000 ) {
+        if (this.state.propsAccountAmountVal > this.props.data.criticalValue * 10000) {
             this.setState({
                 selectWhich: 1,
                 selectCashMethod: !this.state.selectCashMethod
@@ -514,11 +512,11 @@ const Withdrawals = React.createClass({
 
             return <div className="info-list">
                 <div className="info-select-btn">
-								<span onClick={()=>_this.handlerImmediatelyCashMethod(b)} className={
-										"select-icon " + (_this.state.selectWhich == 0 || !b ?  "select-icon select-btn" : "")
-									}
-                                    >
-								</span>
+                    <span onClick={() => _this.handlerImmediatelyCashMethod(b)} className={
+                        "select-icon " + (_this.state.selectWhich == 0 || !b ? "select-icon select-btn" : "")
+                    }
+                    >
+                    </span>
                 </div>
                 <div className="info-text">
                     <div className="subhead-text">
@@ -528,7 +526,7 @@ const Withdrawals = React.createClass({
                         单笔金额{'<'}={_this.props.data.criticalValue}万，
                         {
                             _this.props.data.perDayRealTimeAmountLimit != undefined
-                                ? '单日<=' + valText + '万，' : null }
+                                ? '单日<=' + valText + '万，' : null}
                         7*24小时实时到账。
                     </div>
                 </div>
@@ -538,14 +536,14 @@ const Withdrawals = React.createClass({
         var blockTradeCashMethodEml = function (b) {
             return <div className="info-list">
                 <div className="info-select-btn">
-								<span
+                    <span
 
-                                    onClick={()=>_this.handlerBlockTradeCashMethod(b)}
-                                    className={
-										"select-icon " + (_this.state.selectWhich == 1 || !b ? "select-icon select-btn" : "")
-									}
-                                    >
-								</span>
+                        onClick={() => _this.handlerBlockTradeCashMethod(b)}
+                        className={
+                            "select-icon " + (_this.state.selectWhich == 1 || !b ? "select-icon select-btn" : "")
+                        }
+                    >
+                    </span>
                 </div>
                 <div className="info-text">
                     <div className="subhead-text">
@@ -565,7 +563,7 @@ const Withdrawals = React.createClass({
             } else if (_this.props.data.bankInfo.bankName == undefined || _this.props.data.bankInfo.bankName == "") {
                 return immediatelyCashMethodEml(true);
             } else {
-                return <div>{immediatelyCashMethodEml(true)} { blockTradeCashMethodEml(true)}</div>
+                return <div>{immediatelyCashMethodEml(true)} {blockTradeCashMethodEml(true)}</div>
             }
         }
 
@@ -573,12 +571,12 @@ const Withdrawals = React.createClass({
             <div>
                 <div>
                     <TopNav title={"提现"} backBtn={true} btnFun={this.callbackOpenBankBtn} btnText={"提现记录"}
-                            callbackInfoBtn={this.getInfoBtn}
-                        />
+                        callbackInfoBtn={this.getInfoBtn}
+                    />
 
                     <div className="stou clearfix">
                         <div className="zhaoshang"><img className="ico-zhaoshang"
-                                                        src={this.props.data.bankInfo.bankLogo}/></div>
+                            src={this.props.data.bankInfo.bankLogo} /></div>
                         <div className="wz">
                             <div className="zh">{this.props.data.bankInfo.bankName}</div>
                             <div className="nz">
@@ -587,14 +585,14 @@ const Withdrawals = React.createClass({
                                 }
                             </div>
                         </div>
-                        <div className="kuaijie"><img src="images/ico-kuaijie.png"/></div>
+                        <div className="kuaijie"><img src="images/ico-kuaijie.png" /></div>
                     </div>
 
                     <div className="txt-a">
                         <div className="nin">如果您绑定的银行卡暂不支持手机快捷支付请联系客服<a href="tel:400-0322-988" className="c-4aa1f9">400-0322-988</a>
                         </div>
                         <div className="kx">可提现金额(元)：<span
-                            style={{fontSize: '38px',color: '#fd4d4c'}}>{this.props.data.accountAmount}</span></div>
+                            style={{ fontSize: '38px', color: '#fd4d4c' }}>{this.props.data.accountAmount}</span></div>
                     </div>
 
                     <div className="select-bank-area">
@@ -603,13 +601,13 @@ const Withdrawals = React.createClass({
                                 {
                                     !this.state.selectBank ? <div className="xuanwu">
                                         <input className="moneyTxt"
-                                               value={this.state.inputVal}
-                                               onChange={this.handlerOnChange}
-                                               onBlur={this.handlerOnBlur}
-                                               onFocus={this.handlerOnFocus}
-                                               ref="refsMoney"
-                                               type="text" placeholder="请输入提现金额"
-                                            />
+                                            value={this.state.inputVal}
+                                            onChange={this.handlerOnChange}
+                                            onBlur={this.handlerOnBlur}
+                                            onFocus={this.handlerOnFocus}
+                                            ref="refsMoney"
+                                            type="text" placeholder="请输入提现金额"
+                                        />
                                     </div> : ''
                                 }
 
@@ -624,11 +622,11 @@ const Withdrawals = React.createClass({
                                 <div className="modify" onClick={this.handlerSelectPopFun}>
                                     <div className="wire"></div>
                                     <div className="pure">
-                                        <div className="xuanwu" style={{fontSize:'32px'}}>
+                                        <div className="xuanwu" style={{ fontSize: '32px' }}>
                                             {this.state.selectBankName === null ? "开户支行" : this.state.selectBankName}
                                         </div>
                                         <div className="choice">
-                                            <div className="pleas" style={{color:'#555555'}}>请选择开户支行</div>
+                                            <div className="pleas" style={{ color: '#555555' }}>请选择开户支行</div>
                                         </div>
                                     </div>
                                 </div> : null
@@ -640,7 +638,7 @@ const Withdrawals = React.createClass({
                     {
                         this.state.promptShow ?
                             <div className="old-user-prompt-text">已向手机{phoneVal}发送短信验证码，若收不到，请 <span className="c"
-                                                                                                     onClick={this.handlerVoice}>点击这里</span>获取语音验证码。
+                                onClick={this.handlerVoice}>点击这里</span>获取语音验证码。
                             </div> : null
                     }
 
@@ -662,24 +660,24 @@ const Withdrawals = React.createClass({
                         <div className="hsuo">提现说明</div>
                         <div className="danbi">
 
-                            <div className="atpr"><img className="card-d" src="images/card-d.png"/><span
+                            <div className="atpr"><img className="card-d" src="images/card-d.png" /><span
                                 className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
                             <div className="atpr">
-                                <img className="card-d" src="images/card-d.png"/>
-								<span className="online">
-									对首次充值后无投资的提现，平台收取{this.props.data.fee}%的手续费；
+                                <img className="card-d" src="images/card-d.png" />
+                                <span className="online">
+                                    对首次充值后无投资的提现，平台收取{this.props.data.fee}%的手续费；
 								</span>
                             </div>
                             <div className="atpr">
-                                <img className="card-d" src="images/card-d.png"/>
-								<span className="online">
-									徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
+                                <img className="card-d" src="images/card-d.png" />
+                                <span className="online">
+                                    徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
 								</span>
                             </div>
                             <div className="atpr">
-                                <img className="card-d" src="images/card-d.png"/>
-								<span className="online">
-									如遇问题请与客服联系，客服电话：400-0322-988
+                                <img className="card-d" src="images/card-d.png" />
+                                <span className="online">
+                                    如遇问题请与客服联系，客服电话：400-0322-988
 								</span>
                             </div>
                         </div>
@@ -692,7 +690,7 @@ const Withdrawals = React.createClass({
                         callbackSelectBankInfo={this.getSelectBankInfo}
                         callbackOpenBank={this.getOpenBankShow}
 
-                        /> : null
+                    /> : null
                 }
 
                 {
@@ -714,82 +712,11 @@ const Greater = React.createClass({
             <div className="modify" onClick={this.popClickShow}>
                 <div className="wire"></div>
                 <div className="pure">
-                    <div className="xuanwu" style={{fontSize:'32px'}}>{this.props.name ? this.props.name : '开户银行'}</div>
+                    <div className="xuanwu" style={{ fontSize: '32px' }}>{this.props.name ? this.props.name : '开户银行'}</div>
                     <div className="choice">
-                        <div className="pleas" style={{color:'#555555'}}>请选择</div>
+                        <div className="pleas" style={{ color: '#555555' }}>请选择</div>
                     </div>
                 </div>
-            </div>
-        )
-    }
-})
-
-
-const Neg = React.createClass({
-    getDefaultProps: function () {
-        return {
-            countSeconds: 60,
-            verify_code: null
-        }
-    },
-
-    getInitialState: function () {
-        return {
-            seconds: 0,
-            note: false
-        }
-    },
-
-    changeHandler: function (e) {
-        this.setState({verify_code: e.target.value});
-
-    },
-
-    handlerCodeClick: function () {
-        if (this.state.seconds != 0) return;
-
-        if (this.props.accountAmout === 0) {
-            return false;
-        }
-
-        this.setState({seconds: this.props.countSeconds});
-
-        this.setState({note: true});
-
-        this.timer = setInterval(()=> {
-            this.setState({seconds: this.state.seconds - 1});
-            if (this.state.seconds < 1) {
-                clearInterval(this.timer)
-            }
-        }, 1000)
-
-        $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?isVms=SMS&type=1",
-            success: function (data) {
-            }
-        })
-
-    },
-
-    render: function () {
-        return (
-            <div>
-                <div className="slip clearfix"><a href="http://www.lianhanghao.com/index.php"
-                                                  className="peno">忘记开户行？</a></div>
-                <div className="qing clearfix">
-                    <div className="shyan">
-                        <div className="mzysq">
-                            <input className="odec" type="text"
-                                   value={this.state.verify_code}
-                                   onChange={this.changeHandler} placeholder="请输入手机验证码"/>
-                        </div>
-                    </div>
-                    <div className="miaoh" style={{background:'#d4d4d4'}}>
-                        {this.state.seconds ? this.state.seconds + "秒后重新获取" :
-                            <span className="zmy" onClick={this.handlerCodeClick}>获取验证码</span>}
-                    </div>
-                </div>
-                {this.state.note ? <div className="songfa">已向您输入的手机号码 139****0234 发送短信验证码</div> : null}
             </div>
         )
     }
@@ -842,7 +769,7 @@ const Special = React.createClass({
                 });
 
                 _this._timing = true;
-                _this.timer = setInterval(()=> {
+                _this.timer = setInterval(() => {
                     _this.setState(
                         {
                             seconds: _this.state.seconds - 1
@@ -898,13 +825,13 @@ const Special = React.createClass({
                     <div className="shyan">
                         <div className="mzysq" value={this.props.verify_code} onCodeChange={this.changeHandler}>
                             <input className="odec" type="text" onChange={this.inputCodeOnChange}
-                                   placeholder="请输入手机验证码"/>
+                                placeholder="请输入手机验证码" />
                         </div>
                     </div>
                     <div className={this.state.forbid ? "miaoh" : "miaoh c"}>
                         {
                             this.state.seconds !== null ?
-                            this.state.seconds + "秒后重新获取" :
+                                this.state.seconds + "秒后重新获取" :
                                 <span className="zmy" onClick={this.handlerTestClick}><span
                                     className="text">获取验证码</span></span>
                         }
@@ -914,16 +841,14 @@ const Special = React.createClass({
         )
     }
 })
+
 $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getWithdrawInfo.shtml",
-        enable_loading: true,
-        success: function (data) {
-            ReactDOM.render(<Withdrawals data={data}/>, document.getElementById("cnt"))
-
-            fmOpt(data.sessionId);
-
-        }
+        enable_loading: 'mini'
+    }).then(data => {
+        ReactDOM.render(<Withdrawals data={data} />, CONTENT_NODE)
+        fmOpt(data.sessionId);
     })
 });
