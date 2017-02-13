@@ -70,7 +70,7 @@ const UserAboutus = React.createClass({
         return (
             <div className="user-FAQ-cnt">
                 <div className="user-FAQ-list">
-                    {TITLE_TEXT.map((todo, index) => (todo, index))}
+                    {TITLE_TEXT.map((todo, index) => li(todo, index))}
                 </div>
             </div>
         )
