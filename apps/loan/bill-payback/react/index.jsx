@@ -258,7 +258,7 @@ const VerifyCode = React.createClass({
         }
     },
     confirmBtnHandler: function () {
-        if(this.state.value=''){
+        if(this.state.value==''){
             $FW.Component.Toast("请输入验证码");
         }else{
             $FW.Ajax({
@@ -275,7 +275,7 @@ const VerifyCode = React.createClass({
                 }
             }).then(d => {
                     this.props.callbackResultShow(true, false);
-                }, (error) => console.log(error)
+                }, (error) => $FW.Component.Toast(error)
             )
         }
     },
