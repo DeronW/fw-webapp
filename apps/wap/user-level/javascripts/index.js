@@ -1,11 +1,9 @@
-$(function () {
-    // 设置全局变量的 API_PATH , 被用作所有接口的前缀地址
-    // 该变量很重要 !!!
+(function () {
     var p = document.getElementById('api-path').value;
     if (p.substr(0, 2) != '//') p = '//' + p;
     window.API_PATH = location.protocol + p;
-    console.log(API_PATH)
-});
+})();
+console.log(API_PATH);
 function inApp() {
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
