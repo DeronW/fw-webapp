@@ -17,7 +17,8 @@ const Success = React.createClass({
         let query = $FW.Format.urlQuery();
         let status = query.status;
         let statusTex;let seeOrder;
-        if(status=="F"){ statusTex ="支付失败" ;         seeOrder="重新支付"}
+        let failTex = query.failTex||"";
+        if(status=="F"){ statusTex ="支付失败" ;         seeOrder="重新支付"  }
         if(status=="S"){ statusTex ="订单状态:已付款";  seeOrder="查看订单" }
 
         let href = `/static/mall/order-list/index.html`;
@@ -30,6 +31,7 @@ const Success = React.createClass({
                          style={{background:"url(images/circle-white-right.png) no-repeat 80px 80px"}}>
                         {statusTex}
                     </div>
+                    <div className="fail-text">{failTex}</div>
                 </div>
                 <div className="success-btn">
                     <a href={href} className="success-btn1">{seeOrder}</a>

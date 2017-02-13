@@ -111,20 +111,20 @@ const SendCode = React.createClass({
             enable_loading: 'mini',
             data: FormData,
             success: (data) => {
-                if(data.status=="F"){
+                if (data.responseResult.status == "F") {
                     window.location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/order-complete/index.html?status=F"
+                        "/static/mall/order-complete/index.html?status=F&failTex=" + data.responseResult.resMessage
                 }
-                if(data.status=="S"){
+                if (data.responseResult.status == "S") {
                     window.location.href = location.protocol + '//' + location.hostname +
                         "/static/mall/order-complete/index.html?status=S"
                 }
             },
             fail: (data) => {
-                   $FW.Component.Alert(data.msg);
+                $FW.Component.Alert(data.msg);
             }
         })
-        },
+    },
 
     //完成支付确认
     nextStep: function () {
@@ -140,20 +140,20 @@ const SendCode = React.createClass({
             enable_loading: 'mini',
             data: FormData,
             success: (data) => {
-                if(data.status=="I"){
-                    $FW.Component.showAjaxLoading();
-                    setTimeout(() => {
-                        this.queryState();
-                    }, 1500);
-                }
-                else if(data.status=="F"){
-                    window.location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/order-complete/index.html?status=F"
-                }
-                else{
-                    window.location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/order-complete/index.html?status=S"
-                }
+                // if(data.status=="I"){
+                $FW.Component.showAjaxLoading();
+                setTimeout(() => {
+                    this.queryState();
+                }, 1500);
+                // }
+                // else if(data.status=="F"){
+                //     window.location.href = location.protocol + '//' + location.hostname +
+                //         "/static/mall/order-complete/index.html?status=F"
+                // }
+                // else{
+                //     window.location.href = location.protocol + '//' + location.hostname +
+                //         "/static/mall/order-complete/index.html?status=S"
+                // }
 
                 //window.location.href = location.protocol + '//' + location.hostname +
                 //    "/static/mall/order-complete/index.html?id="+data.tradeNo
@@ -166,7 +166,7 @@ const SendCode = React.createClass({
     render: function () {
         return (
             <div>
-               <div className="phone-tip">验证码已发送至手机<span>{this.state.mobileNo}</span></div>
+                <div className="phone-tip">验证码已发送至手机<span>{this.state.mobileNo}</span></div>
                 <div className="input-wrap">
                     <input type="text" defaultValue="" placeholder="请输入验证码" onChange={this.changeVal}/>
                     <input type="button" className="msg-tip"

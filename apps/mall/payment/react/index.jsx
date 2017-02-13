@@ -88,7 +88,7 @@ const Payment = React.createClass({
                     <div className="pay-item" onClick={this.payCheck.bind(this,index)}>
                         <div className="pay-icon"><img src="images/bankpay.jpg"/></div>
                         <div className="pay-name">
-                            <div className="pay-title">{n.bankCardName} 尾号{accountNo}</div>
+                            <div className="pay-title">{n.bankName} &#12288;&#12288;尾号{accountNo}</div>
                             <div className="pay-subtitle">已绑定银行卡（支付服务由先锋金融提供）</div>
                         </div>
                         <div className={this.state.index==index ? "pay-check active" : "pay-check"}></div>
