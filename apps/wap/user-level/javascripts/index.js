@@ -82,7 +82,7 @@ $(function () {
             for (var i = 0; i < levelGiftsData.length; i++) {
                 var level = levelGiftsData[i].level;
                 //奖励加息
-                $(".vip1-interest span").text(levelGiftsData[i].levelRate);
+                $(".vip1-interest span").eq(i).text(levelGiftsData[i].levelRate);
                 for (var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
                     if (levelGiftsData[i].lvGiftIdMap[j].giftBagId !== "") {
                         $(".level-img" + i).append(
@@ -97,6 +97,9 @@ $(function () {
                 $(".level-img" + i).append("<a href='javascript:void(0)'><img src='images/waiting.png'/></a>");
             }
 
+            for(var i = 0; i < levelGiftsData.length; i++){
+                console.log(levelGiftsData[i].levelRate)
+            }
             $("#vip0, #vip1, #vip2, #vip3, #vip4").attr("class", "change-img-gray");
             $("#vip0-jindutiao, #vip1-jindutiao, #vip2-jindutiao, #vip3-jindutiao, #vip4-jindutiao").addClass("gray-class");
 
