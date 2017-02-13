@@ -76,7 +76,11 @@ const PayBackWrap = React.createClass({
                 /> : null}
                 {this.state.bankCardListShow ?
                     <BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem}
-                        callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName} callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid} /> : null}
+                        callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName} callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid}
+                      bankName={this.state.bankName}
+                      bankNo={this.state.bankNo}
+                      cardGid={this.state.cardGid}
+                    /> : null}
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid}
                         callbackCloseHanler={this.closeHandler}
@@ -140,20 +144,19 @@ const BankCardList = React.createClass({
     getInitialState: function () {
         return {
             checked: 0,
-            bankName: null,
-            bankNo: null,
-            cardGid: null
+            bankName: this.props.bankName,
+            bankNo: this.props.bankNo,
+            cardGid: this.props.cardGid
         }
     },
     backHandler: function () {
         this.props.callbackPopHide(false);
-        if (this.props.bankList.length > 1) {
-            this.props.callbackBankName(this.state.bankName);
-            this.props.callbackBankNo(this.state.bankNo);
-            this.props.callbackBankCardGid(this.state.cardGid);
-        }
     },
-    componentDidMount: function () {
+    confirmHandler:function(){
+        this.props.callbackPopHide(false);
+        this.props.callbackBankName(this.state.bankName);
+        this.props.callbackBankNo(this.state.bankNo);
+        this.props.callbackBankCardGid(this.state.cardGid);
     },
     clickHandler: function (index) {
         this.setState({
@@ -181,6 +184,7 @@ const BankCardList = React.createClass({
                 <div className="bank-branch-list">
                     {this.props.bankList.map(list_item)}
                 </div>
+                <div className="banklist-btn" onClick={this.confirmHandler}>确定</div>
             </div>
         )
     }
