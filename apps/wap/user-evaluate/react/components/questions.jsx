@@ -1,4 +1,4 @@
-let startArr = [];
+
 const QUESTIONS = [{
     q: 'Q1：您的年龄是？',
     seq: 0,
@@ -182,10 +182,11 @@ const QUESTIONS = [{
         score: 15
     }]
 }];
-if (startArr.length == 0) {
-    QUESTIONS.map((value, index) => {
-        let json = {};
-        json[value.name] = -1;
-        startArr.push(json);
-    });
-}
+
+let startArr = [];
+
+QUESTIONS.forEach(value => {
+    let json = {};
+    json[value.name] = -1;
+    startArr.push(json);
+});

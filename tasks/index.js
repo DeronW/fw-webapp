@@ -106,7 +106,7 @@ module.exports = function (site_name, page_name, configs) {
     }
 
     function compile_javascripts() {
-        return javascripts([`${app_path}javascritps/*.js`], `${build_path}javascripts`, null, CONFIG.debug)
+        return javascripts([`${app_path}javascripts/*.js`], `${build_path}javascripts`, null, CONFIG.debug)
     }
 
     function copy_common_javascripts() {
