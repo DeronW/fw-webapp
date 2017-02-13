@@ -85,17 +85,19 @@ const ConfirmLoan = React.createClass({
         return (
             <div>
                 <div className="transfer-box">
-                    <div className="transfer-title">到账金额（元）</div>
-                    <div className="transfer-money">{this.props.accountInAmount}</div>
+                    <div className="money-get">
+                        <div className="transfer-money">{this.props.accountInAmount}</div>
+                        <div className="transfer-title">到账金额（元）</div>
+                    </div>
                     <div className="loan-info">
                         <div className="transfer-lines">
                             <div className="return-money">
-                                <span className="return-money-title">应还金额（元）</span>
                                 <span className="return-money-num">{this.props.shouldRepaymentAmount}</span>
+                                <span className="return-money-title">应还金额（元）</span>
                             </div>
                             <div className="return-date">
-                                <span className="return-date-title">应还日期</span>
                                 <span className="return-date-day">{this.props.dueTime}</span>
+                                <span className="return-date-title">应还日期</span>
                             </div>
                         </div>
                         <span className="vertical-line"></span>
@@ -109,7 +111,7 @@ const ConfirmLoan = React.createClass({
                 <div className="agreement-issue">
                     <div className={this.state.checked ? "checked-box" : "unchecked-box"}
                         onClick={this.checkHandler}></div>
-                    <div className="check-item">同意<a href="">《芥末借款服务协议》</a>、<a href="https://cashloan.9888.cn/static/loan/protocol-borrowing/index.html">《芥末借款协议》</a>，未按时还款将计入信用卡银行的信用报告
+                    <div className="check-item">同意<a href="">《芥末借款服务协议》</a>、<a href="/static/loan/protocol-borrowing/index.html">《芥末借款协议》</a>，未按时还款将计入信用卡银行的信用报告
                     </div>
                 </div>
                 <div className="confirm-btn" onClick={this.confirmHandler}>确定</div>

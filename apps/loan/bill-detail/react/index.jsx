@@ -10,9 +10,11 @@ const Detail = React.createClass({
         return (
             <div>
                 <div className="loan-num">
-                    <div className={loanStatus == 1 ? "loan-money pay-back-color" : (loanStatus == 5 ? "loan-money overdue-color" : "loan-money overdue-color marginTop")}>{this.props.data.loanAmount}</div>
-                    {loanStatus == 5 ? <div className="loan-status1"><img src="images/overdue.jpg" /></div> : null}
-                    {loanStatus == 1 ? <div className="loan-status2">已还清</div> : null}
+                    <div className="loan-money">{this.props.data.loanAmount}</div>
+                    <div className="loan-money-title">应还总额(元)</div>
+                    {loanStatus == 5 ? <div className="icon1"></div> : null}
+                    {loanStatus == 4 ? <div className="icon2"></div> : null}
+                    {loanStatus == 1 ? <div className="icon3"></div> : null}
                 </div>
                 <div className="loan-detail-box">
                     <div>

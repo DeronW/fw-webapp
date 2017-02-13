@@ -25,7 +25,7 @@ const BottomNavBar = React.createClass({
             left: "0",
             right: "0",
             bottom: "0",
-            background: "#fff",
+            background: "#393f5a",
             borderTop: "1px solid #f0f0f0"
         };
 

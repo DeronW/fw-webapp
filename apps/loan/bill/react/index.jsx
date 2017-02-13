@@ -51,17 +51,20 @@ const Bill = React.createClass({
                     <img className="no-data-img" src="images/no-data.png" />
                 </div>) : (<div className="data-box">
                     <div className="transfer-box">
-                        <div className="transfer-title">当前账单(元)</div>
-                        <div className="transfer-money">{this.props.data.undueAmount}</div>
+                        <div className="loan-headline-money">
+                            <div className="transfer-money">{this.props.data.undueAmount}</div>
+                            <div className="transfer-title">当前账单(元)</div>
+                        </div>
+
                         <div className="loan-info">
                             <div className="transfer-lines">
                                 <div className="return-money">
-                                    <span className="return-money-title">信用额度(元)</span>
                                     <span className="return-money-num">{this.props.data.creditLine}</span>
+                                    <span className="return-money-title">信用额度(元)</span>
                                 </div>
                                 <div className="return-date">
-                                    <span className="return-date-title">剩余可借(元)</span>
                                     <span className="return-date-day">{this.props.data.canBorrowAmount}</span>
+                                    <span className="return-date-title">剩余可借(元)</span>
                                 </div>
                             </div>
                             <span className="vertical-line"></span>

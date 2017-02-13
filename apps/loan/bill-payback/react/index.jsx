@@ -111,7 +111,7 @@ const PayBack = React.createClass({
                         <span>{this.props.loanAmount}元</span>
                     </div>
                    <div>
-                        <span>逾期</span>
+                        <span>逾期费用</span>
                         <span>{this.props.overdueFee}元</span>
                     </div>
                 </div>
@@ -125,8 +125,8 @@ const PayBack = React.createClass({
                 </div>
                 <div className="loan-detail-box">
                     <div>
-                        <span>还款金额</span>
-                        <span>{this.props.loanLeftAmount}元</span>
+                        <span>还款金额(元)</span>
+                        <span className="payback-num">{this.props.loanLeftAmount}</span>
                     </div>
                 </div>
                 <div className="payback-tips">
@@ -326,7 +326,7 @@ const PayBackResult = React.createClass({
                 {this.state.payback_fail ? <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div> : null}
                 {this.state.payback_ing ? <div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div> : null}
                 <div className="credit-btn"
-                    onClick={() => gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>
+                    onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>
                     提升额度
                 </div>
                 <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/home/index.html`)}>申请用钱</div>
