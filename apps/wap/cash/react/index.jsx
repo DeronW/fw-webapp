@@ -31,7 +31,7 @@ var numberFormat = {
             //只允许一个小数点
             replace(/^\./g, "").replace(/\.{2,}/g, ".").
             //只能输入小数点后两位
-            replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
+            replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/^(-)*(\d+)\.(\d\d).*$/, '$1$2.$3');
 
         return this.val;
     }

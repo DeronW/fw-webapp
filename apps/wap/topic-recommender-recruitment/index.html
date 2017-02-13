@@ -1,67 +1,56 @@
-{% extends '../../../lib/templates/wap_base.swig.html' %}
-
-{% block disable_telephone%}{% endblock %}
-
-{% block title %}推荐人招募计划{% endblock %}
-{% block content %}
+{% extends '../../../lib/templates/wap_base.swig.html' %} {% block disable_telephone%}{% endblock %} {% block title %}推荐人招募计划{% endblock %} {% block content %}
 <div id="header"></div>
-<div class="banner"><img src="images/bg1.jpg"/></div>
-<div class="introduction"><img src="images/bg2.jpg"/></div>
-<div class="welfare"><img src="images/bg3.jpg"/></div>
+<div class="banner"><img src="images/bg1.jpg" /></div>
+<div class="introduction"><img src="images/bg2.jpg" /></div>
+<div class="welfare"><img src="images/bg3.jpg" /></div>
 <div class="register">
-   <!--<div class="register-tip">您可拨打客服电话400-0322-988 转 0，咨询客服。也可直接登录PC版金融工场在“个人中心 - 工场码”页面进行申请。</div>-->
-
-   <div class="applyfor clearfix">
-      <div id="namep">
-         <div  class="name clearfix">
-            <span class="compellation">姓名</span>
-            <span class="star">*</span>
-            <span class="frame" id="namePart"></span>
-         </div>
-      </div>
-      <div id="phonep">
-         <div  class="phone clearfix">
-            <span class="phonecompellation">手机号</span>
-            <span class="phonestar">*</span>
-            <span class="phoneframe" id="phonePart"></span>
-         </div>
-      </div>
-
-      <div class="wechatNumberPart">
-         <label for="wechatNumber">
+    <!--<div class="register-tip">您可拨打客服电话400-0322-988 转 0，咨询客服。也可直接登录PC版金融工场在“个人中心 - 工场码”页面进行申请。</div>-->
+    <div class="applyfor clearfix">
+        <div id="namep">
+            <div class="name clearfix">
+                <span class="compellation">姓名</span>
+                <span class="star">*</span>
+                <span class="frame" id="namePart"></span>
+            </div>
+        </div>
+        <div id="phonep">
+            <div class="phone clearfix">
+                <span class="phonecompellation">手机号</span>
+                <span class="phonestar">*</span>
+                <span class="phoneframe" id="phonePart"></span>
+            </div>
+        </div>
+        <div class="wechatNumberPart">
+            <label for="wechatNumber">
             微信号
          </label>
-         <span>*</span>
-         <input type="text" id="wechatNumber" required="required"/>
-      </div>
-      <div class="mailPart">
-         <label for="mailPart">
+            <span>*</span>
+            <input type="text" id="wechatNumber" required="required" />
+        </div>
+        <div class="mailPart">
+            <label for="mailPart">
             邮箱
          </label>
-         <span>*</span>
-         <input type="text" id="mailPart" required="required" ref="mailNumber"/>
-
-      </div>
-
-      <div class="cityPart">
-         <label for="cityPart">
+            <span>*</span>
+            <input type="text" id="mailPart" required="required" ref="mailNumber" />
+        </div>
+        <div class="cityPart">
+            <label for="cityPart">
             所在城市
          </label>
-         <span>*</span>
-         <input type="text" id="cityPart" required="required" />
-
-      </div>
-      <div class="submitPart">
-         <a class="confirm-register-btn" id="submitButton">确认申请</a>
-      </div>
-   </div>
-
+            <span>*</span>
+            <input type="text" id="cityPart" required="required" />
+        </div>
+        <div class="submitPart">
+            <a class="confirm-register-btn" id="submitButton">确认申请</a>
+        </div>
+    </div>
 </div>
 <div class="information">
-   <div class="info-title">特别说明：</div>
-   <div class="info-item">互联网推荐人享受多重奖励之外，也有考核要求，考核标准如下：</div>
-   <div class="info-item">1、邀请投资金额：月度内带来的新增投资金额需达到年化10万元。</div>
-   <div class="info-item">2、邀请新增投资人数：月度内邀请新增投资人数需达到6人以上（含6人）。若累计达到30人以上，将不再考核邀请新增投资人数。</div>
-   <div class="info-item">3、若考核未达到标准，则会取消互联网推荐人资格。</div>
+    <div class="info-title">特别说明：</div>
+    <div class="info-item">互联网推荐人享受多重奖励之外，也有考核要求，考核标准如下：</div>
+    <div class="info-item">1、邀请投资金额：月度内带来的新增投资金额需达到年化10万元。</div>
+    <div class="info-item">2、邀请新增投资人数：月度内邀请新增投资人数需达到6人以上（含6人）。若累计达到30人以上，将不再考核邀请新增投资人数。</div>
+    <div class="info-item">3、若考核未达到标准，则会取消互联网推荐人资格。</div>
 </div>
 {% endblock %}
