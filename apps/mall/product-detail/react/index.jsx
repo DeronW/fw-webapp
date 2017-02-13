@@ -196,11 +196,11 @@ const PlusMinus = React.createClass({
         let _this = this;
         let bizNo = $FW.Format.urlQuery().bizNo;
 
-        let link = location.protocol + '//' + location.hostname +
-            '/static/mall/order-confirm/index.html?productBizNo=' + bizNo + '&count=' + this.state.value;
+        let linkLogin = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=/static/mall/product-detail/index.html'
+            + location.search;
 
-        if (!this.props.is_login) {
-            $FW.Browser.inApp() ? NativeBridge.goto(link) : location.href = link
+        if (this.props.is_login == 0) {
+            $FW.Browser.inApp() ? NativeBridge.goto(link) : location.href = linkLogin
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
@@ -261,7 +261,8 @@ const PlusMinus = React.createClass({
 
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
-
+        let linkLogin = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=/static/mall/product-detail/index.html'
+            + location.search;
         let isCanBuy = this.props.isCanBuy;
         console.log(this.props.stock)
 
@@ -269,7 +270,7 @@ const PlusMinus = React.createClass({
             gotoHandler(link);
         } else {
             if (!isCanBuy) {
-                $FW.Component.Alert("请先登录");
+                gotoHandler(linkLogin) //$FW.Component.Alert("请先登录");
             }
         }
 

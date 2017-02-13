@@ -111,6 +111,8 @@ const SendCode = React.createClass({
             enable_loading: 'mini',
             data: FormData,
             success: (data) => {
+                alert(JSON.stringify(data));
+                return false;
                 if(data.status=="F"){
                     window.location.href = location.protocol + '//' + location.hostname +
                         "/static/mall/order-complete/index.html?status=F"
