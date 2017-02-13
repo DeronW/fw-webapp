@@ -61,7 +61,6 @@ const PAYMENT_PAGES = [
 const GAME_PAGES = [
     'game', //游戏中心
     'game-guess', //猜拳
-    'game-red-rain', //2017过年红包雨
     'game-zhuanpan20161230', //20161230转盘活动
 ]
 
@@ -70,6 +69,10 @@ const DEVELOPING_PAGES = [
     'service-livelihood', // 生活服务
     'service-bill', //
     'user-footprint', // 用户足迹, 浏览过的商品页面
+]
+
+const TRASH_PAGES = [
+    // 'game-red-rain', //2017过年红包雨
 ]
 
 APP_NAMES.push(
