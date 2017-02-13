@@ -28,7 +28,7 @@ const Success = React.createClass({
                 <div className="success-banner"
                      style={{background:"url(images/success-banner.jpg) no-repeat center center"}}>
                     <div className="success-text"
-                         style={{background:"url(images/circle-white-right.png) no-repeat 80px 80px"}}>
+                         style={{background:"url(images/circle-white-right.png) no-repeat 80px 11px"}}>
                         {statusTex}
                     </div>
                     <div className="fail-text">{failTex}</div>

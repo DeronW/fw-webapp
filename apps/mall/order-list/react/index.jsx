@@ -1,7 +1,7 @@
 const OrderMain = React.createClass({
     getInitialState: function () {
         var index = 0;
-        if (location.hash == '#pay') {
+        if (location.hash == '#unPay') {
             index = 1
         }
         else if (location.hash == '#prepare') {
@@ -45,14 +45,14 @@ const OrderList = React.createClass({
     getInitialState: function () {
         var state = {
             all: [],
-            pay: [],
+            unPay: [],
             prepare: [],
             shipping: [],
             complete: []
         };
         this.props.orders.forEach(function (i) {
             state.all.push(i);
-            if (i.status) state[i.status].push(i);
+            if (i.status && i.status!="cancel"&& i.status!="failure") state[i.status].push(i);
         });
         return state
     },
@@ -71,7 +71,7 @@ const OrderList = React.createClass({
         return (
             <div className="order-area">
                 {this.props.index == 0 ? (this.state.all.length != 0 ? allBlock("all") : blockText) : null}
-                {this.props.index == 1 ? (this.state.pay.length != 0 ? allBlock("pay") : blockText) : null}
+                {this.props.index == 1 ? (this.state.unPay.length != 0 ? allBlock("unPay") : blockText) : null}
                 {this.props.index == 2 ? (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) : null}
                 {this.props.index == 3 ? (this.state.shipping.length != 0 ? allBlock("shipping") : blockText) : null}
                 {this.props.index == 4 ? (this.state.complete.length != 0 ? allBlock("complete") : blockText) : null}
@@ -135,7 +135,7 @@ const OrderBlock = React.createClass({
         let status_name;
         let status_color;
         switch (order.status) {
-            case 'pay':
+            case 'unPay':
                 status_name = '待付款';
                 status_color = pay_color;
                 break;
@@ -212,7 +212,7 @@ const OrderBlock = React.createClass({
                         </span>
                         {check_link}
                     </div>
-                    {order.status == "pay" ? <div className="pay-order">
+                    {order.status == "unPay" ? <div className="pay-order">
                         <div className="btn-pay"
                              onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo)}>立即支付
                         </div>
@@ -275,6 +275,7 @@ const ConfAlert = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    ReactDOM.render(<Header title={"我的订单"}/>, HEADER_NODE);
     $FW.Ajax({
         //url: `./order_list.json`,
         url: `${API_PATH}mall/api/member/v1/order_list.json`,
@@ -283,7 +284,4 @@ $FW.DOMReady(function () {
         ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);
         window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
     })
-
-
-    ReactDOM.render(<Header title={"我的订单"}/>, HEADER_NODE);
 });
