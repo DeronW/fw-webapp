@@ -113,11 +113,11 @@ const SendCode = React.createClass({
             success: (data) => {
                 alert(JSON.stringify(data));
                 return false;
-                if(data.status=="F"){
+                if(data.responseResult.status=="F"){
                     window.location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/order-complete/index.html?status=F"
+                        "/static/mall/order-complete/index.html?status=F&failTex=resMessage"
                 }
-                if(data.status=="S"){
+                if(data.responseResult.status=="S"){
                     window.location.href = location.protocol + '//' + location.hostname +
                         "/static/mall/order-complete/index.html?status=S"
                 }
