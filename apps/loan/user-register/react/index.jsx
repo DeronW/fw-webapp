@@ -18,7 +18,8 @@ const Register = React.createClass({
             pswVal: '',
             countdown: 0,
             plainCode: false,
-            codeToken: ''
+            codeToken: '',
+            checked:false
         }
     },
     changeCode(e) {
@@ -90,7 +91,9 @@ const Register = React.createClass({
             $FW.Component.Toast("密码不能多于16位");
         } else if (!istrue(this.state.pswVal)) {
             $FW.Component.Toast("必须是字母及数字组合密码");
-        } else {
+        } else if (!this.state.checked){
+            $FW.Component.Toast("请同意放心花注册协议");
+        }else {
             $FW.Ajax({
                 url: API_PATH + "api/userBase/v1/register.json",
                 method: "POST",
@@ -106,16 +109,22 @@ const Register = React.createClass({
                     localStorage.userId = data.userLogin.userId;
                     localStorage.userToken = data.userLogin.userToken;
                     location.href = `/static/loan/home/index.html`;
+                },
+                fail:function(err){
+                    $FW.Component.Toast(err);
                 }
             })
         }
 
     },
+    checkHandler() {
+        this.setState({ checked: !this.state.checked });
+    },
     render() {
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
-                    已发送短信验证码到号码<span>{location.search.split('phone=')[1]}</span>
+                    已发送短信验证码到号码<span>{localStorage.phone}</span>
                 </div>
 
                 <div className="ui-froms">
@@ -147,7 +156,11 @@ const Register = React.createClass({
                         <span className="icon-pwd" onClick={this.handlePlainCode}></span>
                     </div>
                 </div>
-
+                <div className="agreement-issue">
+                    <div className={this.state.checked ? "checked-box" : "unchecked-box"}
+                         onClick={this.checkHandler}></div>
+                    <div className="check-item">同意<a href="">《放心花注册协议》</a></div>
+                </div>
                 <div className="determine-btn">
                     <div className="ui-btn" onClick={this.handleRegisterBtn}>确定</div>
                 </div>
@@ -157,5 +170,6 @@ const Register = React.createClass({
 });
 
 $FW.DOMReady(() => {
+    ReactDOM.render(<Header title={"设置密码"} />, HEADER_NODE);
     ReactDOM.render(<Register />, CONTENT_NODE)
 })

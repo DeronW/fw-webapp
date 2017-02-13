@@ -168,6 +168,7 @@ const VerifyCode = React.createClass({
     componentDidMount: function () {
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
+        this.tick();
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/sendSmsverifycode.json`,
             method: "post",

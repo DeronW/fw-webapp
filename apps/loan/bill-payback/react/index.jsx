@@ -205,6 +205,7 @@ const VerifyCode = React.createClass({
     componentDidMount: function () {
         var query = $FW.Format.urlQuery();
         var loanGid = query.loanGid;
+        this.tick();
         $FW.Ajax({
             url: `${API_PATH}api/repayment/v1/checksmsverifycode.json`,
             method: "post",

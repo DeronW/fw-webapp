@@ -79,7 +79,7 @@ const ApplyLoan = React.createClass({
             <div className="unavailable-loan">
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
-                    仅支持500元以上借款，快去提额吧！</div>
+                    仅支持{this.props.data.lowestLoan}元以上借款，快去提额吧！</div>
                 <div className="max-loan-money">暂无额度</div>
             </div>;
 
@@ -132,7 +132,7 @@ const ApplyLoan = React.createClass({
                 $FW.Component.Toast('设置提现卡申请处理中，请稍等') :
                 location.href = link
         }
-        let loan_btn = <div className="loan-btn" onClick={loanBtnClick}> 申请借款 </div>;
+        let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
         let credit_btn =
             <a className="loan-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`}>
