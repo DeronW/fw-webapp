@@ -257,22 +257,26 @@ const VerifyCode = React.createClass({
         }
     },
     confirmBtnHandler: function () {
-        $FW.Ajax({
-            url: `${API_PATH}api/repayment/v1/do.json`,
-            method: "post",
-            enable_loading:"mini",
-            data: {
-                orderGid: this.state.orderGid,
-                token: localStorage.userToken,
-                userGid: localStorage.userGid,
-                userId: localStorage.userId,
-                sourceType: 3,
-                verifyCode: this.state.value
-            }
-        }).then(d => {
-            this.props.callbackResultShow(true, false);
-        }, (error) => console.log(error)
+        if(this.state.value=''){
+            $FW.Component.Toast("请输入验证码");
+        }else{
+            $FW.Ajax({
+                url: `${API_PATH}api/repayment/v1/do.json`,
+                method: "post",
+                enable_loading:"mini",
+                data: {
+                    orderGid: this.state.orderGid,
+                    token: localStorage.userToken,
+                    userGid: localStorage.userGid,
+                    userId: localStorage.userId,
+                    sourceType: 3,
+                    verifyCode: this.state.value
+                }
+            }).then(d => {
+                    this.props.callbackResultShow(true, false);
+                }, (error) => console.log(error)
             )
+        }
     },
     render: function () {
         return (

@@ -257,7 +257,7 @@ const SetCashCard = React.createClass({
                             </span>
                             {
                                 this.state.cardinfoBankName != '' ?
-                                    <span className="bank"><img className="logo-icon" src={this.state.cardinfoLogoUrl} />{this.state.cardinfoBankName}</span> : null
+                                    <span className="bank">{/*<img className="logo-icon" src={this.state.cardinfoLogoUrl} />*/}{this.state.cardinfoBankName}</span> : null
                             }
                         </div>
                     </div>
