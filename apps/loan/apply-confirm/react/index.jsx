@@ -67,7 +67,7 @@ const ConfirmLoan = React.createClass({
     },
     confirmHandler: function () {
         if (this.state.checked == false) {
-            $FW.Component.Toast("请同意芥末借款服务协议和芥末借款协议");
+            $FW.Component.Toast("请同意放心花借款服务协议和放心花借款协议");
         } else {
             this.props.callbackVerifyCodeShow(true);
         }
@@ -111,7 +111,7 @@ const ConfirmLoan = React.createClass({
                 <div className="agreement-issue">
                     <div className={this.state.checked ? "checked-box" : "unchecked-box"}
                         onClick={this.checkHandler}></div>
-                    <div className="check-item">同意<a href="">《芥末借款服务协议》</a>、<a href="/static/loan/protocol-borrowing/index.html">《芥末借款协议》</a>，未按时还款将计入信用卡银行的信用报告
+                    <div className="check-item">同意<a href="">《放心花借款服务协议》</a>、<a href="/static/loan/protocol-borrowing/index.html">《放心花借款协议》</a>，未按时还款将计入信用卡银行的信用报告
                     </div>
                 </div>
                 <div className="confirm-btn" onClick={this.confirmHandler}>确定</div>
@@ -355,7 +355,7 @@ const LoanResult = React.createClass({
                                     href="tel:400-102-0066">400-102-0066</a></div>
                             </div>
                         </div>
-                        <div className="credit-btn" onClick={() => gotoHandler(`https://cashloan.9888.cn/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>去提额</div>
+                        <div className="credit-btn" onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>去提额</div>
                     </div>
                     <div className={this.state.failResultShow ? "fail-result-box" : "fail-result-box dis"}>
                         <div className="wrap-box">
