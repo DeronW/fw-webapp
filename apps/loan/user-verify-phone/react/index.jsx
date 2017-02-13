@@ -24,7 +24,7 @@ const VerifyPhone = React.createClass({
     },
     getCode() {
         this.setState({
-            countdown: 5,
+            countdown: 60,
             countdownShow: true
         });
 
@@ -166,7 +166,7 @@ const VerifyPhone = React.createClass({
 
                 <div className="ui-froms">
                     <div className="list code-list">
-                        <span className="text">手机验证码</span>
+                        <span className="text">验证码</span>
                         <div className="input">
                             <input type="text" onChange={(e) => this.changeCode(e)} value={this.state.codeVal} placeholder="请输入验证码" />
                         </div>

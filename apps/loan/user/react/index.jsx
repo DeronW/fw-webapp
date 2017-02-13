@@ -82,21 +82,21 @@ const MyCnt = React.createClass({
                 <div className="my-info">
                     <div className="my-info-cnt">
                         <div className="loan-sum-text">
-                            <div className="text">累计借款(元)</div>
                             <div className="num-text">
                                 {
                                     this.state.indexloadpageData.totalLoanAmout == 0 ? "--" : this.state.indexloadpageData.totalLoanAmout
                                 }
                             </div>
+                            <div className="text">累计借款(元)</div>
                         </div>
                         <div className="loan-info">
                             <div className="info">
-                                <span className="text">借款次数</span>
                                 <span className="num-text">{this.state.indexloadpageData.loanCount}</span>
+                                <span className="text">借款次数</span>
                             </div>
                             <div className="info">
-                                <span className="text">逾期次数</span>
                                 <span className="num-text">{this.state.indexloadpageData.overdueCount}</span>
+                                <span className="text">逾期次数</span>
                             </div>
                         </div>
                     </div>

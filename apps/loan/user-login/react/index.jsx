@@ -57,11 +57,11 @@ const Register = React.createClass({
                 </div>
 
                 <div className="logo">
-                    <img src="http://placehold.it/214x214" />
+                    <img src="images/logo.png" />
                 </div>
 
                 <div className="get-name-phone">
-                    <span className="phone-text">{location.search.split("=")[1]}</span>欢迎登录现金贷!
+                    <span className="phone-text">{location.search.split("=")[1]}</span>欢迎登录放心花!
 				</div>
 
                 <div className="from-cnt">

@@ -126,7 +126,7 @@ const PayBack = React.createClass({
                 <div className="loan-detail-box">
                     <div>
                         <span>还款金额</span>
-                        <span>{this.props.loanLeftAmount}</span>
+                        <span>{this.props.loanLeftAmount}元</span>
                     </div>
                 </div>
                 <div className="payback-tips">

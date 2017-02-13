@@ -41,10 +41,10 @@ const Register = React.createClass({
         return (
             <div className="register-login-cnt">
                 <div className="top">
-                    <span className="title">现金贷</span>
+                    <span className="title">放心花</span>
                 </div>
 
-                <div className="logo"> <img src="http://placehold.it/214x214" /> </div>
+                <div className="logo"> <img src="images/logo.png" /> </div>
 
                 <div className="register-login-cnt">
                     <div className="from-cnt">
