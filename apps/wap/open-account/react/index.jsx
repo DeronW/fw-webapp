@@ -4,7 +4,6 @@ var numberFormat = {
         if (!isNaN(val.replace(/[0-9]/g, ""))) {
             this.val = val.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");//四位数字一组，以空格分割
         }
-
         return this.val;
     }
 };
@@ -24,7 +23,7 @@ var Nav = React.createClass({
     render: function () {
         return (
             <div className="nav-block">
-                <img src={this.props.imgUrl}/>
+                <img src={this.props.imgUrl} />
             </div>
         );
     }
@@ -32,11 +31,12 @@ var Nav = React.createClass({
 
 var Btn = React.createClass({
     render: function () {
-        return (
-            <div className="btn-area">
-                <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>{this.props.btnText}</div>
+        return <div className="btn-area">
+            <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>
+                {this.props.btnText}
             </div>
-        );
+        </div>
+            ;
     }
 });
 
@@ -116,7 +116,7 @@ var Text = React.createClass({
                     this.props.userOpenStatusCode === "1" ? "开通即视为我已阅读并同意: " : "马上开通徽商存管并且迁移资金,开通即视为我已阅读并同意:"
                 }
 
-                <br/>
+                <br />
                 <a href="/static/wap/protocol-trusteeship/index.html" className="text">《资金存管三方协议》</a>
                 &nbsp;
                 {
@@ -148,7 +148,7 @@ var TopNav = React.createClass({
                 <div className="info">
                     {
                         this.props.backBtn ?
-                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/>
+                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png" />
                             </div> : null
                     }
 
@@ -399,12 +399,12 @@ var From = React.createClass({
         var accountInput = function () {
             return _this.state.showInput == 1 ?
                 <input type="text"
-                       value={_this.state.account}
-                       placeholder="输入账号"
-                       ref="number"
-                       onFocus={_this.inputFocus}
-                       onBlur={_this.inputBlur}
-                       onChange={_this.onInputChangeHandler}/> :
+                    value={_this.state.account}
+                    placeholder="输入账号"
+                    ref="number"
+                    onFocus={_this.inputFocus}
+                    onBlur={_this.inputBlur}
+                    onChange={_this.onInputChangeHandler} /> :
                 <span className="text id-text" onClick={_this.amendId}>{
                     numberFormat.format(bankCardNum)
                 }</span>
@@ -412,24 +412,24 @@ var From = React.createClass({
 
         var selectEml = function () {
             return <div className="">
-                        <span className="bank-text">
-                            {
-                                _this.props.alreadyBankData === null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
-                            }
-                        </span>
-                    <span className="img">
-                        
-                        <img
-                            src={_this.props.alreadyBankData === null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl}
-                            style={
-                                _this.props.alreadyBankData === null && userAjaxData.userInfo.bankLogo == "" ?
-                                 {"display": "none"} : {"display" : "block"}
-                            }
-                            className="r-icon"
-                            />
-                    
-                        
-                    </span>
+                <span className="bank-text">
+                    {
+                        _this.props.alreadyBankData === null ? userAjaxData.userInfo.bankName : _this.props.alreadyBankData.bankName
+                    }
+                </span>
+                <span className="img">
+
+                    <img
+                        src={_this.props.alreadyBankData === null ? userAjaxData.userInfo.bankLogo : _this.props.alreadyBankData.logoUrl}
+                        style={
+                            _this.props.alreadyBankData === null && userAjaxData.userInfo.bankLogo == "" ?
+                                { "display": "none" } : { "display": "block" }
+                        }
+                        className="r-icon"
+                    />
+
+
+                </span>
             </div>
         };
 
@@ -442,7 +442,7 @@ var From = React.createClass({
                         <div className="text-block">
                             {
                                 userAjaxData.userInfo.realName === "" ?
-                                    <input type="text" placeholder="真实姓名" onChange={this.changeUserName}/> :
+                                    <input type="text" placeholder="真实姓名" onChange={this.changeUserName} /> :
                                     <span className="text name-text">{realNameVal}</span>
                             }
 
@@ -454,7 +454,7 @@ var From = React.createClass({
 
                         <div className="text-block">
                             {
-                                idCardNo === "" ? <input type="text" placeholder="身份证号" onChange={this.changeId}/> :
+                                idCardNo === "" ? <input type="text" placeholder="身份证号" onChange={this.changeId} /> :
                                     <span className="text number-text">{idCarNoNntercept}</span>
                             }
 
@@ -467,8 +467,8 @@ var From = React.createClass({
                         <div className="text-block">
                             {
                                 userAjaxData.userInfo.bankCard === "" ? <input type="text" placeholder="银行卡号"
-                                                                               value={this.state.account}
-                                                                               onChange={this.changeBankCard}/> : accountInput()
+                                    value={this.state.account}
+                                    onChange={this.changeBankCard} /> : accountInput()
                             }
                         </div>
                     </div>
@@ -485,7 +485,7 @@ var From = React.createClass({
 
                     <div className="input-block code-block">
                         <span className="input">
-                            <input type="text" placeholder="请输入验证码" onChange={this.validateCodeChangeHandler}/>
+                            <input type="text" placeholder="请输入验证码" onChange={this.validateCodeChangeHandler} />
                         </span>
 
                         <span className="btn-code">
@@ -495,7 +495,7 @@ var From = React.createClass({
                                 this.state.code ?
                                     <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
                                     <span className={this.userInfoAllVal() ? "timing-text" : "btn"}
-                                          onClick={this.headlerCode}>获取验证码</span>
+                                        onClick={this.headlerCode}>获取验证码</span>
                             }
 
                         </span>
@@ -509,7 +509,7 @@ var From = React.createClass({
                             callbackCountdown={this.state.countdown}
                             callbackCode={this.getCode}
                             callbackCountdownVal={this.getCountdownVal}
-                            /> : null
+                        /> : null
                     }
                 </div>
 
@@ -523,7 +523,7 @@ var From = React.createClass({
 var Pop = React.createClass({
     render: function () {
         return (
-            <div className="pop-body" style={{zIndex: 1000000}}>
+            <div className="pop-body" style={{ zIndex: 1000000 }}>
                 <div className="pop-back"></div>
                 <div className="pop-cnt">
                     <div className="pop-info">
@@ -531,9 +531,9 @@ var Pop = React.createClass({
                     </div>
                     <div className="pop-btn">
                         <div className="cancel-btn btn l-btn"
-                             onClick={this.props.callbackCancelBtn}>{this.props.callbackBtnText[1]}</div>
+                            onClick={this.props.callbackCancelBtn}>{this.props.callbackBtnText[1]}</div>
                         <div className="confirm-btn btn r-btn"
-                             onClick={this.props.callbackConfirmBtn}>{this.props.callbackBtnText[0]}</div>
+                            onClick={this.props.callbackConfirmBtn}>{this.props.callbackBtnText[0]}</div>
                     </div>
                 </div>
             </div>
@@ -570,22 +570,15 @@ var SelectBank = React.createClass({
         }
     },
     backBtnClick: function () {
-        //this.props.callbackBtn(false);
         this.props.callbackBtnVal();
     },
     supportQuickPayClick: function (index) {
         this.props.callbackAlreadyBank(this.state.bankListData.quickBankList[index]);
         this.props.callbackBtn(false);
-        //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayClick: function (index) {
-        //this.props.callbackAlreadyBank(this.state.bankListData.bankList[index])
-        //this.props.callbackBtn(false);
-
         this.props.callbackAlreadyBank(this.state.notSupportQuickPayList);
         this.props.callbackBtn(false);
-
-        //this.props.callbackSelectBankNullOderIs(false);
     },
     notSupportQuickPayList: function (index) {
         this.props.callbackLeapfrogBtn(2);
@@ -604,18 +597,18 @@ var SelectBank = React.createClass({
         var quickPayli = function (comment, index) {
 
             return <li key={index} onClick={_this.supportQuickPayClick.bind(this, index)} ref={"item" + index}>
-                <img src={comment.logoUrl} className="logo-img"/>
+                <img src={comment.logoUrl} className="logo-img" />
 
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
                 </div>
-                <img src="images/fash-bank.png" className="quick-pay-icon"/>
+                <img src="images/fash-bank.png" className="quick-pay-icon" />
             </li>
         };
 
         var notQuickPayli = function (comment, index) {
             return <li key={index} onClick={_this.notSupportQuickPayList.bind(this, index)} ref={"item" + index}>
-                <img src={comment.logoUrl} className="logo-img"/>
+                <img src={comment.logoUrl} className="logo-img" />
 
                 <div className="info-block">
                     <span className="text">{comment.bankName}</span>
@@ -625,7 +618,7 @@ var SelectBank = React.createClass({
 
         return (
             <div className="select-bank-area" style={style}>
-                <TopNav title={"选择开户行"} backBtn={true} btnFun={this.backBtnClick}/>
+                <TopNav title={"选择开户行"} backBtn={true} btnFun={this.backBtnClick} />
 
                 <div className="select-bank-content-block">
                     <div className="select-list">
@@ -757,7 +750,7 @@ var Body = React.createClass({
 
         if (this.props.activity.openStatus === "4" || this.props.activity.openStatus === "2" || this.props.activity.openStatus === "3") {
             // nothing to do here
-            typeof(window)
+            typeof (window)
         } else {
             if (!isCardNo(this.state.userInfo.idCardNo)) {
                 $FW.Component.Toast("身份证不格式不正确");
@@ -849,7 +842,7 @@ var Body = React.createClass({
     backBtnClick: function () {
         //location.href = document.referrer;
         //window.history.back();
-        window.location.href = location.protocol + "//m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+        window.location.href = "/mpwap/orderuser/getUserInfo.shtml";
     },
     getLeapfrogBtn: function (val) {
         // 1 跳过按钮
@@ -870,24 +863,14 @@ var Body = React.createClass({
             });
         }
 
-        this.setState({
-            popShow: true
-        });
+        this.setState({ popShow: true });
     },
     getCancelBtn: function () {
-        this.setState({
-            popShow: false
-        });
+        this.setState({ popShow: false });
     },
     getConfirmBtn: function () {
         if (this.state.popSelect === 1) {
-            //window.history.back(0);
-            //window.history.go(-1);
-            //return false;
-
-            window.location.href = location.protocol + "//m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
-
-            //window.location.href = "http://m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
+            window.location.href = "/mpwap/orderuser/getUserInfo.shtml";
         } else if (this.state.popSelect === 2) {
             this.setState({
                 propsPopBtnBank: true
@@ -906,9 +889,9 @@ var Body = React.createClass({
 
                 {
                     <TopNav title={"开通存管账户"} backBtn={true} btnText="关闭"
-                            btnFun={this.backBtnClick}
-                            callbackLeapfrogBtn={this.getLeapfrogBtn}
-                        />
+                        btnFun={this.backBtnClick}
+                        callbackLeapfrogBtn={this.getLeapfrogBtn}
+                    />
                 }
 
                 {
@@ -916,7 +899,7 @@ var Body = React.createClass({
                         <div className="modily-bank-info">请更改为指定开户银行范围的银行卡, 否则无法提现</div> : null
                 }
 
-                <Nav imgUrl={"images/nav-2.png"}/>
+                <Nav imgUrl={"images/nav-2.png"} />
 
                 <From
                     callbackParent={this.fromData}
@@ -930,13 +913,13 @@ var Body = React.createClass({
                     callbackUserId={this.getUserId}
                     callbackBankCardNo={this.getBankCardNo}
                     transmittalCallbackBtnVal={this.state.getCallbackBtnVal}
-                    />
+                />
 
                 <Btn btnText={"同意"} Fun={this.clickFun}
 
-                    />
+                />
 
-                <Text userOpenStatusCode={this.props.activity.openStatus}/>
+                <Text userOpenStatusCode={this.props.activity.openStatus} />
 
                 {
                     _this.state.backSelect ? <SelectBank
@@ -946,7 +929,7 @@ var Body = React.createClass({
                         callbackLeapfrogBtn={this.getLeapfrogBtn}
                         callbackPopBtnBank={this.state.propsPopBtnBank}
 
-                        /> : null
+                    /> : null
                 }
 
 
@@ -958,7 +941,7 @@ var Body = React.createClass({
                         callbackCancelBtn={this.getCancelBtn}
                         callbackConfirmBtn={this.getConfirmBtn}
                         callbackBtnText={this.state.btnText}
-                        /> : null
+                    /> : null
                 }
             </div>
 
@@ -969,43 +952,15 @@ var Body = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
-        enable_loading: true,
-        success: function (data) {
-            var title = data.userInfo.bankId === null ? "升级存管账户" : "开通存管账户";
-            /*ReactDOM.render(
-             <Header title={title} sub_text={'关闭'} sub_url={'javascript:history.back()'}/>,
-             HEADER_NODE);*/
-
-            if (data.openStatus >= 3) {
-                window.location.href = location.protocol + "//m.9888.cn/mpwap/top/index.do";
-            } else {
-                ReactDOM.render(<Body activity={data}/>, document.getElementById("cnt"));
-            }
-        },
-        fail: function hander(code, msg, responseText) {
-
-            // if (code == 10000 || code == 0) {
-            //     $FW.Component.Alert('it seems OK');
-            // } else if (code == 40101) {
-            //     if (FinancialWorkspace.Browser.inApp() && NativeBridge) {
-            //         NativeBridge.login()
-            //     } else {
-            //         location.href = 'http://m.9888.cn/mpwap/orderuser/toLogin.shtml?redirect_url=' + FinancialWorkspace.getLoginRedirect();
-            //     }
-            // } else if (code == 60000) {
-            //     $FW.Component.Alert(msg)
-            // } else if (code >= 50000 && code < 60000) {
-            //     // 服务器内部错误
-            //     $FW.Component.Alert('异常:' + msg)
-            // } else {
-            //     $FW.Component.Alert(msg);
-            //     console.log(responseText)
-            // }
-
-            // return true;
+        url: `${API_PATH}mpwap/api/v1/getOpenAccountInfo.shtml`,
+        enable_loading: 'mini'
+    }).then(data => {
+        // var title = data.userInfo.bankId ? "开通存管账户" : "升级存管账户";
+        if (data.openStatus >= 3) {
+            window.location.href = "/mpwap/top/index.do";
+        } else {
+            ReactDOM.render(<Body activity={data} />, CONTENT_NODE);
         }
-
     });
 
 });

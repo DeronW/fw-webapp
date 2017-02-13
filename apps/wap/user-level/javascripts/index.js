@@ -1,3 +1,11 @@
+$(function () {
+    // 设置全局变量的 API_PATH , 被用作所有接口的前缀地址
+    // 该变量很重要 !!!
+    var p = document.getElementById('api-path').value;
+    if (p.substr(0, 2) != '//') p = '//' + p;
+    window.API_PATH = location.protocol + p;
+    console.log(API_PATH)
+});
 function inApp() {
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
@@ -42,7 +50,7 @@ $(function () {
 
     $.ajax({
         type: "GET",
-        url: "/mpwap/api/v1/user/level-info.shtml",
+        url: API_PATH+"mpwap/api/v1/user/level-info.shtml",
         //url: "http://10.105.7.124/xxxxx.json",
         //url: "http://localhost/user-level.json",
         dataType: "json",
@@ -73,7 +81,8 @@ $(function () {
 
             for (var i = 0; i < levelGiftsData.length; i++) {
                 var level = levelGiftsData[i].level;
-
+                //奖励加息
+                $(".vip1-interest span").eq(i).text(levelGiftsData[i].levelRate);
                 for (var j = 0; j < levelGiftsData[i].lvGiftIdMap.length; j++) {
                     if (levelGiftsData[i].lvGiftIdMap[j].giftBagId !== "") {
                         $(".level-img" + i).append(
@@ -88,6 +97,9 @@ $(function () {
                 $(".level-img" + i).append("<a href='javascript:void(0)'><img src='images/waiting.png'/></a>");
             }
 
+            for(var i = 0; i < levelGiftsData.length; i++){
+                console.log(levelGiftsData[i].levelRate)
+            }
             $("#vip0, #vip1, #vip2, #vip3, #vip4").attr("class", "change-img-gray");
             $("#vip0-jindutiao, #vip1-jindutiao, #vip2-jindutiao, #vip3-jindutiao, #vip4-jindutiao").addClass("gray-class");
 
