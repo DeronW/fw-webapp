@@ -2,13 +2,31 @@ function isMobilePhone(phone) {
     return /^1(3|4|5|7|8)\d{9}$/.test(phone)
 }
 
+
+function verificationNum(val) {
+    var reg = new RegExp("^[0-9]*$");
+    return reg.test(val)
+}
+
 const Register = React.createClass({
     getInitialState() {
         return { phone: '' }
     },
     changeHandler(e) {
         let v = e.target.value;
-        this.setState({ phone: parseInt(v) || 1 });
+        //this.setState({ phone: parseInt(v)});
+        console.log(v);
+        if(e.target.value.length > 11) {
+            this.setState({
+                phone: this.state.phone
+            });
+        } else {
+            if(verificationNum(v)) {
+                this.setState({
+                    phone: v
+                })
+            }
+        }
     },
 
     handleGetCode() {

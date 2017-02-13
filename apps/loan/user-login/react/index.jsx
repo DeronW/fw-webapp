@@ -41,8 +41,8 @@ const Register = React.createClass({
 
                     location.href = `${location.protocol}\/\/${location.host}/static/loan/home/index.html`;
                 },
-                fail: function (code, mes) {
-
+                fail: function (error) {
+                    $FW.Component.Toast(error)
                 }
             })
         }

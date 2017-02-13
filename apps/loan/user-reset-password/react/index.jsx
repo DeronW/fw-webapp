@@ -140,6 +140,9 @@ const Register = React.createClass({
                     localStorage.userToken = data.userPasswordOption.userToken;
 
                     window.location.href = "/static/loan/home/index.html"
+                },
+                fail:function(err){
+                    $FW.Component.Toast(err);
                 }
             })
         }
