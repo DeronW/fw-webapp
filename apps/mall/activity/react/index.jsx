@@ -32,13 +32,11 @@ const Banner = React.createClass({
         let detail = null;
 
         if (show && desc) {
-            detail = (
+            detail =
                 <div className="act-explain-cont show">
                     {desc.split(/[;|；]/).map((i, index) => <div key={index}>{trim(i)}</div>)}
                 </div>
-            )
         }
-
 
         return (
             <div>
@@ -46,8 +44,7 @@ const Banner = React.createClass({
                 <div className="act-explain-box">
                     <div className="act-explain-head" onClick={this.clickHandler}>
                         <div className="act-explain-h">活动说明</div>
-                        <div className={show ? "act-explain-btn on" : "act-explain-btn"}
-                            style={{ background: "url(images/ico-grap-down.png) no-repeat center" }}></div>
+                        <div className={`act-explain-btn ${show && 'on'}`}></div>
                     </div>
                     {detail}
                 </div>
@@ -100,19 +97,18 @@ const Content = React.createClass({
             }
 
             if (parseFloat(props.score) > 0) {
-                score = (
+                score =
                     <span className="list-price-score">
-                        {props.price > 0 ? <span>+</span> : null}
+                        {props.price > 0 && <span>+</span>}
                         {props.score}工分
-                </span>
-                )
+                    </span>
             }
 
             if (props.angle_text) {
                 angle = <div className="list-label">{props.angle_text}</div>
             }
 
-            let cover_bg = 'url(' + (props.img || 'images/default-product.jpg') + ')';
+            let cover_bg = `url(${props.img || 'images/default-product.jpg'})`;
             let href = `/static/mall/product-detail/index.html?bizNo=${props.BIZ_NO}`;
 
             return (
@@ -126,7 +122,7 @@ const Content = React.createClass({
                     </div>
                     <div className="list-price-box">
                         <div className="list-price">
-                            {props.price > 0 ? <span className="list-price-mark">&yen;</span> : null}
+                            {props.price > 0 && <span className="list-price-mark">&yen;</span>}
                             {price}
                             {score}
                         </div>
@@ -139,26 +135,23 @@ const Content = React.createClass({
             )
         };
 
-        return (
-            <div>
-                <Banner />
-                <div className="products-act">
-                    <div className="index-actList-list">
-                        {products.map(ProductItem)}
-                    </div>
-                    <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
+        return
+        <div>
+            <Banner />
+            <div className="products-act">
+                <div className="index-actList-list">
+                    {products.map(ProductItem)}
                 </div>
+                <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
             </div>
-        )
+        </div>
     }
 })
 
 const BIZ_NO = $FW.Format.urlQuery().bizNo;
 
 $FW.DOMReady(() => {
-
     $FW.Ajax(`${API_PATH}mall/api/index/v1/activity.json?bizNo=${BIZ_NO}`)
         .then(data => ReactDOM.render(<Header title={data.title} />, HEADER_NODE));
-
     ReactDOM.render(<Content />, CONTENT_NODE);
 })

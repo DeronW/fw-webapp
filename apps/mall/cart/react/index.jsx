@@ -35,28 +35,27 @@ const ShoppingCart = React.createClass({
         var ps = this.state.products;
         for (var i = 0; i < ps.length; i++) {
             if (!ps[i].cartStatus == 0) {
-                this.setState({changeAll: false});
+                this.setState({ changeAll: false });
             }
         }
     },
     checkHandler: function (index) {
         var ps = this.state.products;
-        var _this = this;
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/isChecked.json`,
             data: {
-                flag: ps[index].cartStatus == 0 ? true : false,
+                flag: ps[index].cartStatus === 0,
                 productBizNo: ps[index].productBizNo
-            },
-            success: function (data) {
-                ps[index].cartStatus = ps[index].cartStatus == 0 ? 5 : 0,
-                    _this.setState({products: ps});
-                for (var i = 0; i < ps.length; i++) {
-                    if (ps[i].cartStatus == 5) {
-                        _this.setState({changeAll: false});
-                    } else if (ps[i].cartStatus == 0) {
-                        _this.setState({changeAll: true});
-                    }
+            }
+        }).then(data => {
+            ps[index].cartStatus = ps[index].cartStatus == 0 ? 5 : 0;
+            this.setState({ products: ps });
+
+            for (var i = 0; i < ps.length; i++) {
+                if (ps[i].cartStatus == 5) {
+                    this.setState({ changeAll: false });
+                } else if (ps[i].cartStatus == 0) {
+                    this.setState({ changeAll: true });
                 }
             }
         });
@@ -64,16 +63,14 @@ const ShoppingCart = React.createClass({
     },
     deleteHandler: function (index) {
         let ps = this.state.products;
-        var _this = this;
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
             data: {
                 productBizNo: ps[index].productBizNo
             },
-            enable_loading: 'mini',
-            success: function (data) {
-                _this.setState({products: ps});
-            }
+            enable_loading: 'mini'
+        }).then(data => {
+            this.setState({ products: ps });
         });
         ps.splice(index, 1);
     },
@@ -92,11 +89,8 @@ const ShoppingCart = React.createClass({
             data: {
                 allFlag: newChangeAll,
                 productBizNo: ''
-            },
-            success: () => {
-                this.setState({products: products});
             }
-        });
+        }).then(() => this.setState({ products: products }));
     },
     updateCount: function (index, newAmount) {
         var ps = this.state.products;
@@ -106,16 +100,14 @@ const ShoppingCart = React.createClass({
         if (c < 1) c = 1;
         if (c > ps[index].prdInventory) c = ps[index].prdInventory;
         ps[index].productNumber = c;
+
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/updateCartNumber.json`,
             data: {
                 buyNum: ps[index].productNumber,
                 productBizNo: ps[index].productBizNo
-            },
-            success: function (data) {
-                _this.setState({products: ps});
             }
-        });
+        }).then(() => this.setState({ products: ps }));
     },
     changeMinus: function (index) {
         let ps = this.state.products;
@@ -145,11 +137,11 @@ const ShoppingCart = React.createClass({
                         <div className="checked-icon" onClick={() => this.checkHandler(index)}>
                             <span className={product.cartStatus == 0 ? "checked-circle" : "unchecked-circle"}></span>
                             <input type="hidden" className="checked-bizNo"
-                                   value={product.cartStatus == 0 ? product.productBizNo : null}/>
+                                value={product.cartStatus == 0 ? product.productBizNo : null} />
                         </div>
                         <a className="product-img"
-                           href={"/static/mall/product-detail/index.html?bizNo=" + product.productBizNo}><img
-                            src={product.img}/></a>
+                            href={"/static/mall/product-detail/index.html?bizNo=" + product.productBizNo}><img
+                                src={product.img} /></a>
                         <div className="product-item">
                             <div className="product-info">
                                 <div className="product-name">{product.productName}</div>
@@ -206,8 +198,7 @@ const ShoppingCart = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax(`${API_PATH}mall/api/cart/v1/shoppingCart.json`)
-        .then(data => ReactDOM.render(<ShoppingCart products={data.cartList}/>, CONTENT_NODE));
-
-    ReactDOM.render(<Header title={"购物车"} show_back_btn={true}/>, HEADER_NODE);
+        .then(data => ReactDOM.render(<ShoppingCart products={data.cartList} />, CONTENT_NODE));
+    ReactDOM.render(<Header title={"购物车"} show_back_btn={true} />, HEADER_NODE);
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 });
