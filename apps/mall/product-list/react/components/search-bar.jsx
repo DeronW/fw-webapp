@@ -1,7 +1,7 @@
 const SearchBar = React.createClass({
     getInitialState: function () {
         return {
-            value: $FW.Format.urlQuery().productName?$FW.Format.urlQuery().productName:'',
+            value: $FW.Format.urlQuery().productName ? $FW.Format.urlQuery().productName : '',
             history: [],
             showSearchHistory: true
         }
@@ -24,7 +24,7 @@ const SearchBar = React.createClass({
             this.props.filterProducts({productName: this.state.value});
             this.props.setShowExchangeBar();
             this.setState({showSearchHistory: false});
-			Filter.setParamsToQuery();
+            Filter.setParamsToQuery();
         }
     },
     clearHistoryHandler: function () {
@@ -63,7 +63,7 @@ const SearchBar = React.createClass({
                 this.props.filterProducts({productName: this.state.value});
                 this.props.setShowExchangeBar();
                 this.setState({showSearchHistory: false});
-				Filter.setParamsToQuery();
+                Filter.setParamsToQuery();
             }
             this.refs.searchInput.blur();
         }

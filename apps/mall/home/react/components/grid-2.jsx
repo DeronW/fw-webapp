@@ -8,8 +8,8 @@ const Grid_2 = React.createClass({
         let theme_product_item = (product, index) => {
             return (
                 <a className="theme-product-item" key={index}
-                    href={productLink(product.bizNo)} >
-                    <img className="theme-1-img" src={product.img} />
+                   href={productLink(product.bizNo)}>
+                    <img className="theme-1-img" src={product.img}/>
                     <span className="theme-product-item-name">{product.abbreviation}</span>
                 </a>
             )
@@ -17,7 +17,7 @@ const Grid_2 = React.createClass({
         return (
             <div className="theme-1">
                 <a className="activity-theme">
-                    <img src="static/mall/product-list/images/fantasy.jpg" /></a>
+                    <img src="static/mall/product-list/images/fantasy.jpg"/></a>
                 <div className="theme-product-wrap">
                     {this.state.ps.map(theme_product_item)}
                 </div>

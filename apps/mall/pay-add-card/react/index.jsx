@@ -59,7 +59,8 @@ const AddBankCard = React.createClass({
                 <div className="add-bank-card-tip">请绑定账户本人的银行卡</div>
                 <div className="input-box">
                     <span className="card-icon"></span>
-                    <input type="text" placeholder="请输入银行卡号" name="title" defaultValue="" onChange={this.changeVal} value={this.state.val}/>
+                    <input type="text" placeholder="请输入银行卡号" name="title" defaultValue="" onChange={this.changeVal}
+                           value={this.state.val}/>
                 </div>
                 <label htmlFor="title" className="card-info">{this.state.info}</label>
                 <a className={this.state.active ? "next-step active":"next-step"} onClick={this.nextStep}>下一步</a>

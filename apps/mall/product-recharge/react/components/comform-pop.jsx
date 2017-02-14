@@ -10,7 +10,7 @@ const ConfirmPop = React.createClass({
         }
     },
     show: function () {
-        this.setState({ show: true });
+        this.setState({show: true});
     },
     hide: function () {
         this.setState({
@@ -22,14 +22,14 @@ const ConfirmPop = React.createClass({
         })
     },
     changeValueHandler: function (e) {
-        this.setState({ value: e.target.value });
+        this.setState({value: e.target.value});
     },
     countingDown: function () {
         if (this.state.remain <= 1) window.clearInterval(this._timer);
-        this.setState({ remain: this.state.remain - 1 });
+        this.setState({remain: this.state.remain - 1});
     },
     tick: function () {
-        this.setState({ remain: 60 });
+        this.setState({remain: 60});
         window.clearInterval(this._timer);
         this._timer = setInterval(this.countingDown, 1000);
     },
@@ -58,7 +58,7 @@ const ConfirmPop = React.createClass({
         var form_data = rechargePanel.getFormData();
         if (this.state.loading)
             return;
-        this.setState({ loading: true })
+        this.setState({loading: true})
         $FW.Ajax({
             url: API_PATH + 'mall/api/v1/getToken.json',
             success: function (data) {
@@ -75,7 +75,7 @@ const ConfirmPop = React.createClass({
                         tokenStr: token
                     },
                     complete: function () {
-                        _this.setState({ loading: true });
+                        _this.setState({loading: true});
                     },
                     success: function () {
                         _this.setState({
@@ -116,14 +116,14 @@ const ConfirmPop = React.createClass({
                     <div className="pop-content">
                         <div className="confirm-sms-code">
                             <input type="text" placeholder="请输入验证码" className="sms-input" value={this.state.value}
-                                onChange={this.changeValueHandler} />
+                                   onChange={this.changeValueHandler}/>
                             <span className={this.state.remain > 0 ? "btn-countdown" : "sms-btn"}
-                                onClick={this.getSmsCodeHandler}>
+                                  onClick={this.getSmsCodeHandler}>
                                 {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
                         {frequent_tip}
                         <div className={this.state.loading ? "pop-confirm-btn gray" : "pop-confirm-btn"}
-                            onClick={this.submitHandler}>确认
+                             onClick={this.submitHandler}>确认
                         </div>
                         <div className="pop-tip"></div>
                     </div>

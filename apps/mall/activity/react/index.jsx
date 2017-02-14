@@ -14,7 +14,7 @@ const Banner = React.createClass({
             }));
     },
     clickHandler: function () {
-        this.setState({ show: !this.state.show });
+        this.setState({show: !this.state.show});
     },
     render: function () {
         let {image, desc, show} = this.state;
@@ -25,7 +25,7 @@ const Banner = React.createClass({
 
         let img = (
             <a className="act-img-detail">
-                <img src={image || 'images/default-banner.jpg'} />
+                <img src={image || 'images/default-banner.jpg'}/>
             </a>
         );
 
@@ -113,7 +113,7 @@ const Content = React.createClass({
 
             return (
                 <a href={href} className="index-actList-a"
-                    key={index}>
+                   key={index}>
                     <div className="list-img" style={{ backgroundImage: cover_bg }}></div>
                     {angle}
                     <div className="list-name">{props.title}</div>
@@ -152,6 +152,6 @@ const BIZ_NO = $FW.Format.urlQuery().bizNo;
 
 $FW.DOMReady(() => {
     $FW.Ajax(`${API_PATH}mall/api/index/v1/activity.json?bizNo=${BIZ_NO}`)
-        .then(data => ReactDOM.render(<Header title={data.title} />, HEADER_NODE));
+        .then(data => ReactDOM.render(<Header title={data.title}/>, HEADER_NODE));
     ReactDOM.render(<Content />, CONTENT_NODE);
 })

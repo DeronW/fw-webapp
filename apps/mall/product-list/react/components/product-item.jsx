@@ -1,4 +1,3 @@
-
 const ProductItem = React.createClass({
     getInitialState: function () {
         return {}

@@ -41,38 +41,41 @@ const PaymentPanel = React.createClass({
             show_voucher_modal: false
         });
 
-       // if(cc==0) return;
+        // if(cc==0) return;
 
         var query = $FW.Format.urlQuery();
         let cartFlag = query.cartFlag;
-        let prd = query.prd||[];
+        let prd = query.prd || [];
         let buyNum = query.buyNum || 0;
         let userTicketList = [];
 
-        let checkedVoucher=$FW.Utils.jsonFilter(new_voucher_list, (i) => i.selected);
+        let checkedVoucher = $FW.Utils.jsonFilter(new_voucher_list, (i) => i.selected);
         for (var key in checkedVoucher) {
             userTicketList.push(checkedVoucher[key].id);
-        };
+        }
+        ;
 
         $FW.Ajax({
             url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prd + `&buyNum=` + buyNum + `&userTickets=` + userTicketList,
             enable_loading: true
         }).then(data => {
 
-            let jia=(data.payableRmbAmt==0&&data.payablePointAmt==0) ?"0":"";
-            let RmbAmt= data.payableRmbAmt==0 ?"": '¥' + data.payableRmbAmt + '+'; let PointAmt= data.payablePointAmt==0  ?"":data.payablePointAmt + '工分';
+            let jia = (data.payableRmbAmt == 0 && data.payablePointAmt == 0) ? "0" : "";
+            let RmbAmt = data.payableRmbAmt == 0 ? "" : '¥' + data.payableRmbAmt + '+';
+            let PointAmt = data.payablePointAmt == 0 ? "" : data.payablePointAmt + '工分';
 
-            let jia1=((data.totalPrice-data.payableRmbAmt)==0||(data.totalPoints-data.payablePointAmt)==0) ?"":"+";
-            let RmbAmt1= (data.totalPrice-data.payableRmbAmt)==0 ?"-": '- ¥ ' + (data.totalPrice-data.payableRmbAmt); let PointAmt1= (data.totalPoints-data.payablePointAmt)==0  ?"":(data.totalPoints-data.payablePointAmt) + '工分';
+            let jia1 = ((data.totalPrice - data.payableRmbAmt) == 0 || (data.totalPoints - data.payablePointAmt) == 0) ? "" : "+";
+            let RmbAmt1 = (data.totalPrice - data.payableRmbAmt) == 0 ? "-" : '- ¥ ' + (data.totalPrice - data.payableRmbAmt);
+            let PointAmt1 = (data.totalPoints - data.payablePointAmt) == 0 ? "" : (data.totalPoints - data.payablePointAmt) + '工分';
 
-            document.querySelectorAll('.item-detail')[1].innerHTML  = RmbAmt1+jia1+PointAmt1;
-            document.querySelector('.total-item-detail').innerHTML = RmbAmt+jia+PointAmt
+            document.querySelectorAll('.item-detail')[1].innerHTML = RmbAmt1 + jia1 + PointAmt1;
+            document.querySelector('.total-item-detail').innerHTML = RmbAmt + jia + PointAmt
             this.props.changeTicketPoints(PointAmt);
         })
     },
     render: function () {
 
-        let checked_voucher = (l,index) => {
+        let checked_voucher = (l, index) => {
             return this.state.checked_voucher_count ?
                 (<div className="coupons-r">
                     <span
@@ -81,14 +84,15 @@ const PaymentPanel = React.createClass({
                 null;
         };
 
-        let voucherName=[];
-        var checkedVoucher=$FW.Utils.jsonFilter(this.state.voucher_list, (i) => i.selected);
+        let voucherName = [];
+        var checkedVoucher = $FW.Utils.jsonFilter(this.state.voucher_list, (i) => i.selected);
 
         for (var key in checkedVoucher) {
             voucherName.push(checkedVoucher[key].productName);
-         };
+        }
+        ;
 
-         return (
+        return (
             <div className="balance-wrap">
                 <div className="account-box">
 
