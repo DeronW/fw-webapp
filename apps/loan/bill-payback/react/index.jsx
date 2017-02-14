@@ -87,7 +87,7 @@ const PayBackWrap = React.createClass({
                     <VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid}
                         callbackCloseHanler={this.closeHandler}
                         repaymentAmount={this.state.repaymentAmount} /> : null}
-                {this.state.payBackResultShow ? <PayBackResult /> : null}
+                {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount}/> : null}
             </div>
         )
     }
@@ -110,12 +110,12 @@ const PayBack = React.createClass({
                 </div>
                 <div className="loan-detail-box">
                     <div>
-                        <span>待还本金</span>
-                        <span>{this.props.loanAmount.toFixed(2)}元</span>
+                        <span>待还本金(元)</span>
+                        <span>{this.props.loanAmount.toFixed(2)}</span>
                     </div>
                     <div>
-                        <span>逾期费用</span>
-                        <span>{this.props.overdueFee.toFixed(2)}元</span>
+                        <span>逾期费用(元)</span>
+                        <span>{this.props.overdueFee.toFixed(2)}</span>
                     </div>
                 </div>
                 <div className="loan-detail-box">
@@ -189,7 +189,7 @@ const BankCardList = React.createClass({
                 <div className="header">
                     <div className="arrow-left" onClick={this.backHandler}></div>
                     <div className="title">选择还款卡</div>
-                    <a className="history-bill" href='/static/loan/user-card-add/index.html'>添加</a>
+                    {this.props.bankList.length < 11 ? <a className="history-bill" href='/static/loan/user-card-add/index.html'>添加</a> : null}
                 </div>
                 <div className="bank-branch-list">
                     {this.props.bankList.map(list_item)}
@@ -330,10 +330,10 @@ const PayBackResult = React.createClass({
                     <div className="payback-result-ing-img">
                         <img src="images/payback-ing.png" />
                     </div>}
-                {/*<div className="payback-result-success-tip">
-                 <div className="tip-top">还有2323.23元未还，请记得准时还款!</div>
-                 <div className="tip-bottom"> 还款金额：<span>212.21</span>元</div>
-                 </div>*/}
+                <div className="payback-result-success-tip">
+                 <div className="tip-top">欢迎再次使用!</div>
+                 <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum}</span>元</div>
+                 </div>
                 {this.state.payback_fail ? <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div> : null}
                 {this.state.payback_ing ? <div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div> : null}
                 <div className="credit-btn"
