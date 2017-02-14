@@ -148,7 +148,7 @@ const ApplyLoan = React.createClass({
                 </a>
                 <a className="credit-apply-btn"
                     href={`/static/loan/apply-want/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}&lowestLoan=${this.props.data.lowestLoan}`}>
-                    我要借款</a>
+                    申请借款</a>
             </div>;
 
         if (st === 1 || st === 101) btn = loan_btn;
@@ -168,7 +168,7 @@ const ApplyLoan = React.createClass({
 
         return (
             <div className="apply-loan">
-                <div className="header">现金贷</div>
+                <div className="header">放心花</div>
                 <div className="loan-num">
                     {this.getBorrowBtn()}
                 </div>
