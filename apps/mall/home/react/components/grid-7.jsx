@@ -13,8 +13,8 @@ const Grid_7 = React.createClass({
                         className={"theme4-top-product-title theme4-top-product-title-color" + parseInt(index + 1)}>
                         {product.abbreviation}</span>
                     <span className="theme4-top-product-price">
-                        {product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice + "+"}
-                        {product.score == 0 ? null : "+" + product.score + "工分"}
+                        {product.rmbPrice == 0 ? null : `¥${product.rmbPrice}`}
+                        {product.score == 0 ? null : `+${product.score}工分`}
                     </span>
                     <span className={"horizon-line theme4-top-line-color" + parseInt(index + 1)}></span>
                     <img className="theme4-top-product-img" src={product.img}/>
