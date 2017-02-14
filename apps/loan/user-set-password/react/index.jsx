@@ -10,7 +10,7 @@ function istrue(str) {
     return reg.test(str);
 }
 
-const Register = React.createClass({
+const SetPassword = React.createClass({
     getInitialState() {
         return {
             code: '',
@@ -137,5 +137,5 @@ const Register = React.createClass({
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"设置密码"} />, HEADER_NODE);
-    ReactDOM.render(<Register />, CONTENT_NODE)
+    ReactDOM.render(<SetPassword />, CONTENT_NODE)
 })

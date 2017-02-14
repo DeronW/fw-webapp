@@ -1,14 +1,3 @@
-function verificationNum(val) {
-    var reg = /^[A-Za-z0-9]*$/;
-    return reg.test(val)
-}
-
-//字母和数字
-function istrue(str) {
-    var reg = /^([a-z]+(?=[0-9])|[0-9]+(?=[a-z]))[a-z0-9]+$/ig;
-
-    return reg.test(str);
-}
 
 const Register = React.createClass({
     getInitialState() {
