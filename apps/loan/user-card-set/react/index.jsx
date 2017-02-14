@@ -119,7 +119,7 @@ const SetCashCard = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/cardinfo.json`,
                 method: "POST",
-                enable_loading:"mini",
+                enable_loading: "mini",
                 data: {
                     bankCardNo: space(this.state.bankNum),
                     token: localStorage.userToken,
@@ -196,7 +196,7 @@ const SetCashCard = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/commitinfo.json`,
                 method: 'POST',
-                enable_loading:"mini",
+                enable_loading: "mini",
                 data: {
                     bankName: this.state.bankName,
                     cardHolderName: this.state.name,
@@ -216,8 +216,6 @@ const SetCashCard = React.createClass({
                 let operatorBankcardGid = data.bindBankInfo.operatorBankcardGid;
 
                 window.location.href = `/static/loan/user-verify-phone/index.html?bankCardGid=${bankCardGid}&operatorBankcardGid=${operatorBankcardGid}`;
-            }, (error) => {
-                console.log(error);
             });
         }
     },
@@ -226,7 +224,8 @@ const SetCashCard = React.createClass({
         return (
             <div className="set-cash-card-cnt">
                 {
-                    this.state.withholdServerPop ? <WithholdServer getWithholdServerPop={this.callbackWithholdServerPop} /> : null
+                    this.state.withholdServerPop &&
+                    <WithholdServer getWithholdServerPop={this.callbackWithholdServerPop} />
                 }
                 <div className="ui-froms">
                     <div className="list">

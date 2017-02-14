@@ -21,12 +21,11 @@ const PayBackWrap = React.createClass({
             repaymentAmount: this.props.loanLeftAmount,
             bankName: filtered.bankShortName,
             bankNo: filtered.cardNo,
-            selectedBankName:null,
-            index:0
+            selectedBankName: null,
+            index: 0
         }
     },
     componentDidMount: function () {
-        console.log(this.state.cardGid)
     },
     getBankCardListShow: function (booleanVal) {
         this.setState({ bankCardListShow: booleanVal });
@@ -50,8 +49,6 @@ const PayBackWrap = React.createClass({
     closeHandler: function (booleanVal) {
         this.setState({ verifyCodeShow: booleanVal });
     },
-    componentDidMount: function () {
-    },
     getBankName: function (val) {
         this.setState({ bankName: val });
     },
@@ -61,10 +58,8 @@ const PayBackWrap = React.createClass({
     getBankCardGid: function (val) {
         this.setState({ cardGid: val });
     },
-    getBankIndex:function(index){
-        this.setState({
-            index: index
-        })
+    getBankIndex: function (index) {
+        this.setState({ index: index })
     },
 
     render: function () {
@@ -81,11 +76,11 @@ const PayBackWrap = React.createClass({
                 {this.state.bankCardListShow ?
                     <BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem}
                         callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName} callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid}
-                      bankName={this.state.bankName}
-                      bankNo={this.state.bankNo}
-                      cardGid={this.state.cardGid}
-                      callbackGetBankIndex={this.getBankIndex}
-                      callbackIndex= {this.state.index}
+                        bankName={this.state.bankName}
+                        bankNo={this.state.bankNo}
+                        cardGid={this.state.cardGid}
+                        callbackGetBankIndex={this.getBankIndex}
+                        callbackIndex={this.state.index}
 
                     /> : null}
                 {this.state.verifyCodeShow ?
@@ -118,7 +113,7 @@ const PayBack = React.createClass({
                         <span>待还本金</span>
                         <span>{this.props.loanAmount.toFixed(2)}元</span>
                     </div>
-                   <div>
+                    <div>
                         <span>逾期费用</span>
                         <span>{this.props.overdueFee.toFixed(2)}元</span>
                     </div>
@@ -160,7 +155,7 @@ const BankCardList = React.createClass({
     backHandler: function () {
         this.props.callbackPopHide(false);
     },
-    confirmHandler:function(){
+    confirmHandler: function () {
         this.props.callbackPopHide(false);
         this.props.callbackBankName(this.state.bankName);
         this.props.callbackBankNo(this.state.bankNo);
@@ -181,7 +176,7 @@ const BankCardList = React.createClass({
                 <div className="list-item" key={index} onClick={() => { this.clickHandler(index) }}>
                     <img
                         src={item.logoUrl} />
-                            {item.bankShortName}（{item.cardNo.slice(-4)}）
+                    {item.bankShortName}（{item.cardNo.slice(-4)}）
                             {
                                 this.state.checked == index ?
                                                       <div className="checked"></div> : null
@@ -265,10 +260,6 @@ const VerifyCode = React.createClass({
                     sourceType: 3,
                     orderGid: this.state.orderGid
                 }
-            }).then(d => {
-                console.log(d)
-            }, (error) => {
-
             });
         }
     },
@@ -385,7 +376,5 @@ $FW.DOMReady(function () {
                 sourceType: 3
             }
         })
-    ]).then(d => {
-        ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]} />, CONTENT_NODE);
-    }, (error) => console.log(error));
+    ]).then(d => ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]} />, CONTENT_NODE) );
 });

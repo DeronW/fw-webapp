@@ -49,7 +49,7 @@ const Register = React.createClass({
                     localStorage.userToken = data.userLogin.userToken;
                     localStorage.userStatus = data.userLogin.userStatus;
 
-                    location.href = `${location.protocol}\/\/${location.host}/static/loan/home/index.html`;
+                    location.href = `/static/loan/home/index.html`;
                 },
                 fail: function (error) {
                     $FW.Component.Toast(error)
@@ -62,7 +62,7 @@ const Register = React.createClass({
         return (
             <div className="login-cnt">
                 <div className="top">
-                    <span className="icon" onClick={() => gotoHandler(`/static/loan/user-entry/index.html`)}></span>
+                    <a className="icon" href="static/loan/user-entry/index.html"></a>
                     <span className="title">登录</span>
                 </div>
 
@@ -87,7 +87,6 @@ const Register = React.createClass({
                         </div>
 
                         <div className="pwd-icon" onClick={() => this.handlePlainCode()}>
-
                         </div>
                     </div>
                 </div>

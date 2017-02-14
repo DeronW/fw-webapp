@@ -61,10 +61,9 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}api/repayment/v1/loandetail.json`,
         method: "post",
-        enable_loading:"mini",
+        enable_loading: "mini",
         data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3, loanGid: loanGid }
     }).then((data) => {
-        console.log(data)
         ReactDOM.render(<Detail data={data} />, CONTENT_NODE);
-    }, (error) => console.log(error));
+    });
 });

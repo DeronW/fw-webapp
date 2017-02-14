@@ -1,42 +1,35 @@
-function gotoHandler(link) {
-    location.href = encodeURI(link);
-}
 
 const HistoryBill = React.createClass({
     getInitialState: function () {
         return {
             page: 1,
-            column: []
+            rows: [],
+            hasData: true
         }
     },
     componentDidMount: function () {
-        $FW.Ajax({
-            url: `${API_PATH}api/oriole/v1/loanhistory.json`,
-            method: 'POST',
-            data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3, pageSize: 20, pageIndex: 1 },
-        })
-            .then((data) => {
-                this.setState({ column: data.loanHistoryList })
-            }, (err) => console.log(err));
+        this.loadMoreProductHandler()
         $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
     loadMoreProductHandler: function (done) {
-        this.setState({ page: this.state.page + 1 });
-        $FW.Ajax({
-            url: `${API_PATH}api/oriole/v1/loanhistory.json`,
-            method: 'POST',
-            enable_loading:"mini",
-            data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3, pageSize: 20, pageIndex: this.state.page },
-            success: (data) => {
-                console.log(data)
-                let loanHistoryList = data.loanHistoryList;
-                this.setState({
-                    column: loanHistoryList,
-                    hasData: !!loanHistoryList.length
-                })
-                done && done()
-            },
-            fail: () => true
+        if (!this.state.hasData) return;
+        let user = $FW.Store.getUserDict();
+
+        $FW.Post(`${API_PATH}api/oriole/v1/loanhistory.json`, {
+            token: user.token,
+            userGid: user.gid,
+            userId: user.id,
+            sourceType: 3,
+            pageSize: 20,
+            pageIndex: this.state.page
+        }).then(data => {
+            let loanHistoryList = data.loanHistoryList;
+            this.setState({
+                rows: loanHistoryList,
+                page: this.state.page + 1,
+                hasData: !!loanHistoryList.length
+            })
+            done && done()
         })
     },
     render: function () {
@@ -44,35 +37,46 @@ const HistoryBill = React.createClass({
             let repayment;
             if (item.repaymentStatus == 0) repayment = '借款失败';
             if (item.repaymentStatus == 1) repayment = '已还款';
+
             return (
-                <div className="bill-item" key={index} onClick={() => gotoHandler(`/static/loan/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`)}>
+                <a className="bill-item" key={index}
+                    href={`/static/loan/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`}>
                     <div className="bill-detail">
                         <div className="bill-detail-wrap">
-                            <span className="bill-money">{item.loanAmount.toFixed(2)}</span>
+                            <span className="bill-money">
+                                {item.loanAmount.toFixed(2)}</span>
                         </div>
                         <span className="bill-deadline">{item.loanTimeStr}</span>
                     </div>
                     <div className="pay-back-btn-wrap">
-                        <span className="bill-status">{repayment}<img src="images/right-arrow.jpg" /></span>
+                        <span className="bill-status">
+                            {repayment}
+                            <img src="images/right-arrow.jpg" />
+                        </span>
                     </div>
-                </div>
+                </a>
             )
         };
+
+        let empty = <div className="no-data-box">
+            <img className="no-data-img" src="images/no-data.png" />
+        </div>;
+
+        let {rows, hasData} = this.state;
+
         return (
             <div>
-                {this.state.column.length == 0 ? (<div className="no-data-box">
-                    <img className="no-data-img" src="images/no-data.png" />
-                </div>) :
-                    (<div className="data-box">
-                        {this.state.column.map(item_list)}
-                        <div className="data-completion">已加载完全部数据</div>
-                    </div>)}
+                <div className="data-box">
+                    {rows.map(item_list)}
+                    {!hasData && <div className="data-completion">已加载完全部数据</div>}
+                </div>
+                {rows.length === 0 && empty}
             </div>
         )
     }
 });
 
-$FW.DOMReady(function () {
+$FW.DOMReady(() => {
     ReactDOM.render(<Header title={"历史账单"} />, HEADER_NODE);
     ReactDOM.render(<HistoryBill />, CONTENT_NODE);
 });
