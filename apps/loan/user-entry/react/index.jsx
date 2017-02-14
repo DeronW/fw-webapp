@@ -14,14 +14,12 @@ const Register = React.createClass({
     },
     changeHandler(e) {
         let v = e.target.value;
-        //this.setState({ phone: parseInt(v)});
-        console.log(v);
-        if(e.target.value.length > 11) {
+        if (e.target.value.length > 11) {
             this.setState({
                 phone: this.state.phone
             });
         } else {
-            if(verificationNum(v)) {
+            if (verificationNum(v)) {
                 this.setState({
                     phone: v
                 })
