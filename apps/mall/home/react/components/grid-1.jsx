@@ -15,8 +15,8 @@ const Grid_1 = React.createClass({
                     <div className={"theme2-top-product-title theme2-top-product-title-color" + parseInt(index + 1)}>
                         {product.abbreviation}</div>
                     <div className="theme2-top-product-price">
-                        {product.rmbPrice == 0 ? null : `¥${product.rmbPrice}+`}
-                        {product.score == 0 ? null : "+" + product.score + "工分"}
+                        {product.rmbPrice == 0 ? null : `¥${product.rmbPrice}`}
+                        {product.score == 0 ? null : `+${product.score}工分`}
                     </div>
                     <img className="product-img2" src={product.img}/>
                 </a>
