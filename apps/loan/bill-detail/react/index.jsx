@@ -47,7 +47,7 @@ const Detail = React.createClass({
                         <span>{this.props.data.loanTimeStr}</span>
                     </div>
                 </div>
-                {(loanStatus == 2 ||  loanStatus == 3) ? <div className="pay-back-btn" onClick={() => gotoHandler(`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${$FW.Store.getUserToken()}&userGid=${$FW.Store.getUserGid()}&userId=${$FW.Store.getUserId()}`)}>立即还款</div> : null}
+                {loanStatus == 2 ||  loanStatus == 3 ? <div className="pay-back-btn" onClick={() => gotoHandler(`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${$FW.Store.getUserToken()}&userGid=${$FW.Store.getUserGid()}&userId=${$FW.Store.getUserId()}`)}>立即还款</div> : null}
                 {loanStatus == 1 ? <div className="pay-back-btn" onClick={() => gotoHandler(``)}>去确认</div> : null}
             </div>
         )
