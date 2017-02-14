@@ -3,8 +3,6 @@
     if (p.substr(0, 2) != '//') p = '//' + p;
     window.API_PATH = location.protocol + p;
 })();
-var dd = window.outerWidth;
-alert(dd);
 function inApp() {
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
