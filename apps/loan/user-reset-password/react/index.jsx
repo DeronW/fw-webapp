@@ -19,149 +19,94 @@ const Register = React.createClass({
         return {
             code: '',
             codeBoolean: false,
-            pswVal: '',
+            password: '',
             countdown: 0,
             plainCode: false,
-            codeToken: '',
-            codeValue: ''
+            codeToken: ''
         }
     },
     componentDidMount() {
-        this.countdownFun();
+        this.handleGetCode();
     },
     changeCode(e) {
-        this.setState({
-            code: e.target.value
-        });
-        if (this.state.codeValue.length > 3) {
-            this.setState({
-                codeValue: this.state.codeValue
-            });
-        } else {
-            if (verificationNum(e.target.value)) {
-                this.setState({
-                    codeValue: e.target.value
-                });
-            }
-        }
+        let v = e.target.value;
+        v.length < 5 && this.setState({ code: v });
     },
     changePsw(e) {
         if (e.target.value.length <= 16) {
-            if (verificationNum(e.target.value)) {
-                this.setState({
-                    pswVal: e.target.value
-                });
-            }
+            if (verificationNum(e.target.value))
+                this.setState({ password: e.target.value });
         }
     },
-    blurPsw() {
-
-    },
     countdownFun() {
-        let _this = this;
-
         this.setState({
             codeBoolean: true,
             countdown: 60
         });
         this.timer = setInterval(() => {
-            this.setState({
-                countdown: this.state.countdown - 1
-            });
-
-
+            this.setState({ countdown: this.state.countdown - 1 });
             if (this.state.countdown == 0) {
                 clearInterval(this.timer);
-                this.setState({
-                    codeBoolean: false
-                });
+                this.setState({ codeBoolean: false });
             }
         }, 1000);
     },
     handleGetCode() {
-
-
-        $FW.Ajax({
-            url: API_PATH + "api/userBase/v1/sendVerifyCode.json",
-            method: "POST",
-            enable_loading: "mini",
-            data: {
-                mobile: localStorage.phone,
-                userOperationType: 2,
-                sourceType: 3
-            },
-            success: function (data) {
-                _this.setState({
-                    codeToken: data.codeToken
-                });
-            }
-        })
-
+        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+            mobile: localStorage.phone,
+            userOperationType: 2,
+            sourceType: 3
+        }).then(data => this.setState({ codeToken: data.codeToken }))
         this.countdownFun();
-
     },
     handlePlainCode() {
-        this.setState({
-            plainCode: !this.state.plainCode
-        });
+        this.setState({ plainCode: !this.state.plainCode });
     },
     handleRegisterBtn() {
-        let _this = this;
+        let err, {code, password} = this.state;
 
-        if (this.state.code == '') {
-            $FW.Component.Toast("验证码不能为空");
-        } else if (this.state.pswVal == '') {
-            $FW.Component.Toast("密码不能为空");
-        } else if (this.state.pswVal.length < 8) {
-            $FW.Component.Toast("密码不能少于8位");
-        } else if (this.state.pswVal.length > 16) {
-            $FW.Component.Toast("密码不能多于16位");
-        } else if (!istrue(this.state.pswVal)) {
-            $FW.Component.Toast("必须是字母及数字组合密码");
-        } else {
-            $FW.Ajax({
-                url: API_PATH + "api/userBase/v1/resetPass.json",
-                method: "POST",
-                enable_loading: "mini",
-                data: {
-                    codeToken: _this.state.codeToken,
-                    mobile: localStorage.phone,
-                    password: _this.state.pswVal,
-                    verifyCode: _this.state.code,
-                    sourceType: 3
-                },
-                success: function (data) {
-                    localStorage.userGid = data.userPasswordOption.userGid;
-                    localStorage.userId = data.userPasswordOption.userId;
-                    localStorage.userToken = data.userPasswordOption.userToken;
+        if (code == '') err = "验证码不能为空";
+        if (password == '') err = "密码不能为空";
+        if (password.length < 8) err = "密码不能少于8位";
+        if (password.length > 16) err = "密码不能多于16位";
+        if (!istrue(password)) err = "必须是字母及数字组合密码";
 
-                    window.location.href = "/static/loan/home/index.html"
-                },
-                fail: function (err) {
-                    $FW.Component.Toast(err);
-                }
-            })
-        }
+        err ?
+            $FW.Component.Toast(err) :
+            $FW.Post(`${API_PATH}api/userBase/v1/resetPass.json`, {
+                codeToken: _this.state.codeToken,
+                mobile: localStorage.phone,
+                password: _this.state.password,
+                verifyCode: _this.state.code,
+                sourceType: 3
+            }).then(data => {
+                localStorage.userGid = data.userPasswordOption.userGid;
+                localStorage.userId = data.userPasswordOption.userId;
+                localStorage.userToken = data.userPasswordOption.userToken;
 
+                window.location.href = "/static/loan/home/index.html"
+            }, e => $FW.Component.Toast(e.msg))
     },
     render() {
+        let phone = $FW.Format.urlQuery().phone;
+
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
-                    已发送短信验证码到号码<span>{location.search.split('phone=')[1]}</span>
+                    已发送短信验证码到号码<span>{phone}</span>
                 </div>
 
                 <div className="ui-froms">
                     <div className="list code-list">
                         <span className="icon"></span>
                         <div className="input">
-                            <input type="text" onChange={this.changeCode} value={this.state.codeValue} placeholder="输入手机验证码" />
+                            <input type="number" onChange={this.changeCode} value={this.state.code} placeholder="输入手机验证码" />
                         </div>
 
                         {
                             this.state.codeBoolean ?
                                 <div className="get-code-btn c">{this.state.countdown}倒计时</div> :
-                                <div className="get-code-btn" onClick={() => this.handleGetCode()}>获取验证码</div>
+                                <div className="get-code-btn" onClick={this.handleGetCode}>获取验证码</div>
                         }
 
                     </div>
@@ -170,7 +115,7 @@ const Register = React.createClass({
                         <div className="input">
                             <input
                                 type={this.state.plainCode ? "text" : "password"}
-                                value={this.state.pswVal}
+                                value={this.state.password}
                                 onChange={this.changePsw}
                                 onBlur={this.blurPsw}
                                 placeholder="设置8-16位的字母及数字组合密码"
