@@ -80,7 +80,7 @@ const VerifyPhone = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/commitverifycode.json`,
                 method: "POST",
-
+                enable_loading: "mini",
                 data: {
                     operatorBankcardGid: location.search.split("operatorBankcardGid=")[1],
                     token: localStorage.userToken,
@@ -96,7 +96,7 @@ const VerifyPhone = React.createClass({
                 $FW.Ajax({
                     url: `${API_PATH}api/bankcard/v1/status.json`,
                     method: "POST",
-
+                    enable_loading: "mini",
                     data: {
                         operatorBankcardGid: operatorBankcardGid,
                         token: localStorage.userToken,
