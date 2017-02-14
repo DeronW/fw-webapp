@@ -1,5 +1,16 @@
+function verificationNum(val) {
+    var reg = /^[A-Za-z0-9]*$/;
+    return reg.test(val)
+}
 
-const Register = React.createClass({
+//字母和数字
+function istrue(str) {
+    var reg = /^([a-z]+(?=[0-9])|[0-9]+(?=[a-z]))[a-z0-9]+$/ig;
+
+    return reg.test(str);
+}
+
+const SetPassword = React.createClass({
     getInitialState() {
         return {
             code: '',
@@ -126,5 +137,5 @@ const Register = React.createClass({
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"设置密码"} />, HEADER_NODE);
-    ReactDOM.render(<Register />, CONTENT_NODE)
+    ReactDOM.render(<SetPassword />, CONTENT_NODE)
 })

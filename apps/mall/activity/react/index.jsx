@@ -135,16 +135,17 @@ const Content = React.createClass({
             )
         };
 
-        return
-        <div>
-            <Banner />
-            <div className="products-act">
-                <div className="index-actList-list">
-                    {products.map(ProductItem)}
+        return (
+            <div>
+                <Banner />
+                <div className="products-act">
+                    <div className="index-actList-list">
+                        {products.map(ProductItem)}
+                    </div>
+                    <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
                 </div>
-                <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
             </div>
-        </div>
+        )
     }
 })
 
