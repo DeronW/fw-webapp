@@ -109,13 +109,19 @@ $FW.DOMReady(function () {
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3
+                sourceType: 3,
+                productId:1
             }
         }),
         $FW.Ajax({
             url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
             method: "post",
-            data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3 }
+            data: {
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
+                sourceType: 3
+            }
         })
     ]).then(d => {
         ReactDOM.render(<WantLoan {...d[0]} {...d[1]} />, CONTENT_NODE);
