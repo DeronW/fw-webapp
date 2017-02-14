@@ -65,25 +65,17 @@ const SetCashCard = React.createClass({
     },
     changeBankNum(e) {
         let val = e.target.value;
-
-        this.setState({
-            bankNum: numberFormat.format(val)
-        });
+        this.setState({ bankNum: numberFormat.format(val) });
     },
     blurBankNum(e) {
 
         if (!space(this.state.bankNum).length > 19 || !space(this.state.bankNum).length < 16) {
-            $FW.Ajax({
-                url: `${API_PATH}api/bankcard/v1/cardinfo.json`,
-                method: "POST",
-                enable_loading: "mini",
-                data: {
-                    bankCardNo: space(this.state.bankNum),
-                    token: localStorage.userToken,
-                    userGid: localStorage.userGid,
-                    userId: localStorage.userId,
-                    sourceType: 3
-                }
+            $FW.Post(`${API_PATH}api/bankcard/v1/cardinfo.json`, {
+                bankCardNo: space(this.state.bankNum),
+                token: localStorage.userToken,
+                userGid: localStorage.userGid,
+                userId: localStorage.userId,
+                sourceType: 3
             }).then((data) => {
                 this.setState({
                     cardinfoBankName: data.cardInfo.bankName,
@@ -91,7 +83,6 @@ const SetCashCard = React.createClass({
                     cardType: data.cardInfo.cardType,
                     canVerify: data.cardInfo.canVerify,
                     bankName: data.cardInfo.bankName
-
                 });
             }, (error) => {
 
@@ -102,19 +93,12 @@ const SetCashCard = React.createClass({
     },
     changePhone(e) {
         let val = e.target.value;
-
-        if (verificationNum(val)) {
-            if (val.length <= 11) {
-                this.setState({
-                    phone: space(val)
-                });
-            }
-        }
+        verificationNum(val) &&
+            val.length <= 11 &&
+            this.setState({ phone: space(val) });
     },
     handlerClause() {
-        this.setState({
-            selectClause: !this.state.selectClause
-        });
+        this.setState({ selectClause: !this.state.selectClause });
     },
     handlerWithholdServer() {
         this.setState({
@@ -127,74 +111,62 @@ const SetCashCard = React.createClass({
         });
     },
     handlerNext() {
-        if (this.state.name == '') {
-            $FW.Component.Toast("姓名不能为空");
-        } else if (this.state.name.length > 20) {
-            $FW.Component.Toast("姓名不能超过20个字符");
-        } else if (this.state.id == '') {
-            $FW.Component.Toast("身份证不能为空");
-        } else if (!isCardNo(this.state.id)) {
-            $FW.Component.Toast("身份证格式不对");
-        } else if (this.state.bankNum == '') {
-            $FW.Component.Toast("储蓄卡不能为空");
-        } else if (space(this.state.bankNum).length > 19 || space(this.state.bankNum).length < 16) {
-            $FW.Component.Toast("储蓄卡格式不对");
-        } else if (this.state.phone == '') {
-            $FW.Component.Toast("手机号不能为空");
-        } else if (!isMobilePhone(this.state.phone)) {
-            $FW.Component.Toast("手机号格式不对");
-        } else if (!this.state.selectClause) {
-            $FW.Component.Toast("请勾选代扣服务协议");
-        } else if (this.state.cardType == 1) {
-            $FW.Component.Toast("请绑定借记卡");
-        } else if (this.state.canVerify == 0) {
-            $FW.Component.Toast("该银行卡暂不支持绑定");
-        } else {
-            $FW.Ajax({
-                url: `${API_PATH}api/bankcard/v1/commitinfo.json`,
-                method: 'POST',
-                enable_loading: "mini",
-                data: {
-                    bankName: this.state.bankName,
-                    cardHolderName: this.state.name,
-                    cardNo: space(this.state.bankNum),
-                    cardType: this.state.cardType,
-                    idCard: this.state.id,
-                    mobile: this.state.phone,
-                    operatorType: localStorage.userStatus,
-                    token: localStorage.userToken,
-                    userGid: localStorage.userGid,
-                    userId: localStorage.userId,
-                    sourceType: 3
-                }
+        let err, {name, id, bankName, bankNum, phone, selectClause, cardType, canVerify} = this.state;
+        let user = $FW.Store.getUserDict();
 
+        if (name == '') err = "姓名不能为空";
+        if (name.length > 20) err = "姓名不能超过20个字符";
+        if (id == '') err = "身份证不能为空";
+        if (!isCardNo(id)) err = "身份证格式不对";
+        if (bankNum == '') err = "储蓄卡不能为空";
+        if (space(bankNum).length > 19 || space(bankNum).length < 16) err = "储蓄卡格式不对";
+        if (phone == '') err = "手机号不能为空";
+        if (!isMobilePhone(phone)) err = "手机号格式不对";
+        if (!selectClause) err = "请勾选代扣服务协议";
+        if (cardType == 1) err = "请绑定借记卡";
+        if (canVerify == 0) err = "该银行卡暂不支持绑定";
+
+        err ?
+            $FW.Component.Toast(err) :
+            $FW.Post(`${API_PATH}api/bankcard/v1/commitinfo.json`, {
+                bankName: bankName,
+                cardHolderName: name,
+                cardNo: space(bankNum),
+                cardType: cardType,
+                idCard: id,
+                mobile: phone,
+                operatorType: localStorage.userStatus,
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
+                sourceType: 3
             }).then((data) => {
-                let bankCardGid = data.bindBankInfo.bankCardGid;
-                let operatorBankcardGid = data.bindBankInfo.operatorBankcardGid;
-
-                window.location.href = `/static/loan/user-verify-phone/index.html?bankCardGid=${bankCardGid}&operatorBankcardGid=${operatorBankcardGid}`;
-            });
-        }
+                let bGid = data.bindBankInfo.bankCardGid;
+                let oGid = data.bindBankInfo.operatorBankcardGid;
+                window.location.href = `/static/loan/user-verify-phone/index.html?bankCardGid=${bGid}&operatorBankcardGid=${oGid}`;
+            }, e => $FW.Component.Toast(e.message));
     },
     render() {
 
+        let {withholdServerPop, cardinfoBankName, selectClause} = this.state;
+
         return (
             <div className="set-cash-card-cnt">
-                {
-                    this.state.withholdServerPop &&
-                    <WithholdServer getWithholdServerPop={this.callbackWithholdServerPop} />
-                }
+                {withholdServerPop &&
+                    <WithholdServer getWithholdServerPop={this.callbackWithholdServerPop} />}
                 <div className="ui-froms">
                     <div className="list">
                         <span className="text">姓名</span>
                         <div className="input">
-                            <input onChange={this.changeName} value={this.state.name} type="text" placeholder="请输入姓名" />
+                            <input onChange={this.changeName} value={this.state.name}
+                                type="text" placeholder="请输入姓名" />
                         </div>
                     </div>
                     <div className="list">
                         <span className="text">身份证号</span>
                         <div className="input">
-                            <input onChange={this.changeId} value={this.state.Id} type="text" placeholder="请输入身份证号码" />
+                            <input onChange={this.changeId} value={this.state.Id}
+                                type="text" placeholder="请输入身份证号码" />
                         </div>
                     </div>
                 </div>
@@ -203,18 +175,16 @@ const SetCashCard = React.createClass({
                     <div className="list prompt-list">
                         <span className="text">储蓄卡号</span>
                         <div className="input">
-                            <input onChange={this.changeBankNum} onBlur={this.blurBankNum} value={this.state.bankNum} type="text" placeholder="输入储蓄卡号" />
+                            <input onChange={this.changeBankNum} onBlur={this.blurBankNum}
+                                value={this.state.bankNum} type="text" placeholder="输入储蓄卡号" />
                         </div>
 
                         <div className="list-bank-li">
-                            <span className="prompt-text" onClick={() => gotoHandler(`/static/loan/user-bank-support/index.html`)}>
+                            <a className="prompt-text" href="/static/loan/user-bank-support/index.html">
                                 支持银行
 								<img src="images/prompt-icon.png" />
-                            </span>
-                            {
-                                this.state.cardinfoBankName != '' ?
-                                    <span className="bank">{/*<img className="logo-icon" src={this.state.cardinfoLogoUrl} />*/}{this.state.cardinfoBankName}</span> : null
-                            }
+                            </a>
+                            {cardinfoBankName != '' && <span className="bank"> {cardinfoBankName}</span>}
                         </div>
                     </div>
                 </div>
@@ -223,13 +193,15 @@ const SetCashCard = React.createClass({
                     <div className="list">
                         <span className="text">手机号</span>
                         <div className="input">
-                            <input onChange={this.changePhone} value={this.state.phone} type="text" placeholder="银行卡预留手机号" />
+                            <input onChange={this.changePhone} value={this.state.phone}
+                                type="text" placeholder="银行卡预留手机号" />
                         </div>
                     </div>
                 </div>
 
                 <div className="clause">
-                    <span className={"icon " + (this.state.selectClause ? "select-icon" : "icon")} onClick={this.handlerClause}></span>
+                    <span className={`icon ${selectClause ? "select-icon" : "icon"}`}
+                        onClick={this.handlerClause}></span>
                     <span className="text">
                         同意
 						<a href={`/static/loan/protocol-cost/index.html`}>《代扣服务协议》</a>
