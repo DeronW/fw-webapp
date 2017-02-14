@@ -12,6 +12,7 @@ const BankManagement = React.createClass({
         if(borrowStatus != 5){
             this.setState({popShow:true});
         }
+        console.log(this.props.userBankList.withdrawBankcard.length)
     },
     closeHandler(){
         this.setState({popShow:false});
@@ -54,7 +55,7 @@ const BankManagement = React.createClass({
                         <div>2.支持绑定多张银行卡。</div>
                     </div>
                 </div>
-                {this.props.userBankList.withdrawBankcard.length < 11 ? <div className="fixed-bottom-part">
+                {this.props.userBankList.withdrawBankcard.length < 10 ? <div className="fixed-bottom-part">
                         <div className="fixed-tip">绑定银行卡越多，信用额度越高！</div>
                         <a className="add-card-btn" href='/static/loan/user-card-add/index.html'>马上添加</a>
                     </div> : null}
