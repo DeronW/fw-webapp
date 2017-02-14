@@ -4,7 +4,7 @@ function gotoHandler(link) {
 
 const Detail = React.createClass({
     render: function () {
-        let loanStatus = this.props.data.loanStatus;
+        let loanStatus = this.props.data.repaymentStatus;
         let query = $FW.Format.urlQuery();
         let loanGid = query.loanGid;
         return (
@@ -12,9 +12,9 @@ const Detail = React.createClass({
                 <div className="loan-num">
                     <div className="loan-money">{this.props.data.loanAmount}</div>
                     <div className="loan-money-title">应还总额(元)</div>
-                    {loanStatus == 5 ? <div className="icon1"></div> : null}
-                    {loanStatus == 4 ? <div className="icon2"></div> : null}
-                    {loanStatus == 1 ? <div className="icon3"></div> : null}
+                    {loanStatus == 3 ? <div className="icon1"></div> : null}
+                    {loanStatus == 2 ? <div className="icon2"></div> : null}
+                    {loanStatus == 0 ? <div className="icon3"></div> : null}
                 </div>
                 <div className="loan-detail-box">
                     <div>
