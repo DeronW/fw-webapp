@@ -95,6 +95,9 @@ const Header = React.createClass({
             }}>{this.props.sub_text}</a>
         }
 
+        // 如果页面在app中打开, 则不显示网页的头部导航
+        if (navigator.userAgent.indexOf('EasyLoan888') >= 0) return null;
+
         return (
             <div style={{ height: this.state.height + 'px' }}>
                 <div className="_style_header_fixed" style={_style_header_fixed}>
