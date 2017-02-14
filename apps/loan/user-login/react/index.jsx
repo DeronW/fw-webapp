@@ -49,7 +49,7 @@ const Register = React.createClass({
         return (
             <div className="login-cnt">
                 <div className="top">
-                    <a className="icon" href="static/loan/user-entry/index.html"></a>
+                    <a className="icon" href={`/static/loan/user-entry/index.html`}></a>
                     <span className="title">登录</span>
                 </div>
                 <div className="logo"> <img src="images/logo.png" /> </div>
