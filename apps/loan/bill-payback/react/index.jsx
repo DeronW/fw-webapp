@@ -114,17 +114,17 @@ const PayBack = React.createClass({
         return (
             <div className="payback-box">
                 <div className="loan-num">
-                    <div className="loan-money overdue-color">{this.props.loanLeftAmount}</div>
+                    <div className="loan-money overdue-color">{this.props.loanLeftAmount.toFixed(2)}</div>
                     <div className="loan-status2">应还总额(元)</div>
                 </div>
                 <div className="loan-detail-box">
                     <div>
                         <span>待还本金</span>
-                        <span>{this.props.loanAmount}元</span>
+                        <span>{this.props.loanAmount.toFixed(2)}元</span>
                     </div>
                    <div>
                         <span>逾期费用</span>
-                        <span>{this.props.overdueFee}元</span>
+                        <span>{this.props.overdueFee.toFixed(2)}元</span>
                     </div>
                 </div>
                 <div className="loan-detail-box">
@@ -138,7 +138,7 @@ const PayBack = React.createClass({
                 <div className="loan-detail-box">
                     <div>
                         <span>还款金额(元)</span>
-                        <span className="payback-num">{this.props.loanLeftAmount}</span>
+                        <span className="payback-num">{this.props.loanLeftAmount.toFixed(2)}</span>
                     </div>
                 </div>
                 <div className="payback-tips">
