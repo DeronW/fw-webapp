@@ -11,16 +11,16 @@ const Payment = React.createClass({
         this.setState({index: arg});
     },
     componentDidMount: function () {
-        var m=29;
-        var s=59;
-        setInterval(function(){
-            document.getElementById("cutdown").innerHTML=(m+'分'+s+"秒内完成支付");
+        var m = 29;
+        var s = 59;
+        setInterval(function () {
+            document.getElementById("cutdown").innerHTML = (m + '分' + s + "秒内完成支付");
             s--;
-            if(s<0){
-                s=59;
+            if (s < 0) {
+                s = 59;
                 m--;
             }
-        },1000)
+        }, 1000)
     },
     split: function (str) {
         return str.substr(str.length - 4, 4);
@@ -35,7 +35,7 @@ const Payment = React.createClass({
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
             let link = location.protocol + '//' + location.hostname +
-                '/static/mall/pay-add-card/index.html'+location.search;
+                '/static/mall/pay-add-card/index.html' + location.search;
             location.href = link;
         }
         else {
@@ -50,9 +50,9 @@ const Payment = React.createClass({
                 bankId: data[index].bankId,
                 bankName: data[index].bankName,
                 productName: '豆哥商城商品',
-                orderTime:query.orderTime||"",
-                orderBizNo:query.orderBizNo||"",
-                orderGroupBizNo:query.orderGroupBizNo||""
+                orderTime: query.orderTime || "",
+                orderBizNo: query.orderBizNo || "",
+                orderGroupBizNo: query.orderGroupBizNo || ""
             };
             $FW.Ajax({
                 url: `${API_PATH}mall/api/payment/v1/ucf_pay.json`,
@@ -100,19 +100,19 @@ const Payment = React.createClass({
             <div className="order-payment">
                 <div className="order-status">
                     <div className="pay-tip">请在<span id="cutdown"></span></div>
-                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt/100}元</span></div>
+                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt / 100}元</span></div>
                 </div>
                 {/*<div className="order-products">
-                    <div className="order-item">
-                        <span className="order-item-name">爱奇艺VIP周卡兑换码</span>
-                        <span className="order-item-amount">×1</span>
-                    </div>
-                    <div className="order-item">
-                        <span className="order-item-name">爱奇艺VIP周卡兑换码</span>
-                        <span className="order-item-amount">×1</span>
-                    </div>
-                </div>
-                */}
+                 <div className="order-item">
+                 <span className="order-item-name">爱奇艺VIP周卡兑换码</span>
+                 <span className="order-item-amount">×1</span>
+                 </div>
+                 <div className="order-item">
+                 <span className="order-item-name">爱奇艺VIP周卡兑换码</span>
+                 <span className="order-item-amount">×1</span>
+                 </div>
+                 </div>
+                 */}
                 <div className="pay-way">
                     {payMethods} {quick_pay}
                     {/*

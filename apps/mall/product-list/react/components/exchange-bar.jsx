@@ -9,10 +9,10 @@ const ExchangeBar = React.createClass({
             showFilterPop: false,
             filterScore: '不限',
             filterLevel: '不限',
-            maxPoints:Filter.options.searchSourceType == 1?Filter.myConvertibleScore : '',
-            minPoints:'',
-            maxValue:'',
-            minValue:'',
+            maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
+            minPoints: '',
+            maxValue: '',
+            minValue: '',
         }
     },
     searchHandler: function () {
@@ -24,7 +24,7 @@ const ExchangeBar = React.createClass({
         this.props.filterProducts(options);
     },
     componentDidMount: function () {
-        if(Filter.options.searchSourceType == 1) {
+        if (Filter.options.searchSourceType == 1) {
             this.setState({maxPoints: Filter.myConvertibleScore});
         }
     },
@@ -113,25 +113,25 @@ const ExchangeBar = React.createClass({
         this.setState({tab: tabName});
     },
     filterScoreHandler: function (name) {
-        this.setState({minValue:''});
-        this.setState({maxValue:''});
+        this.setState({minValue: ''});
+        this.setState({maxValue: ''});
         this.setState({filterScore: name});
         if (name == '不限') {
             this.setState({
-                maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore :'',
+                maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
                 minPoints: ''
             });
         } else if (name == '我可兑换') {
             this.setState({
                 minPoints: '',
-                maxPoints:Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore :''
+                maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : ''
             });
         } else if (name == '1-100') {
             this.setState({
-                minPoints: Filter.options.searchSourceType == 1&&Filter.myConvertibleScore >= 1 ? 1 : 0,
-                maxPoints: Filter.options.searchSourceType == 1&&Filter.myConvertibleScore <= 100 ? Filter.myConvertibleScore : 100
+                minPoints: Filter.options.searchSourceType == 1 && Filter.myConvertibleScore >= 1 ? 1 : 0,
+                maxPoints: Filter.options.searchSourceType == 1 && Filter.myConvertibleScore <= 100 ? Filter.myConvertibleScore : 100
             });
-                
+
         } else if (name == '101-1000') {
             if (Filter.options.searchSourceType == 1) {
                 this.setState({
@@ -186,48 +186,48 @@ const ExchangeBar = React.createClass({
             this.setState({vipLevel: 5});
         }
     },
-    maxValueHandler: function (e) {    	
-    	if(e.target.value!=''&&isNaN(e.target.value)) return false 
-    	if(this.state.minValue==''){
-    		this.setState({
-                minPoints:0,
+    maxValueHandler: function (e) {
+        if (e.target.value != '' && isNaN(e.target.value)) return false
+        if (this.state.minValue == '') {
+            this.setState({
+                minPoints: 0,
             });
-    	}
+        }
         if (Filter.options.searchSourceType == 1) {
             this.setState({
                 maxValue: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value
             });
-            this.setState({maxPoints:e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value});
+            this.setState({maxPoints: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value});
         } else {
-            this.setState({maxValue:e.target.value});
-            this.setState({maxPoints:e.target.value});
-        }        
+            this.setState({maxValue: e.target.value});
+            this.setState({maxPoints: e.target.value});
+        }
         if (e.target.value == '' && this.state.minValue == '') {
             this.setState({filterScore: '不限'});
-        }else{
-        	this.setState({filterScore:''});
+        } else {
+            this.setState({filterScore: ''});
         }
     },
     minValueHandler: function (e) {
-      if(e.target.value!=''&&isNaN(e.target.value)) return false 
-    	if(this.state.maxValue==''){
-    		this.setState({
-                maxPoints:Filter.options.searchSourceType == 1?Filter.myConvertibleScore:99999999,
+        if (e.target.value != '' && isNaN(e.target.value)) return false
+        if (this.state.maxValue == '') {
+            this.setState({
+                maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : 99999999,
             });
-    	}
+        }
         if (Filter.options.searchSourceType == 1) {
             this.setState({
                 minValue: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value
             });
             this.setState({minPoints: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value});
         } else {
-        	this.setState({minValue:e.target.value});
-            this.setState({minPoints:e.target.value});
-        }        
+            this.setState({minValue: e.target.value});
+            this.setState({minPoints: e.target.value});
+        }
         if (e.target.value == '' && this.state.maxValue == '') {
             this.setState({filterScore: '不限'});
-        }else{
-        	this.setState({filterScore:''});
+        } else {
+            this.setState({filterScore: ''});
         }
     },
     clearFilterHandler: function () {
@@ -257,7 +257,7 @@ const ExchangeBar = React.createClass({
 
     },
     filterFinishHandler: function () {
-        this.props.searchFilterProductShow();        
+        this.props.searchFilterProductShow();
         var options = {
             vipLevel: this.state.vipLevel,
             minPoints: this.state.minPoints,

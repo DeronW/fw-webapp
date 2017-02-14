@@ -9,7 +9,7 @@ const DeliverAddress = React.createClass({
             method: 'POST',
             enable_loading: true,
             data: {id: address_id}
-        }).then(data =>{
+        }).then(data => {
             location.reload()
         })
     },
@@ -23,12 +23,13 @@ const DeliverAddress = React.createClass({
         let address = function (address, index) {
             let link;
             if (!preview) {
-                link = "/static/mall/order-confirm/index.html?address_id=" + address.address_id +"&cartFlag=" + cartFlag + "&prd=" + prd + '&buyNum=' + buyNum;
+                link = "/static/mall/order-confirm/index.html?address_id=" + address.address_id + "&cartFlag=" + cartFlag + "&prd=" + prd + '&buyNum=' + buyNum;
             }
             let checked_flag = null;
             if (!preview) {
                 let aid = $FW.Format.urlQuery().address_id;
-                checked_flag = ( <div className="checked-flag"> {aid && aid == address.address_id ? <div></div> : null} </div> );
+                checked_flag = (
+                    <div className="checked-flag"> {aid && aid == address.address_id ? <div></div> : null} </div> );
             }
 
             let set_default = null;
@@ -57,7 +58,7 @@ const DeliverAddress = React.createClass({
 
         let create_link = preview ?
             "/static/mall/user-build-deliver/index.html?preview=true" :
-            ("/static/mall/user-build-deliver/index.html?cartFlag="+cartFlag+"&prd=" + prd + '&buyNum=' + buyNum);
+            ("/static/mall/user-build-deliver/index.html?cartFlag=" + cartFlag + "&prd=" + prd + '&buyNum=' + buyNum);
 
         return (
             <div>
@@ -85,20 +86,7 @@ $FW.DOMReady(function () {
                 CONTENT_NODE);
         }
     });
+    ReactDOM.render(<Header title={"我的收货地址"}/>, HEADER_NODE);
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"我的收货地址"} back_handler={back_handler}/>, HEADER_NODE);
-    }
 });
 
-//function back_handler() {
-//    if ($FW.Format.urlQuery().preview == 'true') {
-//        location.href = '/static/mall/user/index.html'
-//    } else {
-//        history.back();
-//    }
-//}
-
-window.onNativeMessageReceive = function (msg) {
-    if (msg == 'history:back') back_handler()
-};

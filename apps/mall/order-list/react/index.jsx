@@ -52,7 +52,7 @@ const OrderList = React.createClass({
         };
         this.props.orders.forEach(function (i) {
             state.all.push(i);
-            if (i.status && i.status!="cancel"&& i.status!="failure") state[i.status].push(i);
+            if (i.status && i.status != "cancel" && i.status != "failure") state[i.status].push(i);
         });
         return state
     },
@@ -152,12 +152,12 @@ const OrderBlock = React.createClass({
                 status_color = complete_color;
                 break;
         }
-
+        var _this = this;
         let product_item = function (product, index) {
 
             return (
                 <a key={index}>
-                    <div className="t-info">
+                    <div className="t-info" onClick={_this.gotoDetail}>
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
                         </div>
@@ -192,7 +192,7 @@ const OrderBlock = React.createClass({
                href={'/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
 
         return (
-            <div className="order-block" onClick={this.gotoDetail}>
+            <div className="order-block">
                 <div className="title-block">
                     <span className="time-text">{order.pay_at}</span>
                     <span style={status_color}>

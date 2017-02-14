@@ -11,14 +11,14 @@ const Grid_1 = React.createClass({
         let theme2_top_product_item = (product, index) => {
             return (
                 <a className="theme2-top-product-item" key={index}
-                    href={productLink(product.bizNo)}>
+                   href={productLink(product.bizNo)}>
                     <div className={"theme2-top-product-title theme2-top-product-title-color" + parseInt(index + 1)}>
                         {product.abbreviation}</div>
                     <div className="theme2-top-product-price">
                         {product.rmbPrice == 0 ? null : `¥${product.rmbPrice}+`}
-                        {product.score}工分
+                        {product.score == 0 ? null : "+" + product.score + "工分"}
                     </div>
-                    <img className="product-img2" src={product.img} />
+                    <img className="product-img2" src={product.img}/>
                 </a>
             )
         };
@@ -26,9 +26,9 @@ const Grid_1 = React.createClass({
         let theme2_btm_product_item = (product, index) => {
             return (
                 <a className="theme2-btm-product-item" key={index}
-                    href={productLink(product.bizNo)}>
+                   href={productLink(product.bizNo)}>
                     <div className="theme2-btm-product-wrap">
-                        <img className="theme2-product-img" src={product.img} />
+                        <img className="theme2-product-img" src={product.img}/>
                         <div className="theme2-btm-product-info">
                             <span className="theme2-btm-product-title">{product.abbreviation}</span>
                             <span className="theme2-btm-product-price">
@@ -43,7 +43,7 @@ const Grid_1 = React.createClass({
         return (
             <div className="theme-2">
                 <a className="activity-theme">
-                    <img src="images/education-theme-img.png" /></a>
+                    <img src="images/education-theme-img.png"/></a>
                 <div className="theme2-product-wrap">
                     <div className="theme2-top-product-list">
                         {this.state.ps.slice(0, 3).map(theme2_top_product_item)}

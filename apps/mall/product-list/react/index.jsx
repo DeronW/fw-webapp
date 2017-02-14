@@ -22,7 +22,7 @@ const ResultPage = React.createClass({
                 }
             });
         } else if (Filter.options.searchSourceType == 2) {
-            this.setState({ showExchangeBar: false });
+            this.setState({showExchangeBar: false});
             //if($FW.Format.urlQuery().productName){
             //document.querySelector('.search-confirm').click()
             //this.loadMoreProductHandler();
@@ -54,17 +54,17 @@ const ResultPage = React.createClass({
         //      });
     },
     setMyConvertibleScore: function (num) {
-        this.setState({ myConvertibleScore: num });
+        this.setState({myConvertibleScore: num});
     },
     searchFilterProductShow: function () {
-        this.setState({ searchFilterProductShow: true });
+        this.setState({searchFilterProductShow: true});
     },
     searchFilterProductHide: function () {
-        this.setState({ searchFilterProductShow: false });
+        this.setState({searchFilterProductShow: false});
     },
     loadMoreProductHandler: function (done) {
         this.state.hasData ?
-            Filter.search({ page: this.state.page + 1 }, (data) => {
+            Filter.search({page: this.state.page + 1}, (data) => {
                 this.appendProducts(data);
                 this.setState({
                     page: this.state.page + 1,
@@ -76,7 +76,7 @@ const ResultPage = React.createClass({
     filterProducts: function (options) {
         options.page = 1;
         Filter.search(options, (data) => {
-            this.setState({ products: [] }, () => this.appendProducts(data))
+            this.setState({products: []}, () => this.appendProducts(data))
             this.setState({
                 page: 1,
                 hasData: data.hasData
@@ -84,23 +84,23 @@ const ResultPage = React.createClass({
         });
     },
     setShowExchangeBar: function () {
-        this.setState({ showExchangeBar: true });
+        this.setState({showExchangeBar: true});
     },
     appendProducts: function (data) {
         var list = this.state.products.slice();
         var newList = list.concat(data.products || []);
-        this.setState({ products: newList })
+        this.setState({products: newList})
     },
     searchFocus: function () {
-        this.setState({ showExchangeBar: false });
+        this.setState({showExchangeBar: false});
     },
     render: function () {
         let productsList = () => {
             return (
                 <div className="products-list">
                     {this.state.products.length ? this.state.products.map((p, index) => <ProductItem
-                        filterProducts={this.filterProducts} {...p} key={index} />) :
-                        <div className="empty-list"><img src="images/no-products.png" /></div>}
+                        filterProducts={this.filterProducts} {...p} key={index}/>) :
+                        <div className="empty-list"><img src="images/no-products.png"/></div>}
                 </div>
             )
         };
@@ -108,15 +108,15 @@ const ResultPage = React.createClass({
         return (
             <div>
                 {this.state.showSearch ? <SearchBar filterProducts={this.filterProducts}
-                    searchFocus={this.searchFocus}
-                    setShowExchangeBar={this.setShowExchangeBar} /> : null}
-                <ResultPage.CategoryBanner filterProducts={this.filterProducts} />
+                                                    searchFocus={this.searchFocus}
+                                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
+                <ResultPage.CategoryBanner filterProducts={this.filterProducts}/>
 
                 {this.state.showExchangeBar || this.state.showFilterBar ?
                     <ExchangeBar setMyConvertibleScore={this.setMyConvertibleScore}
-                        filterProducts={this.filterProducts}
-                        searchFilterProductShow={this.searchFilterProductShow}
-                        searchFilterProductHide={this.searchFilterProductHide} /> : null}
+                                 filterProducts={this.filterProducts}
+                                 searchFilterProductShow={this.searchFilterProductShow}
+                                 searchFilterProductHide={this.searchFilterProductHide}/> : null}
                 {this.state.showExchangeBar && this.state.searchFilterProductShow ? productsList() : null}
             </div>
         )
@@ -127,7 +127,7 @@ ResultPage.CategoryBanner = React.createClass({
     render: function () {
         let c = $FW.Format.urlQuery().category;
         if (!c) return null;
-        return <a className="category-img"><img src={"images/" + c + ".jpg"} /></a>;
+        return <a className="category-img"><img src={"images/" + c + ".jpg"}/></a>;
     }
 });
 
@@ -197,7 +197,7 @@ $FW.DOMReady(function () {
     if (Filter.options.searchSourceType == 2) {
 
     } else {
-        ReactDOM.render(<Header title={title} />, HEADER_NODE);
+        ReactDOM.render(<Header title={title}/>, HEADER_NODE);
     }
 
     window._ResultPage = ReactDOM.render(<ResultPage />, CONTENT_NODE);

@@ -133,35 +133,29 @@ const HotSale = React.createClass({
     },
 
     componentDidMount: function () {
-        $FW.Ajax({
-            url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
-            data: {count: 6},
-            success: (data) => {
-                this.setState({column: data.products});
-            }
-        });
+        $FW.Ajax(`${API_PATH}/mall/api/index/v1/hotProducts.json?count=6`)
+            .then((data) => this.setState({column: data.products}));
+
         $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
 
     loadMoreProductHandler: function (done) {
-        let {hasData, page, column} = this.state;
-        if (!hasData) return;
-
+        this.setState({page: this.state.page + 1});
         let arr = [];
-
-        //人气热卖列表
-        $FW.Ajax({
-                url: `${API_PATH}/mall/api/index/v1/hotProducts.json?count=6&page${page}`,
-                enable_loading: 'mini'
-            })
-            .then(data => {
-                this.setState({
-                    column: column.concat(data.products),
-                    hasData: data.products.length
-                })
-                done && done();
-            });
-        this.setState({page: page + 1});
+        this.state.hasData ?
+            $FW.Ajax({
+                url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+                enable_loading: true,
+                data: {count: 6, page: this.state.page},
+                success: (data) => {
+                    let products = data.products;
+                    this.setState({
+                        column: [...this.state.column, ...products],
+                        hasData: !!products.length
+                    })
+                    done && done()
+                }
+            }) : null
     },
 
     render: function () {
