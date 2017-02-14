@@ -54,10 +54,10 @@ const BankManagement = React.createClass({
                         <div>2.支持绑定多张银行卡。</div>
                     </div>
                 </div>
-                <div className="fixed-bottom-part">
-                    <div className="fixed-tip">绑定银行卡越多，信用额度越高！</div>
-                    <a className="add-card-btn" href='/static/loan/user-card-add/index.html'>马上添加</a>
-                </div>
+                {this.props.userBankList.withdrawBankcard.length < 11 ? <div className="fixed-bottom-part">
+                        <div className="fixed-tip">绑定银行卡越多，信用额度越高！</div>
+                        <a className="add-card-btn" href='/static/loan/user-card-add/index.html'>马上添加</a>
+                    </div> : null}
                 <div className={this.state.popShow ? "mask" : "mask dis"} style={{zIndex:10}}>
                     <div className="verify-pop">
                         <div className="verify-tip">您离成功借钱只差一步<br/>请先完成必填认证！</div>
