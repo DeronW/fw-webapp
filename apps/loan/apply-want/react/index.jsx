@@ -100,14 +100,15 @@ $FW.DOMReady(function () {
     let query = $FW.Format.urlQuery();
     let orioleOrderGid = query.orioleOrderGid;
     let loanNum = query.loanNum;
+    let user = $FW.Store.getUserDict();
     Promise.all([
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/baseinfo.json`,
             method: "post",
             data: {
-                token: $FW.Store.getUserToken(),
-                userGid: $FW.Store.getUserGid(),
-                userId: $FW.Store.getUserId(),
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3
             }
         }),
