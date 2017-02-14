@@ -30,7 +30,7 @@ const Register = React.createClass({
     },
     changeCode(e) {
         let v = e.target.value;
-        v.length < 5 && this.setState({ code: v });
+        v.length < 7 && this.setState({ code: v });
     },
     changePsw(e) {
         if (e.target.value.length <= 16) {
@@ -75,7 +75,7 @@ const Register = React.createClass({
             $FW.Component.Toast(err) :
             $FW.Post(`${API_PATH}api/userBase/v1/resetPass.json`, {
                 codeToken: _this.state.codeToken,
-                mobile: localStorage.phone,
+                mobile: PHONE,
                 password: _this.state.password,
                 verifyCode: _this.state.code,
                 sourceType: 3
@@ -88,12 +88,11 @@ const Register = React.createClass({
             }, e => $FW.Component.Toast(e.msg))
     },
     render() {
-        let phone = $FW.Format.urlQuery().phone;
 
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
-                    已发送短信验证码到号码<span>{phone}</span>
+                    已发送短信验证码到号码<span>{PHONE}</span>
                 </div>
 
                 <div className="ui-froms">
@@ -133,6 +132,8 @@ const Register = React.createClass({
         )
     }
 });
+
+const PHONE = $FW.Format.urlQuery().phone;
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"设置新密码"} />, HEADER_NODE);

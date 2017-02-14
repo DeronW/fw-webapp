@@ -29,7 +29,7 @@ const Register = React.createClass({
 
         err ?
             $FW.Component.Toast(err) :
-            $FW.Ajax(`${API_PATH}/api/userBase/v1/login.json`, {
+            $FW.Post(`${API_PATH}/api/userBase/v1/login.json`, {
                 mobile: PHONE,
                 password: password,
                 sourceType: 3
