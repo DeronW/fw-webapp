@@ -1,7 +1,7 @@
 function gotoHandler(link) {
     location.href = encodeURI(link);
 }
-function formatDate(now) {
+function formatDate() {
     var now = new Date();
     var yy = now.getFullYear();
     var mm = now.getMonth() + 1;
@@ -24,11 +24,11 @@ const Bill = React.createClass({
         let bill_item = (item, index) => {
             return (
                 <div className="bill-item-wrap">
-                    <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/loan/bill-detail/index.html?loanGid=${item.loanGid}`) }>
+                    <div className="bill-item" key={index} onClick={() => gotoHandler(`/static/loan/bill-detail/index.html?loanGid=${item.loanGid}`)}>
                         <div className="bill-detail">
                             <div className="bill-detail-wrap">
                                 <span className="bill-money">{item.loanLeftAmount.toFixed(2)}</span>
-                                {item.exceedDays > 0 ? <span className="bill-status"></span>:null}
+                                {item.exceedDays > 0 ? <span className="bill-status"></span> : null}
                             </div>
                             <span className="bill-deadline">{item.dueTimeStr}到期</span>
                         </div>
@@ -41,18 +41,21 @@ const Bill = React.createClass({
             )
         };
 
+        let empty = <div className="no-data-box">
+            <img className="no-data-img" src="images/no-data.png" />
+        </div>;
+
         return (
             <div>
                 <div className="header">
                     <div className="title">账单</div>
                     <div className="history-bill" onClick={() => gotoHandler(`/static/loan/bill-history/index.html`)}>历史账单</div>
                 </div>
-                {this.props.data.loanList.length == 0 ? (<div className="no-data-box">
-                    <img className="no-data-img" src="images/no-data.png" />
-                </div>) : (<div className="data-box">
+                {this.props.data.loanList.length === 0 ? empty : (<div className="data-box">
                     <div className="transfer-box">
                         <div className="loan-headline-money">
-                            <div className="transfer-money">{this.props.data.undueAmount.toFixed(2)}</div>
+                            <div className="transfer-money">
+                                {this.props.data.undueAmount.toFixed(2)}</div>
                             <div className="transfer-title">当前账单(元)</div>
                         </div>
 
@@ -81,12 +84,13 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}api/oriole/v1/loanloadpage.json`,
         method: "post",
-        enable_loading:"mini",
+        enable_loading: "mini",
         data: {
             token: $FW.Store.getUserToken(),
             userGid: $FW.Store.getUserGid(),
             userId: $FW.Store.getUserId(),
-            sourceType: 3 }
+            sourceType: 3
+        }
     }).then((data) => {
         ReactDOM.render(<Bill data={data} />, CONTENT_NODE);
     }, (error) => console.log(error));

@@ -27,6 +27,21 @@ const ApplyLoan = React.createClass({
                 flag = true;
             });
 
+            let getPosition = function(node) {
+                var left = node.offsetLeft;
+                var top = node.offsetTop;
+                var current = node.offsetParent;
+                while (current !== null) {
+                    left += current.offsetLeft;
+                    top += current.offsetTop;
+                    current = current.offsetParent;
+                }
+                return {
+                    "left": left,
+                    "top": top
+                };
+            }
+
             applyLoan.addEventListener("touchmove", (e) => {
                 if (flag) {
                     var x = e.touches[0].pageX || e.touches[0].clientX;
@@ -50,20 +65,6 @@ const ApplyLoan = React.createClass({
                 flag = false;
             });
 
-            function getPosition(node) {
-                var left = node.offsetLeft;
-                var top = node.offsetTop;
-                var current = node.offsetParent;
-                while (current != null) {
-                    left += current.offsetLeft;
-                    top += current.offsetTop;
-                    current = current.offsetParent;
-                }
-                return {
-                    "left": left,
-                    "top": top
-                };
-            }
         }
     },
     getBorrowBtn() {

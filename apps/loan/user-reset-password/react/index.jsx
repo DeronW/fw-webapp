@@ -10,10 +10,6 @@ function istrue(str) {
     return reg.test(str);
 }
 
-function verificationNum(val) {
-    var reg = new RegExp("^[0-9]*$");
-    return reg.test(val)
-}
 function space(val) {
     return val.replace(/ /g, '');
 }
@@ -37,12 +33,12 @@ const Register = React.createClass({
         this.setState({
             code: e.target.value
         });
-        if(this.state.codeValue.length > 3) {
+        if (this.state.codeValue.length > 3) {
             this.setState({
                 codeValue: this.state.codeValue
             });
         } else {
-            if(verificationNum(e.target.value)) {
+            if (verificationNum(e.target.value)) {
                 this.setState({
                     codeValue: e.target.value
                 });
@@ -88,7 +84,7 @@ const Register = React.createClass({
         $FW.Ajax({
             url: API_PATH + "api/userBase/v1/sendVerifyCode.json",
             method: "POST",
-            enable_loading:"mini",
+            enable_loading: "mini",
             data: {
                 mobile: localStorage.phone,
                 userOperationType: 2,
@@ -114,7 +110,7 @@ const Register = React.createClass({
 
         if (this.state.code == '') {
             $FW.Component.Toast("验证码不能为空");
-        }else if (this.state.pswVal == '') {
+        } else if (this.state.pswVal == '') {
             $FW.Component.Toast("密码不能为空");
         } else if (this.state.pswVal.length < 8) {
             $FW.Component.Toast("密码不能少于8位");
@@ -126,7 +122,7 @@ const Register = React.createClass({
             $FW.Ajax({
                 url: API_PATH + "api/userBase/v1/resetPass.json",
                 method: "POST",
-                enable_loading:"mini",
+                enable_loading: "mini",
                 data: {
                     codeToken: _this.state.codeToken,
                     mobile: localStorage.phone,
@@ -141,7 +137,7 @@ const Register = React.createClass({
 
                     window.location.href = "/static/loan/home/index.html"
                 },
-                fail:function(err){
+                fail: function (err) {
                     $FW.Component.Toast(err);
                 }
             })

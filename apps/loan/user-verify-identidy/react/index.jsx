@@ -9,7 +9,6 @@ function verificationNum(val) {
     return reg.test(val)
 }
 
-
 const VerifyIdentidy = React.createClass({
     getInitialState() {
         return {
@@ -39,25 +38,17 @@ const VerifyIdentidy = React.createClass({
             underWayCode: false
         });
 
-
         if (this.state.underWayCode) {
-            this.time = setInterval(() => {
-				/*this.setState({
-					countdown: this.state.countdown - 1
-				});*/
-            }, 1000);
-        } else {
-
+            // this.time = setInterval(() => {
+                // this.setState({ countdown: this.state.countdown - 1 });
+            // }, 1000);
         }
     },
-    handleSetPws() {
-        if (this.state.idVal == '') {
-            console.log("id 1");
-        } else if (!isCardNo(this.state.idVal)) {
-            console.log("id 2");
-        } else if (this.state.codeVal == '') {
-            console.log("验证码不能为空");
-        }
+    setHandler() {
+        // if (this.state.idVal === '') {
+        // } else if (!isCardNo(this.state.idVal)) {
+        // } else if (this.state.codeVal == '') {
+        // }
     },
 
     render() {
@@ -93,7 +84,7 @@ const VerifyIdentidy = React.createClass({
                 </div>
 
                 <div className="set-pws-btn">
-                    <div className="ui-btn" onClick={this.handleSetPws}>设置交易密码</div>
+                    <div className="ui-btn" onClick={this.setHandler}>设置交易密码</div>
                 </div>
             </div>
         )

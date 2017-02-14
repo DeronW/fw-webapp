@@ -119,7 +119,7 @@ const SetCashCard = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/cardinfo.json`,
                 method: "POST",
-                enable_loading:"mini",
+                enable_loading: "mini",
                 data: {
                     bankCardNo: space(this.state.bankNum),
                     token: localStorage.userToken,
@@ -128,7 +128,6 @@ const SetCashCard = React.createClass({
                     sourceType: 3
                 }
             }).then((data) => {
-                console.log(data)
                 this.setState({
                     cardinfoBankName: data.cardInfo.bankName,
                     cardinfoLogoUrl: data.cardInfo.logoUrl,
@@ -171,8 +170,6 @@ const SetCashCard = React.createClass({
         });
     },
     handlerNext() {
-        console.log(this.state.bankNum);
-
         if (this.state.bankNum == '') {
             $FW.Component.Toast("储蓄卡不能为空");
         } else if (space(this.state.bankNum).length > 19 || space(this.state.bankNum).length < 16) {
@@ -191,7 +188,7 @@ const SetCashCard = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/commitinfo.json`,
                 method: 'POST',
-                enable_loading:"mini",
+                enable_loading: "mini",
                 data: {
                     bankName: this.state.bankName,
                     //cardHolderName: this.state.name,
@@ -207,8 +204,6 @@ const SetCashCard = React.createClass({
                 }
             }).then((data) => {
                 window.location.href = `/static/loan/user-bank-management/index.html`;
-            }, (error) => {
-                console.log(error);
             });
         }
     },

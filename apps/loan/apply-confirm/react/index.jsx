@@ -8,7 +8,7 @@ const ConfirmLoanWrap = React.createClass({
             itemShow: false,
             verifyCodeShow: false,
             loanResult: false,
-            noticeShow:false
+            noticeShow: false
         }
     },
     itemShow: function (val) {
@@ -30,10 +30,10 @@ const ConfirmLoanWrap = React.createClass({
         this.setState({ loanResult: booleanVal });
     },
     noticeShow: function (booleanVal) {
-        this.setState({noticeShow: booleanVal});
+        this.setState({ noticeShow: booleanVal });
     },
-    noticeHide:function (booleanVal) {
-        this.setState({noticeShow: booleanVal});
+    noticeHide: function (booleanVal) {
+        this.setState({ noticeShow: booleanVal });
     },
     render: function () {
         let cashBank = this.props.userBankList.withdrawBankcard;
@@ -47,10 +47,10 @@ const ConfirmLoanWrap = React.createClass({
                 <ConfirmLoan callbackItemShow={this.itemShow} callbackVerifyCodeShow={this.getVerifyCodeShow}
                     accountInAmount
                     ={this.props.accountInAmount} shouldRepaymentAmount={this.props.shouldRepaymentAmount}
-                    dueTime={this.props.dueTimeStr} totalFeeAmount={this.props.totalFeeAmount} callbackNoticeShow={this.noticeShow}/>
+                    dueTime={this.props.dueTimeStr} totalFeeAmount={this.props.totalFeeAmount} callbackNoticeShow={this.noticeShow} />
                 {this.state.itemShow ? <ItemDetail callbackItemDetailHide={this.itemDetailHide}
                     feeExtList={this.props.feeExtList} /> : null}
-                {this.state.noticeShow ? <Notice content={this.props.latedescription} callbackNoticeHide={this.noticeHide}/> : null}
+                {this.state.noticeShow ? <Notice content={this.props.latedescription} callbackNoticeHide={this.noticeHide} /> : null}
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow} /> : null}
                 {this.state.loanResult ? <LoanResult callbackResultHide={this.resultHide} bankShortName={filtered[0].bankShortName} cardNo={filtered[0].cardNo} /> : null}
@@ -78,7 +78,7 @@ const ConfirmLoan = React.createClass({
     detailHandler: function () {
         this.props.callbackItemShow(true);
     },
-    clickHandler:function(){
+    clickHandler: function () {
         this.props.callbackNoticeShow(true);
     },
     render: function () {
@@ -121,8 +121,8 @@ const ConfirmLoan = React.createClass({
 });
 
 const Notice = React.createClass({
-    clickHandler:function(){
-         this.props.callbackNoticeHide(false);
+    clickHandler: function () {
+        this.props.callbackNoticeHide(false);
     },
     render: function () {
         return (
@@ -397,7 +397,7 @@ $FW.DOMReady(function () {
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/tryLoanBudget.json`,
             method: "post",
-            enable_loading:"mini",
+            enable_loading: "mini",
             data: {
                 token: $FW.Store.getUserToken(),
                 userGid: $FW.Store.getUserGid(),
@@ -410,13 +410,13 @@ $FW.DOMReady(function () {
         $FW.Ajax({
             url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
             method: "post",
-            enable_loading:"mini",
+            enable_loading: "mini",
             data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3 }
         }),
         $FW.Ajax({
             url: `${API_PATH}api/repayment/v1/latedescription.json`,
             method: "post",
-            enable_loading:"mini",
+            enable_loading: "mini",
             data: {
                 token: $FW.Store.getUserToken(),
                 userGid: $FW.Store.getUserGid(),
@@ -425,6 +425,6 @@ $FW.DOMReady(function () {
             }
         })
     ]).then(d => {
-        ReactDOM.render(<ConfirmLoanWrap {...d[0]} {...d[1]} {...d[2]}/>, CONTENT_NODE);
-    }, (error) => console.error(error));
+        ReactDOM.render(<ConfirmLoanWrap {...d[0]} {...d[1]} {...d[2]} />, CONTENT_NODE);
+    });
 });
