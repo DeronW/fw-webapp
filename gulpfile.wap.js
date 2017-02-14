@@ -44,6 +44,13 @@ const CIRCLE_PAGES = [
     'circle-score-stream', //工分流水
 ]
 
+const NOTICE_PAGES = [
+    // 内容展示页面
+    'notice-corporate-structure', // 信息披露 公司结构
+    'notice-safeguard', // 资金安全保障
+    'notice-risk-prompt', // 风险揭示
+]
+
 const TOPIC_PAGES = [
     // 专题页面
     'topic-hui-shang', // 徽商专题页面
@@ -74,12 +81,6 @@ const HUISHANG_PAGES = [
     'modification-phone', // 修改银行预留手机号
 ]
 
-const NOTICE_PAGES = [
-    // 内容展示页面
-    'notice-corporate-structure', // 信息披露 公司结构
-    'notice-safeguard', // 资金安全保障
-    'notice-risk-prompt', // 风险揭示
-]
 
 const DEVELOPING_PAGES = [
 ]
