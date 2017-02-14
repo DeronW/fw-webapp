@@ -23,22 +23,22 @@ const Detail = React.createClass({
                         <span>{this.props.data.dueTimeStr}</span>
                     </div>
                     <div>
-                        <span>待还本金</span>
-                        <span>{this.props.data.loanAmount}元</span>
+                        <span>待还本金(元)</span>
+                        <span>{this.props.data.loanAmount.toFixed(2)}</span>
                     </div>
                     <div>
-                        <span>逾期费用</span>
-                        <span>{this.props.data.overdueFee}元</span>
+                        <span>逾期费用(元)</span>
+                        <span>{this.props.data.overdueFee.toFixed(2)}</span>
                     </div>
                 </div>
                 <div className="loan-detail-box">
                     <div>
-                        <span>借入金额</span>
-                        <span>{this.props.data.loanAmount}元</span>
+                        <span>借入金额(元)</span>
+                        <span>{this.props.data.loanAmount.toFixed(2)}</span>
                     </div>
                     <div>
-                        <span>到账金额</span>
-                        <span>{this.props.data.netAmount}元</span>
+                        <span>到账金额(元)</span>
+                        <span>{this.props.data.netAmount.toFixed(2)}</span>
                     </div>
                 </div>
                 <div className="loan-detail-box">
