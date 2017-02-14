@@ -10,7 +10,7 @@ const Detail = React.createClass({
         return (
             <div>
                 <div className="loan-num">
-                    <div className={loanStatus ==2 || loanStatus ==3 ? "loan-money overdue-color" : "loan-money pay-back-color"}>{this.props.data.loanAmount}</div>
+                    <div className={loanStatus ==2 || loanStatus ==3 ? "loan-money overdue-color" : "loan-money pay-back-color"}>{this.props.data.loanLeftAmountStr}</div>
                     <div className="loan-money-title">应还总额(元)</div>
                     {loanStatus == 3 ? <div className="icon1"></div> : null}
                     {loanStatus == 2 ? <div className="icon2"></div> : null}
