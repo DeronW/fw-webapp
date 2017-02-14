@@ -232,7 +232,7 @@ const SetCashCard = React.createClass({
                     <span className={"icon " + (this.state.selectClause ? "select-icon" : "icon")} onClick={this.handlerClause}></span>
                     <span className="text">
                         同意
-						<span onClick={this.handlerWithholdServer}>《代扣服务协议》</span>
+						<a href={`/static/loan/protocol-cost/index.html`}>《代扣服务协议》</a>
                     </span>
                 </div>
 
