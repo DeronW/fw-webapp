@@ -9,13 +9,13 @@ function istrue(str) {
 const Register = React.createClass({
     getInitialState() {
         return {
-            pwdVal: '',
+            password: '',
             plainCode: false
         }
     },
     changePwd(e) {
         this.setState({
-            pwdVal: e.target.value
+            password: e.target.value
         });
     },
     handlePlainCode() {
@@ -25,13 +25,13 @@ const Register = React.createClass({
     },
     loadingBtn() {
         let _this = this;
-        if (this.state.pwdVal == '') {
+        if (this.state.password == '') {
             $FW.Component.Toast("请输入登录密码");
-        } else if (this.state.pswVal.length < 8) {
+        } else if (this.state.password.length < 8) {
             $FW.Component.Toast("密码不能少于8位");
-        } else if (this.state.pswVal.length > 16) {
+        } else if (this.state.password.length > 16) {
             $FW.Component.Toast("密码不能多于16位");
-        } else if (!istrue(this.state.pswVal)) {
+        } else if (!istrue(this.state.password)) {
             $FW.Component.Toast("必须是字母及数字组合密码");
         }else {
             $FW.Ajax({
@@ -40,7 +40,7 @@ const Register = React.createClass({
 
                 data: {
                     mobile: location.search.split("=")[1],
-                    password: _this.state.pwdVal,
+                    password: _this.state.password,
                     sourceType: 3
                 },
                 success: function (data) {

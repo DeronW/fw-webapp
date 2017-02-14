@@ -9,7 +9,7 @@ const ApplyLoan = React.createClass({
             present_availableLoan: this.props.data.creditLine,
             orioleOrderGid: this.props.data.orioleOrderGid,
             creditLine: this.props.data.canBorrowAmount,
-            present_creditLine:this.props.data.canBorrowAmount
+            present_creditLine: this.props.data.canBorrowAmount
         }
     },
     componentDidMount: function () {
@@ -162,6 +162,7 @@ const ApplyLoan = React.createClass({
         if (st === 5) line = this.props.data.creditLine;
         return line
     },
+
     render() {
 
         return (
@@ -199,7 +200,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}api/loan/v1/baseinfo.json`,
         method: "post",
-        enable_loading:"mini",
+        enable_loading: "mini",
         data: {
             token: user.token,
             userGid: user.gid,
@@ -207,7 +208,7 @@ $FW.DOMReady(function () {
             sourceType: 3,
             productId: 1
         }
-    }).then((data) => {
+    }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
     }, e => $FW.Capture(e));
     ReactDOM.render(<BottomNavBar index={1} />, BOTTOM_NAV_NODE);
