@@ -40,8 +40,8 @@ const Register = React.createClass({
             userOperationType: 3,
             sourceType: 3
         }).then(data => {
-            localStorage.phone = phone;
-            location.href = `/static/loan/user-register/index.html?codeToken=${data.codeToken}&phone=${phone}`;
+            $FW.Store.set('phone', phone);
+            location.href = `/static/loan/user-set-password/index.html?codeToken=${data.codeToken}&phone=${phone}`;
         }, res => {
             if (res.code === 1029) {
                 localStorage.phone = phone;
