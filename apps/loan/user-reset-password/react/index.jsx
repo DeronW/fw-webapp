@@ -88,7 +88,7 @@ const Register = React.createClass({
             }, e => $FW.Component.Toast(e.msg))
     },
     render() {
-        let phone = $FW.Format.urlQuery.phone;
+        let phone = $FW.Format.urlQuery().phone;
 
         return (
             <div className="register-cnt">
