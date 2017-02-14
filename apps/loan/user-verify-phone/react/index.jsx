@@ -91,7 +91,7 @@ const VerifyPhone = React.createClass({
                 }
             }).then((data) => {
                 let operatorBankcardGid = location.search.split("operatorBankcardGid=")[1];
-                //window.location.href = `${location.protocol}\/\/${location.host}/static/user-bank-management/index.html?operatorBankcardGid=${operatorBankcardGid}`;
+                window.location.href = `/static/user-bank-management/index.html?operatorBankcardGid=${operatorBankcardGid}`;
 
                 $FW.Ajax({
                     url: `${API_PATH}api/bankcard/v1/status.json`,
@@ -117,8 +117,8 @@ const VerifyPhone = React.createClass({
                             popBtnText: "确定",
                             popStatus: 2
                         });
-                        //$FW.Component.Alert(data.bindStatus.failReason);
-                        //window.history.back();
+                        $FW.Component.Toast(data.bindStatus.failReason);
+                        window.history.back();
                     }
 
 
