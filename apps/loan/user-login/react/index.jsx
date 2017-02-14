@@ -62,7 +62,7 @@ const Register = React.createClass({
         return (
             <div className="login-cnt">
                 <div className="top">
-                    <span className="icon" onClick={() => gotoHandler(`/static/loan/user-entry/index.html`)}></span>
+                    <a className="icon" href="static/loan/user-entry/index.html"></a>
                     <span className="title">登录</span>
                 </div>
 
@@ -87,7 +87,6 @@ const Register = React.createClass({
                         </div>
 
                         <div className="pwd-icon" onClick={() => this.handlePlainCode()}>
-
                         </div>
                     </div>
                 </div>
