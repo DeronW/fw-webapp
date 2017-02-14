@@ -15,25 +15,20 @@ const Register = React.createClass({
         return {
             code: '',
             codeBoolean: false,
-            pswVal: '',
+            password: '',
             countdown: 0,
             plainCode: false,
             codeToken: '',
-            checked:false
+            checked: false
         }
     },
     changeCode(e) {
-        this.setState({
-            code: e.target.value
-        });
+        this.setState({ code: e.target.value });
     },
     changePsw(e) {
         if (e.target.value.length <= 16) {
-            if (verificationNum(e.target.value)) {
-                this.setState({
-                    pswVal: e.target.value
-                });
-            }
+            if (verificationNum(e.target.value))
+                this.setState({ password: e.target.value });
         }
     },
     handleGetCode() {
@@ -44,78 +39,46 @@ const Register = React.createClass({
             countdown: 60
         });
 
-        $FW.Ajax({
-            url: API_PATH + "api/userBase/v1/sendVerifyCode.json",
-            method: "POST",
-            data: {
-                mobile: location.search.split('phone=')[1],
-                userOperationType: 3,
-                sourceType: 3
-            },
-            success: function (data) {
-                _this.setState({
-                    codeToken: data.codeToken
-                });
-            }
-        })
+        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+            mobile: location.search.split('phone=')[1],
+            userOperationType: 3,
+            sourceType: 3
+        }).then(data => this.setState({ codeToken: data.codeToken }))
 
         this.timer = setInterval(() => {
-            this.setState({
-                countdown: this.state.countdown - 1
-            });
-
+            this.setState({ countdown: this.state.countdown - 1 });
 
             if (this.state.countdown == 0) {
                 clearInterval(this.timer);
-                this.setState({
-                    codeBoolean: false
-                });
+                this.setState({ codeBoolean: false });
             }
         }, 1000);
     },
     handlePlainCode() {
-        this.setState({
-            plainCode: !this.state.plainCode
-        });
+        this.setState({ plainCode: !this.state.plainCode });
     },
     handleRegisterBtn() {
-        let _this = this;
+        let err, {password, code, checked} = this.state;
 
-        if (this.state.code == '') {
-            $FW.Component.Toast("验证码不能为空");
-        } else if (this.state.pswVal == '') {
-            $FW.Component.Toast("密码不能为空");
-        } else if (this.state.pswVal.length < 8) {
-            $FW.Component.Toast("密码不能少于8位");
-        } else if (this.state.pswVal.length > 16) {
-            $FW.Component.Toast("密码不能多于16位");
-        } else if (!istrue(this.state.pswVal)) {
-            $FW.Component.Toast("必须是字母及数字组合密码");
-        } else if (!this.state.checked){
-            $FW.Component.Toast("请同意放心花注册协议");
-        }else {
-            $FW.Ajax({
-                url: API_PATH + "api/userBase/v1/register.json",
-                method: "POST",
-                data: {
-                    codeToken: location.search.split("?codeToken=")[1], //_this.state.codeToken ,
-                    mobile: location.search.split('phone=')[1],
-                    password: _this.state.pswVal,
-                    verifyCode: _this.state.code,
-                    sourceType: 3
-                },
-                success: function (data) {
-                    localStorage.userGid = data.userLogin.userGid;
-                    localStorage.userId = data.userLogin.userId;
-                    localStorage.userToken = data.userLogin.userToken;
-                    location.href = `/static/loan/home/index.html`;
-                },
-                fail:function(err){
-                    $FW.Component.Toast(err);
-                }
-            })
-        }
+        if (code == '') err = "验证码不能为空";
+        if (password == '') err = "密码不能为空";
+        if (password.length < 8) err = "密码不能少于8位";
+        if (password.length > 16) err = "密码不能多于16位";
+        if (!istrue(password)) err = "必须是字母及数字组合密码";
+        if (!checked) err = "请同意放心花注册协议";
 
+        err ? $FW.Component.Toast(err) :
+            $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
+                mobile: location.search.split('phone=')[1],
+                password: password,
+                verifyCode: code,
+                sourceType: 3
+            }).then(data => {
+                localStorage.userGid = data.userLogin.userGid;
+                localStorage.userId = data.userLogin.userId;
+                localStorage.userToken = data.userLogin.userToken;
+                location.href = `/static/loan/home/index.html`;
+            }, e => $FW.Component.Toast(e.msg))
     },
     checkHandler() {
         this.setState({ checked: !this.state.checked });
@@ -137,7 +100,8 @@ const Register = React.createClass({
                         {
                             this.state.codeBoolean ?
                                 <div className="get-code-btn c">{this.state.countdown}倒计时</div> :
-                                <div className="get-code-btn" onClick={() => this.handleGetCode()}>获取验证码</div>
+                                <div className="get-code-btn" onClick={this.handleGetCode}>
+                                    获取验证码</div>
                         }
 
                     </div>
@@ -146,7 +110,7 @@ const Register = React.createClass({
                         <div className="input">
                             <input
                                 type={this.state.plainCode ? "text" : "password"}
-                                value={this.state.pswVal}
+                                value={this.state.password}
                                 onChange={this.changePsw}
                                 onBlur={this.blurPsw}
                                 placeholder="设置8-16位的字母及数字组合密码"
@@ -158,8 +122,10 @@ const Register = React.createClass({
                 </div>
                 <div className="agreement-issue">
                     <div className={this.state.checked ? "checked-box" : "unchecked-box"}
-                         onClick={this.checkHandler}></div>
-                    <div className="check-item">同意<a href="">《放心花注册协议》</a></div>
+                        onClick={this.checkHandler}></div>
+                    <div className="check-item">同意
+                        <a href="/static/loan/protocol-register/index.html">
+                            《放心花注册协议》</a></div>
                 </div>
                 <div className="determine-btn">
                     <div className="ui-btn" onClick={this.handleRegisterBtn}>确定</div>
