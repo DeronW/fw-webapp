@@ -332,7 +332,7 @@ const PayBackResult = React.createClass({
                     </div>}
                 <div className="payback-result-success-tip">
                  <div className="tip-top">欢迎再次使用!</div>
-                 <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum}</span>元</div>
+                 <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum.toFixed(2)}</span>元</div>
                  </div>
                 {this.state.payback_fail ? <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div> : null}
                 {this.state.payback_ing ? <div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div> : null}

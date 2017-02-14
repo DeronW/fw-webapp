@@ -33,14 +33,14 @@ let More = React.createClass({
                                 <span className="arrow-icon"></span>
                             </a>
                         </div>
-                        <div className="list-cnt">
+                        {/*<div className="list-cnt">
                             <a>
                                 <span className="icon version-icon"></span>
                                 <span className="text">当前版本</span>
                                 <span className="arrow-icon"></span>
                                 <span className="version">V1.0.0</span>
                             </a>
-                        </div>
+                        </div>*/}
                     </div>
                 </div>
 
