@@ -24,14 +24,15 @@ const WantLoan = React.createClass({
         let query = $FW.Format.urlQuery();
         let loanNum = query.loanNum;
         let orioleOrderGid = query.orioleOrderGid;
+        let lowestLoan = query.lowestLoan;
         let n = parseInt(this.state.loanNum) || 0, {creditLine} = this.state, err;
 
 
         if (n > creditLine) err = '不能输入大于可借额度';
         if (n % 100 != 0) err = '借款金额必须为100的整数倍';
-        if (n < 500) err = '借款金额必须大于等于500';
+        if (n < lowestLoan ) err = '借款金额必须大于等于'+ lowestLoan;
 
-        let format = x => Math.round(Math.max(500, Math.min(x, creditLine)) / 100) * 100;
+        let format = x => Math.round(Math.max(lowestLoan, Math.min(x, creditLine)) / 100) * 100;
 
         err && $FW.Component.Toast(err);
         this.setState({ loanNum: format(n) });

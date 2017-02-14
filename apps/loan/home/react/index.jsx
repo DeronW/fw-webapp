@@ -146,7 +146,7 @@ const ApplyLoan = React.createClass({
                     我要提额
                 </a>
                 <a className="credit-apply-btn"
-                    href={`/static/loan/apply-want/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`}>
+                    href={`/static/loan/apply-want/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}&lowestLoan=${this.props.data.lowestLoan}`}>
                     我要借款</a>
             </div>;
 
