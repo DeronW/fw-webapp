@@ -27,7 +27,7 @@ const Bill = React.createClass({
                     <div className="bill-item" key={index} onClick={ () => gotoHandler(`/static/loan/bill-detail/index.html?loanGid=${item.loanGid}`) }>
                         <div className="bill-detail">
                             <div className="bill-detail-wrap">
-                                <span className="bill-money">{item.loanLeftAmount}</span>
+                                <span className="bill-money">{item.loanLeftAmount.toFixed(2)}</span>
                                 {item.exceedDays > 0 ? <span className="bill-status"></span>:null}
                             </div>
                             <span className="bill-deadline">{item.dueTimeStr}到期</span>
@@ -52,7 +52,7 @@ const Bill = React.createClass({
                 </div>) : (<div className="data-box">
                     <div className="transfer-box">
                         <div className="loan-headline-money">
-                            <div className="transfer-money">{this.props.data.undueAmount}</div>
+                            <div className="transfer-money">{this.props.data.undueAmount.toFixed(2)}</div>
                             <div className="transfer-title">当前账单(元)</div>
                         </div>
 
