@@ -6,6 +6,7 @@ function istrue(str) {
 
     return reg.test(str);
 }
+
 const Register = React.createClass({
     getInitialState() {
         return {

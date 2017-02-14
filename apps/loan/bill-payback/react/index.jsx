@@ -33,9 +33,6 @@ const PayBackWrap = React.createClass({
     getVerifyCodeShow: function (booleanVal) {
         this.setState({ verifyCodeShow: booleanVal });
     },
-    getPayBackResultShow: function (booleanVal) {
-        this.setState({ payBackResultShow: booleanVal });
-    },
     indexItem: function (booleanVal) {
 
     },
