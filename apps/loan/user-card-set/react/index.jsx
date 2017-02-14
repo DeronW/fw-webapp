@@ -32,49 +32,6 @@ function space(str) {
     return str.replace(/ /g, "");
 }
 
-const WithholdServer = React.createClass({
-    handlerBack(ble) {
-        this.props.getWithholdServerPop(false);
-    },
-    render() {
-        return (
-            <div className="withhold-server">
-                <div className="title-nav">
-                    <div className="icon" onClick={this.handlerBack}></div>
-                    <div className="title-text">
-                        代扣服务协议
-					</div>
-                </div>
-
-                <div className="withhold-server-cnt">
-                    <div className="title">
-                        借款协议
-					</div>
-
-                    <div className="text">
-                        欢迎阅读金融工场（以下简称本公司）用户协议。本协议将详述您在域名为 www.9888.cn 的互联网网站（备案号为：京ICP证130046号，以下简称金融工场）使用本公司服务所须遵守的条款和条件。
-					</div>
-                    <div className="text">
-                        您成为金融工场用户前，必须阅读、同意并接受本协议中所含的所有条款和条件，包括以下明示载明的及因被提及而纳入的文件、条款和条件。本公司强烈建议：您阅读本协议时，也应阅读本协议所提及的其他网页中所包含的资料，因为其可能包含对作为金融工场用户的您适用的进一步条款和条件。请注意：点击划有底线的词句即可链接到相应网页。
-					</div>
-                    <div className="text">
-                        您申请注册为金融工场用户，表明您已经充分阅读、理解并无任何附加条件的接受了本协议中含有的所有条款和条件，包括本协议中载明的及因被提及而纳入的所有文件、条款和条件。
-					</div>
-
-                    <div className="text">
-                        <div className="q">
-                            一、用户资格
-						</div>
-                        <div className="a">
-                            1.1 本公司的服务仅向适用法律规定的能够签订有法律约束力文件的个人、企业及其他组织提供并由其使用。
-						</div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-});
-
 const SetCashCard = React.createClass({
     getInitialState() {
         return {

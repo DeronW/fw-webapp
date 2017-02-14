@@ -114,7 +114,7 @@ const PayBack = React.createClass({
                         <span>{this.props.loanAmount.toFixed(2)}</span>
                     </div>
                     <div>
-                        <span>逾期费用(元)</span>
+                        <span>逾期费(元)</span>
                         <span>{this.props.overdueFee.toFixed(2)}</span>
                     </div>
                 </div>

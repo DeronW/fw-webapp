@@ -27,7 +27,7 @@ const Detail = React.createClass({
                         <span>{this.props.data.loanAmount.toFixed(2)}</span>
                     </div>
                     <div>
-                        <span>逾期费用(元)</span>
+                        <span>逾期费(元)</span>
                         <span>{this.props.data.overdueFee.toFixed(2)}</span>
                     </div>
                 </div>
