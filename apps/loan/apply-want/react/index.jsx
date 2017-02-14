@@ -30,7 +30,7 @@ const WantLoan = React.createClass({
 
         if (n > creditLine) err = '不能输入大于可借额度';
         if (n % 100 != 0) err = '借款金额必须为100的整数倍';
-        if (n < lowestLoan ) err = '借款金额必须大于等于'+ lowestLoan;
+        if (n < lowestLoan) err = '借款金额必须大于等于' + lowestLoan;
 
         let format = x => Math.round(Math.max(lowestLoan, Math.min(x, creditLine)) / 100) * 100;
 
@@ -45,26 +45,22 @@ const WantLoan = React.createClass({
         }
         let filtered = cashBank.filter(isRealNameBindCard);
 
-        $FW.Ajax({
-            url: `${API_PATH}api/loan/v1/apply.json`,
-            method: "post",
-            enable_loading:"mini",
-            data: {
-                token: $FW.Store.getUserToken(),
-                userGid: $FW.Store.getUserGid(),
-                userId: $FW.Store.getUserId(),
-                loanAmount:this.state.loanNum,
-                orioleOrderGid: orioleOrderGid,
-                productId: 1,
-                sourceType: 3,
-                withdrawCardGid: filtered[0].cardGid
-            }
-        }).then((data) => {
+        $FW.Post(`${API_PATH}api/loan/v1/apply.json`, {
+            token: $FW.Store.getUserToken(),
+            userGid: $FW.Store.getUserGid(),
+            userId: $FW.Store.getUserId(),
+            loanAmount: this.state.loanNum,
+            orioleOrderGid: orioleOrderGid,
+            productId: 1,
+            sourceType: 3,
+            withdrawCardGid: filtered[0].cardGid
+        }
+        ).then((data) => {
             this.setState({ loanGid: data.loanGid, orderGid: data.orderGid });
             if (!err) {
                 location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`;
             }
-        }, (error) => console.error(error));
+        });
 
     },
     render: function () {
@@ -124,6 +120,6 @@ $FW.DOMReady(function () {
         })
     ]).then(d => {
         ReactDOM.render(<WantLoan {...d[0]} {...d[1]} />, CONTENT_NODE);
-    }, (error) => console.error(error));
+    });
 
 });
