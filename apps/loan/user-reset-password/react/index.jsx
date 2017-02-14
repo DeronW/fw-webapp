@@ -56,7 +56,9 @@ const Register = React.createClass({
             mobile: PHONE,
             userOperationType: 2,
             sourceType: 3
-        }).then(data => this.setState({ codeToken: data.codeToken }))
+        }).then(
+            data => this.setState({ codeToken: data.codeToken }),
+            e => $FW.Component.Toast(e.message));
         this.countdownFun();
     },
     handlePlainCode() {
@@ -80,12 +82,15 @@ const Register = React.createClass({
                 verifyCode: code,
                 sourceType: 3
             }).then(data => {
-                localStorage.userGid = data.userPasswordOption.userGid;
-                localStorage.userId = data.userPasswordOption.userId;
-                localStorage.userToken = data.userPasswordOption.userToken;
+                let {userGid, userId, userToken} = data.userPasswordOption;
+                $FW.Store.setUserDict({
+                    gid: userGid,
+                    id: userId,
+                    token: userToken
+                })
 
                 window.location.href = "/static/loan/home/index.html"
-            }, e => $FW.Component.Toast(e.msg))
+            }, e => $FW.Component.Toast(e.message))
     },
     render() {
 
