@@ -63,7 +63,7 @@ const Register = React.createClass({
         this.setState({ plainCode: !this.state.plainCode });
     },
     handleRegisterBtn() {
-        let err, {code, password} = this.state;
+        let err, {code, password, codeToken} = this.state;
 
         if (code == '') err = "验证码不能为空";
         if (password == '') err = "密码不能为空";
@@ -74,10 +74,10 @@ const Register = React.createClass({
         err ?
             $FW.Component.Toast(err) :
             $FW.Post(`${API_PATH}api/userBase/v1/resetPass.json`, {
-                codeToken: _this.state.codeToken,
+                codeToken: codeToken,
                 mobile: PHONE,
-                password: _this.state.password,
-                verifyCode: _this.state.code,
+                password: password,
+                verifyCode: code,
                 sourceType: 3
             }).then(data => {
                 localStorage.userGid = data.userPasswordOption.userGid;
