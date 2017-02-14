@@ -1,7 +1,11 @@
 function gotoHandler(link) {
     location.href = encodeURI(link);
 }
+function istrue(str) {
+    var reg = /^([a-z]+(?=[0-9])|[0-9]+(?=[a-z]))[a-z0-9]+$/ig;
 
+    return reg.test(str);
+}
 const Register = React.createClass({
     getInitialState() {
         return {
@@ -23,7 +27,13 @@ const Register = React.createClass({
         let _this = this;
         if (this.state.pwdVal == '') {
             $FW.Component.Toast("请输入登录密码");
-        } else {
+        } else if (this.state.pswVal.length < 8) {
+            $FW.Component.Toast("密码不能少于8位");
+        } else if (this.state.pswVal.length > 16) {
+            $FW.Component.Toast("密码不能多于16位");
+        } else if (!istrue(this.state.pswVal)) {
+            $FW.Component.Toast("必须是字母及数字组合密码");
+        }else {
             $FW.Ajax({
                 url: API_PATH + "/api/userBase/v1/login.json",
                 method: "POST",
