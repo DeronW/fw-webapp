@@ -53,7 +53,7 @@ const Register = React.createClass({
     },
     handleGetCode() {
         $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
-            mobile: localStorage.phone,
+            mobile: PHONE,
             userOperationType: 2,
             sourceType: 3
         }).then(data => this.setState({ codeToken: data.codeToken }))
