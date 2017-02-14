@@ -40,7 +40,7 @@ const Register = React.createClass({
                 localStorage.userStatus = data.userLogin.userStatus;
 
                 location.href = `/static/loan/home/index.html`;
-            }, e => $FW.Component.Toast(e));
+            }, e => $FW.Component.Toast(e.message));
     },
     render() {
 
