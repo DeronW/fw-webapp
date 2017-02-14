@@ -206,7 +206,7 @@ const SetCashCard = React.createClass({
                     sourceType: 3
                 }
             }).then((data) => {
-                window.location.href = `/static/loan/user-bank-management/index.html`;
+                window.location.href = `/static/loan/user-verify-phone/index.html`;
             }, (error) => {
                 console.log(error);
             });
@@ -257,7 +257,7 @@ const SetCashCard = React.createClass({
                 </div>
 
                 <div className="next-btn">
-                    <div onClick={this.handlerNext} className="ui-btn">确定</div>
+                    <div onClick={this.handlerNext} className="ui-btn">下一步</div>
                 </div>
             </div>
         )
