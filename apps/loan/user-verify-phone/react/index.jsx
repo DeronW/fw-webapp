@@ -80,7 +80,7 @@ const VerifyPhone = React.createClass({
             $FW.Ajax({
                 url: `${API_PATH}api/bankcard/v1/commitverifycode.json`,
                 method: "POST",
-
+                enable_loading: "mini",
                 data: {
                     operatorBankcardGid: location.search.split("operatorBankcardGid=")[1],
                     token: localStorage.userToken,
@@ -91,12 +91,12 @@ const VerifyPhone = React.createClass({
                 }
             }).then((data) => {
                 let operatorBankcardGid = location.search.split("operatorBankcardGid=")[1];
-                //window.location.href = `${location.protocol}\/\/${location.host}/static/user-bank-management/index.html?operatorBankcardGid=${operatorBankcardGid}`;
+                window.location.href = `/static/loan/user-bank-management/index.html?operatorBankcardGid=${operatorBankcardGid}`;
 
                 $FW.Ajax({
                     url: `${API_PATH}api/bankcard/v1/status.json`,
                     method: "POST",
-
+                    enable_loading: "mini",
                     data: {
                         operatorBankcardGid: operatorBankcardGid,
                         token: localStorage.userToken,
@@ -108,7 +108,7 @@ const VerifyPhone = React.createClass({
                     if (data.bindStatus.status == 0) {
                         $FW.Component.Toast("处理中");
                     } else if (data.bindStatus.status == 1) {
-                        //成功
+                        window.location.href = `/static/loan/user-bank-management/index.html`;
                     } else if (data.bindStatus.status == 2) {
                         //失败
                         this.setState({
@@ -117,8 +117,8 @@ const VerifyPhone = React.createClass({
                             popBtnText: "确定",
                             popStatus: 2
                         });
-                        //$FW.Component.Alert(data.bindStatus.failReason);
-                        //window.history.back();
+                        $FW.Component.Toast(data.bindStatus.failReason);
+                        window.history.back();
                     }
 
 

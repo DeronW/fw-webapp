@@ -23,7 +23,8 @@ const BottomNavBar = React.createClass({
             right: "0",
             bottom: "0",
             background: "#393f5a",
-            borderTop: "1px solid #f0f0f0"
+            borderTop: "1px solid #f0f0f0",
+            zIndex:"100"
         };
 
         let {index} = this.props;
