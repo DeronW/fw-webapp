@@ -18,7 +18,6 @@ var numberFormat = {
         if (!isNaN(val.replace(/[0-9]/g, ""))) {
             this.val = val.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");//四位数字一组，以空格分割
         }
-
         return this.val;
     }
 };
@@ -64,8 +63,8 @@ const SetCashCard = React.createClass({
         });
     },
     changeBankNum(e) {
-        let val = e.target.value;
-        this.setState({ bankNum: numberFormat.format(val) });
+        let v = e.target.value;
+        v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
     },
     blurBankNum(e) {
 
