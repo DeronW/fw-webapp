@@ -58,10 +58,10 @@ const HistoryBill = React.createClass({
             )
         };
 
-        let empty =
+        let empty = (
             <div className="no-data-box">
                 <img className="no-data-img" src="images/no-data.png" />
-            </div>;
+            </div>);
 
         let {rows, hasData} = this.state;
 
