@@ -10,11 +10,12 @@ const Detail = React.createClass({
         return (
             <div>
                 <div className="loan-num">
-                    <div className="loan-money">{this.props.data.loanAmount}</div>
+                    <div className={loanStatus ==2 || loanStatus ==3 ? "loan-money overdue-color" : "loan-money pay-back-color"}>{this.props.data.loanAmount}</div>
                     <div className="loan-money-title">应还总额(元)</div>
                     {loanStatus == 3 ? <div className="icon1"></div> : null}
                     {loanStatus == 2 ? <div className="icon2"></div> : null}
                     {loanStatus == 0 ? <div className="icon3"></div> : null}
+                    {loanStatus == 1 ? <div className="icon4"></div> : null}
                 </div>
                 <div className="loan-detail-box">
                     <div>
@@ -46,7 +47,8 @@ const Detail = React.createClass({
                         <span>{this.props.data.loanTimeStr}</span>
                     </div>
                 </div>
-                {loanStatus == 4 || loanStatus == 5 ? <div className="pay-back-btn" onClick={() => gotoHandler(`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${$FW.Store.getUserToken()}&userGid=${$FW.Store.getUserGid()}&userId=${$FW.Store.getUserId()}`)}>立即还款</div> : null}
+                {(loanStatus == 2 ||  loanStatus == 3) ? <div className="pay-back-btn" onClick={() => gotoHandler(`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${$FW.Store.getUserToken()}&userGid=${$FW.Store.getUserGid()}&userId=${$FW.Store.getUserId()}`)}>立即还款</div> : null}
+                {loanStatus == 1 ? <div className="pay-back-btn" onClick={() => gotoHandler(``)}>去确认</div> : null}
             </div>
         )
     }
