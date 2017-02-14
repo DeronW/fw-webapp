@@ -54,7 +54,7 @@ const UserAboutus = React.createClass({
         let li = (todo, index) => {
             return <div key={index} className="li">
                 <div className="title-li" onClick={() => this.handleList(index)}>
-                    <p className="text">{todo}</p>
+                    <div className="text">{todo}</div>
                     <span className={`icon ${this.state.selectWhich == index && "arrow-d"}`}></span>
                 </div>
                 {selectWhich === index && showDetail && detailText(index)}
@@ -64,7 +64,7 @@ const UserAboutus = React.createClass({
         let detailText = (index) => {
             return <div className="detail-text">
                 {DETAIL_TEXT[index].map((todo, index) =>
-                    <p key={index} className="text">{todo}</p>)}
+                    <div key={index} className="text">{todo}</div>)}
             </div>
         };
 
