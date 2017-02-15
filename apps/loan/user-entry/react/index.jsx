@@ -44,7 +44,7 @@ const Register = React.createClass({
             location.href = `/static/loan/user-set-password/index.html?codeToken=${data.codeToken}&phone=${phone}`;
         }, res => {
             if (res.code === 1029) {
-                localStorage.phone = phone;
+                $FW.Store.set('phone', phone);
                 location.href = `/static/loan/user-login/index.html?phone=${phone}`;
             } else {
                 $FW.Component.Alert(res.msg)

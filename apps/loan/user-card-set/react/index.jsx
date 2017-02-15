@@ -68,12 +68,14 @@ const SetCashCard = React.createClass({
     },
     blurBankNum(e) {
 
+        let user = $FW.Store.getUserDict();
+
         if (!space(this.state.bankNum).length > 19 || !space(this.state.bankNum).length < 16) {
             $FW.Post(`${API_PATH}api/bankcard/v1/cardinfo.json`, {
                 bankCardNo: space(this.state.bankNum),
-                token: localStorage.userToken,
-                userGid: localStorage.userGid,
-                userId: localStorage.userId,
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3
             }).then((data) => {
                 this.setState({
@@ -134,7 +136,7 @@ const SetCashCard = React.createClass({
                 cardType: cardType,
                 idCard: id,
                 mobile: phone,
-                operatorType: localStorage.userStatus,
+                operatorType: $FW.Store.get('userStatus'),
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,

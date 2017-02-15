@@ -46,6 +46,8 @@ const BankManagement = React.createClass({
             )
         }
 
+        let user = $FW.Store.getUserDict();
+
         return (
             <div>
                 <div className={this.props.userBankList.withdrawBankcard.length < 10 ? "bank-management-cnt margin-bottom1" : "bank-management-cnt margin-bottom2"}>
@@ -63,7 +65,7 @@ const BankManagement = React.createClass({
                     <div className="verify-pop">
                         <div className="verify-tip">您离成功借钱只差一步<br/>请先完成必填认证！</div>
                         <div className="verify-pop-close" onClick={this.closeHandler}></div>
-                        <a className="verify-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`}>去认证</a>
+                        <a className="verify-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`}>去认证</a>
                     </div>
                 </div>
             </div>

@@ -63,9 +63,13 @@ const Register = React.createClass({
                 verifyCode: code,
                 sourceType: 3
             }).then(data => {
-                localStorage.userGid = data.userLogin.userGid;
-                localStorage.userId = data.userLogin.userId;
-                localStorage.userToken = data.userLogin.userToken;
+                let dict = data.userLogin;
+                $FW.Store.setUserDict({
+                    token: dict.userToken,
+                    id: dict.userId,
+                    gid: dict.userGid
+                })
+
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.msg))
     },
@@ -76,7 +80,7 @@ const Register = React.createClass({
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
-                    已发送短信验证码到号码<span>{localStorage.phone}</span>
+                    已发送短信验证码到号码<span>{$FW.Store.get('phone')}</span>
                 </div>
 
                 <div className="ui-froms">

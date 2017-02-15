@@ -55,12 +55,13 @@ const MyCnt = React.createClass({
     },
     render() {
         let userStatus = this.state.baseinfoData.borrowBtnStatus;
+        let user = $FW.Store.getUserDict()
 
         let creditUrl = () => {
             if (userStatus == 1) {
                 return "/static/loan/user-card-set/index.html";
             } else if (userStatus >= 2) {
-                return `/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`
+                return `/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`
             }
         }
 
@@ -75,7 +76,7 @@ const MyCnt = React.createClass({
         return (
             <div className="my-cnt">
                 <div className="my-nav">
-                    <span className="text">{phoneMosaic(localStorage.phone)}</span>
+                    <span className="text">{phoneMosaic($FW.Store.get('phone'))}</span>
                 </div>
 
                 <div className="my-info">

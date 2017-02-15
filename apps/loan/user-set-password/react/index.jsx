@@ -70,14 +70,18 @@ const SetPassword = React.createClass({
         err ? $FW.Component.Toast(err) :
             $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
                 mobile: location.search.split('phone=')[1],
-                codeToken:this.state.codeToken,
+                codeToken: this.state.codeToken,
                 password: password,
                 verifyCode: code,
                 sourceType: 3
             }).then(data => {
-                localStorage.userGid = data.userLogin.userGid;
-                localStorage.userId = data.userLogin.userId;
-                localStorage.userToken = data.userLogin.userToken;
+                let dict = data.userLogin;
+                $FW.Store.setUserDict({
+                    token: dict.userToken,
+                    id: dict.userId,
+                    gid: dict.userGid
+                })
+
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message))
     },
@@ -88,7 +92,7 @@ const SetPassword = React.createClass({
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
-                    已发送短信验证码到号码<span>{localStorage.phone}</span>
+                    已发送短信验证码到号码<span>{$FW.Store.get('phone')}</span>
                 </div>
 
                 <div className="ui-froms">

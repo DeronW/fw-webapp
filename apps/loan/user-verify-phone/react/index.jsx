@@ -162,7 +162,7 @@ const VerifyPhone = React.createClass({
                 }
 
                 <div className="prompt-text">
-                    验证码已发送到尾号<span>{localStorage.phone}</span> 的手机上
+                    验证码已发送到尾号<span>{$FW.Store.get('phone')}</span> 的手机上
 				</div>
 
                 <div className="ui-froms">

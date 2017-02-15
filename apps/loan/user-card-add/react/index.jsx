@@ -156,7 +156,7 @@ const SetCashCard = React.createClass({
                     cardType: this.state.cardType,
                     //idCard: this.state.id,
                     mobile: this.state.phone,
-                    operatorType: localStorage.userStatus,
+                    operatorType: $FW.Store.get('userStatus'),
                     token: user.token,
                     userGid: user.gid,
                     userId: user.id,

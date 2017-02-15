@@ -227,7 +227,11 @@ const VerifyCode = React.createClass({
         });
     },
     render: function () {
-        let frequent_tip = this.state.show_warn ? (<div className="wrong-tip">{this.state.show_text}</div>) : null;
+        let frequent_tip = this.state.show_warn &&
+            <div className="wrong-tip">{this.state.show_text}</div>;
+
+        let phone = $FW.Store.get('phone');
+
         return (
             <div className="mask">
                 <div className="verify-popup">
@@ -235,13 +239,14 @@ const VerifyCode = React.createClass({
                         <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                         <div className="verify-popup-title">短信验证</div>
                         <div className="verify-popup-tip">
-                            已向尾号（{localStorage.phone.slice(-4)}）发送短信验证码。
+                            已向尾号（{phone.slice(-4)}）发送短信验证码。
                         </div>
                         <div className="verify-input">
-                            <input className="sms-input" type="number" name="number" value={this.state.value}
+                            <input className="sms-input" type="number" name="number"
+                                value={this.state.value}
                                 placeholder="输入验证码" onChange={this.changeValueHandler} />
-                            <span className="btn-countdown"
-                                onClick={this.getSMSCode}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
+                            <span className="btn-countdown" onClick={this.getSMSCode}>
+                                {this.state.remain > 0 ? `${this.state.remain}s` : '获取验证码'}</span>
                         </div>
                         {frequent_tip}
                         <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>

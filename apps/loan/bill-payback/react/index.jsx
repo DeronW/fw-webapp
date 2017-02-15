@@ -87,7 +87,7 @@ const PayBackWrap = React.createClass({
                     <VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid}
                         callbackCloseHanler={this.closeHandler}
                         repaymentAmount={this.state.repaymentAmount} /> : null}
-                {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount}/> : null}
+                {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount} /> : null}
             </div>
         )
     }
@@ -216,23 +216,19 @@ const VerifyCode = React.createClass({
         var query = $FW.Format.urlQuery();
         var loanGid = query.loanGid;
         this.tick();
-        $FW.Ajax({
-            url: `${API_PATH}api/repayment/v1/checksmsverifycode.json`,
-            method: "post",
-            enable_loading:"mini",
-            data: {
+        $FW.Post(
+            `${API_PATH}api/repayment/v1/checksmsverifycode.json`,
+            {
                 repaymentAmount: this.props.repaymentAmount,
                 loanGid: loanGid,
                 cardGid: this.props.cardGid,
-                token: localStorage.userToken,
-                userGid: localStorage.userGid,
-                userId: localStorage.userId,
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
                 sourceType: 3
-            }
         }).then(d => {
             this.setState({ phoneNum: d.mobile, orderGid: d.orderGid });
-        }, (error) => console.log(error)
-            )
+        }, e => $FW.Component.Toast(e.message))
     },
     changeValueHandler: function (e) {
         this.setState({ value: e.target.value });
@@ -249,17 +245,12 @@ const VerifyCode = React.createClass({
     getSMSCode: function () {
         if (this.state.remain <= 0) {
             this.tick();
-            $FW.Ajax({
-                url: `${API_PATH}api/repayment/v1/resendverifycode.json`,
-                method: "post",
-                enable_loading:"mini",
-                data: {
-                    token: localStorage.userToken,
-                    userGid: localStorage.userGid,
-                    userId: localStorage.userId,
+            $FW.Post( `${API_PATH}api/repayment/v1/resendverifycode.json`, {
+                    token: USER.token,
+                    userGid: USER.gid,
+                    userId: USER.id,
                     sourceType: 3,
                     orderGid: this.state.orderGid
-                }
             });
         }
     },
@@ -267,21 +258,16 @@ const VerifyCode = React.createClass({
         if(this.state.value==''){
             $FW.Component.Toast("请输入验证码");
         }else{
-            $FW.Ajax({
-                url: `${API_PATH}api/repayment/v1/do.json`,
-                method: "post",
-                enable_loading:"mini",
-                data: {
+            $FW.Post( `${API_PATH}api/repayment/v1/do.json`, {
                     orderGid: this.state.orderGid,
-                    token: localStorage.userToken,
-                    userGid: localStorage.userGid,
-                    userId: localStorage.userId,
+                    token: USER.token,
+                    userGid: USER.gid,
+                    userId: USER.id,
                     sourceType: 3,
                     verifyCode: this.state.value
-                }
-            }).then(d => {
-                    this.props.callbackResultShow(true, false);
-                }, (error) => $FW.Component.Toast(error)
+            }).then(
+            d => { this.props.callbackResultShow(true, false); },
+            e => $FW.Component.Toast(e.message)
             )
         }
     },
@@ -292,12 +278,13 @@ const VerifyCode = React.createClass({
                     <div className="verify-popup-wrap">
                         <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                         <div className="verify-popup-title">短信验证</div>
-                        <div className="verify-popup-tip"> 已向尾号（{localStorage.phone.slice(-4)}）发送短信验证码。</div>
+                        <div className="verify-popup-tip">
+                            已向尾号（{$FW.Store.get('phone').slice(-4)}）发送短信验证码。</div>
                         <div className="verify-input">
                             <input className="sms-input" type="number" name="number" value={this.state.value}
                                 placeholder="输入验证码" onChange={this.changeValueHandler} />
-                            <span className="btn-countdown"
-                                onClick={this.getSMSCode}>{this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
+                            <span className="btn-countdown" onClick={this.getSMSCode}>
+                                {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
                         <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
                     </div>
@@ -334,46 +321,48 @@ const PayBackResult = React.createClass({
                  <div className="tip-top">欢迎再次使用!</div>
                  <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum.toFixed(2)}</span>元</div>
                  </div>
-                {this.state.payback_fail ? <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div> : null}
-                {this.state.payback_ing ? <div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div> : null}
-                <div className="credit-btn"
-                    onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>
+                {this.state.payback_fail &&
+                    <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>}
+                {this.state.payback_ing &&
+                    <div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div>}
+                <a className="credit-btn"
+                    href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>
                     提升额度
-                </div>
+                </a>
                 <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/home/index.html`)}>申请用钱</div>
             </div>
         )
     }
 });
 
+const USER = $FW.Store.getUserDict()
+
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"还款"} />, HEADER_NODE);
     var query = $FW.Format.urlQuery();
     var loanGid = query.loanGid;
     var loanType = query.loanType;
-    let user = $FW.Store.getUserDict();
+
     Promise.all([
         $FW.Ajax({
             url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
             method: "post",
-            enable_loading:"mini",
             data: {
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
                 sourceType: 3
             }
         }),
         $FW.Ajax({
             url: `${API_PATH}api/repayment/v1/loandetail.json`,
             method: "post",
-            enable_loading:"mini",
             data: {
                 loanGid: loanGid,
                 loanType: loanType,
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
                 sourceType: 3
             }
         })

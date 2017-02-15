@@ -34,11 +34,14 @@ const Register = React.createClass({
                 password: password,
                 sourceType: 3
             }).then(data => {
-                localStorage.userGid = data.userLogin.userGid;
-                localStorage.userId = data.userLogin.userId;
-                localStorage.userToken = data.userLogin.userToken;
-                localStorage.userStatus = data.userLogin.userStatus;
+                let dict = data.userLogin;
 
+                $FW.Store.setUserDict({
+                    token: dict.userToken,
+                    id: dict.userId,
+                    gid: dict.userGid,
+                    status: dict.userStatus
+                })
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message));
     },
