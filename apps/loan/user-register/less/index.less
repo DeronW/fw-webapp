@@ -1,0 +1,106 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+html{
+  background: #3a4a79 url(../images/regist-bg.jpg) no-repeat bottom center;
+  background-size: 100%;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+  color: #6195a4;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #6195a4;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #6195a4;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color: #6195a4;
+}
+#cnt {
+  height: 100%;
+
+  .register-box {
+    position: relative;
+    height: 100%;
+
+    .logo {
+      position: absolute;
+      top: 136px;
+      left: 256px;
+      text-align: center;
+      border-radius: 30px;
+      background-color: #fff;
+      width: 212px;
+      height: 212px;
+      img {
+        display: block;
+        margin: 26px auto 0;
+        vertical-align: middle;
+      }
+    }
+    .register-box-input {
+      padding:442px 70px 0;
+      .input-box{
+        position: relative;
+        border:1px solid #435a84;
+        border-radius:6px;
+        height:48px;
+        padding:12px 0 12px 62px;
+        margin:0 auto 30px;
+        background-color:#3d4d7b;
+        input{
+          display: block;
+          background-color: transparent;
+          border:none;
+          width:100%;
+          height:48px;
+          line-height:48px;
+          font-size:28px;
+          color:#6195a4;
+          color:#fff;
+          outline:none;
+        }
+      }
+      .phone-box{
+        background:url("../images/regist-phone.png") no-repeat 20px center;
+      }
+      .code-box{
+        background:url("../images/regist-code.png") no-repeat 18px center;
+        .get-code{
+          position: absolute;
+          right:17px;
+          top:0;
+          height:74px;
+          line-height:74px;
+          color:#6ba4f0;
+          font-size:28px;
+        }
+      }
+      .password-box{
+        background:url("../images/regist-psw.png") no-repeat 19px center;
+        .eye{
+          position: absolute;
+          right:17px;
+          top:0;
+          height:74px;
+          background:url("../images/eye-close.png") no-repeat right center;
+          width:50px;
+        }
+        .eye.on{
+          background:url("../images/eye-open.png") no-repeat right center;
+        }
+      }
+    }
+    .next-btn{
+      height:74px;
+      line-height:74px;
+      font-size:30px;
+      color:#fff;
+      text-align: center;
+      border-radius:6px;
+      background-color:#6ba4f0;
+    }
+  }
+}
