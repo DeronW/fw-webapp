@@ -95,8 +95,13 @@ const Header = React.createClass({
             }}>{this.props.sub_text}</a>
         }
 
+        var ua = navigator.userAgent;
         // 如果页面在app中打开, 则不显示网页的头部导航
-        if (navigator.userAgent.indexOf('EasyLoan888') >= 0) return null;
+        if (ua.indexOf('EasyLoan888') >= 0) return null;
+
+        // 如果在微信中打开, 除了个别页面外, 也不显示头部导航
+        let show_header_titles = [''];
+        if(ua.indexOf('MicroMessenger') >= 0 && show_header_titles.indexOf(title) < 0) return null;
 
         return (
             <div style={{ height: this.state.height + 'px' }}>
