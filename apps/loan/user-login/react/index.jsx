@@ -65,7 +65,7 @@ const Register = React.createClass({
                     <div className="from">
                         <div className="icon"></div>
                         <div className="input">
-                            <input type={plainCode ? "text" : "password"}
+                            <input type={plainCode ? "text" : "password"} value={this.state.password}
                                 placeholder="请输入登录密码" onChange={this.changePasswordHandler} />
                         </div>
 
