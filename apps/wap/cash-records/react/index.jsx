@@ -147,19 +147,5 @@ const CashRecords = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={'提现记录'}/>, HEADER_NODE);
-    ReactDOM.render(<CashRecords />, document.getElementById("cnt"));
-
-    document.body.onscroll = function () {
-        // var titles = document.querySelectorAll('.month-title');
-
-        // for (var i = 0; i < titles.length; i++) {
-        //     var e = titles[i];
-        //     if (e.offsetTop - document.body.scrollTop < 120) {
-        //         e.className = 'month-title title-fixed';
-        //     } else {
-        //         e.className = 'month-title';
-        //         break;
-        //     }
-        // }
-    }
+    ReactDOM.render(<CashRecords />, CONTENT_NODE);
 });
