@@ -49,11 +49,9 @@ const SetCashCard = React.createClass({
         }
     },
     changeName(e) {
-        let val = e.target.value;
-
-        this.setState({
-            name: space(val)
-        });
+        let v = e.target.value;
+        v.replace(/[0-9a-zA-Z]/g, '');
+        v.length < 21 && this.setState({ name: space(v) });
     },
     changeId(e) {
         let val = e.target.value;
