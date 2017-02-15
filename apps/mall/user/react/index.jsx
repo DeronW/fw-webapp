@@ -54,7 +54,7 @@ const User = React.createClass({
                        href={`/static/mall/user-setting/index.html?username=${data.username}&avatar=${data.avatar}`}>账户设置</a>
                 </div>
                 <div className="product-status">
-                    <a className="product-status-item" href="/static/mall/order-list/index.html#pay">
+                    <a className="product-status-item" href="/static/mall/order-list/index.html#unPay">
                         <img src="images/icon1.jpg"/>
                         <span className="status-name">待付款</span>
                         <span className="remind-circle">{data.voucher_count}</span>

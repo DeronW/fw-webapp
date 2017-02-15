@@ -50,6 +50,7 @@ const DEVELOPING_PAGES = [
     'user-verify-phone',
     'weixin-download',
     'weixin-invite',
+    'weixin-attention'
 ]
 
 APP_NAMES.push(

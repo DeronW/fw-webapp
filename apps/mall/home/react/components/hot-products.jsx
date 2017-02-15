@@ -13,8 +13,10 @@ const HotProducts = React.createClass({
                     <span
                         className={"hot-img-title hot-img-title-color-" + parseInt(index + 1)}>{product.abbreviation}</span>
                     <span
-                        className="hot-img-price">{product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice}
-                        {product.score == 0 ? null : "+" + product.score + "工分"}
+                        className="hot-img-price">
+                        {product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice}
+                        {product.rmbPrice == 0  &&  product.score == 0 ? "" : "+"}
+                        {product.score == 0 ? null : `${product.score}工分`}
                     </span>
                 </a>
             )
