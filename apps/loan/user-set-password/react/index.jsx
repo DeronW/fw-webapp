@@ -58,7 +58,7 @@ const SetPassword = React.createClass({
         this.setState({ plainCode: !this.state.plainCode });
     },
     handleRegisterBtn() {
-        let err, {password, code, checked} = this.state;
+        let err, {password, code, checked, codeToken} = this.state;
 
         if (code == '') err = "验证码不能为空";
         if (password == '') err = "密码不能为空";
@@ -66,6 +66,7 @@ const SetPassword = React.createClass({
         if (password.length > 16) err = "密码不能多于16位";
         if (!istrue(password)) err = "必须是字母及数字组合密码";
         if (!checked) err = "请同意放心花注册协议";
+        if(codeToken == '') err="Token值不完整，无法注册";
 
         err ? $FW.Component.Toast(err) :
             $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
