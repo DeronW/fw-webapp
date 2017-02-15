@@ -16,7 +16,7 @@ const Register = React.createClass({
     },
     changePasswordHandler(e) {
         let v = e.target.value;
-        v.length < 19 && this.setState({ password: v });
+        v.length < 17 && this.setState({ password: v });
     },
     handlePlainCode() {
         this.setState({ plainCode: !this.state.plainCode });
