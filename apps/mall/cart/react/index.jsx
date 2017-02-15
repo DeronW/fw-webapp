@@ -165,8 +165,8 @@ const ShoppingCart = React.createClass({
         let total_price = 0;
         let total_score = 0;
         let total = (product, index) => {
-            product.cartStatus == 0 ? total_price += product.subTotalPrice * product.productNumber : total_price;
-            product.cartStatus == 0 ? total_score += product.subTotalCredit * product.productNumber : total_score;
+            product.cartStatus == 0 ? total_price += product.singleRmbPrice * product.productNumber : total_price;
+            product.cartStatus == 0 ? total_score += product.singleCredit * product.productNumber : total_score;
         };
         this.state.products.map((product, index) => total(product, index));
 

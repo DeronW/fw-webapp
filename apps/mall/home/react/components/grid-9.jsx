@@ -30,7 +30,8 @@ const Grid_9 = React.createClass({
                             <span
                                 className="theme2-btm-product-price">
                                 {product.rmbPrice == 0 ? null : `¥${product.rmbPrice}`}
-                                {product.score == 0 ? null : `+${product.score}工分`}
+                                {product.rmbPrice == 0  &&  product.score == 0 ? "" : "+"}
+                                {product.score == 0 ? null : `${product.score}工分`}
                             </span>
                         </div>
                     </div>

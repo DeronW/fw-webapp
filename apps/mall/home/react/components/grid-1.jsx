@@ -16,7 +16,8 @@ const Grid_1 = React.createClass({
                         {product.abbreviation}</div>
                     <div className="theme2-top-product-price">
                         {product.rmbPrice == 0 ? null : `¥${product.rmbPrice}`}
-                        {product.score == 0 ? null : `+${product.score}工分`}
+                        {product.rmbPrice == 0  &&  product.score == 0 ? "" : "+"}
+                        {product.score == 0 ? null : `${product.score}工分`}
                     </div>
                     <img className="product-img2" src={product.img}/>
                 </a>
@@ -32,7 +33,8 @@ const Grid_1 = React.createClass({
                         <div className="theme2-btm-product-info">
                             <span className="theme2-btm-product-title">{product.abbreviation}</span>
                             <span className="theme2-btm-product-price">
-                                {product.rmbPrice == 0 ? null : `¥${product.rmbPrice}+`}
+                                {product.rmbPrice == 0 ? null : `¥${product.rmbPrice}`}
+                                {product.rmbPrice == 0  &&  product.score == 0 ? "" : "+"}
                                 {product.score}工分</span>
                         </div>
                     </div>
