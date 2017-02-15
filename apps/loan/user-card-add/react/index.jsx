@@ -129,6 +129,7 @@ const SetCashCard = React.createClass({
         });
     },
     handlerNext() {
+        let user = $FW.Store.getUserDict();
         if (this.state.bankNum == '') {
             $FW.Component.Toast("储蓄卡不能为空");
         } else if (space(this.state.bankNum).length > 19 || space(this.state.bankNum).length < 16) {
@@ -210,7 +211,7 @@ const SetCashCard = React.createClass({
                     <span className={"icon " + (this.state.selectClause ? "select-icon" : "icon")} onClick={this.handlerClause}></span>
                     <span className="text">
                         同意
-						<span onClick={this.handlerWithholdServer}>《代扣服务协议》</span>
+						<a href={`/static/loan/protocol-cost/index.html`}>《代扣服务协议》</a>
                     </span>
                 </div>
 
