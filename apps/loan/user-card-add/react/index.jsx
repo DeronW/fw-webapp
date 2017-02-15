@@ -105,10 +105,8 @@ const SetCashCard = React.createClass({
             $FW.Component.Toast(err) :
             $FW.Post(`${API_PATH}api/bankcard/v1/commitinfo.json`, {
                 bankName: this.state.bankName,
-                //cardHolderName: this.state.name,
                 cardNo: space(bankNum),
                 cardType: cardType,
-                //idCard: this.state.id,
                 mobile: phone,
                 operatorType: $FW.Store.get('userStatus'),
                 token: user.token,
@@ -116,8 +114,8 @@ const SetCashCard = React.createClass({
                 userId: user.id,
                 sourceType: 3
             }).then((data) => {
-                let {bankCardGid, operatorBankcardGid} = data.bindBankInfo;
-                // window.location.href = `/static/loan/user-verify-phone/index.html?bankCardGid=${bankCardGid}&operatorBankcardGid=${operatorBankcardGid}`;
+                let {gid} = data.bindBankInfo;
+                window.location.href = `/static/loan/user-verify-phone/index.html?operatorBankcardGid=${gid}`;
             });
     },
     render() {

@@ -29,82 +29,49 @@ const VerifyPhone = React.createClass({
         });
 
         this.time = setInterval(() => {
-            this.setState({
-                countdown: this.state.countdown - 1
-            });
-
+            this.setState({ countdown: this.state.countdown - 1 });
             if (this.state.countdown == 0) {
                 clearInterval(this.time);
-
-                this.setState({
-                    countdownShow: false
-                });
-
+                this.setState({ countdownShow: false });
             }
         }, 1000)
     },
     changeCode(e) {
         if (verificationNum(e.target.value)) {
             if (space(e.target.value).length < 5) {
-                this.setState({
-                    codeVal: space(e.target.value)
-                });
+                this.setState({ codeVal: space(e.target.value) });
             }
         }
     },
     handleGetCode() {
-        let user = $FW.Store.getUserDict();
         this.getCode();
 
-        $FW.Ajax({
-            url: `${API_PATH}api/bankcard/v1/resendverifycode.json`,
-            method: "POST",
-
-            data: {
-                operatorBankcardGid: location.search.split("operatorBankcardGid=")[1],
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
-                sourceType: 3
-            }
-        }).then((data) => {
-
-        }, (error) => {
-
-        });
-
+        $FW.Post(`${API_PATH}api/bankcard/v1/resendverifycode.json`, {
+            operatorBankcardGid: BANK_GID,
+            token: USER.token,
+            userGid: USER.gid,
+            userId: USER.id,
+            sourceType: 3
+        }).then(null, e => $FW.Component.Toast(e.message));
     },
     definiteBtn() {
         if (this.state.codeVal.length < 4) {
             $FW.Component.Toast("验证码不能小于4位");
         } else {
-            $FW.Ajax({
-                url: `${API_PATH}api/bankcard/v1/commitverifycode.json`,
-                method: "POST",
-                enable_loading: "mini",
-                data: {
-                    operatorBankcardGid: location.search.split("operatorBankcardGid=")[1],
-                    token: user.token,
-                    userGid: user.gid,
-                    userId: user.id,
-                    verifyCode: this.state.codeVal,
-                    sourceType: 3
-                }
+            $FW.Post(`${API_PATH}api/bankcard/v1/commitverifycode.json`, {
+                operatorBankcardGid: BANK_GID,
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
+                verifyCode: this.state.codeVal,
+                sourceType: 3
             }).then((data) => {
-                let operatorBankcardGid = location.search.split("operatorBankcardGid=")[1];
-                //window.location.href = `/static/loan/user-bank-management/index.html?operatorBankcardGid=${operatorBankcardGid}`;
-
-                $FW.Ajax({
-                    url: `${API_PATH}api/bankcard/v1/status.json`,
-                    method: "POST",
-                    enable_loading: "mini",
-                    data: {
-                        operatorBankcardGid: operatorBankcardGid,
-                        token: user.token,
-                        userGid: user.gid,
-                        userId: user.id,
-                        sourceType: 3
-                    }
+                $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
+                    operatorBankcardGid: BANK_GID,
+                    token: USER.token,
+                    userGid: USER.gid,
+                    userId: USER.id,
+                    sourceType: 3
                 }).then((data) => {
                     if (data.bindStatus.status == 0) {
                         $FW.Component.Toast("处理中");
@@ -119,27 +86,14 @@ const VerifyPhone = React.createClass({
                             popStatus: 2
                         });
                         $FW.Component.Toast(data.bindStatus.failReason);
-                        //window.history.back();
                     }
-
-
-                }, (error) => {
-
                 });
-
-            }, (error) => {
-
             });
         }
     },
     handlerBtn() {
-        this.setState({
-            popShow: false
-        });
-
-        if (this.state.popStatus == 2) {
-            window.history.back();
-        }
+        this.setState({ popShow: false });
+        if (this.state.popStatus === 2) window.history.back();
     },
     render() {
         let pop = () => {
@@ -157,10 +111,7 @@ const VerifyPhone = React.createClass({
 
         return (
             <div className="verify-phone-cnt">
-                {
-                    this.state.popShow ? pop() : null
-                }
-
+                {this.state.popShow && pop()}
                 <div className="prompt-text">
                     验证码已发送到尾号<span>{$FW.Store.get('phone')}</span> 的手机上
 				</div>
@@ -175,14 +126,14 @@ const VerifyPhone = React.createClass({
                         {
                             this.state.countdownShow ?
                                 <div className="get-code-btn c">{this.state.countdown}倒计时</div> :
-                                <div className="get-code-btn" onClick={() => this.handleGetCode()}>重新获取</div>
+                                <div className="get-code-btn" onClick={this.handleGetCode}>重新获取</div>
                         }
 
                     </div>
                 </div>
 
                 <div className="determine-btn">
-                    <div className="ui-btn" onClick={() => this.definiteBtn()}>确定</div>
+                    <div className="ui-btn" onClick={this.definiteBtn}>确定</div>
                 </div>
             </div>
         )
@@ -190,8 +141,10 @@ const VerifyPhone = React.createClass({
 });
 
 
-ReactDOM.render(<Header title={"验证手机号"} />, HEADER_NODE);
-ReactDOM.render(
-    <VerifyPhone />,
-    CONTENT_NODE
-);
+const USER = $FW.Store.getUserDict();
+const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid;
+
+$FW.DOMReady(() => {
+    ReactDOM.render(<Header title={"验证手机号"} />, HEADER_NODE);
+    ReactDOM.render(<VerifyPhone />, CONTENT_NODE);
+})
