@@ -46,6 +46,7 @@ var jsPost = function (action, values) {
 };
 
 $(function () {
+    alert(23)
     $.ajax({
         type: "GET",
         url: API_PATH+"mpwap/api/v1/user/level-info.shtml",
