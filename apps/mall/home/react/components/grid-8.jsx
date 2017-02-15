@@ -12,9 +12,12 @@ const Grid_8 = React.createClass({
                     <div className="theme3-top-product-wrap">
                         <div className="theme3-top-product-info">
                             <span
-                                className={"theme3-top-product-title theme3-top-product-title-color" + parseInt(index + 1)}>{product.abbreviation}</span>
+                                className={"theme3-top-product-title theme3-top-product-title-color" + parseInt(index + 1)}>
+                                {product.abbreviation}</span>
                             <span
-                                className="theme3-top-product-price">{product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice + "+"}
+                                className="theme3-top-product-price">
+                                {product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice}
+                                {product.rmbPrice == 0 || product.score == 0 ? "" : "+"}
                                 {product.score == 0 ? null : "+" + product.score + "工分"}
                             </span>
                             <span

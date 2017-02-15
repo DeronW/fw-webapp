@@ -15,7 +15,7 @@ const HotProducts = React.createClass({
                     <span
                         className="hot-img-price">
                         {product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice}
-                        {product.rmbPrice == 0  &&  product.score == 0 ? "" : "+"}
+                        {product.rmbPrice == 0  ||  product.score == 0 ? "" : "+"}
                         {product.score == 0 ? null : `${product.score}工分`}
                     </span>
                 </a>
