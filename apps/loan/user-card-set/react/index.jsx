@@ -50,15 +50,13 @@ const SetCashCard = React.createClass({
     },
     changeName(e) {
         let v = e.target.value;
-        v.replace(/[0-9a-zA-Z]/g, '');
+        v = v.replace(/[0-9a-z]/gi, '');
         v.length < 21 && this.setState({ name: space(v) });
     },
-    changeId(e) {
-        let val = e.target.value;
-
-        this.setState({
-            id: space(val)
-        });
+    changeIdHandler(e) {
+        let v = e.target.value;
+        v = v.replace(/[a-w|y|z]/gi, '');
+        v.length <= 18 && this.setState({ id: v });
     },
     changeBankNum(e) {
         let v = e.target.value;
@@ -164,7 +162,7 @@ const SetCashCard = React.createClass({
                     <div className="list">
                         <span className="text">身份证号</span>
                         <div className="input">
-                            <input onChange={this.changeId} value={this.state.Id}
+                            <input onChange={this.changeIdHandler} value={this.state.id}
                                 type="text" placeholder="请输入身份证号码" />
                         </div>
                     </div>
