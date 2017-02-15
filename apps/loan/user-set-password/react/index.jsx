@@ -70,6 +70,7 @@ const SetPassword = React.createClass({
         err ? $FW.Component.Toast(err) :
             $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
                 mobile: location.search.split('phone=')[1],
+                codeToken:this.state.codeToken,
                 password: password,
                 verifyCode: code,
                 sourceType: 3
