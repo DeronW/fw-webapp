@@ -47,7 +47,7 @@ const Register = React.createClass({
                 $FW.Store.set('phone', phone);
                 location.href = `/static/loan/user-login/index.html?phone=${phone}`;
             } else {
-                $FW.Component.Alert(res.msg)
+                $FW.Component.Toast(res.message)
             }
         })
 
