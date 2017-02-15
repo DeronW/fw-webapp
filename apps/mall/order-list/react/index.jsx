@@ -89,7 +89,7 @@ const OrderBlock = React.createClass({
         };
 
         $FW.Ajax({
-            data: this.FormData,
+            data: FormData,
             //url: `./order_to_account.json`,
             url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
             enable_loading: true,
@@ -249,7 +249,8 @@ const ConfAlert = React.createClass({
         $FW.Ajax({
             data: {
                 orderBizNo: this.state.orderNo,
-                orderGroupBizNo: this.state.groupNo
+                orderGroupBizNo: this.state.groupNo,
+                source: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2
             },
             //url: `./cancelOrder.json`,
             url: `${API_PATH}mall/api/cart/v1/cancelOrder.json`,
