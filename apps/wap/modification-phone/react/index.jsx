@@ -199,16 +199,13 @@ const ModificationPhone = React.createClass({
                 <div className="modification-phone-nav">
                     <img src={"images/nav-" + (this.state.next ? 2 : 1) + ".jpg"} />
                 </div>
-
                 <ModificationPhoneFrom callbackNext={this.getCallbackNext} />
             </div>
         )
     }
 })
 
-ReactDOM.render(
-    <Header title={"修改银行预留手机号"} sub_text={""} />,
-    HEADER_NODE
-);
-
-ReactDOM.render(<ModificationPhone />, document.getElementById("cnt"))
+$FW.DOMReady(() => {
+    ReactDOM.render(<Header title={"修改银行预留手机号"} sub_text={""} />, HEADER_NODE);
+    ReactDOM.render(<ModificationPhone />, CONTENT_NODE)
+})

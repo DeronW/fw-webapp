@@ -7,7 +7,7 @@ var TopNav = React.createClass({
             <div className="top-nav">
                 <div className="info">
                     <div className="back-btn" onClick={this.props.btnFun}>
-                        <img src="images/back.png"/>
+                        <img src="images/back.png" />
                     </div>
                     <div className="title">{this.props.title}</div>
                     <span className="r-text" onClick={this.skipHandler}>{this.props.btnText}</span>
@@ -18,7 +18,7 @@ var TopNav = React.createClass({
 });
 
 var Btn = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="btn-area">
                 <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>{this.props.btnText}</div>
@@ -28,7 +28,7 @@ var Btn = React.createClass({
 });
 
 var PromptBlock = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="ui-prompt">
                 <div className="img">
@@ -48,23 +48,23 @@ var PromptBlock = React.createClass({
 });
 
 var Body = React.createClass({
-    backBtnClick: function() {
+    backBtnClick: function () {
         window.history.back();
     },
-    btnHandler: function() {
+    btnHandler: function () {
         window.history.back();
     },
-    render: function() {
-        var text = function() {
+    render: function () {
+        var text = function () {
             return <span>
-                        请确认各项信息填写正确后，重新提交， 或联系客服：<span className="c">400-0322-988</span>
-                   </span>
+                请确认各项信息填写正确后，重新提交， 或联系客服：<span className="c">400-0322-988</span>
+            </span>
 
         };
 
         return (
             <div >
-                <TopNav title={"开户失败"} backBtn={true} btnFun={this.backBtnClick}/>
+                <TopNav title={"开户失败"} backBtn={true} btnFun={this.backBtnClick} />
 
                 <PromptBlock imgUrl={"images/fail-img.png"} title={"开户失败"} text={text()} />
 
@@ -74,7 +74,6 @@ var Body = React.createClass({
     }
 });
 
-ReactDOM.render(
-    <Body />,
-    document.getElementById("cnt")
-);
+$FW.DOMReady(() => {
+    ReactDOM.render(<Body />, CONTENT_NODE);
+})

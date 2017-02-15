@@ -1,5 +1,5 @@
 var Nav = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="nav-block">
                 <img src={this.props.imgUrl} />
@@ -9,20 +9,20 @@ var Nav = React.createClass({
 });
 
 var TopNav = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             backBtn: false
         }
     },
-    backBtnClick: function() {
+    backBtnClick: function () {
 
     },
-    render: function() {
+    render: function () {
         return (
             <div className="top-nav">
                 <div className="info">
                     {
-                        this.props.backBtn ? <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/></div> : null
+                        this.props.backBtn ? <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png" /></div> : null
                     }
 
                     <div className="title">{this.props.title}</div>
@@ -34,7 +34,7 @@ var TopNav = React.createClass({
 });
 
 var Btn = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="btn-area">
                 <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>{this.props.btnText}</div>
@@ -44,7 +44,7 @@ var Btn = React.createClass({
 });
 
 var PromptBlock = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="ui-prompt">
                 <div className="img">
@@ -65,12 +65,12 @@ var PromptBlock = React.createClass({
 
 //开户成功
 var AccountSucceedBody = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="">
                 <TopNav title={"开户成功"} btnText={"关闭"} />
 
-                <Nav imgUrl={"images/nav-2.png"}/>
+                <Nav imgUrl={"images/nav-2.png"} />
 
                 <PromptBlock imgUrl={"images/account-succeed.png"} title={"成功开通徽商银行存管账户"} text={"交易密码用于投标、提现等操作，为了您的 账户安全，资金操作前请先设置交易密码。"} />
 
@@ -79,7 +79,7 @@ var AccountSucceedBody = React.createClass({
         );
     }
 });
-ReactDOM.render(
-    <AccountSucceedBody />,
-    document.getElementById("cnt")
-);
+
+$FW.DOMReady(() => {
+    ReactDOM.render(<AccountSucceedBody />, CONTENT_NODE);
+})

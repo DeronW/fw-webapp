@@ -1,7 +1,7 @@
 var Pop = React.createClass({
     render: function () {
         return (
-            <div className="pop-body" style={{zIndex: 1000000}}>
+            <div className="pop-body" style={{ zIndex: 1000000 }}>
                 <div className="pop-back"></div>
                 <div className="pop-cnt">
                     <div className="pop-info">
@@ -54,7 +54,7 @@ var PromptBlock = React.createClass({
         return (
             <div className="ui-prompt">
                 <div className="img">
-                    <img src={this.props.imgUrl}/>
+                    <img src={this.props.imgUrl} />
                 </div>
                 <div className="title">
 
@@ -111,21 +111,21 @@ var AccountSucceedBody = React.createClass({
     render: function () {
         return (
             <div className="">
-                <TopNav title={"注册成功"} btnText={"关闭"} callbackPopShow={this.handlerPopShow}/>
+                <TopNav title={"注册成功"} btnText={"关闭"} callbackPopShow={this.handlerPopShow} />
 
                 <div className="nav-block">
-                    <img src="images/process.png"/>
+                    <img src="images/process.png" />
                 </div>
                 <PromptBlock imgUrl={"images/succeed-1.png"} title={"注册成功"}
-                             text={"元返现券已经转入您的账户中"}
-                             numberText={this.state.registResultData.resvalue}
-                    />
-                <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler}/>
+                    text={"元返现券已经转入您的账户中"}
+                    numberText={this.state.registResultData.resvalue}
+                />
+                <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler} />
 
                 {
                     this.state.popShow ? <Pop callbackCancelBtn={this.getCancelBtn}
-                                              callbackConfirmBtn={this.getConfirmBtn}
-                        /> : null
+                        callbackConfirmBtn={this.getConfirmBtn}
+                    /> : null
                 }
 
             </div>
@@ -133,5 +133,5 @@ var AccountSucceedBody = React.createClass({
     }
 });
 $FW.DOMReady(() => {
-    ReactDOM.render(<AccountSucceedBody />, document.getElementById("cnt"));
+    ReactDOM.render(<AccountSucceedBody />, CONTENT_NODE);
 });
