@@ -79,7 +79,7 @@ const SetPassword = React.createClass({
                 localStorage.userId = data.userLogin.userId;
                 localStorage.userToken = data.userLogin.userToken;
                 location.href = `/static/loan/home/index.html`;
-            }, e => $FW.Component.Toast(e.msg))
+            }, e => $FW.Component.Toast(e.message))
     },
     checkHandler() {
         this.setState({ checked: !this.state.checked });
