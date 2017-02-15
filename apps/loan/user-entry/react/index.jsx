@@ -78,6 +78,7 @@ const Register = React.createClass({
                             </div>
                             <div className="pwd-icon"> </div>
                         </div>
+                    <div className="form-border"></div>
                     </div>
                 </div>
 
