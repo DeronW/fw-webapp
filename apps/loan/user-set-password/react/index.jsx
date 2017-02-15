@@ -31,9 +31,10 @@ const SetPassword = React.createClass({
                 this.setState({ password: e.target.value });
         }
     },
+    componentDidMount() {
+        this.handleGetCode()
+    },
     handleGetCode() {
-        let _this = this;
-
         this.setState({
             codeBoolean: true,
             countdown: 60
@@ -47,7 +48,6 @@ const SetPassword = React.createClass({
 
         this.timer = setInterval(() => {
             this.setState({ countdown: this.state.countdown - 1 });
-
             if (this.state.countdown == 0) {
                 clearInterval(this.timer);
                 this.setState({ codeBoolean: false });
