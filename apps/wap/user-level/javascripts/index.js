@@ -3,7 +3,8 @@
     if (p.substr(0, 2) != '//') p = '//' + p;
     window.API_PATH = location.protocol + p;
 })();
-alert(window.outerWidth)
+
+
 function inApp() {
     return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
 }
@@ -45,7 +46,6 @@ var jsPost = function (action, values) {
 };
 
 $(function () {
-
     $.ajax({
         type: "GET",
         url: API_PATH+"mpwap/api/v1/user/level-info.shtml",
