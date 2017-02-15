@@ -2,7 +2,7 @@ var Nav = React.createClass({
     render: function () {
         return (
             <div className="nav-block">
-                <img src={this.props.imgUrl}/>
+                <img src={this.props.imgUrl} />
             </div>
         );
     }
@@ -63,7 +63,7 @@ var TopNav = React.createClass({
                 <div className="info">
                     {
                         this.props.backBtn ?
-                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/>
+                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png" />
                             </div> : null
                     }
 
@@ -270,11 +270,11 @@ var PswFrom = React.createClass({
                     <span className="icon id-icon"></span>
 
                     <div className="text-block">
-                        <input type="text" placeholder={userInfoData.isCompanyAgent ?  "输入企业信息" : "请输入身份证" }
-                               onChange={this.handlerOnChangeInputId}
-                               onBlur={this.blurOnChangeInputId}
-                               value={this.state.userId}
-                            />
+                        <input type="text" placeholder={userInfoData.isCompanyAgent ? "输入企业信息" : "请输入身份证"}
+                            onChange={this.handlerOnChangeInputId}
+                            onBlur={this.blurOnChangeInputId}
+                            value={this.state.userId}
+                        />
                     </div>
                 </div>
 
@@ -293,7 +293,7 @@ var PswFrom = React.createClass({
 
                 <div className="input-block code-block">
                     <span className="input">
-                        <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput}/>
+                        <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput} />
                     </span>
 
                     <span className="btn-code">
@@ -301,7 +301,7 @@ var PswFrom = React.createClass({
                             this.state.code ?
                                 <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
                                 <span className={this.state.codeClickable ? "btn" : "timing-text"}
-                                      onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
+                                    onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
                         }
                     </span>
                 </div>
@@ -386,14 +386,14 @@ var Body = React.createClass({
         return (
             <div>
                 <TopNav title={this.props.activity.openStatus < 4 ? "设置交易密码" : "验证身份"}
-                        backBtn={true}
-                        btnFun={this.backBtnClick}
-                        skipFun={this.handlerSkipBtn}
-                        btnText={"关闭"}
-                    />
+                    backBtn={true}
+                    btnFun={this.backBtnClick}
+                    skipFun={this.handlerSkipBtn}
+                    btnText={"关闭"}
+                />
 
                 {
-                    this.props.activity.openStatus < 4 ? <Nav imgUrl={"images/process-2.png"}/> : null
+                    this.props.activity.openStatus < 4 ? <Nav imgUrl={"images/process-2.png"} /> : null
                 }
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
@@ -401,22 +401,22 @@ var Body = React.createClass({
                     callbackPhoneCodePromptShow={this.getPhoneCodePromptShow}
                     callbackCardNo={this.getCardNo}
                     propsVoice={this.state.voice}
-                    />
+                />
 
                 <div className="phone-code-prompt">
                     {
                         this.state.phoneCodePromptShow ? <PhoneCodePrompt
                             getGetPorpsUserInfo={this.state.getAjaxUserInfo}
                             callbackVoice={this.getVoice}
-                            /> : null
+                        /> : null
                     }
 
                 </div>
 
-                <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword}/>
+                <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword} />
 
                 {
-                    this.state.popShow ? <Pop callbackCloseInfo={this.getCloseInfo}/> : null
+                    this.state.popShow ? <Pop callbackCloseInfo={this.getCloseInfo} /> : null
                 }
 
             </div>
@@ -424,13 +424,11 @@ var Body = React.createClass({
     }
 });
 
-
-$FW.Ajax({
-    url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
-    success: function (data) {
-        ReactDOM.render(
-            <Body activity={data}/>,
-            document.getElementById("cnt")
-        );
-    }
-});
+$FW.DOMReady(() => {
+    $FW.Ajax({
+        url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+        success: function (data) {
+            ReactDOM.render(<Body activity={data} />, CONTENT_NODE);
+        }
+    });
+})

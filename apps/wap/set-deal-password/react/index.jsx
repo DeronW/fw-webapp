@@ -4,7 +4,7 @@ var TopNav = React.createClass({
             <div className="top-nav">
                 <div className="info">
                     <div className="back-btn" onClick={this.props.btnFun}>
-                        <img src="images/back.png"/>
+                        <img src="images/back.png" />
                     </div>
                     <div className="title">{this.props.title}</div>
                     <span className="r-text" onClick={this.props.btnFun}>{this.props.btnText}</span>
@@ -56,10 +56,10 @@ var PswFrom = React.createClass({
         });
 
         this.interval = setInterval(function () {
-            this.setState({countdown: this.state.countdown - 1});
+            this.setState({ countdown: this.state.countdown - 1 });
             if (this.state.countdown == 0) {
                 clearInterval(this.interval);
-                this.setState({code: false});
+                this.setState({ code: false });
             }
         }.bind(this), 1000);
 
@@ -92,7 +92,7 @@ var PswFrom = React.createClass({
 
                 <div className="input-block code-block">
                     <span className="input">
-                        <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput}/>
+                        <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput} />
                     </span>
 
                     <span className="btn-code">
@@ -100,7 +100,7 @@ var PswFrom = React.createClass({
                             this.state.code ?
                                 <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
                                 <span className="btn"
-                                      onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
+                                    onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
                         }
                     </span>
                 </div>
@@ -134,34 +134,34 @@ var Body = React.createClass({
             idCardNo + "&validateCode=" + this.state.code;
     },
     getCallbackInputVal: function (val) {
-        this.setState({code: val});
+        this.setState({ code: val });
     },
     getPromptShow: function (booleanVal) {
-        this.setState({promptShow: booleanVal});
+        this.setState({ promptShow: booleanVal });
     },
     handlerVoice: function () {
-        this.setState({voice: +new Date()});
+        this.setState({ voice: +new Date() });
     },
     // getCountdownVal: function (val) {
     //     this.setState({callbackCountdownInfo: val});
     // },
     getCancelBtn: function () {
-        this.setState({popShow: false});
+        this.setState({ popShow: false });
     },
     getConfirmBtn: function () {
         window.location.href = location.protocol + "//m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
     },
     rightBtnFun: function () {
-        this.setState({popShow: true});
+        this.setState({ popShow: true });
     },
     render: function () {
 
         return (
             <div>
-                <TopNav title={"设置交易密码" } backBtn={true} btnText="关闭" btnFun={this.rightBtnFun}/>
+                <TopNav title={"设置交易密码"} backBtn={true} btnText="关闭" btnFun={this.rightBtnFun} />
 
                 <div className="nav-block">
-                    <img src="images/process-2.png"/>
+                    <img src="images/process-2.png" />
                 </div>
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
@@ -218,18 +218,13 @@ var Pop = React.createClass({
 });
 
 $FW.DOMReady(function () {
-
-
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {
             if (data.openStatus != 3) {
                 window.location.href = location.protocol + "//m.9888.cn/mpwap/top/index.do"
             } else {
-                ReactDOM.render(
-                    <Body activity={data}/>,
-                    document.getElementById("cnt")
-                );
+                ReactDOM.render(<Body activity={data} />, CONTENT_NODE);
             }
         }
     });

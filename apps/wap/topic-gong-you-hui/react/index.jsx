@@ -102,7 +102,7 @@ const WorkerBox = React.createClass({
                             })
                         }
                     </div>
-                    <a onClick={() => { this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615", true) } } className="moreBtn">了解更多现场情况</a>
+                    <a onClick={() => { this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5615", true) }} className="moreBtn">了解更多现场情况</a>
                 </div>
                 <div className="northEast">
                     <div className="northEastTitle">大连站、哈尔滨站——走进东北</div>
@@ -115,7 +115,8 @@ const WorkerBox = React.createClass({
                         }
                     </div>
                     <a onClick={() => {
-                        this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5923&extra=", true) } } className="moreBtn">了解更多现场情况
+                        this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5923&extra=", true)
+                    }} className="moreBtn">了解更多现场情况
                     </a>
                     <div className="northTitle">12月10日，工友汇”第三站走进童话的冰雪之城——哈尔滨。</div>
                     <div className="northImg">
@@ -126,7 +127,8 @@ const WorkerBox = React.createClass({
                         }
                     </div>
                     <a onClick={() => {
-                        this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5930&extra=", true) } } className="moreBtn">了解更多现场情况
+                        this.gotoHandle("http://bbs.9888.cn/forum.php?mod=viewthread&tid=5930&extra=", true)
+                    }} className="moreBtn">了解更多现场情况
                     </a>
                 </div>
                 <div className="aboutMe">
@@ -143,8 +145,5 @@ const WorkerBox = React.createClass({
     }
 });
 $FW.DOMReady(function () {
-    ReactDOM.render(
-        <WorkerBox />,
-        document.getElementById("cnt")
-    );
+    ReactDOM.render(<WorkerBox />, CONTENT_NODE);
 });

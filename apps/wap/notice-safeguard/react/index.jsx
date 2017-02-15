@@ -106,5 +106,5 @@ const NotSafeGuar = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<NotSafeGuar/>, document.getElementById("cnt"));
+    ReactDOM.render(<NotSafeGuar/>, CONTENT_NODE);
 });

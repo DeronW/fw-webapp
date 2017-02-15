@@ -13,7 +13,7 @@ var TopNav = React.createClass({
                 <div className="info">
                     {
                         this.props.backBtn ?
-                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/>
+                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png" />
                             </div> : null
                     }
 
@@ -43,7 +43,7 @@ var AllJournal = React.createClass({
                 </div>
                 <div className="r">
                     <span
-                        className={"money-text " +  (cnt.amount.substring(0, 1) !== "-" ? "" : "c-4db94f")}>{cnt.amount}</span>
+                        className={"money-text " + (cnt.amount.substring(0, 1) !== "-" ? "" : "c-4db94f")}>{cnt.amount}</span>
                 </div>
             </div>;
         };
@@ -71,10 +71,10 @@ var Body = React.createClass({
 
         return (
             <div className="">
-                <TopNav title={"徽商银行存管账户"} backBtn={true} btnFun={this.backBtnClick}/>
+                <TopNav title={"徽商银行存管账户"} backBtn={true} btnFun={this.backBtnClick} />
 
                 <AllJournal getAjaxResultList={this.props.activity}
-                    />
+                />
             </div>
         );
     }
@@ -86,11 +86,7 @@ $FW.DOMReady(function () {
         url: API_PATH + "mpwap/api/v1/getHSAccountInfoBill.shtml?page=1&pageSize=100",
         enable_loading: true,
         success: function (data) {
-            ReactDOM.render(
-                <Body activity={data}/>,
-                document.getElementById("cnt")
-            );
-
+            ReactDOM.render(<Body activity={data} />, CONTENT_NODE);
         }
     });
 

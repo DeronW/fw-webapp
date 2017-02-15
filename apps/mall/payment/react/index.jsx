@@ -11,7 +11,7 @@ const Payment = React.createClass({
         this.setState({index: arg});
     },
     componentDidMount: function () {
-        var m = 29;
+        var m = 14;
         var s = 59;
         setInterval(function () {
             document.getElementById("cutdown").innerHTML = (m + '分' + s + "秒内完成支付");
@@ -84,9 +84,25 @@ const Payment = React.createClass({
         var payMethods =
             data.map((n, index) => {
                 let accountNo = this.split(n.accountNo);
+
+                let r = n.bankName;
+                var b =
+                    r == "中国银行" ? "images/zg.png"
+                        : r == "工商银行" ? "images/gs.png"
+                        : r == "农业银行" ? "images/ny.png"
+                        : r == "建设银行" ? "images/js.png"
+                        : r == "平安银行" ? "images/pa.png"
+                        : r == "兴业银行" ? "images/xy.png"
+                        : r == "光大银行" ? "images/gd.png"
+                        : r == "浦发银行" ? "images/pf.png"
+                        : r == "华兴银行" ? "images/hx.png"
+                        : r == "北京银行" ? "images/bj.png"
+                        : r == "中信银行" ? "images/zx.png"
+                        : "images/gf.png";
+
                 return (
                     <div className="pay-item" onClick={this.payCheck.bind(this,index)}>
-                        <div className="pay-icon"><img src="images/bankpay.jpg"/></div>
+                        <div className="pay-icon"><img src={b}/></div>
                         <div className="pay-name">
                             <div className="pay-title">{n.bankName} &#12288;&#12288;尾号{accountNo}</div>
                             <div className="pay-subtitle">已绑定银行卡（支付服务由先锋金融提供）</div>

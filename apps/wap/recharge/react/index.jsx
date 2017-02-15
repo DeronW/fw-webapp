@@ -445,9 +445,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getRechargeInfo.shtml",
         success: function (data) {
-            window._Recharge = ReactDOM.render(<Recharge data={data} />,
-                document.getElementById("cnt"))
-
+            window._Recharge = ReactDOM.render(<Recharge data={data} />, CONTENT_NODE)
             fmOpt(data.sessionId);
         }
     })

@@ -16,13 +16,13 @@ var TopNav = React.createClass({
                 <div className="info">
                     {
                         this.props.backBtn ?
-                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/>
+                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png" />
                             </div> : null
                     }
 
                     <div className="title">{this.props.title}</div>
                     <span className="r-text" onClick={this.showHandler}>
-                        <img src="images/icon.png"/>
+                        <img src="images/icon.png" />
                     </span>
                 </div>
             </div>
@@ -49,7 +49,7 @@ var Cart = React.createClass({
         return (
             <div className="hui-bank-cart">
                 <div className="hui-shang-logo">
-                    <img src="images/hui-shang-logo.png"/>
+                    <img src="images/hui-shang-logo.png" />
                 </div>
 
                 <div className="bank-id">
@@ -128,7 +128,7 @@ var FundsFlow = React.createClass({
                 </div>
                 <div className="r">
                     <span
-                        className={"money-text " +  (cnt.amount.substring(0, 1) !== "-" ? "" : "c-4db94f")}>{cnt.amount}</span>
+                        className={"money-text " + (cnt.amount.substring(0, 1) !== "-" ? "" : "c-4db94f")}>{cnt.amount}</span>
                 </div>
             </div>;
         };
@@ -169,17 +169,17 @@ var Body = React.createClass({
         return (
             <div className="">
                 <TopNav title={"徽商银行存管账户"} backBtn={true}
-                        btnFun={this.backBtnClick}
-                        callbackPopShow={this.getPopShow}
-                    />
-                <Cart userHsAccountInfo={this.props.ajaxHsAccountInfo}/>
+                    btnFun={this.backBtnClick}
+                    callbackPopShow={this.getPopShow}
+                />
+                <Cart userHsAccountInfo={this.props.ajaxHsAccountInfo} />
 
-                <Earnings userIncome={this.props.ajaxHsAccountInfo}/>
+                <Earnings userIncome={this.props.ajaxHsAccountInfo} />
 
-                <FundsFlow userPageData={this.props.ajaxPageData} callbackIndex={this.props.callbackPage}/>
+                <FundsFlow userPageData={this.props.ajaxPageData} callbackIndex={this.props.callbackPage} />
 
                 {
-                    !this.state.popShow ? null : <Pop callbackPopShow={this.getPopShow}/>
+                    !this.state.popShow ? null : <Pop callbackPopShow={this.getPopShow} />
                 }
             </div>
         );
@@ -226,7 +226,7 @@ var AllPage = React.createClass({
                 callbackPage={this.page}
                 ajaxHsAccountInfo={userAjaxData.hsAccountInfo}
                 ajaxPageData={userAjaxData.pageData}
-                />,
+            />,
         ];
 
         return (
@@ -247,10 +247,7 @@ $FW.DOMReady(function () {
         url: API_PATH + "mpwap/api/v1/getHSAccountInfo.shtml",
         enable_loading: true,
         success: function (data) {
-            ReactDOM.render(
-                <AllPage activity={data}/>,
-                document.getElementById("cnt")
-            );
+            ReactDOM.render(<AllPage activity={data} />, CONTENT_NODE);
         }
     });
 

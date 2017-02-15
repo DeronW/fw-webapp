@@ -39,21 +39,8 @@
 {% endblock %}
 
 {% if !DEBUG %}
-<script type='text/javascript'>
-    var _vds = _vds || [];
-    window._vds = _vds;
-    (function () {
-        _vds.push(['setAccountId', 'af530885d23e3d7a']);
-        (function () {
-            var vds = document.createElement('script');
-            vds.type = 'text/javascript';
-            vds.async = true;
-            vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(vds, s);
-        })();
-    })();
-</script>
+{% include 'partial/growing-io.swig.html' with {key: 'af530885d23e3d7a'} %}
 {% endif %}
+
 </body>
 </html>
