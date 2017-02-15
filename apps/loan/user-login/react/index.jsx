@@ -72,6 +72,7 @@ const Register = React.createClass({
                         <div className="pwd-icon" onClick={this.handlePlainCode}>
                         </div>
                     </div>
+                    <div className="form-border"></div>
                 </div>
                 <div className="register-login-btn">
                     <div className="ui-btn" onClick={this.loadingBtn}>下一步</div>
