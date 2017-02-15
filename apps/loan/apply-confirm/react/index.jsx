@@ -169,13 +169,14 @@ const VerifyCode = React.createClass({
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
         this.tick();
+        let user = $FW.Store.getUserDict();
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/sendSmsverifycode.json`,
             method: "post",
             data: {
-                token: localStorage.userToken,
-                userGid: localStorage.userGid,
-                userId: localStorage.userId,
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3,
                 orderGid: orderGid
             }
@@ -184,15 +185,16 @@ const VerifyCode = React.createClass({
         }, (err) => $FW.Component.Toast(err));
     },
     getSMSCode: function () {
+        let user = $FW.Store.getUserDict();
         if (this.state.remain <= 0) {
             this.tick();
             $FW.Ajax({
                 url: `${API_PATH}api/loan/v1/resendverifycode.json`,
                 method: "post",
                 data: {
-                    token: localStorage.userToken,
-                    userGid: localStorage.userGid,
-                    userId: localStorage.userId,
+                    token: user.token,
+                    userGid: user.gid,
+                    userId: user.id,
                     sourceType: 3,
                     orderGid: this.state.orderGid
                 }
@@ -205,13 +207,14 @@ const VerifyCode = React.createClass({
     confirmBtnHandler: function () {
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
+        let user = $FW.Store.getUserDict();
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/do.json`,
             method: "post",
             data: {
-                token: localStorage.userToken,
-                userGid: localStorage.userGid,
-                userId: localStorage.userId,
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3,
                 orderGid: orderGid,
                 verifyCode: this.state.value,
@@ -290,6 +293,7 @@ const LoanResult = React.createClass({
         this.setState({ successResultShow: true });
     },
     render: function () {
+        let user = $FW.Store.getUserDict();
         return (
             <div className="loan-result">
                 <div className="header">
@@ -356,7 +360,7 @@ const LoanResult = React.createClass({
                                     href="tel:400-102-0066">400-102-0066</a></div>
                             </div>
                         </div>
-                        <div className="credit-btn" onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=2&token=${localStorage.userToken}&userId=${localStorage.userId}`)}>去提额</div>
+                        <div className="credit-btn" onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`)}>去提额</div>
                     </div>
                     <div className={this.state.failResultShow ? "fail-result-box" : "fail-result-box dis"}>
                         <div className="wrap-box">
@@ -392,16 +396,16 @@ $FW.DOMReady(function () {
     let loanNum = query.loanNum;
     let orioleOrderGid = query.orioleOrderGid;
     let withdrawCardGid = query.withdrawCardGid;
-
+    let user = $FW.Store.getUserDict();
     Promise.all([
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/tryLoanBudget.json`,
             method: "post",
             enable_loading: "mini",
             data: {
-                token: $FW.Store.getUserToken(),
-                userGid: $FW.Store.getUserGid(),
-                userId: $FW.Store.getUserId(),
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3,
                 orioleOrderGid: orioleOrderGid,
                 loanAmount: loanNum
@@ -411,16 +415,21 @@ $FW.DOMReady(function () {
             url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
             method: "post",
             enable_loading: "mini",
-            data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3 }
+            data: {
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
+                sourceType: 3
+            }
         }),
         $FW.Ajax({
             url: `${API_PATH}api/repayment/v1/latedescription.json`,
             method: "post",
             enable_loading: "mini",
             data: {
-                token: $FW.Store.getUserToken(),
-                userGid: $FW.Store.getUserGid(),
-                userId: $FW.Store.getUserId(),
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3
             }
         })

@@ -58,11 +58,18 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"详情"} />, HEADER_NODE);
     let query = $FW.Format.urlQuery();
     let loanGid = query.loanGid;
+    let user = $FW.Store.getUserDict();
     $FW.Ajax({
         url: `${API_PATH}api/repayment/v1/loandetail.json`,
         method: "post",
         enable_loading: "mini",
-        data: { token: $FW.Store.getUserToken(), userGid: $FW.Store.getUserGid(), userId: $FW.Store.getUserId(), sourceType: 3, loanGid: loanGid }
+        data: {
+            token: user.token,
+            userGid: user.gid,
+            userId: user.id,
+            sourceType: 3,
+            loanGid: loanGid
+        }
     }).then((data) => {
         ReactDOM.render(<Detail data={data} />, CONTENT_NODE);
     });

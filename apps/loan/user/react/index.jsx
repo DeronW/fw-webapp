@@ -21,15 +21,16 @@ const MyCnt = React.createClass({
         }
     },
     componentDidMount() {
+        let user = $FW.Store.getUserDict();
         Promise.all([
             $FW.Ajax({
                 url: API_PATH + "api/oriole/v1/indexloadpage.json",
                 method: "POST",
                 enable_loading: "mini",
                 data: {
-                    token: localStorage.userToken,
-                    userGid: localStorage.userGid,
-                    userId: localStorage.userId,
+                    token: user.token,
+                    userGid: user.gid,
+                    userId: user.id,
                     sourceType: 3
                 }
             }),
@@ -38,9 +39,9 @@ const MyCnt = React.createClass({
                 method: "POST",
                 enable_loading: "mini",
                 data: {
-                    token: localStorage.userToken,
-                    userGid: localStorage.userGid,
-                    userId: localStorage.userId,
+                    token: user.token,
+                    userGid: user.gid,
+                    userId: user.id,
                     productId: 1,
                     sourceType: 3
                 }

@@ -90,9 +90,9 @@ $FW.DOMReady(function () {
             url: `${API_PATH}/api/loan/v1/baseinfo.json`,
             method: "post",
             data: {
-                token: $FW.Store.getUserToken(),
-                userGid: $FW.Store.getUserGid(),
-                userId: $FW.Store.getUserId(),
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3,
                 productId:1
             }

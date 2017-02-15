@@ -351,15 +351,16 @@ $FW.DOMReady(function () {
     var query = $FW.Format.urlQuery();
     var loanGid = query.loanGid;
     var loanType = query.loanType;
+    let user = $FW.Store.getUserDict();
     Promise.all([
         $FW.Ajax({
             url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
             method: "post",
             enable_loading:"mini",
             data: {
-                token: $FW.Store.getUserToken(),
-                userGid: $FW.Store.getUserGid(),
-                userId: $FW.Store.getUserId(),
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3
             }
         }),
@@ -370,9 +371,9 @@ $FW.DOMReady(function () {
             data: {
                 loanGid: loanGid,
                 loanType: loanType,
-                token: $FW.Store.getUserToken(),
-                userGid: $FW.Store.getUserGid(),
-                userId: $FW.Store.getUserId(),
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3
             }
         })

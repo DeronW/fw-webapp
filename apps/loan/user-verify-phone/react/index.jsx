@@ -53,6 +53,7 @@ const VerifyPhone = React.createClass({
         }
     },
     handleGetCode() {
+        let user = $FW.Store.getUserDict();
         this.getCode();
 
         $FW.Ajax({
@@ -61,9 +62,9 @@ const VerifyPhone = React.createClass({
 
             data: {
                 operatorBankcardGid: location.search.split("operatorBankcardGid=")[1],
-                token: localStorage.userToken,
-                userGid: localStorage.userGid,
-                userId: localStorage.userId,
+                token: user.token,
+                userGid: user.gid,
+                userId: user.id,
                 sourceType: 3
             }
         }).then((data) => {
@@ -83,9 +84,9 @@ const VerifyPhone = React.createClass({
                 enable_loading: "mini",
                 data: {
                     operatorBankcardGid: location.search.split("operatorBankcardGid=")[1],
-                    token: localStorage.userToken,
-                    userGid: localStorage.userGid,
-                    userId: localStorage.userId,
+                    token: user.token,
+                    userGid: user.gid,
+                    userId: user.id,
                     verifyCode: this.state.codeVal,
                     sourceType: 3
                 }
@@ -99,9 +100,9 @@ const VerifyPhone = React.createClass({
                     enable_loading: "mini",
                     data: {
                         operatorBankcardGid: operatorBankcardGid,
-                        token: localStorage.userToken,
-                        userGid: localStorage.userGid,
-                        userId: localStorage.userId,
+                        token: user.token,
+                        userGid: user.gid,
+                        userId: user.id,
                         sourceType: 3
                     }
                 }).then((data) => {

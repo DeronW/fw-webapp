@@ -44,11 +44,11 @@ const WantLoan = React.createClass({
             return ele.isRealNameBindCard == true;
         }
         let filtered = cashBank.filter(isRealNameBindCard);
-
+        let user = $FW.Store.getUserDict();
         $FW.Post(`${API_PATH}api/loan/v1/apply.json`, {
-            token: $FW.Store.getUserToken(),
-            userGid: $FW.Store.getUserGid(),
-            userId: $FW.Store.getUserId(),
+            token: user.token,
+            userGid: user.gid,
+            userId: user.id,
             loanAmount: this.state.loanNum,
             orioleOrderGid: orioleOrderGid,
             productId: 1,
