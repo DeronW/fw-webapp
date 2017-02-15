@@ -21,8 +21,5 @@ $FW.DOMReady(function () {
     $("download-btn").addEventListener("click", function () {
         $("mask").style.display = "block";
     });
-    $("mask").addEventListener("click", function () {
-        $("mask").style.display = "none";
-    });
 
 });
