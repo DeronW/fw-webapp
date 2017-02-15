@@ -75,6 +75,19 @@ const Bill = React.createClass({
                     </div>
                     {this.state.billList.map(bill_item)}
                 </div>)}
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </div>
         )
     }

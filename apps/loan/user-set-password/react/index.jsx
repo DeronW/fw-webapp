@@ -12,13 +12,15 @@ function istrue(str) {
 
 const SetPassword = React.createClass({
     getInitialState() {
+        let query = $FW.Format.urlQuery();
+        let codeToken = query.codeToken;
         return {
             code: '',
             codeBoolean: false,
             password: '',
             countdown: 0,
             plainCode: false,
-            codeToken: '',
+            codeToken: codeToken,
             checked: false
         }
     },
@@ -38,11 +40,11 @@ const SetPassword = React.createClass({
             countdown: 60
         });
 
-        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
-            mobile: localStorage.phone,
-            userOperationType: 3,
-            sourceType: 3
-        }).then(data => this.setState({ codeToken: data.codeToken }))
+        // $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+        //     mobile: localStorage.phone,
+        //     userOperationType: 3,
+        //     sourceType: 3
+        // }).then(data => this.setState({ codeToken: data.codeToken }))
 
         this.timer = setInterval(() => {
             this.setState({ countdown: this.state.countdown - 1 });
