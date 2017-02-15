@@ -113,7 +113,7 @@ const VerifyPhone = React.createClass({
             <div className="verify-phone-cnt">
                 {this.state.popShow && pop()}
                 <div className="prompt-text">
-                    验证码已发送到尾号<span>{$FW.Store.get('phone')}</span> 的手机上
+                    验证码已发送到尾号<span>{PHONE}</span> 的手机上
 				</div>
 
                 <div className="ui-froms">
@@ -143,6 +143,7 @@ const VerifyPhone = React.createClass({
 
 const USER = $FW.Store.getUserDict();
 const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid;
+const PHONE = $FW.Format.urlQuery().phone;
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"验证手机号"} />, HEADER_NODE);
