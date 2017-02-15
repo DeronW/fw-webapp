@@ -41,7 +41,7 @@ const SetPassword = React.createClass({
         });
 
         $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
-            mobile: location.search.split('phone=')[1],
+            mobile:localStorage.phone,
             userOperationType: 3,
             sourceType: 3
         }).then(data => this.setState({ codeToken: data.codeToken }))
@@ -69,7 +69,7 @@ const SetPassword = React.createClass({
 
         err ? $FW.Component.Toast(err) :
             $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
-                mobile: location.search.split('phone=')[1],
+                mobile: localStorage.phone,
                 codeToken:this.state.codeToken,
                 password: password,
                 verifyCode: code,
