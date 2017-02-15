@@ -33,10 +33,8 @@ const Register = React.createClass({
         v.length < 5 && this.setState({ code: v });
     },
     changePsw(e) {
-        if (e.target.value.length <= 16) {
-            if (verificationNum(e.target.value))
-                this.setState({ password: e.target.value });
-        }
+        let v = e.target.value;
+        v.length <= 16 && verificationNum(v) && this.setState({ password: v });
     },
     countdownFun() {
         this.setState({

@@ -27,6 +27,10 @@ const Register = React.createClass({
         }
     },
 
+    clearHandler() {
+        this.setState({ phone: '' })
+    },
+
     handleGetCode() {
         let phone = this.state.phone;
 
@@ -70,7 +74,7 @@ const Register = React.createClass({
                                 <input type="number" value={this.state.phone}
                                     onChange={this.changeHandler}
                                     placeholder="请输入手机号进行注册登录" />
-                                <span className="clear-num"></span>
+                                <span className="clear-num" onClick={this.clearHandler}></span>
                             </div>
                             <div className="pwd-icon"> </div>
                         </div>
