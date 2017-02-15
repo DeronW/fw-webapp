@@ -40,6 +40,22 @@
 {% block extra_javascripts %}{% endblock %}
 {% endblock %}
 
+{% block force_reload %}
+<input id="_reload_flag_value" type="hidden" value="" />
+<script>
+(function(){
+    var t = new Date().getTime();
+    var f = document.getElementById('_reload_flag_value');
+    if(f.value.length === 0) {
+        f.value = t;
+    } else {
+        f.value = '';
+        location.reload();
+    }
+})();
+</script>
+{% endblock%}
+
 {% if !DEBUG %}
 <script type='text/javascript'>
     var _vds = _vds || [];
