@@ -14,8 +14,9 @@ const Register = React.createClass({
             plainCode: false
         }
     },
-    changePwd(e) {
-        this.setState({ password: e.target.value });
+    changePasswordHandler(e) {
+        let v = e.target.value;
+        v.length < 19 && this.setState({ password: v });
     },
     handlePlainCode() {
         this.setState({ plainCode: !this.state.plainCode });
@@ -65,7 +66,7 @@ const Register = React.createClass({
                         <div className="icon"></div>
                         <div className="input">
                             <input type={plainCode ? "text" : "password"}
-                                placeholder="请输入登录密码" onChange={this.changePwd} />
+                                placeholder="请输入登录密码" onChange={this.changePasswordHandler} />
                         </div>
 
                         <div className="pwd-icon" onClick={this.handlePlainCode}>

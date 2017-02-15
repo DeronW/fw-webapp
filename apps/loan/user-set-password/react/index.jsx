@@ -27,25 +27,28 @@ const SetPassword = React.createClass({
     changeCode(e) {
         this.setState({ code: e.target.value });
     },
-    changePsw(e) {
+    changePasswordHandler(e) {
         let v = e.target.value;
         v.length <= 16 && verificationNum(v) && this.setState({ password: v });
     },
     componentDidMount() {
-        this.handleGetCode()
+        this.countingDown();
     },
     handleGetCode() {
+
+        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+            mobile: localStorage.phone,
+            userOperationType: 3,
+            sourceType: 3
+        }).then(data => this.setState({ codeToken: data.codeToken }))
+
+        this.countingDown();
+    },
+    countingDown(){
         this.setState({
             codeBoolean: true,
             countdown: 60
         });
-
-        // $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
-        //     mobile: localStorage.phone,
-        //     userOperationType: 3,
-        //     sourceType: 3
-        // }).then(data => this.setState({ codeToken: data.codeToken }))
-
         this.timer = setInterval(() => {
             this.setState({ countdown: this.state.countdown - 1 });
             if (this.state.countdown == 0) {
@@ -90,6 +93,8 @@ const SetPassword = React.createClass({
         this.setState({ checked: !this.state.checked });
     },
     render() {
+        let {code} = this.state;
+
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
@@ -117,7 +122,7 @@ const SetPassword = React.createClass({
                             <input
                                 type={this.state.plainCode ? "text" : "password"}
                                 value={this.state.password}
-                                onChange={this.changePsw}
+                                onChange={this.changePasswordHandler}
                                 onBlur={this.blurPsw}
                                 placeholder="设置8-16位的字母及数字组合密码"
                             />
