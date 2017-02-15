@@ -147,9 +147,9 @@ const ShoppingCart = React.createClass({
                             <div className="product-info">
                                 <div className="product-name">{product.productName}</div>
                                 <div className="product-price">
-                                    {product.subTotalPrice == 0 ? "" : '¥' + product.subTotalPrice}
-                                    {product.subTotalPrice == 0 || product.subTotalCredit == 0 ? '' : '+'}
-                                    {product.subTotalCredit == 0 ? "" : product.subTotalCredit + '工分'}
+                                    {product.singleRmbPrice == 0 ? "" : '¥' + product.singleRmbPrice}
+                                    {product.singleRmbPrice == 0 || product.singleCredit == 0 ? '' : '+'}
+                                    {product.singleCredit == 0 ? "" : product.singleCredit + '工分'}
                                 </div>
                                 <div className="detail-num-change">
                                     <div className="minus" onClick={() => this.changeMinus(index)}></div>
