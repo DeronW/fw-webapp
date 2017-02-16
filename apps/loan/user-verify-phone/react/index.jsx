@@ -55,7 +55,7 @@ const VerifyPhone = React.createClass({
         }).then(null, e => $FW.Component.Toast(e.message));
     },
     definiteBtn() {
-        if (this.state.codeVal.length >= 4) return $FW.Component.Toast("验证码不能小于4位");
+        if (this.state.codeVal.length < 4) return $FW.Component.Toast("验证码不能小于4位");
 
         $FW.Post(`${API_PATH}api/bankcard/v1/commitverifycode.json`, {
             operatorBankcardGid: BANK_GID,
