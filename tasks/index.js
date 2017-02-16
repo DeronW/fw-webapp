@@ -55,6 +55,8 @@ module.exports = function (site_name, page_name, configs) {
         cdn_path = `cdn/${site_name}/${page_name}/`,
         CONFIG = Object.assign({
             debug: false,
+            // 新增编译环境, 有3种环境, development/testing/production
+            environment: process.env.ENV || 'development',
             cmd_prefix: '', // 通用指令前缀，比如 pack:
             api_path: '',
             cdn_prefix: '',
@@ -89,7 +91,8 @@ module.exports = function (site_name, page_name, configs) {
             build_path,
             CONFIG.html_engine, {
                 API_PATH: CONFIG.api_path,
-                DEBUG: CONFIG.debug
+                DEBUG: CONFIG.debug,
+                ENV: CONFIG.environment
             })
     }
 

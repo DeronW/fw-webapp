@@ -30,7 +30,7 @@
 
 {% block javascripts %}
 <script src="javascripts/lib.js"></script>
-{% if !DEBUG %}
+{% if ENV == 'production' %}
 {% include 'partial/expection-handler.swig.html' with
     {SENTRY_DSN: 'https://6598d6b107674705be86433412e78c3b@sentry.dougemall.com/4'} %}
 {% endif %}
@@ -38,7 +38,7 @@
 {% block extra_javascripts %}{% endblock %}
 {% endblock %}
 
-{% if !DEBUG %}
+{% if ENV == 'production' %}
 {% include 'partial/growing-io.swig.html' with {key: 'af530885d23e3d7a'} %}
 {% endif %}
 
