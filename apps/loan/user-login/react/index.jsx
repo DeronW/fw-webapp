@@ -13,7 +13,7 @@ function phoneMosaic(val) {
     if (val == undefined) {
         return '';
     } else {
-        return `${frontNum}***${lastNum}`
+        return `${frontNum}****${lastNum}`
     }
 
 }
