@@ -130,6 +130,7 @@ const Notice = React.createClass({
                 <div className="notice-pop">
                     <div className="notice-close"></div>
                     <div className="notice-title">逾期费用说明</div>
+                    <div className="close-icon" onClick={this.clickHandler}></div>
                     <div className="notice-content">
                         {this.props.content}
                     </div>
@@ -273,6 +274,7 @@ const ItemDetail = React.createClass({
             <div className="mask">
                 <div className="detail-pop">
                     <div className="close-icon" onClick={this.itemHideHandler}></div>
+                    <div className="notice-title">借款费用详情</div>
                     <div className="item-wrap">
                         {this.props.feeExtList.map(item_list)}
                     </div>
