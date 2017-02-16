@@ -11,7 +11,8 @@ const Recharge = React.createClass({
             login: this.props.is_login,
             phone: '',
             price: '',
-            operator: ''
+            operator: '',
+            stock: ''
         }
     },
     componentDidMount: function () {
@@ -58,7 +59,8 @@ const Recharge = React.createClass({
                 this.setState({
                     fee_pay_score: pay_score,
                     bizNo: data.defaultBizNo,
-                    product_fee: data.fee
+                    product_fee: data.fee,
+                    stock: data.inventory
                 })
             }.bind(this)
         });
@@ -83,7 +85,8 @@ const Recharge = React.createClass({
                 this.setState({
                     net_pay_score: pay_score,
                     bizNo: data.defaultBizNo,
-                    product_fee: data.fee
+                    product_fee: data.fee,
+                    stock: data.inventory
                 })
             }.bind(this)
         });
@@ -231,7 +234,7 @@ const Recharge = React.createClass({
                 </div>
                 {this.state.tab == 'net' ? <div className="recharge-tip">{RechargeTip}</div> : null}
                 <Recharge.ProductPanel products={this.state.product_fee} bizNo={this.state.bizNo}
-                                       setCheckedBizNo={this.setCheckedBizNo}/>
+                                       stock={this.state.stock}        setCheckedBizNo={this.setCheckedBizNo}/>
 
                 <div className="payment-wrap">
                     <div className="payment-way">支付方式<span>工分支付</span></div>
@@ -257,6 +260,7 @@ Recharge.ProductPanel = React.createClass({
 
         var _this = this;
         var bizNo = this.props.bizNo;
+        var stock = this.props.stock;
 
         function fee_card(data, index) {
             function check() {
@@ -272,9 +276,10 @@ Recharge.ProductPanel = React.createClass({
                     </span>;
 
             let class_name = bizNo == data.bizNo ? "value-box selected" : "value-box";
+            let class_stock = stock == 0 ? "value-num over" : "value-num";
 
             return <div className={class_name} key={index} onClick={check}>
-                <span className="value-num">
+                <span className={class_stock}>
                     {data.title}
                     <span className="value-unit">{data.unit}</span>
                 </span>
