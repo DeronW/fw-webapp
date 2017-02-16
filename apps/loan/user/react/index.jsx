@@ -127,6 +127,13 @@ const MyCnt = React.createClass({
 							</a>
 						</div>*/}
                         <div className="list-cnt">
+                            <a href="">
+                                <span className="icon invite-icon"></span>
+                                <span className="text">邀请好友</span>
+                                <span className="arrow-r-icon"></span>
+                            </a>
+                        </div>
+                        <div className="list-cnt">
                             <a href="/static/loan/user-settings/index.html">
                                 <span className="icon more-icon"></span>
                                 <span className="text">更多</span>

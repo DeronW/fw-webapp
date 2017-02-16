@@ -251,7 +251,11 @@ const VerifyCode = React.createClass({
                                 {this.state.remain > 0 ? `${this.state.remain}s` : '获取验证码'}</span>
                         </div>
                         {frequent_tip}
-                        <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
+                        <div className="btn-list">
+                            <div className="cancel-btn" onClick={this.closePopHandler}>取消</div>
+                            <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
+                        </div>
+
                     </div>
                 </div>
             </div>
