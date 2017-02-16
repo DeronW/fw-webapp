@@ -58,7 +58,7 @@ const Register = React.createClass({
                 </div>
                 <div className="logo"> <img src="images/logo.png" /> </div>
                 <div className="get-name-phone">
-                    <span className="phone-text">{PHONE}</span>欢迎登录放心花!
+                    亲爱的<span className="phone-text">{PHONE}</span>欢迎登录
 				</div>
 
                 <div className="from-cnt">
