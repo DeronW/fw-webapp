@@ -93,7 +93,7 @@ const Bill = React.createClass({
 const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(function () {
-    $FW.Ajax(`${API_PATH}api/oriole/v1/loanloadpage.json`, {
+    $FW.Post(`${API_PATH}api/oriole/v1/loanloadpage.json`, {
         token: USER.token,
         userGid: USER.gid,
         userId: USER.id,
