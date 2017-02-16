@@ -274,7 +274,7 @@ const ItemDetail = React.createClass({
             <div className="mask">
                 <div className="detail-pop">
                     <div className="close-icon" onClick={this.itemHideHandler}></div>
-                    <div className="notice-title">借款费用详情</div>
+                    <div className="item-title">借款费用详情</div>
                     <div className="item-wrap">
                         {this.props.feeExtList.map(item_list)}
                     </div>
