@@ -223,7 +223,7 @@ const Recharge = React.createClass({
                 <div className="phonenumber-wrap">
                     <span className="phone-icon"> </span>
                     <input type="number" className="phone-input"
-                           placeholder="请输入手机号" number="true"
+                           placeholder="请输入手机号"
                            value={this.state.phone}
                            onChange={this.phoneChangeHandler}/>
                     <span className="phone-operator">{this.getOperatorName()}</span>
