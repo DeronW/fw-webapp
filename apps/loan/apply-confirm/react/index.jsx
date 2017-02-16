@@ -52,7 +52,7 @@ const ConfirmLoanWrap = React.createClass({
                     feeExtList={this.props.feeExtList} /> : null}
                 {this.state.noticeShow ? <Notice content={this.props.latedescription} callbackNoticeHide={this.noticeHide} /> : null}
                 {this.state.verifyCodeShow ?
-                    <VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow} /> : null}
+                    <VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow} bankShortName={filtered[0].bankShortName} cardNo={filtered[0].cardNo}/> : null}
                 {this.state.loanResult ? <LoanResult callbackResultHide={this.resultHide} bankShortName={filtered[0].bankShortName} cardNo={filtered[0].cardNo} /> : null}
             </div>
         )
@@ -239,7 +239,8 @@ const VerifyCode = React.createClass({
                         <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                         <div className="verify-popup-title">短信验证</div>
                         <div className="verify-popup-tip">
-                            已向尾号（{phone.slice(-4)}）发送短信验证码。
+                            {/*已向尾号（{phone.slice(-4)}）发送短信验证码。*/}
+                            已向{this.props.bankShortName}({this.props.cardNo.slice(-4)})银行预留手机号发送短信验证码。
                         </div>
                         <div className="verify-input">
                             <input className="sms-input" type="number" name="number"

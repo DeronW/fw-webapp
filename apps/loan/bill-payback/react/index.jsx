@@ -86,7 +86,10 @@ const PayBackWrap = React.createClass({
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid}
                         callbackCloseHanler={this.closeHandler}
-                        repaymentAmount={this.state.repaymentAmount} /> : null}
+                        repaymentAmount={this.state.repaymentAmount}
+                        bankName={this.state.bankName}
+                        bankNo={this.state.bankNo}
+                    /> : null}
                 {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount} /> : null}
             </div>
         )
@@ -279,7 +282,9 @@ const VerifyCode = React.createClass({
                         <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                         <div className="verify-popup-title">短信验证</div>
                         <div className="verify-popup-tip">
-                            已向尾号（{$FW.Store.get('phone').slice(-4)}）发送短信验证码。</div>
+                            {/*已向尾号（{$FW.Store.get('phone').slice(-4)}）发送短信验证码。*/}
+                            已向{this.props.bankName}({this.props.bankNo.slice(-4)})银行预留手机号发送短信验证码。
+                        </div>
                         <div className="verify-input">
                             <input className="sms-input" type="number" name="number" value={this.state.value}
                                 placeholder="输入验证码" onChange={this.changeValueHandler} />
