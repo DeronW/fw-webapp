@@ -38,7 +38,6 @@ const Bill = React.createClass({
                     </a>
                     <div className="pay-back-btn-wrap"> {st} </div>
                 </div>
-
             )
         };
 
@@ -50,7 +49,8 @@ const Bill = React.createClass({
             <div>
                 <div className="header">
                     <div className="title">账单</div>
-                    <div className="history-bill" onClick={() => gotoHandler(`/static/loan/bill-history/index.html`)}>历史账单</div>
+                    <a className="history-bill" href='/static/loan/bill-history/index.html'>
+                        历史账单</a>
                 </div>
                 {this.props.data.loanList.length === 0 ? empty : (<div className="data-box">
                     <div className="transfer-box">
