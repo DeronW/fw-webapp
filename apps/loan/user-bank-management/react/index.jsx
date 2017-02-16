@@ -9,7 +9,7 @@ const BankManagement = React.createClass({
     },
     componentDidMount() {
         let borrowStatus = this.props.borrowBtnStatus;
-        if(borrowStatus != 5){
+        if(borrowStatus == 2){
             this.setState({popShow:true});
         }
         console.log(this.props.userBankList.withdrawBankcard.length)
