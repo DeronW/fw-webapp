@@ -6,7 +6,17 @@ function istrue(str) {
 
     return reg.test(str);
 }
+function phoneMosaic(val) {
+    let frontNum = val.slice(0, 3);
+    let lastNum = val.slice(val.length - 4, val.length);
 
+    if (val == undefined) {
+        return '';
+    } else {
+        return `${frontNum}***${lastNum}`
+    }
+
+}
 const Register = React.createClass({
     getInitialState() {
         return {
@@ -58,7 +68,7 @@ const Register = React.createClass({
                 </div>
                 <div className="logo"> <img src="images/logo.png" /> </div>
                 <div className="get-name-phone">
-                    亲爱的<span className="phone-text">{PHONE}</span>欢迎登录
+                    亲爱的<span className="phone-text">{phoneMosaic(PHONE)}</span>欢迎登录
 				</div>
 
                 <div className="from-cnt">
