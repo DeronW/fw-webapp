@@ -128,7 +128,7 @@ const Register = React.createClass({
                                onChange={this.passwordChange}/>
                         <div className={this.state.seeCode?"eye on":"eye"} onClick={this.seeCodeChange}></div>
                     </div>
-                    <div className="next-btn" onClick={this.nextStepHandler}>下一步</div>
+                    <div className="next-btn" onClick={this.nextStepHandler}>立即注册</div>
                 </div>
             </div>
         )
