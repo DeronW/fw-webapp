@@ -29,17 +29,17 @@ const VerifyPhone = React.createClass({
         });
 
         this.time = setInterval(() => {
-            this.setState({ countdown: this.state.countdown - 1 });
+            this.setState({countdown: this.state.countdown - 1});
             if (this.state.countdown == 0) {
                 clearInterval(this.time);
-                this.setState({ countdownShow: false });
+                this.setState({countdownShow: false});
             }
         }, 1000)
     },
     changeCode(e) {
         if (verificationNum(e.target.value)) {
             if (space(e.target.value).length < 5) {
-                this.setState({ codeVal: space(e.target.value) });
+                this.setState({codeVal: space(e.target.value)});
             }
         }
     },
@@ -55,49 +55,47 @@ const VerifyPhone = React.createClass({
         }).then(null, e => $FW.Component.Toast(e.message));
     },
     definiteBtn() {
-        if (this.state.codeVal.length < 4) {
-            $FW.Component.Toast("验证码不能小于4位");
-        } else {
-            $FW.Post(`${API_PATH}api/bankcard/v1/commitverifycode.json`, {
+        if (this.state.codeVal.length >= 4) return $FW.Component.Toast("验证码不能小于4位");
+
+        $FW.Post(`${API_PATH}api/bankcard/v1/commitverifycode.json`, {
+            operatorBankcardGid: BANK_GID,
+            token: USER.token,
+            userGid: USER.gid,
+            userId: USER.id,
+            verifyCode: this.state.codeVal,
+            sourceType: 3
+        }).then(()=> {
+            $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
                 operatorBankcardGid: BANK_GID,
                 token: USER.token,
                 userGid: USER.gid,
                 userId: USER.id,
-                verifyCode: this.state.codeVal,
                 sourceType: 3
-            }).then((data) => {
-                $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
-                    operatorBankcardGid: BANK_GID,
-                    token: USER.token,
-                    userGid: USER.gid,
-                    userId: USER.id,
-                    sourceType: 3
-                }).then((data) => {
-                    if (data.bindStatus.status == 0) {
-                        $FW.Component.Toast("处理中");
-                    } else if (data.bindStatus.status == 1) {
-                        window.location.href = `/static/loan/user-bank-management/index.html`;
-                    } else if (data.bindStatus.status == 2) {
-                        //失败
-                        this.setState({
-                            popShow: true,
-                            popText: data.bindStatus.failReason,
-                            popBtnText: "确定",
-                            popStatus: 2
-                        });
-                        $FW.Component.Toast(data.bindStatus.failReason);
-                    }
+            })
+        }, e => $FW.Component.Toast(e.message)).then((data)=> {
+            if (data.bindStatus.status == 0) {
+                $FW.Component.Toast("处理中");
+            } else if (data.bindStatus.status == 1) {
+                window.location.href = `/static/loan/user-bank-management/index.html`;
+            } else if (data.bindStatus.status == 2) {
+                //失败
+                this.setState({
+                    popShow: true,
+                    popText: data.bindStatus.failReason,
+                    popBtnText: "确定",
+                    popStatus: 2
                 });
-            });
-        }
+                $FW.Component.Toast(data.bindStatus.failReason);
+            }
+        });
     },
     handlerBtn() {
-        this.setState({ popShow: false });
+        this.setState({popShow: false});
         if (this.state.popStatus === 2) window.history.back();
     },
     render() {
         let pop = () => {
-            return <div className="pop" style={{ zIndex: 10000 }}>
+            return <div className="pop" style={{zIndex: 10000}}>
                 <div className="pop-cnt">
                     <div className="pop-info">
                         <div className="pop-text">{this.state.popText}</div>
@@ -114,13 +112,14 @@ const VerifyPhone = React.createClass({
                 {this.state.popShow && pop()}
                 <div className="prompt-text">
                     验证码已发送到尾号<span>{PHONE}</span> 的手机上
-				</div>
+                </div>
 
                 <div className="ui-froms">
                     <div className="list code-list">
                         <span className="text">验证码</span>
                         <div className="input">
-                            <input type="text" onChange={(e) => this.changeCode(e)} value={this.state.codeVal} placeholder="请输入验证码" />
+                            <input type="text" onChange={(e) => this.changeCode(e)} value={this.state.codeVal}
+                                   placeholder="请输入验证码"/>
                         </div>
 
                         {
@@ -146,6 +145,6 @@ const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid;
 const PHONE = $FW.Format.urlQuery().phone;
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={"验证手机号"} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"验证手机号"}/>, HEADER_NODE);
     ReactDOM.render(<VerifyPhone />, CONTENT_NODE);
 })
