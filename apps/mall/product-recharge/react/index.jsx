@@ -297,7 +297,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"充值中心"}/>, HEADER_NODE)
 
     $FW.Ajax({
-        url: API_PATH + 'api/v1/user-state.json',
+        url: API_PATH + 'mall/api/v1/user-state.json',
         enable_loading: 'mini',
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,

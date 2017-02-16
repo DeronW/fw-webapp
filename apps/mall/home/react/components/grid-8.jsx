@@ -16,9 +16,9 @@ const Grid_8 = React.createClass({
                                 {product.abbreviation}</span>
                             <span
                                 className="theme3-top-product-price">
-                                {product.rmbPrice == 0.00 ? null : "¥" + product.rmbPrice}
+                                {product.rmbPrice == 0 ? null : "¥" + product.rmbPrice}
                                 {product.rmbPrice == 0 || product.score == 0 ? "" : "+"}
-                                {product.score == 0 ? null : "+" + product.score + "工分"}
+                                {product.score == 0 ? null :  product.score + "工分"}
                             </span>
                             <span
                                 className={"product-purchase theme3-top-product-title-color" + parseInt(index + 1)}>点击抢购<span
