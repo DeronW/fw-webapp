@@ -24,34 +24,34 @@ const ResultPage = React.createClass({
         } else if (Filter.options.searchSourceType == 2) {
             this.setState({showExchangeBar: false});
             //if($FW.Format.urlQuery().productName){
-				//document.querySelector('.search-confirm').click()
-            	//this.loadMoreProductHandler();
+            //document.querySelector('.search-confirm').click()
+            //this.loadMoreProductHandler();
             //}
         } else {
             this.loadMoreProductHandler();
         }
         $FW.Event.touchBottom(this.loadMoreProductHandler);
 
-//      window.addEventListener('popstate', () => {
-//          function getUrlVars() {
-//              var newSearch = {};
-//              var hash = [];
-//              var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-//              for (var i = 0; i < hashes.length; i++) {
-//                  hash = hashes[i].split('=');
-//                  if (hash[0] == "page") {
-//                      newSearch[hash[0]] = 1;
-//                  } else {
-//                      newSearch[hash[0]] = hash[1];
-//                  }
-//              }
-//              return newSearch;
-//          }
-//
-//          Filter.search(getUrlVars(), (data)=> {
-//          	this.setState({products: data||[]})
-//          })
-//      });
+        //      window.addEventListener('popstate', () => {
+        //          function getUrlVars() {
+        //              var newSearch = {};
+        //              var hash = [];
+        //              var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        //              for (var i = 0; i < hashes.length; i++) {
+        //                  hash = hashes[i].split('=');
+        //                  if (hash[0] == "page") {
+        //                      newSearch[hash[0]] = 1;
+        //                  } else {
+        //                      newSearch[hash[0]] = hash[1];
+        //                  }
+        //              }
+        //              return newSearch;
+        //          }
+        //
+        //          Filter.search(getUrlVars(), (data)=> {
+        //          	this.setState({products: data||[]})
+        //          })
+        //      });
     },
     setMyConvertibleScore: function (num) {
         this.setState({myConvertibleScore: num});
@@ -64,7 +64,7 @@ const ResultPage = React.createClass({
     },
     loadMoreProductHandler: function (done) {
         this.state.hasData ?
-            Filter.search({page: this.state.page + 1}, (data)=> {
+            Filter.search({page: this.state.page + 1}, (data) => {
                 this.appendProducts(data);
                 this.setState({
                     page: this.state.page + 1,
@@ -75,7 +75,7 @@ const ResultPage = React.createClass({
     },
     filterProducts: function (options) {
         options.page = 1;
-        Filter.search(options, (data)=> {
+        Filter.search(options, (data) => {
             this.setState({products: []}, () => this.appendProducts(data))
             this.setState({
                 page: 1,
@@ -95,7 +95,7 @@ const ResultPage = React.createClass({
         this.setState({showExchangeBar: false});
     },
     render: function () {
-        let productsList = ()=> {
+        let productsList = () => {
             return (
                 <div className="products-list">
                     {this.state.products.length ? this.state.products.map((p, index) => <ProductItem
@@ -108,8 +108,8 @@ const ResultPage = React.createClass({
         return (
             <div>
                 {this.state.showSearch ? <SearchBar filterProducts={this.filterProducts}
-                                    searchFocus={this.searchFocus}
-                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
+                                                    searchFocus={this.searchFocus}
+                                                    setShowExchangeBar={this.setShowExchangeBar}/> : null}
                 <ResultPage.CategoryBanner filterProducts={this.filterProducts}/>
 
                 {this.state.showExchangeBar || this.state.showFilterBar ?
@@ -147,7 +147,7 @@ let Filter = {
     myConvertibleScore: 0,
     mix: function (opts) {
         for (var i in opts) {
-            if (typeof(Filter.options[i]) != 'undefined') {
+            if (typeof (Filter.options[i]) != 'undefined') {
                 Filter.options[i] = opts[i];
             }
         }
@@ -157,7 +157,7 @@ let Filter = {
         $FW.Ajax({
             url: API_PATH + 'mall/api/index/v1/search.json',
             data: Filter.options,
-            enable_loading: true,
+            enable_loading: 'mini',
             success: data => callback(data)
         });
     },
@@ -169,9 +169,9 @@ let Filter = {
         for (var i in Filter.options) {
             search.push(`${i}=${Filter.options[i]}`)
         }
-        if(!window.__push_flag) {
-        	window.__push_flag = true;
-	        history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
+        if (!window.__push_flag) {
+            window.__push_flag = true;
+            history.pushState({}, null, `${location.pathname}?${search.join('&')}`);
         }
     }
 };
@@ -181,13 +181,13 @@ $FW.DOMReady(function () {
     if (Filter.options.searchSourceType == 1) {
         title = '我可兑换';
     }
-   else if(Filter.options.searchSourceType == 2){
+    else if (Filter.options.searchSourceType == 2) {
         title = '豆哥周边';
     }
-   else if(Filter.options.searchSourceType == 3){
+    else if (Filter.options.searchSourceType == 3) {
         title = '工场券';
     }
-   else{
+    else {
         title = '商品列表';
     }
     //Filter.options.searchSourceType = Filter.options.searchSourceType || '';
@@ -197,10 +197,8 @@ $FW.DOMReady(function () {
     if (Filter.options.searchSourceType == 2) {
 
     } else {
-        NativeBridge.setTitle(title);
-        if ($FW.Utils.shouldShowHeader())
-            ReactDOM.render(<Header title={title}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={title}/>, HEADER_NODE);
     }
 
-    window._ResultPage = ReactDOM.render(<ResultPage/>, document.getElementById('cnt'));
+    window._ResultPage = ReactDOM.render(<ResultPage />, CONTENT_NODE);
 });

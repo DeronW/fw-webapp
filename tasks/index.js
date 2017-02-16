@@ -19,7 +19,7 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
         `${lib_path}request-animation-frame-0.0.23.js`,
         `${lib_path}promise-2.0.2.min.js`,
-        `${lib_path}fw-1.6.2.js`,
+        `${lib_path}fw-1.7.1.js`,
         `${lib_path}native-bridge-0.4.0.js`
     ];
 
@@ -55,6 +55,8 @@ module.exports = function (site_name, page_name, configs) {
         cdn_path = `cdn/${site_name}/${page_name}/`,
         CONFIG = Object.assign({
             debug: false,
+            // 新增编译环境, 有3种环境, development/testing/production
+            environment: process.env.ENV || 'development',
             cmd_prefix: '', // 通用指令前缀，比如 pack:
             api_path: '',
             cdn_prefix: '',
@@ -89,7 +91,8 @@ module.exports = function (site_name, page_name, configs) {
             build_path,
             CONFIG.html_engine, {
                 API_PATH: CONFIG.api_path,
-                DEBUG: CONFIG.debug
+                DEBUG: CONFIG.debug,
+                ENV: CONFIG.environment
             })
     }
 
@@ -106,7 +109,7 @@ module.exports = function (site_name, page_name, configs) {
     }
 
     function compile_javascripts() {
-        return javascripts([`${app_path}javascritps/*.js`], `${build_path}javascripts`, null, CONFIG.debug)
+        return javascripts([`${app_path}javascripts/*.js`], `${build_path}javascripts`, null, CONFIG.debug)
     }
 
     function copy_common_javascripts() {

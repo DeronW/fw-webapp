@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
-    {% include 'partial/fix-viewport.html' %}
+    {% if DEBUG %} {% include 'partial/fix-viewport.html' %} {% endif %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no"/>
     <meta name="screen-orientation" content="portrait">
@@ -24,28 +24,14 @@
 {% endblock %}
 
 <script src="javascripts/lib.js"></script>
-{% if !DEBUG %}
+{% if ENV == 'production' %}
 {% include 'partial/expection-handler.swig.html' with
-    {SENTRY_DSN: 'https://33bee169f49442d09c446018023d78b7@sentry.dougemall.com/2'} %}
+{SENTRY_DSN: 'https://33bee169f49442d09c446018023d78b7@sentry.dougemall.com/2'} %}
 {% endif %}
 <script src="javascripts/bundle.js"></script>
 
-{% if !DEBUG %}
-<script type='text/javascript'>
-    var _vds = _vds || [];
-    window._vds = _vds;
-    (function () {
-        _vds.push(['setAccountId', '94c306a7663c0ec1']);
-        (function () {
-            var vds = document.createElement('script');
-            vds.type = 'text/javascript';
-            vds.async = true;
-            vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(vds, s);
-        })();
-    })();
-</script>
+{% if ENV == 'production' %}
+{% include 'partial/growing-io.swig.html' with {key: '94c306a7663c0ec1'} %}
 {% endif %}
 </body>
 </html>

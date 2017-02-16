@@ -2,7 +2,7 @@ $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('年化佣金小贴士')
     } else {
-        ReactDOM.render(<Header title={'年化佣金小贴士'}/>, document.getElementById('header'))
+        ReactDOM.render(<Header title={'年化佣金小贴士'}/>, HEADER_NODE)
     }
 });
 

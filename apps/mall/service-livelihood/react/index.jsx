@@ -1,36 +1,48 @@
 const Service = React.createClass({
-    back_handler:function(){
+    back_handler: function () {
         location.href = '/static/mall/home/index.html';
     },
-    render: function(){
+    render: function () {
         return (
             <div>
                 <div className="banner-wrap">
-                    <div className="header"><a className="back-arrow" onClick={this.back_handler}></a><span className="big-title">生活服务</span><a className="record-link">缴费记录</a></div>
+                    <div className="header"><a className="back-arrow" onClick={this.back_handler}></a><span
+                        className="big-title">生活服务</span><a className="record-link">缴费记录</a></div>
                 </div>
                 <div className="charge-wrap">
                     <div className="water-charge">
                         <div className="water-item">
-                            <img className="icon-img" src="images/water-icon.png"/><span className="water-title">水费</span><a className="charge-link">缴费</a>
+                            <img className="icon-img" src="images/water-icon.png"/><span
+                            className="water-title">水费</span><a className="charge-link">缴费</a>
                         </div>
-                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span className="right-link-arrow"></span></a>
+                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span
+                            className="right-link-arrow"></span></a>
                     </div>
                     <div className="water-charge">
                         <div className="water-item">
-                            <img className="icon-img" src="images/gas-icon.png"/><span className="water-title">天然气</span><a className="charge-link">缴费</a>
+                            <img className="icon-img" src="images/gas-icon.png"/><span
+                            className="water-title">天然气</span><a className="charge-link">缴费</a>
                         </div>
-                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span className="right-link-arrow"></span></a>
-                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span className="right-link-arrow"></span></a>
-                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span className="right-link-arrow"></span></a>
+                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span
+                            className="right-link-arrow"></span></a>
+                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span
+                            className="right-link-arrow"></span></a>
+                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span
+                            className="right-link-arrow"></span></a>
                     </div>
                     <div className="water-charge">
                         <div className="water-item">
-                            <img className="icon-img" src="images/ele-icon.png"/><span className="water-title">电费</span><a className="charge-link">缴费</a>
+                            <img className="icon-img" src="images/ele-icon.png"/><span className="water-title">电费</span><a
+                            className="charge-link">缴费</a>
                         </div>
-                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span className="right-link-arrow"></span></a>
-                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span className="right-link-arrow"></span></a>
-                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span className="right-link-arrow"></span></a>
-                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span className="right-link-arrow"></span></a>
+                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span
+                            className="right-link-arrow"></span></a>
+                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span
+                            className="right-link-arrow"></span></a>
+                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span
+                            className="right-link-arrow"></span></a>
+                        <a className="charge-item"><span>北京朝阳丰联广场1105</span><span
+                            className="right-link-arrow"></span></a>
                     </div>
                 </div>
                 <div className="select-wrap" style={{textAlign:"center", marginTop:"-60px"}}>
@@ -54,7 +66,7 @@ const Service = React.createClass({
                      <input type="text" value="" placeholder="请输入客户编号"/>
                      </div>
                      </div>
-                    <a className="check-info-btn">查询</a>
+                     <a className="check-info-btn">查询</a>
                      */}
                 </div>
 
@@ -63,7 +75,8 @@ const Service = React.createClass({
     }
 });
 
-$FW.DOMReady(function() {
-    NativeBridge.setTitle('生活服务');
-    ReactDOM.render(<Service/>, document.getElementById('cnt'));
+$FW.DOMReady(function () {
+
+    ReactDOM.render(<Header title={"生活服务"}/>, HEADER_NODE);
+    ReactDOM.render(<Service/>, CONTENT_NODE);
 });

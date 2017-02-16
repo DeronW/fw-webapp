@@ -2,7 +2,7 @@ $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('新手福利');
     } else {
-        ReactDOM.render(<Header title={'玩赚攻略'}/>, document.getElementById('header'));
+        ReactDOM.render(<Header title={'玩赚攻略'}/>, HEADER_NODE);
     }
 
     if (!$FW.Browser.inIOS()) {

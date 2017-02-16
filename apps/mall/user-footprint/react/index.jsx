@@ -32,7 +32,7 @@ const FootPrint = React.createClass({
             },
             method: 'post',
             success: function () {
-                this.setState({ list: [] });
+                this.setState({list: []});
             }
         });
     },
@@ -47,18 +47,20 @@ const FootPrint = React.createClass({
             success: function () {
                 let list = this.state.list
                 list.splice(key, 1)
-                this.setState({ list: list });
+                this.setState({list: list});
             }
         });
     },
     render: function () {
         let myList = (list, key) => {
-            let date = key > 0 && (this.state.list[key - 1].date == list.date) ? null : <div className="footPrint-data">{this.state.list[key].date}</div>;
-            let price = list.price ? <span className="footPrint-price"><span>¥</span>{$FW.Format.currency(list.price)}</span> : null;
+            let date = key > 0 && (this.state.list[key - 1].date == list.date) ? null :
+                <div className="footPrint-data">{this.state.list[key].date}</div>;
+            let price = list.price ?
+                <span className="footPrint-price"><span>¥</span>{$FW.Format.currency(list.price)}</span> : null;
             let score = list.score ? <span className="footPrint-score">{list.score}工分</span> : null;
             let priceBox = () => {
                 return (
-                    <div className="footPrint-pay" >
+                    <div className="footPrint-pay">
                         {price}
                         {list.price && list.score ? <span className="footPrint-plus">+</span> : null}
                         {score}
@@ -70,7 +72,7 @@ const FootPrint = React.createClass({
                     {date}
                     <div className="footPrint-li">
                         <a href="#" className="footPrint-a">
-                            <img src={list.img} className="footPrint-img" />
+                            <img src={list.img} className="footPrint-img"/>
                             <div className="footPrint-detail">
                                 <div className="footPrint-title">{list.title}</div>
                                 {priceBox()}
@@ -93,6 +95,6 @@ const FootPrint = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"足迹"} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"足迹"}/>, HEADER_NODE);
     ReactDOM.render(<FootPrint />, CONTENT_NODE);
 });

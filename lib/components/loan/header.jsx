@@ -15,7 +15,7 @@ const Header = React.createClass({
         }
     },
     backClickHandler: function () {
-        this.props.back_handler ? this.props.back_handler() : window.history.back();
+        this.props.back_handler ? this.props.back_handler() : window.history.go(-1);
     },
     render: function () {
         let fontSize = '40px';
@@ -45,7 +45,7 @@ const Header = React.createClass({
             fontFamily: "serif",
             fontSize: fontSize,
             fontWeight: 'bold',
-            color: "#50ad9a",
+            color: "#6aa4f0",
             overflow: "hidden",
             left: "0px",
             top: "0px"
@@ -59,7 +59,7 @@ const Header = React.createClass({
             transform: "rotate(45deg)",
             top: "25px",
             left: "50px",
-            background: "#50ad9a"
+            background: "#6aa4f0"
         };
         let _style_header_arm_down = {
             position: "absolute",
@@ -69,7 +69,7 @@ const Header = React.createClass({
             transform: "rotate(135deg)",
             top: "45px",
             left: "50px",
-            background: '#50ad9a'
+            background: '#6aa4f0'
         };
 
         let title = this.state.title;
@@ -94,6 +94,14 @@ const Header = React.createClass({
                 top: '0'
             }}>{this.props.sub_text}</a>
         }
+
+        var ua = navigator.userAgent;
+        // 如果页面在app中打开, 则不显示网页的头部导航
+        if (ua.indexOf('EasyLoan888') >= 0) return null;
+
+        // 如果在微信中打开, 除了个别页面外, 也不显示头部导航
+        let show_header_titles = [''];
+        if(ua.indexOf('MicroMessenger') >= 0 && show_header_titles.indexOf(title) < 0) return null;
 
         return (
             <div style={{ height: this.state.height + 'px' }}>

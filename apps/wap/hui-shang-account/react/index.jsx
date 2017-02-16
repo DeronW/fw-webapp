@@ -1,26 +1,28 @@
 var TopNav = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             backBtn: false
         }
     },
-    backBtnClick: function() {
+    backBtnClick: function () {
 
     },
-    showHandler:function(){
+    showHandler: function () {
         this.props.callbackPopShow(true);
     },
-    render: function() {
+    render: function () {
         return (
             <div className="top-nav">
                 <div className="info">
                     {
-                        this.props.backBtn ? <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/></div> : null
+                        this.props.backBtn ?
+                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png" />
+                            </div> : null
                     }
 
                     <div className="title">{this.props.title}</div>
                     <span className="r-text" onClick={this.showHandler}>
-                        <img src="images/icon.png"/>
+                        <img src="images/icon.png" />
                     </span>
                 </div>
             </div>
@@ -29,19 +31,18 @@ var TopNav = React.createClass({
 });
 
 
-
 var Cart = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             userInfo: {}
         };
     },
-    componentDidMount: function() {
+    componentDidMount: function () {
         var _this = this;
 
 
     },
-    render: function() {
+    render: function () {
 
         var dataInfo = this.props.userHsAccountInfo;
 
@@ -70,15 +71,15 @@ var Cart = React.createClass({
 });
 
 var Earnings = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             earnings: {}
         };
     },
-    componentDidMount: function() {
+    componentDidMount: function () {
 
     },
-    render: function() {
+    render: function () {
         var dataInfo = this.props.userIncome;
 
         return (
@@ -106,29 +107,30 @@ var Earnings = React.createClass({
 });
 
 var FundsFlow = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             data: []
         };
     },
-    componentDidMount: function() {
+    componentDidMount: function () {
 
     },
-    handlerAll: function() {
+    handlerAll: function () {
         //console.log(this.props.callbackIndex);
         location.href = "/static/wap/hui-shang-cash-flow/index.html"
     },
-    render: function() {
-        var list = function(cnt, index) {
+    render: function () {
+        var list = function (cnt, index) {
             return <div className="paragraph">
-                        <div className="l">
-                            <span className="text info-title">{cnt.desc}</span>
-                            <span className="text data-text">{cnt.createDate}</span>
-                        </div>
-                        <div className="r">
-                            <span className={"money-text " +  (cnt.amount.substring(0, 1) !== "-" ? "" : "c-4db94f")} >{cnt.amount}</span>
-                        </div>
-                    </div>;
+                <div className="l">
+                    <span className="text info-title">{cnt.desc}</span>
+                    <span className="text data-text">{cnt.createDate}</span>
+                </div>
+                <div className="r">
+                    <span
+                        className={"money-text " + (cnt.amount.substring(0, 1) !== "-" ? "" : "c-4db94f")}>{cnt.amount}</span>
+                </div>
+            </div>;
         };
 
         return (
@@ -150,35 +152,34 @@ var FundsFlow = React.createClass({
 });
 
 var Body = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             popShow: false
         };
     },
-    backBtnClick: function() {
+    backBtnClick: function () {
         window.history.back();
     },
-    getPopShow: function(booleanVal) {
-        console.log(booleanVal);
+    getPopShow: function (booleanVal) {
         this.setState({
             popShow: booleanVal
         });
     },
-    render: function() {
+    render: function () {
         return (
             <div className="">
                 <TopNav title={"徽商银行存管账户"} backBtn={true}
-                        btnFun={this.backBtnClick}
+                    btnFun={this.backBtnClick}
                     callbackPopShow={this.getPopShow}
                 />
-                <Cart userHsAccountInfo={this.props.ajaxHsAccountInfo}/>
+                <Cart userHsAccountInfo={this.props.ajaxHsAccountInfo} />
 
-                <Earnings userIncome={this.props.ajaxHsAccountInfo}/>
+                <Earnings userIncome={this.props.ajaxHsAccountInfo} />
 
-                <FundsFlow userPageData={this.props.ajaxPageData} callbackIndex={this.props.callbackPage}/>
+                <FundsFlow userPageData={this.props.ajaxPageData} callbackIndex={this.props.callbackPage} />
 
                 {
-                    !this.state.popShow ? null : <Pop callbackPopShow={this.getPopShow}/>
+                    !this.state.popShow ? null : <Pop callbackPopShow={this.getPopShow} />
                 }
             </div>
         );
@@ -186,10 +187,10 @@ var Body = React.createClass({
 });
 
 var Pop = React.createClass({
-    closeHandler: function() {
+    closeHandler: function () {
         this.props.callbackPopShow(false);
     },
-    render: function() {
+    render: function () {
         return (
             <div className="mask">
                 <div className="close-btn" onClick={this.closeHandler}></div>
@@ -204,20 +205,20 @@ var Pop = React.createClass({
 });
 
 var AllPage = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             index: 0
         };
     },
-    page: function(index) {
+    page: function (index) {
         this.setState({
             index: index
         });
     },
-    closeHandler:function(){
+    closeHandler: function () {
 
     },
-    render: function() {
+    render: function () {
         var userAjaxData = this.props.activity;
 
         var ui = [
@@ -230,7 +231,7 @@ var AllPage = React.createClass({
 
         return (
 
-            <div>   
+            <div>
                 {
                     ui[this.state.index]
                 }
@@ -241,15 +242,12 @@ var AllPage = React.createClass({
     }
 });
 
-$FW.DOMReady(function() {
+$FW.DOMReady(function () {
     $FW.Ajax({
         url: API_PATH + "mpwap/api/v1/getHSAccountInfo.shtml",
         enable_loading: true,
-        success: function(data) {
-            ReactDOM.render(
-                <AllPage activity={data} />,
-                document.getElementById("cnt")
-            );
+        success: function (data) {
+            ReactDOM.render(<AllPage activity={data} />, CONTENT_NODE);
         }
     });
 

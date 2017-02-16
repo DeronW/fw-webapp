@@ -28,7 +28,6 @@ const Waiting = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('敬请期待');
-    ReactDOM.render(<Header title={'敬请期待'} background={'transparent'}/>, document.getElementById('header'));
-    ReactDOM.render(<Waiting />, document.getElementById('cnt'));
+    ReactDOM.render(<Header title={'敬请期待'} background={'transparent'}/>, HEADER_NODE);
+    ReactDOM.render(<Waiting />, CONTENT_NODE);
 });

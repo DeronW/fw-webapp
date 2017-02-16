@@ -1,4 +1,3 @@
-
 const Questions = React.createClass({
     getInitialState: function () {
         return { selected: startArr }
@@ -13,8 +12,8 @@ const Questions = React.createClass({
     fnSumHandler: function () {
         let newJson = {};
         let ajaxcan = true;
-        this.state.selected.map((value, index) => {
-            if (ajaxcan) {
+        this.state.selected.map((value, index) => ({
+            if(ajaxcan) {
                 for (let x in value) {
                     switch (value[x]) {
                         case 0:
@@ -36,12 +35,14 @@ const Questions = React.createClass({
                             ajaxcan = false;
                             $FW.Component.Toast("您还有未填写试题");
                             break;
+                        default:
+                        // do nothing
                     }
                     newJson[x] = value[x];
                 }
             }
 
-        });
+        }));
         if (ajaxcan) {
             $FW.Ajax({
                 url: API_PATH + 'mpwap/orderuser/riskGradeInto.shtml', //传参数

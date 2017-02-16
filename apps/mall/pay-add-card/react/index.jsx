@@ -44,7 +44,7 @@ const AddBankCard = React.createClass({
         var bizNo = query.bizNo;
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/bank_card_info.json?accountNo=` + removeAllSpace(this.state.val),
-            enable_loading: true
+            enable_loading: 'mini'
         }).then((data)=> {
             if (data.bankInfo) {
                 var data = data.bankInfo;
@@ -59,7 +59,8 @@ const AddBankCard = React.createClass({
                 <div className="add-bank-card-tip">请绑定账户本人的银行卡</div>
                 <div className="input-box">
                     <span className="card-icon"></span>
-                    <input type="text" placeholder="请输入银行卡号" name="title" defaultValue="" onChange={this.changeVal} value={this.state.val}/>
+                    <input type="text" placeholder="请输入银行卡号" name="title" defaultValue="" onChange={this.changeVal}
+                           value={this.state.val}/>
                 </div>
                 <label htmlFor="title" className="card-info">{this.state.info}</label>
                 <a className={this.state.active ? "next-step active":"next-step"} onClick={this.nextStep}>下一步</a>
@@ -69,12 +70,7 @@ const AddBankCard = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('添加银行卡');
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"添加银行卡"} back_handler={backward}/>, document.getElementById('header'));
-    ReactDOM.render(<AddBankCard/>, document.getElementById('cnt'));
+    ReactDOM.render(<Header title={"添加银行卡"}/>, HEADER_NODE);
+    ReactDOM.render(<AddBankCard/>, CONTENT_NODE);
 });
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/pay-bank-card/index.html';
-}

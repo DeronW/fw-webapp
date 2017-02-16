@@ -104,7 +104,7 @@ const GameCenter = React.createClass({
                 <div className="nickname-title">游戏昵称</div>
                 <div className="nickname">{this.state.nameNick}</div>
             </div>
-            <div className="login-btn" onClick={() => { this.popNickName(true) } }>修改昵称</div>
+            <div className="login-btn" onClick={() => { this.popNickName(true) }}>修改昵称</div>
         </div> :
             <div className="game-head-unlogin">
                 <div className="avatar"><img src="images/default-avatar.png" /></div>
@@ -134,13 +134,13 @@ $FW.DOMReady(function () {
     if ($FW.Browser.inIOS() && $FW.Browser.appVersion() >= "2.3.60") {
         location.href = "/static/mall/waiting/index.html";
     }
+
     NativeBridge.setTitle('游戏中心');
+
     var ua = window.navigator.userAgent.toLowerCase();
     var wxBrower = ua.match(/MicroMessenger/i) == 'micromessenger' ? true : false;
     if ($FW.Format.urlQuery().mallHead == "true" && !wxBrower) {
-        if ($FW.Utils.shouldShowHeader())
-            ReactDOM.render(<Header title={"游戏中心"} back_handler={backward} />, document.getElementById
-                ('header'));
+        ReactDOM.render(<Header title={"游戏中心"} back_handler={backward} />, CONTENT_NODE);
     }
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/getuinfo`,//判断登录状态
@@ -149,7 +149,7 @@ $FW.DOMReady(function () {
             if (data.login_status == 1) {
                 gameToken = data.token;
             }
-            ReactDOM.render(<GameCenter data={data} />, document.getElementById('cnt'));
+            ReactDOM.render(<GameCenter data={data} />, CONTENT_NODE);
         }
     });
 });
@@ -157,6 +157,7 @@ $FW.DOMReady(function () {
 function backward() {
     $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html'
 }
+
 function str_length(str) {
     var byteLen = 0, len = str.length;
     if (str) {

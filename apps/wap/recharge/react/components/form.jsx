@@ -21,7 +21,6 @@ const Form = React.createClass({
         }
     },
     componentDidUpdate: function() {
-        console.log(this.state.phoneBlur);
 
         if (this.state.phoneBlur) {
             if (ReactDOM.findDOMNode(this.refs.phoneRef) !== null) {
@@ -170,7 +169,7 @@ const Form = React.createClass({
                 } else {
                     return <div className="bank-phone-text">
                                 {
-                                    popModifyPhoneVal.substring(0, 3) + "****" + popModifyPhoneVal.substring((popModifyPhoneVal.length - 4), popModifyPhoneVal.length)
+                                    popModifyPhoneVal.substring(0, 3) + "****" + popModifyPhoneVal.substring(popModifyPhoneVal.length - 4, popModifyPhoneVal.length)
                                 }
                             </div>;
                 }

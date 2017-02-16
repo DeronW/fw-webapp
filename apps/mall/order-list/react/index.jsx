@@ -1,7 +1,7 @@
 const OrderMain = React.createClass({
     getInitialState: function () {
         var index = 0;
-        if (location.hash == '#pay') {
+        if (location.hash == '#unPay') {
             index = 1
         }
         else if (location.hash == '#prepare') {
@@ -45,14 +45,14 @@ const OrderList = React.createClass({
     getInitialState: function () {
         var state = {
             all: [],
-            pay: [],
+            unPay: [],
             prepare: [],
             shipping: [],
             complete: []
         };
         this.props.orders.forEach(function (i) {
             state.all.push(i);
-            if (i.status) state[i.status].push(i);
+            if (i.status && i.status != "cancel" && i.status != "failure") state[i.status].push(i);
         });
         return state
     },
@@ -71,7 +71,7 @@ const OrderList = React.createClass({
         return (
             <div className="order-area">
                 {this.props.index == 0 ? (this.state.all.length != 0 ? allBlock("all") : blockText) : null}
-                {this.props.index == 1 ? (this.state.pay.length != 0 ? allBlock("pay") : blockText) : null}
+                {this.props.index == 1 ? (this.state.unPay.length != 0 ? allBlock("unPay") : blockText) : null}
                 {this.props.index == 2 ? (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) : null}
                 {this.props.index == 3 ? (this.state.shipping.length != 0 ? allBlock("shipping") : blockText) : null}
                 {this.props.index == 4 ? (this.state.complete.length != 0 ? allBlock("complete") : blockText) : null}
@@ -81,15 +81,15 @@ const OrderList = React.createClass({
 });
 
 const OrderBlock = React.createClass({
-    clickPay: function (orderTime,orderNo, groupNo) {
+    clickPay: function (orderTime, orderNo, groupNo) {
         let FormData = {
             orderTime: orderTime,
-            orderBizNo: orderNo ,
+            orderBizNo: orderNo,
             orderGroupBizNo: groupNo
         };
 
         $FW.Ajax({
-            data: this.FormData,
+            data: FormData,
             //url: `./order_to_account.json`,
             url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
             enable_loading: true,
@@ -98,7 +98,7 @@ const OrderBlock = React.createClass({
                     '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
                     '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo +
                     '&totalShouldPayPrice=' + result.totalShouldPayPrice
-             }
+            }
         });
     },
 
@@ -111,7 +111,7 @@ const OrderBlock = React.createClass({
     },
     gotoDetail: function (index) {
         let order = this.props.order;
-        location.href='/static/mall/order-detail/index.html?bizNo=' + order.bizNo+'&cardUuid='+order.cardUuid+'&orderId='+order.orderId
+        location.href = '/static/mall/order-detail/index.html?bizNo=' + order.bizNo + '&cardUuid=' + order.cardUuid + '&orderId=' + order.orderId
     },
     render: function () {
         let pay_color = {
@@ -135,7 +135,7 @@ const OrderBlock = React.createClass({
         let status_name;
         let status_color;
         switch (order.status) {
-            case 'pay':
+            case 'unPay':
                 status_name = '待付款';
                 status_color = pay_color;
                 break;
@@ -152,12 +152,12 @@ const OrderBlock = React.createClass({
                 status_color = complete_color;
                 break;
         }
-
+        var _this = this;
         let product_item = function (product, index) {
 
             return (
-                <a  key={index}>
-                    <div className="t-info">
+                <a key={index}>
+                    <div className="t-info" onClick={_this.gotoDetail}>
                         <div className="commodity-img">
                             <img src={product.img || 'images/default-product.jpg'}/>
                         </div>
@@ -186,10 +186,13 @@ const OrderBlock = React.createClass({
         let sendOrderNo = order.sendOrderNo;
         let sendChannel = order.sendChannel;
         let sendChannelEnum = order.sendChannelEnum;
-        let check_link = order.sendOrderNo ? <a className="link-btn" href={'/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ? <a className="link-btn" href={'/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
+        let check_link = order.sendOrderNo ? <a className="link-btn"
+                                                href={'/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ?
+            <a className="link-btn"
+               href={'/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
 
         return (
-            <div className="order-block" onClick={this.gotoDetail}>
+            <div className="order-block">
                 <div className="title-block">
                     <span className="time-text">{order.pay_at}</span>
                     <span style={status_color}>
@@ -209,8 +212,10 @@ const OrderBlock = React.createClass({
                         </span>
                         {check_link}
                     </div>
-                    {order.status == "pay" ? <div className="pay-order">
-                        <div className="btn-pay" onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo)}>立即支付</div>
+                    {order.status == "unPay" ? <div className="pay-order">
+                        <div className="btn-pay"
+                             onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo)}>立即支付
+                        </div>
                         <div className="btn-cancel"
                              onClick={this.clickCancel.bind(this,order.bizNo,order.orderGroupBizNo)}>取消订单
                         </div>
@@ -244,7 +249,8 @@ const ConfAlert = React.createClass({
         $FW.Ajax({
             data: {
                 orderBizNo: this.state.orderNo,
-                orderGroupBizNo: this.state.groupNo
+                orderGroupBizNo: this.state.groupNo,
+                source: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2
             },
             //url: `./cancelOrder.json`,
             url: `${API_PATH}mall/api/cart/v1/cancelOrder.json`,
@@ -270,8 +276,7 @@ const ConfAlert = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('订单列表');
-
+    ReactDOM.render(<Header title={"我的订单"}/>, HEADER_NODE);
     $FW.Ajax({
         //url: `./order_list.json`,
         url: `${API_PATH}mall/api/member/v1/order_list.json`,
@@ -280,11 +285,4 @@ $FW.DOMReady(function () {
         ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);
         window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
     })
-
-
-    ReactDOM.render(<Header title={"我的订单"} back_handler={back_handler}/>, HEADER_NODE);
 });
-
-function back_handler() {
-    location.href = '/static/mall/user/index.html';
-}

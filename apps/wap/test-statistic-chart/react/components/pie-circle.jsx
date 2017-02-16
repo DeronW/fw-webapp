@@ -14,7 +14,7 @@
 const PieChart = React.createClass({
     getDefaultProps: function () {
         return {
-            weight:80,
+            weight: 80,
             radius: 200,
             animate: false,
             padding: 0,
@@ -33,7 +33,7 @@ const PieChart = React.createClass({
             radius: this.props.radius,
             bgColor: this.props.bgColor,
             progressColor: this.props.progressColor,
-            progress2Color:this.props.progress2Color,
+            progress2Color: this.props.progress2Color,
             weight: this.props.weight,
             current_percent: 0,
             target_percent: this.props.percent,
@@ -51,14 +51,14 @@ const PieChart = React.createClass({
         clearInterval(this._animate_timer);
     },
 
-    setProgress: function (p,p2) {
+    setProgress: function (p, p2) {
         if (p > this.MAX_UNFINISHED_PERCENT && p < 100) p = this.MAX_UNFINISHED_PERCENT;
         // 一旦进度条到达100%, 就不能再重新设置进度了
         if (p >= 100) {
             p = 100;
             clearInterval(this._animate_timer);
         }
-        this.setState({current_percent: p,remain_percent:p2})
+        this.setState({ current_percent: p, remain_percent: p2 })
     },
 
     animate: function () {
@@ -66,7 +66,6 @@ const PieChart = React.createClass({
             var p = this.state.current_percent + this.STEP_PERCENT;
             if (p > this.MAX_UNFINISHED_PERCENT && this.state.target_percent == 100) {
                 p = 100;
-            } else {
             }
             this.setProgress(p)
         } else {
@@ -78,7 +77,7 @@ const PieChart = React.createClass({
         if (this.state.animate) {
             this._animate_timer = setInterval(this.animate, 15)
         } else {
-            this.setProgress(this.state.target_percent,this.state.remain_percent);
+            this.setProgress(this.state.target_percent, this.state.remain_percent);
         }
     },
 
@@ -91,11 +90,18 @@ const PieChart = React.createClass({
         let percent = this.state.current_percent / 100;
         let percent2 = this.state.remain_percent / 100;
 
-        let circleColor = percent === 1 ? this.state.progressColor : (percent2 ===1 ? this.state. progress2Color : (percent === 0 && percent2 === 0) ? this.state.bgColor : null);
+        if (percent === 1) {
+            circleColor = this.state.progressColor
+        } else if (percent2 === 1) {
+            circleColor = this.state.progress2Color
+        } else if (percent === 0 && percent2 === 0) {
+            circleColor = this.state.bgColor
+        }
+
         let circle = <circle cx={center.x} cy={center.y}
-                             r={this.state.radius - this.state.weight / 2}
-                             fill="transparent" stroke={circleColor}
-                             strokeWidth={this.state.weight}></circle>;
+            r={this.state.radius - this.state.weight / 2}
+            fill="transparent" stroke={circleColor}
+            strokeWidth={this.state.weight}></circle>;
 
         let p2 = {
             x: center.x + Math.sin(Math.PI * 2 * percent) * this.state.radius,
@@ -108,19 +114,19 @@ const PieChart = React.createClass({
 
         // 一共由2段圆弧和2条直线构成
         let f1 = ['M', sideLength / 2, sideLength / 2 - this.state.radius],
-            f2 = ['A', this.state.radius, this.state.radius, 0, (percent > .5 ? 1 : 0), 1, p2.x, p2.y],
+            f2 = ['A', this.state.radius, this.state.radius, 0, percent > .5 ? 1 : 0, 1, p2.x, p2.y],
             f3 = ['L', p2.x, p2.y, p3.x, p3.y],
             f4 = ['A', this.state.radius - this.state.weight, this.state.radius - this.state.weight, '0',
-                (percent > 0.5 ? 1 : 0), '0', sideLength / 2, sideLength / 2 - this.state.radius + this.state.weight],
-            f5 = ['L', this.state.radius, '0', this.state.radius, this.state.radius-this.state.weight],
+                percent > 0.5 ? 1 : 0, '0', sideLength / 2, sideLength / 2 - this.state.radius + this.state.weight],
+            f5 = ['L', this.state.radius, '0', this.state.radius, this.state.radius - this.state.weight],
             f6 = ['Z'];
 
         let g1 = ['M', sideLength / 2, sideLength / 2 - this.state.radius],
-            g2 = ['A', this.state.radius, this.state.radius, 0, (percent2 > .5 ? 1 : 0), 0, p2.x, p2.y],
+            g2 = ['A', this.state.radius, this.state.radius, 0, percent2 > .5 ? 1 : 0, 0, p2.x, p2.y],
             g3 = ['L', p2.x, p2.y, p3.x, p3.y],
             g4 = ['A', this.state.radius - this.state.weight, this.state.radius - this.state.weight, '0',
-                (percent2 > 0.5 ? 1 : 0), 1, sideLength / 2, sideLength / 2 - this.state.radius + this.state.weight],
-            g5 = ['L', this.state.radius, '0', this.state.radius, this.state.radius-this.state.weight],
+                percent2 > 0.5 ? 1 : 0, 1, sideLength / 2, sideLength / 2 - this.state.radius + this.state.weight],
+            g5 = ['L', this.state.radius, '0', this.state.radius, this.state.radius - this.state.weight],
             g6 = ['Z'];
 
         let d = [].concat(f1).concat(f2).concat(f3).concat(f4).concat(f5).concat(f6).join(' ');
@@ -133,11 +139,11 @@ const PieChart = React.createClass({
         return (
             <div>
                 <svg width={sideLength} height={sideLength}
-                     style={{
-                         display: 'inline-block',
-                         transform: 'translate(0, 0)',
-                         overflow: 'hidden'
-                     }}>
+                    style={{
+                        display: 'inline-block',
+                        transform: 'translate(0, 0)',
+                        overflow: 'hidden'
+                    }}>
                     {circle}
                     {path}
                     {path2}

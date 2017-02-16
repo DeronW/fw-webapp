@@ -1,5 +1,5 @@
 const Account = React.createClass({
-    render : function(){
+    render: function () {
         var data = $FW.Format.urlQuery();
         return (
             <div className="account-wrap">
@@ -23,11 +23,11 @@ const Account = React.createClass({
                     <div className="right-arrow"></div>
                 </a>
                 {/*
-                <a className="account-item" href="/static/mall/pay-bank-card/index.html">
-                    <div className="item-title">银行卡</div>
-                    <div className="right-arrow"></div>
-                    <div className="item-right-info">已绑定</div>
-                </a>
+                 <a className="account-item" href="/static/mall/pay-bank-card/index.html">
+                 <div className="item-title">银行卡</div>
+                 <div className="right-arrow"></div>
+                 <div className="item-right-info">已绑定</div>
+                 </a>
                  */}
             </div>
         )
@@ -35,10 +35,8 @@ const Account = React.createClass({
 });
 
 
-$FW.DOMReady(function() {
-    NativeBridge.setTitle('账户设置');
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"账户设置"}/>, document.getElementById('header'));
+$FW.DOMReady(function () {
+    ReactDOM.render(<Header title={"账户设置"}/>, HEADER_NODE);
 
-    ReactDOM.render(<Account/>, document.getElementById('cnt'));
+    ReactDOM.render(<Account/>, CONTENT_NODE);
 });

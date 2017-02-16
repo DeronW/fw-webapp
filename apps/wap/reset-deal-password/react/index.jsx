@@ -1,5 +1,5 @@
 var Nav = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="nav-block">
                 <img src={this.props.imgUrl} />
@@ -16,53 +16,55 @@ function isCardNo(card) {
 
 
 var PhoneCodePrompt = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             getUserInfo: this.props.getGetPorpsUserInfo
         };
     },
-    handlerVoice: function() {
+    handlerVoice: function () {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
 
         this.props.callbackVoice(+new Date);
 
-/*        $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
-            method: "GET",
-            success: function(data) {
-                console.log(data);
-            }
-        });*/
+        /*        $FW.Ajax({
+         url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
+         method: "GET",
+         success: function(data) {
+         console.log(data);
+         }
+         });*/
     },
-    render: function() {
+    render: function () {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
-        var idCarNoNntercept = phoneNo.substring(0, 3) + "****" + phoneNo.substring((phoneNo.length - 4), phoneNo.length);
+        var idCarNoNntercept = phoneNo.substring(0, 3) + "****" + phoneNo.substring(phoneNo.length - 4, phoneNo.length);
 
-        console.log(idCarNoNntercept);
 
         return (
             <div className="old-user-prompt-text">
-                已向手机{idCarNoNntercept}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span> 获取语音验证码。
+                已向手机{idCarNoNntercept}发送短信验证码，若收不到，请 <span className="c" onClick={this.handlerVoice}>点击这里</span>
+                获取语音验证码。
             </div>
         );
     }
 });
 
 var TopNav = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             backBtn: false
         }
     },
-    backBtnClick: function() {
+    backBtnClick: function () {
 
     },
-    render: function() {
+    render: function () {
         return (
             <div className="top-nav">
                 <div className="info">
                     {
-                        this.props.backBtn ? <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png"/></div> : null
+                        this.props.backBtn ?
+                            <div className="back-btn" onClick={this.props.btnFun}><img src="images/back.png" />
+                            </div> : null
                     }
 
                     <div className="title">{this.props.title}</div>
@@ -74,7 +76,7 @@ var TopNav = React.createClass({
 });
 
 var Btn = React.createClass({
-    render: function() {
+    render: function () {
         return (
             <div className="btn-area">
                 <div className="ui-btn ui-red-btn" onClick={this.props.Fun}>{this.props.btnText}</div>
@@ -84,15 +86,15 @@ var Btn = React.createClass({
 });
 
 var Pop = React.createClass({
-    handlerCloseBtn: function() {
+    handlerCloseBtn: function () {
         this.props.callbackCloseInfo(false);
 
     },
-    handlerConfirmBtn: function() {
+    handlerConfirmBtn: function () {
         window.history.back();
 
     },
-    render: function() {
+    render: function () {
         return (
             <div className="pop">
                 <div className="pop-back"></div>
@@ -111,7 +113,7 @@ var Pop = React.createClass({
 
 //设置交易密码 from
 var PswFrom = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         var userInfoData = this.props.propsUserInfo;
 
         return {
@@ -126,35 +128,35 @@ var PswFrom = React.createClass({
             noCode: false
         };
     },
-    componentWillUnmount: function() {
+    componentWillUnmount: function () {
         clearInterval(this.interval);
     },
-    componentWillReceiveProps: function(nextProps) {
-        if(this.state.countdown == 0 && (+new Date())　-　nextProps.propsVoice  < 10) {
+    componentWillReceiveProps: function (nextProps) {
+        if (this.state.countdown == 0 && +new Date() - nextProps.propsVoice < 10) {
             this.setState(
                 {
                     codeType: 5,
                     isVmsType: "VMS"
-                },this.handerIdentifyingCode
+                }, this.handerIdentifyingCode
             );
 
         } else {
-            if((+new Date())　-　nextProps.propsVoice  < 10) {
-                if(this.state.countdown > 0 && this.state.countdown !== 60) {
+            if (+new Date() - nextProps.propsVoice < 10) {
+                if (this.state.countdown > 0 && this.state.countdown !== 60) {
                     $FW.Component.Toast(this.state.countdown + "s后才能获取");
                 }
             }
         }
 
     },
-    handerIdentifyingCode: function(codeBoolean) {
+    handerIdentifyingCode: function (codeBoolean) {
         var _this = this;
 
         this.setState({
             codeNoClick: true
         });
 
-        if(!this.state.codeClickable) {
+        if (!this.state.codeClickable) {
             return false;
         }
 
@@ -163,17 +165,17 @@ var PswFrom = React.createClass({
             countdown: 60
         })
 
-        if(codeBoolean == "VMSCode") {
+        if (codeBoolean == "VMSCode") {
             this.props.callbackPhoneCodePromptShow(true);
         }
 
 
-        _this.interval = setInterval(function() {
+        _this.interval = setInterval(function () {
             _this.setState({
                 countdown: _this.state.countdown - 1
             });
 
-            if(_this.state.countdown == 0) {
+            if (_this.state.countdown == 0) {
                 clearInterval(_this.interval);
 
                 _this.setState({
@@ -185,21 +187,21 @@ var PswFrom = React.createClass({
 
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type="+ this.state.codeType +"&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
+            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=" + this.state.codeType + "&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
             method: "GET",
-            success: function(data) {
+            success: function (data) {
 
             },
-            fail: function() {
+            fail: function () {
 
             }
         })
 
     },
-    handerChangeInput: function(event) {
+    handerChangeInput: function (event) {
         this.props.callbackInputVal(event.target.value)
     },
-    handlerOnChangeInputId: function(e) {
+    handlerOnChangeInputId: function (e) {
         /*        if(!isCardNo(e.target.value)) {
          $FW.Component.Toast("身份证不格式不正确");
          return false;
@@ -208,7 +210,7 @@ var PswFrom = React.createClass({
         var reg = /^[\da-zA-Z]+$/;
 
 
-        if(e.target.value !== "") {
+        if (e.target.value !== "") {
             this.setState({
                 codeClickable: true
             });
@@ -218,24 +220,24 @@ var PswFrom = React.createClass({
             });
         }
 
-        if(this.props.propsUserInfo.userInfo.isCompanyAgent) {
-            if(e.target.value == '') {
+        if (this.props.propsUserInfo.userInfo.isCompanyAgent) {
+            if (e.target.value == '') {
                 this.setState({
-                    userId:''
+                    userId: ''
                 });
             }
 
-            if(!reg.test(e.target.value)) {
+            if (!reg.test(e.target.value)) {
                 $FW.Component.Toast("输入正确的企业信息");
                 return false;
-            } else if(e.target.value.length > 18) {
+            } else if (e.target.value.length > 18) {
                 $FW.Component.Toast("不能超过18位");
                 return false;
             }
 
             this.props.callbackCardNo(e.target.value);
         } else {
-             this.props.callbackCardNo(e.target.value);
+            this.props.callbackCardNo(e.target.value);
         }
 
         this.setState({
@@ -243,21 +245,22 @@ var PswFrom = React.createClass({
         });
 
     },
-    blurOnChangeInputId: function(e) {
-        if(this.props.propsUserInfo.userInfo.isCompanyAgent) {
-            if(e.target.value.length < 9) {
+    blurOnChangeInputId: function (e) {
+        if (this.props.propsUserInfo.userInfo.isCompanyAgent) {
+            if (e.target.value.length < 9) {
                 $FW.Component.Toast("企业信息不能小于9位");
                 return false;
             }
         }
     },
-    render: function() {
+    render: function () {
         var userInfoData = this.props.propsUserInfo.userInfo;
 
         return (
             <div className="from-block setting-trading-from">
                 <div className="input-block">
                     <span className="icon name-icon"></span>
+
                     <div className="text-block">
                         {userInfoData.realName}
                     </div>
@@ -265,21 +268,23 @@ var PswFrom = React.createClass({
 
                 <div className="input-block">
                     <span className="icon id-icon"></span>
+
                     <div className="text-block">
-                        <input type="text" placeholder={userInfoData.isCompanyAgent ?  "输入企业信息" : "请输入身份证" }
-                               onChange={this.handlerOnChangeInputId}
-                               onBlur={this.blurOnChangeInputId}
-                               value={this.state.userId}
+                        <input type="text" placeholder={userInfoData.isCompanyAgent ? "输入企业信息" : "请输入身份证"}
+                            onChange={this.handlerOnChangeInputId}
+                            onBlur={this.blurOnChangeInputId}
+                            value={this.state.userId}
                         />
                     </div>
                 </div>
 
                 <div className="input-block">
                     <span className="icon phone-n-icon"></span>
+
                     <div className="text-block">
                         <span className="text phone-n-text">
                             {
-                                this.state.phoneNumber.substring(0, 3) + "****" + this.state.phoneNumber.substring((this.state.phoneNumber.length - 4), this.state.phoneNumber.length)
+                                this.state.phoneNumber.substring(0, 3) + "****" + this.state.phoneNumber.substring(this.state.phoneNumber.length - 4, this.state.phoneNumber.length)
                             }
                         </span>
                     </div>
@@ -295,7 +300,8 @@ var PswFrom = React.createClass({
                         {
                             this.state.code ?
                                 <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
-                                <span className={this.state.codeClickable ? "btn" : "timing-text"} onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
+                                <span className={this.state.codeClickable ? "btn" : "timing-text"}
+                                    onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
                         }
                     </span>
                 </div>
@@ -305,7 +311,7 @@ var PswFrom = React.createClass({
 });
 
 var Body = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         var userInfoData = this.props.activity;
 
         return {
@@ -318,15 +324,15 @@ var Body = React.createClass({
             voice: false
         };
     },
-    handlerSettingsPassword: function() {
+    handlerSettingsPassword: function () {
         var _this = this;
 
-        if(this.state.cardId === "") {
+        if (this.state.cardId === "") {
             $FW.Component.Toast("身份证不能为空");
             return false;
         }
 
-        if(this.state.code === null) {
+        if (this.state.code === null) {
             $FW.Component.Toast("验证码不能为空");
             return false;
         }
@@ -342,53 +348,52 @@ var Body = React.createClass({
          })*/
 
     },
-    getCallbackInputVal: function(val) {
+    getCallbackInputVal: function (val) {
         this.setState({
             code: val
         });
     },
-    backBtnClick: function() {
+    backBtnClick: function () {
         window.history.back();
     },
-    handlerSkipBtn: function() {
+    handlerSkipBtn: function () {
         this.setState({
             popShow: true
         });
     },
-    getCloseInfo: function(booleanVal) {
+    getCloseInfo: function (booleanVal) {
         this.setState({
             popShow: booleanVal
         });
     },
-    getPhoneCodePromptShow: function(booleanVal) {
+    getPhoneCodePromptShow: function (booleanVal) {
         this.setState({
             phoneCodePromptShow: booleanVal
         });
     },
-    getCardNo: function(cardVal) {
+    getCardNo: function (cardVal) {
         this.setState({
             cardId: cardVal
         });
     },
-    getVoice: function(boolnaeVal) {
-        console.log(boolnaeVal);
-          this.setState({
-              voice: boolnaeVal
-          });
+    getVoice: function (boolnaeVal) {
+        this.setState({
+            voice: boolnaeVal
+        });
     },
-    render: function() {
+    render: function () {
 
         return (
             <div>
                 <TopNav title={this.props.activity.openStatus < 4 ? "设置交易密码" : "验证身份"}
-                        backBtn={true}
-                        btnFun={this.backBtnClick}
-                        skipFun={this.handlerSkipBtn}
-                        btnText={"关闭"}
+                    backBtn={true}
+                    btnFun={this.backBtnClick}
+                    skipFun={this.handlerSkipBtn}
+                    btnText={"关闭"}
                 />
 
                 {
-                    this.props.activity.openStatus < 4 ? <Nav imgUrl={"images/process-2.png"}/> : null
+                    this.props.activity.openStatus < 4 ? <Nav imgUrl={"images/process-2.png"} /> : null
                 }
                 <PswFrom
                     propsUserInfo={this.state.getAjaxUserInfo}
@@ -411,7 +416,7 @@ var Body = React.createClass({
                 <Btn btnText={"设置交易密码"} Fun={this.handlerSettingsPassword} />
 
                 {
-                    this.state.popShow ? <Pop callbackCloseInfo={this.getCloseInfo}/> : null
+                    this.state.popShow ? <Pop callbackCloseInfo={this.getCloseInfo} /> : null
                 }
 
             </div>
@@ -419,16 +424,11 @@ var Body = React.createClass({
     }
 });
 
-
-$FW.Ajax({
-    url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
-    success: function(data) {
-        ReactDOM.render(
-            <Body activity={data}/>,
-            document.getElementById("cnt")
-        );
-    }
-});
-
-
-
+$FW.DOMReady(() => {
+    $FW.Ajax({
+        url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+        success: function (data) {
+            ReactDOM.render(<Body activity={data} />, CONTENT_NODE);
+        }
+    });
+})

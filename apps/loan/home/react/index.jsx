@@ -9,7 +9,7 @@ const ApplyLoan = React.createClass({
             present_availableLoan: this.props.data.creditLine,
             orioleOrderGid: this.props.data.orioleOrderGid,
             creditLine: this.props.data.canBorrowAmount,
-            present_creditLine:this.props.data.canBorrowAmount
+            present_creditLine: this.props.data.canBorrowAmount
         }
     },
     componentDidMount: function () {
@@ -27,6 +27,21 @@ const ApplyLoan = React.createClass({
                 flag = true;
             });
 
+            let getPosition = function(node) {
+                var left = node.offsetLeft;
+                var top = node.offsetTop;
+                var current = node.offsetParent;
+                while (current !== null) {
+                    left += current.offsetLeft;
+                    top += current.offsetTop;
+                    current = current.offsetParent;
+                }
+                return {
+                    "left": left,
+                    "top": top
+                };
+            }
+
             applyLoan.addEventListener("touchmove", (e) => {
                 if (flag) {
                     var x = e.touches[0].pageX || e.touches[0].clientX;
@@ -41,7 +56,7 @@ const ApplyLoan = React.createClass({
                     minDiv.style.left = minDiv_left + "px";
                     lineDivBar.style.width = minDiv_left + 15 + "px";
                     var loanNum = Math.round(parseInt(minDiv_left / (lineDiv.offsetWidth - 58) * al) / 100) * 100;
-                    if (loanNum <= 500) { loanNum = 500 }
+                    if (loanNum <= this.props.data.lowestLoan) { loanNum = this.props.data.lowestLoan }
                     this.setState({ creditLine: loanNum });
                 }
             });
@@ -50,36 +65,22 @@ const ApplyLoan = React.createClass({
                 flag = false;
             });
 
-            function getPosition(node) {
-                var left = node.offsetLeft;
-                var top = node.offsetTop;
-                var current = node.offsetParent;
-                while (current != null) {
-                    left += current.offsetLeft;
-                    top += current.offsetTop;
-                    current = current.offsetParent;
-                }
-                return {
-                    "left": left,
-                    "top": top
-                };
-            }
         }
     },
     getBorrowBtn() {
         let btn = '--', st = this.props.data.borrowBtnStatus;
-
+        let user = $FW.Store.getUserDict();
         let available_loan =
             <div className="available-loan">
-                <div className="max-loan-title">最高借款额度（元）</div>
                 <div className="max-loan-money">{this.state.creditLine}</div>
+                <div className="max-loan-title">最高借款额度（元）</div>
             </div>;
 
         let unavailable_loan =
             <div className="unavailable-loan">
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
-                    仅支持500元以上借款，快去提额吧！</div>
+                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={`/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`}>提额</a>吧！</div>
                 <div className="max-loan-money">暂无额度</div>
             </div>;
 
@@ -104,7 +105,7 @@ const ApplyLoan = React.createClass({
                 </div>
                 <div className="start-point"></div>
                 <div className="end-point"></div>
-                <div className="start-point-num">500</div>
+                <div className="start-point-num">{this.props.data.lowestLoan}</div>
                 <div className="end-point-num">{this.state.present_creditLine}</div>
             </div>;
 
@@ -124,7 +125,7 @@ const ApplyLoan = React.createClass({
 
         let user = $FW.Store.getUserDict();
         let link;
-        if (st == 1) link = '/static/loan/user-set-cash-card/index.html';
+        if (st == 1) link = '/static/loan/user-card-set/index.html';
         if (st == 2) link = `/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`;
 
         let loanBtnClick = () => {
@@ -132,22 +133,22 @@ const ApplyLoan = React.createClass({
                 $FW.Component.Toast('设置提现卡申请处理中，请稍等') :
                 location.href = link
         }
-        let loan_btn = <div className="loan-btn" onClick={loanBtnClick}> 申请借款 </div>;
+        let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
         let credit_btn =
-            <a className="loan-btn" href={`/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`}>
+            <a className="loan-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`}>
                 我要提额
             </a>;
 
         let btn_list =
             <div className="credit-btn">
                 <a className="credit-improvement-btn"
-                    href={`/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`}>
+                    href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`}>
                     我要提额
                 </a>
                 <a className="credit-apply-btn"
-                    href={`/static/loan/apply-want-loan/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}`}>
-                    我要借款</a>
+                    href={`/static/loan/apply-want/index.html?creditLine=${this.props.data.canBorrowAmount}&orioleOrderGid=${this.state.orioleOrderGid}&loanNum=${this.state.creditLine}&lowestLoan=${this.props.data.lowestLoan}`}>
+                    申请借款</a>
             </div>;
 
         if (st === 1 || st === 101) btn = loan_btn;
@@ -162,11 +163,12 @@ const ApplyLoan = React.createClass({
         if (st === 5) line = this.props.data.creditLine;
         return line
     },
+
     render() {
 
         return (
             <div className="apply-loan">
-                <div className="header">现金贷</div>
+                <div className="header">放心花</div>
                 <div className="loan-num">
                     {this.getBorrowBtn()}
                 </div>
@@ -188,6 +190,18 @@ const ApplyLoan = React.createClass({
                 </div>
                 {this.getBtnStatus()}
                 <div className="loan-tip">完善授权信息可减免手续费</div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </div>
         )
     }
@@ -199,6 +213,7 @@ $FW.DOMReady(function () {
     $FW.Ajax({
         url: `${API_PATH}api/loan/v1/baseinfo.json`,
         method: "post",
+        enable_loading: "mini",
         data: {
             token: user.token,
             userGid: user.gid,
@@ -206,8 +221,8 @@ $FW.DOMReady(function () {
             sourceType: 3,
             productId: 1
         }
-    }).then((data) => {
+    }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
-    }, e => $FW.Event.captureExpection(e));
+    }, e => $FW.Capture(e));
     ReactDOM.render(<BottomNavBar index={1} />, BOTTOM_NAV_NODE);
 });

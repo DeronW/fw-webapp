@@ -11,4 +11,18 @@ $FW.DOMReady(function () {
     $(".mask").click(function(){
         $(this).hide();
     });
+
+    $FW.Ajax({
+        url: `${API_PATH}api/userBase/v1/invitationRecord.json`,
+        method: "post",
+        data: {
+            pageIndex:null,
+            pageSize:null,
+            userGid:null
+        }
+    }).then((data) => {
+
+    }, e => $FW.Capture(e));
+
+
 });

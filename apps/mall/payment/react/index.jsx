@@ -11,16 +11,16 @@ const Payment = React.createClass({
         this.setState({index: arg});
     },
     componentDidMount: function () {
-        var m=29;
-        var s=59;
-        setInterval(function(){
-            document.getElementById("cutdown").innerHTML=(m+'分'+s+"秒内完成支付");
+        var m = 14;
+        var s = 59;
+        setInterval(function () {
+            document.getElementById("cutdown").innerHTML = (m + '分' + s + "秒内完成支付");
             s--;
-            if(s<0){
-                s=59;
+            if (s < 0) {
+                s = 59;
                 m--;
             }
-        },1000)
+        }, 1000)
     },
     split: function (str) {
         return str.substr(str.length - 4, 4);
@@ -35,7 +35,7 @@ const Payment = React.createClass({
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
             let link = location.protocol + '//' + location.hostname +
-                '/static/mall/pay-add-card/index.html'+location.search;
+                '/static/mall/pay-add-card/index.html' + location.search;
             location.href = link;
         }
         else {
@@ -50,9 +50,9 @@ const Payment = React.createClass({
                 bankId: data[index].bankId,
                 bankName: data[index].bankName,
                 productName: '豆哥商城商品',
-                orderTime:query.orderTime||"",
-                orderBizNo:query.orderBizNo||"",
-                orderGroupBizNo:query.orderGroupBizNo||""
+                orderTime: query.orderTime || "",
+                orderBizNo: query.orderBizNo || "",
+                orderGroupBizNo: query.orderGroupBizNo || ""
             };
             $FW.Ajax({
                 url: `${API_PATH}mall/api/payment/v1/ucf_pay.json`,
@@ -84,11 +84,27 @@ const Payment = React.createClass({
         var payMethods =
             data.map((n, index) => {
                 let accountNo = this.split(n.accountNo);
+
+                let r = n.bankName;
+                var b =
+                    r == "中国银行" ? "images/zg.png"
+                        : r == "工商银行" ? "images/gs.png"
+                        : r == "农业银行" ? "images/ny.png"
+                        : r == "建设银行" ? "images/js.png"
+                        : r == "平安银行" ? "images/pa.png"
+                        : r == "兴业银行" ? "images/xy.png"
+                        : r == "光大银行" ? "images/gd.png"
+                        : r == "浦发银行" ? "images/pf.png"
+                        : r == "华兴银行" ? "images/hx.png"
+                        : r == "北京银行" ? "images/bj.png"
+                        : r == "中信银行" ? "images/zx.png"
+                        : "images/gf.png";
+
                 return (
                     <div className="pay-item" onClick={this.payCheck.bind(this,index)}>
-                        <div className="pay-icon"><img src="images/bankpay.jpg"/></div>
+                        <div className="pay-icon"><img src={b}/></div>
                         <div className="pay-name">
-                            <div className="pay-title">{n.bankCardName} 尾号{accountNo}</div>
+                            <div className="pay-title">{n.bankName} &#12288;&#12288;尾号{accountNo}</div>
                             <div className="pay-subtitle">已绑定银行卡（支付服务由先锋金融提供）</div>
                         </div>
                         <div className={this.state.index==index ? "pay-check active" : "pay-check"}></div>
@@ -100,19 +116,19 @@ const Payment = React.createClass({
             <div className="order-payment">
                 <div className="order-status">
                     <div className="pay-tip">请在<span id="cutdown"></span></div>
-                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt/100}元</span></div>
+                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt / 100}元</span></div>
                 </div>
                 {/*<div className="order-products">
-                    <div className="order-item">
-                        <span className="order-item-name">爱奇艺VIP周卡兑换码</span>
-                        <span className="order-item-amount">×1</span>
-                    </div>
-                    <div className="order-item">
-                        <span className="order-item-name">爱奇艺VIP周卡兑换码</span>
-                        <span className="order-item-amount">×1</span>
-                    </div>
-                </div>
-                */}
+                 <div className="order-item">
+                 <span className="order-item-name">爱奇艺VIP周卡兑换码</span>
+                 <span className="order-item-amount">×1</span>
+                 </div>
+                 <div className="order-item">
+                 <span className="order-item-name">爱奇艺VIP周卡兑换码</span>
+                 <span className="order-item-amount">×1</span>
+                 </div>
+                 </div>
+                 */}
                 <div className="pay-way">
                     {payMethods} {quick_pay}
                     {/*
@@ -143,21 +159,14 @@ const Payment = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('订单结算');
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"订单结算"} back_handler={backward}/>, document.getElementById('header'));
-
+    ReactDOM.render(<Header title={"订单结算"}/>, HEADER_NODE);
 
     $FW.Ajax({
         url: `${API_PATH}mall/api/payment/v1/bank_card_list.json`,
         //url: './bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
-        enable_loading: true,
+        enable_loading: 'mini',
         success: function (data) {
-            ReactDOM.render(<Payment data={data.bankCards}/>, document.getElementById('cnt'));
+            ReactDOM.render(<Payment data={data.bankCards}/>, CONTENT_NODE);
         }
     })
 });
-
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
-}

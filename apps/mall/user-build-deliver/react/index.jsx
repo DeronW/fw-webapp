@@ -155,7 +155,7 @@ const Address = React.createClass({
                     // 如果是从下单页面进入, 则需要回到下单页面或下单页的收获地址
                     var link;
                     if (data.address_count > 1) {
-                        link = '/static/mall/user-deliver-address/index.html?cartFlag='+ query.cartFlag + '&prd=' + query.prd + '&buyNum=' + query.buyNum;
+                        link = '/static/mall/user-deliver-address/index.html?cartFlag=' + query.cartFlag + '&prd=' + query.prd + '&buyNum=' + query.buyNum;
                     } else {
                         link = '/static/mall/user-confirm/index.html?address_id=' + data.address_id + '&cartFlag=' + query.cartFlag + '&prd=' + query.prd + '&buyNum=' + query.buyNum;
                     }
@@ -196,7 +196,8 @@ const Address = React.createClass({
                         <input value={this.state.username} onChange={this.onUsernameChangeHandler} placeholder="收货人姓名"/>
                     </div>
                     <div className="phone input-div">
-                        <input type="tel" value={this.state.phone} onChange={this.onPhoneChangeHandler} placeholder="手机号码"/>
+                        <input type="tel" value={this.state.phone} onChange={this.onPhoneChangeHandler}
+                               placeholder="手机号码"/>
                     </div>
                     <div className="deliver-info">详细收货地址：</div>
                     <CascadingAddressForm
@@ -219,15 +220,8 @@ const Address = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('新建收货地址');
+    ReactDOM.render(<Header title={"新建收货地址"}/>, HEADER_NODE);
 
-    if ($FW.Utils.shouldShowHeader()) {
-        ReactDOM.render(<Header title={"新建收货地址"} back_handler={back_handler}/>, document.getElementById('header'));
-    }
-
-    ReactDOM.render(<Address />, document.getElementById('cnt'));
+    ReactDOM.render(<Address />, CONTENT_NODE);
 });
 
-function back_handler() {
-        location.href = '/static/mall/order-deliver-address/index.html?preview=true'
-}

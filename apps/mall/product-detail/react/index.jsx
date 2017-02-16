@@ -1,12 +1,8 @@
-function gotoHandler(link, need_login) {
+function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
+    location.href = encodeURI(link);
 }
 const Product = React.createClass({
     getInitialState: function () {
@@ -20,11 +16,11 @@ const Product = React.createClass({
     },
 
     toggleHandler: function () {
-        this.setState({ show: !this.state.show });
+        this.setState({show: !this.state.show});
     },
 
     childEventHandler: function (params, value) {
-        this.setState({ showOverlayDef: true, showOverlay: params, value: value });
+        this.setState({showOverlayDef: true, showOverlay: params, value: value});
     },
 
     shopHandler: function (e) {
@@ -67,7 +63,7 @@ const Product = React.createClass({
                     <div className="act-explain-head" onClick={this.toggleHandler}>
                         <div className="detail-explain-h">活动说明</div>
                         <div className={this.state.show ? "act-explain-btn on" : "act-explain-btn"}
-                            style={{}}></div>
+                             style={{}}></div>
                     </div>
                     {detail_explain_cont}
                 </div>
@@ -87,7 +83,7 @@ const Product = React.createClass({
                 </div>
                 <div className="product-content">
                     {data.desc ? <div className="desc">{data.desc}</div> : null}
-                    {data.rich_detail.map((i, index) => <img src={i} key={index} />)}
+                    {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
                 </div>
             </div>
         }
@@ -122,7 +118,9 @@ const Product = React.createClass({
 
         let shop_card_prompt = null;
         if (this.state.showOverlayDef)
-            shop_card_prompt = (<div className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>添加成功，在购物车等亲~</div>);
+            shop_card_prompt = (<div
+                className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>
+                添加成功，在购物车等亲~</div>);
 
         return (
             <div className="detail-box">
@@ -131,7 +129,7 @@ const Product = React.createClass({
                     <span className="_style_buy_cart_span"></span>
                 </a>
                 {data.head_images && data.head_images.length ?
-                    <BannerGroup className="head-images" images={data.head_images} /> :
+                    <BannerGroup className="head-images" images={data.head_images}/> :
                     <div className="no-head-images"></div>}
 
                 <div className="detail-inf">
@@ -172,9 +170,10 @@ const Product = React.createClass({
                 {activity_desc}
                 {rich_detail}
                 <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
-                <PlusMinus is_login={data.is_login} stock={data.stock} ticket_count={data.ticketList} parentCallback={this.childEventHandler}
-                    check_messages={data.checkMessages}
-                    voucher_only={data.supportTicket} isCanBuy={data.isCanBuy} />
+                <PlusMinus is_login={data.is_login} stock={data.stock} ticket_count={data.ticketList}
+                           parentCallback={this.childEventHandler}
+                           check_messages={data.checkMessages}
+                           voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
             </div>
         )
     }
@@ -197,15 +196,15 @@ const PlusMinus = React.createClass({
         let _this = this;
         let bizNo = $FW.Format.urlQuery().bizNo;
 
-        let link = location.protocol + '//' + location.hostname +
-            '/static/mall/order-confirm/index.html?productBizNo=' + bizNo + '&count=' + this.state.value;
+        let linkLogin = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=/static/mall/product-detail/index.html'
+            + location.search;
 
-        if (!this.props.is_login) {
-            $FW.Browser.inApp() ? NativeBridge.goto(link, true) : location.href = link
+        if (this.props.is_login == 0) {
+            $FW.Browser.inApp() ? NativeBridge.goto(link) : location.href = linkLogin
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
-                enable_loading: true,
+                enable_loading: 'mini',
                 data: {
                     buyNum: this.state.value,
                     productBizNo: bizNo
@@ -247,7 +246,7 @@ const PlusMinus = React.createClass({
 
         // 检查当前用户(或未登录用户)是否可以点这个按钮
         if (this.props.ticket_count == 0 && this.props.check_messages.length) {
-            $FW.Component.Alert(this.props.check_messages, { header: '不满足购买条件' });
+            $FW.Component.Alert(this.props.check_messages, {header: '不满足购买条件'});
             return
         }
         if (this.props.ticket_count < 1 && this.props.voucher_only) {
@@ -261,35 +260,42 @@ const PlusMinus = React.createClass({
         }
 
         let bizNo = $FW.Format.urlQuery().bizNo;
-        let link = location.protocol + '//' + location.hostname +
-            '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
-
+        let link = '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
+        let linkLogin = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=/static/mall/product-detail/index.html'
+            + location.search;
         let isCanBuy = this.props.isCanBuy;
         console.log(this.props.stock)
-        gotoHandler(link, true);
 
-        /*
-        if (this.props.is_login==1) {
-            if ($FW.Browser.inApp()) {
-                // 注意: 这里有个hole
-                // 非种cookie 用这种
-                //NativeBridge.login(link)
-                // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
-                //NativeBridge.goto(link, true)
-
-                //$FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
-                    NativeBridge.goto(link, true)// :
-                    //NativeBridge.login(link);
-
-            } else {
-                location.href = link
-            }
+        if (this.props.is_login == 1) {
+            gotoHandler(link);
         } else {
             if (!isCanBuy) {
-                $FW.Component.Alert("请先登录");
+                gotoHandler(linkLogin) //$FW.Component.Alert("请先登录");
             }
         }
-        */
+
+        /*
+         if (this.props.is_login==1) {
+         if ($FW.Browser.inApp()) {
+         // 注意: 这里有个hole
+         // 非种cookie 用这种
+         //NativeBridge.login(link)
+         // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
+         //NativeBridge.goto(link, true)
+
+         //$FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
+         NativeBridge.goto(link, true)// :
+         //NativeBridge.login(link);
+
+         } else {
+         location.href = link
+         }
+         } else {
+         if (!isCanBuy) {
+         $FW.Component.Alert("请先登录");
+         }
+         }
+         */
 
     },
 
@@ -306,7 +312,7 @@ const PlusMinus = React.createClass({
                         {this.state.value}
                     </div>
                     <div className={this.state.value < this.props.stock ? "plus" : "plus gray"}
-                        onClick={this.changePlus}></div>
+                         onClick={this.changePlus}></div>
                 </div>
                 <a className="btn-buy btn-buy-card" onClick={this.toggleOverlay}>加入购物车</a>
                 <a onClick={this.buyHandler} className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>
@@ -321,7 +327,7 @@ const EmptyProduct = React.createClass({
     render: function () {
         return (
             <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
-                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg' />
+                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg'/>
                 <div style={{ fontSize: "30px", color: "#8591b3", textAlign: "center" }}>
                     抱歉, 没有找到相关商品!
                 </div>
@@ -337,14 +343,14 @@ $FW.DOMReady(function () {
 
     $FW.Ajax({
         url: `${API_PATH}mall/api/detail/v1/item_detail.json?bizNo=${bizNo}`,
-        enable_loading: true
+        enable_loading: 'mini'
     }).then(data => {
         data.title ?
-            ReactDOM.render(<Product data={data} />, CONTENT_NODE) :
+            ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
     })
 
-    ReactDOM.render(<Header title={""} />, HEADER_NODE);
+    ReactDOM.render(<Header title={""}/>, HEADER_NODE);
 });
 
 function trim(s) {

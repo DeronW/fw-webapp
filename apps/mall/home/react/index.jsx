@@ -1,14 +1,13 @@
-function gotoHandler(link, need_login) {
-    // if (link.indexOf('://') < 0) {
-    //     link = location.protocol + '//' + location.hostname + link;
-    // }
-    // if ($FW.Browser.inApp()) {
-    //     NativeBridge.goto(link, need_login)
-    // } else {
-    //     location.href = encodeURI(link);
-    // }
-    location.
-        href = encodeURI(link);
+function gotoHandler(link) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+
+    location.href = encodeURI(link);
+}
+
+function productLink(bizNo) {
+    return `/static/mall/product-detail/index.html?bizNo=${bizNo}`
 }
 
 const Mall = React.createClass({
@@ -45,10 +44,10 @@ const Mall = React.createClass({
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png"
             } : {
-                    background: "transparent",
-                    logoImage: "images/logo.png",
-                    avatarImage: "images/list-icon.png"
-                }
+                background: "transparent",
+                logoImage: "images/logo.png",
+                avatarImage: "images/list-icon.png"
+            }
 
             this.setState(style);
         }.bind(this), false);
@@ -59,8 +58,8 @@ const Mall = React.createClass({
 
         if (this.props.banners.length) {
             banner = <BannerGroup className={iOSApp ? "head-images head-images-ios" : "head-images"}
-                images={this.getHeadImages()}
-                onImageClick={this.onImageClickHandler} />
+                                  images={this.getHeadImages()}
+                                  onImageClick={this.onImageClickHandler}/>
         } else {
             banner = <div className="no-banner"></div>
         }
@@ -75,8 +74,8 @@ const Mall = React.createClass({
         };
 
         let Charge_Nav = <div className="charge-nav">
-            <div className="charge-bill"><img src="images/charge-bill.png" /></div>
-            <div className="charge-flow"><img src="images/charge-flow.png" /></div>
+            <div className="charge-bill"><img src="images/charge-bill.png"/></div>
+            <div className="charge-flow"><img src="images/charge-flow.png"/></div>
         </div>
 
         return (
@@ -84,33 +83,34 @@ const Mall = React.createClass({
                 {banner}
                 <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
                     <div style={head_nav_wrap} className="head_nav_wrap">
-                        <img className="m-logo" src={this.state.logoImage} />
-                        <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=2", false)}
-                            className="search-bar-a">
-                            <img className="search-icon" src="images/search-icon.png" />
+                        <img className="m-logo" src={this.state.logoImage}/>
+                        <a href="/static/mall/product-list/index.html?searchSourceType=2"
+                           className="search-bar-a">
+                            <img className="search-icon" src="images/search-icon.png"/>
                             <div className="search-bar">请输入关键字</div>
                         </a>
                         <a className="index-avatar" href="/static/mall/user/index.html">
-                            <img src={this.state.avatarImage} /></a>
+                            <img src={this.state.avatarImage}/></a>
                     </div>
                 </div>
                 <div className="head-nav">
-                    <a onClick={() => gotoHandler("/static/mall/product-vip-zone/index.html")}><img
-                        src="images/nav-1.png" /><span>VIP专区</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=2")}><img
-                        src="images/nav-2.png" /><span>豆哥周边</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=3")}><img
-                        src="images/nav-3.png" /><span>工场券</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-hot-activity/index.html", true)}><img
-                        src="images/nav-4.png" /><span>热门活动</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=1", true)}><img
-                        src="images/nav-5.png" /><span>充话费</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-recharge/index.html?tab=2", true)}><img
-                        src="images/nav-6.png" /><span>充流量</span><span className="hot-tag"></span></a>
-                    <a onClick={() => gotoHandler("/static/mall/game/index.html?mallHead=true", true)}><img
-                        src="images/nav-7.png" /><span>游戏中心</span></a>
-                    <a onClick={() => gotoHandler("/static/mall/product-list/index.html?searchSourceType=1", true)}><img
-                        src="images/nav-8.png" /><span>我可兑换</span></a>
+                    <a href="/static/mall/product-vip-zone/index.html">
+                        <img src="images/nav-1.png"/><span>VIP专区</span></a>
+                    <a href="/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=2">
+                        <img src="images/nav-2.png"/><span>豆哥周边</span></a>
+                    <a href="/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=3">
+                        <img src="images/nav-3.png"/><span>工场券</span></a>
+                    <a href="/static/mall/product-hot-activity/index.html">
+                        <img src="images/nav-4.png"/><span>热门活动</span></a>
+                    <a href="/static/mall/product-recharge/index.html?tab=1">
+                        <img src="images/nav-5.png"/><span>充话费</span></a>
+                    <a href="/static/mall/product-recharge/index.html?tab=2">
+                        <img src="images/nav-6.png"/><span>充流量</span>
+                        <span className="hot-tag"></span></a>
+                    <a href="/static/mall/game/index.html?mallHead=true">
+                        <img src="images/nav-7.png"/><span>游戏中心</span></a>
+                    <a href="/static/mall/product-list/index.html?searchSourceType=1">
+                        <img src="images/nav-8.png"/><span>我可兑换</span></a>
                 </div>
                 <div id="HotProducts"></div>
                 <div id="NewProducts" className="hide"></div>
@@ -136,31 +136,31 @@ $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 
     $FW.Ajax(`${API_PATH}mall/api/index/v1/banners.json`)
-        .then(data => ReactDOM.render(<Mall banners={data.banners} />, CONTENT_NODE));
+        .then(data => ReactDOM.render(<Mall banners={data.banners}/>, CONTENT_NODE));
 
     $FW.Ajax(`${API_PATH}mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=6`)
-        .then((data) => ReactDOM.render(<NewProducts data={data.products} />, $g('NewProducts')));
+        .then((data) => ReactDOM.render(<NewProducts data={data.products}/>, $g('NewProducts')));
 
     $FW.Ajax(`${API_PATH}mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=8`)
         .then((data) => {
-            ReactDOM.render(<HotProducts data={data.products} />, $g('HotProducts'));
-            ReactDOM.render(<Grid_2 data={data.products} />, $g('Grid_2'));
-            ReactDOM.render(<Grid_6 data={data.products} />, $g('Grid_6'))
+            ReactDOM.render(<HotProducts data={data.products}/>, $g('HotProducts'));
+            ReactDOM.render(<Grid_2 data={data.products}/>, $g('Grid_2'));
+            ReactDOM.render(<Grid_6 data={data.products}/>, $g('Grid_6'))
         });
 
     $FW.Ajax(`${API_PATH}mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=9`)
         .then(data => {
-            ReactDOM.render(<Grid_1 data={data.products} />, $g('Grid_1'));
-            ReactDOM.render(<Grid_5 data={data.products} />, $g('Grid_5'));
-            ReactDOM.render(<Grid_9 data={data.products} />, $g('Grid_9'))
+            ReactDOM.render(<Grid_1 data={data.products}/>, $g('Grid_1'));
+            ReactDOM.render(<Grid_5 data={data.products}/>, $g('Grid_5'));
+            ReactDOM.render(<Grid_9 data={data.products}/>, $g('Grid_9'))
         })
 
     $FW.Ajax(`${API_PATH}mall/api/index/v1/recommendProducts.json?recommendBizNo=TJ0000022&totalCount=10`)
         .then(data => {
-            ReactDOM.render(<Grid_3 data={data.products} />, $g('Grid_3'));
-            ReactDOM.render(<Grid_4 data={data.products} />, $g('Grid_4'));
-            ReactDOM.render(<Grid_7 data={data.products} />, $g('Grid_7'));
-            ReactDOM.render(<Grid_8 data={data.products} />, $g('Grid_8'))
+            ReactDOM.render(<Grid_3 data={data.products}/>, $g('Grid_3'));
+            ReactDOM.render(<Grid_4 data={data.products}/>, $g('Grid_4'));
+            ReactDOM.render(<Grid_7 data={data.products}/>, $g('Grid_7'));
+            ReactDOM.render(<Grid_8 data={data.products}/>, $g('Grid_8'))
         })
 
 });

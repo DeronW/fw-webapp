@@ -9,17 +9,20 @@ $FW.DOMReady(function () {
         })()
     };
 
-    function $(id){return document.getElementById(id)};
+    function $(id) { return document.getElementById(id) }
 
-    if(ConcertUtilBrowser.versions.ios){
-       $("download-btn").innerHTML = "IOS客户端下载";
+    if (ConcertUtilBrowser.versions.ios) {
+        $("download-btn").innerHTML = "IOS客户端下载";
     }
-    if(ConcertUtilBrowser.versions.android){
+    if (ConcertUtilBrowser.versions.android) {
         $("download-btn").innerHTML = "Android客户端下载";
     }
 
-    $("download-btn").addEventListener("click",function(){
+    $("download-btn").addEventListener("click", function () {
         $("mask").style.display = "block";
+    });
+    $("mask").addEventListener("click", function () {
+        $("mask").style.display = "none";
     });
 
 });

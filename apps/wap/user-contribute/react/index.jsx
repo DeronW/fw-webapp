@@ -49,7 +49,7 @@ const Contribute = React.createClass({
                     <div className="top-info-r">
                         <div className="vip-block">
                             <span className="img">
-                                <img src={"images/vip" + (myInfoData.userLevel - 1) + "_icon.png"}/>
+                                <img src={"images/vip" + (myInfoData.userLevel - 1) + "_icon.png"} />
                             </span>
                             <span className="user-vip-text">
                                 会员等级
@@ -96,7 +96,7 @@ const InvestTab = React.createClass({
         var data = _this.state.listData;
 
 
-        var objDiv = (value, index) => (
+        var objDiv = (value, index) =>
             <div key={index} className="cont-block">
                 <div className="top-block">
                     <span className="fl">{value.title}</span>
@@ -114,7 +114,7 @@ const InvestTab = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+            ;
 
         var btnMore = <div className="loading-more" onClick={_this.ajaxHandler}>
             加载更多
@@ -122,12 +122,12 @@ const InvestTab = React.createClass({
 
         var btnComplete = <div className="complete-btn">全部加载完毕</div>;
 
-        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/><span
+        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png" /><span
             className="text">暂无投资贡献值</span></div>;
 
         return (
             <div className="invest-block">
-                { data.map(objDiv) }
+                {data.map(objDiv)}
                 {this.state.hasMore ? btnMore : null}
                 {!this.state.hasMore && data.length > 0 ? btnComplete : null}
 
@@ -170,7 +170,7 @@ const InviteTab = React.createClass({
         var _this = this;
         var data = _this.state.listData;
 
-        var objDiv = (value, index) => (
+        var objDiv = (value, index) =>
             <div key={index} className="cont-block">
                 <div className="top-block">
                     <span className="fl">{value.title}</span>
@@ -186,7 +186,7 @@ const InviteTab = React.createClass({
                     </div>
                 </div>
             </div>
-        );
+            ;
 
         var btnMore = <div className="loading-more" onClick={_this.ajaxHandler}>
             加载更多
@@ -194,12 +194,12 @@ const InviteTab = React.createClass({
 
         var btnComplete = <div className="complete-btn">全部加载完毕</div>;
 
-        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png"/><span
+        var wulistImg = <div className="wulist-img"><img src="images/ico-wulist.png" /><span
             className="text">暂无邀友贡献值</span></div>;
 
         return (
             <div className="invite-block">
-                { data.map(objDiv) }
+                {data.map(objDiv)}
                 {this.state.hasMore ? btnMore : null}
                 {!this.state.hasMore && data.length > 0 ? btnComplete : null}
 
@@ -257,7 +257,7 @@ const HomePage = React.createClass({
     render: function () {
         return (
             <div>
-                <Contribute myInfoData={this.props.myInfoData}/>
+                <Contribute myInfoData={this.props.myInfoData} />
                 <ContributeTab />
             </div>
         );
@@ -268,11 +268,11 @@ $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('我的贡献值');
     } else {
-        ReactDOM.render(<Header title={"我的贡献值"}/>, document.getElementById("header"));
+        ReactDOM.render(<Header title={"我的贡献值"} />, document.getElementById("header"));
     }
 
     $FW.Ajax({
         url: `${API_PATH}mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0`,
-        success: data => ReactDOM.render(<HomePage myInfoData={data}/>, document.getElementById("cnt"))
+        success: data => ReactDOM.render(<HomePage myInfoData={data} />, CONTENT_NODE)
     })
 });

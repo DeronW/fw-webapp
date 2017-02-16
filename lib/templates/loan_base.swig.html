@@ -12,7 +12,7 @@
     {% block disable_telephone %}
     <meta name="format-detection" content="telephone=no"/>
     {% endblock %}
-    <title>{% block title %}生蚝借贷{% endblock %}</title>
+    <title>{% block title %}放心花{% endblock %}</title>
     {% block css %}
     <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css"/>
     {% endblock %}
@@ -32,30 +32,20 @@
 
 {% block javascripts %}
 <script src="javascripts/lib.js"></script>
-{% if !DEBUG %}
+{% if ENV == 'production' %}
 {% include 'partial/expection-handler.swig.html' with
-    {SENTRY_DSN: 'https://064ad415a6de48dbbef9c9974ff6a029@sentry.dougemall.com/5'} %}
+{SENTRY_DSN: 'https://064ad415a6de48dbbef9c9974ff6a029@sentry.dougemall.com/5'} %}
 {% endif %}
 <script src="javascripts/bundle.js"></script>
 {% block extra_javascripts %}{% endblock %}
 {% endblock %}
 
-{% if !DEBUG %}
-<script type='text/javascript'>
-    var _vds = _vds || [];
-    window._vds = _vds;
-    (function () {
-        _vds.push(['setAccountId', 'af530885d23e3d7a']);
-        (function () {
-            var vds = document.createElement('script');
-            vds.type = 'text/javascript';
-            vds.async = true;
-            vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(vds, s);
-        })();
-    })();
-</script>
+{% block force_reload %}
+{% include 'partial/auto-reload-in-back-action.swig.html' %}
+{% endblock%}
+
+{% if ENV == 'production' %}
+{% include 'partial/growing-io.swig.html' with {key: '8560a41923a914be'} %}
 {% endif %}
 </body>
 </html>

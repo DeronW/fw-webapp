@@ -56,14 +56,14 @@ const SendCode = React.createClass({
             service: 'REQ_PAY_QUICK_RESEND',
             merchantNo: this.state.merchantNo
         }
-        console.log(FormData);
+
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
-            enable_loading: true,
+            enable_loading: 'mini',
             data: FormData,
             success: function (data) {
-                console.log(data);
+
                 this.setState({value: 60, reSend: false});
                 this.tick()
                 this.setState({reSend: false});
@@ -108,23 +108,23 @@ const SendCode = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
-            enable_loading: true,
+            enable_loading: 'mini',
             data: FormData,
             success: (data) => {
-                if(data.status=="F"){
+                if (data.responseResult.status == "F") {
                     window.location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/order-complete/index.html?status=F"
+                        "/static/mall/order-complete/index.html?status=F&failTex=" + data.responseResult.resMessage
                 }
-                if(data.status=="S"){
+                if (data.responseResult.status == "S") {
                     window.location.href = location.protocol + '//' + location.hostname +
                         "/static/mall/order-complete/index.html?status=S"
                 }
             },
             fail: (data) => {
-                   $FW.Component.Alert(data.msg);
+                $FW.Component.Alert(data.msg);
             }
         })
-        },
+    },
 
     //完成支付确认
     nextStep: function () {
@@ -137,23 +137,23 @@ const SendCode = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
-            enable_loading: true,
+            enable_loading: 'mini',
             data: FormData,
             success: (data) => {
-                if(data.status=="I"){
-                    $FW.Component.showAjaxLoading();
-                    setTimeout(() => {
-                        this.queryState();
-                    }, 1500);
-                }
-                else if(data.status=="F"){
-                    window.location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/order-complete/index.html?status=F"
-                }
-                else{
-                    window.location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/order-complete/index.html?status=S"
-                }
+                // if(data.status=="I"){
+                $FW.Component.showAjaxLoading();
+                setTimeout(() => {
+                    this.queryState();
+                }, 1500);
+                // }
+                // else if(data.status=="F"){
+                //     window.location.href = location.protocol + '//' + location.hostname +
+                //         "/static/mall/order-complete/index.html?status=F"
+                // }
+                // else{
+                //     window.location.href = location.protocol + '//' + location.hostname +
+                //         "/static/mall/order-complete/index.html?status=S"
+                // }
 
                 //window.location.href = location.protocol + '//' + location.hostname +
                 //    "/static/mall/order-complete/index.html?id="+data.tradeNo
@@ -166,7 +166,7 @@ const SendCode = React.createClass({
     render: function () {
         return (
             <div>
-               <div className="phone-tip">验证码已发送至手机<span>{this.state.mobileNo}</span></div>
+                <div className="phone-tip">验证码已发送至手机<span>{this.state.mobileNo}</span></div>
                 <div className="input-wrap">
                     <input type="text" defaultValue="" placeholder="请输入验证码" onChange={this.changeVal}/>
                     <input type="button" className="msg-tip"
@@ -182,10 +182,9 @@ const SendCode = React.createClass({
 
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('手机验证码');
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"手机验证码"} back_handler={backward}/>, document.getElementById('header'));
-    ReactDOM.render(<SendCode/>, document.getElementById('cnt'));
+
+    ReactDOM.render(<Header title={"手机验证码"}/>, HEADER_NODE);
+    ReactDOM.render(<SendCode/>, CONTENT_NODE);
 });
 
 function backward() {

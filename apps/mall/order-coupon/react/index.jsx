@@ -1,7 +1,7 @@
 const Coupon = React.createClass({
-    render:function(){
+    render: function () {
         let ls = this.props.data.coupon;
-        let coupon = (l,index) => {
+        let coupon = (l, index) => {
             return (
                 <div className="coupon">
                     <div className="l-r-text">
@@ -30,25 +30,20 @@ const Coupon = React.createClass({
 });
 
 
-$FW.DOMReady(function() {
-    NativeBridge.setTitle('查看券码');
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"查看券码"} back_handler={back_handler}/>, document.getElementById('header'));
+$FW.DOMReady(function () {
+    ReactDOM.render(<Header title={"查看券码"}/>, HEADER_NODE);
     var query = $FW.Format.urlQuery();
     $FW.Ajax({
         url: API_PATH + "mall/api/order/v1/viewCardPass.json",
-        enable_loading: true,
-        data:{
-            bizNo:query.bizNo,
-            cardUuid:query.cardUuid
+        enable_loading: 'mini',
+        data: {
+            bizNo: query.bizNo,
+            cardUuid: query.cardUuid
         },
         success: function (data) {
             console.log(data);
-            ReactDOM.render(<Coupon data={data}/>, document.getElementById('cnt'));
+            ReactDOM.render(<Coupon data={data}/>, CONTENT_NODE);
         }
     });
 });
 
-function back_handler() {
-    location.href = '/static/mall/order-list/index.html';
-}

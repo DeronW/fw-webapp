@@ -20,7 +20,7 @@ const USER_PAGES = [
     'user-voucher',
     'user-deliver-address',
     'user-build-deliver',
-	'user-help',
+    'user-help',
 ]
 
 const PRODUCT_PAGES = [
@@ -61,7 +61,6 @@ const PAYMENT_PAGES = [
 const GAME_PAGES = [
     'game', //游戏中心
     'game-guess', //猜拳
-    'game-red-rain', //2017过年红包雨
     'game-zhuanpan20161230', //20161230转盘活动
 ]
 
@@ -70,6 +69,10 @@ const DEVELOPING_PAGES = [
     'service-livelihood', // 生活服务
     'service-bill', //
     'user-footprint', // 用户足迹, 浏览过的商品页面
+]
+
+const TRASH_PAGES = [
+    // 'game-red-rain', //2017过年红包雨
 ]
 
 APP_NAMES.push(
@@ -119,10 +122,12 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-            `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
-            '!**/jquery.*.js', '!**.min.js'])
+                `apps/${PROJ}/**/*.+(js|jsx)`,
+                '!node_modules/**',
+                '!**/jquery.*.js',
+                '!**.min.js'
+            ])
             .pipe(eslint())
-            .pipe(eslint.format())
-            .pipe(eslint.failAfterError());
+            .pipe(eslint.format());
     }))
 };

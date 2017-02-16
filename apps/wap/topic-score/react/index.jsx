@@ -2,7 +2,7 @@ $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('玩转工分')
     } else {
-        ReactDOM.render(<Header title={'玩转工分'}/>, document.getElementById('header'))
+        ReactDOM.render(<Header title={'玩转工分'}/>, HEADER_NODE)
     }
 
     if ($FW.Browser.inIOS()) {

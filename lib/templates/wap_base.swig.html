@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     {% block viewport %}
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
-    {% include 'partial/fix-viewport.html' %}
+    {% if DEBUG %} {% include 'partial/fix-viewport.html' %} {% endif %}
     {% endblock %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="screen-orientation" content="portrait">
@@ -30,7 +30,7 @@
 
 {% block javascripts %}
 <script src="javascripts/lib.js"></script>
-{% if !DEBUG %}
+{% if ENV == 'production' %}
 {% include 'partial/expection-handler.swig.html' with
     {SENTRY_DSN: 'https://6598d6b107674705be86433412e78c3b@sentry.dougemall.com/4'} %}
 {% endif %}
@@ -38,22 +38,9 @@
 {% block extra_javascripts %}{% endblock %}
 {% endblock %}
 
-{% if !DEBUG %}
-<script type='text/javascript'>
-    var _vds = _vds || [];
-    window._vds = _vds;
-    (function () {
-        _vds.push(['setAccountId', 'af530885d23e3d7a']);
-        (function () {
-            var vds = document.createElement('script');
-            vds.type = 'text/javascript';
-            vds.async = true;
-            vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(vds, s);
-        })();
-    })();
-</script>
+{% if ENV == 'production' %}
+{% include 'partial/growing-io.swig.html' with {key: 'af530885d23e3d7a'} %}
 {% endif %}
+
 </body>
 </html>

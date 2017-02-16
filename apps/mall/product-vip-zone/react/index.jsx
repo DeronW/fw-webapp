@@ -112,52 +112,52 @@ const VipZone = React.createClass({
 //      });
 
 
-	$FW.Ajax({
-	            url: API_PATH + 'mall/api/index/v1/search.json',
-	            data: {
-	            	page: page,
-			        vipLevel:is_Level,
-			        productName: '',
-			        categoryName: '',
-			        actIds: '',
-			        searchSourceType:4,
-			        prefectureType:3,
-			        order:0,
-			        minPoints: '',
-			        maxPoints: ''
-	            },
-	            enable_loading: true,
-	            success: function (data) {
+        $FW.Ajax({
+            url: API_PATH + 'mall/api/index/v1/search.json',
+            data: {
+                page: page,
+                vipLevel: is_Level,
+                productName: '',
+                categoryName: '',
+                actIds: '',
+                searchSourceType: 4,
+                prefectureType: 3,
+                order: 0,
+                minPoints: '',
+                maxPoints: ''
+            },
+            enable_loading: 'mini',
+            success: function (data) {
 
-		              let tab;
-		              console.log(1);
-		              if (is_Level== -1) {
-		                  tab = 'all'
+                let tab;
+                console.log(1);
+                if (is_Level == -1) {
+                    tab = 'all'
 
-		              } else if (is_Level == 1) {
-		                  tab = 'vipLevel0'
-		              } else if (is_Level == 2) {
-		                  tab = 'vipLevel1'
-		              } else if (is_Level == 3) {
-		                  tab = 'vipLevel2'
-		              } else if (is_Level == 4) {
-		                  tab = 'vipLevel3'
-		              } else if (is_Level == 5) {
-		                  tab = 'vipLevel4'
-		              } else {
-		                  done && done();
-		                  return;
-		              }
+                } else if (is_Level == 1) {
+                    tab = 'vipLevel0'
+                } else if (is_Level == 2) {
+                    tab = 'vipLevel1'
+                } else if (is_Level == 3) {
+                    tab = 'vipLevel2'
+                } else if (is_Level == 4) {
+                    tab = 'vipLevel3'
+                } else if (is_Level == 5) {
+                    tab = 'vipLevel4'
+                } else {
+                    done && done();
+                    return;
+                }
 
-		              window.Products[tab] = window.Products[tab].concat(data.products);
-		              let products = window.Products[this.state.tab];
-		              let new_page = this.state.page;
-		              new_page[this.state.tab] = new_page[this.state.tab] + 1;
-		              if (data.totalCount < 20) new_page[this.state.tab] = 0;
-		              this.setState({products: products, page: new_page});
-		              done && done();
-		          }.bind(this)
-	        });
+                window.Products[tab] = window.Products[tab].concat(data.products);
+                let products = window.Products[this.state.tab];
+                let new_page = this.state.page;
+                new_page[this.state.tab] = new_page[this.state.tab] + 1;
+                if (data.totalCount < 20) new_page[this.state.tab] = 0;
+                this.setState({products: products, page: new_page});
+                done && done();
+            }.bind(this)
+        });
     },
 
     componentDidMount: function () {
@@ -259,14 +259,11 @@ window.Products = {
 };
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('VIP专区');
-
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"VIP专区"} back_handler={backward}/>, document.getElementById('header'));
+    ReactDOM.render(<Header title={"VIP专区"}/>, HEADER_NODE);
 
     $FW.Ajax({
         url: API_PATH + "mall/api/member/v1/user_level_points.json",
-        enable_loading: true,
+        enable_loading: 'mini',
         success: function (data) {
             if (data.loginOk) {
                 ReactDOM.render(<VipMsg user_level={data.vip_level}
@@ -274,12 +271,9 @@ $FW.DOMReady(function () {
             }
         }
     });
-    ReactDOM.render(<VipZone/>, document.getElementById('cnt'));
+    ReactDOM.render(<VipZone/>, CONTENT_NODE);
 });
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html'
-}
 
 //window.onNativeMessageReceive = function (msg) {
 //	if (msg == 'history:back') backward()

@@ -8,15 +8,11 @@ function getNextElement(node) {
     return null;
 }
 
-function gotoHandler(link, need_login) {
+function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
+    location.href = encodeURI(link);
 }
 
 const ShoppingCart = React.createClass({
@@ -39,28 +35,28 @@ const ShoppingCart = React.createClass({
         var ps = this.state.products;
         for (var i = 0; i < ps.length; i++) {
             if (!ps[i].cartStatus == 0) {
-                this.setState({ changeAll: false });
+                this.setState({changeAll: false});
             }
         }
+        document.querySelector("._style_header_fixed").removeChild(document.querySelector('._style_header_arrow'));
     },
     checkHandler: function (index) {
         var ps = this.state.products;
-        var _this = this;
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/isChecked.json`,
             data: {
-                flag: ps[index].cartStatus == 0 ? true : false,
+                flag: ps[index].cartStatus === 0,
                 productBizNo: ps[index].productBizNo
-            },
-            success: function (data) {
-                ps[index].cartStatus = ps[index].cartStatus == 0 ? 5 : 0,
-                    _this.setState({ products: ps });
-                for (var i = 0; i < ps.length; i++) {
-                    if (ps[i].cartStatus == 5) {
-                        _this.setState({ changeAll: false });
-                    } else if (ps[i].cartStatus == 0) {
-                        _this.setState({ changeAll: true });
-                    }
+            }
+        }).then(data => {
+            ps[index].cartStatus = ps[index].cartStatus == 0 ? 5 : 0;
+            this.setState({products: ps});
+
+            for (var i = 0; i < ps.length; i++) {
+                if (ps[i].cartStatus == 5) {
+                    this.setState({changeAll: false});
+                } else if (ps[i].cartStatus == 0) {
+                    this.setState({changeAll: true});
                 }
             }
         });
@@ -68,16 +64,14 @@ const ShoppingCart = React.createClass({
     },
     deleteHandler: function (index) {
         let ps = this.state.products;
-        var _this = this;
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
             data: {
                 productBizNo: ps[index].productBizNo
             },
-            enable_loading: true,
-            success: function (data) {
-                _this.setState({ products: ps });
-            }
+            enable_loading: 'mini'
+        }).then(data => {
+            this.setState({products: ps});
         });
         ps.splice(index, 1);
     },
@@ -96,11 +90,8 @@ const ShoppingCart = React.createClass({
             data: {
                 allFlag: newChangeAll,
                 productBizNo: ''
-            },
-            success: () => {
-                this.setState({ products: products });
             }
-        });
+        }).then(() => this.setState({products: products}));
     },
     updateCount: function (index, newAmount) {
         var ps = this.state.products;
@@ -110,16 +101,14 @@ const ShoppingCart = React.createClass({
         if (c < 1) c = 1;
         if (c > ps[index].prdInventory) c = ps[index].prdInventory;
         ps[index].productNumber = c;
+
         $FW.Ajax({
             url: `${API_PATH}mall/api/cart/v1/updateCartNumber.json`,
             data: {
                 buyNum: ps[index].productNumber,
                 productBizNo: ps[index].productBizNo
-            },
-            success: function (data) {
-                _this.setState({ products: ps });
             }
-        });
+        }).then(() => this.setState({products: ps}));
     },
     changeMinus: function (index) {
         let ps = this.state.products;
@@ -149,17 +138,19 @@ const ShoppingCart = React.createClass({
                         <div className="checked-icon" onClick={() => this.checkHandler(index)}>
                             <span className={product.cartStatus == 0 ? "checked-circle" : "unchecked-circle"}></span>
                             <input type="hidden" className="checked-bizNo"
-                                value={product.cartStatus == 0 ? product.productBizNo : null} />
+                                   value={product.cartStatus == 0 ? product.productBizNo : null}/>
                         </div>
-                        <a className="product-img" href={"/static/mall/product-detail/index.html?bizNo=" + product.productBizNo}><img src={product.img} /></a>
+                        <a className="product-img"
+                           href={"/static/mall/product-detail/index.html?bizNo=" + product.productBizNo}><img
+                            src={product.img}/></a>
                         <div className="product-item">
                             <div className="product-info">
                                 <div className="product-name">{product.productName}</div>
                                 <div className="product-price">
-                                    {product.subTotalPrice==0 ?"": '¥' + product.subTotalPrice}
-                                    {product.subTotalPrice==0||product.subTotalCredit==0?'':'+'}
-                                    {product.subTotalCredit==0 ?"": product.subTotalCredit+ '工分'}
-                            </div>
+                                    {product.singleRmbPrice == 0 ? "" : '¥' + product.singleRmbPrice}
+                                    {product.singleRmbPrice == 0 || product.singleCredit == 0 ? '' : '+'}
+                                    {product.singleCredit == 0 ? "" : product.singleCredit + '工分'}
+                                </div>
                                 <div className="detail-num-change">
                                     <div className="minus" onClick={() => this.changeMinus(index)}></div>
                                     <div className="input-num">{product.productNumber}</div>
@@ -174,8 +165,8 @@ const ShoppingCart = React.createClass({
         let total_price = 0;
         let total_score = 0;
         let total = (product, index) => {
-            product.cartStatus == 0 ? total_price += product.subTotalPrice * product.productNumber : total_price;
-            product.cartStatus == 0 ? total_score += product.subTotalCredit * product.productNumber : total_score;
+            product.cartStatus == 0 ? total_price += product.singleRmbPrice * product.productNumber : total_price;
+            product.cartStatus == 0 ? total_score += product.singleCredit * product.productNumber : total_score;
         };
         this.state.products.map((product, index) => total(product, index));
 
@@ -193,10 +184,10 @@ const ShoppingCart = React.createClass({
                     <div className="empty-cart-icon"></div>}
                 {this.props.products.length != 0 ? <div className="pay-bar">
                     <div className="all-price">合计：<span className="total-price">
-                        {total_price==0 ?"": '¥' + total_price.toFixed(2)}
-                        {total_price==0||total_score==0?'':'+'}
-                        {total_price==0&&total_score==0?'0':''}
-                        {total_score==0 ?"": total_score+ '工分'}
+                        {total_price == 0 ? "" : '¥' + total_price.toFixed(2)}
+                        {total_price == 0 || total_score == 0 ? '' : '+'}
+                        {total_price == 0 && total_score == 0 ? '0' : ''}
+                        {total_score == 0 ? "" : total_score + '工分'}
                     </span>
                     </div>
                     <a className="pay-btn" onClick={this.payHandler}>结算</a>
@@ -208,8 +199,7 @@ const ShoppingCart = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax(`${API_PATH}mall/api/cart/v1/shoppingCart.json`)
-        .then(data => ReactDOM.render(<ShoppingCart products={data.cartList} />, CONTENT_NODE));
-
-    ReactDOM.render(<Header title={"购物车"} show_back_btn={true} />, HEADER_NODE);
+        .then(data => ReactDOM.render(<ShoppingCart products={data.cartList}/>, CONTENT_NODE));
+    ReactDOM.render(<Header title={"购物车"} show_back_btn={true}/>, HEADER_NODE);
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 });

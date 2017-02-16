@@ -7,6 +7,7 @@ let APP_NAMES = [
     'about-us', // 关于我们
     'faq', // 帮助中心
     'app-download', // app 下载页面
+    'guide-cookbook', // 用户使用引导页面
 
     // test page
     'test-native-bridge',
@@ -19,7 +20,6 @@ const USER_PAGES = [
     'user-contribute', // 用户贡献值
     'user-evaluate', // 投资风险承受能力评估
     'vip-prerogative', // VIP特权详情页
-    'guide-cookbook', // 用户使用引导页面
 ]
 
 const PROTOCOL_PAGES = [
@@ -40,6 +40,13 @@ const PROTOCOL_PAGES = [
 //     'circle-person-data', //个人数据
 //     'circle-score-stream', //工分流水
 // ]
+
+const NOTICE_PAGES = [
+    // 内容展示页面
+    'notice-corporate-structure', // 信息披露 公司结构
+    'notice-safeguard', // 资金安全保障
+    'notice-risk-prompt', // 风险揭示
+]
 
 const TOPIC_PAGES = [
     // 专题页面
@@ -71,14 +78,9 @@ const HUISHANG_PAGES = [
     'modification-phone', // 修改银行预留手机号
 ]
 
-const NOTICE_PAGES = [
-    // 内容展示页面
-    'notice-corporate-structure', // 信息披露 公司结构
-    'notice-safeguard', // 资金安全保障
-    'notice-risk-prompt', // 风险揭示
-]
 
 const DEVELOPING_PAGES = [
+    'user-levels', // 用户等级详情, 重构版
 ]
 
 APP_NAMES.push(
@@ -121,10 +123,12 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-            `apps/${PROJ}/**/*.+(js|jsx)`, '!node_modules/**',
-            '!**/jquery.*.js', '!**.min.js'])
+                `apps/${PROJ}/**/*.+(js|jsx)`,
+                '!node_modules/**',
+                '!**/jquery.*.js',
+                '!**.min.js'
+            ])
             .pipe(eslint())
-            .pipe(eslint.format())
-            .pipe(eslint.failAfterError());
+            .pipe(eslint.format());
     }))
 };

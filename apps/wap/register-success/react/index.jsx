@@ -1,7 +1,7 @@
 var Pop = React.createClass({
-    render: function() {
+    render: function () {
         return (
-            <div className="pop-body" style={{zIndex: 1000000}}>
+            <div className="pop-body" style={{ zIndex: 1000000 }}>
                 <div className="pop-back"></div>
                 <div className="pop-cnt">
                     <div className="pop-info">
@@ -21,7 +21,7 @@ var TopNav = React.createClass({
     skipHandler: function () {
         //location.href = '/'
     },
-    handlerBtn: function() {
+    handlerBtn: function () {
         this.props.callbackPopShow(true);
     },
     render: function () {
@@ -54,7 +54,7 @@ var PromptBlock = React.createClass({
         return (
             <div className="ui-prompt">
                 <div className="img">
-                    <img src={this.props.imgUrl}/>
+                    <img src={this.props.imgUrl} />
                 </div>
                 <div className="title">
 
@@ -71,13 +71,13 @@ var PromptBlock = React.createClass({
 
 //开户成功
 var AccountSucceedBody = React.createClass({
-    getInitialState: function() {
+    getInitialState: function () {
         return {
             popShow: false,
             registResultData: ""
         }
     },
-    componentWillMount: function() {
+    componentWillMount: function () {
         var _this = this;
 
         $FW.Ajax({
@@ -87,7 +87,7 @@ var AccountSucceedBody = React.createClass({
                     registResultData: data
                 });
             },
-            fail: function() {
+            fail: function () {
 
             }
         });
@@ -95,47 +95,43 @@ var AccountSucceedBody = React.createClass({
     clickHandler: function () {
         location.href = '/static/wap/open-account/index.html'
     },
-    handlerPopShow: function(booleanVal) {
+    handlerPopShow: function (booleanVal) {
         this.setState({
             popShow: booleanVal
         });
     },
-    getCancelBtn: function() {
+    getCancelBtn: function () {
         this.setState({
             popShow: false
         });
     },
-    getConfirmBtn: function() {
+    getConfirmBtn: function () {
         window.location.href = location.protocol + "//m.9888.cn/mpwap/orderuser/getUserInfo.shtml";
     },
     render: function () {
         return (
             <div className="">
-                <TopNav title={"注册成功"} btnText={"关闭"} callbackPopShow={this.handlerPopShow}/>
+                <TopNav title={"注册成功"} btnText={"关闭"} callbackPopShow={this.handlerPopShow} />
+
                 <div className="nav-block">
-                    <img src="images/process.png"/>
+                    <img src="images/process.png" />
                 </div>
                 <PromptBlock imgUrl={"images/succeed-1.png"} title={"注册成功"}
-                             text={"元返现券已经转入您的账户中"}
-                             numberText={this.state.registResultData.resvalue}
+                    text={"元返现券已经转入您的账户中"}
+                    numberText={this.state.registResultData.resvalue}
                 />
-                <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler}/>
+                <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler} />
 
                 {
-                    this.state.popShow ? <Pop  callbackCancelBtn={this.getCancelBtn}
-                                               callbackConfirmBtn={this.getConfirmBtn}
-                                         /> : null
+                    this.state.popShow ? <Pop callbackCancelBtn={this.getCancelBtn}
+                        callbackConfirmBtn={this.getConfirmBtn}
+                    /> : null
                 }
 
             </div>
         );
     }
 });
-
-
-
 $FW.DOMReady(() => {
-    ReactDOM.render(<AccountSucceedBody />, document.getElementById("cnt"));
+    ReactDOM.render(<AccountSucceedBody />, CONTENT_NODE);
 });
-
-

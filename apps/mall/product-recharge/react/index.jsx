@@ -16,9 +16,13 @@ const Recharge = React.createClass({
     },
     componentDidMount: function () {
         var query = $FW.Format.urlQuery();
-        var tab= query.tab;
-        if(tab==1){this.switchTabHandler('fee');}
-        else{ this.switchTabHandler('net'); }
+        var tab = query.tab;
+        if (tab == 1) {
+            this.switchTabHandler('fee');
+        }
+        else {
+            this.switchTabHandler('net');
+        }
     },
 
     switchTabHandler: function (tab) {
@@ -40,8 +44,8 @@ const Recharge = React.createClass({
 
     reloadFeeHandler: function () {
         $FW.Ajax({
-            url: API_PATH + 'api/v1/phone/fee/recharge.json',
-            enable_loading: true,
+            url: API_PATH + 'mall/api/v1/phone/fee/recharge.json',
+            enable_loading: 'mini',
             success: function (data) {
                 let pay_score;
                 data.fee.forEach((i)=> {
@@ -67,8 +71,8 @@ const Recharge = React.createClass({
         console.log('load net', code)
 
         $FW.Ajax({
-            url: API_PATH + 'api/v1/phone/net/recharge.json',
-            enable_loading: true,
+            url: API_PATH + 'mall/api/v1/phone/net/recharge.json',
+            enable_loading: 'mini',
             data: {operator: code},
             success: function (data) {
                 let pay_score = 0;
@@ -144,9 +148,9 @@ const Recharge = React.createClass({
             return $FW.Component.Alert("请输入手机号！");
         if (!/^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/.test(v))
             return $FW.Component.Alert("手机号格式不正确！");
-        if(this.state.tab == 'fee' && this.state.user_score < this.state.fee_pay_score)
+        if (this.state.tab == 'fee' && this.state.user_score < this.state.fee_pay_score)
             return $FW.Component.Alert("充值失败，工分不足！");
-        if(this.state.tab == 'net' && this.state.user_score < this.state.net_pay_score)
+        if (this.state.tab == 'net' && this.state.user_score < this.state.net_pay_score)
             return $FW.Component.Alert("充值失败，工分不足！");
         window.confirmPanel.show();
     },
@@ -290,25 +294,16 @@ Recharge.ProductPanel = React.createClass({
 
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('充值中心');
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(
-			<Header title={"充值中心"} back_handler={backward}/>,
-            document.getElementById('header')
-		)
+    ReactDOM.render(<Header title={"充值中心"}/>, HEADER_NODE)
 
     $FW.Ajax({
-        url: API_PATH + 'api/v1/user-state.json',
-        enable_loading: true,
+        url: API_PATH + 'mall/api/v1/user-state.json',
+        enable_loading: 'mini',
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
-                document.getElementById('cnt'));
+                CONTENT_NODE);
         }
     });
     window.confirmPanel = ReactDOM.render(<ConfirmPop />, document.getElementById('dialog'));
 });
 
-
-function backward(){
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html';
-}

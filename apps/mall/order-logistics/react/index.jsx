@@ -1,15 +1,14 @@
 const Logistics = React.createClass({
-    getInitialState:function(){
-        return {
-        }
+    getInitialState: function () {
+        return {}
     },
-    render:function(){
+    render: function () {
         let ls = this.props.data.logistics;
         var query = $FW.Format.urlQuery();
-        let logisticsItem = (l,index)=>{
+        let logisticsItem = (l, index)=> {
             return (
                 <div className="logistics-li" key={index}>
-                    {index==0?<span className="first-mark-status"></span>:<span className="mark-status"></span>}
+                    {index == 0 ? <span className="first-mark-status"></span> : <span className="mark-status"></span>}
                     <span className="logistics-vertical-line"></span>
                     <div className={index==0? "logistics-title green":"logistics-title grey"}>{ls[index].text}</div>
                     <div className={index==0? "logistics-date green":"logistics-date grey"}>{ls[index].date}</div>
@@ -34,30 +33,25 @@ const Logistics = React.createClass({
 });
 
 
-$FW.DOMReady(function() {
-    NativeBridge.setTitle('查看物流');
-    if ($FW.Utils.shouldShowHeader())
-        ReactDOM.render(<Header title={"查看物流"} back_handler={back_handler}/>, document.getElementById('header'));
+$FW.DOMReady(function () {
+    ReactDOM.render(<Header title={"查看物流"}/>, HEADER_NODE);
     var query = $FW.Format.urlQuery();
     $FW.Ajax({
         //url: "http://localhost/nginx-1.9.12/html/logistics.json",
         url: API_PATH + "mall/api/order/v1/logistics.json",
-        enable_loading: true,
-        data:{
-            sendOrderNo:query.sendOrderNo,
-            sendChannel:query.sendChannel,
-            sendChannelEnum:query.sendChannelEnum
+        enable_loading: 'mini',
+        data: {
+            sendOrderNo: query.sendOrderNo,
+            sendChannel: query.sendChannel,
+            sendChannelEnum: query.sendChannelEnum
             //sendOrderNo:1000688237617,
             //sendChannel:"韵达快递",
             //sendChannelEnum:"YD"
         },
         success: function (data) {
             console.log(data);
-            ReactDOM.render(<Logistics data={data}/>, document.getElementById('cnt'));
+            ReactDOM.render(<Logistics data={data}/>, CONTENT_NODE);
         }
     });
 });
 
-function back_handler() {
-    location.href = '/static/mall/order-list/index.html';
-}
