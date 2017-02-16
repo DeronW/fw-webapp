@@ -71,7 +71,7 @@ const Recharge = React.createClass({
         console.log('load net', code)
 
         $FW.Ajax({
-            url: API_PATH + 'api/v1/phone/net/recharge.json',
+            url: API_PATH + 'mall/api/v1/phone/net/recharge.json',
             enable_loading: 'mini',
             data: {operator: code},
             success: function (data) {
