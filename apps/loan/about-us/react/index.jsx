@@ -26,7 +26,7 @@ const UserAboutus = React.createClass({
                         </div>
                         <div className="r">
                             <span className="icon"></span>
-                            <span className="text">124124</span>
+                            <span className="text">fxhuaba</span>
                         </div>
                     </div>
                 </div>
