@@ -82,7 +82,7 @@ const Register = React.createClass({
                     userOperationType: 3
                 }).then(data=>{ this.setState({
                 codeToken: data.codeToken
-            })},e => $FW.Component.Toast(e.message))
+            })},(e) =>{$FW.Component.Alert(e.message);});
         }
     },
     passwordChange: function (e) {
@@ -108,7 +108,7 @@ const Register = React.createClass({
                 verifyCode: code
             }).then(data => {
                 window.location.href = "/static/loan/weixin-attention/index.html"
-            }, e => $FW.Component.Toast(e.message))
+            }, (e) => $FW.Component.Alert(e.message))
     },
     render(){
         return (

@@ -68,7 +68,7 @@ const HistoryBill = React.createClass({
             <div>
                 <div className="data-box">
                     {rows.map(item_list)}
-                    {!hasData && <div className="data-completion">已加载完全部数据</div>}
+                    { hasData && <div className="data-completion">已加载完全部数据</div>}
                 </div>
                 {rows.length === 0 && empty}
             </div>
