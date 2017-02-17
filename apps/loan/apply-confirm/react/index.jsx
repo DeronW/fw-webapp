@@ -178,7 +178,7 @@ const VerifyCode = React.createClass({
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3,
+                sourceType: SOURCE_TYPE,
                 orderGid: orderGid
             }
         }).then(data => {
@@ -196,12 +196,9 @@ const VerifyCode = React.createClass({
                     token: user.token,
                     userGid: user.gid,
                     userId: user.id,
-                    sourceType: 3,
+                    sourceType: SOURCE_TYPE,
                     orderGid: this.state.orderGid
                 }
-            }).then(d => {
-            }, (error) => {
-
             });
         }
     },
@@ -216,7 +213,7 @@ const VerifyCode = React.createClass({
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3,
+                sourceType: SOURCE_TYPE,
                 orderGid: orderGid,
                 verifyCode: this.state.value,
             }
@@ -418,7 +415,7 @@ $FW.DOMReady(function () {
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3,
+                sourceType: SOURCE_TYPE,
                 orioleOrderGid: orioleOrderGid,
                 loanAmount: loanNum
             }
@@ -431,7 +428,7 @@ $FW.DOMReady(function () {
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }
         }),
         $FW.Ajax({
@@ -442,7 +439,7 @@ $FW.DOMReady(function () {
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }
         })
     ]).then(d => {

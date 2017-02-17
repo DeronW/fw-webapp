@@ -43,7 +43,7 @@ const Register = React.createClass({
             $FW.Post(`${API_PATH}/api/userBase/v1/login.json`, {
                 mobile: PHONE,
                 password: password,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }).then(data => {
                 let dict = data.userLogin;
 

@@ -218,7 +218,7 @@ $FW.DOMReady(function () {
             token: user.token,
             userGid: user.gid,
             userId: user.id,
-            sourceType: 3,
+            sourceType: SOURCE_TYPE,
             productId: 1
         }
     }).then(data => {

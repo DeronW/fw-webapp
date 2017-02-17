@@ -16,7 +16,7 @@ const BankList = React.createClass({
                 userId: user.id,
                 page: 1,
                 pageSize: 100,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }
         }).then((data) => {
             this.setState({

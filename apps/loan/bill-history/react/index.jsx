@@ -19,7 +19,7 @@ const HistoryBill = React.createClass({
             token: user.token,
             userGid: user.gid,
             userId: user.id,
-            sourceType: 3,
+            sourceType: SOURCE_TYPE,
             pageSize: 20,
             pageIndex: this.state.page
         }).then(data => {

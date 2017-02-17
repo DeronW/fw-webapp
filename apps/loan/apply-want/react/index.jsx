@@ -52,7 +52,7 @@ const WantLoan = React.createClass({
             loanAmount: this.state.loanNum,
             orioleOrderGid: orioleOrderGid,
             productId: 1,
-            sourceType: 3,
+            sourceType: SOURCE_TYPE,
             withdrawCardGid: filtered[0].cardGid
         }
         ).then((data) => {
@@ -113,7 +113,7 @@ $FW.DOMReady(function () {
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3,
+                sourceType: SOURCE_TYPE,
                 productId:1
             }
         }),
@@ -124,7 +124,7 @@ $FW.DOMReady(function () {
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }
         })
     ]).then(d => {
