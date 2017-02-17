@@ -77,8 +77,8 @@ const Greater = React.createClass({
 
 const Content = React.createClass({
     getInitialState: function () {
-        console.log(this.props.data.bankInfo)
-        console.log(this.props.data.bankInfo.bankBranchName)
+        console.log(this.props.data)
+        console.log(this.props.data)
         return {
             modifyShow: false,
             specialShow: false,
@@ -520,7 +520,7 @@ $FW.DOMReady(function () {
         url: `http://apitest.9888.cn/api/sspay/withdraw/v1/getWithdrawInfo.shtml`,
         enable_loading: 'mini'
     }).then(data => {
-        console.log(data)
+        console.log(data.data)
         ReactDOM.render(<Content data={data} />, CONTENT_NODE)
         fmOpt(data.sessionId);
     })
