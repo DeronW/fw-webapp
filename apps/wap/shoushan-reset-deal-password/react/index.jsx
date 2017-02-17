@@ -426,7 +426,7 @@ var Body = React.createClass({
 
 $FW.DOMReady(() => {
     $FW.Ajax({
-        url: 'http://apitest.9888.cn/' + "mpwap/api/v1/getOpenAccountInfo.shtml",
+        url: 'http://apitest.9888.cn/' + "/api/sspay/withdraw/v1/getOpenAccountInfo.shtml",
         success: function (data) {
             ReactDOM.render(<Body activity={data} />, CONTENT_NODE);
         }
