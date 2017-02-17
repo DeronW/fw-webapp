@@ -78,6 +78,11 @@ const HUISHANG_PAGES = [
     'modification-phone', // 修改银行预留手机号
 ]
 
+const SHOUSHAN = [
+    'shoushan-reset-deal-password',
+    'shoushan-cash'
+]
+
 
 const DEVELOPING_PAGES = [
 ]
@@ -88,7 +93,8 @@ APP_NAMES.push(
     ...TOPIC_PAGES,
     ...HUISHANG_PAGES,
     ...NOTICE_PAGES,
-    ...DEVELOPING_PAGES
+    ...DEVELOPING_PAGES,
+    ...SHOUSHAN
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
