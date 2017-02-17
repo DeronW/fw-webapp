@@ -60,8 +60,9 @@ const WantLoan = React.createClass({
             if (!err) {
                 location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`;
             }
+        },(err) => {
+            $FW.Component.Toast(err.message);
         });
-
     },
     render: function () {
         let interest = this.props.baseRateDay * 100;
@@ -88,7 +89,10 @@ const WantLoan = React.createClass({
                     <span className="withdraw-card-title">提现卡</span>
                     <span className="withdraw-card-branch">{filtered[0].bankShortName}（{filtered[0].cardNo.slice(-4)}）</span>
                 </div>
-                <div className="loan-btn" onClick={this.loanHandler}>立即借款</div>
+                <div className="withdraw-tip">审核通过之后，若在24小时之内未确认用钱，视为自动放弃。</div>
+                <div className="loan-btn-wrap">
+                    <div className="loan-btn" onClick={this.loanHandler}>立即借款</div>
+                </div>
             </div>
         )
     }

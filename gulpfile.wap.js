@@ -80,7 +80,6 @@ const HUISHANG_PAGES = [
 
 
 const DEVELOPING_PAGES = [
-    'user-levels', // 用户等级详情, 重构版
 ]
 
 APP_NAMES.push(

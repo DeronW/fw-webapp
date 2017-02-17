@@ -16,15 +16,18 @@ function formatDate() {
 
 const Bill = React.createClass({
     getInitialState: function () {
-        return {
-            billList: this.props.data.loanList
-        }
+        return { billList: this.props.data.loanList }
     },
     render: function () {
         let bill_item = (item, index) => {
+            let st = item.status === 0 ?
+                <div className="pay-back-btn-status1">打款中</div> :
+                <a className="pay-back-btn-status2" href={`/static/loan/bill-payback/index.html?loanGid=${item.loanGid}&token=${USER.token}&userGid=${USER.gid}&userId=${USER.id}`}>还款</a>;
+
             return (
                 <div className="bill-item-wrap">
-                    <div className="bill-item" key={index} onClick={() => gotoHandler(`/static/loan/bill-detail/index.html?loanGid=${item.loanGid}`)}>
+                    <a className="bill-item" key={index}
+                        href={`/static/loan/bill-detail/index.html?loanGid=${item.loanGid}`}>
                         <div className="bill-detail">
                             <div className="bill-detail-wrap">
                                 <span className="bill-money">{item.loanLeftAmount.toFixed(2)}</span>
@@ -32,12 +35,9 @@ const Bill = React.createClass({
                             </div>
                             <span className="bill-deadline">{item.dueTimeStr}到期</span>
                         </div>
-                    </div>
-                    <div className="pay-back-btn-wrap">
-                        {item.status == 0 ? <div className="pay-back-btn-status1">打款中</div> : <div className="pay-back-btn-status2" onClick={() => gotoHandler(`/static/loan/bill-payback/index.html?loanGid=${item.loanGid}&token=${$FW.Store.getUserToken()}&userGid=${$FW.Store.getUserGid()}&userId=${$FW.Store.getUserId()}`)}>还款</div>}
-                    </div>
+                    </a>
+                    <div className="pay-back-btn-wrap"> {st} </div>
                 </div>
-
             )
         };
 
@@ -49,7 +49,8 @@ const Bill = React.createClass({
             <div>
                 <div className="header">
                     <div className="title">账单</div>
-                    <div className="history-bill" onClick={() => gotoHandler(`/static/loan/bill-history/index.html`)}>历史账单</div>
+                    <a className="history-bill" href='/static/loan/bill-history/index.html'>
+                        历史账单</a>
                 </div>
                 {this.props.data.loanList.length === 0 ? empty : (<div className="data-box">
                     <div className="transfer-box">
@@ -75,38 +76,30 @@ const Bill = React.createClass({
                     </div>
                     {this.state.billList.map(bill_item)}
                 </div>)}
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
         )
     }
 });
 
+const USER = $FW.Store.getUserDict();
+
 $FW.DOMReady(function () {
-    let user = $FW.Store.getUserDict();
-    $FW.Ajax({
-        url: `${API_PATH}api/oriole/v1/loanloadpage.json`,
-        method: "post",
-        enable_loading: "mini",
-        data: {
-            token: user.token,
-            userGid: user.gid,
-            userId: user.id,
-            sourceType: 3
-        }
+    $FW.Post(`${API_PATH}api/oriole/v1/loanloadpage.json`, {
+        token: USER.token,
+        userGid: USER.gid,
+        userId: USER.id,
+        sourceType: 3
     }).then((data) => {
         ReactDOM.render(<Bill data={data} />, CONTENT_NODE);
-    }, (error) => console.log(error));
-    ReactDOM.render(<BottomNavBar index={2} />, document.getElementById('bottom-nav-bar'));
+    }, e => $FW.Component.Toast(e.message));
+    ReactDOM.render(<BottomNavBar index={2} />, BOTTOM_NAV_NODE);
 });

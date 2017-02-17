@@ -52,7 +52,7 @@ const ConfirmLoanWrap = React.createClass({
                     feeExtList={this.props.feeExtList} /> : null}
                 {this.state.noticeShow ? <Notice content={this.props.latedescription} callbackNoticeHide={this.noticeHide} /> : null}
                 {this.state.verifyCodeShow ?
-                    <VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow} /> : null}
+                    <VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow} bankShortName={filtered[0].bankShortName} cardNo={filtered[0].cardNo}/> : null}
                 {this.state.loanResult ? <LoanResult callbackResultHide={this.resultHide} bankShortName={filtered[0].bankShortName} cardNo={filtered[0].cardNo} /> : null}
             </div>
         )
@@ -86,13 +86,13 @@ const ConfirmLoan = React.createClass({
             <div>
                 <div className="transfer-box">
                     <div className="money-get">
-                        <div className="transfer-money">{this.props.accountInAmount}</div>
+                        <div className="transfer-money">{this.props.accountInAmount.toFixed(2)}</div>
                         <div className="transfer-title">到账金额（元）</div>
                     </div>
                     <div className="loan-info">
                         <div className="transfer-lines">
                             <div className="return-money">
-                                <span className="return-money-num">{this.props.shouldRepaymentAmount}</span>
+                                <span className="return-money-num">{this.props.shouldRepaymentAmount.toFixed(2)}</span>
                                 <span className="return-money-title">应还金额（元）</span>
                             </div>
                             <div className="return-date">
@@ -105,13 +105,13 @@ const ConfirmLoan = React.createClass({
                 </div>
                 <div className="transfer-tip">请按时还款，避免<a onClick={this.clickHandler}>逾期费用</a>。</div>
                 <div className="loan-fee">
-                    <span className="loan-fee-num">借款费用{this.props.totalFeeAmount}元</span>
+                    <span className="loan-fee-num">借款费用{this.props.totalFeeAmount.toFixed(2)}元</span>
                     <span className="loan-right-arrow" onClick={this.detailHandler}>详情</span>
                 </div>
                 <div className="agreement-issue">
                     <div className={this.state.checked ? "checked-box" : "unchecked-box"}
                         onClick={this.checkHandler}></div>
-                    <div className="check-item">同意<a href="">《放心花借款服务协议》</a>、<a href="/static/loan/protocol-borrowing/index.html">《放心花借款协议》</a>，未按时还款将计入信用卡银行的信用报告
+                    <div className="check-item">同意<a href="/static/loan/protocol-partner/index.html">《放心花借款服务协议》</a>、<a href="/static/loan/protocol-borrowing/index.html">《放心花借款协议》</a>，未按时还款将计入信用卡银行的信用报告
                     </div>
                 </div>
                 <div className="confirm-btn" onClick={this.confirmHandler}>确定</div>
@@ -130,6 +130,7 @@ const Notice = React.createClass({
                 <div className="notice-pop">
                     <div className="notice-close"></div>
                     <div className="notice-title">逾期费用说明</div>
+                    <div className="close-icon" onClick={this.clickHandler}></div>
                     <div className="notice-content">
                         {this.props.content}
                     </div>
@@ -239,7 +240,8 @@ const VerifyCode = React.createClass({
                         <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                         <div className="verify-popup-title">短信验证</div>
                         <div className="verify-popup-tip">
-                            已向尾号（{phone.slice(-4)}）发送短信验证码。
+                            {/*已向尾号（{phone.slice(-4)}）发送短信验证码。*/}
+                            已向{this.props.bankShortName}({this.props.cardNo.slice(-4)})银行预留手机号发送短信验证码。
                         </div>
                         <div className="verify-input">
                             <input className="sms-input" type="number" name="number"
@@ -249,7 +251,11 @@ const VerifyCode = React.createClass({
                                 {this.state.remain > 0 ? `${this.state.remain}s` : '获取验证码'}</span>
                         </div>
                         {frequent_tip}
-                        <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
+                        <div className="btn-list">
+                            <div className="cancel-btn" onClick={this.closePopHandler}>取消</div>
+                            <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -272,6 +278,7 @@ const ItemDetail = React.createClass({
             <div className="mask">
                 <div className="detail-pop">
                     <div className="close-icon" onClick={this.itemHideHandler}></div>
+                    <div className="item-title">借款费用详情</div>
                     <div className="item-wrap">
                         {this.props.feeExtList.map(item_list)}
                     </div>

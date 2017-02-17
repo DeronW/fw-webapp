@@ -80,7 +80,7 @@ const ApplyLoan = React.createClass({
             <div className="unavailable-loan">
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
-                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={`/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`}>提额</a>吧！</div>
+                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`}>提额</a>吧！</div>
                 <div className="max-loan-money">暂无额度</div>
             </div>;
 
@@ -126,7 +126,7 @@ const ApplyLoan = React.createClass({
         let user = $FW.Store.getUserDict();
         let link;
         if (st == 1) link = '/static/loan/user-card-set/index.html';
-        if (st == 2) link = `/api/credit/v1/creditlist.html?sourceType=2&token=${user.token}&userId=${user.id}`;
+        if (st == 2) link = `/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`;
 
         let loanBtnClick = () => {
             st === 101 ?

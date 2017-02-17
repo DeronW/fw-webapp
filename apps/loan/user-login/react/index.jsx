@@ -6,7 +6,17 @@ function istrue(str) {
 
     return reg.test(str);
 }
+function phoneMosaic(val) {
+    let frontNum = val.slice(0, 3);
+    let lastNum = val.slice(val.length - 4, val.length);
 
+    if (val == undefined) {
+        return '';
+    } else {
+        return `${frontNum}****${lastNum}`
+    }
+
+}
 const Register = React.createClass({
     getInitialState() {
         return {
@@ -58,7 +68,7 @@ const Register = React.createClass({
                 </div>
                 <div className="logo"> <img src="images/logo.png" /> </div>
                 <div className="get-name-phone">
-                    <span className="phone-text">{PHONE}</span>欢迎登录放心花!
+                    亲爱的<span className="phone-text">{phoneMosaic(PHONE)}</span>欢迎登录
 				</div>
 
                 <div className="from-cnt">
@@ -75,7 +85,7 @@ const Register = React.createClass({
                     <div className="form-border"></div>
                 </div>
                 <div className="register-login-btn">
-                    <div className="ui-btn" onClick={this.loadingBtn}>下一步</div>
+                    <div className="ui-btn" onClick={this.loadingBtn}>确定</div>
                 </div>
                 <div className="forget-pwd-link">
                     <a href={`/static/loan/user-reset-password/index.html?phone=${PHONE}`}>
