@@ -34,8 +34,7 @@ const Payment = React.createClass({
         }
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
-            let link = location.protocol + '//' + location.hostname +
-                '/static/mall/pay-add-card/index.html' + location.search;
+            let link = '/static/mall/pay-add-card/index.html' + location.search;
             location.href = link;
         }
         else {
