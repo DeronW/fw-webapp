@@ -60,8 +60,9 @@ const WantLoan = React.createClass({
             if (!err) {
                 location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`;
             }
+        },(err) => {
+            $FW.Component.Toast(err.message);
         });
-
     },
     render: function () {
         let interest = this.props.baseRateDay * 100;
