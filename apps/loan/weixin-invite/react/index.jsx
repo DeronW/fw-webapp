@@ -21,6 +21,7 @@ $FW.DOMReady(function () {
                 pageSize: 20,
                 userGid: $FW.Store.getUserDict().gid
             }).then((data) => {
+                $("#more").show();
             if (data.invitationRecord.length == 0 && page == 1) {
                 $("#more").html("暂无数据");
             } else if (data.invitationRecord.length < 20 && page == 1) {
@@ -42,7 +43,10 @@ $FW.DOMReady(function () {
                 $("#more").html("已经到结尾");
             }
             done && done();
-            }, e => $FW.Capture(e));
+            }, (e) =>{
+                $FW.Component.Alert(e.message);
+                if(page==1){$("#more").hide();}
+            } );
         }
     }
     loadMoreHandler();
