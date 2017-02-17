@@ -114,6 +114,7 @@ const Register = React.createClass({
         return (
             <div className="register-box">
                 <div className="logo"><img src="images/logo.png"/></div>
+                <div className="logo-text"><img src="images/logo-text.png"/></div>
                 <div className="register-box-input">
                     <div className="phone-box input-box">
                         <input type="number" placeholder="请输入手机号进行注册登录" value={this.state.phoneNum}
@@ -127,6 +128,11 @@ const Register = React.createClass({
                         <input type={this.state.seeCode?"text":"password"} placeholder="密码要求8-16位字母与数字组合" value={this.state.password}
                                onChange={this.passwordChange}/>
                         <div className={this.state.seeCode?"eye on":"eye"} onClick={this.seeCodeChange}></div>
+                    </div>
+                    <div className="protocol">
+                        <div className="protocol-btn"></div>
+                        同意
+                        <a href="../protocol-borrowing/index.html" className="protocol-text">《放心花借款服务协议》</a>
                     </div>
                     <div className="next-btn" onClick={this.nextStepHandler}>立即注册</div>
                 </div>
