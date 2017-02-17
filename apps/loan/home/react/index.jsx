@@ -195,7 +195,6 @@ const ApplyLoan = React.createClass({
                 <br/>
                 <br/>
                 <br/>
-                <br/>
             </div>
         )
     }
