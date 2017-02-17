@@ -27,7 +27,7 @@ const ApplyLoan = React.createClass({
                 flag = true;
             });
 
-            let getPosition = function(node) {
+            let getPosition = function (node) {
                 var left = node.offsetLeft;
                 var top = node.offsetTop;
                 var current = node.offsetParent;
@@ -69,7 +69,6 @@ const ApplyLoan = React.createClass({
     },
     getBorrowBtn() {
         let btn = '--', st = this.props.data.borrowBtnStatus;
-        let user = $FW.Store.getUserDict();
         let available_loan =
             <div className="available-loan">
                 <div className="max-loan-money">{this.state.creditLine}</div>
@@ -80,7 +79,7 @@ const ApplyLoan = React.createClass({
             <div className="unavailable-loan">
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
-                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`}>提额</a>吧！</div>
+                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>提额</a>吧！</div>
                 <div className="max-loan-money">暂无额度</div>
             </div>;
 
@@ -123,10 +122,9 @@ const ApplyLoan = React.createClass({
     getBtnStatus() {
         let btn = '--', st = this.props.data.borrowBtnStatus;
 
-        let user = $FW.Store.getUserDict();
         let link;
         if (st == 1) link = '/static/loan/user-card-set/index.html';
-        if (st == 2) link = `/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`;
+        if (st == 2) link = `/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`;
 
         let loanBtnClick = () => {
             st === 101 ?
@@ -136,14 +134,14 @@ const ApplyLoan = React.createClass({
         let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
         let credit_btn =
-            <a className="loan-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`}>
+            <a className="loan-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>
                 我要提额
             </a>;
 
         let btn_list =
             <div className="credit-btn">
                 <a className="credit-improvement-btn"
-                    href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`}>
+                    href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>
                     我要提额
                 </a>
                 <a className="credit-apply-btn"
@@ -159,7 +157,7 @@ const ApplyLoan = React.createClass({
     },
     getCreditLine() {
         let line = '--', st = this.props.data.borrowBtnStatus;
-        if (st === 3) $FW.Component.Toast(this.props.data.borrowBtnDesc);
+        // if (st === 3) $FW.Component.Toast(this.props.data.borrowBtnDesc);
         if (st === 5) line = this.props.data.creditLine;
         return line
     },
@@ -190,31 +188,26 @@ const ApplyLoan = React.createClass({
                 </div>
                 {this.getBtnStatus()}
                 <div className="loan-tip">完善授权信息可减免手续费</div>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
         )
     }
 });
 
-$FW.DOMReady(function () {
-    let user = $FW.Store.getUserDict();
+const USER = $FW.Store.getUserDict();
+const user = USER;
 
-    $FW.Ajax({
-        url: `${API_PATH}api/loan/v1/baseinfo.json`,
-        method: "post",
-        enable_loading: "mini",
-        data: {
-            token: user.token,
-            userGid: user.gid,
-            userId: user.id,
-            sourceType: SOURCE_TYPE,
-            productId: 1
-        }
+$FW.DOMReady(function () {
+
+    $FW.Post(`${API_PATH}api/loan/v1/baseinfo.json`, {
+        token: USER.token,
+        userGid: USER.gid,
+        userId: USER.id,
+        sourceType: SOURCE_TYPE,
+        productId: 1
     }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
     }, e => $FW.Capture(e));
