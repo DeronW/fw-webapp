@@ -97,7 +97,7 @@ $FW.DOMReady(function () {
         token: USER.token,
         userGid: USER.gid,
         userId: USER.id,
-        sourceType: 3
+        sourceType: SOURCE_TYPE,
     }).then((data) => {
         ReactDOM.render(<Bill data={data} />, CONTENT_NODE);
     }, e => $FW.Component.Toast(e.message));

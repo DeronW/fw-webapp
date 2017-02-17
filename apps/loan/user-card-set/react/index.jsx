@@ -72,17 +72,18 @@ const SetCashCard = React.createClass({
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3
-            }).then((data) => {
-                this.setState({
-                    cardinfoBankName: data.cardInfo.bankName,
-                    cardinfoLogoUrl: data.cardInfo.logoUrl,
-                    cardType: data.cardInfo.cardType,
-                    canVerify: data.cardInfo.canVerify,
-                    bankName: data.cardInfo.bankName
-                });
-            }, (error) => {
+                sourceType: SOURCE_TYPE
+            }).then(data => {
+                let ci = data.cardInfo;
+                if (ci.cardType == -1) $FW.Component.Toast('不支持该银行卡号');
 
+                this.setState({
+                    cardinfoBankName: ci.bankName,
+                    cardinfoLogoUrl: ci.logoUrl,
+                    cardType: ci.cardType,
+                    canVerify: ci.canVerify,
+                    bankName: ci.bankName
+                });
             })
         } else {
             $FW.Component.Toast("储蓄卡格式不对");
@@ -136,7 +137,7 @@ const SetCashCard = React.createClass({
                 token: user.token,
                 userGid: user.gid,
                 userId: user.id,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }).then((data) => {
                 let bGid = data.bindBankInfo.bankCardGid;
                 let oGid = data.bindBankInfo.operatorBankcardGid;

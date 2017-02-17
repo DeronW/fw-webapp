@@ -31,7 +31,7 @@ const MyCnt = React.createClass({
                     token: user.token,
                     userGid: user.gid,
                     userId: user.id,
-                    sourceType: 3
+                    sourceType: SOURCE_TYPE
                 }
             }),
             $FW.Ajax({
@@ -43,7 +43,7 @@ const MyCnt = React.createClass({
                     userGid: user.gid,
                     userId: user.id,
                     productId: 1,
-                    sourceType: 3
+                    sourceType: SOURCE_TYPE
                 }
             })
         ]).then(data => {

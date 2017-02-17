@@ -51,7 +51,7 @@ const VerifyPhone = React.createClass({
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
-            sourceType: 3
+            sourceType: SOURCE_TYPE
         }).then(null, e => $FW.Component.Toast(e.message));
     },
     definiteBtn() {
@@ -63,14 +63,14 @@ const VerifyPhone = React.createClass({
             userGid: USER.gid,
             userId: USER.id,
             verifyCode: this.state.codeVal,
-            sourceType: 3
+            sourceType: SOURCE_TYPE
         }).then(()=> {
             return $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
                 operatorBankcardGid: BANK_GID,
                 token: USER.token,
                 userGid: USER.gid,
                 userId: USER.id,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             })
         }, e => $FW.Component.Toast(e.message)).then((data)=> {
             console.log(data)

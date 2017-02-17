@@ -52,7 +52,7 @@ const Register = React.createClass({
         $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
             mobile: PHONE,
             userOperationType: 2,
-            sourceType: 3
+            sourceType: SOURCE_TYPE
         }).then(
             data => this.setState({ codeToken: data.codeToken }),
             e => $FW.Component.Toast(e.message));
@@ -77,7 +77,7 @@ const Register = React.createClass({
                 mobile: PHONE,
                 password: password,
                 verifyCode: code,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }).then(data => {
                 let {userGid, userId, userToken} = data.userPasswordOption;
                 $FW.Store.setUserDict({

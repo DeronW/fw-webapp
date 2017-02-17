@@ -228,7 +228,7 @@ const VerifyCode = React.createClass({
                 token: USER.token,
                 userGid: USER.gid,
                 userId: USER.id,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
         }).then(d => {
             this.setState({ phoneNum: d.mobile, orderGid: d.orderGid });
         }, e => $FW.Component.Toast(e.message))
@@ -252,7 +252,7 @@ const VerifyCode = React.createClass({
                     token: USER.token,
                     userGid: USER.gid,
                     userId: USER.id,
-                    sourceType: 3,
+                    sourceType: SOURCE_TYPE,
                     orderGid: this.state.orderGid
             });
         }
@@ -266,7 +266,7 @@ const VerifyCode = React.createClass({
                     token: USER.token,
                     userGid: USER.gid,
                     userId: USER.id,
-                    sourceType: 3,
+                    sourceType: SOURCE_TYPE,
                     verifyCode: this.state.value
             }).then(
             d => { this.props.callbackResultShow(true, false); },
@@ -359,7 +359,7 @@ $FW.DOMReady(function () {
                 token: USER.token,
                 userGid: USER.gid,
                 userId: USER.id,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }
         }),
         $FW.Ajax({
@@ -371,7 +371,7 @@ $FW.DOMReady(function () {
                 token: USER.token,
                 userGid: USER.gid,
                 userId: USER.id,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }
         })
     ]).then(d => ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]} />, CONTENT_NODE) );

@@ -39,7 +39,7 @@ const SetPassword = React.createClass({
         $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
             mobile: localStorage.phone,
             userOperationType: 3,
-            sourceType: 3
+            sourceType: SOURCE_TYPE
         }).then(data => this.setState({ codeToken: data.codeToken }))
 
         this.countingDown();
@@ -77,7 +77,7 @@ const SetPassword = React.createClass({
                 codeToken: this.state.codeToken,
                 password: password,
                 verifyCode: code,
-                sourceType: 3
+                sourceType: SOURCE_TYPE
             }).then(data => {
                 let dict = data.userLogin;
                 $FW.Store.setUserDict({
