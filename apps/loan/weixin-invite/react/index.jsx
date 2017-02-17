@@ -30,7 +30,7 @@ $FW.DOMReady(function () {
                 } else if (data.invitationRecord.resultList.length < 20 && page == 1) {
                     $("#more").html("已经到结尾");
                 }
-                if (data.invitationRecord.resultList.length > 0 && page < 5) {
+                if (data.invitationRecord.resultList.length > 0) {
                     var str = '';
                     for (var i = 0; i < data.invitationRecord.resultList.length; i++) {
                         str += '<div class="invite-item">';
@@ -41,7 +41,7 @@ $FW.DOMReady(function () {
                     }
                     $(".tab-content-item-wrap2").append(str);
                     page++;
-                } else {
+                } else if(page >1){
                     loadNextPage = false
                     $("#more").html("已经到结尾");
                 }
