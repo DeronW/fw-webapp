@@ -27,7 +27,7 @@ const Register = React.createClass({
             allowCode: true,
             codeToken: '',
             codeText: '获取验证码',
-            seeCode:false
+            seeCode: false
         }
     },
     phoneChange: function (e) {
@@ -61,9 +61,9 @@ const Register = React.createClass({
             })
         }
     },
-    seeCodeChange:function(){
+    seeCodeChange: function () {
         this.setState({
-            seeCode:!this.state.seeCode
+            seeCode: !this.state.seeCode
         });
     },
     getCodeHandler: function () {
@@ -78,11 +78,16 @@ const Register = React.createClass({
             });
             this.codeTime();
             $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
-                    mobile: this.state.phoneNum,
-                    userOperationType: 3
-                }).then(data=>{ this.setState({
-                codeToken: data.codeToken
-            })},(e) =>{$FW.Component.Alert(e.message);});
+                mobile: this.state.phoneNum,
+                userOperationType: 3,
+                sourceType: SOURCE_TYPE
+            }).then(data => {
+                this.setState({
+                    codeToken: data.codeToken
+                })
+            }, (e) => {
+                $FW.Component.Alert(e.message);
+            });
         }
     },
     passwordChange: function (e) {
@@ -125,9 +130,10 @@ const Register = React.createClass({
                         <div className="get-code" onClick={this.getCodeHandler}>{this.state.codeText}</div>
                     </div>
                     <div className="password-box input-box">
-                        <input type={this.state.seeCode?"text":"password"} placeholder="密码要求8-16位字母与数字组合" value={this.state.password}
+                        <input type={this.state.seeCode ? "text" : "password"} placeholder="密码要求8-16位字母与数字组合"
+                               value={this.state.password}
                                onChange={this.passwordChange}/>
-                        <div className={this.state.seeCode?"eye on":"eye"} onClick={this.seeCodeChange}></div>
+                        <div className={this.state.seeCode ? "eye on" : "eye"} onClick={this.seeCodeChange}></div>
                     </div>
                     <div className="protocol">
                         <div className="protocol-btn"></div>

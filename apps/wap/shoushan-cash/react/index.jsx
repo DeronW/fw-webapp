@@ -233,7 +233,7 @@ const Content = React.createClass({
                 return '';
             }
         };
-        window.location.href = API_PATH + "mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.withdrawToken;
+        window.location.href = "http://apitest.9888.cn/api/sspay/withdraw/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.withdrawToken;
     },
     handlerVoice: function () {
         this.setState({ voice: +new Date() })
@@ -515,7 +515,7 @@ const Content = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: `${API_PATH}mpwap/api/v1/getWithdrawInfo.shtml`,
+        url: `http://apitest.9888.cn/api/sspay/withdraw/v1/getWithdrawInfo.shtml`,
         enable_loading: 'mini'
     }).then(data => {
         ReactDOM.render(<Content data={data} />, CONTENT_NODE)
