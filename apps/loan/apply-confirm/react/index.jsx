@@ -171,7 +171,7 @@ const VerifyCode = React.createClass({
         return {
             phoneNum: null,
             orderGid: null,
-            remain: 0,
+            countdown: 0,
             show_warn: false,
             value: ''
         }
@@ -182,19 +182,23 @@ const VerifyCode = React.createClass({
     closePopHandler: function () {
         this.props.callbackCloseHanler(false);
     },
-    countingDown: function () {
-        if (this.state.remain <= 1) window.clearInterval(this._timer);
-        this.setState({remain: this.state.remain - 1});
-    },
-    tick: function () {
-        this.setState({remain: 60});
-        window.clearInterval(this._timer);
-        this._timer = setInterval(this.countingDown, 1000);
+    countingDown() {
+        this.setState({
+            countdown: 60
+        });
+        this.timer = setInterval(() => {
+            this.setState({
+                countdown: this.state.countdown - 1
+            });
+            if (this.state.countdown == 0) {
+                clearInterval(this.timer);
+            }
+        }, 1000);
     },
     componentDidMount: function () {
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
-        this.tick();
+        this.countingDown();
         let user = $FW.Store.getUserDict();
         $FW.Ajax({
             url: `${API_PATH}api/loan/v1/sendSmsverifycode.json`,
@@ -210,10 +214,13 @@ const VerifyCode = React.createClass({
             this.setState({orderGid: data.orderGid});
         }, (err) => $FW.Component.Toast(err));
     },
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    },
     getSMSCode: function () {
         let user = $FW.Store.getUserDict();
         if (this.state.remain <= 0) {
-            this.tick();
+            this.countingDown();
             $FW.Ajax({
                 url: `${API_PATH}api/loan/v1/resendverifycode.json`,
                 method: "post",
@@ -231,24 +238,6 @@ const VerifyCode = React.createClass({
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
         let user = $FW.Store.getUserDict();
-        // $FW.Ajax({
-        //     url: `${API_PATH}api/loan/v1/do.json`,
-        //     method: "post",
-        //     data: {
-        //         token: user.token,
-        //         userGid: user.gid,
-        //         userId: user.id,
-        //         sourceType: SOURCE_TYPE,
-        //         orderGid: orderGid,
-        //         verifyCode: this.state.value,
-        //     }
-        // }).then(d => {
-        //     this.props.callbackResultShow(true);
-        //     this.props.callbackCloseHanler(false);
-        // }, (error) => {
-        //     this.setState({ show_warn: true });
-        // });
-
         $FW.Post(`${API_PATH}api/loan/v1/do.json`, {
             token: user.token,
             userGid: user.gid,
@@ -257,27 +246,10 @@ const VerifyCode = React.createClass({
             orderGid: orderGid,
             verifyCode: this.state.value,
         }).then(() => {
-            return $FW.Post(`${API_PATH}api/loan/v1/status.json`, {
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
-                orderGid: orderGid,
-                sourceType: SOURCE_TYPE
-            })
-        }, e => $FW.Component.Toast(e.message)).then((data) => {
             this.props.callbackCloseHanler(false);
             this.props.callbackResultShow(true);
-            if (data.loanStatus == 6) {
-                this.props.callbackGetLoanResultSuccess(true);
-            } else if (data.loanStatus == 5) {
-                this.props.callbackGetLoanResultFail(true);
-            } else if (data.loanStatus == 4) {
-                this.props.callbackGetLoanResultCheck(true);
-            }
-        }, e => {
-
-        });
-
+            this.props.callbackGetLoanResultCheck(true);
+        }, e => $FW.Component.Toast(e.message));
     },
 
     render: function () {
@@ -301,7 +273,7 @@ const VerifyCode = React.createClass({
                                    value={this.state.value}
                                    placeholder="输入验证码" onChange={this.changeValueHandler}/>
                             <span className="btn-countdown" onClick={this.getSMSCode}>
-                                {this.state.remain > 0 ? `${this.state.remain}s` : '获取验证码'}</span>
+                                {this.state.countdown > 0 ? `${this.state.countdown}s` : '获取验证码'}</span>
                         </div>
                         {frequent_tip}
                         <div className="btn-list">
@@ -345,70 +317,79 @@ const ItemDetail = React.createClass({
 const LoanResult = React.createClass({
     getInitialState: function () {
         return {
-            waitingResultShow: false,
+            waitingResultShow:true,
             successResultShow: false,
             failResultShow: false,
             checkingResult:false,
-            remain:0
+            countdown:0,
+            loanStatus:null
         }
     },
     componentWillReceiveProps:function(nextProps){
         this.resetState(nextProps)
     },
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    },
     resetState: function(props){
         this.setState({
             waitingResultShow: props.check,
-            successResultShow: props.success,
-            failResultShow: props.fail
+            //successResultShow: props.success,
+            //failResultShow: props.fail
         });
     },
-    countingDown: function () {
-        if (this.state.remain <= 1) window.clearInterval(this._timer);
-        this.setState({remain: this.state.remain - 1});
+    countingDown() {
+        let n = 56;
+
+        this.setState({
+            countdown: 56
+        });
+        this.timer = setInterval(() => {
+            if(this.state.countdown == n) {
+                this.checkAjax();
+                n = n-10;
+            }
+            this.setState({ countdown: this.state.countdown - 1 });
+            if (this.state.countdown == 0) {
+                clearInterval(this.timer);
+            }
+        }, 1000);
     },
-    tick: function () {
-        this.setState({remain: 56});
-        window.clearInterval(this._timer);
-        this._timer = setInterval(this.countingDown, 1000);
-    },
-    componentDidMount(){
-        this.resetState(this.props);
+    checkAjax(){
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
         let user = $FW.Store.getUserDict();
-        let loanStatus;
-        if (this.state.waitingResultShow) {
-            this.tick();
-            function checkAjax() {
-                $FW.Post(`${API_PATH}api/loan/v1/status.json`, {
-                    token: user.token,
-                    userGid: user.gid,
-                    userId: user.id,
-                    orderGid: orderGid,
-                    sourceType: SOURCE_TYPE
-                }).then((data) => {
-                    loanStatus = data.loanStatus;
-                }, (err) => {});
-            }
-            let timer = setInterval(checkAjax(), 10000);
-            if (this.state.remain <= 1) window.clearInterval(timer);
-            if (loanStatus == 6) {
+        $FW.Post(`${API_PATH}api/loan/v1/status.json`, {
+            token: user.token,
+            userGid: user.gid,
+            userId: user.id,
+            orderGid: orderGid,
+            sourceType: SOURCE_TYPE
+        }).then((data) => {
+            clearInterval(this.timer);
+            if (data.loanStatus == 6) {
                 this.setState({
+                    waitingResultShow: false,
                     successResultShow: true,
-                    waitingResultShow:false
                 });
-            } else if(loanStatus == 5){
+            } else if(data.loanStatus == 5){
                 this.setState({
+                    waitingResultShow: false,
                     failResultShow: true,
-                    waitingResultShow:false
                 });
-            } else if(loanStatus == 4){
+            } else if(data.loanStatus == 4){
                 this.setState({
-                    checkingResult: true,
-                    waitingResultShow:false
+                    waitingResultShow: false,
+                    checkingResult:true
                 });
             }
-        }
+        }, (err) => {});
+    },
+    componentDidMount(){
+
+        this.countingDown();
+        this.resetState(this.props);
+
     },
     resultHide: function () {
         this.props.callbackResultHide(false);
@@ -427,11 +408,11 @@ const LoanResult = React.createClass({
                             <div className="success-icon"><img src="images/success-icon.png"/></div>
                             <div className="loan-result1">
                                 <div className="icon1"></div>
-                                <div className="icon1-info">借款成功</div>
+                                <div className="icon1-info">申请成功</div>
                                 <div className="line"></div>
                                 <div className="waiting-result">
                                     <div className="icon2"></div>
-                                    <div className="icon2-info">预计56S之后给您处理结果</div>
+                                    <div className="icon2-info">预计{this.state.countdown > 0 ? `${this.state.countdown}s` : 0}之后给您处理结果</div>
                                 </div>
                             </div>
                             <div className="customer-service">
@@ -445,7 +426,7 @@ const LoanResult = React.createClass({
                             <div className="success-icon"><img src="images/success-icon.png"/></div>
                             <div className="loan-result2">
                                 <div className="icon1"></div>
-                                <div className="icon1-info">借款成功</div>
+                                <div className="icon1-info">申请成功</div>
                                 <div className="line"></div>
                                 <div className="success-result-for-jrgc">
                                     <div className="icon3"></div>
@@ -466,7 +447,7 @@ const LoanResult = React.createClass({
                             <div className="success-icon"><img src="images/success-icon.png"/></div>
                             <div className="loan-result3">
                                 <div className="icon1"></div>
-                                <div className="icon1-info">借款成功</div>
+                                <div className="icon1-info">申请成功</div>
                                 <div className="line"></div>
                                 <div className="success-result-for-other">
                                     <div className="icon3"></div>
