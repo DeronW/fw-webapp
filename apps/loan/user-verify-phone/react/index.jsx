@@ -29,17 +29,17 @@ const VerifyPhone = React.createClass({
         });
 
         this.time = setInterval(() => {
-            this.setState({countdown: this.state.countdown - 1});
+            this.setState({ countdown: this.state.countdown - 1 });
             if (this.state.countdown == 0) {
                 clearInterval(this.time);
-                this.setState({countdownShow: false});
+                this.setState({ countdownShow: false });
             }
         }, 1000)
     },
     changeCode(e) {
         if (verificationNum(e.target.value)) {
             if (space(e.target.value).length < 5) {
-                this.setState({codeVal: space(e.target.value)});
+                this.setState({ codeVal: space(e.target.value) });
             }
         }
     },
@@ -64,7 +64,7 @@ const VerifyPhone = React.createClass({
             userId: USER.id,
             verifyCode: this.state.codeVal,
             sourceType: SOURCE_TYPE
-        }).then(()=> {
+        }).then(() => {
             return $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
                 operatorBankcardGid: BANK_GID,
                 token: USER.token,
@@ -72,7 +72,7 @@ const VerifyPhone = React.createClass({
                 userId: USER.id,
                 sourceType: SOURCE_TYPE
             })
-        }, e => $FW.Component.Toast(e.message)).then((data)=> {
+        }, e => $FW.Component.Toast(e.message)).then((data) => {
             console.log(data)
             if (data.bindStatus.status == 0) {
                 $FW.Component.Toast("处理中");
@@ -92,12 +92,12 @@ const VerifyPhone = React.createClass({
         });
     },
     handlerBtn() {
-        this.setState({popShow: false});
+        this.setState({ popShow: false });
         if (this.state.popStatus === 2) window.history.back();
     },
     render() {
         let pop = () => {
-            return <div className="pop" style={{zIndex: 10000}}>
+            return <div className="pop" style={{ zIndex: 10000 }}>
                 <div className="pop-cnt">
                     <div className="pop-info">
                         <div className="pop-text">{this.state.popText}</div>
@@ -108,6 +108,10 @@ const VerifyPhone = React.createClass({
                 </div>
             </div>
         }
+
+        let btnSMSCode = this.state.countdownShow ?
+            <div className="get-code-btn c">{this.state.countdown}s</div> :
+            <div className="get-code-btn" onClick={this.handleGetCode}>重新获取</div>;
 
         return (
             <div className="verify-phone-cnt">
@@ -120,16 +124,10 @@ const VerifyPhone = React.createClass({
                     <div className="list code-list">
                         <span className="text">验证码</span>
                         <div className="input">
-                            <input type="text" onChange={(e) => this.changeCode(e)} value={this.state.codeVal}
-                                   placeholder="请输入验证码"/>
+                            <input type="text" onChange={(e) => this.changeCode(e)}
+                                value={this.state.codeVal} placeholder="请输入验证码" />
                         </div>
-
-                        {
-                            this.state.countdownShow ?
-                                <div className="get-code-btn c">{this.state.countdown}倒计时</div> :
-                                <div className="get-code-btn" onClick={this.handleGetCode}>重新获取</div>
-                        }
-
+                        {btnSMSCode}
                     </div>
                 </div>
 
@@ -147,6 +145,6 @@ const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid;
 const PHONE = $FW.Format.urlQuery().phone;
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={"验证手机号"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"验证手机号"} />, HEADER_NODE);
     ReactDOM.render(<VerifyPhone />, CONTENT_NODE);
 })
