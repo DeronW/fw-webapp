@@ -70,8 +70,6 @@ const Recharge = React.createClass({
         var opt = this.state.operator;
         var code = opt == 'union' ? 1032 : (opt == 'tele' ? 1033 : 1034);
 
-        console.log('load net', code)
-
         $FW.Ajax({
             url: API_PATH + 'mall/api/v1/phone/net/recharge.json',
             enable_loading: 'mini',
@@ -82,11 +80,11 @@ const Recharge = React.createClass({
                     if (i.bizNo == data.defaultBizNo)
                         pay_score = i.score;
                 });
+
                 this.setState({
                     net_pay_score: pay_score,
                     bizNo: data.defaultBizNo,
-                    product_fee: data.fee,
-                    stock: data.inventory
+                    product_fee: data.fee
                 })
             }.bind(this)
         });
@@ -144,18 +142,22 @@ const Recharge = React.createClass({
     },
 
     getSMSCodeHandler: function () {
-        let v = this.state.phone;
-        if (!this.state.login)
-            return $FW.Utils.loginMall();
-        if (v == '')
-            return $FW.Component.Alert("请输入手机号！");
-        if (!/^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/.test(v))
-            return $FW.Component.Alert("手机号格式不正确！");
-        if (this.state.tab == 'fee' && this.state.user_score < this.state.fee_pay_score)
-            return $FW.Component.Alert("充值失败，工分不足！");
-        if (this.state.tab == 'net' && this.state.user_score < this.state.net_pay_score)
-            return $FW.Component.Alert("充值失败，工分不足！");
-        window.confirmPanel.show();
+        for (var i = 0; i < document.querySelectorAll('.value-box').length; i++) {
+            if (document.querySelectorAll('.value-box')[i].classList.contains('selected') == true) {
+                let v = this.state.phone;
+                if (!this.state.login)
+                //return $FW.Utils.loginMall();
+                    if (v == '')
+                        return $FW.Component.Alert("请输入手机号！");
+                if (!/^1(3[0-9]|4[57]|5[0-35-9]|7[0678]|8[0-9])\d{8}$/.test(v))
+                    return $FW.Component.Alert("手机号格式不正确！");
+                if (this.state.tab == 'fee' && this.state.user_score < this.state.fee_pay_score)
+                    return $FW.Component.Alert("充值失败，工分不足！");
+                if (this.state.tab == 'net' && this.state.user_score < this.state.net_pay_score)
+                    return $FW.Component.Alert("充值失败，工分不足！");
+                window.confirmPanel.show();
+            }
+        }
     },
 
     getFormData: function () {
@@ -234,7 +236,7 @@ const Recharge = React.createClass({
                 </div>
                 {this.state.tab == 'net' ? <div className="recharge-tip">{RechargeTip}</div> : null}
                 <Recharge.ProductPanel products={this.state.product_fee} bizNo={this.state.bizNo}
-                                       stock={this.state.stock}        setCheckedBizNo={this.setCheckedBizNo}/>
+                                       setCheckedBizNo={this.setCheckedBizNo}/>
 
                 <div className="payment-wrap">
                     <div className="payment-way">支付方式<span>工分支付</span></div>
@@ -249,6 +251,9 @@ const Recharge = React.createClass({
                 </div>
 
                 <div className="telconfirm-btn" onClick={this.getSMSCodeHandler}>立即充值</div>
+                <div className="reminder">
+                    温馨提示：工作日10点限量发售
+                </div>
             </div>
         );
     }
@@ -260,11 +265,12 @@ Recharge.ProductPanel = React.createClass({
 
         var _this = this;
         var bizNo = this.props.bizNo;
-        var stock = this.props.stock;
 
         function fee_card(data, index) {
             function check() {
-                _this.props.setCheckedBizNo(data.bizNo, data.price, data.score)
+                if (data.inventory != 0) {
+                    _this.props.setCheckedBizNo(data.bizNo, data.price, data.score)
+                }
             }
 
             let checked = <span className="default-selected"></span>;
@@ -275,8 +281,8 @@ Recharge.ProductPanel = React.createClass({
                             {data.sub_title}</span>
                     </span>;
 
-            let class_name = bizNo == data.bizNo ? "value-box selected" : "value-box";
-            let class_stock = stock == 0 ? "value-num over" : "value-num";
+            let class_name = bizNo == data.bizNo && data.inventory != 0 ? "value-box selected" : "value-box";
+            let class_stock = data.inventory == 0 ? "value-num over" : "value-num";
 
             return <div className={class_name} key={index} onClick={check}>
                 <span className={class_stock}>
@@ -285,7 +291,7 @@ Recharge.ProductPanel = React.createClass({
                 </span>
                 {data.sub_title ? sub_title : null }
 
-                {bizNo == data.bizNo ? checked : null}
+                {bizNo == data.bizNo && data.inventory != 0 ? checked : null}
             </div>
         }
 

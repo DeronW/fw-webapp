@@ -77,6 +77,8 @@ const Greater = React.createClass({
 
 const Content = React.createClass({
     getInitialState: function () {
+        console.log(this.props.data)
+        console.log(this.props.data)
         return {
             modifyShow: false,
             specialShow: false,
@@ -233,7 +235,7 @@ const Content = React.createClass({
                 return '';
             }
         };
-        window.location.href = API_PATH + "mpwap/api/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.withdrawToken;
+        window.location.href = "http://apitest.9888.cn/api/sspay/withdraw/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.withdrawToken;
     },
     handlerVoice: function () {
         this.setState({ voice: +new Date() })
@@ -515,9 +517,10 @@ const Content = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: `${API_PATH}mpwap/api/v1/getWithdrawInfo.shtml`,
+        url: `http://apitest.9888.cn/api/sspay/withdraw/v1/getWithdrawInfo.shtml`,
         enable_loading: 'mini'
     }).then(data => {
+        console.log(data.data)
         ReactDOM.render(<Content data={data} />, CONTENT_NODE)
         fmOpt(data.sessionId);
     })

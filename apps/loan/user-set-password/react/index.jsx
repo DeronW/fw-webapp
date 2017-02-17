@@ -73,7 +73,7 @@ const SetPassword = React.createClass({
 
         err ? $FW.Component.Toast(err) :
             $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
-                mobile: location.search.split('phone=')[1],
+                mobile: PHONE,
                 codeToken: this.state.codeToken,
                 password: password,
                 verifyCode: code,
@@ -145,6 +145,8 @@ const SetPassword = React.createClass({
         )
     }
 });
+
+const PHONE = $FW.Format.urlQuery().phone;
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"设置密码"} />, HEADER_NODE);

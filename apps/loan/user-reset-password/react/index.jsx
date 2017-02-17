@@ -25,7 +25,7 @@ const Register = React.createClass({
         }
     },
     componentDidMount() {
-        this.countdownFun();
+        this.handleGetCode();
     },
     changeCode(e) {
         let v = e.target.value;
@@ -35,7 +35,7 @@ const Register = React.createClass({
         let v = e.target.value;
         v.length <= 16 && verificationNum(v) && this.setState({ password: v });
     },
-    countdownFun() {
+    countingDown() {
         this.setState({
             codeBoolean: true,
             countdown: 60
@@ -56,7 +56,7 @@ const Register = React.createClass({
         }).then(
             data => this.setState({ codeToken: data.codeToken }),
             e => $FW.Component.Toast(e.message));
-        this.countdownFun();
+        this.countingDown();
     },
     handlePlainCode() {
         this.setState({ plainCode: !this.state.plainCode });
@@ -91,25 +91,24 @@ const Register = React.createClass({
     },
     render() {
 
+        let btnSMSCode = this.state.codeBoolean ?
+            <div className="get-code-btn c">{this.state.countdown}s</div> :
+            <div className="get-code-btn" onClick={this.handleGetCode}>获取验证码</div>;
+
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
-                    已发送短信验证码到号码<span>{PHONE}</span>
+                    已发送短信验证码到尾号<span>{PHONE.substr(7)}</span>手机上
                 </div>
 
                 <div className="ui-froms">
                     <div className="list code-list">
                         <span className="icon"></span>
                         <div className="input">
-                            <input type="number" onChange={this.changeCode} value={this.state.code} placeholder="输入手机验证码" />
+                            <input type="number" onChange={this.changeCode}
+                                value={this.state.code} placeholder="输入手机验证码" />
                         </div>
-
-                        {
-                            this.state.codeBoolean ?
-                                <div className="get-code-btn c">{this.state.countdown}倒计时</div> :
-                                <div className="get-code-btn" onClick={this.handleGetCode}>获取验证码</div>
-                        }
-
+                        {btnSMSCode}
                     </div>
                     <div className="list pwd-list">
                         <span className="icon"></span>

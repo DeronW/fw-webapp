@@ -27,7 +27,7 @@ var PhoneCodePrompt = React.createClass({
         this.props.callbackVoice(+new Date);
 
         /*        $FW.Ajax({
-         url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
+         url: 'http://apitest.9888.cn/' + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
          method: "GET",
          success: function(data) {
          console.log(data);
@@ -187,7 +187,7 @@ var PswFrom = React.createClass({
 
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=" + this.state.codeType + "&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
+            url: 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/sendCode.shtml?type=" + this.state.codeType + "&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
             method: "GET",
             success: function (data) {
 
@@ -289,22 +289,6 @@ var PswFrom = React.createClass({
                         </span>
                     </div>
                 </div>
-
-
-                <div className="input-block code-block">
-                    <span className="input">
-                        <input type="text" placeholder="请输入验证码" onChange={this.handerChangeInput} />
-                    </span>
-
-                    <span className="btn-code">
-                        {
-                            this.state.code ?
-                                <span className="timing-text">{this.state.countdown}秒后重新获取</span> :
-                                <span className={this.state.codeClickable ? "btn" : "timing-text"}
-                                    onClick={this.handerIdentifyingCode.bind(this, "VMSCode")}>获取验证码</span>
-                        }
-                    </span>
-                </div>
             </div>
         );
     }
@@ -317,7 +301,6 @@ var Body = React.createClass({
         return {
             getAjaxUserInfo: userInfoData,
             phoneNumber: userInfoData.userInfo.phoneNum,
-            code: null,
             popShow: false,
             phoneCodePromptShow: false,
             cardId: "",
@@ -332,15 +315,11 @@ var Body = React.createClass({
             return false;
         }
 
-        if (this.state.code === null) {
-            $FW.Component.Toast("验证码不能为空");
-            return false;
-        }
 
-        location.href = API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId + "&validateCode=" + _this.state.code;
+        location.href = 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId;
 
         /*$FW.Ajax({
-         url: API_PATH + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code,
+         url: 'http://apitest.9888.cn/' + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code,
          method: "GET",
          success: function(data) {
          console.log(data);
@@ -426,7 +405,7 @@ var Body = React.createClass({
 
 $FW.DOMReady(() => {
     $FW.Ajax({
-        url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+        url: 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/getOpenAccountInfo.shtml",
         success: function (data) {
             ReactDOM.render(<Body activity={data} />, CONTENT_NODE);
         }

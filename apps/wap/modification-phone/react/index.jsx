@@ -1,10 +1,6 @@
 //手机号验证
 function checkPhone(phoneValue) {
-    if (!/^1[34578]\d{9}$/.test(phoneValue)) {
-        return false;
-    } else {
-        return true;
-    }
+    return /^1[34578]\d{9}$/.test(phoneValue))
 }
 
 const ModificationPhoneFrom = React.createClass({
@@ -14,7 +10,7 @@ const ModificationPhoneFrom = React.createClass({
             countdown: 0,
             codeValue: '',
             next: false,
-            phone: location.search.substring(1).split("=")[1],
+            phone: PHONE,
             phoneValue: '',
             updatePhoneNoTicket: '',
             bottomPhoneShow: false
@@ -32,10 +28,7 @@ const ModificationPhoneFrom = React.createClass({
         })
 
         this.timer = setInterval(() => {
-            this.setState({
-                countdown: this.state.countdown - 1
-            });
-
+            this.setState({ countdown: this.state.countdown - 1 });
             if (this.state.countdown == 0) {
                 clearInterval(this.timer);
                 this.setState({ showGetCode: true });
@@ -43,13 +36,15 @@ const ModificationPhoneFrom = React.createClass({
         }, 1000)
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + (this.state.next ? 10 : 9) + "&isVms=" + isVms + "&destPhoneNo=" + (this.state.next ? this.state.phoneValue : ""),
-            method: "GET",
-            success: (data) => {
-                if (_this.state.next) {
-                    _this.setState({ bottomPhoneShow: true });
-                }
+            url: `${API_PATH}/mpwap/api/v1/sendCode.shtml`,
+            data: {
+                type: this.state.next ? 10 : 9,
+                isVms: isVms,
+                destPhoneNo: this.state.next && this.state.phoneValue
             }
+        }).then(data => {
+            if (_this.state.next)
+                _this.setState({ bottomPhoneShow: true });
         })
     },
 
@@ -63,21 +58,15 @@ const ModificationPhoneFrom = React.createClass({
         } else {
             this.sountdownFun(isVms);
         }
-
     },
     codeChange(e) {
-        this.setState({
-            codeValue: e.target.value
-        });
+        this.setState({ codeValue: e.target.value });
     },
     phoneChange(e) {
-        this.setState({
-            phoneValue: e.target.value
-        });
+        this.setState({ phoneValue: e.target.value });
     },
     handlerModificationPhone() {
         var _this = this;
-
 
         if (this.state.next) {
 
@@ -87,57 +76,54 @@ const ModificationPhoneFrom = React.createClass({
                 $FW.Component.Toast("验证码不对");
             } else {
                 $FW.Ajax({
-                    url: API_PATH + "/mpwap/api/v1/changBankPhone.shtml?updatePhoneNoTicket=" + _this.state.updatePhoneNoTicket + "&phoneNum=" + _this.state.phoneValue + '&validateCode=' + _this.state.codeValue,
-                    method: "GET",
-                    success: function (data) {
-                        window.location.href = "/static/wap/recharge/index.html"
-                    },
-                    fail: function () {
-
+                    url: `${API_PATH}mpwap/api/v1/changBankPhone.shtml`,
+                    data: {
+                        updatePhoneNoTicket: this.state.updatePhoneNoTicket,
+                        phoneNum: this.state.phoneValue,
+                        validateCode: this.state.codeValue
                     }
+                }).then(data => {
+                    window.location.href = "/static/wap/recharge/index.html"
                 })
             }
 
         } else {
             if (this.state.codeValue == '') {
                 $FW.Component.Toast("验证码不对");
-
             } else {
                 $FW.Ajax({
                     url: API_PATH + "mpwap/api/v1/validateOldPhone.shtml?validateCode=" + _this.state.codeValue,
                     method: "GET",
-                    success: function (data) {
-                        _this.setState({
-                            next: true,
-                            codeValue: '',
-                            countdown: 60,
-                            showGetCode: true,
-                            updatePhoneNoTicket: data.updatePhoneNoTicket
-                        });
-
-                        clearInterval(_this.timer);
-
-                        _this.props.callbackNext(true)
-                    },
-                    fail: function () {
-
-                    }
+                }).then(data => {
+                    _this.setState({
+                        next: true,
+                        codeValue: '',
+                        countdown: 60,
+                        showGetCode: true,
+                        updatePhoneNoTicket: data.updatePhoneNoTicket
+                    });
+                    clearInterval(_this.timer);
+                    _this.props.callbackNext(true)
                 })
-
             }
         }
     },
     render() {
         let phoneText = this.state.bottomPhoneShow ?
             this.state.phoneValue.substring(0, 3) + "****" + this.state.phoneValue.substring(this.state.phoneValue.length - 4, this.state.phoneValue.length) : "";
+
         let bottomPhone = () => {
-            return <div className="phone-info">已向手机{phoneText}发送短信验证码，若收不到请<span className="s"
-                onClick={() => this.handlerGetCode("VMS")}>点击这里</span>获取语音验证码
+            return <div className="phone-info">已向手机{phoneText}
+                发送短信验证码，若收不到请
+                <span className="s" onClick={() => this.handlerGetCode("VMS")}>
+                    点击这里</span>获取语音验证码
             </div>
         }
 
         let text = () => {
-            return <div className="phone-info">若注册手机号无法进行验证，请<span className="s">联系客服</span>人工解决</div>
+            return <div className="phone-info">
+                若注册手机号无法进行验证，请
+                <span className="s">联系客服</span>人工解决</div>
         }
 
         let next;
@@ -174,24 +160,20 @@ const ModificationPhoneFrom = React.createClass({
                 {next}
 
                 <div className="modification-phone-btn"
-                    onClick={this.handlerModificationPhone}>{this.state.next ? '完成' : '下一步'}</div>
-
+                    onClick={this.handlerModificationPhone}>
+                    {this.state.next ? '完成' : '下一步'}
+                </div>
             </div>
         )
     }
 });
 
-
 const ModificationPhone = React.createClass({
     getInitialState() {
-        return {
-            next: false
-        }
+        return { next: false }
     },
     getCallbackNext(v) {
-        this.setState({
-            next: v
-        });
+        this.setState({ next: v });
     },
     render() {
         return (
@@ -204,6 +186,8 @@ const ModificationPhone = React.createClass({
         )
     }
 })
+
+const PHONE = $FW.Format.urlQuery().phone;
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"修改银行预留手机号"} sub_text={""} />, HEADER_NODE);

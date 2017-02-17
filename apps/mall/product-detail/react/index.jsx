@@ -44,7 +44,7 @@ const Product = React.createClass({
     render: function () {
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-        let topBuyCart = (inApp) ? "_style_buy_cart _top_buy_cart" : "_style_buy_cart";
+        let topBuyCart = inApp ? "_style_buy_cart _top_buy_cart" : "_style_buy_cart";
 
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
@@ -56,9 +56,9 @@ const Product = React.createClass({
 
             let detail_explain_cont = null;
             if (this.state.show)
-                detail_explain_cont = (<div className="detail-explain-cont">{data.activity_desc.map(text)}</div>);
+                detail_explain_cont = <div className="detail-explain-cont">{data.activity_desc.map(text)}</div>;
 
-            activity_desc = (
+            activity_desc =
                 <div className="detail-explain">
                     <div className="act-explain-head" onClick={this.toggleHandler}>
                         <div className="detail-explain-h">活动说明</div>
@@ -67,11 +67,11 @@ const Product = React.createClass({
                     </div>
                     {detail_explain_cont}
                 </div>
-            )
+
         }
 
         let rich_detail = null;
-        if (data.desc || (data.rich_detail && data.rich_detail.length)) {
+        if (data.desc || data.rich_detail && data.rich_detail.length) {
             rich_detail = <div className="detail-des">
                 <div className="title">商品详情</div>
                 <div className="remin">【温馨提示】
@@ -98,12 +98,12 @@ const Product = React.createClass({
 
         let market_price = null;
         if (data.market_price) {
-            market_price = (
+            market_price =
                 <div className="market-price">
                     <span>市价：</span>
                     <span className="market-price-num">&yen;{data.market_price}</span>
                 </div>
-            )
+
         }
 
         let user_level_manifest;
@@ -113,8 +113,11 @@ const Product = React.createClass({
         if (data.vipLevel == 4) user_level_manifest = "VIP3";
         if (data.vipLevel == 5) user_level_manifest = "VIP4";
 
-        let vip_tag = data.vipConfigUuid ? (data.vipLevel ? (
-            <span className="vip-tag">{user_level_manifest}</span>) : null) : null;
+        var vip_tag = null;
+
+        if (data.vipConfigUuid) {
+            if (data.vipLevel) vip_tag = <span className="vip-tag">{user_level_manifest}</span>
+        }
 
         let shop_card_prompt = null;
         if (this.state.showOverlayDef)

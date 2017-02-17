@@ -19,36 +19,42 @@ $FW.DOMReady(function () {
             $FW.Post(`${API_PATH}api/userBase/v1/invitationRecord.json`, {
                 pageIndex: page,
                 pageSize: 20,
-                userGid: $FW.Store.getUserDict().gid
+                userGid: $FW.Store.getUserDict().gid,
+                userId: $FW.Store.getUserDict().id,
+                token: $FW.Store.getUserDict().token,
+                sourceType: SOURCE_TYPE
             }).then((data) => {
                 $("#more").show();
-            if (data.invitationRecord.length == 0 && page == 1) {
-                $("#more").html("暂无数据");
-            } else if (data.invitationRecord.length < 20 && page == 1) {
-                $("#more").html("已经到结尾");
-            }
-            if (data.invitationRecord.length > 0 && page < 5) {
-                var str = '';
-                for (var i = 0; i < data.invitationRecord.length; i++) {
-                    str += '<div class="invite-item">';
-                    str += '<span class="phone-num">' + data.invitationRecord[i].mobile + '</span>';
-                    str += '<span class="invite-status">' + data.invitationRecord[i].userStatus + '</span>';
-                    str += '<span class="invite-date">' + data.invitationRecord[i].createTime + '</span>';
-                    str += '</div>';
+                if (data.invitationRecord.resultList.length == 0 && page == 1) {
+                    $("#more").html("暂无数据");
+                } else if (data.invitationRecord.resultList.length < 20 && page == 1) {
+                    $("#more").html("已经到结尾");
                 }
-                $(".tab-content-item-wrap2").append(str);
-                page++;
-            } else {
-                loadNextPage = false
-                $("#more").html("已经到结尾");
-            }
-            done && done();
-            }, (e) =>{
+                if (data.invitationRecord.resultList.length > 0 && page < 5) {
+                    var str = '';
+                    for (var i = 0; i < data.invitationRecord.resultList.length; i++) {
+                        str += '<div class="invite-item">';
+                        str += '<span class="phone-num">' + data.invitationRecord.resultList[i].mobile + '</span>';
+                        str += '<span class="invite-status">' + data.invitationRecord.resultList[i].userStatus + '</span>';
+                        str += '<span class="invite-date">' + data.invitationRecord.resultList[i].createTime + '</span>';
+                        str += '</div>';
+                    }
+                    $(".tab-content-item-wrap2").append(str);
+                    page++;
+                } else {
+                    loadNextPage = false
+                    $("#more").html("已经到结尾");
+                }
+                done && done();
+            }, (e) => {
                 $FW.Component.Alert(e.message);
-                if(page==1){$("#more").hide();}
-            } );
+                if (page == 1) {
+                    $("#more").hide();
+                }
+            });
         }
     }
+
     loadMoreHandler();
     $FW.Event.touchBottom(loadMoreHandler);
 });

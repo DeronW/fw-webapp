@@ -34,8 +34,7 @@ const Payment = React.createClass({
         }
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
-            let link = location.protocol + '//' + location.hostname +
-                '/static/mall/pay-add-card/index.html' + location.search;
+            let link = '/static/mall/pay-add-card/index.html' + location.search;
             location.href = link;
         }
         else {
@@ -116,7 +115,7 @@ const Payment = React.createClass({
             <div className="order-payment">
                 <div className="order-status">
                     <div className="pay-tip">请在<span id="cutdown"></span></div>
-                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt}元</span></div>
+                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt/100}元</span></div>
                 </div>
                 {/*<div className="order-products">
                  <div className="order-item">
