@@ -10,18 +10,23 @@ function verificationNum(val) {
 
 const Register = React.createClass({
     getInitialState() {
-        return { phone: '' }
+        return {
+            phone: '',
+            deleteShow:false
+        }
     },
     changeHandler(e) {
         let v = e.target.value;
         if (e.target.value.length > 11) {
             this.setState({
-                phone: this.state.phone
+                phone: this.state.phone,
+                deleteShow:true
             });
         } else {
             if (verificationNum(v)) {
                 this.setState({
-                    phone: v
+                    phone: v,
+                    deleteShow:true
                 })
             }
         }
@@ -74,7 +79,7 @@ const Register = React.createClass({
                                 <input type="number" value={this.state.phone}
                                     onChange={this.changeHandler}
                                     placeholder="请输入手机号进行注册登录" />
-                                <span className="clear-num" onClick={this.clearHandler}></span>
+                                {this.state.deleteShow?<span className="clear-num" onClick={this.clearHandler}></span>:null}
                             </div>
                             <div className="pwd-icon"> </div>
                         </div>

@@ -81,10 +81,6 @@ const Bill = React.createClass({
                 <br />
                 <br />
                 <br />
-                <br />
-                <br />
-                <br />
-                <br />
             </div>
         )
     }
