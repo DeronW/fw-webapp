@@ -520,7 +520,7 @@ $FW.DOMReady(function () {
         url: `http://apitest.9888.cn/api/sspay/withdraw/v1/getWithdrawInfo.shtml`,
         enable_loading: 'mini'
     }).then(data => {
-        console.log(this.props.data.bankInfo)
+        console.log(data)
         ReactDOM.render(<Content data={data} />, CONTENT_NODE)
         fmOpt(data.sessionId);
     })
