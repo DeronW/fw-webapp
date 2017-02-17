@@ -17,18 +17,12 @@ function gotoHandler(link) {
 
 const ShoppingCart = React.createClass({
     getInitialState: function () {
-        let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
-        let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-        var appCartHeader = (inIOS && inApp) ? "app-cart-header" : "cart-header";
-        var shoppingCart = (inIOS && inApp) ? "app-shopping-cart" : "shopping-cart";
         var ps = this.props.products;
         ps.map(i => i.checked = true);
 
         return {
             products: ps,
-            changeAll: true,
-            appCartHeader: appCartHeader,
-            shoppingCart: shoppingCart
+            changeAll: true
         }
     },
     componentDidMount: function () {
@@ -179,7 +173,7 @@ const ShoppingCart = React.createClass({
         }
 
         return (
-            <div className={this.state.shoppingCart}>
+            <div className="shopping-cart">
                 {this.props.products.length != 0 ? this.state.products.map((product, index) => product_item(product, index)) :
                     <div className="empty-cart-icon"></div>}
                 {this.props.products.length != 0 ? <div className="pay-bar">
