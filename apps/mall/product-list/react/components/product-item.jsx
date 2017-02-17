@@ -4,10 +4,10 @@ const ProductItem = React.createClass({
     },
     render: function () {
         var show_price = this.props.price != 0 || this.props.score == 0;
-        var score = (parseFloat(this.props.score) > 0) ? (
+        var score = parseFloat(this.props.score) > 0 ?
             <span className="list-price-score">{show_price ?
-                <span>&#43;</span> : null}{this.props.score}工分</span>) : null;
-        var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
+                <span>&#43;</span> : null}{this.props.score}工分</span> : null;
+        var Angle = this.props.angle_text ? <div className="list-label">{this.props.angle_text}</div> : null;
         var cover_bg = 'url(' + (this.props.img || 'images/default-product.jpg') + ')';
 
         let marks = (this.props.tags || []).map((d, index) => <div key={index}>{d}</div>);

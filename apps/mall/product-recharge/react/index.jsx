@@ -70,8 +70,6 @@ const Recharge = React.createClass({
         var opt = this.state.operator;
         var code = opt == 'union' ? 1032 : (opt == 'tele' ? 1033 : 1034);
 
-        console.log('load net', code)
-
         $FW.Ajax({
             url: API_PATH + 'mall/api/v1/phone/net/recharge.json',
             enable_loading: 'mini',

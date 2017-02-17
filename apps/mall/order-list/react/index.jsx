@@ -87,7 +87,7 @@ const OrderBlock = React.createClass({
             orderBizNo: orderNo,
             orderGroupBizNo: groupNo
         };
-
+        //alert(FormData); return false;
         $FW.Ajax({
             data: FormData,
             url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
