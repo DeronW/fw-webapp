@@ -1,5 +1,6 @@
 {
   "name": "webapp",
+  "version": "3.0.0",
   "author": "web front group",
   "private": true,
   "dependencies": {
