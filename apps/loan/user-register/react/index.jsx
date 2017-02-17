@@ -110,7 +110,8 @@ const Register = React.createClass({
                 invitationCode: '',
                 mobile: phoneNum,
                 password: password,
-                verifyCode: code
+                verifyCode: code,
+                sourceType: SOURCE_TYPE
             }).then(data => {
                 window.location.href = "/static/loan/weixin-attention/index.html"
             }, (e) => $FW.Component.Alert(e.message))
