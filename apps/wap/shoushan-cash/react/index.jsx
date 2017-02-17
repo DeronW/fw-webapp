@@ -78,7 +78,7 @@ const Greater = React.createClass({
 const Content = React.createClass({
     getInitialState: function () {
         console.log(this.props.data)
-        console.log(this.props.data.data.bankInfo.bankBranchName)
+        console.log(this.props.data.bankInfo.perDayRealTimeAmountLimit)
         return {
             modifyShow: false,
             specialShow: false,
