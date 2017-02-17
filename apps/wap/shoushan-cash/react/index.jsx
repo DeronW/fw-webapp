@@ -78,7 +78,7 @@ const Greater = React.createClass({
 const Content = React.createClass({
     getInitialState: function () {
         console.log(this.props.data)
-        console.log(this.props.data)
+        console.log(this.props.data.data.bankInfo.bankBranchName)
         return {
             modifyShow: false,
             specialShow: false,
@@ -88,9 +88,9 @@ const Content = React.createClass({
             popShow: false,
             moneyInput: false,
             inputVal: "",
-            selectBankName: this.props.data.bankInfo.bankBranchName,
+            selectBankName: this.props.data.data.bankInfo.bankBranchName,
             selectBankId: "",
-            propsAccountAmountVal: this.props.data.accountAmount,
+            propsAccountAmountVal: this.props.accountAmount,
             propsUserInfo: this.props.data,
             promptShow: false,
             voice: null,
