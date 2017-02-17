@@ -81,7 +81,7 @@ const OrderList = React.createClass({
 });
 
 const OrderBlock = React.createClass({
-    clickPay: function (orderTime, orderNo, groupNo,payableRmbAmt) {
+    clickPay: function (orderTime, orderNo, groupNo, payableRmbAmt) {
         let FormData = {
             orderTime: orderTime,
             orderBizNo: orderNo,
@@ -90,10 +90,11 @@ const OrderBlock = React.createClass({
 
         $FW.Ajax({
             data: FormData,
-            //url: `./order_to_account.json`,
             url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
             enable_loading: true,
             success: function (result) {
+                //alert(JSON.stringify(result));
+                //return false;
                 location.href =
                     '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
                     '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo +
@@ -149,6 +150,10 @@ const OrderBlock = React.createClass({
                 break;
             case 'complete':
                 status_name = '已完成';
+                status_color = complete_color;
+                break;
+            case 'cancel':
+                status_name = '已取消';
                 status_color = complete_color;
                 break;
         }
@@ -214,7 +219,8 @@ const OrderBlock = React.createClass({
                     </div>
                     {order.status == "unPay" ? <div className="pay-order">
                         <div className="btn-pay"
-                             onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo,$FW.Format.currency(order.price))}>立即支付
+                             onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo,$FW.Format.currency(order.price))}>
+                            立即支付
                         </div>
                         <div className="btn-cancel"
                              onClick={this.clickCancel.bind(this,order.bizNo,order.orderGroupBizNo)}>取消订单

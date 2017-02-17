@@ -262,7 +262,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"VIP专区"}/>, HEADER_NODE);
 
     $FW.Ajax({
-        url: API_PATH + "mall/api/member/v1/user_level_points.json",
+        url: `${API_PATH}mall/api/member/v1/user_level_points.json`,
         enable_loading: 'mini',
         success: function (data) {
             if (data.loginOk) {
