@@ -77,8 +77,6 @@ const Greater = React.createClass({
 
 const Content = React.createClass({
     getInitialState: function () {
-        console.log(this.props.data.data)
-        console.log(this.props.data.bankInfo.perDayRealTimeAmountLimit)
         return {
             modifyShow: false,
             specialShow: false,
@@ -90,12 +88,12 @@ const Content = React.createClass({
             inputVal: "",
             selectBankName: this.props.data.data.bankInfo.bankBranchName,
             selectBankId: "",
-            propsAccountAmountVal: this.props.accountAmount,
-            propsUserInfo: this.props.data,
+            propsAccountAmountVal: this.props.data.data.accountAmount,
+            propsUserInfo: this.props.data.data,
             promptShow: false,
             voice: null,
             selectCashMethod: true,
-            selectWhich: this.props.data.bankInfo.isCompanyAgent ? 1 : 0
+            selectWhich: this.props.data.data.bankInfo.isCompanyAgent ? 1 : 0
         }
     },
     componentDidUpdate: function (a, params) {
@@ -121,14 +119,14 @@ const Content = React.createClass({
             return false;
         }
 
-        if (numberFormat.format(e.target.value) > this.props.data.criticalValue * 10000) {
+        if (numberFormat.format(e.target.value) > this.props.data.data.criticalValue * 10000) {
             this.setState({ selectWhich: 1 });
         }
 
-        if (this.props.data.bankInfo.isCompanyAgent || this.props.data.bankInfo.isSpecial) {
+        if (this.props.data.data.bankInfo.isCompanyAgent || this.props.data.data.bankInfo.isSpecial) {
             this.setState({ selectWhich: 1 });
         }
-        if (numberFormat.format(e.target.value) < this.props.data.criticalValue * 10000) {
+        if (numberFormat.format(e.target.value) < this.props.data.data.criticalValue * 10000) {
             this.setState({
                 inputVal: numberFormat.format(e.target.value),
                 selectWhich: 0,
@@ -150,7 +148,7 @@ const Content = React.createClass({
             inputVal: numberFormat.format(e.target.value)
         });
 
-        if (numberFormat.format(e.target.value) > this.props.data.criticalValue * 10000) {
+        if (numberFormat.format(e.target.value) > this.props.data.data.criticalValue * 10000) {
             this.setState({
                 modifyShow: true
             });
@@ -179,7 +177,7 @@ const Content = React.createClass({
             inputVal: this.state.propsAccountAmountVal
         });
 
-        if (this.state.propsAccountAmountVal > this.props.data.criticalValue * 10000) {
+        if (this.state.propsAccountAmountVal > this.props.data.data.criticalValue * 10000) {
             this.setState({
                 selectWhich: 1,
                 selectCashMethod: !this.state.selectCashMethod
@@ -190,7 +188,7 @@ const Content = React.createClass({
     handlerPost: function () {
         var _this = this;
 
-        if (this.state.inputVal < parseInt(this.props.data.minAmt)) {
+        if (this.state.inputVal < parseInt(this.props.data.data.minAmt)) {
             $FW.Component.Toast("提现金额不能低于10元");
             return false;
         }
@@ -203,9 +201,9 @@ const Content = React.createClass({
         }
 
         if (this.state.selectWhich == 0) {
-            if (this.state.inputVal > this.props.data.criticalValue * 10000) {
+            if (this.state.inputVal > this.props.data.data.criticalValue * 10000) {
 
-                $FW.Component.Toast("您实时提现单笔已超过" + this.props.data.criticalValue + "万限制，请使用大额提现！");
+                $FW.Component.Toast("您实时提现单笔已超过" + this.props.data.data.criticalValue + "万限制，请使用大额提现！");
                 return false;
             }
         }
@@ -226,16 +224,16 @@ const Content = React.createClass({
 
         var bankNoVal = () => {
             if (this.state.selectWhich == 1) {
-                if (_this.props.data.bankInfo.lianhangNo === null) {
+                if (_this.props.data.data.bankInfo.lianhangNo === null) {
                     return _this.state.selectBankId;
                 } else {
-                    return _this.props.data.bankInfo.lianhangNo;
+                    return _this.props.data.data.bankInfo.lianhangNo;
                 }
             } else {
                 return '';
             }
         };
-        window.location.href = "http://apitest.9888.cn/api/sspay/withdraw/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.withdrawToken;
+        window.location.href = "http://apitest.9888.cn/api/sspay/withdraw/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.data.withdrawToken;
     },
     handlerVoice: function () {
         this.setState({ voice: +new Date() })
@@ -284,8 +282,8 @@ const Content = React.createClass({
         var _this = this;
 
         var feeVal = this.state.propsUserInfo.fee;
-        var bankId = this.props.data.bankInfo.bankCardNo || '';
-        var phone = this.props.data.bankInfo.phoneNo;
+        var bankId = this.props.data.data.bankInfo.bankCardNo || '';
+        var phone = this.props.data.data.bankInfo.phoneNo;
         var phoneVal = phone.substring(0, 3) + "****" + phone.substring(phone.length - 4, phone.length);
 
         var commissionCharge = function () {
@@ -334,7 +332,7 @@ const Content = React.createClass({
 
         var immediatelyCashMethodEml = function (b) {
 
-            var valText = _this.props.data.perDayRealTimeAmountLimit;
+            var valText = _this.props.data.data.perDayRealTimeAmountLimit;
 
             return <div className="info-list">
                 <div className="info-select-btn">
@@ -346,8 +344,8 @@ const Content = React.createClass({
                 <div className="info-text">
                     <div className="subhead-text"> 实时提现 </div>
                     <div className="detail-text">
-                        单笔金额&lt;={_this.props.data.criticalValue}万，
-                        { _this.props.data.perDayRealTimeAmountLimit && `单日&lt;=${valText}万，`}
+                        单笔金额&lt;={_this.props.data.data.criticalValue}万，
+                        { _this.props.data.data.perDayRealTimeAmountLimit && `单日&lt;=${valText}万，`}
                         7*24小时实时到账
                     </div>
                 </div>
@@ -368,7 +366,7 @@ const Content = React.createClass({
                 <div className="info-text">
                     <div className="subhead-text"> 大额提现 </div>
                     <div className="detail-text">
-                        工作日{_this.props.data.doTime}受理，最快30分钟之内到账。
+                        工作日{_this.props.data.data.doTime}受理，最快30分钟之内到账。
                     </div>
                 </div>
             </div>
@@ -376,9 +374,9 @@ const Content = React.createClass({
 
 
         var blockEml = function () {
-            if (_this.props.data.bankInfo.isCompanyAgent || _this.props.data.bankInfo.isSpecial) {
+            if (_this.props.data.data.bankInfo.isCompanyAgent || _this.props.data.data.bankInfo.isSpecial) {
                 return blockTradeCashMethodEml(false);
-            } else if (_this.props.data.bankInfo.bankName == undefined || _this.props.data.bankInfo.bankName == "") {
+            } else if (_this.props.data.data.bankInfo.bankName == undefined || _this.props.data.data.bankInfo.bankName == "") {
                 return immediatelyCashMethodEml(true);
             } else {
                 return <div>{immediatelyCashMethodEml(true)} {blockTradeCashMethodEml(true)}</div>
@@ -393,9 +391,9 @@ const Content = React.createClass({
 
                     <div className="stou clearfix">
                         <div className="zhaoshang"><img className="ico-zhaoshang"
-                            src={this.props.data.bankInfo.bankLogo} /></div>
+                            src={this.props.data.data.bankInfo.bankLogo} /></div>
                         <div className="wz">
-                            <div className="zh">{this.props.data.bankInfo.bankName}</div>
+                            <div className="zh">{this.props.data.data.bankInfo.bankName}</div>
                             <div className="nz">
                                 {
                                     bankId.substring(0, 4) + "********" + bankId.substring(bankId.length - 4, bankId.length)
@@ -409,7 +407,7 @@ const Content = React.createClass({
                         <div className="nin">如果您绑定的银行卡暂不支持手机快捷支付请联系客服<a href="tel:400-0322-988" className="c-4aa1f9">400-0322-988</a>
                         </div>
                         <div className="kx">可提现金额(元)：
-                            <span style={{ fontSize: '38px', color: '#fd4d4c' }}>{this.props.data.accountAmount}</span></div>
+                            <span style={{ fontSize: '38px', color: '#fd4d4c' }}>{this.props.data.data.accountAmount}</span></div>
                     </div>
 
                     <div className="select-bank-area">
@@ -435,7 +433,7 @@ const Content = React.createClass({
                         </div>
 
                         {
-                            this.state.selectWhich == 1 || (_this.props.data.bankInfo.isCompanyAgent || _this.props.data.bankInfo.isSpecial) ?
+                            this.state.selectWhich == 1 || (_this.props.data.data.bankInfo.isCompanyAgent || _this.props.data.data.bankInfo.isSpecial) ?
                                 <div className="modify" onClick={this.handlerSelectPopFun}>
                                     <div className="wire"></div>
                                     <div className="pure">
@@ -482,7 +480,7 @@ const Content = React.createClass({
                             <div className="atpr">
                                 <img className="card-d" src="images/card-d.png" />
                                 <span className="online">
-                                    对首次充值后无投资的提现，平台收取{this.props.data.fee}%的手续费；
+                                    对首次充值后无投资的提现，平台收取{this.props.data.data.fee}%的手续费；
 								</span>
                             </div>
                             <div className="atpr">
@@ -520,7 +518,6 @@ $FW.DOMReady(function () {
         url: `http://apitest.9888.cn/api/sspay/withdraw/v1/getWithdrawInfo.shtml`,
         enable_loading: 'mini'
     }).then(data => {
-        console.log(data.data)
         ReactDOM.render(<Content data={data} />, CONTENT_NODE)
         fmOpt(data.sessionId);
     })
