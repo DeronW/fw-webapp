@@ -3,8 +3,6 @@
   "author": "web front group",
   "private": true,
   "dependencies": {
-  },
-  "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",
     "gulp-data": ">=1.2",
     "gulp-swig": ">=0.8",
