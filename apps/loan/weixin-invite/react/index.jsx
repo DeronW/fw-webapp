@@ -21,7 +21,8 @@ $FW.DOMReady(function () {
                 pageSize: 20,
                 userGid: $FW.Store.getUserDict().gid,
                 userId: $FW.Store.getUserDict().id,
-                token: $FW.Store.getUserDict().token
+                token: $FW.Store.getUserDict().token,
+                sourceType: SOURCE_TYPE
             }).then((data) => {
                 $("#more").show();
                 if (data.invitationRecord.length == 0 && page == 1) {
