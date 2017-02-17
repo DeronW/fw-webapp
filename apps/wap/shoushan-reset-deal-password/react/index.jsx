@@ -187,7 +187,7 @@ var PswFrom = React.createClass({
 
 
         $FW.Ajax({
-            url: 'http://apitest.9888.cn/' + "mpwap/api/v1/sendCode.shtml?type=" + this.state.codeType + "&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
+            url: 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/sendCode.shtml?type=" + this.state.codeType + "&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
             method: "GET",
             success: function (data) {
 
@@ -337,7 +337,7 @@ var Body = React.createClass({
             return false;
         }
 
-        location.href = 'http://apitest.9888.cn/' + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId + "&validateCode=" + _this.state.code;
+        location.href = 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId + "&validateCode=" + _this.state.code;
 
         /*$FW.Ajax({
          url: 'http://apitest.9888.cn/' + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code,
