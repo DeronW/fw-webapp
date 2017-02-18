@@ -59,7 +59,7 @@ const Register = React.createClass({
     passwordHandler(){
         $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
             mobile: PHONE,
-            userOperationType: 3,
+            userOperationType: 2,
             sourceType: SOURCE_TYPE
         }).then(()=>{
             location.herf= `/static/loan/user-reset-password/index.html?phone=${PHONE}`;
