@@ -76,6 +76,9 @@ const VerifyPhone = React.createClass({
             console.log(data)
             if (data.bindStatus.status == 0) {
                 $FW.Component.Toast("处理中");
+                if(data.bindStatus.transCode == 1001){
+                    $FW.Component.Toast("验证码不正确");
+                }
                 //window.location.href = `/static/loan/user-bank-management/index.html`;
             } else if (data.bindStatus.status == 1) {
                 window.location.href = `/static/loan/user-bank-management/index.html`;
