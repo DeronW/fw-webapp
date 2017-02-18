@@ -187,7 +187,7 @@ const SetCashCard = React.createClass({
                         <span className="text">手机号</span>
                         <div className="input">
                             <input onChange={this.changePhone} value={this.state.phone}
-                                type="text" placeholder="银行卡预留手机号" />
+                                type="number" placeholder="银行卡预留手机号" />
                         </div>
                     </div>
                 </div>
