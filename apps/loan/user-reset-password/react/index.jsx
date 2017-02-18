@@ -15,13 +15,15 @@ function space(val) {
 
 const Register = React.createClass({
     getInitialState() {
+    let query = $FW.Format.urlQuery();
+    let codeToken = query.codeToken;
         return {
             code: '',
             codeBoolean: false,
             password: '',
             countdown: 0,
             plainCode: false,
-            codeToken: ''
+            codeToken: codeToken
         }
     },
     componentDidMount() {
