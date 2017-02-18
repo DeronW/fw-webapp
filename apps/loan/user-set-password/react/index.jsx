@@ -35,16 +35,15 @@ const SetPassword = React.createClass({
         this.countingDown();
     },
     handleGetCode() {
-
         $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
-            mobile: localStorage.phone,
+            mobile: PHONE,
             userOperationType: 3,
             sourceType: SOURCE_TYPE
         }).then(data => this.setState({ codeToken: data.codeToken }))
 
         this.countingDown();
     },
-    countingDown(){
+    countingDown() {
         this.setState({
             codeBoolean: true,
             countdown: 60
@@ -95,26 +94,25 @@ const SetPassword = React.createClass({
     render() {
         let {code} = this.state;
 
+        let btnSMSCode =
+            this.state.codeBoolean ?
+                <div className="get-code-btn c">{this.state.countdown}倒计时</div> :
+                <div className="get-code-btn" onClick={this.handleGetCode}>获取验证码</div>;
+
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
-                    已发送短信验证码到号码<span>{$FW.Store.get('phone')}</span>
+                    已发送短信验证码到号码<span>{PHONE}</span>
                 </div>
 
                 <div className="ui-froms">
                     <div className="list code-list">
                         <span className="icon"></span>
                         <div className="input">
-                            <input type="text" onChange={this.changeCode} placeholder="输入手机验证码" />
+                            <input type="text" onChange={this.changeCode}
+                                placeholder="输入手机验证码" />
                         </div>
-
-                        {
-                            this.state.codeBoolean ?
-                                <div className="get-code-btn c">{this.state.countdown}倒计时</div> :
-                                <div className="get-code-btn" onClick={this.handleGetCode}>
-                                    获取验证码</div>
-                        }
-
+                        {btnSMSCode}
                     </div>
                     <div className="list pwd-list">
                         <span className="icon"></span>
