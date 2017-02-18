@@ -144,7 +144,7 @@ const SetPassword = React.createClass({
     }
 });
 
-const PHONE = $FW.Format.urlQuery().phone;
+const PHONE = $FW.Format.urlQuery().phone || '';
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"设置密码"} />, HEADER_NODE);

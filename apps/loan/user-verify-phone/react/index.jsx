@@ -73,7 +73,6 @@ const VerifyPhone = React.createClass({
                 sourceType: SOURCE_TYPE
             })
         }, e => $FW.Component.Toast(e.message)).then((data) => {
-            console.log(data)
             if (data.bindStatus.status == 0) {
                 $FW.Component.Toast("处理中");
                 if(data.bindStatus.transCode == 1001){
