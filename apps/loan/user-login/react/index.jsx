@@ -56,6 +56,15 @@ const Register = React.createClass({
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message));
     },
+    passwordHandler(){
+        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+            mobile: PHONE,
+            userOperationType: 3,
+            sourceType: SOURCE_TYPE
+        }).then(()=>{
+            location.herf= `/static/loan/user-reset-password/index.html?phone=${PHONE}`;
+        }, err => $FW.Component.Toast(err.message));
+    },
     render() {
 
         let {plainCode} = this.state;
@@ -88,7 +97,7 @@ const Register = React.createClass({
                     <div className="ui-btn" onClick={this.loadingBtn}>确定</div>
                 </div>
                 <div className="forget-pwd-link">
-                    <a href={`/static/loan/user-reset-password/index.html?phone=${PHONE}`}>
+                    <a onClick={this.passwordHandler}>
                         忘记密码?</a>
                 </div>
             </div>
