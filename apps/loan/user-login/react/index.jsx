@@ -62,7 +62,7 @@ const Register = React.createClass({
             userOperationType: 2,
             sourceType: SOURCE_TYPE
         }).then(()=>{
-            location.herf= `/static/loan/user-reset-password/index.html?phone=${PHONE}`;
+            location.href= `/static/loan/user-reset-password/index.html?phone=${PHONE}`;
         }, err => $FW.Component.Toast(err.message));
     },
     render() {
