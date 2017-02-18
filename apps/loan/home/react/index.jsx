@@ -72,7 +72,7 @@ const ApplyLoan = React.createClass({
         let available_loan =
             <div className="available-loan">
                 <div className="max-loan-money">{this.state.creditLine}</div>
-                <div className="max-loan-title">最高借款额度（元）</div>
+                <div className="max-loan-title">最高借款额度(元)</div>
             </div>;
 
         let unavailable_loan =
