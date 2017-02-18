@@ -61,8 +61,8 @@ const Register = React.createClass({
             mobile: PHONE,
             userOperationType: 2,
             sourceType: SOURCE_TYPE
-        }).then(()=>{
-            location.href= `/static/loan/user-reset-password/index.html?phone=${PHONE}`;
+        }).then((data)=>{
+            location.href= `/static/loan/user-reset-password/index.html?phone=${PHONE}&codeToken=${data.codeToken}`;
         }, err => $FW.Component.Toast(err.message));
     },
     render() {
