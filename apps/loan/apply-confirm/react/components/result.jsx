@@ -82,7 +82,7 @@ const LoanResult = React.createClass({
         return (
             <div className="loan-result">
                 <div className="header">
-                    <div className="arrow-left" onClick={this.resultHide}></div>
+                    <div className="arrow-left" onClick={()=>{gotoHandler("/static/loan/home/index.html")}}></div>
                     <div className="title">借款结果</div>
                 </div>
                 <div className="result-box">
