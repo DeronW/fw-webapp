@@ -45,6 +45,33 @@ const Bill = React.createClass({
             <img className="no-data-img" src="images/no-data.png" />
         </div>;
 
+        let bill_panel = (
+            <div className="data-box">
+                <div className="transfer-box">
+                    <div className="loan-headline-money">
+                        <div className="transfer-money">
+                            {this.props.data.undueAmount.toFixed(2)}</div>
+                        <div className="transfer-title">当前账单(元)</div>
+                    </div>
+
+                    <div className="loan-info">
+                        <div className="transfer-lines">
+                            <div className="return-money">
+                                <span className="return-money-num">{this.props.data.creditLine}</span>
+                                <span className="return-money-title">信用额度(元)</span>
+                            </div>
+                            <div className="return-date">
+                                <span className="return-date-day">{this.props.data.canBorrowAmount}</span>
+                                <span className="return-date-title">剩余可借(元)</span>
+                            </div>
+                        </div>
+                        <span className="vertical-line"></span>
+                    </div>
+                </div>
+                {this.state.billList.map(bill_item)}
+            </div>
+        )
+
         return (
             <div>
                 <div className="header">
@@ -52,30 +79,7 @@ const Bill = React.createClass({
                     <a className="history-bill" href='/static/loan/bill-history/index.html'>
                         历史账单</a>
                 </div>
-                {this.props.data.loanList.length === 0 ? empty : (<div className="data-box">
-                    <div className="transfer-box">
-                        <div className="loan-headline-money">
-                            <div className="transfer-money">
-                                {this.props.data.undueAmount.toFixed(2)}</div>
-                            <div className="transfer-title">当前账单(元)</div>
-                        </div>
-
-                        <div className="loan-info">
-                            <div className="transfer-lines">
-                                <div className="return-money">
-                                    <span className="return-money-num">{this.props.data.creditLine}</span>
-                                    <span className="return-money-title">信用额度(元)</span>
-                                </div>
-                                <div className="return-date">
-                                    <span className="return-date-day">{this.props.data.canBorrowAmount}</span>
-                                    <span className="return-date-title">剩余可借(元)</span>
-                                </div>
-                            </div>
-                            <span className="vertical-line"></span>
-                        </div>
-                    </div>
-                    {this.state.billList.map(bill_item)}
-                </div>)}
+                {this.props.data.loanList.length === 0 ? empty : bill_panel}
                 <br />
                 <br />
                 <br />

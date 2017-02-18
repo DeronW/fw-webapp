@@ -50,7 +50,6 @@ const ConfirmLoanWrap = React.createClass({
         function isRealNameBindCard(ele) {
             return ele.isRealNameBindCard == true;
         }
-        console.log(this.state.successResult);
         let filtered = cashBank.filter(isRealNameBindCard);
         return (
             <div>

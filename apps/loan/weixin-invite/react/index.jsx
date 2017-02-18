@@ -1,3 +1,5 @@
+const USER = $FW.Store.getUserDict();
+
 $FW.DOMReady(function () {
     var page = 1;
     var loadNextPage = true;
@@ -7,21 +9,23 @@ $FW.DOMReady(function () {
         $(this).addClass('selected').siblings().removeClass('selected');
         $(".tab-content-item").eq(index).show().siblings().hide();
     });
+
     $(".get-btn").click(function () {
         $(".mask").show();
     });
+
     $(".mask").click(function () {
         $(this).hide();
     });
+
     function loadMoreHandler(done) {
         if (loadNextPage) {
-            console.log(page);
             $FW.Post(`${API_PATH}api/userBase/v1/invitationRecord.json`, {
                 pageIndex: page,
                 pageSize: 20,
-                userGid: $FW.Store.getUserDict().gid,
-                userId: $FW.Store.getUserDict().id,
-                token: $FW.Store.getUserDict().token,
+                userGid: USER.gid,
+                userId: USER.id,
+                token: USER.token,
                 sourceType: SOURCE_TYPE
             }).then((data) => {
                 $("#more").show();
@@ -41,7 +45,7 @@ $FW.DOMReady(function () {
                     }
                     $(".tab-content-item-wrap2").append(str);
                     page++;
-                } else if(page >1){
+                } else if (page > 1) {
                     loadNextPage = false
                     $("#more").html("已经到结尾");
                 }
