@@ -64,6 +64,10 @@ const VerifyPhone = React.createClass({
             userId: USER.id,
             verifyCode: this.state.codeVal,
             sourceType: SOURCE_TYPE
+        }).then(()=>{
+            let p = new Promise();
+            setTimeout(()=> p.resolve(), 5000);
+            return p;
         }).then(() => {
             return $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
                 operatorBankcardGid: BANK_GID,
@@ -81,7 +85,7 @@ const VerifyPhone = React.createClass({
                     $FW.Component.Toast("处理中");
                     setTimeout(() => {
                         window.location.href = `/static/loan/user-bank-management/index.html`
-                    }, 3000)
+                    }, 1000)
                 }
             } else if (bs.status == 1) {
                 window.location.href = `/static/loan/user-bank-management/index.html`;
