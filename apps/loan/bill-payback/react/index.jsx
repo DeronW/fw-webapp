@@ -23,18 +23,18 @@ const PayBackWrap = React.createClass({
             bankNo: filtered.cardNo,
             selectedBankName: null,
             index: 0,
-            paybackSuccessState:false,
-            paybackFailState:false,
-            paybackCheckState:false
+            paybackSuccessState: false,
+            paybackFailState: false,
+            paybackCheckState: false
         }
     },
     componentDidMount: function () {
     },
     getBankCardListShow: function (booleanVal) {
-        this.setState({bankCardListShow: booleanVal});
+        this.setState({ bankCardListShow: booleanVal });
     },
     getVerifyCodeShow: function (booleanVal) {
-        this.setState({verifyCodeShow: booleanVal});
+        this.setState({ verifyCodeShow: booleanVal });
     },
     indexItem: function (booleanVal) {
 
@@ -47,69 +47,69 @@ const PayBackWrap = React.createClass({
         });
     },
     popHideHandler: function (booleanVal) {
-        this.setState({bankCardListShow: booleanVal});
+        this.setState({ bankCardListShow: booleanVal });
     },
     closeHandler: function (booleanVal) {
-        this.setState({verifyCodeShow: booleanVal});
+        this.setState({ verifyCodeShow: booleanVal });
     },
     getBankName: function (val) {
-        this.setState({bankName: val});
+        this.setState({ bankName: val });
     },
     getBankNo: function (val) {
-        this.setState({bankNo: val});
+        this.setState({ bankNo: val });
     },
     getBankCardGid: function (val) {
-        this.setState({cardGid: val});
+        this.setState({ cardGid: val });
     },
     getBankIndex: function (index) {
-        this.setState({index: index})
+        this.setState({ index: index })
     },
-    getPaybackSuccess:function(val){
-        this.setState({paybackSuccessState:val});
+    getPaybackSuccess: function (val) {
+        this.setState({ paybackSuccessState: val });
     },
-    getPaybackFail:function(val){
-        this.setState({paybackFailState:val});
+    getPaybackFail: function (val) {
+        this.setState({ paybackFailState: val });
     },
-    getPaybackCheck:function(val){
-        this.setState({paybackCheckState:val});
+    getPaybackCheck: function (val) {
+        this.setState({ paybackCheckState: val });
     },
     render: function () {
         return (
             <div>
                 {this.state.paybackShow ? <PayBack callbackBankListShow={this.getBankCardListShow}
-                                                   callbackVerifyCodeShow={this.getVerifyCodeShow}
-                                                   loanLeftAmount={this.props.loanLeftAmount}
-                                                   loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus}
-                                                   overdueFee={this.props.overdueFee}
-                                                   bankName={this.state.bankName}
-                                                   bankNo={this.state.bankNo}
-                    /> : null}
+                    callbackVerifyCodeShow={this.getVerifyCodeShow}
+                    loanLeftAmount={this.props.loanLeftAmount}
+                    loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus}
+                    overdueFee={this.props.overdueFee}
+                    bankName={this.state.bankName}
+                    bankNo={this.state.bankNo}
+                /> : null}
                 {this.state.bankCardListShow ?
                     <BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem}
-                                  callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName}
-                                  callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid}
-                                  bankName={this.state.bankName}
-                                  bankNo={this.state.bankNo}
-                                  cardGid={this.state.cardGid}
-                                  callbackGetBankIndex={this.getBankIndex}
-                                  callbackIndex={this.state.index}
+                        callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName}
+                        callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid}
+                        bankName={this.state.bankName}
+                        bankNo={this.state.bankNo}
+                        cardGid={this.state.cardGid}
+                        callbackGetBankIndex={this.getBankIndex}
+                        callbackIndex={this.state.index}
 
                     /> : null}
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid}
-                                callbackCloseHanler={this.closeHandler}
-                                repaymentAmount={this.state.repaymentAmount}
-                                bankName={this.state.bankName}
-                                bankNo={this.state.bankNo}
-                                callbackGetPaybackSuccess={this.getPaybackSuccess}
-                                callbackGetPaybackFail={this.getPaybackFail}
-                                callbackGetPaybackCheck={this.getPaybackCheck}
+                        callbackCloseHanler={this.closeHandler}
+                        repaymentAmount={this.state.repaymentAmount}
+                        bankName={this.state.bankName}
+                        bankNo={this.state.bankNo}
+                        callbackGetPaybackSuccess={this.getPaybackSuccess}
+                        callbackGetPaybackFail={this.getPaybackFail}
+                        callbackGetPaybackCheck={this.getPaybackCheck}
                     /> : null}
                 {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount}
                     success={this.state.paybackSuccessState}
                     fail={this.state.getPaybackFail}
                     check={this.state.getPaybackCheck}
-                    /> : null}
+                /> : null}
             </div>
         )
     }
@@ -145,7 +145,7 @@ const PayBack = React.createClass({
                         <span>还款卡</span>
                         <span onClick={this.bankListHandler}>
                             {this.props.bankName}（{this.props.bankNo.slice(-4)}）<img className="right-arrow"
-                                                                                     src="images/right-arrow.jpg"/></span>
+                                src="images/right-arrow.jpg" /></span>
                     </div>
                 </div>
                 <div className="loan-detail-box">
@@ -199,7 +199,7 @@ const BankCardList = React.createClass({
                     this.clickHandler(index)
                 }}>
                     <img
-                        src={item.logoUrl}/>
+                        src={item.logoUrl} />
                     {item.bankShortName}（{item.cardNo.slice(-4)}）
                     {
                         this.state.checked == index ?
@@ -241,17 +241,15 @@ const VerifyCode = React.createClass({
         var query = $FW.Format.urlQuery();
         var loanGid = query.loanGid;
         this.tick();
-        $FW.Post(
-            `${API_PATH}api/repayment/v1/checksmsverifycode.json`,
-            {
-                repaymentAmount: this.props.repaymentAmount,
-                loanGid: loanGid,
-                cardGid: this.props.cardGid,
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE
-            }).then(d => {
+        $FW.Post( `${API_PATH}api/repayment/v1/checksmsverifycode.json`, {
+            repaymentAmount: this.props.repaymentAmount,
+            loanGid: loanGid,
+            cardGid: this.props.cardGid,
+            token: USER.token,
+            userGid: USER.gid,
+            userId: USER.id,
+            sourceType: SOURCE_TYPE
+        }).then(d => {
             this.setState({phoneNum: d.mobile, orderGid: d.orderGid});
         }, e => $FW.Component.Toast(e.message))
     },
