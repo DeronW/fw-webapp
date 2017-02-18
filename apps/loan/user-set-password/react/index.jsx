@@ -96,13 +96,13 @@ const SetPassword = React.createClass({
 
         let btnSMSCode =
             this.state.codeBoolean ?
-                <div className="get-code-btn c">{this.state.countdown}倒计时</div> :
+                <div className="get-code-btn c">{this.state.countdown}s</div> :
                 <div className="get-code-btn" onClick={this.handleGetCode}>获取验证码</div>;
 
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
-                    已发送短信验证码到号码<span>{PHONE}</span>
+                    已发送短信验证码到尾号为<span>{PHONE.slice(7)}</span>的手机
                 </div>
 
                 <div className="ui-froms">
@@ -144,7 +144,7 @@ const SetPassword = React.createClass({
     }
 });
 
-const PHONE = $FW.Format.urlQuery().phone;
+const PHONE = $FW.Format.urlQuery().phone || '';
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"设置密码"} />, HEADER_NODE);

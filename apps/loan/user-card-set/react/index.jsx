@@ -63,15 +63,12 @@ const SetCashCard = React.createClass({
         v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
     },
     blurBankNum(e) {
-
-        let user = $FW.Store.getUserDict();
-
         if (!space(this.state.bankNum).length > 19 || !space(this.state.bankNum).length < 16) {
             $FW.Post(`${API_PATH}api/bankcard/v1/cardinfo.json`, {
                 bankCardNo: space(this.state.bankNum),
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
                 sourceType: SOURCE_TYPE
             }).then(data => {
                 let ci = data.cardInfo;
@@ -110,7 +107,6 @@ const SetCashCard = React.createClass({
     },
     handlerNext() {
         let err, {name, id, bankName, bankNum, phone, selectClause, cardType, canVerify} = this.state;
-        let user = $FW.Store.getUserDict();
 
         if (name == '') err = "姓名不能为空";
         if (name.length > 20) err = "姓名不能超过20个字符";
@@ -133,10 +129,10 @@ const SetCashCard = React.createClass({
                 cardType: cardType,
                 idCard: id,
                 mobile: phone,
-                operatorType: $FW.Store.get('userStatus'),
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
+                operatorType: USER.status < 2 ? 1 : 2,
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
                 sourceType: SOURCE_TYPE
             }).then((data) => {
                 let oGid = data.bindBankInfo.operatorBankcardGid;
@@ -191,7 +187,7 @@ const SetCashCard = React.createClass({
                         <span className="text">手机号</span>
                         <div className="input">
                             <input onChange={this.changePhone} value={this.state.phone}
-                                type="text" placeholder="银行卡预留手机号" />
+                                type="number" placeholder="银行卡预留手机号" />
                         </div>
                     </div>
                 </div>
@@ -213,6 +209,7 @@ const SetCashCard = React.createClass({
     }
 });
 
+const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"设置提现卡"} />, HEADER_NODE);
