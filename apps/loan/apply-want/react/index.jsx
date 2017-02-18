@@ -76,7 +76,7 @@ const WantLoan = React.createClass({
         return (
             <div>
                 <div className="loan-box">
-                    <div className="loan-box-title">借款金额（元）</div>
+                    <div className="loan-box-title">借款金额(元)</div>
                     <input className="loan-num" type="number" name="number" value={this.state.loanNum} onChange={this.changeHandler} />
                     <div className="horizonal-line">
                         <div className="line1"></div>

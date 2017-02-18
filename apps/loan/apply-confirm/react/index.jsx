@@ -111,13 +111,13 @@ const ConfirmLoan = React.createClass({
                 <div className="transfer-box">
                     <div className="money-get">
                         <div className="transfer-money">{this.props.accountInAmount.toFixed(2)}</div>
-                        <div className="transfer-title">到账金额（元）</div>
+                        <div className="transfer-title">到账金额(元)</div>
                     </div>
                     <div className="loan-info">
                         <div className="transfer-lines">
                             <div className="return-money">
                                 <span className="return-money-num">{this.props.shouldRepaymentAmount.toFixed(2)}</span>
-                                <span className="return-money-title">应还金额（元）</span>
+                                <span className="return-money-title">应还金额(元)</span>
                             </div>
                             <div className="return-date">
                                 <span className="return-date-day">{this.props.dueTime}</span>

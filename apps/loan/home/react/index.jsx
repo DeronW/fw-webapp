@@ -175,11 +175,11 @@ const ApplyLoan = React.createClass({
                     <div className="loan-info-items">
                         <div className="credit-lines">
                             <div className="credit-money">
-                                <span className="credit-money-title">信用额度（元）</span>
+                                <span className="credit-money-title">信用额度(元)</span>
                                 <span className="credit-money-num">{this.getCreditLine()}</span>
                             </div>
                             <div className="loan-duration">
-                                <span className="loan-duration-title">借款期限（天）</span>
+                                <span className="loan-duration-title">借款期限(天)</span>
                                 <span className="loan-duration-num">{this.props.data.productPeriod}</span>
                             </div>
                         </div>
