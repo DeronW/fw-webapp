@@ -22,16 +22,19 @@ const PayBackWrap = React.createClass({
             bankName: filtered.bankShortName,
             bankNo: filtered.cardNo,
             selectedBankName: null,
-            index: 0
+            index: 0,
+            paybackSuccessState:false,
+            paybackFailState:false,
+            paybackCheckState:false
         }
     },
     componentDidMount: function () {
     },
     getBankCardListShow: function (booleanVal) {
-        this.setState({ bankCardListShow: booleanVal });
+        this.setState({bankCardListShow: booleanVal});
     },
     getVerifyCodeShow: function (booleanVal) {
-        this.setState({ verifyCodeShow: booleanVal });
+        this.setState({verifyCodeShow: booleanVal});
     },
     indexItem: function (booleanVal) {
 
@@ -44,53 +47,69 @@ const PayBackWrap = React.createClass({
         });
     },
     popHideHandler: function (booleanVal) {
-        this.setState({ bankCardListShow: booleanVal });
+        this.setState({bankCardListShow: booleanVal});
     },
     closeHandler: function (booleanVal) {
-        this.setState({ verifyCodeShow: booleanVal });
+        this.setState({verifyCodeShow: booleanVal});
     },
     getBankName: function (val) {
-        this.setState({ bankName: val });
+        this.setState({bankName: val});
     },
     getBankNo: function (val) {
-        this.setState({ bankNo: val });
+        this.setState({bankNo: val});
     },
     getBankCardGid: function (val) {
-        this.setState({ cardGid: val });
+        this.setState({cardGid: val});
     },
     getBankIndex: function (index) {
-        this.setState({ index: index })
+        this.setState({index: index})
     },
-
+    getPaybackSuccess:function(val){
+        this.setState({paybackSuccessState:val});
+    },
+    getPaybackFail:function(val){
+        this.setState({paybackFailState:val});
+    },
+    getPaybackCheck:function(val){
+        this.setState({paybackCheckState:val});
+    },
     render: function () {
         return (
             <div>
                 {this.state.paybackShow ? <PayBack callbackBankListShow={this.getBankCardListShow}
-                    callbackVerifyCodeShow={this.getVerifyCodeShow}
-                    loanLeftAmount={this.props.loanLeftAmount}
-                    loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus}
-                    overdueFee={this.props.overdueFee}
-                    bankName={this.state.bankName}
-                    bankNo={this.state.bankNo}
-                /> : null}
+                                                   callbackVerifyCodeShow={this.getVerifyCodeShow}
+                                                   loanLeftAmount={this.props.loanLeftAmount}
+                                                   loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus}
+                                                   overdueFee={this.props.overdueFee}
+                                                   bankName={this.state.bankName}
+                                                   bankNo={this.state.bankNo}
+                    /> : null}
                 {this.state.bankCardListShow ?
                     <BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem}
-                        callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName} callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid}
-                        bankName={this.state.bankName}
-                        bankNo={this.state.bankNo}
-                        cardGid={this.state.cardGid}
-                        callbackGetBankIndex={this.getBankIndex}
-                        callbackIndex={this.state.index}
+                                  callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName}
+                                  callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid}
+                                  bankName={this.state.bankName}
+                                  bankNo={this.state.bankNo}
+                                  cardGid={this.state.cardGid}
+                                  callbackGetBankIndex={this.getBankIndex}
+                                  callbackIndex={this.state.index}
 
                     /> : null}
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid}
-                        callbackCloseHanler={this.closeHandler}
-                        repaymentAmount={this.state.repaymentAmount}
-                        bankName={this.state.bankName}
-                        bankNo={this.state.bankNo}
+                                callbackCloseHanler={this.closeHandler}
+                                repaymentAmount={this.state.repaymentAmount}
+                                bankName={this.state.bankName}
+                                bankNo={this.state.bankNo}
+                                callbackGetPaybackSuccess={this.getPaybackSuccess}
+                                callbackGetPaybackFail={this.getPaybackFail}
+                                callbackGetPaybackCheck={this.getPaybackCheck}
                     /> : null}
-                {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount} /> : null}
+                {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount}
+                    success={this.state.paybackSuccessState}
+                    fail={this.state.getPaybackFail}
+                    check={this.state.getPaybackCheck}
+                    /> : null}
             </div>
         )
     }
@@ -126,7 +145,7 @@ const PayBack = React.createClass({
                         <span>还款卡</span>
                         <span onClick={this.bankListHandler}>
                             {this.props.bankName}（{this.props.bankNo.slice(-4)}）<img className="right-arrow"
-                                src="images/right-arrow.jpg" /></span>
+                                                                                     src="images/right-arrow.jpg"/></span>
                     </div>
                 </div>
                 <div className="loan-detail-box">
@@ -176,14 +195,16 @@ const BankCardList = React.createClass({
     render: function () {
         let list_item = (item, index) => {
             return (
-                <div className="list-item" key={index} onClick={() => { this.clickHandler(index) }}>
+                <div className="list-item" key={index} onClick={() => {
+                    this.clickHandler(index)
+                }}>
                     <img
-                        src={item.logoUrl} />
+                        src={item.logoUrl}/>
                     {item.bankShortName}（{item.cardNo.slice(-4)}）
-                            {
-                                this.state.checked == index ?
-                                                      <div className="checked"></div> : null
-                            }
+                    {
+                        this.state.checked == index ?
+                            <div className="checked"></div> : null
+                    }
                 </div>
             )
         };
@@ -192,7 +213,8 @@ const BankCardList = React.createClass({
                 <div className="header">
                     <div className="arrow-left" onClick={this.backHandler}></div>
                     <div className="title">选择还款卡</div>
-                    {this.props.bankList.length < 10 ? <a className="history-bill" href='/static/loan/user-card-add/index.html'>添加</a> : null}
+                    {this.props.bankList.length < 10 ?
+                        <a className="history-bill" href='/static/loan/user-card-add/index.html'>添加</a> : null}
                 </div>
                 <div className="bank-branch-list">
                     {this.props.bankList.map(list_item)}
@@ -229,49 +251,68 @@ const VerifyCode = React.createClass({
                 userGid: USER.gid,
                 userId: USER.id,
                 sourceType: SOURCE_TYPE
-        }).then(d => {
-            this.setState({ phoneNum: d.mobile, orderGid: d.orderGid });
+            }).then(d => {
+            this.setState({phoneNum: d.mobile, orderGid: d.orderGid});
         }, e => $FW.Component.Toast(e.message))
     },
     changeValueHandler: function (e) {
-        this.setState({ value: e.target.value });
+        this.setState({value: e.target.value});
     },
     countingDown: function () {
         if (this.state.remain <= 1) window.clearInterval(this._timer);
-        this.setState({ remain: this.state.remain - 1 });
+        this.setState({remain: this.state.remain - 1});
     },
     tick: function () {
-        this.setState({ remain: 60 });
+        this.setState({remain: 60});
         window.clearInterval(this._timer);
         this._timer = setInterval(this.countingDown, 1000);
+    },
+    componentWillUnmount() {
+        clearInterval(this._timer);
     },
     getSMSCode: function () {
         if (this.state.remain <= 0) {
             this.tick();
-            $FW.Post( `${API_PATH}api/repayment/v1/resendverifycode.json`, {
-                    token: USER.token,
-                    userGid: USER.gid,
-                    userId: USER.id,
-                    sourceType: SOURCE_TYPE,
-                    orderGid: this.state.orderGid
+            $FW.Post(`${API_PATH}api/repayment/v1/resendverifycode.json`, {
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
+                sourceType: SOURCE_TYPE,
+                orderGid: this.state.orderGid
             });
         }
     },
     confirmBtnHandler: function () {
-        if(this.state.value==''){
+        if (this.state.value == '') {
             $FW.Component.Toast("请输入验证码");
-        }else{
-            $FW.Post( `${API_PATH}api/repayment/v1/do.json`, {
-                    orderGid: this.state.orderGid,
+        } else {
+            $FW.Post(`${API_PATH}api/repayment/v1/do.json`, {
+                orderGid: this.state.orderGid,
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
+                sourceType: SOURCE_TYPE,
+                verifyCode: this.state.value
+            }).then((data) => {
+                return $FW.Post(`${API_PATH}api/repayment/v1/repaymentstatus.json`, {
+                    repaymentGid: data.repaymentGid,
                     token: USER.token,
                     userGid: USER.gid,
                     userId: USER.id,
-                    sourceType: SOURCE_TYPE,
-                    verifyCode: this.state.value
-            }).then(
-            d => { this.props.callbackResultShow(true, false); },
-            e => $FW.Component.Toast(e.message)
-            )
+                    sourceType: SOURCE_TYPE
+                })
+            }, e => $FW.Component.Toast(e.message)).then(
+                (data) => {
+                    this.props.callbackResultShow(true, false);
+                    if(data.status == 1){
+                        this.props.callbackGetPaybackSuccess(true);
+                    }else if(data.status==2){
+                        this.props.callbackGetPaybackFail(true);
+                    }else if(data.status==0){
+                        this.props.callbackGetPaybackCheck(true);
+                    }
+                }, e => $FW.Component.Toast(e.message)
+            );
         }
     },
     render: function () {
@@ -287,7 +328,7 @@ const VerifyCode = React.createClass({
                         </div>
                         <div className="verify-input">
                             <input className="sms-input" type="number" name="number" value={this.state.value}
-                                placeholder="输入验证码" onChange={this.changeValueHandler} />
+                                   placeholder="输入验证码" onChange={this.changeValueHandler}/>
                             <span className="btn-countdown" onClick={this.getSMSCode}>
                                 {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
@@ -305,36 +346,46 @@ const VerifyCode = React.createClass({
 const PayBackResult = React.createClass({
     getInitialState: function () {
         return {
-            payback_success: true,
+            payback_success: false,
             payback_fail: false,
             payback_ing: false
         }
+    },
+    componentWillReceiveProps:function(nextProps){
+        this.resetState(nextProps)
+    },
+    resetState: function(props){
+        this.setState({
+            payback_success: props.success,
+            payback_fail: props.fail,
+            payback_ing: props.check
+        });
     },
     render: function () {
         return (
             <div className="payback-result">
                 {this.state.payback_success &&
-                    <div className="payback-result-success-img">
-                        <img src="images/payback-success.png" />
-                    </div>}
+                <div className="payback-result-success-img">
+                    <img src="images/payback-success.png"/>
+                </div>}
                 {this.state.payback_fail &&
-                    <div className="payback-result-fail-img">
-                        <img src="images/payback-fail.png" />
-                    </div>}
+                <div className="payback-result-fail-img">
+                    <img src="images/payback-fail.png"/>
+                </div>}
                 {this.state.payback_ing &&
-                    <div className="payback-result-ing-img">
-                        <img src="images/payback-ing.png" />
-                    </div>}
+                <div className="payback-result-ing-img">
+                    <img src="images/payback-ing.png"/>
+                </div>}
                 <div className="payback-result-success-tip">
-                 <div className="tip-top">欢迎再次使用!</div>
-                 <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum.toFixed(2)}</span>元</div>
-                 </div>
+                    <div className="tip-top">欢迎再次使用!</div>
+                    <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum.toFixed(2)}</span>元</div>
+                </div>
                 {this.state.payback_fail &&
-                    <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>}
+                <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>}
                 {this.state.payback_ing &&
-                    <div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div>}
+                <div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div>}
                 <a className="credit-btn"
-                    href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>
+                   href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>
                     提升额度
                 </a>
                 <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/home/index.html`)}>申请用钱</div>
@@ -346,7 +397,7 @@ const PayBackResult = React.createClass({
 const USER = $FW.Store.getUserDict()
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"还款"} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"还款"}/>, HEADER_NODE);
     var query = $FW.Format.urlQuery();
     var loanGid = query.loanGid;
     var loanType = query.loanType;
@@ -374,5 +425,5 @@ $FW.DOMReady(function () {
                 sourceType: SOURCE_TYPE
             }
         })
-    ]).then(d => ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]} />, CONTENT_NODE) );
+    ]).then(d => ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]} />, CONTENT_NODE));
 });

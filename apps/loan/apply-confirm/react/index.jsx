@@ -383,7 +383,7 @@ const LoanResult = React.createClass({
                     checkingResult:true
                 });
             }
-        }, (err) => {});
+        }, (err) => {$FW.Component.Toast(err.message)});
     },
     componentDidMount(){
 
