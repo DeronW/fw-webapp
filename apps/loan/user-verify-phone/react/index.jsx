@@ -73,23 +73,27 @@ const VerifyPhone = React.createClass({
                 sourceType: SOURCE_TYPE
             })
         }, e => $FW.Component.Toast(e.message)).then((data) => {
-            if (data.bindStatus.status == 0) {
-                $FW.Component.Toast("处理中");
-                if(data.bindStatus.transCode == 1001){
+            let bs = data.bindStatus;
+            if (bs.status == 0) {
+                if (bs.transCode == 1001) {
                     $FW.Component.Toast("验证码不正确");
+                } else {
+                    $FW.Component.Toast("处理中");
+                    setTimeout(() => {
+                        window.location.href = `/static/loan/user-bank-management/index.html`
+                    }, 3000)
                 }
-                //window.location.href = `/static/loan/user-bank-management/index.html`;
-            } else if (data.bindStatus.status == 1) {
+            } else if (bs.status == 1) {
                 window.location.href = `/static/loan/user-bank-management/index.html`;
-            } else if (data.bindStatus.status == 2) {
+            } else if (bs.status == 2) {
                 //失败
                 this.setState({
                     popShow: true,
-                    popText: data.bindStatus.failReason,
+                    popText: bs.failReason,
                     popBtnText: "确定",
                     popStatus: 2
                 });
-                $FW.Component.Toast(data.bindStatus.failReason);
+                $FW.Component.Toast(bs.failReason);
             }
         });
     },
@@ -126,7 +130,7 @@ const VerifyPhone = React.createClass({
                     <div className="list code-list">
                         <span className="text">验证码</span>
                         <div className="input">
-                            <input type="text" onChange={(e) => this.changeCode(e)}
+                            <input type="number" onChange={this.changeCode}
                                 value={this.state.codeVal} placeholder="请输入验证码" />
                         </div>
                         {btnSMSCode}
