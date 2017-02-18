@@ -25,7 +25,7 @@ const Register = React.createClass({
         }
     },
     componentDidMount() {
-        this.handleGetCode();
+        this.countingDown();
     },
     changeCode(e) {
         let v = e.target.value;
