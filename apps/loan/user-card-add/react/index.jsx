@@ -99,7 +99,7 @@ const SetCashCard = React.createClass({
         if (!isMobilePhone(phone)) err = "手机号格式不对";
         if (!selectClause) err = "请勾选代扣服务协议";
         if (cardType == 1) err = "请绑定借记卡";
-        if (canVerify == 0) err = "该银行卡暂不支持绑定";
+        if (canVerify == 0) err = "不支持绑定此类卡";
 
         err ?
             $FW.Component.Toast(err) :
