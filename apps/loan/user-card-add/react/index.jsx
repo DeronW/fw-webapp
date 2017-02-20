@@ -68,7 +68,6 @@ const SetCashCard = React.createClass({
                     cardType: data.cardInfo.cardType,
                     canVerify: data.cardInfo.canVerify,
                     bankName: data.cardInfo.bankName
-
                 });
             })
         } else {
@@ -131,7 +130,7 @@ const SetCashCard = React.createClass({
                         <span className="text">储蓄卡号</span>
                         <div className="input">
                             <input onChange={this.changeBankNum} onBlur={this.blurBankNum}
-                                value={this.state.bankNum} type="number" placeholder="输入储蓄卡号" />
+                                value={this.state.bankNum} type="text" placeholder="输入储蓄卡号" />
                         </div>
 
                         <div className="list-bank-li">
