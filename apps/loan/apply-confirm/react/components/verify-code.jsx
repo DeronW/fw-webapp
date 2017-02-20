@@ -99,7 +99,7 @@ const VerifyCode = React.createClass({
                         <div className="verify-popup-title">短信验证</div>
                         <div className="verify-popup-tip">
                             {/*已向尾号（{phone.slice(-4)}）发送短信验证码。*/}
-                            已向{this.props.bankShortName}({this.props.cardNo.slice(-4)})银行预留手机号发送短信验证码。
+                            已向{this.props.bankShortName}( {this.props.cardNo.slice(-4)} )银行预留手机号发送短信验证码。
                         </div>
                         <div className="verify-input">
                             <input className="sms-input" type="number" name="number"
