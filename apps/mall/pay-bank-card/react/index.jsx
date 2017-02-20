@@ -76,7 +76,7 @@ const CardList = React.createClass({
 
 $FW.DOMReady(function () {
 
-    ReactDOM.render(<Header title={"我的银行卡"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"我的银行卡"} back_handler={back_handler}/>, HEADER_NODE);
 
     $FW.Ajax({
         url: `${API_PATH}/mall/api/payment/v1/bank_card_list.json`,
@@ -84,4 +84,7 @@ $FW.DOMReady(function () {
     }).then(data => ReactDOM.render(<MyBankCard bankCards={data.bankCards}/>, CONTENT_NODE));
 });
 
+function backward() {
+    location.href = '/static/mall/user/index.html';
+}
 
