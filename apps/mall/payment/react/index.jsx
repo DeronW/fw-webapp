@@ -41,7 +41,7 @@ const Payment = React.createClass({
             var FormData = {
                 service: "REQ_PAY_QUICK_APPLY",
                 merchantNo: query.merchantNo,
-                amount: query.payableRmbAmt,
+                amount: query.amount,
                 certificateNo: data[index].certificateNo,
                 accountNo: data[index].accountNo,
                 accountName: data[index].accountName,
@@ -143,7 +143,7 @@ const Payment = React.createClass({
             <div className="order-payment">
                 <div className="order-status">
                     <div className="pay-tip">请在<span id="cutdown"></span></div>
-                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt / 100}元</span></div>
+                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt}元</span></div>
                 </div>
                 {/*<div className="order-products">
                  <div className="order-item">
@@ -182,7 +182,7 @@ const Payment = React.createClass({
                 </div>
             </div>
         );
-  　 }
+    }
 });
 
 $FW.DOMReady(function () {
