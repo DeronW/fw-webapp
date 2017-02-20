@@ -359,7 +359,6 @@ var Body = React.createClass({
 
     },
     backBtnClick: function () {
-        //location.href = document.referrer;
         //window.history.back();
         window.location.href = "/mpwap/orderuser/getUserInfo.shtml";
     },
