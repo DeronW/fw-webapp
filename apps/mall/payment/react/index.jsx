@@ -14,7 +14,7 @@ const Payment = React.createClass({
         var m = 14;
         var s = 59;
         setInterval(function () {
-            document.getElementById("cutdown").innerHTML = (m + '分' + s + "秒内完成支付");
+            document.getElementById("cutdown").innerHTML = m + '分' + s + "秒内完成支付";
             s--;
             if (s < 0) {
                 s = 59;
@@ -69,7 +69,7 @@ const Payment = React.createClass({
     },
     render: function () {
         let data = this.props.data;
-        var quick_pay = (
+        var quick_pay =
             <div className="pay-item" onClick={this.payCheck.bind(this,"quick_pay")}>
                 <div className="pay-icon"><img src="images/quickpay.jpg"/></div>
                 <div className="pay-name">
@@ -77,27 +77,55 @@ const Payment = React.createClass({
                     <div className="pay-subtitle">支付服务由先锋金融提供，无需开通网银</div>
                 </div>
                 <div className={this.state.index=="quick_pay" ? "pay-check active" : "pay-check"}></div>
-            </div>
-        );
+            </div>;
 
         var payMethods =
             data.map((n, index) => {
                 let accountNo = this.split(n.accountNo);
 
                 let r = n.bankName;
-                var b =
-                    r == "中国银行" ? "images/zg.png"
-                        : r == "工商银行" ? "images/gs.png"
-                        : r == "农业银行" ? "images/ny.png"
-                        : r == "建设银行" ? "images/js.png"
-                        : r == "平安银行" ? "images/pa.png"
-                        : r == "兴业银行" ? "images/xy.png"
-                        : r == "光大银行" ? "images/gd.png"
-                        : r == "浦发银行" ? "images/pf.png"
-                        : r == "华兴银行" ? "images/hx.png"
-                        : r == "北京银行" ? "images/bj.png"
-                        : r == "中信银行" ? "images/zx.png"
-                        : "images/gf.png";
+                var b;
+
+                switch (r) {
+                    case "中国银行":
+                        b = "images/zg.png"
+                        break;
+                    case "工商银行":
+                        b = "images/gs.png"
+                        break;
+                    case "农业银行":
+                        b = "images/ny.png"
+                        break;
+                    case "建设银行":
+                        b = "images/js.png"
+                        break;
+                    case "平安银行":
+                        b = "images/pa.png"
+                        break;
+                    case "兴业银行":
+                        b = "images/xy.png"
+                        break;
+                    case "光大银行":
+                        b = "images/gd.png"
+                        break;
+                    case "浦发银行":
+                        b = "images/pf.png"
+                        break;
+                    case "华兴银行":
+                        b = "images/hx.png"
+                        break;
+                    case "北京银行":
+                        b = "images/bj.png"
+                        break;
+                    case "中信银行":
+                        b = "images/zx.png"
+                        break;
+                    case "广发银行":
+                        b = "images/gf.png";
+                        break;
+                    default:
+                        b = ""
+                }
 
                 return (
                     <div className="pay-item" onClick={this.payCheck.bind(this,index)}>
@@ -115,7 +143,7 @@ const Payment = React.createClass({
             <div className="order-payment">
                 <div className="order-status">
                     <div className="pay-tip">请在<span id="cutdown"></span></div>
-                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt/100}元</span></div>
+                    <div className="pay-price">金额:<span>￥{this.state.payableRmbAmt / 100}元</span></div>
                 </div>
                 {/*<div className="order-products">
                  <div className="order-item">
@@ -154,11 +182,11 @@ const Payment = React.createClass({
                 </div>
             </div>
         );
-    }
+  去 }
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"订单结算"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"订单结算"} back_handler={back_handler}/>, HEADER_NODE);
 
     $FW.Ajax({
         url: `${API_PATH}mall/api/payment/v1/bank_card_list.json`,
@@ -169,3 +197,7 @@ $FW.DOMReady(function () {
         }
     })
 });
+
+function back_handler() {
+    location.href = '/static/mall/order-list/index.html#all';
+}

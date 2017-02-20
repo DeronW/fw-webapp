@@ -2,6 +2,19 @@ const ConfirmOrder = React.createClass({
 
     getInitialState: function () {
         var query = $FW.Format.urlQuery();
+        var sourceType;
+
+        if ($FW.Browser.inApp()) {
+            if ($FW.Browser.inAndroid()) {
+                sourceType = 4
+            }
+            else {
+                sourceType = 3
+            }
+        }
+        else {
+            sourceType = 2
+        }
 
         window._form_data = this.FormData = {
             cartFlag: query.cartFlag,
@@ -11,7 +24,7 @@ const ConfirmOrder = React.createClass({
             msgCode: null,
             addressId: this.props.data.addressId,
             tokenStr: '',
-            sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2
+            sourceType: sourceType
         };
 
         return {
@@ -30,7 +43,6 @@ const ConfirmOrder = React.createClass({
             //url: `./getTokenStr.json`
         }).then(data => {
             this.FormData.tokenStr = data.tokenStr;
-            console.log("tokenStr:" + this.FormData.tokenStr)
         })
     },
     makeOrderHandler: function () {
@@ -55,7 +67,6 @@ const ConfirmOrder = React.createClass({
                      this.refreshTokenStr()
                      } else {
                      */
-                    console.log(result.status);
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
@@ -230,10 +241,8 @@ $FW.DOMReady(function () {
         />, CONTENT_NODE);
     })
 
-    ReactDOM.render(<Header title={"确认订单"} back_handler={back_handler}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"确认订单"}/>, HEADER_NODE);
 });
 
-function backward() {
-    location.href = '/static/mall/order-list/index.html#all';
-}
+
 

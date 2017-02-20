@@ -121,9 +121,9 @@ const Product = React.createClass({
 
         let shop_card_prompt = null;
         if (this.state.showOverlayDef)
-            shop_card_prompt = (<div
+            shop_card_prompt = <div
                 className={this.state.showOverlay ? "ui-ios-overlay ios-overlay-show" : "ui-ios-overlay ios-overlay-hide"}>
-                添加成功，在购物车等亲~</div>);
+                添加成功，在购物车等亲~</div>;
 
         return (
             <div className="detail-box">
@@ -267,7 +267,6 @@ const PlusMinus = React.createClass({
         let linkLogin = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=/static/mall/product-detail/index.html'
             + location.search;
         let isCanBuy = this.props.isCanBuy;
-        console.log(this.props.stock)
 
         if (this.props.is_login == 1) {
             gotoHandler(link);

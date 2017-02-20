@@ -30,19 +30,48 @@ const CardList = React.createClass({
     },
     render: function () {
         let r = this.props.bankCard.bankName;
-        var cardImg =
-            r == "中国银行" ? "images/zg.png"
-                : r == "工商银行" ? "images/gs.png"
-                : r == "农业银行" ? "images/ny.png"
-                : r == "建设银行" ? "images/js.png"
-                : r == "平安银行" ? "images/pa.png"
-                : r == "兴业银行" ? "images/xy.png"
-                : r == "光大银行" ? "images/gd.png"
-                : r == "浦发银行" ? "images/pf.png"
-                : r == "华兴银行" ? "images/hx.png"
-                : r == "北京银行" ? "images/bj.png"
-                : r == "中信银行" ? "images/zx.png"
-                : "images/gf.png";
+        var cardImg;
+
+        switch (r) {
+            case "中国银行":
+                cardImg = "images/zg.png"
+                break;
+            case "工商银行":
+                cardImg = "images/gs.png"
+                break;
+            case "农业银行":
+                cardImg = "images/ny.png"
+                break;
+            case "建设银行":
+                cardImg = "images/js.png"
+                break;
+            case "平安银行":
+                cardImg = "images/pa.png"
+                break;
+            case "兴业银行":
+                cardImg = "images/xy.png"
+                break;
+            case "光大银行":
+                cardImg = "images/gd.png"
+                break;
+            case "浦发银行":
+                cardImg = "images/pf.png"
+                break;
+            case "华兴银行":
+                cardImg = "images/hx.png"
+                break;
+            case "北京银行":
+                cardImg = "images/bj.png"
+                break;
+            case "中信银行":
+                cardImg = "images/zx.png"
+                break;
+            case "广发银行":
+                cardImg = "images/gf.png";
+                break;
+            default:
+                cardImg = ""
+        }
 
         var bgColor = 'my-bank-card bankColor1';
         let bankCard = this.props.bankCard;
@@ -84,7 +113,7 @@ $FW.DOMReady(function () {
     }).then(data => ReactDOM.render(<MyBankCard bankCards={data.bankCards}/>, CONTENT_NODE));
 });
 
-function backward() {
+function back_handler() {
     location.href = '/static/mall/user/index.html';
 }
 

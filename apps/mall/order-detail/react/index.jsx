@@ -11,7 +11,7 @@ const OrderDetail = React.createClass({
                     send_channel={this.props.sendChannel}
                 />
                 <OrderStatusBlock order={this.props.order} products={this.props.products}/>
-                {card ? <Coupon coupon={this.props.coupon}/> : null}
+                {card == null ? null : <Coupon coupon={this.props.coupon}/>}
                 <OrderPayInfo payment={this.props.payment} order={this.props.order}/>
                 <OrderNumberList order={this.props.order}/>
             </div>
@@ -65,9 +65,17 @@ const OrderStatusList = React.createClass({
             case 'complete':
                 status_name = '已完成';
                 break;
+            case 'unPay':
+                status_name = '待付款';
+                break;
+            case 'cancel':
+                status_name = '已取消';
+                break;
+            default:
+                status_name = '';
         }
 
-        let shipping = this.props.send_channel ? (<div>
+        let shipping = this.props.send_channel ? <div>
             <div className="info-block">
                 <span className="text">物流名称</span>
                 <span className="data-text">{this.props.send_channel}</span>
@@ -90,7 +98,7 @@ const OrderStatusList = React.createClass({
                     </div>
                 </div>
             </div>
-        </div>) : null;
+        </div> : null;
 
         return (
             <div className="l-r-text">
@@ -172,39 +180,35 @@ const OrderPayInfo = React.createClass({
 
         let score, bean, ticket, money;
         if (payment.score) {
-            score = (
+            score =
                 <div className="info-block">
                     <span className="text">工分消耗</span>
                     <span className="data-text">{payment.score}工分</span>
                 </div>
-            )
         }
         if (payment.bean) {
             var format_bean = parseInt(payment.bean / 100);
             var sub = '00' + payment.bean % 100;
             format_bean += '.' + sub.substr(sub.length - 2);
-            bean = (
+            bean =
                 <div className="info-block">
                     <span className="text">工豆支付</span>
                     <span className="data-text">&yen;{format_bean}</span>
                 </div>
-            )
         }
         if (order.ticket_num) {
-            ticket = (
+            ticket =
                 <div className="info-block">
                     <span className="text">兑换券支付</span>
                     <span className="data-text"> 兑换券 &times; {order.ticket_num}</span>
                 </div>
-            )
         }
         if (payment.money > 0) {
-            money = (
+            money =
                 <div className="info-block">
                     <span className="text">余额支付</span>
                     <span className="data-text">&yen;{payment.money}</span>
                 </div>
-            )
         }
 
         return (
@@ -229,22 +233,20 @@ const OrderNumberList = React.createClass({
 
         let pay_at = null;
         if (order.pay_at) {
-            pay_at = (
+            pay_at =
                 <div className="sequence-text">
                     <span className="text">付款时间：</span>
                     <span className="time-text">{order.pay_at}</span>
                 </div>
-            )
         }
 
         let deliver_at = null;
         if (order.deliver_at) {
-            deliver_at = (
+            deliver_at =
                 <div className="sequence-text">
                     <span className="text">发货时间：</span>
                     <span className="time-text">{order.deliver_at}</span>
-                </div>
-            )
+                </div>;
         }
 
         let receive_at = null;

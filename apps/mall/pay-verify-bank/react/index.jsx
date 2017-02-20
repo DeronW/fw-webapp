@@ -63,19 +63,49 @@ const BankInfo = React.createClass({
     },
     componentDidMount: function () {
         let r = this.state.bankName;
-        var b =
-            r == "中国银行" ? "images/zg.png"
-                : r == "工商银行" ? "images/gs.png"
-                : r == "农业银行" ? "images/ny.png"
-                : r == "建设银行" ? "images/js.png"
-                : r == "平安银行" ? "images/pa.png"
-                : r == "兴业银行" ? "images/xy.png"
-                : r == "光大银行" ? "images/gd.png"
-                : r == "浦发银行" ? "images/pf.png"
-                : r == "华兴银行" ? "images/hx.png"
-                : r == "北京银行" ? "images/bj.png"
-                : r == "中信银行" ? "images/zx.png"
-                : "images/gf.png";
+        var b
+
+        switch (r) {
+            case "中国银行":
+                b = "images/zg.png"
+                break;
+            case "工商银行":
+                b = "images/gs.png"
+                break;
+            case "农业银行":
+                b = "images/ny.png"
+                break;
+            case "建设银行":
+                b = "images/js.png"
+                break;
+            case "平安银行":
+                b = "images/pa.png"
+                break;
+            case "兴业银行":
+                b = "images/xy.png"
+                break;
+            case "光大银行":
+                b = "images/gd.png"
+                break;
+            case "浦发银行":
+                b = "images/pf.png"
+                break;
+            case "华兴银行":
+                b = "images/hx.png"
+                break;
+            case "北京银行":
+                b = "images/bj.png"
+                break;
+            case "中信银行":
+                b = "images/zx.png"
+                break;
+            case "广发银行":
+                b = "images/gf.png";
+                break;
+            default:
+                b = ""
+        }
+
         this.setState({bankImage: b});
     },
     handlePhone: function (e) {
