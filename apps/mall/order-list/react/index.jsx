@@ -96,8 +96,8 @@ const OrderBlock = React.createClass({
                 //return false;
                 location.href =
                     '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
-                    '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo +
-                    '&payableRmbAmt=' +  payableRmbAmt
+                    '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo +
+                    '&payableRmbAmt=' +  result.totalShouldPayPrice
             }
         });
     },
