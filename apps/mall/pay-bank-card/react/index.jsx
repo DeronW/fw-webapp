@@ -113,7 +113,7 @@ $FW.DOMReady(function () {
     }).then(data => ReactDOM.render(<MyBankCard bankCards={data.bankCards}/>, CONTENT_NODE));
 });
 
-function backward() {
+function back_handler() {
     location.href = '/static/mall/user/index.html';
 }
 

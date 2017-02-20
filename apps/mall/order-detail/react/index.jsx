@@ -11,7 +11,7 @@ const OrderDetail = React.createClass({
                     send_channel={this.props.sendChannel}
                 />
                 <OrderStatusBlock order={this.props.order} products={this.props.products}/>
-                {card ? <Coupon coupon={this.props.coupon}/> : null}
+                {card == null ? null : <Coupon coupon={this.props.coupon}/>}
                 <OrderPayInfo payment={this.props.payment} order={this.props.order}/>
                 <OrderNumberList order={this.props.order}/>
             </div>
@@ -246,16 +246,17 @@ const OrderNumberList = React.createClass({
                 <div className="sequence-text">
                     <span className="text">发货时间：</span>
                     <span className="time-text">{order.deliver_at}</span>
-                </div>
+                </div>;
         }
 
         let receive_at = null;
         if (order.receive_at) {
-            receive_at =
+            receive_at = (
                 <div className="sequence-text">
                     <span className="text">完成时间：</span>
                     <span className="time-text">{order.receive_at}</span>
                 </div>
+            )
         }
 
         return (
