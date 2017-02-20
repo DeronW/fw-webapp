@@ -1,10 +1,10 @@
-const GameCenter_AllGame=React.createClass({
-    render:function(){
-        let allList=(list,index)=>{
-            let link=(list.game_url.indexOf('#')<0)?
-                <a className="game-up-img" href={list.game_url}></a>:
+const GameCenter_AllGame = React.createClass({
+    render: function () {
+        let allList = (list, index)=> {
+            let link = list.game_url.indexOf('#') < 0 ?
+                <a className="game-up-img" href={list.game_url}></a> :
                 <a className="game-up-img"></a>
-            return(
+            return (
                 <div className="all-game-li" key={index}>
                     <div className="game-img"><img src={list.logo}/></div>
                     {link}
@@ -13,10 +13,10 @@ const GameCenter_AllGame=React.createClass({
                 </div>
             )
         }
-        return(
+        return (
             <div className="all-game">
                 {this.props.data.map(allList)}
             </div>
         )
     }
-    })
+})

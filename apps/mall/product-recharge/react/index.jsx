@@ -54,8 +54,6 @@ const Recharge = React.createClass({
                         pay_score = i.score;
                 });
 
-                if (!pay_score) console.log('no match default bizNo', data);
-
                 this.setState({
                     fee_pay_score: pay_score,
                     bizNo: data.defaultBizNo,

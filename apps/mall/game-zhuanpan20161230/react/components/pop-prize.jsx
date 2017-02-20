@@ -1,7 +1,7 @@
 const PopPrize = React.createClass({
     render: function () {
-        let prize =()=>{
-        	return <div className="pop-prize-text2">恭喜您,获得{this.props.popPrizeName}!</div>
+        let prize = ()=> {
+            return <div className="pop-prize-text2">恭喜您,获得{this.props.popPrizeName}!</div>
         }
         let popPrizeBtn1 = ()=> {
             if (this.props.infinitely) {

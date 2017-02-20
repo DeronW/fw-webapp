@@ -53,7 +53,7 @@ const FootPrint = React.createClass({
     },
     render: function () {
         let myList = (list, key) => {
-            let date = key > 0 && (this.state.list[key - 1].date == list.date) ? null :
+            let date = key > 0 && this.state.list[key - 1].date == list.date ? null :
                 <div className="footPrint-data">{this.state.list[key].date}</div>;
             let price = list.price ?
                 <span className="footPrint-price"><span>¥</span>{$FW.Format.currency(list.price)}</span> : null;
