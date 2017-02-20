@@ -182,7 +182,7 @@ const Payment = React.createClass({
                 </div>
             </div>
         );
-  去 }
+  　 }
 });
 
 $FW.DOMReady(function () {

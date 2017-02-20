@@ -295,7 +295,7 @@ const ConfAlert = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"我的订单"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"我的订单"} back_handler={back_handler}/>, HEADER_NODE);
     $FW.Ajax({
         //url: `./order_list.json`,
         url: `${API_PATH}mall/api/member/v1/order_list.json`,
@@ -305,3 +305,7 @@ $FW.DOMReady(function () {
         window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
     })
 });
+
+function back_handler() {
+    location.href = '/static/mall/order-list/index.html#all';
+}
