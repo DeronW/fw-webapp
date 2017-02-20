@@ -186,7 +186,7 @@ const Payment = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"订单结算"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"订单结算"} back_handler={back_handler}/>, HEADER_NODE);
 
     $FW.Ajax({
         url: `${API_PATH}mall/api/payment/v1/bank_card_list.json`,
@@ -197,3 +197,7 @@ $FW.DOMReady(function () {
         }
     })
 });
+
+function back_handler() {
+    location.href = '/static/mall/order-list/index.html#all';
+}

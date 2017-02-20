@@ -241,10 +241,8 @@ $FW.DOMReady(function () {
         />, CONTENT_NODE);
     })
 
-    ReactDOM.render(<Header title={"确认订单"} back_handler={back_handler}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"确认订单"}/>, HEADER_NODE);
 });
 
-function back_handler() {
-    location.href = '/static/mall/order-list/index.html#all';
-}
+
 
