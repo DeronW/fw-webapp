@@ -184,7 +184,6 @@ const Address = React.createClass({
                 this.setState({address: data[i]})
             }
         });
-        console.log(data)
     },
     render: function () {
         return (

@@ -130,7 +130,6 @@ const VipZone = React.createClass({
             success: function (data) {
 
                 let tab;
-                console.log(1);
                 if (is_Level == -1) {
                     tab = 'all'
 
@@ -218,11 +217,11 @@ const VipZone = React.createClass({
 const ProductItem = React.createClass({
     render: function () {
         var show_price = this.props.price != 0 || this.props.score == 0;
-        var score = (parseFloat(this.props.score) > 0) ? (
+        var score = parseFloat(this.props.score) > 0 ?
             <span className="list-price-score">{show_price ?
-                <span>&#43;</span> : null}{this.props.score}工分</span>) : null;
-        var Angle = (this.props.angle_text) ? (<div className="list-label">{this.props.angle_text}</div>) : null;
-        var cover_bg = 'url(' + (this.props.img || 'images/default-product.jpg') + ')';
+                <span>&#43;</span> : null}{this.props.score}工分</span> : null;
+        var Angle = this.props.angle_text ? <div className="list-label">{this.props.angle_text}</div> : null;
+        var cover_bg = 'url(' + this.props.img || 'images/default-product.jpg' + ')';
 
         return (
             <a href={'/static/mall/product-detail/index.html?bizNo=' + this.props.bizNo} className="index-actList-a">

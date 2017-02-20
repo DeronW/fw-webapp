@@ -113,13 +113,13 @@ const Voucher = React.createClass({
         let exchange_btn = mark_name ? null : <span className="btn-exchange"></span>;
 
         let voucher_score = data.score ? <span>{data.score}工分</span> : null;
-        let voucher_price = (data.price > 0 || data.score == 0) ?
+        let voucher_price = data.price > 0 || data.score == 0 ?
             <span>&yen;{$FW.Format.currency(data.price)}</span> : null;
 
         return (
             <div
                 className={ this.props.state == "used" || this.props.state == "dated" ? "my-voucher-cont-list gray-bg" : "my-voucher-cont-list color-bg"}>
-                <a href={ (this.props.state == 'used' || this.props.state == 'dated') ? 'javascript:void(0)' : '/static/mall/product-detail/index.html?bizNo=' + data.product_biz_no}>
+                <a href={ this.props.state == 'used' || this.props.state == 'dated' ? 'javascript:void(0)' : '/static/mall/product-detail/index.html?bizNo=' + data.product_biz_no}>
                     <div className={gray_bg ? "t-info b-color" : "t-info"}>
                         <div className="title-info">
                             <span className="title-text">{data.title}</span>
@@ -147,7 +147,6 @@ $FW.DOMReady(function () {
         url: `${API_PATH}mall/api/member/v1/user.json`,
         enable_loading: 'mini',
         success: function (data) {
-            console.log(data)
             ReactDOM.render(<HomePage {...data}/>, CONTENT_NODE);
         }
     });

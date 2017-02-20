@@ -10,7 +10,7 @@ const NineDraw = React.createClass({
             infinitely: null,
             costScore: null,
             usableScore: null,
-            popPrizeName:''
+            popPrizeName: ''
         }
     },
     componentDidMount: function () {
@@ -37,8 +37,8 @@ const NineDraw = React.createClass({
     },
     stopRoll: function (n, prizeName) {
         clearInterval(this._timer);
-		this.setState({popPrizeName:prizeName});
-        var remain = (7 - this.state.masker) + 8 * 2 + parseFloat(n) - 1;
+        this.setState({popPrizeName: prizeName});
+        var remain = 7 - this.state.masker + 8 * 2 + parseFloat(n) - 1;
         var orig_remain = remain;
         var run = () => {
             setTimeout(()=> {
@@ -47,10 +47,10 @@ const NineDraw = React.createClass({
                     run()
                 }
                 if (remain == -1) {
-                	setTimeout(()=> {
-                		this.setState({showPopPrize: true});
-                		this._usable = true;
-                	},500);
+                    setTimeout(()=> {
+                        this.setState({showPopPrize: true});
+                        this._usable = true;
+                    }, 500);
                     this.props.addPriceList(prizeName);
                 }
             }, 1000 / 8 + (orig_remain - remain) * 10);
@@ -71,7 +71,7 @@ const NineDraw = React.createClass({
         $FW.Ajax({
             url: API_PATH + 'mall/api/magic/v6/draw.json',
             method: 'post',
-            data: {activityId:ACTIVITY_ID, source: getBrowserType()},
+            data: {activityId: ACTIVITY_ID, source: getBrowserType()},
             success: (data) => {
                 this.setState({
                     remainTimes: data.remainTimes
@@ -110,7 +110,8 @@ const NineDraw = React.createClass({
             <div className="Nine-draw">
                 <div className="tip">
                     <div className="tip-score">单次消耗<span>
-                        {this.state.costScore}</span>工分</div>
+                        {this.state.costScore}</span>工分
+                    </div>
                     <div className="tip-line"></div>
                     {score()}
                 </div>

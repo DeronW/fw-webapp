@@ -3,7 +3,6 @@ const DeliverAddress = React.createClass({
         return {}
     },
     markDefaultHandler: function (address_id) {
-        console.log(address_id);
         $FW.Ajax({
             url: `${API_PATH}mall/api/member/v1/address/set_default.json`,
             method: 'POST',
@@ -28,19 +27,19 @@ const DeliverAddress = React.createClass({
             let checked_flag = null;
             if (!preview) {
                 let aid = $FW.Format.urlQuery().address_id;
-                checked_flag = (
-                    <div className="checked-flag"> {aid && aid == address.address_id ? <div></div> : null} </div> );
+                checked_flag =
+                    <div className="checked-flag"> {aid && aid == address.address_id ? <div></div> : null} </div>;
             }
 
             let set_default = null;
             if (preview)
-                set_default = address.isDefault ? (
+                set_default = address.isDefault ?
                     <div className="set-default"
                          style={{backgroundImage: 'url(images/default-address.png)'}}>
                     </div>
-                ) : (
-                    <div className="set-default" onClick={() => _this.markDefaultHandler(address.address_id)}>设为默认</div>
-                );
+                    :
+                    <div className="set-default" onClick={() => _this.markDefaultHandler(address.address_id)}>
+                        设为默认</div>;
 
             return (
                 <div key={index} className="address-panel">
@@ -58,7 +57,7 @@ const DeliverAddress = React.createClass({
 
         let create_link = preview ?
             "/static/mall/user-build-deliver/index.html?preview=true" :
-            ("/static/mall/user-build-deliver/index.html?cartFlag=" + cartFlag + "&prd=" + prd + '&buyNum=' + buyNum);
+        "/static/mall/user-build-deliver/index.html?cartFlag=" + cartFlag + "&prd=" + prd + '&buyNum=' + buyNum;
 
         return (
             <div>

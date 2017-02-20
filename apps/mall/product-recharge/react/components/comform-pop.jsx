@@ -59,6 +59,21 @@ const ConfirmPop = React.createClass({
         if (this.state.loading)
             return;
         this.setState({loading: true})
+
+        var sourceType;
+
+        if ($FW.Browser.inApp()) {
+            if ( $FW.Browser.inAndroid()) {
+                sourceType = 4
+            }
+            else{
+                sourceType = 3
+            }
+        }
+        else {
+                sourceType = 2
+        }
+
         $FW.Ajax({
             url: API_PATH + 'mall/api/v1/getToken.json',
             success: function (data) {
@@ -71,7 +86,7 @@ const ConfirmPop = React.createClass({
                         phone: form_data.phone,
                         sms_code: _this.state.value,
                         bizNo: form_data.bizNo,
-                        sourceType: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2,
+                        sourceType: sourceType,
                         tokenStr: token
                     },
                     complete: function () {

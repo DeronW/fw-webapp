@@ -40,33 +40,31 @@ const NineList = React.createClass({
                 <div className="time">{time}</div>
             </div>
         };
-		
+
         let prize_list = this.props.prize_list;
-        let no_data=() => {
-        	return <div className="Nine-list-no">暂无抽奖记录</div>
+        let no_data = () => {
+            return <div className="Nine-list-no">暂无抽奖记录</div>
         };
-        let end_data=() => {
-        	return <div className="Nine-list-end">活动已结束</div>
-        };        
-		let data_list=() => {
-			if(false){
-				return (<div
-                    className={"Nine-list-ul"}
-                    style={{top: "0px"}}>
-                    {end_data()}
-                </div>)
-			}else{
-				return (<div
-                    className={this.state.with_animate ? "Nine-list-ul with-animate" : "Nine-list-ul"}
-                    style={{top: -152 * this.state.position / 2 + 'px'}}>
-                    {prize_list.length==0?no_data():prize_list.map(prize)}
-                    {prize_list.length > 2?[prize_list[0], prize_list[1]].map(prize):null}
-                </div>)
-			}
-        	
-       };
+        let end_data = () => {
+            return <div className="Nine-list-end">活动已结束</div>
+        };
+        let data_list = () => {
+            if (false) {
+                return (
+                    <div className={"Nine-list-ul"} style={{top: "0px"}}> {end_data()} </div>
+                )
+            } else {
+                return (
+                    <div className={this.state.with_animate ? "Nine-list-ul with-animate" : "Nine-list-ul"}
+                         style={{top: -152 * this.state.position / 2 + 'px'}}>
+                        {prize_list.length == 0 ? no_data() : prize_list.map(prize)}
+                        {prize_list.length > 2 ? [prize_list[0], prize_list[1]].map(prize) : null}
+                    </div>
+                )
+            }
+        };
         return (
-            <div className="Nine-list-box">            
+            <div className="Nine-list-box">
                 {data_list()}
             </div>
         );

@@ -34,7 +34,7 @@ const ExchangeBar = React.createClass({
                 sort: -1,
                 tab: tabName,
             });
-            var options = {
+            let options = {
                 order: -1,
                 page: 1
             };
@@ -42,7 +42,7 @@ const ExchangeBar = React.createClass({
             this.props.filterProducts(options);
             this.setState({showFilterPop: false});
         } else if (tabName == 'proceeds') {
-            var options = {
+            let options = {
                 order: this.state.sort,
                 page: 1
             };
@@ -63,7 +63,7 @@ const ExchangeBar = React.createClass({
             this.props.filterProducts(options);
             this.setState({showFilterPop: false});
         } else if (tabName == 'salestime') {
-            var options = {
+            let options = {
                 order: this.state.sort,
                 page: 1
             };
@@ -84,7 +84,7 @@ const ExchangeBar = React.createClass({
             this.props.filterProducts(options);
             this.setState({showFilterPop: false});
         } else if (tabName == 'scorerank') {
-            var options = {
+            let options = {
                 order: this.state.sort,
                 page: 1
             };
@@ -318,12 +318,12 @@ const ExchangeBar = React.createClass({
 
         let gongfeng_array = ['不限', '我可兑换', '1-100', '101-1000', '1000-5000', '5000以上'];
         let gongfeng_item = gongfeng_array.map((name, index) => {
-                return (
-                    <span className={this.state.filterScore == name ? "gongfeng-item-wrap on" : "gongfeng-item-wrap"}
-                          key={index}><span className="gongfeng-item" onClick={function () {
-                        _this.filterScoreHandler(name)
-                    }}>{name}</span></span>
-                )
+                return (<span className={this.state.filterScore == name ? "gongfeng-item-wrap on" : "gongfeng-item-wrap"}
+                              key={index}>
+                        <span className="gongfeng-item" onClick={function () { _this.filterScoreHandler(name)}}>
+                        {name}
+                        </span>
+                    </span>)
             }
         );
         let viplevel_array = ['不限', '普通会员', 'Vip1专享', 'Vip2专享', 'Vip3专享', 'Vip4专享'];
