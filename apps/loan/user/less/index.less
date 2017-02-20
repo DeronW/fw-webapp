@@ -15,7 +15,7 @@ body {
 }
 
 .my-info{
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 .my-info-cnt {
 
@@ -38,6 +38,7 @@ body {
 	}
 
 	.loan-info {
+    position:relative;
 		display: -webkit-flex;
 		display: flex;
 		height: 110px;
@@ -69,6 +70,15 @@ body {
 
 
 		}
+    .vertical-line{
+      width:1px;
+      height:68px;
+      background:#f5f4f4;
+      position:absolute;
+      top:35px;
+      left:50%;
+      transform:translateX(-50%);
+    }
 	}
 }
 
@@ -108,18 +118,19 @@ body {
 
 
 .my-settings {
-	padding: 0 0 0 30px;
+
 	background-color: #fff;
 
 	.list {
 		.list-cnt {
 			height: 36px;
 			padding: 26px 0;
-
-			border-bottom: 1px solid #ebeaea;
-
+      border-bottom: 1px solid #ebeaea;
+      margin-left:34px;
 			a {
+        padding: 0 30px 0 0;
 				display: block;
+
 			}
 
 			.icon {
@@ -159,11 +170,13 @@ body {
 				float: right;
 				width: 36px;
 				height: 36px;
-				margin: 0 10px 0 0;
 				background: url(../images/arrow-r-icon.png) no-repeat center;
 				background-size: 16px auto;
 			}
 		}
+    .list-cnt:last-child{
+      border-bottom:none;
+    }
 	}
 }
 

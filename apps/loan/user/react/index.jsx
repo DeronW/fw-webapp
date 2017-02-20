@@ -98,6 +98,7 @@ const MyCnt = React.createClass({
                                 <span className="num-text">{this.state.indexloadpageData.overdueCount}</span>
                                 <span className="text">逾期次数</span>
                             </div>
+                            <div className="vertical-line"></div>
                         </div>
                     </div>
 
