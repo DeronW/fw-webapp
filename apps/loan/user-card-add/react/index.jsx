@@ -113,10 +113,10 @@ const SetCashCard = React.createClass({
                 userGid: user.gid,
                 userId: user.id,
                 sourceType: SOURCE_TYPE
-            }).then((data) => {
+            }).then(data => {
                 let gid = data.bindBankInfo.operatorBankcardGid;
                 window.location.href = `/static/loan/user-verify-phone/index.html?operatorBankcardGid=${gid}&phone=${phone}`;
-            });
+            }, e => $FW.Component.Toast(e.message));
     },
     render() {
 
