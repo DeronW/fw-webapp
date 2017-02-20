@@ -11,7 +11,7 @@ const OrderDetail = React.createClass({
                     send_channel={this.props.sendChannel}
                 />
                 <OrderStatusBlock order={this.props.order} products={this.props.products}/>
-                {card == null ? null : <Coupon coupon={this.props.coupon}/>}
+                {card == 'null' ? null : <Coupon coupon={this.props.coupon}/>}
                 <OrderPayInfo payment={this.props.payment} order={this.props.order}/>
                 <OrderNumberList order={this.props.order}/>
             </div>
