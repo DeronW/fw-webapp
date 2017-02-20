@@ -66,7 +66,19 @@ const Recharge = React.createClass({
 
     reloadNetHandler: function () {
         var opt = this.state.operator;
-        var code = opt == 'union' ? 1032 : (opt == 'tele' ? 1033 : 1034);
+        var code;
+
+        if (opt == 'union') {
+            code = 1032
+        }
+        else {
+            if (opt == 'tele') {
+                code = 1033
+            }
+            else {
+                code = 1034
+            }
+        }
 
         $FW.Ajax({
             url: API_PATH + 'mall/api/v1/phone/net/recharge.json',
@@ -217,7 +229,18 @@ const Recharge = React.createClass({
             </div>
         };
 
-        let RechargeTip = this.state.operator == 'union' ? '全国可用，即时生效，当月有效，同档位限充3次' : (this.state.operator == 'tele' ? '全国可用，即时生效，当月有效' : '全国可用，24小时内生效，当月有效');
+        let RechargeTip;
+        if (this.state.operator == 'union') {
+                RechargeTip = '全国可用，即时生效，当月有效，同档位限充3次'
+        }
+        else {
+            if (this.state.operator == 'tele') {
+                RechargeTip = '全国可用，即时生效，当月有效'
+            }
+            else {
+                RechargeTip = '全国可用，24小时内生效，当月有效'
+            }
+        }
 
         return (
             <div>

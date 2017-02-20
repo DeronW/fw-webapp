@@ -49,7 +49,6 @@ $FW.DOMReady(function () {
             //sendChannelEnum:"YD"
         },
         success: function (data) {
-            console.log(data);
             ReactDOM.render(<Logistics data={data}/>, CONTENT_NODE);
         }
     });

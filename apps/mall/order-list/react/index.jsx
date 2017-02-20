@@ -23,12 +23,11 @@ const OrderMain = React.createClass({
     render: function () {
         var self = this;
 
-        var btnVoucher = (v, index) => (
+        var btnVoucher = (v, index) =>
             <div key={index} className={index == this.state.index ? "btn-tab select-li" : "btn-tab"}
                  onClick={ function() { self.clickHandler(index) } }>
                 <span className="tab-text">{self.state.voucherName[index]}</span>
-            </div>
-        );
+            </div>;
 
         return (
             <div>
@@ -70,11 +69,11 @@ const OrderList = React.createClass({
 
         return (
             <div className="order-area">
-                {this.props.index == 0 ? (this.state.all.length != 0 ? allBlock("all") : blockText) : null}
-                {this.props.index == 1 ? (this.state.unPay.length != 0 ? allBlock("unPay") : blockText) : null}
-                {this.props.index == 2 ? (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) : null}
-                {this.props.index == 3 ? (this.state.shipping.length != 0 ? allBlock("shipping") : blockText) : null}
-                {this.props.index == 4 ? (this.state.complete.length != 0 ? allBlock("complete") : blockText) : null}
+                {this.props.index == 0 ? this.state.all.length != 0 ? allBlock("all") : blockText : null}
+                {this.props.index == 1 ? this.state.unPay.length != 0 ? allBlock("unPay") : blockText : null}
+                {this.props.index == 2 ? this.state.prepare.length != 0 ? allBlock("prepare") : blockText : null}
+                {this.props.index == 3 ? this.state.shipping.length != 0 ? allBlock("shipping") : blockText : null}
+                {this.props.index == 4 ? this.state.complete.length != 0 ? allBlock("complete") : blockText : null}
             </div>
         );
     }
@@ -97,8 +96,8 @@ const OrderBlock = React.createClass({
                 //return false;
                 location.href =
                     '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
-                    '&amount=' + result.amount * 100 + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo +
-                    '&totalShouldPayPrice=' + result.totalShouldPayPrice + '&payableRmbAmt=' + payableRmbAmt
+                    '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo +
+                    '&payableRmbAmt=' +  result.totalShouldPayPrice
             }
         });
     },
@@ -251,12 +250,25 @@ const ConfAlert = React.createClass({
         this.setState({showcAlert: false});
     },
     cancelY: function () {
-        console.log(this.state.orderNo);
+        var sourceType;
+
+        if ($FW.Browser.inApp()) {
+            if ($FW.Browser.inAndroid()) {
+                sourceType = 4
+            }
+            else {
+                sourceType = 3
+            }
+        }
+        else {
+            sourceType = 2
+        }
+
         $FW.Ajax({
             data: {
                 orderBizNo: this.state.orderNo,
                 orderGroupBizNo: this.state.groupNo,
-                source: $FW.Browser.inApp() ? ($FW.Browser.inAndroid() ? 4 : 3) : 2
+                source: sourceType
             },
             //url: `./cancelOrder.json`,
             url: `${API_PATH}mall/api/cart/v1/cancelOrder.json`,
@@ -283,7 +295,7 @@ const ConfAlert = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"我的订单"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"我的订单"} back_handler={back_handler}/>, HEADER_NODE);
     $FW.Ajax({
         //url: `./order_list.json`,
         url: `${API_PATH}mall/api/member/v1/order_list.json`,
@@ -293,3 +305,7 @@ $FW.DOMReady(function () {
         window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
     })
 });
+
+function back_handler() {
+    location.href = '/static/mall/user/index.html';
+}

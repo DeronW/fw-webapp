@@ -24,7 +24,9 @@ const BankManagement = React.createClass({
                         <div className="list-cnt">
                             <div className="t">
                                 <div className="bank-logo">
-                                    <img src={item.logoUrl} />
+                                    <div className="img-wrap">
+                                        <img src={item.logoUrl} />
+                                    </div>
                                     <span className="name-text">{item.bankShortName}</span>
                                 </div>
                             </div>

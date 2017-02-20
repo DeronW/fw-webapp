@@ -144,7 +144,7 @@ const PayBack = React.createClass({
                     <div>
                         <span>还款卡</span>
                         <span onClick={this.bankListHandler}>
-                            {this.props.bankName}（{this.props.bankNo.slice(-4)}）<img className="right-arrow"
+                            {this.props.bankName}({this.props.bankNo.slice(-4)})<img className="right-arrow"
                                 src="images/right-arrow.jpg" /></span>
                     </div>
                 </div>
@@ -200,7 +200,7 @@ const BankCardList = React.createClass({
                 }}>
                     <img
                         src={item.logoUrl} />
-                    {item.bankShortName}（{item.cardNo.slice(-4)}）
+                    {item.bankShortName}({item.cardNo.slice(-4)})
                     {
                         this.state.checked == index ?
                             <div className="checked"></div> : null
@@ -219,7 +219,9 @@ const BankCardList = React.createClass({
                 <div className="bank-branch-list">
                     {this.props.bankList.map(list_item)}
                 </div>
-                <div className="banklist-btn" onClick={this.confirmHandler}>确定</div>
+                <div className="banklist-btn-wrap">
+                    <div className="banklist-btn" onClick={this.confirmHandler}>确定</div>
+                </div>
             </div>
         )
     }
