@@ -70,7 +70,7 @@ const ConfirmOrder = React.createClass({
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
-                            '&payableRmbAmt=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
+                            '&payableRmbAmt=' + result.totalShouldPayPrice + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
                     }
                     else {
                         location.href = '/static/mall/order-complete/index.html?status=S'
@@ -191,7 +191,7 @@ const ConfirmOrder = React.createClass({
                     <span className="total-item-name">实付:</span>
                     <span
                         className="total-item-detail">
-                        {this.props.data.payableRmbAmt == 0 ? "" : "¥" + this.props.data.payableRmbAmt}
+                        {this.props.data.payableRmbAmt == 0 ? "" : "¥" + this.props.data.payableRmbAmt.toFixed(2)}
                         {this.props.data.payableRmbAmt == 0 || this.props.data.payablePointAmt == 0 ? "" : "+"}
                         {this.props.data.payablePointAmt == 0 ? "" : this.props.data.payablePointAmt + "工分"}
                         {/*¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分*/}
