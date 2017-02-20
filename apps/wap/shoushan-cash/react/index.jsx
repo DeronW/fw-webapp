@@ -472,17 +472,11 @@ const Content = React.createClass({
                     </div>
 
                     <div>
-                        <div className="hsuo">提现说明</div>
+                        <div className="hsuo">温馨提示</div>
                         <div className="danbi">
 
                             <div className="atpr"><img className="card-d" src="images/card-d.png" /><span
                                 className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
-                            <div className="atpr">
-                                <img className="card-d" src="images/card-d.png" />
-                                <span className="online">
-                                    对首次充值后无投资的提现，平台收取{this.props.data.data.fee}%的手续费；
-								</span>
-                            </div>
                             <div className="atpr">
                                 <img className="card-d" src="images/card-d.png" />
                                 <span className="online">
