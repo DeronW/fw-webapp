@@ -140,12 +140,11 @@ const SendCode = React.createClass({
         let veri_code_tip = null;
 
         //if (!this.state.reSend){
-        veri_code_tip = (
+        veri_code_tip =
             <div className="phone-tip">
                 验证码已发送至手机
                 <span>{this.state.mobileNo}</span>
             </div>
-        )
         //}
         return (
             <div>

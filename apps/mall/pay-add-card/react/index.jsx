@@ -47,9 +47,9 @@ const AddBankCard = React.createClass({
             enable_loading: 'mini'
         }).then((data)=> {
             if (data.bankInfo) {
-                var data = data.bankInfo;
+                let bankInfo = data.bankInfo;
                 location.href = location.protocol + '//' + location.hostname +
-                    "/static/mall/pay-verify-bank/index.html?accountNo=" + data.accountNo + "&bankCardName=" + data.bankCardName + "&bankName=" + data.bankName + "&bankId=" + data.bankId + "&bizNo=" + bizNo
+                    "/static/mall/pay-verify-bank/index.html?accountNo=" + bankInfo.accountNo + "&bankCardName=" + bankInfo.bankCardName + "&bankName=" + bankInfo.bankName + "&bankId=" + bankInfo.bankId + "&bizNo=" + bizNo
             }
         });
     },

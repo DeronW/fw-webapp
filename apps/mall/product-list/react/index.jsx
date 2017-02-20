@@ -147,7 +147,7 @@ let Filter = {
     myConvertibleScore: 0,
     mix: function (opts) {
         for (var i in opts) {
-            if (typeof (Filter.options[i]) != 'undefined') {
+            if (typeof Filter.options[i] != 'undefined') {
                 Filter.options[i] = opts[i];
             }
         }
@@ -195,7 +195,7 @@ $FW.DOMReady(function () {
         Filter.options.categoryName = $FW.Format.urlQuery().category;
     }
     if (Filter.options.searchSourceType == 2) {
-
+        return
     } else {
         ReactDOM.render(<Header title={title}/>, HEADER_NODE);
     }
