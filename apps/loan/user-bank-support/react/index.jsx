@@ -46,7 +46,9 @@ const BankList = React.createClass({
                         })
                     }
                 </div>
-                <div className="know-btn" onClick={() => { window.history.back() }}>我知道了</div>
+                <div className="know-btn-wrap">
+                    <div className="know-btn" onClick={() => { window.history.back() }}>我知道了</div>
+                </div>
             </div>
         )
     }

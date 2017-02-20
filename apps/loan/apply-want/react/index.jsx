@@ -87,7 +87,7 @@ const WantLoan = React.createClass({
                 </div>
                 <div className="withdraw-card">
                     <span className="withdraw-card-title">提现卡</span>
-                    <span className="withdraw-card-branch">{filtered[0].bankShortName}（{filtered[0].cardNo.slice(-4)}）</span>
+                    <span className="withdraw-card-branch">{filtered[0].bankShortName}({filtered[0].cardNo.slice(-4)})</span>
                 </div>
                 {/*<div className="withdraw-tip">审核通过之后，若在24小时之内未确认用钱，视为自动放弃。</div>*/}
                 <div className="loan-btn-wrap">
