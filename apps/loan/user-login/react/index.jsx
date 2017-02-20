@@ -77,7 +77,7 @@ const Register = React.createClass({
                 </div>
                 <div className="logo"> <img src="images/logo.png" /> </div>
                 <div className="get-name-phone">
-                    亲爱的<span className="phone-text">{phoneMosaic(PHONE)}</span>欢迎登录
+                    亲爱的<span className="phone-text">  {phoneMosaic(PHONE)}  </span>欢迎登录
 				</div>
 
                 <div className="from-cnt">
@@ -88,7 +88,7 @@ const Register = React.createClass({
                                 placeholder="请输入登录密码" onChange={this.changePasswordHandler} />
                         </div>
 
-                        <div className="pwd-icon" onClick={this.handlePlainCode}>
+                        <div className={this.state.plainCode?"pwd-icon1":"pwd-icon"} onClick={this.handlePlainCode}>
                         </div>
                     </div>
                     <div className="form-border"></div>

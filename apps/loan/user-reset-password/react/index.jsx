@@ -100,7 +100,7 @@ const Register = React.createClass({
         return (
             <div className="register-cnt">
                 <div className="prompt-text">
-                    已发送短信验证码到尾号<span>{PHONE.substr(7)}</span>手机上
+                    已发送短信验证码到尾号<span>  {PHONE.substr(7)}  </span>手机上
                 </div>
 
                 <div className="ui-froms">

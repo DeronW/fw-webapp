@@ -57,7 +57,7 @@ const SetPassword = React.createClass({
         }, 1000);
     },
     handlePlainCode() {
-        this.setState({ plainCode: !this.state.plainCode });
+        this.setState({ plainCode: !this.state.plainCode});
     },
     handleRegisterBtn() {
         let err, {password, code, checked, codeToken} = this.state;
@@ -126,7 +126,7 @@ const SetPassword = React.createClass({
                             />
                         </div>
 
-                        <span className="icon-pwd" onClick={this.handlePlainCode}></span>
+                        <span className={this.state.plainCode? "icon-pwd1": "icon-pwd"} onClick={this.handlePlainCode}></span>
                     </div>
                 </div>
                 <div className="agreement-issue">
