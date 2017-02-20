@@ -131,7 +131,7 @@ const SetCashCard = React.createClass({
                         <span className="text">储蓄卡号</span>
                         <div className="input">
                             <input onChange={this.changeBankNum} onBlur={this.blurBankNum}
-                                value={this.state.bankNum} type="text" placeholder="输入储蓄卡号" />
+                                value={this.state.bankNum} type="number" placeholder="输入储蓄卡号" />
                         </div>
 
                         <div className="list-bank-li">
@@ -150,7 +150,7 @@ const SetCashCard = React.createClass({
                         <span className="text">手机号</span>
                         <div className="input">
                             <input onChange={this.changePhone} value={this.state.phone}
-                                type="text" placeholder="银行卡预留手机号" />
+                                type="number" placeholder="银行卡预留手机号" />
                         </div>
                     </div>
                 </div>
