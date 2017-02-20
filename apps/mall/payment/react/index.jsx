@@ -150,7 +150,7 @@ const Payment = React.createClass({
                      */}
                 </div>
                 <div className="pay-bar">
-                    <a className="pay-btn" onClick={this.payHandler}>确认支付</a>
+                    <a className="pay-btn" onClick={this.payHandler}>去支付</a>
                 </div>
             </div>
         );

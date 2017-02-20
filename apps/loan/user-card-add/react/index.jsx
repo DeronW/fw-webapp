@@ -68,7 +68,6 @@ const SetCashCard = React.createClass({
                     cardType: data.cardInfo.cardType,
                     canVerify: data.cardInfo.canVerify,
                     bankName: data.cardInfo.bankName
-
                 });
             })
         } else {
@@ -113,10 +112,10 @@ const SetCashCard = React.createClass({
                 userGid: user.gid,
                 userId: user.id,
                 sourceType: SOURCE_TYPE
-            }).then((data) => {
+            }).then(data => {
                 let gid = data.bindBankInfo.operatorBankcardGid;
                 window.location.href = `/static/loan/user-verify-phone/index.html?operatorBankcardGid=${gid}&phone=${phone}`;
-            });
+            }, e => $FW.Component.Toast(e.message));
     },
     render() {
 
@@ -150,7 +149,7 @@ const SetCashCard = React.createClass({
                         <span className="text">手机号</span>
                         <div className="input">
                             <input onChange={this.changePhone} value={this.state.phone}
-                                type="text" placeholder="银行卡预留手机号" />
+                                type="number" placeholder="银行卡预留手机号" />
                         </div>
                     </div>
                 </div>

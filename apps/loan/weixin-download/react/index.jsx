@@ -1,4 +1,5 @@
 $FW.DOMReady(function () {
+
     var ConcertUtilBrowser = {
         versions: (function () {
             var u = navigator.userAgent;
@@ -13,12 +14,14 @@ $FW.DOMReady(function () {
 
     if (ConcertUtilBrowser.versions.ios) {
         $("download-btn").innerHTML = "IOS客户端下载";
-    }
-    if (ConcertUtilBrowser.versions.android) {
+    }else{
         $("download-btn").innerHTML = "Android客户端下载";
     }
-
     $("download-btn").addEventListener("click", function () {
+        $FW.Ajax({
+            url:`${API_PATH}/api/v1/download.json`,
+            data:{name: "JRGC"}
+        });
         $("mask").style.display = "block";
     });
     $("mask").addEventListener("click", function () {
