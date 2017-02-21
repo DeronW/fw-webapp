@@ -82,11 +82,11 @@ const VerifyPhone = React.createClass({
                 } else {
                     $FW.Component.Toast("处理中");
                     setTimeout(() => {
-                        window.location.href = `/static/loan/user-bank-management/index.html`
+                        window.location.href = `/static/loan/user-card-management/index.html`
                     }, 1000)
                 }
             } else if (bs.status == 1) {
-                window.location.href = `/static/loan/user-bank-management/index.html`;
+                window.location.href = `/static/loan/user-card-management/index.html`;
             } else if (bs.status == 2) {
                 //失败
                 this.setState({

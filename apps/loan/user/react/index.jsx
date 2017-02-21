@@ -69,7 +69,7 @@ const MyCnt = React.createClass({
             if (userStatus == 1) {
                 return "/static/loan/user-card-set/index.html";
             } else if (userStatus >= 2) {
-                return '/static/loan/user-bank-management/index.html'
+                return '/static/loan/user-card-management/index.html'
             }
         }
 
