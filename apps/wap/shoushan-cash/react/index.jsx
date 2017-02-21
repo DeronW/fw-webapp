@@ -281,7 +281,7 @@ const Content = React.createClass({
     },
     handlerTS: function() {
         this.setState({
-            handlerTS: !this.state.handlerTS
+            handlerTSShow: !this.state.handlerTSShow
         });
     },
     render: function () {
