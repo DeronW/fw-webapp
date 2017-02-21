@@ -63,28 +63,28 @@ const SetCashCard = React.createClass({
         v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
     },
     blurBankNum(e) {
-        if (!space(this.state.bankNum).length > 19 || !space(this.state.bankNum).length < 16) {
-            $FW.Post(`${API_PATH}api/bankcard/v1/cardinfo.json`, {
-                bankCardNo: space(this.state.bankNum),
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE
-            }).then(data => {
-                let ci = data.cardInfo;
-                if (ci.cardType == -1) $FW.Component.Toast('不支持该银行卡号');
 
-                this.setState({
-                    cardinfoBankName: ci.bankName,
-                    cardinfoLogoUrl: ci.logoUrl,
-                    cardType: ci.cardType,
-                    canVerify: ci.canVerify,
-                    bankName: ci.bankName
-                });
-            })
-        } else {
-            $FW.Component.Toast("储蓄卡格式不对");
-        }
+        let {bankNum} = this.state, len = space(this.state.bankNum).length;
+        if (len < 16 || len > 19) return $FW.Component.Toast("储蓄卡格式不对");
+
+        $FW.Post(`${API_PATH}api/bankcard/v1/cardinfo.json`, {
+            bankCardNo: space(this.state.bankNum),
+            token: USER.token,
+            userGid: USER.gid,
+            userId: USER.id,
+            sourceType: SOURCE_TYPE
+        }).then(data => {
+            let ci = data.cardInfo;
+            if (ci.cardType == -1) $FW.Component.Toast('不支持该银行卡号');
+
+            this.setState({
+                cardinfoBankName: ci.bankName,
+                cardinfoLogoUrl: ci.logoUrl,
+                cardType: ci.cardType,
+                canVerify: ci.canVerify,
+                bankName: ci.bankName
+            });
+        })
     },
     changePhone(e) {
         let val = e.target.value;
