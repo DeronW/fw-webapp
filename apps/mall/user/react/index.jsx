@@ -160,13 +160,17 @@ const HotSale = React.createClass({
 
     render: function () {
         let hotProduct = (product, index) => {
-            let {bizNo, img, title, score} = product;
+            let {bizNo, img, title, score , price} = product;
             return (
                 <a className="product-wrap" key={bizNo + index}
                    href={'/static/mall/product-detail/index.html?bizNo=' + bizNo}>
                     <img src={img}/>
                     <span className="product-name">{title}</span>
-                    <span className="product-price">{score}工分</span>
+                    <span className="product-price">
+                        {price == 0 ? null : `¥${price}`}
+                        {price == 0 || score == 0 ? "" : "+"}
+                        {score == 0 ? null : `${score}工分`}
+                    </span>
                 </a>
             )
         }
