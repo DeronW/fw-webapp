@@ -63,15 +63,15 @@ const ConfirmPop = React.createClass({
         var sourceType;
 
         if ($FW.Browser.inApp()) {
-            if ( $FW.Browser.inAndroid()) {
+            if ($FW.Browser.inAndroid()) {
                 sourceType = 4
             }
-            else{
+            else {
                 sourceType = 3
             }
         }
         else {
-                sourceType = 2
+            sourceType = 2
         }
 
         $FW.Ajax({
@@ -79,7 +79,7 @@ const ConfirmPop = React.createClass({
             success: function (data) {
                 var token = data.token;
                 $FW.Ajax({
-                    url: API_PATH + 'api/v1/phone/recharge-order.json',
+                    url: API_PATH + 'mall/api/v1/phone/recharge-order.json',
                     enable_loading: true,
                     method: 'get',
                     data: {

@@ -139,11 +139,13 @@ const BankInfo = React.createClass({
             accountName: this.state.val1,
             mobileNo: this.state.val3,
             bankId: this.state.bankId,
-            bankName: this.state.bankName
+            bankName: this.state.bankName,
+            source:query.source
         };
         setTimeout(function () {
             location.href = location.protocol + '//' + location.hostname +
                 "/static/mall/pay-msg-bind/index.html?mobileNo=" + FormData.mobileNo + "&certificateNo=" + FormData.certificateNo + "&accountNo=" + FormData.accountNo + "&bankId=" + FormData.bankId + "&bankName=" + FormData.bankName + "&bankCardName=" + FormData.bankCardName + "&accountName=" + FormData.accountName
+                + "&source=" + FormData.source
         })
     },
     render: function () {
