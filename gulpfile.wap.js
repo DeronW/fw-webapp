@@ -80,7 +80,8 @@ const HUISHANG_PAGES = [
 
 const SHOUSHAN = [
     'shoushan-reset-deal-password',
-    'shoushan-cash'
+    'shoushan-cash',
+    'shoushan-cash-records'
 ]
 
 

@@ -20,7 +20,7 @@ const USER_PAGES = [
     'user-card-add', //添加提现卡
     'user-verify-phone', //获取验证码
     'user-bank-support', //支持银行卡
-    'user-bank-management', //银行卡管理
+    'user-card-management', //银行卡管理
     'user-settings' //更多
 ]
 
