@@ -35,7 +35,7 @@ const Special = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/validate.shtml?reflectAmount=" + this.props.propsMoneyValue,
+            url: "http://apitest.9888.cn/api/sspay/withdraw/v1/validate.shtml?reflectAmount=" + this.props.propsMoneyValue,
             success: function (data) {
                 _this.props.callbackPromptShow(true);
 
@@ -65,7 +65,7 @@ const Special = React.createClass({
 
 
                 $FW.Ajax({
-                    url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=" + _this.state.codeType + "&destPhoneNo=" + _this.props.propsPhone + "&isVms=" + _this.state.isVmsType,
+                    url: "http://apitest.9888.cn/api/sspay/withdraw/v1/sendCode.shtml?type=" + _this.state.codeType + "&destPhoneNo=" + _this.props.propsPhone + "&isVms=" + _this.state.isVmsType,
                     success: function (data) {
                     },
                     fail: function () {

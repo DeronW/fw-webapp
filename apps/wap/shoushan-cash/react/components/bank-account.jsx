@@ -17,7 +17,7 @@ var BankAccount = React.createClass({
     refreshBankList: function (value) {
         let fn = () => {
             $FW.Ajax({
-                url: API_PATH + "mpwap/api/v1/getBankList.shtml",
+                url: "http://apitest.9888.cn/api/sspay/withdraw/v1/getBankList.shtml",
                 data: {
                     index: "0",
                     keyword: value,

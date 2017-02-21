@@ -41,7 +41,7 @@ const AddBankCard = React.createClass({
     nextStep: function () {
         if (!this.state.active) return;
         var query = $FW.Format.urlQuery();
-        var bizNo = query.bizNo;
+        var source = query.source;
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/bank_card_info.json?accountNo=` + removeAllSpace(this.state.val),
             enable_loading: 'mini'
@@ -49,7 +49,7 @@ const AddBankCard = React.createClass({
             if (data.bankInfo) {
                 let bankInfo = data.bankInfo;
                 location.href = location.protocol + '//' + location.hostname +
-                    "/static/mall/pay-verify-bank/index.html?accountNo=" + bankInfo.accountNo + "&bankCardName=" + bankInfo.bankCardName + "&bankName=" + bankInfo.bankName + "&bankId=" + bankInfo.bankId + "&bizNo=" + bizNo
+                    "/static/mall/pay-verify-bank/index.html?accountNo=" + bankInfo.accountNo + "&bankCardName=" + bankInfo.bankCardName + "&bankName=" + bankInfo.bankName + "&bankId=" + bankInfo.bankId + "&source=" + source
             }
         });
     },

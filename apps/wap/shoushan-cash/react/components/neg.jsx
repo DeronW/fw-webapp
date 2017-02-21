@@ -38,7 +38,7 @@ const Neg = React.createClass({
         }, 1000)
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?isVms=SMS&type=1",
+            url: "http://apitest.9888.cn/api/sspay/withdraw/v1/sendCode.shtml?isVms=SMS&type=1",
             success: function (data) {
             }
         })

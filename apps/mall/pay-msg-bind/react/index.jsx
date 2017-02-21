@@ -106,9 +106,17 @@ const SendCode = React.createClass({
             data: FormData,
             success: function (data) {
                 $FW.Component.Alert(data.msg);
-                setTimeout(function () {
-                    location.href = "/static/mall/pay-bank-card/index.html"
-                }, 1500)
+                if(query.source=="pay"){
+                    setTimeout(function () {
+                        location.href = "/static/mall/order-list/index.html"
+                    }, 1500)
+                }
+                else{
+                    setTimeout(function () {
+                        location.href = "/static/mall/pay-bank-card/index.html"
+                    }, 1500)
+                }
+
             }
         })
     },
@@ -128,10 +136,6 @@ const SendCode = React.createClass({
                 /*var query = $FW.Format.urlQuery();
                  var bizNo = query.bizNo;
                  */
-                setTimeout(function () {
-                    location.href = location.protocol + '//' + location.hostname +
-                        "/static/mall/pay-bank-card/index.html"
-                }, 2000)
             }.bind(this)
         })
     },
