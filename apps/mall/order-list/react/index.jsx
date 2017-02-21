@@ -92,12 +92,10 @@ const OrderBlock = React.createClass({
             url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
             enable_loading: true,
             success: function (result) {
-                //alert(JSON.stringify(result));
-                //return false;
                 location.href =
                     '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
                     '&amount=' + result.amount + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo +
-                    '&payableRmbAmt=' +  result.totalShouldPayPrice
+                    '&payableRmbAmt=' +  result.totalShouldPayPrice+'&createdTime=' +  result.orderTime
             }
         });
     },

@@ -315,6 +315,11 @@ var Body = React.createClass({
             return false;
         }
 
+        if(!isCardNo(this.state.cardId)) {
+            $FW.Component.Toast("身份证不格式不正确");
+            return false;
+         }
+
 
         location.href = 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId;
 
