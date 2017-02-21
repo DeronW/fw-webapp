@@ -53,26 +53,25 @@ const SetCashCard = React.createClass({
         v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
     },
     blurBankNum(e) {
-        let user = $FW.Store.getUserDict();
-        if (!space(this.state.bankNum).length > 19 || !space(this.state.bankNum).length < 16) {
-            $FW.Post(`${API_PATH}api/bankcard/v1/cardinfo.json`, {
-                bankCardNo: space(this.state.bankNum),
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
-                sourceType: SOURCE_TYPE
-            }).then((data) => {
-                this.setState({
-                    cardinfoBankName: data.cardInfo.bankName,
-                    cardinfoLogoUrl: data.cardInfo.logoUrl,
-                    cardType: data.cardInfo.cardType,
-                    canVerify: data.cardInfo.canVerify,
-                    bankName: data.cardInfo.bankName
-                });
-            })
-        } else {
-            $FW.Component.Toast("储蓄卡格式不对");
-        }
+        let {bankNum} = this.state, len = space(this.state.bankNum).length;
+        if (len < 16 || len > 19) return $FW.Component.Toast("储蓄卡格式不对");
+
+        $FW.Post(`${API_PATH}api/bankcard/v1/cardinfo.json`, {
+            bankCardNo: space(bankNum),
+            token: USER.token,
+            userGid: USER.gid,
+            userId: USER.id,
+            sourceType: SOURCE_TYPE
+        }).then(data => {
+            let ci = data.cardInfo;
+            this.setState({
+                cardinfoBankName: ci.bankName,
+                cardinfoLogoUrl: ci.logoUrl,
+                cardType: ci.cardType,
+                canVerify: ci.canVerify,
+                bankName: ci.bankName
+            });
+        })
     },
     changePhone(e) {
         let v = e.target.value;
@@ -89,7 +88,6 @@ const SetCashCard = React.createClass({
         });
     },
     handlerNext() {
-        let user = $FW.Store.getUserDict();
         let err, {bankNum, phone, selectClause, cardType, canVerify} = this.state;
 
         if (bankNum == '') err = "储蓄卡不能为空";
@@ -108,9 +106,9 @@ const SetCashCard = React.createClass({
                 cardType: cardType,
                 mobile: phone,
                 operatorType: $FW.Store.get('userStatus'),
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
                 sourceType: SOURCE_TYPE
             }).then(data => {
                 let gid = data.bindBankInfo.operatorBankcardGid;
@@ -118,6 +116,8 @@ const SetCashCard = React.createClass({
             }, e => $FW.Component.Toast(e.message));
     },
     render() {
+
+        let {phone, bankNum, cardinfoBankName} = this.state;
 
         return (
             <div className="set-cash-card-cnt">
@@ -130,7 +130,7 @@ const SetCashCard = React.createClass({
                         <span className="text">储蓄卡号</span>
                         <div className="input">
                             <input onChange={this.changeBankNum} onBlur={this.blurBankNum}
-                                value={this.state.bankNum} type="text" placeholder="输入储蓄卡号" />
+                                value={bankNum} type="text" placeholder="输入储蓄卡号" />
                         </div>
 
                         <div className="list-bank-li">
@@ -138,8 +138,8 @@ const SetCashCard = React.createClass({
                                 支持银行
 								<img src="images/prompt-icon.png" />
                             </a>
-                            {this.state.cardinfoBankName != '' &&
-                                <span className="bank">{this.state.cardinfoBankName}</span>}
+                            {cardinfoBankName != '' &&
+                                <span className="bank">{cardinfoBankName}</span>}
                         </div>
                     </div>
                 </div>
@@ -148,7 +148,7 @@ const SetCashCard = React.createClass({
                     <div className="list">
                         <span className="text">手机号</span>
                         <div className="input">
-                            <input onChange={this.changePhone} value={this.state.phone}
+                            <input onChange={this.changePhone} value={phone}
                                 type="number" placeholder="银行卡预留手机号" />
                         </div>
                     </div>
@@ -170,6 +170,7 @@ const SetCashCard = React.createClass({
     }
 });
 
+const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"添加储蓄卡"} />, HEADER_NODE);
