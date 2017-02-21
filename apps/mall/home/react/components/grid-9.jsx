@@ -1,10 +1,23 @@
 const Grid_9 = React.createClass({
-    getInitialState: function () {
+    getInitialState() {
         return {
-            ps: this.props.data
+            bizNo: this.props.bizNo,
+            products: []
         }
     },
+    componentDidMount() {
+        $FW.Ajax({
+            url: `${API_PATH}mall/api/index/v1/recommendProducts.json`,
+            data: {
+                recommendBizNo: this.state.bizNo,
+                totalCount: this.props.count
+            }
+        }).then(data => this.setState({ products: data.products }))
+    },
     render: function () {
+        let {products} = this.state;
+        if(products.length == 0) return null;
+
         let theme2_top_product_item = (product, index) => {
             return (
                 <a className="theme2-top-product-item" key={index}
@@ -46,10 +59,10 @@ const Grid_9 = React.createClass({
                 <a href="" className="activity-theme"><img src="static/mall/product-list/images/qualityLife.jpg"/></a>
                 <div className="theme2-product-wrap">
                     <div className="theme2-top-product-list">
-                        {this.state.ps.slice(0, 3).map(theme2_top_product_item)}
+                        {products.slice(0, 3).map(theme2_top_product_item)}
                     </div>
                     <div className="theme2-btm-product-list">
-                        {this.state.ps.slice(3, 9).map(theme2_btm_product_item)}
+                        {products.slice(3, 9).map(theme2_btm_product_item)}
                     </div>
                 </div>
             </div>
