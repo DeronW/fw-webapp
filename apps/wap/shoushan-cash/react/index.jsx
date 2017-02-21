@@ -486,7 +486,7 @@ const Content = React.createClass({
                             <div className="atpr">
                                 <img className="card-d" src="images/card-d.png" />
                                 <span className="online">
-                                    如遇问题请与客服联系，客服电话：400-0322-988
+                                    如遇问题请与客服联系，客服电话：<span className="c-b">400-0322-988</span>
 								</span>
                             </div>
                         </div>
