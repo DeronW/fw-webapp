@@ -107,6 +107,8 @@ var BankAccount = React.createClass({
                         <img className="false" onClick={this.handleClear} src="images/false.jpg" />
                     </div>
 
+                    <div >{this.state.bankList.length}</div>
+
                     {this.state.bankList.length && list()}
 
                     {
