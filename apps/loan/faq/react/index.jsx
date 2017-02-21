@@ -46,7 +46,7 @@ const UserAboutus = React.createClass({
             return <div key={index} className="li">
                 <div className="title-li" onClick={() => this.handleList(index)}>
                     <div className="text">{todo}</div>
-                    <span className={`icon arrow-d`}></span>
+                    <span className={this.state.toggle_list[index] ? 'icon' : 'icon arrow-d'}></span>
                 </div>
                 {this.state.toggle_list[index] && detailText(index)}
             </div>
