@@ -4,12 +4,10 @@
 
 const Mumm = React.createClass({
     getInitialState: function () {
-        return {
-            counter: 0
-        };
+        return { counter: 0 };
     },
     startCounter: function () {
-        this.setState({counter: this.state.counter + 1})
+        this.setState({ counter: this.state.counter + 1 })
     },
     componentDidMount: function () {
         this._timer = setInterval(this.startCounter, 150);
@@ -41,9 +39,6 @@ const Mumm = React.createClass({
                 dis = leader + 8 - index;
             }
 
-            //if(leader < index) leader += 8;
-            //var dis = leader - index;
-
             var opacity = (dis + 2) / 8;
 
             return {
@@ -59,10 +54,7 @@ const Mumm = React.createClass({
             };
         };
 
-        //console.log(leader);
-
-
-        let e = (index) => <div className="shape" style={shapeStyle}></div> ;
+        let e = (index) => <div className="shape" style={shapeStyle}></div>;
 
         return (
             <div className="mumm" style={shapeRadius}>

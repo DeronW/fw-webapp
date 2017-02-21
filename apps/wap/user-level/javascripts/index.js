@@ -48,7 +48,7 @@ var jsPost = function (action, values) {
 $(function () {
     $.ajax({
         type: "GET",
-        url: API_PATH+"mpwap/api/v1/user/level-info.shtml",
+        url: API_PATH + "mpwap/api/v1/user/level-info.shtml",
         //url: "http://10.105.7.124/xxxxx.json",
         //url: "http://localhost/user-level.json",
         dataType: "json",
@@ -143,7 +143,7 @@ $(function () {
 
             [0, 1, 2, 3, 4].forEach(function (i) {
                 $(".level-progress-box" + i + " .level-progress-red").css("width", parseInt(data.data.contributePercent) + "%");
-                $(".level-progress-box" + i + " .level-progress-bar").css("width", (userLevel - 1) * 20) + "%";
+                $(".level-progress-box" + i + " .level-progress-bar").css("width", (userLevel - 1) * 20 + "%");
             });
 
             $(".slider-block").css("visibility", "visible");
