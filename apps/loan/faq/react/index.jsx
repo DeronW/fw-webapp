@@ -33,26 +33,22 @@ const DETAIL_TEXT = [
 const UserAboutus = React.createClass({
     getInitialState() {
         return {
-            showDetail: false,
-            liArr: [],
-            selectWhich: Number
+            toggle_list: []
         }
     },
     handleList(index) {
-        this.setState({
-            showDetail: !this.state.showDetail,
-            selectWhich: index
-        });
+        let t = this.state.toggle_list;
+        t[index] = !t[index];
+        this.setState({ toggle_list: t});
     },
     render() {
-        let {selectWhich, showDetail} = this.state;
         let li = (todo, index) => {
             return <div key={index} className="li">
                 <div className="title-li" onClick={() => this.handleList(index)}>
                     <div className="text">{todo}</div>
-                    <span className={`icon ${this.state.selectWhich == index && showDetail && "arrow-d"}`}></span>
+                    <span className={this.state.toggle_list[index] ? 'icon' : 'icon arrow-d'}></span>
                 </div>
-                {selectWhich === index && showDetail && detailText(index)}
+                {this.state.toggle_list[index] && detailText(index)}
             </div>
         };
 
