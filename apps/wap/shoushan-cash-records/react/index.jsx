@@ -16,7 +16,7 @@ const CashRecords = React.createClass({
         if (this.state.totalPage && this.state.page >= this.state.totalPage) return;
 
         $FW.Ajax({
-            url: API_PATH + "/mpwap/api/v1/getWithDrawRecord.shtml",
+            url: "http://apitest.9888.cn/api/sspay/withdraw/v1/getWithDrawRecord.shtml",
             data: {pageSize: 20, page: this.state.page + 1},
             enable_loading: true,
             success: (data) => {
