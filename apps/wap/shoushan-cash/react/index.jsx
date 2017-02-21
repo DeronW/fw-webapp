@@ -93,6 +93,7 @@ const Content = React.createClass({
             promptShow: false,
             voice: null,
             selectCashMethod: true,
+            handlerTSShow: false,
             selectWhich: this.props.data.data.bankInfo.isCompanyAgent ? 1 : 0
         }
     },
@@ -277,6 +278,11 @@ const Content = React.createClass({
     },
     getInfoBtn: function () {
         location.href = "/static/wap/shoushan-cash-records/index.html";
+    },
+    handlerTS: function() {
+        this.setState({
+            handlerTS: !this.state.handlerTS
+        });
     },
     render: function () {
         var _this = this;
@@ -472,24 +478,29 @@ const Content = React.createClass({
                     </div>
 
                     <div>
-                        <div className="hsuo">温馨提示</div>
-                        <div className="danbi">
+                        <div className="hsuo" onClick={this.handlerTS}>温馨提示</div>
 
-                            <div className="atpr"><img className="card-d" src="images/card-d.png" /><span
-                                className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
-                            <div className="atpr">
-                                <img className="card-d" src="images/card-d.png" />
-                                <span className="online">
-                                    徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
-								</span>
-                            </div>
-                            <div className="atpr">
-                                <img className="card-d" src="images/card-d.png" />
-                                <span className="online">
-                                    如遇问题请与客服联系，客服电话：<span className="c-b">400-0322-988</span>
-								</span>
-                            </div>
-                        </div>
+                        {
+                            this.state.handlerTSShow ?  <div className="danbi" >
+
+                                    <div className="atpr"><img className="card-d" src="images/card-d.png" /><span
+                                        className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
+                                    <div className="atpr">
+                                        <img className="card-d" src="images/card-d.png" />
+                                        <span className="online">
+                                            徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
+                                        </span>
+                                    </div>
+                                    <div className="atpr">
+                                        <img className="card-d" src="images/card-d.png" />
+                                        <span className="online">
+                                            如遇问题请与客服联系，客服电话：<span className="c-b">400-0322-988</span>
+                                        </span>
+                                    </div>
+                                </div> : null
+                        }
+
+
                     </div>
 
                 </div>
