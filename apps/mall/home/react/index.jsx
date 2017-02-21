@@ -113,7 +113,7 @@ const Mall = React.createClass({
                         <img src="images/nav-8.png" /><span>我可兑换</span></a>
                 </div>
                 <HotProducts bizNo={'TJ0000022'} count={8} />
-                <NewProducts bizNo={'TJ0000022'} count={6} />
+                {/*<NewProducts bizNo={'TJ0000022'} count={6} />*/}
                 <Grid_1 bizNo={'TJ0000022'} count={8} />
                 <Grid_2 bizNo={'TJ0000022'} count={8} />
                 <Grid_3 bizNo={'TJ0000022'} count={8} />
