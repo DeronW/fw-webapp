@@ -1,29 +1,5 @@
 const PAGE_COUNT = 20;
 
-function inApp() {
-    return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-}
-
-const Header = React.createClass({
-    backHandler: function () {
-        history.back()
-    },
-    render: function () {
-        return (
-            <div className="header">
-                <div className="header-cont">
-                    <div className="up-btn" onClick={this.backHandler}>
-                    </div>
-
-                    <div className="header-title">
-                        {this.props.title}
-                    </div>
-                </div>
-            </div>
-        );
-    }
-});
-
 const Contribute = React.createClass({
     render: function () {
         var myInfoData = this.props.myInfoData;
@@ -75,16 +51,13 @@ const InvestTab = React.createClass({
 
         $FW.Ajax({
             url: API_PATH + "mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=0",
-            //url: "http://10.105.7.124/xxxxx.json?page=1&rows=10&type=0",
-            enable_loading: true,
-            success: function (data) {
-                _this.setState({
-                    listData: _this.state.listData.concat(data.data),
-                    page: ++_this.state.page,
-                    hasMore: data.data.length >= PAGE_COUNT
-                });
-
-            }
+            enable_loading: 'mini',
+        }).then(data => {
+            this.setState({
+                listData: this.state.listData.concat(data.data),
+                page: ++this.state.page,
+                hasMore: data.data.length >= PAGE_COUNT
+            });
         });
     },
     componentDidMount: function (list) {
@@ -128,12 +101,9 @@ const InvestTab = React.createClass({
         return (
             <div className="invest-block">
                 {data.map(objDiv)}
-                {this.state.hasMore ? btnMore : null}
+                {this.state.hasMore && btnMore}
                 {!this.state.hasMore && data.length > 0 ? btnComplete : null}
-
-                {
-                    this.state.page == 2 && data.length == 0 ? wulistImg : null
-                }
+                {this.state.page == 2 && data.length == 0 ? wulistImg : null}
             </div>
         );
     }
@@ -200,12 +170,9 @@ const InviteTab = React.createClass({
         return (
             <div className="invite-block">
                 {data.map(objDiv)}
-                {this.state.hasMore ? btnMore : null}
-                {!this.state.hasMore && data.length > 0 ? btnComplete : null}
-
-                {
-                    this.state.page == 2 && data.length == 0 ? wulistImg : null
-                }
+                {this.state.hasMore && btnMore}
+                {!this.state.hasMore && data.length > 0 && btnComplete}
+                {this.state.page == 2 && data.length == 0 && wulistImg}
             </div>
 
         );
@@ -229,24 +196,23 @@ const ContributeTab = React.createClass({
         });
     },
     render: function () {
-        var tabValue = this.state.value;
-        var _this = this;
+        let {index} = this.state;
 
         return (
             <div className="contribute-cnt">
                 <div className="contribute-tab">
                     <ul>
-                        <li className={this.state.index == 0 ? "select-li" : ""}>
+                        <li className={index == 0 && "select-li"}>
                             <span className="text" onClick={this.checkToInvestHandler}>投资贡献值</span>
                         </li>
-                        <li className={this.state.index == 1 ? "select-li" : ""}>
+                        <li className={index == 1 && "select-li"}>
                             <span className="text" onClick={this.checkToInviteHandler}>邀友贡献值</span>
                         </li>
                     </ul>
                 </div>
 
                 <div className="contribute-tab-cnt">
-                    {this.state.index == 0 ? <InvestTab /> : <InviteTab />}
+                    {index == 0 ? <InvestTab /> : <InviteTab />}
                 </div>
             </div>
         );
@@ -265,11 +231,9 @@ const HomePage = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    if ($FW.Browser.inApp()) {
-        NativeBridge.setTitle('我的贡献值');
-    } else {
-        ReactDOM.render(<Header title={"我的贡献值"} />, document.getElementById("header"));
-    }
+    $FW.Browser.inApp() ?
+        NativeBridge.setTitle('我的贡献值') :
+        ReactDOM.render(<Header title={"我的贡献值"} />, HEADER_NODE);
 
     $FW.Ajax({
         url: `${API_PATH}mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0`,
