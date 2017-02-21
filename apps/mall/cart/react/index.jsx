@@ -178,7 +178,7 @@ const ShoppingCart = React.createClass({
                     <div className="empty-cart-icon"></div>}
                 {this.props.products.length != 0 ? <div className="pay-bar">
                     <div className="all-price">合计：<span className="total-price">
-                        {total_price == 0 ? "" : '¥' + total_price.toFixed(2)}
+                        {total_price != 0 && `¥${total_price.toFixed(2)}`}
                         {total_price == 0 || total_score == 0 ? '' : '+'}
                         {total_price == 0 && total_score == 0 ? '0' : ''}
                         {total_score == 0 ? "" : total_score + '工分'}

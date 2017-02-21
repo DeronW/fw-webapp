@@ -1,8 +1,18 @@
 const Grid_2 = React.createClass({
-    getInitialState: function () {
+    getInitialState() {
         return {
-            ps: this.props.data
+            bizNo: this.props.bizNo,
+            products: []
         }
+    },
+    componentDidMount() {
+        $FW.Ajax({
+            url: `${API_PATH}mall/api/index/v1/recommendProducts.json`,
+            data: {
+                recommendBizNo: this.state.bizNo,
+                totalCount: this.props.count
+            }
+        }).then(data => this.setState({ products: data.products }))
     },
     render: function () {
         let theme_product_item = (product, index) => {
@@ -17,9 +27,9 @@ const Grid_2 = React.createClass({
         return (
             <div className="theme-1">
                 <a className="activity-theme">
-                    <img src="static/mall/product-list/images/fantasy.jpg"/></a>
+                    <img src="/static/mall/product-list/images/fantasy.jpg"/></a>
                 <div className="theme-product-wrap">
-                    {this.state.ps.map(theme_product_item)}
+                    {this.state.products.map(theme_product_item)}
                 </div>
             </div>
         )
