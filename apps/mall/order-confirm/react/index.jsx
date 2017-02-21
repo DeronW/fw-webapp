@@ -69,7 +69,7 @@ const ConfirmOrder = React.createClass({
                      */
                     if (result.status == 1) {
                         location.href =
-                            '/static/mall/payment/index.html?productName=' + result.productName + '&productInfo=' + result.productInfo + '&merchantNo=' + result.merchantNo +
+                            '/static/mall/payment/index.html?merchantNo=' + result.merchantNo +
                             '&amount=' + result.amount +'&payableRmbAmt=' + result.totalShouldPayPrice + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
                     }
                     else {

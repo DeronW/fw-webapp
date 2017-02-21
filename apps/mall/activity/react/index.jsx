@@ -109,7 +109,7 @@ const Content = React.createClass({
             }
 
             let cover_bg = `url(${props.img || 'images/default-product.jpg'})`;
-            let href = `/static/mall/product-detail/index.html?bizNo=${props.BIZ_NO}`;
+            let href = `/static/mall/product-detail/index.html?bizNo=${props.bizNo}`;
 
             return (
                 <a href={href} className="index-actList-a"
