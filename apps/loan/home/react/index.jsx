@@ -77,10 +77,10 @@ const ApplyLoan = React.createClass({
 
         let unavailable_loan =
             <div className="unavailable-loan">
+                <div className="max-loan-money">暂无额度</div>
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
                     仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>提额</a>吧！</div>
-                <div className="max-loan-money">暂无额度</div>
             </div>;
 
         btn = st === 2 || st === 3 ?
