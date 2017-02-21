@@ -97,7 +97,7 @@ Content.Prerogative = (all_gifts, current_level, user_level) => {
     }
 
     let cn = 'prerogative';
-    if (current_level != user_level) cn += ' gray-icons';
+    if (current_level != user_level) cn += ' gray-scale';
     return (
         <div className={cn}>
             {gifts.map(gift_items)}
@@ -144,7 +144,7 @@ const Slider = React.createClass({
             let pcn = 'progress', ccn = 'card';
             if (current_level != index + 1) {
                 ccn += ' gray-scale';
-                pcn += ' gray-progress';
+                pcn += ' gray-progress gray-scale';
             }
 
             let interest;
