@@ -194,11 +194,8 @@ $FW.DOMReady(function () {
     if ($FW.Format.urlQuery().category) {
         Filter.options.categoryName = $FW.Format.urlQuery().category;
     }
-    if (Filter.options.searchSourceType == 2) {
-        return
-    } else {
+    if (Filter.options.searchSourceType != 2)
         ReactDOM.render(<Header title={title}/>, HEADER_NODE);
-    }
 
     window._ResultPage = ReactDOM.render(<ResultPage />, CONTENT_NODE);
 });

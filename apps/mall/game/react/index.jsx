@@ -144,7 +144,7 @@ $FW.DOMReady(function () {
     var ua = window.navigator.userAgent.toLowerCase();
     var wxBrower = ua.match(/MicroMessenger/i) == 'micromessenger' ? true : false;
     if ($FW.Format.urlQuery().mallHead == "true" && !wxBrower) {
-        ReactDOM.render(<Header title={"游戏中心"}/>, HEADER_NODE);
+        ReactDOM.render(<Header title={"游戏中心"} back_handler={back_handler}/>, HEADER_NODE);
     }
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/getuinfo`,//判断登录状态
@@ -174,3 +174,6 @@ function str_length(str) {
     }
 }
 
+function back_handler() {
+    location.href = '/';
+}
