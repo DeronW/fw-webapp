@@ -373,7 +373,7 @@ var Body = React.createClass({
                     backBtn={true}
                     btnFun={this.backBtnClick}
                     skipFun={this.handlerSkipBtn}
-                    btnText={""}
+                    btnText={"关闭"}
                 />
 
                 {
