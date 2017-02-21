@@ -57,7 +57,7 @@ const User = React.createClass({
                     <a className="product-status-item" href="/static/mall/order-list/index.html#unPay">
                         <img src="images/icon1.jpg"/>
                         <span className="status-name">待付款</span>
-                        <span className="remind-circle">{data.voucher_count}</span>
+                        <spaunPayn className="remind-circle">{data._count}</spaunPayn>
                     </a>
                     <a className="product-status-item" href="/static/mall/order-list/index.html#prepare">
                         <img src="images/icon2.jpg"/>
