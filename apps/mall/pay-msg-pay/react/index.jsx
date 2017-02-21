@@ -121,7 +121,8 @@ const SendCode = React.createClass({
                 }
             },
             fail: (data) => {
-                $FW.Component.Alert(data.msg);
+                window.location.href = location.protocol + '//' + location.hostname +
+                    "/static/mall/order-complete/index.html?status=F&failTex=" + data.msg
             }
         })
     },
