@@ -17,10 +17,11 @@ let COMMON_JAVASCRIPTS_TASK = {};
 
 function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
-        `${lib_path}request-animation-frame-0.0.23.js`,
-        `${lib_path}promise-2.0.2.min.js`,
+        `${lib_path}javascripts/request-animation-frame-0.0.23.js`,
+        `${lib_path}javascripts/promise-2.0.2.min.js`,
+        `${lib_path}javascripts/object-assign-4.1.1.js`,
         `${lib_path}fw-1.7.1.js`,
-        `${lib_path}native-bridge-0.4.0.js`
+        `${lib_path}javascripts/native-bridge-0.4.0.js`
     ];
 
     if (debug) {
