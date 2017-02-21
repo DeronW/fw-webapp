@@ -11,6 +11,7 @@ const Payment = React.createClass({
         this.setState({index: arg});
     },
     componentDidMount: function () {
+
         var m = 14;
         var s = 59;
         setInterval(function () {
@@ -187,13 +188,14 @@ const Payment = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"订单结算"} back_handler={back_handler}/>, HEADER_NODE);
-
+    let query = $FW.Format.urlQuery();
+    let createdTime = query.createdTime;
     $FW.Ajax({
-        url: `${API_PATH}mall/api/payment/v1/bank_card_list.json`,
+        url: `${API_PATH}mall/api/payment/v1/bank_card_list.json?createdTime=`+createdTime,
         //url: './bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
         enable_loading: 'mini',
         success: function (data) {
-            ReactDOM.render(<Payment data={data.bankCards}/>, CONTENT_NODE);
+            ReactDOM.render(<Payment data={data.bankCards} createdTime={data.createdTime}/>, CONTENT_NODE);
         }
     })
 });

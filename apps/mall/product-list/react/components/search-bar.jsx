@@ -100,7 +100,7 @@ const SearchBar = React.createClass({
             <div className={class_name}>
                 <div className="search-page-box">
                     <a className="back-arrow" onClick={this.backHandler}> </a>
-                    <input autofocus="autofocus" type="search" value={this.state.value}
+                    <input type="search" value={this.state.value}
                            placeholder="请输入想找的商品"
                            onChange={this.changeHandler}
                            onClick={this.clickHistoryHandler}

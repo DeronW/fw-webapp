@@ -134,7 +134,7 @@ const SetPassword = React.createClass({
                         onClick={this.checkHandler}></div>
                     <div className="check-item">同意
                         <a href="/static/loan/protocol-register/index.html">
-                            《放心花注册协议》</a></div>
+                            《放心花用户注册协议》</a></div>
                 </div>
                 <div className="determine-btn">
                     <div className="ui-btn" onClick={this.handleRegisterBtn}>确定</div>
