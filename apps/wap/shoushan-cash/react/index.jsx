@@ -344,8 +344,8 @@ const Content = React.createClass({
                 <div className="info-text">
                     <div className="subhead-text"> 实时提现 </div>
                     <div className="detail-text">
-                        单笔金额&lt;={_this.props.data.data.criticalValue}万，
-                        { _this.props.data.data.perDayRealTimeAmountLimit && `单日&lt;=${valText}万，`}
+                        单笔金额&le;{_this.props.data.data.criticalValue}万，
+                        { _this.props.data.data.perDayRealTimeAmountLimit && `单日${&ge;}${valText}万，`}
                         7*24小时实时到账
                     </div>
                 </div>
@@ -366,7 +366,7 @@ const Content = React.createClass({
                 <div className="info-text">
                     <div className="subhead-text"> 大额提现 </div>
                     <div className="detail-text">
-                        工作日{_this.props.data.data.doTime}受理，最快30分钟之内到账。
+                        工作日9:00-16:30受理，最快30分钟之内到账。
                     </div>
                 </div>
             </div>
