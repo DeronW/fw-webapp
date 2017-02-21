@@ -2,7 +2,7 @@ const BankManagement = React.createClass({
     getInitialState() {
         let filtered = this.props.cards.filter(e => e.isRealNameBindCard === true);
         return {
-            cardNo: filtered[0].cardNo,
+            cardNo: filtered[0] && filtered[0].cardNo || '',
             popShow: false
         }
     },

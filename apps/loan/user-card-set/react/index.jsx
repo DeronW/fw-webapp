@@ -84,7 +84,7 @@ const SetCashCard = React.createClass({
                 canVerify: ci.canVerify,
                 bankName: ci.bankName
             });
-        })
+        }, e => $FW.Component.Toast(e.message))
     },
     changePhone(e) {
         let val = e.target.value;
