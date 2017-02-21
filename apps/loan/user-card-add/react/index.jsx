@@ -105,7 +105,7 @@ const SetCashCard = React.createClass({
                 cardNo: space(bankNum),
                 cardType: cardType,
                 mobile: phone,
-                operatorType: $FW.Store.get('userStatus'),
+                operatorType: USER.status < 2 ? 1 : 2,
                 token: USER.token,
                 userGid: USER.gid,
                 userId: USER.id,
