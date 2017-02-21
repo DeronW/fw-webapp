@@ -292,6 +292,8 @@ const Content = React.createClass({
         var phone = this.props.data.data.bankInfo.phoneNo;
         var phoneVal = phone.substring(0, 3) + "****" + phone.substring(phone.length - 4, phone.length);
 
+        console.log(_this.props.data.doTime);
+
         var commissionCharge = function () {
 
             if (_this.state.propsUserInfo.isFeeEnable == true) {
