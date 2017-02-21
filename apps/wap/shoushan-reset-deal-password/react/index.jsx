@@ -316,7 +316,7 @@ var Body = React.createClass({
         }
 
         if(!isCardNo(this.state.cardId)) {
-            $FW.Component.Toast("身份证不格式不正确");
+            $FW.Component.Toast("身份证格式不正确");
             return false;
          }
 
@@ -373,7 +373,7 @@ var Body = React.createClass({
                     backBtn={true}
                     btnFun={this.backBtnClick}
                     skipFun={this.handlerSkipBtn}
-                    btnText={"关闭"}
+                    btnText={""}
                 />
 
                 {
