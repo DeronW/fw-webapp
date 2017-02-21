@@ -292,8 +292,6 @@ const Content = React.createClass({
         var phone = this.props.data.data.bankInfo.phoneNo;
         var phoneVal = phone.substring(0, 3) + "****" + phone.substring(phone.length - 4, phone.length);
 
-        console.log(_this.props.data.doTime);
-
         var commissionCharge = function () {
 
             if (_this.state.propsUserInfo.isFeeEnable == true) {
@@ -374,7 +372,7 @@ const Content = React.createClass({
                 <div className="info-text">
                     <div className="subhead-text"> 大额提现 </div>
                     <div className="detail-text">
-                        工作日{_this.props.data.doTime}受理，最快30分钟之内到账。
+                        工作日{_this.props.data.data.doTime}受理，最快30分钟之内到账。
                     </div>
                 </div>
             </div>
