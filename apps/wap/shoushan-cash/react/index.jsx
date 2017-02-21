@@ -276,7 +276,7 @@ const Content = React.createClass({
         window.location.href = "/mpwap/orderuser/getUserInfo.shtml";
     },
     getInfoBtn: function () {
-        location.href = "/static/wap/cash-records/index.html";
+        location.href = "/static/wap/shoushan-cash-records/index.html";
     },
     render: function () {
         var _this = this;
@@ -386,7 +386,7 @@ const Content = React.createClass({
         return (
             <div>
                 <div>
-                    <TopNav title={"提现"} backBtn={true} btnFun={this.callbackOpenBankBtn}
+                    <TopNav title={"提现"} backBtn={false} btnFun={this.callbackOpenBankBtn}
                         btnText={"提现记录"} callbackInfoBtn={this.getInfoBtn} />
 
                     <div className="stou clearfix">
