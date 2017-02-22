@@ -83,6 +83,7 @@ const PayBackWrap = React.createClass({
                     overdueFee={this.props.overdueFee}
                     bankName={this.state.bankName}
                     bankNo={this.state.bankNo}
+                    extendStatus={this.props.extendStatus}
                 /> : null}
                 {this.state.bankCardListShow ?
                     <BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem}
@@ -159,7 +160,8 @@ const PayBack = React.createClass({
                     <div>1.当前只支持使用储蓄卡还款，请确保卡内余额充足；</div>
                     <div>2.单次还款金额不低于100元。</div>
                 </div>
-                <div className="pay-back-btn" onClick={this.paybackHandler}>立即还款</div>
+                {this.props.extendStatus == 102 || this.props.extendStatus == 103 ?  <div className="pay-back-btn" onClick={this.paybackHandler}>立即还款</div>:null}
+
             </div>
         )
     }
@@ -376,19 +378,26 @@ const PayBackResult = React.createClass({
                 <div className="payback-result-ing-img">
                     <img src="images/payback-ing.png"/>
                 </div>}
-                <div className="payback-result-success-tip">
-                    <div className="tip-top">欢迎再次使用!</div>
-                    <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum.toFixed(2)}</span>元</div>
-                </div>
+                { this.state.payback_success &&
+                    <div className="payback-result-success-tip">
+                        <div className="tip-top">欢迎再次使用!</div>
+                        <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum.toFixed(2)}</span>元</div>
+                        <a className="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>
+                            提升额度</a>
+                        <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/home/index.html`)}>申请用钱</div>
+                    </div>}
                 {this.state.payback_fail &&
-                <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>}
+                    <div>
+                        <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>
+                        <div className="payback-customer-service">如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
+                    </div>
+                }
                 {this.state.payback_ing &&
-                <div className="payback-result-ing-tip">稍后可到账单页面查看具体还款结果。</div>}
-                <a className="credit-btn"
-                   href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>
-                    提升额度
-                </a>
-                <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/home/index.html`)}>申请用钱</div>
+                    <div>
+                        <div className="payback-result-ing-tip">稍后可到账单页面<br/>查看具体还款结果。</div>
+                        <div className="payback-customer-service">如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
+                    </div>
+                }
             </div>
         )
     }
