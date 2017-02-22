@@ -109,22 +109,21 @@ const SendCode = React.createClass({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             //url:  `./ucf_pay.json`,
             enable_loading: 'mini',
-            data: FormData,
-            success: (data) => {
+            data: FormData
+        }).then(data=> {
                 if (data.responseResult.status == "F") {
-                    window.location.href = location.protocol + '//' + location.hostname +
+                    window.location.href =
                         "/static/mall/order-complete/index.html?status=F&failTex=" + data.responseResult.resMessage
                 }
                 if (data.responseResult.status == "S") {
-                    window.location.href = location.protocol + '//' + location.hostname +
+                    window.location.href =
                         "/static/mall/order-complete/index.html?status=S"
                 }
             },
-            fail: (data) => {
-                window.location.href = location.protocol + '//' + location.hostname +
-                    "/static/mall/order-complete/index.html?status=F&failTex=" + data.msg
-            }
-        })
+            e => {
+                window.location.href =
+                    "/static/mall/order-complete/index.html?status=F&failTex=" + (e.msg || e.message)
+            })
     },
 
     //完成支付确认
@@ -139,12 +138,12 @@ const SendCode = React.createClass({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
             enable_loading: 'mini',
             data: FormData
-        }).then(data=>{
+        }).then(data=> {
             $FW.Component.showAjaxLoading('mini');
             setTimeout(() => {
                 this.queryState();
             }, 2000);
-            
+
             // if(data.status=="I"){
             //$FW.Component.showAjaxLoading();
             //setTimeout(() => {

@@ -196,6 +196,21 @@ const PlusMinus = React.createClass({
     toggleOverlay: function () {
         if (this.state.value < 1) return;
 
+        // 检查当前用户(或未登录用户)是否可以点这个按钮
+        if (this.props.ticket_count == 0 && this.props.check_messages.length) {
+            $FW.Component.Alert(this.props.check_messages, {header: '不满足购买条件'});
+            return
+        }
+        if (this.props.ticket_count < 1 && this.props.voucher_only) {
+            $FW.Component.Alert('该商品仅限兑换券购买');
+            return
+        }
+
+        if (this.props.ticket_count < this.state.value && this.props.voucher_only) {
+            $FW.Component.Alert('您有' + this.props.ticket_count + '张兑换券, 限购' + this.props.ticket_count + '件商品');
+            return
+        }
+
         let _this = this;
         let bizNo = $FW.Format.urlQuery().bizNo;
 
