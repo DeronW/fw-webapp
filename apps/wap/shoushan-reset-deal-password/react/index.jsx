@@ -370,7 +370,7 @@ var Body = React.createClass({
         return (
             <div>
                 <TopNav title={this.props.activity.openStatus < 4 ? "设置交易密码" : "验证身份"}
-                    backBtn={true}
+                    backBtn={false}
                     btnFun={this.backBtnClick}
                     skipFun={this.handlerSkipBtn}
                     btnText={""}
