@@ -25,7 +25,9 @@ const Payment = React.createClass({
             if (s < 0) {
                 s = 59;
                 m--;
-                if (m == 0) location.href = "/static/mall/order-list/index.html"
+                if (m == -1) {
+                    location.href = "/static/mall/order-list/index.html"
+                }
             }
         }, 1000)
     },

@@ -381,11 +381,13 @@ const Content = React.createClass({
 
         var blockEml = function () {
             if (_this.props.data.data.bankInfo.isCompanyAgent || _this.props.data.data.bankInfo.isSpecial) {
-                return blockTradeCashMethodEml(false);
+                return immediatelyCashMethodEml(true);
+                //return blockTradeCashMethodEml(false);
             } else if (_this.props.data.data.bankInfo.bankName == undefined || _this.props.data.data.bankInfo.bankName == "") {
                 return immediatelyCashMethodEml(true);
             } else {
-                return <div>{immediatelyCashMethodEml(true)} {blockTradeCashMethodEml(true)}</div>
+                //return <div>{immediatelyCashMethodEml(true)} {blockTradeCashMethodEml(true)}</div>
+                return <div>{immediatelyCashMethodEml(true)}</div>;
             }
         }
 

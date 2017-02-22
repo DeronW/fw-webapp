@@ -23,7 +23,15 @@ $FW.DOMReady(function () {
         if(ConcertUtilBrowser.versions.weixin){
             $("mask").style.display = "block";
         }else{
-            location.href = '/api/v1/download.json?name=JRGC';
+            $FW.Ajax({
+                url: `${API_PATH}api/v1/download.json`,
+                data:{
+                    name:"JRGC"
+                },
+                success:(data)=>{
+                    location.href = data.url;
+                }
+            });
         }
 
     });

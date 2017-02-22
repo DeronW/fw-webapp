@@ -24,6 +24,7 @@ const HotSales = React.createClass({
 
         $FW.Ajax({
             url: `${API_PATH}/mall/api/index/v1/hotProducts.json`,//人气热卖列表
+            enable_loading: true,
             data: {
                 count: this.state.page_count,
                 page: this.state.page
@@ -45,7 +46,11 @@ const HotSales = React.createClass({
                     href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
                     <img src={product.img} />
                     <span className="product-name">{product.title}</span>
-                    <span className="product-price">{product.score}工分</span>
+                    <span className="product-price">
+                        {product.price == 0 ? null : `¥${product.price}`}
+                        {product.price == 0 || product.score == 0 ? "" : "+"}
+                        {product.score == 0 ? null : `${product.score}工分`}
+                    </span>
                 </a>
             )
         }
