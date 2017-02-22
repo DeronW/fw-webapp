@@ -56,25 +56,10 @@ const VerifyCode = React.createClass({
                 sourceType: SOURCE_TYPE,
                 verifyCode: this.state.value
             }).then((data) => {
-                return $FW.Post(`${API_PATH}api/repayment/v1/repaymentstatus.json`, {
-                    repaymentGid: data.repaymentGid,
-                    token: USER.token,
-                    userGid: USER.gid,
-                    userId: USER.id,
-                    sourceType: SOURCE_TYPE
-                })
-            }, e => $FW.Component.Toast(e.message)).then(
-                (data) => {
-                    this.props.callbackResultShow(true, false);
-                    if (data.status == 1) {
-                        this.props.callbackGetPaybackSuccess(true);
-                    } else if (data.status == 2) {
-                        this.props.callbackGetPaybackFail(true);
-                    } else if (data.status == 0) {
-                        this.props.callbackGetPaybackCheck(true);
-                    }
-                }, e => $FW.Component.Toast(e.message)
-                );
+                this.props.callbackResultShow(true, false);
+                this.props.callbackGetRepaymentGid(data.repaymentGid);
+               }, e => $FW.Component.Toast(e.message)
+            );
         }
     },
     render: function () {

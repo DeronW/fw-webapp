@@ -24,6 +24,7 @@ const PayBackWrap = React.createClass({
             selectedBankName: null,
             index: 0,
             cardType:0,
+            repaymentGid:null,
             orderGid:null,
             paybackSuccessState: false,
             paybackFailState: false,
@@ -81,6 +82,9 @@ const PayBackWrap = React.createClass({
     getOrderGid:function(val){
         this.setState({ orderGid: val });
     },
+    getRepaymentGid:function(val){
+        this.setState({repaymentGid:val});
+    },
     render: function () {
         return (
             <div>
@@ -118,11 +122,13 @@ const PayBackWrap = React.createClass({
                         callbackGetPaybackFail={this.getPaybackFail}
                         callbackGetPaybackCheck={this.getPaybackCheck}
                         orderGid={this.state.orderGid}
+                        callbackGetRepaymentGid={this.getRepaymentGid}
                     /> : null}
                 {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount}
                     success={this.state.paybackSuccessState}
                     fail={this.state.getPaybackFail}
                     check={this.state.getPaybackCheck}
+                    repaymentGid={this.state.repaymentGid}
                 /> : null}
             </div>
         )
@@ -189,64 +195,6 @@ const BankCardList = React.createClass({
                 <div className="banklist-btn-wrap">
                     <div className="banklist-btn" onClick={this.confirmHandler}>确定</div>
                 </div>
-            </div>
-        )
-    }
-});
-
-const PayBackResult = React.createClass({
-    getInitialState: function () {
-        return {
-            payback_success: false,
-            payback_fail: false,
-            payback_ing: false
-        }
-    },
-    componentWillReceiveProps:function(nextProps){
-        this.resetState(nextProps)
-    },
-    resetState: function(props){
-        this.setState({
-            payback_success: props.success,
-            payback_fail: props.fail,
-            payback_ing: props.check
-        });
-    },
-    render: function () {
-        return (
-            <div className="payback-result">
-                {this.state.payback_success &&
-                <div className="payback-result-success-img">
-                    <img src="images/payback-success.png"/>
-                </div>}
-                {this.state.payback_fail &&
-                <div className="payback-result-fail-img">
-                    <img src="images/payback-fail.png"/>
-                </div>}
-                {this.state.payback_ing &&
-                <div className="payback-result-ing-img">
-                    <img src="images/payback-ing.png"/>
-                </div>}
-                { this.state.payback_success &&
-                    <div className="payback-result-success-tip">
-                        <div className="tip-top">欢迎再次使用!</div>
-                        <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum.toFixed(2)}</span>元</div>
-                        <a className="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>
-                            提升额度</a>
-                        <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/home/index.html`)}>申请用钱</div>
-                    </div>}
-                {this.state.payback_fail &&
-                    <div>
-                        <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>
-                        <div className="payback-customer-service"><img src="images/phone.png" />如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
-                    </div>
-                }
-                {this.state.payback_ing &&
-                    <div>
-                        <div className="payback-result-ing-tip">稍后可到账单页面<br/>查看具体还款结果。</div>
-                        <div className="payback-customer-service"><img src="images/phone.png" />如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
-                    </div>
-                }
             </div>
         )
     }
