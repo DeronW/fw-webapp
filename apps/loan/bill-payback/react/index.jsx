@@ -402,13 +402,13 @@ const PayBackResult = React.createClass({
                 {this.state.payback_fail &&
                     <div>
                         <div className="payback-result-fail-tip">请检查网络原因，本次还款失败</div>
-                        <div className="payback-customer-service">如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
+                        <div className="payback-customer-service"><img src="images/phone.png" />如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
                     </div>
                 }
                 {this.state.payback_ing &&
                     <div>
                         <div className="payback-result-ing-tip">稍后可到账单页面<br/>查看具体还款结果。</div>
-                        <div className="payback-customer-service">如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
+                        <div className="payback-customer-service"><img src="images/phone.png" />如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
                     </div>
                 }
             </div>
