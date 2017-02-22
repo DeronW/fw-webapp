@@ -57,7 +57,7 @@ const BankManagement = React.createClass({
                 <div className={cards.length < 10 ? "bank-management-cnt margin-bottom1" : "bank-management-cnt margin-bottom2"}>
                     {cards.map(bank_item)}
                     <div className="management-tip">
-                        <div>1.储蓄卡(尾号{this.state.cardNo.slice(-4)})为默认提现卡，不可变更；</div>
+                        <div>1.储蓄卡(尾号{this.state.cardNo.slice(-4)})为默认提现卡，不可变更。</div>
                         <div>2.支持绑定多张银行卡。</div>
                     </div>
                 </div>
