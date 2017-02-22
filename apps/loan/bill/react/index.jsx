@@ -21,9 +21,7 @@ const Bill = React.createClass({
     render: function () {
         let bill_item = (item, index) => {
             let st = item.status === 0 ?
-                <div className="pay-back-btn-status1">打款中</div> :
-                <a className="pay-back-btn-status2" href={`/static/loan/bill-payback/index.html?loanGid=${item.loanGid}&token=${USER.token}&userGid=${USER.gid}&userId=${USER.id}`}>还款</a>;
-
+                <div className="pay-back-btn-status1">打款中</div> : ( item.status === 1 ? <a className="pay-back-btn-status2" href={`/static/loan/bill-payback/index.html?loanGid=${item.loanGid}&token=${USER.token}&userGid=${USER.gid}&userId=${USER.id}`}>还款</a>: null);
             return (
                 <div className="bill-item-wrap">
                     <a className="bill-item" key={index}

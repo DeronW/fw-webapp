@@ -3,9 +3,11 @@ $FW.DOMReady(function () {
     var ConcertUtilBrowser = {
         versions: (function () {
             var u = navigator.userAgent;
+            var ua = window.navigator.userAgent.toLowerCase();
             return {
                 ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
-                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
+                weixin:ua.match(/MicroMessenger/i) == 'micromessenger'
             };
         })()
     };
@@ -18,11 +20,20 @@ $FW.DOMReady(function () {
         $("download-btn").innerHTML = "Android客户端下载";
     }
     $("download-btn").addEventListener("click", function () {
-        $FW.Ajax({
-            url:`${API_PATH}/api/v1/download.json`,
-            data:{name: "JRGC"}
-        });
-        $("mask").style.display = "block";
+        if(ConcertUtilBrowser.versions.weixin){
+            $("mask").style.display = "block";
+        }else{
+            $FW.Ajax({
+                url: `${API_PATH}api/v1/download.json`,
+                data:{
+                    name:"JRGC"
+                },
+                success:(data)=>{
+                    location.href = data.url;
+                }
+            });
+        }
+
     });
     $("mask").addEventListener("click", function () {
         $("mask").style.display = "none";

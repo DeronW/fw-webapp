@@ -12,14 +12,22 @@ const Payment = React.createClass({
     },
     componentDidMount: function () {
 
-        var m = 14;
-        var s = 59;
+        let createdTime = this.props.createdTime;
+
+        let mm = createdTime / 1000;
+
+        var m = parseInt(mm / 60);
+        var s = (mm % 60).toFixed(0);
+
         setInterval(function () {
             document.getElementById("cutdown").innerHTML = m + '分' + s + "秒内完成支付";
             s--;
             if (s < 0) {
                 s = 59;
                 m--;
+                if (m == -1) {
+                    location.href = "/static/mall/order-list/index.html"
+                }
             }
         }, 1000)
     },
@@ -191,7 +199,7 @@ $FW.DOMReady(function () {
     let query = $FW.Format.urlQuery();
     let createdTime = query.createdTime;
     $FW.Ajax({
-        url: `${API_PATH}mall/api/payment/v1/bank_card_list.json?createdTime=`+createdTime,
+        url: `${API_PATH}mall/api/payment/v1/bank_card_list.json?createdTime=` + createdTime,
         //url: './bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
         enable_loading: 'mini',
         success: function (data) {
