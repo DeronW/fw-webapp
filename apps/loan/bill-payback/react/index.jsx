@@ -276,6 +276,9 @@ const VerifyCode = React.createClass({
             orderGid: null
         }
     },
+    componentWillReceiveProps(nextProps){
+        this.setState({orderGid:nextProps.orderGid});
+    },
     closePopHandler: function () {
         this.props.callbackCloseHanler(false);
     },
@@ -305,7 +308,7 @@ const VerifyCode = React.createClass({
                 userGid: USER.gid,
                 userId: USER.id,
                 sourceType: SOURCE_TYPE,
-                orderGid: this.props.orderGid
+                orderGid: this.state.orderGid
             }).then(()=>{}, e => $FW.Component.Toast(e.message));
         }
     },
@@ -314,7 +317,7 @@ const VerifyCode = React.createClass({
             $FW.Component.Toast("请输入验证码");
         } else {
             $FW.Post(`${API_PATH}api/repayment/v1/do.json`, {
-                orderGid: this.props.orderGid,
+                orderGid: this.state.orderGid,
                 token: USER.token,
                 userGid: USER.gid,
                 userId: USER.id,
