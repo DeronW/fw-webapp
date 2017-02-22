@@ -19,7 +19,7 @@ const VipMsg = React.createClass({
         return (
             <div className={this.state.show ? "vip-msg" : "hide"}>
                 <p className="text">您当前等级是<em className="c">{user_level_manifest}</em>，可用工分<em
-                    className="c">{this.state.score}</em><!--<span className="closeBtn" onClick={this.closeHandler}></span>-->
+                    className="c">{this.state.score}</em><span className="closeBtn" onClick={this.closeHandler}></span>
                 </p>
             </div>
         );
