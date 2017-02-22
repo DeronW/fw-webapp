@@ -12,7 +12,7 @@ const Register = React.createClass({
     getInitialState() {
         return {
             phone: '',
-            deleteShow:false
+            deleteShow: false
         }
     },
     changeHandler(e) {
@@ -20,15 +20,13 @@ const Register = React.createClass({
         if (e.target.value.length > 11) {
             this.setState({
                 phone: this.state.phone,
-                deleteShow:true
+                deleteShow: true
             });
-        } else {
-            if (verificationNum(v)) {
-                this.setState({
-                    phone: v,
-                    deleteShow:true
-                })
-            }
+        } else if (verificationNum(v)) {
+            this.setState({
+                phone: v,
+                deleteShow: true
+            })
         }
     },
 
@@ -59,7 +57,10 @@ const Register = React.createClass({
                 $FW.Component.Toast(res.message)
             }
         })
+    },
 
+    keyUpHandler (e){
+        if(e.keyCode === 13) this.handleGetCode()
     },
 
     render() {
@@ -68,29 +69,26 @@ const Register = React.createClass({
                 <div className="top">
                     <span className="title">放心花</span>
                 </div>
-
                 <div className="logo"> <img src="images/logo.png" /> </div>
-
                 <div className="register-login-cnt">
                     <div className="from-cnt">
                         <div className="from">
                             <div className="icon"></div>
                             <div className="input">
                                 <input type="number" value={this.state.phone}
-                                    onChange={this.changeHandler}
+                                    onChange={this.changeHandler} onKeyUp={this.keyUpHandler}
                                     placeholder="请输入手机号进行注册登录" />
-                                {this.state.deleteShow?<span className="clear-num" onClick={this.clearHandler}></span>:null}
+                                {this.state.deleteShow ? <span className="clear-num" onClick={this.clearHandler}></span> : null}
                             </div>
                             <div className="pwd-icon"> </div>
                         </div>
-                    <div className="form-border"></div>
+                        <div className="form-border"></div>
                     </div>
                 </div>
 
                 <div className="register-login-btn">
                     <div className="ui-btn" onClick={this.handleGetCode}>下一步</div>
                 </div>
-
             </div>
         )
     }
