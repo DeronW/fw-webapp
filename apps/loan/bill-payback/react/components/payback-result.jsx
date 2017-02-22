@@ -2,6 +2,7 @@ const PayBackResult = React.createClass({
     getInitialState: function () {
         return {
             payback_status: null,
+            fail_reason:null,
             repaymentGid: this.props.repaymentGid
         }
     },
@@ -22,7 +23,8 @@ const PayBackResult = React.createClass({
             sourceType: SOURCE_TYPE
         }).then((data) => {
             this.setState({
-                payback_status: data.status
+                payback_status: data.status,
+                fail_reason:data.failReason
             });
         }, e => $FW.Component.Toast(e.message));
     },
@@ -55,7 +57,7 @@ const PayBackResult = React.createClass({
                     </div>}
                 {payback_status >= 2 &&
                     <div>
-                        <div className="payback-result-fail-tip">{data.failReason}</div>
+                        <div className="payback-result-fail-tip">{this.state.fail_reason}</div>
                         <div className="payback-customer-service"><img src="images/phone.png" />如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
                     </div>
                 }
