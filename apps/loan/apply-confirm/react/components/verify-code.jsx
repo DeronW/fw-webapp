@@ -49,7 +49,7 @@ const VerifyCode = React.createClass({
         clearInterval(this.timer);
     },
     getSMSCode: function () {
-        if (this.state.remain <= 0) {
+        if (this.state.countdown <= 0) {
             this.countingDown();
             $FW.Ajax({
                 url: `${API_PATH}api/loan/v1/resendverifycode.json`,
