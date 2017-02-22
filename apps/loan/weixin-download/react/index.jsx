@@ -7,7 +7,7 @@ $FW.DOMReady(function () {
             return {
                 ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
                 android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
-                weixin:ua.match(/MicroMessenger/i) == 'micromessenger'
+                weixin: ua.match(/MicroMessenger/i) == 'micromessenger'
             };
         })()
     };
@@ -16,22 +16,17 @@ $FW.DOMReady(function () {
 
     if (ConcertUtilBrowser.versions.ios) {
         $("download-btn").innerHTML = "IOS客户端下载";
-    }else{
+    } else {
         $("download-btn").innerHTML = "Android客户端下载";
-    }
+    };
+
     $("download-btn").addEventListener("click", function () {
-        if(ConcertUtilBrowser.versions.weixin){
+        if (ConcertUtilBrowser.versions.weixin) {
             $("mask").style.display = "block";
-        }else{
-            $FW.Ajax({
-                url: `${API_PATH}api/v1/download.json`,
-                data:{
-                    name:"JRGC"
-                },
-                success:(data)=>{
-                    location.href = data.url;
-                }
-            });
+        } else {
+            $FW.Ajax(`${API_PATH}api/v1/download.json?name=JRGC`).then(data => {
+                location.href = data.url;
+            }, e => $FW.Component.Toast(e.message));
         }
 
     });
