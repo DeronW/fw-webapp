@@ -145,7 +145,7 @@ const SendCode = React.createClass({
                 $FW.Component.showAjaxLoading();
                 setTimeout(() => {
                     this.queryState();
-                }, 1500);
+                }, 2000);
                 // }
                 // else if(data.status=="F"){
                 //     window.location.href = location.protocol + '//' + location.hostname +
