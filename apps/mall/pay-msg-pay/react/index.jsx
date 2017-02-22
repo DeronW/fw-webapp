@@ -137,32 +137,33 @@ const SendCode = React.createClass({
         }
         $FW.Ajax({
             url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
-            //url:  `./ucf_pay.json`,
             enable_loading: 'mini',
-            data: FormData,
-            success: (data) => {
-                // if(data.status=="I"){
-                $FW.Component.showAjaxLoading();
-                setTimeout(() => {
-                    this.queryState();
-                }, 2000);
-                // }
-                // else if(data.status=="F"){
-                //     window.location.href = location.protocol + '//' + location.hostname +
-                //         "/static/mall/order-complete/index.html?status=F"
-                // }
-                // else{
-                //     window.location.href = location.protocol + '//' + location.hostname +
-                //         "/static/mall/order-complete/index.html?status=S"
-                // }
+            data: FormData
+        }).then(data=>{
+            $FW.Component.showAjaxLoading('mini');
+            setTimeout(() => {
+                this.queryState();
+            }, 2000);
+            
+            // if(data.status=="I"){
+            //$FW.Component.showAjaxLoading();
+            //setTimeout(() => {
+            //    this.queryState();
+            //}, 2000);
+            // }
+            // else if(data.status=="F"){
+            //     window.location.href = location.protocol + '//' + location.hostname +
+            //         "/static/mall/order-complete/index.html?status=F"
+            // }
+            // else{
+            //     window.location.href = location.protocol + '//' + location.hostname +
+            //         "/static/mall/order-complete/index.html?status=S"
+            // }
 
-                //window.location.href = location.protocol + '//' + location.hostname +
-                //    "/static/mall/order-complete/index.html?id="+data.tradeNo
-            },
-            fail: (data) => {
-                window.location.href = location.protocol + '//' + location.hostname +
-                    "/static/mall/order-complete/index.html?status=F&failTex=" + data.msg
-            }
+            //window.location.href = location.protocol + '//' + location.hostname +
+            //    "/static/mall/order-complete/index.html?id="+data.tradeNo
+        }, e => {
+            window.location.href = `/static/mall/order-complete/index.html?status=F&failTex=${e.message}`
         })
 
     },
