@@ -23,9 +23,9 @@ const PayBackWrap = React.createClass({
             bankNo: filtered.cardNo,
             selectedBankName: null,
             index: 0,
-            cardType:0,
-            repaymentGid:null,
-            orderGid:null,
+            cardType: 0,
+            repaymentGid: null,
+            orderGid: null,
             paybackSuccessState: false,
             paybackFailState: false,
             paybackCheckState: false
@@ -34,10 +34,10 @@ const PayBackWrap = React.createClass({
     componentDidMount: function () {
     },
     getBankCardListShow: function (booleanVal) {
-        this.setState({ bankCardListShow: booleanVal });
+        this.setState({bankCardListShow: booleanVal});
     },
     getVerifyCodeShow: function (booleanVal) {
-        this.setState({ verifyCodeShow: booleanVal });
+        this.setState({verifyCodeShow: booleanVal});
     },
     indexItem: function (booleanVal) {
 
@@ -50,86 +50,86 @@ const PayBackWrap = React.createClass({
         });
     },
     popHideHandler: function (booleanVal) {
-        this.setState({ bankCardListShow: booleanVal });
+        this.setState({bankCardListShow: booleanVal});
     },
     closeHandler: function (booleanVal) {
-        this.setState({ verifyCodeShow: booleanVal });
+        this.setState({verifyCodeShow: booleanVal});
     },
     getBankName: function (val) {
-        this.setState({ bankName: val });
+        this.setState({bankName: val});
     },
     getBankNo: function (val) {
-        this.setState({ bankNo: val });
+        this.setState({bankNo: val});
     },
     getBankCardGid: function (val) {
-        this.setState({ cardGid: val });
+        this.setState({cardGid: val});
     },
     getBankIndex: function (index) {
-        this.setState({ index: index })
+        this.setState({index: index})
     },
-    getBankType:function (val) {
-        this.setState({ cardType: val })
+    getBankType: function (val) {
+        this.setState({cardType: val})
     },
     getPaybackSuccess: function (val) {
-        this.setState({ paybackSuccessState: val });
+        this.setState({paybackSuccessState: val});
     },
     getPaybackFail: function (val) {
-        this.setState({ paybackFailState: val });
+        this.setState({paybackFailState: val});
     },
     getPaybackCheck: function (val) {
-        this.setState({ paybackCheckState: val });
+        this.setState({paybackCheckState: val});
     },
-    getOrderGid:function(val){
-        this.setState({ orderGid: val });
+    getOrderGid: function (val) {
+        this.setState({orderGid: val});
     },
-    getRepaymentGid:function(val){
-        this.setState({repaymentGid:val});
+    getRepaymentGid: function (val) {
+        this.setState({repaymentGid: val});
     },
     render: function () {
         return (
             <div>
                 {this.state.paybackShow ? <PayBack callbackBankListShow={this.getBankCardListShow}
-                    callbackVerifyCodeShow={this.getVerifyCodeShow}
-                    loanLeftAmount={this.props.loanLeftAmount}
-                    loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus}
-                    overdueFee={this.props.overdueFee}
-                    bankName={this.state.bankName}
-                    bankNo={this.state.bankNo}
-                    cardType={this.state.cardType}
-                    extendStatus={this.props.extendStatus}
-                    repaymentAmount={this.state.repaymentAmount}
-                    cardGid={this.state.cardGid}
-                    callbackGetOrderGid={this.getOrderGid}
-                /> : null}
+                                                   callbackVerifyCodeShow={this.getVerifyCodeShow}
+                                                   loanLeftAmount={this.props.loanLeftAmount}
+                                                   loanAmount={this.props.loanAmount} loanStatus={this.props.loanStatus}
+                                                   overdueFee={this.props.overdueFee}
+                                                   bankName={this.state.bankName}
+                                                   bankNo={this.state.bankNo}
+                                                   cardType={this.state.cardType}
+                                                   extendStatus={this.props.extendStatus}
+                                                   repaymentAmount={this.state.repaymentAmount}
+                                                   cardGid={this.state.cardGid}
+                                                   callbackGetOrderGid={this.getOrderGid}
+                    /> : null}
                 {this.state.bankCardListShow ?
                     <BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem}
-                        callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName}
-                        callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid}
-                        callbackGetBankType={this.getBankType}
-                        bankName={this.state.bankName}
-                        bankNo={this.state.bankNo}
-                        cardGid={this.state.cardGid}
-                        callbackGetBankIndex={this.getBankIndex}
-                        callbackIndex={this.state.index}
+                                  callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName}
+                                  callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid}
+                                  callbackGetBankType={this.getBankType}
+                                  bankName={this.state.bankName}
+                                  bankNo={this.state.bankNo}
+                                  cardGid={this.state.cardGid}
+                                  callbackGetBankIndex={this.getBankIndex}
+                                  callbackIndex={this.state.index}
                     /> : null}
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid}
-                        callbackCloseHanler={this.closeHandler}
-                        repaymentAmount={this.state.repaymentAmount}
-                        bankName={this.state.bankName}
-                        bankNo={this.state.bankNo}
-                        callbackGetPaybackSuccess={this.getPaybackSuccess}
-                        callbackGetPaybackFail={this.getPaybackFail}
-                        callbackGetPaybackCheck={this.getPaybackCheck}
-                        orderGid={this.state.orderGid}
-                        callbackGetRepaymentGid={this.getRepaymentGid}
+                                callbackCloseHanler={this.closeHandler}
+                                repaymentAmount={this.state.repaymentAmount}
+                                bankName={this.state.bankName}
+                                bankNo={this.state.bankNo}
+                                callbackGetPaybackSuccess={this.getPaybackSuccess}
+                                callbackGetPaybackFail={this.getPaybackFail}
+                                callbackGetPaybackCheck={this.getPaybackCheck}
+                                orderGid={this.state.orderGid}
+                                callbackGetRepaymentGid={this.getRepaymentGid}
                     /> : null}
                 {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount}
-                    success={this.state.paybackSuccessState}
-                    fail={this.state.getPaybackFail}
-                    check={this.state.getPaybackCheck}
-                    repaymentGid={this.state.repaymentGid}
-                /> : null}
+                                                               success={this.state.paybackSuccessState}
+                                                               fail={this.state.getPaybackFail}
+                                                               check={this.state.getPaybackCheck}
+                                                               repaymentGid={this.state.repaymentGid}
+                    /> : null}
             </div>
         )
     }
@@ -162,7 +162,7 @@ const BankCardList = React.createClass({
             bankName: this.props.bankList[index].bankShortName,
             bankNo: this.props.bankList[index].cardNo,
             cardGid: this.props.bankList[index].cardGid,
-            cardType:this.props.bankList[index].cardType
+            cardType: this.props.bankList[index].cardType
         })
     },
     render: function () {
@@ -172,7 +172,7 @@ const BankCardList = React.createClass({
                     this.clickHandler(index)
                 }}>
                     <img
-                        src={item.logoUrl} />
+                        src={item.logoUrl}/>
                     {item.bankShortName}({item.cardNo.slice(-4)})
                     {
                         this.state.checked == index ?
