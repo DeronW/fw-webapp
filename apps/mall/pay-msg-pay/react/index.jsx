@@ -101,7 +101,7 @@ const SendCode = React.createClass({
 
     //查询订单状态
     queryState: function () {
-        var FormData = {
+        let FormData = {
             service: 'REQ_QUICK_QUERY_BY_ID',
             merchantNo: this.state.merchantNo
         }
@@ -130,7 +130,7 @@ const SendCode = React.createClass({
     //完成支付确认
     nextStep: function () {
         if (!this.state.active) return;
-        var FormData = {
+        let FormData = {
             service: 'REQ_PAY_QUICK_CONFIRM',
             merchantNo: this.state.merchantNo,
             checkCode: this.state.code
