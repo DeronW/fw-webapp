@@ -54,7 +54,6 @@ const ShoppingCart = React.createClass({
                 }
             }
         });
-
     },
     deleteHandler: function (index) {
         let ps = this.state.products;
@@ -62,8 +61,7 @@ const ShoppingCart = React.createClass({
             url: `${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
             data: {
                 productBizNo: ps[index].productBizNo
-            },
-            enable_loading: 'mini'
+            }
         }).then(data => {
             this.setState({ products: ps });
         });

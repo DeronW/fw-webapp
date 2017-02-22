@@ -101,7 +101,7 @@ const SendCode = React.createClass({
 
     //查询订单状态
     queryState: function () {
-        var FormData = {
+        let FormData = {
             service: 'REQ_QUICK_QUERY_BY_ID',
             merchantNo: this.state.merchantNo
         }
@@ -130,7 +130,7 @@ const SendCode = React.createClass({
     //完成支付确认
     nextStep: function () {
         if (!this.state.active) return;
-        var FormData = {
+        let FormData = {
             service: 'REQ_PAY_QUICK_CONFIRM',
             merchantNo: this.state.merchantNo,
             checkCode: this.state.code
@@ -145,7 +145,7 @@ const SendCode = React.createClass({
                 $FW.Component.showAjaxLoading();
                 setTimeout(() => {
                     this.queryState();
-                }, 1500);
+                }, 2000);
                 // }
                 // else if(data.status=="F"){
                 //     window.location.href = location.protocol + '//' + location.hostname +
@@ -158,6 +158,10 @@ const SendCode = React.createClass({
 
                 //window.location.href = location.protocol + '//' + location.hostname +
                 //    "/static/mall/order-complete/index.html?id="+data.tradeNo
+            },
+            fail: (data) => {
+                window.location.href = location.protocol + '//' + location.hostname +
+                    "/static/mall/order-complete/index.html?status=F&failTex=" + data.msg
             }
         })
 
