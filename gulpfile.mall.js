@@ -61,7 +61,8 @@ const PAYMENT_PAGES = [
 const GAME_PAGES = [
     'game', //游戏中心
     'game-guess', //猜拳
-    'game-zhuanpan20161230', //20161230转盘活动
+    // 'game-red-rain', //红包雨
+    'game-zhuanpan20161230',//2016-12-30号转盘
 ]
 
 const DEVELOPING_PAGES = [
