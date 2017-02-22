@@ -24,6 +24,7 @@ const PayBackWrap = React.createClass({
             selectedBankName: null,
             index: 0,
             cardType:0,
+            orderGid:null,
             paybackSuccessState: false,
             paybackFailState: false,
             paybackCheckState: false
@@ -77,6 +78,9 @@ const PayBackWrap = React.createClass({
     getPaybackCheck: function (val) {
         this.setState({ paybackCheckState: val });
     },
+    getOrderGid:function(val){
+        this.setState({ orderGid: val });
+    },
     render: function () {
         return (
             <div>
@@ -89,6 +93,9 @@ const PayBackWrap = React.createClass({
                     bankNo={this.state.bankNo}
                     cardType={this.state.cardType}
                     extendStatus={this.props.extendStatus}
+                    repaymentAmount={this.state.repaymentAmount}
+                    cardGid={this.state.cardGid}
+                    callbackGetOrderGid={this.getOrderGid}
                 /> : null}
                 {this.state.bankCardListShow ?
                     <BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem}
@@ -100,7 +107,6 @@ const PayBackWrap = React.createClass({
                         cardGid={this.state.cardGid}
                         callbackGetBankIndex={this.getBankIndex}
                         callbackIndex={this.state.index}
-
                     /> : null}
                 {this.state.verifyCodeShow ?
                     <VerifyCode callbackResultShow={this.getPayBackResultShow} cardGid={this.state.cardGid}
@@ -111,6 +117,7 @@ const PayBackWrap = React.createClass({
                         callbackGetPaybackSuccess={this.getPaybackSuccess}
                         callbackGetPaybackFail={this.getPaybackFail}
                         callbackGetPaybackCheck={this.getPaybackCheck}
+                        orderGid={this.state.orderGid}
                     /> : null}
                 {this.state.payBackResultShow ? <PayBackResult paybackNum={this.props.loanLeftAmount}
                     success={this.state.paybackSuccessState}
@@ -123,15 +130,33 @@ const PayBackWrap = React.createClass({
 });
 
 const PayBack = React.createClass({
+    getInitialState:function(){
+        return {
+            orderGid:null
+        }
+    },
     bankListHandler: function () {
         this.props.callbackBankListShow(true);
 
     },
     paybackHandler: function () {
+        var query = $FW.Format.urlQuery();
+        var loanGid = query.loanGid;
         if(this.props.cardType == 1){
             $FW.Component.Toast("信用卡暂不支持还款");
         }else{
-            this.props.callbackVerifyCodeShow(true);
+            $FW.Post( `${API_PATH}api/repayment/v1/checksmsverifycode.json`, {
+                repaymentAmount: this.props.repaymentAmount,
+                loanGid: loanGid,
+                cardGid: this.props.cardGid,
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
+                sourceType: SOURCE_TYPE
+            }).then(d => {
+                this.props.callbackVerifyCodeShow(true);
+                this.setState({phoneNum: d.mobile, orderGid: d.orderGid}, this.props.callbackGetOrderGid(this.state.orderGid));
+            }, e => $FW.Component.Toast(e.message))
         }
     },
     render: function () {
@@ -255,20 +280,7 @@ const VerifyCode = React.createClass({
         this.props.callbackCloseHanler(false);
     },
     componentDidMount: function () {
-        var query = $FW.Format.urlQuery();
-        var loanGid = query.loanGid;
         this.tick();
-        $FW.Post( `${API_PATH}api/repayment/v1/checksmsverifycode.json`, {
-            repaymentAmount: this.props.repaymentAmount,
-            loanGid: loanGid,
-            cardGid: this.props.cardGid,
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE
-        }).then(d => {
-            this.setState({phoneNum: d.mobile, orderGid: d.orderGid});
-        }, e => $FW.Component.Toast(e.message))
     },
     changeValueHandler: function (e) {
         this.setState({value: e.target.value});
@@ -293,8 +305,8 @@ const VerifyCode = React.createClass({
                 userGid: USER.gid,
                 userId: USER.id,
                 sourceType: SOURCE_TYPE,
-                orderGid: this.state.orderGid
-            });
+                orderGid: this.props.orderGid
+            }).then(()=>{}, e => $FW.Component.Toast(e.message));
         }
     },
     confirmBtnHandler: function () {
@@ -302,7 +314,7 @@ const VerifyCode = React.createClass({
             $FW.Component.Toast("请输入验证码");
         } else {
             $FW.Post(`${API_PATH}api/repayment/v1/do.json`, {
-                orderGid: this.state.orderGid,
+                orderGid: this.props.orderGid,
                 token: USER.token,
                 userGid: USER.gid,
                 userId: USER.id,
