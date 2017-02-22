@@ -23,6 +23,7 @@ const PayBackWrap = React.createClass({
             bankNo: filtered.cardNo,
             selectedBankName: null,
             index: 0,
+            cardType:0,
             paybackSuccessState: false,
             paybackFailState: false,
             paybackCheckState: false
@@ -64,6 +65,9 @@ const PayBackWrap = React.createClass({
     getBankIndex: function (index) {
         this.setState({ index: index })
     },
+    getBankType:function (val) {
+        this.setState({ cardType: val })
+    },
     getPaybackSuccess: function (val) {
         this.setState({ paybackSuccessState: val });
     },
@@ -83,12 +87,14 @@ const PayBackWrap = React.createClass({
                     overdueFee={this.props.overdueFee}
                     bankName={this.state.bankName}
                     bankNo={this.state.bankNo}
+                    cardType={this.state.cardType}
                     extendStatus={this.props.extendStatus}
                 /> : null}
                 {this.state.bankCardListShow ?
                     <BankCardList bankList={this.props.userBankList.withdrawBankcard} callbackIndexItem={this.indexItem}
                         callbackPopHide={this.popHideHandler} callbackBankName={this.getBankName}
                         callbackBankNo={this.getBankNo} callbackBankCardGid={this.getBankCardGid}
+                        callbackGetBankType={this.getBankType}
                         bankName={this.state.bankName}
                         bankNo={this.state.bankNo}
                         cardGid={this.state.cardGid}
@@ -122,7 +128,11 @@ const PayBack = React.createClass({
 
     },
     paybackHandler: function () {
-        this.props.callbackVerifyCodeShow(true);
+        if(this.props.cardType == 1){
+            $FW.Component.Toast("信用卡暂不支持还款");
+        }else{
+            this.props.callbackVerifyCodeShow(true);
+        }
     },
     render: function () {
         return (
@@ -173,7 +183,8 @@ const BankCardList = React.createClass({
             checked: this.props.callbackIndex,
             bankName: this.props.bankName,
             bankNo: this.props.bankNo,
-            cardGid: this.props.cardGid
+            cardGid: this.props.cardGid,
+            cardType: this.props.cardType
         }
     },
     backHandler: function () {
@@ -185,13 +196,15 @@ const BankCardList = React.createClass({
         this.props.callbackBankNo(this.state.bankNo);
         this.props.callbackBankCardGid(this.state.cardGid);
         this.props.callbackGetBankIndex(this.state.checked);
+        this.props.callbackGetBankType(this.state.cardType);
     },
     clickHandler: function (index) {
         this.setState({
             checked: index,
             bankName: this.props.bankList[index].bankShortName,
             bankNo: this.props.bankList[index].cardNo,
-            cardGid: this.props.bankList[index].cardGid
+            cardGid: this.props.bankList[index].cardGid,
+            cardType:this.props.bankList[index].cardType
         })
     },
     render: function () {
