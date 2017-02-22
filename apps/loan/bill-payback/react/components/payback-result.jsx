@@ -31,7 +31,7 @@ const PayBackResult = React.createClass({
     render: function () {
         let {payback_status} = this.state;
 
-        if (!payback_status) return null;
+        if (payback_status === null) return null;
 
         return (
             <div className="payback-result">

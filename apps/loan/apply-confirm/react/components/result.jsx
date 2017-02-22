@@ -24,25 +24,19 @@ const LoanResult = React.createClass({
         });
     },
     countingDown() {
-        let n = 56;
-
-        this.setState({
-            countdown: 56
-        });
+        let {countdown} = this.state;
+        this.setState({ countdown: 56});
+        this.checkAjax();
         this.timer = setInterval(() => {
-            if (this.state.countdown == n) {
-                this.checkAjax();
-                n = n - 10;
-            }
-            this.setState({ countdown: this.state.countdown - 1 });
-            if (this.state.countdown == 0) {
-                clearInterval(this.timer);
-            }
+            if(countdown % 10 === 0) this.checkAjax();
+            this.setState({ countdown: countdown - 1 });
+            if (countdown <= 0) clearInterval(this.timer);
         }, 1000);
     },
     checkAjax() {
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
+
         $FW.Post(`${API_PATH}api/loan/v1/status.json`, {
             token: USER.token,
             userGid: USER.gid,
@@ -50,7 +44,8 @@ const LoanResult = React.createClass({
             orderGid: orderGid,
             sourceType: SOURCE_TYPE
         }).then((data) => {
-            clearInterval(this.timer);
+            let finishFlag = true;
+
             if (data.loanStatus == 6) {
                 this.setState({
                     waitingResultShow: false,
@@ -61,13 +56,33 @@ const LoanResult = React.createClass({
                     waitingResultShow: false,
                     failResultShow: true,
                 });
-            } else if (data.loanStatus == 4) {
-                this.setState({
-                    waitingResultShow: false,
-                    checkingResult: true
-                });
+            } else {
+                finishFlag = false
             }
+
+            if(this.state.countdown <= 0 ){
+                if (data.loanStatus == 6) {
+                    this.setState({
+                        waitingResultShow: false,
+                        successResultShow: true,
+                    });
+                } else if (data.loanStatus == 5) {
+                    this.setState({
+                        waitingResultShow: false,
+                        failResultShow: true,
+                    });
+                } else if (data.loanStatus == 4) {
+                    this.setState({
+                        waitingResultShow: false,
+                        checkingResult: true
+                    });
+                }else {
+                    finishFlag = false
+                }
+            }
+            if(finishFlag) clearInterval(this.timer);
         }, (err) => { $FW.Component.Toast(err.message) });
+
     },
     componentDidMount() {
 
