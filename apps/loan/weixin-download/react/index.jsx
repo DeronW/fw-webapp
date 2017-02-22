@@ -25,7 +25,9 @@ $FW.DOMReady(function () {
         }else{
             $FW.Ajax({
                 url: `${API_PATH}api/v1/download.json`,
-                data:{name:"JRGC"},
+                data:{
+                    name:"JRGC"
+                },
                 success:(data)=>{
                     location.href = data.url;
                 }
