@@ -91,7 +91,7 @@ const User = React.createClass({
                     <a className="personal-item" href="/static/mall/pay-bank-card/index.html?id=user">
                         <span className="item-name item-icon8">银行卡</span>
                         <span className="jump-arrow"></span>
-                        <span className="bank-card-status">已绑定</span>
+                        <span className="bank-card-status"></span>
                     </a>
                 </div>
                 <div className="icon-list">

@@ -66,8 +66,10 @@ const AddBankCard = React.createClass({
                 <a className={this.state.active ? "next-step active":"next-step"} onClick={this.nextStep}>下一步</a>
                 <div className="reminder">
                     温馨提示：<br/>
-                    1.支付服务由先锋金融提供<br/>
-                    2.支持银行：<br/>工商银行、农业银行、中国银行、建设银行、平安银行、兴业银行、光大银行、浦发银行、华夏银行、北京银行、中信银行、广发银行
+                    1.支付服务由先锋金融提供；<br/>
+                    2.仅支持储蓄卡；<br/>
+                    3.支持银行：<br/>
+                    工商银行、农业银行、中国银行、建设银行、平安银行、兴业银行、光大银行、浦发银行、华夏银行、北京银行、中信银行、广发银行。
                 </div>
             </div>
         )
