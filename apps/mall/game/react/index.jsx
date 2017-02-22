@@ -20,21 +20,21 @@ const GameCenter = React.createClass({
             url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/gamelist&fr=shop`,//游戏中心所有列表
             withCredentials: true,
             success: (data) => {
-                this.setState({allList: data.list});
+                this.setState({ allList: data.list });
             }
         });
         $FW.Ajax({
             url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/newst`,//游戏中心最新游戏
             withCredentials: true,
             success: (data) => {
-                this.setState({newList: data.list});
+                this.setState({ newList: data.list });
             }
         });
         $FW.Ajax({
             url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/gamebanner&fr=shop&tag=tag1`,//banner
             withCredentials: true,
             success: (data) => {
-                this.setState({bannerList: data.list});
+                this.setState({ bannerList: data.list });
             }
         });
     },
@@ -99,7 +99,7 @@ const GameCenter = React.createClass({
     },
     render: function () {
         let head = this.state.isLogin ? <div className="game-head-login">
-            <div className="avatar" onClick={this.clickAvatarHandler}><img src={this.state.avatar}/></div>
+            <div className="avatar" onClick={this.clickAvatarHandler}><img src={this.state.avatar} /></div>
             <div className="name-box">
                 <div className="nickname-title">游戏昵称</div>
                 <div className="nickname">{this.state.nameNick}</div>
@@ -107,7 +107,7 @@ const GameCenter = React.createClass({
             <div className="login-btn" onClick={() => { this.popNickName(true) }}>修改昵称</div>
         </div> :
             <div className="game-head-unlogin">
-                <div className="avatar"><img src="images/default-avatar.png"/></div>
+                <div className="avatar"><img src="images/default-avatar.png" /></div>
                 <div className="name-box">
                     <div className="nickname-title">游戏昵称</div>
                     <div className="nickname">未登录</div>
@@ -118,19 +118,19 @@ const GameCenter = React.createClass({
             <div className="game-center">
                 {head}
                 {this.state.bannerList.length > 0 ? <BannerGroup className="game-banner"
-                                                                 images={this.getHeadImages()}
-                                                                 onImageClick={this.onImageClickHandler}/> : null}
-                {this.state.newList.length > 0 ? <GameCenter_NewGame data={this.state.newList}/> : null}
-                {this.state.allList.length > 0 ? <GameCenter_AllGame data={this.state.allList}/> : null}
+                    images={this.getHeadImages()}
+                    onImageClick={this.onImageClickHandler} /> : null}
+                {this.state.newList.length > 0 && <GameCenter_NewGame data={this.state.newList} />}
+                {this.state.allList.length > 0 && <GameCenter_AllGame data={this.state.allList} />}
                 {this.state.popError ?
                     <GameCenter_popNickNameError data={this.state.errorMessage} popNickName={this.popNickName}
-                                                 popError={this.popError}/> : null}
+                        popError={this.popError} /> : null}
                 {this.state.popNameNick ?
                     <GameCenter_popNickname setNameNick={this.setNameNick} popNickName={this.popNickName}
-                                            popError={this.popError} popErrorMessage={this.setErrorMessage}/> : null}
+                        popError={this.popError} popErrorMessage={this.setErrorMessage} /> : null}
                 {this.state.popAvatar ?
                     <GameCenter_popAvatar setAvatar={this.setAvatar} setPopAvatar={this.setPopAvatar}
-                                          data={this.state.avatarList}/> : null}
+                        data={this.state.avatarList} /> : null}
             </div>
         );
     }
@@ -144,16 +144,14 @@ $FW.DOMReady(function () {
     var ua = window.navigator.userAgent.toLowerCase();
     var wxBrower = ua.match(/MicroMessenger/i) == 'micromessenger' ? true : false;
     if ($FW.Format.urlQuery().mallHead == "true" && !wxBrower) {
-        ReactDOM.render(<Header title={"游戏中心"} back_handler={back_handler}/>, HEADER_NODE);
+        ReactDOM.render(<Header title={"游戏中心"} back_handler={back_handler} />, HEADER_NODE);
     }
     $FW.Ajax({
         url: `${location.protocol}//game.9888.cn/index.php?r=polymerization/getuinfo`,//判断登录状态
         withCredentials: true,
         success: (data) => {
-            if (data.login_status == 1) {
-                gameToken = data.token;
-            }
-            ReactDOM.render(<GameCenter data={data}/>, CONTENT_NODE);
+            if (data.login_status == 1) gameToken = data.token;
+            ReactDOM.render(<GameCenter data={data} />, CONTENT_NODE);
         }
     });
 });
