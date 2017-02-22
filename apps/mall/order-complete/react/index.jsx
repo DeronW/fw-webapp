@@ -1,18 +1,6 @@
-function gotoHandler(link) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    location.href = encodeURI(link);
-}
+const QUERY = $FW.Format.urlQuery();
+
 const Success = React.createClass({
-    backToMallHandler: function () {
-        gotoHandler("https://mmall.9888.cn");
-        /*function back2times() {
-         NativeBridge.toNative('app_back_native')
-         }
-         $FW.Browser.inApp() ? back2times() : location.href = '/'
-         */
-    },
     render: function () {
         let query = $FW.Format.urlQuery();
         let status = query.status;
@@ -42,14 +30,13 @@ const Success = React.createClass({
                 </div>
                 <div className="success-btn">
                     <a href={href} className="success-btn1">{seeOrder}</a>
-                    <a onClick={this.backToMallHandler} className="success-btn2">返回商城</a>
+                    <a href="/" className="success-btn2">返回商城</a>
                 </div>
             </div>
         )
     }
 });
 
-window.ProductBizNo = null;
 
 $FW.DOMReady(function () {
     let query = $FW.Format.urlQuery();
