@@ -70,7 +70,8 @@ const ConfirmOrder = React.createClass({
                     if (result.status == 1) {
                         location.href =
                             '/static/mall/payment/index.html?merchantNo=' + result.merchantNo +
-                            '&amount=' + result.amount +'&payableRmbAmt=' + result.totalShouldPayPrice + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
+                            '&amount=' + result.amount + '&payableRmbAmt=' + result.totalShouldPayPrice + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
+                            + '&createdTime=' + result.duration
                     }
                     else {
                         location.href = '/static/mall/order-complete/index.html?status=S'

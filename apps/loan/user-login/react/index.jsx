@@ -65,6 +65,9 @@ const Register = React.createClass({
             location.href= `/static/loan/user-reset-password/index.html?phone=${PHONE}&codeToken=${data.codeToken}`;
         }, err => $FW.Component.Toast(err.message));
     },
+    keyUpHandler (e){
+        if(e.keyCode === 13) this.loadingBtn()
+    },
     render() {
 
         let {plainCode} = this.state;
@@ -85,7 +88,7 @@ const Register = React.createClass({
                         <div className="icon"></div>
                         <div className="input">
                             <input type={plainCode ? "text" : "password"} value={this.state.password}
-                                placeholder="请输入登录密码" onChange={this.changePasswordHandler} />
+                                placeholder="请输入登录密码" onKeyUp={this.keyUpHandler} onChange={this.changePasswordHandler} />
                         </div>
 
                         <div className={this.state.plainCode?"pwd-icon1":"pwd-icon"} onClick={this.handlePlainCode}>
@@ -97,8 +100,7 @@ const Register = React.createClass({
                     <div className="ui-btn" onClick={this.loadingBtn}>确定</div>
                 </div>
                 <div className="forget-pwd-link">
-                    <a onClick={this.passwordHandler}>
-                        忘记密码?</a>
+                    <a onClick={this.passwordHandler}> 忘记密码?</a>
                 </div>
             </div>
         )

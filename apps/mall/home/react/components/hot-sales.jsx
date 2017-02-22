@@ -45,7 +45,11 @@ const HotSales = React.createClass({
                     href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
                     <img src={product.img} />
                     <span className="product-name">{product.title}</span>
-                    <span className="product-price">{product.score}工分</span>
+                    <span className="product-price">
+                        {product.price == 0 ? null : `¥${product.price}`}
+                        {product.price == 0 || product.score == 0 ? "" : "+"}
+                        {product.score == 0 ? null : `${product.score}工分`}
+                    </span>
                 </a>
             )
         }
