@@ -111,30 +111,24 @@ const SendCode = React.createClass({
             enable_loading: 'mini',
             data: FormData
         }).then(data=> {
-                if (e.responseResult.resCode == "00002") {//订单处理中 支付查询接口 应该加载
-                    $FW.Component.Alert(e.responseResult.resMessage);
-                } else {
-                    if (data.responseResult.status == "F") {
+                if (data.responseResult.status == "F") {
+                    window.location.href =
+                        "/static/mall/order-complete/index.html?status=F&failTex=" + data.responseResult.resMessage
+                }
+                if (data.responseResult.status == "S") {
+                    window.location.href =
+                        "/static/mall/order-complete/index.html?status=S"
+                }
+                if (final == 'final') {
+                    if (data.responseResult.status == "I") {
                         window.location.href =
-                            "/static/mall/order-complete/index.html?status=F&failTex=" + data.responseResult.resMessage
-                    }
-                    if (data.responseResult.status == "S") {
-                        window.location.href =
-                            "/static/mall/order-complete/index.html?status=S"
-                    }
-                    if (final == 'final') {
-                        if (data.responseResult.status == "I") {
-                            window.location.href =
-                                "/static/mall/order-complete/index.html?status=I&Tex=" + data.responseResult.resMessage
-                        }
+                            "/static/mall/order-complete/index.html?status=I&Tex=" + data.responseResult.resMessage
                     }
                 }
-
             },
             e => {
-                $FW.Component.Alert(${e.message});
-                /* window.location.href =
-                 "/static/mall/order-complete/index.html?status=F&failTex=" + (e.msg || e.message)*/
+                window.location.href =
+                    "/static/mall/order-complete/index.html?status=F&failTex=" + (e.msg || e.message)
             })
     },
 
@@ -152,19 +146,13 @@ const SendCode = React.createClass({
             data: FormData
         }).then(data=> {
             $FW.Component.showAjaxLoading('mini');
-            if (data.responseResult.resCode == "20005") {//短信校验失败 支付确认接口 应该加载
-                $FW.Component.Alert(data.responseResult.resMessage);
-            } else if (data.responseResult.resCode == "00000") {//成功
-                setTimeout(() => {
-                    this.queryState();
-                }, 3000);
-                setTimeout(() => {
-                    this.queryState('final');
-                }, 6000);
-            } else {
-                window.location.href = `/static/mall/order-complete/index.html?status=F&failTex=${data.message}`
-            }
+            setTimeout(() => {
+                this.queryState();
+            }, 3000);
 
+            setTimeout(() => {
+                this.queryState('final');
+            }, 6000);
 
             // if(data.status=="I"){
             //$FW.Component.showAjaxLoading();
@@ -184,7 +172,9 @@ const SendCode = React.createClass({
             //window.location.href = location.protocol + '//' + location.hostname +
             //    "/static/mall/order-complete/index.html?id="+data.tradeNo
         }, e => {
-            $FW.Component.Alert(${e.message});
+            if (e.responseResult.resCode == "20005") {
+                $FW.Component.Alert(e.responseResult.resMessage);
+            }
         })
 
     },
