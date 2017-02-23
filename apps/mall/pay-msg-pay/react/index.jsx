@@ -119,6 +119,10 @@ const SendCode = React.createClass({
                     window.location.href =
                         "/static/mall/order-complete/index.html?status=S"
                 }
+                if (data.responseResult.status == "I") {
+                    window.location.href =
+                        "/static/mall/order-complete/index.html?status=S&failTex=" + data.msg
+                }
             },
             e => {
                 window.location.href =
@@ -142,7 +146,7 @@ const SendCode = React.createClass({
             $FW.Component.showAjaxLoading('mini');
             setTimeout(() => {
                 this.queryState();
-            }, 2000);
+            }, 3000);
 
             // if(data.status=="I"){
             //$FW.Component.showAjaxLoading();
