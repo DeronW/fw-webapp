@@ -99,7 +99,7 @@ const Header = React.createClass({
         return (
             <div style={{ height: height + 'px' }}>
                 <div className="_style_header_fixed" style={_style_header_fixed}>
-                    {this.state.show_back_btn ? back_btn : null}
+                    {this.state.show_back_btn && back_btn}
                     {title}
                 </div>
             </div>
