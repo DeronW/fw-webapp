@@ -47,18 +47,14 @@ body {
 			width: 50%;
 			border-right: 1px solid #fff;
 			text-align: center;
-      float:left;
-			&:last-child {
-				border-right: none;
-			}
-
+      position:absolute;
+      top:30px;
 			.text {
 				display: block;
 				line-height: 27px;
 				font-size: 27px;
         color:#999;
 			}
-
 			.num-text {
 				display: block;
 				font-size: 36px;
@@ -66,9 +62,14 @@ body {
         color:#333;
         margin-bottom:4px;
 			}
-
-
 		}
+    .info1{
+      left:0;
+    }
+    .info2{
+      border-right:none;
+      left:50%;
+    }
     .vertical-line{
       width:1px;
       height:72px;

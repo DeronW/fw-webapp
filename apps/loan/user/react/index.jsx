@@ -90,11 +90,11 @@ const MyCnt = React.createClass({
                             <div className="text">累计借款(元)</div>
                         </div>
                         <div className="loan-info">
-                            <div className="info">
+                            <div className="info info1">
                                 <span className="num-text">{this.state.indexloadpageData.loanCount}</span>
                                 <span className="text">借款次数</span>
                             </div>
-                            <div className="info">
+                            <div className="info info2">
                                 <span className="num-text">{this.state.indexloadpageData.overdueCount}</span>
                                 <span className="text">逾期次数</span>
                             </div>
