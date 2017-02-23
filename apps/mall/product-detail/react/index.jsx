@@ -16,11 +16,11 @@ const Product = React.createClass({
     },
 
     toggleHandler: function () {
-        this.setState({show: !this.state.show});
+        this.setState({ show: !this.state.show });
     },
 
     childEventHandler: function (params, value) {
-        this.setState({showOverlayDef: true, showOverlay: params, value: value});
+        this.setState({ showOverlayDef: true, showOverlay: params, value: value });
     },
 
     shopHandler: function (e) {
@@ -42,9 +42,7 @@ const Product = React.createClass({
         }.bind(this), false);
     },
     render: function () {
-        let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
-        let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
-        let topBuyCart = inApp ? "_style_buy_cart _top_buy_cart" : "_style_buy_cart";
+        let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
 
         let data = this.props.data;
         let score = data.score ? <span className="score">{data.score}工分</span> : "";
@@ -63,7 +61,7 @@ const Product = React.createClass({
                     <div className="act-explain-head" onClick={this.toggleHandler}>
                         <div className="detail-explain-h">活动说明</div>
                         <div className={this.state.show ? "act-explain-btn on" : "act-explain-btn"}
-                             style={{}}></div>
+                            style={{}}></div>
                     </div>
                     {detail_explain_cont}
                 </div>
@@ -83,7 +81,7 @@ const Product = React.createClass({
                 </div>
                 <div className="product-content">
                     {data.desc ? <div className="desc">{data.desc}</div> : null}
-                    {data.rich_detail.map((i, index) => <img src={i} key={index}/>)}
+                    {data.rich_detail.map((i, index) => <img src={i} key={index} />)}
                 </div>
             </div>
         }
@@ -132,7 +130,7 @@ const Product = React.createClass({
                     <span className="_style_buy_cart_span"></span>
                 </a>
                 {data.head_images && data.head_images.length ?
-                    <BannerGroup className="head-images" images={data.head_images}/> :
+                    <BannerGroup className="head-images" images={data.head_images} /> :
                     <div className="no-head-images"></div>}
 
                 <div className="detail-inf">
@@ -174,9 +172,9 @@ const Product = React.createClass({
                 {rich_detail}
                 <div className="auth-info only-in-ios-app">以上活动由金融工场主办 与Apple Inc.无关</div>
                 <PlusMinus is_login={data.is_login} stock={data.stock} ticket_count={data.ticketList}
-                           parentCallback={this.childEventHandler}
-                           check_messages={data.checkMessages}
-                           voucher_only={data.supportTicket} isCanBuy={data.isCanBuy}/>
+                    parentCallback={this.childEventHandler}
+                    check_messages={data.checkMessages}
+                    voucher_only={data.supportTicket} isCanBuy={data.isCanBuy} />
             </div>
         )
     }
@@ -198,7 +196,7 @@ const PlusMinus = React.createClass({
 
         // 检查当前用户(或未登录用户)是否可以点这个按钮
         if (this.props.ticket_count == 0 && this.props.check_messages.length) {
-            $FW.Component.Alert(this.props.check_messages, {header: '不满足购买条件'});
+            $FW.Component.Alert(this.props.check_messages, { header: '不满足购买条件' });
             return
         }
         if (this.props.ticket_count < 1 && this.props.voucher_only) {
@@ -264,7 +262,7 @@ const PlusMinus = React.createClass({
 
         // 检查当前用户(或未登录用户)是否可以点这个按钮
         if (this.props.ticket_count == 0 && this.props.check_messages.length) {
-            $FW.Component.Alert(this.props.check_messages, {header: '不满足购买条件'});
+            $FW.Component.Alert(this.props.check_messages, { header: '不满足购买条件' });
             return
         }
         if (this.props.ticket_count < 1 && this.props.voucher_only) {
@@ -305,7 +303,7 @@ const PlusMinus = React.createClass({
                         {this.state.value}
                     </div>
                     <div className={this.state.value < this.props.stock ? "plus" : "plus gray"}
-                         onClick={this.changePlus}></div>
+                        onClick={this.changePlus}></div>
                 </div>
                 <a className="btn-buy btn-buy-card" onClick={this.toggleOverlay}>加入购物车</a>
                 <a onClick={this.buyHandler} className={this.props.stock < 1 ? "btn-buy btn-buy-dis" : "btn-buy"}>
@@ -320,7 +318,7 @@ const EmptyProduct = React.createClass({
     render: function () {
         return (
             <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
-                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg'/>
+                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg' />
                 <div style={{ fontSize: "30px", color: "#8591b3", textAlign: "center" }}>
                     抱歉, 没有找到相关商品!
                 </div>
@@ -339,11 +337,11 @@ $FW.DOMReady(function () {
         enable_loading: 'mini'
     }).then(data => {
         data.title ?
-            ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
+            ReactDOM.render(<Product data={data} />, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
     })
 
-    ReactDOM.render(<Header title={""}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={""} />, HEADER_NODE);
 });
 
 function trim(s) {
