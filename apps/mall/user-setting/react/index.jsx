@@ -43,11 +43,4 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Account/>, CONTENT_NODE);
 });
 
-			var data={count: 6, page: 2};
-			var formData = '';
-			for (var i in data) {
-				if (formData) formData += '&';
-                formData += i + '=' + data[i];
-            }
-			alert(formData)
-			alert(1)
+			
