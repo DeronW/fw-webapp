@@ -2,14 +2,30 @@
 const ConfirmLoan = React.createClass({
     getInitialState: function () {
         return {
-            checked: false
+            checked: false,
+            orderGid: null
         }
     },
     confirmHandler: function () {
         if (this.state.checked == false) {
             $FW.Component.Toast("请同意放心花借款服务协议和放心花借款协议");
         } else {
-            this.props.callbackVerifyCodeShow(true);
+            let query = $FW.Format.urlQuery();
+            let orderGid = query.orderGid;
+            $FW.Ajax({
+                url: `${API_PATH}api/loan/v1/sendSmsverifycode.json`,
+                method: "post",
+                data: {
+                    token: USER.token,
+                    userGid: USER.gid,
+                    userId: USER.id,
+                    sourceType: SOURCE_TYPE,
+                    orderGid: orderGid
+                }
+            }).then(data => {
+                this.props.callbackVerifyCodeShow(true);
+                //this.setState({orderGid: data.orderGid});
+            }, (err) => $FW.Component.Toast(err));
         }
     },
     checkHandler: function () {

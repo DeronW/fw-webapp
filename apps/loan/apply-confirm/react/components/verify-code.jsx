@@ -2,7 +2,6 @@ const VerifyCode = React.createClass({
     getInitialState: function () {
         return {
             phoneNum: null,
-            orderGid: null,
             countdown: 0,
             show_warn: false,
             value: ''
@@ -28,27 +27,14 @@ const VerifyCode = React.createClass({
         }, 1000);
     },
     componentDidMount: function () {
-        let query = $FW.Format.urlQuery();
-        let orderGid = query.orderGid;
         this.countingDown();
-        $FW.Ajax({
-            url: `${API_PATH}api/loan/v1/sendSmsverifycode.json`,
-            method: "post",
-            data: {
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE,
-                orderGid: orderGid
-            }
-        }).then(data => {
-            this.setState({orderGid: data.orderGid});
-        }, (err) => $FW.Component.Toast(err));
     },
     componentWillUnmount() {
         clearInterval(this.timer);
     },
     getSMSCode: function () {
+        let query = $FW.Format.urlQuery();
+        let orderGid = query.orderGid;
         if (this.state.countdown <= 0) {
             this.countingDown();
             $FW.Ajax({
@@ -59,7 +45,7 @@ const VerifyCode = React.createClass({
                     userGid: USER.gid,
                     userId: USER.id,
                     sourceType: SOURCE_TYPE,
-                    orderGid: this.state.orderGid
+                    orderGid: orderGid
                 }
             });
         }
