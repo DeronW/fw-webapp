@@ -87,8 +87,7 @@ const Payment = React.createClass({
                 </div>
                 <div className={this.state.index=="quick_pay" ? "pay-check active" : "pay-check"}></div>
             </div>;
-
-        var payMethods = data.bankCards ?
+        var payMethods = data ?
             data.map((n, index) => {
                 let accountNo = this.split(n.accountNo);
 
