@@ -36,10 +36,13 @@ const Header = React.createClass({
 
         // compatible with iPhone state bar, move down 22px
         let inIOSAPP = false;
-        if ($FW.Browser.inIOS() && $FW.Browser.inApp()) {
-            height += IOS_DELTA;
-            lineHeight += IOS_DELTA * 2.4;
-            inIOSAPP = true;
+        if ($FW.Browser.inIOSApp()) {
+            // hack, 商品详情页面不做iOS的手机状态栏高度兼容
+            if (location.href.indexOf('/static/mall/product-detail/') < 0) {
+                height += IOS_DELTA;
+                lineHeight += IOS_DELTA * 2.4;
+                inIOSAPP = true;
+            }
         }
 
         let fontSize = title && title.length > 7 ? '36px' : '32px';
@@ -87,7 +90,7 @@ const Header = React.createClass({
         }
 
         if (inIOSAPP) {
-            _img_style.top = 30 + IOS_DELTA +　'px';
+            _img_style.top = 30 + IOS_DELTA + 　'px';
             _style_header_arrow.top = IOS_DELTA + 'px';
         }
 
