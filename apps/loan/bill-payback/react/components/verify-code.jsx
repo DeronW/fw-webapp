@@ -55,6 +55,8 @@ const VerifyCode = React.createClass({
                 userId: USER.id,
                 sourceType: SOURCE_TYPE,
                 verifyCode: this.state.value
+            }).then(()=>{
+               return new Promise(resolve => setTimeout(resolve, 5000))
             }).then((data) => {
                 this.props.callbackResultShow(true, false);
                 this.props.callbackGetRepaymentGid(data.repaymentGid);
