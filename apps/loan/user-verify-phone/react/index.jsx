@@ -16,7 +16,8 @@ const VerifyPhone = React.createClass({
             popShow: false,
             popText: '',
             popBtnText: '',
-            popStatus: null
+            popStatus: null,
+            popShow:false
         }
     },
     componentDidMount() {
@@ -89,13 +90,7 @@ const VerifyPhone = React.createClass({
             } else if (bs.status == 1) {
                 window.location.href = '/static/loan/user-card-management/index.html';
             } else if (bs.status == 2) {
-                //失败
-                // this.setState({
-                //     popShow: true,
-                //     popText: bs.failReason,
-                //     popBtnText: "确定",
-                //     popStatus: 2
-                // });
+
                 setTimeout(() => {
                     $FW.Component.Toast(bs.failReason);
                 }, 1000)
@@ -126,27 +121,37 @@ const VerifyPhone = React.createClass({
             <div className="get-code-btn" onClick={this.handleGetCode}>重新获取</div>;
 
         return (
-            <div className="verify-phone-cnt">
-                {this.state.popShow && pop()}
-                <div className="prompt-text">
-                    验证码已发送到尾号<span>{PHONE.substr(7)}</span> 的手机上
-                </div>
+            <div>
+                <div className="verify-phone-cnt">
+                    {this.state.popShow && pop()}
+                    <div className="prompt-text">
+                        验证码已发送到尾号<span>{PHONE.substr(7)}</span> 的手机上
+                    </div>
 
-                <div className="ui-froms">
-                    <div className="list code-list">
-                        <span className="text">验证码</span>
-                        <div className="input">
-                            <input type="number" onChange={this.changeCode}
-                                value={this.state.codeVal} placeholder="请输入验证码" />
+                    <div className="ui-froms">
+                        <div className="list code-list">
+                            <span className="text">验证码</span>
+                            <div className="input">
+                                <input type="number" onChange={this.changeCode}
+                                       value={this.state.codeVal} placeholder="请输入验证码" />
+                            </div>
+                            {btnSMSCode}
                         </div>
-                        {btnSMSCode}
+                    </div>
+
+                    <div className="determine-btn">
+                        <div className="ui-btn" onClick={this.definiteBtn}>确定</div>
                     </div>
                 </div>
-
-                <div className="determine-btn">
-                    <div className="ui-btn" onClick={this.definiteBtn}>确定</div>
+                <div className="mask" style={{zIndex:100}}>
+                    <div className="popup">
+                         <div className="popup-title">设置提现卡失败</div>
+                         <div className="popup-reason">设置提现卡失败</div>
+                         <div className="popup-btn">确定</div>
+                    </div>
                 </div>
             </div>
+
         )
     }
 });
