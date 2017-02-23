@@ -95,7 +95,7 @@ const User = React.createClass({
                     </a>
                 </div>
                 <div className="icon-list">
-                    /*
+                    {/*
                     <a className="list-box" href="/static/mall/user-prize-record/index.html">
                         <img src="images/icon9.jpg"/>
                         <span className="box-title1">抽奖记录</span>
@@ -103,7 +103,7 @@ const User = React.createClass({
                     <a className="list-box">
                         <img src="images/icon11.jpg"/>
                         <span className="box-title2">我的足迹</span>
-                    </a>*/
+                    </a>*/}
                     <a className="list-box" href="tel:400-0322-988">
                         <img src="images/icon10.jpg"/>
                         <span className="box-title3">客服热线</span>
