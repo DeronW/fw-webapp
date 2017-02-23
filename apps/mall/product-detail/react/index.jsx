@@ -290,30 +290,6 @@ const PlusMinus = React.createClass({
                 gotoHandler(linkLogin) //$FW.Component.Alert("请先登录");
             }
         }
-
-        /*
-         if (this.props.is_login==1) {
-         if ($FW.Browser.inApp()) {
-         // 注意: 这里有个hole
-         // 非种cookie 用这种
-         //NativeBridge.login(link)
-         // 需要测试, 在APP内需要根据APP的登录状态来判断是否用这种登录方式, 种cookie用这种
-         //NativeBridge.goto(link, true)
-
-         //$FW.Browser.appVersion() >= $FW.AppVersion.show_header ?
-         NativeBridge.goto(link, true)// :
-         //NativeBridge.login(link);
-
-         } else {
-         location.href = link
-         }
-         } else {
-         if (!isCanBuy) {
-         $FW.Component.Alert("请先登录");
-         }
-         }
-         */
-
     },
 
     blur: function (e) {

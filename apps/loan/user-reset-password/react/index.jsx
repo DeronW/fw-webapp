@@ -81,11 +81,12 @@ const Register = React.createClass({
                 verifyCode: code,
                 sourceType: SOURCE_TYPE
             }).then(data => {
-                let {userGid, userId, userToken} = data.userPasswordOption;
+                let dict = data.userPasswordOption;
                 $FW.Store.setUserDict({
-                    gid: userGid,
-                    id: userId,
-                    token: userToken
+                    token: dict.userToken,
+                    id: dict.userId,
+                    gid: dict.userGid,
+                    status: dict.userStatus
                 })
 
                 window.location.href = "/static/loan/home/index.html"

@@ -82,7 +82,8 @@ const SetPassword = React.createClass({
                 $FW.Store.setUserDict({
                     token: dict.userToken,
                     id: dict.userId,
-                    gid: dict.userGid
+                    gid: dict.userGid,
+                    status: dict.userStatus
                 })
 
                 location.href = `/static/loan/home/index.html`;
