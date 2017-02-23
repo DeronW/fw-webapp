@@ -57,7 +57,8 @@ const Header = React.createClass({
             zIndex: '9',
             textShadow: "0 0 8px white",
             fontSize: fontSize,
-            borderBottom: "1px solid #d8d8d8"
+            borderBottom: "1px solid #d8d8d8",
+            color: "#333"
         };
 
         var _style_header_arrow = {
