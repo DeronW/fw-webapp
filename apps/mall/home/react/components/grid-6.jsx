@@ -30,7 +30,7 @@ const Grid_6 = React.createClass({
         return (
             <div className="theme-1">
                 <a className="activity-theme">
-                    <img src="static/mall/product-list/images/outdoor.jpg"/></a>
+                    <img src="/static/mall/product-list/images/mobileDigital.jpg"/></a>
                 <div className="theme-product-wrap">
                     {products.map(theme_product_item)}
                 </div>

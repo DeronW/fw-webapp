@@ -157,7 +157,7 @@ const Address = React.createClass({
                     if (data.address_count > 1) {
                         link = '/static/mall/user-deliver-address/index.html?cartFlag=' + query.cartFlag + '&prd=' + query.prd + '&buyNum=' + query.buyNum;
                     } else {
-                        link = '/static/mall/user-confirm/index.html?address_id=' + data.address_id + '&cartFlag=' + query.cartFlag + '&prd=' + query.prd + '&buyNum=' + query.buyNum;
+                        link = '/static/mall/order-confirm/index.html?address_id=' + data.address_id + '&cartFlag=' + query.cartFlag + '&prd=' + query.prd + '&buyNum=' + query.buyNum;
                     }
                     location.href = link
                 }

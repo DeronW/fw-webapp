@@ -7,7 +7,7 @@ const VipMsg = React.createClass({
         }
     },
     closeHandler: function () {
-        this.setState({show: false});
+        this.setState({ show: false });
     },
     render: function () {
         let user_level_manifest;
@@ -53,7 +53,7 @@ const VipZone = React.createClass({
     },
 
     tabClickHandler: function (tab) {
-        this.setState({tab: tab, products: window.Products[tab]});
+        this.setState({ tab: tab, products: window.Products[tab] });
         if (window.Products[tab].length == 0) {
             setTimeout(function () {
                 this.loadMoreProductHandler(null);
@@ -79,37 +79,37 @@ const VipZone = React.createClass({
             is_Level = 5
         }
 
-//      $FW.Ajax({
-//          url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.count + '&page=' + page + '&vipLevel=' + is_Level,
-//          enable_loading: true,
-//          success: function (data) {
-//              let tab;
-//              if (data.vipLevel == -1) {
-//                  tab = 'all'
-//              } else if (data.vipLevel == 1) {
-//                  tab = 'vipLevel0'
-//              } else if (data.vipLevel == 2) {
-//                  tab = 'vipLevel1'
-//              } else if (data.vipLevel == 3) {
-//                  tab = 'vipLevel2'
-//              } else if (data.vipLevel == 4) {
-//                  tab = 'vipLevel3'
-//              } else if (data.vipLevel == 5) {
-//                  tab = 'vipLevel4'
-//              } else {
-//                  done && done();
-//                  return;
-//              }
-//
-//              window.Products[tab] = window.Products[tab].concat(data.products);
-//              let products = window.Products[this.state.tab];
-//              let new_page = this.state.page;
-//              new_page[this.state.tab] = new_page[this.state.tab] + 1;
-//              if (data.totalCount < 20) new_page[this.state.tab] = 0;
-//              this.setState({products: products, page: new_page});
-//              done && done();
-//          }.bind(this)
-//      });
+        //      $FW.Ajax({
+        //          url: API_PATH + 'mall/api/index/v1/vip_list.json?count=' + this.count + '&page=' + page + '&vipLevel=' + is_Level,
+        //          enable_loading: true,
+        //          success: function (data) {
+        //              let tab;
+        //              if (data.vipLevel == -1) {
+        //                  tab = 'all'
+        //              } else if (data.vipLevel == 1) {
+        //                  tab = 'vipLevel0'
+        //              } else if (data.vipLevel == 2) {
+        //                  tab = 'vipLevel1'
+        //              } else if (data.vipLevel == 3) {
+        //                  tab = 'vipLevel2'
+        //              } else if (data.vipLevel == 4) {
+        //                  tab = 'vipLevel3'
+        //              } else if (data.vipLevel == 5) {
+        //                  tab = 'vipLevel4'
+        //              } else {
+        //                  done && done();
+        //                  return;
+        //              }
+        //
+        //              window.Products[tab] = window.Products[tab].concat(data.products);
+        //              let products = window.Products[this.state.tab];
+        //              let new_page = this.state.page;
+        //              new_page[this.state.tab] = new_page[this.state.tab] + 1;
+        //              if (data.totalCount < 20) new_page[this.state.tab] = 0;
+        //              this.setState({products: products, page: new_page});
+        //              done && done();
+        //          }.bind(this)
+        //      });
 
 
         $FW.Ajax({
@@ -153,7 +153,7 @@ const VipZone = React.createClass({
                 let new_page = this.state.page;
                 new_page[this.state.tab] = new_page[this.state.tab] + 1;
                 if (data.totalCount < 20) new_page[this.state.tab] = 0;
-                this.setState({products: products, page: new_page});
+                this.setState({ products: products, page: new_page });
                 done && done();
             }.bind(this)
         });
@@ -185,8 +185,8 @@ const VipZone = React.createClass({
                 vipLevel4: 'VIP4'
             };
             return (
-                <div key={i} className={i==_this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
-                     onClick={function(){_this.tabClickHandler(i)}}>
+                <div key={i} className={i == _this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
+                    onClick={function () { _this.tabClickHandler(i) }}>
                     <span className="text">{name[i]}</span>
                 </div>
             )
@@ -196,9 +196,9 @@ const VipZone = React.createClass({
             <div>
                 <div id="msg"></div>
                 <div className="ui-tab"
-                     onTouchStart={_this.handleTouchStart}
-                     onTouchMove={_this.handleTouchMove}
-                     onTouchEnd={_this.handleTouchEnd}
+                    onTouchStart={_this.handleTouchStart}
+                    onTouchMove={_this.handleTouchMove}
+                    onTouchEnd={_this.handleTouchEnd}
                 >
                     <div className="ui-tab-block" style={marginStyle}>
                         {this.tabs.map(tab)}
@@ -206,7 +206,7 @@ const VipZone = React.createClass({
                     </div>
                 </div>
                 <div className="products-list">
-                    {this.state.products.map((p, index) => <ProductItem {...p} key={index}/>) }
+                    {this.state.products.map((p, index) => <ProductItem {...p} key={index} />)}
                     {this.state.products.length == 0 && this.state.page[this.state.tab] == 0 ?
                         <div className="empty-list">暂无商品</div> : null}
                 </div>
@@ -218,26 +218,31 @@ const VipZone = React.createClass({
 const ProductItem = React.createClass({
     render: function () {
         var show_price = this.props.price != 0 || this.props.score == 0;
-        var score = parseFloat(this.props.score) > 0 ?
-            <span className="list-price-score">{show_price ?
-                <span>&#43;</span> : null}{this.props.score}工分</span> : null;
-        var Angle = this.props.angle_text ? <div className="list-label">{this.props.angle_text}</div> : null;
-        var cover_bg = 'url(' + this.props.img || 'images/default-product.jpg' + ')';
+        let score;
+        if (parseFloat(this.props.score) > 0) {
+            score = <span className="list-price-score">
+                {show_price && <span>&#43;</span>}{this.props.score}工分</span>
+        }
+
+        let Angle = this.props.angle_text &&
+            <div className="list-label">{this.props.angle_text}</div>;
 
         return (
             <a href={'/static/mall/product-detail/index.html?bizNo=' + this.props.bizNo} className="index-actList-a">
-                <div className="list-img" style={{backgroundImage: cover_bg}}></div>
+                <div className="list-img">
+                    <img src={this.props.img || 'images/default-product.jpg'} />
+                </div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
                 <div className="list-mark">
-                    { (this.props.tags || []).map((d, index) => <div key={index}>{d}</div>) }
+                    {(this.props.tags || []).map((d, index) => <div key={index}>{d}</div>)}
                 </div>
                 <div className="list-price-box">
                     <div className="list-price">
-                        {show_price ? <span className="list-price-mark">&yen;</span> : null}
-                        {show_price ?
-                            <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span> : null}
-                        { score }
+                        {show_price && <span className="list-price-mark">&yen;</span>}
+                        {show_price &&
+                            <span className="list-price-num">{$FW.Format.currency(this.props.price)}</span>}
+                        {score}
                     </div>
                     <div className="list-sold">
                         <span>累计销量 </span>
@@ -259,7 +264,7 @@ window.Products = {
 };
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"VIP专区"}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"VIP专区"} />, HEADER_NODE);
 
     $FW.Ajax({
         url: `${API_PATH}mall/api/member/v1/user_level_points.json`,
@@ -267,14 +272,9 @@ $FW.DOMReady(function () {
         success: function (data) {
             if (data.loginOk) {
                 ReactDOM.render(<VipMsg user_level={data.vip_level}
-                                        user_score={data.score}/>, document.getElementById('msg'));
+                    user_score={data.score} />, document.getElementById('msg'));
             }
         }
     });
-    ReactDOM.render(<VipZone/>, CONTENT_NODE);
+    ReactDOM.render(<VipZone />, CONTENT_NODE);
 });
-
-
-//window.onNativeMessageReceive = function (msg) {
-//	if (msg == 'history:back') backward()
-//};
