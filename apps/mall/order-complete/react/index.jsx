@@ -16,7 +16,8 @@ const Success = React.createClass({
             seeOrder = "查看订单"
         }
         if (status == "I") {
-            statusTex = query.Tex
+            statusTex = query.Tex;
+            seeOrder = "重新支付"
         }
         let href = `/static/mall/order-list/index.html`;
 
