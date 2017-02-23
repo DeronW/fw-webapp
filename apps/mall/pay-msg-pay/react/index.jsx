@@ -121,7 +121,7 @@ const SendCode = React.createClass({
                 }
                 if (data.responseResult.status == "I") {
                     window.location.href =
-                        "/static/mall/order-complete/index.html?status=S&failTex=" + data.msg
+                        "/static/mall/order-complete/index.html?status=I&Tex=" + data.responseResult.resMessage
                 }
             },
             e => {
