@@ -12,7 +12,7 @@ const Grid_2 = React.createClass({
                 recommendBizNo: this.state.bizNo,
                 totalCount: this.props.count
             }
-        }).then(data => this.setState({ products: data.products }))
+        }).then(data => this.setState({products: data.products}))
     },
     render: function () {
         let theme_product_item = (product, index) => {
@@ -24,14 +24,14 @@ const Grid_2 = React.createClass({
                 </a>
             )
         };
-        return (
-            <div className="theme-1">
-                <a className="activity-theme">
-                    <img src="/static/mall/product-list/images/fantasy.jpg"/></a>
-                <div className="theme-product-wrap">
-                    {this.state.products.map(theme_product_item)}
-                </div>
-            </div>
+        return (this.state.products ?
+                <div className="theme-1">
+                    <a className="activity-theme">
+                        <img src="/static/mall/product-list/images/diet.jpg"/></a>
+                    <div className="theme-product-wrap">
+                        {this.state.products.map(theme_product_item)}
+                    </div>
+                </div> : null
         )
     }
 });

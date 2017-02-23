@@ -12,14 +12,14 @@ const HotProducts = React.createClass({
                 recommendBizNo: this.state.bizNo,
                 totalCount: this.props.count
             }
-        }).then(data => this.setState({ ps: data.products }))
+        }).then(data => this.setState({ps: data.products}))
     },
     render: function () {
         let hot_product_item = (product, index) => {
             return (
                 <a className={`hot-product-item hot-product-item-bg-${index + 1}`} key={index}
-                    href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
-                    <img className="hot-img" src={product.img} />
+                   href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
+                    <img className="hot-img" src={product.img}/>
                     <span className={"hot-img-title hot-img-title-color-" + parseInt(index + 1)}>
                         {product.abbreviation}</span>
                     <span
@@ -31,13 +31,13 @@ const HotProducts = React.createClass({
                 </a>
             )
         };
-        return (
-            <div className="hot-product-list">
-                <div className="hot-title"><img className="hot-title-img" src="images/hot-title.png" /></div>
-                <div className="hot-product-wrap">
-                    {this.state.ps.map(hot_product_item)}
-                </div>
-            </div>
+        return (this.state.ps ?
+                <div className="hot-product-list">
+                    <div className="hot-title"><img className="hot-title-img" src="images/hot-title.png"/></div>
+                    <div className="hot-product-wrap">
+                        {this.state.ps.map(hot_product_item)}
+                    </div>
+                </div> : null
         )
     }
 });
