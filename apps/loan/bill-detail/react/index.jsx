@@ -50,6 +50,8 @@ const Detail = React.createClass({
                     </div>
                 </div>
                 {loanStatus == 102 ||  loanStatus == 103 ? <div className="pay-back-btn" onClick={() => gotoHandler(`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${$FW.Store.getUserToken()}&userGid=${$FW.Store.getUserGid()}&userId=${$FW.Store.getUserId()}`)}>立即还款</div> : null}
+                {loanStatus == 4 && <div className="deposit-btn">打款中</div>}
+                {loanStatus == 101 && <div className="deposit-btn">还款中</div>}
             </div>
         )
     }

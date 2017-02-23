@@ -82,20 +82,24 @@ const VerifyPhone = React.createClass({
                 } else {
                     $FW.Component.Toast("处理中");
                     setTimeout(() => {
-                        window.location.href = '/'
+                        //window.location.href = '/static/loan/home/index.html'
+                        window.history.go(-2);
                     }, 1000)
                 }
             } else if (bs.status == 1) {
-                window.location.href = '/';
+                window.location.href = '/static/loan/user-card-management/index.html';
             } else if (bs.status == 2) {
                 //失败
-                this.setState({
-                    popShow: true,
-                    popText: bs.failReason,
-                    popBtnText: "确定",
-                    popStatus: 2
-                });
-                $FW.Component.Toast(bs.failReason);
+                // this.setState({
+                //     popShow: true,
+                //     popText: bs.failReason,
+                //     popBtnText: "确定",
+                //     popStatus: 2
+                // });
+                setTimeout(() => {
+                    $FW.Component.Toast(bs.failReason);
+                }, 1000)
+                window.location.href = '/static/loan/user-card-set/index.html';
             }
         });
     },
