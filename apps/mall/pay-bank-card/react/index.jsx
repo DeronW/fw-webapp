@@ -34,40 +34,40 @@ const CardList = React.createClass({
 
         switch (r) {
             case "中国银行":
-                cardImg = "images/zg.png"
+                cardImg = "images/zg.jpg"
                 break;
             case "工商银行":
-                cardImg = "images/gs.png"
+                cardImg = "images/gs.jpg"
                 break;
             case "农业银行":
-                cardImg = "images/ny.png"
+                cardImg = "images/ny.jpg"
                 break;
             case "建设银行":
-                cardImg = "images/js.png"
+                cardImg = "images/js.jpg"
                 break;
             case "平安银行":
-                cardImg = "images/pa.png"
+                cardImg = "images/pa.jpg"
                 break;
             case "兴业银行":
-                cardImg = "images/xy.png"
+                cardImg = "images/xy.jpg"
                 break;
             case "光大银行":
-                cardImg = "images/gd.png"
+                cardImg = "images/gd.jpg"
                 break;
             case "浦发银行":
-                cardImg = "images/pf.png"
+                cardImg = "images/pf.jpg"
                 break;
             case "华兴银行":
-                cardImg = "images/hx.png"
+                cardImg = "images/hx.jpg"
                 break;
             case "北京银行":
-                cardImg = "images/bj.png"
+                cardImg = "images/bj.jpg"
                 break;
             case "中信银行":
-                cardImg = "images/zx.png"
+                cardImg = "images/zx.jpg"
                 break;
             case "广发银行":
-                cardImg = "images/gf.png";
+                cardImg = "images/gf.jpg";
                 break;
             default:
                 cardImg = ""

@@ -118,7 +118,7 @@ const Voucher = React.createClass({
 
         return (
             <div
-                className={ this.props.state == "used" || this.props.state == "dated" ? "my-voucher-cont-list gray-bg" : "my-voucher-cont-list color-bg"}>
+                className={ mark_name||this.props.state == "used" || this.props.state == "dated" ? "my-voucher-cont-list gray-bg" : "my-voucher-cont-list color-bg"}>
                 <a href={ this.props.state == 'used' || this.props.state == 'dated' ? 'javascript:void(0)' : '/static/mall/product-detail/index.html?bizNo=' + data.product_biz_no}>
                     <div className={gray_bg ? "t-info b-color" : "t-info"}>
                         <div className="title-info">
