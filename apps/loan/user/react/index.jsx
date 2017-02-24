@@ -63,7 +63,7 @@ const MyCnt = React.createClass({
             if (userStatus == 1) {
                 return "/static/loan/user-card-set/index.html";
             } else if (userStatus >= 2) {
-                return `/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`
+                return `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`
             }
         }
 
