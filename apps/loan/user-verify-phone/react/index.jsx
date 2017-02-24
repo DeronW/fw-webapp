@@ -16,12 +16,12 @@ const VerifyPhone = React.createClass({
             popText: '',
             popBtnText: '',
             popStatus: null,
-            popShow:false,
-            remain:0,
-            result:null,
-            transCode:null,
-            failReason:null,
-            show:false
+            popShow: false,
+            remain: 0,
+            result: null,
+            transCode: null,
+            failReason: null,
+            show: false
         }
     },
     componentDidMount() {
@@ -110,10 +110,10 @@ const VerifyPhone = React.createClass({
             sourceType: SOURCE_TYPE
         }).then(() => {
             let {remain} = this.state;
-            this.setState({remain:12});
+            this.setState({ remain: 12 });
             this.checkAjax();
             this.timer = setInterval(() => {
-                if(remain % 3 === 0) this.checkAjax();
+                if (remain % 3 === 0) this.checkAjax();
                 this.setState({ remain: remain - 1 });
                 if (remain <= 0) {
                     clearInterval(this.timer);
@@ -126,42 +126,42 @@ const VerifyPhone = React.createClass({
             //     this.checkAjax().then(check);
             // }
 
-            if(this.state.result == 0){
-                this.setState({show:true});
+            if (this.state.result == 0) {
+                this.setState({ show: true });
                 clearInterval(this.timer);
-                if(this.state.transCode == 1001){
-                    this.setState({show:false});
+                if (this.state.transCode == 1001) {
+                    this.setState({ show: false });
                     clearInterval(this.timer);
                     $FW.Component.Toast("验证码不正确");
                 }
-            }else if(this.state.result ==1){
-                 window.location.href = '/static/loan/user-card-management/index.html';
-            }else if(this.state.result ==2){
-                this.setState({show:true});
+            } else if (this.state.result == 1) {
+                window.location.href = '/static/loan/user-card-management/index.html';
+            } else if (this.state.result == 2) {
+                this.setState({ show: true });
                 clearInterval(this.timer);
             }
-        } , e=>$FW.Component.Toast(e.message));
+        }, e => $FW.Component.Toast(e.message));
 
     },
-    checkAjax(){
+    checkAjax() {
         $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
             operatorBankcardGid: BANK_GID,
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
             sourceType: SOURCE_TYPE
-        }).then((data)=>{
-            this.setState({result:data.status, transCode:data.transCode,failReason:data.failReason});
-        }, e =>$FW.Component.Toast(e.message));
+        }).then((data) => {
+            this.setState({ result: data.status, transCode: data.transCode, failReason: data.failReason });
+        }, e => $FW.Component.Toast(e.message));
     },
-    confirmHandler(){
-        if(this.state.result == 0){
+    confirmHandler() {
+        if (this.state.result == 0) {
             window.history.go(-2);
-        }else if(this.state.result == 2){
+        } else if (this.state.result == 2) {
             window.location.href = '/static/loan/user-card-set/index.html';
         }
     },
-    componentWillUnmount(){
+    componentWillUnmount() {
         clearInterval(this.timer);
     },
     // handlerBtn() {
@@ -199,7 +199,7 @@ const VerifyPhone = React.createClass({
                             <span className="text">验证码</span>
                             <div className="input">
                                 <input type="number" onChange={this.changeCode}
-                                       value={this.state.codeVal} placeholder="请输入验证码" />
+                                    value={this.state.codeVal} placeholder="请输入验证码" />
                             </div>
                             {btnSMSCode}
                         </div>
@@ -209,12 +209,12 @@ const VerifyPhone = React.createClass({
                         <div className="ui-btn" onClick={this.definiteBtn}>确定</div>
                     </div>
                 </div>
-                {this.state.show && <div className="mask" style={{zIndex:100}}>
+                {this.state.show && <div className="mask" style={{ zIndex: 100 }}>
                     <div className="popup">
-                        {this.state.result == 2 &&  <div className="popup-title">设置提现卡失败</div>}
+                        {this.state.result == 2 && <div className="popup-title">设置提现卡失败</div>}
                         {this.state.result == 2 && <div className="popup-reason">{this.state.failReason}</div>}
-                        {this.state.result == 0 &&  <div className="popup-title">请求正在处理中，请稍等</div>}
-                         <div className="popup-btn" onClick={this.confirmHandler}>确定</div>
+                        {this.state.result == 0 && <div className="popup-title">请求正在处理中，请稍等</div>}
+                        <div className="popup-btn" onClick={this.confirmHandler}>确定</div>
                     </div>
                 </div>}
             </div>
