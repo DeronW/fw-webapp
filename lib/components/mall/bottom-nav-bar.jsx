@@ -102,7 +102,7 @@ const BottomNavBar = React.createClass({
             width: '44px',
             height: '44px',
             display: 'block',
-            margin: '0 auto',
+            margin: '0 auto 3px'
         }
 
         return (
