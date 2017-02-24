@@ -21,16 +21,15 @@ const MyCnt = React.createClass({
         }
     },
     componentDidMount() {
-        let user = $FW.Store.getUserDict();
         Promise.all([
             $FW.Ajax({
                 url: API_PATH + "api/oriole/v1/indexloadpage.json",
                 method: "POST",
                 enable_loading: "mini",
                 data: {
-                    token: user.token,
-                    userGid: user.gid,
-                    userId: user.id,
+                    token: USER.token,
+                    userGid: USER.gid,
+                    userId: USER.id,
                     sourceType: SOURCE_TYPE
                 }
             }),
@@ -39,9 +38,9 @@ const MyCnt = React.createClass({
                 method: "POST",
                 enable_loading: "mini",
                 data: {
-                    token: user.token,
-                    userGid: user.gid,
-                    userId: user.id,
+                    token: USER.token,
+                    userGid: USER.gid,
+                    userId: USER.id,
                     productId: 1,
                     sourceType: SOURCE_TYPE
                 }
@@ -53,19 +52,18 @@ const MyCnt = React.createClass({
             });
         })
     },
-    clickHandler(){
+    clickHandler() {
         let userStatus = this.state.baseinfoData.borrowBtnStatus;
-        if(userStatus == 101) $FW.Component.Toast("设置提现卡申请处理中，请稍等");
+        if (userStatus == 101) $FW.Component.Toast("设置提现卡申请处理中，请稍等");
     },
     render() {
         let userStatus = this.state.baseinfoData.borrowBtnStatus;
-        let user = $FW.Store.getUserDict()
 
         let creditUrl = () => {
             if (userStatus == 1) {
                 return "/static/loan/user-card-set/index.html";
             } else if (userStatus >= 2) {
-                return `/api/credit/v1/creditlist.shtml?sourceType=2&token=${user.token}&userId=${user.id}`
+                return `/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`
             }
         }
 
@@ -125,13 +123,6 @@ const MyCnt = React.createClass({
                             </a>
                         </div>
                         {/*<div className="list-cnt">
-							<a href="">
-								<span className="icon feedback-icon"></span>
-								<span className="text">意见反馈</span>
-								<span className="arrow-r-icon"></span>
-							</a>
-						</div>*/}
-                        {/*<div className="list-cnt">
                             <a href="">
                                 <span className="icon invite-icon"></span>
                                 <span className="text">邀请好友</span>
@@ -152,11 +143,11 @@ const MyCnt = React.createClass({
                 {/*<div className="my-btn">
 					<div className="ui-btn">退出登录</div>
 				</div>*/}
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
             </div>
 
 
@@ -164,6 +155,7 @@ const MyCnt = React.createClass({
     }
 });
 
+const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(() => {
     ReactDOM.render(<MyCnt />, CONTENT_NODE);
