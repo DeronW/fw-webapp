@@ -10,7 +10,9 @@ const MyBankCard = React.createClass({
         return (
             <div className="detail-box">
                 <div onClick={this.addCardHandler} className="add_card" style={{zIndex:"10"}}></div>
-                {this.props.bankCards.map((card, index) => <CardList key={index} bankCard={card}/>)}
+                {this.props.bankCards ? this.props.bankCards.map((card, index) => <CardList key={index}
+                                                                                            bankCard={card}/>) : null
+                }
             </div>
         )
     }

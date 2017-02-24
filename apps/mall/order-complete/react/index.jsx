@@ -15,7 +15,10 @@ const Success = React.createClass({
             statusTex = "订单状态:已付款";
             seeOrder = "查看订单"
         }
-
+        if (status == "I") {
+            statusTex = query.Tex;
+            seeOrder = "重新支付"
+        }
         let href = `/static/mall/order-list/index.html`;
 
         return (
@@ -47,6 +50,9 @@ $FW.DOMReady(function () {
     }
     if (status == "S") {
         title = "交易成功"
+    }
+    if (status == "I") {
+        title = "支付结果"
     }
     ReactDOM.render(<Success />, CONTENT_NODE);
     ReactDOM.render(<Header title={title} show_back_btn={false}/>, HEADER_NODE);

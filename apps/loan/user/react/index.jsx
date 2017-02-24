@@ -53,6 +53,10 @@ const MyCnt = React.createClass({
             });
         })
     },
+    clickHandler(){
+        let userStatus = this.state.baseinfoData.borrowBtnStatus;
+        if(userStatus == 101) $FW.Component.Toast("设置提现卡申请处理中，请稍等");
+    },
     render() {
         let userStatus = this.state.baseinfoData.borrowBtnStatus;
         let user = $FW.Store.getUserDict()
@@ -106,14 +110,14 @@ const MyCnt = React.createClass({
 
                 <div className="my-settings">
                     <div className="list">
-                        <div className="list-cnt">
+                        <div className="list-cnt" onClick={this.clickHandler}>
                             <a href={creditUrl()}>
                                 <span className="icon credit-icon"></span>
                                 <span className="text">信用额度</span>
                                 <span className="arrow-r-icon"></span>
                             </a>
                         </div>
-                        <div className="list-cnt">
+                        <div className="list-cnt" onClick={this.clickHandler}>
                             <a href={bankUrl()}>
                                 <span className="icon back-icon"></span>
                                 <span className="text">银行卡</span>
