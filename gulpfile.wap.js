@@ -86,6 +86,7 @@ const SHOUSHAN = [
 
 
 const DEVELOPING_PAGES = [
+    'fa-xian'
 ]
 
 APP_NAMES.push(
