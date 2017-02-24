@@ -163,7 +163,7 @@ const LoanResult = React.createClass({
                             </div>
                         </div>
                         <div className="credit-btn"
-                             onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`)}>
+                             onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`)}>
                             去提额
                         </div>
                     </div>
