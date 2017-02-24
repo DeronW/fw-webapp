@@ -3,10 +3,6 @@ function verificationNum(val) {
     return reg.test(val)
 }
 
-function space(str) {
-    return str.replace(/ /g, "");
-}
-
 const VerifyPhone = React.createClass({
     getInitialState() {
         return {
@@ -19,7 +15,6 @@ const VerifyPhone = React.createClass({
             popShow: false,
             remain: 0,
             result: null,
-            transCode: null,
             failReason: null,
             show: false
         }
@@ -43,8 +38,8 @@ const VerifyPhone = React.createClass({
     },
     changeCode(e) {
         if (verificationNum(e.target.value)) {
-            if (space(e.target.value).length < 5) {
-                this.setState({ codeVal: space(e.target.value) });
+            if ($FW.Format.trim(e.target.value).length < 5) {
+                this.setState({ codeVal: $FW.Format.trim(e.target.value) });
             }
         }
     },
@@ -59,47 +54,8 @@ const VerifyPhone = React.createClass({
             sourceType: SOURCE_TYPE
         }).then(null, e => $FW.Component.Toast(e.message));
     },
-    definiteBtn() {
+    submitHandler() {
         if (this.state.codeVal.length < 4) return $FW.Component.Toast("验证码不能小于4位");
-
-        // $FW.Post(`${API_PATH}api/bankcard/v1/commitverifycode.json`, {
-        //     operatorBankcardGid: BANK_GID,
-        //     token: USER.token,
-        //     userGid: USER.gid,
-        //     userId: USER.id,
-        //     verifyCode: this.state.codeVal,
-        //     sourceType: SOURCE_TYPE
-        // }).then(() => {
-        //     return new Promise(resolve => setTimeout(resolve, 5000))
-        // }).then(() => {
-        //     return $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
-        //         operatorBankcardGid: BANK_GID,
-        //         token: USER.token,
-        //         userGid: USER.gid,
-        //         userId: USER.id,
-        //         sourceType: SOURCE_TYPE
-        //     })
-        // }, e => $FW.Component.Toast(e.message)).then((data) => {
-        //     let bs = data.bindStatus;
-        //     if (bs.status == 0) {
-        //         if (bs.transCode == 1001) {
-        //             $FW.Component.Toast("验证码不正确");
-        //         } else {
-        //             $FW.Component.Toast("处理中");
-        //             setTimeout(() => {
-        //                 //window.location.href = '/static/loan/home/index.html'
-        //                 window.history.go(-2);
-        //             }, 1000)
-        //         }
-        //     } else if (bs.status == 1) {
-        //         window.location.href = '/static/loan/user-card-management/index.html';
-        //     } else if (bs.status == 2) {
-        //         setTimeout(() => {
-        //             $FW.Component.Toast(bs.failReason);
-        //         }, 1000)
-        //         window.location.href = '/static/loan/user-card-set/index.html';
-        //     }
-        // });
 
         $FW.Post(`${API_PATH}api/bankcard/v1/commitverifycode.json`, {
             operatorBankcardGid: BANK_GID,
@@ -109,37 +65,10 @@ const VerifyPhone = React.createClass({
             verifyCode: this.state.codeVal,
             sourceType: SOURCE_TYPE
         }).then(() => {
-            let {remain} = this.state;
-            this.setState({ remain: 12 });
-            this.checkAjax();
-            this.timer = setInterval(() => {
-                if (remain % 3 === 0) this.checkAjax();
-                this.setState({ remain: remain - 1 });
-                if (remain <= 0) {
-                    clearInterval(this.timer);
-                }
-            }, 1000);
-
-            // let check = () => {
-            //     if(this.state.result) return;
-            //     if(this.state.remain <=0) return;
-            //     this.checkAjax().then(check);
-            // }
-
-            if (this.state.result == 0) {
-                this.setState({ show: true });
-                clearInterval(this.timer);
-                if (this.state.transCode == 1001) {
-                    this.setState({ show: false });
-                    clearInterval(this.timer);
-                    $FW.Component.Toast("验证码不正确");
-                }
-            } else if (this.state.result == 1) {
-                window.location.href = '/static/loan/user-card-management/index.html';
-            } else if (this.state.result == 2) {
-                this.setState({ show: true });
-                clearInterval(this.timer);
-            }
+            setTimeout(this.checkAjax, 3000);
+            setTimeout(this.checkAjax, 6000);
+            setTimeout(this.checkAjax, 9000);
+            setTimeout(this.checkAjax, 12000);
         }, e => $FW.Component.Toast(e.message));
 
     },
@@ -151,8 +80,28 @@ const VerifyPhone = React.createClass({
             userId: USER.id,
             sourceType: SOURCE_TYPE
         }).then((data) => {
-            this.setState({ result: data.status, transCode: data.transCode, failReason: data.failReason });
+            this.setState({
+                result: data.status,
+                failReason: data.failReason
+            });
+            this.getResult(data.status, data.transCode);
         }, e => $FW.Component.Toast(e.message));
+    },
+    getResult(result, transCode) {
+        // 判断是否已经拿到了结果, 如果拿到结果就不再查询
+        if ([0, 1, 2].indexOf(this.state.result) > -1) return;
+
+        if (result == 0) {
+            this.setState({ show: true });
+            if (transCode == 1001) {
+                this.setState({ show: false });
+                $FW.Component.Toast("验证码不正确");
+            }
+        } else if (result == 1) {
+            window.location.href = '/static/loan/user-card-management/index.html';
+        } else if (result == 2) {
+            this.setState({ show: true });
+        }
     },
     confirmHandler() {
         if (this.state.result == 0) {
@@ -164,24 +113,7 @@ const VerifyPhone = React.createClass({
     componentWillUnmount() {
         clearInterval(this.timer);
     },
-    // handlerBtn() {
-    //     this.setState({ popShow: false });
-    //     if (this.state.popStatus === 2) window.history.back();
-    // },
     render() {
-        // let pop = () => {
-        //     return <div className="pop" style={{ zIndex: 10000 }}>
-        //         <div className="pop-cnt">
-        //             <div className="pop-info">
-        //                 <div className="pop-text">{this.state.popText}</div>
-        //                 <div className="btn" onClick={this.handlerBtn}>
-        //                     {this.state.popBtnText}
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // }
-
         let btnSMSCode = this.state.countdownShow ?
             <div className="get-code-btn c">{this.state.countdown}s</div> :
             <div className="get-code-btn" onClick={this.handleGetCode}>重新获取</div>;
@@ -206,7 +138,7 @@ const VerifyPhone = React.createClass({
                     </div>
 
                     <div className="determine-btn">
-                        <div className="ui-btn" onClick={this.definiteBtn}>确定</div>
+                        <div className="ui-btn" onClick={this.submitHandler}>确定</div>
                     </div>
                 </div>
                 {this.state.show && <div className="mask" style={{ zIndex: 100 }}>
