@@ -43,7 +43,6 @@ const SetCashCard = React.createClass({
             cardinfoLogoUrl: '',
             cardType: '',
             selectClause: false,
-            withholdServerPop: false,
             loading: false,
             canVerify: ''
         }
@@ -82,11 +81,6 @@ const SetCashCard = React.createClass({
             selectClause: !this.state.selectClause
         });
     },
-    callbackWithholdServerPop(ble) {
-        this.setState({
-            withholdServerPop: ble
-        });
-    },
     handlerNext() {
         let err, {bankNum, phone, selectClause, cardType, canVerify} = this.state;
 
@@ -121,10 +115,6 @@ const SetCashCard = React.createClass({
 
         return (
             <div className="set-cash-card-cnt">
-                {
-                    this.state.withholdServerPop &&
-                    <WithholdServer getWithholdServerPop={this.callbackWithholdServerPop} />
-                }
                 <div className="ui-froms">
                     <div className="list prompt-list">
                         <span className="text">储蓄卡号</span>

@@ -2,6 +2,7 @@
     (function () {
         // 在桌面版Chrome54 版本以后 关于Viewport的计算出现异常, 通过下面代码进行热修复
         var cw = document.documentElement.clientWidth;
+        try {
         if (cw != 720) {
             var metas = document.getElementsByTagName('meta'), vw;
             for (var i = 0; i < metas.length; i++) {
@@ -9,5 +10,6 @@
             }
             if (vw) vw.setAttribute('content', 'width=' + (720 * 720 / cw) + ', user-scalable=no')
         }
+        } catch(e){}
     })();
 </script>
