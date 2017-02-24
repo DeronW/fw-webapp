@@ -65,6 +65,7 @@ const VerifyPhone = React.createClass({
             verifyCode: this.state.codeVal,
             sourceType: SOURCE_TYPE
         }).then(() => {
+            this.setState({result: null});
             setTimeout(this.checkAjax, 3000);
             setTimeout(this.checkAjax, 6000);
             setTimeout(this.checkAjax, 9000);
