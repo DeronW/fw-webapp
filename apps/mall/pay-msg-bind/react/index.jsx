@@ -52,7 +52,6 @@ const SendCode = React.createClass({
             url: API_PATH + 'mall/api/payment/v1/SendPhoneVerifyPay.json',
             enable_loading: 'mini',
             success: function (data) {
-                $FW.Component.Alert(data.validateCode);
                 if (!this.state.reSend) return;
                 this.setState({value: 60, reSend: false});
                 this.tick()

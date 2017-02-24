@@ -5,7 +5,10 @@ const MyBankCard = React.createClass({
     addCardHandler: function () {
         location.href = location.protocol + '//' + location.hostname + '/static/mall/pay-add-card/index.html'
     },
-
+    componentDidMount: function () {
+        if ($FW.Browser.inIOS())
+            document.querySelector(".add_card").style.top = '22px';
+    },
     render: function () {
         return (
             <div className="detail-box">
