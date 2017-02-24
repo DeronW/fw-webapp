@@ -135,6 +135,7 @@ const VerifyPhone = React.createClass({
                     $FW.Component.Toast("验证码不正确");
                 }
             }else if(this.state.result ==1){
+                 clearInterval(this.timer);
                  window.location.href = '/static/loan/user-card-management/index.html';
             }else if(this.state.result ==2){
                 this.setState({show:true});
