@@ -56,17 +56,17 @@ const Register = React.createClass({
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message));
     },
-    passwordHandler(){
+    forgotPasswordHandler() {
         $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
             mobile: PHONE,
             userOperationType: 2,
             sourceType: SOURCE_TYPE
-        }).then((data)=>{
-            location.href= `/static/loan/user-reset-password/index.html?phone=${PHONE}&codeToken=${data.codeToken}`;
+        }).then(data => {
+            location.href = `/static/loan/user-reset-password/index.html?phone=${PHONE}&codeToken=${data.codeToken}`;
         }, err => $FW.Component.Toast(err.message));
     },
-    keyUpHandler (e){
-        if(e.keyCode === 13) this.loadingBtn()
+    keyUpHandler(e) {
+        if (e.keyCode === 13) this.loadingBtn()
     },
     render() {
 
@@ -91,7 +91,7 @@ const Register = React.createClass({
                                 placeholder="请输入登录密码" onKeyUp={this.keyUpHandler} onChange={this.changePasswordHandler} />
                         </div>
 
-                        <div className={this.state.plainCode?"pwd-icon1":"pwd-icon"} onClick={this.handlePlainCode}>
+                        <div className={this.state.plainCode ? "pwd-icon1" : "pwd-icon"} onClick={this.handlePlainCode}>
                         </div>
                     </div>
                     <div className="form-border"></div>
@@ -100,14 +100,14 @@ const Register = React.createClass({
                     <div className="ui-btn" onClick={this.loadingBtn}>确定</div>
                 </div>
                 <div className="forget-pwd-link">
-                    <a onClick={this.passwordHandler}> 忘记密码?</a>
+                    <a onClick={this.forgotPasswordHandler}> 忘记密码?</a>
                 </div>
             </div>
         )
     }
 });
 
-const PHONE = $FW.Format.urlQuery().phone;
+const PHONE = $FW.Format.urlQuery().phone || '';
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Register />, CONTENT_NODE);

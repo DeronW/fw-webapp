@@ -88,7 +88,7 @@ const Register = React.createClass({
                     gid: dict.userGid,
                     status: dict.userStatus
                 })
-                window.location.href = "/static/loan/home/index.html"
+                window.location.href = "/"
             }, e => $FW.Component.Toast(e.message))
     },
     render() {
