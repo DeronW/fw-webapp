@@ -13,11 +13,15 @@ const VerifyPhone = React.createClass({
             countdown: 0,
             countdownShow: false,
             codeVal: '',
-            popShow: false,
             popText: '',
             popBtnText: '',
             popStatus: null,
-            popShow:false
+            popShow:false,
+            remain:0,
+            result:null,
+            transCode:null,
+            failReason:null,
+            show:false
         }
     },
     componentDidMount() {
@@ -58,6 +62,45 @@ const VerifyPhone = React.createClass({
     definiteBtn() {
         if (this.state.codeVal.length < 4) return $FW.Component.Toast("验证码不能小于4位");
 
+        // $FW.Post(`${API_PATH}api/bankcard/v1/commitverifycode.json`, {
+        //     operatorBankcardGid: BANK_GID,
+        //     token: USER.token,
+        //     userGid: USER.gid,
+        //     userId: USER.id,
+        //     verifyCode: this.state.codeVal,
+        //     sourceType: SOURCE_TYPE
+        // }).then(() => {
+        //     return new Promise(resolve => setTimeout(resolve, 5000))
+        // }).then(() => {
+        //     return $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
+        //         operatorBankcardGid: BANK_GID,
+        //         token: USER.token,
+        //         userGid: USER.gid,
+        //         userId: USER.id,
+        //         sourceType: SOURCE_TYPE
+        //     })
+        // }, e => $FW.Component.Toast(e.message)).then((data) => {
+        //     let bs = data.bindStatus;
+        //     if (bs.status == 0) {
+        //         if (bs.transCode == 1001) {
+        //             $FW.Component.Toast("验证码不正确");
+        //         } else {
+        //             $FW.Component.Toast("处理中");
+        //             setTimeout(() => {
+        //                 //window.location.href = '/static/loan/home/index.html'
+        //                 window.history.go(-2);
+        //             }, 1000)
+        //         }
+        //     } else if (bs.status == 1) {
+        //         window.location.href = '/static/loan/user-card-management/index.html';
+        //     } else if (bs.status == 2) {
+        //         setTimeout(() => {
+        //             $FW.Component.Toast(bs.failReason);
+        //         }, 1000)
+        //         window.location.href = '/static/loan/user-card-set/index.html';
+        //     }
+        // });
+
         $FW.Post(`${API_PATH}api/bankcard/v1/commitverifycode.json`, {
             operatorBankcardGid: BANK_GID,
             token: USER.token,
@@ -66,55 +109,78 @@ const VerifyPhone = React.createClass({
             verifyCode: this.state.codeVal,
             sourceType: SOURCE_TYPE
         }).then(() => {
-            return new Promise(resolve => setTimeout(resolve, 5000))
-        }).then(() => {
-            return $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
-                operatorBankcardGid: BANK_GID,
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE
-            })
-        }, e => $FW.Component.Toast(e.message)).then((data) => {
-            let bs = data.bindStatus;
-            if (bs.status == 0) {
-                if (bs.transCode == 1001) {
-                    $FW.Component.Toast("验证码不正确");
-                } else {
-                    $FW.Component.Toast("处理中");
-                    setTimeout(() => {
-                        //window.location.href = '/static/loan/home/index.html'
-                        window.history.go(-2);
-                    }, 1000)
+            let {remain} = this.state;
+            this.setState({remain:12});
+            this.checkAjax();
+            this.timer = setInterval(() => {
+                if(remain % 3 === 0) this.checkAjax();
+                this.setState({ remain: remain - 1 });
+                if (remain <= 0) {
+                    clearInterval(this.timer);
                 }
-            } else if (bs.status == 1) {
-                window.location.href = '/static/loan/user-card-management/index.html';
-            } else if (bs.status == 2) {
+            }, 1000);
 
-                setTimeout(() => {
-                    $FW.Component.Toast(bs.failReason);
-                }, 1000)
-                window.location.href = '/static/loan/user-card-set/index.html';
+            // let check = () => {
+            //     if(this.state.result) return;
+            //     if(this.state.remain <=0) return;
+            //     this.checkAjax().then(check);
+            // }
+
+            if(this.state.result == 0){
+                this.setState({show:true});
+                clearInterval(this.timer);
+                if(this.state.transCode == 1001){
+                    this.setState({show:false});
+                    clearInterval(this.timer);
+                    $FW.Component.Toast("验证码不正确");
+                }
+            }else if(this.state.result ==2){
+                this.setState({show:true});
+                clearInterval(this.timer);
             }
-        });
+        } , e=>$FW.Component.Toast(e.message));
+
     },
-    handlerBtn() {
-        this.setState({ popShow: false });
-        if (this.state.popStatus === 2) window.history.back();
+    checkAjax(){
+        $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
+            operatorBankcardGid: BANK_GID,
+            token: USER.token,
+            userGid: USER.gid,
+            userId: USER.id,
+            sourceType: SOURCE_TYPE
+        }).then((data)=>{
+            this.setState({result:data.status, transCode:data.transCode,failReason:data.failReason});
+        }, e =>$FW.Component.Toast(e.message));
     },
-    render() {
-        let pop = () => {
-            return <div className="pop" style={{ zIndex: 10000 }}>
-                <div className="pop-cnt">
-                    <div className="pop-info">
-                        <div className="pop-text">{this.state.popText}</div>
-                        <div className="btn" onClick={this.handlerBtn}>
-                            {this.state.popBtnText}
-                        </div>
-                    </div>
-                </div>
-            </div>
+    confirmHandler(){
+        if(this.state.result == 0){
+            window.history.go(-2);
+        }else if(this.state.result == 1){
+            window.location.href = '/static/loan/user-card-management/index.html';
+        }else if(this.state.result == 2){
+            window.location.href = '/static/loan/user-card-set/index.html';
         }
+    },
+    componentWillUnmount(){
+        clearInterval(this.timer);
+    },
+    // handlerBtn() {
+    //     this.setState({ popShow: false });
+    //     if (this.state.popStatus === 2) window.history.back();
+    // },
+    render() {
+        // let pop = () => {
+        //     return <div className="pop" style={{ zIndex: 10000 }}>
+        //         <div className="pop-cnt">
+        //             <div className="pop-info">
+        //                 <div className="pop-text">{this.state.popText}</div>
+        //                 <div className="btn" onClick={this.handlerBtn}>
+        //                     {this.state.popBtnText}
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </div>
+        // }
 
         let btnSMSCode = this.state.countdownShow ?
             <div className="get-code-btn c">{this.state.countdown}s</div> :
@@ -143,13 +209,14 @@ const VerifyPhone = React.createClass({
                         <div className="ui-btn" onClick={this.definiteBtn}>确定</div>
                     </div>
                 </div>
-                <div className="mask" style={{zIndex:100}}>
+                {this.state.show && <div className="mask" style={{zIndex:100}}>
                     <div className="popup">
-                         <div className="popup-title">设置提现卡失败</div>
-                         <div className="popup-reason">设置提现卡失败</div>
-                         <div className="popup-btn">确定</div>
+                        {this.state.result == 2 &&  <div className="popup-title">设置提现卡失败</div>}
+                        {this.state.result == 2 && <div className="popup-reason">{this.state.failReason}</div>}
+                        {this.state.result == 0 &&  <div className="popup-title">请求正在处理中，请稍等</div>}
+                         <div className="popup-btn" onClick={this.confirmHandler}>确定</div>
                     </div>
-                </div>
+                </div>}
             </div>
 
         )
