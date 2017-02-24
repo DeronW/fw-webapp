@@ -21,6 +21,7 @@ const USER_PAGES = [
     'user-verify-phone', //获取验证码
     'user-bank-support', //支持银行卡
     'user-card-management', //银行卡管理
+    'user-verify-phone',
     'user-settings' //更多
 ]
 
@@ -47,10 +48,10 @@ const PROTOCOL_PAGES = [
 ]
 
 const DEVELOPING_PAGES = [
-    'user-verify-phone',
     'weixin-download',
     'weixin-invite',
-    'weixin-attention'
+    'weixin-attention',
+    'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
 APP_NAMES.push(
