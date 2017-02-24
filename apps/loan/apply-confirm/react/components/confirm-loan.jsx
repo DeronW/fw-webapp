@@ -25,7 +25,7 @@ const ConfirmLoan = React.createClass({
             }).then(data => {
                 this.props.callbackVerifyCodeShow(true);
                 //this.setState({orderGid: data.orderGid});
-            }, (err) => $FW.Component.Toast(err));
+            }, (err) => $FW.Component.Toast(err.message));
         }
     },
     checkHandler: function () {
