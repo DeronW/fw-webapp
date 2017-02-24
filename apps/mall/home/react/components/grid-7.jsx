@@ -94,7 +94,7 @@ const Grid_7 = React.createClass({
                                 <img className="theme4-btm-product-img" src={products[7].img}/>
                             </a>
                             <a onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[7].bizNo)}>
-                                <img className="theme4-btm-product-img" src={products[7].img}/>
+                                <img className="theme4-btm-product-img" src={products[8].img}/>
                             </a>
                         </div>
                     </div>
