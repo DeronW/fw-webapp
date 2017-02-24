@@ -1,4 +1,3 @@
-
 const VerifyCode = React.createClass({
     getInitialState: function () {
         return {
@@ -9,7 +8,7 @@ const VerifyCode = React.createClass({
         }
     },
     componentWillReceiveProps(nextProps) {
-        this.setState({ orderGid: nextProps.orderGid });
+        this.setState({orderGid: nextProps.orderGid});
     },
     closePopHandler: function () {
         this.props.callbackCloseHanler(false);
@@ -18,14 +17,14 @@ const VerifyCode = React.createClass({
         this.tick();
     },
     changeValueHandler: function (e) {
-        this.setState({ value: e.target.value });
+        this.setState({value: e.target.value});
     },
     countingDown: function () {
         if (this.state.remain <= 1) window.clearInterval(this._timer);
-        this.setState({ remain: this.state.remain - 1 });
+        this.setState({remain: this.state.remain - 1});
     },
     tick: function () {
-        this.setState({ remain: 60 });
+        this.setState({remain: 60});
         window.clearInterval(this._timer);
         this._timer = setInterval(this.countingDown, 1000);
     },
@@ -41,7 +40,8 @@ const VerifyCode = React.createClass({
                 userId: USER.id,
                 sourceType: SOURCE_TYPE,
                 orderGid: this.state.orderGid
-            }).then(() => { }, e => $FW.Component.Toast(e.message));
+            }).then(() => {
+            }, e => $FW.Component.Toast(e.message));
         }
     },
     confirmBtnHandler: function () {
@@ -55,12 +55,12 @@ const VerifyCode = React.createClass({
                 userId: USER.id,
                 sourceType: SOURCE_TYPE,
                 verifyCode: this.state.value
-            }).then(()=>{
-               return new Promise(resolve => setTimeout(resolve, 5000))
-            }).then((data) => {
-                this.props.callbackResultShow(true, false);
-                this.props.callbackGetRepaymentGid(data.repaymentGid);
-               }, e => $FW.Component.Toast(e.message)
+            }).then(data => {
+                return new Promise(resolve => setTimeout(() => resolve(data), 5000))
+            }).then(data => {
+                    this.props.callbackResultShow(true, false);
+                    this.props.callbackGetRepaymentGid(data.repaymentGid);
+                }, e => $FW.Component.Toast(e.message)
             );
         }
     },
@@ -77,7 +77,7 @@ const VerifyCode = React.createClass({
                         </div>
                         <div className="verify-input">
                             <input className="sms-input" type="number" name="number" value={this.state.value}
-                                placeholder="输入验证码" onChange={this.changeValueHandler} />
+                                   placeholder="输入验证码" onChange={this.changeValueHandler}/>
                             <span className="btn-countdown" onClick={this.getSMSCode}>
                                 {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                         </div>
