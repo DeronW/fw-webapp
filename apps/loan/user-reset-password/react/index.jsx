@@ -89,7 +89,7 @@ const Register = React.createClass({
                     status: dict.userStatus
                 })
 
-                window.location.href = "/static/loan/home/index.html"
+                // window.location.href = "/static/loan/home/index.html"
             }, e => $FW.Component.Toast(e.message))
     },
     render() {
@@ -137,7 +137,7 @@ const Register = React.createClass({
     }
 });
 
-const PHONE = $FW.Format.urlQuery().phone;
+const PHONE = $FW.Format.urlQuery().phone || '';
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"设置新密码"} />, HEADER_NODE);
