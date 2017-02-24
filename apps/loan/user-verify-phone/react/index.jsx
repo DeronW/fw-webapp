@@ -79,22 +79,23 @@ const VerifyPhone = React.createClass({
             userGid: USER.gid,
             userId: USER.id,
             sourceType: SOURCE_TYPE
-        }).then((data) => {
+        }).then(data => {
+            let d = data.bindStatus;
             this.setState({
-                result: data.status,
-                failReason: data.failReason
+                result: d.status,
+                failReason: d.failReason
             });
-            this.getResult(data.status, data.transCode);
+            this.getResult(d.status, d.transCode);
         }, e => $FW.Component.Toast(e.message));
     },
     getResult(result, transCode) {
         // 判断是否已经拿到了结果, 如果拿到结果就不再查询
-        if ([0, 1, 2].indexOf(this.state.result) > -1) return;
+        if ([0, 1, 2, 'wrong_code'].indexOf(this.state.result) > -1) return;
 
         if (result == 0) {
             this.setState({ show: true });
             if (transCode == 1001) {
-                this.setState({ show: false });
+                this.setState({ show: false, result: 'wrong_code' });
                 $FW.Component.Toast("验证码不正确");
             }
         } else if (result == 1) {
@@ -157,8 +158,8 @@ const VerifyPhone = React.createClass({
 
 
 const USER = $FW.Store.getUserDict();
-const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid;
-const PHONE = $FW.Format.urlQuery().phone;
+const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid || '';
+const PHONE = $FW.Format.urlQuery().phone || '';
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"验证手机号"} />, HEADER_NODE);
