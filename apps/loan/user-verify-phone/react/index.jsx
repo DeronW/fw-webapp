@@ -65,6 +65,7 @@ const VerifyPhone = React.createClass({
             verifyCode: this.state.codeVal,
             sourceType: SOURCE_TYPE
         }).then(() => {
+            this.setState({result: null});
             setTimeout(this.checkAjax, 3000);
             setTimeout(this.checkAjax, 6000);
             setTimeout(this.checkAjax, 9000);
@@ -89,8 +90,7 @@ const VerifyPhone = React.createClass({
         }, e => $FW.Component.Toast(e.message));
     },
     getResult(result, transCode) {
-        // 判断是否已经拿到了结果, 如果拿到结果就不再查询
-        if ([0, 1, 2, 'wrong_code'].indexOf(this.state.result) > -1) return;
+        console.log('getResult', result, transCode)
 
         if (result == 0) {
             this.setState({ show: true });
