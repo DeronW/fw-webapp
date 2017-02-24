@@ -187,7 +187,7 @@ const LoanResult = React.createClass({
                                     href="tel:400-102-0066">400-102-0066</a></div>
                             </div>
                         </div>
-                        <div className="apply-btn">重新借款</div>
+                        <div className="apply-btn" onClick={()=>gotoHandler('/static/loan/home/index.html')}>重新借款</div>
                     </div>
                 </div>
             </div>
