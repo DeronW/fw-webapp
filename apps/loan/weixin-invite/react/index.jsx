@@ -1,5 +1,4 @@
 const USER = $FW.Store.getUserDict();
-
 $FW.DOMReady(function () {
     var page = 1;
     var loadNextPage = true;

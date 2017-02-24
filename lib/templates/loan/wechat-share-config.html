@@ -1,0 +1,74 @@
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+    const USER = $FW.Store.getUserDict();
+    let templateContent;
+    let templateTitle;
+    let templateUrl;
+    $FW.Post(`${API_PATH}api/shareTemplate/v1/getContent.json`, {
+        token: USER.token,
+        userGid: USER.gid,
+        userId: USER.id,
+        sourceType: SOURCE_TYPE,
+        templateType:1
+    }).then((data) => {
+        templateContent = data.shareTemplate.templateContent;
+        templateTitle = data.shareTemplate.templateTitle;
+        templateUrl = data.shareTemplate.templateUrl;
+    }, e => $FW.Component.Toast(e.message));
+
+
+    function setWxConfig(debug, appid, timestamp, noncestr, signature) {
+        wx.config({
+            debug: true,
+            appId: appid,
+            timestamp: timestamp,
+            nonceStr: noncestr,
+            signature: signature,
+            jsApiList: [
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage'
+            ]
+        });
+    }
+
+    var iurl = 'http://game.9888.cn/static/frontend/game/axc/image/axc_share.jpg';
+
+    function setShareFriend() {
+        wx.onMenuShareAppMessage({
+            title: templateTitle, // 分享标题
+            desc:  templateContent, // 分享描述
+            link: templateUrl, // 分享链接
+            imgUrl: iurl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+                //alert("喵喵感谢您！");
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    }
+    function setShareFriendQuan() {
+        wx.onMenuShareTimeline({
+            title: templateTitle, // 分享标题
+            link: templateUrl, // 分享链接
+            imgUrl: iurl, // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    }
+
+    // $.get('http://fore.9888.cn/weixin/jssdk/share', {
+    $.get('http://game.9888.cn/index.php?r=games/getshare', {
+        url: location.href
+    }, function (data) {
+        setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
+        setShareFriend()
+        setShareFriendQuan()
+    }, 'json')
+
+</script>
