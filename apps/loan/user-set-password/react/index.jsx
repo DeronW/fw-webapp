@@ -3,6 +3,11 @@ function verificationNum(val) {
     return reg.test(val)
 }
 
+function isNum(val){
+    var reg = /^[0-9]*$/;
+    return reg.test(val);
+}
+
 //字母和数字
 function istrue(str) {
     var reg = /^([a-z]+(?=[0-9])|[0-9]+(?=[a-z]))[a-z0-9]+$/ig;
@@ -25,7 +30,8 @@ const SetPassword = React.createClass({
         }
     },
     changeCode(e) {
-        this.setState({ code: e.target.value });
+        let v = e.target.value;
+        v.length == 4 && isNum(v) && this.setState({ code: v });
     },
     changePasswordHandler(e) {
         let v = e.target.value;
@@ -63,6 +69,8 @@ const SetPassword = React.createClass({
         let err, {password, code, checked, codeToken} = this.state;
 
         if (code == '') err = "验证码不能为空";
+        if (code.length != 4) err = "验证码为四位数字";
+        if (!isNum(code)) err = "验证码为数字";
         if (password == '') err = "密码不能为空";
         if (password.length < 8) err = "密码不能少于8位";
         if (password.length > 16) err = "密码不能多于16位";
@@ -110,7 +118,7 @@ const SetPassword = React.createClass({
                     <div className="list code-list">
                         <span className="icon"></span>
                         <div className="input">
-                            <input type="text" onChange={this.changeCode}
+                            <input type="number" onChange={this.changeCode}
                                 placeholder="输入手机验证码" />
                         </div>
                         {btnSMSCode}
