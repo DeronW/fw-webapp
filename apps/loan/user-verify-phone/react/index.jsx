@@ -134,6 +134,8 @@ const VerifyPhone = React.createClass({
                     clearInterval(this.timer);
                     $FW.Component.Toast("验证码不正确");
                 }
+            }else if(this.state.result ==1){
+                 window.location.href = '/static/loan/user-card-management/index.html';
             }else if(this.state.result ==2){
                 this.setState({show:true});
                 clearInterval(this.timer);
@@ -155,8 +157,6 @@ const VerifyPhone = React.createClass({
     confirmHandler(){
         if(this.state.result == 0){
             window.history.go(-2);
-        }else if(this.state.result == 1){
-            window.location.href = '/static/loan/user-card-management/index.html';
         }else if(this.state.result == 2){
             window.location.href = '/static/loan/user-card-set/index.html';
         }
