@@ -107,16 +107,16 @@ const BottomNavBar = React.createClass({
 
         return (
             <div className="_style_footer_fixed" style={_style_footer_fixed}>
-                <a style={_style_footer_item_home} href={tab.home ? null : "/"}> </a>
+                <a style={_style_footer_item_home} href={!tab.home && "/"}> </a>
                 <a className="_style_footer_item_category" style={_style_footer_item_category}
-                    href={tab.category ? null : "/static/mall/product-category/index.html"}>
+                    href={!tab.category && "/static/mall/product-category/index.html"}>
                 </a>
                 <a className="_back_to_index" style={_back_to_index} onClick={this.exitHandler}> </a>
                 <a className="_style_footer_item_cart" style={_style_footer_item_cart}
-                    href={tab.cart ? null : "/static/mall/cart/index.html"}>
+                    href={!tab.cart && "/static/mall/cart/index.html"}>
                 </a>
                 <a className="_style_footer_item_user" style={_style_footer_item_user}
-                    href={tab.user ? null : "/static/mall/user/index.html"}>
+                    href={!tab.user && "/static/mall/user/index.html"}>
                 </a>
             </div>
         )
