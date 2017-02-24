@@ -80,7 +80,7 @@ const MyCnt = React.createClass({
         return (
             <div className="my-cnt">
                 <div className="my-nav">
-                    <span className="text">{phoneMosaic($FW.Store.get('phone'))}</span>
+                    <span className="text">{phoneMosaic($FW.Store.get('phone', ''))}</span>
                 </div>
 
                 <div className="my-info">
