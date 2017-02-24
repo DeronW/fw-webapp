@@ -151,7 +151,7 @@ const SendCode = React.createClass({
         }).then(data=> {
             $FW.Component.showAjaxLoading('mini');
             if (data.responseResult.resCode == "20005") {//短信校验失败
-                FW.Component.hideAjaxLoading();
+                $FW.Component.hideAjaxLoading();
                 $FW.Component.Alert(data.responseResult.resMessage);
             } else if (data.responseResult.resCode == "00000") {
                 setTimeout(() => {
