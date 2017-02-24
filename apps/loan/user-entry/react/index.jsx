@@ -59,8 +59,8 @@ const Register = React.createClass({
         })
     },
 
-    keyUpHandler (e){
-        if(e.keyCode === 13) this.handleGetCode()
+    keyUpHandler(e) {
+        if (e.keyCode === 13) this.handleGetCode()
     },
 
     render() {
@@ -78,7 +78,8 @@ const Register = React.createClass({
                                 <input type="number" value={this.state.phone}
                                     onChange={this.changeHandler} onKeyUp={this.keyUpHandler}
                                     placeholder="请输入手机号进行注册登录" />
-                                {this.state.deleteShow ? <span className="clear-num" onClick={this.clearHandler}></span> : null}
+                                {this.state.deleteShow &&
+                                    <span className="clear-num" onClick={this.clearHandler}></span>}
                             </div>
                             <div className="pwd-icon"> </div>
                         </div>
