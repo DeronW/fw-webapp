@@ -81,11 +81,11 @@ const VerifyPhone = React.createClass({
             sourceType: SOURCE_TYPE
         }).then(data => {
             let d = data.bindStatus;
+            this.getResult(d.status, d.transCode);
             this.setState({
                 result: d.status,
                 failReason: d.failReason
             });
-            this.getResult(d.status, d.transCode);
         }, e => $FW.Component.Toast(e.message));
     },
     getResult(result, transCode) {
