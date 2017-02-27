@@ -59,6 +59,7 @@ const TOPIC_PAGES = [
     'topic-annual-commision', //年化佣金页面
     'topic-invite', //邀请返利, 邀请人,
     'topic-gong-you-hui', //工友会专题页面
+    'topic-zong-dong-yuan'//人脉总动员页面
 ]
 
 const HUISHANG_PAGES = [
