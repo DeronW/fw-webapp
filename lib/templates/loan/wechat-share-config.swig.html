@@ -1,73 +1,79 @@
 <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
-    const USER = $FW.Store.getUserDict();
-    let templateContent;
-    let templateTitle;
-    let templateUrl;
-     $FW.Post(`${API_PATH}api/shareTemplate/v1/getContent.json`, {
-         token: USER.token,
-         userGid: USER.gid,
-         userId: USER.id,
-         sourceType: SOURCE_TYPE,
-         templateType:1
-     }).then((data) => {
-         templateContent = data.shareTemplate.templateContent;
-         templateTitle = data.shareTemplate.templateTitle;
-         templateUrl = data.shareTemplate.templateUrl;
-     }, e => $FW.Component.Toast(e.message));
+    (function () {
 
+        let USER = $FW.Store.getUserDict();
+        let templateContent;
+        let templateTitle;
+        let templateUrl;
 
-    function setWxConfig(debug, appid, timestamp, noncestr, signature) {
-        wx.config({
-            debug: true,
-            appId: appid,
-            timestamp: timestamp,
-            nonceStr: noncestr,
-            signature: signature,
-            jsApiList: [
-                'onMenuShareTimeline',
-                'onMenuShareAppMessage'
-            ]
+        $FW.Post(`${API_PATH}api/shareTemplate/v1/getContent.json`, {
+            token: USER.token,
+            userGid: USER.gid,
+            userId: USER.id,
+            sourceType: SOURCE_TYPE,
+            templateType: 1
+        }).then((data) => {
+            alert(data)
+            templateContent = data.shareTemplate.templateContent;
+            templateTitle = data.shareTemplate.templateTitle;
+            templateUrl = data.shareTemplate.templateUrl;
+        }, e => $FW.Component.Toast(e.message));
+
+        function setWxConfig(debug, appid, timestamp, noncestr, signature) {
+            wx.config({
+                debug: true,
+                appId: appid,
+                timestamp: timestamp,
+                nonceStr: noncestr,
+                signature: signature,
+                jsApiList: [
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage'
+                ]
+            });
+        }
+
+        var iurl = 'http://static.9888.cn/images/loan/invitation.jpg';
+
+        function setShareFriend() {
+            wx.onMenuShareAppMessage({
+                title: templateTitle, // 分享标题
+                desc: templateContent, // 分享描述
+                link: templateUrl, // 分享链接
+                imgUrl: iurl, // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                    //alert("喵喵感谢您！");
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        }
+        function setShareFriendQuan() {
+            wx.onMenuShareTimeline({
+                title: templateTitle, // 分享标题
+                link: templateUrl, // 分享链接
+                imgUrl: iurl, // 分享图标
+                success: function () {
+                    // 用户确认分享后执行的回调函数
+                },
+                cancel: function () {
+                    // 用户取消分享后执行的回调函数
+                }
+            });
+        }
+
+        $FW.Post(`${API_PATH}/cashloan/outside/weixinAccountController.do?wxConfig`, {
+            url: location.href // 'http://m.easyloan888.cn/static/loan/weixin-invite/index.html'
+        }).then((data) => {
+            alert(data)
+            setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
+            setShareFriend()
+            setShareFriendQuan()
         });
-    }
 
-    var iurl = 'http://static.9888.cn/images/loan/invitation.jpg';
-
-    function setShareFriend() {
-        wx.onMenuShareAppMessage({
-            title: templateTitle, // 分享标题
-            desc:  templateContent, // 分享描述
-            link: templateUrl, // 分享链接
-            imgUrl: iurl, // 分享图标
-            success: function () {
-                // 用户确认分享后执行的回调函数
-                //alert("喵喵感谢您！");
-            },
-            cancel: function () {
-                // 用户取消分享后执行的回调函数
-            }
-        });
-    }
-    function setShareFriendQuan() {
-        wx.onMenuShareTimeline({
-            title: templateTitle, // 分享标题
-            link: templateUrl, // 分享链接
-            imgUrl: iurl, // 分享图标
-            success: function () {
-                // 用户确认分享后执行的回调函数
-            },
-            cancel: function () {
-                // 用户取消分享后执行的回调函数
-            }
-        });
-    }
-
-     $FW.Post('http://m.easyloan888.cn/cashloan/outside/weixinAccountController.do?wxConfig', {
-         url: location.href
-     }).then((data)=>{
-         setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
-         setShareFriend()
-         setShareFriendQuan()
-     });
+    })();
 
 </script>
