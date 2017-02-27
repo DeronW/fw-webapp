@@ -60,33 +60,33 @@ const BottomNavBar = React.createClass({
 
         let gray_filter = {
             filter: 'grayscale(100%)',
-            '-webkit-filter': 'grayscale(100%)'
+            WebkitFilter: 'grayscale(100%)'
         }
         let _style_footer_item_home = Object.assign({
-            height: "70px",
+            height: "80px",
             top: "60px",
-            left: "49px",
+            left: "28px",
         }, _style_footer_item_base, tab.home ? {} : gray_filter);
 
         let _style_footer_item_category = Object.assign({
             width: "42px",
             height: "70px",
             top: "60px",
-            left: "171px",
+            left: "160px",
         }, _style_footer_item_base, tab.category ? {} : gray_filter);
 
         let _style_footer_item_cart = Object.assign({
             width: "65px",
             height: "70px",
             top: "60px",
-            left: "450px",
+            left: "470px",
         }, _style_footer_item_base, tab.cart ? {} : gray_filter);
 
         let _style_footer_item_user = Object.assign({
             width: "87px",
             height: "70px",
             top: "60px",
-            left: "571px",
+            left: "600px",
         }, _style_footer_item_base, tab.user ? {} : gray_filter);
 
         let _back_to_index = {

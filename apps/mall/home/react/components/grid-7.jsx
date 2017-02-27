@@ -16,28 +16,31 @@ const Grid_7 = React.createClass({
     },
     render: function () {
         let {products} = this.state;
-        if(products.length == 0) return null;
+        if (products.length == 0) return null;
 
         let theme4_top_product_item = (product, index) => {
             return (
                 <a className="theme4-top-product-item" key={index}
-                   href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
+                    href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
                     <span
                         className={"theme4-top-product-title theme4-top-product-title-color" + parseInt(index + 1)}>
                         {product.abbreviation}</span>
                     <span className="theme4-top-product-price">
                         {product.rmbPrice == 0 ? null : `¥${product.rmbPrice}`}
-                        {product.rmbPrice == 0  ||  product.score == 0 ? "" : "+"}
+                        {product.rmbPrice == 0 || product.score == 0 ? "" : "+"}
                         {product.score == 0 ? null : `${product.score}工分`}
                     </span>
                     <span className={"horizon-line theme4-top-line-color" + parseInt(index + 1)}></span>
-                    <img className="theme4-top-product-img" src={product.img}/>
+                    <img className="theme4-top-product-img" src={product.img} />
                 </a>
             )
         };
+
+        let get_prd = (n) => products[n] || {};
+
         return (
             <div className="theme-4">
-                <a href="" className="activity-theme"><img src="/static/mall/product-list/images/maternalInfantEducation.jpg"/></a>
+                <a href="" className="activity-theme"><img src="/static/mall/product-list/images/maternalInfantEducation.jpg" /></a>
                 <div className="theme4-product-wrap">
                     <div className="theme4-top-product-list">
                         {products.slice(0, 4).map(theme4_top_product_item)}
@@ -45,8 +48,8 @@ const Grid_7 = React.createClass({
                     <div className="theme4-btm-product-list">
                         <div className="theme4-btm-left-product-item">
                             <a className="theme4-btm-left-product-wrap"
-                               href={`/static/mall/product-detail/index.html?bizNo=${products[4].bizNo}`}>
-                                <img className="theme4-btm-product-img" src={products[4].img}/>
+                                href={`/static/mall/product-detail/index.html?bizNo=${products[4].bizNo}`}>
+                                <img className="theme4-btm-product-img" src={products[4].img} />
                                 <span
                                     className="theme4-btm-product-title theme4-btm-product-title-color1">{products[4].abbreviation}</span>
                                 <span
@@ -57,44 +60,47 @@ const Grid_7 = React.createClass({
                         </div>
                         <div className="theme4-btm-middle-product-wrap">
                             <a className="theme4-btm-middle-product-item"
-                               onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[5].bizNo)}>
+                                onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[5].bizNo)}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
-                                        <img className="theme4-btm-product-img" src={products[5].img}/>
+                                        <img className="theme4-btm-product-img" src={get_prd(5).img} />
                                     </div>
                                     <div className="theme4-btm-middle-top-info">
                                         <span
-                                            className="theme4-btm-product-title theme4-btm-product-title-color2">{products[5].abbreviation}</span>
-                                        <span
-                                            className="theme4-btm-product-price">{products[5].rmbPrice == 0.00 ? null : "¥" + products[5].rmbPrice + "+"}{products[5].score}工分</span>
-                                        <span className="product-purchase theme4-btm-product-title-color2">点击抢购<span
-                                            className="tri tri-btm-color2"></span></span>
+                                            className="theme4-btm-product-title theme4-btm-product-title-color2">{get_prd(5).abbreviation}</span>
+                                        <span className="theme4-btm-product-price">
+                                            {get_prd(5).rmbPrice != 0 && `¥${get_prd(5).rmbPrice}+`}
+                                            {get_prd(5).score}工分</span>
+                                        <span className="product-purchase theme4-btm-product-title-color2">点击抢购
+                                            <span className="tri tri-btm-color2"></span>
+                                        </span>
                                     </div>
                                 </div>
                             </a>
                             <a className="theme4-btm-middle-product-item"
-                               onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[6].bizNo)}>
+                                onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[6].bizNo)}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
-                                        <img className="theme4-btm-product-img" src={products[6].img}/>
+                                        <img className="theme4-btm-product-img" src={get_prd(6).img} />
                                     </div>
                                     <div className="theme4-btm-middle-top-info">
                                         <span
                                             className="theme4-btm-product-title theme4-btm-product-title-color3">{this.state.productSeventhTitle}</span>
-                                        <span
-                                            className="theme4-btm-product-price">{products[6].rmbPrice == 0.00 ? null : "¥" + products[6].rmbPrice + "+"}{products[6].score}工分</span>
-                                        <span className="product-purchase theme4-btm-product-title-color3">点击抢购<span
-                                            className="tri tri-btm-color3"></span></span>
+                                        <span className="theme4-btm-product-price">
+                                            {get_prd(6).rmbPrice != 0 && `¥${get_prd(6).rmbPrice}+`}
+                                            {get_prd(6).score}工分</span>
+                                        <span className="product-purchasej theme4-btm-product-title-color3">
+                                            点击抢购<span className="tri tri-btm-color3"></span></span>
                                     </div>
                                 </div>
                             </a>
                         </div>
                         <div className="theme4-btm-right-product-wrap">
-                            <a onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[7].bizNo)}>
-                                <img className="theme4-btm-product-img" src={products[7].img}/>
+                            <a href={`/static/mall/product-detail/index.html?bizNo=${get_prd(7).bizNo}`}>
+                                <img className="theme4-btm-product-img" src={get_prd(7).img} />
                             </a>
-                            <a onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[7].bizNo)}>
-                                <img className="theme4-btm-product-img" src={products[8].img}/>
+                            <a href={`/static/mall/product-detail/index.html?bizNo=${get_prd(6).bizNo}`}>
+                                <img className="theme4-btm-product-img" src={get_prd(8).img} />
                             </a>
                         </div>
                     </div>
