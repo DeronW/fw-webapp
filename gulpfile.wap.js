@@ -29,6 +29,7 @@ const PROTOCOL_PAGES = [
     'protocol-special-recharge', // 特殊用户充值协议
     'protocol-special-cash', // 特殊提现协议
     'protocol-special-bind', // 特殊绑定银行卡协议
+    'protocol-batch-invest', // 批量投资协议
 ]
 
 // const CIRCLE_PAGES = [
