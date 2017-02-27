@@ -97,7 +97,8 @@ const CardList = React.createClass({
             <div className={bgColor}>
                 <div className="bank-tit"><img src={cardImg}/><span
                     className="bank-name">{bankCard.bankName}</span><span
-                    className="bank-type">{bankCard.bankCardType}</span></div>
+                    className="bank-type">/*{bankCard.bankCardType}*/</span>
+                </div>
                 <div className="bank-desc">
                     <div className="owner-name">{bankCard.accountName}</div>
                     <div>{bankCard.accountNo}</div>
