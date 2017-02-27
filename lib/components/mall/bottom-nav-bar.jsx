@@ -41,7 +41,7 @@ const BottomNavBar = React.createClass({
         let _style_footer_fixed = {
             // background: "url(images/global-bottom-nav-bg.png) no-repeat",
             background: 'white',
-            boxShadow: '0 -10px 10px #eee',
+            boxShadow: '0 -15px 15px #e3e3e3',
             width: "720px",
             height: "100px",
             fontSize: '22px',
@@ -90,12 +90,12 @@ const BottomNavBar = React.createClass({
 
         let _back_to_index = {
             display: "block",
-            width: "90px",
-            height: "90px",
+            width: "96px",
+            height: "96px",
             padding: '10px',
             position: "absolute",
             top: "31px",
-            left: "312px",
+            left: "304px",
             background: 'white',
             position: 'relative',
             top: '-22px',
@@ -103,8 +103,8 @@ const BottomNavBar = React.createClass({
         }
 
         let _back_to_index_icon = {
-            width: '90px',
-            height: '90px',
+            width: '96px',
+            height: '96px',
             borderRadius: '50%',
             background: '#ef3837 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAAA5CAMAAABeWLbbAAAAq1BMVEUAAAD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////Nr6iZAAAAOHRSTlMA9+7y+rfHOD+jdkQt0+TDM+ocXPy7Bd/Xqo5VIhDNlBWmC2u/soZQOycDcgeuxoB7aGFKKgG8mjV7IaIAAANeSURBVEjH7ZbbmppADIADigJSFUG0rCCyHnbVdY9t8/5P1iSzI0fb1a+X/S9gIsMPCWQEbiQ6uK5XhP0h1ul+h0/usYqpTqGRBZpJF4mRo/lucvwEikenyjPsXNdd0oy5694fgUnVCQWJKPs6fEvnBSuADqJh0ISQrmTuaYItd51DiSUSM30TfNgUQsSOGPqSBY/GNEOK8Axl9h0kAhBeabgEwWoa+jyB8KHKW1EzuP+LQV1ul3RLDAFmSGzrhmmbIUbiG0Qby7KkgLRfcvKEcdQGVGpsM/CvZgZCh6eWX4OVVNIqs20YgiB430PTANnAtj0gxnaFj7pBUxjq6CQYTq1uGBoFyJTinjbMims0DZteQciGUrw8G2LrjkpjvbDhpixmFob5AjFuN2wdZ9AwvDpOUDJMEF8cxEgZir5QhhPtX2uGFY0OJUOGmA7RSMRQ6k33EH12llEYzs20LxnmKKzFUKwPyWLBBjCki7RB30JaroNM8gFqBkpjw9FI5muDHhy+YKDQ0i9wGBUGOYzJFYYIiUPJsJF+/6phSIRcS9kT55iwWg0WHfFlivS9+SdGQMxM8wkgNc0plcw0U95ofGsP//mXRN6gwUN2xfnbDrYxfYSv8WODFzA/9ByXFqx1BJDYVR6AucOLTLXhG0cTAAdrTFQnXyRMaoZdT6MS7xx1b/vfFZvQGH0OUyQ+qoaCXyrNDLRhBUK0fjo/gQckvHbDfq0FdYObRtAwTBzHUR81TgxCPheBn0Bh6N0J84CfjS3jrTbs8EwXmImvBWdDwZjiuAjFkB9cV87Zum8LwjZUCh4HSd3g6ZyZZh022ODndQbPrSD/w9cZiHFMADzT1jZuMcjIhwHHg5sMmfru63Ep4SbDL36mUR7SLr7N0JHyx9wz+U2GnfrRpO0J2gyz/C8Gbrch2Bw9VA2nAWMnFB47gQQvLYaEdy6c5HlUDSs4c59e7s2l1PHIddxeMkQH37tokPwt2HIdjyUD97o5Vax9nH8OvzVWmOydt4/AbbYGbbhmlZM6ztTNjbXB/PNKawGxOPV63EMjeY/eYC2ed1orkYh5RXm6JPAXUKwwveiZtwBk646pqIKjqvfit6awWajDAbHLAPIg6FM8CO5ygCwg3o/nlfNx3MBL4Gv8BiXsRv1VM+PXAAAAAElFTkSuQmCC") no-repeat center center'
         }
