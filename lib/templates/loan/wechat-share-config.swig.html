@@ -2,7 +2,7 @@
 <script type="text/javascript">
     (function () {
 
-        let USER = $FW.Store.getUserDict();
+        const USER = $FW.Store.getUserDict();
         let templateContent;
         let templateTitle;
         let templateUrl;
@@ -34,7 +34,7 @@
             });
         }
 
-        var iurl = 'http://static.9888.cn/images/loan/invitation.jpg';
+        let iurl = 'http://static.9888.cn/images/loan/invitation.jpg';
 
         function setShareFriend() {
             wx.onMenuShareAppMessage({
@@ -44,7 +44,7 @@
                 imgUrl: iurl, // 分享图标
                 success: function () {
                     // 用户确认分享后执行的回调函数
-                    //alert("喵喵感谢您！");
+                    alert("喵喵感谢您！");
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
@@ -58,6 +58,7 @@
                 imgUrl: iurl, // 分享图标
                 success: function () {
                     // 用户确认分享后执行的回调函数
+                    alert("喵喵感谢您！");
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
@@ -66,7 +67,7 @@
         }
 
         $FW.Post(`${API_PATH}/cashloan/outside/weixinAccountController.do?wxConfig`, {
-            url: location.href // 'http://m.easyloan888.cn/static/loan/weixin-invite/index.html'
+            url: 'http://m.easyloan888.cn/static/loan/weixin-invite/index.html'
         }).then((data) => {
             alert(data)
             setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
