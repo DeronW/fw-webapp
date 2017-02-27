@@ -13,7 +13,7 @@
             sourceType: SOURCE_TYPE,
             templateType: 1
         }).then(data => {
-            alert('debug getContent', JSON.stringify(data))
+            //alert('debug getContent', JSON.stringify(data))
             templateContent = data.shareTemplate.templateContent;
             templateTitle = data.shareTemplate.templateTitle;
             templateUrl = data.shareTemplate.templateUrl;
@@ -36,7 +36,7 @@
         let iurl = 'https://static.9888.cn/images/loan/invitation.jpg';
 
         function setShareFriend() {
-            alert('setShareFriend')
+            //alert('setShareFriend')
             wx.onMenuShareAppMessage({
                 title: templateTitle, // 分享标题
                 desc: templateContent, // 分享描述
@@ -52,7 +52,7 @@
             });
         }
         function setShareFriendQuan() {
-            alert('setShareFriendQuan')
+            //alert('setShareFriendQuan')
             wx.onMenuShareTimeline({
                 title: templateTitle, // 分享标题
                 link: templateUrl, // 分享链接
@@ -71,7 +71,7 @@
             url: `${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`,
             data: { url: location.href }
         }).then(data => {
-            alert('debug wxConfig', JSON.stringify(data))
+            //alert('debug wxConfig', JSON.stringify(data))
             setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
             setShareFriend()
             setShareFriendQuan()
