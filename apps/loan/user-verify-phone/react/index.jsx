@@ -85,17 +85,15 @@ const VerifyPhone = React.createClass({
             sourceType: SOURCE_TYPE
         }).then(data => {
             let d = data.bindStatus;
-            this.getResult(d.status, d.transCode);
             this.setState({
                 result: d.status,
                 failReason: d.failReason
             });
+            this.getResult(d.status, d.transCode);
             $FW.Component.showAjaxLoading();
         }, e => $FW.Component.Toast(e.message));
     },
     getResult(result, transCode) {
-        console.log('getResult', result, transCode)
-
         if (result == 0) {
             this.setState({ show: true });
             if (transCode == 1001) {
