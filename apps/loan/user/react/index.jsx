@@ -122,13 +122,13 @@ const MyCnt = React.createClass({
                                 <span className="arrow-r-icon"></span>
                             </a>
                         </div>
-                        {/*<div className="list-cnt">
-                            <a href="">
+                        <div className="list-cnt">
+                            <a href="/static/loan/weixin-invite/index.html">
                                 <span className="icon invite-icon"></span>
                                 <span className="text">邀请好友</span>
                                 <span className="arrow-r-icon"></span>
                             </a>
-                        </div>*/}
+                        </div>
                         <div className="list-cnt">
                             <a href="/static/loan/user-settings/index.html">
                                 <span className="icon more-icon"></span>
