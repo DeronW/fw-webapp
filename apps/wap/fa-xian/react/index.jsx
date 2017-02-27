@@ -1,8 +1,13 @@
 const Content = React.createClass({
     getInitialState() {
         return {
-
+            notice: ''
         }
+    },
+    componentDidMount() {
+        $.Ajax(`${API_PATH}mpwap/new/userLogin/showNotice.shtml`).then(data => {
+            this.setState({ notice: data.siteNotice })
+        })
     },
     render() {
         return (
@@ -15,9 +20,8 @@ const Content = React.createClass({
                 <a className="notice">
                     <img className="notice-icon" src="images/1.png" />
                     <div className="sp-line"></div>
-                    <div className="text">
-                        中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文
-                        </div>
+                    <div className="text"> {this.state.notice} </div>
+                    <i className="icon-right-arrow"></i>
                 </a>
                 <div className="channel">
                     <a> <i className="icon-game"></i>游戏中心 </a>
