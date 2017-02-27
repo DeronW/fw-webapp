@@ -17,7 +17,7 @@
             templateContent = data.shareTemplate.templateContent;
             templateTitle = data.shareTemplate.templateTitle;
             templateUrl = data.shareTemplate.templateUrl;
-        }, e => $FW.Component.Toast(e.message));
+        });
 
         function setWxConfig(debug, appid, timestamp, noncestr, signature) {
             wx.config({
@@ -65,8 +65,9 @@
             });
         }
 
-        $FW.Post(`${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`, {
-            url: location.href
+        $FW.Ajax({
+            url:`${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`,
+            method: 'GET'
         }).then((data) => {
             setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
             setShareFriend()
