@@ -65,7 +65,7 @@ const VerifyPhone = React.createClass({
             verifyCode: this.state.codeVal,
             sourceType: SOURCE_TYPE
         }).then(() => {
-            this.setState({result: null});
+            this.setState({ result: null });
             setTimeout(this.checkAjax, 3000);
             setTimeout(this.checkAjax, 6000);
             setTimeout(this.checkAjax, 9000);
@@ -74,6 +74,8 @@ const VerifyPhone = React.createClass({
 
     },
     checkAjax() {
+        if (this.state.result === 'wrong_code') return;
+
         $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
             operatorBankcardGid: BANK_GID,
             token: USER.token,
