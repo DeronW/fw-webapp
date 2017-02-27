@@ -2,7 +2,7 @@
 <script type="text/javascript">
     (function () {
 
-        const USER = $FW.Store.getUserDict();
+        let USER = $FW.Store.getUserDict();
         let templateContent;
         let templateTitle;
         let templateUrl;
@@ -65,10 +65,7 @@
             });
         }
 
-        $FW.Ajax({
-            url:`${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`,
-            method: 'GET'
-        }).then((data) => {
+        $FW.Ajax(`${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`).then(data => {
             setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
             setShareFriend()
             setShareFriendQuan()
