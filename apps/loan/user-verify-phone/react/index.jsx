@@ -70,7 +70,6 @@ const VerifyPhone = React.createClass({
             setTimeout(this.checkAjax, 6000);
             setTimeout(this.checkAjax, 9000);
             setTimeout(this.checkAjax, 12000);
-            setTimeout($FW.Component.hideAjaxLoading, 1100);
         }, e => $FW.Component.Toast(e.message));
 
     },
@@ -90,7 +89,6 @@ const VerifyPhone = React.createClass({
                 failReason: d.failReason
             });
             this.getResult(d.status, d.transCode);
-            $FW.Component.showAjaxLoading();
         }, e => $FW.Component.Toast(e.message));
     },
     getResult(result, transCode) {
