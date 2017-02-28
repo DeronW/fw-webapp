@@ -5,7 +5,7 @@ const Content = React.createClass({
         }
     },
     componentDidMount() {
-        $.Ajax(`${API_PATH}mpwap/new/userLogin/showNotice.shtml`).then(data => {
+        $FW.Ajax(`${API_PATH}mpwap/new/userLogin/showNotice.shtml`).then(data => {
             this.setState({ notice: data.siteNotice })
         })
     },
