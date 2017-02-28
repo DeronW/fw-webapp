@@ -17,6 +17,16 @@ function phoneMosaic(val) {
     }
 
 }
+
+var ConcertUtilBrowser = {
+    versions: (function () {
+        var ua = window.navigator.userAgent.toLowerCase();
+        return {
+            weixin: ua.match(/MicroMessenger/i) == 'micromessenger'
+        };
+    })()
+};
+
 const Register = React.createClass({
     getInitialState() {
         return {
@@ -75,7 +85,7 @@ const Register = React.createClass({
         return (
             <div className="login-cnt">
                 {
-                    navigator.userAgent.indexOf('MicroMessenger') >= 0 ? <div className="top"></div> :
+                    ConcertUtilBrowser.versions.weixin ? <div className="top"></div> :
                         <div className="top">
                             <a className="icon" href={`/static/loan/user-entry/index.html`}></a>
                             <span className="title">登录</span>
