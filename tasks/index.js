@@ -88,9 +88,10 @@ module.exports = function (site_name, page_name, configs) {
         CONFIG.debug);
 
     function compile_html() {
-        return html([`${app_path}index.html`, `${app_path}index.pjax.html`],
-            build_path,
-            CONFIG.html_engine, {
+        return html([
+            `${app_path}index.html`,
+            // `${app_path}index.pjax.html`
+        ], build_path, CONFIG.html_engine, {
                 API_PATH: CONFIG.api_path,
                 DEBUG: CONFIG.debug,
                 ENV: CONFIG.environment
