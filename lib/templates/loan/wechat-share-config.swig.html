@@ -5,6 +5,7 @@
         let templateContent;
         let templateTitle;
         let templateUrl;
+        let iurl = 'https://static.9888.cn/images/loan/invitation.jpg';
 
         $FW.Post(`${API_PATH}api/shareTemplate/v1/getContent.json`, {
             token: USER.token,
@@ -17,6 +18,17 @@
             templateContent = data.shareTemplate.templateContent;
             templateTitle = data.shareTemplate.templateTitle;
             templateUrl = data.shareTemplate.templateUrl;
+
+            return $FW.Ajax({
+                url: `${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`,
+                data: {url: location.href}
+            }).then(data => {
+                alert('debug wxConfig: ' + JSON.stringify(data))
+                setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
+            });
+        }).then(() => {
+            setShareFriend()
+            setShareFriendQuan()
         });
 
         function setWxConfig(debug, appid, timestamp, noncestr, signature) {
@@ -33,10 +45,8 @@
             });
         }
 
-        let iurl = 'https://static.9888.cn/images/loan/invitation.jpg';
-
         function setShareFriend() {
-            //alert('setShareFriend')
+            alert('setShareFriend: ' + templateTitle + ' , ' + templateContent + ', ' + templateUrl)
             wx.onMenuShareAppMessage({
                 title: templateTitle, // 分享标题
                 desc: templateContent, // 分享描述
@@ -44,13 +54,14 @@
                 imgUrl: iurl, // 分享图标
                 success: function () {
                     // 用户确认分享后执行的回调函数
-                    //alert("喵喵感谢您！");
+                    alert("喵喵感谢您！");
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
                 }
             });
         }
+
         function setShareFriendQuan() {
             //alert('setShareFriendQuan')
             wx.onMenuShareTimeline({
@@ -59,24 +70,13 @@
                 imgUrl: iurl, // 分享图标
                 success: function () {
                     // 用户确认分享后执行的回调函数
-                    //alert("喵喵感谢您！");
+                    alert("喵喵感谢您！");
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
                 }
             });
         }
-
-        $FW.Ajax({
-            url: `${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`,
-            data: { url: location.href }
-        }).then(data => {
-            alert('debug wxConfig: ' + JSON.stringify(data))
-            setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
-            setShareFriend()
-            setShareFriendQuan()
-        });
-
     })();
 
 </script>
