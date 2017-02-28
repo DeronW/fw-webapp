@@ -8,6 +8,8 @@
         if (typeof (Raven) === 'object' && Raven.isSetup()) {
             var err;
             if (error) {
+                // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
+                if(error.message && String(error.message).indexOf('_vds_hybrid') > -1) return;
                 Raven.captureException(error);
             } else {
                 // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
