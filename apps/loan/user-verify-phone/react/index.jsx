@@ -69,11 +69,10 @@ const VerifyPhone = React.createClass({
             setTimeout(this.checkAjax, 3000);
             setTimeout(this.checkAjax, 6000);
             setTimeout(this.checkAjax, 9000);
-            setTimeout(this.checkAjax, 12000);
+            setTimeout(()=>this.checkAjax('finalTry'), 12000);
         }, e => $FW.Component.Toast(e.message));
-
     },
-    checkAjax() {
+    checkAjax(finalTry) {
         if (this.state.result === 'wrong_code') return;
 
         $FW.Post(`${API_PATH}api/bankcard/v1/status.json`, {
@@ -88,12 +87,12 @@ const VerifyPhone = React.createClass({
                 result: d.status,
                 failReason: d.failReason
             });
-            this.getResult(d.status, d.transCode);
+            this.getResult(d.status, d.transCode, finalTry);
         }, e => $FW.Component.Toast(e.message));
     },
-    getResult(result, transCode) {
+    getResult(result, transCode, finalTry) {
         if (result == 0) {
-            this.setState({ show: true });
+            if(finalTry) this.setState({ show: true });
             if (transCode == 1001) {
                 this.setState({ show: false, result: 'wrong_code' });
                 $FW.Component.Toast("验证码不正确");
