@@ -23,11 +23,10 @@ const Banner = React.createClass({
             return s.replace(/(^\s*)|(\s*$)/g, '')
         }
 
-        let img = (
+        let img =
             <a className="act-img-detail">
                 <img src={image || 'images/default-banner.jpg'}/>
             </a>
-        );
 
         let detail = null;
 
