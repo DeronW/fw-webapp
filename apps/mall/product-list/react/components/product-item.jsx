@@ -14,17 +14,17 @@ const ProductItem = React.createClass({
 
         return (
             <a href={'/static/mall/product-detail/index.html?bizNo=' + this.props.bizNo} className="index-actList-a">
-                <div className="list-img" style={{backgroundImage: cover_bg}}></div>
+                <div className="list-img" style={{ backgroundImage: cover_bg }}></div>
                 {Angle}
                 <div className="list-name">{this.props.title}</div>
                 <div className="list-mark"> {marks} </div>
                 <div className="list-price-box">
                     <div className="list-price">
-                        {show_price ? <span className="list-price-mark">&yen;</span> : null}
-                        {show_price ?
+                        {show_price && <span className="list-price-mark">&yen;</span>}
+                        {show_price &&
                             <span className="list-price-num">
                                 {$FW.Format.currency(this.props.price)}
-                                </span> : null}
+                            </span>}
                         {score}
                     </div>
                     <div className="list-sold">

@@ -25,7 +25,7 @@ const ExchangeBar = React.createClass({
     },
     componentDidMount: function () {
         if (Filter.options.searchSourceType == 1) {
-            this.setState({maxPoints: Filter.myConvertibleScore});
+            this.setState({ maxPoints: Filter.myConvertibleScore });
         }
     },
     tabClickHandler: function (tabName) {
@@ -40,20 +40,20 @@ const ExchangeBar = React.createClass({
             };
             this.props.searchFilterProductShow();
             this.props.filterProducts(options);
-            this.setState({showFilterPop: false});
+            this.setState({ showFilterPop: false });
         } else if (tabName == 'proceeds') {
             let options = {
                 order: this.state.sort,
                 page: 1
             };
             if (this.state.sort == 3) {
-                this.setState({sort: 4});
+                this.setState({ sort: 4 });
                 options = {
                     order: 4,
                     page: 1
                 };
             } else {
-                this.setState({sort: 3});
+                this.setState({ sort: 3 });
                 options = {
                     order: 3,
                     page: 1
@@ -61,20 +61,20 @@ const ExchangeBar = React.createClass({
             }
             this.props.searchFilterProductShow();
             this.props.filterProducts(options);
-            this.setState({showFilterPop: false});
+            this.setState({ showFilterPop: false });
         } else if (tabName == 'salestime') {
             let options = {
                 order: this.state.sort,
                 page: 1
             };
             if (this.state.sort == 5) {
-                this.setState({sort: 0});
+                this.setState({ sort: 0 });
                 options = {
                     order: 0,
                     page: 1
                 };
             } else {
-                this.setState({sort: 5});
+                this.setState({ sort: 5 });
                 options = {
                     order: 5,
                     page: 1
@@ -82,20 +82,20 @@ const ExchangeBar = React.createClass({
             }
             this.props.searchFilterProductShow();
             this.props.filterProducts(options);
-            this.setState({showFilterPop: false});
+            this.setState({ showFilterPop: false });
         } else if (tabName == 'scorerank') {
             let options = {
                 order: this.state.sort,
                 page: 1
             };
             if (this.state.sort == 1) {
-                this.setState({sort: 2});
+                this.setState({ sort: 2 });
                 options = {
                     order: 2,
                     page: 1
                 };
             } else {
-                this.setState({sort: 1});
+                this.setState({ sort: 1 });
                 options = {
                     order: 1,
                     page: 1
@@ -103,19 +103,19 @@ const ExchangeBar = React.createClass({
             }
             this.props.searchFilterProductShow();
             this.props.filterProducts(options);
-            this.setState({showFilterPop: false});
+            this.setState({ showFilterPop: false });
         } else if (tabName == 'filter') {
             this.state.showFilterPop ?
                 this.props.searchFilterProductShow() :
                 this.props.searchFilterProductHide();
-            this.setState({showFilterPop: !this.state.showFilterPop});
+            this.setState({ showFilterPop: !this.state.showFilterPop });
         }
-        this.setState({tab: tabName});
+        this.setState({ tab: tabName });
     },
     filterScoreHandler: function (name) {
-        this.setState({minValue: ''});
-        this.setState({maxValue: ''});
-        this.setState({filterScore: name});
+        this.setState({ minValue: '' });
+        this.setState({ maxValue: '' });
+        this.setState({ filterScore: name });
         if (name == '不限') {
             this.setState({
                 maxPoints: Filter.options.searchSourceType == 1 ? Filter.myConvertibleScore : '',
@@ -171,19 +171,19 @@ const ExchangeBar = React.createClass({
         }
     },
     filterLevelHandler: function (name) {
-        this.setState({filterLevel: name});
+        this.setState({ filterLevel: name });
         if (name == '不限') {
-            this.setState({vipLevel: ''});
+            this.setState({ vipLevel: '' });
         } else if (name == '普通会员') {
-            this.setState({vipLevel: 1});
+            this.setState({ vipLevel: 1 });
         } else if (name == 'Vip1专享') {
-            this.setState({vipLevel: 2});
+            this.setState({ vipLevel: 2 });
         } else if (name == 'Vip2专享') {
-            this.setState({vipLevel: 3});
+            this.setState({ vipLevel: 3 });
         } else if (name == 'Vip3专享') {
-            this.setState({vipLevel: 4});
+            this.setState({ vipLevel: 4 });
         } else if (name == 'Vip4专享') {
-            this.setState({vipLevel: 5});
+            this.setState({ vipLevel: 5 });
         }
     },
     maxValueHandler: function (e) {
@@ -197,15 +197,15 @@ const ExchangeBar = React.createClass({
             this.setState({
                 maxValue: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value
             });
-            this.setState({maxPoints: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value});
+            this.setState({ maxPoints: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value });
         } else {
-            this.setState({maxValue: e.target.value});
-            this.setState({maxPoints: e.target.value});
+            this.setState({ maxValue: e.target.value });
+            this.setState({ maxPoints: e.target.value });
         }
         if (e.target.value == '' && this.state.minValue == '') {
-            this.setState({filterScore: '不限'});
+            this.setState({ filterScore: '不限' });
         } else {
-            this.setState({filterScore: ''});
+            this.setState({ filterScore: '' });
         }
     },
     minValueHandler: function (e) {
@@ -219,15 +219,15 @@ const ExchangeBar = React.createClass({
             this.setState({
                 minValue: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value
             });
-            this.setState({minPoints: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value});
+            this.setState({ minPoints: e.target.value > Filter.myConvertibleScore ? Filter.myConvertibleScore : e.target.value });
         } else {
-            this.setState({minValue: e.target.value});
-            this.setState({minPoints: e.target.value});
+            this.setState({ minValue: e.target.value });
+            this.setState({ minPoints: e.target.value });
         }
         if (e.target.value == '' && this.state.maxValue == '') {
-            this.setState({filterScore: '不限'});
+            this.setState({ filterScore: '不限' });
         } else {
-            this.setState({filterScore: ''});
+            this.setState({ filterScore: '' });
         }
     },
     clearFilterHandler: function () {
@@ -264,7 +264,7 @@ const ExchangeBar = React.createClass({
             maxPoints: this.state.maxPoints,
             page: 1
         };
-        this.setState({showFilterPop: false});
+        this.setState({ showFilterPop: false });
         this.props.filterProducts(options);
     },
     render: function () {
@@ -277,7 +277,7 @@ const ExchangeBar = React.createClass({
                 scorerank: '工分',
                 filter: '筛选'
             };
-            let rank_icon = (j)=> {
+            let rank_icon = (j) => {
                 if (j == 'proceeds') {
                     if (_this.state.sort == 4) {
                         return 'rank-icon-up'
@@ -308,9 +308,9 @@ const ExchangeBar = React.createClass({
             };
             return (
                 <div key={i} className={i == _this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
-                     onClick={function () {
-                         _this.tabClickHandler(i)
-                     }}>
+                    onClick={function () {
+                        _this.tabClickHandler(i)
+                    }}>
                     {name[i]}<span className={"rank-icon " + rank_icon(i)}></span>
                 </div>
             )
@@ -318,29 +318,29 @@ const ExchangeBar = React.createClass({
 
         let gongfeng_array = ['不限', '我可兑换', '1-100', '101-1000', '1000-5000', '5000以上'];
         let gongfeng_item = gongfeng_array.map((name, index) => {
-                return (<span className={this.state.filterScore == name ? "gongfeng-item-wrap on" : "gongfeng-item-wrap"}
-                              key={index}>
-                        <span className="gongfeng-item" onClick={function () { _this.filterScoreHandler(name)}}>
-                        {name}
-                        </span>
-                    </span>)
-            }
+            return (<span className={this.state.filterScore == name ? "gongfeng-item-wrap on" : "gongfeng-item-wrap"}
+                key={index}>
+                <span className="gongfeng-item" onClick={function () { _this.filterScoreHandler(name) }}>
+                    {name}
+                </span>
+            </span>)
+        }
         );
         let viplevel_array = ['不限', '普通会员', 'Vip1专享', 'Vip2专享', 'Vip3专享', 'Vip4专享'];
 
         let viplevel_item = viplevel_array.map((name, index) => {
-                return (
-                    <span className={this.state.filterLevel == name ? "viplevel-item-wrap on" : "viplevel-item-wrap"}
-                          key={index}><span className="viplevel-item" onClick={function () {
+            return (
+                <span className={this.state.filterLevel == name ? "viplevel-item-wrap on" : "viplevel-item-wrap"}
+                    key={index}><span className="viplevel-item" onClick={function () {
                         _this.filterLevelHandler(name)
                     }}>{name}</span></span>
-                )
-            }
+            )
+        }
         );
 
-        let filterPop = ()=> {
+        let filterPop = () => {
             return (
-                <div className="filter-box" style={{zIndex: "10"}}>
+                <div className="filter-box" style={{ zIndex: "10" }}>
                     <div className="filter-box-wrap">
                         <div className="gongfeng-filter-box">
                             <div className="filter-title">按工分值</div>
@@ -350,13 +350,13 @@ const ExchangeBar = React.createClass({
 
                                     <div className="gongfeng-input-box gongfeng-input-box1"><input
                                         className="gongfeng-input" type="text" value={this.state.minValue}
-                                        placeholder="最低工分" onChange={this.minValueHandler}/></div>
+                                        placeholder="最低工分" onChange={this.minValueHandler} /></div>
                                     <span
                                         className="horizon-line"></span>
                                     <div className="gongfeng-input-box gongfeng-input-box2"><input
                                         className="gongfeng-input gongfeng-input1" type="text"
                                         value={this.state.maxValue} placeholder="最高工分" onChange={this.maxValueHandler}
-                                        ref="maxScore"/>
+                                        ref="maxScore" />
                                     </div>
                                 </div>
                             </div>
@@ -383,7 +383,7 @@ const ExchangeBar = React.createClass({
                         {this.tabs.map(tab)}
                     </div>
                 </div>
-                {this.state.showFilterPop ? filterPop() : null}
+                {this.state.showFilterPop && filterPop()}
             </div>
         );
     }
