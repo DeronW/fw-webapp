@@ -30,17 +30,18 @@ const MyVoucher = React.createClass({
                 case 'used':
                     return '已使用';
                 case 'dated':
-                    return '已过期'
+                    return '已过期';
+                default:
+                    return ''
             }
         };
 
-        var btn_voucher = (v, index) => (
+        var btn_voucher = (v, index) =>
             <div key={index}
                  className={index == this.state.index ? "select-li" : ""}
                  onClick={function(){self.clickHandler(index)}}>
                 <span className="tab-text"> {voucher_name(v)} </span>
             </div>
-        );
 
         let voucher_list = [];
         if (this.state.index == 0) {

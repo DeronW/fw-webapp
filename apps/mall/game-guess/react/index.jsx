@@ -66,7 +66,6 @@ const GameGuess = React.createClass({
                     next_cost_score: data.nextCostScore
                 });
                 let upValue = 0;
-                console.log(data.result);
                 if (data.result) {
                     switch (value) {
                         case 0:
@@ -77,6 +76,9 @@ const GameGuess = React.createClass({
                             break;
                         case 2:
                             upValue = 1;
+                            break;
+                        default:
+                            upValue = '';
                             break;
                     }
                 } else {
@@ -89,6 +91,9 @@ const GameGuess = React.createClass({
                             break;
                         case 2:
                             upValue = 0;
+                            break;
+                        default:
+                            upValue = '';
                             break;
                     }
                 }
@@ -175,17 +180,15 @@ const GameGuess = React.createClass({
     },
     render: function () {
         let cost_tip = (level, cost)=> {
-            return (
-                <div className="cost">第<span className="pass-num">{(level % 3) + 1}</span>关仅<span
-                    className="cost-score">{cost}</span>工分，选手势赢翻倍积分! </div>
-            )
+            return
+            <div className="cost">第<span className="pass-num">{(level % 3) + 1}</span>关仅<span
+                className="cost-score">{cost}</span>工分，选手势赢翻倍积分! </div>
         };
         let check_img = [0, 1, 2].map((value, index)=> {
             let check_state = (value == this.state.checked) ? "smallimg-on" : "smallimg";
-            return (
-                <div key={index} className={"check check"+value} onClick={()=>{this.checkHandler(value)}}><img
-                    src={"images/"+check_state+value+".png"}/></div>
-            )
+            return
+            <div key={index} className={"check check"+value} onClick={()=>{this.checkHandler(value)}}><img
+                src={"images/"+check_state+value+".png"}/></div>
         });
         return (
             <div className={"game-guess bg"+this.state.level}>
