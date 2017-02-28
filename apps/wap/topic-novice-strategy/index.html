@@ -1,0 +1,56 @@
+{% extends '../../../lib/templates/wap_base.swig.html' %}
+
+{% block title %}新手策略{% endblock %}
+{% block content %}
+<div class="novice-box">
+    <div class="novice-title">
+        新手策略
+    </div>
+    <div class="model model-new">
+        <div class="text new-text">
+            成功注册即获<span class="yellow">120元大礼包</span>。分为20元、100元的返现券，如何正确的首投赚更多呢？
+        </div>
+    </div>
+    <div class="model model-primary">
+        <div class="text primary-text">
+            新手必学！<span class="yellow">首投2千稳赚20元</span>(20元新手返现现金)。
+        </div>
+    </div>
+    <div class="model model-middle">
+        <div class="text middle-text">
+            想赚更多？<span class="yellow">首投1万立获100元</span>(100元新手返现现金）。
+        </div>
+    </div>
+    <div class="model model-advanced">
+        <div class="text advanced-text">
+            最高挑战！<span class="yellow">首投1.2万新手120元奖励全到手，满满幸福感！</span>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="clickevent">
+            <a href="https://m.9888.cn/mpwap/orderuser/toRegister.shtml" class="link"></a>
+        </div>
+        <div class="activity" onclick="document.getElementById('pop-window').style.display='block'">
+            <img src="images/hdxj.png" class="activity-pic">
+        </div>
+    </div>
+    <div class="popup-window" id="pop-window" style="display: none">
+        <div class="pop-close" onclick="document.getElementById('pop-window').style.display='none'">
+        </div>
+        <div class="pop-text">
+            <div class="p-text time"><div class="p-title">活动时间：</div>2017年3月8日起</div>
+            <div class="p-text ruler"><div class="p-title">活动规则：</div>
+                1：新工友注册送120元返现券礼包
+            </div>
+            <div class="p-text des">
+                <div class="p-title">活动说明：</div>
+                <div class="des-text">1、每张返现券都有对应使用条件：最短投资标的期限、最低投资金额、有效期。可在“我的工场 - 优惠券”中查看返现券明细；</div>
+                <div class="des-text">2、返现券不可抵现金，不可转让，不能用于投资债权转让项目；</div>
+                <div class="des-text">3、除特殊说明外，每次投标可使用多张返现券。投资时请务必勾选“使用返现券”，投资成功即返对应现金至金融工场账户，返还的现金可用于继续投资或提现；</div>
+                <div class="des-text">4、本活动最终解释权归金融工场所有，详情可致电客服热线咨询：<a style="color: blue;text-decoration: underline;">400-0322-988</a>。</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
