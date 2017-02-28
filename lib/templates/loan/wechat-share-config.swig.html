@@ -14,7 +14,7 @@
             sourceType: SOURCE_TYPE,
             templateType: 1
         }).then(data => {
-            alert('debug getContent 2 ->' + JSON.stringify(data))
+            alert('debug getContent 3 ->' + JSON.stringify(data))
             templateContent = data.shareTemplate.templateContent;
             templateTitle = data.shareTemplate.templateTitle;
             templateUrl = data.shareTemplate.templateUrl;
@@ -27,8 +27,6 @@
             alert('debug wxConfig: ' + JSON.stringify(data))
             setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
         }).then(() => {
-            setShareFriend()
-            setShareFriendQuan()
         });
 
         function setWxConfig(debug, appid, timestamp, noncestr, signature) {
@@ -44,6 +42,11 @@
                 ]
             });
         }
+
+        wx.ready(function (){
+            setShareFriend()
+            setShareFriendQuan()
+        })
 
         function setShareFriend() {
             alert('setShareFriend: ' + templateTitle + ' , ' + templateContent + ', ' + templateUrl)
