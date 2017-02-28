@@ -15,23 +15,24 @@ $FW.DOMReady(function () {
     function $(id) { return document.getElementById(id) }
 
     if (ConcertUtilBrowser.versions.ios) {
-        $("download-btn").innerHTML = "IOS客户端下载";
-    } else {
+        $("download-btn").innerHTML = "iOS客户端敬请期待";
+    } else if(ConcertUtilBrowser.versions.android){
         $("download-btn").innerHTML = "Android客户端下载";
     };
 
-    $("download-btn").addEventListener("click", function () {
-        if (ConcertUtilBrowser.versions.weixin) {
-            $("mask").style.display = "block";
-        } else {
-            $FW.Ajax(`${API_PATH}api/v1/download.json?name=JRGC`).then(data => {
-                location.href = data.url;
-            }, e => $FW.Component.Toast(e.message));
-        }
-
-    });
-    $("mask").addEventListener("click", function () {
-        $("mask").style.display = "none";
-    });
+    if(ConcertUtilBrowser.versions.android){
+        $("download-btn").addEventListener("click", function () {
+            if (ConcertUtilBrowser.versions.weixin) {
+                $("mask").style.display = "block";
+            } else {
+                $FW.Ajax(`${API_PATH}api/v1/download.json?name=HLWZZ`).then(data => {
+                    location.href = data.url;
+                }, e => $FW.Component.Toast(e.message));
+            }
+        });
+        $("mask").addEventListener("click", function () {
+            $("mask").style.display = "none";
+        });
+    }
 
 });
