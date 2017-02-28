@@ -72,7 +72,7 @@ const GameCenter = React.createClass({
         for (var i = 0; i < bs.length; i++) {
             if (i == index) link = bs[i].link;
         }
-        link ? location.href = link : console.log('no link set');
+        link ? location.href = link : '';
     },
     popError: function (a) {
         this.setState({
