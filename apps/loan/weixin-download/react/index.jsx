@@ -27,7 +27,6 @@ $FW.DOMReady(function () {
             } else {
                 $FW.Ajax(`${API_PATH}api/v1/download.json?name=HLWZZ`).then(data => {
                     location.href = data.url;
-                    alert(data.url);
                 }, e => $FW.Component.Toast(e.message));
             }
         });
