@@ -1,22 +1,51 @@
 const Content = React.createClass({
     getInitialState() {
         return {
-            notice: ''
+            notice: '',
+            banners: [],
+            topics: []
         }
     },
     componentDidMount() {
         $FW.Ajax(`${API_PATH}mpwap/new/userLogin/showNotice.shtml`).then(data => {
             this.setState({ notice: data.siteNotice })
+        });
+
+        let q = $FW.Format.urlQuery();
+
+        $FW.Ajax({
+            url: 'https://fore.9888.cn/cms/api/appbanner.php',
+            data: {
+                key: '0ca175b9c0f726a831d895e',
+                id: q.banner_id || '33'
+            },
+            complete: data => this.setState({
+                banners: data.map(i => ({ url: i.url, img: i.image }))
+            })
+        });
+
+        $FW.Ajax({
+            url: 'https://fore.9888.cn/cms/api/appbanner.php',
+            data: {
+                key: '0ca175b9c0f726a831d895e',
+                id: q.topic_id || '34'
+            },
+            complete: data => this.setState({
+                topics: data.map(i => ({ url: i.url, img: i.thumb }))
+            })
         })
     },
     render() {
+
+        let topic = (t, index) => {
+            return <a className="event" key={index} href={t.url}>
+                <img src={t.img} />
+            </a>
+        }
+
         return (
             <div>
-                <BannerGroup className="banners" images={[
-                    'http://placehold.it/360x113',
-                    'http://placehold.it/360x113',
-                    'http://placehold.it/360x113'
-                ]} />
+                <BannerGroup className="banners" images={this.state.banners.map(i => i.img)} />
                 <a className="notice">
                     <img className="notice-icon" src="images/1.png" />
                     <div className="sp-line"></div>
@@ -31,15 +60,7 @@ const Content = React.createClass({
                 </div>
                 <div className="title-recommended"> 内容推荐 </div>
                 <div className="events">
-                    <a className="event">
-                        <img src="http://placehold.it/660x150" />
-                    </a>
-                    <a className="event">
-                        <img src="http://placehold.it/660x150" />
-                    </a>
-                    <a className="event">
-                        <img src="http://placehold.it/660x150" />
-                    </a>
+                    {this.state.topics.map(topic)}
                 </div>
                 <div className="contact-us">
                     <a className="service"><i className="icon-service"></i>联系客服</a>
@@ -48,7 +69,7 @@ const Content = React.createClass({
             </div>
         )
     }
-})
+});
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={'发现'} show_back_btn={false} />, HEADER_NODE);
