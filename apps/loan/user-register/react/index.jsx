@@ -105,7 +105,7 @@ const Register = React.createClass({
                 $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
                     channelCode: '',
                     codeToken: codeToken,
-                    invitationCode: '',
+                    invitationCode: $FW.Format.urlQuery().code,
                     mobile: phoneNum,
                     password: password,
                     verifyCode: code,
