@@ -29,17 +29,17 @@ const VerifyPhone = React.createClass({
         });
 
         this.time = setInterval(() => {
-            this.setState({ countdown: this.state.countdown - 1 });
+            this.setState({countdown: this.state.countdown - 1});
             if (this.state.countdown == 0) {
                 clearInterval(this.time);
-                this.setState({ countdownShow: false });
+                this.setState({countdownShow: false});
             }
         }, 1000)
     },
     changeCode(e) {
         if (verificationNum(e.target.value)) {
             if ($FW.Format.trim(e.target.value).length < 5) {
-                this.setState({ codeVal: $FW.Format.trim(e.target.value) });
+                this.setState({codeVal: $FW.Format.trim(e.target.value)});
             }
         }
     },
@@ -64,12 +64,20 @@ const VerifyPhone = React.createClass({
             userId: USER.id,
             verifyCode: this.state.codeVal,
             sourceType: SOURCE_TYPE
-        }).then(() => {
-            this.setState({ result: null });
+        }).then(
+            () => {
+                $FW.Component.showAjaxLoading()
+                return new Promise(resolve => setTimeout(() => {
+                            $FW.Component.hideAjaxLoading()
+                            resolve()
+                }, 5000))
+            }
+        ).then(() => {
+            this.setState({result: null});
             setTimeout(this.checkAjax, 3000);
             setTimeout(this.checkAjax, 6000);
             setTimeout(this.checkAjax, 9000);
-            setTimeout(()=>this.checkAjax('finalTry'), 12000);
+            setTimeout(() => this.checkAjax('finalTry'), 12000);
         }, e => $FW.Component.Toast(e.message));
     },
     checkAjax(finalTry) {
@@ -92,15 +100,15 @@ const VerifyPhone = React.createClass({
     },
     getResult(result, transCode, finalTry) {
         if (result == 0) {
-            if(finalTry) this.setState({ show: true });
+            if (finalTry) this.setState({show: true});
             if (transCode == 1001) {
-                this.setState({ show: false, result: 'wrong_code' });
+                this.setState({show: false, result: 'wrong_code'});
                 $FW.Component.Toast("验证码不正确");
             }
         } else if (result == 1) {
             window.location.href = '/static/loan/user-card-management/index.html';
         } else if (result == 2) {
-            this.setState({ show: true });
+            this.setState({show: true});
         }
     },
     confirmHandler() {
@@ -131,7 +139,7 @@ const VerifyPhone = React.createClass({
                             <span className="text">验证码</span>
                             <div className="input">
                                 <input type="number" onChange={this.changeCode}
-                                    value={this.state.codeVal} placeholder="请输入验证码" />
+                                       value={this.state.codeVal} placeholder="请输入验证码"/>
                             </div>
                             {btnSMSCode}
                         </div>
@@ -141,7 +149,7 @@ const VerifyPhone = React.createClass({
                         <div className="ui-btn" onClick={this.submitHandler}>确定</div>
                     </div>
                 </div>
-                {this.state.show && <div className="mask" style={{ zIndex: 100 }}>
+                {this.state.show && <div className="mask" style={{zIndex: 100}}>
                     <div className="popup">
                         {this.state.result == 2 && <div className="popup-title">设置提现卡失败</div>}
                         {this.state.result == 2 && <div className="popup-reason">{this.state.failReason}</div>}
@@ -161,6 +169,6 @@ const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid || '';
 const PHONE = $FW.Format.urlQuery().phone || '';
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={"验证手机号"} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"验证手机号"}/>, HEADER_NODE);
     ReactDOM.render(<VerifyPhone />, CONTENT_NODE);
 })
