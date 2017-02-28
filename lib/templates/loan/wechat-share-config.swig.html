@@ -12,7 +12,8 @@
             userGid: USER.gid,
             userId: USER.id,
             sourceType: SOURCE_TYPE,
-            templateType: 1
+            templateType: 1,
+            fail: () => true
         }).then(data => {
             templateContent = data.shareTemplate.templateContent;
             templateTitle = data.shareTemplate.templateTitle;
@@ -20,7 +21,8 @@
 
             return $FW.Ajax({
                 url: `${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`,
-                data: {url: location.href}
+                data: { url: location.href },
+                fail: () => true
             })
         }).then(data => {
             setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
@@ -40,7 +42,7 @@
             });
         }
 
-        wx.ready(function (){
+        wx.ready(function () {
             setShareFriend()
             setShareFriendQuan()
         })
