@@ -27,7 +27,8 @@ const Register = React.createClass({
             allowCode: true,
             codeToken: '',
             codeText: '获取验证码',
-            seeCode: false
+            seeCode: false,
+            checked:false
         }
     },
     phoneChange: function (e) {
@@ -95,26 +96,34 @@ const Register = React.createClass({
         v.length <= 16 && numLetter(v) && this.setState({password: v});
     },
     nextStepHandler: function () {
-        let err, {phoneNum, code, password, codeToken} = this.state;
-        if (!isMobilePhone(phoneNum)) err = "手机号格式不正确";
-        if (code == '') err = "验证码不能为空";
-        if (password == '') err = "密码不能为空";
-        if (password.length < 8) err = "密码不能少于8位";
-        if (password.length > 16) err = "密码不能多于16位";
-        if (!istrue(password)) err = "必须是字母及数字组合密码";
-        err ?
-            $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
-                channelCode: '',
-                codeToken: codeToken,
-                invitationCode: '',
-                mobile: phoneNum,
-                password: password,
-                verifyCode: code,
-                sourceType: SOURCE_TYPE
-            }).then(data => {
-                window.location.href = "/static/loan/weixin-attention/index.html"
-            }, (e) => $FW.Component.Alert(e.message))
+        if(this.state.checked){
+            let err, {phoneNum, code, password, codeToken} = this.state;
+            if (!isMobilePhone(phoneNum)) err = "手机号格式不正确";
+            if (code == '') err = "验证码不能为空";
+            if (password == '') err = "密码不能为空";
+            if (password.length < 8) err = "密码不能少于8位";
+            if (password.length > 16) err = "密码不能多于16位";
+            if (!istrue(password)) err = "必须是字母及数字组合密码";
+            err ?
+                $FW.Component.Toast(err) :
+                $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
+                    channelCode: '',
+                    codeToken: codeToken,
+                    invitationCode: '',
+                    mobile: phoneNum,
+                    password: password,
+                    verifyCode: code,
+                    sourceType: SOURCE_TYPE
+                }).then(data => {
+                    window.location.href = "/static/loan/weixin-attention/index.html"
+                }, (e) => $FW.Component.Alert(e.message))
+        }else{
+            $FW.Component.Toast("请同意放心花用户注册协议");
+        }
+
+    },
+    clickHandler(){
+        this.setState({checked:!this.state.checked});
     },
     render(){
         return (
@@ -137,9 +146,9 @@ const Register = React.createClass({
                         <div className={this.state.seeCode ? "eye on" : "eye"} onClick={this.seeCodeChange}></div>
                     </div>
                     <div className="protocol">
-                        <div className="protocol-btn"></div>
+                        <div className={this.state.checked?"protocol-btn":"protocol-unchecked-btn"} onClick={this.clickHandler}></div>
                         同意
-                        <a href="../protocol-borrowing/index.html" className="protocol-text">《放心花借款服务协议》</a>
+                        <a href="../protocol-register/index.html" className="protocol-text">《放心花用户注册协议》</a>
                     </div>
                     <div className="next-btn" onClick={this.nextStepHandler}>立即注册</div>
                 </div>
