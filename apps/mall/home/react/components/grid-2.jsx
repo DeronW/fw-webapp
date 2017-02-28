@@ -27,13 +27,14 @@ const Grid_2 = React.createClass({
                 </a>
             )
         };
-        return
-        <div className="theme-1">
-            <a className="activity-theme" href='/static/mall/product-list/index.html?searchSourceType=0&category=饮食'>
-                <img src="/static/mall/product-list/images/diet.jpg"/></a>
-            <div className="theme-product-wrap">
-                {products.map(theme_product_item)}
-            </div>
-        </div>
+        return (
+            <div className="theme-1">
+                <a className="activity-theme"
+                   href='/static/mall/product-list/index.html?searchSourceType=0&category=饮食'>
+                    <img src="/static/mall/product-list/images/diet.jpg"/></a>
+                <div className="theme-product-wrap">
+                    {products.map(theme_product_item)}
+                </div>
+            </div>)
     }
 });
