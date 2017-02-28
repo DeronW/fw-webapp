@@ -41,7 +41,7 @@ const BottomNavBar = React.createClass({
         let _style_footer_fixed = {
             // background: "url(images/global-bottom-nav-bg.png) no-repeat",
             background: 'white',
-            boxShadow: '0 -15px 15px #e3e3e3',
+            boxShadow: '0 -10px 10px #f2f2f2',
             width: "720px",
             height: "100px",
             fontSize: '22px',

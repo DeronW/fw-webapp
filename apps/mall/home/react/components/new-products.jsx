@@ -16,7 +16,7 @@ const NewProducts = React.createClass({
     },
     render: function () {
         let {products} = this.state;
-        if (products === null || products.length !== this.props.count) return null;
+        if (!products || products.length !== this.props.count) return null;
 
         let get_prd = (n) => products[n] || {};
 
