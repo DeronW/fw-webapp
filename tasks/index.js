@@ -88,7 +88,7 @@ module.exports = function (site_name, page_name, configs) {
         CONFIG.debug);
 
     function compile_html() {
-        return html([`${app_path}index.html`],
+        return html([`${app_path}index.html`, `${app_path}index.pjax.html`],
             build_path,
             CONFIG.html_engine, {
                 API_PATH: CONFIG.api_path,
@@ -145,7 +145,7 @@ module.exports = function (site_name, page_name, configs) {
 
     function compile_revision() {
         return revision([`${build_path}/**`], cdn_path, {
-            dontRenameFile: [/^\/favicon.ico$/g, 'index.html'],
+            dontRenameFile: [/^\/favicon.ico$/g, 'index.html', 'index.pjax.html'],
             transformPath: function (rev, source, path) {
                 // 在css中, 采用的是相对的图片路径, 但是在加入版本和前缀域名后不能再使用相对路径
                 if (rev.startsWith('../')) rev = rev.substr(3);

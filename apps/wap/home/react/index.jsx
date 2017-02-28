@@ -15,7 +15,7 @@ const Content = React.createClass({
         } else {
             tab = hash
         }
-        return {tab: tab}
+        return { tab: tab }
     },
 
     componentDidMount: function () {
@@ -24,18 +24,18 @@ const Content = React.createClass({
     switchHomePanel: function () {
         if (this.state.tab == 'home') return;
         history.pushState({}, '', `${location.pathname}#home`);
-        this.setState({tab: 'home'});
+        this.setState({ tab: 'home' });
     },
 
     switchInvestPanel: function (invest_type = 'new') {
         history.pushState({}, '', `${location.pathname}#invest-${invest_type}`);
-        this.setState({tab: `invest-${invest_type}`});
+        this.setState({ tab: `invest-${invest_type}` });
     },
 
     render: function () {
 
         let panel = this.state.tab == 'home' ?
-            <HomePanel switchInvestPanel={this.switchInvestPanel}/> :
+            <HomePanel switchInvestPanel={this.switchInvestPanel} /> :
             <InvestPanel />;
 
         return (
@@ -43,7 +43,7 @@ const Content = React.createClass({
                 <div className="status-bar">
                     <div className="status-bar-fixed">
                         <div className="top">
-                            <img src="./images/ico-logo.png"/>
+                            <img src="./images/ico-logo.png" />
                             <a className="d" href="/mpwap/orderuser/toLogin.shtml">登录</a>
                             <div className="v-line"></div>
                             <a className="z" href={location.protocol + "//m.9888.cn:80/mpwap/orderuser/toRegister.shtml?source=0"}>注册</a>
@@ -52,11 +52,11 @@ const Content = React.createClass({
                         </div>
 
                         <div className="nav">
-                            <a className={this.state.tab == 'home' ? 'active' : null}
-                               onClick={this.switchHomePanel}>首页</a>
-                            <a className={this.state.tab != 'home' ? 'active' : null}
-                               onClick={()=>this.switchInvestPanel('new')}>投资</a>
-                            <a href="http://mmall.9888.cn">豆哥商城</a>
+                            <a className={this.state.tab == 'home' && 'active'}
+                                onClick={this.switchHomePanel}>首页</a>
+                            <a className={this.state.tab != 'home' && 'active'}
+                                onClick={() => this.switchInvestPanel('new')}>投资</a>
+                            <a href="https://mmall.9888.cn">豆哥商城</a>
                             <a className="user-center has-unread-msg" href="/mpwap/orderuser/getUserInfo.shtml">
                                 <div className="red-dot"></div>
                                 个人中心

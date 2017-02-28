@@ -15,6 +15,6 @@ function gotoMall() {
     if ($FW.Browser.inApp()) {
         NativeBridge.gotoMall();
     } else {
-        location.href = 'http://mmall.9888.cn'
+        location.href = 'https://mmall.9888.cn'
     }
 }
