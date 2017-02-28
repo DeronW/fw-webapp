@@ -14,7 +14,7 @@
             sourceType: SOURCE_TYPE,
             templateType: 1
         }).then(data => {
-            alert('debug getContent' + JSON.stringify(data))
+            alert('debug getContent 2 ->' + JSON.stringify(data))
             templateContent = data.shareTemplate.templateContent;
             templateTitle = data.shareTemplate.templateTitle;
             templateUrl = data.shareTemplate.templateUrl;
@@ -22,10 +22,10 @@
             return $FW.Ajax({
                 url: `${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`,
                 data: {url: location.href}
-            }).then(data => {
-                alert('debug wxConfig: ' + JSON.stringify(data))
-                setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
-            });
+            })
+        }).then(data => {
+            alert('debug wxConfig: ' + JSON.stringify(data))
+            setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
         }).then(() => {
             setShareFriend()
             setShareFriendQuan()
