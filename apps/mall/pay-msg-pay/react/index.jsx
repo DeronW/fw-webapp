@@ -164,31 +164,6 @@ const SendCode = React.createClass({
                 FW.Component.hideAjaxLoading();
                 $FW.Component.Alert(data.responseResult.resMessage);
             }
-            /* setTimeout(() => {
-             this.queryState();
-             }, 3000);
-
-             setTimeout(() => {
-             this.queryState('final');
-             }, 6000);*/
-
-            // if(data.status=="I"){
-            //$FW.Component.showAjaxLoading();
-            //setTimeout(() => {
-            //    this.queryState();
-            //}, 2000);
-            // }
-            // else if(data.status=="F"){
-            //     window.location.href = location.protocol + '//' + location.hostname +
-            //         "/static/mall/order-complete/index.html?status=F"
-            // }
-            // else{
-            //     window.location.href = location.protocol + '//' + location.hostname +
-            //         "/static/mall/order-complete/index.html?status=S"
-            // }
-
-            //window.location.href = location.protocol + '//' + location.hostname +
-            //    "/static/mall/order-complete/index.html?id="+data.tradeNo
         }, e => {
             $FW.Component.Alert(e.message);
         })
