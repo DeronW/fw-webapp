@@ -25,7 +25,7 @@ $FW.DOMReady(function () {
             if (ConcertUtilBrowser.versions.weixin) {
                 $("mask").style.display = "block";
             } else {
-                $FW.Ajax(`${API_PATH}api/v1/download.json?name=HLWZZ`).then(data => {
+                $FW.Ajax(`${API_PATH}api/v1/download.json?name=DEBUG`).then(data => {
                     location.href = data.url;
                 }, e => $FW.Component.Toast(e.message));
             }
