@@ -21,7 +21,7 @@ const Content = React.createClass({
             },
             fila: () => true,
             complete: data => this.setState({
-                banners: data.map(i => ({ url: i.url, img: i.image }))
+                banners: data.map(i => ({ url: i.url, img: i.thumb }))
             })
         });
 
