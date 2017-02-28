@@ -27,7 +27,8 @@ const Register = React.createClass({
             allowCode: true,
             codeToken: '',
             codeText: '获取验证码',
-            seeCode: false
+            seeCode: false,
+            checked:false
         }
     },
     phoneChange: function (e) {
@@ -82,64 +83,67 @@ const Register = React.createClass({
                 userOperationType: 3,
                 sourceType: SOURCE_TYPE
             }).then(data => {
-                this.setState({
-                    codeToken: data.codeToken
-                })
-            }, (e) => {
-                $FW.Component.Alert(e.message);
-            });
+                this.setState({ codeToken: data.codeToken })
+            }, e => $FW.Component.Alert(e.message));
         }
     },
     passwordChange: function (e) {
         let v = e.target.value;
-        v.length <= 16 && numLetter(v) && this.setState({password: v});
+        v.length <= 16 && numLetter(v) && this.setState({ password: v });
     },
     nextStepHandler: function () {
-        let err, {phoneNum, code, password, codeToken} = this.state;
-        if (!isMobilePhone(phoneNum)) err = "手机号格式不正确";
-        if (code == '') err = "验证码不能为空";
-        if (password == '') err = "密码不能为空";
-        if (password.length < 8) err = "密码不能少于8位";
-        if (password.length > 16) err = "密码不能多于16位";
-        if (!istrue(password)) err = "必须是字母及数字组合密码";
-        err ?
-            $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
-                channelCode: '',
-                codeToken: codeToken,
-                invitationCode: '',
-                mobile: phoneNum,
-                password: password,
-                verifyCode: code,
-                sourceType: SOURCE_TYPE
-            }).then(data => {
-                window.location.href = "/static/loan/weixin-attention/index.html"
-            }, (e) => $FW.Component.Alert(e.message))
+        if(this.state.checked){
+            let err, {phoneNum, code, password, codeToken} = this.state;
+            if (!isMobilePhone(phoneNum)) err = "手机号格式不正确";
+            if (code == '') err = "验证码不能为空";
+            if (password == '') err = "密码不能为空";
+            if (password.length < 8) err = "密码不能少于8位";
+            if (password.length > 16) err = "密码不能多于16位";
+            if (!istrue(password)) err = "必须是字母及数字组合密码";
+            err ?
+                $FW.Component.Toast(err) :
+                $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
+                    channelCode: '',
+                    codeToken: codeToken,
+                    invitationCode: $FW.Format.urlQuery().code,
+                    mobile: phoneNum,
+                    password: password,
+                    verifyCode: code,
+                    sourceType: SOURCE_TYPE
+                }).then(data => {
+                    window.location.href = "/static/loan/weixin-attention/index.html"
+                }, (e) => $FW.Component.Alert(e.message))
+        }else{
+            $FW.Component.Toast("请同意放心花用户注册协议");
+        }
     },
-    render(){
+    clickHandler(){
+        this.setState({checked:!this.state.checked});
+    },
+    render() {
         return (
             <div className="register-box">
-                <div className="logo"><img src="images/logo.png"/></div>
-                <div className="logo-text"><img src="images/logo-text.png"/></div>
+                <div className="logo"><img src="images/logo.png" /></div>
+                <div className="logo-text"><img src="images/logo-text.png" /></div>
                 <div className="register-box-input">
                     <div className="phone-box input-box">
                         <input type="number" placeholder="请输入手机号进行注册登录" value={this.state.phoneNum}
-                               onChange={this.phoneChange}/>
+                            onChange={this.phoneChange} />
                     </div>
                     <div className="code-box input-box">
-                        <input type="number" placeholder="输入短信验证码" value={this.state.code} onChange={this.codeChange}/>
+                        <input type="number" placeholder="输入短信验证码" value={this.state.code} onChange={this.codeChange} />
                         <div className="get-code" onClick={this.getCodeHandler}>{this.state.codeText}</div>
                     </div>
                     <div className="password-box input-box">
                         <input type={this.state.seeCode ? "text" : "password"} placeholder="密码要求8-16位字母与数字组合"
-                               value={this.state.password}
-                               onChange={this.passwordChange}/>
+                            value={this.state.password}
+                            onChange={this.passwordChange} />
                         <div className={this.state.seeCode ? "eye on" : "eye"} onClick={this.seeCodeChange}></div>
                     </div>
                     <div className="protocol">
-                        <div className="protocol-btn"></div>
+                        <div className={this.state.checked?"protocol-btn":"protocol-unchecked-btn"} onClick={this.clickHandler}></div>
                         同意
-                        <a href="../protocol-borrowing/index.html" className="protocol-text">《放心花借款服务协议》</a>
+                        <a href="../protocol-register/index.html" className="protocol-text">《放心花用户注册协议》</a>
                     </div>
                     <div className="next-btn" onClick={this.nextStepHandler}>立即注册</div>
                 </div>
