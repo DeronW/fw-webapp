@@ -14,7 +14,6 @@
             sourceType: SOURCE_TYPE,
             templateType: 1
         }).then(data => {
-            alert('debug getContent 3 ->' + JSON.stringify(data))
             templateContent = data.shareTemplate.templateContent;
             templateTitle = data.shareTemplate.templateTitle;
             templateUrl = data.shareTemplate.templateUrl;
@@ -24,14 +23,12 @@
                 data: {url: location.href}
             })
         }).then(data => {
-            alert('debug wxConfig: ' + JSON.stringify(data))
-            setWxConfig(false, data.appId, data.timestamp, data.nonceStr, data.signature);
-        }).then(() => {
+            setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
         });
 
-        function setWxConfig(debug, appid, timestamp, noncestr, signature) {
+        function setWxConfig(appid, timestamp, noncestr, signature) {
             wx.config({
-                debug: true,
+                debug: location.href.indexOf('debug-wechat-share') > 0,
                 appId: appid,
                 timestamp: timestamp,
                 nonceStr: noncestr,
@@ -49,7 +46,6 @@
         })
 
         function setShareFriend() {
-            alert('setShareFriend: ' + templateTitle + ' , ' + templateContent + ', ' + templateUrl)
             wx.onMenuShareAppMessage({
                 title: templateTitle, // 分享标题
                 desc: templateContent, // 分享描述
@@ -57,7 +53,6 @@
                 imgUrl: iurl, // 分享图标
                 success: function () {
                     // 用户确认分享后执行的回调函数
-                    alert("喵喵感谢您！");
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
@@ -66,14 +61,12 @@
         }
 
         function setShareFriendQuan() {
-            //alert('setShareFriendQuan')
             wx.onMenuShareTimeline({
                 title: templateTitle, // 分享标题
                 link: templateUrl, // 分享链接
                 imgUrl: iurl, // 分享图标
                 success: function () {
                     // 用户确认分享后执行的回调函数
-                    alert("喵喵感谢您！");
                 },
                 cancel: function () {
                     // 用户取消分享后执行的回调函数
