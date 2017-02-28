@@ -82,17 +82,13 @@ const Register = React.createClass({
                 userOperationType: 3,
                 sourceType: SOURCE_TYPE
             }).then(data => {
-                this.setState({
-                    codeToken: data.codeToken
-                })
-            }, (e) => {
-                $FW.Component.Alert(e.message);
-            });
+                this.setState({ codeToken: data.codeToken })
+            }, e => $FW.Component.Alert(e.message));
         }
     },
     passwordChange: function (e) {
         let v = e.target.value;
-        v.length <= 16 && numLetter(v) && this.setState({password: v});
+        v.length <= 16 && numLetter(v) && this.setState({ password: v });
     },
     nextStepHandler: function () {
         let err, {phoneNum, code, password, codeToken} = this.state;
@@ -116,24 +112,24 @@ const Register = React.createClass({
                 window.location.href = "/static/loan/weixin-attention/index.html"
             }, (e) => $FW.Component.Alert(e.message))
     },
-    render(){
+    render() {
         return (
             <div className="register-box">
-                <div className="logo"><img src="images/logo.png"/></div>
-                <div className="logo-text"><img src="images/logo-text.png"/></div>
+                <div className="logo"><img src="images/logo.png" /></div>
+                <div className="logo-text"><img src="images/logo-text.png" /></div>
                 <div className="register-box-input">
                     <div className="phone-box input-box">
                         <input type="number" placeholder="请输入手机号进行注册登录" value={this.state.phoneNum}
-                               onChange={this.phoneChange}/>
+                            onChange={this.phoneChange} />
                     </div>
                     <div className="code-box input-box">
-                        <input type="number" placeholder="输入短信验证码" value={this.state.code} onChange={this.codeChange}/>
+                        <input type="number" placeholder="输入短信验证码" value={this.state.code} onChange={this.codeChange} />
                         <div className="get-code" onClick={this.getCodeHandler}>{this.state.codeText}</div>
                     </div>
                     <div className="password-box input-box">
                         <input type={this.state.seeCode ? "text" : "password"} placeholder="密码要求8-16位字母与数字组合"
-                               value={this.state.password}
-                               onChange={this.passwordChange}/>
+                            value={this.state.password}
+                            onChange={this.passwordChange} />
                         <div className={this.state.seeCode ? "eye on" : "eye"} onClick={this.seeCodeChange}></div>
                     </div>
                     <div className="protocol">
