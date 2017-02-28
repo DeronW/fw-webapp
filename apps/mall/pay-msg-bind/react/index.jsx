@@ -105,12 +105,12 @@ const SendCode = React.createClass({
             data: FormData,
             success: function (data) {
                 $FW.Component.Alert(data.msg);
-                if(query.source=="pay"){
+                if (query.source == "pay") {
                     setTimeout(function () {
                         location.href = "/static/mall/order-list/index.html"
                     }, 1500)
                 }
-                else{
+                else {
                     setTimeout(function () {
                         location.href = "/static/mall/pay-bank-card/index.html"
                     }, 1500)

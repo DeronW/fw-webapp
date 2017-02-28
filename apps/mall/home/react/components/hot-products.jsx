@@ -31,13 +31,12 @@ const HotProducts = React.createClass({
                 </a>
             )
         };
-        return (this.state.ps ?
-                <div className="hot-product-list">
-                    <div className="hot-title"><img className="hot-title-img" src="images/hot-title.png"/></div>
-                    <div className="hot-product-wrap">
-                        {this.state.ps.map(hot_product_item)}
-                    </div>
-                </div> : null
-        )
+        return this.state.ps ?
+            <div className="hot-product-list">
+                <div className="hot-title"><img className="hot-title-img" src="images/hot-title.png"/></div>
+                <div className="hot-product-wrap">
+                    {this.state.ps.map(hot_product_item)}
+                </div>
+            </div> : null
     }
 });
