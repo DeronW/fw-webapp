@@ -12,26 +12,30 @@ const Grid_2 = React.createClass({
                 recommendBizNo: this.state.bizNo,
                 totalCount: this.props.count
             }
-        }).then(data => this.setState({products: data.products}))
+        }).then(data => this.setState({ products: data.products }))
     },
     render: function () {
+        let {products} = this.state;
+        if (products.length === 0) return null;
+
         let theme_product_item = (product, index) => {
             return (
                 <a className="theme-product-item" key={index}
-                   href={productLink(product.bizNo)}>
-                    <img className="theme-1-img" src={product.img}/>
+                    href={productLink(product.bizNo)}>
+                    <img className="theme-1-img" src={product.img} />
                     <span className="theme-product-item-name">{product.abbreviation}</span>
                 </a>
             )
         };
-        return (this.state.products ?
-                <div className="theme-1">
-                    <a className="activity-theme">
-                        <img src="/static/mall/product-list/images/diet.jpg"/></a>
-                    <div className="theme-product-wrap">
-                        {this.state.products.map(theme_product_item)}
-                    </div>
-                </div> : null
+
+        return (
+            <div className="theme-1">
+                <a className="activity-theme">
+                    <img src="/static/mall/product-list/images/diet.jpg" /></a>
+                <div className="theme-product-wrap">
+                    {products.map(theme_product_item)}
+                </div>
+            </div>
         )
     }
 });
