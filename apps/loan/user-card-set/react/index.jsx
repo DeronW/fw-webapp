@@ -51,7 +51,7 @@ const SetCashCard = React.createClass({
     changeName(e) {
         let v = e.target.value;
         v = v.replace(/[0-9a-z]/gi, '');
-        v.length < 21 && this.setState({ name: space(v) });
+        v.length < 21 && this.setState({ name: $FW.Format.trim(v) });
     },
     changeIdHandler(e) {
         let v = e.target.value;
