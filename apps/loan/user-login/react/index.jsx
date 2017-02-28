@@ -74,10 +74,13 @@ const Register = React.createClass({
 
         return (
             <div className="login-cnt">
-                <div className="top">
-                    <a className="icon" href={`/static/loan/user-entry/index.html`}></a>
-                    <span className="title">登录</span>
-                </div>
+                {
+                    navigator.userAgent.indexOf('MicroMessenger') >= 0 ? <div className="top"></div> :
+                        <div className="top">
+                            <a className="icon" href={`/static/loan/user-entry/index.html`}></a>
+                            <span className="title">登录</span>
+                        </div>
+                }
                 <div className="logo"> <img src="images/logo.png" /> </div>
                 <div className="get-name-phone">
                     亲爱的<span className="phone-text">  {phoneMosaic(PHONE)}  </span>欢迎登录
