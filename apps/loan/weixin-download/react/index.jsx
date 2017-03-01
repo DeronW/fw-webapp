@@ -25,7 +25,7 @@ $FW.DOMReady(function () {
             $("mask").style.display = "block";
         } else {
             if (ConcertUtilBrowser.versions.ios) {
-                location.href = 'https://itunes.apple.com/cn/';
+                // location.href = 'https://itunes.apple.com/cn/';
             } else {
                 $FW.Ajax(`${API_PATH}api/v1/download.json?name=JRGC`).then(data => {
                     location.href = data.url;
