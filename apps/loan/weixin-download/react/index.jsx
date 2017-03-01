@@ -16,7 +16,7 @@ $FW.DOMReady(function () {
 
     if (ConcertUtilBrowser.versions.ios) {
         $("download-btn").innerHTML = "iOS客户端敬请期待";
-    } else if (ConcertUtilBrowser.versions.android) {
+    } else {
         $("download-btn").innerHTML = "Android客户端下载";
     };
 
