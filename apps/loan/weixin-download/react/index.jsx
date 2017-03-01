@@ -16,23 +16,26 @@ $FW.DOMReady(function () {
 
     if (ConcertUtilBrowser.versions.ios) {
         $("download-btn").innerHTML = "iOS客户端敬请期待";
-    } else if(ConcertUtilBrowser.versions.android){
+    } else if (ConcertUtilBrowser.versions.android) {
         $("download-btn").innerHTML = "Android客户端下载";
     };
 
-    if(ConcertUtilBrowser.versions.android){
-        $("download-btn").addEventListener("click", function () {
-            if (ConcertUtilBrowser.versions.weixin) {
-                $("mask").style.display = "block";
+    $("download-btn").addEventListener("click", function () {
+        if (ConcertUtilBrowser.versions.weixin) {
+            $("mask").style.display = "block";
+        } else {
+            if (ConcertUtilBrowser.versions.ios) {
+                location.href = 'https://itunes.apple.com/cn/';
             } else {
-                $FW.Ajax(`${API_PATH}api/v1/download.json?name=DEBUG`).then(data => {
+                $FW.Ajax(`${API_PATH}api/v1/download.json?name=JRGC`).then(data => {
                     location.href = data.url;
                 }, e => $FW.Component.Toast(e.message));
             }
-        });
-        $("mask").addEventListener("click", function () {
-            $("mask").style.display = "none";
-        });
-    }
+        }
+
+    });
+    $("mask").addEventListener("click", function () {
+        $("mask").style.display = "none";
+    });
 
 });
