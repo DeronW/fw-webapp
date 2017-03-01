@@ -103,7 +103,7 @@ const Register = React.createClass({
             err ?
                 $FW.Component.Toast(err) :
                 $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
-                    channelCode: '',
+                    channelCode:$FW.Format.urlQuery().channelCode,
                     codeToken: codeToken,
                     invitationCode: $FW.Format.urlQuery().code,
                     mobile: phoneNum,
