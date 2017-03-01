@@ -1,6 +1,6 @@
 //手机号验证
 function checkPhone(phoneValue) {
-    return /^1[34578]\d{9}$/.test(phoneValue))
+    return /^1[34578]\d{9}$/.test(phoneValue)
 }
 
 const ModificationPhoneFrom = React.createClass({
