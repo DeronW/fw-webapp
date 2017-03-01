@@ -129,7 +129,7 @@ const Slider = React.createClass({
             initialSlide: this.props.data.current_level - 1,
         }).on("afterChange", (slick, currentSlide) => {
             // 用户等级是 1~5, 组建序号是 0~4
-            this.props.levelChangeHandler(currentSlide.currentSlide+1)
+            this.props.levelChangeHandler(currentSlide.currentSlide + 1)
         });
 
     },
@@ -187,8 +187,10 @@ const Slider = React.createClass({
 })
 
 $FW.DOMReady(() => {
-    if ($FW.Browser.inApp()) NativeBridge.setTitle('会员等级');
-    ReactDOM.render(<Header title={'会员等级'} />, HEADER_NODE);
+    $FW.Browser.inApp() ?
+        NativeBridge.setTitle('会员等级') :
+        ReactDOM.render(<Header title={'会员等级'} />, HEADER_NODE);
+
     ReactDOM.render(<Content />, CONTENT_NODE);
 });
 

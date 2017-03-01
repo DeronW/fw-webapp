@@ -117,7 +117,7 @@ const BannerGroup = React.createClass({
     touchMoveHandler: function (event) {
         let left = this._touch.originLeft + event.changedTouches[0].pageX - this._touch.startX;
         this.setState({left: left});
-        event.preventDefault();
+        // event.preventDefault();
         event.stopPropagation();
         event.nativeEvent.stopImmediatePropagation();
     },
