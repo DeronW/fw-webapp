@@ -10,6 +10,11 @@
  */
 
 const GlobalAlert = React.createClass({
+    getDefaultProps(){
+        return {
+            title: '好像除了点问题!?'
+        }
+    },
     getInitialState: function () {
         return {show: true}
     },
@@ -155,7 +160,3 @@ const GlobalAlert = React.createClass({
         )
     }
 });
-
-GlobalAlert.propTypes = {
-    title: React.PropTypes.string.isRequired
-};

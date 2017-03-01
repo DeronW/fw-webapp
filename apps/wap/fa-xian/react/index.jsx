@@ -19,7 +19,7 @@ const Content = React.createClass({
                 key: '0ca175b9c0f726a831d895e',
                 id: q.banner_id || '33'
             },
-            fila: () => true,
+            fail: () => true,
             complete: data => this.setState({
                 banners: data.map(i => ({ url: i.url, img: i.thumb }))
             })
@@ -31,7 +31,7 @@ const Content = React.createClass({
                 key: '0ca175b9c0f726a831d895e',
                 id: q.topic_id || '34'
             },
-            fila: () => true,
+            fail: () => true,
             complete: data => this.setState({
                 topics: data.map(i => ({ url: i.url, img: i.thumb }))
             })
