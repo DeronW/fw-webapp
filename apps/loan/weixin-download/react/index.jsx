@@ -27,7 +27,7 @@ $FW.DOMReady(function () {
             if (ConcertUtilBrowser.versions.ios) {
                 // location.href = 'https://itunes.apple.com/cn/';
             } else {
-                $FW.Ajax(`${API_PATH}api/v1/download.json?name=JRGC`).then(data => {
+                $FW.Ajax(`${API_PATH}api/v1/download.json?name=DEBUG`).then(data => {
                     location.href = data.url;
                 }, e => $FW.Component.Toast(e.message));
             }
