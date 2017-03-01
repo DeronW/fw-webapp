@@ -23,16 +23,7 @@ var PhoneCodePrompt = React.createClass({
     },
     handlerVoice: function () {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
-
         this.props.callbackVoice(+new Date);
-
-        /*        $FW.Ajax({
-         url: 'http://apitest.9888.cn/' + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
-         method: "GET",
-         success: function(data) {
-         console.log(data);
-         }
-         });*/
     },
     render: function () {
         var phoneNo = this.state.getUserInfo.userInfo.phoneNum;
@@ -322,15 +313,6 @@ var Body = React.createClass({
 
 
         location.href = 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId;
-
-        /*$FW.Ajax({
-         url: 'http://apitest.9888.cn/' + "/mpwap/api/v1/setHsPwd.shtml?idCardNo=" + idCardNo + "&validateCode=" + _this.state.code,
-         method: "GET",
-         success: function(data) {
-         console.log(data);
-         }
-         })*/
-
     },
     getCallbackInputVal: function (val) {
         this.setState({

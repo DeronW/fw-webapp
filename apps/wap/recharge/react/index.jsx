@@ -278,7 +278,6 @@ const Recharge = React.createClass({
         });
     },
     render: function () {
-        // console.log(this.props.data);
         var deny = <Mask username={this.props.data.bankInfo.realName} />;
         var bankCardNo = this.props.data.bankInfo.bankCardNo;
         let idCarNoNntercept = bankCardNo.substring(0, 4) + "********" + bankCardNo.substring(bankCardNo.length - 4, bankCardNo.length);

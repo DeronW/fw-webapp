@@ -116,7 +116,6 @@ var FundsFlow = React.createClass({
 
     },
     handlerAll: function () {
-        //console.log(this.props.callbackIndex);
         location.href = "/static/wap/hui-shang-cash-flow/index.html"
     },
     render: function () {

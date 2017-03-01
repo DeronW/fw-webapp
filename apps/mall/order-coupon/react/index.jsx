@@ -41,7 +41,6 @@ $FW.DOMReady(function () {
             cardUuid: query.cardUuid
         },
         success: function (data) {
-            console.log(data);
             ReactDOM.render(<Coupon data={data}/>, CONTENT_NODE);
         }
     });
