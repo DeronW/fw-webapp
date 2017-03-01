@@ -84,7 +84,7 @@ const Register = React.createClass({
                 sourceType: SOURCE_TYPE
             }).then(data => {
                 this.setState({ codeToken: data.codeToken })
-            }, e => $FW.Component.Alert(e.message));
+            }, e => $FW.Component.Toast(e.message));
         }
     },
     passwordChange: function (e) {
@@ -112,7 +112,7 @@ const Register = React.createClass({
                     sourceType: SOURCE_TYPE
                 }).then(data => {
                     window.location.href = "/static/loan/weixin-attention/index.html"
-                }, (e) => $FW.Component.Alert(e.message))
+                }, (e) => $FW.Component.Toast(e.message))
         }else{
             $FW.Component.Toast("请同意放心花用户注册协议");
         }
