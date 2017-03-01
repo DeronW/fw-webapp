@@ -24,9 +24,13 @@ $FW.DOMReady(function () {
         if (ConcertUtilBrowser.versions.weixin) {
             $("mask").style.display = "block";
         } else {
-            $FW.Ajax(`${API_PATH}api/v1/download.json?name=JRGC`).then(data => {
-                location.href = data.url;
-            }, e => $FW.Component.Toast(e.message));
+            if (ConcertUtilBrowser.versions.ios) {
+                location.href = 'https://itunes.apple.com/cn/';
+            } else {
+                $FW.Ajax(`${API_PATH}api/v1/download.json?name=JRGC`).then(data => {
+                    location.href = data.url;
+                }, e => $FW.Component.Toast(e.message));
+            }
         }
 
     });
