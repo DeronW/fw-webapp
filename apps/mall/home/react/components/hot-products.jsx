@@ -12,7 +12,7 @@ const HotProducts = React.createClass({
                 recommendBizNo: this.state.bizNo,
                 totalCount: this.props.count
             }
-        }).then(data => this.setState({ ps: data.products }))
+        }).then(data => this.setState({ ps: data.products || [] }))
     },
     render: function () {
         if (this.state.ps.length === 0) return null;
