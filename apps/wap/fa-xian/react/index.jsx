@@ -38,6 +38,7 @@ const Content = React.createClass({
         })
     },
     render() {
+        let {banners} = this.state;
 
         let topic = (t, index) => {
             return <a className="event" key={index} href={t.url}>
@@ -45,9 +46,13 @@ const Content = React.createClass({
             </a>
         }
 
+        let banner_group;
+        if (banners.length > 0)
+            banner_group = <BannerGroup className="banners" images={banners.map(i => i.img)} />
+
         return (
             <div>
-                <BannerGroup className="banners" images={this.state.banners.map(i => i.img)} />
+                {banner_group}
                 <a className="notice">
                     <img className="notice-icon" src="images/1.png" />
                     <div className="sp-line"></div>
