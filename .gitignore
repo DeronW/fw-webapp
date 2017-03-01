@@ -17,6 +17,6 @@ debug.log
 .project
 gulpfile.settings.js
 
-
-*swp
-*swo
+*.rej
+*.swp
+*.swo
