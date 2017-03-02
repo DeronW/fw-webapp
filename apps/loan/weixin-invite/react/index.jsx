@@ -28,18 +28,18 @@ $FW.DOMReady(function () {
                 sourceType: SOURCE_TYPE
             }).then((data) => {
                 $("#more").show();
-                if (data.invitationRecord.resultList.length == 0 && page == 1) {
+                if (data.invitationRecord.length == 0 && page == 1) {
                     $("#more").html("暂无数据");
-                } else if (data.invitationRecord.resultList.length < 20 && page == 1) {
+                } else if (data.invitationRecord.length < 20 && page == 1) {
                     $("#more").html("已经到结尾");
                 }
-                if (data.invitationRecord.resultList.length > 0) {
+                if (data.invitationRecord.length > 0) {
                     var str = '';
-                    for (var i = 0; i < data.invitationRecord.resultList.length; i++) {
+                    for (var i = 0; i < data.invitationRecord.length; i++) {
                         str += '<div class="invite-item">';
-                        str += '<span class="phone-num">' + data.invitationRecord.resultList[i].mobile + '</span>';
-                        str += '<span class="invite-status">' + data.invitationRecord.resultList[i].userStatus + '</span>';
-                        str += '<span class="invite-date">' + data.invitationRecord.resultList[i].createTime + '</span>';
+                        str += '<span class="phone-num">' + data.invitationRecord[i].mobile + '</span>';
+                        str += '<span class="invite-status">' + data.invitationRecord[i].userStatus + '</span>';
+                        str += '<span class="invite-date">' + data.invitationRecord[i].createTime + '</span>';
                         str += '</div>';
                     }
                     $(".tab-content-item-wrap2").append(str);
@@ -50,7 +50,7 @@ $FW.DOMReady(function () {
                 }
                 done && done();
             }, (e) => {
-                $FW.Component.Alert(e.message);
+                $FW.Component.Toast(e.message);
                 if (page == 1) {
                     $("#more").hide();
                 }
