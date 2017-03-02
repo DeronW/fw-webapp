@@ -10,8 +10,10 @@ const HotSales = React.createClass({
     },
 
     componentDidMount: function () {
-        $FW.Ajax(`${API_PATH}/mall/api/index/v1/hotProducts.json?count=${this.state.page_count}`)
-            .then((data) => this.setState({ products: data.products }));
+        $FW.Ajax({
+            url: `${API_PATH}/mall/api/index/v1/hotProducts.json?count=${this.state.page_count}`,
+            enable_loading: 'mini'
+        }).then((data) => this.setState({ products: data.products }));
         $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
 
