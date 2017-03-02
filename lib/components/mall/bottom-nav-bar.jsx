@@ -41,7 +41,6 @@ const BottomNavBar = React.createClass({
         let _style_footer_fixed = {
             // background: "url(images/global-bottom-nav-bg.png) no-repeat",
             background: 'white',
-            boxShadow: '0 -10px 10px #f2f2f2',
             width: "720px",
             height: "100px",
             fontSize: '22px',
@@ -79,13 +78,13 @@ const BottomNavBar = React.createClass({
         let _style_footer_item_cart = Object.assign({
             width: "65px",
             height: "70px",
-            left: "470px",
+            right: "160px",
         }, _style_footer_item_base, tab.cart ? {} : gray_filter);
 
         let _style_footer_item_user = Object.assign({
             width: "87px",
             height: "70px",
-            left: "600px",
+            right: "28px",
         }, _style_footer_item_base, tab.user ? {} : gray_filter);
 
         let _back_to_index = {
@@ -95,7 +94,9 @@ const BottomNavBar = React.createClass({
             padding: '10px',
             position: "absolute",
             top: "31px",
-            left: "304px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            webkiTransform: "translateX(-50%)",
             background: 'white',
             position: 'relative',
             top: '-22px',

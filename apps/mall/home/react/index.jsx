@@ -112,14 +112,14 @@ const Mall = React.createClass({
                     <a href="/static/mall/product-list/index.html?searchSourceType=1">
                         <img src="images/nav-8.png"/><span>我可兑换</span></a>
                 </div>
-                <NewProducts bizNo={'TJ0000060'} count={6}/>
-                <HotProducts bizNo={'TJ0000022'} count={8}/>
-                <Grid_1 bizNo={'TJ0000042'} count={8}/>
-                <Grid_2 bizNo={'TJ0000044'} count={8}/>
-                <Grid_3 bizNo={'TJ0000046'} count={8}/>
+                <NewProducts bizNo={'TJ0000060'} count={10}/>
+                <HotProducts bizNo={'TJ0000022'} count={10}/>
+                <Grid_1 bizNo={'TJ0000042'} count={10}/>
+                <Grid_2 bizNo={'TJ0000044'} count={10}/>
+                <Grid_3 bizNo={'TJ0000046'} count={10}/>
                 <Grid_7 bizNo={'TJ0000054'} count={10}/>
-                <Grid_6 bizNo={'TJ0000052'} count={8}/>
-                <Grid_5 bizNo={'TJ0000050'} count={9}/>
+                <Grid_6 bizNo={'TJ0000052'} count={10}/>
+                <Grid_5 bizNo={'TJ0000050'} count={10}/>
                 <Grid_4 bizNo={'TJ0000048'} count={10}/>
                 <Grid_8 bizNo={'TJ0000056'} count={10}/>
                 <HotSales />

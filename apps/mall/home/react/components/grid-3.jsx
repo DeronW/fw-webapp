@@ -106,7 +106,7 @@ const Grid_3 = React.createClass({
                             <a href={'/static/mall/product-detail/index.html?bizNo=' + get_prd(7).bizNo}>
                                 <img className="theme4-btm-product-img" src={get_prd(7).img}/>
                             </a>
-                            <a href={'/static/mall/product-detail/index.html?bizNo=' + get_prd(7).bizNo}>
+                            <a href={'/static/mall/product-detail/index.html?bizNo=' + get_prd(8).bizNo}>
                                 <img className="theme4-btm-product-img" src={get_prd(8).img}/>
                             </a>
                         </div>
