@@ -44,7 +44,7 @@ const Grid_3 = React.createClass({
 
         return (
             <div className="theme-4">
-                <a className="activity-theme" href= '/static/mall/product-list/index.html?searchSourceType=0&category=家居生活'>
+                <a className="activity-theme" href= '/static/mall/product-list/index.html?searchSourceType=0&category=living&title=家居生活'>
                     <img src="/static/mall/product-list/images/living.jpg"/></a>
                 <div className="theme4-product-wrap">
                     <div className="theme4-top-product-list">
