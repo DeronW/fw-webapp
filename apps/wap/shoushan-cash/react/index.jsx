@@ -234,7 +234,7 @@ const Content = React.createClass({
                 return '';
             }
         };
-        window.location.href = "http://apitest.9888.cn/api/sspay/withdraw/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.data.withdrawToken;
+        window.location.href = "/api/sspay/withdraw/v1/withDraw.shtml?reflectAmount=" + val + "&bankNo=" + bankNoVal() + "&withdrawTicket=" + this.props.data.data.withdrawToken;
     },
     handlerVoice: function () {
         this.setState({ voice: +new Date() })
@@ -279,7 +279,7 @@ const Content = React.createClass({
     getInfoBtn: function () {
         location.href = "/static/wap/shoushan-cash-records/index.html";
     },
-    handlerTS: function() {
+    handlerTS: function () {
         this.setState({
             handlerTSShow: !this.state.handlerTSShow
         });
@@ -351,7 +351,7 @@ const Content = React.createClass({
                     <div className="subhead-text"> 实时提现 </div>
                     <div className="detail-text">
                         单笔金额&le;{_this.props.data.data.criticalValue}万，
-                        { _this.props.data.data.perDayRealTimeAmountLimit && "单日"+ "≥" + valText + "万，"}
+                        {_this.props.data.data.perDayRealTimeAmountLimit && "单日" + "≥" + valText + "万，"}
                         7*24小时实时到账
                     </div>
                 </div>
@@ -483,23 +483,23 @@ const Content = React.createClass({
                         <div className="hsuo" onClick={this.handlerTS}>温馨提示</div>
 
                         {
-                            this.state.handlerTSShow ?  <div className="danbi" >
+                            this.state.handlerTSShow ? <div className="danbi" >
 
-                                    <div className="atpr"><img className="card-d" src="images/card-d.png" /><span
-                                        className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
-                                    <div className="atpr">
-                                        <img className="card-d" src="images/card-d.png" />
-                                        <span className="online">
-                                            徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
+                                <div className="atpr"><img className="card-d" src="images/card-d.png" /><span
+                                    className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
+                                <div className="atpr">
+                                    <img className="card-d" src="images/card-d.png" />
+                                    <span className="online">
+                                        徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
                                         </span>
-                                    </div>
-                                    <div className="atpr">
-                                        <img className="card-d" src="images/card-d.png" />
-                                        <span className="online">
-                                            如遇问题请与客服联系，客服电话：<span className="c-b">400-0322-988</span>
-                                        </span>
-                                    </div>
-                                </div> : null
+                                </div>
+                                <div className="atpr">
+                                    <img className="card-d" src="images/card-d.png" />
+                                    <span className="online">
+                                        如遇问题请与客服联系，客服电话：<span className="c-b">400-0322-988</span>
+                                    </span>
+                                </div>
+                            </div> : null
                         }
 
 
@@ -513,7 +513,7 @@ const Content = React.createClass({
                         callbackOpenBank={this.getOpenBankShow}
                     />
                 }
-                { this.state.popShow && pop() }
+                {this.state.popShow && pop()}
             </div>
         )
     }
@@ -521,8 +521,9 @@ const Content = React.createClass({
 
 
 $FW.DOMReady(function () {
+    // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
     $FW.Ajax({
-        url: `http://apitest.9888.cn/api/sspay/withdraw/v1/getWithdrawInfo.shtml`,
+        url: `/api/sspay/withdraw/v1/getWithdrawInfo.shtml`,
         enable_loading: 'mini'
     }).then(data => {
         ReactDOM.render(<Content data={data} />, CONTENT_NODE)

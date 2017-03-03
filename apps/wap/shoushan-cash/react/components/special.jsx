@@ -34,8 +34,9 @@ const Special = React.createClass({
     handlerTestClick: function () {
         var _this = this;
 
+        // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
         $FW.Ajax({
-            url: "http://apitest.9888.cn/api/sspay/withdraw/v1/validate.shtml?reflectAmount=" + this.props.propsMoneyValue,
+            url: "/api/sspay/withdraw/v1/validate.shtml?reflectAmount=" + this.props.propsMoneyValue,
             success: function (data) {
                 _this.props.callbackPromptShow(true);
 
@@ -64,8 +65,9 @@ const Special = React.createClass({
                 }, 1000);
 
 
+                // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
                 $FW.Ajax({
-                    url: "http://apitest.9888.cn/api/sspay/withdraw/v1/sendCode.shtml?type=" + _this.state.codeType + "&destPhoneNo=" + _this.props.propsPhone + "&isVms=" + _this.state.isVmsType,
+                    url: "/api/sspay/withdraw/v1/sendCode.shtml?type=" + _this.state.codeType + "&destPhoneNo=" + _this.props.propsPhone + "&isVms=" + _this.state.isVmsType,
                     success: function (data) {
                     },
                     fail: function () {

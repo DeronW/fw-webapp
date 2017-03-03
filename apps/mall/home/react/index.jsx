@@ -122,6 +122,7 @@ const Mall = React.createClass({
                 <Grid_5 bizNo={'TJ0000050'} count={10}/>
                 <Grid_4 bizNo={'TJ0000048'} count={10}/>
                 <Grid_8 bizNo={'TJ0000056'} count={10}/>
+
                 <HotSales />
             </div>
         )

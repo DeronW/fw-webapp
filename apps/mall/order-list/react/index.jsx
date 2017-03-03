@@ -167,10 +167,12 @@ const OrderBlock = React.createClass({
                             <div className="commodity-name">
                                 <h2>{product.title}</h2>
                             </div>
+                            {/*
                             <div className="tag-block">
                                 { product.tags.length != 0 ? product.tags.map(
                                     (i, index) => <span key={index} className="text">{i}</span>) : null }
                             </div>
+                             */}
                             <div className="commodity-number">
                                 <span className="money-text">
                                     {product.price > 0 || product.score == 0 ?

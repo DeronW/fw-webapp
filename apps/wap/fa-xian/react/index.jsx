@@ -37,8 +37,16 @@ const Content = React.createClass({
             })
         })
     },
+    onImageClickHandler(index) {
+        let link = null;
+        let bs = this.state.banners;
+        for (let i = 0; i < bs.length; i++) {
+            if (i == index) link = bs[i].url;
+        }
+        if (link) window.location.href = link;
+    },
     render() {
-        let {banners} = this.state;
+        let { banners } = this.state;
 
         let topic = (t, index) => {
             return <a className="event" key={index} href={t.url}>
@@ -48,7 +56,9 @@ const Content = React.createClass({
 
         let banner_group;
         if (banners.length > 0)
-            banner_group = <BannerGroup className="banners" images={banners.map(i => i.img)} />
+            banner_group = <BannerGroup className="banners"
+                onImageClick={this.onImageClickHandler}
+                images={banners.map(i => i.img)} />
 
         return (
             <div>

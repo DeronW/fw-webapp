@@ -177,8 +177,9 @@ var PswFrom = React.createClass({
         }, 1000);
 
 
+        // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
         $FW.Ajax({
-            url: 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/sendCode.shtml?type=" + this.state.codeType + "&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
+            url: "/api/sspay/withdraw/v1/sendCode.shtml?type=" + this.state.codeType + "&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
             method: "GET",
             success: function (data) {
 
@@ -306,13 +307,13 @@ var Body = React.createClass({
             return false;
         }
 
-        if(!isCardNo(this.state.cardId)) {
+        if (!isCardNo(this.state.cardId)) {
             $FW.Component.Toast("身份证格式不正确");
             return false;
-         }
+        }
 
 
-        location.href = 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId;
+        location.href = "/api/sspay/withdraw/v1/setHsPwd.shtml?idCardNo=" + this.state.cardId;
     },
     getCallbackInputVal: function (val) {
         this.setState({
@@ -391,8 +392,9 @@ var Body = React.createClass({
 });
 
 $FW.DOMReady(() => {
+    // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
     $FW.Ajax({
-        url: 'http://apitest.9888.cn/' + "api/sspay/withdraw/v1/getOpenAccountInfo.shtml",
+        url: "/api/sspay/withdraw/v1/getOpenAccountInfo.shtml",
         success: function (data) {
             ReactDOM.render(<Body activity={data} />, CONTENT_NODE);
         }

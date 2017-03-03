@@ -15,9 +15,10 @@ const CashRecords = React.createClass({
         // var records = this.state.records.concat();
         if (this.state.totalPage && this.state.page >= this.state.totalPage) return;
 
+        // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
         $FW.Ajax({
-            url: "http://apitest.9888.cn/api/sspay/withdraw/v1/getWithDrawRecord.shtml",
-            data: {pageSize: 20, page: this.state.page + 1},
+            url: "/api/sspay/withdraw/v1/getWithDrawRecord.shtml",
+            data: { pageSize: 20, page: this.state.page + 1 },
             enable_loading: true,
             success: (data) => {
                 let month = this.state.month;
@@ -28,7 +29,7 @@ const CashRecords = React.createClass({
                     });
                 }
 
-                data.pageData.result.forEach((i)=>insertRecord(month, format_record(i)));
+                data.pageData.result.forEach((i) => insertRecord(month, format_record(i)));
 
                 this.setState({
                     month: month,
@@ -146,6 +147,6 @@ const CashRecords = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'提现记录'}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={'提现记录'} />, HEADER_NODE);
     ReactDOM.render(<CashRecords />, CONTENT_NODE);
 });
