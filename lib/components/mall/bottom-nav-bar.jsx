@@ -96,7 +96,7 @@ const BottomNavBar = React.createClass({
             top: "31px",
             left: "50%",
             transform: "translateX(-50%)",
-            webkiTransform: "translateX(-50%)",
+            WebkitTransform: "translateX(-50%)",
             background: 'white',
             position: 'relative',
             top: '-22px',
