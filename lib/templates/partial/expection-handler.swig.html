@@ -9,11 +9,11 @@
             var err;
             if (error) {
                 // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
-                if(error.message && String(error.message).indexOf('_vds_hybrid') > -1) return;
+                if (file && String(file).indexOf('raven-') > -1) return;
                 Raven.captureException(error);
             } else {
                 // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
-                if(msg.indexOf('_vds_hybrid') > -1) return;
+                if (msg.indexOf('_vds_hybrid') > -1) return;
                 err = 'Uncatch Error in ' + file + ':' + line;
                 if (column) err += ',' + column;
                 err += ' -> ' + msg;
@@ -23,5 +23,4 @@
             return; // Raven is now ready
         }
     }
-
 </script>
