@@ -9,7 +9,8 @@ const ApplyLoan = React.createClass({
             present_availableLoan: this.props.data.creditLine,
             orioleOrderGid: this.props.data.orioleOrderGid,
             creditLine: this.props.data.canBorrowAmount,
-            present_creditLine: this.props.data.canBorrowAmount
+            present_creditLine: this.props.data.canBorrowAmount,
+            show_tip:"最高"
         }
     },
     componentDidMount: function () {
@@ -61,10 +62,12 @@ const ApplyLoan = React.createClass({
                     var everyDragDistance = (al - lowestLoanNum)/100;
                     var times = parseInt(lineWidth / 558 * 100);
                     var loanNum;
-                    console.log(times)
                     loanNum = Math.round((lowestLoanNum + parseInt((al - lowestLoanNum)*lineWidth/558))/100)*100;
-                    console.log(loanNum)
-
+                    if(loanNum != al){
+                        this.setState({show_tip:''});
+                    }else{
+                        this.setState({show_tip:'最高'});
+                    }
                     //console.log(getPosition(minDiv).left - 48)
                     //if (loanNum <= this.props.data.lowestLoan) { loanNum = this.props.data.lowestLoan }
                     this.setState({ creditLine: loanNum });
@@ -82,7 +85,7 @@ const ApplyLoan = React.createClass({
         let available_loan =
             <div className="available-loan">
                 <div className="max-loan-money">{this.state.creditLine}</div>
-                <div className="max-loan-title">最高借款额度(元)</div>
+                <div className="max-loan-title">{this.state.show_tip}借款额度(元)</div>
             </div>;
 
         let unavailable_loan =
