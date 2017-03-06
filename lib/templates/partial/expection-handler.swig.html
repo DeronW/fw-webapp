@@ -12,18 +12,18 @@
         if (msg.indexOf('_vds_hybrid') > -1) return;
         if (error && String(error.message).indexOf('_vds_hybrid') > -1) return;
 
-        if (typeof (Raven) === 'object' && Raven.isSetup()) {
-            var err;
-            if (error) {
-                Raven.captureException(error);
-            } else {
-                err = 'Uncatch Error in ' + file + ':' + line;
-                if (column) err += ',' + column;
-                err += ' -> ' + msg;
-                Raven.captureMessage(err);
-            }
+        // 如果Raven还没有设置成功, 不用捕捉错误
+        if (typeof (Raven) !== 'object' || !Raven.isSetup()) return;
+
+
+        if (error) {
+            Raven.captureException(error);
         } else {
-            return; // Raven is now ready
+            var err;
+            err = 'Uncatch Error in ' + file + ':' + line;
+            if (column) err += ',' + column;
+            err += ' -> ' + msg;
+            Raven.captureMessage(err);
         }
     }
 
