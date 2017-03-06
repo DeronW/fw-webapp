@@ -58,7 +58,7 @@ const Content = React.createClass({
         if (banners.length > 0)
             banner_group = <BannerGroup className="banners"
                 onImageClick={this.onImageClickHandler}
-                images={banners.map(i => i.img)} />
+                images={banners.map(i => i.img)} />;
 
         return (
             <div>
