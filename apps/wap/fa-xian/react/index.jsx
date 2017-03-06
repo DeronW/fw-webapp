@@ -80,8 +80,10 @@ const Content = React.createClass({
                     {this.state.topics.map(topic)}
                 </div>
                 <div className="contact-us">
-                    <a className="service"><i className="icon-service"></i>联系客服</a>
-                    <a className="about-us"><i className="icon-about-us"></i>关于我们</a>
+                    <a className="service">
+                        <i className="icon-service"></i>联系客服</a>
+                    <a className="about-us">
+                        <i className="icon-about-us"></i>关于我们</a>
                 </div>
             </div>
         )
