@@ -55,8 +55,18 @@ const ApplyLoan = React.createClass({
                     }
                     minDiv.style.left = minDiv_left + "px";
                     lineDivBar.style.width = minDiv_left + 15 + "px";
-                    var loanNum = Math.round(parseInt(minDiv_left / (lineDiv.offsetWidth - 58) * al) / 100) * 100;
-                    if (loanNum <= this.props.data.lowestLoan) { loanNum = this.props.data.lowestLoan }
+                    //var loanNum = Math.round(parseInt(minDiv_left / (lineDiv.offsetWidth - 58 ) * al) / 100) * 100;
+                    var lowestLoanNum = this.props.data.lowestLoan;
+                    var lineWidth = getPosition(minDiv).left - 48;
+                    var everyDragDistance = (al - lowestLoanNum)/100;
+                    var times = parseInt(lineWidth / 558 * 100);
+                    var loanNum;
+                    console.log(times)
+                    loanNum = Math.round((lowestLoanNum + parseInt((al - lowestLoanNum)*lineWidth/558))/100)*100;
+                    console.log(loanNum)
+
+                    //console.log(getPosition(minDiv).left - 48)
+                    //if (loanNum <= this.props.data.lowestLoan) { loanNum = this.props.data.lowestLoan }
                     this.setState({ creditLine: loanNum });
                 }
             });
