@@ -27,6 +27,7 @@
             err += ' -> ' + msg;
             Raven.captureMessage(err);
         }
+        console.error(error || err);
     }
 
 </script>
