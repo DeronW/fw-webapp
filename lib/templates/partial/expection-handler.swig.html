@@ -9,12 +9,14 @@
         if (file && String(file).indexOf('raven-') > -1) return;
 
         // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
-        if (msg.indexOf('_vds_hybrid') > -1) return;
-        if (error && String(error.message).indexOf('_vds_hybrid') > -1) return;
+        var igt = '_vds_hybrid';
+        if (msg.indexOf(igt) > -1) return;
+        if (error && String(error.message).indexOf(igt) > -1) return;
+        if (error && String(error.description).indexOf(igt) > -1) return;
+        if (error && error.toString().indexOf(igt) > -1) return;
 
         // 如果Raven还没有设置成功, 不用捕捉错误
         if (typeof (Raven) !== 'object' || !Raven.isSetup()) return;
-
 
         if (error) {
             Raven.captureException(error);
