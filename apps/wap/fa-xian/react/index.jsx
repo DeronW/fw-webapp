@@ -82,9 +82,9 @@ const Content = React.createClass({
                 <div className="contact-us">
                     <a className="service" href="tel:400-0322-988">
                         <i className="icon-service"></i><span>联系客服</span></a>
-                    <a className="about-us" href="/static/wap/about-us/index.html">
-                        <i className="icon-about-us"></i>
-                        <span>关于我们</span>
+                    <a className="about-us" href="#">
+                        <i className="icon-about-us icon-about-us-grey"></i>
+                        <span className="about-us-grey">关于我们</span>
                     </a>
                 </div>
             </div>
