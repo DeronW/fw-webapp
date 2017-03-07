@@ -70,7 +70,7 @@ const Content = React.createClass({
                     <i className="icon-right-arrow"></i>
                 </a>
                 <div className="channel">
-                    <a href="https://mmall.9888.cn/static/mall/game/index.html?mallHead=true"> <i className="icon-game"></i>游戏中心 </a>
+                    <a href="https://m.dougemall.com/static/mall/game/index.html?mallHead=true"> <i className="icon-game"></i>游戏中心 </a>
                     <a href="https://bbs.9888.cn/"> <i className="icon-bbs"></i>工友之家 </a>
                     <a href="https://m.9888.cn/static/wap/faq/index.html"> <i className="icon-faq"></i>帮助中心</a>
                     <a> <i className="icon-waiting"></i>敬请期待</a>
