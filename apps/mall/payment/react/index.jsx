@@ -41,6 +41,16 @@ const Payment = React.createClass({
         if (index == null) {
             return
         }
+        else if (index == 'w') {
+            $FW.Ajax({
+                    url: `${API_PATH}mall/api/payment/v1/wechatPay.json`,
+                    enable_loading: true,
+                    data: {payType: 'WECHAT_PAY'},
+                })
+                .then((data) => {
+
+                });
+        }
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
             let link = '/static/mall/pay-add-card/index.html?source=pay'
