@@ -2,19 +2,14 @@
 <script>
     Raven.config('{{ SENTRY_DSN }}', {
         autoBreadcrumbs: { xhr: false }
-    }).install()
+    }).install();
     // 全局JS异常捕获方法
     window.onerror = function (msg, file, line, column, error) {
         // 如果是 raven 自己尝试上报错误导致的错误, 不捕捉
         if (file && String(file).indexOf('raven-') > -1) return;
-
-console.log('got', error)
-console.log('got 2', arguments)
         // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
         var igt = '_vds_hybrid';
         if (msg.indexOf(igt) > -1) return;
-        if (error && String(error.message).indexOf(igt) > -1) return;
-        if (error && String(error.description).indexOf(igt) > -1) return;
         if (error && error.toString().indexOf(igt) > -1) return;
         // 如果Raven还没有设置成功, 不用捕捉错误
         if (typeof (Raven) !== 'object' || !Raven.isSetup()) return;
@@ -29,8 +24,8 @@ console.log('got 2', arguments)
             Raven.captureMessage(err);
         }
         console.error(error || err);
-
-console.log('END ==========')
     }
+
+    window.onunhandledrejection = function () { }
 
 </script>
