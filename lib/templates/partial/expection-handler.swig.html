@@ -5,6 +5,7 @@
     }).install()
     // 全局JS异常捕获方法
     window.onerror = function (msg, file, line, column, error) {
+        return
         // 如果是 raven 自己尝试上报错误导致的错误, 不捕捉
         if (file && String(file).indexOf('raven-') > -1) return;
 
