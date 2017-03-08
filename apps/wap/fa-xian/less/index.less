@@ -37,9 +37,11 @@ body {
         width: 500px;
         line-height: 40px;
         font-size: 24px;
-        overflow: hidden;
-        word-wrap: break-word;
+        overflow : hidden;
         text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
     .icon-right-arrow {
         position: absolute;
@@ -137,7 +139,19 @@ body {
     color: #4aa1f9;
     padding-top: 18px;
     a {
-        display: block;
+        //display: block;
+        color: #4aa1f9;
+        i{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        span{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .about-us-grey{
+            color: #ccc;
+        }
     }
     i {
         display: block;
@@ -158,6 +172,9 @@ body {
         float: right;
         .icon-about-us {
             background: url(../images/7.png);
+        }
+        .icon-about-us-grey{
+            background: url(../images/7grey.png);
         }
     }
 }
