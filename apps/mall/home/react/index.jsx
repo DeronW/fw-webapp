@@ -107,7 +107,7 @@ const Mall = React.createClass({
                     <a href="/static/mall/product-recharge/index.html?tab=2">
                         <img src="images/nav-6.png"/><span>充流量</span>
                         <span className="hot-tag"></span></a>
-                    <a href="/static/mall/waiting/index.html">/*static/mall/game/index.html?mallHead=true*/
+                    <a href="/static/mall/waiting/index.html">{/*static/mall/game/index.html?mallHead=true*/}
                         <img src="images/nav-7.png"/><span>游戏中心</span></a>
                     <a href="/static/mall/product-list/index.html?searchSourceType=1">
                         <img src="images/nav-8.png"/><span>我可兑换</span></a>
