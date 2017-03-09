@@ -21,20 +21,10 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
         `${lib_path}javascripts/promise-2.0.2.min.js`,
         `${lib_path}javascripts/object-assign-4.1.1.js`,
         `${lib_path}fw-1.7.2.js`,
-        `${lib_path}javascripts/native-bridge-0.4.0.js`
+        `${lib_path}javascripts/native-bridge-0.4.0.js`,
+        `${lib_path}${REACT_PATH}/react.min.js`,
+        `${lib_path}${REACT_PATH}/react-dom.min.js`,
     ];
-
-    if (debug) {
-        files.push(...[
-            `${lib_path}${REACT_PATH}/react.js`,
-            `${lib_path}${REACT_PATH}/react-dom.js`
-        ])
-    } else {
-        files.push(...[
-            `${lib_path}${REACT_PATH}/react.min.js`,
-            `${lib_path}${REACT_PATH}/react-dom.min.js`
-        ])
-    }
 
     files.push(...extend_files);
     return files;
