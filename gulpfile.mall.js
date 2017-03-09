@@ -21,8 +21,8 @@ const USER_PAGES = [
     'user-deliver-address',
     'user-build-deliver',
     'user-help',
-	'user-register',
-	'user-register-1',
+	// 'user-register',
+	// 'user-register-1',
 ]
 
 const PRODUCT_PAGES = [
