@@ -17,6 +17,16 @@ $FW.DOMReady(function () {
         $(this).hide();
     });
 
+    $FW.Post(`${API_PATH}api/shareTemplate/v1/getContent.json`,{
+        templateType:1,
+        userGid: USER.gid,
+        userId: USER.id,
+        token: USER.token,
+        sourceType: SOURCE_TYPE
+    }).then((data)=>{
+        $(".btm-tip").text(data.shareTemplate.templateUrl);
+    });
+
     function loadMoreHandler(done) {
         if (loadNextPage) {
             $FW.Post(`${API_PATH}api/userBase/v1/invitationRecord.json`, {
