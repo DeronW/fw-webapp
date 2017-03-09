@@ -27,6 +27,7 @@
     "babel-preset-es2015": ">= 6.18",
     "babel-preset-react": ">= 6.16",
     "colors": ">= 1.1",
+    "pump": ">= 1.0",
     "del": ">=2.2"
   },
   "scripts": {
