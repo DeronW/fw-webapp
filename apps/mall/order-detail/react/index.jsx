@@ -22,7 +22,6 @@ const OrderDetail = React.createClass({
 const Coupon = React.createClass({
     render: function () {
         let ls = this.props.coupon;
-        alert(ls);
         let coupon = (l, index) => {
             return (
                 <div className="coupon">
