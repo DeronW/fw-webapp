@@ -47,5 +47,8 @@
     p.innerHTML = (new Date().toTimeString().split(' ')[0]) + ' ' + type + ' <b>' + cmd + '</b>';
     logs.insertBefore(p, logs.children[0])
   }
+  window.onNativeMessageReceive = function(data){
+    log('得到Native消息', JSON.stringify(data))
+  }
 </script>
 {% endblock %}
