@@ -11,37 +11,42 @@
         let jrgc_wap = $FW.Browser.inMobile();
         let jrgc_web = !$FW.Browser.inMobile();
 
-        if(jrgc_ios) sourceType = 1;
-        if(jrgc_android) sourceType = 2;
-        if(jrgc_wap) sourceType = 3;
-        if(jrgc_weixin) sourceType = 4;
-        if(jrgc_web) sourceType = 5;
+        if (jrgc_ios) sourceType = 1;
+        if (jrgc_android) sourceType = 2;
+        if (jrgc_wap) sourceType = 3;
+        if (jrgc_weixin) sourceType = 4;
+        if (jrgc_web) sourceType = 5;
 
-        let tick = setInterval(()=>{NativeBridge.trigger("refresh_loan_token")},1000);
-        if(NativeBridge.isReady){
-            clearInterval(tick);
-            $FW.Component.hideAjaxLoading();
-        }else{
-            tick();
-            $FW.Component.showAjaxLoading();
-        }
+//        let tick = setInterval(() => {
+//            NativeBridge.trigger("refresh_loan_token")
+//        }, 1000);
+//
+//        if (NativeBridge.isReady) {
+//            clearInterval(tick);
+//            $FW.Component.hideAjaxLoading();
+//        } else {
+//            tick();
+//            $FW.Component.showAjaxLoading();
+//        }
 
-        window.onNativeMessageReceive = function(data){
+        NativeBridge.trigger("refresh_loan_token")
+
+        window.onNativeMessageReceive = function (data) {
             let receiveData = JSON.stringify(data);
-            if(receiveData.token == ""){
+            if (receiveData.token == "") {
                 NativeBridge.login();
-            }else{
+            } else {
                 jrcgToken = receiveData.token;
-                if(jrcgToken){
+                if (jrcgToken) {
                     login(jrcgToken);
                 }
             }
         }
 
-        function login(jrcgToken){
+        function login(jrcgToken) {
             $FW.Post(`${API_PATH}api/user/v1/signature`, {
-                jrgcToken:jrcgToken,
-                sourceType:sourceType
+                jrgcToken: jrcgToken,
+                sourceType: sourceType
             }).then(data => {
                 let dict = data.userLogin;
                 $FW.Store.setUserDict({
