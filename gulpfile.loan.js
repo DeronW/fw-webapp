@@ -22,7 +22,8 @@ const USER_PAGES = [
     'user-bank-support', //支持银行卡
     'user-card-management', //银行卡管理
     'user-verify-phone',
-    'user-settings' //更多
+    'user-settings', //更多
+    'user-jrgcLogin'
 ]
 
 // 账单模块
