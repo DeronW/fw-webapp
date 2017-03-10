@@ -17,12 +17,12 @@
         if(jrgc_weixin) sourceType = 4;
         if(jrgc_web) sourceType = 5;
 
-        let timer = ()=>{setInterval(()=>{NativeBridge.trigger("refresh_loan_token")},1000)};
+        let tick = setInterval(()=>{NativeBridge.trigger("refresh_loan_token")},1000);
         if(NativeBridge.isReady){
-            timer();
+            clearInterval(tick);
             $FW.Component.hideAjaxLoading();
         }else{
-            clearInterval(timer);
+            tick();
             $FW.Component.showAjaxLoading();
         }
 
