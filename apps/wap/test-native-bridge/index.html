@@ -11,12 +11,12 @@
 
   <hr />
 
-  <button onClick="action('hideHeader')">隐藏Native头部导航</button>
-  <button onClick="action('showHeader')">显示Native头部导航</button>
+  <button onClick="trigger('hide_header')">隐藏Native头部导航</button>
+  <button onClick="trigger('show_header')">显示Native头部导航</button>
   <button onClick="action('login')">调用APP登录</button>
 
   <button onClick="toNative('app_fanxiCoupon')">去返息券页面</button>
-  <button onClick="action('refresh_loan_token')">获取登录放心花的Token</button>
+  <button onClick="trigger('refresh_loan_token')">获取登录放心花的Token</button>
   <button onClick="action('close')">关闭页面</button>
 </div>
 
@@ -35,6 +35,10 @@
   function action(name){
     NativeBridge[name]();
     log('发送指令', name)
+  }
+  function trigger(name) {
+        NativeBridge.trigger(name)
+      log('触发指令', name)
   }
   function setTitle(){
       var v = document.getElementById('title').value
