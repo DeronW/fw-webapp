@@ -58,7 +58,7 @@ const TOPIC_PAGES = [
     'topic-recommender-recruitment', //推荐人页面
     'topic-annual-commision', //年化佣金页面
     'topic-invite', //邀请返利, 邀请人,
-    'topic-gong-you-hui', //工友会专题页面
+    'topic-gong-you-hui', //工友会专题页面,
     'topic-invite-strategy',//邀请攻略页面
     'topic-novice-strategy'//新手策略页面
 ]
