@@ -7,7 +7,7 @@ const NewProducts = React.createClass({
     },
     componentDidMount() {
         $FW.Ajax({
-            url: `${API_PATH}mall/api/index/v1/recommendProducts.json`,
+            url: `./recommendProducts.json`,
             data: {
                 recommendBizNo: this.state.bizNo,
                 totalCount: this.props.count
@@ -57,7 +57,7 @@ const NewProducts = React.createClass({
         </a>;
 
         let product5 = products[4] && <a className="new-bg-5"
-            href={`/static/mall/product-detail/index.html?bizNo=${this.state.ps[4].bizNo}`}>
+            href={`/static/mall/product-detail/index.html?bizNo=${products[4].bizNo}`}>
             <img className="new-img2" src={products[4].img} />
             <span className="new-img2-title">{products[4].abbreviation}</span>
         </a>;
