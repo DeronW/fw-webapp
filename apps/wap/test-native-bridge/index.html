@@ -16,6 +16,7 @@
   <button onClick="action('login')">调用APP登录</button>
 
   <button onClick="toNative('app_fanxiCoupon')">去返息券页面</button>
+  <button onClick="action('refresh_loan_token')">获取登录放心花的Token</button>
   <button onClick="action('close')">关闭页面</button>
 </div>
 
@@ -23,7 +24,9 @@
   <p></p>
 </div>
 
-{% endblock %} {% block extra_javascripts %}
+{% endblock %}
+
+{% block extra_javascripts %}
 <script>
   function toNative(name){
     NativeBridge.toNative(name)
@@ -44,4 +47,5 @@
     p.innerHTML = (new Date().toTimeString().split(' ')[0]) + ' ' + type + ' <b>' + cmd + '</b>';
     logs.insertBefore(p, logs.children[0])
   }
-</script> {% endblock %}
+</script>
+{% endblock %}
