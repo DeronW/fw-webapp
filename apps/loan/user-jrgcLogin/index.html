@@ -26,7 +26,6 @@
                 jrgcToken: jrcgToken,
                 sourceType: sourceType
             }).then(data => {
-                alert(`${API_PATH}api/userext/v1/signature`);
                 let dict = data.userLogin;
                 $FW.Store.setUserDict({
                     token: dict.userToken,
