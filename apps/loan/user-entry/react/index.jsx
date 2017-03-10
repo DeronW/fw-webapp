@@ -48,7 +48,11 @@ const Register = React.createClass({
             sourceType: SOURCE_TYPE
         }).then(data => {
             $FW.Store.set('phone', phone);
-            location.href = `/static/loan/user-set-password/index.html?codeToken=${data.codeToken}&phone=${phone}`;
+            if(data.codeType == 1){
+                location.href = `/static/loan/user-set-password/index.html?codeToken=${data.codeToken}&phone=${phone}`;
+            }else if(data.codeType == 2){
+                location.href = `/static/loan/user-reset-password/index.html?codeToken=${data.codeToken}&phone=${phone}`;
+            }
         }, res => {
             if (res.code === 201003) {
                 $FW.Store.set('phone', phone);

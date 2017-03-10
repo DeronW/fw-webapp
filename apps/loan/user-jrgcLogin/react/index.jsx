@@ -13,18 +13,37 @@ $FW.DOMReady(function () {
     if(jrgc_weixin) sourceType = 4;
     if(jrgc_web) sourceType = 5;
 
-    $FW.Post(`${API_PATH}api/user/v1/signature`, {
-        jrgcToken:jrgcToken,
-        sourceType:sourceType
-    }).then(data => {
-        return $FW.Post(``,{
-            token:null,
-            userId:null,
-            userGid:null
-        })
-    }).then(data=>{
+    function action(name){
+        NativeBridge[name]();
+    }
 
-       },e => $FW.Component.Toast(e.message)
-    );
+    NativeBridge.trigger("refresh_loan_token");
+    window.onNativeMessageReceive = function(data){
+        let receiveData = JSON.stringify(data);
+        if(receiveData == ""){
+            action("login");
+        }else{
+            jrcgToken = receiveData;
+            if(jrcgToken){
+                login(jrcgToken);
+            }
+        }
+    }
+
+    function login(jrcgToken){
+        $FW.Post(`${API_PATH}api/user/v1/signature`, {
+            jrgcToken:jrcgToken,
+            sourceType:sourceType
+        }).then(data => {
+            let dict = data.userLogin;
+            $FW.Store.setUserDict({
+                token: dict.userToken,
+                id: dict.userId,
+                gid: dict.userGid,
+                status: dict.userStatus
+            })
+            location.href = `/static/loan/home/index.html`;
+        }, e => $FW.Component.Toast(e.message));
+    }
 
 });

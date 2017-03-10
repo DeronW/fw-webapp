@@ -225,5 +225,5 @@ $FW.DOMReady(function () {
     }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
     }, e => $FW.Capture(e));
-    ReactDOM.render(<BottomNavBar index={1} />, BOTTOM_NAV_NODE);
+    {!$FW.Browser.inApp && ReactDOM.render(<BottomNavBar index={1} />, BOTTOM_NAV_NODE)}
 });
