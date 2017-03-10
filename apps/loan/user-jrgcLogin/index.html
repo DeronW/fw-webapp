@@ -1,6 +1,4 @@
-{% extends '../../../lib/templates/loan_base.swig.html' %}
-
-{% block extra_javascripts %}
+{% extends '../../../lib/templates/loan_base.swig.html' %} {% block extra_javascripts %}
 <script>
     (function () {
         let jrcgToken;
@@ -17,30 +15,20 @@
         if (jrgc_weixin) sourceType = 4;
         if (jrgc_web) sourceType = 5;
 
-//        let tick = setInterval(() => {
-//            NativeBridge.trigger("refresh_loan_token")
-//        }, 1000);
-//
-//        if (NativeBridge.isReady) {
-//            clearInterval(tick);
-//            $FW.Component.hideAjaxLoading();
-//        } else {
-//            tick();
-//            $FW.Component.showAjaxLoading();
-//        }
-
         NativeBridge.trigger("refresh_loan_token")
 
         window.onNativeMessageReceive = function (data) {
-            let receiveData = JSON.stringify(data);
-            if (receiveData.token == "") {
-                NativeBridge.login();
-            } else {
-                jrcgToken = receiveData.token;
-                if (jrcgToken) {
-                    login(jrcgToken);
-                }
-            }
+            // let receiveData = JSON.parse(data);
+            // if (receiveData.token == "") {
+            //     NativeBridge.login();
+            // } else {
+            //     jrcgToken = receiveData.token;
+            //     if (jrcgToken) {
+            //         login(jrcgToken);
+            //     }
+            // }
+alert('got token: '+ data.toekn)
+            data.token ? login(data.token) : NativeBridge.login()
         }
 
         function login(jrcgToken) {
@@ -55,10 +43,11 @@
                     gid: dict.userGid,
                     status: dict.userStatus
                 })
-                location.href = `/static/loan/home/index.html`;
+                location.href = '/';
             }, e => $FW.Component.Toast(e.message));
         }
 
     })();
+
 </script>
 {% endblock %}
