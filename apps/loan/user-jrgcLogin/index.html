@@ -18,21 +18,11 @@
         NativeBridge.trigger("refresh_loan_token")
 
         window.onNativeMessageReceive = function (data) {
-            // let receiveData = JSON.parse(data);
-            // if (receiveData.token == "") {
-            //     NativeBridge.login();
-            // } else {
-            //     jrcgToken = receiveData.token;
-            //     if (jrcgToken) {
-            //         login(jrcgToken);
-            //     }
-            // }
-alert('got token: '+ data.token)
             data.token ? login(data.token) : NativeBridge.login()
         }
 
         function login(jrcgToken) {
-            $FW.Post(`${API_PATH}api/user/v1/signature`, {
+            $FW.Post(`${API_PATH}api/userext/v1/signature`, {
                 jrgcToken: jrcgToken,
                 sourceType: sourceType
             }).then(data => {
