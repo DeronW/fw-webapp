@@ -17,7 +17,7 @@ $FW.DOMReady(function () {
         NativeBridge[name]();
     }
 
-    NativeBridge.trigger("refresh_loan_token");
+    action("refresh_loan_token");
     window.onNativeMessageReceive = function(data){
         let receiveData = JSON.stringify(data);
         if(receiveData == ""){
