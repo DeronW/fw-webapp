@@ -17,9 +17,8 @@
         if(jrgc_weixin) sourceType = 4;
         if(jrgc_web) sourceType = 5;
 
-
-        NativeBridge.trigger("refresh_loan_token");
         window.onNativeMessageReceive = function(data){
+            NativeBridge.trigger("refresh_loan_token");
             let receiveData = JSON.stringify(data);
             if(receiveData == ""){
                 NativeBridge.login();
