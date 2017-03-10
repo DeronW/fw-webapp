@@ -1,176 +1,83 @@
-body, p {
-  margin: 0;
-  padding: 0
-}
-
-.li_wx {
+.connection-box {
   width: 100%;
-  background: url(../images/conButBg.png) center bottom no-repeat;
-  padding-bottom: 65px;
-  text-align: center;
-}
-
-.top {
-  margin-bottom: 30px;
-}
-
-.topList {
-  font-size: 26px;
+  height: auto;
   color: #5e5100;
-  margin-bottom: 30px;
+  overflow: hidden;
+  .top {
+    width: 100%;
+  }
+  .step {
+    width: 100%;
+    height: 267px;
+    margin: 40px 0 100px 46px;
+    .step-item {
+      float: left;
+      width: 225px;
+      img {
+        margin-bottom: 20px;
+        margin-left: 5px;
+      }
+      .step-text {
+        font-size: 26px;
+        text-align: center;
+        padding-right: 40px;
+      }
+    }
+  }
+  .earn-box {
+    font-size: 22px;
+    margin-bottom: 100px;
+    .case-box {
+      height: 267px;
+      background: url("../images/casebg.png") no-repeat center;
+      line-height: 40px;
+      padding:33px 60px 0 60px;
+      .case-title{
+        font-weight: 700;
+      }
+    }
+  }
+  .vip-box{
+    font-size: 24px;
+    .title-invite{
+      margin-bottom: 30px;
+    }
+    .vip-pic{
+      margin-bottom: 15px;
+    }
+    .vip-text{
+      padding-left: 50px;
+      .text-item{
+        width: 126px;
+        padding-right: 40px;
+        float: left;
+        text-align: center;
+        line-height: 35px;
+      }
+    }
+  }
+  .mj-box{
+    width: 640px;
+    padding: 50px 40px 0 40px;
+    height: 84px;
+    text-align: center;
+    display: table;
+    font-size: 24px;
+    line-height: 35px;
+    .mj-text{
+      float: left;
+      padding-top: 18px;
+    }
+    .mj-pic{
+      float: right;
+    }
+  }
 }
 
-.topList p {
-  margin-bottom: 40px
-}
-
-.topList span {
-  display: inline-block;
-  width: 32%;
-  text-align: center;
-}
-
-.topList span em {
-  font-size: 28px;
+.colorRed {
   color: #d10000;
-  font-style: normal;
 }
 
-.bot {
-  background: url(../images/conCont3.png) top center no-repeat;
-  font-size: 26px;
-  color: #5e5100;
-  height: 620px;
-  line-height: 150%;
-  padding: 40px;
-  margin-bottom: 50px;
-}
-
-.bot em {
+.font28 {
   font-size: 28px;
-  color: #d10000;
-  font-style: normal;
-}
-
-.botBut {
-  position: relative;
-}
-
-.botBut .but {
-  position: absolute;
-  right: 35px;
-  top: -12px;
-}
-
-/* ���ֹ��� */
-.xs_wx {
-  width: 100%;
-  background: #ffeebc;
-  padding-bottom: 30px;
-  text-align: center;
-}
-
-.xs_top {
-  font-size: 36px;
-  color: #fff;
-  text-align: center;
-  height: 80px;
-  line-height: 80px;
-  background: #ff795f;
-  margin-bottom: 15px;
-}
-
-.xs_botBut {
-  margin-top: 30px;
-  position: relative;
-}
-
-.xs_botBut .but {
-  position: absolute;
-  right: 35px;
-  top: -12px;
-}
-
-.shade {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  position: fixed;
-  z-index: 10;
-}
-
-.detail {
-  background: url(../images/detail-miji.png) top center no-repeat;
-  height: 976px;
-  font-size: 24px;
-  color: #070707;
-  padding: 160px 84px 45px;
-  line-height: 196%;
-  position: relative;
-}
-
-.close {
-  width: 62px;
-  height: 62px;
-  border-radius: 100%;
-  position: absolute;
-  top: 70px;
-  right: 34px;
-  z-index: 50;
-}
-
-.cs2 {
-  top: 53px;
-  right: 40px;
-}
-
-.detailNew {
-  background: url(../images/detail.png) top center no-repeat;
-  height: 1152px;
-  font-size: 24px;
-  color: #fff;
-  padding: 120px 84px 45px;
-  line-height: 196%;
-  position: relative;
-}
-
-.detailNew .tit {
-  color: #f4ff7e;
-}
-
-.cover2 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-}
-
-.cover2 .bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  opacity: 0.6;
-  background: black;
-}
-
-.cover2 .modal {
-  z-index: 1;
-  position: relative;
-}
-
-.cover2 .modal img {
-  display: block;
-  margin: 100px auto 0;
-}
-
-.cover2 .modal .close2 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 160px;
-  height: 160px;
 }
