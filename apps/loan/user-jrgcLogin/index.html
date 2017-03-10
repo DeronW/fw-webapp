@@ -17,19 +17,21 @@
         if(jrgc_weixin) sourceType = 4;
         if(jrgc_web) sourceType = 5;
 
+        let timer = ()=>{setInterval(()=>{NativeBridge.trigger("refresh_loan_token")},1000)};
         if(NativeBridge.isReady){
-            NativeBridge.trigger("refresh_loan_token");
+            timer();
             $FW.Component.hideAjaxLoading();
         }else{
+            clearInterval(timer);
             $FW.Component.showAjaxLoading();
         }
 
         window.onNativeMessageReceive = function(data){
             let receiveData = JSON.stringify(data);
-            if(receiveData == ""){
+            if(receiveData.token == ""){
                 NativeBridge.login();
             }else{
-                jrcgToken = receiveData;
+                jrcgToken = receiveData.token;
                 if(jrcgToken){
                     login(jrcgToken);
                 }
