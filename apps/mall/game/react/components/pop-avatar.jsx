@@ -15,11 +15,10 @@ const GameCenter_popAvatar= React.createClass({
                 icon:url,
                 token:gameToken
             },
-            withCredentials: true,
-            success: (data) => {
+            withCredentials: true
+        }).then(data => {
                 this.props.setAvatar(url);
                 this.props.setPopAvatar(false);
-            }
         });
     },
     render:function(){
