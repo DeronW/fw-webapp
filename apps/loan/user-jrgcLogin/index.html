@@ -26,9 +26,9 @@
                 jrgcToken: jrcgToken,
                 sourceType: sourceType
             }).then(data => {
-                let dict = data.userLogin;
+                let dict = data;
                 $FW.Store.setUserDict({
-                    token: dict.userToken,
+                    token: dict.token,
                     id: dict.userId,
                     gid: dict.userGid,
                     status: dict.userStatus
