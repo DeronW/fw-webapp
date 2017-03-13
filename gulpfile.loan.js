@@ -23,7 +23,8 @@ const USER_PAGES = [
     'user-card-management', //银行卡管理
     'user-verify-phone',
     'user-settings', //更多
-    'user-jrgcLogin'
+    'user-jrgcLogin',
+    'user-weixin'
 ]
 
 // 账单模块
@@ -38,6 +39,7 @@ const BILL_PAGES = [
 const APPLY_PAGES = [
     'apply-want', //我要借款页面
     'apply-confirm', //确认借款页面
+    'apply-result'
 ]
 
 // 借款服务协议页面
