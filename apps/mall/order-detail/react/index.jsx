@@ -250,12 +250,11 @@ const OrderNumberList = React.createClass({
 
         let receive_at = null;
         if (order.receive_at) {
-            receive_at = (
+            receive_at =
                 <div className="sequence-text">
                     <span className="text">完成时间：</span>
                     <span className="time-text">{order.receive_at}</span>
                 </div>
-            )
         }
 
         return (
