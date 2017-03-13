@@ -318,12 +318,12 @@ const ExchangeBar = React.createClass({
 
         let gongfeng_array = ['不限', '我可兑换', '1-100', '101-1000', '1000-5000', '5000以上'];
         let gongfeng_item = gongfeng_array.map((name, index) => {
-            return (<span className={this.state.filterScore == name ? "gongfeng-item-wrap on" : "gongfeng-item-wrap"}
+            return <span className={this.state.filterScore == name ? "gongfeng-item-wrap on" : "gongfeng-item-wrap"}
                 key={index}>
                 <span className="gongfeng-item" onClick={function () { _this.filterScoreHandler(name) }}>
                     {name}
                 </span>
-            </span>)
+            </span>
         }
         );
         let viplevel_array = ['不限', '普通会员', 'Vip1专享', 'Vip2专享', 'Vip3专享', 'Vip4专享'];
