@@ -18,6 +18,7 @@
         NativeBridge.trigger("refresh_loan_token")
 
         window.onNativeMessageReceive = function (data) {
+            alert(data.token);
             data.token ? login(data.token) : NativeBridge.login()
         }
 
