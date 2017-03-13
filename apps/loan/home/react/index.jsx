@@ -71,6 +71,8 @@ const ApplyLoan = React.createClass({
                     //console.log(getPosition(minDiv).left - 48)
                     //if (loanNum <= this.props.data.lowestLoan) { loanNum = this.props.data.lowestLoan }
                     this.setState({ creditLine: loanNum });
+                    e.stopPropagation();
+                    e.nativeEvent.stopImmediatePropagation();
                 }
             });
 
