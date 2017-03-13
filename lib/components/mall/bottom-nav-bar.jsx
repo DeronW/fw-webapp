@@ -37,7 +37,7 @@ const BottomNavBar = React.createClass({
     render: function () {
         let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
         let posAW = inApp ? "absolute" : "relative";
-        let topAW = inApp ? "top:15px" : "paddingTop:15px";
+        let pTopAW = inApp ? "15px" : "0";
         let disAW = inApp ? "block" : "none";
         let widAW = inApp ? "100px" : "25%";
 
@@ -59,11 +59,12 @@ const BottomNavBar = React.createClass({
 
         let _style_footer_item_base = {
             backgroundRepeat: 'no-repeat',
-            display: "block",
+            display: "inline-block",
             width: widAW,
             color: '#ef3837',
             textAlign: 'center',
-            topAW,
+            top: "15px",
+            paddingTop: pTopAW,
             position: posAW
         }
 
