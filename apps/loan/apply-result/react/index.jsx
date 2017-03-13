@@ -42,7 +42,7 @@ const LoanResult = React.createClass({
     checkAjax() {
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
-
+        let user = $FW.Store.getUserDict();
         $FW.Post(`${API_PATH}api/loan/v1/status.json`, {
             token: USER.token,
             userGid: USER.gid,
@@ -94,18 +94,18 @@ const LoanResult = React.createClass({
 
         this.countingDown();
         //this.resetState(this.props);
-        var clipboard = new Clipboard('.copy-qr');
-        clipboard.on('success', function(e) {
-            console.info('Action:', e.action);
-            console.info('Text:', e.text);
-            console.info('Trigger:', e.trigger);
-            e.clearSelection();
-        });
-
-        clipboard.on('error', function(e) {
-            console.error('Action:', e.action);
-            console.error('Trigger:', e.trigger);
-        });
+        // var clipboard = new Clipboard('.copy-qr');
+        // clipboard.on('success', function(e) {
+        //     console.info('Action:', e.action);
+        //     console.info('Text:', e.text);
+        //     console.info('Trigger:', e.trigger);
+        //     e.clearSelection();
+        // });
+        //
+        // clipboard.on('error', function(e) {
+        //     console.error('Action:', e.action);
+        //     console.error('Trigger:', e.trigger);
+        // });
 
     },
     // resultHide: function () {
@@ -217,7 +217,7 @@ const LoanResult = React.createClass({
 $FW.DOMReady(function () {
     let user = $FW.Store.getUserDict();
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
-    ReactDOM.render(<LoanResult/>, CONTENT_NODE);
+    //ReactDOM.render(<LoanResult/>, CONTENT_NODE);
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
         token: user.token,
         userGid: user.gid,
