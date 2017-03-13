@@ -4,7 +4,7 @@ function isMobilePhone(phone) {
 
 
 function verificationNum(val) {
-    var reg = new RegExp("/[^\d]/g");
+    var reg = new RegExp("^[0-9]*$");
     return reg.test(val)
 }
 
