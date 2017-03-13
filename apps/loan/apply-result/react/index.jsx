@@ -94,7 +94,18 @@ const LoanResult = React.createClass({
 
         this.countingDown();
         //this.resetState(this.props);
+        var clipboard = new Clipboard('.copy-qr');
+        clipboard.on('success', function(e) {
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+            e.clearSelection();
+        });
 
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+        });
 
     },
     // resultHide: function () {
@@ -189,7 +200,7 @@ const LoanResult = React.createClass({
                     </div>
                     <div className="weixin-attention">
                         <div className="weixin-attention-wrap">
-                            <div>关注微信公众号fxhuaba<span className="copy-qr">点击复制公众号</span></div>
+                            <div>关注微信公众号fxhuaba<span className="copy-qr" data-clipboard-text="fxhuaba">点击复制公众号</span></div>
                             <div>可获得更高借款额度，且随时查看还款计划</div>
                         </div>
                     </div>
