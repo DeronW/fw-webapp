@@ -17,7 +17,7 @@
         NativeBridge.trigger("refresh_loan_token")
 
         window.onNativeMessageReceive = function (data) {
-            alert(data.token);
+            //alert(data.token);
             data.token ? login(data.token) : NativeBridge.login()
         }
 
@@ -33,7 +33,7 @@
                     gid: dict.userGid,
                     status: dict.userStatus
                 })
-                location.href = '/';
+                location.href = '/static/loan/home/index.html';
             }, e => $FW.Component.Toast(e.message));
         }
 
