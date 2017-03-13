@@ -201,11 +201,7 @@ const ApplyLoan = React.createClass({
                 </div>
                 {this.getBtnStatus()}
                 <div className="loan-tip">完善授权信息可减免手续费</div>
-                <br />
-                <br />
-                <br />
-                <br />
-
+                {!$FW.Browser.inApp() && <div><br /><br /><br /><br /></div>}
             </div>
         )
     }
