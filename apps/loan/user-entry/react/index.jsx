@@ -16,7 +16,9 @@ const Register = React.createClass({
         }
     },
     changeHandler(e) {
+
         let v = e.target.value;
+
         if (e.target.value.length > 11) {
             this.setState({
                 phone: this.state.phone,
@@ -79,7 +81,7 @@ const Register = React.createClass({
                         <div className="from">
                             <div className="icon"></div>
                             <div className="input">
-                                <input type="number" value={this.state.phone}
+                                <input type="text" value={this.state.phone}
                                     onChange={this.changeHandler} onKeyUp={this.keyUpHandler}
                                     placeholder="请输入手机号进行注册登录" />
                                 {this.state.deleteShow &&
