@@ -22,7 +22,7 @@
         }
 
         function login(jrcgToken) {
-            $FW.Post(`${API_PATH}api/userext/v1/signature`, {
+            $FW.Post(`${API_PATH}api/userext/v1/signature.json`, {
                 jrgcToken: jrcgToken,
                 sourceType: sourceType
             }).then(data => {
