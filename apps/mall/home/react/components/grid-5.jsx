@@ -12,11 +12,11 @@ const Grid_5 = React.createClass({
                 recommendBizNo: this.state.bizNo,
                 totalCount: this.props.count
             }
-        }).then(data => this.setState({ products: data.products }))
+        }).then(data => this.setState({products: data.products}))
     },
     render: function () {
         let {products} = this.state;
-        if(products.length == 0) return null;
+        if (products.length == 0) return null;
 
         let theme2_top_product_item = (product, index) => {
             return (
@@ -43,9 +43,9 @@ const Grid_5 = React.createClass({
                         <div className="theme2-btm-product-info">
                             <span className="theme2-btm-product-title">{product.abbreviation}</span>
                             <span className="theme2-btm-product-price">
-                                {product.rmbPrice == 0.00 ? null : `¥${product.rmbPrice}`}
+                                {product.rmbPrice != 0 && `¥${product.rmbPrice}`}
                                 {product.rmbPrice == 0 || product.score == 0 ? "" : "+"}
-                                {product.score}工分
+                                {product.score != 0 && `${product.score}工分`}
                             </span>
                         </div>
                     </div>
@@ -54,7 +54,8 @@ const Grid_5 = React.createClass({
         };
         return (
             <div className="theme-2">
-                <a href= '/static/mall/product-list/index.html?searchSourceType=0&category=outdoor&title=户外用品' className="activity-theme"><img src="/static/mall/product-list/images/outdoor.jpg"/></a>
+                <a href='/static/mall/product-list/index.html?searchSourceType=0&category=outdoor&title=户外用品'
+                   className="activity-theme"><img src="/static/mall/product-list/images/outdoor.jpg"/></a>
                 <div className="theme2-product-wrap">
                     <div className="theme2-top-product-list">
                         {products.slice(0, 3).map(theme2_top_product_item)}

@@ -33,7 +33,7 @@ const Mall = React.createClass({
         for (var i = 0; i < bs.length; i++) {
             if (i == index) link = bs[i].link;
         }
-        link ? gotoHandler(link) : console.log('no link set');
+        link ? gotoHandler(link) : null;
     },
     componentDidMount: function () {
         window.addEventListener('scroll', function () {

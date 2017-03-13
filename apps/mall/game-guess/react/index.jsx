@@ -181,13 +181,13 @@ const GameGuess = React.createClass({
     render: function () {
         let cost_tip = (level, cost)=> {
             return
-            <div className="cost">第<span className="pass-num">{(level % 3) + 1}</span>关仅<span
+            <div className="cost">第<span className="pass-num">{level % 3 + 1}</span>关仅<span
                 className="cost-score">{cost}</span>工分，选手势赢翻倍积分! </div>
         };
         let check_img = [0, 1, 2].map((value, index)=> {
-            let check_state = (value == this.state.checked) ? "smallimg-on" : "smallimg";
+            let check_state = value == this.state.checked ? "smallimg-on" : "smallimg";
             return
-            <div key={index} className={"check check"+value} onClick={()=>{this.checkHandler(value)}}><img
+            <div key={index} className={"check check"+value} onClick={()=>{this.checkHandler.bind(this,value)}}><img
                 src={"images/"+check_state+value+".png"}/></div>
         });
         return (
@@ -208,13 +208,15 @@ const GameGuess = React.createClass({
                 </div>
                 {this.state.show_inf ? <GameGuess_inf changeInfHandler={this.changeInfHandler}/> : null}
                 {this.state.show_pop ? <GameGuess_popResult data={
-                        {result:this.state.result,
+                    {
+                        result:this.state.result,
                         level:this.state.level,
                         get_prize:this.state.get_prize,
                         hideResultHandLer:this.hideResultHandLer,
                         nextHandler:this.nextHandler,
                         next_get_prize:this.state.next_get_prize,
-                        next_cost_score:this.state.next_cost_score}
+                        next_cost_score:this.state.next_cost_score
+                    }
                 }/> : null}
             </div>
         )
