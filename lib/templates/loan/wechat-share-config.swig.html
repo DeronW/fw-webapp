@@ -17,19 +17,23 @@
             sourceType: SOURCE_TYPE,
             templateType: 1,
             //fail: () => true
-        }).then(data => {
-            templateContent = data.shareTemplate.templateContent;
-            templateTitle = data.shareTemplate.templateTitle;
-            templateUrl = data.shareTemplate.templateUrl;
+        }).then(
+            function(data){
+                templateContent = data.shareTemplate.templateContent;
+                templateTitle = data.shareTemplate.templateTitle;
+                templateUrl = data.shareTemplate.templateUrl;
 
-            return $FW.Ajax({
-                url: API_PATH + 'cashloan/outside/weixinAccountController.do?wxConfig',
-                data: { url: location.href },
-                //fail: () => true
-            })
-        }).then(data => {
-            setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
-        });
+                return $FW.Ajax({
+                    url: API_PATH + 'cashloan/outside/weixinAccountController.do?wxConfig',
+                    data: { url: location.href },
+                    //fail: () => true
+                })
+            }
+        ).then(
+            function(data){
+                setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
+            }
+        );
 
         function setWxConfig(appid, timestamp, noncestr, signature) {
             wx.config({
