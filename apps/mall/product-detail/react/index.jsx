@@ -218,13 +218,9 @@ const PlusMinus = React.createClass({
         let linkLogin = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=/static/mall/product-detail/index.html'
             + location.search;
 
+
         if (this.props.is_login == 0) {
-            $FW.Ajax({
-                url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
-                enable_loading: 'mini'
-            }).then(data => {
-                //location.href = linkLogin
-            });
+             location.href = linkLogin
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
@@ -293,7 +289,12 @@ const PlusMinus = React.createClass({
             gotoHandler(link);
         } else {
             if (!isCanBuy) {
-                gotoHandler(linkLogin) //$FW.Component.Alert("请先登录");
+                 $FW.Ajax({
+                    url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
+                    enable_loading: 'mini'
+                }).then(data => {
+                    // gotoHandler(linkLogin) //$FW.Component.Alert("请先登录");
+                });
             }
         }
     },
