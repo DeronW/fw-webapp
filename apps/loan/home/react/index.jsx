@@ -24,6 +24,8 @@ const ApplyLoan = React.createClass({
             var flag = false;
 
             minDiv.addEventListener("touchstart", function (e) {
+                var e = event || window.event;
+                e.preventDefault();
                 e.stopPropagation();
                 flag = true;
             });
@@ -44,7 +46,7 @@ const ApplyLoan = React.createClass({
             }
 
             applyLoan.addEventListener("touchmove", (e) => {
-                var e = event || window.event;
+                let e = event || window.event;
                 if (flag) {
                     var x = e.touches[0].pageX || e.touches[0].clientX;
                     var lineDiv_left = getPosition(lineDiv).left;
@@ -72,12 +74,8 @@ const ApplyLoan = React.createClass({
                     //console.log(getPosition(minDiv).left - 48)
                     //if (loanNum <= this.props.data.lowestLoan) { loanNum = this.props.data.lowestLoan }
                     this.setState({ creditLine: loanNum });
-                    document.documentElement.style.overflow='hidden';
-                    document.body.style.overflow='hidden';
-                    e.preventDefault && e.preventDefault();
-                    e.returnValue=false;
-                    e.stopPropagation && e.stopPropagation();
-                    return false;
+                    e.preventDefault();
+                    e.stopPropagation();
                 }
             });
 
