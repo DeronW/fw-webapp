@@ -12,8 +12,8 @@ const LoanResult = React.createClass({
             checkingResult: false,
             countdown: 0,
             loanStatus: null,
-            bankName:filtered[0].bankShortName,
-            bankNo:filtered[0].cardNo.slice(-4)
+            bankName: filtered[0].bankShortName,
+            bankNo: filtered[0].cardNo.slice(-4)
         }
     },
     // componentWillReceiveProps: function (nextProps) {
@@ -30,11 +30,11 @@ const LoanResult = React.createClass({
     //     });
     // },
     countingDown() {
-        let {countdown} = this.state;
-        this.setState({ countdown: 56});
+        let { countdown } = this.state;
+        this.setState({ countdown: 56 });
         this.checkAjax();
         this.timer = setInterval(() => {
-            if(countdown % 10 === 0) this.checkAjax();
+            if (countdown % 10 === 0) this.checkAjax();
             this.setState({ countdown: countdown - 1 });
             if (countdown <= 0) clearInterval(this.timer);
         }, 1000);
@@ -66,7 +66,7 @@ const LoanResult = React.createClass({
                 finishFlag = false
             }
 
-            if(this.state.countdown <= 0 ){
+            if (this.state.countdown <= 0) {
                 if (data.loanStatus == 6) {
                     this.setState({
                         waitingResultShow: false,
@@ -82,11 +82,11 @@ const LoanResult = React.createClass({
                         waitingResultShow: false,
                         checkingResult: true
                     });
-                }else {
+                } else {
                     finishFlag = false
                 }
             }
-            if(finishFlag) clearInterval(this.timer);
+            if (finishFlag) clearInterval(this.timer);
         }, (err) => { $FW.Component.Toast(err.message) });
 
     },
@@ -95,14 +95,12 @@ const LoanResult = React.createClass({
         this.countingDown();
         //this.resetState(this.props);
         var clipboard = new Clipboard('.copy-qr');
-        clipboard.on('success', function(e) {
-            console.info('Action:', e.action);
-            console.info('Text:', e.text);
-            console.info('Trigger:', e.trigger);
+        clipboard.on('success', function (e) {
+            $FW.Component.Toast('复制成功')
             e.clearSelection();
         });
 
-        clipboard.on('error', function(e) {
+        clipboard.on('error', function (e) {
             console.error('Action:', e.action);
             console.error('Trigger:', e.trigger);
         });
@@ -115,7 +113,7 @@ const LoanResult = React.createClass({
         return (
             <div className="loan-result">
                 <div className="header">
-                    <div className="arrow-left" onClick={()=>{gotoHandler("/static/loan/home/index.html")}}></div>
+                    <div className="arrow-left" onClick={() => { gotoHandler("/static/loan/home/index.html") }}></div>
                     <div className="title">借款结果</div>
                 </div>
                 <div className="result-box">
@@ -150,7 +148,7 @@ const LoanResult = React.createClass({
                             </div>
                         </div>
                         <div className="btn-wrap">
-                            <div className="apply-btn" onClick={()=>gotoHandler('/static/loan/home/index.html')}>返回</div>
+                            <div className="apply-btn" onClick={() => gotoHandler('/static/loan/home/index.html')}>返回</div>
                         </div>
                     </div>
                     <div className={this.state.successResultShow ? "success-result-box" : "success-result-box dis"}>
