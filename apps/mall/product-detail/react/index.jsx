@@ -130,7 +130,7 @@ const Product = React.createClass({
         return (
             <div className="detail-box">
                 {shop_card_prompt}
-                <a onClick={this.shopHandler} className={topBuyCart} style={{ zIndex: '10' }}>
+                <a onClick={this.shopHandler} className={topBuyCart} style={{zIndex: '10'}}>
                     <span className="_style_buy_cart_span"></span>
                 </a>
                 {data.head_images && data.head_images.length ?
@@ -223,9 +223,8 @@ const PlusMinus = React.createClass({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
             }).then(data => {
-
-
             });
+
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
@@ -337,9 +336,9 @@ const EmptyProduct = React.createClass({
     },
     render: function () {
         return (
-            <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
-                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg'/>
-                <div style={{ fontSize: "30px", color: "#8591b3", textAlign: "center" }}>
+            <div style={{position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1"}}>
+                <img style={{display: "block", maxWidth: "80%", margin: "20% auto 50px"}} src='images/outdate.jpg'/>
+                <div style={{fontSize: "30px", color: "#8591b3", textAlign: "center"}}>
                     抱歉, 没有找到相关商品!
                 </div>
             </div>
@@ -360,8 +359,8 @@ $FW.DOMReady(function () {
         let i = document.createElement('iframe');
         i.src = '/favicon.ico';
         i.style.display = 'none';
-        i.onload = function() {
-            setTimeout(function(){
+        i.onload = function () {
+            setTimeout(function () {
                 i.remove();
             }, 9)
         }
