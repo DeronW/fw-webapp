@@ -96,7 +96,7 @@ const ApplyLoan = React.createClass({
                 <div className="max-loan-money">暂无额度</div>
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
-                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={$FW.Browser.inApp() ? `/static/loan/user-weixin/index.html`: `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>提额</a>吧！</div>
+                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={$FW.Browser.inApp() && st == 5 ? `/static/loan/user-weixin/index.html`: `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>提额</a>吧！</div>
             </div>;
 
         btn = st === 2 || st === 3 ?
@@ -150,14 +150,14 @@ const ApplyLoan = React.createClass({
         let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
         let credit_btn =
-            <a className="loan-btn" href={$FW.Browser.inApp() ? `/static/loan/user-weixin/index.html`: `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
+            <a className="loan-btn" href={$FW.Browser.inApp() && st == 5 ? `/static/loan/user-weixin/index.html`: `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
                 我要提额
             </a>;
 
         let btn_list =
             <div className="credit-btn">
                 <a className="credit-improvement-btn"
-                    href={$FW.Browser.inApp() ? `/static/loan/user-weixin/index.html`:`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
+                    href={$FW.Browser.inApp() && st == 5 ? `/static/loan/user-weixin/index.html`:`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
                     我要提额
                 </a>
                 <a className="credit-apply-btn"
@@ -215,6 +215,7 @@ const user = USER;
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('放心花');
+    alert(USER.status);
     $FW.Post(`${API_PATH}api/loan/v1/baseinfo.json`, {
         token: USER.token,
         userGid: USER.gid,
