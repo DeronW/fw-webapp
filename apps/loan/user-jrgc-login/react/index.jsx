@@ -20,6 +20,7 @@ $FW.DOMReady(function () {
 
     window.onNativeMessageReceive = function (data) {
         //alert(data.token);
+        console.log(data)
         data.token ? login(data.token) : NativeBridge.login()
     }
 
@@ -35,7 +36,7 @@ $FW.DOMReady(function () {
                 gid: dict.userGid,
                 status: dict.userStatus
             })
-            location.href = '/static/loan/home/index.html';
+            // location.href = '/static/loan/home/index.html';
         }, e => $FW.Component.Toast(e.message));
     }
 
