@@ -64,7 +64,9 @@ APP_NAMES.push(
     ...APP_NAMES,
     ...PROTOCOL_PAGES,
     ...DEVELOPING_PAGES
-)
+);
+
+APP_NAMES = ['user-jrgc-login'] // for debug
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
