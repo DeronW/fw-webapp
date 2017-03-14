@@ -218,10 +218,12 @@ const PlusMinus = React.createClass({
 
 
         if (this.props.is_login == 0) {
+            
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
             }).then(data => {
+
 
             });
         } else {
