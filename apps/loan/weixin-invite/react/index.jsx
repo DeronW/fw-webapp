@@ -25,6 +25,8 @@ $FW.DOMReady(function () {
         sourceType: SOURCE_TYPE
     }).then((data)=>{
         $(".btm-tip").text(data.shareTemplate.templateUrl);
+    }, ()=>{
+        location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });
 
     function loadMoreHandler(done) {
