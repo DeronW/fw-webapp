@@ -279,7 +279,7 @@ const PlusMinus = React.createClass({
             gotoHandler(link);
         } else {
             if (!isCanBuy) {
-                $FW.Ajax({
+                 $FW.Ajax({
                     url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                     enable_loading: 'mini'
                 }).then(data => {
