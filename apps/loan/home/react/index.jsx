@@ -182,7 +182,7 @@ const ApplyLoan = React.createClass({
 
         return (
             <div className="apply-loan">
-                <div className="header">放心花</div>
+                {!$FW.Browser.inApp() && <div className="header">放心花</div>}
                 <div className="loan-num">
                     {this.getBorrowBtn()}
                 </div>
