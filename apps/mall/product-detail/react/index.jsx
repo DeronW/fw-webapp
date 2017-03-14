@@ -28,6 +28,12 @@ const Product = React.createClass({
     },
 
     componentDidMount: function () {
+        var arrUrl=location.href.split('?');
+
+        if(arrUrl[2]){
+            location.href = (arrUrl[0].concat("?",arrUrl[1]))
+        }
+        /*
         window.addEventListener('scroll', function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
@@ -39,7 +45,7 @@ const Product = React.createClass({
             else {
                 id.setAttribute("class", "clarity _style_header_fixed");
             }
-        }.bind(this), false);
+        }.bind(this), false);*/
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
@@ -218,7 +224,7 @@ const PlusMinus = React.createClass({
             + location.search;
 
         if (this.props.is_login == 0) {
-            $FW.Browser.inApp() ? NativeBridge.goto(link) : location.href = linkLogin
+             location.href = linkLogin
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
