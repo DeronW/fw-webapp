@@ -213,6 +213,7 @@ const LoanResult = React.createClass({
 
 $FW.DOMReady(function () {
     let user = $FW.Store.getUserDict();
+    NativeBridge.setTitle('借款结果');
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
     //ReactDOM.render(<LoanResult/>, CONTENT_NODE);
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{

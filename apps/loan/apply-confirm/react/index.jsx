@@ -5,6 +5,7 @@ function gotoHandler(link) {
 const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('确认信息');
     ReactDOM.render(<Header title={"确认信息"} />, HEADER_NODE);
 
     let query = $FW.Format.urlQuery();

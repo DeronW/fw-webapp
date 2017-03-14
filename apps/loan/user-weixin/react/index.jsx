@@ -34,6 +34,7 @@ const WeixinCon = React.createClass({
 });
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle('关注微信');
     ReactDOM.render(<Header title={"关注微信"} />, HEADER_NODE);
     ReactDOM.render(<WeixinCon />, CONTENT_NODE);
 })
