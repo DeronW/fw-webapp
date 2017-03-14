@@ -1,10 +1,10 @@
 const LoanResult = React.createClass({
     getInitialState: function () {
-        let cashBank = this.props.userBankList.withdrawBankcard;
-        function isRealNameBindCard(ele) {
-            return ele.isRealNameBindCard == true;
-        }
-        let filtered = cashBank.filter(isRealNameBindCard);
+        // let cashBank = this.props.userBankList.withdrawBankcard;
+        // function isRealNameBindCard(ele) {
+        //     return ele.isRealNameBindCard == true;
+        // }
+        // let filtered = cashBank.filter(isRealNameBindCard);
         return {
             waitingResultShow: true,
             successResultShow: false,
@@ -12,8 +12,8 @@ const LoanResult = React.createClass({
             checkingResult: false,
             countdown: 0,
             loanStatus: null,
-            bankName:filtered[0].bankShortName,
-            bankNo:filtered[0].cardNo.slice(-4)
+            //bankName:filtered[0].bankShortName,
+            //bankNo:filtered[0].cardNo.slice(-4)
         }
     },
     // componentWillReceiveProps: function (nextProps) {
@@ -42,7 +42,7 @@ const LoanResult = React.createClass({
     checkAjax() {
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
-        let user = $FW.Store.getUserDict();
+        let USER = $FW.Store.getUserDict();
         $FW.Post(`${API_PATH}api/loan/v1/status.json`, {
             token: USER.token,
             userGid: USER.gid,
@@ -94,18 +94,18 @@ const LoanResult = React.createClass({
 
         this.countingDown();
         //this.resetState(this.props);
-        // var clipboard = new Clipboard('.copy-qr');
-        // clipboard.on('success', function(e) {
-        //     console.info('Action:', e.action);
-        //     console.info('Text:', e.text);
-        //     console.info('Trigger:', e.trigger);
-        //     e.clearSelection();
-        // });
-        //
-        // clipboard.on('error', function(e) {
-        //     console.error('Action:', e.action);
-        //     console.error('Trigger:', e.trigger);
-        // });
+        var clipboard = new Clipboard('.copy-qr');
+        clipboard.on('success', function(e) {
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+            e.clearSelection();
+        });
+
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+        });
 
     },
     // resultHide: function () {
