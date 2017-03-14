@@ -29,7 +29,6 @@ const Product = React.createClass({
 
     componentDidMount: function () {
         document.title = this.props.data.title;
-
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
@@ -212,7 +211,7 @@ const PlusMinus = React.createClass({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
             }).then(data => {
-                
+
             });
         } else {
             $FW.Ajax({
@@ -316,13 +315,6 @@ const PlusMinus = React.createClass({
 });
 
 const EmptyProduct = React.createClass({
-    componentDidMount: function () {
-        var arrUrl = location.href.split('?');
-
-        if (arrUrl[2]) {
-            location.href = (arrUrl[0].concat("?", arrUrl[1]))
-        }
-    },
     render: function () {
         return (
             <div style={{position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1"}}>
