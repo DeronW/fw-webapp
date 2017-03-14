@@ -28,6 +28,19 @@ const Product = React.createClass({
     },
 
     componentDidMount: function () {
+        /*
+        window.addEventListener('scroll', function () {
+            var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+
+            if (scrollTop > 100) return false;
+            let id = document.querySelector('._style_header_fixed');
+            if (scrollTop > 10) {
+                id.setAttribute("class", "no_clarity _style_header_fixed");
+            }
+            else {
+                id.setAttribute("class", "clarity _style_header_fixed");
+            }
+        }.bind(this), false);*/
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
@@ -206,7 +219,12 @@ const PlusMinus = React.createClass({
             + location.search;
 
         if (this.props.is_login == 0) {
-            location.href = linkLogin
+            $FW.Ajax({
+                url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
+                enable_loading: 'mini'
+            }).then(data => {
+                //location.href = linkLogin
+            });
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
@@ -305,13 +323,6 @@ const PlusMinus = React.createClass({
 });
 
 const EmptyProduct = React.createClass({
-    componentDidMount: function () {
-        var arrUrl = location.href.split('?');
-
-        if (arrUrl[2]) {
-            location.href = (arrUrl[0].concat("?", arrUrl[1]))
-        }
-    },
     render: function () {
         return (
             <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
