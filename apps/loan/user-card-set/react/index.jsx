@@ -139,7 +139,7 @@ const SetCashCard = React.createClass({
                 window.location.href = `/static/loan/user-verify-phone/index.html?phone=${phone}&operatorBankcardGid=${oGid}`;
             }, (e) => {
                 $FW.Component.Toast(e.message);
-                alert(USER.status);
+                //alert(USER.status);
         });
     },
     render() {
