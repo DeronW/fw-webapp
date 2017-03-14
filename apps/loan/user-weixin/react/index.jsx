@@ -7,8 +7,7 @@ const WeixinCon = React.createClass({
         });
 
         clipboard.on('error', function (e) {
-            console.error('Action:', e.action);
-            console.error('Trigger:', e.trigger);
+            $FW.Component.Toast('复制失败')
         });
     },
     render() {
