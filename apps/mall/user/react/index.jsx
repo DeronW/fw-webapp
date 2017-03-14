@@ -7,7 +7,13 @@ const User = React.createClass({
     },
     componentDidMount: function () {
         var _this = this;
-        window.onscroll = function () {
+
+        $FW.Ajax(`${API_PATH}mall/api/login.json`)
+            .then((data) => {
+
+
+            });
+        /*window.onscroll = function () {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
             if (scrollTop > 100) return false;
 
@@ -22,7 +28,7 @@ const User = React.createClass({
                     color: "#fff"
                 })
             }
-        }
+        }*/
     },
 
     render: function () {
