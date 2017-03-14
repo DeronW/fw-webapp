@@ -1,3 +1,9 @@
+function gotoHandler(link, need_login) {
+    $FW.Browser.inApp() ?
+        NativeBridge.goto(link, need_login) :
+        location.href = encodeURI(link);
+}
+
 const Content = React.createClass({
     getInitialState() {
         this.TIMER = null;
@@ -17,7 +23,7 @@ const Content = React.createClass({
             },
             fail: () => true,
             complete: data => {
-                this.setState({notice: data})
+                this.setState({ notice: data })
             }
         });
         let q = $FW.Format.urlQuery();
@@ -30,7 +36,7 @@ const Content = React.createClass({
             },
             fail: () => true,
             complete: data => this.setState({
-                banners: data.map(i => ({url: i.url, img: i.thumb}))
+                banners: data.map(i => ({ url: i.url, img: i.thumb }))
             })
         });
 
@@ -42,17 +48,17 @@ const Content = React.createClass({
             },
             fail: () => true,
             complete: data => this.setState({
-                topics: data.map(i => ({url: i.url, img: i.thumb}))
+                topics: data.map(i => ({ url: i.url, img: i.thumb }))
             })
         })
         this.moveNoticeHandler()
     },
-    moveNoticeHandler(){
+    moveNoticeHandler() {
         var distance = 68;
-        this.Timer = setInterval(()=> {
-            let {position,notice} = this.state;
+        this.Timer = setInterval(() => {
+            let { position, notice } = this.state;
             if (position > (notice.length - 2) * 68) {
-                setTimeout(()=> {
+                setTimeout(() => {
                     this.setState({
                         position: 0
                     });
@@ -68,9 +74,9 @@ const Content = React.createClass({
             }
         }, 30)
     },
-    moveHandler(distance){
+    moveHandler(distance) {
         let s = 0;
-        setTimeout(()=> {
+        setTimeout(() => {
             s = (distance - this.state.position) / 8;
             s = s > 0 ? Math.ceil(s) : Math.floor(s);
             this.setState({
@@ -91,15 +97,15 @@ const Content = React.createClass({
 
         let topic = (t, index) => {
             return <a className="event" key={index} href={t.url}>
-                <img src={t.img}/>
+                <img src={t.img} />
             </a>
         };
 
         let banner_group;
         if (banners.length > 0)
             banner_group = <BannerGroup className="banners"
-                                        onImageClick={this.onImageClickHandler}
-                                        images={banners.map(i => i.img)}/>;
+                onImageClick={this.onImageClickHandler}
+                images={banners.map(i => i.img)} />;
         let position = {
             transform: 'translateY(-' + this.state.position + 'px)'
         };
@@ -111,7 +117,7 @@ const Content = React.createClass({
             <div>
                 {banner_group}
                 <div className="notice">
-                    <img className="notice-icon" src="images/1.png"/>
+                    <img className="notice-icon" src="images/1.png" />
 
                     <div className="sp-line"></div>
                     <div className="text">
@@ -147,6 +153,6 @@ const Content = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'发现'} show_back_btn={false}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={'发现'} show_back_btn={false} />, HEADER_NODE);
     ReactDOM.render(<Content />, CONTENT_NODE);
 });
