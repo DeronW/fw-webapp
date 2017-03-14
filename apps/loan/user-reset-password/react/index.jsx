@@ -70,7 +70,7 @@ const Register = React.createClass({
         if (password == '') err = "密码不能为空";
         if (password.length < 8) err = "密码不能少于8位";
         if (password.length > 16) err = "密码不能多于16位";
-        if (!istrue(password)) err = "必须是字母及数字组合密码";
+        if (!istrue(password)) err = "请输入8-16位字母和数字组合";
 
         err ?
             $FW.Component.Toast(err) :
