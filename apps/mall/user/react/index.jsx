@@ -11,8 +11,7 @@ const User = React.createClass({
         let checkId = query.checkId || "";
         $FW.Ajax(`${API_PATH}mall/api/login.json?checkId=`+ checkId)
             .then((data) => {
-
-
+                location.reload();
             });
         /*window.onscroll = function () {
          var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
