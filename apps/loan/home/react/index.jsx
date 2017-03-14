@@ -44,7 +44,7 @@ const ApplyLoan = React.createClass({
             }
 
             applyLoan.addEventListener("touchmove", (e) => {
-                let e = event || window.event;
+                var e = event || window.event;
                 if (flag) {
                     var x = e.touches[0].pageX || e.touches[0].clientX;
                     var lineDiv_left = getPosition(lineDiv).left;
