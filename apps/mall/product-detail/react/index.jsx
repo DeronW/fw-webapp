@@ -29,7 +29,6 @@ const Product = React.createClass({
 
     componentDidMount: function () {
         document.title = this.props.data.title;
-
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
@@ -347,8 +346,8 @@ $FW.DOMReady(function () {
         let i = document.createElement('iframe');
         i.src = '/favicon.ico';
         i.style.display = 'none';
-        i.onload = function() {
-            setTimeout(function(){
+        i.onload = function () {
+            setTimeout(function () {
                 i.remove();
             }, 9)
         }
