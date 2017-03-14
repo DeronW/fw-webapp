@@ -70,14 +70,14 @@ const Content = React.createClass({
                     distance = 68;
                 }, 2000)
             } else {
-                if (distance == this.state.position) {
+                if (distance == position) {
                     distance += 66;
                     this.moveHandler(distance)
                 } else {
                     this.moveHandler(distance)
                 }
             }
-        }, 30)
+        }, 20)
     },
     moveHandler(distance) {
         let s = 0;
@@ -138,7 +138,7 @@ const Content = React.createClass({
                         className="icon-game"></i>游戏中心 </a>
                     <a href="https://bbs.9888.cn/"> <i className="icon-bbs"></i>工友之家 </a>
                     <a href="https://m.9888.cn/static/wap/faq/index.html"> <i className="icon-faq"></i>帮助中心</a>
-                    <a> <i className="icon-waiting"></i>投资学堂</a>
+                    <a href="http://fe.9888.cn/static/wap/topic-invest-school/index.html"> <i className="icon-waiting"></i>投资学堂</a>
                 </div>
                 <div className="title-recommended"> 内容推荐</div>
                 <div className="events">
