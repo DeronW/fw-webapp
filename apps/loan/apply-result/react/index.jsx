@@ -1,10 +1,10 @@
 const LoanResult = React.createClass({
     getInitialState: function () {
-        // let cashBank = this.props.userBankList.withdrawBankcard;
-        // function isRealNameBindCard(ele) {
-        //     return ele.isRealNameBindCard == true;
-        // }
-        // let filtered = cashBank.filter(isRealNameBindCard);
+        let cashBank = this.props.userBankList.withdrawBankcard;
+        function isRealNameBindCard(ele) {
+            return ele.isRealNameBindCard == true;
+        }
+        let filtered = cashBank.filter(isRealNameBindCard);
         return {
             waitingResultShow: true,
             successResultShow: false,
@@ -12,8 +12,8 @@ const LoanResult = React.createClass({
             checkingResult: false,
             countdown: 0,
             loanStatus: null,
-            //bankName:filtered[0].bankShortName,
-            //bankNo:filtered[0].cardNo.slice(-4)
+            bankName:filtered[0].bankShortName,
+            bankNo:filtered[0].cardNo.slice(-4)
         }
     },
     // componentWillReceiveProps: function (nextProps) {
