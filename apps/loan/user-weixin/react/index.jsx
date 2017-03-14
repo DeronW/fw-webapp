@@ -1,4 +1,18 @@
 const WeixinCon = React.createClass({
+    componentDidMount(){
+        var clipboard = new Clipboard('.copy-qr');
+        clipboard.on('success', function(e) {
+            console.info('Action:', e.action);
+            console.info('Text:', e.text);
+            console.info('Trigger:', e.trigger);
+            e.clearSelection();
+        });
+
+        clipboard.on('error', function(e) {
+            console.error('Action:', e.action);
+            console.error('Trigger:', e.trigger);
+        });
+    },
     render(){
         return (
            <div className="content-wrap">
@@ -14,7 +28,7 @@ const WeixinCon = React.createClass({
                        <div className="p3">长按下图二维码保存到相册>打开微信>扫一扫> 关注放心花公众号</div>
                        <img src="images/qr.jpg" className="qr"/>
                        <div className="p2">2、打开微信>添加朋友</div>
-                       <div className="p3">搜索“fxhuaba”公众号<span>点击复制公众号</span></div>
+                       <div className="p3">搜索“fxhuaba”公众号<span data-clipboard-text="fxhuaba">点击复制公众号</span></div>
                        <div className="p2 p4">3、点击此处<a href="/static/loan/weixin-download/index.html">下载APP</a></div>
                    </div>
            </div>
