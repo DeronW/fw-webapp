@@ -28,6 +28,7 @@ const Product = React.createClass({
     },
 
     componentDidMount: function () {
+
         document.title = this.props.data.title;
     },
     render: function () {
@@ -279,8 +280,7 @@ const PlusMinus = React.createClass({
             gotoHandler(link);
         } else {
             if (!isCanBuy) {
-
-                 $FW.Ajax({
+                $FW.Ajax({
                     url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                     enable_loading: 'mini'
                 }).then(data => {
