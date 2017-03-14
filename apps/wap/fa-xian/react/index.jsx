@@ -140,7 +140,7 @@ const Content = React.createClass({
                     <a onClick={()=>gotoHandler("https://bbs.9888.cn/")}> <i className="icon-bbs"></i>工友之家 </a>
                     <a onClick={()=>gotoHandler("https://m.9888.cn/static/wap/faq/index.html")}> <i
                         className="icon-faq"></i>帮助中心</a>
-                    <a onClick={()=>gotoHandler("http://fe.9888.cn/static/wap/topic-invest-school/index.html")}> <i
+                    <a onClick={()=>gotoHandler("http://m.9888.cn/static/wap/topic-invest-school/index.html")}> <i
                         className="icon-waiting"></i>投资学堂</a>
                 </div>
                 <div className="title-recommended"> 内容推荐</div>
