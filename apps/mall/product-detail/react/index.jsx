@@ -218,7 +218,7 @@ const PlusMinus = React.createClass({
             + location.search;
 
         if (this.props.is_login == 0) {
-            $FW.Browser.inApp() ? NativeBridge.goto(linkLogin) : location.href = linkLogin
+             location.href = linkLogin
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
