@@ -36,7 +36,7 @@ $FW.DOMReady(function () {
                 gid: dict.userGid,
                 status: dict.userStatus
             })
-            // location.href = '/static/loan/home/index.html';
+            location.href = '/static/loan/home/index.html';
         }, e => $FW.Component.Toast(e.message));
     }
 
