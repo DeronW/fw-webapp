@@ -1,7 +1,12 @@
 function gotoHandler(link, need_login) {
-    $FW.Browser.inApp() ?
-        NativeBridge.goto(link, need_login) :
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
         location.href = encodeURI(link);
+    }
 }
 
 const Content = React.createClass({
