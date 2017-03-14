@@ -23,7 +23,7 @@ const USER_PAGES = [
     'user-card-management', //银行卡管理
     'user-verify-phone',
     'user-settings', //更多
-    'user-jrgcLogin',
+    'user-jrgc-login',
     'user-weixin'
 ]
 
