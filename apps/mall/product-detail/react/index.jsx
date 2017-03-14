@@ -206,7 +206,6 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
 
         if (this.props.is_login == 0) {
-
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
@@ -314,13 +313,6 @@ const PlusMinus = React.createClass({
 });
 
 const EmptyProduct = React.createClass({
-    componentDidMount: function () {
-        var arrUrl = location.href.split('?');
-
-        if (arrUrl[2]) {
-            location.href = (arrUrl[0].concat("?", arrUrl[1]))
-        }
-    },
     render: function () {
         return (
             <div style={{position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1"}}>
