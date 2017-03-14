@@ -28,7 +28,7 @@ const Content = React.createClass({
             },
             fail: () => true,
             complete: data => {
-                this.setState({ notice: data })
+                this.setState({notice: data})
             }
         });
         let q = $FW.Format.urlQuery();
@@ -41,7 +41,7 @@ const Content = React.createClass({
             },
             fail: () => true,
             complete: data => this.setState({
-                banners: data.map(i => ({ url: i.url, img: i.thumb }))
+                banners: data.map(i => ({url: i.url, img: i.thumb}))
             })
         });
 
@@ -53,7 +53,7 @@ const Content = React.createClass({
             },
             fail: () => true,
             complete: data => this.setState({
-                topics: data.map(i => ({ url: i.url, img: i.thumb }))
+                topics: data.map(i => ({url: i.url, img: i.thumb}))
             })
         })
         this.moveNoticeHandler()
@@ -101,16 +101,16 @@ const Content = React.createClass({
         let { banners } = this.state;
 
         let topic = (t, index) => {
-            return <a className="event" key={index} href={t.url}>
-                <img src={t.img} />
+            return <a className="event" key={index} onClick={()=>gotoHandler(t.url)}>
+                <img src={t.img}/>
             </a>
         };
 
         let banner_group;
         if (banners.length > 0)
             banner_group = <BannerGroup className="banners"
-                onImageClick={this.onImageClickHandler}
-                images={banners.map(i => i.img)} />;
+                                        onImageClick={this.onImageClickHandler}
+                                        images={banners.map(i => i.img)}/>;
         let position = {
             transform: 'translateY(-' + this.state.position + 'px)'
         };
@@ -122,7 +122,7 @@ const Content = React.createClass({
             <div>
                 {banner_group}
                 <div className="notice">
-                    <img className="notice-icon" src="images/1.png" />
+                    <img className="notice-icon" src="images/1.png"/>
 
                     <div className="sp-line"></div>
                     <div className="text">
@@ -134,11 +134,14 @@ const Content = React.createClass({
                 </div>
 
                 <div className="channel">
-                    <a href="https://m.dougemall.com/static/mall/game/index.html?mallHead=true"> <i
-                        className="icon-game"></i>游戏中心 </a>
-                    <a href="https://bbs.9888.cn/"> <i className="icon-bbs"></i>工友之家 </a>
-                    <a href="https://m.9888.cn/static/wap/faq/index.html"> <i className="icon-faq"></i>帮助中心</a>
-                    <a href="http://fe.9888.cn/static/wap/topic-invest-school/index.html"> <i className="icon-waiting"></i>投资学堂</a>
+                    <a onClick={()=>gotoHandler('https://m.dougemall.com/static/mall/game/index.html?mallHead=true')}>
+                        <i
+                            className="icon-game"></i>游戏中心 </a>
+                    <a onClick={()=>gotoHandler("https://bbs.9888.cn/")}> <i className="icon-bbs"></i>工友之家 </a>
+                    <a onClick={()=>gotoHandler("https://m.9888.cn/static/wap/faq/index.html")}> <i
+                        className="icon-faq"></i>帮助中心</a>
+                    <a onClick={()=>gotoHandler("http://fe.9888.cn/static/wap/topic-invest-school/index.html")}> <i
+                        className="icon-waiting"></i>投资学堂</a>
                 </div>
                 <div className="title-recommended"> 内容推荐</div>
                 <div className="events">
@@ -158,6 +161,6 @@ const Content = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'发现'} show_back_btn={false} />, HEADER_NODE);
+    ReactDOM.render(<Header title={'发现'} show_back_btn={false}/>, HEADER_NODE);
     ReactDOM.render(<Content />, CONTENT_NODE);
 });
