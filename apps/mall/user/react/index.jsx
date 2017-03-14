@@ -8,7 +8,7 @@ const User = React.createClass({
     componentDidMount: function () {
         var _this = this;
 
-        $FW.Ajax(`${API_PATH}mall/api/login.json`)
+        $FW.Ajax(`${API_PATH}mall/api/login.json?checkId=`)
             .then((data) => {
 
 
