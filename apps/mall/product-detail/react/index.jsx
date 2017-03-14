@@ -326,6 +326,13 @@ const PlusMinus = React.createClass({
 });
 
 const EmptyProduct = React.createClass({
+    componentDidMount: function () {
+        var arrUrl = location.href.split('?');
+
+        if (arrUrl[2]) {
+            location.href = (arrUrl[0].concat("?", arrUrl[1]))
+        }
+    },
     render: function () {
         return (
             <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
@@ -351,8 +358,8 @@ $FW.DOMReady(function () {
         let i = document.createElement('iframe');
         i.src = '/favicon.ico';
         i.style.display = 'none';
-        i.onload = function() {
-            setTimeout(function(){
+        i.onload = function () {
+            setTimeout(function () {
                 i.remove();
             }, 9)
         }
