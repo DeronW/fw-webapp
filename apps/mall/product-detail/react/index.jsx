@@ -28,6 +28,7 @@ const Product = React.createClass({
     },
 
     componentDidMount: function () {
+        document.title = this.props.data.title;
         /*
          window.addEventListener('scroll', function () {
          var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
