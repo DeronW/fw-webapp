@@ -1,6 +1,6 @@
 const LoanResult = React.createClass({
     getInitialState: function () {
-        let cashBank = this.props.userBankList.withdrawBankcard;
+        let cashBank = this.props.data.userBankList.withdrawBankcard;
         function isRealNameBindCard(ele) {
             return ele.isRealNameBindCard == true;
         }
