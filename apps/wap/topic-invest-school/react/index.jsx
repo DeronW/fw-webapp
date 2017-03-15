@@ -84,10 +84,10 @@ const InvestSchool = React.createClass({
 InvestSchool.List = React.createClass({
     render(){
         let cell = (item, index)=> {
-            return <div className="cell" key={index} onClick={()=>gotoHandler(item.url)}>
+            return <a className="cell" key={index} href={item.url}>
                 <div className="cellText">{item.desc}</div>
                 <img className="iconArrow" src="images/arrow.png"/>
-            </div>
+            </a>
         };
         return <div className="list">
             {
