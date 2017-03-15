@@ -341,6 +341,7 @@ const EmptyProduct = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    document.title = this.props.data.title;
     let bizNo = $FW.Format.urlQuery().bizNo;
 
     if (!bizNo) return $FW.Component.Alert('bizNo is missing');
