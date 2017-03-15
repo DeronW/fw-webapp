@@ -66,8 +66,6 @@ APP_NAMES.push(
     ...DEVELOPING_PAGES
 );
 
-APP_NAMES = ['user-jrgc-login'] // for debug
-
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
         'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
