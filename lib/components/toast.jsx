@@ -34,7 +34,7 @@ const GlobalToast = React.createClass({
             color: "#fff",
             fontSize: "28px",
             backgroundColor: "rgba(0, 0, 0, 0.6)",
-            transition: "opacity " + this.props.animation + "ms ease-in-out",
+            transition: `opacity ${this.props.animation}ms ease-in-out`,
             opacity: this.state.opacity,
             borderRadius: "5px",
             zIndex: "999"
