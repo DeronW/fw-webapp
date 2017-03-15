@@ -25,6 +25,9 @@ const BankList = React.createClass({
 
         })
     },
+    back_handler(){
+        window.history.back()
+    },
     render: function () {
         let bankLi = (todo, index) => {
             return <div className="bank-branch">
@@ -41,7 +44,7 @@ const BankList = React.createClass({
                     {this.state.bankList.map((todo, index) => bankLi(todo, index))}
                 </div>
                 <div className="know-btn-wrap">
-                    <div className="know-btn" onClick={window.history.back}>
+                    <div className="know-btn" onClick={this.back_handler}>
                         我知道了</div>
                 </div>
             </div>
