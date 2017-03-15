@@ -169,6 +169,7 @@ const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid || '';
 const PHONE = $FW.Format.urlQuery().phone || '';
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle('验证手机号');
     ReactDOM.render(<Header title={"验证手机号"}/>, HEADER_NODE);
     ReactDOM.render(<VerifyPhone />, CONTENT_NODE);
 })
