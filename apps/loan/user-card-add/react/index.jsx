@@ -1,7 +1,3 @@
-function gotoHandler(link) {
-    location.href = encodeURI(link);
-}
-
 function isMobilePhone(phone) {
     return /^1(3|4|5|7|8)\d{9}$/.test(phone)
 }
@@ -11,16 +7,6 @@ function isCardNo(card) {
     var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
     return pattern.test(card);
 }
-
-var numberFormat = {
-    val: "",
-    format: function (val) {
-        if (!isNaN(val.replace(/[0-9]/g, ""))) {
-            this.val = val.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");//四位数字一组，以空格分割
-        }
-        return this.val;
-    }
-};
 
 function verificationNum(val) {
     var reg = new RegExp("^[0-9]*$");
@@ -48,11 +34,16 @@ const SetCashCard = React.createClass({
         }
     },
     changeBankNum(e) {
-        let v = e.target.value;
-        v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
+        let input = e.target, v = input.value;
+        // 把银行卡号, 每隔4个数字添加一个空格
+        v = v.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
+        if (v.length < 19 + 5)
+            this.setState({ bankNum: v }, () => {
+                input.setSelectionRange(99, 99)
+            });
     },
     blurBankNum(e) {
-        let {bankNum} = this.state, len = space(this.state.bankNum).length;
+        let { bankNum } = this.state, len = space(this.state.bankNum).length;
         if (len < 16 || len > 19) return $FW.Component.Toast("储蓄卡格式不对");
 
         $FW.Post(`${API_PATH}api/bankcard/v1/cardinfo.json`, {
@@ -82,7 +73,7 @@ const SetCashCard = React.createClass({
         });
     },
     handlerNext() {
-        let err, {bankNum, phone, selectClause, cardType, canVerify} = this.state;
+        let err, { bankNum, phone, selectClause, cardType, canVerify } = this.state;
 
         if (bankNum == '') err = "储蓄卡不能为空";
         if (space(bankNum).length > 19 || space(bankNum).length < 16) err = "储蓄卡格式不对";
@@ -111,7 +102,7 @@ const SetCashCard = React.createClass({
     },
     render() {
 
-        let {phone, bankNum, cardinfoBankName} = this.state;
+        let { phone, bankNum, cardinfoBankName } = this.state;
 
         return (
             <div className="set-cash-card-cnt">
