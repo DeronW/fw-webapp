@@ -25,9 +25,9 @@ const InvestSchool = React.createClass({
         $FW.Ajax({
             url: 'https://fore.9888.cn/cms/api/appbanner.php',
             type: 'get',
-            data:{
-                key:'0ca175b9c0f726a831d895e',
-                id:41
+            data: {
+                key: '0ca175b9c0f726a831d895e',
+                id: 41
             },
             dataType: 'json',
             fail: ()=>true,
@@ -51,7 +51,7 @@ const InvestSchool = React.createClass({
             url: 'https://fore.9888.cn/cms/api/appbanner.php',
             type: 'get',
             data: {
-                key:'0ca175b9c0f726a831d895e',
+                key: '0ca175b9c0f726a831d895e',
                 id: id
             },
             fail: ()=>true,
@@ -97,8 +97,8 @@ InvestSchool.List = React.createClass({
     }
 });
 $FW.DOMReady(function () {
-    //if (!$FW.Browser.inApp()) {
-    ReactDOM.render(<Header title={'投资学堂'}/>, HEADER_NODE);
-    //}
+    if (!$FW.Browser.inApp()) {
+        ReactDOM.render(<Header title={'投资学堂'}/>, HEADER_NODE);
+    }
     ReactDOM.render(<InvestSchool />, CONTENT_NODE)
 });
