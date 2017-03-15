@@ -215,7 +215,7 @@ const user = USER;
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('放心花');
-    alert(USER.status);
+    console.log(USER.status);
     $FW.Post(`${API_PATH}api/loan/v1/baseinfo.json`, {
         token: USER.token,
         userGid: USER.gid,
