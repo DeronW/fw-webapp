@@ -137,7 +137,7 @@ const Content = React.createClass({
                     <a onClick={()=>gotoHandler('https://m.dougemall.com/static/mall/game/index.html?mallHead=true',null)}>
                         <i
                             className="icon-game"></i>游戏中心 </a>
-                    <a onClick={()=>gotoHandler("https://bbs.9888.cn/",null)}> <i className="icon-bbs"></i>工友之家 </a>
+                    <a onClick={()=>gotoHandler("https://bbs.9888.cn/",true)}> <i className="icon-bbs"></i>工友之家 </a>
                     <a onClick={()=>gotoHandler("https://m.9888.cn/static/wap/faq/index.html",null)}> <i
                         className="icon-faq"></i>帮助中心</a>
                     <a onClick={()=>gotoHandler("http://m.9888.cn/static/wap/topic-invest-school/index.html",null)}> <i
