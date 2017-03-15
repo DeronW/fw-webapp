@@ -70,5 +70,7 @@
   window.onNativeMessageReceive = function(data){
     log('得到Native消息', JSON.stringify(data))
   }
+
+  log('UserAgent:', navigator.userAgent);
 </script>
 {% endblock %}
