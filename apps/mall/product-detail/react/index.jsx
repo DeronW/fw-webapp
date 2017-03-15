@@ -28,7 +28,6 @@ const Product = React.createClass({
     },
 
     componentDidMount: function () {
-
         document.title = this.props.data.title;
     },
     render: function () {
