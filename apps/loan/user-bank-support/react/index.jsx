@@ -41,7 +41,7 @@ const BankList = React.createClass({
                     {this.state.bankList.map((todo, index) => bankLi(todo, index))}
                 </div>
                 <div className="know-btn-wrap">
-                    <div className="know-btn" onClick={$FW.Browser.inApp()? NativeBridge.close():window.history.back}>
+                    <div className="know-btn" onClick={()=>($FW.Browser.inApp()? NativeBridge.close(): window.history.back())}>
                         我知道了</div>
                 </div>
             </div>
