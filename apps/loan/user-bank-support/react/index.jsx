@@ -41,7 +41,7 @@ const BankList = React.createClass({
                     {this.state.bankList.map((todo, index) => bankLi(todo, index))}
                 </div>
                 <div className="know-btn-wrap">
-                    <div className="know-btn" onClick={window.history.back}>
+                    <div className="know-btn" onClick={$FW.Browser.inApp()? NativeBridge.close():window.history.back}>
                         我知道了</div>
                 </div>
             </div>
@@ -50,6 +50,7 @@ const BankList = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('支持储蓄卡');
     ReactDOM.render(<Header title={"支持储蓄卡"} />, HEADER_NODE);
     ReactDOM.render(<BankList />, CONTENT_NODE);
 });

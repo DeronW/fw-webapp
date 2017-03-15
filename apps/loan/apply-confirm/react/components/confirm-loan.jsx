@@ -67,8 +67,8 @@ const ConfirmLoan = React.createClass({
                 <div className="agreement-issue">
                     <div className={this.state.checked ? "checked-box" : "unchecked-box"}
                         onClick={this.checkHandler}></div>
-                    <div className="check-item">同意<a href="/static/loan/protocol-borrowing/index.html">《借款服务协议》</a>、<a
-                        href="/static/loan/protocol-partner/index.html">《借款确认书》</a>，未按时还款将计入信用卡银行的信用报告
+                    <div className="check-item">同意<a onClick={()=>gotoHandler("/static/loan/protocol-borrowing/index.html")}>《借款服务协议》</a>、<a
+                        onClick={()=>gotoHandler("/static/loan/protocol-partner/index.html")}>《借款确认书》</a>，未按时还款将计入信用卡银行的信用报告
                     </div>
                 </div>
                 <div className="confirm-btn" onClick={this.confirmHandler}>确定</div>
