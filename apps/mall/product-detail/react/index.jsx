@@ -344,7 +344,7 @@ $FW.DOMReady(function () {
             }, 9)
         }
         document.body.appendChild(i);
-
+        
         data.title ?
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
