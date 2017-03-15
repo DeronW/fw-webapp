@@ -1,12 +1,5 @@
-function gotoHandler(link, need_login) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
+function gotoHandler(link) {
+    location.href = encodeURI(link);
 }
 
 function isMobilePhone(phone) {
@@ -183,7 +176,7 @@ const SetCashCard = React.createClass({
                         </div>
 
                         <div className="list-bank-li">
-                            <a className="prompt-text" onClick={()=>gotoHandler("/static/loan/user-bank-support/index.html")}>
+                            <a className="prompt-text" href="/static/loan/user-bank-support/index.html">
                                 支持银行
 								<img src="images/prompt-icon.png" />
                             </a>
@@ -207,7 +200,7 @@ const SetCashCard = React.createClass({
                         onClick={this.handlerClause}></span>
                     <span className="text">
                         同意
-						<a onClick={()=>gotoHandler(`/static/loan/protocol-cost/index.html`)}>《代扣服务协议》</a>
+						<a href={`/static/loan/protocol-cost/index.html`}>《代扣服务协议》</a>
                     </span>
                 </div>
 

@@ -1,14 +1,6 @@
-function gotoHandler(link, need_login) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
+function gotoHandler(link) {
+    location.href = encodeURI(link);
 }
-
 
 const WantLoan = React.createClass({
     getInitialState: function () {
@@ -66,7 +58,7 @@ const WantLoan = React.createClass({
         ).then((data) => {
             this.setState({ loanGid: data.loanGid, orderGid: data.orderGid });
             if (!err) {
-                gotoHandler(`/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`);
+                location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`;
             }
         },(err) => {
             $FW.Component.Toast(err.message);

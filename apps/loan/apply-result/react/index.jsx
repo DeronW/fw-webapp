@@ -1,14 +1,6 @@
-function gotoHandler(link, need_login) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
+function gotoHandler(link) {
+    location.href = encodeURI(link);
 }
-
 
 const LoanResult = React.createClass({
     getInitialState: function () {
@@ -225,7 +217,7 @@ const LoanResult = React.createClass({
 
 $FW.DOMReady(function () {
     let user = $FW.Store.getUserDict();
-    NativeBridge.setTitle('借款结果');
+    NativeBridge.setTitle("借款结果");
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
     //ReactDOM.render(<LoanResult/>, CONTENT_NODE);
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
