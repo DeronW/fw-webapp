@@ -97,8 +97,8 @@ InvestSchool.List = React.createClass({
     }
 });
 $FW.DOMReady(function () {
-    if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={'投资学堂'}/>, HEADER_NODE);
-    }
+    //if (!$FW.Browser.inApp()) {
+    ReactDOM.render(<Header title={'投资学堂'}/>, HEADER_NODE);
+    //}
     ReactDOM.render(<InvestSchool />, CONTENT_NODE)
 });
