@@ -134,13 +134,13 @@ const Content = React.createClass({
                 </div>
 
                 <div className="channel">
-                    <a onClick={()=>gotoHandler('https://m.dougemall.com/static/mall/game/index.html?mallHead=true')}>
+                    <a onClick={()=>gotoHandler('https://m.dougemall.com/static/mall/game/index.html?mallHead=true',null)}>
                         <i
                             className="icon-game"></i>游戏中心 </a>
-                    <a onClick={()=>gotoHandler("https://bbs.9888.cn/")}> <i className="icon-bbs"></i>工友之家 </a>
-                    <a onClick={()=>gotoHandler("https://m.9888.cn/static/wap/faq/index.html")}> <i
+                    <a onClick={()=>gotoHandler("https://bbs.9888.cn/",null)}> <i className="icon-bbs"></i>工友之家 </a>
+                    <a onClick={()=>gotoHandler("https://m.9888.cn/static/wap/faq/index.html",null)}> <i
                         className="icon-faq"></i>帮助中心</a>
-                    <a onClick={()=>gotoHandler("http://m.9888.cn/static/wap/topic-invest-school/index.html")}> <i
+                    <a onClick={()=>gotoHandler("http://m.9888.cn/static/wap/topic-invest-school/index.html",null)}> <i
                         className="icon-waiting"></i>投资学堂</a>
                 </div>
                 <div className="title-recommended"> 内容推荐</div>
