@@ -65,7 +65,7 @@ const VerifyCode = React.createClass({
             verifyCode: this.state.value,
         }).then(() => {
             if($FW.Browser.inApp()){
-                location.href=`/static/loan/apply-result/index.html?orderGid=${orderGid}`;
+                gotoHandler(`/static/loan/apply-result/index.html?orderGid=${orderGid}`);
             }else{
                 this.props.callbackCloseHanler(false);
                 this.props.callbackResultShow(true);
