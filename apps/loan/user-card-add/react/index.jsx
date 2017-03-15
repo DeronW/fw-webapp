@@ -33,14 +33,15 @@ const SetCashCard = React.createClass({
             canVerify: ''
         }
     },
+    componentDidUpdate() {
+        this.refs.cardNumberInput.setSelectionRange(99, 99)
+    },
     changeBankNum(e) {
         let input = e.target, v = input.value;
         // 把银行卡号, 每隔4个数字添加一个空格
         v = v.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
         if (v.length < 19 + 5)
-            this.setState({ bankNum: v }, () => {
-                input.setSelectionRange(99, 99)
-            });
+            this.setState({ bankNum: v });
     },
     blurBankNum(e) {
         let { bankNum } = this.state, len = space(this.state.bankNum).length;
@@ -110,7 +111,8 @@ const SetCashCard = React.createClass({
                     <div className="list prompt-list">
                         <span className="text">储蓄卡号</span>
                         <div className="input">
-                            <input onChange={this.changeBankNum} onBlur={this.blurBankNum}
+                            <input onChange={this.changeBankNum} ref="cardNumberInput"
+                                onBlur={this.blurBankNum}
                                 value={bankNum} type="text" placeholder="输入储蓄卡号" />
                         </div>
 
