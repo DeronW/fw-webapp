@@ -338,13 +338,12 @@ $FW.DOMReady(function () {
         let i = document.createElement('iframe');
         i.src = '/favicon.ico';
         i.style.display = 'none';
-        i.onload = function () {
-            setTimeout(function () {
+        i.onload = function() {
+            setTimeout(function(){
                 i.remove();
             }, 9)
         }
         document.body.appendChild(i);
-        
         data.title ?
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
