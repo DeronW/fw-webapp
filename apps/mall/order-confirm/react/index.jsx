@@ -179,9 +179,6 @@ const ConfirmOrder = React.createClass({
                          this.props.data.ordersTicketPrice?"":"-"+this.props.data.ordersTicketPrice+"金额"*/}</span>
                     </div>
                     <div className="price-item">
-                        <span className="item-name">优惠券</span><span className="item-detail">0</span>
-                    </div>
-                    <div className="price-item">
                         <span className="item-name">运费</span><span
                         className="item-detail"> ¥ {this.props.data.totalFreightPrice}</span>
                     </div>
