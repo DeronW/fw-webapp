@@ -218,7 +218,7 @@ const PlusMinus = React.createClass({
 
 
         if (this.props.is_login == 0) {
-            
+
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
@@ -359,6 +359,7 @@ $FW.DOMReady(function () {
             }, 9)
         }
         document.body.appendChild(i);
+        
 
         data.title ?
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
