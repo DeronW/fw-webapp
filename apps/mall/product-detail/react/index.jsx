@@ -347,6 +347,7 @@ $FW.DOMReady(function () {
         url: `${API_PATH}mall/api/detail/v1/item_detail.json?bizNo=${bizNo}`,
         enable_loading: 'mini'
     }).then(data => {
+        document.title = data.title;
         data.title ?
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
