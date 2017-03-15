@@ -1,3 +1,7 @@
+function gotoHandler(link) {
+    location.href = encodeURI(link);
+}
+
 const LoanResult = React.createClass({
     getInitialState: function () {
         let cashBank = this.props.data.userBankList.withdrawBankcard;
