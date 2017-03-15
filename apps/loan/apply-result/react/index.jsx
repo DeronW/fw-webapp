@@ -46,7 +46,6 @@ const LoanResult = React.createClass({
     checkAjax() {
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
-        let USER = $FW.Store.getUserDict();
         $FW.Post(`${API_PATH}api/loan/v1/status.json`, {
             token: USER.token,
             userGid: USER.gid,
@@ -115,10 +114,6 @@ const LoanResult = React.createClass({
     render: function () {
         return (
             <div className="loan-result">
-                <div className="header">
-                    <div className="arrow-left" onClick={() => { gotoHandler("/static/loan/home/index.html") }}></div>
-                    <div className="title">借款结果</div>
-                </div>
                 <div className="result-box">
                     <div className={this.state.waitingResultShow ? "waiting-result-box" : "waiting-result-box dis"}>
                         <div className="wrap-box">
@@ -215,15 +210,14 @@ const LoanResult = React.createClass({
     }
 });
 
+const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
-    let user = $FW.Store.getUserDict();
     NativeBridge.setTitle("借款结果");
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
-    //ReactDOM.render(<LoanResult/>, CONTENT_NODE);
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
-        token: user.token,
-        userGid: user.gid,
-        userId: user.id,
+        token: USER.token,
+        userGid: USER.gid,
+        userId: USER.id,
         sourceType: SOURCE_TYPE
     }).then((data)=>{
         ReactDOM.render(<LoanResult data={data}/>, CONTENT_NODE);

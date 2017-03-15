@@ -1,4 +1,5 @@
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('APP下载');
     var channel = $FW.Format.urlQuery().name;
     var ConcertUtilBrowser = {
         versions: (function () {
