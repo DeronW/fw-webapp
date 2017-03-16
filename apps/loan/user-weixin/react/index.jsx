@@ -28,6 +28,7 @@ $FW.DOMReady(() => {
     NativeBridge.setTitle('关注微信');
     ReactDOM.render(<Header title={"关注微信"} />, HEADER_NODE);
     var clipboard = new Clipboard('.copy-qr');
+    alert(Clipboard.isSupported());
     clipboard.on('success', function (e) {
         $FW.Component.Toast('已复制fxhuaba到剪切板');
         e.clearSelection();
