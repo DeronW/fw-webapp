@@ -117,7 +117,7 @@ const Content = React.createClass({
         };
 
         let noticeFn = (item, index) => {
-            return <a href={item.url} style={position} key={index}> {item.desc} </a>
+            return <a onClick={()=>gotoHandler(item.url)} style={position} key={index}> {item.desc} </a>
         };
         return (
             <div>
