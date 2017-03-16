@@ -29,12 +29,11 @@ const Product = React.createClass({
 
     componentDidMount: function () {
         document.title = this.props.data.title;
-
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
 
-        if (!$FW.Browser.inWeixin()) document.querySelector('#cnt').style.marginTop = "-100px";
+       // if (!$FW.Browser.inWeixin()) document.querySelector('#cnt').style.marginTop = "-100px";
 
         if ($FW.Browser.inIOSApp()) document.querySelector('._style_header_arrow').style.top = "22px";
 
@@ -207,7 +206,6 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
 
         if (this.props.is_login == 0) {
-
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
