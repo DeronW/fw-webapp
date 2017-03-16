@@ -32,8 +32,7 @@ const Product = React.createClass({
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
-
-
+        
        // if (!$FW.Browser.inWeixin()) document.querySelector('#cnt').style.marginTop = "-100px";
 
         if ($FW.Browser.inIOSApp()) document.querySelector('._style_header_arrow').style.top = "22px";
