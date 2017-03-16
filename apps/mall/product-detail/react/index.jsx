@@ -204,13 +204,12 @@ const PlusMinus = React.createClass({
 
         let _this = this;
         let bizNo = $FW.Format.urlQuery().bizNo;
-
         if (this.props.is_login == 0) {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
             }).then(data => {
-
+                //  location.href = linkLogin
             });
         } else {
             $FW.Ajax({
