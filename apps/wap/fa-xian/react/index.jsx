@@ -163,8 +163,5 @@ const Content = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={'发现'} show_back_btn={false}/>, HEADER_NODE);
-    }
     ReactDOM.render(<Content />, CONTENT_NODE);
 });
