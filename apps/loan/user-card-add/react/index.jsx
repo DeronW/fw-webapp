@@ -156,6 +156,7 @@ const SetCashCard = React.createClass({
 const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle('添加储蓄卡');
     ReactDOM.render(<Header title={"添加储蓄卡"} />, HEADER_NODE);
     ReactDOM.render(<SetCashCard />, CONTENT_NODE)
 })

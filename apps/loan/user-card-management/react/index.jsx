@@ -7,7 +7,7 @@ const BankManagement = React.createClass({
         }
     },
     componentDidMount() {
-        $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
+        $FW.Post(`${API_PATH}api/loan/v1/baseinfo.json`, {
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
@@ -81,8 +81,8 @@ const BankManagement = React.createClass({
 const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('银行卡管理');
     ReactDOM.render(<Header title={"银行卡管理"} />, HEADER_NODE);
-
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`, {
         token: USER.token,
         userGid: USER.gid,
