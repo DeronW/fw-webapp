@@ -207,7 +207,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
     var clipboard = new Clipboard('.copy-qr');
     clipboard.on('success', function (e) {
-        $FW.Component.Toast('复制成功');
+        $FW.Component.Toast('已复制fxhuaba到剪切板');
         e.clearSelection();
     });
     clipboard.on('error', function (e) {
