@@ -137,9 +137,9 @@ const GameCenter = React.createClass({
 });
 var gameToken = '';
 $FW.DOMReady(function () {
-    location.href = "/static/mall/waiting/index.html"; // deny all requests
+    // location.href = "/static/mall/waiting/index.html"; // deny all requests
 
-    if ($FW.Browser.inIOS() && $FW.Browser.appVersion() >= "2.3.80") {
+    if ($FW.Browser.inIOS() && $FW.Browser.appVersion() >= "2.4.0") {
         location.href = "/static/mall/waiting/index.html";
     }
 
