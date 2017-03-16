@@ -37,7 +37,7 @@ $FW.DOMReady(function () {
                 status: dict.userStatus
             })
             location.href = '/static/loan/home/index.html';
-        }, e => $FW.Component.Toast(e.message));
+        }, e => $FW.Component.Alert(e.message));
     }
 
 });
