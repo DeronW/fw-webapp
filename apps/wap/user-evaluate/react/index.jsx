@@ -1,4 +1,4 @@
-const Questions = React.createClass({
+const QuestionPanel = React.createClass({
     getInitialState: function () {
         return { selected: startArr }
     },
@@ -109,7 +109,7 @@ const Answer = React.createClass({
         return (
             <div>
                 {this.state.answer ? <Result investType={this.state.investType} score={this.state.score} /> :
-                    <Questions setResult={this.setResult} />}
+                    <QuestionPanel setResult={this.setResult} />}
             </div>
         )
     }
