@@ -1,14 +1,5 @@
 const WeixinCon = React.createClass({
     componentDidMount() {
-        var clipboard = new Clipboard('.copy-qr');
-        clipboard.on('success', function (e) {
-            $FW.Component.Toast('复制成功')
-            e.clearSelection();
-        });
-
-        clipboard.on('error', function (e) {
-            $FW.Component.Toast('复制失败')
-        });
     },
     render() {
         return (
@@ -36,5 +27,13 @@ const WeixinCon = React.createClass({
 $FW.DOMReady(() => {
     NativeBridge.setTitle('关注微信');
     ReactDOM.render(<Header title={"关注微信"} />, HEADER_NODE);
+    var clipboard = new Clipboard('.copy-qr');
+    clipboard.on('success', function (e) {
+        $FW.Component.Toast('复制成功');
+        e.clearSelection();
+    });
+    clipboard.on('error', function (e) {
+        $FW.Component.Toast('请选择“拷贝”进行复制!');
+    });
     ReactDOM.render(<WeixinCon />, CONTENT_NODE);
 })

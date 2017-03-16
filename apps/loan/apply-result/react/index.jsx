@@ -97,15 +97,6 @@ const LoanResult = React.createClass({
 
         this.countingDown();
         //this.resetState(this.props);
-        var clipboard = new Clipboard('.copy-qr');
-        clipboard.on('success', function (e) {
-            $FW.Component.Toast('复制成功')
-            e.clearSelection();
-        });
-
-        clipboard.on('error', function (e) {
-            $FW.Component.Toast('复制失败')
-        });
 
     },
     // resultHide: function () {
@@ -214,6 +205,14 @@ const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
     NativeBridge.setTitle("借款结果");
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
+    var clipboard = new Clipboard('.copy-qr');
+    clipboard.on('success', function (e) {
+        $FW.Component.Toast('复制成功');
+        e.clearSelection();
+    });
+    clipboard.on('error', function (e) {
+        $FW.Component.Toast('请选择“拷贝”进行复制!');
+    });
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
         token: USER.token,
         userGid: USER.gid,
