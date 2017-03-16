@@ -29,22 +29,6 @@ const Product = React.createClass({
 
     componentDidMount: function () {
         document.title = this.props.data.title;
-<<<<<<< HEAD
-=======
-        /*
-         window.addEventListener('scroll', function () {
-         var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-
-         if (scrollTop > 100) return false;
-         let id = document.querySelector('._style_header_fixed');
-         if (scrollTop > 10) {
-         id.setAttribute("class", "no_clarity _style_header_fixed");
-         }
-         else {
-         id.setAttribute("class", "clarity _style_header_fixed");
-         }
-         }.bind(this), false);*/
->>>>>>> release-mall
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
@@ -368,10 +352,7 @@ $FW.DOMReady(function () {
             }, 9)
         }
         document.body.appendChild(i);
-<<<<<<< HEAD
-=======
 
->>>>>>> release-mall
         data.title ?
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
