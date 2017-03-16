@@ -328,6 +328,13 @@ const PlusMinus = React.createClass({
 });
 
 const EmptyProduct = React.createClass({
+    componentDidMount: function () {
+        var arrUrl = location.href.split('?');
+
+        if (arrUrl[2]) {
+            location.href = (arrUrl[0].concat("?", arrUrl[1]))
+        }
+    },
     render: function () {
         return (
             <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
@@ -364,8 +371,7 @@ $FW.DOMReady(function () {
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
     })
-
-    ReactDOM.render(<Header title={""}/>, HEADER_NODE);
+    if (!$FW.Browser.inWeixin()) ReactDOM.render(<Header title={"商品详情"}/>, HEADER_NODE);
 });
 
 function trim(s) {
