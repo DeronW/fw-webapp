@@ -1,5 +1,5 @@
 
-const QUESTIONS = [{
+let QUESTIONS = [{
     q: 'Q1：您的年龄是？',
     seq: 0,
     name: "age",
