@@ -27,7 +27,7 @@ const InvestSchool = React.createClass({
             type: 'get',
             data: {
                 key: '0ca175b9c0f726a831d895e',
-                id: 41
+                id: 41 // 37
             },
             dataType: 'json',
             fail: ()=>true,
@@ -39,11 +39,11 @@ const InvestSchool = React.createClass({
     toggleTabHandler(t){
         this.setState({tab: t});
         if (t == "投资百科") {
-            this.getListHandler(38)
+            this.getListHandler(38); //34
         } else if (t == "投资者技巧") {
-            this.getListHandler(39)
+            this.getListHandler(39); //35
         } else {
-            this.getListHandler(40)
+            this.getListHandler(40); //36
         }
     },
     getListHandler(id){

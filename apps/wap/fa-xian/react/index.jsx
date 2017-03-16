@@ -24,7 +24,7 @@ const Content = React.createClass({
             url: "https://fore.9888.cn/cms/api/appbanner.php",
             data: {
                 key: '0ca175b9c0f726a831d895e',
-                id: '37'
+                id: '37'//'33'
             },
             fail: () => true,
             complete: data => {
@@ -37,7 +37,7 @@ const Content = React.createClass({
             url: 'https://fore.9888.cn/cms/api/appbanner.php',
             data: {
                 key: '0ca175b9c0f726a831d895e',
-                id: q.banner_id || '33'
+                id: q.banner_id || '33'//'30'
             },
             fail: () => true,
             complete: data => this.setState({
@@ -49,7 +49,7 @@ const Content = React.createClass({
             url: 'https://fore.9888.cn/cms/api/appbanner.php',
             data: {
                 key: '0ca175b9c0f726a831d895e',
-                id: q.topic_id || '34'
+                id: q.topic_id || '34'//'31'
             },
             fail: () => true,
             complete: data => this.setState({
@@ -95,7 +95,8 @@ const Content = React.createClass({
         for (let i = 0; i < bs.length; i++) {
             if (i == index) link = bs[i].url;
         }
-        if (link) window.location.href = link;
+        if (link)  gotoHandler(link, null);
+
     },
     render() {
         let { banners } = this.state;
@@ -135,8 +136,7 @@ const Content = React.createClass({
 
                 <div className="channel">
                     <a onClick={()=>gotoHandler('https://m.dougemall.com/static/mall/game/index.html?mallHead=true',null)}>
-                        <i
-                            className="icon-game"></i>游戏中心 </a>
+                        <i className="icon-game"></i>游戏中心 </a>
                     <a onClick={()=>gotoHandler("https://bbs.9888.cn/",true)}> <i className="icon-bbs"></i>工友之家 </a>
                     <a onClick={()=>gotoHandler("https://m.9888.cn/static/wap/faq/index.html",null)}> <i
                         className="icon-faq"></i>帮助中心</a>
