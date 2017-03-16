@@ -206,7 +206,7 @@ $FW.DOMReady(function () {
     NativeBridge.setTitle("借款结果");
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
     var clipboard = new Clipboard('.copy-qr');
-    alert(Clipboard.isSupported());
+    //alert(Clipboard.isSupported());
     clipboard.on('success', function (e) {
         $FW.Component.Toast('已复制fxhuaba到剪切板');
         e.clearSelection();
