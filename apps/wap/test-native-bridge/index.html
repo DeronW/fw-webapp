@@ -41,12 +41,12 @@
   }
 
   function share(){
-    NativeBridge.share({
+    NativeBridge.share(JSON.stringify({
         title: '分享标题',
         image: 'https://placehold.it/150x150',
         link: 'https://www.baidu.com',
         desc: '分享描述'
-    })
+    }))
   }
 
   function trigger(name) {

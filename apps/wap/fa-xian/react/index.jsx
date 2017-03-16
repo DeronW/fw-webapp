@@ -95,7 +95,7 @@ const Content = React.createClass({
         for (let i = 0; i < bs.length; i++) {
             if (i == index) link = bs[i].url;
         }
-        if (link)  gotoHandler(link, null);
+        if (link)  gotoHandler(link);
 
     },
     render() {
@@ -117,11 +117,13 @@ const Content = React.createClass({
         };
 
         let noticeFn = (item, index) => {
-            return <a href={item.url} style={position} key={index}> {item.desc} </a>
+            return <a onClick={()=>gotoHandler(item.url)} style={position} key={index}> {item.desc} </a>
         };
         return (
             <div>
-                {banner_group}
+                <div className="findBanner">
+                    {banner_group}
+                </div>
                 <div className="notice">
                     <img className="notice-icon" src="images/1.png"/>
 
@@ -135,12 +137,12 @@ const Content = React.createClass({
                 </div>
 
                 <div className="channel">
-                    <a onClick={()=>gotoHandler('https://m.dougemall.com/static/mall/game/index.html?mallHead=true',null)}>
+                    <a onClick={()=>gotoHandler('https://m.dougemall.com/static/mall/game/index.html?mallHead=true')}>
                         <i className="icon-game"></i>游戏中心 </a>
                     <a onClick={()=>gotoHandler("https://bbs.9888.cn/",true)}> <i className="icon-bbs"></i>工友之家 </a>
-                    <a onClick={()=>gotoHandler("https://m.9888.cn/static/wap/faq/index.html",null)}> <i
+                    <a onClick={()=>gotoHandler("https://m.9888.cn/static/wap/faq/index.html")}> <i
                         className="icon-faq"></i>帮助中心</a>
-                    <a onClick={()=>gotoHandler("http://m.9888.cn/static/wap/topic-invest-school/index.html",null)}> <i
+                    <a onClick={()=>gotoHandler("http://m.9888.cn/static/wap/topic-invest-school/index.html")}> <i
                         className="icon-waiting"></i>投资学堂</a>
                 </div>
                 <div className="title-recommended"> 内容推荐</div>
