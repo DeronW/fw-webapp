@@ -204,6 +204,7 @@ const PlusMinus = React.createClass({
 
         let _this = this;
         let bizNo = $FW.Format.urlQuery().bizNo;
+
         if (this.props.is_login == 0) {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
@@ -351,6 +352,7 @@ $FW.DOMReady(function () {
             }, 9)
         }
         document.body.appendChild(i);
+
         data.title ?
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
