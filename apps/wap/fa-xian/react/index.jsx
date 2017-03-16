@@ -121,7 +121,9 @@ const Content = React.createClass({
         };
         return (
             <div>
-                {banner_group}
+                <div className="findBanner">
+                    {banner_group}
+                </div>
                 <div className="notice">
                     <img className="notice-icon" src="images/1.png"/>
 
