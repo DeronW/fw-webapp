@@ -94,7 +94,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
         generate_task(PROJ, i, {
             cmd_prefix: 'pack',
-            api_path: '//m.easyloan888.cn/',
+            api_path: '/',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: INCLUDE_COMPONENTS,
             include_less: INCLUDE_LESS,
