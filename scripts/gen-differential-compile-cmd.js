@@ -41,6 +41,6 @@ fs.readFile(sourceF, (err, data) => {
         console.log(colors.yellow('完成差量编译检测:'));
         console.log(colors.gray(r.lib ? '需要完全编译' : '可以差量编译'));
 
-        fs.chmod(targetF, 777);
+        fs.chmod(targetF, parseInt('755', 8));
     });
 });
