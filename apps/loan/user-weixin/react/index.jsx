@@ -1,6 +1,10 @@
 const WeixinCon = React.createClass({
     componentDidMount() {
     },
+    copyHandler(){
+        NativeBridge.clipboard("fxhuaba");
+        $FW.Component.Toast("已复制fxhuaba到剪切板");
+    },
     render() {
         return (
             <div className="content-wrap">
@@ -16,7 +20,7 @@ const WeixinCon = React.createClass({
                     <div className="p3">长按下图二维码保存到相册>打开微信>扫一扫> 关注放心花公众号</div>
                     <img src="images/qr.jpg" className="qr" />
                     <div className="p2">2、打开微信>添加朋友</div>
-                    <div className="p3">搜索“fxhuaba”公众号<span className="copy-qr" data-clipboard-text="fxhuaba">点击复制公众号</span></div>
+                    <div className="p3">搜索“fxhuaba”公众号<span className="copy-qr" onClick={this.copyHandler}>点击复制公众号</span></div>
                     <div className="p2 p4">3、点击此处<a href="/static/loan/weixin-download/index.html">下载APP</a></div>
                 </div>
             </div>
@@ -27,14 +31,14 @@ const WeixinCon = React.createClass({
 $FW.DOMReady(() => {
     NativeBridge.setTitle('关注微信');
     ReactDOM.render(<Header title={"关注微信"} />, HEADER_NODE);
-    var clipboard = new Clipboard('.copy-qr');
-    //alert(Clipboard.isSupported());
-    clipboard.on('success', function (e) {
-        $FW.Component.Toast('已复制fxhuaba到剪切板');
-        e.clearSelection();
-    });
-    clipboard.on('error', function (e) {
-        $FW.Component.Toast('请选择“拷贝”进行复制!');
-    });
+    // var clipboard = new Clipboard('.copy-qr');
+    // //alert(Clipboard.isSupported());
+    // clipboard.on('success', function (e) {
+    //     $FW.Component.Toast('已复制fxhuaba到剪切板');
+    //     e.clearSelection();
+    // });
+    // clipboard.on('error', function (e) {
+    //     $FW.Component.Toast('请选择“拷贝”进行复制!');
+    // });
     ReactDOM.render(<WeixinCon />, CONTENT_NODE);
 })

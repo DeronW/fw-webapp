@@ -102,6 +102,10 @@ const LoanResult = React.createClass({
     // resultHide: function () {
     //     this.props.callbackResultHide(false);
     // },
+    copyHandler(){
+      NativeBridge.clipboard("fxhuaba");
+      $FW.Component.Toast("已复制fxhuaba到剪切板");
+    },
     render: function () {
         return (
             <div className="loan-result">
@@ -187,7 +191,7 @@ const LoanResult = React.createClass({
                     </div>
                     <div className="weixin-attention">
                         <div className="weixin-attention-wrap">
-                            <div>关注微信公众号fxhuaba<span className="copy-qr" data-clipboard-text="fxhuaba">点击复制公众号</span></div>
+                            <div>关注微信公众号fxhuaba<span className="copy-qr" onClick={this.copyHandler}>点击复制公众号</span></div>
                             <div>可获得更高借款额度，且随时查看还款计划</div>
                         </div>
                     </div>
@@ -205,14 +209,14 @@ const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
     NativeBridge.setTitle("借款结果");
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
-    var clipboard = new Clipboard('.copy-qr');
-    clipboard.on('success', function (e) {
-        $FW.Component.Toast('已复制fxhuaba到剪切板');
-        e.clearSelection();
-    });
-    clipboard.on('error', function (e) {
-        $FW.Component.Toast('请选择“拷贝”进行复制!');
-    });
+    // var clipboard = new Clipboard('.copy-qr');
+    // clipboard.on('success', function (e) {
+    //     $FW.Component.Toast('已复制fxhuaba到剪切板');
+    //     e.clearSelection();
+    // });
+    // clipboard.on('error', function (e) {
+    //     $FW.Component.Toast('请选择“拷贝”进行复制!');
+    // });
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
         token: USER.token,
         userGid: USER.gid,
