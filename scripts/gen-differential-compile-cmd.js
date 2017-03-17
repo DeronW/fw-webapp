@@ -40,7 +40,7 @@ fs.readFile(sourceF, (err, data) => {
     fs.writeFile(targetF, sh_script.join('\n'), (err) => {
         if (err) throw err;
         console.log(colors.yellow('完成差量编译检测:'));
-        console.log(colors.green(
+        console.log(colors.yellow(
             r.lib ?
                 '需要完全编译' :
                 sh_script.length ?
