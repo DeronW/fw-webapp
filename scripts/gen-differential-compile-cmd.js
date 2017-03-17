@@ -1,14 +1,12 @@
 let fs = require('fs')
 var colors = require('colors');
 
-// const sourceF = '/tmp/webapp.loan.git.diff'
-const targetF = 'differential.compile.tmp.sh'
-
-const sourceF = './test.diff'
-
 // 需要传入一个参数是表示差量编译检测项目名称
 // example : npm run pre-compile -- loan
 const PROJ = process.argv[2];
+
+const sourceF = `/tmp/webapp.${PROJ}.git.diff`
+const targetF = 'differential.compile.tmp.sh'
 
 if (!PROJ) throw new Error('缺少参数, 待编译项目名称');
 
