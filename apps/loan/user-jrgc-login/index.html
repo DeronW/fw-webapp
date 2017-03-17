@@ -1,1 +1,24 @@
 {% extends '../../../lib/templates/loan_base.swig.html' %}
+
+{% block content %}
+<script>
+    function reload_jrgc(){
+        location.href = "/static/user-jrgc-login/index.html"
+    }
+</script>
+
+<style>
+    .relogin {
+        display: block;
+        margin: 50px auto;
+        padding: 10px 30px;
+        border-radius: 8px;
+        background: #fd4d4c;
+        color: white;
+    }
+</style>
+
+<a class="relogin" onClick="reload_jrgc()">
+    刷新
+</a>
+{% endblock %}
