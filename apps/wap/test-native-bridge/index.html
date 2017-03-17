@@ -14,6 +14,7 @@
   <button onClick="trigger('hide_header')">隐藏Native头部导航</button>
   <button onClick="trigger('show_header')">显示Native头部导航</button>
   <button onClick="action('login')">调用APP登录</button>
+  <button onClick="clipboard()">复制到剪切板</button>
   <button onClick="action('get_factory_code')">获取用户工场码</button>
   <button onClick="share()">调用分享</button>
 
@@ -38,6 +39,10 @@
   function action(name){
     NativeBridge[name]();
     log('发送指令', name)
+  }
+
+  function clipboard(){
+    NativeBridge.clipboard('复制@' + new Date())
   }
 
   function share(){
