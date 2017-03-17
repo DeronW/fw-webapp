@@ -158,7 +158,6 @@ const Slider = React.createClass({
                 <div className={ccn} key={index}>
                     <img src={bg} />
                     {interest}
-                    {i.level == 5 && <img className="level-4-icon" src="images/ico-level-vip4-1.png" />}
                     <div className={pcn}>
                         <div className="bar">
                             <div className="red-bar" style={{ width: red_b_width }}></div>
