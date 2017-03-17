@@ -104,7 +104,6 @@ const LoanResult = React.createClass({
     // },
     copyHandler(){
       NativeBridge.clipboard("fxhuaba");
-      $FW.Component.Toast("已复制fxhuaba到剪切板");
     },
     render: function () {
         return (

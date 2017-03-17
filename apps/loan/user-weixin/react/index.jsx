@@ -3,7 +3,6 @@ const WeixinCon = React.createClass({
     },
     copyHandler(){
         NativeBridge.clipboard("fxhuaba");
-        $FW.Component.Toast("已复制fxhuaba到剪切板");
     },
     render() {
         return (
