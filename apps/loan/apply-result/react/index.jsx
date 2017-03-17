@@ -4,20 +4,22 @@ function gotoHandler(link) {
 
 const LoanResult = React.createClass({
     getInitialState: function () {
-        let cashBank = this.props.data.userBankList.withdrawBankcard;
-        function isRealNameBindCard(ele) {
-            return ele.isRealNameBindCard == true;
-        }
-        let filtered = cashBank.filter(isRealNameBindCard);
+        // let cashBank = this.props.data.userBankList.withdrawBankcard;
+        // function isRealNameBindCard(ele) {
+        //     return ele.isRealNameBindCard == true;
+        // }
+        // let filtered = cashBank.filter(isRealNameBindCard);
         return {
-            waitingResultShow: true,
+            //waitingResultShow: true,
+            waitingResultShow:false,
             successResultShow: false,
-            failResultShow: false,
+            //failResultShow: false,
+            failResultShow:true,
             checkingResult: false,
             countdown: 0,
             loanStatus: null,
-            bankName: filtered[0].bankShortName,
-            bankNo: filtered[0].cardNo.slice(-4)
+            // bankName: filtered[0].bankShortName,
+            // bankNo: filtered[0].cardNo.slice(-4)
         }
     },
     // componentWillReceiveProps: function (nextProps) {
@@ -171,13 +173,13 @@ const LoanResult = React.createClass({
                             <div className="loan-result4">
                                 <div className="icon4"></div>
                                 <div className="icon4-info">
-                                    <div className="icon4-info-top">借款失败</div>
-                                    <div className="icon4-info-btm">由于银行问题导致借款失败</div>
+                                    <div className="icon4-info-top">申请成功</div>
                                 </div>
                                 <div className="line2"></div>
                                 <div className="waiting-result">
                                     <div className="icon5"></div>
-                                    <div className="icon5-info">请重新借款</div>
+                                    <div className="icon5-info">借款失败</div>
+                                    <div className="icon5-info-btm">由于银行问题导致借款失败</div>
                                 </div>
                             </div>
                         </div>
