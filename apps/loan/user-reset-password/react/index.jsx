@@ -127,7 +127,7 @@ const Register = React.createClass({
                         <span className="icon-pwd" onClick={this.handlePlainCode}></span>
                     </div>
                 </div>
-
+                <div className="login-tip">初次使用时需设置登录密码</div>
                 <div className="determine-btn">
                     <div className="ui-btn" onClick={this.handleRegisterBtn}>确定</div>
                 </div>
