@@ -32,6 +32,7 @@
   },
   "scripts": {
     "clean": "node scripts/clean.js",
+    "pre-compile:loan": "node scripts/gen-loan-differential-compile.js",
     "gulp": "node node_modules/gulp/bin/gulp.js",
     "build:mall": "npm run clean && npm run gulp mall:common_js && npm run gulp build:mall",
     "build:wap": "npm run clean && npm run gulp wap:common_js && npm run gulp build:wap",
