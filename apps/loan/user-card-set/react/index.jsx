@@ -63,7 +63,8 @@ const SetCashCard = React.createClass({
     },
     changeBankNum(e) {
         let v = e.target.value;
-        v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
+        //v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
+        v.length < 19 + 5 && this.setState({ bankNum: v });
     },
     blurBankNum(e) {
 
