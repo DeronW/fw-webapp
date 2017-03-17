@@ -21,3 +21,5 @@ gulpfile.settings.js
 *.swp
 *.swo
 *.diff
+tmp.*
+*.compile.sh
