@@ -137,7 +137,7 @@ const LoanResult = React.createClass({
                             </div>
                         </div>
                         <div className="btn-wrap">
-                            <div className="apply-btn" onClick={() => gotoHandler('/static/loan/home/index.html')}>返回</div>
+                            <div className="apply-btn" onClick={() => {$FW.Browser.inApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>返回</div>
                         </div>
                     </div>
                     <div className={this.state.successResultShow ? "success-result-box" : "success-result-box dis"}>
@@ -182,7 +182,7 @@ const LoanResult = React.createClass({
                             </div>
                         </div>
                         <div className="btn-wrap">
-                            <div className="credit-btn" onClick={()=>gotoHandler('/static/loan/home/index.html')}>重新借款</div>
+                            <div className="credit-btn" onClick={()=>{$FW.Browser.inApp()? NativeBridge.close():gotoHandler('/static/loan/home/index.html')}}>重新借款</div>
                         </div>
                     </div>
                     <div className="weixin-attention">
