@@ -20,7 +20,7 @@ fs.readFile(sourceF, (err, data) => {
     let reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
 
     lines.forEach(line => {
-        if (line.startsWith('lib')) r.lib = true;
+        ['lib', 'public', 'tasks'].forEach(i => { if (i.startsWith('lib')) r.lib = true });
         let m = line.match(reg_page);
         if (m) r.pages[m[1]] = true;
     })
@@ -34,6 +34,7 @@ fs.readFile(sourceF, (err, data) => {
             if (r.pages.hasOwnProperty(i))
                 sh_script.push(`npm run gulp ${PROJ}:pack:${i}:revision`)
         }
+        if(sh_script.length === 1) sh_script = [];
     }
 
     fs.writeFile(targetF, sh_script.join('\n'), (err) => {
