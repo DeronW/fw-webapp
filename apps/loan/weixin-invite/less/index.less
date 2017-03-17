@@ -12,6 +12,15 @@ a{
 img{
   vertical-align: middle;
 }
+input{
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -webkit-appearance: none;
+  -webkit-text-size-adjust: none;
+  -webkit-touch-callout:none;
+  background:transparent;
+  outline:none;
+  border:none;
+}
 #more{
   position:absolute;
   bottom:30px;
@@ -71,11 +80,16 @@ img{
 }
 .btm-tip{
   width:480px;
-  font-size:17px;
-  color:#f6930f;
   margin:7px auto 0;
   line-height:17px;
   text-align:justify;
+}
+.btm-tip input{
+  width:480px;
+  height:34px;
+  word-wrap:break-word;
+  font-size:17px;
+  color:#f6930f;
 }
 .tabs{
   width:480px;
