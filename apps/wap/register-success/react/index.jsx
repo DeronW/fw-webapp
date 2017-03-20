@@ -62,15 +62,6 @@ var PromptBlock = React.createClass({
                     {this.props.title}
                 </div>
 
-				{
-					this.props.resDetails.map((data, index) => {
-						<div className="ui-prompt-text">
-							<span className="number-text">{data.giftAmount}</span>
-							data.giftType == 0 ? '元返现券礼包已经转入您的账户中' : '返息券已经转入您的账户中'
-						</div>
-						
-					})	
-				}
             </div>
         );
     }
