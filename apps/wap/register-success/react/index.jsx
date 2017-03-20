@@ -61,9 +61,8 @@ var PromptBlock = React.createClass({
                     {this.props.title}
                 </div>
 
-                /*{
+                {
                     this.props.resDetails.map((data, index) => {
-						console.log(data);
                        	return  <div className="ui-prompt-text">
                                     <span className="number-text">{data.giftAmount}</span>
 									{
@@ -71,7 +70,8 @@ var PromptBlock = React.createClass({
                                     }
                                 </div>
                     });
-                }*/
+                }
+			</div>
         );
     }
 });
