@@ -176,13 +176,13 @@ const LoanResult = React.createClass({
                             <div className="loan-result4">
                                 <div className="icon4"></div>
                                 <div className="icon4-info">
-                                    <div className="icon4-info-top">借款失败</div>
-                                    <div className="icon4-info-btm">{this.state.failReason}</div>
+                                    <div className="icon4-info-top">申请成功</div>
                                 </div>
                                 <div className="line2"></div>
                                 <div className="waiting-result">
                                     <div className="icon5"></div>
-                                    <div className="icon5-info">请重新借款</div>
+                                    <div className="icon5-info">借款失败</div>
+                                    <div className="icon5-info-btm">{this.state.failReason}</div>
                                 </div>
                             </div>
                             <div className="customer-service">
