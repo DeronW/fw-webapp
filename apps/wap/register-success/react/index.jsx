@@ -51,6 +51,7 @@ var Btn = React.createClass({
 
 var PromptBlock = React.createClass({
     render: function () {
+		console.log(this.props.resDetails);
         return (
             <div className="ui-prompt">
                 <div className="img">
