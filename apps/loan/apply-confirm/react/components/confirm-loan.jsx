@@ -12,16 +12,12 @@ const ConfirmLoan = React.createClass({
         } else {
             let query = $FW.Format.urlQuery();
             let orderGid = query.orderGid;
-            $FW.Ajax({
-                url: `${API_PATH}api/loan/v1/sendSmsverifycode.json`,
-                method: "post",
-                data: {
+            $FW.Post(`${API_PATH}api/loan/v1/sendSmsverifycode.json`,{
                     token: USER.token,
                     userGid: USER.gid,
                     userId: USER.id,
                     sourceType: SOURCE_TYPE,
                     orderGid: orderGid
-                }
             }).then(data => {
                 this.props.callbackVerifyCodeShow(true);
                 //this.setState({orderGid: data.orderGid});
