@@ -100,7 +100,7 @@ const Content = React.createClass({
         if (link) gotoHandler(link);
     },
     bdHandler() {
-        if (this._count++ > 6) location.href = '/static/test-native-bridge/index.html'
+        if (this._count++ > 6) location.href = 'https://m.9888.cn/static/test-native-bridge/index.html'
     },
     render() {
         let { banners } = this.state;
