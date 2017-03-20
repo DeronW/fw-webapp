@@ -6,7 +6,6 @@ const VoucherModal = React.createClass({
     toggleVoucher: function (index) {
         let list = this.state.voucher_list;
         list[index].selected = !list[index].selected;
-
         if ($FW.Utils.length(list, (i) => i.selected) > this.props.product_count) {
             $FW.Component.Alert('兑换券数量不能大于购买商品数量');
             list[index].selected = !list[index].selected;

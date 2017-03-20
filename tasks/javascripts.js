@@ -9,7 +9,7 @@ module.exports = javascripts = function (src_path, build_path, name, debug) {
     return gulp.src(src_path)
         .pipe(changed(build_path))
         //.pipe(babel({presets: ['es2015']}))
-        .pipe(debug ? plugins.util.noop() : js_uglify())
-        .pipe(name ? concat(name, {newLine: ';\n'}) : plugins.util.noop())
+        .pipe(debug ? plugins.util.noop() : js_uglify({ compress: { unused: false } }))
+        .pipe(name ? concat(name, { newLine: ';\n' }) : plugins.util.noop())
         .pipe(gulp.dest(build_path));
 };

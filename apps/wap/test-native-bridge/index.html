@@ -11,37 +11,67 @@
 
   <hr />
 
-  <button onClick="action('hideHeader')">隐藏Native头部导航</button>
-  <button onClick="action('showHeader')">显示Native头部导航</button>
-  <button onClick="action('login')">调用APP登录</button>
+  <button onClick="trigger('hide_header')">隐藏Native头部导航</button>
+  <button onClick="trigger('show_header')">显示Native头部导航</button>
+  <button onClick="trigger('login')">调用APP登录</button>
+  <button onClick="clipboard()">复制到剪切板</button>
+  <button onClick="trigger('get_factory_code')">获取用户工场码</button>
+  <button onClick="share()">调用分享</button>
 
   <button onClick="toNative('app_fanxiCoupon')">去返息券页面</button>
-  <button onClick="action('close')">关闭页面</button>
+  <button onClick="trigger('refresh_loan_token')">获取登录放心花的Token</button>
+  <button onClick="trigger('close')">关闭页面</button>
 </div>
 
 <div id="logs" class="logs">
   <p></p>
 </div>
 
-{% endblock %} {% block extra_javascripts %}
+
+{% endblock %}
+
+{% block extra_javascripts %}
 <script>
   function toNative(name){
     NativeBridge.toNative(name)
     log('跳转到app页面', name)
   }
-  function action(name){
-    NativeBridge[name]();
-    log('发送指令', name)
+
+  function clipboard(){
+    NativeBridge.clipboard('复制@' + new Date())
   }
+
+  function share(){
+    NativeBridge.share({
+        title: '分享标题',
+        image: 'https://static.9888.cn/images/loan/invitation.jpg',
+        link: 'https://www.baidu.com',
+        desc: '分享描述, @' + new Date()
+    })
+  }
+
+  function trigger(name) {
+      NativeBridge.trigger(name)
+      log('触发指令', name)
+  }
+
   function setTitle(){
       var v = document.getElementById('title').value
     NativeBridge.setTitle(v);
     log('设置标题', v)
   }
+
   function log(type, cmd){
     var logs = document.getElementById('logs');
     var p = document.createElement('p');
     p.innerHTML = (new Date().toTimeString().split(' ')[0]) + ' ' + type + ' <b>' + cmd + '</b>';
     logs.insertBefore(p, logs.children[0])
   }
-</script> {% endblock %}
+
+  window.onNativeMessageReceive = function(data){
+    log('得到Native消息', JSON.stringify(data))
+  }
+
+  log('UserAgent:', navigator.userAgent);
+</script>
+{% endblock %}

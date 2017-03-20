@@ -19,13 +19,13 @@ const Grid_3 = React.createClass({
         }).then(data => this.setState({ products: data.products }))
     },
     render: function () {
-        let {products} = this.state;
-        if(products.length == 0) return null;
+        let { products } = this.state;
+        if (products.length == 0) return null;
 
         let theme4_top_product_item = (product, index) => {
             return (
                 <a className="theme4-top-product-item" key={index}
-                   href={productLink(product.bizNo)}>
+                    href={productLink(product.bizNo)}>
                     <span
                         className={"theme4-top-product-title theme4-top-product-title-color" + parseInt(index + 1)}>{product.abbreviation}</span>
                     <span
@@ -35,7 +35,7 @@ const Grid_3 = React.createClass({
                         {product.score == 0 ? null : `${product.score}工分`}
                     </span>
                     <span className={"horizon-line theme4-top-line-color" + parseInt(index + 1)}></span>
-                    <img className="theme4-top-product-img" src={product.img}/>
+                    <img className="theme4-top-product-img" src={product.img} />
                 </a>
             )
         };
@@ -44,8 +44,8 @@ const Grid_3 = React.createClass({
 
         return (
             <div className="theme-4">
-                <a className="activity-theme" href= '/static/mall/product-list/index.html?searchSourceType=0&category=家居生活'>
-                    <img src="/static/mall/product-list/images/living.jpg"/></a>
+                <a className="activity-theme" href='/static/mall/product-list/index.html?searchSourceType=0&category=living&title=家居生活'>
+                    <img src="/static/mall/product-list/images/living.jpg" /></a>
                 <div className="theme4-product-wrap">
                     <div className="theme4-top-product-list">
                         {products.slice(0, 4).map(theme4_top_product_item)}
@@ -53,7 +53,7 @@ const Grid_3 = React.createClass({
                     <div className="theme4-btm-product-list">
                         <div className="theme4-btm-left-product-item">
                             <a className="theme4-btm-left-product-wrap" href={productLink(products[4].bizNo)}>
-                                <img className="theme4-btm-product-img" src={products[4].img}/>
+                                <img className="theme4-btm-product-img" src={products[4].img} />
                                 <span
                                     className="theme4-btm-product-title theme4-btm-product-title-color1">{products[4].abbreviation}</span>
                                 <span
@@ -66,10 +66,10 @@ const Grid_3 = React.createClass({
                         </div>
                         <div className="theme4-btm-middle-product-wrap">
                             <a className="theme4-btm-middle-product-item"
-                               onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[5].bizNo)}>
+                                href={`/static/mall/product-detail/index.html?bizNo=${products[5].bizNo}`}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
-                                        <img className="theme4-btm-product-img" src={get_prd(5).img}/>
+                                        <img className="theme4-btm-product-img" src={get_prd(5).img} />
                                     </div>
                                     <div className="theme4-btm-middle-top-info">
                                         <span
@@ -84,10 +84,10 @@ const Grid_3 = React.createClass({
                                 </div>
                             </a>
                             <a className="theme4-btm-middle-product-item"
-                               onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + get_prd(6).bizNo)}>
+                                href={`/static/mall/product-detail/index.html?bizNo=${get_prd(6).bizNo}`}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
-                                        <img className="theme4-btm-product-img" src={get_prd(6).img}/>
+                                        <img className="theme4-btm-product-img" src={get_prd(6).img} />
                                     </div>
                                     <div className="theme4-btm-middle-top-info">
                                         <span
@@ -104,10 +104,10 @@ const Grid_3 = React.createClass({
                         </div>
                         <div className="theme4-btm-right-product-wrap">
                             <a href={'/static/mall/product-detail/index.html?bizNo=' + get_prd(7).bizNo}>
-                                <img className="theme4-btm-product-img" src={get_prd(7).img}/>
+                                <img className="theme4-btm-product-img" src={get_prd(7).img} />
                             </a>
-                            <a href={'/static/mall/product-detail/index.html?bizNo=' + get_prd(7).bizNo}>
-                                <img className="theme4-btm-product-img" src={get_prd(8).img}/>
+                            <a href={'/static/mall/product-detail/index.html?bizNo=' + get_prd(8).bizNo}>
+                                <img className="theme4-btm-product-img" src={get_prd(8).img} />
                             </a>
                         </div>
                     </div>

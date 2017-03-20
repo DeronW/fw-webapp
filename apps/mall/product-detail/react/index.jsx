@@ -28,21 +28,12 @@ const Product = React.createClass({
     },
 
     componentDidMount: function () {
-        window.addEventListener('scroll', function () {
-            var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-
-            if (scrollTop > 100) return false;
-            let id = document.querySelector('._style_header_fixed');
-            if (scrollTop > 10) {
-                id.setAttribute("class", "no_clarity _style_header_fixed");
-            }
-            else {
-                id.setAttribute("class", "clarity _style_header_fixed");
-            }
-        }.bind(this), false);
+        document.title = this.props.data.title;
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
+
+        if (!$FW.Browser.inWeixin()) document.querySelector('._style_header_fixed').style.borderBottom = "1px solid rgb(216, 216, 216)!important";
 
         if ($FW.Browser.inIOSApp()) document.querySelector('._style_header_arrow').style.top = "22px";
 
@@ -128,7 +119,7 @@ const Product = React.createClass({
         return (
             <div className="detail-box">
                 {shop_card_prompt}
-                <a onClick={this.shopHandler} className={topBuyCart} style={{ zIndex: '10' }}>
+                <a onClick={this.shopHandler} className={topBuyCart} style={{zIndex: '10'}}>
                     <span className="_style_buy_cart_span"></span>
                 </a>
                 {data.head_images && data.head_images.length ?
@@ -214,11 +205,13 @@ const PlusMinus = React.createClass({
         let _this = this;
         let bizNo = $FW.Format.urlQuery().bizNo;
 
-        let linkLogin = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=/static/mall/product-detail/index.html'
-            + location.search;
-
         if (this.props.is_login == 0) {
-            $FW.Browser.inApp() ? NativeBridge.goto(link) : location.href = linkLogin
+            $FW.Ajax({
+                url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
+                enable_loading: 'mini'
+            }).then(data => {
+                //  location.href = linkLogin
+            });
         } else {
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
@@ -279,15 +272,19 @@ const PlusMinus = React.createClass({
 
         let bizNo = $FW.Format.urlQuery().bizNo;
         let link = '/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=' + this.state.value;
-        let linkLogin = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml?is_mall=1&redirect_url=/static/mall/product-detail/index.html'
-            + location.search;
+
         let isCanBuy = this.props.isCanBuy;
 
         if (this.props.is_login == 1) {
             gotoHandler(link);
         } else {
             if (!isCanBuy) {
-                gotoHandler(linkLogin) //$FW.Component.Alert("请先登录");
+                $FW.Ajax({
+                    url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
+                    enable_loading: 'mini'
+                }).then(data => {
+                    // gotoHandler(linkLogin) //$FW.Component.Alert("请先登录");
+                });
             }
         }
     },
@@ -317,11 +314,18 @@ const PlusMinus = React.createClass({
 });
 
 const EmptyProduct = React.createClass({
+    componentDidMount: function () {
+        var arrUrl = location.href.split('?');
+
+        if (arrUrl[2]) {
+            location.href = (arrUrl[0].concat("?", arrUrl[1]))
+        }
+    },
     render: function () {
         return (
-            <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
-                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg'/>
-                <div style={{ fontSize: "30px", color: "#8591b3", textAlign: "center" }}>
+            <div style={{position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1"}}>
+                <img style={{display: "block", maxWidth: "80%", margin: "20% auto 50px"}} src='images/outdate.jpg'/>
+                <div style={{fontSize: "30px", color: "#8591b3", textAlign: "center"}}>
                     抱歉, 没有找到相关商品!
                 </div>
             </div>
@@ -338,12 +342,22 @@ $FW.DOMReady(function () {
         url: `${API_PATH}mall/api/detail/v1/item_detail.json?bizNo=${bizNo}`,
         enable_loading: 'mini'
     }).then(data => {
+        document.title = data.title;
+        let i = document.createElement('iframe');
+        i.src = '/favicon.ico';
+        i.style.display = 'none';
+        i.onload = function() {
+            setTimeout(function(){
+                i.remove();
+            }, 9)
+        }
+        document.body.appendChild(i);
+
         data.title ?
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
     })
-
-    ReactDOM.render(<Header title={""}/>, HEADER_NODE);
+    if (!$FW.Browser.inWeixin()) ReactDOM.render(<Header title={"商品详情"}/>, HEADER_NODE);
 });
 
 function trim(s) {

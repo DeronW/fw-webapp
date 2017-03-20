@@ -102,6 +102,7 @@ const Header = React.createClass({
         // 如果在微信中打开, 除了个别页面外, 也不显示头部导航
         let show_header_titles = [''];
         if(ua.indexOf('MicroMessenger') >= 0 && show_header_titles.indexOf(title) < 0) return null;
+        if($FW.Browser.inApp()) return null;
 
         return (
             <div style={{ height: this.state.height + 'px' }}>

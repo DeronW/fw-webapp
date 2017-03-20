@@ -37,8 +37,9 @@ const Neg = React.createClass({
             }
         }, 1000)
 
+        // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
         $FW.Ajax({
-            url: "http://apitest.9888.cn/api/sspay/withdraw/v1/sendCode.shtml?isVms=SMS&type=1",
+            url: "/api/sspay/withdraw/v1/sendCode.shtml?isVms=SMS&type=1",
             success: function (data) {
             }
         })

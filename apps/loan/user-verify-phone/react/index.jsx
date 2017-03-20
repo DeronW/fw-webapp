@@ -52,7 +52,11 @@ const VerifyPhone = React.createClass({
             userGid: USER.gid,
             userId: USER.id,
             sourceType: SOURCE_TYPE
-        }).then(null, e => $FW.Component.Toast(e.message));
+        }).then(null, (e) => {
+            $FW.Component.Toast(e.message);
+            clearInterval(this.time);
+            this.setState({countdownShow: false});
+        });
     },
     submitHandler() {
         if (this.state.codeVal.length < 4) return $FW.Component.Toast("验证码不能小于4位");
@@ -169,6 +173,7 @@ const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid || '';
 const PHONE = $FW.Format.urlQuery().phone || '';
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle('验证手机号');
     ReactDOM.render(<Header title={"验证手机号"}/>, HEADER_NODE);
     ReactDOM.render(<VerifyPhone />, CONTENT_NODE);
 })

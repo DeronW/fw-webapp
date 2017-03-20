@@ -16,8 +16,9 @@ var BankAccount = React.createClass({
 
     refreshBankList: function (value) {
         let fn = () => {
+            // 首山的接口不能添加 API_PATH 参数, 它的域名是独立的: assets-api.9888.cn
             $FW.Ajax({
-                url: "http://apitest.9888.cn/api/sspay/withdraw/v1/getBankList.shtml",
+                url: "/api/sspay/withdraw/v1/getBankList.shtml",
                 data: {
                     index: "0",
                     keyword: value,

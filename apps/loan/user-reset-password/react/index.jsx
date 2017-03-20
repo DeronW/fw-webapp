@@ -70,7 +70,7 @@ const Register = React.createClass({
         if (password == '') err = "密码不能为空";
         if (password.length < 8) err = "密码不能少于8位";
         if (password.length > 16) err = "密码不能多于16位";
-        if (!istrue(password)) err = "必须是字母及数字组合密码";
+        if (!istrue(password)) err = "请输入8-16位字母和数字组合";
 
         err ?
             $FW.Component.Toast(err) :
@@ -127,7 +127,7 @@ const Register = React.createClass({
                         <span className="icon-pwd" onClick={this.handlePlainCode}></span>
                     </div>
                 </div>
-
+                <div className="login-tip">初次使用时需设置登录密码</div>
                 <div className="determine-btn">
                     <div className="ui-btn" onClick={this.handleRegisterBtn}>确定</div>
                 </div>

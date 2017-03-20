@@ -1,27 +1,32 @@
-<script src="javascripts/raven-3.10.0.min.js" crossorigin="anonymous"></script>
+<script src="javascripts/raven-refine-3.12.2.min.js" crossorigin="anonymous"></script>
 <script>
     Raven.config('{{ SENTRY_DSN }}', {
         autoBreadcrumbs: { xhr: false }
-    }).install()
+    }).install();
     // 全局JS异常捕获方法
     window.onerror = function (msg, file, line, column, error) {
-        if (typeof (Raven) === 'object' && Raven.isSetup()) {
-            var err;
-            if (error) {
-                // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
-                if(error.message && String(error.message).indexOf('_vds_hybrid') > -1) return;
-                Raven.captureException(error);
-            } else {
-                // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
-                if(msg.indexOf('_vds_hybrid') > -1) return;
-                err = 'Uncatch Error in ' + file + ':' + line;
-                if (column) err += ',' + column;
-                err += ' -> ' + msg;
-                Raven.captureMessage(err);
-            }
+        return
+        // 如果是 raven 自己尝试上报错误导致的错误, 不捕捉
+        if (file && String(file).indexOf('raven-') > -1) return;
+        // 如果是 _vds 相关错误, 不捕捉, 这是growing io的错误
+        var igt = '_vds_hybrid';
+        if (msg.indexOf(igt) > -1) return;
+        if (error && error.toString().indexOf(igt) > -1) return;
+        // 如果Raven还没有设置成功, 不用捕捉错误
+        if (typeof (Raven) !== 'object' || !Raven.isSetup()) return;
+
+        if (error) {
+            Raven.captureException(error);
         } else {
-            return; // Raven is now ready
+            var err;
+            err = 'Uncatch Error in ' + file + ':' + line;
+            if (column) err += ',' + column;
+            err += ' -> ' + msg;
+            Raven.captureMessage(err);
         }
+        console.error(error || err);
     }
+
+    window.onunhandledrejection = function () { }
 
 </script>

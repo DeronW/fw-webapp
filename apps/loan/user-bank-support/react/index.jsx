@@ -9,7 +9,6 @@ const BankList = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}api/bankcard/v1/supportbank.json`,
             method: "POST",
-            enable_loading:"mini",
             data: {
                 token: user.token,
                 userGid: user.gid,
@@ -18,7 +17,7 @@ const BankList = React.createClass({
                 pageSize: 100,
                 sourceType: SOURCE_TYPE
             }
-        }).then((data) => {
+        }).then(data => {
             this.setState({
                 bankList: data.pageData.result
             });
@@ -26,13 +25,15 @@ const BankList = React.createClass({
 
         })
     },
+    back_handler(){
+        window.history.back()
+    },
     render: function () {
         let bankLi = (todo, index) => {
             return <div className="bank-branch">
                 <div className="bank-icon">
-                    <img src={todo.logoUrl} />
+                    <img src={todo.logoUrl || 'images/logo.png'} />
                 </div>
-
                 <div className="bank-name">{todo.bankName}</div>
             </div>
         }
@@ -40,14 +41,11 @@ const BankList = React.createClass({
         return (
             <div>
                 <div className="banklist">
-                    {
-                        this.state.bankList.map((todo, index) => {
-                            return bankLi(todo, index)
-                        })
-                    }
+                    {this.state.bankList.map((todo, index) => bankLi(todo, index))}
                 </div>
                 <div className="know-btn-wrap">
-                    <div className="know-btn" onClick={() => { window.history.back() }}>我知道了</div>
+                    <div className="know-btn" onClick={this.back_handler}>
+                        我知道了</div>
                 </div>
             </div>
         )
@@ -55,6 +53,7 @@ const BankList = React.createClass({
 });
 
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('支持储蓄卡');
     ReactDOM.render(<Header title={"支持储蓄卡"} />, HEADER_NODE);
     ReactDOM.render(<BankList />, CONTENT_NODE);
 });

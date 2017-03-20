@@ -1,4 +1,5 @@
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('APP下载');
     var channel = $FW.Format.urlQuery().name;
     var ConcertUtilBrowser = {
         versions: (function () {
@@ -15,29 +16,27 @@ $FW.DOMReady(function () {
     function $(id) { return document.getElementById(id) }
 
     if (ConcertUtilBrowser.versions.ios) {
-        $("download-btn").innerHTML = "iOS客户端敬请期待";
+        $("download-btn").innerHTML = "iOS客户端下载";
     } else {
         $("download-btn").innerHTML = "Android客户端下载";
     };
 
-    if(ConcertUtilBrowser.versions.android){
-        $("download-btn").addEventListener("click", function () {
-            if (ConcertUtilBrowser.versions.weixin) {
-                $("mask").style.display = "block";
-            } else {
-                if (ConcertUtilBrowser.versions.ios) {
-                    // location.href = 'https://itunes.apple.com/cn/';
-                } else {
-                    $FW.Ajax(`${API_PATH}api/v1/download.json?name=${channel}`).then(data => {
-                        location.href = data.url;
-                    }, e => $FW.Component.Toast(e.message));
-                }
-            }
 
-        });
-        $("mask").addEventListener("click", function () {
-            $("mask").style.display = "none";
-        });
-    }
+    $("download-btn").addEventListener("click", function () {
+        if (ConcertUtilBrowser.versions.weixin) {
+            $("mask").style.display = "block";
+        } else {
+            if (ConcertUtilBrowser.versions.ios) {
+                location.href = 'https://appsto.re/cn/-mzaib.i';
+            } else {
+                $FW.Ajax(`${API_PATH}api/v1/download.json?name=${channel}`).then(data => {
+                    location.href = data.url;
+                }, e => $FW.Component.Toast(e.message));
+            }
+        }
+    });
+    $("mask").addEventListener("click", function () {
+        $("mask").style.display = "none";
+    });
 
 });

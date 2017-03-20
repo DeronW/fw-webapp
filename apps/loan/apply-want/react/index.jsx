@@ -100,6 +100,7 @@ const WantLoan = React.createClass({
 
 
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('我要借款');
     ReactDOM.render(<Header title={"我要借款"} />, HEADER_NODE);
     let query = $FW.Format.urlQuery();
     let orioleOrderGid = query.orioleOrderGid;

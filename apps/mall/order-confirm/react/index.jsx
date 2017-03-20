@@ -59,25 +59,24 @@ const ConfirmOrder = React.createClass({
                 //url: `./commit_pay_order.json`,
                 //method: 'POST',
                 enable_loading: 'mini',
-                data: this.FormData,
-                success: (result) => {
-                    /*
-                     if (data.errMsg) {
-                     $FW.Component.Alert(data.errMsg);
-                     this.refreshTokenStr()
-                     } else {
-                     */
-                    if (result.status == 1) {
-                        location.href =
-                            '/static/mall/payment/index.html?merchantNo=' + result.merchantNo +
-                            '&amount=' + result.amount + '&payableRmbAmt=' + result.totalShouldPayPrice + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
-                            + '&createdTime=' + result.duration
-                    }
-                    else {
-                        location.href = '/static/mall/order-complete/index.html?status=S'
-                    }
-                    /* } */
+                data: this.FormData
+            }).then(result=> {
+                /*
+                 if (data.errMsg) {
+                 $FW.Component.Alert(data.errMsg);
+                 this.refreshTokenStr()
+                 } else {
+                 */
+                if (result.status == 1) {
+                    location.href =
+                        '/static/mall/payment/index.html?merchantNo=' + result.merchantNo +
+                        '&amount=' + result.amount + '&payableRmbAmt=' + result.totalShouldPayPrice + '&orderTime=' + result.orderTime + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo
+                        + '&createdTime=' + result.duration
                 }
+                else {
+                    location.href = '/static/mall/order-complete/index.html?status=S'
+                }
+                /* } */
             })
         }.bind(this);
 
@@ -175,7 +174,7 @@ const ConfirmOrder = React.createClass({
                         {this.props.data.totalPoints == 0 ? "" : this.props.data.totalPoints + "工分"}</span>
                     </div>
                     <div className="price-item">
-                        <span className="item-name">兑换券</span><span className="item-detail">0
+                        <span className="item-name">兑换券</span><span className="item-detail">¥ 0
                         {/*this.props.data.ordersTicketPoints==0?"":"-"+this.props.data.ordersTicketPoints+"工分"+
                          this.props.data.ordersTicketPrice?"":"-"+this.props.data.ordersTicketPrice+"金额"*/}</span>
                     </div>

@@ -4,32 +4,36 @@
         // 如果不在微信中, 不使用微信设置功能
         if (navigator.userAgent.indexOf('MicroMessenger') < 0) return;
 
-        let USER = $FW.Store.getUserDict();
-        let templateContent;
-        let templateTitle;
-        let templateUrl;
-        let iurl = 'https://static.9888.cn/images/loan/invitation.jpg';
+        var USER = $FW.Store.getUserDict();
+        var templateContent;
+        var templateTitle;
+        var templateUrl;
+        var iurl = 'https://static.9888.cn/images/loan/invitation.jpg';
 
-        $FW.Post(`${API_PATH}api/shareTemplate/v1/getContent.json`, {
+        $FW.Post( API_PATH + 'api/shareTemplate/v1/getContent.json', {
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
             sourceType: SOURCE_TYPE,
             templateType: 1,
-            fail: () => true
-        }).then(data => {
-            templateContent = data.shareTemplate.templateContent;
-            templateTitle = data.shareTemplate.templateTitle;
-            templateUrl = data.shareTemplate.templateUrl;
+            //fail: () => true
+        }).then(
+            function(data){
+                templateContent = data.shareTemplate.templateContent;
+                templateTitle = data.shareTemplate.templateTitle;
+                templateUrl = data.shareTemplate.templateUrl;
 
-            return $FW.Ajax({
-                url: `${API_PATH}cashloan/outside/weixinAccountController.do?wxConfig`,
-                data: { url: location.href },
-                fail: () => true
-            })
-        }).then(data => {
-            setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
-        });
+                return $FW.Ajax({
+                    url: API_PATH + 'cashloan/outside/weixinAccountController.do?wxConfig',
+                    data: { url: location.href },
+                    //fail: () => true
+                })
+            }
+        ).then(
+            function(data){
+                setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
+            }
+        );
 
         function setWxConfig(appid, timestamp, noncestr, signature) {
             wx.config({

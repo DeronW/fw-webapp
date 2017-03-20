@@ -1,4 +1,3 @@
-
 const ConfirmLoanWrap = React.createClass({
     getInitialState: function () {
         return {

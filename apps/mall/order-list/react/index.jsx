@@ -69,11 +69,11 @@ const OrderList = React.createClass({
 
         return (
             <div className="order-area">
-                {this.props.index == 0 ? this.state.all.length != 0 ? allBlock("all") : blockText : null}
-                {this.props.index == 1 ? this.state.unPay.length != 0 ? allBlock("unPay") : blockText : null}
-                {this.props.index == 2 ? this.state.prepare.length != 0 ? allBlock("prepare") : blockText : null}
-                {this.props.index == 3 ? this.state.shipping.length != 0 ? allBlock("shipping") : blockText : null}
-                {this.props.index == 4 ? this.state.complete.length != 0 ? allBlock("complete") : blockText : null}
+                {this.props.index == 0 && (this.state.all.length != 0 ? allBlock("all") : blockText) }
+                {this.props.index == 1 && (this.state.unPay.length != 0 ? allBlock("unPay") : blockText) }
+                {this.props.index == 2 && (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) }
+                {this.props.index == 3 && (this.state.shipping.length != 0 ? allBlock("shipping") : blockText) }
+                {this.props.index == 4 && (this.state.complete.length != 0 ? allBlock("complete") : blockText) }
             </div>
         );
     }
@@ -153,6 +153,9 @@ const OrderBlock = React.createClass({
                 status_name = '已取消';
                 status_color = complete_color;
                 break;
+            default:
+                return true
+                break;
         }
         var _this = this;
         let product_item = function (product, index) {
@@ -167,10 +170,12 @@ const OrderBlock = React.createClass({
                             <div className="commodity-name">
                                 <h2>{product.title}</h2>
                             </div>
-                            <div className="tag-block">
-                                { product.tags.length != 0 ? product.tags.map(
-                                    (i, index) => <span key={index} className="text">{i}</span>) : null }
-                            </div>
+                            {/*
+                             <div className="tag-block">
+                             { product.tags.length != 0 ? product.tags.map(
+                             (i, index) => <span key={index} className="text">{i}</span>) : null }
+                             </div>
+                             */}
                             <div className="commodity-number">
                                 <span className="money-text">
                                     {product.price > 0 || product.score == 0 ?
@@ -189,9 +194,9 @@ const OrderBlock = React.createClass({
         let sendChannel = order.sendChannel;
         let sendChannelEnum = order.sendChannelEnum;
         let check_link = order.sendOrderNo ? <a className="link-btn"
-                                                href={'/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid ?
-            <a className="link-btn"
-               href={'/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a> : null);
+                                                href={'/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid &&
+        <a className="link-btn"
+           href={'/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a>);
 
         return (
             <div className="order-block">

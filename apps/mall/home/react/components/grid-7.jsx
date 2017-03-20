@@ -15,7 +15,7 @@ const Grid_7 = React.createClass({
         }).then(data => this.setState({ products: data.products }))
     },
     render: function () {
-        let {products} = this.state;
+        let { products } = this.state;
         if (products.length == 0) return null;
 
         let theme4_top_product_item = (product, index) => {
@@ -40,7 +40,7 @@ const Grid_7 = React.createClass({
 
         return (
             <div className="theme-4">
-                <a href= '/static/mall/product-list/index.html?searchSourceType=0&category=汽车用品' className="activity-theme"><img src="/static/mall/product-list/images/maternalInfantEducation.jpg" /></a>
+                <a href='/static/mall/product-list/index.html?searchSourceType=0&category=maternalInfantEducation&title=母婴教育' className="activity-theme"><img src="/static/mall/product-list/images/maternalInfantEducation.jpg" /></a>
                 <div className="theme4-product-wrap">
                     <div className="theme4-top-product-list">
                         {products.slice(0, 4).map(theme4_top_product_item)}
@@ -60,7 +60,7 @@ const Grid_7 = React.createClass({
                         </div>
                         <div className="theme4-btm-middle-product-wrap">
                             <a className="theme4-btm-middle-product-item"
-                                onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[5].bizNo)}>
+                                href={'/static/mall/product-detail/index.html?bizNo=' + products[5].bizNo}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
                                         <img className="theme4-btm-product-img" src={get_prd(5).img} />
@@ -78,7 +78,7 @@ const Grid_7 = React.createClass({
                                 </div>
                             </a>
                             <a className="theme4-btm-middle-product-item"
-                                onClick={() => gotoHandler('/static/mall/product-detail/index.html?bizNo=' + products[6].bizNo)}>
+                                href={'/static/mall/product-detail/index.html?bizNo=' + products[6].bizNo}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
                                         <img className="theme4-btm-product-img" src={get_prd(6).img} />
@@ -99,7 +99,7 @@ const Grid_7 = React.createClass({
                             <a href={`/static/mall/product-detail/index.html?bizNo=${get_prd(7).bizNo}`}>
                                 <img className="theme4-btm-product-img" src={get_prd(7).img} />
                             </a>
-                            <a href={`/static/mall/product-detail/index.html?bizNo=${get_prd(6).bizNo}`}>
+                            <a href={`/static/mall/product-detail/index.html?bizNo=${get_prd(8).bizNo}`}>
                                 <img className="theme4-btm-product-img" src={get_prd(8).img} />
                             </a>
                         </div>

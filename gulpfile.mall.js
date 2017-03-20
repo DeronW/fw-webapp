@@ -21,6 +21,10 @@ const USER_PAGES = [
     'user-deliver-address',
     'user-build-deliver',
     'user-help',
+	'user-coupon',
+	// 'user-register',
+	// 'user-register-1',
+	// 'login',
 ]
 
 const PRODUCT_PAGES = [
@@ -113,7 +117,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
         generate_task(PROJ, i, {
             cmd_prefix: 'pack',
-            api_path: '/',
+            api_path: process.env.API_PATH || '/',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: INCLUDE_COMPONENTS,
             include_javascripts: INCLUDE_JAVASCRIPTS
@@ -123,12 +127,10 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-                `apps/${PROJ}/**/*.+(js|jsx)`,
-                '!node_modules/**',
-                '!**/jquery.*.js',
-                '!**.min.js'
-            ])
-            .pipe(eslint())
-            .pipe(eslint.format());
+            `apps/${PROJ}/**/*.+(js|jsx)`,
+            '!node_modules/**',
+            '!**/jquery.*.js',
+            '!**.min.js'
+        ]).pipe(eslint()).pipe(eslint.format());
     }))
 };

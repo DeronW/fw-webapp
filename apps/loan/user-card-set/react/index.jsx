@@ -50,7 +50,10 @@ const SetCashCard = React.createClass({
     },
     changeName(e) {
         let v = e.target.value;
-        v = v.replace(/[0-9a-z]/gi, '');
+        let meizu = window.navigator.userAgent.indexOf('MX4 Pro') > -1;
+        if(!meizu){
+            v = v.replace(/[0-9a-z]/gi, '');
+        }
         v.length < 21 && this.setState({ name: $FW.Format.trim(v) });
     },
     changeIdHandler(e) {
@@ -60,7 +63,8 @@ const SetCashCard = React.createClass({
     },
     changeBankNum(e) {
         let v = e.target.value;
-        v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
+        //v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
+        v.length < 19 + 5 && this.setState({ bankNum: v });
     },
     blurBankNum(e) {
 
@@ -137,7 +141,10 @@ const SetCashCard = React.createClass({
             }).then((data) => {
                 let oGid = data.bindBankInfo.operatorBankcardGid;
                 window.location.href = `/static/loan/user-verify-phone/index.html?phone=${phone}&operatorBankcardGid=${oGid}`;
-            }, e => $FW.Component.Toast(e.message));
+            }, (e) => {
+                $FW.Component.Toast(e.message);
+                //alert(USER.status);
+        });
     },
     render() {
 
@@ -212,6 +219,7 @@ const SetCashCard = React.createClass({
 const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle('设置提现卡');
     ReactDOM.render(<Header title={"设置提现卡"} />, HEADER_NODE);
     ReactDOM.render(<SetCashCard />, CONTENT_NODE)
 })

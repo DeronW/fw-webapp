@@ -22,7 +22,9 @@ const USER_PAGES = [
     'user-bank-support', //支持银行卡
     'user-card-management', //银行卡管理
     'user-verify-phone',
-    'user-settings' //更多
+    'user-settings', //更多
+    'user-jrgc-login',
+    'user-weixin'
 ]
 
 // 账单模块
@@ -37,6 +39,7 @@ const BILL_PAGES = [
 const APPLY_PAGES = [
     'apply-want', //我要借款页面
     'apply-confirm', //确认借款页面
+    'apply-result'
 ]
 
 // 借款服务协议页面
@@ -61,7 +64,7 @@ APP_NAMES.push(
     ...APP_NAMES,
     ...PROTOCOL_PAGES,
     ...DEVELOPING_PAGES
-)
+);
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
@@ -91,7 +94,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
         generate_task(PROJ, i, {
             cmd_prefix: 'pack',
-            api_path: '//m.easyloan888.com/',
+            api_path: '/',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: INCLUDE_COMPONENTS,
             include_less: INCLUDE_LESS,

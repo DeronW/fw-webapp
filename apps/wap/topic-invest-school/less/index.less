@@ -1,0 +1,97 @@
+
+@colorRed:#fa4f51;
+@colorWhite:#fff;
+@color5:#555;
+@colorEb:#ebebee;
+@colorE3:#e3e5ea;
+@colorD8:#d8d8d8;
+@fontSize32:32px;
+@fontSize28:28px;
+body{
+  width: 100%;
+  height: 100%;
+  background: @colorEb;
+}
+.investSchool{
+
+  .banner{
+    width: 100%;
+    height: 225px;
+  }
+  .tabGroup{
+    width: 100%;
+    display: table;
+    height: 90px;
+    line-height: 90px;
+    position: relative;
+    background: @colorEb;
+    margin-top: -4px;
+    padding: 0 0 4px;
+    .dashed1{
+      height: 30px;
+      width: 3px;
+      background: url("../images/dash.png") no-repeat;
+      position: absolute;
+      top: 30px;
+      left: 230px;
+    }
+    .dashed2{
+      height: 30px;
+      width: 3px;
+      background: url("../images/dash.png") no-repeat;
+      position: absolute;
+      top: 30px;
+      right: 250px;
+    }
+    .tabBlock{
+      float: left;
+      width: 33.33%;
+      text-align: center;
+      color: @color5;
+      font-size: @fontSize32;
+      background: @colorWhite;
+    }
+    .tab{
+      padding: 0 4px;
+      font-style: normal;
+      padding-bottom: 26px;
+    }
+    .selected{
+      color: @colorRed;
+      border-bottom: 4px solid @colorRed;
+    }
+  }
+  .space{
+    height: 20px;
+    width: 100%;
+    background: @colorEb;
+    border-top: 1px solid @colorD8;
+    border-bottom: 1px solid @colorD8;
+  }
+  .list{
+    width: 100%;
+    height: 100%;
+    background: @colorWhite;
+  }
+  .cell{
+    display: block;
+    margin-left: 30px;
+    height: 90px;
+    line-height: 90px;
+    border-bottom: @colorE3 1px solid;
+    font-size: @fontSize28;
+    color: @color5;
+    .cellText{
+      float: left;
+      width: 620px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .iconArrow{
+      float: right;
+      margin: 30px 30px 31px 0;
+    }
+
+  }
+}

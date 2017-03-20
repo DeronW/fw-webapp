@@ -1,161 +1,200 @@
 body {
-    background: #ebebec;
-    padding-bottom: 90px;
+  background: #ebebec;
+  padding-bottom: 90px;
 }
-
+.findBanner{
+  width: 100%;
+  min-height: 226px;
+}
 .banners {
-    height: 226px;
+  height: 226px;
 }
 
 .notice {
+  display: block;
+  height: 110px;
+  position: relative;
+  background: white;
+  .notice-icon {
     display: block;
-    height: 110px;
-    position: relative;
-    background: white;
-    .notice-icon {
-        display: block;
-        float: left;
-        margin-top: 26px;
-        margin-left: 30px;
+    float: left;
+    margin-top: 26px;
+    margin-left: 30px;
+  }
+  .sp-line {
+    width: 1px;
+    float: left;
+    background: #ddd;
+    height: 62px;
+    margin-top: 26px;
+    margin-left: 28px;
+  }
+  .right-arrow {
+    float: right;
+  }
+  .text {
+    vertical-align: middle;
+    position: absolute;
+    left: 150px;
+    top: 24px;
+    font-size: 24px;
+    height: 66px;
+    width: 505px;
+    line-height: 35px;
+    overflow: hidden;
+    a {
+      color: #555;
+      display: -webkit-box !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-all;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      //margin-bottom: 2px;
     }
-    .sp-line {
-        width: 1px;
-        float: left;
-        background: #ddd;
-        height: 60px;
-        margin-top: 26px;
-        margin-left: 30px;
-    }
-    .right-arrow {
-        float: right;
-    }
-    .text {
-        float: left;
-        margin-left: 30px;
-        height: 66px;
-        padding: 18px 0;
-        width: 500px;
-        line-height: 40px;
-        font-size: 24px;
-        overflow: hidden;
-        word-wrap: break-word;
-        text-overflow: ellipsis;
-    }
-    .icon-right-arrow {
-        position: absolute;
-        top: 44px;
-        right: 30px;
-        width: 16px;
-        height: 26px;
-        background: url(../images/8.png);
-    }
+  }
+  .icon-right-arrow {
+    position: absolute;
+    top: 44px;
+    right: 30px;
+    width: 16px;
+    height: 26px;
+    background: url(../images/8.png);
+  }
 }
 
 .channel {
-    background: #ebebee;
-    height: 236px;
-    border: 1px solid #d8d8d8;
-    border-left: 0;
-    border-right: 0;
-    a {
-        display: block;
-        height: 88px;
-        line-height: 88px;
-        width: 315px;
-        float: left;
-        margin-left: 30px;
-        margin-top: 20px;
-        background: white;
-        border-radius: 8px;
-        color: #555;
-        font-size: 28px;
-        text-align: right;
-        padding-right: 60px;
-        box-sizing: border-box;
-        i {
-            display: block;
-            float: left;
-            margin: 17px 0 0 42px;
-        }
+  background: #ebebee;
+  height: 236px;
+  border: 1px solid #d8d8d8;
+  border-left: 0;
+  border-right: 0;
+  a {
+    display: block;
+    height: 88px;
+    line-height: 88px;
+    width: 315px;
+    float: left;
+    margin-left: 30px;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    color: #555;
+    font-size: 28px;
+    text-align: right;
+    padding-right: 60px;
+    box-sizing: border-box;
+    i {
+      display: block;
+      float: left;
+      margin: 17px 0 0 42px;
     }
-    .icon-game {
-        background: url(../images/4.png);
-        width: 64px;
-        height: 61px;
-    }
-    .icon-bbs {
-        background: url(../images/3.png);
-        width: 69px;
-        height: 64px;
-    }
-    .icon-waiting {
-        background: url(../images/5.png);
-        width: 62px;
-        height: 54px;
-    }
-    .icon-faq {
-        background: url(../images/2.png);
-        width: 49px;
-        height: 58px;
-        margin-left: 48px !important;
-    }
+  }
+  .icon-game {
+    background: url(../images/4.png);
+    width: 64px;
+    height: 61px;
+    display: inline-block;
+    margin-top: 12px;
+  }
+  .icon-bbs {
+    background: url(../images/3.png);
+    width: 69px;
+    height: 64px;
+    display: inline-block;
+    margin-top: 14px;
+  }
+  .icon-waiting {
+    background: url(../images/class.png);
+    width: 62px;
+    height: 66px;
+    display: inline-block;
+    margin-top: 12px;
+    margin-left: 44px;
+  }
+  .icon-faq {
+    background: url(../images/2.png);
+    width: 49px;
+    height: 58px;
+    margin-left: 50px !important;
+    display: inline-block;
+    margin-top: 15px;
+  }
 }
 
 .title-recommended {
-    color: #333;
-    font-size: 30px;
-    background: #f9f9f9;
-    border-bottom: 1px solid #e3e5ea;
-    height: 70px;
-    line-height: 70px;
-    padding-left: 30px;
+  color: #333;
+  font-size: 30px;
+  background: #f9f9f9;
+  //border-bottom: 1px solid #e3e5ea;
+  height: 70px;
+  line-height: 70px;
+  padding-left: 30px;
 }
 
 .events {
-    background: white;
-    padding: 1px 0;
-    border: 1px solid #d8d8d8;
-    border-left: 0;
-    border-right: 0;
-    .event {
-        display: block;
-        // height: 150px;
-        width: 660px;
-        margin: 20px auto;
-
-        img {
-          display: block;
-          width: 100%;
-        }
+  background: white;
+  padding: 1px 0;
+  border-bottom: 1px solid #d8d8d8;
+  border-top:1px solid #e3e5ea;
+  //border-left: 0;
+  //border-right: 0;
+  .event {
+    display: block;
+    // height: 150px;
+    width: 660px;
+    margin: 20px auto;
+    img {
+      display: block;
+      width: 100%;
     }
+  }
 }
 
 .contact-us {
-    position: relative;
-    height: 50px;
-    margin: 0 30px;
-    font-size: 30px;
+  position: relative;
+  height: 50px;
+  margin: 0 30px;
+  font-size: 30px;
+  color: #4aa1f9;
+  padding-top: 18px;
+  a {
+    //display: block;
     color: #4aa1f9;
-    padding-top: 18px;
     i {
-        display: block;
-        float: left;
-        width: 25px;
-        height: 26px;
-        margin-right: 6px;
-        position: relative;
-        top: 9px;
+      display: inline-block;
+      vertical-align: middle;
     }
-    .service {
-        float: left;
-        .icon-service {
-            background: url(../images/6.png);
-        }
+    span {
+      display: inline-block;
+      vertical-align: middle;
     }
-    .about-us {
-        float: right;
-        .icon-about-us {
-            background: url(../images/7.png);
-        }
+    .about-us-grey {
+      color: #ccc;
     }
+  }
+  i {
+    display: block;
+    float: left;
+    width: 25px;
+    height: 26px;
+    margin-right: 6px;
+    position: relative;
+    top: 9px;
+  }
+  .service {
+    float: left;
+    .icon-service {
+      background: url(../images/6.png);
+    }
+  }
+  .about-us {
+    float: right;
+    .icon-about-us {
+      background: url(../images/7.png);
+    }
+    .icon-about-us-grey {
+      background: url(../images/7grey.png);
+    }
+  }
 }

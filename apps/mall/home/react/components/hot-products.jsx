@@ -12,7 +12,7 @@ const HotProducts = React.createClass({
                 recommendBizNo: this.state.bizNo,
                 totalCount: this.props.count
             }
-        }).then(data => this.setState({ ps: data.products }))
+        }).then(data => this.setState({ps: data.products || []}))
     },
     render: function () {
         if (this.state.ps.length === 0) return null;
@@ -20,8 +20,8 @@ const HotProducts = React.createClass({
         let hot_product_item = (product, index) => {
             return (
                 <a className={`hot-product-item hot-product-item-bg-${index + 1}`} key={index}
-                    href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
-                    <img className="hot-img" src={product.img} />
+                   href={`/static/mall/product-detail/index.html?bizNo=${product.bizNo}`}>
+                    <img className="hot-img" src={product.img}/>
                     <span className={"hot-img-title hot-img-title-color-" + parseInt(index + 1)}>
                         {product.abbreviation}</span>
                     <span
@@ -36,8 +36,8 @@ const HotProducts = React.createClass({
         return <div className="hot-product-list">
             <div className="hot-title">
                 {/*<img className="hot-title-img" src="images/hot-title.png" />*/}
-                <img className="hot-title-img" src="images/tmp-3.8-hot-products.png" />
-                <a className="link-more" href="/static/mall/activity/index.html?&bizNo=D0000001141&activity_id=d7cff05fc41d43a5aa3504a2a842b5c4">更多 &gt; </a>
+                <img className="hot-title-img" src="images/hot-title.png"/>
+                {/*<a className="link-more" href="/static/mall/activity/index.html?&bizNo=D0000001141&activity_id=d7cff05fc41d43a5aa3504a2a842b5c4">更多 &gt; </a>*/}
             </div>
             <div className="hot-product-wrap">
                 {this.state.ps.map(hot_product_item)}

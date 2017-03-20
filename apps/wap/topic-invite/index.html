@@ -1,69 +1,67 @@
 {% extends '../../../lib/templates/wap_base.swig.html' %}
 
-{% block title %}邀请返利{% endblock %}
+{% block title %}人脉总动员{% endblock %}
 
 {% block content %}
-
-<div id="header"></div>
-<!--/* 遮罩层 - start */-->
-<div class="shade" id="shade" style="display: none;">
-    <div class="close" onclick="javascript:this.parentNode.style.display='none'"></div>
-    <div class="detail">
-        <p>1、邀请返现券对应使用条件：最短投资标的期限、最低投资金额、有效期。可在“我的工场 - 优惠券”中查看返现券明细；</p>
-        <p>2、邀请返现券不可抵现金，不可转让，不能用于投资债权转让项目；</p>
-        <p>3、除特殊说明外，每次投标可使用多张返现券。投资时请务必勾选“使用返现券”，投资成功即返对应现金至金融工场账户，返还的现金可用于继续投资或提现；</p>
-        <p>
-            4、金融工场有权随时随机抽查邀请人推荐注册客户的真实性，一旦发现一例造假和欺骗行为，则立即终止邀请人和被邀请人的全部活动参加资格，回收已发放返现券并清除邀请人和被邀请人账户信息，并保留追究由此给金融工场带来的一切损失的权利；</p>
-        <p>5、本活动最终解释权归金融工场所有，详情可致电客服热线咨询：400-0322-988。</p>
+<div class="connection-box">
+    <div class="top">
+        <img src="images/top.png">
+    </div>
+    <div class="step">
+        <div class="step-item">
+            <img src="images/step-one.png">
+            <div class="step-text">好友填写邀请码<br/><span class="colorRed font28">成功注册</span></div>
+        </div>
+        <div class="step-item">
+            <img src="images/step-two.png">
+            <div class="step-text">好友30天内投资<br/><span  class="colorRed font28">满足升级条件</span></div>
+        </div>
+        <div class="step-item">
+            <img src="images/step-three.png">
+            <div class="step-text">邀请人立获<br/><span  class="colorRed font28">相应工豆奖励</span></div>
+        </div>
+    </div>
+    <div class="earn-box">
+        <img src="images/title-earn.png">
+        <img src="images/content-earn.png">
+        <div class="case-box">
+            <span class="case-title">举个例子：</span>工友A在2017年3月12日邀请了工友B，若工友B在注册后第10天
+            (3月21日)等级升为VIP1，则工友A会得到价值50元工豆，若在第15天等级升为VP2，可再获价值150元工豆，共获得
+            累计价值200元工豆；若工友B在注册后1天内等级升为VIP4，则工友A会得到价值2400元工豆（价值50元工豆+价值150
+            元工豆+价值700元工豆+价值1500元工豆）。
+        </div>
+    </div>
+    <div class="vip-box">
+        <img src="images/title-invite.png" class="title-invite">
+        <img src="images/title-vip.png" class="vip-pic">
+        <div class="vip-text">
+            <div class="text-item">
+                邀请人获<br/>
+                50元工豆
+            </div>
+            <div class="text-item">
+                邀请人获<br/>
+                150元工豆
+            </div>
+            <div class="text-item">
+                邀请人获<br/>
+                700元工豆
+            </div>
+            <div class="text-item">
+                邀请人获<br/>
+                1500元工豆
+            </div>
+        </div>
+    </div>
+    <div class="mj-box">
+        <div class="mj-text">
+            工豆会在好友注册后30天内(含注册当日)，根据<br/>
+            好友当时达到的相应等级实时发放相应的工豆。
+        </div>
+        <img src="images/xj.png" class="mj-pic">
+    </div>
+    <div class="footer">
+        <img src="images/footerbg.png">
     </div>
 </div>
-<!--/* 遮罩层 - end */-->
-
-<!--/* 遮罩层2 - start */-->
-<div class="cover2" id="cover2" style="display: none;">
-    <div class="bg"></div>
-    <div class="modal">
-        <div class="close2" onclick="javascript:this.parentNode.parentNode.style.display='none'"></div>
-        <a href="">
-            <img src="./images/not_bind_account.png">
-        </a>
-    </div>
-</div>
-<!--/* 遮罩层2 - end */-->
-
-<!--/* 遮罩层 3 - start */-->
-<div class="shade" id="cover3" style="display: none;">
-    <img src="./images/share.png" alt=""
-         onclick="document.getElementById('cover3').style.display='none'"/>
-</div>
-<!--/* 遮罩层3 - end */-->
-
-<div class="li_wx">
-    <div class="top"><img src="./images/conTop.png" alt=""/></div>
-    <div class="topList">
-        <img src="./images/conCont1.png" alt=""/>
-        <p>
-            <span>好友填写邀请码<br><em>成功注册</em></span>
-            <span>好友首次投资<br><em>满5000元</em></span>
-            <span>邀请人立获<br><em>50奖励</em></span>
-        </p>
-        <img src="./images/conCont2.png" alt=""/>
-    </div>
-    <div class="bot">
-        <div>邀请一名好友首投满<em>5000元</em>，“我”获<em>50元</em>返现券</div>
-        <div>邀请了N名好友首投<em>5000元</em>，“我”获<em>50*N元</em>返现券</div>
-        <div>邀请越多赚越多，<em>不设上限</em>，看看你人脉有多广！</div>
-    </div>
-    <div class="botBut">
-        <a onClick="invite()" style="display: none"><img src="./images/conContbut.png" alt=""/></a>
-        <a class="but" style="position: fixed;right: 60px;bottom: 60px;top: auto;">
-            <img onclick="document.getElementById('shade').style.display='block'"
-                 src="./images/conContbut-2.png" alt=""/></a>
-    </div>
-</div>
-
-<script>
-    function invite() {
-    }
-</script>
 {% endblock %}
