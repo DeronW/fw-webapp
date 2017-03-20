@@ -60,18 +60,11 @@ var PromptBlock = React.createClass({
 
                     {this.props.title}
                 </div>
-
-                /*{
-                    this.props.resDetails.map((data, index) => {
-                       	return  <div className="ui-prompt-text">
-                                    <span className="number-text">{data.giftAmount}</span>
-									{
-                                        data.giftType == 0 ? '元返现券礼包已经转入您的账户中' : '返息券已经转入您的账户中'
-                                    }
-                                </div>
-                    });
-                }*/
-			</div>
+                <div className="ui-prompt-text">
+                    <span className="number-text">{this.props.numberText}</span>
+                    {this.props.text}
+                </div>
+            </div>
         );
     }
 });
@@ -142,3 +135,4 @@ var AccountSucceedBody = React.createClass({
 $FW.DOMReady(() => {
     ReactDOM.render(<AccountSucceedBody />, CONTENT_NODE);
 });
+
