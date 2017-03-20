@@ -51,7 +51,6 @@ var Btn = React.createClass({
 
 var PromptBlock = React.createClass({
     render: function () {
-				console.log(this.props.resDetails);
         return (
             <div className="ui-prompt">
                 <div className="img">
@@ -127,7 +126,6 @@ var AccountSucceedBody = React.createClass({
                 <PromptBlock imgUrl={"images/succeed-1.png"} title={"注册成功"}
                     text={"元返现券已经转入您的账户中"}
                     numberText={this.state.registResultData.resvalue}
-					resDetails={this.state.registResultData}
                 />
                 <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler} />
 
