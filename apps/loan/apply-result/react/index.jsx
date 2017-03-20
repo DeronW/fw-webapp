@@ -17,7 +17,8 @@ const LoanResult = React.createClass({
             countdown: 0,
             loanStatus: null,
             bankName: filtered[0].bankShortName,
-            bankNo: filtered[0].cardNo.slice(-4)
+            bankNo: filtered[0].cardNo.slice(-4),
+            failReason:null
         }
     },
     // componentWillReceiveProps: function (nextProps) {
@@ -54,7 +55,6 @@ const LoanResult = React.createClass({
             sourceType: SOURCE_TYPE
         }).then((data) => {
             let finishFlag = true;
-
             if (data.loanStatus == 6) {
                 this.setState({
                     waitingResultShow: false,
@@ -64,6 +64,7 @@ const LoanResult = React.createClass({
                 this.setState({
                     waitingResultShow: false,
                     failResultShow: true,
+                    failReason:data.failReason
                 });
             } else {
                 finishFlag = false
@@ -79,6 +80,7 @@ const LoanResult = React.createClass({
                     this.setState({
                         waitingResultShow: false,
                         failResultShow: true,
+                        failReason:data.failReason
                     });
                 } else if (data.loanStatus == 4) {
                     this.setState({
@@ -180,7 +182,7 @@ const LoanResult = React.createClass({
                                 <div className="waiting-result">
                                     <div className="icon5"></div>
                                     <div className="icon5-info">借款失败</div>
-                                    <div className="icon5-info-btm">由于银行问题导致借款失败</div>
+                                    <div className="icon5-info-btm">{this.state.failReason}</div>
                                 </div>
                             </div>
                         </div>

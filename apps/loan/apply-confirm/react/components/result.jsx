@@ -7,7 +7,8 @@ const LoanResult = React.createClass({
             failResultShow: false,
             checkingResult: false,
             countdown: 0,
-            loanStatus: null
+            loanStatus: null,
+            failReason:null
         }
     },
     componentWillReceiveProps: function (nextProps) {
@@ -55,6 +56,7 @@ const LoanResult = React.createClass({
                 this.setState({
                     waitingResultShow: false,
                     failResultShow: true,
+                    failReason:data.failReason
                 });
             } else {
                 finishFlag = false
@@ -70,6 +72,7 @@ const LoanResult = React.createClass({
                     this.setState({
                         waitingResultShow: false,
                         failResultShow: true,
+                        failReason:data.failReason
                     });
                 } else if (data.loanStatus == 4) {
                     this.setState({
@@ -174,7 +177,7 @@ const LoanResult = React.createClass({
                                 <div className="icon4"></div>
                                 <div className="icon4-info">
                                     <div className="icon4-info-top">借款失败</div>
-                                    <div className="icon4-info-btm">由于银行问题导致借款失败</div>
+                                    <div className="icon4-info-btm">{this.state.failReason}</div>
                                 </div>
                                 <div className="line2"></div>
                                 <div className="waiting-result">
