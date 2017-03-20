@@ -164,10 +164,7 @@ const LoanResult = React.createClass({
                             </div>
                         </div>
                         <div className="btn-wrap">
-                            <div className="credit-btn"
-                                 onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`)}>
-                                去提额
-                            </div>
+                            <div className="apply-btn" onClick={() => {$FW.Browser.inApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>返回</div>
                         </div>
                     </div>
                     <div className={this.state.failResultShow ? "fail-result-box" : "fail-result-box dis"}>
