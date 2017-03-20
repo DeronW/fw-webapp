@@ -110,6 +110,10 @@ const LoanResult = React.createClass({
     render: function () {
         return (
             <div className="loan-result">
+                <div className="header">
+                    <div className="arrow-left" onClick={()=>{$FW.Browser.inApp()?NativeBridge.close():gotoHandler("/static/loan/home/index.html")}}></div>
+                    <div className="title">借款结果</div>
+                </div>
                 <div className="result-box">
                     <div className={this.state.waitingResultShow ? "waiting-result-box" : "waiting-result-box dis"}>
                         <div className="wrap-box">
@@ -205,16 +209,8 @@ const LoanResult = React.createClass({
 
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
-    NativeBridge.setTitle("借款结果");
+    NativeBridge.hideHeader();
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
-    // var clipboard = new Clipboard('.copy-qr');
-    // clipboard.on('success', function (e) {
-    //     $FW.Component.Toast('已复制fxhuaba到剪切板');
-    //     e.clearSelection();
-    // });
-    // clipboard.on('error', function (e) {
-    //     $FW.Component.Toast('请选择“拷贝”进行复制!');
-    // });
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
         token: USER.token,
         userGid: USER.gid,
