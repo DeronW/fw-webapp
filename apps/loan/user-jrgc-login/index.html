@@ -1,10 +1,13 @@
-{% extends '../../../lib/templates/loan_base.swig.html' %}
-
-{% block content %}
+{% extends '../../../lib/templates/loan_base.swig.html' %} {% block content %}
 <script>
-    function reload_jrgc(){
+    function reload_jrgc() {
         location.href = "/static/loan/user-jrgc-login/index.html"
     }
+
+    setTimeout(function () {
+        document.getElementById('delayPanel').style.display = 'block'
+    }, 1000)
+
 </script>
 
 <style>
@@ -14,15 +17,15 @@
         border-radius: 8px;
         background: #fd4d4c;
         color: white;
-        width:300px;
-        font-size:60px;
-        line-height:120px;
-        height:120px;
-        text-align:center;
+        width: 300px;
+        font-size: 60px;
+        line-height: 120px;
+        height: 120px;
+        text-align: center;
     }
 </style>
 
-<a class="relogin" onClick="reload_jrgc()">
-    刷新
-</a>
+<div id="delayPanel" style="display: none;">
+    <a class="relogin" onClick="reload_jrgc()"> 刷新 </a>
+</div>
 {% endblock %}
