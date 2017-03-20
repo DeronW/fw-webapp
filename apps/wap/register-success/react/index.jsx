@@ -51,7 +51,9 @@ var Btn = React.createClass({
 
 var PromptBlock = React.createClass({
     render: function () {
-		console.log(this.props.resDetails);
+		console.log(	this.props.resDetails); 
+		console.log(	this.props.resDetails.resDetails); 
+		console.log(typeof 	this.props.resDetails.resDetails); 
         return (
             <div className="ui-prompt">
                 <div className="img">
@@ -63,13 +65,13 @@ var PromptBlock = React.createClass({
                 </div>
 
 				{
-					this.props.resDetails.map((data, index) => {
+					/*this.props.resDetails.resDetails != '' ?  this.props.resDetails.resDetails.map((data, index) => {
 						<div className="ui-prompt-text">
 							<span className="number-text">{data.giftAmount}</span>
 							data.giftType == 0 ? '元返现券礼包已经转入您的账户中' : '返息券已经转入您的账户中'
 						</div>
 						
-					})	
+					}) : null	*/
 				}
             </div>
         );
@@ -125,7 +127,6 @@ var AccountSucceedBody = React.createClass({
                 </div>
                 <PromptBlock imgUrl={"images/succeed-1.png"} title={"注册成功"}
                     text={"元返现券已经转入您的账户中"}
-                    numberText={this.state.registResultData.resvalue}
                     resDetails={this.state.registResultData}
                 />
                 <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler} />
