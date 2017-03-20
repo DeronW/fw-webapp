@@ -35,9 +35,10 @@ const HotProducts = React.createClass({
         };
         return <div className="hot-product-list">
             <div className="hot-title">
-                {/*<img className="hot-title-img" src="images/hot-title.png" />*/}
-                <img className="hot-title-img" src="images/hot-title.png"/>
-                {/*<a className="link-more" href="/static/mall/activity/index.html?&bizNo=D0000001141&activity_id=d7cff05fc41d43a5aa3504a2a842b5c4">更多 &gt; </a>*/}
+                {/*<img className="hot-title-img" src="images/hot-title.png" />
+                <img className="hot-title-img" src="images/hot-title.png"/>*/}
+                <b>—— </b>奔向户外 给压力打折<b> ——</b>
+                <a className="link-more" href="/static/mall/activity/index.html?&bizNo=D0000001201">更多 &gt; </a>
             </div>
             <div className="hot-product-wrap">
                 {this.state.ps.map(hot_product_item)}
