@@ -51,7 +51,8 @@ var Btn = React.createClass({
 
 var PromptBlock = React.createClass({
     render: function () {
-		console.log(	this.props.resDetails); 
+		console.log(	this.props.resDetails == ''); 
+		console.log(	this.props.resDetails != ''); 
 		console.log(	this.props.resDetails.resDetails); 
 		console.log(typeof 	this.props.resDetails.resDetails); 
         return (
@@ -88,6 +89,7 @@ var AccountSucceedBody = React.createClass({
     },
     componentWillMount: function () {
         var _this = this;
+		
 
         $FW.Ajax({
             url: API_PATH + "mpwap/new/userLogin/registResult.shtml",
