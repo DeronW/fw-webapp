@@ -213,7 +213,6 @@ const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
     $FW.Browser.inAndroid() && NativeBridge.hideHeader();
     $FW.Browser.inIOS() && NativeBridge.setTitle('借款结果');
-    ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
         token: USER.token,
         userGid: USER.gid,
