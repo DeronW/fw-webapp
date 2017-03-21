@@ -61,7 +61,7 @@ const TOPIC_PAGES = [
     'topic-gong-you-hui', //工友会专题页面,
     'topic-invite-strategy',//邀请攻略页面
     'topic-novice-strategy',//新手策略页面
-    'topic-invest-school'
+    'topic-invest-school', // 投资学堂
 ]
 
 const HUISHANG_PAGES = [
@@ -134,11 +134,11 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-                `apps/${PROJ}/**/*.+(js|jsx)`,
-                '!node_modules/**',
-                '!**/jquery.*.js',
-                '!**.min.js'
-            ])
+            `apps/${PROJ}/**/*.+(js|jsx)`,
+            '!node_modules/**',
+            '!**/jquery.*.js',
+            '!**.min.js'
+        ])
             .pipe(eslint())
             .pipe(eslint.format());
     }))
