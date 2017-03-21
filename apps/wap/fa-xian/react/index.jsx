@@ -26,7 +26,7 @@ const Content = React.createClass({
             url: "https://fore.9888.cn/cms/api/appbanner.php",
             data: {
                 key: '0ca175b9c0f726a831d895e',
-                id: '37'//'33'
+                id: '33'//'33'
             },
             fail: () => true,
             complete: data => {
@@ -39,7 +39,7 @@ const Content = React.createClass({
             url: 'https://fore.9888.cn/cms/api/appbanner.php',
             data: {
                 key: '0ca175b9c0f726a831d895e',
-                id: q.banner_id || '33'//'30'
+                id: q.banner_id || '30'//'30'
             },
             fail: () => true,
             complete: data => this.setState({
@@ -51,7 +51,7 @@ const Content = React.createClass({
             url: 'https://fore.9888.cn/cms/api/appbanner.php',
             data: {
                 key: '0ca175b9c0f726a831d895e',
-                id: q.topic_id || '34'//'31'
+                id: q.topic_id || '31'//'31'
             },
             fail: () => true,
             complete: data => this.setState({
