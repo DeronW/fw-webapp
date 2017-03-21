@@ -116,7 +116,7 @@ const LoanResult = React.createClass({
                         <div className="title">借款结果</div>
                     </div>
                 }
-                <div className="result-box">
+                <div className={$FW.Browser.inIOS()? "result-box-ios" : "result-box"}>
                     <div className={this.state.waitingResultShow ? "waiting-result-box" : "waiting-result-box dis"}>
                         <div className="wrap-box">
                             <div className="success-icon"><img src="images/success-icon.png" /></div>
