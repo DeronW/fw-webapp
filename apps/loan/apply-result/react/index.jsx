@@ -110,7 +110,13 @@ const LoanResult = React.createClass({
     render: function () {
         return (
             <div className="loan-result">
-                <div className="result-box">
+                {$FW.Browser.inAndroid() &&
+                    <div className="header">
+                        <div className="arrow-left" onClick={()=>{$FW.Browser.inApp()?NativeBridge.close():gotoHandler("/static/loan/home/index.html")}}></div>
+                        <div className="title">借款结果</div>
+                    </div>
+                }
+                <div className={$FW.Browser.inIOS()? "result-box-ios" : "result-box"}>
                     <div className={this.state.waitingResultShow ? "waiting-result-box" : "waiting-result-box dis"}>
                         <div className="wrap-box">
                             <div className="success-icon"><img src="images/success-icon.png" /></div>
@@ -205,16 +211,8 @@ const LoanResult = React.createClass({
 
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
-    NativeBridge.setTitle("借款结果");
-    ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
-    // var clipboard = new Clipboard('.copy-qr');
-    // clipboard.on('success', function (e) {
-    //     $FW.Component.Toast('已复制fxhuaba到剪切板');
-    //     e.clearSelection();
-    // });
-    // clipboard.on('error', function (e) {
-    //     $FW.Component.Toast('请选择“拷贝”进行复制!');
-    // });
+    $FW.Browser.inAndroid() && NativeBridge.hideHeader();
+    $FW.Browser.inIOS() && NativeBridge.setTitle('借款结果');
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
         token: USER.token,
         userGid: USER.gid,

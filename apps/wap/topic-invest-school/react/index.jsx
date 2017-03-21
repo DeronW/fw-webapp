@@ -19,7 +19,7 @@ const InvestSchool = React.createClass({
     },
     componentDidMount(){
         this.getBannerFun();
-        this.getListHandler(38);
+        this.getListHandler(34);
     },
     getBannerFun(){
         $FW.Ajax({
@@ -27,7 +27,7 @@ const InvestSchool = React.createClass({
             type: 'get',
             data: {
                 key: '0ca175b9c0f726a831d895e',
-                id: 41 // 37
+                id: 37 // 37
             },
             dataType: 'json',
             fail: ()=>true,
@@ -39,11 +39,11 @@ const InvestSchool = React.createClass({
     toggleTabHandler(t){
         this.setState({tab: t});
         if (t == "投资百科") {
-            this.getListHandler(38); //34
+            this.getListHandler(34); //34
         } else if (t == "投资者技巧") {
-            this.getListHandler(39); //35
+            this.getListHandler(35); //35
         } else {
-            this.getListHandler(40); //36
+            this.getListHandler(36); //36
         }
     },
     getListHandler(id){
@@ -59,9 +59,12 @@ const InvestSchool = React.createClass({
         })
     },
     render(){
+        let tabStyle = {
+            paddingBottom: $FW.Browser.inIOS() ? "23px" : "26px"
+        };
         let tab = (t, i)=> {
             return <div className="tabBlock" key={i} onClick={()=>this.toggleTabHandler(t)}>
-                <em className={this.state.tab==t?"tab selected":'tab'}>{t}</em>
+                <em style={tabStyle} className={this.state.tab==t?"tab selected":'tab'}>{t}</em>
             </div>
         };
         return <div className="investSchool">
@@ -85,7 +88,7 @@ InvestSchool.List = React.createClass({
     render(){
         let cell = (item, index)=> {
             return <a className="cell" key={index} href={item.url}>
-                <div className="cellText">{item.desc}</div>
+                <div className="cellText">{item.title}</div>
                 <img className="iconArrow" src="images/arrow.png"/>
             </a>
         };

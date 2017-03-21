@@ -12,22 +12,23 @@ body {
 
 .notice {
   display: block;
-  height: 110px;
+  height: 90px;
   position: relative;
   background: white;
   .notice-icon {
     display: block;
     float: left;
-    margin-top: 26px;
-    margin-left: 30px;
+    margin-top: 14px;
+    margin-left: 26px;
+    transform: scale(0.9);
   }
   .sp-line {
     width: 1px;
     float: left;
     background: #ddd;
-    height: 62px;
-    margin-top: 26px;
-    margin-left: 28px;
+    height: 56px;
+    margin-top: 18px;
+    margin-left: 26px;
   }
   .right-arrow {
     float: right;
@@ -35,27 +36,31 @@ body {
   .text {
     vertical-align: middle;
     position: absolute;
-    left: 150px;
-    top: 24px;
+    left: 146px;
+    top: 28px;
     font-size: 24px;
-    height: 66px;
+    height: 36px;
     width: 505px;
     line-height: 35px;
     overflow: hidden;
     a {
+      display: block;
+      width: 505px;
       color: #555;
-      display: -webkit-box !important;
       overflow: hidden;
-      text-overflow: ellipsis;
-      word-break: break-all;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+      //overflow: hidden;
+      //text-overflow: ellipsis;
+      //word-break: break-all;
+      //-webkit-box-orient: vertical;
+      //-webkit-line-clamp: 2;
       //margin-bottom: 2px;
     }
   }
   .icon-right-arrow {
     position: absolute;
-    top: 44px;
+    top: 32px;
     right: 30px;
     width: 16px;
     height: 26px;

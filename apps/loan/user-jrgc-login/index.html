@@ -2,27 +2,40 @@
 
 {% block content %}
 <script>
-    function reload_jrgc(){
+    function reload_jrgc() {
         location.href = "/static/loan/user-jrgc-login/index.html"
     }
+
+    setTimeout(function () {
+        document.getElementById('delayPanel').style.display = 'block'
+    }, 4000)
+
 </script>
 
 <style>
+    #delayPanel{position:absolute;top:50%;left:50%;-webkit-transform: translate(-50%,-50%);transform:translate(-50%,-50%);}
+    .tip{width:100%;font-size:38px;color:#333;text-align:center;}
+    .tip-img{text-align:center;margin-top:60px;}
+    .tip-info{font-size:26px;color:#666;line-height:45px;text-align:center;margin-top:70px;}
+    .tip-info a{color:#6aa4f0;}
     .relogin {
         display: block;
-        margin: 200px auto;
-        border-radius: 8px;
-        background: #fd4d4c;
-        color: white;
-        width:300px;
-        font-size:60px;
-        line-height:120px;
-        height:120px;
-        text-align:center;
+        width:578px;
+        height:72px;
+        line-height:72px;
+        border:1px solid #6aa4f0;
+        border-radius: 4px;
+        color: #6aa4f0;
+        font-size: 30px;
+        text-align: center;
+        margin:30px auto;
     }
 </style>
 
-<a class="relogin" onClick="reload_jrgc()">
-    刷新
-</a>
+<div id="delayPanel" style="display: none;">
+    <div class="tip">很抱歉，访问此页面暂时出现问题</div>
+    <div class="tip-img"><img src="images/icon.png"/></div>
+    <div class="tip-info">你可点击下方按钮刷新页面<br/>或拨打<a href="tel:400-102-0066">400-102-0066</a>联系客服</div>
+    <a class="relogin" onClick="reload_jrgc()"> 刷新 </a>
+</div>
 {% endblock %}

@@ -169,8 +169,10 @@ const BannerGroup = React.createClass({
             overflow: 'hidden',
             visibility: this.state.show ? 'visible' : 'hidden',
             position: 'relative',
-            transform: 'translate3d(0, 0, 0)'
-        };
+            transform: 'translate3d(0, 0, 0)',
+            background: '#fff'
+    }
+        ;
 
         let image = (img, index) => {
             return (

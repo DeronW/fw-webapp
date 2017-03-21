@@ -222,8 +222,8 @@ const USER = $FW.Store.getUserDict();
 const user = USER;
 
 $FW.DOMReady(function () {
-    console.log(window.navigator.userAgent.toLowerCase())
     NativeBridge.setTitle('放心花');
+
     $FW.Post(`${API_PATH}api/loan/v1/baseinfo.json`, {
         token: USER.token,
         userGid: USER.gid,
@@ -232,7 +232,10 @@ $FW.DOMReady(function () {
         productId: 1
     }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
-    }, e => $FW.Capture(e));
+    }, e => {
+        $FW.Components.Alert(e.toString())
+        $FW.Capture(e)
+    });
 
     !$FW.Browser.inApp() && ReactDOM.render(<BottomNavBar index={1} />, BOTTOM_NAV_NODE)
 });
