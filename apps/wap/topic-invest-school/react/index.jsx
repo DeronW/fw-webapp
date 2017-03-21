@@ -60,7 +60,7 @@ const InvestSchool = React.createClass({
     },
     render(){
         let tabStyle = {
-            paddingBottom: $FW.Browser.inIOS ? "23px" : "26px"
+            paddingBottom: $FW.Browser.inIOS() ? "23px" : "26px"
         };
         let tab = (t, i)=> {
             return <div className="tabBlock" key={i} onClick={()=>this.toggleTabHandler(t)}>
