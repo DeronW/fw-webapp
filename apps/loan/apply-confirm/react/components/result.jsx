@@ -8,7 +8,7 @@ const LoanResult = React.createClass({
             checkingResult: false,
             countdown: 0,
             loanStatus: null,
-            failReason:null
+            failReason: null
         }
     },
     componentWillReceiveProps: function (nextProps) {
@@ -25,13 +25,14 @@ const LoanResult = React.createClass({
         });
     },
     countingDown() {
-        let {countdown} = this.state;
-        this.setState({ countdown: 56});
+        this.setState({ countdown: 56 });
         this.checkAjax();
+
         this.timer = setInterval(() => {
-            if(countdown % 10 === 0) this.checkAjax();
-            this.setState({ countdown: countdown - 1 });
-            if (countdown <= 0) clearInterval(this.timer);
+            let c = this.state.countdown;
+            if (c % 10 === 0) this.checkAjax();
+            this.setState({ countdown: c - 1 });
+            if (c <= 0) clearInterval(this.timer);
         }, 1000);
     },
     checkAjax() {
@@ -56,13 +57,13 @@ const LoanResult = React.createClass({
                 this.setState({
                     waitingResultShow: false,
                     failResultShow: true,
-                    failReason:data.failReason
+                    failReason: data.failReason
                 });
             } else {
                 finishFlag = false
             }
 
-            if(this.state.countdown <= 0 ){
+            if (this.state.countdown <= 0) {
                 if (data.loanStatus == 6) {
                     this.setState({
                         waitingResultShow: false,
@@ -72,18 +73,18 @@ const LoanResult = React.createClass({
                     this.setState({
                         waitingResultShow: false,
                         failResultShow: true,
-                        failReason:data.failReason
+                        failReason: data.failReason
                     });
                 } else if (data.loanStatus == 4) {
                     this.setState({
                         waitingResultShow: false,
                         checkingResult: true
                     });
-                }else {
+                } else {
                     finishFlag = false
                 }
             }
-            if(finishFlag) clearInterval(this.timer);
+            if (finishFlag) clearInterval(this.timer);
         }, (err) => { $FW.Component.Toast(err.message) });
 
     },
@@ -100,7 +101,7 @@ const LoanResult = React.createClass({
         return (
             <div className="loan-result">
                 <div className="header">
-                    <div className="arrow-left" onClick={()=>{gotoHandler("/static/loan/home/index.html")}}></div>
+                    <div className="arrow-left" onClick={() => { gotoHandler("/static/loan/home/index.html") }}></div>
                     <div className="title">借款结果</div>
                 </div>
                 <div className="result-box">
@@ -113,7 +114,7 @@ const LoanResult = React.createClass({
                                 <div className="line"></div>
                                 <div className="waiting-result">
                                     <div className="icon2"></div>
-                                    <div className="icon2-info">预计{this.state.countdown > 0 ? `${this.state.countdown}s` : 0}之后给您处理结果</div>
+                                    <div className="icon2-info">预计{this.state.countdown > 0 ? `${this.state.countdown}s` : '1s'}之后给您处理结果</div>
                                 </div>
                             </div>
                             <div className="customer-service">
