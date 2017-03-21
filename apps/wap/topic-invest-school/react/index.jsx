@@ -19,7 +19,7 @@ const InvestSchool = React.createClass({
     },
     componentDidMount(){
         this.getBannerFun();
-        this.getListHandler(38);
+        this.getListHandler(34);
     },
     getBannerFun(){
         $FW.Ajax({
