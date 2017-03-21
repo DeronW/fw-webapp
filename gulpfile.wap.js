@@ -82,6 +82,7 @@ const HUISHANG_PAGES = [
     'modification-phone', // 修改银行预留手机号
 ]
 
+// 守山相关的提现页面
 const SHOUSHAN = [
     'shoushan-reset-deal-password',
     'shoushan-cash',
