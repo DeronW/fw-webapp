@@ -110,10 +110,12 @@ const LoanResult = React.createClass({
     render: function () {
         return (
             <div className="loan-result">
-                <div className="header">
-                    <div className="arrow-left" onClick={()=>{$FW.Browser.inApp()?NativeBridge.close():gotoHandler("/static/loan/home/index.html")}}></div>
-                    <div className="title">借款结果</div>
-                </div>
+                {$FW.Browser.inAndroid() &&
+                    <div className="header">
+                        <div className="arrow-left" onClick={()=>{$FW.Browser.inApp()?NativeBridge.close():gotoHandler("/static/loan/home/index.html")}}></div>
+                        <div className="title">借款结果</div>
+                    </div>
+                }
                 <div className="result-box">
                     <div className={this.state.waitingResultShow ? "waiting-result-box" : "waiting-result-box dis"}>
                         <div className="wrap-box">
@@ -209,7 +211,8 @@ const LoanResult = React.createClass({
 
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
-    NativeBridge.hideHeader();
+    $FW.Browser.inAndroid() && NativeBridge.hideHeader();
+    $FW.Browser.inIOS() && NativeBridge.setTitle('借款结果');
     ReactDOM.render(<Header title={"借款结果"} />, HEADER_NODE);
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
         token: USER.token,
