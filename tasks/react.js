@@ -1,7 +1,7 @@
 const gulp = require('gulp');
-const changed = require('gulp-changed');
-const plumber = require('gulp-plumber');
-const plugins = require('gulp-load-plugins')();
+const changed = require('gulp-changed');  // Only pass through changed files
+const plumber = require('gulp-plumber'); // Prevent pipe breaking caused by errors from gulp plugins
+const plugins = require('gulp-load-plugins')(); // Loads gulp plugins from package dependencies and attaches them to an object
 const babel = require('gulp-babel');
 const js_uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
