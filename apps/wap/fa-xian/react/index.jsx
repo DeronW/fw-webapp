@@ -61,19 +61,19 @@ const Content = React.createClass({
         this.moveNoticeHandler()
     },
     moveNoticeHandler() {
-        var distance = 68;
+        var distance = 36;
         this.Timer = setInterval(() => {
             let { position, notice } = this.state;
-            if (position > (notice.length - 2) * 68) {
+            if (position > (notice.length - 2) * 36) {
                 setTimeout(() => {
                     this.setState({
                         position: 0
                     });
-                    distance = 68;
+                    distance = 36;
                 }, 2000)
             } else {
                 if (distance == position) {
-                    distance += 66;
+                    distance += 34;
                     this.moveHandler(distance)
                 } else {
                     this.moveHandler(distance)
@@ -121,7 +121,7 @@ const Content = React.createClass({
         };
 
         let noticeFn = (item, index) => {
-            return <a onClick={() => gotoHandler(item.url)} style={position} key={index}> {item.desc} </a>
+            return <a onClick={() => gotoHandler(item.url)} style={position} key={index}> {item.title} </a>
         };
         return (
             <div>
