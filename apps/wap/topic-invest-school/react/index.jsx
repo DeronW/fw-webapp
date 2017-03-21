@@ -88,7 +88,7 @@ InvestSchool.List = React.createClass({
     render(){
         let cell = (item, index)=> {
             return <a className="cell" key={index} href={item.url}>
-                <div className="cellText">{item.desc}</div>
+                <div className="cellText">{item.title}</div>
                 <img className="iconArrow" src="images/arrow.png"/>
             </a>
         };
