@@ -66,7 +66,7 @@ const Login = React.createClass({
             phone: this.state.val1
         }
         $FW.Ajax({
-            url: `http://mld.9888.cn/mall/login/setCode.json`,
+            url: `/mall/login/setCode.json`,
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
@@ -138,13 +138,12 @@ const Login = React.createClass({
             code: this.state.val2
         }
         $FW.Ajax({
-            url: `http://mld.9888.cn/mall/login/login.json`,
+            url: `/mall/login/login.json`,
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
-                $FW.Component.Alert("结果：" + data.code)
-
-            }.bind(this)
+                window.location.href="/static/mall/home/index.html"
+             }.bind(this)
         })
 
     },
