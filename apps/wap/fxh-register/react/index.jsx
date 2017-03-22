@@ -43,10 +43,15 @@ class PasswordInput extends React.Component {
           <img src="images/password.png"/>
         </div>
         <input
-          placeholder="请输入验证码" />
-        <div className="toggle-password-display">
+          type={this.props.type}
+          value={this.props.value}
+          placeholder="请输入密码，8-16位数字字母组合"
+          onChange={this.props.handleChange} />
+        <div
+          className="toggle-password-display"
+          onClick={this.props.handleClick}>
           <img
-            src={this.props.tooglePasswordDisplay ?
+            src={this.props.togglePasswordDisplay ?
                     "images/show-password.png" :
                     "images/hide-password.png"} />
         </div>
@@ -60,45 +65,70 @@ class InteractWrap extends React.Component {
     super();
     this.state = {
       phoneNum: null,
-      timeRemainForNewCode: 60
+      timeRemainForNewCode: 6,
+      password: '',
+      showPassword: false
     }
-    this.handleInput = this.handleInput.bind(this);
+    this.handlePhoneNumInput = this.handlePhoneNumInput.bind(this);
     this.getVerificationCode = this.getVerificationCode.bind(this);
+    this.handlePasswordInput = this.handlePasswordInput.bind(this);
+    this.togglePasswordDisplay = this.togglePasswordDisplay.bind(this);
   }
 
-  handleInput(e) {
-    this.setState({phoneNum: e.target.value})
+  handlePhoneNumInput(e) {
+    this.setState({phoneNum: e.target.value});
   }
 
   getVerificationCode() {
-    if (this.state.timeRemainForNewCode === 60) {
-      var dmk = setInterval(() => {
-        this.setState({timeRemainForNewCode: this.state.timeRemainForNewCode - 1});
-      }, 1000);
-      //
-      // $FW.Post(`${API_PATH}`, {
-      //
-      // }).then(
-      //
-      // );
+    if (this.state.timeRemainForNewCode === 6) {
+      if (isPhoneNum(this.state.phoneNum)) {
+        var countdown = setInterval(() => {
+          this.setState({timeRemainForNewCode: this.state.timeRemainForNewCode - 1});
+          if (this.state.timeRemainForNewCode === 0) {
+            clearInterval(countdown);
+            this.setState({timeRemainForNewCode: 6});
+          }
+        }, 1000);
+        //
+        // $FW.Post(`${API_PATH}`, {
+        //
+        // }).then(
+        //
+        // );
+      } else {
+        $FW.Component.Toast("手机号格式不正确");
+      }
     }
   }
 
+  handlePasswordInput(e) {
+    this.setState({password: e.target.value});
+  }
+
+  togglePasswordDisplay() {
+    this.setState({showPassword: !this.state.showPassword});
+  }
+
   handleSubmit() {
+
   }
 
   render() {
     return (
       <div className="interact-wrap">
         <PhoneNumInput
-          handleChange={this.handleInput}
+          handleChange={this.handlePhoneNumInput}
           value={this.state.phoneNum} />
         <VerificationCodeInput
-          verificationCodeInfo={this.state.timeRemainForNewCode === 60 ?
+          verificationCodeInfo={this.state.timeRemainForNewCode === 6 ?
                                     "获取验证码" : (this.state.timeRemainForNewCode + "s")}
           handleClick={this.getVerificationCode} />
         <PasswordInput
-          tooglePasswordDisplay={false} />
+          type={this.state.showPassword ? "text" : "password"}
+          togglePasswordDisplay={!this.state.showPassword}
+          handleChange={this.handlePasswordInput}
+          handleClick={this.togglePasswordDisplay}
+          value={this.state.password} />
         <button
           className="register-button"
           onClick={this.handleSubmit}>
