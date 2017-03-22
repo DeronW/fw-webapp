@@ -24,7 +24,9 @@ class VerificationCodeInput extends React.Component {
           <img src="images/veri-code.png"/>
         </div>
         <input
-          placeholder="请输入验证码" />
+          placeholder="请输入验证码"
+          value={this.props.value}
+          onChange={this.props.handleChange} />
         <div
           className="veri-code-info"
           onClick={this.props.handleClick}>
@@ -64,18 +66,25 @@ class InteractWrap extends React.Component {
   constructor() {
     super();
     this.state = {
-      phoneNum: null,
-      timeRemainForNewCode: 6,
+      phoneNum: '',
       password: '',
+      verificationCode: '',
+      timeRemainForNewCode: 6,
       showPassword: false
     }
     this.handlePhoneNumInput = this.handlePhoneNumInput.bind(this);
+    this.handleVeriCodeInput = this.handleVeriCodeInput.bind(this);
     this.getVerificationCode = this.getVerificationCode.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.togglePasswordDisplay = this.togglePasswordDisplay.bind(this);
+    this.ifEssentialsExist = this.ifEssentialsExist.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handlePhoneNumInput(e) {
+    if (/[^0-9]/.test(e.target.value)) {
+      return;
+    }
     this.setState({phoneNum: e.target.value});
   }
 
@@ -97,8 +106,16 @@ class InteractWrap extends React.Component {
         // );
       } else {
         $FW.Component.Toast("手机号格式不正确");
+        this.setState({phoneNum: ''});
       }
     }
+  }
+
+  handleVeriCodeInput(e) {
+    if (/[^0-9]/.test(e.target.value)) {
+      return;
+    }
+    this.setState({verificationCode: e.target.value});
   }
 
   handlePasswordInput(e) {
@@ -109,8 +126,32 @@ class InteractWrap extends React.Component {
     this.setState({showPassword: !this.state.showPassword});
   }
 
-  handleSubmit() {
+  ifEssentialsExist() {
+    var essentialTypeNames = {phoneNum: "手机号", verificationCode: "验证码", password: "密码"};
+    for (var typeName in essentialTypeNames) {
+      if (essentialTypeNames.hasOwnProperty(typeName)) {
+        if (!this.state[typeName]) {
+          $FW.Component.Toast("请输入" + essentialTypeNames[typeName] + "！");
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
+  handleSubmit() {
+    if (this.ifEssentialsExist()) {
+      if (isPhoneNum(this.state.phoneNum)) {
+        if (isPasswordValid(this.state.password)) {
+          // AJAX
+        } else {
+          this.setState({password: ''});
+        }
+      } else {
+        $FW.Component.Toast("手机号格式不正确");
+        this.setState({phoneNum: '', verificationCode: '', password: ''});
+      }
+    }
   }
 
   render() {
@@ -120,8 +161,10 @@ class InteractWrap extends React.Component {
           handleChange={this.handlePhoneNumInput}
           value={this.state.phoneNum} />
         <VerificationCodeInput
+          value={this.state.verificationCode}
           verificationCodeInfo={this.state.timeRemainForNewCode === 6 ?
                                     "获取验证码" : (this.state.timeRemainForNewCode + "s")}
+          handleChange={this.handleVeriCodeInput}
           handleClick={this.getVerificationCode} />
         <PasswordInput
           type={this.state.showPassword ? "text" : "password"}
@@ -145,6 +188,33 @@ class InteractWrap extends React.Component {
 function isPhoneNum(phoneNum) {
   const phoneNumFormat = /^1[3|4|5|7|8]\d{9}$/;
   return phoneNumFormat.test(phoneNum);
+}
+
+function isPasswordValid(password) {
+  const typePattern = /[^A-Za-z0-9]/;
+  const includeNumPattern = /[0-9]+/;
+  const includeAlphabetPattern = /[A-Za-z]+/;
+  if (!typePattern.test(password)) {
+    if (password.length >= 8 && password.length <= 16) {
+      if (includeNumPattern.test(password)) {
+        if (includeAlphabetPattern.test(password)) {
+          return true;
+        } else {
+          $FW.Component.Toast("密码需至少包含1位字母");
+          return false;
+        }
+      } else {
+        $FW.Component.Toast("密码需至少包含1位数字");
+        return false;
+      }
+    } else {
+      $FW.Component.Toast("密码长度需在8-16位");
+      return false;
+    }
+  } else {
+    $FW.Component.Toast("密码只能包含数字和字母");
+    return false;
+  }
 }
 
 
