@@ -60,7 +60,7 @@ const Content = React.createClass({
 
     },
     startMovingNotice() {
-        setInterval(this.moveNoticeHandler, 2000)
+        setInterval(this.moveNoticeHandler, 3000)
     },
     moveNoticeHandler() {
         let singleH = 36, step = 2;
@@ -69,6 +69,7 @@ const Content = React.createClass({
         this._notice_timer = setInterval(() => {
             p = this.state.position - step;
             if (p <= old_position - singleH) clearInterval(this._notice_timer);
+            // console.log(p, old_position, p <= old_position - singleH, p <= -singleH * notice.length)
             if (p <= -singleH * notice.length) {
                 clearInterval(this._notice_timer);
                 p = 0;
