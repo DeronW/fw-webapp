@@ -65,7 +65,7 @@ const SendCode = React.createClass({
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
-                location.href = ""
+                location.href = "/static/mall/order-confirm/index.html" + location.search
             }.bind(this)
         })
     },
