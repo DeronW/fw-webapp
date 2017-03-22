@@ -100,7 +100,8 @@ const Content = React.createClass({
         if (link) gotoHandler(link);
     },
     bdHandler() {
-        if (this._count++ > 6) location.href = 'https://m.9888.cn/static/test-native-bridge/index.html'
+        if (this._count++ > 6)
+            gotoHandler('https://m.9888.cn/static/test-native-bridge/index.html')
     },
     render() {
         let { banners } = this.state;
@@ -139,7 +140,7 @@ const Content = React.createClass({
                 </div>
 
                 <div className="channel">
-                    <a onClick={() => gotoHandler('https://m.dougemall.com/static/mall/game/index.html?mallHead=true', true)}>
+                    <a onClick={() => gotoHandler('https://m.dougemall.com/static/mall/game/index.html', true)}>
                         <i className="icon-game"></i>游戏中心 </a>
                     <a onClick={() => gotoHandler("https://bbs.9888.cn/", true)}>
                         <i className="icon-bbs"></i>工友之家 </a>
