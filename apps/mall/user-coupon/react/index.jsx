@@ -25,51 +25,19 @@ const SendCode = React.createClass({
         var mobileNo = query.mobileNo;
         return {
             mobileNo: mobileNo,
-            reSend: true,
-            value: 60,
             active: false,
             code: ""
         }
     },
 
-    //倒计时递减
-    decline: function () {
-        this.setState({value: this.state.value - 1});
-    },
-
-    //倒计时
-    tick: function () {
-        this.interval = setInterval(this.decline, 1000);
-    },
-
-    stopTick: function () {
-        clearInterval(this.interval);
-    },
-
-    //重新发送验证码
-    reSend: function () {
-        $FW.Ajax({
-            url: API_PATH + 'mall/api/payment/v1/SendPhoneVerifyPay.json',
-            enable_loading: 'mini',
-            success: function (data) {
-                if (!this.state.reSend) return;
-                this.setState({value: 60, reSend: false});
-                this.tick()
-            }.bind(this)
-        })
-    },
-
     //加载完成之后立刻倒计时
     componentDidMount: function () {
-        this.reSend();
+
     },
 
     //倒计时完成终止
     componentDidUpdate: function () {
-        if (this.state.value == 0) {
-            this.stopTick();
-            this.setState({value: "获取验证码", reSend: true});
-        }
+
     },
 
     //激活下一步
@@ -89,17 +57,15 @@ const SendCode = React.createClass({
     nextStep: function () {
         if (!this.state.active) return;
         var FormData = {
-            smsCode: this.state.code
+            cheapCode: this.state.code
         }
+        alert(JSON.stringify(FormData));
         $FW.Ajax({
-            url: `${API_PATH}/mall/api/payment/v1/validatePaySmsCode.json`,
+            url: `/mall/api/cheap/v1/bondCheapCode.json`,
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
-
-                /*var query = $FW.Format.urlQuery();
-                 var bizNo = query.bizNo;
-                 */
+                location.href = ""
             }.bind(this)
         })
     },
@@ -109,9 +75,9 @@ const SendCode = React.createClass({
             <div>
                 <div className="input-wrap">
                     <input type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
-                    <input type="button" className="msg-tip"
+                    <input type="button" className={this.state.active ? "msg-tip active":"msg-tip"}
                            value={"兑换"}
-                           onClick={this.reSend}/>
+                           onClick={this.nextStep}/>
                     <span className="vertical-line"></span>
                 </div>
             </div>
