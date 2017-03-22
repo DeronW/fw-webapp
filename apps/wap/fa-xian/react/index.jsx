@@ -64,12 +64,11 @@ const Content = React.createClass({
     },
     moveNoticeHandler() {
         let singleH = 36, step = 2;
-        let p, { notice } = this.state, old_position = this.state.position;
+        let p, { notice } = this.state, old_position = parseInt('' + this.state.position);
 
         this._notice_timer = setInterval(() => {
             p = this.state.position - step;
             if (p <= old_position - singleH) clearInterval(this._notice_timer);
-            // console.log(p, old_position, p <= old_position - singleH, p <= -singleH * notice.length)
             if (p <= -singleH * notice.length) {
                 clearInterval(this._notice_timer);
                 p = 0;
