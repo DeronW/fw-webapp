@@ -8,7 +8,9 @@ class PhoneNumInput extends React.Component {
           <img src="images/phone.png"/>
         </div>
         <input
-          placeholder="请输入手机号" />
+          placeholder="请输入手机号"
+          onChange={this.props.handleChange}
+          value={this.props.value} />
       </div>
     )
   }
@@ -23,7 +25,9 @@ class VerificationCodeInput extends React.Component {
         </div>
         <input
           placeholder="请输入验证码" />
-        <div className="veri-code-info">
+        <div
+          className="veri-code-info"
+          onClick={this.props.handleClick}>
           {this.props.verificationCodeInfo}
         </div>
       </div>
@@ -52,15 +56,54 @@ class PasswordInput extends React.Component {
 }
 
 class InteractWrap extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      phoneNum: null,
+      timeRemainForNewCode: 60
+    }
+    this.handleInput = this.handleInput.bind(this);
+    this.getVerificationCode = this.getVerificationCode.bind(this);
+  }
+
+  handleInput(e) {
+    this.setState({phoneNum: e.target.value})
+  }
+
+  getVerificationCode() {
+    if (this.state.timeRemainForNewCode === 60) {
+      var dmk = setInterval(() => {
+        this.setState({timeRemainForNewCode: this.state.timeRemainForNewCode - 1});
+      }, 1000);
+      //
+      // $FW.Post(`${API_PATH}`, {
+      //
+      // }).then(
+      //
+      // );
+    }
+  }
+
+  handleSubmit() {
+  }
+
   render() {
     return (
       <div className="interact-wrap">
-        <PhoneNumInput />
+        <PhoneNumInput
+          handleChange={this.handleInput}
+          value={this.state.phoneNum} />
         <VerificationCodeInput
-          verificationCodeInfo="获取验证码" />
+          verificationCodeInfo={this.state.timeRemainForNewCode === 60 ?
+                                    "获取验证码" : (this.state.timeRemainForNewCode + "s")}
+          handleClick={this.getVerificationCode} />
         <PasswordInput
           tooglePasswordDisplay={false} />
-        <button className="register-button">立即领钱</button>
+        <button
+          className="register-button"
+          onClick={this.handleSubmit}>
+          立即领钱
+        </button>
       </div>
     )
   }
@@ -69,7 +112,7 @@ class InteractWrap extends React.Component {
 
 // functions
 
-function verifyPhoneNumFormat(phoneNum) {
+function isPhoneNum(phoneNum) {
   const phoneNumFormat = /^1[3|4|5|7|8]\d{9}$/;
   return phoneNumFormat.test(phoneNum);
 }

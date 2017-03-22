@@ -43,8 +43,8 @@ $FW.DOMReady(function () {
                 if (data.invitationRecord.length == 0 && page == 1) {
                     $("#more").html("暂无数据");
                 } else if (data.invitationRecord.length < 20 && page == 1) {
-                    $("#more").html("已经到结尾");
-                }
+                    $("#more").html("已全部显示");
+                }　
                 if (data.invitationRecord.length > 0) {
                     var str = '';
                     for (var i = 0; i < data.invitationRecord.length; i++) {
@@ -58,7 +58,7 @@ $FW.DOMReady(function () {
                     page++;
                 } else if (page > 1) {
                     loadNextPage = false
-                    $("#more").html("已经到结尾");
+                    $("#more").html("已全部显示");
                 }
                 done && done();
             }, (e) => {

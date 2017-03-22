@@ -62,7 +62,8 @@ const TOPIC_PAGES = [
     'topic-invite-strategy',//邀请攻略页面
     'topic-novice-strategy',//新手策略页面
     'topic-invest-school', // 投资学堂
-    'fxh-register' // 注册页面
+    'fxh-register', // 注册页面
+    'fxh-jrgc-invite'//放心花金融工场邀请页面
 ]
 
 const HUISHANG_PAGES = [

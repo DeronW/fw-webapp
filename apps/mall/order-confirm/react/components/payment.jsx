@@ -25,8 +25,8 @@ const PaymentPanel = React.createClass({
             voucher_list: this.state.voucher_list
         });
     },
-    toggleCouponModal: function () {
-
+    toggleCoupon: function () {
+        window.location.href = "/static/mall/user-coupon/index.html" + location.search
     },
     toggleVoucherModal: function () {
         this.setState({show_voucher_modal: !this.state.show_voucher_modal})
@@ -97,9 +97,8 @@ const PaymentPanel = React.createClass({
         return (
             <div className="balance-wrap">
                 <div className="account-box">
-                    <div className="coupons" onClick={this.toggleCouponModal}>
-                        <div className="coupons-l">优惠券{this.state.checked_voucher_count ? null :
-                            <span className="avail-coupon">{this.props.ordersTicketNum}张可用</span>}</div>
+                    <div className="coupons" onClick={this.toggleCoupon}>
+                        <div className="coupons-l">优惠券</div>
                         {this.state.checked_voucher_count ? null : <div className="coupons-r"></div>}
                         {voucherName.map((l, index) => checked_voucher(l, index)) }
                     </div>

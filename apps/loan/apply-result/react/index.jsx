@@ -18,30 +18,21 @@ const LoanResult = React.createClass({
             loanStatus: null,
             bankName: filtered[0].bankShortName,
             bankNo: filtered[0].cardNo.slice(-4),
-            failReason:null
+            failReason: null
         }
     },
-    // componentWillReceiveProps: function (nextProps) {
-    //     this.resetState(nextProps)
-    // },
     componentWillUnmount() {
         clearInterval(this.timer);
     },
-    // resetState: function (props) {
-    //     this.setState({
-    //         waitingResultShow: props.check,
-    //         //successResultShow: props.success,
-    //         //failResultShow: props.fail
-    //     });
-    // },
     countingDown() {
-        let { countdown } = this.state;
         this.setState({ countdown: 56 });
         this.checkAjax();
+
         this.timer = setInterval(() => {
-            if (countdown % 10 === 0) this.checkAjax();
-            this.setState({ countdown: countdown - 1 });
-            if (countdown <= 0) clearInterval(this.timer);
+            let c = this.state.countdown;
+            if (c % 10 === 0) this.checkAjax();
+            this.setState({ countdown: c - 1 });
+            if (c <= 0) clearInterval(this.timer);
         }, 1000);
     },
     checkAjax() {
@@ -64,7 +55,7 @@ const LoanResult = React.createClass({
                 this.setState({
                     waitingResultShow: false,
                     failResultShow: true,
-                    failReason:data.failReason
+                    failReason: data.failReason
                 });
             } else {
                 finishFlag = false
@@ -80,7 +71,7 @@ const LoanResult = React.createClass({
                     this.setState({
                         waitingResultShow: false,
                         failResultShow: true,
-                        failReason:data.failReason
+                        failReason: data.failReason
                     });
                 } else if (data.loanStatus == 4) {
                     this.setState({
@@ -96,27 +87,21 @@ const LoanResult = React.createClass({
 
     },
     componentDidMount() {
-
         this.countingDown();
-        //this.resetState(this.props);
-
     },
-    // resultHide: function () {
-    //     this.props.callbackResultHide(false);
-    // },
-    copyHandler(){
-      NativeBridge.clipboard("fxhuaba");
+    copyHandler() {
+        NativeBridge.clipboard("fxhuaba");
     },
     render: function () {
         return (
             <div className="loan-result">
                 {$FW.Browser.inAndroid() &&
                     <div className="header">
-                        <div className="arrow-left" onClick={()=>{$FW.Browser.inApp()?NativeBridge.close():gotoHandler("/static/loan/home/index.html")}}></div>
+                        <div className="arrow-left" onClick={() => { $FW.Browser.inApp() ? NativeBridge.close() : gotoHandler("/static/loan/home/index.html") }}></div>
                         <div className="title">借款结果</div>
                     </div>
                 }
-                <div className={$FW.Browser.inIOS()? "result-box-ios" : "result-box"}>
+                <div className={$FW.Browser.inIOS() ? "result-box-ios" : "result-box"}>
                     <div className={this.state.waitingResultShow ? "waiting-result-box" : "waiting-result-box dis"}>
                         <div className="wrap-box">
                             <div className="success-icon"><img src="images/success-icon.png" /></div>
@@ -126,7 +111,7 @@ const LoanResult = React.createClass({
                                 <div className="line"></div>
                                 <div className="waiting-result">
                                     <div className="icon2"></div>
-                                    <div className="icon2-info">预计{this.state.countdown > 0 ? `${this.state.countdown}s` : 0}之后给您处理结果</div>
+                                    <div className="icon2-info">预计{this.state.countdown > 0 ? `${this.state.countdown}s` : '1s'}之后给您处理结果</div>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +133,7 @@ const LoanResult = React.createClass({
                             </div>
                         </div>
                         <div className="btn-wrap">
-                            <div className="credit-btn" onClick={() => {$FW.Browser.inApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>返回</div>
+                            <div className="credit-btn" onClick={() => { $FW.Browser.inApp() ? NativeBridge.close() : gotoHandler('/static/loan/home/index.html') }}>返回</div>
                         </div>
                     </div>
                     <div className={this.state.successResultShow ? "success-result-box" : "success-result-box dis"}>

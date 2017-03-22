@@ -70,7 +70,7 @@ const BankManagement = React.createClass({
                     <div className="verify-pop">
                         <div className="verify-tip">您离成功借钱只差一步<br />请先完成必填认证！</div>
                         <div className="verify-pop-close" onClick={this.closeHandler}></div>
-                        <a className="verify-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>去认证</a>
+                        <a className="verify-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>去认证</a>
                     </div>
                 </div>
             </div>
