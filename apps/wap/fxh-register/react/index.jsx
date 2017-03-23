@@ -70,6 +70,7 @@ class InteractWrap extends React.Component {
       password: '',
       verificationCode: '',
       timeRemainForNewCode: 6,
+      codeToken: '',
       showPassword: false
     }
     this.handlePhoneNumInput = this.handlePhoneNumInput.bind(this);
@@ -99,11 +100,13 @@ class InteractWrap extends React.Component {
           }
         }, 1000);
         //
-        // $FW.Post(`${API_PATH}`, {
-        //
-        // }).then(
-        //
-        // );
+        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+          mobile: this.state.phoneNum,
+          userOperationType: 3
+          // sourceType: SOURCE_TYPE
+        }).then((data) => {
+          this.setState({codeToken: data.codeToken});
+        }, e => $FW.Component.Toast(e.message));
       } else {
         $FW.Component.Toast("手机号格式不正确");
         this.setState({phoneNum: ''});
@@ -143,7 +146,18 @@ class InteractWrap extends React.Component {
     if (this.ifEssentialsExist()) {
       if (isPhoneNum(this.state.phoneNum)) {
         if (isPasswordValid(this.state.password)) {
-          // AJAX
+          //
+          $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
+            channelCode: $FW.Format.urlQuery().channelCode,
+            codeToken: this.state.codeToken,
+            invitationCode: $FW.Format.urlQuery().code,
+            mobile: this.state.phoneNum,
+            password: this.state.password,
+            verifyCode: this.state.verificationNum
+            // sourceType: SOURCE_TYPE
+          }).then(data => {
+            // window.location.href =\ "/static/loan/weixin-attention/index.html"
+          }, e => $FW.Component.Toast(e.message))
         } else {
           this.setState({password: ''});
         }
