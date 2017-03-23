@@ -60,11 +60,11 @@ const Content = React.createClass({
 
     },
     startMovingNotice() {
-        setInterval(this.moveNoticeHandler, 2000)
+        setInterval(this.moveNoticeHandler, 3000)
     },
     moveNoticeHandler() {
         let singleH = 36, step = 2;
-        let p, { notice } = this.state, old_position = this.state.position;
+        let p, { notice } = this.state, old_position = parseInt('' + this.state.position);
 
         this._notice_timer = setInterval(() => {
             p = this.state.position - step;
