@@ -11,7 +11,6 @@ function gotoHandler(link, need_login) {
 
 const Content = React.createClass({
     getInitialState() {
-        this.TIMER = null;
         this._count = 0;
 
         return {
@@ -30,7 +29,7 @@ const Content = React.createClass({
             },
             fail: () => true,
             complete: data => {
-                this.setState({ notice: data })
+                this.setState({ notice: data }, this.startMovingNotice);
             }
         });
         let q = $FW.Format.urlQuery();
@@ -58,38 +57,24 @@ const Content = React.createClass({
                 topics: data.map(i => ({ url: i.url, img: i.thumb }))
             })
         })
-        this.moveNoticeHandler()
+
+    },
+    startMovingNotice() {
+        setInterval(this.moveNoticeHandler, 3000)
     },
     moveNoticeHandler() {
-        var distance = 36;
-        this.Timer = setInterval(() => {
-            let { position, notice } = this.state;
-            if (position > (notice.length - 2) * 36) {
-                setTimeout(() => {
-                    this.setState({
-                        position: 0
-                    });
-                    distance = 36;
-                }, 2000)
-            } else {
-                if (distance == position) {
-                    distance += 34;
-                    this.moveHandler(distance)
-                } else {
-                    this.moveHandler(distance)
-                }
+        let singleH = 36, step = 2;
+        let p, { notice } = this.state, old_position = parseInt('' + this.state.position);
+
+        this._notice_timer = setInterval(() => {
+            p = this.state.position - step;
+            if (p <= old_position - singleH) clearInterval(this._notice_timer);
+            if (p <= -singleH * notice.length) {
+                clearInterval(this._notice_timer);
+                p = 0;
             }
-        }, 20)
-    },
-    moveHandler(distance) {
-        let s = 0;
-        setTimeout(() => {
-            s = (distance - this.state.position) / 8;
-            s = s > 0 ? Math.ceil(s) : Math.floor(s);
-            this.setState({
-                position: this.state.position + s
-            });
-        }, 2000);
+            this.setState({ position: p });
+        }, 30)
     },
     onImageClickHandler(index) {
         let link = null;
@@ -104,7 +89,7 @@ const Content = React.createClass({
             gotoHandler('https://m.9888.cn/static/test-native-bridge/index.html')
     },
     render() {
-        let { banners } = this.state;
+        let { banners, notice, position } = this.state;
 
         let topic = (t, index) => {
             return <a className="event" key={index} onClick={() => gotoHandler(t.url)}>
@@ -117,13 +102,11 @@ const Content = React.createClass({
             banner_group = <BannerGroup className="banners"
                 onImageClick={this.onImageClickHandler}
                 images={banners.map(i => i.img)} />;
-        let position = {
-            transform: 'translateY(-' + this.state.position + 'px)'
-        };
 
         let noticeFn = (item, index) => {
-            return <a onClick={() => gotoHandler(item.url)} style={position} key={index}> {item.title} </a>
+            return <a onClick={() => gotoHandler(item.url)} key={index}> {item.title} </a>
         };
+
         return (
             <div>
                 <div className="findBanner">
@@ -134,7 +117,10 @@ const Content = React.createClass({
 
                     <div className="sp-line"></div>
                     <div className="text">
-                        {this.state.notice.map(noticeFn)}
+                        <div className="text-scroll-panel" style={{ top: `${position}px` }}>
+                            {notice.map(noticeFn)}
+                            {notice[0] && noticeFn(notice[0])}
+                        </div>
                     </div>
                     <i className="icon-right-arrow"></i>
                 </div>
