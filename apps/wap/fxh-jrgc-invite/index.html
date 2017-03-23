@@ -1,4 +1,7 @@
 {% extends '../../../lib/templates/wap_base.swig.html' %}
+{% block head_javascripts %}
+<script src="javascripts/jquery-2.1.4.min.js"></script>
+{% endblock %}
 {% block content %}
 <div id="header"></div>
 <div class="bg1">
@@ -116,7 +119,4 @@
        <div class="pop-contact">客服热线：<a href="tel:400-102-0066">400-102-0066</a></div>
    </div>
 </div>
-{% endblock %}
-{% block extra_javascripts %}
-<script src="javascripts/jquery-2.1.4.min.js"></script>
 {% endblock %}
