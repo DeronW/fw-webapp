@@ -102,8 +102,8 @@ class InteractWrap extends React.Component {
         //
         $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
           mobile: this.state.phoneNum,
-          userOperationType: 3
-          // sourceType: SOURCE_TYPE
+          userOperationType: 3,
+          sourceType: SOURCE_TYPE
         }).then((data) => {
           this.setState({codeToken: data.codeToken});
         }, e => $FW.Component.Toast(e.message));
@@ -153,11 +153,28 @@ class InteractWrap extends React.Component {
             invitationCode: $FW.Format.urlQuery().code,
             mobile: this.state.phoneNum,
             password: this.state.password,
-            verifyCode: this.state.verificationNum
-            // sourceType: SOURCE_TYPE
-          }).then(data => {
-            // window.location.href =\ "/static/loan/weixin-attention/index.html"
-          }, e => $FW.Component.Toast(e.message))
+            verifyCode: this.state.verificationCode,
+            sourceType: SOURCE_TYPE
+          }).then((data) => {
+            var channel = '';
+            if ($FW.Browser.inApp && $FW.Browser.inMobile) {
+              channel = app;
+            } else if ($FW.Browser.inWeixin && $FW.Browser.inMobile) {
+              channel = wx;
+            } else {
+              return;
+            }
+            window.location.href = `/static/loan/outside-register-success-${channel}/index.html`;
+          }, (e) => {
+            if (!this.state.codeToken) {
+              $FW.Component.Toast("请点击获取验证码！");
+              return;
+            }
+            $FW.Component.Toast(e.message);
+            if (/验证码不正确/.test(e.message)) {
+              this.setState({verificationCode: ''});
+            };
+          })
         } else {
           this.setState({password: ''});
         }
