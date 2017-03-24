@@ -83,7 +83,7 @@ class InteractWrap extends React.Component {
   }
 
   handlePhoneNumInput(e) {
-    if (/[^0-9]/.test(e.target.value)) {
+    if (/[^0-9]/.test(e.target.value) || e.target.value.length > 11) {
       return;
     }
     this.setState({phoneNum: e.target.value});
@@ -134,7 +134,7 @@ class InteractWrap extends React.Component {
     for (var typeName in essentialTypeNames) {
       if (essentialTypeNames.hasOwnProperty(typeName)) {
         if (!this.state[typeName]) {
-          $FW.Component.Toast("请输入" + essentialTypeNames[typeName] + "！");
+          $FW.Component.Toast(essentialTypeNames[typeName] + "为空，请重新输入");
           return false;
         }
       }
@@ -220,15 +220,10 @@ function isPasswordValid(password) {
   const includeAlphabetPattern = /[A-Za-z]+/;
   if (!typePattern.test(password)) {
     if (password.length >= 8 && password.length <= 16) {
-      if (includeNumPattern.test(password)) {
-        if (includeAlphabetPattern.test(password)) {
-          return true;
-        } else {
-          $FW.Component.Toast("密码需至少包含1位字母");
-          return false;
-        }
+      if (includeNumPattern.test(password) && includeAlphabetPattern.test(password)) {
+        return true;
       } else {
-        $FW.Component.Toast("密码需至少包含1位数字");
+        $FW.Component.Toast("密码过于简单，请输入8-16位的字母和数字组合密码");
         return false;
       }
     } else {
