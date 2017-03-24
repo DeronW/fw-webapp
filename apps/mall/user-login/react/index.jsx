@@ -4,9 +4,9 @@ function removeAllSpace(str) {
 
 const Login = React.createClass({
     getInitialState: function () {
-        this.tabs = ['veri', 'pwd'];
+        this.tabs = ['veri'];//, 'pwd'
         return {
-            tab: 'no_default_tab',
+            tab: 'veri',
             val1: "",
             val2: "",
             val3: "",
