@@ -191,9 +191,9 @@ const ApplyLoan = React.createClass({
         return (
             <div className="apply-loan">
                 {!$FW.Browser.inApp() && <div className="header">放心花</div>}
-                <div className="ad">
+                {$FW.Browser.inApp() && <div className="ad">
                     <a href="https://m.9888.cn/static/wap/fxh-jrgc-invite/index.html"><img src="images/banner.jpg"/></a>
-                </div>
+                </div>}
                 <div className="loan-num">
                     {this.getBorrowBtn()}
                 </div>
