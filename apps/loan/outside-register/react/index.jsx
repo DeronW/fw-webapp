@@ -1,6 +1,11 @@
 // components
 
 class PhoneNumInput extends React.Component {
+  constructor() {
+    super();
+    this.state = { enableClear: false };
+  }
+
   render() {
     return (
       <div className="input-wrap phone">
@@ -10,17 +15,42 @@ class PhoneNumInput extends React.Component {
         <input
           type="number"
           placeholder="请输入手机号"
-          onChange={this.props.handleChange}
-          value={this.props.value} />
+          value={this.props.value}
+          onChange={(e) => {
+            if (e.target.value.length > 11) {
+              return;
+            }
+            this.setState({ enableClear: e.target.value ? true : false});
+            this.props.handleChange(e, 'phoneNum');
+          }}
+          onFocus={(e) => {this.setState({ enableClear: e.target.value ? true : false});}}
+          onBlur={() => {setTimeout(() => {this.setState({ enableClear: false });}, 10);}} />
+          {/* reason for setTimeout:
+            clicking on the clear button triggers `blur` event
+            for input element first, if enableClear is set to
+            false instantly, there would be no clear button,
+            and no `click` event for it will be triggered! */}
+          { this.state.enableClear &&
+            <div
+              className="clear-btn"
+              onClick={() => {this.props.handleClear('phoneNum');}}>
+              <img src="images/clear-copy.png" alt="clear button"></img>
+            </div>
+          }
       </div>
     )
   }
 }
 
 class VerificationCodeInput extends React.Component {
+  constructor() {
+    super();
+    this.state = { enableClear: false };
+  }
+
   render() {
     return (
-      <div className="input-wrap verification-code">
+      <div className="input-wrap">
         <div className="input-type-icon">
           <img src="images/veri-code.png"/>
         </div>
@@ -28,11 +58,24 @@ class VerificationCodeInput extends React.Component {
           type="number"
           placeholder="请输入验证码"
           value={this.props.value}
-          onChange={this.props.handleChange} />
+          onChange={(e) => {
+            this.setState({ enableClear: e.target.value ? true : false});
+            this.props.handleChange(e, 'verificationCode');}}
+          onFocus={(e) => {this.setState({ enableClear: e.target.value ? true : false});}}
+          onBlur={() => {setTimeout(() => {this.setState({ enableClear: false });}, 10);}} />
         <div
-          className="veri-code-info"
-          onClick={this.props.handleClick}>
-          {this.props.verificationCodeInfo}
+          className="veri-code-info">
+          { this.state.enableClear &&
+            <div
+              className="clear-btn"
+              onClick={() => {this.props.handleClear('verificationCode');}}>
+              <img src="images/clear-copy.png" alt="clear button"></img>
+            </div>
+          }
+          <div
+            onClick={this.props.handleClick}>
+            {this.props.verificationCodeInfo}
+          </div>
         </div>
       </div>
     )
@@ -40,24 +83,43 @@ class VerificationCodeInput extends React.Component {
 }
 
 class PasswordInput extends React.Component {
+  constructor() {
+    super();
+    this.state = { enableClear: false };
+  }
+
   render() {
     return (
-      <div className="input-wrap verification-code">
+      <div className="input-wrap">
         <div className="input-type-icon">
           <img src="images/password.png"/>
         </div>
         <input
           type={this.props.type}
-          value={this.props.value}
           placeholder="请输入密码，8-16位数字字母组合"
-          onChange={this.props.handleChange} />
-        <div
-          className="toggle-password-display"
-          onClick={this.props.handleClick}>
-          <img
-            src={this.props.togglePasswordDisplay ?
-                    "images/show-password.png" :
-                    "images/hide-password.png"} />
+          value={this.props.value}
+          onChange={(e) => {
+            this.setState({ enableClear: e.target.value ? true : false});
+            this.props.handleChange(e, 'password');}
+          }
+          onFocus={(e) => {this.setState({ enableClear: e.target.value ? true : false});}}
+          onBlur={() => {setTimeout(() => {this.setState({ enableClear: false });}, 10);}} />
+        <div className="password-opts-wrap">
+          { this.state.enableClear &&
+            <div
+              className="clear-btn"
+              onClick={() => {this.props.handleClear('password');}}>
+              <img src="images/clear-copy.png" alt="clear button"></img>
+            </div>
+          }
+          <div
+            className="toggle-password-display"
+            onClick={this.props.handleClick}>
+            <img
+              src={this.props.togglePasswordDisplay ?
+                      "images/show-password.png" :
+                      "images/hide-password.png"} />
+          </div>
         </div>
       </div>
     )
@@ -75,30 +137,26 @@ class InteractWrap extends React.Component {
       codeToken: '',
       showPassword: false
     }
-    this.handlePhoneNumInput = this.handlePhoneNumInput.bind(this);
-    this.handleVeriCodeInput = this.handleVeriCodeInput.bind(this);
+    this.handleInput = this.handleInput.bind(this);
     this.getVerificationCode = this.getVerificationCode.bind(this);
-    this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.togglePasswordDisplay = this.togglePasswordDisplay.bind(this);
+    this.clearInput = this.clearInput.bind(this);
     this.ifEssentialsExist = this.ifEssentialsExist.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handlePhoneNumInput(e) {
-    if (e.target.value.length > 11) {
-      return;
-    }
-    this.setState({phoneNum: e.target.value});
+  handleInput(e, inputType) {
+    this.setState({[inputType]: e.target.value});
   }
 
   getVerificationCode() {
-    if (this.state.timeRemainForNewCode === 6) {
+    if (this.state.timeRemainForNewCode === 6) {  // time for test
       if (isPhoneNum(this.state.phoneNum)) {
         var countdown = setInterval(() => {
           this.setState({timeRemainForNewCode: this.state.timeRemainForNewCode - 1});
           if (this.state.timeRemainForNewCode === 0) {
             clearInterval(countdown);
-            this.setState({timeRemainForNewCode: 6});
+            this.setState({timeRemainForNewCode: 6});  // time for test
           }
         }, 1000);
         //
@@ -116,20 +174,16 @@ class InteractWrap extends React.Component {
     }
   }
 
-  handleVeriCodeInput(e) {
-    this.setState({verificationCode: e.target.value});
-  }
-
-  handlePasswordInput(e) {
-    this.setState({password: e.target.value});
-  }
-
   togglePasswordDisplay() {
     this.setState({showPassword: !this.state.showPassword});
   }
 
+  clearInput(inputType) {
+    this.setState({[inputType]: ''});
+  }
+
   ifEssentialsExist() {
-    var essentialTypeNames = {phoneNum: "手机号", verificationCode: "验证码", password: "密码"};
+    var essentialTypeNames = {'phoneNum': '手机号', 'verificationCode': '验证码', 'password': '密码'};
     for (var typeName in essentialTypeNames) {
       if (essentialTypeNames.hasOwnProperty(typeName)) {
         if (!this.state[typeName]) {
@@ -181,20 +235,23 @@ class InteractWrap extends React.Component {
     return (
       <div className="interact-wrap">
         <PhoneNumInput
-          handleChange={this.handlePhoneNumInput}
-          value={this.state.phoneNum} />
+          handleChange={this.handleInput}
+          value={this.state.phoneNum}
+          handleClear={this.clearInput} />
         <VerificationCodeInput
           value={this.state.verificationCode}
           verificationCodeInfo={this.state.timeRemainForNewCode === 6 ?
                                     "获取验证码" : (this.state.timeRemainForNewCode + "s")}
-          handleChange={this.handleVeriCodeInput}
-          handleClick={this.getVerificationCode} />
+          handleChange={this.handleInput}
+          handleClick={this.getVerificationCode}
+          handleClear={this.clearInput} />
         <PasswordInput
           type={this.state.showPassword ? "text" : "password"}
           togglePasswordDisplay={!this.state.showPassword}
-          handleChange={this.handlePasswordInput}
+          handleChange={this.handleInput}
           handleClick={this.togglePasswordDisplay}
-          value={this.state.password} />
+          value={this.state.password}
+          handleClear={this.clearInput} />
         <button
           className="register-button"
           onClick={this.handleSubmit}>

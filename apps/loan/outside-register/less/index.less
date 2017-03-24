@@ -26,6 +26,15 @@
   font-family: "PingFang";
 }
 
+.small-icon-pattern {
+  position: relative;
+  width: 75px;
+  height: 100%;
+  img {
+    .center-element;
+  }
+}
+
 // main style
 * {
   box-sizing: border-box;
@@ -33,7 +42,6 @@
 
 body {
   background: url("../images/bg.jpg") no-repeat;
-  // background: #ccc;
 }
 
 .interact-wrap {
@@ -87,19 +95,31 @@ body {
   }
 }
 
+.phone {
+  .clear-btn {
+    .small-icon-pattern;
+    .right-align-element;
+  }
+}
+
 .veri-code-info {
+  display: inline-flex;
   .right-align-element;
   padding-right: 24px;
   .font-style-default;
   line-height: @input-field-height;
+
+  .clear-btn {
+    .small-icon-pattern;
+  }
 }
 
-.toggle-password-display {
-  width: 78px;
+.password-opts-wrap {
+  display: inline-flex;
   .right-align-element;
 
-  img {
-    .center-element;
+  .toggle-password-display, .clear-btn {
+    .small-icon-pattern;
   }
 }
 

@@ -20,6 +20,7 @@ const USER_PAGES = [
     'user-contribute', // 用户贡献值
     'user-evaluate', // 投资风险承受能力评估
     'vip-prerogative', // VIP特权详情页
+    'user-evaluate-p2p',//p2p投资风险承受能力评估
 ]
 
 const PROTOCOL_PAGES = [
