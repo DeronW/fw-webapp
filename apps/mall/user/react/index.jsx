@@ -115,6 +115,10 @@ const User = React.createClass({
                         <img src="images/icon10.jpg"/>
                         <span className="box-title3">客服热线</span>
                     </a>
+                    <a className="list-box" href="https://dougemall.qiyukf.com/client?k=b0ecf23066d7645f98686b64260485da&wp=1">
+                        <img src="images/icon10.jpg"/>
+                        <span className="box-title3">在线客服</span>
+                    </a>
                     <a className="list-box" href="/static/mall/user-help/index.html">
                         <img src="images/icon12.jpg"/>
                         <span className="box-title4">帮助中心</span>
