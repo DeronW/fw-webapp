@@ -1,5 +1,5 @@
+const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
-    const USER = $FW.Store.getUserDict();
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('掌上钱包，随用随取');
     } else {
