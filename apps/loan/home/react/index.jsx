@@ -192,7 +192,7 @@ const ApplyLoan = React.createClass({
             <div className="apply-loan">
                 {!$FW.Browser.inApp() && <div className="header">放心花</div>}
                 {$FW.Browser.inApp() && <div className="ad">
-                    <a href="https://m.9888.cn/static/wap/fxh-jrgc-invite/index.html"><img src="images/banner.jpg"/></a>
+                    <a onClick={()=>gotoHandler("https://m.9888.cn/static/wap/fxh-jrgc-invite/index.html")}><img src="images/banner.jpg"/></a>
                 </div>}
                 <div className="loan-num">
                     {this.getBorrowBtn()}
