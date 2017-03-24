@@ -8,6 +8,7 @@ class PhoneNumInput extends React.Component {
           <img src="images/phone.png"/>
         </div>
         <input
+          type="number"
           placeholder="请输入手机号"
           onChange={this.props.handleChange}
           value={this.props.value} />
@@ -24,6 +25,7 @@ class VerificationCodeInput extends React.Component {
           <img src="images/veri-code.png"/>
         </div>
         <input
+          type="number"
           placeholder="请输入验证码"
           value={this.props.value}
           onChange={this.props.handleChange} />
@@ -83,7 +85,7 @@ class InteractWrap extends React.Component {
   }
 
   handlePhoneNumInput(e) {
-    if (/[^0-9]/.test(e.target.value)) {
+    if (e.target.value.length > 11) {
       return;
     }
     this.setState({phoneNum: e.target.value});
@@ -115,9 +117,6 @@ class InteractWrap extends React.Component {
   }
 
   handleVeriCodeInput(e) {
-    if (/[^0-9]/.test(e.target.value)) {
-      return;
-    }
     this.setState({verificationCode: e.target.value});
   }
 
@@ -134,7 +133,7 @@ class InteractWrap extends React.Component {
     for (var typeName in essentialTypeNames) {
       if (essentialTypeNames.hasOwnProperty(typeName)) {
         if (!this.state[typeName]) {
-          $FW.Component.Toast("请输入" + essentialTypeNames[typeName] + "！");
+          $FW.Component.Toast(essentialTypeNames[typeName] + "为空，请重新输入");
           return false;
         }
       }
@@ -156,8 +155,8 @@ class InteractWrap extends React.Component {
             verifyCode: this.state.verificationCode,
             sourceType: SOURCE_TYPE
           }).then((data) => {
-            var type = $FW.Format.urlQuery().type;
-            window.location.href = `/static/loan/outside-register-success-${type}/index.html`;
+            var jumpType = $FW.Format.urlQuery().jumpType;
+            window.location.href = `/static/loan/outside-register-success-${jumpType}/index.html`;
           }, (e) => {
             if (!this.state.codeToken) {
               $FW.Component.Toast("请点击获取验证码！");
@@ -220,15 +219,10 @@ function isPasswordValid(password) {
   const includeAlphabetPattern = /[A-Za-z]+/;
   if (!typePattern.test(password)) {
     if (password.length >= 8 && password.length <= 16) {
-      if (includeNumPattern.test(password)) {
-        if (includeAlphabetPattern.test(password)) {
-          return true;
-        } else {
-          $FW.Component.Toast("密码需至少包含1位字母");
-          return false;
-        }
+      if (includeNumPattern.test(password) && includeAlphabetPattern.test(password)) {
+        return true;
       } else {
-        $FW.Component.Toast("密码需至少包含1位数字");
+        $FW.Component.Toast("密码过于简单，请输入8-16位的字母和数字组合密码");
         return false;
       }
     } else {
