@@ -8,6 +8,7 @@ class PhoneNumInput extends React.Component {
           <img src="images/phone.png"/>
         </div>
         <input
+          type="number"
           placeholder="请输入手机号"
           onChange={this.props.handleChange}
           value={this.props.value} />
@@ -24,6 +25,7 @@ class VerificationCodeInput extends React.Component {
           <img src="images/veri-code.png"/>
         </div>
         <input
+          type="number"
           placeholder="请输入验证码"
           value={this.props.value}
           onChange={this.props.handleChange} />
@@ -83,7 +85,7 @@ class InteractWrap extends React.Component {
   }
 
   handlePhoneNumInput(e) {
-    if (/[^0-9]/.test(e.target.value) || e.target.value.length > 11) {
+    if (e.target.value.length > 11) {
       return;
     }
     this.setState({phoneNum: e.target.value});
@@ -115,9 +117,6 @@ class InteractWrap extends React.Component {
   }
 
   handleVeriCodeInput(e) {
-    if (/[^0-9]/.test(e.target.value)) {
-      return;
-    }
     this.setState({verificationCode: e.target.value});
   }
 
