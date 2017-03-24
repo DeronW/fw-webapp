@@ -20,14 +20,15 @@ const Login = React.createClass({
         }
     },
     componentDidMount: function () {
-        var query = $FW.Format.urlQuery();
-        var tab = query.tab;
-        if (tab == 1) {
-            this.switchTabHandler('veri');
-        }
-        else {
-            this.switchTabHandler('pwd');
-        }
+        this.switchTabHandler('veri');
+        //var query = $FW.Format.urlQuery();
+        //var tab = query.tab;
+        //if (tab == 1) {
+        //    this.switchTabHandler('veri');
+        //}
+        //else {
+        //    this.switchTabHandler('pwd');
+        //}
     },
     //倒计时完成终止
     componentDidUpdate: function () {
