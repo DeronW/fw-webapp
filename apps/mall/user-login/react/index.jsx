@@ -20,22 +20,19 @@ const Login = React.createClass({
         }
     },
     componentDidMount: function () {
-        var query = $FW.Format.urlQuery();
-        var tab = query.tab;
-        if (tab == 1) {
-            this.switchTabHandler('veri');
-        }
-        else {
-            this.switchTabHandler('pwd');
-        }
+        this.switchTabHandler('veri');
+        //var query = $FW.Format.urlQuery();
+        //var tab = query.tab;
+        //if (tab == 1) {
+        //    this.switchTabHandler('veri');
+        //}
+        //else {
+        //    this.switchTabHandler('pwd');
+        //}
     },
     //倒计时完成终止
     componentDidUpdate: function () {
-        if (this.state.value == 55) {
-            this.stopTick();
-            this.setState({value: "获取验证码", reSend: true});
 
-        }
     },
     switchTabHandler: function (tab) {
         if (tab == this.state.tab) return;
@@ -44,20 +41,6 @@ const Login = React.createClass({
             tab: tab,
             phone: ''
         });
-    },
-
-    //倒计时递减
-    decline: function () {
-        this.setState({value: this.state.value - 1});
-    },
-
-    //倒计时
-    tick: function () {
-        this.interval = setInterval(this.decline, 1000);
-    },
-
-    stopTick: function () {
-        clearInterval(this.interval);
     },
 
     getSMSCodeHandler: function () {

@@ -56,7 +56,8 @@ window.onload = function () {
             x: 'center',
             textStyle: {
                 color: '#384a62',
-                fontSize: 36
+                fontSize: 36,
+                fontWeight:'normal'
             }
         },
         tooltip: {
@@ -190,7 +191,8 @@ window.onload = function () {
             x: 'center',
             textStyle: {
                 color: '#384a62',
-                fontSize: 36
+                fontSize: 36,
+                fontWeight:'normal'
             }
         },
         tooltip: {

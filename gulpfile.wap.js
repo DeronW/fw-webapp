@@ -20,6 +20,7 @@ const USER_PAGES = [
     'user-contribute', // 用户贡献值
     'user-evaluate', // 投资风险承受能力评估
     'vip-prerogative', // VIP特权详情页
+    'user-evaluate-p2p',//p2p投资风险承受能力评估
 ]
 
 const PROTOCOL_PAGES = [
@@ -62,8 +63,7 @@ const TOPIC_PAGES = [
     'topic-gong-you-hui', //工友会专题页面,
     'topic-invite-strategy',//邀请攻略页面
     'topic-novice-strategy',//新手策略页面
-    'topic-invest-school', // 投资学堂
-    'fxh-jrgc-invite'//放心花金融工场邀请页面
+    'topic-invest-school'// 投资学堂
 ]
 
 const HUISHANG_PAGES = [
