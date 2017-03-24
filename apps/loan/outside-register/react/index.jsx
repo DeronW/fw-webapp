@@ -1,6 +1,11 @@
 // components
 
 class PhoneNumInput extends React.Component {
+  constructor() {
+    super();
+    this.state = { enableClear: false };
+  }
+
   render() {
     return (
       <div className="input-wrap phone">
@@ -10,14 +15,30 @@ class PhoneNumInput extends React.Component {
         <input
           type="number"
           placeholder="请输入手机号"
-          onChange={this.props.handleChange}
+          onChange={(e) => {
+            this.setState({ enableClear: e.target.value ? true : false});
+            this.props.handleChange(e);}}
+          onFocus={(e) => {this.setState({ enableClear: e.target.value ? true : false});}}
+          onBlur={() => {setTimeout(() => {this.setState({ enableClear: false });}, 10);}}
           value={this.props.value} />
+          { this.state.enableClear &&
+            <div
+              className="clear-btn"
+              onClick={() => {this.props.handleClear('phoneNum');}}>
+              <img src="images/clear-copy.png" alt="clear button"></img>
+            </div>
+          }
       </div>
     )
   }
 }
 
 class VerificationCodeInput extends React.Component {
+  constructor() {
+    super();
+    this.state = { enableClear: false };
+  }
+
   render() {
     return (
       <div className="input-wrap verification-code">
@@ -28,11 +49,24 @@ class VerificationCodeInput extends React.Component {
           type="number"
           placeholder="请输入验证码"
           value={this.props.value}
-          onChange={this.props.handleChange} />
+          onChange={(e) => {
+            this.setState({ enableClear: e.target.value ? true : false});
+            this.props.handleChange(e);}}
+          onFocus={(e) => {this.setState({ enableClear: e.target.value ? true : false});}}
+          onBlur={() => {setTimeout(() => {this.setState({ enableClear: false });}, 10);}} />
         <div
-          className="veri-code-info"
-          onClick={this.props.handleClick}>
-          {this.props.verificationCodeInfo}
+          className="veri-code-info">
+          { this.state.enableClear &&
+            <div
+              className="clear-btn"
+              onClick={() => {this.props.handleClear('verificationCode');}}>
+              <img src="images/clear-copy.png" alt="clear button"></img>
+            </div>
+          }
+          <div
+            onClick={this.props.handleClick}>
+            {this.props.verificationCodeInfo}
+          </div>
         </div>
       </div>
     )
@@ -40,6 +74,10 @@ class VerificationCodeInput extends React.Component {
 }
 
 class PasswordInput extends React.Component {
+  constructor() {
+    super();
+    this.state = { enableClear: false };
+  }
   render() {
     return (
       <div className="input-wrap verification-code">
@@ -50,14 +88,28 @@ class PasswordInput extends React.Component {
           type={this.props.type}
           value={this.props.value}
           placeholder="请输入密码，8-16位数字字母组合"
-          onChange={this.props.handleChange} />
-        <div
-          className="toggle-password-display"
-          onClick={this.props.handleClick}>
-          <img
-            src={this.props.togglePasswordDisplay ?
-                    "images/show-password.png" :
-                    "images/hide-password.png"} />
+          onChange={(e) => {
+            this.setState({ enableClear: e.target.value ? true : false});
+            this.props.handleChange(e);}
+          }
+          onFocus={(e) => {this.setState({ enableClear: e.target.value ? true : false});}}
+          onBlur={() => {setTimeout(() => {this.setState({ enableClear: false });}, 10);}} />
+        <div className="password-opts-wrap">
+          { this.state.enableClear &&
+            <div
+              className="clear-btn"
+              onClick={() => {this.props.handleClear('password');}}>
+              <img src="images/clear-copy.png" alt="clear button"></img>
+            </div>
+          }
+          <div
+            className="toggle-password-display"
+            onClick={this.props.handleClick}>
+            <img
+              src={this.props.togglePasswordDisplay ?
+                      "images/show-password.png" :
+                      "images/hide-password.png"} />
+          </div>
         </div>
       </div>
     )
@@ -80,6 +132,7 @@ class InteractWrap extends React.Component {
     this.getVerificationCode = this.getVerificationCode.bind(this);
     this.handlePasswordInput = this.handlePasswordInput.bind(this);
     this.togglePasswordDisplay = this.togglePasswordDisplay.bind(this);
+    this.clearInput = this.clearInput.bind(this);
     this.ifEssentialsExist = this.ifEssentialsExist.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -126,6 +179,10 @@ class InteractWrap extends React.Component {
 
   togglePasswordDisplay() {
     this.setState({showPassword: !this.state.showPassword});
+  }
+
+  clearInput(inputType) {
+    this.setState({[inputType]: ''});
   }
 
   ifEssentialsExist() {
@@ -182,19 +239,22 @@ class InteractWrap extends React.Component {
       <div className="interact-wrap">
         <PhoneNumInput
           handleChange={this.handlePhoneNumInput}
-          value={this.state.phoneNum} />
+          value={this.state.phoneNum}
+          handleClear={this.clearInput} />
         <VerificationCodeInput
           value={this.state.verificationCode}
           verificationCodeInfo={this.state.timeRemainForNewCode === 6 ?
                                     "获取验证码" : (this.state.timeRemainForNewCode + "s")}
           handleChange={this.handleVeriCodeInput}
-          handleClick={this.getVerificationCode} />
+          handleClick={this.getVerificationCode}
+          handleClear={this.clearInput} />
         <PasswordInput
           type={this.state.showPassword ? "text" : "password"}
           togglePasswordDisplay={!this.state.showPassword}
           handleChange={this.handlePasswordInput}
           handleClick={this.togglePasswordDisplay}
-          value={this.state.password} />
+          value={this.state.password}
+          handleClear={this.clearInput} />
         <button
           className="register-button"
           onClick={this.handleSubmit}>
