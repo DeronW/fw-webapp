@@ -80,20 +80,20 @@ const ConfirmOrder = React.createClass({
             })
         }.bind(this);
 
-        if (!this.state.isVirtualProduct) {
-            if (!this.FormData.msgCode) return $FW.Component.Alert('请填写手机验证码');
-
-            $FW.Ajax({
-                url: `${API_PATH}mall/api/order/v1/validatePaySmsCode.json`,
-                //url: `./validatePaySmsCode.json`,
-                enable_loading: 'mini',
-                method: 'post',
-                data: {smsCode: this.FormData.msgCode},
-                success: submit
-            });
-        } else {
+        //if (!this.state.isVirtualProduct) {
+        //    if (!this.FormData.msgCode) return $FW.Component.Alert('请填写手机验证码');
+        //
+        //    $FW.Ajax({
+        //        url: `${API_PATH}mall/api/order/v1/validatePaySmsCode.json`,
+        //        //url: `./validatePaySmsCode.json`,
+        //        enable_loading: 'mini',
+        //        method: 'post',
+        //        data: {smsCode: this.FormData.msgCode},
+        //        success: submit
+        //    });
+        //} else {
             submit()
-        }
+       // }
 
     },
     updateSMSCodeHandler: function (code) {
@@ -183,10 +183,10 @@ const ConfirmOrder = React.createClass({
                         className="item-detail"> ¥ {this.props.data.totalFreightPrice}</span>
                     </div>
                 </div>
-                {this.props.data.showAddressOK ?
+                {/*this.props.data.showAddressOK ?
                     <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
                              update_sms_code_handler={this.updateSMSCodeHandler}/>
-                    : null}
+                    : null*/}
                 <div className="confirm-order-foot">
                     <span className="total-item-name">实付:</span>
                     <span

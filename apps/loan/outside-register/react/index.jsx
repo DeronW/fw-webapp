@@ -188,7 +188,7 @@ class InteractWrap extends React.Component {
       if (essentialTypeNames.hasOwnProperty(typeName)) {
         if (!this.state[typeName]) {
           $FW.Component.Toast(essentialTypeNames[typeName] + "为空，请重新输入");
-          return false;
+          return;
         }
       }
     }
@@ -197,9 +197,13 @@ class InteractWrap extends React.Component {
 
   handleSubmit() {
     if (this.ifEssentialsExist()) {
-      if (isPhoneNum(this.state.phoneNum)) {
-        if (isPasswordValid(this.state.password)) {
-          //
+      if (!isPhoneNum(this.state.phoneNum)) {
+        $FW.Component.Toast("手机号格式不正确");
+        this.setState({phoneNum: '', verificationCode: '', password: ''});
+      } else {
+        if (!isPasswordValid(this.state.password)) {
+          this.setState({password: ''});
+        } else {
           $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
             channelCode: $FW.Format.urlQuery().channelCode,
             codeToken: this.state.codeToken,
@@ -220,13 +224,8 @@ class InteractWrap extends React.Component {
             if (/验证码不正确/.test(e.message)) {
               this.setState({verificationCode: ''});
             };
-          })
-        } else {
-          this.setState({password: ''});
+          });
         }
-      } else {
-        $FW.Component.Toast("手机号格式不正确");
-        this.setState({phoneNum: '', verificationCode: '', password: ''});
       }
     }
   }
@@ -274,22 +273,19 @@ function isPasswordValid(password) {
   const typePattern = /[^A-Za-z0-9]/;
   const includeNumPattern = /[0-9]+/;
   const includeAlphabetPattern = /[A-Za-z]+/;
-  if (!typePattern.test(password)) {
-    if (password.length >= 8 && password.length <= 16) {
-      if (includeNumPattern.test(password) && includeAlphabetPattern.test(password)) {
-        return true;
-      } else {
-        $FW.Component.Toast("密码过于简单，请输入8-16位的字母和数字组合密码");
-        return false;
-      }
-    } else {
-      $FW.Component.Toast("密码长度需在8-16位");
-      return false;
-    }
-  } else {
+  if (typePattern.test(password)) {
     $FW.Component.Toast("密码只能包含数字和字母");
-    return false;
+    return;
   }
+  if (password.length <= 8 || password.length >= 16) {
+    $FW.Component.Toast("密码长度需在8-16位");
+    return;
+  }
+  if (!includeNumPattern.test(password) || !includeAlphabetPattern.test(password)) {
+    $FW.Component.Toast("密码过于简单，请输入8-16位的字母和数字组合密码");
+    return;
+  }
+  return true;
 }
 
 
