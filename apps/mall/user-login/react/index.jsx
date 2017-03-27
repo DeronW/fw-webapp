@@ -125,8 +125,9 @@ const Login = React.createClass({
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
-                window.location.href="/static/mall/home/index.html"
-             }.bind(this)
+                var url = data.redirectMallURL;
+                window.location.href = url
+            }.bind(this)
         })
 
     },
