@@ -278,7 +278,7 @@ function isPasswordValid(password) {
     $FW.Component.Toast("密码只能包含数字和字母");
     return;
   }
-  if (password.length <= 8 || password.length >= 16) {
+  if (password.length < 8 || password.length >= 16) {
     $FW.Component.Toast("密码长度需在8-16位");
     return;
   }
