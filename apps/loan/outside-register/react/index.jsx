@@ -133,7 +133,7 @@ class InteractWrap extends React.Component {
       phoneNum: '',
       password: '',
       verificationCode: '',
-      timeRemainForNewCode: 6,
+      timeRemainForNewCode: 60,
       codeToken: '',
       showPassword: false
     }
@@ -150,22 +150,23 @@ class InteractWrap extends React.Component {
   }
 
   getVerificationCode() {
-    if (this.state.timeRemainForNewCode === 6) {  // time for test
+    if (this.state.timeRemainForNewCode === 60) {  // time for test
       if (isPhoneNum(this.state.phoneNum)) {
-        var countdown = setInterval(() => {
-          this.setState({timeRemainForNewCode: this.state.timeRemainForNewCode - 1});
-          if (this.state.timeRemainForNewCode === 0) {
-            clearInterval(countdown);
-            this.setState({timeRemainForNewCode: 6});  // time for test
-          }
-        }, 1000);
-        //
         $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
           mobile: this.state.phoneNum,
           userOperationType: 3,
           sourceType: SOURCE_TYPE
         }).then((data) => {
           this.setState({codeToken: data.codeToken});
+          if (data.code === 10000) {
+            var countdown = setInterval(() => {
+              this.setState({timeRemainForNewCode: this.state.timeRemainForNewCode - 1});
+              if (this.state.timeRemainForNewCode === 0) {
+                clearInterval(countdown);
+                this.setState({timeRemainForNewCode: 60});  // time for test
+              }
+            }, 1000);
+          }
         }, e => $FW.Component.Toast(e.message));
       } else {
         $FW.Component.Toast("手机号格式不正确");
@@ -239,7 +240,7 @@ class InteractWrap extends React.Component {
           handleClear={this.clearInput} />
         <VerificationCodeInput
           value={this.state.verificationCode}
-          verificationCodeInfo={this.state.timeRemainForNewCode === 6 ?
+          verificationCodeInfo={this.state.timeRemainForNewCode === 60 ?
                                     "获取验证码" : (this.state.timeRemainForNewCode + "s")}
           handleChange={this.handleInput}
           handleClick={this.getVerificationCode}
@@ -277,7 +278,7 @@ function isPasswordValid(password) {
     $FW.Component.Toast("密码只能包含数字和字母");
     return;
   }
-  if (password.length <= 8 || password.length >= 16) {
+  if (password.length < 8 || password.length >= 16) {
     $FW.Component.Toast("密码长度需在8-16位");
     return;
   }
