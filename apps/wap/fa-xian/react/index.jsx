@@ -12,11 +12,13 @@ function gotoHandler(link, need_login) {
 const Content = React.createClass({
     getInitialState() {
         this._count = 0;
+        this._time_gap = 0;
 
         return {
             notice: [],
             banners: [],
             topics: [],
+            position_index: 0,
             position: 0
         }
     },
@@ -57,27 +59,34 @@ const Content = React.createClass({
                 topics: data.map(i => ({ url: i.url, img: i.thumb }))
             })
         })
-
     },
     startMovingNotice() {
-        setInterval(this.moveNoticeHandler, 3000)
-    },
-    moveNoticeHandler() {
-        let singleH = 36, step = 2;
-        let p, { notice } = this.state, old_position = this.state.position;
+        let delay = 30, duration = 3000, step = 2, singleH = 36, p, position_index;
+        let { notice } = this.state;
 
-        this._notice_timer = setInterval(() => {
-            p = this.state.position - step;
-            if (p <= old_position - singleH) {
-                clearInterval(this._notice_timer);
-                p = Math.round(p / singleH) * singleH;
+        let t = setInterval(() => {
+            this._time_gap += delay;
+            if (this._time_gap >= duration) {
+                p = this.state.position - step, position_index = this.state.position_index;
+                if (p <= -singleH * (this.state.position_index + 1)) {
+                    this._time_gap = 0
+                    p = Math.round(p / singleH) * singleH
+                    position_index += 1
+                }
+
+                if (p <= -singleH * notice.length) {
+                    this._time_gap = 0
+                    p = 0
+                    position_index = 0
+                }
+
+                this.setState({
+                    position: p,
+                    position_index: position_index
+                })
             }
-            if (p <= -singleH * notice.length) {
-                clearInterval(this._notice_timer);
-                p = 0;
-            }
-            this.setState({ position: p });
-        }, 30)
+        }, delay)
+
     },
     onImageClickHandler(index) {
         let link = null;
