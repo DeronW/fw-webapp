@@ -68,8 +68,10 @@ const Content = React.createClass({
 
         this._notice_timer = setInterval(() => {
             p = this.state.position - step;
-            if(Math.abs(old_position) < singleH / 3) old_position = 0;
-            if (p <= old_position - singleH) clearInterval(this._notice_timer);
+            if (p <= old_position - singleH) {
+                clearInterval(this._notice_timer);
+                p = Math.round(p / singleH) * singleH;
+            }
             if (p <= -singleH * notice.length) {
                 clearInterval(this._notice_timer);
                 p = 0;
