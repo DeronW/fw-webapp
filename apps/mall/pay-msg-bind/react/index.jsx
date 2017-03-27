@@ -127,6 +127,7 @@ const SendCode = React.createClass({
     nextStep: function () {
         if (!this.state.active) return;
         var FormData = {
+            mobileNo: $FW.Format.urlQuery().mobileNo,
             smsCode: this.state.code
         }
         $FW.Ajax({
