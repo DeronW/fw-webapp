@@ -158,15 +158,13 @@ class InteractWrap extends React.Component {
           sourceType: SOURCE_TYPE
         }).then((data) => {
           this.setState({codeToken: data.codeToken});
-          if (data.code === 10000) {
-            var countdown = setInterval(() => {
-              this.setState({timeRemainForNewCode: this.state.timeRemainForNewCode - 1});
-              if (this.state.timeRemainForNewCode === 0) {
-                clearInterval(countdown);
-                this.setState({timeRemainForNewCode: 60});  // time for test
-              }
-            }, 1000);
-          }
+          var countdown = setInterval(() => {
+            this.setState({timeRemainForNewCode: this.state.timeRemainForNewCode - 1});
+            if (this.state.timeRemainForNewCode === 0) {
+              clearInterval(countdown);
+              this.setState({timeRemainForNewCode: 60});  // time for test
+            }
+          }, 1000);
         }, e => $FW.Component.Toast(e.message));
       } else {
         $FW.Component.Toast("手机号格式不正确");
