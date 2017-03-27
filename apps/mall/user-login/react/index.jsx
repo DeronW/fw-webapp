@@ -34,6 +34,7 @@ const Login = React.createClass({
     componentDidUpdate: function () {
 
     },
+
     switchTabHandler: function (tab) {
         if (tab == this.state.tab) return;
 
@@ -43,13 +44,27 @@ const Login = React.createClass({
         });
     },
 
+    //倒计时递减
+    decline: function () {
+        this.setState({value: this.state.value - 1});
+    },
+
+    //倒计时
+    tick: function () {
+        this.interval = setInterval(this.decline, 1000);
+    },
+
+    stopTick: function () {
+        clearInterval(this.interval);
+    },
+
     getSMSCodeHandler: function () {
         if (!this.state.reSend) return;
         let FormData = {
             phone: this.state.val1
         }
         $FW.Ajax({
-            url: `/mall/login/setCode.json`,
+            url: `${API_PATH}mall/login/setCode.json`,
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
@@ -121,11 +136,11 @@ const Login = React.createClass({
             code: this.state.val2
         }
         $FW.Ajax({
-            url: `/mall/login/login.json`,
+            url: `${API_PATH}mall/login/login.json`,
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
-                var url = data.redirectMallURL;
+                var url = data.redirectUrl;
                 window.location.href = url
             }.bind(this)
         })
@@ -163,7 +178,7 @@ const Login = React.createClass({
             <div className="field">
                 <span className="ico-password"></span>
                 <input type="password" placeholder="请输入验证码" name="code" defaultValue="" onChange={this.handleCode}/>
-                <div className="empty" onclick={this.empty}></div>
+                <div className="empty"></div>
                 <input type="button" className="yzm b-radius" onClick={this.getSMSCodeHandler} id="btnMessageCode"
                        value={!this.state.reSend ? "重新发送("+this.state.value+")":this.state.value}/>
             </div>
@@ -174,7 +189,7 @@ const Login = React.createClass({
                 <span className="ico-password"></span>
                 <input type="password" placeholder="登录密码" name="pwd" defaultValue="" onChange={this.handlePaw}
                        className="password f-14"/>
-                <div className="empty" onclick={this.empty}></div>
+                <div className="empty"></div>
             </div>
             <label className="phone" htmlFor="pwd">{this.state.paw}</label></div>;
 
@@ -185,7 +200,7 @@ const Login = React.createClass({
                     <div className="field">
                         <span className="ico-user"></span>
                         <input type="text" placeholder="手机号/邮箱/用户名" defaultValue="" onChange={this.handlePhone}/>
-                        <div className="empty" onclick={this.empty}></div>
+                        <div className="empty"></div>
                     </div>
                     <label className="phone" htmlFor="phone">{this.state.phone}</label>
                     {this.state.tab == 'veri' ? Pwd : null}
