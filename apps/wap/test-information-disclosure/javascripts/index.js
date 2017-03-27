@@ -47,6 +47,33 @@ window.onload = function () {
         gotoHandler("https://www.weibo.cn")
     };
 
+    //判断金额 n:四舍五入保留几位小数，默认为2位
+    function judgeCash(value,n) {
+        n = n > 0 && n <= 20 ? n : 2;
+        var len = value.toString().length;
+        var v = "";
+        if (len > 8) {
+            v = (value / 100000000).toFixed(n) + "亿";
+        } else if (len > 3) {
+            v = (value / 10000).toFixed(n) + "万";
+        } else {
+            return value
+        }
+        return v
+    }
+    //格式化人数
+    function formatPerson(s) {
+        s = parseFloat((s + "").replace(/[^\d\.-]/g, "")) + "";
+        var l = s.split(".")[0].split("").reverse(),
+            t = "";
+        for (i = 0; i < l.length; i++) {
+            t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+        }
+        return t.split("").reverse().join("")+'人';
+    }
+
+
+
     var myChartLeft = echarts.init(document.getElementById('main1'));
 
     optionLeft = {
