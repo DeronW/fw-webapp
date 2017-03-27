@@ -133,7 +133,7 @@ class InteractWrap extends React.Component {
       phoneNum: '',
       password: '',
       verificationCode: '',
-      timeRemainForNewCode: 6,
+      timeRemainForNewCode: 60,
       codeToken: '',
       showPassword: false
     }
@@ -150,13 +150,13 @@ class InteractWrap extends React.Component {
   }
 
   getVerificationCode() {
-    if (this.state.timeRemainForNewCode === 6) {  // time for test
+    if (this.state.timeRemainForNewCode === 60) {  // time for test
       if (isPhoneNum(this.state.phoneNum)) {
         var countdown = setInterval(() => {
           this.setState({timeRemainForNewCode: this.state.timeRemainForNewCode - 1});
           if (this.state.timeRemainForNewCode === 0) {
             clearInterval(countdown);
-            this.setState({timeRemainForNewCode: 6});  // time for test
+            this.setState({timeRemainForNewCode: 60});  // time for test
           }
         }, 1000);
         //
@@ -239,7 +239,7 @@ class InteractWrap extends React.Component {
           handleClear={this.clearInput} />
         <VerificationCodeInput
           value={this.state.verificationCode}
-          verificationCodeInfo={this.state.timeRemainForNewCode === 6 ?
+          verificationCodeInfo={this.state.timeRemainForNewCode === 60 ?
                                     "获取验证码" : (this.state.timeRemainForNewCode + "s")}
           handleChange={this.handleInput}
           handleClick={this.getVerificationCode}
