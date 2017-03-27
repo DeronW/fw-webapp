@@ -16,11 +16,8 @@ $FW.DOMReady(function () {
     if (jrgc_weixin) sourceType = 4;
     if (jrgc_web) sourceType = 5;
 
-    NativeBridge.trigger("refresh_loan_token")
-
+    NativeBridge.trigger("refresh_loan_token");
     window.onNativeMessageReceive = function (data) {
-        //alert(data.token);
-        console.log(data)
         data.token ? login(data.token) : NativeBridge.login()
     }
 
@@ -34,8 +31,7 @@ $FW.DOMReady(function () {
                 token: dict.token,
                 id: dict.userId,
                 gid: dict.userGid,
-                status: dict.userStatus,
-                code:dict.invitationCode
+                status: dict.userStatus
             })
             location.href = '/static/loan/home/index.html';
         }, e => $FW.Component.Alert(e.message));
