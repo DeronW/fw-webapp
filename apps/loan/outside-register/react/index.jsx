@@ -212,8 +212,10 @@ class InteractWrap extends React.Component {
             verifyCode: this.state.verificationCode,
             sourceType: SOURCE_TYPE
           }).then((data) => {
-            var jumpType = $FW.Format.urlQuery().jumpType;
-            window.location.href = `/static/loan/outside-register-success-${jumpType}/index.html`;
+            let jt = $FW.Format.urlQuery().jumpType;
+            let app_url = '/static/loan/outside-register-success-app/index.html',
+            wx_url = '/static/loan/outside-register-success-wx/index.html';
+            window.location.href = jt === 'app' ? app_url : wx_url;
           }, (e) => {
             if (!this.state.codeToken) {
               $FW.Component.Toast("请点击获取验证码！");
