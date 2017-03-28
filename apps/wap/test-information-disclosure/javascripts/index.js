@@ -52,7 +52,7 @@ window.onload = function () {
     function judgeCash(value, n) {
         n = n > 0 && n <= 20 ? n : 2;
         var len = value.toString().split(".")[0].length;
-        value = Number(value.toString().substr(0,11));
+        value = Number(value.toString().substr(0, 11));
         var v = "";
         if (len > 8) {
             v = (value / 100000000).toFixed(n) + "亿";
@@ -74,9 +74,10 @@ window.onload = function () {
         }
         return t.split("").reverse().join("") + '人';
     }
+
     //防止除不尽
-    function prevent(number){
-        return Number(number.toString().substr(0,9)).toFixed(2)
+    function prevent(number) {
+        return Number(number.toString().substr(0, 9)).toFixed(2)
     }
 
     function firstPie() {
@@ -356,17 +357,17 @@ window.onload = function () {
 
     $FW.getJSONP("https://www.9888.cn/dataTopics/data.shtml", (data)=> {
         //截止日期前一天
-        document.querySelector(".infoTimeMobile span").innerText =data.data.date;
+        document.querySelector(".infoTimeMobile span").innerText = data.data.date;
         //计算总额
-        computeTotal(judgeCash(data.data.total_invest),judgeCash(data.data.total_interest),judgeCash(data.data.total_principal),judgeCash(data.data.total_orderCount));
+        computeTotal(judgeCash(data.data.total_invest), judgeCash(data.data.total_interest), judgeCash(data.data.total_principal), judgeCash(data.data.total_orderCount));
         //借款用户
-        firstPie(data.data.borr_female,data.data.borr_male,data.data.borr_age_level_1,data.data.borr_age_level_2,data.data.borr_age_level_3,data.data.borr_age_level_4,data.data.borr_age_level_5);
+        firstPie(data.data.borr_female, data.data.borr_male, data.data.borr_age_level_1, data.data.borr_age_level_2, data.data.borr_age_level_3, data.data.borr_age_level_4, data.data.borr_age_level_5);
         //借款人数
         document.querySelector(".pieTopMobile .userNumber span").innerText = formatPerson(data.data.total_borrUserCount);
         //借款金额
-        document.querySelector(".pieTopMobile .userCash span").innerText = judgeCash(data.data.total_invest /data.data.total_borrUserCount);
+        document.querySelector(".pieTopMobile .userCash span").innerText = judgeCash(data.data.total_invest / data.data.total_borrUserCount);
         //出借用户
-        secondPie(data.data.female,data.data.male,data.data.age_level_1,data.data.age_level_2,data.data.age_level_3,data.data.age_level_4,data.data.age_level_5);
+        secondPie(data.data.female, data.data.male, data.data.age_level_1, data.data.age_level_2, data.data.age_level_3, data.data.age_level_4, data.data.age_level_5);
         //出借人数
         document.querySelector('.pieBottomMobile .userNumber span').innerText = formatPerson(data.data.total_userCount);
         //出借金额
@@ -374,11 +375,11 @@ window.onload = function () {
         //待偿金额
         var endurance = document.querySelectorAll(".enduranceCell");
         var len = endurance.length;
-        for(var i = 0;i<len;i++){
+        for (var i = 0; i < len; i++) {
             endurance[0].querySelector('.cash span').innerText = judgeCash(data.data.total_principalInvest);
             endurance[1].querySelector('.cash span').innerText = judgeCash(data.data.total_overdueCount);
-            endurance[2].querySelector('.cash span').innerText = prevent(data.data.total_overdueCount / data.data.total_invest).toFixed(2);
-            endurance[3].querySelector('.cash span').innerText = prevent(data.data.total_overdueSum / data.data.total_orderCount).toFixed(2);
+            endurance[2].querySelector('.cash span').innerText = prevent(data.data.total_overdueCount / data.data.total_invest);
+            endurance[3].querySelector('.cash span').innerText = data.data.total_overdueSum ? prevent(data.data.total_overdueSum / data.data.total_orderCount) : 0;
         }
     });
 
