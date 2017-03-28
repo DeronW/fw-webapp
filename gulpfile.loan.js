@@ -13,6 +13,7 @@ const USER_PAGES = [
     'outside-register', // 放心花注册页面
     'outside-register-success-wx',
     'outside-register-success-app',
+    'outside-register-success-otherApps',
     'user-entry', // 用户入口, 并非登录或注册, 而是用户的进入入口
     'user-register', //注册入口
     'user-login', //登录入口

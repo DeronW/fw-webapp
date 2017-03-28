@@ -20,7 +20,7 @@ class QrcodeWrap extends React.Component {
         </div>
         <div className="wx-info">
           <h1>微信号：fxhuaba</h1>
-          <h2>长按上方二维码图片<br />关注放心花微信号</h2>
+          <h2>长按保存上方二维码图片<br />打开微信扫一扫，选择从相册选取</h2>
         </div>
       </div>
     )
