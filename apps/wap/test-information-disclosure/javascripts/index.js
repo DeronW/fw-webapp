@@ -52,6 +52,7 @@ window.onload = function () {
     function judgeCash(value, n) {
         n = n > 0 && n <= 20 ? n : 2;
         var len = value.toString().split(".")[0].length;
+        value = Number(value.toString().substr(0,11));
         var v = "";
         if (len > 8) {
             v = (value / 100000000).toFixed(n) + "亿";
@@ -73,7 +74,10 @@ window.onload = function () {
         }
         return t.split("").reverse().join("") + '人';
     }
-
+    //防止除不尽
+    function prevent(number){
+        return Number(number.toString().substr(0,9)).toFixed(2)
+    }
 
     function firstPie() {
         var myChartLeft = echarts.init(document.getElementById('main1'));
@@ -373,8 +377,8 @@ window.onload = function () {
         for(var i = 0;i<len;i++){
             endurance[0].querySelector('.cash span').innerText = judgeCash(data.data.total_principalInvest);
             endurance[1].querySelector('.cash span').innerText = judgeCash(data.data.total_overdueCount);
-            endurance[2].querySelector('.cash span').innerText = (data.data.total_principalInvest / data.data.total_invest).toFixed(2);
-            endurance[3].querySelector('.cash span').innerText = (data.data.total_overdueCount / data.data.total_orderCount).toFixed(2);
+            endurance[2].querySelector('.cash span').innerText = prevent(data.data.total_overdueCount / data.data.total_invest).toFixed(2);
+            endurance[3].querySelector('.cash span').innerText = prevent(data.data.total_overdueSum / data.data.total_orderCount).toFixed(2);
         }
     });
 
