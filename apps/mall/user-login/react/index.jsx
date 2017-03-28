@@ -234,5 +234,5 @@ $FW.DOMReady(function () {
 });
 
 function back_handler() {
-    location.href = '/static/mall/order-list/index.html#all';
+    location.href = '/';
 }
