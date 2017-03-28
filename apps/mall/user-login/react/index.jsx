@@ -146,7 +146,7 @@ const Login = React.createClass({
             success: function (data) {
                 var urlQuery = location.search.split("?");
                 if (urlQuery[2]) {
-                    window.location.href = urlQuery[1] + "?" + urlQuery[2];
+                    window.location.href = urlQuery[1].split('&')[1].split('=')[1] + "?" + urlQuery[2];
                 }
                 else {
                     var url = $FW.Format.urlQuery().redirect_url;
