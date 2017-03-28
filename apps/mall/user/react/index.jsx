@@ -8,13 +8,13 @@ const User = React.createClass({
     componentDidMount: function () {
         var _this = this;
         /*
-        let query = $FW.Format.urlQuery();
-        let checkId = query.checkId || "";
-        $FW.Ajax(`${API_PATH}mall/api/login.json?checkId=`+ checkId)
-            .then((data) => {
-                location.reload();
-            });
-        window.onscroll = function () {
+         let query = $FW.Format.urlQuery();
+         let checkId = query.checkId || "";
+         $FW.Ajax(`${API_PATH}mall/api/login.json?checkId=`+ checkId)
+         .then((data) => {
+         location.reload();
+         });
+         window.onscroll = function () {
          var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
          if (scrollTop > 100) return false;
 
@@ -54,7 +54,7 @@ const User = React.createClass({
                 <div className="user-info" style={{ marginTop: '-70px' }}>
                     <img className="profile-img" src="images/boy.jpg"/>
                     <div className="user-name">{data.username}
-                        {data.vip_level == 1 ? null : <span className="user-level"><img
+                        {data.vip_level == 1 || data.vip_level == "" ? null : <span className="user-level"><img
                             src={`images/usercenter_vip${data.vip_level - 1}_icon.png`}/></span>}</div>
                     <div className="available-score">可用工分<span className="gongfeng">{data.score}</span></div>
                     <a className="account-setting"
