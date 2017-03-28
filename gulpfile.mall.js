@@ -23,7 +23,7 @@ const USER_PAGES = [
     'user-help',
 	// 'user-register',
 	// 'user-register-1',
-	// 'login',
+	'user-login',
 ]
 
 const PRODUCT_PAGES = [
