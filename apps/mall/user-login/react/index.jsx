@@ -144,7 +144,7 @@ const Login = React.createClass({
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
-                var url = data.redirectUrl;
+                var url = $FW.Format.urlQuery().redirect_url;
                 window.location.href = url
             }.bind(this)
         })
