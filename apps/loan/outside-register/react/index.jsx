@@ -165,7 +165,14 @@ class InteractWrap extends React.Component {
               this.setState({timeRemainForNewCode: 60});  // time for test
             }
           }, 1000);
-        }, e => $FW.Component.Toast(e.message));
+        }, (e) => {
+          if (e.code === 201003) {
+            $FW.Component.Toast('手机号已注册');
+            setTimeout(this.handleJump, 2000);
+            return;
+          };
+          $FW.Component.Toast(e.message);
+        });
       } else {
         $FW.Component.Toast("手机号格式不正确");
         this.setState({phoneNum: ''});
@@ -194,6 +201,25 @@ class InteractWrap extends React.Component {
     return true;
   }
 
+  handleJump() {
+    let jt = $FW.Format.urlQuery().jumpType;
+    let app_url = '/static/loan/outside-register-success-app/index.html',
+    wx_url = '/static/loan/outside-register-success-wx/index.html',
+    otherapps_url = '/static/loan/outside-register-success-wx/index.html';
+    switch (jt) {
+      case 'app':
+        window.location.href = app_url;
+        break;
+      case 'wx':
+        window.location.href = wx_url;
+        break;
+      case 'otherapps':
+        window.location.href = otherapps_url;
+        break;
+      default:
+    }
+  }
+
   handleSubmit() {
     if (this.ifEssentialsExist()) {
       if (!isPhoneNum(this.state.phoneNum)) {
@@ -212,27 +238,12 @@ class InteractWrap extends React.Component {
             verifyCode: this.state.verificationCode,
             sourceType: SOURCE_TYPE
           }).then((data) => {
-            let jt = $FW.Format.urlQuery().jumpType;
-            let app_url = '/static/loan/outside-register-success-app/index.html',
-            wx_url = '/static/loan/outside-register-success-wx/index.html',
-            otherapps_url = '/static/loan/outside-register-success-wx/index.html';
-            switch (jt) {
-              case 'app':
-                window.location.href = app_url;
-                break;
-              case 'wx':
-                window.location.href = wx_url;
-                break;
-              case 'otherapps':
-                window.location.href = otherapps_url;
-                break;
-              default:
-            }
+            this.handleJump();
           }, (e) => {
             if (!this.state.codeToken) {
               $FW.Component.Toast("请点击获取验证码！");
               return;
-            }
+            };
             $FW.Component.Toast(e.message);
             if (/验证码不正确/.test(e.message)) {
               this.setState({verificationCode: ''});
