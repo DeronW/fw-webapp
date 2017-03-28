@@ -6,6 +6,7 @@ const plugins = require('gulp-load-plugins')();
 const babel = require('gulp-babel');
 
 module.exports = javascripts = function (src_path, build_path, name, debug) {
+    debug = true;
     return gulp.src(src_path)
         .pipe(changed(build_path))
         //.pipe(babel({presets: ['es2015']}))

@@ -1,0 +1,150 @@
+// vars and mixins
+@input-field-width: 582px;
+@input-field-height: 76px;
+@placeholder-color: rgb(139, 183, 254);
+@input-type-icon-width: 64px;
+
+// containing block should better be a positioned element
+.center-element {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.right-align-element {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+}
+
+.font-style-default {
+  color: rgb(255, 255, 255);
+  font-size: 28px;
+  font-family: "PingFang";
+}
+
+.small-icon-pattern {
+  position: relative;
+  width: 75px;
+  height: 100%;
+  img {
+    .center-element;
+  }
+}
+
+// main style
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // no highlight when tapping
+}
+
+html {
+  height: 100%;
+  min-height: 1000px;
+}
+
+body {
+  height: 100%;
+  background: #4a86e8 url("../images/bg.png") no-repeat;
+  background-position: 0 -111px;
+}
+
+.interact-wrap {
+  position: relative;
+  top: 623px;
+  width: @input-field-width;
+  margin: 0 auto;
+}
+
+.input-wrap {
+  position: relative;
+  width: 100%;
+  height: @input-field-height;
+  margin-bottom: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  background-color: rgba(254, 254, 255, 0.08);
+
+  .input-type-icon {
+    position: absolute;
+    width: @input-type-icon-width;
+    height: 100%;
+
+    img {
+      .center-element;
+    }
+  }
+
+  input {
+    display: block;
+    width: @input-field-width - @input-type-icon-width;
+    height: 100%;
+    border: none;
+    outline: none;
+    margin-left: @input-type-icon-width;
+    padding-left: 0;
+    background-color: transparent;
+    .font-style-default;
+
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: @placeholder-color;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: @placeholder-color;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: @placeholder-color;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+      color: @placeholder-color;
+    }
+  }
+}
+
+.phone {
+  .clear-btn {
+    .small-icon-pattern;
+    .right-align-element;
+  }
+}
+
+.veri-code-info {
+  display: inline-flex;
+  .right-align-element;
+  padding-right: 24px;
+  .font-style-default;
+  line-height: @input-field-height;
+  color: #d6e2ff;
+
+  .clear-btn {
+    .small-icon-pattern;
+  }
+}
+
+.password-opts-wrap {
+  display: inline-flex;
+  .right-align-element;
+
+  .toggle-password-display, .clear-btn {
+    .small-icon-pattern;
+  }
+
+  .clear-btn {
+    width: 45px;
+  }
+}
+
+.register-button {
+  width: 100%;
+  height: @input-field-height;
+  margin-bottom: 32px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(255, 95, 154);
+  .font-style-default;
+  text-align: center;
+}

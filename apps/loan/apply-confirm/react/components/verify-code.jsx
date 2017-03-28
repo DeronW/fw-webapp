@@ -64,11 +64,14 @@ const VerifyCode = React.createClass({
             orderGid: orderGid,
             verifyCode: this.state.value,
         }).then(() => {
-            this.props.callbackCloseHanler(false);
-            this.props.callbackResultShow(true);
-            this.props.callbackGetLoanResultCheck(true);
+            if($FW.Browser.inApp()){
+                gotoHandler(`/static/loan/apply-result/index.html?orderGid=${orderGid}`);
+            }else{
+                this.props.callbackCloseHanler(false);
+                this.props.callbackResultShow(true);
+                this.props.callbackGetLoanResultCheck(true);
+            }
         }, e => $FW.Component.Toast(e.message));
-
     },
 
     render: function () {

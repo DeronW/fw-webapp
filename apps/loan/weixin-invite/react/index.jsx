@@ -17,6 +17,19 @@ $FW.DOMReady(function () {
         $(this).hide();
     });
 
+    $FW.Post(`${API_PATH}api/shareTemplate/v1/getContent.json`,{
+        channelCode: "OFFICIAL",
+        templateType:1,
+        userGid: USER.gid,
+        userId: USER.id,
+        token: USER.token,
+        sourceType: SOURCE_TYPE
+    }).then((data)=>{
+        $(".btm-tip input").val(data.shareTemplate.templateUrl + `&jumpType=${$FW.Browser.inWeixin()?'wx':'app'}`);
+    }, ()=>{
+        location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
+    });
+
     function loadMoreHandler(done) {
         if (loadNextPage) {
             $FW.Post(`${API_PATH}api/userBase/v1/invitationRecord.json`, {
@@ -31,8 +44,8 @@ $FW.DOMReady(function () {
                 if (data.invitationRecord.length == 0 && page == 1) {
                     $("#more").html("暂无数据");
                 } else if (data.invitationRecord.length < 20 && page == 1) {
-                    $("#more").html("已经到结尾");
-                }
+                    $("#more").html("已全部显示");
+                }　
                 if (data.invitationRecord.length > 0) {
                     var str = '';
                     for (var i = 0; i < data.invitationRecord.length; i++) {
@@ -46,7 +59,7 @@ $FW.DOMReady(function () {
                     page++;
                 } else if (page > 1) {
                     loadNextPage = false
-                    $("#more").html("已经到结尾");
+                    $("#more").html("已全部显示");
                 }
                 done && done();
             }, (e) => {

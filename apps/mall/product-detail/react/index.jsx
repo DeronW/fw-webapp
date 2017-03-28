@@ -29,24 +29,11 @@ const Product = React.createClass({
 
     componentDidMount: function () {
         document.title = this.props.data.title;
-        /*
-         window.addEventListener('scroll', function () {
-         var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-
-         if (scrollTop > 100) return false;
-         let id = document.querySelector('._style_header_fixed');
-         if (scrollTop > 10) {
-         id.setAttribute("class", "no_clarity _style_header_fixed");
-         }
-         else {
-         id.setAttribute("class", "clarity _style_header_fixed");
-         }
-         }.bind(this), false);*/
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
 
-       // if (!$FW.Browser.inWeixin()) document.querySelector('#cnt').style.marginTop = "-100px";
+        if (!$FW.Browser.inWeixin()) document.querySelector('._style_header_fixed').style.borderBottom = "1px solid rgb(216, 216, 216)!important";
 
         if ($FW.Browser.inIOSApp()) document.querySelector('._style_header_arrow').style.top = "22px";
 
@@ -102,13 +89,12 @@ const Product = React.createClass({
 
         let market_price = null;
         if (data.market_price) {
-            market_price =
-                <div className="market-price">
+            market_price = null;
+            {/*<div className="market-price">
                     <span>市价：</span>
                     <span className="market-price-num">&yen;{data.market_price}</span>
-                </div>
-
-        }
+                </div>*/}
+            }
 
         let user_level_manifest;
         if (data.vipLevel == 1) user_level_manifest = "普通用户";
@@ -132,7 +118,7 @@ const Product = React.createClass({
         return (
             <div className="detail-box">
                 {shop_card_prompt}
-                <a onClick={this.shopHandler} className={topBuyCart} style={{ zIndex: '10' }}>
+                <a onClick={this.shopHandler} className={topBuyCart} style={{zIndex: '10'}}>
                     <span className="_style_buy_cart_span"></span>
                 </a>
                 {data.head_images && data.head_images.length ?
@@ -217,7 +203,6 @@ const PlusMinus = React.createClass({
 
         let _this = this;
         let bizNo = $FW.Format.urlQuery().bizNo;
-
 
         if (this.props.is_login == 0) {
             $FW.Ajax({
@@ -337,9 +322,9 @@ const EmptyProduct = React.createClass({
     },
     render: function () {
         return (
-            <div style={{ position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1" }}>
-                <img style={{ display: "block", maxWidth: "80%", margin: "20% auto 50px" }} src='images/outdate.jpg'/>
-                <div style={{ fontSize: "30px", color: "#8591b3", textAlign: "center" }}>
+            <div style={{position: "absolute", top: "0px", bottom: "0px", width: "100%", zIndex: "-1"}}>
+                <img style={{display: "block", maxWidth: "80%", margin: "20% auto 50px"}} src='images/outdate.jpg'/>
+                <div style={{fontSize: "30px", color: "#8591b3", textAlign: "center"}}>
                     抱歉, 没有找到相关商品!
                 </div>
             </div>

@@ -3,47 +3,69 @@ body {
     padding-bottom: 90px;
 }
 
+.findBanner {
+    width: 100%;
+    min-height: 226px;
+}
+
 .banners {
     height: 226px;
 }
 
 .notice {
     display: block;
-    height: 110px;
+    height: 90px;
     position: relative;
     background: white;
     .notice-icon {
         display: block;
         float: left;
-        margin-top: 26px;
-        margin-left: 30px;
+        margin-top: 14px;
+        margin-left: 26px;
+        transform: scale(0.9);
     }
     .sp-line {
         width: 1px;
         float: left;
         background: #ddd;
-        height: 60px;
-        margin-top: 26px;
-        margin-left: 30px;
+        height: 56px;
+        margin-top: 18px;
+        margin-left: 26px;
     }
     .right-arrow {
         float: right;
     }
     .text {
-        float: left;
-        margin-left: 30px;
-        height: 66px;
-        padding: 18px 0;
-        width: 500px;
-        line-height: 40px;
+        vertical-align: middle;
+        position: absolute;
+        left: 146px;
+        top: 28px;
         font-size: 24px;
+        height: 36px;
+        width: 505px;
+        line-height: 35px;
         overflow: hidden;
-        word-wrap: break-word;
-        text-overflow: ellipsis;
+        .text-scroll-panel {
+            position: absolute;
+        }
+        a {
+            display: block;
+            width: 505px;
+            color: #555;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            //overflow: hidden;
+            //text-overflow: ellipsis;
+            //word-break: break-all;
+            //-webkit-box-orient: vertical;
+            //-webkit-line-clamp: 2;
+            //margin-bottom: 2px;
+        }
     }
     .icon-right-arrow {
         position: absolute;
-        top: 44px;
+        top: 32px;
         right: 30px;
         width: 16px;
         height: 26px;
@@ -82,22 +104,31 @@ body {
         background: url(../images/4.png);
         width: 64px;
         height: 61px;
+        display: inline-block;
+        margin-top: 12px;
     }
     .icon-bbs {
         background: url(../images/3.png);
         width: 69px;
         height: 64px;
+        display: inline-block;
+        margin-top: 14px;
     }
     .icon-waiting {
-        background: url(../images/5.png);
+        background: url(../images/class.png);
         width: 62px;
-        height: 54px;
+        height: 66px;
+        display: inline-block;
+        margin-top: 12px;
+        margin-left: 44px;
     }
     .icon-faq {
         background: url(../images/2.png);
         width: 49px;
         height: 58px;
-        margin-left: 48px !important;
+        margin-left: 50px !important;
+        display: inline-block;
+        margin-top: 15px;
     }
 }
 
@@ -105,7 +136,7 @@ body {
     color: #333;
     font-size: 30px;
     background: #f9f9f9;
-    border-bottom: 1px solid #e3e5ea;
+    //border-bottom: 1px solid #e3e5ea;
     height: 70px;
     line-height: 70px;
     padding-left: 30px;
@@ -114,18 +145,18 @@ body {
 .events {
     background: white;
     padding: 1px 0;
-    border: 1px solid #d8d8d8;
-    border-left: 0;
-    border-right: 0;
+    border-bottom: 1px solid #d8d8d8;
+    border-top: 1px solid #e3e5ea;
+    //border-left: 0;
+    //border-right: 0;
     .event {
         display: block;
         // height: 150px;
         width: 660px;
         margin: 20px auto;
-
         img {
-          display: block;
-          width: 100%;
+            display: block;
+            width: 100%;
         }
     }
 }
@@ -137,6 +168,21 @@ body {
     font-size: 30px;
     color: #4aa1f9;
     padding-top: 18px;
+    a {
+        //display: block;
+        color: #4aa1f9;
+        i {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .about-us-grey {
+            color: #ccc;
+        }
+    }
     i {
         display: block;
         float: left;
@@ -156,6 +202,9 @@ body {
         float: right;
         .icon-about-us {
             background: url(../images/7.png);
+        }
+        .icon-about-us-grey {
+            background: url(../images/7grey.png);
         }
     }
 }

@@ -51,6 +51,9 @@ const SendCode = React.createClass({
         $FW.Ajax({
             url: API_PATH + 'mall/api/payment/v1/SendPhoneVerifyPay.json',
             enable_loading: 'mini',
+            data:{
+                mobileNo: $FW.Format.urlQuery().mobileNo,
+            },
             success: function (data) {
                 if (!this.state.reSend) return;
                 this.setState({value: 60, reSend: false});
@@ -124,6 +127,7 @@ const SendCode = React.createClass({
     nextStep: function () {
         if (!this.state.active) return;
         var FormData = {
+            mobileNo: $FW.Format.urlQuery().mobileNo,
             smsCode: this.state.code
         }
         $FW.Ajax({

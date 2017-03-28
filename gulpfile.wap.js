@@ -20,6 +20,7 @@ const USER_PAGES = [
     'user-contribute', // 用户贡献值
     'user-evaluate', // 投资风险承受能力评估
     'vip-prerogative', // VIP特权详情页
+    'user-evaluate-p2p',//p2p投资风险承受能力评估
 ]
 
 const PROTOCOL_PAGES = [
@@ -47,6 +48,7 @@ const NOTICE_PAGES = [
     'notice-corporate-structure', // 信息披露 公司结构
     'notice-safeguard', // 资金安全保障
     'notice-risk-prompt', // 风险揭示
+    'test-information-disclosure',//测试 信息披露
 ]
 
 const TOPIC_PAGES = [
@@ -58,10 +60,10 @@ const TOPIC_PAGES = [
     'topic-recommender-recruitment', //推荐人页面
     'topic-annual-commision', //年化佣金页面
     'topic-invite', //邀请返利, 邀请人,
-    'topic-gong-you-hui', //工友会专题页面
-    'topic-zong-dong-yuan',//人脉总动员页面
+    'topic-gong-you-hui', //工友会专题页面,
     'topic-invite-strategy',//邀请攻略页面
-    'topic-novice-strategy'//新手策略页面
+    'topic-novice-strategy',//新手策略页面
+    'topic-invest-school'// 投资学堂
 ]
 
 const HUISHANG_PAGES = [
@@ -82,6 +84,7 @@ const HUISHANG_PAGES = [
     'modification-phone', // 修改银行预留手机号
 ]
 
+// 守山相关的提现页面
 const SHOUSHAN = [
     'shoushan-reset-deal-password',
     'shoushan-cash',
@@ -134,11 +137,11 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-                `apps/${PROJ}/**/*.+(js|jsx)`,
-                '!node_modules/**',
-                '!**/jquery.*.js',
-                '!**.min.js'
-            ])
+            `apps/${PROJ}/**/*.+(js|jsx)`,
+            '!node_modules/**',
+            '!**/jquery.*.js',
+            '!**.min.js'
+        ])
             .pipe(eslint())
             .pipe(eslint.format());
     }))

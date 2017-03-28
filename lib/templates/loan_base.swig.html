@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     {% block viewport %}
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
-    {% include 'partial/fix-viewport.html' %}
     {% endblock %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="screen-orientation" content="portrait">
@@ -32,14 +31,15 @@
 
 {% block javascripts %}
 <script src="javascripts/lib.js"></script>
+<script src="javascripts/bundle.js"></script>
+{% block extra_javascripts %}{% endblock %}
+{% endblock %}
+
+{% include 'loan/wechat-share-config.swig.html' %}
 {% if ENV == 'production' %}
 {% include 'partial/expection-handler.swig.html' with
 {SENTRY_DSN: 'https://064ad415a6de48dbbef9c9974ff6a029@sentry.dougemall.com/5'} %}
 {% endif %}
-<script src="javascripts/bundle.js"></script>
-{% include 'loan/wechat-share-config.swig.html' %}
-{% block extra_javascripts %}{% endblock %}
-{% endblock %}
 
 {% block force_reload %}
 {% include 'partial/auto-reload-in-back-action.swig.html' %}

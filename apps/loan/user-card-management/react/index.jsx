@@ -7,7 +7,7 @@ const BankManagement = React.createClass({
         }
     },
     componentDidMount() {
-        $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
+        $FW.Post(`${API_PATH}api/loan/v1/baseinfo.json`, {
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
@@ -70,7 +70,7 @@ const BankManagement = React.createClass({
                     <div className="verify-pop">
                         <div className="verify-tip">您离成功借钱只差一步<br />请先完成必填认证！</div>
                         <div className="verify-pop-close" onClick={this.closeHandler}></div>
-                        <a className="verify-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=2&token=${USER.token}&userId=${USER.id}`}>去认证</a>
+                        <a className="verify-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>去认证</a>
                     </div>
                 </div>
             </div>
@@ -81,8 +81,8 @@ const BankManagement = React.createClass({
 const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('银行卡管理');
     ReactDOM.render(<Header title={"银行卡管理"} />, HEADER_NODE);
-
     $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`, {
         token: USER.token,
         userGid: USER.gid,

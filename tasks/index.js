@@ -11,30 +11,23 @@ const images = require('./images.js');
 const copy = require('./copy.js');
 const revision = require('./revision.js');
 
-const REACT_PATH = 'react-15.4.1';
+const REACT_PATH = 'react-15.4.2';
 
 let COMMON_JAVASCRIPTS_TASK = {};
 
 function get_common_javascript_files(lib_path, extend_files, debug) {
     let files = [
+        `${lib_path}javascripts/use-strict.js`,
         `${lib_path}javascripts/request-animation-frame-0.0.23.js`,
         `${lib_path}javascripts/promise-2.0.2.min.js`,
         `${lib_path}javascripts/object-assign-4.1.1.js`,
         `${lib_path}fw-1.7.2.js`,
-        `${lib_path}javascripts/native-bridge-0.4.0.js`
+        `${lib_path}javascripts/native-bridge-0.6.2.js`
     ];
 
-    if (debug) {
-        files.push(...[
-            `${lib_path}${REACT_PATH}/react.js`,
-            `${lib_path}${REACT_PATH}/react-dom.js`
-        ])
-    } else {
-        files.push(...[
-            `${lib_path}${REACT_PATH}/react.min.js`,
-            `${lib_path}${REACT_PATH}/react-dom.min.js`
-        ])
-    }
+    debug ?
+        files.push(...[`${lib_path}${REACT_PATH}/react.js`, `${lib_path}${REACT_PATH}/react-dom.js`]) :
+        files.push(...[`${lib_path}${REACT_PATH}/react.min.js`, `${lib_path}${REACT_PATH}/react-dom.min.js`]);
 
     files.push(...extend_files);
     return files;
@@ -92,10 +85,10 @@ module.exports = function (site_name, page_name, configs) {
             `${app_path}index.html`,
             // `${app_path}index.pjax.html`
         ], build_path, CONFIG.html_engine, {
-                API_PATH: CONFIG.api_path,
-                DEBUG: CONFIG.debug,
-                ENV: CONFIG.environment
-            })
+            API_PATH: CONFIG.api_path,
+            DEBUG: CONFIG.debug,
+            ENV: CONFIG.environment
+        })
     }
 
     function compile_stylesheets() {

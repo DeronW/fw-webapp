@@ -41,6 +41,16 @@ const Payment = React.createClass({
         if (index == null) {
             return
         }
+        else if (index == 'w') {
+            $FW.Ajax({
+                    url: `${API_PATH}mall/api/payment/v1/wechatPay.json`,
+                    enable_loading: true,
+                    data: {payType: 'WECHAT_PAY'},
+                })
+                .then((data) => {
+
+                });
+        }
         else if (index == "quick_pay") {
             var bizNo = query.bizNo;
             let link = '/static/mall/pay-add-card/index.html?source=pay'
@@ -166,24 +176,22 @@ const Payment = React.createClass({
                  */}
                 <div className="pay-way">
                     {payMethods} {quick_pay}
-                    {/*
-                     <div className="pay-item" onClick={this.payCheck.bind(this,2)}>
-                     <div className="pay-icon"><img src="images/wechat.jpg"/></div>
-                     <div className="pay-name">
-                     <div className="pay-title">微信支付</div>
-                     <div className="pay-subtitle">推荐安装微信5.0及以上版本的用户使用</div>
-                     </div>
-                     <div className={this.state.index==2 ? "pay-check active" : "pay-check"}></div>
-                     </div>
-                     <div className="pay-item" onClick={this.payCheck.bind(this,3)}>
-                     <div className="pay-icon"><img src="images/alipay.jpg"/></div>
-                     <div className="pay-name">
-                     <div className="pay-title">支付宝</div>
-                     <div className="pay-subtitle">推荐安装支付宝5.0及以上版本的用户使用</div>
-                     </div>
-                     <div className={this.state.index==3 ? "pay-check active" : "pay-check"}></div>
-                     </div>
-                     */}
+                    <div className="pay-item" onClick={this.payCheck.bind(this,'w')}>
+                        <div className="pay-icon"><img src="images/wechat.jpg"/></div>
+                        <div className="pay-name">
+                            <div className="pay-title">微信支付</div>
+                            <div className="pay-subtitle">推荐安装微信5.0及以上版本的用户使用</div>
+                        </div>
+                        <div className={this.state.index=='w' ? "pay-check active" : "pay-check"}></div>
+                    </div>
+                    <div className="pay-item" onClick={this.payCheck.bind(this,'z')}>
+                        <div className="pay-icon"><img src="images/alipay.jpg"/></div>
+                        <div className="pay-name">
+                            <div className="pay-title">支付宝</div>
+                            <div className="pay-subtitle">推荐安装支付宝5.0及以上版本的用户使用</div>
+                        </div>
+                        <div className={this.state.index=='z' ? "pay-check active" : "pay-check"}></div>
+                    </div>
                 </div>
                 <div className="pay-bar">
                     <a className="pay-btn" onClick={this.payHandler}>去支付</a>
