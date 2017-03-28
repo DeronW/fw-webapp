@@ -195,6 +195,3 @@ $FW.DOMReady(function () {
     ReactDOM.render(<SendCode/>, CONTENT_NODE);
 });
 
-function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '';
-}
