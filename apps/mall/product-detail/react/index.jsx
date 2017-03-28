@@ -89,13 +89,12 @@ const Product = React.createClass({
 
         let market_price = null;
         if (data.market_price) {
-            market_price =
-                <div className="market-price">
+            market_price = null;
+            {/*<div className="market-price">
                     <span>市价：</span>
                     <span className="market-price-num">&yen;{data.market_price}</span>
-                </div>
-
-        }
+                </div>*/}
+            }
 
         let user_level_manifest;
         if (data.vipLevel == 1) user_level_manifest = "普通用户";
