@@ -18,6 +18,7 @@ $FW.DOMReady(function () {
     });
 
     $FW.Post(`${API_PATH}api/shareTemplate/v1/getContent.json`,{
+        channelCode:OFFICIAL,
         templateType:1,
         userGid: USER.gid,
         userId: USER.id,
