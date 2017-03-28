@@ -219,9 +219,6 @@ const Login = React.createClass({
 
                     <input type="button" onClick={this.state.tab == 'veri' ?this.loginVeri:this.loginPaw}
                            className={this.state.active ? "btn-red active":"btn-red"} value="登录"/>
-                    <div className="login-tip clearfix">没有账户？
-                        <a href="https://m.9888.cn:443/mpwap/orderuser/toRegister.shtml?source=1" id="res">立即注册</a>
-                    </div>
                 </div>
             </div>
         )
