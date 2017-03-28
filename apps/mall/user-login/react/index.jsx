@@ -229,6 +229,10 @@ const Login = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'登录'}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={'登录'} back_handler={back_handler}/>, HEADER_NODE);
     ReactDOM.render(<Login />, CONTENT_NODE);
 });
+
+function back_handler() {
+    location.href = '/';
+}
