@@ -41,9 +41,14 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
   background: #4a86e8 url("../images/bg.png") no-repeat;
-  background-position: 0 45px;
+  background-position: bottom;
 }
 
 .interact-wrap {
@@ -110,6 +115,7 @@ body {
   padding-right: 24px;
   .font-style-default;
   line-height: @input-field-height;
+  color: #d6e2ff;
 
   .clear-btn {
     .small-icon-pattern;
