@@ -32,7 +32,7 @@ const Login = React.createClass({
     },
     //倒计时完成终止
     componentDidUpdate: function () {
-        if (this.state.value == 55) {
+        if (this.state.value == 0) {
             this.stopTick();
             this.setState({value: "获取验证码", reSend: true});
 
