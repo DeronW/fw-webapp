@@ -34,7 +34,7 @@ class PhoneNumInput extends React.Component {
             <div
               className="clear-btn"
               onClick={() => {this.props.handleClear('phoneNum');}}>
-              <img src="images/clear-copy.png" alt="clear button"></img>
+              <img src="images/clear.png" alt="clear button"></img>
             </div>
           }
       </div>
@@ -69,7 +69,7 @@ class VerificationCodeInput extends React.Component {
             <div
               className="clear-btn"
               onClick={() => {this.props.handleClear('verificationCode');}}>
-              <img src="images/clear-copy.png" alt="clear button"></img>
+              <img src="images/clear.png" alt="clear button"></img>
             </div>
           }
           <div
@@ -109,7 +109,7 @@ class PasswordInput extends React.Component {
             <div
               className="clear-btn"
               onClick={() => {this.props.handleClear('password');}}>
-              <img src="images/clear-copy.png" alt="clear button"></img>
+              <img src="images/clear.png" alt="clear button"></img>
             </div>
           }
           <div
@@ -217,13 +217,13 @@ class InteractWrap extends React.Component {
             wx_url = '/static/loan/outside-register-success-wx/index.html',
             otherApps_url = '/static/loan/outside-register-success-wx/index.html';
             switch (jt) {
-              case app:
+              case 'app':
                 window.location.href = app_url;
                 break;
-              case wx:
+              case 'wx':
                 window.location.href = wx_url;
                 break;
-              case otherApps:
+              case 'otherApps':
                 window.location.href = otherApps_url;
                 break;
               default:
