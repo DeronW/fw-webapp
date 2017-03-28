@@ -231,8 +231,9 @@ class InteractWrap extends React.Component {
         } else {
           $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
             channelCode: $FW.Format.urlQuery().channelCode,
+            extInvCode:$FW.Format.urlQuery().extInvCode,
             codeToken: this.state.codeToken,
-            invitationCode: $FW.Format.urlQuery().code,
+            invitationCode: $FW.Format.urlQuery().invitationCode,
             mobile: this.state.phoneNum,
             password: this.state.password,
             verifyCode: this.state.verificationCode,
