@@ -144,8 +144,8 @@ const Login = React.createClass({
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
+                var urlQuery = location.search.split("?");
                 if (urlQuery[2]) {
-                    var urlQuery = location.search.split("?");
                     window.location.href = urlQuery[1] + "?" + urlQuery[2];
                 }
                 else {
