@@ -144,8 +144,15 @@ const Login = React.createClass({
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {
-                var url = $FW.Format.urlQuery().redirect_url;
-                window.location.href = url
+                var urlQuery = location.search.split("?");
+                if (urlQuery[2]) {
+                    window.location.href = urlQuery[1].split('&')[1].split('=')[1] + "?" + urlQuery[2];
+                }
+                else {
+                    var url = $FW.Format.urlQuery().redirect_url;
+                    window.location.href = url
+                }
+
             }.bind(this)
         })
 
