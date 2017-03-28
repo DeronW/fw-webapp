@@ -34,7 +34,7 @@ class PhoneNumInput extends React.Component {
             <div
               className="clear-btn"
               onClick={() => {this.props.handleClear('phoneNum');}}>
-              <img src="images/clear-copy.png" alt="clear button"></img>
+              <img src="images/clear.png" alt="clear button"></img>
             </div>
           }
       </div>
@@ -69,7 +69,7 @@ class VerificationCodeInput extends React.Component {
             <div
               className="clear-btn"
               onClick={() => {this.props.handleClear('verificationCode');}}>
-              <img src="images/clear-copy.png" alt="clear button"></img>
+              <img src="images/clear.png" alt="clear button"></img>
             </div>
           }
           <div
@@ -109,7 +109,7 @@ class PasswordInput extends React.Component {
             <div
               className="clear-btn"
               onClick={() => {this.props.handleClear('password');}}>
-              <img src="images/clear-copy.png" alt="clear button"></img>
+              <img src="images/clear.png" alt="clear button"></img>
             </div>
           }
           <div
