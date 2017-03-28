@@ -51,7 +51,7 @@ window.onload = function () {
     //判断金额 n:四舍五入保留几位小数，默认为2位
     function judgeCash(value, n) {
         n = n > 0 && n <= 20 ? n : 2;
-        var len = value.toString().length;
+        var len = value.toString().split(".")[0].length;
         var v = "";
         if (len > 8) {
             v = (value / 100000000).toFixed(n) + "亿";
