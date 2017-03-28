@@ -70,6 +70,7 @@ const Login = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/login/setCode.json`,
             enable_loading: 'mini',
+            method: 'post',
             data: FormData,
             success: function (data) {
                 $FW.Component.Alert("原来你在测试那就告诉你验证码：" + data.code)
@@ -142,6 +143,7 @@ const Login = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/login/login.json`,
             enable_loading: 'mini',
+            method: 'post',
             data: FormData,
             success: function (data) {
                 var urlQuery = location.search.split("?");
