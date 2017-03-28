@@ -360,7 +360,7 @@ window.onload = function () {
         //借款人数
         document.querySelector(".pieTopMobile .userNumber span").innerText = formatPerson(data.data.total_borrUserCount);
         //借款金额
-        document.querySelector(".pieTopMobile .userCash span").innerText = judgeCash(data.data.total_invest /data.data.data.data.total_borrUserCount);
+        document.querySelector(".pieTopMobile .userCash span").innerText = judgeCash(data.data.total_invest /data.data.total_borrUserCount);
         //出借用户
         secondPie(data.data.female,data.data.male,data.data.age_level_1,data.data.age_level_2,data.data.age_level_3,data.data.age_level_4,data.data.age_level_5);
         //出借人数
