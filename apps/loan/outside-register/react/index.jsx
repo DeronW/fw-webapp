@@ -14,11 +14,11 @@ class PhoneNumInput extends React.Component {
         </div>
         <input
           type="tel"
-          pattern="[0-9]*"
           placeholder="请输入手机号"
+          maxLength="11"
           value={this.props.value}
           onChange={(e) => {
-            if (e.target.value.length > 11) {
+            if (!/[0-9]/.test(e.target.value[e.target.value.length-1]) ) {
               return;
             }
             this.setState({ enableClear: e.target.value ? true : false});
@@ -56,10 +56,14 @@ class VerificationCodeInput extends React.Component {
           <img src="images/veri-code.png"/>
         </div>
         <input
-          type="number"
+          type="tel"
           placeholder="请输入验证码"
+          maxLength="8"
           value={this.props.value}
           onChange={(e) => {
+            if (!/[0-9]/.test(e.target.value[e.target.value.length-1]) ) {
+              return;
+            }
             this.setState({ enableClear: e.target.value ? true : false});
             this.props.handleChange(e, 'verificationCode');}}
           onFocus={(e) => {this.setState({ enableClear: e.target.value ? true : false});}}
