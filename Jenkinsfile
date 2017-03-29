@@ -13,9 +13,9 @@ node("front") {
        sh 'npm run clean'
    }
    stage('Build') {
-      echo '是否强制重新刷新'
-      sh ''' echo off
-if [ $FORCE == \'true\' ] ; then
+      // 是否强制重新刷新
+      sh ''' 
+if [ $FORCE = \'true\' ] ; then
 echo 'npm run build:loan'
 fi '''
    }
