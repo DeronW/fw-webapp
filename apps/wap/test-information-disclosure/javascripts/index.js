@@ -35,9 +35,9 @@ window.onload = function () {
         }
     }
 
-    reportBtn.onclick = function () {
-        //gotoHandler("")
-    };
+    //reportBtn.onclick = function () {
+    //    gotoHandler("https://static.9888.cn/pdf/2016report.pdf")
+    //};
     auditBtn1.onclick = function () {
         //gotoHandler("")
     };
