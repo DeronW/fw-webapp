@@ -24,7 +24,7 @@ fi '''
 if [ $FORCE = \'true\' ] ; then
     echo 'npm run build:loan'
 else
-    ~/workspace/fron-$PROJECT/differential.compile.$BRANCH.sh
+    ~/workspace/front-$PROJECT/differential.compile.$BRANCH.sh
 fi '''
    }
    stage('Publish') {
