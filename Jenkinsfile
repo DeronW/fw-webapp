@@ -11,7 +11,6 @@ node("front") {
 if [ $FORCE = \'true\' ] ; then
     npm install
 fi '''
-       // sh 'npm install' // 时而打开时而关闭
    }
    stage('Clean workspace'){
        sh 'npm run clean'
