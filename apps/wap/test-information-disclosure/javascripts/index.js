@@ -231,7 +231,7 @@ window.onload = function () {
             },
             tooltip: {
                 trigger: 'item',
-                formatter: "{b} : {c} ({d}%)",
+                formatter: "{d}%",
                 backgroundColor: 'rgba(55,72,123,0.7)',
                 padding: 10
             },
