@@ -15,10 +15,11 @@ class PhoneNumInput extends React.Component {
         <input
           type="tel"
           placeholder="请输入手机号"
+          // minLength="0"
           maxLength="11"
           value={this.props.value}
           onChange={(e) => {
-            if (!/[0-9]/.test(e.target.value[e.target.value.length-1]) ) {
+            if (!/[0-9]/.test(e.target.value[e.target.value.length-1]) && e.target.value.length > 0) {
               return;
             }
             this.setState({ enableClear: e.target.value ? true : false});
@@ -61,7 +62,7 @@ class VerificationCodeInput extends React.Component {
           maxLength="8"
           value={this.props.value}
           onChange={(e) => {
-            if (!/[0-9]/.test(e.target.value[e.target.value.length-1]) ) {
+            if (!/[0-9]/.test(e.target.value[e.target.value.length-1]) && e.target.value.length > 0) {
               return;
             }
             this.setState({ enableClear: e.target.value ? true : false});
