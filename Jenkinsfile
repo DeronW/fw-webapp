@@ -15,9 +15,7 @@ node("front") {
    stage('Build') {
       echo '是否强制重新刷新'
       sh ''' echo off
-if [ $FORCE == \'true\' ]
-    echo 'force complete compile'
-then
+if [ $FORCE == \'true\' ] ; then
     npm run build:loan
 fi '''
 
