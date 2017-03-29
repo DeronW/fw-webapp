@@ -6,7 +6,7 @@ node("front") {
         sh 'git diff --stat=400 origin/$BRANCH > /tmp/webapp.$PROJECT.git.diff'
         sh 'git pull'
    }
-   stage('Update compile env'){
+   stage('Update nodejs lib'){
              sh '''
 if [ $FORCE = \'true\' ] ; then
     npm install
@@ -15,11 +15,16 @@ fi '''
    stage('Clean workspace'){
        sh 'npm run clean'
    }
+   stage('Differential check') {
+       sh 'npm run pre-compile -- $PROJECT'
+   }
    stage('Build') {
       // 是否强制重新刷新
       sh ''' 
 if [ $FORCE = \'true\' ] ; then
-echo 'npm run build:loan'
+    echo 'npm run build:loan'
+else
+    ./differential.compile.$BRANCH.sh
 fi '''
    }
    stage('Publish') {
