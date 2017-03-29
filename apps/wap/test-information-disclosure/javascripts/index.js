@@ -35,9 +35,9 @@ window.onload = function () {
         }
     }
 
-    reportBtn.onclick = function () {
-        //gotoHandler("")
-    };
+    //reportBtn.onclick = function () {
+    //    gotoHandler("https://static.9888.cn/pdf/2016report.pdf")
+    //};
     auditBtn1.onclick = function () {
         //gotoHandler("")
     };
@@ -66,11 +66,11 @@ window.onload = function () {
 
     //格式化人数
     function formatPerson(s) {
-        s = parseFloat((s + "").replace(/[^\d\.-]/g, "")) + "";
+        s = parseFloat((s + "").replace(/[^\d.-]/g, "")) + "";
         var l = s.split(".")[0].split("").reverse(),
             t = "";
-        for (i = 0; i < l.length; i++) {
-            t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+        for (var i = 0; i < l.length; i++) {
+            t += l[i] + ((i + 1) % 3 == 0 && i + 1 != l.length ? "," : "");
         }
         return t.split("").reverse().join("") + '人';
     }
