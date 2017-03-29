@@ -1,6 +1,5 @@
 node("front") {
-   stage('Preparation') { // for display purposes
-      // git 'git@10.10.100.106:front/webapp.git'
+   stage('Preparation') {
         // git credentialsId: '4cac0f9e-5bcd-4f50-a38f-d17f417bbeb5', url: 'git@10.10.100.106:front/webapp.git'
         sh 'git checkout $BRANCH'
         sh 'git fetch'
@@ -15,12 +14,12 @@ node("front") {
    }
    stage('Build') {
       // Run the maven build
+      sh '''if [ $FORCE == \'true\' ] # 是否强制重新刷新
+            then
+	        npm run build:loan
+        fi '''
 
-        // if [ $FORCE == 'true' ] # 是否强制重新刷新
-        //then
-        //	npm run build:loan
-        //fi 
-        sh 'npm run build:loan'
+        // sh 'npm run build:loan'
    }
    stage('Publish') {
         sh 'mkdir -p cdn/loan/placeholder/'
