@@ -7,6 +7,10 @@ node("front") {
         sh 'git pull'
    }
    stage('Update compile env'){
+             sh '''
+if [ $FORCE = \'true\' ] ; then
+    npm install
+fi '''
        // sh 'npm install' // 时而打开时而关闭
    }
    stage('Clean workspace'){
