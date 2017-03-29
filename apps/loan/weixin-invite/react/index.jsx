@@ -61,7 +61,7 @@ $FW.DOMReady(function () {
                     loadNextPage = false
                     $("#more").html("已全部显示");
                 }
-                done && done();
+               done && done();
             }, (e) => {
                 $FW.Component.Toast(e.message);
                 if (page == 1) {
