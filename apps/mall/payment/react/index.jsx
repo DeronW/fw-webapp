@@ -176,6 +176,7 @@ const Payment = React.createClass({
                  */}
                 <div className="pay-way">
                     {payMethods} {quick_pay}
+                    {/*
                     <div className="pay-item" onClick={this.payCheck.bind(this,'w')}>
                         <div className="pay-icon"><img src="images/wechat.jpg"/></div>
                         <div className="pay-name">
@@ -192,6 +193,7 @@ const Payment = React.createClass({
                         </div>
                         <div className={this.state.index=='z' ? "pay-check active" : "pay-check"}></div>
                     </div>
+                    */}
                 </div>
                 <div className="pay-bar">
                     <a className="pay-btn" onClick={this.payHandler}>去支付</a>
