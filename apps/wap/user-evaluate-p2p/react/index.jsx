@@ -283,7 +283,6 @@ const QuestionPanel = React.createClass({
 
         }));
         if (ajaxcan) {
-            console.log(newJson)
             $FW.Ajax({
                 url: API_PATH + 'mpwap/orderuser/riskGradeInto.shtml', //传参数
                 data: newJson,
