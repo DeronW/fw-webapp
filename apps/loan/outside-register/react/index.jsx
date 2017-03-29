@@ -199,6 +199,10 @@ class InteractWrap extends React.Component {
     for (var typeName in essentialTypeNames) {
       if (essentialTypeNames.hasOwnProperty(typeName)) {
         if (!this.state[typeName]) {
+          if (typeName === 'password') {
+            $FW.Component.Toast('密码为空，输入8-16位的字母和数字组合密码');
+            return;
+          }
           $FW.Component.Toast(essentialTypeNames[typeName] + "为空，请重新输入");
           return;
         }
@@ -252,7 +256,8 @@ class InteractWrap extends React.Component {
               return;
             };
             $FW.Component.Toast(e.message);
-            if (/验证码不正确/.test(e.message)) {
+            if (e.code === 20010) {
+              $FW.Component.Toast("验证码错误，请重新输入");
               this.setState({verificationCode: ''});
             };
           });
@@ -308,8 +313,8 @@ function isPasswordValid(password) {
     $FW.Component.Toast("密码只能包含数字和字母");
     return;
   }
-  if (password.length < 8 || password.length >= 16) {
-    $FW.Component.Toast("密码长度需在8-16位");
+  if (password.length < 8) {
+    $FW.Component.Toast("密码过短，请输入8-16位的字母和数字组合密码");
     return;
   }
   if (!includeNumPattern.test(password) || !includeAlphabetPattern.test(password)) {
@@ -318,6 +323,12 @@ function isPasswordValid(password) {
   }
   return true;
 }
+
+
+// document.body.onoffline = function() {
+//   $FW.Component.Toast("无网络连接");
+//   console.log("无网络连接");
+// }
 
 
 // render ReactDom
