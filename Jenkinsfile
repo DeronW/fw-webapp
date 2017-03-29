@@ -16,10 +16,8 @@ node("front") {
       echo '是否强制重新刷新'
       sh ''' echo off
 if [ $FORCE == \'true\' ] ; then
-    npm run build:loan
+echo 'npm run build:loan'
 fi '''
-
-        // sh 'npm run build:loan'
    }
    stage('Publish') {
         sh 'mkdir -p cdn/loan/placeholder/'
