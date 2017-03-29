@@ -15,7 +15,6 @@ class PhoneNumInput extends React.Component {
         <input
           type="tel"
           placeholder="请输入手机号"
-          // minLength="0"
           maxLength="11"
           value={this.props.value}
           onChange={(e) => {
