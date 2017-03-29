@@ -89,13 +89,12 @@ const Product = React.createClass({
 
         let market_price = null;
         if (data.market_price) {
-            market_price =
-                <div className="market-price">
+            market_price = null;
+            {/*<div className="market-price">
                     <span>市价：</span>
                     <span className="market-price-num">&yen;{data.market_price}</span>
-                </div>
-
-        }
+                </div>*/}
+            }
 
         let user_level_manifest;
         if (data.vipLevel == 1) user_level_manifest = "普通用户";
@@ -206,11 +205,10 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
 
         if (this.props.is_login == 0) {
+            // 首先检查是否已经登录
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
-            }).then(data => {
-                //  location.href = linkLogin
             });
         } else {
             $FW.Ajax({
@@ -276,14 +274,13 @@ const PlusMinus = React.createClass({
         let isCanBuy = this.props.isCanBuy;
 
         if (this.props.is_login == 1) {
-            gotoHandler(link);
+            // gotoHandler(link);
+            window.location.href = link;
         } else {
             if (!isCanBuy) {
                 $FW.Ajax({
                     url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                     enable_loading: 'mini'
-                }).then(data => {
-                    // gotoHandler(linkLogin) //$FW.Component.Alert("请先登录");
                 });
             }
         }

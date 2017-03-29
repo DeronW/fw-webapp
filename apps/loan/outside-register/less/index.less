@@ -39,6 +39,7 @@
 // main style
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // no highlight when tapping
 }
 
 html {
@@ -85,6 +86,7 @@ body {
     border: none;
     outline: none;
     margin-left: @input-type-icon-width;
+    padding-left: 0;
     background-color: transparent;
     .font-style-default;
 
@@ -129,6 +131,10 @@ body {
 
   .toggle-password-display, .clear-btn {
     .small-icon-pattern;
+  }
+
+  .clear-btn {
+    width: 45px;
   }
 }
 

@@ -24,8 +24,8 @@ const USER_PAGES = [
 	// 'user-register',
 	// 'user-register-1',
 	'user-login',
-	'user-coupon',
-	//'user-coupon-list'
+	//'user-coupon',
+
 ]
 
 const PRODUCT_PAGES = [

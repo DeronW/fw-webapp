@@ -35,9 +35,9 @@ window.onload = function () {
         }
     }
 
-    reportBtn.onclick = function () {
-        //gotoHandler("")
-    };
+    //reportBtn.onclick = function () {
+    //    gotoHandler("https://static.9888.cn/pdf/2016report.pdf")
+    //};
     auditBtn1.onclick = function () {
         //gotoHandler("")
     };
@@ -66,11 +66,11 @@ window.onload = function () {
 
     //格式化人数
     function formatPerson(s) {
-        s = parseFloat((s + "").replace(/[^\d\.-]/g, "")) + "";
+        s = parseFloat((s + "").replace(/[^\d.-]/g, "")) + "";
         var l = s.split(".")[0].split("").reverse(),
             t = "";
-        for (i = 0; i < l.length; i++) {
-            t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+        for (var i = 0; i < l.length; i++) {
+            t += l[i] + ((i + 1) % 3 == 0 && i + 1 != l.length ? "," : "");
         }
         return t.split("").reverse().join("") + '人';
     }
@@ -378,8 +378,8 @@ window.onload = function () {
         for (var i = 0; i < len; i++) {
             endurance[0].querySelector('.cash span').innerText = judgeCash(data.data.total_principalInvest);
             endurance[1].querySelector('.cash span').innerText = judgeCash(data.data.total_overdueCount);
-            endurance[2].querySelector('.cash span').innerText = prevent(data.data.total_overdueCount / data.data.total_invest);
-            endurance[3].querySelector('.cash span').innerText = data.data.total_overdueSum ? prevent(data.data.total_overdueSum / data.data.total_orderCount) : 0;
+            endurance[2].querySelector('.cash span').innerText = prevent(data.data.total_overdueCount / data.data.total_invest * 100);
+            endurance[3].querySelector('.cash span').innerText = prevent(data.data.total_overdueSum / data.data.total_orderCount  * 100);
         }
     });
 

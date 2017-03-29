@@ -51,28 +51,25 @@ var Btn = React.createClass({
 
 var PromptBlock = React.createClass({
     render: function () {
-		console.log(	this.props.resDetails != ''); 
-		console.log(	this.props.resDetails.resDetails); 
-		console.log(typeof 	this.props.resDetails.resDetails); 
         return (
             <div className="ui-prompt">
                 <div className="img">
-                    <img src={this.props.imgUrl} />
+                    <img src={this.props.imgUrl}/>
                 </div>
                 <div className="title">
 
                     {this.props.title}
                 </div>
 
-				{
-					this.props.resDetails != '' ?  this.props.resDetails.resDetails.map((data, index) => {
-						return <div className="ui-prompt-text">
-								<span className="number-text">{data.giftAmount}</span>
-								{data.giftType == 0 ? '元返现券礼包已经转入您的账户中' : '返息券已经转入您的账户中'}
-							</div>
-						
-					}) : null
-				}
+                {
+                    this.props.resDetails != '' ? this.props.resDetails.resDetails.map((data, index) => {
+                        return <div className="ui-prompt-text">
+                            <span className="number-text">{data.giftAmount}</span>
+                            {data.giftType == 0 ? '元返现券礼包已经转入您的账户中' : '返息券已经转入您的账户中'}
+                        </div>
+
+                    }) : null
+                }
             </div>
         );
     }
@@ -88,7 +85,7 @@ var AccountSucceedBody = React.createClass({
     },
     componentWillMount: function () {
         var _this = this;
-		
+
 
         $FW.Ajax({
             url: API_PATH + "mpwap/new/userLogin/registResult.shtml",
@@ -121,21 +118,21 @@ var AccountSucceedBody = React.createClass({
     render: function () {
         return (
             <div className="">
-                <TopNav title={"注册成功"} btnText={"关闭"} callbackPopShow={this.handlerPopShow} />
+                <TopNav title={"注册成功"} btnText={"关闭"} callbackPopShow={this.handlerPopShow}/>
 
                 <div className="nav-block">
-                    <img src="images/process.png" />
+                    <img src="images/process.png"/>
                 </div>
                 <PromptBlock imgUrl={"images/succeed-1.png"} title={"注册成功"}
-                    text={"元返现券已经转入您的账户中"}
-                    resDetails={this.state.registResultData}
-                />
-                <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler} />
+                             text={"元返现券已经转入您的账户中"}
+                             resDetails={this.state.registResultData}
+                    />
+                <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler}/>
 
                 {
                     this.state.popShow ? <Pop callbackCancelBtn={this.getCancelBtn}
-                        callbackConfirmBtn={this.getConfirmBtn}
-                    /> : null
+                                              callbackConfirmBtn={this.getConfirmBtn}
+                        /> : null
                 }
 
             </div>

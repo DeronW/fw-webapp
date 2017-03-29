@@ -32,7 +32,7 @@ const Login = React.createClass({
     },
     //倒计时完成终止
     componentDidUpdate: function () {
-        if (this.state.value == 55) {
+        if (this.state.value == 0) {
             this.stopTick();
             this.setState({value: "获取验证码", reSend: true});
 
@@ -70,9 +70,10 @@ const Login = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/login/setCode.json`,
             enable_loading: 'mini',
+            method: 'post',
             data: FormData,
             success: function (data) {
-                $FW.Component.Alert("原来你在测试那就告诉你验证码：" + data.code)
+               // $FW.Component.Alert("原来你在测试那就告诉你验证码：" + data.code)
                 this.setState({value: 60, reSend: false});
                 this.tick()
                 this.setState({reSend: false});
@@ -142,6 +143,7 @@ const Login = React.createClass({
         $FW.Ajax({
             url: `${API_PATH}mall/login/login.json`,
             enable_loading: 'mini',
+            method: 'post',
             data: FormData,
             success: function (data) {
                 var urlQuery = location.search.split("?");
