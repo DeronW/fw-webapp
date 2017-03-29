@@ -22,7 +22,7 @@ fi '''
       // 是否强制重新刷新
       sh ''' 
 if [ $FORCE = \'true\' ] ; then
-    echo 'npm run build:loan'
+    npm run build:loan
 else
     ~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh
 fi '''
