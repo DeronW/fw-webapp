@@ -13,7 +13,8 @@ class PhoneNumInput extends React.Component {
           <img src="images/phone.png"/>
         </div>
         <input
-          type="number"
+          type="tel"
+          pattern="[0-9]*"
           placeholder="请输入手机号"
           value={this.props.value}
           onChange={(e) => {
