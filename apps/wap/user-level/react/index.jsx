@@ -87,12 +87,10 @@ Content.Prerogative = (all_gifts, current_level, user_level) => {
 
     let gift_items = (g, index) => {
 
-        let img = (
-            <a className="prerogative-item" key={index}
+        let img = <a className="prerogative-item" key={index}
                 onClick={() => qryDetail(g.giftBagId, current_level, g.bagType)}>
                 <img src={`images/level-${current_level}-${g.bagType}.png`} />
             </a>
-        )
         return g.giftBagId ? img : null;
     }
 
