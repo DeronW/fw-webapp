@@ -102,6 +102,7 @@ class PasswordInput extends React.Component {
         <input
           type={this.props.type}
           placeholder="请输入密码，8-16位数字字母组合"
+          maxLength="16"
           value={this.props.value}
           onChange={(e) => {
             this.setState({ enableClear: e.target.value ? true : false});
@@ -175,7 +176,7 @@ class InteractWrap extends React.Component {
             $FW.Component.Toast('手机号已注册');
             setTimeout(this.handleJump, 2000);
             return;
-          };
+          }
           $FW.Component.Toast(e.message);
         });
       } else {
@@ -214,7 +215,7 @@ class InteractWrap extends React.Component {
     let jt = $FW.Format.urlQuery().jumpType;
     let app_url = '/static/loan/outside-register-success-app/index.html',
     wx_url = '/static/loan/outside-register-success-wx/index.html',
-    other_apps_url = '/static/loan/outside-register-success-wx/index.html';
+    other_apps_url = '/static/loan/outside-register-success-other_apps/index.html';
     switch (jt) {
       case 'app':
         window.location.href = app_url;
@@ -253,12 +254,12 @@ class InteractWrap extends React.Component {
             if (!this.state.codeToken) {
               $FW.Component.Toast("请点击获取验证码！");
               return;
-            };
+            }
             $FW.Component.Toast(e.message);
             if (e.code === 20010) {
               $FW.Component.Toast("验证码错误，请重新输入");
               this.setState({verificationCode: ''});
-            };
+            }
           });
         }
       }
@@ -275,7 +276,7 @@ class InteractWrap extends React.Component {
         <VerificationCodeInput
           value={this.state.verificationCode}
           verificationCodeInfo={this.state.timeRemainForNewCode === 60 ?
-                                    "获取验证码" : (this.state.timeRemainForNewCode + "s")}
+                                    "获取验证码" : this.state.timeRemainForNewCode + "s"}
           handleChange={this.handleInput}
           handleClick={this.getVerificationCode}
           handleClear={this.clearInput} />
