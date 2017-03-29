@@ -14,6 +14,7 @@ class PhoneNumInput extends React.Component {
         </div>
         <input
           type="tel"
+          pattern="[0-9]*"
           placeholder="请输入手机号"
           value={this.props.value}
           onChange={(e) => {
