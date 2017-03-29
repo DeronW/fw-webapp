@@ -15,9 +15,9 @@ node("front") {
    stage('Build') {
       // Run the maven build
       sh '''if [ $FORCE == \'true\' ] # 是否强制重新刷新
-            then
-	        npm run build:loan
-        fi '''
+then
+    npm run build:loan
+fi '''
 
         // sh 'npm run build:loan'
    }
