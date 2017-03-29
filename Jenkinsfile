@@ -29,7 +29,6 @@ fi '''
    }
    stage('Publish') {
         sh 'mkdir -p ~/workspace/front-$PROJECT/cdn/loan/placeholder/'
-        // sh 'rsync -arI cdn/loan/ www@10.10.100.158:/static/loan/'
         sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ /srv/static/$PROJECT/'
    }
 }
