@@ -7,14 +7,15 @@ node("front") {
         sh 'git pull'
    }
    stage('Update compile env'){
-       sh 'npm install'
+       // sh 'npm install' // 时而打开时而关闭
    }
    stage('Clean workspace'){
        sh 'npm run clean'
    }
    stage('Build') {
-      // Run the maven build
-      sh '''if [ $FORCE == \'true\' ] # 是否强制重新刷新
+      echo '是否强制重新刷新'
+      sh ''' 
+if [ $FORCE == \'true\' ]
 then
     npm run build:loan
 fi '''
