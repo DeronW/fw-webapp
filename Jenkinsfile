@@ -30,5 +30,6 @@ fi '''
    stage('Publish') {
         sh 'mkdir -p cdn/loan/placeholder/'
         // sh 'rsync -arI cdn/loan/ www@10.10.100.158:/static/loan/'
+        sh 'rsync -arI cdn/$PROJECT/ /srv/static/$PROJECT/'
    }
 }
