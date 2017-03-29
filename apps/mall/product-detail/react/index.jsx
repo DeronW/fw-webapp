@@ -205,11 +205,10 @@ const PlusMinus = React.createClass({
         let bizNo = $FW.Format.urlQuery().bizNo;
 
         if (this.props.is_login == 0) {
+            // 首先检查是否已经登录
             $FW.Ajax({
                 url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
-            }).then(data => {
-                //  location.href = linkLogin
             });
         } else {
             $FW.Ajax({
@@ -275,14 +274,13 @@ const PlusMinus = React.createClass({
         let isCanBuy = this.props.isCanBuy;
 
         if (this.props.is_login == 1) {
-            gotoHandler(link);
+            // gotoHandler(link);
+            window.location.href = link;
         } else {
             if (!isCanBuy) {
                 $FW.Ajax({
                     url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
                     enable_loading: 'mini'
-                }).then(data => {
-                    // gotoHandler(linkLogin) //$FW.Component.Alert("请先登录");
                 });
             }
         }
