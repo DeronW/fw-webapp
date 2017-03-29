@@ -102,8 +102,7 @@ const User = React.createClass({
                     </a>
                 </div>
                 <div className="icon-list">
-                    {/*
-                     <a className="list-box" href="/static/mall/user-prize-record/index.html">
+                    <a className="list-box" href="/static/mall/user-prize-record/index.html">
                      <img src="images/icon9.jpg"/>
                      <span className="box-title1">抽奖记录</span>
                      </a>
@@ -111,6 +110,7 @@ const User = React.createClass({
                      <img src="images/icon11.jpg"/>
                      <span className="box-title2">我的足迹</span>
                      </a>
+                    {/*
                      <a className="list-box" href="https://dougemall.qiyukf.com/client?k=b0ecf23066d7645f98686b64260485da&wp=1">
                      <img src="images/icon10.jpg"/>
                      <span className="box-title3">在线客服</span>
