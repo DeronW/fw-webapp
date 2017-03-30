@@ -15,6 +15,7 @@ node("front") {
         }
         sh 'git pull'
     }
+
     stage('Update nodejs lib'){
        if(params.FORCE) {
            sh 'npm install'
@@ -24,14 +25,17 @@ node("front") {
            echo 'ignore npm update'
        }
     }
+
     stage('Clean workspace'){
        sh 'npm run clean'
     }
+
     stage('Differential check') {
         if(!params.FORCE) {
            sh 'npm run pre-compile -- $PROJECT'
         }
     }
+
     stage('Build') {
       // 是否强制重新刷新
         if(params.FORCE) {
@@ -41,6 +45,7 @@ node("front") {
             sh '~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
         }
     }
+    
     stage('Publish') {
         sh 'mkdir -p ~/workspace/front-$PROJECT/cdn/loan/placeholder/'
         sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ /srv/static/$PROJECT/'
