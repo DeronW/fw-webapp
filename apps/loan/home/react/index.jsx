@@ -190,8 +190,7 @@ const ApplyLoan = React.createClass({
 
         return (
             <div className="apply-loan">
-                {/*{!$FW.Browser.inApp() && <div className="header">放心花</div>}*/}
-                <div className="header">放心花</div>
+                {!$FW.Browser.inApp() && <div className="header">放心花</div>}
                 {false && $FW.Browser.inApp() && <div className="ad">
                     <a onClick={()=>gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png"/></a>
                 </div>}
