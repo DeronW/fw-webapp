@@ -251,7 +251,6 @@ wap站：npm run gulp main:[文件名]:watch
 放心花：npm run gulp loan:[文件名]:watch
 
 
-
 ## 金融工场前端组开发及发布流程
 
 ### 标准流程
@@ -266,3 +265,20 @@ wap站：npm run gulp main:[文件名]:watch
 1. 请在各个项目的release分支中进行开发，推送到远程仓库之前记得拉取线上最新代码。
 2. 在测试Jenkins上编译release分支代码，在测试环境测试相关功能。
 3. 测试通过以后在发布Jenkins上编译release分支的代码。
+
+
+
+
+
+
+## 项目目录结果说明
+- apps
+- lib
+- public
+- scripts
+- tasks
+- .editorconfig
+- .eslintrc
+- .gitignore
+- gulpfile.js
+- gulpfile.loan.js
