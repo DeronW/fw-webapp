@@ -10,7 +10,7 @@ let jsPost = function (action, values) {
 };
 
 let qryDetail = (giftBagId, level, bagType) => {
-    let in_app = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
+    let in_app = $FW.Browser.inApp();
     jsPost(`/mpwap/${in_app ? 'app/' : ''}vipTeQuan/qryVipTeQuanDetail.shtml`, {
         'level': level,
         'giftBagId': giftBagId,

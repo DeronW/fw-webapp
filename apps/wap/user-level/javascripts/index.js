@@ -6,7 +6,7 @@
 
 
 function inApp() {
-    return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+    return $FW.Browser.inApp();
 }
 
 function redirectToAppUserContribute() {
@@ -19,7 +19,7 @@ function redirectToAppUserContribute() {
 
 var qryDetail = function (giftBagId, level, bagType) {
 
-    var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
+    var app_login_sign = $FW.Browser.inApp();
     if (app_login_sign !== null && app_login_sign !== '') {
         jsPost(location.protocol + '//m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml', {
             'level': level,
@@ -111,7 +111,7 @@ $(function () {
 
             var ua = navigator.userAgent;
             // hack 针对华为B199 机型的兼容, 不使用滑动功能
-            if (ua.match(/FinancialWorkshop/) && ua.match(/HuaweiB199/)) {
+            if ($FW.Browser.inApp() && ua.match(/HuaweiB199/)) {
                 [0, 1, 2, 3, 4].forEach(function (i) {
                     if (i != num)
                         $(".center.slider > div:eq(" + i + ")").hide()
