@@ -31,6 +31,10 @@ const PROTOCOL_PAGES = [
     'protocol-special-cash', // 特殊提现协议
     'protocol-special-bind', // 特殊绑定银行卡协议
     'protocol-batch-invest', // 批量投资协议
+    'protocol-lender-promise', // 出借人承诺书
+    'protocol-entrust-transfer', // 委托划款授权书
+    'protocol-perform-duty', // 履行反洗钱义务的承诺书
+    'protocol-risk-prompt', // 网络借贷出借风险提示
 ]
 
 // const CIRCLE_PAGES = [
