@@ -276,9 +276,19 @@ wap站：npm run gulp main:[文件名]:watch
 - lib
 - public
 - scripts
+    - clean.js 清除上次编译结果文件
+    - gen-differential-compile-cmd.js 检查当前分支与git仓库远程分支的文件差异, 并生成差量编译脚本
+    - webpack.config.js
 - tasks
 - .editorconfig
 - .eslintrc
 - .gitignore
 - gulpfile.js
 - gulpfile.loan.js
+- gulpfile.mall.js
+- gulpfile.wap.js
+- gulpfile.settings.default.js
+- gulpfile.settings.js
+- Jenkinsfile
+- package.json
+- README.md
