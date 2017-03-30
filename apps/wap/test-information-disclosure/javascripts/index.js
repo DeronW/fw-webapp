@@ -378,8 +378,8 @@ window.onload = function () {
         for (var i = 0; i < len; i++) {
             endurance[0].querySelector('.cash span').innerText = judgeCash(data.data.total_principalInvest);
             endurance[1].querySelector('.cash span').innerText = judgeCash(data.data.total_overdueCount);
-            endurance[2].querySelector('.cash span').innerText = prevent(data.data.total_overdueCount / data.data.total_invest * 100);
-            endurance[3].querySelector('.cash span').innerText = prevent(data.data.total_overdueSum / data.data.total_orderCount  * 100);
+            endurance[2].querySelector('.cash span').innerText = prevent(data.data.total_overdueSum / data.data.total_invest * 100);
+            endurance[3].querySelector('.cash span').innerText = prevent(data.data.total_overdueCount / data.data.total_orderCount * 100);
         }
     });
 
