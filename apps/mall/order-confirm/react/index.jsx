@@ -47,9 +47,13 @@ const ConfirmOrder = React.createClass({
     },
     makeOrderHandler: function () {
         if (!this.props.data.canBuy) return; // $FW.Component.Alert('您现在不能购买这件商品');
-        if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
-            return $FW.Component.Alert('请选择收货地址');
 
+
+        if (!this.state.isVirtualProduct) {
+            if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
+                return $FW.Component.Alert('请选择收货地址');
+        }
+        
         if (this.state.payablePointAmt > this.state.avaliablePoints) {
             $FW.Component.Alert('工分不足，不能购买');
             return;
