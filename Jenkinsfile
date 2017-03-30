@@ -39,7 +39,7 @@ node("front") {
     stage('Build') {
       // 是否强制重新刷新
         if(params.FORCE) {
-            sh 'npm run build:loan'
+            sh 'npm run build:$PROJECT'
         }
         if(!params.FORCE) {
             sh '~/workspace/front-$PROJECT/differential.compile.$PROJECT.sh'
@@ -47,7 +47,7 @@ node("front") {
     }
     
     stage('Publish') {
-        sh 'mkdir -p ~/workspace/front-$PROJECT/cdn/loan/placeholder/'
+        sh 'mkdir -p ~/workspace/front-$PROJECT/cdn/$PROJECT/placeholder/'
         sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ /srv/static/$PROJECT/'
     }
 }
