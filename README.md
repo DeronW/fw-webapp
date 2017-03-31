@@ -1,57 +1,31 @@
 WebAPP
 =========
-# 金融工场 移动端商城
+# 金融工场 移动端项目代码库
 
-**用途**:
+**包含项目**:
 
-嵌入到APP的商城系统
+* 豆哥商城
+* 金融工场移动端
+* 放心花
 
 ###
 
-### RESTful接口
+### API说明
 
-#### URL
-
-http://m.mall.9888.cn/mall/api/v1/products.json
-
-#### 支持格式
-
-JSON
-
-#### HTTP请求方式
-
-POST
-
-#### 是否需要登录
-
-是
-
-#### 请求参数
-
-    cursor  字符串,    非必填,    默认起始位置, 游标位置,本次数据从这个游标开始获取数据
-    filter  过滤条件,   非必填,    默认不过滤,  筛选某一种类产品
-
-
-#### 注意事项
-
-需要通过游标, 标记下拉刷新商品的位置
+#### 返回格式
 
 #### 正确返回格式
 
     {
         "ret": true,
         "code": 10000,
-        "message": null,
+        "message": "null",
         "data": {
             "total": 200,
             "next_cursor": '143123123341',
             "products": [
                 {
-                    "name": 'NAME',
-                    "market_price": 2300,
-                    "sold_price": 999,
-                    "stock": 20,
-                    "desc": 'many text',
+                    "name": 'NAME', 
                     "tag": ['hot', 'new', 'sales']
                 }
             ]
@@ -105,114 +79,6 @@ POST
 
 - 603xx 市场专题活动相关错误码
 
-### APP和Native消息互传
-
-#### webview给native发消息
-
-消息格式:
-
-    {
-        action: "",
-        value: ""
-    }
-
-action 消息指令
-
-value 消息格式
-
-#### 发给Native例子
-
-去登录
-
-    {
-        action: "login"
-    }
-
-登录后跳转到商城页面
-
-    {
-        action: "login",
-        value: "url"
-    }
-
-跳转到指定页面页面
-
-    {
-        action: "goto",
-        value: "url"
-    }
-
-关闭当前页面
-
-    {
-        action: "close"
-    }
-
-显示后退按钮
-
-    {
-        action: "show_back_button"
-    }
-
-隐藏后退按钮
-
-    {
-        action: "hide_back_button"
-    }
-
-显示关闭按钮
-
-    {
-        action: "show_close_button"
-    }
-
-隐藏关闭按钮
-
-    {
-        action: "hide_close_button"
-    }
-
-设置标题
-
-    {
-        action: "set_title",
-        value: "xxx"
-    }
-
-#### 发给webview
-
-后退消息
-
-  "history:back"
-
-
-#### native给webview发消息
-
-调用全局的js方法
-
-设置网页标题
-NativeBridge.setTitle('new title')
-
-设置登录用的token
-
-onNativeMessageReceive('login_token', 'params')
-
-
-### url定义
-
-* 商城首页       [http://mmall.9888.cn]
-* 专题活动页     [http://mmall.9888.cn/static/mall/activity/index.html]
-* VIP专区页      [http://mmall.9888.cn/static/mall/product-vip/index.html]
-* 商品列表页     [http://mmall.9888.cn/static/mall/products/index.html]
-* 商品详情页     [http://mmall.9888.cn/static/mall/product/index.html?bizNo=id]
-* 确认订单页     [http://mmall.9888.cn/static/mall/order-confirm/index.html]
-* 交易成功页     [http://mmall.9888.cn/static/mall/order-complete/index.html]
-* 我的订单页     [http://mmall.9888.cn/static/mall/order-mine/index.html]
-* 订单详情页     [http://mmall.9888.cn/static/mall/order/index.html?bizNo=id]
-* 我的商城页     [http://mmall.9888.cn/static/mall/user/index.html]
-* 收货地址列表页 [http://mmall.9888.cn/static/mall/delivery_address/index.html]
-* 新建收货地址页 [http://mmall.9888.cn/static/mall/delivery_address/create/index.html]
-
 
 ### 环境配置
 
@@ -265,9 +131,6 @@ wap站：npm run gulp main:[文件名]:watch
 1. 请在各个项目的release分支中进行开发，推送到远程仓库之前记得拉取线上最新代码。
 2. 在测试Jenkins上编译release分支代码，在测试环境测试相关功能。
 3. 测试通过以后在发布Jenkins上编译release分支的代码。
-
-
-
 
 
 
