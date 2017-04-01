@@ -238,7 +238,7 @@ class InteractWrap extends React.Component {
         return true;
     }
 
-    handleJump() {
+    handleJump(data) {
         let jt = $FW.Format.urlQuery().jumpType;
         let app_url = '/static/loan/outside-register-success-app/index.html',
             wx_url = '/static/loan/outside-register-success-wx/index.html',
@@ -253,6 +253,15 @@ class InteractWrap extends React.Component {
             case 'other_apps':
                 window.location.href = other_apps_url;
                 break;
+            case 'to_home':
+                let dict = data.userLogin;
+                $FW.Store.setUserDict({
+                    token: dict.userToken,
+                    id: dict.userId,
+                    gid: dict.userGid,
+                    status: dict.userStatus
+                });
+                window.location.href = '/static/loan/home/index.html';
             default:
         }
     }
@@ -276,7 +285,7 @@ class InteractWrap extends React.Component {
                         verifyCode: this.state.verificationCode,
                         sourceType: SOURCE_TYPE
                     }).then((data) => {
-                        this.handleJump();
+                        this.handleJump(data);
                     }, (e) => {
                         if (!this.state.codeToken) {
                             $FW.Component.Toast("请点击获取验证码！");
