@@ -194,7 +194,7 @@ class InteractWrap extends React.Component {
                     }, 1000);
                 }, (e) => {
                     let msg = e.code === 201003 ? '手机号已注册' : e.message;
-                    $FW.Component.Toast(msg);
+                    $FW.Component.Toast(msg || "验证码获取失败");
                 });
             } else {
                 $FW.Component.Toast("手机号格式不正确");
