@@ -1,10 +1,11 @@
 'use strict';
 
 let gulp = require('gulp');
+const util = require('gulp-util');
 const gt = require('./tasks');
 
 gulp.task('default', function (done) {
-    console.log(require('archy')(gulp.tree()));
+    util.log(require('archy')(gulp.tree()));
     done();
 });
 
