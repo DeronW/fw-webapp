@@ -339,7 +339,6 @@ function isPasswordValid(password) {
 
 // document.body.onoffline = function() {
 //   $FW.Component.Toast("无网络连接");
-//   console.log("无网络连接");
 // }
 
 // render ReactDom

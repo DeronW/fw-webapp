@@ -1,5 +1,5 @@
 let fs = require('fs')
-var colors = require('colors');
+const util = require('gulp-util');
 
 // 需要传入一个参数是表示差量编译检测项目名称
 // example : npm run pre-compile -- loan
@@ -46,7 +46,7 @@ fs.readFile(sourceF, (err, data) => {
             sh_script.length ?
                 '可以差量编译' :
                 '无更新, 不需要编译';
-        console.log(colors.yellow(`完成差量编译检测:${t}`));
+        util.log(util.colors.yellow(`完成差量编译检测:${t}`));
 
         fs.chmod(targetF, parseInt('755', 8));
     });
