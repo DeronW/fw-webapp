@@ -38,7 +38,7 @@ const LoanResult = React.createClass({
     checkAjax() {
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
-        $FW.Post(`${API_PATH}api/loan/v1/status.json`, {
+        $FW.Post(`${API_PATH}/api/loan/v1/status.json`, {
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
@@ -198,7 +198,7 @@ const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
     $FW.Browser.inAndroid() && NativeBridge.hideHeader();
     $FW.Browser.inIOS() && NativeBridge.setTitle('借款结果');
-    $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`,{
+    $FW.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`,{
         token: USER.token,
         userGid: USER.gid,
         userId: USER.id,

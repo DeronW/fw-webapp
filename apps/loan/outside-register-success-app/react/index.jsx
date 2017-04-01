@@ -45,7 +45,7 @@ class DownloadAppWrap extends React.Component {
                     return;
                 }
                 var channel = $FW.Format.urlQuery().name;
-                $FW.Ajax(`${API_PATH}api/v1/download.json?name=${channel}`).then((data) => {
+                $FW.Ajax(`${API_PATH}/api/v1/download.json?name=${channel}`).then((data) => {
                     location.href = data.url;
                 }, e => $FW.Component.Toast(e.message));
                 break;

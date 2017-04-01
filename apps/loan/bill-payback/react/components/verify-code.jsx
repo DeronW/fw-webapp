@@ -34,7 +34,7 @@ const VerifyCode = React.createClass({
     getSMSCode: function () {
         if (this.state.remain <= 0) {
             this.tick();
-            $FW.Post(`${API_PATH}api/repayment/v1/resendverifycode.json`, {
+            $FW.Post(`${API_PATH}/api/repayment/v1/resendverifycode.json`, {
                 token: USER.token,
                 userGid: USER.gid,
                 userId: USER.id,
@@ -48,7 +48,7 @@ const VerifyCode = React.createClass({
         if (this.state.value == '') {
             $FW.Component.Toast("请输入验证码");
         } else {
-            $FW.Post(`${API_PATH}api/repayment/v1/do.json`, {
+            $FW.Post(`${API_PATH}/api/repayment/v1/do.json`, {
                 orderGid: this.state.orderGid,
                 token: USER.token,
                 userGid: USER.gid,

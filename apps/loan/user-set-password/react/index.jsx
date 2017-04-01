@@ -41,7 +41,7 @@ const SetPassword = React.createClass({
         this.countingDown();
     },
     handleGetCode() {
-        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+        $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
             mobile: PHONE,
             userOperationType: 3,
             sourceType: SOURCE_TYPE
@@ -79,7 +79,7 @@ const SetPassword = React.createClass({
         if (codeToken == '') err = "Token值不完整，无法注册";
 
         err ? $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
+            $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
                 mobile: PHONE,
                 codeToken: this.state.codeToken,
                 password: password,

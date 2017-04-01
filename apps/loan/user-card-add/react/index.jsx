@@ -47,7 +47,7 @@ const SetCashCard = React.createClass({
         let { bankNum } = this.state, len = space(this.state.bankNum).length;
         if (len < 16 || len > 19) return $FW.Component.Toast("储蓄卡格式不对");
 
-        $FW.Post(`${API_PATH}api/bankcard/v1/cardinfo.json`, {
+        $FW.Post(`${API_PATH}/api/bankcard/v1/cardinfo.json`, {
             bankCardNo: space(bankNum),
             token: USER.token,
             userGid: USER.gid,
@@ -86,7 +86,7 @@ const SetCashCard = React.createClass({
 
         err ?
             $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}api/bankcard/v1/commitinfo.json`, {
+            $FW.Post(`${API_PATH}/api/bankcard/v1/commitinfo.json`, {
                 bankName: this.state.bankName,
                 cardNo: space(bankNum),
                 cardType: cardType,

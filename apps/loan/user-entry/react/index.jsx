@@ -44,7 +44,7 @@ const Register = React.createClass({
             return;
         }
 
-        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+        $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
             mobile: phone,
             userOperationType: 3,
             sourceType: SOURCE_TYPE

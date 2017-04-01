@@ -45,7 +45,7 @@ const WantLoan = React.createClass({
         }
         let filtered = cashBank.filter(isRealNameBindCard);
         let user = $FW.Store.getUserDict();
-        $FW.Post(`${API_PATH}api/loan/v1/apply.json`, {
+        $FW.Post(`${API_PATH}/api/loan/v1/apply.json`, {
             token: user.token,
             userGid: user.gid,
             userId: user.id,
@@ -108,7 +108,7 @@ $FW.DOMReady(function () {
     let user = $FW.Store.getUserDict();
     Promise.all([
         $FW.Ajax({
-            url: `${API_PATH}api/loan/v1/baseinfo.json`,
+            url: `${API_PATH}/api/loan/v1/baseinfo.json`,
             method: "post",
             data: {
                 token: user.token,
@@ -119,7 +119,7 @@ $FW.DOMReady(function () {
             }
         }),
         $FW.Ajax({
-            url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
+            url: `${API_PATH}/api/bankcard/v1/bankcardlist.json`,
             method: "post",
             data: {
                 token: user.token,

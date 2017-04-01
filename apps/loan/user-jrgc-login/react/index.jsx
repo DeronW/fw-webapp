@@ -22,7 +22,7 @@ $FW.DOMReady(function () {
     }
 
     function login(jrcgToken) {
-        $FW.Post(`${API_PATH}api/userext/v1/signature.json`, {
+        $FW.Post(`${API_PATH}/api/userext/v1/signature.json`, {
             jrgcToken: jrcgToken,
             sourceType: sourceType
         }).then(data => {
