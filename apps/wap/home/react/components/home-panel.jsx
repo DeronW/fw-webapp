@@ -7,7 +7,7 @@ const HomePanel = React.createClass({
     },
     componentDidMount: function () {
         $FW.Ajax({
-            url: `${API_PATH}mall/api/index/v1/banners.json`, // banner轮播图数据
+            url: `${API_PATH}/mall/api/index/v1/banners.json`, // banner轮播图数据
             success: (data) => this.setState({banners: data.banners})
         })
     },
@@ -64,8 +64,8 @@ HomePanel.Projects = React.createClass({
     },
     componentDidMount: function () {
         let url = this.props.tab == 'new' ?
-            `${API_PATH}mpwap/newPrdClaims/dataList.shtml` :
-            `${API_PATH}mpwap/newPrdTransfer/dataList.shtml`;
+            `${API_PATH}/mpwap/newPrdClaims/dataList.shtml` :
+            `${API_PATH}/mpwap/newPrdTransfer/dataList.shtml`;
 
         $FW.Ajax({
             url: url,

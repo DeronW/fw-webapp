@@ -83,7 +83,7 @@ var PhoneCodePrompt = React.createClass({
         }
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=6&destPhoneNo=" + phoneNo + "&isVms=VMS",
+            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=6&destPhoneNo=" + phoneNo + "&isVms=VMS",
             method: "GET",
             success: function (data) {
             },
@@ -278,7 +278,7 @@ var Body = React.createClass({
         }
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/bind/card.shtml",
+            url: API_PATH + "/mpwap/api/v1/bind/card.shtml",
             method: "POST",
             enable_loading: true,
             data: _this.state.userInfo,
@@ -470,7 +470,7 @@ var Body = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: `${API_PATH}mpwap/api/v1/getOpenAccountInfo.shtml`,
+        url: `${API_PATH}/mpwap/api/v1/getOpenAccountInfo.shtml`,
         enable_loading: 'mini'
     }).then(data => {
         // var title = data.userInfo.bankId ? "开通存管账户" : "升级存管账户";

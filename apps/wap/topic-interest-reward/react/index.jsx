@@ -10,7 +10,7 @@ $FW.DOMReady(function () {
             interest_list = [null, null, { describe: '0.2' }, { describe: '0.4' }, { describe: '0.6' }]
         }
         $FW.Ajax({
-            url: API_PATH + 'mpwap/api/v1/user/level-info.shtml',
+            url: API_PATH + '/mpwap/api/v1/user/level-info.shtml',
             success: (data) => {
                 var level = data.userLevel - 1;
                 document.getElementById('level').innerText = level > 0 ? 'VIP' + level : '普通会员';

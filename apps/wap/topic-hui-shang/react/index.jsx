@@ -8,7 +8,7 @@ $FW.DOMReady(function () {
 
     document.getElementById("openUserBtn").onclick = function () {
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+            url: API_PATH + "/mpwap/api/v1/getOpenAccountInfo.shtml",
             enable_loading: true,
             success: function (data) {
                 if (data.openStatus < 3) {

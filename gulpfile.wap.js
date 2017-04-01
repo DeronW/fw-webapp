@@ -131,7 +131,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
             include_javascripts: INCLUDE_JAVASCRIPTS
         });
         generate_task(PROJ, i, {
-            api_path: "//m.9888.cn/",
+            api_path: "",
             cmd_prefix: 'pack',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
             include_components: COMMON_COMPONENTS,

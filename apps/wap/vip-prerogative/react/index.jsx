@@ -6,7 +6,7 @@ $FW.DOMReady(function () {
     }
 
     $FW.Ajax({
-        url: API_PATH + 'mpwap/api/v1/upgrade-formula.shtml',
+        url: API_PATH + '/mpwap/api/v1/upgrade-formula.shtml',
         success: function (data) {
 
             var F = $FW.Format.currency;

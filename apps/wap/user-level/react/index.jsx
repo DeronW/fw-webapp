@@ -30,7 +30,7 @@ const Content = React.createClass({
         }
     },
     componentDidMount() {
-        $FW.Ajax(`${API_PATH}mpwap/api/v1/user/level-info.shtml`).then(data => {
+        $FW.Ajax(`${API_PATH}/mpwap/api/v1/user/level-info.shtml`).then(data => {
             this.setState({
                 current_level: data.userLevel,
                 user_level: data.userLevel,

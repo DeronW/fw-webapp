@@ -76,7 +76,7 @@ const ModificationPhoneFrom = React.createClass({
                 $FW.Component.Toast("验证码不对");
             } else {
                 $FW.Ajax({
-                    url: `${API_PATH}mpwap/api/v1/changBankPhone.shtml`,
+                    url: `${API_PATH}/mpwap/api/v1/changBankPhone.shtml`,
                     data: {
                         updatePhoneNoTicket: this.state.updatePhoneNoTicket,
                         phoneNum: this.state.phoneValue,
@@ -92,7 +92,7 @@ const ModificationPhoneFrom = React.createClass({
                 $FW.Component.Toast("验证码不对");
             } else {
                 $FW.Ajax({
-                    url: API_PATH + "mpwap/api/v1/validateOldPhone.shtml?validateCode=" + _this.state.codeValue,
+                    url: API_PATH + "/mpwap/api/v1/validateOldPhone.shtml?validateCode=" + _this.state.codeValue,
                     method: "GET",
                 }).then(data => {
                     _this.setState({

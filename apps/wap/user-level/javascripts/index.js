@@ -1,7 +1,5 @@
 (function () {
-    var p = document.getElementById('api-path').value;
-    if (p.substr(0, 2) != '//') p = '//' + p;
-    window.API_PATH = location.protocol + p;
+    window.API_PATH = document.getElementById('api-path').value;
 })();
 
 
@@ -48,9 +46,7 @@ var jsPost = function (action, values) {
 $(function () {
     $.ajax({
         type: "GET",
-        url: API_PATH + "mpwap/api/v1/user/level-info.shtml",
-        //url: "http://10.105.7.124/xxxxx.json",
-        //url: "http://localhost/user-level.json",
+        url: API_PATH + "/mpwap/api/v1/user/level-info.shtml",
         dataType: "json",
         success: function (data) {
 

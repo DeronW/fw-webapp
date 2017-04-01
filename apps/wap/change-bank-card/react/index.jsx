@@ -50,7 +50,7 @@ var PhoneCodePrompt = React.createClass({
 
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
+            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=VMS",
             method: "GET",
             success: function (data) {
             }
@@ -206,7 +206,7 @@ var From = React.createClass({
         }, 1000);
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=SMS",
+            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=3&destPhoneNo=" + phoneNo + "&isVms=SMS",
             method: "GET",
             success: function (data) {
 
@@ -358,7 +358,7 @@ var SelectBank = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/getBankListInfo.shtml",
+            url: API_PATH + "/mpwap/api/v1/getBankListInfo.shtml",
             enable_loading: true,
             success: function (data) {
                 _this.setState({
@@ -555,7 +555,7 @@ var Body = React.createClass({
         let validateCode = this.state.userInfo.validateCode;
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/changeBankCard.shtml?bankCard=" + space(bankCard) + "&bankId=" + bankNo + "&validateCode=" + validateCode,
+            url: API_PATH + "/mpwap/api/v1/changeBankCard.shtml?bankCard=" + space(bankCard) + "&bankId=" + bankNo + "&validateCode=" + validateCode,
             success: function (data) {
                 //location.href = "/static/wap/bind-bank-card/index.html";
                 window.history.back();
@@ -668,7 +668,7 @@ var Body = React.createClass({
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"修改绑定银行卡"} />, HEADER_NODE);
     $FW.Ajax({
-        url: `${API_PATH}mpwap/api/v1/getOpenAccountInfo.shtml`,
+        url: `${API_PATH}/mpwap/api/v1/getOpenAccountInfo.shtml`,
         enable_loading: 'mini'
     }).then(data => ReactDOM.render(<Body activity={data} />, CONTENT_NODE));
 });

@@ -261,7 +261,7 @@ const QuestionPanel = React.createClass({
             $FW.Component.Toast("您还有未填写试题");
         } else {
             $FW.Ajax({
-                url: `${API_PATH}mpwap/orderuser/riskGradeInto.shtml`, //传参数
+                url: `${API_PATH}/mpwap/orderuser/riskGradeInto.shtml`, //传参数
                 data: form_data,
                 success: data => {
                     this.props.setResult(true, data.score, data.gradeLevel);

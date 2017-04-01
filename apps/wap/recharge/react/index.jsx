@@ -125,7 +125,7 @@ const PopPhone = React.createClass({
         }, 1000);
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=4&destPhoneNo=" + this.state.changePhoneVal + "&isVms=SMS",
+            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=4&destPhoneNo=" + this.state.changePhoneVal + "&isVms=SMS",
             method: "GET",
             success: function (data) {
 
@@ -221,7 +221,7 @@ const Recharge = React.createClass({
     },
     componentDidMount: function () {
         $FW.Ajax({
-            url: API_PATH + 'mpwap/api/v1/getOpenAccountInfo.shtml',
+            url: API_PATH + '/mpwap/api/v1/getOpenAccountInfo.shtml',
             success: (data) => {
                 // 当前开户用户是特殊用户, 不能充值
                 if (data.openStatus == 5) {
@@ -442,7 +442,7 @@ $FW.DOMReady(function () {
         HEADER_NODE);
 
     $FW.Ajax({
-        url: API_PATH + "mpwap/api/v1/getRechargeInfo.shtml",
+        url: API_PATH + "/mpwap/api/v1/getRechargeInfo.shtml",
         success: function (data) {
             window._Recharge = ReactDOM.render(<Recharge data={data} />, CONTENT_NODE)
             fmOpt(data.sessionId);

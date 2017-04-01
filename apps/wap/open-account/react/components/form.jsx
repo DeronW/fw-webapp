@@ -103,7 +103,7 @@ var Form = React.createClass({
         }, 1000);
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=6&destPhoneNo=" + phoneNo + "&isVms=SMS",
+            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=6&destPhoneNo=" + phoneNo + "&isVms=SMS",
             method: "GET",
             success: function (data) {
             },

@@ -19,7 +19,7 @@ const BindBankCard = React.createClass({
             }
         });
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/updateBankZone.shtml",
+            url: API_PATH + "/mpwap/api/v1/updateBankZone.shtml",
             data: {
                 relevBankCard: val.bankNo
             },
@@ -210,12 +210,6 @@ const Warm = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"绑定银行卡"}/>, HEADER_NODE);
-    /*    $FW.Ajax({
-     url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
-     success: function (data) {
-
-     }
-     });*/
 
     $FW.Ajax({
         url: API_PATH + "/mpwap/api/v1/showBankCardMess.shtml",

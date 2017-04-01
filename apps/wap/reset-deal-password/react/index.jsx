@@ -178,7 +178,7 @@ var PswFrom = React.createClass({
 
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=" + this.state.codeType + "&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
+            url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + this.state.codeType + "&destPhoneNo=" + this.state.phoneNumber + "&isVms=" + this.state.isVmsType,
             method: "GET",
             success: function (data) {
 
@@ -408,7 +408,7 @@ var Body = React.createClass({
 
 $FW.DOMReady(() => {
     $FW.Ajax({
-        url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+        url: API_PATH + "/mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {
             ReactDOM.render(<Body activity={data} />, CONTENT_NODE);
         }
