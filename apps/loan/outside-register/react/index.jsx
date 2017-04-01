@@ -193,13 +193,8 @@ class InteractWrap extends React.Component {
                         }
                     }, 1000);
                 }, (e) => {
-                    if (e.code === 201003) {
-                        $FW.Component.Toast('手机号已注册');
-                        // 不能跳首页, 用户未登录, 不能去首页
-                        // setTimeout(this.handleJump, 2000);
-                        return;
-                    }
-                    $FW.Component.Toast(e.message);
+                    let msg = e.code === 201003 ? '手机号已注册' : e.message;
+                    $FW.Component.Toast(msg);
                 });
             } else {
                 $FW.Component.Toast("手机号格式不正确");
