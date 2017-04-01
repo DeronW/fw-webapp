@@ -255,13 +255,13 @@ class InteractWrap extends React.Component {
                 break;
             case 'to_home':
                 let dict = data.userLogin;
-                // $FW.Store.setUserDict({
-                //     token: dict.userToken,
-                //     id: dict.userId,
-                //     gid: dict.userGid,
-                //     status: dict.userStatus
-                // });
-                // window.location.href = '/static/loan/home/index.html';
+                $FW.Store.setUserDict({
+                    token: dict.userToken,
+                    id: dict.userId,
+                    gid: dict.userGid,
+                    status: dict.userStatus
+                });
+                window.location.href = '/static/loan/home/index.html';
             default:
         }
     }
