@@ -20,6 +20,13 @@ const CouponMain = React.createClass({
         this.setState({index: index});
     },
 
+    exChange: function (index) {
+        $FW.Ajax(`${API_PATH}/mall/api/index/v1/bondCheapCode.json`)
+            .then((data) => {
+　　　　　　　　　alert(JSON.stringify(data))
+            });
+    },
+
     render: function () {
         var self = this;
 
@@ -39,7 +46,7 @@ const CouponMain = React.createClass({
                         <input type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
                         <input type="button" className={this.state.active ? "msg-tip active":"msg-tip"}
                                value={"兑换"}
-                               onClick={this.nextStep}/>
+                               onClick={this.exChange}/>
                         <span className="vertical-line"></span>
                     </div>
                     <OrderList index={this.state.index} orders={this.props.orders}/>
@@ -307,7 +314,7 @@ const ConfAlert = React.createClass({
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"优惠券"} back_handler={back_handler}/>, HEADER_NODE);
     $FW.Ajax({
-        url: `${API_PATH}mall/api/member/v1/order_list.json`,//mall/api/cheap/v1/queryAllcheap.json
+        url: `${API_PATH}mall/api/cheap/v1/order_list.json`,//queryAllcheap.json
         enable_loading: true
     }).then(data => {
         ReactDOM.render(<CouponMain orders={data.orders}/>, CONTENT_NODE);
