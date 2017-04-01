@@ -195,7 +195,8 @@ class InteractWrap extends React.Component {
                 }, (e) => {
                     if (e.code === 201003) {
                         $FW.Component.Toast('手机号已注册');
-                        setTimeout(this.handleJump, 2000);
+                        // 不能跳首页, 用户未登录, 不能去首页
+                        // setTimeout(this.handleJump, 2000);
                         return;
                     }
                     $FW.Component.Toast(e.message);
