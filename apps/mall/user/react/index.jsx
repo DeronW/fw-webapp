@@ -5,32 +5,6 @@ const User = React.createClass({
             color: '#fff'
         }
     },
-    componentDidMount: function () {
-        var _this = this;
-        /*
-        let query = $FW.Format.urlQuery();
-        let checkId = query.checkId || "";
-        $FW.Ajax(`${API_PATH}mall/api/login.json?checkId=`+ checkId)
-            .then((data) => {
-                location.reload();
-            });
-        window.onscroll = function () {
-         var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-         if (scrollTop > 100) return false;
-
-         if (scrollTop > 0) {
-         _this.setState({
-         background: "rgba(255,255,255,.7)",
-         color: "#333"
-         })
-         } else {
-         _this.setState({
-         background: "#ff3a38",
-         color: "#fff"
-         })
-         }
-         }*/
-    },
 
     render: function () {
         let data = this.props.data;
@@ -191,7 +165,7 @@ const HotSale = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: `${API_PATH}mall/api/member/v1/user.json`,
+        url: `${API_PATH}/mall/api/member/v1/user.json`,
         enable_loading: 'mini'
     }).then(data => ReactDOM.render(<User data={data}/>, CONTENT_NODE));
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);

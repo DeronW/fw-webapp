@@ -281,7 +281,7 @@ $FW.DOMReady(function () {
         return;
     }
     $FW.Ajax({
-        url: API_PATH + "mall/api/member/v1/order_detail.json?orderId=" + order_id,
+        url: `${API_PATH}/mall/api/member/v1/order_detail.json?orderId=${order_id}`,
         data: {
             bizNo: query.bizNo,
             cardUuid: query.cardUuid

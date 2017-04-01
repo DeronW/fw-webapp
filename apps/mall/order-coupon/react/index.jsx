@@ -34,7 +34,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"查看券码"}/>, HEADER_NODE);
     var query = $FW.Format.urlQuery();
     $FW.Ajax({
-        url: API_PATH + "mall/api/order/v1/viewCardPass.json",
+        url: `${API_PATH}/mall/api/order/v1/viewCardPass.json`,
         enable_loading: 'mini',
         data: {
             bizNo: query.bizNo,

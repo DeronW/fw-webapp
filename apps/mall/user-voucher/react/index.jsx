@@ -144,8 +144,7 @@ const Voucher = React.createClass({
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"兑换券"}/>, HEADER_NODE);
     $FW.Ajax({
-        //url: API_PATH + 'mall/api/member/v1/user.json',
-        url: `${API_PATH}mall/api/member/v1/user.json`,
+        url: `${API_PATH}/mall/api/member/v1/user.json`,
         enable_loading: 'mini',
         success: function (data) {
             ReactDOM.render(<HomePage {...data}/>, CONTENT_NODE);

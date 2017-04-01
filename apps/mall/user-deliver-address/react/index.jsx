@@ -4,7 +4,7 @@ const DeliverAddress = React.createClass({
     },
     markDefaultHandler: function (address_id) {
         $FW.Ajax({
-            url: `${API_PATH}mall/api/member/v1/address/set_default.json`,
+            url: `${API_PATH}/mall/api/member/v1/address/set_default.json`,
             method: 'POST',
             enable_loading: true,
             data: {id: address_id}
@@ -76,7 +76,7 @@ const DeliverAddress = React.createClass({
 $FW.DOMReady(function () {
     $FW.Component.showAjaxLoading();
     $FW.Ajax({
-        url: API_PATH + 'mall/api/member/v1/delivery_address.json',
+        url: API_PATH + '/mall/api/member/v1/delivery_address.json',
         enable_loading: true,
         success: function (data) {
             $FW.Component.hideAjaxLoading();

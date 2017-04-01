@@ -13,7 +13,7 @@ const FootPrint = React.createClass({
     loadMoreHandler: function (done) {
         let {page, hasNextPage} = this.state;
         if (!hasNextPage) return;
-        $FW.Ajax(`${API_PATH}mall/api/v1/footPrintList.json?num=10&pageNo=${page}`)
+        $FW.Ajax(`${API_PATH}/mall/api/v1/footPrintList.json?num=10&pageNo=${page}`)
             .then(data => {
                 this.setState({
                     list: list.concat(data.list || []),
@@ -25,7 +25,7 @@ const FootPrint = React.createClass({
     },
     clearAllHandler: function () {
         $FW.Ajax({
-            url: `${API_PATH}mall/api/v1/footPrintDel.json`,//足迹删除
+            url: `${API_PATH}/mall/api/v1/footPrintDel.json`,//足迹删除
             data: {
                 type: 'all',
                 id: ''
@@ -38,7 +38,7 @@ const FootPrint = React.createClass({
     },
     delHandler: function (id, key) {
         $FW.Ajax({
-            url: `${API_PATH}mall/api/v1/footPrintDel.json`,//足迹删除
+            url: `${API_PATH}/mall/api/v1/footPrintDel.json`,//足迹删除
             data: {
                 type: 'one',
                 id: id

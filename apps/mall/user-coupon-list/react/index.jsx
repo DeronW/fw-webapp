@@ -105,7 +105,7 @@ const OrderBlock = React.createClass({
         //alert(FormData); return false;
         $FW.Ajax({
             data: FormData,
-            url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
+            url: `${API_PATH}/mall/api/cart/v1/order_to_account.json`,
             enable_loading: true,
             success: function (result) {
                 location.href =
@@ -287,8 +287,7 @@ const ConfAlert = React.createClass({
                 orderGroupBizNo: this.state.groupNo,
                 source: sourceType
             },
-            //url: `./cancelOrder.json`,
-            url: `${API_PATH}mall/api/cart/v1/cancelOrder.json`,
+            url: `${API_PATH}/mall/api/cart/v1/cancelOrder.json`,
             enable_loading: true,
             success: function (data) {
                 location.reload()
@@ -314,7 +313,7 @@ const ConfAlert = React.createClass({
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"优惠券"} back_handler={back_handler}/>, HEADER_NODE);
     $FW.Ajax({
-        url: `${API_PATH}mall/api/cheap/v1/queryAllcheap.json`,//queryAllcheap.json
+        url: `${API_PATH}/mall/api/cheap/v1/queryAllcheap.json`,
         enable_loading: true
     }).then(data => {
         ReactDOM.render(<CouponMain orders={data.orders}/>, CONTENT_NODE);

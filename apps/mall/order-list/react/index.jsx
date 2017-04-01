@@ -89,7 +89,7 @@ const OrderBlock = React.createClass({
         //alert(FormData); return false;
         $FW.Ajax({
             data: FormData,
-            url: `${API_PATH}mall/api/cart/v1/order_to_account.json`,
+            url: `${API_PATH}/mall/api/cart/v1/order_to_account.json`,
             enable_loading: true,
             success: function (result) {
                 location.href =
@@ -273,8 +273,7 @@ const ConfAlert = React.createClass({
                 orderGroupBizNo: this.state.groupNo,
                 source: sourceType
             },
-            //url: `./cancelOrder.json`,
-            url: `${API_PATH}mall/api/cart/v1/cancelOrder.json`,
+            url: `${API_PATH}/mall/api/cart/v1/cancelOrder.json`,
             enable_loading: true,
             success: function (data) {
                 location.reload()
@@ -300,8 +299,7 @@ const ConfAlert = React.createClass({
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"我的订单"} back_handler={back_handler}/>, HEADER_NODE);
     $FW.Ajax({
-        //url: `./order_list.json`,
-        url: `${API_PATH}mall/api/member/v1/order_list.json`,
+        url: `${API_PATH}/mall/api/member/v1/order_list.json`,
         enable_loading: true
     }).then(data => {
         ReactDOM.render(<OrderMain orders={data.orders}/>, CONTENT_NODE);

@@ -207,12 +207,12 @@ const PlusMinus = React.createClass({
         if (this.props.is_login == 0) {
             // 首先检查是否已经登录
             $FW.Ajax({
-                url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
+                url: `${API_PATH}/mall/api/cart/v1/shoppingCart.json`,
                 enable_loading: 'mini'
             });
         } else {
             $FW.Ajax({
-                url: `${API_PATH}mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
+                url: `${API_PATH}/mall/api/cart/v2/insertCart.json?bizNo=${bizNo}`,
                 enable_loading: 'mini',
                 data: {
                     buyNum: this.state.value,
@@ -279,7 +279,7 @@ const PlusMinus = React.createClass({
         } else {
             if (!isCanBuy) {
                 $FW.Ajax({
-                    url: `${API_PATH}mall/api/cart/v1/shoppingCart.json`,
+                    url: `${API_PATH}/mall/api/cart/v1/shoppingCart.json`,
                     enable_loading: 'mini'
                 });
             }
@@ -336,7 +336,7 @@ $FW.DOMReady(function () {
     if (!bizNo) return $FW.Component.Alert('bizNo is missing');
 
     $FW.Ajax({
-        url: `${API_PATH}mall/api/detail/v1/item_detail.json?bizNo=${bizNo}`,
+        url: `${API_PATH}/mall/api/detail/v1/item_detail.json?bizNo=${bizNo}`,
         enable_loading: 'mini'
     }).then(data => {
         document.title = data.title;

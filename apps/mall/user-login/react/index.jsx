@@ -68,7 +68,7 @@ const Login = React.createClass({
             phone: this.state.val1
         }
         $FW.Ajax({
-            url: `${API_PATH}mall/login/setCode.json`,
+            url: `${API_PATH}/mall/login/setCode.json`,
             enable_loading: 'mini',
             method: 'post',
             data: FormData,
@@ -141,7 +141,7 @@ const Login = React.createClass({
             code: this.state.val2
         }
         $FW.Ajax({
-            url: `${API_PATH}mall/login/login.json`,
+            url: `${API_PATH}/mall/login/login.json`,
             enable_loading: 'mini',
             method: 'post',
             data: FormData,

@@ -45,7 +45,7 @@ const Recharge = React.createClass({
 
     reloadFeeHandler: function () {
         $FW.Ajax({
-            url: `${API_PATH}mall/api/v1/phone/fee/recharge.json`,
+            url: `${API_PATH}/mall/api/v1/phone/fee/recharge.json`,
             enable_loading: 'mini',
             success: function (data) {
                 let pay_score;
@@ -81,7 +81,7 @@ const Recharge = React.createClass({
         }
 
         $FW.Ajax({
-            url: API_PATH + 'mall/api/v1/phone/net/recharge.json',
+            url: API_PATH + '/mall/api/v1/phone/net/recharge.json',
             enable_loading: 'mini',
             data: {operator: code},
             success: function (data) {
@@ -329,7 +329,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"充值中心"}/>, HEADER_NODE)
 
     $FW.Ajax({
-        url: API_PATH + 'mall/api/v1/user-state.json',
+        url: API_PATH + '/mall/api/v1/user-state.json',
         enable_loading: 'mini',
         success: function (data) {
             window.rechargePanel = ReactDOM.render(<Recharge is_login={data.is_login} user_score={data.score}/>,
