@@ -62,14 +62,25 @@ const DEVELOPING_PAGES = [
     'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
+// Beta项目, 使用 webpack 编译指定页面
+const WEBPACK_PAGES = [
+    {
+        name: 'faq2',
+        describe: 'page for testing webpack',
+        compiler: 'webpack', // gulp or webpack
+    }
+]
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
     ...APPLY_PAGES,
     ...APP_NAMES,
     ...PROTOCOL_PAGES,
-    ...DEVELOPING_PAGES
+    ...DEVELOPING_PAGES,
+    ...WEBPACK_PAGES
 );
+
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
@@ -110,13 +121,11 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-                `apps/${PROJ}/**/*.+(js|jsx)`,
-                '!node_modules/**',
-                '!**/jquery.*.js',
-                '!**.min.js'
-            ])
-            .pipe(eslint())
-            .pipe(eslint.format())
-        // .pipe(eslint.failAfterError());
+            `apps/${PROJ}/**/*.+(js|jsx)`,
+            '!node_modules/**',
+            '!**/jquery.*.js',
+            '!**.min.js'
+        ]).pipe(eslint()).pipe(eslint.format());
     }))
+
 };

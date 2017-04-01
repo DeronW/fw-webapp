@@ -10,6 +10,7 @@ const react = require('./react.js');
 const images = require('./images.js');
 const copy = require('./copy.js');
 const revision = require('./revision.js');
+const webpack_task = require('./webpack.shell.js');
 
 const REACT_PATH = 'react-15.4.2';
 
@@ -33,7 +34,21 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
     return files;
 }
 
-module.exports = function (site_name, page_name, configs) {
+function generate_webpack_task(site_name, page_name, CONFIG) {
+    gulp.task(`${site_name}:${page_name}`, () => {
+        console.log('normal webpack task ', `${site_name}:${page_name}`)
+        webpack_task(site_name, page_name)
+    })
+    gulp.task(`${site_name}:${page_name}:watch`, () => {
+        console.log('watch webpack task ', `${site_name}:${page_name}`)
+        webpack_task(site_name, page_name, { watch: true })
+    })
+    gulp.task(`${site_name}:pack:${page_name}:revision`, () => {
+        console.log('pack & revision webpack task ', `${site_name}:${page_name}`)
+    })
+}
+
+let generate_task = function (site_name, page_name, configs) {
     // 支持单个网页的动态配置
     let singlePageCfg = {};
     if (typeof (page_name) == 'object') {
@@ -57,9 +72,13 @@ module.exports = function (site_name, page_name, configs) {
             include_components: [],
             include_javascripts: [],
             include_less: [],
+            compiler: 'gulp', // 编译方式, 使用gulp还是webpack
             main_jsx: 'react/index.jsx',
             html_engine: 'swig'
         }, configs, singlePageCfg);
+
+    // 如果配置项中采用了 webpack 编译, 那么只生成webpack相关配置
+    if (CONFIG.compiler === 'webpack') return generate_webpack_task(site_name, page_name, CONFIG);
 
     let task_name = `${site_name}${CONFIG.cmd_prefix ? `:${CONFIG.cmd_prefix}` : ''}:${page_name}`;
 
@@ -81,10 +100,7 @@ module.exports = function (site_name, page_name, configs) {
         CONFIG.debug);
 
     function compile_html() {
-        return html([
-            `${app_path}index.html`,
-            // `${app_path}index.pjax.html`
-        ], build_path, CONFIG.html_engine, {
+        return html([`${app_path}index.html`], build_path, CONFIG.html_engine, {
             API_PATH: CONFIG.api_path,
             DEBUG: CONFIG.debug,
             ENV: CONFIG.environment
@@ -139,7 +155,7 @@ module.exports = function (site_name, page_name, configs) {
 
     function compile_revision() {
         return revision([`${build_path}/**`], cdn_path, {
-            dontRenameFile: [/^\/favicon.ico$/g, 'index.html', 'index.pjax.html'],
+            dontRenameFile: [/^\/favicon.ico$/g, 'index.html'],
             transformPath: function (rev, source, path) {
                 // 在css中, 采用的是相对的图片路径, 但是在加入版本和前缀域名后不能再使用相对路径
                 if (rev.startsWith('../')) rev = rev.substr(3);
@@ -185,3 +201,5 @@ module.exports = function (site_name, page_name, configs) {
         COMMON_JAVASCRIPTS_TASK[site_name] = true;
     }
 };
+
+module.exports = generate_task;
