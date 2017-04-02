@@ -6,11 +6,8 @@ const CouponMain = React.createClass({
         }
         else if (location.hash == '#prepare') {
             index = 2
-        } else if (location.hash == '#shipping') {
-            index = 3
-        } else if (location.hash == '#complete') {
-            index = 4
         }
+
         return {
             index: index,
             voucherName: ["未使用", "已使用", "已过期"]
@@ -49,7 +46,7 @@ const CouponMain = React.createClass({
                                onClick={this.exChange}/>
                         <span className="vertical-line"></span>
                     </div>
-                    <OrderList index={this.state.index} orders={this.props.orders}/>
+                    <OrderList index={this.state.index} cheapCodes={this.props.cheapCodes}/>
                 </div>
             </div>
         );
@@ -61,11 +58,9 @@ const OrderList = React.createClass({
         var state = {
             all: [],
             unPay: [],
-            prepare: [],
-            shipping: [],
-            complete: []
+            prepare: []
         };
-        this.props.orders.forEach(function (i) {
+        this.props.cheapCodes.forEach(function (i) {
             state.all.push(i);
             if (i.status && i.status != "cancel" && i.status != "failure") state[i.status].push(i);
         });
@@ -88,8 +83,6 @@ const OrderList = React.createClass({
                 {this.props.index == 0 && (this.state.all.length != 0 ? allBlock("all") : blockText) }
                 {this.props.index == 1 && (this.state.unPay.length != 0 ? allBlock("unPay") : blockText) }
                 {this.props.index == 2 && (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) }
-                {this.props.index == 3 && (this.state.shipping.length != 0 ? allBlock("shipping") : blockText) }
-                {this.props.index == 4 && (this.state.complete.length != 0 ? allBlock("complete") : blockText) }
             </div>
         );
     }
@@ -316,7 +309,7 @@ $FW.DOMReady(function () {
         url: `${API_PATH}/mall/api/cheap/v1/queryAllcheap.json`,
         enable_loading: true
     }).then(data => {
-        ReactDOM.render(<CouponMain orders={data.orders}/>, CONTENT_NODE);
+        ReactDOM.render(<CouponMain cheapCodes={data.cheapCodes}/>, CONTENT_NODE);
         window.confirmPanel = ReactDOM.render(<ConfAlert/>, document.getElementById("alert"));
     })
 });
