@@ -12,7 +12,7 @@
 const GlobalAlert = React.createClass({
     getDefaultProps(){
         return {
-            title: '好像除了点问题!?'
+            title: '好像出了点问题!?'
         }
     },
     getInitialState: function () {
