@@ -29,7 +29,8 @@ const USER_PAGES = [
     'user-settings', //更多
     'user-jrgc-login',
     'user-weixin',
-    'fxh-jrgc-invite'//放心花金融工场邀请页面
+    'fxh-jrgc-invite',//放心花金融工场邀请页面
+    'fxh-jrgc-invite-banner'//放心花金融工场邀请页面(banner入口)
 ]
 
 // 账单模块
