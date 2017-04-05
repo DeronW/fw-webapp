@@ -20,7 +20,7 @@ const CouponMain = React.createClass({
     exChange: function (index) {
         $FW.Ajax(`${API_PATH}/mall/api/cheap/v1/bondCheapCode.json`)
             .then((data) => {
-　　　　　　　　　alert(JSON.stringify(data))
+                alert(JSON.stringify(data))
             });
     },
 
@@ -71,7 +71,8 @@ const OrderList = React.createClass({
         let allBlock = function (s) {
             return (
                 <div className="order-all">
-                    { self.state[s].map((cheap) => <OrderBlock key={cheap.cheapBizNo} cheap={cheap} dataJson={cheap}/>) }
+                    { self.state[s].map((cheap) => <OrderBlock key={cheap.cheapBizNo} cheap={cheap}
+                                                               dataJson={cheap}/>) }
                 </div>
             );
         };
@@ -89,8 +90,10 @@ const OrderList = React.createClass({
 });
 
 const OrderBlock = React.createClass({
-    clickPay: function (orderTime, orderNo, groupNo, payableRmbAmt) {
-
+    clickUse: function (orderTime, orderNo, groupNo, payableRmbAmt) {
+        let cheap = this.props.cheap;
+        let cheapBizNo = cheap.cheapBizNo;
+        window.location.href = "/static/mall/order-confirm/index.html?" + location.search + "&cheapBizNo" + cheap.cheapBizNo + "&reduceAmont" + cheap.reduceAmont;
     },
 
     gotoDetail: function (index) {
@@ -139,32 +142,32 @@ const OrderBlock = React.createClass({
         var _this = this;
 
 
-            return (
-                <div className="order-block">
-                    <div className="info-block">
-                        <a>
-                            <div className="t-info" onClick={_this.gotoDetail}>
-                                <div className="commodity-img">
-                                    <p className="price"><span>￥</span><b>{cheap.reduceAmont}</b></p>
-                                    <p className="condition">满{cheap.fullAmont}元可用</p>
-                                    {/*<img src={product.img || 'images/default-product.jpg'}/> */}
+        return (
+            <div className="order-block">
+                <div className="info-block">
+                    <a>
+                        <div className="t-info" onClick={_this.gotoDetail}>
+                            <div className="commodity-img">
+                                <p className="price"><span>￥</span><b>{cheap.reduceAmont}</b></p>
+                                <p className="condition">满{cheap.fullAmont}元可用</p>
+                                {/*<img src={product.img || 'images/default-product.jpg'}/> */}
+                            </div>
+                            <div className="commodity-info">
+                                <div className="commodity-name">
+                                    <h2></h2>
                                 </div>
-                                <div className="commodity-info">
-                                    <div className="commodity-name">
-                                        <h2></h2>
-                                    </div>
-                                    <div className="commodity-number">
+                                <div className="commodity-number">
                                         <span className="money-text">
                                         </span>
-                                        <span className="number-text">&times; </span>
-                                    </div>
-                                    <div className="buy-now">立即使用</div>
+                                    <span className="number-text">&times; </span>
                                 </div>
+                                <div className="buy-now" onClick={this.clickUse}>立即使用</div>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
-            );
+            </div>
+        );
     }
 });
 

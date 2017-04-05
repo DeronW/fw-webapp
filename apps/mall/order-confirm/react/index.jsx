@@ -22,6 +22,7 @@ const ConfirmOrder = React.createClass({
             buyNum: query.buyNum || 0,
             userTickets: [],
             msgCode: null,
+            cheapCode: query.cheapCode || null,
             addressId: this.props.default_address_id,
             tokenStr: '',
             sourceType: sourceType
@@ -89,8 +90,8 @@ const ConfirmOrder = React.createClass({
         //        success: submit
         //    });
         //} else {
-            submit()
-       // }
+        submit()
+        // }
 
     },
     updateSMSCodeHandler: function (code) {
@@ -180,9 +181,9 @@ const ConfirmOrder = React.createClass({
                     </div>
                 </div>
                 {/*this.props.data.showAddressOK ?
-                    <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
-                             update_sms_code_handler={this.updateSMSCodeHandler}/>
-                    : null*/}
+                 <SMSCode validate_before_sms_handler={this.validateBeforeSMSCodeHandler}
+                 update_sms_code_handler={this.updateSMSCodeHandler}/>
+                 : null*/}
                 <div className="confirm-order-foot">
                     <span className="total-item-name">实付:</span>
                     <span
