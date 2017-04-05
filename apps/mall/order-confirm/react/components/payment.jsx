@@ -77,7 +77,8 @@ const PaymentPanel = React.createClass({
         })
     },
     render: function () {
-
+        let query = $FW.Format.urlQuery();
+        let coupon = query.reduceAmont;
         let checked_voucher = (l, index) => {
             return this.state.checked_voucher_count ?
                 <div className="coupons-r">
@@ -99,7 +100,7 @@ const PaymentPanel = React.createClass({
                 <div className="account-box">
                     <div className="coupons" onClick={this.toggleCoupon}>
                         <div className="coupons-l">优惠券</div>
-                        {this.state.checked_voucher_count ? null : <div className="coupons-r"></div>}
+                        {this.state.checked_voucher_count ? null : <div className="coupons-r">-{coupon}</div>}
                         {voucherName.map((l, index) => checked_voucher(l, index)) }
                     </div>
 
