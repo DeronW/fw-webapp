@@ -1,10 +1,10 @@
 const CouponMain = React.createClass({
     getInitialState: function () {
         var index = 0;
-        if (location.hash == '#unPay') {
+        if (location.hash == '#2') {
             index = 1
         }
-        else if (location.hash == '#prepare') {
+        else if (location.hash == '#3') {
             index = 2
         }
 
@@ -56,13 +56,13 @@ const CouponMain = React.createClass({
 const OrderList = React.createClass({
     getInitialState: function () {
         var state = {
-            all: [],
-            unPay: [],
-            prepare: []
+            1: [],
+            2: [],
+            3: []
         };
         this.props.cheapCodes.forEach(function (i) {
-            state.all.push(i);
-            if (i.status && i.status != "cancel" && i.status != "failure") state[i.status].push(i);
+            //state.all.push(i);
+            state[i.status].push(i);
         });
         return state
     },
@@ -71,7 +71,7 @@ const OrderList = React.createClass({
         let allBlock = function (s) {
             return (
                 <div className="order-all">
-                    { self.state[s].map((order) => <OrderBlock key={order.orderId} order={order} dataJson={order}/>) }
+                    { self.state[s].map((cheap) => <OrderBlock key={cheap.id} cheap={cheap} dataJson={cheap}/>) }
                 </div>
             );
         };
@@ -80,9 +80,9 @@ const OrderList = React.createClass({
 
         return (
             <div className="order-area">
-                {this.props.index == 0 && (this.state.all.length != 0 ? allBlock("all") : blockText) }
-                {this.props.index == 1 && (this.state.unPay.length != 0 ? allBlock("unPay") : blockText) }
-                {this.props.index == 2 && (this.state.prepare.length != 0 ? allBlock("prepare") : blockText) }
+                {this.props.index == 0 && (this.state.(1).length != 0 ? allBlock("1") : blockText) }
+                {this.props.index == 1 && (this.state.(2).length != 0 ? allBlock("2") : blockText) }
+                {this.props.index == 2 && (this.state.(3).length != 0 ? allBlock("3") : blockText) }
             </div>
         );
     }
@@ -117,8 +117,8 @@ const OrderBlock = React.createClass({
         confirmPanel.hide()
     },
     gotoDetail: function (index) {
-        let order = this.props.order;
-        location.href = '/static/mall/order-detail/index.html?bizNo=' + order.bizNo + '&cardUuid=' + order.cardUuid + '&orderId=' + order.orderId
+        //   let order = this.props.order;
+        //   location.href = '/static/mall/order-detail/index.html?bizNo=' + order.bizNo + '&cardUuid=' + order.cardUuid + '&orderId=' + order.orderId
     },
     render: function () {
         let pay_color = {
@@ -138,29 +138,17 @@ const OrderBlock = React.createClass({
             float: "right"
         };
 
-        let order = this.props.order;
+        let cheap = this.props.cheap;
         let status_name;
         let status_color;
-        switch (order.status) {
-            case 'unPay':
-                status_name = '待付款';
+        switch (cheap.status) {
+            case '2':
+                status_name = '已使用';
                 status_color = pay_color;
                 break;
-            case 'prepare':
-                status_name = '待发货';
+            case '3':
+                status_name = '已过期';
                 status_color = prepare_color;
-                break;
-            case 'shipping':
-                status_name = '待收货';
-                status_color = shipping_color;
-                break;
-            case 'complete':
-                status_name = '已完成';
-                status_color = complete_color;
-                break;
-            case 'cancel':
-                status_name = '已取消';
-                status_color = complete_color;
                 break;
             default:
                 return true
@@ -173,13 +161,13 @@ const OrderBlock = React.createClass({
                 <a key={index}>
                     <div className="t-info" onClick={_this.gotoDetail}>
                         <div className="commodity-img">
-                            <p className="price"><span>￥</span><b>5</b></p>
-                            <p className="condition">满199元可用</p>
+                            <p className="price"><span>￥</span><b>{product.reduceAmont}</b></p>
+                            <p className="condition">满{product.fullAmont}元可用</p>
                             {/*<img src={product.img || 'images/default-product.jpg'}/> */}
                         </div>
                         <div className="commodity-info">
                             <div className="commodity-name">
-                                <h2>{product.title}</h2>
+                                <h2></h2>
                             </div>
                             {/*
                              <div className="tag-block">
@@ -189,10 +177,6 @@ const OrderBlock = React.createClass({
                              */}
                             <div className="commodity-number">
                                 <span className="money-text">
-                                    {product.price > 0 || product.score == 0 ?
-                                        <span>&yen;{$FW.Format.currency(product.price)}</span> : null}
-                                    {product.price > 0 && product.score ? ' + ' : null}
-                                    {product.score ? product.score + '工分' : null}
                                 </span>
                                 <span className="number-text">&times; {product.count}</span>
                             </div>
@@ -202,40 +186,9 @@ const OrderBlock = React.createClass({
                 </a>
             );
         };
-        let sendOrderNo = order.sendOrderNo;
-        let sendChannel = order.sendChannel;
-        let sendChannelEnum = order.sendChannelEnum;
-        let check_link = order.sendOrderNo ? <a className="link-btn"
-                                                href={'/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel)+ '&sendChannelEnum=' + sendChannelEnum }>查看物流</a> : (order.cardUuid &&
-        <a className="link-btn"
-           href={'/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo}>查看券码</a>);
 
         return (
             <div className="order-block">
-                <div className="info-block">
-                    { order.products.map((p, index) => product_item(p, index)) }
-                    {/*<div className="commodity-total">
-                        <span className="commodity-text">共件{order.orderCount}商品</span>
-                        <span className="total-text">
-                            实付款:
-                            {order.price > 0 || order.score == 0 ?
-                                <span>&yen;{$FW.Format.currency(order.price)}</span> : null}
-                            {order.price > 0 && order.score ? ' + ' : null}
-                            {order.score ? order.score + '工分' : null}
-                        </span>
-                        {check_link}
-                    </div> */}
-
-                    {order.status == "unPay" ? <div className="pay-order">
-                        <div className="btn-pay"
-                             onClick={this.clickPay.bind(this,order.orderTime,order.bizNo,order.orderGroupBizNo,$FW.Format.currency(order.price))}>
-                            立即支付
-                        </div>
-                        <div className="btn-cancel"
-                             onClick={this.clickCancel.bind(this,order.bizNo,order.orderGroupBizNo)}>取消订单
-                        </div>
-                    </div> : null}
-                </div>
             </div>
         );
     }
