@@ -1,12 +1,10 @@
 (function () {
-    var p = document.getElementById('api-path').value;
-    if (p.substr(0, 2) != '//') p = '//' + p;
-    window.API_PATH = location.protocol + p;
+    window.API_PATH = document.getElementById('api-path').value;
 })();
 
 
 function inApp() {
-    return navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+    return $FW.Browser.inApp();
 }
 
 function redirectToAppUserContribute() {
@@ -19,7 +17,7 @@ function redirectToAppUserContribute() {
 
 var qryDetail = function (giftBagId, level, bagType) {
 
-    var app_login_sign = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
+    var app_login_sign = $FW.Browser.inApp();
     if (app_login_sign !== null && app_login_sign !== '') {
         jsPost(location.protocol + '//m.9888.cn/mpwap/app/vipTeQuan/qryVipTeQuanDetail.shtml', {
             'level': level,
@@ -48,9 +46,7 @@ var jsPost = function (action, values) {
 $(function () {
     $.ajax({
         type: "GET",
-        url: API_PATH + "mpwap/api/v1/user/level-info.shtml",
-        //url: "http://10.105.7.124/xxxxx.json",
-        //url: "http://localhost/user-level.json",
+        url: API_PATH + "/mpwap/api/v1/user/level-info.shtml",
         dataType: "json",
         success: function (data) {
 
@@ -111,7 +107,7 @@ $(function () {
 
             var ua = navigator.userAgent;
             // hack 针对华为B199 机型的兼容, 不使用滑动功能
-            if (ua.match(/FinancialWorkshop/) && ua.match(/HuaweiB199/)) {
+            if ($FW.Browser.inApp() && ua.match(/HuaweiB199/)) {
                 [0, 1, 2, 3, 4].forEach(function (i) {
                     if (i != num)
                         $(".center.slider > div:eq(" + i + ")").hide()

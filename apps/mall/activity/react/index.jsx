@@ -7,7 +7,7 @@ const Banner = React.createClass({
         }
     },
     componentDidMount: function () {
-        $FW.Ajax(`${API_PATH}mall/api/index/v1/activity.json?bizNo=${BIZ_NO}`)
+        $FW.Ajax(`${API_PATH}/mall/api/index/v1/activity.json?bizNo=${BIZ_NO}`)
             .then(data => this.setState({
                 image: data.img,
                 desc: data.desc
@@ -68,7 +68,7 @@ const Content = React.createClass({
         if (!this.state.has_more) return;
 
         $FW.Ajax({
-            url: `${API_PATH}mall/api/index/v1/search.json`,
+            url: `${API_PATH}/mall/api/index/v1/search.json`,
             data: {
                 page: this.state.page,
                 actIds: BIZ_NO,
@@ -151,7 +151,7 @@ const Content = React.createClass({
 const BIZ_NO = $FW.Format.urlQuery().bizNo;
 
 $FW.DOMReady(() => {
-    $FW.Ajax(`${API_PATH}mall/api/index/v1/activity.json?bizNo=${BIZ_NO}`)
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/activity.json?bizNo=${BIZ_NO}`)
         .then(data => ReactDOM.render(<Header title={data.title}/>, HEADER_NODE));
     ReactDOM.render(<Content />, CONTENT_NODE);
 })

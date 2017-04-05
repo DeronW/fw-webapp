@@ -78,7 +78,7 @@ const Register = React.createClass({
                 countdown: 60
             });
             this.codeTime();
-            $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+            $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                 mobile: this.state.phoneNum,
                 userOperationType: 3,
                 sourceType: SOURCE_TYPE
@@ -102,7 +102,7 @@ const Register = React.createClass({
             if (!istrue(password)) err = "必须是字母及数字组合密码";
             err ?
                 $FW.Component.Toast(err) :
-                $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
+                $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
                     channelCode:$FW.Format.urlQuery().channelCode,
                     codeToken: codeToken,
                     invitationCode: $FW.Format.urlQuery().code,

@@ -15,7 +15,7 @@ const HistoryBill = React.createClass({
         if (!this.state.hasData) return;
         let user = $FW.Store.getUserDict();
 
-        $FW.Post(`${API_PATH}api/oriole/v1/loanhistory.json`, {
+        $FW.Post(`${API_PATH}/api/oriole/v1/loanhistory.json`, {
             token: user.token,
             userGid: user.gid,
             userId: user.id,

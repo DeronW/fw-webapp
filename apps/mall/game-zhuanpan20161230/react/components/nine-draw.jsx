@@ -16,7 +16,7 @@ const NineDraw = React.createClass({
     componentDidMount: function () {
 
         $FW.Ajax({
-            url: `${API_PATH}mall/api/magic/v1/cost.json?activityId=${ACTIVITY_ID}`, //活动消耗工分
+            url: `${API_PATH}/mall/api/magic/v1/cost.json?activityId=${ACTIVITY_ID}`, //活动消耗工分
             success: (data) => {
                 this.setState({
                     infinitely: data.infinitely,
@@ -69,7 +69,7 @@ const NineDraw = React.createClass({
         if (this.state.remainTimes < 1) return;
         this._usable = false;
         $FW.Ajax({
-            url: API_PATH + 'mall/api/magic/v6/draw.json',
+            url: `${API_PATH}/mall/api/magic/v6/draw.json`,
             method: 'post',
             data: {activityId: ACTIVITY_ID, source: getBrowserType()},
             success: (data) => {

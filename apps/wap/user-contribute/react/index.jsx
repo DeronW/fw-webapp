@@ -50,7 +50,7 @@ const InvestTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=0",
+            url: API_PATH + "/mpwap/api/v1/user/contribute/invest.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=0",
             enable_loading: 'mini',
         }).then(data => {
             this.setState({
@@ -121,7 +121,7 @@ const InviteTab = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=1",
+            url: API_PATH + "/mpwap/api/v1/user/contribute/invite.shtml?page=" + _this.state.page + "&rows=" + PAGE_COUNT + "&type=1",
             enable_loading: true,
             success: function (data) {
                 _this.setState({
@@ -236,7 +236,7 @@ $FW.DOMReady(function () {
         ReactDOM.render(<Header title={"我的贡献值"} />, HEADER_NODE);
 
     $FW.Ajax({
-        url: `${API_PATH}mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0`,
+        url: `${API_PATH}/mpwap/api/v1/user/contribute.shtml?page=1&rows=1&type=0`,
         success: data => ReactDOM.render(<HomePage myInfoData={data} />, CONTENT_NODE)
     })
 });

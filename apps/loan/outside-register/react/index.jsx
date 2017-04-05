@@ -177,7 +177,7 @@ class InteractWrap extends React.Component {
     getVerificationCode() {
         if (this.state.timeRemainForNewCode === 60) { // time for test
             if (isPhoneNum(this.state.phoneNum)) {
-                $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+                $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                     mobile: this.state.phoneNum,
                     userOperationType: 3,
                     sourceType: SOURCE_TYPE
@@ -271,7 +271,7 @@ class InteractWrap extends React.Component {
                 if (!isPasswordValid(this.state.password)) {
                     this.setState({ password: '' });
                 } else {
-                    $FW.Post(`${API_PATH}api/userBase/v1/register.json`, {
+                    $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
                         channelCode: $FW.Format.urlQuery().channelCode,
                         extInvCode: $FW.Format.urlQuery().extInvCode || '',
                         codeToken: this.state.codeToken,
@@ -343,6 +343,11 @@ function isPasswordValid(password) {
     return true;
 }
 
+// document.body.onoffline = function() {
+//   $FW.Component.Toast("无网络连接");
+// }
+
+// render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(<InteractWrap />, CONTENT_NODE)
 })

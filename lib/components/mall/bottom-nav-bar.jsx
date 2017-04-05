@@ -4,7 +4,7 @@ const BottomNavBar = React.createClass({
         let lineHeight = parseInt(this.props.height) || 100;
 
         let inIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
-        let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+        let inApp = $FW.Browser.inApp();
 
         if (inIOS && inApp) {
             height += 22;
@@ -35,7 +35,7 @@ const BottomNavBar = React.createClass({
     },
 
     render: function () {
-        let inApp = navigator.userAgent.indexOf('FinancialWorkshop') >= 0;
+        let inApp = $FW.Browser.inApp();
         let posAW = inApp ? "absolute" : "static";
         let Top = inApp ? "15px" : "0";
         let pTopAW = inApp ? "0" : "15px";

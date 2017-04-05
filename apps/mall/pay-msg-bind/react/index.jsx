@@ -49,8 +49,7 @@ const SendCode = React.createClass({
     //重新发送验证码
     reSend: function () {
         $FW.Ajax({
-            url: API_PATH + 'mall/api/payment/v1/SendPhoneVerifyPay.json',
-            enable_loading: 'mini',
+            url: `${API_PATH}/mall/api/payment/v1/SendPhoneVerifyPay.json`,
             data:{
                 mobileNo: $FW.Format.urlQuery().mobileNo,
             },
@@ -103,7 +102,7 @@ const SendCode = React.createClass({
             bankName: query.bankName
         };
         $FW.Ajax({
-            url: API_PATH + '/mall/api/payment/v1/binding_bank_card.json',
+            url: `${API_PATH}/mall/api/payment/v1/binding_bank_card.json`,
             enable_loading: 'mini',
             data: FormData,
             success: function (data) {

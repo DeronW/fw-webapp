@@ -13,8 +13,8 @@ const InvestPanel = React.createClass({
     },
     loadBids: function () {
         let url = this.state.tab == 'new' ?
-            `${API_PATH}mpwap/newPrdClaims/dataList.shtml` :
-            `${API_PATH}mpwap/newPrdTransfer/dataList.shtml`;
+            `${API_PATH}/mpwap/newPrdClaims/dataList.shtml` :
+            `${API_PATH}/mpwap/newPrdTransfer/dataList.shtml`;
 
         $FW.Ajax({
             url: url,

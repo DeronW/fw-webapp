@@ -44,13 +44,12 @@ const Register = React.createClass({
             return;
         }
 
-        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+        $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
             mobile: phone,
             userOperationType: 3,
             sourceType: SOURCE_TYPE
         }).then(data => {
             $FW.Store.set('phone', phone);
-            console.log(data.codeType);
             if(data.codeType == 1){
                 location.href = `/static/loan/user-set-password/index.html?codeToken=${data.codeToken}&phone=${phone}`;
             }else if(data.codeType == 2){

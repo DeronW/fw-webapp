@@ -38,7 +38,7 @@ const VerifyCode = React.createClass({
         if (this.state.countdown <= 0) {
             this.countingDown();
             $FW.Ajax({
-                url: `${API_PATH}api/loan/v1/resendverifycode.json`,
+                url: `${API_PATH}/api/loan/v1/resendverifycode.json`,
                 method: "post",
                 data: {
                     token: USER.token,
@@ -56,7 +56,7 @@ const VerifyCode = React.createClass({
         if (this.state.value == '')
             return $FW.Component.Toast("请输入短信验证码");
 
-        $FW.Post(`${API_PATH}api/loan/v1/do.json`, {
+        $FW.Post(`${API_PATH}/api/loan/v1/do.json`, {
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,

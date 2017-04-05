@@ -77,7 +77,6 @@ const ApplyLoan = React.createClass({
                     } else {
                         this.setState({ show_tip: '最高' });
                     }
-                    //console.log(getPosition(minDiv).left - 48)
                     //if (loanNum <= this.props.data.lowestLoan) { loanNum = this.props.data.lowestLoan }
                     this.setState({ creditLine: loanNum });
                     e.preventDefault();
@@ -227,7 +226,7 @@ const user = USER;
 $FW.DOMReady(function () {
     NativeBridge.setTitle('放心花');
 
-    $FW.Post(`${API_PATH}api/loan/v1/baseinfo.json`, {
+    $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
         token: USER.token,
         userGid: USER.gid,
         userId: USER.id,

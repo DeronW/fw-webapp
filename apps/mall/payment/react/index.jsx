@@ -43,7 +43,7 @@ const Payment = React.createClass({
         }
         else if (index == 'w') {
             $FW.Ajax({
-                    url: `${API_PATH}mall/api/payment/v1/wechatPay.json`,
+                    url: `${API_PATH}/mall/api/payment/v1/wechatPay.json`,
                     enable_loading: true,
                     data: {payType: 'WECHAT_PAY'},
                 })
@@ -73,7 +73,7 @@ const Payment = React.createClass({
                 orderGroupBizNo: query.orderGroupBizNo || ""
             };
             $FW.Ajax({
-                url: `${API_PATH}mall/api/payment/v1/ucf_pay.json`,
+                url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
                 //url: './ucf_pay.json',
                 enable_loading: true,
                 data: FormData,
@@ -208,9 +208,7 @@ $FW.DOMReady(function () {
     let query = $FW.Format.urlQuery();
     let createdTime = query.createdTime;
     $FW.Ajax({
-        url: `${API_PATH}mall/api/payment/v1/bank_card_list.json?createdTime=` + createdTime,
-        //url: './bank_card_list.json',//mall/api/payment/v1/bank_card_list.json
-        enable_loading: 'mini',
+        url: `${API_PATH}/mall/api/payment/v1/bank_card_list.json?createdTime=` + createdTime,
         success: function (data) {
             ReactDOM.render(<Payment data={data.bankCards} createdTime={data.createdTime}/>, CONTENT_NODE);
         }

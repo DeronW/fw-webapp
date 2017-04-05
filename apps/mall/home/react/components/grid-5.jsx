@@ -7,7 +7,7 @@ const Grid_5 = React.createClass({
     },
     componentDidMount() {
         $FW.Ajax({
-            url: `${API_PATH}mall/api/index/v1/recommendProducts.json`,
+            url: `${API_PATH}/mall/api/index/v1/recommendProducts.json`,
             data: {
                 recommendBizNo: this.state.bizNo,
                 totalCount: this.props.count

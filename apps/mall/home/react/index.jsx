@@ -132,6 +132,6 @@ const Mall = React.createClass({
 
 $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
-    $FW.Ajax(`${API_PATH}mall/api/index/v1/banners.json`)
+    $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
         .then(data => ReactDOM.render(<Mall banners={data.banners} />, CONTENT_NODE));
 });

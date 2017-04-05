@@ -14,7 +14,7 @@ $FW.DOMReady(function () {
     let withdrawCardGid = query.withdrawCardGid;
 
     Promise.all([
-        $FW.Post(`${API_PATH}api/loan/v1/tryLoanBudget.json`, {
+        $FW.Post(`${API_PATH}/api/loan/v1/tryLoanBudget.json`, {
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
@@ -22,13 +22,13 @@ $FW.DOMReady(function () {
             orioleOrderGid: orioleOrderGid,
             loanAmount: loanNum
         }),
-        $FW.Post(`${API_PATH}api/bankcard/v1/bankcardlist.json`, {
+        $FW.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`, {
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
             sourceType: SOURCE_TYPE
         }),
-        $FW.Post(`${API_PATH}api/repayment/v1/latedescription.json`, {
+        $FW.Post(`${API_PATH}/api/repayment/v1/latedescription.json`, {
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,

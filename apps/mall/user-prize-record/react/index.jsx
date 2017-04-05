@@ -17,8 +17,7 @@ const MyPrizeRecord = React.createClass({
     },
     loadMoreProductHandler: function (done) {
         this.state.hasNextPage ? $FW.Ajax({
-            url: `${API_PATH}mall/api/v1/MyPrizeRecordList.json`, //获得中奖记录
-            //url:"http://10.10.100.112/mockjs/4/mall/api/v1/MyPrizeRecordList.json",
+            url: `${API_PATH}/mall/api/v1/MyPrizeRecordList.json`, //获得中奖记录
             data: {
                 num: 20,
                 pages: this.state.page

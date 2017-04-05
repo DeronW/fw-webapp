@@ -64,7 +64,7 @@ var PswFrom = React.createClass({
         }.bind(this), 1000);
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/sendCode.shtml",
+            url: API_PATH + "/mpwap/api/v1/sendCode.shtml",
             method: "GET",
             data: {
                 type: this.state.codeType,
@@ -219,7 +219,7 @@ var Pop = React.createClass({
 
 $FW.DOMReady(function () {
     $FW.Ajax({
-        url: API_PATH + "mpwap/api/v1/getOpenAccountInfo.shtml",
+        url: API_PATH + "/mpwap/api/v1/getOpenAccountInfo.shtml",
         success: function (data) {
             if (data.openStatus != 3) {
                 window.location.href = location.protocol + "//m.9888.cn/mpwap/top/index.do"

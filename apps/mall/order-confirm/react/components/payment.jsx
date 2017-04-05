@@ -59,7 +59,7 @@ const PaymentPanel = React.createClass({
 
 
         $FW.Ajax({
-            url: `${API_PATH}mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prd + `&buyNum=` + buyNum + `&userTickets=` + userTicketList,
+            url: `${API_PATH}/mall/api/order/v1/pre_pay_order.json?cartFlag=` + cartFlag + `&prd=` + prd + `&buyNum=` + buyNum + `&userTickets=` + userTicketList,
             enable_loading: true
         }).then(data => {
 

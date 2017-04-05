@@ -65,7 +65,7 @@ const Special = React.createClass({
 
 
                 $FW.Ajax({
-                    url: API_PATH + "mpwap/api/v1/sendCode.shtml?type=" + _this.state.codeType + "&destPhoneNo=" + _this.props.propsPhone + "&isVms=" + _this.state.isVmsType,
+                    url: API_PATH + "/mpwap/api/v1/sendCode.shtml?type=" + _this.state.codeType + "&destPhoneNo=" + _this.props.propsPhone + "&isVms=" + _this.state.isVmsType,
                     success: function (data) {
                     },
                     fail: function () {

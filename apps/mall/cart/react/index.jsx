@@ -37,7 +37,7 @@ const ShoppingCart = React.createClass({
     checkHandler: function (index) {
         var ps = this.state.products;
         $FW.Ajax({
-            url: `${API_PATH}mall/api/cart/v1/isChecked.json`,
+            url: `${API_PATH}/mall/api/cart/v1/isChecked.json`,
             data: {
                 flag: ps[index].cartStatus === 0,
                 productBizNo: ps[index].productBizNo
@@ -58,7 +58,7 @@ const ShoppingCart = React.createClass({
     deleteHandler: function (index) {
         let ps = this.state.products;
         $FW.Ajax({
-            url: `${API_PATH}mall/api/cart/v1/deleteCartProduct.json`,
+            url: `${API_PATH}/mall/api/cart/v1/deleteCartProduct.json`,
             data: {
                 productBizNo: ps[index].productBizNo
             }
@@ -78,7 +78,7 @@ const ShoppingCart = React.createClass({
             changeAll: newChangeAll
         });
         $FW.Ajax({
-            url: `${API_PATH}mall/api/cart/v1/isChecked.json`,
+            url: `${API_PATH}/mall/api/cart/v1/isChecked.json`,
             data: {
                 allFlag: newChangeAll,
                 productBizNo: ''
@@ -95,7 +95,7 @@ const ShoppingCart = React.createClass({
         ps[index].productNumber = c;
 
         $FW.Ajax({
-            url: `${API_PATH}mall/api/cart/v1/updateCartNumber.json`,
+            url: `${API_PATH}/mall/api/cart/v1/updateCartNumber.json`,
             data: {
                 buyNum: ps[index].productNumber,
                 productBizNo: ps[index].productBizNo
@@ -190,7 +190,7 @@ const ShoppingCart = React.createClass({
 });
 
 $FW.DOMReady(function () {
-    $FW.Ajax(`${API_PATH}mall/api/cart/v1/shoppingCart.json`).then(data => {
+    $FW.Ajax(`${API_PATH}/mall/api/cart/v1/shoppingCart.json`).then(data => {
         ReactDOM.render(<ShoppingCart products={data.cartList} />, CONTENT_NODE)
     });
     ReactDOM.render(<Header title={"购物车"} />, HEADER_NODE);

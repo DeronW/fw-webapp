@@ -10,7 +10,7 @@ let jsPost = function (action, values) {
 };
 
 let qryDetail = (giftBagId, level, bagType) => {
-    let in_app = navigator.userAgent.indexOf('FinancialWorkshop') > -1;
+    let in_app = $FW.Browser.inApp();
     jsPost(`/mpwap/${in_app ? 'app/' : ''}vipTeQuan/qryVipTeQuanDetail.shtml`, {
         'level': level,
         'giftBagId': giftBagId,
@@ -30,7 +30,7 @@ const Content = React.createClass({
         }
     },
     componentDidMount() {
-        $FW.Ajax(`${API_PATH}mpwap/api/v1/user/level-info.shtml`).then(data => {
+        $FW.Ajax(`${API_PATH}/mpwap/api/v1/user/level-info.shtml`).then(data => {
             this.setState({
                 current_level: data.userLevel,
                 user_level: data.userLevel,

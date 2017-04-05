@@ -8,7 +8,7 @@ const SearchBar = React.createClass({
     },
     componentDidMount: function () {
         $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
+            url: `${API_PATH}/mall/api/index/v1/searchRecordListOrClearAllRecords.json`,
             data: {searchOpType: 0, page: 1},
             success: (data) => {
                 this.setState({history: data.searchRecords || []});
@@ -29,7 +29,7 @@ const SearchBar = React.createClass({
     },
     clearHistoryHandler: function () {
         $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
+            url: `${API_PATH}/mall/api/index/v1/searchRecordListOrClearAllRecords.json`,
             data: {searchOpType: 1, page: 1},
             success: (data) => {
                 this.setState({history: data.searchRecords || []})
@@ -50,7 +50,7 @@ const SearchBar = React.createClass({
         this.props.searchFocus();
 
         $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/searchRecordListOrClearAllRecords.json',
+            url: `${API_PATH}/mall/api/index/v1/searchRecordListOrClearAllRecords.json`,
             data: {searchOpType: 0, page: 1},
             success: (data) => {
                 this.setState({history: data.searchRecords || []});

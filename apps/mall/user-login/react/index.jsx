@@ -68,12 +68,12 @@ const Login = React.createClass({
             phone: this.state.val1
         }
         $FW.Ajax({
-            url: `${API_PATH}mall/login/setCode.json`,
+            url: `${API_PATH}/mall/login/setCode.json`,
             enable_loading: 'mini',
             method: 'post',
             data: FormData,
             success: function (data) {
-               // $FW.Component.Alert("原来你在测试那就告诉你验证码：" + data.code)
+                $FW.Component.Alert("原来你在测试那就告诉你验证码：" + data.code)
                 this.setState({value: 60, reSend: false});
                 this.tick()
                 this.setState({reSend: false});
@@ -141,7 +141,7 @@ const Login = React.createClass({
             code: this.state.val2
         }
         $FW.Ajax({
-            url: `${API_PATH}mall/login/login.json`,
+            url: `${API_PATH}/mall/login/login.json`,
             enable_loading: 'mini',
             method: 'post',
             data: FormData,

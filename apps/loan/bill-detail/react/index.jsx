@@ -63,7 +63,7 @@ $FW.DOMReady(function () {
     let loanGid = query.loanGid;
     let user = $FW.Store.getUserDict();
     $FW.Ajax({
-        url: `${API_PATH}api/repayment/v1/loandetail.json`,
+        url: `${API_PATH}/api/repayment/v1/loandetail.json`,
         method: "post",
         enable_loading: "mini",
         data: {

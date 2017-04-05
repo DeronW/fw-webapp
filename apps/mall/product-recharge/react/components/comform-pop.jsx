@@ -38,7 +38,7 @@ const ConfirmPop = React.createClass({
         if (this.state.remain <= 0) {
             this.tick();
             $FW.Ajax({
-                url: API_PATH + "mall/api/order/v1/SendPhoneVerifyPay.json",
+                url: `${API_PATH}/mall/api/order/v1/SendPhoneVerifyPay.json`,
                 fail: function (code, message, response) {
                     _this.setState({
                         show_warn: true,
@@ -75,11 +75,11 @@ const ConfirmPop = React.createClass({
         }
 
         $FW.Ajax({
-            url: API_PATH + 'mall/api/v1/getToken.json',
+            url: API_PATH + '/mall/api/v1/getToken.json',
             success: function (data) {
                 var token = data.token;
                 $FW.Ajax({
-                    url: API_PATH + 'mall/api/v1/phone/recharge-order.json',
+                    url: API_PATH + '/mall/api/v1/phone/recharge-order.json',
                     enable_loading: true,
                     method: 'get',
                     data: {

@@ -39,7 +39,7 @@ const ConfirmOrder = React.createClass({
     },
     refreshTokenStr: function () {
         $FW.Ajax({
-            url: `${API_PATH}mall/api/order/v1/getTokenStr.json`
+            url: `${API_PATH}/mall/api/order/v1/getTokenStr.json`
             //url: `./getTokenStr.json`
         }).then(data => {
             this.FormData.tokenStr = data.tokenStr;
@@ -53,7 +53,7 @@ const ConfirmOrder = React.createClass({
             if (!this.FormData.addressId || this.FormData.addressId == 'undefined')
                 return $FW.Component.Alert('请选择收货地址');
         }
-        
+
         if (this.state.payablePointAmt > this.state.avaliablePoints) {
             $FW.Component.Alert('工分不足，不能购买');
             return;
@@ -61,18 +61,9 @@ const ConfirmOrder = React.createClass({
 
         let submit = function submit() {
             $FW.Ajax({
-                url: `${API_PATH}mall/api/order/v1/commit_pay_order.json`,
-                //url: `./commit_pay_order.json`,
-                //method: 'POST',
-                enable_loading: 'mini',
+                url: `${API_PATH}/mall/api/order/v1/commit_pay_order.json`,
                 data: this.FormData
             }).then(result=> {
-                /*
-                 if (data.errMsg) {
-                 $FW.Component.Alert(data.errMsg);
-                 this.refreshTokenStr()
-                 } else {
-                 */
                 if (result.status == 1) {
                     location.href =
                         '/static/mall/payment/index.html?merchantNo=' + result.merchantNo +
@@ -219,8 +210,7 @@ $FW.DOMReady(function () {
     //if (!query.productBizNo) $FW.Component.Alert('product bizNo not in url query');
 
     $FW.Ajax({
-        url: `${API_PATH}mall/api/order/v1/pre_pay_order.json`,
-        //url: `./pre_pay_order.json`,
+        url: `${API_PATH}/mall/api/order/v1/pre_pay_order.json`,
         data: {
             cartFlag: cartFlag,
             prd: prd,

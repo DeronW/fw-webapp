@@ -12,7 +12,7 @@ const ConfirmLoan = React.createClass({
         } else {
             let query = $FW.Format.urlQuery();
             let orderGid = query.orderGid;
-            $FW.Post(`${API_PATH}api/loan/v1/sendSmsverifycode.json`,{
+            $FW.Post(`${API_PATH}/api/loan/v1/sendSmsverifycode.json`,{
                     token: USER.token,
                     userGid: USER.gid,
                     userId: USER.id,

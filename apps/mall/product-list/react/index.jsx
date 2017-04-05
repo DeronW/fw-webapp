@@ -14,7 +14,7 @@ const ResultPage = React.createClass({
     componentDidMount: function () {
         if (Filter.options.searchSourceType == 1) {
             $FW.Ajax({
-                url: `${API_PATH}mall/api/v1/user-state.json`,//登录状态及工分
+                url: `${API_PATH}/mall/api/v1/user-state.json`,//登录状态及工分
                 success: (data) => {
                     Filter.options.maxPoints = data.score;
                     Filter.myConvertibleScore = data.score;
@@ -155,7 +155,7 @@ let Filter = {
     search: function (options, callback) {
         Filter.mix(options);
         $FW.Ajax({
-            url: API_PATH + 'mall/api/index/v1/search.json',
+            url: `${API_PATH}/mall/api/index/v1/search.json`,
             data: Filter.options,
             enable_loading: 'mini',
             success: data => callback(data)

@@ -50,7 +50,7 @@ const Register = React.createClass({
 
         err ?
             $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}api/userBase/v1/login.json`, {
+            $FW.Post(`${API_PATH}/api/userBase/v1/login.json`, {
                 mobile: PHONE,
                 password: password,
                 sourceType: SOURCE_TYPE
@@ -67,7 +67,7 @@ const Register = React.createClass({
             }, e => $FW.Component.Toast(e.message));
     },
     forgotPasswordHandler() {
-        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+        $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
             mobile: PHONE,
             userOperationType: 2,
             sourceType: SOURCE_TYPE

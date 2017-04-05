@@ -145,7 +145,7 @@ $FW.DOMReady(function () {
 
     Promise.all([
         $FW.Ajax({
-            url: `${API_PATH}api/bankcard/v1/bankcardlist.json`,
+            url: `${API_PATH}/api/bankcard/v1/bankcardlist.json`,
             method: "post",
             data: {
                 token: USER.token,
@@ -155,7 +155,7 @@ $FW.DOMReady(function () {
             }
         }),
         $FW.Ajax({
-            url: `${API_PATH}api/repayment/v1/loandetail.json`,
+            url: `${API_PATH}/api/repayment/v1/loandetail.json`,
             method: "post",
             data: {
                 loanGid: loanGid,

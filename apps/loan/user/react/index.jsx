@@ -23,7 +23,7 @@ const MyCnt = React.createClass({
     componentDidMount() {
         Promise.all([
             $FW.Ajax({
-                url: API_PATH + "api/oriole/v1/indexloadpage.json",
+                url: `${API_PATH}/api/oriole/v1/indexloadpage.json`,
                 method: "POST",
                 enable_loading: "mini",
                 data: {
@@ -34,7 +34,7 @@ const MyCnt = React.createClass({
                 }
             }),
             $FW.Ajax({
-                url: API_PATH + "api/loan/v1/baseinfo.json",
+                url: `${API_PATH}/api/loan/v1/baseinfo.json`,
                 method: "POST",
                 enable_loading: "mini",
                 data: {

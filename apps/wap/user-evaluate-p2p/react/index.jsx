@@ -249,44 +249,21 @@ const QuestionPanel = React.createClass({
         this.setState({ selected: selected });
     },
     fnSumHandler: function () {
-        let newJson = {};
-        let ajaxcan = true;
-        this.state.selected.map((value, index) => ({
-            if(ajaxcan) {
-                for (let x in value) {
-                    switch (value[x]) {
-                        case 0:
-                            value[x] = 'A';
-                            break;
-                        case 1:
-                            value[x] = 'B';
-                            break;
-                        case 2:
-                            value[x] = 'C';
-                            break;
-                        case 3:
-                            value[x] = 'D';
-                            break;
-                        case 4:
-                            value[x] = 'E';
-                            break;
-                        case -1:
-                            ajaxcan = false;
-                            $FW.Component.Toast("您还有未填写试题");
-                            break;
-                        default:
-                        // do nothing
-                    }
-                    newJson[x] = value[x];
-                }
-            }
-
-        }));
-        if (ajaxcan) {
+        let form_data = {}, { selected } = this.state, err;
+        for (let i = 0; i < selected.length; i++) {
+            Object.assign(form_data, selected[i])
+        }
+        for (let i in form_data) {
+            if (form_data[i] == -1) err = true;
+            form_data[i] = ['A', 'B', 'C', 'D', 'E'][form_data[i]]
+        }
+        if (err) {
+            $FW.Component.Toast("您还有未填写试题");
+        } else {
             $FW.Ajax({
-                url: API_PATH + 'mpwap/orderuser/riskGradeInto.shtml', //传参数
-                data: newJson,
-                success: (data) => {
+                url: `${API_PATH}/mpwap/orderuser/riskGradeInto.shtml`, //传参数
+                data: form_data,
+                success: data => {
                     this.props.setResult(true, data.score, data.gradeLevel);
                 }
             })

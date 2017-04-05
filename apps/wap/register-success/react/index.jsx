@@ -88,7 +88,7 @@ var AccountSucceedBody = React.createClass({
 
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/new/userLogin/registResult.shtml",
+            url: API_PATH + "/mpwap/new/userLogin/registResult.shtml",
             success: function (data) {
                 _this.setState({
                     registResultData: data

@@ -17,7 +17,7 @@ $FW.DOMReady(function () {
         $(this).hide();
     });
 
-    $FW.Post(`${API_PATH}api/shareTemplate/v1/getContent.json`, {
+    $FW.Post(`${API_PATH}/api/shareTemplate/v1/getContent.json`, {
         channelCode: "OFFICIAL",
         templateType: 1,
         userGid: USER.gid,
@@ -32,7 +32,7 @@ $FW.DOMReady(function () {
 
     function loadMoreHandler(done) {
         if (loadNextPage) {
-            $FW.Post(`${API_PATH}api/userBase/v1/invitationRecord.json`, {
+            $FW.Post(`${API_PATH}/api/userBase/v1/invitationRecord.json`, {
                 pageIndex: page,
                 pageSize: 20,
                 userGid: USER.gid,

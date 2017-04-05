@@ -37,16 +37,11 @@ $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"查看物流"}/>, HEADER_NODE);
     var query = $FW.Format.urlQuery();
     $FW.Ajax({
-        //url: "http://localhost/nginx-1.9.12/html/logistics.json",
-        url: API_PATH + "mall/api/order/v1/logistics.json",
-        enable_loading: 'mini',
+        url: `${API_PATH}/mall/api/order/v1/logistics.json`,
         data: {
             sendOrderNo: query.sendOrderNo,
             sendChannel: query.sendChannel,
             sendChannelEnum: query.sendChannelEnum
-            //sendOrderNo:1000688237617,
-            //sendChannel:"韵达快递",
-            //sendChannelEnum:"YD"
         },
         success: function (data) {
             ReactDOM.render(<Logistics data={data}/>, CONTENT_NODE);

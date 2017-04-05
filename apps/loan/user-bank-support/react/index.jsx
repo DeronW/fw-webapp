@@ -7,7 +7,7 @@ const BankList = React.createClass({
     componentDidMount() {
         let user = $FW.Store.getUserDict();
         $FW.Ajax({
-            url: `${API_PATH}api/bankcard/v1/supportbank.json`,
+            url: `${API_PATH}/api/bankcard/v1/supportbank.json`,
             method: "POST",
             data: {
                 token: user.token,

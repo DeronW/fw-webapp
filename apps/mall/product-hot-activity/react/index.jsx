@@ -28,7 +28,7 @@ const HotActivity = React.createClass({
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"热门活动"}/>, HEADER_NODE);
     $FW.Ajax({
-        url: `${API_PATH}mall/api/index/v1/activities.json`,//热门活动
+        url: `${API_PATH}/mall/api/index/v1/activities.json`,//热门活动
         success: (data) => {
             ReactDOM.render(<HotActivity data={data}/>, CONTENT_NODE);
         }

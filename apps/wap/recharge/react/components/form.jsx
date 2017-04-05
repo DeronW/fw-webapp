@@ -40,7 +40,7 @@ const Form = React.createClass({
             }, 1000);
 
             $FW.Ajax({
-                url: API_PATH + 'mpwap/api/v1/getRechargeCode.shtml',
+                url: API_PATH + '/mpwap/api/v1/getRechargeCode.shtml',
                 method: 'POST',
                 data: {
                     phoneNo: this.state.phone
@@ -101,7 +101,7 @@ const Form = React.createClass({
             $FW.Component.Alert('请输入验证码')
         } else {
             $FW.Ajax({
-                url: API_PATH + 'mpwap/api/v1/index.shtml',
+                url: API_PATH + '/mpwap/api/v1/index.shtml',
                 enable_loading: true,
                 data: {
                     payAmount: this.state.money,

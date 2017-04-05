@@ -11,7 +11,7 @@ var SelectBank = React.createClass({
         var _this = this;
 
         $FW.Ajax({
-            url: API_PATH + "mpwap/api/v1/getBankListInfo.shtml",
+            url: API_PATH + "/mpwap/api/v1/getBankListInfo.shtml",
             enable_loading: true,
             success: function (data) {
                 _this.setState({

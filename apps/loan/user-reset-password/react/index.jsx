@@ -51,7 +51,7 @@ const Register = React.createClass({
         }, 1000);
     },
     handleGetCode() {
-        $FW.Post(`${API_PATH}api/userBase/v1/sendVerifyCode.json`, {
+        $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
             mobile: PHONE,
             userOperationType: 2,
             sourceType: SOURCE_TYPE
@@ -74,7 +74,7 @@ const Register = React.createClass({
 
         err ?
             $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}api/userBase/v1/resetPass.json`, {
+            $FW.Post(`${API_PATH}/api/userBase/v1/resetPass.json`, {
                 codeToken: codeToken,
                 mobile: PHONE,
                 password: password,
