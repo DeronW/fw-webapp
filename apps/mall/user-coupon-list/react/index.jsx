@@ -18,7 +18,7 @@ const CouponMain = React.createClass({
     },
 
     exChange: function (index) {
-        $FW.Ajax(`${API_PATH}/mall/api/index/v1/bondCheapCode.json`)
+        $FW.Ajax(`${API_PATH}/mall/api/cheap/v1/bondCheapCode.json`)
             .then((data) => {
 　　　　　　　　　alert(JSON.stringify(data))
             });
