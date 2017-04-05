@@ -195,6 +195,7 @@ class InteractWrap extends React.Component {
                 }, (e) => {
                     let msg = e.code === 201003 ? '手机号已注册' : e.message;
                     $FW.Component.Toast(msg || "验证码获取失败");
+                    if (e.code === 201003) this.handleJump(false);
                 });
             } else {
                 $FW.Component.Toast("手机号格式不正确");
@@ -250,6 +251,9 @@ class InteractWrap extends React.Component {
                 window.location.href = other_apps_url;
                 break;
             case 'to_home':
+                // 如果传入参数是 false , 则不跳转, 这可能是因为用户已经注册,
+                // 但不能跳转到首页, 因为TA还没有登录
+                if (data === false) return;
                 let dict = data.userLogin;
                 $FW.Store.setUserDict({
                     token: dict.userToken,
