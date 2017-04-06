@@ -75,10 +75,15 @@ const MyCnt = React.createClass({
             }
         }
 
+        let title_text = phoneMosaic($FW.Store.get('phone', ''));
+        if($FW.Store.get('phone') == 'phone:not-exist') {
+            title_text = '未实名'
+        }
+
         return (
             <div className="my-cnt">
                 <div className="my-nav">
-                    <span className="text">{phoneMosaic($FW.Store.get('phone', ''))}</span>
+                    <span className="text">{title_text}</span>
                 </div>
 
                 <div className="my-info">

@@ -12,7 +12,7 @@ class PhoneNumInput extends React.Component {
         return (
             <div className="input-wrap phone">
                 <div className="input-type-icon">
-                    <img src="images/phone.png"/>
+                    <img src="images/phone.png" />
                 </div>
                 <input type="tel" placeholder="请输入手机号" maxLength="11" value={this.props.value} onChange={(e) => {
                     if (!/[0-9]/.test(e.target.value[e.target.value.length - 1]) && e.target.value.length > 0) {
@@ -32,9 +32,9 @@ class PhoneNumInput extends React.Component {
                     });
                 }} onBlur={() => {
                     setTimeout(() => {
-                        this.setState({enableClear: false});
+                        this.setState({ enableClear: false });
                     }, 10);
-                }}/> {/* reason for setTimeout:
+                }} /> {/* reason for setTimeout:
             clicking on the clear button triggers `blur` event
             for input element first, if enableClear is set to
             false instantly, there would be no clear button,
@@ -44,7 +44,7 @@ class PhoneNumInput extends React.Component {
                 }}>
                     <img src="images/clear.png" alt="clear button"></img>
                 </div>
-}
+                }
             </div>
         )
     }
@@ -62,7 +62,7 @@ class VerificationCodeInput extends React.Component {
         return (
             <div className="input-wrap">
                 <div className="input-type-icon">
-                    <img src="images/veri-code.png"/>
+                    <img src="images/veri-code.png" />
                 </div>
                 <input type="tel" placeholder="请输入验证码" maxLength="8" value={this.props.value} onChange={(e) => {
                     if (!/[0-9]/.test(e.target.value[e.target.value.length - 1]) && e.target.value.length > 0) {
@@ -82,16 +82,16 @@ class VerificationCodeInput extends React.Component {
                     });
                 }} onBlur={() => {
                     setTimeout(() => {
-                        this.setState({enableClear: false});
+                        this.setState({ enableClear: false });
                     }, 10);
-                }}/>
+                }} />
                 <div className="veri-code-info">
                     {this.state.enableClear && <div className="clear-btn" onClick={() => {
                         this.props.handleClear('verificationCode');
                     }}>
                         <img src="images/clear.png" alt="clear button"></img>
                     </div>
-}
+                    }
                     <div onClick={this.props.handleClick}>
                         {this.props.verificationCodeInfo}
                     </div>
@@ -113,7 +113,7 @@ class PasswordInput extends React.Component {
         return (
             <div className="input-wrap">
                 <div className="input-type-icon">
-                    <img src="images/password.png"/>
+                    <img src="images/password.png" />
                 </div>
                 <input type={this.props.type} placeholder="请输入密码，8-16位数字字母组合" maxLength="16" value={this.props.value} onChange={(e) => {
                     this.setState({
@@ -130,20 +130,20 @@ class PasswordInput extends React.Component {
                     });
                 }} onBlur={() => {
                     setTimeout(() => {
-                        this.setState({enableClear: false});
+                        this.setState({ enableClear: false });
                     }, 10);
-                }}/>
+                }} />
                 <div className="password-opts-wrap">
                     {this.state.enableClear && <div className="clear-btn" onClick={() => {
                         this.props.handleClear('password');
                     }}>
                         <img src="images/clear.png" alt="clear button"></img>
                     </div>
-}
+                    }
                     <div className="toggle-password-display" onClick={this.props.handleClick}>
                         <img src={this.props.togglePasswordDisplay
                             ? "images/show-password.png"
-                            : "images/hide-password.png"}/>
+                            : "images/hide-password.png"} />
                     </div>
                 </div>
             </div>
@@ -171,7 +171,7 @@ class InteractWrap extends React.Component {
     }
 
     handleInput(e, inputType) {
-        this.setState({[inputType]: e.target.value});
+        this.setState({ [inputType]: e.target.value });
     }
 
     getVerificationCode() {
@@ -182,27 +182,24 @@ class InteractWrap extends React.Component {
                     userOperationType: 3,
                     sourceType: SOURCE_TYPE
                 }).then((data) => {
-                    this.setState({codeToken: data.codeToken});
+                    this.setState({ codeToken: data.codeToken });
                     var countdown = setInterval(() => {
                         this.setState({
                             timeRemainForNewCode: this.state.timeRemainForNewCode - 1
                         });
                         if (this.state.timeRemainForNewCode === 0) {
                             clearInterval(countdown);
-                            this.setState({timeRemainForNewCode: 60}); // time for test
+                            this.setState({ timeRemainForNewCode: 60 }); // time for test
                         }
                     }, 1000);
                 }, (e) => {
-                    if (e.code === 201003) {
-                        $FW.Component.Toast('手机号已注册');
-                        setTimeout(this.handleJump, 2000);
-                        return;
-                    }
-                    $FW.Component.Toast(e.message);
+                    let msg = e.code === 201003 ? '手机号已注册' : e.message;
+                    $FW.Component.Toast(msg || "验证码获取失败");
+                    if (e.code === 201003) this.handleJump(false);
                 });
             } else {
                 $FW.Component.Toast("手机号格式不正确");
-                this.setState({phoneNum: ''});
+                this.setState({ phoneNum: '' });
             }
         }
     }
@@ -214,7 +211,7 @@ class InteractWrap extends React.Component {
     }
 
     clearInput(inputType) {
-        this.setState({[inputType]: ''});
+        this.setState({ [inputType]: '' });
     }
 
     ifEssentialsExist() {
@@ -254,6 +251,9 @@ class InteractWrap extends React.Component {
                 window.location.href = other_apps_url;
                 break;
             case 'to_home':
+                // 如果传入参数是 false , 则不跳转, 这可能是因为用户已经注册,
+                // 但不能跳转到首页, 因为TA还没有登录
+                if (data === false) return;
                 let dict = data.userLogin;
                 $FW.Store.setUserDict({
                     token: dict.userToken,
@@ -270,10 +270,10 @@ class InteractWrap extends React.Component {
         if (this.ifEssentialsExist()) {
             if (!isPhoneNum(this.state.phoneNum)) {
                 $FW.Component.Toast("手机号格式不正确");
-                this.setState({phoneNum: '', verificationCode: '', password: ''});
+                this.setState({ phoneNum: '', verificationCode: '', password: '' });
             } else {
                 if (!isPasswordValid(this.state.password)) {
-                    this.setState({password: ''});
+                    this.setState({ password: '' });
                 } else {
                     $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
                         channelCode: $FW.Format.urlQuery().channelCode,
@@ -285,6 +285,7 @@ class InteractWrap extends React.Component {
                         verifyCode: this.state.verificationCode,
                         sourceType: SOURCE_TYPE
                     }).then((data) => {
+                        $FW.Store.set('phone', this.state.phoneNum);
                         this.handleJump(data);
                     }, (e) => {
                         if (!this.state.codeToken) {
@@ -294,7 +295,7 @@ class InteractWrap extends React.Component {
                         $FW.Component.Toast(e.message);
                         if (e.code === 20010) {
                             $FW.Component.Toast("验证码错误，请重新输入");
-                            this.setState({verificationCode: ''});
+                            this.setState({ verificationCode: '' });
                         }
                     });
                 }
@@ -305,13 +306,13 @@ class InteractWrap extends React.Component {
     render() {
         return (
             <div className="interact-wrap">
-                <PhoneNumInput handleChange={this.handleInput} value={this.state.phoneNum} handleClear={this.clearInput}/>
+                <PhoneNumInput handleChange={this.handleInput} value={this.state.phoneNum} handleClear={this.clearInput} />
                 <VerificationCodeInput value={this.state.verificationCode} verificationCodeInfo={this.state.timeRemainForNewCode === 60
                     ? "获取验证码"
-                    : this.state.timeRemainForNewCode + "s"} handleChange={this.handleInput} handleClick={this.getVerificationCode} handleClear={this.clearInput}/>
+                    : this.state.timeRemainForNewCode + "s"} handleChange={this.handleInput} handleClick={this.getVerificationCode} handleClear={this.clearInput} />
                 <PasswordInput type={this.state.showPassword
                     ? "text"
-                    : "password"} togglePasswordDisplay={!this.state.showPassword} handleChange={this.handleInput} handleClick={this.togglePasswordDisplay} value={this.state.password} handleClear={this.clearInput}/>
+                    : "password"} togglePasswordDisplay={!this.state.showPassword} handleChange={this.handleInput} handleClick={this.togglePasswordDisplay} value={this.state.password} handleClear={this.clearInput} />
                 <button className="register-button" onClick={this.handleSubmit}>
                     立即领钱
                 </button>
@@ -351,8 +352,6 @@ function isPasswordValid(password) {
 // }
 
 // render ReactDom
-
 $FW.DOMReady(() => {
-    ReactDOM.render(
-        <InteractWrap/>, CONTENT_NODE)
+    ReactDOM.render(<InteractWrap />, CONTENT_NODE)
 })
