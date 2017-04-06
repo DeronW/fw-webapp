@@ -22,7 +22,7 @@ const ConfirmOrder = React.createClass({
             buyNum: query.buyNum || 0,
             userTickets: [],
             msgCode: null,
-            cheapCode: query.cheapCode || null,
+            cheapCode: query.cheapBizNo || null,
             addressId: this.props.default_address_id,
             tokenStr: '',
             sourceType: sourceType
