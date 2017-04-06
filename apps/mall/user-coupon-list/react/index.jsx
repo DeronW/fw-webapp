@@ -51,19 +51,22 @@ const CouponMain = React.createClass({
                 <span className="tab-text">{self.state.voucherName[index]}</span>
             </div>;
 
+         let inputWrap =
+            <div className="input-wrap">
+                <input type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
+                <input type="button" className={this.state.active ? "msg-tip active":"msg-tip"}
+                       value={"兑换"}
+                       onClick={this.exChange}/>
+                <span className="vertical-line"></span>
+            </div>;
+
         return (
             <div>
                 <div className="ui-tab">
                     <div> {this.state.voucherName.map(btnVoucher)} </div>
                 </div>
                 <div className="coupon-cont">
-                    <div className="input-wrap">
-                        <input type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
-                        <input type="button" className={this.state.active ? "msg-tip active":"msg-tip"}
-                               value={"兑换"}
-                               onClick={this.exChange}/>
-                        <span className="vertical-line"></span>
-                    </div>
+                    {inputWrap}
                     <OrderList index={this.state.index} cheapCodes={this.props.cheapCodes}/>
                 </div>
             </div>
