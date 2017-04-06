@@ -1,8 +1,8 @@
 // vars and mixins
-@input-field-width: 582px;
-@input-field-height: 76px;
+@input-field-width: 582 / 40rem;
+@input-field-height: 76 / 40rem;
 @placeholder-color: rgb(139, 183, 254);
-@input-type-icon-width: 64px;
+@input-type-icon-width: 64 / 40rem;
 
 // containing block should better be a positioned element
 .center-element {
@@ -23,13 +23,13 @@
 
 .font-style-default {
   color: rgb(255, 255, 255);
-  font-size: 28px;
+  font-size: 28 / 40rem;
   font-family: "PingFang";
 }
 
 .small-icon-pattern {
   position: relative;
-  width: 75px;
+  width: 75 / 40rem;
   height: 100%;
   img {
     .center-element;
@@ -44,18 +44,19 @@
 
 html {
   height: 100%;
-  min-height: 1000px;
+  min-height: 1000 / 40rem;
 }
 
 body {
   height: 100%;
   background: #4a86e8 url("../images/bg.png") no-repeat;
-  background-position: 0 -111px;
+  background-position: 0 -136 / 40rem;
+  background-size: 100% auto;
 }
 
 .interact-wrap {
   position: relative;
-  top: 623px;
+  top: 623 / 40rem;
   width: @input-field-width;
   margin: 0 auto;
 }
@@ -64,9 +65,9 @@ body {
   position: relative;
   width: 100%;
   height: @input-field-height;
-  margin-bottom: 28px;
+  margin-bottom: 28 / 40rem;
   border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 8px;
+  border-radius: 8 / 40rem;
   background-color: rgba(254, 254, 255, 0.08);
 
   .input-type-icon {
@@ -75,6 +76,7 @@ body {
     height: 100%;
 
     img {
+      width: 0.6rem;
       .center-element;
     }
   }
@@ -109,19 +111,35 @@ body {
   .clear-btn {
     .small-icon-pattern;
     .right-align-element;
+
+    img {
+      width: 1.1rem;
+    }
+  }
+}
+
+.veri-code {
+  .input-type-icon {
+    img {
+      width: 0.65rem;
+    }
   }
 }
 
 .veri-code-info {
   display: inline-flex;
   .right-align-element;
-  padding-right: 24px;
+  padding-right: 24 / 40rem;
   .font-style-default;
   line-height: @input-field-height;
   color: #d6e2ff;
 
   .clear-btn {
     .small-icon-pattern;
+
+    img {
+      width: 1.1rem;
+    }
   }
 }
 
@@ -129,21 +147,30 @@ body {
   display: inline-flex;
   .right-align-element;
 
-  .toggle-password-display, .clear-btn {
+  .toggle-password-display, {
     .small-icon-pattern;
+
+    img {
+      width: 0.8rem;
+    }
   }
 
   .clear-btn {
-    width: 45px;
+    .small-icon-pattern;
+    width: 45 / 40rem;
+
+    img {
+      width: 1.1rem;
+    }
   }
 }
 
 .register-button {
   width: 100%;
   height: @input-field-height;
-  margin-bottom: 32px;
+  margin-bottom: 32 / 40rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 8 / 40rem;
   background-color: rgb(255, 95, 154);
   .font-style-default;
   text-align: center;

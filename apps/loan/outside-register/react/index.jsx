@@ -60,7 +60,7 @@ class VerificationCodeInput extends React.Component {
 
     render() {
         return (
-            <div className="input-wrap">
+            <div className="input-wrap veri-code">
                 <div className="input-type-icon">
                     <img src="images/veri-code.png" />
                 </div>
