@@ -97,7 +97,8 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         'use-strict.js',
         `${PROJ}/fw-ajax-error-handler.js`,
         `${PROJ}/fw-common.js`,
-        `${PROJ}/fw-plugin-store.js`
+        `${PROJ}/fw-plugin-store.js`,
+        `${PROJ}/fw-plugin-theme.js`
     ];
 
     APP_NAMES.forEach(i => {
