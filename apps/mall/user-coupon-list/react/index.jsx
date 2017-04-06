@@ -10,18 +10,36 @@ const CouponMain = React.createClass({
 
         return {
             index: index,
-            voucherName: ["未使用", "已使用", "已过期"]
+            voucherName: ["未使用", "已使用", "已过期"],
+            active: false,
+            code: ""
         };
     },
     clickHandler: function (index) {
         this.setState({index: index});
     },
 
+    //激活下一步
+    changeVal: function (e) {
+        var val = e.target.value;
+        if (val != "") {
+            this.setState({active: true});
+        }
+        else {
+            this.setState({active: false});
+        }
+        this.setState({"code": val});
+    },
+
     exChange: function (index) {
-        $FW.Ajax(`${API_PATH}/mall/api/cheap/v1/bondCheapCode.json`)
-            .then((data) => {
-                alert(JSON.stringify(data))
-            });
+        if (!this.state.active) return;
+        $FW.Ajax({
+            data: {cheapCode: this.state.code},
+            url: `${API_PATH}/mall/api/cheap/v1/bondCheapCode.json`,
+            enable_loading: true
+        }).then((data) => {
+            alert(JSON.stringify(data))
+        });
     },
 
     render: function () {
