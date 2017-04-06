@@ -19,7 +19,7 @@ const CouponMain = React.createClass({
         this.setState({index: index});
     },
 
-    //激活下一步
+    //激活兑换
     changeVal: function (e) {
         var val = e.target.value;
         if (val != "") {
