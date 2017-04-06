@@ -10,7 +10,7 @@
         var templateUrl;
         var iurl = 'https://static.9888.cn/images/loan/invitation.jpg';
 
-        $FW.Post( API_PATH + 'api/shareTemplate/v1/getContent.json', {
+        $FW.Post( API_PATH + '/api/shareTemplate/v1/getContent.json', {
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
@@ -24,7 +24,7 @@
                 templateUrl = data.shareTemplate.templateUrl;
 
                 return $FW.Ajax({
-                    url: API_PATH + 'cashloan/outside/weixinAccountController.do?wxConfig',
+                    url: API_PATH + '/cashloan/outside/weixinAccountController.do?wxConfig',
                     data: { url: location.href },
                     //fail: () => true
                 })
