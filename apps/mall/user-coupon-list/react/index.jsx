@@ -38,7 +38,10 @@ const CouponMain = React.createClass({
             url: `${API_PATH}/mall/api/cheap/v1/bondCheapCode.json`,
             enable_loading: true
         }).then((data) => {
-            alert(JSON.stringify(data))
+            $FW.Component.Alert('绑定成功');
+            setTimeout(function(){
+                window.location.reload();
+            },1500)
         });
     },
 
