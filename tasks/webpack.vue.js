@@ -16,7 +16,15 @@ module.exports = function (site_name, page_name, options) {
             filename: 'bundle.min.js'
         },
         module: {
-            rules: [{ test: /\.(js|jsx)$/, use: 'babel-loader' }]
+            rules: [
+               {
+                test: /\.(js|jsx)$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015', 'react']
+                }
+               }
+            ]
         }
     });
 

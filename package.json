@@ -30,9 +30,11 @@
     "del": ">=2.2"
   },
   "devDependencies": {
-    "webpack": ">= 2.3",
+    "babel-loader": ">= 6.4",
     "lodash": ">= 4.17",
-    "babel-loader": ">= 6.4"
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "webpack": ">= 2.3"
   },
   "scripts": {
     "clean": "node scripts/clean.js",
