@@ -16,8 +16,23 @@ module.exports = function (site_name, page_name, options) {
             filename: 'bundle.min.js'
         },
         module: {
-            rules: [{ test: /\.(js|jsx)$/, use: 'babel-loader' }]
-        }
+            rules: [
+               {
+                test: /\.(js|jsx)$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015', 'react']
+                }
+               }
+            ]
+        },
+        plugins: [
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false
+                }
+            })
+        ]
     });
 
     // 因为 webpack 被集成到了 gulp 中, 所以要遵循 gulp 的路径配置

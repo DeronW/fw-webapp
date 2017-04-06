@@ -10,18 +10,39 @@ const CouponMain = React.createClass({
 
         return {
             index: index,
-            voucherName: ["未使用", "已使用", "已过期"]
+            voucherName: ["未使用", "已使用", "已过期"],
+            active: false,
+            code: ""
         };
     },
     clickHandler: function (index) {
         this.setState({index: index});
     },
 
+    //激活下一步
+    changeVal: function (e) {
+        var val = e.target.value;
+        if (val != "") {
+            this.setState({active: true});
+        }
+        else {
+            this.setState({active: false});
+        }
+        this.setState({"code": val});
+    },
+
     exChange: function (index) {
-        $FW.Ajax(`${API_PATH}/mall/api/cheap/v1/bondCheapCode.json`)
-            .then((data) => {
-                alert(JSON.stringify(data))
-            });
+        if (!this.state.active) return;
+        $FW.Ajax({
+            data: {cheapCode: this.state.code},
+            url: `${API_PATH}/mall/api/cheap/v1/bondCheapCode.json`,
+            enable_loading: true
+        }).then((data) => {
+            $FW.Component.Alert('绑定成功');
+            setTimeout(function(){
+                window.location.reload();
+            },1500)
+        });
     },
 
     render: function () {
@@ -33,20 +54,25 @@ const CouponMain = React.createClass({
                 <span className="tab-text">{self.state.voucherName[index]}</span>
             </div>;
 
+        var inputWrap =
+            <div className="input-wrap">
+                <input type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
+                <input type="button" className={this.state.active ? "msg-tip active":"msg-tip"}
+                       value={"兑换"}
+                       onClick={this.exChange}/>
+                <span className="vertical-line"></span>
+            </div>;
+
         return (
             <div>
                 <div className="ui-tab">
                     <div> {this.state.voucherName.map(btnVoucher)} </div>
                 </div>
                 <div className="coupon-cont">
-                    <div className="input-wrap">
-                        <input type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
-                        <input type="button" className={this.state.active ? "msg-tip active":"msg-tip"}
-                               value={"兑换"}
-                               onClick={this.exChange}/>
-                        <span className="vertical-line"></span>
-                    </div>
-                    <OrderList index={this.state.index} cheapCodes={this.props.cheapCodes}/>
+                    {inputWrap}
+                    {
+                        this.props.cheapCodes && <OrderList index={this.state.index} cheapCodes={this.props.cheapCodes}/>
+                    }
                 </div>
             </div>
         );
@@ -173,15 +199,15 @@ const OrderBlock = React.createClass({
 
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"优惠券"} back_handler={back_handler}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"优惠券"}/>, HEADER_NODE);
     $FW.Ajax({
         url: `${API_PATH}/mall/api/cheap/v1/queryAllcheap.json`,
         enable_loading: true
     }).then(data => {
-        ReactDOM.render(<CouponMain cheapCodes={data.cheapCodes}/>, CONTENT_NODE);
-    })
+            ReactDOM.render(<CouponMain cheapCodes={data.cheapCodes}/>, CONTENT_NODE);
+        },
+        e => {
+            ReactDOM.render(<CouponMain/>, CONTENT_NODE)
+        })
 });
 
-function back_handler() {
-    location.href = '/static/mall/user/index.html';
-}
