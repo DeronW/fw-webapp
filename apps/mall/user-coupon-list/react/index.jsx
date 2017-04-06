@@ -51,7 +51,7 @@ const CouponMain = React.createClass({
                 <span className="tab-text">{self.state.voucherName[index]}</span>
             </div>;
 
-         let inputWrap =
+        var inputWrap =
             <div className="input-wrap">
                 <input type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
                 <input type="button" className={this.state.active ? "msg-tip active":"msg-tip"}
@@ -67,7 +67,9 @@ const CouponMain = React.createClass({
                 </div>
                 <div className="coupon-cont">
                     {inputWrap}
-                    <OrderList index={this.state.index} cheapCodes={this.props.cheapCodes}/>
+                    {
+                        this.props.cheapCodes && <OrderList index={this.state.index} cheapCodes={this.props.cheapCodes}/>
+                    }
                 </div>
             </div>
         );
@@ -194,15 +196,15 @@ const OrderBlock = React.createClass({
 
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"优惠券"} back_handler={back_handler}/>, HEADER_NODE);
+    ReactDOM.render(<Header title={"优惠券"}/>, HEADER_NODE);
     $FW.Ajax({
         url: `${API_PATH}/mall/api/cheap/v1/queryAllcheap.json`,
         enable_loading: true
     }).then(data => {
-        ReactDOM.render(<CouponMain cheapCodes={data.cheapCodes}/>, CONTENT_NODE);
-    })
+            ReactDOM.render(<CouponMain cheapCodes={data.cheapCodes}/>, CONTENT_NODE);
+        },
+        e => {
+            ReactDOM.render(<CouponMain/>, CONTENT_NODE)
+        })
 });
 
-function back_handler() {
-    location.href = '/static/mall/user/index.html';
-}
