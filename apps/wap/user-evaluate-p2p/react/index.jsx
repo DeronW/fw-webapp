@@ -56,7 +56,7 @@ let QUESTIONS = [{
 }, {
     q: 'Q4：您过去一年投资非保本类金融产品的总金额为？',
     seq: 3,
-    name: "experience",
+    name: "total",
     options: [{
         a: 'A.1万以下',
         score: 2
@@ -76,7 +76,7 @@ let QUESTIONS = [{
 }, {
     q: 'Q5：以下哪项最能说明您的投资经验？ ',
     seq: 4,
-    name: "experiencePeriod",
+    name: "experience",
     options: [{
         a: 'A.除存款、国债等保本类金额产品外，我从不投资其他非保本类金融产品，包括股票、基金、理财产品等。',
         score: 2
@@ -93,7 +93,7 @@ let QUESTIONS = [{
 }, {
     q: 'Q6：您有多少年投资股票、基金、外汇、理财产品、网络借贷、金融衍生产品、海外投资产品等风险投资品的经验？',
     seq: 5,
-    name: "attitude",
+    name: "experiencePeriod",
     options: [{
         a: 'A.少于1年',
         score: 1
@@ -110,7 +110,7 @@ let QUESTIONS = [{
 }, {
     q: 'Q7：您的互联网操作熟练程度是怎样的？',
     seq: 6,
-    name: "investPeriod",
+    name: "practised",
     options: [{
         a: 'A.1年以内互联网使用经验',
         score: 1
@@ -127,7 +127,7 @@ let QUESTIONS = [{
 }, {
     q: 'Q8：您计划的投资期限是多久？',
     seq: 7,
-    name: "hope",
+    name: "period",
     options: [{
         a: 'A.3个月以内',
         score: 1
@@ -144,7 +144,7 @@ let QUESTIONS = [{
 }, {
     q: 'Q9：以下哪项描述最符合您的投资态度？',
     seq: 8,
-    name: "riskAjust",
+    name: "attitude",
     options: [{
         a: 'A.厌恶风险，不希望本金损失 ',
         score: 1
@@ -179,7 +179,8 @@ let QUESTIONS = [{
         score: 9
     }]
 }];
-
+//var age , anxious,attitude,can,experience,experiencePeriod,income,period,practised,total;
+//  年龄， 焦虑，  态度，     能力，经验，     经验时间，          收入  ， 期限， 熟练的 ，总值
 let startArr = [];
 
 QUESTIONS.forEach(value => {
@@ -261,7 +262,7 @@ const QuestionPanel = React.createClass({
             $FW.Component.Toast("您还有未填写试题");
         } else {
             $FW.Ajax({
-                url: `${API_PATH}/mpwap/orderuser/riskGradeP2P.shtml`, //传参数
+                url: `${API_PATH}/mpwap/orderuser/riskGradeIntoP2P.shtml`, //传参数
                 data: form_data,
                 success: data => {
                     this.props.setResult(true, data.score, data.gradeLevel);
