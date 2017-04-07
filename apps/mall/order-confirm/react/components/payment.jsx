@@ -12,6 +12,7 @@ const PaymentPanel = React.createClass({
         }
     },
     componentDidMount: function () {
+        alert(this.props.payableRmbAmt);
         this.updateFormDataHandler()
     },
     componentDidUpdate: function () {
@@ -26,7 +27,6 @@ const PaymentPanel = React.createClass({
         });
     },
     toggleCoupon: function () {
-        alert(this.props.payableRmbAmt);
         if (this.props.payableRmbAmt != 0)
             window.location.href = "/static/mall/user-coupon/index.html" + location.search;
     },
