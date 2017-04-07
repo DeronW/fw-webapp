@@ -39,9 +39,9 @@ const CouponMain = React.createClass({
             enable_loading: true
         }).then((data) => {
             $FW.Component.Alert('绑定成功');
-            setTimeout(function(){
+            setTimeout(function () {
                 window.location.reload();
-            },1500)
+            }, 1500)
         });
     },
 
@@ -71,7 +71,8 @@ const CouponMain = React.createClass({
                 <div className="coupon-cont">
                     {inputWrap}
                     {
-                        this.props.cheapCodes && <OrderList index={this.state.index} cheapCodes={this.props.cheapCodes}/>
+                        this.props.cheapCodes &&
+                        <OrderList index={this.state.index} cheapCodes={this.props.cheapCodes}/>
                     }
                 </div>
             </div>
@@ -97,7 +98,8 @@ const OrderList = React.createClass({
         let allBlock = function (s) {
             return (
                 <div className="order-all">
-                    { self.state[s].map((cheap) => <OrderBlock key={cheap.cheapBizNo} cheap={cheap}
+                    { self.state[s].map((cheap) => <OrderBlock index={this.props.index} key={cheap.cheapBizNo}
+                                                               cheap={cheap}
                                                                dataJson={cheap}/>) }
                 </div>
             );
@@ -173,19 +175,19 @@ const OrderBlock = React.createClass({
                 <div className="info-block">
                     <a>
                         <div className="t-info" onClick={_this.gotoDetail}>
-                            <div className="commodity-img">
+                            <div className={this.props.index==0 ?"commodity-img" :"commodity-img commodity-img1"}>
                                 <p className="price"><span>￥</span><b>{cheap.reduceAmont}</b></p>
                                 <p className="condition">满{cheap.fullAmont}元可用</p>
                                 {/*<img src={product.img || 'images/default-product.jpg'}/> */}
                             </div>
                             <div className="commodity-info">
                                 <div className="commodity-name">
-                                    <h2></h2>
+                                    <h2>{cheap.cheapName ? cheap.cheapName : "优惠券" }</h2>
                                 </div>
                                 <div className="commodity-number">
                                         <span className="money-text">
+                                            全场通用
                                         </span>
-                                    <span className="number-text">&times; </span>
                                 </div>
                                 <div className="buy-now" onClick={this.clickUse}>立即使用</div>
                             </div>
