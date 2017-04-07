@@ -168,8 +168,16 @@ const OrderBlock = React.createClass({
                 break;
         }
         var _this = this;
-
-
+        var text;
+        if (this.props.index == 0) {
+            text = "立即使用"
+        }
+        else if (this.props.index == 1) {
+            text = "已使用"
+        }
+        else if (this.props.index == 2) {
+            text = "已过期"
+        }
         return (
             <div className="order-block">
                 <div className="info-block">
@@ -189,7 +197,8 @@ const OrderBlock = React.createClass({
                                             全场通用
                                         </span>
                                 </div>
-                                <div className="buy-now" onClick={this.clickUse}>立即使用</div>
+                                <div className={this.props.index ==0 ? "buy-now":"buy-now buy-now-hui"}
+                                     onClick={this.clickUse}> {text}</div>
                             </div>
                         </div>
                     </a>
