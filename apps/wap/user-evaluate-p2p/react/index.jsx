@@ -1,4 +1,3 @@
-
 let QUESTIONS = [{
     q: 'Q1：您的年龄是？',
     seq: 0,
@@ -69,7 +68,7 @@ let QUESTIONS = [{
     }, {
         a: 'D.10-50万',
         score: 8
-    },{
+    }, {
         a: 'E.50万以上',
         score: 10
     }]
@@ -195,18 +194,20 @@ const Result = React.createClass({
         return (
             <div className="question-result">
                 <div className="result-top">
-                    <div className="result-img"><img src="images/result.png" /></div>
+                    <div className="result-img"><img src="images/result.png"/></div>
                     <div className="result-score">{this.props.score}分</div>
                     <div className="result-text1">评估完成，您的风险承受能力为：</div>
                     <div className="result-text2">{this.props.investType}</div>
                 </div>
                 <div className="result-cnt">
                     <div className="text1">郑重提醒：</div>
-                    <div className="text2">出借人需具备相应的风险承受能力，审慎参与市场出借，合理配置金融资产。本风险承受能力评估并不构成对出借人未来所承担出借风险程度的保证，仅作为本平台客户适当性服务的依据。实际出借时请慎重选择，本平台不对出借人据此出借资金所产生的风险承担责任。
+                    <div className="text2">
+                        出借人需具备相应的风险承受能力，审慎参与市场出借，合理配置金融资产。本风险承受能力评估并不构成对出借人未来所承担出借风险程度的保证，仅作为本平台客户适当性服务的依据。实际出借时请慎重选择，本平台不对出借人据此出借资金所产生的风险承担责任。
                     </div>
                     <div className="text3"> 本人声明：</div>
                     <div className="text4">在出借人风险承受能力测试过程中，本人提供的全部信息、资料是真实、准确和完整的，测试结果真实、准确地反映了本人的出借风险承受程度。
-                        本人保证上述所填信息为本人真实的意思表示，完全独立依据自身情况和判断做出上述答案，并接受评估意见。否则由此导致的一切后果由本人承担。
+                    </div>
+                    <div className="text5">本人保证上述所填信息为本人真实的意思表示，完全独立依据自身情况和判断做出上述答案，并接受评估意见。否则由此导致的一切后果由本人承担。
                     </div>
                     <div className="list-box">
                         <div className="li-head">
@@ -241,14 +242,14 @@ const Result = React.createClass({
 
 const QuestionPanel = React.createClass({
     getInitialState: function () {
-        return { selected: startArr }
+        return {selected: startArr}
     },
     componentDidMount: function () {
     },
     clickHandler: function (value, index, num) {
         let { selected } = this.state;
         selected[index][value] = num;
-        this.setState({ selected: selected });
+        this.setState({selected: selected});
     },
     fnSumHandler: function () {
         let form_data = {}, { selected } = this.state, err;
@@ -279,7 +280,7 @@ const QuestionPanel = React.createClass({
                 return (
                     <div className="question-select" key={oIndex}>
                         <div className={this.state.selected[myNum][myName] == oIndex ? "select checked" : "select"}
-                            onClick={() => this.clickHandler(myName, myNum, oIndex)}>
+                             onClick={() => this.clickHandler(myName, myNum, oIndex)}>
                         </div>
                         {o.a}
                     </div>
@@ -297,7 +298,7 @@ const QuestionPanel = React.createClass({
         }
         return (
             <div className="question-box">
-                <div className="question-img"><img src="images/question-top.png" /></div>
+                <div className="question-img"><img src="images/question-top.png"/></div>
                 <div className="question-tip">风险提示：投资需承担各类风险，可能遭受资金损失。市场有风险，投资需谨慎。</div>
                 <div className="question-ul">{QUESTIONS.map(question)}</div>
                 <div className="foot-btn-box">
@@ -326,8 +327,8 @@ const Answer = React.createClass({
     render: function () {
         return (
             <div>
-                {this.state.answer ? <Result investType={this.state.investType} score={this.state.score} /> :
-                    <QuestionPanel setResult={this.setResult} />}
+                {this.state.answer ? <Result investType={this.state.investType} score={this.state.score}/> :
+                    <QuestionPanel setResult={this.setResult}/>}
             </div>
         )
     }
@@ -336,7 +337,7 @@ const Answer = React.createClass({
 $FW.DOMReady(() => {
     if (!$FW.Browser.inApp())
         ReactDOM.render(<Header title={'P2P风险承受能力评估'}
-            back_handler={back_handler} />, HEADER_NODE);
+                                back_handler={back_handler}/>, HEADER_NODE);
     ReactDOM.render(<Answer />, CONTENT_NODE);
 })
 function back_handler() {
