@@ -26,7 +26,8 @@ const PaymentPanel = React.createClass({
         });
     },
     toggleCoupon: function () {
-        window.location.href = "/static/mall/user-coupon-list/index.html" + location.search
+        if (this.props.payableRmbAmt != 0)
+            window.location.href = "/static/mall/user-coupon/index.html" + location.search;
     },
     toggleVoucherModal: function () {
         this.setState({show_voucher_modal: !this.state.show_voucher_modal})
