@@ -119,7 +119,7 @@ const OrderBlock = React.createClass({
     clickUse: function () {
         let cheap = this.props.cheap;
         let cheapBizNo = cheap.cheapBizNo;
-        window.location.href = "/static/mall/order-confirm/index.html?" + location.search + "&cheapBizNo=" + cheap.cheapBizNo + "&reduceAmont=" + cheap.reduceAmont;
+        window.location.href = "/static/mall/order-confirm/index.html" + location.search + "&cheapBizNo=" + cheap.cheapBizNo + "&reduceAmont=" + cheap.reduceAmont;
     },
 
     gotoDetail: function (index) {
