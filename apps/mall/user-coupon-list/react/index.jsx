@@ -119,6 +119,8 @@ const OrderList = React.createClass({
 
 const OrderBlock = React.createClass({
     clickUse: function () {
+        if (this.props.index != 0) return;
+        
         let cheap = this.props.cheap;
         let cheapBizNo = cheap.cheapBizNo;
         window.location.href = "/static/mall/order-confirm/index.html" + location.search + "&cheapBizNo=" + cheap.cheapBizNo + "&reduceAmont=" + cheap.reduceAmont;
