@@ -134,13 +134,14 @@ const ConfirmOrder = React.createClass({
     },
     render: function () {
         let query = $FW.Format.urlQuery();
-        let coupon = query.reduceAmont||0;
+        let coupon = query.reduceAmont || 0;
         let address = null;
         if (this.props.default_address_id) {
             this.props.address_list.forEach((i) => {
                 if (i.id == this.props.default_address_id) address = i
             });
         }
+        let paid = (this.props.data.payableRmbAmt - coupon).toFixed(2);
         return (
             <div className="confirm-order">
                 {this.props.data.showAddressOK ?
@@ -194,7 +195,7 @@ const ConfirmOrder = React.createClass({
                     <span className="total-item-name">实付:</span>
                     <span
                         className="total-item-detail">
-                        {this.props.data.payableRmbAmt == 0 ? "" : "¥" + (this.props.data.payableRmbAmt - coupon).toFixed(2)}
+                        {this.props.data.payableRmbAmt == 0 ? "" : "¥" + paid < 0 ? 0 : paid}
                         {this.props.data.payableRmbAmt == 0 || this.props.data.payablePointAmt == 0 ? "" : "+"}
                         {this.props.data.payablePointAmt == 0 ? "" : this.props.data.payablePointAmt + "工分"}
                         {/*¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分*/}
