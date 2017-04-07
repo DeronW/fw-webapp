@@ -134,7 +134,7 @@ const ConfirmOrder = React.createClass({
     },
     render: function () {
         let query = $FW.Format.urlQuery();
-        let coupon = query.reduceAmont;
+        let coupon = query.reduceAmont||0;
         let address = null;
         if (this.props.default_address_id) {
             this.props.address_list.forEach((i) => {
@@ -168,7 +168,7 @@ const ConfirmOrder = React.createClass({
                     <div className="price-item">
                         <span className="item-name">商品金额</span><span
                         className="item-detail">
-                        {this.props.data.totalPrice == 0 ? "" : "¥" + (this.props.data.totalPrice-coupon).toFixed(2)}
+                        {this.props.data.totalPrice == 0 ? "" : "¥" + this.props.data.totalPrice}
                         {this.props.data.totalPrice == 0 || this.props.data.totalPoints == 0 ? "" : "+"}
                         {this.props.data.totalPoints == 0 ? "" : this.props.data.totalPoints + "工分"}</span>
                     </div>
@@ -176,6 +176,10 @@ const ConfirmOrder = React.createClass({
                         <span className="item-name">兑换券</span><span className="item-detail">¥ 0
                         {/*this.props.data.ordersTicketPoints==0?"":"-"+this.props.data.ordersTicketPoints+"工分"+
                          this.props.data.ordersTicketPrice?"":"-"+this.props.data.ordersTicketPrice+"金额"*/}</span>
+                    </div>
+                    <div className="price-item">
+                        <span className="item-name">优惠券</span><span className="item-detail">¥ {coupon}
+                       </span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
