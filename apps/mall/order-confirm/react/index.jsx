@@ -168,7 +168,7 @@ const ConfirmOrder = React.createClass({
                     <div className="price-item">
                         <span className="item-name">商品金额</span><span
                         className="item-detail">
-                        {this.props.data.totalPrice == 0 ? "" : "¥" + this.props.data.totalPrice}
+                        {this.props.data.totalPrice == 0 ? "" : "¥" + (this.props.data.totalPrice-coupon).toFixed(2)}
                         {this.props.data.totalPrice == 0 || this.props.data.totalPoints == 0 ? "" : "+"}
                         {this.props.data.totalPoints == 0 ? "" : this.props.data.totalPoints + "工分"}</span>
                     </div>
@@ -190,7 +190,7 @@ const ConfirmOrder = React.createClass({
                     <span className="total-item-name">实付:</span>
                     <span
                         className="total-item-detail">
-                        {this.props.data.payableRmbAmt == 0 ? "" : "¥" + (this.props.data.payableRmbAmt.toFixed(2) - coupon)}
+                        {this.props.data.payableRmbAmt == 0 ? "" : "¥" + (this.props.data.payableRmbAmt - coupon).toFixed(2)}
                         {this.props.data.payableRmbAmt == 0 || this.props.data.payablePointAmt == 0 ? "" : "+"}
                         {this.props.data.payablePointAmt == 0 ? "" : this.props.data.payablePointAmt + "工分"}
                         {/*¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分*/}
