@@ -134,7 +134,6 @@ const ConfirmOrder = React.createClass({
     },
     render: function () {
         let address = null;
-
         if (this.props.default_address_id) {
             this.props.address_list.forEach((i) => {
                 if (i.id == this.props.default_address_id) address = i
