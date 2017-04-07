@@ -157,7 +157,7 @@ const ConfirmOrder = React.createClass({
                  </div>*/}
                 <PaymentPanel product={this.props.product}
                               ordersTicketNum={this.props.data.ordersTicketNum}
-                              payableRmbAmt ={this.props.data.payableRmbAmt}
+                              payableRmbAmt={this.props.data.payableRmbAmt}
                               avaliablePoints={this.props.data.avaliablePoints}
                               voucher_list={this.props.ticket_list}
                               user={this.props.user}
@@ -190,7 +190,7 @@ const ConfirmOrder = React.createClass({
                     <span className="total-item-name">实付:</span>
                     <span
                         className="total-item-detail">
-                        {this.props.data.payableRmbAmt == 0 ? "" : "¥" + this.props.data.payableRmbAmt.toFixed(2)-coupon}
+                        {this.props.data.payableRmbAmt == 0 ? "" : "¥" + (this.props.data.payableRmbAmt.toFixed(2) - coupon)}
                         {this.props.data.payableRmbAmt == 0 || this.props.data.payablePointAmt == 0 ? "" : "+"}
                         {this.props.data.payablePointAmt == 0 ? "" : this.props.data.payablePointAmt + "工分"}
                         {/*¥{this.props.data.payableRmbAmt}+{this.props.data.payablePointAmt}工分*/}
