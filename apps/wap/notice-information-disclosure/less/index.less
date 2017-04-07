@@ -15,7 +15,9 @@
 .show {
   display: block !important;
 }
-
+.hidden{
+  display: none !important;
+}
 .informationDisclosureMobile {
   width: 100%;
   .informationTabMobile {
@@ -114,18 +116,13 @@
           }
         }
       }
-      .infoTimeMobile {
-        width: 100%;
-        text-align: center;
-        font-size: @fontSize24;
-        color: @colorWhite;
-        margin: 20px 0 20px;
-      }
+
       .infoPromoteMobile {
         width: 100%;
         text-align: center;
         color: #c1adf1;
         font-size: @fontSize20;
+        margin-top: 70px;
       }
     }
     .pieMobileContent {
@@ -248,6 +245,13 @@
         border-radius: 4px;
       }
     }
+    .infoTimeMobile {
+      width: 100%;
+      text-align: center;
+      font-size: @fontSize24;
+      color: @colorRed;
+      margin: 0px 0 60px;
+    }
   }
   .clearfix::after {
     display: block;
@@ -339,6 +343,9 @@
               font-size: 24px;
               padding-right: 30px;
               padding-left: 40px;
+              .rlineLook{
+                color: @colorRed;
+              }
             }
             .rrange {
               width: 478px;
