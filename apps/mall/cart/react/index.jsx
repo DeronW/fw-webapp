@@ -117,7 +117,7 @@ const ShoppingCart = React.createClass({
         _checkDom.map((checkDom, index) => {
             prd.push(getNextElement(checkDom).value);
         });
-        gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&prd=" + prd + "&totalPrice =" + totalPrice)
+        gotoHandler("/static/mall/order-confirm/index.html?cartFlag=true&prd=" + prd)
 
     },
     render: function () {
