@@ -9,6 +9,7 @@ window.onload = function () {
     var auditBtn2 = document.querySelector(".auditBtn2");
     var auditBtn3 = document.querySelector(".auditBtn3");
 
+    alert($FW.Browser.inIOS());
     var len = tabs.length;
     for (var i = 0; i < len; i++) {
         tabs[i].onclick = function () {
