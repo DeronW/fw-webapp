@@ -98,7 +98,7 @@ const OrderList = React.createClass({
         let allBlock = function (s) {
             return (
                 <div className="order-all">
-                    { self.state[s].map((cheap) => <OrderBlock index={this.props.index} key={cheap.cheapBizNo}
+                    { self.state[s].map((cheap) => <OrderBlock index={self.props.index} key={cheap.cheapBizNo}
                                                                cheap={cheap}
                                                                dataJson={cheap}/>) }
                 </div>
