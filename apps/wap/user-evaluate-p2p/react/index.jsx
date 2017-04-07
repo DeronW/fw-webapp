@@ -180,7 +180,7 @@ let QUESTIONS = [{
 }];
 //var age , anxious,attitude,can,experience,experiencePeriod,income,period,practised,total;
 //  年龄， 焦虑，  态度，     能力，经验，     经验时间，          收入  ， 期限， 熟练的 ，总值
-//https://m.9888.cn/mpwap/orderuser/riskGradeIntoP2P.shtml?age=A&income=A&can=B&total=D&experience=B&experiencePeriod=A&practised=D&period=C&attitude=A&anxious=A
+//https://m.9888.cn/mpwap/orderuser/riskGradeP2P.shtml?age=A&income=A&can=B&total=D&experience=B&experiencePeriod=A&practised=D&period=C&attitude=A&anxious=A
 let startArr = [];
 
 QUESTIONS.forEach(value => {

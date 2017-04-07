@@ -174,13 +174,14 @@ const ConfirmOrder = React.createClass({
                         {this.props.data.totalPoints == 0 ? "" : this.props.data.totalPoints + "工分"}</span>
                     </div>
                     <div className="price-item">
+                        <span className="item-name">优惠券</span><span className="item-detail">
+                        {coupon ? '- ¥ ' : null}{coupon}
+                       </span>
+                    </div>
+                    <div className="price-item">
                         <span className="item-name">兑换券</span><span className="item-detail">¥ 0
                         {/*this.props.data.ordersTicketPoints==0?"":"-"+this.props.data.ordersTicketPoints+"工分"+
                          this.props.data.ordersTicketPrice?"":"-"+this.props.data.ordersTicketPrice+"金额"*/}</span>
-                    </div>
-                    <div className="price-item">
-                        <span className="item-name">优惠券</span><span className="item-detail">¥ {coupon}
-                       </span>
                     </div>
                     <div className="price-item">
                         <span className="item-name">运费</span><span
