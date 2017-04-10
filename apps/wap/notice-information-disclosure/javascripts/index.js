@@ -233,7 +233,10 @@ window.onload = function () {
                 trigger: 'item',
                 formatter: "{d}%",
                 backgroundColor: 'rgba(55,72,123,0.7)',
-                padding: 10
+                padding: 10,
+                textStyle: {
+                    fontSize: 24
+                }
             },
             legend: {
                 orient: 'vertical',
