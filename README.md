@@ -154,4 +154,4 @@ wap站：npm run gulp main:[文件名]:watch
 - gulpfile.settings.js
 - Jenkinsfile
 - package.json
-- README.md
+- README.md // 项目说明
