@@ -13,7 +13,7 @@ const copy = require('./copy.js');
 const revision = require('./revision.js');
 const webpack_task = require('./webpack.vue.js');
 
-const REACT_PATH = 'react-15.4.2';
+const REACT_PATH = 'react-15.5.0';
 
 let COMMON_JAVASCRIPTS_TASK = {};
 

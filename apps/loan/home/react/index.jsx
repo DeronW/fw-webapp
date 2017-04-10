@@ -10,8 +10,8 @@ function gotoHandler(link, need_login) {
 }
 
 
-const ApplyLoan = React.createClass({
-    getInitialState: function () {
+class ApplyLoan extends React.Component {
+    getInitialState() {
         return {
             availableLoan: this.props.data.creditLine,
             present_availableLoan: this.props.data.creditLine,
@@ -20,8 +20,9 @@ const ApplyLoan = React.createClass({
             present_creditLine: this.props.data.canBorrowAmount,
             show_tip: "最高"
         }
-    },
-    componentDidMount: function () {
+    }
+
+    componentDidMount() {
         var sliderBar = document.querySelector('.slider-area');
         if (sliderBar) {
             var al = this.state.creditLine;
@@ -89,7 +90,8 @@ const ApplyLoan = React.createClass({
             });
 
         }
-    },
+    }
+
     getBorrowBtn() {
         let btn = '--', st = this.props.data.borrowBtnStatus;
         let available_loan =
@@ -111,7 +113,8 @@ const ApplyLoan = React.createClass({
             available_loan;
 
         return btn
-    },
+    }
+
     getMoneySlider() {
         let slider = '--', st = this.props.data.borrowBtnStatus;
 
@@ -141,7 +144,8 @@ const ApplyLoan = React.createClass({
             slider_bar;
 
         return slider
-    },
+    }
+
     getBtnStatus() {
         let btn = '--', st = this.props.data.borrowBtnStatus;
 
@@ -177,13 +181,14 @@ const ApplyLoan = React.createClass({
         if (st === 5) btn = btn_list;
 
         return btn
-    },
+    }
+
     getCreditLine() {
         let line = '--', st = this.props.data.borrowBtnStatus;
         // if (st === 3) $FW.Component.Toast(this.props.data.borrowBtnDesc);
         if (st === 5) line = this.props.data.creditLine;
         return line
-    },
+    }
 
     render() {
 
@@ -191,9 +196,9 @@ const ApplyLoan = React.createClass({
             <div className="apply-loan">
                 {!$FW.Browser.inApp() && <div className="header">放心花</div>}
                 {$FW.Browser.inApp() && <div className="ad">
-                    <a onClick={()=>gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png"/></a>
+                    <a onClick={() => gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png" /></a>
                 </div>}
-                <div className={$FW.Browser.inApp()? "app-loan-num":"loan-num"}>
+                <div className={$FW.Browser.inApp() ? "app-loan-num" : "loan-num"}>
                     {this.getBorrowBtn()}
                 </div>
                 <div className="loan-info">
@@ -218,7 +223,7 @@ const ApplyLoan = React.createClass({
             </div>
         )
     }
-});
+};
 
 const USER = $FW.Store.getUserDict();
 const user = USER;
