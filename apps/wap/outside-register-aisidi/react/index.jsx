@@ -44,7 +44,7 @@ const RegisterContent = React.createClass({
                     </div>
                 </div>
             </div>
-            <div className="box3">
+            <div className="box3 clearfix">
                 <div className="box31">
                     <img src="images/top2@ldy.jpg"/>
                 </div>
@@ -68,7 +68,7 @@ const RegisterContent = React.createClass({
                     </div>
                 </div>
             </div>
-            <div className="box4">
+            <div className="box4 clearfix">
                 <div className="box42">
                     <div className="btm fl">
                         <div className="btm-img">
@@ -76,6 +76,26 @@ const RegisterContent = React.createClass({
                         </div>
                         <div className="btm-text1">
                             上市公司
+                        </div>
+                        <div className="btm-text2">
+                            中国信贷战略控股
+                        </div>
+                        <div className="btm-text3">
+                            股票代码：08207.HK
+                        </div>
+                    </div>
+                    <div className="btm fr">
+                        <div className="btm-img">
+                            <img src="images/bottom2@ldy-baoxian.jpg" alt=""/>
+                        </div>
+                        <div className="btm-text1">
+                            上市公司
+                        </div>
+                        <div className="btm-text2">
+                            中国信贷战略控股
+                        </div>
+                        <div className="btm-text3">
+                            股票代码：08207.HK
                         </div>
                     </div>
                 </div>
