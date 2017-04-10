@@ -100,7 +100,9 @@ const SHOUSHAN = [
 const DEVELOPING_PAGES = [
     'fa-xian'
 ]
-
+const OUTSIDE_PAGES=[
+    'outside-register-aisidi' //爱施德注册页面
+]
 APP_NAMES.push(
     ...USER_PAGES,
     ...PROTOCOL_PAGES,
@@ -108,7 +110,8 @@ APP_NAMES.push(
     ...HUISHANG_PAGES,
     ...NOTICE_PAGES,
     ...DEVELOPING_PAGES,
-    ...SHOUSHAN
+    ...SHOUSHAN,
+    ...OUTSIDE_PAGES
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
