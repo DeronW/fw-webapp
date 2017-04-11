@@ -1,28 +1,32 @@
-const GlobalToast = React.createClass({
-    getDefaultProps: function () {
-        return { duration: 2000, animation: 200 }
-    },
-    getInitialState: function () {
-        return { offset: 0, opacity: 0 };
-    },
-    componentDidMount: function () {
+class GlobalToast extends React.Component {
+
+    constructor() {
+      super();
+      this.state = { offset: 0, opacity: 0 };
+      this.hideHandler = this.hideHandler.bind(this);
+    }
+
+    componentDidMount() {
         this.timer = setTimeout(this.hideHandler, this.props.duration);
         this.setState({
             offset: ReactDOM.findDOMNode(this.refs.self).offsetWidth,
             opacity: '1'
         });
-    },
-    hideHandler: function () {
+    }
+
+    hideHandler() {
         this.setState({ opacity: 0 });
         setTimeout(() => {
             ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
         }, this.props.animation)
-    },
-    componentWillUnmount: function () {
+    }
+
+    componentWillUnmount() {
         clearTimeout(this.timer);
         this.props.unMountToast && this.props.unMountToast();
-    },
-    render: function () {
+    }
+
+    render() {
         let style = {
             position: "fixed",
             textAlign: "center",
@@ -42,4 +46,9 @@ const GlobalToast = React.createClass({
 
         return <div className="error-tip" style={style} ref="self">{this.props.text}</div>
     }
-});
+}
+
+GlobalToast.defaultProps = {
+    duration: 2000,
+    animation: 200
+}

@@ -36,6 +36,8 @@ const PROTOCOL_PAGES = [
     'protocol-perform-duty', // 履行反洗钱义务的承诺书
     'protocol-risk-prompt', // 网络借贷出借风险提示
     'protocol-register', // 网络借贷出借风险提示
+    'protocol-user-service',//工场微金用户服务协议
+
 ]
 
 // const CIRCLE_PAGES = [
@@ -100,7 +102,9 @@ const SHOUSHAN = [
 const DEVELOPING_PAGES = [
     'fa-xian'
 ]
-
+const OUTSIDE_PAGES=[
+    'outside-register-aisidi' //爱施德注册页面
+]
 APP_NAMES.push(
     ...USER_PAGES,
     ...PROTOCOL_PAGES,
@@ -108,7 +112,8 @@ APP_NAMES.push(
     ...HUISHANG_PAGES,
     ...NOTICE_PAGES,
     ...DEVELOPING_PAGES,
-    ...SHOUSHAN
+    ...SHOUSHAN,
+    ...OUTSIDE_PAGES
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {

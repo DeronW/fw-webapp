@@ -11,24 +11,16 @@
  * @param {string} progressColor - 进度条进度颜色.
  */
 
-const SVGCircleProgress = React.createClass({
-    getDefaultProps: function () {
-        return {
-            weight: 10,
-            radius: 100,
-            animate: true,
-            padding: 0,
-            bgColor: '#eee',
-            progressColor: '#FC655A'
-        }
-    },
-    getInitialState: function () {
+class SVGCircleProgress extends React.Component {
+
+    constructor() {
+        super();
         this.STEP_PERCENT = 1.2;
         let minLineWeightWidth = 100 * this.props.weight / (Math.PI * 2 * (this.props.radius - this.props.weight / 2));
         this.MAX_UNFINISHED_PERCENT = 99.9 - minLineWeightWidth;
         this.MIN_START_PERCENT = Math.min(minLineWeightWidth, this.STEP_PERCENT);
 
-        return {
+        this.state = {
             radius: this.props.radius,
             bgColor: this.props.bgColor,
             progressColor: this.props.progressColor,
@@ -37,18 +29,21 @@ const SVGCircleProgress = React.createClass({
             target_percent: this.props.percent,
             animate: this.props.animate,
             padding: this.props.padding
-        }
-    },
+        };
 
-    shouldComponentUpdate: function () {
+        this.setProgress = this.setProgress.bind(this);
+        this.animate = this.animate.bind(this);
+    }
+
+    shouldComponentUpdate() {
         return this.state.current_percent < this.state.target_percent;
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         clearInterval(this._animate_timer);
-    },
+    }
 
-    setProgress: function (p) {
+    setProgress(p) {
         if (p > this.MAX_UNFINISHED_PERCENT && p < 100) p = this.MAX_UNFINISHED_PERCENT;
         // 一旦进度条到达100%, 就不能再重新设置进度了
         if (p >= 100) {
@@ -56,9 +51,9 @@ const SVGCircleProgress = React.createClass({
             clearInterval(this._animate_timer);
         }
         this.setState({current_percent: p})
-    },
+    }
 
-    animate: function () {
+    animate() {
         if (this.state.current_percent < this.state.target_percent) {
             var p = this.state.current_percent + this.STEP_PERCENT;
             if (p > this.MAX_UNFINISHED_PERCENT && this.state.target_percent == 100) {
@@ -69,17 +64,17 @@ const SVGCircleProgress = React.createClass({
         } else {
             clearInterval(this._animate_timer);
         }
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         if (this.state.animate) {
             this._animate_timer = setInterval(this.animate, 15)
         } else {
             this.setProgress(this.state.target_percent);
         }
-    },
+    }
 
-    render: function () {
+    render() {
         let sideLength = (this.state.radius + this.state.padding) * 2;
         let center = {
             x: this.state.radius + this.state.padding,
@@ -128,4 +123,13 @@ const SVGCircleProgress = React.createClass({
             </svg>
         )
     }
-});
+}
+
+SVGCircleProgress.defaultProps = {
+    weight: 10,
+    radius: 100,
+    animate: true,
+    padding: 0,
+    bgColor: '#eee',
+    progressColor: '#FC655A'
+}
