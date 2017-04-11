@@ -37,6 +37,11 @@ const BottomNavBar = React.createClass({
                     href="/static/loan/bill/index.html"></a>
                 <a className={`jiemo_style_footer_item3 ${index === 3 && 'active'}`}
                     href="/static/loan/user/index.html"></a>
+                <a className={`jiemo_style_footer_item4 ${index === 4 && 'active'}`}
+                   href="/static/loan/user/index.html"></a>
+                <a className={`jiemo_style_footer_item5 ${index === 5 && 'active'}`}
+                   href="/static/loan/user/index.html"></a>
+                <div className="domebox"></div>
             </div>
         )
     }
