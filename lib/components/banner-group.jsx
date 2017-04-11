@@ -7,13 +7,8 @@
 
 class BannerGroup extends React.Component {
 
-<<<<<<< HEAD
     constructor(props) {
         super(props)
-=======
-    constructor() {
-        super()
->>>>>>> 392cca83caf78d42db89fd4e7330200be5b18632
         this._touch = {
             originLeft: 0,
             startX: null,
