@@ -2,7 +2,9 @@ const RegisterContent = React.createClass({
     render:function () {
         return <div className="aisidiContainer">
             <div className="aisidiTop"></div>
-            <div className="banner"></div>
+            <div className="banner">
+                <img src="images/banner2@ldy.jpg" alt=""/>
+            </div>
             <div className="registerForm">
                 <div className="formBox">
                     <div className="topPic">
