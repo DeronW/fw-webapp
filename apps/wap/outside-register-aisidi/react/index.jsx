@@ -11,7 +11,7 @@ const RegisterContent = React.createClass({
                     </div>
                     <div className="formContainer">
                         <div className="inputBox">
-                            <input type="text"  className="inputs" placeholder="请输入您的手机号" />
+                            <input type="text"  className="inputs" placeholder="请输入您的手机号" name="mobile" maxLength="16"/>
                         </div>
                         <div className="inputBox">
                             <input type="text"  className="inputs" placeholder="请输入推荐人工场码" />

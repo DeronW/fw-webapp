@@ -32,9 +32,17 @@ class BottomNavBar extends React.Component {
 
         return (
             <div className="jiemo_style_footer_fixed" style={jiemo_style_footer_fixed}>
-                <a className={`jiemo_style_footer_item1 ${index === 1 && 'active'}`} href="/static/loan/home/index.html"></a>
-                <a className={`jiemo_style_footer_item2 ${index === 2 && 'active'}`} href="/static/loan/bill/index.html"></a>
-                <a className={`jiemo_style_footer_item3 ${index === 3 && 'active'}`} href="/static/loan/user/index.html"></a>
+                <a className={`jiemo_style_footer_item1 ${index === 1 && 'active'}`}
+                    href="/static/loan/home/index.html"></a>
+                <a className={`jiemo_style_footer_item2 ${index === 2 && 'active'}`}
+                    href="/static/loan/bill/index.html"></a>
+                <a className={`jiemo_style_footer_item3 ${index === 3 && 'active'}`}
+                    href="/static/loan/user/index.html"></a>
+                <a className={`jiemo_style_footer_item4 ${index === 4 && 'active'}`}
+                   href="/static/loan/user/index.html"></a>
+                <a className={`jiemo_style_footer_item5 ${index === 5 && 'active'}`}
+                   href="/static/loan/user/index.html"></a>
+                <div className="domebox"></div>
             </div>
         )
     }
