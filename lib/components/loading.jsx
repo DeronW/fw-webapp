@@ -4,11 +4,12 @@
 
  */
 
-const GlobalLoading = React.createClass({
-    componentWillUnmount: function () {
+class GlobalLoading extends React.Component {
+    componentWillUnmount() {
         this.props.unMountHandler && this.props.unMountHandler();
-    },
-    render: function () {
+    }
+
+    render() {
         let {theme} = this.props;
         let cn = theme == 'mini' ? 'global-ajax-loading-2' : 'global-ajax-loading';
         return (
@@ -21,4 +22,4 @@ const GlobalLoading = React.createClass({
             </div>
         )
     }
-});
+};

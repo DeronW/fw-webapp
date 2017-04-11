@@ -5,19 +5,9 @@
 
  */
 
-const BannerGroup = React.createClass({
+class BannerGroup extends React.Component {
 
-    propTypes: {
-        startIndex: React.PropTypes.number,
-        autoPlay: React.PropTypes.number,
-        loop: React.PropTypes.bool,
-        className: React.PropTypes.string,
-        afterIndexChange: React.PropTypes.func,
-        onImageClick: React.PropTypes.func,
-        images: React.PropTypes.array
-    },
-
-    getInitialState: function () {
+    getInitialState() {
         this._touch = {
             originLeft: 0,
             startX: null,
@@ -46,19 +36,19 @@ const BannerGroup = React.createClass({
             width: 0,
             height: 0
         };
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         this.initHandler();
         window.addEventListener('resize', this.initHandler)
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         clearInterval(this._auto_timer);
         clearInterval(this._timer);
-    },
+    }
 
-    initHandler: function () {
+    initHandler() {
         let elem = ReactDOM.findDOMNode(this);
         let w = elem.offsetWidth;
         this.setState({
@@ -68,17 +58,17 @@ const BannerGroup = React.createClass({
             left: -1 * w * this.state.index
         });
         this.resetTimer();
-    },
+    }
 
-    resetTimer: function () {
+    resetTimer() {
         if (!this.state.autoPlay) return;
         clearInterval(this._auto_timer);
         this._auto_timer = setInterval(function () {
             if (!this._onTouching && !this._onAnimate) this.animateTo(this.state.index + 1)
         }.bind(this), this.state.autoPlay)
-    },
+    }
 
-    animateTo: function (targetIndex) {
+    animateTo(targetIndex) {
         let ti = targetIndex;
         let lastIndex = this.state.images.length;
         let targetLeft = -this.state.width * ti;
@@ -104,25 +94,25 @@ const BannerGroup = React.createClass({
                 this.setState({left: this.state.left + step})
             }
         }.bind(this), 20)
-    },
+    }
 
-    touchStartHandler: function (event) {
+    touchStartHandler(event) {
         if (this._onTouching) return;
         this._touch.startX = event.changedTouches[0].pageX;
         this._touch.originLeft = this.state.left;
         this._onTouching = true;
         clearInterval(this._timer);
-    },
+    }
 
-    touchMoveHandler: function (event) {
+    touchMoveHandler(event) {
         let left = this._touch.originLeft + event.changedTouches[0].pageX - this._touch.startX;
         this.setState({left: left});
         // event.preventDefault();
         event.stopPropagation();
         event.nativeEvent.stopImmediatePropagation();
-    },
+    }
 
-    touchEndHandler: function (event) {
+    touchEndHandler(event) {
         this._onTouching = false;
 
         let delta = event.changedTouches[0].pageX - this._touch.startX;
@@ -144,13 +134,13 @@ const BannerGroup = React.createClass({
         }
 
         this.animateTo(ti);
-    },
+    }
 
-    imageClickHandler: function (index) {
+    imageClickHandler(index) {
         this.props.onImageClick && this.props.onImageClick(index);
-    },
+    }
 
-    getDotStyle: function (active) {
+    getDotStyle(active) {
         let bg = active ? 'white' : 'hsla(0, 0%, 100%, .25)';
         return {
             display: 'inline-block',
@@ -160,9 +150,9 @@ const BannerGroup = React.createClass({
             borderRadius: '50%',
             marginRight: '18px'
         };
-    },
+    }
 
-    render: function () {
+    render() {
         let _this = this;
 
         let style = {
@@ -228,4 +218,14 @@ const BannerGroup = React.createClass({
             </div>
         )
     }
-});
+};
+
+BannerGroup.propTypes = {
+    startIndex: React.PropTypes.number,
+    autoPlay: React.PropTypes.number,
+    loop: React.PropTypes.bool,
+    className: React.PropTypes.string,
+    afterIndexChange: React.PropTypes.func,
+    onImageClick: React.PropTypes.func,
+    images: React.PropTypes.array
+}

@@ -9,24 +9,25 @@
  hide_callback 隐藏之后的回调
  */
 
-const GlobalAlert = React.createClass({
-    getDefaultProps(){
-        return {
-            title: '好像出了点问题!?'
-        }
-    },
-    getInitialState: function () {
-        return {show: true}
-    },
-    hideHandler: function () {
+class GlobalAlert extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            show: true
+        };
+
+        this.hideHandler = this.hideHandler.bind(this);
+    }
+
+    hideHandler() {
         ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         this.props.unMountAlert && this.props.unMountAlert();
-    },
+    }
 
-    render: function () {
+    render() {
         let fontSize = '40px';
 
         let style_pop = {
@@ -129,12 +130,23 @@ const GlobalAlert = React.createClass({
             overflow: "hidden"
         };
 
-        if (!this.state.show) return null;
+        if (!this.state.show)
+            return null;
 
         let title = null;
         if (this.props.title instanceof Array) {
-            title = <div> {this.props.title.map((i, index)=><div key={index} style={title_wrap}><span
-                style={title_index}>{index + 1}、</span><span style={title_content}>{i}</span></div>)} </div>;
+            title = <div>
+                {this.props.title.map((i, index) =>< div key = {
+                    index
+                }
+                style = {
+                    title_wrap
+                } > <span style={title_index}>{index + 1}、</span> < span style = {
+                    title_content
+                } > {
+                    i
+                } < /span></div >)}
+            </div>;
         } else {
             title = this.props.title;
         }
@@ -151,12 +163,21 @@ const GlobalAlert = React.createClass({
                     <div style={style_close} onClick={this.hideHandler}>&times;</div>
                     {header}
                     <div style={style_text}>{title}</div>
-                    {this.props.confirm_text && !this.props.cancel_btn ?
-                        <a style={style_one_big} onClick={this.hideHandler}>{this.props.confirm_text}</a> : null}
-                    {this.props.confirm_btn ? <a style={style_confirm} onClick={this.hideHandler}>CONFIRM</a> : null}
-                    {this.props.cancel_btn ? <a style={style_cancel} onClick={this.hideHandler}>CANCEL</a> : null}
+                    {this.props.confirm_text && !this.props.cancel_btn
+                        ? <a style={style_one_big} onClick={this.hideHandler}>{this.props.confirm_text}</a>
+                        : null}
+                    {this.props.confirm_btn
+                        ? <a style={style_confirm} onClick={this.hideHandler}>CONFIRM</a>
+                        : null}
+                    {this.props.cancel_btn
+                        ? <a style={style_cancel} onClick={this.hideHandler}>CANCEL</a>
+                        : null}
                 </div>
             </div>
         )
     }
-});
+}
+
+GlobalAlert.defaultProps = {
+    title: '好像出了点问题!?'
+};
