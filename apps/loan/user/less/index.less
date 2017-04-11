@@ -24,6 +24,7 @@ html {
 
 body {
   height: 100%;
+  background-color: #f0f0f0;
   font-size: 30px;
 }
 
@@ -96,6 +97,36 @@ body {
   height: 228px;
 
   .bill-label {
-    height:
+    height: 75px;
+    line-height: 75px;
+    padding-left: 35px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  .bill-type-wrap {
+    display: inline-flex;
+    width: 100%;
+    height: 153px;
+    background-color: #fff;
+    color: #666;
+
+    ul {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: inline-block;
+        width: 25%;
+        list-style: none;
+        text-align: center;
+
+        img {
+          display: block;
+          margin: 20px auto 5px;
+        }
+      }
+    }
   }
 }
