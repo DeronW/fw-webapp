@@ -51,8 +51,21 @@ var Btn = React.createClass({
 
 var PromptBlock = React.createClass({
     render: function () {
+		let cntTest = (type) => {
+			if(type === 'A') {
+				return '元返现券礼包已经转入您的账户中'
+			} else if (type === 'B') {
+				return 	'返息券已经转入您的账户中'
+			} else if (type === 'C') {
+				return '公分已经转入您的账户中'
+			} else if (type === '1') {
+				return '工豆已经转入您的账户中'
+			}
+		}
+
         return (
-            <div className="ui-prompt">
+
+			<div className="ui-prompt">
                 <div className="img">
                     <img src={this.props.imgUrl}/>
                 </div>
@@ -62,10 +75,12 @@ var PromptBlock = React.createClass({
                 </div>
 
                 {
-                    this.props.resDetails != '' ? this.props.resDetails.resDetails.map((data, index) => {
-                        return <div className="ui-prompt-text">
+                    this.props.resDetails != '' ? this.props.resDetails.registResult.map((data, index) => {
+				 
+						return <div className="ui-prompt-text">
                             <span className="number-text">{data.giftAmount}</span>
-                            {data.giftType == 0 ? '元返现券礼包已经转入您的账户中' : '返息券已经转入您的账户中'}
+
+							{cntTest(data.giftType)}
                         </div>
 
                     }) : null
