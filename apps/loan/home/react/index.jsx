@@ -13,6 +13,10 @@ function gotoHandler(link, need_login) {
 class ApplyLoan extends React.Component {
     constructor(props) {
         super(props)
+        this.getCreditLine = this.getCreditLine.bind(this)
+        this.getBtnStatus = this.getBtnStatus.bind(this)
+        this.getMoneySlider = this.getMoneySlider.bind(this)
+        this.getBorrowBtn = this.getBorrowBtn.bind(this)
         this.state = {
             availableLoan: this.props.data.creditLine,
             present_availableLoan: this.props.data.creditLine,
@@ -193,11 +197,8 @@ class ApplyLoan extends React.Component {
 
     render() {
 
-        console.log(this)
-        console.log(this.getBorrowBtn)
-
-        return (<div>hhh</div>
-            /*<div className="apply-loan">
+        return (
+            <div className="apply-loan">
                 {!$FW.Browser.inApp() && <div className="header">放心花</div>}
                 {$FW.Browser.inApp() && <div className="ad">
                     <a onClick={() => gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png" /></a>
@@ -224,7 +225,7 @@ class ApplyLoan extends React.Component {
                 {this.getBtnStatus()}
                 <div className="loan-tip">完善授权信息可减免手续费</div>
                 {!$FW.Browser.inApp() && <div><br /><br /><br /><br /></div>}
-            </div>*/
+            </div>
         )
     }
 };
