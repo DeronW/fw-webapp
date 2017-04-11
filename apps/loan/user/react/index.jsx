@@ -17,11 +17,30 @@ class AvatarCard extends React.Component {
     }
 }
 
+class FollowWXEntry extends React.Component {
+    render() {
+        return (
+            <div className="follow-wx-wrap">
+                <div className="left-icon-container">
+                    <img src="images/wx_icon.png" alt="wechat icon"></img>
+                </div>
+                <span>关注微信</span>
+                <div className="right-align-container">
+                  <div className="next-icon-container">
+                    <img src="images/next_arrow.png" alt="next arrow"></img>
+                  </div>
+                </div>
+            </div>
+        )
+    }
+}
+
 class UserInfoWrap extends React.Component {
     render() {
         return (
             <div className="user-info-wrap">
                 <AvatarCard phoneNum="18900001234"/>
+                <FollowWXEntry />
             </div>
         )
     }

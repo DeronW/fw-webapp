@@ -1,3 +1,16 @@
+// vars and mixins
+@follow-wx-wrap--height: 81px;
+
+// containing block should better be a positioned element
+.center-element {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
 // main style
 * {
   box-sizing: border-box;
@@ -29,5 +42,50 @@ body {
     color: #fff;
     font-size: 32px;
     margin-top: 15px;
+  }
+}
+
+.follow-wx-wrap {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  height: @follow-wx-wrap--height;
+  background-color: #3ba1e9;
+  vertical-align: middle;
+
+  .left-icon-container {
+    display: inline-block;
+    position: relative;
+    width: 114px;
+    height: 100%;
+
+    img {
+      .center-element;
+    }
+  }
+
+  span {
+    display: inline-block;
+    height: 100%;
+    color: #fff;
+    font-size: 30px;
+    line-height: @follow-wx-wrap--height;
+  }
+
+  .right-align-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+
+    .next-icon-container {
+      position: relative;
+      width: 60px;
+      height: 100%;
+
+      img {
+        .center-element;
+      }
+    }
   }
 }
