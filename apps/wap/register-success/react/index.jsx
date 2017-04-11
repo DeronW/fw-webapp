@@ -76,11 +76,11 @@ var PromptBlock = React.createClass({
 
                 {
                     this.props.resDetails != '' ? this.props.resDetails.registResult.map((data, index) => {
-				 
+					   	
 						return <div className="ui-prompt-text">
-                            <span className="number-text">{data.giftAmount}</span>
+                            <span className="number-text">{data.resvalue}</span>
 
-							{cntTest(data.giftType)}
+							{cntTest(data.restype)}
                         </div>
 
                     }) : null
