@@ -4,8 +4,9 @@
  */
 
 class BottomNavBar extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+
+        super(props);
         let height = parseInt(this.props.height) || 100;
         let lineHeight = parseInt(this.props.height) || 100;
         this.state = {
@@ -28,7 +29,7 @@ class BottomNavBar extends React.Component {
             zIndex: "100"
         };
 
-        let {index} = this.props;
+        let { index } = this.props;
 
         return (
             <div className="jiemo_style_footer_fixed" style={jiemo_style_footer_fixed}>
@@ -39,9 +40,9 @@ class BottomNavBar extends React.Component {
                 <a className={`jiemo_style_footer_item3 ${index === 3 && 'active'}`}
                     href="/static/loan/user/index.html"></a>
                 <a className={`jiemo_style_footer_item4 ${index === 4 && 'active'}`}
-                   href="/static/loan/user/index.html"></a>
+                    href="/static/loan/user/index.html"></a>
                 <a className={`jiemo_style_footer_item5 ${index === 5 && 'active'}`}
-                   href="/static/loan/user/index.html"></a>
+                    href="/static/loan/user/index.html"></a>
                 <div className="domebox"></div>
             </div>
         )
