@@ -39,6 +39,7 @@ const BILL_PAGES = [
     'bill-history', //历史账单
     'bill-detail', //账单详情
     'bill-payback', //还款页面
+    'bill-loan-phase2'//新账单页面
 ]
 
 // 申请借款模块
