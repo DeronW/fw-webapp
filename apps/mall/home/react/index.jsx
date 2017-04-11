@@ -84,15 +84,11 @@ const Mall = React.createClass({
                 <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
                     <div style={head_nav_wrap} className="head_nav_wrap">
                         <img className="m-logo" src={this.state.logoImage} />
-                        <a href="/static/mall/product-list/index.html?searchSourceType=2"
-                            className="search-bar-a">
-                            <img className="search-icon" src="images/search-icon.png" />
-                            <div className="search-bar">请输入关键字</div>
-                        </a>
-                        {/*<div class="search-bar-a">
-                            <a href="/static/mall/product-list/index.html?searchSourceType=2"><img class="search-icon" src="images/search-icon.png" /></a>
+                        <span class="search-bar-a">
+                            <a class="search-icon" href="/static/mall/product-list/index.html?searchSourceType=2">
+                            <img src="images/search-icon.png" /></a>
                             <input class="search-bar" placeholder="请输入关键字" />
-                        </div>*/}
+                        </span>
                         <a className="index-avatar" href="/static/mall/user/index.html">
                             <img src={this.state.avatarImage} /></a>
                     </div>
