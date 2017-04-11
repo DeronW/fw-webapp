@@ -5,19 +5,10 @@
 
  */
 
-const BannerGroup = React.createClass({
+class BannerGroup extends React.Component {
 
-    propTypes: {
-        startIndex: React.PropTypes.number,
-        autoPlay: React.PropTypes.number,
-        loop: React.PropTypes.bool,
-        className: React.PropTypes.string,
-        afterIndexChange: React.PropTypes.func,
-        onImageClick: React.PropTypes.func,
-        images: React.PropTypes.array
-    },
-
-    getInitialState: function () {
+    constructor() {
+        super()
         this._touch = {
             originLeft: 0,
             startX: null,
@@ -36,7 +27,7 @@ const BannerGroup = React.createClass({
         let autoPlay = this.props.autoPlay || 0;
         autoPlay = images.length <= 1 ? false : (autoPlay < 3000 ? 3000 : autoPlay);
 
-        return {
+        this.state = {
             index: this.props.startIndex || 1,
             images: images,
             autoPlay: autoPlay,
@@ -46,19 +37,19 @@ const BannerGroup = React.createClass({
             width: 0,
             height: 0
         };
-    },
+    }
 
-    componentDidMount: function () {
+    componentDidMount() {
         this.initHandler();
         window.addEventListener('resize', this.initHandler)
-    },
+    }
 
-    componentWillUnmount: function () {
+    componentWillUnmount() {
         clearInterval(this._auto_timer);
         clearInterval(this._timer);
-    },
+    }
 
-    initHandler: function () {
+    initHandler() {
         let elem = ReactDOM.findDOMNode(this);
         let w = elem.offsetWidth;
         this.setState({
@@ -68,17 +59,17 @@ const BannerGroup = React.createClass({
             left: -1 * w * this.state.index
         });
         this.resetTimer();
-    },
+    }
 
-    resetTimer: function () {
+    resetTimer() {
         if (!this.state.autoPlay) return;
         clearInterval(this._auto_timer);
         this._auto_timer = setInterval(function () {
             if (!this._onTouching && !this._onAnimate) this.animateTo(this.state.index + 1)
         }.bind(this), this.state.autoPlay)
-    },
+    }
 
-    animateTo: function (targetIndex) {
+    animateTo(targetIndex) {
         let ti = targetIndex;
         let lastIndex = this.state.images.length;
         let targetLeft = -this.state.width * ti;
@@ -99,30 +90,30 @@ const BannerGroup = React.createClass({
                 if (this.state.index != ti) this.props.afterIndexChange && this.props.afterIndexChange(ti);
 
                 this._onAnimate = false;
-                this.setState({left: targetLeft, index: ti});
+                this.setState({ left: targetLeft, index: ti });
             } else {
-                this.setState({left: this.state.left + step})
+                this.setState({ left: this.state.left + step })
             }
         }.bind(this), 20)
-    },
+    }
 
-    touchStartHandler: function (event) {
+    touchStartHandler(event) {
         if (this._onTouching) return;
         this._touch.startX = event.changedTouches[0].pageX;
         this._touch.originLeft = this.state.left;
         this._onTouching = true;
         clearInterval(this._timer);
-    },
+    }
 
-    touchMoveHandler: function (event) {
+    touchMoveHandler(event) {
         let left = this._touch.originLeft + event.changedTouches[0].pageX - this._touch.startX;
-        this.setState({left: left});
+        this.setState({ left: left });
         // event.preventDefault();
         event.stopPropagation();
         event.nativeEvent.stopImmediatePropagation();
-    },
+    }
 
-    touchEndHandler: function (event) {
+    touchEndHandler(event) {
         this._onTouching = false;
 
         let delta = event.changedTouches[0].pageX - this._touch.startX;
@@ -144,13 +135,13 @@ const BannerGroup = React.createClass({
         }
 
         this.animateTo(ti);
-    },
+    }
 
-    imageClickHandler: function (index) {
+    imageClickHandler(index) {
         this.props.onImageClick && this.props.onImageClick(index);
-    },
+    }
 
-    getDotStyle: function (active) {
+    getDotStyle(active) {
         let bg = active ? 'white' : 'hsla(0, 0%, 100%, .25)';
         return {
             display: 'inline-block',
@@ -160,9 +151,9 @@ const BannerGroup = React.createClass({
             borderRadius: '50%',
             marginRight: '18px'
         };
-    },
+    }
 
-    render: function () {
+    render() {
         let _this = this;
 
         let style = {
@@ -171,23 +162,23 @@ const BannerGroup = React.createClass({
             position: 'relative',
             transform: 'translate3d(0, 0, 0)',
             background: '#fff'
-    }
-        ;
+        }
+            ;
 
         let image = (img, index) => {
             return (
                 <img key={index}
-                     onClick={() => _this.imageClickHandler(index) }
-                     className={index + 1 == this.state.index ? 'active' : null}
-                     style={{
-                         display: 'block',
-                         float: 'left',
-                         width: _this.state.width + 'px'
-                     }} src={img}/>
+                    onClick={() => _this.imageClickHandler(index)}
+                    className={index + 1 == this.state.index ? 'active' : null}
+                    style={{
+                        display: 'block',
+                        float: 'left',
+                        width: _this.state.width + 'px'
+                    }} src={img} />
             )
         };
 
-        let imitateStyle = {width: this.state.width + 'px', height: '100%', float: 'left'};
+        let imitateStyle = { width: this.state.width + 'px', height: '100%', float: 'left' };
         let imitateFirst = <div style={imitateStyle}></div>;
         let imitateLast = <div style={imitateStyle}></div>;
         if (this.state.loop) {
@@ -208,9 +199,9 @@ const BannerGroup = React.createClass({
                     height: '100%',
                     left: this.state.left
                 }}
-                     onTouchStart={this.touchStartHandler}
-                     onTouchMove={this.touchMoveHandler}
-                     onTouchEnd={this.touchEndHandler}
+                    onTouchStart={this.touchStartHandler}
+                    onTouchMove={this.touchMoveHandler}
+                    onTouchEnd={this.touchEndHandler}
                 >
                     {imitateFirst}
                     {this.state.images.map(image)}
@@ -228,4 +219,14 @@ const BannerGroup = React.createClass({
             </div>
         )
     }
-});
+};
+
+BannerGroup.propTypes = {
+    startIndex: React.PropTypes.number,
+    autoPlay: React.PropTypes.number,
+    loop: React.PropTypes.bool,
+    className: React.PropTypes.string,
+    afterIndexChange: React.PropTypes.func,
+    onImageClick: React.PropTypes.func,
+    images: React.PropTypes.array
+}

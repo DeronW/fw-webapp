@@ -11,8 +11,13 @@ function gotoHandler(link, need_login) {
 
 
 class ApplyLoan extends React.Component {
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props)
+        this.getCreditLine = this.getCreditLine.bind(this)
+        this.getBtnStatus = this.getBtnStatus.bind(this)
+        this.getMoneySlider = this.getMoneySlider.bind(this)
+        this.getBorrowBtn = this.getBorrowBtn.bind(this)
+        this.state = {
             availableLoan: this.props.data.creditLine,
             present_availableLoan: this.props.data.creditLine,
             orioleOrderGid: this.props.data.orioleOrderGid,
