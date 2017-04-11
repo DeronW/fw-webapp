@@ -36,6 +36,8 @@ const PROTOCOL_PAGES = [
     'protocol-perform-duty', // 履行反洗钱义务的承诺书
     'protocol-risk-prompt', // 网络借贷出借风险提示
     'protocol-register', // 网络借贷出借风险提示
+    'protocol-user-service',//工场微金用户服务协议
+
 ]
 
 // const CIRCLE_PAGES = [
