@@ -29,32 +29,32 @@ class Content extends React.Component{
             is_Level = 3
         }
 
-     // $FW.Post(`${API_PATH}mall/api/index/v1/vip_list.json`,{
-     //     count:this.count,
-     //     page:page,
-     //     vipLevel:is_Level
-     //   }).then((data)=>{
-     //     let tab;
-     //     if (is_Level == -1) {
-     //         tab = 'billApplying'
-     //     } else if (is_Level == 1) {
-     //         tab = 'billReturning'
-     //     } else if (is_Level == 2) {
-     //         tab = 'billFailing'
-     //     } else if (is_Level == 3) {
-     //         tab = 'billPaid'
-     //     } else {
-     //         done && done();
-     //         return;
-     //     }
-     //     window.Bill[tab] = window.Bill[tab].concat(data.products);
-     //     let bill = window.Bill[this.state.tab];
-     //     let new_page = this.state.page;
-     //     new_page[this.state.tab] = new_page[this.state.tab] + 1;
-     //     if (data.totalCount < 5) new_page[this.state.tab] = 0;
-     //     this.setState({bill: bill, page: new_page});
-     //     done && done();
-     // }, (err)=>$FW.Component.Toast(err.message));
+     $FW.Post(`${API_PATH}mall/api/index/v1/vip_list.json`,{
+         count:this.count,
+         page:page,
+         vipLevel:is_Level
+       }).then((data)=>{
+         let tab;
+         if (is_Level == -1) {
+             tab = 'billApplying'
+         } else if (is_Level == 1) {
+             tab = 'billReturning'
+         } else if (is_Level == 2) {
+             tab = 'billFailing'
+         } else if (is_Level == 3) {
+             tab = 'billPaid'
+         } else {
+             done && done();
+             return;
+         }
+         window.Bill[tab] = window.Bill[tab].concat(data.products);
+         let bill = window.Bill[this.state.tab];
+         let new_page = this.state.page;
+         new_page[this.state.tab] = new_page[this.state.tab] + 1;
+         if (data.totalCount < 5) new_page[this.state.tab] = 0;
+         this.setState({bill: bill, page: new_page});
+         done && done();
+     }, (err)=>$FW.Component.Toast(err.message));
     }
     componentDidMount(){
         this.loadMoreHandler(null);
@@ -102,11 +102,15 @@ class Content extends React.Component{
 
         return (
             <div className="billContent">
-                <div className="billTitle">借款账单</div>
-                <div className="ui-tab-block">
-                    {this.tabs.map(tab_bar)}
+                <div className="bill-header">
+                    <div className="billTitle">借款账单</div>
+                    <div className="ui-tab-block">
+                        {this.tabs.map(tab_bar)}
+                    </div>
                 </div>
                 <div className="billContainer">
+                    {list_li()}
+                    {list_li()}
                     {list_li()}
                     {list_li()}
                     {list_li()}
