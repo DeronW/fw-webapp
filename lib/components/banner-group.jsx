@@ -7,7 +7,8 @@
 
 class BannerGroup extends React.Component {
 
-    getInitialState() {
+    constructor(props) {
+        super(props)
         this._touch = {
             originLeft: 0,
             startX: null,
@@ -26,7 +27,7 @@ class BannerGroup extends React.Component {
         let autoPlay = this.props.autoPlay || 0;
         autoPlay = images.length <= 1 ? false : (autoPlay < 3000 ? 3000 : autoPlay);
 
-        return {
+        this.state = {
             index: this.props.startIndex || 1,
             images: images,
             autoPlay: autoPlay,
