@@ -11,8 +11,9 @@ function gotoHandler(link, need_login) {
 
 
 class ApplyLoan extends React.Component {
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props)
+        this.state = {
             availableLoan: this.props.data.creditLine,
             present_availableLoan: this.props.data.creditLine,
             orioleOrderGid: this.props.data.orioleOrderGid,
@@ -192,8 +193,11 @@ class ApplyLoan extends React.Component {
 
     render() {
 
-        return (
-            <div className="apply-loan">
+        console.log(this)
+        console.log(this.getBorrowBtn)
+
+        return (<div>hhh</div>
+            /*<div className="apply-loan">
                 {!$FW.Browser.inApp() && <div className="header">放心花</div>}
                 {$FW.Browser.inApp() && <div className="ad">
                     <a onClick={() => gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png" /></a>
@@ -220,7 +224,7 @@ class ApplyLoan extends React.Component {
                 {this.getBtnStatus()}
                 <div className="loan-tip">完善授权信息可减免手续费</div>
                 {!$FW.Browser.inApp() && <div><br /><br /><br /><br /></div>}
-            </div>
+            </div>*/
         )
     }
 };
