@@ -5,7 +5,7 @@ const RegisterContent = React.createClass({
             <div className="banner">
                 <img src="images/banner2@ldy.jpg" alt=""/>
             </div>
-            <div className="registerForm">
+            <div className="registerForm clearfix">
                 <div className="formBox">
                     <div className="topPic">
                     </div>
@@ -29,7 +29,7 @@ const RegisterContent = React.createClass({
                     <a href="/mpwap/top/index.do" className="wrapLink">返回首页</a>
                 </div>
             </div>
-            <div className="box2">
+            <div className="box2 clearfix">
                 <div className="title"></div>
                 <div className="contentbox">
                     <div className="line bottom">
