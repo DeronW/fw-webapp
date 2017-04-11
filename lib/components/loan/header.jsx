@@ -4,8 +4,8 @@
  */
 
 class Header extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         let height = parseInt(this.props.height) || 100;
 
         this.state =  {
