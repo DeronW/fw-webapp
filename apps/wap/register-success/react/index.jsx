@@ -52,7 +52,6 @@ var Btn = React.createClass({
 var PromptBlock = React.createClass({
     render: function () {
 		let cntTest = (type) => {
-			console.log(type);
 			if(type === 'A') {
 				return '元返现券礼包已经转入您的账户中'
 			} else if (type === 'B') {
@@ -77,12 +76,11 @@ var PromptBlock = React.createClass({
 
                 {
                     this.props.resDetails != '' ? this.props.resDetails.registResult.map((data, index) => {
-						console.log(this.props.resDetails);
 					   	
 						return <div className="ui-prompt-text">
-                            <span className="number-text">{data.giftAmount}</span>
+                            <span className="number-text">{data.resvalue}</span>
 
-							{cntTest(data.giftType)}
+							{cntTest(data.restype)}
                         </div>
 
                     }) : null
