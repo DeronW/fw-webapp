@@ -94,7 +94,7 @@ APP_NAMES.push(
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
-        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
+        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`, `${PROJ}/user-info-display.jsx`,
         'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
     ];
 

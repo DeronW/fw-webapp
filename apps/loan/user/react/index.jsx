@@ -56,19 +56,44 @@ class BillEntry extends React.Component {
         }
         let billType = [];
         for (let k in billTypesImg) {
-          billType.push(<BillType billType={k} src={billTypesImg[k]} key={this.props.billType}/>);
+            billType.push(<BillType billType={k} src={billTypesImg[k]} key={this.props.billType}/>);
         }
         return (
             <div className="bill-entry-wrap">
                 <div className="bill-label">账单</div>
                 <div className="bill-type-wrap">
-                  <ul>
-                      {billType}
-                  </ul>
+                    <ul>
+                        {billType}
+                    </ul>
                 </div>
             </div>
         )
     }
+}
+
+class MajorUserInfo extends React.Component {
+  render() {
+    let majorInfo = [
+      {
+        infoName: "个人信息",
+        iconSrc: "images/info_icon.png",
+        infoDefaultContent: ""
+      },
+      {
+        infoName: "银行卡",
+        iconSrc: "images/bank_icon.png",
+        infoDefaultContent: ""
+      }
+    ];
+    let infoItems = majorInfo.map((item) => (
+      <UserInfoItemDisplay iconSrc={item.iconSrc} infoName={item.infoName} infoDefaultContent={item.infoDefaultContent}/>
+    ));
+    return (
+      <div className="info-display-block">
+        {infoItems}
+      </div>
+    )
+  }
 }
 
 class UserInfoWrap extends React.Component {
@@ -76,8 +101,10 @@ class UserInfoWrap extends React.Component {
         return (
             <div className="user-info-wrap">
                 <AvatarCard phoneNum="18900001234"/>
-                <FollowWXEntry />
-                <BillEntry />
+                <FollowWXEntry/>
+                <BillEntry/>
+                {/* <UserInfoItemDisplay iconSrc="images/info_icon.png" infoName="个人信息" infoDefaultContent="去完善"/> */}
+                <MajorUserInfo />
             </div>
         )
     }
