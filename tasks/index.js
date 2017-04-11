@@ -29,8 +29,16 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
     ];
 
     debug ?
-        files.push(...[`${lib_path}/${REACT_PATH}/react.js`, `${lib_path}/${REACT_PATH}/react-dom.js`]) :
-        files.push(...[`${lib_path}/${REACT_PATH}/react.min.js`, `${lib_path}/${REACT_PATH}/react-dom.min.js`]);
+        files.push(...[
+            `${lib_path}/${REACT_PATH}/react.js`,
+            `${lib_path}/${REACT_PATH}/react-dom.js`,
+            `${lib_path}/${REACT_PATH}/prop-types.js`
+        ]) :
+        files.push(...[
+            `${lib_path}/${REACT_PATH}/react.min.js`,
+            `${lib_path}/${REACT_PATH}/react-dom.min.js`,
+            `${lib_path}/${REACT_PATH}/prop-types.min.js`
+        ]);
 
     files.push(...extend_files);
     return files;
