@@ -31,7 +31,7 @@ class BottomNavBar extends React.Component {
         let isActiveTab = (tab) => {
             let pt = location.pathname, cnd = false;
             if(tab === 'home' && pt === '/') cnd = true;
-            return pt.match(`/static/loan/${tab}` || cnd)
+            return pt.match(`/static/loan/${tab}`) || cnd
         }
 
         const STYLE_TAB_BASE = {
