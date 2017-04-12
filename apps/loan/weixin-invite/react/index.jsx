@@ -27,6 +27,8 @@ $FW.DOMReady(function () {
     }).then((data) => {
         var shareLink = data.shareTemplate.templateUrl;
         var invitationCode = $FW.Format.urlQuery(shareLink).invitationCode;
+        console.log(shareLink)
+        console.log(invitationCode)
         $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
         $(".invitation-code span").text(invitationCode);
     }, () => {
