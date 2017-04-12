@@ -52,7 +52,7 @@ class Content extends React.Component{
              done && done();
              return;
          }
-         window.Bill[tab] = window.Bill[tab].concat(data.products);
+         window.Bill[tab] = window.Bill[tab].concat(data.loanbillList);
          let bill = window.Bill[this.state.tab];
          let new_page = this.state.page;
          new_page[this.state.tab] = new_page[this.state.tab] + 1;
@@ -89,19 +89,40 @@ class Content extends React.Component{
             )
         };
 
-        let list_li = (index) => {
+        let list_li = (item,index) => {
+            let status = parseInt(item.baseStauts);
+            let baseStatus;
+            let statusColor;
+            switch(status){
+                case 1 :
+                    baseStatus = "申请中";
+                    statusColor = "bill-applying-color";
+                    break;
+                case 2 :
+                    baseStatus = "还款中";
+                    statusColor = "bill-returning-color"
+                    break;
+                case 3 :
+                    baseStatus = "未通过";
+                    statusColor = "bill-failing-color";
+                    break;
+                case 4 :
+                    baseStatus = "已还款";
+                    statusColor = "bill-paid-color";
+                    break;
+            }
             return (
-                <div className="list_li" key={index}>
-                    <div className="list-img"><img src="images/dumiao-logo.png"/></div>
+                <a className="list_li" key={index} href={item.productId == 1 ? "/static/loan/bill-detail/index.html" : "/static/loan/bill-detail-phase2/index.html"}>
+                    <div className="list-img"><img src={item.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png"}/></div>
                     <div className="list-content">
-                        <div className="apply-num">借款金额:2500.00元</div>
-                        <div className="apply-duration">借款期限:21天</div>
+                        <div className="apply-num">借款金额:{item.loanAmtStr}元</div>
+                        <div className="apply-duration">借款期限:{item.tremNum}天</div>
                     </div>
                     <div className="apply-status-wrap">
-                        <div className="apply-status">申请中</div>
-                        <div className="apply-time">2017-04-05</div>
+                        <div className="apply-status"><span className={statusColor}>{baseStatus}</span></div>
+                        <div className="apply-time">{item.loanTime}</div>
                     </div>
-                </div>
+                </a>
             )
         }
 
@@ -130,6 +151,6 @@ window.Bill = {
 
 $FW.DOMReady(function(){
     ReactDOM.render(<Content />, CONTENT_NODE);
-    ReactDOM.render(<BottomNavBar index={2} />, BOTTOM_NAV_NODE);
+    ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
 });
 
