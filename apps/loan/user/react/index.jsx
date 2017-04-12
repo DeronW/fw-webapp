@@ -71,7 +71,7 @@ class BillEntry extends React.Component {
     }
 }
 
-class UserInfoItemDisplay extends React.Component {
+class UserInfoEnterWrap extends React.Component {
     render() {
         return (
             <div className="user-info-display-wrap" id={this.props.infoID}>
@@ -82,9 +82,6 @@ class UserInfoItemDisplay extends React.Component {
                 }
                 <span className="info-name">{this.props.infoNameCN}</span>
                 <div className="right-align-container">
-                    { this.props.infoContent || this.props.infoDefaultContent !== undefined &&
-                      <span className="info-content">{this.props.infoContent || this.props.infoDefaultContent}</span>
-                    }
                     <div className="right-arrow-container">
                         <div className="fake-arrow"></div>
                     </div>
@@ -96,12 +93,25 @@ class UserInfoItemDisplay extends React.Component {
 
 class MajorUserInfo extends React.Component {
     render() {
-        let infoItems = majorInfo.map((item, index, itemArray) => (
-            <UserInfoItemDisplay
+
+        // info items in this page
+        let majorInfo = [
+            {
+                infoID: "personal-info",
+                infoNameCN: "个人信息",
+                iconSrc: "images/info_icon.png"
+            }, {
+                infoID: "card-info",
+                infoNameCN: "银行卡",
+                iconSrc: "images/bank_icon.png"
+            }
+        ];
+
+        let infoItems = majorInfo.map((item, index) => (
+            <UserInfoEnterWrap
               iconSrc={item.iconSrc}
               infoNameCN={item.infoNameCN}
-              key={index}
-              disableBorder={index === itemArray.length - 1 ? true : false}/>
+              key={index}/>
         ));
         return (
             <div className="info-display-block">
@@ -123,19 +133,6 @@ class UserInfoWrap extends React.Component {
         )
     }
 }
-
-// info items in this page
-let majorInfo = [
-    {
-        infoID: "personal-info__dis",
-        infoNameCN: "个人信息",
-        iconSrc: "images/info_icon.png"
-    }, {
-        infoID: "card-info__dis",
-        infoNameCN: "银行卡",
-        iconSrc: "images/bank_icon.png"
-    }
-];
 
 // render ReactDom
 $FW.DOMReady(() => {
