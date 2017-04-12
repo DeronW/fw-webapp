@@ -38,7 +38,8 @@ class Content extends React.Component{
          token: USER.token,
          userGid: USER.gid,
          userId: USER.id,
-         sourceType: SOURCE_TYPE
+         sourceType: SOURCE_TYPE,
+         fail: () => true
        }).then((data)=>{
          let tab;
          if (loanStatus == 1) {

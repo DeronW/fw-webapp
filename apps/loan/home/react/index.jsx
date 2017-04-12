@@ -234,7 +234,6 @@ const USER = $FW.Store.getUserDict();
 const user = USER;
 
 $FW.DOMReady(function () {
-    NativeBridge.setTitle('放心花');
 
     $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
         token: USER.token,
@@ -245,7 +244,7 @@ $FW.DOMReady(function () {
     }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
     }, e => {
-        $FW.Component.Alert(e.toString())
+        $FW.Component.Alert(e.message)
         $FW.Capture(e)
     });
 

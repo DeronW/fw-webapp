@@ -1,5 +1,6 @@
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
+    ReactDOM.render(<Header title={'邀请好友'} />, HEADER_NODE);
     var page = 1;
     var loadNextPage = true;
     $("#tab-content").height($(document).height() - 535 + "px");
@@ -25,7 +26,9 @@ $FW.DOMReady(function () {
         token: USER.token,
         sourceType: SOURCE_TYPE
     }).then((data) => {
-        $(".btm-tip input").val(data.shareTemplate.templateUrl + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
+        var shareLink = data.shareTemplate.templateUrl;
+        $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
+        $(".invitation-code span").text(USER.invitationCode);
     }, () => {
         location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });
