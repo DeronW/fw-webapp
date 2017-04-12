@@ -26,11 +26,8 @@ $FW.DOMReady(function () {
         sourceType: SOURCE_TYPE
     }).then((data) => {
         var shareLink = data.shareTemplate.templateUrl;
-        var invitationCode = $FW.Format.urlQuery(shareLink).invitationCode;
-        console.log(shareLink)
-        console.log(invitationCode)
         $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
-        $(".invitation-code span").text(invitationCode);
+        $(".invitation-code span").text(USER.invitationCode);
     }, () => {
         location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });
