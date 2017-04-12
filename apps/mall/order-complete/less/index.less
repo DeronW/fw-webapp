@@ -1,110 +1,123 @@
-html, body {
-  margin: 0;
-  background-color: #ebebee;
+html,
+body {
+    margin: 0;
+    background-color: #ebebee;
 }
 
 img {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
 }
 
 a {
-  text-decoration: none;
-  &:active {
-    outline: 0;
-  }
-  &:focus {
-    outline: 0;
-  }
+    text-decoration: none;
+    &:active {
+        outline: 0;
+    }
+    &:focus {
+        outline: 0;
+    }
 }
 
 .success-banner {
-  position: relative;
-  padding: 0;
-  height: 232px;
-  .success-text {
-    padding: 0 0 0 128px;
-    line-height: 60px;
-    font-size: 32px;
-    color: #fff;
-    position: absolute;
-    top: 64px;
-  }
-  .fail-text{
-    font-size: 28px;
-    color: #fff;
-    position: absolute;
-    top: 131px;
-    padding: 0 0 0 128px;
-  }
+    position: relative;
+    padding: 0;
+    height: 232px;
+    .success-text {
+        padding: 0 0 0 128px;
+        line-height: 60px;
+        font-size: 32px;
+        color: #fff;
+        position: absolute;
+        top: 64px;
+    }
+    .fail-text {
+        font-size: 28px;
+        color: #fff;
+        position: absolute;
+        top: 131px;
+        padding: 0 0 0 128px;
+    }
 }
 
 .success-addr {
-  padding: 0 0 0 20px;
-  margin: 20px 0 0;
-  background-color: #fff;
-  border-top: 1px solid #d8d8d8;
-  border-bottom: 1px solid #e4e6eb;
-  background-repeat: no-repeat;
-  background-position: 30px 30%;
-  .addr-box {
-    padding: 22px 30px 0 70px;
+    padding: 0 0 0 20px;
+    margin: 20px 0 0;
+    background-color: #fff;
+    border-top: 1px solid #d8d8d8;
     border-bottom: 1px solid #e4e6eb;
-    .addr {
-      display: table;
-      width: 590px;
-      .receiver {
-        float: left;
-        height: 54px;
-        line-height: 54px;
-        color: #333;
-        font-size: 32px;
-      }
-      .phone {
-        float: right;
-        height: 54px;
-        line-height: 54px;
-        color: #333;
+    background-repeat: no-repeat;
+    background-position: 30px 30%;
+    .addr-box {
+        padding: 22px 30px 0 70px;
+        border-bottom: 1px solid #e4e6eb;
+        .addr {
+            display: table;
+            width: 590px;
+            .receiver {
+                float: left;
+                height: 54px;
+                line-height: 54px;
+                color: #333;
+                font-size: 32px;
+            }
+            .phone {
+                float: right;
+                height: 54px;
+                line-height: 54px;
+                color: #333;
+                font-size: 30px;
+            }
+        }
+        .detail {
+            padding: 0 0 22px;
+            line-height: 40px;
+            font-size: 26px;
+            color: #555;
+        }
+    }
+    .pay {
+        padding: 0 0 0 10px;
+        line-height: 83px;
         font-size: 30px;
-      }
+        color: #555;
     }
-    .detail {
-      padding: 0 0 22px;
-      line-height: 40px;
-      font-size: 26px;
-      color: #555;
-    }
-  }
-  .pay {
-    padding: 0 0 0 10px;
-    line-height: 83px;
-    font-size: 30px;
-    color: #555;
-
-  }
 }
 
 .success-btn {
-  padding: 20px 30px;
-  display: table;
-  width: 100%;
-  background-color: #f9f9f9;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  border-bottom: 1px solid #e4e6eb;
-  a {
-    float: left;
-    height: 72px;
-    line-height: 72px;
-    text-align: center;
-    color: #fff;
-    font-size: 32px;
-    background-color: #8296af;
-    width: 315px;
-    border-radius: 4px;
-  }
-  .success-btn2 {
-    float: right;
-    background-color: #fd4d4c;
-  }
+    padding: 20px 30px;
+    display: table;
+    width: 100%;
+    background-color: #f9f9f9;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e4e6eb;
+    a {
+        float: left;
+        height: 72px;
+        line-height: 72px;
+        text-align: center;
+        color: #fff;
+        font-size: 32px;
+        background-color: #8296af;
+        width: 315px;
+        border-radius: 4px;
+    }
+    .success-btn2 {
+        float: right;
+        background-color: #fd4d4c;
+    }
+}
+
+// 二维码
+.scan-code {
+    width: 360px;
+    margin: 0 auto;
+    margin-top: 80px;
+    .QR-code-notice {
+        text-align: center;
+        font-size: 28px;
+        margin-top: 40px;
+        margin-left: -20px;
+    }
 }
