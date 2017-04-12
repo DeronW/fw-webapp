@@ -49,21 +49,6 @@ let More = React.createClass({
                                     <span className="arrow-icon"></span>
                                 </a>
                             </div>
-                            <div className="list-cnt">
-                                <a href="">
-                                    <span className="icon advice-icon"></span>
-                                    <span className="text">意见反馈</span>
-                                    <span className="arrow-icon"></span>
-                                </a>
-                            </div>
-                            <div className="list-cnt">
-                                <a href="">
-                                    <span className="icon version-icon"></span>
-                                    <span className="text">当前版本</span>
-                                    <span className="arrow-icon"></span>
-                                    <span className="version-number">V1.0.00</span>
-                                </a>
-                            </div>
                         </div>
                     </div>
 
