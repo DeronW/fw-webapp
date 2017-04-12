@@ -115,7 +115,8 @@ var AccountSucceedBody = React.createClass({
         });
     },
     clickHandler: function () {
-        location.href = '/static/wap/open-account/index.html'
+        location.href = 'https://m.9888.cn/static/wap/app-download/index.html'
+        //location.href = '/static/wap/open-account/index.html'
     },
     handlerPopShow: function (booleanVal) {
         this.setState({
@@ -133,16 +134,21 @@ var AccountSucceedBody = React.createClass({
     render: function () {
         return (
             <div className="">
-                <TopNav title={"注册成功"} btnText={"关闭"} callbackPopShow={this.handlerPopShow}/>
+                <TopNav title={"注册成功"} callbackPopShow={this.handlerPopShow}/>
 
-                <div className="nav-block">
+               	{/*<div className="nav-block">
                     <img src="images/process.png"/>
-                </div>
+                </div>*/
+				}
                 <PromptBlock imgUrl={"images/succeed-1.png"} title={"注册成功"}
                              text={"元返现券已经转入您的账户中"}
                              resDetails={this.state.registResultData}
                     />
-                <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler}/>
+                <Btn btnText={"下载APP"} Fun={this.clickHandler}/>
+
+				<div className="link-home">
+					去首页转转
+				</div>
 
                 {
                     this.state.popShow ? <Pop callbackCancelBtn={this.getCancelBtn}
