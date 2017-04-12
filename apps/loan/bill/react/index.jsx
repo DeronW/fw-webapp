@@ -115,7 +115,7 @@ class Content extends React.Component{
                     break;
             }
             return (
-                <a className="list_li" key={index} href={item.productId == 1 ? "/static/loan/bill-detail/index.html" : `/static/loan/bill-detail-dumiao/index.html?uuid=${uuid}`}>
+                <a className="list_li" key={index} href={item.productId == 1 ? `/static/loan/bill-detail/index.html?uuid=${uuid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${uuid}`}>
                     <div className="list-img"><img src={item.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png"}/></div>
                     <div className="list-content">
                         <div className="apply-num">借款金额:{item.loanAmtStr}元</div>
