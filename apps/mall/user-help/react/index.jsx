@@ -23,7 +23,7 @@ const Help = React.createClass({
                 </div>
                 <div className="help-wrap">
                     <div className="help-item">
-                        <div className="item-title ask">
+                        <div className="item-title ask">m
                             问：我的包裹多长时间能送到？
                         </div>
                     </div>
