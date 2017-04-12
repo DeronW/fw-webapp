@@ -1,0 +1,128 @@
+// vars and mixins
+@info-tab--height: 72px;
+@user-info-input-wrap--height: 100px;
+@placeholder-color: #666;
+
+.right-align-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+// main style
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // no highlight when tapping
+}
+
+html {
+  height: 100%;
+  min-height: 1000px;
+}
+
+body {
+  height: 100%;
+  background-color: #f0f0f0;
+  font-size: 30px;
+}
+
+.info-tab {
+  display: inline-flex;
+  justify-content: space-around;
+  width: 100%;
+  height: @info-tab--height;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  color: #999;
+  font-size: 27px;
+
+  .info-tab-item {
+    display: inline-block;
+    height: 100%;
+    line-height: @info-tab--height;
+    borderBottom: 3px solid transparent;
+    borderTop: 3px solid transparent;
+    listStyle: none;
+  }
+}
+
+.info-display-block {
+  width: 100%;
+  margin: 21px 0;
+  background-color: #fff;
+
+  .user-info-input-wrap {
+    display: inline-flex;
+    position: relative;
+    margin-left: 35px;
+    width: calc(~"100% - 18px");
+    height: @user-info-input-wrap--height;
+    background-color: #fff;
+    border-bottom: 1px solid #ebeaea;
+    vertical-align: middle;
+
+    &:last-child {
+      border: none;
+    }
+
+    .info-name {
+      display: inline-block;
+      height: 100%;
+      color: #666;
+      line-height: @user-info-input-wrap--height;
+    }
+
+    .right-align-container {
+      display: inline-flex;
+
+      .info-content {
+        display: inline-block;
+        width: 420px;
+        height: 100%;
+        border: none;
+        outline: none;
+        padding: 0;
+        background-color: transparent;
+        color: #333;
+        font-size: 32px;
+        line-height: @user-info-input-wrap--height;
+        text-align: right;
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          color: @placeholder-color;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+          color: @placeholder-color;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+          color: @placeholder-color;
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+          color: @placeholder-color;
+        }
+      }
+
+      .right-arrow-container {
+        display: inline-block;
+        position: relative;
+        width: 96px;
+        height: 100%;
+
+        .fake-arrow {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 10px;
+          width: 25px;
+          height: 25px;
+          margin: auto;
+          border-top: 3px solid #ccc;
+          border-left: 3px solid #ccc;
+          transform: rotate(135deg);
+        }
+      }
+    }
+  }
+}
