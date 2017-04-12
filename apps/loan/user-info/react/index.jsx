@@ -55,7 +55,7 @@ class InfoItemInputWrap extends React.Component {
             var selectOptions = this.props.options.map((option, index) => (
                 <div className="select-option" key={index} onClick={() => {
                     this.toggleExpand();
-                    this.props.handleClick(this.props.itemIndex, option);
+                    this.props.handleInput(this.props.itemIndex, option);
                 }}>
                     {option}
                     {value === option && <img className="selected-icon" src="images/selected.png"></img>
@@ -68,17 +68,19 @@ class InfoItemInputWrap extends React.Component {
                 <div className="input-wrap" id={this.props.infoID}>
                     <span className="info-name">{this.props.infoNameCN}</span>
                     <div className="right-align-container">
-                        {this.props.options === null
+                        { this.props.options === null
                             ? (
-                                <input className="info-text-input" placeholder={this.props.placeholder}></input>
+                                <input className="info-text-input" placeholder={this.props.placeholder} value={this.props.value} onChange={(e) => {this.props.handleInput(this.props.itemIndex, e.target.value)}}></input>
                             )
                             : (
                                 <span className="select-label" onClick={this.toggleExpand}>{value || this.props.placeholder}</span>
                             )
-}
-                        <div className="right-arrow-container">
-                            <div className="fake-arrow"></div>
-                        </div>
+                        }
+                        { this.props.options !== null &&
+                            <div className="right-arrow-container" onClick={this.toggleExpand}>
+                                <div className="fake-arrow"></div>
+                            </div>
+                        }
                     </div>
                 </div>
                 {this.props.options !== null && (this.state.expandOpts && (<div className="select-option-wrap">
@@ -94,7 +96,7 @@ class InfoInputGrp extends React.Component {
     render() {
         let infoGrp = this.props.infoGrp;
         let infoItems = infoGrp.map((item, index) => {
-            let subInfoItems = item.map((item, subIndex) => (<InfoItemInputWrap infoNameCN={item.infoNameCN} key={subIndex} placeholder={item.placeholder} options={item.options || null} value={item.value} itemIndex={[index, subIndex]} handleClick={this.props.handleClick}/>));
+            let subInfoItems = item.map((item, subIndex) => (<InfoItemInputWrap infoNameCN={item.infoNameCN} key={subIndex} placeholder={item.placeholder} options={item.options || null} value={item.value} itemIndex={[index, subIndex]} handleInput={this.props.handleInput}/>));
             return (
                 <div className="info-display-block" key={index}>
                     {subInfoItems}
@@ -224,7 +226,7 @@ class UserInfoWrap extends React.Component {
         return (
             <div>
                 <UserInfoTab selectedTab={selected}/>
-                <InfoInputGrp selectedTab={selected} infoGrp={this.state[selected]} handleClick={this.handleInput}/>
+                <InfoInputGrp selectedTab={selected} infoGrp={this.state[selected]} handleInput={this.handleInput}/>
             </div>
         )
     }
