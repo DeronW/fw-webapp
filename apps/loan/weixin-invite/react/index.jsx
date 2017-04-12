@@ -25,7 +25,10 @@ $FW.DOMReady(function () {
         token: USER.token,
         sourceType: SOURCE_TYPE
     }).then((data) => {
-        $(".btm-tip input").val(data.shareTemplate.templateUrl + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
+        var shareLink = data.shareTemplate.templateUrl;
+        var invitationCode = $FW.Format.urlQuery(shareLink).invitationCode;
+        $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
+        $(".invitation-code span").text(invitationCode);
     }, () => {
         location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });
