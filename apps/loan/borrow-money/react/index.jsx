@@ -20,13 +20,14 @@ class TopInfo extends React.Component {
 					放心花
 				</div>
 
-				<div className="subtitle">
-					借款范围（500 - 10万）
-				</div>
-
 				<div className="tag">
 					<img src="images/tag-1.png"/>
 					<img src="images/tag-2.png"/>
+					<img src="images/tag-3.png"/>
+				</div>
+
+				<div className="subtitle">
+					借款范围（500 - 10万）
 				</div>
 
 				<div className="next">
@@ -52,6 +53,7 @@ class BorrowMoneyList extends React.Component {
 							<div className="tag">
 								<img src="images/tag-1a.png" />
 								<img src="images/tag-2a.png" />
+								<img src="images/tag-3a.png" />
 							</div>
 						</div>
 
