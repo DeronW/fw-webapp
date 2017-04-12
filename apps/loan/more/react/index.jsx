@@ -91,5 +91,6 @@ let More = React.createClass({
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"更多"} />, HEADER_NODE);
     ReactDOM.render(<More />, CONTENT_NODE);
+    ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
 })
 
