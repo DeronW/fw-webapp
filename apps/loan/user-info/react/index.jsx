@@ -63,11 +63,13 @@ class InfoItemInputWrap extends React.Component {
                 }}>
                     {option}
                     {value === option && <img className="selected-icon" src="images/selected.png"></img>
-                }
+}
                 </div>
             ));
         }
-        let selectLabelColor = value ? '#333' : '#999';
+        let selectLabelColor = value
+            ? '#333'
+            : '#999';
         return (
             <div className="user-info-item-wrap">
                 <div className="input-wrap" id={this.props.infoID}>
@@ -80,7 +82,9 @@ class InfoItemInputWrap extends React.Component {
                                 }}></input>
                             )
                             : (
-                                <span className="select-label" onClick={this.toggleExpand} style={{color: selectLabelColor}}>{value || this.props.placeholder}</span>
+                                <span className="select-label" onClick={this.toggleExpand} style={{
+                                    color: selectLabelColor
+                                }}>{value || this.props.placeholder}</span>
                             )
 }
                         {this.props.options !== null && <div className="right-arrow-container" onClick={this.toggleExpand}>
@@ -119,11 +123,20 @@ class InfoInputGrp extends React.Component {
     }
 }
 
+class SubmitBtn extends React.Component {
+    render() {
+        return (
+            <div className="submit-btn" onClick={this.props.handleClick}>提交</div>
+        )
+    }
+}
+
 class UserInfoWrap extends React.Component {
     constructor() {
         super();
         this.state = {
             selectedTab: 'basicInfo',
+            showSubmitBtn: false,
             basicInfo: [
                 [
                     {
@@ -221,17 +234,24 @@ class UserInfoWrap extends React.Component {
         }
         this.shiftTab = this.shiftTab.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     shiftTab(tabName) {
         this.setState({selectedTab: tabName});
+        this.setState({showSubmitBtn: false});
     }
 
     handleInput(index, v) {
+        this.setState({showSubmitBtn: true});
         let selected = this.state.selectedTab;
         let catInfo = JSON.parse(JSON.stringify(this.state[selected]));
         catInfo[index[0]][index[1]].value = v;
         this.setState({[selected]: catInfo});
+    }
+
+    handleSubmit() {
+        this.setState({showSubmitBtn: false});
     }
 
     render() {
@@ -240,6 +260,7 @@ class UserInfoWrap extends React.Component {
             <div>
                 <UserInfoTab selectedTab={selected} handleClick={this.shiftTab}/>
                 <InfoInputGrp selectedTab={selected} infoGrp={this.state[selected]} handleInput={this.handleInput}/>
+                {this.state.showSubmitBtn && <SubmitBtn handleClick={this.handleSubmit}/>}
             </div>
         )
     }
