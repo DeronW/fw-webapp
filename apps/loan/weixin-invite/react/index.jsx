@@ -1,5 +1,6 @@
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
+    ReactDOM.render(<Header title={'邀请好友'} />, HEADER_NODE);
     var page = 1;
     var loadNextPage = true;
     $("#tab-content").height($(document).height() - 535 + "px");
