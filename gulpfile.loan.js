@@ -20,6 +20,7 @@ const USER_PAGES = [
     'user-set-password',
     'user-reset-password',
     'user', //我
+    'user-basic',
     'user-card-set', //设置提现卡
     'user-card-add', //添加提现卡
     'user-verify-phone', //获取验证码
@@ -94,7 +95,7 @@ APP_NAMES.push(
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
-        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`, `${PROJ}/user-info-display.jsx`,
+        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`, `${PROJ}/user-info-item-display.jsx`,`${PROJ}/user-info-tab.jsx`,
         'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
     ];
 
