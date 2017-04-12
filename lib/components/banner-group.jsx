@@ -7,7 +7,8 @@
 
 class BannerGroup extends React.Component {
 
-    getInitialState() {
+    constructor(props) {
+        super(props);
         this._touch = {
             originLeft: 0,
             startX: null,
@@ -26,7 +27,7 @@ class BannerGroup extends React.Component {
         let autoPlay = this.props.autoPlay || 0;
         autoPlay = images.length <= 1 ? false : (autoPlay < 3000 ? 3000 : autoPlay);
 
-        return {
+        this.state = {
             index: this.props.startIndex || 1,
             images: images,
             autoPlay: autoPlay,
@@ -89,9 +90,9 @@ class BannerGroup extends React.Component {
                 if (this.state.index != ti) this.props.afterIndexChange && this.props.afterIndexChange(ti);
 
                 this._onAnimate = false;
-                this.setState({left: targetLeft, index: ti});
+                this.setState({ left: targetLeft, index: ti });
             } else {
-                this.setState({left: this.state.left + step})
+                this.setState({ left: this.state.left + step })
             }
         }.bind(this), 20)
     }
@@ -106,7 +107,7 @@ class BannerGroup extends React.Component {
 
     touchMoveHandler(event) {
         let left = this._touch.originLeft + event.changedTouches[0].pageX - this._touch.startX;
-        this.setState({left: left});
+        this.setState({ left: left });
         // event.preventDefault();
         event.stopPropagation();
         event.nativeEvent.stopImmediatePropagation();
@@ -161,23 +162,23 @@ class BannerGroup extends React.Component {
             position: 'relative',
             transform: 'translate3d(0, 0, 0)',
             background: '#fff'
-    }
-        ;
+        }
+            ;
 
         let image = (img, index) => {
             return (
                 <img key={index}
-                     onClick={() => _this.imageClickHandler(index) }
-                     className={index + 1 == this.state.index ? 'active' : null}
-                     style={{
-                         display: 'block',
-                         float: 'left',
-                         width: _this.state.width + 'px'
-                     }} src={img}/>
+                    onClick={() => _this.imageClickHandler(index)}
+                    className={index + 1 == this.state.index ? 'active' : null}
+                    style={{
+                        display: 'block',
+                        float: 'left',
+                        width: _this.state.width + 'px'
+                    }} src={img} />
             )
         };
 
-        let imitateStyle = {width: this.state.width + 'px', height: '100%', float: 'left'};
+        let imitateStyle = { width: this.state.width + 'px', height: '100%', float: 'left' };
         let imitateFirst = <div style={imitateStyle}></div>;
         let imitateLast = <div style={imitateStyle}></div>;
         if (this.state.loop) {
@@ -198,9 +199,9 @@ class BannerGroup extends React.Component {
                     height: '100%',
                     left: this.state.left
                 }}
-                     onTouchStart={this.touchStartHandler}
-                     onTouchMove={this.touchMoveHandler}
-                     onTouchEnd={this.touchEndHandler}
+                    onTouchStart={this.touchStartHandler}
+                    onTouchMove={this.touchMoveHandler}
+                    onTouchEnd={this.touchEndHandler}
                 >
                     {imitateFirst}
                     {this.state.images.map(image)}

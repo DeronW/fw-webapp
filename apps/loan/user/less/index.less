@@ -1,234 +1,138 @@
+// vars and mixins
+@follow-wx-wrap--height: 81px;
+
+// containing block should better be a positioned element
+.center-element {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+// main style
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // no highlight when tapping
+}
+
+html {
+  height: 100%;
+  min-height: 1000px;
+}
+
 body {
-	background-color: #f0f0f0;
+  height: 100%;
+  background-color: #f0f0f0;
+  font-size: 30px;
 }
 
-.my-cnt {
-	margin-bottom: 120px;
+.avator-card {
+  width: 100%;
+  background-color: #44adf0;
+  padding: 64px 0;
+  text-align: center;
+
+  .avatar-container {
+    width: 156px;
+    height: 156px;
+    margin: 0 auto;
+  }
+
+  .masked-phone-num {
+    color: #fff;
+    font-size: 32px;
+    margin-top: 15px;
+  }
 }
 
-.my-nav {
-	height: 100px;
-	font-size: 36px;
-	line-height: 100px;
-	text-align: center;
-	background-color: #fff;
-}
+.follow-wx-entry-wrap {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  height: @follow-wx-wrap--height;
+  background-color: #3ba1e9;
+  vertical-align: middle;
 
-.my-info{
-  margin-bottom:22px;
-}
-.my-info-cnt {
+  .left-icon-container {
+    display: inline-block;
+    position: relative;
+    width: 114px;
+    height: 100%;
 
-	color: #fff;
-
-	.loan-sum-text {
-    background-color: #42d1f5;
-    padding-top:85px;
-		height: 273px;
-		text-align: center;
-
-		.text {
-			line-height: 42px;
-			font-size: 27px;
-		}
-
-		.num-text {
-			font-size: 112px;
-		}
-	}
-
-	.loan-info {
-    position:relative;
-    overflow:hidden;
-		height: 110px;
-    padding-top:30px;
-    background:#fff;
-		.info {
-			width: 50%;
-			border-right: 1px solid #fff;
-			text-align: center;
-      position:absolute;
-      top:30px;
-			.text {
-				display: block;
-				line-height: 27px;
-				font-size: 27px;
-        color:#999;
-			}
-			.num-text {
-				display: block;
-				font-size: 36px;
-				line-height: 44px;
-        color:#333;
-        margin-bottom:4px;
-			}
-		}
-    .info1{
-      left:0;
+    img {
+      .center-element;
     }
-    .info2{
-      border-right:none;
-      left:50%;
-    }
-    .vertical-line{
-      width:1px;
-      height:72px;
-      background:#f5f4f4;
-      position:absolute;
-      top:34px;
-      left:50%;
-      transform:translateX(-50%);
-    }
-	}
-}
+  }
 
+  span {
+    display: inline-block;
+    height: 100%;
+    color: #fff;
+    font-size: 30px;
+    line-height: @follow-wx-wrap--height;
+  }
 
+  .right-align-container {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
 
-.my-info-num {
-	height: 80px;
-	padding: 30px 30px;
-	background-color: #fff;
+    .next-icon-container {
+      position: relative;
+      width: 60px;
+      height: 100%;
 
-	.quota-info {
-		float: left;
-
-		.num-text {
-			display: block;
-			color: #50ad9a;
-			font-size: 50px;
-			line-height: 50px;
-		}
-
-		.text {
-			font-size: 22px;
-			line-height: 28px;
-			color: #999;
-		}
-	}
-
-	.icon-r {
-		float: right;
-
-		width: 80px;
-		height: 80px;
-		background: url(../images/arrow-r-icon.png) no-repeat center;
-		background-size: 30px auto;
-	}
-}
-
-
-.my-settings {
-
-	background-color: #fff;
-
-	.list {
-		.list-cnt {
-			height: 36px;
-			padding: 26px 0;
-      border-bottom: 1px solid #ebeaea;
-      margin-left:34px;
-			a {
-        padding: 0 30px 0 0;
-				display: block;
-
-			}
-
-			.icon {
-				float: left;
-				width: 36px;
-				height: 36px;
-				margin: -2px 12px 0 0 ;
-				background-size: 38px auto;
-			}
-
-			.text {
-				color: #333;
-				font-size: 28px;
-			}
-
-			.credit-icon {
-				background: url(../images/credit-icon.png) no-repeat center;
-			}
-
-      .invite-icon {
-        background: url(../images/invite-icon.png) no-repeat center;
+      img {
+        .center-element;
       }
-
-			.back-icon {
-				background: url(../images/card-icon.png) no-repeat center;
-			}
-
-			.feedback-icon {
-				background: url(../images/info-icon.png) no-repeat center;
-			}
-
-			.more-icon {
-				background: url(../images/more-icon.png) no-repeat center;
-			}
-
-			.arrow-r-icon {
-				float: right;
-				width: 36px;
-				height: 36px;
-				background: url(../images/arrow-r-icon.png) no-repeat center;
-				background-size: 16px auto;
-			}
-		}
-    .list-cnt:last-child{
-      border-bottom:none;
     }
-	}
+  }
 }
 
+.bill-entry-wrap {
+  width: 100%;
+  height: 228px;
 
+  .bill-label {
+    height: 75px;
+    line-height: 75px;
+    padding-left: 35px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
 
-.my-btn {
-	margin: 30px 0 0 0;
-	padding: 0 30px;
+  .bill-type-wrap {
+    display: inline-flex;
+    width: 100%;
+    height: 153px;
+    background-color: #fff;
+    color: #666;
+
+    ul {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: inline-block;
+        width: 25%;
+        list-style: none;
+        text-align: center;
+
+        img {
+          display: block;
+          margin: 20px auto 5px;
+        }
+      }
+    }
+  }
 }
 
-.ui-btn {
-	height: 74px;
-	line-height: 74px;
-	text-align: center;
-	color: #fff;
-	font-size: 30px;
-	background-color: #50ad9a;
-	border-radius: 5px;
+.info-display-block {
+  width: 100%;
+  margin: 22px 0;
+  background-color: #fff;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

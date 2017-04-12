@@ -13,9 +13,17 @@ import {render, findDOMNode} from 'react-dom';
 //
 // document.body.appendChild(component());
 class App extends React.Component{
+    constructor(){
+        this.state = {
+            test: 1
+        }
+    }
+    clickHandler(){
+        console.log(this.state)
+    }
     render(){
         return (
-            <h1>Hello webpack</h1>
+            <h1 onClick={this.clickHandler}>Hello webpack</h1>
         )
     }
 }

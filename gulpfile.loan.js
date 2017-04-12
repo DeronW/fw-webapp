@@ -65,6 +65,11 @@ const DEVELOPING_PAGES = [
     'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
+//借钱
+const BORROW_MONEY = [
+	'borrow-money'
+]
+
 // Beta项目, 使用 webpack 编译指定页面
 const WEBPACK_PAGES = [
     {
@@ -74,6 +79,7 @@ const WEBPACK_PAGES = [
     }
 ]
 
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
@@ -81,13 +87,14 @@ APP_NAMES.push(
     ...APP_NAMES,
     ...PROTOCOL_PAGES,
     ...DEVELOPING_PAGES,
-    ...WEBPACK_PAGES
+    ...WEBPACK_PAGES,
+	...BORROW_MONEY
 );
 
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
-        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
+        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`, `${PROJ}/user-info-display.jsx`,
         'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
     ];
 

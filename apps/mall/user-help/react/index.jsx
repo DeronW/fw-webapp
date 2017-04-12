@@ -29,7 +29,7 @@ const Help = React.createClass({
                     </div>
                     <div className="help-item">
                         <div className="ans">答：</div>
-                        <div className="item-title ask">
+                        <div className="item-title">
                             1、兑换的返现券实时到账；<br/>
                             2、豆哥周边礼品1-7个工作日发货；<br/>
                             3、其余礼品3-7个工作日发货；<br/>
