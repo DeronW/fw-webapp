@@ -73,21 +73,12 @@ class BillEntry extends React.Component {
 
 class MajorUserInfo extends React.Component {
     render() {
-        let majorInfo = [
-            {
-                infoName: "个人信息",
-                iconSrc: "images/info_icon.png"
-            }, {
-                infoName: "银行卡",
-                iconSrc: "images/bank_icon.png"
-            }
-        ];
         let infoItems = majorInfo.map((item, index, itemArray) => (
-          <UserInfoItemDisplay
-            iconSrc={item.iconSrc}
-            infoName={item.infoName}
-            key={index}
-            disableBorder={index === itemArray.length - 1 ? true : false}/>
+            <UserInfoItemDisplay
+              iconSrc={item.iconSrc}
+              infoNameCN={item.infoNameCN}
+              key={index}
+              disableBorder={index === itemArray.length - 1 ? true : false}/>
         ));
         return (
             <div className="info-display-block">
@@ -109,6 +100,19 @@ class UserInfoWrap extends React.Component {
         )
     }
 }
+
+// info items in this page
+let majorInfo = [
+    {
+        infoID: "personal-info__dis",
+        infoNameCN: "个人信息",
+        iconSrc: "images/info_icon.png"
+    }, {
+        infoID: "card-info__dis",
+        infoNameCN: "银行卡",
+        iconSrc: "images/bank_icon.png"
+    }
+];
 
 // render ReactDom
 $FW.DOMReady(() => {
