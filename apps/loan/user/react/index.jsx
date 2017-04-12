@@ -71,6 +71,29 @@ class BillEntry extends React.Component {
     }
 }
 
+class UserInfoItemDisplay extends React.Component {
+    render() {
+        return (
+            <div className="user-info-display-wrap" id={this.props.infoID}>
+                { this.props.iconSrc !== null &&
+                  <div className="info-icon-container">
+                      <img src={this.props.iconSrc}></img>
+                  </div>
+                }
+                <span className="info-name">{this.props.infoNameCN}</span>
+                <div className="right-align-container">
+                    { this.props.infoContent || this.props.infoDefaultContent !== undefined &&
+                      <span className="info-content">{this.props.infoContent || this.props.infoDefaultContent}</span>
+                    }
+                    <div className="right-arrow-container">
+                        <div className="fake-arrow"></div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
 class MajorUserInfo extends React.Component {
     render() {
         let infoItems = majorInfo.map((item, index, itemArray) => (

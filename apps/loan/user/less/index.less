@@ -1,5 +1,6 @@
 // vars and mixins
 @follow-wx-wrap--height: 87px;
+@user-info-display-wrap--height: 100px;
 
 // containing block should better be a positioned element
 .center-element {
@@ -9,6 +10,13 @@
   left: 0;
   right: 0;
   margin: auto;
+}
+
+.right-align-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
 }
 
 // main style
@@ -74,10 +82,6 @@ body {
   }
 
   .right-align-container {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 100%;
 
     .next-icon-container {
       position: relative;
@@ -133,4 +137,68 @@ body {
   width: 100%;
   margin: 21px 0;
   background-color: #fff;
+
+  .user-info-display-wrap {
+    display: inline-flex;
+    position: relative;
+    margin-left: 35px;
+    width: calc(~"100% - 18px");
+    height: @user-info-display-wrap--height;
+    background-color: #fff;
+    border-bottom: 1px solid #ebeaea;
+    vertical-align: middle;
+
+    &:last-child {
+      border: none;
+    }
+
+    .info-icon-container {
+      display: inline-block;
+      position: relative;
+      width: 40px;
+      height: 100%;
+      margin-right: 18px;
+
+      img {
+        .center-element;
+      }
+    }
+
+    .info-name {
+      display: inline-block;
+      height: 100%;
+      color: #666;
+      line-height: @user-info-display-wrap--height;
+    }
+
+    .right-align-container {
+
+      .info-content {
+        display: inline-block;
+        height: 100%;
+        color: #333;
+        line-height: @user-info-display-wrap--height;
+      }
+
+      .right-arrow-container {
+        display: inline-block;
+        position: relative;
+        width: 96px;
+        height: 100%;
+
+        .fake-arrow {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 10px;
+          width: 25px;
+          height: 25px;
+          margin: auto;
+          border-top: 3px solid #ccc;
+          border-left: 3px solid #ccc;
+          transform: rotate(135deg);
+        }
+      }
+    }
+  }
 }

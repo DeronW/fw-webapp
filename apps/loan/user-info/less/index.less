@@ -1,0 +1,40 @@
+// vars and mixins
+@info-tab--height: 72px;
+
+// main style
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // no highlight when tapping
+}
+
+html {
+  height: 100%;
+  min-height: 1000px;
+}
+
+body {
+  height: 100%;
+  background-color: #f0f0f0;
+  font-size: 30px;
+}
+
+.info-tab {
+  display: inline-flex;
+  justify-content: space-around;
+  width: 100%;
+  height: @info-tab--height;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  color: #999;
+  font-size: 27px;
+
+  .info-tab-item {
+    display: inline-block;
+    height: 100%;
+    line-height: @info-tab--height;
+    borderBottom: 3px solid transparent;
+    borderTop: 3px solid transparent;
+    listStyle: none;
+  }
+}
