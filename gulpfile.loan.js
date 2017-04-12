@@ -4,8 +4,8 @@ const PROJ = 'loan';
 
 let APP_NAMES = [
     'home', // 首页
-    'faq', //常见问题
-    'about-us', //关于我们
+    'more-faq', //常见问题
+    'more-about-us', //关于我们
 ];
 
 // 用户模块
@@ -27,7 +27,7 @@ const USER_PAGES = [
     'user-bank-support', //支持银行卡
     'user-card-management', //银行卡管理
     'user-verify-phone',
-    'user-settings', //更多
+    'more', //更多
     'user-jrgc-login',
     'user-weixin',
     'fxh-jrgc-invite',//放心花金融工场邀请页面
@@ -40,8 +40,7 @@ const BILL_PAGES = [
     'bill-history', //历史账单
     'bill-detail', //账单详情
     'bill-payback', //还款页面
-    'bill-loan-phase2',//新账单页面
-    'bill-detail-phase2'//新账单详情页
+    'bill-detail-dumiao'//读秒账单详情页
 ]
 
 // 申请借款模块
