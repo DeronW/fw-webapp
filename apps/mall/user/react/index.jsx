@@ -85,7 +85,7 @@ const User = React.createClass({
                      <img src="images/icon11.jpg"/>
                      <span className="box-title2">我的足迹</span>
                      </a>*/}
-                     <a className="list-box" href="https://dougemall.qiyukf.com/client?k=b0ecf23066d7645f98686b64260485da&wp=1">
+                     <a className="list-box hide" href="https://dougemall.qiyukf.com/client?k=b0ecf23066d7645f98686b64260485da&wp=1">
                      <img src="images/icon10.jpg"/>
                      <span className="box-title3">在线客服</span>
                      </a>
