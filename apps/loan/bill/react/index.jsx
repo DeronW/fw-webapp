@@ -2,9 +2,10 @@ class Content extends React.Component{
     constructor(props){
         super(props);
         this.tabs = ['billApplying', 'billReturning', 'billFailing', 'billPaid'];
+        let tab = $FW.Format.urlQuery().tab
         this.count = 5;
         this.state = {
-           tab:"billApplying",
+           tab:tab,
            page:{
                billApplying:1,
                billReturning:1,
