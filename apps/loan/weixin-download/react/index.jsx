@@ -19,10 +19,10 @@ $FW.DOMReady(function () {
 
     if (ConcertUtilBrowser.versions.weixin) {
         $("ios-download").addEventListener("click", function () {
-            $("mask").style.display = "block";
+            $("ios-download").setAttribute("href","http://a.app.qq.com/o/simple.jsp?pkgname=com.ucf.jrgc.cfinance");
         })
         $("android-download").addEventListener("click", function () {
-            $("mask").style.display = "block";
+            $("android-download").setAttribute("href","http://a.app.qq.com/o/simple.jsp?pkgname=com.ucf.jrgc.cfinance");
         })
     } else if (ConcertUtilBrowser.versions.ios) {
         $("ios-download").addEventListener("click", function () {
@@ -36,9 +36,7 @@ $FW.DOMReady(function () {
             )
         })
     }
-
-    $("mask").addEventListener("click", function () {
-        $("mask").style.display = "none";
-    })
-
+    // $("mask").addEventListener("click", function () {
+    //     $("mask").style.display = "none";
+    // })
 });
