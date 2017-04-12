@@ -1,6 +1,6 @@
 class Content extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.tabs = ['billApplying', 'billReturning', 'billFailing', 'billPaid'];
         this.count = 5;
         this.state = {
