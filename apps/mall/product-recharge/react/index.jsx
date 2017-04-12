@@ -152,10 +152,11 @@ const Recharge = React.createClass({
     },
 
     getSMSCodeHandler: function () {
+        // let bizNo = $FW.Format.urlQuery().bizNo;
         for (var i = 0; i < document.querySelectorAll('.value-box').length; i++) {
             if (document.querySelectorAll('.value-box')[i].classList.contains('selected') == true) {
                 let v = this.state.phone;
-                if (!this.state.login)
+                if (!this.state.login){
                 //return $FW.Utils.loginMall();
                     if (v == '')
                         return $FW.Component.Alert("请输入手机号！");
@@ -165,17 +166,25 @@ const Recharge = React.createClass({
                     return $FW.Component.Alert("充值失败，工分不足！");
                 if (this.state.tab == 'net' && this.state.user_score < this.state.net_pay_score)
                     return $FW.Component.Alert("充值失败，工分不足！");
-                window.confirmPanel.show();
+                {/*window.confirmPanel.show();*/}
+            {/*下面是话费充值立即充值后由弹框变成跳转登录页*/}
+                $FW.Ajax({
+                    url: `${API_PATH}/mall/api/cart/v1/shoppingCart.json`,
+                    enable_loading: 'mini'
+                })
+            }else{
+                window.location.href='/static/mall/order-confirm/index.html?cartFlag=false&prd=' + bizNo + '&buyNum=1';
             }
+        }
         }
     },
 
     getFormData: function () {
         return {
-            bizNo: this.state.bizNo,
-            phone: this.state.phone,
-            sms_code: '',
-            price: this.state.price
+         bizNo: this.state.bizNo,
+         phone: this.state.phone,
+         sms_code: '',
+         price: this.state.price
         }
     },
 
@@ -325,10 +334,10 @@ Recharge.ProductPanel = React.createClass({
 });
 
 
-$FW.DOMReady(function () {
+    $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"充值中心"}/>, HEADER_NODE)
 
-    $FW.Ajax({
+        $FW.Ajax({
         url: API_PATH + '/mall/api/v1/user-state.json',
         enable_loading: 'mini',
         success: function (data) {
