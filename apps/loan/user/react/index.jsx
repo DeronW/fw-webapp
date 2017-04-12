@@ -56,7 +56,7 @@ class BillEntry extends React.Component {
         }
         let billType = [];
         for (let k in billTypesImg) {
-            billType.push(<BillType billType={k} src={billTypesImg[k]} key={this.props.billType}/>);
+            billType.push(<BillType billType={k} src={billTypesImg[k]} key={k}/>);
         }
         return (
             <div className="bill-entry-wrap">
@@ -72,28 +72,29 @@ class BillEntry extends React.Component {
 }
 
 class MajorUserInfo extends React.Component {
-  render() {
-    let majorInfo = [
-      {
-        infoName: "个人信息",
-        iconSrc: "images/info_icon.png",
-        infoDefaultContent: ""
-      },
-      {
-        infoName: "银行卡",
-        iconSrc: "images/bank_icon.png",
-        infoDefaultContent: ""
-      }
-    ];
-    let infoItems = majorInfo.map((item) => (
-      <UserInfoItemDisplay iconSrc={item.iconSrc} infoName={item.infoName} infoDefaultContent={item.infoDefaultContent}/>
-    ));
-    return (
-      <div className="info-display-block">
-        {infoItems}
-      </div>
-    )
-  }
+    render() {
+        let majorInfo = [
+            {
+                infoName: "个人信息",
+                iconSrc: "images/info_icon.png"
+            }, {
+                infoName: "银行卡",
+                iconSrc: "images/bank_icon.png"
+            }
+        ];
+        let infoItems = majorInfo.map((item, index, itemArray) => (
+          <UserInfoItemDisplay
+            iconSrc={item.iconSrc}
+            infoName={item.infoName}
+            key={index}
+            disableBorder={index === itemArray.length - 1 ? true : false}/>
+        ));
+        return (
+            <div className="info-display-block">
+                {infoItems}
+            </div>
+        )
+    }
 }
 
 class UserInfoWrap extends React.Component {
@@ -103,8 +104,7 @@ class UserInfoWrap extends React.Component {
                 <AvatarCard phoneNum="18900001234"/>
                 <FollowWXEntry/>
                 <BillEntry/>
-                {/* <UserInfoItemDisplay iconSrc="images/info_icon.png" infoName="个人信息" infoDefaultContent="去完善"/> */}
-                <MajorUserInfo />
+                <MajorUserInfo/>
             </div>
         )
     }
@@ -113,5 +113,7 @@ class UserInfoWrap extends React.Component {
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(
-        <UserInfoWrap/>, CONTENT_NODE)
+        <UserInfoWrap/>, CONTENT_NODE);
+    ReactDOM.render(
+        <BottomNavBar/>, BOTTOM_NAV_NODE);
 })
