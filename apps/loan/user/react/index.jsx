@@ -56,16 +56,33 @@ class BillEntry extends React.Component {
         }
         let billType = [];
         for (let k in billTypesImg) {
-          billType.push(<BillType billType={k} src={billTypesImg[k]} key={this.props.billType}/>);
+            billType.push(<BillType billType={k} src={billTypesImg[k]} key={k}/>);
         }
         return (
             <div className="bill-entry-wrap">
                 <div className="bill-label">账单</div>
                 <div className="bill-type-wrap">
-                  <ul>
-                      {billType}
-                  </ul>
+                    <ul>
+                        {billType}
+                    </ul>
                 </div>
+            </div>
+        )
+    }
+}
+
+class MajorUserInfo extends React.Component {
+    render() {
+        let infoItems = majorInfo.map((item, index, itemArray) => (
+            <UserInfoItemDisplay
+              iconSrc={item.iconSrc}
+              infoNameCN={item.infoNameCN}
+              key={index}
+              disableBorder={index === itemArray.length - 1 ? true : false}/>
+        ));
+        return (
+            <div className="info-display-block">
+                {infoItems}
             </div>
         )
     }
@@ -76,15 +93,31 @@ class UserInfoWrap extends React.Component {
         return (
             <div className="user-info-wrap">
                 <AvatarCard phoneNum="18900001234"/>
-                <FollowWXEntry />
-                <BillEntry />
+                <FollowWXEntry/>
+                <BillEntry/>
+                <MajorUserInfo/>
             </div>
         )
     }
 }
 
+// info items in this page
+let majorInfo = [
+    {
+        infoID: "personal-info__dis",
+        infoNameCN: "个人信息",
+        iconSrc: "images/info_icon.png"
+    }, {
+        infoID: "card-info__dis",
+        infoNameCN: "银行卡",
+        iconSrc: "images/bank_icon.png"
+    }
+];
+
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(
-        <UserInfoWrap/>, CONTENT_NODE)
+        <UserInfoWrap/>, CONTENT_NODE);
+    ReactDOM.render(
+        <BottomNavBar/>, BOTTOM_NAV_NODE);
 })

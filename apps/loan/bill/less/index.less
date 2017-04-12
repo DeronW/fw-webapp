@@ -1,173 +1,122 @@
 html,body {
   background-color: #f0f0f0;
 }
+*{
+  margin:0;
+  padding:0;
+}
 a{
   text-decoration: none;
 }
 img{
   vertical-align: middle;
 }
-.header{
+.bill-header{
+  position:fixed;
+  width:100%;
+}
+.billTitle{
+  width:100%;
   height:100px;
   line-height:100px;
-  background:#fff;
   text-align:center;
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:100;
-  border-bottom: 1px solid rgb(216, 216, 216);
-}
-.title{
-  font-size:36px;
+  font-size:40px;
   color:#333;
+  background:#fff;
 }
-.arrow-left{
-  background:url(../images/arrow-left.jpg) no-repeat;
-  width:19px;
-  height:34px;
-  position:absolute;
-  top:34px;
-  left:33px;
+.ui-tab-block{
+  background:#fff;
+  overflow:hidden;
 }
-.history-bill{
-  font-size:32px;
-  color:#6aa4f0;
-  position:absolute;
-  top:0px;
-  right:33px;
-  display: block;
+.ui-tab-li{
+  width:25%;
+  float:left;
 }
-.transfer-box{
-  width:100%;
-  margin-bottom:20px;
-}
-.transfer-title{
+.text{
+  display:block;
+  width:88px;
+  height:72px;
+  margin:0 auto;
+  line-height:72px;
+  text-align:center;
   font-size:27px;
-  color:#fff;
-  text-align:center;
-}
-.transfer-money{
-  font-size:112px;
-  color:#fff;
-  text-align:center;
-}
-.transfer-lines{
-  overflow:hidden;
-}
-.return-money, .return-date{
-  width:50%;
-  float:left;
-}
-.return-money-title, .return-date-title{
-  font-size:24px;
   color:#999;
+  border-bottom:2px solid #fff;
+}
+.ui-select-li .text{
+  color:#649cfe;
+  border-bottom:2px solid #649cfe;
+}
+.billContainer{
+  padding-top:194px;
+  margin-bottom:150px;
+}
+.list_li{
   display:block;
-  text-align:center;
-}
-.return-money-num, .return-date-day{
-  font-size:36px;
-  line-height:40px;
-  color:#333;
-  display:block;
-  text-align:center;
-  margin-bottom:4px;
-}
-.loan-info{
-  position:relative;
+  height:156px;
   background:#fff;
-  padding:34px 0;
-  height:72px;
-  overflow:hidden;
-}
-.vertical-line{
-  width:1px;
-  height:72px;
-  background:#f6f5f5;
-  position:absolute;
-  top:34px;
-  left:50%;
-}
-.bill-item-wrap{
-  position:relative;
-  padding-left:34px;
-  background:#fff;
-}
-.bill-item{
-  height:158px;
-  overflow:hidden;
-  display: block;
+  padding-left:30px;
   border-bottom:1px solid #ebeaea;
-}
-.bill-detail{
-  float:left;
-  margin-top:30px;
-}
-.pay-back-btn-wrap{
-  position:absolute;
-  right:34px;
-  top:44px;
-  z-index:10;
-}
-.bill-detail-wrap{
   overflow:hidden;
 }
-.bill-money{
-  font-size:56px;
-  line-height:66px;
-  color:#6aa4f0;
-  display:inline-block;
+.list-img{
+  width:113px;
+  height:113px;
   float:left;
+  margin-right:24px;
+  margin-top:24px;
 }
-.bill-status{
-  display:inline-block;
-  background:url(../images/overdue.jpg) no-repeat;
-  width:102px;
-  height:46px;
+.list-content{
   float:left;
-  margin-top:7px;
-  margin-left:22px;
+  margin-top:38px;
 }
-.bill-deadline{
-  font-size:25px;
+.apply-num{
+  font-size:36px;
+  line-height:100%;
+  color:#333;
+  margin-bottom:16px;
+}
+.apply-duration{
+  font-size:30px;
+  line-height:100%;
   color:#999;
 }
-.pay-back-btn-status1{
-  width:148px;
-  height:66px;
-  line-height:66px;
-  border:1px solid #ccc;
-  font-size:30px;
-  color:#fff;
-  background:#ccc;
-  border-radius:4px;
-  text-align:center;
+.apply-status-wrap{
+  float:right;
+  margin-right:30px;
+  margin-top:46px;
 }
-.pay-back-btn-status2{
-  width:148px;
-  height:66px;
-  line-height:66px;
-  border:1px solid #6aa4f0;
-  background:#fff;
-  font-size:30px;
-  color:#6aa4f0;
-  border-radius:4px;
-  text-align:center;
-  display: block;
+.apply-status{
+  font-size:27px;
+  line-height:100%;
+  text-align:right;
+  margin-bottom:22px;
 }
-.data-box{
-  margin-bottom:133px;
-  margin-top:100px;
+.bill-applying-color{
+  color:#649cfe;
 }
-.no-data-img{
-  position:absolute;
-  left:50%;
+.bill-returning-color{
+  color:#fc816f;
+}
+.bill-failing-color{
+  color:#f5313f;
+}
+.bill-paid-color{
+  color:#999;
+}
+.apply-time{
+  font-size:25px;
+  line-height:100%;
+  color:#999;
+}
+.no-data{
+  display:block;
+  width:362px;
+  height:296px;
+  background:url(../images/no-data.png) no-repeat;
+  position:fixed;
   top:50%;
+  left:50%;
+  -webkit-transform:translate(-50%,-50%);
   transform:translate(-50%,-50%);
-}
-.loan-headline-money{
-  padding-top:85px;
-  height:273px;
-  background:#42d1f5;
 }

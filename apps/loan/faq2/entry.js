@@ -1,21 +1,20 @@
-import _ from 'lodash';
+
 import React, { Component } from 'react';
 import {render, findDOMNode} from 'react-dom';
 
-// function component () {
-//   var element = document.createElement('div');
-//
-//   /* lodash is required for the next line to work */
-//   element.innerHTML = _.join(['Hello','webpack5'], ' ');
-//
-//   return element;
-// }
-//
-// document.body.appendChild(component());
 class App extends React.Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            a: 1
+        }
+    }
+    clickHandler(){
+        console.log(this.state)
+    }
     render(){
         return (
-            <h1>Hello webpack</h1>
+            <h1 onClick={this.clickHandler.bind(this)}>Hello webpack2</h1>
         )
     }
 }
