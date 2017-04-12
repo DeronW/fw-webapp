@@ -1,5 +1,3 @@
-
-
 class UserInfoItemDisplay extends React.Component {
     render() {
         let height = '100px';
@@ -62,13 +60,13 @@ class UserInfoItemDisplay extends React.Component {
             WebkitTransform: "rotate(135deg)"
         };
         return (
-            <div className="user-info-display-wrap" style={wrapStyle}>
+            <div className="user-info-display-wrap" id={this.props.infoID} style={wrapStyle}>
                 { this.props.iconSrc !== null &&
                   <div style={infoIconStyle}>
                       <img src={this.props.iconSrc} style={centerElementStyle}></img>
                   </div>
                 }
-                <span style={textStyle}>{this.props.infoName}</span>
+                <span style={textStyle}>{this.props.infoNameCN}</span>
                 <div style={rightAlignContainerStyle}>
                     { this.props.infoContent || this.props.infoDefaultContent !== undefined &&
                       <span style={textStyle}>{this.props.infoContent || this.props.infoDefaultContent}</span>

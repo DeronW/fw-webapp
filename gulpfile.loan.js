@@ -4,8 +4,8 @@ const PROJ = 'loan';
 
 let APP_NAMES = [
     'home', // 首页
-    'faq', //常见问题
-    'about-us', //关于我们
+    'more-faq', //常见问题
+    'more-about-us', //关于我们
 ];
 
 // 用户模块
@@ -20,13 +20,14 @@ const USER_PAGES = [
     'user-set-password',
     'user-reset-password',
     'user', //我
+    'user-basic',
     'user-card-set', //设置提现卡
     'user-card-add', //添加提现卡
     'user-verify-phone', //获取验证码
     'user-bank-support', //支持银行卡
     'user-card-management', //银行卡管理
     'user-verify-phone',
-    'user-settings', //更多
+    'more', //更多
     'user-jrgc-login',
     'user-weixin',
     'fxh-jrgc-invite',//放心花金融工场邀请页面
@@ -93,7 +94,7 @@ APP_NAMES.push(
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
-        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`, `${PROJ}/user-info-display.jsx`,
+        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`, `${PROJ}/user-info-item-display.jsx`,`${PROJ}/user-info-tab.jsx`,
         'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
     ];
 
