@@ -88,7 +88,7 @@ APP_NAMES.push(
     ...APP_NAMES,
     ...PROTOCOL_PAGES,
     ...DEVELOPING_PAGES,
-    // ...WEBPACK_PAGES,
+    ...WEBPACK_PAGES,
 	...BORROW_MONEY
 );
 
