@@ -135,7 +135,7 @@ class Content extends React.Component{
                     </div>
                 </div>
                 <div className="billContainer">
-                    {this.state.bill.map(list_li)}
+                    {this.state.bill.length > 0 ? this.state.bill.map(list_li) : <span className="no-data"></span>}
                 </div>
             </div>
         )
