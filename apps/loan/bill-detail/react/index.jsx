@@ -60,7 +60,7 @@ const Detail = React.createClass({
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"详情"} />, HEADER_NODE);
     let query = $FW.Format.urlQuery();
-    let loanGid = query.loanGid;
+    let loanGid = query.uuid;
     let user = $FW.Store.getUserDict();
     $FW.Ajax({
         url: `${API_PATH}/api/repayment/v1/loandetail.json`,
@@ -71,7 +71,7 @@ $FW.DOMReady(function () {
             userGid: user.gid,
             userId: user.id,
             sourceType: SOURCE_TYPE,
-            loanGid: loanGid
+            loanUuid: loanGid
         }
     }).then((data) => {
         ReactDOM.render(<Detail data={data} />, CONTENT_NODE);

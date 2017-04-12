@@ -33,16 +33,58 @@ class UserInfoTab extends React.Component {
 }
 
 class InfoItemInputWrap extends React.Component {
+    constructor(props) {
+        super(props);
+        if (this.props.options !== null) {
+            this.state = {
+                expandOpts: false
+            };
+        }
+        this.toggleExpand = this.toggleExpand.bind(this);
+    }
+
+    toggleExpand() {
+        this.setState({
+            expandOpts: !this.state.expandOpts
+        });
+    }
+
     render() {
+        let value = this.props.value;
+        if (this.props.options !== null) {
+            var selectOptions = this.props.options.map((option, index) => (
+                <div className="select-option" key={index} onClick={() => {
+                    this.toggleExpand();
+                    this.props.handleClick(this.props.itemIndex, option);
+                }}>
+                    {option}
+                    {value === option && <img className="selected-icon" src="images/selected.png"></img>
+}
+                </div>
+            ));
+        }
         return (
-            <div className="user-info-input-wrap" id={this.props.infoID}>
-                <span className="info-name">{this.props.infoNameCN}</span>
-                <div className="right-align-container">
-                    <input className="info-content" placeholder={this.props.placeholder}></input>
-                    <div className="right-arrow-container">
-                        <div className="fake-arrow"></div>
+            <div className="user-info-item-wrap">
+                <div className="input-wrap" id={this.props.infoID}>
+                    <span className="info-name">{this.props.infoNameCN}</span>
+                    <div className="right-align-container">
+                        {this.props.options === null
+                            ? (
+                                <input className="info-text-input" placeholder={this.props.placeholder}></input>
+                            )
+                            : (
+                                <span className="select-label" onClick={this.toggleExpand}>{value || this.props.placeholder}</span>
+                            )
+}
+                        <div className="right-arrow-container">
+                            <div className="fake-arrow"></div>
+                        </div>
                     </div>
                 </div>
+                {this.props.options !== null && (this.state.expandOpts && (<div className="select-option-wrap">
+                    {selectOptions}
+                </div>))
+}
             </div>
         )
     }
@@ -52,12 +94,7 @@ class InfoInputGrp extends React.Component {
     render() {
         let infoGrp = this.props.infoGrp;
         let infoItems = infoGrp.map((item, index) => {
-            let subInfoItems = item.map((item, index) => (
-              <InfoItemInputWrap
-                infoNameCN={item.infoNameCN}
-                key={index}
-                placeholder={item.placeholder}/>
-              ));
+            let subInfoItems = item.map((item, subIndex) => (<InfoItemInputWrap infoNameCN={item.infoNameCN} key={subIndex} placeholder={item.placeholder} options={item.options || null} value={item.value} itemIndex={[index, subIndex]} handleClick={this.props.handleClick}/>));
             return (
                 <div className="info-display-block" key={index}>
                     {subInfoItems}
@@ -76,23 +113,23 @@ class UserInfoWrap extends React.Component {
     constructor() {
         super();
         this.state = {
-            selectedTab: 'workInfo',
+            selectedTab: 'basicInfo',
             basicInfo: [
                 [
                     {
                         infoID: 'name-info',
                         infoNameCN: '姓名',
-                        cnt: '',
+                        value: '',
                         placeholder: '未实名'
                     }, {
                         infoID: 'indentity-info',
                         infoNameCN: '身份证号',
-                        cnt: '',
+                        value: '',
                         placeholder: '未实名'
                     }, {
                         infoID: 'credict-card-info',
                         infoNameCN: '信用卡',
-                        cnt: '',
+                        value: '',
                         placeholder: '请填写'
                     }
                 ],
@@ -100,12 +137,13 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'city-info',
                         infoNameCN: '所在城市',
-                        cnt: '',
+                        value: '',
+                        options: [],
                         placeholder: '请选择'
                     }, {
                         infoID: 'address-info',
                         infoNameCN: '现居住地',
-                        cnt: '',
+                        value: '',
                         placeholder: '请填写'
                     }
                 ],
@@ -113,7 +151,10 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'marriage-info',
                         infoNameCN: '婚姻',
-                        cnt: '',
+                        value: '',
+                        options: [
+                            '未婚', '已婚，无子女', '已婚，有子女'
+                        ],
                         placeholder: '请选择'
                     }
                 ]
@@ -123,17 +164,25 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'ec-name-info',
                         infoNameCN: '紧急联系人',
-                        cnt: '',
+                        value: '',
                         placeholder: '未填写'
                     }, {
                         infoID: 'ec-rel-info',
                         infoNameCN: '联系人关系',
-                        cnt: '',
+                        value: '',
+                        options: [
+                            '父母',
+                            '配偶',
+                            '兄弟姐妹',
+                            '同事',
+                            '同学',
+                            '朋友'
+                        ],
                         placeholder: '请选择'
                     }, {
                         infoID: 'ec-mobile-info',
                         infoNameCN: '联系人手机',
-                        cnt: '',
+                        value: '',
                         placeholder: '请输入'
                     }
                 ]
@@ -143,25 +192,40 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'salary-info',
                         infoNameCN: '税后月收入',
-                        cnt: '',
+                        value: '',
+                        options: [
+                            '3000元以下', '3001-5000元', '5001-10000元', '10001-20000元', '20000元以上'
+                        ],
                         placeholder: '请选择'
                     }, {
                         infoID: 'work-years-info',
                         infoNameCN: '工作年限',
-                        cnt: '',
+                        value: '1年以下',
+                        options: [
+                            '1年以下', '1-5年', '6-10年', '10年以上'
+                        ],
                         placeholder: '请选择'
                     }
                 ]
             ]
         }
+        this.handleInput = this.handleInput.bind(this);
     }
+
+    handleInput(index, v) {
+        let selected = this.state.selectedTab;
+        let catInfo = JSON.parse(JSON.stringify(this.state[selected]));
+        catInfo[index[0]][index[1]].value = v;
+        this.setState({[selected]: catInfo});
+    }
+
     render() {
         let selected = this.state.selectedTab;
         return (
-          <div>
-            <UserInfoTab selectedTab={selected} />
-            <InfoInputGrp selectedTab = {selected} infoGrp={this.state[selected]} />
-          </div>
+            <div>
+                <UserInfoTab selectedTab={selected}/>
+                <InfoInputGrp selectedTab={selected} infoGrp={this.state[selected]} handleClick={this.handleInput}/>
+            </div>
         )
     }
 }
