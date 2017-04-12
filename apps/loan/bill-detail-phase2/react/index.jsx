@@ -25,7 +25,10 @@ class BillHistory extends React.Component{
                     <div className="vertical-line"></div>
                 </div>
                 <div className="detail-status">
-                    
+
+                </div>
+                <div className="enter-btn-wrap">
+                    <a className="enter-btn">点击进入读秒</a>
                 </div>
             </div>
         )

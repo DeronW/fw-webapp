@@ -15,33 +15,38 @@ class Content extends React.Component{
         }
         this.tabClickHandler = this.tabClickHandler.bind(this);
     }
-    loadMoreHandler(){
+    loadMoreHandler(done){
+        const USER = $FW.Store.getUserDict();
         let page = this.state.page[this.state.tab];
         if (page == 0) return;
-        let is_Level;
+        let loanStatus;
         if (this.state.tab == 'billApplying') {
-            is_Level = -1
+            loanStatus = 1
         } else if (this.state.tab == 'billReturning') {
-            is_Level = 1
+            loanStatus = 2
         } else if (this.state.tab == 'billFailing') {
-            is_Level = 2
+            loanStatus = 3
         } else if (this.state.tab == 'billPaid') {
-            is_Level = 3
+            loanStatus = 4
         }
 
-     $FW.Post(`${API_PATH}mall/api/index/v1/vip_list.json`,{
-         count:this.count,
-         page:page,
-         vipLevel:is_Level
+     $FW.Post(`${API_PATH}api/order/v1/orderList.json`,{
+         pageSize:this.count,
+         pageIndex:page,
+         loanStatus:loanStatus,
+         token: USER.token,
+         userGid: USER.gid,
+         userId: USER.id,
+         sourceType: SOURCE_TYPE
        }).then((data)=>{
          let tab;
-         if (is_Level == -1) {
+         if (loanStatus == 1) {
              tab = 'billApplying'
-         } else if (is_Level == 1) {
+         } else if (loanStatus == 2) {
              tab = 'billReturning'
-         } else if (is_Level == 2) {
+         } else if (loanStatus == 3) {
              tab = 'billFailing'
-         } else if (is_Level == 3) {
+         } else if (loanStatus == 4) {
              tab = 'billPaid'
          } else {
              done && done();
@@ -84,9 +89,9 @@ class Content extends React.Component{
             )
         };
 
-        let list_li = () => {
+        let list_li = (index) => {
             return (
-                <div className="list_li">
+                <div className="list_li" key={index}>
                     <div className="list-img"><img src="images/dumiao-logo.png"/></div>
                     <div className="list-content">
                         <div className="apply-num">借款金额:2500.00元</div>
@@ -109,14 +114,7 @@ class Content extends React.Component{
                     </div>
                 </div>
                 <div className="billContainer">
-                    {list_li()}
-                    {list_li()}
-                    {list_li()}
-                    {list_li()}
-                    {list_li()}
-                    {list_li()}
-                    {list_li()}
-                    {list_li()}
+                    {this.state.bill.map(list_li)}
                 </div>
             </div>
         )
