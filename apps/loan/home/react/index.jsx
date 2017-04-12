@@ -244,7 +244,7 @@ $FW.DOMReady(function () {
     }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
     }, e => {
-        $FW.Component.Alert(e.message)
+        // $FW.Component.Alert(e.message)
         $FW.Capture(e)
     });
 
