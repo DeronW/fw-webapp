@@ -3,6 +3,7 @@
 class UserInfoItemDisplay extends React.Component {
     render() {
         let height = '100px';
+        let border = this.props.disableBorder ? "none" : "1px solid #ebeaea";
         let wrapStyle = {
             display: "inline-flex",
             position: "relative",
@@ -10,7 +11,7 @@ class UserInfoItemDisplay extends React.Component {
             width: "calc(100% - 18px)",
             height: "100px",
             backgroundColor: "#fff",
-            borderBottom: "1px solid #ebeaea",
+            borderBottom: border,
             color: "#515151",
             verticalAlign: "middle"
         };
@@ -24,7 +25,7 @@ class UserInfoItemDisplay extends React.Component {
             position: "relative",
             width: "40px",
             height: "100%",
-            marginRight: "24px"
+            marginRight: "18px"
         }
         let rightAlignContainerStyle = {
             display: "inline-flex",
@@ -69,7 +70,9 @@ class UserInfoItemDisplay extends React.Component {
                 }
                 <span style={textStyle}>{this.props.infoName}</span>
                 <div style={rightAlignContainerStyle}>
-                    <span style={textStyle}>{this.props.infoContent || this.props.infoDefaultContent}</span>
+                    { this.props.infoContent || this.props.infoDefaultContent !== undefined &&
+                      <span style={textStyle}>{this.props.infoContent || this.props.infoDefaultContent}</span>
+                    }
                     <div style={rightArrowContainerStyle}>
                         <div style={fakeArrowStyle}></div>
                     </div>
