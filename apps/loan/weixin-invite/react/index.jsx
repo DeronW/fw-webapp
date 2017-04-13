@@ -28,7 +28,7 @@ $FW.DOMReady(function () {
     }).then((data) => {
         var shareLink = data.shareTemplate.templateUrl;
         $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
-        $(".invitation-code span").text(USER.invitationCode);
+        $(".invitation-code span").text(USER.invitCode);
     }, () => {
         location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });

@@ -38,6 +38,7 @@ class Content extends React.Component{
          token: USER.token,
          userGid: USER.gid,
          userId: USER.id,
+         uid:USER.uid,
          sourceType: SOURCE_TYPE,
          fail: () => true
        }).then((data)=>{

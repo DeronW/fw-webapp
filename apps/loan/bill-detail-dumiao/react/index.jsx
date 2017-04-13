@@ -28,7 +28,7 @@ class BillDetail extends React.Component{
 
                 </div>
                 <div className="enter-btn-wrap">
-                    <a className="enter-btn" href={`${API_PATH}api/order/v1/jump.html?token=${USER.token}&userGid=${USER.gid}userId=${USER.id}`}>点击进入读秒</a>
+                    <a className="enter-btn" href={`${API_PATH}api/order/v1/jump.html?token=${USER.token}&userGid=${USER.gid}userId=${USER.id}&uid=${USER.uid}`}>点击进入读秒</a>
                 </div>
             </div>
         )
@@ -43,6 +43,7 @@ $FW.DOMReady(function(){
         token: USER.token,
         userGid: USER.gid,
         userId: USER.id,
+        uid:USER.uid,
         sourceType: SOURCE_TYPE
     }).then((data)=>{
         ReactDOM.render(<BillDetail data={data}/>, CONTENT_NODE);
