@@ -1,5 +1,25 @@
-const RegisterContent = React.createClass({
-    render:function () {
+class RegisterContent extends React.Component{
+    constructor(props) {
+
+        super(props);
+        this.state = {
+            phonenumber: "",
+        };
+    }
+    phonenumberHandler(e){
+        this.setState({phonenumber: e.target.value});
+        console.log( e.target.value);
+    }
+    registerHandler(){
+        if(this.state.phonenumber==""){
+            GlobalToast("手机号不能为空")
+        }
+    }
+    isPhoneNumber(){
+
+    }
+    render(){
+        let {phonenumber} = this.state;
         return <div className="aisidiContainer">
             <div className="aisidiTop"></div>
             <div className="banner">
@@ -11,12 +31,12 @@ const RegisterContent = React.createClass({
                     </div>
                     <div className="formContainer">
                         <div className="inputBox">
-                            <input type="text"  className="inputs" placeholder="请输入您的手机号" name="mobile" maxLength="16"/>
+                            <input type="text" value={phonenumber} onChange={this.phonenumberHandler.bind(this)} className="inputs" placeholder="请输入您的手机号" name="mobile" maxLength="16"/>
                         </div>
                         <div className="inputBox">
                             <input type="text"  className="inputs" placeholder="请输入推荐人工场码" />
                         </div>
-                        <div className="registerButton">
+                        <div className="registerButton" onClick={this.registerHandler.bind(this)}>
                             立即注册
                         </div>
                         <div className="tips">
@@ -149,7 +169,7 @@ const RegisterContent = React.createClass({
         </div>
     }
 
-});
+};
 
 $FW.DOMReady(function () {
     ReactDOM.render(<RegisterContent/>, CONTENT_NODE);
