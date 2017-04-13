@@ -10,7 +10,7 @@ module.exports = react = function (src_path, build_path, name, debug) {
     return gulp.src(src_path)
         .pipe(changed(build_path))
         .pipe(plumber())
-        .pipe(babel({presets: ['es2015', 'react']}))
+        .pipe(babel({presets: ['es2015', 'react', 'stage-2']}))
         .pipe(debug ? plugins.util.noop() : js_uglify())
         .pipe(concat(name, {newLine: ';'}))
         .pipe(gulp.dest(build_path));
