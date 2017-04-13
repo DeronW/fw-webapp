@@ -67,8 +67,9 @@ class BillEntry extends React.Component {
                 jumpLink: '/static/loan/bill/index.html?tab=billPaid'
             }
         ];
-        let billType = billTypesObj.map((type, index) => (
-          <BillType billType={type.typeNameCN} src={type.iconImg} key={type.typeNameCN} handleClick={() => {window.location.href = type.jumpLink}}/>));
+        let billType = billTypesObj.map((type, index) => (<BillType billType={type.typeNameCN} src={type.iconImg} key={type.typeNameCN} handleClick={() => {
+            window.location.href = type.jumpLink
+        }}/>));
         return (
             <div className="bill-entry-wrap">
                 <div className="bill-label">账单</div>
@@ -89,24 +90,32 @@ class UserInfoEnterWrap extends React.Component {
     }
 
     handleJump(infoID) {
-        if (infoID === 'personal-info') {
-            window.location.href = '/static/loan/user-info/index.html';
-        } else if (infoID === 'card-info') {
-            const USER = $FW.Store.getUserDict();
-            $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE,
-                productId: 1
-            }).then(data => {
-                if (data.borrowBtnStatus === 1)
+        const USER = $FW.Store.getUserDict();
+        $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
+            token: USER.token,
+            userGid: USER.gid,
+            userId: USER.id,
+            sourceType: SOURCE_TYPE,
+            productId: 1
+        }).then(data => {
+            switch (data.borrowBtnStatus) {
+                case 1: // 未实名
                     window.location.href = '/static/loan/user-card-set/index.html';
-                if (data.borrowBtnStatus === 101)
-                    $FW.Component.Toast('设置提现卡处理中，请稍等');
-                }
-            )
-        }
+                    break;
+                case 101: // 实名中
+                    if (infoID === 'card-info') {
+                        $FW.Component.Toast('设置提现卡处理中，请稍等');
+                        break;
+                    }
+                default:
+                    if (infoID === 'personal-info') {
+                        window.location.href = '/static/loan/user-info/index.html';
+                    }
+                    if (infoID === 'card-info') {
+                        window.location.href = '/static/loan/user-card-management/index.html';
+                    }
+            }
+        })
     }
 
     render() {
@@ -185,6 +194,7 @@ $FW.DOMReady(() => {
         token: USER.token,
         uid: USER.uid
     }).then(data => {
-        ReactDOM.render(<UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
+        ReactDOM.render(
+            <UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
     }, e => $FW.Component.Toast(e.message));
 })
