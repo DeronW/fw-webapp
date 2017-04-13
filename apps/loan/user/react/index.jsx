@@ -24,7 +24,9 @@ class FollowWXEntry extends React.Component {
                 </div>
                 <span>关注微信</span>
                 <div className="right-align-container">
-                    <div className="next-icon-container" onClick={() => {window.location.href = '/static/loan/user-weixin/index.html';}}>
+                    <div className="next-icon-container" onClick={() => {
+                        window.location.href = '/static/loan/user-weixin/index.html';
+                    }}>
                         <img src="images/next_arrow.png" alt="next arrow"></img>
                     </div>
                 </div>
@@ -70,13 +72,23 @@ class BillEntry extends React.Component {
 }
 
 class UserInfoEnterWrap extends React.Component {
+    constructor() {
+        super();
+        this.handleJump = this.handleJump.bind(this);
+    }
+
+    handleJump(infoID) {
+        if (infoID === 'personal-info') {
+            window.location.href = '/static/loan/user-info/index.html';
+        } else if (infoID === 'card-info') {}
+    }
+
     render() {
         return (
-            <div className="user-info-display-wrap" id={this.props.infoID}>
+            <div className="user-info-display-wrap" id={this.props.infoID} onClick={() => {this.handleJump(this.props.infoID)}}>
                 {this.props.iconSrc !== null && <div className="info-icon-container">
                     <img src={this.props.iconSrc}></img>
-                </div>
-}
+                </div>}
                 <span className="info-name">{this.props.infoNameCN}</span>
                 <div className="right-align-container">
                     <div className="right-arrow-container">
@@ -104,7 +116,7 @@ class MajorUserInfo extends React.Component {
             }
         ];
 
-        let infoItems = majorInfo.map((item, index) => (<UserInfoEnterWrap iconSrc={item.iconSrc} infoNameCN={item.infoNameCN} key={index}/>));
+        let infoItems = majorInfo.map((item, index) => (<UserInfoEnterWrap iconSrc={item.iconSrc} infoID={item.infoID} infoNameCN={item.infoNameCN} key={index}/>));
         return (
             <div className="info-display-block">
                 {infoItems}
@@ -137,8 +149,8 @@ function maskInfo(text, sIndex, eIndex) {
 
 // render ReactDom
 $FW.DOMReady(() => {
-ReactDOM.render(
-    <UserInfoWrap/>, CONTENT_NODE);
-ReactDOM.render(
-    <BottomNavBar/>, BOTTOM_NAV_NODE);
+    ReactDOM.render(
+        <UserInfoWrap/>, CONTENT_NODE);
+    ReactDOM.render(
+        <BottomNavBar/>, BOTTOM_NAV_NODE);
 })
