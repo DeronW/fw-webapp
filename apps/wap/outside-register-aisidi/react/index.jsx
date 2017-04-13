@@ -56,14 +56,14 @@ const RegisterContent = React.createClass({
                 <div className="box33">
                     <div className="box-left">
                         <div>用户投资金额</div>
-                        <div>
+                        <div className="data">
                             <span className="number">11</span>亿
                             <span className="number">33333</span>万元
                         </div>
                     </div>
                     <div className="box-left">
                         <div>用户投资金额</div>
-                        <div>
+                        <div className="data">
                             <span className="number">22</span>亿
                             <span className="number">33333</span>万元
                         </div>
@@ -101,6 +101,50 @@ const RegisterContent = React.createClass({
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="need">
+                <div className="need-title">
+                    <img src="images/need-title.jpg" alt=""/>
+                </div>
+                <div className="need-wrap clearfix">
+                    <div className="need-icon need-icon1">
+                        <img src="images/need-icon1.jpg" alt=""/>
+                    </div>
+                    <div className="need-tips">
+                        如果您是爱施德体系内的优质分销商，提交融资申请，增加资金流动性，实现收益最大化。
+                        <a href="javascript:void(0)" className="lend1">企业借款>></a>
+                    </div>
+                </div>
+                <div className="need-wrap clearfix">
+                    <div className="need-icon need-icon2">
+                        <img src="images/need-icon2.jpg" alt=""/>
+                    </div>
+                    <div className="need-tips need-tips2">
+                        短期资金周转，用身份证就能借款，500-10000额度，
+                        <a href="https://jkentry.weshare.com.cn/regisiter.html?c=22500" className="lend1">
+                            个人借款>></a>
+                    </div>
+                </div>
+            </div>
+            <div className="box5">
+                <div className="shouye-foot">
+                    <div className="foot-a clearfix">
+                        <a href="javascript:window.location.href='https://www.9888.cn/top/index.do?pc=1'">PC首页</a>
+                        <a href="javascript:window.location.href='https://bbs.9888.cn'">工友之家</a>
+                        <a href="javascript:toAppLoad();">下载APP</a>
+                        <a href="https://m.9888.cn/static/wap/about-us/index.html">关于我们</a>
+                        <a href="https://m.9888.cn/static/wap/test-information-disclosure/index.html">信息披露</a>
+                    </div>
+                    <div className="copyRight clearfix">
+                        ©2017 金融工场版权所有
+                    </div>
+                    <div className="copyRight-down">
+                        北京凤凰信用管理有限公司
+                    </div>
+                </div>
+            </div>
+            <div className="foot" style={{display:"block"}}>
+                <a href="#" className="btn-foot">立即领取新手礼包</a>
             </div>
         </div>
     }

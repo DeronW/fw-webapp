@@ -113,15 +113,14 @@
     .title{
       width: 3.74rem;
       height: 0.77rem;
-      padding: 0 1.72rem 0.43rem 1.74rem;
+      margin: 0 auto;
       background: url("../images/feature-logo.png") no-repeat center;
-      background-size: 56%;
       margin-bottom:0.5rem;
     }
     .contentbox{
-      width:6.32rem;
+      width:5.32rem;
       height: 1.96rem;
-      padding: 0 .4rem 0.63rem 0.48rem;
+      margin: 0 auto;
       .bottom{
         margin-bottom: 0.36rem;
       }
@@ -143,12 +142,15 @@
           float: left;
         }
         .c-right{
-          width: 5.16rem;
+          width: 4rem;
           height: 0.8rem;
           padding-left: 0.3rem;
-          float: right;
+          float: left;
           color: #999;
-          font-size: 16px;
+          font-size: 24px;
+          line-height: -0.2rem;
+          margin-top: 0;
+          font-family: "microsoft yahei";
         }
       }
 
@@ -172,16 +174,21 @@
       }
     }
     .box33{
-      padding: 1% 3.4% 0;
+      padding: 3% 3.4% 0;
       .box-left{
         float: left;
         width: 50%;
         text-align: center;
         color: #666;
-        font: 12px/1.2 "microsoft yahei";
+        font: 15px/1.2 "microsoft yahei";
+        .data{
+          margin-top: 0.1rem;
+          font-size: 20px/1.2 "microsoft yahei";
+        }
         .number{
-          font: 18px/1.2 "microsoft yahei";
+          font: 24px/1.2 "microsoft yahei";
           color: #ef758a;
+          margin: 0 0.05rem;
         }
       }
     }
@@ -200,15 +207,98 @@
         width: 50%;
         text-align: center;
         .btm-img {
-          width: 54%;
+          width: 44%;
           margin: 0 auto;
+          margin-left: 1.1rem;
           img{
             width: 100%;
             vertical-align: top;
 
           }
         }
+        .btm-text1{
+          font: 24px/1.8 "microsoft yahei";
+          color: #1cb0f6;
+        }
       }
+    }
+  }
+  .need{
+    .need-title{
+
+    }
+    .need-wrap{
+      padding: 0 6% 6%;
+      .need-icon{
+        width: 13%;
+        float: left;
+      }
+      .need-icon1{
+        margin-top: 2%;
+      }
+      .need-icon2{
+
+      }
+      .need-tips{
+        margin-left: 5%;
+        width: 82%;
+        float: left;
+        font: 20px/1.2 "microsoft yahei";
+        margin-top: 3%;
+        line-height: 0.3rem;
+        color: #555;
+        a{
+          display: block;
+          color: #1cb0f6;
+        }
+      }
+    }
+  }
+  .box5{
+    .shouye-foot{
+      padding: 0 0.5rem 0.6rem;
+      .foot-a{
+        height: 0.4rem;
+        margin-bottom: 0.3rem;
+        a{
+          display: block;
+          float: left;
+          height: 0.4rem;
+          width: 20%;
+          text-align: center;
+          color: #8296af;
+          line-height: 0.4rem;
+          font-size: 0.24rem;
+        }
+      }
+      .copyRight{
+        line-height: 0.16rem;
+        font-size: 0.2rem;
+        text-align: center;
+        color: #999;
+        margin: 0.15rem auto;
+      }
+      .copyRight-down{
+        font-size: 0.18rem;
+        color: #555;
+        text-align: center;
+      }
+    }
+  }
+  .foot{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    padding: 16px 20%;
+    background-color: rgba(5,3,19,0.7);
+    .btn-foot{
+      display: block;
+      font: 20px/2.5 "microsoft yahei";
+      color: #fff;
+      text-align: center;
+      border-radius: 4px;
+      background-color: #da4771;
     }
   }
 }
