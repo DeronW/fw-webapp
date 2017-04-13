@@ -72,7 +72,6 @@ const Mall = React.createClass({
             paddingBottom: "20px",
             transition: "1s all"
         };
-
         let Charge_Nav = <div className="charge-nav">
             <div className="charge-bill"><img src="images/charge-bill.png" /></div>
             <div className="charge-flow"><img src="images/charge-flow.png" /></div>

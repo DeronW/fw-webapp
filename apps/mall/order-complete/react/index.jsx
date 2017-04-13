@@ -37,7 +37,7 @@ const Success = React.createClass({
                 </div>
                 <div className="scan-code">
                         <img className="code" src="/static/mall/order-complete/images/QR-code.png" />
-                        <p className="QR-code-notice">长按二维码关注豆哥商城111</p>
+                        <p className="QR-code-notice">长按二维码关注豆哥商城</p>
                     </div>
             </div>
         )

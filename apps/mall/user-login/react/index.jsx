@@ -1,7 +1,6 @@
 function removeAllSpace(str) {
     return str.replace(/\s+/g, "");
 }
-
 const Login = React.createClass({
     getInitialState: function () {
         this.tabs = ['veri'];//, 'pwd'
