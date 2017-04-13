@@ -3,7 +3,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
     var page = 1;
     var loadNextPage = true;
-    $("#tab-content").height($(document).height() - 535 + "px");
+    $("#tab-content").height($(document).height() - 425 + "px");
     $(".tabs span").click(function () {
         var index = $(this).index();
         $(this).addClass('selected').siblings().removeClass('selected');
