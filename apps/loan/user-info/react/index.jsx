@@ -252,7 +252,23 @@ class UserInfoWrap extends React.Component {
     }
 
     handleSubmit() {
-        this.setState({showSubmitBtn: false});
+        $FW.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
+            token: USER.token,
+            uid: USER.uid,
+            email: USER.email,
+            creditCard: this.state.basicInfo[0][2].value,
+            city: this.state.basicInfo[1][0].value,
+            address: this.state.basicInfo[1][1].value,
+            homeSituation: this.state.basicInfo[2][0].value,
+            emContact: this.state.ecInfo[0][0].value,
+            emMobile: this.state.ecInfo[0][1].value,
+            emRelationship: this.state.ecInfo[0][2].value,
+            income: this.state.workInfo[0][0].value,
+            workExperience: this.state.workInfo[0][1].value
+        }).then(data => {
+            $FW.Component.Toast('信息已提交');
+            this.setState({showSubmitBtn: false});
+        }, e => $FW.Component.Toast(e.message));
     }
 
     render() {
