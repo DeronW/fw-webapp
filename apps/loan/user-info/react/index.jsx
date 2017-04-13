@@ -59,7 +59,7 @@ class InfoItemInputWrap extends React.Component {
             var selectOptions = this.props.options.map((option, index) => (
                 <div className="select-option" key={index} onClick={() => {
                     this.toggleExpand();
-                    this.props.handleInput(this.props.itemIndex, option);
+                    this.props.handleInput(this.props.itemIndex, index);
                 }}>
                     {option}
                     {value === option && <img className="selected-icon" src="images/selected.png"></img>
@@ -67,7 +67,7 @@ class InfoItemInputWrap extends React.Component {
                 </div>
             ));
         }
-        let selectLabelColor = value
+        let selectLabelColor = value !== null
             ? '#333'
             : '#999';
         return (
@@ -84,7 +84,7 @@ class InfoItemInputWrap extends React.Component {
                             : (
                                 <span className="select-label" onClick={this.toggleExpand} style={{
                                     color: selectLabelColor
-                                }}>{value || this.props.placeholder}</span>
+                                }}>{value !== null ? this.props.options[value] : this.props.placeholder}</span>
                             )
 }
                         {this.props.options !== null && <div className="right-arrow-container" onClick={this.toggleExpand}>
@@ -132,8 +132,8 @@ class SubmitBtn extends React.Component {
 }
 
 class UserInfoWrap extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             selectedTab: 'basicInfo',
             showSubmitBtn: false,
@@ -142,17 +142,17 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'name-info',
                         infoNameCN: '姓名',
-                        value: '',
+                        value: this.props.userInfo.realName,
                         placeholder: '未实名'
                     }, {
                         infoID: 'indentity-info',
                         infoNameCN: '身份证号',
-                        value: '',
+                        value: this.props.userInfo.idCard,
                         placeholder: '未实名'
                     }, {
                         infoID: 'credict-card-info',
                         infoNameCN: '信用卡',
-                        value: '',
+                        value: this.props.userInfo.creditCard,
                         placeholder: '请填写'
                     }
                 ],
@@ -160,13 +160,13 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'city-info',
                         infoNameCN: '所在城市',
-                        value: '',
+                        value: this.props.userInfo.city,
                         options: [],
                         placeholder: '请选择'
                     }, {
                         infoID: 'address-info',
                         infoNameCN: '现居住地',
-                        value: '',
+                        value: this.props.userInfo.address,
                         placeholder: '请填写'
                     }
                 ],
@@ -174,7 +174,7 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'marriage-info',
                         infoNameCN: '婚姻',
-                        value: '',
+                        value: this.props.userInfo.homeSituation,
                         options: [
                             '未婚', '已婚，无子女', '已婚，有子女'
                         ],
@@ -187,15 +187,16 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'ec-name-info',
                         infoNameCN: '紧急联系人',
-                        value: '',
+                        value: this.props.userInfo.emContact,
                         placeholder: '未填写'
                     }, {
                         infoID: 'ec-rel-info',
                         infoNameCN: '联系人关系',
-                        value: '',
+                        value: this.props.userInfo.emRelationship,
                         options: [
                             '父母',
                             '配偶',
+                            '子女',
                             '兄弟姐妹',
                             '同事',
                             '同学',
@@ -205,7 +206,7 @@ class UserInfoWrap extends React.Component {
                     }, {
                         infoID: 'ec-mobile-info',
                         infoNameCN: '联系人手机',
-                        value: '',
+                        value: this.props.userInfo.emMobile,
                         placeholder: '请输入'
                     }
                 ]
@@ -215,7 +216,7 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'salary-info',
                         infoNameCN: '税后月收入',
-                        value: '',
+                        value: this.props.userInfo.income,
                         options: [
                             '3000元以下', '3001-5000元', '5001-10000元', '10001-20000元', '20000元以上'
                         ],
@@ -223,7 +224,7 @@ class UserInfoWrap extends React.Component {
                     }, {
                         infoID: 'work-years-info',
                         infoNameCN: '工作年限',
-                        value: '1年以下',
+                        value: this.props.userInfo.workExperience,
                         options: [
                             '1年以下', '1-5年', '6-10年', '10年以上'
                         ],
@@ -251,7 +252,23 @@ class UserInfoWrap extends React.Component {
     }
 
     handleSubmit() {
-        this.setState({showSubmitBtn: false});
+        $FW.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
+            token: USER.token,
+            uid: USER.uid,
+            email: USER.email,
+            creditCard: this.state.basicInfo[0][2].value,
+            city: this.state.basicInfo[1][0].value,
+            address: this.state.basicInfo[1][1].value,
+            homeSituation: this.state.basicInfo[2][0].value,
+            emContact: this.state.ecInfo[0][0].value,
+            emMobile: this.state.ecInfo[0][1].value,
+            emRelationship: this.state.ecInfo[0][2].value,
+            income: this.state.workInfo[0][0].value,
+            workExperience: this.state.workInfo[0][1].value
+        }).then(data => {
+            $FW.Component.Toast('信息已提交');
+            this.setState({showSubmitBtn: false});
+        }, e => $FW.Component.Toast(e.message));
     }
 
     render() {
@@ -266,10 +283,17 @@ class UserInfoWrap extends React.Component {
     }
 }
 
+const USER = $FW.Store.getUserDict();
+
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(
         <Header title="个人信息"/>, HEADER_NODE);
-    ReactDOM.render(
-        <UserInfoWrap/>, CONTENT_NODE);
+    $FW.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`, {
+        token: USER.token,
+        uid: USER.uid
+    }).then(data => {
+        ReactDOM.render(
+            <UserInfoWrap userInfo={data}/>, CONTENT_NODE);
+    }, e => $FW.Component.Toast(e.message));
 })

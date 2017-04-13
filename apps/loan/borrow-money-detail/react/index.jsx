@@ -68,6 +68,16 @@ class BorrowMoneyDetailTop extends React.Component {
 	}
 }
 
+class Btn extends React.Component {
+	render() {
+		return (
+			<div className="footer">
+				<div className="btn">马上拿钱</div>	
+			</div>		
+		)
+	}
+}
+
 class BorrowMoneyDatailList extends React.Component {
 	render() {
 		let imgUrl = (index) => {
@@ -106,6 +116,8 @@ class BorrowMoney extends React.Component {
 				<BorrowMoneyDetailTop />
 
 				<BorrowMoneyDatailList />
+
+				<Btn />
 			</div>
 		)
 	}	

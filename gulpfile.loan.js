@@ -68,7 +68,8 @@ const DEVELOPING_PAGES = [
 //借钱
 const BORROW_MONEY = [
 	'borrow-money',
-	'borrow-money-detail'
+	'borrow-money-detail',
+	'apply-borrow-money'
 ]
 
 // Beta项目, 使用 webpack 编译指定页面
