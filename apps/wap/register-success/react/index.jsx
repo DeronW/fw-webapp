@@ -147,7 +147,7 @@ var AccountSucceedBody = React.createClass({
                 <Btn btnText={"下载APP"} Fun={this.clickHandler}/>
 
 				<div className="link-home">
-					<a href="m.9888.cn">去首页转转</a>
+					<a href="https://m.9888.cn">去首页转转</a>
 				</div>
 
                 {
