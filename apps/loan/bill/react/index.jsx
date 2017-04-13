@@ -31,7 +31,7 @@ class Content extends React.Component{
             loanStatus = 4
         }
 
-     $FW.Post(`${API_PATH}api/order/v1/orderList.json`,{
+     $FW.Post(`${API_PATH}/api/order/v1/orderList.json`,{
          pageSize:this.count,
          pageIndex:page,
          loanStatus:loanStatus,
