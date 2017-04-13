@@ -23,14 +23,14 @@ class SumList extends React.Component {
 				<div className="list">
 					<div className="name-text">借款金额</div>
 					<div className="r">
-						<div className="text">{ getPopVal == '' ?  '请输入' : getPopVal.val }</div>
+						<div className="text">{  }</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
 				<div className="list">
 					<div className="name-text">期限</div>
 					<div className="r">
-						<div className="text">{ getPopVal == '' ? '请选择' : getPopVal.deadline + '个月' }</div>
+						<div className="text"> 请选择</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
@@ -171,9 +171,9 @@ class Btn extends React.Component {
 		
 	}
 	handlerBtn(val) {
-		const { btnValFun, popInfoFunProps } = this.props
+		const { btnValFun, getPopInfoProps } = this.props
 
-		popInfoFunProps(false, btnValFun())	
+		getPopInfoProps(btnValFun())	
 	}
 	render() {
 		return (
@@ -214,9 +214,10 @@ class WindowPop extends React.Component {
 
 	}	
 	handlerBack() {
-		const { popInfoFun } = this.props
+		const { getPopShow } = this.props
+		console.log(getPopShow)
 
-		popInfoFun(false)
+		getPopShow(false)
 	}
 
 	changeInput(e) {
@@ -284,12 +285,12 @@ class WindowPop extends React.Component {
 	callbackBtnVal(val) {
 		return {
 			val: this.state.inputVal,
-			deadline: this.state.deadlineVal
+			deadlineVal: this.state.deadlineVal
 		}
 	}
 
 	render() {
-		const { selectList, popTitle, popInfoFun } = this.props
+		const { selectList, popTitle, getPopInfo } = this.props
 
 		let deadlineList = () => {
 			return 
@@ -349,7 +350,7 @@ class WindowPop extends React.Component {
 					</div>
 				</div>
 
-				<Btn btnValFun = { this.callbackBtnVal.bind(this) } popInfoFunProps = { popInfoFun } />
+				<Btn btnValFun = { this.callbackBtnVal.bind(this) }  getPopInfoProps = { getPopInfo } />
 			</div>
 		)
 	}
@@ -362,9 +363,10 @@ class ApplyBorrowMoney extends React.Component {
 			popShow: false,
 			selectList: '',
 			popTitle: '',
-			sumMoney: '',
-			deadlineVal: '',
-			popInfoObj: '' 
+			sumMoneyObj: {
+				val: '',
+				deadlineVal: ''
+			}
 		}
 	}
 	callbackSelectList(selectList, title, popShow) {
@@ -374,16 +376,24 @@ class ApplyBorrowMoney extends React.Component {
 			selectList: selectList
 		})	
 	}
-	callbackPopInfo(popShow, obj) {
+	callbackSumPopInfo(obj) {
+		console.log(obj)
 		this.setState({
-			popShow: popShow,
-			popInfoObj: obj
+			sumMoneyObj: {
+				val: obj.val,
+				deadlineVal: obj.deadlineVal
+			}
+		})
+	}
+	callbackPopShow(popShow) {
+		this.setState({
+			popShow: popShow
 		})
 	}
 	render() {
 		return (
 			<div className="">
-				<SumList selectListFun = { this.callbackSelectList.bind(this) } getPopVal = { this.state.popInfoObj } />
+				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyObj } />
 				<BasicInfo />
 				<UrgentContactPerson />
 				<JobInfo />
@@ -393,7 +403,8 @@ class ApplyBorrowMoney extends React.Component {
 				{ this.state.popShow ?  <WindowPop  
 					selectList={ this.state.selectList } 
 					popTitle = { this.state.popTitle }
-					popInfoFun = { this.callbackPopInfo.bind(this) }
+					getPopInfo = { this.callbackSumPopInfo.bind(this) }
+					getPopShow = { this.callbackPopShow.bind(this) }
 				/> : null } 
 			</div>
 		)
