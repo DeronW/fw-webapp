@@ -11,7 +11,7 @@ const react = require('./react.js');
 const images = require('./images.js');
 const copy = require('./copy.js');
 const revision = require('./revision.js');
-const webpack_task = require('./webpack.vue.js');
+const webpack_task = require('./webpack.js');
 
 const REACT_PATH = 'react-15.5.0';
 

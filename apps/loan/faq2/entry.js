@@ -1,32 +1,86 @@
+import { render } from 'react-dom';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+
 
 import React, { Component } from 'react';
-import { render, findDOMNode } from 'react-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import { deepOrange500 } from 'material-ui/styles/colors';
+import FlatButton from 'material-ui/FlatButton';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-class App extends React.Component {
-    constructor() {
-        console.log('constructor2', typeof (props))
-        super()
+const styles = {
+    container: {
+        textAlign: 'center',
+        paddingTop: 200,
+    },
+};
+
+const muiTheme = getMuiTheme({
+    palette: {
+        accent1Color: deepOrange500,
+    },
+});
+
+class App extends Component {
+    constructor(props, context) {
+        super(props, context);
+
         this.state = {
-            a: 1
-        }
+            open: false,
+        };
     }
-    clickHandler() {
 
-        console.log('clickHandler', this)
-        console.log('clickHandler props', this.props)
-        console.log('clickHandler state', this.state)
-
+    handleRequestClose = () => {
+        this.setState({
+            open: false,
+        });
     }
+
+    handleTouchTap = () => {
+        this.setState({
+            open: true,
+        });
+    }
+
     render() {
-        console.log('render', this)
-        console.log('render', this.props)
+        const standardActions = (
+            <FlatButton
+                label="Ok"
+                primary={true}
+                onTouchTap={this.handleRequestClose}
+            />
+        );
+
         return (
-            <div>
-                <h1 onClick={this.clickHandler}>Hello webpack</h1>
-                <h1 onClick={this.clickHandler.bind(this)}>Hello webpack2</h1>
-            </div>
-        )
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <div style={styles.container}>
+                    <Dialog
+                        open={this.state.open}
+                        title="Super Secret Password"
+                        actions={standardActions}
+                        onRequestClose={this.handleRequestClose}
+                    >
+                        1-2-3-4-5
+          </Dialog>
+                    <h1>Material-UI</h1>
+                    <h2>example project</h2>
+                    <RaisedButton
+                        label="Super Secret Password"
+                        secondary={true}
+                        onTouchTap={this.handleTouchTap}
+                    />
+                </div>
+            </MuiThemeProvider>
+        );
     }
 }
-render(<App t={1} />, document.getElementById('app'));
+
+render(<App />, document.getElementById('app'));
 

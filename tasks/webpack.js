@@ -17,13 +17,13 @@ module.exports = function (site_name, page_name, options) {
         },
         module: {
             rules: [
-               {
-                test: /\.(js|jsx)$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'react']
+                {
+                    test: /\.(js|jsx)$/,
+                    loader: 'babel-loader',
+                    query: {
+                        presets: ['es2015', 'react', 'stage-2']
+                    }
                 }
-               }
             ]
         },
         plugins: [
