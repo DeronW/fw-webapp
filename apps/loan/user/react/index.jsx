@@ -24,7 +24,7 @@ class FollowWXEntry extends React.Component {
                 </div>
                 <span>关注微信</span>
                 <div className="right-align-container">
-                    <div className="next-icon-container">
+                    <div className="next-icon-container" onClick={() => {window.location.href = '/static/loan/user-weixin/index.html';}}>
                         <img src="images/next_arrow.png" alt="next arrow"></img>
                     </div>
                 </div>
