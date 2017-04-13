@@ -61,7 +61,9 @@ const Register = React.createClass({
                     token: dict.userToken,
                     id: dict.userId,
                     gid: dict.userGid,
-                    status: dict.userStatus
+                    status: dict.userStatus,
+                    invitCode:dict.invitCode,
+                    uid:dict.uid
                 })
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message));
