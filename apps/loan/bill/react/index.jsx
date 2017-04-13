@@ -38,6 +38,7 @@ class Content extends React.Component{
          token: USER.token,
          userGid: USER.gid,
          userId: USER.id,
+         uid:USER.uid,
          sourceType: SOURCE_TYPE,
          fail: () => true
        }).then((data)=>{
@@ -93,6 +94,7 @@ class Content extends React.Component{
 
         let list_li = (item,index) => {
             let status = parseInt(item.baseStauts);
+            let uuid = item.uuid;
             let baseStatus;
             let statusColor;
             switch(status){
@@ -114,7 +116,7 @@ class Content extends React.Component{
                     break;
             }
             return (
-                <a className="list_li" key={index} href={item.productId == 1 ? "/static/loan/bill-detail/index.html" : "/static/loan/bill-detail-dumiao/index.html"}>
+                <a className="list_li" key={index} href={item.productId == 1 ? `/static/loan/bill-detail/index.html?uuid=${uuid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${uuid}`}>
                     <div className="list-img"><img src={item.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png"}/></div>
                     <div className="list-content">
                         <div className="apply-num">借款金额:{item.loanAmtStr}元</div>

@@ -31,7 +31,7 @@ class BottomNavBar extends React.Component {
         let isActiveTab = (tab) => {
             let pt = location.pathname, cnd = false;
             if(tab === 'home' && pt === '/') cnd = true;
-            return pt.match(`/static/loan/${tab}` || cnd)
+            return pt.match(`/static/loan/${tab}`) || cnd
         }
 
         const STYLE_TAB_BASE = {
@@ -59,7 +59,7 @@ class BottomNavBar extends React.Component {
         }
         let _style_tab_a = Object.assign({}, STYLE_TAB_BASE, tabColor('home'))
         let _style_tab_bill = Object.assign({}, STYLE_TAB_BASE, tabColor('bill'))
-        let _style_tab_invite = Object.assign({}, STYLE_TAB_BASE,tabColor('invite'))
+        let _style_tab_invite = Object.assign({}, STYLE_TAB_BASE,tabColor('weixin-invite'))
         let _style_tab_self = Object.assign({}, STYLE_TAB_BASE, tabColor('user'))
         let _style_tab_more = Object.assign({}, STYLE_TAB_BASE, tabColor('more'))
         let _style_tab_a_icon = Object.assign({}, STYLE_ICON_BASE, {

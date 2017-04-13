@@ -72,7 +72,6 @@ const Mall = React.createClass({
             paddingBottom: "20px",
             transition: "1s all"
         };
-
         let Charge_Nav = <div className="charge-nav">
             <div className="charge-bill"><img src="images/charge-bill.png" /></div>
             <div className="charge-flow"><img src="images/charge-flow.png" /></div>
@@ -87,7 +86,7 @@ const Mall = React.createClass({
                         <a href="/static/mall/product-list/index.html?searchSourceType=2"
                             className="search-bar-a">
                             <img className="search-icon" src="images/search-icon.png" />
-                            <div className="search-bar">请输入关键字</div>
+                            <div className="search-bar">请您输入关键字。。。</div>
                         </a>
                         <a className="index-avatar" href="/static/mall/user/index.html">
                             <img src={this.state.avatarImage} /></a>

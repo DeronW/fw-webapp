@@ -200,8 +200,8 @@ class ApplyLoan extends React.Component {
         return (
             <div className="apply-loan">
                 {!$FW.Browser.inApp() && <div className="header">放心花</div>}
-                {$FW.Browser.inApp() && <div className="ad">
-                    <a onClick={() => gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png" /></a>
+                {false && $FW.Browser.inApp() && <div className="ad">
+                    <a onClick={()=>gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png"/></a>
                 </div>}
                 <div className={$FW.Browser.inApp() ? "app-loan-num" : "loan-num"}>
                     {this.getBorrowBtn()}
@@ -244,7 +244,7 @@ $FW.DOMReady(function () {
     }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
     }, e => {
-        $FW.Component.Alert(e.message)
+        // $FW.Component.Alert(e.message)
         $FW.Capture(e)
     });
 

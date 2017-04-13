@@ -137,13 +137,13 @@ const SetCashCard = React.createClass({
                     </div>
                 </div>
 
-                <div className="clause">
+                {/*<div className="clause">
                     <span className={"icon " + (this.state.selectClause ? "select-icon" : "icon")} onClick={this.handlerClause}></span>
                     <span className="text">
                         同意
 						<a href='/static/loan/protocol-cost/index.html'>《代扣服务协议》</a>
                     </span>
-                </div>
+                </div>*/}
 
                 <div className="next-btn">
                     <div onClick={this.handlerNext} className="ui-btn">下一步</div>

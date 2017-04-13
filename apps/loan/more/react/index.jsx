@@ -24,6 +24,7 @@ let More = React.createClass({
     render: function () {
         return (
             <div>
+                <div className="header">更多</div>
                 <img src="images/hotline.jpg"/>
                 <div className="more-cnt">
                     <div className="more-list">
@@ -89,7 +90,7 @@ let More = React.createClass({
 });
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={"更多"} />, HEADER_NODE);
     ReactDOM.render(<More />, CONTENT_NODE);
+    ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
 })
 
