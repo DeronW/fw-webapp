@@ -27,7 +27,12 @@ class UserInfoTab extends React.Component {
             )
         });
         return (
-            <ul className="info-tab">{infoTabGrp}</ul>
+            <ul className="info-tab" onClick={(e) => {
+                if (!e.target.id) {
+                    return
+                }
+                this.props.handleClick(e.target.id)
+            }}>{infoTabGrp}</ul>
         )
     }
 }
@@ -35,10 +40,9 @@ class UserInfoTab extends React.Component {
 class InfoItemInputWrap extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {};
         if (this.props.options !== null) {
-            this.state = {
-                expandOpts: false
-            };
+            this.state.expandOpts = false;
         }
         this.toggleExpand = this.toggleExpand.bind(this);
     }
@@ -63,29 +67,37 @@ class InfoItemInputWrap extends React.Component {
                 </div>
             ));
         }
+        let selectLabelColor = value
+            ? '#333'
+            : '#999';
         return (
             <div className="user-info-item-wrap">
                 <div className="input-wrap" id={this.props.infoID}>
                     <span className="info-name">{this.props.infoNameCN}</span>
                     <div className="right-align-container">
-                        { this.props.options === null
+                        {this.props.options === null
                             ? (
-                                <input className="info-text-input" placeholder={this.props.placeholder} value={this.props.value} onChange={(e) => {this.props.handleInput(this.props.itemIndex, e.target.value)}}></input>
+                                <input className="info-text-input" placeholder={this.props.placeholder} value={this.props.value} onChange={(e) => {
+                                    this.props.handleInput(this.props.itemIndex, e.target.value)
+                                }}></input>
                             )
                             : (
-                                <span className="select-label" onClick={this.toggleExpand}>{value || this.props.placeholder}</span>
+                                <span className="select-label" onClick={this.toggleExpand} style={{
+                                    color: selectLabelColor
+                                }}>{value || this.props.placeholder}</span>
                             )
-                        }
-                        { this.props.options !== null &&
-                            <div className="right-arrow-container" onClick={this.toggleExpand}>
-                                <div className="fake-arrow"></div>
-                            </div>
-                        }
+}
+                        {this.props.options !== null && <div className="right-arrow-container" onClick={this.toggleExpand}>
+                            <div className="fake-arrow"></div>
+                        </div>
+}
                     </div>
                 </div>
-                {this.props.options !== null && (this.state.expandOpts && (<div className="select-option-wrap">
-                    {selectOptions}
-                </div>))
+                {this.state.expandOpts && (
+                    <div className="select-option-wrap">
+                        {selectOptions}
+                    </div>
+                )
 }
             </div>
         )
@@ -96,7 +108,7 @@ class InfoInputGrp extends React.Component {
     render() {
         let infoGrp = this.props.infoGrp;
         let infoItems = infoGrp.map((item, index) => {
-            let subInfoItems = item.map((item, subIndex) => (<InfoItemInputWrap infoNameCN={item.infoNameCN} key={subIndex} placeholder={item.placeholder} options={item.options || null} value={item.value} itemIndex={[index, subIndex]} handleInput={this.props.handleInput}/>));
+            let subInfoItems = item.map((item, subIndex) => (<InfoItemInputWrap infoNameCN={item.infoNameCN} key={item.infoID} placeholder={item.placeholder} options={item.options || null} value={item.value} itemIndex={[index, subIndex]} handleInput={this.props.handleInput}/>));
             return (
                 <div className="info-display-block" key={index}>
                     {subInfoItems}
@@ -111,11 +123,20 @@ class InfoInputGrp extends React.Component {
     }
 }
 
+class SubmitBtn extends React.Component {
+    render() {
+        return (
+            <div className="submit-btn" onClick={this.props.handleClick}>提交</div>
+        )
+    }
+}
+
 class UserInfoWrap extends React.Component {
     constructor() {
         super();
         this.state = {
             selectedTab: 'basicInfo',
+            showSubmitBtn: false,
             basicInfo: [
                 [
                     {
@@ -211,22 +232,35 @@ class UserInfoWrap extends React.Component {
                 ]
             ]
         }
+        this.shiftTab = this.shiftTab.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    shiftTab(tabName) {
+        this.setState({selectedTab: tabName});
+        this.setState({showSubmitBtn: false});
     }
 
     handleInput(index, v) {
+        this.setState({showSubmitBtn: true});
         let selected = this.state.selectedTab;
         let catInfo = JSON.parse(JSON.stringify(this.state[selected]));
         catInfo[index[0]][index[1]].value = v;
         this.setState({[selected]: catInfo});
     }
 
+    handleSubmit() {
+        this.setState({showSubmitBtn: false});
+    }
+
     render() {
         let selected = this.state.selectedTab;
         return (
             <div>
-                <UserInfoTab selectedTab={selected}/>
+                <UserInfoTab selectedTab={selected} handleClick={this.shiftTab}/>
                 <InfoInputGrp selectedTab={selected} infoGrp={this.state[selected]} handleInput={this.handleInput}/>
+                {this.state.showSubmitBtn && <SubmitBtn handleClick={this.handleSubmit}/>}
             </div>
         )
     }

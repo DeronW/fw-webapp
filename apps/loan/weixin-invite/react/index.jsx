@@ -1,6 +1,5 @@
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'邀请好友'} />, HEADER_NODE);
     ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
     var page = 1;
     var loadNextPage = true;
