@@ -1,9 +1,7 @@
 class AvatarCard extends React.Component {
     render() {
         let avatarSrc = this.props.src || 'images/avatar_default.png';
-        console.log(this.props.phoneNum);
-        console.log(this.props.phoneNum.match(/\d{4}(?=^\d{3})/));
-        let maskedPhoneNum = this.props.phoneNum.replace(/\d{4}(?=^\d{3})/, /\*\*\*\*/);
+        let maskedPhoneNum = maskInfo(this.props.phoneNum, 3, -5);
         return (
             <div className="avator-card">
                 <div className="avatar-container">
@@ -75,11 +73,10 @@ class UserInfoEnterWrap extends React.Component {
     render() {
         return (
             <div className="user-info-display-wrap" id={this.props.infoID}>
-                { this.props.iconSrc !== null &&
-                  <div className="info-icon-container">
-                      <img src={this.props.iconSrc}></img>
-                  </div>
-                }
+                {this.props.iconSrc !== null && <div className="info-icon-container">
+                    <img src={this.props.iconSrc}></img>
+                </div>
+}
                 <span className="info-name">{this.props.infoNameCN}</span>
                 <div className="right-align-container">
                     <div className="right-arrow-container">
@@ -107,12 +104,7 @@ class MajorUserInfo extends React.Component {
             }
         ];
 
-        let infoItems = majorInfo.map((item, index) => (
-            <UserInfoEnterWrap
-              iconSrc={item.iconSrc}
-              infoNameCN={item.infoNameCN}
-              key={index}/>
-        ));
+        let infoItems = majorInfo.map((item, index) => (<UserInfoEnterWrap iconSrc={item.iconSrc} infoNameCN={item.infoNameCN} key={index}/>));
         return (
             <div className="info-display-block">
                 {infoItems}
@@ -134,10 +126,19 @@ class UserInfoWrap extends React.Component {
     }
 }
 
+function maskInfo(text, sIndex, eIndex) {
+    let textLength = text.length,
+        startIndex = Math.max(0, sIndex),
+        endIndex = eIndex < 0
+            ? (textLength + eIndex)
+            : Math.max(eIndex, textLength - 1);
+    return `${text.substr(0, startIndex)}${ '*'.repeat(endIndex - startIndex + 1)}${text.substr(endIndex + 1, textLength - 1)}`
+}
+
 // render ReactDom
 $FW.DOMReady(() => {
-    ReactDOM.render(
-        <UserInfoWrap/>, CONTENT_NODE);
-    ReactDOM.render(
-        <BottomNavBar/>, BOTTOM_NAV_NODE);
+ReactDOM.render(
+    <UserInfoWrap/>, CONTENT_NODE);
+ReactDOM.render(
+    <BottomNavBar/>, BOTTOM_NAV_NODE);
 })
