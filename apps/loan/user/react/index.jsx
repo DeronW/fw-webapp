@@ -38,7 +38,7 @@ class FollowWXEntry extends React.Component {
 class BillType extends React.Component {
     render() {
         return (
-            <li className="bill-type">
+            <li className="bill-type" onClick={this.props.handleClick}>
                 <img src={this.props.src}></img>
                 <span>{this.props.billType}</span>
             </li>
@@ -48,16 +48,27 @@ class BillType extends React.Component {
 
 class BillEntry extends React.Component {
     render() {
-        let billTypesImg = {
-            "申请中": "images/bill_applying_icon.png",
-            "还款中": "images/bill_onloan_icon.png",
-            "未通过": "images/bill_refused_icon.png",
-            "已还款": "images/bill_finished_icon.png"
-        }
-        let billType = [];
-        for (let k in billTypesImg) {
-            billType.push(<BillType billType={k} src={billTypesImg[k]} key={k}/>);
-        }
+        let billTypesObj = [
+            {
+                typeNameCN: '申请中',
+                iconImg: 'images/bill_applying_icon.png',
+                jumpLink: '/static/loan/bill/index.html?tab=billApplying'
+            }, {
+                typeNameCN: '还款中',
+                iconImg: 'images/bill_onloan_icon.png',
+                jumpLink: '/static/loan/bill/index.html?tab=billReturning'
+            }, {
+                typeNameCN: '未通过',
+                iconImg: 'images/bill_refused_icon.png',
+                jumpLink: '/static/loan/bill/index.html?tab=billFailing'
+            }, {
+                typeNameCN: '已还款',
+                iconImg: 'images/bill_finished_icon.png',
+                jumpLink: '/static/loan/bill/index.html?tab=billPaid'
+            }
+        ];
+        let billType = billTypesObj.map((type, index) => (
+          <BillType billType={type.typeNameCN} src={type.iconImg} key={type.typeNameCN} handleClick={() => {window.location.href = type.jumpLink}}/>));
         return (
             <div className="bill-entry-wrap">
                 <div className="bill-label">账单</div>
@@ -80,12 +91,29 @@ class UserInfoEnterWrap extends React.Component {
     handleJump(infoID) {
         if (infoID === 'personal-info') {
             window.location.href = '/static/loan/user-info/index.html';
-        } else if (infoID === 'card-info') {}
+        } else if (infoID === 'card-info') {
+            const USER = $FW.Store.getUserDict();
+            $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
+                token: USER.token,
+                userGid: USER.gid,
+                userId: USER.id,
+                sourceType: SOURCE_TYPE,
+                productId: 1
+            }).then(data => {
+                if (data.borrowBtnStatus === 1)
+                    window.location.href = '/static/loan/user-card-set/index.html';
+                if (data.borrowBtnStatus === 101)
+                    $FW.Component.Toast('设置提现卡处理中，请稍等');
+                }
+            )
+        }
     }
 
     render() {
         return (
-            <div className="user-info-display-wrap" id={this.props.infoID} onClick={() => {this.handleJump(this.props.infoID)}}>
+            <div className="user-info-display-wrap" id={this.props.infoID} onClick={() => {
+                this.handleJump(this.props.infoID)
+            }}>
                 {this.props.iconSrc !== null && <div className="info-icon-container">
                     <img src={this.props.iconSrc}></img>
                 </div>}
