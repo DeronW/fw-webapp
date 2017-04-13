@@ -103,10 +103,8 @@ class UserInfoEnterWrap extends React.Component {
                     window.location.href = '/static/loan/user-card-set/index.html';
                     break;
                 case 101: // 实名中
-                    if (infoID === 'card-info') {
-                        $FW.Component.Toast('设置提现卡处理中，请稍等');
-                        break;
-                    }
+                    $FW.Component.Toast('设置提现卡处理中，请稍等');
+                    break;
                 default:
                     if (infoID === 'personal-info') {
                         window.location.href = '/static/loan/user-info/index.html';
