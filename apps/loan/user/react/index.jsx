@@ -157,7 +157,7 @@ class UserInfoWrap extends React.Component {
     render() {
         return (
             <div className="user-info-wrap">
-                <AvatarCard phoneNum="18900001234"/>
+                <AvatarCard phoneNum={this.props.phoneNum}/>
                 <FollowWXEntry/>
                 <BillEntry/>
                 <MajorUserInfo/>
@@ -175,10 +175,16 @@ function maskInfo(text, sIndex, eIndex) {
     return `${text.substr(0, startIndex)}${ '*'.repeat(endIndex - startIndex + 1)}${text.substr(endIndex + 1, textLength - 1)}`
 }
 
+const USER = $FW.Store.getUserDict();
+
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(
-        <UserInfoWrap/>, CONTENT_NODE);
-    ReactDOM.render(
         <BottomNavBar/>, BOTTOM_NAV_NODE);
+    $FW.Post(`${API_PATH}/api/userBase/v1/userCenter.json`, {
+        token: USER.token,
+        uid: USER.uid
+    }).then(data => {
+        ReactDOM.render(<UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
+    }, e => $FW.Component.Toast(e.message));
 })
