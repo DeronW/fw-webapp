@@ -3,19 +3,17 @@
 class GlobalConfirm extends React.Component {
     constructor() {
         super();
-        this.confirmHandler = this.confirmHandler.bind(this);
-        this.clearHandler = this.clearHandler.bind(this);
     }
     componentWillUnmount() {
         this.props.unMountConfirm && this.props.unMountConfirm();
     }
 
-    confirmHandler() {
+    confirmHandler = () => {
         this.props.confirmCallback && this.props.confirmCallback();
         ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
     }
 
-    clearHandler() {
+    clearHandler = () => {
         ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
     }
 
