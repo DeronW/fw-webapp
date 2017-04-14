@@ -43,13 +43,20 @@ class CitySelectWrap extends React.Component {
         this.scrollList = this.scrollList.bind(this);
     }
 
+    componentDidMount() {
+        let labelHeight = 100;
+        let cityWrapEl = ReactDOM.findDOMNode(this),
+            devisionIndexEl = cityWrapEl.childNodes[1];
+        let cityWrapHeight = window.innerHeight - labelHeight,
+            devisionIndexHeight = devisionIndexEl.clientHeight;
+        devisionIndexEl.style.top = (cityWrapHeight - devisionIndexHeight) / 2 + labelHeight + 'px';
+    }
+
     scrollList(divs, sIndex) {
         let cityWrapEl = ReactDOM.findDOMNode(this);
         let devisionHeight = 40,
             optionHeight = 80,
             scrollTop = 0;
-            // labelHeight = 100,
-            // scrollTop = labelHeight;
         for (var i = 0; i < sIndex; i++) {
             scrollTop += devisionHeight + optionHeight * divs[i][Object.keys(divs[i])[0]];
         }
@@ -161,7 +168,10 @@ class InfoItemInputWrap extends React.Component {
         }
         let selectOptionsWrap = this.props.infoNameCN === '所在城市' ?
             (<div className="city-select-mask">
-              <div className="city-select-label">选择城市</div>
+              <div className="city-select-label">
+                  选择城市
+                  <img src="images/close.png" onClick={this.toggleExpand}></img>
+              </div>
               <CitySelectWrap
                 itemIndex={this.props.itemIndex}
                 handleClick={(index, v) => {this.toggleExpand(); this.props.handleInput(index, v);}}
