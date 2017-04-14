@@ -12,7 +12,8 @@ class Content extends React.Component{
                billFailing:1,
                billPaid:1
            },
-           bill:[]
+           bill:[],
+           hasData:true
         }
         this.tabClickHandler = this.tabClickHandler.bind(this);
     }
@@ -59,7 +60,7 @@ class Content extends React.Component{
          let new_page = this.state.page;
          new_page[this.state.tab] = new_page[this.state.tab] + 1;
          if (data.totalCount < 5) new_page[this.state.tab] = 0;
-         this.setState({bill: bill, page: new_page});
+         this.setState({bill: bill, page: new_page, hasData:!!data.resultList.length});
          done && done();
      }, (err)=>$FW.Component.Toast(err.message));
     }
@@ -129,6 +130,8 @@ class Content extends React.Component{
             )
         }
 
+        let empty = <span className="no-data"></span>;
+
         return (
             <div className="billContent">
                 <div className="bill-header">
@@ -138,7 +141,8 @@ class Content extends React.Component{
                     </div>
                 </div>
                 <div className="billContainer">
-                    {this.state.bill.length === 0 ? <span className="no-data"></span> : this.state.bill.map(list_li)}
+                    {this.state.bill.map(list_li)}
+                    {this.state.bill.length === 0 && !hasData && empty}
                 </div>
             </div>
         )
