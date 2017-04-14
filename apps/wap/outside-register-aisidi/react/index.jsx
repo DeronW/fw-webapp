@@ -3,23 +3,40 @@ class RegisterContent extends React.Component{
 
         super(props);
         this.state = {
-            phonenumber: "",
+            phonenumber: '',
+            totleInvestYi:'',
+            totleInvestWan:'',
+            isShow:'none'
         };
+    }
+    componentDidMount(){
+        $FW.getJSONP("https://fore.9888.cn/cms/api/dealstatis.php",(data)=>{
+            console.log(data)
+        })
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+    handleScroll(){
+        if(document.body.scrollTop>400){
+            console.log(document.body.scrollTop)
+            this.setState({isShow:"block"})
+        }else{
+            this.setState({isShow:"none"})
+        }
     }
     phonenumberHandler(e){
         this.setState({phonenumber: e.target.value});
         console.log( e.target.value);
     }
     registerHandler(){
+        let phoneReg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
         if(this.state.phonenumber==""){
-            GlobalToast("手机号不能为空")
+          $FW.Component.Toast("手机号不能为空")
+        }else if(!phoneReg.test(this.state.phonenumber)){
+            $FW.Component.Toast("手机号格式不正确")
         }
     }
-    isPhoneNumber(){
-
-    }
     render(){
-        let {phonenumber} = this.state;
+        let {phonenumber,totleInvestYi,totleInvestWan,isShow} = this.state;
         return <div className="aisidiContainer">
             <div className="aisidiTop"></div>
             <div className="banner">
@@ -77,15 +94,14 @@ class RegisterContent extends React.Component{
                     <div className="box-left">
                         <div>用户投资金额</div>
                         <div className="data">
-                            <span className="number">11</span>亿
-                            <span className="number">33333</span>万元
+                            <span className="number">{totleInvestYi}</span>亿
+                            <span className="number">{totleInvestWan}</span>万元
                         </div>
                     </div>
                     <div className="box-left">
-                        <div>用户投资金额</div>
+                        <div>注册会员数量超过</div>
                         <div className="data">
-                            <span className="number">22</span>亿
-                            <span className="number">33333</span>万元
+                            <span className="number">{}</span>万人
                         </div>
                     </div>
                 </div>
@@ -163,7 +179,7 @@ class RegisterContent extends React.Component{
                     </div>
                 </div>
             </div>
-            <div className="foot" style={{display:"block"}}>
+            <div className="foot" style={{display:isShow}}>
                 <a href="#" className="btn-foot">立即领取新手礼包</a>
             </div>
         </div>
