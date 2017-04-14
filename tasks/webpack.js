@@ -27,11 +27,15 @@ module.exports = function (site_name, page_name, options) {
             ]
         },
         plugins: [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false
-                }
-            })
+            // new webpack.DllPlugin({
+            //     path: path.join(__dirname, "js", "[name]-manifest.json"),
+            //     name: "[name]_[hash]"
+            // })
+            // , new webpack.optimize.UglifyJsPlugin({
+            //     compress: {
+            //         warnings: false
+            //     }
+            // })
         ]
     });
 
