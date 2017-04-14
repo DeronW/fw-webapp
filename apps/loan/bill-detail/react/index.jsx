@@ -70,9 +70,8 @@ $FW.DOMReady(function () {
             token: user.token,
             userGid: user.gid,
             userId: user.id,
-            uid:user.uid,
             sourceType: SOURCE_TYPE,
-            loanUuid: loanGid
+            loanGid: loanGid
         }
     }).then((data) => {
         ReactDOM.render(<Detail data={data} />, CONTENT_NODE);
