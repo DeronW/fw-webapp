@@ -15,11 +15,9 @@ class GlobalAlert extends React.Component {
         this.state = {
             show: true
         };
-
-        this.hideHandler = this.hideHandler.bind(this);
     }
 
-    hideHandler() {
+    hideHandler = () => {
         ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
     }
 
