@@ -355,11 +355,8 @@ class UserInfoWrap extends React.Component {
     }
 
     handleSubmit() {
-        $FW.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
-            sourceType: SOURCE_TYPE,
-            token: USER.token,
-            uid: USER.uid,
-            email: USER.email,
+        $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
+            email: email,
             creditCard: this.state.basicInfo[0][2].value,
             city: this.state.basicInfo[1][0].value,
             address: this.state.basicInfo[1][1].value,
@@ -387,7 +384,7 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-const USER = $FW.Store.getUserDict();
+// const USER = $FW.Store.getUserDict();
 var cityList = [
   {
     eng: 'beijing',
@@ -436,16 +433,14 @@ var cityList = [
     cn: '长沙'
   }
 ];
+var email;
 
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(
         <Header title="个人信息"/>, HEADER_NODE);
-    $FW.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`, {
-        sourceType: SOURCE_TYPE,
-        token: USER.token,
-        uid: USER.uid
-    }).then(data => {
+    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
+        email = data.email;
         ReactDOM.render(
             <UserInfoWrap userInfo={data} cityList={cityList}/>, CONTENT_NODE);
     }, e => $FW.Component.Toast(e.message));
