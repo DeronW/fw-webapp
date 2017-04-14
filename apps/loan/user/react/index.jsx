@@ -195,5 +195,5 @@ $FW.DOMReady(() => {
     }).then(data => {
         ReactDOM.render(
             <UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
-    }, e => {$FW.Component.Toast(e.message); console.log(e.code);});
+    }, e => {$FW.Component.Toast(e.message); console.log(e.code); console.log(e.message);});
 })
