@@ -54,7 +54,7 @@ class Content extends React.Component{
              done && done();
              return;
          }
-         window.Bill[tab] = window.Bill[tab].concat(data.loanbillList);
+         window.Bill[tab] = window.Bill[tab].concat(data.resultList);
          let bill = window.Bill[this.state.tab];
          let new_page = this.state.page;
          new_page[this.state.tab] = new_page[this.state.tab] + 1;
@@ -92,7 +92,7 @@ class Content extends React.Component{
         };
 
         let list_li = (item,index) => {
-            let status = parseInt(item.baseStauts);
+            let status = parseInt(item.baseStatus);
             let uuid = item.uuid;
             let baseStatus;
             let statusColor;
@@ -119,7 +119,7 @@ class Content extends React.Component{
                     <div className="list-img"><img src={item.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png"}/></div>
                     <div className="list-content">
                         <div className="apply-num">借款金额:{item.loanAmtStr}元</div>
-                        <div className="apply-duration">借款期限:{item.tremNum}天</div>
+                        <div className="apply-duration">借款期限:{item.termNum}天</div>
                     </div>
                     <div className="apply-status-wrap">
                         <div className="apply-status"><span className={statusColor}>{baseStatus}</span></div>
