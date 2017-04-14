@@ -1,7 +1,7 @@
 const Payment = React.createClass({
     getInitialState: function () {
         let query = $FW.Format.urlQuery();
-        let payableRmbAmt = query.payableRmbAmt;
+        let payableRmbAmt = query.payableRmbAmt
         return {
             index: null,
             payableRmbAmt: payableRmbAmt
@@ -36,6 +36,10 @@ const Payment = React.createClass({
     },
     payHandler: function () {
         let query = $FW.Format.urlQuery();
+        // let orderBizNo = query.orderBizNo;
+        // let orderGroupBizNo = query.orderGroupBizNo;
+        // let orderTime = query.orderTime;
+        // let amount = query.amount;
         let data = this.props.data;
         let index = this.state.index;
         if (index == null) {
@@ -56,6 +60,27 @@ const Payment = React.createClass({
             let link = '/static/mall/pay-add-card/index.html?source=pay'
             location.href = link;
         }
+        else if (index == 'z') {
+            $FW.Ajax({
+                    url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
+                    enable_loading: true,
+                    data: {
+                        payType: 3,
+                        orderBizNo: query.orderBizNo,
+                        orderGroupBizNo: query.orderGroupBizNo,
+                        orderTime: query.orderTime,
+                        amount: query.amount,
+                        UserId:""
+                    },
+                })
+                .then((data) => {
+                    if(data.status == 200){
+                        location.href = '/static/mall/order-complete/index.html';
+                    }else{
+                        
+                    }
+                });
+        }qw
         else {
             var FormData = {
                 service: "REQ_PAY_QUICK_APPLY",
@@ -185,6 +210,7 @@ const Payment = React.createClass({
                         </div>
                         <div className={this.state.index=='w' ? "pay-check active" : "pay-check"}></div>
                     </div>
+                     */}
                     <div className="pay-item" onClick={this.payCheck.bind(this,'z')}>
                         <div className="pay-icon"><img src="images/alipay.jpg"/></div>
                         <div className="pay-name">
@@ -193,7 +219,7 @@ const Payment = React.createClass({
                         </div>
                         <div className={this.state.index=='z' ? "pay-check active" : "pay-check"}></div>
                     </div>
-                    */}
+                   
                 </div>
                 <div className="pay-bar">
                     <a className="pay-btn" onClick={this.payHandler}>去支付</a>

@@ -1,4 +1,7 @@
-node("front-virtual") {
+// support 2 nodes
+// major node is : front
+// backup node is : front-virtual
+node("front") {
 
     stage('Preparation') {
         if(params.INITIALIZE) {

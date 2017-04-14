@@ -3,7 +3,6 @@ class GlobalToast extends React.Component {
     constructor() {
       super();
       this.state = { offset: 0, opacity: 0 };
-      this.hideHandler = this.hideHandler.bind(this);
     }
 
     componentDidMount() {
@@ -14,7 +13,7 @@ class GlobalToast extends React.Component {
         });
     }
 
-    hideHandler() {
+    hideHandler = () => {
         this.setState({ opacity: 0 });
         setTimeout(() => {
             ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
