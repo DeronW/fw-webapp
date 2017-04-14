@@ -37,11 +37,78 @@ class UserInfoTab extends React.Component {
     }
 }
 
+class CitySelectWrap extends React.Component {
+    constructor() {
+        super();
+        this.scrollList = this.scrollList.bind(this);
+    }
+
+    scrollList(divs, sIndex) {
+        let cityWrapEl = ReactDOM.findDOMNode(this);
+        let devisionHeight = 40,
+            optionHeight = 80,
+            scrollTop = 0;
+            // labelHeight = 100,
+            // scrollTop = labelHeight;
+        for (var i = 0; i < sIndex; i++) {
+            scrollTop += devisionHeight + optionHeight * divs[i][Object.keys(divs[i])[0]];
+        }
+        window.scrollTo(0, scrollTop);
+    }
+
+    render() {
+        let sortedCityList = this.props.cityList.sort((c1, c2) => {
+            if (c1.eng > c2.eng) {
+                return 1;
+            }
+            if (c1.eng < c2.eng) {
+                return -1;
+            }
+            return 0;
+        });
+        let divisions = [];
+        let cityEls = sortedCityList.map((c, index, list) => {
+            let newFirstLetter = (index === 0 || list[index - 1].eng[0] !== c.eng[0]) ? c.eng[0] : '';
+            if (newFirstLetter) {
+                divisions.push({[newFirstLetter]: 1});
+            } else {
+                divisions[divisions.length-1][c.eng[0]]++ ;
+            }
+            return (
+                <div key={c.eng}>
+                  { newFirstLetter &&
+                      <div className="city-division">{newFirstLetter.toUpperCase()}</div>
+                  }
+                  <div className="city-option" onClick={() => {this.props.handleClick(this.props.itemIndex, c.cn);}}>{c.cn}</div>
+                </div>
+            );
+        });
+        let divisionEls = divisions.map((d, index) => (
+            <li
+              key={index}
+              id={`city-division-${index}`}>
+                {Object.keys(d)[0].toUpperCase()}
+            </li>
+        ))
+        return (
+            <div className="city-select-wrap">
+                <div className="city-options-wrap">
+                    {cityEls}
+                </div>
+                <ul className="city-divisions-wrap" onClick={(e) => {this.scrollList(divisions, e.target.id[e.target.id.length - 1]);}}>
+                    {divisionEls}
+                </ul>
+            </div>
+        )
+    }
+}
+
 class InfoItemInputWrap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        if (this.props.options !== null) {
+        this.isSelectItem = this.props.options !== null;
+        if (this.isSelectItem) {
             this.state.expandOpts = false;
         }
         this.toggleExpand = this.toggleExpand.bind(this);
@@ -54,48 +121,69 @@ class InfoItemInputWrap extends React.Component {
     }
 
     render() {
-        let value = this.props.value;
-        if (this.props.options !== null) {
-            var selectOptions = this.props.options.map((option, index) => (
-                <div className="select-option" key={index} onClick={() => {
-                    this.toggleExpand();
-                    this.props.handleInput(this.props.itemIndex, index);
+        let value = this.props.value,
+            isSelectItem = this.isSelectItem,
+            selectLabelColor = value !== null ? '#333' : '#999',
+            inputItemDis = (
+                <input
+                    className="info-text-input"
+                    placeholder={this.props.placeholder}
+                    value={value}
+                    onChange={(e) => {this.props.handleInput(this.props.itemIndex, e.target.value)}}>
+                </input>
+            ),
+            selectItemDis;
+        if (isSelectItem) {
+            selectItemDis = (
+                <span
+                    className="select-label"
+                    style={{color: selectLabelColor}}
+                    onClick={this.toggleExpand}>
+                    {value !== null ?
+                      (this.props.infoNameCN === '所在城市' ? value : this.props.options[value])
+                      : this.props.placeholder}
+                </span>
+            );
+        }
+        let selectOptions = [];
+        if (isSelectItem && this.props.infoNameCN !== '所在城市') {
+            selectOptions = this.props.options.map((option, index) => (
+                <div
+                    className="select-option"
+                    key={index}
+                    onClick={() => {
+                        this.props.handleInput(this.props.itemIndex, index);
                 }}>
                     {option}
-                    {value === option && <img className="selected-icon" src="images/selected.png"></img>}
+                    {value === index && <img className="selected-icon" src="images/selected.png"></img>}
                 </div>
             ));
         }
-        let selectLabelColor = value !== null
-            ? '#333'
-            : '#999';
+        let selectOptionsWrap = this.props.infoNameCN === '所在城市' ?
+            (<div className="city-select-mask">
+              <div className="city-select-label">选择城市</div>
+              <CitySelectWrap
+                itemIndex={this.props.itemIndex}
+                handleClick={(index, v) => {this.toggleExpand(); this.props.handleInput(index, v);}}
+                cityList={this.props.options}/>
+            </div>) :
+            (<div className="select-option-wrap">
+                {selectOptions}
+            </div>)
+        ;
         return (
             <div className="user-info-item-wrap">
                 <div className="input-wrap" id={this.props.infoID}>
                     <span className="info-name">{this.props.infoNameCN}</span>
-                    <div className="right-align-container">
-                        {this.props.options === null
-                            ? (
-                                <input className="info-text-input" placeholder={this.props.placeholder} value={this.props.value} onChange={(e) => {
-                                    this.props.handleInput(this.props.itemIndex, e.target.value)
-                                }}></input>
-                            )
-                            : (
-                                <span className="select-label" onClick={this.toggleExpand} style={{
-                                    color: selectLabelColor
-                                }}>{value !== null ? this.props.options[value] : this.props.placeholder}</span>
-                            )}
-                        { this.props.options !== null &&
+                    <div className="item-display right-align-container">
+                        { selectItemDis || inputItemDis }
+                        { isSelectItem &&
                           <div className="right-arrow-container" onClick={this.toggleExpand}>
                             <div className="fake-arrow"></div>
                           </div>}
                     </div>
                 </div>
-                {this.state.expandOpts && (
-                    <div className="select-option-wrap">
-                        {selectOptions}
-                    </div>
-                )}
+                { this.state.expandOpts && selectOptionsWrap}
             </div>
         )
     }
@@ -105,7 +193,15 @@ class InfoInputGrp extends React.Component {
     render() {
         let infoGrp = this.props.infoGrp;
         let infoItems = infoGrp.map((item, index) => {
-            let subInfoItems = item.map((item, subIndex) => (<InfoItemInputWrap infoNameCN={item.infoNameCN} key={item.infoID} placeholder={item.placeholder} options={item.options || null} value={item.value} itemIndex={[index, subIndex]} handleInput={this.props.handleInput}/>));
+            let subInfoItems = item.map((item, subIndex) => (
+              <InfoItemInputWrap
+                infoNameCN={item.infoNameCN}
+                key={item.infoID}
+                placeholder={item.placeholder}
+                options={item.options || null}
+                value={item.value}
+                itemIndex={[index, subIndex]}
+                handleInput={this.props.handleInput} />));
             return (
                 <div className="info-display-block" key={index}>
                     {subInfoItems}
@@ -158,7 +254,7 @@ class UserInfoWrap extends React.Component {
                         infoID: 'city-info',
                         infoNameCN: '所在城市',
                         value: this.props.userInfo.city,
-                        options: [],
+                        options: this.props.cityList,
                         placeholder: '请选择'
                     }, {
                         infoID: 'address-info',
@@ -274,7 +370,7 @@ class UserInfoWrap extends React.Component {
         return (
             <div>
                 <UserInfoTab selectedTab={selected} handleClick={this.shiftTab}/>
-                <InfoInputGrp selectedTab={selected} infoGrp={this.state[selected]} handleInput={this.handleInput}/>
+                <InfoInputGrp selectedTab={selected} infoGrp={this.state[selected]} handleInput={this.handleInput} />
                 {this.state.showSubmitBtn && <SubmitBtn handleClick={this.handleSubmit}/>}
             </div>
         )
@@ -282,6 +378,54 @@ class UserInfoWrap extends React.Component {
 }
 
 const USER = $FW.Store.getUserDict();
+var cityList = [
+  {
+    eng: 'beijing',
+    cn: '北京'
+  }, {
+    eng: 'shanghai',
+    cn: '上海'
+  }, {
+    eng: 'guangzhou',
+    cn: '广州'
+  }, {
+    eng: 'shenzhen',
+    cn: '深圳'
+  }, {
+    eng: 'nanjing',
+    cn: '南京'
+  }, {
+    eng: 'tianjin',
+    cn: '天津'
+  }, {
+    eng: 'hangzhou',
+    cn: '杭州'
+  }, {
+    eng: 'chengdu',
+    cn: '成都'
+  }, {
+    eng: 'wuhan',
+    cn: '武汉'
+  }, {
+    eng: 'xiamen',
+    cn: '厦门'
+  }, {
+    eng: 'qingdao',
+    cn: '青岛'
+  }, {
+    eng: 'xian',
+    cn: '西安'
+  }, {
+    eng: 'chongqing',
+    cn: '重庆'
+  }, {
+    eng: 'suzhou',
+    cn: '苏州'
+  }, {
+    eng: 'changsha',
+    cn: '长沙'
+  }
+];
 
 // render ReactDom
 $FW.DOMReady(() => {
@@ -293,6 +437,6 @@ $FW.DOMReady(() => {
         uid: USER.uid
     }).then(data => {
         ReactDOM.render(
-            <UserInfoWrap userInfo={data}/>, CONTENT_NODE);
+            <UserInfoWrap userInfo={data} cityList={cityList}/>, CONTENT_NODE);
     }, e => $FW.Component.Toast(e.message));
 })
