@@ -62,8 +62,7 @@ class InfoItemInputWrap extends React.Component {
                     this.props.handleInput(this.props.itemIndex, index);
                 }}>
                     {option}
-                    {value === option && <img className="selected-icon" src="images/selected.png"></img>
-}
+                    {value === option && <img className="selected-icon" src="images/selected.png"></img>}
                 </div>
             ));
         }
@@ -85,20 +84,18 @@ class InfoItemInputWrap extends React.Component {
                                 <span className="select-label" onClick={this.toggleExpand} style={{
                                     color: selectLabelColor
                                 }}>{value !== null ? this.props.options[value] : this.props.placeholder}</span>
-                            )
-}
-                        {this.props.options !== null && <div className="right-arrow-container" onClick={this.toggleExpand}>
+                            )}
+                        { this.props.options !== null &&
+                          <div className="right-arrow-container" onClick={this.toggleExpand}>
                             <div className="fake-arrow"></div>
-                        </div>
-}
+                          </div>}
                     </div>
                 </div>
                 {this.state.expandOpts && (
                     <div className="select-option-wrap">
                         {selectOptions}
                     </div>
-                )
-}
+                )}
             </div>
         )
     }
@@ -253,6 +250,7 @@ class UserInfoWrap extends React.Component {
 
     handleSubmit() {
         $FW.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
+            sourceType: SOURCE_TYPE,
             token: USER.token,
             uid: USER.uid,
             email: USER.email,
@@ -290,6 +288,7 @@ $FW.DOMReady(() => {
     ReactDOM.render(
         <Header title="个人信息"/>, HEADER_NODE);
     $FW.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`, {
+        sourceType: SOURCE_TYPE,
         token: USER.token,
         uid: USER.uid
     }).then(data => {
