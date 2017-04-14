@@ -92,7 +92,7 @@ class Content extends React.Component{
         };
 
         let list_li = (item,index) => {
-            let status = parseInt(item.baseStauts);
+            let status = parseInt(item.baseStatus);
             let uuid = item.uuid;
             let baseStatus;
             let statusColor;
