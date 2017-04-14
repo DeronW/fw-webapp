@@ -190,6 +190,8 @@ $FW.DOMReady(() => {
         <BottomNavBar/>, BOTTOM_NAV_NODE);
     $FW.Post(`${API_PATH}/api/userBase/v1/userCenter.json`, {
         sourceType: SOURCE_TYPE,
+        userGid: USER.gid,
+        userId: USER.id,
         token: USER.token,
         uid: USER.uid
     }).then(data => {
