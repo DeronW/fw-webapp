@@ -4,8 +4,8 @@
  */
 
 class BottomNavBar extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         let height = parseInt(this.props.height) || 100;
         let lineHeight = parseInt(this.props.height) || 100;
         this.state = {
@@ -48,9 +48,11 @@ class BottomNavBar extends React.Component {
             margin: "10px 0",
         }
         let tabColor = (keyword) => {
+            let cnd = isActiveTab(keyword);
             return {
-                color: isActiveTab(keyword) ? "#77a4ea" : "#ffffff",
-                webkitFilter: isActiveTab(keyword) ? 'none' : "brightness(4)"
+                color: cnd ? "#77a4ea" : "#ffffff",
+                WebkitFilter: cnd ? null : "brightness(4)",
+                filter: cnd ? null : "brightness(4)"
             }
         }
         let goto = (path) => {
@@ -84,7 +86,7 @@ class BottomNavBar extends React.Component {
         let _href_self = goto('/static/loan/user/index.html')
         let _href_more = goto('/static/loan/more/index.html')
 
-        if(!$FW.Theme.get('header')) return null;
+        if (!$FW.Theme.get('header')) return null;
 
         return (
             <div style={easyloan_style_footer_fixed}>

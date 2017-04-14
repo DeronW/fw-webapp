@@ -222,11 +222,11 @@ class BannerGroup extends React.Component {
 };
 
 BannerGroup.propTypes = {
-    startIndex: React.PropTypes.number,
-    autoPlay: React.PropTypes.number,
-    loop: React.PropTypes.bool,
-    className: React.PropTypes.string,
-    afterIndexChange: React.PropTypes.func,
-    onImageClick: React.PropTypes.func,
-    images: React.PropTypes.array
+    startIndex: PropTypes.number,
+    autoPlay: PropTypes.number,
+    loop: PropTypes.bool,
+    className: PropTypes.string,
+    afterIndexChange: PropTypes.func,
+    onImageClick: PropTypes.func,
+    images: PropTypes.array
 }

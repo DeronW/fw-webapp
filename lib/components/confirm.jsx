@@ -104,6 +104,6 @@ class GlobalConfirm extends React.Component {
 };
 
 GlobalConfirm.propTypes = {
-    title: React.PropTypes.string.isRequired,
-    confirmCallback: React.PropTypes.func
+    title: PropTypes.string.isRequired,
+    confirmCallback: PropTypes.func
 };
