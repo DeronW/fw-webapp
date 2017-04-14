@@ -92,10 +92,10 @@ class UserInfoEnterWrap extends React.Component {
     handleJump(infoID) {
         const USER = $FW.Store.getUserDict();
         $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
+            sourceType: SOURCE_TYPE,
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
-            sourceType: SOURCE_TYPE,
             productId: 1
         }).then(data => {
             switch (data.borrowBtnStatus) {
@@ -189,6 +189,7 @@ $FW.DOMReady(() => {
     ReactDOM.render(
         <BottomNavBar/>, BOTTOM_NAV_NODE);
     $FW.Post(`${API_PATH}/api/userBase/v1/userCenter.json`, {
+        sourceType: SOURCE_TYPE,
         token: USER.token,
         uid: USER.uid
     }).then(data => {
