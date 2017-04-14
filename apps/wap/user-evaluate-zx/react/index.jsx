@@ -340,7 +340,7 @@ const Answer = React.createClass({
 
 $FW.DOMReady(() => {
     if (!$FW.Browser.inApp())
-        ReactDOM.render(<Header title={'风险承受能力评估'}
+        ReactDOM.render(<Header title={'尊享风险承受能力评估'}
             back_handler={back_handler} />, HEADER_NODE);
     ReactDOM.render(<Answer />, CONTENT_NODE);
 })
