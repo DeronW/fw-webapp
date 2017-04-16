@@ -199,6 +199,7 @@ let generate_task = function (site_name, page_name, configs) {
         gulp.watch(`${project_path}less/**`, gulp.parallel(compile_less));
         gulp.watch(`${project_path}javascripts/**`, gulp.parallel(compile_javascripts));
         gulp.watch(`${project_path}react/**`, gulp.parallel(compile_react));
+        gulp.watch(`${lib_path}components/**`, gulp.parallel(compile_react));
 
         gulp.watch(`lib/templates/**/*.html`, gulp.parallel(compile_html));
         gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));

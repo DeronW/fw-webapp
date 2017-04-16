@@ -112,7 +112,7 @@ WebAPP
 本地启动项目
 
 商城：npm run gulp mall:[文件名]:watch
-wap站：npm run gulp main:[文件名]:watch
+wap站：npm run gulp wap是扥:[文件名]:watch
 放心花：npm run gulp loan:[文件名]:watch
 
 
