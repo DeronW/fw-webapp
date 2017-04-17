@@ -185,6 +185,7 @@ class UserInfoWrap extends React.Component {
 // let phone_mask = n => String(n).replace(/(\d{3})\d{4}(\d{4})/, "'$1****$2")
 
 const USER = $FW.Store.getUserDict();
+console.log(USER.token, USER.gid, USER.id, USER.uid);
 
 // render ReactDom
 $FW.DOMReady(() => {
