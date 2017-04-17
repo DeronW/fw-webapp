@@ -177,7 +177,7 @@ class ExitBtn extends React.Component {
           <div className="ui-btn" onClick={() => {this.setState({showPop: true})}}>退出登录</div>
         </div>
         {this.state.showPop &&
-          <div className={"mask"} style={{ zIndex: 100 }}>
+          <div className="mask" style={{ zIndex: 100 }}>
               <div className="pop">
                   <div className="pop-title">退出登录</div>
                   <div className="pop-close" onClick={() => {this.setState({showPop: false})}}></div>

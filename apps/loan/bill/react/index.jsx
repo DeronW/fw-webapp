@@ -110,7 +110,7 @@ class Content extends React.Component{
             //     billPaid: '已还款',
             // };
             return (
-                <div key={i} className={i == this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
+                <div key={i.billType} className={i == this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
                      onClick={()=>{this.tabClickHandler(i) }}>
                      <span className="text">{i.typeCN}</span>
                     {/* <span className="text">{name[i]}</span> */}
