@@ -4,6 +4,16 @@ const verificationNum = val => {
 	return reg.test(val)
 }
 
+const eimalReg = val => {
+	const reg = new RegExp(/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/)
+
+	return reg.test(val)
+}
+
+const phoneEeg = val => {
+	const reg = /^1[3|4|5|7|8][0-9]{9}$/
+	return reg.test(val)
+}
 
 class SumList extends React.Component {
 	constructor(props) {
@@ -243,11 +253,84 @@ class Btn extends React.Component {
 
 
 		} else if(pushType == 'popBtn') {
-			const { btnValFun, getPopInfoProps, getPopShowProps } = this.props			
+			const { btnValFun, getPopInfoProps, getPopShowProps, getSelectListProps } = this.props			
 
-			getPopInfoProps(btnValFun())	
+			if(getSelectListProps == 'sumMoney') {
+				if(btnValFun().moneyVal == '') {
+					$FW.Component.Toast("借款金额不能为空");
+				} else if((btnValFun().moneyVal % 1000) != 0) {
+					$FW.Component.Toast("请以1000为单位，上限为50000");
+				} else if (btnValFun().deadlineVal == '') {
+					$FW.Component.Toast("请选择期限");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				} 	
+			} else if(getSelectListProps == 'creditCardVal') {
+				if(btnValFun().creditCardVal == '') {
+					$FW.Component.Toast("信用卡不能为空");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				} 
+			} else if (getSelectListProps == 'emailVal') {
+				if(eimalReg(btnValFun().emailVal) == false) {
+					$FW.Component.Toast("邮箱格式不对");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				} 
+			} else if (getSelectListProps == 'homeVal') {
+				if(btnValFun().homeVal == '') {
+					$FW.Component.Toast("现居住地不能为空");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				} 
+			} else if (getSelectListProps == 'marriageVal') {
+				if(btnValFun().marriageVal == '') {
+					$FW.Component.Toast("婚姻不能为空");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				} 
+			}  else if (getSelectListProps == 'urgentPerson') {
+				if(btnValFun().urgentPerson == '') {
+					$FW.Component.Toast("紧急联系人不能为空");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				} 
+			} else if (getSelectListProps == 'relationship') {
+				if(btnValFun().relationship == '') {
+					$FW.Component.Toast("联系人关系不能为空");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				} 
+			} else if (getSelectListProps == 'phone') {
+				if(btnValFun().phone == '') {
+					$FW.Component.Toast("联系人手机不能为空");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				} 
+			} else if (getSelectListProps == 'income') {
+				if(btnValFun().income == '') {
+					$FW.Component.Toast("税后收后不能为空");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				} 
+			}  else if (getSelectListProps == 'yearsOfWork') {
+				if(btnValFun().yearsOfWork == '') {
+					$FW.Component.Toast("工作年限不能为空");
+				} else {
+					getPopInfoProps(btnValFun())	
+					getPopShowProps(false)
+				}
+			}  
 
-			getPopShowProps(false)
 		}
 	}
 	render() {
@@ -403,11 +486,14 @@ class WindowPop extends React.Component {
 			}	
 
 		} else if (this.state.selectList === 'creditCardVal') {	
-			let copSumMoneyListObj2 = this.state.sumMoneyListObj
-			copSumMoneyListObj2.creditCardVal = e.target.value		
-			this.setState({
-				copSumMoneyListObj2
-			})
+			if(verificationNum(e.target.value)) {
+				let copSumMoneyListObj2 = this.state.sumMoneyListObj
+				copSumMoneyListObj2.creditCardVal = e.target.value		
+				this.setState({
+					copSumMoneyListObj2
+				})
+			}
+			
 		} else if (this.state.selectList === 'emailVal') {	
 			let copSumMoneyListObj3 = this.state.sumMoneyListObj
 			copSumMoneyListObj3.emailVal = e.target.value		
@@ -439,8 +525,7 @@ class WindowPop extends React.Component {
 		
 		if(inputVal.length == 0) {
             $FW.Component.Toast("金额不能为空");
-		}
-		else if((inputVal % 1000) != 0) {
+		} else if((inputVal % 1000) != 0) {
             $FW.Component.Toast("请以1000为单位，上限为50000");
 		} else {
 			this.setState({
@@ -703,6 +788,7 @@ class WindowPop extends React.Component {
 					btnValFun = { this.callbackBtnVal.bind(this) } 
 		   			getPopInfoProps = { getPopInfo } 
 					getPopShowProps = { getPopShow } 
+					getSelectListProps = { selectList }
 					pushType= { 'popBtn' }
 				/>
 			</div>
@@ -813,11 +899,11 @@ class ApplyBorrowMoney extends React.Component {
 	}
 }
 
-//ReactDOM.render(<ApplyBorrowMoney  />, CONTENT_NODE)
+ReactDOM.render(<ApplyBorrowMoney  />, CONTENT_NODE)
 
 
-$FW.DOMReady(() => {
-	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
-        .then(data => ReactDOM.render(<ApplyBorrowMoney  />, CONTENT_NODE))
-})
+// $FW.DOMReady(() => {
+// 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
+//         .then(data => ReactDOM.render(<ApplyBorrowMoney  />, CONTENT_NODE))
+// })
 
