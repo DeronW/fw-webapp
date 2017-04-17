@@ -97,9 +97,7 @@ const SetPassword = React.createClass({
                     token: dict.userToken,
                     id: dict.userId,
                     gid: dict.userGid,
-                    status: dict.userStatus,
-                    invitCode:dict.invitationCode,
-                    uid:dict.uid
+                    status: dict.userStatus
                 })
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message))
