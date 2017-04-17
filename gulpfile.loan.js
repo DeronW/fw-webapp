@@ -110,6 +110,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         `${PROJ}/fw-ajax-error-handler.js`,
         `${PROJ}/fw-common.js`,
         `${PROJ}/fw-plugin-store.js`,
+        `${PROJ}/fxh.js`,
         `${PROJ}/fw-plugin-theme.js`
     ];
 
