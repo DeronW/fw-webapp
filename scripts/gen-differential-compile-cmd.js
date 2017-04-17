@@ -52,9 +52,9 @@ fs.readFile(sourceF, (err, data) => {
                 '无更新, 不需要编译';
         util.log(util.colors.yellow(`完成差量编译检测:${t}`));
         if (r.npm) {
-            util.log(utils.colors.yellow('package.json 包有更新, 需要执行 npm install'))
+            util.log(util.colors.yellow('package.json 包有更新, 需要执行 npm install'))
         } else {
-            util.log(utils.colors.yellow('package.json 没有变更, 不用更新 npm'))
+            util.log(util.colors.yellow('package.json 没有变更, 不用更新 npm'))
         }
 
         fs.chmod(targetF, parseInt('755', 8));
