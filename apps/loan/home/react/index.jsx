@@ -57,5 +57,5 @@ class MainPanel extends React.Component {
 $FW.DOMReady(() => {
     $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
         .then(data => ReactDOM.render(<MainPanel products={data.resultList} />, CONTENT_NODE))
-    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE)
+    ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
 })
