@@ -165,7 +165,7 @@ class ExitBtn extends React.Component {
     this.state = {showPop: false};
   }
 
-  logoutHandler: function () {
+  logoutHandler() {
       $FW.Store.clear();
       location.href = '/static/loan/user-entry/index.html';
   }
@@ -215,7 +215,9 @@ class UserInfoWrap extends React.Component {
                 <FollowWXEntry/>
                 <BillEntry/>
                 <MajorUserInfo/>
-                <ExitBtn isLoggedIn={isLoggedIn}/>
+                {isLoggedIn &&
+                    <ExitBtn/>
+                }
             </div>
         )
     }
