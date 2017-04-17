@@ -25,7 +25,7 @@ let More = React.createClass({
         let isLoggedIn = $FW.Store.getUserToken() ? true : false;
         return (
             <div>
-                <div className="header">更多</div>
+                <div className="header">放心花</div>
                 <img src="images/hotline.jpg"/>
                 <div className="more-cnt">
                     <div className="more-list">

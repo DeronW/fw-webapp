@@ -40,7 +40,6 @@ class UserInfoTab extends React.Component {
 class CitySelectWrap extends React.Component {
     constructor() {
         super();
-        this.scrollList = this.scrollList.bind(this);
     }
 
     componentDidMount() {
@@ -52,7 +51,7 @@ class CitySelectWrap extends React.Component {
         devisionIndexEl.style.top = (cityWrapHeight - devisionIndexHeight) / 2 + labelHeight + 'px';
     }
 
-    scrollList(divs, divLetter) {
+    scrollList = (divs, divLetter) => {
         let cityWrapEl = ReactDOM.findDOMNode(this);
         let devisionHeight = 40,
             optionHeight = 80,
@@ -127,10 +126,9 @@ class InfoItemInputWrap extends React.Component {
         if (this.isSelectItem) {
             this.state.expandOpts = false;
         }
-        this.toggleExpand = this.toggleExpand.bind(this);
     }
 
-    toggleExpand() {
+    toggleExpand = () => {
         this.setState({
             expandOpts: !this.state.expandOpts
         });
@@ -347,17 +345,14 @@ class UserInfoWrap extends React.Component {
                 ]
             ]
         }
-        this.shiftTab = this.shiftTab.bind(this);
-        this.handleInput = this.handleInput.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    shiftTab(tabName) {
+    shiftTab = (tabName) => {
         this.setState({selectedTab: tabName});
         this.setState({showSubmitBtn: false});
     }
 
-    handleInput(index, v) {
+    handleInput = (index, v) => {
         this.setState({showSubmitBtn: true});
         let selected = this.state.selectedTab;
         let catInfo = JSON.parse(JSON.stringify(this.state[selected]));
@@ -365,7 +360,7 @@ class UserInfoWrap extends React.Component {
         this.setState({[selected]: catInfo});
     }
 
-    handleSubmit() {
+    handleSubmit = () => {
         $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
             email: '',
             creditCard: this.state.basicInfo[0][2].value,
@@ -395,7 +390,7 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-let cityList = {
+const CITYLIST = {
   "A": [
     "安康市", "安庆市", "安顺市", "鞍山市", "安阳市"
   ],
@@ -708,6 +703,6 @@ $FW.DOMReady(() => {
         <Header title="个人信息"/>, HEADER_NODE);
     $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
         ReactDOM.render(
-            <UserInfoWrap userInfo={data} cityList={cityList}/>, CONTENT_NODE);
+            <UserInfoWrap userInfo={data} cityList={CITYLIST}/>, CONTENT_NODE);
     }, e => $FW.Component.Toast(e.message));
 })
