@@ -7,33 +7,30 @@ class MainPanel extends React.Component {
                 link = `/static/loan/apply-${page_name}/index.html?id=${p.productId}`;
 
             return (
-                <Nav key={index} href={link}>
-                    <div className="borrow-money-list">
-                        <div className="icon-block">
-                            <img src={p.productLogo} />
-                        </div>
-                        <div className="info">
-                            <div className="t">
-                                <span className="title-text">{p.productName}</span>
-                                <div className="tag">
-                                    <img src="images/tag-1a.png" />
-                                    <img src="images/tag-2a.png" />
-                                    <img src="images/tag-3a.png" />
-                                </div>
-                            </div>
-
-                            <div className="b">
-                                <div className="text"> 借款范围（{p.amountStr}） </div>
-                            </div>
-                        </div>
-                        <div className="next"></div>
+                <Nav className="borrow-money-list" key={index} href={link}>
+                    <div className="icon-block">
+                        <img src={p.productLogo} />
                     </div>
+                    <div className="info">
+                        <div className="t">
+                            <span className="title-text">{p.productName}</span>
+                            <div className="tag">
+                                <img src="images/tag-1a.png" />
+                                <img src="images/tag-2a.png" />
+                                <img src="images/tag-3a.png" />
+                            </div>
+                        </div>
+                        <div className="b">
+                            <div className="text"> 借款范围（{p.amountStr}） </div>
+                        </div>
+                    </div>
+                    <div className="next"></div>
                 </Nav>
             )
         }
 
         return (
-            <div>
+            <div className="main-panel">
                 <div className="banner">
                     <img src="images/banner.png" />
                 </div>
