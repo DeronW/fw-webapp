@@ -11,7 +11,7 @@ class MainPanel extends React.Component {
             return (
                 <Nav className="borrow-money-list" key={index} href={link}>
                     <div className="icon-block">
-                        <img src="/static/loan/home/images/icon.png" />
+                        <img src="images/icon.png" />
                     </div>
                     <div className="info">
                         <div className="t">
@@ -38,7 +38,7 @@ class MainPanel extends React.Component {
                     <img src="images/banner.png" />
                 </div>
                 <a href="/static/loan/apply-zhang-zhong/index.html" className="top-info">
-                    <div className="logo"> <img src="/static/loan/home/images/logo.png" /> </div>
+                    <div className="logo"> <img src="images/logo.png" /> </div>
                     <div className="title"> {main_product.productName} </div>
                     <div className="tag">
                         {main_product.productLabelList.map(i => <img src={`/static/loan/home/images/tag-${i.labelType}.png`} />)}
