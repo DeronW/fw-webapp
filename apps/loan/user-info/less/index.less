@@ -160,15 +160,15 @@ body {
           border: none;
         }
 
-        .selected-icon {
-          position: absolute;
-          top: 30px;
-          right: 40px;
-        }
-
       }
     }
   }
+}
+
+.selected-icon {
+  position: absolute;
+  top: 30px;
+  right: 40px;
 }
 
 .submit-btn {
@@ -193,6 +193,7 @@ body {
 
   .city-select-label {
     position: fixed;
+    z-index: 999;
     width: 100%;
     height: 100px;
     line-height: 100px;
@@ -222,12 +223,17 @@ body {
 }
 
 .city-option {
+  position: relative;
   height: 80px;
   line-height: 80px;
   margin-left: 24px;
   font-size: 30px;
   border-bottom: 1px solid #e6e6e6;
   color: #333;
+
+  .selected-icon {
+    right: 60px;
+  }
 }
 
 .city-divisions-wrap {

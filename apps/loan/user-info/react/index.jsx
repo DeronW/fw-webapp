@@ -93,6 +93,7 @@ class CitySelectWrap extends React.Component {
                       this.props.handleClick(this.props.itemIndex, c);
                   }}>
                   {c}
+                  {this.props.value === c && <img className="selected-icon" src="images/selected.png"></img>}
                 </div>
             ));
             cityEls.push(
@@ -225,6 +226,7 @@ class InfoItemInputWrap extends React.Component {
                   <img src="images/close.png" onClick={this.toggleExpand}></img>
               </div>
               <CitySelectWrap
+                value={value}
                 itemIndex={this.props.itemIndex}
                 handleClick={(index, v) => {this.toggleExpand(); this.props.handleInput(index, v);}}
                 cityList={this.props.options}/>
