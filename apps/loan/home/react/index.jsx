@@ -34,9 +34,9 @@ class MainPanel extends React.Component {
 
         return (
             <div className="main-panel">
-                <div className="banner">
+                <a href="/static/loan/weixin-download/index.html" className="banner">
                     <img src="images/banner.png" />
-                </div>
+                </a>
                 <a href="/static/loan/apply-zhang-zhong/index.html" className="top-info">
                     <div className="logo"> <img src="images/logo.png" /> </div>
                     <div className="title"> {main_product.productName} </div>
