@@ -96,7 +96,7 @@ const Payment = React.createClass({
         }
         else if (index == 'z') {
             
-            //申请支付
+            //請求申请支付
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
                 enable_loading: true,
