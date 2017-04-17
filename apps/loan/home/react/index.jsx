@@ -1,97 +1,61 @@
-class Banner extends React.Component {
+
+
+class MainPanel extends React.Component {
     render() {
-        return (
-            <div className="banner">
-                <img src="images/banner.png" />
-            </div>
-        )
-    }
-}
+        let product = (p, index) => {
+            let page_name = p.productName == '放心花' ? 'zhang-zhong' : 'du-miao',
+                link = `/static/loan/apply-${page_name}/index.html?id=${p.productId}`;
 
-class TopInfo extends React.Component {
-    render() {
-        return (
-            <div className="top-info">
-                <div className="logo">
-                    <img src="images/logo.png" />
-                </div>
-                <div className="title">
-                    放心花
-				</div>
+            return (
+                <Nav key={index} href={link}>
+                    <div className="borrow-money-list">
+                        <div className="icon-block">
+                            <img src={p.productLogo} />
+                        </div>
+                        <div className="info">
+                            <div className="t">
+                                <span className="title-text">{p.productName}</span>
+                                <div className="tag">
+                                    <img src="images/tag-1a.png" />
+                                    <img src="images/tag-2a.png" />
+                                    <img src="images/tag-3a.png" />
+                                </div>
+                            </div>
 
-                <div className="tag">
-                    <img src="images/tag-1.png" />
-                    <img src="images/tag-2.png" />
-                    <img src="images/tag-3.png" />
-                </div>
-
-                <div className="subtitle">
-                    借款范围（500 - 10万）
-				</div>
-                <div className="next">
-
-                </div>
-            </div>
-        )
-    }
-}
-
-class BorrowMoneyList extends React.Component {
-    render() {
-        return (
-            <div className="">
-                <div className="borrow-money-list">
-                    <div className="icon-block">
-                        <img src="images/icon.png" />
-                    </div>
-                    <div className="info">
-                        <div className="t">
-                            <span className="title-text">读秒</span>
-                            <div className="tag">
-                                <img src="images/tag-1a.png" />
-                                <img src="images/tag-2a.png" />
-                                <img src="images/tag-3a.png" />
+                            <div className="b">
+                                <div className="text"> 借款范围（{p.amountStr}） </div>
                             </div>
                         </div>
-
-                        <div className="b">
-                            <div className="text">
-                                借款范围（500 - 10万）
-							</div>
-                        </div>
+                        <div className="next"></div>
                     </div>
-                    <div className="next">
+                </Nav>
+            )
+        }
 
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
-class BorrowMoney extends React.Component {
-    render() {
         return (
-            <div className="">
-                <Banner />
-                <TopInfo />
-                <BorrowMoneyList />
+            <div>
+                <div className="banner">
+                    <img src="images/banner.png" />
+                </div>
+                <div className="top-info">
+                    <div className="logo"> <img src="images/logo.png" /> </div>
+                    <div className="title"> 放心花 </div>
+                    <div className="tag">
+                        <img src="images/tag-1.png" />
+                        <img src="images/tag-2.png" />
+                        <img src="images/tag-3.png" />
+                    </div>
+                    <div className="subtitle"> 借款范围（500 - 10万） </div>
+                    <div className="next"> </div>
+                </div>
+                {this.props.products.map(product)}
             </div>
         )
     }
 }
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<BorrowMoney />, CONTENT_NODE)
+    $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
+        .then(data => ReactDOM.render(<MainPanel products={data.resultList} />, CONTENT_NODE))
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE)
 })
-
-window.onerror = function(errorMessage, scriptURI, lineNumber,columnNumber,errorObj) {
-    alert("错误信息：", errorMessage);
-    console.log("出错文件：", scriptURI);
-    console.log("出错行号：", lineNumber);
-    console.log("出错列号：", columnNumber);
-    alert("错误详情：", errorObj);
-}
-
-
