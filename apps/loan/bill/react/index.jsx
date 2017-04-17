@@ -110,8 +110,8 @@ class Content extends React.Component{
             //     billPaid: '已还款',
             // };
             return (
-                <div key={i.billType} className={i == this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
-                     onClick={()=>{this.tabClickHandler(i) }}>
+                <div key={i.billType} className={i.billType === this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
+                     onClick={()=>{this.tabClickHandler(i.billType) }}>
                      <span className="text">{i.typeCN}</span>
                     {/* <span className="text">{name[i]}</span> */}
                 </div>
@@ -124,6 +124,8 @@ class Content extends React.Component{
             let loanGid = item.loanGid;
             let baseStatus = this.tabs[status-1].typeCN;
             let statusColor = `bill-${this.tabs[status-1].billType}-color`;
+            console.log(this.tabs[status-1].billType);
+            console.log(statusColor);
             // let baseStatus;
             // let statusColor;
             // switch(status){
