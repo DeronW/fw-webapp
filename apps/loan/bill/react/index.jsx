@@ -136,12 +136,12 @@ class Content extends React.Component{
         return (
             <div className="billContent">
                 <div className="bill-header">
-                    <div className="billTitle">借款账单</div>
+                    {!$FW.Browser.inWeixin() && <div className="billTitle">借款账单</div>}
                     <div className="ui-tab-block">
                         {this.tabs.map(tab_bar)}
                     </div>
                 </div>
-                <div className="billContainer">
+                <div className={$FW.Browser.inWeixin() ? "billContainer-weixin" : "billContainer"}>
                     {this.state.bill.map(list_li)}
                     {this.state.bill.length === 0 && !this.state.hasData && empty}
                 </div>
