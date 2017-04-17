@@ -2,7 +2,7 @@ class Banner extends React.Component {
 	render() {
 		return (
 			<div className="banner">
-				<img src="images/banner.png" />	
+				<img src="images/banner.png" />
 			</div>
 		)
 	}
@@ -14,7 +14,7 @@ class TopInfo extends React.Component {
 			<div className="top-info">
 				<div className="logo">
 					<img src="images/logo.png" />
-				</div>	
+				</div>
 
 				<div className="title">
 					放心花
@@ -31,7 +31,7 @@ class TopInfo extends React.Component {
 				</div>
 
 				<div className="next">
-					
+
 				</div>
 			</div>
 		)
@@ -44,7 +44,7 @@ class BorrowMoneyList extends React.Component {
 			<div className="">
 				<div className="borrow-money-list">
 					<div className="icon-block">
-						<img src="images/icon.png" />	
+						<img src="images/icon.png" />
 					</div>
 
 					<div className="info">
@@ -65,7 +65,7 @@ class BorrowMoneyList extends React.Component {
 					</div>
 
 					<div className="next">
-					
+
 					</div>
 				</div>
 			</div>
@@ -73,7 +73,7 @@ class BorrowMoneyList extends React.Component {
 	}
 }
 
-class BorrowMoney extends React.Component {	
+class BorrowMoney extends React.Component {
 	render() {
 		return (
 			<div className="">
@@ -82,10 +82,20 @@ class BorrowMoney extends React.Component {
 				<BorrowMoneyList />
 			</div>
 		)
-	}	
+	}
 }
 
-ReactDOM.render(
-	<BorrowMoney />,
-	document.getElementById('cnt')
-)
+$FW.DOMReady(()=>{
+        ReactDOM.render(
+        <BorrowMoney />,
+        document.getElementById('cnt')
+    )
+})
+
+window.onerror = function(errorMessage, scriptURI, lineNumber,columnNumber,errorObj) {
+    alert("错误信息：", errorMessage);
+    console.log("出错文件：", scriptURI);
+    console.log("出错行号：", lineNumber);
+    console.log("出错列号：", columnNumber);
+    alert("错误详情：", errorObj);
+}
