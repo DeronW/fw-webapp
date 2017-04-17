@@ -72,7 +72,7 @@ const Login = React.createClass({
             method: 'post',
             data: FormData,
             success: function (data) {
-               // $FW.Component.Alert("原来你在测试那就告诉你验证码：" + data.code)
+               $FW.Component.Alert("原来你在测试那就告诉你验证码：" + data.code)
                 this.setState({value: 60, reSend: false});
                 this.tick()
                 this.setState({reSend: false});
@@ -221,7 +221,6 @@ const Login = React.createClass({
                     <input type="button" onClick={this.state.tab == 'veri' ?this.loginVeri:this.loginPaw}
                            className={this.state.active ? "btn-red active":"btn-red"} value="登录"/>
                 </div>
-                <p>{this.state.value}</p>
             </div>
         )
     }
