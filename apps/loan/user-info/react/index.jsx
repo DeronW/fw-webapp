@@ -85,9 +85,9 @@ class CitySelectWrap extends React.Component {
                   key={c}
                   className="city-option"
                   onClick={(e) => {
-                      // if e.target.clientX / e.target.clientWidth > 0.9, assume
+                      // if e.target.clientX / e.target.clientWidth > 0.8, assume
                       // that user clicked on division elements to scroll
-                      if (e.target.clientX / e.target.clientWidth > 0.9) {
+                      if (e.target.clientX / e.target.clientWidth > 0.8) {
                           return;
                       }
                       this.props.handleClick(this.props.itemIndex, c);
