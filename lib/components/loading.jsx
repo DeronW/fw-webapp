@@ -1,7 +1,6 @@
 /*
  parameters
  <Loading />
-
  */
 
 class GlobalLoading extends React.Component {

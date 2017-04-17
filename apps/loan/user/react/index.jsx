@@ -1,14 +1,14 @@
 class AvatarCard extends React.Component {
     render() {
         let avatarSrc = this.props.src || 'images/avatar_default.png';
-        let maskedPhoneNum = maskInfo(this.props.phoneNum, 3, -5);
+        // let maskedPhoneNum = maskInfo(this.props.phoneNum, 3, -5);
         return (
             <div className="avator-card">
                 <div className="avatar-container">
                     <img src={avatarSrc} alt="user avatar"/>
                 </div>
                 <div className="masked-phone-num">
-                    {maskedPhoneNum}
+                    {this.props.phoneNum}
                 </div>
             </div>
         )
@@ -92,10 +92,10 @@ class UserInfoEnterWrap extends React.Component {
     handleJump(infoID) {
         const USER = $FW.Store.getUserDict();
         $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
+            sourceType: SOURCE_TYPE,
             token: USER.token,
             userGid: USER.gid,
             userId: USER.id,
-            sourceType: SOURCE_TYPE,
             productId: 1
         }).then(data => {
             switch (data.borrowBtnStatus) {
@@ -173,26 +173,35 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-function maskInfo(text, sIndex, eIndex) {
-    let textLength = text.length,
-        startIndex = Math.max(0, sIndex),
-        endIndex = eIndex < 0
-            ? (textLength + eIndex)
-            : Math.max(eIndex, textLength - 1);
-    return `${text.substr(0, startIndex)}${ '*'.repeat(endIndex - startIndex + 1)}${text.substr(endIndex + 1, textLength - 1)}`
-}
+// function maskInfo(text, sIndex, eIndex) {
+//     let textLength = text.length,
+//         startIndex = Math.max(0, sIndex),
+//         endIndex = eIndex < 0
+//             ? (textLength + eIndex)
+//             : Math.max(eIndex, textLength - 1);
+//     return `${text.substr(0, startIndex)}${ '*'.repeat(endIndex - startIndex + 1)}${text.substr(endIndex + 1, textLength - 1)}`
+// }
+
+// let phone_mask = n => String(n).replace(/(\d{3})\d{4}(\d{4})/, "'$1****$2")
 
 const USER = $FW.Store.getUserDict();
 
 // render ReactDom
 $FW.DOMReady(() => {
-    ReactDOM.render(
-        <BottomNavBar/>, BOTTOM_NAV_NODE);
-    $FW.Post(`${API_PATH}/api/userBase/v1/userCenter.json`, {
-        token: USER.token,
-        uid: USER.uid
-    }).then(data => {
-        ReactDOM.render(
-            <UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
-    }, e => $FW.Component.Toast(e.message));
+    ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
+
+    // $FW.Post(`${API_PATH}/api/userBase/v1/userCenter.json`, {
+    //     sourceType: SOURCE_TYPE,
+    //     userGid: USER.gid,
+    //     userId: USER.id,
+    //     token: USER.token,
+    //     uid: USER.uid
+    // }).then(data => {
+    //     ReactDOM.render(
+    //         <UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
+    // }, e => {$FW.Component.Toast(e.message); console.log(e.code); console.log(e.message);});
+
+    $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
+        ReactDOM.render( <UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
+    }, e => {$FW.Component.Toast(e.message)});
 })

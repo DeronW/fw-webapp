@@ -71,7 +71,7 @@ $FW.DOMReady(function () {
             userGid: user.gid,
             userId: user.id,
             sourceType: SOURCE_TYPE,
-            loanUuid: loanGid
+            loanGid: loanGid
         }
     }).then((data) => {
         ReactDOM.render(<Detail data={data} />, CONTENT_NODE);

@@ -244,9 +244,8 @@ $FW.DOMReady(function () {
     }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
     }, e => {
-        // $FW.Component.Alert(e.message)
         $FW.Capture(e)
     });
 
-    !$FW.Browser.inApp() && ReactDOM.render(<BottomNavBar index={1} />, BOTTOM_NAV_NODE)
+    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE)
 });

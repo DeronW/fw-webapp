@@ -1,6 +1,6 @@
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
-    ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
+    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     var page = 1;
     var loadNextPage = true;
     $("#tab-content").height($(document).height() - 425 + "px");

@@ -1,5 +1,42 @@
-const RegisterContent = React.createClass({
-    render:function () {
+class RegisterContent extends React.Component{
+    constructor(props) {
+
+        super(props);
+        this.state = {
+            phonenumber: '',
+            totleInvestYi:'',
+            totleInvestWan:'',
+            isShow:'none'
+        };
+    }
+    componentDidMount(){
+        $FW.getJSONP("https://fore.9888.cn/cms/api/dealstatis.php",(data)=>{
+            console.log(data)
+        })
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+    }
+    handleScroll(){
+        if(document.body.scrollTop>400){
+            console.log(document.body.scrollTop)
+            this.setState({isShow:"block"})
+        }else{
+            this.setState({isShow:"none"})
+        }
+    }
+    phonenumberHandler(e){
+        this.setState({phonenumber: e.target.value});
+        console.log( e.target.value);
+    }
+    registerHandler(){
+        let phoneReg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        if(this.state.phonenumber==""){
+          $FW.Component.Toast("手机号不能为空")
+        }else if(!phoneReg.test(this.state.phonenumber)){
+            $FW.Component.Toast("手机号格式不正确")
+        }
+    }
+    render(){
+        let {phonenumber,totleInvestYi,totleInvestWan,isShow} = this.state;
         return <div className="aisidiContainer">
             <div className="aisidiTop"></div>
             <div className="banner">
@@ -11,12 +48,12 @@ const RegisterContent = React.createClass({
                     </div>
                     <div className="formContainer">
                         <div className="inputBox">
-                            <input type="text"  className="inputs" placeholder="请输入您的手机号" name="mobile" maxLength="16"/>
+                            <input type="text" value={phonenumber} onChange={this.phonenumberHandler.bind(this)} className="inputs" placeholder="请输入您的手机号" name="mobile" maxLength="16"/>
                         </div>
                         <div className="inputBox">
                             <input type="text"  className="inputs" placeholder="请输入推荐人工场码" />
                         </div>
-                        <div className="registerButton">
+                        <div className="registerButton" onClick={this.registerHandler.bind(this)}>
                             立即注册
                         </div>
                         <div className="tips">
@@ -57,15 +94,14 @@ const RegisterContent = React.createClass({
                     <div className="box-left">
                         <div>用户投资金额</div>
                         <div className="data">
-                            <span className="number">11</span>亿
-                            <span className="number">33333</span>万元
+                            <span className="number">{totleInvestYi}</span>亿
+                            <span className="number">{totleInvestWan}</span>万元
                         </div>
                     </div>
                     <div className="box-left">
-                        <div>用户投资金额</div>
+                        <div>注册会员数量超过</div>
                         <div className="data">
-                            <span className="number">22</span>亿
-                            <span className="number">33333</span>万元
+                            <span className="number">{}</span>万人
                         </div>
                     </div>
                 </div>
@@ -143,13 +179,13 @@ const RegisterContent = React.createClass({
                     </div>
                 </div>
             </div>
-            <div className="foot" style={{display:"block"}}>
+            <div className="foot" style={{display:isShow}}>
                 <a href="#" className="btn-foot">立即领取新手礼包</a>
             </div>
         </div>
     }
 
-});
+};
 
 $FW.DOMReady(function () {
     ReactDOM.render(<RegisterContent/>, CONTENT_NODE);

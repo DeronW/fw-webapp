@@ -12,7 +12,8 @@ class Content extends React.Component{
                billFailing:1,
                billPaid:1
            },
-           bill:[]
+           bill:[],
+           hasData:true
         }
         this.tabClickHandler = this.tabClickHandler.bind(this);
     }
@@ -31,7 +32,7 @@ class Content extends React.Component{
             loanStatus = 4
         }
 
-     $FW.Post(`${API_PATH}api/order/v1/orderList.json`,{
+     $FW.Post(`${API_PATH}/api/order/v1/orderList.json`,{
          pageSize:this.count,
          pageIndex:page,
          loanStatus:loanStatus,
@@ -39,8 +40,7 @@ class Content extends React.Component{
          userGid: USER.gid,
          userId: USER.id,
          uid:USER.uid,
-         sourceType: SOURCE_TYPE,
-         fail: () => true
+         sourceType: SOURCE_TYPE
        }).then((data)=>{
          let tab;
          if (loanStatus == 1) {
@@ -55,12 +55,12 @@ class Content extends React.Component{
              done && done();
              return;
          }
-         window.Bill[tab] = window.Bill[tab].concat(data.loanbillList);
+         window.Bill[tab] = window.Bill[tab].concat(data.resultList);
          let bill = window.Bill[this.state.tab];
          let new_page = this.state.page;
          new_page[this.state.tab] = new_page[this.state.tab] + 1;
          if (data.totalCount < 5) new_page[this.state.tab] = 0;
-         this.setState({bill: bill, page: new_page});
+         this.setState({bill: bill, page: new_page, hasData:!!data.resultList.length});
          done && done();
      }, (err)=>$FW.Component.Toast(err.message));
     }
@@ -93,8 +93,9 @@ class Content extends React.Component{
         };
 
         let list_li = (item,index) => {
-            let status = parseInt(item.baseStauts);
+            let status = parseInt(item.baseStatus);
             let uuid = item.uuid;
+            let loanGid = item.loanGid;
             let baseStatus;
             let statusColor;
             switch(status){
@@ -116,11 +117,11 @@ class Content extends React.Component{
                     break;
             }
             return (
-                <a className="list_li" key={index} href={item.productId == 1 ? `/static/loan/bill-detail/index.html?uuid=${uuid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${uuid}`}>
+                <a className="list_li" key={index} href={item.productId == 1 ? `/static/loan/bill-detail/index.html?uuid=${loanGid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${uuid}`}>
                     <div className="list-img"><img src={item.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png"}/></div>
                     <div className="list-content">
                         <div className="apply-num">借款金额:{item.loanAmtStr}元</div>
-                        <div className="apply-duration">借款期限:{item.tremNum}天</div>
+                        <div className="apply-duration">借款期限:{item.termNum}天</div>
                     </div>
                     <div className="apply-status-wrap">
                         <div className="apply-status"><span className={statusColor}>{baseStatus}</span></div>
@@ -129,6 +130,8 @@ class Content extends React.Component{
                 </a>
             )
         }
+
+        let empty = <span className="no-data"></span>;
 
         return (
             <div className="billContent">
@@ -139,7 +142,8 @@ class Content extends React.Component{
                     </div>
                 </div>
                 <div className="billContainer">
-                    {this.state.bill.length > 0 ? this.state.bill.map(list_li) : <span className="no-data"></span>}
+                    {this.state.bill.map(list_li)}
+                    {this.state.bill.length === 0 && !this.state.hasData && empty}
                 </div>
             </div>
         )

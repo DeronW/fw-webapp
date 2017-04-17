@@ -11,7 +11,7 @@ function productLink(bizNo) {
 }
 
 const Mall = React.createClass({
-    getInitialState: function () {
+    getInitialState: function() {
         return {
             background: "transparent",
             logoImage: "images/logo.png",
@@ -19,7 +19,7 @@ const Mall = React.createClass({
             borderBottom: "none"
         }
     },
-    getHeadImages: function () {
+    getHeadImages: function() {
         var images = [];
         var bs = this.props.banners;
         for (var i = 0; i < bs.length; i++) {
@@ -27,7 +27,7 @@ const Mall = React.createClass({
         }
         return images;
     },
-    onImageClickHandler: function (index) {
+    onImageClickHandler: function(index) {
         var link = null;
         var bs = this.props.banners;
         for (var i = 0; i < bs.length; i++) {
@@ -35,8 +35,8 @@ const Mall = React.createClass({
         }
         link && gotoHandler(link)
     },
-    componentDidMount: function () {
-        window.addEventListener('scroll', function () {
+    componentDidMount: function() {
+        window.addEventListener('scroll', function() {
             var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 
             let style = scrollTop > 400 ? {
@@ -44,10 +44,10 @@ const Mall = React.createClass({
                 logoImage: "images/m-logo.png",
                 avatarImage: "images/m-list-icon.png"
             } : {
-                    background: "transparent",
-                    logoImage: "images/logo.png",
-                    avatarImage: "images/list-icon.png"
-                }
+                background: "transparent",
+                logoImage: "images/logo.png",
+                avatarImage: "images/list-icon.png"
+            }
 
             this.setState(style);
         }.bind(this), false);
@@ -72,6 +72,7 @@ const Mall = React.createClass({
             paddingBottom: "20px",
             transition: "1s all"
         };
+
         let Charge_Nav = <div className="charge-nav">
             <div className="charge-bill"><img src="images/charge-bill.png" /></div>
             <div className="charge-flow"><img src="images/charge-flow.png" /></div>
@@ -86,7 +87,7 @@ const Mall = React.createClass({
                         <a href="/static/mall/product-list/index.html?searchSourceType=2"
                             className="search-bar-a">
                             <img className="search-icon" src="images/search-icon.png" />
-                            <div className="search-bar">请您输入关键字。。。</div>
+                            <div className="search-bar">请您输入关键字</div>
                         </a>
                         <a className="index-avatar" href="/static/mall/user/index.html">
                             <img src={this.state.avatarImage} /></a>
@@ -129,8 +130,8 @@ const Mall = React.createClass({
     }
 });
 
-$FW.DOMReady(function () {
-    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
-    $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
-        .then(data => ReactDOM.render(<Mall banners={data.banners} />, CONTENT_NODE));
+$FW.DOMReady(function() {
+            ReactDOM.render( < BottomNavBar / > , BOTTOM_NAV_NODE);
+            $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
+                .then(data => ReactDOM.render(<Mall banners={data.banners} />, CONTENT_NODE));
 });

@@ -94,7 +94,7 @@ const Register = React.createClass({
                 </div>
 
                 <div className="register-login-btn">
-                    <div className="ui-btn" onClick={this.handleGetCode}>下一步</div>
+                    <Nav className="ui-btn" onClick={this.handleGetCode}>下一步</Nav>
                 </div>
             </div>
         )
