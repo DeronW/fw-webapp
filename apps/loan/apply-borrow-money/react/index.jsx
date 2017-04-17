@@ -813,8 +813,11 @@ class ApplyBorrowMoney extends React.Component {
 	}
 }
 
+//ReactDOM.render(<ApplyBorrowMoney  />, CONTENT_NODE)
+
 
 $FW.DOMReady(() => {
-	<ApplyBorrowMoney />,
-	document.getElementById('cnt')
+	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
+        .then(data => ReactDOM.render(<ApplyBorrowMoney  />, CONTENT_NODE))
 })
+
