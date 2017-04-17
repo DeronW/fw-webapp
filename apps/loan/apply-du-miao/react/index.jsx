@@ -46,6 +46,17 @@ class BorrowMoneyDatailList extends React.Component {
 }
 
 class BorrowMoney extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            product: {}
+        }
+    }
+    componentDidMount = () => {
+        let pid = $FW.Format.urlQuery().id;
+        $FXH.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}`)
+            .then(data => this.setState({ product: data }))
+    }
     render() {
         return (
             <div className="">
@@ -90,9 +101,11 @@ class BorrowMoney extends React.Component {
                         </div>
                     </div>
                 </div>
+
                 <BorrowMoneyDatailList product={this.props.product} />
+
                 <div className="footer">
-                    <div className="btn">马上拿钱</div>
+                    <Nav className="btn" href="/static/loan/apply-borrow-money/index.html">马上拿钱</Nav>
                 </div>
             </div>
         )
@@ -100,9 +113,5 @@ class BorrowMoney extends React.Component {
 }
 
 $FW.DOMReady(() => {
-    let pid = $FW.Util.querySelector().id;
-    $FXH.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}`)
-        .then(data => {
-            ReactDOM.render(<BorrowMoney product={data} />, CONTENT_NODE)
-        })
+    ReactDOM.render(<BorrowMoney />, CONTENT_NODE)
 })

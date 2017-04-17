@@ -9,7 +9,7 @@ class MainPanel extends React.Component {
                 link = p.productName == '放心花' ? link_a : link_b;
 
             return (
-                <Nav className="borrow-money-list" key={index} href={link}>
+                <Nav className="borrow-money-list" key={index} href={`${link}?pid=${p.productId}`}>
                     <div className="icon-block">
                         <img src="images/icon.png" />
                     </div>
@@ -37,7 +37,7 @@ class MainPanel extends React.Component {
                 <a href="/static/loan/weixin-download/index.html" className="banner">
                     <img src="images/banner.png" />
                 </a>
-                <a href="/static/loan/apply-zhang-zhong/index.html" className="top-info">
+                <a href={`/static/loan/apply-zhang-zhong/index.html?pid=${main_product.productId}`} className="top-info">
                     <div className="logo"> <img src="images/logo.png" /> </div>
                     <div className="title"> {main_product.productName} </div>
                     <div className="tag">
