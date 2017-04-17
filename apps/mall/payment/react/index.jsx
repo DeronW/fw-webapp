@@ -95,18 +95,18 @@ const Payment = React.createClass({
             location.href = link;
         }
         else if (index == 'z') {
-            var query = $FW.Format.urlQuery();
-            console.log(query);
+            var queryNew = $FW.Format.urlQuery();
+            console.log(queryNew);
              //申请支付
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
                 enable_loading: true,
                 data: {
                     payType: 3,
-                    orderBizNo: query.orderBizNo,
-                    orderGroupBizNo: query.orderGroupBizNo,
-                    orderTime: query.orderTime,
-                    amount: query.amount,
+                    orderBizNo: queryNew.orderBizNo,
+                    orderGroupBizNo: queryNew.orderGroupBizNo,
+                    orderTime: queryNew.orderTime,
+                    amount: queryNew.amount,
                     UserId:""
                 },
             }).then(data=> {
