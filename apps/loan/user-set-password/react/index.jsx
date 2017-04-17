@@ -26,7 +26,8 @@ const SetPassword = React.createClass({
             countdown: 0,
             plainCode: false,
             codeToken: codeToken,
-            checked: false
+            checked: false,
+            inviteCode:''
         }
     },
     changeCode(e) {
@@ -36,6 +37,10 @@ const SetPassword = React.createClass({
     changePasswordHandler(e) {
         let v = e.target.value;
         v.length <= 16 && verificationNum(v) && this.setState({ password: v });
+    },
+    changeInviteCodeHandler(e){
+        let v = e.target.value;
+        v.length <= 7 && this.setState({inviteCode:v});
     },
     componentDidMount() {
         this.countingDown();
@@ -84,6 +89,7 @@ const SetPassword = React.createClass({
                 codeToken: this.state.codeToken,
                 password: password,
                 verifyCode: code,
+                inviteCode:this.state.inviteCode,
                 sourceType: SOURCE_TYPE
             }).then(data => {
                 let dict = data.userLogin;
@@ -91,9 +97,10 @@ const SetPassword = React.createClass({
                     token: dict.userToken,
                     id: dict.userId,
                     gid: dict.userGid,
-                    status: dict.userStatus
+                    status: dict.userStatus,
+                    invitCode:dict.invitationCode,
+                    uid:dict.uid
                 })
-
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message))
     },
@@ -136,6 +143,18 @@ const SetPassword = React.createClass({
                         </div>
 
                         <span className={this.state.plainCode? "icon-pwd1": "icon-pwd"} onClick={this.handlePlainCode}></span>
+                    </div>
+                    <div className="list invite-list">
+                        <span className="icon"></span>
+                        <div className="input">
+                            <input
+                                type="text"
+                                value={this.state.inviteCode}
+                                onChange={this.changeInviteCodeHandler}
+                                placeholder="请输入邀请码"
+                            />
+                        </div>
+                        <span className="invite-tip">(选填)</span>
                     </div>
                 </div>
                 <div className="agreement-issue">
