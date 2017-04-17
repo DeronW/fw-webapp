@@ -184,24 +184,20 @@ class UserInfoWrap extends React.Component {
 
 // let phone_mask = n => String(n).replace(/(\d{3})\d{4}(\d{4})/, "'$1****$2")
 
-// const USER = $FW.Store.getUserDict();
+const USER = $FW.Store.getUserDict();
 
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
 
-    // $FW.Post(`${API_PATH}/api/userBase/v1/userCenter.json`, {
-    //     sourceType: SOURCE_TYPE,
-    //     userGid: USER.gid,
-    //     userId: USER.id,
-    //     token: USER.token,
-    //     uid: USER.uid
-    // }).then(data => {
-    //     ReactDOM.render(
-    //         <UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
-    // }, e => {$FW.Component.Toast(e.message); console.log(e.code); console.log(e.message);});
-
-    $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
+    $FW.Post(`${API_PATH}/api/userBase/v1/userCenter.json`, {
+        token: USER.token,
+        userGid: USER.gid,
+        userId: USER.id,
+        uid: USER.uid,
+        sourceType: SOURCE_TYPE
+    }).then(data => {
+    // $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
         ReactDOM.render( <UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
     }, e => {$FW.Component.Toast(e.message)});
 })
