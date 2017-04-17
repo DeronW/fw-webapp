@@ -74,7 +74,6 @@ const OrderStatusList = React.createClass({
                 status_name = '';
         }
 
-     
         let shipping = <div>
             <div className="info-block">
                 <span className="text">物流名称</span>
