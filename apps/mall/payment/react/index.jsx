@@ -123,7 +123,8 @@ const Payment = React.createClass({
                     // let completeForm=formStart+content+formEnd;
                     // document.write(completeForm);
                     // document.forms[0].submit();
-                    {data.form};
+
+                    document.write(data.form);
                     setTimeout(() => {
                         this.queryState();
                     }, 3000);
