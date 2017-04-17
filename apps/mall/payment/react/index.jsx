@@ -36,6 +36,7 @@ const Payment = React.createClass({
     },
     //申请查询支付結果
     queryState: function () {
+        let query = $FW.Format.urlQuery();
         let FormData = {
             payType: 4,
             orderBizNo: query.orderBizNo,
