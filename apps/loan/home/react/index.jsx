@@ -35,7 +35,7 @@ class MainPanel extends React.Component {
                 <div className="banner">
                     <img src="images/banner.png" />
                 </div>
-                <div className="top-info">
+                <a href="/static/loan/apply-zhang-zhong/index.html" className="top-info">
                     <div className="logo"> <img src="images/logo.png" /> </div>
                     <div className="title"> 放心花 </div>
                     <div className="tag">
@@ -45,7 +45,7 @@ class MainPanel extends React.Component {
                     </div>
                     <div className="subtitle"> 借款范围（500 - 10万） </div>
                     <div className="next"> </div>
-                </div>
+                </a>
                 {this.props.products.map(product)}
             </div>
         )
