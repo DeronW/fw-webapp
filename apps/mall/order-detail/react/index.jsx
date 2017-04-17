@@ -18,6 +18,7 @@ const OrderDetail = React.createClass({
         );
     }
 });
+
 const Coupon = React.createClass({
     render: function () {
         let ls = this.props.coupon;
@@ -48,8 +49,10 @@ const Coupon = React.createClass({
         )
     }
 });
+
 const OrderStatusList = React.createClass({
     render: function () {
+
         let status_name;
         switch (this.props.status) {
             case 'prepare':
@@ -70,6 +73,7 @@ const OrderStatusList = React.createClass({
             default:
                 status_name = '';
         }
+
         let shipping = <div>
             <div className="info-block">
                 <span className="text">物流名称</span>
@@ -81,7 +85,7 @@ const OrderStatusList = React.createClass({
             </div>
             <div className="address-list">
                 <div className="address-icon">
-                    <img src="images/ico-address.png"/>
+                    <img src="images/ico-blue-location.png"/>
                 </div>
                 <div className="address-info">
                     <div className="my-info-text">
@@ -94,6 +98,7 @@ const OrderStatusList = React.createClass({
                 </div>
             </div>
         </div>;
+
         return (
             <div className="l-r-text">
                 <div className="info-block">
@@ -107,13 +112,17 @@ const OrderStatusList = React.createClass({
         );
     }
 });
+
 const OrderStatusBlock = React.createClass({
     render: function () {
         let products = this.props.products;
         let order = this.props.order;
+
         let orderBlock = function (d, index) {
+
             let pay_price = d.price > 0 || d.score == 0 ? <span> &yen;{$FW.Format.currency(d.price)}</span> : null;
             let score_cost = d.score ? d.score + '工分' : null;
+
             return (
                 <div className="order-block" key={index}>
                     <div className="info-block">
@@ -121,6 +130,7 @@ const OrderStatusBlock = React.createClass({
                             <div className="commodity-img">
                                 <img src={d.img || 'images/default-product.jpg'}/>
                             </div>
+
                             <div className="commodity-info">
                                 <div className="commodity-name">
                                     <h2>{d.title}</h2>
@@ -139,6 +149,7 @@ const OrderStatusBlock = React.createClass({
                                 </div>
                             </div>
                         </div>
+
                         <div className="order-commodity-total">
                             <span className="commodity-text">共{order.count}件商品</span>
                             <span className="total-text">
@@ -160,10 +171,12 @@ const OrderStatusBlock = React.createClass({
         );
     }
 });
+
 const OrderPayInfo = React.createClass({
     render: function () {
         let payment = this.props.payment;
         let order = this.props.order;
+
         let score, bean, ticket, money;
         if (payment.score) {
             score =
@@ -196,6 +209,7 @@ const OrderPayInfo = React.createClass({
                     <span className="data-text">&yen;{payment.money}</span>
                 </div>
         }
+
         return (
             <div className="order-pay-info">
                 <div className="ui-block-title">
@@ -211,9 +225,11 @@ const OrderPayInfo = React.createClass({
         );
     }
 });
+
 const OrderNumberList = React.createClass({
     render: function () {
         let order = this.props.order;
+
         let pay_at = null;
         if (order.pay_at) {
             pay_at =
@@ -222,6 +238,7 @@ const OrderNumberList = React.createClass({
                     <span className="time-text">{order.pay_at}</span>
                 </div>
         }
+
         let deliver_at = null;
         if (order.deliver_at) {
             deliver_at =
@@ -230,6 +247,7 @@ const OrderNumberList = React.createClass({
                     <span className="time-text">{order.deliver_at}</span>
                 </div>;
         }
+
         let receive_at = null;
         if (order.receive_at) {
             receive_at =
@@ -238,11 +256,13 @@ const OrderNumberList = React.createClass({
                     <span className="time-text">{order.receive_at}</span>
                 </div>
         }
+
         return (
             <div className="order-number">
                 <div className="title">
                     订单号：{order.bizNo}
                 </div>
+
                 <div className="sequence">
                     {pay_at}
                     {deliver_at}
@@ -252,6 +272,7 @@ const OrderNumberList = React.createClass({
         );
     }
 });
+
 $FW.DOMReady(function () {
     let query = $FW.Format.urlQuery();
     let order_id = $FW.Format.urlQuery().orderId;
@@ -272,3 +293,4 @@ $FW.DOMReady(function () {
     });
     ReactDOM.render(<Header title={"订单详情"}/>, HEADER_NODE);
 });
+
