@@ -95,7 +95,8 @@ const Payment = React.createClass({
             location.href = link;
         }
         else if (index == 'z') {
-            let query = $FW.Format.urlQuery();
+            var query = $FW.Format.urlQuery();
+            console.log(query);
              //申请支付
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
