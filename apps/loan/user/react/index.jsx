@@ -172,17 +172,6 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-// function maskInfo(text, sIndex, eIndex) {
-//     let textLength = text.length,
-//         startIndex = Math.max(0, sIndex),
-//         endIndex = eIndex < 0
-//             ? (textLength + eIndex)
-//             : Math.max(eIndex, textLength - 1);
-//     return `${text.substr(0, startIndex)}${ '*'.repeat(endIndex - startIndex + 1)}${text.substr(endIndex + 1, textLength - 1)}`
-// }
-
-// let phone_mask = n => String(n).replace(/(\d{3})\d{4}(\d{4})/, "'$1****$2")
-
 const USER = $FW.Store.getUserDict();
 console.log(`token: ${USER.token}, userGid: ${USER.gid}, userId: ${USER.id}, uid: ${USER.uid}, sourceType: ${SOURCE_TYPE}`);
 
