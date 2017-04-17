@@ -55,7 +55,7 @@ let More = React.createClass({
                     </div>
 
 
-                    {isLoggedIn && <div className="more-btn">
+                    {/* {isLoggedIn && <div className="more-btn">
                         <div className="ui-btn" onClick={this.popShow}>退出登录</div>
                     </div>}
 
@@ -69,7 +69,7 @@ let More = React.createClass({
                                 <span className="pop-confirm" onClick={this.logoutHandler}>确认</span>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className={this.state.contact ? "mask" : "mask dis"} style={{ zIndex: 100 }}>
                         <div className="pop">
