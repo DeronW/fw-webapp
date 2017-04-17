@@ -2,6 +2,21 @@ class Content extends React.Component{
     constructor(props){
         super(props);
         this.tabs = ['billApplying', 'billReturning', 'billFailing', 'billPaid'];
+        // this.tabs = [
+        //   {
+        //     billType: 'billApplying',
+        //     typeCN: '申请中'
+        //   }, {
+        //     billType: 'billReturning',
+        //     typeCN: '还款中'
+        //   }, {
+        //     billType: 'billFailing',
+        //     typeCN: '未通过'
+        //   }, {
+        //     billType: 'billPaid',
+        //     typeCN: '已还款'
+        //   }
+        // ];
         let tab = $FW.Format.urlQuery().tab;
         this.count = 5;
         this.state = {
@@ -21,6 +36,7 @@ class Content extends React.Component{
         const USER = $FW.Store.getUserDict();
         let page = this.state.page[this.state.tab];
         if (page == 0) return;
+        // let loanStatus = this.tabs.findIndex((t) => (t.billType === this.state.tab)) + 1;
         let loanStatus;
         if (this.state.tab == 'billApplying') {
             loanStatus = 1
@@ -42,6 +58,7 @@ class Content extends React.Component{
          uid:USER.uid,
          sourceType: SOURCE_TYPE
        }).then((data)=>{
+        //  let tab = this.tabs[loanStatus-1].billType;
          let tab;
          if (loanStatus == 1) {
              tab = 'billApplying'
@@ -87,6 +104,7 @@ class Content extends React.Component{
             return (
                 <div key={i} className={i == this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
                      onClick={()=>{this.tabClickHandler(i) }}>
+                     {/* <span className="text">{i.typeCN}</span> */}
                     <span className="text">{name[i]}</span>
                 </div>
             )
@@ -96,6 +114,7 @@ class Content extends React.Component{
             let status = parseInt(item.baseStatus);
             let uuid = item.uuid;
             let loanGid = item.loanGid;
+            // let baseStatus =
             let baseStatus;
             let statusColor;
             switch(status){
@@ -136,12 +155,12 @@ class Content extends React.Component{
         return (
             <div className="billContent">
                 <div className="bill-header">
-                    <div className="billTitle">借款账单</div>
+                    {!$FW.Browser.inWeixin() && <div className="billTitle">借款账单</div>}
                     <div className="ui-tab-block">
                         {this.tabs.map(tab_bar)}
                     </div>
                 </div>
-                <div className="billContainer">
+                <div className={$FW.Browser.inWeixin() ? "billContainer-weixin" : "billContainer"}>
                     {this.state.bill.map(list_li)}
                     {this.state.bill.length === 0 && !this.state.hasData && empty}
                 </div>
@@ -161,4 +180,3 @@ $FW.DOMReady(function(){
     ReactDOM.render(<Content />, CONTENT_NODE);
     ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
 });
-
