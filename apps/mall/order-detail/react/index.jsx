@@ -74,7 +74,8 @@ const OrderStatusList = React.createClass({
                 status_name = '';
         }
 
-        let shipping = <div>
+        {/*let shipping = this.props.send_channel ? <div>*/}
+        let shipping = this.props.send_channel ? <div>
             <div className="info-block">
                 <span className="text">物流名称</span>
                 <span className="data-text">{this.props.send_channel}</span>
@@ -85,7 +86,7 @@ const OrderStatusList = React.createClass({
             </div>
             <div className="address-list">
                 <div className="address-icon">
-                    <img src="images/ico-blue-location.png"/>
+                    <img src="images/icon-address.png"/>
                 </div>
                 <div className="address-info">
                     <div className="my-info-text">
