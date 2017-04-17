@@ -36,6 +36,7 @@ const Payment = React.createClass({
     },
     //申请查询支付結果
     queryState: function () {
+        let query = $FW.Format.urlQuery();
         let FormData = {
             payType: 4,
             orderBizNo: query.orderBizNo,
@@ -95,17 +96,18 @@ const Payment = React.createClass({
             location.href = link;
         }
         else if (index == 'z') {
-            let query = $FW.Format.urlQuery();
+            var queryNew = $FW.Format.urlQuery();
+            console.log(queryNew);
              //申请支付
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
                 enable_loading: true,
                 data: {
                     payType: 3,
-                    orderBizNo: query.orderBizNo,
-                    orderGroupBizNo: query.orderGroupBizNo,
-                    orderTime: query.orderTime,
-                    amount: query.amount,
+                    orderBizNo: queryNew.orderBizNo,
+                    orderGroupBizNo: queryNew.orderGroupBizNo,
+                    orderTime: queryNew.orderTime,
+                    amount: queryNew.amount,
                     UserId:""
                 },
             }).then(data=> {
@@ -114,14 +116,15 @@ const Payment = React.createClass({
             //     console.log(111);
             //     if (data.code == "10000") {
             //         console.log(222);
-                    let formStart='<form name="punchout_form" method="post" action="https://openapi.alipaydev.com/gateway.do?sign=I8YO%2BJDkzFntCG7cuOvnOXytyHlbbQmmjqqs6Bepjsx5KLtnl7Un1ckMMl87HcycfEAWsp1qf%2FsFuSJIKVSm4yIB4mFNNFesmSGCHh2NuEk1r4SxGHio%2Fwh55A3OQUAQwp1T4ma0HvTTSKvYfvg5jL%2FVvSxqoElhoZ7bO9gfqE4w9IlzIUi9mZMwOwHe42GVaC18FGJMMb8c6IQ1sOeT5va2kNvtFoHfoPlSQGqwakM8UgRhOnFjoDEyaI%2Bzcdt1fTiBtx2v0CrBXTh3%2BYhYqef9pl68oovFe0a5qjp8z9f2XQCC13QxmPzH6Q7fJNZTM0Pbr4ZQcJGPEeV2gAHCCg%3D%3D&timestamp=2017-04-14+19%3A56%3A33&sign_type=RSA2&notify_url=https%3A%2F%2Fapitest.9888.cn%2Fmall%2Fapi%2Fpayment%2FaiPay_callback.json&charset=UTF-8&app_id=2016080200146584&method=alipay.trade.wap.pay&version=1.0&alipay_sdk=alipay-sdk-java-dynamicVersionNo&format=json">↵<input type="hidden" name="biz_content" value="{&quot;total_amount&quot;:1999900,&quot;biz_content&quot;:&quot;{\&quot;status\&quot;:\&quot;\&quot;,\&quot;orderBizNo\&quot;:\&quot;11674420001\&quot;,\&quot;orderGroupBizNo\&quot;:\&quot;2OGP1024440000000000000000000G\&quot;,\&quot;orderTime\&quot;:\&quot;1492170987273\&quot;,\&quot;amount\&quot;:\&quot;1999900\&quot;,\&quot;userId\&quot;:\&quot;\&quot;}&quot;,&quot;timestamp&quot;:&quot;2017-04-14 19:56:33&quot;,&quot;product_code&quot;:&quot;QUICK_WAP_PAY&quot;,&quot;subject&quot;:&quot;豆哥商城-支付&quot;,&quot;method&quot;:&quot;alipay.trade.wap.pay&quot;,&quot;out_trade_no&quot;:&quot;2OGP1024440000000000000000000G&quot;}">';
-                    let content='<input type="submit" value="立即支付" style="display:none" >';
-                    let formEnd='</form>';
-                    // let submitJs="<script>document.forms[0].submit();</script>";
-                    let completeForm=formStart+content+formEnd;
-                    document.write(completeForm);
-                    document.forms[0].submit();
-                    // {data.form};
+                    // let formStart='<form name="punchout_form" method="post" action="https://openapi.alipaydev.com/gateway.do?sign=I8YO%2BJDkzFntCG7cuOvnOXytyHlbbQmmjqqs6Bepjsx5KLtnl7Un1ckMMl87HcycfEAWsp1qf%2FsFuSJIKVSm4yIB4mFNNFesmSGCHh2NuEk1r4SxGHio%2Fwh55A3OQUAQwp1T4ma0HvTTSKvYfvg5jL%2FVvSxqoElhoZ7bO9gfqE4w9IlzIUi9mZMwOwHe42GVaC18FGJMMb8c6IQ1sOeT5va2kNvtFoHfoPlSQGqwakM8UgRhOnFjoDEyaI%2Bzcdt1fTiBtx2v0CrBXTh3%2BYhYqef9pl68oovFe0a5qjp8z9f2XQCC13QxmPzH6Q7fJNZTM0Pbr4ZQcJGPEeV2gAHCCg%3D%3D&timestamp=2017-04-14+19%3A56%3A33&sign_type=RSA2&notify_url=https%3A%2F%2Fapitest.9888.cn%2Fmall%2Fapi%2Fpayment%2FaiPay_callback.json&charset=UTF-8&app_id=2016080200146584&method=alipay.trade.wap.pay&version=1.0&alipay_sdk=alipay-sdk-java-dynamicVersionNo&format=json">↵<input type="hidden" name="biz_content" value="{&quot;total_amount&quot;:1999900,&quot;biz_content&quot;:&quot;{\&quot;status\&quot;:\&quot;\&quot;,\&quot;orderBizNo\&quot;:\&quot;11674420001\&quot;,\&quot;orderGroupBizNo\&quot;:\&quot;2OGP1024440000000000000000000G\&quot;,\&quot;orderTime\&quot;:\&quot;1492170987273\&quot;,\&quot;amount\&quot;:\&quot;1999900\&quot;,\&quot;userId\&quot;:\&quot;\&quot;}&quot;,&quot;timestamp&quot;:&quot;2017-04-14 19:56:33&quot;,&quot;product_code&quot;:&quot;QUICK_WAP_PAY&quot;,&quot;subject&quot;:&quot;豆哥商城-支付&quot;,&quot;method&quot;:&quot;alipay.trade.wap.pay&quot;,&quot;out_trade_no&quot;:&quot;2OGP1024440000000000000000000G&quot;}">';
+                    // let content='<input type="submit" value="立即支付" style="display:none" >';
+                    // let formEnd='</form>';
+                    // // let submitJs="<script>document.forms[0].submit();</script>";
+                    // let completeForm=formStart+content+formEnd;
+                    // document.write(completeForm);
+                    // document.forms[0].submit();
+
+                    document.write(data.form);
                     setTimeout(() => {
                         this.queryState();
                     }, 3000);
