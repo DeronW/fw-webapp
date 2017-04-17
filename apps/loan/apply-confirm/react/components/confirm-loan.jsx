@@ -8,7 +8,7 @@ const ConfirmLoan = React.createClass({
     },
     confirmHandler: function () {
         if (this.state.checked == false) {
-            $FW.Component.Toast("请同意借款服务协议和借款确认书");
+            $FW.Component.Toast("请同意借款服务协议，借款确认书和代扣服务协议");
         } else {
             let query = $FW.Format.urlQuery();
             let orderGid = query.orderGid;
