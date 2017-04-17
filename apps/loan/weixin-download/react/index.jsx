@@ -30,7 +30,7 @@ $FW.DOMReady(function () {
         })
     } else if (ConcertUtilBrowser.versions.android) {
         $("android-download").addEventListener("click", function () {
-            $FW.Ajax(`${API_PATH}api/v1/download.json?name=${channel}`).then(data => {
+            $FW.Ajax(`${API_PATH}/api/v1/download.json?name=${channel}`).then(data => {
                     location.href = data.url;
                 }, (e) => $FW.Component.Toast(e.message)
             )
