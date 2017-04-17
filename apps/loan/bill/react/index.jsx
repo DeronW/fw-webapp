@@ -17,7 +17,7 @@ class Content extends React.Component{
         }
         this.tabClickHandler = this.tabClickHandler.bind(this);
     }
-    loadMoreHandler(done){
+    loadMoreHandler = (done) => {
         const USER = $FW.Store.getUserDict();
         let page = this.state.page[this.state.tab];
         if (page == 0) return;
