@@ -22,6 +22,7 @@ let More = React.createClass({
         this.setState({ contact: false });
     },
     render: function () {
+        let isLoggedIn = $FW.Store.getUserToken() ? true : false;
         return (
             <div>
                 <div className="header">更多</div>
@@ -54,9 +55,9 @@ let More = React.createClass({
                     </div>
 
 
-                    <div className="more-btn">
+                    {isLoggedIn && <div className="more-btn">
                         <div className="ui-btn" onClick={this.popShow}>退出登录</div>
-                    </div>
+                    </div>}
 
                     <div className={this.state.popShow ? "mask" : "mask dis"} style={{ zIndex: 100 }}>
                         <div className="pop">
@@ -93,4 +94,3 @@ $FW.DOMReady(() => {
     ReactDOM.render(<More />, CONTENT_NODE);
     ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
 })
-
