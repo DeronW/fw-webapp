@@ -18,9 +18,7 @@ class MainPanel extends React.Component {
                         <div className="t">
                             <span className="title-text">{p.productName}</span>
                             <div className="tag">
-                                <img src="images/tag-1a.png" />
-                                <img src="images/tag-2a.png" />
-                                <img src="images/tag-3a.png" />
+                                {p.productLabelList.map(i => <img src={`./images/tag-${i.labelType}.png`} />)}
                             </div>
                         </div>
                         <div className="b">
