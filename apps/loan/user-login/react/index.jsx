@@ -62,10 +62,10 @@ const Register = React.createClass({
                     id: dict.userId,
                     gid: dict.userGid,
                     status: dict.userStatus,
-                    invitCode:dict.invitCode,
+                    invitCode:dict.invitationCode,
                     uid:dict.uid
                 })
-                //location.href = `/static/loan/home/index.html`;
+                location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message));
     },
     forgotPasswordHandler() {
