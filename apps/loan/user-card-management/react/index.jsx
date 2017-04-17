@@ -14,7 +14,7 @@ const BankManagement = React.createClass({
             sourceType: SOURCE_TYPE,
             productId: 1
         }).then(data => {
-            if (data.borrowBtnStatus == 2) this.setState({ popShow: true });
+            //if (data.borrowBtnStatus == 2) this.setState({ popShow: true });
         })
 
     },
