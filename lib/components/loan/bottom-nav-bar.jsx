@@ -98,7 +98,9 @@ class BottomNavBar extends React.Component {
             backgroundPosition:"center"
     }
 
-        if (!$FW.Theme.get('header')) return null;
+        //if (!$FW.Theme.get('header')) return null;
+
+        if($FW.Browser.inApp()) return null;
 
         return (
             <div style={easyloan_style_footer_fixed}>
