@@ -221,6 +221,7 @@ const Login = React.createClass({
                     <input type="button" onClick={this.state.tab == 'veri' ?this.loginVeri:this.loginPaw}
                            className={this.state.active ? "btn-red active":"btn-red"} value="登录"/>
                 </div>
+                <p>{this.state.value}</p>
             </div>
         )
     }

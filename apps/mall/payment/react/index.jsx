@@ -34,7 +34,7 @@ const Payment = React.createClass({
     split: function (str) {
         return str.substr(str.length - 4, 4);
     },
-    //申请查询支付結果
+    //申请查询結果
     queryState: function () {
         let query = $FW.Format.urlQuery();
         let FormData = {
