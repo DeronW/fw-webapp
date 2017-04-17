@@ -85,7 +85,7 @@ const OrderStatusList = React.createClass({
             </div>
             <div className="address-list">
                 <div className="address-icon">
-                    <img src="images/ico-blue-location.png"/>
+                    <img src="images/icon-address.png"/>
                 </div>
                 <div className="address-info">
                     <div className="my-info-text">
