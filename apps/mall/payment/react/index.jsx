@@ -34,7 +34,7 @@ const Payment = React.createClass({
     split: function (str) {
         return str.substr(str.length - 4, 4);
     },
-    //申请查询
+    //申请查询支付結果
     queryState: function () {
         let FormData = {
             payType: 4,
