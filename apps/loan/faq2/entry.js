@@ -4,6 +4,8 @@ import {observer} from "mobx-react";
 
 import { QUESTIONS } from './components/questions'
 
+import {Header} from 'fw-react-components/components/loan/header'
+
 
 const STYLE = {
     question: {
@@ -23,4 +25,5 @@ class ToggleList {
     @observable open_list = []
 }
 
+ReactDOM.render(<Header />, document.getElementById('header'));
 ReactDOM.render(<FAQ />, document.getElementById('app'));

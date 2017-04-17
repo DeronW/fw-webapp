@@ -56,7 +56,22 @@ class BasicInfo extends React.Component {
 		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
 		const { getSumMoneyPopVal } = this.props
 
-		console.log(getSumMoneyPopVal['homeVal'])							
+		// console.log(getSumMoneyPopVal['marriageVal'])
+		// let selectBasicVal = () => {
+		// 	if(getSumMoneyPopVal['marriageVal'] != '') {
+		// 		if(getSumMoneyPopVal['marriageVal'] == 0) {
+		// 			return '未婚'
+		// 		} else if(getSumMoneyPopVal['marriageVal'] == 1) {
+		// 			return '已婚, 无子女'
+		// 		} else if(getSumMoneyPopVal['marriageVal'] == 2) {
+		// 			return '已婚, 有子女'
+		// 		} 
+		// 	} else {
+
+		// 	}
+		// }
+		
+
 		return (
 			<div className="basic-info">
 				<div className="ui-title">基本信息</div>
@@ -75,7 +90,6 @@ class BasicInfo extends React.Component {
 					</div>
 					{
 						basicArr.map((data, index) => {
-							console.log(getSumMoneyPopVal['creditCard'])
 							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data)}>
 									<div className="name-text">{ data[0] }</div>
 									<div className="r">
@@ -358,12 +372,15 @@ class WindowPop extends React.Component {
 
 	handlerSelectMarriage(index, data) {
 		let copState = this.state.sumMoneyListObj
-			copState.marriageVal = data		
-		
+			copState.marriageVal = index	
+
+		console.log(index)	
 		this.setState({
 			selectMarriageIconIndex: index,
 			copState
 		})
+		console.log(this.state.sumMoneyListObj.marriageVal)
+		
 	}
 	render() {
 		const { selectList, popTitle, getPopShow, getPopInfo } = this.props
@@ -396,6 +413,19 @@ class WindowPop extends React.Component {
 						</div>
 
 		}
+		
+		let selectBasicVal = (index) => {
+			
+			if(this.state.sumMoneyListObj.marriageVal != '') {
+				if(this.state.sumMoneyListObj.marriageVal == index) {
+					console.log('xxxxxxx')
+					return  <div className="select-icon"></div>
+				}
+				
+			} else {
+				console.log('aaaa')
+			}
+		}
 
 		let marriageList = () => {
 			const MARRIAGE_ARR = ['未婚', '已婚, 无子女', '已婚,有子女']
@@ -405,9 +435,11 @@ class WindowPop extends React.Component {
 							{
 								MARRIAGE_ARR.map((data, index) => {
 									return <div className="list" onClick={ this.handlerSelectMarriage.bind(this, index, data ) } key={ index }>
-											<div className="name-text">{ data }</div>
+											<div className="name-text">{ data } </div>
 											<div className="r">
-												{ index == this.state.selectMarriageIconIndex ? <div className="select-icon"></div> : null }
+												{ 													
+													selectBasicVal(index)
+												}
 											</div>
 										</div>			
 								})
