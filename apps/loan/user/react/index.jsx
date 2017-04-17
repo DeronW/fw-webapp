@@ -1,7 +1,6 @@
 class AvatarCard extends React.Component {
     render() {
         let avatarSrc = this.props.src || 'images/avatar_default.png';
-        // let maskedPhoneNum = maskInfo(this.props.phoneNum, 3, -5);
         return (
             <div className="avator-card">
                 <div className="avatar-container">
