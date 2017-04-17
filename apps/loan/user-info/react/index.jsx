@@ -81,7 +81,19 @@ class CitySelectWrap extends React.Component {
                 </li>
             );
             let cityElsInside = cityList[division].map((c, index) => (
-                <div className="city-option" onClick={() => {this.props.handleClick(this.props.itemIndex, c);}}>{c}</div>
+                <div
+                  key={c}
+                  className="city-option"
+                  onClick={(e) => {
+                      // if e.target.clientX / e.target.clientWidth > 0.9, assume
+                      // that user clicked on division elements to scroll
+                      if (e.target.clientX / e.target.clientWidth > 0.9) {
+                          return;
+                      }
+                      this.props.handleClick(this.props.itemIndex, c);
+                  }}>
+                  {c}
+                </div>
             ));
             cityEls.push(
                 <div key={division}>
@@ -198,6 +210,7 @@ class InfoItemInputWrap extends React.Component {
                     className="select-option"
                     key={index}
                     onClick={() => {
+                        this.toggleExpand();
                         this.props.handleInput(this.props.itemIndex, index);
                 }}>
                     {option}
@@ -423,55 +436,6 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-// const USER = $FW.Store.getUserDict();
-// var cityList = [
-//   {
-//     eng: 'beijing',
-//     cn: '北京'
-//   }, {
-//     eng: 'shanghai',
-//     cn: '上海'
-//   }, {
-//     eng: 'guangzhou',
-//     cn: '广州'
-//   }, {
-//     eng: 'shenzhen',
-//     cn: '深圳'
-//   }, {
-//     eng: 'nanjing',
-//     cn: '南京'
-//   }, {
-//     eng: 'tianjin',
-//     cn: '天津'
-//   }, {
-//     eng: 'hangzhou',
-//     cn: '杭州'
-//   }, {
-//     eng: 'chengdu',
-//     cn: '成都'
-//   }, {
-//     eng: 'wuhan',
-//     cn: '武汉'
-//   }, {
-//     eng: 'xiamen',
-//     cn: '厦门'
-//   }, {
-//     eng: 'qingdao',
-//     cn: '青岛'
-//   }, {
-//     eng: 'xian',
-//     cn: '西安'
-//   }, {
-//     eng: 'chongqing',
-//     cn: '重庆'
-//   }, {
-//     eng: 'suzhou',
-//     cn: '苏州'
-//   }, {
-//     eng: 'changsha',
-//     cn: '长沙'
-//   }
-// ];
 let cityList = {
   "A": [
     "安康市", "安庆市", "安顺市", "鞍山市", "安阳市"
@@ -778,14 +742,14 @@ let cityList = {
     "郑州市"
   ]
 };
-var email;
+// var email;
 
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(
         <Header title="个人信息"/>, HEADER_NODE);
     $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
-        email = data.email;
+        // email = data.email;
         ReactDOM.render(
             <UserInfoWrap userInfo={data} cityList={cityList}/>, CONTENT_NODE);
     }, e => $FW.Component.Toast(e.message));
