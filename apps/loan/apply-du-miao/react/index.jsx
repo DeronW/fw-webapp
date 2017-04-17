@@ -16,32 +16,18 @@ const INFO = [
 
 class BorrowMoneyDatailList extends React.Component {
     render() {
-        let imgUrl = (index) => {
-            return {
-                background: 'url(images/icon-' + index + '.png) no-repeat center'
-            }
-        }
-
-        return (
-            <div className="">
-                {
-                    TITLE.map((data, index) => {
-                        return <div className="datail-list" key={index}>
-                            <div className="title">
-                                <div className="icon" style={imgUrl(index)}>
-
-                                </div>
-                                <div className="text">{data}</div>
-                            </div>
-                            <div className="info-block">
-
-                            </div>
-                        </div>
-
-                    })
-                }
+        let item = (data, index) => {
+            return <div className="datail-list" key={index}>
+                <div className="title">
+                    <div className="icon" style={
+                        { backgroundImage: `url(images/icon-${index}.png)` }}>
+                    </div>
+                    <div className="text">{data}</div>
+                </div>
+                <div className="info-block">{INFO[index]} </div>
             </div>
-        )
+        }
+        return <div className=""> {TITLE.map(item)} </div>
     }
 }
 
