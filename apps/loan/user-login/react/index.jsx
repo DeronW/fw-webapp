@@ -111,9 +111,9 @@ const Register = React.createClass({
                     </div>
                     <div className="form-border"></div>
                 </div>
-                <div className="register-login-btn">
+                <Nav className="register-login-btn">
                     <div className="ui-btn" onClick={this.loadingBtn}>确定</div>
-                </div>
+                </Nav>
                 <div className="forget-pwd-link">
                     <a onClick={this.forgotPasswordHandler}> 忘记密码?</a>
                 </div>
