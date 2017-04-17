@@ -79,10 +79,8 @@ const Mall = React.createClass({
         </div>
 
         return (
-            <div className="head-wrap">
-                {banner}
-                <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                    <div style={head_nav_wrap} className="head_nav_wrap">
+            <div>
+                <div style={head_nav_wrap} className="head_nav_wrap">
                         <img className="m-logo" src={this.state.logoImage} />
                         <a href="/static/mall/product-list/index.html?searchSourceType=2"
                             className="search-bar-a">
@@ -92,6 +90,9 @@ const Mall = React.createClass({
                         <a className="index-avatar" href="/static/mall/user/index.html">
                             <img src={this.state.avatarImage} /></a>
                     </div>
+            <div className="head-wrap">
+                {banner}
+                <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
                 </div>
                 <div className="head-nav">
                     <a href="/static/mall/product-vip-zone/index.html">
@@ -126,6 +127,8 @@ const Mall = React.createClass({
 
                 <HotSales />
             </div>
+            </div>
+            
         )
     }
 });
