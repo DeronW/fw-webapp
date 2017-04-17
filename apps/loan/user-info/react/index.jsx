@@ -43,13 +43,20 @@ class CitySelectWrap extends React.Component {
         this.scrollList = this.scrollList.bind(this);
     }
 
+    componentDidMount() {
+        let labelHeight = 100;
+        let cityWrapEl = ReactDOM.findDOMNode(this),
+            devisionIndexEl = cityWrapEl.childNodes[1];
+        let cityWrapHeight = window.innerHeight - labelHeight,
+            devisionIndexHeight = devisionIndexEl.clientHeight;
+        devisionIndexEl.style.top = (cityWrapHeight - devisionIndexHeight) / 2 + labelHeight + 'px';
+    }
+
     scrollList(divs, sIndex) {
         let cityWrapEl = ReactDOM.findDOMNode(this);
         let devisionHeight = 40,
             optionHeight = 80,
             scrollTop = 0;
-            // labelHeight = 100,
-            // scrollTop = labelHeight;
         for (var i = 0; i < sIndex; i++) {
             scrollTop += devisionHeight + optionHeight * divs[i][Object.keys(divs[i])[0]];
         }
@@ -161,7 +168,10 @@ class InfoItemInputWrap extends React.Component {
         }
         let selectOptionsWrap = this.props.infoNameCN === '所在城市' ?
             (<div className="city-select-mask">
-              <div className="city-select-label">选择城市</div>
+              <div className="city-select-label">
+                  选择城市
+                  <img src="images/close.png" onClick={this.toggleExpand}></img>
+              </div>
               <CitySelectWrap
                 itemIndex={this.props.itemIndex}
                 handleClick={(index, v) => {this.toggleExpand(); this.props.handleInput(index, v);}}
@@ -345,11 +355,8 @@ class UserInfoWrap extends React.Component {
     }
 
     handleSubmit() {
-        $FW.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
-            sourceType: SOURCE_TYPE,
-            token: USER.token,
-            uid: USER.uid,
-            email: USER.email,
+        $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
+            email: email,
             creditCard: this.state.basicInfo[0][2].value,
             city: this.state.basicInfo[1][0].value,
             address: this.state.basicInfo[1][1].value,
@@ -377,7 +384,7 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-const USER = $FW.Store.getUserDict();
+// const USER = $FW.Store.getUserDict();
 var cityList = [
   {
     eng: 'beijing',
@@ -426,16 +433,14 @@ var cityList = [
     cn: '长沙'
   }
 ];
+var email;
 
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(
         <Header title="个人信息"/>, HEADER_NODE);
-    $FW.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`, {
-        sourceType: SOURCE_TYPE,
-        token: USER.token,
-        uid: USER.uid
-    }).then(data => {
+    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
+        email = data.email;
         ReactDOM.render(
             <UserInfoWrap userInfo={data} cityList={cityList}/>, CONTENT_NODE);
     }, e => $FW.Component.Toast(e.message));
