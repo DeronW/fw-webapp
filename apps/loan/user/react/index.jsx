@@ -215,7 +215,7 @@ class UserInfoWrap extends React.Component {
                 <FollowWXEntry/>
                 <BillEntry/>
                 <MajorUserInfo/>
-                <ExitBtn isLoggedIn={isLoggedIn}/>
+                {/* <ExitBtn isLoggedIn={isLoggedIn}/> */}
             </div>
         )
     }
