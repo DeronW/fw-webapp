@@ -6,8 +6,8 @@ const verificationNum = val => {
 
 
 class SumList extends React.Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 	}
 
 	handlerSum() {
@@ -16,21 +16,23 @@ class SumList extends React.Component {
 		selectListFun('sumMoney', '金额和期限', true)
 	}
 	render() {
-		const { getPopVal } = this.props
+		const { getPopVal, getSumMoneyPopVal } = this.props
+		
+		//console.log(getSumMoneyPopVal)
 
 		return (
 			<div className="sum-list ui-list" onClick={this.handlerSum.bind(this)}>
 				<div className="list">
 					<div className="name-text">借款金额</div>
 					<div className="r">
-						<div className="text">{  }</div>
+						<div className="text">{ getSumMoneyPopVal.moneyVal == '' ? '请选择' : getSumMoneyPopVal.moneyVal }</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
 				<div className="list">
 					<div className="name-text">期限</div>
 					<div className="r">
-						<div className="text"> 请选择</div>
+						<div className="text"> { getSumMoneyPopVal.deadlineVal == '' ? '请选择' : getSumMoneyPopVal.deadlineVal + '个月' }</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
@@ -41,7 +43,20 @@ class SumList extends React.Component {
 
 
 class BasicInfo extends React.Component {
+	constructor() {
+		super()
+
+	}
+	handlerSelect(data) {
+		const { selectListFun } = this.props		
+		
+		selectListFun(data[1], data[0], true)
+	}
 	render() {
+		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
+		const { getSumMoneyPopVal } = this.props
+
+		console.log(getSumMoneyPopVal['homeVal'])							
 		return (
 			<div className="basic-info">
 				<div className="ui-title">基本信息</div>
@@ -58,34 +73,19 @@ class BasicInfo extends React.Component {
 							<div className="text">130198198501230123</div>
 						</div>
 					</div>
-					<div className="list">
-						<div className="name-text">信用卡</div>
-						<div className="r">
-							<div className="text">请填写</div>
-							<div className="arrow-icon"></div>
-						</div>
-					</div>
-					<div className="list">
-						<div className="name-text">邮箱</div>
-						<div className="r">
-							<div className="text">请填写</div>
-							<div className="arrow-icon"></div>
-						</div>
-					</div>
-					<div className="list">
-						<div className="name-text">现居住地</div>
-						<div className="r">
-							<div className="text">请填写</div>
-							<div className="arrow-icon"></div>
-						</div>
-					</div>
-					<div className="list">
-						<div className="name-text">婚姻</div>
-						<div className="r">
-							<div className="text">请选择</div>
-							<div className="arrow-icon"></div>
-						</div>
-					</div>
+					{
+						basicArr.map((data, index) => {
+							console.log(getSumMoneyPopVal['creditCard'])
+							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data)}>
+									<div className="name-text">{ data[0] }</div>
+									<div className="r">
+										<div className="text">{ getSumMoneyPopVal[data[1]] == '' ? '请填写' : getSumMoneyPopVal[data[1]] }</div>
+										<div className="arrow-icon"></div>
+									</div>
+								</div>
+								
+						})
+					}
 				</div>
 			</div>
 		)
@@ -171,9 +171,12 @@ class Btn extends React.Component {
 		
 	}
 	handlerBtn(val) {
-		const { btnValFun, getPopInfoProps } = this.props
-
+		const { btnValFun, getPopInfoProps, getPopShowProps } = this.props
+		
+		console.log(btnValFun)
 		getPopInfoProps(btnValFun())	
+
+		getPopShowProps(false)
 	}
 	render() {
 		return (
@@ -186,47 +189,85 @@ class Btn extends React.Component {
 
 
 class WindowPop extends React.Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			inputPlaceholder: '',
-			inputVal: '',
+			sumMoneyListObj: {
+				moneyVal: '',
+				deadlineVal: '',
+				creditCardVal: '',
+				emailVal: '',
+				homeVal: '',
+				marriageVal: ''
+			},
+			inputType: '',
 			selectList: '',
 			tabShow: false,
 			deadline: [],
 			deadlineIconShow: false,
 			deadlineIconIndex: 0,
-		   	deadlineVal: '请选择'	
+			selectMarriageIconIndex: 0
 		}
 	}
 	componentWillMount() {
-		const { selectList } = this.props
+		const { selectList, getPopSumMoneyListObj } = this.props
+		console.log( this.state.sumMoneyListObj)
 
 		this.setState({
-			selectList: selectList
+			selectList: selectList,
+			sumMoneyListObj: getPopSumMoneyListObj
 		})
 
-		if(selectList === 'sumMoney') {
-			this.setState({
-				inputPlaceholder: '请以1000为单位，上限为50000' 
-			})	
+		switch( selectList ) {
+			case 'sumMoney':
+				this.setState({
+					inputPlaceholder: '请以1000为单位，上限为50000',
+					inputType: 'moneyVal'
+				})	
+				break
+			case 'creditCardVal': 
+				this.setState({
+					inputPlaceholder: '请输入信用卡号',
+					inputType: 'creditCardVal',
+				})	
+				break
+			case 'emailVal': 
+				this.setState({
+					inputPlaceholder: '请输入邮箱',
+					inputType: 'emailVal'
+				})	
+				break
+			case 'homeVal': 
+				this.setState({
+					inputPlaceholder: '请输入居住地',
+					inputType: 'homeVal'
+				})	
+				break
+			case 'marriageVal': 
+				this.setState({
+					inputPlaceholder: '请输入婚姻状况',
+					inputType: 'marriageVal'
+				})	
+				break
 		}
 
 	}	
 	handlerBack() {
 		const { getPopShow } = this.props
-		console.log(getPopShow)
 
 		getPopShow(false)
 	}
 
 	changeInput(e) {
-		if(this.state.selectList === 'sumMoney') {
+		if(this.state.selectList === 'sumMoney') {		
 			if(verificationNum(e.target.value)) {
+				let copSumMoneyListObj1 = this.state.sumMoneyListObj
+				copSumMoneyListObj1.moneyVal = e.target.value
+
 				this.setState({
-					inputVal: e.target.value,
-					deadlineIconShow: false,
-					deadlineVal: '请选择'	
+					copSumMoneyListObj1,
+					deadlineIconShow: false,						
 				})
 
 				if(e.target.value >= 1000 && e.target.value <= 3000 ) {
@@ -252,13 +293,31 @@ class WindowPop extends React.Component {
 				} 
 			}	
 
-		} else {
+		} else if (this.state.selectList === 'creditCardVal') {	
+			let copSumMoneyListObj2 = this.state.sumMoneyListObj
+			copSumMoneyListObj2.creditCardVal = e.target.value		
+			this.setState({
+				copSumMoneyListObj2
+			})
+		} else if (this.state.selectList === 'emailVal') {	
+			let copSumMoneyListObj3 = this.state.sumMoneyListObj
+			copSumMoneyListObj3.emailVal = e.target.value		
+			this.setState({
+				copSumMoneyListObj3
+			})
+		} else if (this.state.selectList === 'homeVal') {	
+			let copSumMoneyListObj4 = this.state.sumMoneyListObj
+			copSumMoneyListObj4.homeVal = e.target.value		
+			this.setState({
+				copSumMoneyListObj4
+			})
+		}  else {
 
 		}
 	}
 	handlerDate(e) {
-		const inputVal = this.state.inputVal
-
+		const inputVal = this.state.sumMoneyListObj.moneyVal
+		
 		if(inputVal.length == 0) {
             $FW.Component.Toast("金额不能为空");
 		}
@@ -268,40 +327,53 @@ class WindowPop extends React.Component {
 			this.setState({
 				tabShow: !this.state.tabShow 
 			})		
-
-			
 		}
 	}
 
 	handlerSelectDeadline(index, data) {
+		const copState = this.state.sumMoneyListObj
+
+		copState.deadlineVal = data,
+
 		this.setState({
 			deadlineIconShow: true,
-			deadlineIconIndex: index,
-			deadlineVal: data,
-			tabShow: false			
+			deadlineIconIndex: index,			
+			tabShow: false,
+			copState		
 		})
 	}
 
 	callbackBtnVal(val) {
+		console.log( this.state.sumMoneyListObj)
+		
 		return {
-			val: this.state.inputVal,
-			deadlineVal: this.state.deadlineVal
+			moneyVal: this.state.sumMoneyListObj.moneyVal,			
+			deadlineVal: this.state.sumMoneyListObj.deadlineVal,
+			creditCardVal: this.state.sumMoneyListObj.creditCardVal,
+			emailVal: this.state.sumMoneyListObj.emailVal,
+			homeVal: this.state.sumMoneyListObj.homeVal,
+			marriageVal: this.state.sumMoneyListObj.marriageVal
 		}
 	}
 
+	handlerSelectMarriage(index, data) {
+		let copState = this.state.sumMoneyListObj
+			copState.marriageVal = data		
+		
+		this.setState({
+			selectMarriageIconIndex: index,
+			copState
+		})
+	}
 	render() {
-		const { selectList, popTitle, getPopInfo } = this.props
-
-		let deadlineList = () => {
-			return 
-		}
+		const { selectList, popTitle, getPopShow, getPopInfo } = this.props
 
 		let listNextTab = () => {
 			return 		<div className="list list-next-tab">
 							<div className="" onClick={ this.handlerDate.bind(this) }>
 								<div className="name-text">期限</div>
 								<div className="r">
-									<div className="text">{ this.state.deadlineVal } { this.state.deadlineIconShow ? '个月' : '' }</div>
+									<div className="text">{ this.state.sumMoneyListObj.deadlineVal } { this.state.deadlineIconShow ? '个月' : '' }</div>
 									<div className="arrow-icon"></div>
 								</div>
 
@@ -324,7 +396,28 @@ class WindowPop extends React.Component {
 						</div>
 
 		}
+
+		let marriageList = () => {
+			const MARRIAGE_ARR = ['未婚', '已婚, 无子女', '已婚,有子女']
+
+			return 	<div className="cnt-pop">
+						<div className="ui-list marriage-list">
+							{
+								MARRIAGE_ARR.map((data, index) => {
+									return <div className="list" onClick={ this.handlerSelectMarriage.bind(this, index, data ) } key={ index }>
+											<div className="name-text">{ data }</div>
+											<div className="r">
+												{ index == this.state.selectMarriageIconIndex ? <div className="select-icon"></div> : null }
+											</div>
+										</div>			
+								})
+							}
+																		
+						</div>
+					</div>
+		}
 		
+
 		return (
 			<div className="window-pop">
 				<div className="top">
@@ -332,40 +425,50 @@ class WindowPop extends React.Component {
 					<div className="title">{ popTitle }</div>
 				</div>	
 
-				<div className="cnt-pop">
-					<div className="ui-title">工作信息</div>
-					<div className="ui-list">
-						<div className="list">
-							<div className="name-text">借款金额</div>
-							<div className="r no">
-								<input type="text" 
-									placeholder={ this.state.inputPlaceholder }
-									onChange= { this.changeInput.bind(this) }
-									value={ this.state.inputVal }
-								/>
+				{ selectList != 'marriageVal' ? 
+					<div className="cnt-pop">
+						<div className="ui-title">工作信息</div>
+						<div className="ui-list">
+							<div className="list">
+								<div className="name-text">{ selectList == 'sumMoney'  ?  '借款金额' : popTitle }</div>
+								<div className="r no">
+									<input type="text" 
+										placeholder={ this.state.inputPlaceholder }
+										onChange= { this.changeInput.bind(this) }
+										value={ this.state.sumMoneyListObj[this.state.inputType] }
+									/>
+								</div>
 							</div>
+							
+							{ selectList == 'sumMoney' ? listNextTab() : null}
 						</div>
-						
-						{ listNextTab() }
-					</div>
-				</div>
+					</div> :  marriageList() 
+				}
 
-				<Btn btnValFun = { this.callbackBtnVal.bind(this) }  getPopInfoProps = { getPopInfo } />
+				<Btn 
+					btnValFun = { this.callbackBtnVal.bind(this) } 
+		   			getPopInfoProps = { getPopInfo } 
+					getPopShowProps = { getPopShow } 
+				/>
 			</div>
 		)
 	}
 }
 
 class ApplyBorrowMoney extends React.Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			popShow: false,
 			selectList: '',
 			popTitle: '',
-			sumMoneyObj: {
-				val: '',
-				deadlineVal: ''
+			sumMoneyListObj: {
+				moneyVal: '',
+				deadlineVal: '',
+				creditCardVal: '',
+				emailVal: '',
+				homeVal: '',
+				marriageVal: ''
 			}
 		}
 	}
@@ -379,12 +482,17 @@ class ApplyBorrowMoney extends React.Component {
 	callbackSumPopInfo(obj) {
 		console.log(obj)
 		this.setState({
-			sumMoneyObj: {
-				val: obj.val,
-				deadlineVal: obj.deadlineVal
+			sumMoneyListObj: {
+				moneyVal: obj.moneyVal,
+				deadlineVal: obj.deadlineVal,
+				creditCardVal: obj.creditCardVal,
+				emailVal: obj.emailVal,
+				homeVal: obj.homeVal,
+				marriageVal: obj.marriageVal
 			}
 		})
 	}
+
 	callbackPopShow(popShow) {
 		this.setState({
 			popShow: popShow
@@ -393,8 +501,8 @@ class ApplyBorrowMoney extends React.Component {
 	render() {
 		return (
 			<div className="">
-				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyObj } />
-				<BasicInfo />
+				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } />
+				<BasicInfo selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } />
 				<UrgentContactPerson />
 				<JobInfo />
 				<Agree />
@@ -405,6 +513,7 @@ class ApplyBorrowMoney extends React.Component {
 					popTitle = { this.state.popTitle }
 					getPopInfo = { this.callbackSumPopInfo.bind(this) }
 					getPopShow = { this.callbackPopShow.bind(this) }
+					getPopSumMoneyListObj = { this.state.sumMoneyListObj }
 				/> : null } 
 			</div>
 		)
