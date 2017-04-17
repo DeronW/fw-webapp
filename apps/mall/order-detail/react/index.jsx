@@ -73,9 +73,12 @@ const OrderStatusList = React.createClass({
             default:
                 status_name = '';
         }
-
-        {/*let shipping = this.props.send_channel ? <div>*/}
-        let shipping = this.props.send_channel ? <div>
+        {   /*
+            因为现在暂时还没有物流方式选择 从后台拿到的数据send_channel一直为“”，所以先注释这个判断
+            let shipping = this.props.send_channel ? <div>
+            */
+        }
+        let shipping = <div>
             <div className="info-block">
                 <span className="text">物流名称</span>
                 <span className="data-text">{this.props.send_channel}</span>

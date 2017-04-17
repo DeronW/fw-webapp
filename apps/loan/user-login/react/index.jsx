@@ -65,7 +65,7 @@ const Register = React.createClass({
                     invitCode:dict.invitCode,
                     uid:dict.uid
                 })
-                location.href = `/static/loan/home/index.html`;
+                //location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message));
     },
     forgotPasswordHandler() {

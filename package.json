@@ -38,7 +38,8 @@
     "prop-types": ">= 15.5",
     "mobx": ">= 3.1",
     "mobx-react": ">= 4.1",
-    "webpack": ">= 2.3"
+    "webpack": ">= 2.3",
+    "fw-react-components": "= 1.0.1"
   },
   "scripts": {
     "clean": "node scripts/clean.js",
