@@ -14,70 +14,6 @@ const INFO = [
     ],
 ]
 
-
-class BorrowMoneyDetailTop extends React.Component {
-    render() {
-        return (
-            <div className="">
-                <div className="borrow-money-list">
-                    <div className="icon-block">
-                        <img src="images/icon-img.png" />
-                    </div>
-
-                    <div className="info">
-                        <div className="t">
-                            <span className="title-text">读秒</span>
-                            <div className="text">
-                                借款范围（500 - 10万）
-							</div>
-                        </div>
-
-                        <div className="b">
-                            <div className="tag">
-                                <img src="images/tag-0.png" />
-                                <img src="images/tag-1.png" />
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="borrow-money-detail-data">
-                    <div className="list">
-                        <div className="name-text">6.25%</div>
-                        <div className="data-text">
-                            每月费用
-							<img src="images/icon-6.png" />
-                        </div>
-                    </div>
-                    <div className="list">
-                        <div className="name-text">5~28天/个月</div>
-                        <div className="data-text">
-                            期限范围
-						</div>
-                    </div>
-                    <div className="list">
-                        <div className="name-text">56秒/分钟/天</div>
-                        <div className="data-text">
-                            最快放款
-						</div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
-
-class Btn extends React.Component {
-    render() {
-        return (
-            <div className="footer">
-                <div className="btn">马上拿钱</div>
-            </div>
-        )
-    }
-}
-
 class BorrowMoneyDatailList extends React.Component {
     render() {
         let imgUrl = (index) => {
@@ -113,16 +49,60 @@ class BorrowMoney extends React.Component {
     render() {
         return (
             <div className="">
-                <BorrowMoneyDetailTop />
-                <BorrowMoneyDatailList />>
-                <Btn />
+                <div className="">
+                    <div className="borrow-money-list">
+                        <div className="icon-block"> <img src="images/icon-img.png" /> </div>
+                        <div className="info">
+                            <div className="t">
+                                <span className="title-text">读秒</span>
+                                <div className="text"> 借款范围（500 - 10万） </div>
+                            </div>
+
+                            <div className="b">
+                                <div className="tag">
+                                    <img src="images/tag-0.png" />
+                                    <img src="images/tag-1.png" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="borrow-money-detail-data">
+                        <div className="list">
+                            <div className="name-text">6.25%</div>
+                            <div className="data-text">
+                                每月费用
+							<img src="images/icon-6.png" />
+                            </div>
+                        </div>
+                        <div className="list">
+                            <div className="name-text">5~28天/个月</div>
+                            <div className="data-text">
+                                期限范围
+						</div>
+                        </div>
+                        <div className="list">
+                            <div className="name-text">56秒/分钟/天</div>
+                            <div className="data-text">
+                                最快放款
+						</div>
+                        </div>
+                    </div>
+                </div>
+                <BorrowMoneyDatailList product={this.props.product} />
+                <div className="footer">
+                    <div className="btn">马上拿钱</div>
+                </div>
             </div>
         )
     }
 }
 
 $FW.DOMReady(() => {
-
-    // ReactDOM.render( <BorrowMoney />, CONTENT_NODE)
-    ReactDOM.render(<BorrowMoney />, CONTENT_NODE)
+    let pid = $FW.Util.querySelector().id;
+    $FXH.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}`)
+        .then(data => {
+            ReactDOM.render(<BorrowMoney product={data} />, CONTENT_NODE)
+        })
 })
