@@ -14,10 +14,6 @@
         tapHandler = (event) => {
             let p0 = event.currentTarget, p1 = event.changedTouches[0]
             let waves = this.state.waves
-
-            console.log(p1.pageX, p0.offsetLeft)
-            console.log(p1.pageY, p0.offsetTop)
-
             waves.push({
                 left: p1.pageX - p0.offsetLeft,
                 top: p1.pageY - p0.offsetTop
