@@ -3,8 +3,11 @@
 class MainPanel extends React.Component {
     render() {
         let product = (p, index) => {
-            let page_name = p.productName == '放心花' ? 'zhang-zhong' : 'du-miao',
-                link = `/static/loan/apply-${page_name}/index.html?id=${p.productId}`;
+
+            let link_a = `/static/loan/apply-zhang-zhong/index.html`,
+                link_b = `/static/loan/apply-du-miao/index.html`,
+                link = p.productName == '放心花' ? link_a : link_b;
+
 
             return (
                 <Nav className="borrow-money-list" key={index} href={link}>
