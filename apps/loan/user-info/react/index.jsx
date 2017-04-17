@@ -64,6 +64,8 @@ class CitySelectWrap extends React.Component {
     }
 
     render() {
+      // let cityList = this.props.cityList;
+
         let sortedCityList = this.props.cityList.sort((c1, c2) => {
             if (c1.eng > c2.eng) {
                 return 1;
