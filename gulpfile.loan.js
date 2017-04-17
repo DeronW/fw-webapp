@@ -11,10 +11,6 @@ let APP_NAMES = [
 
 // 用户模块
 const USER_PAGES = [
-    'outside-register', // 放心花注册页面
-    'outside-register-success-wx',
-    'outside-register-success-app',
-    'outside-register-success-other_apps',
     'user-entry', // 用户入口, 并非登录或注册, 而是用户的进入入口
     'user-register', //注册入口
     'user-login', //登录入口
@@ -30,8 +26,20 @@ const USER_PAGES = [
     'user-verify-phone',
     'user-jrgc-login',
     'user-weixin',
+]
+
+// 金融工场APP页面
+const JRGC_PAGES = [
     'fxh-jrgc-invite',//放心花金融工场邀请页面
     'fxh-jrgc-invite-banner'//放心花金融工场邀请页面(banner入口)
+]
+
+// 合作方页面
+const OUTSIDE_PAGES = [
+    'outside-register', // 放心花注册页面
+    'outside-register-success-wx',
+    'outside-register-success-app',
+    'outside-register-success-other_apps',
 ]
 
 // 账单模块
@@ -45,7 +53,8 @@ const BILL_PAGES = [
 
 // 申请借款模块
 const APPLY_PAGES = [
-    'apply',
+    'apply-zhang-zhong', // 掌众产品借款页面
+    'apply-du-miao', // 读秒产品借款页面
     'apply-want', //我要借款页面
     'apply-confirm', //确认借款页面
     'apply-result'
@@ -68,9 +77,8 @@ const DEVELOPING_PAGES = [
 
 //借钱
 const BORROW_MONEY = [
-	// 'borrow-money',
-	'borrow-money-detail',
-	'apply-borrow-money'
+    // 'borrow-money',
+    'apply-borrow-money'
 ]
 
 // Beta项目, 使用 webpack 编译指定页面
@@ -86,12 +94,14 @@ const WEBPACK_PAGES = [
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
+    ...OUTSIDE_PAGES,
     ...APPLY_PAGES,
     ...APP_NAMES,
     ...PROTOCOL_PAGES,
+    ...JRGC_PAGES,
     ...DEVELOPING_PAGES,
     ...WEBPACK_PAGES,
-	...BORROW_MONEY
+    ...BORROW_MONEY
 );
 
 

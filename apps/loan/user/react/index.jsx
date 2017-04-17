@@ -1,7 +1,6 @@
 class AvatarCard extends React.Component {
     render() {
         let avatarSrc = this.props.src || 'images/avatar_default.png';
-        // let maskedPhoneNum = maskInfo(this.props.phoneNum, 3, -5);
         return (
             <div className="avator-card">
                 <div className="avatar-container">
@@ -161,10 +160,22 @@ class MajorUserInfo extends React.Component {
 }
 
 class UserInfoWrap extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      phoneNum: null
+    }
+  }
+  componentDidMount = () => {
+
+      //     $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
+      //       this.setState({phoneNum: data.mobile})
+      // }, e => {$FW.Component.Toast(e.message)});
+  }
     render() {
         return (
             <div className="user-info-wrap">
-                <AvatarCard phoneNum={this.props.phoneNum}/>
+                <AvatarCard phoneNum={this.state.phoneNum}/>
                 <FollowWXEntry/>
                 <BillEntry/>
                 <MajorUserInfo/>
@@ -173,31 +184,11 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-// function maskInfo(text, sIndex, eIndex) {
-//     let textLength = text.length,
-//         startIndex = Math.max(0, sIndex),
-//         endIndex = eIndex < 0
-//             ? (textLength + eIndex)
-//             : Math.max(eIndex, textLength - 1);
-//     return `${text.substr(0, startIndex)}${ '*'.repeat(endIndex - startIndex + 1)}${text.substr(endIndex + 1, textLength - 1)}`
-// }
-
-// let phone_mask = n => String(n).replace(/(\d{3})\d{4}(\d{4})/, "'$1****$2")
-
 const USER = $FW.Store.getUserDict();
+console.log(`token: ${USER.token}, userGid: ${USER.gid}, userId: ${USER.id}, uid: ${USER.uid}, sourceType: ${SOURCE_TYPE}`);
 
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
-
-    $FW.Post(`${API_PATH}/api/userBase/v1/userCenter.json`, {
-        token: USER.token,
-        userGid: USER.gid,
-        userId: USER.id,
-        uid: USER.uid,
-        sourceType: SOURCE_TYPE
-    }).then(data => {
-    // $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
-        ReactDOM.render( <UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
-    }, e => {$FW.Component.Toast(e.message)});
+        ReactDOM.render( <UserInfoWrap />, CONTENT_NODE)
 })

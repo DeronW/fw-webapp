@@ -85,8 +85,22 @@ class BottomNavBar extends React.Component {
         let _href_invite = goto('/static/loan/weixin-invite/index.html')
         let _href_self = goto('/static/loan/user/index.html')
         let _href_more = goto('/static/loan/more/index.html')
+        let _dome_section = {
+            width: "140px",
+            height: "100px",
+            overflow: "hidden",
+            position: "absolute",
+            top: "-22px",
+            left: "50%",
+            marginLeft: "-70px",
+            backgroundColor:"#393f5a",
+            borderRadius:"50%",
+            zIndex:"-1"
+    }
 
-        if (!$FW.Theme.get('header')) return null;
+        //if (!$FW.Theme.get('header')) return null;
+
+        if($FW.Browser.inApp()) return null;
 
         return (
             <div style={easyloan_style_footer_fixed}>
@@ -110,7 +124,7 @@ class BottomNavBar extends React.Component {
                     <i style={_style_tab_more_icon}></i>
                     更多
                 </a>
-                <div className="domebox"></div>
+                <div style={_dome_section}></div>
             </div>
         )
     }

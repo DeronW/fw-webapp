@@ -36,8 +36,9 @@ const Success = React.createClass({
                     <a href="/" className="success-btn2">返回商城</a>
                 </div>
                 <div className="scan-code">
+                        <p className="code-up-text">商城优惠早知道</p>
                         <img className="code" src="/static/mall/order-complete/images/QR-code.png" />
-                        <p className="QR-code-notice">长按二维码关注豆哥商城</p>
+                        <p className="QR-code-notice">搜索关注微信号:dgsc90</p>
                     </div>
             </div>
         )

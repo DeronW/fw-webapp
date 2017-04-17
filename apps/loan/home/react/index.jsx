@@ -1,97 +1,59 @@
-class Banner extends React.Component {
+
+
+class MainPanel extends React.Component {
     render() {
-        return (
-            <div className="banner">
-                <img src="images/banner.png" />
-            </div>
-        )
-    }
-}
+        let product = (p, index) => {
 
-class TopInfo extends React.Component {
-    render() {
-        return (
-            <div className="top-info">
-                <div className="logo">
-                    <img src="images/logo.png" />
-                </div>
-                <div className="title">
-                    放心花
-				</div>
+            let link_a = `/static/loan/apply-zhang-zhong/index.html`,
+                link_b = `/static/loan/apply-du-miao/index.html`,
+                link = p.productName == '放心花' ? link_a : link_b;
 
-                <div className="tag">
-                    <img src="images/tag-1.png" />
-                    <img src="images/tag-2.png" />
-                    <img src="images/tag-3.png" />
-                </div>
-
-                <div className="subtitle">
-                    借款范围（500 - 10万）
-				</div>
-                <div className="next">
-
-                </div>
-            </div>
-        )
-    }
-}
-
-class BorrowMoneyList extends React.Component {
-    render() {
-        return (
-            <div className="">
-                <div className="borrow-money-list">
+            return (
+                <Nav className="borrow-money-list" key={index} href={`${link}?pid=${p.productId}`}>
                     <div className="icon-block">
                         <img src="images/icon.png" />
                     </div>
                     <div className="info">
                         <div className="t">
-                            <span className="title-text">读秒</span>
+                            <span className="title-text">{p.productName}</span>
                             <div className="tag">
-                                <img src="images/tag-1a.png" />
-                                <img src="images/tag-2a.png" />
-                                <img src="images/tag-3a.png" />
+                                {p.productLabelList.map(i => <img src={`/static/loan/home/images/tag-${i.labelType}a.png`} />)}
                             </div>
                         </div>
-
                         <div className="b">
-                            <div className="text">
-                                借款范围（500 - 10万）
-							</div>
+                            <div className="text"> 借款范围（{p.amountStr}） </div>
                         </div>
                     </div>
-                    <div className="next">
+                    <div className="next"></div>
+                </Nav>
+            )
+        }
 
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
+        let main_product = this.props.products[0],
+            sub_products = this.props.products.slice(1)
 
-class BorrowMoney extends React.Component {
-    render() {
         return (
-            <div className="">
-                <Banner />
-                <TopInfo />
-                <BorrowMoneyList />
+            <div className="main-panel">
+                <a href="/static/loan/weixin-download/index.html" className="banner">
+                    <img src="images/banner.png" />
+                </a>
+                <a href={`/static/loan/apply-zhang-zhong/index.html?pid=${main_product.productId}`} className="top-info">
+                    <div className="logo"> <img src="images/logo.png" /> </div>
+                    <div className="title"> {main_product.productName} </div>
+                    <div className="tag">
+                        {main_product.productLabelList.map(i => <img src={`/static/loan/home/images/tag-${i.labelType}.png`} />)}
+                    </div>
+                    <div className="subtitle"> 借款范围（{main_product.amountStr}） </div>
+                    <div className="next"> </div>
+                </a>
+                {sub_products.map(product)}
             </div>
         )
     }
 }
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<BorrowMoney />, CONTENT_NODE)
-    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE)
+    $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
+        .then(data => ReactDOM.render(<MainPanel products={data.resultList} />, CONTENT_NODE))
+    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 })
-
-window.onerror = function(errorMessage, scriptURI, lineNumber,columnNumber,errorObj) {
-    alert("错误信息：", errorMessage);
-    console.log("出错文件：", scriptURI);
-    console.log("出错行号：", lineNumber);
-    console.log("出错列号：", columnNumber);
-    alert("错误详情：", errorObj);
-}
-
-

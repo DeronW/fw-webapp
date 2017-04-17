@@ -58,6 +58,16 @@ body {
 
   .user-info-item-wrap {
 
+    .input-wrap:last-child {
+      border-bottom: 1px solid #ebeaea;
+    }
+
+    &:last-child {
+      .input-wrap {
+        border: none;
+      }
+    }
+
     .input-wrap {
       display: inline-flex;
       position: relative;
@@ -65,12 +75,7 @@ body {
       width: ~"calc(100% - @{input-wrap--margin-left})";
       height: @input-wrap--height;
       background-color: #fff;
-      border-bottom: 1px solid #ebeaea;
       vertical-align: middle;
-
-      &:last-child {
-        border: none;
-      }
 
       .info-name {
         display: inline-block;
@@ -160,15 +165,15 @@ body {
           border: none;
         }
 
-        .selected-icon {
-          position: absolute;
-          top: 30px;
-          right: 40px;
-        }
-
       }
     }
   }
+}
+
+.selected-icon {
+  position: absolute;
+  top: 30px;
+  right: 40px;
 }
 
 .submit-btn {
@@ -193,6 +198,7 @@ body {
 
   .city-select-label {
     position: fixed;
+    z-index: 999;
     width: 100%;
     height: 100px;
     line-height: 100px;
@@ -222,17 +228,27 @@ body {
 }
 
 .city-option {
+  position: relative;
   height: 80px;
   line-height: 80px;
   margin-left: 24px;
   font-size: 30px;
   border-bottom: 1px solid #e6e6e6;
   color: #333;
+
+  &:last-child {
+    border: none;
+  }
+
+  .selected-icon {
+    right: 60px;
+  }
 }
 
 .city-divisions-wrap {
   position: fixed;
   right: 15px;
+  padding: 0;
 
   li {
     width: 36px;

@@ -40,7 +40,6 @@ class UserInfoTab extends React.Component {
 class CitySelectWrap extends React.Component {
     constructor() {
         super();
-        this.scrollList = this.scrollList.bind(this);
     }
 
     componentDidMount() {
@@ -52,7 +51,7 @@ class CitySelectWrap extends React.Component {
         devisionIndexEl.style.top = (cityWrapHeight - devisionIndexHeight) / 2 + labelHeight + 'px';
     }
 
-    scrollList(divs, divLetter) {
+    scrollList = (divs, divLetter) => {
         let cityWrapEl = ReactDOM.findDOMNode(this);
         let devisionHeight = 40,
             optionHeight = 80,
@@ -85,14 +84,15 @@ class CitySelectWrap extends React.Component {
                   key={c}
                   className="city-option"
                   onClick={(e) => {
-                      // if e.target.clientX / e.target.clientWidth > 0.8, assume
+                      // if e.target.clientX / e.target.clientWidth > 0.9, assume
                       // that user clicked on division elements to scroll
-                      if (e.target.clientX / e.target.clientWidth > 0.8) {
+                      if (e.clientX / e.target.clientWidth > 0.9) {
                           return;
                       }
                       this.props.handleClick(this.props.itemIndex, c);
                   }}>
                   {c}
+                  {this.props.value === c && <img className="selected-icon" src="images/selected.png"></img>}
                 </div>
             ));
             cityEls.push(
@@ -115,49 +115,6 @@ class CitySelectWrap extends React.Component {
                 </ul>
             </div>
         )
-        // let sortedCityList = this.props.cityList.sort((c1, c2) => {
-        //     if (c1.eng > c2.eng) {
-        //         return 1;
-        //     }
-        //     if (c1.eng < c2.eng) {
-        //         return -1;
-        //     }
-        //     return 0;
-        // });
-        // let divisions = [];
-        // let cityEls = sortedCityList.map((c, index, list) => {
-        //     let newFirstLetter = (index === 0 || list[index - 1].eng[0] !== c.eng[0]) ? c.eng[0] : '';
-        //     if (newFirstLetter) {
-        //         divisions.push({[newFirstLetter]: 1});
-        //     } else {
-        //         divisions[divisions.length-1][c.eng[0]]++ ;
-        //     }
-        //     return (
-        //         <div key={c.eng}>
-        //           { newFirstLetter &&
-        //               <div className="city-division">{newFirstLetter.toUpperCase()}</div>
-        //           }
-        //           <div className="city-option" onClick={() => {this.props.handleClick(this.props.itemIndex, c.cn);}}>{c.cn}</div>
-        //         </div>
-        //     );
-        // });
-        // let divisionEls = divisions.map((d, index) => (
-        //     <li
-        //       key={index}
-        //       id={`city-division-${index}`}>
-        //         {Object.keys(d)[0].toUpperCase()}
-        //     </li>
-        // ))
-        // return (
-        //     <div className="city-select-wrap">
-        //         <div className="city-options-wrap">
-        //             {cityEls}
-        //         </div>
-        //         <ul className="city-divisions-wrap" onClick={(e) => {this.scrollList(divisions, e.target.id[e.target.id.length - 1]);}}>
-        //             {divisionEls}
-        //         </ul>
-        //     </div>
-        // )
     }
 }
 
@@ -169,10 +126,9 @@ class InfoItemInputWrap extends React.Component {
         if (this.isSelectItem) {
             this.state.expandOpts = false;
         }
-        this.toggleExpand = this.toggleExpand.bind(this);
     }
 
-    toggleExpand() {
+    toggleExpand = () => {
         this.setState({
             expandOpts: !this.state.expandOpts
         });
@@ -225,6 +181,7 @@ class InfoItemInputWrap extends React.Component {
                   <img src="images/close.png" onClick={this.toggleExpand}></img>
               </div>
               <CitySelectWrap
+                value={value}
                 itemIndex={this.props.itemIndex}
                 handleClick={(index, v) => {this.toggleExpand(); this.props.handleInput(index, v);}}
                 cityList={this.props.options}/>
@@ -388,17 +345,14 @@ class UserInfoWrap extends React.Component {
                 ]
             ]
         }
-        this.shiftTab = this.shiftTab.bind(this);
-        this.handleInput = this.handleInput.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    shiftTab(tabName) {
+    shiftTab = (tabName) => {
         this.setState({selectedTab: tabName});
         this.setState({showSubmitBtn: false});
     }
 
-    handleInput(index, v) {
+    handleInput = (index, v) => {
         this.setState({showSubmitBtn: true});
         let selected = this.state.selectedTab;
         let catInfo = JSON.parse(JSON.stringify(this.state[selected]));
@@ -406,9 +360,9 @@ class UserInfoWrap extends React.Component {
         this.setState({[selected]: catInfo});
     }
 
-    handleSubmit() {
+    handleSubmit = () => {
         $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
-            email: email,
+            email: '',
             creditCard: this.state.basicInfo[0][2].value,
             city: this.state.basicInfo[1][0].value,
             address: this.state.basicInfo[1][1].value,
@@ -436,7 +390,7 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-let cityList = {
+const CITYLIST = {
   "A": [
     "安康市", "安庆市", "安顺市", "鞍山市", "安阳市"
   ],
@@ -742,15 +696,13 @@ let cityList = {
     "郑州市"
   ]
 };
-// var email;
 
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(
         <Header title="个人信息"/>, HEADER_NODE);
     $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
-        // email = data.email;
         ReactDOM.render(
-            <UserInfoWrap userInfo={data} cityList={cityList}/>, CONTENT_NODE);
+            <UserInfoWrap userInfo={data} cityList={CITYLIST}/>, CONTENT_NODE);
     }, e => $FW.Component.Toast(e.message));
 })
