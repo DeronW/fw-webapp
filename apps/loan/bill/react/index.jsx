@@ -1,32 +1,40 @@
 class Content extends React.Component{
     constructor(props){
         super(props);
-        this.tabs = ['billApplying', 'billReturning', 'billFailing', 'billPaid'];
-        // this.tabs = [
-        //   {
-        //     billType: 'billApplying',
-        //     typeCN: '申请中'
-        //   }, {
-        //     billType: 'billReturning',
-        //     typeCN: '还款中'
-        //   }, {
-        //     billType: 'billFailing',
-        //     typeCN: '未通过'
-        //   }, {
-        //     billType: 'billPaid',
-        //     typeCN: '已还款'
-        //   }
-        // ];
-        let tab = $FW.Format.urlQuery().tab;
+        // this.tabs = ['billApplying', 'billReturning', 'billFailing', 'billPaid'];
+        this.tabs = [
+          {
+            billType: 'applying',
+            typeCN: '申请中'
+          }, {
+            billType: 'returning',
+            typeCN: '还款中'
+          }, {
+            billType: 'failing',
+            typeCN: '未通过'
+          }, {
+            billType: 'paid',
+            typeCN: '已还款'
+          }
+        ];
+        let tabTemp = $FW.Format.urlQuery().tab;
+        let tab = tabTemp.toLowerCase().slice(4);
+        // let tab = $FW.Format.urlQuery().tab;
         this.count = 5;
         this.state = {
            tab:tab,
            page:{
-               billApplying:1,
-               billReturning:1,
-               billFailing:1,
-               billPaid:1
+               applying:1,
+               returning:1,
+               failing:1,
+               paid:1
            },
+          //  page:{
+          //      billApplying:1,
+          //      billReturning:1,
+          //      billFailing:1,
+          //      billPaid:1
+          //  },
            bill:[],
            hasData:true
         }
@@ -36,17 +44,17 @@ class Content extends React.Component{
         const USER = $FW.Store.getUserDict();
         let page = this.state.page[this.state.tab];
         if (page == 0) return;
-        // let loanStatus = this.tabs.findIndex((t) => (t.billType === this.state.tab)) + 1;
-        let loanStatus;
-        if (this.state.tab == 'billApplying') {
-            loanStatus = 1
-        } else if (this.state.tab == 'billReturning') {
-            loanStatus = 2
-        } else if (this.state.tab == 'billFailing') {
-            loanStatus = 3
-        } else if (this.state.tab == 'billPaid') {
-            loanStatus = 4
-        }
+        let loanStatus = this.tabs.findIndex((t) => (t.billType === this.state.tab)) + 1;
+        // let loanStatus;
+        // if (this.state.tab == 'billApplying') {
+        //     loanStatus = 1
+        // } else if (this.state.tab == 'billReturning') {
+        //     loanStatus = 2
+        // } else if (this.state.tab == 'billFailing') {
+        //     loanStatus = 3
+        // } else if (this.state.tab == 'billPaid') {
+        //     loanStatus = 4
+        // }
 
      $FW.Post(`${API_PATH}/api/order/v1/orderList.json`,{
          pageSize:this.count,
@@ -58,20 +66,20 @@ class Content extends React.Component{
          uid:USER.uid,
          sourceType: SOURCE_TYPE
        }).then((data)=>{
-        //  let tab = this.tabs[loanStatus-1].billType;
-         let tab;
-         if (loanStatus == 1) {
-             tab = 'billApplying'
-         } else if (loanStatus == 2) {
-             tab = 'billReturning'
-         } else if (loanStatus == 3) {
-             tab = 'billFailing'
-         } else if (loanStatus == 4) {
-             tab = 'billPaid'
-         } else {
-             done && done();
-             return;
-         }
+         let tab = this.tabs[loanStatus-1].billType;
+        //  let tab;
+        //  if (loanStatus == 1) {
+        //      tab = 'billApplying'
+        //  } else if (loanStatus == 2) {
+        //      tab = 'billReturning'
+        //  } else if (loanStatus == 3) {
+        //      tab = 'billFailing'
+        //  } else if (loanStatus == 4) {
+        //      tab = 'billPaid'
+        //  } else {
+        //      done && done();
+        //      return;
+        //  }
          window.Bill[tab] = window.Bill[tab].concat(data.resultList);
          let bill = window.Bill[this.state.tab];
          let new_page = this.state.page;
@@ -95,17 +103,17 @@ class Content extends React.Component{
     }
     render() {
         let tab_bar = (i) => {
-            let name = {
-                billApplying: '申请中',
-                billReturning: '还款中',
-                billFailing: '未通过',
-                billPaid: '已还款',
-            };
+            // let name = {
+            //     billApplying: '申请中',
+            //     billReturning: '还款中',
+            //     billFailing: '未通过',
+            //     billPaid: '已还款',
+            // };
             return (
-                <div key={i} className={i == this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
-                     onClick={()=>{this.tabClickHandler(i) }}>
-                     {/* <span className="text">{i.typeCN}</span> */}
-                    <span className="text">{name[i]}</span>
+                <div key={i.billType} className={i.billType === this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
+                     onClick={()=>{this.tabClickHandler(i.billType) }}>
+                     <span className="text">{i.typeCN}</span>
+                    {/* <span className="text">{name[i]}</span> */}
                 </div>
             )
         };
@@ -114,27 +122,30 @@ class Content extends React.Component{
             let status = parseInt(item.baseStatus);
             let uuid = item.uuid;
             let loanGid = item.loanGid;
-            // let baseStatus =
-            let baseStatus;
-            let statusColor;
-            switch(status){
-                case 1 :
-                    baseStatus = "申请中";
-                    statusColor = "bill-applying-color";
-                    break;
-                case 2 :
-                    baseStatus = "还款中";
-                    statusColor = "bill-returning-color"
-                    break;
-                case 3 :
-                    baseStatus = "未通过";
-                    statusColor = "bill-failing-color";
-                    break;
-                case 4 :
-                    baseStatus = "已还款";
-                    statusColor = "bill-paid-color";
-                    break;
-            }
+            let baseStatus = this.tabs[status-1].typeCN;
+            let statusColor = `bill-${this.tabs[status-1].billType}-color`;
+            console.log(this.tabs[status-1].billType);
+            console.log(statusColor);
+            // let baseStatus;
+            // let statusColor;
+            // switch(status){
+            //     case 1 :
+            //         baseStatus = "申请中";
+            //         statusColor = "bill-applying-color";
+            //         break;
+            //     case 2 :
+            //         baseStatus = "还款中";
+            //         statusColor = "bill-returning-color"
+            //         break;
+            //     case 3 :
+            //         baseStatus = "未通过";
+            //         statusColor = "bill-failing-color";
+            //         break;
+            //     case 4 :
+            //         baseStatus = "已还款";
+            //         statusColor = "bill-paid-color";
+            //         break;
+            // }
             return (
                 <a className="list_li" key={index} href={item.productId == 1 ? `/static/loan/bill-detail/index.html?uuid=${loanGid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${uuid}`}>
                     <div className="list-img"><img src={item.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png"}/></div>
@@ -169,11 +180,17 @@ class Content extends React.Component{
     }
 }
 
+// window.Bill = {
+//     billApplying: [],
+//     billReturning: [],
+//     billFailing: [],
+//     billPaid: []
+// };
 window.Bill = {
-    billApplying: [],
-    billReturning: [],
-    billFailing: [],
-    billPaid: []
+    applying: [],
+    returning: [],
+    failing: [],
+    paid: []
 };
 
 $FW.DOMReady(function(){

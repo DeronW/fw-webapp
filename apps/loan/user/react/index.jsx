@@ -159,6 +159,41 @@ class MajorUserInfo extends React.Component {
     }
 }
 
+class ExitBtn extends React.Component {
+  constructor() {
+    super();
+    this.state = {showPop: false};
+  }
+
+  logoutHandler: function () {
+      $FW.Store.clear();
+      location.href = '/static/loan/user-entry/index.html';
+  }
+
+  render() {
+    return (
+      <div>
+        <div className="more-btn">
+          <div className="ui-btn" onClick={() => {this.setState({showPop: true})}}>退出登录</div>
+        </div>
+        {this.state.showPop &&
+          <div className="mask" style={{ zIndex: 100 }}>
+              <div className="pop">
+                  <div className="pop-title">退出登录</div>
+                  <div className="pop-close" onClick={() => {this.setState({showPop: false})}}></div>
+                  <div className="pop-content">确定退出登录当前账号？</div>
+                  <div className="pop-btnlist">
+                      <span className="pop-cancel" onClick={() => {this.setState({showPop: false})}}>取消</span>
+                      <span className="pop-confirm" onClick={this.logoutHandler}>确认</span>
+                  </div>
+              </div>
+          </div>
+        }
+      </div>
+    )
+  }
+}
+
 class UserInfoWrap extends React.Component {
   constructor(){
     super()
@@ -173,12 +208,14 @@ class UserInfoWrap extends React.Component {
       }, e => {$FW.Component.Toast(e.message)});
   }
     render() {
+        let isLoggedIn = $FW.Store.getUserToken() ? true : false;
         return (
             <div className="user-info-wrap">
                 <AvatarCard phoneNum={this.state.phoneNum}/>
                 <FollowWXEntry/>
                 <BillEntry/>
                 <MajorUserInfo/>
+                <ExitBtn isLoggedIn={isLoggedIn}/>
             </div>
         )
     }
