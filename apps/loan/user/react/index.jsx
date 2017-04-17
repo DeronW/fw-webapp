@@ -160,10 +160,22 @@ class MajorUserInfo extends React.Component {
 }
 
 class UserInfoWrap extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      phoneNum: null
+    }
+  }
+  componentDidMount = () => {
+
+    $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
+      this.setState({phoneNum: data.mobile})
+}, e => {$FW.Component.Toast(e.message)});
+  }
     render() {
         return (
             <div className="user-info-wrap">
-                <AvatarCard phoneNum={this.props.phoneNum}/>
+                <AvatarCard phoneNum={this.state.phoneNum}/>
                 <FollowWXEntry/>
                 <BillEntry/>
                 <MajorUserInfo/>
@@ -178,15 +190,5 @@ console.log(`token: ${USER.token}, userGid: ${USER.gid}, userId: ${USER.id}, uid
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
-
-    $FW.Post(`${API_PATH}/api/userBase/v1/userCenter.json`, {
-        token: USER.token,
-        userGid: USER.gid,
-        userId: USER.id,
-        uid: USER.uid,
-        sourceType: SOURCE_TYPE
-    }).then(data => {
-    // $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
-        ReactDOM.render( <UserInfoWrap phoneNum={data.mobile}/>, CONTENT_NODE)
-    }, e => {$FW.Component.Toast(e.message)});
+        ReactDOM.render( <UserInfoWrap />, CONTENT_NODE)
 })
