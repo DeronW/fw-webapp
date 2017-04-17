@@ -175,5 +175,5 @@ function str_length(str) {
 }
 
 function back_handler() {
-    location.href = '/static/mall/game/index.html?mallHead=true';
+    location.href = '/';
 }
