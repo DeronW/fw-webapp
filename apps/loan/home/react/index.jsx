@@ -3,21 +3,21 @@
 class MainPanel extends React.Component {
     render() {
         let product = (p, index) => {
-            let page_name = p.productName == '放心花' ? 'zhang-zhong' : 'du-miao',
-                link = `/static/loan/apply-${page_name}/index.html?id=${p.productId}`;
+
+            let link_a = `/static/loan/apply-zhang-zhong/index.html`,
+                link_b = `/static/loan/apply-du-miao/index.html`,
+                link = p.productName == '放心花' ? link_a : link_b;
 
             return (
-                <Nav className="borrow-money-list" key={index} href={link}>
+                <Nav className="borrow-money-list" key={index} href={`${link}?pid=${p.productId}`}>
                     <div className="icon-block">
-                        <img src={p.productLogo} />
+                        <img src="images/icon.png" />
                     </div>
                     <div className="info">
                         <div className="t">
                             <span className="title-text">{p.productName}</span>
                             <div className="tag">
-                                <img src="images/tag-1a.png" />
-                                <img src="images/tag-2a.png" />
-                                <img src="images/tag-3a.png" />
+                                {p.productLabelList.map(i => <img src={`/static/loan/home/images/tag-${i.labelType}a.png`} />)}
                             </div>
                         </div>
                         <div className="b">
@@ -29,23 +29,24 @@ class MainPanel extends React.Component {
             )
         }
 
+        let main_product = this.props.products[0],
+            sub_products = this.props.products.slice(1)
+
         return (
             <div className="main-panel">
-                <div className="banner">
+                <a href="/static/loan/weixin-download/index.html" className="banner">
                     <img src="images/banner.png" />
-                </div>
-                <div className="top-info">
+                </a>
+                <a href={`/static/loan/apply-zhang-zhong/index.html?pid=${main_product.productId}`} className="top-info">
                     <div className="logo"> <img src="images/logo.png" /> </div>
-                    <div className="title"> 放心花 </div>
+                    <div className="title"> {main_product.productName} </div>
                     <div className="tag">
-                        <img src="images/tag-1.png" />
-                        <img src="images/tag-2.png" />
-                        <img src="images/tag-3.png" />
+                        {main_product.productLabelList.map(i => <img src={`/static/loan/home/images/tag-${i.labelType}.png`} />)}
                     </div>
-                    <div className="subtitle"> 借款范围（500 - 10万） </div>
+                    <div className="subtitle"> 借款范围（{main_product.amountStr}） </div>
                     <div className="next"> </div>
-                </div>
-                {this.props.products.map(product)}
+                </a>
+                {sub_products.map(product)}
             </div>
         )
     }
@@ -54,5 +55,5 @@ class MainPanel extends React.Component {
 $FW.DOMReady(() => {
     $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
         .then(data => ReactDOM.render(<MainPanel products={data.resultList} />, CONTENT_NODE))
-    ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
+    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 })

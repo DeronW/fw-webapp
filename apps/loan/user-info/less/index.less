@@ -58,6 +58,16 @@ body {
 
   .user-info-item-wrap {
 
+    .input-wrap:last-child {
+      border-bottom: 1px solid #ebeaea;
+    }
+
+    &:last-child {
+      .input-wrap {
+        border: none;
+      }
+    }
+
     .input-wrap {
       display: inline-flex;
       position: relative;
@@ -65,12 +75,7 @@ body {
       width: ~"calc(100% - @{input-wrap--margin-left})";
       height: @input-wrap--height;
       background-color: #fff;
-      border-bottom: 1px solid #ebeaea;
       vertical-align: middle;
-
-      &:last-child {
-        border: none;
-      }
 
       .info-name {
         display: inline-block;
@@ -230,6 +235,10 @@ body {
   font-size: 30px;
   border-bottom: 1px solid #e6e6e6;
   color: #333;
+
+  &:last-child {
+    border: none;
+  }
 
   .selected-icon {
     right: 60px;
