@@ -201,7 +201,7 @@ class ApplyLoan extends React.Component {
             <div className="apply-loan">
                 {!$FW.Browser.inApp() && <div className="header">放心花</div>}
                 {false && $FW.Browser.inApp() && <div className="ad">
-                    <a onClick={()=>gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png"/></a>
+                    <a onClick={() => gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png" /></a>
                 </div>}
                 <div className={$FW.Browser.inApp() ? "app-loan-num" : "loan-num"}>
                     {this.getBorrowBtn()}
@@ -234,7 +234,6 @@ const USER = $FW.Store.getUserDict();
 const user = USER;
 
 $FW.DOMReady(function () {
-
     $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
         token: USER.token,
         userGid: USER.gid,
@@ -246,6 +245,4 @@ $FW.DOMReady(function () {
     }, e => {
         $FW.Capture(e)
     });
-
-    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE)
 });
