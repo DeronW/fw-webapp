@@ -86,13 +86,13 @@ class BottomNavBar extends React.Component {
         let _href_self = goto('/static/loan/user/index.html')
         let _href_more = goto('/static/loan/more/index.html')
         let _dome_section = {
-            width: "110px",
-            height: "68px",
+            width: "140px",
+            height: "100px",
             overflow: "hidden",
             position: "absolute",
-            top: "-23px",
+            top: "-22px",
             left: "50%",
-            marginLeft: "-55px",
+            marginLeft: "-70px",
             backgroundColor:"#393f5a",
             borderRadius:"50%",
             zIndex:"-1"
