@@ -60,11 +60,11 @@ $FW.DOMReady(function () {
                     }
                     $(".tab-content-item-wrap2").append(str);
                     page++;
+                    done && done();
                 } else if (page > 1) {
                     loadNextPage = false
                     $("#more").html("已全部显示");
                 }
-                done && done();
             }, (e) => {
                 $FW.Component.Toast(e.message);
                 if (page == 1) {
