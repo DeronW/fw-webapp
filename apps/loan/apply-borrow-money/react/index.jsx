@@ -64,8 +64,10 @@ class BasicInfo extends React.Component {
 	}
 	render() {
 		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
-		const { getSumMoneyPopVal ,getSelectList } = this.props
+		const { getSumMoneyPopVal ,getSelectList, getDataProps } = this.props
 
+		console.log(getDataProps.data.idCard)
+		console.log(getDataProps.data.realName)
 
 		return (
 			<div className="basic-info">
@@ -869,6 +871,7 @@ class ApplyBorrowMoney extends React.Component {
 				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } />
 				<BasicInfo selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } 
 					getSelectList = { this.state.selectList }
+					getDataProps = { dataProps }
 				/>
 				<UrgentContactPerson 
 					selectListFun = { this.callbackSelectList.bind(this) }
@@ -904,6 +907,6 @@ class ApplyBorrowMoney extends React.Component {
 
 $FW.DOMReady(() => {
 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
-        .then(data => ReactDOM.render(<ApplyBorrowMoney  />, CONTENT_NODE))
+        .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
 })
 
