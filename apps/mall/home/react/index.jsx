@@ -67,8 +67,7 @@ const Mall = React.createClass({
         var head_nav_wrap = {
             // background: this.state.background,
             width: "100%",
-            height: "71px",
-            paddingTop: "20px",
+            paddingTop: "24px",
             paddingBottom: "20px",
             transition: "1s all"
         };
