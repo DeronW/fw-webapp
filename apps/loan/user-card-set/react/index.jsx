@@ -42,7 +42,6 @@ const SetCashCard = React.createClass({
             cardinfoBankName: '',
             cardinfoLogoUrl: '',
             cardType: '',
-            selectClause: false,
             withholdServerPop: false,
             loading: false,
             canVerify: ''
@@ -110,19 +109,17 @@ const SetCashCard = React.createClass({
         });
     },
     handlerNext() {
-        let err, {name, id, bankName, bankNum, phone, selectClause, cardType, canVerify} = this.state;
-
-        if (name == '') err = "姓名不能为空";
-        if (name.length > 20) err = "姓名不能超过20个字符";
-        if (id == '') err = "身份证不能为空";
-        if (!isCardNo(id)) err = "身份证格式不对";
-        if (bankNum == '') err = "储蓄卡不能为空";
-        if (space(bankNum).length > 19 || space(bankNum).length < 16) err = "储蓄卡格式不对";
-        if (phone == '') err = "手机号不能为空";
-        if (!isMobilePhone(phone)) err = "手机号格式不对";
-        // if (!selectClause) err = "请勾选代扣服务协议";
-        if (cardType == 1) err = "请绑定借记卡";
+        let err, {name, id, bankName, bankNum, phone, cardType, canVerify} = this.state;
         if (canVerify == 0) err = "不支持绑定此类卡";
+        if (cardType == 1) err = "请绑定借记卡";
+        if (!isMobilePhone(phone)) err = "手机号格式不对";
+        if (phone == '') err = "手机号不能为空";
+        if (space(bankNum).length > 19 || space(bankNum).length < 16) err = "储蓄卡格式不对";
+        if (bankNum == '') err = "储蓄卡不能为空";
+        if (!isCardNo(id)) err = "身份证格式不对";
+        if (id == '') err = "身份证不能为空";
+        if (name.length > 20) err = "姓名不能超过20个字符";
+        if (name == '') err = "姓名不能为空";
 
         err ?
             $FW.Component.Toast(err) :
@@ -147,7 +144,7 @@ const SetCashCard = React.createClass({
     },
     render() {
 
-        let {withholdServerPop, cardinfoBankName, selectClause} = this.state;
+        let {withholdServerPop, cardinfoBankName} = this.state;
 
         return (
             <div className="set-cash-card-cnt">

@@ -49,7 +49,7 @@ const Register = React.createClass({
             userOperationType: 3,
             sourceType: SOURCE_TYPE
         }).then(data => {
-            $FW.Store.set('phone', phone);
+            //$FW.Store.set('phone', phone);
             if(data.codeType == 1){
                 location.href = `/static/loan/user-set-password/index.html?codeToken=${data.codeToken}&phone=${phone}`;
             }else if(data.codeType == 2){
@@ -57,7 +57,7 @@ const Register = React.createClass({
             }
         }, res => {
             if (res.code === 201003) {
-                $FW.Store.set('phone', phone);
+                //$FW.Store.set('phone', phone);
                 location.href = `/static/loan/user-login/index.html?phone=${phone}`;
             } else {
                 $FW.Component.Toast(res.message)
