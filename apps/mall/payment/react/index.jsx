@@ -124,14 +124,14 @@ const Payment = React.createClass({
                     // document.write(completeForm);
                     // document.forms[0].submit();
 
-                    // document.write(data.form);
-                    window.location.href="/static/mall/order-complete/index.html#form=" + (data.form);
-                    setTimeout(() => {
-                        this.queryState();
-                    }, 3000);
-                    setTimeout(() => {
-                        this.queryState('final');
-                    }, 6000);
+                    document.write(data.form);
+                    // window.location.href="/static/mall/order-complete/index.html#form=" + (data.form);
+                    // setTimeout(() => {
+                    //     this.queryState();
+                    // }, 3000);
+                    // setTimeout(() => {
+                    //     this.queryState('final');
+                    // }, 6000);
                 // } else {
                 //     FW.Component.hideAjaxLoading();
                 //     $FW.Component.Alert(data.responseResult.resMessage);
