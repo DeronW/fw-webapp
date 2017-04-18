@@ -1615,7 +1615,7 @@ class Btn extends React.Component {
 					emContact: getSumMoneyPopVal.urgentPerson,
 					emRelationship: getSumMoneyPopVal.relationshipIndex,
 					emMobile: getSumMoneyPopVal.phone,
-					income: getSumMoneyPopVal.income,
+					income: getSumMoneyPopVal.incomeIndex,
 					workExperience: getSumMoneyPopVal.yearsOfWorkIndex,
 					productId: $FW.Format.urlQuery().pid,
 					position: '0,0', //this.state.position,
