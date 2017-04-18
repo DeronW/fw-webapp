@@ -2269,7 +2269,11 @@ class ApplyBorrowMoney extends React.Component {
 		}
 	}
     componentDidMount(){
-        // /api/userBase/v1/userInfoItem.json
+        $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
+            let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
+
+            this.setState({sumMoneyListObj: init_data})
+        })
     }
 	callbackSelectList(selectList, title, popShow) {
 		this.setState({
@@ -2284,7 +2288,6 @@ class ApplyBorrowMoney extends React.Component {
 		})
 	}
 	callbackSumPopInfo(obj) {
-		//console.log(obj)
 		this.setState({
 			sumMoneyListObj: {
 				moneyVal: obj.moneyVal,
@@ -2354,10 +2357,8 @@ class ApplyBorrowMoney extends React.Component {
 	}
 }
 
-//ReactDOM.render(<ApplyBorrowMoney  />, CONTENT_NODE)
-
-
 $FW.DOMReady(() => {
+    ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
         .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
 })
