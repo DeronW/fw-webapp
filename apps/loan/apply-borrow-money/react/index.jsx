@@ -2253,28 +2253,6 @@ class ApplyBorrowMoney extends React.Component {
 			agreeShow: false
 		}
 	}
-<<<<<<< HEAD
-	componentDidMound() {
-		const { dataProps } = this.props
-		this.setState({					
-			moneyVal : dataProps.balance,
-			deadlineVal : dataProps.term,
-			realName: dataProps.realName,
-			idCard: dataProps.idCard,
-			creditCardVal: dataProps.creditCard,
-			email: dataProps.email,
-			city: dataProps.city,
-			homeVal:  dataProps.address,
-			marriageIndex: dataProps.homeSituation,
-			urgentPerson: dataProps.emContact,
-			emRelationship: dataProps.relationshipIndex,
-			phone: dataProps.emMobile,
-			income: dataProps.income,
-			yearsOfWorkIndex: dataProps.workExperience,
-					
-		})	
-	}
-=======
     componentDidMount(){
         $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
             let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
@@ -2282,7 +2260,6 @@ class ApplyBorrowMoney extends React.Component {
             this.setState({sumMoneyListObj: init_data})
         })
     }
->>>>>>> 8d7eab01576a75854756bbc8a053b0a2ab12eff2
 	callbackSelectList(selectList, title, popShow) {
 		this.setState({
 			popShow: popShow,
