@@ -1615,7 +1615,7 @@ class Btn extends React.Component {
 					income: getSumMoneyPopVal.incomeIndex,
 					workExperience: getSumMoneyPopVal.yearsOfWorkIndex,
 					productId: $FW.Format.urlQuery().pid,
-					position: this.state.position,
+					position: '0,0', //this.state.position,
 					userCookieID: '0000'
 				}).then(data => {
 					alert(data)
