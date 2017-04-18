@@ -1599,14 +1599,14 @@ class Btn extends React.Component {
 				$FW.Component.Toast("点击同意");
 			} else {
 				$FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`), {
-					address: '',
+					address:  getSumMoneyPopVal.homeVal,
 					balance: getSumMoneyPopVal.moneyVal,
 					term: getSumMoneyPopVal.deadlineVal,
 					realName: getDataProps.realName,
 					idCard: getDataProps.idCard,
 					creditCard: getSumMoneyPopVal.creditCardVal,
 					email: getSumMoneyPopVal.email,
-					city: getSumMoneyPopVal.homeVal,
+					city: getSumMoneyPopVal.city,
 					homeSituation: getSumMoneyPopVal.marriageIndex,
 					emContact: getSumMoneyPopVal.urgentPerson,
 					emRelationship: getSumMoneyPopVal.relationshipIndex,
