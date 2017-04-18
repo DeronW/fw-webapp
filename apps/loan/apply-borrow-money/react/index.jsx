@@ -1606,7 +1606,7 @@ class Btn extends React.Component {
 					realName: getDataProps.realName,
 					idCard: getDataProps.idCard,
 					creditCard: getSumMoneyPopVal.creditCardVal,
-					email: getSumMoneyPopVal.email,
+					email: getSumMoneyPopVal.emailVal,
 					city: getSumMoneyPopVal.city,
 					homeSituation: getSumMoneyPopVal.marriageIndex,
 					emContact: getSumMoneyPopVal.urgentPerson,
@@ -1615,16 +1615,14 @@ class Btn extends React.Component {
 					income: getSumMoneyPopVal.income,
 					workExperience: getSumMoneyPopVal.yearsOfWorkIndex,
 					productId: $FW.Format.urlQuery().pid,
-					position: this.state.position,
-					userCookieID: navigator.userAgent,
-					clientIP: '192.168.2.5'
-					// token: JSON.parse($FW.Store.exportUserDict()).token,
-					// uid	: JSON.parse($FW.Store.exportUserDict()).uid,
-					// userGid: JSON.parse($FW.Store.exportUserDict()).userGid,
-					// userId: JSON.parse($FW.Store.exportUserDict()).userId
-				})
-        		.then(data => {
-					alert(data)
+					position: '0,0', //this.state.position,
+					userCookieID: '0000'
+				}).then(data => {
+                    // redirect to du-miao
+                    let u = $FW.Store.getUserDict();
+                    let params = `uid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
+                    location.href = `/api/order/v1/jump.shtml?${params}`
+
 				})
 			}
 
@@ -2255,6 +2253,7 @@ class ApplyBorrowMoney extends React.Component {
 			agreeShow: false
 		}
 	}
+<<<<<<< HEAD
 	componentDidMound() {
 		const { dataProps } = this.props
 		this.setState({					
@@ -2275,6 +2274,15 @@ class ApplyBorrowMoney extends React.Component {
 					
 		})	
 	}
+=======
+    componentDidMount(){
+        $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
+            let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
+
+            this.setState({sumMoneyListObj: init_data})
+        })
+    }
+>>>>>>> 8d7eab01576a75854756bbc8a053b0a2ab12eff2
 	callbackSelectList(selectList, title, popShow) {
 		this.setState({
 			popShow: popShow,
@@ -2357,10 +2365,8 @@ class ApplyBorrowMoney extends React.Component {
 	}
 }
 
-//ReactDOM.render(<ApplyBorrowMoney  />, CONTENT_NODE)
-
-
 $FW.DOMReady(() => {
+    ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
         .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
 })
