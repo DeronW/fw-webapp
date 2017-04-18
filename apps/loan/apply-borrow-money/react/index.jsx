@@ -317,7 +317,7 @@ class Btn extends React.Component {
 					userId: JSON.parse($FW.Store.exportUserDict()).userId
 				}
         		.then(data => {
-					console.log(data)
+					alert(data)
 				})
 			}
 
