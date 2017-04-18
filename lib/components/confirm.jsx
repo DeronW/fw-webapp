@@ -1,18 +1,23 @@
 /*
  */
-
-const GlobalConfirm = React.createClass({
-    componentWillUnmount: function () {
+class GlobalConfirm extends React.Component {
+    constructor() {
+        super();
+    }
+    componentWillUnmount() {
         this.props.unMountConfirm && this.props.unMountConfirm();
-    },
-    confirmHandler: function () {
+    }
+
+    confirmHandler = () => {
         this.props.confirmCallback && this.props.confirmCallback();
         ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
-    },
-    clearHandler: function() {
+    }
+
+    clearHandler = () => {
         ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
-    },
-    render: function () {
+    }
+
+    render() {
         let popStyle = {
             position: "fixed",
             top: "0",
@@ -96,9 +101,9 @@ const GlobalConfirm = React.createClass({
             </div>
         )
     }
-});
+};
 
 GlobalConfirm.propTypes = {
-    title: React.PropTypes.string.isRequired,
-    confirmCallback: React.PropTypes.func
+    title: PropTypes.string.isRequired,
+    confirmCallback: PropTypes.func
 };

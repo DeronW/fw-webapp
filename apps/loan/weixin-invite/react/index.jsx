@@ -1,8 +1,9 @@
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
+    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     var page = 1;
     var loadNextPage = true;
-    $("#tab-content").height($(document).height() - 535 + "px");
+    $("#tab-content").height($(document).height() - 425 + "px");
     $(".tabs span").click(function () {
         var index = $(this).index();
         $(this).addClass('selected').siblings().removeClass('selected');
@@ -25,7 +26,9 @@ $FW.DOMReady(function () {
         token: USER.token,
         sourceType: SOURCE_TYPE
     }).then((data) => {
-        $(".btm-tip input").val(data.shareTemplate.templateUrl + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
+        var shareLink = data.shareTemplate.templateUrl;
+        $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
+        $(".invitation-code span").text(USER.invitCode);
     }, () => {
         location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });
@@ -57,11 +60,11 @@ $FW.DOMReady(function () {
                     }
                     $(".tab-content-item-wrap2").append(str);
                     page++;
+                    done && done();
                 } else if (page > 1) {
                     loadNextPage = false
                     $("#more").html("已全部显示");
                 }
-                done && done();
             }, (e) => {
                 $FW.Component.Toast(e.message);
                 if (page == 1) {

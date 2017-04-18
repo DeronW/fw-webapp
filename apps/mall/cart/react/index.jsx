@@ -22,7 +22,7 @@ const ShoppingCart = React.createClass({
 
         return {
             products: ps,
-            changeAll: true
+                changeAll: true
         }
     },
     componentDidMount: function () {

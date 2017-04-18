@@ -14,7 +14,7 @@ const BankManagement = React.createClass({
             sourceType: SOURCE_TYPE,
             productId: 1
         }).then(data => {
-            if (data.borrowBtnStatus == 2) this.setState({ popShow: true });
+            //if (data.borrowBtnStatus == 2) this.setState({ popShow: true });
         })
 
     },
@@ -66,13 +66,13 @@ const BankManagement = React.createClass({
                     <a className="add-card-btn" href='/static/loan/user-card-add/index.html'>马上添加</a>
                 </div>}
 
-                <div className={this.state.popShow ? "mask" : "mask dis"} style={{ zIndex: 10 }}>
+                {/* <div className={this.state.popShow ? "mask" : "mask dis"} style={{ zIndex: 10 }}>
                     <div className="verify-pop">
                         <div className="verify-tip">您离成功借钱只差一步<br />请先完成必填认证！</div>
                         <div className="verify-pop-close" onClick={this.closeHandler}></div>
                         <a className="verify-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>去认证</a>
                     </div>
-                </div>
+                </div> */}
             </div>
         )
     }

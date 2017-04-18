@@ -1,188 +1,210 @@
+// vars and mixins
+@follow-wx-wrap--height: 87px;
+@user-info-display-wrap--height: 100px;
+
+// containing block should better be a positioned element
+.center-element {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.right-align-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+// main style
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // no highlight when tapping
+}
+
+html {
+  height: 100%;
+  min-height: 1140px;
+}
+
 body {
-	background-color: #f0f0f0;
+  height: 100%;
+  background-color: #f0f0f0;
+  font-size: 30px;
 }
 
-.my-cnt {
-	margin-bottom: 120px;
+.avator-card {
+  width: 100%;
+  background-color: #44adf0;
+  padding: 64px 0;
+  text-align: center;
+
+  .avatar-container {
+    width: 156px;
+    height: 156px;
+    margin: 0 auto;
+  }
+
+  .masked-phone-num {
+    color: #fff;
+    font-size: 32px;
+    margin-top: 18px;
+  }
 }
 
-.my-nav {
-	height: 100px;
-	font-size: 36px;
-	line-height: 100px;
-	text-align: center;
-	background-color: #fff;
-}
+.follow-wx-entry-wrap {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  height: @follow-wx-wrap--height;
+  background-color: #3ba1e9;
+  vertical-align: middle;
 
-.my-info{
-  margin-bottom:22px;
-}
-.my-info-cnt {
+  .left-icon-container {
+    display: inline-block;
+    position: relative;
+    width: 114px;
+    height: 100%;
 
-	color: #fff;
-
-	.loan-sum-text {
-    background-color: #42d1f5;
-    padding-top:85px;
-		height: 273px;
-		text-align: center;
-
-		.text {
-			line-height: 42px;
-			font-size: 27px;
-		}
-
-		.num-text {
-			font-size: 112px;
-		}
-	}
-
-	.loan-info {
-    position:relative;
-    overflow:hidden;
-		height: 110px;
-    padding-top:30px;
-    background:#fff;
-		.info {
-			width: 50%;
-			border-right: 1px solid #fff;
-			text-align: center;
-      position:absolute;
-      top:30px;
-			.text {
-				display: block;
-				line-height: 27px;
-				font-size: 27px;
-        color:#999;
-			}
-			.num-text {
-				display: block;
-				font-size: 36px;
-				line-height: 44px;
-        color:#333;
-        margin-bottom:4px;
-			}
-		}
-    .info1{
-      left:0;
+    img {
+      .center-element;
     }
-    .info2{
-      border-right:none;
-      left:50%;
+  }
+
+  span {
+    display: inline-block;
+    height: 100%;
+    color: #fff;
+    line-height: @follow-wx-wrap--height;
+  }
+
+  .right-align-container {
+
+    .next-icon-container {
+      position: relative;
+      width: 60px;
+      height: 100%;
+
+      img {
+        .center-element;
+      }
     }
-    .vertical-line{
-      width:1px;
-      height:72px;
-      background:#f5f4f4;
-      position:absolute;
-      top:34px;
-      left:50%;
-      transform:translateX(-50%);
-    }
-	}
+  }
 }
 
+.bill-entry-wrap {
+  width: 100%;
 
+  .bill-label {
+    height: 66px;
+    line-height: 75px;
+    padding-left: 35px;
+    background-color: #f9f9f9;
+    color: #333;
+  }
 
-.my-info-num {
-	height: 80px;
-	padding: 30px 30px;
-	background-color: #fff;
+  .bill-type-wrap {
+    display: inline-flex;
+    width: 100%;
+    height: 153px;
+    background-color: #fff;
+    color: #666;
 
-	.quota-info {
-		float: left;
+    ul {
+      width: 100%;
+      padding: 0;
+      margin: 0;
 
-		.num-text {
-			display: block;
-			color: #50ad9a;
-			font-size: 50px;
-			line-height: 50px;
-		}
+      li {
+        display: inline-block;
+        width: 25%;
+        list-style: none;
+        text-align: center;
 
-		.text {
-			font-size: 22px;
-			line-height: 28px;
-			color: #999;
-		}
-	}
-
-	.icon-r {
-		float: right;
-
-		width: 80px;
-		height: 80px;
-		background: url(../images/arrow-r-icon.png) no-repeat center;
-		background-size: 30px auto;
-	}
+        img {
+          display: block;
+          margin: 20px auto 5px;
+        }
+      }
+    }
+  }
 }
 
+.info-display-block {
+  width: 100%;
+  margin: 21px 0;
+  background-color: #fff;
 
-.my-settings {
+  .user-info-display-wrap {
+    display: inline-flex;
+    position: relative;
+    margin-left: 35px;
+    width: calc(~"100% - 18px");
+    height: @user-info-display-wrap--height;
+    background-color: #fff;
+    border-bottom: 1px solid #ebeaea;
+    vertical-align: middle;
 
-	background-color: #fff;
+    &:last-child {
+      border: none;
+    }
 
-	.list {
-		.list-cnt {
-			height: 36px;
-			padding: 26px 0;
-      border-bottom: 1px solid #ebeaea;
-      margin-left:34px;
-			a {
-        padding: 0 30px 0 0;
-				display: block;
+    .info-icon-container {
+      display: inline-block;
+      position: relative;
+      width: 40px;
+      height: 100%;
+      margin-right: 18px;
 
-			}
+      img {
+        .center-element;
+      }
+    }
 
-			.icon {
-				float: left;
-				width: 36px;
-				height: 36px;
-				margin: -2px 12px 0 0 ;
-				background-size: 38px auto;
-			}
+    .info-name {
+      display: inline-block;
+      height: 100%;
+      color: #666;
+      line-height: @user-info-display-wrap--height;
+    }
 
-			.text {
-				color: #333;
-				font-size: 28px;
-			}
+    .right-align-container {
 
-			.credit-icon {
-				background: url(../images/credit-icon.png) no-repeat center;
-			}
-
-      .invite-icon {
-        background: url(../images/invite-icon.png) no-repeat center;
+      .info-content {
+        display: inline-block;
+        height: 100%;
+        color: #333;
+        line-height: @user-info-display-wrap--height;
       }
 
-			.back-icon {
-				background: url(../images/card-icon.png) no-repeat center;
-			}
+      .right-arrow-container {
+        display: inline-block;
+        position: relative;
+        width: 96px;
+        height: 100%;
 
-			.feedback-icon {
-				background: url(../images/info-icon.png) no-repeat center;
-			}
-
-			.more-icon {
-				background: url(../images/more-icon.png) no-repeat center;
-			}
-
-			.arrow-r-icon {
-				float: right;
-				width: 36px;
-				height: 36px;
-				background: url(../images/arrow-r-icon.png) no-repeat center;
-				background-size: 16px auto;
-			}
-		}
-    .list-cnt:last-child{
-      border-bottom:none;
+        .fake-arrow {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 10px;
+          width: 25px;
+          height: 25px;
+          margin: auto;
+          border-top: 3px solid #ccc;
+          border-left: 3px solid #ccc;
+          transform: rotate(135deg);
+        }
+      }
     }
-	}
+  }
 }
 
 
-
-.my-btn {
+.more-btn {
 	margin: 30px 0 0 0;
 	padding: 0 30px;
 }
@@ -193,42 +215,96 @@ body {
 	text-align: center;
 	color: #fff;
 	font-size: 30px;
-	background-color: #50ad9a;
+	background-color: #6aa4f0;
 	border-radius: 5px;
 }
+.mask{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  background:rgba(0,0,0,.7);
+}
+.pop{
+  width:586px;
+  padding:34px;
+  background:#fff;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:12px;
+}
+.pop-title{
+  font-size:36px;
+  color:#6aa4f0;
+  text-align:center;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+.pop-content{
+  font-size:30px;
+  color:#666;
+  margin-top:50px;
+  margin-bottom:50px;
+  text-align:center;
+}
+.pop-btnlist{
+  overflow:hidden;
+}
+.pop-btnlist span{
+  display:inline-block;
+  font-size:0;
+  width:273px;
+  height:81px;
+  line-height:81px;
+  text-align:center;
+  border-radius:6px;
+}
+.pop-btnlist span.pop-cancel{
+  width: 246px;
+  font-size:34px;
+  color:#6aa4f0;
+  border:1px solid #6aa4f0;
+  float:left;
+}
+.pop-btnlist span.pop-confirm{
+  width: 246px;
+  font-size:34px;
+  color:#fff;
+  background:#6aa4f0;
+  border:1px solid #6aa4f0;
+  float:right;
+}
+.pop-btnlist span.pop-confirm{
+  font-size:34px;
+  color:#fff;
+  background:#6aa4f0;
+  border:1px solid #6aa4f0;
+  float:right;
+}
+.pop-btnlist a.pop-tel{
+  display:inline-block;
+  width:273px;
+  height:81px;
+  line-height:81px;
+  text-align:center;
+  border-radius:8px;
+  font-size:34px;
+  color:#fff;
+  background:#6aa4f0;
+  border:1px solid #6aa4f0;
+  float:right;
+}
+.pop-close{
+  z-index: 9999;
+  width:26px;
+  height:26px;
+  background:url(../images/close.jpg) no-repeat;
+  position:absolute;
+  top:34px;
+  right:34px;
+}
+.dis{
+  display:none;
+}

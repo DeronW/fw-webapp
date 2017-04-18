@@ -3,23 +3,31 @@
  <Header title={} title_img={} height={} background={} sub_text={} sub_url={} />
  */
 
-const Header = React.createClass({
-    getInitialState: function () {
+class Header extends React.Component {
+    constructor(props) {
+        super(props);
         let height = parseInt(this.props.height) || 100;
 
-        return {
+        this.state = {
             height: height,
             background: this.props.background || 'white',
             title: this.props.title,
             title_img: this.props.title_img
-        }
-    },
-    backClickHandler: function () {
-        this.props.back_handler ? this.props.back_handler() : window.history.go(-1);
-    },
-    render: function () {
+        };
+
+        this.backClickHandler = this.backClickHandler.bind(this);
+    }
+
+    backClickHandler() {
+        this.props.back_handler
+            ? this.props.back_handler()
+            : window.history.go(-1);
+    }
+
+    render() {
         let fontSize = '40px';
-        if (this.props.title && this.props.title.length > 7) fontSize = '32px';
+        if (this.props.title && this.props.title.length > 7)
+            fontSize = '32px';
         let _style_header_fixed = {
             transform: 'translate3d(0, 0, 0)',
             position: "fixed",
@@ -33,7 +41,7 @@ const Header = React.createClass({
             zIndex: '9',
             textShadow: "0 0 8px white",
             fontSize: fontSize,
-            color:"#333"
+            color: "#333"
         };
 
         let _style_header_arrow = {
@@ -74,14 +82,13 @@ const Header = React.createClass({
 
         let title = this.state.title;
         if (this.state.title_img)
-            title = <img src={this.state.title_img}
-                style={{
-                    display: 'block',
-                    margin: '0 auto',
-                    width: "182px",
-                    position: "relative",
-                    top: "30px"
-                }} />;
+            title = <img src={this.state.title_img} style={{
+                display: 'block',
+                margin: '0 auto',
+                width: "182px",
+                position: "relative",
+                top: "30px"
+            }} />;
 
         let link = null;
         if (this.props.sub_text) {
@@ -97,15 +104,22 @@ const Header = React.createClass({
 
         var ua = navigator.userAgent;
         // 如果页面在app中打开, 则不显示网页的头部导航
-        if (ua.indexOf('EasyLoan888') >= 0) return null;
+        if (ua.indexOf('EasyLoan888') >= 0)
+            return null;
 
         // 如果在微信中打开, 除了个别页面外, 也不显示头部导航
         let show_header_titles = [''];
-        if(ua.indexOf('MicroMessenger') >= 0 && show_header_titles.indexOf(title) < 0) return null;
-        if($FW.Browser.inApp()) return null;
+        if (ua.indexOf('MicroMessenger') >= 0 && show_header_titles.indexOf(title) < 0)
+            return null;
+        if ($FW.Browser.inApp())
+            return null;
+        if ($FW.Browser.inWeixin())
+            return null;
 
         return (
-            <div style={{ height: this.state.height + 'px' }}>
+            <div style={{
+                height: this.state.height + 'px'
+            }}>
                 <div className="_style_header_fixed" style={_style_header_fixed}>
                     <div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
                         <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
@@ -117,4 +131,4 @@ const Header = React.createClass({
             </div>
         )
     }
-});
+}

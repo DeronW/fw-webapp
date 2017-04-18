@@ -4,33 +4,42 @@ const PROJ = 'loan';
 
 let APP_NAMES = [
     'home', // 首页
+    'more', //更多
     'faq', //常见问题
     'about-us', //关于我们
 ];
 
 // 用户模块
 const USER_PAGES = [
-    'outside-register', // 放心花注册页面
-    'outside-register-success-wx',
-    'outside-register-success-app',
-    'outside-register-success-other_apps',
     'user-entry', // 用户入口, 并非登录或注册, 而是用户的进入入口
     'user-register', //注册入口
     'user-login', //登录入口
     'user-set-password',
     'user-reset-password',
     'user', //我
+    'user-info',
     'user-card-set', //设置提现卡
     'user-card-add', //添加提现卡
     'user-verify-phone', //获取验证码
     'user-bank-support', //支持银行卡
     'user-card-management', //银行卡管理
     'user-verify-phone',
-    'user-settings', //更多
     'user-jrgc-login',
     'user-weixin',
+]
+
+// 金融工场APP页面
+const JRGC_PAGES = [
     'fxh-jrgc-invite',//放心花金融工场邀请页面
     'fxh-jrgc-invite-banner'//放心花金融工场邀请页面(banner入口)
+]
+
+// 合作方页面
+const OUTSIDE_PAGES = [
+    'outside-register', // 放心花注册页面
+    'outside-register-success-wx',
+    'outside-register-success-app',
+    'outside-register-success-other_apps',
 ]
 
 // 账单模块
@@ -39,10 +48,13 @@ const BILL_PAGES = [
     'bill-history', //历史账单
     'bill-detail', //账单详情
     'bill-payback', //还款页面
+    'bill-detail-dumiao'//读秒账单详情页
 ]
 
 // 申请借款模块
 const APPLY_PAGES = [
+    'apply-zhang-zhong', // 掌众产品借款页面
+    'apply-du-miao', // 读秒产品借款页面
     'apply-want', //我要借款页面
     'apply-confirm', //确认借款页面
     'apply-result'
@@ -63,6 +75,12 @@ const DEVELOPING_PAGES = [
     'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
+//借钱
+const BORROW_MONEY = [
+    // 'borrow-money',
+    'apply-borrow-money'
+]
+
 // Beta项目, 使用 webpack 编译指定页面
 const WEBPACK_PAGES = [
     {
@@ -72,20 +90,25 @@ const WEBPACK_PAGES = [
     }
 ]
 
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
+    ...OUTSIDE_PAGES,
     ...APPLY_PAGES,
     ...APP_NAMES,
     ...PROTOCOL_PAGES,
+    ...JRGC_PAGES,
     ...DEVELOPING_PAGES,
-    ...WEBPACK_PAGES
+    ...WEBPACK_PAGES,
+    ...BORROW_MONEY
 );
 
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     let INCLUDE_COMPONENTS = [
         'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
+        'confirm.jsx', 'nav.jsx',
         'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
     ];
 
@@ -98,6 +121,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         `${PROJ}/fw-ajax-error-handler.js`,
         `${PROJ}/fw-common.js`,
         `${PROJ}/fw-plugin-store.js`,
+        `${PROJ}/fxh.js`,
         `${PROJ}/fw-plugin-theme.js`
     ];
 

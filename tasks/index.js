@@ -11,9 +11,9 @@ const react = require('./react.js');
 const images = require('./images.js');
 const copy = require('./copy.js');
 const revision = require('./revision.js');
-const webpack_task = require('./webpack.vue.js');
+const webpack_task = require('./webpack.js');
 
-const REACT_PATH = 'react-15.4.2';
+const REACT_PATH = 'react-15.5.0';
 
 let COMMON_JAVASCRIPTS_TASK = {};
 
@@ -29,8 +29,16 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
     ];
 
     debug ?
-        files.push(...[`${lib_path}/${REACT_PATH}/react.js`, `${lib_path}/${REACT_PATH}/react-dom.js`]) :
-        files.push(...[`${lib_path}/${REACT_PATH}/react.min.js`, `${lib_path}/${REACT_PATH}/react-dom.min.js`]);
+        files.push(...[
+            `${lib_path}/${REACT_PATH}/react.js`,
+            `${lib_path}/${REACT_PATH}/react-dom.js`,
+            `${lib_path}/${REACT_PATH}/prop-types.js`
+        ]) :
+        files.push(...[
+            `${lib_path}/${REACT_PATH}/react.min.js`,
+            `${lib_path}/${REACT_PATH}/react-dom.min.js`,
+            `${lib_path}/${REACT_PATH}/prop-types.min.js`
+        ]);
 
     files.push(...extend_files);
     return files;
@@ -191,6 +199,7 @@ let generate_task = function (site_name, page_name, configs) {
         gulp.watch(`${project_path}less/**`, gulp.parallel(compile_less));
         gulp.watch(`${project_path}javascripts/**`, gulp.parallel(compile_javascripts));
         gulp.watch(`${project_path}react/**`, gulp.parallel(compile_react));
+        gulp.watch(`${lib_path}components/**`, gulp.parallel(compile_react));
 
         gulp.watch(`lib/templates/**/*.html`, gulp.parallel(compile_html));
         gulp.watch(`lib/less/**/*.less`, gulp.parallel(compile_less));

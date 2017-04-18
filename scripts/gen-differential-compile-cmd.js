@@ -15,6 +15,7 @@ fs.readFile(sourceF, (err, data) => {
     let lines = data.toString().split('\n');
     let r = {
         lib: false,
+        npm: false,
         pages: {}
     }
     let reg_page = new RegExp(`apps/${PROJ}/([-\\w]+)/`)
@@ -25,9 +26,12 @@ fs.readFile(sourceF, (err, data) => {
         });
         let m = line.match(reg_page);
         if (m) r.pages[m[1]] = true;
+
+        if (line.match('package.json')) r.npm = true;
     })
 
     let sh_script = [];
+    if (r.npm) sh_script.push('npm install')
     if (r.lib) {
         sh_script.push(`npm run build:${PROJ}`)
     } else {
@@ -47,6 +51,11 @@ fs.readFile(sourceF, (err, data) => {
                 '可以差量编译' :
                 '无更新, 不需要编译';
         util.log(util.colors.yellow(`完成差量编译检测:${t}`));
+        if (r.npm) {
+            util.log(util.colors.yellow('package.json 包有更新, 需要执行 npm install'))
+        } else {
+            util.log(util.colors.yellow('package.json 没有变更, 不用更新 npm'))
+        }
 
         fs.chmod(targetF, parseInt('755', 8));
     });

@@ -51,8 +51,21 @@ var Btn = React.createClass({
 
 var PromptBlock = React.createClass({
     render: function () {
+		let cntTest = (type) => {
+			if(type === 'A') {
+				return '元返现券礼包已经转入您的账户中'
+			} else if (type === 'B') {
+				return 	'返息券已经转入您的账户中'
+			} else if (type === 'C') {
+				return '公分已经转入您的账户中'
+			} else if (type === '1') {
+				return '工豆已经转入您的账户中'
+			}
+		}
+
         return (
-            <div className="ui-prompt">
+
+			<div className="ui-prompt">
                 <div className="img">
                     <img src={this.props.imgUrl}/>
                 </div>
@@ -62,10 +75,12 @@ var PromptBlock = React.createClass({
                 </div>
 
                 {
-                    this.props.resDetails != '' ? this.props.resDetails.resDetails.map((data, index) => {
-                        return <div className="ui-prompt-text">
-                            <span className="number-text">{data.giftAmount}</span>
-                            {data.giftType == 0 ? '元返现券礼包已经转入您的账户中' : '返息券已经转入您的账户中'}
+                    this.props.resDetails != '' ? this.props.resDetails.registResult.map((data, index) => {
+					   	
+						return <div className="ui-prompt-text">
+                            <span className="number-text">{data.resvalue}</span>
+
+							{cntTest(data.restype)}
                         </div>
 
                     }) : null
@@ -100,7 +115,8 @@ var AccountSucceedBody = React.createClass({
         });
     },
     clickHandler: function () {
-        location.href = '/static/wap/open-account/index.html'
+        location.href = 'https://m.9888.cn/static/wap/app-download/index.html'
+        //location.href = '/static/wap/open-account/index.html'
     },
     handlerPopShow: function (booleanVal) {
         this.setState({
@@ -118,16 +134,21 @@ var AccountSucceedBody = React.createClass({
     render: function () {
         return (
             <div className="">
-                <TopNav title={"注册成功"} btnText={"关闭"} callbackPopShow={this.handlerPopShow}/>
+                <TopNav title={"注册成功"} callbackPopShow={this.handlerPopShow}/>
 
-                <div className="nav-block">
+               	{/*<div className="nav-block">
                     <img src="images/process.png"/>
-                </div>
+                </div>*/
+				}
                 <PromptBlock imgUrl={"images/succeed-1.png"} title={"注册成功"}
                              text={"元返现券已经转入您的账户中"}
                              resDetails={this.state.registResultData}
                     />
-                <Btn btnText={"马上开通徽商账户"} Fun={this.clickHandler}/>
+                <Btn btnText={"下载APP"} Fun={this.clickHandler}/>
+
+				<div className="link-home">
+					<a href="https://m.9888.cn">去首页转转</a>
+				</div>
 
                 {
                     this.state.popShow ? <Pop callbackCancelBtn={this.getCancelBtn}

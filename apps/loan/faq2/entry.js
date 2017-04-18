@@ -1,23 +1,29 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import {render, findDOMNode} from 'react-dom';
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+import {observer} from "mobx-react";
 
-// function component () {
-//   var element = document.createElement('div');
-//
-//   /* lodash is required for the next line to work */
-//   element.innerHTML = _.join(['Hello','webpack5'], ' ');
-//
-//   return element;
-// }
-//
-// document.body.appendChild(component());
-class App extends React.Component{
-    render(){
-        return (
-            <h1>Hello webpack</h1>
-        )
+import { QUESTIONS } from './components/questions'
+
+import {Header} from 'fw-react-components/components/loan/header'
+
+
+const STYLE = {
+    question: {
+        // fontSize: 28,
+        // lineHeight: 1.6
+    },
+    answer: {
+        // fontSize: 22,
+        // lineHeight: 1.6
+    },
+    arrow: {
+        // transform: 'scale(2)'
     }
 }
-render(<App/>, document.getElementById('app'));
 
+class ToggleList {
+    @observable open_list = []
+}
+
+ReactDOM.render(<Header />, document.getElementById('header'));
+ReactDOM.render(<FAQ />, document.getElementById('app'));

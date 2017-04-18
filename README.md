@@ -84,36 +84,35 @@ WebAPP
 
 安装 Node.js
 
-1. 下载bin包 https://nodejs.org/en/
-2. 安装后配置path（环境变量）
+    https://nodejs.org/en/download/
 
 安装 Git
 
-1. 下载Git， https://git-scm.com/downloads
-2. 查看安装帮助文档， https://help.github.com/articles/set-up-git/
-3. 配置Git后 clone 项目，项目地址： http://10.10.100.105/web/webapp
+    下载Git， https://git-scm.com/downloads
 
 配置项目开发环境
 
-1. 安装Node.js库，在项目根目录下执行 *npm install*
-2. 查看全部可用 gulp 指令： *node node_modules/gulp/bin/gulp.js*
+1. 安装项目的依赖库 *npm install*
+2. 查看全部可用 gulp 指令： *npm run gulp*
 
 常用指令说明：
 
     clean 清空生成的打包文件
     build:mall 构建豆哥商城项目
     build:main 构建移动端网站项目
-    project:xxx:watch 开发时使用的监控指令
-    project:xxx 一次性编译文件指令
+    [project]:xxx:watch 开发时使用的监控指令
+    [project]:xxx 一次性编译文件指令
 
 添加新页面：
 
 1. 在 *apps* 目录下创建新目录，目录结构参考其它目录
 2. 在 *gulp/tasks/mall.js* 文件内,给 *apps* 变量添加一行新数据, 字符串, 跟新建目录同名
 3. 查看 gulp 默认指令, 已经新添加了新页面的指令
+
 本地启动项目
+
 商城：npm run gulp mall:[文件名]:watch
-wap站：npm run gulp main:[文件名]:watch
+wap站：npm run gulp wap是扥:[文件名]:watch
 放心花：npm run gulp loan:[文件名]:watch
 
 
@@ -154,4 +153,4 @@ wap站：npm run gulp main:[文件名]:watch
 - gulpfile.settings.js
 - Jenkinsfile
 - package.json
-- README.md
+- README.md // 项目说明

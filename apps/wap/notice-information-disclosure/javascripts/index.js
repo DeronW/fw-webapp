@@ -8,6 +8,7 @@ window.onload = function () {
     var auditBtn1 = document.querySelector(".auditBtn1");
     var auditBtn2 = document.querySelector(".auditBtn2");
     var auditBtn3 = document.querySelector(".auditBtn3");
+    var rlineLook = document.querySelector(".rlineLook");
 
     var len = tabs.length;
     for (var i = 0; i < len; i++) {
@@ -35,9 +36,9 @@ window.onload = function () {
         }
     }
 
-    //reportBtn.onclick = function () {
-    //    gotoHandler("https://static.9888.cn/pdf/2016report.pdf")
-    //};
+    rlineLook.onclick = function () {
+        gotoHandler("https://m.9888.cn/static/wap/protocol-user-service/index.html")
+    };
     auditBtn1.onclick = function () {
         //gotoHandler("")
     };
@@ -233,7 +234,10 @@ window.onload = function () {
                 trigger: 'item',
                 formatter: "{d}%",
                 backgroundColor: 'rgba(55,72,123,0.7)',
-                padding: 10
+                padding: 10,
+                textStyle: {
+                    fontSize: 24
+                }
             },
             legend: {
                 orient: 'vertical',

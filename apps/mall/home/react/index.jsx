@@ -11,15 +11,15 @@ function productLink(bizNo) {
 }
 
 const Mall = React.createClass({
-    getInitialState: function () {
+    getInitialState: function() {
         return {
-            background: "transparent",
-            logoImage: "images/logo.png",
-            avatarImage: "images/list-icon.png",
+            // background: "transparent",
+            logoImage: "images/logo_3.png",
+            avatarImage: "images/avatar_3.png",
             borderBottom: "none"
         }
     },
-    getHeadImages: function () {
+    getHeadImages: function() {
         var images = [];
         var bs = this.props.banners;
         for (var i = 0; i < bs.length; i++) {
@@ -27,7 +27,7 @@ const Mall = React.createClass({
         }
         return images;
     },
-    onImageClickHandler: function (index) {
+    onImageClickHandler: function(index) {
         var link = null;
         var bs = this.props.banners;
         for (var i = 0; i < bs.length; i++) {
@@ -35,22 +35,7 @@ const Mall = React.createClass({
         }
         link && gotoHandler(link)
     },
-    componentDidMount: function () {
-        window.addEventListener('scroll', function () {
-            var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-
-            let style = scrollTop > 400 ? {
-                background: "url(images/header-bg.png)",
-                logoImage: "images/m-logo.png",
-                avatarImage: "images/m-list-icon.png"
-            } : {
-                    background: "transparent",
-                    logoImage: "images/logo.png",
-                    avatarImage: "images/list-icon.png"
-                }
-
-            this.setState(style);
-        }.bind(this), false);
+    componentDidMount: function() {
     },
     render: function () {
         let banner;
@@ -64,14 +49,6 @@ const Mall = React.createClass({
             banner = <div className="no-banner"></div>
         }
 
-        var head_nav_wrap = {
-            background: this.state.background,
-            width: "100%",
-            height: "71px",
-            paddingTop: "20px",
-            paddingBottom: "20px",
-            transition: "1s all"
-        };
 
         let Charge_Nav = <div className="charge-nav">
             <div className="charge-bill"><img src="images/charge-bill.png" /></div>
@@ -80,19 +57,21 @@ const Mall = React.createClass({
 
         return (
             <div className="head-wrap">
-                {banner}
-                <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                    <div style={head_nav_wrap} className="head_nav_wrap">
+
+            <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
+                    <div className="head_nav_wrap">
                         <img className="m-logo" src={this.state.logoImage} />
                         <a href="/static/mall/product-list/index.html?searchSourceType=2"
                             className="search-bar-a">
-                            <img className="search-icon" src="images/search-icon.png" />
-                            <div className="search-bar">请输入关键字</div>
+                            <img className="search-icon" src="images/icon_search.png" />
+                            <div className="search-bar">请您输入关键字</div>
                         </a>
                         <a className="index-avatar" href="/static/mall/user/index.html">
                             <img src={this.state.avatarImage} /></a>
                     </div>
                 </div>
+                {banner}
+                
                 <div className="head-nav">
                     <a href="/static/mall/product-vip-zone/index.html">
                         <img src="images/nav-1.png" /><span>VIP专区</span></a>
@@ -113,6 +92,8 @@ const Mall = React.createClass({
                     <a href="/static/mall/product-list/index.html?searchSourceType=1">
                         <img src="images/nav-8.png" /><span>我可兑换</span></a>
                 </div>
+
+
                 <HotProducts bizNo={'TJ0000022'} count={10} />
                 <NewProducts bizNo={'TJ0000060'} count={10} />
                 <Grid_1 bizNo={'TJ0000042'} count={10} />
@@ -130,8 +111,8 @@ const Mall = React.createClass({
     }
 });
 
-$FW.DOMReady(function () {
-    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
-    $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
-        .then(data => ReactDOM.render(<Mall banners={data.banners} />, CONTENT_NODE));
+$FW.DOMReady(function() {
+            ReactDOM.render( < BottomNavBar / > , BOTTOM_NAV_NODE);
+            $FW.Ajax(`${API_PATH}/mall/api/index/v1/banners.json`)
+                .then(data => ReactDOM.render(<Mall banners={data.banners} />, CONTENT_NODE));
 });

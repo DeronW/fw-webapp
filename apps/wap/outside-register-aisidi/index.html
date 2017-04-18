@@ -1,0 +1,41 @@
+{% extends '../../../lib/templates/wap_base.swig.html' %}
+
+{% block title %}{% endblock %}
+{% block viewport %}
+<meta name="viewport" content="initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no">
+{% endblock %}
+{% block head_javascripts %}
+<script type="text/javascript">
+    (function(doc,win){
+        var docEl = doc.documentElement;
+        var resizeEvt = "onorientationchange" in win ? "orientationchange" : "resize";
+        var Timer = null;
+        function recalc(){
+            var clientWidth = docEl.clientWidth || win.innerWidth;
+//      var clientWidth=window.screen.width;
+            // alert(clientWidth)
+            //设计稿是720px
+            var initSize = (clientWidth / 720) * 100;
+            var fontSize = clientWidth > 768 ? 106.67 : (initSize < 44.44 ? 50 : initSize);
+            docEl.style.fontSize = fontSize + "px";
+        }
+        doc.addEventListener("DOMContendLoaded",recalc,false);
+
+        //转屏
+        win.addEventListener(resizeEvt,function(){
+            clearTimeout(Timer);
+            Timer = setTimeout(recalc,300)
+        },false);
+
+        //pageshow,缓存相关
+        win.addEventListener("pageshow",function(e){
+            if(e.persisted){
+                clearTimeout(Timer);
+                Timer = setTimeout(recalc,300)
+            }
+        },false);
+        // 初始化
+        recalc();
+    })(document,window);
+</script>
+{% endblock %}

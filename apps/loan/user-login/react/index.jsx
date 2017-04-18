@@ -61,7 +61,9 @@ const Register = React.createClass({
                     token: dict.userToken,
                     id: dict.userId,
                     gid: dict.userGid,
-                    status: dict.userStatus
+                    status: dict.userStatus,
+                    invitCode:dict.invitationCode,
+                    uid:dict.uid
                 })
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message));
@@ -110,7 +112,7 @@ const Register = React.createClass({
                     <div className="form-border"></div>
                 </div>
                 <div className="register-login-btn">
-                    <div className="ui-btn" onClick={this.loadingBtn}>确定</div>
+                    <Nav className="ui-btn" onClick={this.loadingBtn}>确定</Nav>
                 </div>
                 <div className="forget-pwd-link">
                     <a onClick={this.forgotPasswordHandler}> 忘记密码?</a>

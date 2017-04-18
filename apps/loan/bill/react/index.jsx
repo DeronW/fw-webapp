@@ -1,102 +1,88 @@
-function gotoHandler(link) {
-    location.href = encodeURI(link);
-}
-function formatDate() {
-    var now = new Date();
-    var yy = now.getFullYear();
-    var mm = now.getMonth() + 1;
-    var dd = now.getDate();
-    var clock = yy + "-";
-    if (mm < 10) clock += "0";
-    clock += mm + "-";
-    if (dd < 10) clock += "0";
-    clock += dd + " ";
-    return clock;
-}
-
-const Bill = React.createClass({
-    getInitialState: function () {
-        return { billList: this.props.data.loanList }
-    },
-    render: function () {
-        let bill_item = (item, index) => {
-            let st = item.status === 0 ?
-                <div className="pay-back-btn-status1">打款中</div> : ( item.status === 1 ? <a className="pay-back-btn-status2" href={`/static/loan/bill-payback/index.html?loanGid=${item.loanGid}&token=${USER.token}&userGid=${USER.gid}&userId=${USER.id}`}>还款</a>: null);
-            return (
-                <div className="bill-item-wrap">
-                    <a className="bill-item" key={index}
-                        href={`/static/loan/bill-detail/index.html?loanGid=${item.loanGid}`}>
-                        <div className="bill-detail">
-                            <div className="bill-detail-wrap">
-                                <span className="bill-money">{item.loanLeftAmount.toFixed(2)}</span>
-                                {item.exceedDays > 0 ? <span className="bill-status"></span> : null}
-                            </div>
-                            <span className="bill-deadline">{item.dueTimeStr}到期</span>
-                        </div>
-                    </a>
-                    <div className="pay-back-btn-wrap"> {st} </div>
-                </div>
-            )
-        };
-
-        let empty = <div className="no-data-box">
-            <img className="no-data-img" src="images/no-data.png" />
-        </div>;
-
-        let bill_panel = <div className="data-box">
-            <div className="transfer-box">
-                <div className="loan-headline-money">
-                    <div className="transfer-money">
-                        {this.props.data.undueAmount.toFixed(2)}</div>
-                    <div className="transfer-title">当前账单(元)</div>
-                </div>
-
-                <div className="loan-info">
-                    <div className="transfer-lines">
-                        <div className="return-money">
-                            <span className="return-money-num">{this.props.data.creditLine}</span>
-                            <span className="return-money-title">信用额度(元)</span>
-                        </div>
-                        <div className="return-date">
-                            <span className="return-date-day">{this.props.data.canBorrowAmount}</span>
-                            <span className="return-date-title">剩余可借(元)</span>
-                        </div>
-                    </div>
-                    <span className="vertical-line"></span>
-                </div>
-            </div>
-            {this.state.billList.map(bill_item)}
-        </div>;
-
-
-        return (
-            <div>
-                <div className="header">
-                    <div className="title">账单</div>
-                    <a className="history-bill" href='/static/loan/bill-history/index.html'>
-                        历史账单</a>
-                </div>
-                {this.props.data.loanList.length === 0 ? empty : bill_panel}
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-            </div>
-        )
+class Content extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            current_type: '1',
+            tab: {
+                '1': { name: '申请中', page_no: 1, order_list: [] },
+                '2': { name: '还款中', page_no: 1, order_list: [] },
+                '3': { name: '未通过', page_no: 1, order_list: [] },
+                '4': { name: '已还款', page_no: 1, order_list: [] }
+            }
+        }
     }
-});
 
-const USER = $FW.Store.getUserDict();
+    loadMoreHandler = (done) => {
+        let { current_type, tab } = this.state, current_tab = tab[current_type];
+        if (current_tab.page_no === 0) return done && done();
+
+        $FXH.Post(`${API_PATH}/api/order/v1/orderList.json`, {
+            pageSize: 10,
+            pageIndex: current_tab.page_no,
+            loanStatus: current_type
+        }).then(data => {
+            tab[current_type].order_list.push(...data.resultList)
+            current_tab.page_no < data.totalPage ?
+                tab[current_type].page_no++ :
+                tab[current_type].page_no = 0;
+            this.setState({ tab: tab });
+
+            done && done();
+        })
+    }
+    componentDidMount() {
+        this.loadMoreHandler(null);
+        $FW.Event.touchBottom(this.loadMoreHandler);
+    }
+    switchTabHandler = (type) => {
+        this.setState({ current_type: type }, this.loadMoreHandler);
+    }
+    render() {
+        let { current_type, tab } = this.state;
+
+        let btn_tab = (type, index) => {
+            let cn = `ui-tab-li ${type === current_type && 'ui-select-li'}`
+            return <Nav key={index} className={cn}
+                onClick={() => this.switchTabHandler(type)}>
+                <span className="text">{tab[type].name}</span>
+            </Nav>
+        }
+
+        let order_item = (order, index) => {
+            let link = order.productId == 1 ?
+                `/static/loan/bill-detail/index.html?uuid=${order.loanGid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${order.uuid}`;
+            let logo = order.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png";
+
+            return <Nav className="list_li" key={`${order.orderGid}${index}`} href={link}>
+                <div className="list-img"><img src={logo} /></div>
+                <div className="list-content">
+                    <div className="apply-num">借款金额:{order.loanAmtStr}元</div>
+                    <div className="apply-duration">借款期限:{order.termNum}天</div>
+                </div>
+                <div className="apply-status-wrap">
+                    <div className="apply-status">
+                        <span className={`bill-${current_type}-color`}>
+                            {tab[current_type].name}</span></div>
+                    <div className="apply-time">{order.loanTime}</div>
+                </div>
+            </Nav>
+        }
+
+        let empty = <span className="no-data"></span>
+        let current_tab = this.state.tab[this.state.current_type]
+
+        return <div className="billContent">
+            <div className="bill-header"> {['1', '2', '3', '4'].map(btn_tab)} </div>
+            <div className="billContainer">
+                {current_tab.order_list.map(order_item)}
+                {current_tab.order_list.length === 0 && empty}
+            </div>
+        </div>
+    }
+}
 
 $FW.DOMReady(function () {
-    $FW.Post(`${API_PATH}/api/oriole/v1/loanloadpage.json`, {
-        token: USER.token,
-        userGid: USER.gid,
-        userId: USER.id,
-        sourceType: SOURCE_TYPE,
-    }).then((data) => {
-        ReactDOM.render(<Bill data={data} />, CONTENT_NODE);
-    }, e => $FW.Component.Toast(e.message));
-    ReactDOM.render(<BottomNavBar index={2} />, BOTTOM_NAV_NODE);
+    ReactDOM.render(<Header title={"借款账单"} show_back={false} />, HEADER_NODE);
+    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
+    ReactDOM.render(<Content />, CONTENT_NODE);
 });
