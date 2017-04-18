@@ -144,7 +144,8 @@ class InfoItemInputWrap extends React.Component {
                     placeholder={this.props.placeholder}
                     value={this.props.infoNameCN === '身份证号' ? idValue : value}
                     disabled={disableInput}
-                    onChange={(e) => {this.props.handleInput(this.props.itemIndex, e.target.value)}}>
+                    onChange={(e) => {this.props.handleInput(this.props.itemIndex, e.target.value)}}
+                    type={this.props.infoNameCN === '联系人手机' ? "tel" : "text"}>
                 </input>
             );
         let isSelectItem = this.isSelectItem,
@@ -361,14 +362,17 @@ class UserInfoWrap extends React.Component {
     }
 
     handleInput = (index, v) => {
-        this.setState({showSubmitBtn: true});
         let selected = this.state.selectedTab;
         let catInfo = JSON.parse(JSON.stringify(this.state[selected]));
         catInfo[index[0]][index[1]].value = v;
         this.setState({[selected]: catInfo});
+        this.setState({showSubmitBtn: true});
     }
 
     handleSubmit = () => {
+        if (!isPhoneNum(this.state.ecInfo[0][2].value)) {
+            return $FW.Component.Toast('联系人手机格式不正确!');
+        }
         $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
             creditCard: this.state.basicInfo[0][2].value,
             email: this.state.basicInfo[0][3].value,
@@ -706,6 +710,10 @@ const CITYLIST = {
 };
 
 var id_mask = n => String(n).replace(/(\d{4})\d{10}(\d{4})/, "$1**********$2");
+var isPhoneNum = (phoneNum) => {
+    const phoneNumFormat = /^1[3|4|5|7|8]\d{9}$/;
+    return phoneNumFormat.test(phoneNum);
+}
 
 // render ReactDom
 $FW.DOMReady(() => {
