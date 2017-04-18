@@ -13,12 +13,26 @@ function productLink(bizNo) {
 const Mall = React.createClass({
     getInitialState: function() {
         return {
+        //     var sourceType;
+
+        // if ($FW.Browser.inApp()) {
+        //     if ($FW.Browser.inAndroid()) {
+        //         sourceType = 4
+        //     }
+        //     else {
+        //         sourceType = 3
+        //     }
+        // }
+        // else {
+        //     sourceType = 2
+        // }
             // background: "transparent",
             logoImage: "images/logo_3.png",
             avatarImage: "images/avatar_3.png",
             borderBottom: "none"
         }
     },
+
     getHeadImages: function() {
         var images = [];
         var bs = this.props.banners;
@@ -59,7 +73,7 @@ const Mall = React.createClass({
             <div className="head-wrap">
 
             <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                    <div className="head_nav_wrap">
+                    <div className= "head_nav_wrap">
                         <img className="m-logo" src={this.state.logoImage} />
                         <a href="/static/mall/product-list/index.html?searchSourceType=2"
                             className="search-bar-a">

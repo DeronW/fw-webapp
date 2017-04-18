@@ -67,7 +67,16 @@ class BorrowMoney extends React.Component {
             productId:pid
         }).then(data=>this.setState({borrowStatus:data.borrowBtnStatus}));
         $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
-            .then(data=>this.setState({ableEnter:data.code,tryOtherLoanMsg:data.message}, err=>this.setState({ableEnter:data.code, tryOtherLoanMsg:data.message})));
+            .then(data=>{
+                 this.setState({ableEnter:data.code})
+            }, err=>{
+                if(err.code == 1001002){
+                    this.setState({ableEnter:err.code})
+                }else{
+                    this.setState({ableEnter:err.code, tryOtherLoanMsg:err.message})
+                }
+            }
+         );
     }
     clickHandler(){
         let borrowStatus = this.state.borrowStatus;

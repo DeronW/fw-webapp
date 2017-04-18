@@ -4,6 +4,10 @@
  */
 
 class Header extends React.Component {
+    static defaultProps = {
+        show_back: true
+    }
+
     constructor(props) {
         super(props);
         let height = parseInt(this.props.height) || 100;
@@ -21,7 +25,8 @@ class Header extends React.Component {
     backClickHandler() {
         this.props.back_handler
             ? this.props.back_handler()
-            : window.history.go(-1);
+            : window.history.back();
+        // : window.history.go(-1);
     }
 
     render() {
@@ -55,6 +60,7 @@ class Header extends React.Component {
             fontWeight: 'bold',
             color: "#6aa4f0",
             overflow: "hidden",
+            borderRadius: '50%',
             left: "0px",
             top: "0px"
         };
@@ -116,19 +122,18 @@ class Header extends React.Component {
         if ($FW.Browser.inWeixin())
             return null;
 
-        return (
-            <div style={{
-                height: this.state.height + 'px'
-            }}>
-                <div className="_style_header_fixed" style={_style_header_fixed}>
-                    <div className="_style_header_arrow" style={_style_header_arrow} onClick={this.backClickHandler}>
-                        <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
-                        <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
-                    </div>
-                    {title}
-                    {link}
-                </div>
+        let back_arrow = <Nav className="_style_header_arrow" style={_style_header_arrow}
+            onClick={this.backClickHandler}>
+            <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
+            <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
+        </Nav>
+
+        return <div style={{ height: this.state.height + 'px' }}>
+            <div className="_style_header_fixed" style={_style_header_fixed}>
+                {this.props.show_back && back_arrow}
+                {title}
+                {link}
             </div>
-        )
+        </div>
     }
 }
