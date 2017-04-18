@@ -25,7 +25,8 @@ class Header extends React.Component {
     backClickHandler() {
         this.props.back_handler
             ? this.props.back_handler()
-            : window.history.go(-1);
+            : window.history.back();
+        // : window.history.go(-1);
     }
 
     render() {
