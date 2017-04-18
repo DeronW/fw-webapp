@@ -1598,7 +1598,8 @@ class Btn extends React.Component {
 			} else if (propsAgree == false) {
 				$FW.Component.Toast("点击同意");
 			} else {
-				$FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`), {
+				
+				$FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`, {
 					address:  getSumMoneyPopVal.homeVal,
 					balance: getSumMoneyPopVal.moneyVal,
 					term: getSumMoneyPopVal.deadlineVal,
@@ -1621,7 +1622,7 @@ class Btn extends React.Component {
 					// uid	: JSON.parse($FW.Store.exportUserDict()).uid,
 					// userGid: JSON.parse($FW.Store.exportUserDict()).userGid,
 					// userId: JSON.parse($FW.Store.exportUserDict()).userId
-				}
+				})
         		.then(data => {
 					alert(data)
 				})
