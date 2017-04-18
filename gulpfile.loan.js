@@ -54,7 +54,7 @@ const BILL_PAGES = [
 
 // 申请借款模块
 const APPLY_PAGES = [
-    'apply-zhang-zhong', // 掌众产品借款页面
+    'apply-fxh', // 掌众产品借款页面
     'apply-du-miao', // 读秒产品借款页面
     'apply-want', //我要借款页面
     'apply-confirm', //确认借款页面
