@@ -44,7 +44,7 @@ class Content extends React.Component {
             let cn = `ui-tab-li ${type === current_type && 'ui-select-li'}`
             return <Nav key={index} className={cn}
                 onClick={() => this.switchTabHandler(type)}>
-                <span className="text">{tab[current_type].name}</span>
+                <span className="text">{tab[type].name}</span>
             </Nav>
         }
 
