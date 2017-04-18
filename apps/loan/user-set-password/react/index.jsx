@@ -32,7 +32,7 @@ const SetPassword = React.createClass({
     },
     changeCode(e) {
         let v = e.target.value;
-        v.length <= 4 && !isNaN(v) && this.setState({ code: v });
+        v.length <= 6 && !isNaN(v) && this.setState({ code: v });
     },
     changePasswordHandler(e) {
         let v = e.target.value;
@@ -74,7 +74,7 @@ const SetPassword = React.createClass({
         let err, {password, code, checked, codeToken} = this.state;
 
         if (code == '') err = "验证码不能为空";
-        if (code.length > 4) err = "验证码为四位数字";
+        if (code.length > 6) err = "验证码为六位数字";
         if (!isNum(code)) err = "验证码为数字";
         if (password == '') err = "密码不能为空";
         if (password.length < 8) err = "密码不能少于8位";
