@@ -53,6 +53,7 @@ class BorrowMoney extends React.Component {
             tryOtherLoanPopShow:false,
             tryOtherLoanMsg:''
         }
+        this.clickHandler = this.clickHandler.bind(this);
         this.imgClickHandler = this.imgClickHandler.bind(this);
         this.detailClickHandler = this.detailClickHandler.bind(this);
         this.dumiaoCloseHandler = this.dumiaoCloseHandler.bind(this);
