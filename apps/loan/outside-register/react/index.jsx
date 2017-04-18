@@ -151,6 +151,55 @@ class PasswordInput extends React.Component {
     }
 }
 
+class InvitationCodeInput extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            enableClear: false
+        };
+    }
+
+    render() {
+        return (
+            <div className="input-wrap veri-code">
+                <div className="input-type-icon">
+                    <img src="images/invite.png" />
+                </div>
+                <input type="tel" placeholder="请输入邀请码" value={this.props.value} onChange={(e) => {
+                    // if (!/[0-9]/.test(e.target.value[e.target.value.length - 1]) && e.target.value.length > 0) {
+                    //     return;
+                    // }
+                    this.setState({
+                        enableClear: e.target.value
+                            ? true
+                            : false
+                    });
+                    this.props.handleChange(e, 'invitationCode');
+                }} onFocus={(e) => {
+                    this.setState({
+                        enableClear: e.target.value
+                            ? true
+                            : false
+                    });
+                }} onBlur={() => {
+                    setTimeout(() => {
+                        this.setState({ enableClear: false });
+                    }, 10);
+                }} />
+                <div className="veri-code-info">
+                    {this.state.enableClear && <div className="clear-btn" onClick={() => {
+                        this.props.handleClear('invitationCode');
+                    }}>
+                        <img src="images/clear.png" alt="clear button"></img>
+                    </div>
+                    }
+                    <span style={{color: "#8bb7fe"}}>(选填)</span>
+                </div>
+            </div>
+        )
+    }
+}
+
 class InteractWrap extends React.Component {
     constructor() {
         super();
@@ -158,23 +207,18 @@ class InteractWrap extends React.Component {
             phoneNum: '',
             password: '',
             verificationCode: '',
+            invitationCode: '',
             timeRemainForNewCode: 60,
             codeToken: '',
             showPassword: false
         }
-        this.handleInput = this.handleInput.bind(this);
-        this.getVerificationCode = this.getVerificationCode.bind(this);
-        this.togglePasswordDisplay = this.togglePasswordDisplay.bind(this);
-        this.clearInput = this.clearInput.bind(this);
-        this.ifEssentialsExist = this.ifEssentialsExist.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleInput(e, inputType) {
+    handleInput = (e, inputType) => {
         this.setState({ [inputType]: e.target.value });
     }
 
-    getVerificationCode() {
+    getVerificationCode = () => {
         if (this.state.timeRemainForNewCode === 60) { // time for test
             if (isPhoneNum(this.state.phoneNum)) {
                 $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
@@ -204,17 +248,17 @@ class InteractWrap extends React.Component {
         }
     }
 
-    togglePasswordDisplay() {
+    togglePasswordDisplay = () => {
         this.setState({
             showPassword: !this.state.showPassword
         });
     }
 
-    clearInput(inputType) {
+    clearInput = (inputType) => {
         this.setState({ [inputType]: '' });
     }
 
-    ifEssentialsExist() {
+    ifEssentialsExist = () => {
         var essentialTypeNames = {
             'phoneNum': '手机号',
             'verificationCode': '验证码',
@@ -235,7 +279,7 @@ class InteractWrap extends React.Component {
         return true;
     }
 
-    handleJump(data) {
+    handleJump = (data) => {
         let jt = $FW.Format.urlQuery().jumpType;
         let app_url = '/static/loan/outside-register-success-app/index.html',
             wx_url = '/static/loan/outside-register-success-wx/index.html',
@@ -266,7 +310,7 @@ class InteractWrap extends React.Component {
         }
     }
 
-    handleSubmit() {
+    handleSubmit = () => {
         if (this.ifEssentialsExist()) {
             if (!isPhoneNum(this.state.phoneNum)) {
                 alert("手机号格式不正确");
@@ -279,7 +323,7 @@ class InteractWrap extends React.Component {
                         channelCode: $FW.Format.urlQuery().channelCode,
                         extInvCode: $FW.Format.urlQuery().extInvCode || '',
                         codeToken: this.state.codeToken,
-                        invitationCode: $FW.Format.urlQuery().invitationCode,
+                        invitationCode: this.state.invitationCode || $FW.Format.urlQuery().invitationCode,
                         mobile: this.state.phoneNum,
                         password: this.state.password,
                         verifyCode: this.state.verificationCode,
@@ -313,9 +357,11 @@ class InteractWrap extends React.Component {
                 <PasswordInput type={this.state.showPassword
                     ? "text"
                     : "password"} togglePasswordDisplay={!this.state.showPassword} handleChange={this.handleInput} handleClick={this.togglePasswordDisplay} value={this.state.password} handleClear={this.clearInput} />
+                <InvitationCodeInput handleChange={this.handleInput} value={this.state.invitationCode} handleClear={this.clearInput} />
                 <button className="register-button" onClick={this.handleSubmit}>
                     立即领钱
                 </button>
+                <Nav className='jump-login' href='/static/loan/user-entry/index.html'>已有账号？立即登录 >></Nav>
             </div>
         )
     }
