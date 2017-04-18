@@ -866,6 +866,8 @@ class ApplyBorrowMoney extends React.Component {
 		})
 	}
 	render() {
+		const { dataProps } = this.props
+		
 		return (
 			<div className="">
 				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } />
