@@ -248,7 +248,26 @@ class Btn extends React.Component {
 				$FW.Component.Toast("工作年限不能为空");
 			} else if (propsAgree == false) {
 				$FW.Component.Toast("点击同意");
-			}  
+			} else {
+				$FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`), {
+					balance: '',
+					term: '',
+					realName: '',
+					idCard: '',
+					creditCard: '',
+					email: '',
+					city: '',
+					homeSituation: '',
+					emContact: '',
+					emRelationship: '',
+					emMobile: '',
+					income: '',
+					workExperience: ''
+				}
+        		.then(data => {
+
+				})
+			}
 
 
 		} else if(pushType == 'popBtn') {
