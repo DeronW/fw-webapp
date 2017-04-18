@@ -2259,60 +2259,60 @@ class ApplyBorrowMoney extends React.Component {
 		}
 	}
     componentDidMount(){
+			// this.setState({
+			// 	sumMoneyListObj: {
+			// 		moneyVal: '',
+			// 		deadlineVal: '',
+			// 		creditCardVal: 12342412,
+			// 		emailVal: null,
+			// 		homeVal: null,
+			// 		realName: 'xx',
+			// 		idCard: 2414521521,
+			// 		city: null,
+			// 		cityIndex: '',
+			// 		marriageVal: null,
+			// 		marriageIndex: 1,
+			// 		urgentPerson: null,
+			// 		relationship: null,
+			// 		relationshipIndex: null,
+			// 		phone: null,
+			// 		income: null,
+			// 		incomeIndex: null,
+			// 		yearsOfWork: null,
+			// 		yearsOfWorkIndex: null
+			// 	}
+
+			// })
+
+
+        $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
+            let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
+
 			this.setState({
 				sumMoneyListObj: {
 					moneyVal: '',
 					deadlineVal: '',
-					creditCardVal: 12342412,
-					emailVal: null,
-					homeVal: null,
-					realName: 'xx',
-					idCard: 2414521521,
-					city: null,
+					creditCardVal: data.creditCard,
+					emailVal: data.email,
+					homeVal: data.address,
+					realName: data.realName,
+					idCard: data.idCard,
+					city: data.city,
 					cityIndex: '',
-					marriageVal: null,
+					marriageVal: data.homeSituation,
 					marriageIndex: 1,
-					urgentPerson: null,
-					relationship: null,
-					relationshipIndex: null,
-					phone: null,
-					income: null,
-					incomeIndex: null,
-					yearsOfWork: null,
-					yearsOfWorkIndex: null
+					urgentPerson: data.emContact,
+					relationship: data.emRelationship,
+					relationshipIndex: data.emRelationship,
+					phone: data.emMobile,
+					income: data.income,
+					incomeIndex: data.income,
+					yearsOfWork: data.workExperience,
+					yearsOfWorkIndex: data.workExperience
 				}
 
 			})
-
-
-        // $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
-        //     let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
-
-		// 	this.setState({
-		// 		sumMoneyListObj: {
-		// 			moneyVal: '',
-		// 			deadlineVal: '',
-		// 			creditCardVal: data.creditCard,
-		// 			emailVal: data.email,
-		// 			homeVal: data.address,
-		// 			realName: data.realName,
-		// 			idCard: data.idCard,
-		// 			city: data.city,
-		// 			cityIndex: '',
-		// 			marriageVal: data.homeSituation,
-		// 			marriageIndex: 1,
-		// 			urgentPerson: data.emContact,
-		// 			relationship: data.emRelationship,
-		// 			relationshipIndex: data.emRelationship,
-		// 			phone: data.emMobile,
-		// 			income: data.income,
-		// 			incomeIndex: data.income,
-		// 			yearsOfWork: data.workExperience,
-		// 			yearsOfWorkIndex: data.workExperience
-		// 		}
-
-		// 	})
-        // })
+        })
     }
 	callbackSelectList(selectList, title, popShow) {
 		this.setState({
@@ -2398,11 +2398,11 @@ class ApplyBorrowMoney extends React.Component {
 	}
 }
 
-ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
+//ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
 
-// $FW.DOMReady(() => {
-//     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
-// 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
-//         .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
-// })
+$FW.DOMReady(() => {
+    ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
+	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
+        .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
+})
 
