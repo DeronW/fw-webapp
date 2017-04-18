@@ -269,6 +269,11 @@ class UserInfoWrap extends React.Component {
                         infoNameCN: '信用卡',
                         value: this.props.userInfo.creditCard,
                         placeholder: '请填写'
+                    }, {
+                        infoID: 'email-info',
+                        infoNameCN: '邮箱',
+                        value: this.props.userInfo.email,
+                        placeholder: '请填写'
                     }
                 ],
                 [
@@ -365,8 +370,8 @@ class UserInfoWrap extends React.Component {
 
     handleSubmit = () => {
         $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
-            email: '',
             creditCard: this.state.basicInfo[0][2].value,
+            email: this.state.basicInfo[0][3].value,
             city: this.state.basicInfo[1][0].value,
             address: this.state.basicInfo[1][1].value,
             homeSituation: this.state.basicInfo[2][0].value,
