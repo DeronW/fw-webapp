@@ -7,6 +7,7 @@ let APP_NAMES = [
     'more', //更多
     'faq', //常见问题
     'about-us', //关于我们
+    '404'
 ];
 
 // 用户模块
