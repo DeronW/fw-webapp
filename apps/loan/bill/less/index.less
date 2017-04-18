@@ -1,10 +1,7 @@
 html,body {
   background-color: #f0f0f0;
 }
-*{
-  margin:0;
-  padding:0;
-}
+
 a{
   text-decoration: none;
 }
@@ -12,8 +9,9 @@ img{
   vertical-align: middle;
 }
 .bill-header{
-  position:fixed;
   width:100%;
+  display: table;
+  background: white;
 }
 .billTitle{
   width:100%;
@@ -48,7 +46,6 @@ img{
   border-bottom:2px solid #649cfe;
 }
 .billContainer{
-  padding-top:194px;
   margin-bottom:150px;
 }
 .billContainer-weixin{
@@ -96,16 +93,16 @@ img{
   text-align:right;
   margin-bottom:22px;
 }
-.bill-applying-color{
+.bill-1-color{
   color:#649cfe;
 }
-.bill-returning-color{
+.bill-2-color{
   color:#fc816f;
 }
-.bill-failing-color{
+.bill-3-color{
   color:#f5313f;
 }
-.bill-paid-color{
+.bill-4-color{
   color:#999;
 }
 .apply-time{

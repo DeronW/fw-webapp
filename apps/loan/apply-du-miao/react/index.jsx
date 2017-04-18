@@ -59,7 +59,7 @@ class BorrowMoney extends React.Component {
         this.tryOtherLoanCloseHandler = this.tryOtherLoanCloseHandler.bind(this);
     }
     componentDidMount = () => {
-        let pid = $FW.Format.urlQuery().id;
+        let pid = $FW.Format.urlQuery().pid;
         $FXH.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}`)
             .then(data => this.setState({ product: data }));
         $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`)
@@ -93,6 +93,8 @@ class BorrowMoney extends React.Component {
         this.setState({tryOtherLoanPopShow:false})
     }
     render() {
+        let pid = $FW.Format.urlQuery().pid;
+
         return (
             <div className="">
                 <div className="">
@@ -100,20 +102,20 @@ class BorrowMoney extends React.Component {
                         <div className="icon-block"> <img src="images/icon-img.png" /> </div>
                         <div className="info">
                             <div className="t">
-                                <span className="title-text">读秒</span>
-                                <div className="text"> 借款范围（{this.state.product.amountStr}） </div>
+                                <span className="title-text">{ this.state.product.productName }</span>
+                                <div className="text"> 借款范围（{ this.state.product.amountStr }） </div>
                             </div>
-
                             <div className="b">
-                                <div className="tag">
-                                    <img src="images/tag-0.png" />
-                                    <img src="images/tag-1.png" />
+                                <div className="tag" >
+                                    {
+                                        this.state.product.productLabelList.map((data, index) => {
+                                            return  <img src={ "images/tag-"+ data.labelType  +".png"} key={ index } />
+                                        })
+                                    }
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                     <div className="borrow-money-detail-data">
                         <div className="list">
                             <div className="name-text">{this.state.product.monthRateStr}</div>
@@ -177,6 +179,7 @@ class BorrowMoney extends React.Component {
         )
     }
 }
+
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"读秒"} />, HEADER_NODE);

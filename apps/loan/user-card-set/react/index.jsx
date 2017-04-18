@@ -118,7 +118,6 @@ const SetCashCard = React.createClass({
         if (space(bankNum).length > 19 || space(bankNum).length < 16) err = "储蓄卡格式不对";
         if (phone == '') err = "手机号不能为空";
         if (!isMobilePhone(phone)) err = "手机号格式不对";
-        //if (!selectClause) err = "请勾选代扣服务协议";
         if (cardType == 1) err = "请绑定借记卡";
         if (canVerify == 0) err = "不支持绑定此类卡";
 
@@ -141,7 +140,6 @@ const SetCashCard = React.createClass({
                 window.location.href = `/static/loan/user-verify-phone/index.html?phone=${phone}&operatorBankcardGid=${oGid}`;
             }, (e) => {
                 $FW.Component.Toast(e.message);
-                //alert(USER.status);
         });
     },
     render() {

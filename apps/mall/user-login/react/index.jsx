@@ -2,8 +2,8 @@ function removeAllSpace(str) {
     return str.replace(/\s+/g, "");
 }
 const Login = React.createClass({
-    getInitialState: function () {
-        this.tabs = ['veri'];//, 'pwd'
+    getInitialState: function() {
+        this.tabs = ['veri']; //, 'pwd'
         return {
             tab: 'veri',
             val1: "",
@@ -18,7 +18,7 @@ const Login = React.createClass({
             code: ""
         }
     },
-    componentDidMount: function () {
+    componentDidMount: function() {
         this.switchTabHandler('veri');
         //var query = $FW.Format.urlQuery();
         //var tab = query.tab;
@@ -30,15 +30,15 @@ const Login = React.createClass({
         //}
     },
     //倒计时完成终止
-    componentDidUpdate: function () {
+    componentDidUpdate: function() {
         if (this.state.value == 0) {
             this.stopTick();
-            this.setState({value: "获取验证码", reSend: true});
+            this.setState({ value: "获取验证码", reSend: true });
 
         }
     },
 
-    switchTabHandler: function (tab) {
+    switchTabHandler: function(tab) {
         if (tab == this.state.tab) return;
 
         this.setState({
@@ -48,20 +48,20 @@ const Login = React.createClass({
     },
 
     //倒计时递减
-    decline: function () {
-        this.setState({value: this.state.value - 1});
+    decline: function() {
+        this.setState({ value: this.state.value - 1 });
     },
 
     //倒计时
-    tick: function () {
+    tick: function() {
         this.interval = setInterval(this.decline, 1000);
     },
 
-    stopTick: function () {
+    stopTick: function() {
         clearInterval(this.interval);
     },
 
-    getSMSCodeHandler: function () {
+    getSMSCodeHandler: function() {
         if (!this.state.reSend) return;
         let FormData = {
             phone: this.state.val1
@@ -71,69 +71,64 @@ const Login = React.createClass({
             enable_loading: 'mini',
             method: 'post',
             data: FormData,
-            success: function (data) {
-               $FW.Component.Alert("验证码：" + data.code)
-                this.setState({value: 60, reSend: false});
+            success: function(data) {
+                $FW.Component.Alert("验证码：" + data.code)
+                this.setState({ value: 60, reSend: false });
                 this.tick()
-                this.setState({reSend: false});
+                this.setState({ reSend: false });
             }.bind(this)
         })
     },
-    handlePhone: function (e) {
+    handlePhone: function(e) {
         var phone = e.target.value;
         var reg = /^1[34578]\d{9}$/;
         if (reg.test(phone) == false) {
-            this.setState({"phone": "请输入合法的手机号"});
-            this.setState({pass1: 0});
+            this.setState({ "phone": "请输入合法的手机号" });
+            this.setState({ pass1: 0 });
         } else {
-            this.setState({"phone": ""});
-            this.setState({pass1: 1});
+            this.setState({ "phone": "" });
+            this.setState({ pass1: 1 });
         }
-        this.setState({"val1": phone});
+        this.setState({ "val1": phone });
         if (reg.test(phone) && this.state.pass2 != 0) {
-            this.setState({active: true});
-        }
-        else {
-            this.setState({active: false})
+            this.setState({ active: true });
+        } else {
+            this.setState({ active: false })
         }
     },
-    handleCode: function (e) {
+    handleCode: function(e) {
         var value = e.target.value;
         if (value == "") {
-            this.setState({"code": "不能为空!"});
-            this.setState({pass2: 0});
+            this.setState({ "code": "不能为空!" });
+            this.setState({ pass2: 0 });
+        } else {
+            this.setState({ "name": "" });
+            this.setState({ pass2: 1 });
         }
-        else {
-            this.setState({"name": ""});
-            this.setState({pass2: 1});
-        }
-        this.setState({"val2": value});
+        this.setState({ "val2": value });
         if (value != "" && this.state.pass1 != 0) {
-            this.setState({active: true});
-        }
-        else {
-            this.setState({active: false})
+            this.setState({ active: true });
+        } else {
+            this.setState({ active: false })
         }
     },
-    handlePaw: function (e) {
+    handlePaw: function(e) {
         var value = e.target.value;
         if (value == "") {
-            this.setState({"paw": "不能为空!"});
-            this.setState({pass3: 0});
+            this.setState({ "paw": "不能为空!" });
+            this.setState({ pass3: 0 });
+        } else {
+            this.setState({ "paw": "" });
+            this.setState({ pass3: 1 });
         }
-        else {
-            this.setState({"paw": ""});
-            this.setState({pass3: 1});
-        }
-        this.setState({"val3": value});
+        this.setState({ "val3": value });
         if (value != "" && this.state.pass1 != 0) {
-            this.setState({active: true});
-        }
-        else {
-            this.setState({active: false})
+            this.setState({ active: true });
+        } else {
+            this.setState({ active: false })
         }
     },
-    loginVeri: function () {
+    loginVeri: function() {
         if (!this.state.active) return;
         let FormData = {
             phone: this.state.val1,
@@ -144,12 +139,11 @@ const Login = React.createClass({
             enable_loading: 'mini',
             method: 'post',
             data: FormData,
-            success: function (data) {
+            success: function(data) {
                 var urlQuery = location.search.split("?");
                 if (urlQuery[2]) {
                     window.location.href = urlQuery[1].split('&')[1].split('=')[1] + "?" + urlQuery[2];
-                }
-                else {
+                } else {
                     var url = $FW.Format.urlQuery().redirect_url;
                     window.location.href = url
                 }
@@ -158,7 +152,7 @@ const Login = React.createClass({
         })
 
     },
-    loginPaw: function () {
+    loginPaw: function() {
         if (!this.state.active) return;
         let FormData = {
             phone: this.state.val1,
@@ -178,59 +172,93 @@ const Login = React.createClass({
         //})
 
     },
-    render: function () {
-        let tab = (i, index)=> {
-            return <div key={index} className={i == this.state.tab ? 'active' : null}
-                        onClick={()=> this.switchTabHandler(i)}>
-                {i == 'veri' ? '验证码登录' : '普通登录'}
-            </div>
+    render: function() {
+        let tab = (i, index) => {
+            return <div key = { index }
+            className = { i == this.state.tab ? 'active' : null }
+            onClick = {
+                    () => this.switchTabHandler(i)
+                } > { i == 'veri' ? '验证码登录' : '普通登录' } <
+                /div>
         };
 
-        let Pwd = <div>
-            <div className="field">
-                <span className="ico-password"></span>
-                <input type="password" placeholder="请输入验证码" name="code" defaultValue="" onChange={this.handleCode}/>
-                <div className="empty"></div>
-                <input type="button" className="yzm b-radius" onClick={this.getSMSCodeHandler} id="btnMessageCode"
-                       value={!this.state.reSend ? "重新发送("+this.state.value+")":this.state.value}/>
-            </div>
-            <label className="phone" htmlFor="code">{this.state.code}</label></div>;
+        let Pwd = < div >
+            <
+            div className = "field" >
+            <
+            span className = "ico-password" > < /span> <
+        input type = "password"
+        placeholder = "请输入验证码"
+        name = "code"
+        defaultValue = ""
+        onChange = { this.handleCode }
+        /> <
+        div className = "empty" > < /div> <
+        input type = "button"
+        className = "yzm b-radius"
+        onClick = { this.getSMSCodeHandler }
+        id = "btnMessageCode"
+        value = {!this.state.reSend ? "重新发送(" + this.state.value + ")" : this.state.value }
+        /> < /
+        div > <
+            label className = "phone"
+        htmlFor = "code" > { this.state.code } < /label></div > ;
 
-        let Pwd1 = <div>
-            <div className="field">
-                <span className="ico-password"></span>
-                <input type="password" placeholder="登录密码" name="pwd" defaultValue="" onChange={this.handlePaw}
-                       className="password f-14"/>
-                <div className="empty"></div>
-            </div>
-            <label className="phone" htmlFor="pwd">{this.state.paw}</label></div>;
+        let Pwd1 = < div >
+            <
+            div className = "field" >
+            <
+            span className = "ico-password" > < /span> <
+        input type = "password"
+        placeholder = "登录密码"
+        name = "pwd"
+        defaultValue = ""
+        onChange = { this.handlePaw }
+        className = "password f-14" / >
+            <
+            div className = "empty" > < /div> < /
+        div > <
+            label className = "phone"
+        htmlFor = "pwd" > { this.state.paw } < /label></div > ;
 
-        return (
-            <div>
-                <div className="recharge-panel-tab"> {this.tabs.map(tab)} </div>
-                <div className="container wrap">
-                    <div className="field">
-                        <span className="ico-user"></span>
-                        <input type="text" placeholder="手机号/邮箱/用户名" defaultValue="" onChange={this.handlePhone}/>
-                        <div className="empty"></div>
-                    </div>
-                    <label className="phone" htmlFor="phone">{this.state.phone}</label>
-                    {this.state.tab == 'veri' ? Pwd : null}
-                    {this.state.tab == 'pwd' ? Pwd1 : null}
+        return ( <
+            div >
+            <
+            div className = "recharge-panel-tab" > { this.tabs.map(tab) } < /div> <
+            div className = "container wrap" >
+            <
+            div className = "field" >
+            <
+            span className = "ico-user" > < /span> <
+            input type = "text"
+            placeholder = "手机号/邮箱/用户名"
+            defaultValue = ""
+            onChange = { this.handlePhone }
+            /> <
+            div className = "empty" > < /div> < /
+            div > <
+            label className = "phone"
+            htmlFor = "phone" > { this.state.phone } < /label> { this.state.tab == 'veri' ? Pwd : null } { this.state.tab == 'pwd' ? Pwd1 : null }
 
-                    <input type="button" onClick={this.state.tab == 'veri' ?this.loginVeri:this.loginPaw}
-                           className={this.state.active ? "btn-red active":"btn-red"} value="登录"/>
-                </div>
-            </div>
+            <
+            input type = "button"
+            onClick = { this.state.tab == 'veri' ? this.loginVeri : this.loginPaw }
+            className = { this.state.active ? "btn-red active" : "btn-red" }
+            value = "登录" / >
+            <
+            /div> < /
+            div >
         )
     }
 });
 
-$FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'登录'} back_handler={back_handler}/>, HEADER_NODE);
-    ReactDOM.render(<Login />, CONTENT_NODE);
-});
+$FW.DOMReady(function() {
+            ReactDOM.render( < Header title = { '登录' }
+                back_handler = { back_handler }
+                />, HEADER_NODE);
+                ReactDOM.render( < Login / > , CONTENT_NODE);
+            });
 
-function back_handler() {
-    location.href = '/';
-}
+        function back_handler() {
+            location.href = '/';
+        }
