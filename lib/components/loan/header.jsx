@@ -8,7 +8,7 @@ class Header extends React.Component {
         super(props);
         let height = parseInt(this.props.height) || 100;
 
-        this.state =  {
+        this.state = {
             height: height,
             background: this.props.background || 'white',
             title: this.props.title,
@@ -88,7 +88,7 @@ class Header extends React.Component {
                 width: "182px",
                 position: "relative",
                 top: "30px"
-            }}/>;
+            }} />;
 
         let link = null;
         if (this.props.sub_text) {
@@ -112,6 +112,8 @@ class Header extends React.Component {
         if (ua.indexOf('MicroMessenger') >= 0 && show_header_titles.indexOf(title) < 0)
             return null;
         if ($FW.Browser.inApp())
+            return null;
+        if ($FW.Browser.inWeixin())
             return null;
 
         return (
