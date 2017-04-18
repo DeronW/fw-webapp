@@ -1369,14 +1369,14 @@ class SumList extends React.Component {
 				<div className="list">
 					<div className="name-text">借款金额</div>
 					<div className="r">
-						<div className="text">{ getSumMoneyPopVal.moneyVal == null ? '请选择' : getSumMoneyPopVal.moneyVal }</div>
+						<div className="text">{ getSumMoneyPopVal.moneyVal == '' ? '请选择' : getSumMoneyPopVal.moneyVal }</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
 				<div className="list">
 					<div className="name-text">期限</div>
 					<div className="r">
-						<div className="text"> { getSumMoneyPopVal.deadlineVal == null ? '请选择' : getSumMoneyPopVal.deadlineVal + '个月' }</div>
+						<div className="text"> { getSumMoneyPopVal.deadlineVal == '' ? '请选择' : getSumMoneyPopVal.deadlineVal + '个月' }</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
@@ -1399,6 +1399,7 @@ class BasicInfo extends React.Component {
 	render() {
 		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['城市 ', 'city'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
 		const { getSumMoneyPopVal ,getSelectList } = this.props
+		console.log(getSumMoneyPopVal)
 
 		return (
 			<div className="basic-info">
@@ -2237,6 +2238,8 @@ class ApplyBorrowMoney extends React.Component {
 				creditCardVal: '',
 				emailVal: '',
 				homeVal: '',
+				realName: '',
+				idCard: '',
 				city: '',
 				cityIndex: '',
 				marriageVal: '',
@@ -2254,10 +2257,34 @@ class ApplyBorrowMoney extends React.Component {
 		}
 	}
     componentDidMount(){
+
         $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
             let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
 
-            this.setState({sumMoneyListObj: init_data})
+			this.setState({
+				sumMoneyListObj: {
+					moneyVal: '',
+					deadlineVal: '',
+					creditCardVal: data.creditCard,
+					emailVal: data.email,
+					homeVal: data.address,
+					realName: data.realName,
+					idCard: data.idCard,
+					city: data.city,
+					cityIndex: '',
+					marriageVal: data.homeSituation,
+					marriageIndex: 1,
+					urgentPerson: data.emContact,
+					relationship: data.emRelationship,
+					relationshipIndex: data.emRelationship,
+					phone: data.emMobile,
+					income: data.income,
+					incomeIndex: data.income,
+					yearsOfWork: data.workExperience,
+					yearsOfWorkIndex: data.workExperience
+				}
+
+			})
         })
     }
 	callbackSelectList(selectList, title, popShow) {
@@ -2341,6 +2368,8 @@ class ApplyBorrowMoney extends React.Component {
 		)
 	}
 }
+
+//ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
