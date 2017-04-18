@@ -1616,13 +1616,8 @@ class Btn extends React.Component {
 					workExperience: getSumMoneyPopVal.yearsOfWorkIndex,
 					productId: $FW.Format.urlQuery().pid,
 					position: this.state.position,
-					userCookieID: navigator.userAgent,
-					// clientIP: '192.168.2.5'
-					// token: JSON.parse($FW.Store.exportUserDict()).token,
-					// uid	: JSON.parse($FW.Store.exportUserDict()).uid,
-					// userGid: JSON.parse($FW.Store.exportUserDict()).userGid,
-					// userId: JSON.parse($FW.Store.exportUserDict()).userId
-				}) .then(data => {
+					userCookieID: navigator.userAgent
+				}).then(data => {
 					alert(data)
 				})
 			}
