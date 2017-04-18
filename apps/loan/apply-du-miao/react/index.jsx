@@ -95,7 +95,6 @@ class BorrowMoney extends React.Component {
         this.setState({tryOtherLoanPopShow:false})
     }
     render() {
-        let pid = $FW.Format.urlQuery().pid;
         let labelList = this.state.product.productLabelList;
         return (
             <div className="">
