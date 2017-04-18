@@ -56,7 +56,7 @@ const Register = React.createClass({
                 sourceType: SOURCE_TYPE
             }).then(data => {
                 let dict = data.userLogin;
-                $FW.Store.set('phone', phone);
+                $FW.Store.set('phone', $FW.Format.urlQuery().phone);
                 $FW.Store.setUserDict({
                     token: dict.userToken,
                     id: dict.userId,
