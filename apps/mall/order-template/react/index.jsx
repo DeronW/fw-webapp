@@ -1,6 +1,6 @@
 const Form = React.createClass({
     render: function () {
-        let hash = location.hash.splice(6)
+        let hash = location.hash.slice(6)
         return (
             <div>
                 {document.write(hash)}
