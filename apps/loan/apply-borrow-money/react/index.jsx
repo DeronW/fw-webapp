@@ -1347,7 +1347,7 @@ const CITY_ARR = [
 			}]
 		]
 	]
- 
+
 
 class SumList extends React.Component {
 	constructor(props) {
@@ -1356,12 +1356,12 @@ class SumList extends React.Component {
 
 	handlerSum() {
 		const { selectListFun } = this.props
-		
+
 		selectListFun('sumMoney', '金额和期限', true)
 	}
 	render() {
 		const { getPopVal, getSumMoneyPopVal } = this.props
-		
+
 		//console.log(getSumMoneyPopVal)
 
 		return (
@@ -1392,8 +1392,8 @@ class BasicInfo extends React.Component {
 
 	}
 	handlerSelect(data) {
-		const { selectListFun } = this.props		
-		
+		const { selectListFun } = this.props
+
 		selectListFun(data[1], data[0], true)
 	}
 	render() {
@@ -1426,7 +1426,7 @@ class BasicInfo extends React.Component {
 										<div className="arrow-icon"></div>
 									</div>
 								</div>
-								
+
 						})
 					}
 				</div>
@@ -1440,8 +1440,8 @@ class UrgentContactPerson extends React.Component {
 		super()
 	}
 	handlerSelect(data) {
-		const { selectListFun } = this.props		
-		
+		const { selectListFun } = this.props
+
 		selectListFun(data[1], data[0], true)
 	}
 
@@ -1449,8 +1449,8 @@ class UrgentContactPerson extends React.Component {
 		const { getSumMoneyPopVal } = this.props
 
 		const URGENT_CONTACT_PERSON_ARR = [
-			['紧急联系人', 'urgentPerson'], 
-			['联系人关系', 'relationship'], 
+			['紧急联系人', 'urgentPerson'],
+			['联系人关系', 'relationship'],
 			['联系人手机', 'phone']
 		]
 
@@ -1482,15 +1482,15 @@ class JobInfo extends React.Component {
 		super()
 	}
 	handlerSelect(data) {
-		const { selectListFun } = this.props		
-		
+		const { selectListFun } = this.props
+
 		selectListFun(data[1], data[0], true)
 	}
 	render() {
 		const { getSumMoneyPopVal } = this.props
-	
+
 		const JOB_INFO_ARR = [
-			['税后月收入', 'income'], 
+			['税后月收入', 'income'],
 			['工作年限', 'yearsOfWork']
 		]
 
@@ -1511,7 +1511,7 @@ class JobInfo extends React.Component {
 								</div>
 						})
 					}
-					
+
 				</div>
 			</div>
 		)
@@ -1533,7 +1533,7 @@ class Agree extends React.Component {
 			agreeShow: !this.state.agreeShow
 		})
 
-		getAgree(this.state.agreeShow)		
+		getAgree(this.state.agreeShow)
 	}
 
 	render() {
@@ -1541,8 +1541,8 @@ class Agree extends React.Component {
 			<div className="agree">
 				<div className={ this.state.agreeShow ? 'agree-icon select-icon' : 'agree-icon'  } onClick={ this.handlerAgree.bind(this)  }></div>
 				<div className="text">
-					点击“申请借款”即视为同意<a href="">《读秒开户授权书》</a>、<a href="">《个人信息采集授权说明》</a>	
-				</div>	
+					点击“申请借款”即视为同意<a href="">《读秒开户授权书》</a>、<a href="">《个人信息采集授权说明》</a>
+				</div>
 			</div>
 		)
 	}
@@ -1553,9 +1553,9 @@ class Btn extends React.Component {
 		super()
 		this.state = {
 			position: '0, 0'
-		}	
+		}
 	}
-	componentDidMount() {		
+	componentDidMount() {
 		navigator.geolocation.getCurrentPosition((pos) => {
 			this.setState({
 				position: pos.coords.latitude + ', ' +pos.coords.longitude
@@ -1573,7 +1573,7 @@ class Btn extends React.Component {
 
 		if(pushType == 'pushBtn') {
 			const { propsAgree, getSumMoneyPopVal, getDataProps } = this.props
-			
+
 			if(getSumMoneyPopVal.moneyVal == null) {
 				$FW.Component.Toast("借款金融不能为空");
 			} else if(getSumMoneyPopVal.deadlineVal == null) {
@@ -1599,7 +1599,7 @@ class Btn extends React.Component {
 			} else if (propsAgree == false) {
 				$FW.Component.Toast("点击同意");
 			} else {
-				
+
 				$FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`, {
 					address:  getSumMoneyPopVal.homeVal,
 					balance: getSumMoneyPopVal.moneyVal,
@@ -1624,12 +1624,12 @@ class Btn extends React.Component {
                     let params = `uid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
                     location.href = `/api/order/v1/jump.shtml?${params}`
 
-				})
+				}, false)
 			}
 
 
 		} else if(pushType == 'popBtn') {
-			const { btnValFun, getPopInfoProps, getPopShowProps, getSelectListProps } = this.props			
+			const { btnValFun, getPopInfoProps, getPopShowProps, getSelectListProps } = this.props
 
 			if(getSelectListProps == 'sumMoney') {
 				if(btnValFun().moneyVal == '') {
@@ -1639,87 +1639,87 @@ class Btn extends React.Component {
 				} else if (btnValFun().deadlineVal == '') {
 					$FW.Component.Toast("请选择期限")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 	
+				}
 			} else if(getSelectListProps == 'creditCardVal') {
 				if(btnValFun().creditCardVal == '') {
 					$FW.Component.Toast("信用卡不能为空")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 
+				}
 			} else if (getSelectListProps == 'emailVal') {
 				if(eimalReg(btnValFun().emailVal) == false) {
 					$FW.Component.Toast("邮箱格式不对")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 
+				}
 			} else if (getSelectListProps == 'homeVal') {
 				if(btnValFun().homeVal == '') {
 					$FW.Component.Toast("现居住地不能为空")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 
+				}
 			} else if (getSelectListProps == 'city') {
 				if(btnValFun().city == '') {
 					$FW.Component.Toast("城市不能为空")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 
+				}
 			} else if (getSelectListProps == 'marriageVal') {
 				if(btnValFun().marriageVal == '') {
 					$FW.Component.Toast("婚姻不能为空")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 
+				}
 			}  else if (getSelectListProps == 'urgentPerson') {
 				if(btnValFun().urgentPerson == '') {
 					$FW.Component.Toast("紧急联系人不能为空")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 
+				}
 			} else if (getSelectListProps == 'relationship') {
 				if(btnValFun().relationship == '') {
 					$FW.Component.Toast("联系人关系不能为空")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 
+				}
 			} else if (getSelectListProps == 'phone') {
 				if(btnValFun().phone == '') {
 					$FW.Component.Toast("联系人手机不能为空")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 
+				}
 			} else if (getSelectListProps == 'income') {
 				if(btnValFun().income == '') {
 					$FW.Component.Toast("税后收后不能为空")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
-				} 
+				}
 			}  else if (getSelectListProps == 'yearsOfWork') {
 				if(btnValFun().yearsOfWork == '') {
 					$FW.Component.Toast("工作年限不能为空")
 				} else {
-					getPopInfoProps(btnValFun())	
+					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
 				}
-			}  
+			}
 
 		}
 	}
 	render() {
 		return (
 			<div className="btn-area">
-				<div className="btn" onClick={ this.handlerBtn.bind(this) }>确定</div>		
+				<div className="btn" onClick={ this.handlerBtn.bind(this) }>确定</div>
 			</div>
 		)
 	}
@@ -1732,7 +1732,7 @@ class WindowPop extends React.Component {
 		this.state = {
 			inputPlaceholder: '',
 			sumMoneyListObj: {
-			
+
 			},
 			inputType: '',
 			selectList: '',
@@ -1755,71 +1755,71 @@ class WindowPop extends React.Component {
 				this.setState({
 					inputPlaceholder: '请以1000为单位，上限为50000',
 					inputType: 'moneyVal'
-				})	
+				})
 				break
-			case 'creditCardVal': 
+			case 'creditCardVal':
 				this.setState({
 					inputPlaceholder: '请输入信用卡号',
 					inputType: 'creditCardVal',
-				})	
+				})
 				break
-			case 'emailVal': 
+			case 'emailVal':
 				this.setState({
 					inputPlaceholder: '请输入邮箱',
 					inputType: 'emailVal'
-				})	
+				})
 				break
-			case 'homeVal': 
+			case 'homeVal':
 				this.setState({
 					inputPlaceholder: '请输入居住地',
 					inputType: 'homeVal'
-				})	
+				})
 				break
-			case 'city': 
+			case 'city':
 				this.setState({
 					inputPlaceholder: '',
 					inputType: 'city'
-				})	
-				break				
-			case 'marriageVal': 
+				})
+				break
+			case 'marriageVal':
 				this.setState({
 					inputPlaceholder: '请输入婚姻状况',
 					inputType: 'marriageVal'
 				})
 				break
-			case 'urgentPerson': 
+			case 'urgentPerson':
 				this.setState({
 					inputPlaceholder: '请输入亲属或好友姓名',
 					inputType: 'urgentPerson'
 				})
-				break	
-			case 'relationship': 				
+				break
+			case 'relationship':
 				this.setState({
 					inputPlaceholder: '紧急联系人关系',
 					inputType: 'relationship'
 				})
 				break
-			case 'phone': 
+			case 'phone':
 				this.setState({
 					inputPlaceholder: '请输入联系人手机号',
 					inputType: 'phone'
-				})						
+				})
 				break
-			case 'income': 
+			case 'income':
 				this.setState({
 					inputPlaceholder: '',
 					inputType: 'income'
-				})						
-				break	
-			case 'yearsOfWork': 
+				})
+				break
+			case 'yearsOfWork':
 				this.setState({
 					inputPlaceholder: '',
 					inputType: 'yearsOfWork'
-				})						
-				break	
+				})
+				break
 		}
 
-	}	
+	}
 	handlerBack() {
 		const { getPopShow } = this.props
 
@@ -1827,14 +1827,14 @@ class WindowPop extends React.Component {
 	}
 
 	changeInput(e) {
-		if(this.state.selectList === 'sumMoney') {		
+		if(this.state.selectList === 'sumMoney') {
 			if(verificationNum(e.target.value)) {
 				let copSumMoneyListObj1 = this.state.sumMoneyListObj
 				copSumMoneyListObj1.moneyVal = e.target.value
 
 				this.setState({
 					copSumMoneyListObj1,
-					deadlineIconShow: false,						
+					deadlineIconShow: false,
 				})
 
 				if(e.target.value >= 1000 && e.target.value <= 3000 ) {
@@ -1857,55 +1857,55 @@ class WindowPop extends React.Component {
 					this.setState({
 						deadline: []
 					})
-				} 
-			}	
+				}
+			}
 
-		} else if (this.state.selectList === 'creditCardVal') {	
+		} else if (this.state.selectList === 'creditCardVal') {
 			if(verificationNum(e.target.value)) {
 				let copSumMoneyListObj2 = this.state.sumMoneyListObj
-				copSumMoneyListObj2.creditCardVal = e.target.value		
+				copSumMoneyListObj2.creditCardVal = e.target.value
 				this.setState({
 					copSumMoneyListObj2
 				})
 			}
-			
-		} else if (this.state.selectList === 'emailVal') {	
+
+		} else if (this.state.selectList === 'emailVal') {
 			let copSumMoneyListObj3 = this.state.sumMoneyListObj
-			copSumMoneyListObj3.emailVal = e.target.value		
+			copSumMoneyListObj3.emailVal = e.target.value
 			this.setState({
 				copSumMoneyListObj3
 			})
-		} else if (this.state.selectList === 'homeVal') {	
+		} else if (this.state.selectList === 'homeVal') {
 			let copSumMoneyListObj4 = this.state.sumMoneyListObj
-			copSumMoneyListObj4.homeVal = e.target.value		
+			copSumMoneyListObj4.homeVal = e.target.value
 			this.setState({
 				copSumMoneyListObj4
 			})
-		}  else if (this.state.selectList === 'urgentPerson') {	
+		}  else if (this.state.selectList === 'urgentPerson') {
 			let copSumMoneyListObjUrgentPerson = this.state.sumMoneyListObj
-			copSumMoneyListObjUrgentPerson.urgentPerson = e.target.value		
+			copSumMoneyListObjUrgentPerson.urgentPerson = e.target.value
 			this.setState({
 				copSumMoneyListObjUrgentPerson
 			})
-		} else if (this.state.selectList === 'phone') {	
+		} else if (this.state.selectList === 'phone') {
 			let copSumMoneyListObjPhone = this.state.sumMoneyListObj
-			copSumMoneyListObjPhone.phone = e.target.value		
+			copSumMoneyListObjPhone.phone = e.target.value
 			this.setState({
 				copSumMoneyListObjPhone
 			})
-		} 
+		}
 	}
 	handlerDate(e) {
 		const inputVal = this.state.sumMoneyListObj.moneyVal
-		
+
 		if(inputVal.length == 0) {
             $FW.Component.Toast("金额不能为空");
 		} else if((inputVal % 1000) != 0) {
             $FW.Component.Toast("请以1000为单位，上限为50000");
 		} else {
 			this.setState({
-				tabShow: !this.state.tabShow 
-			})		
+				tabShow: !this.state.tabShow
+			})
 		}
 	}
 
@@ -1916,17 +1916,17 @@ class WindowPop extends React.Component {
 
 		this.setState({
 			deadlineIconShow: true,
-			deadlineIconIndex: index,			
+			deadlineIconIndex: index,
 			tabShow: false,
-			copState		
+			copState
 		})
 	}
 
 	callbackBtnVal(val) {
 		//console.log( this.state.sumMoneyListObj)
-		
+
 		return {
-			moneyVal: this.state.sumMoneyListObj.moneyVal,			
+			moneyVal: this.state.sumMoneyListObj.moneyVal,
 			deadlineVal: this.state.sumMoneyListObj.deadlineVal,
 			creditCardVal: this.state.sumMoneyListObj.creditCardVal,
 			emailVal: this.state.sumMoneyListObj.emailVal,
@@ -1942,7 +1942,7 @@ class WindowPop extends React.Component {
 			income: this.state.sumMoneyListObj.income,
 			incomeIndex: this.state.sumMoneyListObj.incomeIndex,
 			yearsOfWork: this.state.sumMoneyListObj.yearsOfWork,
-			yearsOfWorkIndex: this.state.sumMoneyListObj.yearsOfWorkIndex			
+			yearsOfWorkIndex: this.state.sumMoneyListObj.yearsOfWorkIndex
 		}
 	}
 
@@ -1950,20 +1950,20 @@ class WindowPop extends React.Component {
 		let copState = this.state.sumMoneyListObj
 			copState.marriageVal = data,
 			copState.marriageIndex = index
-		
+
 		this.setState({
 			copState
 		})
-		
+
 	}
 	handlerSelectRelationship(data, index) {
 		let copState = this.state.sumMoneyListObj
 			copState.relationship = data
 			copState.relationshipIndex = index
-		
+
 		this.setState({
 			copState
-		})		
+		})
 	}
 
 	handlerSelectJob(data, index) {
@@ -1978,7 +1978,7 @@ class WindowPop extends React.Component {
 			copState.yearsOfWork = data
 			copState.yearsOfWorkIndex = index
 		}
-		
+
 		this.setState({
 			copState
 		})
@@ -1988,7 +1988,7 @@ class WindowPop extends React.Component {
 		let copState = this.state.sumMoneyListObj
 			copState.city = cntData.name
 			copState.cityIndex = [data[0], index]
-		
+
 		this.setState({
 			copState
 		})
@@ -2007,44 +2007,44 @@ class WindowPop extends React.Component {
 								</div>
 
 							</div>
-							{ this.state.tabShow ? 
+							{ this.state.tabShow ?
 								<div className="tab-list">
 									{
 										this.state.deadline.map((data, index) => {
 											return <div className="block" key={ index } onClick= { this.handlerSelectDeadline.bind(this, index, data) }>
 												<div className="info-text">{ data }个月</div>
-												{												
+												{
 													index == this.state.deadlineIconIndex && this.state.deadlineIconShow ? <div className="select-icon"></div> : null
 												}
 											</div>
-										})	
-									}				
-						
+										})
+									}
+
 								</div> : null
 							}
 						</div>
 
 		}
-		
-		let selectBasicVal = (index) => {						
+
+		let selectBasicVal = (index) => {
 			if(this.state.sumMoneyListObj.marriageIndex != '' || this.state.sumMoneyListObj.marriageIndex == '0') {
 				if(this.state.sumMoneyListObj.marriageIndex == index) {
 					return  <div className="select-icon"></div>
 				}
-				
+
 			}
 		}
 
-		let urgentContactPersonVal = (index) => {						
+		let urgentContactPersonVal = (index) => {
 			if(this.state.sumMoneyListObj.relationshipIndex != '' || this.state.sumMoneyListObj.relationshipIndex == '0') {
 				if(this.state.sumMoneyListObj.relationshipIndex == index) {
 					return  <div className="select-icon"></div>
 				}
-				
+
 			}
 		}
 
-		let jobInfoVal = (index) => {		
+		let jobInfoVal = (index) => {
 			let jobSelectType
 
 			if(selectList == 'income') {
@@ -2057,7 +2057,7 @@ class WindowPop extends React.Component {
 				if(this.state.sumMoneyListObj[jobSelectType] == index) {
 					return  <div className="select-icon"></div>
 				}
-				
+
 			}
 		}
 
@@ -2071,18 +2071,18 @@ class WindowPop extends React.Component {
 									return <div className="list" onClick={ this.handlerSelectMarriage.bind(this, index, data ) } key={ index }>
 											<div className="name-text">{ data }</div>
 											<div className="r">
-												{ 													
+												{
 													selectBasicVal(index)
 												}
 											</div>
-										</div>			
+										</div>
 								})
 							}
-																		
+
 						</div>
 					</div>
 		}
-		
+
 		let relationshipList  = () => {
 			const RELATIONSHIP_ARR =  [ '父母', '配偶', '兄弟姐妹', '同事', '同学', '朋友' ]
 
@@ -2094,12 +2094,12 @@ class WindowPop extends React.Component {
 											<div className="name-text">{ data }</div>
 											<div className="r">
 												{ urgentContactPersonVal(index) }
-												
+
 											</div>
-										</div>			
+										</div>
 								})
 							}
-																		
+
 						</div>
 					</div>
 		}
@@ -2120,22 +2120,22 @@ class WindowPop extends React.Component {
 									return <div className="list"  key={ index } onClick={ this.handlerSelectJob.bind(this, data, index) }>
 											<div className="name-text">{ data }</div>
 											<div className="r">
-												{ jobInfoVal(index) }												
+												{ jobInfoVal(index) }
 											</div>
-										</div>			
+										</div>
 								})
 							}
-																		
+
 						</div>
 					</div>
 		}
 
-		let cityListVal = (data, index) => {						
+		let cityListVal = (data, index) => {
 			if(this.state.sumMoneyListObj.cityIndex != '') {
 				if(this.state.sumMoneyListObj.cityIndex[0] == data && this.state.sumMoneyListObj.cityIndex[1] == index ) {
 					return  <div className="select-icon"></div>
 				}
-				
+
 			}
 		}
 
@@ -2144,10 +2144,10 @@ class WindowPop extends React.Component {
 							<div className="ui-list marriage-list city-list">
 								{
 									CITY_ARR.map((data, i) => {
-										
+
 										return <div key={ i }>
-												<div className="city-name">{ data[0] }</div>	
-																
+												<div className="city-name">{ data[0] }</div>
+
 												{
 													data[1].map((cntData, index) => {
 														return <div className="list"  key={ index } onClick={ this.handlerCitySelect.bind(this, data, i, cntData, index) }>
@@ -2156,16 +2156,16 @@ class WindowPop extends React.Component {
 																	{
 																		cityListVal(data[0], index)
 																	}
-																	 
+
 																</div>
-															</div>		
+															</div>
 													})
 												}
-												
+
 										</div>
 									})
-								}	
-										
+								}
+
 						</div>
 					</div>
 		}
@@ -2175,23 +2175,23 @@ class WindowPop extends React.Component {
 				<div className="top">
 					<div className="back" onClick={ this.handlerBack.bind(this) } ></div>
 					<div className="title">{ popTitle }</div>
-				</div>	
+				</div>
 
-				{ selectList != 'marriageVal' && selectList != 'relationship' && selectList != 'income'  && selectList != 'yearsOfWork' && selectList != 'city' ? 
+				{ selectList != 'marriageVal' && selectList != 'relationship' && selectList != 'income'  && selectList != 'yearsOfWork' && selectList != 'city' ?
 					<div className="cnt-pop">
 						<div className="ui-title">工作信息</div>
 						<div className="ui-list">
 							<div className="list">
 								<div className="name-text">{ selectList == 'sumMoney'  ?  '借款金额' : popTitle }</div>
 								<div className="r no">
-									<input type="text" 
+									<input type="text"
 										placeholder={ this.state.inputPlaceholder }
 										onChange= { this.changeInput.bind(this) }
 										value={ this.state.sumMoneyListObj[this.state.inputType] }
 									/>
 								</div>
 							</div>
-							
+
 							{ selectList == 'sumMoney' ? listNextTab() : null}
 						</div>
 					</div> :  null
@@ -2213,10 +2213,10 @@ class WindowPop extends React.Component {
 					selectList == 'city' ? cityList() : null
 				}
 
-				<Btn 
-					btnValFun = { this.callbackBtnVal.bind(this) } 
-		   			getPopInfoProps = { getPopInfo } 
-					getPopShowProps = { getPopShow } 
+				<Btn
+					btnValFun = { this.callbackBtnVal.bind(this) }
+		   			getPopInfoProps = { getPopInfo }
+					getPopShowProps = { getPopShow }
 					getSelectListProps = { selectList }
 					pushType= { 'popBtn' }
 				/>
@@ -2292,7 +2292,7 @@ class ApplyBorrowMoney extends React.Component {
 			popShow: popShow,
 			popTitle: title,
 			selectList: selectList
-		})	
+		})
 	}
 	callbackAgree(val) {
 		this.setState({
@@ -2335,35 +2335,35 @@ class ApplyBorrowMoney extends React.Component {
 			<div className="">
 
 				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } />
-				<BasicInfo selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } 
+				<BasicInfo selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj }
 					getSelectList = { this.state.selectList }
-					
+
 				/>
-				<UrgentContactPerson 
+				<UrgentContactPerson
 					selectListFun = { this.callbackSelectList.bind(this) }
 					getSumMoneyPopVal = { this.state.sumMoneyListObj }
 				/>
-				<JobInfo 
+				<JobInfo
 					selectListFun = { this.callbackSelectList.bind(this) }
 					getSumMoneyPopVal = { this.state.sumMoneyListObj }
 				/>
-				<Agree 
+				<Agree
 					getAgree = { this.callbackAgree.bind(this) }
 				/>
-				<Btn 
+				<Btn
 					pushType= { 'pushBtn' }
 					getSumMoneyPopVal = { this.state.sumMoneyListObj }
 					propsAgree = { this.state.agreeShow }
-					
+
 				/>
 
-				{ this.state.popShow ?  <WindowPop  
-					selectList={ this.state.selectList } 
+				{ this.state.popShow ?  <WindowPop
+					selectList={ this.state.selectList }
 					popTitle = { this.state.popTitle }
 					getPopInfo = { this.callbackSumPopInfo.bind(this) }
 					getPopShow = { this.callbackPopShow.bind(this) }
 					getPopSumMoneyListObj = { this.state.sumMoneyListObj }
-				/> : null } 
+				/> : null }
 			</div>
 		)
 	}
