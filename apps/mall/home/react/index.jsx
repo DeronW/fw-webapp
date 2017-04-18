@@ -14,8 +14,8 @@ const Mall = React.createClass({
     getInitialState: function() {
         return {
             // background: "transparent",
-            logoImage: "images/logo_03.png",
-            avatarImage: "images/avatar_03.png",
+            logoImage: "images/logo_3.png",
+            avatarImage: "images/avatar_3.png",
             borderBottom: "none"
         }
     },
@@ -36,21 +36,6 @@ const Mall = React.createClass({
         link && gotoHandler(link)
     },
     componentDidMount: function() {
-        // window.addEventListener('scroll', function() {
-        //     var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
-
-        //     let style = scrollTop > 400 ? {
-        //         background: "url(images/header-bg.png)",
-        //         logoImage: "images/m-logo.png",
-        //         avatarImage: "images/m-list-icon.png"
-        //     } : {
-        //         background: "transparent",
-        //         logoImage: "images/logo.png",
-        //         avatarImage: "images/list-icon.png"
-        //     }
-
-        //     this.setState(style);
-        // }.bind(this), false);
     },
     render: function () {
         let banner;
@@ -64,13 +49,6 @@ const Mall = React.createClass({
             banner = <div className="no-banner"></div>
         }
 
-        var head_nav_wrap = {
-            // background: this.state.background,
-            width: "100%",
-            paddingTop: "22px",
-            paddingBottom: "22px",
-            transition: "1s all"
-        };
 
         let Charge_Nav = <div className="charge-nav">
             <div className="charge-bill"><img src="images/charge-bill.png" /></div>
@@ -79,9 +57,9 @@ const Mall = React.createClass({
 
         return (
             <div className="head-wrap">
-            
+
             <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                    <div style={head_nav_wrap} className="head_nav_wrap">
+                    <div className="head_nav_wrap">
                         <img className="m-logo" src={this.state.logoImage} />
                         <a href="/static/mall/product-list/index.html?searchSourceType=2"
                             className="search-bar-a">
