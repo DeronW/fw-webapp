@@ -108,11 +108,11 @@ class BorrowMoney extends React.Component {
                             </div>
                             <div className="b">
                                 <div className="tag" >
-                                    {
+                                    {/*
                                         this.state.product.productLabelList.map((data, index) => {
                                             return  <img src={ "images/tag-"+ data.labelType  +".png"} key={ index } />
                                         })
-                                    }
+                                    */}
                                 </div>
                             </div>
                         </div>
