@@ -42,7 +42,6 @@ const SetCashCard = React.createClass({
             cardinfoBankName: '',
             cardinfoLogoUrl: '',
             cardType: '',
-            selectClause: false,
             withholdServerPop: false,
             loading: false,
             canVerify: ''
@@ -110,8 +109,7 @@ const SetCashCard = React.createClass({
         });
     },
     handlerNext() {
-        let err, {name, id, bankName, bankNum, phone, selectClause, cardType, canVerify} = this.state;
-
+        let err, {name, id, bankName, bankNum, phone, cardType, canVerify} = this.state;
         if (name == '') err = "姓名不能为空";
         if (name.length > 20) err = "姓名不能超过20个字符";
         if (id == '') err = "身份证不能为空";
@@ -120,7 +118,7 @@ const SetCashCard = React.createClass({
         if (space(bankNum).length > 19 || space(bankNum).length < 16) err = "储蓄卡格式不对";
         if (phone == '') err = "手机号不能为空";
         if (!isMobilePhone(phone)) err = "手机号格式不对";
-        if (!selectClause) err = "请勾选代扣服务协议";
+        //if (!selectClause) err = "请勾选代扣服务协议";
         if (cardType == 1) err = "请绑定借记卡";
         if (canVerify == 0) err = "不支持绑定此类卡";
 
@@ -148,7 +146,7 @@ const SetCashCard = React.createClass({
     },
     render() {
 
-        let {withholdServerPop, cardinfoBankName, selectClause} = this.state;
+        let {withholdServerPop, cardinfoBankName} = this.state;
 
         return (
             <div className="set-cash-card-cnt">
