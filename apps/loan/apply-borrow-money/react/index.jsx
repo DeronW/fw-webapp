@@ -1,4 +1,4 @@
-const verificationNum = val => {
+ const verificationNum = val => {
 	const reg = new RegExp('^[0-9]*$')
 
 	return reg.test(val)
@@ -1575,28 +1575,28 @@ class Btn extends React.Component {
 
 			if(getSumMoneyPopVal.moneyVal == '') {
 				$FW.Component.Toast("借款金融不能为空");
-			// } else if(getSumMoneyPopVal.deadlineVal == '') {
-			// 	$FW.Component.Toast("期限不能为空");
-			// } else if(getSumMoneyPopVal.creditCardVal == '') {
-			// 	$FW.Component.Toast("信用卡不能为空");
-			// } else if(getSumMoneyPopVal.emailVal == '') {
-			// 	$FW.Component.Toast("邮箱不能为空");
-			// } else if(getSumMoneyPopVal.homeVal == '') {
-			// 	$FW.Component.Toast("现居住地不能为空");
-			// } else if(getSumMoneyPopVal.marriageVal == '') {
-			// 	$FW.Component.Toast("婚姻不能为空");
-			// } else if(getSumMoneyPopVal.urgentPerson == '') {
-			// 	$FW.Component.Toast("紧急联系人不能为空");
-			// } else if(getSumMoneyPopVal.relationship == '') {
-			// 	$FW.Component.Toast("联系人关系不能为空");
-			// } else if(getSumMoneyPopVal.phone == '') {
-			// 	$FW.Component.Toast("联系人手机不能为空");
-			// } else if(getSumMoneyPopVal.income == '') {
-			// 	$FW.Component.Toast("税后收后不能为空");
-			// } else if(getSumMoneyPopVal.yearsOfWork == '') {
-			// 	$FW.Component.Toast("工作年限不能为空");
-			// } else if (propsAgree == false) {
-			// 	$FW.Component.Toast("点击同意");
+			} else if(getSumMoneyPopVal.deadlineVal == '') {
+				$FW.Component.Toast("期限不能为空");
+			} else if(getSumMoneyPopVal.creditCardVal == '') {
+				$FW.Component.Toast("信用卡不能为空");
+			} else if(getSumMoneyPopVal.emailVal == '') {
+				$FW.Component.Toast("邮箱不能为空");
+			} else if(getSumMoneyPopVal.homeVal == '') {
+				$FW.Component.Toast("现居住地不能为空");
+			} else if(getSumMoneyPopVal.marriageVal == '') {
+				$FW.Component.Toast("婚姻不能为空");
+			} else if(getSumMoneyPopVal.urgentPerson == '') {
+				$FW.Component.Toast("紧急联系人不能为空");
+			} else if(getSumMoneyPopVal.relationship == '') {
+				$FW.Component.Toast("联系人关系不能为空");
+			} else if(getSumMoneyPopVal.phone == '') {
+				$FW.Component.Toast("联系人手机不能为空");
+			} else if(getSumMoneyPopVal.income == '') {
+				$FW.Component.Toast("税后收后不能为空");
+			} else if(getSumMoneyPopVal.yearsOfWork == '') {
+				$FW.Component.Toast("工作年限不能为空");
+			} else if (propsAgree == false) {
+				$FW.Component.Toast("点击同意");
 			} else {
 
 				$FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`, {
@@ -1616,8 +1616,8 @@ class Btn extends React.Component {
 					workExperience: getSumMoneyPopVal.yearsOfWorkIndex,
 					productId: $FW.Format.urlQuery().pid,
 					position: this.state.position,
-					// userCookieID: navigator.userAgent,
-					// clientIP: '192.168.2.5'
+					userCookieID: navigator.userAgent,
+					clientIP: '192.168.2.5'
 					// token: JSON.parse($FW.Store.exportUserDict()).token,
 					// uid	: JSON.parse($FW.Store.exportUserDict()).uid,
 					// userGid: JSON.parse($FW.Store.exportUserDict()).userGid,
