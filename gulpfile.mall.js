@@ -21,11 +21,11 @@ const USER_PAGES = [
     'user-deliver-address',
     'user-build-deliver',
     'user-help',
-	// 'user-register',
-	// 'user-register-1',
-	'user-login',
-	'user-coupon',
-	'user-coupon-list',
+    // 'user-register',
+    // 'user-register-1',
+    'user-login',
+    'user-coupon',
+    'user-coupon-list',
 
 ]
 
@@ -52,6 +52,7 @@ const ORDER_PAGES = [
     'order-complete',
     'order-logistics',
     'order-coupon',
+    'order-template',
 ]
 
 const PAYMENT_PAGES = [
@@ -68,7 +69,7 @@ const GAME_PAGES = [
     'game', //游戏中心
     'game-guess', //猜拳
     // 'game-red-rain', //红包雨
-    'game-zhuanpan20161230',//2016-12-30号转盘
+    'game-zhuanpan20161230', //2016-12-30号转盘
 ]
 
 const DEVELOPING_PAGES = [
@@ -92,7 +93,7 @@ APP_NAMES.push(
     ...DEVELOPING_PAGES
 );
 
-module.exports = function (gulp, generate_task, CONSTANTS) {
+module.exports = function(gulp, generate_task, CONSTANTS) {
 
     let INCLUDE_COMPONENTS = [
         'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
