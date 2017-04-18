@@ -63,7 +63,7 @@ class Content extends React.Component {
                     <div className="apply-status">
                         <span className={`bill-${current_type}-color`}>
                             {tab[current_type].name}</span></div>
-                    <div className="apply-time">{order.loanTime}</div>
+                    <div className="apply-time">{order.loanTimeStr}</div>
                 </div>
             </Nav>
         }
