@@ -217,7 +217,7 @@ const Login = React.createClass({
         className = "password f-14" / >
             <
             div className = "empty" > < /div> < /
-            div > <
+        div > <
             label className = "phone"
         htmlFor = "pwd" > { this.state.paw } < /label></div > ;
 
