@@ -16,116 +16,86 @@ class Content extends React.Component{
             typeCN: '已还款'
           }
         ];
-        let tabTemp = $FW.Format.urlQuery().tab;
-        let tab = tabTemp.toLowerCase().slice(4);
-        this.count = 5;
+        this.pageSize = 5;
         this.state = {
-           tab:tab,
-           page:{
-               applying:1,
-               returning:1,
-               failing:1,
-               paid:1
-           },
-           bill:[],
-           hasData:true
+           loanStatus: this.getLoanStatus($FW.Format.urlQuery().tab.toLowerCase().slice(4)),
+           billItems: Array(4).fill([]),
+           moreToLoad: Array(4).fill(true)
         }
-        this.tabClickHandler = this.tabClickHandler.bind(this);
+    }
+    getLoanStatus = (tName) => {
+        return this.tabs.findIndex((t) => (tName === t.billType)) + 1;
     }
     loadMoreHandler = (done) => {
-        const USER = $FW.Store.getUserDict();
-        let page = this.state.page[this.state.tab];
-        if (page == 0) return;
-        let loanStatus = this.tabs.findIndex((t) => (t.billType === this.state.tab)) + 1;
-
-     $FW.Post(`${API_PATH}/api/order/v1/orderList.json`,{
-         pageSize:this.count,
-         pageIndex:page,
-         loanStatus:loanStatus,
-         token: USER.token,
-         userGid: USER.gid,
-         userId: USER.id,
-         uid:USER.uid,
-         sourceType: SOURCE_TYPE
-       }).then((data)=>{
-         let tab = this.tabs[loanStatus-1].billType;
-         window.Bill[tab] = window.Bill[tab].concat(data.resultList);
-         let bill = window.Bill[this.state.tab];
-         let new_page = this.state.page;
-         new_page[this.state.tab] = new_page[this.state.tab] + 1;
-         if (data.totalCount < 5) new_page[this.state.tab] = 0;
-         this.setState({bill: bill, page: new_page, hasData:!!data.resultList.length});
-         done && done();
-     }, (err)=>$FW.Component.Toast(err.message));
+        let loanIndex = this.state.loanStatus - 1;
+        if (!this.state.moreToLoad[loanIndex]) {return;}
+        let billItemsLength = this.state.billItems[loanIndex].length;
+        let pageIndex = billItemsLength / this.pageSize + 1; // if there are more to load, this must be an integer
+        $FXH.Post(`${API_PATH}/api/order/v1/orderList.json`, {
+           pageSize: this.pageSize,
+           pageIndex: pageIndex,
+           loanStatus: this.state.loanStatus
+         }).then((data) => {
+           let newBillItems = data.resultList;
+           let billItemsTemp = JSON.parse(JSON.stringify(this.state.billItems));
+           billItemsTemp[loanIndex] = billItemsTemp[loanIndex].concat(newBillItems);
+           this.setState({billItems: billItemsTemp});
+           if (this.state.billItems[loanIndex].length === data.totalCount) {
+               let moreToLoadTemp = this.state.moreToLoad.slice(0);
+               moreToLoadTemp[loanIndex] = false;
+               this.setState({moreToLoad: moreToLoadTemp});
+           }
+           done && done();
+        }, (err) => $FW.Component.Toast(err.message));
     }
-    componentDidMount(){
+    componentDidMount() {
         this.loadMoreHandler(null);
         $FW.Event.touchBottom(this.loadMoreHandler);
     }
-    tabClickHandler(tab) {
-        this.setState({ tab: tab, bill: window.Bill[tab] });
-        if (window.Bill[tab].length == 0) {
-            setTimeout(function () {
-                this.loadMoreHandler(null);
-            }.bind(this), 500)
+    shiftTab = (status) => {
+        this.setState({loanStatus: status});
+        let loanIndex = this.state.loanStatus - 1;
+        if (this.state.billItems[loanIndex].length == 0 && this.state.moreToLoad[loanIndex]) {
+            setTimeout(() => {this.loadMoreHandler(null)}, 500);
         }
     }
     render() {
-        let tab_bar = (i) => {
-            return (
-                <div key={i.billType} className={i.billType === this.state.tab ? "ui-tab-li ui-select-li" : "ui-tab-li"}
-                     onClick={()=>{this.tabClickHandler(i.billType) }}>
-                     <span className="text">{i.typeCN}</span>
+        let tabEls = this.tabs.map((tab, index) => (
+                <div key={tab.billType} className={index === this.state.loanStatus - 1 ? "ui-tab-li ui-select-li" : "ui-tab-li"} onClick={() => {this.shiftTab(index + 1);}}>
+                     <span className="text">{tab.typeCN}</span>
                 </div>
-            )
-        };
-
-        let list_li = (item,index) => {
+            ));
+        let billItemEls = this.state.billItems[this.state.loanStatus - 1].map((item, index) => {
             let status = parseInt(item.baseStatus);
-            let uuid = item.uuid;
-            let loanGid = item.loanGid;
-            let baseStatus = this.tabs[status-1].typeCN;
             let statusColor = `bill-${this.tabs[status-1].billType}-color`;
             return (
-                <a className="list_li" key={index} href={item.productId == 1 ? `/static/loan/bill-detail/index.html?uuid=${loanGid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${uuid}`}>
+                <a className="list_li" key={index} href={item.productId == 1 ? `/static/loan/bill-detail/index.html?uuid=${item.loanGid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${item.uuid}`}>
                     <div className="list-img"><img src={item.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png"}/></div>
                     <div className="list-content">
                         <div className="apply-num">借款金额:{item.loanAmtStr}元</div>
                         <div className="apply-duration">借款期限:{item.termNum}天</div>
                     </div>
                     <div className="apply-status-wrap">
-                        <div className="apply-status"><span className={statusColor}>{baseStatus}</span></div>
+                        <div className="apply-status"><span className={statusColor}>{this.tabs[status - 1].typeCN}</span></div>
                         <div className="apply-time">{item.loanTime}</div>
                     </div>
                 </a>
             )
-        }
-
-        let empty = <span className="no-data"></span>;
-
+        });
         return (
             <div className="billContent">
                 <div className="bill-header">
                     {!$FW.Browser.inWeixin() && <div className="billTitle">借款账单</div>}
-                    <div className="ui-tab-block">
-                        {this.tabs.map(tab_bar)}
-                    </div>
+                    <div className="ui-tab-block">{tabEls}</div>
                 </div>
                 <div className={$FW.Browser.inWeixin() ? "billContainer-weixin" : "billContainer"}>
-                    {this.state.bill.map(list_li)}
-                    {this.state.bill.length === 0 && !this.state.hasData && empty}
+                    {billItemEls}
+                    {this.state.billItems[this.state.loanStatus - 1].length === 0 && <span className="no-data"></span>}
                 </div>
             </div>
         )
     }
 }
-
-window.Bill = {
-    applying: [],
-    returning: [],
-    failing: [],
-    paid: []
-};
 
 $FW.DOMReady(function(){
     ReactDOM.render(<Content />, CONTENT_NODE);
