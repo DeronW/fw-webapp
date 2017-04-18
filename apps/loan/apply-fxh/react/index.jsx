@@ -13,10 +13,6 @@ function gotoHandler(link, need_login) {
 class ApplyLoan extends React.Component {
     constructor(props) {
         super(props)
-        this.getCreditLine = this.getCreditLine.bind(this)
-        this.getBtnStatus = this.getBtnStatus.bind(this)
-        this.getMoneySlider = this.getMoneySlider.bind(this)
-        this.getBorrowBtn = this.getBorrowBtn.bind(this)
         this.state = {
             availableLoan: this.props.data.creditLine,
             present_availableLoan: this.props.data.creditLine,
@@ -71,7 +67,6 @@ class ApplyLoan extends React.Component {
                     }
                     minDiv.style.left = minDiv_left + "px";
                     lineDivBar.style.width = minDiv_left + 15 + "px";
-                    //var loanNum = Math.round(parseInt(minDiv_left / (lineDiv.offsetWidth - 58 ) * al) / 100) * 100;
                     var lowestLoanNum = this.props.data.lowestLoan;
                     var lineWidth = getPosition(minDiv).left - 48;
                     var everyDragDistance = (al - lowestLoanNum) / 100;
@@ -83,7 +78,6 @@ class ApplyLoan extends React.Component {
                     } else {
                         this.setState({ show_tip: '最高' });
                     }
-                    //if (loanNum <= this.props.data.lowestLoan) { loanNum = this.props.data.lowestLoan }
                     this.setState({ creditLine: loanNum });
                     e.preventDefault();
                     e.stopPropagation();
@@ -97,7 +91,7 @@ class ApplyLoan extends React.Component {
         }
     }
 
-    getBorrowBtn() {
+    getBorrowBtn = () => {
         let btn = '--', st = this.props.data.borrowBtnStatus;
         let available_loan =
             <div className="available-loan">
@@ -120,7 +114,7 @@ class ApplyLoan extends React.Component {
         return btn
     }
 
-    getMoneySlider() {
+    getMoneySlider = () => {
         let slider = '--', st = this.props.data.borrowBtnStatus;
 
         let slider_bar =
@@ -151,7 +145,7 @@ class ApplyLoan extends React.Component {
         return slider
     }
 
-    getBtnStatus() {
+    getBtnStatus = () => {
         let btn = '--', st = this.props.data.borrowBtnStatus;
 
         let link;
@@ -188,21 +182,21 @@ class ApplyLoan extends React.Component {
         return btn
     }
 
-    getCreditLine() {
+    getCreditLine = () => {
         let line = '--', st = this.props.data.borrowBtnStatus;
-        // if (st === 3) $FW.Component.Toast(this.props.data.borrowBtnDesc);
         if (st === 5) line = this.props.data.creditLine;
         return line
     }
 
     render() {
 
+        let banner = <div className="ad">
+            <a onClick={() => gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png" /></a>
+        </div>
+
         return (
             <div className="apply-loan">
-                {!$FW.Browser.inApp() && <div className="header">放心花</div>}
-                {false && $FW.Browser.inApp() && <div className="ad">
-                    <a onClick={() => gotoHandler("https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html")}><img src="images/banner.png" /></a>
-                </div>}
+                {/*{$FW.Browser.inApp() && banner}*/}
                 <div className={$FW.Browser.inApp() ? "app-loan-num" : "loan-num"}>
                     {this.getBorrowBtn()}
                 </div>
@@ -234,12 +228,10 @@ const USER = $FW.Store.getUserDict();
 const user = USER;
 
 $FW.DOMReady(function () {
-    $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
-        token: USER.token,
-        userGid: USER.gid,
-        userId: USER.id,
-        sourceType: SOURCE_TYPE,
-        productId: 1
+    ReactDOM.render(<Header title={'放心花'} />, HEADER_NODE)
+
+    $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
+        productId: $FW.Format.urlQuery().pid || 1
     }).then(data => {
         ReactDOM.render(<ApplyLoan data={data} />, CONTENT_NODE)
     }, e => {
