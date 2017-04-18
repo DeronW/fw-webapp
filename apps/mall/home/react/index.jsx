@@ -79,6 +79,7 @@ const Mall = React.createClass({
 
         return (
             <div className="head-wrap">
+            
             <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
                     <div style={head_nav_wrap} className="head_nav_wrap">
                         <img className="m-logo" src={this.state.logoImage} />
@@ -113,6 +114,8 @@ const Mall = React.createClass({
                     <a href="/static/mall/product-list/index.html?searchSourceType=1">
                         <img src="images/nav-8.png" /><span>我可兑换</span></a>
                 </div>
+
+
                 <HotProducts bizNo={'TJ0000022'} count={10} />
                 <NewProducts bizNo={'TJ0000060'} count={10} />
                 <Grid_1 bizNo={'TJ0000042'} count={10} />
