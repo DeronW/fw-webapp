@@ -45,7 +45,7 @@
             }
         }
         componentDidMount() {
-            setTimeout(() => this.setState({ scale: 3}), 30)
+            setTimeout(() => this.setState({ scale: 4}), 30)
             setTimeout(() => this.setState({ opacity: 0 }), 200)
             setTimeout(() => this.setState({ dead: true }), 400)
         }
@@ -59,7 +59,7 @@
                 height: radius,
                 borderRadius: '50%',
                 background: 'rgba(0, 0, 0, 0.15)',
-                transition: 'all 400ms ease-out',
+                transition: 'all 300ms ease-out',
                 transform: `scale(${this.state.scale})`,
                 opacity: this.state.opacity
             }
