@@ -14,8 +14,8 @@ const Mall = React.createClass({
     getInitialState: function() {
         return {
             // background: "transparent",
-            logoImage: "images/logo_03.png",
-            avatarImage: "images/avatar_03.png",
+            logoImage: "images/logo_3.png",
+            avatarImage: "images/avatar_3.png",
             borderBottom: "none"
         }
     },
