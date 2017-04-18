@@ -62,7 +62,7 @@ class BorrowMoney extends React.Component {
     componentDidMount = () => {
         let pid = $FW.Format.urlQuery().pid;
         $FXH.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}`)
-            .then(data => this.setState({ product: data }));
+            .then(data => this.setState({ product: data}));
         $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`,{
             productId:pid
         }).then(data=>this.setState({borrowStatus:data.borrowBtnStatus}));
@@ -96,7 +96,7 @@ class BorrowMoney extends React.Component {
     }
     render() {
         let pid = $FW.Format.urlQuery().pid;
-
+        let labelList = this.state.product.productLabelList;
         return (
             <div className="">
                 <div className="">
@@ -109,11 +109,9 @@ class BorrowMoney extends React.Component {
                             </div>
                             <div className="b">
                                 <div className="tag" >
-                                    {/*
-                                        this.state.product.productLabelList.map((data, index) => {
-                                            return  <img src={ "images/tag-"+ data.labelType  +".png"} key={ index } />
-                                        })
-                                    */}
+                                    {labelList && labelList.map((data, index) => {
+                                        return  <img src={ "images/tag-"+ data.labelType  +".png"} key={ index } />
+                                    })}
                                 </div>
                             </div>
                         </div>
@@ -133,7 +131,7 @@ class BorrowMoney extends React.Component {
 						</div>
                         </div>
                         <div className="list">
-                            <div className="name-text">{this.state.product.fastLoanValue}日</div>
+                            <div className="name-text">{this.state.product.fastLoanValue}</div>
                             <div className="data-text">
                                 最快放款
 						</div>
