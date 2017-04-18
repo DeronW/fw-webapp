@@ -1618,7 +1618,10 @@ class Btn extends React.Component {
 					position: '0,0', //this.state.position,
 					userCookieID: '0000'
 				}).then(data => {
-					alert(data)
+                    // redirect to du-miao
+                    let u = $FW.Store.getUserDict();
+                    let params = `uid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
+                    location.href = `/api/order/v1/jump.shtml?${params}`
 				})
 			}
 
@@ -2265,6 +2268,9 @@ class ApplyBorrowMoney extends React.Component {
 			agreeShow: false
 		}
 	}
+    componentDidMount(){
+        // /api/userBase/v1/userInfoItem.json
+    }
 	callbackSelectList(selectList, title, popShow) {
 		this.setState({
 			popShow: popShow,
