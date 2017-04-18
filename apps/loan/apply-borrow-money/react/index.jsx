@@ -1369,14 +1369,14 @@ class SumList extends React.Component {
 				<div className="list">
 					<div className="name-text">借款金额</div>
 					<div className="r">
-						<div className="text">{ getSumMoneyPopVal.moneyVal == '' ? '请选择' : getSumMoneyPopVal.moneyVal }</div>
+						<div className="text">{ getSumMoneyPopVal.moneyVal == null ? '请选择' : getSumMoneyPopVal.moneyVal }</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
 				<div className="list">
 					<div className="name-text">期限</div>
 					<div className="r">
-						<div className="text"> { getSumMoneyPopVal.deadlineVal == '' ? '请选择' : getSumMoneyPopVal.deadlineVal + '个月' }</div>
+						<div className="text"> { getSumMoneyPopVal.deadlineVal == null ? '请选择' : getSumMoneyPopVal.deadlineVal + '个月' }</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
@@ -1398,7 +1398,7 @@ class BasicInfo extends React.Component {
 	}
 	render() {
 		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['城市 ', 'city'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
-		const { getSumMoneyPopVal ,getSelectList, getDataProps } = this.props
+		const { getSumMoneyPopVal ,getSelectList } = this.props
 
 		return (
 			<div className="basic-info">
@@ -1407,13 +1407,13 @@ class BasicInfo extends React.Component {
 					<div className="list">
 						<div className="name-text">姓名</div>
 						<div className="r no">
-							<div className="text">{ getDataProps.realName } </div>
+							<div className="text">{ getSumMoneyPopVal.realName } </div>
 						</div>
 					</div>
 					<div className="list">
 						<div className="name-text">身份证号</div>
 						<div className="r no">
-							<div className="text"> { getDataProps.idCard }</div>
+							<div className="text"> { getSumMoneyPopVal.idCard }</div>
 						</div>
 					</div>
 					{
@@ -1421,7 +1421,7 @@ class BasicInfo extends React.Component {
 							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data)}>
 									<div className="name-text">{ data[0] }</div>
 									<div className="r">
-										<div className="text">{ getSumMoneyPopVal[data[1]] == '' ? '请填写' : getSumMoneyPopVal[data[1]]}</div>
+										<div className="text">{ getSumMoneyPopVal[data[1]] == null ? '请填写' : getSumMoneyPopVal[data[1]]}</div>
 										<div className="arrow-icon"></div>
 									</div>
 								</div>
@@ -1462,7 +1462,7 @@ class UrgentContactPerson extends React.Component {
 							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data) }>
 							 		<div className="name-text">{ data[0] }</div>
 									<div className="r">
-										<div className="text">{ getSumMoneyPopVal[data[1]] == '' ? '未填写' :  getSumMoneyPopVal[data[1]] }</div>
+										<div className="text">{ getSumMoneyPopVal[data[1]] == null ? '未填写' :  getSumMoneyPopVal[data[1]] }</div>
 										<div className="arrow-icon"></div>
 									</div>
 								</div>
@@ -1504,7 +1504,7 @@ class JobInfo extends React.Component {
 							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data) }>
 									<div className="name-text">{ data[0] }</div>
 									<div className="r">
-										<div className="text">{ getSumMoneyPopVal[data[1]] == "" ? '请选择' : getSumMoneyPopVal[data[1]] }</div>
+										<div className="text">{ getSumMoneyPopVal[data[1]] == null ? '请选择' : getSumMoneyPopVal[data[1]] }</div>
 										<div className="arrow-icon"></div>
 									</div>
 								</div>
@@ -1573,27 +1573,27 @@ class Btn extends React.Component {
 		if(pushType == 'pushBtn') {
 			const { propsAgree, getSumMoneyPopVal, getDataProps } = this.props
 
-			if(getSumMoneyPopVal.moneyVal == '') {
+			if(getSumMoneyPopVal.moneyVal == null) {
 				$FW.Component.Toast("借款金融不能为空");
-			} else if(getSumMoneyPopVal.deadlineVal == '') {
+			} else if(getSumMoneyPopVal.deadlineVal == null) {
 				$FW.Component.Toast("期限不能为空");
-			} else if(getSumMoneyPopVal.creditCardVal == '') {
+			} else if(getSumMoneyPopVal.creditCardVal == null) {
 				$FW.Component.Toast("信用卡不能为空");
-			} else if(getSumMoneyPopVal.emailVal == '') {
+			} else if(getSumMoneyPopVal.emailVal == null) {
 				$FW.Component.Toast("邮箱不能为空");
-			} else if(getSumMoneyPopVal.homeVal == '') {
+			} else if(getSumMoneyPopVal.homeVal == null) {
 				$FW.Component.Toast("现居住地不能为空");
-			} else if(getSumMoneyPopVal.marriageVal == '') {
+			} else if(getSumMoneyPopVal.marriageVal == null) {
 				$FW.Component.Toast("婚姻不能为空");
-			} else if(getSumMoneyPopVal.urgentPerson == '') {
+			} else if(getSumMoneyPopVal.urgentPerson == null) {
 				$FW.Component.Toast("紧急联系人不能为空");
-			} else if(getSumMoneyPopVal.relationship == '') {
+			} else if(getSumMoneyPopVal.relationship == null) {
 				$FW.Component.Toast("联系人关系不能为空");
-			} else if(getSumMoneyPopVal.phone == '') {
+			} else if(getSumMoneyPopVal.phone == null) {
 				$FW.Component.Toast("联系人手机不能为空");
-			} else if(getSumMoneyPopVal.income == '') {
+			} else if(getSumMoneyPopVal.income == null) {
 				$FW.Component.Toast("税后收后不能为空");
-			} else if(getSumMoneyPopVal.yearsOfWork == '') {
+			} else if(getSumMoneyPopVal.yearsOfWork == null) {
 				$FW.Component.Toast("工作年限不能为空");
 			} else if (propsAgree == false) {
 				$FW.Component.Toast("点击同意");
@@ -1612,7 +1612,7 @@ class Btn extends React.Component {
 					emContact: getSumMoneyPopVal.urgentPerson,
 					emRelationship: getSumMoneyPopVal.relationshipIndex,
 					emMobile: getSumMoneyPopVal.phone,
-					income: getSumMoneyPopVal.incomeIndex,
+					income: getSumMoneyPopVal.income,
 					workExperience: getSumMoneyPopVal.yearsOfWorkIndex,
 					productId: $FW.Format.urlQuery().pid,
 					position: '0,0', //this.state.position,
@@ -1622,7 +1622,8 @@ class Btn extends React.Component {
                     let u = $FW.Store.getUserDict();
                     let params = `uid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
                     location.href = `/api/order/v1/jump.shtml?${params}`
-				})
+
+				}, false)
 			}
 
 
@@ -1730,23 +1731,7 @@ class WindowPop extends React.Component {
 		this.state = {
 			inputPlaceholder: '',
 			sumMoneyListObj: {
-				moneyVal: '',
-				deadlineVal: '',
-				creditCardVal: '',
-				emailVal: '',
-				homeVal: '',
-				city: '',
-				cityIndex: '',
-				marriageVal: '',
-				marriageIndex: '',
-				urgentPerson: '',
-				relationship: '',
-				relationshipIndex: '',
-				phone: '',
-				income: '',
-				incomeIndex: '',
-				yearsOfWork: '',
-				yearsOfWorkIndex: ''
+
 			},
 			inputType: '',
 			selectList: '',
@@ -2325,7 +2310,7 @@ class ApplyBorrowMoney extends React.Component {
 				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } />
 				<BasicInfo selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj }
 					getSelectList = { this.state.selectList }
-					getDataProps = { dataProps }
+
 				/>
 				<UrgentContactPerson
 					selectListFun = { this.callbackSelectList.bind(this) }
@@ -2342,7 +2327,7 @@ class ApplyBorrowMoney extends React.Component {
 					pushType= { 'pushBtn' }
 					getSumMoneyPopVal = { this.state.sumMoneyListObj }
 					propsAgree = { this.state.agreeShow }
-					getDataProps = { dataProps }
+
 				/>
 
 				{ this.state.popShow ?  <WindowPop

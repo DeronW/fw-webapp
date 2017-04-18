@@ -123,7 +123,6 @@ const Payment = React.createClass({
                     // let completeForm=formStart+content+formEnd;
                     // document.write(completeForm);
                     // document.forms[0].submit();
-
                     document.write(data.form);
                     // window.location.href="/static/mall/order-complete/index.html#form=" + (data.form);
                     // setTimeout(() => {
