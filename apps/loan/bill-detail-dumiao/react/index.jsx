@@ -7,8 +7,8 @@ class BillDetail extends React.Component{
             <div className="detail-container">
                 <div className="logo-wrap">
                     <div className="logo-container">
-                        <img src="images/dumiao-logo.png"/>
-                        <div className="logo-name">读秒</div>
+                        <img src={this.props.data.productLogo}/>
+                        <div className="logo-name">{this.props.data.productName}</div>
                     </div>
                 </div>
                 <div className="bill-detail-wrap">
@@ -18,7 +18,7 @@ class BillDetail extends React.Component{
                             <div className="bill-info">借款金额</div>
                         </div>
                         <div className="bill-right">
-                            <div className="bill-num">{this.props.data.tremNumStr}</div>
+                            <div className="bill-num">{this.props.data.termNumStr}</div>
                             <div className="bill-info">借款期限</div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@ class BillDetail extends React.Component{
 
                 </div>
                 <div className="enter-btn-wrap">
-                    <a className="enter-btn" href={`/api/order/v1/jump.html?sourceType=${SOURCE_TYPE}&token=${USER.token}&userGid=${USER.gid}userId=${USER.id}&uid=${USER.uid}`}>点击进入读秒</a>
+                    <a className="enter-btn" href={`${API_PATH}/api/order/v1/jump.html?sourceType=${SOURCE_TYPE}&token=${USER.token}&userGid=${USER.gid}userId=${USER.id}&uid=${USER.uid}`}>点击进入读秒</a>
                 </div>
             </div>
         )

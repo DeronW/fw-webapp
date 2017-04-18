@@ -1541,7 +1541,9 @@ class Agree extends React.Component {
 			<div className="agree">
 				<div className={ this.state.agreeShow ? 'agree-icon select-icon' : 'agree-icon'  } onClick={ this.handlerAgree.bind(this)  }></div>
 				<div className="text">
-					点击“申请借款”即视为同意<a href="">《读秒开户授权书》</a>、<a href="">《个人信息采集授权说明》</a>
+					点击“申请借款”即视为同意
+                    <a href="/static/loan/protocol-dumiao-openaccount/index.html">《读秒开户授权书》</a>、
+                    <a href="/static/loan/protocol-personal-collect/index.html">《个人信息采集授权说明》</a>
 				</div>
 			</div>
 		)
@@ -1930,6 +1932,8 @@ class WindowPop extends React.Component {
 			deadlineVal: this.state.sumMoneyListObj.deadlineVal,
 			creditCardVal: this.state.sumMoneyListObj.creditCardVal,
 			emailVal: this.state.sumMoneyListObj.emailVal,
+			realName: this.state.sumMoneyListObj.realName,
+			idCard: this.state.sumMoneyListObj.idCard,
 			homeVal: this.state.sumMoneyListObj.homeVal,
 			city: this.state.sumMoneyListObj.city,
 			cityIndex: this.state.sumMoneyListObj.cityIndex,
@@ -2257,6 +2261,31 @@ class ApplyBorrowMoney extends React.Component {
 		}
 	}
     componentDidMount(){
+			// this.setState({
+			// 	sumMoneyListObj: {
+			// 		moneyVal: '',
+			// 		deadlineVal: '',
+			// 		creditCardVal: 12342412,
+			// 		emailVal: null,
+			// 		homeVal: null,
+			// 		realName: 'xx',
+			// 		idCard: 2414521521,
+			// 		city: null,
+			// 		cityIndex: '',
+			// 		marriageVal: null,
+			// 		marriageIndex: 1,
+			// 		urgentPerson: null,
+			// 		relationship: null,
+			// 		relationshipIndex: null,
+			// 		phone: null,
+			// 		income: null,
+			// 		incomeIndex: null,
+			// 		yearsOfWork: null,
+			// 		yearsOfWorkIndex: null
+			// 	}
+
+			// })
+
 
         $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
             let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
@@ -2306,6 +2335,8 @@ class ApplyBorrowMoney extends React.Component {
 				deadlineVal: obj.deadlineVal,
 				creditCardVal: obj.creditCardVal,
 				emailVal: obj.emailVal,
+				realName: obj.realName,
+				idCard: obj.idCard,
 				homeVal: obj.homeVal,
 				city: obj.city,
 				cityIndex: obj.cityIndex,
