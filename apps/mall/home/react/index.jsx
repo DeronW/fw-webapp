@@ -73,7 +73,7 @@ const Mall = React.createClass({
             <div className="head-wrap">
 
             <div className={iOSApp ? "head-items head-images-ios" : "head-items"}>
-                    <div className=iOSApp ? "head_nav_wrap head_ios" : "head_nav_wrap">
+                    <div className={iOSApp ? "head_nav_wrap head_ios" : "head_nav_wrap"}>
                         <img className="m-logo" src={this.state.logoImage} />
                         <a href="/static/mall/product-list/index.html?searchSourceType=2"
                             className="search-bar-a">
