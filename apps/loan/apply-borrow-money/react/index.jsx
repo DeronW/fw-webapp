@@ -2174,6 +2174,8 @@ class WindowPop extends React.Component {
 					</div>
 		}
 
+
+
 		return (
 			<div className="window-pop">
 				<div className="top">
@@ -2183,7 +2185,10 @@ class WindowPop extends React.Component {
 
 				{ selectList != 'marriageVal' && selectList != 'relationship' && selectList != 'income'  && selectList != 'yearsOfWork' && selectList != 'city' ?
 					<div className="cnt-pop">
-						<div className="ui-title">工作信息</div>
+						{
+							selectList == 'creditCardVal' ?  <div className="ui-title">请提供与实际借款人姓名一致的信用卡号</div> : null
+						}
+						
 						<div className="ui-list">
 							<div className="list">
 								<div className="name-text">{ selectList == 'sumMoney'  ?  '借款金额' : popTitle }</div>
