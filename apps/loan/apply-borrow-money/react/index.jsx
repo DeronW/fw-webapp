@@ -1615,15 +1615,13 @@ class Btn extends React.Component {
 					income: getSumMoneyPopVal.incomeIndex,
 					workExperience: getSumMoneyPopVal.yearsOfWorkIndex,
 					productId: $FW.Format.urlQuery().pid,
-					position: this.state.position,
-					userCookieID: navigator.userAgent,
-					// clientIP: '192.168.2.5'
-					// token: JSON.parse($FW.Store.exportUserDict()).token,
-					// uid	: JSON.parse($FW.Store.exportUserDict()).uid,
-					// userGid: JSON.parse($FW.Store.exportUserDict()).userGid,
-					// userId: JSON.parse($FW.Store.exportUserDict()).userId
-				}) .then(data => {
-					alert(data)
+					position: '0,0', //this.state.position,
+					userCookieID: '0000'
+				}).then(data => {
+                    // redirect to du-miao
+                    let u = $FW.Store.getUserDict();
+                    let params = `uid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
+                    location.href = `/api/order/v1/jump.shtml?${params}`
 				})
 			}
 
@@ -2270,6 +2268,9 @@ class ApplyBorrowMoney extends React.Component {
 			agreeShow: false
 		}
 	}
+    componentDidMount(){
+        // /api/userBase/v1/userInfoItem.json
+    }
 	callbackSelectList(selectList, title, popShow) {
 		this.setState({
 			popShow: popShow,
