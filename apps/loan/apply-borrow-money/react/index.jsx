@@ -938,10 +938,6 @@ class ApplyBorrowMoney extends React.Component {
 
 		return (
 			<div className="">
-				asdfas
-				{
-					navigator.geolocation.getCurrentPosition(on_success, on_error)
-				}
 
 				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } />
 				<BasicInfo selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } 
