@@ -96,7 +96,7 @@ const Payment = React.createClass({
             location.href = link;
         }
         else if (index == 'z') {
-            window.location.href='/static/mall/order-template/index.html?orderTime=' + orderTime +
+            window.location.href='/static/mall/order-template/index.html?orderTime=' + result.orderTime +
                         '&amount=' + result.amount  + '&orderBizNo=' + result.orderBizNo + '&orderGroupBizNo=' + result.orderGroupBizNo;
         //     var queryNew = $FW.Format.urlQuery();
         //     console.log(queryNew);
