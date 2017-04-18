@@ -7,8 +7,8 @@ class BillDetail extends React.Component{
             <div className="detail-container">
                 <div className="logo-wrap">
                     <div className="logo-container">
-                        <img src="images/dumiao-logo.png"/>
-                        <div className="logo-name">读秒</div>
+                        <img src={this.props.data.productLogo}/>
+                        <div className="logo-name">{this.props.data.productName}</div>
                     </div>
                 </div>
                 <div className="bill-detail-wrap">
