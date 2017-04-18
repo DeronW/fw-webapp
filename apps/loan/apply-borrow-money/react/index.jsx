@@ -1,4 +1,4 @@
-const verificationNum = val => {
+ const verificationNum = val => {
 	const reg = new RegExp('^[0-9]*$')
 
 	return reg.test(val)
