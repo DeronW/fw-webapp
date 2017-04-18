@@ -66,6 +66,7 @@ const PROTOCOL_PAGES = [
     'protocol-register', // APP注册协议
     'protocol-borrowing', // 借款服务协议
     'protocol-partner', // 借款协议双方
+    'protocol-personinfo-collect' //个人信息采集授权声明
 ]
 
 const DEVELOPING_PAGES = [
