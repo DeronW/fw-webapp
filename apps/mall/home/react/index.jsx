@@ -67,8 +67,8 @@ const Mall = React.createClass({
         var head_nav_wrap = {
             // background: this.state.background,
             width: "100%",
-            paddingTop: "24px",
-            paddingBottom: "20px",
+            paddingTop: "22px",
+            paddingBottom: "22px",
             transition: "1s all"
         };
 
@@ -84,7 +84,7 @@ const Mall = React.createClass({
                         <img className="m-logo" src={this.state.logoImage} />
                         <a href="/static/mall/product-list/index.html?searchSourceType=2"
                             className="search-bar-a">
-                            <img className="search-icon" src="images/search.png" />
+                            <img className="search-icon" src="images/icon_search.png" />
                             <div className="search-bar">请您输入关键字</div>
                         </a>
                         <a className="index-avatar" href="/static/mall/user/index.html">
