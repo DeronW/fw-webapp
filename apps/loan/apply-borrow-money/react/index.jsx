@@ -42,7 +42,7 @@ const phoneEeg = val => {
 // 	}
 // }
 
-navigator.geolocation.getCurrentPosition(on_success, on_error);
+// navigator.geolocation.getCurrentPosition(on_success, on_error);
 
 
 class SumList extends React.Component {
