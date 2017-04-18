@@ -15,6 +15,36 @@ const phoneEeg = val => {
 	return reg.test(val)
 }
 
+// function on_success(pos) {
+//     // 将会获得以下信息
+//     // var latitude = pos.coords.latitude;
+//     // var longitude = pos.coords.longitude;
+//     // var accuracy = pos.coords.accuracy;
+//     // var timestamp = pos.timestamp;
+//     // // 以下信息不一定提供，和具体设备有关
+//     // var altitude = pos.coords.altitude;
+//     // var altitudeAccuracy = pos.coords.altitudeAccuracy;
+//     // var heading = pos.coords.heading;
+//     // var speed = pos.coords.speed;
+
+// 	return {
+// 		latitude: pos.coords.latitude,
+// 		longitude: pos.coords.longitude
+// 	}
+// }
+
+// function on_error(error) {
+//     console.log(error.message);
+//     if (error.code == error.PERMISSION_DENIED) {
+//         console.log("User denied Geolocation.");
+//     } else {
+
+// 	}
+// }
+
+navigator.geolocation.getCurrentPosition(on_success, on_error);
+
+
 class SumList extends React.Component {
 	constructor(props) {
 		super(props)
@@ -216,13 +246,28 @@ class Agree extends React.Component {
 class Btn extends React.Component {
 	constructor() {
 		super()
-		
+		this.state = {
+			position: '0, 0'
+		}	
+	}
+	componentDidMount() {		
+		navigator.geolocation.getCurrentPosition((pos) => {
+			this.setState({
+				position: pop.coords.latitude + ', ' +pos.coords.longitude
+			})
+		}, (error) => {
+			if (error.code == error.PERMISSION_DENIED) {
+				this.setState({
+					position: '0, 0'
+				})
+			}
+		});
 	}
 	handlerBtn(val) {
 		const { pushType } = this.props
 
 		if(pushType == 'pushBtn') {
-			const { propsAgree, getSumMoneyPopVal } = this.props
+			const { propsAgree, getSumMoneyPopVal, getDataProps } = this.props
 			
 			if(getSumMoneyPopVal.moneyVal == '') {
 				$FW.Component.Toast("借款金融不能为空");
@@ -250,22 +295,29 @@ class Btn extends React.Component {
 				$FW.Component.Toast("点击同意");
 			} else {
 				$FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`), {
-					balance: '',
-					term: '',
-					realName: '',
-					idCard: '',
-					creditCard: '',
-					email: '',
-					city: '',
-					homeSituation: '',
-					emContact: '',
-					emRelationship: '',
-					emMobile: '',
-					income: '',
-					workExperience: ''
+					balance: getSumMoneyPopVal.moneyVal,
+					term: getSumMoneyPopVal.deadlineVal,
+					realName: getDataProps.realName,
+					idCard: getDataProps.idCard,
+					creditCard: getSumMoneyPopVal.creditCardVal,
+					email: getSumMoneyPopVal.email,
+					city: getSumMoneyPopVal.homeVal,
+					homeSituation: getSumMoneyPopVal.marriageIndex,
+					emContact: getSumMoneyPopVal.urgentPerson,
+					emRelationship: getSumMoneyPopVal.relationshipIndex,
+					emMobile: getSumMoneyPopVal.phone,
+					income: getSumMoneyPopVal.income,
+					workExperience: getSumMoneyPopVal.yearsOfWorkIndex,
+					productId: $FW.Format.urlQuery().pid,
+					position: this.state.position,
+					userCookieID: navigator.userAgent,
+					token: JSON.parse($FW.Store.exportUserDict()).token,
+					uid	: JSON.parse($FW.Store.exportUserDict()).uid,
+					userGid: JSON.parse($FW.Store.exportUserDict()).userGid,
+					userId: JSON.parse($FW.Store.exportUserDict()).userId
 				}
         		.then(data => {
-
+					console.log(data)
 				})
 			}
 
@@ -886,6 +938,11 @@ class ApplyBorrowMoney extends React.Component {
 
 		return (
 			<div className="">
+				asdfas
+				{
+					navigator.geolocation.getCurrentPosition(on_success, on_error)
+				}
+
 				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } />
 				<BasicInfo selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } 
 					getSelectList = { this.state.selectList }
@@ -906,6 +963,7 @@ class ApplyBorrowMoney extends React.Component {
 					pushType= { 'pushBtn' }
 					getSumMoneyPopVal = { this.state.sumMoneyListObj }
 					propsAgree = { this.state.agreeShow }
+					getDataProps = { dataProps }
 				/>
 
 				{ this.state.popShow ?  <WindowPop  
