@@ -1541,7 +1541,9 @@ class Agree extends React.Component {
 			<div className="agree">
 				<div className={ this.state.agreeShow ? 'agree-icon select-icon' : 'agree-icon'  } onClick={ this.handlerAgree.bind(this)  }></div>
 				<div className="text">
-					点击“申请借款”即视为同意<a href="">《读秒开户授权书》</a>、<a href="">《个人信息采集授权说明》</a>
+					点击“申请借款”即视为同意
+                    <a href="/static/loan/protocol-dumiao-openaccount/index.html">《读秒开户授权书》</a>、
+                    <a href="/static/loan/protocol-personal-collect/index.html">《个人信息采集授权说明》</a>
 				</div>
 			</div>
 		)
