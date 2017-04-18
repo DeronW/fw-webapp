@@ -67,14 +67,23 @@ class BorrowMoney extends React.Component {
             productId:pid
         }).then(data=>this.setState({borrowStatus:data.borrowBtnStatus}));
         $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
-            .then(data=>this.setState({ableEnter:data.code,tryOtherLoanMsg:data.message}, err=>this.setState({ableEnter:data.code, tryOtherLoanMsg:data.message})));
+            .then(data=>{
+                 this.setState({ableEntter:data.code})
+            }, err=>{
+                if(err.code == 1001002){
+                    this.setState({ableEnter:data.code})
+                }else{
+                    this.setState({ableEnter:data.code, tryOtherLoanMsg:data.message})
+                }
+            }
+         );
     }
     clickHandler(){
         let borrowStatus = this.state.borrowStatus;
         let ableEnter = this.state.ableEnter;
         if(borrowStatus == 1 || borrowStatus == 101){
             location.href = '/static/loan/user-card-set/index.html';
-        }else if(borrowStatus == 2 || borrowStatus == 3 || borrowStatus == 5 || ableEnter == 10000){
+        }else if(ableEnter == 10000){
             location.href = '/static/loan/apply-borrow-money/index.html';
         }else if(ableEnter == 1001002){
              this.setState({dumiaoEnterPopShow:true});
