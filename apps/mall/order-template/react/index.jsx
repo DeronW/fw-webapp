@@ -1,8 +1,10 @@
 const Form = React.createClass({
     render: function () {
-        let query = $FW.Format.urlQuery();
+        let hash = location.hash.splice(6)
         return (
-            <div>{query.form}</div>
+            <div>
+                {document.write(hash)}
+            </div>
         )
     }
 });

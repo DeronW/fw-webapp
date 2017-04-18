@@ -125,7 +125,7 @@ const Payment = React.createClass({
                     // document.forms[0].submit();
 
                     // document.write(data.form);
-                    window.location.href="/static/mall/order-complete/index.html?form=" + (data.form);
+                    window.location.href="/static/mall/order-complete/index.html#form=" + (data.form);
                     setTimeout(() => {
                         this.queryState();
                     }, 3000);
