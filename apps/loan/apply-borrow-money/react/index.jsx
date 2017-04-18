@@ -66,8 +66,9 @@ class BasicInfo extends React.Component {
 		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
 		const { getSumMoneyPopVal ,getSelectList, getDataProps } = this.props
 
-		console.log(getDataProps.data.idCard)
-		console.log(getDataProps.data.realName)
+		console.log(getDataProps.data)
+		console.log(getDataProps.data.data.idCard)
+		console.log(getDataProps.data.data.realName)
 
 		return (
 			<div className="basic-info">
@@ -867,7 +868,7 @@ class ApplyBorrowMoney extends React.Component {
 	}
 	render() {
 		const { dataProps } = this.props
-		
+
 		return (
 			<div className="">
 				<SumList selectListFun = { this.callbackSelectList.bind(this) } getSumMoneyPopVal = { this.state.sumMoneyListObj } />
