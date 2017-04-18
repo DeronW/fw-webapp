@@ -1606,7 +1606,7 @@ class Btn extends React.Component {
 					realName: getDataProps.realName,
 					idCard: getDataProps.idCard,
 					creditCard: getSumMoneyPopVal.creditCardVal,
-					email: getSumMoneyPopVal.email,
+					email: getSumMoneyPopVal.emailVal,
 					city: getSumMoneyPopVal.city,
 					homeSituation: getSumMoneyPopVal.marriageIndex,
 					emContact: getSumMoneyPopVal.urgentPerson,
@@ -1617,7 +1617,7 @@ class Btn extends React.Component {
 					productId: $FW.Format.urlQuery().pid,
 					position: this.state.position,
 					userCookieID: navigator.userAgent,
-					clientIP: '192.168.2.5'
+					// clientIP: '192.168.2.5'
 					// token: JSON.parse($FW.Store.exportUserDict()).token,
 					// uid	: JSON.parse($FW.Store.exportUserDict()).uid,
 					// userGid: JSON.parse($FW.Store.exportUserDict()).userGid,
