@@ -253,7 +253,7 @@ class Btn extends React.Component {
 	componentDidMount() {		
 		navigator.geolocation.getCurrentPosition((pos) => {
 			this.setState({
-				position: pop.coords.latitude + ', ' +pos.coords.longitude
+				position: pos.coords.latitude + ', ' +pos.coords.longitude
 			})
 		}, (error) => {
 			if (error.code == error.PERMISSION_DENIED) {
