@@ -18,7 +18,7 @@ class BillDetail extends React.Component{
                             <div className="bill-info">借款金额</div>
                         </div>
                         <div className="bill-right">
-                            <div className="bill-num">{this.props.data.tremNumStr}</div>
+                            <div className="bill-num">{this.props.data.termNumStr}</div>
                             <div className="bill-info">借款期限</div>
                         </div>
                     </div>
