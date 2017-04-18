@@ -195,29 +195,27 @@ class ExitBtn extends React.Component {
 }
 
 class UserInfoWrap extends React.Component {
-  constructor(){
-    super()
-    this.state = {
-      phoneNum: null
+    constructor() {
+        super();
+        this.state = {
+            phoneNum: null
+        };
     }
-  }
-  componentDidMount = () => {
 
-          $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
-            this.setState({phoneNum: data.mobile})
-      }, e => {$FW.Component.Toast(e.message)});
-  }
+    componentDidMount = () => {
+        $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
+            this.setState({phoneNum: data.mobile});
+        }, e => {$FW.Component.Toast(e.message)});
+    }
+
     render() {
-        let isLoggedIn = $FW.Store.getUserToken() ? true : false;
         return (
             <div className="user-info-wrap">
                 <AvatarCard phoneNum={this.state.phoneNum}/>
                 <FollowWXEntry/>
                 <BillEntry/>
                 <MajorUserInfo/>
-                {isLoggedIn &&
-                    <ExitBtn/>
-                }
+                <ExitBtn/>
             </div>
         )
     }

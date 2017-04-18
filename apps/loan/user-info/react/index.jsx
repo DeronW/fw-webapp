@@ -135,17 +135,20 @@ class InfoItemInputWrap extends React.Component {
     }
 
     render() {
-        let value = this.props.value,
-            isSelectItem = this.isSelectItem,
-            selectLabelColor = value !== null ? '#333' : '#999',
+        let value = this.props.value;
+        let disableInput = (this.props.infoNameCN === '姓名' || this.props.infoNameCN === '身份证号') ? true : false,
+            idValue = id_mask(value),
             inputItemDis = (
                 <input
                     className="info-text-input"
                     placeholder={this.props.placeholder}
-                    value={value}
+                    value={this.props.infoNameCN === '身份证号' ? idValue : value}
+                    disabled={disableInput}
                     onChange={(e) => {this.props.handleInput(this.props.itemIndex, e.target.value)}}>
                 </input>
-            ),
+            );
+        let isSelectItem = this.isSelectItem,
+            selectLabelColor = value !== null ? '#333' : '#999',
             selectItemDis;
         if (isSelectItem) {
             selectItemDis = (
@@ -696,6 +699,8 @@ const CITYLIST = {
     "郑州市"
   ]
 };
+
+var id_mask = n => String(n).replace(/(\d{4})\d{10}(\d{4})/, "$1**********$2");
 
 // render ReactDom
 $FW.DOMReady(() => {
