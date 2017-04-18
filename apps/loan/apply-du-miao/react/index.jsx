@@ -69,7 +69,7 @@ class BorrowMoney extends React.Component {
         $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
             .then(data=>{
                  console.log(data.code)
-                 this.setState({ableEnter:data.code})
+                 this.setState({ableEnter:10000})
             }, err=>{
                 if(err.code == 1001002){
                     this.setState({ableEnter:err.code})
