@@ -66,9 +66,8 @@ class BasicInfo extends React.Component {
 		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
 		const { getSumMoneyPopVal ,getSelectList, getDataProps } = this.props
 
-		console.log(getDataProps.data)
-		console.log(getDataProps.data.data.idCard)
-		console.log(getDataProps.data.data.realName)
+		console.log(getDataProps)
+		
 
 		return (
 			<div className="basic-info">
