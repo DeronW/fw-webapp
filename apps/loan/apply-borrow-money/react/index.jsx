@@ -66,9 +66,6 @@ class BasicInfo extends React.Component {
 		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
 		const { getSumMoneyPopVal ,getSelectList, getDataProps } = this.props
 
-		console.log(getDataProps)
-		
-
 		return (
 			<div className="basic-info">
 				<div className="ui-title">基本信息</div>
@@ -76,13 +73,13 @@ class BasicInfo extends React.Component {
 					<div className="list">
 						<div className="name-text">姓名</div>
 						<div className="r no">
-							<div className="text">熊先生</div>
+							<div className="text">{ getDataProps.realName } </div>
 						</div>
 					</div>
 					<div className="list">
 						<div className="name-text">身份证号</div>
 						<div className="r no">
-							<div className="text">130198198501230123</div>
+							<div className="text"> { getDataProps.idCard }</div>
 						</div>
 					</div>
 					{
