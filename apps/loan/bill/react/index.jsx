@@ -52,10 +52,10 @@ class Content extends React.Component {
         let order_item = (order, index) => {
             let link = order.productId == 1 ?
                 `/static/loan/bill-detail/index.html?uuid=${order.loanGid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${order.uuid}`;
-            let logo = order.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png";
+            //let logo = order.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png";
 
             return <Nav className="list_li" key={`${order.orderGid}${index}`} href={link}>
-                <div className="list-img"><img src={logo} /></div>
+                <div className="list-img"><img src={order.productLogo} /></div>
                 <div className="list-content">
                     <div className="apply-num">借款金额:{order.loanAmtStr}元</div>
                     <div className="apply-duration">借款期限:{order.termNumStr}</div>
