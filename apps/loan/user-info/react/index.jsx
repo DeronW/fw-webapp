@@ -154,18 +154,20 @@ class InfoItemInputWrap extends React.Component {
         }
         let selectOptions = [];
         if (isSelectItem && this.props.infoNameCN !== '所在城市') {
-            selectOptions = this.props.options.map((option, index) => (
-                <div
-                    className="select-option"
-                    key={index}
-                    onClick={() => {
-                        this.toggleExpand();
-                        this.props.handleInput(this.props.itemIndex, index);
-                }}>
-                    {option}
-                    {value === index && <img className="selected-icon" src="images/selected.png"></img>}
-                </div>
-            ));
+            for (let option in this.props.options) {
+                selectOptions.push(
+                    <div
+                        className="select-option"
+                        key={this.props.options[option]}
+                        onClick={() => {
+                            this.toggleExpand();
+                            this.props.handleInput(this.props.itemIndex, option);
+                    }}>
+                        {this.props.options[option]}
+                        {value === option && <img className="selected-icon" src="images/selected.png"></img>}
+                    </div>
+                );
+            }
         }
         let selectOptionsWrap = this.props.infoNameCN === '所在城市' ?
             (<div className="city-select-mask">
@@ -284,10 +286,12 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'marriage-info',
                         infoNameCN: '婚姻',
-                        value: this.props.userInfo.homeSituation - 1,
-                        options: [
-                            '未婚', '已婚，无子女', '已婚，有子女'
-                        ],
+                        value: this.props.userInfo.homeSituation.toString(),
+                        options: {
+                            '1': '未婚',
+                            '2': '已婚，无子女',
+                            '3': '已婚，有子女'
+                        },
                         placeholder: '请选择'
                     }
                 ]
@@ -302,16 +306,16 @@ class UserInfoWrap extends React.Component {
                     }, {
                         infoID: 'ec-rel-info',
                         infoNameCN: '联系人关系',
-                        value: this.props.userInfo.emRelationship,
-                        options: [
-                            '父母',
-                            '配偶',
-                            '子女',
-                            '兄弟姐妹',
-                            '同事',
-                            '同学',
-                            '朋友'
-                        ],
+                        value: this.props.userInfo.emRelationship.toString(),
+                        options: {
+                            '0': '父母',
+                            '1': '配偶',
+                            '2': '子女',
+                            '3': '兄弟姐妹',
+                            '4': '同事',
+                            '5': '同学',
+                            '6': '朋友'
+                        },
                         placeholder: '请选择'
                     }, {
                         infoID: 'ec-mobile-info',
@@ -326,18 +330,25 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'salary-info',
                         infoNameCN: '税后月收入',
-                        value: this.props.userInfo.income,
-                        options: [
-                            '3000元以下', '3001-5000元', '5001-10000元', '10001-20000元', '20000元以上'
-                        ],
+                        value: this.props.userInfo.income.toString(),
+                        options: {
+                            '0': '3000元以下',
+                            '1': '3001-5000元',
+                            '2': '5001-10000元',
+                            '3': '10001-20000元',
+                            '4': '20000元以上'
+                        },
                         placeholder: '请选择'
                     }, {
                         infoID: 'work-years-info',
                         infoNameCN: '工作年限',
-                        value: this.props.userInfo.workExperience,
-                        options: [
-                            '1年以下', '1-5年', '6-10年', '10年以上'
-                        ],
+                        value: this.props.userInfo.workExperience.toString(),
+                        options: {
+                            '0': '1年以下',
+                            '1': '1-5年',
+                            '2': '6-10年',
+                            '3': '10年以上'
+                        },
                         placeholder: '请选择'
                     }
                 ]
@@ -371,7 +382,7 @@ class UserInfoWrap extends React.Component {
             email: this.state.basicInfo[0][3].value,
             city: this.state.basicInfo[1][0].value,
             address: this.state.basicInfo[1][1].value,
-            homeSituation: this.state.basicInfo[2][0].value + 1,
+            homeSituation: this.state.basicInfo[2][0].value,
             emContact: this.state.ecInfo[0][0].value,
             emRelationship: this.state.ecInfo[0][1].value,
             emMobile: this.state.ecInfo[0][2].value,

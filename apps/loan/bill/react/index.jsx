@@ -2,7 +2,7 @@ class Content extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            current_type: '1',
+            current_type: window.location.hash.slice(1) || '1',
             tab: {
                 '1': { name: '申请中', page_no: 1, order_list: [] },
                 '2': { name: '还款中', page_no: 1, order_list: [] },
@@ -36,6 +36,7 @@ class Content extends React.Component {
     }
     switchTabHandler = (type) => {
         this.setState({ current_type: type }, this.loadMoreHandler);
+        window.location.hash = type;
     }
     render() {
         let { current_type, tab } = this.state;

@@ -97,7 +97,7 @@ const Payment = React.createClass({
         }
         else if (index == 'z') {
             var queryNew = $FW.Format.urlQuery();
-            console.log(queryNew);
+            // console.log(queryNew);
              //申请支付
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
@@ -111,18 +111,19 @@ const Payment = React.createClass({
                     UserId:""
                 },
             }).then(data=> {
+                console.log(111);
             $FW.Component.showAjaxLoading('mini');
 
-                    // document.write(data.form);
-                    window.location.href="/static/mall/order-complete/index.html?form=" + (data.form);
-                    setTimeout(() => {
-                        this.queryState();
-                    }, 3000);
-                    setTimeout(() => {
-                        this.queryState('final');
-                    }, 6000);
+                    document.write(data.form);
+                    // window.location.href="/static/mall/order-complete/index.html?form=" + (data.form);
+                    // setTimeout(() => {
+                    //     this.queryState();
+                    // }, 3000);
+                    // setTimeout(() => {
+                    //     this.queryState('final');
+                    // }, 6000);
         }, e => {
-            $FW.Component.Alert(e.message);
+            $FW.Component.Alert("www"+e.message);
         })
         }
         else {
@@ -255,8 +256,7 @@ return (
                         <div className={this.state.index=='w' ? "pay-check active" : "pay-check"}></div>
                     </div>
                 */}
-                {
-                /*<div className="pay-item" onClick={this.payCheck.bind(this,'z')}>
+                <div className="pay-item" onClick={this.payCheck.bind(this,'z')}>
                 <div className="pay-icon"><img src="images/alipay.jpg"/></div>
                 <div className="pay-name">
                 <div className="pay-title">支付宝</div>
@@ -264,7 +264,6 @@ return (
                 </div>
                 <div className={this.state.index=='z' ? "pay-check active" : "pay-check"}></div>
                 </div>
-            */}
 
                 </div>
                 <div className="pay-bar">
