@@ -30,8 +30,7 @@ $FW.DOMReady(function () {
         $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'wx' : 'app'}`);
         $(".invitation-code span").text(USER.invitCode);
     }, (err) => {
-        console.log(err.message)
-        //location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
+        location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });
 
     function loadMoreHandler(done) {
