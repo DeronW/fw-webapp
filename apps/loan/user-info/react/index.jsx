@@ -390,6 +390,7 @@ class UserInfoWrap extends React.Component {
             workExperience: this.state.workInfo[0][1].value
         };
         $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, submitData).then(data => {
+            console.log(typeof this.state.basicInfo[2][0].value);
             console.log(typeof data.userDataDetail.homeSituation);
             $FW.Component.Toast('信息已提交');
             this.setState({showSubmitBtn: false});
