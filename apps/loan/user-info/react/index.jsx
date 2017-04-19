@@ -295,7 +295,7 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'marriage-info',
                         infoNameCN: '婚姻',
-                        value: this.props.userInfo.homeSituation,
+                        value: this.props.userInfo.homeSituation - 1,
                         options: [
                             '未婚', '已婚，无子女', '已婚，有子女'
                         ],
@@ -380,10 +380,10 @@ class UserInfoWrap extends React.Component {
             email: this.state.basicInfo[0][3].value,
             city: this.state.basicInfo[1][0].value,
             address: this.state.basicInfo[1][1].value,
-            homeSituation: this.state.basicInfo[2][0].value,
+            homeSituation: this.state.basicInfo[2][0].value + 1,
             emContact: this.state.ecInfo[0][0].value,
-            emMobile: this.state.ecInfo[0][1].value,
-            emRelationship: this.state.ecInfo[0][2].value,
+            emMobile: this.state.ecInfo[0][2].value,
+            emRelationship: this.state.ecInfo[0][1].value,
             income: this.state.workInfo[0][0].value,
             workExperience: this.state.workInfo[0][1].value
         }).then(data => {
