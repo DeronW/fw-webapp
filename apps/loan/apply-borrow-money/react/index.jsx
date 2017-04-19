@@ -193,7 +193,7 @@ class Agree extends React.Component {
 				<div className="text">
 					点击“申请借款”即视为同意
                     <a href="/static/loan/protocol-dumiao-openaccount/index.html">《读秒开户授权书》</a>、
-                    <a href="/static/loan/protocol-personal-collect/index.html">《个人信息采集授权说明》</a>
+                    <a href="/static/loan/protocol-personinfo-collect/index.html">《个人信息采集授权说明》</a>
 				</div>
 			</div>
 		)
@@ -560,11 +560,11 @@ class ApplyBorrowMoney extends React.Component {
 	}
 }
 
-ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
+//ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
 
-// $FW.DOMReady(() => {
-//     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
-// 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
-//         .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
-// })
+$FW.DOMReady(() => {
+    ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
+	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
+        .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
+})
 
