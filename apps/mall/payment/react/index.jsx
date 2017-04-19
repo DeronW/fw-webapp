@@ -255,8 +255,7 @@ return (
                         <div className={this.state.index=='w' ? "pay-check active" : "pay-check"}></div>
                     </div>
                 */}
-                {
-                /*<div className="pay-item" onClick={this.payCheck.bind(this,'z')}>
+                <div className="pay-item" onClick={this.payCheck.bind(this,'z')}>
                 <div className="pay-icon"><img src="images/alipay.jpg"/></div>
                 <div className="pay-name">
                 <div className="pay-title">支付宝</div>
@@ -264,8 +263,6 @@ return (
                 </div>
                 <div className={this.state.index=='z' ? "pay-check active" : "pay-check"}></div>
                 </div>
-            */}
-
                 </div>
                 <div className="pay-bar">
                 <a className="pay-btn" onClick={this.payHandler}>去支付</a>
