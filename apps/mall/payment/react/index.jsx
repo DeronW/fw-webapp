@@ -123,7 +123,7 @@ const Payment = React.createClass({
                     //     this.queryState('final');
                     // }, 6000);
         }, e => {
-            console.log(222);
+            console.log(222www);
             $FW.Component.Alert(e.message);
         })
         }
