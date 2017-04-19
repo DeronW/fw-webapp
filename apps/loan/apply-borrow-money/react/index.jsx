@@ -369,7 +369,7 @@ class Btn extends React.Component {
 		}
 	}
 	render() {
-		const { getSelectListProps } = this.props
+		const { getSelectListProps, pushType } = this.props
 
 		const btnStyle = {
 			position: 'fixed',
@@ -382,7 +382,7 @@ class Btn extends React.Component {
 		}
 
 		return (
-			<div className="btn-area" style={ getSelectListProps == 'city' ? btnStyle : null }>
+			<div className="btn-area" style={ getSelectListProps == 'city' && pushType == 'popBtn' ? btnStyle : null }>
 				<div className="btn" onClick={ this.handlerBtn.bind(this) }>确定</div>
 			</div>
 		)
