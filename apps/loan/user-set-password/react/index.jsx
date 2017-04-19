@@ -89,7 +89,7 @@ const SetPassword = React.createClass({
                 codeToken: this.state.codeToken,
                 password: password,
                 verifyCode: code,
-                inviteCode:this.state.inviteCode,
+                invitationCode:this.state.inviteCode,
                 sourceType: SOURCE_TYPE
             }).then(data => {
                 let dict = data.userLogin;

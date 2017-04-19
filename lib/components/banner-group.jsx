@@ -7,6 +7,16 @@
 
 class BannerGroup extends React.Component {
 
+    static propTypes = {
+        startIndex: PropTypes.number,
+        autoPlay: PropTypes.number,
+        loop: PropTypes.bool,
+        className: PropTypes.string,
+        afterIndexChange: PropTypes.func,
+        onImageClick: PropTypes.func,
+        images: PropTypes.array
+    }
+
     constructor(props) {
         super(props);
         this._touch = {
@@ -49,7 +59,7 @@ class BannerGroup extends React.Component {
         clearInterval(this._timer);
     }
 
-    initHandler() {
+    initHandler = () => {
         let elem = ReactDOM.findDOMNode(this);
         let w = elem.offsetWidth;
         this.setState({
@@ -61,7 +71,7 @@ class BannerGroup extends React.Component {
         this.resetTimer();
     }
 
-    resetTimer() {
+    resetTimer = () => {
         if (!this.state.autoPlay) return;
         clearInterval(this._auto_timer);
         this._auto_timer = setInterval(function () {
@@ -69,7 +79,7 @@ class BannerGroup extends React.Component {
         }.bind(this), this.state.autoPlay)
     }
 
-    animateTo(targetIndex) {
+    animateTo = (targetIndex) => {
         let ti = targetIndex;
         let lastIndex = this.state.images.length;
         let targetLeft = -this.state.width * ti;
@@ -97,7 +107,7 @@ class BannerGroup extends React.Component {
         }.bind(this), 20)
     }
 
-    touchStartHandler(event) {
+    touchStartHandler = (event) => {
         if (this._onTouching) return;
         this._touch.startX = event.changedTouches[0].pageX;
         this._touch.originLeft = this.state.left;
@@ -105,7 +115,7 @@ class BannerGroup extends React.Component {
         clearInterval(this._timer);
     }
 
-    touchMoveHandler(event) {
+    touchMoveHandler = (event) => {
         let left = this._touch.originLeft + event.changedTouches[0].pageX - this._touch.startX;
         this.setState({ left: left });
         // event.preventDefault();
@@ -113,7 +123,7 @@ class BannerGroup extends React.Component {
         event.nativeEvent.stopImmediatePropagation();
     }
 
-    touchEndHandler(event) {
+    touchEndHandler = (event) => {
         this._onTouching = false;
 
         let delta = event.changedTouches[0].pageX - this._touch.startX;
@@ -137,11 +147,11 @@ class BannerGroup extends React.Component {
         this.animateTo(ti);
     }
 
-    imageClickHandler(index) {
+    imageClickHandler = (index) => {
         this.props.onImageClick && this.props.onImageClick(index);
     }
 
-    getDotStyle(active) {
+    getDotStyle = (active) => {
         let bg = active ? 'white' : 'hsla(0, 0%, 100%, .25)';
         return {
             display: 'inline-block',
@@ -163,7 +173,6 @@ class BannerGroup extends React.Component {
             transform: 'translate3d(0, 0, 0)',
             background: '#fff'
         }
-            ;
 
         let image = (img, index) => {
             return (
@@ -220,13 +229,3 @@ class BannerGroup extends React.Component {
         )
     }
 };
-
-BannerGroup.propTypes = {
-    startIndex: PropTypes.number,
-    autoPlay: PropTypes.number,
-    loop: PropTypes.bool,
-    className: PropTypes.string,
-    afterIndexChange: PropTypes.func,
-    onImageClick: PropTypes.func,
-    images: PropTypes.array
-}
