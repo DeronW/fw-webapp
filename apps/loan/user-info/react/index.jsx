@@ -254,7 +254,7 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'city-info',
                         infoNameCN: '所在城市',
-                        value: props.userInfo.city,
+                        value: props.userInfo.city == null ? null : String(props.userInfo.city),
                         options: props.cityList,
                         placeholder: '请选择'
                     }, {
@@ -268,7 +268,7 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'marriage-info',
                         infoNameCN: '婚姻',
-                        value: props.userInfo.homeSituation.toString(),
+                        value: props.userInfo.homeSituation == null ? null : String(props.userInfo.homeSituation),
                         options: {
                             '1': '未婚',
                             '2': '已婚，无子女',
@@ -288,7 +288,7 @@ class UserInfoWrap extends React.Component {
                     }, {
                         infoID: 'ec-rel-info',
                         infoNameCN: '联系人关系',
-                        value: props.userInfo.emRelationship.toString(),
+                        value: props.userInfo.emRelationship == null ? null : String(props.userInfo.emRelationship),
                         options: {
                             '0': '父母',
                             '1': '配偶',
@@ -312,7 +312,7 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'salary-info',
                         infoNameCN: '税后月收入',
-                        value: props.userInfo.income.toString(),
+                        value: props.userInfo.income == null ? null : String(props.userInfo.income),
                         options: {
                             '0': '3000元以下',
                             '1': '3001-5000元',
@@ -324,7 +324,7 @@ class UserInfoWrap extends React.Component {
                     }, {
                         infoID: 'work-years-info',
                         infoNameCN: '工作年限',
-                        value: props.userInfo.workExperience.toString(),
+                        value: props.userInfo.workExperience == null ? null : String(props.userInfo.workExperience),
                         options: {
                             '0': '1年以下',
                             '1': '1-5年',
