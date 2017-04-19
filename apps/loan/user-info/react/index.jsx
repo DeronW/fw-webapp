@@ -372,7 +372,7 @@ class UserInfoWrap extends React.Component {
     handleSubmit = () => {
         let ecName = this.state.ecInfo[0][0].value,
             ecPhone = this.state.ecInfo[0][2].value;
-        if (!isPhoneNum(ecPhone)) return $FW.Component.Toast('联系人手机格式不正确!');
+        if (ecPhone && !isPhoneNum(ecPhone)) return $FW.Component.Toast('联系人手机格式不正确!');
         if (ecName.match(/\d/)) return $FW.Component.Toast('联系人姓名不可包含数字!');
         if (ecName.length < 2) return $FW.Component.Toast('联系人姓名字符长度需在2位以上!');
         $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
