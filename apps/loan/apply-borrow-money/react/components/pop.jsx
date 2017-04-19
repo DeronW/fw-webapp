@@ -439,7 +439,7 @@ class WindowPop extends React.Component {
         }
 
 		let cityList = () => {
-				return 	<div className="cnt-pop">
+				return 	<div className="cnt-pop" style={{ marginBottom: '150px' }}>
                             <div className="ABC-find">
                                 {
                                     CITY_ARR.map((data, index) => {                                        
