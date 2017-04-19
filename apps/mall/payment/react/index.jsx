@@ -113,14 +113,14 @@ const Payment = React.createClass({
             }).then(data=> {
             $FW.Component.showAjaxLoading('mini');
 
-                    // document.write(data.form);
-                    window.location.href="/static/mall/order-complete/index.html?form=" + (data.form);
-                    setTimeout(() => {
-                        this.queryState();
-                    }, 3000);
-                    setTimeout(() => {
-                        this.queryState('final');
-                    }, 6000);
+                    document.write(data.form);
+                    // window.location.href="/static/mall/order-complete/index.html?form=" + (data.form);
+                    // setTimeout(() => {
+                    //     this.queryState();
+                    // }, 3000);
+                    // setTimeout(() => {
+                    //     this.queryState('final');
+                    // }, 6000);
         }, e => {
             $FW.Component.Alert(e.message);
         })
