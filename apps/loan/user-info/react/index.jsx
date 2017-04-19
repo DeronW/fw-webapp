@@ -382,7 +382,7 @@ class UserInfoWrap extends React.Component {
             email: this.state.basicInfo[0][3].value,
             city: this.state.basicInfo[1][0].value,
             address: this.state.basicInfo[1][1].value,
-            homeSituation: this.state.basicInfo[2][0].value + 1,
+            homeSituation: this.state.basicInfo[2][0].value,
             emContact: this.state.ecInfo[0][0].value,
             emRelationship: this.state.ecInfo[0][1].value,
             emMobile: this.state.ecInfo[0][2].value,
