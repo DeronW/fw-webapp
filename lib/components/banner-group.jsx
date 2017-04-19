@@ -173,7 +173,6 @@ class BannerGroup extends React.Component {
             transform: 'translate3d(0, 0, 0)',
             background: '#fff'
         }
-            ;
 
         let image = (img, index) => {
             return (
