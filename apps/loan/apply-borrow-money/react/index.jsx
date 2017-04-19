@@ -440,6 +440,16 @@ class ApplyBorrowMoney extends React.Component {
         $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
             let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
 
+			let homeSituationState = null
+
+			if(homeSituation == 0) {
+				homeSituationStae = '未婚'
+			} else if(homeSituation == 1) {
+				homeSituationStae = '已婚，无子女'
+			} else if(homeSituation == 2) {
+				homeSituationStae = '已婚，有子女'
+			}
+
 			this.setState({
 				sumMoneyListObj: {
 					moneyVal: '',
@@ -451,8 +461,8 @@ class ApplyBorrowMoney extends React.Component {
 					idCard: data.idCard,
 					city: data.city,
 					cityIndex: '',
-					marriageVal: data.homeSituation,
-					marriageIndex: 1,
+					marriageVal: homeSituationState,
+					marriageIndex: data.homeSituation,
 					urgentPerson: data.emContact,
 					relationship: data.emRelationship,
 					relationshipIndex: data.emRelationship,
