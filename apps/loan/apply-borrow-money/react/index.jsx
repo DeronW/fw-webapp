@@ -443,11 +443,11 @@ class ApplyBorrowMoney extends React.Component {
 			let homeSituationState = null
 
 			if(data.homeSituation == 0) {
-				data.homeSituationStae = '未婚'
-			} else if(homeSituation == 1) {
-				data.homeSituationStae = '已婚，无子女'
-			} else if(homeSituation == 2) {
-				data.homeSituationStae = '已婚，有子女'
+				homeSituationState = '未婚'
+			} else if(data.homeSituation == 1) {
+				homeSituationState = '已婚，无子女'
+			} else if(data.homeSituation == 2) {
+				homeSituationState = '已婚，有子女'
 			}
 
 			this.setState({
