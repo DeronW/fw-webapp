@@ -1730,11 +1730,29 @@ class Btn extends React.Component {
 
 class WindowPop extends React.Component {
 	constructor(props) {
-		super(props)
+		super(props)		
 		this.state = {
 			inputPlaceholder: '',
 			sumMoneyListObj: {
-
+				moneyVal: props.getPopSumMoneyListObj.moneyVal,
+				deadlineVal: props.getPopSumMoneyListObj.deadlineVal,
+				creditCardVal: props.getPopSumMoneyListObj.creditCardVal,
+				emailVal: props.getPopSumMoneyListObj.emailVal,
+				homeVal: props.getPopSumMoneyListObj.homeVal,
+				realName: props.getPopSumMoneyListObj.realName,
+				idCard: props.getPopSumMoneyListObj.idCard,
+				city: props.getPopSumMoneyListObj.city,
+				cityIndex: props.getPopSumMoneyListObj.cityIndex,
+				marriageVal: props.getPopSumMoneyListObj.marriageVal,
+				marriageIndex: props.getPopSumMoneyListObj.marriageIndex,
+				urgentPerson: props.getPopSumMoneyListObj.urgentPerson,
+				relationship: props.getPopSumMoneyListObj.relationship,
+				relationshipIndex: props.getPopSumMoneyListObj.relationshipIndex,
+				phone: props.getPopSumMoneyListObj.phone,
+				income: props.getPopSumMoneyListObj.income,
+				incomeIndex: props.getPopSumMoneyListObj.incomeIndex,
+				yearsOfWork: props.getPopSumMoneyListObj.yearsOfWork,
+				yearsOfWorkIndex: props.getPopSumMoneyListObj.yearsOfWorkIndex
 			},
 			inputType: '',
 			selectList: '',
@@ -1745,11 +1763,11 @@ class WindowPop extends React.Component {
 		}
 	}
 	componentWillMount() {
-		const { selectList, getPopSumMoneyListObj } = this.props
-
+		const { selectList, getPopSumMoneyListObj, getPopInfo } = this.props
+		
 		this.setState({
-			selectList: selectList,
-			sumMoneyListObj: getPopSumMoneyListObj
+			selectList: selectList
+			//sumMoneyListObj: getPopSumMoneyListObj
 		})
 
 		switch( selectList ) {
@@ -1822,6 +1840,7 @@ class WindowPop extends React.Component {
 		}
 
 	}
+
 	handlerBack() {
 		const { getPopShow } = this.props
 
@@ -2334,6 +2353,8 @@ class ApplyBorrowMoney extends React.Component {
 		})
 	}
 	callbackSumPopInfo(obj) {
+		console.log(obj)
+		console.log('afasdf')
 		this.setState({
 			sumMoneyListObj: {
 				moneyVal: obj.moneyVal,
