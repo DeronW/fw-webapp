@@ -97,7 +97,7 @@ const Payment = React.createClass({
         }
         else if (index == 'z') {
             var queryNew = $FW.Format.urlQuery();
-            console.log(queryNew);
+            // console.log(queryNew);
              //申请支付
             $FW.Ajax({
                 url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
@@ -111,18 +111,19 @@ const Payment = React.createClass({
                     UserId:""
                 },
             }).then(data=> {
-                console.log(data);
+                console.log(111);
             $FW.Component.showAjaxLoading('mini');
 
                     document.write(data.form);
-                    window.location.href="/static/mall/order-complete/index.html?form=" + (data.form);
-                    setTimeout(() => {
-                        this.queryState();
-                    }, 3000);
-                    setTimeout(() => {
-                        this.queryState('final');
-                    }, 6000);
+                    // window.location.href="/static/mall/order-complete/index.html?form=" + (data.form);
+                    // setTimeout(() => {
+                    //     this.queryState();
+                    // }, 3000);
+                    // setTimeout(() => {
+                    //     this.queryState('final');
+                    // }, 6000);
         }, e => {
+            console.log(222);
             $FW.Component.Alert(e.message);
         })
         }
@@ -143,7 +144,7 @@ const Payment = React.createClass({
                 orderGroupBizNo: query.orderGroupBizNo || ""
             };
             $FW.Ajax({
-                url: `${API_PATH}/mall/gapi/payment/v1/ucf_pay.json`,
+                url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
                 //url: './ucf_pay.json',
                 enable_loading: true,
                 data: FormData,
