@@ -24,7 +24,7 @@ function get_common_javascript_files(lib_path, extend_files, debug) {
         `${lib_path}/javascripts/promise-2.0.2.min.js`,
         `${lib_path}/javascripts/object-assign-4.1.1.js`,
         `${lib_path}/javascripts/proxy-0.1.6.min.js`,
-        `${lib_path}/fw-1.7.2.js`,
+        `${lib_path}/fw-1.8.0.js`,
         `${lib_path}/javascripts/native-bridge-0.6.2.js`
     ];
 
