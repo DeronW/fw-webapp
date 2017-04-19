@@ -31,25 +31,26 @@ class UserInfoTab extends React.Component {
     }
 }
 
-class CitySelectWrap extends React.Component {
+class CityListWrap extends React.Component {
     componentDidMount() {
-        let labelHeight = 100;
-        let cityWrapEl = ReactDOM.findDOMNode(this),
-            devisionIndexEl = cityWrapEl.childNodes[1];
-        let cityWrapHeight = window.innerHeight - labelHeight,
-            devisionIndexHeight = devisionIndexEl.clientHeight;
-        devisionIndexEl.style.top = (cityWrapHeight - devisionIndexHeight) / 2 + labelHeight + 'px';
+        let cityListEl = ReactDOM.findDOMNode(this),
+            divisionBarEl = cityListEl.childNodes[1],
+            selectLabelEl = cityListEl.previousSibling;
+        let labelHeight = parseInt(window.getComputedStyle(selectLabelEl, null).getPropertyValue('height').slice(0, -2)),
+            cityListDisplayHeight = window.innerHeight - labelHeight,
+            divisionBarHeight = divisionBarEl.clientHeight;
+        divisionBarEl.style.top = (cityListDisplayHeight - divisionBarHeight) / 2 + labelHeight + 'px';
     }
 
     scrollList = (divs, divLetter) => {
-        let cityWrapEl = ReactDOM.findDOMNode(this);
+        // divs is an array saving the number of cities beginning with a specific num,
+        // e.g. [{A: 10}, {B: 20}, ...]
+        let cityListEl = ReactDOM.findDOMNode(this);
         let devisionHeight = 40,
             optionHeight = 80,
             scrollTop = 0;
         for (var i = 0; i < divs.length; i++) {
-            if (divLetter === Object.keys(divs[i])[0]) {
-                break;
-            }
+            if (divLetter === Object.keys(divs[i])[0]) break;
             scrollTop += devisionHeight + optionHeight * divs[i][Object.keys(divs[i])[0]];
         }
         window.scrollTo(0, scrollTop);
@@ -172,7 +173,7 @@ class InfoItemInputWrap extends React.Component {
                   选择城市
                   <img src="images/close.png" onClick={this.toggleExpand}></img>
               </div>
-              <CitySelectWrap
+              <CityListWrap
                 value={value}
                 itemIndex={this.props.itemIndex}
                 handleClick={(index, v) => {this.toggleExpand(); this.props.handleInput(index, v);}}
