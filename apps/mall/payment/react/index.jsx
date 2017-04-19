@@ -161,7 +161,7 @@ const Payment = React.createClass({
                 orderGroupBizNo: query.orderGroupBizNo || ""
             };
             $FW.Ajax({
-                url: `${API_PATH}/mall/gapi/payment/v1/ucf_pay.json`,
+                url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
                 //url: './ucf_pay.json',
                 enable_loading: true,
                 data: FormData,
