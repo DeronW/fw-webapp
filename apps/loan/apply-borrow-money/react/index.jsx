@@ -193,7 +193,7 @@ class Agree extends React.Component {
 				<div className="text">
 					点击“申请借款”即视为同意
                     <a href="/static/loan/protocol-dumiao-openaccount/index.html">《读秒开户授权书》</a>、
-                    <a href="/static/loan/protocol-personal-collect/index.html">《个人信息采集授权说明》</a>
+                    <a href="/static/loan/protocol-personinfo-collect/index.html">《个人信息采集授权说明》</a>
 				</div>
 			</div>
 		)
@@ -369,8 +369,20 @@ class Btn extends React.Component {
 		}
 	}
 	render() {
+		const { getSelectListProps, pushType } = this.props
+
+		const btnStyle = {
+			position: 'fixed',
+			width: '100%',
+			height: '128px',
+			bottom: '0',
+			left: '0',
+			backgroundColor: '#fff',
+			boxShadow: '0 0 20px rgba(0, 0, 0, 0.2)'
+		}
+
 		return (
-			<div className="btn-area">
+			<div className="btn-area" style={ getSelectListProps == 'city' && pushType == 'popBtn' ? btnStyle : null }>
 				<div className="btn" onClick={ this.handlerBtn.bind(this) }>确定</div>
 			</div>
 		)
@@ -545,7 +557,7 @@ class ApplyBorrowMoney extends React.Component {
 					pushType= { 'pushBtn' }
 					getSumMoneyPopVal = { this.state.sumMoneyListObj }
 					propsAgree = { this.state.agreeShow }
-
+					getSelectListProps = { this.state.selectList }
 				/>
 
 				{ this.state.popShow ?  <WindowPop
@@ -560,11 +572,11 @@ class ApplyBorrowMoney extends React.Component {
 	}
 }
 
-ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
+//ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
 
-// $FW.DOMReady(() => {
-//     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
-// 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
-//         .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
-// })
+$FW.DOMReady(() => {
+    ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
+	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
+        .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
+})
 
