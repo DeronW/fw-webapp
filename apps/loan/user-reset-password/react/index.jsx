@@ -31,7 +31,7 @@ const Register = React.createClass({
     },
     changeCode(e) {
         let v = e.target.value;
-        v.length < 5 && this.setState({ code: v });
+        v.length <= 6 && this.setState({ code: v });
     },
     changePsw(e) {
         let v = e.target.value;
