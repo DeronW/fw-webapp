@@ -39,6 +39,7 @@ const Mall = React.createClass({
     },
     render: function () {
         let banner;
+        var bs = this.props.banners;
         let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();
 
         if (bs.length) {
