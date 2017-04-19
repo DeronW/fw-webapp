@@ -282,7 +282,7 @@ const Recharge = React.createClass({
 
                 <div className="telconfirm-btn" onClick={this.getSMSCodeHandler}>立即充值</div>
                 <div className="reminder">
-                    温馨提示：工作日10点限量发售
+                    话费充值暂停使用
                 </div>
             </div>
         );
