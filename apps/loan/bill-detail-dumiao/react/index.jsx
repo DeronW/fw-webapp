@@ -28,7 +28,7 @@ class BillDetail extends React.Component{
 
                 </div>
                 <div className="enter-btn-wrap">
-                    <a className="enter-btn" href={`${API_PATH}/api/order/v1/jump.html?sourceType=${SOURCE_TYPE}&token=${USER.token}&userGid=${USER.gid}&userId=${USER.id}&uid=${USER.uid}`}>点击进入读秒</a>
+                    <a className="enter-btn" href={`${API_PATH}/api/order/v1/jump.html?sourceType=${SOURCE_TYPE}&token=${USER.token}&userGid=${USER.gid}&userId=${USER.id}&uid=${USER.uid}&uuid=${$FW.Format.urlQuery().uuid}`}>点击进入读秒</a>
                 </div>
             </div>
         )
