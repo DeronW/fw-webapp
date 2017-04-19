@@ -1,47 +1,37 @@
 class UserInfoTab extends React.Component {
     render() {
-        let userInfoCat = [
+        let tab = [
             {
-                "infoCatID": "basicInfo",
-                "infoCatNameCN": "基本信息"
+                "tabName": "basicInfo",
+                "tabNameCN": "基本信息"
             }, {
-                "infoCatID": "ecInfo",
-                "infoCatNameCN": "紧急联系人"
+                "tabName": "ecInfo",
+                "tabNameCN": "紧急联系人"
             }, {
-                "infoCatID": "workInfo",
-                "infoCatNameCN": "工作信息"
+                "tabName": "workInfo",
+                "tabNameCN": "工作信息"
             }
         ];
-
-        let selected = this.props.selectedTab;
-        let infoTabGrp = userInfoCat.map((item, index) => {
-            let borderStyle = "3px solid " + (item.infoCatID === selected
-                ? "#649cfe"
-                : "transparent");
+        let selectedTab = this.props.selectedTab;
+        let generate_tabs = (t, index) => {
+            let border = "3px solid " + (t.tabName === selectedTab ? "#649cfe" : "transparent");
             return (
-                <li className="info-tab-item" key={item.infoCatID} id={item.infoCatID} style={{
-                    borderBottom: borderStyle
-                }}>
-                    {item.infoCatNameCN}
+                <li key={t.tabName} className="info-tab-item" id={t.tabName} style={{borderBottom: border}}>
+                    {t.tabNameCN}
                 </li>
-            )
-        });
+            )}
         return (
             <ul className="info-tab" onClick={(e) => {
-                if (!e.target.id) {
-                    return
-                }
-                this.props.handleClick(e.target.id)
-            }}>{infoTabGrp}</ul>
+                if (tab.findIndex((t) => e.target.id === t.tabName) === -1) return;
+                this.props.handleClick(e.target.id);}
+            }>
+                { tab.map(generate_tabs) }
+            </ul>
         )
     }
 }
 
 class CitySelectWrap extends React.Component {
-    constructor() {
-        super();
-    }
-
     componentDidMount() {
         let labelHeight = 100;
         let cityWrapEl = ReactDOM.findDOMNode(this),
@@ -73,10 +63,8 @@ class CitySelectWrap extends React.Component {
         for (var division in cityList) {
             divisions.push({[division.toUpperCase()]: cityList[division].length});
             divisionEls.push(
-                <li
-                  key={division}
-                  id={`city-division-${division}`}>
-                  {division.toUpperCase()}
+                <li key={division} id={`city-division-${division}`}>
+                    {division.toUpperCase()}
                 </li>
             );
             let cityElsInside = cityList[division].map((c, index) => (
@@ -356,9 +344,9 @@ class UserInfoWrap extends React.Component {
         }
     }
 
-    shiftTab = (tabName) => {
+    switchTab = (tabName) => {
+        if (this.state.showSubmitBtn) return $FW.Component.Toast('请先提交当前页信息!');
         this.setState({selectedTab: tabName});
-        this.setState({showSubmitBtn: false});
     }
 
     handleInput = (index, v) => {
@@ -370,23 +358,38 @@ class UserInfoWrap extends React.Component {
     }
 
     handleSubmit = () => {
-        let ecName = this.state.ecInfo[0][0].value,
-            ecPhone = this.state.ecInfo[0][2].value;
-        if (ecName.match(/\d/)) return $FW.Component.Toast('联系人姓名不可包含数字!');
-        if (ecName.length < 2) return $FW.Component.Toast('联系人姓名字符长度需在2位以上!');
-        if (ecPhone && !isPhoneNum(ecPhone)) return $FW.Component.Toast('联系人手机格式不正确!');
-        $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, {
-            creditCard: this.state.basicInfo[0][2].value,
-            email: this.state.basicInfo[0][3].value,
-            city: this.state.basicInfo[1][0].value,
-            address: this.state.basicInfo[1][1].value,
-            homeSituation: this.state.basicInfo[2][0].value + 1,
-            emContact: this.state.ecInfo[0][0].value,
-            emMobile: this.state.ecInfo[0][2].value,
-            emRelationship: this.state.ecInfo[0][1].value,
-            income: this.state.workInfo[0][0].value,
-            workExperience: this.state.workInfo[0][1].value
-        }).then(data => {
+        let submitData = {};
+        switch (this.state.selectedTab) {
+            case 'basicInfo':
+                submitData = {
+                    creditCard: this.state.basicInfo[0][2].value,
+                    email: this.state.basicInfo[0][3].value,
+                    city: this.state.basicInfo[1][0].value,
+                    address: this.state.basicInfo[1][1].value,
+                    homeSituation: this.state.basicInfo[2][0].value + 1
+                };
+                break;
+            case 'ecInfo':
+                let ecName = this.state.ecInfo[0][0].value,
+                    ecPhone = this.state.ecInfo[0][2].value;
+                if (ecName.match(/\d/)) return $FW.Component.Toast('联系人姓名不可包含数字!');
+                if (ecName.length < 2) return $FW.Component.Toast('联系人姓名字符长度需在2位以上!');
+                if (ecPhone && !isPhoneNum(ecPhone)) return $FW.Component.Toast('联系人手机格式不正确!');
+                submitData = {
+                    emContact: this.state.ecInfo[0][0].value,
+                    emRelationship: (this.state.ecInfo[0][1].value),
+                    emMobile: this.state.ecInfo[0][2].value
+                }
+                break;
+            case 'workInfo':
+                submitData = {
+                    income: this.state.workInfo[0][0].value,
+                    workExperience: this.state.workInfo[0][1].value
+                }
+                break;
+            default:
+        }
+        $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, submitData).then(data => {
             $FW.Component.Toast('信息已提交');
             this.setState({showSubmitBtn: false});
         }, e => $FW.Component.Toast(e.message));
@@ -396,7 +399,7 @@ class UserInfoWrap extends React.Component {
         let selected = this.state.selectedTab;
         return (
             <div>
-                <UserInfoTab selectedTab={selected} handleClick={this.shiftTab}/>
+                <UserInfoTab selectedTab={selected} handleClick={this.switchTab}/>
                 <InfoInputGrp selectedTab={selected} infoGrp={this.state[selected]} handleInput={this.handleInput} />
                 {this.state.showSubmitBtn && <SubmitBtn handleClick={this.handleSubmit}/>}
             </div>
