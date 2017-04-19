@@ -57,13 +57,13 @@ class Content extends React.Component {
                 <div className="list-img"><img src={logo} /></div>
                 <div className="list-content">
                     <div className="apply-num">借款金额:{order.loanAmtStr}元</div>
-                    <div className="apply-duration">借款期限:{order.termNum}天</div>
+                    <div className="apply-duration">借款期限:{order.termNumStr}</div>
                 </div>
                 <div className="apply-status-wrap">
                     <div className="apply-status">
                         <span className={`bill-${current_type}-color`}>
                             {tab[current_type].name}</span></div>
-                    <div className="apply-time">{order.loanTime}</div>
+                    <div className="apply-time">{order.loanTimeStr}</div>
                 </div>
             </Nav>
         }

@@ -4,7 +4,9 @@ import {observer} from "mobx-react";
 
 import { QUESTIONS } from './components/questions'
 
-import {Header} from 'fw-react-components/components/loan/header'
+// import {Header} from 'fw-react-components/components/loan/header'
+// import _ from '../../../../fw-core/index.js'
+import _ from 'D:/fw-core/index.js'
 
 
 const STYLE = {
@@ -25,5 +27,12 @@ class ToggleList {
     @observable open_list = []
 }
 
-ReactDOM.render(<Header />, document.getElementById('header'));
+class FAQ extends React.component {
+    render (){
+        return <div>sssss</div>
+    }
+}
+
+
+// ReactDOM.render(<Header />, document.getElementById('header'));
 ReactDOM.render(<FAQ />, document.getElementById('app'));

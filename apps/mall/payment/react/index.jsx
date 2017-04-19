@@ -35,40 +35,40 @@ const Payment = React.createClass({
         return str.substr(str.length - 4, 4);
     },
     //申请查询結果
-    queryState: function () {
-        let query = $FW.Format.urlQuery();
-        let FormData = {
-            payType: 4,
-            orderBizNo: query.orderBizNo,
-            orderGroupBizNo: query.orderGroupBizNo,
-            orderTime: query.orderTime,
-            amount: query.amount,
-            UserId:""
-        }
-        $FW.Ajax({
-            url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
-            enable_loading: 'mini',
-            data: FormData
-        }).then(data=> {
-                if (data.responseResult.resCode == "00002") {//订单处理中
-                    //$FW.Component.Alert(data.responseResult.resMessage);
-                } else {
-                    if (data.responseResult.status == "F") {
-                        window.location.href =
-                        "/static/mall/order-complete/index.html?status=F&failTex=" + data.responseResult.resMessage
-                    }
-                    if (data.responseResult.status == "S") {
-                        window.location.href =
-                        "/static/mall/order-complete/index.html?status=S"
-                    }
-                    if (data.responseResult.status == "I") {
-                        window.location.href =
-                        "/static/mall/order-complete/index.html?status=I&Tex=" + data.responseResult.resMessage
-                    }
-                }
+    // queryState: function () {
+    //     let query = $FW.Format.urlQuery();
+    //     let FormData = {
+    //         payType: 4,
+    //         orderBizNo: query.orderBizNo,
+    //         orderGroupBizNo: query.orderGroupBizNo,
+    //         orderTime: query.orderTime,
+    //         amount: query.amount,
+    //         UserId:""
+    //     }
+    //     $FW.Ajax({
+    //         url: `${API_PATH}/mall/api/payment/v1/alipay_topay.json`,
+    //         enable_loading: 'mini',
+    //         data: FormData
+    //     }).then(data=> {
+    //             if (data.responseResult.resCode == "00002") {//订单处理中
+    //                 //$FW.Component.Alert(data.responseResult.resMessage);
+    //             } else {
+    //                 if (data.responseResult.status == "F") {
+    //                     window.location.href =
+    //                     "/static/mall/order-complete/index.html?status=F&failTex=" + data.responseResult.resMessage
+    //                 }
+    //                 if (data.responseResult.status == "S") {
+    //                     window.location.href =
+    //                     "/static/mall/order-complete/index.html?status=S"
+    //                 }
+    //                 if (data.responseResult.status == "I") {
+    //                     window.location.href =
+    //                     "/static/mall/order-complete/index.html?status=I&Tex=" + data.responseResult.resMessage
+    //                 }
+    //             }
 
-            })
-        },
+    //         })
+    //     },
     payHandler: function () {
         let query = $FW.Format.urlQuery();
         // let orderBizNo = query.orderBizNo;
@@ -161,7 +161,7 @@ const Payment = React.createClass({
                 orderGroupBizNo: query.orderGroupBizNo || ""
             };
             $FW.Ajax({
-                url: `${API_PATH}/mall/gapi/payment/v1/ucf_pay.json`,
+                url: `${API_PATH}/mall/api/payment/v1/ucf_pay.json`,
                 //url: './ucf_pay.json',
                 enable_loading: true,
                 data: FormData,

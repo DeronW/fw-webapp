@@ -68,7 +68,8 @@ class BorrowMoney extends React.Component {
         }).then(data=>this.setState({borrowStatus:data.borrowBtnStatus}));
         $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
             .then(data=>{
-                 this.setState({ableEnter:data.code})
+                 console.log(data.code)
+                 this.setState({ableEnter:10000})
             }, err=>{
                 if(err.code == 1001002){
                     this.setState({ableEnter:err.code})
@@ -180,7 +181,7 @@ class BorrowMoney extends React.Component {
                     <div className="detail-pop">
                         <div className="pop-close" onClick={this.tryOtherLoanCloseHandler}></div>
                         <div className="pop-tip">{this.state.tryOtherLoanMsg}</div>
-                        <a className="know-btn">尝试其他借款</a>
+                        <a className="know-btn" href="/static/loan/home/index.html">尝试其他借款</a>
                     </div>
                 </div>}
             </div>
