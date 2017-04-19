@@ -144,27 +144,10 @@ $FW.DOMReady(function () {
     var loanType = query.loanType;
 
     Promise.all([
-        $FW.Ajax({
-            url: `${API_PATH}/api/bankcard/v1/bankcardlist.json`,
-            method: "post",
-            data: {
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE
-            }
-        }),
-        $FW.Ajax({
-            url: `${API_PATH}/api/repayment/v1/loandetail.json`,
-            method: "post",
-            data: {
-                loanGid: loanGid,
-                loanType: loanType,
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE
-            }
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`),
+        $FXH.Post(`${API_PATH}/api/repayment/v1/loandetail.json`,{
+            loanGid: loanGid,
+            loanType: loanType
         })
     ]).then(d => ReactDOM.render(<PayBackWrap {...d[0]} {...d[1]} />, CONTENT_NODE));
 });

@@ -15,12 +15,8 @@ const PayBackResult = React.createClass({
         if (this.state.repaymentGid) this.queryResult()
     },
     queryResult() {
-        $FW.Post(`${API_PATH}/api/repayment/v1/repaymentstatus.json`, {
-            repaymentGid: this.state.repaymentGid,
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE
+        $FXH.Post(`${API_PATH}/api/repayment/v1/repaymentstatus.json`, {
+            repaymentGid: this.state.repaymentGid
         }).then((data) => {
             this.setState({
                 payback_status: data.status,

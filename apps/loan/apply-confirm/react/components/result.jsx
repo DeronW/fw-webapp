@@ -39,12 +39,8 @@ const LoanResult = React.createClass({
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
 
-        $FW.Post(`${API_PATH}/api/loan/v1/status.json`, {
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            orderGid: orderGid,
-            sourceType: SOURCE_TYPE
+        $FXH.Post(`${API_PATH}/api/loan/v1/status.json`, {
+            orderGid: orderGid
         }).then((data) => {
             let finishFlag = true;
 

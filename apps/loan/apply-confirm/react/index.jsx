@@ -14,26 +14,12 @@ $FW.DOMReady(function () {
     let withdrawCardGid = query.withdrawCardGid;
 
     Promise.all([
-        $FW.Post(`${API_PATH}/api/loan/v1/tryLoanBudget.json`, {
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE,
+        $FXH.Post(`${API_PATH}/api/loan/v1/tryLoanBudget.json`, {
             orioleOrderGid: orioleOrderGid,
             loanAmount: loanNum
         }),
-        $FW.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`, {
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE
-        }),
-        $FW.Post(`${API_PATH}/api/repayment/v1/latedescription.json`, {
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE
-        })
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`),
+        $FXH.Post(`${API_PATH}/api/repayment/v1/latedescription.json`)
     ]).then(d => {
         ReactDOM.render(<ConfirmLoanWrap {...d[0]} {...d[1]} {...d[2]} />, CONTENT_NODE);
     });

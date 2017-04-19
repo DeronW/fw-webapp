@@ -45,14 +45,10 @@ const WantLoan = React.createClass({
         }
         let filtered = cashBank.filter(isRealNameBindCard);
         let user = $FW.Store.getUserDict();
-        $FW.Post(`${API_PATH}/api/loan/v1/apply.json`, {
-            token: user.token,
-            userGid: user.gid,
-            userId: user.id,
+        $FXH.Post(`${API_PATH}/api/loan/v1/apply.json`, {
             loanAmount: this.state.loanNum,
             orioleOrderGid: orioleOrderGid,
             productId: 1,
-            sourceType: SOURCE_TYPE,
             withdrawCardGid: filtered[0].cardGid
         }
         ).then((data) => {
@@ -107,27 +103,8 @@ $FW.DOMReady(function () {
     let loanNum = query.loanNum;
     let user = $FW.Store.getUserDict();
     Promise.all([
-        $FW.Ajax({
-            url: `${API_PATH}/api/loan/v1/baseinfo.json`,
-            method: "post",
-            data: {
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
-                sourceType: SOURCE_TYPE,
-                productId:1
-            }
-        }),
-        $FW.Ajax({
-            url: `${API_PATH}/api/bankcard/v1/bankcardlist.json`,
-            method: "post",
-            data: {
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
-                sourceType: SOURCE_TYPE
-            }
-        })
+        $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`,{productId:1}),
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`)
     ]).then(d => {
         ReactDOM.render(<WantLoan {...d[0]} {...d[1]} />, CONTENT_NODE);
     });

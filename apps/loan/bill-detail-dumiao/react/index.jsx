@@ -38,13 +38,8 @@ class BillDetail extends React.Component{
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function(){
     ReactDOM.render(<Header title={"账单详情"} />, HEADER_NODE);
-    $FW.Post(`${API_PATH}/api/order/v1/orderDetail.json`,{
-        loanUuid:$FW.Format.urlQuery().uuid,
-        token: USER.token,
-        userGid: USER.gid,
-        userId: USER.id,
-        uid:USER.uid,
-        sourceType: SOURCE_TYPE
+    $FXH.Post(`${API_PATH}/api/order/v1/orderDetail.json`,{
+        loanUuid:$FW.Format.urlQuery().uuid
     }).then((data)=>{
         ReactDOM.render(<BillDetail data={data}/>, CONTENT_NODE);
     });
