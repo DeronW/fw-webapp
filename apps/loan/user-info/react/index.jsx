@@ -111,49 +111,37 @@ class InfoItemInputWrap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.isSelectItem = this.props.options !== null;
-        if (this.isSelectItem) {
-            this.state.expandOpts = false;
-        }
+        this.isSelectItem = props.options !== null;
+        if (this.isSelectItem) this.state.expandOpts = false;
     }
 
     toggleExpand = () => {
-        this.setState({
-            expandOpts: !this.state.expandOpts
-        });
+        this.setState({expandOpts: !this.state.expandOpts});
     }
 
     render() {
-        let value = this.props.value;
-        let disableInput = (this.props.infoNameCN === '姓名' || this.props.infoNameCN === '身份证号') ? true : false,
-            idValue = id_mask(value),
-            inputItemDis = (
-                <input
-                    className="info-text-input"
-                    placeholder={this.props.placeholder}
-                    value={this.props.infoNameCN === '身份证号' ? idValue : value}
-                    disabled={disableInput}
-                    onChange={(e) => {this.props.handleInput(this.props.itemIndex, e.target.value)}}
-                    type={this.props.infoNameCN === '联系人手机' ? "tel" : "text"}>
-                </input>
-            );
-        let isSelectItem = this.isSelectItem,
-            selectLabelColor = value !== null ? '#333' : '#999',
-            selectItemDis;
-        if (isSelectItem) {
-            selectItemDis = (
-                <span
-                    className="select-label"
-                    style={{color: selectLabelColor}}
-                    onClick={this.toggleExpand}>
-                    {value !== null ?
-                      (this.props.infoNameCN === '所在城市' ? value : this.props.options[value])
-                      : this.props.placeholder}
-                </span>
-            );
-        }
+        let infoNameCN = this.props.infoNameCN,
+            value = this.props.value;
+        let itemDisplayField = this.isSelectItem ?
+            (<span
+                className="select-label"
+                style={{color: value !== null ? '#333' : '#999'}}
+                onClick={this.toggleExpand}>
+                {value !== null ?
+                    (infoNameCN === '所在城市' ? value : this.props.options[value])
+                    : this.props.placeholder}
+            </span>)
+            :
+            (<input
+                className="info-text-input"
+                type={infoNameCN === '联系人手机' ? "tel" : "text"}
+                placeholder={this.props.placeholder}
+                value={infoNameCN === '身份证号' ? id_mask(value) : value} // mask ID
+                disabled={(infoNameCN === '姓名' || infoNameCN === '身份证号') ? true : false} // disable name and ID input
+                onChange={(e) => {this.props.handleInput(this.props.itemIndex, e.target.value)}}>
+            </input>);
         let selectOptions = [];
-        if (isSelectItem && this.props.infoNameCN !== '所在城市') {
+        if (this.isSelectItem && infoNameCN !== '所在城市') {
             for (let option in this.props.options) {
                 selectOptions.push(
                     <div
@@ -169,35 +157,37 @@ class InfoItemInputWrap extends React.Component {
                 );
             }
         }
-        let selectOptionsWrap = this.props.infoNameCN === '所在城市' ?
+        let selectOptionsWrap = infoNameCN === '所在城市' ?
             (<div className="city-select-mask">
-              <div className="city-select-label">
-                  选择城市
-                  <img src="images/close.png" onClick={this.toggleExpand}></img>
-              </div>
-              <CityListWrap
+                <div className="city-select-label">
+                    选择城市
+                    <img src="images/close.png" onClick={this.toggleExpand}></img>
+                </div>
+                <CityListWrap
                 value={value}
                 itemIndex={this.props.itemIndex}
                 handleClick={(index, v) => {this.toggleExpand(); this.props.handleInput(index, v);}}
                 cityList={this.props.options}/>
-            </div>) :
+            </div>)
+            :
             (<div className="select-option-wrap">
                 {selectOptions}
-            </div>)
-        ;
+            </div>);
+        let expandBtn = (
+            <div className="right-arrow-container" onClick={this.toggleExpand}>
+              <div className="fake-arrow"></div>
+            </div>
+        );
         return (
             <div className="user-info-item-wrap">
                 <div className="input-wrap" id={this.props.infoID}>
-                    <span className="info-name">{this.props.infoNameCN}</span>
+                    <span className="info-name">{infoNameCN}</span>
                     <div className="item-display right-align-container">
-                        { selectItemDis || inputItemDis }
-                        { isSelectItem &&
-                          <div className="right-arrow-container" onClick={this.toggleExpand}>
-                            <div className="fake-arrow"></div>
-                          </div>}
+                        { itemDisplayField }
+                        { this.isSelectItem && expandBtn }
                     </div>
                 </div>
-                { this.state.expandOpts && selectOptionsWrap}
+                { this.state.expandOpts && selectOptionsWrap }
             </div>
         )
     }
@@ -222,20 +212,12 @@ class InfoInputGrp extends React.Component {
                 </div>
             )
         });
-        return (
-            <div>
-                {infoItems}
-            </div>
-        )
+        return <div>{infoItems}</div>
     }
 }
 
 class SubmitBtn extends React.Component {
-    render() {
-        return (
-            <div className="submit-btn" onClick={this.props.handleClick}>提交</div>
-        )
-    }
+    render = () => <div className="submit-btn" onClick={this.props.handleClick}>提交</div>
 }
 
 class UserInfoWrap extends React.Component {
@@ -249,22 +231,22 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'name-info',
                         infoNameCN: '姓名',
-                        value: this.props.userInfo.realName,
+                        value: props.userInfo.realName,
                         placeholder: '未实名'
                     }, {
                         infoID: 'indentity-info',
                         infoNameCN: '身份证号',
-                        value: this.props.userInfo.idCard,
+                        value: props.userInfo.idCard,
                         placeholder: '未实名'
                     }, {
                         infoID: 'credict-card-info',
                         infoNameCN: '信用卡',
-                        value: this.props.userInfo.creditCard,
+                        value: props.userInfo.creditCard,
                         placeholder: '请填写'
                     }, {
                         infoID: 'email-info',
                         infoNameCN: '邮箱',
-                        value: this.props.userInfo.email,
+                        value: props.userInfo.email,
                         placeholder: '请填写'
                     }
                 ],
@@ -272,13 +254,13 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'city-info',
                         infoNameCN: '所在城市',
-                        value: this.props.userInfo.city,
-                        options: this.props.cityList,
+                        value: props.userInfo.city,
+                        options: props.cityList,
                         placeholder: '请选择'
                     }, {
                         infoID: 'address-info',
                         infoNameCN: '现居住地',
-                        value: this.props.userInfo.address,
+                        value: props.userInfo.address,
                         placeholder: '请填写'
                     }
                 ],
@@ -286,7 +268,7 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'marriage-info',
                         infoNameCN: '婚姻',
-                        value: this.props.userInfo.homeSituation.toString(),
+                        value: props.userInfo.homeSituation.toString(),
                         options: {
                             '1': '未婚',
                             '2': '已婚，无子女',
@@ -301,12 +283,12 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'ec-name-info',
                         infoNameCN: '紧急联系人',
-                        value: this.props.userInfo.emContact,
+                        value: props.userInfo.emContact,
                         placeholder: '未填写'
                     }, {
                         infoID: 'ec-rel-info',
                         infoNameCN: '联系人关系',
-                        value: this.props.userInfo.emRelationship.toString(),
+                        value: props.userInfo.emRelationship.toString(),
                         options: {
                             '0': '父母',
                             '1': '配偶',
@@ -320,7 +302,7 @@ class UserInfoWrap extends React.Component {
                     }, {
                         infoID: 'ec-mobile-info',
                         infoNameCN: '联系人手机',
-                        value: this.props.userInfo.emMobile,
+                        value: props.userInfo.emMobile,
                         placeholder: '请输入'
                     }
                 ]
@@ -330,7 +312,7 @@ class UserInfoWrap extends React.Component {
                     {
                         infoID: 'salary-info',
                         infoNameCN: '税后月收入',
-                        value: this.props.userInfo.income.toString(),
+                        value: props.userInfo.income.toString(),
                         options: {
                             '0': '3000元以下',
                             '1': '3001-5000元',
@@ -342,7 +324,7 @@ class UserInfoWrap extends React.Component {
                     }, {
                         infoID: 'work-years-info',
                         infoNameCN: '工作年限',
-                        value: this.props.userInfo.workExperience.toString(),
+                        value: props.userInfo.workExperience.toString(),
                         options: {
                             '0': '1年以下',
                             '1': '1-5年',
@@ -390,8 +372,6 @@ class UserInfoWrap extends React.Component {
             workExperience: this.state.workInfo[0][1].value
         };
         $FXH.Post(`${API_PATH}/api/userBase/v1/saveUserInfo.json`, submitData).then(data => {
-            console.log(typeof this.state.basicInfo[2][0].value);
-            console.log(typeof data.userDataDetail.homeSituation);
             $FW.Component.Toast('信息已提交');
             this.setState({showSubmitBtn: false});
         }, e => $FW.Component.Toast(e.message));
@@ -717,17 +697,13 @@ const CITYLIST = {
 };
 
 var id_mask = n => String(n).replace(/(\d{4})\d{10}(\d{4})/, "$1**********$2");
-var isPhoneNum = (phoneNum) => {
-    const phoneNumFormat = /^1[3|4|5|7|8]\d{9}$/;
-    return phoneNumFormat.test(phoneNum);
-}
+var isPhoneNum = str => /^1[3|4|5|7|8]\d{9}$/.test(String(str));
 
 // render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(
         <Header title="个人信息"/>, HEADER_NODE);
     $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
-        ReactDOM.render(
-            <UserInfoWrap userInfo={data} cityList={CITYLIST}/>, CONTENT_NODE);
+        ReactDOM.render(<UserInfoWrap userInfo={data} cityList={CITYLIST}/>, CONTENT_NODE);
     }, e => $FW.Component.Toast(e.message));
 })
