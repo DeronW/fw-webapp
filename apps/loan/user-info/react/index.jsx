@@ -359,7 +359,7 @@ class UserInfoWrap extends React.Component {
     }
 
     handleSubmit = () => {
-        if (this.selectedTab === 'ecInfo') {
+        if (this.state.selectedTab === 'ecInfo') {
             let ecName = this.state.ecInfo[0][0].value,
                 ecPhone = this.state.ecInfo[0][2].value;
             if (ecName && ecName.match(/\d/)) return $FW.Component.Toast('联系人姓名不可包含数字!');
