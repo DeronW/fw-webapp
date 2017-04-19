@@ -68,11 +68,10 @@ class BorrowMoney extends React.Component {
         }).then(data=>this.setState({borrowStatus:data.borrowBtnStatus}));
         $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
             .then(data=>{
-                 console.log(data.code)
                  this.setState({ableEnter:10000})
             }, err=>{
                 if(err.code == 1001002){
-                    this.setState({ableEnter:err.code})
+                    this.setState({ableEnter:err.code, tryOtherLoanMsg:err.message})
                 }else{
                     this.setState({ableEnter:err.code, tryOtherLoanMsg:err.message})
                 }
@@ -173,7 +172,7 @@ class BorrowMoney extends React.Component {
                 {this.state.dumiaoEnterPopShow && <div className="mask" style={{zIndex:100}}>
                     <div className="detail-pop">
                         <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
-                        <div className="pop-tip">有一笔借款正在申请中</div>
+                        <div className="pop-tip">{this.state.tryOtherLoanMsg}</div>
                         <a className="know-btn" href={`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}`}>进入读秒查看</a>
                     </div>
                 </div>}

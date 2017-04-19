@@ -70,12 +70,8 @@ const SetCashCard = React.createClass({
         let {bankNum} = this.state, len = space(this.state.bankNum).length;
         if (len < 16 || len > 19) return $FW.Component.Toast("储蓄卡格式不对");
 
-        $FW.Post(`${API_PATH}/api/bankcard/v1/cardinfo.json`, {
-            bankCardNo: space(this.state.bankNum),
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/cardinfo.json`, {
+            bankCardNo: space(this.state.bankNum)
         }).then(data => {
             let ci = data.cardInfo;
             if (ci.cardType == -1) $FW.Component.Toast('不支持该银行卡号');
@@ -123,18 +119,14 @@ const SetCashCard = React.createClass({
 
         err ?
             $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}/api/bankcard/v1/commitinfo.json`, {
+            $FXH.Post(`${API_PATH}/api/bankcard/v1/commitinfo.json`, {
                 bankName: bankName,
                 cardHolderName: name,
                 cardNo: space(bankNum),
                 cardType: cardType,
                 idCard: id,
                 mobile: phone,
-                operatorType: USER.status < 2 ? 1 : 2,
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE
+                operatorType: USER.status < 2 ? 1 : 2
             }).then((data) => {
                 let oGid = data.bindBankInfo.operatorBankcardGid;
                 window.location.href = `/static/loan/user-verify-phone/index.html?phone=${phone}&operatorBankcardGid=${oGid}`;

@@ -34,11 +34,7 @@ const VerifyCode = React.createClass({
     getSMSCode: function () {
         if (this.state.remain <= 0) {
             this.tick();
-            $FW.Post(`${API_PATH}/api/repayment/v1/resendverifycode.json`, {
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE,
+            $FXH.Post(`${API_PATH}/api/repayment/v1/resendverifycode.json`, {
                 orderGid: this.state.orderGid
             }).then(() => {
             }, e => $FW.Component.Toast(e.message));
@@ -48,12 +44,8 @@ const VerifyCode = React.createClass({
         if (this.state.value == '') {
             $FW.Component.Toast("请输入验证码");
         } else {
-            $FW.Post(`${API_PATH}/api/repayment/v1/do.json`, {
+            $FXH.Post(`${API_PATH}/api/repayment/v1/do.json`, {
                 orderGid: this.state.orderGid,
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE,
                 verifyCode: this.state.value
             }).then(data => {
                 $FW.Component.showAjaxLoading()

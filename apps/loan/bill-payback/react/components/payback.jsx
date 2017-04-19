@@ -15,14 +15,10 @@ const PayBack = React.createClass({
         if (this.props.cardType == 1) {
             $FW.Component.Toast("信用卡暂不支持还款");
         } else {
-            $FW.Post(`${API_PATH}/api/repayment/v1/checksmsverifycode.json`, {
+            $FXH.Post(`${API_PATH}/api/repayment/v1/checksmsverifycode.json`, {
                 repaymentAmount: this.props.repaymentAmount,
                 loanGid: loanGid,
-                cardGid: this.props.cardGid,
-                token: USER.token,
-                userGid: USER.gid,
-                userId: USER.id,
-                sourceType: SOURCE_TYPE
+                cardGid: this.props.cardGid
             }).then(d => {
                 this.props.callbackVerifyCodeShow(true);
                 this.setState({ phoneNum: d.mobile, orderGid: d.orderGid });
