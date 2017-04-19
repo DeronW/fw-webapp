@@ -109,7 +109,7 @@ class BorrowMoney extends React.Component {
             <div className="">
                 <div className="">
                     <div className="borrow-money-list">
-                        <div className="icon-block"> <img src="images/icon-img.png" /> </div>
+                        <div className="icon-block"> <img src={this.state.product.productLogo}/> </div>
                         <div className="info">
                             <div className="t">
                                 <span className="title-text">{ this.state.product.productName }</span>

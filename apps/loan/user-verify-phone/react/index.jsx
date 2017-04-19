@@ -69,6 +69,7 @@ const VerifyPhone = React.createClass({
                 }, 5000))
             }
         ).then(() => {
+            $FW.Component.showAjaxLoading();
             this.setState({result: null});
             setTimeout(this.checkAjax, 3000);
             setTimeout(this.checkAjax, 6000);
