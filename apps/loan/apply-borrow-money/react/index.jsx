@@ -560,11 +560,11 @@ class ApplyBorrowMoney extends React.Component {
 	}
 }
 
-ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
+//ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
 
-// $FW.DOMReady(() => {
-//     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
-// 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
-//         .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
-// })
+$FW.DOMReady(() => {
+    ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
+	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
+        .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
+})
 
