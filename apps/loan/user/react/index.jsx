@@ -51,19 +51,19 @@ class BillEntry extends React.Component {
             {
                 typeNameCN: '申请中',
                 iconImg: 'images/bill_applying_icon.png',
-                jumpLink: '/static/loan/bill/index.html?tab=billApplying'
+                jumpLink: '/static/loan/bill/index.html#1'
             }, {
                 typeNameCN: '还款中',
                 iconImg: 'images/bill_onloan_icon.png',
-                jumpLink: '/static/loan/bill/index.html?tab=billReturning'
+                jumpLink: '/static/loan/bill/index.html#2'
             }, {
                 typeNameCN: '未通过',
                 iconImg: 'images/bill_refused_icon.png',
-                jumpLink: '/static/loan/bill/index.html?tab=billFailing'
+                jumpLink: '/static/loan/bill/index.html#3'
             }, {
                 typeNameCN: '已还款',
                 iconImg: 'images/bill_finished_icon.png',
-                jumpLink: '/static/loan/bill/index.html?tab=billPaid'
+                jumpLink: '/static/loan/bill/index.html#4'
             }
         ];
         let billType = billTypesObj.map((type, index) => (<BillType billType={type.typeNameCN} src={type.iconImg} key={type.typeNameCN} handleClick={() => {
