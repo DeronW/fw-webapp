@@ -53,9 +53,10 @@ const Mall = React.createClass({
     },
     render: function () {
         let banner;
+        var bs = this.props.banners;
         let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();
 
-        if (this.props.banners.length) {
+        if (bs.length) {
             banner = <BannerGroup className={iOSApp ? "head-images head-images-ios" : "head-images"}
                 images={this.getHeadImages()}
                 onImageClick={this.onImageClickHandler} />
