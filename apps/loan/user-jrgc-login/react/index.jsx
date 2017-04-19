@@ -32,7 +32,8 @@ $FW.DOMReady(function () {
                 id: dict.userId,
                 gid: dict.userGid,
                 status: dict.userStatus,
-                code:dict.invitationCode
+                code: dict.invitationCode,
+                uid: dict.uid
             })
             location.href = '/static/loan/home/index.html';
         }, e => $FW.Component.Alert(e.message));
