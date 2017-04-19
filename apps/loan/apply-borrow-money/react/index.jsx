@@ -369,8 +369,20 @@ class Btn extends React.Component {
 		}
 	}
 	render() {
+		const { getSelectListProps, pushType } = this.props
+
+		const btnStyle = {
+			position: 'fixed',
+			width: '100%',
+			height: '128px',
+			bottom: '0',
+			left: '0',
+			backgroundColor: '#fff',
+			boxShadow: '0 0 20px rgba(0, 0, 0, 0.2)'
+		}
+
 		return (
-			<div className="btn-area">
+			<div className="btn-area" style={ getSelectListProps == 'city' && pushType == 'popBtn' ? btnStyle : null }>
 				<div className="btn" onClick={ this.handlerBtn.bind(this) }>确定</div>
 			</div>
 		)
@@ -545,7 +557,7 @@ class ApplyBorrowMoney extends React.Component {
 					pushType= { 'pushBtn' }
 					getSumMoneyPopVal = { this.state.sumMoneyListObj }
 					propsAgree = { this.state.agreeShow }
-
+					getSelectListProps = { this.state.selectList }
 				/>
 
 				{ this.state.popShow ?  <WindowPop
