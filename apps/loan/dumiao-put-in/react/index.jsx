@@ -12,8 +12,6 @@ class SumList extends React.Component {
     render() {
         const { getPopVal, getSumMoneyPopVal } = this.props
 
-        //console.log(getSumMoneyPopVal)
-
         return (
             <div className="sum-list ui-list" onClick={this.handlerSum.bind(this)}>
                 <div className="list">
@@ -146,8 +144,6 @@ class JobInfo extends React.Component {
             ['税后月收入', 'income'],
             ['工作年限', 'yearsOfWork']
         ]
-
-        console.log(getSumMoneyPopVal)
 
         return (
             <div className="job-info">
@@ -428,32 +424,6 @@ class ApplyBorrowMoney extends React.Component {
 		}
 	}
     componentDidMount(){
-			// this.setState({
-			// 	sumMoneyListObj: {
-			// 		moneyVal: '',
-			// 		deadlineVal: '',
-			// 		creditCardVal: 12342412,
-			// 		emailVal: null,
-			// 		homeVal: null,
-			// 		realName: 'xx',
-			// 		idCard: 2414521521,
-			// 		city: null,
-			// 		cityIndex: '',
-			// 		marriageVal: null,
-			// 		marriageIndex: 1,
-			// 		urgentPerson: null,
-			// 		relationship: '11',
-			// 		relationshipIndex: 1,
-			// 		phone: null,
-			// 		income: null,
-			// 		incomeIndex: null,
-			// 		yearsOfWork: null,
-			// 		yearsOfWorkIndex: null
-			// 	}
-
-			// })
-
-
         $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`).then(data => {
             let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
 
@@ -624,13 +594,8 @@ class ApplyBorrowMoney extends React.Component {
 	}
 }
 
-//ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
-
 $FW.DOMReady(() => {
-    NativeBridge.setTitle('借款申请');
     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
 	ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
-	//ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE)
-
 })
 
