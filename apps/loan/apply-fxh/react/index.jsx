@@ -143,7 +143,7 @@ class ApplyLoan extends React.Component {
         let loanBtnClick = () => {
             st === 101 ?
                 $FW.Component.Toast('设置提现卡申请处理中，请稍等') :
-                gotoHandler(link)
+                link
         }
         let loan_btn = <Nav className="loan-btn" onClick={loanBtnClick}>申请借款</Nav>;
 
