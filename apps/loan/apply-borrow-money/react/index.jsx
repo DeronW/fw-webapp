@@ -575,6 +575,7 @@ class ApplyBorrowMoney extends React.Component {
 //ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle('借款申请');
     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
         .then(
