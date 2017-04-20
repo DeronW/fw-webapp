@@ -4,6 +4,19 @@ body {
 
 input,button,select,textarea{ outline:none;}
 
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #ccc;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #ccc;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #ccc;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #ccc;
+}
+
 .ui-list {
 	margin: 0 0 20px 0;
 	padding: 0 0 0 30px;
@@ -44,7 +57,7 @@ input,button,select,textarea{ outline:none;}
 				height: 30px;
 				padding: 28px 0;
 				font-size: 30px;
-				color: #ccc;
+				color: #333;
 				line-height: 30px;
 				border: none;
 				text-align: right;

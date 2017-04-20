@@ -48,8 +48,7 @@ class BasicInfo extends React.Component {
 	}
 	render() {
 		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['城市 ', 'city'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
-		const { getSumMoneyPopVal ,getSelectList } = this.props
-		console.log(getSumMoneyPopVal)
+		const { getSumMoneyPopVal ,getSelectList } = this.props		
 
 		return (
 			<div className="basic-info">
@@ -58,13 +57,13 @@ class BasicInfo extends React.Component {
 					<div className="list">
 						<div className="name-text">姓名</div>
 						<div className="r no">
-							<div className="text">{ getSumMoneyPopVal.realName } </div>
+							<div className="text" style={{ color: '#333' }}>{ getSumMoneyPopVal.realName } </div>
 						</div>
 					</div>
 					<div className="list">
 						<div className="name-text">身份证号</div>
 						<div className="r no">
-							<div className="text"> { getSumMoneyPopVal.idCard }</div>
+							<div className="text"  style={{ color: '#333' }} > { getSumMoneyPopVal.idCard }</div>
 						</div>
 					</div>
 					{
