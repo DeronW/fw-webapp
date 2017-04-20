@@ -456,8 +456,8 @@ class WindowPop extends React.Component {
 		}
 
         let ABCStyle = {
-            height: 100 / (CITY_ARR.length + 1) +'%',
-            lineHeight: '200%'
+            height: 80 / (CITY_ARR.length + 1) +'%',
+            lineHeight: '100%'
         }
 
 		let cityList = () => {

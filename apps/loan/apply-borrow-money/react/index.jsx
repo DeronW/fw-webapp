@@ -57,13 +57,13 @@ class BasicInfo extends React.Component {
 					<div className="list">
 						<div className="name-text">姓名</div>
 						<div className="r no">
-							<div className="text" style={{ color: '#333' }}>{ getSumMoneyPopVal.realName } </div>
+							<div className="text" style={{ color: '#ccc' }}>{ getSumMoneyPopVal.realName } </div>
 						</div>
 					</div>
 					<div className="list">
 						<div className="name-text">身份证号</div>
 						<div className="r no">
-							<div className="text"  style={{ color: '#333' }} > { getSumMoneyPopVal.idCard }</div>
+							<div className="text"  style={{ color: '#ccc' }} > { getSumMoneyPopVal.idCard }</div>
 						</div>
 					</div>
 					{
