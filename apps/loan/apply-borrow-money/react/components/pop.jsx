@@ -29,16 +29,36 @@ class WindowPop extends React.Component {
 			tabShow: false,
 			deadline: [],
 			deadlineIconShow: false,
-			deadlineIconIndex: 0,
-            url: window.location.href
+			deadlineIconIndex: 0            
 		}
 	}
 	componentWillMount() {
 		const { selectList, getPopSumMoneyListObj, getPopInfo } = this.props
-		
+				
+		if(getPopSumMoneyListObj.moneyVal >= 1000 && getPopSumMoneyListObj.moneyVal <= 3000 ) {
+			this.setState({
+				deadline: [1, 3, 6, 12]
+			})
+		} else if (getPopSumMoneyListObj.moneyVal >= 4000 && e.getPopSumMoneyListObj.moneyVal <= 5000) {
+			this.setState({
+				deadline: [3, 6, 12]
+			})
+		} else if (getPopSumMoneyListObj.moneyVal >= 6000 && getPopSumMoneyListObj.moneyVal <= 20000) {
+			this.setState({
+				deadline: [6, 12, 18, 24]
+			})
+		} else if (getPopSumMoneyListObj.moneyVal >= 21000 && getPopSumMoneyListObj.moneyVal <= 50000) {
+			this.setState({
+				deadline: [12, 18, 24]
+			})
+		} else if(getPopSumMoneyListObj.moneyVal < 1000 || getPopSumMoneyListObj.moneyVal > 50000) {
+			this.setState({
+				deadline: []
+			})
+		}
+
 		this.setState({
-			selectList: selectList
-			//sumMoneyListObj: getPopSumMoneyListObj
+			selectList: selectList			
 		})
 
 		switch( selectList ) {
@@ -188,7 +208,9 @@ class WindowPop extends React.Component {
 		}
 	}
 	handlerDate(e) {
+
 		const inputVal = this.state.sumMoneyListObj.moneyVal
+		
 
 		if(inputVal.length == 0) {
             $FW.Component.Toast("金额不能为空");
@@ -201,7 +223,7 @@ class WindowPop extends React.Component {
 		}
 	}
 
-	handlerSelectDeadline(index, data) {
+	handlerSelectDeadline(index, data) {		
 		const copState = this.state.sumMoneyListObj
 
 		copState.deadlineVal = data,
@@ -289,14 +311,14 @@ class WindowPop extends React.Component {
 	}
 
 	render() {
-		const { selectList, popTitle, getPopShow, getPopInfo } = this.props
+		const { selectList, popTitle, getPopShow, getPopInfo } = this.props		
 
 		let listNextTab = () => {
 			return 		<div className="list list-next-tab">
 							<div className="" onClick={ this.handlerDate.bind(this) }>
 								<div className="name-text">期限</div>
 								<div className="r">
-									<div className="text">{ this.state.sumMoneyListObj.deadlineVal } { this.state.deadlineIconShow ? '个月' : '' }</div>
+									<div className="text">{ this.state.sumMoneyListObj.deadlineVal } { this.state.sumMoneyListObj.deadlineVal != '' ? '个月' : '' }</div>
 									<div className="arrow-icon"></div>
 								</div>
 
