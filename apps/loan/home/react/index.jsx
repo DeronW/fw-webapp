@@ -1,4 +1,13 @@
-
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
 
 class MainPanel extends React.Component {
     render() {
@@ -9,7 +18,7 @@ class MainPanel extends React.Component {
                 link = p.productName == '放心花' ? link_a : link_b;
 
             return (
-                <Nav className="borrow-money-list" key={index} href={`${link}?pid=${p.productId}`}>
+                <Nav className="borrow-money-list" key={index} onClick={()=>gotoHandler(`${link}?pid=${p.productId}`)}>
                     <div className="icon-block">
                         <img src="images/icon.png" />
                     </div>
@@ -34,10 +43,10 @@ class MainPanel extends React.Component {
 
         return (
             <div className="main-panel">
-                <a href="/static/loan/weixin-download/index.html" className="banner">
+                <a onClick={()=>gotoHandler("/static/loan/weixin-download/index.html")} className="banner">
                     <img src="images/banner.png" />
                 </a>
-                <a href={`/static/loan/apply-fxh/index.html?pid=${main_product.productId}`} className="top-info">
+                <a onClick={()=>gotoHandler(`/static/loan/apply-fxh/index.html?pid=${main_product.productId}`)} className="top-info">
                     <div className="logo"> <img src="images/logo.png" /> </div>
                     <div className="title"> {main_product.productName} </div>
                     <div className="tag">

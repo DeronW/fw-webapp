@@ -303,7 +303,8 @@ class InteractWrap extends React.Component {
                     token: dict.userToken,
                     id: dict.userId,
                     gid: dict.userGid,
-                    status: dict.userStatus
+                    status: dict.userStatus,
+                    uid:dict.uid
                 });
                 window.location.href = '/static/loan/home/index.html';
             default:
