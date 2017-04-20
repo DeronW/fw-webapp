@@ -1,3 +1,11 @@
+function gotoHandler(link) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 class ApplyLoan extends React.Component {
     constructor(props) {
         super(props)
@@ -143,7 +151,7 @@ class ApplyLoan extends React.Component {
         let loanBtnClick = () => {
             st === 101 ?
                 $FW.Component.Toast('设置提现卡申请处理中，请稍等') :
-                link
+                gotoHandler(link)
         }
         let loan_btn = <Nav className="loan-btn" onClick={loanBtnClick}>申请借款</Nav>;
 
