@@ -1,202 +1,202 @@
 
 class SumList extends React.Component {
-	constructor(props) {
-		super(props)
-	}
+    constructor(props) {
+        super(props)
+    }
 
-	handlerSum() {
-		const { selectListFun } = this.props
+    handlerSum() {
+        const { selectListFun } = this.props
 
-		selectListFun('sumMoney', '金额和期限', true)
-	}
-	render() {
-		const { getPopVal, getSumMoneyPopVal } = this.props
+        selectListFun('sumMoney', '金额和期限', true)
+    }
+    render() {
+        const { getPopVal, getSumMoneyPopVal } = this.props
 
-		//console.log(getSumMoneyPopVal)
+        //console.log(getSumMoneyPopVal)
 
-		return (
-			<div className="sum-list ui-list" onClick={this.handlerSum.bind(this)}>
-				<div className="list">
-					<div className="name-text">借款金额</div>
-					<div className="r">
-						<div className="text" style={{ color: getSumMoneyPopVal.moneyVal == '' ? '#ccc' : null }}>{ getSumMoneyPopVal.moneyVal == '' ? '请选择' : getSumMoneyPopVal.moneyVal }</div>
-						<div className="arrow-icon"></div>
-					</div>
-				</div>
-				<div className="list">
-					<div className="name-text">期限</div>
-					<div className="r">
-						<div className="text" style={{ color: getSumMoneyPopVal.deadlineVal == '' ? '#ccc' : null }}> { getSumMoneyPopVal.deadlineVal == '' ? '请选择' : getSumMoneyPopVal.deadlineVal + '个月' }</div>
-						<div className="arrow-icon"></div>
-					</div>
-				</div>
-			</div>
-		)
-	}
+        return (
+            <div className="sum-list ui-list" onClick={this.handlerSum.bind(this)}>
+                <div className="list">
+                    <div className="name-text">借款金额</div>
+                    <div className="r">
+                        <div className="text" style={{ color: getSumMoneyPopVal.moneyVal == '' ? '#ccc' : null }}>{getSumMoneyPopVal.moneyVal == '' ? '请选择' : getSumMoneyPopVal.moneyVal}</div>
+                        <div className="arrow-icon"></div>
+                    </div>
+                </div>
+                <div className="list">
+                    <div className="name-text">期限</div>
+                    <div className="r">
+                        <div className="text" style={{ color: getSumMoneyPopVal.deadlineVal == '' ? '#ccc' : null }}> {getSumMoneyPopVal.deadlineVal == '' ? '请选择' : getSumMoneyPopVal.deadlineVal + '个月'}</div>
+                        <div className="arrow-icon"></div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 }
 
 
 class BasicInfo extends React.Component {
-	constructor() {
-		super()
+    constructor() {
+        super()
 
-	}
-	handlerSelect(data) {
-		const { selectListFun } = this.props
+    }
+    handlerSelect(data) {
+        const { selectListFun } = this.props
 
-		selectListFun(data[1], data[0], true)
-	}
-	render() {
-		const basicArr = [ ['信用卡', 'creditCardVal' ], ['邮箱', 'emailVal'], ['城市 ', 'city'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal'] ]
-		const { getSumMoneyPopVal ,getSelectList } = this.props		
+        selectListFun(data[1], data[0], true)
+    }
+    render() {
+        const basicArr = [['信用卡', 'creditCardVal'], ['邮箱', 'emailVal'], ['城市 ', 'city'], ['现居住地', 'homeVal'], ['婚姻', 'marriageVal']]
+        const { getSumMoneyPopVal, getSelectList } = this.props
 
-		return (
-			<div className="basic-info">
-				<div className="ui-title">基本信息</div>
-				<div className="ui-list">
-					<div className="list">
-						<div className="name-text">姓名</div>
-						<div className="r no">
-							<div className="text" style={{ color: '#ccc' }}>{ getSumMoneyPopVal.realName } </div>
-						</div>
-					</div>
-					<div className="list">
-						<div className="name-text">身份证号</div>
-						<div className="r no">
-							<div className="text"  style={{ color: '#ccc' }} > { getSumMoneyPopVal.idCard }</div>
-						</div>
-					</div>
-					{
-						basicArr.map((data, index) => {
-							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data)}>
-									<div className="name-text">{ data[0] }</div>
-									<div className="r">
-										<div className="text" style={{ color: getSumMoneyPopVal[data[1]] == null ? '#ccc' : '' }} >
-												{ getSumMoneyPopVal[data[1]] == null ? '请填写' : getSumMoneyPopVal[data[1]]}
-										</div>
-										<div className="arrow-icon"></div>
-									</div>
-								</div>
+        return (
+            <div className="basic-info">
+                <div className="ui-title">基本信息</div>
+                <div className="ui-list">
+                    <div className="list">
+                        <div className="name-text">姓名</div>
+                        <div className="r no">
+                            <div className="text" style={{ color: '#ccc' }}>{getSumMoneyPopVal.realName} </div>
+                        </div>
+                    </div>
+                    <div className="list">
+                        <div className="name-text">身份证号</div>
+                        <div className="r no">
+                            <div className="text" style={{ color: '#ccc' }} > {getSumMoneyPopVal.idCard}</div>
+                        </div>
+                    </div>
+                    {
+                        basicArr.map((data, index) => {
+                            return <div className="list" key={index} onClick={this.handlerSelect.bind(this, data)}>
+                                <div className="name-text">{data[0]}</div>
+                                <div className="r">
+                                    <div className="text" style={{ color: getSumMoneyPopVal[data[1]] == null ? '#ccc' : '' }} >
+                                        {getSumMoneyPopVal[data[1]] == null ? '请填写' : getSumMoneyPopVal[data[1]]}
+                                    </div>
+                                    <div className="arrow-icon"></div>
+                                </div>
+                            </div>
 
-						})
-					}
-				</div>
-			</div>
-		)
-	}
+                        })
+                    }
+                </div>
+            </div>
+        )
+    }
 }
 
 class UrgentContactPerson extends React.Component {
-	constructor() {
-		super()
-	}
-	handlerSelect(data) {
-		const { selectListFun } = this.props
+    constructor() {
+        super()
+    }
+    handlerSelect(data) {
+        const { selectListFun } = this.props
 
-		selectListFun(data[1], data[0], true)
-	}
+        selectListFun(data[1], data[0], true)
+    }
 
-	render() {
-		const { getSumMoneyPopVal } = this.props
+    render() {
+        const { getSumMoneyPopVal } = this.props
 
-		const URGENT_CONTACT_PERSON_ARR = [
-			['紧急联系人', 'urgentPerson'],
-			['联系人关系', 'relationship'],
-			['联系人手机', 'phone']
-		]
+        const URGENT_CONTACT_PERSON_ARR = [
+            ['紧急联系人', 'urgentPerson'],
+            ['联系人关系', 'relationship'],
+            ['联系人手机', 'phone']
+        ]
 
-		return (
-			<div className="urgent-contact-person">
-				<div className="ui-title">紧急联系人</div>
-				<div className="ui-list">
-					{
-						URGENT_CONTACT_PERSON_ARR.map((data, index) => {
-							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data) }>
-							 		<div className="name-text">{ data[0] }</div>
-									<div className="r">
-										<div className="text"  style={{ color: getSumMoneyPopVal[data[1]] == null ? '#ccc' : '' }}>
-											{ getSumMoneyPopVal[data[1]] == null ? '未填写' :  getSumMoneyPopVal[data[1]] }
-										</div>
-										<div className="arrow-icon"></div>
-									</div>
-								</div>
-						})
+        return (
+            <div className="urgent-contact-person">
+                <div className="ui-title">紧急联系人</div>
+                <div className="ui-list">
+                    {
+                        URGENT_CONTACT_PERSON_ARR.map((data, index) => {
+                            return <div className="list" key={index} onClick={this.handlerSelect.bind(this, data)}>
+                                <div className="name-text">{data[0]}</div>
+                                <div className="r">
+                                    <div className="text" style={{ color: getSumMoneyPopVal[data[1]] == null ? '#ccc' : '' }}>
+                                        {getSumMoneyPopVal[data[1]] == null ? '未填写' : getSumMoneyPopVal[data[1]]}
+                                    </div>
+                                    <div className="arrow-icon"></div>
+                                </div>
+                            </div>
+                        })
 
-					}
-				</div>
-			</div>
-		)
-	}
+                    }
+                </div>
+            </div>
+        )
+    }
 }
 
 
 class JobInfo extends React.Component {
-	constructor() {
-		super()
-	}
-	handlerSelect(data) {
-		const { selectListFun } = this.props
+    constructor() {
+        super()
+    }
+    handlerSelect(data) {
+        const { selectListFun } = this.props
 
-		selectListFun(data[1], data[0], true)
-	}
-	render() {
-		const { getSumMoneyPopVal } = this.props
+        selectListFun(data[1], data[0], true)
+    }
+    render() {
+        const { getSumMoneyPopVal } = this.props
 
-		const JOB_INFO_ARR = [
-			['税后月收入', 'income'],
-			['工作年限', 'yearsOfWork']
-		]
+        const JOB_INFO_ARR = [
+            ['税后月收入', 'income'],
+            ['工作年限', 'yearsOfWork']
+        ]
 
-		console.log(getSumMoneyPopVal)
+        console.log(getSumMoneyPopVal)
 
-		return (
-			<div className="job-info">
-				<div className="ui-title">工作信息</div>
-				<div className="ui-list">
-					{
-						JOB_INFO_ARR.map((data, index) => {
-							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data) }>
-									<div className="name-text">{ data[0] }</div>
-									<div className="r">
-										<div className="text" style={{ color: getSumMoneyPopVal[data[1]] == null ? '#ccc' : '' }}>
-											{ getSumMoneyPopVal[data[1]] == null ? '请选择' : getSumMoneyPopVal[data[1]] }
-										</div>
-										<div className="arrow-icon"></div>
-									</div>
-								</div>
-						})
-					}
+        return (
+            <div className="job-info">
+                <div className="ui-title">工作信息</div>
+                <div className="ui-list">
+                    {
+                        JOB_INFO_ARR.map((data, index) => {
+                            return <div className="list" key={index} onClick={this.handlerSelect.bind(this, data)}>
+                                <div className="name-text">{data[0]}</div>
+                                <div className="r">
+                                    <div className="text" style={{ color: getSumMoneyPopVal[data[1]] == null ? '#ccc' : '' }}>
+                                        {getSumMoneyPopVal[data[1]] == null ? '请选择' : getSumMoneyPopVal[data[1]]}
+                                    </div>
+                                    <div className="arrow-icon"></div>
+                                </div>
+                            </div>
+                        })
+                    }
 
-				</div>
-			</div>
-		)
-	}
+                </div>
+            </div>
+        )
+    }
 }
 
 class Agree extends React.Component {
-	constructor() {
-		super()
+    constructor() {
+        super()
 
-		this.state = {
-			agreeShow: false
-		}
-	}
-	handlerAgree() {
-		const { getAgree } = this.props
+        this.state = {
+            agreeShow: false
+        }
+    }
+    handlerAgree() {
+        const { getAgree } = this.props
 
-		this.setState({
-			agreeShow: !this.state.agreeShow
-		})
+        this.setState({
+            agreeShow: !this.state.agreeShow
+        })
 
-		getAgree(this.state.agreeShow)
-	}
+        getAgree(this.state.agreeShow)
+    }
 
-	render() {
-		return (
-			<div className="agree">
-				<div className={ this.state.agreeShow ? 'agree-icon select-icon' : 'agree-icon'  } onClick={ this.handlerAgree.bind(this)  }></div>
-				<div className="text">
-					点击“申请借款”即视为同意
+    render() {
+        return (
+            <div className="agree">
+                <div className={this.state.agreeShow ? 'agree-icon select-icon' : 'agree-icon'} onClick={this.handlerAgree.bind(this)}></div>
+                <div className="text">
+                    点击“申请借款”即视为同意
                     <a href="/static/loan/protocol-dumiao-openaccount/index.html">《读秒开户授权书》</a>、
                     <a href="/static/loan/protocol-personinfo-collect/index.html">《个人信息采集授权说明》</a>
 				</div>
@@ -460,7 +460,7 @@ class ApplyBorrowMoney extends React.Component {
 			let homeSituationState = null
 			let relationshipState = null
 			let yearsOfWorkState = null
-			let incomeState = null 
+			let incomeState = null
 
 			if(data.homeSituation == 0) {
 				homeSituationState = '未婚'
@@ -631,6 +631,6 @@ $FW.DOMReady(() => {
     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
 	ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
 	//ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE)
-	    
+
 })
 
