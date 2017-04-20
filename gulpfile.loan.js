@@ -25,7 +25,7 @@ const USER_PAGES = [
     'user-bank-support', //支持银行卡
     'user-card-management', //银行卡管理
     'user-verify-phone',
-    'user-jrgc-login',
+    'user-jrgc-login', // 金融工场 App 同步登录页面
     'user-weixin',
 ]
 
@@ -40,7 +40,7 @@ const OUTSIDE_PAGES = [
     'outside-register', // 放心花注册页面
     'outside-register-success-wx',
     'outside-register-success-app',
-    'outside-register-success-other_apps',
+    'outside-register-success-other-apps',
 ]
 
 // 账单模块
@@ -54,8 +54,6 @@ const BILL_PAGES = [
 
 // 申请借款模块
 const APPLY_PAGES = [
-    'apply-fxh', // 掌众产品借款页面
-    'apply-du-miao', // 读秒产品借款页面
     'apply-want', //我要借款页面
     'apply-confirm', //确认借款页面
     'apply-result'
@@ -71,18 +69,22 @@ const PROTOCOL_PAGES = [
     'protocol-dumiao-openaccount',//读秒开户授权书
 ]
 
-const DEVELOPING_PAGES = [
+const FXH_PAGES = [
+    'fxh', // 掌众产品借款页面
+]
+
+const DU_MIAO_PAGES = [
+    'dumiao', // 读秒产品借款页面
+    'dumiao-put-in', // 读秒进件页面
+]
+
+const WEIXIN_PAGES = [
     'weixin-download',
     'weixin-invite',
     'weixin-attention',
     'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
-//借钱
-const BORROW_MONEY = [
-    // 'borrow-money',
-    'apply-borrow-money'
-]
 
 // Beta项目, 使用 webpack 编译指定页面
 const WEBPACK_PAGES = [
@@ -102,9 +104,10 @@ APP_NAMES.push(
     ...APP_NAMES,
     ...PROTOCOL_PAGES,
     ...JRGC_PAGES,
-    ...DEVELOPING_PAGES,
-    ...WEBPACK_PAGES,
-    ...BORROW_MONEY
+    ...WEIXIN_PAGES,
+    ...FXH_PAGES,
+    ...DU_MIAO_PAGES,
+    ...WEBPACK_PAGES
 );
 
 

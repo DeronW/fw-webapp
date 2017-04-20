@@ -95,7 +95,7 @@ class BorrowMoney extends React.Component {
         if(borrowStatus == 1 || borrowStatus == 101){
             location.href = '/static/loan/user-card-set/index.html';
         }else if(ableEnter == 10000){
-            location.href = '/static/loan/apply-borrow-money/index.html?pid=' + $FW.Format.urlQuery().pid;
+            location.href = '/static/loan/apply-dumiao-put-in/index.html?pid=' + $FW.Format.urlQuery().pid;
         }else if(ableEnter == 1001002){
              this.setState({dumiaoEnterPopShow:true});
         }else{
