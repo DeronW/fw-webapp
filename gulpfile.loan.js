@@ -18,7 +18,7 @@ const USER_PAGES = [
     'user-set-password',
     'user-reset-password',
     'user', //我
-    'user-info',
+    'user-info', // 个人信息设置
     'user-card-set', //设置提现卡
     'user-card-add', //添加提现卡
     'user-verify-phone', //获取验证码
@@ -47,9 +47,7 @@ const OUTSIDE_PAGES = [
 const BILL_PAGES = [
     'bill', //账单首页
     'bill-history', //历史账单
-    'bill-detail', //账单详情
     'bill-payback', //还款页面
-    'bill-detail-dumiao'//读秒账单详情页
 ]
 
 // 申请借款模块
@@ -71,11 +69,13 @@ const PROTOCOL_PAGES = [
 
 const FXH_PAGES = [
     'fxh', // 掌众产品借款页面
+    'fxh-bill', //账单详情
 ]
 
 const DU_MIAO_PAGES = [
     'dumiao', // 读秒产品借款页面
     'dumiao-put-in', // 读秒进件页面
+    'dumiao-bill', //读秒账单详情页
 ]
 
 const WEIXIN_PAGES = [
