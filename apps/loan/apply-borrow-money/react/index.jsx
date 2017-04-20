@@ -19,14 +19,14 @@ class SumList extends React.Component {
 				<div className="list">
 					<div className="name-text">借款金额</div>
 					<div className="r">
-						<div className="text">{ getSumMoneyPopVal.moneyVal == '' ? '请选择' : getSumMoneyPopVal.moneyVal }</div>
+						<div className="text" style={{ color: getSumMoneyPopVal.moneyVal == '' ? '#ccc' : null }}>{ getSumMoneyPopVal.moneyVal == '' ? '请选择' : getSumMoneyPopVal.moneyVal }</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
 				<div className="list">
 					<div className="name-text">期限</div>
 					<div className="r">
-						<div className="text"> { getSumMoneyPopVal.deadlineVal == '' ? '请选择' : getSumMoneyPopVal.deadlineVal + '个月' }</div>
+						<div className="text" style={{ color: getSumMoneyPopVal.deadlineVal == '' ? '#ccc' : null }}> { getSumMoneyPopVal.deadlineVal == '' ? '请选择' : getSumMoneyPopVal.deadlineVal + '个月' }</div>
 						<div className="arrow-icon"></div>
 					</div>
 				</div>
@@ -72,7 +72,9 @@ class BasicInfo extends React.Component {
 							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data)}>
 									<div className="name-text">{ data[0] }</div>
 									<div className="r">
-										<div className="text">{ getSumMoneyPopVal[data[1]] == null ? '请填写' : getSumMoneyPopVal[data[1]]}</div>
+										<div className="text" style={{ color: getSumMoneyPopVal[data[1]] == null ? '#ccc' : '' }} >
+												{ getSumMoneyPopVal[data[1]] == null ? '请填写' : getSumMoneyPopVal[data[1]]}
+										</div>
 										<div className="arrow-icon"></div>
 									</div>
 								</div>
@@ -113,7 +115,9 @@ class UrgentContactPerson extends React.Component {
 							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data) }>
 							 		<div className="name-text">{ data[0] }</div>
 									<div className="r">
-										<div className="text">{ getSumMoneyPopVal[data[1]] == null ? '未填写' :  getSumMoneyPopVal[data[1]] }</div>
+										<div className="text"  style={{ color: getSumMoneyPopVal[data[1]] == null ? '#ccc' : '' }}>
+											{ getSumMoneyPopVal[data[1]] == null ? '未填写' :  getSumMoneyPopVal[data[1]] }
+										</div>
 										<div className="arrow-icon"></div>
 									</div>
 								</div>
@@ -155,7 +159,9 @@ class JobInfo extends React.Component {
 							return <div className="list" key={ index } onClick={ this.handlerSelect.bind(this, data) }>
 									<div className="name-text">{ data[0] }</div>
 									<div className="r">
-										<div className="text">{ getSumMoneyPopVal[data[1]] == null ? '请选择' : getSumMoneyPopVal[data[1]] }</div>
+										<div className="text" style={{ color: getSumMoneyPopVal[data[1]] == null ? '#ccc' : '' }}>
+											{ getSumMoneyPopVal[data[1]] == null ? '请选择' : getSumMoneyPopVal[data[1]] }
+										</div>
 										<div className="arrow-icon"></div>
 									</div>
 								</div>
