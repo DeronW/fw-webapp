@@ -3,7 +3,7 @@ class BillDetail extends React.Component{
         super(props);
     }
     render(){
-        let baseStatus = $FW.Format.urlQuery().baseStatus;
+        let baseStatus = this.props.data.baseStatus;
         return (
             <div className="detail-container">
                 <div className="logo-wrap">
@@ -28,7 +28,7 @@ class BillDetail extends React.Component{
                 <div className="detail-status">
 
                 </div>
-                { (baseStatus == 3 || baseStatus == 4) && <div className="enter-btn-wrap">
+                { baseStatus < 3 && <div className="enter-btn-wrap">
                     <a className="enter-btn" href={`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userGid=${USER.gid}&userId=${USER.id}&uid=${USER.uid}&loanUuid=${$FW.Format.urlQuery().uuid}`}>点击进入读秒</a>
                 </div>}
             </div>
