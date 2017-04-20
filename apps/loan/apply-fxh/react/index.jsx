@@ -145,7 +145,7 @@ class ApplyLoan extends React.Component {
                 $FW.Component.Toast('设置提现卡申请处理中，请稍等') :
                 gotoHandler(link)
         }
-        let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
+        let loan_btn = <Nav className="loan-btn" onClick={loanBtnClick}>申请借款</Nav>;
 
         let credit_btn =
             <a className="loan-btn" href={$FW.Browser.inApp() && st == 3 ? `/static/loan/user-weixin/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>

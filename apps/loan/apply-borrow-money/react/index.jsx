@@ -454,6 +454,8 @@ class ApplyBorrowMoney extends React.Component {
 
 			let homeSituationState = null
 			let relationshipState = null
+			let yearsOfWorkState = null
+			let incomeState = null 
 
 			if(data.homeSituation == 0) {
 				homeSituationState = '未婚'
@@ -483,6 +485,30 @@ class ApplyBorrowMoney extends React.Component {
 				relationshipState = null
 			}
 
+			if(data.income == 0) {
+				incomeState = '3000以下'
+			} else if(data.income == 1) {
+				incomeState = '3000-5000元'
+			} else if(data.income == 2) {
+				incomeState = '5000-10000元'
+			} else if(data.income == 3) {
+				incomeState = '20000元以上'
+			} else {
+				incomeState = null
+			}
+
+			if(data.workExperience == 0) {
+				yearsOfWorkState = '1年以下'
+			} else if (data.workExperience == 1) {
+				yearsOfWorkState = '1-5年 '
+			} else if (data.workExperience == 2) {
+				yearsOfWorkState = '6-10年'
+			} else if (data.workExperience == 3) {
+				yearsOfWorkState = '10年以上'
+			} else {
+				yearsOfWorkState = null
+			}
+
 			this.setState({
 				sumMoneyListObj: {
 					moneyVal: '',
@@ -501,8 +527,8 @@ class ApplyBorrowMoney extends React.Component {
 					relationshipIndex: data.emRelationship,
 					phone: data.emMobile,
 					income: data.income,
-					incomeIndex: data.income,
-					yearsOfWork: data.workExperience,
+					incomeIndex: incomeState,
+					yearsOfWork: yearsOfWorkState,
 					yearsOfWorkIndex: data.workExperience
 				}
 
