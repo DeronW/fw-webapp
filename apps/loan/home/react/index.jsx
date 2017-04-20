@@ -46,7 +46,7 @@ class MainPanel extends React.Component {
                 <a onClick={()=>gotoHandler("/static/loan/weixin-download/index.html")} className="banner">
                     <img src="images/banner.png" />
                 </a>
-                <a onClick={()=>gotoHandler(`/static/loan/apply-fxh/index.html?pid=${main_product.productId}`)} className="top-info">
+                <a onClick={()=>gotoHandler(`/static/loan/fxh/index.html?pid=${main_product.productId}`)} className="top-info">
                     <div className="logo"> <img src="images/logo.png" /> </div>
                     <div className="title"> {main_product.productName} </div>
                     <div className="tag">
