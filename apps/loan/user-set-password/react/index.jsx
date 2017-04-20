@@ -15,11 +15,6 @@ function istrue(str) {
     return reg.test(str);
 }
 
-function emptyString(str){
-    var reg = /\s*/g;
-    return reg.test(str);
-}
-
 const SetPassword = React.createClass({
     getInitialState() {
         let query = $FW.Format.urlQuery();
@@ -85,7 +80,6 @@ const SetPassword = React.createClass({
         if (password.length < 8) err = "密码不能少于8位";
         if (password.length > 16) err = "密码不能多于16位";
         if (!istrue(password)) err = "必须是字母及数字组合密码";
-        if (!istrue(inviteCode) || emptyString(inviteCode)) err = "必须是字母及数字组合";
         if (!checked) err = "请同意放心花注册协议";
         if (codeToken == '') err = "Token值不完整，无法注册";
 
