@@ -74,11 +74,7 @@ const WantLoan = React.createClass({
                 <div className="loan-box">
                     <div className="loan-box-title">借款金额(元)</div>
                     <input className="loan-num" type="number" name="number" value={this.state.loanNum} onChange={this.changeHandler} />
-                    <div className="horizonal-line">
-                        <div className="line1"></div>
-                        <div className="line2"></div>
-                        <div className="line3"></div>
-                    </div>
+                    <div className="horizonal-line"></div>
                     <div className="loan-charge"><img className="icon" src="images/icon.png" />日综合费率<span>{this.props.baseRateDayStr}</span>，期限<span>{this.props.productPeriod}天</span></div>
                 </div>
                 <div className="withdraw-card">
