@@ -9,7 +9,7 @@ let QUESTIONS = [{
         a: 'B.31-50岁',
         score: 6
     }, {
-        a: 'C.51-64岁',
+        a: 'C.51-65岁',
         score: 4
     }, {
         a: 'D.高于65岁',
@@ -264,7 +264,8 @@ const QuestionPanel = React.createClass({
             $FW.Component.Toast("您还有未填写试题");
         } else {
             $FW.Ajax({
-                url: `${API_PATH}/mpwap/orderuser/riskGradeP2P.shtml`, //传参数
+                // url: `${API_PATH}/mpwap/orderuser/riskGradeP2P.shtml`, //传参数
+                url: `${API_PATH}/mpwap/orderuser/riskGradeInto.shtml`, //传参数
                 data: form_data,
                 success: data => {
                     this.props.setResult(true, data.score, data.gradeLevel);
@@ -299,7 +300,6 @@ const QuestionPanel = React.createClass({
         return (
             <div className="question-box">
                 <div className="question-img"><img src="images/question-top.png"/></div>
-                <div className="question-tip">风险提示：投资需承担各类风险，可能遭受资金损失。市场有风险，投资需谨慎。</div>
                 <div className="question-ul">{QUESTIONS.map(question)}</div>
                 <div className="foot-btn-box">
                     <div className="foot-btn" onClick={this.fnSumHandler}>提交</div>
