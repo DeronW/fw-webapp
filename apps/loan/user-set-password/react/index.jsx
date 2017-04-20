@@ -40,7 +40,7 @@ const SetPassword = React.createClass({
     },
     changeInviteCodeHandler(e) {
         let v = e.target.value;
-        v.length <= 7 && this.setState({ inviteCode: v });
+        v.length <= 8 && istrue(v) && this.setState({ inviteCode: v });
     },
     componentDidMount() {
         this.countingDown();
@@ -71,7 +71,7 @@ const SetPassword = React.createClass({
         this.setState({ plainCode: !this.state.plainCode });
     },
     handleRegisterBtn() {
-        let err, { password, code, checked, codeToken } = this.state;
+        let err, { password, code, checked, codeToken, inviteCode } = this.state;
 
         if (code == '') err = "验证码不能为空";
         if (code.length > 6) err = "验证码为六位数字";
@@ -80,6 +80,7 @@ const SetPassword = React.createClass({
         if (password.length < 8) err = "密码不能少于8位";
         if (password.length > 16) err = "密码不能多于16位";
         if (!istrue(password)) err = "必须是字母及数字组合密码";
+        if (!istrue(inviteCode)) err = "必须是字母及数字组合";
         if (!checked) err = "请同意放心花注册协议";
         if (codeToken == '') err = "Token值不完整，无法注册";
 

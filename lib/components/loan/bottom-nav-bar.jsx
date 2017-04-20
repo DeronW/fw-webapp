@@ -18,11 +18,11 @@ class BottomNavBar extends React.Component {
     render() {
         let easyloan_style_footer_fixed = {
             width: "720px",
-            height: "110px",
+            height: "111px",
             position: "fixed",
             left: "0",
             right: "0",
-            bottom: "0",
+            bottom: "-1px",
             background: "#393f5a",
             zIndex: "100"
         };
