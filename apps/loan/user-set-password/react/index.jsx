@@ -15,6 +15,12 @@ function istrue(str) {
     return reg.test(str);
 }
 
+function isInviteCode(str) {
+    var reg = /^([a-z]+(?=[0-9])|[0-9]+(?=[a-z]))[a-z0-9]+$/ig;
+    return reg.test(str);
+}
+
+
 const SetPassword = React.createClass({
     getInitialState() {
         let query = $FW.Format.urlQuery();
