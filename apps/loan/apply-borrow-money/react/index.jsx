@@ -577,6 +577,9 @@ class ApplyBorrowMoney extends React.Component {
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
-        .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
+        .then(
+            data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE),
+            e => $FW.Component.Alert(e.message)
+            )
 })
 
