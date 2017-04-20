@@ -39,7 +39,7 @@ class WindowPop extends React.Component {
 			this.setState({
 				deadline: [1, 3, 6, 12]
 			})
-		} else if (getPopSumMoneyListObj.moneyVal >= 4000 && e.getPopSumMoneyListObj.moneyVal <= 5000) {
+		} else if (getPopSumMoneyListObj.moneyVal >= 4000 && getPopSumMoneyListObj.moneyVal <= 5000) {
 			this.setState({
 				deadline: [3, 6, 12]
 			})
