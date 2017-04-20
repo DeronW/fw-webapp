@@ -40,7 +40,7 @@ const SetPassword = React.createClass({
     },
     changeInviteCodeHandler(e) {
         let v = e.target.value;
-        v.length <= 8 && istrue(v) && this.setState({ inviteCode: v });
+        v.length <= 8 && this.setState({ inviteCode: v });
     },
     componentDidMount() {
         this.countingDown();
