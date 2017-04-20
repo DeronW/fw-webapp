@@ -1,3 +1,14 @@
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 const TITLE = [
     '申请条件',
     '所需资料',
@@ -180,7 +191,7 @@ class BorrowMoney extends React.Component {
                     <div className="detail-pop">
                         <div className="pop-close" onClick={this.tryOtherLoanCloseHandler}></div>
                         <div className="pop-tip">{this.state.tryOtherLoanMsg}</div>
-                        <a className="know-btn" href="/static/loan/home/index.html">尝试其他借款</a>
+                        <a className="know-btn" onClick={()=>gotoHandler("/static/loan/home/index.html")}>尝试其他借款</a>
                     </div>
                 </div>}
             </div>
