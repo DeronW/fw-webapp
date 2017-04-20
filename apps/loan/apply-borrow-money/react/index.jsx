@@ -278,7 +278,7 @@ class Btn extends React.Component {
 				}).then(data => {
                     // redirect to du-miao
                     let u = $FW.Store.getUserDict();
-                    let params = `uid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
+                    let params = `loanUuid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
                     location.href = `/api/order/v1/jump.shtml?${params}`
 
 				}, false)
