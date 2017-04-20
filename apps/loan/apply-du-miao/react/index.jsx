@@ -191,7 +191,7 @@ class BorrowMoney extends React.Component {
                     <div className="detail-pop">
                         <div className="pop-close" onClick={this.tryOtherLoanCloseHandler}></div>
                         <div className="pop-tip">{this.state.tryOtherLoanMsg}</div>
-                        <a className="know-btn" onClick={()=>gotoHandler("/static/loan/home/index.html")}>尝试其他借款</a>
+                        <a className="know-btn" onClick={()=>$FW.Browser.inApp()?NativeBridge.close():gotoHandler("/static/loan/home/index.html")}>尝试其他借款</a>
                     </div>
                 </div>}
             </div>
