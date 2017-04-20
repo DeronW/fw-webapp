@@ -527,7 +527,7 @@ class ApplyBorrowMoney extends React.Component {
 					relationshipIndex: data.emRelationship,
 					phone: data.emMobile,
 					income: incomeState,
-					incomeIndex: incomeState,
+					incomeIndex: data.income,
 					yearsOfWork: yearsOfWorkState,
 					yearsOfWorkIndex: data.workExperience
 				}
