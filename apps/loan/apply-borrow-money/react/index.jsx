@@ -437,8 +437,8 @@ class ApplyBorrowMoney extends React.Component {
 			// 		marriageVal: null,
 			// 		marriageIndex: 1,
 			// 		urgentPerson: null,
-			// 		relationship: null,
-			// 		relationshipIndex: null,
+			// 		relationship: '11',
+			// 		relationshipIndex: 1,
 			// 		phone: null,
 			// 		income: null,
 			// 		incomeIndex: null,
@@ -453,6 +453,7 @@ class ApplyBorrowMoney extends React.Component {
             let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
 
 			let homeSituationState = null
+			let relationshipState = null
 
 			if(data.homeSituation == 0) {
 				homeSituationState = '未婚'
@@ -460,6 +461,26 @@ class ApplyBorrowMoney extends React.Component {
 				homeSituationState = '已婚，无子女'
 			} else if(data.homeSituation == 2) {
 				homeSituationState = '已婚，有子女'
+			} else {
+				homeSituationState = null
+			}
+
+			if(data.emRelationship == 0) {
+				relationshipState = '父母'
+			} else if (data.emRelationship == 1) {
+				relationshipState = '配偶'
+			} else if (data.emRelationship == 2) {
+				relationshipState = '子女'
+			} else if (data.emRelationship == 3) {
+				relationshipState = '兄弟姐妹'
+			} else if (data.emRelationship == 4) {
+				relationshipState = '同事'
+			} else if (data.emRelationship == 5) {
+				relationshipState = '同学'
+			} else if (data.emRelationship == 6) {
+				relationshipState = '朋友'
+			} else {
+				relationshipState = null
 			}
 
 			this.setState({
@@ -476,7 +497,7 @@ class ApplyBorrowMoney extends React.Component {
 					marriageVal: homeSituationState,
 					marriageIndex: data.homeSituation,
 					urgentPerson: data.emContact,
-					relationship: data.emRelationship,
+					relationship: relationshipState,
 					relationshipIndex: data.emRelationship,
 					phone: data.emMobile,
 					income: data.income,
