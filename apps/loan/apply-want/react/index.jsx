@@ -32,8 +32,14 @@ const WantLoan = React.createClass({
             err = '不能输入大于可借额度';
             return;
         }
-        if (n % 100 != 0) err = '借款金额必须为100的整数倍';
-        if (n < lowestLoan) err = '借款金额必须大于等于' + lowestLoan;
+        if (n % 100 != 0){
+            err = '借款金额必须为100的整数倍';
+            return;
+        }
+        if (n < lowestLoan) {
+            err = '借款金额必须大于等于' + lowestLoan;
+            return;
+        }
 
         let format = x => Math.round(Math.max(lowestLoan, Math.min(x, creditLine)) / 100) * 100;
 
