@@ -283,7 +283,7 @@ class InteractWrap extends React.Component {
         let jt = $FW.Format.urlQuery().jumpType;
         let app_url = '/static/loan/outside-register-success-app/index.html',
             wx_url = '/static/loan/outside-register-success-wx/index.html',
-            other_apps_url = '/static/loan/outside-register-success-other_apps/index.html';
+            other_apps_url = '/static/loan/outside-register-success-other-apps/index.html';
         switch (jt) {
             case 'app':
                 window.location.href = app_url;

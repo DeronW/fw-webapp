@@ -13,8 +13,8 @@ class MainPanel extends React.Component {
     render() {
         let product = (p, index) => {
 
-            let link_a = `/static/loan/apply-fxh/index.html`,
-                link_b = `/static/loan/apply-du-miao/index.html`,
+            let link_a = `/static/loan/fxh/index.html`,
+                link_b = `/static/loan/dumiao/index.html`,
                 link = p.productName == '放心花' ? link_a : link_b;
 
             return (
