@@ -226,9 +226,9 @@ class Btn extends React.Component {
 		if(pushType == 'pushBtn') {
 			const { propsAgree, getSumMoneyPopVal, getDataProps } = this.props
 
-			if(getSumMoneyPopVal.moneyVal == null) {
+			if(getSumMoneyPopVal.moneyVal == '') {
 				$FW.Component.Toast("借款金融不能为空");
-			} else if(getSumMoneyPopVal.deadlineVal == null) {
+			} else if(getSumMoneyPopVal.deadlineVal == '') {
 				$FW.Component.Toast("期限不能为空");
 			} else if(getSumMoneyPopVal.creditCardVal == null) {
 				$FW.Component.Toast("信用卡不能为空");
@@ -437,8 +437,8 @@ class ApplyBorrowMoney extends React.Component {
 			// 		marriageVal: null,
 			// 		marriageIndex: 1,
 			// 		urgentPerson: null,
-			// 		relationship: null,
-			// 		relationshipIndex: null,
+			// 		relationship: '11',
+			// 		relationshipIndex: 1,
 			// 		phone: null,
 			// 		income: null,
 			// 		incomeIndex: null,
@@ -453,6 +453,9 @@ class ApplyBorrowMoney extends React.Component {
             let init_data = Object.assign({}, this.state.sumMoneyListObj, data);
 
 			let homeSituationState = null
+			let relationshipState = null
+			let yearsOfWorkState = null
+			let incomeState = null 
 
 			if(data.homeSituation == 0) {
 				homeSituationState = '未婚'
@@ -460,6 +463,50 @@ class ApplyBorrowMoney extends React.Component {
 				homeSituationState = '已婚，无子女'
 			} else if(data.homeSituation == 2) {
 				homeSituationState = '已婚，有子女'
+			} else {
+				homeSituationState = null
+			}
+
+			if(data.emRelationship == 0) {
+				relationshipState = '父母'
+			} else if (data.emRelationship == 1) {
+				relationshipState = '配偶'
+			} else if (data.emRelationship == 2) {
+				relationshipState = '子女'
+			} else if (data.emRelationship == 3) {
+				relationshipState = '兄弟姐妹'
+			} else if (data.emRelationship == 4) {
+				relationshipState = '同事'
+			} else if (data.emRelationship == 5) {
+				relationshipState = '同学'
+			} else if (data.emRelationship == 6) {
+				relationshipState = '朋友'
+			} else {
+				relationshipState = null
+			}
+
+			if(data.income == 0) {
+				incomeState = '3000以下'
+			} else if(data.income == 1) {
+				incomeState = '3000-5000元'
+			} else if(data.income == 2) {
+				incomeState = '5000-10000元'
+			} else if(data.income == 3) {
+				incomeState = '20000元以上'
+			} else {
+				incomeState = null
+			}
+
+			if(data.workExperience == 0) {
+				yearsOfWorkState = '1年以下'
+			} else if (data.workExperience == 1) {
+				yearsOfWorkState = '1-5年 '
+			} else if (data.workExperience == 2) {
+				yearsOfWorkState = '6-10年'
+			} else if (data.workExperience == 3) {
+				yearsOfWorkState = '10年以上'
+			} else {
+				yearsOfWorkState = null
 			}
 
 			this.setState({
@@ -476,12 +523,12 @@ class ApplyBorrowMoney extends React.Component {
 					marriageVal: homeSituationState,
 					marriageIndex: data.homeSituation,
 					urgentPerson: data.emContact,
-					relationship: data.emRelationship,
+					relationship: relationshipState,
 					relationshipIndex: data.emRelationship,
 					phone: data.emMobile,
-					income: data.income,
+					income: incomeState,
 					incomeIndex: data.income,
-					yearsOfWork: data.workExperience,
+					yearsOfWork: yearsOfWorkState,
 					yearsOfWorkIndex: data.workExperience
 				}
 
@@ -575,8 +622,12 @@ class ApplyBorrowMoney extends React.Component {
 //ReactDOM.render(<ApplyBorrowMoney />, CONTENT_NODE)
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle('借款申请');
     ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
 	    $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
-        .then(data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE))
+        .then(
+            data => ReactDOM.render(<ApplyBorrowMoney  dataProps= { data }/>, CONTENT_NODE),
+            e => $FW.Component.Alert(e.message)
+            )
 })
 

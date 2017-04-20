@@ -1,5 +1,6 @@
 $FW.DOMReady(function () {
     NativeBridge.setTitle('APP下载');
+    ReactDOM.render(<Header title={'APP下载'} />, HEADER_NODE)
     var channel = $FW.Format.urlQuery().name;
     var ConcertUtilBrowser = {
         versions: (function () {
