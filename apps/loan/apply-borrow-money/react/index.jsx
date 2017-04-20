@@ -226,9 +226,9 @@ class Btn extends React.Component {
 		if(pushType == 'pushBtn') {
 			const { propsAgree, getSumMoneyPopVal, getDataProps } = this.props
 
-			if(getSumMoneyPopVal.moneyVal == null) {
+			if(getSumMoneyPopVal.moneyVal == '') {
 				$FW.Component.Toast("借款金融不能为空");
-			} else if(getSumMoneyPopVal.deadlineVal == null) {
+			} else if(getSumMoneyPopVal.deadlineVal == '') {
 				$FW.Component.Toast("期限不能为空");
 			} else if(getSumMoneyPopVal.creditCardVal == null) {
 				$FW.Component.Toast("信用卡不能为空");
@@ -526,8 +526,8 @@ class ApplyBorrowMoney extends React.Component {
 					relationship: relationshipState,
 					relationshipIndex: data.emRelationship,
 					phone: data.emMobile,
-					income: data.income,
-					incomeIndex: incomeState,
+					income: incomeState,
+					incomeIndex: data.income,
 					yearsOfWork: yearsOfWorkState,
 					yearsOfWorkIndex: data.workExperience
 				}
