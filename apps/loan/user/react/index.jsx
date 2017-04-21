@@ -118,7 +118,7 @@ class MajorUserInfo extends React.Component {
     render() {
         let {link_a, link_b} = this.state
         return <div className="info-display-block">
-            <Nav className="user-info-display-wrap" onClick={this.clickHandler}
+            <a className="user-info-display-wrap" onClick={this.clickHandler}
                 href={link_a}>
                 <div className="info-icon-container">
                     <img src="images/info_icon.png"></img>
@@ -129,8 +129,8 @@ class MajorUserInfo extends React.Component {
                         <div className="fake-arrow"></div>
                     </div>
                 </div>
-            </Nav>
-            <Nav className="user-info-display-wrap" onClick={this.clickHandler}
+            </a>
+            <a className="user-info-display-wrap" onClick={this.clickHandler}
                 href={link_b}>
                 <div className="info-icon-container">
                     <img src="images/bank_icon.png"></img>
@@ -141,7 +141,7 @@ class MajorUserInfo extends React.Component {
                         <div className="fake-arrow"></div>
                     </div>
                 </div>
-            </Nav>
+            </a>
         </div>
 
     }
