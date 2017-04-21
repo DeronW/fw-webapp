@@ -6,6 +6,7 @@ class WindowPop extends React.Component {
             sumMoneyListObj: {
                 moneyVal: props.getPopSumMoneyListObj.moneyVal,
                 deadlineVal: props.getPopSumMoneyListObj.deadlineVal,
+                deadlineValIndex: props.getPopSumMoneyListObj.deadlineValIndex,
                 creditCardVal: props.getPopSumMoneyListObj.creditCardVal,
                 emailVal: props.getPopSumMoneyListObj.emailVal,
                 homeVal: props.getPopSumMoneyListObj.homeVal,
@@ -143,6 +144,8 @@ class WindowPop extends React.Component {
             if (verificationNum(e.target.value)) {
                 let copSumMoneyListObj1 = this.state.sumMoneyListObj
                 copSumMoneyListObj1.moneyVal = e.target.value
+                copSumMoneyListObj1.deadlineVal = ''
+                copSumMoneyListObj1.deadlineValIndex = null
 
                 this.setState({
                     copSumMoneyListObj1,
@@ -227,6 +230,7 @@ class WindowPop extends React.Component {
         const copState = this.state.sumMoneyListObj
 
         copState.deadlineVal = data,
+        copState.deadlineValIndex = index
 
             this.setState({
                 deadlineIconShow: true,
@@ -242,6 +246,7 @@ class WindowPop extends React.Component {
         return {
             moneyVal: this.state.sumMoneyListObj.moneyVal,
             deadlineVal: this.state.sumMoneyListObj.deadlineVal,
+            deadlineValIndex: this.state.sumMoneyListObj.deadlineValIndex,
             creditCardVal: this.state.sumMoneyListObj.creditCardVal,
             emailVal: this.state.sumMoneyListObj.emailVal,
             realName: this.state.sumMoneyListObj.realName,
@@ -330,7 +335,7 @@ class WindowPop extends React.Component {
                                 return <div className="block" key={index} onClick={this.handlerSelectDeadline.bind(this, index, data)}>
                                     <div className="info-text">{data}个月</div>
                                     {
-                                        index == this.state.deadlineIconIndex && this.state.deadlineIconShow ? <div className="select-icon"></div> : null
+                                        index == this.state.sumMoneyListObj.deadlineValIndex ? <div className="select-icon"></div> : null
                                     }
                                 </div>
                             })

@@ -402,6 +402,7 @@ class ApplyBorrowMoney extends React.Component {
 			sumMoneyListObj: {
 				moneyVal: '',
 				deadlineVal: '',
+				deadlineValIndex: null,
 				creditCardVal: '',
 				emailVal: '',
 				homeVal: '',
@@ -488,6 +489,7 @@ class ApplyBorrowMoney extends React.Component {
 				sumMoneyListObj: {
 					moneyVal: '',
 					deadlineVal: '',
+					deadlineValIndex: null,
 					creditCardVal: data.creditCard,
 					emailVal: data.email,
 					homeVal: data.address,
@@ -527,6 +529,7 @@ class ApplyBorrowMoney extends React.Component {
 			sumMoneyListObj: {
 				moneyVal: obj.moneyVal,
 				deadlineVal: obj.deadlineVal,
+				deadlineValIndex: obj.deadlineValIndex,
 				creditCardVal: obj.creditCardVal,
 				emailVal: obj.emailVal,
 				realName: obj.realName,
