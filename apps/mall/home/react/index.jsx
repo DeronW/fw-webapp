@@ -93,9 +93,9 @@ const Mall = React.createClass({
                         <img src="images/vip.png" /><span>VIP专区</span></a>
                     <a href="/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=2">
                         <img src="images/douge_hood.png" /><span>豆哥周边</span></a>
-                        <a href="/static/mall/product-vip-zone/index.html">
+                        <a href="/static/mall/product-list/index.html?searchSourceType=0&category=qualityLife&title=品质生活">
                         <img src="images/global_shopping.png" /><span>全球购</span></a>
-                    <a href="/static/mall/product-list/index.html?searchSourceType=0&category=qualityLife&title=品质生活">
+                    <a href="/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=3">
                         <img src="images/vouchers.png" /><span>工场神券</span></a>
                     {/*<a href="/static/mall/product-hot-activity/index.html">
                         <img src="images/nav-4.png" /><span>热门活动</span></a>*/}
