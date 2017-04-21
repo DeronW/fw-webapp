@@ -105,12 +105,10 @@ const Mall = React.createClass({
                     <a href="/static/mall/product-recharge/index.html?tab=1">
                         <img src="images/Prepaid_ calls.png" /><span>话费充值</span></a>
                     <a href="/static/mall/product-recharge/index.html?tab=2">
-                        <img src="images/flow_recharge.png" /><span>流量充值</span>
-                        {/*<span className="hot-tag"></span></a>*/}
+                        <img src="images/flow_recharge.png" /><span>流量充值</span></a>
 
                         <a href="/static/mall/product-recharge/index.html?tab=2">
-                        <img src="images/query_order.png" /><span>订单查询</span>
-                        {/*<span className="hot-tag"></span></a>*/}
+                        <img src="images/query_order.png" /><span>订单查询</span></a>
                     <a href="/static/mall/game/index.html?mallHead=true">{/*static/mall/waiting/index.html*/}
                         <img src="images/game_center.png" /><span>游戏中心</span></a>
 
