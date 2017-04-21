@@ -172,25 +172,17 @@ class JobInfo extends React.Component {
 class Agree extends React.Component {
     constructor() {
         super()
-
-        this.state = {
-            agreeShow: false
-        }
     }
     handlerAgree() {
         const { getAgree } = this.props
 
-        this.setState({
-            agreeShow: !this.state.agreeShow
-        })
-
-        getAgree(this.state.agreeShow)
+        getAgree(true)
     }
 
     render() {
         return (
             <div className="agree">
-                <div className={this.state.agreeShow ? 'agree-icon select-icon' : 'agree-icon'} onClick={this.handlerAgree.bind(this)}></div>
+                {/*<div className={this.state.agreeShow ? 'agree-icon select-icon' : 'agree-icon'} onClick={this.handlerAgree.bind(this)}></div>*/}
                 <div className="text">
                     点击“申请借款”即视为同意
                     <a href="/static/loan/protocol-dumiao-openaccount/index.html">《读秒开户授权书》</a>、
@@ -228,7 +220,7 @@ class Btn extends React.Component {
 			const { propsAgree, getSumMoneyPopVal, getDataProps } = this.props
 
 			if(getSumMoneyPopVal.moneyVal == '') {
-				$FW.Component.Toast("借款金融不能为空");
+				$FW.Component.Toast("借款金额不能为空");
 			} else if(getSumMoneyPopVal.deadlineVal == '') {
 				$FW.Component.Toast("期限不能为空");
 			} else if(getSumMoneyPopVal.creditCardVal == null) {
@@ -249,8 +241,6 @@ class Btn extends React.Component {
 				$FW.Component.Toast("税后收后不能为空");
 			} else if(getSumMoneyPopVal.yearsOfWork == null) {
 				$FW.Component.Toast("工作年限不能为空");
-			} else if (propsAgree == false) {
-				$FW.Component.Toast("点击同意");
 			} else {
 
 				$FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`, {
@@ -271,13 +261,13 @@ class Btn extends React.Component {
 					productId: $FW.Format.urlQuery().pid,
 					position: '0,0', //this.state.position,
 					userCookieID: '0000'
-				}).then(data => {
+				}, false).then(data => {
                     // redirect to du-miao
                     let u = $FW.Store.getUserDict();
-                    let params = `loanUuid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
+                    let params = `loanUuid=${data.uuid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
                     location.href = `/api/order/v1/jump.shtml?${params}`
 
-				}, false)
+				})
 			}
 
 
@@ -298,6 +288,8 @@ class Btn extends React.Component {
 			} else if(getSelectListProps == 'creditCardVal') {
 				if(btnValFun().creditCardVal == '') {
 					$FW.Component.Toast("信用卡不能为空")
+				} else if (btnValFun().creditCardVal.length <= 13 || btnValFun().creditCardVal.length >= 16) {
+					$FW.Component.Toast("信用卡格式不对")
 				} else {
 					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
@@ -347,6 +339,8 @@ class Btn extends React.Component {
 			} else if (getSelectListProps == 'phone') {
 				if(btnValFun().phone == '') {
 					$FW.Component.Toast("联系人手机不能为空")
+				} else if(!phoneEeg(btnValFun().phone)) {
+					$FW.Component.Toast("手机号格式不对")
 				} else {
 					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
@@ -370,7 +364,7 @@ class Btn extends React.Component {
 		}
 	}
 	render() {
-		const { getSelectListProps, pushType } = this.props
+		const { getSelectListProps, pushType, btnName } = this.props
 
 		const btnStyle = {
 			position: 'fixed',
@@ -384,7 +378,7 @@ class Btn extends React.Component {
 
 		return (
 			<div className="btn-area" style={ getSelectListProps == 'city' && pushType == 'popBtn' ? btnStyle : null }>
-				<div className="btn" onClick={ this.handlerBtn.bind(this) }>确定</div>
+				<div className="btn" onClick={ this.handlerBtn.bind(this) }>{ btnName }</div>
 			</div>
 		)
 	}
@@ -421,7 +415,7 @@ class ApplyBorrowMoney extends React.Component {
 				yearsOfWork: '',
 				yearsOfWorkIndex: ''
 			},
-			agreeShow: false
+			agreeShow: true
 		}
 	}
     componentDidMount(){
@@ -433,11 +427,11 @@ class ApplyBorrowMoney extends React.Component {
 			let yearsOfWorkState = null
 			let incomeState = null
 
-			if(data.homeSituation == 0) {
+			if(data.homeSituation == 1) {
 				homeSituationState = '未婚'
-			} else if(data.homeSituation == 1) {
-				homeSituationState = '已婚，无子女'
 			} else if(data.homeSituation == 2) {
+				homeSituationState = '已婚，无子女'
+			} else if(data.homeSituation == 3) {
 				homeSituationState = '已婚，有子女'
 			} else {
 				homeSituationState = null
@@ -521,7 +515,7 @@ class ApplyBorrowMoney extends React.Component {
 	}
 	callbackAgree(val) {
 		this.setState({
-			agreeShow: !val
+			agreeShow: true
 		})
 	}
 	callbackSumPopInfo(obj) {
@@ -583,6 +577,7 @@ class ApplyBorrowMoney extends React.Component {
 					getSumMoneyPopVal = { this.state.sumMoneyListObj }
 					propsAgree = { this.state.agreeShow }
 					getSelectListProps = { this.state.selectList }
+					btnName="申请借款"
 				/>
 
 				{ this.state.popShow ?  <WindowPop

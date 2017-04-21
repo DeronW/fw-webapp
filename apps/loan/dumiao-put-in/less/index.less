@@ -131,6 +131,40 @@ input,button,select,textarea{ outline:none;}
 }
 
 
+@-webkit-keyframes rotate-d{
+	from{-webkit-transform:rotate(0deg)}
+	to{-webkit-transform:rotate(90deg)}
+}
+
+@-webkit-keyframes rotate-u{
+	from{-webkit-transform:rotate(90deg)}
+	to{-webkit-transform:rotate(0deg)}
+}
+
+.ui-list .list {
+	.deadline-list {
+		.r {
+			.arrow-icon {
+				width: 40px;
+				height: 40px;
+				margin: 24px 22px 0 10px
+			}
+
+			.d-arrow {			
+				animation: rotate-d .4s ease-in-out;
+				animation-fill-mode: forwards;
+			}
+			.u-arrow {			
+				animation: rotate-u .4s ease-in-out;
+				animation-fill-mode: forwards;
+			}
+
+		}
+	}
+}
+
+
+
 
 .city-name {
 	display: block;
@@ -180,8 +214,7 @@ input,button,select,textarea{ outline:none;}
 	}
 
 	.text {
-		margin: -4px 0 0 0;
-		padding: 0 0 0 40px;
+		margin: -4px 0 0 0;		
 		line-height: 32px;
 		color: #999;
 		font-size: 20px;

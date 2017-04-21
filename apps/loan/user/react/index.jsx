@@ -82,75 +82,68 @@ class BillEntry extends React.Component {
     }
 }
 
-class UserInfoEnterWrap extends React.Component {
-    constructor() {
-        super();
-        this.handleJump = this.handleJump.bind(this);
-    }
 
-    handleJump(infoID) {
+class MajorUserInfo extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            link_a: null,
+            link_b: null,
+            tips: null
+        }
+    }
+    componentDidMount() {
+        let link_a, link_b
         $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
             productId: 1
         }).then(data => {
-            switch (data.borrowBtnStatus) {
-                case 1: // 未实名
-                    window.location.href = '/static/loan/user-card-set/index.html';
-                    break;
-                case 101: // 实名中
-                    $FW.Component.Toast('设置提现卡处理中，请稍等');
-                    break;
-                default:
-                    if (infoID === 'personal-info') {
-                        window.location.href = '/static/loan/user-info/index.html';
-                    }
-                    if (infoID === 'card-info') {
-                        window.location.href = '/static/loan/user-card-management/index.html';
-                    }
+            let st = data.borrowBtnStatus,
+                link_a = '/static/loan/user-info/index.html',
+                link_b = '/static/loan/user-card-management/index.html';
+
+            if (st === 1) { // 未实名
+                link_a = link_b = '/static/loan/user-card-set/index.html'
             }
+            this.setState({
+                link_a: link_a,
+                link_b: link_b,
+                tips: st === 101 ? '设置提现卡处理中，请稍等' : false, // 实名中
+            })
         })
     }
-
+    clickHandler = () => {
+        let { tips } = this.state
+        tips && $FW.Component.Toast(tips)
+    }
     render() {
-        return (
-            <div className="user-info-display-wrap" id={this.props.infoID} onClick={() => {
-                this.handleJump(this.props.infoID)
-            }}>
-                {this.props.iconSrc !== null && <div className="info-icon-container">
-                    <img src={this.props.iconSrc}></img>
-                </div>}
-                <span className="info-name">{this.props.infoNameCN}</span>
+        let {link_a, link_b} = this.state
+        return <div className="info-display-block">
+            <Nav className="user-info-display-wrap" onClick={this.clickHandler}
+                href={link_a}>
+                <div className="info-icon-container">
+                    <img src="images/info_icon.png"></img>
+                </div>
+                <span className="info-name">个人信息</span>
                 <div className="right-align-container">
                     <div className="right-arrow-container">
                         <div className="fake-arrow"></div>
                     </div>
                 </div>
-            </div>
-        )
-    }
-}
+            </Nav>
+            <Nav className="user-info-display-wrap" onClick={this.clickHandler}
+                href={link_b}>
+                <div className="info-icon-container">
+                    <img src="images/bank_icon.png"></img>
+                </div>
+                <span className="info-name">银行卡</span>
+                <div className="right-align-container">
+                    <div className="right-arrow-container">
+                        <div className="fake-arrow"></div>
+                    </div>
+                </div>
+            </Nav>
+        </div>
 
-class MajorUserInfo extends React.Component {
-    render() {
-
-        // info items in this page
-        let majorInfo = [
-            {
-                infoID: "personal-info",
-                infoNameCN: "个人信息",
-                iconSrc: "images/info_icon.png"
-            }, {
-                infoID: "card-info",
-                infoNameCN: "银行卡",
-                iconSrc: "images/bank_icon.png"
-            }
-        ];
-
-        let infoItems = majorInfo.map((item, index) => (<UserInfoEnterWrap iconSrc={item.iconSrc} infoID={item.infoID} infoNameCN={item.infoNameCN} key={index} />));
-        return (
-            <div className="info-display-block">
-                {infoItems}
-            </div>
-        )
     }
 }
 
@@ -207,7 +200,7 @@ class UserInfoWrap extends React.Component {
         return (
             <div className="user-info-wrap">
                 <AvatarCard phoneNum={this.state.phoneNum} />
-                {!$FW.Theme.hasTheme('wap') && <FollowWXEntry />}
+                {$FW.Browser.inApp() && <FollowWXEntry />}
                 <BillEntry />
                 <MajorUserInfo />
                 <ExitBtn />
