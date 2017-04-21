@@ -307,7 +307,9 @@ class InteractWrap extends React.Component {
                     uid:dict.uid
                 });
                 window.location.href = '/static/loan/home/index.html';
+                break;
             default:
+                window.location.href = '/static/loan/home/index.html';
         }
     }
 
