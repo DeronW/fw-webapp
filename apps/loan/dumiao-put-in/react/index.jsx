@@ -264,7 +264,7 @@ class Btn extends React.Component {
 				}).then(data => {
                     // redirect to du-miao
                     let u = $FW.Store.getUserDict();
-                    let params = `loanUuid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
+                    let params = `loanUuid=${data.uuid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
                     location.href = `/api/order/v1/jump.shtml?${params}`
 
 				}, false)
@@ -427,11 +427,11 @@ class ApplyBorrowMoney extends React.Component {
 			let yearsOfWorkState = null
 			let incomeState = null
 
-			if(data.homeSituation == 0) {
+			if(data.homeSituation == 1) {
 				homeSituationState = '未婚'
-			} else if(data.homeSituation == 1) {
-				homeSituationState = '已婚，无子女'
 			} else if(data.homeSituation == 2) {
+				homeSituationState = '已婚，无子女'
+			} else if(data.homeSituation == 3) {
 				homeSituationState = '已婚，有子女'
 			} else {
 				homeSituationState = null
