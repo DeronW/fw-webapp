@@ -107,13 +107,12 @@ const Mall = React.createClass({
                     <a href="/static/mall/product-recharge/index.html?tab=2">
                         <img src="images/flow_recharge.png" /><span>流量充值</span></a>
 
-                        <a href="/static/mall/product-recharge/index.html?tab=2">
+                        <a href="/static/mall/order-list/index.html">
                         <img src="images/query_order.png" /><span>订单查询</span></a>
+                        <a href="/static/mall/game-zhuanpan20161230/index.html">
+                        <img src="images/get_vouchers.png" /><span>大转盘</span></a>
                     <a href="/static/mall/game/index.html?mallHead=true">{/*static/mall/waiting/index.html*/}
                         <img src="images/game_center.png" /><span>游戏中心</span></a>
-
-                    <a>
-                        <img src="images/get_vouchers.png" /><span>领券中心</span></a>
                 </div>
 
 
