@@ -30,7 +30,8 @@ class WindowPop extends React.Component {
             tabShow: false,
             deadline: [],
             deadlineIconShow: false,
-            deadlineIconIndex: 0
+            deadlineIconIndex: 0,
+            arrowCounter: 0
         }
     }
     componentWillMount() {
@@ -203,11 +204,14 @@ class WindowPop extends React.Component {
                 copSumMoneyListObjUrgentPerson
             })
         } else if (this.state.selectList === 'phone') {
-            let copSumMoneyListObjPhone = this.state.sumMoneyListObj
-            copSumMoneyListObjPhone.phone = e.target.value
-            this.setState({
-                copSumMoneyListObjPhone
-            })
+            if (verificationNum(e.target.value)) {
+                let copSumMoneyListObjPhone = this.state.sumMoneyListObj
+                copSumMoneyListObjPhone.phone = e.target.value
+                this.setState({
+                    copSumMoneyListObjPhone
+                })
+            }
+            
         }
     }
     handlerDate(e) {
@@ -221,7 +225,8 @@ class WindowPop extends React.Component {
             $FW.Component.Toast("请以1000为单位，上限为50000");
         } else {
             this.setState({
-                tabShow: !this.state.tabShow
+                tabShow: !this.state.tabShow,
+                arrowCounter: 1
             })
         }
     }
@@ -318,15 +323,24 @@ class WindowPop extends React.Component {
     render() {
         const { selectList, popTitle, getPopShow, getPopInfo } = this.props
 
+        let arrowRotate = () => {
+            if(this.state.arrowCounter == 1) {
+
+            }
+        }
+
         let listNextTab = () => {
             return <div className="list list-next-tab">
-                <div className="" style={{ height: '86px' }} onClick={this.handlerDate.bind(this)}>
+                <div className="deadline-list" style={{ height: '86px' }} onClick={this.handlerDate.bind(this)}>
                     <div className="name-text">期限</div>
                     <div className="r">
                         <div className="text" style={{ color: this.state.sumMoneyListObj.deadlineVal != '' ? null : 'rgb(204, 204, 204)' } }>
                             {this.state.sumMoneyListObj.deadlineVal} {this.state.sumMoneyListObj.deadlineVal != '' ? '个月' : '请选择期限'}
                         </div>
-                        <div className="arrow-icon"></div>
+                        <div className= { 
+                            this.state.arrowCounter == 1 ?  (this.state.tabShow ? 'd-arrow' : 'u-arrow') + ' arrow-icon' :  'arrow-icon'
+                             }>
+                        </div>
                     </div>
 
                 </div>

@@ -347,6 +347,8 @@ class Btn extends React.Component {
 			} else if (getSelectListProps == 'phone') {
 				if(btnValFun().phone == '') {
 					$FW.Component.Toast("联系人手机不能为空")
+				} else if(!phoneEeg(btnValFun().phone)) {
+					$FW.Component.Toast("手机号格式不对")
 				} else {
 					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
