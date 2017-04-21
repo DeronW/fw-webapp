@@ -38,7 +38,7 @@ const PROTOCOL_PAGES = [
     'protocol-risk-prompt', // 网络借贷出借风险提示
     'protocol-register', // 网络借贷出借风险提示
     'protocol-user-service',//工场微金用户服务协议
-
+    'protocol-trade-service', //徽商银行网络交易资金账户服务三方协议
 ]
 
 // const CIRCLE_PAGES = [

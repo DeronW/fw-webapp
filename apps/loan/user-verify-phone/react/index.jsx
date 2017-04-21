@@ -100,7 +100,7 @@ const VerifyPhone = React.createClass({
                 $FW.Component.Toast("验证码不正确");
             }
         } else if (result == 1) {
-            window.location.href = '/static/loan/home/index.html';
+            $FW.Browser.inApp()? NativeBridge.close() : window.location.href = '/static/loan/home/index.html';
         } else if (result == 2) {
             this.setState({show: true});
         }

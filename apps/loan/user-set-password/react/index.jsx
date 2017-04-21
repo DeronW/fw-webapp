@@ -40,7 +40,7 @@ const SetPassword = React.createClass({
     },
     changeInviteCodeHandler(e) {
         let v = e.target.value;
-        v.length <= 7 && this.setState({ inviteCode: v });
+        v.length <= 8 && this.setState({ inviteCode: v });
     },
     componentDidMount() {
         this.countingDown();
@@ -71,7 +71,7 @@ const SetPassword = React.createClass({
         this.setState({ plainCode: !this.state.plainCode });
     },
     handleRegisterBtn() {
-        let err, { password, code, checked, codeToken } = this.state;
+        let err, { password, code, checked, codeToken, inviteCode } = this.state;
 
         if (code == '') err = "验证码不能为空";
         if (code.length > 6) err = "验证码为六位数字";
