@@ -220,7 +220,7 @@ class Btn extends React.Component {
 			const { propsAgree, getSumMoneyPopVal, getDataProps } = this.props
 
 			if(getSumMoneyPopVal.moneyVal == '') {
-				$FW.Component.Toast("借款金融不能为空");
+				$FW.Component.Toast("借款金额不能为空");
 			} else if(getSumMoneyPopVal.deadlineVal == '') {
 				$FW.Component.Toast("期限不能为空");
 			} else if(getSumMoneyPopVal.creditCardVal == null) {
