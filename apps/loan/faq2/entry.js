@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {observer} from "mobx-react";
+import { observer } from "mobx-react";
 
-import { QUESTIONS } from './components/questions'
+// import { QUESTIONS } from './components/questi
+import FW from 'fw-core'
 
-// import {Header} from 'fw-react-components/components/loan/header'
-// import _ from '../../../../fw-core/index.js'
-import _ from 'D:/fw-core/index.js'
-
+console.log(FW.Ajax)
+console.log(FW.Format.urlQuery())
 
 const STYLE = {
     question: {
@@ -27,12 +26,14 @@ class ToggleList {
     @observable open_list = []
 }
 
-class FAQ extends React.component {
-    render (){
+class FAQ extends React.Component {
+    render() {
         return <div>sssss</div>
     }
 }
 
 
+FW.DOMReady(() => {
 // ReactDOM.render(<Header />, document.getElementById('header'));
-ReactDOM.render(<FAQ />, document.getElementById('app'));
+    ReactDOM.render(<FAQ />, document.getElementById('app'));
+})
