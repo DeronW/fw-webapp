@@ -212,7 +212,7 @@ class UserInfoWrap extends React.Component {
         return (
             <div className="user-info-wrap">
                 <AvatarCard phoneNum={this.state.phoneNum}/>
-                <FollowWXEntry/>
+                {/* <FollowWXEntry/> */}
                 <BillEntry/>
                 <MajorUserInfo/>
                 <ExitBtn/>
