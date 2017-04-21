@@ -51,7 +51,7 @@ class Content extends React.Component {
 
         let order_item = (order, index) => {
             let link = order.productId == 1 ?
-                `/static/loan/bill-detail/index.html?uuid=${order.loanGid}` :
+                `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}` :
                 `/static/loan/dumiao-bill/index.html?uuid=${order.uuid}&baseStatus=${order.baseStatus}`;
             //let logo = order.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png";
 
