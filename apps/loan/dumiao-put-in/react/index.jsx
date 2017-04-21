@@ -285,7 +285,7 @@ class Btn extends React.Component {
 					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
 				}
-			} else if(getSelectListProps == 'creditCardVal') {				
+			} else if(getSelectListProps == 'creditCardVal') {
 				if(btnValFun().creditCardVal == '') {
 					$FW.Component.Toast("信用卡不能为空")
 				} else if (btnValFun().creditCardVal.length <= 13 || btnValFun().creditCardVal.length >= 16) {
@@ -415,7 +415,7 @@ class ApplyBorrowMoney extends React.Component {
 				yearsOfWork: '',
 				yearsOfWorkIndex: ''
 			},
-			agreeShow: true 
+			agreeShow: true
 		}
 	}
     componentDidMount(){
