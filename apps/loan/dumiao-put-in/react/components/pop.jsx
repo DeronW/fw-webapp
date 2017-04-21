@@ -575,6 +575,7 @@ class WindowPop extends React.Component {
                     getPopShowProps={getPopShow}
                     getSelectListProps={selectList}
                     pushType={'popBtn'}
+                    btnName="确定"
                 />
             </div>
         )
