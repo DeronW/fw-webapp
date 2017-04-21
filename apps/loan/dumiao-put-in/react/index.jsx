@@ -172,25 +172,17 @@ class JobInfo extends React.Component {
 class Agree extends React.Component {
     constructor() {
         super()
-
-        this.state = {
-            agreeShow: false
-        }
     }
     handlerAgree() {
         const { getAgree } = this.props
 
-        this.setState({
-            agreeShow: !this.state.agreeShow
-        })
-
-        getAgree(this.state.agreeShow)
+        getAgree(true)
     }
 
     render() {
         return (
             <div className="agree">
-                <div className={this.state.agreeShow ? 'agree-icon select-icon' : 'agree-icon'} onClick={this.handlerAgree.bind(this)}></div>
+                {/*<div className={this.state.agreeShow ? 'agree-icon select-icon' : 'agree-icon'} onClick={this.handlerAgree.bind(this)}></div>*/}
                 <div className="text">
                     点击“申请借款”即视为同意
                     <a href="/static/loan/protocol-dumiao-openaccount/index.html">《读秒开户授权书》</a>、
@@ -249,8 +241,6 @@ class Btn extends React.Component {
 				$FW.Component.Toast("税后收后不能为空");
 			} else if(getSumMoneyPopVal.yearsOfWork == null) {
 				$FW.Component.Toast("工作年限不能为空");
-			} else if (propsAgree == false) {
-				$FW.Component.Toast("点击同意");
 			} else {
 
 				$FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`, {
@@ -295,9 +285,11 @@ class Btn extends React.Component {
 					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
 				}
-			} else if(getSelectListProps == 'creditCardVal') {
+			} else if(getSelectListProps == 'creditCardVal') {				
 				if(btnValFun().creditCardVal == '') {
 					$FW.Component.Toast("信用卡不能为空")
+				} else if (btnValFun().creditCardVal.length <= 13 || btnValFun().creditCardVal.length >= 16) {
+					$FW.Component.Toast("信用卡格式不对")
 				} else {
 					getPopInfoProps(btnValFun())
 					getPopShowProps(false)
@@ -423,7 +415,7 @@ class ApplyBorrowMoney extends React.Component {
 				yearsOfWork: '',
 				yearsOfWorkIndex: ''
 			},
-			agreeShow: false
+			agreeShow: true 
 		}
 	}
     componentDidMount(){
@@ -523,7 +515,7 @@ class ApplyBorrowMoney extends React.Component {
 	}
 	callbackAgree(val) {
 		this.setState({
-			agreeShow: !val
+			agreeShow: true
 		})
 	}
 	callbackSumPopInfo(obj) {
