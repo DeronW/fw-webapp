@@ -320,10 +320,12 @@ class WindowPop extends React.Component {
 
         let listNextTab = () => {
             return <div className="list list-next-tab">
-                <div className="" onClick={this.handlerDate.bind(this)}>
+                <div className="" style={{ height: '86px' }} onClick={this.handlerDate.bind(this)}>
                     <div className="name-text">期限</div>
                     <div className="r">
-                        <div className="text">{this.state.sumMoneyListObj.deadlineVal} {this.state.sumMoneyListObj.deadlineVal != '' ? '个月' : ''}</div>
+                        <div className="text" style={{ color: this.state.sumMoneyListObj.deadlineVal != '' ? null : 'rgb(204, 204, 204)' } }>
+                            {this.state.sumMoneyListObj.deadlineVal} {this.state.sumMoneyListObj.deadlineVal != '' ? '个月' : '请选择期限'}
+                        </div>
                         <div className="arrow-icon"></div>
                     </div>
 
