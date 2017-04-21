@@ -165,14 +165,16 @@ class InvitationCodeInput extends React.Component {
                 <div className="input-type-icon">
                     <img src="images/invite.png" />
                 </div>
-                <input type="tel" placeholder="请输入邀请码" value={this.props.value} onChange={(e) => {
+                <input
+                    type="tel"
+                    placeholder="请输入邀请码"
+                    value={this.props.value}
+                    disabled={this.props.disabled}
+                    onChange={(e) => {
                     // if (!/[0-9]/.test(e.target.value[e.target.value.length - 1]) && e.target.value.length > 0) {
                     //     return;
                     // }
-                    this.setState({
-                        enableClear: e.target.value
-                            ? true
-                            : false
+                        this.setState({enableClear: e.target.value ? true: false
                     });
                     this.props.handleChange(e, 'invitationCode');
                 }} onFocus={(e) => {
@@ -207,7 +209,7 @@ class InteractWrap extends React.Component {
             phoneNum: '',
             password: '',
             verificationCode: '',
-            invitationCode: $FW.Format.urlQuery().invitationCode,
+            invitationCode: $FW.Format.urlQuery().invitationCode || '',
             timeRemainForNewCode: 60,
             codeToken: '',
             showPassword: false
@@ -307,7 +309,9 @@ class InteractWrap extends React.Component {
                     uid:dict.uid
                 });
                 window.location.href = '/static/loan/home/index.html';
+                break;
             default:
+                window.location.href = '/static/loan/home/index.html';
         }
     }
 
@@ -358,7 +362,7 @@ class InteractWrap extends React.Component {
                 <PasswordInput type={this.state.showPassword
                     ? "text"
                     : "password"} togglePasswordDisplay={!this.state.showPassword} handleChange={this.handleInput} handleClick={this.togglePasswordDisplay} value={this.state.password} handleClear={this.clearInput} />
-                <InvitationCodeInput handleChange={this.handleInput} value={this.state.invitationCode} handleClear={this.clearInput} />
+                <InvitationCodeInput handleChange={this.handleInput} value={this.state.invitationCode} disabled={$FW.Format.urlQuery().invitationCode ? true : false} handleClear={this.clearInput} />
                 <button className="register-button" onClick={this.handleSubmit}>
                     立即领钱
                 </button>
