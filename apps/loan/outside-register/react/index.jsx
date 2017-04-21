@@ -212,7 +212,8 @@ class InteractWrap extends React.Component {
             invitationCode: $FW.Format.urlQuery().invitationCode || '',
             timeRemainForNewCode: 60,
             codeToken: '',
-            showPassword: false
+            showPassword: false,
+            showRegisteredMask: false
         }
     }
 
@@ -239,7 +240,8 @@ class InteractWrap extends React.Component {
                         }
                     }, 1000);
                 }, (e) => {
-                    let msg = e.code === 201003 ? '手机号已注册' : e.message;
+                    if (e.code === 201003) return this.setState({showRegisteredMask: true}) // 手机号已注册
+                    let msg = e.message;
                     alert(msg || "验证码获取失败");
                     if (e.code === 201003) this.handleJump(false);
                 });
@@ -367,6 +369,18 @@ class InteractWrap extends React.Component {
                     立即领钱
                 </button>
                 <Nav className='jump-login' href='/static/loan/user-entry/index.html'>已有账号？立即登录 >></Nav>
+                { this.state.showRegisteredMask &&
+                    <div className="mask">
+                        <div className="pop-wrap">
+                            <p className="registered-tip">手机号已注册，请直接登录</p>
+                            <img className="close-icon" src="images/close-icon.jpg" onClick={() => {this.setState({showRegisteredMask: false})}}></img>
+                            <div className="mask-opts">
+                                <div className="close-mask" onClick={() => {this.setState({showRegisteredMask: false})}}>关闭</div>
+                                <Nav className="to-next" href="/static/loan/user-entry/index.html">立即登录</Nav>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         )
     }
