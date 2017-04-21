@@ -89,12 +89,7 @@ class UserInfoEnterWrap extends React.Component {
     }
 
     handleJump(infoID) {
-        const USER = $FW.Store.getUserDict();
-        $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
-            sourceType: SOURCE_TYPE,
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
+        $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
             productId: 1
         }).then(data => {
             switch (data.borrowBtnStatus) {
@@ -221,10 +216,6 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-const USER = $FW.Store.getUserDict();
-console.log(`token: ${USER.token}, userGid: ${USER.gid}, userId: ${USER.id}, uid: ${USER.uid}, sourceType: ${SOURCE_TYPE}`);
-
-// render ReactDom
 $FW.DOMReady(() => {
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     ReactDOM.render(<UserInfoWrap />, CONTENT_NODE)
