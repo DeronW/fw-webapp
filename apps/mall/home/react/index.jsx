@@ -95,7 +95,7 @@ const Mall = React.createClass({
                         <img src="images/douge_hood.png" /><span>豆哥周边</span></a>
                         <a href="/static/mall/product-vip-zone/index.html">
                         <img src="images/global_shopping.png" /><span>全球购</span></a>
-                    <a href="/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=3">
+                    <a href="/static/mall/product-list/index.html?searchSourceType=0&category=qualityLife&title=品质生活">
                         <img src="images/vouchers.png" /><span>工场神券</span></a>
                     {/*<a href="/static/mall/product-hot-activity/index.html">
                         <img src="images/nav-4.png" /><span>热门活动</span></a>*/}
@@ -106,11 +106,11 @@ const Mall = React.createClass({
                         <img src="images/Prepaid_ calls.png" /><span>话费充值</span></a>
                     <a href="/static/mall/product-recharge/index.html?tab=2">
                         <img src="images/flow_recharge.png" /><span>流量充值</span>
-                        <span className="hot-tag"></span></a>
+                        {/*<span className="hot-tag"></span></a>*/}
 
                         <a href="/static/mall/product-recharge/index.html?tab=2">
                         <img src="images/query_order.png" /><span>订单查询</span>
-                        <span className="hot-tag"></span></a>
+                        {/*<span className="hot-tag"></span></a>*/}
                     <a href="/static/mall/game/index.html?mallHead=true">{/*static/mall/waiting/index.html*/}
                         <img src="images/game_center.png" /><span>游戏中心</span></a>
 
