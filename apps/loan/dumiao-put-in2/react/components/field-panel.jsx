@@ -65,7 +65,9 @@ class FieldPanel extends React.Component {
                 select_type() :
                 input_type()}
 
-            {field_key === 'city' && <CityPanel />}
+            {field_key === 'city' &&
+                <CityPanel value={this.state.value}
+                    select_handler={this.selectChangeHandler} />}
 
             {!field.options &&
                 <div className="btn-area">
@@ -78,15 +80,43 @@ class FieldPanel extends React.Component {
 }
 
 class CityPanel extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    setQuickPosition = (clientY, offsetTop, offsetHeight) => {
+        let p;
+        p = 1 - (offsetTop + offsetHeight - clientY) / offsetHeight;
+        // console.log(offsetTop, offsetHeight, clientY, p)
+        p = Math.max(p, 0)
+        p = Math.min(p, 1)
+        if (p < 0.05) p = 0;
+        if (p > 0.95) p = 1;
+        let s = this.refs.scroll;
+        s.scrollTop = s.scrollHeight * Math.round(p * 100) / 100
+    }
+    touchStartHandler = event => {
+        event.stopPropagation()
+        this.setQuickPosition(
+            event.changedTouches[0].clientY,
+            event.currentTarget.offsetTop,
+            event.currentTarget.offsetHeight)
+    }
+    touchMoveHandler = event => {
+        event.stopPropagation()
+        this.setQuickPosition(
+            event.changedTouches[0].clientY,
+            event.currentTarget.offsetTop,
+            event.currentTarget.offsetHeight)
+    }
     render() {
         let alphabet = [];
         for (let i = 65; i < 91; i++)
             alphabet.push(String.fromCharCode(i));
 
         let city_option = name => {
-            let cn = `option-item ${name == this.props.name && 'active'}`
+            let cn = `option-item ${name == this.props.value && 'active'}`
             return <div key={name} className={cn} onClick={
-                () => this.props.selectHandler(name)}>
+                () => this.props.select_handler(name)}>
                 {name}
             </div>
         }
@@ -99,11 +129,15 @@ class CityPanel extends React.Component {
             </div>
         }
 
-        return <div className="city-list">
-            {alphabet.map(city_section)}
-            <div className="quick-select">
-                {alphabet.map(char => <div key={char}>{char}</div>)}
-            </div>
-        </div >
+        return <div className="scroll-panel" ref="scroll" id="xxx">
+            <div className="city-list">
+                {alphabet.map(city_section)}
+                <div className="quick-select"
+                    onTouchStart={this.touchStartHandler}
+                    onTouchMove={this.touchMoveHandler}>
+                    {alphabet.map(char => <div key={char}>{char}</div>)}
+                </div>
+            </div >
+        </div>
     }
 }
