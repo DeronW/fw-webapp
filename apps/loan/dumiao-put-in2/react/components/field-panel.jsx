@@ -5,13 +5,11 @@ class FieldPanel extends React.Component {
             value: props.field.value
         }
     }
-    componentDidMount() {
-    }
     confirmHandler = () => {
         let { field, field_key } = this.props, { value } = this.state,
             vld = field.validate || [], err;
         for (let i = 0; i < vld.length; i++) {
-            let test = vld[i].test
+            let test = vld[i].test;
             let check = v => typeof (test) === 'function' ? test(v) : true;
 
             if (check(value)) {
@@ -19,12 +17,17 @@ class FieldPanel extends React.Component {
                 break
             }
         }
+        let dict = { [field_key]: value }
+        // 如果修改字段是借款金额, 那么要重置借款期限
+        if (field_key === 'balance') dict.trem = '';
         err ?
             $FW.Component.Toast(err) :
-            this.props.set_form_data({ [field_key]: value })
+            this.props.set_form_data(dict)
     }
     textChangeHandler = (e) => {
-        this.setState({ value: e.target.value })
+        let v = e.target.value, { field } = this.props;
+        if (typeof (field.format) === 'function') v = field.format(v)
+        this.setState({ value: v })
     }
     selectChangeHandler = (v) => {
         this.setState({ value: v }, this.confirmHandler)

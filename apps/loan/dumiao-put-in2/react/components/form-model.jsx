@@ -5,13 +5,14 @@ class FormModel {
                 name: '借款金额',
                 placeholder: '请以1000为单位，上限为50000',
                 value: '',
-                validate: [
-                    {
-                        test: /.*/,
-                        msg: ''
-                    }
-                ],
-                format: x => parseInt(x)
+                validate: [{
+                    test: v => !v,
+                    msg: '请输入借款金额'
+                }, {
+                    test: v => v % 1000 !== 0,
+                    msg: '请以1000为单位，上限为50000'
+                }],
+                format: x => parseInt(x) || ''
             },
             'trem': {
                 name: '期限',
@@ -30,7 +31,10 @@ class FormModel {
                     text: '12个月',
                     value: '4'
                 }],
-                format: null
+                validate: [{
+                    test: v => !v,
+                    msg: '请选择借款时间'
+                }]
             },
             'creditCard': {
                 name: '信用卡',
@@ -42,8 +46,7 @@ class FormModel {
                         test: v => v.length === 0,
                         msg: '信用卡不能为空'
                     }
-                ],
-                format: x => x
+                ]
             },
             'email': {
                 name: '邮箱',
@@ -58,8 +61,7 @@ class FormModel {
                         test: v => !/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(v),
                         msg: '邮箱格式不正确'
                     }
-                ],
-                format: x => x
+                ]
             },
             'city': {
                 name: '城市',
@@ -70,8 +72,7 @@ class FormModel {
                         test: v => !v,
                         msg: '请选择城市'
                     }
-                ],
-                format: x => x
+                ]
             },
             'address': {
                 name: '现居住地',
@@ -82,8 +83,7 @@ class FormModel {
                         test: v => v.length === 0,
                         msg: '请输入居住地'
                     }
-                ],
-                format: x => x
+                ]
             },
             'homeSituation': {
                 name: '婚姻',
@@ -103,8 +103,7 @@ class FormModel {
                         test: v => !v,
                         msg: '请选择婚姻状况'
                     }
-                ],
-                format: x => x
+                ]
             },
             'emContact': {
                 name: '紧急联系人',
@@ -112,11 +111,10 @@ class FormModel {
                 value: '',
                 validate: [
                     {
-                        test: v => v.length === 0,
+                        test: v => !v,
                         msg: '请输入亲属或好友姓名'
                     }
-                ],
-                format: x => x
+                ]
             },
             'emRelationship': {
                 name: '联系人关系',
@@ -148,8 +146,7 @@ class FormModel {
                         test: v => !v,
                         msg: '请选择紧急联系人关系'
                     }
-                ],
-                format: x => x
+                ]
             },
             'emMobile': {
                 name: '联系人手机',
@@ -163,8 +160,7 @@ class FormModel {
                         test: v => v.length != 11,
                         msg: '手机号格式不正确'
                     }
-                ],
-                format: x => parseInt(x)
+                ]
             },
             'income': {
                 name: '税后月收入',
@@ -184,14 +180,7 @@ class FormModel {
                 }, {
                     text: '20000元以上',
                     value: '4'
-                }],
-                validate: [
-                    {
-                        test: /.*/,
-                        msg: ''
-                    }
-                ],
-                format: x => x
+                }]
             },
             'workExperience': {
                 name: '工作年限',
@@ -208,14 +197,7 @@ class FormModel {
                 }, {
                     text: '10年以上',
                     value: '4'
-                }],
-                validate: [
-                    {
-                        test: /.*/,
-                        msg: ''
-                    }
-                ],
-                format: x => x
+                }]
             },
             'realName': {
                 name: '姓名',
@@ -252,10 +234,7 @@ class FormModel {
     }
     set_field = (key, value, need_validate) => {
         let err
-        if (need_validate) {
-            err = this.validate_field_value(key, value)
-        }
-
+        if (need_validate) err = this.validate_field_value(key, value)
         if (!err) this.form[key].value = value
         return err
     }
@@ -283,8 +262,6 @@ class FormModel {
     }
 
     set_form_data = (data) => {
-        for (let i in data) {
-            this.set_field(i, data[i], true)
-        }
+        for (let i in data) this.set_field(i, data[i])
     }
 }
