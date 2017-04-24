@@ -18,7 +18,7 @@
                 left: p1.pageX - p0.offsetLeft,
                 top: p1.pageY - p0.offsetTop
             })
-            this.setState({ waves: waves })
+            // this.setState({ waves: waves }) // hide this effect
             this.tap_handler && this.tap_handler()
         }
         render() {

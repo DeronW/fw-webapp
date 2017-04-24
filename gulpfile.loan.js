@@ -75,6 +75,7 @@ const FXH_PAGES = [
 const DU_MIAO_PAGES = [
     'dumiao', // 读秒产品借款页面
     'dumiao-put-in', // 读秒进件页面
+    'dumiao-put-in2', // 读秒进件页面
     'dumiao-bill', //读秒账单详情页
 ]
 
