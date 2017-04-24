@@ -313,6 +313,14 @@ class InteractWrap extends React.Component {
                 window.location.href = '/static/loan/home/index.html';
                 break;
             default:
+                let dict = data.userLogin;
+                $FW.Store.setUserDict({
+                    token: dict.userToken,
+                    id: dict.userId,
+                    gid: dict.userGid,
+                    status: dict.userStatus,
+                    uid:dict.uid
+                });
                 window.location.href = '/static/loan/home/index.html';
         }
     }
