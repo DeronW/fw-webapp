@@ -65,7 +65,7 @@ class BorrowMoney extends React.Component {
             tryOtherLoanMsg:'',
             canStatus:'',
             canMessage:'',
-            loanUuid:''
+            loanUuid:null
         }
         this.clickHandler = this.clickHandler.bind(this);
         this.imgClickHandler = this.imgClickHandler.bind(this);
