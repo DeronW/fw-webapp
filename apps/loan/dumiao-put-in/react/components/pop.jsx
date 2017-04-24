@@ -6,6 +6,7 @@ class WindowPop extends React.Component {
             sumMoneyListObj: {
                 moneyVal: props.getPopSumMoneyListObj.moneyVal,
                 deadlineVal: props.getPopSumMoneyListObj.deadlineVal,
+                deadlineValIndex: props.getPopSumMoneyListObj.deadlineValIndex,
                 creditCardVal: props.getPopSumMoneyListObj.creditCardVal,
                 emailVal: props.getPopSumMoneyListObj.emailVal,
                 homeVal: props.getPopSumMoneyListObj.homeVal,
@@ -29,7 +30,8 @@ class WindowPop extends React.Component {
             tabShow: false,
             deadline: [],
             deadlineIconShow: false,
-            deadlineIconIndex: 0
+            deadlineIconIndex: 0,
+            arrowCounter: 0
         }
     }
     componentWillMount() {
@@ -143,6 +145,8 @@ class WindowPop extends React.Component {
             if (verificationNum(e.target.value)) {
                 let copSumMoneyListObj1 = this.state.sumMoneyListObj
                 copSumMoneyListObj1.moneyVal = e.target.value
+                copSumMoneyListObj1.deadlineVal = ''
+                copSumMoneyListObj1.deadlineValIndex = null
 
                 this.setState({
                     copSumMoneyListObj1,
@@ -200,11 +204,14 @@ class WindowPop extends React.Component {
                 copSumMoneyListObjUrgentPerson
             })
         } else if (this.state.selectList === 'phone') {
-            let copSumMoneyListObjPhone = this.state.sumMoneyListObj
-            copSumMoneyListObjPhone.phone = e.target.value
-            this.setState({
-                copSumMoneyListObjPhone
-            })
+            if (verificationNum(e.target.value)) {
+                let copSumMoneyListObjPhone = this.state.sumMoneyListObj
+                copSumMoneyListObjPhone.phone = e.target.value
+                this.setState({
+                    copSumMoneyListObjPhone
+                })
+            }
+            
         }
     }
     handlerDate(e) {
@@ -218,7 +225,8 @@ class WindowPop extends React.Component {
             $FW.Component.Toast("请以1000为单位，上限为50000");
         } else {
             this.setState({
-                tabShow: !this.state.tabShow
+                tabShow: !this.state.tabShow,
+                arrowCounter: 1
             })
         }
     }
@@ -227,6 +235,7 @@ class WindowPop extends React.Component {
         const copState = this.state.sumMoneyListObj
 
         copState.deadlineVal = data,
+        copState.deadlineValIndex = index
 
             this.setState({
                 deadlineIconShow: true,
@@ -242,6 +251,7 @@ class WindowPop extends React.Component {
         return {
             moneyVal: this.state.sumMoneyListObj.moneyVal,
             deadlineVal: this.state.sumMoneyListObj.deadlineVal,
+            deadlineValIndex: this.state.sumMoneyListObj.deadlineValIndex,
             creditCardVal: this.state.sumMoneyListObj.creditCardVal,
             emailVal: this.state.sumMoneyListObj.emailVal,
             realName: this.state.sumMoneyListObj.realName,
@@ -313,13 +323,24 @@ class WindowPop extends React.Component {
     render() {
         const { selectList, popTitle, getPopShow, getPopInfo } = this.props
 
+        let arrowRotate = () => {
+            if(this.state.arrowCounter == 1) {
+
+            }
+        }
+
         let listNextTab = () => {
             return <div className="list list-next-tab">
-                <div className="" onClick={this.handlerDate.bind(this)}>
+                <div className="deadline-list" style={{ height: '86px' }} onClick={this.handlerDate.bind(this)}>
                     <div className="name-text">期限</div>
                     <div className="r">
-                        <div className="text">{this.state.sumMoneyListObj.deadlineVal} {this.state.sumMoneyListObj.deadlineVal != '' ? '个月' : ''}</div>
-                        <div className="arrow-icon"></div>
+                        <div className="text" style={{ color: this.state.sumMoneyListObj.deadlineVal != '' ? null : 'rgb(204, 204, 204)' } }>
+                            {this.state.sumMoneyListObj.deadlineVal} {this.state.sumMoneyListObj.deadlineVal != '' ? '个月' : '请选择期限'}
+                        </div>
+                        <div className= { 
+                            this.state.arrowCounter == 1 ?  (this.state.tabShow ? 'd-arrow' : 'u-arrow') + ' arrow-icon' :  'arrow-icon'
+                             }>
+                        </div>
                     </div>
 
                 </div>
@@ -330,7 +351,7 @@ class WindowPop extends React.Component {
                                 return <div className="block" key={index} onClick={this.handlerSelectDeadline.bind(this, index, data)}>
                                     <div className="info-text">{data}个月</div>
                                     {
-                                        index == this.state.deadlineIconIndex && this.state.deadlineIconShow ? <div className="select-icon"></div> : null
+                                        index == this.state.sumMoneyListObj.deadlineValIndex ? <div className="select-icon"></div> : null
                                     }
                                 </div>
                             })
@@ -554,6 +575,7 @@ class WindowPop extends React.Component {
                     getPopShowProps={getPopShow}
                     getSelectListProps={selectList}
                     pushType={'popBtn'}
+                    btnName="确定"
                 />
             </div>
         )
