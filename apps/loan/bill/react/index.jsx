@@ -2,7 +2,7 @@ class Content extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            current_type: '1',
+            current_type: window.location.hash.slice(1) || '1',
             tab: {
                 '1': { name: '申请中', page_no: 1, order_list: [] },
                 '2': { name: '还款中', page_no: 1, order_list: [] },
@@ -36,6 +36,7 @@ class Content extends React.Component {
     }
     switchTabHandler = (type) => {
         this.setState({ current_type: type }, this.loadMoreHandler);
+        window.location.hash = type;
     }
     render() {
         let { current_type, tab } = this.state;
@@ -50,11 +51,12 @@ class Content extends React.Component {
 
         let order_item = (order, index) => {
             let link = order.productId == 1 ?
-                `/static/loan/bill-detail/index.html?uuid=${order.loanGid}` : `/static/loan/bill-detail-dumiao/index.html?uuid=${order.uuid}`;
-            let logo = order.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png";
+                `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}` :
+                `/static/loan/dumiao-bill/index.html?uuid=${order.uuid}&baseStatus=${order.baseStatus}`;
+            //let logo = order.productId == 1 ? "images/fxh-logo.png" : "images/dumiao-logo.png";
 
             return <Nav className="list_li" key={`${order.orderGid}${index}`} href={link}>
-                <div className="list-img"><img src={logo} /></div>
+                <div className="list-img"><img src={order.productLogo} /></div>
                 <div className="list-content">
                     <div className="apply-num">借款金额:{order.loanAmtStr}元</div>
                     <div className="apply-duration">借款期限:{order.termNumStr}</div>

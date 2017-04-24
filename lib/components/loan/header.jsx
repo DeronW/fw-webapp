@@ -22,11 +22,15 @@ class Header extends React.Component {
         this.backClickHandler = this.backClickHandler.bind(this);
     }
 
-    backClickHandler() {
+    backClickHandler = () => {
         this.props.back_handler
             ? this.props.back_handler()
             : window.history.back();
         // : window.history.go(-1);
+    }
+
+    componentDidMount() {
+        NativeBridge.setTitle(this.props.title);
     }
 
     render() {

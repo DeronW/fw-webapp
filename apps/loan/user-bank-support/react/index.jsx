@@ -6,17 +6,9 @@ const BankList = React.createClass({
     },
     componentDidMount() {
         let user = $FW.Store.getUserDict();
-        $FW.Ajax({
-            url: `${API_PATH}/api/bankcard/v1/supportbank.json`,
-            method: "POST",
-            data: {
-                token: user.token,
-                userGid: user.gid,
-                userId: user.id,
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/supportbank.json`,{
                 page: 1,
-                pageSize: 100,
-                sourceType: SOURCE_TYPE
-            }
+                pageSize: 100
         }).then(data => {
             this.setState({
                 bankList: data.pageData.result

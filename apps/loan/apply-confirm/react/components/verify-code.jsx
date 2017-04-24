@@ -37,17 +37,7 @@ const VerifyCode = React.createClass({
         let orderGid = query.orderGid;
         if (this.state.countdown <= 0) {
             this.countingDown();
-            $FW.Ajax({
-                url: `${API_PATH}/api/loan/v1/resendverifycode.json`,
-                method: "post",
-                data: {
-                    token: USER.token,
-                    userGid: USER.gid,
-                    userId: USER.id,
-                    sourceType: SOURCE_TYPE,
-                    orderGid: orderGid
-                }
-            });
+            $FXH.Post(`${API_PATH}/api/loan/v1/resendverifycode.json`,{orderGid: orderGid});
         }
     },
     confirmBtnHandler: function () {
@@ -56,13 +46,9 @@ const VerifyCode = React.createClass({
         if (this.state.value == '')
             return $FW.Component.Toast("请输入短信验证码");
 
-        $FW.Post(`${API_PATH}/api/loan/v1/do.json`, {
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE,
+        $FXH.Post(`${API_PATH}/api/loan/v1/do.json`, {
             orderGid: orderGid,
-            verifyCode: this.state.value,
+            verifyCode: this.state.value
         }).then(() => {
             if($FW.Browser.inApp()){
                 gotoHandler(`/static/loan/apply-result/index.html?orderGid=${orderGid}`);

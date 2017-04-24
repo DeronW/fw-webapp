@@ -7,11 +7,7 @@ const BankManagement = React.createClass({
         }
     },
     componentDidMount() {
-        $FW.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE,
+        $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
             productId: 1
         }).then(data => {
             //if (data.borrowBtnStatus == 2) this.setState({ popShow: true });
@@ -83,12 +79,7 @@ const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
     NativeBridge.setTitle('银行卡管理');
     ReactDOM.render(<Header title={"银行卡管理"} />, HEADER_NODE);
-    $FW.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`, {
-        token: USER.token,
-        userGid: USER.gid,
-        userId: USER.id,
-        sourceType: SOURCE_TYPE
-    }).then(data => {
+    $FXH.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`).then(data => {
         ReactDOM.render(<BankManagement cards={data.userBankList.withdrawBankcard} />, CONTENT_NODE)
     }, e => $FW.Component.Toast(e.message));
 });

@@ -46,12 +46,8 @@ const VerifyPhone = React.createClass({
     handleGetCode() {
         this.getCode();
 
-        $FW.Post(`${API_PATH}/api/bankcard/v1/resendverifycode.json`, {
-            operatorBankcardGid: BANK_GID,
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/resendverifycode.json`, {
+            operatorBankcardGid: BANK_GID
         }).then(null, (e) => {
             $FW.Component.Toast(e.message);
             clearInterval(this.time);
@@ -61,13 +57,9 @@ const VerifyPhone = React.createClass({
     submitHandler() {
         if (this.state.codeVal.length < 4) return $FW.Component.Toast("验证码不能小于4位");
 
-        $FW.Post(`${API_PATH}/api/bankcard/v1/commitverifycode.json`, {
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/commitverifycode.json`, {
             operatorBankcardGid: BANK_GID,
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            verifyCode: this.state.codeVal,
-            sourceType: SOURCE_TYPE
+            verifyCode: this.state.codeVal
         }).then(
             () => {
                 $FW.Component.showAjaxLoading()
@@ -77,6 +69,7 @@ const VerifyPhone = React.createClass({
                 }, 5000))
             }
         ).then(() => {
+            $FW.Component.showAjaxLoading();
             this.setState({result: null});
             setTimeout(this.checkAjax, 3000);
             setTimeout(this.checkAjax, 6000);
@@ -86,14 +79,11 @@ const VerifyPhone = React.createClass({
     },
     checkAjax(finalTry) {
         if (this.state.result === 'wrong_code') return;
-
-        $FW.Post(`${API_PATH}/api/bankcard/v1/status.json`, {
-            operatorBankcardGid: BANK_GID,
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            sourceType: SOURCE_TYPE
+        $FW.Component.showAjaxLoading();
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/status.json`, {
+            operatorBankcardGid: BANK_GID
         }).then(data => {
+            $FW.Component.showAjaxLoading();
             let d = data.bindStatus;
             this.setState({
                 result: d.status,
@@ -110,7 +100,7 @@ const VerifyPhone = React.createClass({
                 $FW.Component.Toast("验证码不正确");
             }
         } else if (result == 1) {
-            window.location.href = '/static/loan/home/index.html';
+            $FW.Browser.inApp()? NativeBridge.close() : window.location.href = '/static/loan/home/index.html';
         } else if (result == 2) {
             this.setState({show: true});
         }

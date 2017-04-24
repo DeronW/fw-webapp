@@ -38,12 +38,8 @@ const LoanResult = React.createClass({
     checkAjax() {
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
-        $FW.Post(`${API_PATH}/api/loan/v1/status.json`, {
-            token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
-            orderGid: orderGid,
-            sourceType: SOURCE_TYPE
+        $FXH.Post(`${API_PATH}/api/loan/v1/status.json`, {
+            orderGid: orderGid
         }).then((data) => {
             let finishFlag = true;
             if (data.loanStatus == 6) {
@@ -198,12 +194,7 @@ const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
     $FW.Browser.inAndroid() && NativeBridge.hideHeader();
     $FW.Browser.inIOS() && NativeBridge.setTitle('借款结果');
-    $FW.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`,{
-        token: USER.token,
-        userGid: USER.gid,
-        userId: USER.id,
-        sourceType: SOURCE_TYPE
-    }).then((data)=>{
+    $FXH.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`).then((data)=>{
         ReactDOM.render(<LoanResult data={data}/>, CONTENT_NODE);
     });
 });

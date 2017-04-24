@@ -1,6 +1,13 @@
+// import { lazyload } from 'react-lazyload';
+ 
+
+
 function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
+        // if(link.indexOf('%')!=-1){
+        //     link=link.slice(0,link.indexOf('%'))
+        // }
     }
 
     location.href = encodeURI(link);
@@ -9,6 +16,7 @@ function gotoHandler(link) {
 function productLink(bizNo) {
     return `/static/mall/product-detail/index.html?bizNo=${bizNo}`
 }
+
 
 const Mall = React.createClass({
     getInitialState: function() {
@@ -90,26 +98,32 @@ const Mall = React.createClass({
                 
                 <div className="head-nav">
                     <a href="/static/mall/product-vip-zone/index.html">
-                        <img src="images/nav-1.png" /><span>VIP专区</span></a>
+                        <img src="images/vip.png" /><span>VIP专区</span></a>
                     <a href="/static/mall/product-list/index.html?searchSourceType=0&category=fantasy&title=2">
-                        <img src="images/nav-2.png" /><span>豆哥周边</span></a>
+                        <img src="images/douge_hood.png" /><span>豆哥周边</span></a>
+                        <a href="/static/mall/product-list/index.html?searchSourceType=0&category=qualityLife&title=品质生活">
+                        <img src="images/global_shopping.png" /><span>全球购</span></a>
                     <a href="/static/mall/product-list/index.html?searchSourceType=0&category=workshop&title=3">
-                        <img src="images/nav-3.png" /><span>工场券</span></a>
-                    <a href="/static/mall/product-hot-activity/index.html">
-                        <img src="images/nav-4.png" /><span>热门活动</span></a>
-                    <a href="/static/mall/product-recharge/index.html?tab=1">
-                        <img src="images/nav-5.png" /><span>充话费</span></a>
-                    <a href="/static/mall/product-recharge/index.html?tab=2">
-                        <img src="images/nav-6.png" /><span>充流量</span>
-                        <span className="hot-tag"></span></a>
-                    <a href="/static/mall/game/index.html?mallHead=true">{/*static/mall/waiting/index.html*/}
-                        <img src="images/nav-7.png" /><span>游戏中心</span></a>
+                        <img src="images/vouchers.png" /><span>工场神券</span></a>
+                    {/*<a href="/static/mall/product-hot-activity/index.html">
+                        <img src="images/nav-4.png" /><span>热门活动</span></a>*/}
 
-                    <a href="/static/mall/product-list/index.html?searchSourceType=1">
-                        <img src="images/nav-8.png" /><span>我可兑换</span></a>
+                        <a href="/static/mall/product-list/index.html?searchSourceType=1">
+                        <img src="images/exchange.png" /><span>我可兑换</span></a>
+                    <a href="/static/mall/product-recharge/index.html?tab=1">
+                        <img src="images/Prepaid_ calls.png" /><span>话费充值</span></a>
+                    <a href="/static/mall/product-recharge/index.html?tab=2">
+                        <img src="images/flow_recharge.png" /><span>流量充值</span></a>
+
+                        <a href="/static/mall/order-list/index.html">
+                        <img src="images/query_order.png" /><span>订单查询</span></a>
+                        <a href="/static/mall/game-zhuanpan20161230/index.html">
+                        <img src="images/get_vouchers.png" /><span>大转盘</span></a>
+                    <a href="/static/mall/game/index.html?mallHead=true">{/*static/mall/waiting/index.html*/}
+                        <img src="images/game_center.png" /><span>游戏中心</span></a>
                 </div>
 
-
+ {/*<LazyLoad height={200} offset={100}>*/}
                 <HotProducts bizNo={'TJ0000022'} count={10} />
                 <NewProducts bizNo={'TJ0000060'} count={10} />
                 <Grid_1 bizNo={'TJ0000042'} count={10} />
@@ -122,6 +136,7 @@ const Mall = React.createClass({
                 <Grid_8 bizNo={'TJ0000056'} count={10} />
 
                 <HotSales />
+                {/*</LazyLoad>*/}
             </div>
         )
     }

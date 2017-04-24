@@ -31,7 +31,7 @@ const Register = React.createClass({
     },
     changeCode(e) {
         let v = e.target.value;
-        v.length < 5 && this.setState({ code: v });
+        v.length <= 6 && this.setState({ code: v });
     },
     changePsw(e) {
         let v = e.target.value;
@@ -64,7 +64,7 @@ const Register = React.createClass({
         this.setState({ plainCode: !this.state.plainCode });
     },
     handleRegisterBtn() {
-        let err, {code, password, codeToken} = this.state;
+        let err, { code, password, codeToken } = this.state;
 
         if (code == '') err = "验证码不能为空";
         if (password == '') err = "密码不能为空";
@@ -86,7 +86,8 @@ const Register = React.createClass({
                     token: dict.userToken,
                     id: dict.userId,
                     gid: dict.userGid,
-                    status: dict.userStatus
+                    status: dict.userStatus,
+                    uid: dict.uid
                 })
                 window.location.href = "/"
             }, e => $FW.Component.Toast(e.message))

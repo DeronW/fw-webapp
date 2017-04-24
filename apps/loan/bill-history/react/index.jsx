@@ -15,11 +15,7 @@ const HistoryBill = React.createClass({
         if (!this.state.hasData) return;
         let user = $FW.Store.getUserDict();
 
-        $FW.Post(`${API_PATH}/api/oriole/v1/loanhistory.json`, {
-            token: user.token,
-            userGid: user.gid,
-            userId: user.id,
-            sourceType: SOURCE_TYPE,
+        $FXH.Post(`${API_PATH}/api/oriole/v1/loanhistory.json`, {
             pageSize: 20,
             pageIndex: this.state.page
         }).then(data => {
@@ -40,7 +36,7 @@ const HistoryBill = React.createClass({
 
             return (
                 <a className="bill-item" key={index}
-                    href={`/static/loan/bill-detail/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`}>
+                    href={`/static/loan/fxh-bill/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`}>
                     <div className="bill-detail">
                         <div className="bill-detail-wrap">
                             <span className="bill-money">

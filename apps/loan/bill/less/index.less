@@ -47,7 +47,8 @@ img{
 }
 .billContainer{
   margin-bottom:150px;
-  padding-top:20px;
+  margin-top:20px;
+  background-color: #fff;
 }
 .billContainer-weixin{
   padding-top:94px;
@@ -57,9 +58,13 @@ img{
   display:block;
   height:156px;
   background:#fff;
-  padding-left:30px;
+  margin-left:30px;
   border-bottom:1px solid #ebeaea;
   overflow:hidden;
+
+  &:last-child {
+    border-bottom:1px solid transparent;
+  }
 }
 .list-img{
   width:113px;
@@ -68,12 +73,16 @@ img{
   margin-right:24px;
   margin-top:24px;
 }
+.list-img img{
+  width:113px;
+  height:113px;
+}
 .list-content{
   float:left;
   margin-top:38px;
 }
 .apply-num{
-  font-size:36px;
+  font-size:32px;
   line-height:100%;
   color:#333;
   margin-bottom:16px;

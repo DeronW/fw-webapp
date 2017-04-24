@@ -182,3 +182,67 @@ body {
   .font-style-default;
   text-align: center;
 }
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 720 / 40rem;
+  height: 1500 / 40rem;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  text-align: center;
+
+  .pop-wrap {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 586 / 40rem;
+    padding: 34 / 40rem;
+    background: #fff;
+    border-radius: 12 / 40rem;
+
+    .registered-tip {
+      margin: 50 / 40rem auto;
+      font-size: 30 / 40rem;
+      color: #666;
+    }
+
+    .close-icon {
+      position: absolute;
+      top: 34 / 40rem;
+      right: 34 / 40rem;
+      width: 23 / 40rem;
+      height: 23 / 40rem;
+      z-index: 9999;
+    }
+
+    .mask-opts {
+      display: inline-flex;
+      width: 100%;
+      justify-content: space-between;
+      font-size: 30 / 40rem;
+
+      .close-mask {
+        display: inline-block;
+        width: 246 / 40rem;
+        height: 74 / 40rem;
+        line-height: 74 / 40rem;
+        border: 1px solid #6aa4f0;
+        border-radius: 4px;
+        color: #6aa4f0;
+      }
+
+      .to-next {
+        display: inline-block;
+        width: 246 / 40rem;
+        height: 74 / 40rem;
+        line-height: 74 / 40rem;
+        background-color: #6aa4f0;
+        border-radius: 4px;
+        color: #fff;
+      }
+    }
+  }
+}

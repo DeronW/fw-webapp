@@ -3,7 +3,7 @@ function verificationNum(val) {
     return reg.test(val)
 }
 
-function isNum(val){
+function isNum(val) {
     var reg = /^[0-9]*$/;
     return reg.test(val);
 }
@@ -27,7 +27,7 @@ const SetPassword = React.createClass({
             plainCode: false,
             codeToken: codeToken,
             checked: false,
-            inviteCode:''
+            inviteCode: ''
         }
     },
     changeCode(e) {
@@ -38,9 +38,9 @@ const SetPassword = React.createClass({
         let v = e.target.value;
         v.length <= 16 && verificationNum(v) && this.setState({ password: v });
     },
-    changeInviteCodeHandler(e){
+    changeInviteCodeHandler(e) {
         let v = e.target.value;
-        v.length <= 7 && this.setState({inviteCode:v});
+        v.length <= 8 && this.setState({ inviteCode: v });
     },
     componentDidMount() {
         this.countingDown();
@@ -68,10 +68,10 @@ const SetPassword = React.createClass({
         }, 1000);
     },
     handlePlainCode() {
-        this.setState({ plainCode: !this.state.plainCode});
+        this.setState({ plainCode: !this.state.plainCode });
     },
     handleRegisterBtn() {
-        let err, {password, code, checked, codeToken} = this.state;
+        let err, { password, code, checked, codeToken, inviteCode } = this.state;
 
         if (code == '') err = "验证码不能为空";
         if (code.length > 6) err = "验证码为六位数字";
@@ -89,7 +89,7 @@ const SetPassword = React.createClass({
                 codeToken: this.state.codeToken,
                 password: password,
                 verifyCode: code,
-                invitationCode:this.state.inviteCode,
+                invitationCode: this.state.inviteCode,
                 sourceType: SOURCE_TYPE
             }).then(data => {
                 let dict = data.userLogin;
@@ -97,7 +97,8 @@ const SetPassword = React.createClass({
                     token: dict.userToken,
                     id: dict.userId,
                     gid: dict.userGid,
-                    status: dict.userStatus
+                    status: dict.userStatus,
+                    uid: dict.uid
                 })
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message))
@@ -106,7 +107,7 @@ const SetPassword = React.createClass({
         this.setState({ checked: !this.state.checked });
     },
     render() {
-        let {code} = this.state;
+        let { code } = this.state;
 
         let btnSMSCode =
             this.state.codeBoolean ?
@@ -140,7 +141,7 @@ const SetPassword = React.createClass({
                             />
                         </div>
 
-                        <span className={this.state.plainCode? "icon-pwd1": "icon-pwd"} onClick={this.handlePlainCode}></span>
+                        <span className={this.state.plainCode ? "icon-pwd1" : "icon-pwd"} onClick={this.handlePlainCode}></span>
                     </div>
                     <div className="list invite-list">
                         <span className="icon"></span>
