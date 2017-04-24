@@ -83,7 +83,6 @@ const VerifyPhone = React.createClass({
         $FXH.Post(`${API_PATH}/api/bankcard/v1/status.json`, {
             operatorBankcardGid: BANK_GID
         }).then(data => {
-            $FW.Component.hideAjaxLoading();
             let d = data.bindStatus;
             this.setState({
                 result: d.status,
