@@ -327,7 +327,7 @@ const OrderList = React.createClass({
                                                 });
 
                                             function back_handler() {
-                                                if(document.referrer=='https://m.dougemall.com/static/mall/home/index.html'){
+                                                if(document.referrer=='https://m.dougemall.com'){
                                                     window.location.href = '/static/mall/home/index.html';
                                                 }
                                                 if(document.referrer=='https://m.dougemall.com/static/mall/user/index.html'){
