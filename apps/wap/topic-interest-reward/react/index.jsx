@@ -1,8 +1,8 @@
 $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
-        NativeBridge.setTitle('VIP等级加息')
+        NativeBridge.setTitle('年化加息奖励')
     } else {
-        ReactDOM.render(<Header title={'VIP等级加息'} />, HEADER_NODE)
+        ReactDOM.render(<Header title={'年化加息奖励'} />, HEADER_NODE)
     }
 
     function getCurrentUserInfo(interest_list) {
