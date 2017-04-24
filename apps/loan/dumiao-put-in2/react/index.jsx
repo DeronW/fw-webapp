@@ -83,7 +83,7 @@ class MainPanel extends React.Component {
         }
 
         return <div className="main-panel">
-            {['balance', 'trem'].map(field_item)}
+            {['balance', 'term'].map(field_item)}
             {panel_title('基本信息')}
             {['realName', 'idCard'].map(disabled_field_item)}
             {['creditCard', 'email', 'city', 'address', 'homeSituation'].map(field_item)}

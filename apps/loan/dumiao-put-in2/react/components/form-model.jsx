@@ -14,7 +14,7 @@ class FormModel {
                 }],
                 format: x => parseInt(x) || ''
             },
-            'trem': {
+            'term': {
                 name: '期限',
                 placeholder: '请选择期限',
                 value: '',
