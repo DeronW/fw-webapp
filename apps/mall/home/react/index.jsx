@@ -1,3 +1,7 @@
+// import { lazyload } from 'react-lazyload';
+ 
+
+
 function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
@@ -9,6 +13,7 @@ function gotoHandler(link) {
 function productLink(bizNo) {
     return `/static/mall/product-detail/index.html?bizNo=${bizNo}`
 }
+
 
 const Mall = React.createClass({
     getInitialState: function() {
@@ -42,7 +47,7 @@ const Mall = React.createClass({
         return images;
     },
     onImageClickHandler: function(index) {
-        var link = null;
+        var link = '/static/mall/home-banner-detail/index.html';
         var bs = this.props.banners;
         for (var i = 0; i < bs.length; i++) {
             if (i == index) link = bs[i].link;
@@ -115,7 +120,7 @@ const Mall = React.createClass({
                         <img src="images/game_center.png" /><span>游戏中心</span></a>
                 </div>
 
-
+ <LazyLoad height={200} offset={100}>
                 <HotProducts bizNo={'TJ0000022'} count={10} />
                 <NewProducts bizNo={'TJ0000060'} count={10} />
                 <Grid_1 bizNo={'TJ0000042'} count={10} />
@@ -128,6 +133,7 @@ const Mall = React.createClass({
                 <Grid_8 bizNo={'TJ0000056'} count={10} />
 
                 <HotSales />
+                </LazyLoad>
             </div>
         )
     }
