@@ -120,7 +120,7 @@ const Mall = React.createClass({
                         <img src="images/game_center.png" /><span>游戏中心</span></a>
                 </div>
 
- <LazyLoad height={200} offset={100}>
+ {/*<LazyLoad height={200} offset={100}>*/}
                 <HotProducts bizNo={'TJ0000022'} count={10} />
                 <NewProducts bizNo={'TJ0000060'} count={10} />
                 <Grid_1 bizNo={'TJ0000042'} count={10} />
@@ -133,7 +133,7 @@ const Mall = React.createClass({
                 <Grid_8 bizNo={'TJ0000056'} count={10} />
 
                 <HotSales />
-                </LazyLoad>
+                {/*</LazyLoad>*/}
             </div>
         )
     }
