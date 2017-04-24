@@ -331,7 +331,7 @@ const OrderList = React.createClass({
                                                     window.location.href = '/static/mall/home/index.html';
                                                 }
                                                 if(document.referrer=='https://m.dougemall.com/static/mall/user/index.html'){
-                                                    window.location.href = '/static/mall/mall/user/index.html';
+                                                    window.location.href = '/static/mall/user/index.html';
                                                 }
                                                 
                                             }
