@@ -308,6 +308,7 @@ class InteractWrap extends React.Component {
                     id: dict.userId,
                     gid: dict.userGid,
                     status: dict.userStatus,
+                    invitCode:dict.invitationCode,
                     uid:dict.uid
                 });
                 window.location.href = '/static/loan/home/index.html';
@@ -318,6 +319,7 @@ class InteractWrap extends React.Component {
                     id: dict.userId,
                     gid: dict.userGid,
                     status: dict.userStatus,
+                    invitCode:dict.invitationCode,
                     uid:dict.uid
                 });
                 window.location.href = '/static/loan/home/index.html';
