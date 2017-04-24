@@ -59,7 +59,9 @@ class FieldPanel extends React.Component {
             return <div> {field.options.map(option)} </div>
         }
 
-        return <div className="field-edit-panel">
+        return <div className="field-edit-panel" style={{
+            paddingTop: $FW.Browser.inWeixin() ? '0px' : '100px'
+        }}>
             {field.describe &&
                 <div className="section-title">{field.describe}</div>}
             {field.options ?
@@ -130,7 +132,7 @@ class CityPanel extends React.Component {
             </div>
         }
 
-        return <div className="scroll-panel" ref="scroll" id="xxx">
+        return <div className="scroll-panel" ref="scroll">
             <div className="city-list">
                 {alphabet.map(city_section)}
                 <div className="quick-select"
