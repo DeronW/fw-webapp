@@ -5,9 +5,9 @@
 function gotoHandler(link) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
-        if(link.indexOf('%')!=-1){
-            link=link.slice(0,link.indexOf('%'))
-        }
+        // if(link.indexOf('%')!=-1){
+        //     link=link.slice(0,link.indexOf('%'))
+        // }
     }
 
     location.href = encodeURI(link);
