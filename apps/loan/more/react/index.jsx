@@ -25,7 +25,7 @@ let More = React.createClass({
         return (
             <div>
                 <div className="header">放心花</div>
-                <img src="images/hotline.jpg"/>
+                <img src="images/hotline.jpg" onClick={this.contactShow}/>
                 <div className="more-cnt">
                     <div className="more-list">
                         <div className="list">

@@ -7,11 +7,9 @@ const BannerDetail = React.createClass({
 						<img src="images/cheat.jpg"/>
 					</div>
 					<div  className="display">
-					<div>
 					<h2>
 					豆哥商城防诈骗公告
 					</h2>
-					</div>
 
 					<p className="notice">近期有个别客户反映，接到电话自称豆哥商城供货商，谎称商品质量有问题，主动给客户退钱退货事宜。请大家不要轻易相信，此类多是诈骗电话。</p>
 					<p className="notice">豆哥保证豆哥商城全场正品行货，如有质量问题，退换货请主动联系豆哥商城官方客服人员。</p>
