@@ -62,7 +62,10 @@ class BorrowMoney extends React.Component {
             detailPopShow:false,
             dumiaoEnterPopShow:false,
             tryOtherLoanPopShow:false,
-            tryOtherLoanMsg:''
+            tryOtherLoanMsg:'',
+            canStatus:'',
+            canMessage:'',
+            loanUuid:''
         }
         this.clickHandler = this.clickHandler.bind(this);
         this.imgClickHandler = this.imgClickHandler.bind(this);
@@ -79,24 +82,20 @@ class BorrowMoney extends React.Component {
         }).then(data=>this.setState({borrowStatus:data.borrowBtnStatus}));
         $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
             .then(data=>{
-                 this.setState({ableEnter:10000})
+                this.setState({canStatus:data.canStatus,canMessage:data.canMessage,loanUuid:data.loanUuid});
             }, err=>{
-                if(err.code == 1001002){
-                    this.setState({ableEnter:err.code, tryOtherLoanMsg:err.message})
-                }else{
-                    this.setState({ableEnter:err.code, tryOtherLoanMsg:err.message})
-                }
+                this.setState({ableEnter:err.code, tryOtherLoanMsg:err.message})
             }
          );
     }
     clickHandler(){
         let borrowStatus = this.state.borrowStatus;
-        let ableEnter = this.state.ableEnter;
+        let canStatus = this.state.canStatus;
         if(borrowStatus == 1 || borrowStatus == 101){
             location.href = '/static/loan/user-card-set/index.html';
-        }else if(ableEnter == 10000){
+        }else if(canStatus == 2){
             location.href = '/static/loan/dumiao-put-in/index.html?pid=' + $FW.Format.urlQuery().pid;
-        }else if(ableEnter == 1001002){
+        }else if(canStatus == 0 || canStatus == 1){
              this.setState({dumiaoEnterPopShow:true});
         }else{
             this.setState({tryOtherLoanPopShow:true});
@@ -183,8 +182,8 @@ class BorrowMoney extends React.Component {
                 {this.state.dumiaoEnterPopShow && <div className="mask" style={{zIndex:100}}>
                     <div className="detail-pop">
                         <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
-                        <div className="pop-tip">{this.state.tryOtherLoanMsg}</div>
-                        <a className="know-btn" href={`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}`}>进入读秒查看</a>
+                        <div className="pop-tip">{this.state.canMessage}</div>
+                        <a className="know-btn" href={`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}&loanUuid=${this.state.loanUuid}`}>进入读秒查看</a>
                     </div>
                 </div>}
                 {this.state.tryOtherLoanPopShow && <div className="mask" style={{zIndex:100}}>
