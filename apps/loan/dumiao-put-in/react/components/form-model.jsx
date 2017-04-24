@@ -9,7 +9,7 @@ class FormModel {
                     test: v => !v,
                     msg: '请输入借款金额'
                 }, {
-                    test: v => v % 1000 !== 0,
+                    test: v => v % 1000 !== 0 || v > 50000,
                     msg: '请以1000为单位，上限为50000'
                 }],
                 format: x => parseInt(x) || ''
