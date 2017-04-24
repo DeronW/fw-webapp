@@ -5,7 +5,9 @@ class MainPanel extends React.Component {
         this.model = new FormModel()
         window._form_model = this.model // 4 debug
         this.state = {
-            form_data: {},
+            form_data: {
+                productId: $FW.Format.urlQuery().pid
+            },
             field_key: ''
         }
     }
