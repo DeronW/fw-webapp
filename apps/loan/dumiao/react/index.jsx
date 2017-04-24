@@ -196,7 +196,7 @@ class BorrowMoney extends React.Component {
                     <div className="detail-pop">
                         <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
                         <div className="pop-tip">{this.state.canMessage}</div>
-                        <a className="know-btn" href={$FW.Browser.inWeixin() ? `${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}` : `${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`}>进入读秒查看</a>
+                        <a className="know-btn" href={`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`}>进入读秒查看</a>
                     </div>
                 </div>}
                 {this.state.canMessageShow && <div className="mask" style={{zIndex:100}}>
