@@ -64,7 +64,7 @@ const Mall = React.createClass({
         if (bs.length) {
             banner = <BannerGroup className={iOSApp ? "head-images head-images-ios" : "head-images"}
                 images={this.getHeadImages()}
-                onImageClick={this.onImageClickHandler} />
+                onClick={this.onImageClickHandler} />
         } else {
             banner = <div className="no-banner"></div>
         }
