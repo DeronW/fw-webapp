@@ -327,5 +327,6 @@ const OrderList = React.createClass({
                                                 });
 
                                             function back_handler() {
-                                                location.href = '/static/mall/user/index.html';
+                                                // location.href = '/static/mall/user/index.html';
+                                                history.go(-1);backward
                                             }
