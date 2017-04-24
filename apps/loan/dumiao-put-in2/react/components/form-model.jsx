@@ -143,7 +143,7 @@ class FormModel {
                 }],
                 validate: [
                     {
-                        test: v => !v,
+                        test: v => parseInt(v) === NaN,
                         msg: '请选择紧急联系人关系'
                     }
                 ]

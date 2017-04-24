@@ -37,7 +37,7 @@ class MainPanel extends React.Component {
         err ?
             $FW.Component.Toast(err) :
             $FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`,
-                this.state.form_data).then(data => {
+                this.state.form_data, false).then(data => {
                     // redirect to du-miao
                     let u = $FW.Store.getUserDict();
                     let params = `loanUuid=${data.uuid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
