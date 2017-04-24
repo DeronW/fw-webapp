@@ -45,7 +45,23 @@ class MainPanel extends React.Component {
                 })
     }
     render() {
-        let field = this.model.get_field(this.state.field_key);
+        let { field_key, form_data } = this.state,
+            field = this.model.get_field(this.state.field_key);
+
+        // 保持, 借款日期与借款金额的联动
+        if (field_key === 'term') {
+            let pool = field.option_pool;
+            field.options = [pool[0], pool[1], pool[2], pool[3]];
+            if (form_data.balance > 3000) {
+                field.options = [pool[1], pool[2], pool[3]]
+            }
+            if (form_data.balance > 5000) {
+                field.options = [pool[2], pool[3], pool[4], pool[5]]
+            }
+            if (form_data.balance > 20000) {
+                field.options = [pool[3], pool[4], pool[5]]
+            }
+        }
 
         let field_item = key => {
             let f = this.model.get_field(key), text;
