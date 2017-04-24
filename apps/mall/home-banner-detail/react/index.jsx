@@ -18,7 +18,7 @@ const BannerDetail = React.createClass({
 					<p className="notice">请大家提高警惕，谨防上当！</p>
 					<div className="date">
 						<span>豆哥商城</span>
-						<p>2017年4月10日</p>
+						<p className="last-time">2017年4月10日</p>
 					</div>
 					</div>
 
