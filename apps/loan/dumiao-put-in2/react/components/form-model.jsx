@@ -14,7 +14,7 @@ class FormModel {
                 }],
                 format: x => parseInt(x) || ''
             },
-            'trem': {
+            'term': {
                 name: '期限',
                 placeholder: '请选择期限',
                 value: '',
@@ -143,7 +143,7 @@ class FormModel {
                 }],
                 validate: [
                     {
-                        test: v => !v,
+                        test: v => parseInt(v) === NaN,
                         msg: '请选择紧急联系人关系'
                     }
                 ]
@@ -235,7 +235,8 @@ class FormModel {
     set_field = (key, value, need_validate) => {
         let err
         if (need_validate) err = this.validate_field_value(key, value)
-        if (!err) this.form[key].value = value
+        if (!err && this.form[key])
+            this.form[key].value = value
         return err
     }
 

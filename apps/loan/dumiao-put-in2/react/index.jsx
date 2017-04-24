@@ -5,7 +5,9 @@ class MainPanel extends React.Component {
         this.model = new FormModel()
         window._form_model = this.model // 4 debug
         this.state = {
-            form_data: {},
+            form_data: {
+                productId: $FW.Format.urlQuery().pid
+            },
             field_key: ''
         }
     }
@@ -35,7 +37,7 @@ class MainPanel extends React.Component {
         err ?
             $FW.Component.Toast(err) :
             $FXH.Post(`${API_PATH}/api/loan/v1/applyDmLoan.json`,
-                this.state.form_data).then(data => {
+                this.state.form_data, false).then(data => {
                     // redirect to du-miao
                     let u = $FW.Store.getUserDict();
                     let params = `loanUuid=${data.uuid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
@@ -46,11 +48,13 @@ class MainPanel extends React.Component {
         let field = this.model.get_field(this.state.field_key);
 
         let field_item = key => {
-            let f = this.model.get_field(key), text = f.value;
+            let f = this.model.get_field(key), text;
             if (f.options) {
                 f.options.forEach(i => {
                     if (i.value == f.value) text = i.text
                 })
+            } else {
+                text = f.value
             }
             return <div className="field-item" key={key} onClick={
                 () => this.setFieldHandler(key)}>
@@ -81,7 +85,7 @@ class MainPanel extends React.Component {
         }
 
         return <div className="main-panel">
-            {['balance', 'trem'].map(field_item)}
+            {['balance', 'term'].map(field_item)}
             {panel_title('基本信息')}
             {['realName', 'idCard'].map(disabled_field_item)}
             {['creditCard', 'email', 'city', 'address', 'homeSituation'].map(field_item)}
