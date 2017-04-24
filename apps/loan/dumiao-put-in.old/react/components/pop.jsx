@@ -41,15 +41,15 @@ class WindowPop extends React.Component {
             this.setState({
                 deadline: [1, 3, 6, 12]
             })
-        } else if (getPopSumMoneyListObj.moneyVal >= 3001 && getPopSumMoneyListObj.moneyVal <= 5000) {
+        } else if (getPopSumMoneyListObj.moneyVal >= 4000 && getPopSumMoneyListObj.moneyVal <= 5000) {
             this.setState({
                 deadline: [3, 6, 12]
             })
-        } else if (getPopSumMoneyListObj.moneyVal >= 5001 && getPopSumMoneyListObj.moneyVal <= 20000) {
+        } else if (getPopSumMoneyListObj.moneyVal >= 6000 && getPopSumMoneyListObj.moneyVal <= 20000) {
             this.setState({
                 deadline: [6, 12, 18, 24]
             })
-        } else if (getPopSumMoneyListObj.moneyVal >= 20001 && getPopSumMoneyListObj.moneyVal <= 50000) {
+        } else if (getPopSumMoneyListObj.moneyVal >= 21000 && getPopSumMoneyListObj.moneyVal <= 50000) {
             this.setState({
                 deadline: [12, 18, 24]
             })
