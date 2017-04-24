@@ -46,11 +46,13 @@ class MainPanel extends React.Component {
         let field = this.model.get_field(this.state.field_key);
 
         let field_item = key => {
-            let f = this.model.get_field(key), text = f.value;
+            let f = this.model.get_field(key), text;
             if (f.options) {
                 f.options.forEach(i => {
                     if (i.value == f.value) text = i.text
                 })
+            } else {
+                text = f.value
             }
             return <div className="field-item" key={key} onClick={
                 () => this.setFieldHandler(key)}>
