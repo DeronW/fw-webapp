@@ -235,7 +235,8 @@ class FormModel {
     set_field = (key, value, need_validate) => {
         let err
         if (need_validate) err = this.validate_field_value(key, value)
-        if (!err) this.form[key].value = value
+        if (!err && this.form[key])
+            this.form[key].value = value
         return err
     }
 
