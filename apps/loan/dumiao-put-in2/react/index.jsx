@@ -65,7 +65,7 @@ class MainPanel extends React.Component {
 
         let field_item = key => {
             let f = this.model.get_field(key), text;
-            if (f.options) {
+            if (f.options && key !== 'city') {
                 f.options.forEach(i => {
                     if (i.value == f.value) text = i.text
                 })
