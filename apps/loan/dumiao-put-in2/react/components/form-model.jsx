@@ -18,18 +18,25 @@ class FormModel {
                 name: '期限',
                 placeholder: '请选择期限',
                 value: '',
-                options: [{
+                options: [],
+                option_pool: [{
                     text: '1个月',
                     value: '1'
                 }, {
                     text: '3个月',
-                    value: '2'
-                }, {
-                    text: '6个月',
                     value: '3'
                 }, {
+                    text: '6个月',
+                    value: '6'
+                }, {
                     text: '12个月',
-                    value: '4'
+                    value: '12'
+                }, {
+                    text: '18个月',
+                    value: '18'
+                }, {
+                    text: '24个月',
+                    value: '24'
                 }],
                 validate: [{
                     test: v => !v,
@@ -262,7 +269,7 @@ class FormModel {
         return form
     }
 
-    set_form_data = (data) => {
+    set_form_data = data => {
         for (let i in data) this.set_field(i, data[i])
     }
 }

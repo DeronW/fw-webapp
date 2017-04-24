@@ -19,7 +19,7 @@ class FieldPanel extends React.Component {
         }
         let dict = { [field_key]: value }
         // 如果修改字段是借款金额, 那么要重置借款期限
-        if (field_key === 'balance') dict.trem = '';
+        if (field_key === 'balance') dict.term = '';
         err ?
             $FW.Component.Toast(err) :
             this.props.set_form_data(dict)
@@ -58,8 +58,6 @@ class FieldPanel extends React.Component {
             }
             return <div> {field.options.map(option)} </div>
         }
-
-
 
         return <div className="field-edit-panel">
             {field.describe &&
