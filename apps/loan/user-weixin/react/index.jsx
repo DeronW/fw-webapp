@@ -17,12 +17,12 @@ class WeixinCon extends React.Component {
                 <div className="p1"><img src="images/icon2.jpg"/>如何关注我们</div>
                 <div className="p2-wrap">
                     <div className="p2">1、您可以扫描二维码关注我们</div>
-                    <div className="p3">长按下图二维码保存到相册>打开微信>扫一扫> 关注放心花公众号</div>
+                    <div className="p3">截屏下图二维码保存到相册>打开微信>扫一扫> 关注放心花公众号</div>
                     <img src="images/qr.jpg" className="qr" onClick={this.saveHandler} />
                     <div className="p2">2、或您可直接打开微信>添加朋友</div>
                     {/*<div className="p3">搜索“fxhuaba”公众号</div>*/}
                     <div className="p3">搜索“fxhuaba”公众号<span className="copy-qr" onClick={this.copyHandler}>点击复制公众号</span></div>
-                    <div className="p2 p4">3、点击此处<a href="/static/loan/weixin-download/index.html">下载APP</a></div>
+                    {/* <div className="p2 p4">3、点击此处<a href="/static/loan/weixin-download/index.html">下载APP</a></div> */}
                 </div>
             </div>
         )
