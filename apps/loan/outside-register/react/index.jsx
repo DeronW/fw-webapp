@@ -284,6 +284,7 @@ class InteractWrap extends React.Component {
     }
 
     handleJump = (data) => {
+        let dict = data.userLogin;
         let jt = $FW.Format.urlQuery().jumpType;
         let app_url = '/static/loan/outside-register-success-app/index.html',
             wx_url = '/static/loan/outside-register-success-wx/index.html',
@@ -302,7 +303,6 @@ class InteractWrap extends React.Component {
                 // 如果传入参数是 false , 则不跳转, 这可能是因为用户已经注册,
                 // 但不能跳转到首页, 因为TA还没有登录
                 if (data === false) return;
-                let dict = data.userLogin;
                 $FW.Store.setUserDict({
                     token: dict.userToken,
                     id: dict.userId,
@@ -313,6 +313,13 @@ class InteractWrap extends React.Component {
                 window.location.href = '/static/loan/home/index.html';
                 break;
             default:
+                $FW.Store.setUserDict({
+                    token: dict.userToken,
+                    id: dict.userId,
+                    gid: dict.userGid,
+                    status: dict.userStatus,
+                    uid:dict.uid
+                });
                 window.location.href = '/static/loan/home/index.html';
         }
     }
