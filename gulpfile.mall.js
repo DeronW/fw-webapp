@@ -6,7 +6,7 @@ let APP_NAMES = [
     'home', // 首页
     // 专题/活动 相关页面
     'activity', // 专题活动页
-    {
+    'home-banner-detail', {
         name: 'waiting',
         describe: '敬请期待页',
         include_components: [`${PROJ}/header.jsx`]
