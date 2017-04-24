@@ -62,6 +62,7 @@ class BorrowMoney extends React.Component {
             detailPopShow:false,
             dumiaoEnterPopShow:false,
             tryOtherLoanPopShow:false,
+            canMessageShow:false,
             tryOtherLoanMsg:'',
             canStatus:'',
             canMessage:'',
@@ -71,6 +72,7 @@ class BorrowMoney extends React.Component {
         this.imgClickHandler = this.imgClickHandler.bind(this);
         this.detailClickHandler = this.detailClickHandler.bind(this);
         this.dumiaoCloseHandler = this.dumiaoCloseHandler.bind(this);
+        this.canMessageCloseHandler = this.canMessageCloseHandler.bind(this);
         this.tryOtherLoanCloseHandler = this.tryOtherLoanCloseHandler.bind(this);
     }
     componentDidMount = () => {
@@ -82,7 +84,13 @@ class BorrowMoney extends React.Component {
         }).then(data=>this.setState({borrowStatus:data.borrowBtnStatus}));
         $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
             .then(data=>{
-                this.setState({canStatus:data.canStatus,canMessage:data.canMessage,loanUuid:data.loanUuid});
+                if(data.canStatus == 0){
+                    this.setState({canStatus:0,canMessage:data.canMessage,loanUuid:data.loanUuid});
+                }else if(data.canStatus == 1){
+                    this.setState({canStatus:1,loanUuid:data.loanUuid,canMessage:data.canMessage});
+                }else if(data.canStatus == 2){
+                    this.setState({canStatus:2});
+                }
             }, err=>{
                 this.setState({ableEnter:err.code, tryOtherLoanMsg:err.message})
             }
@@ -95,8 +103,10 @@ class BorrowMoney extends React.Component {
             location.href = '/static/loan/user-card-set/index.html';
         }else if(canStatus == 2){
             location.href = '/static/loan/dumiao-put-in/index.html?pid=' + $FW.Format.urlQuery().pid;
-        }else if(canStatus == 0 || canStatus == 1){
+        }else if(canStatus == 0){
              this.setState({dumiaoEnterPopShow:true});
+        }else if(canStatus == 1){
+            this.setState({canMessageShow:true});
         }else{
             this.setState({tryOtherLoanPopShow:true});
         }
@@ -112,6 +122,9 @@ class BorrowMoney extends React.Component {
     }
     tryOtherLoanCloseHandler(){
         this.setState({tryOtherLoanPopShow:false})
+    }
+    canMessageCloseHandler(){
+        this.setState({canMessageShow:false})
     }
     render() {
         let labelList = this.state.product.productLabelList;
@@ -183,7 +196,14 @@ class BorrowMoney extends React.Component {
                     <div className="detail-pop">
                         <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
                         <div className="pop-tip">{this.state.canMessage}</div>
-                        <a className="know-btn" href={`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`}>进入读秒查看</a>
+                        <a className="know-btn" href={$FW.Browser.inWeixin() ? `${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}` : `${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`}>进入读秒查看</a>
+                    </div>
+                </div>}
+                {this.state.canMessageShow && <div className="mask" style={{zIndex:100}}>
+                    <div className="detail-pop">
+                        <div className="pop-close" onClick={this.canMessageCloseHandler}></div>
+                        <div className="pop-tip">{this.state.canMessage}</div>
+                        <a className="know-btn" onClick={()=>$FW.Browser.inApp()?NativeBridge.close():gotoHandler("/static/loan/home/index.html")}>尝试其他借款</a>
                     </div>
                 </div>}
                 {this.state.tryOtherLoanPopShow && <div className="mask" style={{zIndex:100}}>

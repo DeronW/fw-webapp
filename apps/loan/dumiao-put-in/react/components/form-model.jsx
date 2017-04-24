@@ -1,3 +1,4 @@
+
 class FormModel {
     constructor() {
         this.form = {
@@ -179,7 +180,7 @@ class FormModel {
                     text: '3000-5000元',
                     value: '1'
                 }, {
-                    text: '5000-10000元',
+                    text: '5001-10000元',
                     value: '2'
                 }, {
                     text: '10001-20000元',
@@ -187,6 +188,10 @@ class FormModel {
                 }, {
                     text: '20000元以上',
                     value: '4'
+                }],
+                validate: [{
+                    test: v => parseInt(v) === NaN,
+                    msg: '请选择税后月收入'
                 }]
             },
             'workExperience': {
@@ -194,16 +199,20 @@ class FormModel {
                 value: '',
                 options: [{
                     text: '1年以下',
-                    value: '1'
+                    value: '0'
                 }, {
                     text: '1-5年',
-                    value: '2'
+                    value: '1'
                 }, {
                     text: '6-10年',
-                    value: '3'
+                    value: '2'
                 }, {
                     text: '10年以上',
-                    value: '4'
+                    value: '3'
+                }],
+                validate: [{
+                    test: v => parseInt(v) === NaN,
+                    msg: '请选择工作年限'
                 }]
             },
             'realName': {
