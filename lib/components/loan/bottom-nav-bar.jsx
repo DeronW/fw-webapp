@@ -49,8 +49,7 @@ class BottomNavBar extends React.Component {
         let tabColor = (keyword) => {
             let cnd = isActiveTab(keyword);
             return {
-                color: cnd ? "#77a4ea" : "#ffffff",
-                WebkitFilter: cnd ? null : "brightness(4)"
+                color: cnd ? "#77a4ea" : "#ffffff"
             }
         }
         let goto = (path) => {

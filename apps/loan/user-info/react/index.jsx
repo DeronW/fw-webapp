@@ -315,7 +315,7 @@ class UserInfoWrap extends React.Component {
                         value: props.userInfo.income == null ? null : String(props.userInfo.income),
                         options: {
                             '0': '3000元以下',
-                            '1': '3001-5000元',
+                            '1': '3000-5000元',
                             '2': '5001-10000元',
                             '3': '10001-20000元',
                             '4': '20000元以上'
