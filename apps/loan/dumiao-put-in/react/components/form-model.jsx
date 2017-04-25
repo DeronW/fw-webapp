@@ -229,11 +229,7 @@ class FormModel {
             v = typeof (value) !== 'undefined' ? value : field.value;
         if (vld) {
             for (let i = 0; i < vld.length; i++) {
-
-                let check = v => typeof (vld[i].test) === 'function' ?
-                    vld[i].test(v) : true;
-
-                if (check(v)) {
+                if (vld[i].test && vld[i].test(v)) {
                     err = vld[i].msg
                     break
                 }
