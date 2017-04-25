@@ -12,7 +12,7 @@ class MainPanel extends React.Component {
         }
     }
     componentDidMount() {
-        $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
+        $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`, {}, false)
             .then(data => {
                 this.model.set_form_data(data)
                 this.setState({ form_data: this.model.get_form_data() })
