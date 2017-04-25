@@ -335,7 +335,7 @@ const OrderList = React.createClass({
                                 if (document.referrer == 'https://m.dougemall.com/static/mall/user/index.html') {
                                     window.location.href = '/static/mall/user/index.html';
                                 }
-                                if (document.referrer == 'https://m.dougemall.com/static/mall/payment/index.html') {
+                                if (document.referrer == 'https://m.dougemall.com/static/mall/order-confirm/index.html') {
                                     window.location.href = '/static/mall/user/index.html';
                                 }
 
