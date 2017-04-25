@@ -28,8 +28,7 @@
         "gulp-task-listing": ">= 1.0",
         "gulp-uglify": ">=2.1",
         "gulp-util": ">= 3",
-        "pump": ">= 1.0",
-        "react-lazyload": "^2.2.7"
+        "pump": ">= 1.0"
     },
     "devDependencies": {
         "babel-loader": ">= 6.4",
@@ -39,7 +38,6 @@
         "prop-types": ">= 15.5",
         "react": ">= 15.5",
         "react-dom": ">= 15.5",
-        "react-lazyload": "^2.2.7",
         "webpack": ">= 2.3"
     },
     "scripts": {
