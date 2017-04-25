@@ -51,7 +51,7 @@ class MainPanel extends React.Component {
         // 保持, 借款日期与借款金额的联动
         if (field_key === 'term') {
             let pool = field.option_pool;
-            field.options = [pool[0], pool[1], pool[2], pool[3]];
+            field.options = [pool[1], pool[2], pool[3]];
             if (form_data.balance > 3000) {
                 field.options = [pool[1], pool[2], pool[3]]
             }
