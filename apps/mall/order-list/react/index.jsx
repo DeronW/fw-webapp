@@ -27,23 +27,22 @@ const OrderMain = React.createClass({
             div key = { index }
         className = { index == this.state.index ? "btn-tab select-li" : "btn-tab" }
         onClick = {
-                function() { self.clickHandler(index) }
-            } >
+                function() { self.clickHandler(index) } } >
             <
-            span className = "tab-text" > { self.state.voucherName[index] } < /span> < /
-            div > ;
+            span className = "tab-text" > { self.state.voucherName[index] } < /span> <
+            /div>;
 
         return ( <
             div >
             <
             div className = "ui-tab" >
             <
-            div > { this.state.voucherName.map(btnVoucher) } < /div> < /
-            div > <
+            div > { this.state.voucherName.map(btnVoucher) } < /div> <
+            /div> <
             OrderList index = { this.state.index }
             orders = { this.props.orders }
-            /> < /
-            div >
+            /> <
+            /div>
         );
     }
 });
@@ -71,8 +70,8 @@ const OrderList = React.createClass({
                             self.state[s].map((order) => < OrderBlock key = { order.orderId }
                                 order = { order }
                                 dataJson = { order }
-                                />) } < /
-                                div >
+                                />) } <
+                                /div>
                             );
                         };
 
@@ -118,217 +117,216 @@ const OrderList = React.createClass({
                             location.href = '/static/mall/order-detail/index.html?bizNo=' + order.bizNo + '&cardUuid=' + order.cardUuid + '&orderId=' + order.orderId
                         },
                         render: function() {
-                            let pay_color = {
-                                color: "#fd4d4c",
-                                float: "right"
-                            };
-                            let prepare_color = {
-                                color: "#fd4d4c",
-                                float: "right"
-                            };
-                            let shipping_color = {
-                                color: "#4aaef9",
-                                float: "right"
-                            };
-                            let complete_color = {
-                                color: "#999999",
-                                float: "right"
-                            };
-
-                            let order = this.props.order;
-                            let status_name;
-                            let status_color;
-                            switch (order.status) {
-                                case 'unPay':
-                                    status_name = '待付款';
-                                    status_color = pay_color;
-                                    break;
-                                case 'prepare':
-                                    status_name = '待发货';
-                                    status_color = prepare_color;
-                                    break;
-                                case 'shipping':
-                                    status_name = '待收货';
-                                    status_color = shipping_color;
-                                    break;
-                                case 'complete':
-                                    status_name = '已完成';
-                                    status_color = complete_color;
-                                    break;
-                                case 'cancel':
-                                    status_name = '已取消';
-                                    status_color = complete_color;
-                                    break;
-                                default:
-                                    return true
-                                    break;
-                            }
-                            var _this = this;
-                            let product_item = function(product, index) {
-
-                                return ( <
-                                    a key = { index } >
-                                    <
-                                    div className = "t-info"
-                                    onClick = { _this.gotoDetail } >
-                                    <
-                                    div className = "commodity-img" >
-                                    <
-                                    img src = { product.img || 'images/default-product.jpg' }
-                                    /> < /
-                                    div > <
-                                    div className = "commodity-info" >
-                                    <
-                                    div className = "commodity-name" >
-                                    <
-                                    h2 > { product.title } < /h2> < /
-                                    div > {
-                                        /*
-                                                                     <div className="tag-block">
-                                                                     { product.tags.length != 0 ? product.tags.map(
-                                                                     (i, index) => <span key={index} className="text">{i}</span>) : null }
-                                                                     </div>
-                                                                     */
-                                    } <
-                                    div className = "commodity-number" >
-                                    <
-                                    span className = "money-text" > {
-                                        product.price > 0 || product.score == 0 ?
-                                        <
-                                        span > & yen; { $FW.Format.currency(product.price) } < /span> : null} { product.price > 0 && product.score ? ' + ' : null } { product.score ? product.score + '工分' : null } < /
-                                        span > <
-                                        span className = "number-text" > & times; { product.count } < /span> < /
-                                        div > <
-                                        /div> < /
-                                        div > <
-                                        /a>
-                                    );
+                                let pay_color = {
+                                    color: "#fd4d4c",
+                                    float: "right"
                                 };
-                                let sendOrderNo = order.sendOrderNo;
-                                let sendChannel = order.sendChannel;
-                                let sendChannelEnum = order.sendChannelEnum;
-                                let check_link = order.sendOrderNo ? < a className = "link-btn"
-                                href = { '/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel) + '&sendChannelEnum=' + sendChannelEnum } > 查看物流 < /a> : (order.cardUuid && <
-                                a className = "link-btn"
-                                href = { '/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo } > 查看券码 < /a>);
+                                let prepare_color = {
+                                    color: "#fd4d4c",
+                                    float: "right"
+                                };
+                                let shipping_color = {
+                                    color: "#4aaef9",
+                                    float: "right"
+                                };
+                                let complete_color = {
+                                    color: "#999999",
+                                    float: "right"
+                                };
 
-                                return ( <
-                                    div className = "order-block" >
-                                    <
-                                    div className = "title-block" >
-                                    <
-                                    span className = "time-text" > { order.pay_at } < /span> <
-                                    span style = { status_color } > { status_name } <
-                                    /span> < /
-                                    div > <
-                                    div className = "info-block" > { order.products.map((p, index) => product_item(p, index)) } <
-                                    div className = "commodity-total" >
-                                    <
-                                    span className = "commodity-text" > 共件 { order.orderCount }
-                                    商品 < /span> <
-                                    span className = "total-text" >
-                                    实付款: {
-                                        order.price > 0 || order.score == 0 ?
+                                let order = this.props.order;
+                                let status_name;
+                                let status_color;
+                                switch (order.status) {
+                                    case 'unPay':
+                                        status_name = '待付款';
+                                        status_color = pay_color;
+                                        break;
+                                    case 'prepare':
+                                        status_name = '待发货';
+                                        status_color = prepare_color;
+                                        break;
+                                    case 'shipping':
+                                        status_name = '待收货';
+                                        status_color = shipping_color;
+                                        break;
+                                    case 'complete':
+                                        status_name = '已完成';
+                                        status_color = complete_color;
+                                        break;
+                                    case 'cancel':
+                                        status_name = '已取消';
+                                        status_color = complete_color;
+                                        break;
+                                    default:
+                                        return true
+                                        break;
+                                }
+                                var _this = this;
+                                let product_item = function(product, index) {
+
+                                    return ( <
+                                        a key = { index } >
                                         <
-                                        span > & yen; { $FW.Format.currency(order.price) } < /span> : null} { order.price > 0 && order.score ? ' + ' : null } { order.score ? order.score + '工分' : null } < /
-                                        span > { check_link } <
-                                        /div> {
-                                        order.status == "unPay" ? < div className = "pay-order" >
+                                        div className = "t-info"
+                                        onClick = { _this.gotoDetail } >
                                         <
-                                        div className = "btn-pay"
-                                        onClick = { this.clickPay.bind(this, order.orderTime, order.bizNo, order.orderGroupBizNo, $FW.Format.currency(order.price)) } >
-                                        立即支付 <
+                                        div className = "commodity-img" >
+                                        <
+                                        img src = { product.img || 'images/default-product.jpg' }
+                                        /> <
                                         /div> <
-                                        div className = "btn-cancel"
-                                        onClick = { this.clickCancel.bind(this, order.bizNo, order.orderGroupBizNo) } > 取消订单 <
-                                        /div> < /
-                                        div > : null
-                                    } <
-                                    /div> < /
-                                    div >
-                                );
-                            }
-                        });
+                                        div className = "commodity-info" >
+                                        <
+                                        div className = "commodity-name" >
+                                        <
+                                        h2 > { product.title } < /h2> <
+                                        /div> {
+                                            /*
+                                                                         <div className="tag-block">
+                                                                         { product.tags.length != 0 ? product.tags.map(
+                                                                         (i, index) => <span key={index} className="text">{i}</span>) : null }
+                                                                         </div>
+                                                                         */
+                                        } <
+                                        div className = "commodity-number" >
+                                        <
+                                        span className = "money-text" > {
+                                            product.price > 0 || product.score == 0 ?
+                                            <
+                                            span > & yen; { $FW.Format.currency(product.price) } < /span> : null} { product.price > 0 && product.score ? ' + ' : null } { product.score ? product.score + '工分' : null } <
+                                            /span> <
+                                            span className = "number-text" > & times; { product.count } < /span> <
+                                            /div> <
+                                            /div> <
+                                            /div> <
+                                            /a>
+                                        );
+                                    };
+                                    let sendOrderNo = order.sendOrderNo;
+                                    let sendChannel = order.sendChannel;
+                                    let sendChannelEnum = order.sendChannelEnum;
+                                    let check_link = order.sendOrderNo ? < a className = "link-btn"
+                                    href = { '/static/mall/order-logistics/index.html?sendOrderNo=' + sendOrderNo + '&sendChannel=' + encodeURIComponent(sendChannel) + '&sendChannelEnum=' + sendChannelEnum } > 查看物流 < /a> : (order.cardUuid && <
+                                        a className = "link-btn"
+                                    href = { '/static/mall/order-coupon/index.html?cardUuid=' + order.cardUuid + '&bizNo=' + order.bizNo } > 查看券码 < /a>);
 
-                    const ConfAlert = React.createClass({
-                        getInitialState: function() {
-                            return {
-                                orderNo: "",
-                                groupNo: "",
-                                showcAlert: false
-                            }
-                        },
-                        show: function(orderNo, groupNo) {
-                            this.setState({
-                                orderNo: orderNo,
-                                groupNo: groupNo,
-                                showcAlert: true
-                            });
-                        },
-                        hide: function() {
-                            this.setState({ showcAlert: false });
-                        },
-                        cancelY: function() {
-                            var sourceType;
+                                    return ( <
+                                        div className = "order-block" >
+                                        <
+                                        div className = "title-block" >
+                                        <
+                                        span className = "time-text" > { order.pay_at } < /span> <
+                                        span style = { status_color } > { status_name } <
+                                        /span> <
+                                        /div> <
+                                        div className = "info-block" > { order.products.map((p, index) => product_item(p, index)) } <
+                                        div className = "commodity-total" >
+                                        <
+                                        span className = "commodity-text" > 共件 { order.orderCount }
+                                        商品 < /span> <
+                                        span className = "total-text" >
+                                        实付款: {
+                                            order.price > 0 || order.score == 0 ?
+                                            <
+                                            span > & yen; { $FW.Format.currency(order.price) } < /span> : null} { order.price > 0 && order.score ? ' + ' : null } { order.score ? order.score + '工分' : null } <
+                                            /span> { check_link } <
+                                            /div> {
+                                                order.status == "unPay" ? < div className = "pay-order" >
+                                                    <
+                                                    div className = "btn-pay"
+                                                onClick = { this.clickPay.bind(this, order.orderTime, order.bizNo, order.orderGroupBizNo, $FW.Format.currency(order.price)) } >
+                                                    立即支付 <
+                                                    /div> <
+                                                    div className = "btn-cancel"
+                                                onClick = { this.clickCancel.bind(this, order.bizNo, order.orderGroupBizNo) } > 取消订单 <
+                                                    /div> <
+                                                    /div> : null} <
+                                                    /div> <
+                                                    /div>
+                                            );
+                                        }
+                                    });
 
-                            if ($FW.Browser.inApp()) {
-                                if ($FW.Browser.inAndroid()) {
-                                    sourceType = 4
-                                } else {
-                                    sourceType = 3
-                                }
-                            } else {
-                                sourceType = 2
-                            }
+                                const ConfAlert = React.createClass({
+                                    getInitialState: function() {
+                                        return {
+                                            orderNo: "",
+                                            groupNo: "",
+                                            showcAlert: false
+                                        }
+                                    },
+                                    show: function(orderNo, groupNo) {
+                                        this.setState({
+                                            orderNo: orderNo,
+                                            groupNo: groupNo,
+                                            showcAlert: true
+                                        });
+                                    },
+                                    hide: function() {
+                                        this.setState({ showcAlert: false });
+                                    },
+                                    cancelY: function() {
+                                        var sourceType;
 
-                            $FW.Ajax({
-                                data: {
-                                    orderBizNo: this.state.orderNo,
-                                    orderGroupBizNo: this.state.groupNo,
-                                    source: sourceType
-                                },
-                                url: `${API_PATH}/mall/api/cart/v1/cancelOrder.json`,
-                                enable_loading: true,
-                                success: function(data) {
-                                    location.reload()
-                                }
-                            });
-                        },
-                        render: function() {
-                            if (!this.state.showcAlert) return null;
-                            return ( <
-                                div className = "alert-block" >
-                                <
-                                div className = "alert-bg" > < /div> <
-                                div className = "alert-panel" >
-                                <
-                                div className = "alert-text" > 是否取消订单？ < /div> <
-                                div className = "alert-btn" > < /div> <
-                                div onClick = { this.cancelY }
-                                className = "alert-btn-y" > 是 < /div> <
-                                div onClick = { this.hide }
-                                className = "alert-btn-n" > 否 < /div> < /
-                                div > <
-                                /div>
-                            );
-                        }
-                    });
+                                        if ($FW.Browser.inApp()) {
+                                            if ($FW.Browser.inAndroid()) {
+                                                sourceType = 4
+                                            } else {
+                                                sourceType = 3
+                                            }
+                                        } else {
+                                            sourceType = 2
+                                        }
 
-                    $FW.DOMReady(function() {
-                            ReactDOM.render( < Header title = { "我的订单" }
-                                back_handler = { back_handler }
-                                />, HEADER_NODE);
-                                $FW.Ajax({
-                                    url: `${API_PATH}/mall/api/member/v1/order_list.json`,
-                                    enable_loading: true
-                                }).then(data => {
-                                        ReactDOM.render( < OrderMain orders = { data.orders }
-                                            />, CONTENT_NODE);
-                                            window.confirmPanel = ReactDOM.render( < ConfAlert / > , document.getElementById("alert"));
-                                        })
+                                        $FW.Ajax({
+                                            data: {
+                                                orderBizNo: this.state.orderNo,
+                                                orderGroupBizNo: this.state.groupNo,
+                                                source: sourceType
+                                            },
+                                            url: `${API_PATH}/mall/api/cart/v1/cancelOrder.json`,
+                                            enable_loading: true,
+                                            success: function(data) {
+                                                location.reload()
+                                            }
+                                        });
+                                    },
+                                    render: function() {
+                                        if (!this.state.showcAlert) return null;
+                                        return ( <
+                                            div className = "alert-block" >
+                                            <
+                                            div className = "alert-bg" > < /div> <
+                                            div className = "alert-panel" >
+                                            <
+                                            div className = "alert-text" > 是否取消订单？ < /div> <
+                                            div className = "alert-btn" > < /div> <
+                                            div onClick = { this.cancelY }
+                                            className = "alert-btn-y" > 是 < /div> <
+                                            div onClick = { this.hide }
+                                            className = "alert-btn-n" > 否 < /div> <
+                                            /div> <
+                                            /div>
+                                        );
+                                    }
                                 });
 
-                            function back_handler() {
+                                $FW.DOMReady(function() {
+                                            ReactDOM.render( < Header title = { "我的订单" }
+                                                back_handler = { back_handler }
+                                                />, HEADER_NODE);
+                                                $FW.Ajax({
+                                                    url: `${API_PATH}/mall/api/member/v1/order_list.json`,
+                                                    enable_loading: true
+                                                }).then(data => {
+                                                        ReactDOM.render( < OrderMain orders = { data.orders }
+                                                            />, CONTENT_NODE);
+                                                            window.confirmPanel = ReactDOM.render( < ConfAlert / > , document.getElementById("alert"));
+                                                        })
+                                                });
+
+                                             function back_handler() {
                                 // if(document.referrer=="/" || document.referrer== "https://m.dougemall.com" || document.referrer== "https://m.dougemall.com/static/mall/home/index.html"){
                                     window.location.href = "/static/mall/home/index.html";
                                 // }
