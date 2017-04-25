@@ -159,7 +159,7 @@ class ApplyLoan extends React.Component {
         let btn_list =
             <div className="credit-btn">
                 <a className="credit-improvement-btn"
-                  href={$FW.Browser.inApp() && st == 5 ? `/static/loan/user-weixin/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
+                  href={$FW.Browser.inApp() && st == 5 ? `/static/loan/user-weixin-jrgcapp/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
                     我要提额
                 </a>
                 <a className="credit-apply-btn"
