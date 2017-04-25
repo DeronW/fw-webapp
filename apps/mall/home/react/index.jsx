@@ -1,4 +1,4 @@
-// import  lazyload  from 'react-lazyload';
+// import LazyLoad from 'react-lazyload';
  
 
 
@@ -136,7 +136,7 @@ const Mall = React.createClass({
                 <Grid_8 bizNo={'TJ0000056'} count={10} />
 
                 <HotSales />
-               {/*</LazyLoad>*/}
+            {/*</LazyLoad>*/}
             </div>
         )
     }
