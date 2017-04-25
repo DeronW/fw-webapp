@@ -51,7 +51,7 @@ class FormModel {
                 value: '',
                 validate: [
                     {
-                        test: v => v.length === 0,
+                        test: v => !v,
                         msg: '信用卡不能为空'
                     }
                 ]
@@ -62,7 +62,7 @@ class FormModel {
                 value: '',
                 validate: [
                     {
-                        test: v => v.length === 0,
+                        test: v => !v,
                         msg: '邮箱不能为空'
                     },
                     {
@@ -88,7 +88,7 @@ class FormModel {
                 value: '',
                 validate: [
                     {
-                        test: v => v.length === 0,
+                        test: v => !v,
                         msg: '请输入居住地'
                     }
                 ]
@@ -149,26 +149,22 @@ class FormModel {
                     text: '朋友',
                     value: '6'
                 }],
-                validate: [
-                    {
-                        test: v => parseInt(v) === NaN,
-                        msg: '请选择紧急联系人关系'
-                    }
-                ]
+                validate: [{
+                    test: v => parseInt(v) === NaN,
+                    msg: '请选择紧急联系人关系'
+                }]
             },
             'emMobile': {
                 name: '联系人手机',
                 value: '',
                 placeholder: '请输入联系人手机号',
-                validate: [
-                    {
-                        test: v => !v,
-                        msg: '请输入联系人手机号'
-                    }, {
-                        test: v => v.length != 11,
-                        msg: '手机号格式不正确'
-                    }
-                ]
+                validate: [{
+                    test: v => !v,
+                    msg: '请输入联系人手机号'
+                }, {
+                    test: v => v.length != 11,
+                    msg: '手机号格式不正确'
+                }]
             },
             'income': {
                 name: '税后月收入',
