@@ -42,6 +42,8 @@ class MainPanel extends React.Component {
                     let u = $FW.Store.getUserDict();
                     let params = `loanUuid=${data.uuid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
                     location.href = `/api/order/v1/jump.shtml?${params}`
+                }, e => {
+                    if (e.code == 20016) $FW.Component.Toast(e.message)
                 })
     }
     render() {
