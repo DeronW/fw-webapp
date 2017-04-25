@@ -11,7 +11,7 @@ class WeixinCon extends React.Component {
                 <div className="p1"><img src="images/icon1.jpg"/>关注了微信之后有什么好处</div>
                 <div className="p2-wrap">
                     <div className="p2">1.获得更高授信额度</div>
-                    <div className="p2">2.实时查看还款计划，避免逾期</div>
+                    <div className="p2">2.接收降息等活动通知更方便</div>
                     <div className="p2">3.将放心花分享给好友</div>
                 </div>
                 <div className="p1"><img src="images/icon2.jpg"/>如何关注我们</div>
