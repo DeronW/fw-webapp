@@ -9,10 +9,7 @@ class FieldPanel extends React.Component {
         let { field, field_key } = this.props, { value } = this.state,
             vld = field.validate || [], err;
         for (let i = 0; i < vld.length; i++) {
-            let test = vld[i].test;
-            let check = v => typeof (test) === 'function' ? test(v) : true;
-
-            if (check(value)) {
+            if (vld[i].test && vld[i].test(value)) {
                 err = vld[i].msg
                 break
             }
