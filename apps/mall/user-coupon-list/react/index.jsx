@@ -46,6 +46,7 @@ const CouponMain = React.createClass({
     },
 
     render: function () {
+        let iOSApp = $FW.Browser.inApp() && $FW.Browser.inIOS();
         var self = this;
 
         var btnVoucher = (v, index) =>
@@ -57,9 +58,8 @@ const CouponMain = React.createClass({
         var inputWrap =
             <div className="input-wrap">
                 <input type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
-                <input type="button" className={this.state.active ? "msg-tip active":"msg-tip"}
-                       value={"兑换"}
-                       onClick={this.exChange}/>
+                <button className={this.state.active ? "msg-tip active":"msg-tip"}
+                       onClick={this.exChange}>兑换</button>
                 <span className="vertical-line"></span>
             </div>;
 
