@@ -15,11 +15,12 @@ function istrue(str) {
     return reg.test(str);
 }
 
-const SetPassword = React.createClass({
-    getInitialState() {
+class SetPassword extends React.Component{
+    constructor(props){
+        super(props)
         let query = $FW.Format.urlQuery();
         let codeToken = query.codeToken;
-        return {
+        this.state={
             code: '',
             codeBoolean: false,
             password: '',
@@ -29,22 +30,30 @@ const SetPassword = React.createClass({
             checked: false,
             inviteCode: ''
         }
-    },
+        this.changeCode = this.changeCode.bind(this);
+        this.changePasswordHandler = this.changePasswordHandler.bind(this);
+        this.changeInviteCodeHandler = this.changeInviteCodeHandler.bind(this);
+        this.handleGetCode = this.handleGetCode.bind(this);
+        this.countingDown = this.countingDown.bind(this);
+        this.handlePlainCode = this.handlePlainCode.bind(this);
+        this.handleRegisterBtn = this.handleRegisterBtn.bind(this);
+        this.checkHandler = this.checkHandler.bind(this);
+    }
     changeCode(e) {
         let v = e.target.value;
         v.length <= 6 && !isNaN(v) && this.setState({ code: v });
-    },
+    }
     changePasswordHandler(e) {
         let v = e.target.value;
         v.length <= 16 && verificationNum(v) && this.setState({ password: v });
-    },
+    }
     changeInviteCodeHandler(e) {
         let v = e.target.value;
         v.length <= 8 && this.setState({ inviteCode: v });
-    },
+    }
     componentDidMount() {
         this.countingDown();
-    },
+    }
     handleGetCode() {
         $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
             mobile: PHONE,
@@ -53,7 +62,7 @@ const SetPassword = React.createClass({
         }).then(data => this.setState({ codeToken: data.codeToken }))
 
         this.countingDown();
-    },
+    }
     countingDown() {
         this.setState({
             codeBoolean: true,
@@ -66,10 +75,10 @@ const SetPassword = React.createClass({
                 this.setState({ codeBoolean: false });
             }
         }, 1000);
-    },
+    }
     handlePlainCode() {
         this.setState({ plainCode: !this.state.plainCode });
-    },
+    }
     handleRegisterBtn() {
         let err, { password, code, checked, codeToken, inviteCode } = this.state;
 
@@ -102,10 +111,10 @@ const SetPassword = React.createClass({
                 })
                 location.href = `/static/loan/home/index.html`;
             }, e => $FW.Component.Toast(e.message))
-    },
+    }
     checkHandler() {
         this.setState({ checked: !this.state.checked });
-    },
+    }
     render() {
         let { code } = this.state;
 
@@ -125,7 +134,7 @@ const SetPassword = React.createClass({
                         <span className="icon"></span>
                         <div className="input">
                             <input type="number" onChange={this.changeCode} value={this.state.code}
-                                placeholder="输入手机验证码" />
+                                   placeholder="输入手机验证码" />
                         </div>
                         {btnSMSCode}
                     </div>
@@ -158,7 +167,7 @@ const SetPassword = React.createClass({
                 </div>
                 <div className="agreement-issue">
                     <div className={this.state.checked ? "checked-box" : "unchecked-box"}
-                        onClick={this.checkHandler}></div>
+                         onClick={this.checkHandler}></div>
                     <div className="check-item">同意
                         <a href="/static/loan/protocol-register/index.html">
                             《放心花用户注册协议》</a></div>
@@ -169,7 +178,7 @@ const SetPassword = React.createClass({
             </div>
         )
     }
-});
+}
 
 const PHONE = $FW.Format.urlQuery().phone || '';
 
