@@ -32,15 +32,15 @@ const Product = React.createClass({
     },
     render: function () {
         let topBuyCart = `_style_buy_cart ${$FW.Browser.inIOSApp() && '_top_buy_cart'}`;
-        let topHandlerArrow = `_style_handler_arrow ${$FW.Browser.inIOSApp() && '_top_handler_arrow'}`;
-        let topHeaderFixed = `_style_header_fixed ${$FW.Browser.inIOSApp() && '_top_header_fixed'}`;
+        // let topHandlerArrow = `_style_handler_arrow ${$FW.Browser.inIOSApp() && '_top_handler_arrow'}`;
+        // let topHeaderFixed = `_style_header_fixed ${$FW.Browser.inIOSApp() && '_top_header_fixed'}`;
 
         if (!$FW.Browser.inWeixin()) document.querySelector('._style_header_fixed').style.borderBottom = "1px solid rgb(216, 216, 216)!important";
 
-        // if ($FW.Browser.inIOSApp()) {
-        //     document.querySelector('._style_header_arrow').style.top = "22px";
-        //     document.querySelector('._style_header_fixed').style.lineHeight = "130px";
-        // }
+        if ($FW.Browser.inIOSApp()) {
+            document.querySelector('._style_header_arrow').style.top = "22px";
+            document.querySelector('._style_header_fixed').style.lineHeight = "130px";
+        }
 
 
         let data = this.props.data;
