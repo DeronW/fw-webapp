@@ -358,8 +358,8 @@ $FW.DOMReady(function () {
             ReactDOM.render(<Product data={data}/>, CONTENT_NODE) :
             ReactDOM.render(<EmptyProduct />, CONTENT_NODE);
     })
-    // if (!$FW.Browser.inWeixin()) ReactDOM.render(<Header title={"商品详情"}/>, HEADER_NODE);
-    ReactDOM.render(<Header title={"商品详情"}/>, HEADER_NODE);
+    if (!$FW.Browser.inWeixin()) ReactDOM.render(<Header title={"商品详情"}/>, HEADER_NODE);
+    // ReactDOM.render(<Header title={"商品详情"}/>, HEADER_NODE);
 });
 
 function trim(s) {
