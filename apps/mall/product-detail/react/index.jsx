@@ -35,10 +35,10 @@ const Product = React.createClass({
 
         if (!$FW.Browser.inWeixin()) document.querySelector('._style_header_fixed').style.borderBottom = "1px solid rgb(216, 216, 216)!important";
 
-        if ($FW.Browser.inIOSApp()) {
-            document.querySelector('._style_header_arrow').style.top = "22px";
-            document.querySelector('._style_header_fixed').style.lineHeight = "130px";
-        }
+        // if ($FW.Browser.inIOSApp()) {
+        //     document.querySelector('._style_header_arrow').style.top = "22px";
+        //     document.querySelector('._style_header_fixed').style.lineHeight = "130px";
+        // }
 
 
         let data = this.props.data;
