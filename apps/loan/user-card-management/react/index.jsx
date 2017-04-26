@@ -1,11 +1,13 @@
-const BankManagement = React.createClass({
-    getInitialState() {
+class BankManagement extends React.Component{
+    constructor(props){
+        super(props)
         let filtered = this.props.cards.filter(e => e.isRealNameBindCard === true);
-        return {
+        this.state={
             cardNo: filtered[0] && filtered[0].cardNo || '',
             popShow: false
         }
-    },
+        this.closeHandler = this.closeHandler.bind(this);
+    }
     componentDidMount() {
         $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
             productId: 1
@@ -13,10 +15,10 @@ const BankManagement = React.createClass({
             //if (data.borrowBtnStatus == 2) this.setState({ popShow: true });
         })
 
-    },
+    }
     closeHandler() {
         this.setState({ popShow: false });
-    },
+    }
     render() {
         let {cards} = this.props;
 
@@ -63,16 +65,16 @@ const BankManagement = React.createClass({
                 </div>}
 
                 {/* <div className={this.state.popShow ? "mask" : "mask dis"} style={{ zIndex: 10 }}>
-                    <div className="verify-pop">
-                        <div className="verify-tip">您离成功借钱只差一步<br />请先完成必填认证！</div>
-                        <div className="verify-pop-close" onClick={this.closeHandler}></div>
-                        <a className="verify-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>去认证</a>
-                    </div>
-                </div> */}
+                 <div className="verify-pop">
+                 <div className="verify-tip">您离成功借钱只差一步<br />请先完成必填认证！</div>
+                 <div className="verify-pop-close" onClick={this.closeHandler}></div>
+                 <a className="verify-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>去认证</a>
+                 </div>
+                 </div> */}
             </div>
         )
     }
-});
+}
 
 const USER = $FW.Store.getUserDict();
 

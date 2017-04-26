@@ -8,13 +8,18 @@ function verificationNum(val) {
     return reg.test(val)
 }
 
-const Register = React.createClass({
-    getInitialState() {
-        return {
+class Register extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
             phone: '',
             deleteShow: false
         }
-    },
+        this.changeHandler = this.changeHandler.bind(this);
+        this.clearHandler = this.clearHandler.bind(this);
+        this.handleGetCode = this.handleGetCode.bind(this);
+        this.keyUpHandler = this.keyUpHandler.bind(this);
+    }
     changeHandler(e) {
 
         let v = e.target.value;
@@ -30,11 +35,11 @@ const Register = React.createClass({
                 deleteShow: true
             })
         }
-    },
+    }
 
     clearHandler() {
         this.setState({ phone: '' })
-    },
+    }
 
     handleGetCode() {
         let phone = this.state.phone;
@@ -63,11 +68,11 @@ const Register = React.createClass({
                 $FW.Component.Toast(res.message)
             }
         })
-    },
+    }
 
     keyUpHandler(e) {
         if (e.keyCode === 13) this.handleGetCode()
-    },
+    }
 
     render() {
         return (
@@ -82,10 +87,10 @@ const Register = React.createClass({
                             <div className="icon"></div>
                             <div className="input">
                                 <input type="text" value={this.state.phone}
-                                    onChange={this.changeHandler} onKeyUp={this.keyUpHandler}
-                                    placeholder="请输入手机号进行注册登录" />
+                                       onChange={this.changeHandler} onKeyUp={this.keyUpHandler}
+                                       placeholder="请输入手机号进行注册登录" />
                                 {this.state.deleteShow &&
-                                    <span className="clear-num" onClick={this.clearHandler}></span>}
+                                <span className="clear-num" onClick={this.clearHandler}></span>}
                             </div>
                             <div className="pwd-icon"> </div>
                         </div>
@@ -99,7 +104,8 @@ const Register = React.createClass({
             </div>
         )
     }
-});
+
+}
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Register />, CONTENT_NODE);
