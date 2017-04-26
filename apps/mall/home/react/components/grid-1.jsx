@@ -3,6 +3,9 @@ const Grid_1 = React.createClass({
         return {
             bizNo: this.props.bizNo,
             products: []
+            // page: 1,
+            // page_count: "",
+            // hasData: true
         }
     },
     componentDidMount() {
@@ -12,8 +15,31 @@ const Grid_1 = React.createClass({
                 recommendBizNo: this.state.bizNo,
                 totalCount: this.props.count
             }
-        }).then(data => this.setState({ products: data.products }))
+        }).then(data => this.setState({ products: data.products }));
+         // $FW.Event.touchBottom(this.loadMoreProductHandler);
     },
+    // loadMoreProductHandler: function (done) {
+    //     this.setState({ page: this.state.page + 1 });
+    //     // if (!this.state.hasData) {
+    //     //     $FW.Event.cancelTouchBottom();
+    //     //     return;
+    //     // }
+
+    //     $FW.Ajax({
+    //         url: `${API_PATH}/mall/api/index/v1/recommendProducts.json`,
+    //         data: {
+    //             count: this.state.page_count,
+    //             page: this.state.page
+    //         }
+    //     }).then(data => {
+    //         let products = data.products;
+    //         this.setState({
+    //             products: [...this.state.products, ...products],
+    //             hasData: !!products.length
+    //         })
+    //         done && done()
+    //     })
+    // },
     render() {
         let {products} = this.state;
         if (products.length === 0) return null;
