@@ -57,7 +57,7 @@ const CouponMain = React.createClass({
 
         var inputWrap =
             <div className="input-wrap">
-                <input type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
+                <input className={iOSApp ?input-ios :input} type="text" defaultValue="" placeholder="" onChange={this.changeVal}/>
                 <button className={iOSApp ? (this.state.active ? "msg-tip-ios active":"msg-tip-ios"): (this.state.active ? "msg-tip active":"msg-tip")}
                        onClick={this.exChange}>兑换</button>
                 <span className="vertical-line"></span>
