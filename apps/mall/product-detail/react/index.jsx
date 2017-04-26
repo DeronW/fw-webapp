@@ -37,7 +37,7 @@ const Product = React.createClass({
 
         if ($FW.Browser.inIOSApp()) {
             document.querySelector('._style_header_arrow').style.top = "22px";
-            document.querySelector('._style_header_fixed').style.lineHeight = "122px";
+            document.querySelector('._style_header_fixed').style.lineHeight = "130px";
         }
 
 
