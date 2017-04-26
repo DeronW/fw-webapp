@@ -31,9 +31,10 @@ function space(str) {
     return str.replace(/ /g, "");
 }
 
-const SetCashCard = React.createClass({
-    getInitialState() {
-        return {
+class SetCashCard extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
             name: '',
             id: '',
             bankNum: '',
@@ -46,7 +47,16 @@ const SetCashCard = React.createClass({
             loading: false,
             canVerify: ''
         }
-    },
+        this.changeName = this.changeName.bind(this);
+        this.changeIdHandler = this.changeIdHandler.bind(this);
+        this.changeBankNum = this.changeBankNum.bind(this);
+        this.blurBankNum = this.blurBankNum.bind(this);
+        this.changePhone = this.changePhone.bind(this);
+        this.handlerClause = this.handlerClause.bind(this);
+        this.handlerWithholdServer = this.handlerWithholdServer.bind(this);
+        this.callbackWithholdServerPop = this.callbackWithholdServerPop.bind(this);
+        this.handlerNext = this.handlerNext.bind(this);
+    }
     changeName(e) {
         let v = e.target.value;
         let meizu = window.navigator.userAgent.indexOf('MX4 Pro') > -1;
@@ -54,17 +64,17 @@ const SetCashCard = React.createClass({
             v = v.replace(/[0-9a-z]/gi, '');
         }
         v.length < 21 && this.setState({ name: $FW.Format.trim(v) });
-    },
+    }
     changeIdHandler(e) {
         let v = e.target.value;
         v = v.replace(/[a-w|y|z]/gi, '');
         v.length <= 18 && this.setState({ id: v });
-    },
+    }
     changeBankNum(e) {
         let v = e.target.value;
         //v.length < 19 + 5 && this.setState({ bankNum: numberFormat.format(v) });
         v.length < 19 + 5 && this.setState({ bankNum: v });
-    },
+    }
     blurBankNum(e) {
 
         let {bankNum} = this.state, len = space(this.state.bankNum).length;
@@ -84,26 +94,26 @@ const SetCashCard = React.createClass({
                 bankName: ci.bankName
             });
         }, e => $FW.Component.Toast(e.message))
-    },
+    }
     changePhone(e) {
         let val = e.target.value;
         verificationNum(val) &&
-            val.length <= 11 &&
-            this.setState({ phone: space(val) });
-    },
+        val.length <= 11 &&
+        this.setState({ phone: space(val) });
+    }
     handlerClause() {
         this.setState({ selectClause: !this.state.selectClause });
-    },
+    }
     handlerWithholdServer() {
         this.setState({
             withholdServerPop: true
         });
-    },
+    }
     callbackWithholdServerPop(ble) {
         this.setState({
             withholdServerPop: ble
         });
-    },
+    }
     handlerNext() {
         let err, {name, id, bankName, bankNum, phone, cardType, canVerify} = this.state;
         if (canVerify == 0) err = "不支持绑定此类卡";
@@ -132,8 +142,8 @@ const SetCashCard = React.createClass({
                 window.location.href = `/static/loan/user-verify-phone/index.html?phone=${phone}&operatorBankcardGid=${oGid}`;
             }, (e) => {
                 $FW.Component.Toast(e.message);
-        });
-    },
+            });
+    }
     render() {
 
         let {withholdServerPop, cardinfoBankName} = this.state;
@@ -141,20 +151,20 @@ const SetCashCard = React.createClass({
         return (
             <div className="set-cash-card-cnt">
                 {withholdServerPop &&
-                    <WithholdServer getWithholdServerPop={this.callbackWithholdServerPop} />}
+                <WithholdServer getWithholdServerPop={this.callbackWithholdServerPop} />}
                 <div className="ui-froms">
                     <div className="list">
                         <span className="text">姓名</span>
                         <div className="input">
                             <input onChange={this.changeName} value={this.state.name}
-                                type="text" placeholder="请输入姓名" />
+                                   type="text" placeholder="请输入姓名" />
                         </div>
                     </div>
                     <div className="list">
                         <span className="text">身份证号</span>
                         <div className="input">
                             <input onChange={this.changeIdHandler} value={this.state.id}
-                                type="text" placeholder="请输入身份证号码" />
+                                   type="text" placeholder="请输入身份证号码" />
                         </div>
                     </div>
                 </div>
@@ -164,13 +174,13 @@ const SetCashCard = React.createClass({
                         <span className="text">储蓄卡号</span>
                         <div className="input">
                             <input onChange={this.changeBankNum} onBlur={this.blurBankNum}
-                                value={this.state.bankNum} type="text" placeholder="输入储蓄卡号" />
+                                   value={this.state.bankNum} type="text" placeholder="输入储蓄卡号" />
                         </div>
 
                         <div className="list-bank-li">
                             <a className="prompt-text" href="/static/loan/user-bank-support/index.html">
                                 支持银行
-								<img src="images/prompt-icon.png" />
+                                <img src="images/prompt-icon.png" />
                             </a>
                             {cardinfoBankName != '' && <span className="bank"> {cardinfoBankName}</span>}
                         </div>
@@ -182,19 +192,19 @@ const SetCashCard = React.createClass({
                         <span className="text">手机号</span>
                         <div className="input">
                             <input onChange={this.changePhone} value={this.state.phone}
-                                type="number" placeholder="银行卡预留手机号" />
+                                   type="number" placeholder="银行卡预留手机号" />
                         </div>
                     </div>
                 </div>
 
                 {/*<div className="clause">
-                    <span className={`icon ${selectClause ? "select-icon" : "icon"}`}
-                        onClick={this.handlerClause}></span>
-                    <span className="text">
-                        同意
-						<a href={`/static/loan/protocol-cost/index.html`}>《代扣服务协议》</a>
-                    </span>
-                </div>*/}
+                 <span className={`icon ${selectClause ? "select-icon" : "icon"}`}
+                 onClick={this.handlerClause}></span>
+                 <span className="text">
+                 同意
+                 <a href={`/static/loan/protocol-cost/index.html`}>《代扣服务协议》</a>
+                 </span>
+                 </div>*/}
 
                 <div className="next-btn">
                     <div onClick={this.handlerNext} className="ui-btn">下一步</div>
@@ -202,7 +212,7 @@ const SetCashCard = React.createClass({
             </div>
         )
     }
-});
+}
 
 const USER = $FW.Store.getUserDict();
 
