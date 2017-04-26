@@ -17,6 +17,28 @@ function productLink(bizNo) {
     return `/static/mall/product-detail/index.html?bizNo=${bizNo}`
 }
 
+// function isVisible($node){
+//     var winH = $(window).height(),
+//         scrollTop = $(window).scrollTop(),
+//         offSetTop = $(window).offSet().top;
+//     if (offSetTop < winH + scrollTop) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
+
+// var hasShowed = false;
+// $(window).on("sroll",function{
+//     if (hasShowed) {
+//         return;
+//     } else {
+//         if (isVisible($node)) {
+//             console.log(true);
+//         }
+//     }
+// })
+
 
 const Mall = React.createClass({
     getInitialState: function() {

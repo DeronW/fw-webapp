@@ -12,7 +12,7 @@ class MainPanel extends React.Component {
         }
     }
     componentDidMount() {
-        $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
+        $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`, {}, false)
             .then(data => {
                 this.model.set_form_data(data)
                 this.setState({ form_data: this.model.get_form_data() })
@@ -42,6 +42,8 @@ class MainPanel extends React.Component {
                     let u = $FW.Store.getUserDict();
                     let params = `loanUuid=${data.uuid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
                     location.href = `/api/order/v1/jump.shtml?${params}`
+                }, e => {
+                    if (e.code == 20016) $FW.Component.Toast(e.message)
                 })
     }
     render() {
