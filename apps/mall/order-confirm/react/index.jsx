@@ -175,7 +175,7 @@ const ConfirmOrder = React.createClass({
                     </div>
                     <div className="price-item">
                         <span className="item-name">优惠券</span><span className="item-detail">
-                        {coupon||0 ? ' ¥ ' : null}{coupon}
+                        {(coupon||0) ? ' ¥ ' : null}{coupon}
                        </span>
                     </div>
                     <div className="price-item">
