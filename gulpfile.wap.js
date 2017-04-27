@@ -106,6 +106,11 @@ const DEVELOPING_PAGES = [
 const OUTSIDE_PAGES=[
     'outside-register-aisidi' //爱施德注册页面
 ]
+const P2P=[
+    'p2p-invite', //P2P邀请返利, 邀请人
+	'p2p-interest-reward', //P2P年化加息奖励
+	'vip-prerogative'
+]
 APP_NAMES.push(
     ...USER_PAGES,
     ...PROTOCOL_PAGES,
@@ -114,7 +119,8 @@ APP_NAMES.push(
     ...NOTICE_PAGES,
     ...DEVELOPING_PAGES,
     ...SHOUSHAN,
-    ...OUTSIDE_PAGES
+    ...OUTSIDE_PAGES,
+	...P2P
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
