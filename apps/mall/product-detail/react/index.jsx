@@ -39,9 +39,9 @@ const Product = React.createClass({
 
         if ($FW.Browser.inIOSApp()) {
             // document.querySelector('._style_header_arrow').style.top = "22px";
-            document.querySelector('._style_header_arrow').setAttribute("class","_style_header_arrow_ios");
+            document.querySelector('._style_header_arrow').className="_style_header_arrow_ios";
             // document.querySelector('._style_header_fixed').style.lineHeight = "130px";
-            document.querySelector('._style_header_fixed').setAttribute("class","_style_header_fixed_ios");
+            document.querySelector('._style_header_fixed').className="class","_style_header_fixed_ios";
         }
 
 
