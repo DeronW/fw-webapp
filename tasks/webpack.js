@@ -21,7 +21,7 @@ module.exports = function (site_name, page_name, options) {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015', 'react', 'stage-2']
+                    presets: ['es2015', 'react', 'stage-1', 'stage-2']
                 }
             }]
         }
