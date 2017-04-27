@@ -12,7 +12,7 @@ class MainPanel extends React.Component {
         }
     }
     componentDidMount() {
-        $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`)
+        $FXH.Post(`${API_PATH}/api/userBase/v1/userInfoItem.json`, {}, false)
             .then(data => {
                 this.model.set_form_data(data)
                 this.setState({ form_data: this.model.get_form_data() })
@@ -42,6 +42,8 @@ class MainPanel extends React.Component {
                     let u = $FW.Store.getUserDict();
                     let params = `loanUuid=${data.uuid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
                     location.href = `/api/order/v1/jump.shtml?${params}`
+                }, e => {
+                    if (e.code == 20016) $FW.Component.Toast(e.message)
                 })
     }
     render() {
@@ -51,7 +53,7 @@ class MainPanel extends React.Component {
         // 保持, 借款日期与借款金额的联动
         if (field_key === 'term') {
             let pool = field.option_pool;
-            field.options = [pool[0], pool[1], pool[2], pool[3]];
+            field.options = [pool[1], pool[2], pool[3]];
             if (form_data.balance > 3000) {
                 field.options = [pool[1], pool[2], pool[3]]
             }

@@ -90,7 +90,9 @@ $FW.DOMReady(function () {
     })
 });
 function backward() {
-    $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/game/index.html?mallHead=true' 
+    // $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/game/index.html?mallHead=true' 
+    // $FW.Browser.inApp() ? NativeBridge.close() : location.href = '/static/mall/home/index.html' 
+    history.go(-1);
 }
 function getBrowserType() {
     var t = 2; // 在移动浏览器内

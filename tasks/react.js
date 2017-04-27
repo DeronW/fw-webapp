@@ -5,7 +5,7 @@ const plugins = require('gulp-load-plugins')(); // Loads gulp plugins from packa
 const babel = require('gulp-babel');
 const js_uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
-var sourcemaps = require('gulp-sourcemaps');
+const sourcemaps = require('gulp-sourcemaps');
 
 module.exports = react = function (src_path, build_path, name, debug) {
     return gulp.src(src_path)

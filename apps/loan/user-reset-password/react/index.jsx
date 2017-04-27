@@ -13,11 +13,12 @@ function space(val) {
     return val.replace(/ /g, '');
 }
 
-const Register = React.createClass({
-    getInitialState() {
+class Register extends React.Component{
+    constructor(props){
+        super(props)
         let query = $FW.Format.urlQuery();
         let codeToken = query.codeToken;
-        return {
+        this.state={
             code: '',
             codeBoolean: false,
             password: '',
@@ -25,18 +26,24 @@ const Register = React.createClass({
             plainCode: false,
             codeToken: codeToken
         }
-    },
+        this.changeCode = this.changeCode.bind(this);
+        this.changePsw = this.changePsw.bind(this);
+        this.countingDown = this.countingDown.bind(this);
+        this.handleGetCode = this.handleGetCode.bind(this);
+        this.handlePlainCode = this.handlePlainCode.bind(this);
+        this.handleRegisterBtn = this.handleRegisterBtn.bind(this);
+    }
     componentDidMount() {
         this.countingDown();
-    },
+    }
     changeCode(e) {
         let v = e.target.value;
         v.length <= 6 && this.setState({ code: v });
-    },
+    }
     changePsw(e) {
         let v = e.target.value;
         v.length <= 16 && verificationNum(v) && this.setState({ password: v });
-    },
+    }
     countingDown() {
         this.setState({
             codeBoolean: true,
@@ -49,7 +56,7 @@ const Register = React.createClass({
                 this.setState({ codeBoolean: false });
             }
         }, 1000);
-    },
+    }
     handleGetCode() {
         $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
             mobile: PHONE,
@@ -59,10 +66,10 @@ const Register = React.createClass({
             data => this.setState({ codeToken: data.codeToken }),
             e => $FW.Component.Toast(e.message));
         this.countingDown();
-    },
+    }
     handlePlainCode() {
         this.setState({ plainCode: !this.state.plainCode });
-    },
+    }
     handleRegisterBtn() {
         let err, { code, password, codeToken } = this.state;
 
@@ -91,7 +98,7 @@ const Register = React.createClass({
                 })
                 window.location.href = "/"
             }, e => $FW.Component.Toast(e.message))
-    },
+    }
     render() {
 
         let btnSMSCode = this.state.codeBoolean ?
@@ -109,7 +116,7 @@ const Register = React.createClass({
                         <span className="icon"></span>
                         <div className="input">
                             <input type="number" onChange={this.changeCode}
-                                value={this.state.code} placeholder="输入手机验证码" />
+                                   value={this.state.code} placeholder="输入手机验证码" />
                         </div>
                         {btnSMSCode}
                     </div>
@@ -135,7 +142,7 @@ const Register = React.createClass({
             </div>
         )
     }
-});
+}
 
 const PHONE = $FW.Format.urlQuery().phone || '';
 

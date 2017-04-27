@@ -9,20 +9,25 @@ function verificationNum(val) {
     return reg.test(val)
 }
 
-const VerifyIdentidy = React.createClass({
-    getInitialState() {
-        return {
+class VerifyIdentidy extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
             countdown: 0,
             underWayCode: true,
             idVal: '',
             codeVal: ''
         }
-    },
+        this.idChange = this.idChange.bind(this);
+        this.changeCode = this.changeCode.bind(this);
+        this.handleCode = this.handleCode.bind(this);
+        this.setHandler = this.setHandler.bind(this);
+    }
     idChange(e) {
         this.setState({
             idVal: e.target.value
         });
-    },
+    }
     changeCode(e) {
         if (e.target.value.length <= 6) {
             if (verificationNum(e.target.value)) {
@@ -31,7 +36,7 @@ const VerifyIdentidy = React.createClass({
                 });
             }
         }
-    },
+    }
     handleCode() {
         this.setState({
             countdown: 5,
@@ -40,17 +45,16 @@ const VerifyIdentidy = React.createClass({
 
         if (this.state.underWayCode) {
             // this.time = setInterval(() => {
-                // this.setState({ countdown: this.state.countdown - 1 });
+            // this.setState({ countdown: this.state.countdown - 1 });
             // }, 1000);
         }
-    },
+    }
     setHandler() {
         // if (this.state.idVal === '') {
         // } else if (!isCardNo(this.state.idVal)) {
         // } else if (this.state.codeVal == '') {
         // }
-    },
-
+    }
     render() {
         return (
             <div className="verify-identidy-cnt">
@@ -89,7 +93,7 @@ const VerifyIdentidy = React.createClass({
             </div>
         )
     }
-});
+}
 
 $FW.DOMReady(() => {
     ReactDOM.render(<VerifyIdentidy />, CONTENT_NODE)

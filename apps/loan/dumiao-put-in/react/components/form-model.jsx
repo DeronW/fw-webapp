@@ -1,3 +1,4 @@
+
 class FormModel {
     constructor() {
         this.form = {
@@ -50,7 +51,7 @@ class FormModel {
                 value: '',
                 validate: [
                     {
-                        test: v => v.length === 0,
+                        test: v => !v,
                         msg: '信用卡不能为空'
                     }
                 ]
@@ -61,7 +62,7 @@ class FormModel {
                 value: '',
                 validate: [
                     {
-                        test: v => v.length === 0,
+                        test: v => !v,
                         msg: '邮箱不能为空'
                     },
                     {
@@ -87,7 +88,7 @@ class FormModel {
                 value: '',
                 validate: [
                     {
-                        test: v => v.length === 0,
+                        test: v => !v,
                         msg: '请输入居住地'
                     }
                 ]
@@ -148,26 +149,22 @@ class FormModel {
                     text: '朋友',
                     value: '6'
                 }],
-                validate: [
-                    {
-                        test: v => parseInt(v) === NaN,
-                        msg: '请选择紧急联系人关系'
-                    }
-                ]
+                validate: [{
+                    test: v => parseInt(v) === NaN,
+                    msg: '请选择紧急联系人关系'
+                }]
             },
             'emMobile': {
                 name: '联系人手机',
                 value: '',
                 placeholder: '请输入联系人手机号',
-                validate: [
-                    {
-                        test: v => !v,
-                        msg: '请输入联系人手机号'
-                    }, {
-                        test: v => v.length != 11,
-                        msg: '手机号格式不正确'
-                    }
-                ]
+                validate: [{
+                    test: v => !v,
+                    msg: '请输入联系人手机号'
+                }, {
+                    test: v => v.length != 11,
+                    msg: '手机号格式不正确'
+                }]
             },
             'income': {
                 name: '税后月收入',
@@ -179,7 +176,7 @@ class FormModel {
                     text: '3000-5000元',
                     value: '1'
                 }, {
-                    text: '5000-10000元',
+                    text: '5001-10000元',
                     value: '2'
                 }, {
                     text: '10001-20000元',
@@ -187,6 +184,10 @@ class FormModel {
                 }, {
                     text: '20000元以上',
                     value: '4'
+                }],
+                validate: [{
+                    test: v => parseInt(v) === NaN,
+                    msg: '请选择税后月收入'
                 }]
             },
             'workExperience': {
@@ -194,16 +195,20 @@ class FormModel {
                 value: '',
                 options: [{
                     text: '1年以下',
-                    value: '1'
+                    value: '0'
                 }, {
                     text: '1-5年',
-                    value: '2'
+                    value: '1'
                 }, {
                     text: '6-10年',
-                    value: '3'
+                    value: '2'
                 }, {
                     text: '10年以上',
-                    value: '4'
+                    value: '3'
+                }],
+                validate: [{
+                    test: v => parseInt(v) === NaN,
+                    msg: '请选择工作年限'
                 }]
             },
             'realName': {
@@ -224,11 +229,7 @@ class FormModel {
             v = typeof (value) !== 'undefined' ? value : field.value;
         if (vld) {
             for (let i = 0; i < vld.length; i++) {
-
-                let check = v => typeof (vld[i].test) === 'function' ?
-                    vld[i].test(v) : true;
-
-                if (check(v)) {
+                if (vld[i].test && vld[i].test(v)) {
                     err = vld[i].msg
                     break
                 }

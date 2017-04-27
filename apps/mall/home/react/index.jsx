@@ -1,4 +1,4 @@
-// import { lazyload } from 'react-lazyload';
+// import LazyLoad from 'react-lazyload';
  
 
 
@@ -16,6 +16,28 @@ function gotoHandler(link) {
 function productLink(bizNo) {
     return `/static/mall/product-detail/index.html?bizNo=${bizNo}`
 }
+
+// function isVisible($node){
+//     var winH = $(window).height(),
+//         scrollTop = $(window).scrollTop(),
+//         offSetTop = $(window).offSet().top;
+//     if (offSetTop < winH + scrollTop) {
+//         return true;
+//     } else {
+//         return false;
+//     }
+// }
+
+// var hasShowed = false;
+// $(window).on("sroll",function{
+//     if (hasShowed) {
+//         return;
+//     } else {
+//         if (isVisible($node)) {
+//             console.log(true);
+//         }
+//     }
+// })
 
 
 const Mall = React.createClass({
@@ -118,12 +140,12 @@ const Mall = React.createClass({
                         <a href="/static/mall/order-list/index.html">
                         <img src="images/query_order.png" /><span>订单查询</span></a>
                         <a href="/static/mall/game-zhuanpan20161230/index.html">
-                        <img src="images/get_vouchers.png" /><span>大转盘</span></a>
+                        <img src="images/span.png" /><span>大转盘</span></a>
                     <a href="/static/mall/game/index.html?mallHead=true">{/*static/mall/waiting/index.html*/}
                         <img src="images/game_center.png" /><span>游戏中心</span></a>
                 </div>
 
- {/*<LazyLoad height={200} offset={100}>*/}
+{/*<LazyLoad height={200} offset={100}>*/}
                 <HotProducts bizNo={'TJ0000022'} count={10} />
                 <NewProducts bizNo={'TJ0000060'} count={10} />
                 <Grid_1 bizNo={'TJ0000042'} count={10} />
@@ -136,7 +158,7 @@ const Mall = React.createClass({
                 <Grid_8 bizNo={'TJ0000056'} count={10} />
 
                 <HotSales />
-                {/*</LazyLoad>*/}
+            {/*</LazyLoad>*/}
             </div>
         )
     }
