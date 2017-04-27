@@ -1,3 +1,5 @@
+import React from 'react';
+
 /*
  parameters
  <Alert title={'这个是标题'} confirm_text={'CONFIRM'} show_callback={} hide_callback={} />
@@ -9,7 +11,11 @@
  hide_callback 隐藏之后的回调
  */
 
-class GlobalAlert extends React.Component {
+class Alert extends React.Component {
+    static defaultProps = {
+        title: '好像出了点问题!?'
+    }
+
     constructor() {
         super();
         this.state = {
@@ -134,9 +140,9 @@ class GlobalAlert extends React.Component {
         let title = null;
         if (this.props.title instanceof Array) {
             title = <div>
-                {this.props.title.map((i, index) =>< div key={index}
-                                                         style={title_wrap}><span
-                    style={title_index}>{index + 1}、</span> <span style={title_content}> {i} </span></div >)}
+                {this.props.title.map((i, index) => < div key={index}
+                    style={title_wrap}><span
+                        style={title_index}>{index + 1}、</span> <span style={title_content}> {i} </span></div >)}
             </div>;
         } else {
             title = this.props.title;
@@ -169,6 +175,4 @@ class GlobalAlert extends React.Component {
     }
 }
 
-GlobalAlert.defaultProps = {
-    title: '好像出了点问题!?'
-};
+export default Alert

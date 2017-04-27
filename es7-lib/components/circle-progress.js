@@ -13,6 +13,15 @@
 
 class SVGCircleProgress extends React.Component {
 
+    static defaultProps = {
+        weight: 10,
+        radius: 100,
+        animate: true,
+        padding: 0,
+        bgColor: '#eee',
+        progressColor: '#FC655A'
+    }
+
     constructor() {
         super();
         this.STEP_PERCENT = 1.2;
@@ -50,7 +59,7 @@ class SVGCircleProgress extends React.Component {
             p = 100;
             clearInterval(this._animate_timer);
         }
-        this.setState({current_percent: p})
+        this.setState({ current_percent: p })
     }
 
     animate() {
@@ -84,9 +93,9 @@ class SVGCircleProgress extends React.Component {
 
         let circleColor = percent === 1 ? this.state.progressColor : this.state.bgColor;
         let circle = <circle cx={center.x} cy={center.y}
-                             r={this.state.radius - this.state.weight / 2}
-                             fill="transparent" stroke={circleColor}
-                             strokeWidth={this.state.weight}></circle>;
+            r={this.state.radius - this.state.weight / 2}
+            fill="transparent" stroke={circleColor}
+            strokeWidth={this.state.weight}></circle>;
 
         let p2 = {
             x: center.x + Math.sin(Math.PI * 2 * percent) * this.state.radius,
@@ -113,11 +122,11 @@ class SVGCircleProgress extends React.Component {
 
         return (
             <svg width={sideLength} height={sideLength}
-                 style={{
-                     display: 'inline-block',
-                     transform: 'translate(0, 0)',
-                     overflow: 'hidden'
-                 }}>
+                style={{
+                    display: 'inline-block',
+                    transform: 'translate(0, 0)',
+                    overflow: 'hidden'
+                }}>
                 {circle}
                 {path}
             </svg>
@@ -125,11 +134,5 @@ class SVGCircleProgress extends React.Component {
     }
 }
 
-SVGCircleProgress.defaultProps = {
-    weight: 10,
-    radius: 100,
-    animate: true,
-    padding: 0,
-    bgColor: '#eee',
-    progressColor: '#FC655A'
-}
+
+export default SVGCircleProgress

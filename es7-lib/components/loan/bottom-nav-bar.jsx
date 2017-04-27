@@ -124,3 +124,5 @@ class BottomNavBar extends React.Component {
         )
     }
 }
+
+export default BottomNavBar

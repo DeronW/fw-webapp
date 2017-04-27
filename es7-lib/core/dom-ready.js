@@ -21,7 +21,7 @@ let popDOMReadyArr = () => {
     readyList = [];
 }
 
-let DOMReady = (cb) => {
+let DOMReady = cb => {
     document.readyState === 'complete' ?
         runInCatch(cb) :
         readyList.push(cb);

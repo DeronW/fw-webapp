@@ -7,16 +7,13 @@
  * @param {Object|Function} optional options / callback
  * @param {Function} optional callback
  */
-const getJSONP = function(url, params, fn) {
-    if ('function' == typeof params) {
-        fn = params;
-        params = {};
-    }
+const getJSONP = function (url, params) {
 
-    var enc = encodeURIComponent;
+    let enc = encodeURIComponent;
+    params = params || {};
 
-    var formData = '';
-    for (var i in params) {
+    let formData = '';
+    for (let i in params) {
         if (!params.hasOwnProperty(i)) continue;
         if (params[i] === null) continue;
         if (formData) formData += '&';
@@ -25,10 +22,10 @@ const getJSONP = function(url, params, fn) {
 
     // use the callback name that was passed if one was provided.
     // otherwise generate a unique name by incrementing our counter.
-    var id = '__jp' + (+new Date()) + Math.random().toString().substr(3, 5);
+    let id = '__jp' + (+new Date()) + Math.random().toString().substr(3, 5);
 
-    var target = document.getElementsByTagName('script')[0] || document.head;
-    var script;
+    let target = document.getElementsByTagName('script')[0] || document.head;
+    let script;
 
     // add qs component
     url += (~url.indexOf('?') ? '&' : '?') + 'callback=' + enc(id);
@@ -38,10 +35,9 @@ const getJSONP = function(url, params, fn) {
     script.src = url;
 
     return new Promise(function (resolve, reject) {
-        var timer = setTimeout(function () {
-            var err = new Error('JSONP request timeout');
+        let timer = setTimeout(function () {
+            let err = new Error('JSONP request timeout');
             cleanup();
-            // fn && fn(err);
             reject(err);
         }, 3500);
 
@@ -55,7 +51,6 @@ const getJSONP = function(url, params, fn) {
 
         window[id] = function (data) {
             cleanup();
-            fn && fn(data);
             resolve(data);
         };
 
@@ -63,4 +58,4 @@ const getJSONP = function(url, params, fn) {
     });
 }
 
-module.exports = getJSONP
+export default getJSONP

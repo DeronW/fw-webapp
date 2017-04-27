@@ -1,8 +1,10 @@
-let eventMap = {}
 
-const Event = {
-    slideDownRefresh: function () {
-        if (eventMap['slide_down_refresh'])
+class Event {
+    consturctor() {
+        this.event_map = {}
+    }
+    slideDownRefresh() {
+        if (this.event_map['slide_down_refresh'])
             throw ('duplicated event listener on slide down');
 
         var _start_y, _end_y, threshold = 200;
@@ -41,7 +43,7 @@ const Event = {
             _start_y = null, _end_y = null;
         };
 
-        eventMap['slide_down_refresh'] = [fnMove, fnEnd];
+        this.event_map['slide_down_refresh'] = [fnMove, fnEnd];
 
         var upper = document.createElement('div'),
             body = document.body;
@@ -51,34 +53,34 @@ const Event = {
         body.insertBefore(upper, body.childNodes[0]);
         //document.body.addEventListener('touchmove', fnMove);
         //document.body.addEventListener('touchend', fnEnd);
-    },
+    }
 
-    cancelSlideDownRefresh: function () {
-        document.body.removeEventListener('touchmove', eventMap['slide_down_refresh'][0]);
-        document.body.removeEventListener('touchend', eventMap['slide_down_refresh'][1]);
+    cancelSlideDownRefresh() {
+        document.body.removeEventListener('touchmove', this.event_map['slide_down_refresh'][0]);
+        document.body.removeEventListener('touchend', this.event_map['slide_down_refresh'][1]);
         document.body.removeChild(document.getElementById('_id_slide_down_refresh_div'));
-    },
+    }
 
-    touchBottom: function (cb) {
-        if (eventMap['touch_bottom_fn'])
+    touchBottom(cb) {
+        if (this.event_map['touch_bottom_fn'])
             throw ('duplicated event listener on slide up');
 
         var fn = function () {
             //判断滚动条滚到了网页最底部
             if (window.innerHeight + document.body.scrollTop + document.documentElement.scrollTop + 50 > document.body.scrollHeight) {
-                if (eventMap['touch_bottom'] == 'running') return;
-                eventMap['touch_bottom'] = 'running';
+                if (this.event_map['touch_bottom'] == 'running') return;
+                this.event_map['touch_bottom'] = 'running';
                 cb(function () {
-                    eventMap['touch_bottom'] = 'ready';
+                    this.event_map['touch_bottom'] = 'ready';
                 })
             }
         };
-        eventMap['touch_bottom_fn'] = fn;
+        this.event_map['touch_bottom_fn'] = fn;
         window.addEventListener("scroll", fn, false);
-    },
-    cancelTouchBottom: function () {
-        window.removeEventListener('scroll', eventMap['touch_bottom_fn'])
+    }
+    cancelTouchBottom() {
+        window.removeEventListener('scroll', this.event_map['touch_bottom_fn'])
     }
 }
 
-module.exports = Event
+export default new Event()

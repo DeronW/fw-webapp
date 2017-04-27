@@ -1,8 +1,15 @@
-class GlobalToast extends React.Component {
+import React from 'react';
+
+
+class Toast extends React.Component {
+    static defaultProps = {
+        duration: 2000,
+        animation: 200
+    }
 
     constructor() {
-      super();
-      this.state = { offset: 0, opacity: 0 };
+        super();
+        this.state = { offset: 0, opacity: 0 };
     }
 
     componentDidMount() {
@@ -43,11 +50,10 @@ class GlobalToast extends React.Component {
             zIndex: "999"
         };
 
-        return <div className="error-tip" style={style} ref="self">{this.props.text}</div>
+        return <div className="error-tip" style={style} ref="self">
+            {this.props.text}
+        </div>
     }
 }
 
-GlobalToast.defaultProps = {
-    duration: 2000,
-    animation: 200
-}
+export default Toast

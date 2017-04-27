@@ -1,4 +1,6 @@
-let Ajax = function (options) {
+import {} from '../components'
+
+let Ajax2 = function (options) {
     var cfg = {
         url: '',
         method: 'GET',
@@ -27,9 +29,6 @@ let Ajax = function (options) {
     var xhr = new XMLHttpRequest();
 
     if (typeof (cfg.data) == 'object') {
-        // 伪装成 PUT or DELETE 方法
-        if (cfg.method.toUpperCase() === 'PUT') cfg.data['_method'] = 'put';
-        if (cfg.method.toUpperCase() == 'DELETE') cfg.data['_method'] = 'delete';
 
         var formData = '';
         for (var i in cfg.data) {
@@ -107,34 +106,112 @@ let Ajax = function (options) {
     return p;
 }
 
-let Ajax = require('./ajax.js')
 
-/*
-* Ajax 的简化版, 仅用于Post请求
-* 接受3个必要参数
-* url: 请求地址
-* data: 请求参数
-* success: 成功后的执行函数
-* Post方法 use "slience" option,
-*/
-const Post = function(url, data, loading, slience) {
-    return Ajax({
-        url: url,
-        method: 'POST',
-        data: data,
-        enable_loading: loading || 'mini',
-        slience: slience === undefined ? true : !!slience
-    })
+class Ajax {
+    constructor(options) {
+
+        let default_options = {
+            url: '',
+            method: 'GET',
+            data: {},
+            withCredentials: false,
+            timeout: 10,
+            enable_loading: false,
+            onStart: null,
+            onTimeout: null,
+            onComplete: null
+        };
+        // 快捷写法, 如果传入参数只有一个字符串,
+        // 那么就默认使用 GET 请求这个字符串表示的地址
+        if (typeof (options) == 'string')
+            options = { url: options };
+
+        this.options = Object.assign(default_options, options)
+        this.xhr = new XMLHttpRequest();
+    }
+    get request_url() {
+        let url = this.options.url, form_data = this.form_data;
+        if (cfg.method.toUpperCase() == 'GET' && form_data) {
+            let chr = url.indexOf('?') > 0 ? '&' : '?'
+            url += `${chr}${form_data}`
+        }
+        return url
+    }
+    get form_data() {
+        let form_data = '', opt = this.options;
+
+        // 伪装成 PUT or DELETE 方法
+        if (opt.method.toUpperCase() === 'PUT')
+            opt.data['_method'] = 'put';
+        if (opt.method.toUpperCase() == 'DELETE')
+            opt.data['_method'] = 'delete';
+
+        if (typeof (opt.data) == 'object') {
+            opt.data.forEach((k, v) => {
+                form_data += `${form_data.length ? '' : '&'}${k}=${v}`
+            })
+        } else {
+            form_data = opt.data;
+        }
+        return form_data
+    }
+
+    prepare() {
+        let opt = this.options,
+            method = opt.method.toUpperCase() == 'GET' ? 'GET' : 'POST';
+        xhr.open(method, this.request_url, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.withCredentials = !!opt.withCredentials;
+    }
+
+    emit() {
+        let opt = this.options;
+        opt.onStart && opt.onStart()
+        let promise = new Promise((resolve, reject) => {
+            xhr.onreadystatechange = state => {
+                if (xhr.readyState == 4) {
+                    opt.onComplete && opt.onComplete(xhr.status, xhr.responseText)
+                }
+            }
+        })
+        // cancel callback if timeout
+        setTimeout(() => {
+            this.options.onComplete = null;
+            opt.onTimeout && opt.onTimeout()
+        }, opt.timeout * 1000)
+        xhr.send(this.form_data);
+        return promise
+    }
 }
 
-class Request {
-    constructor(error_handler) {
+class RequestFactory {
+    constructor(eh) {
+        this.error_handler = eh
+    }
+
+    set_error_handler(eh) {
         this.error_handler = error_handler
     }
 
+    get default_options() {
+        return {
+            onStart: () => {
+
+            },
+            onTimeout: () => {
+
+            },
+            onComplete: () => {
+
+            }
+        }
+    }
+
     ajax(options) {
-        console.log('call ajax')
+        return (new Ajax(Object.assign(options, this.default_options))).emit()
     }
 }
 
-export default Request
+
+export default RequestFactory
