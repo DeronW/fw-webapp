@@ -109,7 +109,7 @@ const OUTSIDE_PAGES=[
 const P2P=[
     'p2p-invite', //P2P邀请返利, 邀请人
 	'p2p-interest-reward', //P2P年化加息奖励
-	'vip-prerogative'
+	'p2p-vip-prerogative'
 ]
 APP_NAMES.push(
     ...USER_PAGES,
