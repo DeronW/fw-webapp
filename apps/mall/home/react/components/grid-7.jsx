@@ -77,7 +77,10 @@ const Grid_7 = React.createClass({
                                     </div>
                                 </div>
                             </a>
-                            <a className="theme4-btm-middle-product-item"
+                            {
+                               products[6]
+                               ?
+                                <a className="theme4-btm-middle-product-item"
                                 href={`/static/mall/product-detail/index.html?bizNo=${get_prd(6).bizNo}`}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
@@ -93,7 +96,7 @@ const Grid_7 = React.createClass({
                                             点击抢购<span className="tri tri-btm-color3"></span></span>
                                     </div>
                                 </div>
-                            </a>
+                            </a>:null}
                         </div>
                        { products[7] 
                         ?
