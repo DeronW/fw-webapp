@@ -7,3 +7,5 @@
 // DOMReady(() => {
 //     console.log(getJSONP)
 // })
+
+import css from './less/index.less'

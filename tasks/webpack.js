@@ -3,6 +3,7 @@ const path = require('path');
 const util = require('gulp-util');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
 
 
 module.exports = function (site_name, page_name, options) {
@@ -36,17 +37,22 @@ module.exports = function (site_name, page_name, options) {
                     fallback: 'style-loader',
                     //resolve-url-loader may be chained before sass-loader if necessary
                     use: [
-                        'css-loader', 'less-loader'
-
-                        // {
-                        //     use: 'less-loader',
-                        //     options: {
-                        //         strictMath: true,
-                        //         noIeCompat: true
-                        //     }
-                        // }
+                        'css-loader',
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                strictMath: true,
+                                noIeCompat: true
+                            }
+                        }
                     ]
                 })
+            }, {
+                test: /.(png|jpg)/,
+                use: [{
+                    loader: 'file-loader?name=images/[name]-[hash:6].[ext]',
+                    query: ''
+                }]
             }]
         },
         plugins: [
@@ -54,7 +60,7 @@ module.exports = function (site_name, page_name, options) {
                 template: `${page_path}/index.html`
             }),
             new ExtractTextPlugin({
-                filename: `${page_path}/stylesheets/all.css`
+                filename: `all.css`
             })
         ]
     });
@@ -69,7 +75,9 @@ module.exports = function (site_name, page_name, options) {
             })
         } else {
             compiler.run((err, stats) => {
-                err ? util.log(err) : util.log('webpack compile complete')
+                err ?
+                    util.log(err) :
+                    util.log(util.colors.green('webpack compile complete'))
                 resolve()
             })
         }
