@@ -81,7 +81,7 @@ const Grid_7 = React.createClass({
                                 href={`/static/mall/product-detail/index.html?bizNo=${get_prd(6).bizNo}`}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
-                                        <img className="theme4-btm-product-img" src={get_prd(6).img} />
+                                        <img className="theme4-btm-product-img" src={products[6].img} />
                                     </div>
                                     <div className="theme4-btm-middle-top-info">
                                         <span
