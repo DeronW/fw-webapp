@@ -95,6 +95,16 @@ const Grid_7 = React.createClass({
                                 </div>
                             </a>
                         </div>
+                       { products[7] 
+                        ?
+                        <div className="theme4-btm-right-product-wrap">
+                            <a href={`/static/mall/product-detail/index.html?bizNo=${get_prd(7).bizNo}`}>
+                                <img className="theme4-btm-product-img" src={get_prd(7).img} />
+                            </a>
+                        </div>
+                        : null}
+                        {products[8] 
+                        ? 
                         <div className="theme4-btm-right-product-wrap">
                             <a href={`/static/mall/product-detail/index.html?bizNo=${get_prd(7).bizNo}`}>
                                 <img className="theme4-btm-product-img" src={get_prd(7).img} />
@@ -103,6 +113,7 @@ const Grid_7 = React.createClass({
                                 <img className="theme4-btm-product-img" src={get_prd(8).img} />
                             </a>
                         </div>
+                        : null}
                     </div>
                 </div>
             </div>
