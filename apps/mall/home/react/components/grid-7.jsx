@@ -48,7 +48,7 @@ const Grid_7 = React.createClass({
                     <div className="theme4-btm-product-list">
                         <div className="theme4-btm-left-product-item">
                             <a className="theme4-btm-left-product-wrap"
-                                href={`/static/mall/product-detail/index.html?bizNo=${get_prd(4).bizNo}`>
+                                href={`/static/mall/product-detail/index.html?bizNo=${products[4].bizNo}`}>
                                 <img className="theme4-btm-product-img" src={products[4].img} />
                                 <span
                                     className="theme4-btm-product-title theme4-btm-product-title-color1">{products[4].abbreviation}</span>
@@ -60,7 +60,7 @@ const Grid_7 = React.createClass({
                         </div>
                         <div className="theme4-btm-middle-product-wrap">
                             <a className="theme4-btm-middle-product-item"
-                                href={`/static/mall/product-detail/index.html?bizNo=${get_prd(5).bizNo}`>
+                                href={'/static/mall/product-detail/index.html?bizNo=' + products[5].bizNo}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
                                         <img className="theme4-btm-product-img" src={get_prd(5).img} />
@@ -78,7 +78,7 @@ const Grid_7 = React.createClass({
                                 </div>
                             </a>
                             <a className="theme4-btm-middle-product-item"
-                                href={`/static/mall/product-detail/index.html?bizNo=${get_prd(6).bizNo}`>
+                                href={'/static/mall/product-detail/index.html?bizNo=' + products[6].bizNo}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
                                         <img className="theme4-btm-product-img" src={get_prd(6).img} />
