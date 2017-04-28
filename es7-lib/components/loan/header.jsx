@@ -1,3 +1,5 @@
+import React from 'react';
+
 /*
  parameters
  <Header title={} title_img={} height={} background={} sub_text={} sub_url={} />

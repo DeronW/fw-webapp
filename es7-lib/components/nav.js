@@ -1,3 +1,5 @@
+import React from 'react';
+
 /*
  A 包装了 <a></a>
  */

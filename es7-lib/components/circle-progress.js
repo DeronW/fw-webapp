@@ -1,3 +1,5 @@
+import React from 'react';
+
 /*
  * SVGCircleProgress组件，创建一个圆形进度条.
  * @constructor

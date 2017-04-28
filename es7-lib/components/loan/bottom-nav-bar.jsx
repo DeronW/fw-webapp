@@ -1,3 +1,5 @@
+import React from 'react';
+
 /*
  parameters
  <NavBar title={}  height={} background={} />

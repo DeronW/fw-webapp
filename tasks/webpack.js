@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require('path');
 const util = require('gulp-util');
-const SwigWebpackPlugin = require('swig-webpack-plugin')
+const swig_html = require('./html.js');
 
 module.exports = function (site_name, page_name, options) {
     options = options || {};
@@ -10,7 +10,7 @@ module.exports = function (site_name, page_name, options) {
         build_path = path.resolve(__dirname, `../build/${site_name}/${page_name}/`);
 
     const compiler = webpack({
-        entry: `${page_path}/entry.js`,
+        entry: [`${page_path}/entry.js`],
         output: {
             path: `${build_path}/javascripts`,
             filename: 'bundle.min.js'
@@ -23,22 +23,21 @@ module.exports = function (site_name, page_name, options) {
                 query: {
                     presets: ['es2015', 'react', 'stage-1', 'stage-2']
                 }
+            }, {
+                test: /\.html$/,
+                loader: 'swig-loader'
             }]
         },
-        plugins: [
-            new SwigWebpackPlugin({
-                filename: `${page_path}/index.html`,
-                beautify: true,
-                data: {
-                    api_path: 'xxx'
-                }
-            })
-        ]
+        plugins: []
     });
 
     // 因为 webpack 被集成到了 gulp 中, 所以要遵循 gulp 的路径配置
     // 先把html 拷贝到 build 目录中
-    // copy([`${app_path}/index.html`], build_path)
+    swig_html([`${page_path}/index.html`], build_path, 'swig', {
+        API_PATH: '',
+        DEBUG: false,
+        ENV: ''
+    })
 
     return new Promise(function (resolve, reject) {
         if (options.watch) {
