@@ -2,6 +2,8 @@ const webpack = require("webpack");
 const path = require('path');
 const util = require('gulp-util');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 module.exports = function (site_name, page_name, options) {
     options = options || {};
@@ -10,7 +12,7 @@ module.exports = function (site_name, page_name, options) {
         build_path = path.resolve(__dirname, `../build/${site_name}/${page_name}/`);
 
     const compiler = webpack({
-        entry: [`${page_path}/entry.js`],
+        entry: `${page_path}/entry.js`,
         output: {
             path: `${build_path}`,
             filename: 'javascripts/bundle.min.js'
@@ -30,22 +32,29 @@ module.exports = function (site_name, page_name, options) {
                 loader: 'swig-loader'
             }, {
                 test: /\.less$/,
-                use: [{
-                    loader: "style-loader" // creates style nodes from JS strings
-                }, {
-                    loader: "css-loader" // translates CSS into CommonJS
-                }, {
-                    loader: "less-loader" // compiles Less to CSS
-                    , options: {
-                        strictMath: true,
-                        noIeCompat: true
-                    }
-                }]
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //resolve-url-loader may be chained before sass-loader if necessary
+                    use: [
+                        'css-loader', 'less-loader'
+
+                        // {
+                        //     use: 'less-loader',
+                        //     options: {
+                        //         strictMath: true,
+                        //         noIeCompat: true
+                        //     }
+                        // }
+                    ]
+                })
             }]
         },
         plugins: [
             new HtmlWebpackPlugin({
                 template: `${page_path}/index.html`
+            }),
+            new ExtractTextPlugin({
+                filename: `${page_path}/stylesheets/all.css`
             })
         ]
     });

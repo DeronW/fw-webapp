@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     {% block viewport %}
     <meta name="viewport" content="target-densitydpi=device-dpi, width=720, user-scalable=no">
-    {% include 'partial/fix-viewport.html' %}
+    {% include 'partial/fix-viewport.swig.html' %}
     {% endblock %}
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="screen-orientation" content="portrait">
@@ -12,17 +12,10 @@
     {% block disable_telephone %}
     <meta name="format-detection" content="telephone=no"/>
     {% endblock %}
-    <title>{% block title %}放心花{% endblock %}</title>
-    {% block css %}
-    <link type="text/css" rel="stylesheet" href="stylesheets/all.less.css"/>
-    {% endblock %}
-    {% block head_javascripts %}{% endblock %}
+    <title>{% block title %}Loan - Manager{% endblock %}</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/all.css"/>
 </head>
 <body>
-
-{% block force_reload %}
-{% include 'partial/auto-reload-in-back-action.swig.html' %}
-{% endblock%}
 
 <!--接口地址前缀,结尾需要添加斜线-->
 <input type="hidden" id="api-path" value="{{ API_PATH }}"/>
@@ -33,18 +26,7 @@
 <div id="bottom-nav-bar"></div>
 {% endblock %}
 
-{% block javascripts %}
 <script src="javascripts/bundle.min.js"></script>
-{% endblock %}
 
-{% include 'loan/wechat-share-config.swig.html' %}
-{% if ENV == 'production' %}
-{% include 'partial/expection-handler.swig.html' with
-{SENTRY_DSN: 'https://064ad415a6de48dbbef9c9974ff6a029@sentry.dougemall.com/5'} %}
-{% endif %}
-
-{% if ENV == 'production' %}
-{% include 'partial/growing-io.swig.html' with {key: '8560a41923a914be'} %}
-{% endif %}
 </body>
 </html>
