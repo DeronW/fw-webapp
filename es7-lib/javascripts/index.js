@@ -1,12 +1,35 @@
-export AppBridge from './core/app-bridge.js';
-export Browser from './core/browser.js';
-export DOMReady from './core/dom-ready.js';
-export Event from './core/event.js';
-export Utils from './core/utils.js';
-export getJSONP from './core/jsonp.js';
+import AppBridge from './core/app-bridge.js'
+import Browser from './core/browser.js'
+import DOMReady from './core/dom-ready.js'
+import Event from './core/event.js'
+import Utils from './core/utils.js'
+import getJSONP from './core/jsonp.js'
+import * as Components from './components'
+import * as Capture from './core/capture.js'
 
-import RequestFactory from './core/request.js';
 
-export let Request = new RequestFactory()
+import RequestFactory from './core/request-factory.js';
 
-export default { version: '0.9' }
+let Request = new RequestFactory({
+    error_handler: (code, message, responseText) => {
+        console.log('this is default error handler, you should override this function')
+        Components.showToast(message)
+    },
+    alert: Components.showAlert,
+    capture: Capture.captureError,
+    show_loading: Components.showLoading,
+    hide_loading: Components.hideLoading
+}).ajax
+
+let Version = { version: '0.9.0' }
+
+export {
+    Version as default
+    , AppBridge
+    , Browser
+    , DOMReady
+    , Event
+    , Utils
+    , getJSONP
+    , Request
+}

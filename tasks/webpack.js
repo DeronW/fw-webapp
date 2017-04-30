@@ -25,7 +25,12 @@ module.exports = function (site_name, page_name, options) {
                 use: [{
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015', 'react', 'stage-1', 'stage-2']
+                        presets: [
+                            'es2015',
+                            'react',
+                            // 'stage-1',
+                            'stage-2'
+                        ]
                     }
                 }]
             }, {

@@ -1,11 +1,13 @@
-// import $FW from '../../../es7-lib/'
-// import {
-//     DOMReady, Utils, AppBridge,
-//     Browser, Event, Request, getJSONP
-// } from '../../../es7-lib/'
+import ReactDOM from 'react-dom'
+import React from 'react'
 
-// DOMReady(() => {
-//     console.log(getJSONP)
-// })
+import * as $FW from '../../../es7-lib/javascripts'
 
-import css from './less/index.less'
+$FW.DOMReady(() => {
+    $FW.Request('http://fe.9888.cn/fake-api/api/fail.json').then(
+        d => console.log(d),
+        e => console.log('self handler: ', e.message)
+    )
+})
+
+// import css from './less/index.less'

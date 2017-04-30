@@ -1,4 +1,4 @@
-import runInCatch from './run-in-catch.js';
+import { runInCatch } from './capture.js';
 
 let readyList = [];
 

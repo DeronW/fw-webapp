@@ -15,4 +15,7 @@ let runInCatch = fn => {
     }
 }
 
-export default runInCatch
+export {
+    runInCatch
+    , captureError
+}

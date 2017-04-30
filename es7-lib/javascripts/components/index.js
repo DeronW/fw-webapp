@@ -1,34 +1,35 @@
 import ReactDOM from 'react-dom'
-import Alert from './alert'
-import Toast from './toast'
-import Loading from './loading'
-import SVGCircleProgress from './circle-progress'
+import React from 'react'
+import Alert from './alert.js'
+import Toast from './toast.js'
+import Loading from './loading.js'
+import SVGCircleProgress from './circle-progress.js'
+import Nav from './nav.js'
 
 const LOADING_ELEMENT_ID = '_id_react_component_global_loading'
 
 let createTemporaryDOMNode = function (id) {
-    var element = document.getElementById(id);
-
-    if (!element) {
-        element = document.createElement('div');
-        element.id = id;
-        document.body.appendChild(element);
+    let node = document.getElementById(id)
+    if (!node) {
+        node = document.createElement('div');
+        node.id = id;
+        document.body.appendChild(node);
     }
-    return element;
+    return node
 }
 
 let showLoading = function (theme) {
-    let element = createTemporaryDOMNode(LOADING_ELEMENT_ID)
+    let node = createTemporaryDOMNode(LOADING_ELEMENT_ID)
     ReactDOM.render(
         <Loading unMountHandler={
-            () => element.parentNode.removeChild(element)} />,
-        element);
-    setTimeout(() => ReactDOM.unmountComponentAtNode(element), 6900);
+            () => node.parentNode.removeChild(node)} />,
+        node);
+    setTimeout(() => ReactDOM.unmountComponentAtNode(node), 6900);
 }
 
 let hideLoading = () => {
-    let element = document.getElementById(LOADING_ELEMENT_ID)
-    ReactDOM.unmountComponentAtNode(element)
+    let node = document.getElementById(LOADING_ELEMENT_ID)
+    ReactDOM.unmountComponentAtNode(node)
 }
 
 let showAlert = function (title, options) {
@@ -36,40 +37,36 @@ let showAlert = function (title, options) {
     var id = '_id_react_component_global_alert',
         node = createTemporaryDOMNode(id);
 
-    ReactDOM.render(React.createElement(Alert, {
-        id: id,
-        title: title,
-        header: options.header,
-        confirm_text: '确认',
-        unMountAlert: function () {
-            node.parentNode.removeChild(node)
-        }
-    }), node);
+    ReactDOM.render(<Alert
+        id={id}
+        title={title}
+        header={options.header}
+        confirm_text={'确认'}
+        unMountAlert={() => node.parentNode.removeChild(node)}
+    />, node);
 }
 
 let showToast = function (data) {
     var id = '_id_react_component_global_toast',
-        node = FW.Component._createTemporaryDOMNode(id);
+        node = createTemporaryDOMNode(id);
 
-    FW.Component.getReactDOM().render(React.createElement(GlobalToast, {
-        id: id,
-        text: data,
-        unMountToast: function () {
-            node.parentNode.removeChild(node)
-        }
-    }), node);
+    ReactDOM.render(<Toast
+        id={id}
+        text={data}
+        unMountToast={() => node.parentNode.removeChild(node)}
+    />, node);
 }
 
-export Nav from './nav'
-export SVGCircleProgress from './circle-progress'
 
 export {
-    createTemporaryDOMNode,
-    showAlert,
-    showLoading,
-    hideLoading,
-    showToast,
-    Alert,
-    Toast,
-    Loading
+    createTemporaryDOMNode
+    , showAlert
+    , showLoading
+    , hideLoading
+    , showToast
+    , Alert
+    , Toast
+    , Loading
+    , Nav
+    , SVGCircleProgress
 }
