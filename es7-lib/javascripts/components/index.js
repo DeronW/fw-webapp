@@ -18,13 +18,12 @@ let createTemporaryDOMNode = function (id) {
     return node
 }
 
-let showLoading = function (theme) {
+let showLoading = function (theme, auto_disappear = true) {
     let node = createTemporaryDOMNode(LOADING_ELEMENT_ID)
     ReactDOM.render(
-        <Loading unMountHandler={
-            () => node.parentNode.removeChild(node)} />,
-        node);
-    setTimeout(() => ReactDOM.unmountComponentAtNode(node), 6900);
+        <Loading unMountHandler={() => node.parentNode.removeChild(node)} />, node);
+    auto_disappear &&
+        setTimeout(() => ReactDOM.unmountComponentAtNode(node), 6900);
 }
 
 let hideLoading = () => {

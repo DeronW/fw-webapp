@@ -1,5 +1,5 @@
 import RequestFactory from './core/request.js'
-import Components from './components';
+import * as Components from './components';
 
 
 let request = new RequestFactory({

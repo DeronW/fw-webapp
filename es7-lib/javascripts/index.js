@@ -12,8 +12,8 @@ import RequestFactory from './core/request-factory.js';
 
 let Request = new RequestFactory({
     error_handler: (code, message, responseText) => {
-        console.log('this is default error handler, you should override this function')
-        Components.showToast(message)
+        // Components.showAlert(message)
+        Components.showLoading('default', false)
     },
     alert: Components.showAlert,
     capture: Capture.captureError,
