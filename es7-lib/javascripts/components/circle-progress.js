@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 /*
  * SVGCircleProgress组件，创建一个圆形进度条.
@@ -13,7 +13,7 @@ import React from 'react';
  * @param {string} progressColor - 进度条进度颜色.
  */
 
-class SVGCircleProgress extends React.Component {
+class SVGCircleProgress extends Component {
 
     static defaultProps = {
         weight: 10,

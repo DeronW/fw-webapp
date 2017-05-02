@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 /*
  A 包装了 <a></a>
  */
-class Nav extends React.Component {
+class Nav extends Component {
     constructor(props) {
         super(props)
         this.tap_handler = props.onTouchStart
