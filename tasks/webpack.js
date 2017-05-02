@@ -29,7 +29,10 @@ module.exports = function (site_name, page_name, options) {
                             'es2015',
                             'react',
                             // 'stage-1',
-                            'stage-2'
+                            'stage-2',
+                        ],
+                        plugins: [
+                            'transform-decorators-legacy'
                         ]
                     }
                 }]
