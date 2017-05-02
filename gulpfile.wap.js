@@ -8,7 +8,7 @@ let APP_NAMES = [
     'faq', // 帮助中心
     'app-download', // app 下载页面
     'guide-cookbook', // 用户使用引导页面
-
+    'p2p-app-download',//微金app下载页面
     // test page
     'test-native-bridge',
     'test-statistic-chart'
