@@ -125,6 +125,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
     let INCLUDE_JAVASCRIPTS = [
         'use-strict.js',
+        `${PROJ}/encript.js`,
         `${PROJ}/fw-ajax-error-handler.js`,
         `${PROJ}/fw-common.js`,
         `${PROJ}/fw-plugin-store.js`,
