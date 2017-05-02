@@ -110,19 +110,23 @@ class Register extends React.Component{
         if (password.length < 8) err = "密码不能少于8位";
         if (password.length > 16) err = "密码不能多于16位";
         if (!istrue(password)) err = "必须是字母及数字组合密码";
-        err ?
-            $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
-                channelCode:$FW.Format.urlQuery().channelCode,
-                codeToken: codeToken,
-                invitationCode: $FW.Format.urlQuery().code,
-                mobile: phoneNum,
-                password: password,
-                verifyCode: code,
-                sourceType: SOURCE_TYPE
-            }).then(data => {
-                window.location.href = "/static/loan/weixin-attention/index.html"
-            }, (e) => $FW.Component.Toast(e.message))
+
+        if (err) return $FW.Component.Toast(err);
+
+        let encPassword = $FW.Enc(password);
+
+        $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
+            channelCode:$FW.Format.urlQuery().channelCode,
+            codeToken: codeToken,
+            invitationCode: $FW.Format.urlQuery().code,
+            mobile: phoneNum,
+            password: password,
+            encryptedPassword: encPassword,
+            verifyCode: code,
+            sourceType: SOURCE_TYPE
+        }).then(data => {
+            window.location.href = "/static/loan/weixin-attention/index.html"
+        }, (e) => $FW.Component.Toast(e.message))
     }else{
         $FW.Component.Toast("请同意放心花用户注册协议");
     }

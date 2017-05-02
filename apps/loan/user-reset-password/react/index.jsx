@@ -79,25 +79,28 @@ class Register extends React.Component{
         if (password.length > 16) err = "密码不能多于16位";
         if (!istrue(password)) err = "请输入8-16位字母和数字组合";
 
-        err ?
-            $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}/api/userBase/v1/resetPass.json`, {
-                codeToken: codeToken,
-                mobile: PHONE,
-                password: password,
-                verifyCode: code,
-                sourceType: SOURCE_TYPE
-            }).then(data => {
-                let dict = data.userPasswordOption;
-                $FW.Store.setUserDict({
-                    token: dict.userToken,
-                    id: dict.userId,
-                    gid: dict.userGid,
-                    status: dict.userStatus,
-                    uid: dict.uid
-                })
-                window.location.href = "/"
-            }, e => $FW.Component.Toast(e.message))
+        if (err) return $FW.Component.Toast(err);
+
+        let encPassword = $FW.Enc(password);
+
+        $FW.Post(`${API_PATH}/api/userBase/v1/resetPass.json`, {
+            codeToken: codeToken,
+            mobile: PHONE,
+            password: password,
+            encryptedPassword: encPassword,
+            verifyCode: code,
+            sourceType: SOURCE_TYPE
+        }).then(data => {
+            let dict = data.userPasswordOption;
+            $FW.Store.setUserDict({
+                token: dict.userToken,
+                id: dict.userId,
+                gid: dict.userGid,
+                status: dict.userStatus,
+                uid: dict.uid
+            })
+            window.location.href = "/"
+        }, e => $FW.Component.Toast(e.message))
     }
     render() {
 
