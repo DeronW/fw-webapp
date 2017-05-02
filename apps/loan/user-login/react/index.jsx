@@ -61,7 +61,7 @@ class Register extends React.Component{
         $FW.Post(`${API_PATH}/api/userBase/v1/login.json`, {
             mobile: PHONE,
             password: password,
-            encPassword: encPassword,
+            encryptedPassword: encPassword,
             sourceType: SOURCE_TYPE
         }).then(data => {
             let dict = data.userLogin;
