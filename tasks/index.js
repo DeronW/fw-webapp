@@ -50,13 +50,14 @@ function generate_webpack_task(site_name, page_name, CONFIG) {
         cdn_path = `cdn/${site_name}/${page_name}`;
 
     function compile_webpack() {
-        util.log(util.colors.yellow('run webpack task:', `${site_name}:${page_name}`))
-        return webpack_task(site_name, page_name)
+        util.log(util.colors.yellow(`run webpack task:${site_name}:${page_name}`))
+        return webpack_task(site_name, page_name, CONFIG)
     }
 
     function watch_webpack() {
         util.log(util.colors.yellow('watch webpack task:', `${site_name}:${page_name}`))
-        return webpack_task(site_name, page_name, { watch: true })
+        return webpack_task(site_name, page_name,
+            Object.assign({ watch: true }, CONFIG))
     }
 
     function copy2cdn() {

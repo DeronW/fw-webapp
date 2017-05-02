@@ -1,35 +1,77 @@
 const webpack = require("webpack");
 const path = require('path');
-const copy = require('./copy.js');
-const util = require('gulp-util')
+const util = require('gulp-util');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
+
 
 module.exports = function (site_name, page_name, options) {
     options = options || {};
 
-    const app_path = path.resolve(__dirname, `../apps/${site_name}/${page_name}`),
+    const page_path = path.resolve(__dirname, `../apps/${site_name}/${page_name}`),
         build_path = path.resolve(__dirname, `../build/${site_name}/${page_name}/`);
 
     const compiler = webpack({
-        entry: `${app_path}/entry.js`,
+        entry: `${page_path}/entry.js`,
         output: {
-            path: `${build_path}/javascripts`,
-            filename: 'bundle.min.js'
+            path: `${build_path}`,
+            filename: 'javascripts/bundle.min.js'
         },
         devtool: 'source-map',
         module: {
             rules: [{
                 test: /\.(js|jsx)$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'react', 'stage-2']
-                }
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            'es2015',
+                            'react',
+                            // 'stage-1',
+                            'stage-2',
+                        ],
+                        plugins: [
+                            'transform-decorators-legacy'
+                        ]
+                    }
+                }]
+            }, {
+                test: /\.html$/,
+                loader: 'swig-loader'
+            }, {
+                test: /\.less$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //resolve-url-loader may be chained before sass-loader if necessary
+                    use: [
+                        'css-loader',
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                strictMath: true,
+                                noIeCompat: true
+                            }
+                        }
+                    ]
+                })
+            }, {
+                test: /.(png|jpg)/,
+                use: [{
+                    loader: 'file-loader?name=images/[name]-[hash:6].[ext]',
+                    query: ''
+                }]
             }]
-        }
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                template: `${page_path}/index.html`
+            }),
+            new ExtractTextPlugin({
+                filename: `all.css`
+            })
+        ]
     });
-
-    // 因为 webpack 被集成到了 gulp 中, 所以要遵循 gulp 的路径配置
-    // 先把html 拷贝到 build 目录中
-    copy([`${app_path}/index.html`], build_path)
 
     return new Promise(function (resolve, reject) {
         if (options.watch) {
@@ -41,7 +83,9 @@ module.exports = function (site_name, page_name, options) {
             })
         } else {
             compiler.run((err, stats) => {
-                err ? util.log(err) : util.log('webpack compile complete')
+                err ?
+                    util.log(err) :
+                    util.log(util.colors.green('webpack compile complete'))
                 resolve()
             })
         }
