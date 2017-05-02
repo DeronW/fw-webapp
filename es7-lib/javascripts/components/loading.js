@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class CircleLoading extends React.Component {
+class CircleLoading extends Component {
     constructor() {
         super()
         this.state = {

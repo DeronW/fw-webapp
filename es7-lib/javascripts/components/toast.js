@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react'
+import ReactDOM, { findDOMNode, unmountComponentAtNode } from 'react-dom'
 
-class Toast extends React.Component {
+class Toast extends Component {
     static defaultProps = {
         duration: 2000,
         animation: 200
@@ -15,7 +15,7 @@ class Toast extends React.Component {
     componentDidMount() {
         this.timer = setTimeout(this.hideHandler, this.props.duration);
         this.setState({
-            offset: ReactDOM.findDOMNode(this.refs.self).offsetWidth,
+            offset: findDOMNode(this.refs.self).offsetWidth,
             opacity: '1'
         });
     }
@@ -23,7 +23,7 @@ class Toast extends React.Component {
     hideHandler = () => {
         this.setState({ opacity: 0 });
         setTimeout(() => {
-            ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
+            unmountComponentAtNode(document.getElementById(this.props.id));
         }, this.props.animation)
     }
 
