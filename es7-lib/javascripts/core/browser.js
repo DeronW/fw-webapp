@@ -10,10 +10,10 @@ class Browser {
         return r ? r[1] : '0';
     }
     get inAndroid() {
-        return this.ua.test(/Android/i)
+        return /Android/i.test(this.ua)
     }
     get inIOS() {
-        return this.ua.test(/iPhone|iPad|iPod/i)
+        return /iPhone|iPad|iPod/i.test(this.ua)
     }
     get inMobile() {
         return this.inAndroid || this.inIOS
@@ -25,7 +25,7 @@ class Browser {
         return this.inApp && this.inAndroid
     }
     get inWeixin() {
-        return this.ua.test('MicroMessenger')
+        return /MicroMessenger/.test(this.ua)
     }
 }
 

@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom'
+import ReactDOM, { render, unmountComponentAtNode } from 'react-dom'
 import React from 'react'
 import Alert from './alert.js'
 import Toast from './toast.js'
@@ -20,15 +20,15 @@ let createTemporaryDOMNode = function (id) {
 
 let showLoading = function (theme, auto_disappear = true) {
     let node = createTemporaryDOMNode(LOADING_ELEMENT_ID)
-    ReactDOM.render(
+    render(
         <Loading unMountHandler={() => node.parentNode.removeChild(node)} />, node);
     auto_disappear &&
-        setTimeout(() => ReactDOM.unmountComponentAtNode(node), 6900);
+        setTimeout(() => unmountComponentAtNode(node), 6900);
 }
 
 let hideLoading = () => {
     let node = document.getElementById(LOADING_ELEMENT_ID)
-    ReactDOM.unmountComponentAtNode(node)
+    unmountComponentAtNode(node)
 }
 
 let showAlert = function (title, options) {
@@ -36,7 +36,7 @@ let showAlert = function (title, options) {
     var id = '_id_react_component_global_alert',
         node = createTemporaryDOMNode(id);
 
-    ReactDOM.render(<Alert
+    render(<Alert
         id={id}
         title={title}
         header={options.header}
@@ -49,11 +49,11 @@ let showToast = function (data) {
     var id = '_id_react_component_global_toast',
         node = createTemporaryDOMNode(id);
 
-    ReactDOM.render(<Toast
+    render(<Toast
         id={id}
         text={data}
         unMountToast={() => node.parentNode.removeChild(node)}
-    />, node);
+    />, node)
 }
 
 

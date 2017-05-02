@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react'
+import { unmountComponentAtNode } from 'react-dom'
 
 /*
  parameters
@@ -11,7 +12,7 @@ import React from 'react';
  hide_callback 隐藏之后的回调
  */
 
-class Alert extends React.Component {
+class Alert extends Component {
     static defaultProps = {
         title: '好像出了点问题!?'
     }
@@ -24,7 +25,7 @@ class Alert extends React.Component {
     }
 
     hideHandler = () => {
-        ReactDOM.unmountComponentAtNode(document.getElementById(this.props.id));
+        unmountComponentAtNode(document.getElementById(this.props.id));
     }
 
     componentWillUnmount() {
@@ -83,18 +84,6 @@ class Alert extends React.Component {
             maxWidth: "576px",
             fontSize: "28px"
         };
-        let style_confirm = {
-            display: "block",
-            float: "left",
-            width: window.innerWidth * 0.3 + "px",
-            textAlign: "center"
-        };
-        let style_cancel = {
-            display: "block",
-            float: "right",
-            width: window.innerWidth * 0.3 + "px",
-            textAlign: "center"
-        };
         let style_one_big = {
             display: "block",
             width: "516px",
@@ -134,44 +123,20 @@ class Alert extends React.Component {
             overflow: "hidden"
         };
 
-        if (!this.state.show)
-            return null;
+        if (!this.state.show) return null;
 
-        let title = null;
-        if (this.props.title instanceof Array) {
-            title = <div>
-                {this.props.title.map((i, index) => < div key={index}
-                    style={title_wrap}><span
-                        style={title_index}>{index + 1}、</span> <span style={title_content}> {i} </span></div >)}
-            </div>;
-        } else {
-            title = this.props.title;
-        }
+        let title = this.props.title;
+        let header = <div style={style_header}>{this.props.header}</div>;
 
-        let header = null;
-        if (this.props.header) {
-            header = <div style={style_header}>{this.props.header}</div>
-        }
-
-        return (
-            <div style={style_pop}>
-                <div style={style_bg} onClick={this.hideHandler}></div>
-                <div className="_alert_style_panel" style={_alert_style_panel}>
-                    <div style={style_close} onClick={this.hideHandler}>&times;</div>
-                    {header}
-                    <div style={style_text}>{title}</div>
-                    {this.props.confirm_text && !this.props.cancel_btn
-                        ? <a style={style_one_big} onClick={this.hideHandler}>{this.props.confirm_text}</a>
-                        : null}
-                    {this.props.confirm_btn
-                        ? <a style={style_confirm} onClick={this.hideHandler}>CONFIRM</a>
-                        : null}
-                    {this.props.cancel_btn
-                        ? <a style={style_cancel} onClick={this.hideHandler}>CANCEL</a>
-                        : null}
-                </div>
+        return <div style={style_pop}>
+            <div style={style_bg} onClick={this.hideHandler}></div>
+            <div className="_alert_style_panel" style={_alert_style_panel}>
+                <div style={style_close} onClick={this.hideHandler}>&times;</div>
+                {header}
+                <div style={style_text}>{title}</div>
+                <a style={style_one_big} onClick={this.hideHandler}>{this.props.confirm_text}</a>
             </div>
-        )
+        </div>
     }
 }
 
