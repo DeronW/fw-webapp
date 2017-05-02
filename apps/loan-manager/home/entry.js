@@ -12,7 +12,6 @@ class Todo {
         this.title = title
     }
 }
-
 class TodoList {
     @observable todos = [];
     @computed get unfinishedTodoCount() {
