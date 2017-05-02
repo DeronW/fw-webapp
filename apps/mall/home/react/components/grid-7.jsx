@@ -77,8 +77,11 @@ const Grid_7 = React.createClass({
                                     </div>
                                 </div>
                             </a>
-                            <a className="theme4-btm-middle-product-item"
-                                href={'/static/mall/product-detail/index.html?bizNo=' + products[6].bizNo}>
+                            {
+                               products[6]
+                               ?
+                                <a className="theme4-btm-middle-product-item"
+                                href={`/static/mall/product-detail/index.html?bizNo=${get_prd(6).bizNo}`}>
                                 <div className="theme4-btm-middle-top-product-wrap">
                                     <div className="theme4-btm-img-wrap">
                                         <img className="theme4-btm-product-img" src={get_prd(6).img} />
@@ -93,8 +96,18 @@ const Grid_7 = React.createClass({
                                             点击抢购<span className="tri tri-btm-color3"></span></span>
                                     </div>
                                 </div>
+                            </a>:null}
+                        </div>
+                       { products[7] 
+                        ?
+                        <div className="theme4-btm-right-product-wrap">
+                            <a href={`/static/mall/product-detail/index.html?bizNo=${get_prd(7).bizNo}`}>
+                                <img className="theme4-btm-product-img" src={get_prd(7).img} />
                             </a>
                         </div>
+                        : null}
+                        {products[8] 
+                        ? 
                         <div className="theme4-btm-right-product-wrap">
                             <a href={`/static/mall/product-detail/index.html?bizNo=${get_prd(7).bizNo}`}>
                                 <img className="theme4-btm-product-img" src={get_prd(7).img} />
@@ -103,6 +116,7 @@ const Grid_7 = React.createClass({
                                 <img className="theme4-btm-product-img" src={get_prd(8).img} />
                             </a>
                         </div>
+                        : null}
                     </div>
                 </div>
             </div>
