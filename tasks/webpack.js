@@ -38,7 +38,16 @@ module.exports = function (site_name, page_name, options) {
                 }]
             }, {
                 test: /\.html$/,
-                loader: 'swig-loader'
+                use: [{
+                    loader: `${__dirname}/loaders/swig.js`,
+                    options: {
+                        locals: {
+                            DEBUG: options.debug,
+                            API_PATH: options.api_path,
+                            ENV: options.enviroument
+                        }
+                    }
+                }]
             }, {
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({

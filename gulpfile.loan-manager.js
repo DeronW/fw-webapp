@@ -14,14 +14,16 @@ const WEBPACK_PAGES = [
         name: 'router',
         describe: 'page for testing webpack',
         compiler: 'webpack'
+    },
+    {
+        name: 'user',
+        compiler: 'webpack'
     }
 ]
-
 
 APP_NAMES.push(
     ...WEBPACK_PAGES
 );
-
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
 
@@ -33,7 +35,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
         generate_task(PROJ, i, {
             cmd_prefix: 'pack',
-            api_path: '',
+            api_path: '/xxx',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`
         });
     });
