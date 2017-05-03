@@ -13,9 +13,10 @@ class Detail extends React.Component {
 
         let status_icon = status => {
             let d = {
-                '103': 'icon1', '102': 'icon2',
-                '100': 'icon3', '101': 'icon4',
-                '5': 'icon5', '4': 'icon6'
+                '0': 'icon1', '1': 'icon1',
+                '2': 'icon2', '3': 'icon2',
+                '5': 'icon2', '100':'icon4',
+                '101': 'icon3', '102': 'icon3'
             }
             return d[status] && <div className={d[status]}></div>
         }
@@ -36,7 +37,7 @@ class Detail extends React.Component {
                     <div className="loan-info">
                         <div className="transfer-lines">
                             <div className="return-money">
-                                <span className="return-money-num">{data.loanLeftAmountStr}</span>
+                                <span className="return-money-num">{data.loanAmountStr}</span>
                                 <span className="return-money-title">借款金额</span>
                             </div>
                             <div className="return-date">
@@ -50,25 +51,25 @@ class Detail extends React.Component {
                     <div className="loan-detail-box">
                         <div>
                             <span>到账金额(元)</span>
-                            <span>{data.dueTimeStr}</span>
+                            <span>{data.netAmountStr}</span>
                         </div>
                         <div>
                             <span>已还金额(元)</span>
-                            <span>{data.loanAmount.toFixed(2)}</span>
+                            <span>{data.repaymentAmountStr}</span>
                         </div>
                         <div>
                             <span>逾期费(元)</span>
-                            <span>{data.loanAmount.toFixed(2)}</span>
+                            <span>{data.overdueFeeStr}</span>
                         </div>
                         <div>
                             <span>待还金额(元)</span>
-                            <span>{data.overdueFee.toFixed(2)}</span>
+                            <span>{data.loanLeftAmountStr}</span>
                         </div>
                     </div>
                     <div className="loan-detail-box">
                         <div>
                             <span>借款时间</span>
-                            <span>{data.loanAmount.toFixed(2)}</span>
+                            <span>{data.transactionTime}</span>
                         </div>
                         <div>
                             <span>到期划款日</span>
