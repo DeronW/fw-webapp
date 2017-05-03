@@ -48,7 +48,7 @@ class Detail extends React.Component {
                         <span className="vertical-line"></span>
                     </div>
 
-                    <div className="loan-detail-box">
+                    {(st == 100 || st == 101 || st == 102 || st == 103) && <div className="loan-detail-box">
                         <div>
                             <span>到账金额(元)</span>
                             <span>{data.netAmountStr}</span>
@@ -57,34 +57,33 @@ class Detail extends React.Component {
                             <span>已还金额(元)</span>
                             <span>{data.repaymentAmountStr}</span>
                         </div>
-                        <div>
+                        { st == 103 && <div>
                             <span>逾期费(元)</span>
                             <span>{data.overdueFeeStr}</span>
-                        </div>
+                        </div>}
                         <div>
                             <span>待还金额(元)</span>
                             <span>{data.loanLeftAmountStr}</span>
                         </div>
-                    </div>
-                    <div className="loan-detail-box">
+                    </div>}
+                    {(st == 100 || st == 101 || st == 102 || st == 103) && <div className="loan-detail-box">
                         <div>
                             <span>借款时间</span>
                             <span>{data.transactionTime}</span>
                         </div>
                         <div>
                             <span>到期划款日</span>
-                            <span>{data.netAmount.toFixed(2)}</span>
+                            <span>{data.netAmount}</span>
                         </div>
-                    </div>
-                    <div className="loan-detail-box">
+                    </div>}
+                    {(st == 0 || st == 1 || st ==2 || st == 3 || st == 5) && <div className="loan-detail-box">
                         <div>
                             <span>借款时间</span>
                             <span>{data.loanTimeStr}</span>
                         </div>
-                    </div>
+                    </div>}
                 </div>
-
-                {(st == 102 || st == 103) &&
+                {(st == 101 || st == 102) &&
                 <div className="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}`}>立即还款</a></div>}
             </div>
         )
