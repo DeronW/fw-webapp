@@ -1,5 +1,12 @@
 
 class Detail extends React.Component {
+    constructor(props){
+        super(props)
+        this.clickHandler = this.clickHandler.bind(this);
+    }
+    clickHandler(){
+        window.history.back();
+    }
     render() {
         let user = $FW.Store.getUserDict();
         let { data, loanGid } = this.props, st = data.extendStatus;
@@ -16,7 +23,7 @@ class Detail extends React.Component {
         return (
             <div>
                 <div className="header">
-                    <div className="back-arrow"></div>
+                    <div className="back-arrow" onClick={this.clickHandler}></div>
                     <div className="page-name">账单详情</div>
                     <a className="bill-history-entry">还款记录</a>
                 </div>
@@ -26,22 +33,15 @@ class Detail extends React.Component {
                     {status_icon(st)}
                 </div>
                 <div className="detail-items">
-                    {/*<div className="loan-num">
-                        <div className={st == 102 || st == 103 || st == 5 ? "loan-money overdue-color" : "loan-money pay-back-color"}>
-                            {st == 100 ? data.repaymentAmountStr : data.loanLeftAmountStr}
-                        </div>
-                        <div className="loan-money-title">应还总额(元)</div>
-
-                    </div>*/}
                     <div className="loan-info">
                         <div className="transfer-lines">
                             <div className="return-money">
-                                <span className="return-money-num">500</span>
-                                <span className="return-money-title">应还金额(元)</span>
+                                <span className="return-money-num">{data.loanLeftAmountStr}</span>
+                                <span className="return-money-title">借款金额</span>
                             </div>
                             <div className="return-date">
-                                <span className="return-date-day">3个月</span>
-                                <span className="return-date-title">应还日期</span>
+                                <span className="return-date-day">{data.dueTimeStr}</span>
+                                <span className="return-date-title">借款期限</span>
                             </div>
                         </div>
                         <span className="vertical-line"></span>
@@ -85,9 +85,6 @@ class Detail extends React.Component {
 
                 {(st == 102 || st == 103) &&
                 <div className="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}`}>立即还款</a></div>}
-
-                {st == 4 && <div className="deposit-btn">打款中</div>}
-                {st == 101 && <div className="deposit-btn">还款中</div>}
             </div>
         )
     }
