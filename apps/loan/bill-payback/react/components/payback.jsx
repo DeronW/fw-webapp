@@ -10,8 +10,9 @@ class PayBack extends React.Component{
 
     componentDidMount() {
         if (this.props.loanLeftAmount <= 200) {
+            let repaymentAmount = this.props.loanLeftAmount.toFixed(2);
             this.setState({
-                repaymentAmount: this.props.loanLeftAmount,
+                repaymentAmount: repaymentAmount.toString(),
                 disableInput: true
             });
         }
@@ -44,7 +45,8 @@ class PayBack extends React.Component{
     get repaymentAmountValid () {
         let loanLeftAmount = Number(this.props.loanLeftAmount),
             repaymentAmount = Number(this.state.repaymentAmount);
-        if (repaymentAmount == NaN) return $FW.Component.Toast("还款金额输入不合法！");
+        if (repaymentAmount === 0) return $FW.Component.Toast("请输入还款金额");
+        if (repaymentAmount === NaN) return $FW.Component.Toast("还款金额输入不合法！");
         if (repaymentAmount > loanLeftAmount) return $FW.Component.Toast("还款金额不得超过待还金额！");
         if (repaymentAmount < 100) return $FW.Component.Toast("单笔还款金额需大于100.00元！");
         return true;
