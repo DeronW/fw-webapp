@@ -32,4 +32,5 @@ export {
     , Utils
     , getJSONP
     , Request
+    , Components
 }

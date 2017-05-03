@@ -9,6 +9,11 @@ const WEBPACK_PAGES = [
         name: 'home',
         describe: 'page for testing webpack',
         compiler: 'webpack'
+    },
+    {
+        name: 'router',
+        describe: 'page for testing webpack',
+        compiler: 'webpack'
     }
 ]
 
