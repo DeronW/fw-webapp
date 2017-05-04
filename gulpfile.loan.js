@@ -88,16 +88,7 @@ const WEIXIN_PAGES = [
 ]
 
 const JUXTAPOSE = [
-	'juxtapose'
-]
-
-// Beta项目, 使用 webpack 编译指定页面
-const WEBPACK_PAGES = [
-    {
-        name: 'faq2',
-        describe: 'page for testing webpack',
-        compiler: 'webpack', // gulp or webpack
-    }
+    'juxtapose'
 ]
 
 
@@ -112,8 +103,7 @@ APP_NAMES.push(
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
-	...JUXTAPOSE,
-    ...WEBPACK_PAGES
+    ...JUXTAPOSE
 );
 
 

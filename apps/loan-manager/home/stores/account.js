@@ -1,6 +1,6 @@
 import { extendObservable } from 'mobx'
 
-export default class User {
+export default class Account {
 
     constructor(request, state = {}) {
         this.request = request
@@ -15,6 +15,8 @@ export default class User {
     }
 
     login(params) {
+        console.log('user want to login')
+
         return this.request('api/account/login', params).then(account => {
             extendObservable(this, account)
         })

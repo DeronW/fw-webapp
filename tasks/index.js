@@ -70,8 +70,13 @@ function generate_webpack_task(site_name, page_name, CONFIG) {
         })
     }
 
-    gulp.task(`${site_name}:${page_name}`, gulp.series(compile_webpack))
-    gulp.task(`${site_name}:${page_name}:watch`, gulp.series(watch_webpack))
+    if (CONFIG.debug) {
+        gulp.task(`${site_name}:${page_name}`, gulp.series(compile_webpack))
+        gulp.task(`${site_name}:${page_name}:watch`, gulp.series(watch_webpack))
+    } else {
+        gulp.task(`${site_name}:${CONFIG.cmd_prefix}:${page_name}`,
+            gulp.series(compile_webpack))
+    }
     gulp.task(`${site_name}:pack:${page_name}:revision`,
         gulp.series(`${site_name}:${page_name}`, copy2cdn, revision2cdn)
     )
