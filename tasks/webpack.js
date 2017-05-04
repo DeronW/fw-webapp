@@ -57,15 +57,16 @@ module.exports = function (site_name, page_name, options) {
                             localIdentName: '[name]__[local]--[hash:base64:6]'
                         }
                     }, {
-                        loader: 'less-loader',
-                        options: {
-                            strictMath: true,
-                            noIeCompat: true
-                        }
-                    }, {
                         loader: 'resolve-url-loader',
                         options: {
                             debug: options.debug
+                        }
+                    }, {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: true,
+                            strictMath: true,
+                            noIeCompat: true
                         }
                     }]
                 })

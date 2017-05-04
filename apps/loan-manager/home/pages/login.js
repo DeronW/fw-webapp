@@ -3,8 +3,8 @@ import CSSModules from 'react-css-modules'
 import styles from '../less/login.less'
 import { observer, inject } from 'mobx-react'
 
-@inject('account') @observer
-class Login extends React.Component {
+@inject('account') @observer @CSSModules(styles)
+export default class Login extends React.Component {
 
     static onEnter() {
         document.title = 'Login'
@@ -21,7 +21,10 @@ class Login extends React.Component {
 
     loginHandler = e => {
         e.preventDefault()
+
         let { account } = this.props;
+console.log(this.props)
+
         account.login(this.state)
             .then()
             .catch(e => {
@@ -34,7 +37,7 @@ class Login extends React.Component {
         return <div>
             <img className="global-logo" src={require('../images/login/logo.png')} />
             <div className="global-form" styleName="form">
-                <input styleName="input" value={this.state.phone}
+                <input styleName="" value={this.state.phone}
                     onChange={this.changeHandler('phone')} />
                 <input styleName="" value={this.state.code}
                     onChange={this.changeHandler('sms_code')} />
@@ -45,6 +48,3 @@ class Login extends React.Component {
         </div>
     }
 }
-
-export default CSSModules(Login, styles)
-
