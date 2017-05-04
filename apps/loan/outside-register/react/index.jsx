@@ -335,6 +335,7 @@ class InteractWrap extends React.Component {
                 if (!isPasswordValid(this.state.password)) {
                     this.setState({ password: '' });
                 } else {
+                    let encPassword = $FW.Enc(this.state.password);
                     $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
                         channelCode: $FW.Format.urlQuery().channelCode,
                         extInvCode: $FW.Format.urlQuery().extInvCode || '',
@@ -342,6 +343,7 @@ class InteractWrap extends React.Component {
                         invitationCode: this.state.invitationCode,
                         mobile: this.state.phoneNum,
                         password: this.state.password,
+                        encryptedPassword: encPassword,
                         verifyCode: this.state.verificationCode,
                         sourceType: SOURCE_TYPE
                     }).then((data) => {

@@ -6,9 +6,10 @@ let APP_NAMES = [
     'home', // 首页
     'about-us', // 关于我们
     'faq', // 帮助中心
+    'p2p-faq',//微金帮助中心页面
     'app-download', // app 下载页面
     'guide-cookbook', // 用户使用引导页面
-
+    'p2p-app-download',//微金app下载页面
     // test page
     'test-native-bridge',
     'test-statistic-chart'
@@ -57,6 +58,7 @@ const NOTICE_PAGES = [
     'notice-safeguard', // 资金安全保障
     'notice-risk-prompt', // 风险揭示
     'notice-information-disclosure',//测试 信息披露
+    'p2p-notice-information-disclosure',//微金信息披露
 ]
 
 const TOPIC_PAGES = [
@@ -71,7 +73,8 @@ const TOPIC_PAGES = [
     'topic-gong-you-hui', //工友会专题页面,
     'topic-invite-strategy',//邀请攻略页面
     'topic-novice-strategy',//新手策略页面
-    'topic-invest-school'// 投资学堂
+    'topic-invest-school',// 投资学堂
+    'p2p-topic-invest-school',//微金投资学堂页面
 ]
 
 const HUISHANG_PAGES = [
@@ -101,7 +104,8 @@ const SHOUSHAN = [
 
 
 const DEVELOPING_PAGES = [
-    'fa-xian'
+    'fa-xian',
+    'p2p-fa-xian',//微金发现页面
 ]
 const OUTSIDE_PAGES=[
     'outside-register-aisidi' //爱施德注册页面

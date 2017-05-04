@@ -49,6 +49,7 @@ const BILL_PAGES = [
     'bill', //账单首页
     'bill-history', //历史账单
     'bill-payback', //还款页面
+    'repayment-record' //还款列表页面
 ]
 
 // 申请借款模块
@@ -86,6 +87,9 @@ const WEIXIN_PAGES = [
     'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
+const JUXTAPOSE = [
+	'juxtapose'
+]
 
 // Beta项目, 使用 webpack 编译指定页面
 const WEBPACK_PAGES = [
@@ -108,6 +112,7 @@ APP_NAMES.push(
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
+	...JUXTAPOSE,
     ...WEBPACK_PAGES
 );
 
@@ -125,6 +130,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
     let INCLUDE_JAVASCRIPTS = [
         'use-strict.js',
+        `${PROJ}/encript.js`,
         `${PROJ}/fw-ajax-error-handler.js`,
         `${PROJ}/fw-common.js`,
         `${PROJ}/fw-plugin-store.js`,

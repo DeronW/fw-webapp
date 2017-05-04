@@ -22,3 +22,4 @@ const CONSTANTS = Object.assign({}, require('./gulpfile.settings.default.js'), s
 require('./gulpfile.wap.js')(gulp, gt, CONSTANTS);
 require('./gulpfile.mall.js')(gulp, gt, CONSTANTS);
 require('./gulpfile.loan.js')(gulp, gt, CONSTANTS);
+require('./gulpfile.loan-manager.js')(gulp, gt, CONSTANTS);

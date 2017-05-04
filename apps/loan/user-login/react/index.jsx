@@ -54,25 +54,28 @@ class Register extends React.Component{
         if (password.length > 16) err = "密码不能多于16位";
         //if (!istrue(password)) err = "必须是字母及数字组合密码";
 
-        err ?
-            $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}/api/userBase/v1/login.json`, {
-                mobile: PHONE,
-                password: password,
-                sourceType: SOURCE_TYPE
-            }).then(data => {
-                let dict = data.userLogin;
-                $FW.Store.set('phone', $FW.Format.urlQuery().phone);
-                $FW.Store.setUserDict({
-                    token: dict.userToken,
-                    id: dict.userId,
-                    gid: dict.userGid,
-                    status: dict.userStatus,
-                    invitCode:dict.invitationCode,
-                    uid:dict.uid
-                })
-                location.href = `/static/loan/home/index.html`;
-            }, e => $FW.Component.Toast(e.message));
+        if (err) return $FW.Component.Toast(err);
+
+        let encPassword = $FW.Enc(password);
+
+        $FW.Post(`${API_PATH}/api/userBase/v1/login.json`, {
+            mobile: PHONE,
+            password: password,
+            encryptedPassword: encPassword,
+            sourceType: SOURCE_TYPE
+        }).then(data => {
+            let dict = data.userLogin;
+            $FW.Store.set('phone', $FW.Format.urlQuery().phone);
+            $FW.Store.setUserDict({
+                token: dict.userToken,
+                id: dict.userId,
+                gid: dict.userGid,
+                status: dict.userStatus,
+                invitCode:dict.invitationCode,
+                uid:dict.uid
+            })
+            location.href = `/static/loan/home/index.html`;
+        }, e => $FW.Component.Toast(e.message))
     }
     forgotPasswordHandler() {
         $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
