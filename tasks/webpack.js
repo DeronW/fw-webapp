@@ -3,7 +3,6 @@ const path = require('path');
 const util = require('gulp-util');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
 
 
 module.exports = function (site_name, page_name, options) {
@@ -77,7 +76,8 @@ module.exports = function (site_name, page_name, options) {
                 template: `${page_path}/index.html`
             }),
             new ExtractTextPlugin({
-                filename: `all.css`
+                filename: 'all.css',
+                allChunks: true
             })
         ]
     });
