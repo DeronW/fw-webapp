@@ -179,75 +179,73 @@ const Login = React.createClass({
             className = { i == this.state.tab ? 'active' : null }
             onClick = {
                     () => this.switchTabHandler(i)
-                } > { i == 'veri' ? '验证码登录' : '普通登录' } <
-                /div>
+                } > { i == 'veri' ? '验证码登录' : '普通登录' } 
+                </div>
         };
 
-        let Pwd = < div >
-            <
-            div className = "field" >
-            <
-            span className = "ico-password" > < /span> <
+        let Pwd = <div>
+            <div className = "field" >
+                <span className = "ico-password" > </span> <
         input type = "password"
         placeholder = "请输入验证码"
         name = "code"
         defaultValue = ""
         onChange = { this.handleCode }
-        /> <
-        div className = "empty" > < /div> <
+        /> 
+        <div className = "empty" > </div> <
         input type = "button"
         className = "yzm b-radius"
         onClick = { this.getSMSCodeHandler }
         id = "btnMessageCode"
         value = {!this.state.reSend ? "重新发送(" + this.state.value + ")" : this.state.value }
-        /> < /
+        /> </
         div > <
             label className = "phone"
-        htmlFor = "code" > { this.state.code } < /label></div > ;
+        htmlFor = "code" > { this.state.code } </label>
+        </div > ;
 
-        let Pwd1 = < div >
+        let Pwd1 = <div >
+            <div className = "field" >
             <
-            div className = "field" >
-            <
-            span className = "ico-password" > < /span> <
-        input type = "password"
+            span className = "ico-password" > </span> 
+            <input type = "password"
         placeholder = "登录密码"
         name = "pwd"
         defaultValue = ""
         onChange = { this.handlePaw }
         className = "password f-14" / >
-            <
-            div className = "empty" > < /div> < /
-        div > <
-            label className = "phone"
-        htmlFor = "pwd" > { this.state.paw } < /label></div > ;
+            <div className = "empty" > </div> 
+            </div> 
+            <label className = "phone"
+        htmlFor = "pwd" > { this.state.paw } </label>
+        </div > ;
 
-        return ( <
-            div >
-            <
-            div className = "recharge-panel-tab" > { this.tabs.map(tab) } < /div> <
-            div className = "container wrap" >
-            <
-            div className = "field" >
-            <
-            span className = "ico-user" > < /span> <
+        return ( 
+            <div >
+            {/*<div className = "recharge-panel-tab" > { this.tabs.map(tab) } </div> */}
+            <div className="top-img"><img src="images/douge_login.png" alt="" className="login-logo"/></div>
+            <div className = "container wrap" >
+            <div className = "field" >
+            <span className = "ico-user" > </span> <
             input type = "text"
             placeholder = "手机号/邮箱/用户名"
             defaultValue = ""
             onChange = { this.handlePhone }
-            /> <
-            div className = "empty" > < /div> < /
-            div > <
-            label className = "phone"
-            htmlFor = "phone" > { this.state.phone } < /label> { this.state.tab == 'veri' ? Pwd : null } { this.state.tab == 'pwd' ? Pwd1 : null }
+            /> 
+            <div className = "empty" > </div> 
+            </div > 
+            <label className = "phone"
+            htmlFor = "phone" > { this.state.phone } </label> { this.state.tab == 'veri' ? Pwd : null } { this.state.tab == 'pwd' ? Pwd1 : null }
 
             <
             input type = "button"
             onClick = { this.state.tab == 'veri' ? this.loginVeri : this.loginPaw }
             className = { this.state.active ? "btn-red active" : "btn-red" }
             value = "登录" / >
-            <
-            /div> < /
+            
+            </div> 
+            <img src="images/login_bg.png" className="login-bg" alt=""/>
+            </
             div >
         )
     }
