@@ -23,7 +23,6 @@ export default class Login extends React.Component {
         e.preventDefault()
 
         let { account } = this.props;
-console.log(this.props)
 
         account.login(this.state)
             .then()
