@@ -84,7 +84,7 @@ class Detail extends React.Component {
                     </div>}
                 </div>
                 {(st == 101 || st == 102) &&
-                <div className="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}`}>立即还款</a></div>}
+                <div className="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}&repaymentid=${data.repaymentid}`}>立即还款</a></div>}
             </div>
         )
     }
