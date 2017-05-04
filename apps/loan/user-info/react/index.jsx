@@ -46,9 +46,10 @@ class CityListWrap extends React.Component {
         // divs is an array saving the number of cities beginning with a specific num,
         // e.g. [{A: 10}, {B: 20}, ...]
         let cityListEl = ReactDOM.findDOMNode(this);
+        let hotCitiesWrapEl = cityListEl.childNodes[0].childNodes[0];
         let devisionHeight = 40,
             optionHeight = 80,
-            scrollTop = 0;
+            scrollTop = hotCitiesWrapEl.clientHeight;
         for (var i = 0; i < divs.length; i++) {
             if (divLetter === Object.keys(divs[i])[0]) break;
             scrollTop += devisionHeight + optionHeight * divs[i][Object.keys(divs[i])[0]];
@@ -91,9 +92,21 @@ class CityListWrap extends React.Component {
                 </div>
             );
         }
+        let hotCities_el = (
+            <div className="hot-cities-wrap">
+                <div className="hot-cities-label">热门城市</div>
+                <div className="hot-cities">
+                    <div className="hot-city" onClick={(e) => {this.props.handleClick(this.props.itemIndex, e.target.innerHTML);}}>北京市</div>
+                    <div className="hot-city" onClick={(e) => {this.props.handleClick(this.props.itemIndex, e.target.innerHTML);}}>上海市</div>
+                    <div className="hot-city" onClick={(e) => {this.props.handleClick(this.props.itemIndex, e.target.innerHTML);}}>广州市</div>
+                    <div className="hot-city" onClick={(e) => {this.props.handleClick(this.props.itemIndex, e.target.innerHTML);}}>深圳市</div>
+                </div>
+            </div>
+        )
         return (
             <div className="city-select-wrap">
                 <div className="city-options-wrap">
+                    {hotCities_el}
                     {cityEls}
                 </div>
                 <ul className="city-divisions-wrap" onClick={(e) => {

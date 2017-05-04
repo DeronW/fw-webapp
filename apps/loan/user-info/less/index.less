@@ -218,7 +218,30 @@ body {
   margin-top: 100px;
 }
 
-.city-division {
+.hot-cities-wrap {
+  .hot-cities {
+    display: flex;
+    // justify-content: space-around;
+    // align-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px 0 0 24px;
+    background-color: #fff;
+
+    .hot-city {
+      width: 210px;
+      height: 80px;
+      line-height: 80px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #649cfe;
+      border-radius: 4px;
+      color: #649cfe;
+      text-align: center;
+    }
+  }
+}
+
+.city-division, .hot-cities-label {
   height: 40px;
   line-height: 40px;
   padding-left: 24px;
