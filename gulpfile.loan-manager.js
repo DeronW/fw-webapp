@@ -2,28 +2,10 @@ const eslint = require('gulp-eslint');
 
 const PROJ = 'loan-manager';
 
-let APP_NAMES= []
-
-const WEBPACK_PAGES = [
-    {
-        name: 'home',
-        describe: 'page for testing webpack',
-        compiler: 'webpack'
-    },
-    {
-        name: 'router',
-        describe: 'page for testing webpack',
-        compiler: 'webpack'
-    },
-    {
-        name: 'user',
-        compiler: 'webpack'
-    }
-]
-
-APP_NAMES.push(
-    ...WEBPACK_PAGES
-);
+const APP_NAMES = [{
+    name: 'home',
+    compiler: 'webpack'
+}]
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
 
@@ -35,7 +17,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
 
         generate_task(PROJ, i, {
             cmd_prefix: 'pack',
-            api_path: '/xxx',
+            api_path: '',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`
         });
     });

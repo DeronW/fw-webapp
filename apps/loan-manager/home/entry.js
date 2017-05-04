@@ -1,55 +1,19 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { observable, computed } from "mobx";
+import { render } from 'react-dom'
+import React from 'react'
 
-import { observer } from "mobx-react";
+import Router from './router.js'
+import * as Stores from './stores'
 
-class Todo {
-    id = Math.random();
-    @observable title = "";
-    @observable finished = false;
-    constructor(title){
-        this.title = title
-    }
-}
-class TodoList {
-    @observable todos = [];
-    @computed get unfinishedTodoCount() {
-        return this.todos.filter(todo => !todo.finished).length;
-    }
+import { Request } from '../../../es7-lib/javascripts'
+
+import './less/index.less'
+
+let stores = {
+    user: new Stores.User(Request),
+    statis_register: new Stores.StatisRegister(Request),
+    statis_apply: new Stores.StatisApply(Request),
+    statis_chart: new Stores.StatisChart(Request),
 }
 
-@observer
-class TodoListView extends Component {
-    render() {
-        return <div>
-            <ul>
-                {this.props.todoList.todos.map(todo =>
-                    <TodoView todo={todo} key={todo.id} />
-                )}
-            </ul>
-            Tasks left: {this.props.todoList.unfinishedTodoCount}
-        </div>
-    }
-}
 
-const TodoView = observer(({ todo }) =>
-    <li>
-        <input
-            type="checkbox"
-            checked={todo.finished}
-            onClick={() => todo.finished = !todo.finished}
-        />{todo.title}
-    </li>
-)
-
-const store = new TodoList();
-ReactDOM.render(<TodoListView todoList={store} />, document.getElementById('cnt'));
-
-setTimeout(() => {
-    store.todos.push(
-        new Todo("Get Coffee"),
-        new Todo("Write simpler code")
-    );
-    store.todos[0].finished = true;
-}, 1000)
+render(<Router stores={stores} />, document.getElementById('cnt'))
