@@ -96,10 +96,14 @@ class CityListWrap extends React.Component {
             <div className="hot-cities-wrap">
                 <div className="hot-cities-label">热门城市</div>
                 <div className="hot-cities">
-                    <div className="hot-city" onClick={(e) => {this.props.handleClick(this.props.itemIndex, e.target.innerHTML);}}>北京市</div>
-                    <div className="hot-city" onClick={(e) => {this.props.handleClick(this.props.itemIndex, e.target.innerHTML);}}>上海市</div>
-                    <div className="hot-city" onClick={(e) => {this.props.handleClick(this.props.itemIndex, e.target.innerHTML);}}>广州市</div>
-                    <div className="hot-city" onClick={(e) => {this.props.handleClick(this.props.itemIndex, e.target.innerHTML);}}>深圳市</div>
+                    {HOT_CITIES_LIST.map((city) => (
+                        <div
+                            key={city}
+                            className="hot-city"
+                            onClick={(e) => {this.props.handleClick(this.props.itemIndex, e.target.innerHTML);}}>
+                            {city}
+                        </div>
+                    ))}
                 </div>
             </div>
         )
@@ -708,6 +712,8 @@ const CITYLIST = {
     "郑州市"
   ]
 };
+
+const HOT_CITIES_LIST = ["北京市", "上海市", "广州市", "深圳市"];
 
 var id_mask = n => String(n).replace(/(\d{4})\d{10}(\d{4})/, "$1**********$2");
 var isPhoneNum = str => /^1[3|4|5|7|8]\d{9}$/.test(String(str));
