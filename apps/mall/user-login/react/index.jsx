@@ -83,7 +83,10 @@ const Login = React.createClass({
     handlePhone: function(e) {
         var phone = e.target.value;
         var reg = /^1[34578]\d{9}$/;
-        if (reg.test(phone) == false) {
+        if(phone == ""){
+            this.setState({ "phone": "" });
+            this.setState({ pass1: 0 });
+        }else if (reg.test(phone) == false) {
             this.setState({ "phone": "请输入合法的手机号" });
             this.setState({ pass1: 0 });
         } else {
