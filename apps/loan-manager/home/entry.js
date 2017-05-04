@@ -7,6 +7,7 @@ import { Request } from 'fw-javascripts'
 
 import * as Stores from './stores'
 
+import './less/index.less'
 
 let stores = {
     account: new Stores.Account(Request),
@@ -15,6 +16,4 @@ let stores = {
     statis_chart: new Stores.StatisChart(Request),
 }
 
-console.log('entry', stores)
-
-render(<AppRouter stores={...stores} />, document.getElementById('cnt'))
+render(AppRouter(stores), document.getElementById('cnt'))

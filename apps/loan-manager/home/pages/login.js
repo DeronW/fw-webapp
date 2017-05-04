@@ -7,7 +7,7 @@ import { observer, inject } from 'mobx-react'
 class Login extends React.Component {
 
     static onEnter() {
-
+        document.title = 'Login'
     }
 
     state = {
@@ -21,8 +21,8 @@ class Login extends React.Component {
 
     loginHandler = e => {
         e.preventDefault()
-        let { user } = this.props;
-        user.login(this.state)
+        let { account } = this.props;
+        account.login(this.state)
             .then()
             .catch(e => {
                 console.log(e.message)
@@ -32,8 +32,8 @@ class Login extends React.Component {
     render() {
 
         return <div>
-            <img styleName="bg-logo" src={require('../images/login/logo.png')} />
-            <div styleName="form">
+            <img className="global-logo" src={require('../images/login/logo.png')} />
+            <div className="global-form" styleName="form">
                 <input styleName="input" value={this.state.phone}
                     onChange={this.changeHandler('phone')} />
                 <input styleName="" value={this.state.code}

@@ -84,13 +84,13 @@ module.exports = function (site_name, page_name, options) {
         plugins: [
             new HtmlWebpackPlugin({
                 template: `${page_path}/index.html`
-            }),
-            new ExtractTextPlugin({
+            })
+            , new ExtractTextPlugin({
                 filename: options.debug ? 'all.css' : 'all.[contenthash:4].css',
                 allChunks: true,
                 ignoreOrder: true
-            }),
-            new webpack.NoErrorsPlugin()
+            })
+            // , new webpack.NoErrorsPlugin()
         ]
     });
 

@@ -11,9 +11,6 @@ import NoMatch from './pages/no-match'
 
 export default (stores) => {
 
-    console.log(stores)
-    console.log(stores.stores)
-
     return <Router>
         <Provider {...stores} >
             <Route exact path='/login' component={Login} />
