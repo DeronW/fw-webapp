@@ -228,7 +228,7 @@ const Login = React.createClass({
             <div className = "field" >
             <span className = "ico-user" > </span> <
             input type = "text"
-            placeholder = "手机号/邮箱/用户名"
+            placeholder = "手机号（免注册登录）"
             defaultValue = ""
             onChange = { this.handlePhone }
             /> 
@@ -252,7 +252,7 @@ const Login = React.createClass({
 });
 
 $FW.DOMReady(function() {
-            ReactDOM.render( < Header title = { '登录' }
+            ReactDOM.render( < Header title = { '验证码登录' }
                 back_handler = { back_handler }
                 />, HEADER_NODE);
                 ReactDOM.render( < Login / > , CONTENT_NODE);
