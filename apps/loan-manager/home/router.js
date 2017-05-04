@@ -1,24 +1,24 @@
 import React from 'react'
+import { Provider } from 'mobx-react'
 import {
-    BrowserRouter as Router,
+    HashRouter as Router,
     Route,
     Link
 } from 'react-router-dom'
 
-const BasicExample = (stores) => {
+import Login from './pages/login'
+import NoMatch from './pages/no-match'
+
+export default (stores) => {
+
     console.log(stores)
+    console.log(stores.stores)
+
     return <Router>
-        <div>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-                <li><Link to="/topics">Topics</Link></li>
-            </ul>
-
-            <hr />
-
-        </div>
+        <Provider {...stores} >
+            <Route exact path='/login' component={Login} />
+            {/*<Route component={NoMatch} />*/}
+        </Provider>
     </Router>
-}
 
-export default BasicExample
+}
