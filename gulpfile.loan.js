@@ -49,6 +49,7 @@ const BILL_PAGES = [
     'bill', //账单首页
     'bill-history', //历史账单
     'bill-payback', //还款页面
+    'repayment-record' //还款列表页面
 ]
 
 // 申请借款模块
