@@ -26,10 +26,10 @@ function RecordList(props) {
     )
 }
 
-let loanUuid = 'sgdf';
-
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title="还款记录" />, HEADER_NODE);
+
+    let loanUuid = $FW.Format.urlQuery().repaymentid;
     $FW.Post(`${API_PATH}/api/loan/v1/repaymentrecordlist.json`, {
         sourceType: SOURCE_TYPE,
         loanUuid: loanUuid

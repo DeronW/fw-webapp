@@ -87,6 +87,9 @@ const WEIXIN_PAGES = [
     'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
+const JUXTAPOSE = [
+	'juxtapose'
+]
 
 // Beta项目, 使用 webpack 编译指定页面
 const WEBPACK_PAGES = [
@@ -109,6 +112,7 @@ APP_NAMES.push(
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
+	...JUXTAPOSE,
     ...WEBPACK_PAGES
 );
 
