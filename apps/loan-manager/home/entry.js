@@ -4,8 +4,6 @@ import React from 'react'
 import Router from './router.js'
 import * as Stores from './stores'
 
-import { Request } from '../../../es7-lib/javascripts'
-
 import './less/index.less'
 
 let stores = {

@@ -123,16 +123,16 @@ class Header extends React.Component {
         let show_header_titles = [''];
         if (ua.indexOf('MicroMessenger') >= 0 && show_header_titles.indexOf(title) < 0)
             return null;
-        if ($FW.Browser.inApp())
-            return null;
-        if ($FW.Browser.inWeixin())
-            return null;
+        // if ($FW.Browser.inApp())
+        //     return null;
+        // if ($FW.Browser.inWeixin())
+        //     return null;
 
-        let back_arrow = <Nav className="_style_header_arrow" style={_style_header_arrow}
+        let back_arrow = <div className="_style_header_arrow" style={_style_header_arrow}
             onClick={this.backClickHandler}>
             <div className="_style_header_arm_up" style={_style_header_arm_up}></div>
             <div className="_style_header_arm_down" style={_style_header_arm_down}></div>
-        </Nav>
+        </div>
 
         return <div style={{ height: this.state.height + 'px' }}>
             <div className="_style_header_fixed" style={_style_header_fixed}>
