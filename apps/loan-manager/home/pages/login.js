@@ -2,6 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from '../less/login.less'
 import { observer, inject } from 'mobx-react'
+import { Redirect } from 'react-router'
 
 @inject('account') @observer @CSSModules(styles)
 export default class Login extends React.Component {
@@ -12,7 +13,8 @@ export default class Login extends React.Component {
 
     state = {
         phone: '',
-        sms_code: ''
+        sms_code: '',
+        loginSuccess: false
     }
 
     changeHandler = key => e => {
@@ -24,24 +26,31 @@ export default class Login extends React.Component {
 
         let { account } = this.props;
 
-        account.login(this.state)
-            .then()
-            .catch(e => {
-                console.log(e.message)
-            })
+        // account.login(this.state)
+        //     .then()
+        //     .catch(e => {
+        //         console.log(e.message)
+        //     })
+
+        console.log("login success")
+        this.setState({ loginSuccess: true })
     }
 
     render() {
 
+        if (this.state.loginSuccess) {
+            return <Redirect to={'/statis/register'} />
+        }
+
         return <div>
-            <img className="global-logo" src={require('../images/login/logo.png')} />
-            <div className="global-form" styleName="form">
-                <input styleName="" value={this.state.phone}
+            <img styleName="bg-logo" src={require('../images/login/logo.png')} />
+            <div styleName="form">
+                <input value={this.state.phone} placeholder="Phone number"
                     onChange={this.changeHandler('phone')} />
-                <input styleName="" value={this.state.code}
+                <input value={this.state.code} placeholder="SMS verify code"
                     onChange={this.changeHandler('sms_code')} />
             </div>
-            <a onClick={this.loginHandler}>
+            <a styleName="btn-login" onClick={this.loginHandler}>
                 Login
             </a>
         </div>
