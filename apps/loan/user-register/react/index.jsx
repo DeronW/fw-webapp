@@ -121,7 +121,7 @@ class Register extends React.Component{
             invitationCode: $FW.Format.urlQuery().code,
             mobile: phoneNum,
             password: password,
-            encryptedPassword: encPassword,
+            // encryptedPassword: encPassword,
             verifyCode: code,
             sourceType: SOURCE_TYPE
         }).then(data => {
