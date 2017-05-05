@@ -9,73 +9,77 @@ import {
 } from 'react-router-dom'
 import * as $FW from 'fw-javascripts'
 
-class AuthExample extends React.Component{
-    render(){
-        return (
-            <Router>
-                <div>
-                    <AuthButton />
-                    <ul>
-                        <li><Link to="/public">Public Page</Link></li>
-                        <li><Link to="/protected">Protected Page</Link></li>
-                    </ul>
-                    <Route path="/public" component={Public}/>
-                    <Route path="/login" component={Login}/>
-                    <PrivateRoute path="/protected" component={Protected}/>
-                </div>
-            </Router>
-        )
-    }
-}
+const AuthExample = () => (
+    <Router>
+        <div>
+            <AuthButton/>
+            <ul>
+                <li><Link to="/public">Public Page</Link></li>
+                <li><Link to="/protected">Protected Page</Link></li>
+            </ul>
+            <Route path="/public" component={Public}/>
+            <Route path="/login" component={Login}/>
+            <PrivateRoute path="/protected" component={Protected}/>
+        </div>
+    </Router>
+)
 
 const fakeAuth = {
-    isAuthenticated:false,
-    authenticate(cb){
+    isAuthenticated: false,
+    authenticate(cb) {
         this.isAuthenticated = true
-        setTimeout(cb,100)
+        setTimeout(cb, 100) // fake async
     },
-    signout(cb){
-        this.isAuthenticated = false,
-        setTimeout(cb,100)
+    signout(cb) {
+        this.isAuthenticated = false
+        setTimeout(cb, 100)
     }
 }
 
-const AuthButton = withRouter(({history}) => {
+const AuthButton = withRouter(({ history }) => (
     fakeAuth.isAuthenticated ? (
-            <p>Welcome! <button onClick={()=>fakeAuth.signout(()=>history.push('/'))}>Sign Out</button></p>
-        ) : (<p>You are not logged in.</p>)
-})
+            <p>
+                Welcome! <button onClick={() => {
+                fakeAuth.signout(() => history.push('/'))
+            }}>Sign out</button>
+            </p>
+        ) : (
+            <p>You are not logged in.</p>
+        )
+))
 
-const PrivateRoute = ({component:Component, ...rest}) => {
-    <Route {...rest} render={
-        props => {
-            fakeAuth.isAuthenticated ? <Component {...props}/> : <Redirect to={{pathname:'/login',state:{from: props.location}}}/>
-        }
-    }/>
-}
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={props => (
+        fakeAuth.isAuthenticated ? (
+                <Component {...props}/>
+            ) : (
+                <Redirect to={{
+                    pathname: '/login',
+                    state: { from: props.location }
+                }}/>
+            )
+    )}/>
+)
 
-const Public = () => {return (<h3>Public page</h3>)}
-const Protected = () => {return (<h3>Protected Page</h3>)}
+const Public = () => <h3>Public</h3>
+const Protected = () => <h3>Protected</h3>
 
-class Login extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            redirectToReferrer:false
-        }
+class Login extends React.Component {
+    state = {
+        redirectToReferrer: false
     }
 
     login = () => {
-        fakeAuth.authenticate(()=>{
-            this.setState({redirectToReferrer:true})
+        fakeAuth.authenticate(() => {
+            this.setState({ redirectToReferrer: true })
         })
     }
 
-    render(){
-        const {from} = this.props.location.state || { from: { pathname: '/' } };
-        const {redirectToReferrer} = this.state;
+    render() {
+        const { from } = this.props.location.state || { from: { pathname: '/' } }
+        const { redirectToReferrer } = this.state
 
-        if(redirectToReferrer){
+        if (redirectToReferrer) {
             return (
                 <Redirect to={from}/>
             )
@@ -89,7 +93,6 @@ class Login extends React.Component{
         )
     }
 }
-
 
 $FW.DOMReady(()=>{
     render(<AuthExample />, document.getElementById('cnt'));
