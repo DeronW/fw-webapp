@@ -87,7 +87,7 @@ class Register extends React.Component{
             codeToken: codeToken,
             mobile: PHONE,
             password: password,
-            encryptedPassword: encPassword,
+            // encryptedPassword: encPassword,
             verifyCode: code,
             sourceType: SOURCE_TYPE
         }).then(data => {

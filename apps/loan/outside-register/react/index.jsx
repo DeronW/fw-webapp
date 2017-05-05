@@ -343,7 +343,7 @@ class InteractWrap extends React.Component {
                         invitationCode: this.state.invitationCode,
                         mobile: this.state.phoneNum,
                         password: this.state.password,
-                        encryptedPassword: encPassword,
+                        // encryptedPassword: encPassword,
                         verifyCode: this.state.verificationCode,
                         sourceType: SOURCE_TYPE
                     }).then((data) => {

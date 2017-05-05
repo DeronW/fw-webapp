@@ -144,7 +144,7 @@ class MajorUserInfo extends React.Component {
             </a>
             <a className="user-info-display-wrap" href="/static/loan/more/index.html">
                 <div className="info-icon-container">
-                    <img src="images/bank_icon.png"></img>
+                    <img src="images/more_icon.png"></img>
                 </div>
                 <span className="info-name">更多</span>
                 <div className="right-align-container">
