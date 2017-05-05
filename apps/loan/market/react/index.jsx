@@ -31,36 +31,42 @@ class Juxtapose extends React.Component {
 		}	
 	}
 	componentDidMount() {
-		//$FXH.Post(`${API_PATH}/api/product/v1/productDisplayList.json`, {
-		/*$FXH.Post(`/Users/dante/Desktop/test/test.json`, {
+		$FXH.Post(`${API_PATH}/api/product/v1/productDisplayList.json`, {
 				pageIndex: 1,
 				pageSize: 100,
 				productDisplayType: 2	
 			})
             .then(data => {
+				this.setState({
+					listData: data.data.resultList
+				})
 				console.log(data)
-            })*/
+            })
 
-		this.setState({
+		/*this.setState({
 			listData: test.data.resultList
-		})
+		})*/
 
 	}
 	render() {
-		const TEST = [1, 2, 3, 4] 
 
 		console.log(this.state.listData)
 
 		let list = (data, i) => {
-			console.log(data)
+			console.log(data.productLabelList)
 			return <div className="li" key={ i }>
 					<div className="t">
 						<div className="img-icon">
 							<img src={ data.productLogo } />
 						</div>
 						<div className="title-block">
-							<div className="title-text">读秒</div>
+							<div className="title-text">{ data.productName }</div>
 							<div className="tag-list">
+								{
+									data.productLabelList.map((data, index) => {
+										
+									})	
+								}
 								<div className="tag-icon m-tag">
 									秒批
 								</div>
@@ -75,7 +81,7 @@ class Juxtapose extends React.Component {
 					</div>
 					<div className="b">
 						<div className="info-list">
-							<div className="info-text">1,000~5万</div>
+							<div className="info-text">{ data.amountStr }</div>
 							<div className="text">借款范围(元)</div>
 						</div>	
 						<div className="info-list">
