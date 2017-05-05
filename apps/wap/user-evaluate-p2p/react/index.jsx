@@ -36,7 +36,7 @@ let QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: 'Q3：在您每年的家庭收入中，可用于投资（储蓄存款除外）的比例为？',
+    q: 'Q3：在您每年的家庭收入中，可用于出借（储蓄存款除外）的比例为？',
     seq: 2,
     name: "can",
     options: [{
@@ -53,7 +53,7 @@ let QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: 'Q4：您过去一年投资非保本类金融产品的总金额为？',
+    q: 'Q4：您过去一年出借非保本类金融产品的总金额为？',
     seq: 3,
     name: "total",
     options: [{
@@ -73,24 +73,24 @@ let QUESTIONS = [{
         score: 10
     }]
 }, {
-    q: 'Q5：以下哪项最能说明您的投资经验？ ',
+    q: 'Q5：以下哪项最能说明您的出借经验？ ',
     seq: 4,
     name: "experience",
     options: [{
-        a: 'A.除存款、国债等保本类金额产品外，我从不投资其他非保本类金融产品，包括股票、基金、理财产品等。',
+        a: 'A.除存款、国债等保本类金额产品外，我从不出借其他非保本类金融产品，包括股票、基金、理财产品等。',
         score: 2
     }, {
-        a: 'B.大部分投资于存款、国债等，少部分投资于股票、基金、理财产品等风险产品 ',
+        a: 'B.大部分出借于存款、国债等，少部分投资于股票、基金、理财产品等风险产品 ',
         score: 4
     }, {
         a: 'C.资产均衡地分布于存款、国债、银行理财产品、信托产品、股票、基金等  ',
         score: 6
     }, {
-        a: 'D.大部分投资于股票、基金、外汇、金融衍生品、海外投资产品等高风险产品，较少投资于存款、国债',
+        a: 'D.大部分出借于股票、基金、外汇、金融衍生品、海外出借产品等高风险产品，较少出借于存款、国债',
         score: 8
     }]
 }, {
-    q: 'Q6：您有多少年投资股票、基金、外汇、理财产品、网络借贷、金融衍生产品、海外投资产品等风险投资品的经验？',
+    q: 'Q6：您有多少年出借股票、基金、外汇、理财产品、网络借贷、金融衍生产品、海外出借产品等风险出借品的经验？',
     seq: 5,
     name: "experiencePeriod",
     options: [{
@@ -124,7 +124,7 @@ let QUESTIONS = [{
         score: 8
     }]
 }, {
-    q: 'Q8：您计划的投资期限是多久？',
+    q: 'Q8：您计划的出借期限是多久？',
     seq: 7,
     name: "period",
     options: [{
@@ -141,14 +141,14 @@ let QUESTIONS = [{
         score: 7
     }]
 }, {
-    q: 'Q9：以下哪项描述最符合您的投资态度？',
+    q: 'Q9：以下哪项描述最符合您的出借态度？',
     seq: 8,
     name: "attitude",
     options: [{
         a: 'A.厌恶风险，不希望本金损失 ',
         score: 1
     }, {
-        a: 'B.保守投资，不希望本金损失，愿意承担一定幅度的收益波动 ',
+        a: 'B.保守出借，不希望本金损失，愿意承担一定幅度的收益波动 ',
         score: 3
     }, {
         a: 'C.寻求资金的较高收益和成长性，愿意为此承担有限本金损失',
@@ -158,7 +158,7 @@ let QUESTIONS = [{
         score: 8
     }]
 }, {
-    q: 'Q10：您的投资出现何种程度的波动时，您会呈现明显的焦虑？',
+    q: 'Q10：您的出借出现何种程度的波动时，您会呈现明显的焦虑？',
     seq: 9,
     name: "anxious",
     options: [{
@@ -298,7 +298,19 @@ const QuestionPanel = React.createClass({
         }
         return (
             <div className="question-box">
-                <div className="question-img"><img src="images/question-top.png"/></div>
+                <div className="question-img">
+                    <div className="question-tips">
+                        重要提示：请先仔细阅读然后填写《个人出借风险能力评估表》
+                    </div>
+                    <div className="question-content">
+                        <div className="qc-title">尊敬的客户：</div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;为了便于您了解自身的风险承受能力，选择合适的理财产品，请您填写以下评估问卷，工场微金承诺对您的所有个人资料保密。下列问题可协助评估您对金融工具及出借目标相关风险的态度。请您回答所有的问题，并在各题最合适的答案选项上打“√”。我们将根据您的加总分评估您的出借风险承受能力，建议您出借与自己的风险承受能力相匹配的金融产品。为了及时了解您的出借风险承受能力，我们建议您定期评估。
+                    </div>
+                    <div className="risk-tips">
+                        风险提示：出借需承担各类风险，可能遭受资金损失。市场
+                        有风险，出借需谨慎。
+                    </div>
+                </div>
                 <div className="question-ul">{QUESTIONS.map(question)}</div>
                 <div className="foot-btn-box">
                     <div className="foot-btn" onClick={this.fnSumHandler}>提交</div>

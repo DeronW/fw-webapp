@@ -5,12 +5,10 @@ const PROJ = 'loan-manager';
 const APP_NAMES = [{
     name: 'home',
     compiler: 'webpack'
-},
-    {
-        name: 'router-auth',
-        compiler: 'webpack'
-    }
-]
+}, {
+    name: 'router-auth',
+    compiler: 'webpack'
+}]
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
 
