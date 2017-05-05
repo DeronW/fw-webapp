@@ -335,7 +335,7 @@ const Answer = React.createClass({
 
 $FW.DOMReady(() => {
     if (!$FW.Browser.inApp())
-        ReactDOM.render(<Header title={'P2P风险承受能力评估'}
+        ReactDOM.render(<Header title={'微金风险承受能力评估'}
                                 back_handler={back_handler}/>, HEADER_NODE);
     ReactDOM.render(<Answer />, CONTENT_NODE);
 })
