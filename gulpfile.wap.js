@@ -56,6 +56,7 @@ const NOTICE_PAGES = [
     // 内容展示页面
     'notice-corporate-structure', // 信息披露 公司结构
     'notice-safeguard', // 资金安全保障
+    'p2p-notice-safeguard',//p2p资金安全保障
     'notice-risk-prompt', // 风险揭示
     'notice-information-disclosure',//测试 信息披露
     'p2p-notice-information-disclosure',//微金信息披露
