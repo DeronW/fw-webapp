@@ -142,6 +142,17 @@ class MajorUserInfo extends React.Component {
                     </div>
                 </div>
             </a>
+            <a className="user-info-display-wrap" href="/static/loan/more/index.html">
+                <div className="info-icon-container">
+                    <img src="images/bank_icon.png"></img>
+                </div>
+                <span className="info-name">更多</span>
+                <div className="right-align-container">
+                    <div className="right-arrow-container">
+                        <div className="fake-arrow"></div>
+                    </div>
+                </div>
+            </a>
         </div>
 
     }
@@ -203,7 +214,7 @@ class UserInfoWrap extends React.Component {
                 {$FW.Browser.inApp() && <FollowWXEntry />}
                 <BillEntry />
                 <MajorUserInfo />
-                <ExitBtn />
+                {/* <ExitBtn /> */}
             </div>
         )
     }

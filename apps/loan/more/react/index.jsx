@@ -1,3 +1,39 @@
+class ExitBtn extends React.Component {
+    constructor() {
+        super();
+        this.state = { showPop: false };
+    }
+
+    logoutHandler() {
+        $FW.Store.clear();
+        location.href = '/static/loan/user-entry/index.html';
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="more-btn">
+                    <div className="ui-btn" onClick={() => { this.setState({ showPop: true }) }}>退出登录</div>
+                </div>
+                {this.state.showPop &&
+                    <div className="mask" style={{ zIndex: 100 }}>
+                        <div className="pop">
+                            <div className="pop-title">退出登录</div>
+                            <div className="pop-close" onClick={() => { this.setState({ showPop: false }) }}></div>
+                            <div className="pop-content">确定退出登录当前账号？</div>
+                            <div className="pop-btnlist">
+                                <span className="pop-cancel" onClick={() => { this.setState({ showPop: false }) }}>取消</span>
+                                <span className="pop-confirm" onClick={this.logoutHandler}>确认</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        )
+    }
+}
+
+
 class More extends React.Component{
     constructor(props){
         super(props)
@@ -58,6 +94,8 @@ class More extends React.Component{
                         </div>
                     </div>
                 </div>
+
+                <ExitBtn />
 
                 <div className={this.state.contact ? "mask" : "mask dis"} style={{ zIndex: 100 }}>
                     <div className="pop">

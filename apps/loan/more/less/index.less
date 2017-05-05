@@ -99,7 +99,6 @@ img{
 }
 
 
-
 .more-btn {
 	margin: 30px 0 0 0;
 	padding: 0 30px;
@@ -109,9 +108,9 @@ img{
 	height: 74px;
 	line-height: 74px;
 	text-align: center;
-	color: #fff;
+	color: #6aa4f0;
 	font-size: 30px;
-	background-color: #6aa4f0;
+	border: 1px solid #6aa4f0;
 	border-radius: 5px;
 }
 .mask{
@@ -130,6 +129,8 @@ img{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
+  -webkit-transform:translate(-50%,-50%);
+  -ms-transform:translate(-50%,-50%);
   border-radius:12px;
 }
 .pop-title{
@@ -155,16 +156,17 @@ img{
   height:74px;
   line-height:74px;
   text-align:center;
-  border-radius:6px;
+  font-size:30px;
+  border-radius:4px;
 }
 .pop-btnlist span.pop-cancel{
-  font-size:30px;
+  width: 246px;
   color:#6aa4f0;
   border:1px solid #6aa4f0;
   float:left;
 }
 .pop-btnlist span.pop-confirm{
-  font-size:34px;
+  width: 246px;
   color:#fff;
   background:#6aa4f0;
   border:1px solid #6aa4f0;
@@ -180,17 +182,18 @@ img{
 .pop-btnlist a.pop-tel{
   display:inline-block;
   width:273px;
-  height:74px;
-  line-height:74px;
+  height:81px;
+  line-height:81px;
   text-align:center;
   border-radius:8px;
-  font-size:30px;
+  font-size:34px;
   color:#fff;
   background:#6aa4f0;
   border:1px solid #6aa4f0;
   float:right;
 }
 .pop-close{
+  z-index: 9999;
   width:26px;
   height:26px;
   background:url(../images/close.jpg) no-repeat;
