@@ -1,27 +1,199 @@
 var test = {
-    code: 1,
-    data: {
-        resultList: [
+    ret:true,
+    code:10000,
+    message:"获取成功",
+    ver:1,
+    data:{
+        totalCount:8,
+        resultList:[
             {
-                amountStr: "测试内容z14l",
-                productId: "测试内容6g7y",
-                productLabelList: [
+                productId:"38",
+                amountStr:"1000 - 5000",
+                commRateStr:null,
+                descInfo:null,
+                fastLoanValue:"59秒",
+                loanRateStr:null,
+                productLabelList:[
                     {
-                        labelType: 1,
-                        labelValue: 1
+                        labelType:"1",
+                        labelValue:"秒批"
                     }
                 ],
-                productLogo: "images/dumiao-logo.png",
-                productName: "测试内容ivt1"
+                productLogo:"https://app.easyloan888.com/img/dumiao_icon.png",
+                productName:"秒白条",
+                serviceRateStr:null,
+                termRangeStr:"7 - 21",
+                termRangeType:null,
+                monthRateStr:null,
+                canBuy:null,
+                androidSoftwareUrl:null,
+                iosSoftwareUrl:null
+            },
+            {
+                productId:"37",
+                amountStr:"1万 - 20万",
+                commRateStr:null,
+                descInfo:null,
+                fastLoanValue:"30分钟",
+                loanRateStr:null,
+                productLabelList:[
+                    {
+                        labelType:"2",
+                        labelValue:"授信额度高"
+                    }
+                ],
+                productLogo:"https://app.easyloan888.com/img/dumiao_icon.png",
+                productName:"宜人贷",
+                serviceRateStr:null,
+                termRangeStr:"12 - 48",
+                termRangeType:null,
+                monthRateStr:null,
+                canBuy:null,
+                androidSoftwareUrl:null,
+                iosSoftwareUrl:null
+            },
+            {
+                productId:"32",
+                amountStr:"2000 - 1万",
+                commRateStr:null,
+                descInfo:null,
+                fastLoanValue:"30分钟",
+                loanRateStr:null,
+                productLabelList:[
+                    {
+                        labelType:"3",
+                        labelValue:"极速到账"
+                    }
+                ],
+                productLogo:"https://app.easyloan888.com/img/dumiao_icon.png",
+                productName:"信用钱包",
+                serviceRateStr:null,
+                termRangeStr:"1 - 12",
+                termRangeType:null,
+                monthRateStr:null,
+                canBuy:null,
+                androidSoftwareUrl:null,
+                iosSoftwareUrl:null
+            },
+            {
+                productId:"36",
+                amountStr:"300 - 1万",
+                commRateStr:null,
+                descInfo:null,
+                fastLoanValue:"半小时",
+                loanRateStr:null,
+                productLabelList:[
+                    {
+                        labelType:"3",
+                        labelValue:"极速到账"
+                    }
+                ],
+                productLogo:"https://app.easyloan888.com/img/dumiao_icon.png",
+                productName:"手机贷",
+                serviceRateStr:null,
+                termRangeStr:"7 - 180",
+                termRangeType:null,
+                monthRateStr:null,
+                canBuy:null,
+                androidSoftwareUrl:null,
+                iosSoftwareUrl:null
+            },
+            {
+                productId:"35",
+                amountStr:"1000 - 5万",
+                commRateStr:null,
+                descInfo:null,
+                fastLoanValue:"2小时",
+                loanRateStr:null,
+                productLabelList:[
+                    {
+                        labelType:"2",
+                        labelValue:"授信额度高"
+                    }
+                ],
+                productLogo:"https://app.easyloan888.com/img/dumiao_icon.png",
+                productName:"拍拍贷",
+                serviceRateStr:null,
+                termRangeStr:"3 - 12",
+                termRangeType:null,
+                monthRateStr:null,
+                canBuy:null,
+                androidSoftwareUrl:null,
+                iosSoftwareUrl:null
+            },
+            {
+                productId:"33",
+                amountStr:"500 - 1万",
+                commRateStr:null,
+                descInfo:null,
+                fastLoanValue:"2小时",
+                loanRateStr:null,
+                productLabelList:[
+                    {
+                        labelType:"3",
+                        labelValue:"极速到账"
+                    }
+                ],
+                productLogo:"https://app.easyloan888.com/img/dumiao_icon.png",
+                productName:"给你花",
+                serviceRateStr:null,
+                termRangeStr:"1 - 12",
+                termRangeType:null,
+                monthRateStr:null,
+                canBuy:null,
+                androidSoftwareUrl:null,
+                iosSoftwareUrl:null
+            },
+            {
+                productId:"31",
+                amountStr:"1000 - 5万",
+                commRateStr:null,
+                descInfo:null,
+                fastLoanValue:"当天",
+                loanRateStr:null,
+                productLabelList:[
+                    {
+                        labelType:"2",
+                        labelValue:"授信额度高"
+                    }
+                ],
+                productLogo:"https://app.easyloan888.com/img/dumiao_icon.png",
+                productName:"贷你嗨",
+                serviceRateStr:null,
+                termRangeStr:"6 - 24",
+                termRangeType:null,
+                monthRateStr:null,
+                canBuy:null,
+                androidSoftwareUrl:null,
+                iosSoftwareUrl:null
+            },
+            {
+                productId:"34",
+                amountStr:"500 - 10万",
+                commRateStr:null,
+                descInfo:null,
+                fastLoanValue:"24小时",
+                loanRateStr:null,
+                productLabelList:[
+                    {
+                        labelType:"2",
+                        labelValue:"授信额度高"
+                    }
+                ],
+                productLogo:"https://app.easyloan888.com/img/dumiao_icon.png",
+                productName:"玖富叮当贷",
+                serviceRateStr:null,
+                termRangeStr:"3 - 36",
+                termRangeType:null,
+                monthRateStr:null,
+                canBuy:null,
+                androidSoftwareUrl:null,
+                iosSoftwareUrl:null
             }
         ],
-        totalCount: 50035,
-        totalPage: 34107
-    },
-    message: 1,
-    ret: 1
+        totalPage:1
+    }
 }
-
 
 class Juxtapose extends React.Component {
 	constructor() {
@@ -43,14 +215,29 @@ class Juxtapose extends React.Component {
 				console.log(data)
             })
 
-		/*this.setState({
-			listData: test.data.resultList
-		})*/
+		//this.setState({
+		//	listData: test.data.resultList
+		//})
 
 	}
 	render() {
 
-		console.log(this.state.listData)
+		let tagType = (data) => {
+			let tagClass
+
+			if(data.labelType == 1) {
+				tagClass = 'm-tag'
+			} else if (data.labelType == 2) {
+				tagClass = 'quota-tag'
+			} else if (data.labelType == 3) {
+				tagClass = 'speed-tag'
+			}
+
+			return <div className={ 'tag-icon ' + tagClass }>
+						{ data.labelValue }
+				</div>
+			
+		}
 
 		let list = (data, i) => {
 			console.log(data.productLabelList)
@@ -64,18 +251,9 @@ class Juxtapose extends React.Component {
 							<div className="tag-list">
 								{
 									data.productLabelList.map((data, index) => {
-										
+										return tagType(data)
 									})	
 								}
-								<div className="tag-icon m-tag">
-									秒批
-								</div>
-								<div className="tag-icon quota-tag">
-									授信额度高	
-								</div>
-								<div className="tag-icon speed-tag">
-									极速到账
-								</div>
 							</div>
 						</div>
 					</div>
@@ -85,11 +263,11 @@ class Juxtapose extends React.Component {
 							<div className="text">借款范围(元)</div>
 						</div>	
 						<div className="info-list">
-							<div className="info-text">21天~3个月</div>
+							<div className="info-text">{ data.termRangeStr }</div>
 							<div className="text">借款期限</div>
 						</div>	
 						<div className="info-list">
-							<div className="info-text">2日内放款</div>
+							<div className="info-text">{ data.fastLoanValue }</div>
 							<div className="text">放款时间</div>
 						</div>	
 					</div>
