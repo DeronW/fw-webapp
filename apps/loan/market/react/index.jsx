@@ -210,7 +210,7 @@ class Juxtapose extends React.Component {
 			})
             .then(data => {
 				this.setState({
-					listData: data.data.resultList
+					listData: data.resultList
 				})
 				console.log(data)
             })
