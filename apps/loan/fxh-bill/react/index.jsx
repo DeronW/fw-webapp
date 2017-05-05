@@ -26,7 +26,7 @@ class Detail extends React.Component {
                 <div className="header">
                     <div className="back-arrow" onClick={this.clickHandler}></div>
                     <div className="page-name">账单详情</div>
-                    <a className="bill-history-entry">还款记录</a>
+                    {data.haveRepaymentRecord && <a className="bill-history-entry">还款记录</a>}
                 </div>
                 <div className="logo-box">
                     <img className="logo-img" src="images/logo.png"/>
@@ -41,7 +41,7 @@ class Detail extends React.Component {
                                 <span className="return-money-title">借款金额</span>
                             </div>
                             <div className="return-date">
-                                <span className="return-date-day">{data.dueTimeStr}</span>
+                                <span className="return-date-day">{data.productPeriod}</span>
                                 <span className="return-date-title">借款期限</span>
                             </div>
                         </div>
@@ -83,8 +83,10 @@ class Detail extends React.Component {
                         </div>
                     </div>}
                 </div>
-                {(st == 101 || st == 102) &&
+                {st == 102 &&
                 <div className="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}&repaymentid=${data.repaymentid}`}>立即还款</a></div>}
+                {st == 101 &&
+                <div className="pay-back-btn-box"><span>立即还款</span></div>}
             </div>
         )
     }

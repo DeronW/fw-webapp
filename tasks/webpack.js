@@ -1,9 +1,8 @@
-const webpack = require("webpack");
-const path = require('path');
-const util = require('gulp-util');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const webpack = require("webpack")
+const path = require('path')
+const util = require('gulp-util')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = function (site_name, page_name, options) {
     options = options || {};
@@ -27,7 +26,6 @@ module.exports = function (site_name, page_name, options) {
                         presets: [
                             'es2015',
                             'react',
-                            // 'stage-1',
                             'stage-2',
                         ],
                         plugins: [
@@ -52,33 +50,48 @@ module.exports = function (site_name, page_name, options) {
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     //resolve-url-loader may be chained before sass-loader if necessary
-                    use: [
-                        'css-loader',
-                        {
-                            loader: 'less-loader',
-                            options: {
-                                strictMath: true,
-                                noIeCompat: true
-                            }
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            localIdentName: '[name]__[local]--[hash:base64:6]'
                         }
-                    ]
+                    }, {
+                        loader: 'resolve-url-loader',
+                        options: {
+                            debug: options.debug
+                        }
+                    }, {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: true,
+                            strictMath: true,
+                            noIeCompat: true
+                        }
+                    }]
                 })
             }, {
-                test: /.(png|jpg)/,
+                test: /.(png|jpe?g|gif)/i,
                 use: [{
-                    loader: 'file-loader?name=images/[name]-[hash:6].[ext]',
-                    query: ''
+                    loader: 'file-loader',
+                    options: {
+                        hash: 'sha512',
+                        digest: 'hex',
+                        name: '[name]-[hash:6].[ext]'
+                    }
                 }]
             }]
         },
         plugins: [
             new HtmlWebpackPlugin({
                 template: `${page_path}/index.html`
-            }),
-            new ExtractTextPlugin({
-                filename: 'all.css',
-                allChunks: true
             })
+            , new ExtractTextPlugin({
+                filename: options.debug ? 'all.css' : 'all.[contenthash:4].css',
+                allChunks: true,
+                ignoreOrder: true
+            })
+            // , new webpack.NoErrorsPlugin()
         ]
     });
 
