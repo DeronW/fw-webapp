@@ -1,4 +1,5 @@
 import React from 'react'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { Provider } from 'mobx-react'
 import {
     HashRouter as Router,
@@ -20,9 +21,16 @@ export default (stores) => {
         <Provider {...stores} >
             <Switch>
                 <Route path='/login' component={Login} />
-                <Route exact path='/statis/register' component={StatisRegister} />
-                <Route exact path='/statis/apply' component={StatisApply} />
-                <Route exact path='/statis/chart' component={StatisChart} />
+
+                <CSSTransitionGroup
+                    transitionName="carousel"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
+                    <Route exact path='/statis/register' component={StatisRegister} />
+                    <Route exact path='/statis/apply' component={StatisApply} />
+                    <Route exact path='/statis/chart' component={StatisChart} />
+                </CSSTransitionGroup>
+
                 <Route path='/'>
                     <Redirect to='/login' />
                 </Route>

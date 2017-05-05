@@ -32,7 +32,7 @@ export default class Login extends React.Component {
         //         console.log(e.message)
         //     })
 
-        console.log("login success")
+        console.log("fake login success")
         this.setState({ loginSuccess: true })
     }
 
@@ -51,7 +51,7 @@ export default class Login extends React.Component {
                     onChange={this.changeHandler('sms_code')} />
             </div>
             <a styleName="btn-login" onClick={this.loginHandler}>
-                Login
+                登录
             </a>
         </div>
     }
