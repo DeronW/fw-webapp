@@ -6,7 +6,7 @@ const Content = React.createClass({
         window.addEventListener('popstate', () => this.setState({topic: 'index'}))
     },
     topicClickHandler: function (group_title) {
-        history.pushState(null, {}, `/static/wap/faq/index.html?${group_title}`);
+        history.pushState(null, {}, `/static/wap/p2p-faq/index.html?${group_title}`);
         this.setState({topic: group_title})
     },
     getCurrentTopic: function () {
