@@ -87,8 +87,8 @@ const WEIXIN_PAGES = [
     'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
-const JUXTAPOSE = [
-    'juxtapose'
+const MARKET = [
+    'market'
 ]
 
 
@@ -103,7 +103,7 @@ APP_NAMES.push(
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
-    ...JUXTAPOSE
+    ...MARKET
 );
 
 
