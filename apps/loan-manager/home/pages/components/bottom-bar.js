@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 
-import styles from '../../less/bottom-bar.less'
+import styles from '../../css/bottom-bar.css'
 
 @CSSModules(styles)
 class BottomBar extends React.Component {

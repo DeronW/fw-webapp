@@ -8,16 +8,17 @@
     margin: 80px auto;
     width: 400px;
     box-sizing: border-box;
-    input {
-        margin: 20px 0;
-        width: 100%;
-        font-size: 24px;
-        padding: 12px 12px;
-        display: block;
-        position: relative;
-        border-radius: 8px;
-        box-sizing: border-box;
-    }
+}
+
+.input {
+    margin: 20px 0;
+    width: 100%;
+    font-size: 24px;
+    padding: 12px 12px;
+    display: block;
+    position: relative;
+    border-radius: 8px;
+    box-sizing: border-box;
 }
 
 .btn-login {

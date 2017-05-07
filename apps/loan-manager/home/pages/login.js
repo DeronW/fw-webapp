@@ -1,6 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import styles from '../less/login.less'
+import styles from '../css/login.css'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 

@@ -21,20 +21,11 @@ export default (stores) => {
         <Provider {...stores} >
             <Switch>
                 <Route path='/login' component={Login} />
-
-                <CSSTransitionGroup
-                    transitionName="carousel"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}>
-                    <Route exact path='/statis/register' component={StatisRegister} />
-                    <Route exact path='/statis/apply' component={StatisApply} />
-                    <Route exact path='/statis/chart' component={StatisChart} />
-                </CSSTransitionGroup>
-
-                <Route path='/'>
-                    <Redirect to='/login' />
-                </Route>
-                <Route component={NoMatch} />
+                <Route exact path='/statis/register' component={StatisRegister} />
+                <Route exact path='/statis/apply' component={StatisApply} />
+                <Route exact path='/statis/chart' component={StatisChart} />
+                <Route path='/'> <Redirect to='/login' /> </Route>
+                {/*<Route component={NoMatch} />*/}
             </Switch>
         </Provider>
     </Router>

@@ -20,6 +20,7 @@ module.exports = function (site_name, page_name, options) {
         module: {
             rules: [{
                 test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 use: [{
                     loader: 'babel-loader',
                     options: {
@@ -46,7 +47,7 @@ module.exports = function (site_name, page_name, options) {
                     }
                 }]
             }, {
-                test: /\.less$/,
+                test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     //resolve-url-loader may be chained before sass-loader if necessary
@@ -83,6 +84,7 @@ module.exports = function (site_name, page_name, options) {
             }]
         },
         plugins: [
+            new webpack.optimize.UglifyJsPlugin(),
             new HtmlWebpackPlugin({
                 template: `${page_path}/index.html`
             })

@@ -7,7 +7,7 @@ import { Request } from 'fw-javascripts'
 
 import * as Stores from './stores'
 
-import './less/index.less'
+import './css/index.css'
 
 let stores = {
     account: new Stores.Account(Request),

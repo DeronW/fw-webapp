@@ -1,7 +1,7 @@
 import React from 'react'
 
 import CSSModules from 'react-css-modules'
-import styles from '../less/statis-apply.less'
+import styles from '../css/statis-apply.css'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 import BottomBar from './components/bottom-bar'
