@@ -109,6 +109,7 @@ class CityPanel extends React.Component {
             event.currentTarget.offsetHeight)
     }
     render() {
+        let HOT_CITY_LIST = ["北京市", "上海市", "广州市", "深圳市"];
         let alphabet = [];
         for (let i = 65; i < 91; i++)
             alphabet.push(String.fromCharCode(i));
@@ -116,6 +117,13 @@ class CityPanel extends React.Component {
         let city_option = name => {
             let cn = `option-item ${name == this.props.value && 'active'}`
             return <div key={name} className={cn} onClick={
+                () => this.props.select_handler(name)}>
+                {name}
+            </div>
+        }
+
+        let hot_city_option = name => {
+            return <div key={name} className="hot-city-item" onClick={
                 () => this.props.select_handler(name)}>
                 {name}
             </div>
@@ -129,8 +137,19 @@ class CityPanel extends React.Component {
             </div>
         }
 
+        let hot_city_selection = char => {
+            if (!HOT_CITY_LIST[char]) return null;
+            return <div key={char}>
+                <div className="hot-section-title">热门城市</div>
+                <div className="hot-cities">
+                    {HOT_CITY_LIST[char].map(hot_city_option)}
+                </div>
+            </div>
+        }
+
         return <div className="scroll-panel" ref="scroll">
             <div className="city-list">
+                {hot_city_selection}
                 {alphabet.map(city_section)}
                 <div className="quick-select"
                     onTouchStart={this.touchStartHandler}

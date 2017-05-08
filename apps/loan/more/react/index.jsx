@@ -66,7 +66,6 @@ class More extends React.Component{
     render() {
     return (
         <div>
-            <div className="header">放心花</div>
             <img src="images/hotline.jpg" onClick={this.contactShow}/>
             <div className="more-cnt">
                 <div className="more-list">
@@ -117,6 +116,6 @@ class More extends React.Component{
 }
 
 $FW.DOMReady(() => {
+    ReactDOM.render(<Header title={"更多"} />, HEADER_NODE);
     ReactDOM.render(<More />, CONTENT_NODE);
-    ReactDOM.render(<BottomNavBar/>, BOTTOM_NAV_NODE);
 })
