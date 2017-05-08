@@ -8,6 +8,9 @@ const APP_NAMES = [{
 }, {
     name: 'router-auth',
     compiler: 'webpack'
+},{
+    name: 'router-prototype',
+    compiler: 'webpack'
 }]
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
