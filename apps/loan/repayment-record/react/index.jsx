@@ -13,6 +13,11 @@ class RecordList extends React.Component {
         $FW.Event.touchBottom(this.loadMore);
     }
 
+    formatTime = (ms) => {
+        let date = new Date(Number(ms));
+        return date.toLocaleString('zh-Hans-CN', { hour12: false });
+    }
+
     loadMore = (done) => {
         if (this.state.curPage === 0) return done && done();
         $FXH.Post(`${API_PATH}/api/repayment/v1/repaymentrecordlist.json`, {
@@ -22,7 +27,7 @@ class RecordList extends React.Component {
         }).then((data) => {
             let list_temp = [...this.state.list],
                 curPage_temp = this.state.curPage;
-            list_temp.push(...data.repaymentRecordList);
+            list_temp.push(...data.resultList);
             curPage_temp === data.totalPage ?
                 curPage_temp = 0 :
                 curPage_temp ++ ;
@@ -41,11 +46,11 @@ class RecordList extends React.Component {
             <div className="record-list-item" key={item.updateTime}>
                 <div className="left-els">
                     <div className="amount">{item.repaymentAmt.toFixed(2)}</div>
-                    <div className="time">{item.updateTime}</div>
+                    <div className="time">{this.formatTime(item.updateTime)}</div>
                 </div>
                 <div className="right-els">
                     <span>{item.bankShortName}</span>
-                    <span>{`(尾号${item.cardNo})`}</span>
+                    <span>{`(尾号${item.cardNo.slice(-4)})`}</span>
                 </div>
             </div>
         );

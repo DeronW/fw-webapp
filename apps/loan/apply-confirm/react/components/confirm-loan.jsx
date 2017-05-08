@@ -2,7 +2,7 @@ class ConfirmLoan extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            checked: false,
+            checked: true,
             orderGid: null
         }
         this.confirmHandler = this.confirmHandler.bind(this);
@@ -72,4 +72,3 @@ class ConfirmLoan extends React.Component{
     )
 }
 }
-
