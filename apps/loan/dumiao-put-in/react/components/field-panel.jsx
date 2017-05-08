@@ -137,26 +137,24 @@ class CityPanel extends React.Component {
             </div>
         }
 
-        let hot_city_selection = char => {
-            if (!HOT_CITY_LIST[char]) return null;
-            return <div key={char}>
-                <div className="hot-section-title">热门城市</div>
-                <div className="hot-cities">
-                    {HOT_CITY_LIST[char].map(hot_city_option)}
+        return (
+                <div>
+                    <div className="scroll-panel" ref="scroll">
+                        <div className="hot-city-title">热门城市</div>
+                        <div className="hot-cities">
+                            {HOT_CITY_LIST.map(hot_city_option)}
+                        </div>
+                        <div className="city-list">
+                            {alphabet.map(city_section)}
+                            <div className="quick-select"
+                                 onTouchStart={this.touchStartHandler}
+                                 onTouchMove={this.touchMoveHandler}>
+                                {alphabet.map(char => <div key={char}>{char}</div>)}
+                            </div>
+                        </div >
+                    </div>
                 </div>
-            </div>
-        }
+            )
 
-        return <div className="scroll-panel" ref="scroll">
-            <div className="city-list">
-                {hot_city_selection}
-                {alphabet.map(city_section)}
-                <div className="quick-select"
-                    onTouchStart={this.touchStartHandler}
-                    onTouchMove={this.touchMoveHandler}>
-                    {alphabet.map(char => <div key={char}>{char}</div>)}
-                </div>
-            </div >
-        </div>
     }
 }
