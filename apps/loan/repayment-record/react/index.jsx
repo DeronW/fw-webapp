@@ -29,10 +29,10 @@ function RecordList(props) {
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title="还款记录" />, HEADER_NODE);
 
-    let loanUuid = $FW.Format.urlQuery().repaymentUuid;
+    let repaymentid = $FW.Format.urlQuery().repaymentUuid;
     $FW.Post(`${API_PATH}/api/repayment/v1/repaymentrecordlist.json`, {
         sourceType: SOURCE_TYPE,
-        loanUuid: loanUuid
+        repaymentid: repaymentid
     }).then((data) => {
         ReactDOM.render(<RecordList list={data.repaymentRecordList} />, CONTENT_NODE);
     }, e => $FW.Component.Toast(e.message));
