@@ -87,7 +87,7 @@ class Juxtapose extends React.Component {
 }
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={'对比'} show_back=false/>, HEADER_NODE)
+    ReactDOM.render(<Header title={'对比'} show_back={false} />, HEADER_NODE)
 	ReactDOM.render(<Juxtapose />, CONTENT_NODE)
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 })
