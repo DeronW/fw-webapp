@@ -30,7 +30,7 @@ class Register extends React.Component{
             codeToken: '',
             codeText: '获取验证码',
             seeCode: false,
-            checked:false
+            checked: true
         }
         this.phoneChange = this.phoneChange.bind(this);
         this.codeTime = this.codeTime.bind(this);
