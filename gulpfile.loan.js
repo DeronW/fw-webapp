@@ -88,7 +88,8 @@ const WEIXIN_PAGES = [
 ]
 
 const MARKET = [
-    'market'
+    'market',
+    'market-detail'
 ]
 
 

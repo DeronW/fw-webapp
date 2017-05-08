@@ -1,3 +1,14 @@
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 class Juxtapose extends React.Component {
 	constructor() {
 		super()
@@ -39,7 +50,7 @@ class Juxtapose extends React.Component {
 
 		let list = (data, i) => {
 			console.log(data.productLabelList)
-			return <div className="li" key={ i }>
+			return <div className="li" key={ i } onClick={()=>gotoHandler(`/static/loan/market-detail/index.html?productId=${data.productId}`)}>
 					<div className="t">
 						<div className="img-icon">
 							<img src={ data.productLogo } />
@@ -87,7 +98,7 @@ class Juxtapose extends React.Component {
 }
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={'对比'} show_back={false} />, HEADER_NODE)
+    ReactDOM.render(<Header title={'超市'} show_back={false} />, HEADER_NODE)
 	ReactDOM.render(<Juxtapose />, CONTENT_NODE)
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 })
