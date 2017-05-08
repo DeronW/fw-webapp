@@ -26,7 +26,7 @@ class Detail extends React.Component {
                 <div className="header">
                     <div className="back-arrow" onClick={this.clickHandler}></div>
                     <div className="page-name">账单详情</div>
-                    {data.haveRepaymentRecord && <a className="bill-history-entry" href={`/static/loan/repayment-record/index.html?repaymentid=${data.repaymentid}`}>还款记录</a>}
+                    {data.haveRepaymentRecord && <a className="bill-history-entry" href={`/static/loan/repayment-record/index.html?repaymentUuid=${data.repaymentUuid}`}>还款记录</a>}
                 </div>
                 <div className="logo-box">
                     <img className="logo-img" src="images/logo.png"/>
@@ -84,7 +84,7 @@ class Detail extends React.Component {
                     </div>}
                 </div>
                 {st == 102 &&
-                <div className="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}&repaymentid=${data.repaymentid}`}>立即还款</a></div>}
+                <div className="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}&repaymentUuid=${data.repaymentUuid}`}>立即还款</a></div>}
                 {st == 101 &&
                 <div className="pay-back-btn-box"><span>立即还款</span></div>}
             </div>
