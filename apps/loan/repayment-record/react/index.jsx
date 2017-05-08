@@ -22,7 +22,7 @@ class RecordList extends React.Component {
         }).then((data) => {
             let list_temp = [...this.state.list],
                 curPage_temp = this.state.curPage;
-            list_temp.push(...data.repaymentRecordList);
+            list_temp.push(...data.resultList);
             curPage_temp === data.totalPage ?
                 curPage_temp = 0 :
                 curPage_temp ++ ;
