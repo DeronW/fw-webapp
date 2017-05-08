@@ -713,7 +713,7 @@ const CITYLIST = {
   ]
 };
 
-const HOT_CITIES_LIST = ["北京市", "上海市", "广州市", "深圳市"];
+const HOT_CITIES_LIST = ["北京市", "上海市", "广州市", "深圳市", "杭州市"];
 
 var id_mask = n => String(n).replace(/(\d{4})\d{10}(\d{4})/, "$1**********$2");
 var isPhoneNum = str => /^1[3|4|5|7|8]\d{9}$/.test(String(str));

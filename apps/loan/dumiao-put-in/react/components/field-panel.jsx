@@ -109,7 +109,7 @@ class CityPanel extends React.Component {
             event.currentTarget.offsetHeight)
     }
     render() {
-        let HOT_CITY_LIST = ["北京市", "上海市", "广州市", "深圳市"];
+        let HOT_CITY_LIST = ["北京市", "上海市", "广州市", "深圳市", "杭州市"];
         let alphabet = [];
         for (let i = 65; i < 91; i++)
             alphabet.push(String.fromCharCode(i));
