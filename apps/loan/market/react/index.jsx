@@ -3,13 +3,13 @@ class Juxtapose extends React.Component {
 		super()
 		this.state = {
 			listData: null
-		}	
+		}
 	}
 	componentDidMount() {
 		$FXH.Post(`${API_PATH}/api/product/v1/productDisplayList.json`, {
 				pageIndex: 1,
 				pageSize: 100,
-				productDisplayType: 2	
+				productDisplayType: 2
 			})
             .then(data => {
 				this.setState({
@@ -34,7 +34,7 @@ class Juxtapose extends React.Component {
 			return <div className={ 'tag-icon ' + tagClass }>
 						{ data.labelValue }
 				</div>
-			
+
 		}
 
 		let list = (data, i) => {
@@ -50,7 +50,7 @@ class Juxtapose extends React.Component {
 								{
 									data.productLabelList.map((data, index) => {
 										return tagType(data)
-									})	
+									})
 								}
 							</div>
 						</div>
@@ -59,15 +59,15 @@ class Juxtapose extends React.Component {
 						<div className="info-list">
 							<div className="info-text">{ data.amountStr }</div>
 							<div className="text">借款范围(元)</div>
-						</div>	
+						</div>
 						<div className="info-list">
 							<div className="info-text">{ data.termRangeStr }</div>
 							<div className="text">借款期限</div>
-						</div>	
+						</div>
 						<div className="info-list">
 							<div className="info-text">{ data.fastLoanValue }</div>
 							<div className="text">放款时间</div>
-						</div>	
+						</div>
 					</div>
 				</div>
 		}
@@ -77,16 +77,17 @@ class Juxtapose extends React.Component {
 				<div className="list">
 					{
 						this.state.listData != null ? this.state.listData.map((data, index) => {
-							return list(data, index) 
+							return list(data, index)
 						}) : null
 					}
-				</div>	
-			</div>	
+				</div>
+			</div>
 		)
 	}
-} 
+}
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={'对比'} />, HEADER_NODE)
+    ReactDOM.render(<Header title={'对比'} show_back="false"/>, HEADER_NODE)
 	ReactDOM.render(<Juxtapose />, CONTENT_NODE)
+    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 })
