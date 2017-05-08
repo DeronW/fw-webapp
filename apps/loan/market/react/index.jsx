@@ -49,8 +49,7 @@ class Juxtapose extends React.Component {
 		}
 
 		let list = (data, i) => {
-			console.log(data.productLabelList)
-			return <div className="li" key={ i } onClick={()=>gotoHandler(`/static/loan/market-detail/index.html?productId=${data.productId}`)}>
+			return <div className="li" key={ i } onClick={()=>gotoHandler(`/static/loan/market-detail/index.html?productId=${data.productId}&productName=${data.productName}`)}>
 					<div className="t">
 						<div className="img-icon">
 							<img src={ data.productLogo } />
@@ -98,6 +97,7 @@ class Juxtapose extends React.Component {
 }
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle('超市');
     ReactDOM.render(<Header title={'超市'} show_back={false} />, HEADER_NODE)
 	ReactDOM.render(<Juxtapose />, CONTENT_NODE)
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
