@@ -14,12 +14,13 @@ module.exports = function (site_name, page_name, options) {
         entry: `${page_path}/entry.js`,
         output: {
             path: `${build_path}`,
-            filename: 'javascripts/bundle.min.js'
+            filename: 'javascripts/[name].[chunkhash:6].js'
         },
-        devtool: 'source-map',
+        devtool: options.debug ? 'eval-source-map' : 'source-map',
         module: {
             rules: [{
                 test: /\.(js|jsx)$/,
+                // exclude: /node_modules/,
                 use: [{
                     loader: 'babel-loader',
                     options: {
@@ -46,7 +47,7 @@ module.exports = function (site_name, page_name, options) {
                     }
                 }]
             }, {
-                test: /\.less$/,
+                test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     //resolve-url-loader may be chained before sass-loader if necessary
@@ -77,13 +78,16 @@ module.exports = function (site_name, page_name, options) {
                     options: {
                         hash: 'sha512',
                         digest: 'hex',
-                        name: '[name]-[hash:6].[ext]'
+                        name: 'images/[name]-[hash:6].[ext]'
                     }
                 }]
             }]
         },
         plugins: [
-            new HtmlWebpackPlugin({
+            new webpack.optimize.UglifyJsPlugin({
+                compress: !options.debug
+            })
+            , new HtmlWebpackPlugin({
                 template: `${page_path}/index.html`
             })
             , new ExtractTextPlugin({
@@ -91,6 +95,13 @@ module.exports = function (site_name, page_name, options) {
                 allChunks: true,
                 ignoreOrder: true
             })
+            , new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                minChunks: function (module) {
+                    // this assumes your vendor imports exist in the node_modules directory
+                    return module.context && module.context.indexOf('node_modules') !== -1;
+                }
+            }),
             // , new webpack.NoErrorsPlugin()
         ]
     });

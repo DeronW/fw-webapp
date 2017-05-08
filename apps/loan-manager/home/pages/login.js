@@ -1,8 +1,10 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import styles from '../less/login.less'
+import styles from '../css/login.css'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
+
+import * as $FWC from 'fw-components'
 
 @inject('account') @observer @CSSModules(styles)
 export default class Login extends React.Component {
@@ -31,9 +33,9 @@ export default class Login extends React.Component {
         //     .catch(e => {
         //         console.log(e.message)
         //     })
-
+$FWC.showAlert('fake login')
         console.log("fake login success")
-        this.setState({ loginSuccess: true })
+        // this.setState({ loginSuccess: true })
     }
 
     render() {
@@ -45,9 +47,13 @@ export default class Login extends React.Component {
         return <div>
             <img styleName="bg-logo" src={require('../images/login/logo.png')} />
             <div styleName="form">
-                <input value={this.state.phone} placeholder="Phone number"
+                <input styleName="input"
+                    value={this.state.phone}
+                    placeholder="手机号码"
                     onChange={this.changeHandler('phone')} />
-                <input value={this.state.code} placeholder="SMS verify code"
+                <input styleName="input"
+                    value={this.state.code}
+                    placeholder="短信验证码"
                     onChange={this.changeHandler('sms_code')} />
             </div>
             <a styleName="btn-login" onClick={this.loginHandler}>
