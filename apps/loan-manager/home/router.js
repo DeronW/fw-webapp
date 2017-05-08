@@ -1,5 +1,4 @@
 import React from 'react'
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup'
 import { Provider } from 'mobx-react'
 import {
     HashRouter as Router,
@@ -24,8 +23,8 @@ export default (stores) => {
                 <Route exact path='/statis/register' component={StatisRegister} />
                 <Route exact path='/statis/apply' component={StatisApply} />
                 <Route exact path='/statis/chart' component={StatisChart} />
-                <Route path='/'> <Redirect to='/login' /> </Route>
-                {/*<Route component={NoMatch} />*/}
+                <Route path='/' component={() => <Redirect to='/login' />} />
+                <Route component={NoMatch} />
             </Switch>
         </Provider>
     </Router>
