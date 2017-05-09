@@ -9,48 +9,6 @@ function gotoHandler(link, need_login) {
     }
 }
 
-const TITLE = [
-    '申请条件',
-    '所需资料',
-    '授权认证',
-    '审核方式',
-    '还款方式'
-]
-
-const INFO = [
-    [
-        '中国大陆公民，年龄22-55周岁；手机号实名认证且在网时间超过6个月；有正常使用的信用卡；芝麻信用分600分以上。'
-    ],
-    [
-        '用户基本信息、信用卡、手机号、芝麻信用分。'
-    ],
-    [
-        '手机运营商、银行卡、芝麻信用分。'
-    ],
-    [
-        '纯线上审核。'
-    ],
-    [
-        '用户可选择自动扣款，也可主动还款。'
-    ]
-]
-
-class BorrowMoneyDatailList extends React.Component {
-    render() {
-        let item = (data, index) => {
-            return <div className="datail-list" key={index}>
-                <div className="title">
-                    <div className="icon" style={
-                        { backgroundImage: `url(images/icon-${index}.png)` }}>
-                    </div>
-                    <div className="text">{data}</div>
-                </div>
-                <div className="info-block">{INFO[index]} </div>
-            </div>
-        }
-        return <div className=""> {TITLE.map(item)} </div>
-    }
-}
 
 class BorrowMoney extends React.Component {
     constructor(props) {
@@ -60,10 +18,13 @@ class BorrowMoney extends React.Component {
         }
         this.clickHandler = this.clickHandler.bind(this);
     }
-    componentDidMount = () => {
+    componentDidMount(){
         let pid = $FW.Format.urlQuery().productId;
         $FXH.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}&sourceType=${SOURCE_TYPE}`)
-            .then(data => this.setState({ product: data}));
+            .then(data => {
+                window.DATA = data
+                this.setState({product: data})
+            });
     }
     clickHandler(){
         if($FW.Browser.inIOS()){
@@ -75,6 +36,21 @@ class BorrowMoney extends React.Component {
     }
     render() {
         let labelList = this.state.product.productLabelList;
+        if(this.state.product.descInfo){
+            var itemList = JSON.parse(this.state.product.descInfo);
+            console.log(itemList)
+        }
+        let item = (data, index) => {
+            return <div className="datail-list" key={index}>
+                <div className="title">
+                    <div className="icon" style={
+                        { backgroundImage: `url(images/icon-${data.type}.png)` }}>
+                    </div>
+                    <div className="text">{data.name}</div>
+                </div>
+                <div className="info-block">{data.content} </div>
+            </div>
+        }
         return (
             <div className="">
                 <div className="">
@@ -115,7 +91,10 @@ class BorrowMoney extends React.Component {
                         </div>
                     </div>
                 </div>
-                <BorrowMoneyDatailList product={this.props.product} />
+                <div className="detail-list-wrap">
+                    {itemList && itemList.map(item)}
+                </div>
+
                 <div className="footer">
                     <Nav className="btn" onClick={this.clickHandler}>马上下载</Nav>
                 </div>
