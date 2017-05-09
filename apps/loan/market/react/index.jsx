@@ -83,7 +83,7 @@ class Juxtapose extends React.Component {
 		}
 
 		return (
-			<div className="list-wrap">
+			<div className={!$FW.Browser.inFXHApp()? "list-wrap": ""}>
 				<div className="list">
 					{
 						this.state.listData != null ? this.state.listData.map((data, index) => {
