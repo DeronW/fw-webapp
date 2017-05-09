@@ -56,12 +56,9 @@ class Register extends React.Component{
 
         if (err) return $FW.Component.Toast(err);
 
-        let encPassword = $FW.Enc(password);
-
         $FW.Post(`${API_PATH}/api/userBase/v1/login.json`, {
             mobile: PHONE,
             password: password,
-            // encryptedPassword: encPassword,
             sourceType: SOURCE_TYPE
         }).then(data => {
             let dict = data.userLogin;
