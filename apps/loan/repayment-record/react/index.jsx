@@ -43,10 +43,10 @@ class RecordList extends React.Component {
             </div>
         );
         let generate_list_item = (item) => (
-            <div className="record-list-item" key={item.updateTime}>
+            <div className="record-list-item" key={item.createTimeStr}>
                 <div className="left-els">
-                    <div className="amount">{item.repaymentAmt.toFixed(2)}</div>
-                    <div className="time">{this.formatTime(item.updateTime)}</div>
+                    <div className="amount">{item.repaymentAmtStr}</div>
+                    <div className="time">{item.createTimeStr}</div>
                 </div>
                 <div className="right-els">
                     <span>{item.bankShortName}</span>
