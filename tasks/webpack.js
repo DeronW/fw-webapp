@@ -4,8 +4,7 @@ const util = require('gulp-util')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-module.exports = function (site_name, page_name, options) {
-    options = options || {};
+module.exports = function (site_name, page_name, CONFIG) {
 
     const page_path = path.resolve(__dirname, `../apps/${site_name}/${page_name}`),
         build_path = path.resolve(__dirname, `../build/${site_name}/${page_name}/`);
@@ -16,7 +15,7 @@ module.exports = function (site_name, page_name, options) {
             path: `${build_path}`,
             filename: 'javascripts/[name].[chunkhash:6].js'
         },
-        devtool: options.debug ? 'eval-source-map' : 'source-map',
+        devtool: CONFIG.debug ? 'eval-source-map' : 'source-map',
         module: {
             rules: [{
                 test: /\.(js|jsx)$/,
@@ -40,9 +39,8 @@ module.exports = function (site_name, page_name, options) {
                     loader: `${__dirname}/loaders/swig.js`,
                     options: {
                         locals: {
-                            DEBUG: options.debug,
-                            API_PATH: options.api_path,
-                            ENV: options.enviroument
+                            API_PATH: CONFIG.api_path,
+                            ENV: CONFIG.environment
                         }
                     }
                 }]
@@ -60,7 +58,7 @@ module.exports = function (site_name, page_name, options) {
                     }, {
                         loader: 'resolve-url-loader',
                         options: {
-                            debug: options.debug
+                            debug: CONFIG.debug
                         }
                     }, {
                         loader: 'less-loader',
@@ -85,13 +83,13 @@ module.exports = function (site_name, page_name, options) {
         },
         plugins: [
             new webpack.optimize.UglifyJsPlugin({
-                compress: !options.debug
+                compress: !CONFIG.debug
             })
             , new HtmlWebpackPlugin({
                 template: `${page_path}/index.html`
             })
             , new ExtractTextPlugin({
-                filename: options.debug ? 'all.css' : 'all.[contenthash:4].css',
+                filename: CONFIG.debug ? 'all.css' : 'all.[contenthash:4].css',
                 allChunks: true,
                 ignoreOrder: true
             })
@@ -107,7 +105,7 @@ module.exports = function (site_name, page_name, options) {
     });
 
     return new Promise(function (resolve, reject) {
-        if (options.watch) {
+        if (CONFIG.watch) {
             compiler.watch({
                 // watch options
             }, (err, stats) => {
@@ -117,7 +115,7 @@ module.exports = function (site_name, page_name, options) {
         } else {
             compiler.run((err, stats) => {
                 err ?
-                    util.log(err) :
+                    util.log(util.colors.red(err)) :
                     util.log(util.colors.green('webpack compile complete'))
                 resolve()
             })

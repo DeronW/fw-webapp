@@ -2,14 +2,19 @@ const eslint = require('gulp-eslint');
 
 const PROJ = 'loan-manager';
 
+// const APP_NAMES = [{
+//     name: 'home',
+//     compiler: 'webpack'
+// }, {
+//     name: 'router-auth',
+//     compiler: 'webpack'
+// },{
+//     name: 'router-prototype',
+//     compiler: 'webpack'
+// }]
+
 const APP_NAMES = [{
     name: 'home',
-    compiler: 'webpack'
-}, {
-    name: 'router-auth',
-    compiler: 'webpack'
-},{
-    name: 'router-prototype',
     compiler: 'webpack'
 }]
 
@@ -18,12 +23,14 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     APP_NAMES.forEach(i => {
         generate_task(PROJ, i, {
             debug: true,
+            environment: 'development',
             api_path: CONSTANTS[PROJ].dev_api_path
         });
 
         generate_task(PROJ, i, {
             cmd_prefix: 'pack',
             api_path: '',
+            environment: 'production',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`
         });
     });

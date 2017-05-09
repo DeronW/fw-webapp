@@ -16,8 +16,10 @@
 </head>
 <body>
 
-<!--接口地址前缀,结尾需要添加斜线-->
+<!-- 接口地址前缀 -->
 <input type="hidden" id="api-path" value="{{ API_PATH }}"/>
+<!-- ENV -->
+<input type="hidden" id="env" value="{{ ENV }}"/>
 
 {% block content %}
 <div id="cnt"></div>
