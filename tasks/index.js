@@ -69,16 +69,16 @@ function generate_webpack_task(site_name, page_name, CONFIG) {
         })
     }
 
-    if (CONFIG.debug) {
+    if (CONFIG.environment === 'development') {
         gulp.task(`${site_name}:${page_name}`, gulp.series(compile_webpack))
         gulp.task(`${site_name}:${page_name}:watch`, gulp.series(watch_webpack))
-    } else {
-        gulp.task(`${site_name}:${CONFIG.cmd_prefix}:${page_name}`,
-            gulp.series(compile_webpack))
     }
-    gulp.task(`${site_name}:pack:${page_name}:revision`,
-        gulp.series(`${site_name}:${page_name}`, copy2cdn, revision2cdn)
-    )
+    if (CONFIG.environment === 'production') {
+        let pack_task = `${site_name}:${CONFIG.cmd_prefix}:${page_name}`
+        gulp.task(pack_task, gulp.series(compile_webpack))
+        gulp.task(`${pack_task}:revision`,
+            gulp.series(pack_task, copy2cdn, revision2cdn))
+    }
 }
 
 let generate_task = function (site_name, page_name, configs) {
