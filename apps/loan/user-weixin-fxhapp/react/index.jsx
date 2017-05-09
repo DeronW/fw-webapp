@@ -22,7 +22,7 @@ class WeixinCon extends React.Component {
                     <div className="p2">2、或您可直接打开微信>添加朋友</div>
                     {/*<div className="p3">搜索“fxhuaba”公众号</div>*/}
                     <div className="p3">搜索“fxhuaba”公众号</div>
-                    {/* <div className="p3">搜索“fxhuaba”公众号<span className="copy-qr" onClick={this.copyHandler}>点击复制公众号</span></div> */}
+                    <div className="p3">搜索“fxhuaba”公众号<span className="copy-qr" onClick={this.copyHandler}>点击复制公众号</span></div>
                     {/* <div className="p2 p4">3、点击此处<a href="/static/loan/weixin-download/index.html">下载APP</a></div> */}
                 </div>
             </div>
