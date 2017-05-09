@@ -46,7 +46,7 @@ class RecordList extends React.Component {
             <div className="record-list-item" key={item.createTime}>
                 <div className="left-els">
                     <div className="amount">{item.repaymentAmtStr}</div>
-                    <div className="time">{item.updateTimeStr}</div>
+                    <div className="time">{item.createTimeStr}</div>
                 </div>
                 <div className="right-els">
                     <span>{item.bankShortName}</span>
