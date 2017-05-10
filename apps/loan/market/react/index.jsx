@@ -90,7 +90,7 @@ class Juxtapose extends React.Component {
 }
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={'现金超市'} show_back={false} />, HEADER_NODE)
+    ReactDOM.render(<Header title="超市" show_back={false} />, HEADER_NODE)
 	ReactDOM.render(<Juxtapose />, CONTENT_NODE)
     if(!$FW.Browser.inFXHApp()){
         ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
