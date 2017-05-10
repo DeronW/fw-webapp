@@ -116,7 +116,7 @@ class MajorUserInfo extends React.Component {
         tips && $FW.Component.Toast(tips)
     }
     render() {
-        let {link_a, link_b} = this.state
+        let { link_a, link_b } = this.state
         return <div className="info-display-block">
             <a className="user-info-display-wrap" onClick={this.clickHandler}
                 href={link_a}>
@@ -204,7 +204,7 @@ class UserInfoWrap extends React.Component {
     componentDidMount = () => {
         $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
             this.setState({ phoneNum: data.mobile });
-        }, e => { $FW.Component.Toast(e.message) });
+        });
     }
 
     render() {
