@@ -72,7 +72,7 @@ class BorrowMoney extends React.Component {
                     </div>
                     <div className="borrow-money-detail-data">
                         <div className="list">
-                            <div className="name-text">{this.state.product.monthRateStr}</div>
+                            <div className="name-text">{this.state.product.loanRateStr}</div>
                             <div className="data-text">
                                 每月费用
                             </div>
