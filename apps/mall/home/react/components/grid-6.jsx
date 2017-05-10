@@ -30,7 +30,7 @@ const Grid_6 = React.createClass({
         return (
             <div className="theme-1">
                 <a className="activity-theme" href= '/static/mall/product-list/index.html?searchSourceType=0&category=mobileDigital&title=手机数码'>
-                    <img src="/static/mall/product-list/images/mobileDigital.jpg"/></a>
+                    <img src="/static/mall/product-list/images/_mobileDigital.jpg"/></a>
                 <div className="theme-product-wrap">
                     {products.map(theme_product_item)}
                 </div>
