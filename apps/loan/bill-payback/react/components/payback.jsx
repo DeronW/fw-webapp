@@ -8,15 +8,15 @@ class PayBack extends React.Component{
         };
     }
 
-    // componentDidMount() {
-    //     if (this.props.loanLeftAmount <= 200) {
-    //         let repaymentAmount = this.props.loanLeftAmount.toFixed(2);
-    //         this.setState({
-    //             repaymentAmount: repaymentAmount.toString(),
-    //             disableInput: true
-    //         });
-    //     }
-    // }
+    componentDidMount() {
+        if (this.props.loanLeftAmount < 200) {
+            let repaymentAmount = this.props.loanLeftAmount.toFixed(2);
+            this.setState({
+                repaymentAmount: repaymentAmount.toString(),
+                disableInput: true
+            });
+        }
+    }
 
     bankListHandler = () => {
         this.props.callbackBankListShow(true);
