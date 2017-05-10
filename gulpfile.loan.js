@@ -47,7 +47,7 @@ const OUTSIDE_PAGES = [
 // 账单模块
 const BILL_PAGES = [
     'bill', //账单首页
-    'bill-history', //历史账单
+    // 'bill-history', //历史账单 // depracated
     'bill-payback', //还款页面
     'repayment-record' //还款列表页面
 ]

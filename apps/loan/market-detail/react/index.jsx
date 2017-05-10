@@ -18,25 +18,25 @@ class BorrowMoney extends React.Component {
         }
         this.clickHandler = this.clickHandler.bind(this);
     }
-    componentDidMount(){
+    componentDidMount() {
         let pid = $FW.Format.urlQuery().productId;
         $FXH.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}&sourceType=${SOURCE_TYPE}`)
             .then(data => {
                 window.DATA = data
-                this.setState({product: data})
+                this.setState({ product: data })
             });
     }
-    clickHandler(){
-        if($FW.Browser.inIOS()){
+    clickHandler() {
+        if ($FW.Browser.inIOS()) {
             window.location.href = this.state.product.iosSoftwareUrl;
         }
-        if($FW.Browser.inAndroid()){
+        if ($FW.Browser.inAndroid()) {
             window.location.href = this.state.product.androidSoftwareUrl;
         }
     }
     render() {
         let labelList = this.state.product.productLabelList;
-        if(this.state.product.descInfo){
+        if (this.state.product.descInfo) {
             var itemList = JSON.parse(this.state.product.descInfo);
             console.log(itemList)
         }
@@ -55,16 +55,16 @@ class BorrowMoney extends React.Component {
             <div className="">
                 <div className="">
                     <div className="borrow-money-list">
-                        <div className="icon-block"> <img src={this.state.product.productLogo}/> </div>
+                        <div className="icon-block"> <img src={this.state.product.productLogo} /> </div>
                         <div className="info">
                             <div className="t">
-                                <span className="title-text">{ this.state.product.productName }</span>
-                                <div className="text"> 借款范围（{ this.state.product.amountStr }） </div>
+                                <span className="title-text">{this.state.product.productName}</span>
+                                <div className="text"> 借款范围（{this.state.product.amountStr}） </div>
                             </div>
                             <div className="b">
                                 <div className="tag" >
                                     {labelList && labelList.map((data, index) => {
-                                        return  <img src={ "images/tag-"+ data.labelType  +".png"} key={ index } />
+                                        return <img src={"images/tag-" + data.labelType + ".png"} key={index} />
                                     })}
                                 </div>
                             </div>
