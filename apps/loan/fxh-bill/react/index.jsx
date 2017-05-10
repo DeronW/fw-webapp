@@ -41,7 +41,7 @@ class Detail extends React.Component {
                                 <span className="return-money-title">借款金额</span>
                             </div>
                             <div className="return-date">
-                                <span className="return-date-day">{data.productPeriod}</span>
+                                <span className="return-date-day">{data.productPeriod}天</span>
                                 <span className="return-date-title">借款期限</span>
                             </div>
                         </div>
