@@ -106,6 +106,7 @@ class BorrowMoney extends React.Component {
 $FW.DOMReady(() => {
     let productName = $FW.Format.urlQuery().productName;
     NativeBridge.setTitle(productName);
+    NativeBridge.showHeader();
     ReactDOM.render(<Header title={productName} />, HEADER_NODE);
     ReactDOM.render(<BorrowMoney />, CONTENT_NODE)
 })
