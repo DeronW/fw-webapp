@@ -53,6 +53,7 @@ class PayBack extends React.Component{
     }
 
     handleInput = (e) => {
+        if (/\..{3}/.test(e.target.value)) return;
         this.setState({repaymentAmount: e.target.value});
     }
 
