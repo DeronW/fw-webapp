@@ -111,7 +111,7 @@ class SetCashCard extends React.Component{
                         <div className="input">
                             <input onChange={this.changeBankNum} ref="cardNumberInput"
                                    onBlur={this.blurBankNum}
-                                   value={bankNum} type="text" placeholder="输入储蓄卡号" />
+                                   value={bankNum} type="number" placeholder="输入储蓄卡号" />
                         </div>
 
                         <div className="list-bank-li">
