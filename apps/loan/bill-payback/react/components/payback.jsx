@@ -85,6 +85,7 @@ class PayBack extends React.Component{
                                                                                      src="images/right-arrow.jpg" /></span>
                 </div>
             </div>
+            <p className="repayment-tip">当前只支持使用储蓄卡还款，请确保卡内余额充足</p>
             { (this.props.extendStatus == 102 || this.props.extendStatus == 103) &&
                 <div className="pay-back-btn-wrap">
                     <div className="pay-back-btn" onClick={this.paybackHandler}>立即还款</div>
