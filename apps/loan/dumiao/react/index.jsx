@@ -64,7 +64,7 @@ class BorrowMoney extends React.Component {
             tryOtherLoanPopShow: false,
             canMessageShow: false,
             tryOtherLoanMsg: '',
-            canStatus: '',
+            canStatus: null,
             canMessage: '',
             loanUuid: null
         }
@@ -106,7 +106,7 @@ class BorrowMoney extends React.Component {
             location.href = '/static/loan/user-card-set/index.html';
         } else if (canStatus == 2) {
             location.href = '/static/loan/dumiao-put-in/index.html?pid=' + $FW.Format.urlQuery().pid;
-        } else if (canStatus == 0) {
+        } else if (canStatus === 0) {
             this.setState({ dumiaoEnterPopShow: true });
         } else if (canStatus == 1) {
             this.setState({ canMessageShow: true });
