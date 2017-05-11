@@ -52,8 +52,8 @@ class MainPanel extends React.Component {
                     <img src={decodeURIComponent(product.iconUrl)}/>
                 </div>
                 <div className="product-title">
-                    <span className="product-1st-title">{product.firstTitle}</span>
-                    <span className="product-2nd-title">{product.secondTitle}</span>
+                    <div className="product-1st-title">{product.firstTitle}</div>
+                    <div className="product-2nd-title">{product.secondTitle}</div>
                 </div>
             </div>
         )
