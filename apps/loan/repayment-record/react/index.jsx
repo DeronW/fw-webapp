@@ -15,8 +15,8 @@ class RecordList extends React.Component {
 
     formatTime = (ms) => {
         let jsonDate = new Date(Number(ms)).toJSON();
-        let YMD = jsonDate.slice(0, 11);
-        let HMS = jsonDate.slice(12, 20);
+        let YMD = jsonDate.slice(0, 10);
+        let HMS = jsonDate.slice(11, 19);
         return `${YMD} ${HMS}`;
     }
 
