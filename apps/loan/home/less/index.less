@@ -123,6 +123,10 @@ body {
 }
 
 .other-products-item {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   width: 100%;
   height: 140px;
@@ -144,8 +148,18 @@ body {
   }
 
   .product-title {
+    display: -webkit-inline-box;
+    display: -moz-inline-box;
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
     display: inline-flex;
+    -webkit-box-orient: vertical;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-around;
     justify-content: space-around;
     padding: 24px 0;
 
