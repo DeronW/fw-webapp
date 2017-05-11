@@ -14,8 +14,10 @@ class RecordList extends React.Component {
     }
 
     formatTime = (ms) => {
-        let date = new Date(Number(ms));
-        return date.toLocaleString('zh-Hans-CN', { hour12: false });
+        let jsonDate = new Date(Number(ms)).toJSON();
+        let YMD = jsonDate.slice(0, 11);
+        let HMS = jsonDate.slice(12, 20);
+        return `${YMD} ${HMS}`;
     }
 
     loadMore = (done) => {
