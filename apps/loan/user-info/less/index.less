@@ -31,14 +31,7 @@ body {
 }
 
 .info-tab {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-around;
-  justify-content: space-around;
+  display: table;
   width: 100%;
   height: @info-tab--height;
   padding: 0;
@@ -48,12 +41,23 @@ body {
   font-size: 27px;
 
   .info-tab-item {
-    display: inline-block;
+    position: relative;
+    display: table-cell;
+    float: left;
+    width: 33.33%;
     height: 100%;
-    line-height: @info-tab--height;
-    borderBottom: 3px solid transparent;
-    borderTop: 3px solid transparent;
-    listStyle: none;
+    list-style: none;
+
+    span {
+      display: block;
+      width: 135px;
+      height: 100%;
+      margin: auto;
+      line-height: @info-tab--height;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid transparent;
+      text-align: center;
+    }
   }
 }
 
@@ -95,11 +99,6 @@ body {
       }
 
       .right-align-container {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
 
         .info-text-input {
           display: inline-block;
@@ -129,7 +128,7 @@ body {
         }
 
         .select-label {
-          display: inline-block;
+          float: right;
           width: 420px;
           height: 100%;
           background-color: transparent;
@@ -139,7 +138,7 @@ body {
         }
 
         .right-arrow-container {
-          display: inline-block;
+          float: right;
           position: relative;
           width: 36px;
           height: 100%;
@@ -235,18 +234,12 @@ body {
 
 .hot-cities-wrap {
   .hot-cities {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-wrap: wrap;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
+    height: 220px;
     padding: 20px 0 0 24px;
     background-color: #fff;
 
     .hot-city {
+      float: left;
       width: 210px;
       height: 80px;
       line-height: 80px;
