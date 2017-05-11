@@ -73,7 +73,7 @@ class Detail extends React.Component {
                             <span>{data.dueTimeStr}</span>
                         </div>
                         <div>
-                            <span>到期划款日</span>
+                            <span>到期还款日</span>
                             <span>{data.dueTimeStr}</span>
                         </div>
                     </div>}
