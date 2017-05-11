@@ -49,7 +49,7 @@ class MainPanel extends React.Component {
                 key={product.firstTitle}
                 onClick={() => { window.location.href = product.forwardUrl }}>
                 <div className="product-icon">
-                    <img src={product.iconUrl}/>
+                    <img src={decodeURIComponent(product.iconUrl)}/>
                 </div>
                 <div className="product-title">
                     <span className="product-1st-title">{product.firstTitle}</span>
