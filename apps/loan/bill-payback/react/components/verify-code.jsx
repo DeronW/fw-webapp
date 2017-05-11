@@ -74,8 +74,8 @@ class VerifyCode extends React.Component{
                     <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                     <div className="verify-popup-title">短信验证</div>
                     <div className="verify-popup-tip">
-                        已向手机号(尾号{$FW.Store.get('phone').slice(-4)})发送短信验证码
-                        {/* 已向手机号(尾号{this.props.bankName}({this.props.bankNo.slice(-4)}))发送短信验证码。 */}
+                        {/* 已向手机号(尾号{$FW.Store.get('phone').slice(-4)})发送短信验证码 */}
+                        已向{this.props.bankName}(尾号{this.props.bankNo.slice(-4)})预留的手机号发送短信验证码
                     </div>
                     <div className="verify-input">
                         <input className="sms-input" type="number" name="number" value={this.state.value}
