@@ -44,7 +44,10 @@ class MainPanel extends React.Component {
         let jump_link = $FW.Browser.inApp() ? `/static/loan/user-weixin-jrgcapp/index.html` : `/static/loan/weixin-download/index.html`;
 
         let generate_other_products = (product) => (
-            <div className="other-products-item">
+            <div
+                className="other-products-item"
+                key={product.firstTitle}
+                onClick={() => { window.location.href = product.forwardUrl }}>
                 <div className="product-icon">
                     <img src={product.iconUrl}/>
                 </div>
