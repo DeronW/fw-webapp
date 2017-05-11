@@ -58,7 +58,7 @@ class MainPanel extends React.Component {
         return (
             <div>
                 <div className="main-panel">
-                    <a onClick={()=>gotoHandler({jump_link})} className="banner">
+                    <a onClick={()=>gotoHandler(jump_link)} className="banner">
                         <img src="images/banner.png" />
                     </a>
                     <a onClick={()=>gotoHandler(`/static/loan/fxh/index.html?pid=${main_product.productId}`)} className="top-info">
