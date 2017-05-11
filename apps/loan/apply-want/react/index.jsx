@@ -9,13 +9,14 @@ class WantLoan extends React.Component{
         let loanNum = query.loanNum;
         let creditLine = query.creditLine;
         let orioleOrderGid = query.orioleOrderGid;
-        this.state={
+        this.state = {
             loanNum: loanNum,
             creditLine: creditLine,
             orioleOrderGid: orioleOrderGid,
             orderGid: null,
             loanGid: null,
-            showToZH: false
+            showToZH: false,
+            failMsg: ''
         }
         this.changeHandler = this.changeHandler.bind(this);
         this.loanHandler = this.loanHandler.bind(this);
@@ -73,7 +74,7 @@ class WantLoan extends React.Component{
                 location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`;
             }
         },(err) => {
-            if (err.code === 24005) return this.setState({showToZH: true})
+            if (err.code === 24005) return this.setState({showToZH: true, failMsg: err.message})
             $FW.Component.Toast(err.message);
         });
     }
@@ -107,8 +108,8 @@ class WantLoan extends React.Component{
                     <div className="mask">
                         <div className="pop">
                             <span className="tip-1">审核失败</span>
-                            <span className="tip-2">请提供更多授信资料</span>
-                            <Nav className="to-zhangzhong" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>去授信</Nav>
+                            <span className="tip-2">{this.state.failMsg}</span>
+                            <Nav className="to-zhangzhong" href={`/static/loan/home/index.html`}>尝试其他借款</Nav>
                             <img className="close-icon" src="images/close-icon.jpg" onClick={() => {this.setState({showToZH: false})}}></img>
                         </div>
                     </div>

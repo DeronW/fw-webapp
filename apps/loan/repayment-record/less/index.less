@@ -29,9 +29,6 @@ body {
   background-color: #fff;
 
   .record-list-item {
-    display: inline-flex;
-    justify-content: space-between;
-    width: 100%;
     height: @record-list-item--height;
     padding-right: 30px;
     background-color: inherit;
@@ -42,10 +39,9 @@ body {
     }
 
     .left-els {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      float: left;
       height: 100%;
+      padding: 18px 0;
 
       .amount {
         color: #6aa4f0;
@@ -59,6 +55,8 @@ body {
     }
 
     .right-els {
+      float: right;
+
       span {
         display: inline-block;
         height: @record-list-item--height;

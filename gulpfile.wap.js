@@ -42,16 +42,6 @@ const PROTOCOL_PAGES = [
     'protocol-trade-service', //徽商银行网络交易资金账户服务三方协议
 ]
 
-// const CIRCLE_PAGES = [
-//     //圈子相关页面
-//     'circle-tender-complete', //直融标成功
-//     'circle-transfer-complete', //债券转让成功
-//     'circle-register-complete', //签到成功
-//     'circle-team-data', //小队数据
-//     'circle-person-data', //个人数据
-//     'circle-score-stream', //工分流水
-// ]
-
 const NOTICE_PAGES = [
     // 内容展示页面
     'notice-corporate-structure', // 信息披露 公司结构
@@ -103,18 +93,21 @@ const SHOUSHAN = [
     'shoushan-cash-records'
 ]
 
-
 const DEVELOPING_PAGES = [
     'fa-xian',
     'p2p-fa-xian',//微金发现页面
 ]
-const OUTSIDE_PAGES=[
+
+const OUTSIDE_PAGES = [
     'outside-register-aisidi' //爱施德注册页面
 ]
-const P2P=[
+
+const P2P = [
     'p2p-invite', //P2P邀请返利, 邀请人
-	'p2p-interest-reward', //P2P年化加息奖励
-	'p2p-vip-prerogative'
+    'p2p-interest-reward', //P2P年化加息奖励
+    'p2p-vip-prerogative',
+    'p2p-policy',//政策法规页面
+    'p2p-pdf',
 ]
 APP_NAMES.push(
     ...USER_PAGES,
@@ -125,7 +118,7 @@ APP_NAMES.push(
     ...DEVELOPING_PAGES,
     ...SHOUSHAN,
     ...OUTSIDE_PAGES,
-	...P2P
+    ...P2P
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
@@ -140,20 +133,28 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         `${PROJ}/fw-common.js`
     ];
 
+    let default_options = {
+        include_components: [
+            'use-strict.jsx', 'loading.jsx', 'alert.jsx', `${PROJ}/header.jsx`,
+            'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
+        ],
+        include_javascripts: [
+            'use-strict.js',
+            `${PROJ}/fw-ajax-error-handler.js`,
+            `${PROJ}/fw-common.js`
+        ]
+    }
+
     APP_NAMES.forEach(i => {
-        generate_task(PROJ, i, {
+        generate_task(PROJ, i, Object.assign({}, default_options, {
             debug: true,
             api_path: CONSTANTS[PROJ].dev_api_path,
-            include_components: COMMON_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS
-        });
-        generate_task(PROJ, i, {
+        }))
+        generate_task(PROJ, i, Object.assign({}, default_options, {
             api_path: "",
             cmd_prefix: 'pack',
-            cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
-            include_components: COMMON_COMPONENTS,
-            include_javascripts: INCLUDE_JAVASCRIPTS
-        });
+            cdn_prefix: `/static/${PROJ}/${i.name || i}/`
+        }))
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));

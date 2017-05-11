@@ -57,7 +57,7 @@ const Grid_2 = React.createClass({
             <div className="theme-1">
                 <a className="activity-theme"
                    href='/static/mall/product-list/index.html?searchSourceType=0&category=diet&title=饮食'>
-                    <img src="/static/mall/product-list/images/diet.jpg"/></a>
+                    <img src="/static/mall/home/images/diet.jpg"/></a>
                 <div className="theme-product-wrap">
                     {products.map(theme_product_item)}
                 </div>

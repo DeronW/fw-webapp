@@ -9,7 +9,7 @@ class PayBack extends React.Component{
     }
 
     componentDidMount() {
-        if (this.props.loanLeftAmount <= 200) {
+        if (this.props.loanLeftAmount < 200) {
             let repaymentAmount = this.props.loanLeftAmount.toFixed(2);
             this.setState({
                 repaymentAmount: repaymentAmount.toString(),
@@ -48,11 +48,12 @@ class PayBack extends React.Component{
         if (repaymentAmount === 0) return $FW.Component.Toast("请输入还款金额");
         if (repaymentAmount === NaN) return $FW.Component.Toast("还款金额输入不合法！");
         if (repaymentAmount > loanLeftAmount) return $FW.Component.Toast("还款金额不得超过待还金额！");
-        if (repaymentAmount < 100) return $FW.Component.Toast("还款金额不能低于100.00元！");
+        if (repaymentAmount < 100 && loanLeftAmount >= 200) return $FW.Component.Toast("还款金额不能低于100.00元！");
         return true;
     }
 
     handleInput = (e) => {
+        if (/\..{3}/.test(e.target.value)) return;
         this.setState({repaymentAmount: e.target.value});
     }
 
@@ -84,6 +85,7 @@ class PayBack extends React.Component{
                                                                                      src="images/right-arrow.jpg" /></span>
                 </div>
             </div>
+            <p className="repayment-tip">当前只支持使用储蓄卡还款，请确保卡内余额充足</p>
             { (this.props.extendStatus == 102 || this.props.extendStatus == 103) &&
                 <div className="pay-back-btn-wrap">
                     <div className="pay-back-btn" onClick={this.paybackHandler}>立即还款</div>

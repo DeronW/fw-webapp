@@ -1,17 +1,36 @@
 .bottom-bar {
-  display: flex;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: white;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: white;
 }
 
 .btn {
-  flex: 1;
-  display: block;
-  text-align: center;
-  font-size: 24px;
-  color: gray;
+    flex: 1;
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    color: gray;
+    filter: grayscale(1);
+}
+
+.icon-chart {
+    display: block;
+    height: 60px;
+    background: transparent url('../images/icons/nav-chart.png') no-repeat center center;
+}
+
+.icon-apply {
+    display: block;
+    height: 60px;
+    background: transparent url('../images/icons/nav-apply.png') no-repeat center center;
+}
+
+.icon-register {
+    display: block;
+    height: 60px;
+    background: transparent url('../images/icons/nav-register.png') no-repeat center center;
 }

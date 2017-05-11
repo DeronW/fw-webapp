@@ -16,11 +16,30 @@ export default class Login extends React.Component {
     state = {
         phone: '',
         sms_code: '',
+        countdown: 0,
         loginSuccess: false
     }
 
     changeHandler = key => e => {
         this.setState({ [key]: e.target.value })
+    }
+
+    clearPhoneHandler = () => {
+        this.setState({ phone: '' })
+    }
+
+    getSMSCodeHandler = () => {
+        this.setState({ countdown: 60 }, this.startCountingDown)
+    }
+
+    startCountingDown = () => {
+        let ct = this.state.countdown;
+        setTimeout(() => {
+            if (ct > 0) {
+                this.setState({ countdown: ct - 1 })
+                this.startCountingDown()
+            }
+        }, 1000)
     }
 
     loginHandler = e => {
@@ -33,20 +52,26 @@ export default class Login extends React.Component {
         //     .catch(e => {
         //         console.log(e.message)
         //     })
-$FWC.showAlert('fake login')
+        $FWC.showAlert('fake login')
         console.log("fake login success")
-        // this.setState({ loginSuccess: true })
+        this.setState({ loginSuccess: true })
     }
 
     render() {
+        let { countdown } = this.state;
 
-        if (this.state.loginSuccess) {
-            return <Redirect to={'/statis/register'} />
-        }
+        if (this.state.loginSuccess)
+            return <Redirect to={'/statis/register'} />;
+
+        let ct = countdown ? `${countdown}s` : '获取验证码';
 
         return <div>
             <img styleName="bg-logo" src={require('../images/login/logo.png')} />
             <div styleName="form">
+                <i styleName="icon-close" onClick={this.clearPhoneHandler}></i>
+                <i styleName="icon-code"></i>
+                <i styleName="icon-phone"></i>
+                <a styleName="countdown" onClick={this.getSMSCodeHandler}>{ct}</a>
                 <input styleName="input"
                     value={this.state.phone}
                     placeholder="手机号码"

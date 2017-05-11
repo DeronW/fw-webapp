@@ -16,7 +16,8 @@ class Detail extends React.Component {
                 '0': 'icon1', '1': 'icon1',
                 '2': 'icon2', '3': 'icon2',
                 '5': 'icon2', '100':'icon4',
-                '101': 'icon3', '102': 'icon3'
+                '101': 'icon3', '102': 'icon3',
+                '103': 'icon5'
             }
             return d[status] && <div className={d[status]}></div>
         }
@@ -69,21 +70,21 @@ class Detail extends React.Component {
                     {(st == 100 || st == 101 || st == 102 || st == 103) && <div className="loan-detail-box">
                         <div>
                             <span>借款时间</span>
-                            <span>{data.loanTimeStr}</span>
+                            <span>{data.dueTimeStr}</span>
                         </div>
                         <div>
-                            <span>到期划款日</span>
+                            <span>到期还款日</span>
                             <span>{data.dueTimeStr}</span>
                         </div>
                     </div>}
                     {(st == 0 || st == 1 || st ==2 || st == 3 || st == 5) && <div className="loan-detail-box">
                         <div>
                             <span>借款时间</span>
-                            <span>{data.loanTimeStr}</span>
+                            <span>{data.dueTimeStr}</span>
                         </div>
                     </div>}
                 </div>
-                {st == 102 &&
+                {(st == 102 || st == 103) &&
                 <div className="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}&repaymentUuid=${data.repaymentUuid}`}>立即还款</a></div>}
                 {st == 101 &&
                 <div className="pay-back-btn-box"><span>立即还款</span></div>}

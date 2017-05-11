@@ -6,6 +6,7 @@ import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 import BottomBar from './components/bottom-bar'
 
+
 @inject('statis_chart') @observer @CSSModules(styles)
 class StatisChart extends React.Component {
 
@@ -14,8 +15,9 @@ class StatisChart extends React.Component {
     }
 
     render() {
-        return <div>
-            Statis Chart
+        return <div styleName="statis-chart">
+            <div styleName="bg"></div>
+            <div styleName="txt">COMMING SOON</div>
             <BottomBar />
         </div>
     }

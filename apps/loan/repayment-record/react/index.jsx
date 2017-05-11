@@ -14,8 +14,10 @@ class RecordList extends React.Component {
     }
 
     formatTime = (ms) => {
-        let date = new Date(Number(ms));
-        return date.toLocaleString('zh-Hans-CN', { hour12: false });
+        let jsonDate = new Date(Number(ms)).toJSON();
+        let YMD = jsonDate.slice(0, 10);
+        let HMS = jsonDate.slice(11, 19);
+        return `${YMD} ${HMS}`;
     }
 
     loadMore = (done) => {
@@ -43,10 +45,10 @@ class RecordList extends React.Component {
             </div>
         );
         let generate_list_item = (item) => (
-            <div className="record-list-item" key={item.updateTime}>
+            <div className="record-list-item" key={item.createTime}>
                 <div className="left-els">
-                    <div className="amount">{item.repaymentAmt.toFixed(2)}</div>
-                    <div className="time">{this.formatTime(item.updateTime)}</div>
+                    <div className="amount">{item.repaymentAmtStr}</div>
+                    <div className="time">{this.formatTime(item.createTime)}</div>
                 </div>
                 <div className="right-els">
                     <span>{item.bankShortName}</span>

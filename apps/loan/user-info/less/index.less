@@ -31,7 +31,13 @@ body {
 }
 
 .info-tab {
-  display: inline-flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-around;
   justify-content: space-around;
   width: 100%;
   height: @info-tab--height;
@@ -69,7 +75,11 @@ body {
     }
 
     .input-wrap {
-      display: inline-flex;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
       position: relative;
       margin-left: @input-wrap--margin-left;
       width: ~"calc(100% - @{input-wrap--margin-left})";
@@ -85,7 +95,11 @@ body {
       }
 
       .right-align-container {
-        display: inline-flex;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
 
         .info-text-input {
           display: inline-block;
@@ -140,6 +154,7 @@ body {
             margin: auto;
             border-top: 3px solid #ccc;
             border-left: 3px solid #ccc;
+            -webkit-transform: rotate(135deg);
             transform: rotate(135deg);
           }
         }
@@ -220,9 +235,13 @@ body {
 
 .hot-cities-wrap {
   .hot-cities {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
-    // justify-content: space-around;
-    // align-content: space-around;
+    -webkit-box-wrap: wrap;
+    -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
     padding: 20px 0 0 24px;
     background-color: #fff;

@@ -1,0 +1,24 @@
+.bg {
+    display: block;
+    margin: 200px auto 0;
+    width: 323px;
+    height: 202px;
+    background: transparent url('../images/statis-chart/comming-soon.png') no-repeat center center;
+}
+
+.statis-chart {
+    height: 100%;
+    background: #eee;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.txt {
+    font-size: 30px;
+    margin: 20px auto;
+    text-align: center;
+    color: #333;
+}

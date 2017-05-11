@@ -113,15 +113,12 @@ class Register extends React.Component{
 
         if (err) return $FW.Component.Toast(err);
 
-        let encPassword = $FW.Enc(password);
-
         $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
             channelCode:$FW.Format.urlQuery().channelCode,
             codeToken: codeToken,
             invitationCode: $FW.Format.urlQuery().code,
             mobile: phoneNum,
             password: password,
-            // encryptedPassword: encPassword,
             verifyCode: code,
             sourceType: SOURCE_TYPE
         }).then(data => {

@@ -26,7 +26,6 @@ class Header extends React.Component {
         this.props.back_handler
             ? this.props.back_handler()
             : window.history.back();
-        // : window.history.go(-1);
     }
 
     componentDidMount() {
@@ -114,7 +113,7 @@ class Header extends React.Component {
 
         var ua = navigator.userAgent;
         // 如果页面在app中打开, 则不显示网页的头部导航
-        if (ua.indexOf('EasyLoan888') >= 0)
+        if (ua.indexOf('EasyLoan888') >= 0 && this.props.enable !== 'force')
             return null;
 
         // 如果在微信中打开, 除了个别页面外, 也不显示头部导航
