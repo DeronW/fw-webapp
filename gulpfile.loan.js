@@ -92,6 +92,9 @@ const MARKET = [
     'market-detail'
 ]
 
+const CREDIT_CARD = [
+    'credit-card-products'
+]
 
 APP_NAMES.push(
     ...USER_PAGES,
@@ -104,7 +107,8 @@ APP_NAMES.push(
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
-    ...MARKET
+    ...MARKET,
+    ...CREDIT_CARD
 );
 
 
