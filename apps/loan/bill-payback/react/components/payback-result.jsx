@@ -55,7 +55,7 @@ class PayBackResult extends React.Component{
                 <div className="tip-bottom"> 还款金额：<span>{this.state.repaymentAmount.toFixed(2)}</span>元</div>
                 <a className="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
                     提升额度</a>
-                <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/home/index.html`)}>申请用钱</div>
+                <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/fxh/index.html`)}>申请用钱</div>
             </div>}
             {payback_status >= 2 &&
             <div>
