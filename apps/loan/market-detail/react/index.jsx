@@ -2,7 +2,7 @@ function gotoHandler(link, need_login) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
-    if ($FW.Browser.inApp()) {
+    if ($FW.Browser.inFXHApp()) {
         NativeBridge.goto(link, need_login)
     } else {
         location.href = encodeURI(link);
@@ -105,6 +105,7 @@ class BorrowMoney extends React.Component {
 
 $FW.DOMReady(() => {
     let productName = $FW.Format.urlQuery().productName;
+    NativeBridge.setTitle(productName);
     ReactDOM.render(<Header enable='force' title={productName} />, HEADER_NODE);
     ReactDOM.render(<BorrowMoney />, CONTENT_NODE)
 })

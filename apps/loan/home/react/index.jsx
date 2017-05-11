@@ -41,6 +41,8 @@ class MainPanel extends React.Component {
         let main_product = this.props.products[0],
             sub_products = this.props.products.slice(1)
 
+        let jump_link = $FW.Browser.inApp() ? "/static/loan/user-weixin-jrgcapp/index.html" : "/static/loan/weixin-download/index.html";
+
         let generate_other_products = (product) => (
             <div className="other-products-item">
                 <div className="product-icon">
@@ -56,7 +58,7 @@ class MainPanel extends React.Component {
         return (
             <div>
                 <div className="main-panel">
-                    <a onClick={()=>gotoHandler("/static/loan/weixin-download/index.html")} className="banner">
+                    <a onClick={()=>gotoHandler({jump_link})} className="banner">
                         <img src="images/banner.png" />
                     </a>
                     <a onClick={()=>gotoHandler(`/static/loan/fxh/index.html?pid=${main_product.productId}`)} className="top-info">
