@@ -41,7 +41,7 @@ class MainPanel extends React.Component {
         let main_product = this.props.products[0],
             sub_products = this.props.products.slice(1)
 
-        let jump_link = $FW.Browser.inApp() ? "/static/loan/user-weixin-jrgcapp/index.html" : "/static/loan/weixin-download/index.html";
+        let jump_link = $FW.Browser.inApp() ? `/static/loan/user-weixin-jrgcapp/index.html` : `/static/loan/weixin-download/index.html`;
 
         let generate_other_products = (product) => (
             <div className="other-products-item">
