@@ -107,6 +107,7 @@ const P2P = [
     'p2p-interest-reward', //P2P年化加息奖励
     'p2p-vip-prerogative',
     'p2p-policy',//政策法规页面
+    'p2p-pdf',
 ]
 APP_NAMES.push(
     ...USER_PAGES,
