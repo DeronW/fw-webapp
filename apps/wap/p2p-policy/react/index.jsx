@@ -23,8 +23,8 @@ class PolicyBox extends React.Component {
             url: "12"
         }, { text: "13.网络借贷资金存管业务指引（正式版）", url: "13" }]
         let flmap = (item, index) => {
-            return <div className="policy-link">
-                <a href={`https://static.9888.cn/pdf/wap/policy/${item.text}.pdf`} className="link-detail">{item.text}</a>
+            return <div className="policy-link" key={index}>
+                <a target="_blank" type="application/pdf" href={`https://static.9888.cn/pdf/wap/policy/${item.text}.pdf`} className="link-detail">{item.text}</a>
             </div>
         }
         return <div className="policy-box">
