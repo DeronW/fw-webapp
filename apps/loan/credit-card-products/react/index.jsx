@@ -1,9 +1,20 @@
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inFXHApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 function BankList() {
     let generate_bank_items = (bank) => (
         <div
             className="bank-item"
             key={bank.name}
-            onClick={() => { window.location.href = bank.url }}>
+            onClick={() => {gotoHandler(bank.url)}}>
             <div className="bank-logo-container">
                 <img src={`images/${bank.name}-bank-icon.jpg`}/>
             </div>
