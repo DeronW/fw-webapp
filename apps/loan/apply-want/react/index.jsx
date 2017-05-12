@@ -66,7 +66,7 @@ class WantLoan extends React.Component{
                 loanAmount: this.state.loanNum,
                 orioleOrderGid: orioleOrderGid,
                 productId: 1,
-                withdrawCardGid: filtered[0].cardGid
+                withdrawCardGid: filtered[0] && filtered[0].cardGid
             }
         ).then((data) => {
             this.setState({ loanGid: data.loanGid, orderGid: data.orderGid });
