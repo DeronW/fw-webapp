@@ -47,7 +47,7 @@ class MainPanel extends React.Component {
             <div
                 className="other-products-item"
                 key={product.firstTitle}
-                onClick={() => { window.location.href = decodeURIComponent(product.forwardUrl) }}>
+                onClick={() => { gotoHandler(product.forwardUrl)}}>
                 <div className="product-icon">
                     <img src={decodeURIComponent(product.iconUrl)}/>
                 </div>
@@ -62,7 +62,7 @@ class MainPanel extends React.Component {
             <div>
                 <div className="main-panel">
                     <a onClick={()=>gotoHandler(jump_link)} className="banner">
-                        <img src="images/banner.png" />
+                        <img src="images/banner.jpg" />
                     </a>
                     <a onClick={()=>gotoHandler(`/static/loan/fxh/index.html?pid=${main_product.productId}`)} className="top-info">
                         <div className="logo"> <img src="images/logo.png" /> </div>
