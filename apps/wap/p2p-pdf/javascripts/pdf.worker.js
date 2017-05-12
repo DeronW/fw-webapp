@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-(function (root, factory) {
+(function (root, factory){
  'use strict';
  if (typeof define === 'function' && define.amd) {
   define('pdfjs-dist/build/pdf.worker', ['exports'], factory);
@@ -37044,6 +37044,7 @@
        }
       };
       request.open('GET', url, true);
+      request.setRequestHeader("Origin", '*');
       request.send(null);
      });
     }

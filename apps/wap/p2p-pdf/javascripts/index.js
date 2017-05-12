@@ -4,6 +4,7 @@ var url = 'https://static.9888.cn/pdf/wap/pdf-html/2.%E4%B8%AD%E5%8D%8E%E4%BA%BA
 // script does not work).
 // PDFJS.disableWorker = true;
 // The workerSrc property shall be specified.
+// var url = 'images/one.pdf';
 PDFJS.workerSrc = 'javascripts/pdf.worker.js';
 
 // Asynchronous download of PDF
