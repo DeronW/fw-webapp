@@ -66,6 +66,7 @@ const BANK_LIST = [
 ]
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle("信用卡申请");
     ReactDOM.render(<Header title="信用卡申请" />, HEADER_NODE)
     ReactDOM.render(<BankList />, CONTENT_NODE)
 })
