@@ -70,7 +70,7 @@ class Detail extends React.Component {
                     {(st == 100 || st == 101 || st == 102 || st == 103) && <div className="loan-detail-box">
                         <div>
                             <span>借款时间</span>
-                            <span>{data.dueTimeStr}</span>
+                            <span>{data.loanTimeStr}</span>
                         </div>
                         <div>
                             <span>到期还款日</span>
@@ -80,7 +80,7 @@ class Detail extends React.Component {
                     {(st == 0 || st == 1 || st ==2 || st == 3 || st == 5) && <div className="loan-detail-box">
                         <div>
                             <span>借款时间</span>
-                            <span>{data.dueTimeStr}</span>
+                            <span>{data.loanTimeStr}</span>
                         </div>
                     </div>}
                 </div>
