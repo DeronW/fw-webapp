@@ -40,7 +40,9 @@ class Juxtapose extends React.Component {
 				tagClass = 'quota-tag'
 			} else if (data.labelType == 3) {
 				tagClass = 'speed-tag'
-			}
+			} else if (data.labelType == 4) {
+                tagClass = 'withdraw-tag'
+            }
 
 			return <div className={ 'tag-icon ' + tagClass }>
 						{ data.labelValue }
