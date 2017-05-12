@@ -16,12 +16,8 @@ export default class UIStore {
     switchActiveType = (type) => { this.activeType = type }
 
     getCode = (phone) => {
-        // request for verification code
-        // request(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
-        //     mobile: phone,
-        //     userOperationType: 3,
-        //     sourceType: SOURCE_TYPE
-        // })
+        if (!this.codeAvail) return
+        // TODO: request
         let counter = setInterval(() => {
             if (this.codeAvailAfter === 1) {
                 clearInterval(counter);

@@ -11,10 +11,20 @@ export default class Register extends React.Component {
             <div>
                 <input
                     value={this.props.registerInfo.phone}
-                    onChange={ this.handleChange('phone') }/>
+                    onChange={ this.handleChange('phone') }
+                    placeholder="手机号" />
                 <input
-                    value={this.props.registerInfo.code}
-                    onChange={ this.handleChange('code') }/>
+                    value={this.props.registerInfo.smsCode}
+                    onChange={ this.handleChange('smsCode') }
+                    placeholder="验证码" />
+                <div
+                    onClick={ () => {this.props.uiStores.getCode(this.props.registerInfo.phone)} } >
+                    {this.props.uiStores.codeAvail ? "获取验证码" : this.props.uiStores.codeAvailAfter}
+                </div>
+                <input
+                    value={this.props.registerInfo.password}
+                    onChange={ this.handleChange('password') }
+                    placeholder="密码" />
             </div>
         )
     }
