@@ -53,7 +53,7 @@ const BANK_LIST = [
     }, {
         "name": "zhongguo",
         "url": "https://apply.mcard.boc.cn/apply/6n2URb",
-        "openArea": "全国"
+        "openArea": "上海"
     }, {
         "name": "huaqi",
         "url": "https://www.citibank.com.cn/sim/ICARD/forms/shortform/index.html?ecid=DIYQMCNCCACNFX01",
