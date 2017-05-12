@@ -78,7 +78,7 @@ class BorrowMoney extends React.Component {
                             </div>
                         </div>
                         <div className="list">
-                            <div className="name-text">{this.state.product.termRangeStr}</div>
+                            <div className="name-text">{this.state.product.termRangeStr}{this.state.product.termRangeType == 1 ? "天" : "个月"}</div>
                             <div className="data-text">
                                 期限范围
 						</div>
