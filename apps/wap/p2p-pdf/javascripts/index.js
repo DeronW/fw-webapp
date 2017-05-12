@@ -1,4 +1,6 @@
-var url = 'https://static.9888.cn/pdf/wap/pdf-html/2.%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD%E5%B9%BF%E5%91%8A%E6%B3%95.pdf?b';
+var index=location.search.indexOf("=");
+var link = location.search.slice(index+1);;
+var url = "https://static.9888.cn/pdf/wap/policy/"+link;
 // Disable workers to avoid yet another cross-origin issue (workers need
 // the URL of the script to be loaded, and dynamically loading a cross-origin
 // script does not work).

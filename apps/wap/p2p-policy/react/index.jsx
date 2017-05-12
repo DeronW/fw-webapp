@@ -1,7 +1,7 @@
 class PolicyBox extends React.Component {
     render() {
-        let fl = [{ text: "1.中华人民共和国网络安全法", url: "1" },
-        { text: "2.中华人民共和国广告法", url: "2" }, {
+        let fl = [{ text: "1.中华人民共和国网络安全法", url: "https://m.9888.cn/static/wap/p2p-pdf/index.html?file='1.中华人民共和国网络安全法.pdf'" },
+        { text: "2.中华人民共和国广告法", url: "https://m.9888.cn/static/wap/p2p-pdf/index.html?file='2.中华人民共和国广告法.pdf'" }, {
             text: "3.中华人民共和国电子签名法",
             url: "3"
         }, { text: "4.中国人民共和国反洗钱法", url: "4" }, {
@@ -24,7 +24,7 @@ class PolicyBox extends React.Component {
         }, { text: "13.网络借贷资金存管业务指引（正式版）", url: "13" }]
         let flmap = (item, index) => {
             return <div className="policy-link" key={index}>
-                <a target="_blank" type="application/pdf" href={`https://static.9888.cn/pdf/wap/policy/${item.text}.pdf`} className="link-detail">{item.text}</a>
+                <a target="_blank" type="application/pdf" href={item.url} className="link-detail">{item.text}</a>
             </div>
         }
         return <div className="policy-box">
