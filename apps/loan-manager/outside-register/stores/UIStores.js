@@ -1,18 +1,17 @@
-import { computed } from 'mobx'
-import { extendObservable } from 'mobx-react'
+import { extendObservable, computed } from 'mobx'
 
 export default class UIStore {
-    extendObservable(this, {
-        activeType: 'phone',
-        codeAvailAfter: 60,
-        showPassword: false
-    });
-
-    @computed codeAvail = this.codeAvailAfter === 60;
 
     constructor(request) {
         this.request = request;
+        extendObservable(this, {
+            activeType: 'phone',
+            codeAvailAfter: 60,
+            showPassword: false
+        });
     }
+
+    @computed get codeAvail() { return this.codeAvailAfter === 60 };
 
     switchActiveType = (type) => { this.activeType = type }
 

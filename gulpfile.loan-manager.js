@@ -13,10 +13,15 @@ const PROJ = 'loan-manager';
 //     compiler: 'webpack'
 // }]
 
-const APP_NAMES = [{
-    name: 'home',
-    compiler: 'webpack'
-}]
+const APP_NAMES = [
+    {
+        name: 'home',
+        compiler: 'webpack'
+    }, {
+        name: 'outside-register',
+        compiler: 'webpack'
+    }
+]
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
 

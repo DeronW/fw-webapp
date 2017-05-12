@@ -2,14 +2,13 @@ import { extendObservable } from 'mobx'
 
 export default class RegInfo {
 
-    extendObservable(this, {
-        phone: null,
-        smsCode: null,
-        password: null
-    });
-
     constructor(request) {
         this.request = request;
+        extendObservable(this, {
+            phone: '',
+            smsCode: '',
+            password: ''
+        });
     }
 
     handleInput = (type, value) => { this[type] = value }
