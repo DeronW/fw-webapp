@@ -47,7 +47,7 @@ class MainPanel extends React.Component {
             <div
                 className="other-products-item"
                 key={product.firstTitle}
-                onClick={() => { window.location.href = decodeURIComponent(product.forwardUrl) }}>
+                onClick={() => { gotoHandler(product.forwardUrl)}}>
                 <div className="product-icon">
                     <img src={decodeURIComponent(product.iconUrl)}/>
                 </div>
