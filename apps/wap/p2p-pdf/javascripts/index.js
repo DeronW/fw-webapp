@@ -1,5 +1,5 @@
 var index=location.search.indexOf("=");
-var link = location.search.slice(index+1);;
+var link = location.search.slice(index+1);
 var url = "https://static.9888.cn/pdf/wap/pdf-html/"+link;
 // Disable workers to avoid yet another cross-origin issue (workers need
 // the URL of the script to be loaded, and dynamically loading a cross-origin
