@@ -9,10 +9,13 @@ export default class Register extends React.Component {
     render() {
         return (
             <div>
-                <input
-                    value={this.props.registerInfo.phone}
-                    onChange={ this.handleChange('phone') }
-                    placeholder="手机号" />
+                <div>
+                    <input
+                        value={this.props.registerInfo.phone}
+                        onChange={ this.handleChange('phone') }
+                        placeholder="手机号" />
+                    <img />
+                </div>
                 <input
                     value={this.props.registerInfo.smsCode}
                     onChange={ this.handleChange('smsCode') }
