@@ -16,8 +16,7 @@ class Detail extends React.Component {
                 '0': 'icon1', '1': 'icon1',
                 '2': 'icon2', '3': 'icon2',
                 '5': 'icon2', '100':'icon4',
-                '101': 'icon3', '102': 'icon3',
-                '103': 'icon5'
+                '101': 'icon3', '102': 'icon3'
             }
             return d[status] && <div className={d[status]}></div>
         }
