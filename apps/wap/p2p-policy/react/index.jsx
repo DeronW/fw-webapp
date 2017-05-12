@@ -19,7 +19,7 @@ class PolicyBox extends React.Component {
            ]
         let policy_list_method = (item, index) => {
             return <div className="policy-link" key={index}>
-                <a target="_blank" type="application/pdf" href={base_url+item}
+                <a target="_blank" type="application/pdf" href={base_url+item+'.pdf'}
                     className="link-detail">{item}</a>
             </div>
         }
