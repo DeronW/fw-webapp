@@ -33,7 +33,7 @@ class Header extends React.Component {
     }
 
     render() {
-        let fontSize = '40px';
+        let fontSize = '36px';
         if (this.props.title && this.props.title.length > 7)
             fontSize = '32px';
         let _style_header_fixed = {
