@@ -1,5 +1,12 @@
-function gotoHandler(link) {
-    location.href = encodeURI(link);
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inFXHApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
 }
 
 class Juxtapose extends React.Component {
@@ -33,7 +40,9 @@ class Juxtapose extends React.Component {
 				tagClass = 'quota-tag'
 			} else if (data.labelType == 3) {
 				tagClass = 'speed-tag'
-			}
+			} else if (data.labelType == 4) {
+                tagClass = 'withdraw-tag'
+            }
 
 			return <div className={ 'tag-icon ' + tagClass }>
 						{ data.labelValue }
@@ -90,8 +99,10 @@ class Juxtapose extends React.Component {
 }
 
 $FW.DOMReady(() => {
-    NativeBridge.setTitle('现金超市');
-    ReactDOM.render(<Header title={'现金超市'} show_back={false} />, HEADER_NODE)
+    NativeBridge.setTitle("超市");
+    if(!$FW.Browser.inFXHApp()){
+        ReactDOM.render(<Header enable='force' title="超市" show_back={false} />, HEADER_NODE)
+    }
 	ReactDOM.render(<Juxtapose />, CONTENT_NODE)
     if(!$FW.Browser.inFXHApp()){
         ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);

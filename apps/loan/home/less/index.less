@@ -1,18 +1,24 @@
-body {
-    background-color: #ececec;
+// vars and mixins
+
+// containing block should better be a positioned element
+.center-element {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
-.main-panel {
-    padding-bottom: 160px;
+body {
+  background-color: #ececec;
 }
 
 .banner {
+    width:100%;
     height: 306px;
     background:#44adf0;
     display: block;
-    img {
-        float: left;
-    }
 }
 
 .top-info {
@@ -110,4 +116,45 @@ body {
         margin: -30px 0 0 0;
         background: url(../images/next-a.png) no-repeat center;
     }
+}
+
+.other-products-list {
+  margin-bottom: 144px;
+}
+
+.other-products-item {
+  width: 100%;
+  height: 140px;
+  background-color: #fff;
+
+  .product-icon {
+    float: left;
+    position: relative;
+    width: 120px;
+    height: 100%;
+    margin-left: 21px;
+    margin-right: 10px;
+
+    img {
+      width: 100px;
+      height: 100px;
+      .center-element;
+    }
+  }
+
+  .product-title {
+    float: left;
+    padding: 24px 0;
+
+    .product-1st-title {
+      color: #333;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .product-2nd-title {
+      color: #999;
+      font-size: 26px;
+    }
+  }
 }

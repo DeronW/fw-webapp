@@ -359,7 +359,7 @@ window.onload = function () {
         }
     }
 
-    $FW.getJSONP("https://www.9888.cn/dataTopics/data.shtml", (data)=> {
+    $FW.getJSONP("https://www.9888.cn/dataTopics/data.shtml", function(data) {
         //截止日期前一天
         document.querySelector(".infoTimeMobile span").innerText = data.data.date;
         //计算总额

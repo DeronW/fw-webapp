@@ -12,7 +12,8 @@ class PayBackWrap extends React.Component{
         }
 
         let filtered = cashBank.filter(isRealNameBindCard)[0];
-        let cardGid = filtered.cardGid;
+        let cardGid = filtered && filtered.cardGid || "";
+        let bankNo = filtered && filtered.cardNo || "";
         this.state={
             paybackShow: true,
             bankCardListShow: false,
@@ -20,8 +21,8 @@ class PayBackWrap extends React.Component{
             payBackResultShow: false,
             cardGid: cardGid,
             repaymentAmount: this.props.loanLeftAmount,
-            bankName: filtered.bankShortName,
-            bankNo: filtered.cardNo,
+            bankName: filtered && filtered.bankShortName,
+            bankNo: bankNo,
             selectedBankName: null,
             index: 0,
             cardType: 0,

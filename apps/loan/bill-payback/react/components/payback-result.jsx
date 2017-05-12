@@ -4,7 +4,9 @@ class PayBackResult extends React.Component{
         this.state={
             payback_status: null,
             fail_reason:null,
-            repaymentGid: this.props.repaymentGid
+            repaymentGid: this.props.repaymentGid,
+            repaymentAmount: null,
+            loanLeftAmount: null
         }
         this.queryResult = this.queryResult.bind(this);
     }
@@ -22,7 +24,9 @@ class PayBackResult extends React.Component{
         }).then((data) => {
             this.setState({
                 payback_status: data.status,
-                fail_reason:data.failReason
+                fail_reason: data.failReason,
+                repaymentAmount: data.repaymentAmount,
+                loanLeftAmount: data.loanLeftAmount
             });
         }, e => $FW.Component.Toast(e.message));
     }
@@ -47,11 +51,11 @@ class PayBackResult extends React.Component{
             </div>}
             {payback_status == 1 &&
             <div className="payback-result-success-tip">
-                <div className="tip-top">欢迎再次使用!</div>
-                <div className="tip-bottom"> 还款金额：<span>{this.props.paybackNum.toFixed(2)}</span>元</div>
+                <div className="tip-top">还有{this.state.loanLeftAmount.toFixed(2)}元未还，请记得准时还款！</div>
+                <div className="tip-bottom"> 还款金额：<span>{this.state.repaymentAmount.toFixed(2)}</span>元</div>
                 <a className="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
                     提升额度</a>
-                <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/home/index.html`)}>申请用钱</div>
+                <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/fxh/index.html`)}>申请用钱</div>
             </div>}
             {payback_status >= 2 &&
             <div>
@@ -69,4 +73,3 @@ class PayBackResult extends React.Component{
     )
 }
 }
-

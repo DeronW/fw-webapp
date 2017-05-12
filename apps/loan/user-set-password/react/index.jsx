@@ -27,7 +27,7 @@ class SetPassword extends React.Component{
             countdown: 0,
             plainCode: false,
             codeToken: codeToken,
-            checked: false,
+            checked: true,
             inviteCode: ''
         }
         this.changeCode = this.changeCode.bind(this);
