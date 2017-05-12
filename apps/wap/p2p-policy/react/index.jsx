@@ -1,7 +1,7 @@
 class PolicyBox extends React.Component {
     render() {
-        let fl = [{ text: "1.中华人民共和国网络安全法", url: "https://m.9888.cn/static/wap/p2p-pdf/index.html?file='1.中华人民共和国网络安全法.pdf'" },
-        { text: "2.中华人民共和国广告法", url: "https://m.9888.cn/static/wap/p2p-pdf/index.html?file='2.中华人民共和国广告法.pdf'" }, {
+        let fl = [{ text: "1.中华人民共和国网络安全法", url: "https://m.9888.cn/static/wap/p2p-pdf/index.html?file=1.中华人民共和国网络安全法.pdf" },
+        { text: "2.中华人民共和国广告法", url: "https://m.9888.cn/static/wap/p2p-pdf/index.html?file=2.中华人民共和国广告法.pdf" }, {
             text: "3.中华人民共和国电子签名法",
             url: "3"
         }, { text: "4.中国人民共和国反洗钱法", url: "4" }, {
