@@ -43,10 +43,10 @@ class Content extends React.Component {
 
         let btn_tab = (type, index) => {
             let cn = `ui-tab-li ${type === current_type && 'ui-select-li'}`
-            return <div key={index} className={cn}
+            return <a key={index} className={cn}
                 onClick={() => this.switchTabHandler(type)}>
                 <span className="text">{tab[type].name}</span>
-            </div>
+            </a>
         }
 
         let order_item = (order, index) => {
