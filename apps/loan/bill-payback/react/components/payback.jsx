@@ -46,9 +46,9 @@ class PayBack extends React.Component{
         let loanLeftAmount = Number(this.props.loanLeftAmount),
             repaymentAmount = Number(this.state.repaymentAmount);
         if (repaymentAmount === 0) return $FW.Component.Toast("请输入还款金额");
-        if (repaymentAmount === NaN) return $FW.Component.Toast("还款金额输入不合法！");
-        if (repaymentAmount > loanLeftAmount) return $FW.Component.Toast("还款金额不得超过待还金额！");
-        if (repaymentAmount < 100 && loanLeftAmount >= 200) return $FW.Component.Toast("还款金额不能低于100.00元！");
+        if (repaymentAmount === NaN) return $FW.Component.Toast("还款金额输入不合法");
+        if (repaymentAmount > loanLeftAmount) return $FW.Component.Toast("还款金额不得超过待还金额");
+        if (repaymentAmount < 100 && loanLeftAmount >= 200) return $FW.Component.Toast("还款金额不能低于100.00元");
         return true;
     }
 
