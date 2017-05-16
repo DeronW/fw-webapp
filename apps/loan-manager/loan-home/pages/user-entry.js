@@ -5,7 +5,6 @@ import styles from '../css/user-entry.css'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 
-// import BottomNavBar from './components/bottom-nav-bar'
 import Nav from './components/nav'
 
 
@@ -101,7 +100,6 @@ class Register extends React.Component{
                         <div styleName="form-border"></div>
                     </div>
                 </div>
-
                 <div styleName="register-login-btn">
                     <Nav styleName="ui-btn" onClick={this.handleGetCode}>下一步</Nav>
                 </div>

@@ -9,7 +9,7 @@ import * as Stores from './stores'
 
 
 let stores = {
-
+    products: new Stores.Products(Request)
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))

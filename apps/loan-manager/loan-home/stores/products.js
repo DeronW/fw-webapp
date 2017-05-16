@@ -1,0 +1,24 @@
+import { extendObservable } from 'mobx'
+
+export default class Products {
+
+    constructor(request) {
+        this.request = request;
+        extendObservable(this, {
+            loanProducts: [],
+            otherProducts: []
+        })
+    }
+
+    getProductList = () => {
+        this.request({
+            url: `${API_PATH}/api/product/v1/productList.json`,
+            method: 'post',
+            data: { }
+        }).then(data => {
+            this.loanProducts = data.resultList;
+            this.otherProducts = data.extList;
+        })
+    }
+
+}
