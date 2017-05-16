@@ -32,13 +32,13 @@ class MainPanel extends React.Component {
             return (
                 <Nav styleName="borrow-money-list" key={index} onClick={()=>gotoHandler(`${link}?pid=${p.productId}`)}>
                     <div styleName="icon-block">
-                        <img src={require('../images/icon.png')} />
+                        <img src={require('../images/loan/icon.png')} />
                     </div>
                     <div styleName="info">
                         <div styleName="t">
                             <span styleName="title-text">{p.productName}</span>
                             <div styleName="tag">
-                                {p.productLabelList.map(i => <img src={require(`../images/tag-${i.labelType}a.png`)} />)}
+                                {p.productLabelList.map(i => <img src={require(`../images/loan/tag-${i.labelType}a.png`)} />)}
                             </div>
                         </div>
                         <div styleName="b">
@@ -74,13 +74,13 @@ class MainPanel extends React.Component {
             <div>
                 <div styleName="main-panel">
                     <a onClick={()=>gotoHandler(jump_link)} styleName="banner">
-                        <img src={require('../images/banner.jpg')} />
+                        <img src={require('../images/loan/banner.jpg')} />
                     </a>
                     <a onClick={()=>gotoHandler(`/static/loan/fxh/index.html?pid=${main_product.productId}`)} styleName="top-info">
-                        <div styleName="logo"> <img src={require('../images/logo.png')} /> </div>
+                        <div styleName="logo"> <img src={require('../images/loan/logo.png')} /> </div>
                         <div styleName="title"> {main_product.productName} </div>
                         <div styleName="tag">
-                            {main_product.productLabelList.map(i => <img src={require(`../images/tag-${i.labelType}.png`)} />)}
+                            {main_product.productLabelList.map(i => <img src={require(`../images/loan/tag-${i.labelType}.png`)} />)}
                         </div>
                         <div styleName="subtitle"> 借款范围（{main_product.amountStr}） </div>
                         <div styleName="next"> </div>
