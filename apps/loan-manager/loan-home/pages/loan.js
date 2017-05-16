@@ -22,6 +22,14 @@ function gotoHandler(link, need_login) {
 
 @inject('products') @observer @CSSModules(styles)
 class MainPanel extends React.Component {
+
+    componentWillAmount() {
+        this.props.getProductList()
+            .catch(e => {
+                console.log(e.message)
+            })
+    }
+
     render() {
         let product = (p, index) => {
 

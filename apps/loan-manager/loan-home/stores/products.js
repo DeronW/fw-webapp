@@ -11,7 +11,7 @@ export default class Products {
     }
 
     getProductList = () => {
-        this.request({
+        return this.request({
             url: `${API_PATH}/api/product/v1/productList.json`,
             method: 'post',
             data: { }
