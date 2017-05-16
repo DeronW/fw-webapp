@@ -3,12 +3,12 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from '../css/loan.css'
 import { observer, inject } from 'mobx-react'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 
 import { Browser } from 'fw-javascripts'
 
 import Nav from './components/nav'
-// import BottomNavBar from './components/bottom-nav-bar'
+import BottomNavBar from './components/bottom-nav-bar'
 
 
 function gotoHandler(link, need_login) {
@@ -28,7 +28,6 @@ class MainPanel extends React.Component {
 
     static onEnter(){
         document.title = ''
-        document.body.style.background = 'whitesmoke'
     }
 
     componentDidMount() {
@@ -98,7 +97,7 @@ class MainPanel extends React.Component {
                         <div styleName="logo"> <img src={require('../images/loan/logo.png')} /> </div>
                         <div styleName="title"> {main_product.productName} </div>
                         <div styleName="tag">
-                            {main_product.productLabelList.map(i => <img src={require(`../images/loan/tag-${i.labelType}.png`)} />)}
+                            {main_product.productLabelList.map(i => <img key={i.labelType} src={require(`../images/loan/tag-${i.labelType}.png`)} />)}
                         </div>
                         <div styleName="subtitle"> 借款范围（{main_product.amountStr}） </div>
                         <div styleName="next"> </div>
@@ -108,7 +107,7 @@ class MainPanel extends React.Component {
                 <div styleName="other-products-list">
                     {otherProducts.map(generate_other_products)}
                 </div>
-                {/* <BottomNavBar/> */}
+                <BottomNavBar />
             </div>
         )
     }
