@@ -11,6 +11,7 @@ export default class Products {
     }
 
     getProductList = () => {
+        let API_PATH = document.getElementById('api-path').value;
         return this.request({
             url: `${API_PATH}/api/product/v1/productList.json`,
             method: 'post',

@@ -8,8 +8,8 @@ import {
     Link
 } from 'react-router-dom'
 
-import UserEntey from './pages/user-entry'
 import Loan from './pages/loan'
+import UserEntey from './pages/user-entry'
 import Bill from './pages/bill'
 import Promote from './pages/promote'
 import Market from './pages/market'
@@ -21,8 +21,8 @@ export default (stores) => {
     return <Router>
         <Provider {...stores} >
             <Switch>
-                <Route exact path='/user-entry' component={UserEntey} />
                 <Route exact path='/loan' component={Loan} />
+                <Route exact path='/user-entry' component={UserEntey} />
                 <Route exact path='/bill' component={Bill} />
                 <Route exact path='/promote' component={Promote} />
                 <Route exact path='/market' component={Market} />

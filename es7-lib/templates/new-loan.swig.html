@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%; min-height: 1140px;">
 <head>
     <meta charset="utf-8">
     {% block viewport %}
@@ -14,7 +14,7 @@
     {% endblock %}
     <title>{% block title %}借钱{% endblock %}</title>
 </head>
-<body>
+<body style="height: 100%">
 
 <!-- 接口地址前缀 -->
 <input type="hidden" id="api-path" value="{{ API_PATH }}"/>
@@ -22,7 +22,7 @@
 <input type="hidden" id="env" value="{{ ENV }}"/>
 
 {% block content %}
-<div id="cnt"></div>
+<div id="cnt" style="height: 100%"></div>
 {% endblock %}
 </body>
 </html>

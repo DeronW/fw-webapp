@@ -7,6 +7,9 @@ import { Redirect } from 'react-router'
 
 import { Browser } from 'fw-javascripts'
 
+import Nav from './components/nav'
+// import BottomNavBar from './components/bottom-nav-bar'
+
 
 function gotoHandler(link, need_login) {
     if (link.indexOf('://') < 0) {
@@ -23,14 +26,21 @@ function gotoHandler(link, need_login) {
 @inject('products') @observer @CSSModules(styles)
 class MainPanel extends React.Component {
 
-    componentWillAmount() {
-        this.props.getProductList()
-            .catch(e => {
-                console.log(e.message)
-            })
+    static onEnter(){
+        document.title = ''
+        document.body.style.background = 'whitesmoke'
+    }
+
+    componentDidMount() {
+        this.props.products.getProductList();
     }
 
     render() {
+        let loanProducts = this.props.products.loanProducts.slice(),
+            otherProducts = this.props.products.otherProducts.slice();
+
+        if (loanProducts.length === 0) return;
+
         let product = (p, index) => {
 
             let link_a = `/static/loan/fxh/index.html`,
@@ -46,7 +56,7 @@ class MainPanel extends React.Component {
                         <div styleName="t">
                             <span styleName="title-text">{p.productName}</span>
                             <div styleName="tag">
-                                {p.productLabelList.map(i => <img src={require(`../images/loan/tag-${i.labelType}a.png`)} />)}
+                                {p.productLabelList.map(i => <img key={i.labelType} src={require(`../images/loan/tag-${i.labelType}a.png`)} />)}
                             </div>
                         </div>
                         <div styleName="b">
@@ -58,8 +68,8 @@ class MainPanel extends React.Component {
             )
         }
 
-        let main_product = this.props.products.loanProducts[0],
-            sub_products = this.props.products.loanProducts.slice(1)
+        let main_product = loanProducts[0],
+            sub_products = loanProducts.slice(1);
 
         let jump_link = Browser.inApp ? `/static/loan/user-weixin-jrgcapp/index.html` : `/static/loan/weixin-download/index.html`;
 
@@ -79,8 +89,8 @@ class MainPanel extends React.Component {
         )
 
         return (
-            <div>
-                <div styleName="main-panel">
+            <div styleName="fake-body">
+                <div>
                     <a onClick={()=>gotoHandler(jump_link)} styleName="banner">
                         <img src={require('../images/loan/banner.jpg')} />
                     </a>
@@ -96,8 +106,9 @@ class MainPanel extends React.Component {
                     {sub_products.map(product)}
                 </div>
                 <div styleName="other-products-list">
-                    {this.props.products.otherProducts.map(generate_other_products)}
+                    {otherProducts.map(generate_other_products)}
                 </div>
+                {/* <BottomNavBar/> */}
             </div>
         )
     }

@@ -2,15 +2,11 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // no highlight when tapping
 }
 
-html {
-	min-height: 100%;
-}
-
-body {
+.fake-body {
+  height: 100%;
 	background: #3a4a79 url(../images/back.jpg) no-repeat;
 	background-position: center bottom;
 	background-size: 100% auto;
-  min-height: 1000px;
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
@@ -29,7 +25,7 @@ body {
 input {
   -webkit-tap-highlight-color:rgba(0,0,0,0);
   -webkit-appearance: none;
-  // -webkit-user-select: none; 不能添加这个属性, 会导致输入框无法输入
+  /*-webkit-user-select: none; 不能添加这个属性, 会导致输入框无法输入*/
   -webkit-text-size-adjust: none;
   -webkit-touch-callout:none;
   background:transparent;
@@ -38,7 +34,7 @@ input {
 }
 
 .top {
-	margin: 20px 0 50px;
+	margin-bottom: 50px;
 }
 
 .top .title {
@@ -57,7 +53,7 @@ input {
 }
 
 .register-login-cnt {
-	padding: 0 30px;
+  padding: 20px 30px;
 }
 
 .from-cnt {

@@ -79,29 +79,31 @@ class Register extends React.Component{
 
     render() {
         return (
-            <div styleName="register-login-cnt">
-                <div styleName="top">
-                    <span styleName="title">放心花</span>
-                </div>
-                <div styleName="logo"> <img src={require('../images/user-entry/logo.png')} /> </div>
+            <div styleName="fake-body">
                 <div styleName="register-login-cnt">
-                    <div styleName="from-cnt">
-                        <div styleName="from">
-                            <div styleName="icon"></div>
-                            <div styleName="input">
-                                <input type="text" value={this.state.phone}
-                                       onChange={this.changeHandler} onKeyUp={this.keyUpHandler}
-                                       placeholder="请输入手机号进行注册登录" />
-                                {this.state.deleteShow &&
-                                <span styleName="clear-num" onClick={this.clearHandler}></span>}
-                            </div>
-                            <div styleName="pwd-icon"> </div>
-                        </div>
-                        <div styleName="form-border"></div>
+                    <div styleName="top">
+                        <span styleName="title">放心花</span>
                     </div>
-                </div>
-                <div styleName="register-login-btn">
-                    <Nav styleName="ui-btn" onClick={this.handleGetCode}>下一步</Nav>
+                    <div styleName="logo"> <img src={require('../images/user-entry/logo.png')} /> </div>
+                    <div styleName="register-login-cnt">
+                        <div styleName="from-cnt">
+                            <div styleName="from">
+                                <div styleName="icon"></div>
+                                <div styleName="input">
+                                    <input type="text" value={this.state.phone}
+                                           onChange={this.changeHandler} onKeyUp={this.keyUpHandler}
+                                           placeholder="请输入手机号进行注册登录" />
+                                    {this.state.deleteShow &&
+                                    <span styleName="clear-num" onClick={this.clearHandler}></span>}
+                                </div>
+                                <div styleName="pwd-icon"> </div>
+                            </div>
+                            <div styleName="form-border"></div>
+                        </div>
+                    </div>
+                    <div styleName="register-login-btn">
+                        <Nav styleName="ui-btn" onClick={this.handleGetCode}>下一步</Nav>
+                    </div>
                 </div>
             </div>
         )
