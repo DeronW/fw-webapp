@@ -57,7 +57,7 @@ class Detail extends React.Component {
                             <span>已还金额(元)</span>
                             <span>{data.repaymentAmountStr}</span>
                         </div>
-                        { st == 103 && <div>
+                        {(st == 103 || st == 100) && <div>
                             <span>逾期费(元)</span>
                             <span>{data.overdueFeeStr}</span>
                         </div>}

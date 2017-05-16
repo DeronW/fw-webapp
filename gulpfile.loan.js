@@ -96,6 +96,11 @@ const CREDIT_CARD = [
     'credit-card-products'
 ]
 
+const EXPERIMENTAL_HOME = [{
+    name: 'py-new-home',
+    compiler: 'webpack'
+}]
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
@@ -108,7 +113,8 @@ APP_NAMES.push(
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
     ...MARKET,
-    ...CREDIT_CARD
+    ...CREDIT_CARD,
+    ...EXPERIMENTAL_HOME
 );
 
 
