@@ -1,0 +1,34 @@
+import React from 'react'
+import { Provider } from 'mobx-react'
+import {
+    HashRouter as Router,
+    Route,
+    Switch,
+    Redirect,
+    Link
+} from 'react-router-dom'
+
+import UserEntey from './pages/user-entry'
+import Bill from './pages/bill'
+import Promote from './pages/promote'
+import Market from './pages/market'
+import User from './pages/user'
+import NoMatch from './pages/no-match'
+
+export default (stores) => {
+
+    return <Router>
+        <Provider {...stores} >
+            <Switch>
+                <Route path='/user-entry' component={UserEntey} />
+                <Route exact path='/statis/bill' component={Bill} />
+                <Route exact path='/statis/promote' component={Promote} />
+                <Route exact path='/statis/market' component={Market} />
+                <Route exact path='/statis/user' component={User} />
+                <Route path='/' component={() => <Redirect to='/user-entry' />} />
+                <Route component={NoMatch} />
+            </Switch>
+        </Provider>
+    </Router>
+
+}

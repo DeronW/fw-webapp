@@ -20,6 +20,9 @@ const APP_NAMES = [
     }, {
         name: 'outside-register',
         compiler: 'webpack'
+    }, {
+        name: 'loan-home',
+        compiler: 'webpack'
     }
 ]
 
