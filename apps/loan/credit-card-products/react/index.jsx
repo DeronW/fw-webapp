@@ -1,25 +1,14 @@
-function gotoHandler(link, need_login) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    if ($FW.Browser.inFXHApp() || $FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
-}
-
 function BankList() {
     let generate_bank_items = (bank) => (
-        <div
+        <a
             className="bank-item"
             key={bank.name}
-            onClick={() => {gotoHandler(bank.url)}}>
+            href={bank.url}>
             <div className="bank-logo-container">
                 <img src={`images/${bank.name}-bank-icon.jpg`}/>
             </div>
             <div className="bank-open-area">开放地区：{bank.openArea}</div>
-        </div>
+        </a>
     )
     return (
         <div className="bank-list">
