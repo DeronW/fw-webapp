@@ -17,9 +17,10 @@ function space(str) {
     return str.replace(/ /g, "");
 }
 
-const SetCashCard = React.createClass({
-    getInitialState() {
-        return {
+class SetCashCard extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
             name: '',
             id: '',
             bankNum: '',
@@ -32,17 +33,22 @@ const SetCashCard = React.createClass({
             loading: false,
             canVerify: ''
         }
-    },
-    componentDidUpdate() {
-        this.refs.cardNumberInput.setSelectionRange(99, 99)
-    },
+        this.changeBankNum = this.changeBankNum.bind(this);
+        this.blurBankNum = this.blurBankNum.bind(this);
+        this.changePhone = this.changePhone.bind(this);
+        this.handlerClause = this.handlerClause.bind(this);
+        this.handlerNext = this.handlerNext.bind(this);
+    }
+    // componentDidUpdate() {
+    //     this.refs.cardNumberInput.setSelectionRange(99, 99)
+    // }
     changeBankNum(e) {
         let input = e.target, v = input.value;
         // 把银行卡号, 每隔4个数字添加一个空格
         v = v.replace(/\s/g, '').replace(/(\d{4})(?=\d)/g, "$1 ");
         if (v.length < 19 + 5)
             this.setState({ bankNum: v });
-    },
+    }
     blurBankNum(e) {
         let { bankNum } = this.state, len = space(this.state.bankNum).length;
         if (len < 16 || len > 19) return $FW.Component.Toast("储蓄卡格式不对");
@@ -59,16 +65,16 @@ const SetCashCard = React.createClass({
                 bankName: ci.bankName
             });
         })
-    },
+    }
     changePhone(e) {
         let v = e.target.value;
         verificationNum(v) && v.length <= 11 && this.setState({ phone: space(v) });
-    },
+    }
     handlerClause() {
         this.setState({
             selectClause: !this.state.selectClause
         });
-    },
+    }
     handlerNext() {
         //let err, { bankNum, phone, selectClause, cardType, canVerify } = this.state;
         let err, { bankNum, phone, cardType, canVerify } = this.state;
@@ -92,7 +98,7 @@ const SetCashCard = React.createClass({
                 let gid = data.bindBankInfo.operatorBankcardGid;
                 window.location.href = `/static/loan/user-verify-phone/index.html?operatorBankcardGid=${gid}&phone=${phone}`;
             }, e => $FW.Component.Toast(e.message));
-    },
+    }
     render() {
 
         let { phone, bankNum, cardinfoBankName } = this.state;
@@ -104,17 +110,17 @@ const SetCashCard = React.createClass({
                         <span className="text">储蓄卡号</span>
                         <div className="input">
                             <input onChange={this.changeBankNum} ref="cardNumberInput"
-                                onBlur={this.blurBankNum}
-                                value={bankNum} type="text" placeholder="输入储蓄卡号" />
+                                   onBlur={this.blurBankNum}
+                                   value={bankNum} type="text" placeholder="输入储蓄卡号" />
                         </div>
 
                         <div className="list-bank-li">
                             <a className="prompt-text" href='/static/loan/user-bank-support/index.html'>
                                 支持银行
-								<img src="images/prompt-icon.png" />
+                                <img src="images/prompt-icon.png" />
                             </a>
                             {cardinfoBankName != '' &&
-                                <span className="bank">{cardinfoBankName}</span>}
+                            <span className="bank">{cardinfoBankName}</span>}
                         </div>
                     </div>
                 </div>
@@ -124,18 +130,18 @@ const SetCashCard = React.createClass({
                         <span className="text">手机号</span>
                         <div className="input">
                             <input onChange={this.changePhone} value={phone}
-                                type="number" placeholder="银行卡预留手机号" />
+                                   type="number" placeholder="银行卡预留手机号" />
                         </div>
                     </div>
                 </div>
 
                 {/*<div className="clause">
-                    <span className={"icon " + (this.state.selectClause ? "select-icon" : "icon")} onClick={this.handlerClause}></span>
-                    <span className="text">
-                        同意
-						<a href='/static/loan/protocol-cost/index.html'>《代扣服务协议》</a>
-                    </span>
-                </div>*/}
+                 <span className={"icon " + (this.state.selectClause ? "select-icon" : "icon")} onClick={this.handlerClause}></span>
+                 <span className="text">
+                 同意
+                 <a href='/static/loan/protocol-cost/index.html'>《代扣服务协议》</a>
+                 </span>
+                 </div>*/}
 
                 <div className="next-btn">
                     <div onClick={this.handlerNext} className="ui-btn">下一步</div>
@@ -143,7 +149,7 @@ const SetCashCard = React.createClass({
             </div>
         )
     }
-});
+}
 
 const USER = $FW.Store.getUserDict();
 

@@ -3,9 +3,10 @@ function verificationNum(val) {
     return reg.test(val)
 }
 
-const VerifyPhone = React.createClass({
-    getInitialState() {
-        return {
+class VerifyPhone extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
             countdown: 0,
             countdownShow: false,
             codeVal: '',
@@ -18,10 +19,17 @@ const VerifyPhone = React.createClass({
             failReason: null,
             show: false
         }
-    },
+        this.getCode = this.getCode.bind(this);
+        this.changeCode = this.changeCode.bind(this);
+        this.handleGetCode = this.handleGetCode.bind(this);
+        this.submitHandler = this.submitHandler.bind(this);
+        this.checkAjax = this.checkAjax.bind(this);
+        this.getResult = this.getResult.bind(this);
+        this.confirmHandler = this.confirmHandler.bind(this);
+    }
     componentDidMount() {
         this.getCode();
-    },
+    }
     getCode() {
         this.setState({
             countdown: 60,
@@ -35,14 +43,14 @@ const VerifyPhone = React.createClass({
                 this.setState({countdownShow: false});
             }
         }, 1000)
-    },
+    }
     changeCode(e) {
         if (verificationNum(e.target.value)) {
             if ($FW.Format.trim(e.target.value).length < 5) {
                 this.setState({codeVal: $FW.Format.trim(e.target.value)});
             }
         }
-    },
+    }
     handleGetCode() {
         this.getCode();
 
@@ -53,7 +61,7 @@ const VerifyPhone = React.createClass({
             clearInterval(this.time);
             this.setState({countdownShow: false});
         });
-    },
+    }
     submitHandler() {
         if (this.state.codeVal.length < 4) return $FW.Component.Toast("验证码不能小于4位");
 
@@ -64,8 +72,8 @@ const VerifyPhone = React.createClass({
             () => {
                 $FW.Component.showAjaxLoading()
                 return new Promise(resolve => setTimeout(() => {
-                            $FW.Component.hideAjaxLoading()
-                            resolve()
+                    $FW.Component.hideAjaxLoading()
+                    resolve()
                 }, 5000))
             }
         ).then(() => {
@@ -76,7 +84,7 @@ const VerifyPhone = React.createClass({
             setTimeout(this.checkAjax, 9000);
             setTimeout(() => this.checkAjax('finalTry'), 12000);
         }, e => $FW.Component.Toast(e.message));
-    },
+    }
     checkAjax(finalTry) {
         if (this.state.result === 'wrong_code') return;
         $FW.Component.showAjaxLoading();
@@ -91,7 +99,7 @@ const VerifyPhone = React.createClass({
             });
             this.getResult(d.status, d.transCode, finalTry);
         }, e => $FW.Component.Toast(e.message));
-    },
+    }
     getResult(result, transCode, finalTry) {
         if (result == 0) {
             if (finalTry) this.setState({show: true});
@@ -104,17 +112,17 @@ const VerifyPhone = React.createClass({
         } else if (result == 2) {
             this.setState({show: true});
         }
-    },
+    }
     confirmHandler() {
         if (this.state.result == 0) {
             window.history.go(-2);
         } else if (this.state.result == 2) {
             window.location.href = '/static/loan/user-card-set/index.html';
         }
-    },
+    }
     componentWillUnmount() {
         clearInterval(this.timer);
-    },
+    }
     render() {
         let btnSMSCode = this.state.countdownShow ?
             <div className="get-code-btn c">{this.state.countdown}s</div> :
@@ -155,8 +163,7 @@ const VerifyPhone = React.createClass({
 
         )
     }
-});
-
+}
 
 const USER = $FW.Store.getUserDict();
 const BANK_GID = $FW.Format.urlQuery().operatorBankcardGid || '';

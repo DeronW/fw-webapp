@@ -29,17 +29,19 @@ const DETAIL_TEXT = [
 
 ];
 
-const UserAboutus = React.createClass({
-    getInitialState() {
-        return {
+class UserAboutus extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
             toggle_list: []
         }
-    },
+        this.handleList = this.handleList.bind(this);
+    }
     handleList(index) {
         let t = this.state.toggle_list;
         t[index] = !t[index];
         this.setState({ toggle_list: t});
-    },
+    }
     render() {
         let li = (todo, index) => {
             return <div key={index} className="li">
@@ -66,7 +68,7 @@ const UserAboutus = React.createClass({
             </div>
         )
     }
-});
+}
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={"常见问题"} />, HEADER_NODE);

@@ -41,21 +41,43 @@ class MainPanel extends React.Component {
         let main_product = this.props.products[0],
             sub_products = this.props.products.slice(1)
 
+        let jump_link = $FW.Browser.inApp() ? `/static/loan/user-weixin-jrgcapp/index.html` : `/static/loan/weixin-download/index.html`;
+
+        let generate_other_products = (product) => (
+            <div
+                className="other-products-item"
+                key={product.firstTitle}
+                onClick={() => { gotoHandler(product.forwardUrl)}}>
+                <div className="product-icon">
+                    <img src={decodeURIComponent(product.iconUrl)}/>
+                </div>
+                <div className="product-title">
+                    <div className="product-1st-title">{product.firstTitle}</div>
+                    <div className="product-2nd-title">{product.secondTitle}</div>
+                </div>
+            </div>
+        )
+
         return (
-            <div className="main-panel">
-                <a onClick={()=>gotoHandler("/static/loan/weixin-download/index.html")} className="banner">
-                    <img src="images/banner.png" />
-                </a>
-                <a onClick={()=>gotoHandler(`/static/loan/fxh/index.html?pid=${main_product.productId}`)} className="top-info">
-                    <div className="logo"> <img src="images/logo.png" /> </div>
-                    <div className="title"> {main_product.productName} </div>
-                    <div className="tag">
-                        {main_product.productLabelList.map(i => <img src={`/static/loan/home/images/tag-${i.labelType}.png`} />)}
-                    </div>
-                    <div className="subtitle"> 借款范围（{main_product.amountStr}） </div>
-                    <div className="next"> </div>
-                </a>
-                {sub_products.map(product)}
+            <div>
+                <div className="main-panel">
+                    <a onClick={()=>gotoHandler(jump_link)} className="banner">
+                        <img src="images/banner.jpg" />
+                    </a>
+                    <a onClick={()=>gotoHandler(`/static/loan/fxh/index.html?pid=${main_product.productId}`)} className="top-info">
+                        <div className="logo"> <img src="images/logo.png" /> </div>
+                        <div className="title"> {main_product.productName} </div>
+                        <div className="tag">
+                            {main_product.productLabelList.map(i => <img src={`/static/loan/home/images/tag-${i.labelType}.png`} />)}
+                        </div>
+                        <div className="subtitle"> 借款范围（{main_product.amountStr}） </div>
+                        <div className="next"> </div>
+                    </a>
+                    {sub_products.map(product)}
+                </div>
+                <div className="other-products-list">
+                    {this.props.otherProducts.map(generate_other_products)}
+                </div>
             </div>
         )
     }
@@ -63,6 +85,6 @@ class MainPanel extends React.Component {
 
 $FW.DOMReady(() => {
     $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
-        .then(data => ReactDOM.render(<MainPanel products={data.resultList} />, CONTENT_NODE))
+        .then(data => ReactDOM.render(<MainPanel products={data.resultList} otherProducts={data.extList}/>, CONTENT_NODE))
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
 })

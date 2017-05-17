@@ -2,25 +2,30 @@ function gotoHandler(link) {
     location.href = encodeURI(link);
 }
 
-const WantLoan = React.createClass({
-    getInitialState: function () {
+class WantLoan extends React.Component{
+    constructor(props){
+        super(props)
         let query = $FW.Format.urlQuery();
         let loanNum = query.loanNum;
         let creditLine = query.creditLine;
         let orioleOrderGid = query.orioleOrderGid;
-        return {
+        this.state = {
             loanNum: loanNum,
             creditLine: creditLine,
             orioleOrderGid: orioleOrderGid,
             orderGid: null,
-            loanGid: null
+            loanGid: null,
+            showToZH: false,
+            failMsg: ''
         }
-    },
-    changeHandler: function (e) {
-        let inputNum = e.target.value;
-        this.setState({ loanNum: inputNum });
-    },
-    loanHandler: function () {
+        this.changeHandler = this.changeHandler.bind(this);
+        this.loanHandler = this.loanHandler.bind(this);
+    }
+    changeHandler(e) {
+    let inputNum = e.target.value;
+    this.setState({ loanNum: inputNum });
+}
+    loanHandler() {
         let query = $FW.Format.urlQuery();
         let loanNum = query.loanNum;
         let orioleOrderGid = query.orioleOrderGid;
@@ -58,21 +63,23 @@ const WantLoan = React.createClass({
         let filtered = cashBank.filter(isRealNameBindCard);
         let user = $FW.Store.getUserDict();
         $FXH.Post(`${API_PATH}/api/loan/v1/apply.json`, {
-            loanAmount: this.state.loanNum,
-            orioleOrderGid: orioleOrderGid,
-            productId: 1,
-            withdrawCardGid: filtered[0].cardGid
-        }
+                loanAmount: this.state.loanNum,
+                orioleOrderGid: orioleOrderGid,
+                productId: 1,
+                withdrawCardGid: filtered[0] && filtered[0].cardGid
+            }
         ).then((data) => {
             this.setState({ loanGid: data.loanGid, orderGid: data.orderGid });
             if (!err) {
                 location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`;
             }
         },(err) => {
+            if (err.code === 24005) return this.setState({showToZH: true, failMsg: err.message})
             $FW.Component.Toast(err.message);
         });
-    },
-    render: function () {
+    }
+    render() {
+        const USER = $FW.Store.getUserDict();
         let interest = this.props.baseRateDay * 100;
         let cashBank = this.props.userBankList.withdrawBankcard;
 
@@ -91,17 +98,26 @@ const WantLoan = React.createClass({
                 </div>
                 <div className="withdraw-card">
                     <span className="withdraw-card-title">提现卡</span>
-                    <span className="withdraw-card-branch">{filtered[0].bankShortName}({filtered[0].cardNo.slice(-4)})</span>
+                    <span className="withdraw-card-branch">{filtered[0] && filtered[0].bankShortName}({filtered[0] && filtered[0].cardNo.slice(-4)})</span>
                 </div>
                 {/*<div className="withdraw-tip">审核通过之后，若在24小时之内未确认用钱，视为自动放弃。</div>*/}
                 <div className="loan-btn-wrap">
                     <div className="loan-btn" onClick={this.loanHandler}>立即借款</div>
                 </div>
+                { this.state.showToZH &&
+                    <div className="mask">
+                        <div className="pop">
+                            <span className="tip-1">审核失败</span>
+                            <span className="tip-2">{this.state.failMsg}</span>
+                            <Nav className="to-zhangzhong" href={`/static/loan/home/index.html`}>尝试其他借款</Nav>
+                            <img className="close-icon" src="images/close-icon.jpg" onClick={() => {this.setState({showToZH: false})}}></img>
+                        </div>
+                    </div>
+                }
             </div>
         )
     }
-});
-
+}
 
 $FW.DOMReady(function () {
     NativeBridge.setTitle('我要借款');

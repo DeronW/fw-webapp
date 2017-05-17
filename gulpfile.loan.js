@@ -47,8 +47,9 @@ const OUTSIDE_PAGES = [
 // 账单模块
 const BILL_PAGES = [
     'bill', //账单首页
-    'bill-history', //历史账单
+    // 'bill-history', //历史账单 // depracated
     'bill-payback', //还款页面
+    'repayment-record' //还款列表页面
 ]
 
 // 申请借款模块
@@ -86,16 +87,19 @@ const WEIXIN_PAGES = [
     'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
-
-// Beta项目, 使用 webpack 编译指定页面
-const WEBPACK_PAGES = [
-    {
-        name: 'faq2',
-        describe: 'page for testing webpack',
-        compiler: 'webpack', // gulp or webpack
-    }
+const MARKET = [
+    'market',
+    'market-detail'
 ]
 
+const CREDIT_CARD = [
+    'credit-card-products'
+]
+
+const EXPERIMENTAL_HOME = [{
+    name: 'py-new-home',
+    compiler: 'webpack'
+}]
 
 APP_NAMES.push(
     ...USER_PAGES,
@@ -108,47 +112,48 @@ APP_NAMES.push(
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
-    ...WEBPACK_PAGES
+    ...MARKET,
+    ...CREDIT_CARD,
+    ...EXPERIMENTAL_HOME
 );
 
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
-    let INCLUDE_COMPONENTS = [
-        'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,
-        'confirm.jsx', 'nav.jsx',
-        'loading.jsx', 'alert.jsx', 'banner-group.jsx', 'toast.jsx',
-    ];
 
-    let INCLUDE_LESS = [
-        `${PROJ}/*.less`
-    ];
-
-    let INCLUDE_JAVASCRIPTS = [
-        'use-strict.js',
-        `${PROJ}/fw-ajax-error-handler.js`,
-        `${PROJ}/fw-common.js`,
-        `${PROJ}/fw-plugin-store.js`,
-        `${PROJ}/fxh.js`,
-        `${PROJ}/fw-plugin-theme.js`
-    ];
+    let default_options = {
+        include_components: [
+            'use-strict.jsx', `${PROJ}/header.jsx`,
+            `${PROJ}/bottom-nav-bar.jsx`,
+            'confirm.jsx', 'nav.jsx',
+            'loading.jsx', 'alert.jsx',
+            'banner-group.jsx', 'toast.jsx',
+        ],
+        include_less: [
+            `${PROJ}/common.less`
+        ],
+        include_javascripts: [
+            'use-strict.js',
+            `${PROJ}/fw-cryption.js`,
+            `${PROJ}/fw-ajax-error-handler.js`,
+            `${PROJ}/fw-common.js`,
+            `${PROJ}/fw-plugin-store.js`,
+            `${PROJ}/fxh.js`,
+            `${PROJ}/fw-plugin-theme.js`
+        ]
+    }
 
     APP_NAMES.forEach(i => {
-        generate_task(PROJ, i, {
+        generate_task(PROJ, i, Object.assign({}, default_options, {
             debug: true,
-            api_path: CONSTANTS[PROJ].dev_api_path,
-            include_components: INCLUDE_COMPONENTS,
-            include_less: INCLUDE_LESS,
-            include_javascripts: INCLUDE_JAVASCRIPTS
-        });
+            api_path: CONSTANTS[PROJ].dev_api_path
+        }))
 
-        generate_task(PROJ, i, {
+        generate_task(PROJ, i, Object.assign({}, default_options, {
             cmd_prefix: 'pack',
             api_path: '',
+            environment: 'production',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`,
-            include_components: INCLUDE_COMPONENTS,
-            include_less: INCLUDE_LESS,
-            include_javascripts: INCLUDE_JAVASCRIPTS
-        });
+        }))
     });
 
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));

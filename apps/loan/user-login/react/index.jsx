@@ -27,20 +27,26 @@ var ConcertUtilBrowser = {
     })()
 };
 
-const Register = React.createClass({
-    getInitialState() {
-        return {
+class Register extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
             password: '',
             plainCode: false
         }
-    },
+        this.changePasswordHandler = this.changePasswordHandler.bind(this);
+        this.handlePlainCode = this.handlePlainCode.bind(this);
+        this.loadingBtn = this.loadingBtn.bind(this);
+        this.forgotPasswordHandler = this.forgotPasswordHandler.bind(this);
+        this.keyUpHandler = this.keyUpHandler.bind(this);
+    }
     changePasswordHandler(e) {
         let v = e.target.value;
         v.length < 17 && this.setState({ password: v });
-    },
+    }
     handlePlainCode() {
         this.setState({ plainCode: !this.state.plainCode });
-    },
+    }
     loadingBtn() {
         let err, {password} = this.state;
         if (password == '') err = "请输入登录密码";
@@ -48,26 +54,26 @@ const Register = React.createClass({
         if (password.length > 16) err = "密码不能多于16位";
         //if (!istrue(password)) err = "必须是字母及数字组合密码";
 
-        err ?
-            $FW.Component.Toast(err) :
-            $FW.Post(`${API_PATH}/api/userBase/v1/login.json`, {
-                mobile: PHONE,
-                password: password,
-                sourceType: SOURCE_TYPE
-            }).then(data => {
-                let dict = data.userLogin;
-                $FW.Store.set('phone', $FW.Format.urlQuery().phone);
-                $FW.Store.setUserDict({
-                    token: dict.userToken,
-                    id: dict.userId,
-                    gid: dict.userGid,
-                    status: dict.userStatus,
-                    invitCode:dict.invitationCode,
-                    uid:dict.uid
-                })
-                location.href = `/static/loan/home/index.html`;
-            }, e => $FW.Component.Toast(e.message));
-    },
+        if (err) return $FW.Component.Toast(err);
+
+        $FW.Post(`${API_PATH}/api/userBase/v1/login.json`, {
+            mobile: PHONE,
+            password: password,
+            sourceType: SOURCE_TYPE
+        }).then(data => {
+            let dict = data.userLogin;
+            $FW.Store.set('phone', $FW.Format.urlQuery().phone);
+            $FW.Store.setUserDict({
+                token: dict.userToken,
+                id: dict.userId,
+                gid: dict.userGid,
+                status: dict.userStatus,
+                invitCode:dict.invitationCode,
+                uid:dict.uid
+            })
+            location.href = `/static/loan/home/index.html`;
+        }, e => $FW.Component.Toast(e.message))
+    }
     forgotPasswordHandler() {
         $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
             mobile: PHONE,
@@ -76,10 +82,10 @@ const Register = React.createClass({
         }).then(data => {
             location.href = `/static/loan/user-reset-password/index.html?phone=${PHONE}&codeToken=${data.codeToken}`;
         }, err => $FW.Component.Toast(err.message));
-    },
+    }
     keyUpHandler(e) {
         if (e.keyCode === 13) this.loadingBtn()
-    },
+    }
     render() {
 
         let {plainCode} = this.state;
@@ -96,14 +102,14 @@ const Register = React.createClass({
                 <div className="logo"> <img src="images/logo.png" /> </div>
                 <div className="get-name-phone">
                     亲爱的<span className="phone-text">  {phoneMosaic(PHONE)}  </span>欢迎登录
-				</div>
+                </div>
 
                 <div className="from-cnt">
                     <div className="from">
                         <div className="icon"></div>
                         <div className="input">
                             <input type={plainCode ? "text" : "password"} value={this.state.password}
-                                placeholder="请输入登录密码" onKeyUp={this.keyUpHandler} onChange={this.changePasswordHandler} />
+                                   placeholder="请输入登录密码" onKeyUp={this.keyUpHandler} onChange={this.changePasswordHandler} />
                         </div>
 
                         <div className={this.state.plainCode ? "pwd-icon1" : "pwd-icon"} onClick={this.handlePlainCode}>
@@ -120,7 +126,7 @@ const Register = React.createClass({
             </div>
         )
     }
-});
+}
 
 const PHONE = $FW.Format.urlQuery().phone || '';
 

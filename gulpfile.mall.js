@@ -6,11 +6,8 @@ let APP_NAMES = [
     'home', // 首页
     // 专题/活动 相关页面
     'activity', // 专题活动页
-    'home-banner-detail', {
-        name: 'waiting',
-        describe: '敬请期待页',
-        include_components: [`${PROJ}/header.jsx`]
-    },
+    'home-banner-detail',
+    'waiting',
 ];
 
 const USER_PAGES = [
@@ -93,7 +90,7 @@ APP_NAMES.push(
     ...DEVELOPING_PAGES
 );
 
-module.exports = function(gulp, generate_task, CONSTANTS) {
+module.exports = function (gulp, generate_task, CONSTANTS) {
 
     let INCLUDE_COMPONENTS = [
         'use-strict.jsx', `${PROJ}/header.jsx`, `${PROJ}/bottom-nav-bar.jsx`,

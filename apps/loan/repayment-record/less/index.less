@@ -1,0 +1,69 @@
+// vars and mixins
+@record-list-item--height: 113px;
+
+
+// main style
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // no highlight when tapping
+}
+
+html {
+  height: 100%;
+  min-height: 1140px;
+}
+
+body {
+  height: 100%;
+  background-color: #f0f0f0;
+}
+
+.fxh-banner-wrap {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.record-list {
+  width: 100%;
+  padding-left: 30px;
+  background-color: #fff;
+
+  .record-list-item {
+    height: @record-list-item--height;
+    padding-right: 30px;
+    background-color: inherit;
+    border-bottom: 1px solid #d8d8d8;
+
+    &:last-child {
+      border: none;
+    }
+
+    .left-els {
+      float: left;
+      height: 100%;
+      padding: 18px 0;
+
+      .amount {
+        color: #6aa4f0;
+        font-size: 36px;
+      }
+
+      .time {
+        color: #aaa;
+        font-size: 28px;
+      }
+    }
+
+    .right-els {
+      float: right;
+
+      span {
+        display: inline-block;
+        height: @record-list-item--height;
+        line-height: @record-list-item--height;
+        color: #999;
+        font-size: 28px;
+      }
+    }
+  }
+}

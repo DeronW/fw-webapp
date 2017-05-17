@@ -264,7 +264,6 @@ return (
                 </div>
                 <div className={this.state.index=='z' ? "pay-check active" : "pay-check"}></div>
                 </div>
-
                 </div>
                 <div className="pay-bar">
                 <a className="pay-btn" onClick={this.payHandler}>去支付</a>

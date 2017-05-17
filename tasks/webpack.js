@@ -1,38 +1,111 @@
-const webpack = require("webpack");
-const path = require('path');
-const copy = require('./copy.js');
+const webpack = require("webpack")
+const path = require('path')
 const util = require('gulp-util')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-module.exports = function (site_name, page_name, options) {
-    options = options || {};
+module.exports = function (site_name, page_name, CONFIG) {
 
-    const app_path = path.resolve(__dirname, `../apps/${site_name}/${page_name}`),
+    const page_path = path.resolve(__dirname, `../apps/${site_name}/${page_name}`),
         build_path = path.resolve(__dirname, `../build/${site_name}/${page_name}/`);
 
     const compiler = webpack({
-        entry: `${app_path}/entry.js`,
+        entry: `${page_path}/entry.js`,
         output: {
-            path: `${build_path}/javascripts`,
-            filename: 'bundle.min.js'
+            path: `${build_path}`,
+            filename: 'javascripts/[name].[chunkhash:6].js'
         },
-        devtool: 'source-map',
+        devtool: CONFIG.debug ? 'eval-source-map' : 'source-map',
         module: {
             rules: [{
                 test: /\.(js|jsx)$/,
-                loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'react', 'stage-2']
-                }
+                // exclude: /node_modules/,
+                use: [{
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            'es2015',
+                            'react',
+                            'stage-2',
+                        ],
+                        plugins: [
+                            'transform-decorators-legacy'
+                        ]
+                    }
+                }]
+            }, {
+                test: /\.html$/,
+                use: [{
+                    loader: `${__dirname}/loaders/swig.js`,
+                    options: {
+                        locals: {
+                            API_PATH: CONFIG.api_path,
+                            ENV: CONFIG.environment
+                        }
+                    }
+                }]
+            }, {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //resolve-url-loader may be chained before sass-loader if necessary
+                    use: [{
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            localIdentName: '[name]__[local]--[hash:base64:6]'
+                        }
+                    }, {
+                        loader: 'resolve-url-loader',
+                        options: {
+                            debug: CONFIG.debug
+                        }
+                    }, {
+                        loader: 'less-loader',
+                        options: {
+                            sourceMap: true,
+                            strictMath: true,
+                            noIeCompat: true
+                        }
+                    }]
+                })
+            }, {
+                test: /.(png|jpe?g|gif)/i,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        hash: 'sha512',
+                        digest: 'hex',
+                        name: 'images/[name]-[hash:6].[ext]'
+                    }
+                }]
             }]
-        }
+        },
+        plugins: [
+            new webpack.optimize.UglifyJsPlugin({
+                compress: !CONFIG.debug
+            })
+            , new HtmlWebpackPlugin({
+                template: `${page_path}/index.html`
+            })
+            , new ExtractTextPlugin({
+                filename: CONFIG.debug ? 'all.css' : 'all.[contenthash:4].css',
+                allChunks: true,
+                ignoreOrder: true
+            })
+            , new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                minChunks: function (module) {
+                    // this assumes your vendor imports exist in the node_modules directory
+                    return module.context && module.context.indexOf('node_modules') !== -1;
+                }
+            }),
+            // , new webpack.NoErrorsPlugin()
+        ]
     });
 
-    // 因为 webpack 被集成到了 gulp 中, 所以要遵循 gulp 的路径配置
-    // 先把html 拷贝到 build 目录中
-    copy([`${app_path}/index.html`], build_path)
-
     return new Promise(function (resolve, reject) {
-        if (options.watch) {
+        if (CONFIG.watch) {
             compiler.watch({
                 // watch options
             }, (err, stats) => {
@@ -41,7 +114,9 @@ module.exports = function (site_name, page_name, options) {
             })
         } else {
             compiler.run((err, stats) => {
-                err ? util.log(err) : util.log('webpack compile complete')
+                err ?
+                    util.log(util.colors.red(err)) :
+                    util.log(util.colors.green('webpack compile complete'))
                 resolve()
             })
         }

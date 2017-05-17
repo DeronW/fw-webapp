@@ -17,9 +17,11 @@ function istrue(str) {
     var reg = /^([a-z]+(?=[0-9])|[0-9]+(?=[a-z]))[a-z0-9]+$/ig;
     return reg.test(str);
 }
-const Register = React.createClass({
-    getInitialState() {
-        return {
+
+class Register extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
             phoneNum: '',
             code: '',
             password: '',
@@ -28,98 +30,107 @@ const Register = React.createClass({
             codeToken: '',
             codeText: '获取验证码',
             seeCode: false,
-            checked:false
+            checked: true
         }
-    },
-    phoneChange: function (e) {
-        let value = e.target.value;
-        if (!isNaN(value) && value.length <= 11) {
-            this.setState({
-                phoneNum: value
-            })
-        }
-    },
-    codeTime: function () {
-        this.timer = setInterval(() => {
-            this.setState({
-                countdown: this.state.countdown - 1,
-                codeText: this.state.countdown + 's'
-            });
-            if (this.state.countdown == 0) {
-                clearInterval(this.timer);
-                this.setState({
-                    allowCode: true,
-                    codeText: '获取验证码'
-                });
-            }
-        }, 1000);
-    },
-    codeChange: function (e) {
-        let value = e.target.value;
-        if (!isNaN(value) && value.length <= 8) {
-            this.setState({
-                code: value
-            })
-        }
-    },
-    seeCodeChange: function () {
+        this.phoneChange = this.phoneChange.bind(this);
+        this.codeTime = this.codeTime.bind(this);
+        this.codeChange = this.codeChange.bind(this);
+        this.seeCodeChange = this.seeCodeChange.bind(this);
+        this.getCodeHandler = this.getCodeHandler.bind(this);
+        this.passwordChange = this.passwordChange.bind(this);
+        this.nextStepHandler = this.nextStepHandler.bind(this);
+        this.clickHandler = this.clickHandler.bind(this);
+    }
+    phoneChange(e) {
+    let value = e.target.value;
+    if (!isNaN(value) && value.length <= 11) {
         this.setState({
-            seeCode: !this.state.seeCode
+            phoneNum: value
+        })
+    }
+}
+    codeTime() {
+    this.timer = setInterval(() => {
+        this.setState({
+            countdown: this.state.countdown - 1,
+            codeText: this.state.countdown + 's'
         });
-    },
-    getCodeHandler: function () {
-        if (!isMobilePhone(this.state.phoneNum)) {
-            $FW.Component.Toast("手机号格式不正确");
-            return false
-        }
-        if (this.state.allowCode) {
+        if (this.state.countdown == 0) {
+            clearInterval(this.timer);
             this.setState({
-                allowCode: false,
-                countdown: 60
+                allowCode: true,
+                codeText: '获取验证码'
             });
-            this.codeTime();
-            $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
-                mobile: this.state.phoneNum,
-                userOperationType: 3,
-                sourceType: SOURCE_TYPE
-            }).then(data => {
-                this.setState({ codeToken: data.codeToken })
-            }, e => $FW.Component.Toast(e.message));
         }
-    },
-    passwordChange: function (e) {
-        let v = e.target.value;
-        v.length <= 16 && numLetter(v) && this.setState({ password: v });
-    },
-    nextStepHandler: function () {
-        if(this.state.checked){
-            let err, {phoneNum, code, password, codeToken} = this.state;
-            if (!isMobilePhone(phoneNum)) err = "手机号格式不正确";
-            if (code == '') err = "验证码不能为空";
-            if (password == '') err = "密码不能为空";
-            if (password.length < 8) err = "密码不能少于8位";
-            if (password.length > 16) err = "密码不能多于16位";
-            if (!istrue(password)) err = "必须是字母及数字组合密码";
-            err ?
-                $FW.Component.Toast(err) :
-                $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
-                    channelCode:$FW.Format.urlQuery().channelCode,
-                    codeToken: codeToken,
-                    invitationCode: $FW.Format.urlQuery().code,
-                    mobile: phoneNum,
-                    password: password,
-                    verifyCode: code,
-                    sourceType: SOURCE_TYPE
-                }).then(data => {
-                    window.location.href = "/static/loan/weixin-attention/index.html"
-                }, (e) => $FW.Component.Toast(e.message))
-        }else{
-            $FW.Component.Toast("请同意放心花用户注册协议");
-        }
-    },
+    }, 1000);
+}
+    codeChange(e) {
+    let value = e.target.value;
+    if (!isNaN(value) && value.length <= 8) {
+        this.setState({
+            code: value
+        })
+    }
+}
+    seeCodeChange() {
+    this.setState({
+        seeCode: !this.state.seeCode
+    });
+}
+    getCodeHandler() {
+    if (!isMobilePhone(this.state.phoneNum)) {
+        $FW.Component.Toast("手机号格式不正确");
+        return false
+    }
+    if (this.state.allowCode) {
+        this.setState({
+            allowCode: false,
+            countdown: 60
+        });
+        this.codeTime();
+        $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
+            mobile: this.state.phoneNum,
+            userOperationType: 3,
+            sourceType: SOURCE_TYPE
+        }).then(data => {
+            this.setState({ codeToken: data.codeToken })
+        }, e => $FW.Component.Toast(e.message));
+    }
+}
+    passwordChange(e) {
+    let v = e.target.value;
+    v.length <= 16 && numLetter(v) && this.setState({ password: v });
+}
+    nextStepHandler() {
+    if(this.state.checked){
+        let err, {phoneNum, code, password, codeToken} = this.state;
+        if (!isMobilePhone(phoneNum)) err = "手机号格式不正确";
+        if (code == '') err = "验证码不能为空";
+        if (password == '') err = "密码不能为空";
+        if (password.length < 8) err = "密码不能少于8位";
+        if (password.length > 16) err = "密码不能多于16位";
+        if (!istrue(password)) err = "必须是字母及数字组合密码";
+
+        if (err) return $FW.Component.Toast(err);
+
+        $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
+            channelCode:$FW.Format.urlQuery().channelCode,
+            codeToken: codeToken,
+            invitationCode: $FW.Format.urlQuery().code,
+            mobile: phoneNum,
+            password: password,
+            verifyCode: code,
+            sourceType: SOURCE_TYPE
+        }).then(data => {
+            window.location.href = "/static/loan/weixin-attention/index.html"
+        }, (e) => $FW.Component.Toast(e.message))
+    }else{
+        $FW.Component.Toast("请同意放心花用户注册协议");
+    }
+}
     clickHandler(){
         this.setState({checked:!this.state.checked});
-    },
+    }
     render() {
         return (
             <div className="register-box">
@@ -128,7 +139,7 @@ const Register = React.createClass({
                 <div className="register-box-input">
                     <div className="phone-box input-box">
                         <input type="number" placeholder="请输入手机号进行注册登录" value={this.state.phoneNum}
-                            onChange={this.phoneChange} />
+                               onChange={this.phoneChange} />
                     </div>
                     <div className="code-box input-box">
                         <input type="number" placeholder="输入短信验证码" value={this.state.code} onChange={this.codeChange} />
@@ -136,8 +147,8 @@ const Register = React.createClass({
                     </div>
                     <div className="password-box input-box">
                         <input type={this.state.seeCode ? "text" : "password"} placeholder="密码要求8-16位字母与数字组合"
-                            value={this.state.password}
-                            onChange={this.passwordChange} />
+                               value={this.state.password}
+                               onChange={this.passwordChange} />
                         <div className={this.state.seeCode ? "eye on" : "eye"} onClick={this.seeCodeChange}></div>
                     </div>
                     <div className="protocol">
@@ -150,7 +161,8 @@ const Register = React.createClass({
             </div>
         )
     }
-});
+}
+
 $FW.DOMReady(() => {
     ReactDOM.render(<Register />, CONTENT_NODE)
 })
