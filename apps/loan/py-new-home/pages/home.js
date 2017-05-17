@@ -11,7 +11,7 @@ export default class Home extends React.Component {
     render(){
         return (
             <div>
-                <div>11111111111111111111111</div>
+
                 <BottomNav />
             </div>
         )
