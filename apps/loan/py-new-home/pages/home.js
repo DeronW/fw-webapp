@@ -14,63 +14,63 @@ export default class Home extends React.Component {
         this.props.home.getProductList()
     }
     render(){
-        // let product = (p, index) => {
-        //
-        //     let link_a = `/static/loan/fxh/index.html`,
-        //         link_b = `/static/loan/dumiao/index.html`,
-        //         link = p.productName == '放心花' ? link_a : link_b;
-        //
-        //     return (
-        //         <div styleName="borrow-money-list" key={index} onClick={()=>gotoHandler(`${link}?pid=${p.productId}`)}>
-        //             <div styleName="icon-block">
-        //                 <img src="images/icon.png" />
-        //             </div>
-        //             <div styleName="info">
-        //                 <div styleName="t">
-        //                     <span styleName="title-text">{p.productName}</span>
-        //                     <div styleName="tag">
-        //                         {p.productLabelList.map(i => <img src={`/static/loan/home/images/tag-${i.labelType}a.png`} />)}
-        //                     </div>
-        //                 </div>
-        //                 <div styleName="b">
-        //                     <div styleName="text"> 借款范围（{p.amountStr}） </div>
-        //                 </div>
-        //             </div>
-        //             <div styleName="next"></div>
-        //         </div>
-        //     )
-        // }
-        //
-        // let main_product = this.props.home.resultList[0],
-        //     sub_products = this.props.home.resultList.slice(1)
-        //
-        //
-        // let Browser = new BrowserFactory(navigator.userAgent, 'FinancialWorkspace');
-        // let receive_handler = function(receive_data){
-        //     console.log(receive_data)
-        // }
-        // const NativeBridge = new NativeBridgeFactory('FinancialWorkspace', receive_handler)
-        //
-        // let jump_link = Browser.inApp ? `/static/loan/user-weixin-jrgcapp/index.html` : `/static/loan/weixin-download/index.html`;
-        //
-        // let generate_other_products = (product) => (
-        //     <div
-        //         styleName="other-products-item"
-        //         key={product.firstTitle}
-        //         onClick={() => { NativeBridge.goto(product.forwardUrl)}}>
-        //         <div styleName="product-icon">
-        //             <img src={decodeURIComponent(product.iconUrl)}/>
-        //         </div>
-        //         <div styleName="product-title">
-        //             <div styleName="product-1st-title">{product.firstTitle}</div>
-        //             <div styleName="product-2nd-title">{product.secondTitle}</div>
-        //         </div>
-        //     </div>
-        // )
+        let product = (p, index) => {
+
+            let link_a = `/static/loan/fxh/index.html`,
+                link_b = `/static/loan/dumiao/index.html`,
+                link = p.productName == '放心花' ? link_a : link_b;
+
+            return (
+                <div styleName="borrow-money-list" key={index} onClick={()=>gotoHandler(`${link}?pid=${p.productId}`)}>
+                    <div styleName="icon-block">
+                        <img src="images/icon.png" />
+                    </div>
+                    <div styleName="info">
+                        <div styleName="t">
+                            <span styleName="title-text">{p.productName}</span>
+                            <div styleName="tag">
+                                {p.productLabelList.map(i => <img src={`/static/loan/home/images/tag-${i.labelType}a.png`} />)}
+                            </div>
+                        </div>
+                        <div styleName="b">
+                            <div styleName="text"> 借款范围（{p.amountStr}） </div>
+                        </div>
+                    </div>
+                    <div styleName="next"></div>
+                </div>
+            )
+        }
+
+        let main_product = this.props.home.resultList && this.props.home.resultList[0],
+            sub_products = this.props.home.resultList && this.props.home.resultList.slice(1)
+
+
+        let Browser = new BrowserFactory(navigator.userAgent, 'FinancialWorkspace');
+        let receive_handler = function(receive_data){
+            console.log(receive_data)
+        }
+        const NativeBridge = new NativeBridgeFactory('FinancialWorkspace', receive_handler)
+
+        let jump_link = Browser.inApp ? `/static/loan/user-weixin-jrgcapp/index.html` : `/static/loan/weixin-download/index.html`;
+
+        let generate_other_products = (product) => (
+            <div
+                styleName="other-products-item"
+                key={product.firstTitle}
+                onClick={() => { NativeBridge.goto(product.forwardUrl)}}>
+                <div styleName="product-icon">
+                    <img src={decodeURIComponent(product.iconUrl)}/>
+                </div>
+                <div styleName="product-title">
+                    <div styleName="product-1st-title">{product.firstTitle}</div>
+                    <div styleName="product-2nd-title">{product.secondTitle}</div>
+                </div>
+            </div>
+        )
         console.log(this.props.home.resultList)
         return (
             <div>
-                {/*<div styleName="main-panel">
+                <div styleName="main-panel">
                     <a onClick={()=>NativeBridge.goto(jump_link)} styleName="banner">
                         <img src="images/banner.jpg" />
                     </a>
@@ -86,8 +86,8 @@ export default class Home extends React.Component {
                     {sub_products.map(product)}
                 </div>
                 <div styleName="other-products-list">
-                    {this.props.home.extList.map(generate_other_products)}
-                </div>*/}
+                    {this.props.home.extList && this.props.home.extList.map(generate_other_products)}
+                </div>
                 <BottomNav />
             </div>
         )
