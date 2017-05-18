@@ -9,7 +9,8 @@ import { Request } from 'fw-javascripts'
 import * as Stores from './stores'
 
 let stores = {
-    products: new Stores.Products(Request)
+    products: new Stores.Products(Request),
+    bill: new Stores.Bill(Request)
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))

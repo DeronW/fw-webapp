@@ -31,7 +31,7 @@ class MainPanel extends React.Component {
     }
 
     componentDidMount() {
-        this.props.products.getProductList();
+        this.props.products.fetchProductList();
     }
 
     render() {

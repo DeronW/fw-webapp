@@ -23,7 +23,15 @@ export default (stores) => {
             <Switch>
                 <Route exact path='/loan' component={Loan} />
                 <Route exact path='/user-entry' component={UserEntey} />
-                <Route exact path='/bill' component={Bill} />
+                {/* <Route path='/bill' component={() => <Redirect to='/bill/applying' />}>
+
+                </Route> */}
+                <Route exact path='/bill/:billType' component={Bill} >
+                    {/* <Route exact path='/bill/:billType/:loanProduct/:billId' component={BillDetail} >
+                        <Route exact path='/bill/:billType/:loanProduct/:billId/repayment' component={Repayment} />
+                        <Route exact path='/bill/:billType/:loanProduct/:billId/repayment-record' component={RepaymentRecord} />
+                    </Route> */}
+                </Route>
                 <Route exact path='/promote' component={Promote} />
                 <Route exact path='/market' component={Market} />
                 <Route exact path='/user' component={User} />
