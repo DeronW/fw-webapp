@@ -12,7 +12,8 @@ let APP_NAMES = [
     'p2p-app-download',//微金app下载页面
     // test page
     'test-native-bridge',
-    'test-statistic-chart'
+    'test-statistic-chart',
+    'coupon-center'
 ];
 
 const USER_PAGES = [
