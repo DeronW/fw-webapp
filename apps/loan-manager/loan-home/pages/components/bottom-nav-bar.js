@@ -2,14 +2,14 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../../css/bottom-nav-bar.css'
-import { Browser } from 'fw-javascripts'
+import { BrowserFactory } from 'fw-javascripts'
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class BottomNavBar extends React.Component {
 
     render() {
 
-        if (Browser.inApp) return null
+        if (BrowserFactory.inApp) return null
 
         return (
             <div styleName="bottom-nav-bar">

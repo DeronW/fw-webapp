@@ -32,13 +32,13 @@ img {
     overflow: hidden;
 }
 
-.ui-tab-li {
+:global .ui-tab-li {
     width: 25%;
     float: left;
     display: block;
 }
 
-.text {
+:global .text {
     display: block;
     width: 88px;
     height: 72px;
@@ -50,9 +50,9 @@ img {
     border-bottom: 2px solid #fff;
 }
 
-.ui-select-li .text {
-    color: #649cfe;
-    border-bottom: 2px solid #649cfe;
+:global .active.ui-tab-li .text {
+  color: #649cfe;
+  border-bottom: 2px solid #649cfe;
 }
 
 .billContainer {

@@ -9,6 +9,7 @@ import { observer, inject } from 'mobx-react'
 import { Event } from 'fw-javascripts'
 
 // import Nav from './components/nav'
+import Header from './components/header'
 import BottomNavBar from './components/bottom-nav-bar'
 
 
@@ -16,12 +17,14 @@ import BottomNavBar from './components/bottom-nav-bar'
 class Bill extends React.Component {
 
     componentDidMount() {
+        Event.cancelTouchBottom();
         this.props.bill.fetchBillItems(this.props.match.params.billType)(null);
         Event.touchBottom(this.props.bill.fetchBillItems(this.props.match.params.billType));
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.match.params.billType !== prevProps.match.params.billType) {
+            Event.cancelTouchBottom();
             Event.cancelTouchBottom();
             if (!this.props.bill.billList[this.props.match.params.billType].list.slice().length) {
                 this.props.bill.fetchBillItems(this.props.match.params.billType)(null);
@@ -37,8 +40,8 @@ class Bill extends React.Component {
 
         let btn_tab = (type) => {
             return (
-                <NavLink key={type} styleName="ui-tab-li" to={`/bill/${type}`}>
-                    <span styleName="text">{this.props.bill.billList[type].typeName}</span>
+                <NavLink key={type} className="ui-tab-li" to={`/bill/${type}`}>
+                    <span className="text">{this.props.bill.billList[type].typeName}</span>
                 </NavLink>
             )
         }
@@ -57,8 +60,8 @@ class Bill extends React.Component {
                 </div>
                 <div styleName="apply-status-wrap">
                     <div styleName="apply-status">
-                        <span styleName={`bill-${billType}-color`}>
-                            {[billType].typeName}</span></div>
+                        <span styleName={`bill-${this.props.bill.billList[billType].typeNo}-color`}>
+                            {this.props.bill.billList[billType].typeName}</span></div>
                     <div styleName="apply-time">{order.loanTimeStr}</div>
                 </div>
             </NavLink>
@@ -66,15 +69,21 @@ class Bill extends React.Component {
 
         let empty = <span styleName="no-data"></span>
 
-        return <div styleName="billContent">
-            <div styleName="bill-header">
-                {['applying', 'repayable', 'rejected', 'fulfilled'].map(btn_tab)}
+        return (
+            <div>
+                <Header title={"借款账单"} show_back={false} />
+                <div styleName="billContent">
+                    <div styleName="bill-header">
+                        {['applying', 'repayable', 'rejected', 'fulfilled'].map(btn_tab)}
+                    </div>
+                    <div styleName="billContainer">
+                        {billList.map(order_item)}
+                        {billList.length === 0 && empty}
+                    </div>
+                </div>
+                <BottomNavBar />
             </div>
-            <div styleName="billContainer">
-                {billList.map(order_item)}
-                {billList.length === 0 && empty}
-            </div>
-        </div>
+        )
     }
 }
 

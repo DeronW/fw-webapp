@@ -5,7 +5,7 @@ import styles from '../css/loan.css'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 
-import { Browser } from 'fw-javascripts'
+import { BrowserFactory } from 'fw-javascripts'
 
 import Nav from './components/nav'
 import BottomNavBar from './components/bottom-nav-bar'
@@ -15,7 +15,7 @@ function gotoHandler(link, need_login) {
     if (link.indexOf('://') < 0) {
         link = location.protocol + '//' + location.hostname + link;
     }
-    if (Browser.inApp) {
+    if (BrowserFactory.inApp) {
         NativeBridge.goto(link, need_login)
     } else {
         location.href = encodeURI(link);
@@ -70,7 +70,7 @@ class MainPanel extends React.Component {
         let main_product = loanProducts[0],
             sub_products = loanProducts.slice(1);
 
-        let jump_link = Browser.inApp ? `/static/loan/user-weixin-jrgcapp/index.html` : `/static/loan/weixin-download/index.html`;
+        let jump_link = BrowserFactory.inApp ? `/static/loan/user-weixin-jrgcapp/index.html` : `/static/loan/weixin-download/index.html`;
 
         let generate_other_products = (product) => (
             <div
