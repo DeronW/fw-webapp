@@ -1,13 +1,13 @@
 import {extendObservable} from 'mobx'
 
 export default class Home{
-    constructor(request,state={}){
+    constructor(request){
         this.request = request
         this.extList = []
         extendObservable(this,{
-            resultList:null,
-            extList:null
-        },state)
+            resultList:[],
+            extList:[]
+        })
     }
 
     getProductList(params){

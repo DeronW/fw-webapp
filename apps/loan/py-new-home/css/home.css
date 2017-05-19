@@ -126,6 +126,7 @@ body {
 }
 
 .other-products-item {
+  display:block;
   width: 100%;
   height: 140px;
   background-color: #fff
