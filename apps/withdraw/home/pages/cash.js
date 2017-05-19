@@ -16,9 +16,21 @@ export default class Cash extends React.Component {
         title:"提现",
         inputValue:""
     }
+
+//    dataHandler(){
+//      let data = this.props; 
+//     console.log(this.props);
+//     console.log(data);
+//    }
+   
+   
     componentDidMount(){
         
     }
+    // jumpToCashRecords = () =>{
+    //     let hash=window.location.hash.slice(2);
+    //     hash = "cash-records"
+    // }
     render(){
         return <div>
             <div styleName="cash-wrapper">
@@ -28,7 +40,7 @@ export default class Cash extends React.Component {
                         <img styleName="back-icon" src={require('../images/back.png')}  alt="" />
                     </div>
                     <div styleName="title" >{this.state.title}</div>
-                    <span styleName="to-cash-records">提现记录</span>
+                    <a styleName="to-cash-records" href="#/cash-records">提现记录</a>
                 </div>
                {/*内容*/}
                 <div styleName="content">
@@ -59,20 +71,75 @@ export default class Cash extends React.Component {
                     </div>
                     {/*提现输入框*/}
                     <div styleName="money-cover">
+                        {/*提现*/}
                         <div styleName="sub-cover">
                             <div styleName="input-side">
-                                <input type="text" styleName="input-money"/>
+                                <input type="text" styleName="input-money" placeholder="请输入提现金额"/>
                             </div>
                             <div styleName="click-side">
                                 <span styleName="draw-money">全提</span>
                             </div>
                         </div>
+                        {/*选择开户支行*/}
+                        <div styleName="modify">
+                            <div styleName="wire"></div>
+                            <div styleName="jump-side"></div>
+                            <div styleName="open-account-side">
+                                <div styleName="account-text">请选择开户支行</div>
+                            </div>
+                        </div>
                         
                     </div>
                     {/*提现方式*/}
-                    {/*<div styleName="draw-money-method">
+                    <div styleName="draw-money-method">
                         <div styleName="draw-title">提现方式</div>
-                    </div>*/}
+                        <div styleName="draw-info">
+                            {/*实时提现*/}
+                            <div styleName="info-list">
+                                <div styleName="info-select-btn">
+                                    <span styleName="select-icon"></span>
+                                </div>
+                                <div styleName="info-text">
+                                    <div styleName="subhead-text">实时提现</div>
+                                    <div styleName="detail-text">单笔金额，7*24小时实时到账。</div>
+                                </div>
+                            </div>
+                            {/*大额提现*/}
+                            <div styleName="info-list">
+                                <div styleName="info-select-btn">
+                                    <span styleName="select-btn"></span>
+                                </div>
+                                <div styleName="info-text">
+                                    <div styleName="subhead-text">大额提现</div>
+                                    <div styleName="detail-text">工作日9:00-19:00受理，最快30分钟之内到账。</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/*下一步按钮*/}
+                    <div styleName="next">下一步</div>
+                    {/*提现说明*/}
+                    <div>
+                        <div styleName="instruction-title">提现说明</div>
+                        <div styleName="instruction-detail">
+                            <div>
+                                <img styleName="card-d" src={require("../images/card-d.png")} alt=""/>
+                                <span styleName="text-line">单笔提现金额不低于10元，提现申请成功后不可撤回。</span>
+                            </div>
+                            <div>
+                                <img styleName="card-d" src={require("../images/card-d.png")} alt=""/>
+                                <span styleName="text-line">单笔提现金额不低于10元，提现申请成功后不可撤回。</span>
+                            </div>
+                            <div>
+                                <img styleName="card-d" src={require("../images/card-d.png")} alt=""/>
+                                <span styleName="text-line">单笔提现金额不低于10元，提现申请成功后不可撤回。</span>
+                            </div>
+                            <div>
+                                <img styleName="card-d" src={require("../images/card-d.png")} alt=""/>
+                                <span styleName="text-line">单笔提现金额不低于10元，提现申请成功后不可撤回。</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

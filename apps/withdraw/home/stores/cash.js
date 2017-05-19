@@ -7,4 +7,10 @@ export default class Cash {
             inputValue: null,
         }, state)
     }
+
+    takeData() {
+        return this.request('/api/sspay/withdraw/v1/getOpenAccountInfo.shtml').then(data => {
+            extendObservable(this, data)
+        })
+    }
 }

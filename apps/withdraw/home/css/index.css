@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
     background: #ebebee;
 }
 
@@ -12,7 +12,8 @@ a {
 
 /*提现页面*/
 
-.cash-wrapper {
+.cash-wrapper,
+.cash-records-wrapper {
     width: 100%;
     height: auto;
 }
@@ -26,6 +27,7 @@ a {
     line-height: 100px;
     position: fixed;
     background: #fff;
+    z-index: 100;
 }
 
 .return-btn {
@@ -154,6 +156,9 @@ a {
     margin-top: 5px;
 }
 
+
+/*全提*/
+
 .sub-cover {
     width: 100%;
     height: 100px;
@@ -163,7 +168,6 @@ a {
 .input-side {
     float: left;
     width: 400px;
-    font-size: 36px;
     margin-left: 30px;
     color: #555;
     height: 90px;
@@ -173,11 +177,21 @@ a {
 }
 
 .input-money {
+    width: 100%;
     height: 60px;
     line-height: 60px;
+    font-size: 36px;
+    border: none;
+    /*为了输入框居中，待优化*/
+    margin-top: 20px;
 }
 
-.click-side {
+.input-money:focus {
+    outline: none;
+}
+
+.click-side,
+.open-account-side {
     float: right;
     font-size: 32px;
     margin-right: 30px;
@@ -185,4 +199,158 @@ a {
 
 .draw-money {
     color: #4aa1f9;
+}
+
+
+/*请选择开户支行*/
+
+.modify {
+    height: 98px;
+    line-height: 98px;
+    margin-top: -2px;
+    background: #fff;
+}
+
+.wire {
+    width: 96%;
+    height: 1px;
+    border-top: 1px solid #d8d8d8;
+    float: right;
+}
+
+.jump-side {
+    float: left;
+    width: 400px;
+    font-size: 32px;
+    margin-left: 30px;
+    color: #555;
+    height: 90px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+/*.open-account-side {
+    float: right;
+    font-size: 32px;
+    margin-right: 30px;
+}*/
+
+.account-text {
+    color: rgb(85, 85, 85);
+}
+
+
+/*提现方式*/
+
+.draw-money-method {
+    margin: 20px 0 0;
+}
+
+.draw-title {
+    padding: 0 0 5px 30px;
+    line-height: 40px;
+    font-size: 28px;
+}
+
+.draw-info {
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+    background-color: #fff;
+}
+
+.info-list {
+    height: 150px;
+}
+
+.info-select-btn {
+    float: left;
+    width: 98px;
+}
+
+.select-icon {
+    float: left;
+    width: 38px;
+    height: 38px;
+    margin: 44px 0 0 29px;
+    background-color: #fff;
+    border: 1px solid #d8d8d8;
+    border-radius: 50%;
+}
+
+.select-btn {
+    display: inline-block;
+    margin: 44px 0 0 29px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: #6892cd url(../images/select-icon.png) no-repeat center;
+}
+
+.info-text {
+    height: 128px;
+    margin: 0 0 0 98px;
+    padding: 30px 0 0;
+    line-height: 30px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.subhead-text {
+    line-height: 40px;
+    font-size: 28px;
+    color: #555;
+}
+
+.detail-text {
+    font-size: 24px;
+    color: #999;
+}
+
+
+/*下一步*/
+
+.next {
+    width: 90%;
+    height: 83px;
+    margin: 0 auto;
+    background: #fd4d4c;
+    color: #fff;
+    font-size: 36px;
+    line-height: 83px;
+    border: 1px solid #f2acad;
+    text-align: center;
+    border-radius: 8px;
+    margin-top: 54px;
+}
+
+
+/*提现说明*/
+
+.instruction-title {
+    font-size: 30px;
+    color: #999;
+    margin-left: 40px;
+    margin-top: 28px;
+}
+
+.instruction-detail {
+    width: 94%;
+    margin: 0 auto;
+}
+
+.card-d {
+    float: left;
+    margin-top: 19px;
+    margin-left: 25px;
+    margin-right: 12px;
+}
+
+.text-line {
+    width: 611px;
+    line-height: 43px;
+    display: inline-block;
+    font-size: 28px;
+    color: #999;
 }
