@@ -6,10 +6,10 @@ let APP_NAMES = [
     'home', // 首页
     'about-us', // 关于我们
     'faq', // 帮助中心
-    'p2p-faq',//微金帮助中心页面
+    'p2p-faq', //微金帮助中心页面
     'app-download', // app 下载页面
     'guide-cookbook', // 用户使用引导页面
-    'p2p-app-download',//微金app下载页面
+    'p2p-app-download', //微金app下载页面
     // test page
     'test-native-bridge',
     'test-statistic-chart'
@@ -21,8 +21,8 @@ const USER_PAGES = [
     'user-contribute', // 用户贡献值
     'vip-prerogative', // VIP特权详情页
     'user-evaluate', // 投资风险承受能力评估
-    'user-evaluate-p2p',//p2p投资风险承受能力评估
-    'user-evaluate-zx',//尊享投资风险承受能力评估
+    'user-evaluate-p2p', //p2p投资风险承受能力评估
+    'user-evaluate-zx', //尊享投资风险承受能力评估
 ]
 
 const PROTOCOL_PAGES = [
@@ -38,7 +38,7 @@ const PROTOCOL_PAGES = [
     'protocol-perform-duty', // 履行反洗钱义务的承诺书
     'protocol-risk-prompt', // 网络借贷出借风险提示
     'protocol-register', // 网络借贷出借风险提示
-    'protocol-user-service',//工场微金用户服务协议
+    'protocol-user-service', //工场微金用户服务协议
     'protocol-trade-service', //徽商银行网络交易资金账户服务三方协议
 ]
 
@@ -46,10 +46,10 @@ const NOTICE_PAGES = [
     // 内容展示页面
     'notice-corporate-structure', // 信息披露 公司结构
     'notice-safeguard', // 资金安全保障
-    'p2p-notice-safeguard',//p2p资金安全保障
+    'p2p-notice-safeguard', //p2p资金安全保障
     'notice-risk-prompt', // 风险揭示
-    'notice-information-disclosure',//测试 信息披露
-    'p2p-notice-information-disclosure',//微金信息披露
+    'notice-information-disclosure', //测试 信息披露
+    'p2p-notice-information-disclosure', //微金信息披露
 ]
 
 const TOPIC_PAGES = [
@@ -62,10 +62,10 @@ const TOPIC_PAGES = [
     'topic-annual-commision', //年化佣金页面
     'topic-invite', //邀请返利, 邀请人,
     'topic-gong-you-hui', //工友会专题页面,
-    'topic-invite-strategy',//邀请攻略页面
-    'topic-novice-strategy',//新手策略页面
-    'topic-invest-school',// 投资学堂
-    'p2p-topic-invest-school',//微金投资学堂页面
+    'topic-invite-strategy', //邀请攻略页面
+    'topic-novice-strategy', //新手策略页面
+    'topic-invest-school', // 投资学堂
+    'p2p-topic-invest-school', //微金投资学堂页面
 ]
 
 const HUISHANG_PAGES = [
@@ -93,9 +93,14 @@ const SHOUSHAN = [
     'shoushan-cash-records'
 ]
 
+//通用提现页面
+// const WITHDRAW = [
+//     'withdraw'
+// ]
+
 const DEVELOPING_PAGES = [
     'fa-xian',
-    'p2p-fa-xian',//微金发现页面
+    'p2p-fa-xian', //微金发现页面
 ]
 
 const OUTSIDE_PAGES = [
@@ -106,7 +111,7 @@ const P2P = [
     'p2p-invite', //P2P邀请返利, 邀请人
     'p2p-interest-reward', //P2P年化加息奖励
     'p2p-vip-prerogative',
-    'p2p-policy',//政策法规页面
+    'p2p-policy', //政策法规页面
     'p2p-pdf',
 ]
 APP_NAMES.push(
@@ -121,7 +126,7 @@ APP_NAMES.push(
     ...P2P
 )
 
-module.exports = function (gulp, generate_task, CONSTANTS) {
+module.exports = function(gulp, generate_task, CONSTANTS) {
     const COMMON_COMPONENTS = [
         'use-strict.jsx', 'loading.jsx', 'alert.jsx', `${PROJ}/header.jsx`,
         'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
@@ -160,11 +165,11 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-            `apps/${PROJ}/**/*.+(js|jsx)`,
-            '!node_modules/**',
-            '!**/jquery.*.js',
-            '!**.min.js'
-        ])
+                `apps/${PROJ}/**/*.+(js|jsx)`,
+                '!node_modules/**',
+                '!**/jquery.*.js',
+                '!**.min.js'
+            ])
             .pipe(eslint())
             .pipe(eslint.format());
     }))
