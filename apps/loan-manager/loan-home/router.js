@@ -26,7 +26,7 @@ export default (stores) => {
                 {/* <Route path='/bill' component={() => <Redirect to='/bill/applying' />}>
 
                 </Route> */}
-                <Route exact path='/bill/:billType' component={Bill} >
+                <Route exact path='/bill/:billType' component={Bill}>
                     {/* <Route exact path='/bill/:billType/:loanProduct/:billId' component={BillDetail} >
                         <Route exact path='/bill/:billType/:loanProduct/:billId/repayment' component={Repayment} />
                         <Route exact path='/bill/:billType/:loanProduct/:billId/repayment-record' component={RepaymentRecord} />

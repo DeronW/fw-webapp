@@ -21,14 +21,13 @@ export default class Bill {
         if (this.billList[type].pageNo === 0) return done && done();
 
         let API_PATH = document.getElementById('api-path').value;
-        console.log(this.billList[type]);
         return this.request({
             url: `${API_PATH}/api/order/v1/orderList.json`,
             method: 'post',
             data: {
                 pageSize: pageSize || 10,
                 pageIndex: this.billList[type].pageNo,
-                loanStatus: this.billList[type].typeName
+                loanStatus: this.billList[type].typeNo
             }
         }).then(data => {
             this.billList[type].list.push(...data.resultList)

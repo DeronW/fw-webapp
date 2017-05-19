@@ -14,24 +14,31 @@ import BottomNavBar from './components/bottom-nav-bar'
 
 @inject('bill') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Bill extends React.Component {
-    constructor({ match, bill }) {
-        super({ match, bill });
-        this.billType = match.params.billType;
-        this.billList = bill.billList;
-    }
 
     componentDidMount() {
-        this.props.bill.fetchBillItems(this.billType)(null);
-        Event.touchBottom(this.props.bill.fetchBillItems(this.billType));
+        this.props.bill.fetchBillItems(this.props.match.params.billType)(null);
+        Event.touchBottom(this.props.bill.fetchBillItems(this.props.match.params.billType));
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.billType !== prevProps.match.params.billType) {
+            Event.cancelTouchBottom();
+            if (!this.props.bill.billList[this.props.match.params.billType].list.slice().length) {
+                this.props.bill.fetchBillItems(this.props.match.params.billType)(null);
+            }
+            Event.touchBottom(this.props.bill.fetchBillItems(this.props.match.params.billType));
+        }
     }
 
     render() {
-        let billList = this.billList[this.billType].list.slice();
+        let billType = this.props.match.params.billType,
+            billList = this.props.bill.billList[billType].list.slice();
+
 
         let btn_tab = (type) => {
             return (
                 <NavLink key={type} styleName="ui-tab-li" to={`/bill/${type}`}>
-                    <span styleName="text">{this.billList[type].typeName}</span>
+                    <span styleName="text">{this.props.bill.billList[type].typeName}</span>
                 </NavLink>
             )
         }
@@ -39,13 +46,10 @@ class Bill extends React.Component {
         let order_item = (order, index) => {
 
             let link = order.productId == 1 ?
-            `/bill/${this.billType}/fxh/${order.loanGid}` :
-            `/bill/${this.billType}/dumaio/${order.uuid}`;
+            `/bill/${billType}/fxh/${order.loanGid}` :
+            `/bill/${billType}/dumaio/${order.uuid}`;
 
-            return <NavLink styleName="list_li" key={`${order.orderGid}${index}`} to={link}
-                onClick={() => {console.log('1');
-                    this.props.bill.fetchBillItems(this.billType)(null);
-                Event.touchBottom(this.props.bill.fetchBillItems(this.billType));}}>
+            return <NavLink styleName="list_li" key={`${order.orderGid}${index}`} to={link}> {/* delete index in production */}
                 <div styleName="list-img"><img src={order.productLogo} /></div>
                 <div styleName="list-content">
                     <div styleName="apply-num">借款金额:{order.loanAmtStr}元</div>
@@ -53,8 +57,8 @@ class Bill extends React.Component {
                 </div>
                 <div styleName="apply-status-wrap">
                     <div styleName="apply-status">
-                        <span styleName={`bill-${this.billType}-color`}>
-                            {this.billList[this.billType].typeName}</span></div>
+                        <span styleName={`bill-${billType}-color`}>
+                            {[billType].typeName}</span></div>
                     <div styleName="apply-time">{order.loanTimeStr}</div>
                 </div>
             </NavLink>
