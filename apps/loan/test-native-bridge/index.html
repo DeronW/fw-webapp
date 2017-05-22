@@ -49,8 +49,8 @@
             }
             cookieValue = unescape(cookieValue.substring(cookieStartAt,cookieEndAt));//解码latin-1
         }
-        return cookieValue;
-        log('值为', cookieValue)
+        return log(cookieName+'值为', cookieValue)
+
     }
 
     function toNative(name){
