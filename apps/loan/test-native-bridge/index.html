@@ -39,7 +39,7 @@
         if( all === "" ){
             return cookie;
         }
-        var list = all.split( ";" );
+        var list = all.split( "; " );
         for( var i=0; i<list.length; i++ ){
             var singleCookie = list[i];
             var p = singleCookie.indexOf( "=" );
