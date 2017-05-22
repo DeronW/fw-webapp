@@ -3,14 +3,14 @@ $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     var page = 1;
     var loadNextPage = true;
-    $("#tab-content").height($(document).height() - 425 + "px");
+    $("#tab-content").height($(document).height() - 472 + "px");
     $(".tabs span").click(function () {
         var index = $(this).index();
         $(this).addClass('selected').siblings().removeClass('selected');
         $(".tab-content-item").eq(index).show().siblings().hide();
     });
 
-    $(".get-btn").click(function () {
+    $(".invitation-code").click(function () {
         $(".mask").show();
     });
 
