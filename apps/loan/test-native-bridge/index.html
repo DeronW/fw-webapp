@@ -32,26 +32,23 @@
 
 {% block extra_javascripts %}
 <script>
-    function getCookieValue(cookieName){
-        var cookieValue = document.cookie;
-        var cookieStartAt = cookieValue.indexOf(""+cookieName+"=");
-        if(cookieStartAt==-1){
-            cookieStartAt = cookieValue.indexOf(cookieName+"=");
-        }
-        if(cookieStartAt==-1){
-            cookieValue = null;
-        }else{
-            cookieStartAt = cookieValue.indexOf("=",cookieStartAt)+1;
-            cookieEndAt = cookieValue.indexOf(";",cookieStartAt);
-            if(cookieEndAt==-1)
-            {
-                cookieEndAt = cookieValue.length;
+    function getCookieValue(Name) {
+        var search = Name + "="//查询检索的值
+        var returnvalue = "";//返回值
+        if (document.cookie.length > 0) {
+            sd = document.cookie.indexOf(search);
+            if (sd!= -1) {
+                sd += search.length;
+                end = document.cookie.indexOf(";", sd);
+                if (end == -1)
+                    end = document.cookie.length;
+                //unescape() 函数可对通过 escape() 编码的字符串进行解码。
+                returnvalue=unescape(document.cookie.substring(sd, end))
             }
-            cookieValue = unescape(cookieValue.substring(cookieStartAt,cookieEndAt));//解码latin-1
         }
-        return log(cookieName+'值为', cookieValue)
-
+        return log(name+'值为', returnvalue)
     }
+
 
     function toNative(name){
         NativeBridge.toNative(name)
