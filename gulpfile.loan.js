@@ -33,7 +33,8 @@ const USER_PAGES = [
 // 金融工场APP页面
 const JRGC_PAGES = [
     'fxh-jrgc-invite',//放心花金融工场邀请页面
-    'fxh-jrgc-invite-banner'//放心花金融工场邀请页面(banner入口)
+    'fxh-jrgc-invite-banner',//放心花金融工场邀请页面(banner入口)
+    'test-native-bridge'
 ]
 
 // 合作方页面
