@@ -91,8 +91,6 @@ class Register extends React.Component{
             let dict = data.userPasswordOption;
             $FW.Store.setUserDict({
                 token: dict.userToken,
-                id: dict.userId,
-                gid: dict.userGid,
                 status: dict.userStatus,
                 uid: dict.uid
             })

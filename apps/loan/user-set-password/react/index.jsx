@@ -104,8 +104,6 @@ class SetPassword extends React.Component{
                 let dict = data.userLogin;
                 $FW.Store.setUserDict({
                     token: dict.userToken,
-                    id: dict.userId,
-                    gid: dict.userGid,
                     status: dict.userStatus,
                     uid: dict.uid
                 })

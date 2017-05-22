@@ -65,8 +65,6 @@ class Register extends React.Component{
             $FW.Store.set('phone', $FW.Format.urlQuery().phone);
             $FW.Store.setUserDict({
                 token: dict.userToken,
-                id: dict.userId,
-                gid: dict.userGid,
                 status: dict.userStatus,
                 invitCode:dict.invitationCode,
                 uid:dict.uid
