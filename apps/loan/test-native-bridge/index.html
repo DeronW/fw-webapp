@@ -15,6 +15,8 @@
   <button onClick="trigger('show_header')">显示Native头部导航</button>
   <button onClick="toNative('market')">跳转到超市页</button>
   <button onClick="trigger('login')">调用APP登录</button>
+  <button onClick="getCookieValue('id')">获取APP Cookie id</button>
+  <button onClick="getCookieValue('token')">获取APP Cookie token</button>
   <button onClick="clipboard()">复制到剪切板</button>
   <button onClick="trigger('save_fxh_qrcode')">长按保存放心花微信二维码</button>
   <button onClick="share()">调用分享</button>
@@ -30,9 +32,30 @@
 
 {% block extra_javascripts %}
 <script>
-  function toNative(name){
-    NativeBridge.toNative(name)
-    log('跳转到app页面', name)
+    function getCookieValue(cookieName){
+        var cookieValue = document.cookie;
+        var cookieStartAt = cookieValue.indexOf(""+cookieName+"=");
+        if(cookieStartAt==-1){
+            cookieStartAt = cookieValue.indexOf(cookieName+"=");
+        }
+        if(cookieStartAt==-1){
+            cookieValue = null;
+        }else{
+            cookieStartAt = cookieValue.indexOf("=",cookieStartAt)+1;
+            cookieEndAt = cookieValue.indexOf(";",cookieStartAt);
+            if(cookieEndAt==-1)
+            {
+                cookieEndAt = cookieValue.length;
+            }
+            cookieValue = unescape(cookieValue.substring(cookieStartAt,cookieEndAt));//解码latin-1
+        }
+        return cookieValue;
+        log('值为', cookieValue)
+    }
+
+    function toNative(name){
+        NativeBridge.toNative(name)
+        log('跳转到app页面', name)
   }
 
   function clipboard(){
