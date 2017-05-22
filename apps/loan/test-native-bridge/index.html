@@ -34,20 +34,23 @@
 {% block extra_javascripts %}
 <script>
 
-    function getCookieValue(key){
-        var getCookie = document.cookie.replace(/[ ]/g,"");
-        var arrCookie = getCookie.split(";");
-        var tips;
-        for(var i=0;i<arrCookie.length;i++){
-            var arr=arrCookie[i].split("=");
-            if(key==arr[0]){
-                tips=arr[1];
-                break;
-            }
+    function getCookieValue(c_name) {
+        var c_value = " " + document.cookie;
+        var c_start = c_value.indexOf(" " + c_name + "=");
+        if (c_start == -1) {
+            c_value = null;
         }
-        return log(key+'值为', tips);
+        else {
+            c_start = c_value.indexOf("=", c_start) + 1;
+            var c_end = c_value.indexOf(";", c_start);
+            if (c_end == -1) {
+                c_end = c_value.length;
+            }
+            c_value = unescape(c_value.substring(c_start,c_end));
+        }
+        return c_value;
+        return log(c_name+"值为", c_value)
     }
-
 
     function toNative(name){
         NativeBridge.toNative(name)
