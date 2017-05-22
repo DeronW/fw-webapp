@@ -35,9 +35,22 @@ function SubProduct(props) {
     )
 }
 
+function Bulletin(props) {
+    return (
+        <div className="bulletin-mask">
+            <div className="bulletin">
+                <div className="bulletin-title">山之四季</div>
+                <div className="bulletin-content">一人独居在植物繁茂地地方，就很容易被他们所散发出来地强烈生命力所折服。 七月的土用是植物生长最好的时机。所有的植物否仿佛瞄准了初春到夏季的土用这段时间，凝神屏息，一口气窜上来。每到这时，山中的绿色植物所散发出的那种强烈的生命力，就像是熊熊燃烧的火焰，拉气质简直能把人和动物都盖过去。</div>
+                <div className="close-icon-container" onClick={props.handleBulletinExit}></div>
+                <div className="bulletin-exit" onClick={props.handleBulletinExit}>知道了</div>
+            </div>
+        </div>
+    )
+}
+
 class Home extends React.Component {
 
-    state = { loanProductList: [], subProductList: [] };
+    state = { loanProductList: [], subProductList: [], showBulletin: false };
 
     componentDidMount() {
         $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
@@ -66,6 +79,7 @@ class Home extends React.Component {
                         { this.state.subProductList.map(product => <SubProduct {...product} key={product.firstTitle} />) }
                     </div>
                 </div>
+                { this.state.showBulletin && <Bulletin handleBulletinExit={() => { this.setState({showBulletin: false}) }} />}
             </div>
         )
     }
