@@ -3,10 +3,10 @@ class GiftBag extends React.Component {
         super(props)
         this.state = {
             infoShow: false,
-            startTime: 1495101600,//活动开始时间 18:00
-            intervalMilli: 1495098000,//距离开始时间 17:00
+            startTime: 1495159200,//活动开始时间 10:00
+            intervalMilli: 1495155600,//距离开始时间 09:00
             currentTime: 1495098973,  //17:14
-            endTime:1495105200, //19:00
+            endTime:1495162800, //11:00
             surplus:"100%",
             isGet:false
         }
@@ -37,8 +37,8 @@ class GiftBag extends React.Component {
     }
     timestampHandler(timestamp){
         var timeTrans = new Date(parseInt(timestamp) * 1000);
-        console.log(timeTrans.toLocaleString('chinese',{hour12:false}))
-        return (timeTrans.toLocaleString('chinese',{hour12:false}));
+        console.log(timeTrans.toLocaleString('chinese',{hour12:false}).toString().substr(-8,8))
+        return (timeTrans.toLocaleString('chinese',{hour12:false}).toString().substr(-8,8));
     }
     limitHandler(){
         let {intervalMilli,startTime} = this.state;
