@@ -26,8 +26,8 @@ $FW.DOMReady(function () {
         token: USER.token,
         sourceType: SOURCE_TYPE
     }).then((data) => {
-        var shareLink = data.shareTemplate.templateUrl;
-        $(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
+        // var shareLink = data.shareTemplate.templateUrl;
+        // $(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
         // $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'to_home' : 'app'}`);
         $(".invitation-code span").text(USER.invitCode);
     }, (err) => {
