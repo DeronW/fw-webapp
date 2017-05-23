@@ -70,6 +70,7 @@ class BorrowMoney extends React.Component {
 
         $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
             .then(data => {
+                console.log(data);
                 if (data.canStatus == 0) {
                     this.setState({
                         canStatus: 0, canMessage: data.canMessage, loanUuid: data.loanUuid
