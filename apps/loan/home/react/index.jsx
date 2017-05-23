@@ -102,7 +102,10 @@ class Home extends React.Component {
 }
 
 function gotoHandler(link, toNative, need_login) {
+    console.log($FW.Browser.inApp());
     if ($FW.Browser.inApp() && toNative) return NativeBridge.toNative(toNative);
+    console.log('strange');
+    console.log(link);
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
     console.log(location.protocol);
     console.log(location.hostname);
