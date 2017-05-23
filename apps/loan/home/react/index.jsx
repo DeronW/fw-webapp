@@ -105,7 +105,7 @@ function gotoHandler(link, toNative, need_login) {
     if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+    ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 function getCookie() {
