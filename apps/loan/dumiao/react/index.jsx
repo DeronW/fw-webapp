@@ -103,9 +103,9 @@ class BorrowMoney extends React.Component {
         if (canStatus === null) return;
 
         if (borrowStatus == 1 || borrowStatus == 101) {
-            location.href = '/static/loan/user-card-set/index.html';
+            gotoHandler('/static/loan/user-card-set/index.html');
         } else if (canStatus == 2) {
-            location.href = '/static/loan/dumiao-put-in/index.html?pid=' + $FW.Format.urlQuery().pid;
+            gotoHandler(`/static/loan/dumiao-put-in/index.html?pid=${$FW.Format.urlQuery().pid}`)
         } else if (canStatus === 0) {
             this.setState({ dumiaoEnterPopShow: true });
         } else if (canStatus == 1) {
@@ -232,6 +232,13 @@ class BorrowMoney extends React.Component {
             </div>}
         </div>
     }
+}
+
+function gotoHandler(link, toNative, need_login) {
+    if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
+
+    if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
+    ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 const USER = $FW.Store.getUserDict();
