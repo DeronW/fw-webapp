@@ -175,7 +175,7 @@ class BorrowMoney extends React.Component {
             </div>
             <BorrowMoneyDatailList product={this.props.product} />
             <div className="footer">
-                <Nav className="btn" onClick={this.clickHandler}>马上拿钱</Nav>
+                <div className="btn" onClick={this.clickHandler}>马上拿钱</div>
             </div>
             {this.state.detailPopShow && <div className="mask" style={{ zIndex: 100 }}>
                 <div className="detail-pop">
