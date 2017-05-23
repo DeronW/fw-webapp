@@ -58,7 +58,7 @@ class Home extends React.Component {
         $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
             .then(data => {
                 this.setState({ loanProductList: data.resultList, subProductList: data.extList })
-            });
+            }, e => { $FW.Component.Toast(e.message) });
 
         $FXH.Post(`${API_PATH}/api/product/v1/noticeList.json`)
             .then(data => {
@@ -70,7 +70,7 @@ class Home extends React.Component {
 
                 this.setState({ showBulletin: true, bulletinCnt: newBulletinCnt })
                 $FW.Store.setBulletin(uid, newBulletinCnt);
-            });
+            }, e => { $FW.Component.Toast(e.message) });
     }
 
     render() {
