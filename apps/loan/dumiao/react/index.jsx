@@ -83,6 +83,7 @@ class BorrowMoney extends React.Component {
                     this.setState({ canStatus: 2 });
                 }
             }, err => {
+                console.log(err);
                 this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
             });
     }
