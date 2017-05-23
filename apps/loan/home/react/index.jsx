@@ -41,7 +41,9 @@ function Bulletin(props) {
     return (
         <div className="bulletin-mask">
             <div className="bulletin">
-                <div className="bulletin-title">公告</div>
+                <div className="bulletin-head">
+                    {/* <img src="images/bulletin-head.png" /> */}
+                </div>
                 <div className="bulletin-content">{props.bulletinCnt}</div>
                 <div className="close-icon-container" onClick={props.handleBulletinExit}></div>
                 <div className="bulletin-exit" onClick={props.handleBulletinExit}>知道了</div>
