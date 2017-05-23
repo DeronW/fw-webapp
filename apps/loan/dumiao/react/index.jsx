@@ -1,14 +1,3 @@
-function gotoHandler(link, need_login) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
-}
-
 const TITLE = [
     '申请条件',
     '所需资料',
@@ -137,8 +126,8 @@ class BorrowMoney extends React.Component {
                 <div className="detail-pop">
                     <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
                     <div className="pop-tip">{this.state.canMessage}</div>
-                    <a className="know-btn" href={`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`}>
-                        进入读秒查看</a>
+                    <div className="know-btn" onClick={() => {gotoHandler(`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`)}}>
+                        进入读秒查看</div>
                 </div>
             </div>
         }
