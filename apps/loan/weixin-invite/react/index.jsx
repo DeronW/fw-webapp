@@ -4,6 +4,7 @@ $FW.DOMReady(function () {
     var page = 1;
     var loadNextPage = true;
     $("#tab-content").height($(document).height() - 472 + "px");
+    $(".invitation-code span").text(USER.invitationCode);
     $(".tabs span").click(function () {
         var index = $(this).index();
         $(this).addClass('selected').siblings().removeClass('selected');
@@ -28,7 +29,6 @@ $FW.DOMReady(function () {
         // var shareLink = data.shareTemplate.templateUrl;
         // $(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
         // $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'to_home' : 'app'}`);
-        $(".invitation-code span").text(USER.invitationCode);
     }, (err) => {
         //location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });

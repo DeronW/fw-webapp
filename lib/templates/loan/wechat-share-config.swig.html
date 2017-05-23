@@ -12,8 +12,7 @@
 
         $FW.Post( API_PATH + '/api/shareTemplate/v1/getContent.json', {
             token: USER.token,
-            userGid: USER.gid,
-            userId: USER.id,
+            uid:USER.uid,
             sourceType: SOURCE_TYPE,
             templateType: 1,
             //fail: () => true
