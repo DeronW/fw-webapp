@@ -16,6 +16,8 @@ class BottomNavBar extends React.Component {
     }
 
     render() {
+        if ($FW.Browser.inApp()) return null;
+
         let easyloan_style_footer_fixed = {
             width: "720px",
             height: "111px",
