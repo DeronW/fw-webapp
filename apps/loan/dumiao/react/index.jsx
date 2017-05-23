@@ -70,7 +70,6 @@ class BorrowMoney extends React.Component {
 
         $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
             .then(data => {
-                console.log(data);
                 if (data.canStatus == 0) {
                     this.setState({
                         canStatus: 0, canMessage: data.canMessage, loanUuid: data.loanUuid
@@ -83,13 +82,11 @@ class BorrowMoney extends React.Component {
                     this.setState({ canStatus: 2 });
                 }
             }, err => {
-                console.log(err);
                 this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
             });
     }
     clickHandler = () => {
         let { canStatus, borrowStatus } = this.state;
-        console.log(canStatus, borrowStatus);
         // 初始化数据没有完成, 稍后再试
         if (canStatus === null) return;
 
@@ -227,11 +224,9 @@ class BorrowMoney extends React.Component {
 }
 
 function gotoHandler(link, toNative, need_login) {
-    console.log(link);
     if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    console.log(link);
     ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
