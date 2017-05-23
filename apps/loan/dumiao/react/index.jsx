@@ -86,6 +86,7 @@ class BorrowMoney extends React.Component {
             });
     }
     clickHandler = () => {
+        console.log('clicked!');
         let { canStatus, borrowStatus } = this.state;
 
         // 初始化数据没有完成, 稍后再试
