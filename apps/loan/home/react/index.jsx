@@ -1,5 +1,6 @@
 function LoanProduct(props) {
-    let productLink = `/static/loan/${props.productName === '放心花' ? 'fxh' : 'dumiao'}/index.html`
+    let productLink = `/static/loan/${props.productName === '放心花' ? 'fxh' : 'dumiao'}/index.html`,
+        productToNative = props.productName === '放心花' ? 'fxh_detail' : ';'
     let labelBorderColor = { '1': '#fd6f79', '2': '#46abef', '3': '#fd9c34' };
     let generate_labels = (label) => (
         <span key={label.labelValue} className="loan-product-label"
@@ -9,7 +10,7 @@ function LoanProduct(props) {
         </span>
     );
     return (
-        <div className="loan-product-card" onClick={() => { gotoHandler(`${productLink}?pid=${props.productId}`) }}>
+        <div className="loan-product-card" onClick={() => { gotoHandler(`${productLink}?pid=${props.productId}`, productToNative) }}>
             <img className="loan-product-logo" src={ props.productLogo } />
             <div className="loan-product-name">{ props.productName }</div>
             <div className="loan-product-amount">借款范围({ props.amountStr })</div>
@@ -21,8 +22,9 @@ function LoanProduct(props) {
 }
 
 function SubProduct(props) {
+    let toNative = props.toNative ? props.toNative : '';
     return (
-        <div className="sub-product-item" onClick={() => { gotoHandler(props.forwardUrl) }}>
+        <div className="sub-product-item" onClick={() => { gotoHandler(props.forwardUrl, toNative) }}>
             <div className="sub-product-logo-container">
                 <img className="sub-product-logo" src={decodeURIComponent(props.iconUrl)}/>
             </div>
@@ -39,8 +41,8 @@ function Bulletin(props) {
     return (
         <div className="bulletin-mask">
             <div className="bulletin">
-                <div className="bulletin-title">山之四季</div>
-                <div className="bulletin-content">一人独居在植物繁茂地地方，就很容易被他们所散发出来地强烈生命力所折服。 七月的土用是植物生长最好的时机。所有的植物否仿佛瞄准了初春到夏季的土用这段时间，凝神屏息，一口气窜上来。每到这时，山中的绿色植物所散发出的那种强烈的生命力，就像是熊熊燃烧的火焰，拉气质简直能把人和动物都盖过去。</div>
+                <div className="bulletin-title">公告</div>
+                <div className="bulletin-content">{props.bulletinCnt}</div>
                 <div className="close-icon-container" onClick={props.handleBulletinExit}></div>
                 <div className="bulletin-exit" onClick={props.handleBulletinExit}>知道了</div>
             </div>
@@ -50,12 +52,24 @@ function Bulletin(props) {
 
 class Home extends React.Component {
 
-    state = { loanProductList: [], subProductList: [], showBulletin: false };
+    state = { loanProductList: [], subProductList: [], showBulletin: false, bulletinCnt: '' };
 
     componentDidMount() {
         $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
             .then(data => {
-                this.setState({loanProductList: data.resultList, subProductList: data.extList})
+                this.setState({ loanProductList: data.resultList, subProductList: data.extList })
+            });
+
+        $FXH.Post(`${API_PATH}/api/product/v1/noticeList.json`)
+            .then(data => {
+                let newBulletinCnt = data.noticeContent;
+                let uid = $FW.Browser.inApp() ? getCookie().uid : $FW.Store.getUserDict().uid;
+
+                // if bulettin is secondary and it's read within the valid uid, we just ignore that bulletin
+                if (data.gradeType == '2' && $FW.Store.isBulletinRead(uid, newBulletinCnt)) return
+
+                this.setState({ showBulletin: true, bulletinCnt: newBulletinCnt })
+                $FW.Store.setBulletin(uid, newBulletinCnt);
             });
     }
 
@@ -77,17 +91,33 @@ class Home extends React.Component {
                     </div>
                     <div className="sub-product-item-container">
                         { this.state.subProductList.map(product => <SubProduct {...product} key={product.firstTitle} />) }
+                        {/* <SubProduct forwardUrl="/static/loan/market/index.html" iconUrl="images/market-icon.png" firstTitle="想借更多？" secondTitle="查看更多借款机会" toNative="market"/> */}
                     </div>
                 </div>
-                { this.state.showBulletin && <Bulletin handleBulletinExit={() => { this.setState({showBulletin: false}) }} />}
+                { this.state.showBulletin &&
+                    <Bulletin bulletinCnt={this.state.bulletinCnt} handleBulletinExit={() => { this.setState({showBulletin: false}) }} /> }
             </div>
         )
     }
 }
 
-function gotoHandler(link, need_login) {
+function gotoHandler(link, toNative, need_login) {
+    if (toNative) NativeBridge.toNative(toNative);
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+    console.log(location.protocol);
+    console.log(location.hostname);
+    console.log(link);
+    // $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+}
+
+function getCookie() {
+    let c = document.cookie;
+    if (c === '') return {}
+    c.split('; ').forEach(function(kv) {
+        let t = kv.split('=');
+        r[t[0]] = t[1];
+    });
+    return r;
 }
 
 $FW.DOMReady(() => {
