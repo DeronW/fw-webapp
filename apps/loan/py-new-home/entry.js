@@ -13,7 +13,11 @@ let stores = {
     fxh_confirm: new Stores.FxhConfirm(Request),
     dumiao:new Stores.Dumiao(Request),
     dumiao_detail:new Stores.DumiaoDetail(Request),
-    dumiao_form:new Stores.DumiaoForm(Request)
+    dumiao_form:new Stores.DumiaoForm(Request),
+    bill:new Stores.Bill(Request),
+    invite:new Stores.Invite(Request),
+    market:new Stores.Market(Request),
+    mine:new Stores.Mine(Request)
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))

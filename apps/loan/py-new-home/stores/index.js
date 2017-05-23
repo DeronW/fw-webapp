@@ -6,6 +6,10 @@ import FxhConfirm from './fxh-confirm'
 import Dumiao from './dumiao'
 import DumiaoDetail from './dumiao-detail'
 import DumiaoForm from './dumiao-form'
+import Bill from './bill'
+import Invite from './invite'
+import Market from './market'
+import Mine from './mine'
 
 export {
     Account,
@@ -15,6 +19,10 @@ export {
     FxhConfirm,
     Dumiao,
     DumiaoDetail,
-    DumiaoForm
+    DumiaoForm,
+    Bill,
+    Invite,
+    Market,
+    Mine
 }
 

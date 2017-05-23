@@ -11,7 +11,7 @@ class BottomNav extends React.Component{
             color: '#58a1fa'
         }
         return <div styleName="bottom-nav">
-            <NavLink styleName="btn" to="/" activeStyle={actS}>
+            <NavLink styleName="btn" to="/home" activeStyle={actS}>
                 借款
             </NavLink>
             <NavLink styleName="btn" to="/bill" activeStyle={actS}>
