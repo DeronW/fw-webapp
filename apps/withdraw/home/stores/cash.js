@@ -9,8 +9,12 @@ export default class Cash {
     }
 
     takeData() {
-        return this.request('/api/sspay/withdraw/v1/getOpenAccountInfo.shtml').then(data => {
-            extendObservable(this, data)
+        return this.request({
+            url: '/fake-api/api/sspay/withdraw/v1/getWithdrawInfo.shtml',
+            method: 'post',
+            data: {}
+        }).then(data => {
+            extendObservable(this, data);
         })
     }
 }

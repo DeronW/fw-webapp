@@ -6,31 +6,38 @@ import { Redirect } from 'react-router'
 
 import * as $FWC from 'fw-components'
 
-@inject("cash") @observer @CSSModules(styles)
+@inject("cash") @observer @CSSModules(styles,{"allowMultiple":true})
 export default class Cash extends React.Component {
     static onEnter() {
         document.title = "提现";
     }
-
-    state = {
-        title:"提现",
-        inputValue:""
+    constructor(props){
+        super(props);
+        this.state = {
+            title:"提现",
+            inputVal:"",
+            accountAmount:"",
+            accountAmountVal:"this.props.cash.accountAmount",
+            data:{}
+        }
+        this.takeAll = this.takeAll.bind(this);
     }
+    takeAll(){
+        this.setState({inputVal:this.state.accountAmount});
+        // console.log(this.state.accountAmount);
+    }
+    
 
-//    dataHandler(){
-//      let data = this.props; 
-//     console.log(this.props);
-//     console.log(data);
-//    }
-   
-   
     componentDidMount(){
-        
+        let {cash} = this.props;
+        console.log(cash);
+        cash.takeData().then(() => {
+            this.setState({accountAmount:cash.accountAmount,data:cash.bankInfo})
+            console.log(this.state.accountAmount);
+            console.log(this.state.data);
+        })
     }
-    // jumpToCashRecords = () =>{
-    //     let hash=window.location.hash.slice(2);
-    //     hash = "cash-records"
-    // }
+    
     render(){
         return <div>
             <div styleName="cash-wrapper">
@@ -48,12 +55,13 @@ export default class Cash extends React.Component {
                     <div styleName="bank-info">
                         {/*左边银行logo*/}
                         <div styleName="bank-logo">
-                            <img styleName="logo" src={require("../images/ico-zhaoshang.jpg")} alt=""/>
+                            {/*<img styleName="logo" src={require("../images/ico-zhaoshang.jpg")} alt=""/>*/}
+                            <img styleName="logo" src={this.state.data.bankLogo} alt=""/>
                         </div>
                         {/*中间银卡号信息*/}
                         <div styleName="bank-detail">
-                            <div styleName="bank-name">工商银行</div>
-                            <div styleName="bank-num">123456789012345678</div>
+                            <div styleName="bank-name">{this.state.data.bankName}</div>
+                            <div styleName="bank-num">{this.state.data.bankCardNo}</div>
                         </div>
                         {/*右边快捷logo*/}
                         <div styleName="fast-payment">
@@ -67,17 +75,17 @@ export default class Cash extends React.Component {
                     </div>
                     {/*可提现金金额*/}
                     <div styleName="aviliable-money">
-                        <span styleName="plain-text">可提现金额(元)：<b styleName="amount">0</b></span>
+                        <span styleName="plain-text">可提现金额(元)：<b styleName="amount">{this.state.accountAmount}</b></span>
                     </div>
                     {/*提现输入框*/}
                     <div styleName="money-cover">
                         {/*提现*/}
                         <div styleName="sub-cover">
                             <div styleName="input-side">
-                                <input type="text" styleName="input-money" placeholder="请输入提现金额"/>
+                                <input type="text" styleName="input-money" placeholder="请输入提现金额" value={this.state.inputVal}/>
                             </div>
                             <div styleName="click-side">
-                                <span styleName="draw-money">全提</span>
+                                <span styleName="draw-money" onClick={this.takeAll}>全提</span>
                             </div>
                         </div>
                         {/*选择开户支行*/}
