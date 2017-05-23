@@ -13,20 +13,17 @@ import { Request } from 'fw-javascripts'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Detail extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = { detail: null };
-    }
+    state = { detail: {} };
+    loanGid = this.props.match.params.billId;
 
     componentDidMount() {
-        let loanGid = this.props.match.params.billId;
         let API_PATH = document.getElementById('api-path').value;
 
         Request({
             url: `${API_PATH}/api/repayment/v1/loandetail.json`,
             method: 'post',
             data: {
-                loanGid: loanGid,
+                loanGid: this.loanGid,
                 userId: 'sdf' // user credential infos
             }
         }).then(data => {
@@ -36,6 +33,8 @@ class Detail extends React.Component {
 
     render() {
         let st = this.state.detail.extendStatus;
+        let userToken = '324';
+        let userGid = '324';
 
         let status_icon = status => {
             let d = {
@@ -55,7 +54,7 @@ class Detail extends React.Component {
                         styleName="bill-history-entry"
                         to={`/bill/fxh/${this.props.match.params.billId}/repayment?repaymentUuid=${this.state.detail.repaymentUuid}`}>还款记录</NavLink> }
                 <div styleName="logo-box">
-                    <img styleName="logo-img" src={require("../images/logo.png")}/>
+                    <img styleName="logo-img" src={require("../images/fxh-bill-detail/logo.png")}/>
                     <div styleName="logo-brand">放心花</div>
                     {status_icon(st)}
                 </div>
@@ -110,7 +109,7 @@ class Detail extends React.Component {
                     </div>}
                 </div>
                 {(st == 102 || st == 103) &&
-                <div styleName="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}&repaymentUuid=${this.state.detail.repaymentUuid}`}>立即还款</a></div>}
+                <div styleName="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${this.loanGid}`}>立即还款</a></div>}
                 {st == 101 &&
                 <div styleName="pay-back-btn-box"><span>立即还款</span></div>}
             </div>

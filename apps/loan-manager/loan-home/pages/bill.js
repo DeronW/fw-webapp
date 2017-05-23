@@ -49,8 +49,8 @@ class Bill extends React.Component {
         let order_item = (order, index) => {
 
             let link = order.productId == 1 ?
-            `/bill/${billType}/fxh/${order.loanGid}` :
-            `/bill/${billType}/dumaio/${order.uuid}`;
+            `/bill/detail/fxh/${order.loanGid}` :
+            `/bill/detail/dumaio/${order.uuid}`;
 
             return <NavLink styleName="list_li" key={`${order.orderGid}${index}`} to={link}> {/* delete index in production */}
                 <div styleName="list-img"><img src={order.productLogo} /></div>
