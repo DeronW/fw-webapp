@@ -1,6 +1,6 @@
 function LoanProduct(props) {
     let productLink = `/static/loan/${props.productName === '放心花' ? 'fxh' : 'dumiao'}/index.html`,
-        productToNative = props.productName === '放心花' ? 'fxh_detail' : ';'
+        productToNative = props.productName === '放心花' ? 'fxh_detail' : '';
     let labelBorderColor = { '1': '#fd6f79', '2': '#46abef', '3': '#fd9c34' };
     let generate_labels = (label) => (
         <span key={label.labelValue} className="loan-product-label"
