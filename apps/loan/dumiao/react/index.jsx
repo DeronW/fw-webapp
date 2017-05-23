@@ -224,6 +224,7 @@ class BorrowMoney extends React.Component {
 }
 
 function gotoHandler(link, toNative, need_login) {
+    console.log(link);
     if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
