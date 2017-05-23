@@ -9,6 +9,7 @@ function LoanProduct(props) {
             { label.labelValue }
         </span>
     );
+    console.log(`${productLink}?pid=${props.productId}`);
     return (
         <div className="loan-product-card" onClick={() => { gotoHandler(`${productLink}?pid=${props.productId}`, productToNative) }}>
             <img className="loan-product-logo" src={ props.productLogo } />
@@ -103,12 +104,9 @@ class Home extends React.Component {
 
 function gotoHandler(link, toNative, need_login) {
     console.log($FW.Browser.inApp());
-    if ($FW.Browser.inApp() && toNative) return NativeBridge.toNative(toNative);
-    console.log('strange');
+    if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
     console.log(link);
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    console.log(location.protocol);
-    console.log(location.hostname);
     console.log(link);
     // $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
