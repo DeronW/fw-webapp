@@ -92,8 +92,8 @@ class Home extends React.Component {
                         <img className="product-title-icon" src="images/sub-category-icon.png" />精选推荐
                     </div>
                     <div className="sub-product-item-container">
+                        <SubProduct forwardUrl="/static/loan/house-mortgage/index.html" iconUrl="images/house-icon.png" firstTitle="房产抵押贷款？" secondTitle="北京地区1000万大额贷款" toNative="market"/>
                         { this.state.subProductList.map(product => <SubProduct {...product} key={product.firstTitle} />) }
-                        {/* <SubProduct forwardUrl="/static/loan/market/index.html" iconUrl="images/market-icon.png" firstTitle="想借更多？" secondTitle="查看更多借款机会" toNative="market"/> */}
                     </div>
                 </div>
                 { this.state.showBulletin &&

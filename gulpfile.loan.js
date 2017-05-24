@@ -97,6 +97,10 @@ const CREDIT_CARD = [
     'credit-card-products'
 ]
 
+const MORTGAGE = [
+    'house-mortgage'
+]
+
 const EXPERIMENTAL_HOME = [{
     name: 'py-new-home',
     compiler: 'webpack'
@@ -115,6 +119,7 @@ APP_NAMES.push(
     ...DU_MIAO_PAGES,
     ...MARKET,
     ...CREDIT_CARD,
+    ...MORTGAGE,
     ...EXPERIMENTAL_HOME
 );
 
