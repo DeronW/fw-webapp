@@ -38,8 +38,7 @@ $FW.DOMReady(function () {
             $FW.Post(`${API_PATH}/api/userBase/v1/invitationRecord.json`, {
                 pageIndex: page,
                 pageSize: 20,
-                userGid: USER.gid,
-                userId: USER.id,
+                uid:USER.uid,
                 token: USER.token,
                 sourceType: SOURCE_TYPE
             }).then((data) => {
