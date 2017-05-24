@@ -6,13 +6,14 @@ import {
     Route,
     Switch,
     Redirect,
-    Link
+    Link,
+    hashHistory
 } from 'react-router-dom'
 
 import Home from './pages/home'
-import Fxh from './pages/fxh'
-import FxhWant from './pages/fxh-want'
-import FxhConfirm from './pages/fxh-confirm'
+import Fxh from './pages/fxh/fxh'
+import FxhWant from './pages/fxh/fxh-want'
+import FxhConfirm from './pages/fxh/fxh-confirm'
 import Dumiao from './pages/dumiao'
 import DumiaoDetail from './pages/dumiao-detail'
 import DumiaoForm from './pages/dumiao-form'
@@ -25,9 +26,9 @@ export default (stores) => {
     return <Router>
         <Provider {...stores}>
            <switch>
-               <Route path="/home" component={Home}/>
-               <Route exact path="/fxh" component={Fxh}/>
-               <Route exact path="/fxh-want" component={FxhWant}/>
+               <Route exact path="/home" component={Home}/>
+               <Route exact path="/home/fxh" component={Fxh}/>
+               <Route exact path="/xh-want" component={FxhWant}/>
                <Route exact path="/fxh-confirm" component={FxhConfirm}/>
                <Route exact path="/dumiao" component={Dumiao}/>
                <Route exact path="/dumiao-detail" component={DumiaoDetail}/>
