@@ -86,9 +86,7 @@ class BorrowMoney extends React.Component {
             });
     }
     clickHandler = () => {
-        console.log('clicked!');
         let { canStatus, borrowStatus } = this.state;
-
         // 初始化数据没有完成, 稍后再试
         if (canStatus === null) return;
 
@@ -226,11 +224,9 @@ class BorrowMoney extends React.Component {
 }
 
 function gotoHandler(link, toNative, need_login) {
-    console.log(link);
     if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    console.log(link);
     ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
