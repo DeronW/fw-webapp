@@ -21,36 +21,36 @@ class List extends React.Component {
             fail: () => true,
             complete: data => {
                 // console.log(data);
-                console.log(data.data.timestamp)
+                // console.log(data.data.timestamp)
                 this.setState({currentTime: data.data.timestamp})
             }
         });
 
 
     }
-    componentWillReceiveProps(nextProps){
+
+    componentWillReceiveProps(nextProps) {
         // this.countDown(nextProps.list);
     }
 
     timestampHandler(timestamp) {
         let timeTrans = new Date(parseInt(timestamp) * 1000);
-        console.log(timeTrans.toLocaleString('chinese', {hour12: false}).toString().substr(-8, 8))
+        // console.log(timeTrans.toLocaleString('chinese', {hour12: false}).toString().substr(-8, 8))
         return (timeTrans.toLocaleString('chinese', {hour12: false}).toString().substr(-8, 8));
     }
 
     countDown(time, index) {
         clearInterval(this.timer);
         let createdTime = time;
-        console.log(createdTime + "11111111111111")
+        // console.log(createdTime + "11111111111111")
         let mm = createdTime / 1000;
-
         let m = Math.floor(mm / 60 % 60);
         let s = (mm % 60).toFixed(0);
         this.timer = setInterval(() => {
-            if(s<10){
-                s= "0"+s;
+            if (s < 10) {
+                s = "0" + s;
             }
-            document.getElementById(index+"limit_time").innerHTML = m + ':' + s;
+            document.getElementById(index + "limit_time").innerHTML = m + ':' + s;
             s--;
             if (s < 0) {
                 s = 59;
@@ -59,20 +59,22 @@ class List extends React.Component {
                     clearInterval(this.timer);
                     this.props.request();
                 }
-                if(m<10){
-                    m="0"+m;
+                if (m < 10) {
+                    m = "0" + m;
                 }
             }
         }, 1000)
     }
-    getHandler(){
+
+    getHandler() {
         clearInterval(this.timer);
         this.props.request();//重新请求数据
     }
-    jump(){
-        location.href = "/static/wap/faq/index.html"//跳转到投资的列表页
 
+    jump() {
+        location.href = "/static/wap/faq/index.html"//跳转到投资的列表页
     }
+
     render() {
         let {buyingList} = this.state;
         let buy_func = (item, index) => {
@@ -87,21 +89,32 @@ class List extends React.Component {
                 content = <div>
                     <div className="content_title">倒计时</div>
                     <div className="content_time"
-                         id={index+"limit_time"}>{this.countDown(item.intervalMilli, index)}</div>
+                         id={index + "limit_time"}>{this.countDown(item.intervalMilli, index)}</div>
                     <div className="content_state_gray">领取</div>
                 </div>
-            } else if(item.receiveStatus == "02") {
-                content = <div onClick={item.isGet=="0"?this.getHandler:this.jump}>
+            } else if (item.receiveStatus == "02") {
+                content = <div onClick={item.isGet == "0" ? this.getHandler : this.jump}>
                     <div className="content_title">剩余</div>
                     <div className="content_time">{item.restPercent}</div>
-                    {item.isGet == "0"? <a className="content_state_red">领取</a>:
+                    {item.isGet == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>
                     }
 
                 </div>
             }
             return <div className="list_item" key={index}>
-                <div className="item_left">{item.limitAmount}</div>
+                <div className="item_left">
+                    <div className="detail_left">
+                    <div className="list_amount"><span className="list_rmb">￥</span>{item.limitAmount}</div>
+                    <div className="list_name">{item.sourceTitle}</div>
+                </div>
+                    <div className="detail_right">
+                        <div>满￥{}可用</div>
+                        <div>任意期限可用</div>
+                        <div>有效期至</div>
+                        <div>适用：</div>
+                    </div>
+                </div>
                 <div className="item_right">
                     {content}
                 </div>
