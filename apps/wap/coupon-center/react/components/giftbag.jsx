@@ -1,20 +1,18 @@
 class GiftBag extends React.Component {
     constructor(props) {
         super(props)
+        this.limit_time;
+        this.isshow = false;
         this.state = {
-            infoShow: false,
-            startTime: 1495159200,//活动开始时间 10:00
-            intervalMilli: 1495155600,//距离开始时间 09:00
-            currentTime: 1495098973,  //17:14
-            endTime:1495162800, //11:00
-            surplus:"100%",
-            isGet:false
+            gift_list:this.props.list,
         }
         this.desHandler = this.desHandler.bind(this)
         this.getHandler = this.getHandler.bind(this)
+        // this.countDown = this.countDown(this)
+        this.timestampHandler = this.timestampHandler.bind(this)
     }
-
     componentDidMount() {
+        //获取当前时间
         $FW.Ajax({
             url: API_PATH+'/activity/v1/timestamp.json',
             type: 'get',
@@ -25,107 +23,165 @@ class GiftBag extends React.Component {
             complete: data => {
                 // console.log(data);
                 console.log(data.data.timestamp)
-                this.setState({currentTime:data.data.timestamp})
             }
         });
-
     }
-
     desHandler() {
-        console.log("infoshow:" + this.state.infoShow)
-        this.setState({infoShow: !this.state.infoShow})
+        console.log(this.isshow)
+        this.isshow = true;
     }
     timestampHandler(timestamp){
         var timeTrans = new Date(parseInt(timestamp) * 1000);
         console.log(timeTrans.toLocaleString('chinese',{hour12:false}).toString().substr(-8,8))
         return (timeTrans.toLocaleString('chinese',{hour12:false}).toString().substr(-8,8));
     }
-    limitHandler(){
-        let {intervalMilli,startTime} = this.state;
-        let _this = this;
-        let timer = setInterval(function () {
-            intervalMilli--;
-            _this.setState({intervalMilli:intervalMilli})
-            if(intervalMilli == startTime){
-                clearInterval(timer)
+    countDown(time,number){
+        let created= time;
+        console.log(created + "11111111111111")
+        let mma = created / 1000;
+        let ma = Math.floor(mma / 60 % 60);
+        let sa = (mma % 60).toFixed(0);
+        clearInterval(this.limit_time);
+        this.limit_time = setInterval(() => {
+            if(sa<10){
+                sa= "0"+sa;
             }
-        },1000)
+            document.getElementById(number+"gift_time").innerHTML = ma + ':' + sa;
+            sa--;
+            if (sa < 0) {
+                sa = 59;
+                ma--;
+                if (ma == -1) {
+                    clearInterval(this.limit_time);
+                    this.props.request();//重新请求数据
+                }
+                if(ma<10){
+                    ma="0"+ma;
+                }
+            }
+        }, 1000)
     }
+
     getHandler(){
-        if(!this.state.isGet){
-            this.setState({isGet:true})
-        }
+        this.props.request() //用户点击后重新请求，改变数据
     }
     render() {
-        let {infoShow, startTime, intervalMilli, currentTime,endTime,surplus,isGet} = this.state;
-        let start_title = "开抢时间";
-        let countdown_title = "倒计时";
-        let surplus_title = "剩余";
-        let end_title ="已抢光";
-        let gift_title,gift_state,gift_time;
-        let gray_state = <div className="gray_state">
-            领取
-        </div>;
-        let red_state = <div className="red_state">
-            领取
-        </div>;
-        let red_invest =<a className="red_state">
-            去投资
-        </a>
-        let start_time = this.timestampHandler(startTime)
-        let countdown_time = this.timestampHandler(intervalMilli)
-        let surplus_count  = surplus
-        if (currentTime >= intervalMilli && currentTime<startTime) {
-            gift_title = countdown_title
-            gift_time = countdown_time
-            // this.limitHandler()
-            gift_state = gray_state
-        } else if (currentTime < startTime) {
-            gift_title = start_title
-            gift_time = start_time
-            gift_state = gray_state
-
-        } else if (currentTime < endTime) {
-            gift_title = surplus_title
-            gift_time = surplus_count
-            gift_state = red_state
-            if(isGet){
-                gift_state = red_invest
+        let {infoShow,gift_list} = this.state;
+        let gift_func = (item,index)=>{
+            let gift_item_right_content;
+            if(item.receiveStatus=="00"){
+                gift_item_right_content = <div>
+                    <div className="gift_item_left" onClick={this.desHandler}>
+                        <div className="gift_one_title">
+                            优惠券礼包
+                        </div>
+                        <div className="gift_one_des">
+                            优惠券礼包的描述
+                        </div>
+                    </div>
+                    <div  className="gift_item_right">
+                        <div className="gift_right_title">
+                            开抢时间
+                        </div>
+                        <div className="gift_right_starttime">
+                            {this.timestampHandler(item.startTime)}
+                        </div>
+                        <div className="get_state_gray">
+                            领取
+                        </div>
+                    </div>
+                </div>
+            }else if(item.receiveStatus=="01"){
+                gift_item_right_content = <div >
+                    <div className="gift_item_left" onClick={this.desHandler}>
+                        <div className="gift_one_title">
+                            优惠券礼包
+                        </div>
+                        <div className="gift_one_des">
+                            优惠券礼包的描述
+                        </div>
+                    </div>
+                    <div className="gift_item_right">
+                        <div className="gift_right_title">
+                            倒计时
+                        </div>
+                        <div className="gift_right_starttime"
+                             id={index+"gift_time"}>
+                            {this.countDown(item.intervalMilli, index)}
+                        </div>
+                        <div className="get_state_gray">
+                            领取
+                        </div>
+                    </div>
+                </div>
+            }else if(item.receiveStatus=="02"){
+                gift_item_right_content = <div >
+                    <div className="gift_item_left" onClick={this.desHandler}>
+                        <div className="gift_one_title">
+                            优惠券礼包
+                        </div>
+                        <div className="gift_one_des">
+                            优惠券礼包的描述
+                        </div>
+                    </div>
+                    <div className="gift_item_right">
+                        <div className="gift_right_title">
+                            剩余
+                        </div>
+                        <div className="gift_right_starttime">
+                            {item.restPercent}
+                        </div>
+                        <div className="get_state_red">
+                            领取
+                        </div>
+                    </div>
+                </div>
+            }else if(item.receiveStatus=="03"){
+                gift_item_right_content = <div>
+                    <div className="gift_item_left" onClick={this.desHandler}>
+                        <div className="gift_one_title">
+                            优惠券礼包
+                        </div>
+                        <div className="gift_one_des">
+                            优惠券礼包的描述
+                        </div>
+                    </div>
+                    <div className="gift_item_right">
+                        <img src="images/icon-get.png"/>
+                        <div className="get_state_red">
+                            领取
+                        </div>
+                    </div>
+                </div>
             }
-        } else{
-            gift_title = end_title
+            return <div className="gift_item" key={index}>
+                {gift_item_right_content}
+                {/*<div id="pop" style={{display:this.isshow?"block":"none"}}></div>*/}
+            </div>
         }
         return <div className="giftbag_box">
-            <div className="gift_item gift_one" onClick={this.desHandler}>
-                <div className="gift_one_title">
-                    优惠券礼包
-                </div>
-                <div className="gift_one_des">
-                    优惠券礼包的描述
-                </div>
+            <div className="gift_box_title">
+                <img src="images/icon-gift.png" className="icon_gift"/>
+                <span className="gift_title">优惠券礼包</span>
             </div>
-            <div className="gift_item gift_two" onClick={this.getHandler}>
-                <div className="gift_two_title">
-                    <div>{gift_title}</div>
-                    <div>{gift_time}</div>
-                    <div>{gift_state}</div>
-                </div>
-            </div>
-            {infoShow && <PopGiftDes control={this.desHandler} states={this.state.infoShow}/>}
+            {gift_list.length>0 && gift_list.map(gift_func)}
+            {this.isshow&&<PopGiftDes isshow={this.isshow} control={this.desHandler}/>}
         </div>
     }
 }
 
 class PopGiftDes extends React.Component {
-    constructor(props) {
+    constructor(props){
         super(props)
     }
 
-    render() {
-        let {control, close} = this.props
-        let closestyle = close ? "none" : "block"
+    render(){
+        let {isshow,control} = this.props;
+        let closestyle = isshow ? "block" : "none"
         return <div className="pop_gift_des" style={{display: closestyle}}>
             这是礼包优惠券的信息展示盒子
+            <div>
+            </div>
             <div className="des_close" onClick={() => {
                 control()
             }}>+
