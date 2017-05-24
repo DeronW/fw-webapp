@@ -36,7 +36,7 @@ const BANK_LIST = [
         "openArea": "全国"
     }, {
         "name": "pufa",
-        "url": "https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=P1411700&itemcode=lcsh170310",
+        "url": "https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=P1411700&itemcode=lcsh170418",
         "openArea": "全国"
     }, {
         "name": "pingan",

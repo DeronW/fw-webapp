@@ -14,9 +14,11 @@ class BorrowMoney extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            product: {}
+            product: {},
+            img_show:false
         }
         this.clickHandler = this.clickHandler.bind(this);
+        this.maskHandler = this.maskHandler.bind(this);
     }
     componentDidMount() {
         let pid = $FW.Format.urlQuery().productId;
@@ -27,12 +29,16 @@ class BorrowMoney extends React.Component {
             });
     }
     clickHandler() {
-        if ($FW.Browser.inIOS()) {
+        if($FW.Browser.inAndroid() && $FW.Browser.inWeixin()){
+            this.setState({img_show:true});
+        }else if ($FW.Browser.inIOS()) {
             window.location.href = this.state.product.iosSoftwareUrl;
-        }
-        if ($FW.Browser.inAndroid()) {
+        }else if ($FW.Browser.inAndroid() && !$FW.Browser.inWeixin()) {
             window.location.href = this.state.product.androidSoftwareUrl;
         }
+    }
+    maskHandler(){
+        this.setState({img_show:false});
     }
     render() {
         let labelList = this.state.product.productLabelList;
@@ -98,6 +104,9 @@ class BorrowMoney extends React.Component {
                 <div className="footer">
                     <Nav className="btn" onClick={this.clickHandler}>马上下载</Nav>
                 </div>
+                {this.state.img_show && <div className="mask" onClick={this.maskHandler}>
+                    <img src="images/tip.png"/>
+                </div>}
             </div>
         )
     }

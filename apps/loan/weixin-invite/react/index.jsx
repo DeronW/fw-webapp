@@ -3,14 +3,14 @@ $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     var page = 1;
     var loadNextPage = true;
-    $("#tab-content").height($(document).height() - 425 + "px");
+    $("#tab-content").height($(document).height() - 472 + "px");
     $(".tabs span").click(function () {
         var index = $(this).index();
         $(this).addClass('selected').siblings().removeClass('selected');
         $(".tab-content-item").eq(index).show().siblings().hide();
     });
 
-    $(".get-btn").click(function () {
+    $(".invitation-code").click(function () {
         $(".mask").show();
     });
 
@@ -21,17 +21,16 @@ $FW.DOMReady(function () {
     $FW.Post(`${API_PATH}/api/shareTemplate/v1/getContent.json`, {
         channelCode: "OFFICIAL",
         templateType: 1,
-        userGid: USER.gid,
-        userId: USER.id,
+        uid:USER.uid,
         token: USER.token,
         sourceType: SOURCE_TYPE
     }).then((data) => {
-        var shareLink = data.shareTemplate.templateUrl;
-        $(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
+        // var shareLink = data.shareTemplate.templateUrl;
+        // $(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
         // $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'to_home' : 'app'}`);
-        $(".invitation-code span").text(USER.invitCode);
+        $(".invitation-code span").text(USER.invitationCode);
     }, (err) => {
-        location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
+        //location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });
 
     function loadMoreHandler(done) {

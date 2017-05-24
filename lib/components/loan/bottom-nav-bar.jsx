@@ -16,6 +16,8 @@ class BottomNavBar extends React.Component {
     }
 
     render() {
+        if ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) return null;
+
         let easyloan_style_footer_fixed = {
             width: "720px",
             height: "111px",
@@ -101,7 +103,7 @@ class BottomNavBar extends React.Component {
             <div style={easyloan_style_footer_fixed}>
                 <a style={_style_tab_a} href={_href_a}>
                     <i style={_style_tab_a_icon}></i>
-                    借钱
+                    首页
                 </a>
                 <a style={_style_tab_bill} href={_href_bill}>
                     <i style={_style_tab_bill_icon}></i>
