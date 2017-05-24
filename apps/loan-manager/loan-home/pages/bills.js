@@ -8,7 +8,6 @@ import { observer, inject } from 'mobx-react'
 
 import { Event, Utils } from 'fw-javascripts'
 
-// import Nav from './components/nav'
 import Header from './components/header'
 import BottomNavBar from './components/bottom-nav-bar'
 

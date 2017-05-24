@@ -1,9 +1,5 @@
 import { observable, computed, extendObservable } from 'mobx'
 
-// class BillItem {
-//     constructor(itemInfo)
-// }
-
 export default class Bills {
 
     constructor(request) {
