@@ -11,11 +11,20 @@ import { NativeBridgeFactory } from 'fw-javascripts'
 
 @inject('home') @observer @CSSModules(styles)
 export default class Home extends React.Component {
+    constructor(props){
+        super(props)
+        this.state={
+            extList:[]
+        }
+    }
     componentDidMount(){
-        this.props.home.getProductList()
+        let {home} = this.props;
+        home.getProductList().then(()=>{
+            this.setState({extList:home.extList})
+        })
     }
     render(){
-        let extList = mobx.toJS(this.props.home.extList);
+        //let extList = mobx.toJS(this.props.home.extList);
         let generate_other_products = (product) => (
             <a
                 styleName="other-products-item"
@@ -32,7 +41,8 @@ export default class Home extends React.Component {
         )
         return (
             <div>
-                {extList.length>0 && extList.map(generate_other_products)}
+                {/*extList.length>0 && extList.map(generate_other_products)*/}
+                {this.state.extList.map(generate_other_products)}
                 <BottomNav />
             </div>
         )
