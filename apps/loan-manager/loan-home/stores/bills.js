@@ -4,7 +4,7 @@ import { observable, computed, extendObservable } from 'mobx'
 //     constructor(itemInfo)
 // }
 
-export default class Bill {
+export default class Bills {
 
     constructor(request) {
         this.request = request;

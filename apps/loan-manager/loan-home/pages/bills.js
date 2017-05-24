@@ -2,46 +2,45 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 import CSSModules from 'react-css-modules'
-import styles from '../css/bill.css'
+import styles from '../css/bills.css'
 
 import { observer, inject } from 'mobx-react'
 
-import { Event } from 'fw-javascripts'
+import { Event, Utils } from 'fw-javascripts'
 
 // import Nav from './components/nav'
 import Header from './components/header'
 import BottomNavBar from './components/bottom-nav-bar'
 
 
-@inject('bill') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class Bill extends React.Component {
+@inject('bills') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+class Bills extends React.Component {
 
     componentDidMount() {
         Event.cancelTouchBottom();
-        this.props.bill.fetchBillItems(this.props.match.params.billType)(null);
-        Event.touchBottom(this.props.bill.fetchBillItems(this.props.match.params.billType));
+        this.props.bills.fetchBillItems(this.props.match.params.billType)(null);
+        Event.touchBottom(this.props.bills.fetchBillItems(this.props.match.params.billType));
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.match.params.billType !== prevProps.match.params.billType) {
             Event.cancelTouchBottom();
             Event.cancelTouchBottom();
-            if (!this.props.bill.billList[this.props.match.params.billType].list.slice().length) {
-                this.props.bill.fetchBillItems(this.props.match.params.billType)(null);
+            if (!this.props.bills.billList[this.props.match.params.billType].list.slice().length) {
+                this.props.bills.fetchBillItems(this.props.match.params.billType)(null);
             }
-            Event.touchBottom(this.props.bill.fetchBillItems(this.props.match.params.billType));
+            Event.touchBottom(this.props.bills.fetchBillItems(this.props.match.params.billType));
         }
     }
 
     render() {
         let billType = this.props.match.params.billType,
-            billList = this.props.bill.billList[billType].list.slice();
-
+            billList = this.props.bills.billList[billType].list.slice();
 
         let btn_tab = (type) => {
             return (
-                <NavLink key={type} className="ui-tab-li" to={`/bill/${type}`}>
-                    <span className="text">{this.props.bill.billList[type].typeName}</span>
+                <NavLink key={type} className="ui-tab-li" to={`/bills/${type}`}>
+                    <span className="text">{this.props.bills.billList[type].typeName}</span>
                 </NavLink>
             )
         }
@@ -49,8 +48,8 @@ class Bill extends React.Component {
         let order_item = (order, index) => {
 
             let link = order.productId == 1 ?
-            `/bill/detail/fxh/${order.loanGid}` :
-            `/bill/detail/dumaio/${order.uuid}`;
+            `/bill/fxh/${order.loanGid}` :
+            `/bill/dumaio/${order.uuid}`;
 
             return <NavLink styleName="list_li" key={`${order.orderGid}${index}`} to={link}> {/* delete index in production */}
                 <div styleName="list-img"><img src={order.productLogo} /></div>
@@ -60,8 +59,8 @@ class Bill extends React.Component {
                 </div>
                 <div styleName="apply-status-wrap">
                     <div styleName="apply-status">
-                        <span styleName={`bill-${this.props.bill.billList[billType].typeNo}-color`}>
-                            {this.props.bill.billList[billType].typeName}</span></div>
+                        <span styleName={`bill-${this.props.bills.billList[billType].typeNo}-color`}>
+                            {this.props.bills.billList[billType].typeName}</span></div>
                     <div styleName="apply-time">{order.loanTimeStr}</div>
                 </div>
             </NavLink>
@@ -87,4 +86,4 @@ class Bill extends React.Component {
     }
 }
 
-export default Bill
+export default Bills

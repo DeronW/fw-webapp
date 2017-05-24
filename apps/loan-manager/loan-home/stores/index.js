@@ -1,7 +1,7 @@
-import Bill from './bill.js'
+import Bills from './bills.js'
 import Products from './products.js'
 
 export {
-    Bill,
+    Bills,
     Products
 }

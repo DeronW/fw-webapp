@@ -17,7 +17,7 @@ class BottomNavBar extends React.Component {
                     <i className="nav-icon nav-icon-loan"></i> {/* due to <NavLink>'s activeClassName is originally global, we have to make this className global too */}
                     借钱
                 </NavLink>
-                <NavLink styleName="nav-li" to="/bill">
+                <NavLink styleName="nav-li" to="/bills">
                     <i className="nav-icon nav-icon-bill"></i>
                     账单
                 </NavLink>
