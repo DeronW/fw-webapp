@@ -84,16 +84,18 @@ class MainPanel extends React.Component {
 
 
         return <div className="main-panel">
-            { panel_title('申请人信息') }
-            { ['phone'].map(disabled_field_item) }
-            { form_data.realName ?
-                ['realName'].map(disabled_field_item) :
-                ['realName'].map(field_item) }
-            { panel_title('抵押金额及期限') }
-            { ['mortgAmountRange', 'mortgTimeLong'].map(field_item) }
-            { panel_title('抵押物信息') }
-            { ['city'].map(disabled_field_item) }
-            { ['area', 'housingEstate', 'houseBuildArea'].map(field_item) }
+            <div className="input-field-container">
+                { panel_title('申请人信息') }
+                { ['phone'].map(disabled_field_item) }
+                { form_data.realName ?
+                    ['realName'].map(disabled_field_item) :
+                    ['realName'].map(field_item) }
+                { panel_title('抵押金额及期限') }
+                { ['mortgAmountRange', 'mortgTimeLong'].map(field_item) }
+                { panel_title('抵押物信息') }
+                { ['city'].map(disabled_field_item) }
+                { ['area', 'housingEstate', 'houseBuildArea'].map(field_item) }
+            </div>
 
             <div className="btn-area">
                 <div className="btn" onClick={this.submitHandler}>提交</div>

@@ -4,7 +4,7 @@ $FW.DOMReady(function () {
     var page = 1;
     var loadNextPage = true;
     $("#tab-content").height($(document).height() - 472 + "px");
-    $(".invitation-code span").text(USER.invitationCode);
+    $(".invitation-code span").text(USER.invitCode);
     $(".tabs span").click(function () {
         var index = $(this).index();
         $(this).addClass('selected').siblings().removeClass('selected');
@@ -23,7 +23,7 @@ $FW.DOMReady(function () {
         channelCode: "OFFICIAL",
         templateType: 1,
         uid:USER.uid,
-        token: USER.token,
+        token:USER.token,
         sourceType: SOURCE_TYPE
     }).then((data) => {
         // var shareLink = data.shareTemplate.templateUrl;

@@ -24,13 +24,13 @@ function LoanProduct(props) {
 function SubProduct(props) {
     let toNative = props.toNative ? props.toNative : '';
     return (
-        <div className="sub-product-item" onClick={() => { gotoHandler(props.forwardUrl, toNative) }}>
+        <div className="sub-product-item" onClick={() => { gotoHandler(props.redirectUrl, toNative) }}>
             <div className="sub-product-logo-container">
-                <img className="sub-product-logo" src={decodeURIComponent(props.iconUrl)}/>
+                <img className="sub-product-logo" src={decodeURIComponent(props.logoUrl)}/>
             </div>
             <div className="sub-product-title">
-                <div className="sub-product-1st-title">{props.firstTitle}</div>
-                <div className="sub-product-2nd-title">{props.secondTitle}</div>
+                <div className="sub-product-1st-title">{props.productTitle}</div>
+                <div className="sub-product-2nd-title">{props.productDec}</div>
             </div>
             <div className="next-icon-container"></div>
         </div>
@@ -59,10 +59,15 @@ class Home extends React.Component {
     componentDidMount() {
         $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
             .then(data => {
-                this.setState({ loanProductList: data.resultList, subProductList: data.extList })
+                this.setState({ loanProductList: data.resultList })
             }, e => { $FW.Component.Toast(e.message) });
 
-        $FXH.Post(`${API_PATH}/api/product/v1/noticeList.json`)
+        $FXH.Post(`${API_PATH}/api/v1/recommendedList.json`)
+            .then(data => {
+                this.setState({ subProductList: data })
+            }, e => { $FW.Component.Toast(e.message) });
+
+        $FXH.Post(`${API_PATH}/api/v1/noticeList.json`)
             .then(data => {
                 let newBulletinCnt = data.noticeContent;
                 let uid = $FW.Browser.inApp() ? getCookie().uid : $FW.Store.getUserDict().uid;
@@ -92,7 +97,6 @@ class Home extends React.Component {
                         <img className="product-title-icon" src="images/sub-category-icon.png" />精选推荐
                     </div>
                     <div className="sub-product-item-container">
-                        <SubProduct forwardUrl="/static/loan/house-mortgage/index.html" iconUrl="images/house-icon.png" firstTitle="房产抵押贷款？" secondTitle="北京地区1000万大额贷款" toNative="market"/>
                         { this.state.subProductList.map(product => <SubProduct {...product} key={product.firstTitle} />) }
                     </div>
                 </div>
