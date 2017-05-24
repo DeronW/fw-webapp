@@ -14,12 +14,13 @@ export default class Home extends React.Component {
     constructor(props){
         super(props)
         this.state={
-            extList:props.home.getProductList().
+            extList:[]
         }
     }
     componentDidMount(){
-        //this.props.home.getProductList()
-
+        this.props.home.getProductList().then(()=>{
+            this.setState({extList:data.extList})
+        })
     }
     render(){
         //let extList = mobx.toJS(this.props.home.extList);

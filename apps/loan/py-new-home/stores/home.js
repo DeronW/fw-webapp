@@ -1,7 +1,7 @@
 import {extendObservable} from 'mobx'
 
 export default class Home{
-    constructor(request){
+    constructor(request,state={}){
         this.request = request
         // extendObservable(this,{
         //     resultList:[],
