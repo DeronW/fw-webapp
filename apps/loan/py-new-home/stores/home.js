@@ -3,7 +3,6 @@ import {extendObservable} from 'mobx'
 export default class Home{
     constructor(request){
         this.request = request
-        this.extList = []
         extendObservable(this,{
             resultList:[],
             extList:[]
