@@ -41,7 +41,9 @@ function Bulletin(props) {
     return (
         <div className="bulletin-mask">
             <div className="bulletin">
-                <div className="bulletin-title">公告</div>
+                <div className="bulletin-head">
+                    {/* <img src="images/bulletin-head.png" /> */}
+                </div>
                 <div className="bulletin-content">{props.bulletinCnt}</div>
                 <div className="close-icon-container" onClick={props.handleBulletinExit}></div>
                 <div className="bulletin-exit" onClick={props.handleBulletinExit}>知道了</div>
@@ -105,7 +107,7 @@ function gotoHandler(link, toNative, need_login) {
     if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+    ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 function getCookie() {

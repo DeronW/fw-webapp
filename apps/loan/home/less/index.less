@@ -144,45 +144,53 @@ body {
 
 .bulletin {
   position: fixed;
-  width: 586px;
-  padding: 34px;
-  background: #fff;
-  border-radius:12px;
-  top: 50%;
+  width: 654px;
+  border-radius: 12px;
+  top: 45%;
   left: 50%;
-  -webkit-transform: translate(-50%,-50%);
-  -ms-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-45%);
+  -ms-transform: translate(-50%,-45%);
+  transform: translate(-50%,-45%);
 }
 
-.bulletin-title {
-  color: #6aa4f0;
-  font-size: 36px;
-  text-align: center;
-}
-
-.bulletin-content {
-  margin: 50px 0;
-  color: #666;
-  font-size: 30px;
+.bulletin-head {
+  width: 100%;
+  height: 257px;
+  background-image: url('../images/bulletin-head.png');
 }
 
 .close-icon-container {
   position: absolute;
-  width: 26px;
-  height: 26px;
-  top: 34px;
-  right: 34px;
-  background: url(../images/close-icon.jpg) no-repeat;
+  width: 66px;
+  height: 66px;
+  top: 0;
+  right: 0;
+  background-color: transparent;
   z-index: 9999;
 }
 
+.bulletin-content {
+  position: relative;
+  top: -12px;
+  width: 653px;
+  margin: auto;
+  padding: 0 34px 42px;
+  background: #fff;
+  color: #666;
+  font-size: 30px;
+}
+
 .bulletin-exit {
-  height: 81px;
-  line-height: 81px;
-  background: #6aa4f0;
-  border-radius: 8px;
-  color: #fff;
+  position: relative;
+  top: -12px;
+  width: 653px;
+  height: 104px;
+  line-height: 104px;
+  margin: auto;
+  background: #fff;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  color: #f6775e;
   font-size: 34px;
   text-align: center;
 }

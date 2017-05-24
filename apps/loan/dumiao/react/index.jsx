@@ -1,14 +1,3 @@
-function gotoHandler(link, need_login) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    if ($FW.Browser.inApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
-}
-
 const TITLE = [
     '申请条件',
     '所需资料',
@@ -98,14 +87,14 @@ class BorrowMoney extends React.Component {
     }
     clickHandler = () => {
         let { canStatus, borrowStatus } = this.state;
-
         // 初始化数据没有完成, 稍后再试
         if (canStatus === null) return;
 
         if (borrowStatus == 1 || borrowStatus == 101) {
-            location.href = '/static/loan/user-card-set/index.html';
+            gotoHandler('/static/loan/user-card-set/index.html');
         } else if (canStatus == 2) {
-            location.href = '/static/loan/dumiao-put-in/index.html?pid=' + $FW.Format.urlQuery().pid;
+            let link = `/static/loan/dumiao-put-in/index.html?pid=${$FW.Format.urlQuery().pid}`;
+            gotoHandler(link);
         } else if (canStatus === 0) {
             this.setState({ dumiaoEnterPopShow: true });
         } else if (canStatus == 1) {
@@ -137,8 +126,8 @@ class BorrowMoney extends React.Component {
                 <div className="detail-pop">
                     <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
                     <div className="pop-tip">{this.state.canMessage}</div>
-                    <a className="know-btn" href={`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`}>
-                        进入读秒查看</a>
+                    <div className="know-btn" onClick={() => {gotoHandler(`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}&userGid=${USER.gid}&userId=${USER.id}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`)}}>
+                        进入读秒查看</div>
                 </div>
             </div>
         }
@@ -186,7 +175,7 @@ class BorrowMoney extends React.Component {
             </div>
             <BorrowMoneyDatailList product={this.props.product} />
             <div className="footer">
-                <Nav className="btn" onClick={this.clickHandler}>马上拿钱</Nav>
+                <div className="btn" onClick={this.clickHandler}>马上拿钱</div>
             </div>
             {this.state.detailPopShow && <div className="mask" style={{ zIndex: 100 }}>
                 <div className="detail-pop">
@@ -232,6 +221,13 @@ class BorrowMoney extends React.Component {
             </div>}
         </div>
     }
+}
+
+function gotoHandler(link, toNative, need_login) {
+    if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
+
+    if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
+    ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 const USER = $FW.Store.getUserDict();
