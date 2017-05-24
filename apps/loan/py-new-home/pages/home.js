@@ -18,8 +18,9 @@ export default class Home extends React.Component {
         }
     }
     componentDidMount(){
-        this.props.home.getProductList().then(()=>{
-            this.setState({extList:data.extList})
+        let {home} = this.props;
+        home.getProductList().then(()=>{
+            this.setState({extList:home.extList})
         })
     }
     render(){
