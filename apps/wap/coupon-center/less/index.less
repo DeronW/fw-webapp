@@ -41,6 +41,38 @@ body {
         width: 75%;
         height: 175px;
         float: left;
+        .gift_one_title{
+          width: 155px;
+          padding: 40px 40px 40px 34px;
+          height: 90px;
+          float: left;
+          .gift_amount{
+            font-size: 54px;
+            color: #fff;
+            .amount_rmb{
+              display: inline-block;
+              font-size: 40px;
+            }
+          }
+          .gift_type{
+            font-size: 22px;
+            color: #fff;
+            margin-top: 10px;
+          }
+        }
+        .gift_one_des{
+          width: 200px;
+          padding: 40px 40px 40px 20px;
+          height: 90px;
+          float: left;
+          font-size: 20px;
+          color: #fff;
+          line-height: 34px;
+          .space{
+            display: inline-block;
+            width: 20px;
+          }
+        }
       }
       .gift_item_right{
         float: left;
@@ -91,15 +123,49 @@ body {
       z-index: 9;
       top: 0;
       left: 0;
-      .des_close {
+      .pop_content{
+        width: 595px;
+        height: 790px;
         position: absolute;
-        top: 10px;
-        right: 10px;
-        width: 50px;
-        height: 50px;
-        cursor: pointer;
-        background-color: red;
+        left: 50%;
+        margin-left: -300px;
+        top: 50%;
+        margin-top: -395px;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: auto;
+        .close-btn{
+          width: 530px;
+          height: 68px;
+          background-color: #fd4d4c;
+          position: absolute;
+          bottom: 0;
+          margin-bottom: 20px;
+          margin-left: 33px;
+          border-radius: 4px;
+          font-size: 28px;
+          color: #fff;
+          text-align: center;
+          line-height: 68px;
+          cursor: pointer;
+        }
+        .pop_title{
+          height: 80px;
+          border-bottom: 1px solid #eff0f3;
+          font-size: 32px;
+          color: #333;
+          line-height: 80px;
+          padding-left: 34px;
+          background-color: #f9f9f9;
+        }
+        .pop_content_title{
+          font-size: 32px;
+          padding-left: 34px;
+          color: #555;
+          margin-top: 30px;
+        }
       }
+
     }
   }
   .list_box {
@@ -236,5 +302,32 @@ body {
     .none_get {
       background: url("../images/none_getbg.png") no-repeat center;
     }
+  }
+  .detail_left{
+    width: 155px;
+    padding: 40px 40px 40px 34px;
+    height: 90px;
+    float: left;
+    .list_amount{
+      font-size: 54px;
+      color: #fff;
+      .list_rmb{
+        font-size: 40px;
+      }
+    }
+    .list_name{
+      font-size: 24px;
+      color: #fff;
+      margin-top: 10px;
+    }
+  }
+  .detail_right{
+    width: 200px;
+    padding: 20px 40px 40px 20px;
+    height: 90px;
+    float: left;
+    font-size: 20px;
+    color: #fff;
+    line-height: 34px;
   }
 }
