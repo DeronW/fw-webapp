@@ -3,7 +3,7 @@ class WeixinCon extends React.Component {
         NativeBridge.clipboard("fxhuaba")
     }
     saveHandler = () => {
-        NativeBridge.clipboard("save_fxh_qrcode")
+        NativeBridge.trigger("save_fxh_qrcode")
     }
     render() {
         return (
