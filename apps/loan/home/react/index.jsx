@@ -83,13 +83,13 @@ class Home extends React.Component {
     handleBannerJump = () => {
       if ($FW.Browser.inFXHApp()) return gotoHandler('/static/loan/user-weixin-fxhapp/index.html')
       if ($FW.Browser.inApp()) return gotoHandler('/static/loan/user-weixin-jrgcapp/index.html')
-      return gotoHandler('/static/loan/weixin-download/index.html')
+      return gotoHandler('/static/loan/weixin-download/index.html');
     }
 
     render() {
         return (
             <div>
-                <div onClick={this.props.handleBannerJump}><img src="images/banner.png" /></div>
+                <div onClick={this.handleBannerJump}><img src="images/banner.png" /></div>
                 <div className="loan-product-container">
                     <div className="product-title">
                         <img className="product-title-icon" src="images/loan-category-icon.png" />我要借款
