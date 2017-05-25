@@ -62,12 +62,12 @@ class Home extends React.Component {
                 this.setState({ loanProductList: data.resultList })
             }, e => { $FW.Component.Toast(e.message) });
 
-        $FXH.Post(`${API_PATH}/api/v1/recommendedList.json`)
+        $FXH.Post(`${API_PATH}/api/product/v1/recommendedList.json`)
             .then(data => {
-                this.setState({ subProductList: data })
+                this.setState({ subProductList: data.resultList })
             }, e => { $FW.Component.Toast(e.message) });
 
-        $FXH.Post(`${API_PATH}/api/v1/noticeList.json`)
+        $FXH.Post(`${API_PATH}/api/product/v1/noticeList.json`)
             .then(data => {
                 let newBulletinCnt = data.noticeContent;
                 let uid = $FW.Browser.inApp() ? getCookie().uid : $FW.Store.getUserDict().uid;

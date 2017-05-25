@@ -12,6 +12,7 @@ class GiftBag extends React.Component {
         // this.countDown = this.countDown(this)
         this.timestampHandler = this.timestampHandler.bind(this)
         this.close_pop = this.close_pop.bind(this)
+        // this.drawCircleGift = this.drawCircleGift.bind(this)
     }
 
     componentDidMount() {
@@ -27,6 +28,7 @@ class GiftBag extends React.Component {
                 // console.log(data.data.timestamp)
             }
         });
+        this.props.request();
     }
 
     desHandler(code) {
@@ -44,9 +46,10 @@ class GiftBag extends React.Component {
                 this.setState({pop_show: true, pop_info: data.data})
                 console.log(this.state.pop_info)
                 // console.log(this.state.pop_show,this.state.pop_info)
+
             }
         });
-        this.props.request();
+
 
     }
 
@@ -87,10 +90,97 @@ class GiftBag extends React.Component {
         }, 1000)
     }
 
-    getHandler() {
+    getHandler(item) {
+        item.isGet ="1";
         this.props.request() //用户点击后重新请求，改变数据
     }
+    jump() {
+        location.href = "/static/wap/faq/index.html"//跳转到投资的列表页
+    }
+    drawCircleGift(id, progress) {
+        console.log(11111111111111)
+        let canvas = document.getElementById(id),
+            ctx = canvas.getContext("2d"),
+            percent = progress, //最终百分比
+            circleX = canvas.width / 2, //中心x坐标
+            circleY = canvas.height / 2, //中心y坐标
+            radius = 50, //圆环半径
+            lineWidth = 5, //圆形线条的宽度
+            fontSize = 20;
+        //字体大小
+        //画圆
+        let circle = (cx, cy, r) => {
+            ctx.beginPath();
+            //ctx.moveTo(cx + r, cy);
+            ctx.lineWidth = lineWidth;
+            ctx.strokeStyle = '#e3e3e3';
+            ctx.arc(cx, cy, r, Math.PI * 2, false);
+            ctx.stroke();
+        }
+        //画弧线
+        let sector = (cx, cy, r, startAngle, endAngle, anti) => {
+            ctx.beginPath();
+            ctx.lineWidth = lineWidth;
 
+            // 渐变色 - 可自定义
+            let linGrad = ctx.createLinearGradient(
+                circleX - radius - lineWidth, circleY, circleX + radius + lineWidth, circleY
+            );
+            linGrad.addColorStop(0.0, '#fa5052');
+            linGrad.addColorStop(1.0, '#fa5052');
+            ctx.strokeStyle = linGrad;
+
+            //圆弧两端的样式
+            ctx.lineCap = 'round';
+
+            //圆弧
+            ctx.arc(
+                cx, cy, r,
+                (Math.PI * 1.5),
+                (Math.PI * 1.5) + endAngle / 100 * (Math.PI * 2),
+                false
+            );
+            ctx.stroke();
+        }
+        //刷新
+        let loading = () => {
+            if (process >= percent) {
+                clearInterval(circleLoading);
+            }
+            //清除canvas内容
+            ctx.clearRect(0, 0, circleX * 2, circleY * 2);
+
+            //中间的字
+            ctx.font = fontSize + 'px April';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = '#333';
+            ctx.fillText('剩余', circleX * 1, circleY * 0.9);
+            ctx.fillStyle = '#555';
+            ctx.fontSize = 26
+            ctx.fillText(parseFloat(process).toFixed(0) + '%', circleX, circleY * 1.2);
+            //圆形
+            circle(circleX, circleY, radius);
+            //圆弧
+            sector(circleX, circleY, radius, Math.PI * 2, process);
+            //控制结束时动画的速度
+            if (process / percent > 0.90) {
+                process += 0.30;
+            } else if (process / percent > 0.80) {
+                process += 0.55;
+            } else if (process / percent > 0.70) {
+                process += 0.75;
+            } else {
+                process += 1.0;
+            }
+        }
+        let process = 0.0;
+        //进度
+        let circleLoading = window.setInterval(() => {
+            loading();
+        }, 10);
+
+    }
     render() {
         let {pop_show, gift_list, pop_info} = this.state;
         let pop_show_dis = pop_show ? "block" : "none";
@@ -145,18 +235,24 @@ class GiftBag extends React.Component {
                     </div>
                 </div>
             } else if (item.receiveStatus == "02") {
-                gift_item_right_content = <div >
+                gift_item_right_content = <div key={index}>
                     {gift_left_section(item)}
-                    <div className="gift_item_right" onClick={this.getHandler}>
-                        <div className="gift_right_title">
-                            剩余
-                        </div>
-                        <div className="gift_right_starttime">
-                            {item.restPercent}
-                        </div>
-                        <div className="get_state_red">
-                            领取
-                        </div>
+                    <div className="gift_item_right" onClick={()=>{item.isGet == "0" ? this.getHandler(item) : this.jump()}}>
+                        <canvas id={index+"canvas_gift"} width="120" height="120"></canvas>
+                        {console.log(document.getElementById(index+'canvas_gift'))}
+                        {React.isValidElement(document.getElementById(index+'canvas_gift')?this.drawCircleGift((index+"canvas_gift"), parseInt(item.restPercent)):null)}
+                        {item.isGet == "0" ? <a className="content_state_red">领取</a> :
+                            <a className="content_state_red">去投资</a>
+                        }
+                        {/*<div className="gift_right_title">*/}
+                            {/*剩余*/}
+                        {/*</div>*/}
+                        {/*<div className="gift_right_starttime">*/}
+                            {/*{item.restPercent}*/}
+                        {/*</div>*/}
+                        {/*<div className="get_state_red">*/}
+                            {/*领取*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             } else if (item.receiveStatus == "03") {

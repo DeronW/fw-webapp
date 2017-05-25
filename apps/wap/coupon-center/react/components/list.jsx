@@ -65,8 +65,9 @@ class List extends React.Component {
         }, 1000)
     }
 
-    getHandler() {
-        clearInterval(this.timer);
+    getHandler(item) {
+        // clearInterval(this.timer);
+        item.isGet ="1";
         this.props.request();//重新请求数据
     }
 
@@ -154,7 +155,7 @@ class List extends React.Component {
         //进度
         let circleLoading = window.setInterval(() => {
             loading();
-        }, 20);
+        }, 10);
 
     }
 
@@ -176,8 +177,9 @@ class List extends React.Component {
                     <div className="content_state_gray">领取</div>
                 </div>
             } else if (item.receiveStatus == "02") {
-                content = <div onClick={item.isGet == "0" ? this.getHandler : this.jump}>
+                content = <div onClick={()=>{item.isGet == "0" ? this.getHandler(item) : this.jump()}}>
                     <canvas id={index+"canvas"} width="120" height="120"></canvas>
+                    {console.log(document.getElementById(index+'canvas'))}
                     {React.isValidElement(document.getElementById(index+'canvas')?this.drawCircle((index+"canvas"), parseInt(item.restPercent)):null)}
                     {item.isGet == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>
