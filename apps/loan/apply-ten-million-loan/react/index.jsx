@@ -65,16 +65,12 @@ class ApplyTenMillionLoan extends React.Component {
                 userOperationType: 3,
                 sourceType: 5
             }).then(data => {
-                    console.log(data)
-                    if(data.code == 10000){
-                        console.log(data)
-                        this.setState({
-                            codeToken: data.codeToken,
-                            codeType: data.codeType
-                        })
-                    } else {
-                        $FW.Component.Toast(data.message);
-                    }   
+                    this.setState({
+                        codeToken: data.codeToken,
+                        codeType: data.codeType
+                    })
+                }, e => {
+                    $FW.Component.Toast(e.message);
                 });
         } 
 
@@ -93,11 +89,9 @@ class ApplyTenMillionLoan extends React.Component {
                 verifyCode: this.state.codeVal,
                 sourceType: 5
             }).then(data => {
-                    if(data.code == 10000){
-                        
-                    } else {
-                        $FW.Component.Toast(data.message);
-                    }   
+                    console.log('mes')
+                }, e => {
+                    $FW.Component.Toast(e.message);
                 });
         }
     }
