@@ -16,7 +16,9 @@ class ApplyTenMillionLoan extends React.Component {
             phoneVal: '',
             codeVal: '',
             countdown: 0,
-            countdownShow: false
+            countdownShow: false,
+            codeToken: '',
+            codeType: ''
         }
     }
 
@@ -35,23 +37,48 @@ class ApplyTenMillionLoan extends React.Component {
     }
 
     handlerCountdown () {
-        this.setState({
-            countdown: 4,
-            countdownShow: true
-        })
-
-        this.timer = setInterval(() => {
+        if(this.state.phoneVal == '') {
+            $FW.Component.Toast("手机号不能为空");  
+        } else if(!isMobilePhone(this.state.phoneVal)) {
+            $FW.Component.Toast("手机号格式不正确");
+        } else {
             this.setState({
-                countdown: this.state.countdown - 1 
+                countdown: 60,
+                countdownShow: true
             })
 
-            if(this.state.countdown == 0) {
-                clearInterval(this.timer)
+            this.timer = setInterval(() => {
                 this.setState({
-                    countdownShow: false
+                    countdown: this.state.countdown - 1 
                 })
-            }
-        }, 1000)
+
+                if(this.state.countdown == 0) {
+                    clearInterval(this.timer)
+                    this.setState({
+                        countdownShow: false
+                    })
+                }
+            }, 1000)
+
+            $FXH.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
+                mobile: this.state.phoneVal,
+                userOperationType: 3,
+                sourceType: 5
+            }).then(data => {
+                    console.log(data)
+                    if(data.code == 10000){
+                        console.log(data)
+                        this.setState({
+                            codeToken: data.codeToken,
+                            codeType: data.codeType
+                        })
+                    } else {
+                        $FW.Component.Toast(data.message);
+                    }   
+                });
+        } 
+
+
     }
 
     applyBtn () {
@@ -60,7 +87,18 @@ class ApplyTenMillionLoan extends React.Component {
         } else if (this.state.codeVal == '') {
             $FW.Component.Toast("验证码不能为空");
         } else {
-
+            $FXH.Post(`${API_PATH}/api/userBase/v1/register.json`, {
+                mobile: this.state.phoneVal,
+                codeToken: this.state.codeToken,
+                verifyCode: this.state.codeVal,
+                sourceType: 5
+            }).then(data => {
+                    if(data.code == 10000){
+                        
+                    } else {
+                        $FW.Component.Toast(data.message);
+                    }   
+                });
         }
     }
 
