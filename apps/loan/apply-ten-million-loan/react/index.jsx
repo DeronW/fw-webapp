@@ -31,9 +31,12 @@ class ApplyTenMillionLoan extends React.Component {
     }
 
     codeChange (e) {
-        this.setState({
-            codeVal: e.target.value
-        })
+        if (!isNaN(e.target.value) && e.target.value.length <= 8) {
+            this.setState({
+                codeVal: e.target.value
+            })
+        }
+        
     }
 
     handlerCountdown () {
@@ -71,6 +74,12 @@ class ApplyTenMillionLoan extends React.Component {
                     })
                 }, e => {
                     $FW.Component.Toast(e.message);
+
+                    if(e.code == 201003) {
+                        this.timerTimeout = setTimeout(() => {
+                            window.location.href = '/static/loan/weixin-download/index.html'
+                        }, 2000)
+                    }                    
                 });
         } 
 
@@ -89,7 +98,7 @@ class ApplyTenMillionLoan extends React.Component {
                 verifyCode: this.state.codeVal,
                 sourceType: 5
             }).then(data => {
-                    console.log('mes')
+                    window.location.href = '/static/loan/ten-million-loan-info/index.html'
                 }, e => {
                     $FW.Component.Toast(e.message);
                 });
@@ -98,6 +107,7 @@ class ApplyTenMillionLoan extends React.Component {
 
     componentWillUnmount() {
         clearInterval(this.timer)
+        clearTimeout(timerTimeout)
     }
 
     render () {
