@@ -31,9 +31,12 @@ class ApplyTenMillionLoan extends React.Component {
     }
 
     codeChange (e) {
-        this.setState({
-            codeVal: e.target.value
-        })
+        if (!isNaN(e.target.value) && e.target.value.length <= 8) {
+            this.setState({
+                codeVal: e.target.value
+            })
+        }
+        
     }
 
     handlerCountdown () {
