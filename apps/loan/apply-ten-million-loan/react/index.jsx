@@ -52,6 +52,11 @@ class ApplyTenMillionLoan extends React.Component {
                 })
             }
         }, 1000)
+
+         $FXH.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`)
+            .then(data => {
+                console.log(data)
+            });
     }
 
     applyBtn () {
