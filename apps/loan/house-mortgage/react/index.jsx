@@ -32,7 +32,7 @@ class MainPanel extends React.Component {
                 if (!data.realName) this.setState({hasRealName: false});
                 this.model.set_form_data(data);
                 this.setState({ form_data: this.model.get_form_data() });
-            })
+            }, e => { $FW.Component.Toast(e) })
 
         window.onpopstate = () => {
             this.setState({ field_key: null })
