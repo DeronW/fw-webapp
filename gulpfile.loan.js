@@ -106,6 +106,11 @@ const EXPERIMENTAL_HOME = [{
     compiler: 'webpack'
 }]
 
+const APPLY_TEN_MILLION_LOAN = [
+    'apply-ten-million-loan',
+    'ten-million-loan-info'
+]
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
@@ -120,7 +125,8 @@ APP_NAMES.push(
     ...MARKET,
     ...CREDIT_CARD,
     ...MORTGAGE,
-    ...EXPERIMENTAL_HOME
+    ...EXPERIMENTAL_HOME,
+    ...APPLY_TEN_MILLION_LOAN
 );
 
 
