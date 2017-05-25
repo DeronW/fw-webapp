@@ -8,6 +8,10 @@ class FieldPanel extends React.Component {
     confirmHandler = () => {
         let { field, field_key } = this.props, { value } = this.state,
             vld = field.validate || [], err;
+        if (value === '') {
+            err = `请输入内容`;
+            return $FW.Component.Toast(err)
+        }
         for (let i = 0; i < vld.length; i++) {
             if (vld[i].test && vld[i].test(value)) {
                 err = vld[i].msg
@@ -20,7 +24,10 @@ class FieldPanel extends React.Component {
             this.props.set_form_data(dict)
     }
     textChangeHandler = (e) => {
-        let v = e.target.value, { field } = this.props;
+        let v = e.target.value, { field } = this.props, restrict = field.inputRestrict || [];
+        for (let i = 0; i < restrict.length; i++) {
+            if (restrict[i](v)) return
+        }
         if (typeof (field.format) === 'function') v = field.format(v)
         this.setState({ value: v })
     }
@@ -35,9 +42,12 @@ class FieldPanel extends React.Component {
                 <div className="name-text">{field.name}</div>
                 <div className="r">
                     <div className="text">
-                        <input placeholder={field.placeholder}
+                        <input {...field.inputAttr}
                             onChange={this.textChangeHandler}
                             value={value} />
+                        { field.name === '建筑面积' &&
+                            <div className="suffix">m<span>2</span></div>
+                        }
                     </div>
                 </div>
             </div>
