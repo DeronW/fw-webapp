@@ -27,7 +27,7 @@ class MainPanel extends React.Component {
 
     componentDidMount() {
         // get phone & real name
-        $FXH.Post(`${API_PATH}/api/userext/v1/userAuthentication.json`, {}, false)
+        $FXH.Post(`${API_PATH}/api/userext/v1/userAuthentication.json`, { version: 'v1' }, false)
             .then(data => {
                 if (!data.realName) this.setState({hasRealName: false});
                 this.model.set_form_data(data);
