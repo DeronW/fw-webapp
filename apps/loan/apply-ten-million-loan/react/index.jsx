@@ -65,7 +65,9 @@ class ApplyTenMillionLoan extends React.Component {
                 userOperationType: 3,
                 sourceType: 5
             }).then(data => {
+                    console.log(data)
                     if(data.code == 10000){
+                        console.log(data)
                         this.setState({
                             codeToken: data.codeToken,
                             codeType: data.codeType
