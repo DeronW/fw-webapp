@@ -1,3 +1,15 @@
+function SuccessMask() {
+    return (
+        <div className="success-mask">
+            <div className="close-icon" onClick={() => {gotoHandler('/static/loan/home/index.html')}}></div>
+            <div className="success-container">
+                <div className="success-tip-1">您已成功申请</div>
+                <img src="images/success.png"></img>
+                <div className="success-tip-2">审核专员预计在<span>1个工作日内</span>联系您</div>
+            </div>
+        </div>
+    )
+}
 
 class MainPanel extends React.Component {
 
@@ -50,6 +62,10 @@ class MainPanel extends React.Component {
     }
 
     render() {
+        if (this.state.submitted) {
+            return <SuccessMask />
+        }
+
         let { field_key, form_data } = this.state,
             field = this.model.get_field(this.state.field_key);
 
@@ -110,6 +126,13 @@ class MainPanel extends React.Component {
                     field={field} set_form_data={this.setFormData} /> }
         </div>
     }
+}
+
+function gotoHandler(link, toNative, need_login) {
+    if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
+
+    if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
+    ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 $FW.DOMReady(() => {

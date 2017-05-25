@@ -1,5 +1,5 @@
 body {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 input,
@@ -186,4 +186,46 @@ textarea {
 .suffix span {
   font-size: 24px;
   vertical-align: super;
+}
+
+.success-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.success-container {
+  position: fixed;
+  width: 100%;
+  top: 45%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -45%);
+  -ms-transform: translate(-50%, -45%);
+  transform: translate(-50%, -45%);
+}
+
+.close-icon {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  background: #fff url('../images/close-icon.png') no-repeat center;
+  z-index: 999;
+}
+
+.success-tip-1 {
+  margin-bottom: 36px;
+  color: #333;
+  font-size: 48px;
+}
+
+.success-tip-2 {
+  margin-top: 27px;
+  color: #666;
+  font-size: 32px;
+  span {
+    color: #6aa4f0;
+  }
 }
