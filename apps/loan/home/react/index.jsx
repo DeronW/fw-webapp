@@ -64,7 +64,7 @@ class Home extends React.Component {
 
         $FXH.Post(`${API_PATH}/api/product/v1/recommendedList.json`)
             .then(data => {
-                this.setState({ subProductList: data })
+                this.setState({ subProductList: data.resultList })
             }, e => { $FW.Component.Toast(e.message) });
 
         $FXH.Post(`${API_PATH}/api/product/v1/noticeList.json`)
