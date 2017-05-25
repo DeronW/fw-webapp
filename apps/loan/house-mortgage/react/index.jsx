@@ -6,6 +6,7 @@ class MainPanel extends React.Component {
         this.model = new FormModel();
         window._form_model = this.model // 4 debug
         this.state = {
+            hasRealName: true,
             form_data: { province: '北京省' },
             field_key: '',
             submitted: false
@@ -16,8 +17,9 @@ class MainPanel extends React.Component {
         // get phone & real name
         $FXH.Post(`${API_PATH}/api/userext/v1/userAuthentication.json`, {}, false)
             .then(data => {
-                this.model.set_form_data(data)
-                this.setState({ form_data: this.model.get_form_data() })
+                if (!data.realName) this.setState({hasRealName: false});
+                this.model.set_form_data(data);
+                this.setState({ form_data: this.model.get_form_data() });
             })
 
         window.onpopstate = () => {
@@ -58,10 +60,11 @@ class MainPanel extends React.Component {
                 () => this.setFieldHandler(key)}>
                 <div className="name-text">{f.name}</div>
                 <div className="r">
-                    <div className="text" style={{
-                        color: f.value ? '#333' : '#999'
-                    }}>
+                    <div className="text" style={{ color: f.value ? '#333' : '#999' }}>
                         {text || (f.options ? '请选择' : '请输入')}
+                        {(text && f.name === '建筑面积') &&
+                            <div className="suffix"> m<span>2</span></div>
+                        }
                     </div>
                     <div className="arrow-icon"></div>
                 </div>
@@ -87,7 +90,7 @@ class MainPanel extends React.Component {
             <div className="input-field-container">
                 { panel_title('申请人信息') }
                 { ['phone'].map(disabled_field_item) }
-                { form_data.realName ?
+                { this.state.hasRealName ?
                     ['realName'].map(disabled_field_item) :
                     ['realName'].map(field_item) }
                 { panel_title('抵押金额及期限') }

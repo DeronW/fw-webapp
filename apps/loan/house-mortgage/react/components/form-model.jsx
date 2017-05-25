@@ -8,7 +8,11 @@ class FormModel {
             },
             'realName': {
                 name: '姓名',
-                value: ''
+                value: '',
+                inputAttr: {
+                    type: 'text',
+                    maxLength: '20'
+                }
             },
             'mortgAmountRange': {
                 name: '抵押金额',
@@ -43,12 +47,26 @@ class FormModel {
             },
             'housingEstate': {
                 name: '小区名称',
-                value: ''
+                value: '',
+                inputAttr: {
+                    type: 'text',
+                    maxLength: '20'
+                }
             },
             'houseBuildArea': {
                 name: '建筑面积',
                 value: '',
-                suffix: '平方米'
+                inputAttr: {
+                    type: 'tel',
+                    maxLength: '4'
+                },
+                inputRestrict: [
+                    v => /[^\d]/.test(v)
+                ],
+                validate: [{
+                    test: v => v == 0,
+                    msg: '建筑面积必须大于零'
+                }],
             }
         }
     }
