@@ -53,8 +53,11 @@ class ApplyTenMillionLoan extends React.Component {
             }
         }, 1000)
 
-         $FXH.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`)
-            .then(data => {
+         $FXH.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
+            mobile: this.state.phoneVal,
+            userOperationType: 3,
+            sourceType: 5
+         }).then(data => {
                 console.log(data)
             });
     }
