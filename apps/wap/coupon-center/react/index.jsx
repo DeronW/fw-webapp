@@ -39,8 +39,12 @@ class CouponCenter extends React.Component {
     }
     render(){
         let {isShowEmpty,giftList,limitList,endList} = this.state;
+        let myCoupon = <a className="myCoupon" href="/static/wap/faq/index.html">
+            我的优惠券
+        </a>
         return  <div className="totalBox">
             {/*<EmptyShow/>*/}
+            {myCoupon}
             {isShowEmpty&&<EmptyShow/>}
             {giftList.length!==0&&<GiftBag list={giftList} request={this.requestGiftList}/>}
             {limitList.length!==0&&<List list={limitList} request={this.requestGiftList}/>}
