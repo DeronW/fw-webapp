@@ -59,11 +59,12 @@ class TenMillionLoanInfo extends React.Component {
                     housingEstate: this.state.district,
                     houseBuildArea: this.state.houseSize,
                     province: '北京',
-                    area: '北京',
+                    city: '北京',
                     phone: $FW.Format.urlQuery().phone,
                     uid: $FW.Format.urlQuery().uid,
                     token: $FW.Format.urlQuery().token,
-                    realName: ''
+                    realName: '',
+                    sourceType: 3
                 }).then(data => {
                     
                 }, e => {
