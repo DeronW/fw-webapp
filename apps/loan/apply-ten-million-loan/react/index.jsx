@@ -98,7 +98,7 @@ class ApplyTenMillionLoan extends React.Component {
                 verifyCode: this.state.codeVal,
                 sourceType: 5
             }).then(data => {
-                    window.location.href = '/static/loan/ten-million-loan-info/index.html'
+                    //window.location.href = '/static/loan/ten-million-loan-info/index.html'
                 }, e => {
                     $FW.Component.Toast(e.message);
                 });
