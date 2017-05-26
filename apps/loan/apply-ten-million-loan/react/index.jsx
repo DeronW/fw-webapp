@@ -73,13 +73,7 @@ class ApplyTenMillionLoan extends React.Component {
                         codeType: data.codeType
                     })
                 }, e => {
-                    $FW.Component.Toast(e.message);
-
-                    if(e.code == 201003) {
-                        this.timerTimeout = setTimeout(() => {
-                            window.location.href = '/static/loan/weixin-download/index.html'
-                        }, 2000)
-                    }                    
+                    $FW.Component.Toast(e.message);                
                 });
         } 
 
@@ -102,6 +96,11 @@ class ApplyTenMillionLoan extends React.Component {
                     window.location.href = `/static/loan/ten-million-loan-info/index.html?uid=${data.data.uid}&token=${data.data.userToken}&phone=${this.state.phoneVal}`
                 }, e => {
                     $FW.Component.Toast(e.message);
+                    if(e.code == 201003) {
+                        this.timerTimeout = setTimeout(() => {
+                            window.location.href = '/static/loan/weixin-download/index.html'
+                        }, 2000)
+                    }    
                 });
         }
     }
