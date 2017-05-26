@@ -92,8 +92,8 @@ class ApplyTenMillionLoan extends React.Component {
                 verifyCode: this.state.codeVal,
                 sourceType: 5
             }).then(data => {
-                    console.log(data)
-                    window.location.href = `/static/loan/ten-million-loan-info/index.html?uid=${data.data.uid}&token=${data.data.userToken}&phone=${this.state.phoneVal}`
+                    console.log(data.userLogin.uid)
+                    window.location.href = `/static/loan/ten-million-loan-info/index.html?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phoneVal}`
                 }, e => {
                     $FW.Component.Toast(e.message);
                     if(e.code == 201003) {
