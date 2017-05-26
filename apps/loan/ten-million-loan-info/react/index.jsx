@@ -40,7 +40,6 @@ class TenMillionLoanInfo extends React.Component {
         })
     }
 
-
     handlerInfo () {
         if(this.state.sum == '' || this.state.sum == '请选择') {
             $FW.Component.Toast("抵押金额不能为空");
@@ -61,7 +60,10 @@ class TenMillionLoanInfo extends React.Component {
                     houseBuildArea: this.state.houseSize,
                     province: '北京',
                     area: '北京',
-                    phone: ''
+                    phone: $FW.Format.urlQuery().phone,
+                    uid: $FW.Format.urlQuery().uid,
+                    token: $FW.Format.urlQuery().token,
+                    realName: ''
                 }).then(data => {
                     
                 }, e => {
