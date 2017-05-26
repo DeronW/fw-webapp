@@ -63,7 +63,7 @@ class ApplyTenMillionLoan extends React.Component {
                 }
             }, 1000)
 
-            $FXH.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
+            $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                 mobile: this.state.phoneVal,
                 userOperationType: 3,
                 sourceType: 5
@@ -76,9 +76,9 @@ class ApplyTenMillionLoan extends React.Component {
                     $FW.Component.Toast(e.message);
 
                     if(e.code == 201003) {
-                        this.timerTimeout = setTimeout(() => {
-                            window.location.href = '/static/loan/weixin-download/index.html'
-                        }, 2000)
+                        // this.timerTimeout = setTimeout(() => {
+                        //     window.location.href = '/static/loan/weixin-download/index.html'
+                        // }, 2000)
                     }                    
                 });
         } 
@@ -92,13 +92,13 @@ class ApplyTenMillionLoan extends React.Component {
         } else if (this.state.codeVal == '') {
             $FW.Component.Toast("验证码不能为空");
         } else {
-            $FXH.Post(`${API_PATH}/api/userBase/v1/register.json`, {
+            $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
                 mobile: this.state.phoneVal,
                 codeToken: this.state.codeToken,
                 verifyCode: this.state.codeVal,
                 sourceType: 5
             }).then(data => {
-                    window.location.href = '/static/loan/ten-million-loan-info/index.html'
+                    //window.location.href = '/static/loan/ten-million-loan-info/index.html'
                 }, e => {
                     $FW.Component.Toast(e.message);
                 });
