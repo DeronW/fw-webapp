@@ -52,7 +52,7 @@ class TenMillionLoanInfo extends React.Component {
         } else if(this.state.houseSize == '') {
             $FW.Component.Toast("建筑面积不能为空");
         } else {
-            $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
+            $FW.Post(`${API_PATH}/api/public/v1/mortgage.json`, {
                     mortgAmountRange: this.state.sum,
                     mortgTimeLong: this.state.years,
                     area: this.state.county,
