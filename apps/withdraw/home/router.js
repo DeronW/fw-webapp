@@ -10,6 +10,7 @@ import {
 
 import BlankPage from './pages/blank-page'
 import Cash from './pages/cash'
+import BankAccount from './pages/bank-account'
 import CashRecords from './pages/cash-records'
 import ResetDealPassword from './pages/reset-deal-password'
 
@@ -19,6 +20,7 @@ export default (stores) => {
         <Provider {...stores} >
             <Switch>
             <Route exact path='/cash' component={Cash} />
+            {/*<Route exact path='/cash/:search' component={BankAccount} />*/}
             <Route exact path='/cash-records' component={CashRecords} />
             <Route exact path='/reset-deal-password' component={ResetDealPassword} />
                 <Route component={BlankPage} />

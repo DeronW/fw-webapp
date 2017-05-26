@@ -1,12 +1,14 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/index.css'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
+import BankAccount from './bank-account.js'
 
 import * as $FWC from 'fw-components'
 
-@inject("cash") @observer @CSSModules(styles,{"allowMultiple":true})
+@inject("cash") @observer @CSSModules(styles,{"allowMultiple":true,"errorWhenNotFound": false})
 export default class Cash extends React.Component {
     static onEnter() {
         document.title = "提现";
@@ -15,30 +17,167 @@ export default class Cash extends React.Component {
         super(props);
         this.state = {
             title:"提现",
+            selectBank:false,
             inputVal:"",
-            accountAmount:"",
+            // accountAmount:"",
+            minAmt:"",
+            criticalValue:"",
             accountAmountVal:"this.props.cash.accountAmount",
+            selectWhich:"",
+            selectCashMethod: true,
+            perDayRealTimeAmountLimit:"",
+            doTime:"",
+            // noticeText:[],
             data:{}
         }
         this.takeAll = this.takeAll.bind(this);
+        this.chooseBank = this.chooseBank.bind(this);
+        this.getSelectBankInfo = this.getSelectBankInfo.bind(this);
+        this.getOpenBankShow = this.getOpenBankShow.bind(this);
+        this.handlerPost = this.handlerPost.bind(this);
+        this.handlerImmediatelyCashMethod = this.handlerImmediatelyCashMethod.bind(this);
+        this.handlerBlockTradeCashMethod = this.handlerBlockTradeCashMethod.bind(this);
     }
     takeAll(){
         this.setState({inputVal:this.state.accountAmount});
         // console.log(this.state.accountAmount);
     }
-    
+    chooseBank(){
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        this.setState({ selectBank: true });
+    }
+    // 是否显示开户支行
+   getSelectBankInfo(hide, bankInfo) {
+        this.setState({
+            selectBank: hide,
+            selectBankName: bankInfo.bankName,
+            selectBankId: bankInfo.bankNo
+        });
+    }
+    getOpenBankShow(booleanVal) {
+        this.setState({
+            selectBank: booleanVal
+        });
+    }
+    // 点击实时提现
+    handlerImmediatelyCashMethod (b) {
+        if (b) {
+            this.setState({
+                selectWhich: 0,
+                selectCashMethod: !this.state.selectCashMethod
+            })
+        }
+    }
+    // 点击大额提现
+    handlerBlockTradeCashMethod (b) {
+        if (b) {
+            this.setState({
+                selectWhich: 1,
+                selectCashMethod: !this.state.selectCashMethod
+            })
+        }
+    }
+    // 点击下一步的时候做的一些验证以及toast提示
+    handlerPost(){
+        console.log(this.state.data);
+        if(this.state.inputVal<this.state.minAmt){
+            $FWC.showToast("提现金额不能低于10元");
+            return false;
+        }
+        if (this.state.selectWhich == 1) {
+            if (this.state.selectBankName === null) {
+                $FWC.showToast("请选择开户支行");
+                return false;
+            }
+        }
+        if (this.state.selectWhich == 0) {
+            if (this.state.inputVal > this.state.criticalValue * 10000) {
+
+                $FWC.showToast("您实时提现单笔已超过" + this.state.criticalValue + "万限制，请使用大额提现！");
+                return false;
+            }
+        }
+       
+        
+    }
 
     componentDidMount(){
         let {cash} = this.props;
         console.log(cash);
         cash.takeData().then(() => {
-            this.setState({accountAmount:cash.accountAmount,data:cash.bankInfo})
-            console.log(this.state.accountAmount);
-            console.log(this.state.data);
+            this.setState({
+                accountAmount:cash.accountAmount,
+                data:cash.bankInfo,
+                minAmt:cash.minAmt,
+                selectWhich:cash.isCompanyAgent ? 1 : 0,
+                criticalValue:cash.criticalValue,
+                perDayRealTimeAmountLimit:cash.perDayRealTimeAmountLimit,
+                doTime:cash.doTime,
+            })
+            // console.log(this.state.accountAmount);
+            // console.log(this.state.data);
         })
     }
     
     render(){
+
+        let immediatelyCashMethodEml = (b) => {
+            var valText = this.state.perDayRealTimeAmountLimit;
+            return <div styleName="info-list">
+                <div styleName="info-select-btn">
+                    <span onClick={() => this.handlerImmediatelyCashMethod(b)} styleName={
+                        "select-icon " + (this.state.selectWhich == 0 || !b ? "select-icon select-btn" : "")
+                    } >
+                    </span>
+                </div>
+                <div styleName="info-text">
+                    <div styleName="subhead-text"> 实时提现 </div>
+                    <div styleName="detail-text">
+                        单笔金额&le;{this.state.criticalValue}万，
+                        {this.state.perDayRealTimeAmountLimit && "单日" + "≥" + valText + "万，"}
+                        7*24小时实时到账
+                    </div>
+                </div>
+            </div>
+        };
+
+        let blockTradeCashMethodEml = (b) => {
+            return <div styleName="info-list">
+                <div stylesName="info-select-btn">
+                    <span
+                        onClick={() => this.handlerBlockTradeCashMethod(b)}
+                        styleName={
+                            "select-icon " + (this.state.selectWhich == 1 || !b ? "select-icon select-btn" : "")
+                        }
+                    >
+                    </span>
+                </div>
+                <div styleName="info-text">
+                    <div styleName="subhead-text"> 大额提现 </div>
+                    <div styleName="detail-text">
+                        工作日{this.state.doTime}受理，最快30分钟之内到账。
+                    </div>
+                </div>
+            </div>
+        }
+
+        // TODO  因为不确定判断逻辑，所以先注释掉
+        //  let drawBlock = () => {
+        //     if (this.state.data.isCompanyAgent || this.state.data.isSpecial) {
+        //         return immediatelyCashMethodEml(true);
+        //         //return blockTradeCashMethodEml(false);
+        //     } else if (this.state.data.bankName == undefined || this.state.data.bankName == "") {
+        //         return immediatelyCashMethodEml(true);
+        //     } else {
+        //         //return <div>{immediatelyCashMethodEml(true)} {blockTradeCashMethodEml(true)}</div>
+        //         return <div>{immediatelyCashMethodEml(true)}</div>;
+        //     }
+        // }
+ 
+
+
+
         return <div>
             <div styleName="cash-wrapper">
                 {/*头部*/}
@@ -89,13 +228,16 @@ export default class Cash extends React.Component {
                             </div>
                         </div>
                         {/*选择开户支行*/}
-                        <div styleName="modify">
+                       {this.state.selectWhich == 1 || (this.state.data.isCompanyAgent || this.state.data.isSpecial) ?
+                           <div styleName="modify" onClick={this.chooseBank}>
                             <div styleName="wire"></div>
-                            <div styleName="jump-side"></div>
+                            <div styleName="jump-side">
+                                {this.state.selectBankName === null ? "开户支行" : this.state.selectBankName}
+                            </div>
                             <div styleName="open-account-side">
                                 <div styleName="account-text">请选择开户支行</div>
                             </div>
-                        </div>
+                        </div>:null}
                         
                     </div>
                     {/*提现方式*/}
@@ -103,7 +245,7 @@ export default class Cash extends React.Component {
                         <div styleName="draw-title">提现方式</div>
                         <div styleName="draw-info">
                             {/*实时提现*/}
-                            <div styleName="info-list">
+                            {/*<div styleName="info-list">
                                 <div styleName="info-select-btn">
                                     <span styleName="select-icon"></span>
                                 </div>
@@ -111,9 +253,9 @@ export default class Cash extends React.Component {
                                     <div styleName="subhead-text">实时提现</div>
                                     <div styleName="detail-text">单笔金额，7*24小时实时到账。</div>
                                 </div>
-                            </div>
+                            </div>*/}
                             {/*大额提现*/}
-                            <div styleName="info-list">
+                            {/*<div styleName="info-list">
                                 <div styleName="info-select-btn">
                                     <span styleName="select-btn"></span>
                                 </div>
@@ -121,11 +263,14 @@ export default class Cash extends React.Component {
                                     <div styleName="subhead-text">大额提现</div>
                                     <div styleName="detail-text">工作日9:00-19:00受理，最快30分钟之内到账。</div>
                                 </div>
-                            </div>
+                            </div>*/}
+                            {/*{drawBlock()}*/}
+                            {immediatelyCashMethodEml(true)}
+                            {blockTradeCashMethodEml(true)}
                         </div>
                     </div>
                     {/*下一步按钮*/}
-                    <div styleName="next">下一步</div>
+                    <div styleName="next" onClick={this.handlerPost}>下一步</div>
                     {/*提现说明*/}
                     <div>
                         <div styleName="instruction-title">提现说明</div>
@@ -150,6 +295,7 @@ export default class Cash extends React.Component {
                     </div>
                 </div>
             </div>
+            {this.state.selectBank && <BankAccount callbackSelectBankInfo={this.getSelectBankInfo} callbackOpenBank={this.getOpenBankShow}/>}
         </div>
     }
 }

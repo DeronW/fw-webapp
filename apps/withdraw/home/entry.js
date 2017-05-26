@@ -13,6 +13,7 @@ let stores = {
     cash: new Stores.Cash(Request),
     cash_records: new Stores.CashRecords(Request),
     reset_deal_password: new Stores.ResetDealPassword(Request),
+    bank_account: new Stores.BankAccount(Request),
 }
 
 render(Withdraw(stores), document.getElementById('cnt'))

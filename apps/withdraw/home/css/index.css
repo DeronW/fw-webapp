@@ -9,12 +9,19 @@ a {
     text-decoration: none;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 
 /*提现页面*/
 
 .cash-wrapper,
 .cash-records-wrapper,
-.reset-deal-password-wrapper {
+.reset-deal-password-wrapper,
+.cash-search-wrapper {
     width: 100%;
     height: auto;
 }
@@ -570,4 +577,91 @@ a {
 
 .ui-red-btn {
     background-color: #fd4d4c;
+}
+
+
+/*选择开户支行*/
+
+
+/*请选择开户支行的关键词*/
+
+.select-bank {
+    width: 100%;
+    margin: 120px 0 0;
+    background: #ebebee;
+}
+
+.search {
+    width: 90%;
+    height: 81px;
+    margin: 10px auto 0;
+    line-height: 81px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    z-index: 10;
+}
+
+.select-bank img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.list {
+    width: 100%;
+    margin-top: 40px;
+    background: #fff;
+}
+
+.list li {
+    width: 96%;
+    height: 98px;
+    line-height: 98px;
+    border-bottom: 1px solid #e3e5ea;
+    margin-left: 4%;
+    color: #555;
+    font-size: 32px;
+}
+
+.list img {
+    float: right;
+    margin-top: 36px;
+    margin-right: 35px;
+}
+
+.search-logo {
+    margin-left: 26px;
+}
+
+.search-text {
+    width: 80%;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 32px;
+    color: #ccc;
+    text-indent: 30px;
+    border: none;
+}
+
+.search-text:focus {
+    outline: none;
+}
+
+.close {
+    float: right;
+    margin: 19px 10px 0 0;
+}
+
+.open-bank {
+    background: #ebebee;
+    height: 100%;
+    z-index: 1000000;
+}
+
+.open-bank,
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }

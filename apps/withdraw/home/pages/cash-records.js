@@ -6,7 +6,7 @@ import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 import * as $FWC from 'fw-javascripts'
 
-@inject("cash_records") @observer @CSSModules(styles,{"allowMultiple":true})
+@inject("cash_records") @observer @CSSModules(styles,{"allowMultiple":true,"errorWhenNotFound": false})
 export default class CashRecords extends React.Component {
     static onEnter() {
         document.title = "提现记录";
@@ -29,11 +29,10 @@ export default class CashRecords extends React.Component {
     backwards(){
         history.go(-1);
     }
+
     componentDidMount(){
         this.loadRecordHandler();
-        //  console.log($FWC);
-        // console.log($FWC.Event);
-        // console.log($FWC.Event.touchBottom);
+        // console.log($FWC.Event.touchBottom());
         $FWC.Event.touchBottom(this.loadRecordHandler);
     }
     loadRecordHandler(){
@@ -52,7 +51,7 @@ export default class CashRecords extends React.Component {
                     totalPage: parseInt(this.state.data.pagination.totalPage)
                 });
         })
-    }
+    };
     format_record(record) {
             var r = record.happenTime.split(' ')[0].split('-');
             var d = new Date(r[0], r[1] - 1, r[2]);
