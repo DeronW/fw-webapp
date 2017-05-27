@@ -93,7 +93,6 @@ class UserEntry extends React.Component{
                                     {this.state.deleteShow &&
                                     <span styleName="clear-num" onClick={this.clearHandler}></span>}
                                 </div>
-                                <div styleName="pwd-icon"> </div>
                             </div>
                             <div styleName="form-border"></div>
                         </div>

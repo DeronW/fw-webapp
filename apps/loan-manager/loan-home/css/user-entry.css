@@ -92,16 +92,6 @@ input {
 	background: none;
 }
 
-.pwd-icon {
-	float: right;
-	width: 50px;
-	height: 88px;
-	margin-top: -84px;
-	background: url('../images/user-entry/pwd-icon.png') no-repeat center;
-	background-size: 29px auto;
-  display:none;
-}
-
 .form-border {
   position: relative;
   top: -10px;

@@ -55,9 +55,9 @@ class Login extends React.Component{
         if (err) return $FW.Component.Toast(err);
 
         this.props.account.login(password)
-            .then(data => {
+            .then((data) => {
                 this.setState({ redirect: '/loan' })
-            }, e => $FW.Component.Toast(e.message))
+            })
     }
 
     forgotPasswordHandler = () => {
@@ -90,7 +90,7 @@ class Login extends React.Component{
                                 <span styleName="title">登录</span>
                             </div>
                     }
-                    <div styleName="logo"> <img src="images/logo.png" /> </div>
+                    <div styleName="logo"> <img src={require('../images/login/logo.png')} /> </div>
                     <div styleName="get-name-phone">
                         亲爱的<span styleName="phone-text">  { this.props.account.maskedPhone }  </span>欢迎登录
                     </div>

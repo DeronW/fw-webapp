@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { extendObservable } from 'mobx'
 
 import { Redirect } from 'react-router-dom'
@@ -73,13 +75,12 @@ export default class Account {
 
     login = (password) => {
         let login_params = {
-            mobile: phone,
+            mobile: this.phone,
             password: password
         };
-        this.post('/api/userBase/v1/login.json', login_params)
+        return this.post('/api/userBase/v1/login.json', login_params)
             .then((data) => {
                 this.setAccountAuth(data.userLogin);
-                return <Redirect to={this.nextPage ? this.nextPage : '/loan'}/>
             })
     }
 
