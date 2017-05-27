@@ -4,7 +4,7 @@
 
 .fake-body {
   height: 100%;
-	background: #3a4a79 url(../images/back.jpg) no-repeat;
+	background: #3a4a79 url('../images/user-entry/back.jpg') no-repeat;
 	background-position: center bottom;
 	background-size: 100% auto;
 }
@@ -72,7 +72,7 @@ input {
 	width: 40px;
 	height: 88px;
 	margin: 0 0 0 10px;
-	background: url(../images/phone-icon.png) no-repeat center;
+	background: url('../images/user-entry/phone-icon.png') no-repeat center;
 	background-size: 24px auto;
 }
 
@@ -97,7 +97,7 @@ input {
 	width: 50px;
 	height: 88px;
 	margin-top: -84px;
-	background: url(../images/pwd-icon.png) no-repeat center;
+	background: url('../images/user-entry/pwd-icon.png') no-repeat center;
 	background-size: 29px auto;
   display:none;
 }
@@ -129,7 +129,7 @@ input {
   display:block;
   width:40px;
   height:40px;
-  background:url(../images/closed.png) no-repeat;
+  background:url('../images/user-entry/closed.png') no-repeat;
   position:absolute;
   top:25px;
   right:20px;

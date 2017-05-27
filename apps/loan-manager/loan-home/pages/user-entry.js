@@ -3,7 +3,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from '../css/user-entry.css'
 import { observer, inject } from 'mobx-react'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 
 import Nav from './components/nav'
 
@@ -14,7 +14,7 @@ let verificationNum = val => /^[0-9]*$/.test(val)
 
 
 @inject('account') @observer @CSSModules(styles)
-class Register extends React.Component{
+class UserEntry extends React.Component{
 
     constructor() {
         super();
@@ -61,7 +61,7 @@ class Register extends React.Component{
             }, e => {
                 if (e.code == 201003) {
                     this.props.account.setPhone(this.state.phone);
-                    this.setState({ redirect: '/loan' })
+                    this.setState({ redirect: '/login' })
                 } else {
                     // $FW.Component.Toast(e.message)
                 }
@@ -108,4 +108,4 @@ class Register extends React.Component{
 
 }
 
-export default Register
+export default UserEntry

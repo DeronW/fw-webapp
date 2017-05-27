@@ -37,6 +37,10 @@ export default class Account {
         return this.token && this.uid
     }
 
+    get maskedPhone() {
+        return this.phone.replace(/(\d{3})\d{4}(\d{3})/, "$1****$2");
+    }
+
     setPhone = (phone) => {
         this.phone = phone;
     }
@@ -67,8 +71,12 @@ export default class Account {
             })
     }
 
-    login = (params) => {
-        this.post('/api/userBase/v1/login.json', params)
+    login = (password) => {
+        let login_params = {
+            mobile: phone,
+            password: password
+        };
+        this.post('/api/userBase/v1/login.json', login_params)
             .then((data) => {
                 this.setAccountAuth(data.userLogin);
                 return <Redirect to={this.nextPage ? this.nextPage : '/loan'}/>

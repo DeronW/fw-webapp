@@ -10,8 +10,9 @@ import {
 
 import PrivateRoute from './pages/components/private-route'
 
+import UserEntry from './pages/user-entry'
+import Login from './pages/login'
 import Loan from './pages/loan'
-import UserEntey from './pages/user-entry'
 import Bills from './pages/bills'
 import FXHBillDetail from './pages/fxh-bill-detail'
 // import DMBillDetail from './pages/dm-bill-detail'
@@ -35,7 +36,8 @@ export default (stores) => {
                 <PrivateRoute exact path='/promote' component={Promote} />
                 <PrivateRoute exact path='/market' component={Market} />
                 <PrivateRoute exact path='/user' component={User} />
-                <Route exact path='/user-entry' component={UserEntey} />
+                <Route exact path='/user-entry' component={UserEntry} />
+                <Route exact path='/login' component={Login} />
                 <Route path='/' component={() => <Redirect to='/user-entry' />} />
                 <Route component={NoMatch} />
             </Switch>
