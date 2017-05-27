@@ -8,6 +8,8 @@ import {
     Link
 } from 'react-router-dom'
 
+import PrivateRoute from './pages/components/private-route'
+
 import Loan from './pages/loan'
 import UserEntey from './pages/user-entry'
 import Bills from './pages/bills'
@@ -23,17 +25,17 @@ export default (stores) => {
     return <Router>
         <Provider {...stores} >
             <Switch>
-                <Route exact path='/loan' component={Loan} />
+                <PrivateRoute exact path='/loan' component={Loan} />
+                <PrivateRoute exact path='/bills' component={() => <Redirect to='/bills/applying' />} />
+                <PrivateRoute exact path='/bills/:billType' component={Bills} />
+                <PrivateRoute exact path='/bill/fxh/:billId' component={FXHBillDetail} />
+                {/* <PrivateRoute exact path='/bill/dumiao/:billId' component={DMBillDetail} /> */}
+                {/* <PrivateRoute exact path='/bill/fxh/:billId/repay' component={Repayment} />
+                <PrivateRoute exact path='/bill/fxh/:billId/repayment-record/:repaymentId' component={RepaymentRecord} /> */}
+                <PrivateRoute exact path='/promote' component={Promote} />
+                <PrivateRoute exact path='/market' component={Market} />
+                <PrivateRoute exact path='/user' component={User} />
                 <Route exact path='/user-entry' component={UserEntey} />
-                <Route exact path='/bills' component={() => <Redirect to='/bills/applying' />} />
-                <Route exact path='/bills/:billType' component={Bills} />
-                <Route exact path='/bill/fxh/:billId' component={FXHBillDetail} />
-                {/* <Route exact path='/bill/dumiao/:billId' component={DMBillDetail} /> */}
-                {/* <Route exact path='/bill/fxh/:billId/repay' component={Repayment} />
-                <Route exact path='/bill/fxh/:billId/repayment-record/:repaymentId' component={RepaymentRecord} /> */}
-                <Route exact path='/promote' component={Promote} />
-                <Route exact path='/market' component={Market} />
-                <Route exact path='/user' component={User} />
                 <Route path='/' component={() => <Redirect to='/user-entry' />} />
                 <Route component={NoMatch} />
             </Switch>

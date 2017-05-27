@@ -1,18 +1,20 @@
-import RequestFactory from './core/request.js'
-import * as Components from './components';
+import { Request, BrowserFactory as Browser } from 'fw-javascripts'
 
 
-let request = new RequestFactory({
-    error_handler: (code, message, responseText) => { },
-    alert: Components.showAlert,
-    show_loading: Components.showLoading,
-    hide_loading: Components.hideLoading
-})
+class $LOAN {
 
-class $LOAN_MANAGER {
-    static Post(options) {
-        return request.ajax(options)
+    static Post(url, data, userAuth) {
+        let API_PATH = document.getElementById('api-path').value,
+            SOURCE_TYPE = Browser.inWeixin ? 4 : 3;
+        let options = {
+            url: `${API_PATH}${url}`,
+            method: 'post',
+            data: Object.assign({ sourceType: SOURCE_TYPE }, data, userAuth),
+            slience: true
+        }
+        return Request(options)
     }
+
 }
 
-export default $LOAN_MANAGER
+export default $LOAN

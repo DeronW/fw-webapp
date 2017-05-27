@@ -6,11 +6,17 @@ import './css/index.css'
 import AppRouter from './router'
 import { Request } from 'fw-javascripts'
 
+import $LOAN from '../../../es7-lib/javascripts/new-loan'
+
 import * as Stores from './stores'
 
-let stores = {
-    products: new Stores.Products(Request),
-    bills: new Stores.Bills(Request)
-}
+
+let stores = { account: new Stores.Account($LOAN.Post) },
+    AuthPost = stores.account.authPost;
+
+stores = Object.assign(stores, {
+    products: new Stores.Products(AuthPost),
+    bills: new Stores.Bills(AuthPost)
+})
 
 render(AppRouter(stores), document.getElementById('cnt'))

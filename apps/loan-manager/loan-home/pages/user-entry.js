@@ -13,14 +13,15 @@ let isMobilePhone = phone => /^1(3|4|5|7|8)\d{9}$/.test(phone)
 let verificationNum = val => /^[0-9]*$/.test(val)
 
 
-@observer @CSSModules(styles)
+@inject('account') @observer @CSSModules(styles)
 class Register extends React.Component{
 
-    constructor(props){
-        super(props)
+    constructor() {
+        super();
         this.state = {
             phone: '',
-            deleteShow: false
+            deleteShow: false,
+            redirect: ''
         }
     }
 
@@ -52,25 +53,19 @@ class Register extends React.Component{
             return;
         }
 
-        $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
-            mobile: phone,
-            userOperationType: 3,
-            sourceType: SOURCE_TYPE
-        }).then(data => {
-            //$FW.Store.set('phone', phone);
-            if(data.codeType == 1){
-                // location.href = `/static/loan/user-set-password/index.html?codeToken=${data.codeToken}&phone=${phone}`;
-            }else if(data.codeType == 2){
-                // location.href = `/static/loan/user-reset-password/index.html?codeToken=${data.codeToken}&phone=${phone}`;
-            }
-        }, res => {
-            if (res.code === 201003) {
-                //$FW.Store.set('phone', phone);
-                // location.href = `/static/loan/user-login/index.html?phone=${phone}`;
-            } else {
-                // $FW.Component.Toast(res.message)
-            }
-        })
+        this.props.account.getVeriCode(this.state.phone)
+            .then(data => {
+                this.props.account.setPhone(this.state.phone);
+                if (data.codeType == 1) this.setState({ redirect: '/register' })
+                if (data.codeType == 2) this.setState({ redirect: '/forget-password' })
+            }, e => {
+                if (e.code == 201003) {
+                    this.props.account.setPhone(this.state.phone);
+                    this.setState({ redirect: '/loan' })
+                } else {
+                    // $FW.Component.Toast(e.message)
+                }
+            })
     }
 
     keyUpHandler = (e) => {
@@ -79,6 +74,8 @@ class Register extends React.Component{
 
     render() {
         return (
+            this.state.redirect ?
+            <Redirect to={this.state.redirect} /> :
             <div styleName="fake-body">
                 <div styleName="register-login-cnt">
                     <div styleName="top">

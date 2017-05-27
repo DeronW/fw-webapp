@@ -2,8 +2,8 @@ import { observable, computed, extendObservable } from 'mobx'
 
 export default class Bills {
 
-    constructor(request) {
-        this.request = request;
+    constructor(authPost) {
+        this.authPost = authPost;
     }
 
     @observable billList = {
@@ -16,23 +16,18 @@ export default class Bills {
     fetchBillItems = (type, pageSize) => done => {
         if (this.billList[type].pageNo === 0) return done && done();
 
-        let API_PATH = document.getElementById('api-path').value;
-        return this.request({
-            url: `${API_PATH}/api/order/v1/orderList.json`,
-            method: 'post',
-            data: {
+        return this.authPost(`/api/order/v1/orderList.json`, {
                 pageSize: pageSize || 10,
                 pageIndex: this.billList[type].pageNo,
                 loanStatus: this.billList[type].typeNo
-            }
-        }).then(data => {
-            this.billList[type].list.push(...data.resultList)
-            this.billList[type].pageNo < data.totalPage ?
-                this.billList[type].pageNo++ :
-                this.billList[type].pageNo = 0;
+            }).then(data => {
+                this.billList[type].list.push(...data.resultList)
+                this.billList[type].pageNo < data.totalPage ?
+                    this.billList[type].pageNo++ :
+                    this.billList[type].pageNo = 0;
 
-            done && done();
-        })
+                done && done();
+            })
     }
 
 }
