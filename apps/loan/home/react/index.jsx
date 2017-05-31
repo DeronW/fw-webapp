@@ -2,10 +2,15 @@ function LoanProduct(props) {
     let productLink = props.productName === '放心花' ? `/static/loan/fxh/index.html` : `/static/loan/dumiao/index.html`,
         productToNative = props.productName === '放心花' ? 'fxh_detail' : '';
     let labelBorderColor = { '1': '#fd6f79', '2': '#46abef', '3': '#fd9c34' };
+    let labelImgURI = {
+        '1': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAXCAMAAADjjeWOAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA81BMVEUAAAD9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3n9b3kAAAB/QythAAAAT3RSTlMAARUIQgYZaJDDtT9D8fbaJw2y9QNmZEHGhBvRMOk+AoUUKjbn0qb+jk7MwVtx+jzd60B1kQeJ/dkkc20oq2/NS1e5WrNg8rZqX34MJTE45eArQQAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAAC1SURBVBjTVdDVFoJgDADgXxRQbAQDE7uwMLC7Y+//NiIMgd19ZzsrQqzwEFdQXh/tIMP6A1zQdigMEYjGLMYJDwAJFpsIYpKk0gAZTEtZ4HKCmC+YLJb0YvDLZZxQqf4MNatb3WCjiWwZhDaDm3VMdzGt9AxyyP7A4HCEVs3q8QQPIdOZTm2O6cWSXq0BFAG9ge2O7A+UtctRLz7R8v/wM1zgerMfcdf4x/Nl+61+BOIMyfXZLwDJIFdI7v/vAAAAAElFTkSuQmCC',
+        '2': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAMAAAC3SZ14AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAwFBMVEUAAABGq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+9Gq+8AAABzfUMUAAAAPnRSTlMADy8G2acDNnM/4AFgGsYtAn8eI8WETer7d3IzS7VO/Dw+hdcsXecb+AtrCfnV6coq2H47yLdKRQ223V6CTEPSkQQAAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAAn0lEQVQY013PxxaCQBBE0ULBjIoBxZwTZjGh9v9/lj3gYWZ8u76rauCXkcJfaZOsjE5ZIsrplGcqFDUqMZGtUVlQRYGqI4Rq8VVvNOG2Iml7ntfpAj3qY0Cy4YipjLFCNGGaYqbSnGmBpUoO0wprlTZM5GMrZecLsrGXdBAj6IiTpHNEFwSSjIhcXBMx+aGbWGIl2+9Mj2f4wjuMCz4sX16qMVuB8WhKAAAAAElFTkSuQmCC',
+        '3': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAYCAMAAAD9GTxlAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAkFBMVEUAAAD9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDT9nDQAAABlJT//AAAALnRSTlMAAQZhAyOywIVtTfT+EtifZy9u+0dEJuog+T8bImqXkL/Q3hUR/S1PUn+szwo6ExFmygAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAACDSURBVBjTVZBZEoIwEAUTBFQWdwFFDbhvvPsfj6SSCo/+60rX1EyEcMhAMJOQLYrZ5HTGOkfCaZrlnGIxSrHkFFhxCqy9brRtd3tDYVNHWdnUcjja1GHG1SfN2djFT1PamuHCFrjevN0fSJ/DWi9kb9pZ4cPXtl9Jlv/+/NhVo0+ksgdnkw71Jq2zFAAAAABJRU5ErkJggg=='
+    }
     let generate_labels = (label) => (
         <span key={label.labelValue} className="loan-product-label"
             style={{border: `1px solid ${labelBorderColor[label.labelType]}`, color: `${labelBorderColor[label.labelType]}`}}>
-            <img className="loan-product-label-icon" src={`images/label-${label.labelType}.png`} />
+            <img className="loan-product-label-icon" src={labelImgURI[label.labelType]} />
             { label.labelValue }
         </span>
     );
