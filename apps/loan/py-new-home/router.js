@@ -26,9 +26,9 @@ export default (stores) => {
     return <Router>
         <Provider {...stores}>
            <switch>
-               <Route exact path="/home" component={Home}/>
-               <Route exact path="/home/fxh" component={Fxh}/>
-               <Route exact path="/xh-want" component={FxhWant}/>
+               <Route path="/home" component={Home}/>
+               <Route exact path="/fxh" component={Fxh}/>
+               <Route exact path="/fxh-want" component={FxhWant}/>
                <Route exact path="/fxh-confirm" component={FxhConfirm}/>
                <Route exact path="/dumiao" component={Dumiao}/>
                <Route exact path="/dumiao-detail" component={DumiaoDetail}/>
