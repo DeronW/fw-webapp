@@ -98,7 +98,7 @@ class ApplyTenMillionLoan extends React.Component {
                     $FW.Component.Toast(e.message);
                     if(e.code == 201003) {
                         this.timerTimeout = setTimeout(() => {
-                            window.location.href = '/static/loan/weixin-download/index.html'
+                            window.location.href = '/static/loan/ld-download/index.html'
                         }, 2000)
                     }    
                 });
