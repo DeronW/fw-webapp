@@ -66,11 +66,16 @@ export default class Account {
         }).then(() => { this.phone = phone })
     }
 
-    register = (params, nextPage) => {
+    setNextPage = (loc) => {
+        console.log(loc);
+        this.nextPage = loc;
+    }
+
+    register = (params) => {
         this.post('/api/userBase/v1/register.json', params)
             .then((data) => {
                 this.setAccountAuth(data.userLogin);
-                return <Redirect to={nextPage ? nextPage : '/loan'}/>
+                // return <Redirect to={this.nextPage ? this.nextPage : '/loan'}/>
             })
     }
 
