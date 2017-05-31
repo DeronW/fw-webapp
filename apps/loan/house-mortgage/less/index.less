@@ -36,10 +36,15 @@ textarea {
     .r {
         float: right;
         .text {
-            float: left;
-            line-height: 99px;
-            font-size: 32px;
-            color: #333;
+          float: left;
+          max-width: 450px;
+          height: 99px;
+          line-height: 99px;
+          font-size: 32px;
+          color: #333;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .arrow-icon {
             float: right;
@@ -60,7 +65,7 @@ textarea {
             text-align: right;
         }
         input {
-          width: 450px;
+          width: 420px;
         }
     }
     .no {
