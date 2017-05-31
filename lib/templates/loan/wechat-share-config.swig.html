@@ -11,6 +11,7 @@
         var templateTitle;
         var templateUrl;
         var iurl = 'https://static.9888.cn/images/loan/invitation.jpg';
+        var jumpType = $FW.Browser.inWeixin() ? 'to_home' : 'app';
 
         $FW.Post( API_PATH + '/api/shareTemplate/v1/getContent.json', {
             channelCode:'OFFICIAL',
@@ -23,7 +24,7 @@
             function(data){
                 templateContent = data.shareTemplate.templateContent;
                 templateTitle = data.shareTemplate.templateTitle;
-                templateUrl = data.shareTemplate.templateUrl;
+                templateUrl = data.shareTemplate.templateUrl + '&jumpType=' + jumpType;
 
                 return $FW.Ajax({
                     url: API_PATH + '/cashloan/outside/weixinAccountController.do?wxConfig',
