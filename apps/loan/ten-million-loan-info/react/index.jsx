@@ -147,7 +147,7 @@ class TenMillionLoanInfo extends React.Component {
                             </div>
                         </div>  
                         <div className="li">
-                            <div className="name-text">建筑面积</div>
+                            <div className="name-text">建筑面积(㎡)</div>
                             <div className="input">
                                 <input className="text" type="text" 
                                     placeholder="请输入"
