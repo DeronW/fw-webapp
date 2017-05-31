@@ -61,7 +61,10 @@ class FieldPanel extends React.Component {
                     {i}
                 </div>
             }
-            return <div> {field.options.map(option)} </div>
+            return <div>
+                <div className="option-label">选择{field.name}</div>
+                {field.options.map(option)}
+            </div>
         }
 
         return <div className="field-edit-panel" style={{
