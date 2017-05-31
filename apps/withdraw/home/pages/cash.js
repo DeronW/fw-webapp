@@ -105,7 +105,7 @@ export default class Cash extends React.Component {
     componentDidMount(){
         let {cash} = this.props;
         console.log(cash);
-        cash.takeData().then(() => {
+        cash.takData().then(() => {
             this.setState({
                 accountAmount:cash.accountAmount,
                 data:cash.bankInfo,

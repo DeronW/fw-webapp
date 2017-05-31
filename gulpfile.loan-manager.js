@@ -16,9 +16,12 @@ const PROJ = 'loan-manager';
 const APP_NAMES = [{
     name: 'home',
     compiler: 'webpack'
+}, {
+    name: "insurance",
+    compiler: "webpack"
 }]
 
-module.exports = function (gulp, generate_task, CONSTANTS) {
+module.exports = function(gulp, generate_task, CONSTANTS) {
 
     APP_NAMES.forEach(i => {
         generate_task(PROJ, i, {

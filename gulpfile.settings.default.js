@@ -18,7 +18,12 @@ const CONSTANTS = {
     },
     'withdraw': {
         dev_api_path: '//localhost/fake-api'
-            //   dev_api_path: '//fe.9888.cn/api/test-a/loan'loan-manager'
+
+
+
+
+
+        //   dev_api_path: '//fe.9888.cn/api/test-a/loan'loan-manager'
     }
 };
 
