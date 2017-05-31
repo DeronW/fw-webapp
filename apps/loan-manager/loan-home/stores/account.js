@@ -6,6 +6,8 @@ import { Redirect } from 'react-router-dom'
 
 import { Utils, BrowserFactory as Browser } from 'fw-javascripts'
 
+import $LOAN from '../../../../es7-lib/javascripts/new-loan'
+
 
 export default class Account {
 
@@ -17,7 +19,7 @@ export default class Account {
             phone: '',
             status: '',
             inviteCode: '',
-            nextPage: ''
+            nextPage: '/loan' // default jump to /loan(home) after login
         })
     }
 
@@ -26,13 +28,18 @@ export default class Account {
         return this.post(url, data, { uid: this.uid, token: this.token })
     }
 
-    // localAuthSync =
+    localAuthSync = () => {
+        let localAccount = $LOAN.LocalAccount.getDict();
+        ['uid', 'token'].forEach( (k) => { this[k] = localAccount[k] || this[k] } );
+    }
 
     appAuthSync = (appAccount) => {
         ['uid', 'token'].forEach( (k) => { this[k] = appAccount[k] || this[k] } );
+        $LOAN.LocalAccount.setDict({ token: this.token, uid: this.uid });
     }
 
     get isLoggedIn() {
+        this.localAuthSync();
         if (Browser.inApp) {
             let appCookie = Utils.docCookie;
             this.appAuthSync(appCookie);
@@ -53,6 +60,7 @@ export default class Account {
         this.token = acc.userToken || '';
         this.state = acc.userStatus || '';
         this.inviteCode = acc.invitationCode || '';
+        $LOAN.LocalAccount.setDict({ token: this.token, uid: this.uid });
     }
 
     clearAccount = () => {
@@ -66,11 +74,16 @@ export default class Account {
         }).then(() => { this.phone = phone })
     }
 
-    register = (params, nextPage) => {
+    setNextPage = (loc) => {
+        console.log(loc);
+        this.nextPage = loc;
+    }
+
+    register = (params) => {
         this.post('/api/userBase/v1/register.json', params)
             .then((data) => {
                 this.setAccountAuth(data.userLogin);
-                return <Redirect to={nextPage ? nextPage : '/loan'}/>
+                // return <Redirect to={this.nextPage ? this.nextPage : '/loan'}/>
             })
     }
 

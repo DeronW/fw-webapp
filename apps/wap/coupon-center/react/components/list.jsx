@@ -23,7 +23,7 @@ class List extends React.Component {
             complete: data => {
                 // console.log(data);
                 // console.log(data.data.timestamp)
-                this.setState({currentTime: data.data.timestamp})
+                this.setState({ currentTime: data.data.timestamp })
             }
         })
     }
@@ -35,7 +35,7 @@ class List extends React.Component {
     timestampHandler(timestamp) {
         let timeTrans = new Date(parseInt(timestamp) * 1000);
         // console.log(timeTrans.toLocaleString('chinese', {hour12: false}).toString().substr(-8, 8))
-        return (timeTrans.toLocaleString('chinese', {hour12: false}).toString().substr(-8, 8));
+        return (timeTrans.toLocaleString('chinese', { hour12: false }).toString().substr(-8, 8));
     }
 
     countDown(time, index) {
@@ -67,7 +67,7 @@ class List extends React.Component {
 
     getHandler(item) {
         // clearInterval(this.timer);
-        item.isGet ="1";
+        item.isGet = "1";
         this.props.request();//重新请求数据
     }
 
@@ -160,7 +160,7 @@ class List extends React.Component {
     }
 
     render() {
-        let {buyingList} = this.state;
+        let { buyingList } = this.state;
         let buy_func = (item, index) => {
             let content;
             if (item.receiveStatus == "00") {
@@ -173,14 +173,14 @@ class List extends React.Component {
                 content = <div>
                     <div className="content_title">倒计时</div>
                     <div className="content_time"
-                         id={index + "limit_time"}>{this.countDown(item.intervalMilli, index)}</div>
+                        id={index + "limit_time"}>{this.countDown(item.intervalMilli, index)}</div>
                     <div className="content_state_gray">领取</div>
                 </div>
             } else if (item.receiveStatus == "02") {
-                content = <div onClick={()=>{item.isGet == "0" ? this.getHandler(item) : this.jump()}}>
-                    <canvas id={index+"canvas"} width="120" height="120"></canvas>
-                    {console.log(document.getElementById(index+'canvas'))}
-                    {React.isValidElement(document.getElementById(index+'canvas')?this.drawCircle((index+"canvas"), parseInt(item.restPercent)):null)}
+                content = <div onClick={() => { item.isGet == "0" ? this.getHandler(item) : this.jump() }}>
+                    <canvas id={index + "canvas"} width="120" height="120"></canvas>
+                    {console.log(document.getElementById(index + 'canvas'))}
+                    {React.isValidElement(document.getElementById(index + 'canvas') ? this.drawCircle((index + "canvas"), parseInt(item.restPercent)) : null)}
                     {item.isGet == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>
                     }
@@ -209,7 +209,7 @@ class List extends React.Component {
         }
         return <div className="list_box">
             <div className="list_box_title">
-                <img className="icon_limit" src="images/icon-limit.png"/>
+                <img className="icon_limit" src="images/icon-limit.png" />
                 <span className="limit_title">限时抢购</span>
             </div>
             {buyingList.length > 0 && buyingList.map(buy_func)}

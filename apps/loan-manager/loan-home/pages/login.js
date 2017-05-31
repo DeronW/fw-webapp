@@ -56,7 +56,7 @@ class Login extends React.Component{
 
         this.props.account.login(password)
             .then((data) => {
-                this.setState({ redirect: '/loan' })
+                this.setState({ redirect: this.props.account.nextPage })
             })
     }
 

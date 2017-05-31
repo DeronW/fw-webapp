@@ -19,7 +19,7 @@ class Header extends React.Component {
         }
     }
 
-    backClickHandler() {
+    backClickHandler = () => {
         this.props.back_handler ? this.props.back_handler() : window.history.back();
     }
 
