@@ -4,11 +4,14 @@
         // 如果不在微信中, 不使用微信设置功能
         if (navigator.userAgent.indexOf('MicroMessenger') < 0) return;
 
+        if (location.href.indexOf('weixin-invite') < 0) return;
+
         var USER = $FW.Store.getUserDict();
         var templateContent;
         var templateTitle;
         var templateUrl;
         var iurl = 'https://static.9888.cn/images/loan/invitation.jpg';
+        var jumpType = $FW.Browser.inWeixin() ? 'to_home' : 'app';
 
         $FW.Post( API_PATH + '/api/shareTemplate/v1/getContent.json', {
             channelCode:'OFFICIAL',
@@ -21,7 +24,7 @@
             function(data){
                 templateContent = data.shareTemplate.templateContent;
                 templateTitle = data.shareTemplate.templateTitle;
-                templateUrl = data.shareTemplate.templateUrl;
+                templateUrl = data.shareTemplate.templateUrl + '&jumpType=' + jumpType;
 
                 return $FW.Ajax({
                     url: API_PATH + '/cashloan/outside/weixinAccountController.do?wxConfig',
@@ -37,7 +40,8 @@
 
         function setWxConfig(appid, timestamp, noncestr, signature) {
             wx.config({
-                debug: location.href.indexOf('debug-wechat-share') > 0,
+                //debug: location.href.indexOf('debug-wechat-share') > 0,
+                debug:true,
                 appId: appid,
                 timestamp: timestamp,
                 nonceStr: noncestr,

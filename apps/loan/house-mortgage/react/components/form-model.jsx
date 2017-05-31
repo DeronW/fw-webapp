@@ -31,7 +31,7 @@ class FormModel {
                 options: [
                     '半年以下',
                     '半年-1年',
-                    '1-10年',
+                    '1年-10年',
                     '10年-25年',
                     '25年以上'
                 ]
@@ -65,7 +65,7 @@ class FormModel {
                 ],
                 validate: [{
                     test: v => v == 0,
-                    msg: '建筑面积必须大于零'
+                    msg: '建筑面积必须大于0'
                 }],
             }
         }

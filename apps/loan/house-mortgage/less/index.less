@@ -36,10 +36,15 @@ textarea {
     .r {
         float: right;
         .text {
-            float: left;
-            line-height: 99px;
-            font-size: 32px;
-            color: #333;
+          float: left;
+          max-width: 450px;
+          height: 99px;
+          line-height: 99px;
+          font-size: 32px;
+          color: #333;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .arrow-icon {
             float: right;
@@ -60,7 +65,7 @@ textarea {
             text-align: right;
         }
         input {
-          width: 450px;
+          width: 420px;
         }
     }
     .no {
@@ -73,7 +78,7 @@ textarea {
     }
 }
 
-.section-title {
+.section-title, .option-label {
     padding: 0 30px;
     font-size: 28px;
     line-height: 64px;
@@ -100,8 +105,8 @@ textarea {
 }
 
 .field-edit-panel {
-    position: fixed;
-    top: 100px;
+    position: absolute;
+    top: 0;
     width: 100%;
     height: 100%;
     padding-top: 20px;
