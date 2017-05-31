@@ -11,6 +11,7 @@
         var iurl = 'https://static.9888.cn/images/loan/invitation.jpg';
 
         $FW.Post( API_PATH + '/api/shareTemplate/v1/getContent.json', {
+            channelCode:'OFFICIAL',
             token: USER.token,
             uid:USER.uid,
             sourceType: SOURCE_TYPE,
