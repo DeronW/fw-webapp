@@ -15,43 +15,25 @@ class $LOAN {
         return Request(options)
     }
 
-    // static LocalAccount = () => {
-    //     return {
-    //         get: (k, defaultVal) => {
-    //             return storage.getItem(k) || defaultVal || ''
-    //         },
-    //         set: (k, v) => {
-    //             storage.setItem(k, v)
-    //         },
-    //         clear: () => {
-    //             storage.clear()
-    //         },
-    //
-    //         /*
-    //             setUserDict accept one parameter,
-    //             param = {
-    //                 token: 'xxx',
-    //                 id: 'xxx'
-    //             }
-    //         */
-    //         setDict: (dict) => {
-    //             if (typeof (dict) === 'string') dict = JSON.parse(dict);
-    //             dict.token && this.set('userToken', dict.token);
-    //             dict.uid && this.set('uid', dict.uid);
-    //         },
-    //
-    //         getDict: () => {
-    //             return {
-    //                 token: this.get('userToken'),
-    //                 uid: this.get('uid')
-    //             }
-    //         },
-    //
-    //         exportDict: () => {
-    //             return JSON.stringify(this.getUserDict())
-    //         }
-    //     }
-    // }
+    static get LocalAccount() {
+        let storage = window.localStorage;
+        let _get = (k, defaultVal) => storage.getItem(k) || defaultVal || '',
+            _set = (k, v) => { storage.setItem(k, v) },
+            _clear = () => { storage.clear() },
+            _setDict = (dict) => {
+                if (typeof (dict) === 'string') dict = JSON.parse(dict);
+                dict.token && _set('token', dict.token);
+                dict.uid && _set('uid', dict.uid);
+            },
+            _getDict = () => ({ token: _get('token'), uid: _get('uid') }),
+            _exportDict = () => JSON.stringify(this.getUserDict());
+        return {
+            setDict: _setDict,
+            getDict: _getDict,
+            clear: _clear,
+            exportDict: _exportDict
+        }
+    }
 
 }
 

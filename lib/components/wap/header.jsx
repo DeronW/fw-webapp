@@ -3,22 +3,27 @@
  <Header title={} title_img={} height={} background={} sub_text={} sub_url={} />
  */
 
-const Header = React.createClass({
-    getInitialState: function () {
-        let height = parseInt(this.props.height) || 100;
+class Header extends React.Component {
 
-        return {
+    constructor(props) {
+        super(props)
+
+        let height = parseInt(props.height) || 100;
+
+        this.state = {
             height: height,
-            background: this.props.background || 'white',
-            title: this.props.title,
-            title_img: this.props.title_img,
-            show_back_btn: this.props.show_back_btn !== false
+            background: props.background || 'white',
+            title: props.title,
+            title_img: props.title_img,
+            show_back_btn: props.show_back_btn !== false
         }
-    },
-    backClickHandler: function () {
+    }
+
+    backClickHandler = () => {
         this.props.back_handler ? this.props.back_handler() : window.history.back();
-    },
-    render: function () {
+    }
+
+    render() {
         let fontSize = '40px';
         if (this.props.title && this.props.title.length > 7) fontSize = '32px';
         let _style_header_fixed = {
@@ -104,14 +109,12 @@ const Header = React.createClass({
             </div>
         }
 
-        return (
-            <div style={{ height: this.state.height + 'px' }}>
-                <div className="_style_header_fixed" style={_style_header_fixed}>
-                    {back_btn}
-                    {title}
-                    {link}
-                </div>
+        return <div style={{ height: this.state.height + 'px' }}>
+            <div className="_style_header_fixed" style={_style_header_fixed}>
+                {back_btn}
+                {title}
+                {link}
             </div>
-        )
+        </div>
     }
-});
+}
