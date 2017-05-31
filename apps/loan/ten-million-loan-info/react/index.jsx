@@ -80,28 +80,32 @@ class TenMillionLoanInfo extends React.Component {
 
         return (
             <div className="">
-                <div className="">
+                <div className="banner">
+                    <div className="title">北京地区</div>
+                    <div className="text">房产抵押贷款</div>
+                </div>
+                <div className="list-area">
                     <div className="title">
                         抵押金融及年限
                     </div>
 
-                    <div className="">
-                        <div className="">
+                    <div className="list">
+                        <div className="li">
                             <div className="name-text">抵押金额</div>
                             <div className="input">
-                                <select value={ this.state.sum } onChange={ this.handlerSum.bind(this) }>
+                                <select className="select" value={ this.state.sum } onChange={ this.handlerSum.bind(this) }>
                                     {
                                         SUM.map((data, index) => {
-                                            return <option key={ index } value={ data }>{ data }</option> 
+                                            return <option className="option" key={ index } value={ data }>{ data }</option> 
                                         })
                                     }
                                 </select>
                             </div>
                         </div>
-                        <div className="">
+                        <div className="li">
                             <div className="name-text">抵押年限</div>
                             <div className="input">
-                                <select value={ this.state.years } onChange={ this.handlerYears.bind(this) }>
+                                <select className="select" value={ this.state.years } onChange={ this.handlerYears.bind(this) }>
                                     {
                                         YEARS.map((data, index) => {
                                             return <option key={ index } value={ data }>{ data }</option> 
@@ -114,16 +118,16 @@ class TenMillionLoanInfo extends React.Component {
               
                 </div>
 
-                <div className="">
+                <div className="list-area">
                     <div className="title">
                         抵押物信息
                     </div>
 
-                    <div className="">
-                        <div className="">
+                    <div className="list">
+                        <div className="li">
                             <div className="name-text">所在区县</div>
                             <div className="input">
-                                <select value={ this.state.county } onChange={ this.handlerCounty.bind(this) }>
+                                <select className="select" value={ this.state.county } onChange={ this.handlerCounty.bind(this) }>
                                     {
                                         COUNTY.map((data, index) => {
                                             return <option key={ index } value={ data }>{ data }</option> 
@@ -132,19 +136,21 @@ class TenMillionLoanInfo extends React.Component {
                                 </select>
                             </div>
                         </div>
-                        <div className="">
+                        <div className="li">
                             <div className="name-text">小区名称</div>
                             <div className="input">
-                                <input type="text" 
+                                <input className="text" type="text" 
+                                    placeholder="请输入"
                                     value={ this.state.district }
                                     onChange ={ this.changeDistrict.bind(this) } 
                                 />
                             </div>
                         </div>  
-                        <div className="">
+                        <div className="li">
                             <div className="name-text">建筑面积</div>
                             <div className="input">
-                                <input type="text" 
+                                <input className="text" type="text" 
+                                    placeholder="请输入"
                                     value={ this.state.houseSize }
                                     onChange= { this.changeHouseSize.bind(this) }  
                                 />
@@ -154,15 +160,18 @@ class TenMillionLoanInfo extends React.Component {
               
                 </div>                
 
-                <div className="push-btn" onClick={ this.handlerInfo.bind(this) }>
-                    提交资料
+                <div className="btn-area">
+                    <div className="push-btn" onClick={ this.handlerInfo.bind(this) }>
+                        提交资料
+                    </div>
                 </div>
+                
             </div>
 
         ) 
     }
 }
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"申请千万贷款"} show_back={false} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"申请千万贷款"} show_back={true} />, HEADER_NODE);
     ReactDOM.render(<TenMillionLoanInfo />, CONTENT_NODE)
 });
