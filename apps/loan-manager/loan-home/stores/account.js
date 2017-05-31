@@ -12,7 +12,7 @@ export default class Account {
     constructor(post) {
         this.post = post;
         extendObservable(this, {
-            uid: 'dfg',
+            uid: '',
             token: 'dfg',
             phone: '',
             status: '',
@@ -26,15 +26,16 @@ export default class Account {
         return this.post(url, data, { uid: this.uid, token: this.token })
     }
 
+    // localAuthSync =
 
-    authSyncWithApp = (appAccount) => {
+    appAuthSync = (appAccount) => {
         ['uid', 'token'].forEach( (k) => { this[k] = appAccount[k] || this[k] } );
     }
 
     get isLoggedIn() {
         if (Browser.inApp) {
             let appCookie = Utils.docCookie;
-            this.authSyncWithApp(appCookie);
+            this.appAuthSync(appCookie);
         }
         return this.token && this.uid
     }
