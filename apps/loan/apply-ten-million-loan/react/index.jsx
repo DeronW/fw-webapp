@@ -114,30 +114,33 @@ class ApplyTenMillionLoan extends React.Component {
         return (
             <div className="">
                 <div className="from">
-                    <div className="phone-li">
+                    <div className="li phone-li">
                         <div className="input">
-                            <input type="text" 
-                                value={ this.state.phoneVal } 
-                                placeholder="输入手机号" 
-                                onChange={ this.phoneChange.bind(this) }
-                            />
+                            <div className="i">
+                                <input type="text" 
+                                    value={ this.state.phoneVal } 
+                                    placeholder="输入手机号" 
+                                    onChange={ this.phoneChange.bind(this) }
+                                />
+                            </div>
                         </div>
                     </div>
-                    <div className="verification-code-li">
+                    <div className="li verification-code-li">
                         <div className="input">
-                            <input type="text" 
-                                placeholder="验证码" 
-                                value= { this.state.codeVal }
-                                onChange={ this.codeChange.bind(this) }
-                            />
-                        </div>
-                        <div className="btn">
-                            {
-                                this.state.countdownShow ? 
-                                    <div className="countdown-text">{ this.state.countdown }倒计时</div> : <div className="text" onClick={ this.handlerCountdown.bind(this) }>获取验证码</div>
-                            }
-                            
-                            
+                            <div className="i">
+                                <input type="text" 
+                                    placeholder="验证码" 
+                                    value= { this.state.codeVal }
+                                    onChange={ this.codeChange.bind(this) }
+                                />
+                            </div>
+
+                            <div className="btn">
+                                {
+                                    this.state.countdownShow ? 
+                                        <div className="countdown-text">{ this.state.countdown }倒计时</div> : <div className="text" onClick={ this.handlerCountdown.bind(this) }>获取验证码</div>
+                                }                                                                
+                            </div>                            
                         </div>
                     </div>   
 
@@ -149,6 +152,6 @@ class ApplyTenMillionLoan extends React.Component {
 } 
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"申请千万贷款"} show_back={false} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"申请千万贷款"} show_back={true} />, HEADER_NODE);
     ReactDOM.render(<ApplyTenMillionLoan />, CONTENT_NODE)
 });
