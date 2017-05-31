@@ -1,5 +1,5 @@
-class CountDown extends React.Component{
-    constructor(){
+class CountDown extends React.Component {
+    constructor() {
         super()
         this.countDown = this.countDown.bind(this)
     }
@@ -12,10 +12,10 @@ class CountDown extends React.Component{
         let m = Math.floor(mm / 60 % 60);
         let s = (mm % 60).toFixed(0);
         let timer = setInterval(() => {
-            if(s<10){
-                s= "0"+s;
+            if (s < 10) {
+                s = "0" + s;
             }
-            document.getElementById(index+"limit_time").innerHTML = m + ':' + s;
+            document.getElementById(index + "limit_time").innerHTML = m + ':' + s;
             s--;
             if (s < 0) {
                 s = 59;
@@ -24,16 +24,16 @@ class CountDown extends React.Component{
                     clearInterval(timer);
                     this.props.request();//重新请求数据
                 }
-                if(m<10){
-                    m="0"+m;
+                if (m < 10) {
+                    m = "0" + m;
                 }
             }
         }, 1000)
     }
-    render(){
-        let {id,time,index} = this.props;
+    render() {
+        let { id, time, index } = this.props;
         return <div className="content_time"
-        id={index+"limit_time"}>{this.countDown(time, index)}
+            id={index + "limit_time"}>{this.countDown(time, index)}
         </div>
 
     }
