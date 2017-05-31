@@ -37,7 +37,39 @@ export default class Customer extends Component {
                 </div>
                {/*内容*/} 
                <div styleName="content">
-
+                    <div styleName="applicant-info">
+                        {/*基本信息*/}
+                        <div styleName="applicant-basic-info">
+                            {/*投保人姓名*/}
+                            <div styleName="applicant-info-item">
+                                <div styleName="sub-applicant-info-item">
+                                    <span styleName="left-text">投保人姓名</span>
+                                    <input type="text" styleName="fill-car-info"/>
+                                </div>
+                            </div>
+                            {/*投保人手机*/}
+                            <div styleName="applicant-info-item">
+                                <div styleName="sub-applicant-info-item">
+                                    <span styleName="left-text">投保人手机</span>
+                                    <input type="text" styleName="fill-car-info"/>
+                                </div>
+                            </div>
+                            {/*身份证号*/}
+                            <div styleName="applicant-info-item">
+                                <div styleName="sub-applicant-info-item">
+                                    <span styleName="left-text">身份证号</span>
+                                    <input type="text" styleName="fill-car-info"/>
+                                </div>
+                            </div>
+                            {/*邮箱*/}
+                            <div styleName="applicant-info-item">
+                                <div styleName="sub-applicant-info-item">
+                                    <span styleName="left-text">邮箱</span>
+                                    <input type="text" styleName="fill-car-info"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                </div>
                </div>
     }

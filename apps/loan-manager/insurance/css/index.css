@@ -156,7 +156,8 @@ ul {
 .engine-num,
 .chassis-num,
 .register-date,
-.insurance-item {
+.insurance-item,
+.applicant-info-item {
     width: 100%;
     height: 100px;
 }
@@ -169,7 +170,8 @@ ul {
 .sub-engine-num,
 .sub-chassis-num,
 .sub-register-date,
-.sub-insurance-item {
+.sub-insurance-item,
+.sub-applicant-info-item {
     height: 100px;
     line-height: 100px;
     margin-left: 20px;
@@ -492,4 +494,23 @@ ul {
     float: right;
     top: 80px;
     right: 40px;
+}
+
+
+/********************************************投保人信息页****************************************************/
+
+
+/*投保人基本信息*/
+
+.applicant-info {
+    margin-top: 10px;
+}
+
+.applicant-basic-info {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    background: #fff;
+    color: #000;
 }
