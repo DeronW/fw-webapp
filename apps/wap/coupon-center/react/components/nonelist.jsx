@@ -10,9 +10,9 @@ class NoneList extends React.Component {
     }
 
     render() {
-        let {none_list} = this.state;
+        let { none_list } = this.state;
         let none_list_func = (item, index) => {
-            let none_no =  <div className="none_item_right">
+            let none_no = <div className="none_item_right">
                 <div className="gray_state"></div>
                 <div className="state_button gray_lq">领取</div>
             </div>;
@@ -21,7 +21,7 @@ class NoneList extends React.Component {
                 <div className="state_button red_invest">去投资</div>
             </a>
             let none_get = item.isGet == "0" ? none_no : none_yes;
-            return <div className={item.isGet =="0"?"none_item_box none_noget":"none_item_box none_get"} key={index}>
+            return <div className={item.isGet == "0" ? "none_item_box none_noget" : "none_item_box none_get"} key={index}>
                 <div className="none_item_left">
                     <div className="detail_left">
                         <div className="list_amount"><span className="list_rmb">￥</span>{item.limitAmount}</div>
@@ -39,7 +39,7 @@ class NoneList extends React.Component {
         }
         return <div className="none_box">
             <div className="none_box_title">
-                <img src="images/icon-end.png" className="icon_end"/>
+                <img src="images/icon-end.png" className="icon_end" />
                 <span className="end_title">已结束</span>
             </div>
             {none_list.length > 0 && none_list.map(none_list_func)}
