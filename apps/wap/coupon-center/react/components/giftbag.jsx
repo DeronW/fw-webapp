@@ -43,7 +43,7 @@ class GiftBag extends React.Component {
             fail: () => true,
             complete: data => {
                 // console.log(data);
-                this.setState({pop_show: true, pop_info: data.data})
+                this.setState({ pop_show: true, pop_info: data.data })
                 console.log(this.state.pop_info)
                 // console.log(this.state.pop_show,this.state.pop_info)
 
@@ -54,13 +54,13 @@ class GiftBag extends React.Component {
     }
 
     close_pop() {
-        this.setState({pop_show: false})
+        this.setState({ pop_show: false })
     }
 
     timestampHandler(timestamp) {
         var timeTrans = new Date(parseInt(timestamp) * 1000);
         // console.log(timeTrans.toLocaleString('chinese',{hour12:false}).toString().substr(-8,8))
-        return (timeTrans.toLocaleString('chinese', {hour12: false}).toString().substr(-8, 8));
+        return (timeTrans.toLocaleString('chinese', { hour12: false }).toString().substr(-8, 8));
     }
 
     countDown(time, number) {
@@ -91,7 +91,7 @@ class GiftBag extends React.Component {
     }
 
     getHandler(item) {
-        item.isGet ="1";
+        item.isGet = "1";
         this.props.request() //用户点击后重新请求，改变数据
     }
     jump() {
@@ -182,9 +182,9 @@ class GiftBag extends React.Component {
 
     }
     render() {
-        let {pop_show, gift_list, pop_info} = this.state;
+        let { pop_show, gift_list, pop_info } = this.state;
         let pop_show_dis = pop_show ? "block" : "none";
-        let gift_left_section = (item)=>{
+        let gift_left_section = (item) => {
             return <div className="gift_item_left" onClick={() => this.desHandler(item.code)}>
                 <div className="gift_one_title">
                     <div className="gift_amount">
@@ -226,7 +226,7 @@ class GiftBag extends React.Component {
                             倒计时
                         </div>
                         <div className="gift_right_starttime"
-                             id={index + "gift_time"}>
+                            id={index + "gift_time"}>
                             {this.countDown(item.intervalMilli, index)}
                         </div>
                         <div className="get_state_gray">
@@ -237,21 +237,21 @@ class GiftBag extends React.Component {
             } else if (item.receiveStatus == "02") {
                 gift_item_right_content = <div key={index}>
                     {gift_left_section(item)}
-                    <div className="gift_item_right" onClick={()=>{item.isGet == "0" ? this.getHandler(item) : this.jump()}}>
-                        <canvas id={index+"canvas_gift"} width="120" height="120"></canvas>
-                        {console.log(document.getElementById(index+'canvas_gift'))}
-                        {React.isValidElement(document.getElementById(index+'canvas_gift')?this.drawCircleGift((index+"canvas_gift"), parseInt(item.restPercent)):null)}
+                    <div className="gift_item_right" onClick={() => { item.isGet == "0" ? this.getHandler(item) : this.jump() }}>
+                        <canvas id={index + "canvas_gift"} width="120" height="120"></canvas>
+                        {console.log(document.getElementById(index + 'canvas_gift'))}
+                        {React.isValidElement(document.getElementById(index + 'canvas_gift') ? this.drawCircleGift((index + "canvas_gift"), parseInt(item.restPercent)) : null)}
                         {item.isGet == "0" ? <a className="content_state_red">领取</a> :
                             <a className="content_state_red">去投资</a>
                         }
                         {/*<div className="gift_right_title">*/}
-                            {/*剩余*/}
+                        {/*剩余*/}
                         {/*</div>*/}
                         {/*<div className="gift_right_starttime">*/}
-                            {/*{item.restPercent}*/}
+                        {/*{item.restPercent}*/}
                         {/*</div>*/}
                         {/*<div className="get_state_red">*/}
-                            {/*领取*/}
+                        {/*领取*/}
                         {/*</div>*/}
                     </div>
                 </div>
@@ -259,7 +259,7 @@ class GiftBag extends React.Component {
                 gift_item_right_content = <div>
                     {gift_left_section(item)}
                     <div className="gift_item_right">
-                        <img src="images/icon-get.png"/>
+                        <img src="images/icon-get.png" />
                         <div className="get_state_red">
                             领取
                         </div>
@@ -288,11 +288,11 @@ class GiftBag extends React.Component {
         }
         return <div className="giftbag_box">
             <div className="gift_box_title">
-                <img src="images/icon-gift.png" className="icon_gift"/>
+                <img src="images/icon-gift.png" className="icon_gift" />
                 <span className="gift_title">优惠券礼包</span>
             </div>
             {gift_list.length > 0 && gift_list.map(gift_func)}
-            <div id="pop" style={{display: pop_show_dis}}>
+            <div id="pop" style={{ display: pop_show_dis }}>
                 <div className="pop_content">
                     <div className="pop_title">{pop_info && pop_info.sourceTitle}</div>
                     <div className="pop_content_title">1、{pop_content_title_func()}</div>
