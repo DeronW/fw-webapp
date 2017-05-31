@@ -24,13 +24,13 @@ function LoanProduct(props) {
 function SubProduct(props) {
     let toNative = props.toNative ? props.toNative : '';
     return (
-        <div className="sub-product-item" onClick={() => { gotoHandler(props.forwardUrl, toNative) }}>
+        <div className="sub-product-item" onClick={() => { gotoHandler(props.redirectUrl, toNative) }}>
             <div className="sub-product-logo-container">
-                <img className="sub-product-logo" src={decodeURIComponent(props.iconUrl)}/>
+                <img className="sub-product-logo" src={decodeURIComponent(props.logoUrl)}/>
             </div>
             <div className="sub-product-title">
-                <div className="sub-product-1st-title">{props.firstTitle}</div>
-                <div className="sub-product-2nd-title">{props.secondTitle}</div>
+                <div className="sub-product-1st-title">{props.productTitle}</div>
+                <div className="sub-product-2nd-title">{props.productDec}</div>
             </div>
             <div className="next-icon-container"></div>
         </div>
@@ -59,7 +59,12 @@ class Home extends React.Component {
     componentDidMount() {
         $FXH.Post(`${API_PATH}/api/product/v1/productList.json`)
             .then(data => {
-                this.setState({ loanProductList: data.resultList, subProductList: data.extList })
+                this.setState({ loanProductList: data.resultList })
+            }, e => { $FW.Component.Toast(e.message) });
+
+        $FXH.Post(`${API_PATH}/api/product/v1/recommendedList.json`)
+            .then(data => {
+                this.setState({ subProductList: data.resultList })
             }, e => { $FW.Component.Toast(e.message) });
 
         $FXH.Post(`${API_PATH}/api/product/v1/noticeList.json`)
@@ -75,10 +80,16 @@ class Home extends React.Component {
             }, e => { $FW.Component.Toast(e.message) });
     }
 
+    handleBannerJump = () => {
+      if ($FW.Browser.inFXHApp()) return gotoHandler('/static/loan/user-weixin-fxhapp/index.html')
+      if ($FW.Browser.inApp()) return gotoHandler('/static/loan/user-weixin-jrgcapp/index.html')
+      return gotoHandler('/static/loan/weixin-download/index.html');
+    }
+
     render() {
         return (
             <div>
-                <div><img src="images/banner.png" /></div>
+                <div onClick={this.handleBannerJump}><img src="images/banner.png" /></div>
                 <div className="loan-product-container">
                     <div className="product-title">
                         <img className="product-title-icon" src="images/loan-category-icon.png" />我要借款
@@ -93,7 +104,6 @@ class Home extends React.Component {
                     </div>
                     <div className="sub-product-item-container">
                         { this.state.subProductList.map(product => <SubProduct {...product} key={product.firstTitle} />) }
-                        {/* <SubProduct forwardUrl="/static/loan/market/index.html" iconUrl="images/market-icon.png" firstTitle="想借更多？" secondTitle="查看更多借款机会" toNative="market"/> */}
                     </div>
                 </div>
                 { this.state.showBulletin &&

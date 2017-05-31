@@ -29,8 +29,6 @@ $FW.DOMReady(function () {
             let dict = data;
             $FW.Store.setUserDict({
                 token: dict.token,
-                id: dict.userId,
-                gid: dict.userGid,
                 status: dict.userStatus,
                 code: dict.invitationCode,
                 uid: dict.uid

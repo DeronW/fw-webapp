@@ -12,7 +12,7 @@ function gotoHandler(link, need_login) {
 const InvestSchool = React.createClass({
     getInitialState(){
         return {
-            tab: '投资百科',
+            tab: '出借百科',
             banner: '',
             listData: []
         }
@@ -38,9 +38,9 @@ const InvestSchool = React.createClass({
     },
     toggleTabHandler(t){
         this.setState({tab: t});
-        if (t == "投资百科") {
+        if (t == "出借百科") {
             this.getListHandler(34); //34
-        } else if (t == "投资者技巧") {
+        } else if (t == "出借人技巧") {
             this.getListHandler(35); //35
         } else {
             this.getListHandler(36); //36
@@ -72,7 +72,7 @@ const InvestSchool = React.createClass({
 
             <div className="tabGroup">
                 {
-                    ["投资百科", "投资者技巧", "投资讲堂"].map(tab)
+                    ["出借百科", "出借人技巧", "出借讲堂"].map(tab)
                 }
                 <i className="dashed1"></i>
                 <i className="dashed2"></i>
@@ -101,7 +101,7 @@ InvestSchool.List = React.createClass({
 });
 $FW.DOMReady(function () {
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={'投资学堂'}/>, HEADER_NODE);
+        ReactDOM.render(<Header title={'网贷学堂'}/>, HEADER_NODE);
     }
     ReactDOM.render(<InvestSchool />, CONTENT_NODE)
 });
