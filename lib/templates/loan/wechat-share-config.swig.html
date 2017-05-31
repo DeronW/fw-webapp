@@ -40,7 +40,8 @@
 
         function setWxConfig(appid, timestamp, noncestr, signature) {
             wx.config({
-                debug: location.href.indexOf('debug-wechat-share') > 0,
+                //debug: location.href.indexOf('debug-wechat-share') > 0,
+                debug:true,
                 appId: appid,
                 timestamp: timestamp,
                 nonceStr: noncestr,
