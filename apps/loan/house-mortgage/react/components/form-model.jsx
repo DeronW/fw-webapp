@@ -65,7 +65,7 @@ class FormModel {
                 ],
                 validate: [{
                     test: v => v == 0,
-                    msg: '建筑面积必须大于零'
+                    msg: '建筑面积必须大于0'
                 }],
             }
         }
