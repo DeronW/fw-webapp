@@ -19,7 +19,7 @@ export default class Account {
             phone: '',
             status: '',
             inviteCode: '',
-            nextPage: ''
+            nextPage: '/loan' // default jump to /loan(home) after login
         })
     }
 
