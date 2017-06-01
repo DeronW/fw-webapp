@@ -7,6 +7,7 @@ import Confirm from './confirm.js'
 import Payment from './payment.js'
 import Result from './result.js'
 import OrderList from './order-list.js'
+import QuoteDetail from './quote-detail.js'
 
 
 export {
@@ -18,5 +19,6 @@ export {
     Confirm,
     Payment,
     Result,
-    OrderList
+    OrderList,
+    QuoteDetail
 }

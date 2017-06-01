@@ -525,6 +525,55 @@ dd {
 }
 
 
+/**********************************************保费明细页********************************************************/
+
+
+/*标题*/
+
+.quote-detail-title {
+    margin-top: 30px;
+    font-size: 36px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.quote-detail-brand {
+    color: #f00;
+    margin-right: 20px;
+}
+
+
+/*交强险 车船税*/
+
+.insurance-duty {
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    background: #fff;
+    color: #000;
+    padding: 20px;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.top-line {
+    height: 100px;
+    line-height: 100px;
+}
+
+.top-item-money {
+    float: right;
+}
+
+.line-item {
+    height: 80px;
+    line-height: 80px;
+}
+
+.total-sum {
+    color: #f00;
+}
+
+
 /********************************************投保人信息页****************************************************/
 
 

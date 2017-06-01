@@ -51,9 +51,9 @@ export default class Quote extends Component {
                                 <div styleName="fund-line"><span>工场优惠价</span><b styleName="fund">3094.14元</b></div>
                             </div>
                             {/*右边向右图标*/}
-                            <div styleName="forwards" >
+                            <a styleName="forwards" href="#/quote-detail">
                                 <img src={require('../images/back.png')}  alt="" />
-                            </div>
+                            </a>
                         </div>
                         {/*太平洋车险*/}
                         <div styleName="insurance-quote">
@@ -68,9 +68,9 @@ export default class Quote extends Component {
                                 <div styleName="fund-line"><span>工场优惠价</span><b styleName="fund">3094.14元</b></div>
                             </div>
                             {/*右边向右图标*/}
-                            <div styleName="forwards" >
+                            <a styleName="forwards" href="#/quote-detail">
                                 <img src={require('../images/back.png')}  alt="" />
-                            </div>
+                            </a>
                         </div>
                         {/*人保车险*/}
                         <div styleName="insurance-quote">
@@ -85,9 +85,9 @@ export default class Quote extends Component {
                                 <div styleName="fund-line"><span>工场优惠价</span><b styleName="fund">3094.14元</b></div>
                             </div>
                             {/*右边向右图标*/}
-                            <div styleName="forwards" >
+                            <a styleName="forwards" href="#/quote-detail">
                                 <img src={require('../images/back.png')}  alt="" />
-                            </div>
+                            </a>
                         </div>
                     </div>
                     {/*确认提交按钮*/}

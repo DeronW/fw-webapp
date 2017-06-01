@@ -19,6 +19,7 @@ let stores = {
     payment: new Stores.Payment(Request),
     result: new Stores.Result(Request),
     order_list: new Stores.OrderList(Request),
+    quote_detail: new Stores.QuoteDetail(Request)
 }
 
 render(Insurance(stores), document.getElementById('cnt'))

@@ -58,7 +58,7 @@ export default class Confirm extends Component {
                                     <img src={require("../images/detail.png")} alt=""/>
                                     车辆信息
                                 </span>
-                                <a href="" styleName="view-details">
+                                <a href="#/quote-detail" styleName="view-details">
                                     <span styleName="view-detail-text">查看详情</span>
                                     <img src={require("../images/back.png")} alt=""/>
                                 </a>
@@ -82,6 +82,7 @@ export default class Confirm extends Component {
                             {/*标题*/}
                             <p styleName="PICC-title"><b styleName="PICC-self">PICC</b>人保车险</p>
                             {/*分割线*/}
+                            <div styleName="line"></div>
                             {/*保险公司报价 工厂优惠额度 实际结算金额*/}
                             {/*保险公司报价*/}
                             <div styleName="PICC-sum">
