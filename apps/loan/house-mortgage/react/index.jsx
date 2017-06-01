@@ -1,7 +1,9 @@
 function SuccessMask() {
     return (
         <div className="success-mask">
-            <div className="close-icon" onClick={() => {gotoHandler('/static/loan/home/index.html')}}></div>
+            { SOURCE_TYPE === 4 &&
+                <div className="close-icon" onClick={() => {gotoHandler('/static/loan/home/index.html')}}></div>
+            }
             <div className="success-container">
                 <div className="success-tip-1">您已成功申请</div>
                 <img src="images/success.png"></img>
