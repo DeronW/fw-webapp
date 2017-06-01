@@ -37,6 +37,8 @@ class MainPanel extends React.Component {
         window.onpopstate = () => {
             this.setState({ field_key: null })
         }
+
+        NativeBridge.trigger('cancel_refresh');
     }
 
     setFieldHandler = (key) => {
