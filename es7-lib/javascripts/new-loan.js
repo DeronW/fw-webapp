@@ -1,4 +1,5 @@
 import { Request, BrowserFactory as Browser } from 'fw-javascripts'
+import { showToast } from 'fw-components'
 
 
 class $LOAN {
@@ -12,7 +13,7 @@ class $LOAN {
             data: Object.assign({ sourceType: SOURCE_TYPE }, data, userAuth),
             slience: true
         }
-        return Request(options)
+        return Request(options).catch((e) => { showToast(e.message) })
     }
 
     static get LocalAccount() {
