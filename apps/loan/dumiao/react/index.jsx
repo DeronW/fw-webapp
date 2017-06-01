@@ -86,16 +86,17 @@ class BorrowMoney extends React.Component {
             });
     }
     clickHandler = () => {
-        let { canStatus, borrowStatus } = this.state;
+        //let { canStatus, borrowStatus } = this.state;
         // 初始化数据没有完成, 稍后再试
         //if (canStatus === null) return;
+        let canStatus = this.state.canStatus;
+        let borrowStatus = this.state.borrowStatus;
 
         if (borrowStatus == 1 || borrowStatus == 101) {
             gotoHandler('/static/loan/user-card-set/index.html');
         } else if (canStatus == 2) {
             let link = `/static/loan/dumiao-put-in/index.html?pid=${$FW.Format.urlQuery().pid}`;
             gotoHandler(link);
-            this.setState({ canMessageShow: false, tryOtherLoanPopShow: false })
         } else if (canStatus === 0) {
             this.setState({ dumiaoEnterPopShow: true });
         } else if (canStatus == 1) {
