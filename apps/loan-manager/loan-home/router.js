@@ -26,6 +26,7 @@ export default (stores) => {
     return <Router>
         <Provider {...stores} >
             <Switch>
+                <PrivateRoute exact path='/' component={() => <Redirect to='/loan' />} />
                 <PrivateRoute exact path='/loan' component={Loan} />
                 <PrivateRoute exact path='/bills' component={() => <Redirect to='/bills/applying' />} />
                 <PrivateRoute exact path='/bills/:billType' component={Bills} />
@@ -38,7 +39,6 @@ export default (stores) => {
                 <PrivateRoute exact path='/user' component={User} />
                 <Route exact path='/user-entry' component={UserEntry} />
                 <Route exact path='/login' component={Login} />
-                <Route path='/' component={() => <Redirect to='/user-entry' />} />
                 <Route component={NoMatch} />
             </Switch>
         </Provider>
