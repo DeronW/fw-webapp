@@ -95,6 +95,7 @@ class BorrowMoney extends React.Component {
         } else if (canStatus == 2) {
             let link = `/static/loan/dumiao-put-in/index.html?pid=${$FW.Format.urlQuery().pid}`;
             gotoHandler(link);
+            this.setState({ canMessageShow: false, tryOtherLoanPopShow: false })
         } else if (canStatus === 0) {
             this.setState({ dumiaoEnterPopShow: true });
         } else if (canStatus == 1) {
