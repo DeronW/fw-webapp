@@ -61,18 +61,24 @@ export default class Home extends Component {
                         <div styleName="car-num">
                             <div styleName="sub-car-num">
                                 <span styleName="left-text">车牌号码</span>
+                                <select name="" id="" styleName="choose-car-num" value={chooseRegion}>
+                                    <option value="">请选择</option>
+                                </select>
+                                <input type="text" styleName="fill-home-info"/>
                             </div>
                         </div>
                         {/*车主姓名*/}
                         <div styleName="name">
                             <div styleName="sub-name">
                                 <span styleName="left-text">车主姓名</span>
+                                <input type="text" styleName="fill-home-info"/>
                             </div>
                         </div>
                         {/*身份证号*/}
                         <div styleName="id-num">
                             <div styleName="sub-id-num">
                                 <span styleName="left-text">身份证号</span>
+                                <input type="text" styleName="fill-home-info"/>
                             </div>
                         </div>
                         {/*投保公司*/}
@@ -80,6 +86,9 @@ export default class Home extends Component {
                             <div styleName="sub-company">
                                 <span styleName="left-text">投保公司</span>
                             </div>
+                            <select name="" id="" styleName="choose-company" value={chooseRegion}>
+                                <option value="">请选择</option>
+                            </select>
                         </div>
                     </div>
                     {/*下一步按钮*/}
