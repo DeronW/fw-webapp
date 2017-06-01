@@ -44,7 +44,8 @@ class FieldPanel extends React.Component {
                     <div className="text">
                         <input {...field.inputAttr}
                             onChange={this.textChangeHandler}
-                            value={value} />
+                            value={value}
+                            className={field.name === '建筑面积' ? 'hasSuffix' : ''}/>
                         { field.name === '建筑面积' &&
                             <div className="suffix">m<span>2</span></div>
                         }
