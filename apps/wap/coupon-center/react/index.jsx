@@ -18,7 +18,7 @@ class CouponCenter extends React.Component {
             data: {
             },
             success: data => {
-                console.log(data.code);
+                console.log(data);
                 let packageList = data.data.packageList;
                 let couponAvailableList = data.data.couponAvailableList;
                 let couponEndList = data.data.couponEndList;
