@@ -19,6 +19,8 @@ import Payment from './pages/payment'
 import Result from './pages/result'
 import OrderList from './pages/order-list'
 import QuoteDetail from './pages/quote-detail'
+import CarInfo from './pages/car-info'
+import UserInfo from './pages/user-info'
 
 export default (stores) => {
 
@@ -35,6 +37,8 @@ export default (stores) => {
             <Route exact path='/result' component={Result} />
             <Route exact path='/order-list' component={OrderList} />
             <Route exact path='/quote-detail' component={QuoteDetail} />
+            <Route exact path='/car-info' component={CarInfo} />
+            <Route exact path='/user-info' component={UserInfo} />
                 <Route component={BlankPage} />
             </Switch>
         </Provider>

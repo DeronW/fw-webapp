@@ -604,8 +604,16 @@ dd {
     padding: 20px;
 }
 
-.photo-title {
+.photo-title,
+.check-notify {
     font-size: 40px;
+}
+
+
+/*user-info页里面照片匹配结果提示样式*/
+
+.check-notify {
+    margin-top: 0;
 }
 
 

@@ -8,6 +8,8 @@ import Payment from './payment.js'
 import Result from './result.js'
 import OrderList from './order-list.js'
 import QuoteDetail from './quote-detail.js'
+import UserInfo from './user-info.js'
+import CarInfo from './car-info.js'
 
 
 export {
@@ -20,5 +22,7 @@ export {
     Payment,
     Result,
     OrderList,
-    QuoteDetail
+    QuoteDetail,
+    CarInfo,
+    UserInfo
 }

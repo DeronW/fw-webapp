@@ -45,7 +45,7 @@ export default class Confirm extends Component {
                                     <img src={require("../images/car.png")} alt=""/>
                                     车辆信息
                                 </span>
-                                <a href="" styleName="view-details">
+                                <a href="#/car-info" styleName="view-details">
                                     <span styleName="view-detail-text">查看详情</span>
                                     <img src={require("../images/back.png")} alt=""/>
                                 </a>
@@ -71,7 +71,7 @@ export default class Confirm extends Component {
                                     <img src={require("../images/person.png")} alt=""/>
                                     车辆信息
                                 </span>
-                                <a href="" styleName="view-details">
+                                <a href="#/user-info" styleName="view-details">
                                     <span styleName="view-detail-text">查看详情</span>
                                     <img src={require("../images/back.png")} alt=""/>
                                 </a>
