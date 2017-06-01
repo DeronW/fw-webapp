@@ -124,12 +124,13 @@ class MainPanel extends React.Component {
                 <div className="btn" onClick={this.submitHandler}>提交</div>
             </div>
 
-            { field && (
-                <div className="field-mask"></div>
-                <FieldPanel
-                    field_key={this.state.field_key}
-                    field={field} set_form_data={this.setFormData} />
-            ) }
+            { field &&
+                <div>
+                    <div className="field-mask"></div>
+                    <FieldPanel
+                        field_key={this.state.field_key}
+                        field={field} set_form_data={this.setFormData} />
+                </div> }
         </div>
     }
 }
