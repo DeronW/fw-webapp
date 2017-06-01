@@ -85,10 +85,10 @@ class BorrowMoney extends React.Component {
                 this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
             });
     }
-    clickHandler = () => {
+    clickHandler=()=>{
         let { canStatus, borrowStatus } = this.state;
         // 初始化数据没有完成, 稍后再试
-        //if (canStatus === null) return;
+        if (canStatus === null) return;
 
         if (borrowStatus == 1 || borrowStatus == 101) {
             gotoHandler('/static/loan/user-card-set/index.html');
@@ -99,7 +99,7 @@ class BorrowMoney extends React.Component {
             this.setState({ dumiaoEnterPopShow: true });
         } else if (canStatus == 1) {
             this.setState({ canMessageShow: true });
-        } else {
+        } else{
             this.setState({ tryOtherLoanPopShow: true });
         }
     }

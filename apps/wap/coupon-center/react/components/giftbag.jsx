@@ -16,18 +16,6 @@ class GiftBag extends React.Component {
     }
 
     componentDidMount() {
-        //获取当前时间
-        $FW.Ajax({
-            url: API_PATH + '/activity/v1/timestamp.json',
-            type: 'get',
-            data: {},
-            dataType: 'json',
-            fail: () => true,
-            complete: data => {
-                // console.log(data);
-                // console.log(data.data.timestamp)
-            }
-        });
         this.props.request();
     }
 
@@ -46,7 +34,6 @@ class GiftBag extends React.Component {
                 this.setState({ pop_show: true, pop_info: data.data })
                 console.log(this.state.pop_info)
                 // console.log(this.state.pop_show,this.state.pop_info)
-
             }
         });
 

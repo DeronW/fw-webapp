@@ -4,7 +4,6 @@ class List extends React.Component {
         this.timer;
         this.state = {
             buyingList: this.props.list,
-            current_time: ""
         }
         this.timestampHandler = this.timestampHandler.bind(this)
         // this.countDown = this.countDown.bind(this)
@@ -14,18 +13,6 @@ class List extends React.Component {
     }
 
     componentDidMount() {
-        $FW.Ajax({
-            url: API_PATH + '/activity/v1/timestamp.json',
-            type: 'get',
-            data: {},
-            dataType: 'json',
-            fail: () => true,
-            complete: data => {
-                // console.log(data);
-                // console.log(data.data.timestamp)
-                this.setState({ currentTime: data.data.timestamp })
-            }
-        })
     }
 
     componentWillReceiveProps(nextProps) {
