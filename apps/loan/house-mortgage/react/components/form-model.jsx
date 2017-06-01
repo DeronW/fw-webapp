@@ -120,6 +120,9 @@ class FormModel {
     }
 
     set_form_data = data => {
-        for (let i in data) this.set_field(i, data[i])
+        for (let i in data) {
+            if (!data[i]) return
+            this.set_field(i, data[i]);
+        }
     }
 }
