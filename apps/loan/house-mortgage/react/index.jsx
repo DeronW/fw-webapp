@@ -1,7 +1,7 @@
 function SuccessMask() {
     return (
         <div className="success-mask">
-            { SOURCE_TYPE !== 4 &&
+            { ( SOURCE_TYPE !== 4 || !$FW.Browser.inApp() ) &&
                 <div className="close-icon" onClick={() => {gotoHandler('/static/loan/home/index.html')}}></div>
             }
             <div className="success-container">
