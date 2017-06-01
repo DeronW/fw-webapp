@@ -16,10 +16,10 @@ try {
 } catch (e) {
 }
 
-const CONSTANTS = Object.assign({}, require('./gulpfile.settings.default.js'), settings);
+const CONSTANTS = Object.assign({}, require('./gulpfiles/settings.default.js'), settings);
 
 // gulpfile 本地扩展配置
-require('./gulpfile.wap.js')(gulp, gt, CONSTANTS);
-require('./gulpfile.mall.js')(gulp, gt, CONSTANTS);
-require('./gulpfile.loan.js')(gulp, gt, CONSTANTS);
-require('./gulpfile.loan-manager.js')(gulp, gt, CONSTANTS);
+require('./gulpfiles/wap.js')(gulp, gt, CONSTANTS);
+require('./gulpfiles/mall.js')(gulp, gt, CONSTANTS);
+require('./gulpfiles/loan.js')(gulp, gt, CONSTANTS);
+require('./gulpfiles/loan-manager.js')(gulp, gt, CONSTANTS);
