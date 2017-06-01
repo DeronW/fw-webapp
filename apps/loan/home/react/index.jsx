@@ -126,7 +126,7 @@ function gotoHandler(link, toNative, need_login) {
 }
 
 function getCookie() {
-    let c = document.cookie;
+    let c = document.cookie, r = {};
     if (c === '') return {}
     c.split('; ').forEach(function(kv) {
         let t = kv.split('=');
