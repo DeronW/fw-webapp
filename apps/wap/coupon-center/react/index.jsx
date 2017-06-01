@@ -19,9 +19,9 @@ class CouponCenter extends React.Component {
             },
             success: data => {
                 console.log(data);
-                let packageList = data.data.packageList;
-                let couponAvailableList = data.data.couponAvailableList;
-                let couponEndList = data.data.couponEndList;
+                let packageList = data.packageList;
+                let couponAvailableList = data.couponAvailableList;
+                let couponEndList = data.couponEndList;
                 this.setState({
                     giftList: packageList,
                     limitList: couponAvailableList,
