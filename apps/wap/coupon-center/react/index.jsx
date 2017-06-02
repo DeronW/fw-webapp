@@ -30,7 +30,8 @@ class CouponCenter extends React.Component {
                 if (packageList.length == 0 && couponAvailableList.length == 0 && couponEndList.length == 0) {
                     this.setState({ isShowEmpty: true })
                 }
-            }
+            },
+            fail:()=> true
         });
     }
     render() {
