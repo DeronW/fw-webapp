@@ -35,10 +35,7 @@
         ).then(
             function(data){
                 setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
-            }
-        ).then(
-            function(){
-                wx.ready(function () {
+                return wx.ready(function () {
                     setShareFriend()
                     setShareFriendQuan()
                 })
