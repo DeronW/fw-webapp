@@ -1,7 +1,7 @@
 function SuccessMask() {
     return (
         <div className="success-mask">
-            { ( SOURCE_TYPE !== 4 || !$FW.Browser.inApp() ) &&
+            { ( SOURCE_TYPE !== 4 && !$FW.Browser.inApp() ) &&
                 <div className="close-icon" onClick={() => {gotoHandler('/static/loan/home/index.html')}}></div>
             }
             <div className="success-container">
@@ -21,7 +21,7 @@ class MainPanel extends React.Component {
         window._form_model = this.model // 4 debug
         this.state = {
             hasRealName: true,
-            form_data: { province: '北京省' },
+            form_data: { province: '北京市' },
             field_key: '',
             submitted: false
         };
