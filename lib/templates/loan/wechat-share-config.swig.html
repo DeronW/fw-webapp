@@ -29,13 +29,11 @@
             }
         ).then(
             function(data){
-                alert('start config')
                 setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
             }
         ).then(
             function(){
                 wx.ready(function () {
-                    alert('set share text:' + templateTitle)
                     setShareFriend()
                     setShareFriendQuan()
                 })
