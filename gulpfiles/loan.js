@@ -146,7 +146,8 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         ],
         include_javascripts: [
             'use-strict.js',
-            `${PROJ}/fw-cryption.js`,
+            `${PROJ}/fw-plugin-cryption.js`,
+            `${PROJ}/fw-plugin-cookie.js`,
             `${PROJ}/fw-ajax-error-handler.js`,
             `${PROJ}/fw-common.js`,
             `${PROJ}/fw-plugin-store.js`,
