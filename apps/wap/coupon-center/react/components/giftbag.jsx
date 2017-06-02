@@ -35,8 +35,6 @@ class GiftBag extends React.Component {
                 console.log(this.state.pop_info)
             },
         });
-
-
     }
 
     close_pop() {
@@ -49,7 +47,7 @@ class GiftBag extends React.Component {
         return (timeTrans.toLocaleString('chinese', {hour12: false}).toString().substr(-8, 8));
     }
 
-    countDown(time, number) {
+    countDown(time, number,item) {
         let created = time;
         let mma = created / 1000;
         let ma = Math.floor(mma / 60 % 60);
@@ -66,6 +64,7 @@ class GiftBag extends React.Component {
                 ma--;
                 if (ma == -1) {
                     clearInterval(this.limit_time);
+                    item.receiveStatus ="02";
                     this.props.request();//重新请求数据
                 }
                 if (ma < 10) {
@@ -187,7 +186,7 @@ class GiftBag extends React.Component {
             let gift_name;
             if (item.backCashCount == "0") {
                 if (item.couponDetailList) {
-                    gift_name = "+" + item.couponDetailList[0]
+                    gift_name = "+" + item.backRateTotal
                 }
             } else {
                 gift_name = "￥" + item.backCashTotal
@@ -242,7 +241,7 @@ class GiftBag extends React.Component {
                         </div>
                         <div className="gift_right_starttime"
                              id={index + "gift_time"}>
-                            {this.countDown(item.intervalMilli, index)}
+                            {()=>{this.countDown(item.intervalMilli, index,item)}}
                         </div>
                         <div className="get_state_gray">
                             领取
