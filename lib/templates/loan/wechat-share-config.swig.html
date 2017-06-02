@@ -25,20 +25,12 @@
                 templateContent = data.shareTemplate.templateContent;
                 templateTitle = data.shareTemplate.templateTitle;
                 templateUrl = data.shareTemplate.templateUrl + '&jumpType=' + jumpType;
-
                 return $FW.Post( API_PATH + '/cashloan/outside/weixinAccountController.do?wxConfig',{ url: location.href })
-                    .then(
-                        function(data){
-                            setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
-                            alert(data.appId)
-                        }
-                    )
             }
         ).then(
-            wx.ready(function () {
-                setShareFriend()
-                setShareFriendQuan()
-            })
+            function(data){
+                setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
+            }
         );
 
         function setWxConfig(appid, timestamp, noncestr, signature) {
@@ -54,13 +46,12 @@
                     'onMenuShareAppMessage'
                 ]
             });
-            alert(appid)
         }
 
-//        wx.ready(function () {
-//            setShareFriend()
-//            setShareFriendQuan()
-//        })
+        wx.ready(function () {
+            setShareFriend()
+            setShareFriendQuan()
+        })
 
         function setShareFriend() {
             wx.onMenuShareAppMessage({
