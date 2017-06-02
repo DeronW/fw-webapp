@@ -36,6 +36,13 @@
             function(data){
                 setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
             }
+        ).then(
+            function(){
+                wx.ready(function () {
+                    setShareFriend()
+                    setShareFriendQuan()
+                })
+            }
         );
 
         function setWxConfig(appid, timestamp, noncestr, signature) {
@@ -53,10 +60,10 @@
             });
         }
 
-        wx.ready(function () {
-            setShareFriend()
-            setShareFriendQuan()
-        })
+//        wx.ready(function () {
+//            setShareFriend()
+//            setShareFriendQuan()
+//        })
 
         function setShareFriend() {
             wx.onMenuShareAppMessage({
