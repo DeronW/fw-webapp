@@ -223,16 +223,6 @@ const GameGuess = React.createClass({
     }
 });
 $FW.DOMReady(function () {
-    // var title='和豆哥猜拳'
-    // NativeBridge.setTitle(title);
-    // if ($FW.Utils.shouldShowHeader()) {
-    //     ReactDOM.render(<Header title={title} back_handler={backward}/>, HEADER_NODE);
-    // }
-    //
-    // $FW.Ajax({
-    //     url: API_PATH + 'mall/api/magic/v1/user.json', //用户信息
-    //     success: (data) => {
-
     let data = {
         "isLogin": true,
         "sex": "1",
