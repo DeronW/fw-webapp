@@ -29,7 +29,16 @@
             }
         ).then(
             function(data){
+                alert('start config')
                 setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
+            }
+        ).then(
+            function(){
+                wx.ready(function () {
+                    alert('set share text')
+                    setShareFriend()
+                    setShareFriendQuan()
+                })
             }
         );
 
@@ -47,11 +56,6 @@
                 ]
             });
         }
-
-        wx.ready(function () {
-            setShareFriend()
-            setShareFriendQuan()
-        })
 
         function setShareFriend() {
             wx.onMenuShareAppMessage({
