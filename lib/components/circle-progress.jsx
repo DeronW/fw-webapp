@@ -13,8 +13,8 @@
 
 class SVGCircleProgress extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props)
         this.STEP_PERCENT = 1.2;
         let minLineWeightWidth = 100 * this.props.weight / (Math.PI * 2 * (this.props.radius - this.props.weight / 2));
         this.MAX_UNFINISHED_PERCENT = 99.9 - minLineWeightWidth;

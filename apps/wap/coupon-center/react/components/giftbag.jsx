@@ -5,7 +5,8 @@ class GiftBag extends React.Component {
         this.state = {
             gift_list: this.props.list,
             pop_show: false,
-            pop_info: null,
+            pop_info: [],
+            gift_name: "",
         }
         this.desHandler = this.desHandler.bind(this)
         this.getHandler = this.getHandler.bind(this)
@@ -19,40 +20,37 @@ class GiftBag extends React.Component {
         this.props.request();
     }
 
-    desHandler(code) {
-        console.log(code);
+    desHandler(item) {
+        console.log(item.code);
+        console.log(item.name);
         $FW.Ajax({
-            url: API_PATH + '/api/couponCenter/v2/grabCoupon.json',
-            type: 'post',
+            url: API_PATH + '/mpwap/api/v2/getCouponInfo.shtml',
+            method: 'post',
             data: {
-                code: code
+                code: item.code
             },
-            dataType: 'json',
-            fail: () => true,
-            complete: data => {
-                // console.log(data);
-                this.setState({ pop_show: true, pop_info: data.data })
+            success: data => {
+                console.log(data.giftBagDetail)
+                this.setState({pop_show: true, pop_info: data.giftBagDetail, gift_name: item.name})
                 console.log(this.state.pop_info)
-                // console.log(this.state.pop_show,this.state.pop_info)
-            }
+            },
         });
 
 
     }
 
     close_pop() {
-        this.setState({ pop_show: false })
+        this.setState({pop_show: false})
     }
 
     timestampHandler(timestamp) {
         var timeTrans = new Date(parseInt(timestamp) * 1000);
         // console.log(timeTrans.toLocaleString('chinese',{hour12:false}).toString().substr(-8,8))
-        return (timeTrans.toLocaleString('chinese', { hour12: false }).toString().substr(-8, 8));
+        return (timeTrans.toLocaleString('chinese', {hour12: false}).toString().substr(-8, 8));
     }
 
     countDown(time, number) {
         let created = time;
-        // console.log(created + "11111111111111")
         let mma = created / 1000;
         let ma = Math.floor(mma / 60 % 60);
         let sa = (mma % 60).toFixed(0);
@@ -79,11 +77,24 @@ class GiftBag extends React.Component {
 
     getHandler(item) {
         item.isGet = "1";
+        $FW.Ajax({
+            url: API_PATH + '/mpwap/api/v2/grabCoupon.shtml',
+            method: 'post',
+            data: {
+                code: item.code,
+                couponType: item.type
+            },
+            success: data => {
+                $FW.Component.Alert("领取成功")
+            },
+        });
         this.props.request() //用户点击后重新请求，改变数据
     }
+
     jump() {
         location.href = "/static/wap/faq/index.html"//跳转到投资的列表页
     }
+
     drawCircleGift(id, progress) {
         console.log(11111111111111)
         let canvas = document.getElementById(id),
@@ -168,23 +179,40 @@ class GiftBag extends React.Component {
         }, 10);
 
     }
+
     render() {
-        let { pop_show, gift_list, pop_info } = this.state;
+        let {pop_show, gift_list, pop_info, gift_name} = this.state;
         let pop_show_dis = pop_show ? "block" : "none";
         let gift_left_section = (item) => {
-            return <div className="gift_item_left" onClick={() => this.desHandler(item.code)}>
+            let gift_name;
+            if (item.backCashCount == "0") {
+                if (item.couponDetailList) {
+                    gift_name = "+" + item.couponDetailList[0]
+                }
+            } else {
+                gift_name = "￥" + item.backCashTotal
+            }
+            let detail_func = (item, index) => {
+                return <span key={index}>
+                    {item}
+                </span>
+            }
+            return <div className="gift_item_left" onClick={() => this.desHandler(item)}>
                 <div className="gift_one_title">
                     <div className="gift_amount">
-                        <span className="amount_rmb">￥</span>{item.amount}
+                        {gift_name}
                     </div>
                     <div className="gift_type">
-                        {item.sourceTitle}
+                        {item.name}
                     </div>
                 </div>
                 <div className="gift_one_des">
-                    <div className="cash_line">返现券:共￥{item.backCashTotal}({item.backCashCount})张</div>
-                    <div className="rate_line">返息券:{}{}</div>
-                    <div className="bean_line">工<span className="space"></span>豆:共￥{item.beanTotal}</div>
+                    {item.backCashCount == "0" ? null :
+                        <div className="cash_line">返现券:共￥{item.backCashTotal}({item.backCashCount})张</div>}
+                    {item.couponDetailList.length == 0 ? null :
+                        <div className="rate_line">返息券:{item.couponDetailList.map(detail_func)}</div>}
+                    {item.beanTotal == "0" ? null :
+                        <div className="bean_line">工<span className="space"></span>豆:共￥{item.beanTotal}</div>}
                 </div>
             </div>
         }
@@ -213,7 +241,7 @@ class GiftBag extends React.Component {
                             倒计时
                         </div>
                         <div className="gift_right_starttime"
-                            id={index + "gift_time"}>
+                             id={index + "gift_time"}>
                             {this.countDown(item.intervalMilli, index)}
                         </div>
                         <div className="get_state_gray">
@@ -224,32 +252,29 @@ class GiftBag extends React.Component {
             } else if (item.receiveStatus == "02") {
                 gift_item_right_content = <div key={index}>
                     {gift_left_section(item)}
-                    <div className="gift_item_right" onClick={() => { item.isGet == "0" ? this.getHandler(item) : this.jump() }}>
-                        <canvas id={index + "canvas_gift"} width="120" height="120"></canvas>
-                        {console.log(document.getElementById(index + 'canvas_gift'))}
-                        {React.isValidElement(document.getElementById(index + 'canvas_gift') ? this.drawCircleGift((index + "canvas_gift"), parseInt(item.restPercent)) : null)}
+                    <div className="gift_item_right" onClick={() => {
+                        item.isGet == "0" ? this.getHandler(item) : this.jump()
+                    }}>
+                        <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}/>
                         {item.isGet == "0" ? <a className="content_state_red">领取</a> :
                             <a className="content_state_red">去投资</a>
                         }
-                        {/*<div className="gift_right_title">*/}
-                        {/*剩余*/}
-                        {/*</div>*/}
-                        {/*<div className="gift_right_starttime">*/}
-                        {/*{item.restPercent}*/}
-                        {/*</div>*/}
-                        {/*<div className="get_state_red">*/}
-                        {/*领取*/}
-                        {/*</div>*/}
+                        <div className="gift_right_title">
+                            剩余
+                        </div>
+                        <div className="gift_right_starttime">
+                            {item.restPercent}
+                        </div>
                     </div>
                 </div>
-            } else if (item.receiveStatus == "03") {
+            } else if (item.receiveStatus == "03" || item.receiveStatus == "04") {
                 gift_item_right_content = <div>
                     {gift_left_section(item)}
                     <div className="gift_item_right">
-                        <img src="images/icon-get.png" />
-                        <div className="get_state_red">
-                            领取
-                        </div>
+                        <img src="images/icon-get.png"/>
+                        {item.isGet == "1" ? <a className="get_state_red">去投资</a> :
+                            null
+                        }
                     </div>
                 </div>
             }
@@ -257,61 +282,45 @@ class GiftBag extends React.Component {
                 {gift_item_right_content}
             </div>
         }
-        let pop_content_title_func = () => {
-            let pop_content_title;
-            if (pop_info && pop_info.type == "1") {
-                pop_content_title = "返现券"
-                return pop_content_title;
-            } else if (pop_info && pop_info.type == "2") {
-                pop_content_title = "返息券"
-                return pop_content_title;
-            } else if (pop_info && pop_info.type == "3") {
-                pop_content_title = "大礼包"
-                return pop_content_title;
-            } else if (pop_info && pop_info.type == "4") {
-                pop_content_title = "工豆"
-                return pop_content_title;
+        let pop_content_title_func = (item, index) => {
+            let typejump = (type) => {
+                if (type == "1") {
+                    return "返现券"
+                } else if (type == "2") {
+                    return "返息券"
+                } else if (type == "3") {
+                    return "礼包"
+                } else if (type == "4") {
+                    return "工豆"
+                }
             }
+            return <div key={index}>
+                <div className="detail_title">{index + 1}、{typejump(item.type)}<span
+                    className="amount_red">￥{item.amount}</span></div>
+                <div className="detail_content">
+                    <div>消费金额满￥{item.limitAmount}可用</div>
+                    <div>投资期限{item.limitTerm}</div>
+                    <div>有效期{item.validPeriod}</div>
+                </div>
+
+            </div>
         }
         return <div className="giftbag_box">
             <div className="gift_box_title">
-                <img src="images/icon-gift.png" className="icon_gift" />
+                <img src="images/icon-gift.png" className="icon_gift"/>
                 <span className="gift_title">优惠券礼包</span>
             </div>
             {gift_list.length > 0 && gift_list.map(gift_func)}
-            <div id="pop" style={{ display: pop_show_dis }}>
+            <div id="pop" style={{display: pop_show_dis}}>
                 <div className="pop_content">
-                    <div className="pop_title">{pop_info && pop_info.sourceTitle}</div>
-                    <div className="pop_content_title">1、{pop_content_title_func()}</div>
+                    <div className="pop_title">{gift_name}</div>
+                    <div className="pop_content_title">
+                        {pop_info.map(pop_content_title_func)}
+                    </div>
                     <div className="close-btn" onClick={this.close_pop}>确定</div>
                 </div>
             </div>
         </div>
     }
 }
-//
-// class PopGiftDes extends React.Component {
-//     constructor(props){
-//         super(props)
-//     }
-//     componentDidMount(){
-//
-//     }
-//     render(){
-//
-//     }
-//     // render(){
-//     //     let {isshow,control} = this.props;
-//     //     let closestyle = isshow ? "block" : "none"
-//     //     return <div className="pop_gift_des" style={{display: closestyle}}>
-//     //         这是礼包优惠券的信息展示盒子
-//     //         <div>
-//     //         </div>
-//     //         <div className="des_close" onClick={() => {
-//     //             control()
-//     //         }}>+
-//     //         </div>
-//     //     </div>
-//     // }
-//
-// }
+

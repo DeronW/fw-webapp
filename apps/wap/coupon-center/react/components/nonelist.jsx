@@ -24,14 +24,13 @@ class NoneList extends React.Component {
             return <div className={item.isGet == "0" ? "none_item_box none_noget" : "none_item_box none_get"} key={index}>
                 <div className="none_item_left">
                     <div className="detail_left">
-                        <div className="list_amount"><span className="list_rmb">￥</span>{item.limitAmount}</div>
+                        <div className="list_amount"><span className="list_rmb">￥</span>{item.amount}</div>
                         <div className="list_name">{item.sourceTitle}</div>
                     </div>
                     <div className="detail_right">
-                        <div>满￥{}可用</div>
+                        <div>满￥{item.limitAmount}可用</div>
                         <div>任意期限可用</div>
-                        <div>有效期至</div>
-                        <div>适用：</div>
+                        <div>有效期至{item.validPeriod}</div>
                     </div>
                 </div>
                 {none_get}
