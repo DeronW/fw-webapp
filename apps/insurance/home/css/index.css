@@ -1,0 +1,824 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    background: #ebebee;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+dl,
+dt,
+dd {
+    padding: 0;
+    margin: 0;
+}
+
+
+/*所有一屏页面公用cover*/
+
+.insurance-wrapper,
+{
+    width: 100%;
+    height: auto;
+}
+
+
+/*头部*/
+
+.head {
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    position: fixed;
+    background: #fff;
+    z-index: 100;
+    top: 0;
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.return-btn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 80px;
+    height: 100px;
+}
+
+.back-icon {
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.close {
+    position: absolute;
+    left: 100px;
+    top: 20px;
+}
+
+.title {
+    position: absolute;
+    left: 44%;
+    font-size: 40px;
+    color: #333;
+}
+
+.to-order-list {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #999;
+    font-size: 28px;
+    text-align: center;
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    border: 1px solid #999;
+    border-radius: 20px;
+}
+
+
+/*内容*/
+
+.content {
+    padding-top: 100px;
+}
+
+
+/********************************************************home页*********************************************************/
+
+
+/*banner图片*/
+
+.banner {
+    width: 100%;
+    height: auto;
+}
+
+.banner-picture {
+    width: 100%;
+}
+
+
+/*投保地区*/
+
+.insurance-region {
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    margin: 20px 0 30px 0;
+    position: relative;
+    background: #fff;
+}
+
+.first-left-text,
+.left-text {
+    color: #000;
+    font-size: 36px;
+}
+
+.first-left-text {
+    margin-left: 20px;
+}
+
+.choose-insurance-region,
+.car-info-select,
+.choose-company,
+.choose-car-num {
+    position: absolute;
+    color: #333;
+    font-size: 36px;
+    /*height: 60px;*/
+    height: auto;
+    width: 160px;
+    border-radius: 10px;
+    /*TODO 下面top值待优化*/
+    top: 30px;
+}
+
+.choose-insurance-region,
+.car-info-select,
+.choose-company {
+    right: 20px;
+}
+
+.choose-car-num {
+    left: 170px;
+}
+
+
+/*基本信息*/
+
+.info,
+.car-necessary-info,
+.basic-insurance {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    background: #fff;
+}
+
+.car-num,
+.name,
+.id-num,
+.company,
+.brand,
+.engine-num,
+.chassis-num,
+.register-date,
+.insurance-item,
+.applicant-info-item {
+    width: 100%;
+    height: 100px;
+}
+
+.sub-car-num,
+.sub-name,
+.sub-id-num,
+.sub-company,
+.sub-brand,
+.sub-engine-num,
+.sub-chassis-num,
+.sub-register-date,
+.sub-insurance-item,
+.sub-applicant-info-item {
+    height: 100px;
+    line-height: 100px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.company,
+.car-num {
+    position: relative;
+}
+
+
+/*下一步按钮*/
+
+.next {
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    color: #fff;
+    background: #f00;
+    font-size: 28px;
+    position: fixed;
+    bottom: 0;
+}
+
+
+/***************************************************订单列表页**********************************************************/
+
+
+/*全部订单 已支付 未支付 已完成切换头部*/
+
+.tabs {
+    width: 100%;
+    height: 100px;
+}
+
+.tabs li {
+    float: left;
+    width: 180px;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+    font-size: 28px;
+}
+
+.tabs li .tab-text.active {
+    border-bottom: 1px solid #f00;
+    color: #f00;
+}
+
+
+/*订单列表具体块儿*/
+
+.order-list-block {
+    width: 100%;
+    height: auto;
+}
+
+.order-list-block li {
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 20px;
+    color: #000;
+}
+
+.order-list-item {
+    height: 160px;
+}
+
+.order-list-item-unpay {
+    height: 200px;
+}
+
+.order-number-line {
+    font-size: 30px;
+}
+
+.money-line {
+    font-size: 32px;
+}
+
+.isPay,
+.money {
+    float: right;
+}
+
+.money {
+    color: #f00;
+}
+
+.line {
+    border: 1px solid rgb(216, 216, 216);
+}
+
+.pay {
+    float: right;
+    width: 180px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 20px;
+    font-size: 30px;
+    color: #fff;
+    background: #f00;
+}
+
+
+/***************************************************完善车辆信息页***********************************************************/
+
+
+/*head中有些title右边没有内容，要偏左一点儿*/
+
+.expand-title {
+    /*TODO 距离值不标准，待优化*/
+    left: 38%;
+    position: absolute;
+    font-size: 40px;
+    color: #333;
+}
+
+
+/*完善车辆信息内容部分*/
+
+.car-necessary-info {
+    margin-top: 10px;
+}
+
+
+/*文本输入框样式*/
+
+.fill-car-info,
+.fill-home-info {
+    float: right;
+    width: 360px;
+    height: 60px;
+    margin-top: 20px;
+    border: 1px solid #aaa;
+    border-radius: 20px;
+    font-size: 36px;
+}
+
+.fill-car-info:focus,
+.fill-home-info:focus {
+    outline: none;
+}
+
+
+/*温馨小提示样式*/
+
+.car-info-fill-notice {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.register-date {
+    position: relative;
+}
+
+
+/*************************************************************险种明细页**********************************************************/
+
+
+/*投保方案，交强险、车船险*/
+
+.insurance-types {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    background: #fff;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.insurance-plan,
+.types {
+    line-height: 80px;
+    padding: 20px;
+    font-size: 36px;
+}
+
+.plan img {
+    width: 36px;
+    height: 36px;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+.right-text {
+    float: right;
+}
+
+.gap-line {
+    margin: 0 10px;
+    border: 1px solid rgb(216, 216, 216);
+}
+
+
+/*基本险*/
+
+.basic-insurance,
+.additional-insurance {
+    font-size: 32px;
+    color: #000;
+    margin-bottom: 10px;
+    background: #fff;
+}
+
+.type-title {
+    padding: 20px;
+    font-weight: bold;
+    font-size: 36px;
+    color: #000;
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.label .checkbox {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.label {
+    float: right;
+    margin-right: 240px;
+}
+
+.insurance-item {
+    position: relative;
+}
+
+
+/*因为险种明细页太长，为了显示全部内容，得给外层cover设置min-height，所以独立出来*/
+
+.insurance-types-wrapper {
+    width: 100%;
+    /*TODO 最小高度不标准，待优化*/
+    min-height: 2040px;
+}
+
+
+/***************************************************************保费报价页*******************************************************/
+
+.insurance-quote-list {
+    margin-top: 30px;
+}
+
+
+/*平安车险，太平洋车险，人保车险除了背景颜色不同，其余样式一样 ->统一定义*/
+
+.insurance-quote {
+    width: 100%;
+    height: 200px;
+    background: #fff;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+/*左边单选按钮部分*/
+
+.radio-block {
+    float: left;
+}
+
+.radio {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 80px;
+    left: 30px;
+}
+
+
+/*中间主要内容部分*/
+
+.quote-center {
+    position: absolute;
+    /*TODO 宽度不准确 待优化*/
+    width: 500px;
+    left: 90px;
+    height: 200px;
+    font-size: 32px;
+}
+
+.quote,
+.fund-line {
+    height: 100px;
+    line-height: 100px;
+}
+
+.middle-line {
+    width: 100%;
+    border: 1px solid #aaa;
+}
+
+.official-quote,
+.fund {
+    float: right;
+}
+
+.quote-to,
+.fund {
+    font-size: 36px;
+}
+
+.quote-num {
+    margin-left: 5px;
+}
+
+.fund {
+    color: #f00;
+}
+
+
+/*右边向右按钮*/
+
+.forwards {
+    position: absolute;
+    float: right;
+    top: 80px;
+    right: 40px;
+}
+
+
+/**********************************************保费明细页********************************************************/
+
+
+/*标题*/
+
+.quote-detail-title {
+    margin-top: 30px;
+    font-size: 36px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.quote-detail-brand {
+    color: #f00;
+    margin-right: 20px;
+}
+
+
+/*交强险 车船税*/
+
+.insurance-duty {
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    background: #fff;
+    color: #000;
+    padding: 20px;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.top-line {
+    height: 100px;
+    line-height: 100px;
+}
+
+.top-item-money {
+    float: right;
+}
+
+.line-item {
+    height: 80px;
+    line-height: 80px;
+}
+
+.total-sum {
+    color: #f00;
+}
+
+
+/********************************************投保人信息页****************************************************/
+
+
+/*投保人基本信息*/
+
+.applicant-info {
+    margin-top: 10px;
+}
+
+.applicant-basic-info {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    background: #fff;
+    color: #000;
+}
+
+
+/*投保人上传身份证和行驶证照片*/
+
+.applicant-photo-upload {
+    width: 100%;
+    font-size: 32px;
+}
+
+.upload-ID-photo {
+    padding: 20px;
+}
+
+.photo-title,
+.check-notify {
+    font-size: 40px;
+}
+
+
+/*user-info页里面照片匹配结果提示样式*/
+
+.check-notify {
+    margin-top: 0;
+}
+
+
+/*dl*/
+
+.photo-item-front {
+    float: left;
+    text-align: center;
+    /*TODO margin值不准确，待优化*/
+    margin-right: 20px;
+}
+
+.photo-item-end {
+    float: right;
+    text-align: center;
+}
+
+
+/*dt*/
+
+.photo-self {
+    margin-bottom: 5px;
+}
+
+.photo-self img {
+    width: 300px;
+    height: 200px;
+}
+
+.photos {
+    width: 100%;
+    /*TODO 高度值不准确，待优化*/
+    height: 260px;
+}
+
+
+/*分割线*/
+
+.between-line {
+    clear: both;
+    margin: 10px 10px 15px;
+    border: 1px solid rgb(216, 216, 216);
+}
+
+
+/*投保人信息与被保险人信息是否一致*/
+
+.check {
+    font-size: 36px;
+    padding: 20px;
+}
+
+.check-checkbox {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    margin-left: 30px;
+}
+
+
+/*因为投保人信息页太长，为了显示全部内容，得给外层cover设置min-height，所以独立出来*/
+
+.insurance-applicant-wrapper {
+    width: 100%;
+    /*TODO 最小高度不标准，待优化*/
+    min-height: 1720px;
+}
+
+
+/************************************************确认订单页************************************************************/
+
+
+/*车辆信息 报价信息 客户信息*/
+
+.final-info,
+.PICC {
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    background: #fff;
+    color: #000;
+    font-size: 36px;
+    padding: 10px 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.final-info-item,
+.PICC-sum {
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+}
+
+.info-side img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.view-details {
+    float: right;
+}
+
+.view-detail-text {
+    color: #000;
+}
+
+.view-detail-text:focus {
+    outline: none;
+}
+
+.view-detail-text.active {
+    color: #000;
+}
+
+.view-details img {
+    vertical-align: middle;
+    margin-left: 20px;
+}
+
+
+/*PICC人保车险*/
+
+.PICC-self {
+    color: #f00;
+    margin-right: 10px;
+}
+
+.item-money {
+    float: right;
+}
+
+
+/*******************************************************结算页****************************************************************/
+
+.payment-sum,
+.payment-method,
+.result-status {
+    border-bottom: 1px solid rgb(216, 216, 216);
+    border-top: 1px solid rgb(216, 216, 216);
+    background: #fff;
+    color: #000;
+    font-size: 36px;
+    padding: 30px 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.payment-logo {
+    float: left;
+    position: absolute;
+    top: 38px;
+}
+
+.payment-logo img {
+    width: 80px;
+    height: 80px;
+}
+
+.payment-method-title,
+.sub-payment-method-title {
+    margin: 0;
+    padding: 0;
+}
+
+.sub-payment-method-title {
+    font-size: 28px;
+}
+
+.payment-des label {
+    float: left;
+    position: absolute;
+    top: 36px;
+    left: 114px;
+}
+
+.payment-method {
+    height: 100px;
+    position: relative;
+}
+
+.payment-radio {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 60px;
+    right: 20px;
+}
+
+
+/*******************************************************交易结果页************************************************************/
+
+.result-status {
+    height: 200px;
+    line-height: 200px;
+    padding: 0;
+    text-align: center;
+}
+
+.result-logo {
+    float: right;
+}
+
+.result-logo img {
+    width: 300px;
+    height: 200px;
+}

@@ -1,6 +1,17 @@
 const eslint = require('gulp-eslint');
 
-const PROJ = 'loan-manager'
+const PROJ = 'withdraw';
+
+// const APP_NAMES = [{
+//     name: 'home',
+//     compiler: 'webpack'
+// }, {
+//     name: 'router-auth',
+//     compiler: 'webpack'
+// },{
+//     name: 'router-prototype',
+//     compiler: 'webpack'
+// }]
 
 const APP_NAMES = [{
     name: 'home',
