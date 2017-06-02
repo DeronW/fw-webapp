@@ -139,7 +139,7 @@ const Mall = React.createClass({
 
                         <a href="/static/mall/order-list/index.html">
                         <img src="images/query_order.png" /><span>订单查询</span></a>
-                        <a href="/static/mall/game-zhuanpan20161230/index.html">
+                        <a href="/static/mall/game-zhuanpan20161230/index.html">v
                         <img src="images/span.png" /><span>大转盘</span></a>
                     <a href="/static/mall/game/index.html?mallHead=true">{/*static/mall/waiting/index.html*/}
                         <img src="images/game_center.png" /><span>游戏中心</span></a>

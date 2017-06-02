@@ -13,7 +13,7 @@ class CouponCenter extends React.Component {
     }
     requestGiftList = () => {
         $FW.Ajax({
-            url: 'https://m.9888.cn/mpwap/api/v2/getCouponList.shtml ',
+            url: API_PATH + '/mpwap/api/v2/getCouponList.shtml',
             method: 'post',
             data: {
             },
@@ -31,7 +31,7 @@ class CouponCenter extends React.Component {
                     this.setState({ isShowEmpty: true })
                 }
             },
-            fail:()=> true
+            // fail:()=> true
         });
     }
     render() {
