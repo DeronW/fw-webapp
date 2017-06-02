@@ -126,7 +126,7 @@ APP_NAMES.push(
     ...MARKET,
     ...CREDIT_CARD,
     ...MORTGAGE,
-    ...EXPERIMENTAL_HOME,
+    // ...EXPERIMENTAL_HOME,
     ...APPLY_TEN_MILLION_LOAN
 );
 
