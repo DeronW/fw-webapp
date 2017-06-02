@@ -75,13 +75,14 @@ class Home extends React.Component {
         $FXH.Post(`${API_PATH}/api/product/v1/noticeList.json`)
             .then(data => {
                 let newBulletinCnt = data.noticeContent;
-                let uid = $FW.Browser.inApp() ? getCookie().uid : $FW.Store.getUserDict().uid;
+                let token = $FW.Store.getUserDict().token;
 
-                // if bulettin is secondary and it's read within the valid uid, we just ignore that bulletin
-                if (data.gradeType == '2' && $FW.Store.isBulletinRead(uid, newBulletinCnt)) return
+                // if bulettin is secondary and it's read within the valid token, we just ignore that bulletin
+                if (data.gradeType == '2' && $FW.Store.isBulletinRead(token, newBulletinCnt)) return
 
                 this.setState({ showBulletin: true, bulletinCnt: newBulletinCnt })
-                $FW.Store.setBulletin(uid, newBulletinCnt);
+                $FW.Store.setBulletin(token, newBulletinCnt);
+
             }, e => { $FW.Component.Toast(e.message) });
     }
 
@@ -127,16 +128,6 @@ function gotoHandler(link, toNative, need_login) {
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
 
     ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
-}
-
-function getCookie() {
-    let c = document.cookie, r = {};
-    if (c === '') return {}
-    c.split('; ').forEach(function(kv) {
-        let t = kv.split('=');
-        r[t[0]] = t[1];
-    });
-    return r;
 }
 
 $FW.DOMReady(() => {
