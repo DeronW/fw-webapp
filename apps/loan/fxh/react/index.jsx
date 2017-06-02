@@ -142,7 +142,7 @@ class ApplyLoan extends React.Component {
 
         let link;
         if (st == 1) link = '/static/loan/user-card-set/index.html';
-        if (st == 2) link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`;
+        if (st == 2) link = `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`;
 
         let loanBtnClick = () => {
             st === 101 ?
@@ -152,14 +152,14 @@ class ApplyLoan extends React.Component {
         let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
         let credit_btn =
-            <a className="loan-btn" href={$FW.Browser.inApp() && st == 3 ? `/static/loan/user-weixin/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
+            <a className="loan-btn" href={$FW.Browser.inApp() && st == 3 ? `/static/loan/user-weixin/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
                 我要提额
             </a>;
 
         let btn_list =
             <div className="credit-btn">
                 <a className="credit-improvement-btn"
-                  href={$FW.Browser.inApp() && st == 5 ? `/static/loan/user-weixin-jrgcapp/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`}>
+                  href={$FW.Browser.inApp() && st == 5 ? `/static/loan/user-weixin-jrgcapp/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
                     我要提额
                 </a>
                 <a className="credit-apply-btn"
