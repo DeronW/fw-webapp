@@ -26,20 +26,18 @@
                 templateTitle = data.shareTemplate.templateTitle;
                 templateUrl = data.shareTemplate.templateUrl + '&jumpType=' + jumpType;
 
-                return $FW.Ajax({
-                    url: API_PATH + '/cashloan/outside/weixinAccountController.do?wxConfig',
-                    data: { url: location.href },
-                    //fail: () => true
-                })
+                return $FW.Post( API_PATH + '/cashloan/outside/weixinAccountController.do?wxConfig',{ url: location.href })
+                    .then(
+                        function(data){
+                            setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
+                        }
+                    )
             }
         ).then(
-            function(data){
-                setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
-                return wx.ready(function () {
-                    setShareFriend()
-                    setShareFriendQuan()
-                })
-            }
+            wx.ready(function () {
+                setShareFriend()
+                setShareFriendQuan()
+            })
         );
 
         function setWxConfig(appid, timestamp, noncestr, signature) {
