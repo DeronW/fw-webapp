@@ -9,7 +9,7 @@ import * as $FW from 'fw-components'
 import { BrowserFactory } from 'fw-javascripts'
 import { NativeBridgeFactory } from 'fw-javascripts'
 
-@inject('bill') @observer @CSSModules(styles)
+@inject('bill') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 export default class Bill extends React.Component {
     render(){
         return (

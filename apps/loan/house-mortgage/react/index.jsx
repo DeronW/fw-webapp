@@ -1,7 +1,7 @@
 function SuccessMask() {
     return (
         <div className="success-mask">
-            { SOURCE_TYPE !== 4 &&
+            { ( SOURCE_TYPE !== 4 || !$FW.Browser.inApp() ) &&
                 <div className="close-icon" onClick={() => {gotoHandler('/static/loan/home/index.html')}}></div>
             }
             <div className="success-container">
@@ -125,9 +125,12 @@ class MainPanel extends React.Component {
             </div>
 
             { field &&
-                <FieldPanel
-                    field_key={this.state.field_key}
-                    field={field} set_form_data={this.setFormData} /> }
+                <div>
+                    <div className="field-mask"></div>
+                    <FieldPanel
+                        field_key={this.state.field_key}
+                        field={field} set_form_data={this.setFormData} />
+                </div> }
         </div>
     }
 }

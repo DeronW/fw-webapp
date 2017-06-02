@@ -13,17 +13,15 @@ class CouponCenter extends React.Component {
     }
     requestGiftList = () => {
         $FW.Ajax({
-            url: API_PATH + '/api/couponCenter/v2/getCouponList.json',
-            type: 'get',
+            url: 'https://m.9888.cn/mpwap/api/v2/getCouponList.shtml ',
+            method: 'post',
             data: {
             },
-            dataType: 'json',
-            fail: () => true,
-            complete: data => {
+            success: data => {
                 console.log(data);
-                let packageList = data.data.packageList;
-                let couponAvailableList = data.data.couponAvailableList;
-                let couponEndList = data.data.couponEndList;
+                let packageList = data.packageList;
+                let couponAvailableList = data.couponAvailableList;
+                let couponEndList = data.couponEndList;
                 this.setState({
                     giftList: packageList,
                     limitList: couponAvailableList,
@@ -32,7 +30,8 @@ class CouponCenter extends React.Component {
                 if (packageList.length == 0 && couponAvailableList.length == 0 && couponEndList.length == 0) {
                     this.setState({ isShowEmpty: true })
                 }
-            }
+            },
+            fail:()=> true
         });
     }
     render() {
