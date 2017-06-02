@@ -68,7 +68,7 @@ class FieldPanel extends React.Component {
             </div>
         }
 
-        return <div className="field-edit-panel">
+        return <div className={`${field.name === '所在区县' ? 'field-edit-panel field-edit-panel-area' : 'field-edit-panel'}`}>
             {field.describe &&
                 <div className="section-title">{field.describe}</div>}
             {field.options ?

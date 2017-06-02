@@ -44,8 +44,9 @@ class MainPanel extends React.Component {
     }
 
     setFieldHandler = (key) => {
-        this.setState({ field_key: key })
-        history.pushState({}, '', `#${key}`)
+        this.setState({ field_key: key });
+        history.pushState({}, '', `#${key}`);
+        window.scroll(0, 0);
     }
 
     setFormData = (dict) => {
