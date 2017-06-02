@@ -30,6 +30,7 @@
                     .then(
                         function(data){
                             setWxConfig(data.appId, data.timestamp, data.nonceStr, data.signature);
+                            alert(data.appId)
                         }
                     )
             }
