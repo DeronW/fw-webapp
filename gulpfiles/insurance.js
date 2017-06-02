@@ -1,24 +1,13 @@
 const eslint = require('gulp-eslint');
 
-const PROJ = 'withdraw';
-
-// const APP_NAMES = [{
-//     name: 'home',
-//     compiler: 'webpack'
-// }, {
-//     name: 'router-auth',
-//     compiler: 'webpack'
-// },{
-//     name: 'router-prototype',
-//     compiler: 'webpack'
-// }]
+const PROJ = 'insurance'
 
 const APP_NAMES = [{
     name: 'home',
     compiler: 'webpack'
 }]
 
-module.exports = function(gulp, generate_task, CONSTANTS) {
+module.exports = function (gulp, generate_task, CONSTANTS) {
 
     APP_NAMES.forEach(i => {
         generate_task(PROJ, i, {
