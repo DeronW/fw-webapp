@@ -1,8 +1,8 @@
-class NoneList extends React.Component {
+class EndList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            none_list: this.props.list,
+            none_list: this.props.endList,
         }
     }
 
@@ -36,12 +36,18 @@ class NoneList extends React.Component {
                 {none_get}
             </div>
         }
-        return <div className="none_box">
-            <div className="none_box_title">
-                <img src="images/icon-end.png" className="icon_end" />
-                <span className="end_title">已结束</span>
+        let end_section = ()=>{
+            return  <div>
+                <div className="none_box_title">
+                    <img src="images/icon-end.png" className="icon_end" />
+                    <span className="end_title">已结束</span>
+                </div>
+                {none_list.map(none_list_func)}
             </div>
-            {none_list.length > 0 && none_list.map(none_list_func)}
+        }
+        return <div className="none_box">
+            {none_list.length > 0 && end_section()}
+
         </div>
     }
 }

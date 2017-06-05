@@ -159,7 +159,7 @@ class GiftBag extends React.Component {
                 </span>
             }
             return <div className="gift_item_left" onClick={() =>
-                this.props.showGiftInfoHandler(item.code, gift_name)}>
+                this.props.showGiftInfoHandler(item.code, item.name)}>
                 <div className="gift_one_title">
                     <div className="gift_amount">
                         {gift_name}
