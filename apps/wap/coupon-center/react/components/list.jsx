@@ -44,7 +44,7 @@ class List extends React.Component {
                 m--;
                 if (m == -1) {
                     clearInterval(this.timer);
-                    this.props.request();
+                    this.props.refreshHandler();
                 }
                 if (m < 10) {
                     m = "0" + m;
