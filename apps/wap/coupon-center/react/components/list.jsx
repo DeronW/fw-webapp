@@ -26,7 +26,8 @@ class List extends React.Component {
     }
 
     countDown(time, index) {
-        clearInterval(this.timer);
+        // clearInterval(this.timer);
+        console.log(time);
         let createdTime = time;
         // console.log(createdTime + "11111111111111")
         let mm = createdTime / 1000;
@@ -171,18 +172,23 @@ class List extends React.Component {
                 content = <div>
                     <div className="content_title">倒计时</div>
                     <div className="content_time"
-                        id={index + "limit_time"}>{this.countDown(item.intervalMilli, index)}</div>
+                        id={index + "limit_time"}>
+                        {/*{this.countDown(item.intervalMilli, index)}*/}
+                        </div>
                     <div className="content_state_gray">领取</div>
                 </div>
             } else if (item.receiveStatus == "02") {
                 content = <div onClick={() => { item.isGet == "0" ? this.getHandler(item) : this.jump() }}>
-                    <canvas id={index + "canvas"} width="120" height="120"></canvas>
-                    {console.log(document.getElementById(index + 'canvas'))}
-                    {React.isValidElement(document.getElementById(index + 'canvas') ? this.drawCircle((index + "canvas"), parseInt(item.restPercent)) : null)}
+                    <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}/>
                     {item.isGet == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>
                     }
-
+                    <div className="list_right_title">
+                        剩余
+                    </div>
+                    <div className="list_right_starttime">
+                        {item.restPercent}
+                    </div>
                 </div>
             }
             return <div className="list_item" key={index}>
