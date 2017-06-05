@@ -19,7 +19,7 @@ const NotSafeGuar = React.createClass({
                             <img src="./images/list12@safe.png"/></div>
                         <div className="safe-text1">
                             <div className="safe-t11">贷中担保机制</div>
-                            <div className="safe-t12">平台引入第三方担保机制，担保每笔投资项目。</div>
+                            <div className="safe-t12">平台引入第三方担保机制，担保每笔出借项目。</div>
                         </div>
                     </li>
                     <li className="clearfix">
