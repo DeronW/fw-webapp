@@ -293,15 +293,16 @@ class GiftBag extends React.Component {
                     return "工豆"
                 }
             }
+            let gift_des=<div className="detail_content">
+                <div>消费金额满￥{item.limitAmount}可用</div>
+                <div>投资期限{item.limitTerm}</div>
+                <div>有效期{item.validPeriod}</div>
+            </div>
             return <div key={index}>
                 <div className="detail_title">{index + 1}、{typejump(item.type)}<span
-                    className="amount_red">￥{item.amount}</span></div>
-                <div className="detail_content">
-                    <div>消费金额满￥{item.limitAmount}可用</div>
-                    <div>投资期限{item.limitTerm}</div>
-                    <div>有效期{item.validPeriod}</div>
+                    className="amount_red">￥{item.amount}</span>
                 </div>
-
+                {item.type=="4"?<div>请以【我的工豆】页面，相应流水为准</div>:gift_des}
             </div>
         }
         return <div className="giftbag_box">
