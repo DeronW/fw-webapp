@@ -1,60 +1,48 @@
 class CouponCenter extends React.Component {
+
     constructor() {
-        super();
+        super()
         this.state = {
-            isShowEmpty: false,
             giftList: [],
             limitList: [],
             endList: []
         }
     }
+
     componentDidMount() {
-        this.requestGiftList();
+        this.requestGiftList()
     }
+
     requestGiftList = () => {
         $FW.Ajax({
-            url: API_PATH + '/mpwap/api/v2/getCouponList.shtml',
+            url: `${API_PATH}/mpwap/api/v2/getCouponList.shtml`,
             method: 'post',
-            data: {
-            },
-            success: data => {
-                console.log(data);
-                let packageList = data.packageList;
-                let couponAvailableList = data.couponAvailableList;
-                let couponEndList = data.couponEndList;
-                this.setState({
-                    giftList: packageList,
-                    limitList: couponAvailableList,
-                    endList: couponEndList
-                })
-                if (packageList.length == 0 && couponAvailableList.length == 0 && couponEndList.length == 0) {
-                    this.setState({ isShowEmpty: true })
-                }
-            },
-            // fail:()=> true
-        });
+        }).then(data => {
+            this.setState({
+                giftList: data.packageList,
+                limitList: data.couponAvailableList,
+                endList: data.couponEndList
+            })
+        })
     }
     render() {
         let { isShowEmpty, giftList, limitList, endList } = this.state;
-        let myCoupon = <a className="myCoupon" href="/static/wap/faq/index.html"> 我的优惠券 </a>;
+
+        let isNotEmpty = giftList.length || limitList.length || endList.length;
 
         return <div className="totalBox">
-            {/*<EmptyShow/>*/}
-            {myCoupon}
-            {isShowEmpty && <EmptyShow />}
-            {giftList.length !== 0 &&
-                <GiftBag list={giftList} request={this.requestGiftList} />}
-            {limitList.length !== 0 &&
-                <List list={limitList} request={this.requestGiftList} />}
-            {endList.length !== 0 &&
-                <NoneList list={endList} request={this.requestGiftList} />}
+            {!isNotEmpty && <EmptyShow />}
+            <GiftBagList giftList={giftList} refreshHandler={this.requestGiftList} />
+            <List list={limitList} refreshHandler={this.requestGiftList} />
+            <NoneList list={endList} refreshHandler={this.requestGiftList} />
         </div>
     }
 }
 
 $FW.DOMReady(function () {
     if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={'领券中心'} />, HEADER_NODE);
+        ReactDOM.render(<Header title={'领券中心'} sub_text={'我的优惠券'}
+            sub_url='/static/wap/faq/index.html' />, HEADER_NODE);
     }
     ReactDOM.render(<CouponCenter />, CONTENT_NODE)
 });
