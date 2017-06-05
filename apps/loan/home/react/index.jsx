@@ -83,7 +83,10 @@ class Home extends React.Component {
                 this.setState({ showBulletin: true, bulletinCnt: newBulletinCnt })
                 $FW.Store.setBulletin(token, newBulletinCnt);
 
-            }, e => { $FW.Component.Toast(e.message) });
+            }, e => {
+                if (e.code == 22003) return; // no bulletin now
+                $FW.Component.Toast(e.message)
+            });
     }
 
     handleBannerJump = () => {
