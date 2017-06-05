@@ -167,7 +167,7 @@ class LoanResult extends React.Component{
                         </div>
                     </div>
                     <div className="credit-btn"
-                         onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&userId=${USER.id}`)}>
+                         onClick={() => gotoHandler(`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`)}>
                         去提额
                     </div>
                 </div>
