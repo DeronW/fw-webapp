@@ -33,8 +33,10 @@ class GiftBag extends React.Component {
                 console.log(data.giftBagDetail)
                 this.setState({pop_show: true, pop_info: data.giftBagDetail, gift_name: item.name})
                 console.log(this.state.pop_info)
+                // this.props.request()
             },
         });
+
     }
 
     close_pop() {
@@ -42,16 +44,15 @@ class GiftBag extends React.Component {
     }
 
     timestampHandler(timestamp) {
-        var timeTrans = new Date(parseInt(timestamp) * 1000);
+        // var timeTrans = new Date(parseInt(timestamp) * 1000);
         // console.log(timeTrans.toLocaleString('chinese',{hour12:false}).toString().substr(-8,8))
-        return (timeTrans.toLocaleString('chinese', {hour12: false}).toString().substr(-8, 8));
+        return (timestamp.toString().substr(-8, 8));
     }
 
     countDown(time, number,item) {
-        let created = time;
-        let mma = created / 1000;
-        let ma = Math.floor(mma / 60 % 60);
-        let sa = (mma % 60).toFixed(0);
+        let hh = parseInt(time/3600);
+        let ma =parseInt((time-hh*3600)/60);
+        let sa = parseInt((time-hh*3600)%60);
         clearInterval(this.limit_time);
         this.limit_time = setInterval(() => {
             if (sa < 10) {
@@ -76,6 +77,7 @@ class GiftBag extends React.Component {
 
     getHandler(item) {
         item.isGet = "1";
+        this.props.request() //用户点击后重新请求，改变数据
         $FW.Ajax({
             url: API_PATH + '/mpwap/api/v2/grabCoupon.shtml',
             method: 'post',
@@ -87,7 +89,6 @@ class GiftBag extends React.Component {
                 $FW.Component.Alert("领取成功")
             },
         });
-        this.props.request() //用户点击后重新请求，改变数据
     }
 
     jump() {
@@ -241,7 +242,7 @@ class GiftBag extends React.Component {
                         </div>
                         <div className="gift_right_starttime"
                              id={index + "gift_time"}>
-                            {()=>{this.countDown(item.intervalMilli, index,item)}}
+                            {this.countDown(item.intervalMilli, index,item)}
                         </div>
                         <div className="get_state_gray">
                             领取
@@ -258,10 +259,10 @@ class GiftBag extends React.Component {
                         {item.isGet == "0" ? <a className="content_state_red">领取</a> :
                             <a className="content_state_red">去投资</a>
                         }
-                        <div className="gift_right_title">
+                        <div className="gift_right_title_surplus">
                             剩余
                         </div>
-                        <div className="gift_right_starttime">
+                        <div className="gift_right_starttime_percent">
                             {item.restPercent}
                         </div>
                     </div>
