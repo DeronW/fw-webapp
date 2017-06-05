@@ -84,7 +84,7 @@ class Home extends React.Component {
                 $FW.Store.setBulletin(token, newBulletinCnt);
 
             }, e => {
-                if (code == 22003) return; // no bulletin now
+                if (e.code == 22003) return; // no bulletin now
                 $FW.Component.Toast(e.message)
             });
     }
