@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  background-color: #ebebee;
   font-family: 'San Francisco', 'PingFang SC', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -27,4 +28,8 @@ a, a:active {
 
 .hide {
   display: none !important;
+}
+
+:global .cnt-container {
+  margin-top: 88px; /*height of header*/
 }
