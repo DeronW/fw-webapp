@@ -1,0 +1,186 @@
+@import "various.less";
+//优惠礼包
+.giftbag_box {
+  display: table;
+  margin: 0px auto;
+  .gift_box_title {
+    font-size: 32px;
+    color: @colorBlue;
+    margin: 20px 0px;
+    .icon_gift {
+      vertical-align: middle;
+      padding-right: 20px;
+    }
+    .gift_title {
+      vertical-align: middle;
+    }
+  }
+  .gift_item {
+    width: 652px;
+    margin: 20px auto;
+    height: 175px;
+    background: url("../images/coupon-orangebg.png") no-repeat center;
+    .gift_item_left {
+      width: 75%;
+      height: 175px;
+      float: left;
+      .gift_one_title {
+        width: 155px;
+        padding: 40px 40px 40px 34px;
+        height: 90px;
+        float: left;
+        .gift_amount {
+          font-size: 54px;
+          color: @colorWhite;
+          .amount_rmb {
+            display: inline-block;
+            font-size: 40px;
+          }
+        }
+        .gift_type {
+          font-size: 22px;
+          color: @colorWhite;
+          margin-top: 10px;
+        }
+      }
+      .gift_one_des {
+        width: 200px;
+        padding: 40px 40px 40px 20px;
+        height: 90px;
+        float: left;
+        font-size: 20px;
+        color: @colorWhite;
+        line-height: 34px;
+        .space {
+          display: inline-block;
+          width: 20px;
+        }
+      }
+    }
+    .gift_item_right {
+      float: left;
+      width: 25%;
+      height: 100%;
+      text-align: center;
+      position: relative;
+      margin-top: 10px;
+      .content_state_red {
+        display: block;
+        font-size: 24px;
+        color: @colorWhite;
+        width: 124px;
+        height: 36px;
+        background-color: @colorRed;
+        line-height: 36px;
+        text-align: center;
+        margin: 0px 0 0 22px;
+        border-radius: 4px;
+      }
+      .gift_right_title {
+        font-size: 22px;
+        margin-top: 40px;
+      }
+      .gift_right_starttime {
+        font-size: 26px;
+        color: @colorRed;
+        margin-top: 5px;
+      }
+      .gift_right_title_surplus {
+        font-size: 22px;
+        margin-top: 40px;
+        position: absolute;
+        top: -14px;
+        right: 60px;
+      }
+      .gift_right_starttime_percent {
+        font-size: 26px;
+        color: @colorRed;
+        margin-top: 5px;
+        position: absolute;
+        bottom: 93px;
+        right: 55px;
+      }
+      .get_state_red {
+        display: block;
+        font-size: 24px;
+        color: @colorWhite;
+        width: 124px;
+        height: 36px;
+        background-color: @colorRed;
+        line-height: 36px;
+        text-align: center;
+        margin: 20px 0 0 22px;
+        border-radius: 4px;
+      }
+      .get_state_gray {
+        font-size: 24px;
+        color: @colorWhite;
+        width: 124px;
+        height: 36px;
+        background-color: @colorBackground;
+        line-height: 36px;
+        text-align: center;
+        margin: 20px 0 0 22px;
+        border-radius: 4px;
+      }
+    }
+  }
+
+  //礼包弹窗
+  .gift-pop {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    .pop_content {
+      width: 595px;
+      height: 790px;
+      position: absolute;
+      left: 50%;
+      margin-left: -300px;
+      top: 50%;
+      margin-top: -395px;
+      background-color: @colorWhite;
+      border-radius: 10px;
+      overflow: auto;
+      .close-btn {
+        width: 530px;
+        height: 68px;
+        background-color: @colorRed;
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 20px;
+        margin-left: 33px;
+        border-radius: 4px;
+        font-size: 28px;
+        color: @colorWhite;
+        text-align: center;
+        line-height: 68px;
+        cursor: pointer;
+      }
+      .pop_title {
+        height: 80px;
+        border-bottom: 1px solid @colorBottom;
+        font-size: 32px;
+        color: @color3;
+        line-height: 80px;
+        padding-left: 34px;
+        background-color: @colorF9;
+      }
+      .pop_content_title {
+        font-size: 32px;
+        padding-left: 34px;
+        color: @color5;
+        margin-top: 30px;
+        line-height: 60px;
+        .amount_red {
+          color: @colorRed;
+        }
+      }
+    }
+
+  }
+}
