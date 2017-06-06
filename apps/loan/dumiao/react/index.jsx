@@ -202,7 +202,7 @@ class BorrowMoney extends React.Component {
                     <div className="pop-close" onClick={this.canMessageCloseHandler}></div>
                     <div className="pop-tip">{this.state.canMessage}</div>
                     <a className="know-btn" onClick={
-                        () => $FW.Browser.inApp() ?
+                        () => $FW.Browser.inJRGCApp() ?
                             NativeBridge.close() :
                             gotoHandler("/static/loan/home/index.html")}>
                         尝试其他借款</a>
@@ -213,7 +213,7 @@ class BorrowMoney extends React.Component {
                     <div className="pop-close" onClick={this.tryOtherLoanCloseHandler}></div>
                     <div className="pop-tip">{this.state.tryOtherLoanMsg}</div>
                     <a className="know-btn" onClick={
-                        () => $FW.Browser.inApp() ?
+                        () => $FW.Browser.inJRGCApp() ?
                             NativeBridge.close() :
                             gotoHandler("/static/loan/home/index.html")}>
                         尝试其他借款</a>
@@ -237,7 +237,7 @@ function gotoHandler(link, toNative, need_login) {
     if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+    $FW.Browser.inJRGCApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 const USER = $FW.Store.getUserDict();

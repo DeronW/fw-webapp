@@ -97,7 +97,7 @@ class LoanResult extends React.Component{
         <div className="loan-result">
             {$FW.Browser.inAndroid() &&
             <div className="header">
-                <div className="arrow-left" onClick={() => { $FW.Browser.inApp() ? NativeBridge.close() : gotoHandler("/static/loan/home/index.html") }}></div>
+                <div className="arrow-left" onClick={() => { $FW.Browser.inJRGCApp() ? NativeBridge.close() : gotoHandler("/static/loan/home/index.html") }}></div>
                 <div className="title">借款结果</div>
             </div>
             }
@@ -133,7 +133,7 @@ class LoanResult extends React.Component{
                         </div>
                     </div>
                     <div className="btn-wrap">
-                        <div className="credit-btn" onClick={() => { $FW.Browser.inApp() ? NativeBridge.close() : gotoHandler('/static/loan/home/index.html') }}>返回</div>
+                        <div className="credit-btn" onClick={() => { $FW.Browser.inJRGCApp() ? NativeBridge.close() : gotoHandler('/static/loan/home/index.html') }}>返回</div>
                     </div>
                 </div>
                 <div className={this.state.successResultShow ? "success-result-box" : "success-result-box dis"}>
@@ -155,7 +155,7 @@ class LoanResult extends React.Component{
                         </div>
                     </div>
                     <div className="btn-wrap">
-                        <div className="credit-btn" onClick={() => {$FW.Browser.inApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>返回</div>
+                        <div className="credit-btn" onClick={() => {$FW.Browser.inJRGCApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>返回</div>
                     </div>
                 </div>
                 <div className={this.state.failResultShow ? "fail-result-box" : "fail-result-box dis"}>
@@ -175,7 +175,7 @@ class LoanResult extends React.Component{
                         </div>
                     </div>
                     <div className="btn-wrap">
-                        <div className="credit-btn" onClick={()=>{$FW.Browser.inApp()? NativeBridge.close():gotoHandler('/static/loan/home/index.html')}}>重新借款</div>
+                        <div className="credit-btn" onClick={()=>{$FW.Browser.inJRGCApp()? NativeBridge.close():gotoHandler('/static/loan/home/index.html')}}>重新借款</div>
                     </div>
                 </div>
                 <div className="weixin-attention">

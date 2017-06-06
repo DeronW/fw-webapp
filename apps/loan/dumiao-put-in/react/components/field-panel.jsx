@@ -57,7 +57,7 @@ class FieldPanel extends React.Component {
         }
 
         return <div className="field-edit-panel" style={{
-            top: $FW.Browser.inWeixin() || $FW.Browser.inApp() || $FW.Browser.inFXHApp() ? '0px' : '100px'
+            top: $FW.Browser.inWeixin() || $FW.Browser.inApp() ? '0px' : '100px'
         }}>
             {field.describe &&
                 <div className="section-title">{field.describe}</div>}

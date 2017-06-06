@@ -56,7 +56,7 @@ class VerifyCode extends React.Component{
         orderGid: orderGid,
         verifyCode: this.state.value
     }).then(() => {
-        if($FW.Browser.inApp()){
+        if($FW.Browser.inJRGCApp()){
             gotoHandler(`/static/loan/apply-result/index.html?orderGid=${orderGid}`);
         }else{
             this.props.callbackCloseHanler(false);

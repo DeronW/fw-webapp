@@ -211,7 +211,7 @@ class UserInfoWrap extends React.Component {
         return (
             <div className="user-info-wrap">
                 <AvatarCard phoneNum={this.state.phoneNum} />
-                {$FW.Browser.inApp() && <FollowWXEntry />}
+                {$FW.Browser.inJRGCApp() && <FollowWXEntry />}
                 <BillEntry />
                 <MajorUserInfo />
                 {/* <ExitBtn /> */}

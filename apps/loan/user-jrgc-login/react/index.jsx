@@ -1,5 +1,5 @@
 $FW.DOMReady(function () {
-    if (!$FW.Browser.inApp())
+    if (!$FW.Browser.inJRGCApp())
         ReactDOM.render(<Header title={'跳转'} />, HEADER_NODE);
 
 
