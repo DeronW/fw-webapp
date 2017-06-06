@@ -1,5 +1,9 @@
-// import Account from './account.js'
+import Car from './car.js'
+import Holder from './holder.js'
+import Recognizee from './recognizee.js'
 
 export {
-    // Account,
+    Car,
+    Holder,
+    Recognizee
 }

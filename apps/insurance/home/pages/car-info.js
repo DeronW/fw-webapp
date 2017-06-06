@@ -12,6 +12,10 @@ class CarInfo extends React.Component {
         return (
             <div styleName="fake-body">
                 <Header title="车险" history={this.props.history} />
+                <div className="cnt-container">
+                    <div styleName="banner"></div>
+
+                </div>
             </div>
         )
     }

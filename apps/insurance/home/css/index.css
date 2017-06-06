@@ -29,3 +29,7 @@ a, a:active {
 .hide {
   display: none !important;
 }
+
+:global .cnt-container {
+  margin-top: 88px; /*height of header*/
+}
