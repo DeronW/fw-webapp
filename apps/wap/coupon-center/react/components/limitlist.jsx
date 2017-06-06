@@ -60,7 +60,7 @@ class ListBag extends React.Component {
         });
     }
 
-    jump() {
+    jump(){
         location.href = "/static/wap/faq/index.html"//跳转到投资的列表页
     }
 
@@ -113,7 +113,7 @@ class ListBag extends React.Component {
                 <div className="detail_right">
                     <div>满￥{item.limitAmount}可用</div>
                     <div>任意期限可用</div>
-                    <div>有效期至</div>
+                    <div>有效期至{item.validPeriod}</div>
                     <div>适用：</div>
                 </div>
             </div>
