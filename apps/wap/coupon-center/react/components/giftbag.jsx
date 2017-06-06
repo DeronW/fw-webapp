@@ -124,7 +124,7 @@ class GiftBag extends React.Component {
     }
 
     getHandler = (item) => {
-        item.isGet = "1";
+        item.isGet="1"
         this.props.refreshHandler() //用户点击后重新请求，改变数据
         $FW.Ajax({
             url: API_PATH + '/mpwap/api/v2/grabCoupon.shtml',
@@ -208,10 +208,10 @@ class GiftBag extends React.Component {
 
         let status_start = () => {
             return <div className="gift_item_right" onClick={() => {
-                item.isGet == "0" ? this.getHandler(item) : this.jump()
+                (item.isGet=="0") ? this.getHandler(item) : this.jump()
             }}>
                 <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}/>
-                {item.isGet == "0" ?
+                {(item.isGet=="0")?
                     <a className="content_state_red">领取</a> :
                     <a className="content_state_red">去投资</a>
                 }
