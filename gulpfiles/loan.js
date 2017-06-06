@@ -102,10 +102,10 @@ const MORTGAGE = [
     'house-mortgage'
 ]
 
-const EXPERIMENTAL_HOME = [{
-    name: 'py-new-home',
-    compiler: 'webpack'
-}]
+// const EXPERIMENTAL_HOME = [{
+//     name: 'py-new-home',
+//     compiler: 'webpack'
+// }]
 
 const APPLY_TEN_MILLION_LOAN = [
     'apply-ten-million-loan',

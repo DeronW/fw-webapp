@@ -151,7 +151,7 @@ const Content = React.createClass({
                 </div>
 
                 <div className="channel">
-                    <a onClick={() => gotoHandler('https://m.dougemall.com/static/mall/game/index.html', true)}>
+                    <a onClick={() => gotoHandler('https://m.9888.cn/static/wap/coupon-center/index.html', true)}>
                         <i className="icon-game"></i>
                         领券中心
                         {coupon_count=="0"?null:<span className="coupon-count">{coupon_count}</span>}

@@ -65,14 +65,14 @@ class ListBag extends React.Component {
     }
 
     render() {
-        let {receiveStatus,surplus_seconds} = this.state;
+        let {receiveStatus, surplus_seconds} = this.state;
         let {item} = this.props;
         let content;
         let buy_func = (item) => {
             if (receiveStatus == "00") {
                 content = <div>
                     <div className="content_title">开抢时间</div>
-                    <div className="content_time">{this.timestampHandler(item.startTime)}</div>
+                    <div className="content_time"> {item.startTime.substr(-8)}</div>
                     <div className="content_state_gray">领取</div>
                 </div>
             } else if (receiveStatus == "01") {
