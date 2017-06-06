@@ -1,47 +1,37 @@
-import React, { Component } from "react"
+import React from 'react'
 import { Provider } from 'mobx-react'
 import {
     HashRouter as Router,
     Route,
-    Switch,
-    Redirect,
-    Link
+    Switch
 } from 'react-router-dom'
 
-import BlankPage from './pages/blank-page'
-import Home from './pages/home'
-import Car from './pages/car'
-import Insurance from './pages/insurance'
-import Quote from './pages/quote'
-import Customer from './pages/customer'
-import Confirm from './pages/confirm'
-import Payment from './pages/payment'
-import Result from './pages/result'
-import OrderList from './pages/order-list'
-import QuoteDetail from './pages/quote-detail'
 import CarInfo from './pages/car-info'
-import UserInfo from './pages/user-info'
+import CarInfoPlus from './pages/car-info-plus'
+import PolicyDetail from './pages/policy-detail'
+import PolicyQuotation from './pages/policy-quotation'
+import PolicyHolderInfo from './pages/policy-holder-info'
+import OrderConfirm from './pages/order-confirm'
+import OrderPayment from './pages/order-payment'
+import OrderResult from './pages/order-result'
+import Orders from './pages/orders'
 
 export default (stores) => {
-
-    return <Router>
-        <Provider {...stores} >
-            <Switch>
-            <Route exact path='/home' component={Home} />
-            <Route exact path='/car' component={Car} />
-            <Route exact path='/insurance' component={Insurance} />
-            <Route exact path='/quote' component={Quote} />
-            <Route exact path='/customer' component={Customer} />
-            <Route exact path='/confirm' component={Confirm} />
-            <Route exact path='/payment' component={Payment} />
-            <Route exact path='/result' component={Result} />
-            <Route exact path='/order-list' component={OrderList} />
-            <Route exact path='/quote-detail' component={QuoteDetail} />
-            <Route exact path='/car-info' component={CarInfo} />
-            <Route exact path='/user-info' component={UserInfo} />
-                <Route component={BlankPage} />
-            </Switch>
-        </Provider>
-    </Router>
-
+    return (
+        <Router>
+            <Provider {...stores} >
+                <Switch>
+                    <Route exact path='/car-info' component={CarInfo} />
+                    <Route exact path='/car-info-plus' component={CarInfoPlus} />
+                    <Route exact path='/policy-detail' component={PolicyDetail} />
+                    <Route exact path='/policy-quotation' component={PolicyQuotation} />
+                    <Route exact path='/policy-holder-info' component={PolicyHolderInfo} />
+                    <Route exact path='/order-confirm' component={OrderConfirm} />
+                    <Route exact path='/order-payment' component={OrderPayment} />
+                    <Route exact path='/order-result' component={OrderResult} />
+                    <Route exact path='/orders' component={Orders} />
+                </Switch>
+            </Provider>
+        </Router>
+    )
 }
