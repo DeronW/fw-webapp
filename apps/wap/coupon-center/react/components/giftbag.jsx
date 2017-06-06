@@ -219,7 +219,7 @@ class GiftBag extends React.Component {
         }
 
         let status_finished = () => {
-            return <div className="gift_item_right">
+            return <div className="gift_item_right" onClick={()=>this.jump()}>
                 <img src="images/icon-get.png" />
                 {item.isGet == "1" && <a className="get_state_red">去投资</a>}
             </div>
