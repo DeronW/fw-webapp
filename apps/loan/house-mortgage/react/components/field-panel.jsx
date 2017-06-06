@@ -69,7 +69,7 @@ class FieldPanel extends React.Component {
         }
 
         return <div className={`${field.name === '所在区县' ? 'field-edit-panel field-edit-panel-area' : 'field-edit-panel'}`} style={{
-            top: $FW.Browser.inWeixin() || $FW.Browser.inApp() || $FW.Browser.inFXHApp() || field.name === '所在区县' ? '0px' : '100px'
+            top: $FW.Browser.inWeixin() || $FW.Browser.inApp() || field.name === '所在区县' ? '0px' : '100px'
         }}>
             {field.describe &&
                 <div className="section-title">{field.describe}</div>}

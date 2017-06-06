@@ -60,7 +60,7 @@ class ListBag extends React.Component {
         });
     }
 
-    jump() {
+    jump(){
         location.href = "/static/wap/faq/index.html"//跳转到投资的列表页
     }
 
@@ -87,10 +87,10 @@ class ListBag extends React.Component {
                 </div>
             } else if (receiveStatus == "02") {
                 content = <div onClick={() => {
-                    item.isGet == "0" ? this.getHandler(item) : this.jump()
+                    item.grapLimit  == "0" ? this.getHandler(item) : this.jump()
                 }}>
                     <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}/>
-                    {item.isGet == "0" ? <a className="content_state_red">领取</a> :
+                    {item.grapLimit  == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>
                     }
                     <div className="list_right_title">
@@ -113,7 +113,7 @@ class ListBag extends React.Component {
                 <div className="detail_right">
                     <div>满￥{item.limitAmount}可用</div>
                     <div>任意期限可用</div>
-                    <div>有效期至</div>
+                    <div>有效期至{item.validPeriod}</div>
                     <div>适用：</div>
                 </div>
             </div>

@@ -1,8 +1,8 @@
 function SuccessMask() {
     return (
         <div className="success-mask">
-            { ( SOURCE_TYPE !== 4 && !$FW.Browser.inApp() ) &&
-                <div className="close-icon" onClick={() => {gotoHandler('/static/loan/home/index.html')}}></div>
+            {(SOURCE_TYPE !== 4 && !$FW.Browser.inJRGCApp()) &&
+                <div className="close-icon" onClick={() => { gotoHandler('/static/loan/home/index.html') }}></div>
             }
             <div className="success-container">
                 <div className="success-tip-1">您已成功申请</div>
@@ -29,12 +29,12 @@ class MainPanel extends React.Component {
 
     componentDidMount() {
         // get phone & real name
-        $FXH.Post(`${API_PATH}/api/userext/v1/userAuthentication.json`, { version: 'v1' }, false)
+        $FXH.Post(`${API_PATH}/api/userext/v1/userAuthentication.json`, { version: 'v1' })
             .then(data => {
-                if (!data.realName) this.setState({hasRealName: false});
+                if (!data.realName) this.setState({ hasRealName: false });
                 this.model.set_form_data(data);
                 this.setState({ form_data: this.model.get_form_data() });
-            }, e => { $FW.Component.Toast(e) })
+            })
 
         window.onpopstate = () => {
             this.setState({ field_key: null })
@@ -109,29 +109,29 @@ class MainPanel extends React.Component {
 
         return <div className="main-panel">
             <div className="input-field-container">
-                { panel_title('申请人信息') }
-                { ['phone'].map(disabled_field_item) }
-                { this.state.hasRealName ?
+                {panel_title('申请人信息')}
+                {['phone'].map(disabled_field_item)}
+                {this.state.hasRealName ?
                     ['realName'].map(disabled_field_item) :
-                    ['realName'].map(field_item) }
-                { panel_title('抵押金额及期限') }
-                { ['mortgAmountRange', 'mortgTimeLong'].map(field_item) }
-                { panel_title('抵押物信息') }
-                { ['city'].map(disabled_field_item) }
-                { ['area', 'housingEstate', 'houseBuildArea'].map(field_item) }
+                    ['realName'].map(field_item)}
+                {panel_title('抵押金额及期限')}
+                {['mortgAmountRange', 'mortgTimeLong'].map(field_item)}
+                {panel_title('抵押物信息')}
+                {['city'].map(disabled_field_item)}
+                {['area', 'housingEstate', 'houseBuildArea'].map(field_item)}
             </div>
 
             <div className="btn-area">
                 <div className="btn" onClick={this.submitHandler}>提交</div>
             </div>
 
-            { field &&
+            {field &&
                 <div>
                     <div className="field-mask"></div>
                     <FieldPanel
                         field_key={this.state.field_key}
                         field={field} set_form_data={this.setFormData} />
-                </div> }
+                </div>}
         </div>
     }
 }
@@ -140,10 +140,10 @@ function gotoHandler(link, toNative, need_login) {
     if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+    $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 $FW.DOMReady(() => {
     ReactDOM.render(<Header title={'房产抵押贷款'} />, HEADER_NODE)
-	ReactDOM.render(<MainPanel />, CONTENT_NODE)
+    ReactDOM.render(<MainPanel />, CONTENT_NODE)
 })

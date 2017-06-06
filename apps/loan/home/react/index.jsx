@@ -90,12 +90,7 @@ class Home extends React.Component {
     }
 
     handleBannerJump = () => {
-    //   if ($FW.Browser.inFXHApp()) return gotoHandler('/static/loan/user-weixin-fxhapp/index.html')
-    //   if ($FW.Browser.inApp()) return gotoHandler('/static/loan/user-weixin-jrgcapp/index.html')
-    //   return gotoHandler('/static/loan/weixin-download/index.html');
-
       gotoHandler($FW.Theme.get('weixin_download_page'))
-
     }
 
     render() {
@@ -130,7 +125,7 @@ function gotoHandler(link, toNative, need_login) {
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
 
-    ($FW.Browser.inApp() || $FW.Browser.inFXHApp()) ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+    $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 $FW.DOMReady(() => {

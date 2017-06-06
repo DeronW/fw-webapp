@@ -6,6 +6,7 @@ class GiftBagList extends React.Component {
             selected_code: null
         }
     }
+
     showGiftInfoHandler = (code, gift_name) => {
         this.setState({
             selected_code: code,
@@ -13,26 +14,27 @@ class GiftBagList extends React.Component {
         })
     }
     closePanelHandler = () => {
-        this.setState({ selected_code: null })
+        this.setState({selected_code: null})
     }
+
     render() {
-        let { selected_code, selected_name } = this.state
-        let { giftList } = this.props
+        let {selected_code, selected_name} = this.state
+        let {giftList} = this.props
 
         if (!giftList || giftList.length == 0) return null;
 
         return <div className="giftbag_box">
             <div className="gift_box_title">
-                <img src="images/icon-gift.png" className="icon_gift" />
+                <img src="images/icon-gift.png" className="icon_gift"/>
                 <span className="gift_title">优惠券礼包</span>
             </div>
             {giftList.map((gift, index) => <GiftBag item={gift} key={index}
-                showGiftInfoHandler={this.showGiftInfoHandler}
-                refreshHandler={this.props.refreshHandler}
+                                                    showGiftInfoHandler={this.showGiftInfoHandler}
+                                                    refreshHandler={this.props.refreshHandler}
             />)}
             {selected_code &&
-                <GiftPopPanel code={selected_code}
-                    gift_name={selected_name} closeHandler={this.closePanelHandler} />}
+            <GiftPopPanel code={selected_code}
+                          gift_name={selected_name} closeHandler={this.closePanelHandler}/>}
         </div>
     }
 }
@@ -44,6 +46,7 @@ class GiftPopPanel extends React.Component {
             detail_list: []
         }
     }
+
     componentDidMount() {
         $FW.Ajax({
             url: `${API_PATH}/mpwap/api/v2/getCouponInfo.shtml`,
@@ -52,9 +55,10 @@ class GiftPopPanel extends React.Component {
                 code: this.props.code
             }
         }).then(data => {
-            this.setState({ detail_list: data.giftBagDetail })
+            this.setState({detail_list: data.giftBagDetail})
         })
     }
+
     render() {
 
         let pop_content_title_func = (item, index) => {
@@ -106,22 +110,21 @@ class GiftBag extends React.Component {
     componentDidMount() {
         // start counting down
         if (this.props.item.receiveStatus == "01") {
-            this.setState({ remain_seconds: this.props.item.intervalMilli })
+            this.setState({remain_seconds: this.props.item.intervalMilli})
             this.timer = setInterval(() => {
                 if (this.state.remain_seconds < 1) {
                     clearInterval(this.timer)
-                    this.setState({ receiveStatus: '02' })
+                    this.setState({receiveStatus: '02'})
                     this.props.refreshHandler()
                 } else {
-                    this.setState({ remain_seconds: this.state.remain_seconds - 1 })
+                    this.setState({remain_seconds: this.state.remain_seconds - 1})
                 }
             }, 1000)
         }
     }
 
     getHandler = (item) => {
-        item.isGet = "1";
-        this.props.refreshHandler() //用户点击后重新请求，改变数据
+        item.isGet="1"
         $FW.Ajax({
             url: API_PATH + '/mpwap/api/v2/grabCoupon.shtml',
             method: 'post',
@@ -133,6 +136,7 @@ class GiftBag extends React.Component {
                 $FW.Component.Alert("领取成功")
             },
         });
+        this.props.refreshHandler() //用户点击后重新请求，改变数据
     }
 
     jump() {
@@ -141,8 +145,8 @@ class GiftBag extends React.Component {
 
     render() {
 
-        let { receiveStatus } = this.state;
-        let { item } = this.props;
+        let {receiveStatus} = this.state;
+        let {item} = this.props;
 
         let gift_left_section = (item) => {
             let gift_name;
@@ -181,11 +185,11 @@ class GiftBag extends React.Component {
 
         let status_not_start = () => {
             return <div className="gift_item_right">
-                <div className="gift_right_title"> 开抢时间 </div>
+                <div className="gift_right_title"> 开抢时间</div>
                 <div className="gift_right_starttime">
                     {item.startTime.substr(-8)}
                 </div>
-                <div className="get_state_gray"> 领取 </div>
+                <div className="get_state_gray"> 领取</div>
             </div>
         }
 
@@ -194,24 +198,24 @@ class GiftBag extends React.Component {
             s = `0${s}`.substr(-2)
 
             return <div className="gift_item_right">
-                <div className="gift_right_title"> 倒计时 </div>
+                <div className="gift_right_title"> 倒计时</div>
                 <div className="gift_right_starttime">
                     {`${m}'${s}''`}
                 </div>
-                <div className="get_state_gray"> 领取 </div>
+                <div className="get_state_gray"> 领取</div>
             </div>
         }
 
         let status_start = () => {
             return <div className="gift_item_right" onClick={() => {
-                item.isGet == "0" ? this.getHandler(item) : this.jump()
+                (item.grapLimit=="0") ? this.getHandler(item) : this.jump()
             }}>
-                <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50} />
-                {item.isGet == "0" ?
+                <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}/>
+                {(item.grapLimit=="0")?
                     <a className="content_state_red">领取</a> :
                     <a className="content_state_red">去投资</a>
                 }
-                <div className="gift_right_title_surplus"> 剩余 </div>
+                <div className="gift_right_title_surplus"> 剩余</div>
                 <div className="gift_right_starttime_percent">
                     {item.restPercent}
                 </div>
@@ -219,8 +223,8 @@ class GiftBag extends React.Component {
         }
 
         let status_finished = () => {
-            return <div className="gift_item_right" onClick={()=>this.jump()}>
-                <img src="images/icon-get.png" />
+            return <div className="gift_item_right" onClick={() => this.jump()}>
+                <img src="images/icon-get.png"/>
                 {item.isGet == "1" && <a className="get_state_red">去投资</a>}
             </div>
         }
