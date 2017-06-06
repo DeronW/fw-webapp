@@ -125,7 +125,7 @@ function gotoHandler(link, toNative, need_login) {
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
 
-    $FW.Browser.inJRGCApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+    $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 $FW.DOMReady(() => {
