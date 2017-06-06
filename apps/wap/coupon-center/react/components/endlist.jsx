@@ -3,13 +3,9 @@ class EndList extends React.Component {
         super(props)
     }
 
-    componentDidMount() {
-
-    }
 
     render() {
         let none_list = this.props.endList;
-        console.log(none_list)
         let none_list_func = (item, index) => {
             let none_no = <div className="none_item_right">
                 <div className="gray_state"></div>
