@@ -1,7 +1,7 @@
 function SuccessMask() {
     return (
         <div className="success-mask">
-            { ( SOURCE_TYPE !== 4 && !$FW.Browser.inJRGCApp() ) &&
+            { ( SOURCE_TYPE !== 4 && !$FW.Browser.inApp() ) &&
                 <div className="close-icon" onClick={() => {gotoHandler('/static/loan/home/index.html')}}></div>
             }
             <div className="success-container">
@@ -140,7 +140,7 @@ function gotoHandler(link, toNative, need_login) {
     if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
 
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    $FW.Browser.inJRGCApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+    $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
 }
 
 $FW.DOMReady(() => {
