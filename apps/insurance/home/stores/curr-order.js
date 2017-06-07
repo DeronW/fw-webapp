@@ -1,6 +1,6 @@
 import { extendObservable } from 'mobx'
 
-export default class Car {
+export default class CurrentOrder {
 
     constructor() {
         extendObservable(this, {

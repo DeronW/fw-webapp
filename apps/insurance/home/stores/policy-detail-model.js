@@ -1,10 +1,10 @@
 import { extendObservable } from 'mobx'
 
-export default class Car {
+export default class PolicyDetail {
 
     model = {
+        // '1' for car
         '1': {
-            policyType: 'car',
             platform: '', // '0' for pingan
             baseDetail: {
                 CheSun: {
