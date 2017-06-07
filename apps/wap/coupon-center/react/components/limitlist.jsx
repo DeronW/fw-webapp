@@ -61,7 +61,7 @@ class ListBag extends React.Component {
     }
 
     jump() {
-        NativeBridge.close()
+        NativeBridge.toNative('app_coupon')
     }
 
     render() {
