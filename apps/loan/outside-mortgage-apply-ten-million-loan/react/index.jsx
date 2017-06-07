@@ -163,6 +163,6 @@ class ApplyTenMillionLoan extends React.Component {
 }
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"申请千万贷款"} show_back={true} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"放心花"} show_back={true} />, HEADER_NODE);
     ReactDOM.render(<ApplyTenMillionLoan />, CONTENT_NODE)
 });
