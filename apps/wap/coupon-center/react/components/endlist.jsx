@@ -25,7 +25,7 @@ class EndList extends React.Component {
                     </div>
                     <div className="detail_right">
                         <div>满￥{item.limitAmount}可用</div>
-                        <div>任意期限可用</div>
+                        <div>期限：{item.limitTerm}天</div>
                         <div>有效期至{item.validPeriod}</div>
                     </div>
                 </div>

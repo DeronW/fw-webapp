@@ -7,8 +7,7 @@ let APP_NAMES = [
     'more', //更多
     'faq', //常见问题
     'about-us', //关于我们
-    '404',
-    'ld-download'
+    '404'
 ];
 
 // 用户模块
@@ -108,8 +107,9 @@ const MORTGAGE = [
 // }]
 
 const APPLY_TEN_MILLION_LOAN = [
-    'apply-ten-million-loan',
-    'ten-million-loan-info'
+    'outside-mortgage-apply-ten-million-loan',
+    'outside-mortgage-ten-million-loan-info',
+    'outside-mortgage-id-download'
 ]
 
 APP_NAMES.push(
