@@ -18,19 +18,20 @@ class ApplyTenMillionLoan extends React.Component {
             countdown: 0,
             countdownShow: false,
             codeToken: '',
-            codeType: ''
+            codeType: '',
+            bothFilled:false
         }
     }
 
-    phoneChange (e) {
-        if(verificationNum(e.target.value)) {
+    phoneChange = (e) => {
+        if(verificationNum(e.target.value) && e.target.value.length <= 11) {
             this.setState({
                 phoneVal: e.target.value
             })
         }
     }
 
-    codeChange (e) {
+    codeChange = (e) => {
         if (!isNaN(e.target.value) && e.target.value.length <= 8) {
             this.setState({
                 codeVal: e.target.value
@@ -39,7 +40,7 @@ class ApplyTenMillionLoan extends React.Component {
 
     }
 
-    handlerCountdown () {
+    handlerCountdown = () => {
         if(this.state.phoneVal == '') {
             $FW.Component.Toast("手机号不能为空");
         } else if(!isMobilePhone(this.state.phoneVal)) {
@@ -80,7 +81,7 @@ class ApplyTenMillionLoan extends React.Component {
 
     }
 
-    applyBtn () {
+    applyBtn = () => {
         if(!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
         } else if (this.state.codeVal == '') {
@@ -112,15 +113,15 @@ class ApplyTenMillionLoan extends React.Component {
 
     render () {
         return (
-            <div className="">
+            <div className="content">
                 <div className="from">
                     <div className="li phone-li">
                         <div className="input">
                             <div className="i">
-                                <input type="text"
+                                <input type="number" className="input"
                                     value={ this.state.phoneVal }
                                     placeholder="输入手机号"
-                                    onChange={ this.phoneChange.bind(this) }
+                                    onChange={ this.phoneChange}
                                 />
                             </div>
                         </div>
@@ -128,23 +129,23 @@ class ApplyTenMillionLoan extends React.Component {
                     <div className="li verification-code-li">
                         <div className="input">
                             <div className="i">
-                                <input type="text"
+                                <input type="number" className="input" onBlur={this.blurHandler}
                                     placeholder="验证码"
                                     value= { this.state.codeVal }
-                                    onChange={ this.codeChange.bind(this) }
+                                    onChange={ this.codeChange}
                                 />
                             </div>
 
                             <div className="btn">
                                 {
                                     this.state.countdownShow ?
-                                        <div className="countdown-text">{ this.state.countdown }倒计时</div> : <div className="text" onClick={ this.handlerCountdown.bind(this) }>获取验证码</div>
+                                        <div className="countdown-text">{ this.state.countdown }倒计时</div> : <div className="text" onClick={ this.handlerCountdown}>获取验证码</div>
                                 }
                             </div>
                         </div>
                     </div>
 
-                    <div className="apply-btn" onClick={ this.applyBtn.bind(this) }>申请千万贷款</div>
+                    <div className={this.state.bothFilled ? "apply-btn" : "apply-btn-forbid"} onClick={ this.applyBtn}>申请千万贷款</div>
                 </div>
             </div>
         )
