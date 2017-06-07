@@ -26,7 +26,6 @@ class Juxtapose extends React.Component {
 				this.setState({
 					listData: data.resultList
 				})
-				console.log(data)
             })
 	}
 	render() {
