@@ -31,7 +31,7 @@ class EndList extends React.Component {
             //     cn += ' none_get'
             // }
 
-            return <div className="none_item_box none_get" key={index}>
+            return <div className="none_item_box none_noget" key={index}>
                 <div className="none_item_left">
                     <div className="detail_left">
                         <div className="list_amount">
