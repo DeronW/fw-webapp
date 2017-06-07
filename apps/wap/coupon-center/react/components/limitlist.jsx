@@ -60,7 +60,7 @@ class ListBag extends React.Component {
         });
     }
 
-    jump(){
+    jump() {
         NativeBridge.close()
     }
 
@@ -87,10 +87,10 @@ class ListBag extends React.Component {
                 </div>
             } else if (receiveStatus == "02") {
                 content = <div onClick={() => {
-                    item.grapLimit  == "0" ? this.getHandler(item) : this.jump()
+                    item.grapLimit == "0" ? this.getHandler(item) : this.jump()
                 }}>
                     <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}/>
-                    {item.grapLimit  == "0" ? <a className="content_state_red">领取</a> :
+                    {item.grapLimit == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>
                     }
                     <div className="list_right_title">
@@ -107,7 +107,13 @@ class ListBag extends React.Component {
         return <div className="list_item">
             <div className="item_left">
                 <div className="detail_left">
-                    <div className="list_amount"><span className="list_rmb">￥</span>{item.amount}</div>
+                    <div className="list_amount">
+                        <span className="list_rmb">
+                            {item.type=="1"?"￥":null}
+                            {item.type=="0"?"+":null}
+                        </span>
+                        {item.amount}
+                    </div>
                     <div className="list_name">{item.sourceTitle}</div>
                 </div>
                 <div className="detail_right">
