@@ -26,8 +26,9 @@ class ApplyTenMillionLoan extends React.Component {
     componentDidUpdate(){
         if(this.state.phoneVal != '' && this.state.codeVal != ''){
             if(this.state.bothFilled != true){
-                this.setState({bothFilled:true});
+                this.setState({bothFilled:true})
             }
+        }
     }
 
     phoneChange = (e) => {
