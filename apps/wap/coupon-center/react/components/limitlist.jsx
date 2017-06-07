@@ -114,7 +114,10 @@ class ListBag extends React.Component {
                         </span>
                         {item.amount}
                     </div>
-                    <div className="list_name">{item.sourceTitle}</div>
+                    <div className="list_name">
+                        {item.type=="1" && "返现券"}
+                        {item.type=="2" && "返息券"}
+                        </div>
                 </div>
                 <div className="detail_right">
                     <div>满￥{item.limitAmount}可用</div>
