@@ -6,7 +6,8 @@ class EndList extends React.Component {
     render() {
         let none_list = this.props.endList;
         let none_list_func = (item, index) => {
-
+            let day_number = "期限：>="+item.limitTerm+"天"
+            let day = item.limitTerm == "0"?"任意期限可用": day_number
             let none_no = <div className="none_item_right">
                 <div className="gray_state"></div>
                 <div className="state_button gray_lq">领取</div>
@@ -14,22 +15,11 @@ class EndList extends React.Component {
 
             let none_yes = <a className="none_item_right" onClick={
                 () => NativeBridge.toNative('app_coupon')}>
-                <div className="red_state"></div>
+                <div className="gray_state"></div>
                 <div className="state_button red_invest">去投资</div>
             </a>
 
             let none_get = item.isGet == "0" ? none_no : none_yes;
-
-            // let cn = 'none_item_box'
-            // if (item.isGet == "0") {
-            //     if (item.type == '2') {
-            //         cn += ' none_noget-blue'
-            //     } else {
-            //         cn += ' none_noget'
-            //     }
-            // } else {
-            //     cn += ' none_get'
-            // }
 
             return <div className="none_item_box none_noget" key={index}>
                 <div className="none_item_left">
@@ -40,11 +30,14 @@ class EndList extends React.Component {
                             </span>
                             {item.amount}
                         </div>
-                        <div className="list_name">{item.sourceTitle}</div>
+                        <div className="list_name">
+                            {item.type=="1" && "返现券"}
+                            {item.type=="2" && "返息券"}
+                        </div>
                     </div>
                     <div className="detail_right">
                         <div>满￥{item.limitAmount}可用</div>
-                        <div>期限：{item.limitTerm}天</div>
+                        <div>{day}</div>
                         <div>有效期至{item.validPeriod}</div>
                     </div>
                 </div>
@@ -54,7 +47,7 @@ class EndList extends React.Component {
 
         let end_section = <div>
             <div className="none_box_title">
-                <img src="images/icon-end.png" className="icon_end" />
+                <img src="images/icon-end.png" className="icon_end"/>
                 <span className="end_title">已结束</span>
             </div>
             {none_list.map(none_list_func)}

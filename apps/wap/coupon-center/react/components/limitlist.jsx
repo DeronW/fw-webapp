@@ -67,6 +67,8 @@ class ListBag extends React.Component {
     render() {
         let {receiveStatus, surplus_seconds} = this.state;
         let {item} = this.props;
+        let day_number = "期限：>="+item.limitTerm+"天"
+        let day = item.limitTerm == "0"?"任意期限可用": day_number
         let content;
         let buy_func = (item) => {
             if (receiveStatus == "00") {
@@ -114,11 +116,14 @@ class ListBag extends React.Component {
                         </span>
                         {item.amount}
                     </div>
-                    <div className="list_name">{item.sourceTitle}</div>
+                    <div className="list_name">
+                        {item.type=="1" && "返现券"}
+                        {item.type=="2" && "返息券"}
+                        </div>
                 </div>
                 <div className="detail_right">
                     <div>满￥{item.limitAmount}可用</div>
-                    <div>期限：>={item.limitTerm}天</div>
+                    <div>{day}</div>
                     <div>有效期至{item.validPeriod}</div>
                     {/*<div>适用：</div>*/}
                 </div>
