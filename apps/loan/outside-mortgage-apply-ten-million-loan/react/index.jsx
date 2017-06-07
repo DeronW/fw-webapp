@@ -40,6 +40,16 @@ class ApplyTenMillionLoan extends React.Component {
 
     }
 
+    blurHandler = (e) => {
+        if(e.target.value != ''){
+            this.setState({bothFilled:true});
+        }
+    }
+
+    focusHandler = (e) => {
+        this.setState({bothFilled:false})
+    }
+
     handlerCountdown = () => {
         if(this.state.phoneVal == '') {
             $FW.Component.Toast("手机号不能为空");
@@ -118,7 +128,7 @@ class ApplyTenMillionLoan extends React.Component {
                     <div className="li phone-li">
                         <div className="input">
                             <div className="i">
-                                <input type="number" className="input"
+                                <input type="number" className="input" onFocus={this.focusHandler}
                                     value={ this.state.phoneVal }
                                     placeholder="输入手机号"
                                     onChange={ this.phoneChange}
@@ -129,7 +139,7 @@ class ApplyTenMillionLoan extends React.Component {
                     <div className="li verification-code-li">
                         <div className="input">
                             <div className="i">
-                                <input type="number" className="input" onBlur={this.blurHandler}
+                                <input type="number" className="input" onBlur={this.blurHandler} onFocus={this.focusHandler}
                                     placeholder="验证码"
                                     value= { this.state.codeVal }
                                     onChange={ this.codeChange}
