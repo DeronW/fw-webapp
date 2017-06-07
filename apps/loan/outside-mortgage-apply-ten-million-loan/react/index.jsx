@@ -95,7 +95,7 @@ class ApplyTenMillionLoan extends React.Component {
         if(!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
         } else if (this.state.codeVal == '') {
-            $FW.Component.Toast("验证码不能为空");
+            $FW.Component.Toast("验证码错误，请重新输入");
         } else {
             $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
                 mobile: this.state.phoneVal,
