@@ -27,7 +27,7 @@ $FW.DOMReady(function () {
         sourceType: SOURCE_TYPE
     }).then((data) => {
         var shareLink = data.shareTemplate.templateUrl;
-        $(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
+        //$(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
         $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'to_home' : 'app'}`);
     }, (err) => {
         location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
