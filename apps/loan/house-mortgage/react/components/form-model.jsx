@@ -110,7 +110,7 @@ class FormModel {
 
     get_form_data = () => {
         let form = {
-            province: '北京省'
+            province: '北京市'
         }
 
         for (let key in this.form)

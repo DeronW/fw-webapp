@@ -18,6 +18,10 @@ class TenMillionLoanInfo extends React.Component {
         }
     }
 
+    backClickHandler = () => {
+
+    }
+
     handlerSum = (e) => {
         this.setState({
             sum: e.target.value
@@ -185,7 +189,10 @@ class TenMillionLoanInfo extends React.Component {
         )
     }
 }
+
+
+
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"放心花"} show_back={true} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"放心花"} show_back={true} backClickHandler={back_handler()}/>, HEADER_NODE);
     ReactDOM.render(<TenMillionLoanInfo />, CONTENT_NODE)
 });
