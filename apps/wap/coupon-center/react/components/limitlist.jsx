@@ -81,7 +81,7 @@ class ListBag extends React.Component {
                 content = <div>
                     <div className="content_title">倒计时</div>
                     <div className="content_time">
-                        {`${min}'${sec}''`}
+                        {`${min}:${sec}`}
                     </div>
                     <div className="content_state_gray">领取</div>
                 </div>
