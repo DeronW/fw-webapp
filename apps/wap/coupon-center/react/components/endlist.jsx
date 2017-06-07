@@ -20,7 +20,12 @@ class EndList extends React.Component {
                         key={index}>
                 <div className="none_item_left">
                     <div className="detail_left">
-                        <div className="list_amount"><span className="list_rmb">￥</span>{item.amount}</div>
+                        <div className="list_amount">
+                            <span className="list_rmb">
+                                {item.type=="1"?"￥":"+"}
+                            </span>
+                            {item.amount}
+                            </div>
                         <div className="list_name">{item.sourceTitle}</div>
                     </div>
                     <div className="detail_right">
