@@ -12,10 +12,7 @@ import * as Stores from './stores'
 
 
 let stores = {
-    car: new Stores.Car('request'),
-    holder: new Stores.Holder('request'),
-    recognizee: new Stores.Recognizee('request'),
-    quotation: new Stores.Quotation('request'),
+    currentOrder: new Stores.CurrOrder()
 };
 
 render(AppRouter(stores), document.getElementById('cnt'))
