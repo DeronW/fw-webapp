@@ -11,6 +11,13 @@ class TenMillionLoanInfo extends React.Component {
         }
     }
 
+    componentDidUpdate(){
+        if(this.state.sum != '请选择' && this.state.years != '请选择' && this.state.county != '请选择' && this.state.district != '' && this.state.houseSize != ''){
+            if(this.state.allFilled != true)
+            this.setState({allFilled:true});
+        }
+    }
+
     handlerSum = (e) => {
         this.setState({
             sum: e.target.value
@@ -43,10 +50,6 @@ class TenMillionLoanInfo extends React.Component {
                 houseSize: e.target.value
             })
         }
-    }
-
-    focusHandler = (e) => {
-        this.setState({allFilled:false})
     }
 
     handlerInfo = () => {
@@ -154,7 +157,6 @@ class TenMillionLoanInfo extends React.Component {
                                     placeholder="请输入"
                                     value={ this.state.district }
                                     onChange ={ this.changeDistrict}
-                                    onFocus={this.focusHandler}
                                 />
                             </div>
                         </div>
@@ -164,7 +166,7 @@ class TenMillionLoanInfo extends React.Component {
                                 <input className="text" type="number"
                                     placeholder="请输入"
                                     value={ this.state.houseSize }
-                                    onChange= { this.changeHouseSize} onFocus={this.focusHandler}
+                                    onChange= {this.changeHouseSize}
                                 />
                             </div>
                         </div>

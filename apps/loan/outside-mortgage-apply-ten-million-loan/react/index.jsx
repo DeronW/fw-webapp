@@ -23,6 +23,13 @@ class ApplyTenMillionLoan extends React.Component {
         }
     }
 
+    componentDidUpdate(){
+        if(this.state.phoneVal != '' && this.state.codeVal != ''){
+            if(this.state.bothFilled != true){
+                this.setState({bothFilled:true});
+            }
+    }
+
     phoneChange = (e) => {
         if(verificationNum(e.target.value) && e.target.value.length <= 11) {
             this.setState({
@@ -38,16 +45,6 @@ class ApplyTenMillionLoan extends React.Component {
             })
         }
 
-    }
-
-    blurHandler = (e) => {
-        if(e.target.value != ''){
-            this.setState({bothFilled:true});
-        }
-    }
-
-    focusHandler = (e) => {
-        this.setState({bothFilled:false})
     }
 
     handlerCountdown = () => {
@@ -128,7 +125,7 @@ class ApplyTenMillionLoan extends React.Component {
                     <div className="li phone-li">
                         <div className="input">
                             <div className="i">
-                                <input type="number" className="input" onFocus={this.focusHandler}
+                                <input type="number" className="input"
                                     value={ this.state.phoneVal }
                                     placeholder="输入手机号"
                                     onChange={ this.phoneChange}
@@ -139,7 +136,7 @@ class ApplyTenMillionLoan extends React.Component {
                     <div className="li verification-code-li">
                         <div className="input">
                             <div className="i">
-                                <input type="number" className="input" onBlur={this.blurHandler} onFocus={this.focusHandler}
+                                <input type="number" className="input"
                                     placeholder="验证码"
                                     value= { this.state.codeVal }
                                     onChange={ this.codeChange}
