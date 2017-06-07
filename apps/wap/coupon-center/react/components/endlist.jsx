@@ -14,22 +14,11 @@ class EndList extends React.Component {
 
             let none_yes = <a className="none_item_right" onClick={
                 () => NativeBridge.toNative('app_coupon')}>
-                <div className="red_state"></div>
+                <div className="gray_state"></div>
                 <div className="state_button red_invest">去投资</div>
             </a>
 
             let none_get = item.isGet == "0" ? none_no : none_yes;
-
-            // let cn = 'none_item_box'
-            // if (item.isGet == "0") {
-            //     if (item.type == '2') {
-            //         cn += ' none_noget-blue'
-            //     } else {
-            //         cn += ' none_noget'
-            //     }
-            // } else {
-            //     cn += ' none_get'
-            // }
 
             return <div className="none_item_box none_noget" key={index}>
                 <div className="none_item_left">
@@ -54,7 +43,7 @@ class EndList extends React.Component {
 
         let end_section = <div>
             <div className="none_box_title">
-                <img src="images/icon-end.png" className="icon_end" />
+                <img src="images/icon-end.png" className="icon_end"/>
                 <span className="end_title">已结束</span>
             </div>
             {none_list.map(none_list_func)}
