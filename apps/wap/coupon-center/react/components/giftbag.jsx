@@ -224,12 +224,13 @@ class GiftBag extends React.Component {
 
         let status_finished = () => {
             return <div className={item.isGet=="0"?"gift_no_get":"gift_item_right"} onClick={() => {item.isGet=="1"?this.jump():null}}>
-                <img src="images/icon-get.png"/>
+                <img src="images/icon-get-gray.png"/>
                 {item.isGet == "1" && <a className="get_state_red">去投资</a>}
             </div>
         }
 
-        return <div className="gift_item">
+        let gift_none = (receiveStatus == "03" || receiveStatus == "04")?"gift_item gift_none":"gift_item"
+        return <div className={gift_none}>
             {gift_left_section(item)}
             {receiveStatus == "00" && status_not_start()}
             {receiveStatus == "01" && status_counting_down()}
