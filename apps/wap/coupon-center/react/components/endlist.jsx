@@ -6,7 +6,8 @@ class EndList extends React.Component {
     render() {
         let none_list = this.props.endList;
         let none_list_func = (item, index) => {
-
+            let day_number = "期限：>="+item.limitTerm+"天"
+            let day = item.limitTerm == "0"?"任意期限可用": day_number
             let none_no = <div className="none_item_right">
                 <div className="gray_state"></div>
                 <div className="state_button gray_lq">领取</div>
@@ -36,7 +37,7 @@ class EndList extends React.Component {
                     </div>
                     <div className="detail_right">
                         <div>满￥{item.limitAmount}可用</div>
-                        <div>期限：{item.limitTerm}天</div>
+                        <div>{day}</div>
                         <div>有效期至{item.validPeriod}</div>
                     </div>
                 </div>
