@@ -1,0 +1,15 @@
+.input-field {
+  height: 88px;
+  line-height: 88px;
+  background-color: #fff;
+  color: #333;
+  font-size: 30px;
+}
+
+.input-field-name {
+  float: left;
+}
+
+.float-right-els {
+  float: right;
+}

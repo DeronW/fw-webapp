@@ -1,9 +1,9 @@
-import Car from './car.js'
-import Holder from './holder.js'
-import Recognizee from './recognizee.js'
+import CurrOrder from './curr-order.js'
+import Customer from './customer.js'
+import PolicyDetail from './policy-detail-model.js'
 
 export {
-    Car,
-    Holder,
-    Recognizee
+    CurrOrder,
+    Customer,
+    PolicyDetail
 }

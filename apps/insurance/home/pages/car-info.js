@@ -4,9 +4,11 @@ import { observer, inject } from 'mobx-react'
 
 import Header from '../components/header'
 
+import InputField from '../components/input-field'
+
 import styles from '../css/car-info.css'
 
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@inject('car')@observer@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class CarInfo extends React.Component {
     render() {
         return (
@@ -14,7 +16,7 @@ class CarInfo extends React.Component {
                 <Header title="车险" history={this.props.history} />
                 <div className="cnt-container">
                     <div styleName="banner"></div>
-
+                    <InputField {...this.props.car.area} handleChange={this.props.car.handleChange}/>
                 </div>
             </div>
         )

@@ -8,19 +8,20 @@ import styles from '../css/select.css'
  <Select placeholder="" value="" options="" handleChange={}/>
  */
 
-const Select = CSSModules(styles)((props) => {
-    let gen_options = opt => <option value={opt} onClick={props.handleChange} />
-    return (
-        <div styleName="select-widget">
-            <div styleName="select-mask">
-                {props.value ? props.value : props.placeholder}
-                <div styleName="expand-btn"></div>
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+class Select extends React.Component {
+    render() {
+        let gen_options = opt => <option styleName="native-option" key={opt.name} value={opt.value}>{opt.name}</option>
+        return (
+            <div styleName="select-widget">
+                <select styleName="native-select" style={{color: this.props.value === '' ? '#999' : '#666'}} onChange={this.props.handleChange}>
+                    <option styleName="native-option" key="placeholder" value="">{this.props.placeholder}</option>
+                    { this.props.options.map(gen_options) }
+                </select>
+                <div styleName="expand-btn" />
             </div>
-            <select styleName="native-select">
-                { props.options.map(gen_options) }
-            </select>
-        </div>
-    )
-})
+        )
+    }
+}
 
 export default Select

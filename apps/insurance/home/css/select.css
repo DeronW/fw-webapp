@@ -1,0 +1,30 @@
+/* height of select-widget: 88px */
+
+.select-widget {
+  position: relative;
+  height: 88px;
+}
+
+.expand-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 88px;
+  background: url('../images/select/expand.png') #fff no-repeat center;
+}
+
+.native-select {
+  height: 88px;
+  padding-right: 32px;
+  color: #666;
+  border: none;
+  outline: none;
+  text-align: right;
+  font-size: 28px;
+}
+
+.native-option {
+  color: #333;
+  font-size: 28px;
+}
