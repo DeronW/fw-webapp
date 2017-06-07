@@ -104,7 +104,7 @@ class ListBag extends React.Component {
             return content;
 
         }
-        return <div className="list_item">
+        return <div className={`list_item ${item.type == '2' && 'list-item-red-bg'}`}>
             <div className="item_left">
                 <div className="detail_left">
                     <div className="list_amount">
