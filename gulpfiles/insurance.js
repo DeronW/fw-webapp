@@ -3,7 +3,7 @@ const eslint = require('gulp-eslint');
 const PROJ = 'insurance'
 
 const APP_NAMES = [{
-    name: 'home',
+    name: 'weiyun-car',
     compiler: 'webpack'
 }]
 
