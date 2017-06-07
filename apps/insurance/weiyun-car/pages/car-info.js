@@ -37,11 +37,9 @@ class Model {
             name: '车牌号码',
             subField: {
                 '1': 'carNoArea',
-                '2':
-            }
+            },
             value: {
-                '1': '',
-                '2':
+                '1': ''
             }
         }
     }
@@ -55,7 +53,7 @@ class CarInfo extends React.Component {
                 <Header title="车险" history={this.props.history} />
                 <div className="cnt-container">
                     <div><img src={require('../images/car-info/banner.png')}/></div>
-                    <InputField {...this.props.car.area} handleChange={this.props.car.handleChange}/>
+                    {/* <InputField {...this.props.car.area} handleChange={this.props.car.handleChange}/> */}
                 </div>
             </div>
         )
