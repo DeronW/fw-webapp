@@ -61,7 +61,7 @@ class ListBag extends React.Component {
     }
 
     jump(){
-        location.href = "/static/wap/faq/index.html"//跳转到投资的列表页
+        NativeBridge.close()
     }
 
     render() {

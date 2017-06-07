@@ -11,7 +11,7 @@ class EndList extends React.Component {
                 <div className="gray_state"></div>
                 <div className="state_button gray_lq">领取</div>
             </div>;
-            let none_yes = <a className="none_item_right" href="www.baidu.com">
+            let none_yes = <a className="none_item_right" onClick={()=>NativeBridge.close()}>
                 <div className="red_state"></div>
                 <div className="state_button red_invest">去投资</div>
             </a>
