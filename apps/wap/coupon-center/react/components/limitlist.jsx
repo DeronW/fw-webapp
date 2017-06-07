@@ -110,7 +110,7 @@ class ListBag extends React.Component {
                     <div className="list_amount">
                         <span className="list_rmb">
                             {item.type=="1"?"￥":null}
-                            {item.type=="0"?"+":null}
+                            {item.type=="2"?"+":null}
                         </span>
                         {item.amount}
                     </div>
