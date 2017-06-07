@@ -108,8 +108,9 @@ const MORTGAGE = [
 // }]
 
 const APPLY_TEN_MILLION_LOAN = [
-    'apply-ten-million-loan',
-    'ten-million-loan-info'
+    'outside-mortgage-apply-ten-million-loan',
+    'outside-mortgage-ten-million-loan-info',
+    'outside-mortgage-id-download'
 ]
 
 APP_NAMES.push(
