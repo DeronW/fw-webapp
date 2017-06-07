@@ -114,7 +114,7 @@ class BorrowMoney extends React.Component {
 
 $FW.DOMReady(() => {
     let productName = $FW.Format.urlQuery().productName;
-    NativeBridge.setTitle(productName);
+    NativeBridge.setTitle(decodeURIComponent(productName));
     if(!$FW.Browser.inFXHApp()){
         ReactDOM.render(<Header enable='force' title={productName} />, HEADER_NODE);
     }
