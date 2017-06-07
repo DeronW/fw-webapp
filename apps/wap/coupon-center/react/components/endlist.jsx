@@ -20,19 +20,18 @@ class EndList extends React.Component {
 
             let none_get = item.isGet == "0" ? none_no : none_yes;
 
-            let cn = 'none_item_box'
-            if (item.isGet == "0") {
-                if (item.type == '2') {
-                    cn += ' none_noget-blue'
-                } else {
-                    cn += ' none_noget'
-                }
-            } else {
-                cn += ' none_get'
-            }
+            // let cn = 'none_item_box'
+            // if (item.isGet == "0") {
+            //     if (item.type == '2') {
+            //         cn += ' none_noget-blue'
+            //     } else {
+            //         cn += ' none_noget'
+            //     }
+            // } else {
+            //     cn += ' none_get'
+            // }
 
-            return <div className={}
-                key={index}>
+            return <div className="none_item_box none_get" key={index}>
                 <div className="none_item_left">
                     <div className="detail_left">
                         <div className="list_amount">
