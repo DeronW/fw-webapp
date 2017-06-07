@@ -4,29 +4,20 @@ btn-width: 78px;
 */
 
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 88px;
-  line-height: 88px;
-  background-color: #fff;
-  text-align: center;
-  font-size: 36px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 88px;
+    line-height: 88px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 36px;
 }
 
-.back-btn {
-  position: absolute;
-  left: 0;
-  width: 78px;
-  height: 88px;
-  background: url('../images/header/back.png') transparent no-repeat center;
-}
-
-.close-btn {
-  position: absolute;
-  left: 78px;
-  width: 78px;
-  height: 88px;
-  background: url('../images/header/close.png') transparent no-repeat center;
+.btn {
+    display: block;
+    float: left;
+    width: 78px;
+    height: 88px;
 }
