@@ -20,7 +20,8 @@ class Juxtapose extends React.Component {
 		$FW.Post(`${API_PATH}/api/product/v1/productDisplayList.json`, {
 				pageIndex: 1,
 				pageSize: 100,
-				productDisplayType: 2
+				productDisplayType: 2,
+                sourceType: SOURCE_TYPE
 			})
             .then(data => {
 				this.setState({
