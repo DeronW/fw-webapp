@@ -112,7 +112,7 @@ class ListBag extends React.Component {
                 </div>
                 <div className="detail_right">
                     <div>满￥{item.limitAmount}可用</div>
-                    <div>{item.limitTerm}/天</div>
+                    <div>期限：>={item.limitTerm}天</div>
                     <div>有效期至{item.validPeriod}</div>
                     {/*<div>适用：</div>*/}
                 </div>

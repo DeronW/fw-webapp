@@ -1,0 +1,23 @@
+/*
+height: 88px;
+btn-width: 78px;
+*/
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 88px;
+    line-height: 88px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 36px;
+}
+
+.btn {
+    display: block;
+    float: left;
+    width: 78px;
+    height: 88px;
+}
