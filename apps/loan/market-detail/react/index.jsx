@@ -22,7 +22,7 @@ class BorrowMoney extends React.Component {
     }
     componentDidMount() {
         let pid = $FW.Format.urlQuery().productId;
-        $FXH.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}&sourceType=${SOURCE_TYPE}`)
+        $FW.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}&sourceType=${SOURCE_TYPE}`)
             .then(data => {
                 window.DATA = data
                 this.setState({ product: data })
