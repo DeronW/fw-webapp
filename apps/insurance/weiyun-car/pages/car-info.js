@@ -89,31 +89,43 @@ class CarInfo extends React.Component {
     };
 
     render() {
+        let currentOrder = this.props.currentOrder;
         let gen_input_field = (fieldName) => {
             let field = this.model[fieldName];
-            let valueInStore = this.props.currentOrder.car[field];
-            console.log(this.props.currentOrder.car);
             return (
                 <div key={fieldName} styleName="input-field">
                     <div styleName="input-field-name">{field.name}</div>
-                    <div styleName="float-right-els" style={{ color: this.props.currentOrder.car[field] ? "#666" : "#999" }}>
+                    <div styleName="float-right-els">
                         { field.options ?
-                            <Select placeholder={field.placeholder} value={this.props.currentOrder.car[field]} options={field.options} handleChange={this.props.currentOrder.setData('car', fieldName)} /> :
-                            <input styleName="input-area" placeholder={field.placeholder} value={this.props.currentOrder.car[field]} onChange={this.props.currentOrder.setData('car', fieldName)} />
+                            <Select placeholder={field.placeholder}
+                                value={currentOrder.car[fieldName]}
+                                options={field.options}
+                                handleChange={currentOrder.setData('car', fieldName)} /> :
+                            <input styleName="input-area" style={{ color: currentOrder.car[fieldName] ? "#666" : "#999" }}
+                                placeholder={field.placeholder}
+                                value={currentOrder.car[fieldName]}
+                                onChange={currentOrder.setData('car', fieldName)} />
                         }
                     </div>
                 </div>
             )
         }
         let gen_plate_input_field = (fieldName) => {
-            let field = this.model[fieldName];
-            let valueInStore = [this.props.currentOrder.car[field.subField[0]], this.props.currentOrder.car[field.subField[1]]];
+            let field = this.model[fieldName],
+                subFields = this.model[fieldName].subField;
             return (
                 <div key={fieldName} styleName="input-field">
                     <div styleName="input-field-name">{field.name}</div>
                     <div styleName="float-right-els">
-                        <Select style={{ float: "left", color: this.props.currentOrder.car[field.subField[0]] ? "#666" : "#999" }} placeholder={field.subField[0].placeholder} value={valueInStore[0]} options={field.subField[0].options} handleChange={this.props.currentOrder.setData('car', field.subField[0].fieldName)} />
-                        <input style={{ width: "150px", float: "right", color: this.props.currentOrder.car[field.subField[1]] ? "#666" : "#999" }} styleName="input-area" placeholder={field.subField[1].placeholder} value={valueInStore[1]} onChange={this.props.currentOrder.setData('car', field.subField[1].fieldName)} />
+                        <Select style={{ float: "left"}}
+                            placeholder={subFields[0].placeholder}
+                            value={currentOrder.car[subFields[0].fieldName]}
+                            options={subFields[0].options}
+                            handleChange={currentOrder.setData('car', subFields[0].fieldName)} />
+                        <input style={{ width: "150px", float: "right", color: currentOrder.car[subFields[1].fieldName] ? "#666" : "#999" }} styleName="input-area"
+                            placeholder={subFields[1].placeholder}
+                            value={currentOrder.car[subFields[1].fieldName]}
+                            onChange={currentOrder.setData('car', subFields[1].fieldName)} />
                     </div>
                 </div>
             )
@@ -130,6 +142,9 @@ class CarInfo extends React.Component {
                     <div styleName="input-field-grp">
                         { ['carOwnersName', 'idCard', 'intentionCompanyCode'].map(gen_input_field) }
                     </div>
+                </div>
+                <div styleName="next-btn-area">
+                    <div styleName="next-btn" onClick={() => { currentOrder.logData('car') }}>下一步</div>
                 </div>
             </div>
         )

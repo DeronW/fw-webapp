@@ -12,7 +12,7 @@ class TenMillionLoanInfo extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.state.sum != '请选择' && this.state.years != '请选择' && this.state.county != '请选择' && this.state.district != '' && this.state.houseSize != '') {
+        if (this.state.sum != '请选择' && this.state.num != '' && this.state.years != '请选择' && this.state.years != '' && this.state.county != '请选择' && this.state.county != '' && this.state.district != '' && this.state.houseSize != '') {
             if (this.state.allFilled != true)
                 this.setState({ allFilled: true });
         }
