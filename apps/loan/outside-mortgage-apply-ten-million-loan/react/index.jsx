@@ -10,7 +10,7 @@ function verificationNum(val) {
 }
 
 class ApplyTenMillionLoan extends React.Component {
-    constructor () {
+    constructor() {
         super()
         this.state = {
             phoneVal: '',
@@ -19,20 +19,20 @@ class ApplyTenMillionLoan extends React.Component {
             countdownShow: false,
             codeToken: '',
             codeType: '',
-            bothFilled:false
+            bothFilled: false
         }
     }
 
-    componentDidUpdate(){
-        if(this.state.phoneVal != '' && this.state.codeVal != ''){
-            if(this.state.bothFilled != true){
-                this.setState({bothFilled:true})
+    componentDidUpdate() {
+        if (this.state.phoneVal != '' && this.state.codeVal != '') {
+            if (this.state.bothFilled != true) {
+                this.setState({ bothFilled: true })
             }
         }
     }
 
     phoneChange = (e) => {
-        if(verificationNum(e.target.value) && e.target.value.length <= 11) {
+        if (verificationNum(e.target.value) && e.target.value.length <= 11) {
             this.setState({
                 phoneVal: e.target.value
             })
@@ -45,52 +45,36 @@ class ApplyTenMillionLoan extends React.Component {
                 codeVal: e.target.value
             })
         }
-
     }
 
     handlerCountdown = () => {
-        if(this.state.phoneVal == '') {
+        if (this.state.phoneVal == '') {
             $FW.Component.Toast("手机号不能为空");
-        } else if(!isMobilePhone(this.state.phoneVal)) {
+        } else if (!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
         } else {
-            this.setState({
-                countdown: 60,
-                countdownShow: true
-            })
-
-            this.timer = setInterval(() => {
-                this.setState({
-                    countdown: this.state.countdown - 1
-                })
-
-                if(this.state.countdown == 0) {
-                    clearInterval(this.timer)
-                    this.setState({
-                        countdownShow: false
-                    })
-                }
-            }, 1000)
+            this.startCountingDown()
 
             $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                 mobile: this.state.phoneVal,
                 userOperationType: 3,
                 sourceType: 5
             }).then(data => {
-                    this.setState({
-                        codeToken: data.codeToken,
-                        codeType: data.codeType
-                    })
-                }, e => {
-                    $FW.Component.Toast(e.message);
-                });
+                this.setState({
+                    codeToken: data.codeToken,
+                    codeType: data.codeType
+                })
+            }, e => {
+                $FW.Component.Toast(e.message);
+                this.stopCountingDown()
+            });
         }
 
 
     }
 
     applyBtn = () => {
-        if(!isMobilePhone(this.state.phoneVal)) {
+        if (!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
         } else if (this.state.codeVal == '') {
             $FW.Component.Toast("验证码错误，请重新输入");
@@ -101,25 +85,47 @@ class ApplyTenMillionLoan extends React.Component {
                 verifyCode: this.state.codeVal,
                 sourceType: 5
             }).then(data => {
-                    console.log(data.userLogin.uid)
-                    window.location.href = `/static/loan/outside-mortgage-ten-million-loan-info/index.html?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phoneVal}`
-                }, e => {
-                    $FW.Component.Toast(e.message);
-                    if(e.code == 201003) {
-                        this.timerTimeout = setTimeout(() => {
-                            window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
-                        }, 2000)
-                    }
-                });
+                window.location.href = `/static/loan/outside-mortgage-ten-million-loan-info/index.html?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phoneVal}`
+            }, e => {
+                $FW.Component.Toast(e.message);
+                if (e.code == 201003) {
+                    this.timerTimeout = setTimeout(() => {
+                        window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
+                    }, 2000)
+                }
+            });
         }
     }
 
-    componentWillUnmount() {
+    startCountingDown() {
+
+        this.setState({
+            countdown: 60,
+            countdownShow: true
+        })
+
+        this.timer = setInterval(() => {
+            this.setState({ countdown: this.state.countdown - 1 })
+            if (this.state.countdown == 0) {
+                clearInterval(this.timer)
+                this.setState({ countdownShow: false })
+            }
+        }, 1000)
+    }
+
+    stopCountingDown() {
         clearInterval(this.timer)
+        this.setState({
+            countdown: 60,
+            countdownShow: false
+        })
+    }
+
+    componentWillUnmount() {
         clearTimeout(timerTimeout)
     }
 
-    render () {
+    render() {
         return (
             <div className="content">
                 <div className="from">
@@ -127,9 +133,9 @@ class ApplyTenMillionLoan extends React.Component {
                         <div className="input">
                             <div className="i">
                                 <input type="number" className="input"
-                                    value={ this.state.phoneVal }
+                                    value={this.state.phoneVal}
                                     placeholder="输入手机号"
-                                    onChange={ this.phoneChange}
+                                    onChange={this.phoneChange}
                                 />
                             </div>
                         </div>
@@ -139,21 +145,21 @@ class ApplyTenMillionLoan extends React.Component {
                             <div className="i">
                                 <input type="number" className="input"
                                     placeholder="验证码"
-                                    value= { this.state.codeVal }
-                                    onChange={ this.codeChange}
+                                    value={this.state.codeVal}
+                                    onChange={this.codeChange}
                                 />
                             </div>
 
                             <div className="btn">
                                 {
                                     this.state.countdownShow ?
-                                        <div className="countdown-text">{ this.state.countdown }倒计时</div> : <div className="text" onClick={ this.handlerCountdown}>获取验证码</div>
+                                        <div className="countdown-text">{this.state.countdown}倒计时</div> : <div className="text" onClick={this.handlerCountdown}>获取验证码</div>
                                 }
                             </div>
                         </div>
                     </div>
 
-                    <div className={this.state.bothFilled ? "apply-btn" : "apply-btn-forbid"} onClick={ this.applyBtn}>申请千万贷款</div>
+                    <div className={this.state.bothFilled ? "apply-btn" : "apply-btn-forbid"} onClick={this.applyBtn}>申请千万贷款</div>
                 </div>
             </div>
         )
