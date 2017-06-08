@@ -2,13 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/header.css'
+import NativeBridge from '../helpers/native-bridge.js'
 
 /*
  parameters
  <Header title={} history={history prop from router} />
  */
 
-const Header = CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})((props) => (
+const Header = CSSModules(styles, {
+    "allowMultiple": true,
+    "errorWhenNotFound": false
+})((props) => (
     <div styleName="header">
         <a styleName="btn-back" onClick={() => window.history.goBack}>
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAvCAMAAADKIyriAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAXVBMVEUAAABTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5UAAADt3LwOAAAAHXRSTlMAHofKYTZiyzQ3KpMz9K2WEURUElNSBW7MZUOs8IRJRR4AAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAAXElEQVQ4y+3JyQ5AUBAEwPbs+76b//9NwtH0iYSIuhagsYztqAFXNh4d8emIoSMWneCFE/6DiA7iY5LzIKWDbK+8UKoUftVDV994zQeuvXgdvx70BtAb1cI0LwYrVNwl2vWPSWoAAAAASUVORK5CYII=" />
