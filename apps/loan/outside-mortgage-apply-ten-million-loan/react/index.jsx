@@ -71,6 +71,11 @@ class ApplyTenMillionLoan extends React.Component {
             }, e => {
                 $FW.Component.Toast(e.message);
                 this.stopCountingDown()
+                if (e.code == 201003) {
+                    this.timerTimeout = setTimeout(() => {
+                        window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
+                    }, 2000)
+                }
             });
         }
 
@@ -92,11 +97,11 @@ class ApplyTenMillionLoan extends React.Component {
                 window.location.href = `/static/loan/outside-mortgage-ten-million-loan-info/index.html?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phoneVal}`
             }, e => {
                 $FW.Component.Toast(e.message);
-                if (e.code == 201003) {
-                    this.timerTimeout = setTimeout(() => {
-                        window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
-                    }, 2000)
-                }
+                // if (e.code == 201003) {
+                //     this.timerTimeout = setTimeout(() => {
+                //         window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
+                //     }, 2000)
+                // }
             });
         }
     }
