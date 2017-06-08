@@ -123,7 +123,7 @@ class TenMillionLoanInfo extends React.Component {
                 <div className="list-area-wrap">
                     <div className="list-area">
                         <div className="title">
-                            抵押金融及年限
+                            抵押金额及期限
                         </div>
 
                         <div className="list">
