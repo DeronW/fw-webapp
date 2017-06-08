@@ -13,7 +13,7 @@ class CarInfo extends React.Component {
     model = {
         cityCode: {
             name: '投保地区',
-            placeholder: '请选择',
+            placeholder: '请选择地区',
             options: [
                 {
                     name: '北京',
@@ -58,17 +58,17 @@ class CarInfo extends React.Component {
                 },
                 {
                     fieldName: 'licenseNo',
-                    placeholder: '请输入'
+                    placeholder: '请输入车牌号码'
                 }
             ]
         },
         carOwnersName: {
             name: '车主姓名',
-            placeholder: '请输入'
+            placeholder: '请输入车主姓名'
         },
         idCard: {
             name: '身份证号',
-            placeholder: '请输入'
+            placeholder: '请输入身份证号'
         },
         intentionCompanyCode: {
             name: '投保公司',
@@ -122,7 +122,7 @@ class CarInfo extends React.Component {
                             value={currentOrder.car[subFields[0].fieldName]}
                             options={subFields[0].options}
                             handleChange={currentOrder.setData('car', subFields[0].fieldName)} />
-                        <input style={{ width: "150px", float: "right", color: currentOrder.car[subFields[1].fieldName] ? "#666" : "#999" }} styleName="input-area"
+                        <input styleName="input-area" style={{ width: "240px", height: "45px", lineHeight: "45px", margin: "22px 0 22px 36px", borderLeft: "1px solid #e3e5ea", float: "right", color: currentOrder.car[subFields[1].fieldName] ? "#666" : "#999" }}
                             placeholder={subFields[1].placeholder}
                             value={currentOrder.car[subFields[1].fieldName]}
                             onChange={currentOrder.setData('car', subFields[1].fieldName)} />
