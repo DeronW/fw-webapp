@@ -1,6 +1,7 @@
 /* height of select-widget: 88px */
 
 .select-widget {
+  float: left;
   position: relative;
   height: 88px;
 }
