@@ -6,19 +6,32 @@
   height: 88px;
 }
 
-.expand-btn {
+.select-mask {
+  height: 88px;
+  line-height: 88px;
+  padding-right: 39px;
+  background: url('../images/select/expand.png') #fff no-repeat right;
+  font-size: 28px;
+  text-align: right;
+}
+
+/*.expand-btn {
   position: absolute;
   top: 0;
   right: 0;
   width: 32px;
   height: 88px;
   background: url('../images/select/expand.png') #fff no-repeat center;
-}
+}*/
 
 .native-select {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 88px;
   padding-right: 24px;
-  color: #666;
+  background-color: transparent;
+  color: transparent;
   border: none;
   outline: none;
   text-align: right;
