@@ -3,7 +3,7 @@ import { NativeBridgeFactory } from 'fw-javascripts'
 const NativeBridge = new NativeBridgeFactory('FinancialWorkshop')
 
 NativeBridge.close = function () {
-    this.action('close')
+    this.trigger('close')
 }.bind(NativeBridge)
 
 NativeBridge.setTitle = function (title) {
