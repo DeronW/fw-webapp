@@ -46,7 +46,6 @@ class ListBag extends React.Component {
 
     getHandler = (item) => {
         item.isGet = "1";
-        this.props.refreshHandler() //用户点击后重新请求，改变数据
         $FW.Ajax({
             url: API_PATH + '/mpwap/api/v2/grabCoupon.shtml',
             method: 'post',
@@ -57,6 +56,7 @@ class ListBag extends React.Component {
             success: data => {
                 console.log(data);
                 $FW.Component.Alert(data.remainNumber)
+                this.props.refreshHandler() //用户点击后重新请求，改变数据
             },
         });
     }
