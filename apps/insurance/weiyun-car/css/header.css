@@ -2,6 +2,10 @@
 height: 88px;
 btn-width: 78px;
 */
+.header-placeholder {
+  height: 88px;
+  display: block;
+}
 
 .header {
     position: fixed;
