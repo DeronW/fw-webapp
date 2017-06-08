@@ -7,7 +7,8 @@ class TenMillionLoanInfo extends React.Component {
             county: '',
             district: '',
             houseSize: '',
-            allFilled: false
+            allFilled: false,
+            popShow:false
         }
     }
 
@@ -87,6 +88,18 @@ class TenMillionLoanInfo extends React.Component {
         }
     }
 
+    clickHandler = () => {
+        this.setState({popShow:true});
+    }
+
+    leaveHandler = () => {
+        window.history.go(-1);
+    }
+
+    continueHandler = () => {
+        this.setState({popShow:false});
+    }
+
     render() {
         const SUM = ['请选择', '100万-200万', '200万-300万', '300万-400万', '400万-500万', '500万-1000万']
         const YEARS = ['请选择', '半年以下', '半年-1年', '1年-10年', '10年-25年', '25年以上']
@@ -94,6 +107,10 @@ class TenMillionLoanInfo extends React.Component {
 
         return (
             <div className="">
+                <div className="header">
+                    <div className="back-arrow" onClick={this.clickHandler}></div>
+                    <div className="page-name">放心花</div>
+                </div>
                 <div className="banner">
                     <div className="title">北京地区</div>
                     <div className="text">房产抵押贷款</div>
@@ -131,7 +148,6 @@ class TenMillionLoanInfo extends React.Component {
                     </div>
 
                 </div>
-
                 <div className="list-area">
                     <div className="title">
                         抵押物信息
@@ -173,13 +189,20 @@ class TenMillionLoanInfo extends React.Component {
                     </div>
 
                 </div>
-
                 <div className="btn-area">
                     <div className={this.state.allFilled ? "push-btn" : "push-btn-forbid"} onClick={this.handlerInfo}>
                         提交资料
                     </div>
                 </div>
-
+                {this.state.popShow && <div className="mask">
+                    <div className="pop">
+                        <div className="pop-content">马上就要申请成功了，真的要退出吗？</div>
+                        <div className="pop-btnlist">
+                            <span className="pop-cancel" onClick={this.leaveHandler}>离开</span>
+                            <span className="pop-confirm" onClick={this.continueHandler}>继续申请</span>
+                        </div>
+                    </div>
+                </div>}
             </div>
 
         )
@@ -189,6 +212,5 @@ class TenMillionLoanInfo extends React.Component {
 
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"放心花"} />, HEADER_NODE);
     ReactDOM.render(<TenMillionLoanInfo />, CONTENT_NODE)
 });
