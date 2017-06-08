@@ -4,6 +4,11 @@
     window._vds = _vds;
     (function () {
         _vds.push(['setAccountId', '{{ key }}']);
+        _vds.push(['enableHT', true]);
+        _vds.push(['trackBot', false]);
+        _vds.push(["setCS1", '{{ cs1_key }}', {{ cs1_value }} ]);
+        _vds.push(["setCS2", '{{ cs2_key }}', {{ cs2_value }} ]);
+
         (function () {
             var vds = document.createElement('script');
             vds.type = 'text/javascript';
