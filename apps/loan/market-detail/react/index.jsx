@@ -22,7 +22,7 @@ class BorrowMoney extends React.Component {
     }
     componentDidMount() {
         let pid = $FW.Format.urlQuery().productId;
-        $FXH.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}&sourceType=${SOURCE_TYPE}`)
+        $FW.Post(`${API_PATH}/api/product/v1/productDetail.json?productId=${pid}&sourceType=${SOURCE_TYPE}`)
             .then(data => {
                 window.DATA = data
                 this.setState({ product: data })
@@ -114,7 +114,7 @@ class BorrowMoney extends React.Component {
 
 $FW.DOMReady(() => {
     let productName = $FW.Format.urlQuery().productName;
-    NativeBridge.setTitle(productName);
+    NativeBridge.setTitle(decodeURIComponent(productName));
     if(!$FW.Browser.inFXHApp()){
         ReactDOM.render(<Header enable='force' title={productName} />, HEADER_NODE);
     }

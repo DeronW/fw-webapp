@@ -9,10 +9,10 @@ class Download extends React.Component {
                     <div className="btn-area">
                         <div className="btn android-btn">
                             <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.ucf.jrgc.cfinance">
-                                <img src="images/android-icon.png" />    
+                                <img src="images/android-icon.png" />
                                 iOS版下载
                             </a>
-                            
+
                         </div>
                         <div className="btn apple-btn">
                             <a href="https://itunes.apple.com/cn/app/%E6%94%BE%E5%BF%83%E8%8A%B1-%E6%8E%8C%E4%B8%8A%E5%B0%8F%E9%A2%9D%E7%8E%B0%E9%87%91%E5%80%9F%E6%AC%BE/id1208062782?mt=8">
@@ -28,5 +28,6 @@ class Download extends React.Component {
 }
 
 $FW.DOMReady(function () {
+    ReactDOM.render(<Header title={"放心花"} show_back={true} />, HEADER_NODE);
     ReactDOM.render(<Download />, CONTENT_NODE)
 });

@@ -73,14 +73,20 @@ class GiftPopPanel extends React.Component {
                     return "工豆"
                 }
             }
+            let day_show = ">="+item.limitTerm+"天"
+            let day = item.limitTerm =="0"?"任意期限可用":day_show
             let gift_des = <div className="detail_content">
                 <div>消费金额满￥{item.limitAmount}可用</div>
-                <div>投资期限{item.limitTerm}</div>
+                <div>投资期限：{day}</div>
                 <div>有效期{item.validPeriod}</div>
             </div>
             return <div key={index}>
-                <div className="detail_title">{index + 1}、{typejump(item.type)}<span
-                    className="amount_red">￥{item.amount}</span>
+                <div className="detail_title">{index + 1}、{typejump(item.type)}
+                <span className="amount_red">
+                    {item.type=="1"&&"￥"}
+                    {item.type=="2"&&"+"}
+                    {item.amount}
+                    </span>
                 </div>
                 {item.type == "4" ? <div>请以【我的工豆】页面，相应流水为准</div> : gift_des}
             </div>
@@ -140,7 +146,7 @@ class GiftBag extends React.Component {
     }
 
     jump() {
-        location.href = "/static/wap/faq/index.html"//跳转到投资的列表页
+        NativeBridge.toNative('app_coupon')
     }
 
     render() {
@@ -223,13 +229,14 @@ class GiftBag extends React.Component {
         }
 
         let status_finished = () => {
-            return <div className="gift_item_right" onClick={() => {item.isGet=="1"?this.jump():null}}>
-                <img src="images/icon-get.png"/>
+            return <div className={item.isGet=="0"?"gift_no_get":"gift_item_right"} onClick={() => {item.isGet=="1"?this.jump():null}}>
+                <img src="images/icon-get-gray.png"/>
                 {item.isGet == "1" && <a className="get_state_red">去投资</a>}
             </div>
         }
 
-        return <div className="gift_item">
+        let gift_none = (receiveStatus == "03" || receiveStatus == "04")?"gift_item gift_none":"gift_item"
+        return <div className={gift_none}>
             {gift_left_section(item)}
             {receiveStatus == "00" && status_not_start()}
             {receiveStatus == "01" && status_counting_down()}

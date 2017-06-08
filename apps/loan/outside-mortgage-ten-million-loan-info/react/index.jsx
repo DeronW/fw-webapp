@@ -6,41 +6,57 @@ class TenMillionLoanInfo extends React.Component {
             years: '',
             county: '',
             district: '',
-            houseSize: ''
+            houseSize: '',
+            allFilled:false
         }
     }
 
-    handlerSum (e) {
+    componentDidUpdate(){
+        if(this.state.sum != '请选择' && this.state.years != '请选择' && this.state.county != '请选择' && this.state.district != '' && this.state.houseSize != ''){
+            if(this.state.allFilled != true)
+            this.setState({allFilled:true});
+        }
+    }
+
+    backClickHandler = () => {
+
+    }
+
+    handlerSum = (e) => {
         this.setState({
             sum: e.target.value
         })
     }
 
-    handlerYears(e) {
+    handlerYears = (e) => {
         this.setState({
             years: e.target.value
         })
     }
 
-    handlerCounty(e) {
+    handlerCounty = (e) => {
         this.setState({
             county: e.target.value
         })
     }
 
-    changeDistrict (e) {
-        this.setState({
-            district: e.target.value
-        })
+    changeDistrict = (e) => {
+        if(e.target.value.length <= 20){
+            this.setState({
+                district: e.target.value
+            })
+        }
     }
 
-    changeHouseSize (e) {
-        this.setState({
-            houseSize: e.target.value
-        })
+    changeHouseSize = (e) => {
+        if(e.target.value.length <=4 ){
+            this.setState({
+                houseSize: e.target.value
+            })
+        }
     }
 
-    handlerInfo () {
+    handlerInfo = () => {
         if(this.state.sum == '' || this.state.sum == '请选择') {
             $FW.Component.Toast("抵押金额不能为空");
         } else if(this.state.years == '' || this.state.years == '请选择') {
@@ -51,7 +67,9 @@ class TenMillionLoanInfo extends React.Component {
             $FW.Component.Toast("小区名称不能为空");
         } else if(this.state.houseSize == '') {
             $FW.Component.Toast("建筑面积不能为空");
-        } else {
+        } else if(this.state.houseSize == 0){
+            $FW.Component.Toast("建筑面积必须大于0");
+        }else {
             $FW.Post(`${API_PATH}/api/public/v1/mortgage.json`, {
                     mortgAmountRange: this.state.sum,
                     mortgTimeLong: this.state.years,
@@ -68,7 +86,7 @@ class TenMillionLoanInfo extends React.Component {
                 }).then(data => {
                     location.href = '/static/loan/outside-mortgage-id-download/index.html';
                 }, e => {
-
+                    $FW.Component.Toast(e.message);
                 });
         }
     }
@@ -93,7 +111,7 @@ class TenMillionLoanInfo extends React.Component {
                         <div className="li">
                             <div className="name-text">抵押金额</div>
                             <div className="input">
-                                <select className="select" value={ this.state.sum } onChange={ this.handlerSum.bind(this) }>
+                                <select className="select" value={ this.state.sum } onChange={ this.handlerSum}>
                                     {
                                         SUM.map((data, index) => {
                                             return <option className="option" key={ index } value={ data }>{ data }</option>
@@ -105,7 +123,7 @@ class TenMillionLoanInfo extends React.Component {
                         <div className="li">
                             <div className="name-text">抵押年限</div>
                             <div className="input">
-                                <select className="select" value={ this.state.years } onChange={ this.handlerYears.bind(this) }>
+                                <select className="select" value={ this.state.years } onChange={ this.handlerYears}>
                                     {
                                         YEARS.map((data, index) => {
                                             return <option key={ index } value={ data }>{ data }</option>
@@ -127,7 +145,7 @@ class TenMillionLoanInfo extends React.Component {
                         <div className="li">
                             <div className="name-text">所在区县</div>
                             <div className="input">
-                                <select className="select" value={ this.state.county } onChange={ this.handlerCounty.bind(this) }>
+                                <select className="select" value={ this.state.county } onChange={ this.handlerCounty}>
                                     {
                                         COUNTY.map((data, index) => {
                                             return <option key={ index } value={ data }>{ data }</option>
@@ -142,17 +160,17 @@ class TenMillionLoanInfo extends React.Component {
                                 <input className="text" type="text"
                                     placeholder="请输入"
                                     value={ this.state.district }
-                                    onChange ={ this.changeDistrict.bind(this) }
+                                    onChange ={ this.changeDistrict}
                                 />
                             </div>
                         </div>
                         <div className="li">
                             <div className="name-text">建筑面积(㎡)</div>
                             <div className="input">
-                                <input className="text" type="text"
+                                <input className="text" type="number"
                                     placeholder="请输入"
                                     value={ this.state.houseSize }
-                                    onChange= { this.changeHouseSize.bind(this) }
+                                    onChange= {this.changeHouseSize}
                                 />
                             </div>
                         </div>
@@ -161,7 +179,7 @@ class TenMillionLoanInfo extends React.Component {
                 </div>
 
                 <div className="btn-area">
-                    <div className="push-btn" onClick={ this.handlerInfo.bind(this) }>
+                    <div className={this.state.allFilled ? "push-btn" : "push-btn-forbid"} onClick={this.handlerInfo}>
                         提交资料
                     </div>
                 </div>
@@ -171,7 +189,10 @@ class TenMillionLoanInfo extends React.Component {
         )
     }
 }
+
+
+
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"申请千万贷款"} show_back={true} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"放心花"} show_back={true} backClickHandler={back_handler()}/>, HEADER_NODE);
     ReactDOM.render(<TenMillionLoanInfo />, CONTENT_NODE)
 });

@@ -11,7 +11,9 @@ import Nav from '../components/header'
 
 // @inject('') @observer @CSSModules(styles)
 class MainPanel extends React.Component {
-
+    render(){
+        return <div></div>
+    }
 }
 
 export default MainPanel

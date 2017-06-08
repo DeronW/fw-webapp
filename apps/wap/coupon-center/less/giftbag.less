@@ -4,12 +4,13 @@
   display: table;
   margin: 0px auto;
   .gift_box_title {
-    font-size: 32px;
+    font-size: 31px;
     color: @colorBlue;
     margin: 20px 0px;
+    margin-top: 30px;
     .icon_gift {
       vertical-align: middle;
-      padding-right: 20px;
+      padding-right: 15px;
     }
     .gift_title {
       vertical-align: middle;
@@ -20,6 +21,7 @@
     margin: 20px auto;
     height: 175px;
     background: url("../images/coupon-orangebg.png") no-repeat center;
+    display: table;
     .gift_item_left {
       width: 75%;
       height: 175px;
@@ -40,7 +42,7 @@
         .gift_type {
           font-size: 22px;
           color: @colorWhite;
-          margin-top: 10px;
+          margin-top: 20px;
         }
       }
       .gift_one_des {
@@ -63,7 +65,7 @@
       height: 100%;
       text-align: center;
       position: relative;
-      margin-top: 10px;
+      margin-top: 11px;
       .content_state_red {
         display: block;
         font-size: 24px;
@@ -75,6 +77,7 @@
         text-align: center;
         margin: 0px 0 0 22px;
         border-radius: 4px;
+        margin-top: 13px;
       }
       .gift_right_title {
         font-size: 22px;
@@ -86,19 +89,23 @@
         margin-top: 5px;
       }
       .gift_right_title_surplus {
-        font-size: 22px;
+        font-size: 20px;
         margin-top: 40px;
         position: absolute;
-        top: -14px;
-        right: 60px;
+        top: -15px;
+        /* right: 60px; */
+        left: 50%;
+        margin-left: -20px;
       }
       .gift_right_starttime_percent {
         font-size: 26px;
-        color: @colorRed;
+        color: #333;
         margin-top: 5px;
         position: absolute;
-        bottom: 93px;
-        right: 55px;
+        bottom: 68px;
+        /* right: 54px; */
+        left: 50%;
+        margin-left: -20px;
       }
       .get_state_red {
         display: block;
@@ -124,8 +131,18 @@
         border-radius: 4px;
       }
     }
+    .gift_no_get{
+      float: left;
+      width: 25%;
+      height: 100%;
+      text-align: center;
+      position: relative;
+      margin-top: 42px;
+    }
   }
-
+  .gift_none{
+    background: url("../images/none_nogetbg.png") no-repeat center;
+  }
   //礼包弹窗
   .gift-pop {
     width: 100%;
@@ -145,7 +162,6 @@
       margin-top: -395px;
       background-color: @colorWhite;
       border-radius: 10px;
-      overflow: auto;
       .close-btn {
         width: 530px;
         height: 68px;
@@ -160,6 +176,7 @@
         text-align: center;
         line-height: 68px;
         cursor: pointer;
+        z-index: 10;
       }
       .pop_title {
         height: 80px;
@@ -175,7 +192,9 @@
         padding-left: 34px;
         color: @color5;
         margin-top: 30px;
-        line-height: 60px;
+        line-height: 62px;
+        height: 592px;
+        overflow: auto;
         .amount_red {
           color: @colorRed;
         }

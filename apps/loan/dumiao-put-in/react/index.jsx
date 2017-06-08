@@ -1,3 +1,13 @@
+function getCookie() {
+    var c = document.cookie;
+    var r = {};
+    if (c === '') return r
+    c.split(';').forEach(function(kv) {
+        var t = kv.trim().split('=');
+        r[t[0]] = t[1];
+    });
+    return r;
+}
 
 class MainPanel extends React.Component {
     constructor() {
@@ -40,7 +50,7 @@ class MainPanel extends React.Component {
                 this.state.form_data, false).then(data => {
                     // redirect to du-miao
                     let u = $FW.Store.getUserDict();
-                    let params = `loanUuid=${data.uuid}&uid=${u.uid}&userId=${u.id}&sourceType=${SOURCE_TYPE}&token=${u.token}&userGid=${u.gid}`;
+                    let params = `loanUuid=${data.uuid}&uid=${$FW.Browser.inFXHApp() ? getCookie().uid : u.uid}&sourceType=${SOURCE_TYPE}&token=${$FW.Browser.inFXHApp() ? getCookie().token :u.token}`;
                     location.href = `/api/order/v1/jump.shtml?${params}`
                 }, e => {
                     if (e.code == 20016) $FW.Component.Toast(e.message)

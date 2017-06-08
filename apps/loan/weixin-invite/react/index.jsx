@@ -11,13 +11,13 @@ $FW.DOMReady(function () {
         $(".tab-content-item").eq(index).show().siblings().hide();
     });
 
-    $(".invitation-code").click(function () {
-        $(".mask").show();
-    });
+    // $(".invitation-code").click(function () {
+    //     $(".mask").show();
+    // });
 
-    $(".mask").click(function () {
-        $(this).hide();
-    });
+    // $(".mask").click(function () {
+    //     $(this).hide();
+    // });
 
     $FW.Post(`${API_PATH}/api/shareTemplate/v1/getContent.json`, {
         channelCode: "OFFICIAL",
@@ -26,9 +26,9 @@ $FW.DOMReady(function () {
         token:USER.token,
         sourceType: SOURCE_TYPE
     }).then((data) => {
-        // var shareLink = data.shareTemplate.templateUrl;
-        // $(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
-        // $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'to_home' : 'app'}`);
+        var shareLink = data.shareTemplate.templateUrl;
+        //$(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
+        $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'to_home' : 'app'}`);
     }, (err) => {
         location.href = '/static/loan/user-entry/index.html?next_url=' + location.pathname + location.search;
     });
