@@ -3,7 +3,6 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 
 import Header from '../components/header'
-import Select from '../components/select'
 
 import styles from '../css/car.css'
 
