@@ -97,7 +97,7 @@ class TenMillionLoanInfo extends React.Component {
     }
 
     leaveHandler = () => {
-        window.history.go(-1);
+        window.location.href = '/static/loan/outside-mortgage-apply-ten-million-loan/index.html';
     }
 
     continueHandler = () => {
