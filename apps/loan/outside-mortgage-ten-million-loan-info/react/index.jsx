@@ -7,15 +7,16 @@ class TenMillionLoanInfo extends React.Component {
             county: '',
             district: '',
             houseSize: '',
-            allFilled: false,
+            allFilled:false,
             popShow:false
         }
     }
 
     componentDidUpdate() {
         if (this.state.sum != '请选择' && this.state.num != '' && this.state.years != '请选择' && this.state.years != '' && this.state.county != '请选择' && this.state.county != '' && this.state.district != '' && this.state.houseSize != '') {
-            if (this.state.allFilled != true)
+            if (this.state.allFilled != true){
                 this.setState({ allFilled: true });
+            }
         }else {
             if (this.state.allFilled != false) {
                 this.setState({ allFilled: false })
@@ -52,7 +53,7 @@ class TenMillionLoanInfo extends React.Component {
     changeHouseSize = (e) => {
         if (e.target.value.length <= 4) {
             this.setState({
-                houseSize: parseInt(e.target.value)
+                houseSize: e.target.value
             })
         }
     }
@@ -68,9 +69,9 @@ class TenMillionLoanInfo extends React.Component {
             $FW.Component.Toast("小区名称不能为空");
         } else if (this.state.houseSize == '') {
             $FW.Component.Toast("建筑面积不能为空");
-        } else if (this.state.houseSize == 0) {
+        } else if (this.state.houseSize == 0){
             $FW.Component.Toast("建筑面积必须大于0");
-        } else {
+        }else {
             $FW.Post(`${API_PATH}/api/public/v1/mortgage.json`, {
                 mortgAmountRange: this.state.sum,
                 mortgTimeLong: this.state.years,
