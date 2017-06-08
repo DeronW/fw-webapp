@@ -6,6 +6,14 @@ export default class CurrentOrder {
         extendObservable(this, {
             type: '', // '1' for car
             id: '',
+            car: {
+                cityCode: null,
+                carNoArea: '',
+                licenseNo: '',
+                carOwnersName: '',
+                idCard: '',
+                intentionCompanyCode: null,
+            },
             detail: null,
             customer: null,
             quotation: null,
@@ -13,4 +21,9 @@ export default class CurrentOrder {
             state: '',
         })
     }
+
+    setData = (field, k) => e => {
+        this[field][k] = e.target.value;
+    }
+
 }

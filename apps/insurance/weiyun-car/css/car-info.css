@@ -1,0 +1,29 @@
+.cnt-container {
+  margin-top: 88px;
+}
+
+.float-right-els {
+  float: right;
+}
+
+.input-field {
+  height: 88px;
+  line-height: 88px;
+  padding-right: 24px;
+  background-color: #fff;
+}
+
+.input-field-name {
+  float: left;
+  color: #333;
+  font-size: 30px;
+}
+
+.input-area {
+  height: 88px;
+  line-height: 88px;
+  border: none;
+  outline: none;
+  font-size: 28px;
+  text-align: right;
+}
