@@ -208,7 +208,7 @@ class GiftBag extends React.Component {
             return <div className="gift_item_right">
                 <div className="gift_right_title"> 倒计时</div>
                 <div className="gift_right_starttime">
-                    {`${m}'${s}''`}
+                    {`${m}:${s}`}
                 </div>
                 <div className="get_state_gray"> 领取</div>
             </div>
