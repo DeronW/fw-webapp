@@ -49,7 +49,8 @@
 {% if ENV == 'production' %}
 {% include 'partial/growing-io.swig.html' with {
     key: '8560a41923a914be',
-    vds_CS1: "_vds.push(['setCS1', 'user_id', $FW.Store.getUserID()]);"
+    cs1_key: 'user_id',
+    cs1_value: '$FW.Store.getUserID()'
 } %}
 {% endif %}
 </body>
