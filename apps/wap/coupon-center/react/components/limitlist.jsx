@@ -58,6 +58,9 @@ class ListBag extends React.Component {
                 $FW.Component.Alert(data.remainNumber)
                 this.props.refreshHandler() //用户点击后重新请求，改变数据
             },
+            fail:()=>{
+                this.props.refreshHandler() //用户点击后重新请求，改变数据
+            }
         });
     }
 
