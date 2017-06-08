@@ -52,9 +52,14 @@ class TenMillionLoanInfo extends React.Component {
 
     changeHouseSize = (e) => {
         if (e.target.value.length <= 4) {
-            this.setState({
-                houseSize: e.target.value
-            })
+            if(parseInt(e.target.value) == 0){
+                $FW.Component.Toast("建筑面积必须大于0");
+            }else{
+                this.setState({
+                    houseSize: e.target.value
+                })
+            }
+
         }
     }
 
