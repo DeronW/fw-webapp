@@ -19,7 +19,7 @@ class CouponCenter extends React.Component {
             url: `${API_PATH}/mpwap/api/v2/getCouponList.shtml`,
             method: 'post',
         }).then(data => {
-            this.setState({
+            data&&this.setState({
                 giftList: data.packageList,
                 limitList: data.couponAvailableList,
                 endList: data.couponEndList
