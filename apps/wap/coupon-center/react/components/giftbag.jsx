@@ -165,7 +165,7 @@ class GiftBag extends React.Component {
             }
             let detail_func = (item, index) => {
                 return <span key={index}>
-                    {item}
+                    {item};
                 </span>
             }
             return <div className="gift_item_left" onClick={() =>
