@@ -182,7 +182,7 @@ class GiftBag extends React.Component {
                     {item.backCashCount == "0" ? null :
                         <div className="cash_line">返现券:共￥{item.backCashTotal}({item.backCashCount})张</div>}
                     {item.couponDetailList.length == 0 ? null :
-                        <div className="rate_line">返息券:{item.couponDetailList.map(detail_func)}</div>}
+                        <div className="rate_line">返息券:{item.couponDetailList.map(detail_func)}({item.couponDetailList.length})张</div>}
                     {item.beanTotal == "0" ? null :
                         <div className="bean_line">工<span className="space"></span>豆:共￥{item.beanTotal}</div>}
                 </div>
