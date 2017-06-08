@@ -47,7 +47,7 @@ class TenMillionLoanInfo extends React.Component {
     changeHouseSize = (e) => {
         if (e.target.value.length <= 4) {
             this.setState({
-                houseSize: e.target.value
+                houseSize: parseInt(e.target.value)
             })
         }
     }
