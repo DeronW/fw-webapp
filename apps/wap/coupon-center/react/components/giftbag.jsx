@@ -140,7 +140,7 @@ class GiftBag extends React.Component {
             },
             success: data => {
                 console.log(data);
-                $FW.Component.Alert("领取成功")
+                $FW.Component.Alert(data.remainNumber)
             },
         });
         this.props.refreshHandler() //用户点击后重新请求，改变数据

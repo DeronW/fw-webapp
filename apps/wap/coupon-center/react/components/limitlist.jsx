@@ -55,7 +55,8 @@ class ListBag extends React.Component {
                 couponType: item.type
             },
             success: data => {
-                $FW.Component.Alert("领取成功")
+                console.log(data);
+                $FW.Component.Alert(data.remainNumber)
             },
         });
     }
