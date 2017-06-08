@@ -14,7 +14,7 @@ class Select extends React.Component {
         let gen_options = opt => <option styleName="native-option" key={opt.name} value={opt.value}>{opt.name}</option>
         return (
             <div styleName="select-widget">
-                <select styleName="native-select" style={{color: this.props.value === '' ? '#999' : '#666'}} onChange={this.props.handleChange}>
+                <select styleName="native-select" onChange={this.props.handleChange}>
                     <option styleName="native-option" key="placeholder" value="">{this.props.placeholder}</option>
                     { this.props.options.map(gen_options) }
                 </select>

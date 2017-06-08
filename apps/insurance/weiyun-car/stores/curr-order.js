@@ -24,6 +24,7 @@ export default class CurrentOrder {
 
     setData = (field, k) => e => {
         this[field][k] = e.target.value;
+        console.log(this[field][k]);
     }
 
 }
