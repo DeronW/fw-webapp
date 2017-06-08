@@ -28,8 +28,8 @@
       float: left;
       .gift_one_title {
         width: 155px;
-        padding: 40px 40px 40px 34px;
-        height: 90px;
+        padding: 40px 40px 0px 34px;
+        height: 134px;
         float: left;
         .gift_amount {
           font-size: 54px;
@@ -42,7 +42,7 @@
         .gift_type {
           font-size: 22px;
           color: @colorWhite;
-          margin-top: 20px;
+          margin-top: 15px;
         }
       }
       .gift_one_des {
@@ -93,9 +93,7 @@
         margin-top: 40px;
         position: absolute;
         top: -15px;
-        /* right: 60px; */
-        left: 50%;
-        margin-left: -20px;
+        width: 100%;
       }
       .gift_right_starttime_percent {
         font-size: 26px;
@@ -103,9 +101,7 @@
         margin-top: 5px;
         position: absolute;
         bottom: 68px;
-        /* right: 54px; */
-        left: 50%;
-        margin-left: -20px;
+        width: 100%;
       }
       .get_state_red {
         display: block;
@@ -149,7 +145,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.1);
     position: fixed;
-    z-index: 9;
+    z-index: 999;
     top: 0;
     left: 0;
     .pop_content {
@@ -184,12 +180,13 @@
         font-size: 32px;
         color: @color3;
         line-height: 80px;
-        padding-left: 34px;
+        padding-left: 30px;
         background-color: @colorF9;
+        border-radius: 10px 10px 0 0;
       }
       .pop_content_title {
         font-size: 32px;
-        padding-left: 34px;
+        padding-left: 30px;
         color: @color5;
         margin-top: 30px;
         line-height: 62px;
@@ -197,6 +194,9 @@
         overflow: auto;
         .amount_red {
           color: @colorRed;
+        }
+        .detail_content{
+          font-size: 27px;
         }
       }
     }
