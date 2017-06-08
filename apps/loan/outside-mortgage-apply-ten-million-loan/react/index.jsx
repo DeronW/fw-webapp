@@ -28,6 +28,10 @@ class ApplyTenMillionLoan extends React.Component {
             if (this.state.bothFilled != true) {
                 this.setState({ bothFilled: true })
             }
+        } else {
+            if (this.state.bothFilled != false) {
+                this.setState({ bothFilled: false })
+            }
         }
     }
 
