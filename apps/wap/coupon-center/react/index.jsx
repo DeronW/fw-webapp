@@ -19,13 +19,12 @@ class CouponCenter extends React.Component {
             url: `${API_PATH}/mpwap/api/v2/getCouponList.shtml`,
             method: 'post',
         }).then(data => {
-            data&&this.setState({
+            this.setState({
                 giftList: data.packageList,
                 limitList: data.couponAvailableList,
                 endList: data.couponEndList
             })
-            let isEmpty = (!!data)||(data.packageList.length == 0 && data.couponAvailableList.length == 0 && data.couponEndList.length == 0);
-            if (isEmpty) {
+            if ((!!data)||(data.packageList.length == 0 && data.couponAvailableList.length == 0 && data.couponEndList.length == 0)) {
                 this.setState({ isShowEmpty: true })
             }
         })
