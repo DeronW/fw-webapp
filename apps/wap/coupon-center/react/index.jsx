@@ -24,7 +24,7 @@ class CouponCenter extends React.Component {
                 limitList: data.couponAvailableList,
                 endList: data.couponEndList
             })
-            let isEmpty = (data.packageList.length == 0 && data.couponAvailableList.length == 0 && data.couponEndList.length == 0) || (!data);
+            let isEmpty = (data.packageList.length == 0 && data.couponAvailableList.length == 0 && data.couponEndList.length == 0) || (JSON.stringify(data)=="{}");
             if (isEmpty) {
                 this.setState({ isShowEmpty: true })
             }
