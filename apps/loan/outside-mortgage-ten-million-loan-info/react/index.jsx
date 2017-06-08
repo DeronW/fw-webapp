@@ -120,80 +120,83 @@ class TenMillionLoanInfo extends React.Component {
                     <div className="title">北京地区</div>
                     <div className="text">房产抵押贷款</div>
                 </div>
-                <div className="list-area">
-                    <div className="title">
-                        抵押金融及年限
-                    </div>
+                <div className="list-area-wrap">
+                    <div className="list-area">
+                        <div className="title">
+                            抵押金融及年限
+                        </div>
 
-                    <div className="list">
-                        <div className="li">
-                            <div className="name-text">抵押金额</div>
-                            <div className="input">
-                                <select className="select" value={this.state.sum} onChange={this.handlerSum}>
-                                    {
-                                        SUM.map((data, index) => {
-                                            return <option className="option" key={index} value={data}>{data}</option>
-                                        })
-                                    }
-                                </select>
+                        <div className="list">
+                            <div className="li">
+                                <div className="name-text">抵押金额</div>
+                                <div className="input">
+                                    <select className="select" value={this.state.sum} onChange={this.handlerSum}>
+                                        {
+                                            SUM.map((data, index) => {
+                                                return <option className="option" key={index} value={data}>{data}</option>
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="li">
+                                <div className="name-text">抵押年限</div>
+                                <div className="input">
+                                    <select className="select" value={this.state.years} onChange={this.handlerYears}>
+                                        {
+                                            YEARS.map((data, index) => {
+                                                return <option key={index} value={data}>{data}</option>
+                                            })
+                                        }
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div className="li">
-                            <div className="name-text">抵押年限</div>
-                            <div className="input">
-                                <select className="select" value={this.state.years} onChange={this.handlerYears}>
-                                    {
-                                        YEARS.map((data, index) => {
-                                            return <option key={index} value={data}>{data}</option>
-                                        })
-                                    }
-                                </select>
+
+                    </div>
+                    <div className="list-area">
+                        <div className="title">
+                            抵押物信息
+                        </div>
+
+                        <div className="list">
+                            <div className="li">
+                                <div className="name-text">所在区县</div>
+                                <div className="input">
+                                    <select className="select" value={this.state.county} onChange={this.handlerCounty}>
+                                        {
+                                            COUNTY.map((data, index) => {
+                                                return <option key={index} value={data}>{data}</option>
+                                            })
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="li">
+                                <div className="name-text">小区名称</div>
+                                <div className="input">
+                                    <input className="text" type="text"
+                                           placeholder="请输入"
+                                           value={this.state.district}
+                                           onChange={this.changeDistrict}
+                                    />
+                                </div>
+                            </div>
+                            <div className="li">
+                                <div className="name-text">建筑面积(㎡)</div>
+                                <div className="input">
+                                    <input className="text" type="number"
+                                           placeholder="请输入"
+                                           value={this.state.houseSize}
+                                           onChange={this.changeHouseSize}
+                                    />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
-                <div className="list-area">
-                    <div className="title">
-                        抵押物信息
-                    </div>
 
-                    <div className="list">
-                        <div className="li">
-                            <div className="name-text">所在区县</div>
-                            <div className="input">
-                                <select className="select" value={this.state.county} onChange={this.handlerCounty}>
-                                    {
-                                        COUNTY.map((data, index) => {
-                                            return <option key={index} value={data}>{data}</option>
-                                        })
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                        <div className="li">
-                            <div className="name-text">小区名称</div>
-                            <div className="input">
-                                <input className="text" type="text"
-                                    placeholder="请输入"
-                                    value={this.state.district}
-                                    onChange={this.changeDistrict}
-                                />
-                            </div>
-                        </div>
-                        <div className="li">
-                            <div className="name-text">建筑面积(㎡)</div>
-                            <div className="input">
-                                <input className="text" type="number"
-                                    placeholder="请输入"
-                                    value={this.state.houseSize}
-                                    onChange={this.changeHouseSize}
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <div className="btn-area">
                     <div className={this.state.allFilled ? "push-btn" : "push-btn-forbid"} onClick={this.handlerInfo}>
                         提交资料
