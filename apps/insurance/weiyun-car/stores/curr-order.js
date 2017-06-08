@@ -13,6 +13,10 @@ export default class CurrentOrder {
                 carOwnersName: '',
                 idCard: '',
                 intentionCompanyCode: null,
+                moldName: '', // 品牌型号
+                engineNo: '', // 发动机号
+                carVin: '', // 车架号
+                registerDate: '', // 注册日期
             },
             detail: null,
             customer: null,
