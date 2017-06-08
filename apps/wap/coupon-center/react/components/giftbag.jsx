@@ -139,6 +139,7 @@ class GiftBag extends React.Component {
                 couponType: item.type
             },
             success: data => {
+                console.log(data.message)
                 $FW.Component.Alert("领取成功")
             },
         });
