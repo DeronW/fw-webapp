@@ -7,7 +7,7 @@ import Select from '../components/select'
 
 import styles from '../css/car-info.css'
 
-@inject('currentOrder')@observer@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@inject('currentOrder') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class CarInfo extends React.Component {
 
     model = {
