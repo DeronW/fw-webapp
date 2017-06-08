@@ -228,7 +228,7 @@ class GiftBag extends React.Component {
                 }
                 <div className="gift_right_title_surplus"> 剩余</div>
                 <div className="gift_right_starttime_percent">
-                    {parseInt(item.restPercent)==0 ? receiveStatus == "03":item.restPercent}
+                    {parseInt(item.restPercent)==0 ? receiveStatus = "03":item.restPercent}
                 </div>
             </div>
         }
