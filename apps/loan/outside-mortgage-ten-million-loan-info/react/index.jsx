@@ -52,9 +52,14 @@ class TenMillionLoanInfo extends React.Component {
 
     changeHouseSize = (e) => {
         if (e.target.value.length <= 4) {
-            this.setState({
-                houseSize: e.target.value
-            })
+            if(parseInt(e.target.value) == 0){
+                $FW.Component.Toast("建筑面积必须大于0");
+            }else{
+                this.setState({
+                    houseSize: e.target.value
+                })
+            }
+
         }
     }
 
@@ -123,7 +128,7 @@ class TenMillionLoanInfo extends React.Component {
                 <div className="list-area-wrap">
                     <div className="list-area">
                         <div className="title">
-                            抵押金融及年限
+                            抵押金额及期限
                         </div>
 
                         <div className="list">
