@@ -23,8 +23,15 @@ export default class CurrentOrder {
     }
 
     setData = (field, k) => e => {
+        if (this[field][k] === null || typeof this[field][k] === 'number') {
+            return this[field][k] = parseInt(e.target.value);
+        }
         this[field][k] = e.target.value;
-        console.log(this[field][k]);
+    }
+
+    // for test
+    logData = (field) => {
+        console.log(this[field]);
     }
 
 }
