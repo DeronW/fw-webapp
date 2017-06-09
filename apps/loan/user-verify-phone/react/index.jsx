@@ -113,7 +113,7 @@ class VerifyPhone extends React.Component{
         } else if (result == 2) {
             this.setState({show: true});
         } else {
-            not_stop_loading = true
+            not_stop_loading = false
         }
 
         not_stop_loading && $FW.Component.hideAjaxLoading()
