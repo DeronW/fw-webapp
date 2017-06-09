@@ -1,35 +1,34 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  background-color: #ebebee;
-  font-family: 'San Francisco', 'PingFang SC', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    font-family: 'San Francisco', 'PingFang SC', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-a, a:active {
-  -webkit-tap-highlight-color: transparent;
-  text-decoration: none;
-  outline: 0;
+a,
+a:active {
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    outline: 0;
 }
+
 
 /*
 做一些通用的处理, 在iOS的app审核中, 与商品相关的都必须注明 "该商品与Apple Inc. 无关"
 这条记录不应该在 非iOS应用中显示, 为此做特殊样式处理
 */
+
 .only-in-ios-app {
-  display: none;
+    display: none;
 }
 
 .html-in-app.html-in-ios .only-in-ios-app {
-  display: block;
+    display: block;
 }
 
 .hide {
-  display: none !important;
+    display: none !important;
 }
 
 :global .cnt-container {
-  margin-top: 88px; /*height of header*/
+    margin-top: 88px;
+    /*height of header*/
 }
