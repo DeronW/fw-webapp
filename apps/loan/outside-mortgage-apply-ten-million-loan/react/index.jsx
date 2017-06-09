@@ -69,12 +69,13 @@ class ApplyTenMillionLoan extends React.Component {
                     codeType: data.codeType
                 })
             }, e => {
-                $FW.Component.Toast(e.message);
                 this.stopCountingDown()
                 if (e.code == 201003) {
                     this.timerTimeout = setTimeout(() => {
                         window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
                     }, 2000)
+                }else{
+                    $FW.Component.Toast(e.message);
                 }
             });
         }
