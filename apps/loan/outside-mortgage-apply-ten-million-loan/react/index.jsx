@@ -95,6 +95,7 @@ class ApplyTenMillionLoan extends React.Component {
                     mobile: this.state.phoneVal,
                     codeToken: this.state.codeToken,
                     verifyCode: this.state.codeVal,
+                    channelCode:$FW.Format.urlQuery().channelCode || 'OFFICIAL',
                     sourceType: 5
                 }).then(data => {
                     window.location.href = `/static/loan/outside-mortgage-ten-million-loan-info/index.html?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phoneVal}`
