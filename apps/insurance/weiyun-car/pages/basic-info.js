@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 
 import Header from '../components/header'
 
-import styles from '../css/car.css'
+import styles from '../css/basic-info.css'
 
 @inject('basic_info')
 @observer
