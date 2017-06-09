@@ -17,6 +17,7 @@ import OrderPayment from './pages/order-payment'
 import OrderResult from './pages/order-result'
 import Orders from './pages/orders'
 
+
 export default (stores) => {
     return (
         <Router>

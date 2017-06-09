@@ -3,8 +3,6 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 
-import { BrowserFactory } from 'fw-javascripts'
-
 import Header from '../components/header'
 import Select from '../components/select'
 
@@ -25,6 +23,7 @@ class CarInfo extends React.Component {
             'carVin': '车架号',
             'registerDate': '注册日期'
         }
+
         let gen_input_field = (fieldName) =>
             <div key={fieldName} styleName="input-field">
                 <div styleName="input-field-name">{inputFieldName[fieldName]}</div>
@@ -36,20 +35,19 @@ class CarInfo extends React.Component {
                         type={fieldName === "registerDate" ? "date" : "text"} />
                 </div>
             </div>
-        return (
-            <div styleName="fake-body">
-                <Header title="完善车辆信息" history={this.props.history} />
-                <div styleName="cnt-container">
-                    <div styleName="input-field-grp">
-                        {['moldName', 'engineNo', 'carVin', 'registerDate'].map(gen_input_field)}
-                    </div>
-                </div>
-                <div styleName="next-btn-area">
-                    <div styleName={car_info.valid ? "next-btn" : "next-btn btn-disabled"}
-                        onClick={() => { car_info.logData('car') }}>下一步</div>
+
+        return <div styleName="fake-body">
+            <Header title="完善车辆信息" history={this.props.history} />
+            <div styleName="cnt-container">
+                <div styleName="input-field-grp">
+                    {['moldName', 'engineNo', 'carVin', 'registerDate'].map(gen_input_field)}
                 </div>
             </div>
-        )
+            <div styleName="next-btn-area">
+                <div styleName={car_info.valid ? "next-btn" : "next-btn btn-disabled"}
+                    onClick={() => { car_info.logData('car') }}>下一步</div>
+            </div>
+        </div>
     }
 }
 
