@@ -41,13 +41,13 @@ export default class BasicInfo {
         if (field.indexOf('BuJiMian') > -1) {
             this[field] = 1 - this[field];
         } else {
-            this[field] = value;
+            this[field] = formattedValue;
         }
     }
 
-    // @computed get valid() {
-    //     return this.moldName && this.engineNo && this.carVin && this.registerDate
-    // }
+    @computed get valid() {
+
+    }
 
     logData = () => console.log(this)
 }
