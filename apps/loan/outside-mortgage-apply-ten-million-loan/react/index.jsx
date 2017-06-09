@@ -169,7 +169,7 @@ class ApplyTenMillionLoan extends React.Component {
                             <div className="btn">
                                 {
                                     this.state.countdownShow ?
-                                        <div className="countdown-text">{this.state.countdown}倒计时</div> : <div className="text" onClick={this.handlerCountdown}>获取验证码</div>
+                                        <div className="countdown-text">{this.state.countdown}s</div> : <div className="text" onClick={this.handlerCountdown}>获取验证码</div>
                                 }
                             </div>
                         </div>

@@ -72,12 +72,10 @@ class VerifyPhone extends React.Component{
             () => {
                 $FW.Component.showAjaxLoading()
                 return new Promise(resolve => setTimeout(() => {
-                    $FW.Component.hideAjaxLoading()
                     resolve()
                 }, 5000))
             }
         ).then(() => {
-            $FW.Component.showAjaxLoading();
             this.setState({result: null});
             setTimeout(this.checkAjax, 3000);
             setTimeout(this.checkAjax, 6000);
@@ -85,13 +83,13 @@ class VerifyPhone extends React.Component{
             setTimeout(() => this.checkAjax('finalTry'), 12000);
         }, e => $FW.Component.Toast(e.message));
     }
+
     checkAjax(finalTry) {
         if (this.state.result === 'wrong_code') return;
-        $FW.Component.showAjaxLoading();
         $FXH.Post(`${API_PATH}/api/bankcard/v1/status.json`, {
             operatorBankcardGid: BANK_GID
         }).then(data => {
-            $FW.Component.showAjaxLoading();
+            $FW.Component.showAjaxLoading()
             let d = data.bindStatus;
             this.setState({
                 result: d.status,
@@ -100,7 +98,10 @@ class VerifyPhone extends React.Component{
             this.getResult(d.status, d.transCode, finalTry);
         }, e => $FW.Component.Toast(e.message));
     }
+
     getResult(result, transCode, finalTry) {
+        let not_stop_loading  = true;
+
         if (result == 0) {
             if (finalTry) this.setState({show: true});
             if (transCode == 1001) {
@@ -111,8 +112,13 @@ class VerifyPhone extends React.Component{
             $FW.Browser.inJRGCApp()? NativeBridge.close() : window.location.href = '/static/loan/home/index.html';
         } else if (result == 2) {
             this.setState({show: true});
+        } else {
+            not_stop_loading = false
         }
+
+        not_stop_loading && $FW.Component.hideAjaxLoading()
     }
+
     confirmHandler() {
         if (this.state.result == 0) {
             window.history.go(-2);
