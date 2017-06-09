@@ -99,6 +99,7 @@ class GiftPopPanel extends React.Component {
                     {this.state.detail_list.map(pop_content_title_func)}
                 </div>
                 <div className="close-btn" onClick={this.props.closeHandler}>确定</div>
+                <div className="turnoff-btn" onClick={this.props.closeHandler}>&times;</div>
             </div>
         </div>
     }
