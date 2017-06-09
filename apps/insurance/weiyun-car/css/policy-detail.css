@@ -1,0 +1,156 @@
+/* height of select-widget: 88px */
+
+.select-widget {
+  float: right;
+  position: relative;
+  height: 88px;
+}
+
+.select-mask {
+  height: 88px;
+  line-height: 88px;
+  padding-right: 39px;
+  background: url('../images/select/expand.png') #fff no-repeat right;
+  font-size: 28px;
+  text-align: right;
+}
+
+.native-select {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 88px;
+  padding-right: 24px;
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  outline: none;
+  text-align: right;
+  font-size: 28px;
+}
+
+.native-option {
+  color: #333;
+  font-size: 28px;
+}
+
+/*----------------*/
+
+.car-info-container {
+  background-color: #5b6993;
+  padding: 30px;
+}
+
+.car-info {
+  padding: 18px 30px 30px;
+  background-color: #cfd5e6;
+  border-radius: 12px;
+}
+
+.car-info-item {
+  height: 54px;
+  line-height: 54px;
+  color: #5b6993;
+  font-size: 26px;
+}
+
+.car-info-item span {
+  float: right;
+  display: block;
+  width: 447px;
+  height: 54px;
+  line-height: 54px;
+  color: #333;
+  font-size: 28px;
+  border-bottom: 1px dotted #5b6993;
+}
+
+.car-info-item-expire {
+  height: 30px;
+  margin-top: 24px;
+  color: #5b6993;
+  font-size: 22px;
+}
+
+.car-info-item-expire span {
+  color: #333;
+}
+
+.policy-class {
+  height: 69px;
+  line-height: 69px;
+  margin-left: 24px;
+  color: #5b6993;
+  font-size: 28px;
+}
+
+.input-field-grp {
+  margin-bottom: 21px;
+  padding-left: 24px;
+  background-color: #fff;
+  color: #666;
+  font-size: 30px;
+}
+
+.input-field {
+  height: 88px;
+  line-height: 88px;
+  padding-right: 24px;
+  border-bottom: 1px solid #e3e5ea;
+  background-color: #fff;
+}
+
+.input-field:last-child {
+  border: none;
+}
+
+.input-field-name {
+  float: left;
+  color: #666;
+  font-size: 30px;
+}
+
+.left-els {
+  float: left;
+}
+
+.right-els {
+  float: right;
+  width: 420px;
+  text-align: right;
+}
+
+.input-area {
+  height: 88px;
+  line-height: 88px;
+  border: none;
+  outline: none;
+  font-size: 28px;
+  text-align: right;
+}
+
+.bujimian-input {
+  float: left;
+  width: 160px;
+  font-size: 28px;
+  text-align: right;
+}
+
+.next-btn-area {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 45px 5px #f0f0f0;
+}
+
+.next-btn {
+  margin: 22px 30px;
+  height: 78px;
+  color: #fff;
+  font-size: 32px;
+  line-height: 83px;
+  text-align: center;
+  background-color: #fd4d4c;
+  border-radius: 5px;
+}

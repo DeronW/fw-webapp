@@ -10,8 +10,9 @@ import * as Stores from './stores'
 
 
 let stores = {
-    currentOrder: new Stores.CurrOrder(),
-    basic_info: new Stores.BasicInfo(Request)
+    basic_info: new Stores.BasicInfo(Request),
+    basic_info_plus: new Stores.BasicInfoPlus(Request),
+    policy_detail: new Stores.PolicyDetail(Request),
 };
 
 render(AppRouter(stores), document.getElementById('cnt'))

@@ -1,7 +1,7 @@
 /* height of select-widget: 88px */
 
 .select-widget {
-  float: left;
+  float: right;
   position: relative;
   height: 88px;
 }
@@ -14,15 +14,6 @@
   font-size: 28px;
   text-align: right;
 }
-
-/*.expand-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 32px;
-  height: 88px;
-  background: url('../images/select/expand.png') #fff no-repeat center;
-}*/
 
 .native-select {
   position: absolute;
