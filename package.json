@@ -17,7 +17,7 @@
     "eslint-plugin-react": "6.10.3",
     "fw-components": "^0.1.0",
     "fw-javascripts": "^0.1.5",
-    "gulp": "gulpjs/gulp#4.0",
+    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "6.1.2",
     "gulp-changed": "3.0.0",
     "gulp-concat": "2.6.1",
