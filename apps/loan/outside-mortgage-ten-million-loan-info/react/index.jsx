@@ -64,37 +64,39 @@ class TenMillionLoanInfo extends React.Component {
     }
 
     handlerInfo = () => {
-        if (this.state.sum == '' || this.state.sum == '请选择') {
-            $FW.Component.Toast("抵押金额不能为空");
-        } else if (this.state.years == '' || this.state.years == '请选择') {
-            $FW.Component.Toast("抵押年限不能为空");
-        } else if (this.state.county == '' || this.state.county == '请选择') {
-            $FW.Component.Toast("所在区县不能为空");
-        } else if (this.state.district == '') {
-            $FW.Component.Toast("小区名称不能为空");
-        } else if (this.state.houseSize == '') {
-            $FW.Component.Toast("建筑面积不能为空");
-        } else if (this.state.houseSize == 0){
-            $FW.Component.Toast("建筑面积必须大于0");
-        }else {
-            $FW.Post(`${API_PATH}/api/public/v1/mortgage.json`, {
-                mortgAmountRange: this.state.sum,
-                mortgTimeLong: this.state.years,
-                area: this.state.county,
-                housingEstate: this.state.district,
-                houseBuildArea: this.state.houseSize,
-                province: '北京市',
-                city: '北京市',
-                phone: $FW.Format.urlQuery().phone,
-                uid: $FW.Format.urlQuery().uid,
-                token: $FW.Format.urlQuery().token,
-                realName: '',
-                sourceType: 3
-            }).then(data => {
-                location.href = '/static/loan/outside-mortgage-id-download/index.html';
-            }, e => {
-                $FW.Component.Toast(e.message);
-            });
+        if(this.state.allFilled){
+            if (this.state.sum == '' || this.state.sum == '请选择') {
+                $FW.Component.Toast("抵押金额不能为空");
+            } else if (this.state.years == '' || this.state.years == '请选择') {
+                $FW.Component.Toast("抵押年限不能为空");
+            } else if (this.state.county == '' || this.state.county == '请选择') {
+                $FW.Component.Toast("所在区县不能为空");
+            } else if (this.state.district == '') {
+                $FW.Component.Toast("小区名称不能为空");
+            } else if (this.state.houseSize == '') {
+                $FW.Component.Toast("建筑面积不能为空");
+            } else if (this.state.houseSize == 0){
+                $FW.Component.Toast("建筑面积必须大于0");
+            }else {
+                $FW.Post(`${API_PATH}/api/public/v1/mortgage.json`, {
+                    mortgAmountRange: this.state.sum,
+                    mortgTimeLong: this.state.years,
+                    area: this.state.county,
+                    housingEstate: this.state.district,
+                    houseBuildArea: this.state.houseSize,
+                    province: '北京市',
+                    city: '北京市',
+                    phone: $FW.Format.urlQuery().phone,
+                    uid: $FW.Format.urlQuery().uid,
+                    token: $FW.Format.urlQuery().token,
+                    realName: '',
+                    sourceType: 3
+                }).then(data => {
+                    location.href = '/static/loan/outside-mortgage-id-download/index.html';
+                }, e => {
+                    $FW.Component.Toast(e.message);
+                });
+            }
         }
     }
 

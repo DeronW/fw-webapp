@@ -29,18 +29,22 @@ class SVGCircleProgress extends React.Component {
             target_percent: this.props.percent,
             animate: this.props.animate,
             padding: this.props.padding
-        };
+        }
 
         this.setProgress = this.setProgress.bind(this);
         this.animate = this.animate.bind(this);
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({target_percent: nextProps.percent})
+    }
+
     shouldComponentUpdate() {
-        return this.state.current_percent < this.state.target_percent;
+        return this.state.current_percent < this.state.target_percent
     }
 
     componentWillUnmount() {
-        clearInterval(this._animate_timer);
+        clearInterval(this._animate_timer)
     }
 
     setProgress(p) {

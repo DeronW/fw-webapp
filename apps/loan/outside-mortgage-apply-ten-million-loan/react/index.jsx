@@ -83,29 +83,32 @@ class ApplyTenMillionLoan extends React.Component {
     }
 
     applyBtn = () => {
-        if (!isMobilePhone(this.state.phoneVal)) {
-            $FW.Component.Toast("手机号格式不正确");
-        } else if(this.state.codeVal == '') {
-            $FW.Component.Toast("验证码错误，请重新输入");
-        } else if(this.state.codeToken == ''){
-            $FW.Component.Toast("验证码错误，请重新输入");
-        }else {
-            $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
-                mobile: this.state.phoneVal,
-                codeToken: this.state.codeToken,
-                verifyCode: this.state.codeVal,
-                sourceType: 5
-            }).then(data => {
-                window.location.href = `/static/loan/outside-mortgage-ten-million-loan-info/index.html?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phoneVal}`
-            }, e => {
-                $FW.Component.Toast(e.message);
-                // if (e.code == 201003) {
-                //     this.timerTimeout = setTimeout(() => {
-                //         window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
-                //     }, 2000)
-                // }
-            });
+        if(this.state.bothFilled){
+            if (!isMobilePhone(this.state.phoneVal)) {
+                $FW.Component.Toast("手机号格式不正确");
+            } else if(this.state.codeVal == '') {
+                $FW.Component.Toast("验证码错误，请重新输入");
+            } else if(this.state.codeToken == ''){
+                $FW.Component.Toast("验证码错误，请重新输入");
+            }else {
+                $FW.Post(`${API_PATH}/api/userBase/v1/register.json`, {
+                    mobile: this.state.phoneVal,
+                    codeToken: this.state.codeToken,
+                    verifyCode: this.state.codeVal,
+                    sourceType: 5
+                }).then(data => {
+                    window.location.href = `/static/loan/outside-mortgage-ten-million-loan-info/index.html?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phoneVal}`
+                }, e => {
+                    $FW.Component.Toast(e.message);
+                    // if (e.code == 201003) {
+                    //     this.timerTimeout = setTimeout(() => {
+                    //         window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
+                    //     }, 2000)
+                    // }
+                });
+            }
         }
+
     }
 
     startCountingDown() {
