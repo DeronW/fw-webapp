@@ -15,6 +15,8 @@ export default class BasicInfo {
     }
 
     submit = () => {
+        if (!this.valid) return;
+
         return this.request('api/account/login').then(data => {
             if (data.success) {
 
