@@ -8,7 +8,7 @@ import {
 
 import Home from './pages/home'
 import BasicInfo from './pages/basic-info.js'
-import BasicInfoPlus from './pages/basic-info-plus'
+import CarInfo from './pages/car-info'
 import PolicyDetail from './pages/policy-detail'
 import PolicyQuotation from './pages/policy-quotation'
 import PolicyHolderInfo from './pages/policy-holder-info'
@@ -24,7 +24,8 @@ export default (stores) => {
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route exact path='/basic-info' component={BasicInfo} />
-                    <Route exact path='/basic-info-plus' component={BasicInfoPlus} />
+                    <Route exact path='/car-info' component={CarInfo} />
+
                     <Route exact path='/policy-detail' component={PolicyDetail} />
                     <Route exact path='/policy-quotation' component={PolicyQuotation} />
                     <Route exact path='/policy-holder-info' component={PolicyHolderInfo} />

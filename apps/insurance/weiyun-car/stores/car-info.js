@@ -1,6 +1,6 @@
 import { extendObservable, computed } from 'mobx'
 
-export default class BasicInfo {
+export default class CarInfo {
 
     constructor(request, state = {}) {
         this.request = request
