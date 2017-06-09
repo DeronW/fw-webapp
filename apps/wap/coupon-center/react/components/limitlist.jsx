@@ -92,7 +92,7 @@ class ListBag extends React.Component {
                 content = <div className="list_remain" onClick={() => {
                     item.grapLimit == "0" ? this.getHandler(item) : this.jump()
                 }}>
-                    <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}
+                    <SVGCircleProgress percent={100-parseInt(item.restPercent)} weight={4} radius={50}
                         bgColor={'#FC655A'} progressColor={'#eee'} />
                     {item.grapLimit == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>

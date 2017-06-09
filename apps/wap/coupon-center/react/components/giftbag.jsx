@@ -219,7 +219,7 @@ class GiftBag extends React.Component {
             return <div className="gift_item_right gift_item_get" onClick={() => {
                 (item.grapLimit == "0") ? this.getHandler(item) : this.jump()
             }}>
-                <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4}
+                <SVGCircleProgress percent={100-parseInt(item.restPercent)} weight={4}
                     radius={50} bgColor={'#FC655A'} progressColor={'#eee'} />
                 {(item.grapLimit == "0") ?
                     <a className="content_state_red">领取</a> :
