@@ -1,0 +1,27 @@
+.nav-bar {
+    display: table;
+    width: 100%;
+    background: white;
+}
+
+.nav-bar-item {
+    width: 180px;
+    float: left;
+    display: block;
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+    font-size: 24px;
+    box-sizing: border-box;
+}
+
+.nav-bar-item.active {
+    color: red;
+}
+
+.order-item {
+    margin-top: 8px;
+    background: white;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}

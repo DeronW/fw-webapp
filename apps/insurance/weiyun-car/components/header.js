@@ -18,7 +18,9 @@ const Header = CSSModules(styles, {
             <a styleName="btn btn-back" onClick={props.history.goBack}> </a>
             <a onClick={NativeBridge.close} styleName="btn btn-close"> </a>
             {props.title}
-            {props.sub_title && <a onClick="" styleName="sub-title">{props.sub_title}</a>}
+            {props.sub_title &&
+                <Link to={props.sub_link} styleName="sub-title">{props.sub_title}</Link>
+            }
         </div>
     </div>
 ))
