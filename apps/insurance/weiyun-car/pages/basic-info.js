@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
+import { Redirect } from 'react-router-dom'
 
 import Header from '../components/header'
 
@@ -34,7 +35,7 @@ class BasicInfo extends React.Component {
 
         // submit success, redirect next page
         if (basic_info.redirect_url)
-            return <Link url={basic_info.redirect_url} />
+            return <Redirect to={basic_info.redirect_url} />;
 
         return <div>
             <Header title="车险" history={this.props.history} sub_title="我的订单" />
