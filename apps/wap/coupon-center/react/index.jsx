@@ -19,14 +19,14 @@ class CouponCenter extends React.Component {
             url: `${API_PATH}/mpwap/api/v2/getCouponList.shtml`,
             method: 'post',
         }).then(data => {
+            if ((data.packageList.length == 0 && data.couponAvailableList.length == 0 && data.couponEndList.length == 0)) {
+                this.setState({ isShowEmpty: true })
+            }
             this.setState({
                 giftList: data.packageList,
                 limitList: data.couponAvailableList,
                 endList: data.couponEndList
             })
-            if (data.packageList.length == 0 && data.couponAvailableList.length == 0 && data.couponEndList.length == 0) {
-                this.setState({ isShowEmpty: true })
-            }
         })
     }
 
@@ -35,9 +35,9 @@ class CouponCenter extends React.Component {
 
         return <div className="totalBox">
             {isShowEmpty && <EmptyShow />}
-            <GiftBagList giftList={giftList} refreshHandler={this.requestGiftList} />
-            <LimitBagList limitList={limitList} refreshHandler={this.requestGiftList} />
-            <EndList endList={endList} refreshHandler={this.requestGiftList} />
+            {<GiftBagList giftList={giftList} refreshHandler={this.requestGiftList} />}
+            {<LimitBagList limitList={limitList} refreshHandler={this.requestGiftList} />}
+            {<EndList endList={endList} refreshHandler={this.requestGiftList} />}
         </div>
     }
 }

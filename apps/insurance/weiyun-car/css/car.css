@@ -1,0 +1,83 @@
+.banner {
+    width: 100%;
+    display: block;
+}
+
+.hr {
+    height: 18px;
+}
+
+.field {
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 0 24px;
+    height: 88px;
+    line-height: 88px;
+}
+
+.field-title {
+    display: inline-block;
+    color: #333;
+    font-size: 30px;
+}
+
+.field-input-select {
+    float: right;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    text-align: right;
+    font-size: 28px;
+    line-height: 88px;
+    height: 88px;
+}
+
+.field-input-text {
+    float: right;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    text-align: right;
+    font-size: 28px;
+    line-height: 88px;
+    height: 88px;
+    width: 240px;
+}
+
+.field-v-line {
+    display: inline-block;
+    width: 1px;
+    height: 44px;
+    float: right;
+    background: rgb(227, 229, 234);
+    margin: 22px 10px;
+}
+
+.btn-submit-placeholder {
+    height: 120px;
+}
+
+.btn-submit {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 45px 5px #f0f0f0;
+}
+
+.next-btn {
+    margin: 22px 30px;
+    height: 78px;
+    color: #fff;
+    font-size: 32px;
+    line-height: 83px;
+    text-align: center;
+    background-color: #fd4d4c;
+    border-radius: 5px;
+}
+
+.next-btn.btn-disabled {
+  background-color: #e2e2e2;
+}

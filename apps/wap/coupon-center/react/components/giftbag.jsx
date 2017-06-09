@@ -139,11 +139,15 @@ class GiftBag extends React.Component {
                 couponType: item.type
             },
             success: data => {
-                console.log(data)
-                $FW.Component.Alert("领取成功")
+                console.log(data);
+                $FW.Component.Alert(data.remainNumber)
+                this.props.refreshHandler() //用户点击后重新请求，改变数据
             },
+            fail:()=>{
+                this.props.refreshHandler() //用户点击后重新请求，改变数据
+            }
         });
-        this.props.refreshHandler() //用户点击后重新请求，改变数据
+
     }
 
     jump() {
@@ -181,9 +185,9 @@ class GiftBag extends React.Component {
                 </div>
                 <div className="gift_one_des">
                     {item.backCashCount == "0" ? null :
-                        <div className="cash_line">返现券:共￥{item.backCashTotal}({item.backCashCount})张</div>}
+                        <div className="cash_line">返现券:共￥{item.backCashTotal}({item.backCashCount}张)</div>}
                     {item.couponDetailList.length == 0 ? null :
-                        <div className="rate_line">返息券:{item.couponDetailList.map(detail_func)}({item.couponDetailList.length})张</div>}
+                        <div className="rate_line">返息券:{item.couponDetailList.map(detail_func)}</div>}
                     {item.beanTotal == "0" ? null :
                         <div className="bean_line">工<span className="space"></span>豆:共￥{item.beanTotal}</div>}
                 </div>
@@ -207,14 +211,14 @@ class GiftBag extends React.Component {
             return <div className="gift_item_right">
                 <div className="gift_right_title"> 倒计时</div>
                 <div className="gift_right_starttime">
-                    {`${m}'${s}''`}
+                    {`${m}:${s}`}
                 </div>
                 <div className="get_state_gray"> 领取</div>
             </div>
         }
 
         let status_start = () => {
-            return <div className="gift_item_right" onClick={() => {
+            return <div className="gift_item_right gift_item_get" onClick={() => {
                 (item.grapLimit=="0") ? this.getHandler(item) : this.jump()
             }}>
                 <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}/>
@@ -224,7 +228,7 @@ class GiftBag extends React.Component {
                 }
                 <div className="gift_right_title_surplus"> 剩余</div>
                 <div className="gift_right_starttime_percent">
-                    {item.restPercent}
+                    {parseInt(item.restPercent)==0 ? receiveStatus = "03":item.restPercent}
                 </div>
             </div>
         }

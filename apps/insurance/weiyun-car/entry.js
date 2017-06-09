@@ -2,8 +2,6 @@ import { render } from 'react-dom'
 
 import { Request } from 'fw-javascripts'
 
-// import $LOAN from '../../../es7-lib/javascripts/new-loan'
-
 import './css/index.css'
 
 import AppRouter from './router'
@@ -12,7 +10,8 @@ import * as Stores from './stores'
 
 
 let stores = {
-    currentOrder: new Stores.CurrOrder()
+    currentOrder: new Stores.CurrOrder(),
+    basic_info: new Stores.BasicInfo(Request)
 };
 
 render(AppRouter(stores), document.getElementById('cnt'))
