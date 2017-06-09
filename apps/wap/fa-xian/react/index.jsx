@@ -151,10 +151,14 @@ const Content = React.createClass({
                 </div>
 
                 <div className="channel">
-                    <a onClick={() => gotoHandler('https://m.9888.cn/static/wap/coupon-center/index.html', true)}>
-                        <i className="icon-coupon"></i>
-                        领券中心
-                        {coupon_count=="0"?null:<span className="coupon-count">{coupon_count}</span>}
+                    {/*<a onClick={() => gotoHandler('https://m.9888.cn/static/wap/coupon-center/index.html', true)}>*/}
+                        {/*<i className="icon-coupon"></i>*/}
+                        {/*领券中心*/}
+                        {/*{coupon_count=="0"?null:<span className="coupon-count">{coupon_count}</span>}*/}
+                    {/*</a>*/}
+                    <a onClick={() => gotoHandler('https://m.9888.cn/static/mall/game/index.html', true)}>
+                        <i className="icon-game"></i>
+                        游戏中心
                     </a>
                     <a onClick={() => gotoHandler("https://m.dougemall.com", true)}>
                         <i className="icon-bbs"></i>豆哥商城 </a>
