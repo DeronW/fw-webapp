@@ -57,30 +57,29 @@ class ApplyTenMillionLoan extends React.Component {
         } else if (!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
         } else {
-            this.startCountingDown()
-
-            $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
-                mobile: this.state.phoneVal,
-                userOperationType: 3,
-                sourceType: 5
-            }).then(data => {
-                this.setState({
-                    codeToken: data.codeToken,
-                    codeType: data.codeType
-                })
-            }, e => {
-                this.stopCountingDown()
-                if (e.code == 201003) {
+            $FW.Post(`${API_PATH}/api/userBase/v1/userExist.json`,{mobile: this.state.phoneVal}).then(data=>{
+                if(data.code == 20017){
                     this.timerTimeout = setTimeout(() => {
                         window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
                     }, 2000)
-                }else{
-                    $FW.Component.Toast(e.message);
+                }else if(data.code == 20014){
+                    this.startCountingDown()
+                    $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
+                        mobile: this.state.phoneVal,
+                        userOperationType: 3,
+                        sourceType: 5
+                    }).then(data => {
+                        this.setState({
+                            codeToken: data.codeToken,
+                            codeType: data.codeType
+                        })
+                    }, e => {
+                        this.stopCountingDown()
+                        $FW.Component.Toast(e.message);
+                    });
                 }
-            });
+            }, e => $FW.Component.Toast(e.message))
         }
-
-
     }
 
     applyBtn = () => {
@@ -102,11 +101,6 @@ class ApplyTenMillionLoan extends React.Component {
                     window.location.href = `/static/loan/outside-mortgage-ten-million-loan-info/index.html?uid=${data.userLogin.uid}&token=${data.userLogin.userToken}&phone=${this.state.phoneVal}`
                 }, e => {
                     $FW.Component.Toast(e.message);
-                    // if (e.code == 201003) {
-                    //     this.timerTimeout = setTimeout(() => {
-                    //         window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
-                    //     }, 2000)
-                    // }
                 });
             }
         }
