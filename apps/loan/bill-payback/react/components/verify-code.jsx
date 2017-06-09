@@ -58,7 +58,7 @@ class VerifyCode extends React.Component{
             $FW.Component.showAjaxLoading()
             return new Promise(resolve => setTimeout(() => {
                 $FW.Component.hideAjaxLoading()
-                resolve(data)}, 5000))
+                resolve(data)}, 8000))
         }).then(data => {
                 this.props.callbackResultShow(true, false);
                 this.props.callbackGetRepaymentGid(data.repaymentGid);
