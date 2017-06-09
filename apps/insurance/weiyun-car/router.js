@@ -24,7 +24,7 @@ export default (stores) => {
             <Provider {...stores} >
                 <Switch>
                     <Route exact path='/' component={Home} />
-                    <Route exact path='/car' component={BasicInfo} />
+                    <Route exact path='/basic-info' component={BasicInfo} />
                     <Route exact path='/car-info' component={CarInfo} />
                     <Route exact path='/car-info-plus' component={CarInfoPlus} />
                     <Route exact path='/policy-detail' component={PolicyDetail} />
