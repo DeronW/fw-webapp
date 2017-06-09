@@ -52,15 +52,12 @@ class ListBag extends React.Component {
             data: {
                 code: item.code,
                 couponType: item.type
-            },
-            success: data => {
-                console.log(data);
-                $FW.Component.Alert(data.remainNumber)
-                this.props.refreshHandler() //用户点击后重新请求，改变数据
-            },
-            fail: () => {
-                this.props.refreshHandler() //用户点击后重新请求，改变数据
             }
+        }).then(data=>{
+            $FW.Component.Alert(data.remainNumber)
+            this.props.refreshHandler() //用户点击后重新请求，改变数据
+        },()=>{
+            this.props.refreshHandler() //用户点击后重新请求，改变数据
         });
     }
 
@@ -95,7 +92,7 @@ class ListBag extends React.Component {
                 content = <div className="list_remain" onClick={() => {
                     item.grapLimit == "0" ? this.getHandler(item) : this.jump()
                 }}>
-                    <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}
+                    <SVGCircleProgress percent={100-parseInt(item.restPercent)} weight={4} radius={50}
                         bgColor={'#FC655A'} progressColor={'#eee'} />
                     {item.grapLimit == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>

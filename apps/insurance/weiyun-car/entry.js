@@ -11,7 +11,7 @@ import * as Stores from './stores'
 
 let stores = {
     basic_info: new Stores.BasicInfo(Request),
-    basic_info_plus: new Stores.BasicInfoPlus(Request),
+    car_info: new Stores.CarInfo(Request),
     policy_detail: new Stores.PolicyDetail(Request),
 };
 
