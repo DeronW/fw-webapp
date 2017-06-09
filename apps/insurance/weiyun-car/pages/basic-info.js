@@ -32,6 +32,10 @@ class BasicInfo extends React.Component {
     render() {
         let { basic_info } = this.props;
 
+        // submit success, redirect next page
+        if (basic_info.redirect_url)
+            return <Link url={basic_info.redirect_url} />
+
         return <div>
             <Header title="车险" history={this.props.history} sub_title="我的订单" />
             <img styleName="banner" src={require('../images/car-info/banner.png')} />
