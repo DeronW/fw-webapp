@@ -94,7 +94,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <div onClick={this.handleBannerJump}><img src="images/banner.png" /></div>
+                <div onClick={this.handleBannerJump}><img src="images/banner.jpg" /></div>
                 <div className="loan-product-container">
                     <div className="product-title">
                         <img className="product-title-icon" src="images/loan-category-icon.png" />我要借款

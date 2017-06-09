@@ -38,7 +38,8 @@ class BasicInfo extends React.Component {
             return <Redirect to={basic_info.redirect_url} />;
 
         return <div>
-            <Header title="车险" history={this.props.history} sub_title="我的订单" />
+            <Header title="车险" history={this.props.history}
+                sub_title="我的订单" sub_link="/orders" />
             <img styleName="banner" src={require('../images/car-info/banner.png')} />
             <div styleName="hr"></div>
 
@@ -53,6 +54,7 @@ class BasicInfo extends React.Component {
                     <option value="4">成都</option>
                     <option value="5">昆明</option>
                 </select>
+                <div styleName="field-underline"></div>
             </div>
 
             <div styleName="field">
@@ -78,6 +80,7 @@ class BasicInfo extends React.Component {
                 <input styleName="field-input-text" placeholder="请输入车主姓名"
                     value={basic_info.carOwnersName}
                     onChange={this.inputChangeHandler('carOwnersName')} />
+                <div styleName="field-underline"></div>
             </div>
 
             <div styleName="field">
@@ -86,6 +89,7 @@ class BasicInfo extends React.Component {
                     value={basic_info.idCard}
                     onChange={this.idCardInputHandler}
                 />
+                <div styleName="field-underline"></div>
             </div>
 
             <div styleName="field">
@@ -97,6 +101,7 @@ class BasicInfo extends React.Component {
                     <option value="1">太平洋保险</option>
                     <option value="2">人保</option>
                 </select>
+                <div styleName="field-underline"></div>
             </div>
 
             <div styleName="btn-submit-placeholder">

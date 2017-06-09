@@ -4,17 +4,17 @@ class LimitBagList extends React.Component {
     }
 
     render() {
-        let {limitList} = this.props
+        let { limitList } = this.props
 
         if (!limitList || limitList.length == 0) return null;
 
         return <div className="list_box">
             <div className="list_box_title">
-                <img className="icon_limit" src="images/icon-limit.png"/>
+                <img className="icon_limit" src="images/icon-limit.png" />
                 <span className="limit_title">限时抢购</span>
             </div>
             {limitList.map((limit, index) => <ListBag item={limit} key={index}
-                                                      refreshHandler={this.props.refreshHandler}
+                refreshHandler={this.props.refreshHandler}
             />)}
         </div>
     }
@@ -31,14 +31,14 @@ class ListBag extends React.Component {
     componentDidMount() {
         // start counting down
         if (this.props.item.receiveStatus == "01") {
-            this.setState({surplus_seconds: this.props.item.intervalMilli})
+            this.setState({ surplus_seconds: this.props.item.intervalMilli })
             this.timer = setInterval(() => {
                 if (this.state.surplus_seconds < 1) {
                     clearInterval(this.timer)
-                    this.setState({receiveStatus: '02'})
+                    this.setState({ receiveStatus: '02' })
                     this.props.refreshHandler()
                 } else {
-                    this.setState({surplus_seconds: this.state.surplus_seconds - 1})
+                    this.setState({ surplus_seconds: this.state.surplus_seconds - 1 })
                 }
             }, 1000)
         }
@@ -58,7 +58,7 @@ class ListBag extends React.Component {
                 $FW.Component.Alert(data.remainNumber)
                 this.props.refreshHandler() //用户点击后重新请求，改变数据
             },
-            fail:()=>{
+            fail: () => {
                 this.props.refreshHandler() //用户点击后重新请求，改变数据
             }
         });
@@ -69,10 +69,10 @@ class ListBag extends React.Component {
     }
 
     render() {
-        let {receiveStatus, surplus_seconds} = this.state;
-        let {item} = this.props;
-        let day_number = "期限：>="+item.limitTerm+"天"
-        let day = item.limitTerm == "0"?"任意期限可用": day_number
+        let { receiveStatus, surplus_seconds } = this.state;
+        let { item } = this.props;
+        let day_number = "期限：>=" + item.limitTerm + "天"
+        let day = item.limitTerm == "0" ? "任意期限可用" : day_number
         let content;
         let buy_func = (item) => {
             if (receiveStatus == "00") {
@@ -95,7 +95,8 @@ class ListBag extends React.Component {
                 content = <div className="list_remain" onClick={() => {
                     item.grapLimit == "0" ? this.getHandler(item) : this.jump()
                 }}>
-                    <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}/>
+                    <SVGCircleProgress percent={parseInt(item.restPercent)} weight={4} radius={50}
+                        bgColor={'#FC655A'} progressColor={'#eee'} />
                     {item.grapLimit == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>
                     }
@@ -115,15 +116,15 @@ class ListBag extends React.Component {
                 <div className="detail_left">
                     <div className="list_amount">
                         <span className="list_rmb">
-                            {item.type=="1"?"￥":null}
-                            {item.type=="2"?"+":null}
+                            {item.type == "1" ? "￥" : null}
+                            {item.type == "2" ? "+" : null}
                         </span>
                         {item.amount}
                     </div>
                     <div className="list_name">
-                        {item.type=="1" && "返现券"}
-                        {item.type=="2" && "返息券"}
-                        </div>
+                        {item.type == "1" && "返现券"}
+                        {item.type == "2" && "返息券"}
+                    </div>
                 </div>
                 <div className="detail_right">
                     <div>满￥{item.limitAmount}可用</div>

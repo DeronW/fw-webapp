@@ -1,3 +1,11 @@
+body {
+    background-color: #ebebee;
+}
+
+input {
+    box-sizing: border-box;
+}
+
 .banner {
     width: 100%;
     display: block;
@@ -7,12 +15,22 @@
     height: 18px;
 }
 
+.field-underline {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 680px;
+    height: 1px;
+    background: #ebebee;
+}
+
 .field {
     box-sizing: border-box;
     background-color: #fff;
     padding: 0 24px;
     height: 88px;
     line-height: 88px;
+    position: relative;
 }
 
 .field-title {
@@ -79,5 +97,5 @@
 }
 
 .next-btn.btn-disabled {
-  background-color: #e2e2e2;
+    background-color: #e2e2e2;
 }
