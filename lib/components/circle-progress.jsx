@@ -40,8 +40,7 @@ class SVGCircleProgress extends React.Component {
     }
 
     shouldComponentUpdate() {
-        console.log("update")
-        return this.state.current_percent > this.state.target_percent
+        return this.state.current_percent < this.state.target_percent
     }
 
     componentWillUnmount() {
