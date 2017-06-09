@@ -30,13 +30,13 @@ class SVGCircleProgress extends React.Component {
             animate: this.props.animate,
             padding: this.props.padding
         }
-
-        this.setProgress = this.setProgress.bind(this);
-        this.animate = this.animate.bind(this);
     }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({target_percent: nextProps.percent})
+    componentWillReceiveProps(nextProps) {
+        this.setState(
+            { target_percent: nextProps.percent },
+            () => this.setProgress(Math.max(0, Math.min(nextProps.percent, 100)))
+        )
     }
 
     shouldComponentUpdate() {
@@ -47,17 +47,17 @@ class SVGCircleProgress extends React.Component {
         clearInterval(this._animate_timer)
     }
 
-    setProgress(p) {
+    setProgress = p => {
         if (p > this.MAX_UNFINISHED_PERCENT && p < 100) p = this.MAX_UNFINISHED_PERCENT;
         // 一旦进度条到达100%, 就不能再重新设置进度了
         if (p >= 100) {
             p = 100;
             clearInterval(this._animate_timer);
         }
-        this.setState({current_percent: p})
+        this.setState({ current_percent: p })
     }
 
-    animate() {
+    animate = () => {
         if (this.state.current_percent < this.state.target_percent) {
             var p = this.state.current_percent + this.STEP_PERCENT;
             if (p > this.MAX_UNFINISHED_PERCENT && this.state.target_percent == 100) {
@@ -88,9 +88,9 @@ class SVGCircleProgress extends React.Component {
 
         let circleColor = percent === 1 ? this.state.progressColor : this.state.bgColor;
         let circle = <circle cx={center.x} cy={center.y}
-                             r={this.state.radius - this.state.weight / 2}
-                             fill="transparent" stroke={circleColor}
-                             strokeWidth={this.state.weight}></circle>;
+            r={this.state.radius - this.state.weight / 2}
+            fill="transparent" stroke={circleColor}
+            strokeWidth={this.state.weight}></circle>;
 
         let p2 = {
             x: center.x + Math.sin(Math.PI * 2 * percent) * this.state.radius,
@@ -117,11 +117,11 @@ class SVGCircleProgress extends React.Component {
 
         return (
             <svg width={sideLength} height={sideLength}
-                 style={{
-                     display: 'inline-block',
-                     transform: 'translate(0, 0)',
-                     overflow: 'hidden'
-                 }}>
+                style={{
+                    display: 'inline-block',
+                    transform: 'translate(0, 0)',
+                    overflow: 'hidden'
+                }}>
                 {circle}
                 {path}
             </svg>
