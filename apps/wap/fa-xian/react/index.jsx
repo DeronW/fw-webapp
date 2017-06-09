@@ -156,7 +156,7 @@ const Content = React.createClass({
                         {/*领券中心*/}
                         {/*{coupon_count=="0"?null:<span className="coupon-count">{coupon_count}</span>}*/}
                     {/*</a>*/}
-                    <a onClick={() => gotoHandler('https://m.9888.cn/static/mall/game/index.html', true)}>
+                    <a onClick={() => gotoHandler('https://m.dougemall.com/static/mall/game/index.html', true)}>
                         <i className="icon-game"></i>
                         游戏中心
                     </a>
