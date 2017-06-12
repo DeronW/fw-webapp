@@ -96,7 +96,8 @@ class ApplyLoan extends React.Component {
                 <div className="max-loan-money money-empty">暂无额度</div>
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
-                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={$FW.Browser.inJRGCApp() && st == 3 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>提额</a>吧！</div>
+                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={$FW.Browser.inJRGCApp() && st == 3 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>提额</a>吧！
+                </div>
             </div>;
 
         btn = st === 2 || st === 3 ?
