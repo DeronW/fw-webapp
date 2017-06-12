@@ -13,6 +13,6 @@ let stores = {
     basic_info: new Stores.BasicInfo(Request),
     car_info: new Stores.CarInfo(Request),
     policy_detail: new Stores.PolicyDetail(Request),
-};
+}
 
 render(AppRouter(stores), document.getElementById('cnt'))
