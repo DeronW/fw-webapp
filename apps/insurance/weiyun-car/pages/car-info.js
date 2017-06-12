@@ -13,6 +13,10 @@ import styles from '../css/car-info.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class CarInfo extends React.Component {
 
+    componentDidMount() {
+        document.title = '车辆基本信息'
+    }
+
     changeHandler = field => e => this.props.car_info.setFormData(field, e.target.value)
 
     render() {
@@ -45,7 +49,7 @@ class CarInfo extends React.Component {
             </div>
             <div styleName="next-btn-area">
                 <div styleName={car_info.valid ? "next-btn" : "next-btn btn-disabled"}
-                    onClick={() => { car_info.logData('car') }}>下一步</div>
+                    onClick={car_info.submit}>下一步</div>
             </div>
         </div>
     }

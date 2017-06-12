@@ -40,20 +40,23 @@ class BasicInfo extends React.Component {
         return <div>
             <Header title="车险" history={this.props.history}
                 sub_title="我的订单" sub_link="/orders" />
-            <img styleName="banner" src={require('../images/car-info/banner.png')} />
+            <img styleName="banner" src={require('../images/basic-info/banner.png')} />
             <div styleName="hr"></div>
 
             <div styleName="field">
                 <div styleName="field-title">投保地区</div>
-                <select styleName="field-input-select"
-                    onChange={this.inputChangeHandler('cityCode')}>
-                    <option value="">请选择</option>
-                    <option value="1">北京</option>
-                    <option value="2">重庆</option>
-                    <option value="3">天津</option>
-                    <option value="4">成都</option>
-                    <option value="5">昆明</option>
-                </select>
+                <div styleName="select-placeholder">
+                    <i styleName="icon-down-arrow"></i>
+                    <select styleName="field-input-select"
+                        onChange={this.inputChangeHandler('cityCode')}>
+                        <option value="">请选择</option>
+                        <option value="1">北京</option>
+                        <option value="2">重庆</option>
+                        <option value="3">天津</option>
+                        <option value="4">成都</option>
+                        <option value="5">昆明</option>
+                    </select>
+                </div>
                 <div styleName="field-underline"></div>
             </div>
 
@@ -63,15 +66,19 @@ class BasicInfo extends React.Component {
                     value={basic_info.formatLicenseNo}
                     onChange={this.inputChangeHandler('licenseNo')} />
                 <div styleName="field-v-line"></div>
-                <select styleName="field-input-select"
-                    onChange={this.inputChangeHandler('carNoArea')}>
-                    <option value="">请选择</option>
-                    <option value="京">京</option>
-                    <option value="渝">渝</option>
-                    <option value="津">津</option>
-                    <option value="川">川</option>
-                    <option value="云">云</option>
-                </select>
+
+                <div styleName="select-placeholder">
+                    <i styleName="icon-down-arrow"></i>
+                    <select styleName="field-input-select"
+                        onChange={this.inputChangeHandler('carNoArea')}>
+                        <option value="">请选择</option>
+                        <option value="京">京</option>
+                        <option value="渝">渝</option>
+                        <option value="津">津</option>
+                        <option value="川">川</option>
+                        <option value="云">云</option>
+                    </select>
+                </div>
             </div>
             <div styleName="hr"></div>
 
@@ -94,14 +101,17 @@ class BasicInfo extends React.Component {
 
             <div styleName="field">
                 <div styleName="field-title">投保公司</div>
-                <select styleName="field-input-select"
-                    onChange={this.inputChangeHandler('intentionCompanyCode')} >
-                    <option value="">请选择</option>
-                    <option value="0">平安保险</option>
-                    <option value="1">太平洋保险</option>
-                    <option value="2">人保</option>
-                </select>
-                <div styleName="field-underline"></div>
+                <div styleName="select-placeholder">
+                    <i styleName="icon-down-arrow"></i>
+                    <select styleName="field-input-select"
+                        onChange={this.inputChangeHandler('intentionCompanyCode')} >
+                        <option value="">请选择</option>
+                        <option value="0">平安保险</option>
+                        <option value="1">太平洋保险</option>
+                        <option value="2">人保</option>
+                    </select>
+                    <div styleName="field-underline"></div>
+                </div>
             </div>
 
             <div styleName="btn-submit-placeholder">
