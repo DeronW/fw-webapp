@@ -17,14 +17,16 @@ export default class CarInfo {
     submit = (history) => {
         if (!this.valid) return;
 
-        history.push('/policy-detail')
+        history.push(`/policy-detail?t_id=001`)
 
-        // return this.request('blablabla').then(data => {
-        //     if (data.success) {
-        //
-        //     } else {
-        //
-        //     }
+        // return this.request('/carInsurance/perfectCarInfo.shtml', {
+        //     carVin: this.carVin,
+        //     engineNo: this.engineNo,
+        //     moldName: this.moldName,
+        //     recordDate: this.registerDate,
+        //     temporaryPolicyId: 0
+        // }).then(data => {
+        //     history.push(`/policy-detail?t_id=${data.temporaryPolicyId}`)
         // })
     }
 

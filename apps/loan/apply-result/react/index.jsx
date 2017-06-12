@@ -24,6 +24,7 @@ class LoanResult extends React.Component{
         this.countingDown = this.countingDown.bind(this);
         this.checkAjax = this.checkAjax.bind(this);
         this.copyHandler = this.copyHandler.bind(this);
+        this.clickHandler = this.clickHandler.bind(this);
     }
     componentWillUnmount() {
         clearInterval(this.timer);
@@ -91,6 +92,9 @@ class LoanResult extends React.Component{
     }
     copyHandler() {
         NativeBridge.clipboard("fxhuaba");
+    }
+    clickHandler(){
+        location.href = '/static/loan/user-weixin-new-download/index.html';
     }
     render() {
     return (
@@ -178,12 +182,17 @@ class LoanResult extends React.Component{
                         <div className="credit-btn" onClick={()=>{$FW.Browser.inJRGCApp()? NativeBridge.close():gotoHandler('/static/loan/home/index.html')}}>重新借款</div>
                     </div>
                 </div>
-                <div className="weixin-attention">
+                {/*<div className="weixin-attention">
                     <div className="weixin-attention-wrap">
                         <div>关注微信公众号fxhuaba<span className="copy-qr" onClick={this.copyHandler}>点击复制公众号</span></div>
                         <div>可获得更高借款额度，且随时查看还款计划</div>
                     </div>
-                </div>
+                </div>*/}
+            </div>
+            <div className="new-weixin-attention">
+                <div className="attention-tip">关注放心花微信公众号或使用APP可获得更高借款额度，且随时查看还款计划。</div>
+                <a className="attention-btn copy-bg" onClick={this.copyHandler}>复制微信公众号</a>
+                <a className="attention-btn download-bg" onClick={this.clickHandler}>下载放心花APP</a>
             </div>
             <div className="customer-service">
                 <div className="service-wrap"><img src="images/phone.png" />如有问题请致电：<a

@@ -27,7 +27,8 @@ const USER_PAGES = [
     'user-verify-phone',
     'user-jrgc-login', // 金融工场 App 同步登录页面
     'user-weixin-fxhapp',
-    'user-weixin-jrgcapp'
+    'user-weixin-jrgcapp',
+    'user-weixin-new-download'
 ]
 
 // 金融工场APP页面
