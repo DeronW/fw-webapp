@@ -8,6 +8,12 @@ export default class Orders {
             all_list: [{
                 id: 123,
                 price: 3400,
+                licenseNo: '京A12345',
+                status: 'unpaid',
+            }, {
+                id: 123,
+                price: 3400,
+                licenseNo: '京A12345',
                 status: 'unpaid',
             }],
             paid_list: [],

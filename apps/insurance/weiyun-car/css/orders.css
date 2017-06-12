@@ -21,10 +21,12 @@
     float: left;
     display: block;
     text-align: center;
-    height: 100px;
+    height: 94px;
     line-height: 100px;
     font-size: 24px;
     box-sizing: border-box;
+    position: relative;
+    z-index: 3;
 }
 
 .nav-bar-item.active {
@@ -33,8 +35,80 @@
 }
 
 .order-item {
-    margin-top: 8px;
+    margin-top: 20px;
     background: white;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.order-status-paid {
+    display: inline-block;
+    float: right;
+    color: #4aa1f9;
+    margin-right: 30px;
+}
+
+.order-status-unpaid {
+    display: inline-block;
+    float: right;
+    color: #999;
+    margin-right: 30px;
+}
+
+.order-item-id {
+    line-height: 64px;
+    height: 64px;
+    border: 1px solid #e3e5ea;
+    background: #f9f9f9;
+    color: #999;
+    padding-left: 26px;
+    font-size: 22px;
+}
+
+.order-item-cnt {
+    height: 100px;
+    line-height: 100px;
+}
+
+.order-prefix {
+    margin: 0 30px;
+    color: #333;
+    font-size: 26px;
+}
+
+.order-licenses {
+    color: #333;
+    font-size: 26px;
+}
+
+.order-price {
+    color: #fd4d4c;
+    font-size: 30px;
+    float: right;
+    margin-right: 30px;
+}
+
+.pay-row {
+    display: table;
+    width: 100%;
+}
+
+.pay-split-line {
+    width: 92%;
+    margin: 0 auto;
+    height: 1px;
+    background: #d8d8d8;
+}
+
+.btn-pay {
+    height: 55px;
+    line-height: 55px;
+    width: 140px;
+    text-align: center;
+    color: white;
+    background: #fd4d4c;
+    float: right;
+    font-size: 24px;
+    border-radius: 4px;
+    margin: 15px 30px;
 }
