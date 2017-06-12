@@ -1,4 +1,5 @@
 import { extendObservable, computed } from 'mobx'
+import * as $FW from 'fw-javascripts'
 
 export default class BasicInfo {
 
@@ -18,15 +19,23 @@ export default class BasicInfo {
     submit = (history) => {
         if (!this.valid) return;
 
-        history.push('/car-info')
-
-        // return this.request('api/account/login').then(data => {
-        //     if (data.success) {
-        //         this.redirect_url = '/car-info'
-        //     } else {
-        //         this.redirect_url = '/car-info'
-        //     }
-        // })
+        this.request('api/account/login', {
+            carNoArea: this.carNoArea,
+            carOwnersName: this.carOwnersName,
+            cityCode: this.cityCode,
+            idCard: this.idCard,
+            intentionCompanyCode: this.intentionCompanyCode,
+            licenseNo: this.licenseNo
+        }).then(data => {
+            if (data.success) {
+                this.redirect_url = '/car-info'
+                history.push('/car-info')
+            } else {
+                this.redirect_url = '/car-info'
+            }
+        }, e => {
+            $FW.Components.Toast(e.message)
+        })
     }
 
     setFormData = (field, value) => {

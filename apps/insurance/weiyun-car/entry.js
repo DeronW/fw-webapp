@@ -1,6 +1,6 @@
 import { render } from 'react-dom'
 
-import { Request } from 'fw-javascripts'
+import Request from './helpers/request.js'
 
 import './css/index.css'
 
