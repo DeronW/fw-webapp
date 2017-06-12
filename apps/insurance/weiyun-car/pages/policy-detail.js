@@ -203,7 +203,7 @@ class Select extends React.Component {
     }
 }
 
-@inject('basic_info','basic_info_plus', 'policy_detail') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@inject('basic_info','car_info', 'policy_detail') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PolicyDetail extends React.Component {
 
     changeHandler = field => e => {
@@ -211,7 +211,7 @@ class PolicyDetail extends React.Component {
     }
 
     render() {
-        let { basic_info, basic_info_plus, policy_detail } = this.props;
+        let { basic_info, car_info, policy_detail } = this.props;
 
         let gen_input_field = (fieldName) => {
             let field = model[fieldName],
@@ -268,24 +268,24 @@ class PolicyDetail extends React.Component {
                         </div>
                         <div styleName="car-info-item">
                             车辆型号
-                            <span>sdfsd{basic_info_plus.moldName}</span>
+                            <span>sdfsd{car_info.moldName}</span>
                         </div>
                         <div styleName="car-info-item">
                             车架号
-                            <span>sdfs{basic_info_plus.carVin}</span>
+                            <span>sdfs{car_info.carVin}</span>
                         </div>
                         <div styleName="car-info-item">
                             发动机号
-                            <span>sf{basic_info_plus.engineNo}</span>
+                            <span>sf{car_info.engineNo}</span>
                         </div>
                         <div styleName="car-info-item-expire">
                             <div styleName="left-els">
                                 交强险到期日:
-                                <span> {basic_info_plus.forceExpireDate}</span>
+                                <span> {car_info.forceExpireDate}</span>
                             </div>
                             <div styleName="right-els">
                                 商业险到期日:
-                                <span> {basic_info_plus.businessExpireDate}</span>
+                                <span> {car_info.businessExpireDate}</span>
                             </div>
                         </div>
                     </div>
