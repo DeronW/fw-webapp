@@ -58,7 +58,7 @@ class ApplyTenMillionLoan extends React.Component {
             $FW.Component.Toast("手机号格式不正确");
         } else {
             $FW.Post(`${API_PATH}/api/userBase/v1/userExist.json`,{mobile: this.state.phoneVal, sourceType: 5, version: 'v1'}).then(data=>{
-                if(data.code == 20017){
+                if(data.code == 10000){
                     this.timerTimeout = setTimeout(() => {
                         window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
                     }, 2000)
