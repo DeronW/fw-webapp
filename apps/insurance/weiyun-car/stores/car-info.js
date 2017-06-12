@@ -15,6 +15,8 @@ export default class CarInfo {
     }
 
     submit = () => {
+        if (!this.valid) return;
+
         // return this.request('blablabla').then(data => {
         //     if (data.success) {
         //
@@ -32,5 +34,4 @@ export default class CarInfo {
         return this.moldName && this.engineNo && this.carVin && this.registerDate
     }
 
-    logData = () => console.log(this)
 }
