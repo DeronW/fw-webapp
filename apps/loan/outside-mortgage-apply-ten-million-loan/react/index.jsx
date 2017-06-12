@@ -59,7 +59,7 @@ class ApplyTenMillionLoan extends React.Component {
         } else {
             $FW.Post(`${API_PATH}/api/userBase/v1/userExist.json`,{mobile: this.state.phoneVal, sourceType: 5, version: 'v1'}).then(data=>{
                 if(data.code == 10000){
-                    this.timerTimeout = setTimeout(() => {
+                    setTimeout(() => {
                         window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
                     }, 2000)
                 }else if(data.code == 20014){
@@ -129,10 +129,6 @@ class ApplyTenMillionLoan extends React.Component {
             countdown: 60,
             countdownShow: false
         })
-    }
-
-    componentWillUnmount() {
-        clearTimeout(timerTimeout)
     }
 
     render() {
