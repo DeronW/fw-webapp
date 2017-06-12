@@ -4,7 +4,6 @@ import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 
 import Header from '../components/header'
-import Select from '../components/select'
 
 import styles from '../css/car-info.css'
 
@@ -21,35 +20,35 @@ class CarInfo extends React.Component {
 
     render() {
         let { car_info } = this.props;
-        let inputFieldName = {
-            'moldName': '品牌型号',
-            'engineNo': '发动机号',
-            'carVin': '车架号',
-            'registerDate': '注册日期'
-        }
 
-        let gen_input_field = (fieldName) =>
-            <div key={fieldName} styleName="input-field">
-                <div styleName="input-field-name">{inputFieldName[fieldName]}</div>
-                <div styleName="float-right-els">
-                    <input styleName="input-area" style={{ color: car_info[fieldName] ? "#666" : "#999" }}
-                        placeholder={`请输入${inputFieldName[fieldName]}`}
-                        value={car_info[fieldName]}
-                        onChange={this.changeHandler(fieldName)}
-                        type={fieldName === "registerDate" ? "date" : "text"} />
-                </div>
-            </div>
-
-        return <div styleName="fake-body">
+        return <div>
             <Header title="完善车辆信息" history={this.props.history} />
-            <div styleName="cnt-container">
-                <div styleName="input-field-grp">
-                    {['moldName', 'engineNo', 'carVin', 'registerDate'].map(gen_input_field)}
-                </div>
+
+            <div styleName="input-field">
+                <span styleName="input-field-name">品牌型号</span>
+                <input styleName="input-field-value" placeholder='品牌型号'
+                    value={car_info.moldName} onChange={this.changeHandler('moldName')} />
             </div>
-            <div styleName="next-btn-area">
-                <div styleName={car_info.valid ? "next-btn" : "next-btn btn-disabled"}
-                    onClick={car_info.submit}>下一步</div>
+            <div styleName="input-field">
+                <span styleName="input-field-name">发动机号</span>
+                <input styleName="input-field-value" placeholder='发动机号'
+                    value={car_info.engineNo} onChange={this.changeHandler('engineNo')} />
+            </div>
+            <div styleName="input-field">
+                <span styleName="input-field-name">车架号</span>
+                <input styleName="input-field-value" placeholder='车架号'
+                    value={car_info.carVin} onChange={this.changeHandler('carVin')} />
+            </div>
+            <div styleName="input-field">
+                <span styleName="input-field-name">注册日期     </span>
+                <input styleName="input-field-value" placeholder='注册日期' type="date"
+                    value={car_info.registerDate}
+                    onChange={this.changeHandler('registerDate')} />
+            </div>
+
+            <div styleName="submit-panel">
+                <a styleName={car_info.valid ? "submit-active" : 'submit-disabled'}
+                    onClick={car_info.submit}>下一步</a>
             </div>
         </div>
     }
