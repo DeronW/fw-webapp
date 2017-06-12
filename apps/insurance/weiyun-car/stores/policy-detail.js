@@ -5,39 +5,39 @@ export default class BasicInfo {
     constructor(request, state = {}) {
         this.request = request
         extendObservable(this, {
-            CheSun: null,
-            BuJiMianCheSun: 0,
-            Sanzhe: null,
-            BuJiMianSanzhe: 0,
-            SiJi: null,
-            BuJiMianSiJi: 0,
-            ChengKe: null,
-            BuJiMianChengKe: 0,
-            DaoQiang: null,
-            BuJiMianDaoQiang: 0,
-            HuaHen: null,
-            BuJiMianHuaHen: 0,
-            Boli: null,
-            ZiRan: null,
-            BuJiMianZiRan: 0,
-            SheShui: null,
-            BuJiMianSheShui: 0,
-            HcSanFangTeYue: null,
+            cheSun: null,
+            buJiMianCheSun: 0,
+            sanZhe: null,
+            buJiMianSanZhe: 0,
+            siJi: null,
+            buJiMianSiJi: 0,
+            chengKe: null,
+            buJiMianChengKe: 0,
+            daoQiang: null,
+            buJiMianDaoQiang: 0,
+            huaHen: null,
+            buJiMianHuaHen: 0,
+            boli: null,
+            ziRan: null,
+            buJiMianZiRan: 0,
+            sheShui: null,
+            buJiMianSheShui: 0,
+            hcSanFangTeYue: null,
         }, state)
     }
 
-    setFormData = (field, value) => {
+    setMainFieldData = (field, value) => {
         let formattedValue = parseInt(value);
-        if (field.indexOf('BuJiMian') > -1) {
-            this[field] = 1 - this[field];
-        } else {
-            this[field] = formattedValue;
-        }
+        return this[field] = formattedValue;
+    }
+
+    setBujimianFieldData = (field, value) => {
+        this[field] = value === 0 ? 0 : (1 - this[field]);
     }
 
     @computed get valid() {
         if (this.HcSanFangTeYue === null && this.CheSun !== 0) return false; // 投保车损险但没有选择第三方是否投保，信息缺失
-        ['CheSun', 'Sanzhe', 'SiJi', 'ChengKe', 'DaoQiang', 'HuaHen', 'Boli', 'ZiRan', 'SheShui'].forEach((key) => {
+        ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang', 'huaHen', 'boli', 'ziRan', 'sheShui'].forEach((key) => {
             if (this[key] === null) return false // 其他必选项信息缺失
         })
         return true;

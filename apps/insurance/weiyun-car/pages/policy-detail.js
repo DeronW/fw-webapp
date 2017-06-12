@@ -8,9 +8,9 @@ import styles from '../css/policy-detail.css'
 
 
 const FORM = {
-    CheSun: {
+    cheSun: {
         name: '车辆损失险',
-        hasBujimian: true,
+        hasBujimian: 'buJiMianCheSun',
         options: [{
             name: '不投保',
             value: 0
@@ -19,9 +19,9 @@ const FORM = {
             value: 1
         }]
     },
-    Sanzhe: {
+    sanZhe: {
         name: '第三者责任险',
-        hasBujimian: true,
+        hasBujimian: 'buJiMianSanZhe',
         options: [{
             name: '不投保',
             value: 0
@@ -48,9 +48,9 @@ const FORM = {
             value: 1000000
         }]
     },
-    SiJi: {
+    siJi: {
         name: '司机座位险',
-        hasBujimian: true,
+        hasBujimian: 'buJiMianSiJi',
         options: [{
             name: '不投保',
             value: 0
@@ -77,9 +77,9 @@ const FORM = {
             value: 200000
         }]
     },
-    ChengKe: {
+    chengKe: {
         name: '乘客座位险',
-        hasBujimian: true,
+        hasBujimian: 'buJiMianChengKe',
         options: [{
             name: '不投保',
             value: 0
@@ -106,9 +106,9 @@ const FORM = {
             value: 200000
         }]
     },
-    DaoQiang: {
+    daoQiang: {
         name: '盗抢险',
-        hasBujimian: true,
+        hasBujimian: 'buJiMianDaoQiang',
         options: [{
             name: '不投保',
             value: 0
@@ -117,9 +117,9 @@ const FORM = {
             value: 1
         }]
     },
-    HuaHen: {
+    huaHen: {
         name: '划痕险',
-        hasBujimian: true,
+        hasBujimian: 'buJiMianHuaHen',
         options: [{
             name: '不投保',
             value: 0
@@ -137,9 +137,8 @@ const FORM = {
             value: 20000
         }]
     },
-    Boli: {
+    boli: {
         name: '玻璃单独破碎险',
-        hasBujimian: false,
         options: [{
             name: '不投保',
             value: 0
@@ -151,9 +150,9 @@ const FORM = {
             value: 2
         }]
     },
-    ZiRan: {
+    ziRan: {
         name: '自燃损失险',
-        hasBujimian: true,
+        hasBujimian: 'buJiMianZiRan',
         options: [{
             name: '不投保',
             value: 0
@@ -162,9 +161,9 @@ const FORM = {
             value: 1
         }]
     },
-    SheShui: {
+    sheShui: {
         name: '涉水行驶损失险',
-        hasBujimian: true,
+        hasBujimian: 'buJiMianSheShui',
         options: [{
             name: '不投保',
             value: 0
@@ -173,7 +172,7 @@ const FORM = {
             value: 1
         }]
     },
-    HcSanFangTeYue: {
+    hcSanFangTeYue: {
         name: '第三方特约险',
         options: [{
             name: '不投保',
@@ -246,8 +245,16 @@ const BasicCarInfo = inject('basic_info', 'car_info')(observer(CSSModules((props
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PolicyDetail extends React.Component {
 
-    changeHandler = field => e => {
-        this.props.policy_detail.setFormData(field, e.target.value)
+    changeHandler = (changedFieldType, mainField, bujimianField) => e => {
+        // changed bujimianField value
+        if (changedFieldType === 'bujimianField') {
+            return this.props.policy_detail.setBujimianFieldData(bujimianField)
+        }
+        // changed mainField value
+        this.props.policy_detail.setMainFieldData(mainField, e.target.value);
+        if (e.target.value == '0' && bujimianField) {
+            this.props.policy_detail.setBujimianFieldData(bujimianField, 0);
+        }
     }
 
     render() {
@@ -257,7 +264,7 @@ class PolicyDetail extends React.Component {
             if (fieldName === 'HcSanFangTeYue' && !policy_detail.CheSun) return null; // 必须投保车损险才可以选择投保三方特约险
 
             let field = FORM[fieldName];
-            let bujimainFieldName = field.hasBujimian ? `BuJiMian${fieldName}` : null;
+            let bujimainFieldName = field.hasBujimian ? field.hasBujimian : '';
             let mainValue = policy_detail[fieldName],
                 bujimianValue = policy_detail[bujimainFieldName];
 
@@ -269,7 +276,7 @@ class PolicyDetail extends React.Component {
                     <div styleName="right-els">
                         { field.hasBujimian &&
                             <div styleName="bujimian-input" style={{ color: mainValue ? "#666" : "#999"}}
-                                onClick={this.changeHandler(bujimainFieldName)}>
+                                onClick={this.changeHandler('bujimianField', fieldName, bujimainFieldName)}>
                                 <i styleName={`fake-check-icon ${checkIconState}`}></i>
                                 不计免赔
                             </div>
@@ -277,7 +284,7 @@ class PolicyDetail extends React.Component {
                         <Select placeholder="请选择"
                             value={mainValue}
                             options={field.options}
-                            handleChange={this.changeHandler(fieldName)} />
+                            handleChange={this.changeHandler('mainField', fieldName, bujimainFieldName)} />
                     </div>
                 </div>
             )
@@ -303,11 +310,11 @@ class PolicyDetail extends React.Component {
                 <div>
                     <div styleName="policy-class">基本险</div>
                     <div styleName="input-field-grp">
-                        { ['CheSun', 'Sanzhe', 'SiJi', 'ChengKe', 'DaoQiang'].map(gen_input_field) }
+                        { ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang'].map(gen_input_field) }
                     </div>
                     <div styleName="policy-class">附加险</div>
                     <div styleName="input-field-grp">
-                        { ['HuaHen', 'Boli', 'ZiRan', 'SheShui', 'HcSanFangTeYue'].map(gen_input_field) }
+                        { ['huaHen', 'boli', 'ziRan', 'sheShui', 'hcSanFangTeYue'].map(gen_input_field) }
                     </div>
                 </div>
 
