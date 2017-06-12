@@ -9,13 +9,15 @@ export default class CarInfo {
             engineNo: '', // 发动机号
             carVin: '', // 车架号
             registerDate: '', // 注册日期
-            forceExpireDate: '', // 交强险到期时间
-            businessExpireDate: '', // 商业险到期时间
+            // forceExpireDate: '', // 交强险到期时间
+            // businessExpireDate: '', // 商业险到期时间
         }, state)
     }
 
-    submit = () => {
+    submit = (history) => {
         if (!this.valid) return;
+
+        history.push('/policy-detail')
 
         // return this.request('blablabla').then(data => {
         //     if (data.success) {
