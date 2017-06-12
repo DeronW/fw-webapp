@@ -21,6 +21,9 @@ class CarInfo extends React.Component {
     render() {
         let { car_info } = this.props;
 
+        if (car_info.redirect_url)
+            return <Redirect to={car_info.redirect_url} />;
+
         return <div>
             <Header title="完善车辆信息" history={this.props.history} />
 
