@@ -18,13 +18,15 @@ export default class BasicInfo {
     submit = () => {
         if (!this.valid) return;
 
-        return this.request('api/account/login').then(data => {
-            if (data.success) {
-                this.redirect_url = '/car-info'
-            } else {
-                this.redirect_url = '/car-info'
-            }
-        })
+        this.redirect_url = '/car-info'
+
+        // return this.request('api/account/login').then(data => {
+        //     if (data.success) {
+        //         this.redirect_url = '/car-info'
+        //     } else {
+        //         this.redirect_url = '/car-info'
+        //     }
+        // })
     }
 
     setFormData = (field, value) => {
