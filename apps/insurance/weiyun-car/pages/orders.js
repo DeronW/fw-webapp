@@ -55,6 +55,7 @@ class Orders extends React.Component {
                 {tab('paid', '已支付')}
                 {tab('unpaid', '未支付')}
                 {tab('completed', '已完成')}
+                <div styleName="bottom-line"></div>
             </div>
 
             {orders.current_list.map(order_item)}

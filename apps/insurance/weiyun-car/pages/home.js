@@ -13,7 +13,10 @@ class Home extends React.Component {
     }
     render() {
         return <div>
-            <Link to="/basic-info">BASIC INFO</Link>
+            <Link to="/basic-info">Basic info</Link>
+            <Link to="/car-info">Car info</Link>
+            <Link to="/policy-detail">Policy detail</Link>
+            <Link to="/orders">orders</Link>
         </div>
     }
 }
