@@ -20,7 +20,7 @@ const Content = React.createClass({
             topics: [],
             position_index: 0,
             position: 0,
-            coupon_count:""
+            coupon_count: ""
         }
     },
     componentDidMount() {
@@ -61,18 +61,12 @@ const Content = React.createClass({
             })
         })
 
-        //领券中心张数接口
-        // $FW.Ajax({
-        //     url: 'https://m.9888.cn/mpwap/api/v2/getCouponNum.shtml',
-        //     method: 'post',
-        //     data: {
-        //     },
-        //     fail: () => true,
-        //     success: data => {
-        //         console.log(data)
-        //         this.setState({coupon_count:data.availableNum})
-        //     }
-        // });
+        // 领券中心张数接口
+        $FW.Ajax({
+            url: 'https://m.9888.cn/mpwap/api/v2/getCouponNum.shtml',
+            method: 'post',
+            fail: () => true,
+        }).then(data => this.setState({ coupon_count: data.availableNum }));
     },
     startMovingNotice() {
         let delay = 30, duration = 3000, step = 2, singleH = 36, p, position_index;
@@ -115,7 +109,7 @@ const Content = React.createClass({
             gotoHandler('https://m.9888.cn/static/test-native-bridge/index.html')
     },
     render() {
-        let { banners, notice, position,coupon_count } = this.state;
+        let { banners, notice, position, coupon_count } = this.state;
 
         let topic = (t, index) => {
             return <a className="event" key={index} onClick={() => gotoHandler(t.url)}>
@@ -152,14 +146,11 @@ const Content = React.createClass({
                 </div>
 
                 <div className="channel">
-                    {/*<a onClick={() => gotoHandler('https://m.9888.cn/static/wap/coupon-center/index.html', true)}>*/}
-                        {/*<i className="icon-coupon"></i>*/}
-                        {/*领券中心*/}
-                        {/*{coupon_count=="0"?null:<span className="coupon-count">{coupon_count}</span>}*/}
-                    {/*</a>*/}
-                    <a onClick={() => gotoHandler('https://m.dougemall.com/static/mall/game/index.html', true)}>
-                        <i className="icon-game"></i>
-                        游戏中心
+                    <a onClick={() => gotoHandler('https://m.9888.cn/static/wap/coupon-center/index.html', true)}>
+                        <i className="icon-coupon"></i>
+                        领券中心
+                        {coupon_count != "0" &&
+                            <span className="coupon-count">{coupon_count}</span>}
                     </a>
                     <a onClick={() => gotoHandler("https://m.dougemall.com", true)}>
                         <i className="icon-bbs"></i>豆哥商城 </a>
