@@ -315,7 +315,7 @@ class PolicyDetail extends React.Component {
 
                 <div styleName="next-btn-area">
                     <div styleName={policy_detail.valid ? "next-btn" : "next-btn btn-disabled"}
-                        onClick={() => { policy_detail.logData('car') }}>查询保费</div>
+                        onClick={ policy_detail.submit(this.props.history) }>查询保费</div>
                 </div>
             </div>
         )
