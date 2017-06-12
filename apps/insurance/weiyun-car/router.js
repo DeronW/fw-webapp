@@ -19,23 +19,21 @@ import Orders from './pages/orders'
 
 
 export default (stores) => {
-    return (
-        <Router>
-            <Provider {...stores} >
-                <Switch>
-                    <Route exact path='/' component={Home} />
-                    <Route exact path='/basic-info' component={BasicInfo} />
-                    <Route exact path='/car-info' component={CarInfo} />
+    return <Router>
+        <Provider {...stores} >
+            <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/basic-info' component={BasicInfo} />
+                <Route exact path='/car-info' component={CarInfo} />
 
-                    <Route exact path='/policy-detail' component={PolicyDetail} />
-                    <Route exact path='/policy-quotation' component={PolicyQuotation} />
-                    <Route exact path='/policy-holder-info' component={PolicyHolderInfo} />
-                    <Route exact path='/order-confirm' component={OrderConfirm} />
-                    <Route exact path='/order-payment' component={OrderPayment} />
-                    <Route exact path='/order-result' component={OrderResult} />
-                    <Route exact path='/orders' component={Orders} />
-                </Switch>
-            </Provider>
-        </Router>
-    )
+                <Route exact path='/policy-detail' component={PolicyDetail} />
+                <Route exact path='/policy-quotation' component={PolicyQuotation} />
+                <Route exact path='/policy-holder-info' component={PolicyHolderInfo} />
+                <Route exact path='/order-confirm' component={OrderConfirm} />
+                <Route exact path='/order-payment' component={OrderPayment} />
+                <Route exact path='/order-result' component={OrderResult} />
+                <Route exact path='/orders' component={Orders} />
+            </Switch>
+        </Provider>
+    </Router>
 }

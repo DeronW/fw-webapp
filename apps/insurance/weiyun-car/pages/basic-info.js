@@ -31,15 +31,12 @@ class BasicInfo extends React.Component {
     }
 
     render() {
-        let { basic_info } = this.props;
-
-        // submit success, redirect next page
-        if (basic_info.redirect_url)
-            return <Redirect to={basic_info.redirect_url} />;
+        let { basic_info, history } = this.props;
 
         return <div>
-            <Header title="车险" history={this.props.history}
+            <Header title="车险" history={history}
                 sub_title="我的订单" sub_link="/orders" />
+
             <img styleName="banner" src={require('../images/basic-info/banner.png')} />
             <div styleName="hr"></div>
 
@@ -117,7 +114,7 @@ class BasicInfo extends React.Component {
             <div styleName="btn-submit-placeholder">
                 <div styleName="btn-submit">
                     <div styleName={basic_info.valid ? "next-btn" : "next-btn btn-disabled"}
-                        onClick={basic_info.submit}>下一步</div>
+                        onClick={() => basic_info.submit(history)}>下一步</div>
                 </div>
             </div>
         </div>

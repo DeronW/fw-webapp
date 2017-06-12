@@ -11,14 +11,14 @@ export default class CarInfo {
             registerDate: '', // 注册日期
             // forceExpireDate: '', // 交强险到期时间
             // businessExpireDate: '', // 商业险到期时间
-            redirect_url: '' // 提交之后的下一个页面地址
         }, state)
     }
 
-    submit = () => {
+    submit = (history) => {
         if (!this.valid) return;
 
-        this.redirect_url = '/policy-detail'
+        history.push('/policy-detail')
+
         // return this.request('blablabla').then(data => {
         //     if (data.success) {
         //

@@ -19,13 +19,10 @@ class CarInfo extends React.Component {
     changeHandler = field => e => this.props.car_info.setFormData(field, e.target.value)
 
     render() {
-        let { car_info } = this.props;
-
-        if (car_info.redirect_url)
-            return <Redirect to={car_info.redirect_url} />;
+        let { car_info, history } = this.props;
 
         return <div>
-            <Header title="完善车辆信息" history={this.props.history} />
+            <Header title="完善车辆信息" history={history} />
 
             <div styleName="input-field">
                 <span styleName="input-field-name">品牌型号</span>
@@ -51,7 +48,7 @@ class CarInfo extends React.Component {
 
             <div styleName="submit-panel">
                 <a styleName={car_info.valid ? "submit-active" : 'submit-disabled'}
-                    onClick={car_info.submit}>下一步</a>
+                    onClick={() => car_info.submit(history)}>下一步</a>
             </div>
         </div>
     }
