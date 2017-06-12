@@ -62,6 +62,7 @@ class ApplyTenMillionLoan extends React.Component {
                 sourceType: 5,
                 version: 'v1'
             }).then(() => {
+                $FW.Component.Toast("手机号已注册");
                 setTimeout(function () {
                     window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
                 }, 2000)
