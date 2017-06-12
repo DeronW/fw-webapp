@@ -1,11 +1,23 @@
 .nav-bar {
-    display: table;
-    width: 100%;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
     background: white;
+    height: 95px;
+    position: relative;
+}
+
+.bottom-line {
+    background: #d8d8d8;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
 }
 
 .nav-bar-item {
-    width: 180px;
+    width: 136px;
+    margin: 0 22px;
     float: left;
     display: block;
     text-align: center;
@@ -16,7 +28,8 @@
 }
 
 .nav-bar-item.active {
-    color: red;
+    color: #fd4d4c;
+    border-bottom: 3px solid #fd4d4c;
 }
 
 .order-item {

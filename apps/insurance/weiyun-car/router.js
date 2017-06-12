@@ -11,7 +11,7 @@ import BasicInfo from './pages/basic-info.js'
 import CarInfo from './pages/car-info'
 import PolicyDetail from './pages/policy-detail'
 import PolicyQuotation from './pages/policy-quotation'
-import PolicyHolderInfo from './pages/policy-holder-info'
+import CustomerInfo from './pages/customer-info'
 import OrderConfirm from './pages/order-confirm'
 import OrderPayment from './pages/order-payment'
 import OrderResult from './pages/order-result'
@@ -28,7 +28,7 @@ export default (stores) => {
 
                 <Route exact path='/policy-detail' component={PolicyDetail} />
                 <Route exact path='/policy-quotation' component={PolicyQuotation} />
-                <Route exact path='/policy-holder-info' component={PolicyHolderInfo} />
+                <Route exact path='/customer-info' component={CustomerInfo} />
                 <Route exact path='/order-confirm' component={OrderConfirm} />
                 <Route exact path='/order-payment' component={OrderPayment} />
                 <Route exact path='/order-result' component={OrderResult} />
