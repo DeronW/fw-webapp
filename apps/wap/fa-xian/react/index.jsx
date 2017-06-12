@@ -60,18 +60,19 @@ const Content = React.createClass({
                 topics: data.map(i => ({ url: i.url, img: i.thumb }))
             })
         })
+
         //领券中心张数接口
-        $FW.Ajax({
-            url: 'https://m.9888.cn/mpwap/api/v2/getCouponNum.shtml',
-            method: 'post',
-            data: {
-            },
-            fail: () => true,
-            success: data => {
-                console.log(data)
-                this.setState({coupon_count:data.availableNum})
-            }
-        });
+        // $FW.Ajax({
+        //     url: 'https://m.9888.cn/mpwap/api/v2/getCouponNum.shtml',
+        //     method: 'post',
+        //     data: {
+        //     },
+        //     fail: () => true,
+        //     success: data => {
+        //         console.log(data)
+        //         this.setState({coupon_count:data.availableNum})
+        //     }
+        // });
     },
     startMovingNotice() {
         let delay = 30, duration = 3000, step = 2, singleH = 36, p, position_index;
