@@ -14,6 +14,6 @@ let stores = {
     car_info: new Stores.CarInfo(Request),
     policy_detail: new Stores.PolicyDetail(Request),
     policy_quotation: new Stores.PolicyQuotation(Request),
-};
+}
 
 render(AppRouter(stores), document.getElementById('cnt'))

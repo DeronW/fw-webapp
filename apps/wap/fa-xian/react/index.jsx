@@ -60,18 +60,19 @@ const Content = React.createClass({
                 topics: data.map(i => ({ url: i.url, img: i.thumb }))
             })
         })
+
         //领券中心张数接口
-        $FW.Ajax({
-            url: 'https://m.9888.cn/mpwap/api/v2/getCouponNum.shtml',
-            method: 'post',
-            data: {
-            },
-            fail: () => true,
-            success: data => {
-                console.log(data)
-                this.setState({coupon_count:data.availableNum})
-            }
-        });
+        // $FW.Ajax({
+        //     url: 'https://m.9888.cn/mpwap/api/v2/getCouponNum.shtml',
+        //     method: 'post',
+        //     data: {
+        //     },
+        //     fail: () => true,
+        //     success: data => {
+        //         console.log(data)
+        //         this.setState({coupon_count:data.availableNum})
+        //     }
+        // });
     },
     startMovingNotice() {
         let delay = 30, duration = 3000, step = 2, singleH = 36, p, position_index;
@@ -151,10 +152,14 @@ const Content = React.createClass({
                 </div>
 
                 <div className="channel">
-                    <a onClick={() => gotoHandler('https://m.9888.cn/static/wap/coupon-center/index.html', true)}>
-                        <i className="icon-coupon"></i>
-                        领券中心
-                        {coupon_count=="0"?null:<span className="coupon-count">{coupon_count}</span>}
+                    {/*<a onClick={() => gotoHandler('https://m.9888.cn/static/wap/coupon-center/index.html', true)}>*/}
+                        {/*<i className="icon-coupon"></i>*/}
+                        {/*领券中心*/}
+                        {/*{coupon_count=="0"?null:<span className="coupon-count">{coupon_count}</span>}*/}
+                    {/*</a>*/}
+                    <a onClick={() => gotoHandler('https://m.dougemall.com/static/mall/game/index.html', true)}>
+                        <i className="icon-game"></i>
+                        游戏中心
                     </a>
                     <a onClick={() => gotoHandler("https://m.dougemall.com", true)}>
                         <i className="icon-bbs"></i>豆哥商城 </a>
