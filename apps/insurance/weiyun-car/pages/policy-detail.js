@@ -88,11 +88,11 @@ const BasicCarInfo = inject('basic_info', 'car_info')(observer(CSSModules((props
                 <div styleName="car-info-item-expire">
                     <div styleName="left-els">
                         交强险到期日:
-                        <span> {car_info.forceExpireDate}</span>
+                        <span>{car_info.forceExpireDate}</span>
                     </div>
                     <div styleName="right-els">
                         商业险到期日:
-                        <span> {car_info.businessExpireDate}</span>
+                        <span>{car_info.businessExpireDate}</span>
                     </div>
                 </div>
             </div>
