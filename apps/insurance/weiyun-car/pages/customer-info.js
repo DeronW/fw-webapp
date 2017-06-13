@@ -16,7 +16,7 @@ import styles from '../css/customer-info.css'
 class CustomerInfo extends React.Component {
 
     changeHandler = (type, k) => (e) => {
-        this.customer_info.setFormData(type, k, e.target.value);
+        this.props.customer_info.setFormData(type, k, e.target.value);
     }
 
     cardIdInputHandler = (type) => e => {
@@ -42,6 +42,7 @@ class CustomerInfo extends React.Component {
                         <div styleName="info-item">
                             <div styleName="info-item-type">投保人手机</div>
                             <input styleName="info-item-input" placeholder="请输入"
+                                type="tel" maxLength="11"
                                 value={customer_info.holder.mobile}
                                 onChange={this.changeHandler('holder', 'mobile')} />
                         </div>
@@ -49,7 +50,7 @@ class CustomerInfo extends React.Component {
                             <div styleName="info-item-type">身份证号</div>
                             <input styleName="info-item-input" placeholder="请输入"
                                 value={customer_info.holder.cardId}
-                                onChange={this.changeHandler('holder', 'cardId')} />
+                                onChange={this.cardIdInputHandler('holder')} />
                         </div>
                         <div styleName="info-item">
                             <div styleName="info-item-type">邮箱</div>
@@ -61,14 +62,14 @@ class CustomerInfo extends React.Component {
                             <div styleName="img-upload-label">上传身份证照片</div>
                             <div styleName="img-upload-tip">按保监局要求上传身份证正反面照片</div>
                             <div styleName="upload-img-container">
-                                <div styleName="upload-img-left" onClick={customer_info.triggerUploadImg}>
+                                <div styleName="upload-img-left" onClick={() => { customer_info.triggerUploadImg() }}>
                                     { customer_info.holder.image1 ?
                                         <div styleName="upload-img-display" style={{ background: `url(${customer_info.holder.image1}) #fff no-repeat center` }}></div>
                                         :
                                         <div styleName="upload-img-tip">请添加<br/>身份证正面照片</div>
                                     }
                                 </div>
-                                <div styleName="upload-img-right" onClick={customer_info.triggerUploadImg}>
+                                <div styleName="upload-img-right" onClick={() => { customer_info.triggerUploadImg() }}>
                                     { customer_info.holder.image2 ?
                                         <div styleName="upload-img-display" style={{ background: `url(${customer_info.holder.image2}) #fff no-repeat center` }}></div>
                                         :
@@ -87,32 +88,41 @@ class CustomerInfo extends React.Component {
                             <div styleName="info-label">被保人信息</div>
                             <div styleName="info-item">
                                 <div styleName="info-item-type">被保人姓名</div>
-                                <input styleName="info-item-input" placeholder="请输入" value={customer_info.recognizee.name} />
+                                <input styleName="info-item-input" placeholder="请输入"
+                                    value={customer_info.recognizee.name}
+                                    onChange={this.changeHandler('recognizee', 'name')} />
                             </div>
                             <div styleName="info-item">
                                 <div styleName="info-item-type">被保人手机</div>
-                                <input styleName="info-item-input" placeholder="请输入" value={customer_info.recognizee.mobile} />
+                                <input styleName="info-item-input" placeholder="请输入"
+                                    type="tel" maxLength="11"
+                                    value={customer_info.recognizee.mobile}
+                                    onChange={this.changeHandler('recognizee', 'mobile')} />
                             </div>
                             <div styleName="info-item">
                                 <div styleName="info-item-type">身份证号</div>
-                                <input styleName="info-item-input" placeholder="请输入" value={customer_info.recognizee.cardId} />
+                                <input styleName="info-item-input" placeholder="请输入"
+                                    value={customer_info.recognizee.cardId}
+                                    onChange={this.cardIdInputHandler('recognizee')} />
                             </div>
                             <div styleName="info-item">
                                 <div styleName="info-item-type">邮箱</div>
-                                <input styleName="info-item-input" placeholder="请输入" value={customer_info.recognizee.email} />
+                                <input styleName="info-item-input" placeholder="请输入"
+                                    value={customer_info.recognizee.email}
+                                    onChange={this.changeHandler('recognizee', 'email')}/>
                             </div>
                             <div styleName="upload-img-item">
                                 <div styleName="img-upload-label">上传身份证照片</div>
                                 <div styleName="img-upload-tip">按保监局要求上传身份证正反面照片</div>
                                 <div styleName="upload-img-container">
-                                    <div styleName="upload-img-left">
+                                    <div styleName="upload-img-left" onClick={() => { customer_info.triggerUploadImg() }}>
                                         { customer_info.recognizee.image1 ?
                                             <div styleName="upload-img-display" style={{ background: `url(${customer_info.recognizee.image1}) #fff no-repeat center` }}></div>
                                             :
                                             <div styleName="upload-img-tip">请添加<br/>身份证正面照片</div>
                                         }
                                     </div>
-                                    <div styleName="upload-img-right">
+                                    <div styleName="upload-img-right" onClick={() => { customer_info.triggerUploadImg() }}>
                                         { customer_info.recognizee.image2 ?
                                             <div styleName="upload-img-display" style={{ background: `url(${customer_info.recognizee.image2}) #fff no-repeat center` }}></div>
                                             :
@@ -128,14 +138,14 @@ class CustomerInfo extends React.Component {
                         <div styleName="upload-img-item">
                             <div styleName="img-upload-tip">按保监局要求上传驾驶证正反面照片</div>
                             <div styleName="upload-img-container">
-                                <div styleName="upload-img-left">
+                                <div styleName="upload-img-left" onClick={() => { customer_info.triggerUploadImg() }}>
                                     { customer_info.vehicleLicenseImage1 ?
                                         <div styleName="upload-img-display" style={{ background: `url(${customer_info.vehicleLicenseImage1}) #fff no-repeat center` }}></div>
                                         :
                                         <div styleName="upload-img-tip">请添加<br/>驾驶证正面照片</div>
                                     }
                                 </div>
-                                <div styleName="upload-img-right">
+                                <div styleName="upload-img-right" onClick={() => { customer_info.triggerUploadImg() }}>
                                     { customer_info.vehicleLicenseImage2 ?
                                         <div styleName="upload-img-display" style={{ background: `url(${customer_info.vehicleLicenseImage2}) #fff no-repeat center` }}></div>
                                         :
@@ -146,7 +156,7 @@ class CustomerInfo extends React.Component {
                         </div>
                     </div>
                 </div>
-                <BottomButton active={true} title="确认提交"
+                <BottomButton active={customer_info.valid} title="确认提交"
                     onClick={() => customer_info.submit(history)} />
             </div>
         )

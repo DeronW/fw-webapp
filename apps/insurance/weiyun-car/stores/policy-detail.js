@@ -39,11 +39,11 @@ export default class PolicyDetail {
     @computed get valid() {
         if (this.hcSanFangTeYue === null && this.cheSun !== 0) return false; // 投保车损险但没有选择第三方是否投保，信息缺失
 
-        ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang', 'huaHen', 'boli', 'ziRan', 'sheShui'].forEach((key) => {
-            if (this[key] === null) return false // 其他必选项信息缺失
+        let valid = ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang', 'huaHen', 'boli', 'ziRan', 'sheShui'].every((key) => {
+            return this[key] !== null // 其他必选项信息缺失
         })
 
-        return true;
+        return valid;
     }
 
     submit = (history) => {

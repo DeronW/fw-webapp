@@ -44,10 +44,22 @@ export default class CustomerInfo {
 
     triggerUploadImg = () => {
         // TODO: trigger app upload img
+        console.log('user wants to upload img!');
+    }
+
+    @computed get valid() {
+        let valid = ['name', 'mobile', 'cardId', 'email'].every((k) => {
+            return (this.holder[k] && (this.isSame || this.recognizee[k]))
+        })
+        return valid
+        // let valid = ['name', 'mobile', 'cardId', 'email'].every((k) => {
+        //     return (this.holder[k] && (this.isSame || this.recognizee[k]))
+        // })
+        // return valid && this.vehicleLicenseImage1 && this.vehicleLicenseImage2
     }
 
     submit = (history) => () => {
-        return;
+
         if (!this.valid) return
         history.push('/policy-quotation');
         // return this.request('blablabla').then(data => {
