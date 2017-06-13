@@ -484,14 +484,16 @@ const Content = React.createClass({
 
                         {
                             this.state.handlerTSShow ? <div className="danbi" >
-
-                                <div className="atpr"><img className="card-d" src="images/card-d.png" /><span
-                                    className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span></div>
+                                <div className="atpr"><img className="card-d" src="images/card-d.png" />
+                                    <span className="online">因银行系统维护，23:00到凌晨1：00期间请勿提现；</span>
+                                </div>
+                                <div className="atpr"><img className="card-d" src="images/card-d.png" />
+                                    <span className="online">单笔提现金额不低于10元，提现申请成功后不可撤回；</span>
+                                </div>
                                 <div className="atpr">
                                     <img className="card-d" src="images/card-d.png" />
                                     <span className="online">
-                                        徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡；
-                                        </span>
+                                        徽商电子账户采用原卡进出设置，为了您的资金安全，只能提现至您绑定的银行卡； </span>
                                 </div>
                                 <div className="atpr">
                                     <img className="card-d" src="images/card-d.png" />
@@ -502,9 +504,7 @@ const Content = React.createClass({
                             </div> : null
                         }
 
-
                     </div>
-
                 </div>
 
                 {
