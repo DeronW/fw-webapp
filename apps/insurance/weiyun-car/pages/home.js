@@ -21,6 +21,11 @@ class Home extends React.Component {
             <br />
             <Link to="/orders">orders</Link>
             <br />
+            <Link to="/policy-quotation">policy-quotation</Link>
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
     }
 }

@@ -6,6 +6,7 @@ import Header from '../components/header'
 import BottomButton from '../components/bottom-button'
 
 import styles from '../css/policy-detail.css'
+import styles_icon_circle from '../css/icons/circle.css'
 
 
 const Select = CSSModules((props) => {
@@ -16,7 +17,8 @@ const Select = CSSModules((props) => {
         <div styleName="select-widget">
             <div styleName="select-mask" style={{ color: hasValidData ? "#333" : "#999" }}>{maskText}</div>
             <select styleName="native-select" onChange={props.handleChange}>
-                <option hidden>ocupy</option> {/* helpful to fire change event whtn choose the real first option */}
+                {/* helpful to fire change event whtn choose the real first option */}
+                <option hidden></option>
                 {props.options.map(gen_options)}
             </select>
         </div>
@@ -37,7 +39,8 @@ const Field = inject('policy_detail')(observer(CSSModules(function (props) {
         <div styleName="bujimian-input"
             style={{ color: bjmState == 'disabled' ? "#999" : "#666" }}
             onClick={() => policy_detail.bjmToggleHander(name, bjm)} >
-            <i styleName={`fake-check-icon ${bjmState}`}></i> 不计免赔
+            <i className={styles_icon_circle[bjmState]}></i>
+            不计免赔
         </div>
     )
 
@@ -105,6 +108,10 @@ const BasicCarInfo = inject('basic_info', 'car_info')(observer(CSSModules((props
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class PolicyDetail extends React.Component {
+
+    componentDidMount(){
+        document.title = '险种明细'
+    }
 
     render() {
         let { policy_detail, history } = this.props;
