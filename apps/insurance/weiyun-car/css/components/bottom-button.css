@@ -1,0 +1,30 @@
+.bottom-button {
+    height: 120px;
+}
+
+.fixed-btn {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 45px 5px #f0f0f0;
+}
+
+.fixed-btn a {
+  display: block;
+    margin: 22px 30px;
+    height: 78px;
+    color: #fff;
+    font-size: 32px;
+    line-height: 83px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.fixed-btn-active {
+    background-color: #fd4d4c;
+}
+
+.fixed-btn-disabled {
+    background-color: #e2e2e2;
+}

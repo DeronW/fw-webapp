@@ -31,6 +31,7 @@ input {
     height: 88px;
     line-height: 88px;
     position: relative;
+    overflow: hidden;
 }
 
 .field-title {
@@ -71,33 +72,6 @@ input {
     float: right;
     background: rgb(227, 229, 234);
     margin: 22px 10px;
-}
-
-.btn-submit-placeholder {
-    height: 120px;
-}
-
-.btn-submit {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #fff;
-    box-shadow: 0 0 45px 5px #f0f0f0;
-}
-
-.next-btn {
-    margin: 22px 30px;
-    height: 78px;
-    color: #fff;
-    font-size: 32px;
-    line-height: 83px;
-    text-align: center;
-    background-color: #fd4d4c;
-    border-radius: 5px;
-}
-
-.next-btn.btn-disabled {
-    background-color: #e2e2e2;
 }
 
 .select-placeholder {

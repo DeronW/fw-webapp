@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 
 import Header from '../components/header'
+import BottomButton from '../components/bottom-button'
 
 import styles from '../css/basic-info.css'
 
@@ -111,12 +112,8 @@ class BasicInfo extends React.Component {
                 </div>
             </div>
 
-            <div styleName="btn-submit-placeholder">
-                <div styleName="btn-submit">
-                    <div styleName={basic_info.valid ? "next-btn" : "next-btn btn-disabled"}
-                        onClick={() => basic_info.submit(history)}>下一步</div>
-                </div>
-            </div>
+            <BottomButton active={basic_info.valid} title={'下一步'}
+                onClick={() => basic_info.submit(history)} />
         </div>
     }
 }

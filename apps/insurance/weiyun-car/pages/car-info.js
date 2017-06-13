@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router-dom'
 
 import Header from '../components/header'
+import BottomButton from '../components/bottom-button'
 
 import styles from '../css/car-info.css'
 
@@ -46,10 +47,9 @@ class CarInfo extends React.Component {
                     onChange={this.changeHandler('registerDate')} />
             </div>
 
-            <div styleName="submit-panel">
-                <a styleName={car_info.valid ? "submit-active" : 'submit-disabled'}
-                    onClick={() => car_info.submit(history)}>下一步</a>
-            </div>
+            <BottomButton active={car_info.valid} title={'下一步'}
+                onClick={() => car_info.submit(history)} />
+
         </div>
     }
 }
