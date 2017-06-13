@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 import { BrowserFactory } from 'fw-javascripts'
 
 import Header from '../components/header'
-import BottomButton from '../components/bottom-buttion.js'
+import BottomButton from '../components/bottom-button.js'
 
 import styles from '../css/customer-info.css'
 
