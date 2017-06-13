@@ -16,7 +16,7 @@ const Select = CSSModules((props) => {
         <div styleName="select-widget">
             <div styleName="select-mask" style={{ color: hasValidData ? "#333" : "#999" }}>{maskText}</div>
             <select styleName="native-select" onChange={props.handleChange}>
-                <option disabled hidden>ocupy</option> {/* helpful to fire change event whtn choose the real first option */}
+                <option hidden>ocupy</option> {/* helpful to fire change event whtn choose the real first option */}
                 {props.options.map(gen_options)}
             </select>
         </div>
