@@ -38,6 +38,11 @@
 }
 .alipay{
     margin-left: 10px;
+    width: 500px;
+    margin-right: 10px;
+}
+.alipay-img{
+    margin-left: 30px;
 }
 .alipay-title{
     font-size: 32px;
@@ -48,5 +53,18 @@
     color: #999;
 }
 .checked-btn{
-    margin-left: 10px;
+    height: 36px;
+    width: 36px;
+}
+.payment-btn{
+    margin: 0 5%;
+    width: 90%;
+    height: 74px;
+    border-radius: 4px;
+    background: #fd4d4c;
+    line-height: 74px;
+    text-align: center;
+    color: #fff;
+    font-size: 32px;
+    margin-top: 32px;
 }
