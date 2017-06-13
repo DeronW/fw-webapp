@@ -1,110 +1,91 @@
 .customer-info-container {
-  margin-bottom: 141px;
+    margin-bottom: 141px;
 }
 
 .customer-info-grp {
-  margin-top: 21px;
-  padding-bottom: 30px;
-  background-color: #fff;
+    margin-top: 21px;
+    padding-bottom: 30px;
+    background-color: #fff;
 }
 
 .info-label {
-  height: 90px;
-  line-height: 90px;
-  padding-left: 24px;
-  background-color: #f9f9f9;
-  color: #333;
-  font-size: 32px;
+    height: 90px;
+    line-height: 90px;
+    padding-left: 24px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 32px;
 }
 
 .info-item {
-  box-sizing: border-box;
-  display: table;
-  width: calc(100% - 24px);
-  height: 90px;
-  margin-left: 24px;
-  padding-right: 24px;
-  border-bottom: 1px solid #e3e5ea;
+    box-sizing: border-box;
+    display: table;
+    width: calc(100% - 24px);
+    height: 90px;
+    margin-left: 24px;
+    padding-right: 24px;
+    border-bottom: 1px solid #e3e5ea;
 }
 
 .info-item-type {
-  float: left;
-  height: 90px;
-  line-height: 90px;
-  color: #666;
-  font-size: 30px;
+    float: left;
+    height: 90px;
+    line-height: 90px;
+    color: #666;
+    font-size: 30px;
 }
 
 .info-item-input {
-  float: right;
-  width: 510px;
-  height: 90px;
-  line-height: 90px;
-  background-color: #fff;
-  border: none;
-  outline: none;
-  color: #666;
-  font-size: 30px;
-  text-align: right;
+    float: right;
+    width: 510px;
+    height: 90px;
+    line-height: 90px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    color: #666;
+    font-size: 30px;
+    text-align: right;
 }
 
 .upload-img-item {
-  padding: 36px 24px 0;
+    padding: 36px 24px 0;
 }
 
 .img-upload-label {
-  color: #666;
-  font-size: 30px;
+    color: #666;
+    font-size: 30px;
 }
 
 .img-upload-tip {
-  color: #999;
-  margin-bottom: 18px;
-  font-size: 22px;
+    color: #999;
+    margin-bottom: 18px;
+    font-size: 22px;
 }
 
 .upload-img-container {
-  display: table;
-  width: 100%;
+    display: table;
+    width: 100%;
 }
 
 .upload-img-left {
-  float: left;
-  width: 316px;
-  height: 198px;
-  border-radius: 12px;
-  background: url('../images/customer-info/img-placeholder.png') #fff no-repeat center;
+    float: left;
+    width: 316px;
+    height: 198px;
+    border-radius: 12px;
+    background: url('../images/customer-info/img-placeholder.png') #fff no-repeat center;
 }
 
 .upload-img-right {
-  float: right;
-  width: 316px;
-  height: 198px;
-  border-radius: 12px;
-  background: url('../images/customer-info/img-placeholder.png') #fff no-repeat center;
+    float: right;
+    width: 316px;
+    height: 198px;
+    border-radius: 12px;
+    background: url('../images/customer-info/img-placeholder.png') #fff no-repeat center;
 }
 
 .same-person-check {
-  margin: 24px 0 0 24px;
-  color: #666;
-  font-size: 28px;
-}
-
-.next-btn-area {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0 0 45px 5px #f0f0f0;
-}
-
-.next-btn {
-  margin: 22px 30px;
-  height: 78px;
-  background-color: #fd4d4c;
-  color: #fff;
-  font-size: 32px;
-  line-height: 83px;
-  text-align: center;
-  border-radius: 5px;
+    margin: 24px 0 0 24px;
+    color: #666;
+    font-size: 28px;
 }

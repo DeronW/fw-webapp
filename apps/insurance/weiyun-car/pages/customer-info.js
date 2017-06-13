@@ -6,10 +6,13 @@ import { Redirect } from 'react-router-dom'
 import { BrowserFactory } from 'fw-javascripts'
 
 import Header from '../components/header'
+import BottomButton from '../components/bottom-buttion.js'
 
 import styles from '../css/customer-info.css'
 
-@inject('customer_info') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@inject('customer_info')
+@observer
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class CustomerInfo extends React.Component {
     render() {
         let { customer_info } = this.props;
@@ -39,15 +42,15 @@ class CustomerInfo extends React.Component {
                             <div styleName="img-upload-label">上传身份证照片</div>
                             <div styleName="img-upload-tip">按保监局要求上传身份证正反面照片</div>
                             <div styleName="upload-img-container">
-                                { customer_info.holder.Image1 ?
+                                {customer_info.holder.Image1 ?
                                     <div styleName="upload-img-left" style={{ background: `url(${customer_info.holder.Image1}) #fff no-repeat center` }}></div>
                                     :
-                                    <div styleName="upload-img-left">请添加<br/>身份证正面照片</div>
+                                    <div styleName="upload-img-left">请添加<br />身份证正面照片</div>
                                 }
-                                { customer_info.holder.Image2 ?
+                                {customer_info.holder.Image2 ?
                                     <div styleName="upload-img-right" style={{ background: `url(${customer_info.holder.Image2}) #fff no-repeat center` }}></div>
                                     :
-                                    <div styleName="upload-img-right">请添加<br/>身份证反面照片</div>
+                                    <div styleName="upload-img-right">请添加<br />身份证反面照片</div>
                                 }
                             </div>
                         </div>
@@ -56,7 +59,7 @@ class CustomerInfo extends React.Component {
                             投保人信息与被保人信息一致
                         </div>
                     </div>
-                    { !customer_info.isSame &&
+                    {!customer_info.isSame &&
                         <div styleName="customer-info-grp">
                             <div styleName="info-label">被保人信息</div>
                             <div styleName="info-item">
@@ -79,15 +82,15 @@ class CustomerInfo extends React.Component {
                                 <div styleName="img-upload-label">上传身份证照片</div>
                                 <div styleName="img-upload-tip">按保监局要求上传身份证正反面照片</div>
                                 <div styleName="upload-img-container">
-                                    { customer_info.recognizee.Image1 ?
+                                    {customer_info.recognizee.Image1 ?
                                         <div styleName="upload-img-left" style={{ background: `url(${customer_info.recognizee.Image1}) #fff no-repeat center` }}></div>
                                         :
-                                        <div styleName="upload-img-left">请添加<br/>身份证正面照片</div>
+                                        <div styleName="upload-img-left">请添加<br />身份证正面照片</div>
                                     }
-                                    { customer_info.recognizee.Image2 ?
+                                    {customer_info.recognizee.Image2 ?
                                         <div styleName="upload-img-right" style={{ background: `url(${customer_info.recognizee.Image2}) #fff no-repeat center` }}></div>
                                         :
-                                        <div styleName="upload-img-right">请添加<br/>身份证反面照片</div>
+                                        <div styleName="upload-img-right">请添加<br />身份证反面照片</div>
                                     }
                                 </div>
                             </div>
@@ -98,24 +101,23 @@ class CustomerInfo extends React.Component {
                         <div styleName="upload-img-item">
                             <div styleName="img-upload-tip">按保监局要求上传身份证正反面照片</div>
                             <div styleName="upload-img-container">
-                                { customer_info.vehicleLicenseImage1 ?
+                                {customer_info.vehicleLicenseImage1 ?
                                     <div styleName="upload-img-left" style={{ background: `url(${customer_info.vehicleLicenseImage1}) #fff no-repeat center` }}></div>
                                     :
-                                    <div styleName="upload-img-left">请添加<br/>行驶证正面照片</div>
+                                    <div styleName="upload-img-left">请添加<br />行驶证正面照片</div>
                                 }
-                                { customer_info.vehicleLicenseImage2 ?
+                                {customer_info.vehicleLicenseImage2 ?
                                     <div styleName="upload-img-right" style={{ background: `url(${customer_info.vehicleLicenseImage2}) #fff no-repeat center` }}></div>
                                     :
-                                    <div styleName="upload-img-right">请添加<br/>行驶证反面照片</div>
+                                    <div styleName="upload-img-right">请添加<br />行驶证反面照片</div>
                                 }
                             </div>
                         </div>
                     </div>
                 </div>
-                <div styleName="next-btn-area">
-                    <div styleName="next-btn"
-                        onClick={ customer_info.submit(this.props.history) }>确认提交</div>
-                </div>
+
+                <BottomButton active={true} title="确认提交"
+                    onClick={() => customer_info.submit(history)} />
             </div>
         )
     }
