@@ -48,7 +48,7 @@ export default class PolicyDetail {
 
     submit = (history) => {
         if (!this.valid) return
-        history.push('/policy-quotation');
+        history.push('/order-confirm');
         // return this.request('blablabla').then(data => {
         //     if (data.success) {
         //
