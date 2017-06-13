@@ -222,7 +222,7 @@ class PolicyDetail extends React.Component {
                 </div>
 
                 <BottomButton active={policy_detail.valid} title={'查询保费'}
-                    onClick={() => policy_detail.submit(history)} />
+                    onClick={() => {console.log(policy_detail.valid);policy_detail.submit(history)}} />
             </div>
         )
     }

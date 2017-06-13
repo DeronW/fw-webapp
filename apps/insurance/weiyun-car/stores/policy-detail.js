@@ -37,7 +37,7 @@ export default class PolicyDetail {
     }
 
     @computed get valid() {
-        if (this.HcSanFangTeYue === null && this.CheSun !== 0) return false; // 投保车损险但没有选择第三方是否投保，信息缺失
+        if (this.hcSanFangTeYue === null && this.cheSun !== 0) return false; // 投保车损险但没有选择第三方是否投保，信息缺失
 
         ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang', 'huaHen', 'boli', 'ziRan', 'sheShui'].forEach((key) => {
             if (this[key] === null) return false // 其他必选项信息缺失
@@ -46,7 +46,7 @@ export default class PolicyDetail {
         return true;
     }
 
-    submit = (history) => () => {
+    submit = (history) => {
         if (!this.valid) return
         history.push('/policy-quotation');
         // return this.request('blablabla').then(data => {
