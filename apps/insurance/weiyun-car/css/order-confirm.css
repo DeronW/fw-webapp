@@ -1,0 +1,95 @@
+.confirm-info {
+  width: 690px;
+  height: 268px;
+  border-top: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
+  background: #fff;
+  margin-top: 20px;
+  padding-left: 30px;
+}
+
+.info-item {
+  width: 690px;
+  height: 89px;
+  border-bottom: 1px solid #d8d8d8;
+  display: table;
+}
+
+.item-left {
+  float: left;
+  font-size: 30px;
+  color: #555;
+  line-height: 90px;
+}
+
+.item-right {
+  float: right;
+  width: 130px;
+  line-height: 90px;
+  color: #999;
+  padding-right: 45px;
+  font-size: 26px;
+  background: url("../images/order-confirm/arrow-right.png") no-repeat 130px center;
+}
+
+.amount-info{
+  width: 100%;
+  height: 360px;
+  border-bottom: 1px solid #d8d8d8;
+  background: #fff;
+  margin-top: 20px;
+}
+
+.amount-title{
+  width: 690px;
+  height: 90px;
+  border-top: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
+  background-color: #f2f2f2;
+  line-height: 90px;
+  font-size: 32px;
+  color: #333;
+  padding-left: 30px;
+}
+
+.amount-pic{
+  vertical-align: middle;
+  margin-right: 20px;
+}
+
+.amount-item{
+  width: 690px;
+  line-height: 90px;
+  padding-left: 30px;
+  border-bottom: 1px solid #d8d8d8;
+  display: table;
+}
+
+.item-last {
+  border-bottom: 0 none;
+}
+
+.amount-item-right{
+  float: right;
+  line-height: 90px;
+  color: #333;
+  padding-right: 30px;
+  font-size: 26px;
+}
+
+.color-red{
+  color: #fd4d4c;
+}
+
+.confirm-btn{
+  width: 660px;
+  margin: 30px auto;
+  background-color: #fd4d4c;
+  height: 74px;
+  line-height: 74px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  font-size: 32px;
+  border-radius: 4px;
+}

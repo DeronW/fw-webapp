@@ -15,7 +15,8 @@ let stores = {
     policy_detail: new Stores.PolicyDetail(Request),
     customer_info: new Stores.CustomerInfo(Request),
     orders: new Stores.Orders(Request),
-    order_payment: new Stores.OrderPayment(Request)
+    order_payment: new Stores.OrderPayment(Request),
+    order_confirm:new Stores.OrderConfirm(Request)
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))
