@@ -29,6 +29,5 @@ a:active {
 }
 
 :global .cnt-container {
-    margin-top: 88px;
     /*height of header*/
 }
