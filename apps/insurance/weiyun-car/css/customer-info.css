@@ -101,23 +101,10 @@
 
 .same-person-check {
   position: relative;
-  padding-left: 39px;
+  height: 37px;
   margin: 24px 0 0 24px;
   color: #666;
   font-size: 28px;
-}
-
-.fake-check-icon {
-  position: absolute;
-  top: 4px;
-  left: 0;
-  box-sizing: border-box;
-  display: inline-block;
-  width: 33px;
-  height: 33px;
-  border-radius: 50%;
-  border: 1px solid #d8d8d8;
-  background-color: #fff;
 }
 
 .checked {
