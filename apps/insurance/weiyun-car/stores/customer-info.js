@@ -6,25 +6,44 @@ export default class CustomerInfo {
         this.request = request
         extendObservable(this, {
             holder: {
-                Name: '',
-                Mobile: '',
-                CardId: '',
-                Email: '',
-                Image1: '',
-                Image2: ''
+                name: '',
+                mobile: '',
+                cardId: '',
+                email: '',
+                image1: '',
+                image2: ''
             },
             recognizee: {
-                Name: '',
-                Mobile: '',
-                CardId: '',
-                Email: '',
-                Image1: '',
-                Image2: ''
+                name: '',
+                mobile: '',
+                cardId: '',
+                email: '',
+                image1: '',
+                image2: ''
             },
-            IsSame: true,
+            isSame: true,
             vehicleLicenseImage1: '',
             vehicleLicenseImage2: ''
         }, state)
+    }
+
+    setFormData = (type, k, v) => {
+        this[type][k] = v;
+    }
+
+    toggleSamePerson = () => {
+        this.isSame = !this.isSame;
+        if (this.isSame) {
+            Object.assign(this.recognizee, this.holder);
+        } else {
+            for (var k in this.recognizee) {
+                this.recognizee[k] = ''
+            }
+        }
+    }
+
+    triggerUploadImg = () => {
+        // TODO: trigger app upload img
     }
 
     submit = (history) => () => {

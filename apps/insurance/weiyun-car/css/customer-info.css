@@ -69,6 +69,7 @@
 }
 
 .upload-img-left {
+  display: table;
   float: left;
   width: 316px;
   height: 198px;
@@ -77,6 +78,7 @@
 }
 
 .upload-img-right {
+  display: table;
   float: right;
   width: 316px;
   height: 198px;
@@ -84,10 +86,43 @@
   background: url('../images/customer-info/img-placeholder.png') #fff no-repeat center;
 }
 
+.upload-img-display {
+  width: 100%;
+  height: 100%;
+}
+
+.upload-img-tip {
+  display: table-cell;
+  color: #666;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 22px;
+}
+
 .same-person-check {
+  position: relative;
+  padding-left: 39px;
   margin: 24px 0 0 24px;
   color: #666;
   font-size: 28px;
+}
+
+.fake-check-icon {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  box-sizing: border-box;
+  display: inline-block;
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  border: 1px solid #d8d8d8;
+  background-color: #fff;
+}
+
+.checked {
+  border: none;
+  background: url('../images/policy-detail/check.png') #4aa1f9 no-repeat center;
 }
 
 .next-btn-area {
