@@ -13,7 +13,6 @@ let stores = {
     basic_info: new Stores.BasicInfo(Request),
     car_info: new Stores.CarInfo(Request),
     policy_detail: new Stores.PolicyDetail(Request),
-    policy_quotation: new Stores.PolicyQuotation(Request),
     customer_info: new Stores.CustomerInfo(Request),
     orders: new Stores.Orders(Request),
 }

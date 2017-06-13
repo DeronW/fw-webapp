@@ -9,7 +9,8 @@ import Header from '../components/header'
 
 import styles from '../css/policy-quotation.css'
 
-@inject('policy_quotation') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@observer
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class PolicyQuotation extends React.Component {
 
     state = { selected: null }; // 人保2  太平洋1  平安0
@@ -17,6 +18,10 @@ class PolicyQuotation extends React.Component {
     selectFirm = (firmNo) => {
         let selected = this.state.selected === firmNo ? null : firmNo;
         this.setState({ selected: selected });
+    }
+
+    submitHandler = () => {
+        this.props.history.replace('/customer-info')
     }
 
     render() {
@@ -70,7 +75,7 @@ class PolicyQuotation extends React.Component {
                     </div>
                 </div>
 
-                <div styleName="next-btn">下一步</div>
+                <a styleName="next-btn" onClick={this.submitHandler}>下一步</a>
             </div>
         )
     }
