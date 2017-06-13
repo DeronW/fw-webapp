@@ -1,9 +1,10 @@
 import { extendObservable, computed } from 'mobx'
 
-export default class BasicInfo {
+export default class PolicyDetail {
 
     constructor(request, state = {}) {
         this.request = request
+
         extendObservable(this, {
             cheSun: null,
             buJiMianCheSun: false,
@@ -33,15 +34,6 @@ export default class BasicInfo {
 
     setFormData = (k, v) => {
         this[k] = parseInt(v);
-    }
-
-    setMainFieldData = (field, value) => {
-        let formattedValue = parseInt(value);
-        return this[field] = formattedValue;
-    }
-
-    setBujimianFieldData = (field, value) => {
-        this[field] = value === 0 ? 0 : (1 - this[field]);
     }
 
     @computed get valid() {
