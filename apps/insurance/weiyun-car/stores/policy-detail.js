@@ -6,24 +6,33 @@ export default class BasicInfo {
         this.request = request
         extendObservable(this, {
             cheSun: null,
-            buJiMianCheSun: 0,
+            buJiMianCheSun: false,
             sanZhe: null,
-            buJiMianSanZhe: 0,
+            buJiMianSanZhe: false,
             siJi: null,
-            buJiMianSiJi: 0,
+            buJiMianSiJi: false,
             chengKe: null,
-            buJiMianChengKe: 0,
+            buJiMianChengKe: false,
             daoQiang: null,
-            buJiMianDaoQiang: 0,
+            buJiMianDaoQiang: false,
             huaHen: null,
-            buJiMianHuaHen: 0,
+            buJiMianHuaHen: false,
             boli: null,
             ziRan: null,
-            buJiMianZiRan: 0,
+            buJiMianZiRan: false,
             sheShui: null,
-            buJiMianSheShui: 0,
+            buJiMianSheShui: false,
             hcSanFangTeYue: null,
         }, state)
+    }
+
+    bjmToggleHander = (kindName, bjmName) => {
+        if (this[kindName])
+            this[bjmName] = !this[bjmName]
+    }
+
+    setFormData = (k, v) => {
+        this[k] = parseInt(v);
     }
 
     setMainFieldData = (field, value) => {
@@ -37,9 +46,11 @@ export default class BasicInfo {
 
     @computed get valid() {
         if (this.HcSanFangTeYue === null && this.CheSun !== 0) return false; // 投保车损险但没有选择第三方是否投保，信息缺失
+
         ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang', 'huaHen', 'boli', 'ziRan', 'sheShui'].forEach((key) => {
             if (this[key] === null) return false // 其他必选项信息缺失
         })
+
         return true;
     }
 
