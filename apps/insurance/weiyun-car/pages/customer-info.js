@@ -6,12 +6,13 @@ import { Redirect } from 'react-router-dom'
 import { BrowserFactory } from 'fw-javascripts'
 
 import Header from '../components/header'
+import BottomButton from '../components/bottom-button.js'
 
 import styles from '../css/customer-info.css'
 
 @inject('customer_info')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class CustomerInfo extends React.Component {
 
     changeHandler = (type, k) => (e) => {
@@ -81,7 +82,7 @@ class CustomerInfo extends React.Component {
                             投保人信息与被保人信息一致
                         </div>
                     </div>
-                    { !customer_info.isSame &&
+                    {!customer_info.isSame &&
                         <div styleName="customer-info-grp">
                             <div styleName="info-label">被保人信息</div>
                             <div styleName="info-item">
@@ -145,7 +146,8 @@ class CustomerInfo extends React.Component {
                         </div>
                     </div>
                 </div>
-
+                <BottomButton active={true} title="确认提交"
+                    onClick={() => customer_info.submit(history)} />
             </div>
         )
     }

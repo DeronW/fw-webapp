@@ -25,7 +25,6 @@ export default (stores) => {
                 <Route exact path='/' component={Home} />
                 <Route exact path='/basic-info' component={BasicInfo} />
                 <Route exact path='/car-info' component={CarInfo} />
-
                 <Route exact path='/policy-detail' component={PolicyDetail} />
                 <Route exact path='/policy-quotation' component={PolicyQuotation} />
                 <Route exact path='/customer-info' component={CustomerInfo} />
