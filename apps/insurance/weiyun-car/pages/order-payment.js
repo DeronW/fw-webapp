@@ -14,9 +14,7 @@ class MainPanel extends React.Component {
     constructor(props) {
         super(props)
     }
-    switchIcon = (value) => {
-        this.props.order_payment.setFormData('checked', value)
-    }
+    
     render() {
         let { order_payment, history } = this.props;
         let checkIcont = {
