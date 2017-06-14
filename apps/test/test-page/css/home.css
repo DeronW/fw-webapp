@@ -1,12 +1,10 @@
-body {
-  margin: 0;
-  font-family: San Francisco, PingFang SC, Helvetica Neue, Helvetica, Arial, sans-serif
-}
-
-
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
+}
+
+img {
+  vertical-align: middle
 }
 
 body {
@@ -27,13 +25,13 @@ body {
 
 .product-title-icon {
   margin-right: 12px;
-  vertical-align: text-bottom
+  vertical-align: sub
 }
 
 .loan-product-card {
   float: left;
   width: 50%;
-  text-align: center
+  text-align: center;
 }
 
 .loan-product-card:first-child {
@@ -63,18 +61,14 @@ body {
   display: inline-block;
   height: 36px;
   line-height: 36px;
-  padding: 0 5px;
+  padding: 0 3px;
   border-radius: 2px;
   font-size: 24px
 }
 
-.loan-product-label:first-child {
-  margin-right: 12px
-}
-
 .loan-product-label-icon {
   margin-right: 6px;
-  vertical-align: text-top
+  vertical-align: baseline
 }
 
 .loan-product-label-icon[src*=label-2] {
@@ -89,8 +83,9 @@ body {
 
 .sub-product-item {
   height: 158px;
-  padding: 22px 0 22px 27px;
-  border-bottom: 1px solid #ececec
+  padding: 22px 0;
+  border-bottom: 1px solid #ececec;
+  margin-left: 27px
 }
 
 .sub-product-item:last-child {
@@ -135,16 +130,17 @@ body {
   float: right;
   width: 90px;
   height: 100%;
-  background: url(../images/home/next-icon.png) no-repeat 0 50%;
+  background: url(../images/home/next-icon.png) no-repeat;
+  background-position: 50%
 }
 
 .bulletin-mask {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, .7);
+  background: rgba(0,0,0,.7);
   z-index: 99999
 }
 
@@ -154,8 +150,8 @@ body {
   border-radius: 12px;
   top: 45%;
   left: 50%;
-  -webkit-transform: translate(-50%, -45%);
-  transform: translate(-50%, -45%)
+  -webkit-transform: translate(-50%,-45%);
+  transform: translate(-50%,-45%)
 }
 
 .bulletin-head {
@@ -175,26 +171,27 @@ body {
 }
 
 .bulletin-content {
-  width: 652px;
   padding: 0 34px 42px;
   color: #666;
-  font-size: 30px
+  font-size: 28px;
+  word-break: break-all
 }
 
-.bulletin-content, .bulletin-exit {
+.bulletin-content,.bulletin-exit {
   position: relative;
   top: -12px;
+  width: 652px;
   margin: auto;
   background: #fff
 }
 
 .bulletin-exit {
-  width: 653px;
-  height: 104px;
-  line-height: 104px;
+  height: 100px;
+  line-height: 100px;
+  border-top: 1px solid #eee;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   color: #f6775e;
-  font-size: 34px;
+  font-size: 32px;
   text-align: center
 }

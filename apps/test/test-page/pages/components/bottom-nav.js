@@ -9,19 +9,23 @@ class BottomNav extends React.Component{
     render(){
         let actS = {
             color: '#58a1fa'
-        }
+        };
         return <div styleName="bottom-nav">
             <NavLink styleName="btn" to="/home" activeStyle={actS}>
+                <span styleName="icon1"></span>
                 借款
             </NavLink>
             <NavLink styleName="btn" to="/bill" activeStyle={actS}>
+
                 账单
             </NavLink>
             <NavLink styleName="btn" to="/invite" activeStyle={actS}>
+
                 邀友
             </NavLink>
             <NavLink styleName="btn" to="/market" activeStyle={actS}>
-                超市
+
+                发现
             </NavLink>
             <NavLink styleName="btn" to="/mine" activeStyle={actS}>
                 我的
