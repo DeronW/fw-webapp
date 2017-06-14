@@ -16,7 +16,8 @@ class OrderConfirm extends React.Component {
     render() {
 
         let { quotations, current_order, history } = this.props,
-            orderPrice = quotations.getSelectedAbstract(current_order.selectedFirm);
+            selectedFirm = current_order.selectedFirm,
+            orderPrice = quotations.getSelectedAbstract(selectedFirm);
 
         return <div styleName="confirm-box">
 
@@ -37,10 +38,7 @@ class OrderConfirm extends React.Component {
                 </div>
             </div>
             <div styleName="amount-info">
-                <div styleName="amount-title">
-                    <img src={require('../images/order-confirm/logo-renbao.png')} styleName="amount-pic"/>
-                    人保车险
-                </div>
+                <div styleName={`amount-title-${selectedFirm}`}></div>
                 <div styleName="amount-content">
                     <div styleName="amount-item">
                         <div styleName="item-left">保险公司报价</div>

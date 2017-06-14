@@ -40,19 +40,48 @@
   margin-top: 20px;
 }
 
-.amount-title{
+.amount-title {
   width: 690px;
   height: 90px;
   border-top: 1px solid #d8d8d8;
   border-bottom: 1px solid #d8d8d8;
-  background-color: #f2f2f2;
   line-height: 90px;
   font-size: 32px;
   color: #333;
-  padding-left: 30px;
+  padding-left: 100px;
 }
 
-.amount-pic{
+.amount-title-0 {
+  composes: amount-title;
+
+  background: url('../images/order-confirm/pingan.png') #f2f2f2 no-repeat 24px center;
+}
+
+.amount-title-0::before {
+  content: '平安车险';
+}
+
+.amount-title-1 {
+  composes: amount-title;
+
+  background: url('../images/order-confirm/taipingyang.png') #f2f2f2 no-repeat 24px center;
+}
+
+.amount-title-1::before {
+  content: '太平洋车险';
+}
+
+.amount-title-2 {
+  composes: amount-title;
+
+  background: url('../images/order-confirm/renbao.png') #f2f2f2 no-repeat 24px center;
+}
+
+.amount-title-2::before {
+  content: '人保车险';
+}
+
+.amount-pic {
   vertical-align: middle;
   margin-right: 20px;
 }
