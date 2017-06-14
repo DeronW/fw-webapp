@@ -1,7 +1,14 @@
 import { Request } from 'fw-javascripts'
 
-const WrapRequest = options => {
-    return Request(Object.assign({}, {}, options))
+let API_PATH = document.getElementById('api-path').value;
+
+const Get = (url, params) => {
+    return Request({
+        url: API_PATH + url,
+        data: params
+    })
 }
 
-export default WrapRequest
+export {
+    Get
+}

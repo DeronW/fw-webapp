@@ -46,7 +46,7 @@ $FW.DOMReady(function () {
     if (!$FW.Browser.inApp()) {
         ReactDOM.render(<Header title={'领券中心'}
             sub_text={'我的优惠券'}
-            sub_url='javascript:NativeBridge.toNative("app_coupon")' />, HEADER_NODE);
+            sub_url='javascript:NativeBridge.toNative("app_invest_list")' />, HEADER_NODE);
     }
     ReactDOM.render(<CouponCenter />, CONTENT_NODE)
 });
