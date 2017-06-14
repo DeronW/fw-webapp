@@ -14,35 +14,44 @@ export default class Home extends React.Component {
     constructor(props){
         super(props)
         this.state={
-            extList:[]
+            resultList:[]
         }
     }
     componentDidMount(){
         let {home} = this.props;
         home.getProductList().then(()=>{
-            this.setState({extList:home.extList})
+            this.setState({resultList:home.resultList})
         })
     }
     render(){
-        //let extList = mobx.toJS(this.props.home.extList);
-        let generate_other_products = (product) => (
-            <a
-                styleName="other-products-item"
-                key={product.firstTitle}
-                href={product.forwardUrl}>
-                <div styleName="product-icon">
-                    <img src={decodeURIComponent(product.iconUrl)}/>
+        function LoanProduct(props) {
+            let productLink = props.productName === '放心花' ? `/static/loan/fxh/index.html` : `/static/loan/dumiao/index.html`,
+                productToNative = props.productName === '放心花' ? 'fxh_detail' : '';
+            let labelImgURI = {
+                1: require('../images/home/tag-1.jpg'),
+                2: require('../images/home/tag-2.jpg'),
+                3: require('../images/home/tag-3.jpg')
+            }
+            let generate_labels = (label) => (
+            <img className="loan-product-label-icon" src={labelImgURI[label.labelType]} />
+            );
+            return (
+                <div className="loan-product-card" key={props.productId} onClick={() => { gotoHandler(`${productLink}?pid=${props.productId}`, productToNative) }}>
+                    <img className="loan-product-logo" src={ props.productLogo } />
+                    <div className="loan-product-name">{ props.productName }</div>
+                    <div className="loan-product-amount">借款范围({ props.amountStr })</div>
+                    <div className="loan-product-label-container">
+                        { props.productLabelList.map(generate_labels) }
+                    </div>
                 </div>
-                <div styleName="product-title">
-                    <div styleName="product-1st-title">{product.firstTitle}</div>
-                    <div styleName="product-2nd-title">{product.secondTitle}</div>
-                </div>
-            </a>
-        )
+            )
+        }
         return (
             <div>
-                {/*extList.length>0 && extList.map(generate_other_products)*/}
-                {this.state.extList.map(generate_other_products)}
+                {/*<img src={require("../images/home/banner.jpg")}/>*/}
+                <div className="loan-product-card-container">
+                    { this.state.resultList.map(product => <LoanProduct {...product} key={product.productId } />) }
+                </div>
                 <BottomNav />
             </div>
         )
