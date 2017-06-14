@@ -149,7 +149,7 @@ class GiftBag extends React.Component {
     }
 
     jump() {
-        NativeBridge.toNative('app_coupon')
+        NativeBridge.toNative('app_invest_list')
     }
 
     render() {
