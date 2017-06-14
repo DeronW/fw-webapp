@@ -115,7 +115,7 @@ class BottomNavBar extends React.Component {
                 </a>
                 <a style={_style_tab_self} href={_href_self}>
                     <i style={_style_tab_self_icon}></i>
-                    超市
+                    发现
                 </a>
                 <a style={_style_tab_more} href={_href_more}>
                     <i style={_style_tab_more_icon}></i>
