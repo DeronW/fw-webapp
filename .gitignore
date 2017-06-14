@@ -26,3 +26,4 @@ tmp.*
 bundle.min.js
 apps/test
 gulpfiles/test.js
+es7-lib/templates/test.swig.html

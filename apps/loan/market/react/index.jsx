@@ -99,9 +99,9 @@ class Juxtapose extends React.Component {
 }
 
 $FW.DOMReady(() => {
-    NativeBridge.setTitle("超市");
+    NativeBridge.setTitle("发现");
     if(!$FW.Browser.inFXHApp()){
-        ReactDOM.render(<Header enable='force' title="超市" show_back={false} />, HEADER_NODE)
+        ReactDOM.render(<Header enable='force' title="发现" show_back={false} />, HEADER_NODE)
     }
 	ReactDOM.render(<Juxtapose />, CONTENT_NODE)
     if(!$FW.Browser.inFXHApp()){
