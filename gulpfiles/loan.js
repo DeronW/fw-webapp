@@ -113,6 +113,11 @@ const APPLY_TEN_MILLION_LOAN = [
     'outside-mortgage-id-download'
 ]
 
+const REFACTORY_PAGES = [{
+    name: 'features', // 更多页面 , 包含 联系我们/关于我们/常见问题/退出功能
+    compiler: 'webpack'
+}]
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
@@ -128,7 +133,8 @@ APP_NAMES.push(
     ...CREDIT_CARD,
     ...MORTGAGE,
     // ...EXPERIMENTAL_HOME,
-    ...APPLY_TEN_MILLION_LOAN
+    ...APPLY_TEN_MILLION_LOAN,
+    // ...REFACTORY_PAGES
 );
 
 
