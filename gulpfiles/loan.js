@@ -134,7 +134,7 @@ APP_NAMES.push(
     ...MORTGAGE,
     // ...EXPERIMENTAL_HOME,
     ...APPLY_TEN_MILLION_LOAN,
-    // ...REFACTORY_PAGES
+    ...REFACTORY_PAGES
 );
 
 
