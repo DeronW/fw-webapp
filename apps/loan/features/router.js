@@ -14,7 +14,7 @@ export default (stores) => {
     return <Router>
         <Provider {...stores} >
             <Switch>
-                <Route exact path='/' component={More} />
+                <Route exact path='/more' component={More} />
                 <Route exact path='/about-us' component={AboutUs} />
                 <Route exact path='/faq' component={FAQ} />
             </Switch>
