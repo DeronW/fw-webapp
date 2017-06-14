@@ -1,6 +1,6 @@
 const eslint = require('gulp-eslint');
 
-const PROJ = 'test-project'
+const PROJ = 'test'
 
 const APP_NAMES = [{
     name: 'test-page',
