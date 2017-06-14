@@ -1,0 +1,34 @@
+.header-placeholder {
+    height: 88px;
+    display: block;
+}
+
+.header {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 88px;
+    line-height: 88px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+}
+
+.btn {
+    display: block;
+    float: left;
+    width: 80px;
+    height: 88px;
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    top: 0;
+    left: 0;
+}
+
+.btn-back {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAvCAMAAADKIyriAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAXVBMVEUAAABTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5VTb5UAAADt3LwOAAAAHXRSTlMAHofKYTZiyzQ3KpMz9K2WEURUElNSBW7MZUOs8IRJRR4AAAABYktHRACIBR1IAAAACXBIWXMAAAsSAAALEgHS3X78AAAAXElEQVQ4y+3JyQ5AUBAEwPbs+76b//9NwtH0iYSIuhagsYztqAFXNh4d8emIoSMWneCFE/6DiA7iY5LzIKWDbK+8UKoUftVDV994zQeuvXgdvx70BtAb1cI0LwYrVNwl2vWPSWoAAAAASUVORK5CYII=');
+}

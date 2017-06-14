@@ -14,10 +14,11 @@ export default class Home{
     }
 
     getProductList(params){
-        return this.request('http://localhost/fake-api/api/product/v1/productList.json',params).then( data => {
+        return this.request(`${API_PATH}/api/product/v1/productList.json`,params).then( data => {
             // this.resultList = data.resultList;
             // this.extList = data.extList;
             extendObservable(this, data);
         })
     }
+
 }
