@@ -1,4 +1,4 @@
-import Header from './header.jsx'
-import BottomNavBar from './bottom-nav-bar.jsx'
+import Header from './header.js'
+import BottomNavBar from './bottom-nav-bar.js'
 
 export { Header, BottomNavBar}

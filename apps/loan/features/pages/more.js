@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 
 import styles from '../css/more.css'
+import { Header } from '../../../../es7-lib/loan/components'
 
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
@@ -50,6 +51,8 @@ class More extends React.Component {
         </div>
 
         return <div styleName="bg">
+            <Header title="更多" history={this.props.history} />
+
             <img styleName="banner" src={require('../images/hotline.jpg')}
                 onClick={this.toggleContactHandler} />
 
