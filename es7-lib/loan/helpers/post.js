@@ -1,8 +1,9 @@
 import { Request } from 'fw-javascripts'
-import Cookie from './cookie.js'
 import Store from './store.js'
 
 const Post = (url, params, slience) => {
+
+    const API_PATH = document.getElementById('api-path').value;
 
     let USER = Store.getUserDict(),
         token = USER.token,
@@ -20,7 +21,7 @@ const Post = (url, params, slience) => {
     })
 
     return Request({
-        url: url,
+        url: API_PATH + url,
         method: 'POST',
         data: merged_params
     })

@@ -3,12 +3,12 @@ import { NativeBridgeFactory } from 'fw-javascripts'
 const NativeBridge = new NativeBridgeFactory('FinancialWorkshop')
 
 NativeBridge.close = function () {
-    this.trigger('close')
-}.bind(NativeBridge)
+    NativeBridge.trigger('close')
+}
 
 NativeBridge.setTitle = function (title) {
-    this.trigger('set_title', title)
-}.bind(NativeBridge)
+    NativeBridge.trigger('set_title', title)
+}
 
 export default NativeBridge
 
