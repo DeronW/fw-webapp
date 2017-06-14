@@ -48,7 +48,7 @@ export default class Home extends React.Component {
         }
         return (
             <div>
-                {/*<img src={require("../images/home/banner.jpg")}/>*/}
+                <img src={require("../images/home/banner.jpg")}/>
                 <div className="loan-product-card-container">
                     { this.state.resultList.map(product => <LoanProduct {...product} key={product.productId } />) }
                 </div>
