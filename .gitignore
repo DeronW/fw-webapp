@@ -24,3 +24,5 @@ gulpfile.settings.js
 tmp.*
 *.compile.sh
 bundle.min.js
+apps/test
+gulpfiles/test.js
