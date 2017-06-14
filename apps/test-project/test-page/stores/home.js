@@ -1,31 +1,35 @@
-import {observable, action, extendObservable} from 'mobx'
+import {extendObservable} from 'mobx'
 
-//ui state
-export const ui = observable({
-    pendingRequests : false
-})
+export default class Home{
+    constructor(request,state={}){
+        this.request = request
+        // extendObservable(this,{
+        //     resultList:[],
+        //     extList:[]
+        // })
+        extendObservable(this,{
+            resultList:[],
+            extList:[]
+        },state)
+    }
 
-class HomeStore{
-    @observable feed = []
-    @action('获取feed流') async fetchFeed(){
-        const data = await requestFromServer();
-        this.feed = data.list.map(item=>{
-            const id = item.id;
-            if(!detail.has(id)){
-                detail.set(id,new Detail(item))
-            }
-            return id;
+    getProductList(params){
+        return this.request('api/product/v1/productList.json',params).then( data => {
+            // this.resultList = data.resultList;
+            // this.extList = data.extList;
+            extendObservable(this, data);
         })
     }
-}
 
-class MapStore{
-    @observable data = observable.map();
-    get(id){return this.data.get(id)};
-    set(id, value){this.data.set(id,value)};
-    has(id){return this.data.has(id)}
-}
+    getRecommendList(params){
+        return this.request('api/product/v1/productList.json',params).then(data =>{
+            extendObservable(this,data)
+        })
+    }
 
-class Detail{
-
+    getNotice(params){
+        return this.request('api/product/v1/noticeList.json',params).then(data =>{
+            extendObservable(this,data)
+        })
+    }
 }

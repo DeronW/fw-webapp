@@ -25,3 +25,4 @@ tmp.*
 *.compile.sh
 bundle.min.js
 apps/test-project
+gulpfiles/test-project.js
