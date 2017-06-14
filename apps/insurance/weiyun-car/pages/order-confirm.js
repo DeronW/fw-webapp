@@ -1,15 +1,27 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
+
 import Header from '../components/header'
+import BottomButton from '../components/bottom-button'
+
 import styles from '../css/order-confirm.css'
 
-@inject('order_confirm')
-@observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+
+@inject('quotations', 'current_order')
+@observer
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class OrderConfirm extends React.Component {
+
     render() {
+
+        let { quotations, current_order, history } = this.props,
+            orderPrice = quotations.getSelectedAbstract(current_order.selectedFirm);
+
         return <div styleName="confirm-box">
-            <Header title="确认订单" history={this.props.history}/>
+
+            <Header title="确认订单" history={history}/>
+
             <div styleName="confirm-info">
                 <div styleName="info-item">
                     <div styleName="item-left">车辆信息</div>
@@ -32,23 +44,23 @@ class OrderConfirm extends React.Component {
                 <div styleName="amount-content">
                     <div styleName="amount-item">
                         <div styleName="item-left">保险公司报价</div>
-                        <div styleName="amount-item-right">￥{(this.props.order_confirm.offer_money).toFixed(2)}</div>
+                        <div styleName="amount-item-right">￥{orderPrice.originPrice}</div>
                     </div>
                     <div styleName="amount-item">
                         <div styleName="item-left">工场优惠额度</div>
                         <div styleName="amount-item-right">
-                            ￥{(this.props.order_confirm.preferential_amount).toFixed(2)}</div>
+                            ￥{orderPrice.discount}</div>
                     </div>
                     <div styleName="amount-item item-last">
                         <div styleName="item-left">实际结算金额</div>
                         <div styleName="amount-item-right color-red">
-                            ￥{(this.props.order_confirm.settlement_amount).toFixed(2)}</div>
+                            ￥{orderPrice.actualPrice}</div>
                     </div>
                 </div>
             </div>
-            <div styleName="confirm-btn">
-                确认提交
-            </div>
+
+            <BottomButton active={true} title={'确认提交'}
+                onClick={() => { history.push('/order-payment') } } />
         </div>
     }
 }

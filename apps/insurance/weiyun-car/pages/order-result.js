@@ -1,17 +1,18 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Redirect } from 'react-router-dom'
 
-import { BrowserFactory } from 'fw-javascripts'
+import Header from '../components/header'
 
-import Nav from '../components/header'
+import styles from '../css/order-result.css'
 
-// import styles from '../css/car-info.css'
+const OrderResult = inject('current_order')(observer(CSSModules((props) => (
+    <div>
+        <Header title="交易结果" history={props.history} />
+        <div styleName={props.current_order.state === '1' ? 'success' : 'fail'}>
+            <div styleName="status-tip">订单状态：支付{props.current_order.state === '1' ? '成功' : '失败'}</div>
+        </div>
+    </div>
+), styles, { allowMultiple: true, errorWhenNotFound: false})))
 
-// @inject('') @observer @CSSModules(styles)
-class MainPanel extends React.Component {
-
-}
-
-export default MainPanel
+export default OrderResult
