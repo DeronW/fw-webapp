@@ -1,14 +1,12 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Redirect } from 'react-router-dom'
-
-import { BrowserFactory } from 'fw-javascripts'
 
 import Header from '../components/header'
 import BottomButton from '../components/bottom-button.js'
 
 import styles from '../css/customer-info.css'
+import styles_icon_circle from '../css/icons/circle.css'
 
 @inject('customer_info')
 @observer
@@ -79,7 +77,9 @@ class CustomerInfo extends React.Component {
                             </div>
                         </div>
                         <div styleName="same-person-check" onClick={customer_info.toggleSamePerson}>
-                            <div styleName={`fake-check-icon${customer_info.isSame ? ' checked' : ''}`}></div>
+                            <i className={customer_info.isSame ?
+                                styles_icon_circle.checked :
+                                styles_icon_circle.unchecked}></i>
                             投保人信息与被保人信息一致
                         </div>
                     </div>
