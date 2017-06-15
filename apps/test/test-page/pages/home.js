@@ -3,7 +3,8 @@ import {render} from 'react-dom'
 import { observer, inject } from 'mobx-react'
 import CSSModules from 'react-css-modules'
 import styles from '../css/home.css'
-import BottomNav from './components/bottom-nav'
+import BottomNav from '../components/bottom-nav'
+import { Redirect } from 'react-router-dom'
 import { BrowserFactory } from 'fw-javascripts'
 import { NativeBridgeFactory } from 'fw-javascripts'
 
@@ -88,7 +89,7 @@ export default class Home extends React.Component {
                         <img styleName="product-title-icon" src={require("../images/home/sub-category-icon.png")} />精选推荐
                     </div>
                     <div styleName="sub-product-item-container">
-                        { this.state.recommendList.map(product => <SubProduct {...product} key={product.firstTitle} />) }
+                        { this.state.recommendList.map(product => <SubProduct {...product} key={product.productTitle} />) }
                     </div>
                 </div>
                 <BottomNav />
