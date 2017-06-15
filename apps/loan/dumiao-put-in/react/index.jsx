@@ -144,6 +144,6 @@ class MainPanel extends React.Component {
 }
 
 $FW.DOMReady(() => {
-    ReactDOM.render(<Header title={'借款申请1'} />, HEADER_NODE)
+    ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
 	ReactDOM.render(<MainPanel />, CONTENT_NODE)
 })
