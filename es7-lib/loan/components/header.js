@@ -10,7 +10,10 @@ const Header = CSSModules(styles, {
 })((props) => (
     <div styleName="header-placeholder">
         <div styleName="header">
-            <a styleName="btn btn-back" onClick={props.history.goBack}> </a>
+            <a styleName="btn-back" onClick={props.history.goBack}>
+                <div styleName="arm-up"></div>
+                <div styleName="arm-down"></div>
+            </a>
             {props.title}
         </div>
     </div>
