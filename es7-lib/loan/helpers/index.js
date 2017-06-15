@@ -1,12 +1,12 @@
 
 import StorageFactory from './storage-factory.js'
-import Post from './post.js'
+import PostMethodFactory from './post-method-factory.js'
 import Browser from './browser.js'
 import ThemeFactory from './theme-factory.js'
 import NativeBridge from './native-bridge.js'
 
 let Storage = new StorageFactory()
-
+let Post = PostMethodFactory(Storage)
 let Theme = new ThemeFactory(Storage, Browser)
 
 export {

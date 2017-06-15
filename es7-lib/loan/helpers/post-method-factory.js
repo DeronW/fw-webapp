@@ -1,10 +1,10 @@
 import { Request } from 'fw-javascripts'
 
-const Post = (url, params, slience) => {
+const PostMethodFactory = storage => (url, params, slience) => {
 
     const API_PATH = document.getElementById('api-path').value;
 
-    let USER = Store.getUserDict(),
+    let USER = storage.getUserDict(),
         token = USER.token,
         uid = USER.uid;
 
@@ -27,4 +27,4 @@ const Post = (url, params, slience) => {
 }
 
 
-export default Post
+export default PostMethodFactory
