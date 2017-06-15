@@ -1,6 +1,6 @@
 import React from 'react'
 import {render} from 'react-dom'
-import BottomNav from './components/bottom-nav'
+import BottomNav from '../components/bottom-nav'
 import CSSModules from 'react-css-modules'
 import styles from '../css/mine.css'
 import mobx from 'mobx'

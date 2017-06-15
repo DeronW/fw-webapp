@@ -3,6 +3,7 @@ import {extendObservable} from 'mobx'
 export default class Home{
     constructor(request,state={}){
         this.request = request;
+        this.API_PATH = 'http://localhost/fake-api';
         extendObservable(this,{
             resultList:[],
             recommendList:[]
@@ -10,15 +11,13 @@ export default class Home{
     }
 
     getProductList(params){
-        let API_PATH = 'http://localhost/fake-api'
-        return this.request(`${API_PATH}/api/product/v1/productList.json`,params).then( data => {
+        return this.request(`${this.API_PATH}/api/product/v1/productList.json`,params).then( data => {
             this.resultList = data.resultList
         })
     }
 
     getRecommendList(params){
-        let API_PATH = 'http://localhost/fake-api'
-        return this.request(`${API_PATH}/api/product/v1/recommendedList.json`,params).then( data => {
+        return this.request(`${this.API_PATH}/api/product/v1/recommendedList.json`,params).then( data => {
            this.recommendList = data.resultList
         })
     }
