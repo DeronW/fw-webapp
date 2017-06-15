@@ -70,30 +70,30 @@ const BasicCarInfo = inject('basic_info', 'car_info')(observer(CSSModules((props
             <div styleName="car-info">
                 <div styleName="car-info-item">
                     车牌号码
-                    <span>ssf{`${basic_info.carNoArea}${basic_info.licenseNo}`}</span>
+                    <span>{`${basic_info.carNoArea}${basic_info.licenseNo}`}</span>
                 </div>
                 <div styleName="car-info-item">
                     车主信息
-                    <span>sdfs{basic_info.carOwnersName}</span>
+                    <span>{basic_info.carOwnersName}</span>
                 </div>
                 <div styleName="car-info-item">
                     车辆型号
-                    <span>sdfsd{car_info.moldName}</span>
+                    <span>{car_info.moldName}</span>
                 </div>
                 <div styleName="car-info-item">
                     车架号
-                    <span>sdfs{car_info.carVin}</span>
+                    <span>{car_info.carVin}</span>
                 </div>
                 <div styleName="car-info-item">
                     发动机号
-                    <span>sf{car_info.engineNo}</span>
+                    <span>{car_info.engineNo}</span>
                 </div>
                 <div styleName="car-info-item-expire">
-                    <div styleName="left-els">
+                    <div styleName="expire-items">
                         交强险到期日:
                         <span>{car_info.forceExpireDate}</span>
                     </div>
-                    <div styleName="right-els">
+                    <div styleName="expire-items">
                         商业险到期日:
                         <span>{car_info.businessExpireDate}</span>
                     </div>

@@ -36,6 +36,14 @@ export default class PolicyDetail {
         this[k] = parseInt(v);
     }
 
+    initWithLastYearPlan = (plan) => {
+        for (var k in plan) {
+            if (this[k] !== undefined) {
+                this[k] = plan[k];
+            }
+        }
+    }
+
     @computed get valid() {
         if (this.hcSanFangTeYue === null && this.cheSun !== 0) return false; // 投保车损险但没有选择第三方是否投保，信息缺失
 

@@ -13,6 +13,10 @@ export default class PolicyDetail {
         })
     }
 
+    setPolicyId = (id) => {
+        this.temporaryPolicyId = id;
+    }
+
     toPay = () => {
         console.log('user wants to pay!');
     }

@@ -3,8 +3,9 @@ import * as $FW from 'fw-javascripts'
 
 export default class BasicInfo {
 
-    constructor(request, state = {}) {
-        this.request = request
+    constructor(get) {
+        this.get = get;
+        console.log(get);
         extendObservable(this, {
             carNoArea: null,//	车牌号首位汉字
             carOwnersName: '', //	String	车主姓名
@@ -12,29 +13,22 @@ export default class BasicInfo {
             idCard: '', //	是	String	车主身份证号（15或者18位）
             intentionCompanyCode: null, //	是	Int	意向投保公司(0:平安、1:太平洋、2:人保)
             licenseNo: '', //	是	String	车牌号（字母全部大写）首位除外
-        }, state)
+        })
     }
 
     submit = (history) => {
         if (!this.valid) return;
 
-        history.push('/car-info')
+        console.log(this.get);
 
-        // this.request('api/account/login', {
-        //     carNoArea: this.carNoArea,
-        //     carOwnersName: this.carOwnersName,
-        //     cityCode: this.cityCode,
-        //     idCard: this.idCard,
-        //     intentionCompanyCode: this.intentionCompanyCode,
-        //     licenseNo: this.licenseNo
-        // }).then(data => {
-        //     if (data.success) {
-        //         history.push('/car-info')
-        //     } else {
-        //     }
-        // }, e => {
-        //     $FW.Components.Toast(e.message)
-        // })
+        return this.get('/carInsurance/applyCarInsurance.shtml', {
+            carNoArea: this.carNoArea,
+            carOwnersName: this.carOwnersName,
+            cityCode: this.cityCode,
+            idCard: this.idCard,
+            intentionCompanyCode: this.intentionCompanyCode,
+            licenseNo: this.licenseNo
+        })
     }
 
     setFormData = (field, value) => {
