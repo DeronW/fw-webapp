@@ -1,6 +1,46 @@
-let storage = window.localStorage;
+import { Utils } from 'fw-javascripts'
 
-const Store = {
+class StorageFactory {
+    constructor() {
+        this.storage = window.localStorage
+    }
+
+    'get' = k => {
+        return this.storage.getItem(k) || ''
+    }
+
+    'set' = (k, v) => {
+        this.storage.setItem(k, v)
+    }
+
+    remove = k => {
+        let key_list = k instanceof Array ? k : [k]
+        key_list.forEach(i => this.storage.removeItem(i))
+    }
+
+    logout = () => {
+        this.remove(['userToken', 'userStatus', 'invitationCode', 'uid'])
+    }
+
+    clear = () => {
+        this.storage.clear()
+    }
+
+    getUserDict = () => {
+        return {
+            token: this.get('userToken'),
+            status: this.get('userStatus'),
+            invitCode: this.get('invitationCode'),
+            uid: this.get('uid')
+        }
+    }
+
+    getUserID = () => {
+        return this.get('uid') || Utils.Cookie.get('uid')
+    }
+}
+
+const Storage = {
     get: function (k, defaultVal) {
         return storage.getItem(k) || defaultVal || ''
     },
@@ -41,10 +81,6 @@ const Store = {
         return this.get('uid') || $FW.Cookie.get('uid')
     },
 
-    exportUserDict: function () {
-        return JSON.stringify(this.getUserDict())
-    },
-
     // set bulletin content binding with a certain token
     setBulletin: function (token, cnt) {
         this.set('bulletinToken', token);
@@ -57,4 +93,6 @@ const Store = {
     }
 }
 
-export default Store
+
+
+export default StorageFactory

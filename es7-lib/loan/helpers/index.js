@@ -1,14 +1,17 @@
 
-import Store from './store.js'
+import StorageFactory from './storage-factory.js'
 import Post from './post.js'
-import Theme from './theme.js'
 import Browser from './browser.js'
+import ThemeFactory from './theme-factory.js'
 import NativeBridge from './native-bridge.js'
 
+let Storage = new StorageFactory()
+
+let Theme = new ThemeFactory(Storage, Browser)
 
 export {
     Post,
-    Store,
+    Storage,
     NativeBridge,
     Browser,
     Theme

@@ -1,5 +1,4 @@
 import { Request } from 'fw-javascripts'
-import Store from './store.js'
 
 const Post = (url, params, slience) => {
 

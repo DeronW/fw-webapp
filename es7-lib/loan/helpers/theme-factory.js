@@ -1,8 +1,3 @@
-import Store from './store.js'
-import Browser from './browser.js'
-
-if (typeof (Store) === 'undefined')
-    throw new Error('$FW.Theme plugin depend on $FW.Store plugin')
 
 let KEY = '_THEME_LIST';
 let THEME_DICT = {
@@ -78,4 +73,4 @@ class ThemeFactory {
     }
 }
 
-export default new ThemeFactory(Store, Browser)
+export default ThemeFactory
