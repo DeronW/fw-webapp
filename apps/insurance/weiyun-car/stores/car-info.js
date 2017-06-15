@@ -32,20 +32,18 @@ export default class CarInfo {
         return this.moldName && this.engineNo && this.carVin && this.registerDate
     }
 
-    submit = (history) => {
+    submit = (history, policyId) => {
         if (!this.valid) return;
 
-        history.push(`/policy-detail?t_id=001`)
-
-        // return this.request('/carInsurance/perfectCarInfo.shtml', {
-        //     carVin: this.carVin,
-        //     engineNo: this.engineNo,
-        //     moldName: this.moldName,
-        //     recordDate: this.registerDate,
-        //     temporaryPolicyId: 0
-        // }).then(data => {
-        //     history.push(`/policy-detail?t_id=${data.temporaryPolicyId}`)
-        // })
+        return this.get('/carInsurance/perfectCarInfo.shtml', {
+            carVin: this.carVin,
+            engineNo: this.engineNo,
+            moldName: this.moldName,
+            recordDate: this.registerDate,
+            temporaryPolicyId: policyId
+        }).then(data => {
+            history.push(`/policy-detail?t_id=${data.temporaryPolicyId}`)
+        })
     }
 
 }
