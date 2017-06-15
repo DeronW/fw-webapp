@@ -2,8 +2,8 @@ import { extendObservable, computed } from 'mobx'
 
 export default class CarInfo {
 
-    constructor(get) {
-        this.get = get;
+    constructor(Get) {
+        this.Get = Get;
         extendObservable(this, {
             moldName: '', // 品牌型号
             engineNo: '', // 发动机号
@@ -35,7 +35,7 @@ export default class CarInfo {
     submit = (history, policyId) => {
         if (!this.valid) return;
 
-        return this.get('/carInsurance/perfectCarInfo.shtml', {
+        return this.Get('/carInsurance/perfectCarInfo.shtml', {
             carVin: this.carVin,
             engineNo: this.engineNo,
             moldName: this.moldName,

@@ -12,7 +12,7 @@ import NativeBridge from '../helpers/native-bridge.js'
 const Header = CSSModules(styles, {
     "allowMultiple": true,
     "errorWhenNotFound": false
-})((props) => (
+})(props => (
     <div styleName="header-placeholder">
         <div styleName="header">
             {props.show_back &&
@@ -28,7 +28,7 @@ const Header = CSSModules(styles, {
 ))
 
 Header.defaultProps = {
-  show_back: true
+    show_back: true
 };
 
 export default Header
