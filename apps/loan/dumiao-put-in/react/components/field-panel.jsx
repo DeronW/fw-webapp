@@ -137,11 +137,20 @@ class CityPanel extends React.Component {
             </div>
         }
 
+        let hot_style = {
+            display: "WebkitFlex",
+            webkitFlexWrap:"wrap",
+            display:"flex",
+            flexWrap:"wrap",
+            padding: "20px 0 0 24px",
+            backgroundColor: "#fff"
+        }
+
         return (
                 <div>
                     <div className="scroll-panel" ref="scroll">
                         <div className="hot-city-title">热门城市</div>
-                        <div className="hot-cities">
+                        <div className="hot-cities" style={hot_style}>
                             {HOT_CITY_LIST.map(hot_city_option)}
                         </div>
                         <div className="city-list">
