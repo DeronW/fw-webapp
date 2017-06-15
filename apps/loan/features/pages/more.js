@@ -53,7 +53,7 @@ class More extends React.Component {
         return <div styleName="bg">
             <Header title="更多" history={this.props.history} />
 
-            <img styleName="banner" src={require('../images/hotline.jpg')}
+            <img styleName="banner" src={require('../images/more/hotline.jpg')}
                 onClick={this.toggleContactHandler} />
 
             <a styleName="btn-item" onClick={this.toggleContactHandler}>
