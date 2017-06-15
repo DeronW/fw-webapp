@@ -3,9 +3,9 @@ import * as $FW from 'fw-javascripts'
 
 export default class BasicInfo {
 
-    constructor(get) {
-        this.get = get;
-        console.log(get);
+    constructor(Get) {
+        this.Get = Get;
+
         extendObservable(this, {
             carNoArea: null,//	车牌号首位汉字
             carOwnersName: '', //	String	车主姓名
@@ -19,9 +19,7 @@ export default class BasicInfo {
     submit = (history) => {
         if (!this.valid) return;
 
-        console.log(this.get);
-
-        return this.get('/carInsurance/applyCarInsurance.shtml', {
+        return this.Get('/carInsurance/applyCarInsurance.shtml', {
             carNoArea: this.carNoArea,
             carOwnersName: this.carOwnersName,
             cityCode: this.cityCode,
