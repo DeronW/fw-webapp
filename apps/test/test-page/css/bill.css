@@ -1,0 +1,216 @@
+.nav-bar {
+    border-bottom: 1px solid #d8d8d8;
+    background: white;
+    height: 95px;
+    position: relative;
+    margin-top:100px;
+}
+
+.bottom-line {
+    background: #d8d8d8;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+}
+
+.nav-bar-item {
+    width: 136px;
+    margin: 0 22px;
+    float: left;
+    display: block;
+    text-align: center;
+    height: 94px;
+    line-height: 100px;
+    font-size: 27px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 3;
+    color:#999;
+}
+
+.nav-bar-item.active {
+    color: #649cfe;
+    border-bottom: 3px solid #649cfe;
+}
+
+.order-item {
+    margin-top: 20px;
+    background: white;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.order-status-paid {
+    display: inline-block;
+    float: right;
+    color: #4aa1f9;
+    margin-right: 30px;
+}
+
+.order-status-unpaid {
+    display: inline-block;
+    float: right;
+    color: #999;
+    margin-right: 30px;
+}
+
+.order-item-id {
+    line-height: 64px;
+    height: 64px;
+    border: 1px solid #e3e5ea;
+    background: #f9f9f9;
+    color: #999;
+    padding-left: 26px;
+    font-size: 22px;
+}
+
+.order-item-cnt {
+    height: 100px;
+    line-height: 100px;
+}
+
+.order-prefix {
+    margin: 0 30px;
+    color: #333;
+    font-size: 26px;
+}
+
+.order-licenses {
+    color: #333;
+    font-size: 26px;
+}
+
+.order-price {
+    color: #fd4d4c;
+    font-size: 30px;
+    float: right;
+    margin-right: 30px;
+}
+
+.pay-row {
+    display: table;
+    width: 100%;
+}
+
+.pay-split-line {
+    width: 92%;
+    margin: 0 auto;
+    height: 1px;
+    background: #d8d8d8;
+}
+
+.btn-pay {
+    height: 55px;
+    line-height: 55px;
+    width: 140px;
+    text-align: center;
+    color: white;
+    background: #fd4d4c;
+    float: right;
+    font-size: 24px;
+    border-radius: 4px;
+    margin: 15px 30px;
+}
+.list-container{
+    margin-top:20px;
+    padding-left:30px;
+    background: #fff;
+}
+.list_li {
+    display: block;
+    height: 156px;
+    border-bottom: 1px solid #ebeaea;
+    overflow: hidden;
+}
+.list_li:last-child {
+     border-bottom: 1px solid transparent;
+ }
+.list-img {
+    width: 113px;
+    height: 113px;
+    float: left;
+    margin-right: 24px;
+    margin-top: 24px;
+}
+
+.list-img img {
+    width: 113px;
+    height: 113px;
+}
+
+.list-content {
+    float: left;
+    margin-top: 38px;
+}
+
+.apply-num {
+    font-size: 32px;
+    line-height: 100%;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.apply-duration {
+    font-size: 30px;
+    line-height: 100%;
+    color: #999;
+}
+
+.apply-status-wrap {
+    float: right;
+    margin-right: 30px;
+    margin-top: 46px;
+}
+
+.apply-status {
+    font-size: 27px;
+    line-height: 100%;
+    text-align: right;
+    margin-bottom: 22px;
+}
+
+.bill-1-color {
+    color: #649cfe;
+}
+
+.bill-2-color {
+    color: #fc816f;
+}
+
+.bill-3-color {
+    color: #f5313f;
+}
+
+.bill-4-color {
+    color: #999;
+}
+
+.apply-time {
+    font-size: 25px;
+    line-height: 100%;
+    color: #999;
+}
+.header{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    background: white;
+    z-index: 9;
+    text-shadow: white 0px 0px 8px;
+    font-size: 36px;
+    color: rgb(51, 51, 51);
+}
+.no-data-img{
+    position:fixed;
+    width:362px;
+    height:296px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}

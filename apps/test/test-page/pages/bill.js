@@ -1,97 +1,68 @@
 import React from 'react'
 import {render} from 'react-dom'
+import { Redirect, Link } from 'react-router-dom'
 import BottomNav from '../components/bottom-nav'
 import CSSModules from 'react-css-modules'
 import styles from '../css/bill.css'
-import mobx from 'mobx'
 import { observer, inject } from 'mobx-react'
-import * as $FW from 'fw-components'
-import { BrowserFactory } from 'fw-javascripts'
-import { NativeBridgeFactory } from 'fw-javascripts'
-
-
-
-
-
 
 @inject('bill') @observer @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 export default class Bill extends React.Component {
-    render(){
-        return (
-            <div>
-                <BottomNav />
-            </div>
-        )
-    }
-}
-
-
-import React from 'react'
-import CSSModules from 'react-css-modules'
-import { observer, inject } from 'mobx-react'
-import { Redirect, Link } from 'react-router-dom'
-
-import Header from '../components/header'
-
-import styles from '../css/orders.css'
-
-@inject('orders')
-@observer
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class Orders extends React.Component {
-
     componentDidMount() {
-        document.title = '我的订单'
+        document.title = '借款账单'
     }
-
     render() {
-
-        let { orders } = this.props;
-
-        let order_item = order => {
-
-            return <div key={order.id} styleName="order-item">
-                <div styleName="order-item-id">
-                    订单号: {order.id}
-                    <span styleName="order-status-paid"> 已支付 </span>
-                </div>
-                <div styleName="order-item-cnt">
-                    <span styleName="order-prefix">续保</span>
-                    <span styleName="order-licenses">{order.licenseNo}</span>
-                    <span styleName="order-price">¥{order.price}</span>
-                </div>
-                <div styleName="pay-row">
-                    <div styleName="pay-split-line"></div>
-                    <Link styleName="btn-pay" to="/">立即支付</Link>
-                </div>
-            </div>
-        }
-
-        let Empty = <div>
-            EMPTY
-        </div>
+        let { bill } = this.props;
 
         let tab = (type, title) => {
             return <a styleName={
-                orders.current_type == type ? "nav-bar-item active" : 'nav-bar-item'}
-                      onClick={() => orders.switch_type(type)}> {title} </a>
+                bill.current_type == type ? "nav-bar-item active" : 'nav-bar-item'}
+                      onClick={() => bill.switch_type(type)}> {title} </a>
         }
 
-        return <div>
-            <Header title="我的订单" history={this.props.history} />
+        let order_item = bill => {
+            let status_title;
+            if(bill.baseStatus == 1) status_title = "申请中"
+            if(bill.baseStatus == 2) status_title = "还款中"
+            if(bill.baseStatus == 3) status_title = "未通过"
+            if(bill.baseStatus == 4) status_title = "已还款"
+            return <div styleName="list_li" key={bill.orderGid}>
+                <div styleName="list-img"><img src={bill.productLogo} /></div>
+                <div styleName="list-content">
+                    <div styleName="apply-num">借款金额:{bill.loanAmtStr}元</div>
+                    <div styleName="apply-duration">借款期限:{bill.termNumStr}</div>
+                </div>
+                <div styleName="apply-status-wrap">
+                    <div styleName="apply-status">
+                        <span styleName={`bill-${bill.baseStatus}-color`}>
+                            {status_title}
+                        </span>
+                    </div>
+                    <div styleName="apply-time">{bill.loanTimeStr}</div>
+                </div>
+            </div>
+        }
 
+        let Empty = <div styleName="no-data-img">
+            <img src={require("../images/bill/no-data.png")}/>
+        </div>
+
+
+        return <div>
+            <div styleName="header">借款账单</div>
             <div styleName="nav-bar">
-                {tab('all', '全部订单')}
-                {tab('paid', '已支付')}
-                {tab('unpaid', '未支付')}
-                {tab('completed', '已完成')}
+                {tab('apply', '申请中')}
+                {tab('returning', '还款中')}
+                {tab('failed', '未通过')}
+                {tab('paid', '已还款')}
                 <div styleName="bottom-line"></div>
             </div>
-
-            {orders.current_list.map(order_item)}
-            {orders.current_list.length === 0 && Empty}
+            <div styleName="list-container">
+                {bill.current_list.map(order_item)}
+            </div>
+            {bill.current_list.length === 0 && Empty}
+            <BottomNav/>
         </div>
     }
-}
 
-export default Orders
+}
