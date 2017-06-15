@@ -101,9 +101,9 @@ class BorrowMoney extends React.Component {
                     {itemList && itemList.map(item)}
                 </div>
 
-                {/*<div className="footer">
+                <div className="footer">
                     <Nav className="btn" onClick={this.clickHandler}>马上下载</Nav>
-                </div>*/}
+                </div>
                 {this.state.img_show && <div className="mask" onClick={this.maskHandler}>
                     <img src="images/tip.png"/>
                 </div>}
