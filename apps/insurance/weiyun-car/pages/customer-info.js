@@ -23,6 +23,19 @@ class CustomerInfo extends React.Component {
         this.props.customer_info.setFormData(type, 'cardId', v);
     }
 
+    fileChangeHandler = name => event => {
+        let target = event.target,
+            fpath = event.target.value,
+            ext = fpath.split('.').pop().toLowerCase();
+
+        let fr = new FileReader()
+        fr.readAsDataURL(target.files[0])
+        fr.onload = ofrEvent => {
+            console.log('read a file', ofrEvent)
+            console.log(ofrEvent.target.result)
+        };
+    }
+
     render() {
         let { customer_info } = this.props;
         return (
@@ -61,17 +74,19 @@ class CustomerInfo extends React.Component {
                             <div styleName="img-upload-tip">按保监局要求上传身份证正反面照片</div>
                             <div styleName="upload-img-container">
                                 <div styleName="upload-img-left" onClick={() => { customer_info.triggerUploadImg() }}>
-                                    { customer_info.holder.image1 ?
+                                    {customer_info.holder.image1 ?
                                         <div styleName="upload-img-display" style={{ background: `url(${customer_info.holder.image1}) #fff no-repeat center` }}></div>
                                         :
-                                        <div styleName="upload-img-tip">请添加<br/>身份证正面照片</div>
+                                        <div styleName="upload-img-tip">请添加<br />身份证正面照片</div>
                                     }
+
+                                    <input type="file" onChange={this.fileChangeHandler('s1')} />
                                 </div>
                                 <div styleName="upload-img-right" onClick={() => { customer_info.triggerUploadImg() }}>
-                                    { customer_info.holder.image2 ?
+                                    {customer_info.holder.image2 ?
                                         <div styleName="upload-img-display" style={{ background: `url(${customer_info.holder.image2}) #fff no-repeat center` }}></div>
                                         :
-                                        <div styleName="upload-img-tip">请添加<br/>身份证反面照片</div>
+                                        <div styleName="upload-img-tip">请添加<br />身份证反面照片</div>
                                     }
                                 </div>
                             </div>
@@ -109,24 +124,24 @@ class CustomerInfo extends React.Component {
                                 <div styleName="info-item-type">邮箱</div>
                                 <input styleName="info-item-input" placeholder="请输入"
                                     value={customer_info.recognizee.email}
-                                    onChange={this.changeHandler('recognizee', 'email')}/>
+                                    onChange={this.changeHandler('recognizee', 'email')} />
                             </div>
                             <div styleName="upload-img-item">
                                 <div styleName="img-upload-label">上传身份证照片</div>
                                 <div styleName="img-upload-tip">按保监局要求上传身份证正反面照片</div>
                                 <div styleName="upload-img-container">
                                     <div styleName="upload-img-left" onClick={() => { customer_info.triggerUploadImg() }}>
-                                        { customer_info.recognizee.image1 ?
+                                        {customer_info.recognizee.image1 ?
                                             <div styleName="upload-img-display" style={{ background: `url(${customer_info.recognizee.image1}) #fff no-repeat center` }}></div>
                                             :
-                                            <div styleName="upload-img-tip">请添加<br/>身份证正面照片</div>
+                                            <div styleName="upload-img-tip">请添加<br />身份证正面照片</div>
                                         }
                                     </div>
                                     <div styleName="upload-img-right" onClick={() => { customer_info.triggerUploadImg() }}>
-                                        { customer_info.recognizee.image2 ?
+                                        {customer_info.recognizee.image2 ?
                                             <div styleName="upload-img-display" style={{ background: `url(${customer_info.recognizee.image2}) #fff no-repeat center` }}></div>
                                             :
-                                            <div styleName="upload-img-tip">请添加<br/>身份证反面照片</div>
+                                            <div styleName="upload-img-tip">请添加<br />身份证反面照片</div>
                                         }
                                     </div>
                                 </div>
@@ -139,17 +154,17 @@ class CustomerInfo extends React.Component {
                             <div styleName="img-upload-tip">按保监局要求上传驾驶证正反面照片</div>
                             <div styleName="upload-img-container">
                                 <div styleName="upload-img-left" onClick={() => { customer_info.triggerUploadImg() }}>
-                                    { customer_info.vehicleLicenseImage1 ?
+                                    {customer_info.vehicleLicenseImage1 ?
                                         <div styleName="upload-img-display" style={{ background: `url(${customer_info.vehicleLicenseImage1}) #fff no-repeat center` }}></div>
                                         :
-                                        <div styleName="upload-img-tip">请添加<br/>驾驶证正面照片</div>
+                                        <div styleName="upload-img-tip">请添加<br />驾驶证正面照片</div>
                                     }
                                 </div>
                                 <div styleName="upload-img-right" onClick={() => { customer_info.triggerUploadImg() }}>
-                                    { customer_info.vehicleLicenseImage2 ?
+                                    {customer_info.vehicleLicenseImage2 ?
                                         <div styleName="upload-img-display" style={{ background: `url(${customer_info.vehicleLicenseImage2}) #fff no-repeat center` }}></div>
                                         :
-                                        <div styleName="upload-img-tip">请添加<br/>驾驶证反面照片</div>
+                                        <div styleName="upload-img-tip">请添加<br />驾驶证反面照片</div>
                                     }
                                 </div>
                             </div>
