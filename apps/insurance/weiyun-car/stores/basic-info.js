@@ -40,7 +40,6 @@ export default class BasicInfo {
     }
 
     @computed get valid() {
-        return 1
         return this.carNoArea && this.carOwnersName && this.cityCode && this.idCard && this.intentionCompanyCode && this.licenseNo
     }
 }
