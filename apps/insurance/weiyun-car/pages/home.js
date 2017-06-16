@@ -2,7 +2,19 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 
+import Browser from '../helpers/browser.js'
+import NativeBridge from '../helpers/native-bridge.js'
+
 import styles from '../css/home.css'
+
+function gotoHandler(link, history, need_login) {
+
+    let full_link = `${location.protocol}//${location.hostname}/static/insurance/weiyun-car/#${link}`;
+
+    Browser.inApp ?
+        NativeBridge.goto(full_link, need_login) :
+        history.push(link)
+}
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Home extends React.Component {
@@ -11,8 +23,8 @@ class Home extends React.Component {
         document.title = 'HOME'
     }
 
-    startHandler() {
-        this.props.history.push('/basic-info')
+    startHandler = () => {
+        gotoHandler('/basic-info', this.props.history)
     }
 
     render() {
@@ -20,9 +32,10 @@ class Home extends React.Component {
             <img styleName="banner" src={require('../images/home/banner.jpg')} />
 
             <div styleName="car-insurance">
-                <div></div>
-                <div></div>
-                <a onClick={this.startHandler}></a>
+                <div styleName="car-insurance-title">工场车险</div>
+                <div styleName="car-insurance-sub-title">20%巨额优惠  30秒精准报价</div>
+                <a styleName="btn-start" onClick={this.startHandler}>优惠购买</a>
+                <div styleName="v-line"></div>
             </div>
 
             <div styleName="partner">
