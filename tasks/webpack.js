@@ -83,7 +83,9 @@ module.exports = function (site_name, page_name, CONFIG) {
         },
         plugins: [
             new webpack.DefinePlugin({
-                'process.env': JSON.stringify(CONFIG.enviroument)
+                'process.env': {
+                    NODE_ENV: JSON.stringify(CONFIG.enviroument)
+                }
             })
             , new webpack.optimize.UglifyJsPlugin({
                 compress: !CONFIG.debug
