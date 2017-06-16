@@ -1,5 +1,5 @@
-import BasicInfo from './basic-info.js'
-import CarInfo from './car-info.js'
+import Basic from './basic.js'
+import Car from './car.js'
 import PolicyDetail from './policy-detail.js'
 import CustomerInfo from './customer-info.js'
 import Orders from './orders.js'
@@ -8,8 +8,8 @@ import CurrentOrder from './current-order.js'
 
 
 export {
-    BasicInfo,
-    CarInfo,
+    Basic,
+    Car,
     PolicyDetail,
     CustomerInfo,
     Orders,

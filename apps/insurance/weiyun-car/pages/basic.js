@@ -8,27 +8,27 @@ import BottomButton from '../components/bottom-button'
 
 import styles from '../css/basic.css'
 
-@inject('basic_info')
+@inject('basic')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class BasicInfo extends React.Component {
+class Basic extends React.Component {
 
     componentDidMount() {
         document.title = '基本信息'
     }
 
     inputChangeHandler = name => e => {
-        this.props.basic_info.setFormData(name, e.target.value)
+        this.props.basic.setFormData(name, e.target.value)
     }
 
     idCardInputHandler = e => {
         let v = e.target.value;
         v = v.replace(/[^\d+|^x|^X]/g, '')
-        this.props.basic_info.setFormData('idCard', v)
+        this.props.basic.setFormData('idCard', v)
     }
 
     render() {
-        let { basic_info, history } = this.props;
+        let { basic, history } = this.props;
 
         return <div>
             <Header title="车险" history={history}
@@ -57,7 +57,7 @@ class BasicInfo extends React.Component {
             <div styleName="field">
                 <div styleName="field-title">车牌号码</div>
                 <input styleName="field-input-text" placeholder="请输入车牌号码"
-                    value={basic_info.formatLicenseNo}
+                    value={basic.formatLicenseNo}
                     onChange={this.inputChangeHandler('licenseNo')} />
                 <div styleName="field-v-line"></div>
 
@@ -79,7 +79,7 @@ class BasicInfo extends React.Component {
             <div styleName="field">
                 <div styleName="field-title">车主姓名</div>
                 <input styleName="field-input-text" placeholder="请输入车主姓名"
-                    value={basic_info.carOwnersName}
+                    value={basic.carOwnersName}
                     onChange={this.inputChangeHandler('carOwnersName')} />
                 <div styleName="field-underline"></div>
             </div>
@@ -87,7 +87,7 @@ class BasicInfo extends React.Component {
             <div styleName="field">
                 <div styleName="field-title">身份证号</div>
                 <input styleName="field-input-text" placeholder="请输入身份证号"
-                    value={basic_info.idCard}
+                    value={basic.idCard}
                     onChange={this.idCardInputHandler}
                 />
                 <div styleName="field-underline"></div>
@@ -108,10 +108,10 @@ class BasicInfo extends React.Component {
                 </div>
             </div>
 
-            <BottomButton active={basic_info.valid} title={'下一步'}
-                onClick={() => { basic_info.submit(history) }} />
+            <BottomButton active={basic.valid} title={'下一步'}
+                onClick={() => { basic.submit(history) }} />
         </div>
     }
 }
 
-export default BasicInfo
+export default Basic

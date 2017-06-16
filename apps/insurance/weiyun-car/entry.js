@@ -9,8 +9,8 @@ import AppRouter from './router'
 import * as Stores from './stores'
 
 let stores = {
-    basic_info: new Stores.BasicInfo(Get),
-    car_info: new Stores.CarInfo(Get),
+    basic: new Stores.Basic(Get),
+    car: new Stores.Car(Get),
     policy_detail: new Stores.PolicyDetail(Get),
     customer_info: new Stores.CustomerInfo(Get),
     orders: new Stores.Orders(Get),
