@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 
-import { Header } from '../../../../es7-lib/loan/components'
+import { Header } from '../../lib/components'
 
 import styles from '../css/faq.css'
 

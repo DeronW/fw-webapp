@@ -2,8 +2,8 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 
-import { Header } from '../../../../es7-lib/loan/components'
-import { Browser, Post } from '../../../../es7-lib/loan/helpers'
+import { Header } from '../../lib/components'
+import { Browser, Post } from '../../lib/helpers'
 
 import * as $FW from 'fw-javascripts'
 
