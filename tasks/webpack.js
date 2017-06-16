@@ -82,7 +82,10 @@ module.exports = function (site_name, page_name, CONFIG) {
             }]
         },
         plugins: [
-            new webpack.optimize.UglifyJsPlugin({
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify(CONFIG.enviroument)
+            })
+            , new webpack.optimize.UglifyJsPlugin({
                 compress: !CONFIG.debug
             })
             , new HtmlWebpackPlugin({
@@ -99,9 +102,6 @@ module.exports = function (site_name, page_name, CONFIG) {
                     // this assumes your vendor imports exist in the node_modules directory
                     return module.context && module.context.indexOf('node_modules') !== -1;
                 }
-            }),
-            new webpack.DefinePlugin({
-                'process.env.NODE_ENV': JSON.stringify(CONFIG.enviroument)
             })
             // , new webpack.NoErrorsPlugin()
         ]
