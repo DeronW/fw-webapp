@@ -83,12 +83,20 @@ module.exports = function (site_name, page_name, CONFIG) {
         },
         plugins: [
             new webpack.DefinePlugin({
+                //     'process.env.NODE_ENV': CONFIG.environment === 'production' ?
+                //         '"production"' : '"development"'
+                //     // 'process.env.NODE_ENV': '"production"',
                 'process.env': {
-                    NODE_ENV: JSON.stringify(CONFIG.enviroument)
+                    NODE_ENV: JSON.stringify(CONFIG.environment)
                 }
             })
             , new webpack.optimize.UglifyJsPlugin({
-                compress: !CONFIG.debug
+                compress: CONFIG.debug ?
+                    {} :
+                    {
+                        warnings: false,
+                        drop_console: false,
+                    }
             })
             , new HtmlWebpackPlugin({
                 template: `${page_path}/index.html`
