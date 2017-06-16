@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import Home from './pages/home'
-import BasicInfo from './pages/basic-info.js'
+import Basic from './pages/basic.js'
 import CarInfo from './pages/car-info'
 import PolicyDetail from './pages/policy-detail'
 import PolicyQuotation from './pages/policy-quotation'
@@ -23,7 +23,7 @@ export default (stores) => {
         <Provider {...stores} >
             <Switch>
                 <Route exact path='/' component={Home} />
-                <Route exact path='/basic-info' component={BasicInfo} />
+                <Route exact path='/basic' component={Basic} />
                 <Route exact path='/car-info' component={CarInfo} />
                 <Route exact path='/policy-detail' component={PolicyDetail} />
                 <Route exact path='/policy-quotation' component={PolicyQuotation} />

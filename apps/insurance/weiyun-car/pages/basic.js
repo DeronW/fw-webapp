@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 import Header from '../components/header'
 import BottomButton from '../components/bottom-button'
 
-import styles from '../css/basic-info.css'
+import styles from '../css/basic.css'
 
 @inject('basic_info')
 @observer
@@ -34,7 +34,7 @@ class BasicInfo extends React.Component {
             <Header title="车险" history={history}
                 sub_title="我的订单" sub_link="/orders" />
 
-            <img styleName="banner" src={require('../images/basic-info/banner.png')} />
+            <img styleName="banner" src={require('../images/basic/banner.png')} />
             <div styleName="hr"></div>
 
             <div styleName="field">
