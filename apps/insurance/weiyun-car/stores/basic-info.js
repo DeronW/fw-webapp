@@ -27,7 +27,7 @@ export default class BasicInfo {
             intentionCompanyCode: this.intentionCompanyCode,
             licenseNo: this.licenseNo
         }).then((data) => {
-            history.push('/car-info');
+            // history.push('/car-info');
         })
     }
 
