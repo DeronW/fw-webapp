@@ -8,7 +8,6 @@ import AppRouter from './router'
 
 import * as Stores from './stores'
 
-console.log(Get);
 let stores = {
     basic_info: new Stores.BasicInfo(Get),
     car_info: new Stores.CarInfo(Get),
