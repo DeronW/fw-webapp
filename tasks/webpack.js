@@ -83,9 +83,6 @@ module.exports = function (site_name, page_name, CONFIG) {
         },
         plugins: [
             new webpack.DefinePlugin({
-                //     'process.env.NODE_ENV': CONFIG.environment === 'production' ?
-                //         '"production"' : '"development"'
-                //     // 'process.env.NODE_ENV': '"production"',
                 'process.env': {
                     NODE_ENV: JSON.stringify(CONFIG.environment)
                 }
