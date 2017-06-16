@@ -8,7 +8,7 @@ import BottomButton from '../components/bottom-button'
 
 import styles from '../css/basic-info.css'
 
-@inject('basic_info', 'car_info', 'policy_detail', 'current_order')
+@inject('basic_info')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class BasicInfo extends React.Component {
@@ -27,25 +27,8 @@ class BasicInfo extends React.Component {
         this.props.basic_info.setFormData('idCard', v)
     }
 
-    handleSubmit = () => {
-        let { basic_info, car_info, policy_detail, current_order, history } = this.props;
-
-        basic_info.submit(history).then((data) => {
-            // set temporaryPolicyId in store current_order
-            current_order.setPolicyId(data.temporaryPolicyId);
-            // init policy detail with last-year's plan
-            policy_detail.initWithLastYearPlan(data.saveQuote);
-            // judge if car-info needs extra complete by user
-            if (car_info.needCompleteByUser(data.userInfo)) {
-                history.push('/car-info');
-            } else {
-                history.push('/policy-detail?t_id=001');
-            }
-        })
-    }
-
     render() {
-        let { basic_info } = this.props;
+        let { basic_info, history } = this.props;
 
         return <div>
             <Header title="车险" history={history}
@@ -126,7 +109,7 @@ class BasicInfo extends React.Component {
             </div>
 
             <BottomButton active={basic_info.valid} title={'下一步'}
-                onClick={this.handleSubmit} />
+                onClick={() => { basic_info.submit(history) }} />
         </div>
     }
 }

@@ -1,5 +1,5 @@
 import { extendObservable, computed } from 'mobx'
-import * as $FW from 'fw-javascripts'
+import * as $FW from 'fw-components'
 
 export default class BasicInfo {
 
@@ -19,13 +19,15 @@ export default class BasicInfo {
     submit = (history) => {
         if (!this.valid) return;
 
-        return this.Get('/carInsurance/applyCarInsurance.shtml', {
+        this.Get('/carInsurance/applyCarInsurance.shtml', {
             carNoArea: this.carNoArea,
             carOwnersName: this.carOwnersName,
             cityCode: this.cityCode,
             idCard: this.idCard,
             intentionCompanyCode: this.intentionCompanyCode,
             licenseNo: this.licenseNo
+        }).then((data) => {
+            history.push('/car-info');
         })
     }
 
