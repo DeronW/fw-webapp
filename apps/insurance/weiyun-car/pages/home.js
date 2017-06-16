@@ -24,7 +24,7 @@ class Home extends React.Component {
     }
 
     startHandler = () => {
-        gotoHandler('/basic-info', this.props.history)
+        gotoHandler('/basic', this.props.history)
     }
 
     render() {

@@ -63,39 +63,39 @@ const Field = inject('policy_detail')(observer(CSSModules(function (props) {
     </div>
 }, styles, { "allowMultiple": true, "errorWhenNotFound": false })))
 
-const BasicCarInfo = inject('basic_info', 'car_info')(observer(CSSModules((props) => {
-    let { basic_info, car_info } = props;
+const BasicAndCar = inject('basic', 'car')(observer(CSSModules((props) => {
+    let { basic, car } = props;
     return (
         <div styleName="car-info-container">
             <div styleName="car-info">
                 <div styleName="car-info-item">
                     车牌号码
-                    <span>{`${basic_info.carNoArea}${basic_info.licenseNo}`}</span>
+                    <span>{`${basic.carNoArea}${basic.licenseNo}`}</span>
                 </div>
                 <div styleName="car-info-item">
                     车主信息
-                    <span>{basic_info.carOwnersName}</span>
+                    <span>{basic.carOwnersName}</span>
                 </div>
                 <div styleName="car-info-item">
                     车辆型号
-                    <span>{car_info.moldName}</span>
+                    <span>{car.moldName}</span>
                 </div>
                 <div styleName="car-info-item">
                     车架号
-                    <span>{car_info.carVin}</span>
+                    <span>{car.carVin}</span>
                 </div>
                 <div styleName="car-info-item">
                     发动机号
-                    <span>{car_info.engineNo}</span>
+                    <span>{car.engineNo}</span>
                 </div>
                 <div styleName="car-info-item-expire">
                     <div styleName="expire-items">
                         交强险到期日:
-                        <span>{car_info.forceExpireDate}</span>
+                        <span>{car.forceExpireDate}</span>
                     </div>
                     <div styleName="expire-items">
                         商业险到期日:
-                        <span>{car_info.businessExpireDate}</span>
+                        <span>{car.businessExpireDate}</span>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@ class PolicyDetail extends React.Component {
             <div styleName="fake-body">
                 <Header title="险种明细" history={history} />
 
-                <BasicCarInfo />
+                <BasicAndCar />
 
                 <div styleName="input-field-grp">
                     <div styleName="input-field">

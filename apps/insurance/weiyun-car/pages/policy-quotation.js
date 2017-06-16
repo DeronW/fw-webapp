@@ -22,7 +22,7 @@ class PolicyQuotation extends React.Component {
     }
 
     submitHandler = () => {
-        this.props.history.replace('/customer-info')
+        this.props.history.replace('/customer')
     }
 
     render() {

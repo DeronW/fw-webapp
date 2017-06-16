@@ -1,8 +1,8 @@
-.customer-info-container {
+.customer-container {
     margin-bottom: 21px;
 }
 
-.customer-info-grp {
+.customer-grp {
     margin-top: 21px;
     padding-bottom: 30px;
     background-color: #fff;
@@ -74,7 +74,7 @@
   width: 316px;
   height: 198px;
   border-radius: 12px;
-  background: url('../images/customer-info/img-placeholder.png') #fff no-repeat center;
+  background: url('../images/customer/img-placeholder.png') #fff no-repeat center;
 }
 
 .upload-img-right {
@@ -83,7 +83,7 @@
   width: 316px;
   height: 198px;
   border-radius: 12px;
-  background: url('../images/customer-info/img-placeholder.png') #fff no-repeat center;
+  background: url('../images/customer/img-placeholder.png') #fff no-repeat center;
 }
 
 .upload-img-display {
@@ -109,5 +109,5 @@
 
 .checked {
   border: none;
-  background: url('../images/customer-info/check.png') #4aa1f9 no-repeat center;
+  background: url('../images/customer/check.png') #4aa1f9 no-repeat center;
 }

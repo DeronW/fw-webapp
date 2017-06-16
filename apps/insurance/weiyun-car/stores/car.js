@@ -1,6 +1,6 @@
 import { extendObservable, computed } from 'mobx'
 
-export default class CarInfo {
+export default class Car {
 
     constructor(Get) {
         this.Get = Get;
