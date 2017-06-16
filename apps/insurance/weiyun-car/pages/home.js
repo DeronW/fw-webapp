@@ -6,12 +6,31 @@ import styles from '../css/home.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Home extends React.Component {
+
     componentDidMount() {
         document.title = 'HOME'
     }
+
+    startHandler() {
+        this.props.history.push('/basic-info')
+    }
+
     render() {
         return <div styleName="bg">
             <img styleName="banner" src={require('../images/home/banner.jpg')} />
+
+            <div styleName="car-insurance">
+                <div></div>
+                <div></div>
+                <a onClick={this.startHandler}></a>
+            </div>
+
+            <div styleName="partner">
+                <span styleName="partner-title"> 合作伙伴： </span>
+                <img src={require('../images/home/logo-pingan.jpg')} />
+                <img src={require('../images/home/logo-picc.jpg')} />
+                <img src={require('../images/home/logo-cpic.jpg')} />
+            </div>
 
             <div styleName="faq-title">常见问题</div>
             <div styleName="faq-item">Q1：什么是航空意外险？</div>

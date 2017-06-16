@@ -3,7 +3,40 @@
     margin-top: 20px;
 }
 
+.car-insurance {
+    position: relative;
+    height: 142px;
+}
 
-.faq {
+.partner {
+    border-bottom: 1px solid #d8d8d8;
+    height: 96px;
+    background: white;
+    line-height: 96px;
+    font-size: 24px;
+    color: #999;
+    padding-left: 30px;
+}
 
+.partner-title {
+    display: inline-block;
+    float: left;
+}
+
+.partner img {
+    margin-left: 20px;
+    float: left;
+}
+
+.faq-title {
+    font-size: 32px;
+    margin: 26px 30px 20px;
+    color: #999;
+}
+
+.faq-item {
+    font-size: 24px;
+    color: #999;
+    line-height: 36px;
+    margin: 8px 30px;
 }
