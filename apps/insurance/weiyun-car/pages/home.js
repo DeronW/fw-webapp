@@ -2,7 +2,9 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 
-@CSSModules(styles)
+import styles from '../css/home.css'
+
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Home extends React.Component {
     componentDidMount() {
         document.title = 'HOME'
@@ -10,8 +12,6 @@ class Home extends React.Component {
     render() {
         return <div styleName="bg">
             <img styleName="banner" src={require('../images/home/banner.jpg')} />
-
-
 
             <div styleName="faq-title">常见问题</div>
             <div styleName="faq-item">Q1：什么是航空意外险？</div>
