@@ -13,16 +13,18 @@ const PostMethodFactory = storage => (url, params, slience) => {
         inApp = ua.indexOf('FinancialWorkshop') > -1,
         SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
 
-    let merged_params = Object.assign({}, params, {
-        sourceType: SOURCE_TYPE,
-        token: token,
-        uid: uid
-    })
+    let merged_params = Object.assign({},
+        { sourceType: SOURCE_TYPE },
+        params, {
+            token: token,
+            uid: uid
+        })
 
     return Request({
         url: API_PATH + url,
         method: 'POST',
-        data: merged_params
+        data: merged_params,
+        slience: true
     })
 }
 

@@ -10,6 +10,8 @@
 .logo {
     margin: 40px auto;
     display: block;
+    width: 222px;
+    height: 222px;
 }
 
 .form {

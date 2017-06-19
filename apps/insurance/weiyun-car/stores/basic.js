@@ -1,7 +1,7 @@
 import { extendObservable, computed } from 'mobx'
 import * as $FW from 'fw-components'
 
-export default class BasicInfo {
+export default class Basic {
 
     constructor(Get) {
         this.Get = Get;
