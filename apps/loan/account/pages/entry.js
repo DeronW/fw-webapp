@@ -28,11 +28,11 @@ class Entry extends React.Component {
         let { account, history } = this.props;
         let { phone } = this.state;
 
-        return <div>
+        return <div styleName="bg">
             <div styleName="title">放心花</div>
             <img styleName="logo" src={require('../images/logo.png')} />
             <div styleName="form">
-                <i styleName="icon-phone"></i>
+                <i className="icon-phone" styleName="icon-phone"></i>
                 {phone &&
                     <i styleName="icon-clear" onClick={this.clearHandler}></i>}
                 <input styleName="input" value={phone}

@@ -15,6 +15,10 @@ export default class Account {
         })
     }
 
+    get mask_phone() {
+        return this.phone.replace(/(\d{3})\d{5}(\d{3})/, '$1***$2')
+    }
+
     submit = (phone, history) => {
         if (String(phone).length != 11) {
             return Components.showToast('手机号位数不正确')

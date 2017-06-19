@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import AppRouter from './router.js'
 
 import './css/index.css'
-import './css/icons.css'
 
 import Stores from './stores'
 import { Post } from '../lib/helpers'

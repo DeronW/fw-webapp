@@ -1,3 +1,11 @@
+.bg {
+    background: #3a4a79 url('../images/login-bg.jpg') no-repeat;
+    background-position: bottom;
+    background-size: 100% auto;
+    min-height: 100%;
+    padding-top: 1px;
+}
+
 .btn-back {
     position: absolute;
     left: 0;
@@ -67,6 +75,11 @@
     border: 0;
 }
 
+.form input::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #6195a4;
+}
+
 .underline {
     position: relative;
     top: -20px;
@@ -80,18 +93,13 @@
     height: 80px;
     width: 60px;
     float: left;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
-.icon-eye-open,
-.icon-eye-close {
+.icon-eye {
     display: block;
     height: 80px;
     width: 60px;
     float: right;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 .btn-submit {

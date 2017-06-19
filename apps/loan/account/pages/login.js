@@ -27,17 +27,18 @@ class Login extends React.Component {
         let { account, history } = this.props;
         let { password, plaintext } = this.state;
 
-        return <div>
+        return <div styleName="bg">
             <a styleName="btn-back"></a>
             <div styleName="title">登录</div>
             <img styleName="logo" src={require('../images/logo.png')} />
             <div styleName="welcome">亲爱的
-                <span>{account.phone.replace(/\d{3}\d{4}\d{3}/, '$1***$3')}</span>
+                <span>{account.mask_phone}</span>
                 欢迎登录
             </div>
             <div styleName="form">
-                <i styleName="icon-lock"></i>
-                <i styleName={plaintext ? 'icon-eye-open' : "icon-eye-close"}
+                <i className="icon-lock" styleName="icon-lock"></i>
+                <i className={plaintext ? 'icon-eye-open' : "icon-eye-close"}
+                    styleName="icon-eye"
                     onClick={this.toggleEye}></i>
                 <input styleName="input" type={plaintext ? 'text' : 'password'}
                     value={password}

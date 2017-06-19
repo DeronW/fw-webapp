@@ -8,6 +8,7 @@ import {
 
 import Entry from './pages/entry.js'
 import Login from './pages/login.js'
+import SetPassword from './pages/set-password.js'
 
 export default (stores) => {
     return <Router>
@@ -15,6 +16,7 @@ export default (stores) => {
             <Switch>
                 <Route exact path='/entry' component={Entry} />
                 <Route exact path='/login' component={Login} />
+                <Route exact path='/set-password' component={SetPassword} />
             </Switch>
         </Provider>
     </Router>

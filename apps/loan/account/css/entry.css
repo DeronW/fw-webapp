@@ -1,3 +1,11 @@
+.bg {
+    background: #3a4a79 url('../images/login-bg.jpg') no-repeat;
+    background-position: bottom;
+    background-size: 100% auto;
+    min-height: 100%;
+    padding-top: 1px;
+}
+
 .title {
     display: block;
     font-size: 36px;
@@ -46,6 +54,11 @@
     border: 0;
 }
 
+.form input::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: #6195a4;
+}
+
 .underline {
     position: relative;
     top: -20px;
@@ -59,7 +72,6 @@
     height: 80px;
     width: 60px;
     float: left;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAiCAYAAABFlhkzAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QzY5RTdDOEZGNzFDMTFFNjlGQkNBQTNFREFDQUM4RkQiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QzY5RTdDOEVGNzFDMTFFNjlGQkNBQTNFREFDQUM4RkQiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTZBQTNDOTFGMTlDMTFFNkEzRkNDNDg4QTI4QjU1RDkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OTZBQTNDOTJGMTlDMTFFNkEzRkNDNDg4QTI4QjU1RDkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6Jv2XZAAAAr0lEQVR42mJxufDFk4GBYS4QSzJQFzwH4mQmGhnOADVzLhOS4dOBmBOIGSnEIDOmwSxhBAbRfyiHB4i/Usn13ED8BcRgQhL8SsXggZvFgiT4nwbxgOIDmgBkHzBS2ez/dPHBqAWjFoxaMGrBqAVDrsIZrTIHd5X5AeoiZPxh0MUBN57WnQAZTUcMH3QAMQcVHM0BNQuScoCN32c0ar6DwAuQD1JADBoY/hTUAQEIMAC88CEWuq6MtQAAAABJRU5ErkJggg==') no-repeat center;
 }
 
 .icon-clear {
