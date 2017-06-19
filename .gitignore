@@ -24,3 +24,5 @@ gulpfile.settings.js
 tmp.*
 *.compile.sh
 bundle.min.js
+apps/bao/bao/pages/login.js
+apps/bao/bao/router.js
