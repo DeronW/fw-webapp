@@ -40,10 +40,10 @@ export default class Customer {
             return (this.holder[k] && (this.isSame || this.recognizee[k]))
         })
         return valid
-        // let valid = ['name', 'mobile', 'cardId', 'email'].every((k) => {
-        //     return (this.holder[k] && (this.isSame || this.recognizee[k]))
-        // })
-        // return valid && this.vehicleLicenseImage1 && this.vehicleLicenseImage2
+            // let valid = ['name', 'mobile', 'cardId', 'email'].every((k) => {
+            //     return (this.holder[k] && (this.isSame || this.recognizee[k]))
+            // })
+            // return valid && this.vehicleLicenseImage1 && this.vehicleLicenseImage2
     }
 
     submit = (history) => () => {
