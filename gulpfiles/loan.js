@@ -111,6 +111,9 @@ const APPLY_TEN_MILLION_LOAN = [
 const REFACTORY_PAGES = [{
     name: 'features', // 更多页面 , 包含 联系我们/关于我们/常见问题/退出功能
     compiler: 'webpack'
+}, {
+    name: 'account',
+    compiler: 'webpack'
 }]
 
 APP_NAMES.push(
