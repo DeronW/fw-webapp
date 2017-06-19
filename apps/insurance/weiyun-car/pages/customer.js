@@ -8,173 +8,123 @@ import BottomButton from '../components/bottom-button.js'
 import styles from '../css/customer.css'
 import styles_icon_circle from '../css/icons/circle.css'
 
+
+@inject('customer')
+@observer
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+class UploadImg extends React.Component {
+
+    state = {
+        tips: null,
+        img_data: null
+    }
+
+    changeHandler = event => {
+        let target = event.target
+        var fr = new FileReader();
+        let ext = target.value.split('.').pop().toLowerCase()
+
+        if (ext != 'png' && ext != 'jpg') {
+            this.setState({ tips: '图片格式不正确', img_data: null })
+        } else {
+            fr.readAsDataURL(target.files[0])
+            fr.onload = fre => this.setState({ tips: null, img_data: fre.target.result })
+        }
+    }
+
+    render() {
+
+        let { placeholder } = this.props
+        let { img_data, tips } = this.state
+
+        return <div styleName="field-image">
+            <img src={img_data} />
+            <input type="file" onChange={this.changeHandler} />
+            <br /> <br />
+            <div styleName="">请添加</div>
+            <div>{placeholder}</div>
+            {tips && <div style={{ color: '#fd4d4c' }}>{tips}</div>}
+        </div>
+    }
+}
+
+
 @inject('customer')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Customer extends React.Component {
 
-    changeHandler = (type, k) => (e) => {
+    changeHandler = (type, k) => e => {
         this.props.customer.setFormData(type, k, e.target.value);
     }
 
-    cardIdInputHandler = (type) => e => {
-        let v = e.target.value;
-        v = v.replace(/[^\d+|^x|^X]/g, '');
-        this.props.customer.setFormData(type, 'cardId', v);
-    }
-
-    fileChangeHandler = name => event => {
-        let target = event.target,
-            fpath = event.target.value,
-            ext = fpath.split('.').pop().toLowerCase();
-
-        let fr = new FileReader()
-        fr.readAsDataURL(target.files[0])
-        fr.onload = ofrEvent => {
-            console.log('read a file', ofrEvent)
-            console.log(ofrEvent.target.result)
-        };
-    }
-
     render() {
-        let { customer } = this.props;
-        return (
-            <div styleName="fake-body">
-                <Header title="投保人信息" history={this.props.history} />
-                <div styleName="customer-container">
-                    <div styleName="customer-grp">
-                        <div styleName="info-label">投保人信息</div>
-                        <div styleName="info-item">
-                            <div styleName="info-item-type">投保人姓名</div>
-                            <input styleName="info-item-input" placeholder="请输入"
-                                value={customer.holder.name}
-                                onChange={this.changeHandler('holder', 'name')} />
-                        </div>
-                        <div styleName="info-item">
-                            <div styleName="info-item-type">投保人手机</div>
-                            <input styleName="info-item-input" placeholder="请输入"
-                                type="tel" maxLength="11"
-                                value={customer.holder.mobile}
-                                onChange={this.changeHandler('holder', 'mobile')} />
-                        </div>
-                        <div styleName="info-item">
-                            <div styleName="info-item-type">身份证号</div>
-                            <input styleName="info-item-input" placeholder="请输入"
-                                value={customer.holder.cardId}
-                                onChange={this.cardIdInputHandler('holder')} />
-                        </div>
-                        <div styleName="info-item">
-                            <div styleName="info-item-type">邮箱</div>
-                            <input styleName="info-item-input" placeholder="请输入"
-                                value={customer.holder.email}
-                                onChange={this.changeHandler('holder', 'email')} />
-                        </div>
-                        <div styleName="upload-img-item">
-                            <div styleName="img-upload-label">上传身份证照片</div>
-                            <div styleName="img-upload-tip">按保监局要求上传身份证正反面照片</div>
-                            <div styleName="upload-img-container">
-                                <div styleName="upload-img-left" onClick={() => { customer.triggerUploadImg() }}>
-                                    {customer.holder.image1 ?
-                                        <div styleName="upload-img-display" style={{ background: `url(${customer.holder.image1}) #fff no-repeat center` }}></div>
-                                        :
-                                        <div styleName="upload-img-tip">请添加<br />身份证正面照片</div>
-                                    }
+        let { customer, history } = this.props, { holder } = customer;
+        let change = name => this.changeHandler('holder', name)
 
-                                    <input type="file" onChange={this.fileChangeHandler('s1')} />
-                                </div>
-                                <div styleName="upload-img-right" onClick={() => { customer.triggerUploadImg() }}>
-                                    {customer.holder.image2 ?
-                                        <div styleName="upload-img-display" style={{ background: `url(${customer.holder.image2}) #fff no-repeat center` }}></div>
-                                        :
-                                        <div styleName="upload-img-tip">请添加<br />身份证反面照片</div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div styleName="same-person-check" onClick={customer.toggleSamePerson}>
-                            <i className={customer.isSame ?
-                                styles_icon_circle.checked :
-                                styles_icon_circle.unchecked}></i>
-                            投保人信息与被保人信息一致
-                        </div>
-                    </div>
-                    {!customer.isSame &&
-                        <div styleName="customer-grp">
-                            <div styleName="info-label">被保人信息</div>
-                            <div styleName="info-item">
-                                <div styleName="info-item-type">被保人姓名</div>
-                                <input styleName="info-item-input" placeholder="请输入"
-                                    value={customer.recognizee.name}
-                                    onChange={this.changeHandler('recognizee', 'name')} />
-                            </div>
-                            <div styleName="info-item">
-                                <div styleName="info-item-type">被保人手机</div>
-                                <input styleName="info-item-input" placeholder="请输入"
-                                    type="tel" maxLength="11"
-                                    value={customer.recognizee.mobile}
-                                    onChange={this.changeHandler('recognizee', 'mobile')} />
-                            </div>
-                            <div styleName="info-item">
-                                <div styleName="info-item-type">身份证号</div>
-                                <input styleName="info-item-input" placeholder="请输入"
-                                    value={customer.recognizee.cardId}
-                                    onChange={this.cardIdInputHandler('recognizee')} />
-                            </div>
-                            <div styleName="info-item">
-                                <div styleName="info-item-type">邮箱</div>
-                                <input styleName="info-item-input" placeholder="请输入"
-                                    value={customer.recognizee.email}
-                                    onChange={this.changeHandler('recognizee', 'email')} />
-                            </div>
-                            <div styleName="upload-img-item">
-                                <div styleName="img-upload-label">上传身份证照片</div>
-                                <div styleName="img-upload-tip">按保监局要求上传身份证正反面照片</div>
-                                <div styleName="upload-img-container">
-                                    <div styleName="upload-img-left" onClick={() => { customer.triggerUploadImg() }}>
-                                        {customer.recognizee.image1 ?
-                                            <div styleName="upload-img-display" style={{ background: `url(${customer.recognizee.image1}) #fff no-repeat center` }}></div>
-                                            :
-                                            <div styleName="upload-img-tip">请添加<br />身份证正面照片</div>
-                                        }
-                                    </div>
-                                    <div styleName="upload-img-right" onClick={() => { customer.triggerUploadImg() }}>
-                                        {customer.recognizee.image2 ?
-                                            <div styleName="upload-img-display" style={{ background: `url(${customer.recognizee.image2}) #fff no-repeat center` }}></div>
-                                            :
-                                            <div styleName="upload-img-tip">请添加<br />身份证反面照片</div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    <div styleName="customer-grp">
-                        <div styleName="info-label">上传驾驶证照片</div>
-                        <div styleName="upload-img-item">
-                            <div styleName="img-upload-tip">按保监局要求上传驾驶证正反面照片</div>
-                            <div styleName="upload-img-container">
-                                <div styleName="upload-img-left" onClick={() => { customer.triggerUploadImg() }}>
-                                    {customer.vehicleLicenseImage1 ?
-                                        <div styleName="upload-img-display" style={{ background: `url(${customer.vehicleLicenseImage1}) #fff no-repeat center` }}></div>
-                                        :
-                                        <div styleName="upload-img-tip">请添加<br />驾驶证正面照片</div>
-                                    }
-                                </div>
-                                <div styleName="upload-img-right" onClick={() => { customer.triggerUploadImg() }}>
-                                    {customer.vehicleLicenseImage2 ?
-                                        <div styleName="upload-img-display" style={{ background: `url(${customer.vehicleLicenseImage2}) #fff no-repeat center` }}></div>
-                                        :
-                                        <div styleName="upload-img-tip">请添加<br />驾驶证反面照片</div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <BottomButton active={customer.valid} title="确认提交"
-                    onClick={() => customer.submit(history)} />
+        let hod_input_text = (title, name) => {
+            return <div styleName="field-text">{title}
+                <input placeholder="请输入" type="text" value={holder[name]}
+                    onChange={this.changeHandler('holder', name)} />
+                <div styleName="v-line"></div>
             </div>
-        )
+        }
+
+        let rec_input_text = (title, name) => {
+            if (this.props.customer.isSame) return null;
+
+            return <div styleName="field-text">{title}
+                <input placeholder="请输入" type="text" value={holder[name]}
+                    onChange={this.changeHandler('recognizee', name)} />
+            </div>
+        }
+
+
+        return <div>
+            <Header title="投保人信息" history={history} />
+
+            <div styleName="panel-title">投保人信息</div>
+            {hod_input_text('投保人姓名', 'name')}
+            {hod_input_text('投保人手机', 'mobile')}
+            {hod_input_text('身份证号', 'cardId')}
+            {hod_input_text('邮箱', 'email')}
+            <div styleName="picture-panel">
+                <div styleName="picture-panel-title">上传身份证照片</div>
+                <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
+                <UploadImg placeholder="身份证正面照片" />
+                <UploadImg placeholder="身份证反面照片" />
+            </div>
+
+            <div styleName="field-check" onClick={customer.toggleSamePerson}>
+                <i className={customer.isSame ?
+                    styles_icon_circle.checked :
+                    styles_icon_circle.unchecked}></i>
+                投保人信息与被保人信息一致
+            </div>
+
+            {!customer.isSame && <div styleName="panel-title">被保人信息</div>}
+            {rec_input_text('被保人姓名', 'name')}
+            {rec_input_text('被保人手机', 'mobile')}
+            {rec_input_text('身份证号', 'cardId')}
+            {rec_input_text('邮箱', 'email')}
+            {!customer.isSame &&
+                <div styleName="picture-panel">
+                    <div styleName="picture-panel-title">上传身份证照片</div>
+                    <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
+                    <UploadImg placeholder="身份证正面照片" />
+                    <UploadImg placeholder="身份证反面照片" />
+                </div>}
+
+            <div styleName="picture-panel">
+                <div styleName="picture-panel-title">上传驾驶证照片</div>
+                <div styleName="picture-panel-desc">按保监局要求上传驾驶证正反面照片</div>
+                <UploadImg placeholder="驾驶证正面照片" />
+                <UploadImg placeholder="驾驶证反面照片" />
+            </div>
+
+            <BottomButton active={customer.valid} title="确认提交"
+                onClick={() => customer.submit(history)} />
+        </div>
     }
 }
 
