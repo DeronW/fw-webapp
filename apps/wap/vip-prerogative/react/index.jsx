@@ -2,7 +2,7 @@ $FW.DOMReady(function () {
     if ($FW.Browser.inApp()) {
         NativeBridge.setTitle('升级攻略');
     } else {
-        ReactDOM.render(<Header title={'升级攻略'}/>, HEADER_NODE);
+        ReactDOM.render(<Header title={'升级攻略'} />, HEADER_NODE);
     }
 
     $FW.Ajax({
@@ -35,8 +35,9 @@ $FW.DOMReady(function () {
         return document.getElementById(id)
     }
 
-
-    $FW.getJSONP('https://www.9888.cn/api/userLevel/v1/giftVO.json', {}, function (data) {
+    // https://www.9888.cn/api/userLevel/v1/giftVO.json
+    // https://www.gongchangzx.com/api/userLevel/v1/giftVO.json
+    $FW.getJSONP('https://www.gongchangzx.com/api/userLevel/v1/giftVO.json', {}, function (data) {
         if (data.code != 10000) throw new Error('接口异常, 无法获取用户等级信息');
 
         var rule = data.data.levelGiftRule;

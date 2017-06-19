@@ -54,8 +54,7 @@ body {
             color: #555;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
-            //overflow: hidden;
+            white-space: nowrap; //overflow: hidden;
             //text-overflow: ellipsis;
             //word-break: break-all;
             //-webkit-box-orient: vertical;
@@ -75,7 +74,7 @@ body {
 
 .channel {
     background: #ebebee;
-    height: 236px;
+    height: 347px;
     border: 1px solid #d8d8d8;
     border-left: 0;
     border-right: 0;
@@ -98,52 +97,42 @@ body {
         i {
             display: block;
             float: left;
-            margin: 17px 0 0 42px;
         }
     }
-    .icon-game {
-        background: url(../images/4.png);
-        width: 64px;
-        height: 61px;
+    .icon {
         display: inline-block;
-        margin-top: 12px;
+        margin: 9px 0 0 30px;
+        display: inline-block;
+        height: 70px;
+        width: 70px;
     }
-    .icon-bbs {
-        background: url(../images/3.png);
-        width: 69px;
-        height: 64px;
-        display: inline-block;
-        margin-top: 14px;
+    .icon-mall {
+        background: url(../images/icon-mall.jpg);
+    }
+
+    .icon-xt {
+        background: url(../images/icon-xt.jpg);
+    }
+
+    .icon-bao {
+        background: url(../images/icon-bao.jpg);
+    }
+
+    .icon-help {
+        background: url(../images/icon-help.jpg);
+    }
+    .icon-coupon {
+        background-image: url("../images/icon-coupon.jpg");
     }
     .icon-waiting {
-        background: url(../images/class.png);
-        width: 62px;
-        height: 66px;
-        display: inline-block;
-        margin-top: 12px;
-        margin-left: 44px;
+        background-image: url("../images/icon-waiting.jpg");
     }
-    .icon-faq {
-        background: url(../images/2.png);
-        width: 49px;
-        height: 58px;
-        margin-left: 50px !important;
-        display: inline-block;
-        margin-top: 15px;
-    }
-  .icon-coupon{
-    width: 64px;
-    height: 52px;
-    display: inline-block;
-    background: url("../images/icon-couponcenter.png") no-repeat center;
-  }
 }
 
 .title-recommended {
     color: #333;
     font-size: 30px;
-    background: #f9f9f9;
-    //border-bottom: 1px solid #e3e5ea;
+    background: #f9f9f9; //border-bottom: 1px solid #e3e5ea;
     height: 70px;
     line-height: 70px;
     padding-left: 30px;
@@ -153,12 +142,10 @@ body {
     background: white;
     padding: 1px 0;
     border-bottom: 1px solid #d8d8d8;
-    border-top: 1px solid #e3e5ea;
-    //border-left: 0;
+    border-top: 1px solid #e3e5ea; //border-left: 0;
     //border-right: 0;
     .event {
-        display: block;
-        // height: 150px;
+        display: block; // height: 150px;
         width: 660px;
         margin: 20px auto;
         img {
@@ -215,16 +202,17 @@ body {
         }
     }
 }
-.coupon-count{
-  position: absolute;
-  top: 4px;
-  left: 102px;
-  display: inline-block;
-  padding: 0px 10px;
-  background-color: #fd4d4c;
-  line-height: 32px;
-  text-align: center;
-  font-size: 20px;
-  border-radius: 20px;
-  color: #fff;
+
+.coupon-count {
+    position: absolute;
+    top: 4px;
+    left: 102px;
+    display: inline-block;
+    padding: 0px 10px;
+    background-color: #fd4d4c;
+    line-height: 32px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 20px;
+    color: #fff;
 }

@@ -4,13 +4,10 @@ import { observer, inject } from 'mobx-react'
 import CSSModules from 'react-css-modules'
 import styles from '../css/home.css'
 import BottomNav from '../components/bottom-nav'
-import { Redirect } from 'react-router-dom'
-import { BrowserFactory } from 'fw-javascripts'
-import { NativeBridgeFactory } from 'fw-javascripts'
+import { Redirect, Link } from 'react-router-dom'
 
 const LoanProduct = inject('home')(observer(CSSModules((props) => {
-    let productLink = props.productName === '放心花' ? `/static/loan/fxh/index.html` : `/static/loan/dumiao/index.html`,
-        productToNative = props.productName === '放心花' ? 'fxh_detail' : '';
+    let productLink = props.productName === '放心花' ? `/bill?productId=${props.productId}` : `/invite?productId=${props.productId}`;
     let labelImgURI = {
         1: require('../images/home/tag-1.jpg'),
         2: require('../images/home/tag-2.jpg'),
@@ -20,22 +17,25 @@ const LoanProduct = inject('home')(observer(CSSModules((props) => {
         <img styleName="loan-product-label-icon" key={label.labelType} src={labelImgURI[label.labelType]} />
     );
     return (
-        <div styleName="loan-product-card" key={props.productId} onClick={() => {gotoHandler(`${productLink}?pid=${props.productId}`, productToNative) }}>
-            <img styleName="loan-product-logo" src={ props.productLogo } />
-            <div styleName="loan-product-name">{ props.productName }</div>
-            <div styleName="loan-product-amount">借款范围({ props.amountStr })</div>
-            <div>
-                {props.productLabelList.map(generate_labels) }
-            </div>
+        <div styleName="loan-product-card" key={props.productId}>
+            <Link to={productLink}>
+                {/*onClick={() => {gotoHandler(`${productLink}?pid=${props.productId}`) }}*/}
+                <img styleName="loan-product-logo" src={ props.productLogo } />
+                <div styleName="loan-product-name">{ props.productName }</div>
+                <div styleName="loan-product-amount">借款范围({ props.amountStr })</div>
+                <div>
+                    {props.productLabelList.map(generate_labels) }
+                </div>
+            </Link>
         </div>
     )
 },styles,{ "allowMultiple": true, "errorWhenNotFound": false })));
 
 
 const SubProduct = inject('home')(observer(CSSModules((props) => {
-    let toNative = props.toNative ? props.toNative : '';
     return (
-        <div styleName="sub-product-item" key={props.firstTitle} onClick={() => { gotoHandler(props.redirectUrl, toNative) }}>
+        <div styleName="sub-product-item" key={props.firstTitle} to="/bill">
+            {/*onClick={() => { gotoHandler(props.redirectUrl) }}*/}
             <div styleName="sub-product-logo-container">
                 <img styleName="sub-product-logo" src={decodeURIComponent(props.logoUrl)}/>
             </div>
@@ -57,11 +57,6 @@ export default class Home extends React.Component {
             recommendList:[]
         }
     }
-    // gotoHandler(link, toNative, need_login){
-    //     if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
-    //     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    //     $FW.Browser.inApp() ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
-    // }
     componentDidMount(){
         let {home} = this.props;
         home.getProductList().then(()=>{
