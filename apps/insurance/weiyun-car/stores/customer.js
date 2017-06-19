@@ -32,19 +32,7 @@ export default class Customer {
     }
 
     toggleSamePerson = () => {
-        this.isSame = !this.isSame;
-        if (this.isSame) {
-            Object.assign(this.recognizee, this.holder);
-        } else {
-            for (var k in this.recognizee) {
-                this.recognizee[k] = ''
-            }
-        }
-    }
-
-    triggerUploadImg = () => {
-        // TODO: trigger app upload img
-        console.log('user wants to upload img!');
+        this.isSame = !this.isSame
     }
 
     @computed get valid() {
@@ -62,7 +50,8 @@ export default class Customer {
 
         if (!this.valid) return
         history.push('/policy-quotation');
-        // return this.request('blablabla').then(data => {
+
+        // return this.request('blablabla', {}).then(data => {
         //     if (data.success) {
         //
         //     } else {
