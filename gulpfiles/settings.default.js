@@ -19,9 +19,5 @@ module.exports = {
     insurance: {
         dev_api_path: '//localhost/fake-api'
         // dev_api_path: '//fe.9888.cn/api/test-a/insurance'
-    },
-    test: {
-        dev_api_path: '//localhost/fake-api'
-        //   dev_api_path: '//fe.9888.cn/api/test-a/loan'loan-manager'
     }
 }
