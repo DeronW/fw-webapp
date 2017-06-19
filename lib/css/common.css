@@ -22,7 +22,9 @@ a, a:active {
 .html-in-app.html-in-ios .only-in-ios-app {
     display: block;
 }
-
+.body-in-growingIO{
+  zoom:0.5
+}
 .hide {
   display: none !important;
 }
