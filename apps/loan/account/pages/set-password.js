@@ -13,7 +13,12 @@ import styles from '../css/set-password.css'
 class SetPassword extends React.Component {
 
     state = {
+        agree: true,
         plaintext: false
+    }
+
+    checkHandler = () => {
+        this.setState({ agree: !this.state.agree })
     }
 
     componentDidMount() {
@@ -22,7 +27,7 @@ class SetPassword extends React.Component {
 
     render() {
         let { history, account } = this.props
-        let { plaintext } = this.state
+        let { plaintext, agree } = this.state
 
         return <div>
             <Header title="设置密码" history={history} />
@@ -50,7 +55,8 @@ class SetPassword extends React.Component {
                 <span styleName="xuan-tian">(选填)</span>
             </div>
             <div styleName="protocol">
-                <i styleName=""></i>
+                <i styleName={agree ? 'checked-btn' : "check-btn"}
+                    onClick={this.checkHandler}></i>
                 同意 <a>《放心花用户注册协议》</a>
             </div>
 
