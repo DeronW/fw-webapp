@@ -6,6 +6,15 @@ import styles from '../css/home.css'
 import BottomNav from '../components/bottom-nav'
 import { Redirect, Link } from 'react-router-dom'
 
+function gotoHandler(link, history, need_login) {
+
+    let full_link = `${location.protocol}//${location.hostname}/static/insurance/weiyun-car/#${link}`;
+
+    Browser.inApp ?
+        NativeBridge.goto(full_link, need_login) :
+        history.push(link)
+}
+
 const LoanProduct = inject('home')(observer(CSSModules((props) => {
     let productLink = props.productName === '放心花' ? `/bill?productId=${props.productId}` : `/invite?productId=${props.productId}`;
     let labelImgURI = {

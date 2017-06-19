@@ -1,4 +1,5 @@
 import { extendObservable, computed } from 'mobx'
+import Utils from 'fw-javascripts'
 
 export default class Bill{
     constructor(request, resultList, state = {}) {
