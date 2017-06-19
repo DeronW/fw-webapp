@@ -194,7 +194,3 @@ class UserInfoWrap extends React.Component {
     }
 }
 
-$FW.DOMReady(() => {
-    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
-    ReactDOM.render(<UserInfoWrap />, CONTENT_NODE)
-})
