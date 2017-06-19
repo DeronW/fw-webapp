@@ -4,9 +4,9 @@ const PROJ = 'loan';
 
 let APP_NAMES = [
     'home', // 首页
-    'more', //更多
-    'faq', //常见问题
-    'about-us', //关于我们
+    // 'more', //更多 been refactory
+    // 'faq', //常见问题 been refactory
+    // 'about-us', //关于我们 been refactory
     '404'
 ];
 
@@ -102,16 +102,19 @@ const MORTGAGE = [
     'house-mortgage'
 ]
 
-// const EXPERIMENTAL_HOME = [{
-//     name: 'py-new-home',
-//     compiler: 'webpack'
-// }]
-
 const APPLY_TEN_MILLION_LOAN = [
     'outside-mortgage-apply-ten-million-loan',
     'outside-mortgage-ten-million-loan-info',
     'outside-mortgage-id-download'
 ]
+
+const REFACTORY_PAGES = [{
+    name: 'features', // 更多页面 , 包含 联系我们/关于我们/常见问题/退出功能
+    compiler: 'webpack'
+}, {
+    name: 'account',
+    compiler: 'webpack'
+}]
 
 APP_NAMES.push(
     ...USER_PAGES,
@@ -127,8 +130,8 @@ APP_NAMES.push(
     ...MARKET,
     ...CREDIT_CARD,
     ...MORTGAGE,
-    // ...EXPERIMENTAL_HOME,
-    ...APPLY_TEN_MILLION_LOAN
+    ...APPLY_TEN_MILLION_LOAN,
+    ...REFACTORY_PAGES
 );
 
 

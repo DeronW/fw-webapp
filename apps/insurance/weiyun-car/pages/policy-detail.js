@@ -6,6 +6,7 @@ import Header from '../components/header'
 import BottomButton from '../components/bottom-button'
 
 import styles from '../css/policy-detail.css'
+import styles_icon_circle from '../css/icons/circle.css'
 
 
 const Select = CSSModules((props) => {
@@ -16,7 +17,8 @@ const Select = CSSModules((props) => {
         <div styleName="select-widget">
             <div styleName="select-mask" style={{ color: hasValidData ? "#333" : "#999" }}>{maskText}</div>
             <select styleName="native-select" onChange={props.handleChange}>
-                <option hidden>ocupy</option> {/* helpful to fire change event whtn choose the real first option */}
+                {/* helpful to fire change event whtn choose the real first option */}
+                <option hidden></option>
                 {props.options.map(gen_options)}
             </select>
         </div>
@@ -37,7 +39,8 @@ const Field = inject('policy_detail')(observer(CSSModules(function (props) {
         <div styleName="bujimian-input"
             style={{ color: bjmState == 'disabled' ? "#999" : "#666" }}
             onClick={() => policy_detail.bjmToggleHander(name, bjm)} >
-            <i styleName={`fake-check-icon ${bjmState}`}></i> 不计免赔
+            <i className={styles_icon_circle[bjmState]}></i>
+            不计免赔
         </div>
     )
 
@@ -60,39 +63,39 @@ const Field = inject('policy_detail')(observer(CSSModules(function (props) {
     </div>
 }, styles, { "allowMultiple": true, "errorWhenNotFound": false })))
 
-const BasicCarInfo = inject('basic_info', 'car_info')(observer(CSSModules((props) => {
-    let { basic_info, car_info } = props;
+const BasicAndCar = inject('basic', 'car')(observer(CSSModules((props) => {
+    let { basic, car } = props;
     return (
         <div styleName="car-info-container">
             <div styleName="car-info">
                 <div styleName="car-info-item">
                     车牌号码
-                    <span>ssf{`${basic_info.carNoArea}${basic_info.licenseNo}`}</span>
+                    <span>{`${basic.carNoArea}${basic.licenseNo}`}</span>
                 </div>
                 <div styleName="car-info-item">
                     车主信息
-                    <span>sdfs{basic_info.carOwnersName}</span>
+                    <span>{basic.carOwnersName}</span>
                 </div>
                 <div styleName="car-info-item">
                     车辆型号
-                    <span>sdfsd{car_info.moldName}</span>
+                    <span>{car.moldName}</span>
                 </div>
                 <div styleName="car-info-item">
                     车架号
-                    <span>sdfs{car_info.carVin}</span>
+                    <span>{car.carVin}</span>
                 </div>
                 <div styleName="car-info-item">
                     发动机号
-                    <span>sf{car_info.engineNo}</span>
+                    <span>{car.engineNo}</span>
                 </div>
                 <div styleName="car-info-item-expire">
-                    <div styleName="left-els">
+                    <div styleName="expire-items">
                         交强险到期日:
-                        <span>{car_info.forceExpireDate}</span>
+                        <span>{car.forceExpireDate}</span>
                     </div>
-                    <div styleName="right-els">
+                    <div styleName="expire-items">
                         商业险到期日:
-                        <span>{car_info.businessExpireDate}</span>
+                        <span>{car.businessExpireDate}</span>
                     </div>
                 </div>
             </div>
@@ -106,6 +109,10 @@ const BasicCarInfo = inject('basic_info', 'car_info')(observer(CSSModules((props
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class PolicyDetail extends React.Component {
 
+    componentDidMount(){
+        document.title = '险种明细'
+    }
+
     render() {
         let { policy_detail, history } = this.props;
 
@@ -113,7 +120,7 @@ class PolicyDetail extends React.Component {
             <div styleName="fake-body">
                 <Header title="险种明细" history={history} />
 
-                <BasicCarInfo />
+                <BasicAndCar />
 
                 <div styleName="input-field-grp">
                     <div styleName="input-field">

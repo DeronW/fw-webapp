@@ -147,17 +147,25 @@ const Content = React.createClass({
 
                 <div className="channel">
                     <a onClick={() => gotoHandler('https://m.9888.cn/static/wap/coupon-center/index.html', true)}>
-                        <i className="icon-coupon"></i>
+                        <i className="icon icon-coupon"></i>
                         领券中心
                         {coupon_count != "0" &&
                             <span className="coupon-count">{coupon_count}</span>}
                     </a>
+
                     <a onClick={() => gotoHandler("https://m.dougemall.com", true)}>
-                        <i className="icon-bbs"></i>豆哥商城 </a>
+                        <i className="icon icon-mall"></i>豆哥商城 </a>
+
                     <a onClick={() => gotoHandler("https://m.9888.cn/static/wap/faq/index.html")}>
-                        <i className="icon-faq"></i>帮助中心</a>
+                        <i className="icon icon-help"></i>帮助中心</a>
+
                     <a onClick={() => gotoHandler("http://m.9888.cn/static/wap/topic-invest-school/index.html")}>
-                        <i className="icon-waiting"></i>网贷学堂</a>
+                        <i className="icon icon-xt"></i>网贷学堂</a>
+
+                    <a onClick={() => gotoHandler("http://p-javashop-statics.oss-cn-beijing.aliyuncs.com/weixin/index.html#/home/products")}>
+                        <i className="icon icon-bao"></i>工场保险</a>
+
+                    <a onClick={()=> gotoHandler('https://m.9888.cn/static/insurance/weiyun-car/#/customer')}> <i className="icon icon-waiting"></i>敬请期待</a>
                 </div>
                 <div className="title-recommended" onClick={this.bdHandler}> 内容推荐</div>
                 <div className="events">

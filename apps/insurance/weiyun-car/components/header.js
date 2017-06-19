@@ -6,16 +6,18 @@ import NativeBridge from '../helpers/native-bridge.js'
 
 /*
  parameters
- <Header title={} />
+ <Header title={} history={} show_back={} sub_title={} sub_link={} />
  */
 
 const Header = CSSModules(styles, {
     "allowMultiple": true,
     "errorWhenNotFound": false
-})((props) => (
+})(props => (
     <div styleName="header-placeholder">
         <div styleName="header">
-            <a styleName="btn btn-back" onClick={props.history.goBack}> </a>
+            {props.show_back &&
+                <a styleName="btn btn-back" onClick={props.history.goBack}> </a>
+            }
             <a onClick={NativeBridge.close} styleName="btn btn-close"> </a>
             {props.title}
             {props.sub_title &&
@@ -24,5 +26,9 @@ const Header = CSSModules(styles, {
         </div>
     </div>
 ))
+
+Header.defaultProps = {
+    show_back: true
+};
 
 export default Header

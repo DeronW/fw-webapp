@@ -149,7 +149,7 @@ class GiftBag extends React.Component {
     }
 
     jump() {
-        NativeBridge.toNative('app_coupon')
+        NativeBridge.toNative('app_invest_list')
     }
 
     render() {
@@ -216,7 +216,8 @@ class GiftBag extends React.Component {
         }
 
         let status_start = () => {
-            return <div className="gift_item_right gift_item_get" onClick={() => {
+            let cName = item.grapLimit == "0"?"gift_item_right gift_item_get":"gift_item_right gift_item_get gift_item_limit"
+            return <div className={cName} onClick={() => {
                 (item.grapLimit == "0") ? this.getHandler(item) : this.jump()
             }}>
                 <SVGCircleProgress percent={100-parseInt(item.restPercent)} weight={4}

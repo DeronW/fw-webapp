@@ -142,7 +142,7 @@ class MajorUserInfo extends React.Component {
                     </div>
                 </div>
             </a>
-            <a className="user-info-display-wrap" href="/static/loan/more/index.html">
+            <a className="user-info-display-wrap" href="/static/loan/features/#/more" >
                 <div className="info-icon-container">
                     <img src="images/more_icon.png"></img>
                 </div>

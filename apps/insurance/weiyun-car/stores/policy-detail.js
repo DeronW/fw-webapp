@@ -2,8 +2,8 @@ import { extendObservable, computed } from 'mobx'
 
 export default class PolicyDetail {
 
-    constructor(request, state = {}) {
-        this.request = request
+    constructor(Get) {
+        this.Get = Get;
 
         extendObservable(this, {
             cheSun: null,
@@ -24,7 +24,7 @@ export default class PolicyDetail {
             sheShui: null,
             buJiMianSheShui: false,
             hcSanFangTeYue: null,
-        }, state)
+        })
     }
 
     bjmToggleHander = (kindName, bjmName) => {
@@ -36,27 +36,49 @@ export default class PolicyDetail {
         this[k] = parseInt(v);
     }
 
+    initWithLastYearPlan = (plan) => {
+        for (var k in plan) {
+            if (this[k] !== undefined) {
+                this[k] = plan[k];
+            }
+        }
+    }
+
     @computed get valid() {
         if (this.hcSanFangTeYue === null && this.cheSun !== 0) return false; // 投保车损险但没有选择第三方是否投保，信息缺失
 
-        ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang', 'huaHen', 'boli', 'ziRan', 'sheShui'].forEach((key) => {
-            if (this[key] === null) return false // 其他必选项信息缺失
+        let valid = ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang', 'huaHen', 'boli', 'ziRan', 'sheShui'].every((key) => {
+            return this[key] !== null // 其他必选项信息缺失
         })
 
-        return true;
+        return valid;
     }
 
     submit = (history) => {
         if (!this.valid) return
-        history.push('/policy-quotation');
-        // return this.request('blablabla').then(data => {
-        //     if (data.success) {
-        //
-        //     } else {
-        //
-        //     }
+
+        // return this.Get('/blablabla', {
+        //     cheSun: this.cheSun,
+        //     buJiMianCheSun: this.buJiMianCheSun,
+        //     sanZhe: this.sanZhe,
+        //     buJiMianSanZhe: this.buJiMianSanZhe,
+        //     siJi: this.siJi,
+        //     buJiMianSiJi: this.buJiMianSiJi,
+        //     chengKe: this.chengKe,
+        //     buJiMianChengKe: this.buJiMianChengKe,
+        //     daoQiang: this.daoQiang,
+        //     buJiMianDaoQiang: this.buJiMianDaoQiang,
+        //     huaHen: this.huaHen,
+        //     buJiMianHuaHen: this.buJiMianHuaHen,
+        //     boli: this.boli,
+        //     ziRan: this.ziRan,
+        //     buJiMianZiRan: this.buJiMianZiRan,
+        //     sheShui: this.sheShui,
+        //     buJiMianSheShui: this.buJiMianSheShui,
+        //     hcSanFangTeYue: this.hcSanFangTeYue
+        // }).then(data => {
+            history.push('/policy-quotations');
         // })
     }
 
-    logData = () => console.log(this)
 }

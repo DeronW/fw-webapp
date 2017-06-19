@@ -24,5 +24,8 @@ gulpfile.settings.js
 tmp.*
 *.compile.sh
 bundle.min.js
-apps/bao/bao/pages/login.js
-apps/bao/bao/router.js
+=======
+/test/*
+gulpfiles/test.js
+es7-lib/templates/test.swig.html
+
