@@ -35,7 +35,7 @@ class BottomNavBar extends React.Component {
         }
 
         const STYLE_TAB_BASE = {
-            width: "20%",
+            width: "25%",
             display: "block",
             float: "left",
             textAlign: "center",
@@ -113,15 +113,15 @@ class BottomNavBar extends React.Component {
                     <i style={_style_tab_invite_icon}></i>
                     邀友
                 </a>
-                <a style={_style_tab_self} href={_href_self}>
+                {/*<a style={_style_tab_self} href={_href_self}>
                     <i style={_style_tab_self_icon}></i>
                     发现
-                </a>
+                </a>*/}
                 <a style={_style_tab_more} href={_href_more}>
                     <i style={_style_tab_more_icon}></i>
                     我的
                 </a>
-                <div style={_dome_section}></div>
+                {/*<div style={_dome_section}></div>*/}
             </div>
         )
     }
