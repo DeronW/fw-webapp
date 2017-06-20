@@ -27,7 +27,11 @@ export default class Basic {
             intentionCompanyCode: this.intentionCompanyCode,
             licenseNo: this.licenseNo
         }).then((data) => {
-            // history.push('/car');
+            history.push('/policy-detail');
+        }, (r) => {
+            if (r.code == -105) {
+                history.push('/car');
+            }
         })
     }
 

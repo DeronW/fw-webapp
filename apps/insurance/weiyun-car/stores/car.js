@@ -32,17 +32,20 @@ export default class Car {
         return this.moldName && this.engineNo && this.carVin && this.registerDate
     }
 
-    submit = (history, policyId) => {
+    submit = async (history) => {
         if (!this.valid) return;
+
+        let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
+            .then(data => data.temporaryPolicyId)
 
         return this.Get('/carInsurance/perfectCarInfo.shtml', {
             carVin: this.carVin,
             engineNo: this.engineNo,
             moldName: this.moldName,
             recordDate: this.registerDate,
-            temporaryPolicyId: policyId
+            temporaryPolicyId: temporaryPolicyId
         }).then(data => {
-            history.push(`/policy-detail?t_id=${data.temporaryPolicyId}`)
+            history.push(`/policy-detail`)
         })
     }
 

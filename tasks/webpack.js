@@ -4,13 +4,14 @@ const util = require('gulp-util')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+
 module.exports = function (site_name, page_name, CONFIG) {
 
     const page_path = path.resolve(__dirname, `../apps/${site_name}/${page_name}`),
         build_path = path.resolve(__dirname, `../build/${site_name}/${page_name}/`);
 
     const compiler = webpack({
-        entry: `${page_path}/entry.js`,
+        entry: ["babel-polyfill", `${page_path}/entry.js`],
         output: {
             path: `${build_path}`,
             filename: 'javascripts/[name].[chunkhash:6].js'
