@@ -41,7 +41,7 @@ class Entry extends React.Component {
                 <div styleName="underline"></div>
             </div>
             <a styleName="btn-submit" onClick={
-                () => account.submit(phone, history)}>下一步</a>
+                () => account.check_phone(phone, history)}>下一步</a>
         </div>
     }
 }

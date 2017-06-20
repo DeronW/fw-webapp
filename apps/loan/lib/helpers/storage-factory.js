@@ -18,29 +18,47 @@ class StorageFactory {
         key_list.forEach(i => this.storage.removeItem(i))
     }
 
+    login = dict => {
+        if (typeof (dict) === 'string') dict = JSON.parse(dict);
+
+        ['token', 'status', 'invite_code', 'id', 'phone'].forEach(k => {
+            dict[k] && this.set(`user_${k}`, dict[k])
+        })
+
+        // compatiable old way
+        dict.token && this.set('userToken', dict.token)
+        dict.status && this.set('userStatus', dict.status)
+        dict.invitCode && this.set('invitationCode', dict.invitCode)
+        dict.uid && this.set('uid', dict.uid)
+    }
+
     logout = () => {
+        // compatiable old way
         this.remove(['userToken', 'userStatus', 'invitationCode', 'uid'])
+
+        this.remove(['user_token', 'user_status',
+            'user_invite_code', 'user_id', 'user_phone'])
     }
 
     clear = () => {
         this.storage.clear()
     }
 
-    getUserDict = () => {
-        return {
-            token: this.get('userToken'),
-            status: this.get('userStatus'),
-            invitCode: this.get('invitationCode'),
-            uid: this.get('uid')
-        }
-    }
+    // getUserDict = () => {
+    //     return {
+    //         token: this.get('userToken'),
+    //         status: this.get('userStatus'),
+    //         invitCode: this.get('invitationCode'),
+    //         uid: this.get('uid')
+    //     }
+    // }
 
-    getUserID = () => {
-        return this.get('uid') || Utils.Cookie.get('uid')
-    }
+    // getUserID = () => {
+    //     return this.get('uid') || Utils.Cookie.get('uid')
+    // }
 }
 
-const Storage = {
+const Storage_this_is_only_for_sample = {
     get: function (k, defaultVal) {
         return storage.getItem(k) || defaultVal || ''
     },
