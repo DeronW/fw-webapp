@@ -7,6 +7,10 @@ import styles from '../css/register.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Register extends React.Component {
 
+    componentDidMount(){
+        document.title = '“放心花”用户注册协议'
+    }
+
     render() {
         let { history } = this.props;
 
