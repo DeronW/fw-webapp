@@ -24,7 +24,6 @@ const USER_PAGES = [
     'user-verify-phone', //获取验证码
     'user-bank-support', //支持银行卡
     'user-card-management', //银行卡管理
-    'user-verify-phone',
     'user-jrgc-login', // 金融工场 App 同步登录页面
     'user-weixin-fxhapp',
     'user-weixin-jrgcapp',
