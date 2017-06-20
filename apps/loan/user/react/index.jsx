@@ -166,7 +166,7 @@ class ExitBtn extends React.Component {
 
     logoutHandler() {
         $FW.Store.clear();
-        location.href = '/static/loan/user-entry/index.html';
+        location.href = '/static/loan/account/#/entry';
     }
 
     render() {

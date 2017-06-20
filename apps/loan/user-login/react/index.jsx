@@ -93,7 +93,7 @@ class Register extends React.Component{
                 {
                     ConcertUtilBrowser.versions.weixin ? <div className="top"></div> :
                         <div className="top">
-                            <a className="icon" href={`/static/loan/user-entry/index.html`}></a>
+                            <a className="icon" href={`/static/loan/account/#/entry`}></a>
                             <span className="title">登录</span>
                         </div>
                 }

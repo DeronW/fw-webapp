@@ -377,7 +377,7 @@ class InteractWrap extends React.Component {
                 <button className="register-button" onClick={this.handleSubmit}>
                     立即领钱
                 </button>
-                <Nav className='jump-login' href='/static/loan/user-entry/index.html'>已有账号？立即登录 >></Nav>
+                <Nav className='jump-login' href='/static/loan/account/#/entry'>已有账号？立即登录 >></Nav>
                 { this.state.showRegisteredMask &&
                     <div className="mask">
                         <div className="pop-wrap">
@@ -385,7 +385,7 @@ class InteractWrap extends React.Component {
                             <img className="close-icon" src="images/close-icon.jpg" onClick={() => {this.setState({showRegisteredMask: false})}}></img>
                             <div className="mask-opts">
                                 <div className="close-mask" onClick={() => {this.setState({showRegisteredMask: false})}}>关闭</div>
-                                <Nav className="to-next" href="/static/loan/user-entry/index.html">立即登录</Nav>
+                                <Nav className="to-next" href="/static/loan/account/#/entry">立即登录</Nav>
                             </div>
                         </div>
                     </div>
