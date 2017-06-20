@@ -67,8 +67,9 @@ export default class Account {
             Storage.login({
                 token: dict.userToken,
                 status: dict.userStatus,
-                invitCode: dict.invitationCode,
-                uid: dict.uid
+                invit_code: dict.invitationCode,
+                id: dict.uid,
+                phone: this.phone
             })
             location.href = '/static/loan/home/index.html';
         }, e => Components.showToast(e.message))
