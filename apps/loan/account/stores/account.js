@@ -61,8 +61,9 @@ export default class Account {
     }
 
     forget_password = (history) => {
-        this.registerCodeType = 2
         history.replace('/set-password')
+        this.registerCodeType = 2
+        this.send_sms_code(2)
     }
 
     login = (password, history) => {
