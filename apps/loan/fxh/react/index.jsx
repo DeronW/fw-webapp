@@ -11,7 +11,11 @@ class ApplyLoan extends React.Component {
             orioleOrderGid: this.props.data.orioleOrderGid,
             creditLine: this.props.data.canBorrowAmount,
             present_creditLine: this.props.data.canBorrowAmount,
-            show_tip: "最高"
+            show_tip: "最高",
+            redirectProductId:this.props.data.redirectProductId,
+            redirectType:this.props.data.redirectType,
+            refuseFlag:this.props.data.refuseFlag,
+            popShow:false
         }
     }
 
@@ -152,8 +156,20 @@ class ApplyLoan extends React.Component {
         }
         let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
+        let credit_btn_handler = () => {
+            if(st == 3){
+                 this.setState({popShow:true});
+            }
+        }
+
+        // let credit_btn =
+        //     <a className="loan-btn" href={$FW.Browser.inJRGCApp() && st == 3 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
+        //         我要提额
+        //     </a>;
+
+
         let credit_btn =
-            <a className="loan-btn" href={$FW.Browser.inJRGCApp() && st == 3 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
+            <a className="loan-btn" onClick={credit_btn_handler()}>
                 我要提额
             </a>;
 
@@ -209,8 +225,15 @@ class ApplyLoan extends React.Component {
                     </div>
                 </div>
                 {this.getBtnStatus()}
-                <div className="loan-tip">完善授权信息可减免手续费</div>
-                {!$FW.Browser.inJRGCApp() && <div><br /><br /><br /><br /></div>}
+                {this.props.data.redirectType == 0 ? <div className="loan-tip">额度为0别灰心，试试其他<span onClick={()=>{$FW.Browser.inJRGCApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>借款</span></div> : <div className="loan-tip">完善授权信息可减免手续费</div>}
+                {this.state.popShow && <div className="pop-bg">
+                    <div className="pop-panel">
+                        <div className="pop-title">提示</div>
+                        <div className="pop-content">为方便您快速借到钱，推荐您尝试申请其他借款产品</div>
+                        <a className="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>仍去提额</a>
+                        <a className="pop-confirm" href='/static/loan/dumiao/index.html'>尝试其他</a>
+                    </div>
+                </div>}
             </div>
         )
     }
