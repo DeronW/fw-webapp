@@ -2,6 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
+import { Components } from 'fw-javascripts'
 
 import { Header } from '../../lib/components'
 
@@ -12,10 +13,9 @@ import styles from '../css/set-password.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class SetPassword extends React.Component {
 
-
     state = {
         // 当前页面可能是, 设置密码和重置密码 两种状态, 输入框不同, 提交数据不同
-        reset_pwd: this.props.account.registerCodeType === 2,
+        reset_pwd: this.props.account.registerCodeType == 2,
         agree: true,
         plaintext: false,
         password: '',
@@ -34,20 +34,25 @@ class SetPassword extends React.Component {
 
     componentDidMount() {
         document.title = '设置密码'
-        this.getSMSCode()
+        this.startCounting()
     }
 
     componentWillUnmount() {
         clearInterval(this._timer)
     }
 
-    getSMSCode() {
+    startCounting = () => {
         this.setState({ count: 60 })
         this._timer = setInterval(() => {
             if (this.state.count <= 1) clearInterval(this._timer)
             this.setState({ count: this.state.count - 1 })
         }, 1000)
-        this.props.account.send_sms_code()
+    }
+
+    getSMSCode = () => {
+        this.startCounting()
+        let userOperationType = this.state.reset_pwd ? 2 : 3;
+        this.props.account.send_sms_code(userOperationType)
     }
 
     inputSMSCodeHandler = e => {
@@ -60,7 +65,7 @@ class SetPassword extends React.Component {
         this.setState({ password: v })
     }
 
-    submitHandler() {
+    submitHandler = () => {
         let { account } = this.props;
         let { password, sms_code, invite_code, agree, reset_pwd } = this.state;
 
@@ -95,7 +100,7 @@ class SetPassword extends React.Component {
         let agree_line = !reset_pwd && <div styleName="protocol">
             <i styleName={agree ? 'checked-btn' : "check-btn"}
                 onClick={this.agreeHandler}></i>
-            同意 <a>《放心花用户注册协议》</a>
+            同意 <a href="/static/loan/protocol-register/index.html">《放心花用户注册协议》</a>
         </div>
 
         return <div>

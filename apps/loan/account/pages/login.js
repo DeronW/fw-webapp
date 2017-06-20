@@ -49,7 +49,9 @@ class Login extends React.Component {
             <a styleName="btn-submit" onClick={
                 () => account.login(password, history)}>下一步</a>
 
-            <a styleName="btn-forgot">忘记密码?</a>
+            <a styleName="btn-forgot"
+                onClick={() => account.forget_password(history)}>
+                忘记密码?</a>
         </div>
     }
 }
