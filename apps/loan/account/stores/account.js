@@ -11,7 +11,7 @@ export default class Account {
             // 用户注册状态
             // 1: 可以注册, 需要设置登录密码
             // 2: 已经注册, 修改登录密码, 通过其它服务同步过来的账户没有密码,
-            // 所以登录前先设置密码
+            //     所以登录前先设置密码
             registerCodeType: null,
             registerCodeToken: '',
             phone: '' // 用户登录手机号
@@ -22,8 +22,14 @@ export default class Account {
         return this.phone.replace(/(\d{3})\d{6}(\d{2})/, '$1******$2')
     }
 
-    send_sms_code() {
-
+    send_sms_code(userOperationType) {
+        this.Post('/api/userBase/v1/sendVerifyCode.json', {
+            mobile: this.phone,
+            // userOperationType 2：修改登录密码 3：注册
+            userOperationType: userOperationType
+        }).then(data => {
+            this.registerCodeToken = data.codeToken
+        }, e => Components.Toast(e.message))
     }
 
     check_phone = (phone, history) => {
@@ -36,12 +42,15 @@ export default class Account {
         this.phone = phone;
 
         this.Post('/api/userBase/v1/sendVerifyCode.json', {
-            mobile: phone,
+            mobile: this.phone,
             userOperationType: 3
         }).then(data => {
-            //codeType 1跳转到注册2跳转到重置密码页
+            // codeToken 用来标识发短信和注册/登录/修改密码用的
+            // 每次重新发送短信, codeToken都会变化
             this.registerCodeToken = data.codeToken
+            //codeType 1:注册 2:重置密码
             this.registerCodeType = data.codeType
+            history.push('/set-password')
         }, res => {
             if (res.code === 201003) {
                 history.push('/login')
@@ -49,6 +58,11 @@ export default class Account {
                 Components.Toast(res.message)
             }
         })
+    }
+
+    forget_password = (history) => {
+        this.registerCodeType = 2
+        history.replace('/set-password')
     }
 
     login = (password, history) => {
@@ -75,6 +89,23 @@ export default class Account {
         }, e => Components.showToast(e.message))
     }
 
+    reset_password = (password, sms_code) => {
+        this.Post('/api/userBase/v1/resetPass.json', {
+            codeToken: this.registerCodeToken,
+            mobile: this.phone,
+            password: password,
+            verifyCode: sms_code
+        }).then(data => {
+            let dict = data.userPasswordOption;
+            Storage.login({
+                token: dict.userToken,
+                status: dict.userStatus,
+                id: dict.uid
+            })
+            location.href = "/"
+        }, e => Components.showToast(e.message))
+    }
+
     register = (pwd, sms_code, invite_code, history) => {
         this.Post('/api/userBase/v1/register.json', {
             mobile: this.phone,
@@ -86,7 +117,7 @@ export default class Account {
             Storage.login({
                 token: dict.userToken,
                 status: dict.userStatus,
-                uid: dict.uid
+                id: dict.uid
             })
             location.href = `/static/loan/home/index.html`;
         }, e => Components.showToast(e.message))
