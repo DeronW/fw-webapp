@@ -136,9 +136,9 @@ class LoanResult extends React.Component{
                             </div>
                         </div>
                     </div>
-                    <div className="btn-wrap">
+                    {/*<div className="btn-wrap">
                         <div className="credit-btn" onClick={() => { $FW.Browser.inJRGCApp() ? NativeBridge.close() : gotoHandler('/static/loan/home/index.html') }}>返回</div>
-                    </div>
+                    </div>*/}
                 </div>
                 <div className={this.state.successResultShow ? "success-result-box" : "success-result-box dis"}>
                     <div className="wrap-box">
@@ -158,9 +158,9 @@ class LoanResult extends React.Component{
                             </div>
                         </div>
                     </div>
-                    <div className="btn-wrap">
+                    {/*<div className="btn-wrap">
                         <div className="credit-btn" onClick={() => {$FW.Browser.inJRGCApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>返回</div>
-                    </div>
+                    </div>*/}
                 </div>
                 <div className={this.state.failResultShow ? "fail-result-box" : "fail-result-box dis"}>
                     <div className="wrap-box">
