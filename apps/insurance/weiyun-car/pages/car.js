@@ -50,7 +50,7 @@ class Car extends React.Component {
             </div>
 
             <BottomButton active={car.valid} title={'下一步'}
-                onClick={() => car.submit(history, current_order.temporaryPolicyId)} />
+                onClick={() => car.submit(history)} />
 
         </div>
     }
