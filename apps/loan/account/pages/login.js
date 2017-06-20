@@ -28,7 +28,7 @@ class Login extends React.Component {
         let { password, plaintext } = this.state;
 
         return <div styleName="bg">
-            <a styleName="btn-back"></a>
+            <a styleName="btn-back" onClick={history.goBack}></a>
             <div styleName="title">登录</div>
             <img styleName="logo" src={require('../images/logo.png')} />
             <div styleName="welcome">亲爱的
