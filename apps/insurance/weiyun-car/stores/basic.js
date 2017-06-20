@@ -19,16 +19,14 @@ export default class Basic {
     submit = (history) => {
         if (!this.valid) return;
 
-        this.Get('/carInsurance/applyCarInsurance.shtml', {
+        return this.Get('/carInsurance/applyCarInsurance.shtml', {
             carNoArea: this.carNoArea,
             carOwnersName: this.carOwnersName,
             cityCode: this.cityCode,
             idCard: this.idCard,
             intentionCompanyCode: this.intentionCompanyCode,
             licenseNo: this.licenseNo
-        }).then((data) => {
-            history.push('/policy-detail');
-        }, (r) => {
+        }).catch((r) => {
             if (r.code == -105) {
                 history.push('/car');
             }

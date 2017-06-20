@@ -8,7 +8,7 @@ import BottomButton from '../components/bottom-button'
 
 import styles from '../css/basic.css'
 
-@inject('basic')
+@inject('basic', 'car', 'policy_detail')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Basic extends React.Component {
@@ -25,6 +25,16 @@ class Basic extends React.Component {
         let v = e.target.value;
         v = v.replace(/[^\d+|^x|^X]/g, '')
         this.props.basic.setFormData('idCard', v)
+    }
+
+    handleSubmit = () => {
+        let { basic, car, policy_detail, history } = this.props;
+        basic.submit(history)
+            .then(data => {
+                car.setForm(data.carInfo);
+                policy_detail.setForm(data.insureInfo);
+                history.push('/policy-detail');
+            })
     }
 
     render() {
@@ -109,7 +119,7 @@ class Basic extends React.Component {
             </div>
 
             <BottomButton active={basic.valid} title={'下一步'}
-                onClick={() => { basic.submit(history) }} />
+                onClick={this.handleSubmit} />
         </div>
     }
 }

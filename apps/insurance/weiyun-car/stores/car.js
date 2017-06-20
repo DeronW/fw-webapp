@@ -18,14 +18,13 @@ export default class Car {
         this[field] = value || ''
     }
 
-    needCompleteByUser = (data) => {
+    setForm = (data) => {
         this.setFormData('moldName', data.modleName);
         this.setFormData('engineNo', data.engineNo);
         this.setFormData('carVin', data.carVin);
         this.setFormData('registerDate', data.registerDate);
         this.setFormData('forceExpireDate', data.forceExpireDate);
         this.setFormData('businessExpireDate', data.businessExpireDate);
-        return !this.valid
     }
 
     @computed get valid() {

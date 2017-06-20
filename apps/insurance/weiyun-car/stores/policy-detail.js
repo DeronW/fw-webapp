@@ -36,10 +36,10 @@ export default class PolicyDetail {
         this[k] = parseInt(v);
     }
 
-    initWithLastYearPlan = (plan) => {
-        for (var k in plan) {
+    setForm = (data) => {
+        for (var k in data) {
             if (this[k] !== undefined) {
-                this[k] = plan[k];
+                this[k] = data[k];
             }
         }
     }
@@ -77,7 +77,7 @@ export default class PolicyDetail {
         //     buJiMianSheShui: this.buJiMianSheShui,
         //     hcSanFangTeYue: this.hcSanFangTeYue
         // }).then(data => {
-            history.push('/policy-quotations');
+            history.push('/policy-quotation');
         // })
     }
 
