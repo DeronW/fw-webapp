@@ -63,7 +63,6 @@ const APPLY_PAGES = [
 // 借款服务协议页面
 const PROTOCOL_PAGES = [
     'protocol-cost', // 代扣协议
-    'protocol-register', // APP注册协议
     'protocol-borrowing', // 借款服务协议
     'protocol-partner', // 借款协议双方
     'protocol-personinfo-collect', //个人信息采集授权声明
@@ -112,6 +111,9 @@ const REFACTORY_PAGES = [{
     compiler: 'webpack'
 }, {
     name: 'account',
+    compiler: 'webpack'
+}, {
+    name: 'protocols',
     compiler: 'webpack'
 }]
 

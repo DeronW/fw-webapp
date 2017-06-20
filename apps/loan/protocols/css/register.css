@@ -1,0 +1,10 @@
+.protocol-article {
+    padding: 34px;
+}
+
+.protocol-article div {
+    text-indent: 2em;
+    font-size: 30px;
+    line-height: 45px;
+    text-align: justify;
+}

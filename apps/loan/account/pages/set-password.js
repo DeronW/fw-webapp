@@ -100,7 +100,7 @@ class SetPassword extends React.Component {
         let agree_line = !reset_pwd && <div styleName="protocol">
             <i styleName={agree ? 'checked-btn' : "check-btn"}
                 onClick={this.agreeHandler}></i>
-            同意 <a href="/static/loan/protocol-register/index.html">《放心花用户注册协议》</a>
+            同意 <a href="/static/loan/protocols/#/register">《放心花用户注册协议》</a>
         </div>
 
         return <div>
