@@ -47,7 +47,7 @@ class Login extends React.Component {
                 <div styleName="underline"></div>
             </div>
             <a styleName="btn-submit" onClick={
-                () => this.submitHandler(phone, history)}>下一步</a>
+                () => account.login(password, history)}>下一步</a>
 
             <a styleName="btn-forgot">忘记密码?</a>
         </div>
