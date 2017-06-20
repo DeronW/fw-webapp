@@ -359,7 +359,7 @@ window.onload = function () {
         }
     }
 
-    $FW.getJSONP("https://www.9888.cn/dataTopics/data.shtml", function(data) {
+    $FW.getJSONP("http://www.gongchangp2p.cn/dataTopics/data.shtml", function(data) {
         //截止日期前一天
         document.querySelector(".infoTimeMobile span").innerText = data.data.date;
         //计算总额
@@ -384,7 +384,8 @@ window.onload = function () {
             endurance[1].querySelector('.cash span').innerText = judgeCash(data.data.total_overdueSum);
             endurance[2].querySelector('.cash span').innerText = prevent(data.data.total_overdueSum / data.data.total_invest * 100);
             endurance[3].querySelector('.cash span').innerText = prevent(data.data.total_overdueCount / data.data.total_orderCount * 100);
-        }
+            endurance[4].querySelector('.cash span').innerText = data.data.total_lendSum
+    }
     });
 
 };
