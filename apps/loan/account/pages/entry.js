@@ -23,7 +23,6 @@ class Entry extends React.Component {
         this.setState({ phone: v })
     }
 
-
     render() {
         let { account, history } = this.props;
         let { phone } = this.state;

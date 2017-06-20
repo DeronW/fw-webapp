@@ -33,25 +33,26 @@ class StorageFactory {
     }
 
     logout = () => {
+        ['token', 'status', 'invite_code', 'id', 'phone'].forEach(k => {
+            this.remove(`user_${k}`)
+        })
+
         // compatiable old way
         this.remove(['userToken', 'userStatus', 'invitationCode', 'uid'])
-
-        this.remove(['user_token', 'user_status',
-            'user_invite_code', 'user_id', 'user_phone'])
     }
 
     clear = () => {
         this.storage.clear()
     }
 
-    // getUserDict = () => {
-    //     return {
-    //         token: this.get('userToken'),
-    //         status: this.get('userStatus'),
-    //         invitCode: this.get('invitationCode'),
-    //         uid: this.get('uid')
-    //     }
-    // }
+    getUserDict = () => {
+        let r = {};
+
+        ['token', 'status', 'invite_code', 'id', 'phone'].forEach(k => {
+            r[k] = this.get(k)
+        })
+        return r
+    }
 
     // getUserID = () => {
     //     return this.get('uid') || Utils.Cookie.get('uid')
