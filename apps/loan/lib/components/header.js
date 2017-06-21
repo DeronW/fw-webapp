@@ -1,14 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/header.css'
+
+import { Theme } from '../helpers'
 
 
 const Header = CSSModules(styles, {
     "allowMultiple": true,
     "errorWhenNotFound": false
-})((props) => (
-    <div styleName="header-placeholder">
+})(props => {
+    if (!Theme.get('header')) return null;
+
+    return <div styleName="header-placeholder">
         <div styleName="header">
             <a styleName="btn-back" onClick={props.history.goBack}>
                 <div styleName="arm-up"></div>
@@ -17,6 +20,8 @@ const Header = CSSModules(styles, {
             {props.title}
         </div>
     </div>
-))
+})
+
+
 
 export default Header
