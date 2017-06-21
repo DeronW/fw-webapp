@@ -24,7 +24,9 @@ class Login extends React.Component {
     }
 
     changeHandler = e => {
-        this.setState({ password: e.target.value })
+        if(e.target.value.length <= 16){
+            this.setState({ password: e.target.value })
+        }
     }
 
     render() {
