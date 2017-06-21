@@ -71,11 +71,13 @@ class SetPassword extends React.Component {
 
         let err;
 
-        if (!sms_code) err = '请填写手机验证码';
-        if (!password) err = '请填写密码';
-        if (password.length < 8) err = "密码不能少于8位";
+        if (!password.match(/\d/) || !password.match(/[^\d]/))
+            err = "密码必须是字母和数字组合";
         if (password.length > 16) err = "密码不能多于16位";
         if (reset_pwd && !agree) err = '您还未同意注册协议'
+        if (password.length < 8) err = "密码不能少于8位";
+        if (!password) err = '请填写密码';
+        if (!sms_code) err = '请填写手机验证码';
 
         if (err) return Components.showToast(err);
 
