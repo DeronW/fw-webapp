@@ -10,7 +10,7 @@ import styles from '../css/about-us.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class AboutUs extends React.Component {
     render() {
-        let Browser = new BrowserFactory(navigator.userAgent, 'Easyloan888');
+        let Browser = new BrowserFactory(navigator.userAgent, 'EasyLoan888');
         return <div styleName="bg">
             {!Browser.inApp && <Header title="关于我们" history={this.props.history} />}
             <div styleName="banner">

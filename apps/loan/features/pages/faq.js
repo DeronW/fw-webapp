@@ -44,7 +44,7 @@ class FAQ extends React.Component {
     }
 
     render() {
-        let Browser = new BrowserFactory(navigator.userAgent, 'Easyloan888');
+        let Browser = new BrowserFactory(navigator.userAgent, 'EasyLoan888');
         let item = (qa, index) => {
             return <div key={index} styleName="item">
                 <div styleName="q" onClick={() => this.handleList(index)}>
