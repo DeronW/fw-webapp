@@ -29,7 +29,7 @@ export default class Account {
             userOperationType: userOperationType
         }).then(data => {
             this.registerCodeToken = data.codeToken
-        }, e => Components.Toast(e.message))
+        }, e => Components.showToast(e.message))
     }
 
     check_phone = (phone, history) => {
@@ -55,7 +55,7 @@ export default class Account {
             if (res.code === 201003) {
                 history.push('/login')
             } else {
-                Components.Toast(res.message)
+                Components.showToast(res.message)
             }
         })
     }
@@ -82,8 +82,8 @@ export default class Account {
             Storage.login({
                 token: dict.userToken,
                 status: dict.userStatus,
-                invit_code: dict.invitationCode,
-                id: dict.uid,
+                invitCode: dict.invitationCode,
+                uid: dict.uid,
                 phone: this.phone
             })
             location.href = '/static/loan/home/index.html';
@@ -101,7 +101,7 @@ export default class Account {
             Storage.login({
                 token: dict.userToken,
                 status: dict.userStatus,
-                id: dict.uid
+                uid: dict.uid
             })
             location.href = "/"
         }, e => Components.showToast(e.message))
@@ -118,7 +118,7 @@ export default class Account {
             Storage.login({
                 token: dict.userToken,
                 status: dict.userStatus,
-                id: dict.uid
+                uid: dict.uid
             })
             location.href = `/static/loan/home/index.html`;
         }, e => Components.showToast(e.message))

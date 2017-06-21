@@ -87,10 +87,10 @@ const WEIXIN_PAGES = [
     'weixin-invite4app', // 给app做的临时活动规则页面, 静态页面, 没有功能
 ]
 
-const MARKET = [
-    'market',
-    'market-detail'
-]
+// const MARKET = [
+//     'market',
+//     'market-detail'
+// ]
 
 const CREDIT_CARD = [
     'credit-card-products'
@@ -128,7 +128,6 @@ APP_NAMES.push(
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
-    ...MARKET,
     ...CREDIT_CARD,
     ...MORTGAGE,
     ...APPLY_TEN_MILLION_LOAN,

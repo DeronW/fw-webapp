@@ -15,12 +15,18 @@ class Login extends React.Component {
         password: ''
     }
 
+    componentDidMount() {
+        document.title = '放心花'
+    }
+
     toggleEye = () => {
         this.setState({ plaintext: !this.state.plaintext })
     }
 
     changeHandler = e => {
-        this.setState({ password: e.target.value })
+        if(e.target.value.length <= 16){
+            this.setState({ password: e.target.value })
+        }
     }
 
     render() {
