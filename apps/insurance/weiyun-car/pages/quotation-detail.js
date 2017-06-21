@@ -9,8 +9,8 @@ import styles from '../css/quotation-detail.css'
 
 const QuotationDetail = inject('quotations')(observer(CSSModules((props) => {
 
-    let selectFirm = props.match.params.selectFirm,
-        detail = props.quotations[selectFirm];
+    let selectedFirm = props.match.params.selectedFirm,
+        detail = props.quotations[selectedFirm];
 
     let gen_detail_item = (type, title) => (
         <div styleName="detail-item">
@@ -22,7 +22,7 @@ const QuotationDetail = inject('quotations')(observer(CSSModules((props) => {
     return (
         <div>
             <Header title="保费报价" show_close={false} history={props.history} />
-            <div styleName={`firm-name-${selectFirm}`}></div>
+            <div styleName={`firm-name-${selectedFirm}`}></div>
             <div styleName="detail-grp">
                 <div styleName="grp-title">
                     <div styleName="title-name">交强险+车船税</div>
