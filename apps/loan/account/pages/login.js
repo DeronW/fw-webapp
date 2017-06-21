@@ -15,6 +15,10 @@ class Login extends React.Component {
         password: ''
     }
 
+    componentDidMount() {
+        document.title = '放心花'
+    }
+
     toggleEye = () => {
         this.setState({ plaintext: !this.state.plaintext })
     }

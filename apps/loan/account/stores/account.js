@@ -29,7 +29,7 @@ export default class Account {
             userOperationType: userOperationType
         }).then(data => {
             this.registerCodeToken = data.codeToken
-        }, e => Components.Toast(e.message))
+        }, e => Components.showToast(e.message))
     }
 
     check_phone = (phone, history) => {
@@ -55,7 +55,7 @@ export default class Account {
             if (res.code === 201003) {
                 history.push('/login')
             } else {
-                Components.Toast(res.message)
+                Components.showToast(res.message)
             }
         })
     }
