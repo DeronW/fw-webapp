@@ -13,6 +13,10 @@ class Entry extends React.Component {
         phone: ''
     }
 
+    componentDidMount() {
+        document.title = '放心花'
+    }
+
     clearHandler = () => {
         this.setState({ phone: '' })
     }
