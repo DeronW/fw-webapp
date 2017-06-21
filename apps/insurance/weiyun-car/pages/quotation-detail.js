@@ -7,9 +7,9 @@ import Header from '../components/header'
 import styles from '../css/quotation-detail.css'
 
 
-const QuotationDetail = inject('quotations')(observer(CSSModules((props) => {
+const QuotationDetail = inject('current_order', 'quotations')(observer(CSSModules((props) => {
 
-    let selectedFirm = props.match.params.selectedFirm,
+    let selectedFirm = props.match.params.selectedFirm || props.current_order.selectedFirm,  // 查看不同公司的报价详情||确认页面查看报价
         detail = props.quotations[selectedFirm];
 
     let gen_detail_item = (type, title) => (

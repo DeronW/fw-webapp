@@ -6,7 +6,7 @@ export default class PolicyDetail {
         this.Get = Get
 
         extendObservable(this, {
-            selectedFirm: '1', // 0:平安、1:太平洋、2:人保
+            selectedFirm: '0', // 0:平安、1:太平洋、2:人保
             alipayURL: '', // 支付宝支付链接
             payStatus: '', // 支付状态， 未支付 成功 失败等等
         })

@@ -30,7 +30,7 @@ class OrderConfirm extends React.Component {
                 </div>
                 <div styleName="info-item">
                     <div styleName="item-left">报价明细</div>
-                    <div styleName="item-right">查看详情</div>
+                    <div styleName="item-right" onClick={() => { history.push('/order-confirm/quotation') }}>查看详情</div>
                 </div>
                 <div styleName="info-item item-last">
                     <div styleName="item-left">客户信息</div>
