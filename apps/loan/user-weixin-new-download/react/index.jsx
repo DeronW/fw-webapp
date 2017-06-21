@@ -1,5 +1,5 @@
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={'借款结果'} />, HEADER_NODE)
+    ReactDOM.render(<Header title={'关注下载'} />, HEADER_NODE)
     var channel = $FW.Format.urlQuery().name;
     var ConcertUtilBrowser = {
         versions: (function () {

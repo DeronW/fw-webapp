@@ -82,7 +82,7 @@ export default class Account {
             Storage.login({
                 token: dict.userToken,
                 status: dict.userStatus,
-                invit_code: dict.invitationCode,
+                invitCode: dict.invitationCode,
                 uid: dict.uid,
                 phone: this.phone
             })
