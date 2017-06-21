@@ -199,7 +199,7 @@ class PolicyDetail extends React.Component {
                                 { name: '2万', value: 20000 }
                             ]} />
 
-                        <Field name="boli" title="玻璃单独破碎险"
+                        <Field name="boLi" title="玻璃单独破碎险"
                             options={[
                                 { name: '不投保', value: 0 },
                                 { name: '国产', value: 1 },

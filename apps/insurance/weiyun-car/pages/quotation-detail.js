@@ -51,7 +51,7 @@ const QuotationDetail = inject('quotations')(observer(CSSModules((props) => {
                     { gen_detail_item('buJiMianDaoQiang', '不计免盗抢险') }
                     { gen_detail_item('huaHen', '划痕险') }
                     { gen_detail_item('buJiMianHuaHen', '不计免划痕险') }
-                    { gen_detail_item('boli', '玻璃单独破碎险') }
+                    { gen_detail_item('boLi', '玻璃单独破碎险') }
                     { gen_detail_item('ziRan', '自燃损失险') }
                     { gen_detail_item('buJiMianZiRan', '不计免自燃损失险') }
                     { gen_detail_item('sheShui', '涉水行驶损失险') }

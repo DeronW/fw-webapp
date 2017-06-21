@@ -28,7 +28,7 @@ export default class PolicyDetail {
                 buJiMianDaoQiang: '',  // 不计免盗抢险
                 huaHen: '',  // 划痕险
                 buJiMianHuaHen: '',  // 不计免划痕险
-                boli: '',  // 玻璃单独破碎险
+                boLi: '',  // 玻璃单独破碎险
                 ziRan: '',  // 自燃损失险
                 buJiMianZiRan: '',  // 不计免自燃损失险
                 sheShui: '',  // 涉水行驶损失险
@@ -56,7 +56,7 @@ export default class PolicyDetail {
                 buJiMianDaoQiang: '',  // 不计免盗抢险
                 huaHen: '',  // 划痕险
                 buJiMianHuaHen: '',  // 不计免划痕险
-                boli: '',  // 玻璃单独破碎险
+                boLi: '',  // 玻璃单独破碎险
                 ziRan: '',  // 自燃损失险
                 buJiMianZiRan: '',  // 不计免自燃损失险
                 sheShui: '',  // 涉水行驶损失险
@@ -84,7 +84,7 @@ export default class PolicyDetail {
                 buJiMianDaoQiang: '',  // 不计免盗抢险
                 huaHen: '',  // 划痕险
                 buJiMianHuaHen: '',  // 不计免划痕险
-                boli: '',  // 玻璃单独破碎险
+                boLi: '',  // 玻璃单独破碎险
                 ziRan: '',  // 自燃损失险
                 buJiMianZiRan: '',  // 不计免自燃损失险
                 sheShui: '',  // 涉水行驶损失险
