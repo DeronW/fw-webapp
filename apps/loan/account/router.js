@@ -9,6 +9,8 @@ import {
 import Entry from './pages/entry.js'
 import Login from './pages/login.js'
 import SetPassword from './pages/set-password.js'
+import BankCard from './pages/bank-card.js'
+import BankCardAdd from './pages/bank-card-add.js'
 
 export default (stores) => {
     return <Router>
@@ -17,6 +19,9 @@ export default (stores) => {
                 <Route exact path='/entry' component={Entry} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/set-password' component={SetPassword} />
+
+                <Route exact path='/bank-card' component={BankCard} />
+                <Route exact path='/bank-card-add' component={BankCardAdd} />
             </Switch>
         </Provider>
     </Router>

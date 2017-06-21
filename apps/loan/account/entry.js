@@ -8,7 +8,8 @@ import Stores from './stores'
 import { Post } from '../lib/helpers'
 
 let stores = {
-    account: new Stores.Account(Post)
+    account: new Stores.Account(Post),
+    bank_card: new Stores.BankCard(Post),
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))
