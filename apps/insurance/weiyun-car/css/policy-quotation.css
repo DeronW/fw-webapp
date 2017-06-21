@@ -39,15 +39,18 @@
     font-size: 30px;
 }
 
-.renbao {
+.firm-name-2 {
+    composes: firm-name;
     background: url('../images/policy-quotation/renbao.png') #fff no-repeat left;
 }
 
-.taipingyang {
+.firm-name-1 {
+    composes: firm-name;
     background: url('../images/policy-quotation/taipingyang.png') #fff no-repeat left;
 }
 
-.pingan {
+.firm-name-0 {
+    composes: firm-name;
     background: url('../images/policy-quotation/pingan.png') #fff no-repeat left;
 }
 
