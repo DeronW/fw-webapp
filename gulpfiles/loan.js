@@ -12,11 +12,6 @@ let APP_NAMES = [
 
 // 用户模块
 const USER_PAGES = [
-    'user-entry', // 用户入口, 并非登录或注册, 而是用户的进入入口
-    'user-register', //注册入口
-    'user-login', //登录入口
-    'user-set-password',
-    'user-reset-password',
     'user', //我
     'user-info', // 个人信息设置
     'user-card-set', //设置提现卡
