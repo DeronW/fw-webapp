@@ -18,7 +18,7 @@ class List extends React.Component {
         return <div>
             {this.props.bank_card.supported_list.map(bank)}
             <div styleName="fixed-btn">
-                <a onClick={props.closeHandler}
+                <a onClick={this.props.closeHandler}
                 >{props.title}</a>
             </div>
         </div>
