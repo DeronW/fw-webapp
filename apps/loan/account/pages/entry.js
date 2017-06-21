@@ -10,7 +10,7 @@ import styles from '../css/entry.css'
 class Entry extends React.Component {
 
     state = {
-        phone: ''
+        phone: this.props.account.phone
     }
 
     componentDidMount() {
