@@ -1,5 +1,5 @@
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #3a4a79 inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0) inset !important;
     color:#fff;
     outline:none;
 }
