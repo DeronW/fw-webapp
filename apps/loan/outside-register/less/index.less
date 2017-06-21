@@ -224,9 +224,11 @@ body {
       width: 100%;
       justify-content: space-between;
       font-size: 0;
+      overflow:hidden;
       .close-mask {
         display: inline-block;
-        width: 236 / 40rem;
+        float:left;
+        width: 246 / 40rem;
         height: 74 / 40rem;
         line-height: 74 / 40rem;
         border: 1px solid #6aa4f0;
@@ -237,7 +239,8 @@ body {
 
       .to-next {
         display: inline-block;
-        width: 236 / 40rem;
+        float:right;
+        width: 246 / 40rem;
         height: 74 / 40rem;
         line-height: 74 / 40rem;
         background-color: #6aa4f0;
@@ -247,4 +250,10 @@ body {
       }
     }
   }
+}
+.clear-btn-info{
+    float:right;
+}
+.veri-code-info .clear-btn{
+    float:right;
 }

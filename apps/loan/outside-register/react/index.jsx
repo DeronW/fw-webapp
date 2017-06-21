@@ -86,15 +86,15 @@ class VerificationCodeInput extends React.Component {
                     }, 10);
                 }} />
                 <div className="veri-code-info">
+                    <div onClick={this.props.handleClick} className="clear-btn-info">
+                        {this.props.verificationCodeInfo}
+                    </div>
                     {this.state.enableClear && <div className="clear-btn" onClick={() => {
                         this.props.handleClear('verificationCode');
                     }}>
                         <img src="images/clear.png" alt="clear button"></img>
                     </div>
                     }
-                    <div onClick={this.props.handleClick}>
-                        {this.props.verificationCodeInfo}
-                    </div>
                 </div>
             </div>
         )
