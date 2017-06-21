@@ -21,7 +21,7 @@ class StorageFactory {
     login = dict => {
         if (typeof (dict) === 'string') dict = JSON.parse(dict);
 
-        ['token', 'status', 'invite_code', 'id', 'phone'].forEach(k => {
+        ['token', 'status', 'invite_code', 'uid', 'phone'].forEach(k => {
             dict[k] && this.set(`user_${k}`, dict[k])
         })
 
@@ -33,7 +33,7 @@ class StorageFactory {
     }
 
     logout = () => {
-        ['token', 'status', 'invite_code', 'id', 'phone'].forEach(k => {
+        ['token', 'status', 'invite_code', 'uid', 'phone'].forEach(k => {
             this.remove(`user_${k}`)
         })
 
@@ -48,7 +48,7 @@ class StorageFactory {
     getUserDict = () => {
         let r = {};
 
-        ['token', 'status', 'invite_code', 'id', 'phone'].forEach(k => {
+        ['token', 'status', 'invite_code', 'uid', 'phone'].forEach(k => {
             r[k] = this.get(k)
         })
         return r
