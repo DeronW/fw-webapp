@@ -46,18 +46,9 @@ export default class Customer {
             // return valid && this.vehicleLicenseImage1 && this.vehicleLicenseImage2
     }
 
-    submit = (history) => () => {
-
+    submit = (history) => {
         if (!this.valid) return
-        history.push('/policy-quotation');
-
-        // return this.request('blablabla', {}).then(data => {
-        //     if (data.success) {
-        //
-        //     } else {
-        //
-        //     }
-        // })
+        history.push('/order-confirm');
     }
 
 }

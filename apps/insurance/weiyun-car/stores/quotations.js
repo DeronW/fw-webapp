@@ -94,17 +94,17 @@ export default class PolicyDetail {
         })
     }
 
-    getSelectedAbstract = (firmNo) => {
-        return {
+    getSelectedAbstract = firmNo => (
+        {
             originPrice: this[firmNo].originPrice,
             discount: this[firmNo].discount,
-            actualPrice: this[firmNo].actualPrice,
+            actualPrice: this[firmNo].actualPrice
         }
-    }
+    )
 
-    getSelectedDetail = (firmNo) => this[firmNo]
+    getSelectedDetail = firmNo => this[firmNo]
 
-    getSelectedTotal = (firmNo) => this[firmNo].actualPrice
+    getSelectedTotal = firmNo => this[firmNo].actualPrice
 
 
 }
