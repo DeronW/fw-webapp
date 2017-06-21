@@ -10,6 +10,7 @@ import Header from '../components/header'
 import styles from '../css/policy-quotation.css'
 import styles_icon_circle from '../css/icons/circle.css'
 
+@inject('quotations')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class PolicyQuotation extends React.Component {
@@ -28,6 +29,7 @@ class PolicyQuotation extends React.Component {
     render() {
 
         let { selected } = this.state;
+        let { quotations, history } = this.props;
 
         return (
             <div>
@@ -40,13 +42,11 @@ class PolicyQuotation extends React.Component {
                                 styles_icon_circle.checked :
                                 styles_icon_circle.unchecked}></i>
                         </div>
-                        <div styleName="quotation-entry">
+                        <div styleName="quotation-entry" onClick={() => { history.push('policy-quotation/2') }}>
                             <div styleName="firm-name renbao">人保车险</div>
                             <div styleName="price-container">
-                                <div styleName="discount-price">￥3000.99</div>
-                                <div styleName="origin-price">官网报价3999.00</div>
-                                {/* <div styleName="discount-price">￥{discountPrice}</div>
-                                <div styleName="origin-price">官网报价{originPrice}</div> */}
+                                <div styleName="discount-price">￥{quotations['2'].actualPrice}</div>
+                                <div styleName="origin-price">官网报价{quotations['2'].originPrice}</div>
                             </div>
                         </div>
                     </div>
@@ -56,13 +56,11 @@ class PolicyQuotation extends React.Component {
                                 styles_icon_circle.checked :
                                 styles_icon_circle.unchecked}></i>
                         </div>
-                        <div styleName="quotation-entry">
+                        <div styleName="quotation-entry" onClick={() => { history.push('policy-quotation/1') }}>
                             <div styleName="firm-name taipingyang">太平洋车险</div>
                             <div styleName="price-container">
-                                <div styleName="discount-price">￥3000.99</div>
-                                <div styleName="origin-price">官网报价3999.00</div>
-                                {/* <div styleName="discount-price">￥{discountPrice}</div>
-                                <div styleName="origin-price">官网报价{originPrice}</div> */}
+                                <div styleName="discount-price">￥{quotations['1'].actualPrice}</div>
+                                <div styleName="origin-price">官网报价{quotations['1'].originPrice}</div>
                             </div>
                         </div>
                     </div>
@@ -72,13 +70,11 @@ class PolicyQuotation extends React.Component {
                                 styles_icon_circle.checked :
                                 styles_icon_circle.unchecked}></i>
                         </div>
-                        <div styleName="quotation-entry">
+                        <div styleName="quotation-entry" onClick={() => { history.push('policy-quotation/0') }}>
                             <div styleName="firm-name pingan">平安车险</div>
                             <div styleName="price-container">
-                                <div styleName="discount-price">￥3000.99</div>
-                                <div styleName="origin-price">官网报价3999.00</div>
-                                {/* <div styleName="discount-price">￥{discountPrice}</div>
-                                <div styleName="origin-price">官网报价{originPrice}</div> */}
+                                <div styleName="discount-price">￥{quotations['0'].actualPrice}</div>
+                                <div styleName="origin-price">官网报价{quotations['0'].originPrice}</div>
                             </div>
                         </div>
                     </div>
