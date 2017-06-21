@@ -8,7 +8,8 @@ export default class BankCard {
         this.Post = Post
 
         extendObservable(this, {
-            all: []
+            all: [],
+            supported_list: []
         })
     }
 
@@ -19,8 +20,9 @@ export default class BankCard {
     }
 
     fetch_supported_list = () => {
+        if (this.supported_list.length) return;
         this.Post('/api/bankcard/v1/supportbank.json').then(data => {
-            this.supported_bank_list = data.pageData.result
+            this.supported_list = data.pageData.result
         })
     }
 
