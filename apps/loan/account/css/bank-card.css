@@ -1,0 +1,133 @@
+.card {
+    padding: 0 34px;
+    margin-top: 34px;
+}
+
+.card:nth-child(1n) .card-panel {
+    background-color: #ed6667;
+}
+
+.card:nth-child(2n) .card-panel {
+    background-color: #78c09f;
+}
+
+.card:nth-child(3n) .card-panel {
+    background-color: #7b9ad3;
+}
+
+.card-panel {
+    height: 216px;
+    margin: 0 4px;
+    border-radius: 16px 16px 0 0;
+    padding-top: 1px;
+    position: relative;
+    color: white;
+}
+
+.card-panel-t {
+    height: 64px;
+    font-size: 32px;
+    line-height: 64px;
+    margin: 18px 40px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid hsla(0, 0%, 100%, .5);
+    font-size: 32px;
+}
+
+.bank-logo {
+    border-radius: 50%;
+    float: left;
+    width: 64px;
+    height: 57px;
+    padding-top: 7px;
+    background: hsla(0, 0%, 100%, .5);
+    text-align: center;
+    margin-right: 10px;
+}
+
+.bank-logo img {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: 5px solid hsla(0, 0%, 100%, .2);
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+.card .card-type {
+    display: block;
+    font-size: 28px;
+    line-height: 30px;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.card .card-number {
+    display: block;
+    font-size: 36px;
+    line-height: 40px;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.card .bottom-line {
+    height: 1px;
+    background: rgba(0, 0, 0, .5);
+    border-bottom: 1px solid #fff;
+}
+
+.default-bank-card {
+    position: absolute;
+    top: 134px;
+    right: 40px;
+    width: 124px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 28px;
+    background-color: #fff;
+    border-radius: 5px;
+    color: #ed6667;
+}
+
+.management-tips {
+    padding: 0 34px;
+    font-size: 27px;
+    color: #999;
+    line-height: 40px;
+    margin-top: 40px;
+}
+
+.fixed-panel-holder {
+    height: 180px;
+}
+
+.fixed-panel {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    height: 180px;
+    background: white;
+}
+
+.fixed-panel-tips {
+    font-size: 27px;
+    color: #999;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.fixed-panel-btn {
+    display: block;
+    width: 654px;
+    height: 84px;
+    line-height: 84px;
+    background: #6aa4f0;
+    text-align: center;
+    font-size: 34px;
+    color: #fff;
+    border-radius: 8px;
+    margin: 20px auto 0;
+}
