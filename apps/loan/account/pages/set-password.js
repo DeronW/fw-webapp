@@ -95,7 +95,7 @@ class SetPassword extends React.Component {
 
         let invite_code_line = !reset_pwd && <div styleName="field-input">
             <i className="icon-people" styleName="icon-people"></i>
-            <input placeholder="请输入邀请码" />
+            <input placeholder="请输入邀请码" styleName="pwd-input" />
             <span styleName="xuan-tian">(选填)</span>
         </div>
 
@@ -113,7 +113,7 @@ class SetPassword extends React.Component {
 
             <div styleName="field-input">
                 <i className="icon-phone" styleName="icon-phone"></i>
-                <input placeholder="输入手机验证码" value={sms_code}
+                <input placeholder="输入手机验证码" value={sms_code} styleName="pwd-input"
                     onChange={this.inputSMSCodeHandler} />
                 <a styleName="btn-verify-code" onClick={this.getSMSCode}>
                     {count ? `${count}s` : '获取验证码'}</a>
@@ -121,7 +121,7 @@ class SetPassword extends React.Component {
             </div>
             <div styleName="field-input">
                 <i className="icon-lock" styleName="icon-lock"></i>
-                <input placeholder="设置8-16位的字母及数字组合密码" value={password}
+                <input placeholder="设置8-16位的字母及数字组合密码" value={password} styleName="pwd-input"
                     type={plaintext ? 'text' : 'password'}
                     onChange={this.inputPwdHandler} />
                 <i className={plaintext ? "icon-eye-open" : "icon-eye-close"}

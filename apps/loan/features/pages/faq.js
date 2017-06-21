@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
-
+import { BrowserFactory } from 'fw-javascripts'
 import { Header } from '../../lib/components'
 
 import styles from '../css/faq.css'
@@ -44,7 +44,7 @@ class FAQ extends React.Component {
     }
 
     render() {
-
+        let Browser = new BrowserFactory(navigator.userAgent, 'EasyLoan888');
         let item = (qa, index) => {
             return <div key={index} styleName="item">
                 <div styleName="q" onClick={() => this.handleList(index)}>
@@ -58,7 +58,7 @@ class FAQ extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header title="常见问题" history={this.props.history} />
+            {!Browser.inApp && <Header title="常见问题" history={this.props.history} />}
 
             <div styleName="faq-panel">
                 {Questions.map(item)}

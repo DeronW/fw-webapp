@@ -9,6 +9,7 @@ import {
 import Home from './pages/home'
 import Basic from './pages/basic.js'
 import Car from './pages/car.js'
+import CarImage from './pages/car-image.js'
 import PolicyDetail from './pages/policy-detail'
 import PolicyQuotation from './pages/policy-quotation'
 import QuotationDetail from './pages/quotation-detail'
@@ -28,9 +29,11 @@ export default (stores) => {
                 <Route exact path='/car' component={Car} />
                 <Route exact path='/policy-detail' component={PolicyDetail} />
                 <Route exact path='/policy-quotation' component={PolicyQuotation} />
-                <Route exact path='/policy-quotation/:selectFirm' component={QuotationDetail} />
+                <Route exact path='/policy-quotation/:selectedFirm' component={QuotationDetail} />
                 <Route exact path='/customer' component={Customer} />
                 <Route exact path='/order-confirm' component={OrderConfirm} />
+                <Route exact path='/order-confirm/car' component={CarImage} />
+                <Route exact path='/order-confirm/quotation' component={QuotationDetail} />
                 <Route exact path='/order-payment' component={OrderPayment} />
                 <Route exact path='/order-result' component={OrderResult} />
                 <Route exact path='/orders' component={Orders} />

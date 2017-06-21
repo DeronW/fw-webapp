@@ -126,6 +126,7 @@ body {
 }
 
 .veri-code-info {
+  display:-webkit-inline-flex;
   display: inline-flex;
   .right-align-element;
   padding-right: 24 / 40rem;
@@ -196,6 +197,7 @@ body {
     position: fixed;
     top: 50%;
     left: 50%;
+    -webkit-transform:translate(-50%, -50%);
     transform: translate(-50%, -50%);
     width: 586 / 40rem;
     padding: 34 / 40rem;
@@ -221,8 +223,7 @@ body {
       display: inline-flex;
       width: 100%;
       justify-content: space-between;
-      font-size: 30 / 40rem;
-
+      font-size: 0;
       .close-mask {
         display: inline-block;
         width: 246 / 40rem;
@@ -231,6 +232,7 @@ body {
         border: 1px solid #6aa4f0;
         border-radius: 4px;
         color: #6aa4f0;
+        font-size: 30 / 40rem;
       }
 
       .to-next {
@@ -241,6 +243,7 @@ body {
         background-color: #6aa4f0;
         border-radius: 4px;
         color: #fff;
+        font-size: 30 / 40rem;
       }
     }
   }

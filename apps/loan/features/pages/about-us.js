@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
-
+import { BrowserFactory } from 'fw-javascripts'
 import { Header } from '../../lib/components'
 
 import styles from '../css/about-us.css'
@@ -10,8 +10,9 @@ import styles from '../css/about-us.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class AboutUs extends React.Component {
     render() {
+        let Browser = new BrowserFactory(navigator.userAgent, 'EasyLoan888');
         return <div styleName="bg">
-            <Header title="关于我们" history={this.props.history} />
+            {!Browser.inApp && <Header title="关于我们" history={this.props.history} />}
             <div styleName="banner">
                 <img src={require('../images/about-us/logo.png')} />
                 <div styleName="banner-intro">

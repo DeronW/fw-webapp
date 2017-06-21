@@ -18,7 +18,7 @@ export default class PolicyDetail {
             buJiMianDaoQiang: false,
             huaHen: null,
             buJiMianHuaHen: false,
-            boli: null,
+            boLi: null,
             ziRan: null,
             buJiMianZiRan: false,
             sheShui: null,
@@ -47,7 +47,7 @@ export default class PolicyDetail {
     @computed get valid() {
         if (this.hcSanFangTeYue === null && this.cheSun !== 0) return false; // 投保车损险但没有选择第三方是否投保，信息缺失
 
-        let valid = ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang', 'huaHen', 'boli', 'ziRan', 'sheShui'].every((key) => {
+        let valid = ['cheSun', 'sanZhe', 'siJi', 'chengKe', 'daoQiang', 'huaHen', 'boLi', 'ziRan', 'sheShui'].every((key) => {
             return this[key] !== null // 其他必选项信息缺失
         })
 
@@ -70,7 +70,7 @@ export default class PolicyDetail {
         //     buJiMianDaoQiang: this.buJiMianDaoQiang,
         //     huaHen: this.huaHen,
         //     buJiMianHuaHen: this.buJiMianHuaHen,
-        //     boli: this.boli,
+        //     boLi: this.boLi,
         //     ziRan: this.ziRan,
         //     buJiMianZiRan: this.buJiMianZiRan,
         //     sheShui: this.sheShui,

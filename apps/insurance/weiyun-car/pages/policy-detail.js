@@ -5,6 +5,8 @@ import { observer, inject } from 'mobx-react'
 import Header from '../components/header'
 import BottomButton from '../components/bottom-button'
 
+import CarImage from './car-image'
+
 import styles from '../css/policy-detail.css'
 import styles_icon_circle from '../css/icons/circle.css'
 
@@ -63,46 +65,6 @@ const Field = inject('policy_detail')(observer(CSSModules(function (props) {
     </div>
 }, styles, { "allowMultiple": true, "errorWhenNotFound": false })))
 
-const BasicAndCar = inject('basic', 'car')(observer(CSSModules((props) => {
-    let { basic, car } = props;
-    return (
-        <div styleName="car-info-container">
-            <div styleName="car-info">
-                <div styleName="car-info-item">
-                    车牌号码
-                    <span>{`${basic.carNoArea}${basic.licenseNo}`}</span>
-                </div>
-                <div styleName="car-info-item">
-                    车主信息
-                    <span>{basic.carOwnersName}</span>
-                </div>
-                <div styleName="car-info-item">
-                    车辆型号
-                    <span>{car.moldName}</span>
-                </div>
-                <div styleName="car-info-item">
-                    车架号
-                    <span>{car.carVin}</span>
-                </div>
-                <div styleName="car-info-item">
-                    发动机号
-                    <span>{car.engineNo}</span>
-                </div>
-                <div styleName="car-info-item-expire">
-                    <div styleName="expire-items">
-                        交强险到期日:
-                        <span>{car.forceExpireDate}</span>
-                    </div>
-                    <div styleName="expire-items">
-                        商业险到期日:
-                        <span>{car.businessExpireDate}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}, styles)))
-
 
 @inject('policy_detail')
 @observer
@@ -120,7 +82,7 @@ class PolicyDetail extends React.Component {
             <div styleName="fake-body">
                 <Header title="险种明细" history={history} />
 
-                <BasicAndCar />
+                <CarImage />
 
                 <div styleName="input-field-grp">
                     <div styleName="input-field">
@@ -199,7 +161,7 @@ class PolicyDetail extends React.Component {
                                 { name: '2万', value: 20000 }
                             ]} />
 
-                        <Field name="boli" title="玻璃单独破碎险"
+                        <Field name="boLi" title="玻璃单独破碎险"
                             options={[
                                 { name: '不投保', value: 0 },
                                 { name: '国产', value: 1 },
