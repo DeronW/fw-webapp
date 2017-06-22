@@ -132,7 +132,7 @@ class GiftBag extends React.Component {
         }
     }
 
-    componentwillreceiveprops(nextProps) {
+    componentWillReceiveProps(nextProps) {
         this.setState({token: nextProps.token})
     }
 

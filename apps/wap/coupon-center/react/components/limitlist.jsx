@@ -46,7 +46,7 @@ class ListBag extends React.Component {
         }
     }
 
-    componentwillreceiveprops(nextProps) {
+    componentWillReceiveProps(nextProps) {
         console.log(nextProps.token)
         this.setState({token: nextProps.token})
     }
