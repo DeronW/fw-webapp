@@ -3,18 +3,6 @@
     margin-top: 34px;
 }
 
-.card:nth-child(1n) .card-panel {
-    background-color: #ed6667;
-}
-
-.card:nth-child(2n) .card-panel {
-    background-color: #78c09f;
-}
-
-.card:nth-child(3n) .card-panel {
-    background-color: #7b9ad3;
-}
-
 .card-panel {
     height: 216px;
     margin: 0 4px;
@@ -22,6 +10,18 @@
     padding-top: 1px;
     position: relative;
     color: white;
+}
+
+.card-panel-red {
+    background-color: #ed6667;
+}
+
+.card-panel-blue {
+    background-color: #7b9ad3;
+}
+
+.card-panel-green {
+    background-color: #78c09f;
 }
 
 .card-panel-t {
