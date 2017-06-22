@@ -4,7 +4,7 @@ class LimitBagList extends React.Component {
     }
 
     render() {
-        let {limitList} = this.props
+        let {limitList,token} = this.props
 
         if (!limitList || limitList.length == 0) return null;
 
