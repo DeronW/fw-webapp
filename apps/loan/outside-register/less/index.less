@@ -126,15 +126,20 @@ body {
 }
 
 .veri-code-info {
-  display:-webkit-inline-flex;
-  display: inline-flex;
+    display: table;
+    width: 50%;
   .right-align-element;
   padding-right: 24 / 40rem;
   .font-style-default;
   line-height: @input-field-height;
   color: #d6e2ff;
 
+  .clear-btn-info {
+      float: right;
+  }
+
   .clear-btn {
+      float: right;
     .small-icon-pattern;
 
     img {
@@ -250,10 +255,4 @@ body {
       }
     }
   }
-}
-.clear-btn-info{
-    float:right;
-}
-.veri-code-info .clear-btn{
-    float:right;
 }
