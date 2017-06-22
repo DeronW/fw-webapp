@@ -1,0 +1,61 @@
+.tips {
+    padding: 20px 0 40px;
+    line-height: 30px;
+    font-size: 28px;
+    text-align: center;
+    color: #999;
+}
+
+.tips span {
+    color: #6aa4f0;
+}
+
+.field {
+    position: relative;
+    padding-left: 30px;
+    background-color: #fff;
+    font-size: 28px;
+    color: #333;
+    line-height: 88px;
+}
+
+.field input {
+    line-height: normal;
+    height: 88px;
+    background: transparent;
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-appearance: none;
+    font-size: 28px;
+    border: 0;
+    margin-left: 30px;
+    width: 300px;
+}
+
+.btn-sms-code {
+    display: block;
+    position: absolute;
+    top: 23px;
+    right: 24px;
+    width: 160px;
+    height: 42px;
+    line-height: 42px;
+    border: 1px solid #6aa4f0;
+    color: #6aa4f0;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.btn-submit {
+    display: block;
+    margin-top: 20px;
+    height: 74px;
+    line-height: 74px;
+    text-align: center;
+    color: #fff;
+    font-size: 30px;
+    background-color: #6aa4f0;
+    border-radius: 5px;
+}

@@ -18,10 +18,14 @@ class BankCard extends React.Component {
     render() {
         let { bank_card } = this.props;
 
-
         let bank_item = (item, index) => {
+            let cpcn = 'card-panel card-panel-';
+            if (index % 3 === 0) cpcn += 'red'
+            if (index % 3 === 1) cpcn += 'blue'
+            if (index % 3 === 2) cpcn += 'green'
+
             return <div styleName="card" key={index}>
-                <div styleName="card-panel">
+                <div styleName={cpcn}>
                     <div styleName="card-panel-t">
                         <div styleName="bank-logo">
                             <img src={item.logoUrl} />
