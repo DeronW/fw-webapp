@@ -157,7 +157,7 @@ class ApplyLoan extends React.Component {
         let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
         let credit_btn_handler = () => {
-            if(st == 3){
+            if(this.props.data.redirectType == 0){
                  this.setState({popShow:true});
             }
         }
