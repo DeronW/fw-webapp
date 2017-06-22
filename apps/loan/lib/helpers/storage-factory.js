@@ -49,7 +49,7 @@ class StorageFactory {
         let r = {};
 
         ['token', 'status', 'invite_code', 'uid', 'phone'].forEach(k => {
-            r[k] = this.get(k)
+            r[k] = this.get(`user_${k}`)
         })
         return r
     }

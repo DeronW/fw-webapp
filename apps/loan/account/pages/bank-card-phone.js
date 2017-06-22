@@ -5,7 +5,7 @@ import { Header } from '../../lib/components'
 
 import styles from '../css/bank-card-phone.css'
 
-@inject('bank_card', 'account')
+@inject('bank_card')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class BankCardPhone extends React.Component {
@@ -35,12 +35,15 @@ class BankCardPhone extends React.Component {
     }
 
     render() {
-        let { history, bank_card, account } = this.props
+        let { history, bank_card } = this.props
+        let { code } = this.state
 
         return <div>
             <Header title="验证手机号" history={history} />
 
-            <div styleName="tips">验证码已发送到尾号{account.phone.substr(-4)}的手机上</div>
+            <div styleName="tips">验证码已发送到尾号
+                <span>{bank_card.new_card.phone.substr(-4)}</span>
+                的手机上</div>
 
             <div styleName="field">
                 验证码 <input placeholder="请输入验证码" value={code} onChange={this.changeHandler} />

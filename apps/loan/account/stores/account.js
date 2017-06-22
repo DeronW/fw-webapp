@@ -22,7 +22,11 @@ export default class Account {
         return this.phone.replace(/(\d{3})\d{6}(\d{2})/, '$1******$2')
     }
 
-    send_sms_code(userOperationType) {
+    get_user_status = () => {
+        return Storage.getUserDict().status
+    }
+
+    send_sms_code = userOperationType => {
         this.Post('/api/userBase/v1/sendVerifyCode.json', {
             mobile: this.phone,
             // userOperationType 2：修改登录密码 3：注册
@@ -82,7 +86,6 @@ export default class Account {
             Storage.login({
                 token: dict.userToken,
                 status: dict.userStatus,
-                invitCode: dict.invitationCode,
                 uid: dict.uid,
                 phone: this.phone
             })
@@ -101,7 +104,8 @@ export default class Account {
             Storage.login({
                 token: dict.userToken,
                 status: dict.userStatus,
-                uid: dict.uid
+                uid: dict.uid,
+                phone: this.phone
             })
             location.href = "/"
         }, e => Components.showToast(e.message))

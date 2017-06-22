@@ -1,6 +1,6 @@
 import { extendObservable, computed } from 'mobx'
-import { Components } from 'fw-javascripts'
 import { Storage } from '../../lib/helpers'
+import { Components } from 'fw-javascripts'
 
 export default class BankCard {
 
@@ -9,7 +9,11 @@ export default class BankCard {
 
         extendObservable(this, {
             all: [],
-            supported_list: []
+            supported_list: [],
+            new_card: {
+                operatorBankcardGid: null,
+                phone: ''
+            }
         })
     }
 
@@ -31,4 +35,20 @@ export default class BankCard {
         let filtered = this.all.filter(e => e.isRealNameBindCard === true);
         return filtered[0] && filtered[0].cardNo || ''
     }
+
+    add_new_card_info = (bank_name, card_no, card_type, phone, user_status) => {
+        return this.Post('/api/bankcard/v1/commitinfo.json', {
+            bankName: bank_name,
+            cardNo: card_no,
+            cardType: card_type,
+            mobile: phone,
+            operatorType: user_status < 2 ? 1 : 2
+        }).then(data => {
+            this.new_card = {
+                operatorBankcardGid: data.bindBankInfo.operatorBankcardGid,
+                phone: phone
+            }
+        }, e => Components.showToast(e.message))
+    }
+
 }

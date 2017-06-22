@@ -37,6 +37,11 @@
     background-color: #fafafa;
 }
 
+.bank-list span {
+    float: right;
+    font-size: 24px;
+}
+
 .btn-show-list {
     float: left;
     color: #6aa4f0;
