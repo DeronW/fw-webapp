@@ -1,0 +1,55 @@
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: scroll;
+    z-index: 10;
+    padding: 40px 0 150px;
+}
+
+.bank-item {
+    background: white;
+    display: table;
+    width: 100%;
+    box-sizing: border-box;
+    height: 99px;
+    line-height: 99px;
+    border-bottom: 1px solid #e7e8ed;
+    font-size: 30px;
+    color: #555;
+}
+
+.bank-item img {
+    float: left;
+    margin: 22px 30px;
+    width: 56px;
+    height: 56px;
+}
+
+.panel-know-it {
+    width: 720px;
+    height: 106px;
+    padding-top: 22px;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 -5px 10px 0 rgba(50, 50, 50, .1);
+}
+
+.btn-know-it {
+    display: block;
+    width: 654px;
+    height: 84px;
+    line-height: 84px;
+    background: #6aa4f0;
+    text-align: center;
+    font-size: 34px;
+    color: #fff;
+    border-radius: 8px;
+    margin: 0 auto;
+    padding: 0;
+}
