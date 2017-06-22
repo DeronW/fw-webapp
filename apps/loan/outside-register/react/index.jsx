@@ -134,17 +134,17 @@ class PasswordInput extends React.Component {
                     }, 10);
                 }} />
                 <div className="password-opts-wrap">
+                    <div className="toggle-password-display" onClick={this.props.handleClick}>
+                        <img src={this.props.togglePasswordDisplay
+                            ? "images/show-password.png"
+                            : "images/hide-password.png"} />
+                    </div>
                     {this.state.enableClear && <div className="clear-btn" onClick={() => {
                         this.props.handleClear('password');
                     }}>
                         <img src="images/clear.png" alt="clear button"></img>
                     </div>
                     }
-                    <div className="toggle-password-display" onClick={this.props.handleClick}>
-                        <img src={this.props.togglePasswordDisplay
-                            ? "images/show-password.png"
-                            : "images/hide-password.png"} />
-                    </div>
                 </div>
             </div>
         )
