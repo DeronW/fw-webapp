@@ -2,6 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
+import { Components } from 'fw-javascripts'
 
 import styles from '../css/entry.css'
 
@@ -27,6 +28,22 @@ class Entry extends React.Component {
         this.setState({ phone: v })
     }
 
+    submitHandler = () => {
+        let { account, history } = this.props
+        let { phone } = this.state
+
+        let err;
+        if (!/^1(3|4|5|7|8)\d{9}$/.test(phone)) err = '手机号码格式不正确'
+        if (String(phone).length != 11) err = '手机号位数不正确'
+        if (!phone) err = '请填写手机号码'
+
+        if (err) return Components.showToast(err);
+
+        account.check_phone(phone).then(() => {
+            history.push('/set-password')
+        })
+    }
+
     render() {
         let { account, history } = this.props;
         let { phone } = this.state;
@@ -43,9 +60,8 @@ class Entry extends React.Component {
                     placeholder="请输入手机号进行注册" />
                 <div styleName="underline"></div>
             </div>
-            <a styleName="btn-submit" onClick={
-                () => account.check_phone(phone, history)}>下一步</a>
-        </div>
+            <a styleName="btn-submit" onClick={this.submitHandler}>下一步</a>
+        </div >
     }
 }
 

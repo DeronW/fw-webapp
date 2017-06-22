@@ -36,16 +36,10 @@ export default class Account {
         }, e => Components.showToast(e.message))
     }
 
-    check_phone = (phone, history) => {
-        let err;
-        if (String(phone).length != 11) err = '手机号位数不正确'
-        if (!/^1(3|4|5|7|8)\d{9}$/.test(phone)) err = '手机号码格式不正确'
-
-        if (err) return Components.showToast(err);
-
+    check_phone = phone => {
         this.phone = phone;
 
-        this.Post('/api/userBase/v1/sendVerifyCode.json', {
+        return this.Post('/api/userBase/v1/sendVerifyCode.json', {
             mobile: this.phone,
             userOperationType: 3
         }).then(data => {
@@ -54,7 +48,6 @@ export default class Account {
             this.registerCodeToken = data.codeToken
             //codeType 1:注册 2:重置密码
             this.registerCodeType = data.codeType
-            history.push('/set-password')
         }, res => {
             if (res.code === 201003) {
                 history.push('/login')
@@ -70,7 +63,7 @@ export default class Account {
         this.send_sms_code(2)
     }
 
-    login = (password, history) => {
+    login = password => {
         let err;
         if (!password) err = '请输入密码'
         if (password.length < 8) err = '密码是8位以上字母和数字组合'
@@ -111,7 +104,7 @@ export default class Account {
         }, e => Components.showToast(e.message))
     }
 
-    register = (pwd, sms_code, invite_code, history) => {
+    register = (pwd, sms_code, invite_code) => {
         this.Post('/api/userBase/v1/register.json', {
             mobile: this.phone,
             codeToken: this.registerCodeToken,
