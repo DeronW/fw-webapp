@@ -16,7 +16,7 @@ export default class Basic {
         })
     }
 
-    submit = (history) => {
+    submit = () => {
         if (!this.valid) return;
 
         return this.Get('/carInsurance/applyCarInsurance.shtml', {
@@ -26,10 +26,6 @@ export default class Basic {
             idCard: this.idCard,
             intentionCompanyCode: this.intentionCompanyCode,
             licenseNo: this.licenseNo
-        }).catch((r) => {
-            if (r.code == -105) {
-                history.push('/car');
-            }
         })
     }
 

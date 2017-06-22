@@ -1,5 +1,5 @@
 .tips {
-    padding: 20px 0 40px;
+    padding: 40px 0;
     line-height: 30px;
     font-size: 28px;
     text-align: center;
@@ -50,7 +50,8 @@
 
 .btn-submit {
     display: block;
-    margin-top: 20px;
+    width: 660px;
+    margin: 20px auto;
     height: 74px;
     line-height: 74px;
     text-align: center;

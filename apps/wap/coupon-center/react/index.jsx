@@ -6,7 +6,8 @@ class CouponCenter extends React.Component {
             giftList: [],
             limitList: [],
             endList: [],
-            isShowEmpty: false
+            isShowEmpty: false,
+            requestToken:null
         }
     }
 
@@ -23,6 +24,7 @@ class CouponCenter extends React.Component {
                 this.setState({ isShowEmpty: true })
             }
             this.setState({
+                requestToken: 'data.',
                 giftList: data.packageList,
                 limitList: data.couponAvailableList,
                 endList: data.couponEndList
@@ -31,12 +33,12 @@ class CouponCenter extends React.Component {
     }
 
     render() {
-        let { isShowEmpty, giftList, limitList, endList } = this.state;
+        let { isShowEmpty, giftList, limitList, endList,requestToken } = this.state;
 
         return <div className="totalBox">
             {isShowEmpty && <EmptyShow />}
-            {<GiftBagList giftList={giftList} refreshHandler={this.requestGiftList} />}
-            {<LimitBagList limitList={limitList} refreshHandler={this.requestGiftList} />}
+            {<GiftBagList giftList={giftList} refreshHandler={this.requestGiftList} token={requestToken}/>}
+            {<LimitBagList limitList={limitList} refreshHandler={this.requestGiftList} token={requestToken}/>}
             {<EndList endList={endList} refreshHandler={this.requestGiftList} />}
         </div>
     }
