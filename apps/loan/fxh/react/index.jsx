@@ -89,6 +89,13 @@ class ApplyLoan extends React.Component {
 
     getBorrowBtn = () => {
         let btn = '--', st = this.props.data.borrowBtnStatus;
+
+        let credit_btn_handler = () => {
+            if(this.props.data.redirectType == 0){
+                this.setState({popShow:true});
+            }
+        }
+
         let available_loan =
             <div className="available-loan">
                 <div className="max-loan-money">{this.state.creditLine}</div>
@@ -100,7 +107,7 @@ class ApplyLoan extends React.Component {
                 <div className="max-loan-money money-empty">暂无额度</div>
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
-                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="credit-improvement-tip" href={$FW.Browser.inJRGCApp() && st == 3 ? `/static/loan/user-weixin-new-download/index.html` : `/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>提额</a>吧！
+                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="loan-word-tip" onClick={()=>credit_btn_handler()}>提额</a>吧！
                 </div>
             </div>;
 
@@ -157,7 +164,7 @@ class ApplyLoan extends React.Component {
         let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
         let credit_btn_handler = () => {
-            if(st == 3){
+            if(this.props.data.redirectType == 0){
                  this.setState({popShow:true});
             }
         }
@@ -169,7 +176,7 @@ class ApplyLoan extends React.Component {
 
 
         let credit_btn =
-            <a className="loan-btn" onClick={credit_btn_handler()}>
+            <a className="loan-btn" onClick={()=>credit_btn_handler()}>
                 我要提额
             </a>;
 
@@ -225,13 +232,13 @@ class ApplyLoan extends React.Component {
                     </div>
                 </div>
                 {this.getBtnStatus()}
-                {this.props.data.redirectType == 0 ? <div className="loan-tip">额度为0别灰心，试试其他<span onClick={()=>{$FW.Browser.inJRGCApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>借款</span></div> : <div className="loan-tip">完善授权信息可减免手续费</div>}
+                {this.props.data.redirectType == 0 ? <div className="loan-tip">额度为0别灰心，试试其他<span className="loan-word-tip loan-word-tip-color" onClick={()=>{$FW.Browser.inJRGCApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>借款</span></div> : <div className="loan-tip">完善授权信息可减免手续费</div>}
                 {this.state.popShow && <div className="pop-bg">
                     <div className="pop-panel">
                         <div className="pop-title">提示</div>
                         <div className="pop-content">为方便您快速借到钱，推荐您尝试申请其他借款产品</div>
                         <a className="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>仍去提额</a>
-                        <a className="pop-confirm" href='/static/loan/dumiao/index.html'>尝试其他</a>
+                        <a className="pop-confirm" href='/static/loan/home/index.html'>尝试其他</a>
                     </div>
                 </div>}
             </div>

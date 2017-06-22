@@ -4,17 +4,17 @@ class LimitBagList extends React.Component {
     }
 
     render() {
-        let { limitList } = this.props
+        let {limitList,token} = this.props
 
         if (!limitList || limitList.length == 0) return null;
 
         return <div className="list_box">
             <div className="list_box_title">
-                <img className="icon_limit" src="images/icon-limit.png" />
+                <img className="icon_limit" src="images/icon-limit.png"/>
                 <span className="limit_title">限时抢购</span>
             </div>
             {limitList.map((limit, index) => <ListBag item={limit} key={index}
-                refreshHandler={this.props.refreshHandler}
+                                                      refreshHandler={this.props.refreshHandler} token={token}
             />)}
         </div>
     }
@@ -24,50 +24,62 @@ class ListBag extends React.Component {
         super(props)
         this.state = {
             receiveStatus: this.props.item.receiveStatus,
-            surplus_seconds: null
+            surplus_seconds: null,
+            token: this.props.token,
+            pending: false
         }
     }
 
     componentDidMount() {
         // start counting down
         if (this.props.item.receiveStatus == "01") {
-            this.setState({ surplus_seconds: this.props.item.intervalMilli })
+            this.setState({surplus_seconds: this.props.item.intervalMilli})
             this.timer = setInterval(() => {
                 if (this.state.surplus_seconds < 1) {
                     clearInterval(this.timer)
-                    this.setState({ receiveStatus: '02' })
+                    this.setState({receiveStatus: '02'})
                     this.props.refreshHandler()
                 } else {
-                    this.setState({ surplus_seconds: this.state.surplus_seconds - 1 })
+                    this.setState({surplus_seconds: this.state.surplus_seconds - 1})
                 }
             }, 1000)
         }
     }
 
+    componentwillreceiveprops(nextProps) {
+        this.setState({token: nextProps.token})
+    }
+
     getHandler = (item) => {
+        // 请求处理中, 不能重复点击
+        if (this.state.pending) return;
+
+        this.setState({pending: true})
         item.isGet = "1";
         $FW.Ajax({
             url: API_PATH + '/mpwap/api/v2/grabCoupon.shtml',
             method: 'post',
             data: {
                 code: item.code,
-                couponType: item.type
+                couponType: item.type,
+                couponToken: this.state.token
             }
-        }).then(data=>{
+        }).then(data => {
             $FW.Component.Alert(data.remainNumber)
+            this.setState({pending: false})
             this.props.refreshHandler() //用户点击后重新请求，改变数据
-        },()=>{
+        }, () => {
             this.props.refreshHandler() //用户点击后重新请求，改变数据
         });
     }
 
     jump() {
-        NativeBridge.toNative('app_invest_list')
+        NativeBridge.toNative('app_coupon')
     }
 
     render() {
-        let { receiveStatus, surplus_seconds } = this.state;
-        let { item } = this.props;
+        let {receiveStatus, surplus_seconds} = this.state;
+        let {item} = this.props;
         let day_number = "期限：>=" + item.limitTerm + "天"
         let day = item.limitTerm == "0" ? "任意期限可用" : day_number
         let content;
@@ -89,12 +101,12 @@ class ListBag extends React.Component {
                     <div className="content_state_gray">领取</div>
                 </div>
             } else if (receiveStatus == "02") {
-                let remain_name = item.grapLimit=="0"?"list_remain":"list_remain list_remain_limit"
+                let remain_name = item.grapLimit == "0" ? "list_remain" : "list_remain list_remain_limit"
                 content = <div className={remain_name} onClick={() => {
                     item.grapLimit == "0" ? this.getHandler(item) : this.jump()
                 }}>
-                    <SVGCircleProgress percent={100-parseInt(item.restPercent)} weight={4} radius={50}
-                        bgColor={'#FC655A'} progressColor={'#eee'} />
+                    <SVGCircleProgress percent={100 - parseInt(item.restPercent)} weight={4} radius={50}
+                                       bgColor={'#FC655A'} progressColor={'#eee'}/>
                     {item.grapLimit == "0" ? <a className="content_state_red">领取</a> :
                         <a className="content_state_red">去投资</a>
                     }
