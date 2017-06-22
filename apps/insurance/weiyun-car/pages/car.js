@@ -19,6 +19,14 @@ class Car extends React.Component {
 
     changeHandler = field => e => this.props.car.setFormData(field, e.target.value)
 
+    submitHandler = () => {
+        let { car, history } = this.props
+
+        car.submit().then(data => {
+            history.push(`/policy-detail`)
+        })
+    }
+
     render() {
         let { car, current_order, history } = this.props;
 
@@ -50,7 +58,7 @@ class Car extends React.Component {
             </div>
 
             <BottomButton active={car.valid} title={'下一步'}
-                onClick={() => car.submit(history)} />
+                onClick={this.submitHandler} />
 
         </div>
     }

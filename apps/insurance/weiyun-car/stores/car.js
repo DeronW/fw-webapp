@@ -31,7 +31,7 @@ export default class Car {
         return this.moldName && this.engineNo && this.carVin && this.registerDate
     }
 
-    submit = async (history) => {
+    submit = async () => {
         if (!this.valid) return;
 
         let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
@@ -43,8 +43,6 @@ export default class Car {
             moldName: this.moldName,
             recordDate: this.registerDate,
             temporaryPolicyId: temporaryPolicyId
-        }).then(data => {
-            history.push(`/policy-detail`)
         })
     }
 

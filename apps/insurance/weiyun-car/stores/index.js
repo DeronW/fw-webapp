@@ -5,9 +5,10 @@ import Customer from './customer.js'
 import Orders from './orders.js'
 import Quotations from './quotations.js'
 import CurrentOrder from './current-order.js'
-
+import Common from './common.js'
 
 export {
+    Common,
     Basic,
     Car,
     PolicyDetail,
