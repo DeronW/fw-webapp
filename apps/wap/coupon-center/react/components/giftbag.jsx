@@ -19,7 +19,7 @@ class GiftBagList extends React.Component {
 
     render() {
         let { selected_code, selected_name } = this.state
-        let { giftList } = this.props
+        let { giftList,token } = this.props
 
         if (!giftList || giftList.length == 0) return null;
 
@@ -30,7 +30,7 @@ class GiftBagList extends React.Component {
             </div>
             {giftList.map((gift, index) => <GiftBag item={gift} key={index}
                 showGiftInfoHandler={this.showGiftInfoHandler}
-                refreshHandler={this.props.refreshHandler}
+                refreshHandler={this.props.refreshHandler} token={token}
             />)}
             {selected_code &&
                 <GiftPopPanel code={selected_code}
@@ -110,7 +110,9 @@ class GiftBag extends React.Component {
         super(props)
         this.state = {
             receiveStatus: this.props.item.receiveStatus,
-            remain_seconds: null
+            remain_seconds: null,
+            token:this.props.token,
+            pending:true
         }
     }
 
@@ -130,17 +132,24 @@ class GiftBag extends React.Component {
         }
     }
 
+    componentwillreceiveprops(nextProps){
+        this.setState({token:nextProps.token})
+    }
+
     getHandler = (item) => {
+        this.setState({pending:false})
         item.isGet = "1"
         $FW.Ajax({
             url: API_PATH + '/mpwap/api/v2/grabCoupon.shtml',
             method: 'post',
             data: {
+                token:this.state.token,
                 code: item.code,
                 couponType: item.type
             }
         }).then(data=>{
             $FW.Component.Alert(data.remainNumber)
+            this.setState({pending:true})
             this.props.refreshHandler() //用户点击后重新请求，改变数据
         },()=>{
             this.props.refreshHandler() //用户点击后重新请求，改变数据
@@ -218,12 +227,12 @@ class GiftBag extends React.Component {
         let status_start = () => {
             let cName = item.grapLimit == "0"?"gift_item_right gift_item_get":"gift_item_right gift_item_get gift_item_limit"
             return <div className={cName} onClick={() => {
-                (item.grapLimit == "0") ? this.getHandler(item) : this.jump()
+                (item.grapLimit == "0") ? (this.state.pending?this.getHandler(item):null) : this.jump()
             }}>
                 <SVGCircleProgress percent={100-parseInt(item.restPercent)} weight={4}
                     radius={50} bgColor={'#FC655A'} progressColor={'#eee'} />
                 {(item.grapLimit == "0") ?
-                    <a className="content_state_red">领取</a> :
+                    (this.state.pending?<a className="content_state_red">领取</a>:<div className="get_state_gray"> 领取</div>) :
                     <a className="content_state_red">去投资</a>
                 }
                 <div className="gift_right_title_surplus"> 剩余</div>
