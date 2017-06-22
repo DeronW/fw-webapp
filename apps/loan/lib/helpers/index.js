@@ -6,7 +6,7 @@ import ThemeFactory from './theme-factory.js'
 import NativeBridge from './native-bridge.js'
 
 let Storage = new StorageFactory()
-let Post = PostMethodFactory(Storage)
+let Post = PostMethodFactory(Storage, Browser, NativeBridge)
 let Theme = new ThemeFactory(Storage, Browser)
 
 export {
