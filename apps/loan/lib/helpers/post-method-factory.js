@@ -2,7 +2,7 @@ import { Request, Components } from 'fw-javascripts'
 
 const API_PATH = document.getElementById('api-path').value;
 
-const PostMethodFactory = (Storage, Browser, NativeBridge) => (url, params, slience) => {
+const PostMethodFactory = (Storage, Browser, NativeBridge) => (url, params = {}, slience) => {
 
     let USER = Storage.getUserDict(),
         token = USER.token,
@@ -45,7 +45,7 @@ const PostMethodFactory = (Storage, Browser, NativeBridge) => (url, params, slie
             if (slience)
                 return new Promise((reslove, reject) => reject(error))
 
-            Components.showToast(e.message)
+            Components.showToast(error.message)
 
             return new Promise((resolve, reject) => {
                 setTimeout(() => reject(error), 1700)

@@ -24,9 +24,15 @@ class Login extends React.Component {
     }
 
     changeHandler = e => {
-        if(e.target.value.length <= 16){
+        if (e.target.value.length <= 16) {
             this.setState({ password: e.target.value })
         }
+    }
+
+    forgetHandler = () => {
+        this.props.account.forget_password().then(data => {
+            this.props.history.replace('/set-password')
+        })
     }
 
     render() {
@@ -54,10 +60,7 @@ class Login extends React.Component {
             </div>
             <a styleName="btn-submit" onClick={
                 () => account.login(password, history)}>下一步</a>
-
-            <a styleName="btn-forgot"
-                onClick={() => account.forget_password(history)}>
-                忘记密码?</a>
+            <a styleName="btn-forgot" onClick={this.forgetHandler}>忘记密码?</a>
         </div>
     }
 }

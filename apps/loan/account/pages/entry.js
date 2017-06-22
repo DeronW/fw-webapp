@@ -41,7 +41,7 @@ class Entry extends React.Component {
         account.check_phone(phone).then(() => {
             history.push('/set-password')
         }).catch(e => {
-            e.code === 201003?
+            e.code === 201003 ?
                 history.push('/login') :
                 Components.showToast(e.message)
         })
