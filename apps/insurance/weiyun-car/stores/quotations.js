@@ -53,6 +53,14 @@ export default class PolicyDetail {
         return abstract
     }
 
+    price_preview = () => {
+        return {
+            '0': this.getSelectedDetail('0'),
+            '1': this.getSelectedDetail('1'),
+            '2': this.getSelectedDetail('2')
+        }
+    }
+
     getSelectedAbstract = firmNo => {
         let selectedAbstract = {};
         if (this.detail[firmNo]) {

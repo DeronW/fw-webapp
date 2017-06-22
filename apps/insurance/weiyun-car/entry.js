@@ -10,7 +10,9 @@ import AppRouter from './router'
 
 import * as Stores from './stores'
 
+
 let stores = {
+    common: new Stores.Common(Get),
     basic: new Stores.Basic(Get),
     car: new Stores.Car(Get),
     policy_detail: new Stores.PolicyDetail(Get),
