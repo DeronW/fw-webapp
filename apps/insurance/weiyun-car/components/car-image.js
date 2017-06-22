@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 
 import Header from '../components/header'
 
-import styles from '../css/car-image.css'
+import styles from '../css/components/car-image.css'
 
 const CarImage = inject('basic', 'car')(observer(CSSModules((props) => {
     let { basic, car } = props;

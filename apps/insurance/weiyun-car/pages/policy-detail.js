@@ -4,8 +4,7 @@ import { observer, inject } from 'mobx-react'
 
 import Header from '../components/header'
 import BottomButton from '../components/bottom-button'
-
-import CarImage from './car-image'
+import CarImage from '../components/car-image'
 
 import styles from '../css/policy-detail.css'
 import styles_icon_circle from '../css/icons/circle.css'
@@ -19,7 +18,7 @@ const Select = CSSModules((props) => {
         <div styleName="select-widget">
             <div styleName="select-mask" style={{ color: hasValidData ? "#333" : "#999" }}>{maskText}</div>
             <select styleName="native-select" onChange={props.handleChange}>
-                {/* helpful to fire change event whtn choose the real first option */}
+                {/* helpful to fire change event when choose the real first option */}
                 <option hidden></option>
                 {props.options.map(gen_options)}
             </select>
