@@ -12,7 +12,7 @@ import styles from '../css/bank-card.css'
 class BankCard extends React.Component {
 
     componentDidMount() {
-        this.props.bank_card.fetch_user_list()
+        this.props.bank_card.fetch_card_list()
     }
 
     render() {

@@ -13,7 +13,7 @@ export default class BankCard {
         })
     }
 
-    fetch_user_list = () => {
+    fetch_card_list = () => {
         this.Post('/api/bankcard/v1/bankcardlist.json').then(data => {
             this.all = data.userBankList.withdrawBankcard
         })
@@ -21,6 +21,7 @@ export default class BankCard {
 
     fetch_supported_list = () => {
         if (this.supported_list.length) return;
+
         this.Post('/api/bankcard/v1/supportbank.json').then(data => {
             this.supported_list = data.pageData.result
         })
