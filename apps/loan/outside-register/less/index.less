@@ -149,7 +149,8 @@ body {
 }
 
 .password-opts-wrap {
-  display: inline-flex;
+  display: table;
+  width: 100 / 40rem;
   .right-align-element;
 
   .toggle-password-display{
@@ -161,6 +162,7 @@ body {
   }
 
   .clear-btn {
+      float: right;
     .small-icon-pattern;
     width: 45 / 40rem;
 
@@ -255,4 +257,16 @@ body {
       }
     }
   }
+}
+
+.clear-btn {
+    border: 1px solid #ddd;
+}
+
+.password-opts-wrap {
+    border: 1px solid #ddd;
+}
+
+.veri-code-info {
+    border: 1px solid #ddd;
 }
