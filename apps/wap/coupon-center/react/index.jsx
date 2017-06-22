@@ -7,7 +7,7 @@ class CouponCenter extends React.Component {
             limitList: [],
             endList: [],
             isShowEmpty: false,
-            requestToken:null
+            requestToken: null
         }
     }
 
@@ -21,10 +21,10 @@ class CouponCenter extends React.Component {
             method: 'post',
         }).then(data => {
             if ((data.packageList.length == 0 && data.couponAvailableList.length == 0 && data.couponEndList.length == 0)) {
-                this.setState({ isShowEmpty: true })
+                this.setState({isShowEmpty: true})
             }
             this.setState({
-                requestToken: 'data.',
+                requestToken: data.couponToken,
                 giftList: data.packageList,
                 limitList: data.couponAvailableList,
                 endList: data.couponEndList
@@ -33,13 +33,13 @@ class CouponCenter extends React.Component {
     }
 
     render() {
-        let { isShowEmpty, giftList, limitList, endList,requestToken } = this.state;
+        let {isShowEmpty, giftList, limitList, endList, requestToken} = this.state;
 
         return <div className="totalBox">
             {isShowEmpty && <EmptyShow />}
             {<GiftBagList giftList={giftList} refreshHandler={this.requestGiftList} token={requestToken}/>}
             {<LimitBagList limitList={limitList} refreshHandler={this.requestGiftList} token={requestToken}/>}
-            {<EndList endList={endList} refreshHandler={this.requestGiftList} />}
+            {<EndList endList={endList} refreshHandler={this.requestGiftList}/>}
         </div>
     }
 }
@@ -47,8 +47,8 @@ class CouponCenter extends React.Component {
 $FW.DOMReady(function () {
     if (!$FW.Browser.inApp()) {
         ReactDOM.render(<Header title={'领券中心'}
-            sub_text={'我的优惠券'}
-            sub_url='javascript:NativeBridge.toNative("app_invest_list")' />, HEADER_NODE);
+                                sub_text={'我的优惠券'}
+                                sub_url='javascript:NativeBridge.toNative("app_invest_list")'/>, HEADER_NODE);
     }
     ReactDOM.render(<CouponCenter />, CONTENT_NODE)
 });

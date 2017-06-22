@@ -146,7 +146,7 @@ class GiftBag extends React.Component {
             url: API_PATH + '/mpwap/api/v2/grabCoupon.shtml',
             method: 'post',
             data: {
-                token: this.state.token,
+                couponToken: this.state.token,
                 code: item.code,
                 couponType: item.type
             }
