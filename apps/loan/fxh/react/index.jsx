@@ -107,7 +107,7 @@ class ApplyLoan extends React.Component {
                 <div className="max-loan-money money-empty">暂无额度</div>
                 <div className="max-loan-title">
                     <img src="images/warn.png" />
-                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a onClick={()=>credit_btn_handler()}>提额</a>吧！
+                    仅支持{this.props.data.lowestLoan}元以上借款，快去<a className="loan-word-tip" onClick={()=>credit_btn_handler()}>提额</a>吧！
                 </div>
             </div>;
 
