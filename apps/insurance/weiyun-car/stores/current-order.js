@@ -12,10 +12,13 @@ export default class PolicyDetail {
         })
     }
 
-    selectFirm = (history, selected) => {
-        // this.Get('/blabla', { selectFirm: this.selected })
+    selectFirm = selected => {
+        this.selectedFirm = this.selectedFirm == selected ? '' : selected;
+    }
+
+    submitSelectedFirm = (history) => {
+        // this.Get('/blabla', { selectFirm: this.selectedFirm })
         //     then(data => {
-        //         this.selectFirm = selected;
                 history.push('/customer')
             // })
     }
