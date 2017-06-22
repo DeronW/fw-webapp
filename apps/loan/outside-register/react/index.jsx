@@ -134,17 +134,17 @@ class PasswordInput extends React.Component {
                     }, 10);
                 }} />
                 <div className="password-opts-wrap">
+                    <div className="toggle-password-display" onClick={this.props.handleClick}>
+                        <img src={this.props.togglePasswordDisplay
+                            ? "images/show-password.png"
+                            : "images/hide-password.png"} />
+                    </div>
                     {this.state.enableClear && <div className="clear-btn" onClick={() => {
                         this.props.handleClear('password');
                     }}>
                         <img src="images/clear.png" alt="clear button"></img>
                     </div>
                     }
-                    <div className="toggle-password-display" onClick={this.props.handleClick}>
-                        <img src={this.props.togglePasswordDisplay
-                            ? "images/show-password.png"
-                            : "images/hide-password.png"} />
-                    </div>
                 </div>
             </div>
         )
@@ -242,11 +242,11 @@ class InteractWrap extends React.Component {
                 }, (e) => {
                     if (e.code === 201003) return this.setState({showRegisteredMask: true}) // 手机号已注册
                     let msg = e.message;
-                    $FW.Component.Toast(msg || "验证码获取失败");
+                    alert(msg || "验证码获取失败");
                     if (e.code === 201003) this.handleJump(false);
                 });
             } else {
-                $FW.Component.Toast("手机号格式不正确");
+                alert("手机号格式不正确");
                 this.setState({ phoneNum: '' });
             }
         }
@@ -272,10 +272,10 @@ class InteractWrap extends React.Component {
             if (essentialTypeNames.hasOwnProperty(typeName)) {
                 if (!this.state[typeName]) {
                     if (typeName === 'password') {
-                        $FW.Component.Toast('密码为空，输入8-16位的字母和数字组合密码');
+                        alert('密码为空，输入8-16位的字母和数字组合密码');
                         return;
                     }
-                    $FW.Component.Toast(essentialTypeNames[typeName] + "为空，请重新输入");
+                    alert(essentialTypeNames[typeName] + "为空，请重新输入");
                     return;
                 }
             }
@@ -329,7 +329,7 @@ class InteractWrap extends React.Component {
     handleSubmit = () => {
         if (this.ifEssentialsExist()) {
             if (!isPhoneNum(this.state.phoneNum)) {
-                $FW.Component.Toast("手机号格式不正确");
+                alert("手机号格式不正确");
                 this.setState({ phoneNum: '', verificationCode: '', password: '' });
             } else {
                 if (!isPasswordValid(this.state.password)) {
@@ -349,12 +349,12 @@ class InteractWrap extends React.Component {
                         this.handleJump(data);
                     }, (e) => {
                         if (!this.state.codeToken) {
-                            $FW.Component.Toast("请点击获取验证码！");
+                            alert("请点击获取验证码！");
                             return;
                         }
-                        $FW.Component.Toast(e.message);
+                        alert(e.message);
                         if (e.code === 20010) {
-                            $FW.Component.Toast("验证码错误，请重新输入");
+                            alert("验证码错误，请重新输入");
                             this.setState({ verificationCode: '' });
                         }
                     });
@@ -407,15 +407,15 @@ function isPasswordValid(password) {
     const includeNumPattern = /[0-9]+/;
     const includeAlphabetPattern = /[A-Za-z]+/;
     if (typePattern.test(password)) {
-        $FW.Component.Toast("密码只能包含数字和字母");
+        alert("密码只能包含数字和字母");
         return;
     }
     if (password.length < 8) {
-        $FW.Component.Toast("密码过短，请输入8-16位的字母和数字组合密码");
+        alert("密码过短，请输入8-16位的字母和数字组合密码");
         return;
     }
     if (!includeNumPattern.test(password) || !includeAlphabetPattern.test(password)) {
-        $FW.Component.Toast("密码过于简单，请输入8-16位的字母和数字组合密码");
+        alert("密码过于简单，请输入8-16位的字母和数字组合密码");
         return;
     }
     return true;
