@@ -169,7 +169,7 @@ class ApplyLoan extends React.Component {
 
 
         let credit_btn =
-            <a className="loan-btn" onClick={credit_btn_handler()}>
+            <a className="loan-btn" onClick={()=>credit_btn_handler()}>
                 我要提额
             </a>;
 
@@ -231,7 +231,7 @@ class ApplyLoan extends React.Component {
                         <div className="pop-title">提示</div>
                         <div className="pop-content">为方便您快速借到钱，推荐您尝试申请其他借款产品</div>
                         <a className="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>仍去提额</a>
-                        <a className="pop-confirm" href='/static/loan/dumiao/index.html'>尝试其他</a>
+                        <a className="pop-confirm" href='/static/loan/dumiao/index.html?pid=21'>尝试其他</a>
                     </div>
                 </div>}
             </div>
