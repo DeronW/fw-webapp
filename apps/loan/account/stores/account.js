@@ -48,12 +48,6 @@ export default class Account {
             this.registerCodeToken = data.codeToken
             //codeType 1:注册 2:重置密码
             this.registerCodeType = data.codeType
-        }, res => {
-            if (res.code === 201003) {
-                history.push('/login')
-            } else {
-                Components.showToast(res.message)
-            }
         })
     }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import { Components } from 'fw-javascripts'
 
@@ -41,6 +40,10 @@ class Entry extends React.Component {
 
         account.check_phone(phone).then(() => {
             history.push('/set-password')
+        }).catch(e => {
+            e.code === 201003?
+                history.push('/login') :
+                Components.showToast(e.message)
         })
     }
 
