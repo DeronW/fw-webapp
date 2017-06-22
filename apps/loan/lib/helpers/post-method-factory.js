@@ -25,7 +25,7 @@ const PostMethodFactory = storage => (url, params, slience) => {
         method: 'POST',
         data: merged_params,
         slience: true
-    })
+    })//.catch(e => Components.showToast(e.message))
 }
 
 
