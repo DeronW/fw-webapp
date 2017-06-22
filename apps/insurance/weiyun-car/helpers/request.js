@@ -5,7 +5,7 @@ import NativeBridge from './native-bridge.js'
 
 let API_PATH = document.getElementById('api-path').value;
 
-const Get = (url, params) => {
+const Get = (url, params, slience = false) => {
     return Request({
         url: `${API_PATH}/mpwap${url}`,
         data: params,
@@ -20,10 +20,15 @@ const Get = (url, params) => {
         */
         if (error.code == 40101) {
             console.log('here ! should go to login')
-            // Browser.inApp ?
-            // NativeBridge.login() :
-            // location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
+
+            Browser.inApp ?
+                NativeBridge.login() :
+                location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
         } else {
+            // 如果不弹出错误, 就直接reject
+            if (slience)
+                return new Promise((reslove, reject) => reject(error))
+
             Components.showToast(error.message)
 
             return new Promise((resolve, reject) => {
