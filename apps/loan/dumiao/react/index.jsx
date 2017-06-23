@@ -242,7 +242,7 @@ function gotoHandler(link, toNative, need_login) {
 
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(() => {
-    NativeBridge.setTitle('读秒');
-    ReactDOM.render(<Header title={"读秒"} />, HEADER_NODE);
+    NativeBridge.setTitle('分期');
+    ReactDOM.render(<Header title={"分期"} />, HEADER_NODE);
     ReactDOM.render(<BorrowMoney />, CONTENT_NODE)
 })
