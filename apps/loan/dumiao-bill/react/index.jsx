@@ -35,7 +35,7 @@ class BillDetail extends React.Component {
                 </div>
                 {baseStatus < 3 &&
                     <div className="enter-btn-wrap">
-                        <a className="enter-btn" href={link}>点击进入读秒</a>
+                        <a className="enter-btn" href={link}>点击查看详情</a>
                     </div>}
             </div>
         )
