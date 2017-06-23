@@ -91,10 +91,12 @@ class BorrowMoney extends React.Component {
         if (canStatus === null) return;
 
         if (borrowStatus == 1 || borrowStatus == 101) {
-            gotoHandler('/static/loan/user-card-set/index.html');
+            // gotoHandler('/static/loan/user-card-set/index.html');
+            location.href = '/static/loan/user-card-set/index.html'
         } else if (canStatus == 2) {
             let link = `/static/loan/dumiao-put-in/index.html?pid=${$FW.Format.urlQuery().pid}`;
-            gotoHandler(link);
+            // gotoHandler(link);
+            location.href = link;
         } else if (canStatus === 0) {
             this.setState({ dumiaoEnterPopShow: true });
         } else if (canStatus == 1) {
