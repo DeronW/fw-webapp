@@ -78,8 +78,7 @@ class BankCardVerify extends React.Component {
     }
 
     checkResult(result, transCode) {
-
-        // Components.hideLoading()
+        let should_hide_loading = true;
 
         if (result == 0) {
             if (transCode == 1001) {
@@ -97,7 +96,10 @@ class BankCardVerify extends React.Component {
             // 又开始转圈
             // Components.showLoading(null, false)
             setTimeout(this.fetchResult, 2000)
+            should_hide_loading = false
         }
+
+        if (should_hide_loading) Components.hideLoading()
     }
 
     render() {
