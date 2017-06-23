@@ -127,7 +127,7 @@ class BorrowMoney extends React.Component {
                     <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
                     <div className="pop-tip">{this.state.canMessage}</div>
                     <div className="know-btn" onClick={() => {gotoHandler(`${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${$FW.Browser.inFXHApp()?getCookie().token:USER.token}&uid=${$FW.Browser.inFXHApp()?getCookie().uid:USER.uid}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`)}}>
-                        进入读秒查看</div>
+                        点击查看详情</div>
                 </div>
             </div>
         }
