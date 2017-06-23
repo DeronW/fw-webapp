@@ -22,13 +22,14 @@ class StorageFactory {
         if (typeof (dict) === 'string') dict = JSON.parse(dict);
 
         ['token', 'status', 'invite_code', 'uid', 'phone'].forEach(k => {
-            dict[k] && this.set(`user_${k}`, dict[k])
+            dict[k] && this.set(`_$user_${k}`, dict[k])
         })
 
         // compatiable old way
         dict.token && this.set('userToken', dict.token)
         dict.status && this.set('userStatus', dict.status)
         dict.invitCode && this.set('invitationCode', dict.invitCode)
+        dict.invite_code && this.set('invitationCode', dict.invite_code)
         dict.uid && this.set('uid', dict.uid)
     }
 
@@ -49,7 +50,7 @@ class StorageFactory {
         let r = {};
 
         ['token', 'status', 'invite_code', 'uid', 'phone'].forEach(k => {
-            r[k] = this.get(`user_${k}`)
+            r[k] = this.get(`_$user_${k}`)
         })
         return r
     }

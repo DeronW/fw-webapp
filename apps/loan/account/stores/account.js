@@ -74,7 +74,7 @@ export default class Account {
                 status: dict.userStatus,
                 uid: dict.uid,
                 phone: this.phone,
-                invitCode: dict.invitationCode
+                invite_code: dict.invitationCode
             })
             location.href = '/static/loan/home/index.html';
         }, e => Components.showToast(e.message))
