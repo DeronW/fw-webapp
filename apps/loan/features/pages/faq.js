@@ -49,9 +49,9 @@ class FAQ extends React.Component {
             return <div key={index} styleName="item">
                 <div styleName="q" onClick={() => this.handleList(index)}>
                     {qa.q}
-                    <i styleName={this.state.toggle_list[index] ?
-                        'icon-a icon-a-d' : 'icon-a icon-a-u'}></i>
                 </div>
+                <i styleName={this.state.toggle_list[index] ?
+                    'icon-a icon-a-d' : 'icon-a icon-a-u'}></i>
                 {this.state.toggle_list[index] &&
                     <div styleName="a">{qa.a}</div>}
             </div>
