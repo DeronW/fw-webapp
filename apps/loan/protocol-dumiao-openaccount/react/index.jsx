@@ -1,4 +1,4 @@
 $FW.DOMReady(() => {
-    NativeBridge.setTitle('读秒开户授权书');
-    ReactDOM.render(<Header title={'读秒开户授权书'} />, HEADER_NODE);
+    NativeBridge.setTitle('开户授权书');
+    ReactDOM.render(<Header title={'开户授权书'} />, HEADER_NODE);
 })
