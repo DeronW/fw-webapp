@@ -55,7 +55,7 @@ class BankCardAdd extends React.Component {
                 card_info.bankName, card_no,
                 card_info.card_type, phone,
                 account.get_user_status()).then(() => {
-                    history.push('/bank-card-phone')
+                    history.push('/bank-card-verify')
                 })
     }
 

@@ -5,12 +5,12 @@ import { Header } from '../../lib/components'
 import { Components } from 'fw-javascripts'
 import { Post, Browser, NativeBridge } from '../../lib/helpers'
 
-import styles from '../css/bank-card-phone.css'
+import styles from '../css/bank-card-verify.css'
 
 @inject('bank_card')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class BankCardPhone extends React.Component {
+class BankCardVerify extends React.Component {
 
     state = {
         code: '',
@@ -59,6 +59,9 @@ class BankCardPhone extends React.Component {
         if (code.length < 4)
             return Components.showToast('验证码不能小于4位')
 
+        // 开始转圈, 转到有最终结果位置
+        Components.showLoading(null, false)
+
         Post('/api/bankcard/v1/commitverifycode.json', {
             operatorBankcardGid: this.props.bank_card.new_card.operatorBankcardGid,
             verifyCode: code,
@@ -69,6 +72,7 @@ class BankCardPhone extends React.Component {
     fetchResult = () => {
         Post('/api/bankcard/v1/status.json', {
             operatorBankcardGid: this.props.bank_card.new_card.operatorBankcardGid,
+            loading: false
         }).then(data => {
             let d = data.bindStatus;
             this.checkResult(d.status, d.transCode);
@@ -76,6 +80,9 @@ class BankCardPhone extends React.Component {
     }
 
     checkResult(result, transCode) {
+
+        // Components.hideLoading()
+
         if (result == 0) {
             if (transCode == 1001) {
                 Components.showToast("验证码不正确");
@@ -89,25 +96,30 @@ class BankCardPhone extends React.Component {
         } else if (result == 2) {
             this.setState({ result: 2, result_reason: '' })
         } else {
+            // 又开始转圈
+            // Components.showLoading(null, false)
             setTimeout(this.fetchResult, 2000)
         }
     }
 
     render() {
         let { history, bank_card } = this.props
-        let { code, count, result, result_reason } = this.state
+        let { code, count, result, result_reason, show_result } = this.state
 
-        let show_result = () => {
-            if (result === null) return;
+        let pop_result = () => {
+            if (result === null || !show_result) return;
 
             return <div styleName="result">
-                <div styleName="result-title">
-                    {result === 0 && '请求正在处理中，请稍等'}
-                    {result === 2 && '设置提现卡失败'}
+                <div styleName="result-panel">
+                    <div styleName="result-title">
+                        {result === 0 && '请求正在处理中，请稍等'}
+                        {result === 2 && '设置提现卡失败'}
+                    </div>
+                    <div styleName="result-reason">{result === 2 && result_reason}
+                    </div>
+                    <div styleName="result-btn" onClick={
+                        () => this.setState({ show_result: false })}>确定</div>
                 </div>
-                <div styleName="result-reason">{result === 2 && result_reason}</div>
-                <div className="result-btn" onClick={
-                    () => this.setState({ show_result: false })}>确定</div>
             </div>
         }
 
@@ -123,11 +135,11 @@ class BankCardPhone extends React.Component {
                 <a styleName="btn-sms-code" onClick={this.getSMSCode}>{count ? `${count}s` : '重新获取'}</a>
             </div>
 
-            {show_result()}
+            {pop_result()}
 
             <a styleName="btn-submit" onClick={this.submitHandler}>确定</a>
         </div>
     }
 }
 
-export default BankCardPhone
+export default BankCardVerify

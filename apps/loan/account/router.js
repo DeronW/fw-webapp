@@ -11,7 +11,7 @@ import Login from './pages/login.js'
 import SetPassword from './pages/set-password.js'
 import BankCard from './pages/bank-card.js'
 import BankCardAdd from './pages/bank-card-add.js'
-import BankCardPhone from './pages/bank-card-phone.js'
+import BankCardVerify from './pages/bank-card-verify.js'
 
 export default (stores) => {
     return <Router>
@@ -23,7 +23,7 @@ export default (stores) => {
 
                 <Route exact path='/bank-card' component={BankCard} />
                 <Route exact path='/bank-card-add' component={BankCardAdd} />
-                <Route exact path='/bank-card-phone' component={BankCardPhone} />
+                <Route exact path='/bank-card-verify' component={BankCardVerify} />
             </Switch>
         </Provider>
     </Router>
