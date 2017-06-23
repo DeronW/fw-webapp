@@ -5,8 +5,8 @@ const PROJ = 'loan';
 let APP_NAMES = [
     'home', // 首页
     // 'more', //更多 been refactory
-    // 'faq', //常见问题 been refactory
-    // 'about-us', //关于我们 been refactory
+    'faq', //常见问题 been refactory
+    'about-us', //关于我们 been refactory
     '404'
 ];
 
