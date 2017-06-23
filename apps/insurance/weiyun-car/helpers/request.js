@@ -5,11 +5,12 @@ import NativeBridge from './native-bridge.js'
 
 let API_PATH = document.getElementById('api-path').value;
 
-const Get = (url, params, slience = false) => {
+const Get = (url, params, silence = false, method = 'GET') => {
     return Request({
         url: `${API_PATH}/mpwap${url}`,
+        method: method,
         data: params,
-        slience: true
+        silence: true
     }).catch(error => {
         /*
         result : {
@@ -26,7 +27,7 @@ const Get = (url, params, slience = false) => {
                 location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
         } else {
             // 如果不弹出错误, 就直接reject
-            if (slience)
+            if (silence)
                 return new Promise((reslove, reject) => reject(error))
 
             Components.showToast(error.message)
@@ -38,6 +39,11 @@ const Get = (url, params, slience = false) => {
     })
 }
 
+const Post = (url, params, silence) => {
+    return Get(url, params, silence, 'POST')
+}
+
 export {
-    Get
+    Get,
+    Post
 }

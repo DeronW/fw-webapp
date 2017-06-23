@@ -64,16 +64,14 @@ class BankCardVerify extends React.Component {
 
         Post('/api/bankcard/v1/commitverifycode.json', {
             operatorBankcardGid: this.props.bank_card.new_card.operatorBankcardGid,
-            verifyCode: code,
-            loading: false
-        }).then(this.fetchResult);
+            verifyCode: code
+        }, true, false).then(this.fetchResult);
     }
 
     fetchResult = () => {
         Post('/api/bankcard/v1/status.json', {
-            operatorBankcardGid: this.props.bank_card.new_card.operatorBankcardGid,
-            loading: false
-        }).then(data => {
+            operatorBankcardGid: this.props.bank_card.new_card.operatorBankcardGid
+        }, true, false).then(data => {
             let d = data.bindStatus;
             this.checkResult(d.status, d.transCode);
         });

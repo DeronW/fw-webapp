@@ -42,7 +42,7 @@ export default class Account {
         return this.Post('/api/userBase/v1/sendVerifyCode.json', {
             mobile: this.phone,
             userOperationType: 3
-        }, 'slience').then(data => {
+        }, 'silence').then(data => {
             // codeToken 用来标识发短信和注册/登录/修改密码用的
             // 每次重新发送短信, codeToken都会变化
             this.registerCodeToken = data.codeToken
