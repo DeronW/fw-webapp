@@ -5,8 +5,9 @@ import { Request, Components } from 'fw-javascripts'
 
 export default class Customer {
 
-    constructor(Get) {
+    constructor(Get, Post) {
         this.Get = Get;
+        this.Post = Post;
         extendObservable(this, {
             holder: {
                 name: '',
@@ -63,21 +64,15 @@ export default class Customer {
     }
 
     uploadImg = async (imgId, imgData) => {
-        let API_PATH = document.getElementById('api-path').value;
 
         let temporaryPolicyId = '342';
         // let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
         //     .then(data => data.temporaryPolicyId);
-        Request({
-            url: `${API_PATH}/mpwap/carInsurance/customerImgUpload.shtml`,
-            data: {
+        this.Post(`/carInsurance/customerImgUpload.shtml`, {
                 temporaryPolicyId: temporaryPolicyId,
                 imgId: imgId,
                 imgCode: imgData
-            },
-            method: 'POST',
-            slience: true
-        }).then((data) => {
+            }).then((data) => {
             this.setImgUrl(imgId, data.imgUrl);
         }).catch(error => {
             if (error.code == 40101) {
