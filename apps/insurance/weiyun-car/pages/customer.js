@@ -20,6 +20,8 @@ class UploadImg extends React.Component {
     }
 
     changeHandler = event => {
+        let { customer, imgId } = this.props;
+
         let target = event.target
         var fr = new FileReader();
         let ext = target.value.split('.').pop().toLowerCase()
@@ -28,7 +30,11 @@ class UploadImg extends React.Component {
             this.setState({ tips: '图片格式不正确', img_data: null })
         } else {
             fr.readAsDataURL(target.files[0])
-            fr.onload = fre => this.setState({ tips: null, img_data: fre.target.result })
+            fr.onload = fre => {
+                let imgData = fre.target.result;
+                this.setState({ tips: null, img_data: imgData });
+                customer.uploadImg(imgId, imgData);
+            }
         }
     }
 
@@ -91,8 +97,8 @@ class Customer extends React.Component {
             <div styleName="picture-panel">
                 <div styleName="picture-panel-title">上传身份证照片</div>
                 <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
-                <UploadImg placeholder="身份证正面照片" />
-                <UploadImg placeholder="身份证反面照片" />
+                <UploadImg placeholder="身份证正面照片" imgId="img1" />
+                <UploadImg placeholder="身份证反面照片" imgId="img2" />
             </div>
 
             <div styleName="field-check" onClick={customer.toggleSamePerson}>
@@ -111,15 +117,15 @@ class Customer extends React.Component {
                 <div styleName="picture-panel">
                     <div styleName="picture-panel-title">上传身份证照片</div>
                     <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
-                    <UploadImg placeholder="身份证正面照片" />
-                    <UploadImg placeholder="身份证反面照片" />
+                    <UploadImg placeholder="身份证正面照片" imgId="img3" />
+                    <UploadImg placeholder="身份证反面照片" imgId="img4" />
                 </div>}
 
             <div styleName="picture-panel">
                 <div styleName="picture-panel-title">上传驾驶证照片</div>
                 <div styleName="picture-panel-desc">按保监局要求上传驾驶证正反面照片</div>
-                <UploadImg placeholder="驾驶证正面照片" />
-                <UploadImg placeholder="驾驶证反面照片" />
+                <UploadImg placeholder="驾驶证正面照片" imgId="img7" />
+                <UploadImg placeholder="驾驶证反面照片" imgId="img8" />
             </div>
 
             <BottomButton active={customer.valid} title="确认提交"
