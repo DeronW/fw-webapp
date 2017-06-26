@@ -18,6 +18,7 @@ import OrderConfirm from './pages/order-confirm'
 import OrderPayment from './pages/order-payment'
 import OrderResult from './pages/order-result'
 import Orders from './pages/orders'
+import InsureInfo from './pages/insure-info'
 
 
 export default (stores) => {
@@ -37,6 +38,7 @@ export default (stores) => {
                 <Route exact path='/order-payment' component={OrderPayment} />
                 <Route exact path='/order-result' component={OrderResult} />
                 <Route exact path='/orders' component={Orders} />
+                <Route exact path='/insure-info' component={InsureInfo}/>
             </Switch>
         </Provider>
     </Router>

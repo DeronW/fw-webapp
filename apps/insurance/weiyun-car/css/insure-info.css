@@ -1,0 +1,71 @@
+.insure-title{
+    margin-top: 20px;
+    background: #f9f9f9;
+    font-size: 32px;
+    color: #333;
+    height: 90px;
+    line-height: 90px;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #e3e5ea;
+    padding-left: 24px;
+}
+.input-panel{
+    height: 90px;
+    line-height: 90px;
+    font-size: 30px;
+    background: #fff;
+    padding: 0 24px;
+    display: table;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+.input-panel input[type="text"]{
+    float: right;
+    width: 510px;
+    height: 90px;
+    line-height: 90px;
+    border: none;
+    outline: none;
+    color: #666;
+    font-size: 30px;
+    text-align: right;
+}
+.input-line{
+    position: absolute;
+    left: 24px;
+    right:0;
+    bottom: 0;
+    height: 1px;
+    background: #e3e5ea;
+}
+.picture-panel{
+    padding-top: 40px;
+    font-size: 30px;
+    background: #fff;
+    color: #555;
+}
+.picture-panel-title{
+    width: 100%;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+.picture-panel-desc{
+    color: #999;
+    font-size: 22px;
+    margin: 4px 0 20px 0;
+    width: 100%;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+.input-image{
+    width: 324px;
+    height: 198px;
+    display: inline-block;
+    background: url('../images/customer/img-placeholder.png') #ebebeb no-repeat center;
+    background-size:100%; 
+    margin-left: 24px;
+}
+.input-image:nth-child(2){
+    margin-right: 0;
+}
