@@ -46,14 +46,14 @@ class FAQ extends React.Component {
     render() {
         let Browser = new BrowserFactory(navigator.userAgent, 'EasyLoan888');
         let item = (qa, index) => {
+            let handler = () => this.handleList(index),
+                opened = this.state.toggle_list[index];
+
             return <div key={index} styleName="item">
-                <div styleName="q" onClick={() => this.handleList(index)}>
-                    {qa.q}
-                </div>
-                <i styleName={this.state.toggle_list[index] ?
-                    'icon-a icon-a-d' : 'icon-a icon-a-u'}></i>
-                {this.state.toggle_list[index] &&
-                    <div styleName="a">{qa.a}</div>}
+                <div styleName="q" onClick={handler}>{qa.q}</div>
+                <i onClick={handler}
+                    styleName={opened ? 'icon-a icon-a-d' : 'icon-a icon-a-u'}></i>
+                {opened && <div styleName="a">{qa.a}</div>}
             </div>
         }
 
