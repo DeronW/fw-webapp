@@ -62,11 +62,15 @@ class Content extends React.Component {
                     <div className="apply-duration">借款期限:{order.termNumStr}</div>
                 </div>
                 <div className="apply-status-wrap">
-                    <div className="apply-status">
+                    {/*<div className="apply-status">
                         <span className={`bill-${current_type}-color`}>
-                            {tab[current_type].name}</span></div>
+                            {tab[current_type].name}</span></div>*/}
+                    <div className="apply-status">
+                        <span className={`bill-${current_type}-color`}>{ current_type == 2 ? "立即还款" : tab[current_type].name}</span>
+                    </div>
                     <div className="apply-time">{order.loanTimeStr}</div>
                 </div>
+                <div className="arrow-right"><img src="images/right-arrow.png"/></div>
             </Nav>
         }
 
