@@ -93,6 +93,8 @@ class ApplyLoan extends React.Component {
         let credit_btn_handler = () => {
             if(this.props.data.redirectType == 1){
                 this.setState({popShow:true});
+            }else{
+                location.href=`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`;
             }
         }
 
@@ -166,6 +168,8 @@ class ApplyLoan extends React.Component {
         let credit_btn_handler = () => {
             if(this.props.data.redirectType == 1){
                  this.setState({popShow:true});
+            }else{
+                location.href=`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`;
             }
         }
 
