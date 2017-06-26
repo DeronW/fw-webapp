@@ -32,10 +32,10 @@ const DETAIL_TEXT = [
     ]
 ];
 
-class UserAboutus extends React.Component{
-    constructor(props){
+class UserAboutus extends React.Component {
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             toggle_list: []
         }
         this.handleList = this.handleList.bind(this);
@@ -43,14 +43,17 @@ class UserAboutus extends React.Component{
     handleList(index) {
         let t = this.state.toggle_list;
         t[index] = !t[index];
-        this.setState({ toggle_list: t});
+        this.setState({ toggle_list: t });
     }
     render() {
         let li = (todo, index) => {
+            let handler = () => this.handleList(index),
+                cn = this.state.toggle_list[index] ? 'icon' : 'icon arrow-d';
+
             return <div key={index} className="li">
-                <div className="title-li" onClick={() => this.handleList(index)}>
+                <div className="title-li" onClick={handler}>
                     <div className="text">{todo}</div>
-                    <span className={this.state.toggle_list[index] ? 'icon' : 'icon arrow-d'}></span>
+                    <span onClick={handler} className={cn}></span>
                 </div>
                 {this.state.toggle_list[index] && detailText(index)}
             </div>
