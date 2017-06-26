@@ -61,6 +61,7 @@ class Content extends React.Component {
                     <div className="apply-num">借款金额:{order.loanAmtStr}元</div>
                     <div className="apply-duration">借款期限:{order.termNumStr}</div>
                 </div>
+                <div className="arrow-right"><img src="images/right-arrow.png"/></div>
                 <div className="apply-status-wrap">
                     {/*<div className="apply-status">
                         <span className={`bill-${current_type}-color`}>
@@ -70,7 +71,6 @@ class Content extends React.Component {
                     </div>
                     <div className="apply-time">{order.loanTimeStr}</div>
                 </div>
-                <div className="arrow-right"><img src="images/right-arrow.png"/></div>
             </Nav>
         }
 
