@@ -51,7 +51,8 @@ class FAQ extends React.Component {
 
             return <div key={index} styleName="item">
                 <div styleName="q" onClick={handler}>{qa.q}</div>
-                <i styleName={opened ? 'icon-a icon-a-d' : 'icon-a icon-a-u'}></i>
+                <i onClick={handler}
+                    styleName={opened ? 'icon-a icon-a-d' : 'icon-a icon-a-u'}></i>
                 {opened && <div styleName="a">{qa.a}</div>}
             </div>
         }
