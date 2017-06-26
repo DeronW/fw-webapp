@@ -89,17 +89,19 @@ class MajorUserInfo extends React.Component {
         this.state = {
             link_a: null,
             link_b: null,
+            link_c: null,
             tips: null
         }
     }
     componentDidMount() {
-        let link_a, link_b
+        let link_a, link_b, link_c
         $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
             productId: 1
         }).then(data => {
             let st = data.borrowBtnStatus,
                 link_a = '/static/loan/user-info/index.html',
                 link_b = '/static/loan/user-card-management/index.html';
+                link_c = '/static/loan/bill/index.html#2';
 
             if (st === 1) { // 未实名
                 link_a = link_b = '/static/loan/user-card-set/index.html'
@@ -107,6 +109,7 @@ class MajorUserInfo extends React.Component {
             this.setState({
                 link_a: link_a,
                 link_b: link_b,
+                link_c: link_c,
                 tips: st === 101 ? '设置提现卡处理中，请稍等' : false, // 实名中
             })
         })
@@ -116,7 +119,7 @@ class MajorUserInfo extends React.Component {
         tips && $FW.Component.Toast(tips)
     }
     render() {
-        let { link_a, link_b } = this.state
+        let { link_a, link_b, link_c } = this.state
         return <div className="info-display-block">
             <a className="user-info-display-wrap" onClick={this.clickHandler}
                 href={link_a}>
@@ -124,6 +127,18 @@ class MajorUserInfo extends React.Component {
                     <img src="images/info_icon.png"></img>
                 </div>
                 <span className="info-name">个人信息</span>
+                <div className="right-align-container">
+                    <div className="right-arrow-container">
+                        <div className="fake-arrow"></div>
+                    </div>
+                </div>
+            </a>
+            <a className="user-info-display-wrap" onClick={this.clickHandler}
+               href={link_c}>
+                <div className="info-icon-container">
+                    <img src="images/more_repayment.png"></img>
+                </div>
+                <span className="info-name">还款</span>
                 <div className="right-align-container">
                     <div className="right-arrow-container">
                         <div className="fake-arrow"></div>
@@ -212,7 +227,6 @@ class UserInfoWrap extends React.Component {
             <div className="user-info-wrap">
                 <AvatarCard phoneNum={this.state.phoneNum} />
                 {$FW.Browser.inJRGCApp() && <FollowWXEntry />}
-                <BillEntry />
                 <MajorUserInfo />
                 {/* <ExitBtn /> */}
             </div>
