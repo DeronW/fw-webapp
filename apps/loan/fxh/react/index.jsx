@@ -164,7 +164,7 @@ class ApplyLoan extends React.Component {
         let loan_btn = <div className="loan-btn" onClick={loanBtnClick}>申请借款</div>;
 
         let credit_btn_handler = () => {
-            if(this.props.data.redirectType == 0){
+            if(this.props.data.redirectType == 1){
                  this.setState({popShow:true});
             }
         }
@@ -232,7 +232,7 @@ class ApplyLoan extends React.Component {
                     </div>
                 </div>
                 {this.getBtnStatus()}
-                {this.props.data.redirectType == 0 && (this.props.data.borrowBtnStatus == 2 || this.props.data.borrowBtnStatus == 3)? <div className="loan-tip">额度为0别灰心，试试其他<span className="loan-word-tip loan-word-tip-color" onClick={()=>{$FW.Browser.inJRGCApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>借款</span></div> : <div className="loan-tip">完善授权信息可减免手续费</div>}
+                {this.props.data.redirectType == 1 ? <div className="loan-tip">额度为0别灰心，试试其他<span className="loan-word-tip loan-word-tip-color" onClick={()=>{$FW.Browser.inJRGCApp()? NativeBridge.close(): gotoHandler('/static/loan/home/index.html')}}>借款</span></div> : <div className="loan-tip">完善授权信息可减免手续费</div>}
                 {this.state.popShow && <div className="pop-bg">
                     <div className="pop-panel">
                         <div className="pop-title">提示</div>
