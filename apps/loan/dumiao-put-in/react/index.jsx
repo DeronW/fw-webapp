@@ -124,7 +124,7 @@ class MainPanel extends React.Component {
 
             <div className="agree">
                 <div className="text"> 点击“申请借款”即视为同意
-            <a href="/static/loan/protocol-dumiao-openaccount/index.html">《读秒开户授权书》
+            <a href="/static/loan/protocol-dumiao-openaccount/index.html">《开户授权书》
             </a>、
             <a href="/static/loan/protocol-personinfo-collect/index.html">《个人信息采集授权说明》
             </a>

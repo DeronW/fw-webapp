@@ -89,11 +89,12 @@ class MajorUserInfo extends React.Component {
         this.state = {
             link_a: null,
             link_b: null,
+            link_c: '/static/loan/bill/index.html#2',
             tips: null
         }
     }
     componentDidMount() {
-        let link_a, link_b
+        let link_a, link_b;
         $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
             productId: 1
         }).then(data => {
@@ -116,7 +117,7 @@ class MajorUserInfo extends React.Component {
         tips && $FW.Component.Toast(tips)
     }
     render() {
-        let { link_a, link_b } = this.state
+        let { link_a, link_b, link_c } = this.state
         return <div className="info-display-block">
             <a className="user-info-display-wrap" onClick={this.clickHandler}
                 href={link_a}>
@@ -124,6 +125,18 @@ class MajorUserInfo extends React.Component {
                     <img src="images/info_icon.png"></img>
                 </div>
                 <span className="info-name">个人信息</span>
+                <div className="right-align-container">
+                    <div className="right-arrow-container">
+                        <div className="fake-arrow"></div>
+                    </div>
+                </div>
+            </a>
+            <a className="user-info-display-wrap" onClick={this.clickHandler}
+               href={link_c}>
+                <div className="info-icon-container">
+                    <img src="images/more_repayment.png"></img>
+                </div>
+                <span className="info-name">还款</span>
                 <div className="right-align-container">
                     <div className="right-arrow-container">
                         <div className="fake-arrow"></div>
@@ -212,7 +225,6 @@ class UserInfoWrap extends React.Component {
             <div className="user-info-wrap">
                 <AvatarCard phoneNum={this.state.phoneNum} />
                 {$FW.Browser.inJRGCApp() && <FollowWXEntry />}
-                <BillEntry />
                 <MajorUserInfo />
                 {/* <ExitBtn /> */}
             </div>
