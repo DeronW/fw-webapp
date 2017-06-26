@@ -91,7 +91,7 @@ class ApplyLoan extends React.Component {
         let btn = '--', st = this.props.data.borrowBtnStatus;
 
         let credit_btn_handler = () => {
-            if(this.props.data.redirectType == 0){
+            if(this.props.data.redirectType == 1){
                 this.setState({popShow:true});
             }
         }
