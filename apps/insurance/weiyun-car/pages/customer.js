@@ -31,9 +31,9 @@ class UploadImg extends React.Component {
         } else {
             fr.readAsDataURL(target.files[0])
             fr.onload = fre => {
-                let imgData = fre.target.result;
-                this.setState({ tips: null, img_data: imgData });
-                customer.uploadImg(imgId, imgData);
+                let imgCode = fre.target.result;
+                customer.uploadImg(imgId, imgCode);
+                this.setState({ tips: null, img_data: imgCode });
             }
         }
     }

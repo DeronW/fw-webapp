@@ -5,12 +5,13 @@ import NativeBridge from './native-bridge.js'
 
 let API_PATH = document.getElementById('api-path').value;
 
-const Get = (url, params, silence = false, method = 'GET') => {
+const Get = (url, params, silence = false, method = 'GET', xhrFields = {}) => {
     return Request({
         url: `${API_PATH}/mpwap${url}`,
         method: method,
         data: params,
-        silence: true
+        silence: true,
+		xhrFields: xhrFields
     }).catch(error => {
         /*
         result : {
@@ -39,8 +40,8 @@ const Get = (url, params, silence = false, method = 'GET') => {
     })
 }
 
-const Post = (url, params, silence) => {
-    return Get(url, params, silence, 'POST')
+const Post = (url, params, silence, xhrFields = {}) => {
+    return Get(url, params, silence, 'POST', xhrFields)
 }
 
 export {

@@ -1,7 +1,5 @@
 import { extendObservable, computed } from 'mobx'
 
-import { Request, Components } from 'fw-javascripts'
-
 
 export default class Customer {
 
@@ -63,7 +61,7 @@ export default class Customer {
         }
     }
 
-    uploadImg = async (imgId, imgData) => {
+    uploadImg = async (imgId, imgCode) => {
 
         let temporaryPolicyId = '342';
         // let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
@@ -71,28 +69,12 @@ export default class Customer {
         this.Post(`/carInsurance/customerImgUpload.shtml`, {
                 temporaryPolicyId: temporaryPolicyId,
                 imgId: imgId,
-                imgCode: imgData
+                imgCode: imgCode
+            }, false, {
+                'Content-Type': 'multipart/form-data'
             }).then((data) => {
-            this.setImgUrl(imgId, data.imgUrl);
-        }).catch(error => {
-            if (error.code == 40101) {
-                console.log('here ! should go to login')
-
-                Browser.inApp ?
-                    NativeBridge.login() :
-                    location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
-            } else {
-                // 如果不弹出错误, 就直接reject
-                if (slience)
-                    return new Promise((resolve, reject) => reject(error))
-
-                Components.showToast(error.message)
-
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => reject(error), 1700)
-                })
-            }
-        })
+                this.setImgUrl(imgId, data.imgUrl);
+            })
     }
 
     @computed get valid() {
