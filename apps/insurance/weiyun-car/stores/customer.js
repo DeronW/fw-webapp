@@ -63,13 +63,12 @@ export default class Customer {
 
     uploadImg = (imgId, imgCode) => {
         this.Post(`/carInsurance/customerImgUpload.shtml`, {
-                imgId: imgId,
-                imgCode: imgCode
-            }, false, {
-                'Content-Type': 'multipart/form-data'
-            }).then((data) => {
-                this.setImgUrl(imgId, data.imgUrl);
-            })
+            temporaryPolicyId: '123',
+            imgId: imgId,
+            imgCode: imgCode
+        }, { contentType: false }).then((data) => {
+            this.setImgUrl(imgId, data.imgUrl);
+        })
     }
 
     @computed get valid() {

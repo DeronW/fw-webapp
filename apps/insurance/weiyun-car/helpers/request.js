@@ -5,14 +5,11 @@ import NativeBridge from './native-bridge.js'
 
 let API_PATH = document.getElementById('api-path').value;
 
-const Get = (url, params, silence = false, method = 'GET', xhrFields = {}) => {
-    return Request({
-        url: `${API_PATH}/mpwap${url}`,
-        method: method,
-        data: params,
-        silence: true,
-		xhrFields: xhrFields
-    }).catch(error => {
+const Ajax = options => {
+    // add default url prefix
+    options.url = `${API_PATH}/mpwap${options.url}`
+
+    return Request(options).catch(error => {
         /*
         result : {
             code: xxxx,
@@ -40,8 +37,21 @@ const Get = (url, params, silence = false, method = 'GET', xhrFields = {}) => {
     })
 }
 
-const Post = (url, params, silence, xhrFields = {}) => {
-    return Get(url, params, silence, 'POST', xhrFields)
+const Get = (url, params, silence = false) => {
+    return Ajax({
+        url: url,
+        method: 'GET',
+        data: params,
+        silence: slience
+    })
+}
+
+const Post = (url, params, options) => {
+    return Ajax(Object.assign({
+        url: url,
+        method: 'POST',
+        data: params
+    }, options))
 }
 
 export {
