@@ -36,7 +36,7 @@ class BillDetail extends React.Component {
                 </div>
                 {baseStatus < 3 &&
                     <div className="enter-btn-wrap">
-                        <a className="enter-btn" onClick={()=>{$FW.Browser.inApp()?NativeBridge.goto(link,"分期"):link}}>点击查看详情</a>
+                        <a className="enter-btn" onClick={()=>{$FW.Browser.inApp()?NativeBridge.goto(link,false,"分期"):link}}>点击查看详情</a>
                     </div>}
             </div>
         )

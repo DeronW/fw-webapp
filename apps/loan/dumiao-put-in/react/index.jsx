@@ -51,7 +51,7 @@ class MainPanel extends React.Component {
                     // redirect to du-miao
                     let u = $FW.Store.getUserDict();
                     let params = `loanUuid=${data.uuid}&uid=${$FW.Browser.inFXHApp() ? getCookie().uid : u.uid}&sourceType=${SOURCE_TYPE}&token=${$FW.Browser.inFXHApp() ? getCookie().token :u.token}`;
-                    $FW.Browser.inApp()? NativeBridge.goto(`/api/order/v1/jump.shtml?${params}`,"分期"):location.href = `/api/order/v1/jump.shtml?${params}`
+                    $FW.Browser.inApp()? NativeBridge.goto(`/api/order/v1/jump.shtml?${params}`,false,"分期"):location.href = `/api/order/v1/jump.shtml?${params}`
                 }, e => {
                     if (e.code == 20016) $FW.Component.Toast(e.message)
                 })
