@@ -233,6 +233,17 @@ function getCookie() {
     return r;
 }
 
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
+
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(() => {
     NativeBridge.setTitle('分期');
