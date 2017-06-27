@@ -9,6 +9,7 @@ class BillDetail extends React.Component {
         //     // 不再微信里, 要添加订单号, 直接跳转到订单. 在微信中要跳转到读秒的首页
         //     link += `&loanUuid=${$FW.Format.urlQuery().uuid}`
         // }
+
         return (
             <div className="detail-container">
                 <div className="logo-wrap">
@@ -35,7 +36,7 @@ class BillDetail extends React.Component {
                 </div>
                 {baseStatus < 3 &&
                     <div className="enter-btn-wrap">
-                        <a className="enter-btn" href={link}>点击查看详情</a>
+                        <a className="enter-btn" onClick={()=>{$FW.Browser.inApp()?NativeBridge.goto(link):link}}>点击查看详情</a>
                     </div>}
             </div>
         )
