@@ -40,16 +40,16 @@ export default class Customer {
     setImgUrl = (imgId, imgUrl) => {
         switch (imgId) {
             case 'img1':
-                this.holder.img1 = imgUrl;
+                this.holder.image1 = imgUrl;
                 break;
             case 'img2':
-                this.holder.img2 = imgUrl;
+                this.holder.image2 = imgUrl;
                 break;
             case 'img3':
-                this.recognizee.img1 = imgUrl;
+                this.recognizee.image1 = imgUrl;
                 break;
             case 'img4':
-                this.recognizee.img2 = imgUrl;
+                this.recognizee.image2 = imgUrl;
                 break;
             case 'img7':
                 this.vehicleLicenseImage1 = imgUrl;
@@ -61,13 +61,8 @@ export default class Customer {
         }
     }
 
-    uploadImg = async (imgId, imgCode) => {
-
-        let temporaryPolicyId = '342';
-        // let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
-        //     .then(data => data.temporaryPolicyId);
+    uploadImg = (imgId, imgCode) => {
         this.Post(`/carInsurance/customerImgUpload.shtml`, {
-                temporaryPolicyId: temporaryPolicyId,
                 imgId: imgId,
                 imgCode: imgCode
             }, false, {
@@ -78,19 +73,39 @@ export default class Customer {
     }
 
     @computed get valid() {
-        let valid = ['name', 'mobile', 'cardId', 'email'].every((k) => {
+        let valid = ['name', 'mobile', 'cardId', 'email', 'image1', 'image2'].every((k) => {
             return (this.holder[k] && (this.isSame || this.recognizee[k]))
         })
-        return valid
-            // let valid = ['name', 'mobile', 'cardId', 'email'].every((k) => {
-            //     return (this.holder[k] && (this.isSame || this.recognizee[k]))
-            // })
-            // return valid && this.vehicleLicenseImage1 && this.vehicleLicenseImage2
+        return valid && this.vehicleLicenseImage1 && this.vehicleLicenseImage2
     }
 
-    submit = (history) => {
+    submit = async (history) => {
         if (!this.valid) return
-        history.push('/order-confirm');
+
+        if (this.isSame) Object.assign(this.recognizee, this.holder)
+
+        let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
+            .then(data => data.temporaryPolicyId)
+        this.Get(`/carInsurance/bondsmanInfo.shtml`, {
+            temporaryPolicyId: temporaryPolicyId,
+            holderPeopleName: this.holder.name,
+            holderPeopleMobile: this.holder.mobile,
+            holderPeopleCardId: this.holder.cardId,
+            holderPeopleEmail: this.holder.email,
+            holderPeopleImage1: this.holder.image1,
+            holderPeopleImage2: this.holder.image2,
+            insuredPeopleName: this.recognizee.name,
+            insuredPeopleMobile: this.recognizee.mobile,
+            insuredPeopleCardId: this.recognizee.cardId,
+            insuredPeopleEmail: this.recognizee.email,
+            insuredPeopleImage1: this.recognizee.image1,
+            insuredPeopleImage2: this.recognizee.image2,
+            isSame: this.isSame,
+            vehicleLicenseImage1: this.vehicleLicenseImage1,
+            vehicleLicenseImage2: this.vehicleLicenseImage2
+        }).then((data) => {
+            history.push('/order-confirm');
+        })
     }
 
 }
