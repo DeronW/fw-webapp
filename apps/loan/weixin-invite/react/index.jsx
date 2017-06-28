@@ -3,12 +3,12 @@ $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     var page = 1;
     var loadNextPage = true;
-    $("#tab-content").height($(document).height() - 470 + "px");
+    $("#tab-content").height($(document).height() - 440 + "px");
     $(".invitation-code span").text(USER.invitCode);
     $(".tabs span").click(function () {
         var index = $(this).index();
         $(this).addClass('selected').siblings().removeClass('selected');
-        $(".tab-content-item").eq(index).css("visibility","visible").siblings(".tab-content-item").css("visibility","hidden");
+        $(".tab-content-item").eq(index).show().siblings(".tab-content-item").hide();
     });
 
     $(".activity-btn").click(function () {
