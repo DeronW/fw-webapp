@@ -25,7 +25,7 @@ const Ajax = options => {
                 location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
         } else {
             // 如果不弹出错误, 就直接reject
-            if (silence)
+            if (options.silence)
                 return new Promise((reslove, reject) => reject(error))
 
             Components.showToast(error.message)
