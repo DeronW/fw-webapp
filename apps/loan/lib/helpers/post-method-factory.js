@@ -13,23 +13,17 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
         inApp = ua.indexOf('FinancialWorkshop') > -1,
         SOURCE_TYPE = inApp ? 3 : inWX ? 4 : 3;
 
-    return (url, data = {}, silence = false, loading = 'mini') => {
+    return (url, data = {}, silence = false) => {
 
         let merged_data = Object.assign({},
             { sourceType: SOURCE_TYPE },
             data,
             { token: token, uid: uid })
 
-        // if (typeof (silence) === 'object') {
-        //     loading = loading || silence.loading
-        //     silence = silence.silence || !!silence
-        // }
-
         return Request({
             url: API_PATH + url,
             method: 'POST',
             data: merged_data,
-            loading: loading,
             silence: true
         }).catch(error => {
 
@@ -40,8 +34,7 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
                     inHome() ? loginInApp() : NativeBridge.close()
                 }
 
-                if (Browser.inFXHApp)
-                    NativeBridge.login();
+                if (Browser.inFXHApp) NativeBridge.login();
 
                 if (!Browser.inJRGCApp && !Browser.inFXHApp)
                     setTimeout(login, 1800);
