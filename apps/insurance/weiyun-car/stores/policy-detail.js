@@ -33,7 +33,7 @@ export default class PolicyDetail {
     }
 
     setFormData = (k, v) => {
-        this[k] = parseInt(v);
+        this[k] = typeof v === 'boolean' ? v : parseInt(v);
     }
 
     setForm = (data) => {
@@ -54,31 +54,34 @@ export default class PolicyDetail {
         return valid;
     }
 
-    submit = (history) => {
+    submit = async (history) => {
         if (!this.valid) return
 
-        // return this.Get('/blablabla', {
-        //     cheSun: this.cheSun,
-        //     buJiMianCheSun: this.buJiMianCheSun,
-        //     sanZhe: this.sanZhe,
-        //     buJiMianSanZhe: this.buJiMianSanZhe,
-        //     siJi: this.siJi,
-        //     buJiMianSiJi: this.buJiMianSiJi,
-        //     chengKe: this.chengKe,
-        //     buJiMianChengKe: this.buJiMianChengKe,
-        //     daoQiang: this.daoQiang,
-        //     buJiMianDaoQiang: this.buJiMianDaoQiang,
-        //     huaHen: this.huaHen,
-        //     buJiMianHuaHen: this.buJiMianHuaHen,
-        //     boLi: this.boLi,
-        //     ziRan: this.ziRan,
-        //     buJiMianZiRan: this.buJiMianZiRan,
-        //     sheShui: this.sheShui,
-        //     buJiMianSheShui: this.buJiMianSheShui,
-        //     hcSanFangTeYue: this.hcSanFangTeYue
-        // }).then(data => {
+        let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
+            .then(data => data.temporaryPolicyId)
+        return this.Get('/carInsurance/submitQuoteInfo.shtml', {
+            temporaryPolicyId: temporaryPolicyId,
+            cheSun: this.cheSun,
+            buJiMianCheSun: Number(this.buJiMianCheSun),
+            sanZhe: this.sanZhe,
+            buJiMianSanZhe: Number(this.buJiMianSanZhe),
+            siJi: this.siJi,
+            buJiMianSiJi: Number(this.buJiMianSiJi),
+            chengKe: this.chengKe,
+            buJiMianChengKe: Number(this.buJiMianChengKe),
+            daoQiang: this.daoQiang,
+            buJiMianDaoQiang: Number(this.buJiMianDaoQiang),
+            huaHen: this.huaHen,
+            buJiMianHuaHen: Number(this.buJiMianHuaHen),
+            boLi: this.boLi,
+            ziRan: this.ziRan,
+            buJiMianZiRan: Number(this.buJiMianZiRan),
+            sheShui: this.sheShui,
+            buJiMianSheShui: Number(this.buJiMianSheShui),
+            hcSanFangTeYue: this.hcSanFangTeYue
+        }).then(data => {
             history.push('/policy-quotation');
-        // })
+        })
     }
 
 }

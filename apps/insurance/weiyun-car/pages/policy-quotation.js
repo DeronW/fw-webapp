@@ -16,10 +16,14 @@ import styles_icon_circle from '../css/icons/circle.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class PolicyQuotation extends React.Component {
 
+    componentDidMount() {
+        this.props.quotations.fetchQuotations();
+    }
+
     render() {
 
         let { quotations, current_order, history } = this.props,
-            quotationAbstract = quotations.abstract;
+            quotationDetail = quotations.getDetailForAll();
 
         let gen_quotation_item = (itemId, itemName) => (
             <div styleName="quotation-item">
@@ -31,8 +35,8 @@ class PolicyQuotation extends React.Component {
                 <div styleName="quotation-entry" onClick={() => { history.push(`quotation-detail?selectedFirm=${itemId}`) }}>
                     <div styleName={`firm-name-${itemId}`}>{itemName}</div>
                     <div styleName="price-container">
-                        <div styleName="discount-price">￥{quotationAbstract[itemId].actualPrice}</div>
-                        <div styleName="origin-price">官网报价￥{quotationAbstract[itemId].originPrice}</div>
+                        <div styleName="discount-price">￥{quotationDetail[itemId].actualPrice}</div>
+                        <div styleName="origin-price">官网报价￥{quotationDetail[itemId].originPrice}</div>
                     </div>
                 </div>
             </div>

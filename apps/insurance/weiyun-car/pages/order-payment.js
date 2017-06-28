@@ -16,7 +16,7 @@ class MainPanel extends React.Component {
     render() {
         let { quotations, current_order, history } = this.props;
 
-        let price = quotations.getSelectedTotal(current_order.selectedFirm);
+        let price = quotations.getDetailForSelected(current_order.selectedFirm).actualPrice;
 
         return <div styleName="order-Payment">
             <Header title="结算" history={history} />

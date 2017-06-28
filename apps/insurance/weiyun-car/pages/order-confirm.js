@@ -17,7 +17,7 @@ class OrderConfirm extends React.Component {
 
         let { quotations, current_order, history } = this.props,
             selectedFirm = current_order.selectedFirm,
-            orderPrice = quotations.getSelectedAbstract(selectedFirm);
+            orderPrice = quotations.getDetailForSelected(selectedFirm);
 
         return <div styleName="confirm-box">
 
