@@ -9,20 +9,31 @@ class PCHeader extends React.Component {
 
     state = {
         isLogin: false,
-        show_gift: true
+        show_gift: false
     }
 
     componentDidMount() {
-
+        Ajax({
+            url: '/api/userState/v1/userState.json'
+        }).then(data => {
+            this.setState({
+                isLogin: data.isLogin
+            })
+        })
     }
 
     toggleGift = () => {
         this.setState({ show_gift: !this.state.show_gift })
     }
 
+    showDownload = () => { }
+
+    hideDownload = () => { }
+
     render() {
 
-        let GiftPanel = this.state.show_gift
+        let GiftPanel = this.state.show_gift &&
+            <InvestGiftPanel closeHandler={this.toggleGift} />
 
         return <div styleName="header-placeholder">
             <div styleName="header" style={
@@ -44,17 +55,27 @@ class PCHeader extends React.Component {
                     <div styleName="btn-link-sp"></div>
                     <a styleName="btn-link">登录</a>
                     <div styleName="btn-link-sp"></div>
-                    <a styleName="btn-link" href="http://www.9888keji.com/orderUser/loginout.do">退出</a>
+                    <a styleName="btn-link"
+                        href="http://www.9888keji.com/orderUser/loginout.do">退出</a>
                     <div styleName="btn-link-sp"></div>
-                    <a styleName="btn-link" target="_blank" href="http://www.9888keji.com/static/web/app-download/index.html">APP下载</a>
+                    <a styleName="btn-link btn-download-app" target="_blank"
+                        onMouseEnter={this.showDownload}
+                        onMouseLeave={this.hideDownload}
+                        href="http://www.9888keji.com/static/web/app-download/index.html">APP下载
+                        <a styleName="download-app">
+                            <img src={require('../images/header/app.jpg')} />
+                            <a styleName="d-download">立即下载App</a>
+                            <a styleName="d-android">Android版下载</a>
+                            <a styleName="d-ios">iOS版下载</a>
+                        </a>
+                    </a>
                     <div styleName="btn-link-sp"></div>
-                    <a styleName="btn-link" target="_blank" href="http://www.9888keji.com/static/web/guide-cookbook/index.html">玩赚攻略</a>
+                    <a styleName="btn-link" target="_blank"
+                        href="http://www.9888keji.com/static/web/guide-cookbook/index.html">玩赚攻略</a>
                     <div styleName="btn-link-sp"></div>
                     <a styleName="btn-link" onClick={this.toggleGift}>邀请有礼</a>
                 </div>
             </div>
-
-            <InvestGiftPanel />
             {GiftPanel}
         </div>
     }

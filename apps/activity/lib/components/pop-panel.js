@@ -10,7 +10,7 @@ const InvestGiftPanel = CSSModules(styles, {
     <div styleName="bg">
         <div styleName="gift-panel">
             <div styleName="title">邀请返利攻略（自2017年3月8日起）</div>
-            <b styleName="btn-close">&times;</b>
+            <b styleName="btn-close" onClick={props.closeHandler}>&times;</b>
             <div styleName="paragraph-title">攻略一</div>
             <div styleName="paragraph">好友注册后<span>15</span>天内（含注册当日），投资达到<span>VIP1</span>等级送50元，达到<span>VIP2</span>及以上等级，再送300元！<br />奖励以工豆形式实时发放，有效期<span>30</span>天。</div>
 
@@ -21,7 +21,7 @@ const InvestGiftPanel = CSSModules(styles, {
                         <td>好友达到VIP2级，送邀请人</td>
                     </tr>
                     <tr>
-                        <td style={{width: "25%"}}>
+                        <td style={{ width: "25%" }}>
                             <span styleName="voucher">
                                 <span styleName="voucher-title">
                                     <span styleName="voucher-title-b">50</span>

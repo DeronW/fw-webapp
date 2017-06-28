@@ -55,6 +55,7 @@ const Post = (url, params, options) => {
 }
 
 export {
+    Ajax as default,
     Get,
     Post
 }

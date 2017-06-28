@@ -46,3 +46,61 @@
     float: right;
     height: 14px;
 }
+
+.btn-download-app {
+    position: relative;
+}
+
+.btn-download-app:hover .download-app {
+    display: block;
+}
+
+.download-app {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: -36px;
+    width: 150px;
+    background: whitesmoke;
+    text-align: center;
+    border: 1px solid #ededed;
+    border-radius: 8px;
+}
+
+.download-app img {
+    margin: 10px auto;
+    display: block;
+}
+
+.download-app a {
+    margin: 10px auto;
+    display: block;
+    line-height: 30px;
+}
+
+a.d-download {
+    line-height: 10px;
+    margin: 0 auto;
+    font-size: 13px;
+    color: #555;
+}
+
+.d-android,
+.d-ios {
+    height: 30px;
+    line-height: 30px;
+    width: 120px;
+    display: block;
+    margin: 10px auto 0;
+    color: white;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.d-android {
+    background: #fb6455;
+}
+
+.d-ios {
+    background: #8fbfff;
+}
