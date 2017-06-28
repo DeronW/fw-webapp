@@ -78,7 +78,7 @@ export default class PolicyDetail {
             buJiMianZiRan: Number(this.buJiMianZiRan),
             sheShui: this.sheShui,
             buJiMianSheShui: Number(this.buJiMianSheShui),
-            hcSanFangTeYue: this.hcSanFangTeYue
+            hcSanFangTeYue: Number(this.hcSanFangTeYue)
         }).then(data => {
             history.push('/policy-quotation');
         })
