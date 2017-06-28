@@ -8,7 +8,7 @@ $FW.DOMReady(function () {
     $(".tabs span").click(function () {
         var index = $(this).index();
         $(this).addClass('selected').siblings().removeClass('selected');
-        $(".tab-content-item").eq(index).show().siblings(".tab-content-item").hide();
+        $(".tab-content-item").eq(index).css("visibility","visible").siblings(".tab-content-item").css("visibility","hidden");
     });
 
     $(".activity-btn").click(function () {
