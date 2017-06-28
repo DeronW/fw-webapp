@@ -6,7 +6,7 @@ class CouponCenter extends React.Component {
             giftList: [],
             limitList: [],
             endList: [],
-            isShowEmpty: false,
+            isEmpty: false,
             requestToken: null
         }
     }
@@ -20,9 +20,11 @@ class CouponCenter extends React.Component {
             url: `${API_PATH}/mpwap/api/v2/getCouponList.shtml`,
             method: 'post',
         }).then(data => {
-            if ((data.packageList.length == 0 && data.couponAvailableList.length == 0 && data.couponEndList.length == 0)) {
-                this.setState({isShowEmpty: true})
-            }
+            if ((data.packageList.length == 0 &&
+                data.couponAvailableList.length == 0 &&
+                data.couponEndList.length == 0))
+                this.setState({ isEmpty: true })
+
             this.setState({
                 requestToken: data.couponToken,
                 giftList: data.packageList,
@@ -33,22 +35,22 @@ class CouponCenter extends React.Component {
     }
 
     render() {
-        let {isShowEmpty, giftList, limitList, endList, requestToken} = this.state;
+        let { isEmpty, giftList, limitList, endList, requestToken } = this.state;
+
+        let empty_holder = isEmpty && <div className="empty-box">
+            <img src="images/icon-empty.png" />
+            <div className="empty_text">一大波“优惠券”即将来袭</div>
+        </div>
 
         return <div className="totalBox">
-            {isShowEmpty && <EmptyShow />}
-            {<GiftBagList giftList={giftList} refreshHandler={this.requestGiftList} token={requestToken}/>}
-            {<LimitBagList limitList={limitList} refreshHandler={this.requestGiftList} token={requestToken}/>}
-            {<EndList endList={endList} refreshHandler={this.requestGiftList}/>}
+            {<GiftBagList giftList={giftList} refreshHandler={this.requestGiftList} token={requestToken} />}
+            {<LimitBagList limitList={limitList} refreshHandler={this.requestGiftList} token={requestToken} />}
+            {<EndList endList={endList} refreshHandler={this.requestGiftList} />}
+            {empty_holder}
         </div>
     }
 }
 
 $FW.DOMReady(function () {
-    if (!$FW.Browser.inApp()) {
-        ReactDOM.render(<Header title={'领券中心'}
-                                sub_text={'我的优惠券'}
-                                sub_url='javascript:NativeBridge.toNative("app_invest_list")'/>, HEADER_NODE);
-    }
     ReactDOM.render(<CouponCenter />, CONTENT_NODE)
 });
