@@ -22,7 +22,9 @@ const USER_PAGES = [
     'user-jrgc-login', // 金融工场 App 同步登录页面
     'user-weixin-fxhapp',
     'user-weixin-jrgcapp',
-    'user-weixin-new-download'
+    'user-weixin-new-download',
+    'user-red-packet',//红包
+    'user-red-packet-detail'//红包明细
 ]
 
 // 金融工场APP页面
