@@ -9,22 +9,24 @@
 {% block content %}
 <div id="header"></div>
 <div class="invite-bg">
-    <div class="get-btn">立即分享</div>
-    <div class="copy-link">
-        <div class="top-tip">长按复制链接分享给好友</div>
-        <div class="btm-tip"><input type="text" value=""/></div>
-    </div>
-    <div class="tabs">
-        <span class="rule-btn selected"></span>
-        <span class="invite-btn"></span>
-    </div>
+    <div class="activity-btn"></div>
+    <div class="invitation-code">我的邀请码：<span></span></div>
 </div>
 <div id="tab-content">
+    <div class="tabs">
+        <span class="selected">放心花</span>
+        <span>邀请记录</span>
+    </div>
     <div class="tab-content-item">
         <div class="tab-content-item-wrap1">
-            <div class="rule-item">放心花是由深圳市众利财富管理有限公司推出的基于移动端线上贷款信息聚合平台，满足您的各类贷款需求。
-            </div>
-            <div class="invitation-code">分享我的邀请码：<span></span></div>
+            <div class="rule-item">一人借款，两人赚钱!</div>
+            <div class="rule-item">活动期间邀请亲朋好友来借钱，邀请人和被邀请人皆可得15元现金红包！</div>
+            <div class="rule-item">邀请越多，红包额越大，奖励可高达150元！</div>
+            <div class="rule-item">放心花，有钱赚，快来邀友来借款，有！福！同！享！</div>
+        </div>
+        <div class="copy-link">
+            <div class="top-tip">长按复制链接分享给好友</div>
+            <div class="btm-tip"><input type="text" value=""/></div>
         </div>
     </div>
     <div class="tab-content-item" style="display:none;">
@@ -34,8 +36,20 @@
 
     </div>
 </div>
-<div class="mask">
-    <img src="images/invite-tip.png"/>
-</div>
 <div id="bottom-nav-bar"></div>
+<div class="mask">
+    <div class="pop-content">
+        <div class="close-btn"></div>
+        <div class="pop-title">活动时间</div>
+        <div class="pop-item activity-time">2017年7月1日-14日</div>
+        <div class="pop-title activity-rules">活动规则</div>
+        <div class="pop-item">1、邀请人奖励：</div>
+        <div class="pop-item">被邀请人注册，邀请人即得15元现金红包。</div>
+        <div class="pop-item">活动期间每个邀请人最多可得150元现金红包。</div>
+        <div class="pop-item">2、被邀请人奖励：</div>
+        <div class="pop-item">被邀请人注册即得到15元现金红包。</div>
+        <div class="pop-item">3、在满足红包提现条件下，现金红包可至【我的】-【红包】进行提现。</div>
+        <div class="pop-item">4、若多个邀请人邀请同一个好友，且该好友完成放款，则对应的邀请人奖励给第一个邀请TA的用户（以后台记录时间为准）。</div>
+    </div>
+</div>
 {% endblock %}

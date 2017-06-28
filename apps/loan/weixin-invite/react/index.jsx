@@ -3,21 +3,21 @@ $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     var page = 1;
     var loadNextPage = true;
-    $("#tab-content").height($(document).height() - 472 + "px");
+    $("#tab-content").height($(document).height() - 440 + "px");
     $(".invitation-code span").text(USER.invitCode);
     $(".tabs span").click(function () {
         var index = $(this).index();
         $(this).addClass('selected').siblings().removeClass('selected');
-        $(".tab-content-item").eq(index).show().siblings().hide();
+        $(".tab-content-item").eq(index).show().siblings(".tab-content-item").hide();
     });
 
-    // $(".invitation-code").click(function () {
-    //     $(".mask").show();
-    // });
+    $(".activity-btn").click(function () {
+        $(".mask").show();
+    });
 
-    // $(".mask").click(function () {
-    //     $(this).hide();
-    // });
+    $(".close-btn").click(function () {
+        $(".mask").hide();
+    });
 
     $FW.Post(`${API_PATH}/api/shareTemplate/v1/getContent.json`, {
         channelCode: "OFFICIAL",

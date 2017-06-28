@@ -12,7 +12,7 @@ import styles from '../css/quotation-detail.css'
 const QuotationDetail = inject('current_order', 'quotations')(observer(CSSModules((props) => {
 
     let selectedFirm = Utils.hashQuery.selectedFirm || props.current_order.selectedFirm,
-        detail = props.quotations.getSelectedDetail(selectedFirm);
+        detail = props.quotations.getDetailForSelected(selectedFirm);
 
     let gen_detail_item = (type, title) => (
         <div styleName="detail-item">
