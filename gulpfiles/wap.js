@@ -6,12 +6,11 @@ let APP_NAMES = [
     'home', // 首页
     'about-us', // 关于我们
     'faq', // 帮助中心
-    'p2p-faq', //微金帮助中心页面
     'app-download', // app 下载页面
     'guide-cookbook', // 用户使用引导页面
-    'p2p-app-download', //微金app下载页面
     // test page
     'test-native-bridge',
+    'fa-xian',
     'coupon-center'
 ];
 
@@ -46,10 +45,8 @@ const NOTICE_PAGES = [
     // 内容展示页面
     'notice-corporate-structure', // 信息披露 公司结构
     'notice-safeguard', // 资金安全保障
-    'p2p-notice-safeguard', //p2p资金安全保障
     'notice-risk-prompt', // 风险揭示
     'notice-information-disclosure', //测试 信息披露
-    'p2p-notice-information-disclosure', //微金信息披露
 ]
 
 const TOPIC_PAGES = [
@@ -93,11 +90,6 @@ const SHOUSHAN = [
     'shoushan-cash-records'
 ]
 
-const DEVELOPING_PAGES = [
-    'fa-xian',
-    'p2p-fa-xian', //微金发现页面
-]
-
 const OUTSIDE_PAGES = [
     'outside-register-aisidi' //爱施德注册页面
 ]
@@ -108,6 +100,11 @@ const P2P = [
     'p2p-vip-prerogative',
     'p2p-policy', //政策法规页面
     'p2p-pdf',
+    'p2p-fa-xian', //微金发现页面
+    'p2p-faq', //微金帮助中心页面
+    'p2p-app-download', //微金app下载页面
+    'p2p-notice-safeguard', //p2p资金安全保障
+    'p2p-notice-information-disclosure', //微金信息披露
 ]
 APP_NAMES.push(
     ...USER_PAGES,
@@ -115,13 +112,12 @@ APP_NAMES.push(
     ...TOPIC_PAGES,
     ...HUISHANG_PAGES,
     ...NOTICE_PAGES,
-    ...DEVELOPING_PAGES,
     ...SHOUSHAN,
     ...OUTSIDE_PAGES,
     ...P2P
 )
 
-module.exports = function(gulp, generate_task, CONSTANTS) {
+module.exports = function (gulp, generate_task, CONSTANTS) {
     const COMMON_COMPONENTS = [
         'use-strict.jsx', 'loading.jsx', 'alert.jsx', `${PROJ}/header.jsx`,
         'toast.jsx', 'banner-group.jsx', 'circle-progress.jsx', 'confirm.jsx'
@@ -160,11 +156,11 @@ module.exports = function(gulp, generate_task, CONSTANTS) {
     gulp.task(`build:${PROJ}`, gulp.series(APP_NAMES.map((i) => `${PROJ}:pack:${i.name || i}:revision`)));
     gulp.task(`lint:${PROJ}`, gulp.series(() => {
         return gulp.src([
-                `apps/${PROJ}/**/*.+(js|jsx)`,
-                '!node_modules/**',
-                '!**/jquery.*.js',
-                '!**.min.js'
-            ])
+            `apps/${PROJ}/**/*.+(js|jsx)`,
+            '!node_modules/**',
+            '!**/jquery.*.js',
+            '!**.min.js'
+        ])
             .pipe(eslint())
             .pipe(eslint.format());
     }))
