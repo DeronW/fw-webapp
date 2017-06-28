@@ -32,7 +32,7 @@ export default class Quotations {
     fetchQuotations = async () => {
         let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
             .then(data => data.temporaryPolicyId)
-        this.Get(`/carInsurance/bondsmanInfo.shtml`, {
+        this.Get(`/carInsurance/insuranceQuote.shtml`, {
             temporaryPolicyId: temporaryPolicyId
         }).then(({ quotationDetail }) => {
             for (var i = 0; i < quotationDetail.length; i++) {
