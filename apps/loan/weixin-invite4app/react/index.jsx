@@ -1,8 +1,15 @@
 $FW.DOMReady(function () {
     let inviteCode = $FW.Format.urlQuery().yqm;
-    $("#tab-content").height($(document).height() - 472 + "px");
+    $(".activity-btn").click(function () {
+        $(".mask").show();
+    });
+
+    $(".close-btn").click(function () {
+        $(".mask").hide();
+    });
+    $("#tab-content").height($(document).height() - 440 + "px");
     $("#yqm").text(inviteCode);
-    $(".invitation-code").click(function(){
+    $(".invite-btn").click(function(){
         NativeBridge.share({
             title: '掌上钱包，随用随取',
             image: 'https://static.9888.cn/images/loan/invitation.jpg',
