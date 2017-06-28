@@ -33,7 +33,7 @@ class Basic extends React.Component {
             car.setForm(data.carInfo);
             policy_detail.setForm(data.insureInfo);
             history.push('/policy-detail');
-        }, e => {
+        }).catch(e => {
             if (e.code == -105) history.push('/car')
         })
     }

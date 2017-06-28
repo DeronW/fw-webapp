@@ -1,9 +1,9 @@
 import { extendObservable, computed } from 'mobx'
 
-export default class PolicyDetail {
+export default class Quotations {
 
-    constructor(request) {
-        this.request = request
+    constructor(Get) {
+        this.Get = Get
 
         extendObservable(this, {
             detail: {
@@ -29,6 +29,19 @@ export default class PolicyDetail {
         })
     }
 
+    fetchQuotations = async () => {
+        let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
+            .then(data => data.temporaryPolicyId)
+        this.Get(`/carInsurance/bondsmanInfo.shtml`, {
+            temporaryPolicyId: temporaryPolicyId
+        }).then(({ quotationDetail }) => {
+            for (var i = 0; i < quotationDetail.length; i++) {
+                let source = String(quotationDetail[i].source);
+                Object.assign(this.detail[source], quotationDetail[i]);
+            }
+        })
+    }
+
     setForm = (data) => {
         for (var i = 0; i < data.length; i++) {
             let detailObj = data[i],
@@ -37,44 +50,14 @@ export default class PolicyDetail {
         }
     }
 
-    get abstract() {
-        let abstract = { '0': {}, '1': {}, '2': {} };
-        for (var k in abstract) {
-            if (this.detail[k]) {
-                Object.assign(abstract, {
-                    [k]: {
-                        originPrice: this.detail[k].originPrice,
-                        discount: this.detail[k].discount,
-                        actualPrice: this.detail[k].actualPrice
-                    }
-                })
-            }
-        }
-        return abstract
-    }
+    getDetailForSelected = firmNo => this.detail[firmNo] || {}
 
-    price_preview = () => {
+    getDetailForAll = () => {
         return {
-            '0': this.getSelectedDetail('0'),
-            '1': this.getSelectedDetail('1'),
-            '2': this.getSelectedDetail('2')
+            '0': this.getDetailForSelected('0'),
+            '1': this.getDetailForSelected('1'),
+            '2': this.getDetailForSelected('2')
         }
     }
-
-    getSelectedAbstract = firmNo => {
-        let selectedAbstract = {};
-        if (this.detail[firmNo]) {
-            Object.assign(selectedAbstract, {
-                originPrice: this.detail[firmNo].originPrice,
-                discount: this.detail[firmNo].discount,
-                actualPrice: this.detail[firmNo].actualPrice
-            })
-        }
-        return selectedAbstract
-    }
-
-    getSelectedDetail = firmNo => this.detail[firmNo] || {}
-
-    getSelectedTotal = firmNo => this.detail[firmNo] ? this.detail[firmNo].actualPrice : '';
 
 }
