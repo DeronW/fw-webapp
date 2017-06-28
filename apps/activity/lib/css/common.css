@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+}
+
+.container {
+    width: 1140px;
+    display: table;
+    margin: 0 auto;
+}

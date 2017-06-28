@@ -1,0 +1,48 @@
+.header-placeholder {
+    height: 50px;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    height: 50px;
+    z-index: 1000;
+}
+
+.header-panel {
+    width: 1140px;
+    margin: 0 auto;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+}
+
+.nav-link {
+    margin-right: 20px;
+    height: 100%;
+    display: inline-block;
+}
+
+.nav-link img {
+    margin-top: 13px;
+}
+
+.btn-link {
+    float: right;
+    padding: 0 10px;
+    color: #fff;
+    font-size: 14px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-link-sp {
+    margin: 18px 5px 0;
+    width: 1px;
+    background: #fff;
+    float: right;
+    height: 14px;
+}
