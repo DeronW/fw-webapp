@@ -42,7 +42,7 @@ const Get = (url, params, silence = false) => {
         url: url,
         method: 'GET',
         data: params,
-        silence: slience
+        silence: silence
     })
 }
 
