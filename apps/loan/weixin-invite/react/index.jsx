@@ -3,7 +3,7 @@ $FW.DOMReady(function () {
     ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     var page = 1;
     var loadNextPage = true;
-    $("#tab-content").height($(document).height() - 440 + "px");
+    $(".tab-content-item").height($(document).height() - 440 + "px");
     $(".invitation-code span").text(USER.invitCode);
     $(".tabs span").click(function () {
         var index = $(this).index();
