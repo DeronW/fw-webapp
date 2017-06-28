@@ -1,6 +1,7 @@
+import React from 'react'
 import CSSModules from 'react-css-modules'
 
-import styles from '../css/invest-gift-panel.css'
+import styles from '../css/pop-panel.css'
 
 const InvestGiftPanel = CSSModules(styles, {
     "allowMultiple": true,
@@ -20,7 +21,7 @@ const InvestGiftPanel = CSSModules(styles, {
                         <td>好友达到VIP2级，送邀请人</td>
                     </tr>
                     <tr>
-                        <td style="width: 25%">
+                        <td style={{width: "25%"}}>
                             <span styleName="voucher">
                                 <span styleName="voucher-title">
                                     <span styleName="voucher-title-b">50</span>

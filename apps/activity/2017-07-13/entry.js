@@ -7,7 +7,6 @@ import '../lib/css/common.css'
 
 import PCHeader from '../lib/components/pc-header.js'
 import MobileHeader from '../lib/components/mobile-header.js'
-import InvestGiftPanel from '../lib/components/invest-gift-panel.js'
 
 class Content extends React.Component {
 
@@ -22,7 +21,6 @@ class Content extends React.Component {
     render() {
         return <div>
             <PCHeader bgColor={'black'} />
-            <InvestGiftPanel />
         </div>
     }
 }

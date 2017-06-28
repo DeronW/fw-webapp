@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
-import InvestGiftPanel from './invest-gift-panel.js'
+import InvestGiftPanel from './pop-panel.js'
 import styles from '../css/pc-header.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
@@ -54,7 +54,7 @@ class PCHeader extends React.Component {
                 </div>
             </div>
 
-            {/*<InvestGiftPanel/>*/}
+            <InvestGiftPanel />
             {GiftPanel}
         </div>
     }
