@@ -17,11 +17,32 @@ class UploadImg extends React.Component {
     }
 
     changeHandler = event => {
-
+        let {customer,imgId} = this.props;
+        let target = event.target;
+        var fr = new FileReader();
+        let ext = target.value.split('.').pop().toLowerCase()
+        
+        if(ext != 'png' && ext!= 'jpg'){
+            this.setState({tips:'图片格式不正确',img_data:null})
+        }else{
+            fr.readAsDataURL(target.files[0]);
+            fr.onload = (fre) => {
+                customer.uploadImg(imgId,fr.result)
+                this.setState({tips:null,img_data:fr.result})
+            }
+        }
     }
     render(){
+        let { placeholder } = this.props
+        let { img_data, tips } = this.state
+
         return <div styleName="input-image">
-            <img src="" alt=""/>
+            <img src={img_data} alt=""/>
+            <input type="file" onChange={this.changeHandler}/>
+            <br /> <br />
+            <div styleName="">请添加</div>
+            <div>{placeholder}</div>
+            {tips && <div style={{ color: '#fd4d4c' }}>{tips}</div>}
         </div>
     }
 }
