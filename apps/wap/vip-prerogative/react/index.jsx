@@ -18,13 +18,13 @@ $FW.DOMReady(function () {
             g('vip-3').innerText = F(score.minLv4) + '-' + F(score.maxLv4);
             g('vip-4').innerText = F(score.minLv5) + '以上';
 
-            g('limitDays').innerText = F(data.limitDays);
+            // g('limitDays').innerText = F(data.limitDays);
             g('firstInvestAmount').innerText = F(data.firstInvestAmount);
             g('sendStore').innerText = F(data.sendStore);
             g('maxSendStore').innerText = F(data.sendStore * 100);
 
 
-            g('limitDays2').innerText = F(data.limitDays);
+            // g('limitDays2').innerText = F(data.limitDays);
             g('firstInvestAmount2').innerText = F(data.firstInvestAmount);
             g('sendStore2').innerText = F(data.sendStore);
         },
