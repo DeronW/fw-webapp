@@ -64,6 +64,15 @@ class RedPacketDetail extends React.Component{
         return (
             <div>
                 {/*松开刷新提示*/}
+                <div className="refresh">
+                    <div className="logo-container">
+                        <img src="images/fxh-logo.png" alt=""/>
+                    </div>
+                    <div className="right-text">
+                        <p className="refresh-text">松开刷新</p>
+                        <p className="refresh-time">上次更新时间 <span>11:57:23</span></p>
+                    </div>
+                </div>
                 {/*数据列表*/}
                 {/*<div className="data-list">
                     {rows.map(item_list)}
@@ -89,10 +98,21 @@ class RedPacketDetail extends React.Component{
                             <span className="status-time">2016-12-16</span>
                         </div>
                     </div>
+                    <div className="list-item">
+                        <div className="red-status">
+                            <span className="status-text">可提现</span>
+                            <span className="status-num">15</span>
+                        </div>
+                        <div className="sub-red-status">
+                            <span className="sub-status-text">好友（尾号1231）首借已还款</span>
+                            <span className="status-time">2016-12-16</span>
+                        </div>
+                    </div>
                 </div>
                 {/*已加载完全部数据提示*/}
                 {/*{hasData && <div className="data-completion">已加载完全部数据</div>}
                 {rows.length === 0 && !hasData && empty}*/}
+                <div className="data-completion">已加载完全部数据</div>
             </div>
         )
     }
