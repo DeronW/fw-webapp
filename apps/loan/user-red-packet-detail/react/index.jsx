@@ -20,7 +20,7 @@ class RedPacketDetail extends React.Component{
             pageSize: 20,
             pageIndex: this.state.page
         }).then(data => {
-            let RedPacketDetailList = data.ResultList;
+            let RedPacketDetailList = data.resultList;
             this.setState({
                 rows: RedPacketDetailList,
                 page: this.state.page + 1,
@@ -30,6 +30,7 @@ class RedPacketDetail extends React.Component{
         })
     }
     render() {
+        // 判断红包状态
         let statusText = (item) => {
             console.log(111111111);
             if(parseInt(item.redbagStatus) == 0){
@@ -66,7 +67,7 @@ class RedPacketDetail extends React.Component{
                         </div>
                     </div>
         }
-
+// 没数据的空页面
         let empty = <div className="no-data-box">
             <img className="no-data-img" src="images/no-data.png" />
         </div>;
