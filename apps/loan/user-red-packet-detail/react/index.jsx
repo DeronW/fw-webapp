@@ -50,44 +50,33 @@ class RedPacketDetail extends React.Component{
                 return <span className="status-text">首借非掌众失效</span>
             }
         }
-        let item_test = (item,index) => {
-            
-        }
-        // let item_list = (item, index) => {
-        //     let repayment;
-        //     if (item.repaymentStatus == 0) repayment = '借款失败';
-        //     if (item.repaymentStatus == 1) repayment = '已还款';
 
-        //     return (
-        //         <a className="bill-item" key={index}
-        //             href={`/static/loan/fxh-bill/index.html?loanType=${item.loanType}&loanGid=${item.loanGid}`}>
-        //             <div className="bill-detail">
-        //                 <div className="bill-detail-wrap">
-        //                     <span className="bill-money">
-        //                         {item.loanAmount.toFixed(2)}</span>
-        //                 </div>
-        //                 <span className="bill-deadline">{item.loanTimeStr}</span>
-        //             </div>
-        //             <div className="pay-back-btn-wrap">
-        //                 <span className="bill-status">
-        //                     {repayment}
-        //                     <img src="images/right-arrow.jpg" />
-        //                 </span>
-        //             </div>
-        //         </a>
-        //     )
-        // };
-
-        // let empty = <div className="no-data-box">
-        //     <img className="no-data-img" src="images/no-data.png" />
-        // </div>;
 
         let {rows, hasData} = this.state;
+
+        let item_list = (item,index) => {
+            return <div className="list-item">
+                        <div className="red-status">
+                            {rows.map(statusText)}
+                            <span className="status-num">{item.redbagAmt}</span>
+                        </div>
+                        <div className="sub-red-status">
+                            <span className="sub-status-text">好友（尾号1231）首借已还款</span>
+                            <span className="status-time">{item.createTime}</span>
+                        </div>
+                    </div>
+        }
+
+        let empty = <div className="no-data-box">
+            <img className="no-data-img" src="images/no-data.png" />
+        </div>;
+
+     
 
         return (
             <div>
                 {/*松开刷新提示*/}
-                <div className="refresh">
+                {/*<div className="refresh">
                     <div className="logo-container">
                         <img src="images/fxh-logo.png" alt=""/>
                     </div>
@@ -95,15 +84,14 @@ class RedPacketDetail extends React.Component{
                         <p className="refresh-text">松开刷新</p>
                         <p className="refresh-time">上次更新时间 <span>11:57:23</span></p>
                     </div>
-                </div>
-                {/*数据列表*/}
-                {/*<div className="data-list">
-                    {rows.map(item_list)}
                 </div>*/}
+                {/*数据列表*/}
                 <div className="data-list">
+                    {rows.map(item_list)}
+                </div>
+                {/*<div className="data-list">
                     <div className="list-item">
                         <div className="red-status">
-                            {/*<span className="status-text">可提现</span>*/}
                             {rows.map(statusText)}
                             <span className="status-num">15</span>
                         </div>
@@ -132,10 +120,10 @@ class RedPacketDetail extends React.Component{
                             <span className="status-time">2016-12-16</span>
                         </div>
                     </div>
-                </div>
+                </div>*/}
                 {/*已加载完全部数据提示*/}
-                {/*{hasData && <div className="data-completion">已加载完全部数据</div>}
-                {rows.length === 0 && !hasData && empty}*/}
+                {hasData && <div className="data-completion">已加载完全部数据</div>}
+                {rows.length === 0 && !hasData && empty}
                 <div className="data-completion">已加载完全部数据</div>
             </div>
         )
