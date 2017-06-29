@@ -67,8 +67,10 @@ class Redpacket extends React.Component{
             withdrawAmt:this.state.withdrawAmt,
             withdrawCardUuid:filtered.uuid
         }).then(data => {
-            location.href = `/static/loan/user-red-packet-result/index.html`;
-        }, e => $FW.Component.Toast(e.message));
+            location.href = `/static/loan/user-red-packet-result/index.html?applyTimeStr=${data.applyTimeStr}&preAccountTimeStr=${data.preAccountTimeStr}`;
+        }, e => {
+            location.href = `/static/loan/user-red-packet-result/index.html?error=${e.message}`;
+        });
     }
     changeValueHandler = (e) => {
         this.setState({value: e.target.value});
@@ -87,6 +89,7 @@ class Redpacket extends React.Component{
         }
         return (
             <div className="red-packet-wrapper">
+                {$FW.Browser.inIOS() && $FW.Browser.inFXHApp() && <div className="ios-space"></div>}
                  <div className="header">
                      <div className="arrow" onClick={()=>{$FW.Browser.inApp()?NativeBridge.close():gotoHandler('/static/loan/user/index.html')}}></div>红包账户<a className="details-entry" href="/static/loan/user-red-packet-detail/index.html">红包明细</a>
                  </div>
@@ -128,6 +131,7 @@ class Redpacket extends React.Component{
                         </div>
                     </div>
                 </div>}
+
             </div>
         )
     }
