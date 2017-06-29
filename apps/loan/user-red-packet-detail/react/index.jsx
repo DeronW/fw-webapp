@@ -30,6 +30,29 @@ class RedPacketDetail extends React.Component{
         })
     }
     render() {
+        let statusText = (type) => {
+            console.log(111111111);
+            if(type.redbagStatus == 0){
+                return <span className="status-text">注册冻结</span>
+            }else if(type.redbagStatus == 1){
+                return <span className="status-text">放款冻结</span>
+            }else if(type.redbagStatus == 2){
+                return <span className="status-text">可提现</span>
+            }else if(type.redbagStatus == 3){
+                return <span className="status-text">体现中</span>
+            }else if(type.redbagStatus == 4){
+                return <span className="status-text">已提现</span>
+            }else if(type.redbagStatus == 6){
+                return <span className="status-text">红包过期失效</span>
+            }else if(type.redbagStatus == 7){
+                return <span className="status-text">活动过期失效</span>
+            }else if(type.redbagStatus == 8){
+                return <span className="status-text">首借非掌众失效</span>
+            }
+        }
+        let item_test = (item,index) => {
+            
+        }
         // let item_list = (item, index) => {
         //     let repayment;
         //     if (item.repaymentStatus == 0) repayment = '借款失败';
@@ -64,11 +87,31 @@ class RedPacketDetail extends React.Component{
         return (
             <div>
                 {/*松开刷新提示*/}
+                <div className="refresh">
+                    <div className="logo-container">
+                        <img src="images/fxh-logo.png" alt=""/>
+                    </div>
+                    <div className="right-text">
+                        <p className="refresh-text">松开刷新</p>
+                        <p className="refresh-time">上次更新时间 <span>11:57:23</span></p>
+                    </div>
+                </div>
                 {/*数据列表*/}
                 {/*<div className="data-list">
                     {rows.map(item_list)}
                 </div>*/}
                 <div className="data-list">
+                    <div className="list-item">
+                        <div className="red-status">
+                            {/*<span className="status-text">可提现</span>*/}
+                             {statusText(...rows)}
+                            <span className="status-num">15</span>
+                        </div>
+                        <div className="sub-red-status">
+                            <span className="sub-status-text">好友（尾号1231）首借已还款</span>
+                            <span className="status-time">2016-12-16</span>
+                        </div>
+                    </div>
                     <div className="list-item">
                         <div className="red-status">
                             <span className="status-text">可提现</span>
@@ -93,6 +136,7 @@ class RedPacketDetail extends React.Component{
                 {/*已加载完全部数据提示*/}
                 {/*{hasData && <div className="data-completion">已加载完全部数据</div>}
                 {rows.length === 0 && !hasData && empty}*/}
+                <div className="data-completion">已加载完全部数据</div>
             </div>
         )
     }
