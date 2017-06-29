@@ -71,13 +71,16 @@ class Redpacket extends React.Component{
         this.setState({value: e.target.value});
     }
     render(){
+        let cardNoInfo;
         let borrowBtnStatus = this.state.borrowBtnStatus;
-        if(borrowBtnStatus == 2 || borrowBtnStatus == 3 || borrowBtnStatus == 5){
+        if (borrowBtnStatus >= 2){
             function isRealNameBindCard(ele) {
                 return ele.isRealNameBindCard == true;
             }
             let filtered = this.state.cashCard.filter(isRealNameBindCard)[0];
-            let cardNoInfo = `农行(尾号${filtered.cardNo.slice(-4)})`;
+            cardNoInfo = `农行(尾号${filtered.cardNo.slice(-4)})`;
+        }else{
+            cardNoInfo = '暂未设置'
         }
         return (
             <div className="red-packet-wrapper">
@@ -91,7 +94,7 @@ class Redpacket extends React.Component{
                  </div>
                  <div className="withdraw-card">
                      <div className="card-title">银行卡</div>
-                     <div className="card-branch">{this.state.borrowBtnStatus == 1 || this.state.borrowBtnStatus == 101 ? "暂未设置" : cardNoInfo}</div>
+                     <div className="card-branch">{cardNoInfo}</div>
                  </div>
                  <div className="withdraw-btn" onClick={this.withdrawHandler}>提现</div>
                  <div className="packet-tips">
