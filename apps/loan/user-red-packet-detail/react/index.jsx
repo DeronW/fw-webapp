@@ -24,29 +24,29 @@ class RedPacketDetail extends React.Component{
             this.setState({
                 rows: RedPacketDetailList,
                 page: this.state.page + 1,
-                hasData: !!rows.length
+                hasData: !!RedPacketDetailList.length
             })
             done && done()
         })
     }
     render() {
-        let statusText = () => {
+        let statusText = (type) => {
             console.log(111111111);
-            if(this.state.rows.redbagStatus == 0){
+            if(type.redbagStatus == 0){
                 return <span className="status-text">注册冻结</span>
-            }else if(this.state.rows.redbagStatus == 1){
+            }else if(type.redbagStatus == 1){
                 return <span className="status-text">放款冻结</span>
-            }else if(this.rows.redbagStatus == 2){
+            }else if(type.redbagStatus == 2){
                 return <span className="status-text">可提现</span>
-            }else if(this.state.rows.redbagStatus == 3){
+            }else if(type.redbagStatus == 3){
                 return <span className="status-text">体现中</span>
-            }else if(this.state.rows.redbagStatus == 4){
+            }else if(type.redbagStatus == 4){
                 return <span className="status-text">已提现</span>
-            }else if(this.state.rows.redbagStatus == 6){
+            }else if(type.redbagStatus == 6){
                 return <span className="status-text">红包过期失效</span>
-            }else if(this.state.rows.redbagStatus == 7){
+            }else if(type.redbagStatus == 7){
                 return <span className="status-text">活动过期失效</span>
-            }else if(this.state.rows.redbagStatus == 8){
+            }else if(type.redbagStatus == 8){
                 return <span className="status-text">首借非掌众失效</span>
             }
         }
@@ -104,7 +104,7 @@ class RedPacketDetail extends React.Component{
                     <div className="list-item">
                         <div className="red-status">
                             {/*<span className="status-text">可提现</span>*/}
-                             {statusText}
+                             {statusText(...this.state.rows)}
                             <span className="status-num">15</span>
                         </div>
                         <div className="sub-red-status">
