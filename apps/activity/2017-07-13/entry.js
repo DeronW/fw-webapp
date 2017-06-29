@@ -20,7 +20,8 @@ class Content extends React.Component {
 
     render() {
         return <div>
-            <PCHeader bgColor={'black'} />
+            {/*<PCHeader bgColor={'black'} />*/}
+            <MobileHeader bgColor={'red'} />
         </div>
     }
 }
