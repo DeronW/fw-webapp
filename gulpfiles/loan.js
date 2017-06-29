@@ -24,7 +24,8 @@ const USER_PAGES = [
     'user-weixin-jrgcapp',
     'user-weixin-new-download',
     'user-red-packet', //红包
-    'user-red-packet-detail' //红包明细
+    'user-red-packet-detail', //红包明细
+    'user-red-packet-result'
 
 ]
 
@@ -104,12 +105,6 @@ const APPLY_TEN_MILLION_LOAN = [
     'outside-mortgage-id-download'
 ]
 
-
-//红包模块
-const RED_PACKET = [
-    'red-packet-detail'
-]
-
 const REFACTORY_PAGES = [{
     name: 'features', // 更多页面 , 包含 联系我们/关于我们/常见问题/退出功能
     compiler: 'webpack'
@@ -135,8 +130,7 @@ APP_NAMES.push(
     ...CREDIT_CARD,
     ...MORTGAGE,
     ...APPLY_TEN_MILLION_LOAN,
-    ...REFACTORY_PAGES,
-    ...RED_PACKET
+    ...REFACTORY_PAGES
 );
 
 
