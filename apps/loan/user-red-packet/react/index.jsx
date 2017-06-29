@@ -13,8 +13,9 @@ class Redpacket extends React.Component{
         }
     }
     componentDidMount(){
-        $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`)
-            .then(data => this.setState({borrowBtnStatus:data.borrowBtnStatus}));
+        $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`,{
+            productId:1
+        }).then(data => this.setState({borrowBtnStatus:data.borrowBtnStatus}));
 
         $FXH.Post(`${API_PATH}/api/redbag/v1/summary.json`)
             .then(data => this.setState({withdrawNum:data.hasWithdrawAmt,frozenNum:data.freezeAmt,batchGid:data.batchGid}));
