@@ -104,7 +104,7 @@ class RedPacketDetail extends React.Component{
                     <div className="list-item">
                         <div className="red-status">
                             {/*<span className="status-text">可提现</span>*/}
-                             {statusText(...rows)}
+                            {rows.map(statusText)}
                             <span className="status-num">15</span>
                         </div>
                         <div className="sub-red-status">
