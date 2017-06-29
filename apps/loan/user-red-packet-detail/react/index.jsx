@@ -31,6 +31,7 @@ class RedPacketDetail extends React.Component{
     }
     render() {
         let statusText = () => {
+            console.log(111111111);
             if(this.rows.redbagStatus == 0){
                 return <span className="status-text">注册冻结</span>
             }else if(this.rows.redbagStatus == 1){
