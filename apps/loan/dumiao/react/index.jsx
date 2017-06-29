@@ -126,7 +126,7 @@ class BorrowMoney extends React.Component {
                 <div className="detail-pop">
                     <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
                     <div className="pop-tip">{this.state.canMessage}</div>
-                    <div className="know-btn" onClick={() => {$FW.Browser.inApp()? NativeBridge.goto(link,false,"分期"):link}}>
+                    <div className="know-btn" onClick={() => {$FW.Browser.inApp()? NativeBridge.goto(link,false,"分期"):gotoHandler(link)}}>
                         点击查看详情</div>
                 </div>
             </div>

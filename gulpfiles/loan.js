@@ -25,6 +25,7 @@ const USER_PAGES = [
     'user-weixin-new-download',
     'user-red-packet', //红包
     'user-red-packet-detail' //红包明细
+
 ]
 
 // 金融工场APP页面

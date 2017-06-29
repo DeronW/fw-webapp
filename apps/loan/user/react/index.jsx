@@ -90,6 +90,7 @@ class MajorUserInfo extends React.Component {
             link_a: null,
             link_b: null,
             link_c: '/static/loan/bill/index.html#2',
+            link_d: '/static/loan/user-red-packet/index.html',
             tips: null
         }
     }
@@ -116,7 +117,7 @@ class MajorUserInfo extends React.Component {
         tips && $FW.Component.Toast(tips)
     }
     render() {
-        let { link_a, link_b, link_c } = this.state
+        let { link_a, link_b, link_c, link_d } = this.state
         return <div className="info-display-block">
             <a className="user-info-display-wrap" onClick={this.clickHandler}
                 href={link_a}>
@@ -148,6 +149,18 @@ class MajorUserInfo extends React.Component {
                     <img src="images/bank_icon.png"></img>
                 </div>
                 <span className="info-name">银行卡</span>
+                <div className="right-align-container">
+                    <div className="right-arrow-container">
+                        <div className="fake-arrow"></div>
+                    </div>
+                </div>
+            </a>
+            <a className="user-info-display-wrap" onClick={this.clickHandler}
+               href={link_d}>
+                <div className="info-icon-container">
+                    <img src="images/packet_icon.png"></img>
+                </div>
+                <span className="info-name">红包</span>
                 <div className="right-align-container">
                     <div className="right-arrow-container">
                         <div className="fake-arrow"></div>
