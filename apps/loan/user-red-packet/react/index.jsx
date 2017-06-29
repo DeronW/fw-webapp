@@ -62,7 +62,7 @@ class Redpacket extends React.Component{
             batchGid:this.state.batchGid,
             verifyCode:this.state.value,
             withdrawAmt:this.state.withdrawAmt,
-            withdrawCardUuid:filtered.cardUuid
+            withdrawCardUuid:filtered.uuid
         }).then(data => {
             location.href = `/static/loan/user-red-packet-result/index.html`;
         }, e => $FW.Component.Toast(e.message));
