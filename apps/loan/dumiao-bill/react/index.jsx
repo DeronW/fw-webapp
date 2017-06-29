@@ -36,13 +36,22 @@ class BillDetail extends React.Component {
                 </div>
                 {baseStatus < 3 &&
                     <div className="enter-btn-wrap">
-                        <a className="enter-btn" onClick={()=>{$FW.Browser.inApp()?NativeBridge.goto(link,false,"分期"):link}}>点击查看详情</a>
+                        <a className="enter-btn" onClick={()=>{$FW.Browser.inApp()?NativeBridge.goto(link,false,"分期"):gotoHandler(link)}}>点击查看详情</a>
                     </div>}
             </div>
         )
     }
 }
-
+function gotoHandler(link, need_login) {
+    if (link.indexOf('://') < 0) {
+        link = location.protocol + '//' + location.hostname + link;
+    }
+    if ($FW.Browser.inApp()) {
+        NativeBridge.goto(link, need_login)
+    } else {
+        location.href = encodeURI(link);
+    }
+}
 const USER = $FW.Store.getUserDict();
 $FW.DOMReady(function () {
     ReactDOM.render(<Header title={"账单详情"} />, HEADER_NODE);
