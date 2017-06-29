@@ -24,7 +24,7 @@ class RedPacketDetail extends React.Component{
             this.setState({
                 rows: RedPacketDetailList,
                 page: this.state.page + 1,
-                hasData: !!RedPacketDetailList.length
+                hasData: !!rows.length
             })
             done && done()
         })
