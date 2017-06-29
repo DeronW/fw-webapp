@@ -24,12 +24,14 @@ class Redpacket extends React.Component{
             .then(data => this.setState({cashCard:data.userBankList.withdrawBankcard}));
     }
     withdrawHandler = () => {
-        $FXH.Post(`${API_PATH}/api/redbag/v1/veriftycode.json`, {
-            batchGid:this.state.batchGid
-        }).then(data => {
-            this.setState({maskShow:true});
-            this.tick();
-        }, e => $FW.Component.Toast(e.message))
+        if(this.state.borrowBtnStatus >=2 ){
+            $FXH.Post(`${API_PATH}/api/redbag/v1/veriftycode.json`, {
+                batchGid:this.state.batchGid
+            }).then(data => {
+                this.setState({maskShow:true});
+                this.tick();
+            }, e => $FW.Component.Toast(e.message))
+        }
     }
     tick = () => {
         this.setState({remain: 60});
@@ -97,7 +99,7 @@ class Redpacket extends React.Component{
                      <div className="card-title">银行卡</div>
                      <div className="card-branch">{cardNoInfo}</div>
                  </div>
-                 <div className="withdraw-btn" onClick={this.withdrawHandler}>提现</div>
+                 <div className={borrowBtnStatus >=2 ? "withdraw-btn": "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                  <div className="packet-tips">
                      <div className="packet-tips-title">温馨提示</div>
                      <div className="packet-rule">单笔提现金额不低于50元，单日提现次数不超过3次；</div>
