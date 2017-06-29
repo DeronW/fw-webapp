@@ -23,8 +23,7 @@ const USER_PAGES = [
     'user-weixin-fxhapp',
     'user-weixin-jrgcapp',
     'user-weixin-new-download',
-    'user-red-packet',//红包
-    'user-red-packet-detail'//红包明细
+    'user-red-packet'//红包
 ]
 
 // 金融工场APP页面
