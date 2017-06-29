@@ -38,7 +38,7 @@ class RedPacketDetail extends React.Component{
     render() {
         // 判断红包状态
         let statusText = (item) => {
-            if(parseInt(item.redbagStatus) == 0){
+            if(item.redbagStatus) == 0){
                 return <span className="status-text">注册冻结</span>
             }else if(item.redbagStatus ==1){
                 return <span className="status-text">放款冻结</span>
