@@ -67,9 +67,9 @@ class Redpacket extends React.Component{
             withdrawAmt:this.state.withdrawAmt,
             withdrawCardUuid:filtered.uuid
         }).then(data => {
-            //location.href = `/static/loan/user-red-packet-result/index.html?applyTimeStr=${data.applyTimeStr}&preAccountTimeStr=${data.preAccountTimeStr}`;
+            location.href = `/static/loan/user-red-packet-result/index.html?applyTimeStr=${data.applyTimeStr}&preAccountTimeStr=${data.preAccountTimeStr}`;
         }, e => {
-            //location.href = `/static/loan/user-red-packet-result/index.html?error=${e.message}`;
+            location.href = `/static/loan/user-red-packet-result/index.html?error=${e.message}`;
         });
     }
     changeValueHandler = (e) => {
