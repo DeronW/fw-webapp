@@ -105,10 +105,10 @@ class Redpacket extends React.Component{
                  <div className={((borrowBtnStatus ==2 || borrowBtnStatus == 3 || borrowBtnStatus == 5) && this.state.withdrawNum >= 50) ? "withdraw-btn": "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                  <div className="packet-tips">
                      <div className="packet-tips-title">温馨提示</div>
-                     <div className="packet-rule">单笔提现金额不低于50元，单日提现次数不超过3次；</div>
-                     <div className="packet-rule">7*24小时可以提现；</div>
-                     <div className="packet-rule">提现后1-3个工作日到账；</div>
-                     <div className="packet-rule">若有问题，请咨询<span>400-102-0066</span>。</div>
+                     <div className="packet-rule"><span className="dot"></span>单笔提现金额不低于50元，单日提现次数不超过3次；</div>
+                     <div className="packet-rule"><span className="dot"></span>7*24小时可以提现；</div>
+                     <div className="packet-rule"><span className="dot"></span>提现后1-3个工作日到账；</div>
+                     <div className="packet-rule"><span className="dot"></span>若有问题，请咨询<span>400-102-0066</span>。</div>
                  </div>
                 {this.state.maskShow && <div className="mask">
                     <div className="verify-popup">
