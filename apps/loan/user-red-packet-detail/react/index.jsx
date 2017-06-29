@@ -9,7 +9,7 @@ class RedPacketDetail extends React.Component{
         }
     }
     componentDidMount() {
-        this.loadMore()
+        this.loadMore(null)
         $FW.Event.touchBottom(this.loadMore);
     }
     formatTime = (ms) => {
