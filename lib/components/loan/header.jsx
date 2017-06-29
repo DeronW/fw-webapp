@@ -29,6 +29,7 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
+
         NativeBridge.setTitle(this.props.title);
     }
 
