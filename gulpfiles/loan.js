@@ -23,14 +23,14 @@ const USER_PAGES = [
     'user-weixin-fxhapp',
     'user-weixin-jrgcapp',
     'user-weixin-new-download',
-    'user-red-packet',//红包
-    'user-red-packet-detail'//红包明细
+    'user-red-packet', //红包
+    'user-red-packet-detail' //红包明细
 ]
 
 // 金融工场APP页面
 const JRGC_PAGES = [
-    'fxh-jrgc-invite',//放心花金融工场邀请页面
-    'fxh-jrgc-invite-banner',//放心花金融工场邀请页面(banner入口)
+    'fxh-jrgc-invite', //放心花金融工场邀请页面
+    'fxh-jrgc-invite-banner', //放心花金融工场邀请页面(banner入口)
     'test-native-bridge'
 ]
 
@@ -63,7 +63,7 @@ const PROTOCOL_PAGES = [
     'protocol-borrowing', // 借款服务协议
     'protocol-partner', // 借款协议双方
     'protocol-personinfo-collect', //个人信息采集授权声明
-    'protocol-dumiao-openaccount',//读秒开户授权书
+    'protocol-dumiao-openaccount', //读秒开户授权书
 ]
 
 const FXH_PAGES = [
@@ -103,6 +103,12 @@ const APPLY_TEN_MILLION_LOAN = [
     'outside-mortgage-id-download'
 ]
 
+
+//红包模块
+const RED_PACKET = [
+    'red-packet-detail'
+]
+
 const REFACTORY_PAGES = [{
     name: 'features', // 更多页面 , 包含 联系我们/关于我们/常见问题/退出功能
     compiler: 'webpack'
@@ -128,11 +134,12 @@ APP_NAMES.push(
     ...CREDIT_CARD,
     ...MORTGAGE,
     ...APPLY_TEN_MILLION_LOAN,
-    ...REFACTORY_PAGES
+    ...REFACTORY_PAGES,
+    ...RED_PACKET
 );
 
 
-module.exports = function (gulp, generate_task, CONSTANTS) {
+module.exports = function(gulp, generate_task, CONSTANTS) {
 
     let default_options = {
         include_components: [

@@ -2,7 +2,7 @@ import { Request, Components } from 'fw-javascripts'
 
 const API_PATH = document.getElementById('api-path').value;
 
-const PostMethodFactory = function (Storage, Browser, NativeBridge) {
+const PostMethodFactory = function(Storage, Browser, NativeBridge) {
 
     let USER = Storage.getUserDict(),
         token = USER.token,
@@ -15,10 +15,8 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
 
     return (url, data = {}, silence = false) => {
 
-        let merged_data = Object.assign({},
-            { sourceType: SOURCE_TYPE },
-            data,
-            { token: token, uid: uid })
+        let merged_data = Object.assign({}, { sourceType: SOURCE_TYPE },
+            data, { token: token, uid: uid })
 
         return Request({
             url: API_PATH + url,
