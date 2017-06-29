@@ -1,6 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import Ajax from '../helpers/request.js'
+import UserReady from '../helpers/user-ready.js'
 
 import InvestGiftPanel from './pop-panel.js'
 import styles from '../css/pc-header.css'
@@ -9,19 +10,14 @@ import styles from '../css/pc-header.css'
 class PCHeader extends React.Component {
 
     state = {
-        isLogin: false,
+        isLogin: null,
         user: {},
         show_gift: false
     }
 
     componentDidMount() {
-        Ajax({
-            url: '/api/userState/v1/userState.json'
-        }).then(data => {
-            this.setState({
-                isLogin: data.isLogin,
-                user: data
-            })
+        UserReady((isLogin, user) => {
+            this.setState({ isLogin: isLogin, user: user })
         })
     }
 
@@ -46,22 +42,17 @@ class PCHeader extends React.Component {
         let user_panel = () => {
             if (!isLogin) return null;
 
-            let avatar = user.avatar;
-
-            user.sex == '1'
-
-
             return <div styleName="btn-link">你好，
                     <div styleName="header-user">
-                    <span>{user.userName}</span>
+                    <span>{user.nickname}</span>
                     <img styleName="arrow" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAQAAADoz+32AAAAQ0lEQVQI12M48Wf9yzTBNIY0rgVXzvxlmJF45N+W92kqa18c+bdnLsNlhpXl5/+d+n/+/8zEy+xA7mWginP/lhWAWAAL2SHRnw5VoAAAAABJRU5ErkJggg==" />
 
                     <div styleName="header-user-panel">
                         <a styleName="user-link" href="http://www.9888keji.com/account/myHome.shtml">
-                            <img src={avatar} />
+                            <img src={user.avatar} />
                         </a>
                         <div styleName="header-user-links">
-                            <div>{user.realName}</div>
+                            <div styleName="realname">{user.realname}</div>
                             <a href="http://www.9888keji.com/account/myHome.shtml" styleName="btn-recharge">我的工场</a>
                         </div>
                     </div>
@@ -112,6 +103,5 @@ class PCHeader extends React.Component {
         </div>
     }
 }
-
 
 export default PCHeader

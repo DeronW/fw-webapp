@@ -104,3 +104,84 @@ a.d-download {
 .d-ios {
     background: #8fbfff;
 }
+
+.header-user {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0 8px;
+    position: relative;
+    cursor: pointer;
+    height: 50px;
+    line-height: 24px;
+    border: 1px solid transparent;
+    border-top: 0;
+}
+
+.header-user:hover {
+    background: #fff;
+    color: #333;
+    border: 1px solid #aaa;
+    border-bottom: 1px solid #fff;
+}
+
+.header-username {
+    color: #333;
+}
+
+.header-user:hover .header-user-panel {
+    display: block;
+}
+
+.header-user-panel {
+    display: none;
+    position: absolute;
+    width: 240px;
+    height: 98px;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid #aaa;
+    border-top: 0;
+    line-height: 20px;
+    top: 36px;
+    left: -1px;
+    font-size: 12px;
+    background: #fff;
+    color: #333;
+    z-index: 999;
+}
+
+.arrow {
+    margin-left: 5px;
+}
+
+.realname {
+    height: 20px;
+}
+
+.user-link {
+    width: 65px;
+    height: 65px;
+    float: left;
+    display: block;
+}
+
+.user-link img {
+    width: 65px;
+    height: 65px;
+}
+
+.header-user-links {
+    margin-left: 72px;
+}
+
+.btn-recharge {
+    display: inline-block;
+    width: 113px;
+    height: 24px;
+    background: #f9655a;
+    line-height: 24px;
+    text-align: center;
+    color: #fff!important;
+    border-radius: 2px;
+    margin-top: 20px;
+}
