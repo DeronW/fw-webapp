@@ -121,12 +121,13 @@ class BorrowMoney extends React.Component {
     render() {
         let labelList = this.state.product.productLabelList;
         let link = `${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${$FW.Browser.inFXHApp()?getCookie().token:USER.token}&uid=${$FW.Browser.inFXHApp()?getCookie().uid:USER.uid}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`;
+        let app_link = `${API_PATH}/api/order/v1/jump.shtml?token=${$FW.Browser.inFXHApp()?getCookie().token:USER.token}&uid=${$FW.Browser.inFXHApp()?getCookie().uid:USER.uid}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`;
         let goDumiao = () => {
             return <div className="mask" style={{ zIndex: 100 }}>
                 <div className="detail-pop">
                     <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
                     <div className="pop-tip">{this.state.canMessage}</div>
-                    <div className="know-btn" onClick={() => {$FW.Browser.inApp()? NativeBridge.goto(link,false,"分期"):gotoHandler(link)}}>
+                    <div className="know-btn" onClick={() => {$FW.Browser.inApp()? NativeBridge.goto(app_link,false,"分期"):gotoHandler(link)}}>
                         点击查看详情</div>
                 </div>
             </div>
