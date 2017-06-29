@@ -5,7 +5,7 @@ function gotoHandler(link) {
 class LoanResult extends React.Component{
     render() {
     return (
-        <div className="loan-result">
+        <div className={$FW.Browser.inWeixin()?"loan-result-weixin":"loan-result"}>
             {$FW.Format.urlQuery().applyTimeStr && <div className="waiting-result-box">
                 <div className="wrap-box">
                     <div className="success-icon"><img src="images/success-icon.png" /></div>
