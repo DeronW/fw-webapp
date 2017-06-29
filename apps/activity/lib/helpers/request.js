@@ -1,13 +1,10 @@
-import { Request, Components } from 'fw-javascripts'
-
-import Browser from './browser.js'
-import NativeBridge from './native-bridge.js'
+import { Request, Components, Browser, NativeBridge } from 'fw-javascripts'
 
 let API_PATH = document.getElementById('api-path').value;
 
 const Ajax = options => {
     // add default url prefix
-    options.url = `${API_PATH}/mpwap${options.url}`
+    options.url = `${API_PATH}${options.url}`
 
     return Request(options).catch(error => {
         /*
