@@ -83,7 +83,7 @@ class Redpacket extends React.Component{
                 return ele.isRealNameBindCard == true;
             }
             let filtered = this.state.cashCard.filter(isRealNameBindCard)[0];
-            cardNoInfo = `农行(尾号${filtered.cardNo.slice(-4)})`;
+            cardNoInfo = `${filtered.bankShortName}(尾号${filtered.cardNo.slice(-4)})`;
         }else{
             cardNoInfo = '暂未设置'
         }
