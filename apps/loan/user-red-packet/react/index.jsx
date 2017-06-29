@@ -78,7 +78,7 @@ class Redpacket extends React.Component{
     render(){
         let cardNoInfo;
         let borrowBtnStatus = this.state.borrowBtnStatus;
-        if (borrowBtnStatus >= 2){
+        if (borrowBtnStatus == 2 || borrowBtnStatus == 3 || borrowBtnStatus == 5){
             function isRealNameBindCard(ele) {
                 return ele.isRealNameBindCard == true;
             }
@@ -102,7 +102,7 @@ class Redpacket extends React.Component{
                      <div className="card-title">银行卡</div>
                      <div className="card-branch">{cardNoInfo}</div>
                  </div>
-                 <div className={(borrowBtnStatus >=2 && this.state.withdrawNum >= 50) ? "withdraw-btn": "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
+                 <div className={((borrowBtnStatus ==2 || borrowBtnStatus == 3 || borrowBtnStatus == 5) && this.state.withdrawNum >= 50) ? "withdraw-btn": "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                  <div className="packet-tips">
                      <div className="packet-tips-title">温馨提示</div>
                      <div className="packet-rule">单笔提现金额不低于50元，单日提现次数不超过3次；</div>
