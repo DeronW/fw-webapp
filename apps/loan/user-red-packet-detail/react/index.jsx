@@ -20,10 +20,10 @@ class RedPacketDetail extends React.Component{
             pageSize: 20,
             pageIndex: this.state.page
         }).then(data => {
-            let RedPacketDetailList = data.resultList;
+            let RedPacketDetailList = data.resultList; 
             this.setState({
                 rows: RedPacketDetailList,
-                page: this.state.page + 1,
+                page: this.state.page < data.totalPage?this.state.page + 1:this.state.page=0,
                 hasData: !!RedPacketDetailList.length
             })
             done && done()
