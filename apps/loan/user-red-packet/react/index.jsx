@@ -13,14 +13,14 @@ class Redpacket extends React.Component{
         }
     }
     componentDidMount(){
+        $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`)
+            .then(data => this.setState({borrowBtnStatus:data.borrowBtnStatus}));
+
         $FXH.Post(`${API_PATH}/api/redbag/v1/summary.json`)
             .then(data => this.setState({withdrawNum:data.hasWithdrawAmt,frozenNum:data.freezeAmt,batchGid:data.batchGid}));
 
         $FXH.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`)
             .then(data => this.setState({cashCard:data.userBankList.withdrawBankcard}));
-
-        $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`)
-            .then(data => this.setState({borrowBtnStatus:data.borrowBtnStatus}));
     }
     withdrawHandler = () => {
         $FXH.Post(`${API_PATH}/api/redbag/v1/veriftycode.json`, {
@@ -71,12 +71,14 @@ class Redpacket extends React.Component{
         this.setState({value: e.target.value});
     }
     render(){
-        function isRealNameBindCard(ele) {
-            return ele.isRealNameBindCard == true;
+        let borrowBtnStatus = this.state.borrowBtnStatus;
+        if(borrowBtnStatus == 2 || borrowBtnStatus == 3 || borrowBtnStatus == 5){
+            function isRealNameBindCard(ele) {
+                return ele.isRealNameBindCard == true;
+            }
+            let filtered = this.state.cashCard.filter(isRealNameBindCard)[0];
+            let cardNoInfo = `农行(尾号${filtered.cardNo.slice(-4)})`;
         }
-        let filtered = this.state.cashCard.filter(isRealNameBindCard)[0];
-        let cardNoInfo = `农行(尾号${filtered.cardNo.slice(-4)})`;
-
         return (
             <div className="red-packet-wrapper">
                  <div className="header">
