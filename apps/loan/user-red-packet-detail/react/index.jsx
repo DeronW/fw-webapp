@@ -13,7 +13,7 @@ class RedPacketDetail extends React.Component{
         $FW.Event.touchBottom(this.loadMore);
     }
     loadMore = (done) => {
-        if (!this.state.hasData) return;
+        if (!this.state.hasData) return done && done();
         let user = $FW.Store.getUserDict();
 
         $FXH.Post(`${API_PATH}/api/redbag/v1/list.json`, {
