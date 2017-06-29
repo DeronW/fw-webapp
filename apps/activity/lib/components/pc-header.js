@@ -1,5 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
+import Ajax from '../helpers/request.js'
 
 import InvestGiftPanel from './pop-panel.js'
 import styles from '../css/pc-header.css'
@@ -9,6 +10,7 @@ class PCHeader extends React.Component {
 
     state = {
         isLogin: false,
+        user: {},
         show_gift: false
     }
 
@@ -17,7 +19,8 @@ class PCHeader extends React.Component {
             url: '/api/userState/v1/userState.json'
         }).then(data => {
             this.setState({
-                isLogin: data.isLogin
+                isLogin: data.isLogin,
+                user: data
             })
         })
     }
@@ -26,14 +29,45 @@ class PCHeader extends React.Component {
         this.setState({ show_gift: !this.state.show_gift })
     }
 
-    showDownload = () => { }
-
-    hideDownload = () => { }
+    login = () => {
+        location.href = 'http://passport.9888keji.com/passport/login?sourceSite=jrgc&service=' + location.href;
+    }
 
     render() {
+        let { isLogin, user } = this.state
 
         let GiftPanel = this.state.show_gift &&
-            <InvestGiftPanel closeHandler={this.toggleGift} />
+            <InvestGiftPanel closeHandler={this.toggleGift} />;
+
+        let logout = isLogin &&
+            <a styleName="btn-link"
+                href="http://www.9888keji.com/orderUser/loginout.do">退出</a>
+
+        let user_panel = () => {
+            if (!isLogin) return null;
+
+            let avatar = user.avatar;
+
+            user.sex == '1'
+
+
+            return <div styleName="btn-link">你好，
+                    <div styleName="header-user">
+                    <span>{user.userName}</span>
+                    <img styleName="arrow" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAECAQAAADoz+32AAAAQ0lEQVQI12M48Wf9yzTBNIY0rgVXzvxlmJF45N+W92kqa18c+bdnLsNlhpXl5/+d+n/+/8zEy+xA7mWginP/lhWAWAAL2SHRnw5VoAAAAABJRU5ErkJggg==" />
+
+                    <div styleName="header-user-panel">
+                        <a styleName="user-link" href="http://www.9888keji.com/account/myHome.shtml">
+                            <img src={avatar} />
+                        </a>
+                        <div styleName="header-user-links">
+                            <div>{user.realName}</div>
+                            <a href="http://www.9888keji.com/account/myHome.shtml" styleName="btn-recharge">我的工场</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
 
         return <div styleName="header-placeholder">
             <div styleName="header" style={
@@ -51,25 +85,23 @@ class PCHeader extends React.Component {
                         <img src={require("../images/header/bbs.png")} />
                     </a>
 
-                    <a styleName="btn-link">注册</a>
+                    <a styleName="btn-link" href="/depository/regist/toRegist.shtml?sourceSite=jrgc">注册</a>
                     <div styleName="btn-link-sp"></div>
-                    <a styleName="btn-link">登录</a>
+                    <a styleName="btn-link" onClick={this.login}>登录</a>
                     <div styleName="btn-link-sp"></div>
-                    <a styleName="btn-link"
-                        href="http://www.9888keji.com/orderUser/loginout.do">退出</a>
+
+                    {logout}{user_panel()}
+
                     <div styleName="btn-link-sp"></div>
-                    <a styleName="btn-link btn-download-app" target="_blank"
-                        onMouseEnter={this.showDownload}
-                        onMouseLeave={this.hideDownload}
+                    <div styleName="btn-link btn-download-app" target="_blank"
                         href="http://www.9888keji.com/static/web/app-download/index.html">APP下载
-                        <a styleName="download-app">
+                        <div styleName="download-app">
                             <img src={require('../images/header/app.jpg')} />
                             <a styleName="d-download">立即下载App</a>
                             <a styleName="d-android">Android版下载</a>
                             <a styleName="d-ios">iOS版下载</a>
-                        </a>
-                    </a>
-                    <div styleName="btn-link-sp"></div>
+                        </div>
+                    </div>
                     <a styleName="btn-link" target="_blank"
                         href="http://www.9888keji.com/static/web/guide-cookbook/index.html">玩赚攻略</a>
                     <div styleName="btn-link-sp"></div>

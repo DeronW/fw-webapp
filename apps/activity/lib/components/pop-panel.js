@@ -7,7 +7,7 @@ const InvestGiftPanel = CSSModules(styles, {
     "allowMultiple": true,
     "errorWhenNotFound": false
 })(props => (
-    <div styleName="bg">
+    <div styleName="bg" onClick={props.closeHandler}>
         <div styleName="gift-panel">
             <div styleName="title">邀请返利攻略（自2017年3月8日起）</div>
             <b styleName="btn-close" onClick={props.closeHandler}>&times;</b>
