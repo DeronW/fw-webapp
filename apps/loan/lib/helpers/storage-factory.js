@@ -28,6 +28,7 @@ class StorageFactory {
         // compatiable old way
         dict.token && this.set('userToken', dict.token)
         dict.status && this.set('userStatus', dict.status)
+        dict.phone && this.set('phone',dict.phone)
         dict.invitCode && this.set('invitationCode', dict.invitCode)
         dict.invite_code && this.set('invitationCode', dict.invite_code)
         dict.uid && this.set('uid', dict.uid)
@@ -39,7 +40,7 @@ class StorageFactory {
         })
 
         // compatiable old way
-        this.remove(['userToken', 'userStatus', 'invitationCode', 'uid'])
+        this.remove(['userToken', 'userStatus', 'invitationCode', 'uid', 'phone'])
     }
 
     clear = () => {
@@ -86,6 +87,7 @@ const Storage_this_is_only_for_sample = {
         dict.status && this.set('userStatus', dict.status);
         dict.invitCode && this.set('invitationCode', dict.invitCode);
         dict.uid && this.set('uid', dict.uid);
+        dict.phone && this.set('phone', dict.phone);
     },
 
     getUserDict: function () {
@@ -93,7 +95,8 @@ const Storage_this_is_only_for_sample = {
             token: this.get('userToken'),
             status: this.get('userStatus'),
             invitCode: this.get('invitationCode'),
-            uid: this.get('uid')
+            uid: this.get('uid'),
+            phone:this.get('phone')
         }
     },
 
