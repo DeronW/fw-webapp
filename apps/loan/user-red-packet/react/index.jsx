@@ -91,7 +91,7 @@ class Redpacket extends React.Component{
             <div className="red-packet-wrapper">
                 {$FW.Browser.inIOS() && $FW.Browser.inFXHApp() && <div className="ios-space"></div>}
                  <div className="header">
-                     <div className="arrow" onClick={()=>{$FW.Browser.inApp()?NativeBridge.close():gotoHandler('/static/loan/user/index.html')}}></div>红包账户<a className="details-entry" href="/static/loan/user-red-packet-detail/index.html">红包明细</a>
+                     <div className="arrow" onClick={()=>{$FW.Browser.inFXHApp()?NativeBridge.close():gotoHandler('/static/loan/user/index.html')}}></div>红包账户<a className="details-entry" href="/static/loan/user-red-packet-detail/index.html">红包明细</a>
                  </div>
                  <div className="red-packet-area">
                      <div className="packet-title">可提现(元)</div>
@@ -137,15 +137,8 @@ class Redpacket extends React.Component{
     }
 }
 
-function gotoHandler(link, need_login) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    if ($FW.Browser.inFXHApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
+function gotoHandler(link) {
+    location.href = encodeURI(link);
 }
 
 $FW.DOMReady(() => {
