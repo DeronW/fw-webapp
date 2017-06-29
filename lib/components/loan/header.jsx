@@ -28,10 +28,10 @@ class Header extends React.Component {
             : window.history.back();
     }
 
-    componentDidMount() {
-
-        NativeBridge.setTitle(this.props.title);
-    }
+    // componentDidMount() {
+    //
+    //     NativeBridge.setTitle(this.props.title);
+    // }
 
     render() {
         let fontSize = '36px';
