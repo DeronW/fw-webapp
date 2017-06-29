@@ -32,21 +32,21 @@ class RedPacketDetail extends React.Component{
     render() {
         let statusText = () => {
             console.log(111111111);
-            if(this.rows.redbagStatus == 0){
+            if(this.state.rows.redbagStatus == 0){
                 return <span className="status-text">注册冻结</span>
-            }else if(this.rows.redbagStatus == 1){
+            }else if(this.state.rows.redbagStatus == 1){
                 return <span className="status-text">放款冻结</span>
             }else if(this.rows.redbagStatus == 2){
                 return <span className="status-text">可提现</span>
-            }else if(this.rows.redbagStatus == 3){
+            }else if(this.state.rows.redbagStatus == 3){
                 return <span className="status-text">体现中</span>
-            }else if(this.rows.redbagStatus == 4){
+            }else if(this.state.rows.redbagStatus == 4){
                 return <span className="status-text">已提现</span>
-            }else if(this.rows.redbagStatus == 6){
+            }else if(this.state.rows.redbagStatus == 6){
                 return <span className="status-text">红包过期失效</span>
-            }else if(this.rows.redbagStatus == 7){
+            }else if(this.state.rows.redbagStatus == 7){
                 return <span className="status-text">活动过期失效</span>
-            }else if(this.rows.redbagStatus == 8){
+            }else if(this.state.rows.redbagStatus == 8){
                 return <span className="status-text">首借非掌众失效</span>
             }
         }
