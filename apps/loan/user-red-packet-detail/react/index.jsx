@@ -30,6 +30,28 @@ class RedPacketDetail extends React.Component{
         })
     }
     render() {
+        let statusText = () => {
+            if(this.rows.redbagStatus == 0){
+                return <span className="status-text">注册冻结</span>
+            }else if(this.rows.redbagStatus == 1){
+                return <span className="status-text">放款冻结</span>
+            }else if(this.rows.redbagStatus == 2){
+                return <span className="status-text">可提现</span>
+            }else if(this.rows.redbagStatus == 3){
+                return <span className="status-text">体现中</span>
+            }else if(this.rows.redbagStatus == 4){
+                return <span className="status-text">已提现</span>
+            }else if(this.rows.redbagStatus == 6){
+                return <span className="status-text">红包过期失效</span>
+            }else if(this.rows.redbagStatus == 7){
+                return <span className="status-text">活动过期失效</span>
+            }else if(this.rows.redbagStatus == 8){
+                return <span className="status-text">首借非掌众失效</span>
+            }
+        }
+        let item_test = (item,index) => {
+            
+        }
         // let item_list = (item, index) => {
         //     let repayment;
         //     if (item.repaymentStatus == 0) repayment = '借款失败';
@@ -80,7 +102,8 @@ class RedPacketDetail extends React.Component{
                 <div className="data-list">
                     <div className="list-item">
                         <div className="red-status">
-                            <span className="status-text">可提现</span>
+                            {/*<span className="status-text">可提现</span>*/}
+                             {statusText}
                             <span className="status-num">15</span>
                         </div>
                         <div className="sub-red-status">
