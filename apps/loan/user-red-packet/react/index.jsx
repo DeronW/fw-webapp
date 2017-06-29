@@ -3,26 +3,101 @@ class Redpacket extends React.Component{
         super(props)
         this.state={
             maskShow:false,
+            withdrawNum:'',
+            frozenNum:'',
+            batchGid:'',
+            cashCard:[],
+            borrowBtnStatus:'',
             value:'',
-            remain:60
+            remain:0
         }
     }
+    componentDidMount(){
+        $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`,{
+            productId:1
+        }).then(data => this.setState({borrowBtnStatus:data.borrowBtnStatus}));
+
+        $FXH.Post(`${API_PATH}/api/redbag/v1/summary.json`)
+            .then(data => this.setState({withdrawNum:data.hasWithdrawAmt,frozenNum:data.freezeAmt,batchGid:data.batchGid}));
+
+        $FXH.Post(`${API_PATH}/api/bankcard/v1/bankcardlist.json`)
+            .then(data => this.setState({cashCard:data.userBankList.withdrawBankcard}));
+    }
+    withdrawHandler = () => {
+        $FXH.Post(`${API_PATH}/api/redbag/v1/veriftycode.json`, {
+            batchGid:this.state.batchGid
+        }).then(data => {
+            this.setState({maskShow:true});
+            this.tick();
+        }, e => $FW.Component.Toast(e.message))
+    }
+    tick = () => {
+        this.setState({remain: 60});
+        window.clearInterval(this._timer);
+        this._timer = setInterval(this.countingDown, 1000);
+    }
+    countingDown = () => {
+        if (this.state.remain <= 1) window.clearInterval(this._timer);
+        this.setState({remain: this.state.remain - 1});
+    }
+    getSMSCode = () => {
+        if (this.state.remain <= 0) {
+            this.tick();
+            $FXH.Post(`${API_PATH}/api/redbag/v1/veriftycode.json`,{
+                batchGid:this.state.batchGid
+            }).then(() => {}, e => $FW.Component.Toast(e.message));
+        }
+    }
+    componentWillUnmount() {
+        clearInterval(this._timer);
+    }
+    closePopHandler = () => {
+        this.setState({maskShow:false})
+    }
+    confirmBtnHandler = () => {
+        function isRealNameBindCard(ele) {
+            return ele.isRealNameBindCard == true;
+        }
+        let filtered = this.state.cashCard.filter(isRealNameBindCard)[0];
+        $FXH.Post(`${API_PATH}/api/redbag/v1/apply.json`,{
+            batchGid:this.state.batchGid,
+            verifyCode:this.state.value,
+            withdrawAmt:this.state.withdrawAmt,
+            withdrawCardUuid:filtered.uuid
+        }).then(data => {
+            location.href = `/static/loan/user-red-packet-result/index.html`;
+        }, e => $FW.Component.Toast(e.message));
+    }
+    changeValueHandler = (e) => {
+        this.setState({value: e.target.value});
+    }
     render(){
+        let cardNoInfo;
+        let borrowBtnStatus = this.state.borrowBtnStatus;
+        if (borrowBtnStatus >= 2){
+            function isRealNameBindCard(ele) {
+                return ele.isRealNameBindCard == true;
+            }
+            let filtered = this.state.cashCard.filter(isRealNameBindCard)[0];
+            cardNoInfo = `农行(尾号${filtered.cardNo.slice(-4)})`;
+        }else{
+            cardNoInfo = '暂未设置'
+        }
         return (
             <div className="red-packet-wrapper">
                  <div className="header">
-                     <div className="arrow"></div>红包账户<a className="details-entry" href="/static/loan/user-red-packet-detail/index.html">红包明细</a>
+                     <div className="arrow" onClick={()=>{$FW.Browser.inApp()?NativeBridge.close():gotoHandler('/static/loan/user/index.html')}}></div>红包账户<a className="details-entry" href="/static/loan/user-red-packet-detail/index.html">红包明细</a>
                  </div>
                  <div className="red-packet-area">
                      <div className="packet-title">可提现(元)</div>
-                     <div className="packet-num">10000</div>
-                     <div className="packet-frozen">冻结(元)：15</div>
+                     <div className="packet-num">{this.state.withdrawNum}</div>
+                     <div className="packet-frozen">冻结(元)：{this.state.frozenNum}</div>
                  </div>
                  <div className="withdraw-card">
                      <div className="card-title">银行卡</div>
-                     <div className="card-branch">农行尾号(2333)</div>
+                     <div className="card-branch">{cardNoInfo}</div>
                  </div>
-                 <div className="withdraw-btn">提现</div>
+                 <div className="withdraw-btn" onClick={this.withdrawHandler}>提现</div>
                  <div className="packet-tips">
                      <div className="packet-tips-title">温馨提示</div>
                      <div className="packet-rule">单笔提现金额不低于50元，单日提现次数不超过3次；</div>
@@ -36,8 +111,7 @@ class Redpacket extends React.Component{
                             <div className="verify-popup-close" onClick={this.closePopHandler}></div>
                             <div className="verify-popup-title">短信验证</div>
                             <div className="verify-popup-tip">
-                                {/* 已向手机号(尾号{$FW.Store.get('phone').slice(-4)})发送短信验证码 */}
-                                已向(尾号)预留的手机号发送短信验证码
+                                已向手机号(尾号{$FW.Store.get('phone').slice(-4)})发送短信验证码
                             </div>
                             <div className="verify-input">
                                 <input className="sms-input" type="number" name="number" value={this.state.value}
@@ -55,7 +129,6 @@ class Redpacket extends React.Component{
             </div>
         )
     }
-
 }
 
 function gotoHandler(link, need_login) {
