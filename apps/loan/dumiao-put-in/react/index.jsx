@@ -52,7 +52,7 @@ class MainPanel extends React.Component {
                     let u = $FW.Store.getUserDict();
                     let params = `loanUuid=${data.uuid}&uid=${$FW.Browser.inFXHApp() ? getCookie().uid : u.uid}&sourceType=${SOURCE_TYPE}&token=${$FW.Browser.inFXHApp() ? getCookie().token :u.token}`;
                     let app_params = `loanUuid=${data.uuid}&uid=${$FW.Browser.inFXHApp() ? getCookie().uid : u.uid}&token=${$FW.Browser.inFXHApp() ? getCookie().token :u.token}`;
-                    $FW.Browser.inApp()? NativeBridge.goto(`/api/order/v1/jump.shtml?${app_params}`,false,"分期"):location.href = `/api/order/v1/jump.shtml?${params}`
+                    $FW.Browser.inApp()? NativeBridge.goto(`https://m.easyloan888.com/api/order/v1/jump.shtml?${app_params}`,false,"分期"):location.href = `/api/order/v1/jump.shtml?${params}`
                 }, e => {
                     if (e.code == 20016) $FW.Component.Toast(e.message)
                 })
