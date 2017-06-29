@@ -1,46 +1,64 @@
-class Redpacket extends React.Component{
-    render(){
-        return (
-            <div className="red-packet-wrapper">
-                 <div className="header">
-                     <div className="arrow"></div>红包账户<a className="details-entry">红包明细</a>
-                 </div>
-                 <div className="red-packet-area">
-                     <div className="packet-title">可提现(元)</div>
-                     <div className="packet-num">10000</div>
-                     <div className="packet-frozen">冻结(元)：15</div>
-                 </div>
-                 <div className="withdraw-card">
-                     <div className="card-title">银行卡</div>
-                     <div className="card-branch">农行尾号(2333)</div>
-                 </div>
-                 <div className="withdraw-btn">提现</div>
-                 <div className="packet-tips">
-                     <div className="packet-tips-title">温馨提示</div>
-                     <div className="packet-rule">单笔提现金额不低于50元，单日提现次数不超过3次；</div>
-                     <div className="packet-rule">7*24小时可以提现；</div>
-                     <div className="packet-rule">提现后1-3个工作日到账；</div>
-                     <div className="packet-rule">若有问题，请咨询400-102-0066。</div>
-                 </div>
+function gotoHandler(link) {
+    location.href = encodeURI(link);
+}
 
-
+class LoanResult extends React.Component{
+    render() {
+    return (
+        <div className="loan-result">
+            {$FW.Browser.inAndroid() &&
+            <div className="header">
+                <div className="arrow-left" onClick={() => { $FW.Browser.inJRGCApp() ? NativeBridge.close() : gotoHandler("/static/loan/home/index.html") }}></div>
+                <div className="title">借款结果</div>
             </div>
-        )
-    }
+            }
+            <div className="waiting-result-box">
+                <div className="wrap-box">
+                    <div className="success-icon"><img src="images/success-icon.png" /></div>
+                    <div className="loan-result1">
+                        <div className="icon1"></div>
+                        <div className="icon1-info">提现请求成功，等待银行处理</div>
+                        <div className="time1">6-24 17:51</div>
+                        <div className="line"></div>
+                        <div className="waiting-result">
+                            <div className="icon2"></div>
+                            <div className="icon2-info">预计到账时间</div>
+                            <div className="time2">6-24 17:51</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="btn-wrap">
+                    <div className="credit-btn" onClick={()=>{$FW.Browser.inJRGCApp()? NativeBridge.close():gotoHandler('/static/loan/home/index.html')}}>关闭</div>
+                </div>
+            </div>
+            <div className="fail-result-box dis">
+                <div className="wrap-box">
+                    <div className="fail-icon"><img src="images/fail-icon.png"/></div>
+                    <div className="loan-result4">
+                        <div className="waiting-result">
+                            <div className="icon5"></div>
+                            <div className="icon5-info">提现失败</div>
+                            <div className="icon5-info-btm">系统繁忙，请稍候再试</div>
+                        </div>
+                    </div>
+                </div>
+                <div className="customer-service">
+                    <div className="service-wrap"><img src="images/phone.png" />如有问题请致电：<a
+                        href="tel:400-102-0066">400-102-0066</a></div>
+                </div>
+            </div>
 
+
+        </div>
+    )
+}
 }
 
-function gotoHandler(link, need_login) {
-    if (link.indexOf('://') < 0) {
-        link = location.protocol + '//' + location.hostname + link;
-    }
-    if ($FW.Browser.inFXHApp()) {
-        NativeBridge.goto(link, need_login)
-    } else {
-        location.href = encodeURI(link);
-    }
-}
+const USER = $FW.Store.getUserDict();
+$FW.DOMReady(function () {
+    $FW.Browser.inAndroid() && NativeBridge.hideHeader();
+    $FW.Browser.inIOS() && NativeBridge.setTitle('提现结果');
+    ReactDOM.render(<Header title={'提现结果'} />, HEADER_NODE)
+    ReactDOM.render(<LoanResult/>, CONTENT_NODE);
 
-$FW.DOMReady(() => {
-    ReactDOM.render(<Redpacket />, CONTENT_NODE)
-})
+});
