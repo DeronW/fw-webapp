@@ -41,7 +41,7 @@
 }
 .picture-panel{
     display: table;
-    padding-top: 40px;
+    padding: 40px 0 20px 0;
     font-size: 30px;
     background: #fff;
     color: #555;
