@@ -12,6 +12,12 @@ class RedPacketDetail extends React.Component{
         this.loadMore()
         $FW.Event.touchBottom(this.loadMore);
     }
+    formatTime = (ms) => {
+        let jsonDate = new Date(Number(ms)).toJSON();
+        let YMD = jsonDate.slice(0, 10);
+        let HMS = jsonDate.slice(11, 19);
+        return `${YMD} ${HMS}`;
+    }
     loadMore = (done) => {
         if (!this.state.hasData) return done && done();
         let user = $FW.Store.getUserDict();
@@ -62,7 +68,7 @@ class RedPacketDetail extends React.Component{
                         </div>
                         <div className="sub-red-status">
                             <span className="sub-status-text">{item.remark}</span>
-                            <span className="status-time">{item.createTime}</span>
+                            <span className="status-time">{this.formatTime(item.createTime)}</span>
                         </div>
                     </div>
         }
