@@ -68,7 +68,9 @@ export default class RedBagRecords extends React.Component {
                 {key:"7",value:"活动过期失效"},
                 {key:"8",value:"首借非掌众失效"},
             ]
-            let statusText = (item,index) => {
+
+
+        let statusText = (item,index) => {
             let redNum = item.redbagStatus;
             redNum == item.key && return <span styleName="status-text" key={index}>{item.value}</span>
         }
