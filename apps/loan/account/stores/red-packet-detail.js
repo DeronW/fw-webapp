@@ -6,7 +6,8 @@ import * as $FW from 'fw-javascripts'
 export default class RedPacketDetail {
 
     constructor(Post) {
-        this.Post = Post
+        this.Post = Post;
+        this.API_PATH = 'https://localhost/fake-api';
 
         extendObservable(this, {
             page: 1,
@@ -18,7 +19,7 @@ export default class RedPacketDetail {
         if (!this.hasData) return done && done();
         // let user = $FW.Store.getUserDict();
 
-        return this.Post(`${API_PATH}/api/redbag/v1/list.json`, {
+        return this.Post(`${this.API_PATH}/api/redbag/v1/list.json`, {
             pageSize: 20,
             pageIndex: this.page
         }).then(data => {
