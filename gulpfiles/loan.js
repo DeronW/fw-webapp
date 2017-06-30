@@ -23,9 +23,9 @@ const USER_PAGES = [
     'user-weixin-fxhapp',
     'user-weixin-jrgcapp',
     'user-weixin-new-download',
-    'user-red-packet', //红包
-    'user-red-packet-detail', //红包明细
-    'user-red-packet-result'
+    // 'user-red-packet', //红包  moved to account SPA page
+    // 'user-red-packet-detail', //红包明细
+    // 'user-red-packet-result'
 
 ]
 
