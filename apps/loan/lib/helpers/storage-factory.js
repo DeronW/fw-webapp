@@ -1,7 +1,8 @@
 import { Utils } from 'fw-javascripts'
 
 class StorageFactory {
-    constructor() {
+    constructor(Browser) {
+        this.Browser = Browser
         this.storage = window.localStorage
     }
 
@@ -28,7 +29,7 @@ class StorageFactory {
         // compatiable old way
         dict.token && this.set('userToken', dict.token)
         dict.status && this.set('userStatus', dict.status)
-        dict.phone && this.set('phone',dict.phone)
+        dict.phone && this.set('phone', dict.phone)
         dict.invitCode && this.set('invitationCode', dict.invitCode)
         dict.invite_code && this.set('invitationCode', dict.invite_code)
         dict.uid && this.set('uid', dict.uid)
@@ -53,6 +54,13 @@ class StorageFactory {
         ['token', 'status', 'invite_code', 'uid', 'phone'].forEach(k => {
             r[k] = this.get(`_$user_${k}`)
         })
+
+        // app 会把 登陆用的 token 和 uid 写入cookie中
+        if (this.Browser.inFXHApp()) {
+            if (Utils.Cookie.get('uid')) r['uid'] = Utils.Cookie.get('uid')
+            if (Utils.Cookie.get('token')) r['token'] = Utils.Cookie.get('token')
+        }
+
         return r
     }
 
@@ -96,7 +104,7 @@ const Storage_this_is_only_for_sample = {
             status: this.get('userStatus'),
             invitCode: this.get('invitationCode'),
             uid: this.get('uid'),
-            phone:this.get('phone')
+            phone: this.get('phone')
         }
     },
 
