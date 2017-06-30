@@ -1,0 +1,92 @@
+html,
+body {
+    background-color: #f0f0f0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+.data-list {
+    width: 100%;
+    height: auto;
+    background: #fff;
+}
+
+.list-item {
+    margin-left: 32px;
+    padding: 24px 26px 24px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.red-status {
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.red-status .status-text {
+    color: #000;
+    font-size: 32px;
+    float: left;
+}
+
+.red-status .status-num {
+    float: right;
+    font-size: 36px;
+}
+
+.sub-red-status {
+    overflow: hidden;
+    color: #999;
+    font-size: 27px;
+}
+
+.sub-red-status .sub-status-text {
+    float: left;
+}
+
+.sub-red-status .status-time {
+    float: right;
+}
+
+.data-completion {
+    font-size: 32px;
+    color: #999;
+    text-align: center;
+    line-height: 80px;
+}
+
+.refresh {
+    width: 440px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.logo-container {
+    float: left;
+    margin-right: 10px;
+}
+
+.right-text {
+    margin-top: 14px;
+    color: #aaa;
+}
+
+.refresh-text {
+    font-size: 32px;
+}
+
+.refresh-time {
+    font-size: 24px;
+}
+
+.no-data-img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
