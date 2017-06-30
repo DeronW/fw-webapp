@@ -5,7 +5,7 @@ import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
 import { Storage, NativeBridge } from '../../lib/helpers'
 import styles from '../css/redbag.css'
-import { Components } from 'fw-javascripts'
+import { Components, BrowserFactory } from 'fw-javascripts'
 
 @inject('redbag')
 @observer
@@ -73,6 +73,7 @@ class RedBag extends React.Component {
 
     render() {
         let { redbag, history } = this.props
+        let Browser = new BrowserFactory(navigator.userAgent, 'Easyloan888');
         let ableToClick = redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
 
         let cardNoInfo = redbag.default_card ?
@@ -105,6 +106,7 @@ class RedBag extends React.Component {
         }
 
         return <div>
+            {Browser.inIOS && <div styleName="ios-space"></div>}
             <Header title="红包账户" history={history}/>
             <div styleName="details-entry">
                 <Link to="/redbag-records">

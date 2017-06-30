@@ -202,3 +202,7 @@ input{
     margin:34px auto 0;
     float:left;
 }
+.ios-space{
+    height:22px;
+    background:#fff;
+}
