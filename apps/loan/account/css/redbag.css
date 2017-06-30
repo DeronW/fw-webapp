@@ -92,7 +92,7 @@ input{
     font-size:30px;
     margin-bottom:20px;
 }
-.packet-rule{
+.packet-rule, .packet-rule-item{
     font-size:28px;
     line-height:42px;
 }
