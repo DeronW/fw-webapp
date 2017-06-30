@@ -38,14 +38,13 @@ export default class RedBag {
         }).then(() => {
             // 用户是否可提现状态
             return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 })
-                .then(data => {
-                    this.borrowBtnStatus = data.borrowBtnStatus
-                })
+        }).then(data => {
+            this.borrowBtnStatus = data.borrowBtnStatus
         }).then(() => {
             // 提现银行卡号
-            this.Post('/api/bankcard/v1/bankcardlist.json').then(data => {
-                this.cardList = data.userBankList.withdrawBankcard;
-            })
+            return this.Post('/api/bankcard/v1/bankcardlist.json')
+        }).then(data => {
+            this.cardList = data.userBankList.withdrawBankcard;
         })
     }
 
