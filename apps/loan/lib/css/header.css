@@ -1,5 +1,12 @@
 .header-placeholder {
     display: block;
+    height:88px;
+    width:100%;
+    background:#fff;
+}
+.header-placeholder-inIOSApp {
+    display: block;
+    height:110px;
     width:100%;
     background:#fff;
 }
