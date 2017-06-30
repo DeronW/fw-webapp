@@ -1,0 +1,72 @@
+.july-mobile-box {
+    width: 100%;
+    height: auto;
+    background: #205494;
+    font-size: 24px;
+}
+
+.m-banner {
+    width: 100%;
+    height: 660px;
+    position: relative;
+    background: url("../images/mobile/m-banner.png") no-repeat center bottom;
+    margin-bottom: 70px;
+}
+
+.banner-item {
+    display: block;
+    position: absolute;
+    cursor: pointer;
+    width: 85px;
+    height: 128px;
+}
+
+.m-anchor-one {
+    top: 230px;
+    left: 233px;
+    -webkit-animation: cloudMoveMobile 1.8s 0.2s infinite ease-in-out;
+    -o-animation: cloudMoveMobile 1.8s 0.2s infinite ease-in-out;
+    -ms-animation: cloudMoveMobile 1.8s 0.2s infinite ease-in-out;
+    -moz-animation: cloudMoveMobile 1.8s 0.2s infinite ease-in-out;
+    animation: cloudMoveMobile 1.8s 0.2s infinite ease-in-out;
+}
+
+.m-anchor-two {
+    top: 235px;
+    right: 157px;
+    -webkit-animation: cloudMoveMobile 1.5s 0.2s infinite ease-in-out;
+    -o-animation: cloudMoveMobile 1.5s 0.2s infinite ease-in-out;
+    -ms-animation: cloudMoveMobile 1.5s 0.2s infinite ease-in-out;
+    -moz-animation: cloudMoveMobile 1.5s 0.2s infinite ease-in-out;
+    animation: cloudMoveMobile 1.5s 0.2s infinite ease-in-out;
+}
+
+.m-anchor-three {
+    top: 335px;
+    left: 97px;
+    -webkit-animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
+    -o-animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
+    -ms-animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
+    -moz-animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
+    animation: cloudMoveMobile 2s 0.2s infinite ease-in-out;
+}
+
+.m-anchor-four {
+    top: 415px;
+    left: 287px;
+    -webkit-animation: cloudMoveMobile 1.7s 0.4s infinite ease-in-out;
+    -o-animation: cloudMoveMobile 1.7s 0.4s infinite ease-in-out;
+    -ms-animation: cloudMoveMobile 1.7s 0.4s infinite ease-in-out;
+    -moz-animation: cloudMoveMobile 1.7s 0.4s infinite ease-in-out;
+    animation: cloudMoveMobile 1.7s 0.4s infinite ease-in-out;
+}
+
+.m-anchor-five {
+    top: 377px;
+    right: 135px;
+    -webkit-animation: cloudMoveMobile 1.4s 0.3s infinite ease-in-out;
+    -o-animation: cloudMoveMobile 1.4s 0.3s infinite ease-in-out;
+    -ms-animation: cloudMoveMobile 1.4s 0.3s infinite ease-in-out;
+    -moz-animation: cloudMoveMobile 1.4s 0.3s infinite ease-in-out;
+    animation: cloudMoveMobile 1.4s 0.3s infinite ease-in-out;
+}

@@ -13,7 +13,7 @@ class JulyMobile extends React.Component {
     }
 
     popStatusHandler = () => {
-        let {isLogin,timestamp} = this.props
+        let {isLogin, timestamp} = this.props
         let july_start_time = 1499875200000;//2017-07-13 00:00:00  时间戳
         let july_end_time = 1502726400000;//2017-08-15 00:00:00 时间戳
         console.log(timestamp)
@@ -28,10 +28,19 @@ class JulyMobile extends React.Component {
         }
     }
 
+    startmove = (x, y) => {
+        window.scrollTo(x, y)
+    }
+
     render() {
-        return <div>
+        return <div styleName="july-mobile-box">
             <MobileHeader/>
-            <div className="m-banner">
+            <div styleName="m-banner">
+                <img src={require("../images/mobile/m-anchor-1.png")} styleName="banner-item m-anchor-one" onClick={() => this.startmove(0, 700)}/>
+                <img src={require("../images/mobile/m-anchor-2.png")} styleName="banner-item m-anchor-two" onClick={() => this.startmove(0, 3200)}/>
+                <img src={require("../images/mobile/m-anchor-3.png")} styleName="banner-item m-anchor-three" onClick={() => this.startmove(0, 2540)}/>
+                <img src={require("../images/mobile/m-anchor-4.png")} styleName="banner-item m-anchor-four" onClick={() => this.startmove(0, 2000)}/>
+                <img src={require("../images/mobile/m-anchor-5.png")} styleName="banner-item m-anchor-five" onClick={() => this.startmove(0, 5750)}/>
             </div>
         </div>
     }
