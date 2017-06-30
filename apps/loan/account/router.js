@@ -11,7 +11,7 @@ import Login from './pages/login.js'
 import SetPassword from './pages/set-password.js'
 
 import RedBag from './pages/red-bag.js'
-import RedPacketDetail from './pages/red-packet-detail.js'
+import RedBagRecords from './pages/red-bag-records.js'
 import RedPacketResult from './pages/red-packet-result.js'
 import BankCard from './pages/bank-card.js'
 import BankCardAdd from './pages/bank-card-add.js'
@@ -25,7 +25,7 @@ export default (stores) => {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/set-password' component={SetPassword} />
                 <Route exact path='/red-bag' component={RedBag} />
-                <Route exact path='/red-packet-detail' component={RedPacketDetail} />
+                <Route exact path='/pages/red-bag-records' component={RedBagRecords} />
                 <Route exact path='/red-packet-result' component={RedPacketResult} />
                 <Route exact path='/bank-card' component={BankCard} />
                 <Route exact path='/bank-card-add' component={BankCardAdd} />
