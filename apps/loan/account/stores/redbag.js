@@ -13,10 +13,10 @@ export default class RedBag {
             hasWithdrawAmt: '',
             cardList: [],
             borrowBtnStatus: '',
-            applyTimeStr:'',
-            preAccountTimeStr:'',
-            failReason:'',
-            recoreds: {
+            applyTimeStr: '',
+            preAccountTimeStr: '',
+            failReason: '',
+            records: {
                 page: 1,
                 rows: [],
                 hasData: true
@@ -26,26 +26,26 @@ export default class RedBag {
 
     @computed get default_card_number() {
         let filtered = this.cardList.filter(e => e.isRealNameBindCard === true);
-        return filtered[0] && {bankShortName:filtered[0].bankShortName, uuid: filtered[0].uuid, cardNo: filtered[0].cardNo}
+        return filtered[0] && { bankShortName: filtered[0].bankShortName, uuid: filtered[0].uuid, cardNo: filtered[0].cardNo }
     }
 
-    fetch_packet_num = () => {
-        return this.Post('/api/redbag/v1/summary.json').then(data => {
+    fetch_user_redbag = () => {
+        this.Post('/api/redbag/v1/summary.json').then(data => {
+            // 红包数量
             this.batchGid = data.batchGid;
             this.freezeAmt = data.freezeAmt;
             this.hasWithdrawAmt = data.hasWithdrawAmt;
-        })
-    }
-
-    fetch_user_status = () => {
-        return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 }).then(data => {
-            this.borrowBtnStatus = data.borrowBtnStatus;
-        })
-    }
-
-    fetch_bankcard_list = () => {
-        return this.Post('/api/bankcard/v1/bankcardlist.json').then(data => {
-            this.cardList = data.userBankList.withdrawBankcard;
+        }).then(() => {
+            // 用户是否可提现状态
+            return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 })
+                .then(data => {
+                    this.borrowBtnStatus = data.borrowBtnStatus
+                })
+        }).then(() => {
+            // 提现银行卡号
+            this.Post('/api/bankcard/v1/bankcardlist.json').then(data => {
+                this.cardList = data.userBankList.withdrawBankcard;
+            })
         })
     }
 
@@ -61,7 +61,7 @@ export default class RedBag {
             verifyCode: value,
             withdrawAmt: this.withdrawAmt,
             withdrawCardUuid: uuid
-        }).then(data=>{
+        }).then(data => {
             history.push('/red-bag-result');
             this.applyTimeStr = data.applyTimeStr;
             this.preAccountTimeStr = data.preAccountTimeStr;
@@ -71,7 +71,7 @@ export default class RedBag {
         })
     }
     // 明细页下拉加载更多
-     loadMore = (done) => {
+    loadMore = (done) => {
         if (!this.records.hasData) return done && done();
         // let user = $FW.Store.getUserDict();
 
