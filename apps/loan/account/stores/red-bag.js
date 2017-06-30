@@ -12,7 +12,7 @@ export default class RedBag {
             freezeAmt: '',
             hasWithdrawAmt: '',
             cardList: [],
-            borrowBtnStatus: ''
+            borrowBtnStatus: '',
             recoreds: {
                 page: 1,
                 rows: [],
