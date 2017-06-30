@@ -11,9 +11,11 @@ const Header = CSSModules(styles, {
 })(props => {
     if (!Theme.get('header')) return null;
 
+    let goBack = props.goBack || (props.history && props.history.goBack)
+
     return <div styleName="header-placeholder">
         <div styleName="header">
-            <a styleName="btn-back" onClick={props.history.goBack}>
+            <a styleName="btn-back" onClick={goBack}>
                 <div styleName="arm-up"></div>
                 <div styleName="arm-down"></div>
             </a>
