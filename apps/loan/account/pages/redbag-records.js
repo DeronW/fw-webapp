@@ -70,19 +70,18 @@ export default class RedBagRecords extends React.Component {
         };
 
 
-        let statusText = (item) => <span styleName="status-text">{text[item.redbagStatus]}</span>
+        let statusText = (item) => <span styleName="sub-status-text">{text[item.redbagStatus]}</span>
         
         let {rows, hasData} = this.props.redbag.records;
 
         let item_list = (item,index) => {
             return <div styleName="list-item">
                         <div styleName="red-status">
-                            {item.detailStatusStr}
-                            
+                            <span styleName="status-text">{item.detailStatusStr}</span>
                             <span styleName="status-num">{item.redbagAmt}</span>
                         </div>
                         <div styleName="sub-red-status">
-                            <span styleName="sub-status-text">{rows.map(statusText)}</span>
+                            {rows.map(statusText)}
                             <span styleName="status-time">{this.formatTime(item.createTime)}</span>
                         </div>
                     </div>
