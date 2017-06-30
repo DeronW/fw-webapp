@@ -1,6 +1,7 @@
 import { extendObservable, computed } from 'mobx'
 import { Components } from 'fw-javascripts'
 import { Storage } from '../../lib/helpers'
+import * as $FW from 'fw-javascripts'
 
 export default class RedPacketDetail {
 
