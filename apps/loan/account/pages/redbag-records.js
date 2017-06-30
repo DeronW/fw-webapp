@@ -86,6 +86,11 @@ export default class RedBagRecords extends React.Component {
                         </div>
                     </div>
         }
+        // 没数据的空页面
+        let empty = <div styleName="no-data-box">
+            <img styleName="no-data-img" src={require("../images/no-data.png")} />
+            <p styleName="no-data-desc">暂无数据</p>
+        </div>;
         return <div>
             <Header title="红包明细" history = {history}/>
             <div>
@@ -95,7 +100,7 @@ export default class RedBagRecords extends React.Component {
                 </div>
                 {/*已加载完全部数据提示*/}
                 {hasData && <div styleName="data-completion">已加载完全部数据</div>}
-                {/*{rows.length === 0 && !hasData && empty}*/}
+                {rows.length === 0 && !hasData && empty}
             </div>
         </div>
     }
