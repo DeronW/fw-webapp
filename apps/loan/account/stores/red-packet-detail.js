@@ -13,7 +13,7 @@ export default class RedPacketDetail {
             hasData: true
         })
     }
-    @computed get loadMore(done) {
+    loadMore = (done) => {
         if (!this.state.hasData) return done && done();
         let user = $FW.Store.getUserDict();
 
