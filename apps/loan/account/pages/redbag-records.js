@@ -36,7 +36,7 @@ export default class RedBagRecords extends React.Component {
     render(){
         // 判断红包状态
         let statusText = (item) => {
-            let redNum = parseInt(item.redbagStatus);
+            let redNum = item.redbagStatus;
             if(redNum == 0){
                 return <span styleName="status-text">注册冻结</span>
             }else if(redNum ==1){
