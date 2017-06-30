@@ -3,7 +3,7 @@ import { Components } from 'fw-javascripts'
 import { Storage } from '../../lib/helpers'
 import * as $FW from 'fw-javascripts'
 
-export default class RedBag {
+export default class Redbag {
     constructor(Post) {
         this.Post = Post
 
@@ -24,9 +24,14 @@ export default class RedBag {
         })
     }
 
-    @computed get default_card_number() {
-        let filtered = this.cardList.filter(e => e.isRealNameBindCard === true);
-        return filtered[0] && { bankShortName: filtered[0].bankShortName, uuid: filtered[0].uuid, cardNo: filtered[0].cardNo }
+    @computed get default_card() {
+        let filtered = this.cardList.filter(e => e.isRealNameBindCard === true),
+            card = filtered[0];
+
+        return card && {
+            uuid: card.uuid,
+            text: `${card.bankShortName}(尾号${card.cardNo.slice(-4)})`
+        }
     }
 
     fetch_user_redbag = () => {
@@ -40,6 +45,7 @@ export default class RedBag {
             return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 })
         }).then(data => {
             this.borrowBtnStatus = data.borrowBtnStatus
+            // return new Promise(resolve => resolve())
         }).then(() => {
             // 提现银行卡号
             return this.Post('/api/bankcard/v1/bankcardlist.json')
@@ -51,7 +57,7 @@ export default class RedBag {
     getSMSCode = () => {
         return this.Post('/api/redbag/v1/veriftycode.json', {
             batchGid: this.batchGid
-        }).then(data => { })
+        })
     }
 
     withdrawConfirm = (value, uuid, history) => {

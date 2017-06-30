@@ -7,7 +7,7 @@ import { Storage } from '../../lib/helpers'
 import styles from '../css/red-bag.css'
 import { Components } from 'fw-javascripts'
 
-@inject('red_bag')
+@inject('redbag')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class RedBag extends React.Component {
@@ -22,14 +22,14 @@ class RedBag extends React.Component {
 
     componentDidMount() {
         // document.title = '红包账户'
-        this.props.red_bag.fetch_user_redbag()
+        this.props.redbag.fetch_user_redbag()
     }
 
     withdrawHandler = () => {
-        let ableToClick = this.props.red_bag.borrowBtnStatus >= 2 && this.props.red_bag.hasWithdrawAmt >= 50;
+        let ableToClick = this.props.redbag.borrowBtnStatus >= 2 && this.props.redbag.hasWithdrawAmt >= 50;
         if (ableToClick) {
             this.setState({ maskShow: true });
-            this.props.red_bag.getSMSCode();
+            this.props.redbag.getSMSCode();
             this.startCounting();
         }
     }
@@ -58,29 +58,26 @@ class RedBag extends React.Component {
 
     getSMSCode = () => {
         this.startCounting()
-        this.props.red_bag.getSMSCode();
+        this.props.redbag.getSMSCode();
     }
 
     confirmBtnHandler = () => {
-        let { red_bag, history } = this.props
-        let uuid = red_bag.default_card_number.uuid;
+        let { redbag, history } = this.props
+        let uuid = redbag.default_card.uuid;
         let value = this.state.sms_code;
         let err
         if (!value) err = '请输入验证码'
         if (err) return Components.showToast(err)
-        red_bag.withdrawConfirm(value, uuid, history);
+        redbag.withdrawConfirm(value, uuid, history);
     }
 
     render() {
-        let { red_bag } = this.props
-        let cardNoInfo;
-        let ableToClick = red_bag.borrowBtnStatus >= 2 && red_bag.hasWithdrawAmt >= 50;
+        let { redbag } = this.props
+        let ableToClick = redbag.borrowBtnStatus >= 2 && redbag.hasWithdrawAmt >= 50;
 
-        if (this.props.red_bag.borrowBtnStatus >= 2) {
-            cardNoInfo = `${red_bag.default_card_number.bankShortName}(尾号${red_bag.default_card_number.cardNo.slice(-4)})`;
-        } else {
-            cardNoInfo = '暂未设置'
-        }
+        let cardNoInfo = redbag.borrowBtnStatus >= 2 && redbag.default_card ?
+            redbag.default_card.text : '暂未设置';
+
         return <div>
             <Header title="红包账户" />
             <div styleName="details-entry">
@@ -91,8 +88,8 @@ class RedBag extends React.Component {
             <div styleName="red-packet-wrapper">
                 <div styleName="red-packet-area">
                     <div styleName="packet-title">可提现(元)</div>
-                    <div styleName="packet-num">{this.props.red_bag.hasWithdrawAmt}</div>
-                    <div styleName="packet-frozen">冻结(元)：{this.props.red_bag.freezeAmt}</div>
+                    <div styleName="packet-num">{this.props.redbag.hasWithdrawAmt}</div>
+                    <div styleName="packet-frozen">冻结(元)：{this.props.redbag.freezeAmt}</div>
                 </div>
                 <div styleName="withdraw-card">
                     <div styleName="card-title">银行卡</div>

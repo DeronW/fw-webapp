@@ -6,10 +6,11 @@ import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Header } from '../../lib/components'
 
-import * as $FWC from 'fw-components'
 import * as $FW from 'fw-javascripts'
 
-@inject("red_bag") @observer @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@inject("redbag")
+@observer
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class RedBagRecords extends React.Component {
     static onEnter() {
         document.title = "红包明细";
@@ -22,9 +23,9 @@ export default class RedBagRecords extends React.Component {
         // }
     }
     componentDidMount() {
-        let {history,red_bag} = this.props;
-        red_bag.loadMore(null)
-        $FW.Event.touchBottom(red_bag.loadMore);
+        let {history,redbag} = this.props;
+        redbag.loadMore(null)
+        $FW.Event.touchBottom(redbag.loadMore);
     }
     formatTime = (ms) => {
         let jsonDate = new Date(Number(ms)).toJSON();
@@ -56,7 +57,7 @@ export default class RedBagRecords extends React.Component {
         }
 
 
-        let {rows, hasData} = this.props.red_bag.records;
+        let {rows, hasData} = this.props.redbag.records;
 
         let item_list = (item,index) => {
             return <div styleName="list-item">
