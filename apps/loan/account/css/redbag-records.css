@@ -90,3 +90,7 @@ img {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
+.no-data-desc {
+    margin-top: 20px;
+}
