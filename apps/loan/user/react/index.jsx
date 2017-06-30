@@ -90,24 +90,26 @@ class MajorUserInfo extends React.Component {
             link_a: null,
             link_b: null,
             link_c: '/static/loan/bill/index.html#2',
-            link_d: '/static/loan/account/#/red-bag',
+            link_d: null,
             tips: null
         }
     }
     componentDidMount() {
-        let link_a, link_b;
+        let link_a, link_b, link_d;
         $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
             productId: 1
         }).then(data => {
             let st = data.borrowBtnStatus,
-                link_a = '/static/loan/user-info/index.html',
-                link_b = '/static/loan/user-card-management/index.html';
+                link_a = '/static/loan/user-info/index.html'
+                link_b = '/static/loan/user-card-management/index.html'
+                link_d = '/static/loan/account/#/redbag'
             if (st === 1) { // 未实名
-                link_a = link_b = '/static/loan/user-card-set/index.html'
+                link_a = link_b = link_d = '/static/loan/user-card-set/index.html'
             }
             this.setState({
                 link_a: link_a,
                 link_b: link_b,
+                link_d: link_d,
                 tips: st === 101 ? '设置提现卡处理中，请稍等' : false, // 实名中
             })
         })

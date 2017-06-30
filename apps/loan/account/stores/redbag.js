@@ -8,6 +8,8 @@ export default class Redbag {
         this.Post = Post
 
         extendObservable(this, {
+            minWithdrawAmt:'',
+            instruction:'',
             batchGid: '',
             freezeAmt: '',
             hasWithdrawAmt: '',
@@ -40,6 +42,8 @@ export default class Redbag {
             this.batchGid = data.batchGid;
             this.freezeAmt = data.freezeAmt;
             this.hasWithdrawAmt = data.hasWithdrawAmt;
+            this.minWithdrawAmt = data.minWithdrawAmt;
+            this.instruction = data.instruction;
         }).then(() => {
             // 用户是否可提现状态
             return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 })
