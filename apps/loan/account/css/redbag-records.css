@@ -84,13 +84,15 @@ img {
     font-size: 24px;
 }
 
+.no-data-box {
+    text-align: center;
+}
+
 .no-data-img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: 200px;
 }
 
 .no-data-desc {
+    font-size: 36px;
     margin-top: 20px;
 }

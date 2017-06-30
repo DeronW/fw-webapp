@@ -70,3 +70,48 @@
     -moz-animation: cloudMoveMobile 1.4s 0.3s infinite ease-in-out;
     animation: cloudMoveMobile 1.4s 0.3s infinite ease-in-out;
 }
+
+.m-coupon {
+    padding-bottom: 164px;
+    height: 100%;
+}
+
+.m-c-title {
+    text-align: center;
+    width: 100%;
+    height: auto;
+}
+
+.m-c-tips {
+    width: 620px;
+    height: 60px;
+    margin: 20px auto 0;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    line-height: 60px;
+    background: url("../images/mobile/m-coupon-tipsbg.png") no-repeat center;
+}
+
+.m-c-text {
+    width: 618px;
+    height: 300px;
+    background: url("../images/mobile/m-coupon-textbg.png") no-repeat center;
+    margin: 66px auto 0;
+    text-align: center;
+}
+
+.m-c-des {
+    width: 596px;
+    height: 163px;
+    margin: 40px auto;
+    background: url("../images/mobile/m-coupon-gui.png") no-repeat center;
+}
+
+.des-text {
+    font-size: 26px;
+    margin-top: 0;
+    padding-top: 46px;
+    color: #677ba8;
+    padding-left: 52px;
+}
