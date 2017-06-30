@@ -61,9 +61,12 @@ class RedBag extends React.Component {
 
     render() {
         let {red_bag} = this.props
-        let cardNoInfo;
         let borrowBtnStatus = red_bag.borrowBtnStatus;
-        if (borrowBtnStatus == 2 || borrowBtnStatus == 3 || borrowBtnStatus == 5){
+        let cardNoInfo;
+        let canWithdrawStatus = borrowBtnStatus ==2 || borrowBtnStatus == 3 || borrowBtnStatus == 5;
+        let ableToClick =  canWithdrawStatus && red_bag.withdrawNum >= 50;
+
+        if (canWithdrawStatus){
             function isRealNameBindCard(ele) {
                 return ele.isRealNameBindCard == true;
             }
@@ -89,7 +92,7 @@ class RedBag extends React.Component {
                     <div styleName="card-title">银行卡</div>
                     <div styleName="card-branch">{cardNoInfo}</div>
                 </div>
-                <div styleName={((borrowBtnStatus ==2 || borrowBtnStatus == 3 || borrowBtnStatus == 5) && red_bag.withdrawNum >= 50) ? "withdraw-btn": "withdraw-gray-btn"} onClick={this.withdrawHandler()}>提现</div>
+                <div styleName={ableToClick ? "withdraw-btn": "withdraw-gray-btn"} onClick={this.withdrawHandler()}>提现</div>
                 <div styleName="packet-tips">
                     <div styleName="packet-tips-title">温馨提示</div>
                     <div styleName="packet-rule"><span styleName="dot"></span>单笔提现金额不低于50元，单日提现次数不超过3次；</div>
@@ -107,10 +110,10 @@ class RedBag extends React.Component {
                             已向手机号(尾号{$FW.Store.get('phone').slice(-4)})发送短信验证码
                         </div>
                         <div className="verify-input">
-                            <input className="sms-input" type="number" name="number" value={this.state.value}
+                            <input className="sms-input" type="number" name="number" value={this.state.sms_code}
                                    placeholder="输入验证码" onChange={this.changeValueHandler}/>
                             <span className="btn-countdown" onClick={this.getSMSCode}>
-                                {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
+                                {this.state.count > 0 ? this.state.count + 's' : '获取验证码'}</span>
                         </div>
                         <div className="btn-list">
                             <div className="cancel-btn" onClick={this.closePopHandler}>取消</div>
