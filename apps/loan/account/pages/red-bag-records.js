@@ -56,7 +56,7 @@ export default class RedBagRecords extends React.Component {
         }
 
 
-        let {rows, hasData} = this.props.red_bag;
+        let {rows, hasData} = this.props.red_bag.records;
 
         let item_list = (item,index) => {
             return <div styleName="list-item">

@@ -72,17 +72,17 @@ export default class RedBag {
     }
     // 明细页下拉加载更多
      loadMore = (done) => {
-        if (!this.recoreds.hasData) return done && done();
+        if (!this.records.hasData) return done && done();
         // let user = $FW.Store.getUserDict();
 
         return this.Post(`/api/redbag/v1/list.json`, {
             pageSize: 20,
-            pageIndex: this.recoreds.page
+            pageIndex: this.records.page
         }).then(data => {
             let RedPacketDetailList = data.resultList;
-            this.recoreds.rows = RedPacketDetailList;
-            this.recoreds.page = this.recoreds.page < data.totalPage ? this.recoreds.page + 1 : this.recoreds.page = 0;
-            this.recoreds.hasData = !!RedPacketDetailList.length;
+            this.records.rows = RedPacketDetailList;
+            this.records.page = this.records.page < data.totalPage ? this.records.page + 1 : this.records.page = 0;
+            this.records.hasData = !!RedPacketDetailList.length;
             done && done()
         })
     }
