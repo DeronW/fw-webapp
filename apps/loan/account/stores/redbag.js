@@ -60,19 +60,18 @@ export default class Redbag {
         })
     }
 
-    withdrawConfirm = (value, uuid, history) => {
+    withdrawConfirm = (value, uuid) => {
         return this.Post('/api/redbag/v1/apply.json', {
             batchGid: this.batchGid,
             verifyCode: value,
             withdrawAmt: this.withdrawAmt,
             withdrawCardUuid: uuid
         }).then(data => {
-            history.push('/red-bag-result');
             this.applyTimeStr = data.applyTimeStr;
             this.preAccountTimeStr = data.preAccountTimeStr;
         }, e => {
-            history.push('/red-bag-result');
-            this.failReason = e.message;
+            this.failReason = e.message
+            return new Promise(s => s())
         })
     }
     // 明细页下拉加载更多

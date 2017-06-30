@@ -11,13 +11,10 @@ import { Components } from 'fw-javascripts'
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class RedBag extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            maskShow: false,
-            sms_code: '',
-            count: 0,
-        }
+    state = {
+        maskShow: false,
+        sms_code: '',
+        count: 0,
     }
 
     componentDidMount() {
@@ -27,6 +24,7 @@ class RedBag extends React.Component {
 
     withdrawHandler = () => {
         let ableToClick = this.props.redbag.borrowBtnStatus >= 2 && this.props.redbag.hasWithdrawAmt >= 50;
+
         if (ableToClick) {
             this.setState({ maskShow: true });
             this.props.redbag.getSMSCode();
@@ -68,7 +66,9 @@ class RedBag extends React.Component {
         let err
         if (!value) err = '请输入验证码'
         if (err) return Components.showToast(err)
-        redbag.withdrawConfirm(value, uuid, history);
+        redbag.withdrawConfirm(value, uuid).then(() => {
+            history.push('/redbag-result')
+        });
     }
 
     render() {
@@ -78,10 +78,37 @@ class RedBag extends React.Component {
         let cardNoInfo = redbag.borrowBtnStatus >= 2 && redbag.default_card ?
             redbag.default_card.text : '暂未设置';
 
+
+        let pop = () => {
+            if (!this.state.maskShow) return;
+
+            return <div styleName="mask">
+                <div styleName="verify-popup">
+                    <div styleName="verify-popup-wrap">
+                        <div styleName="verify-popup-close" onClick={this.closePopHandler}></div>
+                        <div styleName="verify-popup-title">短信验证</div>
+                        <div styleName="verify-popup-tip">
+                            已向手机号(尾号{Storage.get('phone').slice(-4)})发送短信验证码
+                        </div>
+                        <div styleName="verify-input">
+                            <input styleName="sms-input" type="number" name="number" value={this.state.sms_code}
+                                placeholder="输入验证码" onChange={this.changeValueHandler} />
+                            <span styleName="btn-countdown" onClick={this.getSMSCode}>
+                                {this.state.count > 0 ? this.state.count + 's' : '获取验证码'}</span>
+                        </div>
+                        <div styleName="btn-list">
+                            <div styleName="cancel-btn" onClick={this.closePopHandler}>取消</div>
+                            <div styleName="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
         return <div>
             <Header title="红包账户" />
             <div styleName="details-entry">
-                <Link to="/red-packet-detail">
+                <Link to="/redbag-records">
                     <span>红包明细</span>
                 </Link>
             </div>
@@ -104,27 +131,8 @@ class RedBag extends React.Component {
                     <div styleName="packet-rule"><span styleName="dot"></span>若有问题，请咨询<span>400-102-0066</span>。</div>
                 </div>
             </div>
-            {this.state.maskShow && <div styleName="mask">
-                <div styleName="verify-popup">
-                    <div styleName="verify-popup-wrap">
-                        <div styleName="verify-popup-close" onClick={this.closePopHandler}></div>
-                        <div styleName="verify-popup-title">短信验证</div>
-                        <div styleName="verify-popup-tip">
-                            已向手机号(尾号{Storage.get('phone').slice(-4)})发送短信验证码
-                        </div>
-                        <div styleName="verify-input">
-                            <input styleName="sms-input" type="number" name="number" value={this.state.sms_code}
-                                placeholder="输入验证码" onChange={this.changeValueHandler} />
-                            <span styleName="btn-countdown" onClick={this.getSMSCode}>
-                                {this.state.count > 0 ? this.state.count + 's' : '获取验证码'}</span>
-                        </div>
-                        <div styleName="btn-list">
-                            <div styleName="cancel-btn" onClick={this.closePopHandler}>取消</div>
-                            <div styleName="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
-                        </div>
-                    </div>
-                </div>
-            </div>}
+
+            {pop()}
         </div>
     }
 }
