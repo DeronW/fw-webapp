@@ -12,9 +12,6 @@ import * as $FW from 'fw-javascripts'
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class RedBagRecords extends React.Component {
-    static onEnter() {
-        document.title = "红包明细";
-    }
     constructor(props){
         super(props);
         // this.state = {
@@ -23,6 +20,7 @@ export default class RedBagRecords extends React.Component {
         // }
     }
     componentDidMount() {
+        document.title = "红包明细";
         let {history,redbag} = this.props;
         redbag.loadMore(null)
         $FW.Event.touchBottom(redbag.loadMore);
@@ -60,7 +58,7 @@ export default class RedBagRecords extends React.Component {
         let {rows, hasData} = this.props.redbag.records;
 
         let item_list = (item,index) => {
-            return <div styleName="list-item">
+            return <div styleName="list-item" key={index}>
                         <div styleName="red-status">
                             {rows.map(statusText)}
                             <span styleName="status-num">{item.redbagAmt}</span>
