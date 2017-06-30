@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
-
+import { Storage } from '../../lib/helpers'
 import styles from '../css/red-bag.css'
 
 @inject('red_bag')
@@ -28,9 +28,12 @@ class RedBag extends React.Component {
     }
 
     withdrawHandler = () => {
-        this.setState({maskShow:true});
-        this.props.red_bag.getSMSCode();
-        this.startCounting();
+        let ableToClick = this.props.red_bag.borrowBtnStatus>=2 && this.props.red_bag.hasWithdrawAmt >= 50;
+        if(ableToClick){
+            this.setState({maskShow:true});
+            this.props.red_bag.getSMSCode();
+            this.startCounting();
+        }
     }
 
     startCounting = () => {
@@ -47,6 +50,7 @@ class RedBag extends React.Component {
 
     closePopHandler = () => {
         this.setState({maskShow:false})
+        clearInterval(this._timer)
     }
 
     changeValueHandler = e => {
@@ -59,18 +63,21 @@ class RedBag extends React.Component {
         this.props.red_bag.getSMSCode();
     }
 
-    render() {
-        let {red_bag} = this.props
-        let borrowBtnStatus = red_bag.borrowBtnStatus;
-        let cardNoInfo;
-        let canWithdrawStatus = borrowBtnStatus ==2 || borrowBtnStatus == 3 || borrowBtnStatus == 5;
-        let ableToClick =  canWithdrawStatus && red_bag.withdrawNum >= 50;
+    confirmBtnHandler = () => {
+        let uuid = this.props.red_bag.default_card_number.uuid;
+        let value = this.state.sms_code;
+        this.props.red_bag.withdrawConfirm(value,uuid);
+    }
 
-        if (canWithdrawStatus){
+    render() {
+        let cardNoInfo;
+        let ableToClick = this.props.red_bag.borrowBtnStatus>=2 && this.props.red_bag.hasWithdrawAmt >= 50;
+
+        if (this.props.red_bag.borrowBtnStatus>=2){
             function isRealNameBindCard(ele) {
                 return ele.isRealNameBindCard == true;
             }
-            let filtered = red_bag.cardList.filter(isRealNameBindCard)[0];
+            let filtered = this.props.red_bag.cardList.filter(isRealNameBindCard)[0];
             cardNoInfo = `${filtered.bankShortName}(尾号${filtered.cardNo.slice(-4)})`;
         }else{
             cardNoInfo = '暂未设置'
@@ -85,14 +92,14 @@ class RedBag extends React.Component {
             <div styleName="red-packet-wrapper">
                 <div styleName="red-packet-area">
                     <div styleName="packet-title">可提现(元)</div>
-                    <div styleName="packet-num">{red_bag.hasWithdrawAmt}</div>
-                    <div styleName="packet-frozen">冻结(元)：{red_bag.freezeAmt}</div>
+                    <div styleName="packet-num">{this.props.red_bag.hasWithdrawAmt}</div>
+                    <div styleName="packet-frozen">冻结(元)：{this.props.red_bag.freezeAmt}</div>
                 </div>
                 <div styleName="withdraw-card">
                     <div styleName="card-title">银行卡</div>
                     <div styleName="card-branch">{cardNoInfo}</div>
                 </div>
-                <div styleName={ableToClick ? "withdraw-btn": "withdraw-gray-btn"} onClick={this.withdrawHandler()}>提现</div>
+                <div styleName={ableToClick ? "withdraw-btn": "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                 <div styleName="packet-tips">
                     <div styleName="packet-tips-title">温馨提示</div>
                     <div styleName="packet-rule"><span styleName="dot"></span>单笔提现金额不低于50元，单日提现次数不超过3次；</div>
@@ -101,23 +108,23 @@ class RedBag extends React.Component {
                     <div styleName="packet-rule"><span styleName="dot"></span>若有问题，请咨询<span>400-102-0066</span>。</div>
                 </div>
             </div>
-            {this.state.maskShow && <div className="mask">
-                <div className="verify-popup">
-                    <div className="verify-popup-wrap">
-                        <div className="verify-popup-close" onClick={this.closePopHandler}></div>
-                        <div className="verify-popup-title">短信验证</div>
-                        <div className="verify-popup-tip">
-                            已向手机号(尾号{$FW.Store.get('phone').slice(-4)})发送短信验证码
+            {this.state.maskShow && <div styleName="mask">
+                <div styleName="verify-popup">
+                    <div styleName="verify-popup-wrap">
+                        <div styleName="verify-popup-close" onClick={this.closePopHandler}></div>
+                        <div styleName="verify-popup-title">短信验证</div>
+                        <div styleName="verify-popup-tip">
+                            已向手机号(尾号{Storage.get('phone').slice(-4)})发送短信验证码
                         </div>
-                        <div className="verify-input">
-                            <input className="sms-input" type="number" name="number" value={this.state.sms_code}
+                        <div styleName="verify-input">
+                            <input styleName="sms-input" type="number" name="number" value={this.state.sms_code}
                                    placeholder="输入验证码" onChange={this.changeValueHandler}/>
-                            <span className="btn-countdown" onClick={this.getSMSCode}>
+                            <span styleName="btn-countdown" onClick={this.getSMSCode}>
                                 {this.state.count > 0 ? this.state.count + 's' : '获取验证码'}</span>
                         </div>
-                        <div className="btn-list">
-                            <div className="cancel-btn" onClick={this.closePopHandler}>取消</div>
-                            <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
+                        <div styleName="btn-list">
+                            <div styleName="cancel-btn" onClick={this.closePopHandler}>取消</div>
+                            <div styleName="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
                         </div>
                     </div>
                 </div>

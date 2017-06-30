@@ -1,6 +1,5 @@
 import { extendObservable, computed } from 'mobx'
 import { Components } from 'fw-javascripts'
-import { Storage } from '../../lib/helpers'
 
 export default class RedBag{
     constructor(Post) {
@@ -14,6 +13,12 @@ export default class RedBag{
             borrowBtnStatus:''
         })
     }
+
+    @computed get default_card_number() {
+        let filtered = this.cardList.filter(e => e.isRealNameBindCard === true);
+        return filtered[0] && {cardNo:filtered[0].cardNo,uuid:filtered[0].uuid}
+    }
+
 
     fetch_packet_num = () => {
         return this.Post('/api/redbag/v1/summary.json').then(data=>{
@@ -36,15 +41,15 @@ export default class RedBag{
     }
 
     getSMSCode = () => {
-        return this.Post('/api/redbag/v1/veriftycode.json',{
-            batchGid:this.batchGid
-        }).then(data=>{},e => Components.showToast(e.message))
+            return this.Post('/api/redbag/v1/veriftycode.json',{
+                batchGid:this.batchGid
+            }).then(data=>{},e => Components.showToast(e.message))
     }
 
-    withdrawConfirm = (uuid) => {
+    withdrawConfirm = (value,uuid) => {
         return this.Post('/api/redbag/v1/apply.json',{
             batchGid:this.batchGid,
-            verifyCode:this.state.value,
+            verifyCode:value,
             withdrawAmt:this.withdrawAmt,
             withdrawCardUuid:uuid
         }).then(data=>{
