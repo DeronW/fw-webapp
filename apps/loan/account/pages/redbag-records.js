@@ -32,6 +32,7 @@ export default class RedBagRecords extends React.Component {
         return `${YMD}`;
     }
     render(){
+        let {history} = this.props;
         // 判断红包状态
         let statusText = (item) => {
             let redNum = item.redbagStatus;
