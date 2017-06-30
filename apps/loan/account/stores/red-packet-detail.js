@@ -19,7 +19,7 @@ export default class RedPacketDetail {
         if (!this.hasData) return done && done();
         // let user = $FW.Store.getUserDict();
 
-        return this.Post('/api/redbag/v1/list.json`, {
+        return this.Post(`/api/redbag/v1/list.json`, {
             pageSize: 20,
             pageIndex: this.page
         }).then(data => {
