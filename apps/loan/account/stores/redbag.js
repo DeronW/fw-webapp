@@ -16,7 +16,7 @@ export default class RedBag {
             applyTimeStr: '',
             preAccountTimeStr: '',
             failReason: '',
-            recoreds: {
+            records: {
                 page: 1,
                 rows: [],
                 hasData: true
