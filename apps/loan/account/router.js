@@ -12,7 +12,7 @@ import SetPassword from './pages/set-password.js'
 
 import RedBag from './pages/red-bag.js'
 import RedPacketDetail from './pages/red-packet-detail.js'
-import RedPacketResult from './pages/red-packet-result.js'
+import RedBagResult from './pages/red-bag-result.js'
 import BankCard from './pages/bank-card.js'
 import BankCardAdd from './pages/bank-card-add.js'
 import BankCardVerify from './pages/bank-card-verify.js'
@@ -26,7 +26,7 @@ export default (stores) => {
                 <Route exact path='/set-password' component={SetPassword} />
                 <Route exact path='/red-bag' component={RedBag} />
                 <Route exact path='/red-packet-detail' component={RedPacketDetail} />
-                <Route exact path='/red-packet-result' component={RedPacketResult} />
+                <Route exact path='/red-bag-result' component={RedBagResult} />
                 <Route exact path='/bank-card' component={BankCard} />
                 <Route exact path='/bank-card-add' component={BankCardAdd} />
                 <Route exact path='/bank-card-verify' component={BankCardVerify} />

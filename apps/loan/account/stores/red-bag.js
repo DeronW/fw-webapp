@@ -10,13 +10,16 @@ export default class RedBag {
             freezeAmt: '',
             hasWithdrawAmt: '',
             cardList: [],
-            borrowBtnStatus: ''
+            borrowBtnStatus: '',
+            applyTimeStr:'',
+            preAccountTimeStr:'',
+            failReason:''
         })
     }
 
     @computed get default_card_number() {
         let filtered = this.cardList.filter(e => e.isRealNameBindCard === true);
-        return filtered[0] && { cardNo: filtered[0].cardNo, uuid: filtered[0].uuid }
+        return filtered[0] && {bankShortName:filtered[0].bankShortName, uuid: filtered[0].uuid, cardNo: filtered[0].cardNo}
     }
 
     fetch_packet_num = () => {
@@ -24,33 +27,40 @@ export default class RedBag {
             this.batchGid = data.batchGid;
             this.freezeAmt = data.freezeAmt;
             this.hasWithdrawAmt = data.hasWithdrawAmt;
-        }, e => Components.showToast(e.message))
+        })
     }
 
     fetch_user_status = () => {
         return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 }).then(data => {
             this.borrowBtnStatus = data.borrowBtnStatus;
-        }, e => Components.showToast(e.message))
+        })
     }
 
     fetch_bankcard_list = () => {
         return this.Post('/api/bankcard/v1/bankcardlist.json').then(data => {
             this.cardList = data.userBankList.withdrawBankcard;
-        }, e => Components.showToast(e.message))
+        })
     }
 
     getSMSCode = () => {
         return this.Post('/api/redbag/v1/veriftycode.json', {
             batchGid: this.batchGid
-        }).then(data => { }, e => Components.showToast(e.message))
+        }).then(data => { })
     }
 
-    withdrawConfirm = (value, uuid) => {
+    withdrawConfirm = (value, uuid, history) => {
         return this.Post('/api/redbag/v1/apply.json', {
             batchGid: this.batchGid,
             verifyCode: value,
             withdrawAmt: this.withdrawAmt,
             withdrawCardUuid: uuid
+        }).then(data=>{
+            history.push('/red-bag-result');
+            this.applyTimeStr = data.applyTimeStr;
+            this.preAccountTimeStr = data.preAccountTimeStr;
+        }, e => {
+            history.push('/red-bag-result');
+            this.failReason = e.message;
         })
     }
 
