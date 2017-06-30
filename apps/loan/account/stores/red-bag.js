@@ -46,14 +46,16 @@ export default class RedBag{
             }).then(data=>{},e => Components.showToast(e.message))
     }
 
-    withdrawConfirm = (value,uuid) => {
+    withdrawConfirm = (value,uuid,history) => {
         return this.Post('/api/redbag/v1/apply.json',{
             batchGid:this.batchGid,
             verifyCode:value,
             withdrawAmt:this.withdrawAmt,
             withdrawCardUuid:uuid
         }).then(data=>{
-
+            history.push('/red-packet-result');
+        }, e =>{
+            history.push('/red-packet-result');
         })
     }
 

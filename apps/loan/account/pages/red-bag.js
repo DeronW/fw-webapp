@@ -85,7 +85,7 @@ class RedBag extends React.Component {
         return <div>
             <Header title="红包账户"/>
             <div styleName="details-entry">
-                <Link to="">
+                <Link to="/red-packet-detail">
                     <span>红包明细</span>
                 </Link>
             </div>
