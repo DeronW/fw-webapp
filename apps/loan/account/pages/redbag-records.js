@@ -1,11 +1,11 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import styles from '../css/red-bag-records.css'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Header } from '../../lib/components'
 
+import styles from '../css/redbag-records.css'
 import * as $FW from 'fw-javascripts'
 
 @inject("redbag")

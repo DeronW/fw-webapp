@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
-import styles from '../css/red-bag-result.css'
+import styles from '../css/redbag-result.css'
 
 @inject('redbag')
 @observer

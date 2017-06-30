@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
 import { Storage } from '../../lib/helpers'
-import styles from '../css/red-bag.css'
+import styles from '../css/redbag.css'
 import { Components } from 'fw-javascripts'
 
 @inject('redbag')
