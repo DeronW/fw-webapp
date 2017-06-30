@@ -58,26 +58,20 @@ export default class RedBagRecords extends React.Component {
         // const text = ["注册冻结","放款冻结","可提现","提现中","已提现","红包过期失效","活动过期失效","首借非掌众失效"];
 
        
-        const text =[
-                {key:"0",value:"注册冻结"},
-                {key:"1",value:"放款冻结"},
-                {key:"2",value:"可提现"},
-                {key:"3",value:"提现中"},
-                {key:"4",value:"已提现"},
-                {key:"6",value:"红包过期失效"},
-                {key:"7",value:"活动过期失效"},
-                {key:"8",value:"首借非掌众失效"},
-            ]
+        const text = {
+            '0': '注册冻结',
+            '1': '放款冻结',
+            '2': '放款冻结',
+            '3': '提现中',
+            '4': '已提现',
+            '6': '红包过期失效',
+            '7': '活动过期失效',
+            '8': '首借非掌众失效',
+        };
 
 
-        let statusText = (item,index) => {
-            let redNum = item.redbagStatus;
-            redNum == item.key && return <span styleName="status-text" key={index}>{item.value}</span>
-        }
+        let statusText = (item) => <span styleName="status-text" key={index}>{text[item.redbagStatus]}</span>
         
-        text.map(statusText);
-
-
         let {rows, hasData} = this.props.redbag.records;
 
         let item_list = (item,index) => {
