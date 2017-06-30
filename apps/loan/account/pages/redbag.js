@@ -124,7 +124,9 @@ class RedBag extends React.Component {
                 <div styleName={ableToClick ? "withdraw-btn" : "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                 <div styleName="packet-tips">
                     <div styleName="packet-tips-title">温馨提示</div>
-                    {this.props.redbag.instruction}
+                    <div styleName="packet-rule-item">
+                        {this.props.redbag.instruction}
+                    </div>
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>7*24小时可以提现；</div>*/}
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>提现后1-3个工作日到账；</div>*/}
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>若有问题，请咨询<span>400-102-0066</span>。</div>*/}
