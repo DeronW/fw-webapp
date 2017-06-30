@@ -19,24 +19,25 @@ export default class RedBag {
         return filtered[0] && { cardNo: filtered[0].cardNo, uuid: filtered[0].uuid }
     }
 
-    fetch_packet_num = () => {
-        return this.Post('/api/redbag/v1/summary.json').then(data => {
+
+    fetch_user_redbag = () => {
+        this.Post('/api/redbag/v1/summary.json').then(data => {
+            // 红包数量
             this.batchGid = data.batchGid;
             this.freezeAmt = data.freezeAmt;
             this.hasWithdrawAmt = data.hasWithdrawAmt;
-        }, e => Components.showToast(e.message))
-    }
-
-    fetch_user_status = () => {
-        return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 }).then(data => {
-            this.borrowBtnStatus = data.borrowBtnStatus;
-        }, e => Components.showToast(e.message))
-    }
-
-    fetch_bankcard_list = () => {
-        return this.Post('/api/bankcard/v1/bankcardlist.json').then(data => {
-            this.cardList = data.userBankList.withdrawBankcard;
-        }, e => Components.showToast(e.message))
+        }).then(() => {
+            // 用户是否可提现状态
+            return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 })
+                .then(data => {
+                    this.borrowBtnStatus = data.borrowBtnStatus
+                })
+        }).then(() => {
+            // 提现银行卡号
+            this.Post('/api/bankcard/v1/bankcardlist.json').then(data => {
+                this.cardList = data.userBankList.withdrawBankcard;
+            })
+        })
     }
 
     getSMSCode = () => {

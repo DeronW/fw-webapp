@@ -20,11 +20,8 @@ class RedBag extends React.Component {
     }
 
     componentDidMount() {
-        document.title = '红包账户'
-        let { red_bag } = this.props
-        red_bag.fetch_packet_num();
-        red_bag.fetch_user_status();
-        red_bag.fetch_bankcard_list();
+        // document.title = '红包账户'
+        this.props.red_bag.fetch_user_redbag()
     }
 
     withdrawHandler = () => {
