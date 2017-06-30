@@ -72,7 +72,7 @@ class RedBag extends React.Component {
     }
 
     render() {
-        let { redbag } = this.props
+        let { redbag, history } = this.props
         let ableToClick = redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
 
         let cardNoInfo = redbag.default_card ?
@@ -105,7 +105,7 @@ class RedBag extends React.Component {
         }
 
         return <div>
-            <Header title="红包账户" goBack={()=>NativeBridge.close()}/>
+            <Header title="红包账户" history={history}/>
             <div styleName="details-entry">
                 <Link to="/redbag-records">
                     <span>红包明细</span>
