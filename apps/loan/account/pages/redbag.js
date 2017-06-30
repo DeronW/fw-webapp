@@ -23,7 +23,7 @@ class RedBag extends React.Component {
     }
 
     withdrawHandler = () => {
-        let ableToClick = this.props.redbag.borrowBtnStatus >= 2 && this.props.redbag.hasWithdrawAmt >= 50;
+        let ableToClick = this.props.redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
 
         if (ableToClick) {
             this.setState({ maskShow: true });
@@ -73,11 +73,10 @@ class RedBag extends React.Component {
 
     render() {
         let { redbag } = this.props
-        let ableToClick = redbag.borrowBtnStatus >= 2 && redbag.hasWithdrawAmt >= 50;
+        let ableToClick = redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
 
-        let cardNoInfo = redbag.borrowBtnStatus >= 2 && redbag.default_card ?
+        let cardNoInfo = redbag.default_card ?
             redbag.default_card.text : '暂未设置';
-
 
         let pop = () => {
             if (!this.state.maskShow) return;
@@ -106,7 +105,7 @@ class RedBag extends React.Component {
         }
 
         return <div>
-            <Header title="红包账户" />
+            <Header title="红包账户" goBack={NativeBridge.close}/>
             <div styleName="details-entry">
                 <Link to="/redbag-records">
                     <span>红包明细</span>
@@ -125,10 +124,10 @@ class RedBag extends React.Component {
                 <div styleName={ableToClick ? "withdraw-btn" : "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                 <div styleName="packet-tips">
                     <div styleName="packet-tips-title">温馨提示</div>
-                    <div styleName="packet-rule"><span styleName="dot"></span>单笔提现金额不低于50元，单日提现次数不超过3次；</div>
-                    <div styleName="packet-rule"><span styleName="dot"></span>7*24小时可以提现；</div>
-                    <div styleName="packet-rule"><span styleName="dot"></span>提现后1-3个工作日到账；</div>
-                    <div styleName="packet-rule"><span styleName="dot"></span>若有问题，请咨询<span>400-102-0066</span>。</div>
+                    <div styleName="packet-rule"><span styleName="dot"></span>{this.props.redbag.instruction}</div>
+                    {/*<div styleName="packet-rule"><span styleName="dot"></span>7*24小时可以提现；</div>*/}
+                    {/*<div styleName="packet-rule"><span styleName="dot"></span>提现后1-3个工作日到账；</div>*/}
+                    {/*<div styleName="packet-rule"><span styleName="dot"></span>若有问题，请咨询<span>400-102-0066</span>。</div>*/}
                 </div>
             </div>
 
