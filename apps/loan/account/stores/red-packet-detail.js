@@ -25,7 +25,7 @@ export default class RedPacketDetail {
         }).then(data => {
             let RedPacketDetailList = data.resultList;
             this.rows = RedPacketDetailList;
-            this.page = this.state.page < data.totalPage ? this.page + 1 : this.page = 0;
+            this.page = this.page < data.totalPage ? this.page + 1 : this.page = 0;
             this.hasData = !!RedPacketDetailList.length;
             done && done()
         })
