@@ -24,9 +24,9 @@ export default (stores) => {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/set-password' component={SetPassword} />
                 {/*注册用户领取红包*/}
-                <Route exact path='/red-bag' component={Redbag} />
-                <Route exact path='/red-bag-records' component={RedbagRecords} />
-                <Route exact path='/red-bag-result' component={RedbagResult} />
+                <Route exact path='/redbag' component={Redbag} />
+                <Route exact path='/redbag-records' component={RedbagRecords} />
+                <Route exact path='/redbag-result' component={RedbagResult} />
                 {/*银行卡绑定*/}
                 <Route exact path='/bank-card' component={BankCard} />
                 <Route exact path='/bank-card-add' component={BankCardAdd} />
