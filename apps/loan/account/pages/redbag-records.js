@@ -75,7 +75,7 @@ export default class RedBagRecords extends React.Component {
         let {rows, hasData} = this.props.redbag.records;
 
         let item_list = (item,index) => {
-            return <div styleName="list-item" key={index}>
+            return <div styleName="list-item">
                         <div styleName="red-status">
                             {rows.map(statusText)}
                             <span styleName="status-num">{item.redbagAmt}</span>
