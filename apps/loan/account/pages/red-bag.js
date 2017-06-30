@@ -10,10 +10,10 @@ import styles from '../css/red-bag.css'
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class RedBag extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state={
-            maskShow:false,
+        this.state = {
+            maskShow: false,
             sms_code: '',
             count: 0,
         }
@@ -21,16 +21,16 @@ class RedBag extends React.Component {
 
     componentDidMount() {
         document.title = '红包账户'
-        let {red_bag} = this.props
+        let { red_bag } = this.props
         red_bag.fetch_packet_num();
         red_bag.fetch_user_status();
         red_bag.fetch_bankcard_list();
     }
 
     withdrawHandler = () => {
-        let ableToClick = this.props.red_bag.borrowBtnStatus>=2 && this.props.red_bag.hasWithdrawAmt >= 50;
-        if(ableToClick){
-            this.setState({maskShow:true});
+        let ableToClick = this.props.red_bag.borrowBtnStatus >= 2 && this.props.red_bag.hasWithdrawAmt >= 50;
+        if (ableToClick) {
+            this.setState({ maskShow: true });
             this.props.red_bag.getSMSCode();
             this.startCounting();
         }
@@ -49,7 +49,7 @@ class RedBag extends React.Component {
     }
 
     closePopHandler = () => {
-        this.setState({maskShow:false})
+        this.setState({ maskShow: false })
         clearInterval(this._timer)
     }
 
@@ -64,26 +64,31 @@ class RedBag extends React.Component {
     }
 
     confirmBtnHandler = () => {
-        let uuid = this.props.red_bag.default_card_number.uuid;
+        let { red_bag, history } = this.props
+        let uuid = red_bag.default_card_number.uuid;
         let value = this.state.sms_code;
-        this.props.red_bag.withdrawConfirm(value,uuid);
+        red_bag.withdrawConfirm(value, uuid).then(data => {
+            history.push('/red-packet-result');
+        }, e => {
+            history.push('/red-packet-result');
+        })
     }
 
     render() {
         let cardNoInfo;
-        let ableToClick = this.props.red_bag.borrowBtnStatus>=2 && this.props.red_bag.hasWithdrawAmt >= 50;
+        let ableToClick = this.props.red_bag.borrowBtnStatus >= 2 && this.props.red_bag.hasWithdrawAmt >= 50;
 
-        if (this.props.red_bag.borrowBtnStatus>=2){
+        if (this.props.red_bag.borrowBtnStatus >= 2) {
             function isRealNameBindCard(ele) {
                 return ele.isRealNameBindCard == true;
             }
             let filtered = this.props.red_bag.cardList.filter(isRealNameBindCard)[0];
             cardNoInfo = `${filtered.bankShortName}(尾号${filtered.cardNo.slice(-4)})`;
-        }else{
+        } else {
             cardNoInfo = '暂未设置'
         }
         return <div>
-            <Header title="红包账户"/>
+            <Header title="红包账户" />
             <div styleName="details-entry">
                 <Link to="/red-packet-detail">
                     <span>红包明细</span>
@@ -99,7 +104,7 @@ class RedBag extends React.Component {
                     <div styleName="card-title">银行卡</div>
                     <div styleName="card-branch">{cardNoInfo}</div>
                 </div>
-                <div styleName={ableToClick ? "withdraw-btn": "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
+                <div styleName={ableToClick ? "withdraw-btn" : "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                 <div styleName="packet-tips">
                     <div styleName="packet-tips-title">温馨提示</div>
                     <div styleName="packet-rule"><span styleName="dot"></span>单笔提现金额不低于50元，单日提现次数不超过3次；</div>
@@ -118,7 +123,7 @@ class RedBag extends React.Component {
                         </div>
                         <div styleName="verify-input">
                             <input styleName="sms-input" type="number" name="number" value={this.state.sms_code}
-                                   placeholder="输入验证码" onChange={this.changeValueHandler}/>
+                                placeholder="输入验证码" onChange={this.changeValueHandler} />
                             <span styleName="btn-countdown" onClick={this.getSMSCode}>
                                 {this.state.count > 0 ? this.state.count + 's' : '获取验证码'}</span>
                         </div>

@@ -12,10 +12,12 @@ export default class RedBag {
             freezeAmt: '',
             hasWithdrawAmt: '',
             cardList: [],
-            borrowBtnStatus: '',
-            page: 1,
-            rows: [],
-            hasData: true
+            borrowBtnStatus: ''
+            recoreds: {
+                page: 1,
+                rows: [],
+                hasData: true
+            }
         })
     }
 
@@ -23,7 +25,6 @@ export default class RedBag {
         let filtered = this.cardList.filter(e => e.isRealNameBindCard === true);
         return filtered[0] && { cardNo: filtered[0].cardNo, uuid: filtered[0].uuid }
     }
-
 
     fetch_packet_num = () => {
         return this.Post('/api/redbag/v1/summary.json').then(data => {
@@ -48,34 +49,30 @@ export default class RedBag {
     getSMSCode = () => {
         return this.Post('/api/redbag/v1/veriftycode.json', {
             batchGid: this.batchGid
-        }).then(data => {}, e => Components.showToast(e.message))
+        }).then(data => { }, e => Components.showToast(e.message))
     }
 
-    withdrawConfirm = (value, uuid, history) => {
+    withdrawConfirm = (value, uuid) => {
         return this.Post('/api/redbag/v1/apply.json', {
             batchGid: this.batchGid,
             verifyCode: value,
             withdrawAmt: this.withdrawAmt,
             withdrawCardUuid: uuid
-        }).then(data => {
-            history.push('/red-packet-result');
-        }, e => {
-            history.push('/red-packet-result');
         })
     }
     // 明细页下拉加载更多
      loadMore = (done) => {
-        if (!this.hasData) return done && done();
+        if (!this.recoreds.hasData) return done && done();
         // let user = $FW.Store.getUserDict();
 
         return this.Post(`/api/redbag/v1/list.json`, {
             pageSize: 20,
-            pageIndex: this.page
+            pageIndex: this.recoreds.page
         }).then(data => {
             let RedPacketDetailList = data.resultList;
-            this.rows = RedPacketDetailList;
-            this.page = this.page < data.totalPage ? this.page + 1 : this.page = 0;
-            this.hasData = !!RedPacketDetailList.length;
+            this.recoreds.rows = RedPacketDetailList;
+            this.recoreds.page = this.recoreds.page < data.totalPage ? this.recoreds.page + 1 : this.recoreds.page = 0;
+            this.recoreds.hasData = !!RedPacketDetailList.length;
             done && done()
         })
     }
