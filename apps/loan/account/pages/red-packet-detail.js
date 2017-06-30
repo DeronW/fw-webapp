@@ -37,21 +37,21 @@ export default class RedPacketDetail extends React.Component {
         let statusText = (item) => {
             let redNum = parseInt(item.redbagStatus);
             if(redNum == 0){
-                return <span className="status-text">注册冻结</span>
+                return <span styleName="status-text">注册冻结</span>
             }else if(redNum ==1){
-                return <span className="status-text">放款冻结</span>
+                return <span styleName="status-text">放款冻结</span>
             }else if(redNum == 2){
-                return <span className="status-text">可提现</span>
+                return <span styleName="status-text">可提现</span>
             }else if(redNum ==3){
-                return <span className="status-text">提现中</span>
+                return <span styleName="status-text">提现中</span>
             }else if(redNum ==4){
-                return <span className="status-text">已提现</span>
+                return <span styleName="status-text">已提现</span>
             }else if(redNum == 6){
-                return <span className="status-text">红包过期失效</span>
+                return <span styleName="status-text">红包过期失效</span>
             }else if(redNum == 7){
-                return <span className="status-text">活动过期失效</span>
+                return <span styleName="status-text">活动过期失效</span>
             }else if(redNum == 8){
-                return <span className="status-text">首借非掌众失效</span>
+                return <span styleName="status-text">首借非掌众失效</span>
             }
         }
 
@@ -59,14 +59,14 @@ export default class RedPacketDetail extends React.Component {
         let {rows, hasData} = this.props.red_packet_detail;
 
         let item_list = (item,index) => {
-            return <div className="list-item">
-                        <div className="red-status">
+            return <div styleName="list-item">
+                        <div styleName="red-status">
                             {rows.map(statusText)}
-                            <span className="status-num">{item.redbagAmt}</span>
+                            <span styleName="status-num">{item.redbagAmt}</span>
                         </div>
-                        <div className="sub-red-status">
-                            <span className="sub-status-text">{item.remark}</span>
-                            <span className="status-time">{this.formatTime(item.createTime)}</span>
+                        <div styleName="sub-red-status">
+                            <span styleName="sub-status-text">{item.remark}</span>
+                            <span styleName="status-time">{this.formatTime(item.createTime)}</span>
                         </div>
                     </div>
         }
@@ -74,11 +74,11 @@ export default class RedPacketDetail extends React.Component {
             <Header title="红包明细"/>
             <div>
                 {/*数据列表*/}
-                <div className="data-list">
+                <div styleName="data-list">
                     {rows.map(item_list)}
                 </div>
                 {/*已加载完全部数据提示*/}
-                {hasData && <div className="data-completion">已加载完全部数据</div>}
+                {hasData && <div styleName="data-completion">已加载完全部数据</div>}
                 {/*{rows.length === 0 && !hasData && empty}*/}
             </div>
         </div>

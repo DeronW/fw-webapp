@@ -14,7 +14,7 @@ export default class RedPacketDetail {
         })
     }
     loadMore = (done) => {
-        if (!this.state.hasData) return done && done();
+        if (!this.hasData) return done && done();
         let user = $FW.Store.getUserDict();
 
         return this.Post(`${API_PATH}/api/redbag/v1/list.json`, {
