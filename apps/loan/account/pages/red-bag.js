@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
 import { Storage } from '../../lib/helpers'
 import styles from '../css/red-bag.css'
+import { Components } from 'fw-javascripts'
 
 @inject('red_bag')
 @observer
@@ -64,23 +65,19 @@ class RedBag extends React.Component {
         let { red_bag, history } = this.props
         let uuid = red_bag.default_card_number.uuid;
         let value = this.state.sms_code;
-        red_bag.withdrawConfirm(value, uuid).then(data => {
-            history.push('/red-packet-result');
-        }, e => {
-            history.push('/red-packet-result');
-        })
+        let err
+        if (!value) err = '请输入验证码'
+        if (err) return Components.showToast(err)
+        red_bag.withdrawConfirm(value, uuid, history);
     }
 
     render() {
+        let { red_bag } = this.props
         let cardNoInfo;
-        let ableToClick = this.props.red_bag.borrowBtnStatus >= 2 && this.props.red_bag.hasWithdrawAmt >= 50;
+        let ableToClick = red_bag.borrowBtnStatus >= 2 && red_bag.hasWithdrawAmt >= 50;
 
         if (this.props.red_bag.borrowBtnStatus >= 2) {
-            function isRealNameBindCard(ele) {
-                return ele.isRealNameBindCard == true;
-            }
-            let filtered = this.props.red_bag.cardList.filter(isRealNameBindCard)[0];
-            cardNoInfo = `${filtered.bankShortName}(尾号${filtered.cardNo.slice(-4)})`;
+            cardNoInfo = `${red_bag.default_card_number.bankShortName}(尾号${red_bag.default_card_number.cardNo.slice(-4)})`;
         } else {
             cardNoInfo = '暂未设置'
         }

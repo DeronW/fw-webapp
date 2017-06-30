@@ -3,7 +3,7 @@ import { Components } from 'fw-javascripts'
 import { Storage } from '../../lib/helpers'
 import * as $FW from 'fw-javascripts'
 
-export default class RedPacketDetail {
+export default class RedBagRecords {
 
     constructor(Post) {
         this.Post = Post;

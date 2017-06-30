@@ -9,11 +9,9 @@ import {
 import Entry from './pages/entry.js'
 import Login from './pages/login.js'
 import SetPassword from './pages/set-password.js'
-
 import RedBag from './pages/red-bag.js'
-import RedBagRecords from './pages/red-packet-detail.js'
-import RedBagResult from './pages/red-packet-result.js'
-
+import RedPacketDetail from './pages/red-packet-detail.js'
+import RedBagResult from './pages/red-bag-result.js'
 import BankCard from './pages/bank-card.js'
 import BankCardAdd from './pages/bank-card-add.js'
 import BankCardVerify from './pages/bank-card-verify.js'
