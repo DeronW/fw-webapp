@@ -66,13 +66,13 @@ export default class RedBagRecords extends React.Component {
                             <span styleName="status-num">{item.redbagAmt}</span>
                         </div>
                         <div styleName="sub-red-status">
-                            <span styleName="sub-status-text">{item.remark}</span>
+                            <span styleName="sub-status-text">{item.detailStatusStr}</span>
                             <span styleName="status-time">{this.formatTime(item.createTime)}</span>
                         </div>
                     </div>
         }
         return <div>
-            <Header title="红包明细"/>
+            <Header title="红包明细" history = {history}/>
             <div>
                 {/*数据列表*/}
                 <div styleName="data-list">
