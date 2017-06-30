@@ -70,7 +70,7 @@ export default class RedBagRecords extends React.Component {
         };
 
 
-        let statusText = (item) => <span styleName="status-text" key={index}>{text[item.redbagStatus]}</span>
+        let statusText = (item) => <span styleName="status-text">{text[item.redbagStatus]}</span>
         
         let {rows, hasData} = this.props.redbag.records;
 
