@@ -68,7 +68,7 @@ class RedPacketDetail extends React.Component{
                             <span className="status-num">{item.redbagAmt}</span>
                         </div>
                         <div className="sub-red-status">
-                            <span className="sub-status-text">{item.remark}</span>
+                            <span className="sub-status-text">{item.detailStatusStr}</span>
                             <span className="status-time">{this.formatTime(item.createTime)}</span>
                         </div>
                     </div>
