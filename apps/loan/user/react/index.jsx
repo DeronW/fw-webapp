@@ -90,7 +90,7 @@ class MajorUserInfo extends React.Component {
             link_a: null,
             link_b: null,
             link_c: '/static/loan/bill/index.html#2',
-            link_d: '/static/loan/account/#/red-bag',
+            link_d: '/static/loan/account/#/redbag',
             tips: null
         }
     }
