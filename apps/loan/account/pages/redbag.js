@@ -105,7 +105,7 @@ class RedBag extends React.Component {
         }
 
         return <div>
-            <Header title="红包账户" goBack={NativeBridge.close}/>
+            <Header title="红包账户" goBack={()=>NativeBridge.close()}/>
             <div styleName="details-entry">
                 <Link to="/redbag-records">
                     <span>红包明细</span>
