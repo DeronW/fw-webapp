@@ -77,11 +77,12 @@ export default class RedBagRecords extends React.Component {
         let item_list = (item,index) => {
             return <div styleName="list-item">
                         <div styleName="red-status">
-                            {rows.map(statusText)}
+                            {item.detailStatusStr}
+                            
                             <span styleName="status-num">{item.redbagAmt}</span>
                         </div>
                         <div styleName="sub-red-status">
-                            <span styleName="sub-status-text">{item.detailStatusStr}</span>
+                            <span styleName="sub-status-text">{rows.map(statusText)}</span>
                             <span styleName="status-time">{this.formatTime(item.createTime)}</span>
                         </div>
                     </div>
