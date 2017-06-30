@@ -2,7 +2,7 @@ import { Request, Components } from 'fw-javascripts'
 
 const API_PATH = document.getElementById('api-path').value;
 
-const PostMethodFactory = function(Storage, Browser, NativeBridge) {
+const PostMethodFactory = function (Storage, Browser, NativeBridge) {
 
     let USER = Storage.getUserDict(),
         token = USER.token,
@@ -35,7 +35,9 @@ const PostMethodFactory = function(Storage, Browser, NativeBridge) {
                 if (Browser.inFXHApp) NativeBridge.login();
 
                 if (!Browser.inJRGCApp && !Browser.inFXHApp)
-                    setTimeout(login, 1800);
+                    setTimeout(() => {
+                        location.href = '/static/loan/account/#/entry'
+                    }, 1800);
 
             } else if (error.code == 11000) {
                 //11000 代表参数不完整

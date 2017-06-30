@@ -9,7 +9,6 @@ import {
 import Entry from './pages/entry.js'
 import Login from './pages/login.js'
 import SetPassword from './pages/set-password.js'
-
 import RedBag from './pages/red-bag.js'
 import RedBagRecords from './pages/red-bag-records.js'
 import RedPacketResult from './pages/red-packet-result.js'
@@ -24,9 +23,11 @@ export default (stores) => {
                 <Route exact path='/entry' component={Entry} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/set-password' component={SetPassword} />
+                {/*注册用户领取红包*/}
                 <Route exact path='/red-bag' component={RedBag} />
-                <Route exact path='/pages/red-bag-records' component={RedBagRecords} />
-                <Route exact path='/red-packet-result' component={RedPacketResult} />
+                <Route exact path='/red-bag-records' component={RedBagRecords} />
+                <Route exact path='/red-bag-result' component={RedBagResult} />
+                {/*银行卡绑定*/}
                 <Route exact path='/bank-card' component={BankCard} />
                 <Route exact path='/bank-card-add' component={BankCardAdd} />
                 <Route exact path='/bank-card-verify' component={BankCardVerify} />
