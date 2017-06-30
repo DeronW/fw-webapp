@@ -64,7 +64,7 @@ class RedBag extends React.Component {
     }
 
     confirmBtnHandler = () => {
-        let { red_bag } = this.props
+        let { red_bag, history } = this.props
         let uuid = red_bag.default_card_number.uuid;
         let value = this.state.sms_code;
         red_bag.withdrawConfirm(value, uuid).then(data => {

@@ -19,7 +19,6 @@ export default class RedBag {
         return filtered[0] && { cardNo: filtered[0].cardNo, uuid: filtered[0].uuid }
     }
 
-
     fetch_packet_num = () => {
         return this.Post('/api/redbag/v1/summary.json').then(data => {
             this.batchGid = data.batchGid;
