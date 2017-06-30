@@ -46,7 +46,7 @@ class RedPacketDetail extends React.Component{
             }else if(redNum == 2){
                 return <span className="status-text">可提现</span>
             }else if(redNum ==3){
-                return <span className="status-text">体现中</span>
+                return <span className="status-text">提现中</span>
             }else if(redNum ==4){
                 return <span className="status-text">已提现</span>
             }else if(redNum == 6){
