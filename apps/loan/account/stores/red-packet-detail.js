@@ -7,7 +7,7 @@ export default class RedPacketDetail {
 
     constructor(Post) {
         this.Post = Post;
-        this.API_PATH = 'http://localhost/fake-api';
+        this.API_PATH = 'https://localhost/fake-api';
 
         extendObservable(this, {
             page: 1,
