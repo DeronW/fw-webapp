@@ -32,10 +32,10 @@ class Content extends React.Component {
     }
 
     render() {
-        let {isLogin,timestamp} = this.state;
+        let {isLogin, timestamp} = this.state;
         let isMobile = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i);
-        let props = {isLogin:isLogin,timestamp:timestamp}
-        let Content = isMobile? <JulyMobile {...props} />:<JulyPC/>
+        let props = {isLogin: isLogin, timestamp: timestamp}
+        let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC/>
         return <div>
             {/*<PCHeader bgColor={'black'} />*/}
             {/*<MobileHeader bgColor={'red'}/>*/}
