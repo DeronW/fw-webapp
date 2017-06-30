@@ -1,6 +1,5 @@
 .header-placeholder {
     display: block;
-    position: fixed;
     top: 0;
     left: 0;
     width:100%;
@@ -8,10 +7,28 @@
 }
 
 .header {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
     z-index: 99;
     width: 100%;
     height: 88px;
     line-height: 88px;
+    background-color: #fff;
+    text-align: center;
+    font-size: 36px;
+    color: #333;
+}
+.header-inIOSApp{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index: 99;
+    width: 100%;
+    height: 110px;
+    line-height: 110px;
     background-color: #fff;
     text-align: center;
     font-size: 36px;
