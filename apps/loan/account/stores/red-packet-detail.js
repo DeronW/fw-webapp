@@ -7,7 +7,7 @@ export default class RedPacketDetail {
 
     constructor(Post) {
         this.Post = Post;
-        this.API_PATH = 'https://localhost/fake-api';
+        // this.API_PATH = 'http://localhost/fake-api';
 
         extendObservable(this, {
             page: 1,
@@ -19,14 +19,14 @@ export default class RedPacketDetail {
         if (!this.hasData) return done && done();
         // let user = $FW.Store.getUserDict();
 
-        return this.Post(`${this.API_PATH}/api/redbag/v1/list.json`, {
+        return this.Post('/api/redbag/v1/list.json`, {
             pageSize: 20,
             pageIndex: this.page
         }).then(data => {
             let RedPacketDetailList = data.resultList;
             this.rows = RedPacketDetailList;
             this.page = this.state.page < data.totalPage ? this.page + 1 : this.page = 0;
-            this.hasData = !!RedPacketDetailList.length
+            this.hasData = !!RedPacketDetailList.length;
             done && done()
         })
     }
