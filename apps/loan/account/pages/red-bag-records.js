@@ -1,6 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import styles from '../css/red-packet-detail.css'
+import styles from '../css/red-bag-records.css'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -9,8 +9,8 @@ import { Header } from '../../lib/components'
 import * as $FWC from 'fw-components'
 import * as $FW from 'fw-javascripts'
 
-@inject("red_packet_detail") @observer @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-export default class RedPacketDetail extends React.Component {
+@inject("red_bag") @observer @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+export default class RedBagRecords extends React.Component {
     static onEnter() {
         document.title = "红包明细";
     }
@@ -22,9 +22,9 @@ export default class RedPacketDetail extends React.Component {
         // }
     }
     componentDidMount() {
-        let {history,red_packet_detail} = this.props;
-        red_packet_detail.loadMore(null)
-        $FW.Event.touchBottom(red_packet_detail.loadMore);
+        let {history,red_bag} = this.props;
+        red_bag.loadMore(null)
+        $FW.Event.touchBottom(red_bag.loadMore);
     }
     formatTime = (ms) => {
         let jsonDate = new Date(Number(ms)).toJSON();
@@ -56,7 +56,7 @@ export default class RedPacketDetail extends React.Component {
         }
 
 
-        let {rows, hasData} = this.props.red_packet_detail;
+        let {rows, hasData} = this.props.red_bag;
 
         let item_list = (item,index) => {
             return <div styleName="list-item">
