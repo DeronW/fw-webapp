@@ -23,6 +23,8 @@ class RedBag extends React.Component {
         alert('inApp ' + Browser.inApp)
         alert('inJRGCApp ' + Browser.inJRGCApp)
         alert('appVersion ' + Browser.appVersion)
+        alert('cookie uid '  + Utils.Cookie.get('uid'))
+        alert('cookie token '  + Utils.Cookie.get('token'))
         // document.title = '红包账户'
         this.props.redbag.fetch_user_redbag()
     }
