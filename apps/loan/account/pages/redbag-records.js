@@ -35,14 +35,11 @@ window.CCC = $FW.Utils.Cookie
     render() {
         let {history} = this.props;
         const text = {
-            '0': '注册冻结',
-            '1': '放款冻结',
-            '2': '放款冻结',
-            '3': '提现中',
-            '4': '已提现',
-            '6': '红包过期失效',
-            '7': '活动过期失效',
-            '8': '首借非掌众失效'
+            '0': '冻结',
+            '1': '可提现',
+            '2': '提现中',
+            '3': '已提现',
+            '4': '失效'
         };
         let {rows, hasData} = this.props.redbag.records;
         let item_list = (item, index) => {
