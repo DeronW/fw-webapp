@@ -2,22 +2,22 @@ import { Request, Components } from 'fw-javascripts'
 
 const API_PATH = document.getElementById('api-path').value;
 
-function getCookie() {
-    var c = document.cookie;
-    var r = {};
-    if (c === '') return r
-    c.split(';').forEach(function(kv) {
-        var t = kv.trim().split('=');
-        r[t[0]] = t[1];
-    });
-    return r;
-}
+// function getCookie() {
+//     var c = document.cookie;
+//     var r = {};
+//     if (c === '') return r
+//     c.split(';').forEach(function(kv) {
+//         var t = kv.trim().split('=');
+//         r[t[0]] = t[1];
+//     });
+//     return r;
+// }
 
 const PostMethodFactory = function (Storage, Browser, NativeBridge) {
 
     let USER = Storage.getUserDict(),
-        token = USER.token || getCookie().token,
-        uid = USER.uid || getCookie().uid;
+        token = USER.token, //|| getCookie().token,
+        uid = USER.uid// || getCookie().uid;
 
     let ua = window.navigator.userAgent,
         inWX = ua.indexOf('MicroMessenger') > -1,
