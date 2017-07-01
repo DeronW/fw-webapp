@@ -3,9 +3,9 @@ import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
-import { Storage, NativeBridge } from '../../lib/helpers'
+import { Storage, NativeBridge, Browser } from '../../lib/helpers'
 import styles from '../css/redbag.css'
-import { Components, NativeBridgeFactory } from 'fw-javascripts'
+import { Components, NativeBridgeFactory, Utils } from 'fw-javascripts'
 
 @inject('redbag')
 @observer
@@ -18,6 +18,11 @@ class RedBag extends React.Component {
     }
 
     componentDidMount() {
+        alert('Browser ' + Browser)
+        alert('inFXHApp ' + Browser.inFXHApp)
+        alert('inApp ' + Browser.inApp)
+        alert('inJRGCApp ' + Browser.inJRGCApp)
+        alert('appVersion ' + Browser.appVersion)
         // document.title = '红包账户'
         this.props.redbag.fetch_user_redbag()
     }
@@ -106,7 +111,7 @@ class RedBag extends React.Component {
         }
 
         return <div>
-            <Header title="红包账户" goback={()=>NativeBridge.trigger('close')} history={history}/>
+            <Header title="红包账户" goback={() => NativeBridge.trigger('close')} history={history} />
             <div styleName="details-entry">
                 <Link to="/redbag-records">
                     <span>红包明细</span>
