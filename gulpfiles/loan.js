@@ -111,10 +111,12 @@ const REFACTORY_PAGES = [{
 }, {
     name: 'account',
     compiler: 'webpack'
-}, {
-    name: 'protocols',
-    compiler: 'webpack'
-}]
+}
+// , {
+//     name: 'protocols',
+//     compiler: 'webpack'
+// }
+]
 
 APP_NAMES.push(
     ...USER_PAGES,

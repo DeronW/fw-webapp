@@ -46,11 +46,10 @@ window.CCC = $FW.Utils.Cookie
         };
         let statusText = (item, index) => <span key={index} styleName="status-text">{text[item.redbagStatus]}</span>
         let {rows, hasData} = this.props.redbag.records;
-        let status = rows.map(statusText);
         let item_list = (item, index) => {
             return <div styleName="list-item" key={item.uuid}>
                 <div styleName="red-status">
-                    {status}
+                    {statusText}
                     <span styleName="status-num">{item.redbagAmt}</span>
                 </div>
                 <div styleName="sub-red-status">
