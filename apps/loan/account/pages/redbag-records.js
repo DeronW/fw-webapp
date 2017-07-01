@@ -44,16 +44,17 @@ window.CCC = $FW.Utils.Cookie
             '7': '活动过期失效',
             '8': '首借非掌众失效'
         };
-        let statusText = (item, index) => <span key={index} styleName="sub-status-text">{text[item.redbagStatus]}</span>
+        let statusText = (item, index) => <span key={index} styleName="status-text">{text[item.redbagStatus]}</span>
         let {rows, hasData} = this.props.redbag.records;
+        let status = rows.map(statusText);
         let item_list = (item, index) => {
             return <div styleName="list-item" key={item.uuid}>
                 <div styleName="red-status">
-                    <span styleName="status-text">{item.detailStatusStr}</span>
+                    {status}
                     <span styleName="status-num">{item.redbagAmt}</span>
                 </div>
                 <div styleName="sub-red-status">
-                    {rows.map(statusText)}
+                    <span styleName="sub-status-text">{item.detailStatusStr}</span>
                     <span styleName="status-time">{this.formatTime(item.createTime)}</span>
                 </div>
             </div>
