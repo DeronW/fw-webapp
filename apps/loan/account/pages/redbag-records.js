@@ -1,63 +1,35 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { observer, inject } from 'mobx-react'
-import { Redirect } from 'react-router'
-import { Link } from 'react-router-dom'
-import { Header } from '../../lib/components'
+import {observer, inject} from 'mobx-react'
+import {Redirect} from 'react-router'
+import {Link} from 'react-router-dom'
+import {Header} from '../../lib/components'
 
 import styles from '../css/redbag-records.css'
 import * as $FW from 'fw-javascripts'
 
 @inject("redbag")
 @observer
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {
+    "allowMultiple": true,
+    "errorWhenNotFound": false
+})
 export default class RedbagRecords extends React.Component {
-    constructor(props){
-        super(props);
-        // this.state = {
-        //     page: 1,
-        //     hasData: true
-        // }
-    }
     componentDidMount() {
         document.title = "红包明细";
-        let {history,redbag} = this.props;
+        let {history, redbag} = this.props;
         redbag.loadMore(null)
-        $FW.Event.touchBottom(redbag.loadMore);
+        $FW
+            .Event
+            .touchBottom(redbag.loadMore);
     }
     formatTime = (ms) => {
         let jsonDate = new Date(Number(ms)).toJSON();
         let YMD = jsonDate.slice(0, 10);
-        // let HMS = jsonDate.slice(11, 19);
         return `${YMD}`;
     }
-    render(){
+    render() {
         let {history} = this.props;
-        // 判断红包状态
-        // let statusText = (item,index) => {
-        //     let redNum = item.redbagStatus;
-        //     if(redNum == 0){
-        //         return <span styleName="status-text">注册冻结</span>
-        //     }else if(redNum ==1){
-        //         return <span styleName="status-text">放款冻结</span>
-        //     }else if(redNum == 2){
-        //         return <span styleName="status-text">可提现</span>
-        //     }else if(redNum ==3){
-        //         return <span styleName="status-text">提现中</span>
-        //     }else if(redNum ==4){
-        //         return <span styleName="status-text">已提现</span>
-        //     }else if(redNum == 6){
-        //         return <span styleName="status-text">红包过期失效</span>
-        //     }else if(redNum == 7){
-        //         return <span styleName="status-text">活动过期失效</span>
-        //     }else if(redNum == 8){
-        //         return <span styleName="status-text">首借非掌众失效</span>
-        //     }
-        // }
-
-        // const text = ["注册冻结","放款冻结","可提现","提现中","已提现","红包过期失效","活动过期失效","首借非掌众失效"];
-
-
         const text = {
             '0': '注册冻结',
             '1': '放款冻结',
@@ -66,33 +38,29 @@ export default class RedbagRecords extends React.Component {
             '4': '已提现',
             '6': '红包过期失效',
             '7': '活动过期失效',
-            '8': '首借非掌众失效',
+            '8': '首借非掌众失效'
         };
-
-
         let statusText = (item, index) => <span key={index} styleName="sub-status-text">{text[item.redbagStatus]}</span>
-
         let {rows, hasData} = this.props.redbag.records;
-
-        let item_list = (item,index) => {
+        let item_list = (item, index) => {
             return <div styleName="list-item" key={item.uuid}>
-                        <div styleName="red-status">
-                            <span styleName="status-text">{item.detailStatusStr}</span>
-                            <span styleName="status-num">{item.redbagAmt}</span>
-                        </div>
-                        <div styleName="sub-red-status">
-                            {rows.map(statusText)}
-                            <span styleName="status-time">{this.formatTime(item.createTime)}</span>
-                        </div>
-                    </div>
+                <div styleName="red-status">
+                    <span styleName="status-text">{item.detailStatusStr}</span>
+                    <span styleName="status-num">{item.redbagAmt}</span>
+                </div>
+                <div styleName="sub-red-status">
+                    {rows.map(statusText)}
+                    <span styleName="status-time">{this.formatTime(item.createTime)}</span>
+                </div>
+            </div>
         }
         // 没数据的空页面
         let empty = <div styleName="no-data-box">
-            <img styleName="no-data-img" src={require("../images/no-data.png")} />
+            <img styleName="no-data-img" src={require("../images/no-data.png")}/>
             <p styleName="no-data-desc">暂无数据</p>
         </div>;
         return <div>
-            <Header title="红包明细" history = {history}/>
+            <Header title="红包明细" history={history}/>
             <div>
                 {/*数据列表*/}
                 <div styleName="data-list">
