@@ -14,8 +14,6 @@ const Header = CSSModules(styles, {
     return <div styleName="header-placeholder">
         <div styleName="header">
             <a styleName="btn-back" onClick={goBack}>
-                <div styleName="arm-up"></div>
-                <div styleName="arm-down"></div>
             </a>
             {props.title}
         </div>
