@@ -18,13 +18,13 @@ class RedBag extends React.Component {
     }
 
     componentDidMount() {
-        alert('Browser ' + Browser)
-        alert('inFXHApp ' + Browser.inFXHApp)
-        alert('inApp ' + Browser.inApp)
-        alert('inJRGCApp ' + Browser.inJRGCApp)
-        alert('appVersion ' + Browser.appVersion)
-        alert('cookie uid '  + Utils.Cookie.get('uid'))
-        alert('cookie token '  + Utils.Cookie.get('token'))
+        console.log('Browser ' + Browser)
+        console.log('inFXHApp ' + Browser.inFXHApp)
+        console.log('inApp ' + Browser.inApp)
+        console.log('inJRGCApp ' + Browser.inJRGCApp)
+        console.log('appVersion ' + Browser.appVersion)
+        console.log('cookie uid '  + Utils.Cookie.get('uid'))
+        console.log('cookie token '  + Utils.Cookie.get('token'))
         // document.title = '红包账户'
         this.props.redbag.fetch_user_redbag()
     }
