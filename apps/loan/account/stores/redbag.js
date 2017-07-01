@@ -68,7 +68,7 @@ export default class Redbag {
         return this.Post('/api/redbag/v1/apply.json', {
             batchGid: this.batchGid,
             verifyCode: value,
-            withdrawAmt: this.withdrawAmt,
+            withdrawAmt: this.hasWithdrawAmt,
             withdrawCardUuid: uuid
         }).then(data => {
             this.applyTimeStr = data.applyTimeStr;
