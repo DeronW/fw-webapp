@@ -1,6 +1,12 @@
 import { NativeBridgeFactory } from 'fw-javascripts'
 
-const NativeBridge = new NativeBridgeFactory('FinancialWorkshop')
+
+let ua = navigator.userAgent, stamp,
+    JRGC = 'FinancialWorkshop', FXH = 'EasyLoan888'
+
+stamp = ua.indexOf(JRGC) > -1 ? JRGC : ua.indexOf(FXH) > -1 ? FXH : null;
+
+const NativeBridge = new NativeBridgeFactory(stamp)
 
 NativeBridge.close = function () {
     NativeBridge.trigger('close')
