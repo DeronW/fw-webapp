@@ -15,7 +15,11 @@ import * as $FW from 'fw-javascripts'
     "errorWhenNotFound": false
 })
 export default class RedbagRecords extends React.Component {
+
     componentDidMount() {
+
+window.CCC = $FW.Utils.Cookie
+
         document.title = "红包明细";
         let {history, redbag} = this.props;
         redbag.loadMore(null)

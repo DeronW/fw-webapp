@@ -56,9 +56,10 @@ class StorageFactory {
         })
 
         // app 会把 登陆用的 token 和 uid 写入cookie中
-        // // if (this.Browser.inFXHApp) { }
-        // if (Utils.docCookie.uid) r.uid = Utils.Cookie.get('uid')
-        // if (Utils.docCookie.token) r.token = Utils.Cookie.get('token')
+        if (this.Browser.inFXHApp) {
+            if (Utils.Cookie.get('uid')) r.uid = Utils.Cookie.get('uid')
+            if (Utils.Cookie.get('token')) r.token = Utils.Cookie.get('token')
+        }
 
         return r
     }
