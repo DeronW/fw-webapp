@@ -16,7 +16,7 @@ NativeBridge.setTitle = function (title) {
 }
 
 NativeBridge.login = function(){
-    NativeBridge.trigger('login')
+    NativeBridge.trigger('login', '', true)
 }
 
 export default NativeBridge
