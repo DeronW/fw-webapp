@@ -5,7 +5,7 @@ import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
 import { Storage, NativeBridge, Browser } from '../../lib/helpers'
 import styles from '../css/redbag.css'
-import { Components, NativeBridgeFactory, Utils } from 'fw-javascripts'
+import { Components, Utils } from 'fw-javascripts'
 
 @inject('redbag')
 @observer
@@ -23,8 +23,12 @@ class RedBag extends React.Component {
         console.log('inApp ' + Browser.inApp)
         console.log('inJRGCApp ' + Browser.inJRGCApp)
         console.log('appVersion ' + Browser.appVersion)
-        console.log('cookie uid '  + Utils.Cookie.get('uid'))
-        console.log('cookie token '  + Utils.Cookie.get('token'))
+        console.log('cookie uid ' + Utils.Cookie.get('uid'))
+        console.log('cookie token ' + Utils.Cookie.get('token'))
+        console.log('NativeBridge', NativeBridge)
+        console.log('NativeBridge.close', NativeBridge.close)
+        window._N = NativeBridge
+
         // document.title = '红包账户'
         this.props.redbag.fetch_user_redbag()
     }
@@ -80,7 +84,6 @@ class RedBag extends React.Component {
 
     render() {
         let { redbag, history } = this.props
-        let NativeBridge = new NativeBridgeFactory('Easyloan888');
         let ableToClick = redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
 
         let cardNoInfo = redbag.default_card ?
