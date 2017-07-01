@@ -44,6 +44,7 @@
     position: absolute;
     width: 4px;
     height: 30px;
+    -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     top: 20px;
     left: 40px;
@@ -54,6 +55,7 @@
     position: absolute;
     width: 4px;
     height: 30px;
+    -wekit-transform:rotate(135deg);
     transform: rotate(135deg);
     top: 40px;
     left: 40px;
