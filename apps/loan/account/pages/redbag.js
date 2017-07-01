@@ -31,6 +31,8 @@ class RedBag extends React.Component {
 
         // document.title = '红包账户'
         this.props.redbag.fetch_user_redbag()
+        let ruleContent = this.props.redbag.instruction;
+        React.findDOMNode(this.refs.rule).innerHTML = ruleContent;
     }
 
     withdrawHandler = () => {
@@ -140,7 +142,7 @@ class RedBag extends React.Component {
                 <div styleName={ableToClick ? "withdraw-btn" : "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                 <div styleName="packet-tips">
                     <div styleName="packet-tips-title">说明</div>
-                    <div styleName="packet-rule-item" dangerouslySetInnerHTML={this.createMarkup}>
+                    <div styleName="packet-rule-item" ref="rule">
                     </div>
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>7*24小时可以提现；</div>*/}
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>提现后1-3个工作日到账；</div>*/}
