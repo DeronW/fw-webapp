@@ -7,7 +7,8 @@ const Header = CSSModules(styles, {
     "allowMultiple": true,
     "errorWhenNotFound": false
 })(props => {
-    if (!Theme.get('header')) return null;
+    if (!Theme.get('header') && props.enable != 'force') return null;
+
     let goBack = props.goBack || (props.history && props.history.goBack)
 
     return <div styleName="header-placeholder">
