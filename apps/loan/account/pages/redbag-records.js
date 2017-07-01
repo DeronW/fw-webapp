@@ -11,7 +11,7 @@ import * as $FW from 'fw-javascripts'
 @inject("redbag")
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-export default class RedBagRecords extends React.Component {
+export default class RedbagRecords extends React.Component {
     constructor(props){
         super(props);
         // this.state = {
@@ -57,7 +57,7 @@ export default class RedBagRecords extends React.Component {
 
         // const text = ["注册冻结","放款冻结","可提现","提现中","已提现","红包过期失效","活动过期失效","首借非掌众失效"];
 
-       
+
         const text = {
             '0': '注册冻结',
             '1': '放款冻结',
@@ -70,12 +70,12 @@ export default class RedBagRecords extends React.Component {
         };
 
 
-        let statusText = (item) => <span styleName="sub-status-text">{text[item.redbagStatus]}</span>
-        
+        let statusText = (item, index) => <span key={index} styleName="sub-status-text">{text[item.redbagStatus]}</span>
+
         let {rows, hasData} = this.props.redbag.records;
 
         let item_list = (item,index) => {
-            return <div styleName="list-item">
+            return <div styleName="list-item" key={item.uuid}>
                         <div styleName="red-status">
                             <span styleName="status-text">{item.detailStatusStr}</span>
                             <span styleName="status-num">{item.redbagAmt}</span>
