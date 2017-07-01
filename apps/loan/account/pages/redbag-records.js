@@ -49,7 +49,7 @@ window.CCC = $FW.Utils.Cookie
         let item_list = (item, index) => {
             return <div styleName="list-item" key={item.uuid}>
                 <div styleName="red-status">
-                    {statusText()}
+                    {statusText}
                     <span styleName="status-num">{item.redbagAmt}</span>
                 </div>
                 <div styleName="sub-red-status">
