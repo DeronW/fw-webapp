@@ -120,7 +120,7 @@ class RedBag extends React.Component {
         }
 
         return <div>
-            <Header title="红包账户" goback={goBack} enable={'force'} />
+            <Header title="红包账户" goBack={goBack} enable={'force'} />
 
             <div styleName="details-entry">
                 <Link to="/redbag-records"><span>红包明细</span></Link>
