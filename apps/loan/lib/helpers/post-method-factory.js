@@ -2,6 +2,16 @@ import { Request, Components } from 'fw-javascripts'
 
 const API_PATH = document.getElementById('api-path').value;
 
+function inHome(){
+    var p = location.pathname;
+    return p === '/' || p === '/static/loan/home/index.html'
+}
+
+function loginInApp(){
+    location.href = '/static/loan/user-jrgc-login/index.html';
+}
+
+
 const PostMethodFactory = function (Storage, Browser, NativeBridge) {
 
     let USER = Storage.getUserDict(),
