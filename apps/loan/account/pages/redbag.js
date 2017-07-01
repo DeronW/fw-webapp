@@ -81,7 +81,9 @@ class RedBag extends React.Component {
             history.push('/redbag-result')
         });
     }
-
+    createMarkup = () => {
+        return {__html:this.props.redbag.instruction};
+    }
     render() {
         let { redbag, history } = this.props
         let ableToClick = redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
@@ -138,8 +140,7 @@ class RedBag extends React.Component {
                 <div styleName={ableToClick ? "withdraw-btn" : "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                 <div styleName="packet-tips">
                     <div styleName="packet-tips-title">说明</div>
-                    <div styleName="packet-rule-item">
-                        {this.props.redbag.instruction}
+                    <div styleName="packet-rule-item" dangerouslySetInnerHTML={this.createMarkup}>
                     </div>
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>7*24小时可以提现；</div>*/}
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>提现后1-3个工作日到账；</div>*/}
