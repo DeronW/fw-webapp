@@ -28,8 +28,7 @@ export default class RedBagResult extends React.Component {
                             <div styleName="line"></div>
                             <div styleName="waiting-result">
                                 <div styleName="icon2"></div>
-                                <div styleName="icon2-info">预计到账时间</div>
-                                <div styleName="time2">{redbag.preAccountTimeStr}</div>
+                                <div styleName="icon2-info">预计1-3个工作日到账</div>
                             </div>
                         </div>
                     </div>
