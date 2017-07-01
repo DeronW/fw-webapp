@@ -84,7 +84,7 @@ class RedBag extends React.Component {
         let ableToClick = redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
 
         let cardNoInfo = redbag.default_card ?
-            redbag.default_card.text : '暂未设置';
+            redbag.default_card.text : '';
 
         let pop = () => {
             if (!this.state.maskShow) return;
@@ -131,7 +131,7 @@ class RedBag extends React.Component {
                 </div>
                 <div styleName={ableToClick ? "withdraw-btn" : "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                 <div styleName="packet-tips">
-                    <div styleName="packet-tips-title">温馨提示</div>
+                    <div styleName="packet-tips-title">说明</div>
                     <div styleName="packet-rule-item">
                         {this.props.redbag.instruction}
                     </div>
