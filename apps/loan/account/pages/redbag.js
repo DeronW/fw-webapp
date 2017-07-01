@@ -18,21 +18,19 @@ class RedBag extends React.Component {
     }
 
     componentDidMount() {
-        console.log('Browser ' + Browser)
-        console.log('inFXHApp ' + Browser.inFXHApp)
-        console.log('inApp ' + Browser.inApp)
-        console.log('inJRGCApp ' + Browser.inJRGCApp)
-        console.log('appVersion ' + Browser.appVersion)
-        console.log('cookie uid ' + Utils.Cookie.get('uid'))
-        console.log('cookie token ' + Utils.Cookie.get('token'))
-        console.log('NativeBridge', NativeBridge)
-        console.log('NativeBridge.close', NativeBridge.close)
+        // console.log('Browser ' + Browser)
+        // console.log('inFXHApp ' + Browser.inFXHApp)
+        // console.log('inApp ' + Browser.inApp)
+        // console.log('inJRGCApp ' + Browser.inJRGCApp)
+        // console.log('appVersion ' + Browser.appVersion)
+        // console.log('cookie uid ' + Utils.Cookie.get('uid'))
+        // console.log('cookie token ' + Utils.Cookie.get('token'))
+        // console.log('NativeBridge', NativeBridge)
+        // console.log('NativeBridge.close', NativeBridge.close)
         window._N = NativeBridge
 
         // document.title = '红包账户'
         this.props.redbag.fetch_user_redbag()
-        let ruleContent = this.props.redbag.instruction;
-        React.findDOMNode(this.refs.rule).innerHTML = ruleContent;
     }
 
     withdrawHandler = () => {
@@ -82,9 +80,6 @@ class RedBag extends React.Component {
         redbag.withdrawConfirm(value, uuid).then(() => {
             history.push('/redbag-result')
         });
-    }
-    createMarkup = () => {
-        return {__html:this.props.redbag.instruction};
     }
     render() {
         let { redbag, history } = this.props
@@ -142,7 +137,7 @@ class RedBag extends React.Component {
                 <div styleName={ableToClick ? "withdraw-btn" : "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
                 <div styleName="packet-tips">
                     <div styleName="packet-tips-title">说明</div>
-                    <div styleName="packet-rule-item" ref="rule">
+                    <div styleName="packet-rule-item" dangerouslySetInnerHTML={{__html:this.props.redbag.instruction}}>
                     </div>
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>7*24小时可以提现；</div>*/}
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>提现后1-3个工作日到账；</div>*/}
