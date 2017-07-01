@@ -115,12 +115,15 @@ class RedBag extends React.Component {
             </div>
         }
 
+        let goBack = () => {
+            Browser.inApp ? NativeBridge.close() : history.goBack()
+        }
+
         return <div>
-            {Browser.inWeixin && <Header title="红包账户" goback={NativeBridge.close} />}
+            {Browser.inWeixin && <Header title="红包账户" goback={goBack} />}
+
             <div styleName="details-entry">
-                <Link to="/redbag-records">
-                    <span>红包明细</span>
-                </Link>
+                <Link to="/redbag-records"><span>红包明细</span></Link>
             </div>
             <div styleName="red-packet-wrapper">
                 <div styleName="red-packet-area">
