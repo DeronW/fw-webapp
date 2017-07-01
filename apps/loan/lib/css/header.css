@@ -4,26 +4,10 @@
     width:100%;
     background:#fff;
 }
-.header-placeholder-inIOSApp {
-    display: block;
-    height:110px;
-    width:100%;
-    background:#fff;
-}
 .header {
     width: 100%;
     height: 88px;
     line-height: 88px;
-    background-color: #fff;
-    text-align: center;
-    font-size: 36px;
-    color: #333;
-}
-.header-inIOSApp{
-    z-index: 99;
-    width: 100%;
-    height: 110px;
-    line-height: 110px;
     background-color: #fff;
     text-align: center;
     font-size: 36px;
@@ -44,6 +28,7 @@
     position: absolute;
     width: 4px;
     height: 30px;
+    -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
     top: 20px;
     left: 40px;
@@ -54,6 +39,7 @@
     position: absolute;
     width: 4px;
     height: 30px;
+    -wekit-transform:rotate(135deg);
     transform: rotate(135deg);
     top: 40px;
     left: 40px;
