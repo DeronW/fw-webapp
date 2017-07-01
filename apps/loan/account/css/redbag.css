@@ -85,7 +85,7 @@ input{
 }
 .packet-tips{
     color:#999;
-    margin-left:34px;
+    padding:0 34px;
     margin-top:50px;
 }
 .packet-tips-title{
