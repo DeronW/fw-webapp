@@ -43,6 +43,9 @@ input{
     font-size:28px;
     line-height:60px;
 }
+.packet-frozen span{
+    font-family: "Helvetica Neue";
+}
 .packet-num{
     font-size:100px;
     line-height:100%;
