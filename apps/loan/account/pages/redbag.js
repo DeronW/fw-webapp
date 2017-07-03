@@ -85,10 +85,10 @@ class RedBag extends React.Component {
                     Components.showToast(e.message)
                     clearInterval(this._timer)
                 } else {
-                    Components.showToast(e.message)
-                    clearInterval(this._timer)
+                    // Components.showToast(e.message)
+                    // clearInterval(this._timer)
                     redbag.setWithdrawResult({success: false, reason: e.message})
-                    //history.push('/redbag-result')
+                    history.push('/redbag-result')
                 }
             });
         }
