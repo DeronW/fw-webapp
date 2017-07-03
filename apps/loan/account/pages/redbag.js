@@ -25,8 +25,8 @@ class RedBag extends React.Component {
         let ableToClick = this.props.redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
 
         if (ableToClick) {
-            this.setState({maskShow: true});
             this.props.redbag.getSMSCode().then(()=>{
+                this.setState({maskShow: true});
                 this.startCounting();
             },e=>{
                 if(e.code == 26012){
