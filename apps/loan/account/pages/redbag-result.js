@@ -56,7 +56,7 @@ export default class RedBagResult extends React.Component {
                         </div>
                         <div styleName="customer-service">
                             <div styleName="service-wrap">
-                                <img src={require("../images/phone.png")} />如有问题请致电：
+                                <img src={require("../images/phone.png")} />有问题请联系客服：
                                 <a href="tel:400-102-0066">400-102-0066</a></div>
                         </div>
                     </div>}
