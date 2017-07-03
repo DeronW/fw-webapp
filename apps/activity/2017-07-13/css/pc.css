@@ -483,4 +483,16 @@
     top: -55px;
     left: 8%;
 }
+/*pc banner action*/
+@keyframes cloudMovePC {
+    0%{
+        margin-top: 20px;
+    }
+    50%{
+        margin-top: 13px;
+    }
+    100%{
+        margin-top: 20px;
+    }
+}
 

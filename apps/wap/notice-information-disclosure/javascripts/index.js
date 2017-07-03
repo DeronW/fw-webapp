@@ -60,7 +60,7 @@ window.onload = function () {
         } else if (len > 3) {
             v = (value / 10000).toFixed(n) + "万";
         } else {
-            return value
+            return value+".00"
         }
         return v
     }
@@ -380,11 +380,11 @@ window.onload = function () {
         var endurance = document.querySelectorAll(".enduranceCell");
         var len = endurance.length;
         for (var i = 0; i < len; i++) {
-            endurance[0].querySelector('.cash span').innerText = judgeCash(data.data.total_principalInvest);
-            endurance[1].querySelector('.cash span').innerText = judgeCash(data.data.total_overdueSum);
+            endurance[0].querySelector('.cash span').innerText = judgeCash(data.data.total_principalInvest,2);
+            endurance[1].querySelector('.cash span').innerText = judgeCash(data.data.total_overdueSum,2);
             endurance[2].querySelector('.cash span').innerText = prevent(data.data.total_overdueSum / data.data.total_invest * 100);
             endurance[3].querySelector('.cash span').innerText = prevent(data.data.total_overdueCount / data.data.total_orderCount * 100);
-            endurance[4].querySelector('.cash span').innerText = data.data.total_lendSum
+            endurance[4].querySelector('.cash span').innerText = judgeCash(data.data.total_lendSum,2)
     }
     });
 
