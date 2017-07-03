@@ -8,38 +8,55 @@ export default class Quotations {
         extendObservable(this, {
             detail: {
                 // 0:平安、1:太平洋、2:人保
-                /*
-                '0': {
-                    source: '0',  // 公司编号
-                    originPrice: '1234',  // 总计报价
-                    discount: '23',  // 工场优惠
-                    actualPrice: '1211',  // 实际结算价
-                    forceAndTaxTotal: '2000',  // 交强险 + 车船税
-                    forceTotal: '1001',  // 交强险
-                    taxTotal: '999',  // 车船税
-                    businessTotal: '12000',  // 商业险总计报价
-                    businessDiscountRate: '20',  // 商业险优惠百分比
-                    cheSun: '12',  // 车损险
-                    ...其他种类明细
-                },
-                '1': {...},
-                '2': {...}
-                */
+
+                '0': { },
+                '1': { },
+                '2': { },
+
+                // with no error:
+                // '0': {
+                //     source: '0',  // 公司编号
+                //     originPrice: '1234',  // 总计报价
+                //     discount: '23',  // 工场优惠
+                //     actualPrice: '1211',  // 实际结算价
+                //     forceAndTaxTotal: '2000',  // 交强险 + 车船税
+                //     forceTotal: '1001',  // 交强险
+                //     taxTotal: '999',  // 车船税
+                //     businessTotal: '12000',  // 商业险总计报价
+                //     businessDiscountRate: '20',  // 商业险优惠百分比
+                //     cheSun: '12',  // 车损险
+                //     ...其他种类明细
+                // },
+                // '1': {...},
+                // '2': {...}
+
             }
         })
     }
 
-    fetchQuotations = async () => {
-        let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
-            .then(data => data.temporaryPolicyId)
-        this.Get(`/carInsurance/insuranceQuote.shtml`, {
-            temporaryPolicyId: temporaryPolicyId
-        }).then(({ quotationDetail }) => {
-            for (var i = 0; i < quotationDetail.length; i++) {
-                let source = String(quotationDetail[i].source);
-                Object.assign(this.detail[source], quotationDetail[i]);
-            }
+    @computed get hasDetail() {
+        let r = {};
+        Object.keys(this.detail).forEach((source) => {
+            r[source] = !(Object.keys(this.detail[source]).length === 0 && this.detail[source].constructor === Object)
         })
+        return r
+    }
+
+    fetchQuotations = async (s) => {
+        let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
+            .then(data => data.temporaryPolicyId);
+
+        ['0', '1', '2'].map((source) => {
+            if (s !== undefined && source !== s) return;
+
+            this.Get(`/carInsurance/insuranceQuote.shtml`, {
+                source: source,
+                temporaryPolicyId: temporaryPolicyId
+            }).then(({ quotationDetail }) => {
+                Object.assign(this.detail, { [source]: quotationDetail[0]} );
+            })
+        })
+
     }
 
     setForm = (data) => {
