@@ -73,9 +73,7 @@ export default class Redbag {
             this.preAccountTimeStr = data.preAccountTimeStr;
             history.push('/redbag-result')
         }, e => {
-            if(e.code == 26001){
-                Components.showToast(e.message)
-            }else if(e.code == 26011){
+            if(e.code == 26001 || e.code == 26008 || e.code == 26009 || e.code == 26010 || e.code == 26011 || e.code == 26012 || e.code == 26013 || e.code == 26014){
                 Components.showToast(e.message)
             }else{
                 this.failReason = e.message
