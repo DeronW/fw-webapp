@@ -78,7 +78,8 @@ export default class Redbag {
     }
 
     setWithdrawResult = result => {
-        this.withdrawResult = result
+        this.withdrawResult.success = result.success
+        this.withdrawResult.reason = result.reason
     }
 
 
