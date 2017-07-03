@@ -34,14 +34,6 @@ export default class Quotations {
         })
     }
 
-    @computed get hasDetail() {
-        let r = {};
-        Object.keys(this.detail).forEach((source) => {
-            r[source] = !(Object.keys(this.detail[source]).length === 0 && this.detail[source].constructor === Object)
-        })
-        return r
-    }
-
     fetchQuotations = async (s) => {
         let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
             .then(data => data.temporaryPolicyId);

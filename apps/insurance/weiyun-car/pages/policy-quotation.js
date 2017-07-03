@@ -34,7 +34,7 @@ class PolicyQuotation extends React.Component {
 
         let gen_quotation_item = (source, sourceName) => {
             let selectedDetail = quotationsDetail[source],
-                hasDetail = quotations.hasDetail[source];
+                hasDetail = !(Object.keys(selectedDetail).length === 0 && selectedDetail.constructor === Object)
             return (
                 <div styleName="quotation-item">
                     <div styleName="check-box" onClick={() => { current_order.selectFirm(source) }}>
