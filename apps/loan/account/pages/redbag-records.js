@@ -1,12 +1,12 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Redirect} from 'react-router'
-import {Link} from 'react-router-dom'
-import {Header} from '../../lib/components'
+import { observer, inject } from 'mobx-react'
+import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom'
+import { Header } from '../../lib/components'
 
 import styles from '../css/redbag-records.css'
-import * as $FW from 'fw-javascripts'
+import { Event } from 'fw-javascripts'
 
 @inject("redbag")
 @observer
@@ -17,15 +17,10 @@ import * as $FW from 'fw-javascripts'
 export default class RedbagRecords extends React.Component {
 
     componentDidMount() {
-
-window.CCC = $FW.Utils.Cookie
-
-        document.title = "红包明细";
-        let {history, redbag} = this.props;
-        redbag.loadMore(null)
-        $FW
-            .Event
-            .touchBottom(redbag.loadMore);
+        // document.title = "红包明细";
+        let { redbag } = this.props;
+        redbag.loadMoreRecords()
+        Event.touchBottom(redbag.loadMoreRecords);
     }
     formatTime = (ms) => {
         let jsonDate = new Date(Number(ms)).toJSON();
@@ -33,7 +28,7 @@ window.CCC = $FW.Utils.Cookie
         return `${YMD}`;
     }
     render() {
-        let {history} = this.props;
+        let { history } = this.props;
         const text = {
             '0': '冻结',
             '1': '可提现',
@@ -41,9 +36,10 @@ window.CCC = $FW.Utils.Cookie
             '3': '已提现',
             '4': '失效'
         };
-        let {rows, hasData} = this.props.redbag.records;
+        let { rows, hasData } = this.props.redbag.records;
+
         let item_list = (item, index) => {
-            return <div styleName="list-item" key={item.uuid}>
+            return <div styleName="list-item" key={item.uuid + index}>
                 <div styleName="red-status">
                     <span styleName="status-text">{text[item.redbagStatus]}</span>
                     <span styleName="status-num">{item.redbagAmt}</span>
@@ -56,18 +52,19 @@ window.CCC = $FW.Utils.Cookie
         }
         // 没数据的空页面
         let empty = <div styleName="no-data-box">
-            <img styleName="no-data-img" src={require("../images/no-data.png")}/>
+            <img styleName="no-data-img" src={require("../images/no-data.png")} />
             <p styleName="no-data-desc">暂无数据</p>
         </div>;
+
         return <div>
-            <Header title="红包明细" history={history}/>
+            <Header title="红包明细" history={history} />
             <div>
                 {/*数据列表*/}
                 <div styleName="data-list">
                     {rows.map(item_list)}
                 </div>
                 {/*已加载完全部数据提示*/}
-                {hasData && <div styleName="data-completion">已加载完全部数据</div>}
+                {!hasData && <div styleName="data-completion">已加载完全部数据</div>}
                 {rows.length === 0 && !hasData && empty}
             </div>
         </div>

@@ -18,18 +18,6 @@ class RedBag extends React.Component {
     }
 
     componentDidMount() {
-        // console.log('Browser ' + Browser)
-        // console.log('inFXHApp ' + Browser.inFXHApp)
-        // console.log('inApp ' + Browser.inApp)
-        // console.log('inJRGCApp ' + Browser.inJRGCApp)
-        // console.log('appVersion ' + Browser.appVersion)
-        // console.log('cookie uid ' + Utils.Cookie.get('uid'))
-        // console.log('cookie token ' + Utils.Cookie.get('token'))
-        // console.log('NativeBridge', NativeBridge)
-        // console.log('NativeBridge.close', NativeBridge.close)
-        window._N = NativeBridge
-
-        // document.title = '红包账户'
         this.props.redbag.fetch_user_redbag()
     }
 
