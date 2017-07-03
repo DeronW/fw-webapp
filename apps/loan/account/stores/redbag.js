@@ -1,4 +1,5 @@
 import {extendObservable, computed} from 'mobx'
+import { Components } from 'fw-javascripts'
 
 export default class Redbag {
     constructor(Post) {
@@ -71,8 +72,12 @@ export default class Redbag {
             this.applyTimeStr = data.applyTimeStr;
             this.preAccountTimeStr = data.preAccountTimeStr;
         }, e => {
-            this.failReason = e.message
-            return new Promise(resolve => resolve())
+            if(e.code == 26001){
+                Components.showToast(`验证码错误，请重新输入`)
+            }else{
+                this.failReason = e.message
+                return new Promise(resolve => resolve())
+            }
         })
     }
     // 明细页下拉加载更多
