@@ -74,19 +74,22 @@ class RedBag extends React.Component {
         let {redbag, history} = this.props
         let uuid = redbag.default_card.uuid;
         let value = this.state.sms_code;
-        if (!value) return Components.showToast('请输入验证码');
-        redbag.withdrawConfirm(value, uuid).then(() => {
-            history.push('/redbag-result')
-            redbag.setWithdrawResult({success: true})
-        }, e => {
-            if (e.code == 26001 || e.code == 26008 || e.code == 26011 || e.code == 26013 ) {
-                Components.showToast(e.message)
-                clearInterval(this._timer)
-            } else {
-                redbag.setWithdrawResult({success: false, reason: e.message})
+        if (!value) {
+            Components.showToast('请输入验证码')
+        }else{
+            redbag.withdrawConfirm(value, uuid).then(() => {
                 history.push('/redbag-result')
-            }
-        });
+                redbag.setWithdrawResult({success: true})
+            }, e => {
+                if (e.code == 26001 || e.code == 26008 || e.code == 26011 || e.code == 26013 ) {
+                    Components.showToast(e.message)
+                    clearInterval(this._timer)
+                } else {
+                    redbag.setWithdrawResult({success: false, reason: e.message})
+                    history.push('/redbag-result')
+                }
+            });
+        }
     }
 
     render() {
