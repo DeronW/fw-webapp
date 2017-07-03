@@ -62,9 +62,7 @@ class RedBag extends React.Component {
         let { redbag, history } = this.props
         let uuid = redbag.default_card.uuid;
         let value = this.state.sms_code;
-        let err
-        if (!value) err = '请输入验证码'
-        if (err) return Components.showToast(err)
+        if (!value) return Components.showToast('请输入验证码');
         redbag.withdrawConfirm(value, uuid, history);
     }
     render() {
