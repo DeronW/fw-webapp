@@ -15,11 +15,14 @@ export default class Redbag {
             borrowBtnStatus: '',
             applyTimeStr: '',
             preAccountTimeStr: '',
-            failReason: '',
             records: {
                 page: 1,
                 rows: [],
                 hasData: true
+            },
+            withdrawResult: {
+                success: null,
+                reason: ''
             }
         })
     }
@@ -62,7 +65,7 @@ export default class Redbag {
         })
     }
 
-    withdrawConfirm = (value, uuid, history) => {
+    withdrawConfirm = (value, uuid) => {
         return this.Post('/api/redbag/v1/apply.json', {
             batchGid: this.batchGid,
             verifyCode: value,
@@ -71,17 +74,14 @@ export default class Redbag {
         }).then(data => {
             this.applyTimeStr = data.applyTimeStr;
             this.preAccountTimeStr = data.preAccountTimeStr;
-            history.push('/redbag-result')
-        }, e => {
-            if(e.code == 26001 || e.code == 26008 || e.code == 26009 || e.code == 26010 || e.code == 26011 || e.code == 26012 || e.code == 26013 || e.code == 26014){
-                Components.showToast(e.message)
-            }else{
-                this.failReason = e.message
-                history.push('/redbag-result')
-                return new Promise(resolve => resolve())
-            }
         })
     }
+
+    setWithdrawResult = result => {
+        this.withdrawResult = result
+    }
+
+
     // 明细页下拉加载更多
     loadMoreRecords = (done, reset) => {
         let {records} = this

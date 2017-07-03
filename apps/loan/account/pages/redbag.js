@@ -1,20 +1,20 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { Link } from 'react-router-dom'
-import { observer, inject } from 'mobx-react'
-import { Header } from '../../lib/components'
-import { Storage, NativeBridge, Browser } from '../../lib/helpers'
+import {Link} from 'react-router-dom'
+import {observer, inject} from 'mobx-react'
+import {Header} from '../../lib/components'
+import {Storage, NativeBridge, Browser} from '../../lib/helpers'
 import styles from '../css/redbag.css'
-import { Components, Utils } from 'fw-javascripts'
+import {Components, Utils} from 'fw-javascripts'
 
 @inject('redbag')
 @observer
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class RedBag extends React.Component {
     state = {
         maskShow: false,
         sms_code: '',
-        count: 0,
+        count: 0
     }
 
     componentDidMount() {
@@ -25,17 +25,17 @@ class RedBag extends React.Component {
         let ableToClick = this.props.redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
 
         if (ableToClick) {
-            this.setState({ maskShow: true });
+            this.setState({maskShow: true});
             this.props.redbag.getSMSCode();
             this.startCounting();
         }
     }
 
     startCounting = () => {
-        this.setState({ count: 60 })
+        this.setState({count: 60})
         this._timer = setInterval(() => {
             if (this.state.count <= 1) clearInterval(this._timer)
-            this.setState({ count: this.state.count - 1 })
+            this.setState({count: this.state.count - 1})
         }, 1000)
     }
 
@@ -44,13 +44,13 @@ class RedBag extends React.Component {
     }
 
     closePopHandler = () => {
-        this.setState({ maskShow: false })
+        this.setState({maskShow: false})
         clearInterval(this._timer)
     }
 
     changeValueHandler = e => {
         let v = String(parseInt(e.target.value) || '').substr(0, 6)
-        this.setState({ sms_code: v })
+        this.setState({sms_code: v})
     }
 
     getSMSCode = () => {
@@ -59,14 +59,26 @@ class RedBag extends React.Component {
     }
 
     confirmBtnHandler = () => {
-        let { redbag, history } = this.props
+        let {redbag, history} = this.props
         let uuid = redbag.default_card.uuid;
         let value = this.state.sms_code;
         if (!value) return Components.showToast('请输入验证码');
-        redbag.withdrawConfirm(value, uuid, history);
+        redbag.withdrawConfirm(value, uuid).then(() => {
+            history.push('/redbag-result')
+            redbag.setWithdrawResult({success: true})
+        }, e => {
+            if (e.code == 26001 || e.code == 26008 || e.code == 26009 || e.code == 26010 ||
+                e.code == 26011 || e.code == 26012 || e.code == 26013 || e.code == 26014) {
+                Components.showToast(e.message)
+            } else {
+                redbag.setWithdrawResult({success: false, reason: e.message})
+                history.push('/redbag-result')
+            }
+        });
     }
+
     render() {
-        let { redbag, history } = this.props
+        let {redbag, history} = this.props
         let ableToClick = redbag.hasWithdrawAmt >= this.props.redbag.minWithdrawAmt;
 
         let cardNoInfo = redbag.default_card ?
@@ -85,7 +97,7 @@ class RedBag extends React.Component {
                         </div>
                         <div styleName="verify-input">
                             <input styleName="sms-input" type="number" name="number" value={this.state.sms_code}
-                                placeholder="输入验证码" onChange={this.changeValueHandler} />
+                                   placeholder="输入验证码" onChange={this.changeValueHandler}/>
                             <span styleName="btn-countdown" onClick={this.getSMSCode}>
                                 {this.state.count > 0 ? this.state.count + 's' : '获取验证码'}</span>
                         </div>
@@ -103,7 +115,7 @@ class RedBag extends React.Component {
         }
 
         return <div>
-            <Header title="红包账户" goBack={goBack} enable={'force'} />
+            <Header title="红包账户" goBack={goBack} enable={'force'}/>
 
             <div styleName="details-entry">
                 <Link to="/redbag-records"><span>红包明细</span></Link>
@@ -118,10 +130,11 @@ class RedBag extends React.Component {
                     <div styleName="card-title">银行卡</div>
                     <div styleName="card-branch">{cardNoInfo}</div>
                 </div>
-                <div styleName={ableToClick ? "withdraw-btn" : "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现</div>
+                <div styleName={ableToClick ? "withdraw-btn" : "withdraw-gray-btn"} onClick={this.withdrawHandler}>提现
+                </div>
                 <div styleName="packet-tips">
                     <div styleName="packet-tips-title">说明</div>
-                    <div styleName="packet-rule-item" dangerouslySetInnerHTML={{__html:this.props.redbag.instruction}}>
+                    <div styleName="packet-rule-item" dangerouslySetInnerHTML={{__html: this.props.redbag.instruction}}>
                     </div>
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>7*24小时可以提现；</div>*/}
                     {/*<div styleName="packet-rule"><span styleName="dot"></span>提现后1-3个工作日到账；</div>*/}

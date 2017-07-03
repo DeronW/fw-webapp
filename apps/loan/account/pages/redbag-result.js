@@ -18,7 +18,7 @@ export default class RedBagResult extends React.Component {
         return (
             <div>
                 <Header title="提现结果" history={history} />
-                {redbag.applyTimeStr && <div styleName="waiting-result-box">
+                {redbag.withdrawResult.success && <div styleName="waiting-result-box">
                     <div styleName="wrap-box">
                         <div styleName="success-icon">
                             <img src={require("../images/success-icon.png")} /></div>
@@ -34,14 +34,14 @@ export default class RedBagResult extends React.Component {
                         </div>
                     </div>
                 </div>}
-                {redbag.failReason && <div styleName="fail-result-box">
+                {redbag.withdrawResult.reason && <div styleName="fail-result-box">
                         <div styleName="wrap-box">
                             <div styleName="fail-icon"><img src={require("../images/fail-icon.png")} /></div>
                             <div styleName="loan-result4">
                                 <div styleName="waiting-result">
                                     <div styleName="icon5"></div>
                                     <div styleName="icon5-info">提现失败</div>
-                                    <div styleName="icon5-info-btm">{redbag.failReason}</div>
+                                    <div styleName="icon5-info-btm">{redbag.withdrawResult.reason}</div>
                                 </div>
                             </div>
                         </div>
