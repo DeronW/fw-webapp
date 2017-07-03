@@ -30,7 +30,7 @@ $FW.DOMReady(function () {
         //$(".btm-tip input").val(`${shareLink}&jumpType=to_home`);
         $(".btm-tip input").val(shareLink + `&jumpType=${$FW.Browser.inWeixin() ? 'to_home' : 'app'}`);
     }, (err) => {
-        location.href = '/static/loan/account/#/entry'
+        location.href = '/static/loan/account/index.html#/entry'
     });
 
     function loadMoreHandler(done) {

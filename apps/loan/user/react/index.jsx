@@ -102,7 +102,7 @@ class MajorUserInfo extends React.Component {
             let st = data.borrowBtnStatus,
                 link_a = '/static/loan/user-info/index.html'
                 link_b = '/static/loan/user-card-management/index.html'
-                link_d = '/static/loan/account/#/redbag'
+                link_d = '/static/loan/account/index.html#/redbag'
             if (st === 1) { // 未实名
                 link_a = link_b = link_d = '/static/loan/user-card-set/index.html'
             }
@@ -193,7 +193,7 @@ class ExitBtn extends React.Component {
 
     logoutHandler() {
         $FW.Store.clear();
-        location.href = '/static/loan/account/#/entry';
+        location.href = '/static/loan/account/index.html#/entry';
     }
 
     render() {

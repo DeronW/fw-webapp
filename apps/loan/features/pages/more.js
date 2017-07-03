@@ -24,7 +24,7 @@ class More extends React.Component {
 
     logout = () => {
         Storage.logout()
-        location.href = '/static/loan/account/#/entry'
+        location.href = '/static/loan/account/index.html#/entry'
     }
 
     render() {

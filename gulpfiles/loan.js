@@ -111,12 +111,10 @@ const REFACTORY_PAGES = [{
 }, {
     name: 'account',
     compiler: 'webpack'
-}
-// , {
-//     name: 'protocols',
-//     compiler: 'webpack'
-// }
-]
+}, {
+    name: 'protocols',
+    compiler: 'webpack'
+}]
 
 APP_NAMES.push(
     ...USER_PAGES,
@@ -136,7 +134,7 @@ APP_NAMES.push(
 );
 
 
-module.exports = function(gulp, generate_task, CONSTANTS) {
+module.exports = function (gulp, generate_task, CONSTANTS) {
 
     let default_options = {
         include_components: [
