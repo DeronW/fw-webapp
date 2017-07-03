@@ -25,7 +25,7 @@ input{
     position:absolute;
     top:20px;
     right:34px;
-    z-index:1000;
+    z-index:2;
 }
 .details-entry span{
     font-size:34px;
