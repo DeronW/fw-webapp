@@ -32,7 +32,8 @@ class RedBag extends React.Component {
     }
 
     startCounting = () => {
-        this.setState({count: 60})
+        // 如果是“获取验证码”，则设置为60s,否则继续当前的秒数
+        this.state.count <= 0 ? this.setState({count: 60}) : this._timer();
         this._timer = setInterval(() => {
             if (this.state.count <= 1) clearInterval(this._timer)
             this.setState({count: this.state.count - 1})
@@ -45,7 +46,8 @@ class RedBag extends React.Component {
 
     closePopHandler = () => {
         this.setState({maskShow: false})
-        clearInterval(this._timer)
+        // this._timer();
+        this.startCounting();
     }
 
     changeValueHandler = e => {
