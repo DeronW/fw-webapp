@@ -1,15 +1,12 @@
 import { extendObservable, computed } from 'mobx'
-import { Components } from 'fw-javascripts'
-import { Storage } from '../../lib/helpers'
-import * as $FW from 'fw-javascripts'
 
 export default class Redbag {
     constructor(Post) {
         this.Post = Post
 
         extendObservable(this, {
-            minWithdrawAmt:'',
-            instruction:'',
+            minWithdrawAmt: '',
+            instruction: '',
             batchGid: '',
             freezeAmt: '',
             hasWithdrawAmt: '',
@@ -75,22 +72,21 @@ export default class Redbag {
             this.preAccountTimeStr = data.preAccountTimeStr;
         }, e => {
             this.failReason = e.message
-            return new Promise(s => s())
+            return new Promise(resolve => resolve())
         })
     }
     // 明细页下拉加载更多
-    loadMore = (done) => {
-        if (!this.records.hasData) return done && done();
-        // let user = $FW.Store.getUserDict();
+    loadMoreRecords = done => {
+        let { records } = this
+        if (!records.hasData) return;
 
         return this.Post(`/api/redbag/v1/list.json`, {
             pageSize: 20,
-            pageIndex: this.records.page
+            pageIndex: records.page
         }).then(data => {
-            let RedPacketDetailList = data.resultList;
-            this.records.rows = RedPacketDetailList;
-            this.records.page = this.records.page < data.totalPage ? this.records.page + 1 : this.records.page = 0;
-            this.records.hasData = !!RedPacketDetailList.length;
+            records.rows = records.rows.concat(data.resultList)
+            records.page += 1
+            records.hasData = data.totalPage > records.page
             done && done()
         })
     }

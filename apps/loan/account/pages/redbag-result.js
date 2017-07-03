@@ -20,7 +20,8 @@ export default class RedBagResult extends React.Component {
                 <Header title="提现结果" history={history} />
                 {redbag.applyTimeStr && <div styleName="waiting-result-box">
                     <div styleName="wrap-box">
-                        <div styleName="success-icon"><img src={require("../images/success-icon.png")} /></div>
+                        <div styleName="success-icon">
+                            <img src={require("../images/success-icon.png")} /></div>
                         <div styleName="loan-result1">
                             <div styleName="icon1"></div>
                             <div styleName="icon1-info">提现请求成功，等待银行处理</div>
