@@ -342,7 +342,7 @@
     -webkit-transform: scale(1);
 }
 
-.star-tips {
+.bonus-star:hover .star-tips {
     display: block;
     top: -120px;
 }
