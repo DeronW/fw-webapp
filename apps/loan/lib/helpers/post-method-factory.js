@@ -56,7 +56,7 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
                 if (silence)
                     return new Promise((reslove, reject) => reject(error))
 
-                Components.showToast(error.message)
+                //Components.showToast(error.message)
 
                 return new Promise((resolve, reject) => {
                     setTimeout(() => reject(error), 1700)
