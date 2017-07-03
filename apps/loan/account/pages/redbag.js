@@ -145,7 +145,7 @@ class RedBag extends React.Component {
                 <div styleName="red-packet-area">
                     <div styleName="packet-title">可提现(元)</div>
                     <div styleName="packet-num">{this.props.redbag.hasWithdrawAmt}</div>
-                    <div styleName="packet-frozen">冻结(元)：{this.props.redbag.freezeAmt}</div>
+                    <div styleName="packet-frozen">冻结(元)：<span>{this.props.redbag.freezeAmt}</span></div>
                 </div>
                 <div styleName="withdraw-card">
                     <div styleName="card-title">银行卡</div>
