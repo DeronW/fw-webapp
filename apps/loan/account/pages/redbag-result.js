@@ -9,6 +9,9 @@ import styles from '../css/redbag-result.css'
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class RedBagResult extends React.Component {
+    componentDidMount() {
+        document.title = '提现结果'
+    }
     closeHandler = () => {
         let { history } = this.props
         history.goBack() // 回到红包首页
