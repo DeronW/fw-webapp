@@ -73,7 +73,9 @@ export default class Redbag {
             this.preAccountTimeStr = data.preAccountTimeStr;
         }, e => {
             if(e.code == 26001){
-                Components.showToast(`验证码错误，请重新输入`)
+                Components.showToast(e.message)
+            }else if(e.code == 26011){
+                Components.showToast(e.message)
             }else{
                 this.failReason = e.message
                 return new Promise(resolve => resolve())
