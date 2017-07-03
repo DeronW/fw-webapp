@@ -3,9 +3,6 @@ import React from 'react'
 import {render} from 'react-dom'
 import ReactDOM from 'react-dom'
 import '../lib/css/common.css'
-
-import PCHeader from '../lib/components/pc-header.js'
-import MobileHeader from '../lib/components/mobile-header.js'
 import JulyMobile from './components/mobile.js'
 import JulyPC from './components/pc.js'
 import {Get} from '../lib/helpers/request.js'
@@ -30,7 +27,7 @@ class Content extends React.Component {
     render() {
         let {isLogin} = this.state;
         let isMobile = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i);
-        let props = {isLogin: isLogin,closePopHandler: this.closePopHandler}
+        let props = {isLogin: isLogin, closePopHandler: this.closePopHandler}
         let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC/>
         return <div>
             {/*<PCHeader bgColor={'black'} />*/}

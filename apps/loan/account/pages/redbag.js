@@ -29,7 +29,11 @@ class RedBag extends React.Component {
             this.props.redbag.getSMSCode().then(()=>{
                 this.startCounting();
             },e=>{
-                if(e.code == 20014 || e.code == 26012 || e.code == 26014 || e.code == 26009 || e.code == 26010){
+                if(e.code == 26012){
+                    this.setState({maskShow: false});
+                    Components.showToast(e.message)
+                    clearInterval(this._timer)
+                }else if(e.code == 20014 || e.code == 26014 || e.code == 26009 || e.code == 26010){
                     Components.showToast(e.message)
                     clearInterval(this._timer)
                 }
@@ -141,7 +145,7 @@ class RedBag extends React.Component {
                 <div styleName="red-packet-area">
                     <div styleName="packet-title">可提现(元)</div>
                     <div styleName="packet-num">{this.props.redbag.hasWithdrawAmt}</div>
-                    <div styleName="packet-frozen">冻结(元)：{this.props.redbag.freezeAmt}</div>
+                    <div styleName="packet-frozen">冻结(元)：<span>{this.props.redbag.freezeAmt}</span></div>
                 </div>
                 <div styleName="withdraw-card">
                     <div styleName="card-title">银行卡</div>

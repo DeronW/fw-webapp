@@ -71,6 +71,7 @@
 .origin-price {
     color: #999;
     font-size: 24px;
+    text-align: right;
 }
 
 .next-btn {

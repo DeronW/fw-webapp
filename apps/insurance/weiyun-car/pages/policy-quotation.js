@@ -20,27 +20,38 @@ class PolicyQuotation extends React.Component {
         this.props.quotations.fetchQuotations();
     }
 
+    handleClickOnItem = (source, hasDetail) => {
+        let { quotations, history } = this.props;
+        hasDetail ?
+            history.push(`quotation-detail?selectedFirm=${source}`)
+            :
+            quotations.fetchQuotations(source);
+    }
+
     render() {
-
         let { quotations, current_order, history } = this.props,
-            quotationDetail = quotations.getDetailForAll();
+            quotationsDetail = quotations.detail;
 
-        let gen_quotation_item = (itemId, itemName) => (
-            <div styleName="quotation-item">
-                <div styleName="check-box" onClick={() => { current_order.selectFirm(itemId) }}>
-                    <i className={current_order.selectedFirm === itemId ?
-                        styles_icon_circle.checked :
-                        styles_icon_circle.unchecked}></i>
-                </div>
-                <div styleName="quotation-entry" onClick={() => { history.push(`quotation-detail?selectedFirm=${itemId}`) }}>
-                    <div styleName={`firm-name-${itemId}`}>{itemName}</div>
-                    <div styleName="price-container">
-                        <div styleName="discount-price">￥{quotationDetail[itemId].actualPrice}</div>
-                        <div styleName="origin-price">官网报价￥{quotationDetail[itemId].originPrice}</div>
+        let gen_quotation_item = (source, sourceName) => {
+            let selectedDetail = quotationsDetail[source],
+                hasDetail = !(Object.keys(selectedDetail).length === 0 && selectedDetail.constructor === Object)
+            return (
+                <div styleName="quotation-item">
+                    <div styleName="check-box" onClick={() => { current_order.selectFirm(source) }}>
+                        <i className={current_order.selectedFirm === source ?
+                            styles_icon_circle.checked :
+                            styles_icon_circle.unchecked}></i>
+                    </div>
+                    <div styleName="quotation-entry" onClick={() => { this.handleClickOnItem(source, hasDetail) }}>
+                        <div styleName={`firm-name-${source}`}>{sourceName}</div>
+                        <div styleName="price-container">
+                            <div styleName="discount-price">{hasDetail ? `￥${selectedDetail.actualPrice}` : '暂无报价'}</div>
+                            <div styleName="origin-price">{hasDetail ? `官网报价￥${selectedDetail.originPrice}` : '点击获取'}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
 
         return (
             <div>
