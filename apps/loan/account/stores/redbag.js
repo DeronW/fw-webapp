@@ -62,7 +62,7 @@ export default class Redbag {
         })
     }
 
-    withdrawConfirm = (value, uuid) => {
+    withdrawConfirm = (value, uuid, history) => {
         return this.Post('/api/redbag/v1/apply.json', {
             batchGid: this.batchGid,
             verifyCode: value,
@@ -71,6 +71,7 @@ export default class Redbag {
         }).then(data => {
             this.applyTimeStr = data.applyTimeStr;
             this.preAccountTimeStr = data.preAccountTimeStr;
+            history.push('/redbag-result')
         }, e => {
             if(e.code == 26001){
                 Components.showToast(e.message)
@@ -78,6 +79,7 @@ export default class Redbag {
                 Components.showToast(e.message)
             }else{
                 this.failReason = e.message
+                history.push('/redbag-result')
                 return new Promise(resolve => resolve())
             }
         })
