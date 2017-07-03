@@ -14,7 +14,7 @@ export default class RedBagResult extends React.Component {
         let { redbag, history } = this.props
 
         // 如果没有拿到结果, 回到上一页
-        if (redbag.withdrawResult.result === null)
+        if (redbag.withdrawResult.success === null)
             history.goBack()
     }
     closeHandler = () => {
