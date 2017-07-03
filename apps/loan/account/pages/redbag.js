@@ -70,6 +70,7 @@ class RedBag extends React.Component {
             if (e.code == 26001 || e.code == 26008 || e.code == 26009 || e.code == 26010 ||
                 e.code == 26011 || e.code == 26012 || e.code == 26013 || e.code == 26014) {
                 Components.showToast(e.message)
+                clearInterval(this._timer)
             } else {
                 redbag.setWithdrawResult({success: false, reason: e.message})
                 history.push('/redbag-result')
