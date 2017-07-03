@@ -26,8 +26,14 @@ class RedBag extends React.Component {
 
         if (ableToClick) {
             this.setState({maskShow: true});
-            this.props.redbag.getSMSCode();
-            this.startCounting();
+            this.props.redbag.getSMSCode().then(()=>{
+                this.startCounting();
+            },e=>{
+                if(e.code == 20014 || e.code == 26012 || e.code == 26014 || e.code == 26009 || e.code == 26010){
+                    Components.showToast(e.message)
+                    clearInterval(this._timer)
+                }
+            });
         }
     }
 
@@ -54,8 +60,14 @@ class RedBag extends React.Component {
     }
 
     getSMSCode = () => {
-        this.startCounting()
-        this.props.redbag.getSMSCode();
+        this.props.redbag.getSMSCode().then(()=>{
+            this.startCounting();
+        },e=>{
+            if(e.code == 20014 || e.code == 26012 || e.code == 26014 || e.code == 26009 || e.code == 26010){
+                Components.showToast(e.message)
+                clearInterval(this._timer)
+            }
+        });
     }
 
     confirmBtnHandler = () => {
@@ -67,8 +79,7 @@ class RedBag extends React.Component {
             history.push('/redbag-result')
             redbag.setWithdrawResult({success: true})
         }, e => {
-            if (e.code == 26001 || e.code == 26008 || e.code == 26009 || e.code == 26010 ||
-                e.code == 26011 || e.code == 26012 || e.code == 26013 || e.code == 26014) {
+            if (e.code == 26001 || e.code == 26008 || e.code == 26011 || e.code == 26013 ) {
                 Components.showToast(e.message)
                 clearInterval(this._timer)
             } else {
