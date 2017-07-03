@@ -59,6 +59,7 @@ class StorageFactory {
         if (this.Browser.inFXHApp) {
             if (Utils.Cookie.get('uid')) r.uid = Utils.Cookie.get('uid')
             if (Utils.Cookie.get('token')) r.token = Utils.Cookie.get('token')
+            if (Utils.Cookie.get('phone')) r.token = Utils.Cookie.get('phone')
         }
 
         return r

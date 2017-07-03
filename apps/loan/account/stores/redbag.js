@@ -1,4 +1,5 @@
-import { extendObservable, computed } from 'mobx'
+import {extendObservable, computed} from 'mobx'
+import { Components } from 'fw-javascripts'
 
 export default class Redbag {
     constructor(Post) {
@@ -28,9 +29,9 @@ export default class Redbag {
             card = filtered[0];
 
         return card && {
-            uuid: card.uuid,
-            text: `${card.bankShortName}(尾号${card.cardNo.slice(-4)})`
-        }
+                uuid: card.uuid,
+                text: `${card.bankShortName}(尾号${card.cardNo.slice(-4)})`
+            }
     }
 
     fetch_user_redbag = () => {
@@ -43,7 +44,7 @@ export default class Redbag {
             this.instruction = data.instruction;
         }).then(() => {
             // 用户是否可提现状态
-            return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 })
+            return this.Post('/api/loan/v1/baseinfo.json', {productId: 1})
         }).then(data => {
             this.borrowBtnStatus = data.borrowBtnStatus
             // return new Promise(resolve => resolve())
@@ -61,7 +62,7 @@ export default class Redbag {
         })
     }
 
-    withdrawConfirm = (value, uuid) => {
+    withdrawConfirm = (value, uuid, history) => {
         return this.Post('/api/redbag/v1/apply.json', {
             batchGid: this.batchGid,
             verifyCode: value,
@@ -70,14 +71,27 @@ export default class Redbag {
         }).then(data => {
             this.applyTimeStr = data.applyTimeStr;
             this.preAccountTimeStr = data.preAccountTimeStr;
+            history.push('/redbag-result')
         }, e => {
-            this.failReason = e.message
-            return new Promise(resolve => resolve())
+            if(e.code == 26001 || e.code == 26008 || e.code == 26009 || e.code == 26010 || e.code == 26011 || e.code == 26012 || e.code == 26013 || e.code == 26014){
+                Components.showToast(e.message)
+            }else{
+                this.failReason = e.message
+                history.push('/redbag-result')
+                return new Promise(resolve => resolve())
+            }
         })
     }
     // 明细页下拉加载更多
-    loadMoreRecords = done => {
-        let { records } = this
+    loadMoreRecords = (done, reset) => {
+        let {records} = this
+
+        if (reset) {
+            records.rows = []
+            records.hasData = true
+            records.page = 1
+        }
+
         if (!records.hasData) return;
 
         return this.Post(`/api/redbag/v1/list.json`, {
