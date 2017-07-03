@@ -7,15 +7,21 @@ img {
     vertical-align: middle;
 }
 
+div {
+    margin: 0;
+    padding: 0;
+}
+
 .data-list {
     width: 100%;
     height: auto;
     background: #fff;
+    margin-top: 20px;
 }
 
 .list-item {
     margin-left: 32px;
-    padding: 24px 26px 24px 0;
+    padding: 20px 26px 20px 0;
     border-bottom: 1px solid #f0f0f0;
 }
 
@@ -24,7 +30,6 @@ img {
 }
 
 .red-status {
-    margin-bottom: 24px;
     overflow: hidden;
 }
 
@@ -37,6 +42,8 @@ img {
 .red-status .status-num {
     float: right;
     font-size: 36px;
+    line-height: 100%;
+    font-family: "Helvetica Neue";
 }
 
 .sub-red-status {
