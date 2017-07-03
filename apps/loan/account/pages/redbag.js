@@ -75,7 +75,7 @@ class RedBag extends React.Component {
 
         let cardNoInfo = redbag.default_card ?
             redbag.default_card.text : '';
-
+        let USER = Storage.getUserDict();
         let pop = () => {
             if (!this.state.maskShow) return;
 
@@ -85,7 +85,7 @@ class RedBag extends React.Component {
                         <div styleName="verify-popup-close" onClick={this.closePopHandler}></div>
                         <div styleName="verify-popup-title">短信验证</div>
                         <div styleName="verify-popup-tip">
-                            已向手机号(尾号{Storage.get('phone').slice(-4)})发送短信验证码
+                            已向手机号(尾号{USER.phone.slice(-4)})发送短信验证码
                         </div>
                         <div styleName="verify-input">
                             <input styleName="sms-input" type="number" name="number" value={this.state.sms_code}
