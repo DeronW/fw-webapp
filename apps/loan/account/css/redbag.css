@@ -46,6 +46,7 @@ input{
 .packet-num{
     font-size:100px;
     line-height:100%;
+    font-family: "Helvetica Neue";
 }
 .withdraw-card{
     height:100px;
