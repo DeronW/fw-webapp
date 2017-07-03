@@ -1,3 +1,7 @@
+body {
+    font-family: "microsoft yahei";
+}
+
 .july-mobile-box {
     width: 100%;
     height: auto;
@@ -71,6 +75,7 @@
     animation: cloudMoveMobile 1.4s 0.3s infinite ease-in-out;
 }
 
+/*coupon panel start*/
 .m-coupon {
     padding-bottom: 164px;
     height: 100%;
@@ -114,4 +119,334 @@
     padding-top: 46px;
     color: #677ba8;
     padding-left: 52px;
+}
+
+/*coupon panel end*/
+/*invite panel start*/
+.m-invite {
+
+}
+
+.m-i-title {
+    height: auto;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.m-i-tips {
+    width: 620px;
+    height: 60px;
+    background: url("../images/mobile/m-coupon-tipsbg.png") no-repeat center;
+    line-height: 60px;
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.m-i-one {
+    width: 660px;
+    height: 468px;
+    margin: 64px auto 0;
+    background: url("../images/mobile/m-invite-one.png") no-repeat center;
+}
+
+.one-text {
+    width: 604px;
+    height: 54px;
+    text-align: center;
+    line-height: 54px;
+    color: #fff;
+    font-size: 24px;
+    margin: 0 auto;
+    padding-top: 103px;
+}
+
+.one-detail {
+    width: 134px;
+    height: 54px;
+    display: inline-block;
+    line-height: 54px;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    background: #ff587b;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.m-i-two {
+    width: 660px;
+    height: 560px;
+    margin: 80px auto 0;
+    background: url("../images/mobile/m-invite-two.png") no-repeat center;
+}
+
+.two-text {
+    padding-top: 107px;
+    text-align: center;
+    color: #fff;
+}
+
+.two-num {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+    font-size: 22px;
+    margin-top: 270px;
+    display: table;
+}
+
+.num-left {
+    float: left;
+    padding-left: 62px;
+}
+
+.num-right {
+    float: right;
+    padding-right: 62px;
+}
+
+.num-yellow {
+    color: #ffe400;
+}
+
+.num-red {
+    color: #f04460;
+}
+
+.m-i-three {
+    width: 660px;
+    height: 521px;
+    margin: 80px auto 0;
+    background: url("../images/mobile/m-invite-three.png") no-repeat center;
+    color: #fff;
+}
+
+.three-title {
+    width: 620px;
+    height: 103px;
+    padding-top: 113px;
+    text-align: center;
+}
+
+.m-i-method {
+    width: 660px;
+    height: 66px;
+    margin: 20px auto 0;
+    color: #79b5ff;
+}
+
+/*invite panel end*/
+
+/*fight panel start*/
+.m-fight {
+    margin-top: 80px;
+}
+
+.m-f-title {
+    text-align: center;
+}
+
+.m-f-top {
+
+}
+
+.top-item {
+    width: 670px;
+    height: 362px;
+}
+
+.top-item-left {
+    float: left;
+}
+
+.top-item-right {
+    width: 291px;
+    height: 237px;
+    float: right;
+    margin-top: 90px;
+}
+
+.top-r-one {
+    background: url("../images/mobile/m-fight1.png") no-repeat center;
+}
+
+.top-r-two {
+    background: url("../images/mobile/m-fight2.png") no-repeat center;
+    margin-top: 60px;
+}
+
+.top-r-three {
+    background: url("../images/mobile/m-fight3.png") no-repeat center;
+    margin-top: 30px;
+}
+
+.top-r-four {
+    background: url("../images/mobile/m-fight4.png") no-repeat center;
+    margin-top: 10px;
+}
+
+.top-r-five {
+    background: url("../images/mobile/m-fight5.png") no-repeat center;
+    margin-top: 10px;
+}
+
+/*fight panel end*/
+/*bonus panel start*/
+.m-bonus {
+
+}
+
+.m-b-title {
+    text-align: center;
+}
+
+.m-n-tips {
+    width: 590px;
+    height: 83px;
+    margin: 20px auto 0;
+    background: url("../images/mobile/m-bonus-tips.png") no-repeat center;
+    color: #fff;
+    padding: 20px 0 0 30px;
+    text-align: center;
+}
+
+.m-b-treasure {
+    width: 653px;
+    height: 388px;
+    margin: 70px auto 0;
+    background: url("../images/mobile/m-money-box.png") no-repeat center;
+}
+
+.treasure-pic {
+    margin: 10px 0 0 15px;
+}
+
+.m-fish-tips {
+    width: 657px;
+    height: 141px;
+    margin: 40px auto 0;
+    background: url("../images/mobile/m-fish-tips.png") no-repeat center;
+    color: #677ba8;
+    text-align: center;
+}
+
+.fish-text {
+    width: 433px;
+    padding: 20px 0 0 20px;
+}
+
+/*bonus panel end*/
+
+/*rank panel start*/
+.m-rank {
+    height: auto;
+}
+
+.m-r-data {
+    width: 700px;
+    height: 772px;
+    background: url("../images/mobile/m-rank.png") no-repeat center;
+    margin: 50px auto 0;
+    color: #fff;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.data-name {
+    color: #fff;
+    font-size: 22px;
+    padding: 90px 0 0 70px;
+}
+
+.name-one {
+    padding-left: 30px;
+}
+
+.name-two {
+    padding-left: 30px;
+}
+
+.name-three {
+    padding-left: 40px;
+}
+
+.name-four {
+    padding-left: 46px;
+}
+
+.data-detil {
+    width: 540px;
+    height: 580px;
+    margin: 0 auto;
+    background: #fff;
+    margin-top: 5px;
+}
+
+.m-rank-tips {
+    font-size: 22px;
+    color: #79b5ff;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+/*rank panel end*/
+
+/*expalin panel start*/
+.m-explain {
+    width: 100%;
+    height: 910px;
+    background: url("../images/mobile/m-sea.png") no-repeat left 653px;
+    background-size: 100%;
+}
+
+.m-e-text {
+    width: 610px;
+    height: 656px;
+    background-color: rgba(15, 71, 133, 0.7);
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 30px 40px 36px 30px;
+    color: #fff;
+    line-height: 36px;
+}
+
+.m-x-title {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.m-x-des {
+    margin-top: 50px;
+}
+
+/*expalin panel end*/
+
+/*bottom panel start*/
+.m-bottom {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    text-align: center;
+    line-height: 80px;
+}
+
+/*banner图动画*/
+@keyframes cloudMoveMobile {
+    0% {
+        margin-top: 20px;
+    }
+    50% {
+        margin-top: 8px;
+    }
+    100% {
+        margin-top: 20px;
+    }
 }
