@@ -60,7 +60,7 @@ class RedBag extends React.Component {
 
     changeValueHandler = e => {
        if(e.target.value.length <= 6){
-           this.setState({sms_code: v})
+           this.setState({sms_code: e.target.value})
        }
     }
 
