@@ -61,7 +61,7 @@ export default class RedbagRecords extends React.Component {
             <div>
                 {/*数据列表*/}
                 <div styleName="data-list">
-                    {rows.map(item_list)}
+                    {rows.length > 0 && rows.map(item_list)}
                 </div>
                 {/*已加载完全部数据提示*/}
                 {!hasData && rows.length && <div styleName="data-completion">已加载完全部数据</div>}
