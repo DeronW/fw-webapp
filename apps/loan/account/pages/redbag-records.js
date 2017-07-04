@@ -17,7 +17,7 @@ import { Event } from 'fw-javascripts'
 export default class RedbagRecords extends React.Component {
 
     componentDidMount() {
-        // document.title = "红包明细";
+        document.title = "红包明细";
         let { redbag } = this.props;
         redbag.loadMoreRecords(null, true)
         Event.touchBottom(redbag.loadMoreRecords);

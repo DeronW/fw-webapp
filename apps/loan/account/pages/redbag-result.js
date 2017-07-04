@@ -10,7 +10,7 @@ import styles from '../css/redbag-result.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class RedBagResult extends React.Component {
     componentDidMount() {
-        // document.title = '提现结果'
+        document.title = '提现结果'
         let { redbag, history } = this.props
 
         // 如果没有拿到结果, 回到上一页

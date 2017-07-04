@@ -18,6 +18,7 @@ class RedBag extends React.Component {
     }
 
     componentDidMount() {
+        document.title="红包";
         this.props.redbag.fetch_user_redbag()
     }
 
