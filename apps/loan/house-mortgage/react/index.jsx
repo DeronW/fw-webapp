@@ -144,6 +144,7 @@ function gotoHandler(link, toNative, need_login) {
 }
 
 $FW.DOMReady(() => {
+    NativeBridge.setTitle('房产抵押贷款');
     ReactDOM.render(<Header title={'房产抵押贷款'} />, HEADER_NODE)
     ReactDOM.render(<MainPanel />, CONTENT_NODE)
 })
