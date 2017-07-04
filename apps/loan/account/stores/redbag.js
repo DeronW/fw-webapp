@@ -74,6 +74,7 @@ export default class Redbag {
         }, true).then(data => {
             this.applyTimeStr = data.applyTimeStr;
             this.preAccountTimeStr = data.preAccountTimeStr;
+            return new Promise(resolve => resolve())
         })
     }
 

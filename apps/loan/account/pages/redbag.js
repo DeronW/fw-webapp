@@ -88,7 +88,6 @@ class RedBag extends React.Component {
                     redbag.setWithdrawResult({success: false, reason: e.message})
                     history.push('/redbag-result')
                 } else {
-                    console.log(value)
                     Components.showToast(e.message)
                     clearInterval(this._timer)
                 }
