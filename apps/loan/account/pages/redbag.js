@@ -29,11 +29,11 @@ class RedBag extends React.Component {
                 this.setState({maskShow: true});
                 this.startCounting();
             },e=>{
-                if(e.code == 26012){
+                if(e.code == 26012 || e.code == 26011){
                     this.setState({maskShow: false});
                     Components.showToast(e.message)
                     clearInterval(this._timer)
-                }else if(e.code == 20014 || e.code == 26014 || e.code == 26009 || e.code == 26010){
+                }else{
                     Components.showToast(e.message)
                     clearInterval(this._timer)
                 }
@@ -59,18 +59,17 @@ class RedBag extends React.Component {
     }
 
     changeValueHandler = e => {
-        let v = String(parseInt(e.target.value) || '').substr(0, 6)
-        this.setState({sms_code: v})
+       if(e.target.value.length <= 6){
+           this.setState({sms_code: e.target.value})
+       }
     }
 
     getSMSCode = () => {
         this.props.redbag.getSMSCode().then(()=>{
             this.startCounting();
         },e=>{
-            if(e.code == 20014 || e.code == 26012 || e.code == 26014 || e.code == 26009 || e.code == 26010){
-                Components.showToast(e.message)
-                clearInterval(this._timer)
-            }
+            Components.showToast(e.message)
+            clearInterval(this._timer)
         });
     }
 
@@ -81,7 +80,6 @@ class RedBag extends React.Component {
         if (!value) {
             Components.showToast('请输入验证码')
         }else{
-            console.log(value)
             redbag.withdrawConfirm(value, uuid).then(() => {
                 history.push('/redbag-result')
                 redbag.setWithdrawResult({success: true})
