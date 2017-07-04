@@ -33,7 +33,7 @@ class RedBag extends React.Component {
                     this.setState({maskShow: false});
                     Components.showToast(e.message)
                     clearInterval(this._timer)
-                }else if(e.code == 20014 || e.code == 26014 || e.code == 26009 || e.code == 26010){
+                }else{
                     Components.showToast(e.message)
                     clearInterval(this._timer)
                 }
@@ -68,10 +68,8 @@ class RedBag extends React.Component {
         this.props.redbag.getSMSCode().then(()=>{
             this.startCounting();
         },e=>{
-            if(e.code == 20014 || e.code == 26012 || e.code == 26014 || e.code == 26009 || e.code == 26010){
-                Components.showToast(e.message)
-                clearInterval(this._timer)
-            }
+            Components.showToast(e.message)
+            clearInterval(this._timer)
         });
     }
 
