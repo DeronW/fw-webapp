@@ -11,28 +11,26 @@ class JulyMobile extends React.Component {
         super(props)
         this.state = {
             timestamp: null,
-            isLogin:null
+            isLogin: this.props.isLogin
         }
     }
 
     componentDidMount() {
         Get('/activity/v1/timestamp.json')
             .then(data => {
-                console.log(`data.timestamp:${data.timestamp}`)
                 this.setState({timestamp: data.timestamp})
-                console.log(this.state.timestamp)
                 this.popStatusHandler()
             })
-        Get('/activity/v1/userState.json', {}).then(data => {
-            console.log(data)
-            this.setState({isLogin: data.isLogin})
-            console.log(`this.state.isLogin:${this.state.isLogin}`)
-        })
+    }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            isLogin: nextProps.isLogin
+        })
     }
 
     popStatusHandler = () => {
-        let {timestamp,isLogin} = this.state
+        let {timestamp} = this.state
         let july_start_time = 1499875200000;//2017-07-13 00:00:00  时间戳
         let july_end_time = 1502726400000;//2017-08-15 00:00:00 时间戳
         console.log(timestamp)
@@ -62,8 +60,7 @@ class JulyMobile extends React.Component {
     }
 
     render() {
-        let {isLogin, closePopHandler} = this.props
-        let {timestamp} = this.state
+        let {isLogin, timestamp} = this.state
         let coupon_panel = <div styleName="m-coupon">
             <div styleName="m-c-title">
                 <img src={require("../images/mobile/m-coupon-title.png")}/>

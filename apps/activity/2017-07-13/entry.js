@@ -6,17 +6,17 @@ import '../lib/css/common.css'
 import JulyMobile from './components/mobile.js'
 import JulyPC from './components/pc.js'
 import {Get} from '../lib/helpers/request.js'
-
+import UserReady from '../lib/helpers/user-ready.js'
 class Content extends React.Component {
 
     state = {
         isLogin: null,
+        timestamp: null
     }
 
     componentDidMount() {
-        Get('/activity/v1/userState.json', {}).then(data => {
-            console.log(data)
-            this.setState({isLogin: data.isLogin})
+        UserReady((isLogin) => {
+            this.setState({isLogin: isLogin})
         })
     }
 
@@ -25,10 +25,12 @@ class Content extends React.Component {
     }
 
     render() {
-        let {isLogin} = this.state;
         let isMobile = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i);
-        let props = {isLogin: isLogin, closePopHandler: this.closePopHandler}
-        let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC/>
+        let props = {
+            isLogin: this.state.isLogin,
+            closePopHandler: this.closePopHandler
+        }
+        let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC {...props}/>
         return <div>
             {/*<PCHeader bgColor={'black'} />*/}
             {/*<MobileHeader bgColor={'red'}/>*/}
