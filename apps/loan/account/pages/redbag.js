@@ -59,8 +59,9 @@ class RedBag extends React.Component {
     }
 
     changeValueHandler = e => {
-        let v = String(parseInt(e.target.value) || '').substr(0, 6)
-        this.setState({sms_code: v})
+       if(e.target.value.length <= 6){
+           this.setState({sms_code: v})
+       }
     }
 
     getSMSCode = () => {
@@ -81,7 +82,6 @@ class RedBag extends React.Component {
         if (!value) {
             Components.showToast('请输入验证码')
         }else{
-            console.log(value)
             redbag.withdrawConfirm(value, uuid).then(() => {
                 history.push('/redbag-result')
                 redbag.setWithdrawResult({success: true})
