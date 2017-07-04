@@ -38,13 +38,13 @@ export default class Quotations {
         let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
             .then(data => data.temporaryPolicyId);
 
-        ['0', '1', '2'].map((source) => {
+        Object.keys(this.detail).map((source) => {
             if (s !== undefined && source !== s) return;
 
             this.Get(`/carInsurance/insuranceQuote.shtml`, {
                 source: source,
                 temporaryPolicyId: temporaryPolicyId
-            }).then(({ quotationDetail }) => {
+            }, true).then(({ quotationDetail }) => {
                 Object.assign(this.detail, { [source]: quotationDetail[0]} );
             })
         })
