@@ -28,7 +28,7 @@ input {
 
 .details-entry {
     position: absolute;
-    top: 20px;
+    top: 24px;
     right: 34px;
     z-index: 2;
 }
