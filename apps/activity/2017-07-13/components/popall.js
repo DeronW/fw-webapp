@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pop.css'
-
+import UserReady from '../../lib/helpers/user-ready.js'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PopStartPanel extends React.Component {
     render() {
@@ -101,23 +101,22 @@ class PopInvitePC extends React.Component {
     }
 
     componentDidMount() {
-        this.clipboardHandler();
-        let _this = this;
-        $UserReady(function (isLogin, user) {
-            _this.setState({isLogin: isLogin, gcm: user.userCode});
+        // this.clipboardHandler();
+        UserReady((isLogin) => {
+            this.setState({isLogin: isLogin})
         })
     }
 
-    clipboardHandler = () => {
-        console.log(11)
-        let clipboard = new Clipboard('.copyCode');//复制功能
-        clipboard.on('success', function (e) {
-            alert('复制成功');
-        });
-        clipboard.on('error', function (e) {
-            alert('复制失败');
-        });
-    }
+    // clipboardHandler = () => {
+    //     console.log(11)
+    //     let clipboard = new Clipboard('.copyCode');//复制功能
+    //     clipboard.on('success', function (e) {
+    //         alert('复制成功');
+    //     });
+    //     clipboard.on('error', function (e) {
+    //         alert('复制失败');
+    //     });
+    // }
 
     render() {
         let {gcm}=this.state;
@@ -139,11 +138,11 @@ class PopInvitePC extends React.Component {
                     <span styleName="order">2</span>
                     复制以下链接，发送工场码给好友邀请TA来注册&投资吧！
                 </div>
-                <div styleName="copy-text" id="copy-value-pc">
-                    {`http://passport.9888.cn/pp-web2/register/phone.do?gcm=${gcm}`}
-                </div>
-                <div styleName="copy-link" data-clipboard-action="copy" data-clipboard-target="#copy-value-pc">复制链接
-                </div>
+                {/*<div styleName="copy-text" id="copy-value-pc">*/}
+                {/*{`http://passport.9888.cn/pp-web2/register/phone.do?gcm=${gcm}`}*/}
+                {/*</div>*/}
+                {/*<div styleName="copy-link" data-clipboard-action="copy" data-clipboard-target="#copy-value-pc">复制链接*/}
+                {/*</div>*/}
             </div>
             <div styleName="logged-tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span
                 styleName="color-red">350元</span></div>

@@ -5,7 +5,9 @@ class VerifyCode extends React.Component{
             phoneNum: null,
             countdown: 0,
             show_warn: false,
-            value: ''
+            value: '',
+            codePop:true,
+            otherTip:false
         }
         this.changeValueHandler = this.changeValueHandler.bind(this);
         this.closePopHandler = this.closePopHandler.bind(this);
@@ -63,7 +65,13 @@ class VerifyCode extends React.Component{
             this.props.callbackResultShow(true);
             this.props.callbackGetLoanResultCheck(true);
         }
-    }, e => $FW.Component.Toast(e.message));
+    }, e => {
+        if(e.code == 603002){
+            this.setState({codePop:false, otherTip:true});
+        }else{
+            $FW.Component.Toast(e.message)}
+        }
+    );
 }
     render() {
     let frequent_tip = this.state.show_warn &&
@@ -72,28 +80,37 @@ class VerifyCode extends React.Component{
     let phone = $FW.Store.get('phone');
 
     return (
-        <div className="mask">
-            <div className="verify-popup">
-                <div className="verify-popup-wrap">
-                    <div className="verify-popup-close" onClick={this.closePopHandler}></div>
-                    <div className="verify-popup-title">短信验证</div>
-                    <div className="verify-popup-tip">
-                        已向手机号(尾号{phone.slice(-4)})发送短信验证码
-                        {/* 已向{this.props.bankShortName}( {this.props.cardNo.slice(-4)} )银行预留手机号发送短信验证码。 */}
-                    </div>
-                    <div className="verify-input">
-                        <input className="sms-input" type="number" name="number"
-                               value={this.state.value}
-                               placeholder="输入验证码" onChange={this.changeValueHandler}/>
-                        <span className="btn-countdown" onClick={this.getSMSCode}>
+        <div>
+            <div className={this.state.codePop ? "mask" : "mask dis"}>
+                <div className="verify-popup">
+                    <div className="verify-popup-wrap">
+                        <div className="verify-popup-close" onClick={this.closePopHandler}></div>
+                        <div className="verify-popup-title">短信验证</div>
+                        <div className="verify-popup-tip">
+                            已向手机号(尾号{phone.slice(-4)})发送短信验证码
+                            {/* 已向{this.props.bankShortName}( {this.props.cardNo.slice(-4)} )银行预留手机号发送短信验证码。 */}
+                        </div>
+                        <div className="verify-input">
+                            <input className="sms-input" type="number" name="number"
+                                   value={this.state.value}
+                                   placeholder="输入验证码" onChange={this.changeValueHandler}/>
+                            <span className="btn-countdown" onClick={this.getSMSCode}>
                                 {this.state.countdown > 0 ? `${this.state.countdown}s` : '获取验证码'}</span>
+                        </div>
+                        {frequent_tip}
+                        <div className="btn-list">
+                            <div className="cancel-btn" onClick={this.closePopHandler}>取消</div>
+                            <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
+                        </div>
                     </div>
-                    {frequent_tip}
-                    <div className="btn-list">
-                        <div className="cancel-btn" onClick={this.closePopHandler}>取消</div>
-                        <div className="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
-                    </div>
-
+                </div>
+            </div>
+            <div className={this.state.otherTip ? "mask": "mask dis"}>
+                <div className="tip-pop">
+                    <span className="tip-1">提示</span>
+                    <span className="tip-2">为方便您快速借到钱，推荐您尝试其他借款产品。</span>
+                    <Nav className="to-zhangzhong" href={`/static/loan/home/index.html`}>尝试其他</Nav>
+                    <img className="close-icon" src="images/close-icon.jpg" onClick={() => {this.setState({otherTip: false})}}/>
                 </div>
             </div>
         </div>
