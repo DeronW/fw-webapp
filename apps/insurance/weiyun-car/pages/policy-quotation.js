@@ -34,13 +34,16 @@ class PolicyQuotation extends React.Component {
 
         let gen_quotation_item = (source, sourceName) => {
             let selectedDetail = quotationsDetail[source],
-                hasDetail = !(Object.keys(selectedDetail).length === 0 && selectedDetail.constructor === Object)
+                hasDetail = !(Object.keys(selectedDetail).length === 0 && selectedDetail.constructor === Object),
+                selectState = !hasDetail ?
+                                'disabled' :
+                                current_order.selectedFirm === source ?
+                                    'checked' :
+                                    'unchecked';
             return (
                 <div styleName="quotation-item">
-                    <div styleName="check-box" onClick={() => { current_order.selectFirm(source) }}>
-                        <i className={current_order.selectedFirm === source ?
-                            styles_icon_circle.checked :
-                            styles_icon_circle.unchecked}></i>
+                    <div styleName="check-box" onClick={() => { current_order.selectFirm(source, hasDetail) }}>
+                        <i className={styles_icon_circle[selectState]}></i>
                     </div>
                     <div styleName="quotation-entry" onClick={() => { this.handleClickOnItem(source, hasDetail) }}>
                         <div styleName={`firm-name-${source}`}>{sourceName}</div>
