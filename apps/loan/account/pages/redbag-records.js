@@ -65,6 +65,7 @@ export default class RedbagRecords extends React.Component {
                 </div>
                 {/*已加载完全部数据提示*/}
                 {!hasData && rows.length !==0 && <div styleName="data-completion">已加载完全部数据</div>}
+                
                 {rows.length === 0 && !hasData && empty}
             </div>
         </div>
