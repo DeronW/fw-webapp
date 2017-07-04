@@ -8,6 +8,7 @@ let is_ready = false,
 Ajax({
     url: '/api/userState/v1/userState.json'
 }).then(data => {
+    is_ready = true
     USER = {
         isLogin: data.isLogin,
         realname: data.realName,
