@@ -99,13 +99,14 @@ export default class Account {
     }
 
     register = (pwd, sms_code, invite_code) => {
-        this.Post('/api/userBase/v1/register.json', {
+       this.Post('/api/userBase/v1/register.json', {
             mobile: this.phone,
             codeToken: this.registerCodeToken,
             password: pwd,
             verifyCode: sms_code,
             invitationCode: invite_code,
         }).then(data => {
+            let dict = data.userLogin
             Storage.login({
                 token: dict.userToken,
                 status: dict.userStatus,
