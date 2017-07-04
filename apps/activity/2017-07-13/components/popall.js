@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pop.css'
 
@@ -119,8 +120,8 @@ class PopInvitePC extends React.Component {
     }
 
     render() {
-        let {isLogin, gcm}=this.state;
-        let {closePopHandler, gotoLogin} =this.props;
+        let {gcm}=this.state;
+        let {closePopHandler, gotoLogin, isLogin} =this.props;
         let notLoginTips = <div styleName="nolog-box">
             <div>请好友用您的工场码注册，去投标，达成团队目标。</div>
             <div>登录后查看我的工场码</div>
@@ -138,7 +139,7 @@ class PopInvitePC extends React.Component {
                     <span styleName="order">2</span>
                     复制以下链接，发送工场码给好友邀请TA来注册&投资吧！
                 </div>
-                <div styleName="copy-text">
+                <div styleName="copy-text" id="copy-value-pc">
                     {`http://passport.9888.cn/pp-web2/register/phone.do?gcm=${gcm}`}
                 </div>
                 <div styleName="copy-link" data-clipboard-action="copy" data-clipboard-target="#copy-value-pc">复制链接
