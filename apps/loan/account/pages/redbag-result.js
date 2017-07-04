@@ -49,7 +49,7 @@ export default class RedBagResult extends React.Component {
                             <div styleName="loan-result4">
                                 <div styleName="waiting-result">
                                     <div styleName="icon5"></div>
-                                    <div styleName="icon5-info">提现失败</div>
+                                    <div styleName="icon5-info">提现失败！</div>
                                     <div styleName="icon5-info-btm">{redbag.withdrawResult.reason}</div>
                                 </div>
                             </div>
