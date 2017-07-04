@@ -56,8 +56,9 @@ class SetPassword extends React.Component {
     }
 
     inputSMSCodeHandler = e => {
-        let v = String(parseInt(e.target.value) || '').substr(0, 6)
-        this.setState({ sms_code: v })
+        if(e.target.value.length <=6){
+            this.setState({ sms_code:e.target.value })
+        }
     }
 
     inputPwdHandler = e => {

@@ -49,8 +49,9 @@ class BankCardVerify extends React.Component {
     }
 
     changeHandler = e => {
-        let v = String(parseInt(e.target.value)).substr(0, 4)
-        this.setState({ code: v })
+        if(e.target.value.length <=4){
+            this.setState({ code:e.target.value })
+        }
     }
 
     submitHandler = () => {
