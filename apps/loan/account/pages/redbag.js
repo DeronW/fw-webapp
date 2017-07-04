@@ -13,7 +13,7 @@ import {Components, Utils} from 'fw-javascripts'
 class RedBag extends React.Component {
     state = {
         maskShow: false,
-        sms_code: '',
+        sms_code: null,
         count: 0
     }
 
