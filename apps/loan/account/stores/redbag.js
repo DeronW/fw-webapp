@@ -72,6 +72,7 @@ export default class Redbag {
             withdrawAmt: this.hasWithdrawAmt,
             withdrawCardUuid: uuid
         }, true).then(data => {
+            console.log(value)
             this.applyTimeStr = data.applyTimeStr;
             this.preAccountTimeStr = data.preAccountTimeStr;
         })

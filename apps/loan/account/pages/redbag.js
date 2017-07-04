@@ -81,6 +81,7 @@ class RedBag extends React.Component {
         if (!value) {
             Components.showToast('请输入验证码')
         }else{
+            console.log(value)
             redbag.withdrawConfirm(value, uuid).then(() => {
                 history.push('/redbag-result')
                 redbag.setWithdrawResult({success: true})
