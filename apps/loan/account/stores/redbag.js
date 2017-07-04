@@ -70,9 +70,8 @@ export default class Redbag {
             batchGid: this.batchGid,
             verifyCode: value,
             withdrawAmt: this.hasWithdrawAmt,
-            withdrawCardUuid: uuid,
-            silence: true
-        }).then(data => {
+            withdrawCardUuid: uuid
+        }, true).then(data => {
             this.applyTimeStr = data.applyTimeStr;
             this.preAccountTimeStr = data.preAccountTimeStr;
         })
