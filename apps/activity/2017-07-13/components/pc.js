@@ -10,30 +10,27 @@ class JulyPC extends React.Component {
     state = {
         timestamp: null,
         closeBottom: false,
-        isLogin: null
+        isLogin: this.props.isLogin
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({isLogin: nextProps.isLogin});
     }
 
     componentDidMount() {
         Get('/activity/v1/timestamp.json')
             .then(data => {
-                console.log(`data.timestamp_pc:${data.timestamp}`)
                 this.setState({timestamp: data.timestamp})
                 this.popStatusHandler()
             })
-        Get('/activity/v1/userState.json', {}).then(data => {
-            console.log(data)
-            this.setState({isLogin: data.isLogin})
-            console.log(`this.state.isLogin:${this.state.isLogin}`)
-        })
     }
 
     popStatusHandler = () => {
         let july_start_time = 1499875200000;//2017-07-13 00:00:00  时间戳
         let july_end_time = 1502726400000;//2017-08-15 00:00:00 时间戳
         let {timestamp} = this.state
-        console.log(timestamp)
-        console.log(`pc_start_time:${july_start_time}`)
-        console.log(`pc_end_time:${july_end_time}`)
+        console.log(`aba${timestamp}`)
+        // console.log(`pc_state_timestamp:${timestamp}`)
         if (timestamp < july_start_time) {
             ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
         } else if (timestamp > july_end_time) {
@@ -47,6 +44,7 @@ class JulyPC extends React.Component {
     }
 
     showHowInvite = () => {
+        console.log(1111111111);
         ReactDOM.render(<PopInvitePC gotoLogin={this.props.gotoLogin} isLogin={this.state.isLogin}
                                      closePopHandler={this.props.closePopHandler}/>, document.getElementById("pop"))
     }
@@ -209,6 +207,7 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let bottom_panel = () => {
+            // console.log(`this.pc.isLogin:${this.state.isLogin}`)
             let isLogin = this.state.isLogin;
             let {closeBottom} = this.state;
             let close_name = closeBottom ? "none" : "block";
