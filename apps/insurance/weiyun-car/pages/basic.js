@@ -34,7 +34,7 @@ class Basic extends React.Component {
             policy_detail.setForm(data.insureInfo);
             history.push('/policy-detail');
         }).catch(e => {
-            if (e.code == -105) history.push('/car')
+            if (e.code == 10003) history.push('/car')
         })
     }
 
