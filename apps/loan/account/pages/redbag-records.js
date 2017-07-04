@@ -17,7 +17,7 @@ import { Event } from 'fw-javascripts'
 export default class RedbagRecords extends React.Component {
 
     componentDidMount() {
-        // document.title = "红包明细";
+        document.title = "红包明细";
         let { redbag } = this.props;
         redbag.loadMoreRecords(null, true)
         Event.touchBottom(redbag.loadMoreRecords);
@@ -61,7 +61,7 @@ export default class RedbagRecords extends React.Component {
             <div>
                 {/*数据列表*/}
                 <div styleName="data-list">
-                    {rows.map(item_list)}
+                    {rows.length > 0 && rows.map(item_list)}
                 </div>
                 {/*已加载完全部数据提示*/}
                 {!hasData && !empty && <div styleName="data-completion">已加载完全部数据</div>}

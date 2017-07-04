@@ -4,18 +4,20 @@ import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
 import styles from '../css/redbag-result.css'
+import { NativeBridge } from '../../lib/helpers'
 
 @inject('redbag')
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class RedBagResult extends React.Component {
     componentDidMount() {
-        // document.title = '提现结果'
+        document.title = '提现结果'
+        NativeBridge.trigger('cancel_refresh');
         let { redbag, history } = this.props
 
         // 如果没有拿到结果, 回到上一页
-        if (redbag.withdrawResult.success === null)
-            history.goBack()
+        // if (redbag.withdrawResult.success === null)
+        //     history.goBack()
     }
     closeHandler = () => {
         let { history } = this.props
