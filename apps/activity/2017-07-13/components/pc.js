@@ -8,33 +8,30 @@ import {PopStartPanel, PopTeamTips, PopInvitePC, PopEndPanel} from './popall.js'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class JulyPC extends React.Component {
     state = {
-        timestamp: null,
+        timestamp: this.props.timestamp,
         closeBottom: false,
         isLogin: this.props.isLogin
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({isLogin: nextProps.isLogin});
+        this.setState({isLogin: nextProps.isLogin, timestamp: nextProps.timestamp});
+        this.popStatusHandler(nextProps.timestamp)
     }
 
     componentDidMount() {
-        Get('/activity/v1/timestamp.json')
-            .then(data => {
-                this.setState({timestamp: data.timestamp})
-                this.popStatusHandler()
-            })
     }
 
-    popStatusHandler = () => {
+    popStatusHandler = (timestamp) => {
         let july_start_time = 1499875200000;//2017-07-13 00:00:00  时间戳
         let july_end_time = 1502726400000;//2017-08-15 00:00:00 时间戳
-        let {timestamp} = this.state
         console.log(`aba${timestamp}`)
         // console.log(`pc_state_timestamp:${timestamp}`)
         if (timestamp < july_start_time) {
             ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
         } else if (timestamp > july_end_time) {
             ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
+        } else {
+            ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
         }
     }
 

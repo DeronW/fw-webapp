@@ -18,6 +18,10 @@ class Content extends React.Component {
         UserReady((isLogin) => {
             this.setState({isLogin: isLogin})
         })
+        Get('/activity/v1/timestamp.json')
+            .then(data => {
+                this.setState({timestamp: data.timestamp})
+            })
     }
 
     closePopHandler = () => {
@@ -28,12 +32,12 @@ class Content extends React.Component {
         let isMobile = navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i);
         let props = {
             isLogin: this.state.isLogin,
-            closePopHandler: this.closePopHandler
+            closePopHandler: this.closePopHandler,
+            timestamp: this.state.timestamp
         }
+        console.log(`props.timestamp${props.timestamp}`)
         let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC {...props}/>
         return <div>
-            {/*<PCHeader bgColor={'black'} />*/}
-            {/*<MobileHeader bgColor={'red'}/>*/}
             {Content}
         </div>
     }

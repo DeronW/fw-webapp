@@ -15,33 +15,21 @@ class JulyMobile extends React.Component {
         }
     }
 
-    componentDidMount() {
-        Get('/activity/v1/timestamp.json')
-            .then(data => {
-                this.setState({timestamp: data.timestamp})
-                this.popStatusHandler()
-            })
-    }
-
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            isLogin: nextProps.isLogin
-        })
+        this.setState({isLogin: nextProps.isLogin, timestamp: nextProps.timestamp});
+        this.popStatusHandler(nextProps.timestamp)
     }
 
-    popStatusHandler = () => {
-        let {timestamp} = this.state
-        let july_start_time = 1499875200000;//2017-07-13 00:00:00  时间戳
-        let july_end_time = 1502726400000;//2017-08-15 00:00:00 时间戳
-        console.log(timestamp)
-        console.log(`mobile:${july_start_time}`)
-        console.log(`mobile:${july_end_time}`)
-        if (timestamp < july_start_time) {
-            console.log("notstart")
+    componentDidMount() {
+    }
+
+    popStatusHandler = (timestamp) => {
+        if (timestamp < 1499875200000) {
             ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
-        } else if (timestamp > july_end_time) {
+        } else if (timestamp > 1502726400000) {
             ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
-            console.log("aleadyend")
+        } else {
+            ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
         }
     }
 
