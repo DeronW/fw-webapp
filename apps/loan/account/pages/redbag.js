@@ -29,7 +29,7 @@ class RedBag extends React.Component {
                 this.setState({maskShow: true});
                 this.startCounting();
             },e=>{
-                if(e.code == 26012){
+                if(e.code == 26012 || e.code == 26011){
                     this.setState({maskShow: false});
                     Components.showToast(e.message)
                     clearInterval(this._timer)
