@@ -4,12 +4,13 @@ import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
 import {Get} from '../../lib/helpers/request.js'
 import PCHeader from '../../lib/components/pc-header.js'
-import {PopStartPanel, PopTeamTips} from './popall.js'
+import {PopStartPanel, PopTeamTips, PopInvitePC, PopEndPanel} from './popall.js'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class JulyPC extends React.Component {
     state = {
         timestamp: null,
-        closeBottom: false
+        closeBottom: false,
+        isLogin: null
     }
 
     componentDidMount() {
@@ -19,6 +20,11 @@ class JulyPC extends React.Component {
                 this.setState({timestamp: data.timestamp})
                 this.popStatusHandler()
             })
+        Get('/activity/v1/userState.json', {}).then(data => {
+            console.log(data)
+            this.setState({isLogin: data.isLogin})
+            console.log(`this.state.isLogin:${this.state.isLogin}`)
+        })
     }
 
     popStatusHandler = () => {
@@ -29,9 +35,9 @@ class JulyPC extends React.Component {
         console.log(`pc_start_time:${july_start_time}`)
         console.log(`pc_end_time:${july_end_time}`)
         if (timestamp < july_start_time) {
-            // ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
         } else if (timestamp > july_end_time) {
-            // ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
+            ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
         }
     }
 
@@ -41,8 +47,8 @@ class JulyPC extends React.Component {
     }
 
     showHowInvite = () => {
-        // ReactDOM.render(<PopInvitePC gotoLogin={this.props.gotoLogin}
-        //                              closePopHandler={this.props.closePopHandler}/>, document.getElementById("pop"))
+        ReactDOM.render(<PopInvitePC gotoLogin={this.props.gotoLogin} isLogin={this.state.isLogin}
+                                     closePopHandler={this.props.closePopHandler}/>, document.getElementById("pop"))
     }
 
     closeBottom = () => {
@@ -203,7 +209,7 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let bottom_panel = () => {
-            let isLogin = this.props.isLogin;
+            let isLogin = this.state.isLogin;
             let {closeBottom} = this.state;
             let close_name = closeBottom ? "none" : "block";
             let logged = <div styleName="log-box logged-box">

@@ -10,7 +10,8 @@ class JulyMobile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            timestamp: null
+            timestamp: null,
+            isLogin:null
         }
     }
 
@@ -22,12 +23,16 @@ class JulyMobile extends React.Component {
                 console.log(this.state.timestamp)
                 this.popStatusHandler()
             })
+        Get('/activity/v1/userState.json', {}).then(data => {
+            console.log(data)
+            this.setState({isLogin: data.isLogin})
+            console.log(`this.state.isLogin:${this.state.isLogin}`)
+        })
 
     }
 
     popStatusHandler = () => {
-        let {isLogin} = this.props
-        let {timestamp} = this.state
+        let {timestamp,isLogin} = this.state
         let july_start_time = 1499875200000;//2017-07-13 00:00:00  时间戳
         let july_end_time = 1502726400000;//2017-08-15 00:00:00 时间戳
         console.log(timestamp)
@@ -53,7 +58,7 @@ class JulyMobile extends React.Component {
     showInvitePop = () => {
         ReactDOM.render(<PopInviteMobile gotoLogin={this.props.gotoLogin}
                                          closePopHandler={this.props.closePopHandler}
-                                         isLogin={this.props.isLogin}/>, document.getElementById("pop"))
+                                         isLogin={this.state.isLogin}/>, document.getElementById("pop"))
     }
 
     render() {
