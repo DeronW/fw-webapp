@@ -66,26 +66,27 @@ class BorrowMoney extends React.Component {
 
         $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
             productId: pid
-        }).then(data => this.setState({ borrowStatus: data.borrowBtnStatus }));
+        }).then(data => this.setState({ borrowStatus: data.borrowBtnStatus })).then(() => {
 
-        $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
-            .then(data => {
-                if (data.canStatus == 0) {
-                    this.setState({
-                        canStatus: 0, canMessage: data.canMessage, loanUuid: data.loanUuid
-                    });
-                } else if (data.canStatus == 1) {
-                    this.setState({
-                        canStatus: 1, loanUuid: data.loanUuid, canMessage: data.canMessage
-                    });
-                } else if (data.canStatus == 2) {
-                    this.setState({ canStatus: 2 });
-                }
-            }, err => {
-                this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
-            });
+            $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
+                .then(data => {
+                    if (data.canStatus == 0) {
+                        this.setState({
+                            canStatus: 0, canMessage: data.canMessage, loanUuid: data.loanUuid
+                        });
+                    } else if (data.canStatus == 1) {
+                        this.setState({
+                            canStatus: 1, loanUuid: data.loanUuid, canMessage: data.canMessage
+                        });
+                    } else if (data.canStatus == 2) {
+                        this.setState({ canStatus: 2 });
+                    }
+                }, err => {
+                    this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
+                });
+        })
     }
-    clickHandler=()=>{
+    clickHandler = () => {
         let { canStatus, borrowStatus } = this.state;
         // 初始化数据没有完成, 稍后再试
         if (canStatus === null) return;
@@ -99,7 +100,7 @@ class BorrowMoney extends React.Component {
             this.setState({ dumiaoEnterPopShow: true });
         } else if (canStatus == 1) {
             this.setState({ canMessageShow: true });
-        } else{
+        } else {
             this.setState({ tryOtherLoanPopShow: true });
         }
     }
@@ -120,14 +121,14 @@ class BorrowMoney extends React.Component {
     }
     render() {
         let labelList = this.state.product.productLabelList;
-        let link = `${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${$FW.Browser.inFXHApp()?getCookie().token:USER.token}&uid=${$FW.Browser.inFXHApp()?getCookie().uid:USER.uid}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`;
-        let app_link = `https://m.easyloan888.com/api/order/v1/jump.shtml?token=${$FW.Browser.inFXHApp()?getCookie().token:USER.token}&uid=${$FW.Browser.inFXHApp()?getCookie().uid:USER.uid}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`;
+        let link = `${API_PATH}/api/order/v1/jump.shtml?sourceType=${SOURCE_TYPE}&token=${$FW.Browser.inFXHApp() ? getCookie().token : USER.token}&uid=${$FW.Browser.inFXHApp() ? getCookie().uid : USER.uid}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`;
+        let app_link = `https://m.easyloan888.com/api/order/v1/jump.shtml?token=${$FW.Browser.inFXHApp() ? getCookie().token : USER.token}&uid=${$FW.Browser.inFXHApp() ? getCookie().uid : USER.uid}&loanUuid=${this.state.loanUuid == null ? '' : this.state.loanUuid}`;
         let goDumiao = () => {
             return <div className="mask" style={{ zIndex: 100 }}>
                 <div className="detail-pop">
                     <div className="pop-close" onClick={this.dumiaoCloseHandler}></div>
                     <div className="pop-tip">{this.state.canMessage}</div>
-                    <div className="know-btn" onClick={() => {$FW.Browser.inApp()? NativeBridge.goto(app_link,false,"分期"):gotoHandler(link)}}>
+                    <div className="know-btn" onClick={() => { $FW.Browser.inApp() ? NativeBridge.goto(app_link, false, "分期") : gotoHandler(link) }}>
                         点击查看详情</div>
                 </div>
             </div>
@@ -227,7 +228,7 @@ class BorrowMoney extends React.Component {
 function getCookie() {
     let c = document.cookie, r = {};
     if (c === '') return {}
-    c.split('; ').forEach(function(kv) {
+    c.split('; ').forEach(function (kv) {
         let t = kv.split('=');
         r[t[0]] = t[1];
     });
@@ -246,6 +247,7 @@ function gotoHandler(link, need_login) {
 }
 
 const USER = $FW.Store.getUserDict();
+
 $FW.DOMReady(() => {
     NativeBridge.setTitle('分期');
     ReactDOM.render(<Header title={"分期"} />, HEADER_NODE);
