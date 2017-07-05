@@ -210,7 +210,8 @@ class JulyPC extends React.Component {
                 <a href="" styleName="pc-invest">立即投资</a>
             </div>;
             let unlogged = <div styleName="log-box unlogged-box">
-                请登录后查看您活动内的邀友和投标情况，立即登录 |
+                请登录后查看您活动内的邀友和投标情况，
+                <div styleName="pre-login">立即登录</div>
                 <div styleName="invite-pc-pre" onClick={this.showHowInvite}>如何邀请</div>
             </div>;
             return <div styleName="bottom-box" style={{display: close_name}}>

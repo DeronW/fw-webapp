@@ -200,13 +200,18 @@ class JulyMobile extends React.Component {
         </div>
         let bottom_panel = () => {
             let logged_text = <div styleName="m-logged">
-                活动内，您可以邀请50人参与活动，
-                <span styleName="howinvite" onClick={this.showInvitePop}>如何邀请</span> | <a href="">立即投资</a>
+                <div styleName="logged-des">活动内，您可以邀请50人参与活动，</div>
+                <div styleName="logged-text">
+                    <span styleName="howinvite-after" onClick={this.showInvitePop}>如何邀请</span>
+                    <a href="" styleName="after-invest">立即投资</a>
+                </div>
             </div>
             let notlogged_text = <div styleName="m-notlogged">
-                请登录后查看您活动内的邀友和投标情况，
-                <span>立即登录</span> |
-                <span styleName="howinvite" onClick={this.showInvitePop}>如何邀请</span>
+                <div styleName="pre-des">请登录后查看您活动内的邀友和投标情况，</div>
+                <div styleName="pre-text">
+                    <span styleName="pre-golog">立即登录</span>
+                    <span styleName="howinvite-pre" onClick={this.showInvitePop}>如何邀请</span>
+                </div>
             </div>
             return <div styleName="m-bottom">
                 {isLogin ? logged_text : notlogged_text}
