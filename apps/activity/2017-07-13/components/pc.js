@@ -22,13 +22,9 @@ class JulyPC extends React.Component {
     }
 
     popStatusHandler = (timestamp) => {
-        let july_start_time = 1499875200000;//2017-07-13 00:00:00  时间戳
-        let july_end_time = 1502726400000;//2017-08-15 00:00:00 时间戳
-        console.log(`aba${timestamp}`)
-        // console.log(`pc_state_timestamp:${timestamp}`)
-        if (timestamp < july_start_time) {
+        if (timestamp < 1499875200000) {
             ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
-        } else if (timestamp > july_end_time) {
+        } else if (timestamp > 1502726400000) {
             ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
         } else {
             ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
@@ -41,7 +37,6 @@ class JulyPC extends React.Component {
     }
 
     showHowInvite = () => {
-        console.log(1111111111);
         ReactDOM.render(<PopInvitePC gotoLogin={this.props.gotoLogin} isLogin={this.state.isLogin}
                                      closePopHandler={this.props.closePopHandler}/>, document.getElementById("pop"))
     }
@@ -204,13 +199,13 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let bottom_panel = () => {
-            // console.log(`this.pc.isLogin:${this.state.isLogin}`)
             let isLogin = this.state.isLogin;
             let {closeBottom} = this.state;
             let close_name = closeBottom ? "none" : "block";
             let logged = <div styleName="log-box logged-box">
                 活动内，您有效邀友50人，有效好友累投年化3,4567元，团队累投年化40,5678.89元 。
-                <div styleName="invite-pc-after" onClick={this.showHowInvite}>如何邀请
+                <div styleName="invite-pc-after" onClick={this.showHowInvite}>
+                    如何邀请
                 </div>
                 <a href="" styleName="pc-invest">立即投资</a>
             </div>;
@@ -228,16 +223,11 @@ class JulyPC extends React.Component {
             <PCHeader/>
             <div styleName="pc-banner">
                 <img src={require("../images/pc/banner.jpg")} width="100%" height="100%"/>
-                <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one"
-                     onClick={() => this.scroll(0, 750)}/>
-                <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two"
-                     onClick={() => this.scroll(0, 3170)}/>
-                <img src={require("../images/pc/anchor-3.png")} styleName="anchor-item anchor-three"
-                     onClick={() => this.scroll(0, 2450)}/>
-                <img src={require("../images/pc/anchor-4.png")} styleName="anchor-item anchor-four"
-                     onClick={() => this.scroll(0, 1950)}/>
-                <img src={require("../images/pc/anchor-5.png")} styleName="anchor-item anchor-five"
-                     onClick={() => this.scroll(0, 4600)}/>
+                <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one" onClick={() => this.scroll(0, 750)}/>
+                <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two" onClick={() => this.scroll(0, 3170)}/>
+                <img src={require("../images/pc/anchor-3.png")} styleName="anchor-item anchor-three" onClick={() => this.scroll(0, 2450)}/>
+                <img src={require("../images/pc/anchor-4.png")} styleName="anchor-item anchor-four" onClick={() => this.scroll(0, 1950)}/>
+                <img src={require("../images/pc/anchor-5.png")} styleName="anchor-item anchor-five" onClick={() => this.scroll(0, 4600)}/>
             </div>
             {content_panel}
             {fight_panel}

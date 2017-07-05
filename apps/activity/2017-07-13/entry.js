@@ -35,7 +35,6 @@ class Content extends React.Component {
             closePopHandler: this.closePopHandler,
             timestamp: this.state.timestamp
         }
-        console.log(`props.timestamp${props.timestamp}`)
         let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC {...props}/>
         return <div>
             {Content}

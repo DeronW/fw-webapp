@@ -53,15 +53,13 @@ class PopInviteMobile extends React.Component {
     }
 
     componentDidMount() {
-        let _this = this;
-        $UserReady(function (isLogin, user) {
-            _this.setState({isLogin: isLogin, gcm: user.userCode});
+        UserReady((isLogin) => {
+            this.setState({isLogin: isLogin})
         })
     }
 
     render() {
         let {isLogin, closePopHandler} = this.props
-        console.log(isLogin)
         let pre_tips = <div styleName="pre-box">
             <div>请好友用您的工场码注册,去投标,达成团队目标。</div>
             <div>登录后查看我的工场码</div>
