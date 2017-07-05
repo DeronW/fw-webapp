@@ -51,7 +51,7 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
 
             } else if (error.code == 11000) {
                 //11000 代表参数不完整
-                !silence && Components.showToast(error.message)
+                !silence && Components.showToast("参数不完整，请重新登录！")
             } else {
                 if (silence)
                     return new Promise((reslove, reject) => reject(error))
