@@ -20,9 +20,9 @@ export default () => {
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/borrowing' component={Borrowing} />
                 <Route exact path='/cost' component={Cost} />
-                <Route exact path='/dumiao-openaccount' component={DumiaoOpenaccount} />
+                <Route exact path='/dumiao' component={DumiaoOpenaccount} />
                 <Route exact path='/partner' component={Partner} />
-                <Route exact path='/personinfo-collect' component={PersoninfoCollect} />
+                <Route exact path='/info-collect' component={PersoninfoCollect} />
             </Switch>
         </Provider>
     </Router>
