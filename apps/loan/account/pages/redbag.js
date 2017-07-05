@@ -27,7 +27,7 @@ class RedBag extends React.Component {
 
         if (ableToClick) {
             this.props.redbag.getSMSCode().then(()=>{
-                this.setState({maskShow: true, sms_code:null});
+                this.setState({maskShow: true});
                 this.startCounting();
             },e=>{
                 if(e.code == 26012 || e.code == 26011){
