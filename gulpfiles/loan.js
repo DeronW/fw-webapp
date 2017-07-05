@@ -60,13 +60,13 @@ const APPLY_PAGES = [
 ]
 
 // 借款服务协议页面
-const PROTOCOL_PAGES = [
-    'protocol-cost', // 代扣协议
-    'protocol-borrowing', // 借款服务协议
-    'protocol-partner', // 借款协议双方
-    'protocol-personinfo-collect', //个人信息采集授权声明
-    'protocol-dumiao-openaccount', //读秒开户授权书
-]
+// const PROTOCOL_PAGES = [
+//     'protocol-cost', // 代扣协议
+//     'protocol-borrowing', // 借款服务协议
+//     'protocol-partner', // 借款协议双方
+//     'protocol-personinfo-collect', //个人信息采集授权声明
+//     'protocol-dumiao-openaccount', //读秒开户授权书
+// ]
 
 const FXH_PAGES = [
     'fxh', // 掌众产品借款页面
@@ -122,7 +122,7 @@ APP_NAMES.push(
     ...OUTSIDE_PAGES,
     ...APPLY_PAGES,
     ...APP_NAMES,
-    ...PROTOCOL_PAGES,
+    // ...PROTOCOL_PAGES,
     ...JRGC_PAGES,
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
