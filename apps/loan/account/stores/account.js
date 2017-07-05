@@ -76,7 +76,7 @@ export default class Account {
                 phone: this.phone,
                 invite_code: dict.invitationCode
             })
-            location.href = '/static/loan/home/index.html';
+            location.href = '/static/loan/home/index.html'
         }, e => Components.showToast(e.message))
     }
 
@@ -92,9 +92,10 @@ export default class Account {
                 token: dict.userToken,
                 status: dict.userStatus,
                 uid: dict.uid,
-                phone: this.phone
+                phone: this.phone,
+                invite_code: dict.invitationCode
             })
-            location.href = "/"
+            location.href = '/static/loan/home/index.html'
         }, e => Components.showToast(e.message))
     }
 

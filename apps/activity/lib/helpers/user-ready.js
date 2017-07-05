@@ -15,7 +15,9 @@ Ajax({
         level: data.userLevel,
         nickname: data.userName,
         sex: data.sex,
-        avatar: data.avatar || (data.sex == 1 ? '/img/man.png' : '/img/woman.png')
+        avatar: data.avatar || (data.sex == 1 ? '/img/man.png' : '/img/woman.png'),
+        gcm:data.userCode
+
     }
     resolve_list.forEach(cb => cb(USER.isLogin, USER))
 }, e => {
