@@ -5,7 +5,7 @@ import { Header } from '../../lib/components'
 import styles from '../css/personinfo-collect.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-export default class PersoninfoCollect extends React.Component {
+export default class InfoCollect extends React.Component {
 
     componentDidMount() {
         document.title = '个人信息采集授权声明'
@@ -53,6 +53,6 @@ export default class PersoninfoCollect extends React.Component {
                     <br />
 
             </div>
-        </div>        
+        </div>
     }
 }

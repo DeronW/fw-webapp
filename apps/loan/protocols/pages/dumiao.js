@@ -5,7 +5,7 @@ import { Header } from '../../lib/components'
 import styles from '../css/dumiao-openaccount.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-export default class DumiaoOpenaccount extends React.Component {
+export default class Dumiao extends React.Component {
 
     componentDidMount() {
         document.title = '读秒开户授权书'

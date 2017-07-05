@@ -9,9 +9,9 @@ import {
 import Register from './pages/register.js'
 import Borrowing from './pages/borrowing.js'
 import Cost from './pages/cost.js'
-import DumiaoOpenaccount from './pages/dumiao-openaccount.js'
+import Dumiao from './pages/dumiao.js'
 import Partner from './pages/partner.js'
-import PersoninfoCollect from './pages/personinfo-collect.js'
+import InfoCollect from './pages/info-collect.js'
 
 export default () => {
     return <Router>
@@ -20,9 +20,9 @@ export default () => {
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/borrowing' component={Borrowing} />
                 <Route exact path='/cost' component={Cost} />
-                <Route exact path='/dumiao' component={DumiaoOpenaccount} />
+                <Route exact path='/dumiao' component={Dumiao} />
                 <Route exact path='/partner' component={Partner} />
-                <Route exact path='/info-collect' component={PersoninfoCollect} />
+                <Route exact path='/info-collect' component={InfoCollect} />
             </Switch>
         </Provider>
     </Router>
