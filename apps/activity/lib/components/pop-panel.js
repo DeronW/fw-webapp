@@ -21,7 +21,7 @@ const InvestGiftPanel = CSSModules(styles, {
                         <td>好友达到VIP2级，送邀请人</td>
                     </tr>
                     <tr>
-                        <td style={{ width: "25%" }}>
+                        <td style={{ width: "35%" }}>
                             <span styleName="voucher">
                                 <span styleName="voucher-title">
                                     <span styleName="voucher-title-b">50</span>
