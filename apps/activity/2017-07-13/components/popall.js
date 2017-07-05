@@ -53,8 +53,8 @@ class PopInviteMobile extends React.Component {
     }
 
     componentDidMount() {
-        UserReady((isLogin) => {
-            this.setState({isLogin: isLogin})
+        UserReady((isLogin,user) => {
+            this.setState({isLogin: isLogin,gcm:user.gcm})
         })
     }
 
@@ -100,8 +100,8 @@ class PopInvitePC extends React.Component {
 
     componentDidMount() {
         // this.clipboardHandler();
-        UserReady((isLogin) => {
-            this.setState({isLogin: isLogin})
+        UserReady((isLogin,user) => {
+            this.setState({isLogin: isLogin,gcm:user.gcm})
         })
     }
 
