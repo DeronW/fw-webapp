@@ -17,9 +17,9 @@
 }
 
 .pc-banner-pics {
-    width: 800px;
+    width: 1000px;
     margin: 0 auto;
-    height: 700px;
+    height: 1000px;
     position: relative;
 
 }
@@ -38,28 +38,28 @@
 }
 
 .anchor-one {
-    top: 286px;
-    left: 730px;
+    top: 454px;
+    left: 272px;
 }
 
 .anchor-two {
-    top: 300px;
-    left: 531px;
+    top: 473px;
+    left: 702px;
 }
 
 .anchor-three {
-    top: 405px;
-    left: 155px;
+    top: 616px;
+    left: 168px;
 }
 
 .anchor-four {
-    top: 530px;
-    left: 344px;
+    top: 800px;
+    left: 436px;
 }
 
 .anchor-five {
-    top: 497px;
-    right: 134px;
+    top: 750px;
+    right: 133px;
 }
 
 .anchor-item:hover {
@@ -71,36 +71,36 @@
 .anchor-one:hover {
     width: 80px;
     height: 124px;
-    top: 286px;
-    left: 229px;
+    top: 445px;
+    left: 269px;
 }
 
 .anchor-two:hover {
     width: 80px;
     height: 124px;
-    top: 300px;
-    left: 531px;
+    top: 467px;
+    left: 697px;
 }
 
 .anchor-three:hover {
     width: 80px;
     height: 124px;
-    top: 405px;
-    left: 155px;
+    top: 616px;
+    left: 162px;
 }
 
 .anchor-four:hover {
     width: 80px;
     height: 124px;
-    top: 530px;
-    left: 344px;
+    top: 800px;
+    left: 432px;
 }
 
 .anchor-five:hover {
     width: 80px;
     height: 124px;
-    top: 497px;
-    right: 134px;
+    top: 750px;
+    right: 129px;
 }
 
 .pc-content {
