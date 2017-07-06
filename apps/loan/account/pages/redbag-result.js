@@ -27,7 +27,7 @@ export default class RedBagResult extends React.Component {
         let { redbag, history } = this.props
         return (
             <div>
-                <Header title="提现结果" history={history} />
+                <Header title="提现结果" history={history} enable={'force'} />
                 <div styleName="result-wrap">
                     {redbag.withdrawResult.success && <div styleName="waiting-result-box">
                         <div styleName="wrap-box">
