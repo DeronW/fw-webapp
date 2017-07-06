@@ -283,10 +283,69 @@
 
 .item-down {
     font-size: 24px;
-    color: #f3c000;
     text-align: center;
     height: 128px;
     line-height: 128px;
+}
+
+.item-data-up {
+    width: 100%;
+    height: 61px;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    padding-top: 5px;
+}
+
+.item-data-down {
+    font-size: 24px;
+    text-align: center;
+    height: 100px;
+}
+
+.itemdown-0 {
+    color: #f3c000;
+}
+
+.itemdown-1 {
+    color: #ff9154;
+}
+
+.itemdown-2 {
+    color: #e76e9e;
+}
+
+.itemdown-3 {
+    color: #b57ed7;
+}
+
+.itemdown-4 {
+    color: #53be83;
+}
+
+.separable-bonus {
+    font-size: 14px;
+    color: #966600;
+}
+
+.bonus-amount {
+    font-size: 24px;
+    color: #fff;
+}
+
+.username {
+    font-size: 24px;
+    padding: 5px 0;
+}
+
+.add-year {
+    font-size: 14px;
+    color: #6f95c4;
+}
+
+.year-amount {
+    font-size: 20px;
+    color: #fff;
 }
 
 .pc-bonus {
@@ -413,6 +472,46 @@
     margin: 0 1px 0 6px;
     height: 388px;
     background-color: #fff;
+}
+
+.rank-item {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #4e548f;
+}
+
+.rank-even {
+    background-color: #ececec;
+}
+
+.r-data-item {
+    display: inline-block;
+    text-align: center;
+}
+
+.rank-num {
+    width: 95px;
+}
+
+.rank-username {
+    width: 148px;
+}
+
+.rank-total {
+    width: 160px;
+}
+
+.rank-bonus {
+    width: 126px;
+}
+
+.empty-box {
+    font-size: 24px;
+    color: #7c9fc1;
+    text-align: center;
+    line-height: 388px;
 }
 
 .rank-tips {
