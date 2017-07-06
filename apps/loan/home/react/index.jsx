@@ -14,11 +14,11 @@ function LoanProduct(props) {
     );
     return (
         <div className="loan-product-card" onClick={() => { gotoHandler(`${productLink}?pid=${props.productId}`, productToNative) }}>
-            <img className="loan-product-logo" src={ props.productLogo } />
-            <div className="loan-product-name">{ props.productName }</div>
-            <div className="loan-product-amount">借款范围({ props.amountStr })</div>
+            <img className="loan-product-logo" src={props.productLogo} />
+            <div className="loan-product-name">{props.productName}</div>
+            <div className="loan-product-amount">借款范围({props.amountStr})</div>
             <div className="loan-product-label-container">
-                { props.productLabelList.map(generate_labels) }
+                {props.productLabelList.map(generate_labels)}
             </div>
         </div>
     )
@@ -29,7 +29,7 @@ function SubProduct(props) {
     return (
         <div className="sub-product-item" onClick={() => { gotoHandler(props.redirectUrl, toNative) }}>
             <div className="sub-product-logo-container">
-                <img className="sub-product-logo" src={decodeURIComponent(props.logoUrl)}/>
+                <img className="sub-product-logo" src={decodeURIComponent(props.logoUrl)} />
             </div>
             <div className="sub-product-title">
                 <div className="sub-product-1st-title">{props.productTitle}</div>
@@ -88,7 +88,12 @@ class Home extends React.Component {
     }
 
     handleBannerJump = () => {
-      gotoHandler($FW.Theme.get('weixin_download_page'))
+        let ua = navigator.userAgent;
+        let r = ua.match(/EasyLoan888\/(\d+.\d+.\d+)/);
+        let appVersion = r ? r[1] : '0';
+        if ($FW.Browser.inIOS() && appVersion == '1.2.20') return;
+
+        gotoHandler($FW.Theme.get('weixin_download_page'))
     }
 
     render() {
@@ -100,7 +105,7 @@ class Home extends React.Component {
                         <img className="product-title-icon" src="images/loan-category-icon.png" />我要借款
                     </div>
                     <div className="loan-product-card-container">
-                        { this.state.loanProductList.map(product => <LoanProduct {...product} key={ product.productId } />) }
+                        {this.state.loanProductList.map(product => <LoanProduct {...product} key={product.productId} />)}
                     </div>
                 </div>
                 <div className="sub-product-container">
@@ -108,11 +113,11 @@ class Home extends React.Component {
                         <img className="product-title-icon" src="images/sub-category-icon.png" />精选推荐
                     </div>
                     <div className="sub-product-item-container">
-                        { this.state.subProductList.map(product => <SubProduct {...product} key={product.firstTitle} />) }
+                        {this.state.subProductList.map(product => <SubProduct {...product} key={product.firstTitle} />)}
                     </div>
                 </div>
-                { this.state.showBulletin &&
-                    <Bulletin bulletinCnt={this.state.bulletinCnt} handleBulletinExit={() => { this.setState({showBulletin: false}) }} /> }
+                {this.state.showBulletin &&
+                    <Bulletin bulletinCnt={this.state.bulletinCnt} handleBulletinExit={() => { this.setState({ showBulletin: false }) }} />}
             </div>
         )
     }
