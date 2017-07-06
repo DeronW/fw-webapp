@@ -38,7 +38,6 @@ class InsureInfo extends React.Component {
         }
         return <div>
             <Header title="投保信息" history={history} />
-
             <div styleName="insure-title">投保人信息</div>
             {showPanel("holder", "投保人姓名", "name")}
             {showPanel("holder", "投保人手机", "mobile")}

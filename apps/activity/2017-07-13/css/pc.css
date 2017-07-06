@@ -5,11 +5,14 @@
 }
 
 .pc-banner {
-    width: 100%;
+    width: 1920px;
     height: 772px;
     background: url("../images/pc/banner.jpg") no-repeat center;
-    background-size: 100%;
     position: relative;
+    left: 50%;
+    top: 0;
+    margin-left: -960px;
+    
 }
 
 .pc-banner-pics {
@@ -35,7 +38,11 @@
 
 .anchor-one {
     top: 286px;
+<<<<<<< HEAD
     left: 229px;
+=======
+    left: 730px;
+>>>>>>> fix
 }
 
 .anchor-two {
