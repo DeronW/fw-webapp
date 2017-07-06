@@ -8,7 +8,9 @@ export default class PolicyDetail {
         extendObservable(this, {
             selectedFirm: '', // 0:平安、1:太平洋、2:人保
             alipayURL: '', // 支付宝支付链接
-            payStatus: '', // 支付状态， 未支付 成功 失败等等
+            orderId: '',
+            orderNo: '',
+            orderStatus: ''// 支付状态， 未支付 成功 失败等等
         })
     }
 
@@ -31,8 +33,11 @@ export default class PolicyDetail {
             .then(data => data.temporaryPolicyId)
         this.Get('/carInsurance/submitOrder.shtml', {
             temporaryPolicyId: temporaryPolicyId
-        }).then(data => {
-            this.alipayURL = data.payUrl;
+        }).then(({ order, payUrl }) => {
+            this.alipayURL = payUrl;
+            this.orderId = order.orderId;
+            this.orderNo = order.orderNo;
+            this.orderStatus = order.status;
             history.push('/order-payment')
         })
     }
