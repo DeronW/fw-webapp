@@ -50,7 +50,7 @@ class InsureInfo extends React.Component {
                 {panelImage("holder", "image1")}
                 {panelImage("holder", "image2")}
             </div>
-            <div styleName="panel-check" onClick={customer.toggleSamePerson}>
+            <div styleName="panel-check">
                 <i className={customer.isSame ?
                     styles_icon_circle.checked :
                     styles_icon_circle.unchecked}></i>
