@@ -58,7 +58,7 @@ class OrderConfirm extends React.Component {
             </div>
 
             <BottomButton active={true} title={'确认提交'}
-                onClick={() => { history.push('/order-payment') } } />
+                onClick={() => { current_order.submitOrder(history) } } />
         </div>
     }
 }

@@ -33,7 +33,7 @@ class MainPanel extends React.Component {
                 </div>
                 <div className={styles_icon_circle.checked}></div>
             </div>
-            <div styleName="payment-btn" onClick={current_order.toPay}>支付</div>
+            <div styleName="payment-btn" onClick={() => current_order.toPay(history)}>支付</div>
         </div>
     }
 }
