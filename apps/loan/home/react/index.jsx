@@ -87,19 +87,19 @@ class Home extends React.Component {
             });
     }
 
-    handleBannerJump = () => {
-        let ua = navigator.userAgent;
-        let r = ua.match(/EasyLoan888\/(\d+.\d+.\d+)/);
-        let appVersion = r ? r[1] : '0';
-        if ($FW.Browser.inIOS() && appVersion == '1.2.20') return;
-
-        gotoHandler($FW.Theme.get('weixin_download_page'))
-    }
+    // handleBannerJump = () => {
+    //     let ua = navigator.userAgent;
+    //     let r = ua.match(/EasyLoan888\/(\d+.\d+.\d+)/);
+    //     let appVersion = r ? r[1] : '0';
+    //     if ($FW.Browser.inIOS() && appVersion == '1.2.20') return;
+    //
+    //     gotoHandler($FW.Theme.get('weixin_download_page'))
+    // }
 
     render() {
         return (
             <div>
-                <div onClick={this.handleBannerJump}><img src="images/banner.jpg" /></div>
+                {$FW.Browser.inJRGCApp() ? null : <div><img src="images/banner.jpg"/></div>}
                 <div className="loan-product-container">
                     <div className="product-title">
                         <img className="product-title-icon" src="images/loan-category-icon.png" />我要借款
