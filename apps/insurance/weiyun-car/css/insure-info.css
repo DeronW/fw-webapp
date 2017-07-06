@@ -9,7 +9,7 @@
     border-bottom: 1px solid #e3e5ea;
     padding-left: 24px;
 }
-.input-panel{
+.show-panel{
     height: 90px;
     line-height: 90px;
     font-size: 30px;
@@ -20,18 +20,17 @@
     width: 100%;
     box-sizing: border-box;
 }
-.input-panel input[type="text"]{
+.panel-text{
     float: right;
     width: 510px;
     height: 90px;
     line-height: 90px;
-    border: none;
-    outline: none;
     color: #666;
     font-size: 30px;
     text-align: right;
+    display: inline-block;
 }
-.input-line{
+.panel-line{
     position: absolute;
     left: 24px;
     right:0;
@@ -61,7 +60,7 @@
     padding: 0 24px;
     box-sizing: border-box;
 }
-.input-image{
+.panel-image{
     position: relative;
     display: block;
     float: left;
