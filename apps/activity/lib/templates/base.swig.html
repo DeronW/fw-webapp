@@ -27,13 +27,14 @@
 <div id="cnt"></div>
 <div id="pop"></div>
 {% endblock %}
+
 {% if ENV == 'production' %}
-{% include './expection-handler.swig.html' with {SENTRY_DSN:
+{% include 'exception-handler.swig.html' with {SENTRY_DSN:
 'https://4135eb9a33e248e984bcc7789424be8e@sentry.dougemall.com/3'} %}
 {% endif %}
 
 {% if ENV == 'production' %}
-{% include './growing-io.swig.html' with { ACCOUNT_ID: '99b8ecbb093eec0e' } %}
+{% include 'growing-io.swig.html' with { ACCOUNT_ID: '99b8ecbb093eec0e' } %}
 {% endif %}
 
 <script>
