@@ -11,7 +11,7 @@
     background: url("../images/pc/banner.jpg") no-repeat center;
     position: relative;
     left: 50%;
-    top: 0;
+    top: -50px;
     margin-left: -960px;
 
 }
