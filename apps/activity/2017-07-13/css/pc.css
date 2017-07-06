@@ -12,12 +12,13 @@
     position: relative;
 }
 
-/*.pc-banner-pics {*/
-    /*width: 1292px;*/
-    /*height: 764px;*/
-    /*margin: 0 auto;*/
-    /*background: red;*/
-/*}*/
+.pc-banner-pics {
+    width: 800px;
+    margin: 0 auto;
+    height: 700px;
+    position: relative;
+
+}
 
 .anchor-item {
     width: 71px;
@@ -33,30 +34,28 @@
 }
 
 .anchor-one {
-
     top: 286px;
-    left: 504px;
+    left: 229px;
 }
 
 .anchor-two {
-
     top: 300px;
-    left: 806px;
+    left: 531px;
 }
 
 .anchor-three {
     top: 405px;
-    left: 430px;
+    left: 155px;
 }
 
 .anchor-four {
     top: 530px;
-    left: 619px;
+    left: 344px;
 }
 
 .anchor-five {
-    top: 500px;
-    right: 406px;
+    top: 497px;
+    right: 134px;
 }
 
 .anchor-item:hover {
@@ -68,36 +67,36 @@
 .anchor-one:hover {
     width: 80px;
     height: 124px;
-    top: 275px;
-    left: 499px;
+    top: 286px;
+    left: 229px;
 }
 
 .anchor-two:hover {
     width: 80px;
     height: 124px;
-    top: 290px;
-    left: 801px;
+    top: 300px;
+    left: 531px;
 }
 
 .anchor-three:hover {
     width: 80px;
     height: 124px;
-    top: 397px;
-    left: 426px;
+    top: 405px;
+    left: 155px;
 }
 
 .anchor-four:hover {
     width: 80px;
     height: 124px;
-    top: 523px;
-    left: 615px;
+    top: 530px;
+    left: 344px;
 }
 
 .anchor-five:hover {
     width: 80px;
     height: 124px;
-    top: 490px;
-    right: 402px;
+    top: 497px;
+    right: 134px;
 }
 
 .pc-content {

@@ -285,17 +285,18 @@ class JulyPC extends React.Component {
         return <div styleName="july-pc-box">
             <PCHeader/>
             <div styleName="pc-banner">
-                {/*<img src={require("../images/pc/banner.jpg")} width="100%" height="100%"/>*/}
-                <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one"
-                     onClick={() => this.scroll(0, 750)}/>
-                <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two"
-                     onClick={() => this.scroll(0, 3170)}/>
-                <img src={require("../images/pc/anchor-3.png")} styleName="anchor-item anchor-three"
-                     onClick={() => this.scroll(0, 2450)}/>
-                <img src={require("../images/pc/anchor-4.png")} styleName="anchor-item anchor-four"
-                     onClick={() => this.scroll(0, 1950)}/>
-                <img src={require("../images/pc/anchor-5.png")} styleName="anchor-item anchor-five"
-                     onClick={() => this.scroll(0, 4600)}/>
+                <div styleName="pc-banner-pics">
+                    <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one"
+                         onClick={() => this.scroll(0, 750)}/>
+                    <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two"
+                         onClick={() => this.scroll(0, 3170)}/>
+                    <img src={require("../images/pc/anchor-3.png")} styleName="anchor-item anchor-three"
+                         onClick={() => this.scroll(0, 2450)}/>
+                    <img src={require("../images/pc/anchor-4.png")} styleName="anchor-item anchor-four"
+                         onClick={() => this.scroll(0, 1950)}/>
+                    <img src={require("../images/pc/anchor-5.png")} styleName="anchor-item anchor-five"
+                         onClick={() => this.scroll(0, 4600)}/>
+                </div>
             </div>
             {content_panel}
             {fight_panel()}
