@@ -285,7 +285,7 @@ class JulyPC extends React.Component {
         return <div styleName="july-pc-box">
             <PCHeader/>
             <div styleName="pc-banner">
-                <img src={require("../images/pc/banner.jpg")} width="100%" height="100%"/>
+                {/*<img src={require("../images/pc/banner.jpg")} width="100%" height="100%"/>*/}
                 <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one"
                      onClick={() => this.scroll(0, 750)}/>
                 <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two"

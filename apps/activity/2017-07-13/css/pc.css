@@ -6,11 +6,18 @@
 
 .pc-banner {
     width: 100%;
-    height: 100%;
+    height: 772px;
     background: url("../images/pc/banner.jpg") no-repeat center;
     background-size: contain;
     position: relative;
 }
+
+/*.pc-banner-pics {*/
+    /*width: 1292px;*/
+    /*height: 764px;*/
+    /*margin: 0 auto;*/
+    /*background: red;*/
+/*}*/
 
 .anchor-item {
     width: 71px;
