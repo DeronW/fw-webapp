@@ -74,8 +74,8 @@ class InsureInfo extends React.Component {
                 {panelImage("recognizee", "image1")}
                 {panelImage("recognizee", "image2")}
             </div>
-            <BottomButton active={customer.valid} title="确认提交"
-                onClick={() => customer.submit(history)} />
+            <BottomButton active={true} title="下一步"
+                onClick={() =>history.push('/order-confirm')}/>
         </div>
     }
 }
