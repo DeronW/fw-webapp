@@ -17,13 +17,28 @@ export default class PolicyDetail {
         this.selectedFirm = this.selectedFirm == selected ? '' : selected;
     }
 
-    submitSelectedFirm = (history) => {
-        this.Get('/carInsurance/submitDisposition.shtml', { code: this.selectedFirm })
-            then(data => history.push('/customer'))
+    submitSelectedFirm = async (history) => {
+        let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
+            .then(data => data.temporaryPolicyId)
+        this.Get('/carInsurance/submitDisposition.shtml', {
+            code: this.selectedFirm,
+            temporaryPolicyId: temporaryPolicyId
+        }).then(data => history.push('/customer'))
     }
 
-    toPay = () => {
-        console.log('user wants to pay!');
+    submitOrder = async (history) => {
+        let temporaryPolicyId = await this.Get('/carInsurance/getTempPolicyIdForUser.shtml')
+            .then(data => data.temporaryPolicyId)
+        this.Get('/carInsurance/submitOrder.shtml', {
+            temporaryPolicyId: temporaryPolicyId
+        }).then(data => {
+            this.alipayURL = data.payUrl;
+            history.push('/order-payment')
+        })
+    }
+
+    toPay = (history) => {
+        window.location = this.alipayURL
     }
 
 }
