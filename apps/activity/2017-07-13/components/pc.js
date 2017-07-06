@@ -10,11 +10,35 @@ class JulyPC extends React.Component {
     state = {
         timestamp: this.props.timestamp,
         closeBottom: false,
-        isLogin: this.props.isLogin
+        isLogin: this.props.isLogin,
+        username: this.props.username,
+        fightdata: [
+            {name: "fxr", money: 15000},
+            {name: "fxr", money: 20000},
+            {name: "fxr", money: 30000},
+            {name: "fxr", money: 40000},
+            {name: "fxr", money: 50000}
+        ],
+        rankdata: [
+            {username: "rising", total_monty: 15000, bonus: 2000},
+            {username: "rising", total_monty: 15000, bonus: 3000},
+            {username: "rising", total_monty: 15000, bonus: 4000},
+            {username: "rising", total_monty: 15000, bonus: 5000},
+            {username: "rising", total_monty: 15000, bonus: 6000},
+            {username: "rising", total_monty: 15000, bonus: 7000},
+            {username: "rising", total_monty: 15000, bonus: 8000},
+            {username: "rising", total_monty: 15000, bonus: 9000},
+            {username: "rising", total_monty: 15000, bonus: 1000},
+            {username: "rising", total_monty: 15000, bonus: 2000}
+        ]
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({isLogin: nextProps.isLogin, timestamp: nextProps.timestamp});
+        this.setState({
+            isLogin: nextProps.isLogin,
+            timestamp: nextProps.timestamp,
+            username: nextProps.username
+        });
         this.popStatusHandler(nextProps.timestamp)
     }
 
@@ -100,50 +124,71 @@ class JulyPC extends React.Component {
                 </div>
             </div>
         </div>
-        let fight_panel = <div styleName="pc-fight">
-            <div styleName="fight-data-box">
+        let fight_panel = () => {
+            let {fightdata} = this.state;
+            //如果数据为空
+            let no_fight_data = <div styleName="fight-data-box">
                 <div styleName="data-item">
                     <div styleName="item-up">
                         暂无奖金
                     </div>
-                    <div styleName="item-down">
+                    <div styleName="item-down itemdown-0">
                         马上就来...
                     </div>
                 </div>
                 <div styleName="data-item">
                     <div styleName="item-up">
-
+                        暂无奖金
                     </div>
-                    <div styleName="item-down">
-
-                    </div>
-                </div>
-                <div styleName="data-item">
-                    <div styleName="item-up">
-
-                    </div>
-                    <div styleName="item-down">
-
+                    <div styleName="item-down itemdown-1">
+                        在潜艇上...
                     </div>
                 </div>
                 <div styleName="data-item">
                     <div styleName="item-up">
-
+                        暂无奖金
                     </div>
-                    <div styleName="item-down">
-
+                    <div styleName="item-down itemdown-2">
+                        在游轮上...
                     </div>
                 </div>
                 <div styleName="data-item">
                     <div styleName="item-up">
-
+                        暂无奖金
                     </div>
-                    <div styleName="item-down">
-
+                    <div styleName="item-down itemdown-3">
+                        在帆船上...
+                    </div>
+                </div>
+                <div styleName="data-item">
+                    <div styleName="item-up">
+                        暂无奖金
+                    </div>
+                    <div styleName="item-down itemdown-4">
+                        游泳中...
                     </div>
                 </div>
             </div>
-        </div>
+            let fight_data_func = (item, index) => {
+                return <div styleName="data-item" key={index}>
+                    <div styleName="item-data-up">
+                        <div styleName="separable-bonus">可分奖金</div>
+                        <div styleName="bonus-amount">{item.money}元</div>
+                    </div>
+                    <div styleName="item-data-down">
+                        <div styleName={`username itemdown-${index}`}>{item.name}</div>
+                        <div styleName="add-year">好友累投年化</div>
+                        <div styleName="year-amount">{item.money}元</div>
+                    </div>
+                </div>
+            }
+            let fight_data_box = <div styleName="fight-data-box">
+                {fightdata.map(fight_data_func)}
+            </div>
+            return <div styleName="pc-fight">
+                {fightdata.length == 0 ? no_fight_data : fight_data_box}
+            </div>
+        }
         let bonus_panel = <div styleName="pc-bonus">
             <img src={require("../images/pc/bonus-title.png")} styleName="bonus-title"/>
             <div styleName="bouns-tips">
@@ -167,22 +212,39 @@ class JulyPC extends React.Component {
                 </div>
             </div>
         </div>
-        let rank_panel = <div styleName="pc-rank">
-            <div styleName="rank-content">
-                <div styleName="rank-name">
-                    <span styleName="name-item item-one">排名</span>
-                    <span styleName="name-item item-two">用户名</span>
-                    <span styleName="name-item item-three">团队累投年化额(元)</span>
-                    <span styleName="name-item item-four">奖金(元)</span>
-                </div>
-                <div styleName="rank-data">
-
+        let rank_panel = () => {
+            let {rankdata} = this.state
+            let empty = <div styleName="rank-data">
+                <div styleName="empty-box">
+                    参赛团队还在努力准备中...
                 </div>
             </div>
-            <div styleName="rank-tips">
-                温馨提示：以上数据实时更新，最终奖金以活动结束后数据为准发放。
+            let rankdata_func = (item, index) => {
+                return <div key={index} styleName={index % 2 != 0 ? "rank-item rank-even" : "rank-item"}>
+                    <span styleName="r-data-item rank-num">{index + 1}</span>
+                    <span styleName="r-data-item rank-username">{item.username}</span>
+                    <span styleName="r-data-item rank-total">{item.total_monty}</span>
+                    <span styleName="r-data-item rank-bonus">{item.bonus}</span>
+                </div>
+            }
+            let rankdata_box = <div styleName="rank-data">
+                {rankdata.map(rankdata_func)}
             </div>
-        </div>
+            return <div styleName="pc-rank">
+                <div styleName="rank-content">
+                    <div styleName="rank-name">
+                        <span styleName="name-item item-one">排名</span>
+                        <span styleName="name-item item-two">用户名</span>
+                        <span styleName="name-item item-three">团队累投年化额(元)</span>
+                        <span styleName="name-item item-four">奖金(元)</span>
+                    </div>
+                    {rankdata.length == 0 ? empty : rankdata_box}
+                </div>
+                <div styleName="rank-tips">
+                    温馨提示：以上数据实时更新，最终奖金以活动结束后数据为准发放。
+                </div>
+            </div>
+        }
         let expalin_panel = <div styleName="pc-explain">
             <div styleName="explain">
                 <div styleName="explain-title">活动说明</div>
@@ -224,16 +286,21 @@ class JulyPC extends React.Component {
             <PCHeader/>
             <div styleName="pc-banner">
                 <img src={require("../images/pc/banner.jpg")} width="100%" height="100%"/>
-                <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one" onClick={() => this.scroll(0, 750)}/>
-                <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two" onClick={() => this.scroll(0, 3170)}/>
-                <img src={require("../images/pc/anchor-3.png")} styleName="anchor-item anchor-three" onClick={() => this.scroll(0, 2450)}/>
-                <img src={require("../images/pc/anchor-4.png")} styleName="anchor-item anchor-four" onClick={() => this.scroll(0, 1950)}/>
-                <img src={require("../images/pc/anchor-5.png")} styleName="anchor-item anchor-five" onClick={() => this.scroll(0, 4600)}/>
+                <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one"
+                     onClick={() => this.scroll(0, 750)}/>
+                <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two"
+                     onClick={() => this.scroll(0, 3170)}/>
+                <img src={require("../images/pc/anchor-3.png")} styleName="anchor-item anchor-three"
+                     onClick={() => this.scroll(0, 2450)}/>
+                <img src={require("../images/pc/anchor-4.png")} styleName="anchor-item anchor-four"
+                     onClick={() => this.scroll(0, 1950)}/>
+                <img src={require("../images/pc/anchor-5.png")} styleName="anchor-item anchor-five"
+                     onClick={() => this.scroll(0, 4600)}/>
             </div>
             {content_panel}
-            {fight_panel}
+            {fight_panel()}
             {bonus_panel}
-            {rank_panel}
+            {rank_panel()}
             {expalin_panel}
             {bottom_panel()}
         </div>

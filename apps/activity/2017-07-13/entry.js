@@ -11,12 +11,13 @@ class Content extends React.Component {
 
     state = {
         isLogin: null,
-        timestamp: null
+        timestamp: null,
+        username: null
     }
 
     componentDidMount() {
-        UserReady((isLogin) => {
-            this.setState({isLogin: isLogin})
+        UserReady((isLogin, user) => {
+            this.setState({isLogin: isLogin, username: user.userName})
         })
         Get('/activity/v1/timestamp.json')
             .then(data => {
@@ -33,7 +34,8 @@ class Content extends React.Component {
         let props = {
             isLogin: this.state.isLogin,
             closePopHandler: this.closePopHandler,
-            timestamp: this.state.timestamp
+            timestamp: this.state.timestamp,
+            username: this.state.username
         }
         let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC {...props}/>
         return <div>
