@@ -19,7 +19,8 @@ class Content extends React.Component {
         UserReady((isLogin, user) => {
             this.setState({isLogin: isLogin, username: user.userName})
         })
-        Get('/activity/v1/timestamp.json')
+
+        Get('/api/userState/v1/timestamp.json')
             .then(data => {
                 this.setState({timestamp: data.timestamp})
             })

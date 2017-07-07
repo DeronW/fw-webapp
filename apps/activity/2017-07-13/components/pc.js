@@ -43,10 +43,10 @@ class JulyPC extends React.Component {
     }
 
     componentDidMount() {
-        Get('http://www.gongchangp2p.cn/api/fiveYearsActivity/v1/getTeamYam.do')
-            .then(data=>{
-                console.log(data)
-            })
+        // Get('http://www.gongchangp2p.cn/api/fiveYearsActivity/v1/getTeamYam.do')
+        //     .then(data=>{
+        //         console.log(data)
+        //     })
     }
 
     popStatusHandler = (timestamp) => {
