@@ -269,28 +269,89 @@ body {
     margin-top: 90px;
 }
 
-.top-r-one {
-    background: url("../images/mobile/m-fight1.png") no-repeat center;
+.top-item-up {
+    width: 100%;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+    font-size: 36px;
+    color: #fff;
 }
 
-.top-r-two {
+.top-item-down {
+    width: 100%;
+    height: 145px;
+    text-align: center;
+    line-height: 145px;
+    font-size: 36px;
+}
+
+.top-r-1 {
+    background: url("../images/mobile/m-fight1.png") no-repeat center;
+    color: #f3c000;
+}
+
+.top-r-2 {
     background: url("../images/mobile/m-fight2.png") no-repeat center;
     margin-top: 60px;
+    color: #ff9154;
 }
 
-.top-r-three {
+.top-r-3 {
     background: url("../images/mobile/m-fight3.png") no-repeat center;
     margin-top: 30px;
+    color: #e76e9e;
 }
 
-.top-r-four {
+.top-r-4 {
     background: url("../images/mobile/m-fight4.png") no-repeat center;
     margin-top: 10px;
+    color: #b174d7;
 }
 
-.top-r-five {
+.top-r-5 {
     background: url("../images/mobile/m-fight5.png") no-repeat center;
     margin-top: 10px;
+    color: #53be83;
+}
+
+.person-up {
+    width: 100%;
+    height: 90px;
+    text-align: center;
+
+}
+
+.person-title {
+    color: #966600;
+    padding-top: 5px;
+    font-size: 22px;
+}
+
+.person-number {
+    color: #fff;
+    font-size: 36px;
+}
+
+.person-down {
+    width: 100%;
+    height: 145px;
+    text-align: center;
+}
+
+.person-realName {
+    font-size: 36px;
+    padding: 5px 0;
+}
+
+.person-subtitle {
+    font-size: 22px;
+    color: #6f95c4;
+}
+
+.person-total {
+    font-size: 30px;
+    color: #fff;
 }
 
 /*fight panel end*/
@@ -385,6 +446,56 @@ body {
     margin-top: 5px;
 }
 
+.empty-box {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 580px;
+    color: #4e548f;
+}
+
+.color-yellow {
+    color: #ffe400;
+}
+
+.data-box {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 22px;
+    color: #4e548f;
+}
+
+.rank-data-item {
+    width: 100%;
+    height: 58px;
+    line-height: 58px;
+}
+
+.rank-data-odd {
+    background-color: #ececec;
+}
+
+.rank_number {
+    display: inline-block;
+    width: 60px;
+}
+
+.rank-username {
+    display: inline-block;
+    width: 108px;
+}
+
+.rank-totalmoney {
+    display: inline-block;
+    width: 224px;
+}
+
+.rank-bonus {
+    display: inline-block;
+    width: 128px;
+}
+
 .m-rank-tips {
     font-size: 22px;
     color: #79b5ff;
@@ -435,7 +546,7 @@ body {
     background: rgba(0, 0, 0, 0.6);
     color: #fff;
     text-align: center;
-    line-height: 80px;
+    font-size: 24px;
 }
 
 .m-logged {
@@ -444,6 +555,11 @@ body {
 
 .pre-des {
 
+}
+
+.logged-des {
+    width: 90%;
+    margin: 20px auto;
 }
 
 .logged-text, .pre-text {
@@ -459,7 +575,7 @@ body {
     border-radius: 20px;
     display: inline-block;
     text-align: center;
-    color:#fff;
+    color: #fff;
 }
 
 .pre-golog {

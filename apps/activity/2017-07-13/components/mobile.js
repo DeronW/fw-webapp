@@ -16,7 +16,12 @@ class JulyMobile extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({isLogin: nextProps.isLogin, timestamp: nextProps.timestamp});
+        this.setState({
+            isLogin: nextProps.isLogin,
+            timestamp: nextProps.timestamp,
+            rankdata: nextProps.rankdata,
+            fightdata: nextProps.fightdata
+        });
         this.popStatusHandler(nextProps.timestamp)
     }
 
@@ -104,53 +109,86 @@ class JulyMobile extends React.Component {
                 年化总额，仅计算满足获奖资格的用户。
             </div>
         </div>
-        let fight_panel = <div styleName="m-fight">
-            <div styleName="m-f-title">
-                <img src={require("../images/mobile/m-fight-title.png")}/>
-            </div>
-            <div styleName="m-f-top">
+        let fight_panel = () => {
+            let {fightdata} = this.props
+            // let fightdata = []
+            let no_fight_data = <div styleName="no-fight-box">
                 <div styleName="top-item">
                     <div styleName="top-item-left">
                         <img src={require("../images/mobile/m-top1.jpg")}/>
                     </div>
-                    <div styleName="top-item-right top-r-one">
-
+                    <div styleName="top-item-right top-r-1">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">马上就来...</div>
                     </div>
                 </div>
                 <div styleName="top-item">
                     <div styleName="top-item-left">
                         <img src={require("../images/mobile/m-top2.jpg")}/>
                     </div>
-                    <div styleName="top-item-right top-r-two">
-
+                    <div styleName="top-item-right top-r-2">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">在潜艇上......</div>
                     </div>
                 </div>
                 <div styleName="top-item">
                     <div styleName="top-item-left">
                         <img src={require("../images/mobile/m-top3.jpg")}/>
                     </div>
-                    <div styleName="top-item-right top-r-three">
-
+                    <div styleName="top-item-right top-r-3">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">在游轮上...</div>
                     </div>
                 </div>
                 <div styleName="top-item">
                     <div styleName="top-item-left">
                         <img src={require("../images/mobile/m-top4.jpg")}/>
                     </div>
-                    <div styleName="top-item-right top-r-four">
-
+                    <div styleName="top-item-right top-r-4">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">在帆船上...</div>
                     </div>
                 </div>
                 <div styleName="top-item">
                     <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top5.png")}/>
+                        <img src={require("../images/mobile/m-top5.jpg")}/>
                     </div>
-                    <div styleName="top-item-right top-r-five">
-
+                    <div styleName="top-item-right top-r-5">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">游泳中...</div>
                     </div>
                 </div>
             </div>
-        </div>
+            let person_data_func = (item, index) => {
+                return <div styleName="top-item" key={index}>
+                    <div styleName="top-item-left">
+                        <img src={require(`../images/mobile/m-top${index + 1}.jpg`)}/>
+                    </div>
+                    <div styleName={`top-item-right top-r-${index + 1}`}>
+                        <div styleName="person-up">
+                            <div styleName="person-title">可分奖金</div>
+                            <div styleName="person-number">{item.ucount}</div>
+                        </div>
+                        <div styleName="person-down">
+                            <div styleName="person-realName">{item.realName}</div>
+                            <div styleName="person-subtitle">好友累投年化</div>
+                            <div styleName="person-total">{item.year_amt_sum}元</div>
+                        </div>
+                    </div>
+                </div>
+            }
+            let fight_data_box = <div styleName="f-data-box">
+                {fightdata.map(person_data_func)}
+            </div>
+            return <div styleName="m-fight">
+                <div styleName="m-f-title">
+                    <img src={require("../images/mobile/m-fight-title.png")}/>
+                </div>
+                <div styleName="m-f-top">
+                    {fightdata && fightdata.length > 0 ? fight_data_box : no_fight_data}
+                </div>
+            </div>
+        }
         let bonus_panel = <div styleName="m-bonus">
             <div styleName="m-b-title">
                 <img src={require("../images/mobile/m-bonus-title.png")}/>
@@ -170,22 +208,39 @@ class JulyMobile extends React.Component {
                 </div>
             </div>
         </div>
-        let rank_panel = <div styleName="m-rank">
-            <div styleName="m-r-data">
-                <div styleName="data-name">
-                    <span styleName="name-one">排名</span>
-                    <span styleName="name-two">用户名</span>
-                    <span styleName="name-three">团队累投年化额(元)</span>
-                    <span styleName="name-four">奖金(元)</span>
+        let rank_panel = () => {
+            let rankdata = this.props.rankdata
+            let empty_box = <div styleName="empty-box">
+                参赛团队还在努力准备中...
+            </div>
+            let rank_data_func = (item, index) => {
+                return <div styleName={index % 2 == 0 ? "rank-data-item" : "rank-data-item rank-data-odd"} key={index}>
+                    <span styleName="rank_number">{index + 1}</span>
+                    <span styleName="rank-username">{item.realName}</span>
+                    <span styleName="rank-totalmoney">{item.year_amt_sum}</span>
+                    <span styleName="rank-bonus">{item.ucount}</span>
                 </div>
-                <div styleName="data-detil">
-
+            }
+            let data_box = <div styleName="data-box">
+                {rankdata.map(rank_data_func)}
+            </div>
+            return <div styleName="m-rank">
+                <div styleName="m-r-data">
+                    <div styleName="data-name">
+                        <span styleName="name-one">排名</span>
+                        <span styleName="name-two">用户名</span>
+                        <span styleName="name-three">团队累投年化额(元)</span>
+                        <span styleName="name-four">奖金(元)</span>
+                    </div>
+                    <div styleName="data-detil">
+                        {rankdata.length == 0 ? empty_box : data_box}
+                    </div>
+                </div>
+                <div styleName="m-rank-tips">
+                    温馨提示：以上数据实时更新，最终奖金以活动结束后数据为准发放。
                 </div>
             </div>
-            <div styleName="m-rank-tips">
-                温馨提示：以上数据实时更新，最终奖金以活动结束后数据为准发放。
-            </div>
-        </div>
+        }
         let explain_panel = <div styleName="m-explain">
             <div styleName="m-e-text">
                 <div styleName="m-x-title">活动说明</div>
@@ -199,8 +254,16 @@ class JulyMobile extends React.Component {
             </div>
         </div>
         let bottom_panel = () => {
+            let {singledata} = this.props
             let logged_text = <div styleName="m-logged">
-                <div styleName="logged-des">活动内，您可以邀请50人参与活动，</div>
+                <div styleName="logged-des">
+                    活动内，您有效邀友
+                    <span styleName="color-yellow">{singledata.ucount}人</span>
+                    ，有效好友累投年化
+                    <span styleName="color-yellow">3,4567元</span>，
+                    团队累投年化
+                    <span styleName="color-yellow">{singledata.year_amt_sum}元</span> 。
+                </div>
                 <div styleName="logged-text">
                     <span styleName="howinvite-after" onClick={this.showInvitePop}>如何邀请</span>
                     <a href="" styleName="after-invest">立即投资</a>
@@ -233,9 +296,9 @@ class JulyMobile extends React.Component {
             </div>
             {coupon_panel}
             {invite_panel}
-            {fight_panel}
+            {fight_panel()}
             {bonus_panel}
-            {rank_panel}
+            {rank_panel()}
             {explain_panel}
             {bottom_panel()}
         </div>

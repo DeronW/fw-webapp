@@ -11,42 +11,22 @@ class JulyPC extends React.Component {
         timestamp: this.props.timestamp,
         closeBottom: false,
         isLogin: this.props.isLogin,
-        username: this.props.username,
-        fightdata: [
-            {name: "fxr", money: 15000},
-            {name: "fxr", money: 20000},
-            {name: "fxr", money: 30000},
-            {name: "fxr", money: 40000},
-            {name: "fxr", money: 50000}
-        ],
-        rankdata: [
-            {username: "rising", total_monty: 15000, bonus: 2000},
-            {username: "rising", total_monty: 15000, bonus: 3000},
-            {username: "rising", total_monty: 15000, bonus: 4000},
-            {username: "rising", total_monty: 15000, bonus: 5000},
-            {username: "rising", total_monty: 15000, bonus: 6000},
-            {username: "rising", total_monty: 15000, bonus: 7000},
-            {username: "rising", total_monty: 15000, bonus: 8000},
-            {username: "rising", total_monty: 15000, bonus: 9000},
-            {username: "rising", total_monty: 15000, bonus: 1000},
-            {username: "rising", total_monty: 15000, bonus: 2000}
-        ]
+        rankdata: this.props.rankdata,
+        singledata: this.props.singledata
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
             isLogin: nextProps.isLogin,
             timestamp: nextProps.timestamp,
-            username: nextProps.username
+            rankdata: nextProps.rankdata,
+            singledata: nextProps.singledata,
+            fightdata: nextProps.fightdata
         });
         this.popStatusHandler(nextProps.timestamp)
     }
 
     componentDidMount() {
-        // Get('http://www.gongchangp2p.cn/api/fiveYearsActivity/v1/getTeamYam.do')
-        //     .then(data=>{
-        //         console.log(data)
-        //     })
     }
 
     popStatusHandler = (timestamp) => {
@@ -129,7 +109,8 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let fight_panel = () => {
-            let {fightdata} = this.state;
+            let {fightdata} = this.props;
+            // let fightdata=[]
             //如果数据为空
             let no_fight_data = <div styleName="fight-data-box">
                 <div styleName="data-item">
@@ -177,12 +158,12 @@ class JulyPC extends React.Component {
                 return <div styleName="data-item" key={index}>
                     <div styleName="item-data-up">
                         <div styleName="separable-bonus">可分奖金</div>
-                        <div styleName="bonus-amount">{item.money}元</div>
+                        <div styleName="bonus-amount">{item.ucount}元</div>
                     </div>
                     <div styleName="item-data-down">
-                        <div styleName={`username itemdown-${index}`}>{item.name}</div>
+                        <div styleName={`username itemdown-${index}`}>{item.realName}</div>
                         <div styleName="add-year">好友累投年化</div>
-                        <div styleName="year-amount">{item.money}元</div>
+                        <div styleName="year-amount">{item.year_amt_sum}元</div>
                     </div>
                 </div>
             }
@@ -218,6 +199,7 @@ class JulyPC extends React.Component {
         </div>
         let rank_panel = () => {
             let {rankdata} = this.state
+            // console.log(`this.state.rankdata.length:${this.state.rankdata.length}`)
             let empty = <div styleName="rank-data">
                 <div styleName="empty-box">
                     参赛团队还在努力准备中...
@@ -226,9 +208,9 @@ class JulyPC extends React.Component {
             let rankdata_func = (item, index) => {
                 return <div key={index} styleName={index % 2 != 0 ? "rank-item rank-even" : "rank-item"}>
                     <span styleName="r-data-item rank-num">{index + 1}</span>
-                    <span styleName="r-data-item rank-username">{item.username}</span>
-                    <span styleName="r-data-item rank-total">{item.total_monty}</span>
-                    <span styleName="r-data-item rank-bonus">{item.bonus}</span>
+                    <span styleName="r-data-item rank-username">{item.realName}</span>
+                    <span styleName="r-data-item rank-total">{item.year_amt_sum}</span>
+                    <span styleName="r-data-item rank-bonus">{item.ucount}</span>
                 </div>
             }
             let rankdata_box = <div styleName="rank-data">
@@ -265,11 +247,16 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let bottom_panel = () => {
-            let isLogin = this.state.isLogin;
-            let {closeBottom} = this.state;
+            let {isLogin, closeBottom} = this.state;
+            let {singledata} = this.props;
             let close_name = closeBottom ? "none" : "block";
             let logged = <div styleName="log-box logged-box">
-                活动内，您有效邀友50人，有效好友累投年化3,4567元，团队累投年化40,5678.89元 。
+                活动内，您有效邀友
+                <span styleName="color-yellow">{singledata.ucount}元</span>
+                ，有效好友累投年化
+                <span styleName="color-yellow">3,4567元</span>
+                ，团队累投年化
+                <span styleName="color-yellow">{singledata.year_amt_sum}元</span> 。
                 <div styleName="invite-pc-after" onClick={this.showHowInvite}>
                     如何邀请
                 </div>
