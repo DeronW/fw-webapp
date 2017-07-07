@@ -66,7 +66,7 @@ class Customer extends React.Component {
         let { customer, history, location } = this.props,
             renderAsDisplay = location.pathname.indexOf('order-confirm') > -1;
 
-        let hod_input_text = (title, name) => {
+        let hold_input_text = (title, name) => {
             return <div styleName="field-text">{title}
                 <input placeholder="请输入" type="text" disabled={renderAsDisplay}
                     value={customer.holder[name]}
@@ -89,10 +89,10 @@ class Customer extends React.Component {
             <Header title="投保人信息" history={history} />
 
             <div styleName="panel-title">投保人信息</div>
-            {hod_input_text('投保人姓名', 'name')}
-            {hod_input_text('投保人手机', 'mobile')}
-            {hod_input_text('身份证号', 'cardId')}
-            {hod_input_text('邮箱', 'email')}
+            {hold_input_text('投保人姓名', 'name')}
+            {hold_input_text('投保人手机', 'mobile')}
+            {hold_input_text('身份证号', 'cardId')}
+            {hold_input_text('邮箱', 'email')}
             <div styleName="picture-panel">
                 <div styleName="picture-panel-title">上传身份证照片</div>
                 <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
