@@ -12,17 +12,32 @@ class Content extends React.Component {
     state = {
         isLogin: null,
         timestamp: null,
-        username: null
+        rankdata: [],
+        singledata: {},
+        fightdata: []
     }
 
     componentDidMount() {
         UserReady((isLogin, user) => {
             this.setState({isLogin: isLogin, username: user.userName})
-        })
+        });
 
         Get('/api/userState/v1/timestamp.json')
             .then(data => {
                 this.setState({timestamp: data.timestamp})
+            });
+        Get('/api/fiveYearsActivity/v1/getTeamAndSelfYearAmt.do')
+            .then(data => {
+                this.setState({rankdata: data.data})
+            });
+        Get('/api/fiveYearsActivity/v1/getSelfYearAmt.do')
+            .then(data => {
+                console.log(`data.data.realName:${data.data.realName}`)
+                this.setState({singledata: data.data})
+            })
+        Get('/api/fiveYearsActivity/v1/getTeamYam.do')
+            .then(data => {
+                this.setState({fightdata: data.data})
             })
     }
 
@@ -36,8 +51,12 @@ class Content extends React.Component {
             isLogin: this.state.isLogin,
             closePopHandler: this.closePopHandler,
             timestamp: this.state.timestamp,
-            username: this.state.username
+            rankdata: this.state.rankdata,
+            singledata: this.state.singledata,
+            fightdata: this.state.fightdata
         }
+        console.log(props.fightdata)
+        console.log(`props.singledata${props.singledata.realName}`)
         let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC {...props}/>
         return <div>
             {Content}
