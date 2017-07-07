@@ -27,8 +27,6 @@ class InsureInfo extends React.Component {
                 <div styleName="panel-line"></div>
             </div>
         }
-        let style = {
-        }
         let panelImage = (type, name) => {
             if (name) {
                 return <div styleName="panel-image" style={{ backgroundImage: `url(${customer[type][name]})` }}></div>
@@ -37,7 +35,7 @@ class InsureInfo extends React.Component {
             }
         }
         return <div>
-            <Header title="投保信息" history={history} />
+            <Header title="投保人信息" history={history} />
             <div styleName="insure-title">投保人信息</div>
             {showPanel("holder", "投保人姓名", "name")}
             {showPanel("holder", "投保人手机", "mobile")}
