@@ -410,9 +410,9 @@ input{
     left:188px;
 }
 .line{
-    width:1px;
+    width:0px;
     height:60px;
-    background:#ddd;
+    border-top:1px dashed #ddd;
     position:absolute;
     top:50px;
     left:142px;
