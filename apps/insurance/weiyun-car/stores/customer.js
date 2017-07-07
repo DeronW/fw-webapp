@@ -8,18 +8,18 @@ export default class Customer {
         this.Post = Post;
         extendObservable(this, {
             holder: {
-                name: '',
-                mobile: '',
-                cardId: '',
-                email: '',
+                name: '12',
+                mobile: '12',
+                cardId: '12',
+                email: '12',
                 image1: '',
                 image2: ''
             },
             recognizee: {
-                name: '',
-                mobile: '',
-                cardId: '',
-                email: '',
+                name: '23',
+                mobile: '23',
+                cardId: '23',
+                email: '23',
                 image1: '',
                 image2: ''
             },

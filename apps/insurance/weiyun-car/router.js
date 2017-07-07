@@ -34,7 +34,7 @@ export default (stores) => {
                 <Route exact path='/order-confirm' component={OrderConfirm} />
                 <Route exact path='/order-confirm/car' component={CarImage} />
                 <Route exact path='/order-confirm/quotation' component={QuotationDetail} />
-                <Route exact path='/order-confirm/insure-info' component={Customer}/>
+                <Route exact path='/order-confirm/customer' component={Customer}/>
                 <Route exact path='/order-payment' component={OrderPayment} />
                 <Route exact path='/order-result' component={OrderResult} />
                 <Route exact path='/orders' component={Orders} />

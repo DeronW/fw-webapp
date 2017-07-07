@@ -16,7 +16,7 @@ class UploadImg extends React.Component {
 
     state = {
         tips: null,
-        img_data: null
+        img_data: this.props.src || null
     }
 
     changeHandler = event => {
@@ -38,13 +38,12 @@ class UploadImg extends React.Component {
     }
 
     render() {
-
         let { placeholder } = this.props
         let { img_data, tips } = this.state
 
         return <div styleName="field-image">
             <img src={img_data} />
-            <input type="file" onChange={this.changeHandler} />
+            <input type="file" onChange={this.changeHandler} disabled={this.props.disabled} />
             <br /> <br />
             <div styleName="">请添加</div>
             <div>{placeholder}</div>
@@ -59,68 +58,36 @@ class UploadImg extends React.Component {
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Customer extends React.Component {
 
-    state = {
-        isFill: true
-    }
-    componentDidMount() {
-        let href = location.href;
-        if (href.match("/customer")) {
-            this.setState({ isFill: true })
-        } else if (href.match("/order-confirm/insure-info")) {
-            this.setState({ isFill: false })
-        }
-    }
     changeHandler = (type, k) => e => {
         this.props.customer.setFormData(type, k, e.target.value);
     }
 
     render() {
-        let { customer, history } = this.props, { holder } = customer;
-        let { isFill } = this.state;
-
-        let change = name => this.changeHandler('holder', name)
+        let { customer, history, location } = this.props,
+            renderAsDisplay = location.pathname.indexOf('order-confirm') > -1;
 
         let hod_input_text = (title, name) => {
             return <div styleName="field-text">{title}
-                {
-                    isFill ? <input placeholder="请输入" type="text" value={holder[name]}
-                        onChange={this.changeHandler('holder', name)} /> : <div styleName="panel-text">{holder[name]}</div>
-                }
+                <input placeholder="请输入" type="text" disabled={renderAsDisplay}
+                    value={customer.holder[name]}
+                    onChange={this.changeHandler('holder', name)} />
                 <div styleName="v-line"></div>
             </div>
         }
 
         let rec_input_text = (title, name) => {
-            if (this.props.customer.isSame) return null;
+            if (customer.isSame) return null;
 
             return <div styleName="field-text">{title}
-                {
-                    isFill ? <input placeholder="请输入" type="text" value={holder[name]}
-                        onChange={this.changeHandler('recognizee', name)} /> : <div styleName="panel-text">{holder[name]}</div>
-                }
-
+                <input placeholder="请输入" type="text" disabled={renderAsDisplay}
+                    value={customer.recognizee[name]}
+                    onChange={this.changeHandler('recognizee', name)} />
             </div>
-        }
-
-        let showPanel = (type, title, content) => {
-            if (type == 'recognizee' && customer.isSame) return null
-            return <div styleName="field-text">
-                {title}
-                <div styleName="panel-text">{holder[content]}</div>
-                <div styleName="v-line"></div>
-            </div>
-        }
-
-        let panelImage = (type, name) => {
-            if (name) {
-                return <div styleName="field-image" style={{ backgroundImage: `url(${customer[type][name]})` }}></div>
-            } else {
-                return <div styleName="field-image" style={{ backgroundImage: `url(${customer[type]})` }}></div>
-            }
         }
 
         return <div>
             <Header title="投保人信息" history={history} />
+
             <div styleName="panel-title">投保人信息</div>
             {hod_input_text('投保人姓名', 'name')}
             {hod_input_text('投保人手机', 'mobile')}
@@ -129,15 +96,16 @@ class Customer extends React.Component {
             <div styleName="picture-panel">
                 <div styleName="picture-panel-title">上传身份证照片</div>
                 <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
-                {isFill ? <UploadImg placeholder="身份证正面照片" imgId="img1" /> : panelImage("holder", "image1")}
-                {isFill ? <UploadImg placeholder="身份证反面照片" imgId="img2" /> : panelImage("holder", "image2")}
+                <UploadImg placeholder="身份证正面照片" imgId="img1" src={customer.holder.image1} disabled={renderAsDisplay} />
+                <UploadImg placeholder="身份证反面照片" imgId="img2" src={customer.holder.image2} disabled={renderAsDisplay} />
             </div>
-            <div styleName="field-check" onClick={isFill ? customer.toggleSamePerson : ''}>
+            <div styleName="field-check" onClick={renderAsDisplay ? () => {} : customer.toggleSamePerson}>
                 <i className={customer.isSame ?
                     styles_icon_circle.checked :
                     styles_icon_circle.unchecked}></i>
                 <span>投保人信息与被保人信息一致</span>
             </div>
+
             {!customer.isSame && <div styleName="panel-title">被保人信息</div>}
             {rec_input_text('被保人姓名', 'name')}
             {rec_input_text('被保人手机', 'mobile')}
@@ -147,20 +115,22 @@ class Customer extends React.Component {
                 <div styleName="picture-panel">
                     <div styleName="picture-panel-title">上传身份证照片</div>
                     <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
-                    {isFill ? <UploadImg placeholder="身份证反面照片" imgId="img3" /> : panelImage("recognizee", "image2")}
-                    {isFill ? <UploadImg placeholder="身份证反面照片" imgId="img4" /> : panelImage("recognizee", "image2")}
+                    <UploadImg placeholder="身份证反面照片" imgId="img3" src={customer.recognizee.image1} disabled={renderAsDisplay} />
+                    <UploadImg placeholder="身份证反面照片" imgId="img4" src={customer.recognizee.image2} disabled={renderAsDisplay} />
                 </div>
             }
+
             <div styleName="picture-panel">
                 <div styleName="picture-panel-title">上传驾驶证照片</div>
                 <div styleName="picture-panel-desc">按保监局要求上传驾驶证正反面照片</div>
-                {isFill ? <UploadImg placeholder="驾驶证正面照片" imgId="img7" /> : panelImage("vehicleLicenseImage1")}
-                {isFill ? <UploadImg placeholder="驾驶证反面照片" imgId="img8" /> : panelImage("vehicleLicenseImage2")}
+                <UploadImg placeholder="驾驶证正面照片" imgId="img7" src={customer.vehicleLicenseImage1} disabled={renderAsDisplay} />
+                <UploadImg placeholder="驾驶证反面照片" imgId="img8" src={customer.vehicleLicenseImage2} disabled={renderAsDisplay} />
             </div>
-            {isFill ? <BottomButton active={customer.valid} title="确认提交"
-                onClick={() => customer.submit(history)} /> :
-                <BottomButton active={true} title="下一步"
-                    onClick={() => history.push('/order-confirm')} />}
+
+            { !renderAsDisplay &&
+                <BottomButton active={customer.valid} title="确认提交"
+                    onClick={() => customer.submit(history)} />
+            }
         </div>
     }
 }
