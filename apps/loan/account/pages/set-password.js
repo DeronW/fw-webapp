@@ -66,6 +66,10 @@ class SetPassword extends React.Component {
         this.setState({ password: v })
     }
 
+    inviteCodeHandler = e => {
+        this.setState({ invite_code: e.target.value })
+    }
+
     submitHandler = () => {
         let { account } = this.props;
         let { password, sms_code, invite_code, agree, reset_pwd } = this.state;
@@ -96,7 +100,7 @@ class SetPassword extends React.Component {
 
         let invite_code_line = !reset_pwd && <div styleName="field-input">
             <i className="icon-people" styleName="icon-people"></i>
-            <input placeholder="请输入邀请码" styleName="pwd-input" />
+            <input placeholder="请输入邀请码" styleName="pwd-input" value={invite_code} onChange={this.inviteCodeHandler} />
             <span styleName="xuan-tian">(选填)</span>
         </div>
 
