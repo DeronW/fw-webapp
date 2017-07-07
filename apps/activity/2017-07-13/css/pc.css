@@ -593,7 +593,7 @@
     left: 8%;
 }
 
-.invite-pc-after, .pc-invest {
+.invite-pc-after, .pc-invest, .pre-login, .invite-pc-pre {
     display: inline-block;
     cursor: pointer;
     width: 106px;
