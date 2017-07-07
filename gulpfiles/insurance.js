@@ -34,4 +34,8 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         ]).pipe(eslint()).pipe(eslint.format());
     }))
 
+    // define a empty activity:common_js function for compiler holder
+    gulp.task(`${PROJ}:common_js`, gulp.series(() => {
+        return new Promise(resolve => resolve())
+    }))
 };
