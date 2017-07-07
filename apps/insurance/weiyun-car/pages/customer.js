@@ -84,51 +84,119 @@ class Customer extends React.Component {
             </div>
         }
 
-
-        return <div>
-            <Header title="投保人信息" history={history} />
-
-            <div styleName="panel-title">投保人信息</div>
-            {hod_input_text('投保人姓名', 'name')}
-            {hod_input_text('投保人手机', 'mobile')}
-            {hod_input_text('身份证号', 'cardId')}
-            {hod_input_text('邮箱', 'email')}
-            <div styleName="picture-panel">
-                <div styleName="picture-panel-title">上传身份证照片</div>
-                <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
-                <UploadImg placeholder="身份证正面照片" imgId="img1" />
-                <UploadImg placeholder="身份证反面照片" imgId="img2" />
+        let showPanel = (type, title, content) => {
+            if (type == 'recognizee' && customer.isSame) return null
+            return <div styleName="field-text">
+                {title}
+                <div styleName="panel-text">{holder[content]}</div>
+                <div styleName="v-line"></div>
             </div>
+        }
 
-            <div styleName="field-check" onClick={customer.toggleSamePerson}>
-                <i className={customer.isSame ?
-                    styles_icon_circle.checked :
-                    styles_icon_circle.unchecked}></i>
-                投保人信息与被保人信息一致
-            </div>
-
-            {!customer.isSame && <div styleName="panel-title">被保人信息</div>}
-            {rec_input_text('被保人姓名', 'name')}
-            {rec_input_text('被保人手机', 'mobile')}
-            {rec_input_text('身份证号', 'cardId')}
-            {rec_input_text('邮箱', 'email')}
-            {!customer.isSame &&
+        let panelImage = (type, name) => {
+            if (name) {
+                return <div styleName="field-image" style={{ backgroundImage: `url(${customer[type][name]})` }}></div>
+            } else {
+                return <div styleName="field-image" style={{ backgroundImage: `url(${customer[type]})` }}></div>
+            }
+        }
+        let fillInformation = () => {
+            return <div>
+                <div styleName="panel-title">投保人信息</div>
+                {hod_input_text('投保人姓名', 'name')}
+                {hod_input_text('投保人手机', 'mobile')}
+                {hod_input_text('身份证号', 'cardId')}
+                {hod_input_text('邮箱', 'email')}
                 <div styleName="picture-panel">
                     <div styleName="picture-panel-title">上传身份证照片</div>
                     <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
-                    <UploadImg placeholder="身份证正面照片" imgId="img3" />
-                    <UploadImg placeholder="身份证反面照片" imgId="img4" />
-                </div>}
+                    <UploadImg placeholder="身份证正面照片" imgId="img1" />
+                    <UploadImg placeholder="身份证反面照片" imgId="img2" />
+                </div>
 
-            <div styleName="picture-panel">
-                <div styleName="picture-panel-title">上传驾驶证照片</div>
-                <div styleName="picture-panel-desc">按保监局要求上传驾驶证正反面照片</div>
-                <UploadImg placeholder="驾驶证正面照片" imgId="img7" />
-                <UploadImg placeholder="驾驶证反面照片" imgId="img8" />
+                <div styleName="field-check" onClick={customer.toggleSamePerson}>
+                    <i className={customer.isSame ?
+                        styles_icon_circle.checked :
+                        styles_icon_circle.unchecked}></i>
+                    投保人信息与被保人信息一致
             </div>
 
-            <BottomButton active={customer.valid} title="确认提交"
-                onClick={() => customer.submit(history)} />
+                {!customer.isSame && <div styleName="panel-title">被保人信息</div>}
+                {rec_input_text('被保人姓名', 'name')}
+                {rec_input_text('被保人手机', 'mobile')}
+                {rec_input_text('身份证号', 'cardId')}
+                {rec_input_text('邮箱', 'email')}
+                {!customer.isSame &&
+                    <div styleName="picture-panel">
+                        <div styleName="picture-panel-title">上传身份证照片</div>
+                        <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
+                        <UploadImg placeholder="身份证正面照片" imgId="img3" />
+                        <UploadImg placeholder="身份证反面照片" imgId="img4" />
+                    </div>}
+
+                <div styleName="picture-panel">
+                    <div styleName="picture-panel-title">上传驾驶证照片</div>
+                    <div styleName="picture-panel-desc">按保监局要求上传驾驶证正反面照片</div>
+                    <UploadImg placeholder="驾驶证正面照片" imgId="img7" />
+                    <UploadImg placeholder="驾驶证反面照片" imgId="img8" />
+                </div>
+
+                <BottomButton active={customer.valid} title="确认提交"
+                    onClick={() => customer.submit(history)} />
+            </div>
+        }
+        let insureInformation = () => {
+            return <div>
+                <div styleName="panel-title">投保人信息</div>
+                {showPanel("holder", "投保人姓名", "name")}
+                {showPanel("holder", "投保人手机", "mobile")}
+                {showPanel("holder", "身份证号", "cardId")}
+                {showPanel("holder", "邮箱", "email")}
+                <div styleName="picture-panel">
+                    <div styleName="picture-panel-title">上传身份证照片</div>
+                    <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
+                    {panelImage("holder", "image1")}
+                    {panelImage("holder", "image2")}
+                </div>
+                <div styleName="field-check">
+                    <i className={customer.isSame ?
+                        styles_icon_circle.checked :
+                        styles_icon_circle.unchecked}></i>
+                    <span>投保人信息与被保人信息一致</span>
+                </div>
+
+                {!customer.isSame && <div styleName="panel-title">被保人信息</div>}
+                {showPanel('recognizee', '被保人姓名', 'name')}
+                {showPanel('recognizee', '被保人手机', 'mobile')}
+                {showPanel('recognizee', '身份证号', 'cardId')}
+                {showPanel('recognizee', '邮箱', 'email')}
+                {!customer.isSame && <div styleName="picture-panel">
+                    <div styleName="picture-panel-title">上传身份证照片</div>
+                    <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
+                    {panelImage("vehicleLicenseImage1")}
+                    {panelImage("vehicleLicenseImage2")}
+                </div>}
+                <div styleName="picture-panel">
+                    <div styleName="picture-panel-title">上传身份证照片</div>
+                    <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
+                    {panelImage("recognizee", "image1")}
+                    {panelImage("recognizee", "image2")}
+                </div>
+                <BottomButton active={true} title="下一步"
+                    onClick={() => history.push('/order-confirm')} />
+            </div>
+        }
+        let show = ()=>{
+            let href = location.href;
+            if(href.match("/customer")){
+                return fillInformation()
+            }else if(href.match("/order-confirm/insure-info")){
+                return insureInformation()
+            }
+        }
+        return <div>
+            <Header title="投保人信息" history={history} />
+            {show()}
         </div>
     }
 }
