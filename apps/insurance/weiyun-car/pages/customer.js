@@ -99,12 +99,15 @@ class Customer extends React.Component {
                 <UploadImg placeholder="身份证正面照片" imgId="img1" src={customer.holder.image1} disabled={renderAsDisplay} />
                 <UploadImg placeholder="身份证反面照片" imgId="img2" src={customer.holder.image2} disabled={renderAsDisplay} />
             </div>
-            <div styleName="field-check" onClick={renderAsDisplay ? () => {} : customer.toggleSamePerson}>
-                <i className={customer.isSame ?
-                    styles_icon_circle.checked :
-                    styles_icon_circle.unchecked}></i>
-                <span>投保人信息与被保人信息一致</span>
-            </div>
+
+            { !renderAsDisplay &&
+                <div styleName="field-check" onClick={customer.toggleSamePerson}>
+                    <i className={customer.isSame ?
+                        styles_icon_circle.checked :
+                        styles_icon_circle.unchecked}></i>
+                    <span>投保人信息与被保人信息一致</span>
+                </div>
+            }
 
             {!customer.isSame && <div styleName="panel-title">被保人信息</div>}
             {rec_input_text('被保人姓名', 'name')}
