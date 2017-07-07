@@ -352,7 +352,7 @@ input{
 }
 .wrap-box{
     background:#fff;
-    padding:50px 0;
+    padding:60px 0;
 }
 .loan-result1{
     margin-top:56px;
@@ -410,9 +410,9 @@ input{
     left:188px;
 }
 .line{
-    width:1px;
+    width:0px;
     height:60px;
-    background:#ddd;
+    border-top:1px dashed #ddd;
     position:absolute;
     top:50px;
     left:142px;
@@ -583,7 +583,7 @@ input{
 .customer-service{
     text-align:center;
     background:#fff;
-    line-height:120px;
+    line-height:108px;
     border-top:1px solid #f6f5f5;
 
 }
@@ -639,4 +639,7 @@ input{
 }
 .result-wrap{
     margin-top:20px;
+}
+.service-wrap a{
+    color:#6aa4f0;
 }

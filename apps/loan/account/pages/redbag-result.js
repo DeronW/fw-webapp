@@ -63,7 +63,6 @@ export default class RedBagResult extends React.Component {
                         </div>
                     </div>}
                 </div>
-
                 <div styleName="btn-wrap">
                     <div styleName="credit-btn" onClick={this.closeHandler}>关闭</div>
                 </div>
