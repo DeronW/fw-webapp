@@ -102,15 +102,6 @@ class Customer extends React.Component {
             </div>
         }
 
-        let showPanel = (type, title, content) => {
-            if (type == 'recognizee' && customer.isSame) return null
-            return <div styleName="field-text">
-                {title}
-                <div styleName="panel-text">{holder[content]}</div>
-                <div styleName="v-line"></div>
-            </div>
-        }
-
         let panelImage = (type, name) => {
             if (name) {
                 return <div styleName="field-image" style={{ backgroundImage: `url(${customer[type][name]})` }}></div>
