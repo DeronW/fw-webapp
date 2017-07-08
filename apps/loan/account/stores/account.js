@@ -16,7 +16,9 @@ export default class Account {
             registerCodeToken: '',
             phone: '', // 用户登录手机号,
             url:'',
-            verifyToken:''
+            verifyToken:'',
+            code:'',
+            userOperationType:''
         })
     }
 
@@ -36,22 +38,23 @@ export default class Account {
         return Storage.getUserDict().status
     }
 
-    send_sms_code = (userOperationType) => {
-        this.Post('/api/userBase/v1/sendVerifyCode.json', {
-            mobile: this.phone,
-            // userOperationType 2：修改登录密码 3：注册
-            userOperationType: userOperationType
-        }).then(data => {
-            this.registerCodeToken = data.codeToken
-        }, e => Components.showToast(e.message))
-    }
+    // send_sms_code = (userOperationType) => {
+    //     this.Post('/api/userBase/v1/sendVerifyCode.json', {
+    //         mobile: this.phone,
+    //         // userOperationType 2：修改登录密码 3：注册
+    //         userOperationType: userOperationType
+    //     }).then(data => {
+    //         this.registerCodeToken = data.codeToken
+    //     }, e => Components.showToast(e.message))
+    // }
 
-    check_phone = phone => {
+    send_sms_code = (phone, captcha) => {
         this.phone = phone;
-
         return this.Post('/api/userBase/v1/sendVerifyCode.json', {
             mobile: this.phone,
-            userOperationType: 3
+            userOperationType: this.userOperationType,
+            verifyToken: this.verifyToken,
+            captcha:captcha
         }, 'silence').then(data => {
             // codeToken 用来标识发短信和注册/登录/修改密码用的
             // 每次重新发送短信, codeToken都会变化
@@ -61,10 +64,23 @@ export default class Account {
         })
     }
 
-    forget_password = () => {
-        this.registerCodeType = 2
-        return this.send_sms_code(2)
+    check_user_exist = phone => {
+        this.phone = phone;
+        return this.Post('/api/userBase/v1/userExist.json', {
+            mobile: this.phone
+        }, 'silence').then(data => {
+            this.code = data.code
+            if(data.code == 201003) this.userOperationType = 2
+            if(data.code == 20014) this.userOperationType = 3
+        })
     }
+
+
+
+    // forget_password = () => {
+    //     this.registerCodeType = 2
+    //     return this.send_sms_code(2)
+    // }
 
     login = password => {
         let err;
@@ -90,14 +106,12 @@ export default class Account {
         }, e => Components.showToast(e.message))
     }
 
-    reset_password = (password, sms_code, captcha) => {
+    reset_password = (password, sms_code) => {
         this.Post('/api/userBase/v1/resetPass.json', {
             codeToken: this.registerCodeToken,
             mobile: this.phone,
             password: password,
-            verifyCode: sms_code,
-            verifyToken: this.verifyToken,
-            captcha:captcha
+            verifyCode: sms_code
         }).then(data => {
             let dict = data.userPasswordOption;
             Storage.login({
@@ -111,15 +125,13 @@ export default class Account {
         }, e => Components.showToast(e.message))
     }
 
-    register = (pwd, sms_code, invite_code, captcha) => {
+    register = (pwd, sms_code, invite_code) => {
        this.Post('/api/userBase/v1/register.json', {
             mobile: this.phone,
             codeToken: this.registerCodeToken,
             password: pwd,
             verifyCode: sms_code,
-            invitationCode: invite_code,
-            verifyToken:this.verifyToken,
-            captcha:captcha
+            invitationCode: invite_code
         }).then(data => {
             let dict = data.userLogin
             Storage.login({

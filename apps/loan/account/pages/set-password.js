@@ -38,6 +38,7 @@ class SetPassword extends React.Component {
         //this.startCounting()
         let { account } = this.props;
         account.get_captcha();
+
     }
 
     componentWillUnmount() {
@@ -53,12 +54,13 @@ class SetPassword extends React.Component {
     }
 
     getSMSCode = () => {
-        let userOperationType = this.state.reset_pwd ? 2 : 3;
+        //let userOperationType = this.state.reset_pwd ? 2 : 3;
+        let {captcha} = this.state;
         if (!this.state.captcha){
             Components.showToast('请输入图形验证码');
         }else{
             this.startCounting()
-            this.props.account.send_sms_code(userOperationType)
+            this.props.account.send_sms_code(phone, captcha)
         }
     }
 

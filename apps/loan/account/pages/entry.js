@@ -38,8 +38,9 @@ class Entry extends React.Component {
 
         if (err) return Components.showToast(err);
 
-        account.check_phone(phone).then(() => {
-            history.push('/set-password')
+        account.check_user_exist(phone).then(() => {
+            if(account.code == 201003 || account.code == 20014 ) history.push('/set-password')
+            if(account.code == 20017) history.push('/login')
         }).catch(e => {
             e.code === 201003 ?
                 history.push('/login') :
