@@ -36,7 +36,8 @@ class SetPassword extends React.Component {
     componentDidMount() {
         document.title = '设置密码'
         //this.startCounting()
-
+        let { account } = this.props;
+        account.get_captcha();
     }
 
     componentWillUnmount() {
