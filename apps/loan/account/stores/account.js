@@ -14,12 +14,22 @@ export default class Account {
             //     所以登录前先设置密码
             registerCodeType: null,
             registerCodeToken: '',
-            phone: '' // 用户登录手机号
+            phone: '', // 用户登录手机号,
+            url:'',
+            verifyToken:''
         })
     }
 
     @computed get mask_phone() {
         return this.phone.replace(/(\d{3})\d{6}(\d{2})/, '$1******$2')
+    }
+
+    get_captcha = () => {
+        this.Post('/api/userBase/v1/verifyNum.json', {
+        }).then(data => {
+            this.url = data.url
+            this.verifyToken = data.verifyToken
+        }, e => Components.showToast(e.message))
     }
 
     get_user_status = () => {
@@ -86,6 +96,7 @@ export default class Account {
             mobile: this.phone,
             password: password,
             verifyCode: sms_code,
+            verifyToken: this.verifyToken,
             captcha:captcha
         }).then(data => {
             let dict = data.userPasswordOption;
@@ -107,7 +118,8 @@ export default class Account {
             password: pwd,
             verifyCode: sms_code,
             invitationCode: invite_code,
-           captcha:captcha
+            verifyToken:this.verifyToken,
+            captcha:captcha
         }).then(data => {
             let dict = data.userLogin
             Storage.login({

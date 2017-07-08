@@ -36,6 +36,7 @@ class SetPassword extends React.Component {
     componentDidMount() {
         document.title = '设置密码'
         //this.startCounting()
+
     }
 
     componentWillUnmount() {
@@ -53,7 +54,7 @@ class SetPassword extends React.Component {
     getSMSCode = () => {
         let userOperationType = this.state.reset_pwd ? 2 : 3;
         if (!this.state.captcha){
-            Components.showToast('请输入图形验证码')
+            Components.showToast('请输入图形验证码');
         }else{
             this.startCounting()
             this.props.account.send_sms_code(userOperationType)
@@ -77,6 +78,11 @@ class SetPassword extends React.Component {
 
     captchaHandler = e => {
         this.setState({ captcha: e.target.value })
+    }
+
+    reGetCaptcha = () => {
+        let { account } = this.props;
+        account.get_captcha();
     }
 
     submitHandler = () => {
@@ -131,7 +137,7 @@ class SetPassword extends React.Component {
                 <input placeholder="请输入图形验证码" value={captcha} styleName="pwd-input"
                        type="text"
                        onChange={this.captchaHandler} />
-                <i styleName="captcha-img"></i>
+                <i styleName="captcha-img" onClick={this.reGetCaptcha}>{account.url}</i>
                 <div styleName="v-line"></div>
             </div>
             <div styleName="field-input">

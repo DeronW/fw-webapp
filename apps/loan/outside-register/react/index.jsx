@@ -184,17 +184,13 @@ class Captcha extends React.Component {
                     }, 10);
                 }} />
                 <div className="password-opts-wrap">
-                    <div className="toggle-password-display" onClick={this.props.handleClick}>
-                        <img src={this.props.togglePasswordDisplay
-                            ? "images/show-password.png"
-                            : "images/hide-password.png"} />
-                    </div>
                     {this.state.enableClear && <div className="clear-btn" onClick={() => {
                         this.props.handleClear('captcha');
                     }}>
                         <img src="images/clear.png" alt="clear button"></img>
                     </div>
                     }
+                    <img src={this.props.url} onClick={this.props.reGetCaptcha}/>
                 </div>
             </div>
         )
@@ -268,7 +264,9 @@ class InteractWrap extends React.Component {
             timeRemainForNewCode: 60,
             codeToken: '',
             showPassword: false,
-            showRegisteredMask: false
+            showRegisteredMask: false,
+            url:'',
+            verifyToken:''
         }
     }
 
@@ -277,7 +275,7 @@ class InteractWrap extends React.Component {
     }
 
     getVerificationCode = () => {
-        if(this.state.captcha == ' '){
+        if(!this.state.captcha){
             alert('图形验证码不能为空');
         }else if (this.state.timeRemainForNewCode === 60) { // time for test
             if (isPhoneNum(this.state.phoneNum)) {
@@ -308,6 +306,7 @@ class InteractWrap extends React.Component {
             }
         }
 
+
     }
 
     togglePasswordDisplay = () => {
@@ -323,6 +322,7 @@ class InteractWrap extends React.Component {
     ifEssentialsExist = () => {
         var essentialTypeNames = {
             'phoneNum': '手机号',
+            'captcha':'图形验证码',
             'verificationCode': '验证码',
             'password': '密码'
         };
@@ -384,6 +384,19 @@ class InteractWrap extends React.Component {
         }
     }
 
+    getCaptcha = () => {
+        $FW.Post(`${API_PATH}/api/userBase/v1/verifyNum.json`).then((data)=>{
+             this.setState({
+                 url:data.url,
+                 verifyToken:data.verifyToken
+             })
+        }, e => alert(e.message));
+    }
+
+    componentDidMount(){
+        this.getCaptcha();
+    }
+
     handleSubmit = () => {
         if (this.ifEssentialsExist()) {
             if (!isPhoneNum(this.state.phoneNum)) {
@@ -426,7 +439,9 @@ class InteractWrap extends React.Component {
         return (
             <div className="interact-wrap">
                 <PhoneNumInput handleChange={this.handleInput} value={this.state.phoneNum} handleClear={this.clearInput} />
-                <Captcha value={this.state.captcha} handleChange={this.handleInput}/>
+                <Captcha value={this.state.captcha} handleChange={this.handleInput} handleClear={this.clearInput} url={this.state.url}
+                         reGetCaptcha={this.getCaptcha}
+                />
                 <VerificationCodeInput value={this.state.verificationCode} verificationCodeInfo={this.state.timeRemainForNewCode === 60
                     ? "获取验证码"
                     : this.state.timeRemainForNewCode + "s"} handleChange={this.handleInput} handleClick={this.getVerificationCode} handleClear={this.clearInput} />
