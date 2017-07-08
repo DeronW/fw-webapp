@@ -69,11 +69,11 @@ export default class Account {
         return this.Post('/api/userBase/v1/userExist.json', {
             mobile: this.phone
         }, 'silence').then(data => {
-            console.log(data);
-            // this.code = code
-            // if(code == 201003) this.userOperationType = 2
-            // if(code == 20014) this.userOperationType = 3
-            // return new Promise(resolve => resolve())
+            console.log(data)
+            this.code = data.code
+            if(data.code == 201003) this.userOperationType = 2
+            if(data.code == 20014) this.userOperationType = 3
+            return new Promise(resolve => resolve())
         })
     }
 
