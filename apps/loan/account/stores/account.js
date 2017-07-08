@@ -26,8 +26,8 @@ export default class Account {
         return Storage.getUserDict().status
     }
 
-    send_sms_code = userOperationType => {
-        return this.Post('/api/userBase/v1/sendVerifyCode.json', {
+    send_sms_code = (userOperationType) => {
+        this.Post('/api/userBase/v1/sendVerifyCode.json', {
             mobile: this.phone,
             // userOperationType 2：修改登录密码 3：注册
             userOperationType: userOperationType
@@ -80,12 +80,13 @@ export default class Account {
         }, e => Components.showToast(e.message))
     }
 
-    reset_password = (password, sms_code) => {
+    reset_password = (password, sms_code, captcha) => {
         this.Post('/api/userBase/v1/resetPass.json', {
             codeToken: this.registerCodeToken,
             mobile: this.phone,
             password: password,
-            verifyCode: sms_code
+            verifyCode: sms_code,
+            captcha:captcha
         }).then(data => {
             let dict = data.userPasswordOption;
             Storage.login({
@@ -99,13 +100,14 @@ export default class Account {
         }, e => Components.showToast(e.message))
     }
 
-    register = (pwd, sms_code, invite_code) => {
+    register = (pwd, sms_code, invite_code, captcha) => {
        this.Post('/api/userBase/v1/register.json', {
             mobile: this.phone,
             codeToken: this.registerCodeToken,
             password: pwd,
             verifyCode: sms_code,
             invitationCode: invite_code,
+           captcha:captcha
         }).then(data => {
             let dict = data.userLogin
             Storage.login({

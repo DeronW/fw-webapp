@@ -151,6 +151,60 @@ class PasswordInput extends React.Component {
     }
 }
 
+class Captcha extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            enableClear: false
+        };
+    }
+
+    render() {
+        return (
+            <div className="input-wrap">
+                <div className="input-type-icon">
+                    <img src="images/veri-code.png" />
+                </div>
+                <input type={this.props.type} placeholder="请输入图形验证码" maxLength="16" value={this.props.value} onChange={(e) => {
+                    this.setState({
+                        enableClear: e.target.value
+                            ? true
+                            : false
+                    });
+                    this.props.handleChange(e, 'captcha');
+                }} onFocus={(e) => {
+                    this.setState({
+                        enableClear: e.target.value
+                            ? true
+                            : false
+                    });
+                }} onBlur={() => {
+                    setTimeout(() => {
+                        this.setState({ enableClear: false });
+                    }, 10);
+                }} />
+                <div className="password-opts-wrap">
+                    <div className="toggle-password-display" onClick={this.props.handleClick}>
+                        <img src={this.props.togglePasswordDisplay
+                            ? "images/show-password.png"
+                            : "images/hide-password.png"} />
+                    </div>
+                    {this.state.enableClear && <div className="clear-btn" onClick={() => {
+                        this.props.handleClear('captcha');
+                    }}>
+                        <img src="images/clear.png" alt="clear button"></img>
+                    </div>
+                    }
+                </div>
+            </div>
+        )
+    }
+}
+
+
+
+
+
 class InvitationCodeInput extends React.Component {
     constructor() {
         super();
@@ -209,6 +263,7 @@ class InteractWrap extends React.Component {
             phoneNum: '',
             password: '',
             verificationCode: '',
+            captcha:'',
             invitationCode: $FW.Format.urlQuery().invitationCode || '',
             timeRemainForNewCode: 60,
             codeToken: '',
@@ -222,7 +277,9 @@ class InteractWrap extends React.Component {
     }
 
     getVerificationCode = () => {
-        if (this.state.timeRemainForNewCode === 60) { // time for test
+        if(this.state.captcha == ' '){
+            alert('图形验证码不能为空');
+        }else if (this.state.timeRemainForNewCode === 60) { // time for test
             if (isPhoneNum(this.state.phoneNum)) {
                 $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                     mobile: this.state.phoneNum,
@@ -250,6 +307,7 @@ class InteractWrap extends React.Component {
                 this.setState({ phoneNum: '' });
             }
         }
+
     }
 
     togglePasswordDisplay = () => {
@@ -339,6 +397,7 @@ class InteractWrap extends React.Component {
                         channelCode: $FW.Format.urlQuery().channelCode,
                         extInvCode: $FW.Format.urlQuery().extInvCode || '',
                         codeToken: this.state.codeToken,
+                        captcha:this.state.captcha,
                         invitationCode: this.state.invitationCode,
                         mobile: this.state.phoneNum,
                         password: this.state.password,
@@ -367,6 +426,7 @@ class InteractWrap extends React.Component {
         return (
             <div className="interact-wrap">
                 <PhoneNumInput handleChange={this.handleInput} value={this.state.phoneNum} handleClear={this.clearInput} />
+                <Captcha value={this.state.captcha} handleChange={this.handleInput}/>
                 <VerificationCodeInput value={this.state.verificationCode} verificationCodeInfo={this.state.timeRemainForNewCode === 60
                     ? "获取验证码"
                     : this.state.timeRemainForNewCode + "s"} handleChange={this.handleInput} handleClick={this.getVerificationCode} handleClear={this.clearInput} />

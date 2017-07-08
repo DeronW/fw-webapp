@@ -21,6 +21,7 @@ class SetPassword extends React.Component {
         password: '',
         sms_code: '',
         invite_code: '',
+        captcha:'',
         count: 0
     }
 
@@ -34,7 +35,7 @@ class SetPassword extends React.Component {
 
     componentDidMount() {
         document.title = '设置密码'
-        this.startCounting()
+        //this.startCounting()
     }
 
     componentWillUnmount() {
@@ -50,9 +51,13 @@ class SetPassword extends React.Component {
     }
 
     getSMSCode = () => {
-        this.startCounting()
         let userOperationType = this.state.reset_pwd ? 2 : 3;
-        this.props.account.send_sms_code(userOperationType)
+        if (!this.state.captcha){
+            Components.showToast('请输入图形验证码')
+        }else{
+            this.startCounting()
+            this.props.account.send_sms_code(userOperationType)
+        }
     }
 
     inputSMSCodeHandler = e => {
@@ -70,9 +75,13 @@ class SetPassword extends React.Component {
         this.setState({ invite_code: e.target.value })
     }
 
+    captchaHandler = e => {
+        this.setState({ captcha: e.target.value })
+    }
+
     submitHandler = () => {
         let { account } = this.props;
-        let { password, sms_code, invite_code, agree, reset_pwd } = this.state;
+        let { password, sms_code, invite_code, agree, reset_pwd, captcha } = this.state;
 
         let err;
 
@@ -83,20 +92,21 @@ class SetPassword extends React.Component {
         if (password.length < 8) err = "密码不能少于8位";
         if (!password) err = '请填写密码';
         if (!sms_code) err = '请填写手机验证码';
+        if (!captcha) err = '请输入图形验证码';
 
         if (err) return Components.showToast(err);
 
         if (reset_pwd) {
-            account.reset_password(password, sms_code, history)
+            account.reset_password(password, sms_code, captcha, history)
         } else {
-            account.register(password, sms_code, invite_code, history)
+            account.register(password, sms_code, invite_code, captcha, history)
         }
     }
 
     render() {
         let { history, account } = this.props
         let { plaintext, agree, count, sms_code,
-            password, invite_code, reset_pwd } = this.state
+            password, invite_code, captcha, reset_pwd } = this.state
 
         let invite_code_line = !reset_pwd && <div styleName="field-input">
             <i className="icon-people" styleName="icon-people"></i>
@@ -113,9 +123,17 @@ class SetPassword extends React.Component {
         return <div>
             <Header title="设置密码" history={history} />
 
-            <div styleName="send-tips">已发送短信验证码到尾号为
-                <span>{account.mask_phone}</span>的手机</div>
-
+            {/*<div styleName="send-tips">已发送短信验证码到尾号为*/}
+                {/*<span>{account.mask_phone}</span>的手机</div>*/}
+            <div styleName="space-wrap"></div>
+            <div styleName="field-input">
+                <i className="icon-lock" styleName="icon-lock"></i>
+                <input placeholder="请输入图形验证码" value={captcha} styleName="pwd-input"
+                       type="text"
+                       onChange={this.captchaHandler} />
+                <i styleName="captcha-img"></i>
+                <div styleName="v-line"></div>
+            </div>
             <div styleName="field-input">
                 <i className="icon-phone" styleName="icon-phone"></i>
                 <input placeholder="输入手机验证码" value={sms_code} styleName="pwd-input"
