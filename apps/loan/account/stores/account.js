@@ -72,6 +72,7 @@ export default class Account {
             this.code = data.code
             if(data.code == 201003) this.userOperationType = 2
             if(data.code == 20014) this.userOperationType = 3
+            return new Promise(resolve => resolve())
         })
     }
 
