@@ -40,7 +40,7 @@ class Entry extends React.Component {
 
         account.check_user_exist(phone).then(() => {
             if(account.code == 201003 || account.code == 20014 ) history.push('/set-password')
-            if(account.code == 20017) history.push('/login')
+            if(account.code == 10000) history.push('/login')
         }).catch(e => {
             e.code === 201003 ?
                 history.push('/login') :
