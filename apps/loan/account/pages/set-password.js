@@ -15,7 +15,7 @@ class SetPassword extends React.Component {
 
     state = {
         // 当前页面可能是, 设置密码和重置密码 两种状态, 输入框不同, 提交数据不同
-        reset_pwd: this.props.account.registerCodeType == 2,
+        reset_pwd: this.props.account.userOperationType,
         agree: true,
         plaintext: false,
         password: '',
@@ -140,7 +140,7 @@ class SetPassword extends React.Component {
                 <input placeholder="请输入图形验证码" value={captcha} styleName="pwd-input"
                        type="text"
                        onChange={this.captchaHandler} />
-                <i styleName="captcha-img" onClick={this.reGetCaptcha}><img src={require(this.props.account.url)}/></i>
+                <i styleName="captcha-img" onClick={this.reGetCaptcha}><img src={require(account.url)}/></i>
                 <div styleName="v-line"></div>
             </div>
             <div styleName="field-input">
