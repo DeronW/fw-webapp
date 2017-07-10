@@ -57,17 +57,16 @@ class ApplyTenMillionLoan extends React.Component {
         } else if (!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
         } else {
-            $FW.Post(`${API_PATH}/api/userBase/v1/userExist.json`, {
+            $FW.Post(`${API_PATH}/api/userBase/v1/userExistIndex.json`, {
                 mobile: this.state.phoneVal,
-                sourceType: 5,
-                version: 'v1'
-            }).then(() => {
-                $FW.Component.Toast("手机号已注册");
-                setTimeout(function () {
-                    window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
-                }, 2000)
-            }, (e)=>{
-                if(e.code == 20014){
+                sourceType: 5
+            }).then((data) => {
+                if(data.userCode == 10000){
+                    $FW.Component.Toast("手机号已注册");
+                    setTimeout(function () {
+                        window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
+                    }, 2000)
+                }else if(data.userCode == 20014){
                     this.startCountingDown()
                     $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                         mobile: this.state.phoneVal,
@@ -79,10 +78,9 @@ class ApplyTenMillionLoan extends React.Component {
                             codeType: data.codeType
                         })
                     })
-                }else{
-                    $FW.Component.Toast(e.message);
                 }
-            })
+            }, (e)=> $FW.Component.Toast(e.message)
+            )
         }
     }
 
