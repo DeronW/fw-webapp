@@ -165,7 +165,7 @@ class Captcha extends React.Component {
                 <div className="input-type-icon">
                     <img src="images/veri-code.png" />
                 </div>
-                <input type={this.props.type} placeholder="请输入图形验证码" maxLength="16" value={this.props.value} onChange={(e) => {
+                <input type={this.props.type} placeholder="请输入图形验证码" maxLength="4" value={this.props.value} onChange={(e) => {
                     this.setState({
                         enableClear: e.target.value
                             ? true
@@ -191,7 +191,7 @@ class Captcha extends React.Component {
                     </div>
                     }
                 </div>
-                <img src={this.props.url} onClick={this.props.reGetCaptcha}/>
+                <img src={this.props.url} onClick={this.props.reGetCaptcha} className="captcha"/>
             </div>
         )
     }
