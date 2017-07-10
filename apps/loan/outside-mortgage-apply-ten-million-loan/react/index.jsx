@@ -186,7 +186,7 @@ class ApplyTenMillionLoan extends React.Component {
                     <div className="li verification-code-li">
                         <div className="input">
                             <div className="i">
-                                <input type="number" className="input"
+                                <input type="text" className="input"
                                        placeholder="请输入图片验证码"
                                        value={this.state.captchaVal}
                                        onChange={this.captchaChange}
