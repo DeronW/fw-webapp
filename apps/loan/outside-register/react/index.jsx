@@ -297,7 +297,7 @@ class InteractWrap extends React.Component {
                         }
                     }, 1000);
                 }, (e) => {
-                    if(e.code){
+                    if(e.code == 20010){
                         alert("图形验证码输入错误，请重新输入！");
                         this.getCaptcha();
                     }
