@@ -110,50 +110,26 @@ class JulyPC extends React.Component {
         </div>
         let fight_panel = () => {
             let {fightdata} = this.props;
-            // let fightdata=[]
-            //如果数据为空
-            let no_fight_data = <div styleName="fight-data-box">
-                <div styleName="data-item">
-                    <div styleName="item-up">
-                        暂无奖金
-                    </div>
-                    <div styleName="item-down itemdown-0">
-                        马上就来...
-                    </div>
-                </div>
-                <div styleName="data-item">
-                    <div styleName="item-up">
-                        暂无奖金
-                    </div>
-                    <div styleName="item-down itemdown-1">
-                        在潜艇上...
-                    </div>
-                </div>
-                <div styleName="data-item">
-                    <div styleName="item-up">
-                        暂无奖金
-                    </div>
-                    <div styleName="item-down itemdown-2">
-                        在游轮上...
-                    </div>
-                </div>
-                <div styleName="data-item">
-                    <div styleName="item-up">
-                        暂无奖金
-                    </div>
-                    <div styleName="item-down itemdown-3">
-                        在帆船上...
-                    </div>
-                </div>
-                <div styleName="data-item">
-                    <div styleName="item-up">
-                        暂无奖金
-                    </div>
-                    <div styleName="item-down itemdown-4">
-                        游泳中...
-                    </div>
-                </div>
-            </div>
+            //fake data
+            // let fightdata = [{
+            //     mobile: "300*****177",
+            //     realName: "p2p小****",
+            //     recommend_userid: "0",
+            //     ucount: "33",
+            //     year_amt_sum: "1,360,499.32"
+            // }, {
+            //     mobile: "300*****177",
+            //     realName: "p2p小****",
+            //     recommend_userid: "0",
+            //     ucount: "33",
+            //     year_amt_sum: "1,360,499.32"
+            // }, {
+            //     mobile: "300*****177",
+            //     realName: "p2p小****",
+            //     recommend_userid: "0",
+            //     ucount: "33",
+            //     year_amt_sum: "1,360,499.32"
+            // }]
             let fight_data_func = (item, index) => {
                 return <div styleName="data-item" key={index}>
                     <div styleName="item-data-up">
@@ -167,11 +143,91 @@ class JulyPC extends React.Component {
                     </div>
                 </div>
             }
-            let fight_data_box = <div styleName="fight-data-box">
-                {fightdata.map(fight_data_func)}
-            </div>
+            let fight_data_box = () => {
+                let nodata_item_one = <div styleName="data-item">
+                    <div styleName="item-up">
+                        暂无奖金
+                    </div>
+                    <div styleName="item-down itemdown-0">
+                        马上就来...
+                    </div>
+                </div>
+                let nodata_two = <div styleName="data-item">
+                    <div styleName="item-up">
+                        暂无奖金
+                    </div>
+                    <div styleName="item-down itemdown-1">
+                        在潜艇上...
+                    </div>
+                </div>
+                let nodata_three = <div styleName="data-item">
+                    <div styleName="item-up">
+                        暂无奖金
+                    </div>
+                    <div styleName="item-down itemdown-2">
+                        在游轮上...
+                    </div>
+                </div>
+                let nodata_four = <div styleName="data-item">
+                    <div styleName="item-up">
+                        暂无奖金
+                    </div>
+                    <div styleName="item-down itemdown-3">
+                        在帆船上...
+                    </div>
+                </div>
+                let nodata_five = <div styleName="data-item">
+                    <div styleName="item-up">
+                        暂无奖金
+                    </div>
+                    <div styleName="item-down itemdown-4">
+                        游泳中...
+                    </div>
+                </div>
+                if (fightdata.length == 0) {
+                    return <div styleName="fight-data-box">
+                        {nodata_item_one}
+                        {nodata_two}
+                        {nodata_three}
+                        {nodata_four}
+                        {nodata_five}
+                    </div>
+                } else if (fightdata.length == 1) {
+                    return <div styleName="fight-data-box">
+                        {fightdata.map(fight_data_func)}
+                        {nodata_two}
+                        {nodata_three}
+                        {nodata_four}
+                        {nodata_five}
+                    </div>
+                } else if (fightdata.length == 2) {
+                    return <div styleName="fight-data-box">
+                        {fightdata.map(fight_data_func)}
+                        {nodata_three}
+                        {nodata_four}
+                        {nodata_five}
+                    </div>
+
+                } else if (fightdata.length == 3) {
+                    return <div styleName="fight-data-box">
+                        {fightdata.map(fight_data_func)}
+                        {nodata_four}
+                        {nodata_five}
+                    </div>
+                } else if (fightdata.length == 4) {
+                    return <div styleName="fight-data-box">
+                        {fightdata.map(fight_data_func)}
+                        {nodata_five}
+                    </div>
+                } else if (fightdata.length == 5) {
+                    return <div styleName="fight-data-box">
+                        {fightdata.map(fight_data_func)}
+                    </div>
+                }
+
+            }
             return <div styleName="pc-fight">
-                {fightdata.length == 0 ? no_fight_data : fight_data_box}
+                {fight_data_box()}
             </div>
         }
         let bonus_panel = <div styleName="pc-bonus">
