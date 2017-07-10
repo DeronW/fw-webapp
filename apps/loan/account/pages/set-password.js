@@ -63,7 +63,7 @@ class SetPassword extends React.Component {
         let { captcha } = this.state;
 
         if (!this.state.captcha) {
-            Components.showToast('请输入图形验证码');
+            Components.showToast('请输入图片验证码');
         } else {
             this.props.account.send_sms_code(captcha).then(() => {
                 this.startCounting()
