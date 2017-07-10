@@ -81,7 +81,7 @@ class JulyMobile extends React.Component {
             <div styleName="m-i-one">
                 <div styleName="one-text">
                     活动期间，成功邀请有效好友至少送50元。
-                    <a href="" styleName="one-detail">查看详情</a>
+                    <a href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y" styleName="one-detail">查看详情</a>
                 </div>
             </div>
             <div styleName="m-i-two">

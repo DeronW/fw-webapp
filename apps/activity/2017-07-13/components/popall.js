@@ -53,8 +53,8 @@ class PopInviteMobile extends React.Component {
     }
 
     componentDidMount() {
-        UserReady((isLogin,user) => {
-            this.setState({isLogin: isLogin,gcm:user.gcm})
+        UserReady((isLogin, user) => {
+            this.setState({isLogin: isLogin, gcm: user.gcm})
         })
     }
 
@@ -67,7 +67,7 @@ class PopInviteMobile extends React.Component {
             <div styleName="log-btn">登录注册</div>
             <div>新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span></div>
             <div>邀请好友升级最高再送<span styleName="color-red">350元</span></div>
-            <div styleName="more">更多新手秘笈</div>
+            <a styleName="more" href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈</a>
         </div>
         let after_tips = <div styleName="after-box">
             <div>请好友注册或投资时</div>
@@ -76,7 +76,7 @@ class PopInviteMobile extends React.Component {
             <div styleName="m-newer">新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span>
             </div>
             <div styleName="m-newer">邀请好友升级最高再送<span styleName="color-red">350元</span></div>
-            <div styleName="more">更多新手秘笈</div>
+            <a styleName="more" href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈</a>
         </div>
         return <div styleName="pop-invite-box">
             <div styleName="pop-m-invite">
@@ -100,8 +100,8 @@ class PopInvitePC extends React.Component {
 
     componentDidMount() {
         // this.clipboardHandler();
-        UserReady((isLogin,user) => {
-            this.setState({isLogin: isLogin,gcm:user.gcm})
+        UserReady((isLogin, user) => {
+            this.setState({isLogin: isLogin, gcm: user.gcm})
         })
     }
 
@@ -126,7 +126,7 @@ class PopInvitePC extends React.Component {
             <div styleName="golog" onClick={gotoLogin}>登录注册</div>
             <div styleName="tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span
                 styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span styleName="color-red">350元</span></div>
-            <a styleName="policy-link" href="">更多新手秘笈></a>
+            <a styleName="policy-link" href="http://www.9888.cn/news/notice/1861.html" target="_blank">更多新手秘笈></a>
         </div>;
         let loginTips = <div styleName="log-box">
             <div styleName="write-gcm"><span styleName="order">1</span>请好友注册或投资时填写我的工场码<span
@@ -144,7 +144,7 @@ class PopInvitePC extends React.Component {
             </div>
             <div styleName="logged-tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span
                 styleName="color-red">350元</span></div>
-            <div styleName="logged-link">更多新手秘笈></div>
+            <a styleName="logged-link" href="http://www.9888.cn/news/notice/1861.html" target="_blank">更多新手秘笈></a>
         </div>
         return <div styleName="pop-invite-pc">
             <div styleName="pop-invite-pc-text">

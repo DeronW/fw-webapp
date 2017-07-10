@@ -83,7 +83,7 @@ class JulyPC extends React.Component {
                 <div styleName="welfare-one">
                     <div styleName="one-text">
                         活动期间，成功邀请有效好友至少送50元。
-                        <a href="" styleName="one-link">查看详情></a>
+                        <a href="https://www.9888.cn/news/notice/1861.html" styleName="one-link">查看详情></a>
                     </div>
                 </div>
                 <div styleName="welfare-two">
