@@ -49,7 +49,7 @@ export default class Account {
         return this.Post('/api/userBase/v1/userExistIndex.json', {
             mobile: this.phone
         }, 'silence').then(data => {
-            this.code = data.userCode
+            this.userCode = data.userCode
             return new Promise(resolve => resolve())
         })
     }
