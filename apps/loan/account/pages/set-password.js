@@ -38,6 +38,7 @@ class SetPassword extends React.Component {
         document.title = '设置密码'
         //this.startCounting()
         account.get_captcha();
+        console.log(this.state.reset_pwd)
 
     }
 
