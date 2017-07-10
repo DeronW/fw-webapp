@@ -81,7 +81,7 @@ class PopInviteMobile extends React.Component {
             <div styleName="m-newer">新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span>
             </div>
             <div styleName="m-newer">邀请好友升级最高再送<span styleName="color-red">350元</span></div>
-            <a styleName="more" href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈</a>
+            <a styleName="more" href="https://www.9888keji.com/cms/addhtml/2057.html">更多新手秘笈</a>
         </div>
         return <div styleName="pop-invite-box">
             <div styleName="pop-m-invite">
@@ -133,7 +133,7 @@ class PopInvitePC extends React.Component {
             <div styleName="golog" onClick={gotoLogin}>登录注册</div>
             <div styleName="tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span
                 styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span styleName="color-red">350元</span></div>
-            <a styleName="policy-link" href="http://www.9888.cn/news/notice/1861.html" target="_blank">更多新手秘笈></a>
+            <a styleName="policy-link" href="https://www.9888keji.com/news/notice/2167.html" target="_blank">更多新手秘笈></a>
         </div>;
 
         let loginTips = <div styleName="log-box">

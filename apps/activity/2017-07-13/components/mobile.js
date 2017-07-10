@@ -5,6 +5,9 @@ import styles from '../css/mobile.css'
 import {Get} from '../../lib/helpers/request.js'
 import MobileHeader from '../../lib/components/mobile-header.js'
 import {PopStartPanel, PopTeamTips, PopInviteMobile} from './popall.js'
+import gotoPage from '../../lib/helpers/goto-page.js'
+
+
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class JulyMobile extends React.Component {
     constructor(props) {
@@ -53,6 +56,10 @@ class JulyMobile extends React.Component {
                                          isLogin={this.state.isLogin}/>, document.getElementById("pop"))
     }
 
+    login = () => {
+        gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
+    }
+
     render() {
         let {isLogin, timestamp} = this.state
         let coupon_panel = <div styleName="m-coupon">
@@ -82,7 +89,7 @@ class JulyMobile extends React.Component {
             <div styleName="m-i-one">
                 <div styleName="one-text">
                     活动期间，成功邀请有效好友至少送50元。
-                    <a href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y" styleName="one-detail">查看详情</a>
+                    <a href="https://www.9888keji.com/cms/addhtml/2057.html" styleName="one-detail">查看详情</a>
                 </div>
             </div>
             <div styleName="m-i-two">
@@ -312,7 +319,7 @@ class JulyMobile extends React.Component {
             let notlogged_text = <div styleName="m-notlogged">
                 <div styleName="pre-des">请登录后查看您活动内的邀友和投标情况，</div>
                 <div styleName="pre-text">
-                    <span styleName="pre-golog">立即登录</span>
+                    <span styleName="pre-golog" onClick={this.login}>立即登录</span>
                     <span styleName="howinvite-pre" onClick={this.showInvitePop}>如何邀请</span>
                 </div>
             </div>

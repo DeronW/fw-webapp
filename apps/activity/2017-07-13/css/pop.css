@@ -301,6 +301,7 @@
     margin-left: -2px;
     font-size: 14px;
     cursor: pointer;
+    border: 0 none;
 }
 
 .logged-tips {
