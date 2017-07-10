@@ -135,12 +135,14 @@ class JulyPC extends React.Component {
                 return <div styleName="data-item" key={index}>
                     <div styleName="item-data-up">
                         <div styleName="separable-bonus">可分奖金</div>
-                        <div styleName="bonus-amount">{item.ucount}元</div>
+                        <div styleName="bonus-amount">
+                            {item.isValid == "暂无瓜分资格" ? item.isValid : `${item.isValid}元`}
+                        </div>
                     </div>
                     <div styleName="item-data-down">
                         <div styleName={`username itemdown-${index}`}>{item.realName}</div>
                         <div styleName="add-year">好友累投年化</div>
-                        <div styleName="year-amount">{item.year_amt_sum}元</div>
+                        <div styleName="year-amount">{item.yearAmtSum}元</div>
                     </div>
                 </div>
             }
@@ -266,8 +268,8 @@ class JulyPC extends React.Component {
                 return <div key={index} styleName={index % 2 != 0 ? "rank-item rank-even" : "rank-item"}>
                     <span styleName="r-data-item rank-num">{index + 1}</span>
                     <span styleName="r-data-item rank-username">{item.realName}</span>
-                    <span styleName="r-data-item rank-total">{item.year_amt_sum}</span>
-                    <span styleName="r-data-item rank-bonus">{item.ucount}</span>
+                    <span styleName="r-data-item rank-total">{item.yearAmtSum}</span>
+                    <span styleName="r-data-item rank-bonus">{item.isValid}</span>
                 </div>
             }
             let rankdata_box = <div styleName="rank-data">
@@ -309,11 +311,13 @@ class JulyPC extends React.Component {
             let close_name = closeBottom ? "none" : "block";
             let logged = <div styleName="log-box logged-box">
                 活动内，您有效邀友
-                <span styleName="color-yellow">{singledata.ucount}元</span>
+                <span styleName="color-yellow">{singledata.ucount}个</span>
                 ，有效好友累投年化
-                <span styleName="color-yellow">3,4567元</span>
+                <span styleName="color-yellow">{singledata.yearAmtSum}元</span>
                 ，团队累投年化
-                <span styleName="color-yellow">{singledata.year_amt_sum}元</span> 。
+                <span styleName="color-yellow">
+                    {singledata.yearAmtSumAll ? singledata.yearAmtSumAll : '0'}元
+                </span> 。
                 <div styleName="invite-pc-after" onClick={this.showHowInvite}>
                     如何邀请
                 </div>

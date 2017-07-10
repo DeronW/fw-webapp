@@ -121,7 +121,7 @@ class JulyMobile extends React.Component {
                     <div styleName={`top-item-right top-r-${index + 1}`}>
                         <div styleName="person-up">
                             <div styleName="person-title">可分奖金</div>
-                            <div styleName="person-number">{item.ucount}</div>
+                            <div styleName="person-number">{item.isValid}</div>
                         </div>
                         <div styleName="person-down">
                             <div styleName="person-realName">{item.realName}</div>
@@ -255,8 +255,8 @@ class JulyMobile extends React.Component {
                 return <div styleName={index % 2 == 0 ? "rank-data-item" : "rank-data-item rank-data-odd"} key={index}>
                     <span styleName="rank_number">{index + 1}</span>
                     <span styleName="rank-username">{item.realName}</span>
-                    <span styleName="rank-totalmoney">{item.year_amt_sum}</span>
-                    <span styleName="rank-bonus">{item.ucount}</span>
+                    <span styleName="rank-totalmoney">{item.yearAmtSum}</span>
+                    <span styleName="rank-bonus">{item.isValid}</span>
                 </div>
             }
             let data_box = <div styleName="data-box">
@@ -298,9 +298,11 @@ class JulyMobile extends React.Component {
                     活动内，您有效邀友
                     <span styleName="color-yellow">{singledata.ucount}人</span>
                     ，有效好友累投年化
-                    <span styleName="color-yellow">3,4567元</span>，
+                    <span styleName="color-yellow">{singledata.yearAmtSum}元</span>，
                     团队累投年化
-                    <span styleName="color-yellow">{singledata.year_amt_sum}元</span> 。
+                    <span styleName="color-yellow">
+                        {singledata.yearAmtSumAll ? singledata.yearAmtSumAll : "0"}元
+                    </span> 。
                 </div>
                 <div styleName="logged-text">
                     <span styleName="howinvite-after" onClick={this.showInvitePop}>如何邀请</span>
