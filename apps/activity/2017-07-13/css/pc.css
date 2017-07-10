@@ -271,7 +271,7 @@
     width: 1138px;
     height: 158px;
     margin: 373px auto 0;
-    display: table;
+    /*display: table;*/
 }
 
 .data-item {
@@ -279,38 +279,7 @@
     height: 100%;
     margin-left: 30px;
     float: left;
-}
-
-.item-up {
-    width: 100%;
-    height: 42px;
-    text-align: center;
-    font-size: 24px;
-    color: #fff;
-    line-height: 60px;
-    padding-top: 14px;
-}
-
-.item-down {
-    font-size: 24px;
-    text-align: center;
-    height: 128px;
-    line-height: 128px;
-}
-
-.item-data-up {
-    width: 100%;
-    height: 61px;
-    text-align: center;
-    font-size: 24px;
-    color: #fff;
-    padding-top: 5px;
-}
-
-.item-data-down {
-    font-size: 24px;
-    text-align: center;
-    height: 100px;
+    /*padding-top: 20px;*/
 }
 
 .itemdown-0 {
@@ -331,6 +300,38 @@
 
 .itemdown-4 {
     color: #53be83;
+}
+
+.item-data-up {
+    width: 100%;
+    height: 61px;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    padding-top: 5px;
+}
+
+.item-data-down {
+    font-size: 24px;
+    text-align: center;
+    height: 100px;
+}
+
+.item-up {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    line-height: 40px;
+    padding-top: 14px;
+}
+
+.item-down {
+    font-size: 24px;
+    text-align: center;
+    height: 128px;
+    line-height: 112px;
 }
 
 .separable-bonus {
