@@ -278,15 +278,15 @@ class JulyPC extends React.Component {
             <div styleName="pc-banner">
                 <div styleName="pc-banner-pics">
                     <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one"
-                         onClick={() => this.scroll(0, 750)}/>
+                         onClick={() => this.scroll(0, 1100)}/>
                     <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two"
-                         onClick={() => this.scroll(0, 3170)}/>
+                         onClick={() => this.scroll(0, 3500)}/>
                     <img src={require("../images/pc/anchor-3.png")} styleName="anchor-item anchor-three"
-                         onClick={() => this.scroll(0, 2450)}/>
+                         onClick={() => this.scroll(0, 2800)}/>
                     <img src={require("../images/pc/anchor-4.png")} styleName="anchor-item anchor-four"
-                         onClick={() => this.scroll(0, 1950)}/>
+                         onClick={() => this.scroll(0, 2300)}/>
                     <img src={require("../images/pc/anchor-5.png")} styleName="anchor-item anchor-five"
-                         onClick={() => this.scroll(0, 4600)}/>
+                         onClick={() => this.scroll(0, 4920)}/>
                 </div>
             </div>
             {content_panel}
