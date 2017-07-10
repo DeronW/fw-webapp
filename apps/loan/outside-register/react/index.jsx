@@ -391,7 +391,7 @@ class InteractWrap extends React.Component {
     }
 
     getCaptcha = () => {
-        $FW.Post(`${API_PATH}/api/userBase/v1/verifyNum.json`).then((data)=>{
+        $FW.Post(`${API_PATH}/api/userBase/v1/verifyNum.json`,{sourceType: SOURCE_TYPE}).then((data)=>{
              this.setState({
                  url:data.url,
                  verifyToken:data.verifyToken
