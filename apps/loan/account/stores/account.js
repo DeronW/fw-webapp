@@ -72,9 +72,9 @@ export default class Account {
             mobile: this.phone
         }, 'silence').then(data => {
             console.log(data)
-            this.code = data.code
-            if(data.code == 201003) this.userOperationType = 2
-            if(data.code == 20014) this.userOperationType = 3
+            this.code = data.userCode
+            if(data.userCode == 201003) this.userOperationType = 2
+            if(data.userCode == 20014) this.userOperationType = 3
             return new Promise(resolve => resolve())
         })
     }
