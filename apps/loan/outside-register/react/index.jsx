@@ -284,7 +284,7 @@ class InteractWrap extends React.Component {
                     userOperationType: 3,
                     sourceType: SOURCE_TYPE,
                     verifyToken:this.state.verifyToken,
-                    captcha:this.state.captcha
+                    verifyCode:this.state.captcha
                 }).then((data) => {
                     this.setState({ codeToken: data.codeToken });
                     var countdown = setInterval(() => {
