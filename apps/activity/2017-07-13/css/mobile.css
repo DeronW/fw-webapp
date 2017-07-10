@@ -586,6 +586,9 @@ body {
     margin-right: 60px;
 }
 
+.pre-des{
+    margin:35px 0;
+}
 /*banner图动画*/
 @keyframes cloudMoveMobile {
     0% {

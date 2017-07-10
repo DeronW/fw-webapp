@@ -110,6 +110,7 @@
 }
 
 .more {
+    display: block;
     width: 250px;
     height: 60px;
     background: #58b7ff;
@@ -313,6 +314,7 @@
 }
 
 .logged-link {
+    display: block;
     font-size: 14px;
     color: #58b7ff;
     text-align: center;
