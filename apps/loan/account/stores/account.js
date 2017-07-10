@@ -66,6 +66,7 @@ export default class Account {
                 this.get_captcha();
             }
             Components.showToast(e.message)
+            return new Promise(reject => reject())
         })
     }
 
