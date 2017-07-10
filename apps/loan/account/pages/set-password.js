@@ -60,14 +60,9 @@ class SetPassword extends React.Component {
         if (!this.state.captcha){
             Components.showToast('请输入图形验证码');
         }else{
-            this.startCounting()
             this.props.account.send_sms_code(phone, captcha).then(()=>{
-            }, e => {
-                if(e.code == 20010){
-                    account.get_captcha();
-                }
-                Components.showToast(e.message)
-            })
+                this.startCounting()
+            });
         }
     }
 
