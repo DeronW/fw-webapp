@@ -53,7 +53,7 @@ export default class Account {
             mobile: this.phone,
             userOperationType: this.userOperationType,
             verifyToken: this.verifyToken,
-            captcha:captcha
+            verifyCode: captcha
         }, 'silence').then(data => {
             // codeToken 用来标识发短信和注册/登录/修改密码用的
             // 每次重新发送短信, codeToken都会变化
