@@ -41,7 +41,7 @@ class SetPassword extends React.Component {
 
     componentDidMount() {
         let { account } = this.props;
-        this.state.reset_pwd ? document.title = '设置密码' : document.title = '重置密码'
+        this.state.reset_pwd ? document.title = '设置新密码' : document.title = '设置密码'
         account.get_captcha();
     }
 
@@ -143,7 +143,7 @@ class SetPassword extends React.Component {
         </div>
 
         return <div>
-            <Header title="设置密码" history={history} />
+            <Header title={this.state.reset_pwd ? '设置新密码' : '设置密码'} history={history} />
 
             {/*<div styleName="send-tips">已发送短信验证码到尾号为*/}
             {/*<span>{account.mask_phone}</span>的手机</div>*/}
