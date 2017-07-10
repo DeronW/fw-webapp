@@ -190,8 +190,8 @@ class Captcha extends React.Component {
                         <img src="images/clear.png" alt="clear button"></img>
                     </div>
                     }
-                    <img src={this.props.url} onClick={this.props.reGetCaptcha}/>
                 </div>
+                <img src={this.props.url} onClick={this.props.reGetCaptcha}/>
             </div>
         )
     }
