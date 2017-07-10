@@ -114,7 +114,7 @@ class SetPassword extends React.Component {
         if (password.length < 8) err = "密码不能少于8位";
         if (!password) err = '请填写密码';
         if (!sms_code) err = '请填写手机验证码';
-        if (!captcha) err = '请输入图形验证码';
+        if (!captcha) err = '请输入图片验证码';
 
         if (err) return Components.showToast(err);
 
@@ -150,7 +150,7 @@ class SetPassword extends React.Component {
             <div styleName="space-wrap"></div>
             <div styleName="field-input">
                 <i className="icon-lock" styleName="icon-lock"></i>
-                <input placeholder="请输入图形验证码" value={captcha} styleName="pwd-input"
+                <input placeholder="请输入图片验证码" value={captcha} styleName="pwd-input"
                     type="text"
                     onChange={this.captchaHandler} maxLength="4" />
                 <i styleName="captcha-img" onClick={this.reGetCaptcha}><img src={account.captcha_img_url} /></i>
