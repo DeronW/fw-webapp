@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
-import { Components } from 'fw-javascripts'
+import { Components,  Utils } from 'fw-javascripts'
 
 import { Header } from '../../lib/components'
 
@@ -15,7 +15,7 @@ class SetPassword extends React.Component {
 
     state = {
         // 当前页面可能是, 设置密码和重置密码 两种状态, 输入框不同, 提交数据不同
-        reset_pwd: this.props.account.registerCodeType == 2,
+        reset_pwd: Utils.urlQuery.forgetPwd,
         agree: true,
         plaintext: false,
         password: '',
