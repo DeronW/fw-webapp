@@ -30,7 +30,7 @@ class Login extends React.Component {
     }
 
     forgetHandler = () => {
-        this.props.history.replace('/set-password?forgetPwd=true')
+        this.props.history.replace('/set-password')
     }
 
     render() {

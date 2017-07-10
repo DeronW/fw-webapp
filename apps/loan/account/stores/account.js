@@ -8,17 +8,11 @@ export default class Account {
         this.Post = Post
 
         extendObservable(this, {
-            // 用户注册状态
-            // 1: 可以注册, 需要设置登录密码
-            // 2: 已经注册, 修改登录密码, 通过其它服务同步过来的账户没有密码,
-            //     所以登录前先设置密码
-            registerCodeType: null,
-            registerCodeToken: '',
+            //userCode: 10000  -已注册已设置密码, 201003-已注册未设置密码, 20014-未注册
+            userCode: '',
             phone: '', // 用户登录手机号,
-            url:'',
-            verifyToken:'',
-            code:'',
-            userOperationType:''
+            captcha_img_url: '',
+            captcha_token: ''
         })
     }
 
@@ -27,41 +21,27 @@ export default class Account {
     }
 
     get_captcha = () => {
-        this.Post('/api/userBase/v1/verifyNum.json', {
-        }).then(data => {
-            this.url = data.url
-            this.verifyToken = data.verifyToken
-        }, e => Components.showToast(e.message))
+        this.Post('/api/userBase/v1/verifyNum.json').then(data => {
+            this.captcha_img_url = data.url
+            this.captcha_token = data.verifyToken
+        })
     }
 
     get_user_status = () => {
         return Storage.getUserDict().status
     }
 
-    // send_sms_code = (userOperationType) => {
-    //     this.Post('/api/userBase/v1/sendVerifyCode.json', {
-    //         mobile: this.phone,
-    //         // userOperationType 2：修改登录密码 3：注册
-    //         userOperationType: userOperationType
-    //     }).then(data => {
-    //         this.registerCodeToken = data.codeToken
-    //     }, e => Components.showToast(e.message))
-    // }
-
     send_sms_code = (captcha) => {
+
+        let uot = 3
+        if (this.userCode == 10000) uot = 2
+
         return this.Post('/api/userBase/v1/sendVerifyCode.json', {
             mobile: this.phone,
-            userOperationType: this.userOperationType,
-            verifyToken: this.verifyToken,
+            userOperationType: uot,
+            verifyToken: this.captcha_token,
             verifyCode: captcha
-        }, 'silence').then(data => {
-            // codeToken 用来标识发短信和注册/登录/修改密码用的
-            // 每次重新发送短信, codeToken都会变化
-            this.registerCodeToken = data.codeToken
-            //codeType 1:注册 2:重置密码
-            this.registerCodeType = data.codeType
-            return new Promise(resolve => resolve())
-        })
+        }, 'silence')
     }
 
     check_user_exist = phone => {
@@ -69,20 +49,10 @@ export default class Account {
         return this.Post('/api/userBase/v1/userExistIndex.json', {
             mobile: this.phone
         }, 'silence').then(data => {
-            console.log(data)
             this.code = data.userCode
-            if(data.userCode == 201003) this.userOperationType = 2
-            if(data.userCode == 20014) this.userOperationType = 3
             return new Promise(resolve => resolve())
         })
     }
-
-
-
-    // forget_password = () => {
-    //     this.registerCodeType = 2
-    //     return this.send_sms_code(2)
-    // }
 
     login = password => {
         let err;
@@ -128,7 +98,7 @@ export default class Account {
     }
 
     register = (pwd, sms_code, invite_code) => {
-       this.Post('/api/userBase/v1/register.json', {
+        this.Post('/api/userBase/v1/register.json', {
             mobile: this.phone,
             codeToken: this.registerCodeToken,
             password: pwd,

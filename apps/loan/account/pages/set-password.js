@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
-import { Components,  Utils } from 'fw-javascripts'
+import { Components, Utils } from 'fw-javascripts'
 
 import { Header } from '../../lib/components'
 
@@ -13,17 +13,19 @@ import styles from '../css/set-password.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class SetPassword extends React.Component {
 
-    constructor(props){
-        super(props);
+    constructor(props) {
+        super(props)
+        let { account } = this.props
+
         this.state = {
             // 当前页面可能是, 设置密码和重置密码 两种状态, 输入框不同, 提交数据不同
-            reset_pwd: Utils.urlQuery.forgetPwd,
+            reset_pwd: account.userCode == 10000,
             agree: true,
             plaintext: false,
             password: '',
             sms_code: '',
             invite_code: '',
-            captcha:'',
+            captcha: '',
             count: 0
         }
     }
@@ -61,16 +63,17 @@ class SetPassword extends React.Component {
     getSMSCode = () => {
         //let userOperationType = this.state.reset_pwd ? 2 : 3;
         let { account } = this.props;
-        let {captcha} = this.state;
-        if (!this.state.captcha){
+        let { captcha } = this.state;
+
+        if (!this.state.captcha) {
             Components.showToast('请输入图形验证码');
-        }else{
-            this.props.account.send_sms_code(captcha).then(()=>{
+        } else {
+            this.props.account.send_sms_code(captcha).then(() => {
                 this.startCounting()
             }, e => {
                 Components.showToast(e.message)
                 clearInterval(this._timer)
-                if(e.code == 20010){
+                if (e.code == 20010) {
                     account.get_captcha();
                 }
             });
@@ -78,8 +81,8 @@ class SetPassword extends React.Component {
     }
 
     inputSMSCodeHandler = e => {
-        if(e.target.value.length <=6){
-            this.setState({ sms_code:e.target.value })
+        if (e.target.value.length <= 6) {
+            this.setState({ sms_code: e.target.value })
         }
     }
 
@@ -146,14 +149,14 @@ class SetPassword extends React.Component {
             <Header title="设置密码" history={history} />
 
             {/*<div styleName="send-tips">已发送短信验证码到尾号为*/}
-                {/*<span>{account.mask_phone}</span>的手机</div>*/}
+            {/*<span>{account.mask_phone}</span>的手机</div>*/}
             <div styleName="space-wrap"></div>
             <div styleName="field-input">
                 <i className="icon-lock" styleName="icon-lock"></i>
                 <input placeholder="请输入图形验证码" value={captcha} styleName="pwd-input"
-                       type="text"
-                       onChange={this.captchaHandler} maxLength="4"/>
-                <i styleName="captcha-img" onClick={this.reGetCaptcha}><img src={account.url}/></i>
+                    type="text"
+                    onChange={this.captchaHandler} maxLength="4" />
+                <i styleName="captcha-img" onClick={this.reGetCaptcha}><img src={account.captcha_img_url} /></i>
                 <div styleName="v-line"></div>
             </div>
             <div styleName="field-input">
