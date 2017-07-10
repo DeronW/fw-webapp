@@ -13,17 +13,21 @@ import styles from '../css/set-password.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class SetPassword extends React.Component {
 
-    state = {
-        // 当前页面可能是, 设置密码和重置密码 两种状态, 输入框不同, 提交数据不同
-        reset_pwd: Utils.urlQuery.forgetPwd,
-        agree: true,
-        plaintext: false,
-        password: '',
-        sms_code: '',
-        invite_code: '',
-        captcha:'',
-        count: 0
+    constructor(props){
+        super(props);
+        this.state = {
+            // 当前页面可能是, 设置密码和重置密码 两种状态, 输入框不同, 提交数据不同
+            reset_pwd: Utils.urlQuery.forgetPwd,
+            agree: true,
+            plaintext: false,
+            password: '',
+            sms_code: '',
+            invite_code: '',
+            captcha:'',
+            count: 0
+        }
     }
+
 
     toggleEye = () => {
         this.setState({ plaintext: !this.state.plaintext })
