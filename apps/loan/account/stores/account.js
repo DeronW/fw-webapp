@@ -68,7 +68,7 @@ export default class Account {
 
     check_user_exist = phone => {
         this.phone = phone;
-        return this.Post('/api/userBase/v1/userExist.json', {
+        return this.Post('/api/userBase/v1/userExistIndex.json', {
             mobile: this.phone
         }, 'silence').then(data => {
             console.log(data)
