@@ -12,7 +12,8 @@ export default class Account {
             userCode: '',
             phone: '', // 用户登录手机号,
             captcha_img_url: '',
-            captcha_token: ''
+            captcha_token: '',
+            codeToken:''
         })
     }
 
@@ -41,7 +42,9 @@ export default class Account {
             userOperationType: uot,
             verifyToken: this.captcha_token,
             verifyCode: captcha
-        }, 'silence')
+        }, 'silence').then((data)=>{
+            this.codeToken = data.codeToken
+        })
     }
 
     check_user_exist = phone => {
@@ -80,7 +83,7 @@ export default class Account {
 
     reset_password = (password, sms_code) => {
         this.Post('/api/userBase/v1/resetPass.json', {
-            codeToken: this.registerCodeToken,
+            codeToken: this.codeToken,
             mobile: this.phone,
             password: password,
             verifyCode: sms_code
@@ -100,7 +103,7 @@ export default class Account {
     register = (pwd, sms_code, invite_code) => {
         this.Post('/api/userBase/v1/register.json', {
             mobile: this.phone,
-            codeToken: this.registerCodeToken,
+            codeToken: this.codeToken,
             password: pwd,
             verifyCode: sms_code,
             invitationCode: invite_code

@@ -188,7 +188,6 @@ class ApplyTenMillionLoan extends React.Component {
                             <div className="i">
                                 <input type="number" className="input"
                                        placeholder="请输入图形验证码"
-                                       maxLength="4"
                                        value={this.state.captchaVal}
                                        onChange={this.captchaChange}
                                 />
