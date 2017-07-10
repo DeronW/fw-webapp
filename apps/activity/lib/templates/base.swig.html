@@ -17,6 +17,7 @@
     <meta name="format-detection" content="telephone=no"/>
     {% endblock %}
     <title>{% block title %}{% endblock %}</title>
+    {% block head_javascripts %}{% endblock %}
 </head>
 
 <body>
@@ -51,6 +52,8 @@
         document.body.appendChild(iframe)
     }
 </script>
+
+{% block javascripts %}{% endblock %}
 
 </body>
 

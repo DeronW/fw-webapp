@@ -12,6 +12,7 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-1": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
+    "clipboard": "^1.7.1",
     "del": "2.2.2",
     "eslint": "3.19.0",
     "eslint-plugin-promise": "3.5.0",
