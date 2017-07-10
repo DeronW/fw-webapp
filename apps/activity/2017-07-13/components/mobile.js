@@ -22,7 +22,8 @@ class JulyMobile extends React.Component {
             rankdata: nextProps.rankdata,
             fightdata: nextProps.fightdata
         });
-        this.popStatusHandler(nextProps.timestamp)
+        //活动状态判断
+        // this.popStatusHandler(nextProps.timestamp)
     }
 
     componentDidMount() {
@@ -112,53 +113,6 @@ class JulyMobile extends React.Component {
         let fight_panel = () => {
             let {fightdata} = this.props
             // let fightdata = []
-            let no_fight_data = <div styleName="no-fight-box">
-                <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top1.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-1">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">马上就来...</div>
-                    </div>
-                </div>
-                <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top2.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-2">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">在潜艇上......</div>
-                    </div>
-                </div>
-                <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top3.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-3">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">在游轮上...</div>
-                    </div>
-                </div>
-                <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top4.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-4">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">在帆船上...</div>
-                    </div>
-                </div>
-                <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top5.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-5">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">游泳中...</div>
-                    </div>
-                </div>
-            </div>
             let person_data_func = (item, index) => {
                 return <div styleName="top-item" key={index}>
                     <div styleName="top-item-left">
@@ -177,15 +131,99 @@ class JulyMobile extends React.Component {
                     </div>
                 </div>
             }
-            let fight_data_box = <div styleName="f-data-box">
-                {fightdata.map(person_data_func)}
-            </div>
+            let fight_data_box = () => {
+                let data_item_one = <div styleName="top-item">
+                    <div styleName="top-item-left">
+                        <img src={require("../images/mobile/m-top1.jpg")}/>
+                    </div>
+                    <div styleName="top-item-right top-r-1">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">马上就来...</div>
+                    </div>
+                </div>
+                let data_item_two = <div styleName="top-item">
+                    <div styleName="top-item-left">
+                        <img src={require("../images/mobile/m-top2.jpg")}/>
+                    </div>
+                    <div styleName="top-item-right top-r-2">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">在潜艇上......</div>
+                    </div>
+                </div>
+                let data_item_three = <div styleName="top-item">
+                    <div styleName="top-item-left">
+                        <img src={require("../images/mobile/m-top3.jpg")}/>
+                    </div>
+                    <div styleName="top-item-right top-r-3">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">在游轮上...</div>
+                    </div>
+                </div>
+                let data_item_four = <div styleName="top-item">
+                    <div styleName="top-item-left">
+                        <img src={require("../images/mobile/m-top4.jpg")}/>
+                    </div>
+                    <div styleName="top-item-right top-r-4">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">在帆船上...</div>
+                    </div>
+                </div>
+                let data_item_five = <div styleName="top-item">
+                    <div styleName="top-item-left">
+                        <img src={require("../images/mobile/m-top5.jpg")}/>
+                    </div>
+                    <div styleName="top-item-right top-r-5">
+                        <div styleName="top-item-up">暂无奖金</div>
+                        <div styleName="top-item-down">游泳中...</div>
+                    </div>
+                </div>
+                if (fightdata.length == 0) {
+                    return <div styleName="f-data-box">
+                        {data_item_one}
+                        {data_item_two}
+                        {data_item_three}
+                        {data_item_four}
+                        {data_item_five}
+                    </div>
+                } else if (fightdata.length == 1) {
+                    return <div styleName="f-data-box">
+                        {fightdata.map(person_data_func)}
+                        {data_item_two}
+                        {data_item_three}
+                        {data_item_four}
+                        {data_item_five}
+                    </div>
+
+                } else if (fightdata.length == 2) {
+                    return <div styleName="f-data-box">
+                        {fightdata.map(person_data_func)}
+                        {data_item_three}
+                        {data_item_four}
+                        {data_item_five}
+                    </div>
+                } else if (fightdata.length == 3) {
+                    return <div styleName="f-data-box">
+                        {fightdata.map(person_data_func)}
+                        {data_item_four}
+                        {data_item_five}
+                    </div>
+                } else if (fightdata.length == 4) {
+                    return <div styleName="f-data-box">
+                        {fightdata.map(person_data_func)}
+                        {data_item_five}
+                    </div>
+                } else if (fightdata.length == 5) {
+                    return <div styleName="f-data-box">
+                        {fightdata.map(person_data_func)}
+                    </div>
+                }
+            }
             return <div styleName="m-fight">
                 <div styleName="m-f-title">
                     <img src={require("../images/mobile/m-fight-title.png")}/>
                 </div>
                 <div styleName="m-f-top">
-                    {fightdata && fightdata.length > 0 ? fight_data_box : no_fight_data}
+                    {fight_data_box()}
                 </div>
             </div>
         }
