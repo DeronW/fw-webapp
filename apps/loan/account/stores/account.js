@@ -61,6 +61,8 @@ export default class Account {
             this.registerCodeToken = data.codeToken
             //codeType 1:注册 2:重置密码
             this.registerCodeType = data.codeType
+        }, e => {
+            return new Promise(reject => reject())
         })
     }
 

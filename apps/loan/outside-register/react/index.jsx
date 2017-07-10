@@ -282,7 +282,9 @@ class InteractWrap extends React.Component {
                 $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                     mobile: this.state.phoneNum,
                     userOperationType: 3,
-                    sourceType: SOURCE_TYPE
+                    sourceType: SOURCE_TYPE,
+                    verifyToken:this.state.verifyToken,
+                    captcha:this.state.captcha
                 }).then((data) => {
                     this.setState({ codeToken: data.codeToken });
                     var countdown = setInterval(() => {
@@ -295,6 +297,10 @@ class InteractWrap extends React.Component {
                         }
                     }, 1000);
                 }, (e) => {
+                    if(e.code){
+                        alert("图形验证码输入错误，请重新输入！");
+                        this.getCaptcha();
+                    }
                     if (e.code === 201003) return this.setState({showRegisteredMask: true}) // 手机号已注册
                     let msg = e.message;
                     alert(msg || "验证码获取失败");
@@ -410,7 +416,6 @@ class InteractWrap extends React.Component {
                         channelCode: $FW.Format.urlQuery().channelCode,
                         extInvCode: $FW.Format.urlQuery().extInvCode || '',
                         codeToken: this.state.codeToken,
-                        captcha:this.state.captcha,
                         invitationCode: this.state.invitationCode,
                         mobile: this.state.phoneNum,
                         password: this.state.password,

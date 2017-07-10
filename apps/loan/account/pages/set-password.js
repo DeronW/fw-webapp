@@ -55,12 +55,19 @@ class SetPassword extends React.Component {
 
     getSMSCode = () => {
         //let userOperationType = this.state.reset_pwd ? 2 : 3;
+        let { account } = this.props;
         let {captcha} = this.state;
         if (!this.state.captcha){
             Components.showToast('请输入图形验证码');
         }else{
             this.startCounting()
-            this.props.account.send_sms_code(phone, captcha)
+            this.props.account.send_sms_code(phone, captcha).then(()=>{
+            }, e => {
+                if(e.code){
+                    account.get_captcha();
+                }
+                Components.showToast(e.message)
+            })
         }
     }
 
