@@ -70,7 +70,7 @@ class SetPassword extends React.Component {
             }, e => {
                 Components.showToast(e.message)
                 clearInterval(this._timer)
-                if (e.code == 20010) {
+                if (e.code == 20020) {
                     account.get_captcha();
                 }
             });

@@ -297,7 +297,7 @@ class InteractWrap extends React.Component {
                         }
                     }, 1000);
                 }, (e) => {
-                    if(e.code == 20010){
+                    if(e.code == 20020){
                         this.getCaptcha();
                     }
                     if (e.code === 201003) return this.setState({showRegisteredMask: true}) // 手机号已注册

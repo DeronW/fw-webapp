@@ -107,7 +107,7 @@ class ApplyTenMillionLoan extends React.Component {
                             codeType: data.codeType
                         })
                     }, e => {
-                        if(e.code == 20010){
+                        if(e.code == 20020){
                             clearInterval(this.timer)
                             $FW.Component.Toast(e.message);
                         }
