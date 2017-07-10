@@ -22,7 +22,7 @@ class ApplyTenMillionLoan extends React.Component {
             bothFilled: false,
             captchaVal:'',
             url:'',
-            verifyCode:''
+            verifyToken:''
         }
     }
 
@@ -49,7 +49,7 @@ class ApplyTenMillionLoan extends React.Component {
         }).then((data)=>{
             this.setState({
                 url:data.url,
-                verifyCode:data.verifyCode
+                verifyToken:data.verifyToken
             })
         });
     }
@@ -81,7 +81,9 @@ class ApplyTenMillionLoan extends React.Component {
             $FW.Component.Toast("手机号不能为空");
         } else if (!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
-        } else {
+        } else if(this.state.captchaVal == ''){
+            $FW.Component.Toast("图形验证码不能为空");
+        }else {
             $FW.Post(`${API_PATH}/api/userBase/v1/userExistIndex.json`, {
                 mobile: this.state.phoneVal,
                 sourceType: 5
@@ -92,20 +94,28 @@ class ApplyTenMillionLoan extends React.Component {
                         window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
                     }, 2000)
                 }else if(data.userCode == 20014){
-                    this.startCountingDown()
                     $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                         mobile: this.state.phoneVal,
                         userOperationType: 3,
-                        sourceType: 5
+                        sourceType: 5,
+                        verifyToken: this.state.verifyToken,
+                        verifyCode: this.state.captchaVal
                     }).then(data => {
+                        this.startCountingDown()
                         this.setState({
                             codeToken: data.codeToken,
                             codeType: data.codeType
                         })
+                    }, e => {
+                        if(e.code == 20010){
+                            clearInterval(this.timer)
+                            $FW.Component.Toast(e.message);
+                        }
                     })
                 }
-            }, (e)=> $FW.Component.Toast(e.message)
-            )
+            }, (e)=> {
+                $FW.Component.Toast(e.message)
+            })
         }
     }
 
@@ -184,7 +194,7 @@ class ApplyTenMillionLoan extends React.Component {
                                 />
                             </div>
                             <div className="btn">
-                                 <img src={this.state.url} onClick={this.reGetCaptchaHandler}/>
+                                 <img className="captchaImg" src={this.state.url} onClick={this.reGetCaptchaHandler}/>
                             </div>
                         </div>
                     </div>
