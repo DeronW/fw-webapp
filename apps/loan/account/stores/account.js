@@ -48,8 +48,7 @@ export default class Account {
     //     }, e => Components.showToast(e.message))
     // }
 
-    send_sms_code = (phone, captcha) => {
-        this.phone = phone;
+    send_sms_code = (captcha) => {
         return this.Post('/api/userBase/v1/sendVerifyCode.json', {
             mobile: this.phone,
             userOperationType: this.userOperationType,
