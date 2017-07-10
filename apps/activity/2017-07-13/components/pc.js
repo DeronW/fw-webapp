@@ -2,10 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
-import {Get} from '../../lib/helpers/request.js'
+import { Get } from '../../lib/helpers/request.js'
+import gotoPage from '../../lib/helpers/goto-page.js'
+
 import PCHeader from '../../lib/components/pc-header.js'
-import {PopStartPanel, PopTeamTips, PopInvitePC, PopEndPanel} from './popall.js'
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+import { PopStartPanel, PopTeamTips, PopInvitePC, PopEndPanel } from './popall.js'
+
+
+
+
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class JulyPC extends React.Component {
     state = {
         timestamp: this.props.timestamp,
@@ -32,9 +38,9 @@ class JulyPC extends React.Component {
 
     popStatusHandler = (timestamp) => {
         if (timestamp < 1499875200000) {
-            ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
+            ReactDOM.render(<PopStartPanel />, document.getElementById("pop"))
         } else if (timestamp > 1502726400000) {
-            ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
+            ReactDOM.render(<PopEndPanel />, document.getElementById("pop"))
         } else {
             ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
         }
@@ -47,27 +53,31 @@ class JulyPC extends React.Component {
 
     showHowInvite = () => {
         ReactDOM.render(<PopInvitePC gotoLogin={this.props.gotoLogin} isLogin={this.state.isLogin}
-                                     closePopHandler={this.props.closePopHandler}/>, document.getElementById("pop"))
+            closePopHandler={this.props.closePopHandler} />, document.getElementById("pop"))
     }
 
     closeBottom = () => {
-        this.setState({closeBottom: true})
+        this.setState({ closeBottom: true })
+    }
+
+    login = () => {
+        gotoPage('登录', '')
     }
 
     render() {
         let content_panel = <div styleName="pc-content">
             <div styleName="pc-coupon">
                 <div styleName="coupon-title">
-                    <img src={require("../images/pc/coupon-title.png")}/>
+                    <img src={require("../images/pc/coupon-title.png")} />
                 </div>
                 <div styleName="coupon-des">
                     （APP专享）每周、限时抢高达千元返现、1%返息
                 </div>
                 <div styleName="coupon-code">
-                    <img src={require("../images/pc/coupon-qrcode.png")} styleName="coupon-pic"/>
+                    <img src={require("../images/pc/coupon-qrcode.png")} styleName="coupon-pic" />
                 </div>
                 <div styleName="code-tips">
-                    <img src={require("../images/pc/coupon-code-tips.png")}/>
+                    <img src={require("../images/pc/coupon-code-tips.png")} />
                     <div styleName="tips-text">
                         <div>扫描二维码下载金融工场APP</div>
                         <div>即可到 APP-领券中心 参与抢券狂欢</div>
@@ -76,7 +86,7 @@ class JulyPC extends React.Component {
             </div>
             <div styleName="pc-welfare">
                 <div styleName="welfare-title">
-                    <img src={require("../images/pc/welfare-title.png")}/>
+                    <img src={require("../images/pc/welfare-title.png")} />
                 </div>
                 <div styleName="welfare-tips">
                     注册7天内，累投年化额≥1000元算一个有效邀请
@@ -110,7 +120,7 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let fight_panel = () => {
-            let {fightdata} = this.props;
+            let { fightdata } = this.props;
             //fake data
             // let fightdata = [{
             //     mobile: "300*****177",
@@ -234,7 +244,7 @@ class JulyPC extends React.Component {
             </div>
         }
         let bonus_panel = <div styleName="pc-bonus">
-            <img src={require("../images/pc/bonus-title.png")} styleName="bonus-title"/>
+            <img src={require("../images/pc/bonus-title.png")} styleName="bonus-title" />
             <div styleName="bouns-tips">
                 活动期间，团队累投年化额≥350万且排名前10的用户，送出88万奖金！
             </div>
@@ -246,18 +256,18 @@ class JulyPC extends React.Component {
                 </div>
             </div>
             <div styleName="bonus-context">
-                <img src={require("../images/pc/bonus-box.png")}/>
+                <img src={require("../images/pc/bonus-box.png")} />
                 <div styleName="bonus-bottom">
                     <div styleName="bonus-text">
-                        奖金分配方式：<br/>
-                        本人团队累投年化额/前10名团队累投年化总额，<br/>
+                        奖金分配方式：<br />
+                        本人团队累投年化额/前10名团队累投年化总额，<br />
                         仅计算满足获奖资格的用户。
                     </div>
                 </div>
             </div>
         </div>
         let rank_panel = () => {
-            let {rankdata} = this.state
+            let { rankdata } = this.state
             // console.log(`this.state.rankdata.length:${this.state.rankdata.length}`)
             let empty = <div styleName="rank-data">
                 <div styleName="empty-box">
@@ -294,11 +304,11 @@ class JulyPC extends React.Component {
             <div styleName="explain">
                 <div styleName="explain-title">活动说明</div>
                 1.活动期间，投资债权转让产品，不能参与本次活动；
-                若被邀请人首次投资选择债权转让项目，则该被邀请的好友不计入邀请人奖励统计；<br/>
-                2.投资等额标时，＞18个月的项目按18个月计算年化投资额<br/>
-                3.排序规则：按累投年化先后顺序排名，累投年化相同时以达到该累投年化的先后顺序为准。<br/>
-                4.奖金奖励以工豆形式发放，工豆奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br/>
-                5.金融工场有权随时随机抽查邀请人所推荐好友的真实性，一旦发现存在好友用虚假手机号注册、好友对注册金融工场账户不知情及非好友真实意愿等造假和欺骗行为，则立即清除虚假好友的统计数据并回收相关奖励，且保留追究由此给金融工场带来的一切损失的权利；<br/>
+                若被邀请人首次投资选择债权转让项目，则该被邀请的好友不计入邀请人奖励统计；<br />
+                2.投资等额标时，＞18个月的项目按18个月计算年化投资额<br />
+                3.排序规则：按累投年化先后顺序排名，累投年化相同时以达到该累投年化的先后顺序为准。<br />
+                4.奖金奖励以工豆形式发放，工豆奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br />
+                5.金融工场有权随时随机抽查邀请人所推荐好友的真实性，一旦发现存在好友用虚假手机号注册、好友对注册金融工场账户不知情及非好友真实意愿等造假和欺骗行为，则立即清除虚假好友的统计数据并回收相关奖励，且保留追究由此给金融工场带来的一切损失的权利；<br />
                 6.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。
                 <div styleName="explain-tips">
                     声明：以上活动由金融工场主办 与Apple Inc. 无关。
@@ -306,8 +316,8 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let bottom_panel = () => {
-            let {isLogin, closeBottom} = this.state;
-            let {singledata} = this.props;
+            let { isLogin, closeBottom } = this.state;
+            let { singledata } = this.props;
             let close_name = closeBottom ? "none" : "block";
             let logged = <div styleName="log-box logged-box">
                 活动内，您有效邀友
@@ -325,29 +335,29 @@ class JulyPC extends React.Component {
             </div>;
             let unlogged = <div styleName="log-box unlogged-box">
                 请登录后查看您活动内的邀友和投标情况，
-                <div styleName="pre-login">立即登录</div>
+                <div styleName="pre-login" onClick={this.login}>立即登录</div>
                 <div styleName="invite-pc-pre" onClick={this.showHowInvite}>如何邀请</div>
             </div>;
-            return <div styleName="bottom-box" style={{display: close_name}}>
+            return <div styleName="bottom-box" style={{ display: close_name }}>
                 {isLogin ? logged : unlogged}
-                <img src={require("../images/pc/ship.png")} styleName="pic-ship"/>
+                <img src={require("../images/pc/ship.png")} styleName="pic-ship" />
                 <div styleName="bottom-btn" onClick={this.closeBottom}>&times;</div>
             </div>
         }
         return <div styleName="july-pc-box">
-            <PCHeader/>
+            <PCHeader />
             <div styleName="pc-banner">
                 <div styleName="pc-banner-pics">
                     <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one"
-                         onClick={() => this.scroll(0, 1100)}/>
+                        onClick={() => this.scroll(0, 1100)} />
                     <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two"
-                         onClick={() => this.scroll(0, 3500)}/>
+                        onClick={() => this.scroll(0, 3500)} />
                     <img src={require("../images/pc/anchor-3.png")} styleName="anchor-item anchor-three"
-                         onClick={() => this.scroll(0, 2800)}/>
+                        onClick={() => this.scroll(0, 2800)} />
                     <img src={require("../images/pc/anchor-4.png")} styleName="anchor-item anchor-four"
-                         onClick={() => this.scroll(0, 2300)}/>
+                        onClick={() => this.scroll(0, 2300)} />
                     <img src={require("../images/pc/anchor-5.png")} styleName="anchor-item anchor-five"
-                         onClick={() => this.scroll(0, 4920)}/>
+                        onClick={() => this.scroll(0, 4920)} />
                 </div>
             </div>
             {content_panel}

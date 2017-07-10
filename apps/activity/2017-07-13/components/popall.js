@@ -156,7 +156,6 @@ class PopInvitePC extends React.Component {
         </div>
         return <div styleName="pop-invite-pc">
             <div styleName="pop-invite-pc-text">
-                {loginTips}
                 {isLogin ? loginTips : notLoginTips}
                 <div styleName="close-btn" onClick={closePopHandler}></div>
             </div>
