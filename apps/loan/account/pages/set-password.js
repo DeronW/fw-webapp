@@ -19,7 +19,7 @@ class SetPassword extends React.Component {
 
         this.state = {
             // 当前页面可能是, 设置密码和重置密码 两种状态, 输入框不同, 提交数据不同
-            reset_pwd: account.userCode == 10000,
+            reset_pwd: account.userCode == 10000 || account.userCode == 201003,
             agree: true,
             plaintext: false,
             password: '',
