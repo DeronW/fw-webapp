@@ -19,7 +19,10 @@ class ApplyTenMillionLoan extends React.Component {
             countdownShow: false,
             codeToken: '',
             codeType: '',
-            bothFilled: false
+            bothFilled: false,
+            captchaVal:'',
+            url:'',
+            verifyCode:''
         }
     }
 
@@ -35,6 +38,22 @@ class ApplyTenMillionLoan extends React.Component {
         }
     }
 
+    componentDidMount(){
+       this.reGetCaptchaHandler();
+    }
+
+    reGetCaptchaHandler = () => {
+        $FW.Post(`${API_PATH}/api/userBase/v1/verifyNum.json`, {
+            mobile: this.state.phoneVal,
+            sourceType: 5
+        }).then((data)=>{
+            this.setState({
+                url:data.url,
+                verifyCode:data.verifyCode
+            })
+        });
+    }
+
     phoneChange = (e) => {
         if (verificationNum(e.target.value) && e.target.value.length <= 11) {
             this.setState({
@@ -48,6 +67,12 @@ class ApplyTenMillionLoan extends React.Component {
             this.setState({
                 codeVal: e.target.value
             })
+        }
+    }
+
+    captchaChange = e => {
+        if(e.target.value.length <=4){
+            this.setState({captchaVal:e.target.value})
         }
     }
 
@@ -152,6 +177,21 @@ class ApplyTenMillionLoan extends React.Component {
                         <div className="input">
                             <div className="i">
                                 <input type="number" className="input"
+                                       placeholder="请输入图形验证码"
+                                       maxLength="4"
+                                       value={this.state.captchaVal}
+                                       onChange={this.captchaChange}
+                                />
+                            </div>
+                            <div className="btn">
+                                 <img src={this.state.url} onClick={this.reGetCaptchaHandler}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="li verification-code-li">
+                        <div className="input">
+                            <div className="i">
+                                <input type="number" className="input"
                                     placeholder="验证码"
                                     value={this.state.codeVal}
                                     onChange={this.codeChange}
@@ -166,7 +206,6 @@ class ApplyTenMillionLoan extends React.Component {
                             </div>
                         </div>
                     </div>
-
                     <div className={this.state.bothFilled ? "apply-btn" : "apply-btn-forbid"} onClick={this.applyBtn}>申请千万贷款</div>
                 </div>
             </div>
