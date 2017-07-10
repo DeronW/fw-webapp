@@ -70,7 +70,9 @@ class JulyMobile extends React.Component {
                 每周、限时抢高达千元返现、1%返息
             </div>
             <div styleName="m-c-text">
-                <img src={require("../images/mobile/m-get-coupon.png")}/>
+                <a href="http://m.9888.cn/static/wap/coupon-center/index.html" styleName="get-coupon-container">
+                    <img src={require("../images/mobile/m-get-coupon.png")}/>
+                </a>
             </div>
             <div styleName="m-c-des">
                 <div styleName="des-text">

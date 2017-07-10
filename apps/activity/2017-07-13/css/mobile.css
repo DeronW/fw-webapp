@@ -106,6 +106,10 @@ body {
     text-align: center;
 }
 
+.get-coupon-container {
+    display: block;
+}
+
 .m-c-des {
     width: 596px;
     height: 163px;
@@ -483,7 +487,7 @@ body {
 
 .rank-username {
     display: inline-block;
-    width: 108px;
+    width: 128px;
 }
 
 .rank-totalmoney {
@@ -586,9 +590,10 @@ body {
     margin-right: 60px;
 }
 
-.pre-des{
-    margin:35px 0;
+.pre-des {
+    margin: 35px 0;
 }
+
 /*banner图动画*/
 @keyframes cloudMoveMobile {
     0% {
