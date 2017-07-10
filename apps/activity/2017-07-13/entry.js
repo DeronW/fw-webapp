@@ -20,6 +20,7 @@ class Content extends React.Component {
     componentDidMount() {
         UserReady((isLogin, user) => {
             this.setState({isLogin: isLogin, username: user.userName})
+            this.state.isLogin && this.getSelfData()
         });
 
         Get('/api/userState/v1/timestamp.json')
@@ -30,14 +31,17 @@ class Content extends React.Component {
             .then(data => {
                 this.setState({rankdata: data.data})
             });
+        Get('/api/fiveYearsActivity/v1/getTeamYam.do')
+            .then(data => {
+                this.setState({fightdata: data.data})
+            })
+    }
+
+    getSelfData = () => {
         Get('/api/fiveYearsActivity/v1/getSelfYearAmt.do')
             .then(data => {
                 console.log(`data.data.realName:${data.data.realName}`)
                 this.setState({singledata: data.data})
-            })
-        Get('/api/fiveYearsActivity/v1/getTeamYam.do')
-            .then(data => {
-                this.setState({fightdata: data.data})
             })
     }
 
