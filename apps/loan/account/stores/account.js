@@ -61,12 +61,6 @@ export default class Account {
             //codeType 1:注册 2:重置密码
             this.registerCodeType = data.codeType
             return new Promise(resolve => resolve())
-        }, e => {
-            if(e.code == 20010){
-                this.get_captcha();
-            }
-            Components.showToast(e.message)
-            return new Promise(reject => reject())
         })
     }
 

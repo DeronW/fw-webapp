@@ -63,7 +63,11 @@ class SetPassword extends React.Component {
             this.props.account.send_sms_code(captcha).then(()=>{
                 this.startCounting()
             }, e => {
+                Components.showToast(e.message)
                 clearInterval(this._timer)
+                if(e.code == 20010){
+                    account.get_captcha();
+                }
             });
         }
     }
