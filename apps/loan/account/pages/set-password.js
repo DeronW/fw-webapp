@@ -15,7 +15,7 @@ class SetPassword extends React.Component {
 
     state = {
         // 当前页面可能是, 设置密码和重置密码 两种状态, 输入框不同, 提交数据不同
-        reset_pwd: this.props.account.userOperationType,
+        reset_pwd: this.props.account.registerCodeType == 2,
         agree: true,
         plaintext: false,
         password: '',
@@ -34,9 +34,9 @@ class SetPassword extends React.Component {
     }
 
     componentDidMount() {
+        let { account } = this.props;
         document.title = '设置密码'
         //this.startCounting()
-        let { account } = this.props;
         account.get_captcha();
 
     }
