@@ -146,7 +146,7 @@ class SetPassword extends React.Component {
                 <i className="icon-lock" styleName="icon-lock"></i>
                 <input placeholder="请输入图形验证码" value={captcha} styleName="pwd-input"
                        type="text"
-                       onChange={this.captchaHandler} />
+                       onChange={this.captchaHandler} maxLength="4"/>
                 <i styleName="captcha-img" onClick={this.reGetCaptcha}><img src={account.url}/></i>
                 <div styleName="v-line"></div>
             </div>
