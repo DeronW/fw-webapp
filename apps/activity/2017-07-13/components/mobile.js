@@ -123,19 +123,25 @@ class JulyMobile extends React.Component {
             let {fightdata} = this.props
             // let fightdata = []
             let person_data_func = (item, index) => {
+                let disability_text = <div styleName="top-item-up">
+                    暂无奖金
+                </div>
+                let ability_text = (item) => {
+                    return <div styleName="person-up">
+                        <div styleName="person-title">可分奖金</div>
+                        <div styleName="person-number">{item.isValid}</div>
+                    </div>
+                }
                 return <div styleName="top-item" key={index}>
                     <div styleName="top-item-left">
                         <img src={require(`../images/mobile/m-top${index + 1}.jpg`)}/>
                     </div>
                     <div styleName={`top-item-right top-r-${index + 1}`}>
-                        <div styleName="person-up">
-                            <div styleName="person-title">可分奖金</div>
-                            <div styleName="person-number">{item.isValid}</div>
-                        </div>
+                        {item.isValid == "暂无瓜分资格" ? disability_text : ability_text(item)}
                         <div styleName="person-down">
                             <div styleName="person-realName">{item.realName}</div>
                             <div styleName="person-subtitle">好友累投年化</div>
-                            <div styleName="person-total">{item.year_amt_sum}元</div>
+                            <div styleName="person-total">{item.yearAmtSum}元</div>
                         </div>
                     </div>
                 </div>

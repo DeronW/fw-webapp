@@ -122,13 +122,28 @@ class JulyPC extends React.Component {
         let fight_panel = () => {
             let {fightdata} = this.props;
             let fight_data_func = (item, index) => {
-                return <div styleName="data-item" key={index}>
-                    <div styleName="item-data-up">
+                let disability = <div styleName="item-data-up">
+                    <div styleName="data-up-disability">
+                        暂无奖金
+                    </div>
+                </div>
+                let ability = (item) => {
+                    return <div styleName="item-data-up">
                         <div styleName="separable-bonus">可分奖金</div>
                         <div styleName="bonus-amount">
                             {item.isValid == "暂无瓜分资格" ? item.isValid : `${item.isValid}元`}
                         </div>
                     </div>
+                }
+                return <div styleName="data-item" key={index}>
+                    {/*<div styleName="item-data-up">*/}
+                        {/*<div styleName="separable-bonus">可分奖金</div>*/}
+                        {/*<div styleName="bonus-amount">*/}
+                        {/*{item.isValid == "暂无瓜分资格" ? item.isValid : `${item.isValid}元`}*/}
+                        {/*</div>*/}
+                        {/**/}
+                    {/*</div>*/}
+                    {item.isValid == "暂无瓜分资格" ? disability : ability(item)}
                     <div styleName="item-data-down">
                         <div styleName={`username itemdown-${index}`}>{item.realName}</div>
                         <div styleName="add-year">好友累投年化</div>
@@ -311,7 +326,7 @@ class JulyPC extends React.Component {
                 <div styleName="invite-pc-after" onClick={this.showHowInvite}>
                     如何邀请
                 </div>
-                <a href="" styleName="pc-invest">立即投资</a>
+                <a href="https://www.9888keji.com/" styleName="pc-invest">立即投资</a>
             </div>;
             let unlogged = <div styleName="log-box unlogged-box">
                 请登录后查看您活动内的邀友和投标情况，
