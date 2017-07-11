@@ -1,3 +1,10 @@
 {% extends '../lib/templates/base.swig.html' %}
 
 {% block title %}专题活动{% endblock %}
+
+
+{% if ENV == 'production' %}
+    {% block base_tag %}
+    <base href="http://www.gongchangp2p.cn/static/activity/2017-07-13/" />
+    {% endblock %}
+{% endblock %}
