@@ -165,7 +165,7 @@ class Captcha extends React.Component {
                 <div className="input-type-icon">
                     <img src="images/veri-code.png" />
                 </div>
-                <input type={this.props.type} placeholder="请输入图形验证码" maxLength="4" value={this.props.value} onChange={(e) => {
+                <input type="text" placeholder="请输入图片验证码" maxLength="4" value={this.props.value} onChange={(e) => {
                     this.setState({
                         enableClear: e.target.value
                             ? true
@@ -276,7 +276,7 @@ class InteractWrap extends React.Component {
 
     getVerificationCode = () => {
         if(!this.state.captcha){
-            alert('图形验证码不能为空');
+            alert('图片验证码不能为空');
         }else if (this.state.timeRemainForNewCode === 60) { // time for test
             if (isPhoneNum(this.state.phoneNum)) {
                 $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
@@ -297,7 +297,7 @@ class InteractWrap extends React.Component {
                         }
                     }, 1000);
                 }, (e) => {
-                    if(e.code == 20010){
+                    if(e.code == 20020){
                         this.getCaptcha();
                     }
                     if (e.code === 201003) return this.setState({showRegisteredMask: true}) // 手机号已注册

@@ -82,7 +82,7 @@ class ApplyTenMillionLoan extends React.Component {
         } else if (!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
         } else if(this.state.captchaVal == ''){
-            $FW.Component.Toast("图形验证码不能为空");
+            $FW.Component.Toast("图片验证码不能为空");
         }else {
             $FW.Post(`${API_PATH}/api/userBase/v1/userExistIndex.json`, {
                 mobile: this.state.phoneVal,
@@ -107,7 +107,7 @@ class ApplyTenMillionLoan extends React.Component {
                             codeType: data.codeType
                         })
                     }, e => {
-                        if(e.code == 20010){
+                        if(e.code == 20020){
                             clearInterval(this.timer)
                             $FW.Component.Toast(e.message);
                         }
@@ -186,8 +186,8 @@ class ApplyTenMillionLoan extends React.Component {
                     <div className="li verification-code-li">
                         <div className="input">
                             <div className="i">
-                                <input type="number" className="input"
-                                       placeholder="请输入图形验证码"
+                                <input type="text" className="input"
+                                       placeholder="请输入图片验证码"
                                        value={this.state.captchaVal}
                                        onChange={this.captchaChange}
                                 />

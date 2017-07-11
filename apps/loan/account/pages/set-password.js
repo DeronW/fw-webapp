@@ -19,7 +19,7 @@ class SetPassword extends React.Component {
 
         this.state = {
             // 当前页面可能是, 设置密码和重置密码 两种状态, 输入框不同, 提交数据不同
-            reset_pwd: account.userCode == 10000,
+            reset_pwd: account.userCode == 10000 || account.userCode == 201003,
             agree: true,
             plaintext: false,
             password: '',
@@ -41,7 +41,7 @@ class SetPassword extends React.Component {
 
     componentDidMount() {
         let { account } = this.props;
-        this.state.reset_pwd ? document.title = '设置密码' : document.title = '重置密码'
+        this.state.reset_pwd ? document.title = '设置新密码' : document.title = '设置密码'
         account.get_captcha();
     }
 
@@ -63,14 +63,14 @@ class SetPassword extends React.Component {
         let { captcha } = this.state;
 
         if (!this.state.captcha) {
-            Components.showToast('请输入图形验证码');
+            Components.showToast('请输入图片验证码');
         } else {
             this.props.account.send_sms_code(captcha).then(() => {
                 this.startCounting()
             }, e => {
                 Components.showToast(e.message)
                 clearInterval(this._timer)
-                if (e.code == 20010) {
+                if (e.code == 20020) {
                     account.get_captcha();
                 }
             });
@@ -110,11 +110,11 @@ class SetPassword extends React.Component {
         if (!password.match(/\d/) || !password.match(/[^\d]/))
             err = "密码必须是字母和数字组合";
         if (password.length > 16) err = "密码不能多于16位";
-        if (reset_pwd && !agree) err = '您还未同意注册协议'
+        if (!agree) err = '您还未同意注册协议'
         if (password.length < 8) err = "密码不能少于8位";
         if (!password) err = '请填写密码';
         if (!sms_code) err = '请填写手机验证码';
-        if (!captcha) err = '请输入图形验证码';
+        if (!captcha) err = '请输入图片验证码';
 
         if (err) return Components.showToast(err);
 
@@ -143,14 +143,14 @@ class SetPassword extends React.Component {
         </div>
 
         return <div>
-            <Header title="设置密码" history={history} />
+            <Header title={this.state.reset_pwd ? '设置新密码' : '设置密码'} history={history} />
 
             {/*<div styleName="send-tips">已发送短信验证码到尾号为*/}
             {/*<span>{account.mask_phone}</span>的手机</div>*/}
             <div styleName="space-wrap"></div>
             <div styleName="field-input">
                 <i className="icon-lock" styleName="icon-lock"></i>
-                <input placeholder="请输入图形验证码" value={captcha} styleName="pwd-input"
+                <input placeholder="请输入图片验证码" value={captcha} styleName="pwd-input"
                     type="text"
                     onChange={this.captchaHandler} maxLength="4" />
                 <i styleName="captcha-img" onClick={this.reGetCaptcha}><img src={account.captcha_img_url} /></i>
