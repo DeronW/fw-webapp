@@ -97,7 +97,13 @@ export default class Account {
                 invite_code: dict.invitationCode
             })
             location.href = '/static/loan/home/index.html'
-        }, e => Components.showToast(e.message))
+        }, e => {
+            if(this.codeToken == ''){
+                Components.showToast("验证码错误，请重新输入")
+            }else{
+                Components.showToast(e.message)
+            }
+        })
     }
 
     register = (pwd, sms_code, invite_code) => {
@@ -115,6 +121,12 @@ export default class Account {
                 uid: dict.uid
             })
             location.href = `/static/loan/home/index.html`;
-        }, e => Components.showToast(e.message))
+        }, e => {
+            if(this.codeToken == ''){
+                Components.showToast("验证码错误，请重新输入")
+            }else{
+                Components.showToast(e.message)
+            }
+        })
     }
 }
