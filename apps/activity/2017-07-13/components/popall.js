@@ -153,10 +153,10 @@ class PopInvitePC extends React.Component {
                     复制以下链接，发送工场码给好友邀请TA来注册&投资吧！
                 </div>
                 <div styleName="copy-text">
-                    http://passport.9888.cn/pp-web2/register/phone.do?gcm={gcm}
+                    http://www.gongchangp2p.cn/depository/regist/toRegist.shtml?gcm= {gcm}
                 </div>
                 <button styleName="copy-link"
-                        data-clipboard-text={`http://passport.9888.cn/pp-web2/register/phone.do?gcm=${gcm}`}
+                        data-clipboard-text={`http://www.gongchangp2p.cn/depository/regist/toRegist.shtml?gcm= ${gcm}`}
                         id="copy-value-pc">复制链接
                 </button>
             </div>
