@@ -85,15 +85,17 @@ class PCHeader extends React.Component {
 
                     {logout}{user_panel()}
                     {isLogin && <div styleName="btn-link-sp"></div>}
-                    <div styleName="btn-link btn-download-app" target="_blank"
-                         href="http://www.9888keji.com/static/web/app-download/index.html">APP下载
+                    <a styleName="btn-link btn-download-app" target="_blank"
+                       href="https://www.9888keji.com/static/keji-web/app-download/index.html">APP下载
                         <div styleName="download-app">
                             <img src={require('../images/header/app.jpg')}/>
                             <a styleName="d-download">立即下载App</a>
-                            <a styleName="d-android">Android版下载</a>
-                            <a styleName="d-ios">iOS版下载</a>
+                            <a styleName="d-android"
+                               href="https://www.9888keji.com/static/keji-web/app-download/index.html">Android版下载</a>
+                            <a styleName="d-ios"
+                               href="https://www.9888keji.com/static/keji-web/app-download/index.html">iOS版下载</a>
                         </div>
-                    </div>
+                    </a>
                     <div styleName="btn-link-sp"></div>
                     <a styleName="btn-link" target="_blank"
                        href="http://www.9888keji.com/static/web/guide-cookbook/index.html">玩赚攻略</a>
