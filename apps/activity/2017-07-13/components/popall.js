@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pop.css'
 import UserReady from '../../lib/helpers/user-ready.js'
-
+import gotoPage from '../../lib/helpers/goto-page.js'
 import Clipboard from 'clipboard'
 
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PopStartPanel extends React.Component {
     render() {
         return <div styleName="pop_status_box pop_notbegun_box">
@@ -17,7 +17,7 @@ class PopStartPanel extends React.Component {
     }
 }
 
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PopEndPanel extends React.Component {
     render() {
         return <div styleName="pop_status_box pop_end_box">
@@ -27,7 +27,7 @@ class PopEndPanel extends React.Component {
     }
 }
 
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PopTeamTips extends React.Component {
     constructor(props) {
         super(props)
@@ -47,7 +47,7 @@ class PopTeamTips extends React.Component {
     }
 }
 
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PopInviteMobile extends React.Component {
     constructor(props) {
         super(props)
@@ -59,17 +59,21 @@ class PopInviteMobile extends React.Component {
 
     componentDidMount() {
         UserReady((isLogin, user) => {
-            this.setState({ isLogin: isLogin, gcm: user.gcm })
+            this.setState({isLogin: isLogin, gcm: user.gcm})
         })
     }
 
+    login = () => {
+        gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
+    }
+
     render() {
-        let { isLogin, closePopHandler } = this.props
+        let {isLogin, closePopHandler} = this.props
         let pre_tips = <div styleName="pre-box">
             <div>请好友用您的工场码注册,去投标,达成团队目标。</div>
             <div>登录后查看我的工场码</div>
             <div>还没有工场码？注册即可拥有。</div>
-            <div styleName="log-btn">登录注册</div>
+            <div styleName="log-btn" onClick={this.login}>登录注册</div>
             <div>新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span></div>
             <div>邀请好友升级最高再送<span styleName="color-red">350元</span></div>
             <a styleName="more" href="https://www.9888.cn/cms/addhtml/2078.html?reloadworkpage=y">更多新手秘笈</a>
@@ -93,7 +97,7 @@ class PopInviteMobile extends React.Component {
     }
 }
 
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class PopInvitePC extends React.Component {
     constructor(props) {
         super(props);
@@ -106,7 +110,7 @@ class PopInvitePC extends React.Component {
     componentDidMount() {
         this.clipboardHandler();
         UserReady((isLogin, user) => {
-            this.setState({ isLogin: isLogin, gcm: user.gcm })
+            this.setState({isLogin: isLogin, gcm: user.gcm})
         })
     }
 
@@ -122,15 +126,19 @@ class PopInvitePC extends React.Component {
         console.log(22)
     }
 
+    login = () => {
+        gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
+    }
+
     render() {
-        let { gcm } = this.state;
-        let { closePopHandler, gotoLogin, isLogin } = this.props;
+        let {gcm} = this.state;
+        let {closePopHandler, gotoLogin, isLogin} = this.props;
 
         let notLoginTips = <div styleName="nolog-box">
             <div>请好友用您的工场码注册，去投标，达成团队目标。</div>
             <div>登录后查看我的工场码</div>
             <div>还没有工场码？注册即可拥有。</div>
-            <div styleName="golog" onClick={gotoLogin}>登录注册</div>
+            <div styleName="golog" onClick={this.login}>登录注册</div>
             <div styleName="tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span
                 styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span styleName="color-red">350元</span></div>
             <a styleName="policy-link" href="https://www.9888keji.com/news/notice/2167.html" target="_blank">更多新手秘笈></a>
@@ -147,8 +155,10 @@ class PopInvitePC extends React.Component {
                 <div styleName="copy-text">
                     http://passport.9888.cn/pp-web2/register/phone.do?gcm={gcm}
                 </div>
-                <button styleName="copy-link" data-clipboard-text={`http://passport.9888.cn/pp-web2/register/phone.do?gcm=${gcm}`}
-                id="copy-value-pc" >复制链接</button>
+                <button styleName="copy-link"
+                        data-clipboard-text={`http://passport.9888.cn/pp-web2/register/phone.do?gcm=${gcm}`}
+                        id="copy-value-pc">复制链接
+                </button>
             </div>
             <div styleName="logged-tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span
                 styleName="color-red">350元</span></div>
@@ -162,4 +172,4 @@ class PopInvitePC extends React.Component {
         </div>
     }
 }
-export { PopStartPanel, PopTeamTips, PopInviteMobile, PopEndPanel, PopInvitePC }
+export {PopStartPanel, PopTeamTips, PopInviteMobile, PopEndPanel, PopInvitePC}

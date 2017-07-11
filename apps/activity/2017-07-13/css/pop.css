@@ -80,6 +80,7 @@
     border-radius: 30px;
     color: #fff;
     margin: 20px auto 70px;
+    cursor: pointer;
 }
 
 .after-box {
@@ -212,6 +213,7 @@
     background: #f8544b;
     border-radius: 4px;
     margin: 35px auto;
+    cursor: pointer;
 }
 
 .tips {

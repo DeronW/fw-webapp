@@ -35,6 +35,8 @@ class JulyPC extends React.Component {
     }
 
     popStatusHandler = (timestamp) => {
+        //1499875200000   2017-07-13 00:00:00
+        //1502726400000   2017-08-15 00:00:00
         if (timestamp < 1499875200000) {
             ReactDOM.render(<PopStartPanel />, document.getElementById("pop"))
         } else if (timestamp > 1502726400000) {
