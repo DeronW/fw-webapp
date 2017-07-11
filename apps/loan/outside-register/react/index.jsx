@@ -338,6 +338,10 @@ class InteractWrap extends React.Component {
                         alert('密码为空，输入8-16位的字母和数字组合密码');
                         return;
                     }
+                    if (typeName === 'captcha') {
+                        alert('请输入图片验证码');
+                        return;
+                    }
                     alert(essentialTypeNames[typeName] + "为空，请重新输入");
                     return;
                 }
