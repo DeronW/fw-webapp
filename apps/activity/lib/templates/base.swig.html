@@ -18,7 +18,7 @@
     <meta name="format-detection" content="telephone=no"/>
     {% endblock %}
     <title>{% block title %}{% endblock %}</title>
-    {% block base_tag %}{% endblock %}
+    {% if ENV == 'production' %}{% block base_tag %}{% endblock %}{% endif %}
     {% block head_javascripts %}{% endblock %}
 </head>
 
