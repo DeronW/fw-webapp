@@ -65,6 +65,15 @@ class StorageFactory {
         return r
     }
 
+    setBulletin =  (token, cnt) => {
+        this.set('bulletinToken', token);
+        this.set('bulletinCnt', cnt);
+    }
+
+    // if a bulletin is read for provided token
+    isBulletinRead = (token, cnt) => {
+        return (this.get('bulletinToken') === token) && (this.get('bulletinCnt') === cnt)
+    }
     // getUserID = () => {
     //     return this.get('uid') || Utils.Cookie.get('uid')
     // }

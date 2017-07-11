@@ -96,9 +96,6 @@ class Home extends React.Component {
                 </div>
             </div>
             {home.showBulletin && <Bulletin />}
-            {
-                // <BottomNavBar />
-            }
         </div>
     }
 }
