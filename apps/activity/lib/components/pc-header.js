@@ -77,14 +77,14 @@ class PCHeader extends React.Component {
                         <img src={require("../images/header/bbs.png")}/>
                     </a>
 
-                    <a styleName="btn-link" href="/depository/regist/toRegist.shtml?sourceSite=jrgc">注册</a>
-                    <div styleName="btn-link-sp"></div>
-                    <a styleName="btn-link" onClick={this.login}>登录</a>
-                    <div styleName="btn-link-sp"></div>
+                    {!isLogin &&
+                    <a styleName="btn-link" href="/depository/regist/toRegist.shtml?sourceSite=jrgc">注册</a>}
+                    {!isLogin && <div styleName="btn-link-sp"></div>}
+                    {!isLogin && <a styleName="btn-link" onClick={this.login}>登录</a>}
+                    {!isLogin && <div styleName="btn-link-sp"></div>}
 
                     {logout}{user_panel()}
 
-                    <div styleName="btn-link-sp"></div>
                     <div styleName="btn-link btn-download-app" target="_blank"
                          href="http://www.9888keji.com/static/web/app-download/index.html">APP下载
                         <div styleName="download-app">
@@ -94,6 +94,7 @@ class PCHeader extends React.Component {
                             <a styleName="d-ios">iOS版下载</a>
                         </div>
                     </div>
+                    <div styleName="btn-link-sp"></div>
                     <a styleName="btn-link" target="_blank"
                        href="http://www.9888keji.com/static/web/guide-cookbook/index.html">玩赚攻略</a>
                     <div styleName="btn-link-sp"></div>
