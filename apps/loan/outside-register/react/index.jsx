@@ -276,7 +276,7 @@ class InteractWrap extends React.Component {
 
     getVerificationCode = () => {
         if(!this.state.captcha){
-            alert('图片验证码不能为空');
+            alert('请输入图片验证码');
         }else if (this.state.timeRemainForNewCode === 60) { // time for test
             if (isPhoneNum(this.state.phoneNum)) {
                 $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {

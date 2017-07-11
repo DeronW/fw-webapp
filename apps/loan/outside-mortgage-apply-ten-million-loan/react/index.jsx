@@ -82,7 +82,7 @@ class ApplyTenMillionLoan extends React.Component {
         } else if (!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
         } else if(this.state.captchaVal == ''){
-            $FW.Component.Toast("图片验证码不能为空");
+            $FW.Component.Toast("请输入图片验证码");
         }else {
             $FW.Post(`${API_PATH}/api/userBase/v1/userExistIndex.json`, {
                 mobile: this.state.phoneVal,
