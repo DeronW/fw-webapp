@@ -1,4 +1,5 @@
 import React from 'react';
+import {Browser} from '../helpers'
 
 /*
  parameters
@@ -97,7 +98,7 @@ class BottomNavBar extends React.Component {
             zIndex: "-1"
         }
 
-        if ($FW.Browser.inApp()) return null;
+        if (Browser.inApp) return null;
 
         return (
             <div style={easyloan_style_footer_fixed}>
