@@ -122,13 +122,28 @@ class JulyPC extends React.Component {
         let fight_panel = () => {
             let {fightdata} = this.props;
             let fight_data_func = (item, index) => {
-                return <div styleName="data-item" key={index}>
-                    <div styleName="item-data-up">
+                let disability = <div styleName="item-data-up">
+                    <div styleName="data-up-disability">
+                        暂无奖金
+                    </div>
+                </div>
+                let ability = (item) => {
+                    return <div styleName="item-data-up">
                         <div styleName="separable-bonus">可分奖金</div>
                         <div styleName="bonus-amount">
                             {item.isValid == "暂无瓜分资格" ? item.isValid : `${item.isValid}元`}
                         </div>
                     </div>
+                }
+                return <div styleName="data-item" key={index}>
+                    {/*<div styleName="item-data-up">*/}
+                        {/*<div styleName="separable-bonus">可分奖金</div>*/}
+                        {/*<div styleName="bonus-amount">*/}
+                        {/*{item.isValid == "暂无瓜分资格" ? item.isValid : `${item.isValid}元`}*/}
+                        {/*</div>*/}
+                        {/**/}
+                    {/*</div>*/}
+                    {item.isValid == "暂无瓜分资格" ? disability : ability(item)}
                     <div styleName="item-data-down">
                         <div styleName={`username itemdown-${index}`}>{item.realName}</div>
                         <div styleName="add-year">好友累投年化</div>
@@ -283,8 +298,8 @@ class JulyPC extends React.Component {
         let expalin_panel = <div styleName="pc-explain">
             <div styleName="explain">
                 <div styleName="explain-title">活动说明</div>
-                1.活动期间，投资债权转让产品，不能参与本次活动；
-                若被邀请人首次投资选择债权转让项目，则该被邀请的好友不计入邀请人奖励统计；<br />
+                1.活动期间，投资转让项目，不能参与本次活动；
+                若被邀请人首次投资选择转让项目，则该被邀请的好友不计入邀请人奖励统计；<br />
                 2.投资等额标时，＞18个月的项目按18个月计算年化投资额；<br />
                 3.排序规则：按累投年化先后顺序排名，累投年化相同时以达到该累投年化的先后顺序为准。<br />
                 4.奖金奖励以工豆形式发放，工豆奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br />
@@ -311,7 +326,7 @@ class JulyPC extends React.Component {
                 <div styleName="invite-pc-after" onClick={this.showHowInvite}>
                     如何邀请
                 </div>
-                <a href="" styleName="pc-invest">立即投资</a>
+                <a href="https://www.9888keji.com/" styleName="pc-invest">立即投资</a>
             </div>;
             let unlogged = <div styleName="log-box unlogged-box">
                 请登录后查看您活动内的邀友和投标情况，

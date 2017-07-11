@@ -311,6 +311,10 @@
     padding-top: 5px;
 }
 
+.item-data-up .data-up-disability {
+    line-height: 57px;
+}
+
 .item-data-down {
     font-size: 24px;
     text-align: center;

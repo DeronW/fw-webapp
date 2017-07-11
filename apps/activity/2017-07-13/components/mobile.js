@@ -123,19 +123,25 @@ class JulyMobile extends React.Component {
             let {fightdata} = this.props
             // let fightdata = []
             let person_data_func = (item, index) => {
+                let disability_text = <div styleName="top-item-up">
+                    暂无奖金
+                </div>
+                let ability_text = (item) => {
+                    return <div styleName="person-up">
+                        <div styleName="person-title">可分奖金</div>
+                        <div styleName="person-number">{item.isValid}</div>
+                    </div>
+                }
                 return <div styleName="top-item" key={index}>
                     <div styleName="top-item-left">
                         <img src={require(`../images/mobile/m-top${index + 1}.jpg`)}/>
                     </div>
                     <div styleName={`top-item-right top-r-${index + 1}`}>
-                        <div styleName="person-up">
-                            <div styleName="person-title">可分奖金</div>
-                            <div styleName="person-number">{item.isValid}</div>
-                        </div>
+                        {item.isValid == "暂无瓜分资格" ? disability_text : ability_text(item)}
                         <div styleName="person-down">
                             <div styleName="person-realName">{item.realName}</div>
                             <div styleName="person-subtitle">好友累投年化</div>
-                            <div styleName="person-total">{item.year_amt_sum}元</div>
+                            <div styleName="person-total">{item.yearAmtSum}元</div>
                         </div>
                     </div>
                 </div>
@@ -291,7 +297,7 @@ class JulyMobile extends React.Component {
         let explain_panel = <div styleName="m-explain">
             <div styleName="m-e-text">
                 <div styleName="m-x-title">活动说明</div>
-                1.活动期间，投资债权转让产品，不能参与本次活动；若被邀请人首次投资选择债权转让项目，则该被邀请的好友不计入邀请人奖励统计；<br/>
+                1.活动期间，投资转让项目，不能参与本次活动；若被邀请人首次投资选择转让项目，则该被邀请的好友不计入邀请人奖励统计；<br/>
                 2.投资等额标时，＞18个月的项目按18个月计算年化投资额<br/>
                 3.排序规则：按累投年化先后顺序排名，累投年化相同时以达到该累投年化的先后顺序为准。<br/>
                 4.奖金奖励以工豆形式发放，工豆奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；<br/>
