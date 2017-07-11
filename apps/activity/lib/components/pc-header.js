@@ -84,7 +84,7 @@ class PCHeader extends React.Component {
                     {!isLogin && <div styleName="btn-link-sp"></div>}
 
                     {logout}{user_panel()}
-
+                    {isLogin && <div styleName="btn-link-sp"></div>}
                     <div styleName="btn-link btn-download-app" target="_blank"
                          href="http://www.9888keji.com/static/web/app-download/index.html">APP下载
                         <div styleName="download-app">
