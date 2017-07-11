@@ -55,6 +55,13 @@ if(params.JENKINS_NODE != 'front-virtual') {
         stage('Publish') {
             sh 'mkdir -p ~/workspace/front-$PROJECT/cdn/$PROJECT/placeholder/'
             sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ /srv/static/$PROJECT/'
+
+            if(params.EXTRA_SERVER_IP) {
+                sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ www@$EXTRA_SERVER_IP:/static/$PROJECT/'
+            }
+            if(params.EXTRA_SERVER_IP_2) {
+                sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
+            }
         }
     }
 }
@@ -114,6 +121,13 @@ if(params.JENKINS_NODE == 'front-virtual') {
         stage('Publish') {
             sh 'mkdir -p ~/workspace/front-$PROJECT/cdn/$PROJECT/placeholder/'
             sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ /srv/static/$PROJECT/'
+
+            if(params.EXTRA_SERVER_IP) {
+                sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ www@$EXTRA_SERVER_IP:/static/$PROJECT/'
+            }
+            if(params.EXTRA_SERVER_IP_2) {
+                sh 'rsync -arI ~/workspace/front-$PROJECT/cdn/$PROJECT/ www@$EXTRA_SERVER_IP_2:/static/$PROJECT/'
+            }
         }
     }
 }
