@@ -11,7 +11,7 @@ const LINKS = {
         app: '投资'
     },
     '登录': {
-        web: 'http://passport.9888keji.com/passport/login',
+        web: 'http://passport.gongchangp2p.cn/passport/login',
         mobile: PROTOCOL + '//m.9888.cn/mpwap/orderuser/toLogin.shtml',
         app: '登录'
     },
