@@ -108,6 +108,7 @@ class ApplyTenMillionLoan extends React.Component {
                         })
                     }, e => {
                         if(e.code == 20020){
+                            this.reGetCaptchaHandler();
                             clearInterval(this.timer)
                             $FW.Component.Toast(e.message);
                         }

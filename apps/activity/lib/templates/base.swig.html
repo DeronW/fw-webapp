@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <!--[if lt IE 9 ]>
-<html lang="zh-cn" class="not-support-ie8"> <![endif]-->
+<html lang="zh-cn" class="not-support-ie8">
+<![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!-->
-<html class1="not-support-ie8">
+<html>
 <!--<![endif]-->
 
 <head>
@@ -41,7 +42,7 @@
 <script>
     // 如果是IE8及以下版本的浏览器, 弹出浏览器升级提示框
     var tag = document.getElementsByTagName('html')[0];
-    if (tag && tag.className.indexOf('not-supported-ie8') >= 0) {
+    if (tag && tag.className === 'not-support-ie8') {
         // 看来是不支持IE8了
         var iframe = document.createElement('iframe');
         iframe.src = 'http://www.9888keji.com/static/keji-web/update-browser/index.html'
