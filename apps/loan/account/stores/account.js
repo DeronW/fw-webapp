@@ -87,7 +87,7 @@ export default class Account {
             mobile: this.phone,
             password: password,
             verifyCode: sms_code
-        }).then(data => {
+        }, 'silence').then(data => {
             let dict = data.userPasswordOption;
             Storage.login({
                 token: dict.userToken,
@@ -113,7 +113,7 @@ export default class Account {
             password: pwd,
             verifyCode: sms_code,
             invitationCode: invite_code
-        }).then(data => {
+        }, 'silence').then(data => {
             let dict = data.userLogin
             Storage.login({
                 token: dict.userToken,
