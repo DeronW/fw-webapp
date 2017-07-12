@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/mobile.css'
 import MobileHeader from '../../lib/components/mobile-header.js'
-import {PopStartPanel, PopTeamTips, PopInviteMobile,PopEndPanel} from './popall.js'
+import {PopStartPanel, PopTeamTips, PopInviteMobile, PopEndPanel} from './popall.js'
 import gotoPage from '../../lib/helpers/goto-page.js'
 
 
@@ -14,7 +14,7 @@ class JulyMobile extends React.Component {
         this.state = {
             timestamp: null,
             isLogin: this.props.isLogin,
-            bottom_close:false,
+            bottom_close: false,
         }
     }
 
@@ -35,7 +35,7 @@ class JulyMobile extends React.Component {
     popStatusHandler = (timestamp) => {
         if (timestamp < 1499875200000) {
             ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
-        } else if (timestamp > 1502726400000) {
+        } else if (timestamp > 1502726400000 + 60 * 60 * 24 * 7 * 1000) {
             ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
         } else {
             ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
@@ -60,9 +60,10 @@ class JulyMobile extends React.Component {
         gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
 
-    bottomHandler = ()=>{
-        this.setState({bottom_close:true})
+    bottomHandler = () => {
+        this.setState({bottom_close: true})
     }
+
     render() {
         let {isLogin, timestamp} = this.state
         let coupon_panel = <div styleName="m-coupon">
@@ -266,8 +267,8 @@ class JulyMobile extends React.Component {
                     <span styleName="howinvite-pre" onClick={this.showInvitePop}>如何邀请</span>
                 </div>
             </div>
-            let bottom_style = this.state.bottom_close?"none":"block"
-            return <div styleName="m-bottom" style={{'display':bottom_style}}>
+            let bottom_style = this.state.bottom_close ? "none" : "block"
+            return <div styleName="m-bottom" style={{'display': bottom_style}}>
                 {isLogin ? logged_text : notlogged_text}
                 <div styleName="m_bottom_close" onClick={this.bottomHandler}>&times;</div>
             </div>
