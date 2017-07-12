@@ -35,9 +35,7 @@ class JulyPC extends React.Component {
     popStatusHandler = (timestamp) => {
         //1499875200000   2017-07-13 00:00:00
         //1502726400000   2017-08-15 00:00:00
-        if (timestamp < 1499875200000) {
-            ReactDOM.render(<PopStartPanel />, document.getElementById("pop"))
-        } else if (timestamp > 1502726400000 + 60 * 60 * 24 * 7 *1000) {
+        if (timestamp > 1502726400000 + 60 * 60 * 24 * 7 * 1000) {
             ReactDOM.render(<PopEndPanel />, document.getElementById("pop"))
         } else {
             ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
@@ -138,7 +136,9 @@ class JulyPC extends React.Component {
                     <div styleName="item-data-down">
                         <div styleName={`username itemdown-${index}`}>{item.realName}</div>
                         <div styleName="add-year">好友累投年化</div>
-                        <div styleName="year-amount">{item.yearAmtSum}元</div>
+                        <div styleName="year-amount">
+                            {item.yearAmtSum}元
+                        </div>
                     </div>
                 </div>
             }
@@ -241,15 +241,14 @@ class JulyPC extends React.Component {
             let {isLogin, closeBottom} = this.state;
             let {singledata} = this.props;
             let close_name = closeBottom ? "none" : "block";
+            let team_des = <span>
+                ，团队累投年化<span styleName="color-yellow">{singledata.yearAmtSumAll}</span> 。           </span>
             let logged = <div styleName="log-box logged-box">
                 活动内，您有效邀友
                 <span styleName="color-yellow">{singledata.ucount}个</span>
                 ，有效好友累投年化
                 <span styleName="color-yellow">{singledata.yearAmtSum}元</span>
-                ，团队累投年化
-                <span styleName="color-yellow">
-                    {singledata.yearAmtSumAll ? singledata.yearAmtSumAll : '0'}元
-                </span> 。
+                {((singledata.yearAmtSumAll == '0') || (!singledata.yearAmtSumAll)) ? null : team_des}
                 <div styleName="invite-pc-after" onClick={this.showHowInvite}>
                     如何邀请
                 </div>

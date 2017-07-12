@@ -33,9 +33,7 @@ class JulyMobile extends React.Component {
     }
 
     popStatusHandler = (timestamp) => {
-        if (timestamp < 1499875200000) {
-            ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
-        } else if (timestamp > 1502726400000 + 60 * 60 * 24 * 7 * 1000) {
+        if (timestamp > 1502726400000 + 60 * 60 * 24 * 7 * 1000) {
             ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
         } else {
             ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
