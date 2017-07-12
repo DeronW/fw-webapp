@@ -2,12 +2,20 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
+<<<<<<< HEAD
+=======
+import { Get } from '../../lib/helpers/request.js'
+>>>>>>> refact
 import gotoPage from '../../lib/helpers/goto-page.js'
 import PCHeader from '../../lib/components/pc-header.js'
+<<<<<<< HEAD
 import {PopStartPanel, PopInvitePC, PopEndPanel} from './popall.js'
+=======
+import { PopStartPanel, PopTeamTips, PopInvitePC, PopEndPanel } from './popall.js'
+>>>>>>> refact
 
 
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class JulyPC extends React.Component {
     state = {
         timestamp: this.props.timestamp,
@@ -51,11 +59,11 @@ class JulyPC extends React.Component {
 
     showHowInvite = () => {
         ReactDOM.render(<PopInvitePC gotoLogin={this.props.gotoLogin} isLogin={this.state.isLogin}
-                                     closePopHandler={this.props.closePopHandler}/>, document.getElementById("pop"))
+            closePopHandler={this.props.closePopHandler} />, document.getElementById("pop"))
     }
 
     closeBottom = () => {
-        this.setState({closeBottom: true})
+        this.setState({ closeBottom: true })
     }
 
     login = () => {
@@ -66,16 +74,16 @@ class JulyPC extends React.Component {
         let content_panel = <div styleName="pc-content">
             <div styleName="pc-coupon">
                 <div styleName="coupon-title">
-                    <img src={require("../images/pc/coupon-title.png")}/>
+                    <img src={require("../images/pc/coupon-title.png")} />
                 </div>
                 <div styleName="coupon-des">
                     （APP专享）每周、限时抢高达千元返现、1%返息
                 </div>
                 <div styleName="coupon-code">
-                    <img src={require("../images/pc/coupon-qrcode.png")} styleName="coupon-pic"/>
+                    <img src={require("../images/pc/coupon-qrcode.png")} styleName="coupon-pic" />
                 </div>
                 <div styleName="code-tips">
-                    <img src={require("../images/pc/coupon-code-tips.png")}/>
+                    <img src={require("../images/pc/coupon-code-tips.png")} />
                     <div styleName="tips-text">
                         <div>扫描二维码下载金融工场APP</div>
                         <div>即可到 APP-领券中心 参与抢券狂欢</div>
@@ -84,7 +92,7 @@ class JulyPC extends React.Component {
             </div>
             <div styleName="pc-welfare">
                 <div styleName="welfare-title">
-                    <img src={require("../images/pc/welfare-title.png")}/>
+                    <img src={require("../images/pc/welfare-title.png")} />
                 </div>
                 <div styleName="welfare-tips">
                     注册7天内，累投年化额≥1000元算一个有效邀请
@@ -118,7 +126,7 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let fight_panel = () => {
-            let {fightdata} = this.props;
+            let { fightdata } = this.props;
             let fight_data_func = (item, index) => {
                 let disability = <div styleName="item-data-up">
                     <div styleName="data-up-disability">
@@ -134,6 +142,16 @@ class JulyPC extends React.Component {
                     </div>
                 }
                 return <div styleName="data-item" key={index}>
+<<<<<<< HEAD
+=======
+                    {/*<div styleName="item-data-up">*/}
+                    {/*<div styleName="separable-bonus">可分奖金</div>*/}
+                    {/*<div styleName="bonus-amount">*/}
+                    {/*{item.isValid == "暂无瓜分资格" ? item.isValid : `${item.isValid}元`}*/}
+                    {/*</div>*/}
+                    {/**/}
+                    {/*</div>*/}
+>>>>>>> refact
                     {item.isValid == "暂无瓜分资格" ? disability : ability(item)}
                     <div styleName="item-data-down">
                         <div styleName={`username itemdown-${index}`}>{item.realName}</div>
@@ -183,46 +201,13 @@ class JulyPC extends React.Component {
                         游泳中...
                     </div>
                 </div>
-                if (fightdata.length == 0) {
-                    return <div styleName="fight-data-box">
-                        {nodata_item_one}
-                        {nodata_two}
-                        {nodata_three}
-                        {nodata_four}
-                        {nodata_five}
-                    </div>
-                } else if (fightdata.length == 1) {
-                    return <div styleName="fight-data-box">
-                        {fightdata.map(fight_data_func)}
-                        {nodata_two}
-                        {nodata_three}
-                        {nodata_four}
-                        {nodata_five}
-                    </div>
-                } else if (fightdata.length == 2) {
-                    return <div styleName="fight-data-box">
-                        {fightdata.map(fight_data_func)}
-                        {nodata_three}
-                        {nodata_four}
-                        {nodata_five}
-                    </div>
-
-                } else if (fightdata.length == 3) {
-                    return <div styleName="fight-data-box">
-                        {fightdata.map(fight_data_func)}
-                        {nodata_four}
-                        {nodata_five}
-                    </div>
-                } else if (fightdata.length == 4) {
-                    return <div styleName="fight-data-box">
-                        {fightdata.map(fight_data_func)}
-                        {nodata_five}
-                    </div>
-                } else if (fightdata.length == 5) {
-                    return <div styleName="fight-data-box">
-                        {fightdata.map(fight_data_func)}
-                    </div>
-                }
+                return <div styleName="fight-data-box">
+                    {fightdata.length > 0 ? fightdata.map(fight_data_func) : nodata_item_one}
+                    {fightdata.length > 1 ? '' : nodata_two}
+                    {fightdata.length > 2 ? '' : nodata_three}
+                    {fightdata.length > 3 ? '' : nodata_four}
+                    {fightdata.length > 4 ? '' : nodata_five}
+                </div>
 
             }
             return <div styleName="pc-fight">
@@ -230,7 +215,7 @@ class JulyPC extends React.Component {
             </div>
         }
         let bonus_panel = <div styleName="pc-bonus">
-            <img src={require("../images/pc/bonus-title.png")} styleName="bonus-title"/>
+            <img src={require("../images/pc/bonus-title.png")} styleName="bonus-title" />
             <div styleName="bouns-tips">
                 活动期间，团队累投年化额≥350万且排名前10的用户，瓜分88万奖金！
             </div>
@@ -242,7 +227,7 @@ class JulyPC extends React.Component {
                 </div>
             </div>
             <div styleName="bonus-context">
-                <img src={require("../images/pc/bonus-box.png")}/>
+                <img src={require("../images/pc/bonus-box.png")} />
                 <div styleName="bonus-bottom">
                     <div styleName="bonus-text">
                         奖金分配方式：<br />
@@ -253,7 +238,12 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let rank_panel = () => {
+<<<<<<< HEAD
             let {rankdata} = this.state
+=======
+            let { rankdata } = this.state
+            // console.log(`this.state.rankdata.length:${this.state.rankdata.length}`)
+>>>>>>> refact
             let empty = <div styleName="rank-data">
                 <div styleName="empty-box">
                     参赛团队还在努力准备中...
@@ -301,8 +291,8 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let bottom_panel = () => {
-            let {isLogin, closeBottom} = this.state;
-            let {singledata} = this.props;
+            let { isLogin, closeBottom } = this.state;
+            let { singledata } = this.props;
             let close_name = closeBottom ? "none" : "block";
             let logged = <div styleName="log-box logged-box">
                 活动内，您有效邀友
@@ -323,9 +313,9 @@ class JulyPC extends React.Component {
                 <div styleName="pre-login" onClick={this.login}>立即登录</div>
                 <div styleName="invite-pc-pre" onClick={this.showHowInvite}>如何邀请</div>
             </div>;
-            return <div styleName="bottom-box" style={{display: close_name}}>
+            return <div styleName="bottom-box" style={{ display: close_name }}>
                 {isLogin ? logged : unlogged}
-                <img src={require("../images/pc/ship.png")} styleName="pic-ship"/>
+                <img src={require("../images/pc/ship.png")} styleName="pic-ship" />
                 <div styleName="bottom-btn" onClick={this.closeBottom}>&times;</div>
             </div>
         }
@@ -334,15 +324,15 @@ class JulyPC extends React.Component {
             <div styleName="pc-banner">
                 <div styleName="pc-banner-pics">
                     <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one"
-                         onClick={() => this.scroll(0, 1100)}/>
+                        onClick={() => this.scroll(0, 1100)} />
                     <img src={require("../images/pc/anchor-2.png")} styleName="anchor-item anchor-two"
-                         onClick={() => this.scroll(0, 3500)}/>
+                        onClick={() => this.scroll(0, 3500)} />
                     <img src={require("../images/pc/anchor-3.png")} styleName="anchor-item anchor-three"
-                         onClick={() => this.scroll(0, 2800)}/>
+                        onClick={() => this.scroll(0, 2800)} />
                     <img src={require("../images/pc/anchor-4.png")} styleName="anchor-item anchor-four"
-                         onClick={() => this.scroll(0, 2300)}/>
+                        onClick={() => this.scroll(0, 2300)} />
                     <img src={require("../images/pc/anchor-5.png")} styleName="anchor-item anchor-five"
-                         onClick={() => this.scroll(0, 4920)}/>
+                        onClick={() => this.scroll(0, 4920)} />
                 </div>
             </div>
             {content_panel}
