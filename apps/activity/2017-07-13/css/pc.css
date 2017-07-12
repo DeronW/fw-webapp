@@ -150,7 +150,7 @@
 
 .tips-text {
     position: absolute;
-    top: 42px;
+    top: 40px;
     left: 50%;
     font-size: 20px;
     color: #677ba8;
@@ -468,19 +468,19 @@
 }
 
 .item-one {
-    padding-left: 40px;
+    padding-left: 30px;
 }
 
 .item-two {
-    padding-left: 86px;
+    padding-left: 66px;
 }
 
 .item-three {
-    padding-left: 74px;
+    padding-left: 82px;
 }
 
 .item-four {
-    padding-left: 60px;
+    padding-left: 68px;
 }
 
 .rank-data {
@@ -507,19 +507,20 @@
 }
 
 .rank-num {
-    width: 95px;
+    width: 75px;
 }
 
 .rank-username {
-    width: 148px;
+    width: 130px;
 }
 
 .rank-total {
-    width: 160px;
+    width: 186px;
 }
 
 .rank-bonus {
-    width: 126px;
+    width: 128px;
+    color: #ff2f4c;
 }
 
 .empty-box {
@@ -580,7 +581,7 @@
     font-size: 16px;
     text-align: center;
     color: #fff;
-    padding-top: 35px;
+    padding-top: 30px;
 }
 
 .bottom-btn {

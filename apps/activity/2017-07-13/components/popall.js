@@ -152,13 +152,13 @@ class PopInvitePC extends React.Component {
                     <span styleName="order">2</span>
                     复制以下链接，发送工场码给好友邀请TA来注册&投资吧！
                 </div>
-                <div styleName="copy-text">
-                    http://www.gongchangp2p.cn/depository/regist/toRegist.shtml?gcm= {gcm}
-                </div>
                 <button styleName="copy-link"
                         data-clipboard-text={`http://www.gongchangp2p.cn/depository/regist/toRegist.shtml?gcm= ${gcm}`}
                         id="copy-value-pc">复制链接
                 </button>
+                <div styleName="copy-text">
+                    http://www.gongchangp2p.cn/depository/regist/toRegist.shtml?gcm= {gcm}
+                </div>
             </div>
             <div styleName="logged-tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span
                 styleName="color-red">350元</span></div>

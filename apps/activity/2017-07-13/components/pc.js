@@ -2,11 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
-import {Get} from '../../lib/helpers/request.js'
 import gotoPage from '../../lib/helpers/goto-page.js'
-
 import PCHeader from '../../lib/components/pc-header.js'
-import {PopStartPanel, PopTeamTips, PopInvitePC, PopEndPanel} from './popall.js'
+import {PopStartPanel, PopInvitePC, PopEndPanel} from './popall.js'
 
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
@@ -28,7 +26,7 @@ class JulyPC extends React.Component {
             fightdata: nextProps.fightdata
         });
         //活动状态判断
-        // this.popStatusHandler(nextProps.timestamp)
+        this.popStatusHandler(nextProps.timestamp)
     }
 
     componentDidMount() {
@@ -136,13 +134,6 @@ class JulyPC extends React.Component {
                     </div>
                 }
                 return <div styleName="data-item" key={index}>
-                    {/*<div styleName="item-data-up">*/}
-                        {/*<div styleName="separable-bonus">可分奖金</div>*/}
-                        {/*<div styleName="bonus-amount">*/}
-                        {/*{item.isValid == "暂无瓜分资格" ? item.isValid : `${item.isValid}元`}*/}
-                        {/*</div>*/}
-                        {/**/}
-                    {/*</div>*/}
                     {item.isValid == "暂无瓜分资格" ? disability : ability(item)}
                     <div styleName="item-data-down">
                         <div styleName={`username itemdown-${index}`}>{item.realName}</div>
@@ -263,7 +254,6 @@ class JulyPC extends React.Component {
         </div>
         let rank_panel = () => {
             let {rankdata} = this.state
-            // console.log(`this.state.rankdata.length:${this.state.rankdata.length}`)
             let empty = <div styleName="rank-data">
                 <div styleName="empty-box">
                     参赛团队还在努力准备中...
@@ -340,7 +330,7 @@ class JulyPC extends React.Component {
             </div>
         }
         return <div styleName="july-pc-box">
-            <PCHeader />
+            <PCHeader bgColor="rgba(0,0,0,0.5)"/>
             <div styleName="pc-banner">
                 <div styleName="pc-banner-pics">
                     <img src={require("../images/pc/anchor-1.png")} styleName="anchor-item anchor-one"
