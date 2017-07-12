@@ -135,8 +135,6 @@ function tellApp(word, value) {
 export default (word, value) => {
     if (Browser.inApp) {
         tellApp(LINKS[word].app)
-    } else if (Browser.inMobile) {
-        location.href = word == '登录' ? `${LINKS[word].mobile}?is_mall=3&redirect_url=${value}` : LINKS[word].mobile;
     } else {
         location.href = word == '登录' ? `${LINKS[word].web}?service=${value}` : LINKS[word].web;
     }

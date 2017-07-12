@@ -13,7 +13,8 @@ class JulyMobile extends React.Component {
         super(props)
         this.state = {
             timestamp: null,
-            isLogin: this.props.isLogin
+            isLogin: this.props.isLogin,
+            bottom_close:false,
         }
     }
 
@@ -59,6 +60,9 @@ class JulyMobile extends React.Component {
         gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
 
+    bottomHandler = ()=>{
+        this.setState({bottom_close:true})
+    }
     render() {
         let {isLogin, timestamp} = this.state
         let coupon_panel = <div styleName="m-coupon">
@@ -120,7 +124,6 @@ class JulyMobile extends React.Component {
         </div>
         let fight_panel = () => {
             let {fightdata} = this.props
-            // let fightdata = []
             let person_data_func = (item, index) => {
                 let disability_text = <div styleName="top-item-up">
                     暂无奖金
@@ -146,91 +149,24 @@ class JulyMobile extends React.Component {
                 </div>
             }
             let fight_data_box = () => {
-                let data_item_one = <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top1.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-1">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">马上就来...</div>
-                    </div>
-                </div>
-                let data_item_two = <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top2.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-2">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">在潜艇上......</div>
-                    </div>
-                </div>
-                let data_item_three = <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top3.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-3">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">在游轮上...</div>
-                    </div>
-                </div>
-                let data_item_four = <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top4.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-4">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">在帆船上...</div>
-                    </div>
-                </div>
-                let data_item_five = <div styleName="top-item">
-                    <div styleName="top-item-left">
-                        <img src={require("../images/mobile/m-top5.jpg")}/>
-                    </div>
-                    <div styleName="top-item-right top-r-5">
-                        <div styleName="top-item-up">暂无奖金</div>
-                        <div styleName="top-item-down">游泳中...</div>
-                    </div>
-                </div>
-                if (fightdata.length == 0) {
-                    return <div styleName="f-data-box">
-                        {data_item_one}
-                        {data_item_two}
-                        {data_item_three}
-                        {data_item_four}
-                        {data_item_five}
-                    </div>
-                } else if (fightdata.length == 1) {
-                    return <div styleName="f-data-box">
-                        {fightdata.map(person_data_func)}
-                        {data_item_two}
-                        {data_item_three}
-                        {data_item_four}
-                        {data_item_five}
-                    </div>
-
-                } else if (fightdata.length == 2) {
-                    return <div styleName="f-data-box">
-                        {fightdata.map(person_data_func)}
-                        {data_item_three}
-                        {data_item_four}
-                        {data_item_five}
-                    </div>
-                } else if (fightdata.length == 3) {
-                    return <div styleName="f-data-box">
-                        {fightdata.map(person_data_func)}
-                        {data_item_four}
-                        {data_item_five}
-                    </div>
-                } else if (fightdata.length == 4) {
-                    return <div styleName="f-data-box">
-                        {fightdata.map(person_data_func)}
-                        {data_item_five}
-                    </div>
-                } else if (fightdata.length == 5) {
-                    return <div styleName="f-data-box">
-                        {fightdata.map(person_data_func)}
+                let data_item_func = (num, text) => {
+                    return <div styleName="top-item">
+                        <div styleName="top-item-left">
+                            <img src={require(`../images/mobile/m-top${num}.jpg`)}/>
+                        </div>
+                        <div styleName={`top-item-right top-r-${num}`}>
+                            <div styleName="top-item-up">暂无奖金</div>
+                            <div styleName="top-item-down">{text}...</div>
+                        </div>
                     </div>
                 }
+                return <div styleName="f-data-box">
+                    {fightdata.length > 0 ? fightdata.map(person_data_func) : data_item_func(1, '马上就来')}
+                    {fightdata.length > 1 ? '' : data_item_func(2, '在潜艇上')}
+                    {fightdata.length > 2 ? '' : data_item_func(3, '在游轮上')}
+                    {fightdata.length > 3 ? '' : data_item_func(4, '在帆船上')}
+                    {fightdata.length > 4 ? '' : data_item_func(5, '游泳中')}
+                </div>
             }
             return <div styleName="m-fight">
                 <div styleName="m-f-title">
@@ -247,7 +183,7 @@ class JulyMobile extends React.Component {
             </div>
             <div styleName="m-n-tips">
                 <div>活动期间，团队累投年化额≥350万且排名前10的用户</div>
-                <div>送出88万奖金！</div>
+                <div>瓜分88万奖金！</div>
             </div>
             <div styleName="m-b-treasure">
                 <img src={require("../images/mobile/m-star.png")} styleName="treasure-pic" onClick={this.popTeamShow}/>
@@ -324,18 +260,20 @@ class JulyMobile extends React.Component {
                 </div>
             </div>
             let notlogged_text = <div styleName="m-notlogged">
-                <div styleName="pre-des">请登录后查看您活动内的邀友和投标情况，</div>
+                <div styleName="pre-des">请登录后查看您活动内的邀友和投标情况</div>
                 <div styleName="pre-text">
                     <span styleName="pre-golog" onClick={this.login}>立即登录</span>
                     <span styleName="howinvite-pre" onClick={this.showInvitePop}>如何邀请</span>
                 </div>
             </div>
-            return <div styleName="m-bottom">
+            let bottom_style = this.state.bottom_close?"none":"block"
+            return <div styleName="m-bottom" style={{'display':bottom_style}}>
                 {isLogin ? logged_text : notlogged_text}
+                <div styleName="m_bottom_close" onClick={this.bottomHandler}>&times;</div>
             </div>
         }
         return <div styleName="july-mobile-box">
-            <MobileHeader/>
+            <MobileHeader bgColor="rgba(0,0,0,0.5)"/>
             <div styleName="m-banner">
                 <img src={require("../images/mobile/m-anchor-1.png")} styleName="banner-item m-anchor-one"
                      onClick={() => this.startmove(0, 700)}/>
