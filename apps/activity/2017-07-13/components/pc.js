@@ -242,13 +242,13 @@ class JulyPC extends React.Component {
             let {singledata} = this.props;
             let close_name = closeBottom ? "none" : "block";
             let team_des = <span>
-                ，团队累投年化<span styleName="color-yellow">{singledata.yearAmtSumAll}</span> 。           </span>
+                ，团队累投年化<span styleName="color-yellow">{singledata.yearAmtSumAll}元</span>            </span>
             let logged = <div styleName="log-box logged-box">
                 活动内，您有效邀友
                 <span styleName="color-yellow">{singledata.ucount}个</span>
                 ，有效好友累投年化
                 <span styleName="color-yellow">{singledata.yearAmtSum}元</span>
-                {((singledata.yearAmtSumAll == '0') || (!singledata.yearAmtSumAll)) ? null : team_des}
+                {((singledata.yearAmtSumAll == '0') || (!singledata.yearAmtSumAll)) ? null : team_des}。
                 <div styleName="invite-pc-after" onClick={this.showHowInvite}>
                     如何邀请
                 </div>
