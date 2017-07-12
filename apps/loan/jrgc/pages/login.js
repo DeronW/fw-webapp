@@ -33,9 +33,9 @@ class Login extends React.Component {
         if (jrgc_web) sourceType = 5;
 
         NativeBridge.trigger("refresh_loan_token");
-        window.onNativeMessageReceive = function (data) {
+        NativeBridge.onReceive(data => {
             data.token ? this.login(data.token) : NativeBridge.login()
-        }
+        })
     }
     login = (jrcgToken) => {
          this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
@@ -51,7 +51,7 @@ class Login extends React.Component {
             })
             location.href = '/static/loan/jrgc/index.html#/home';
         }, e => Components.showAlert(e.message));
-    } 
+    }
     reload_jrgc = () => {
         location.href = "/static/loan/jrgc/index.html#/login"
     }
@@ -60,7 +60,7 @@ class Login extends React.Component {
     render() {
         return <div>
             {!Browser.inJRGCApp && <Header title={'跳转'} />}
-            
+
             <div styleName="delayPanel" style={{display: this.state.show ? 'block':"none"}}>
                 <div styleName="tip">很抱歉，访问此页面暂时出现问题</div>
                 <div styleName="tip-img"><img src={require("../images/icon.png")} /></div>
