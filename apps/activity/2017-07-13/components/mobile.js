@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/mobile.css'
 import MobileHeader from '../../lib/components/mobile-header.js'
-import {PopStartPanel, PopTeamTips, PopInviteMobile} from './popall.js'
+import {PopStartPanel, PopTeamTips, PopInviteMobile,PopEndPanel} from './popall.js'
 import gotoPage from '../../lib/helpers/goto-page.js'
 
 
@@ -26,7 +26,7 @@ class JulyMobile extends React.Component {
             fightdata: nextProps.fightdata
         });
         //活动状态判断
-        this.popStatusHandler(nextProps.timestamp)
+        // this.popStatusHandler(nextProps.timestamp)
     }
 
     componentDidMount() {
