@@ -9,6 +9,7 @@ import {NativeBridge} from '../../lib/helpers'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class AboutUs extends React.Component {
     render() {
+        let {history} = this.props
         let Browser = new BrowserFactory(navigator.userAgent, 'EasyLoan888');
         let goBack = () => {
             Browser.inApp ? NativeBridge.close() : history.goBack()
