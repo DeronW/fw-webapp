@@ -15,7 +15,7 @@ class ContactUs extends React.Component {
             Browser.inApp ? NativeBridge.close() : history.goBack()
         }
         return <div styleName="bg">
-            <Header title="联系我们" goBack={goBack}/>
+            <Header title="联系我们" goBack={goBack} enable={'force'}/>
             <div styleName="banner">
                 <img src={require('../images/contact-us/banner.png')} />
             </div>
