@@ -26,7 +26,7 @@ class JulyPC extends React.Component {
             fightdata: nextProps.fightdata
         });
         //活动状态判断
-        this.popStatusHandler(nextProps.timestamp)
+        // this.popStatusHandler(nextProps.timestamp)
     }
 
     componentDidMount() {
