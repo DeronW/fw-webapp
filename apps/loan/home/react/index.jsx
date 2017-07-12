@@ -98,7 +98,7 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="content-wrap">
                 {$FW.Browser.inJRGCApp() ? null : <div><img src="images/banner.jpg"/></div>}
                 <div className="loan-product-container">
                     <div className="product-title">
@@ -118,6 +118,19 @@ class Home extends React.Component {
                 </div>
                 {this.state.showBulletin &&
                     <Bulletin bulletinCnt={this.state.bulletinCnt} handleBulletinExit={() => { this.setState({ showBulletin: false }) }} />}
+
+                <div className="official-info">
+                    <div className="official-links">
+                        <a onClick={()=>{gotoHandler('/static/loan/user-weixin-new-download/index.html')}}>下载APP</a>
+                        <span></span>
+                        <a onClick={()=>{gotoHandler('/static/loan/features/index.html#/about-us')}}>关于我们</a>
+                        <span></span>
+                        <a onClick={()=>{gotoHandler('/static/loan/features/index.html#/contact-us')}}>联系我们</a>
+                    </div>
+                    <div className="company-info">©2017 深圳市众利财富管理有限公司</div>
+                    <div className="company-info">粤ICP备17034889号-1</div>
+                </div>
+
             </div>
         )
     }

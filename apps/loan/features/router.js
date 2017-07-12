@@ -10,6 +10,7 @@ import More from './pages/more.js'
 import AboutUs from './pages/about-us.js'
 import FAQ from './pages/faq.js'
 import MarketApp from './pages/market-app.js'
+import ContactUs from './pages/cotact-us.js'
 
 export default (stores) => {
     return <Router>
@@ -19,6 +20,7 @@ export default (stores) => {
                 <Route exact path='/about-us' component={AboutUs} />
                 <Route exact path='/faq' component={FAQ} />
                 <Route exact path='/market-app' component={MarketApp} />
+                <Route exact path='/contact-us' component={ContactUs} />
             </Switch>
         </Provider>
     </Router>
