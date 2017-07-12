@@ -10,7 +10,7 @@ import More from './pages/more.js'
 import AboutUs from './pages/about-us.js'
 import FAQ from './pages/faq.js'
 import MarketApp from './pages/market-app.js'
-import ContactUs from './pages/cotact-us.js'
+import ContactUs from './pages/contact-us.js'
 
 export default (stores) => {
     return <Router>
