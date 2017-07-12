@@ -13,7 +13,8 @@ class JulyMobile extends React.Component {
         super(props)
         this.state = {
             timestamp: null,
-            isLogin: this.props.isLogin
+            isLogin: this.props.isLogin,
+            bottom_close:false,
         }
     }
 
@@ -59,6 +60,9 @@ class JulyMobile extends React.Component {
         gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
 
+    bottomHandler = ()=>{
+        this.setState({bottom_close:true})
+    }
     render() {
         let {isLogin, timestamp} = this.state
         let coupon_panel = <div styleName="m-coupon">
@@ -256,18 +260,20 @@ class JulyMobile extends React.Component {
                 </div>
             </div>
             let notlogged_text = <div styleName="m-notlogged">
-                <div styleName="pre-des">请登录后查看您活动内的邀友和投标情况，</div>
+                <div styleName="pre-des">请登录后查看您活动内的邀友和投标情况</div>
                 <div styleName="pre-text">
                     <span styleName="pre-golog" onClick={this.login}>立即登录</span>
                     <span styleName="howinvite-pre" onClick={this.showInvitePop}>如何邀请</span>
                 </div>
             </div>
-            return <div styleName="m-bottom">
+            let bottom_style = this.state.bottom_close?"none":"block"
+            return <div styleName="m-bottom" style={{'display':bottom_style}}>
                 {isLogin ? logged_text : notlogged_text}
+                <div styleName="m_bottom_close" onClick={this.bottomHandler}>&times;</div>
             </div>
         }
         return <div styleName="july-mobile-box">
-            <MobileHeader/>
+            <MobileHeader bgColor="rgba(0,0,0,0.5)"/>
             <div styleName="m-banner">
                 <img src={require("../images/mobile/m-anchor-1.png")} styleName="banner-item m-anchor-one"
                      onClick={() => this.startmove(0, 700)}/>
