@@ -62,8 +62,8 @@ class PCHeader extends React.Component {
         }
 
         return <div styleName="header-placeholder">
-            <div styleName="header" style={
-                {backgroundColor: this.props.bgColor || 'black'}}>
+            <div styleName="header" style=
+                {{backgroundColor: this.props.bgColor || 'black'}}>
                 <div styleName="header-panel">
                     <a styleName="nav-link" href="http://www.9888keji.com/">
                         <img src={require("../images/header/home.png")}/>

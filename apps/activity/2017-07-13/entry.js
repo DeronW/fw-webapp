@@ -40,7 +40,6 @@ class Content extends React.Component {
     getSelfData = () => {
         Get('/api/fiveYearsActivity/v1/getSelfYearAmt.do')
             .then(data => {
-                console.log(`data.data.realName:${data.data.realName}`)
                 this.setState({singledata: data.data})
             })
     }
@@ -59,8 +58,6 @@ class Content extends React.Component {
             singledata: this.state.singledata,
             fightdata: this.state.fightdata
         }
-        console.log(props.fightdata)
-        console.log(`props.singledata${props.singledata.realName}`)
         let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC {...props}/>
         return <div>
             {Content}
