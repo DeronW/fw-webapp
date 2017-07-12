@@ -617,6 +617,10 @@
     color: #ffe400;
 }
 
+.pre-login {
+    margin-left: 20px;
+}
+
 /*pc banner action*/
 @keyframes cloudMovePC {
     0% {
