@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
-import { Get } from '../../lib/helpers/request.js'
 import gotoPage from '../../lib/helpers/goto-page.js'
 import PCHeader from '../../lib/components/pc-header.js'
 import {PopStartPanel, PopInvitePC, PopEndPanel} from './popall.js'
@@ -135,13 +134,6 @@ class JulyPC extends React.Component {
                     </div>
                 }
                 return <div styleName="data-item" key={index}>
-                    {/*<div styleName="item-data-up">*/}
-                    {/*<div styleName="separable-bonus">可分奖金</div>*/}
-                    {/*<div styleName="bonus-amount">*/}
-                    {/*{item.isValid == "暂无瓜分资格" ? item.isValid : `${item.isValid}元`}*/}
-                    {/*</div>*/}
-                    {/**/}
-                    {/*</div>*/}
                     {item.isValid == "暂无瓜分资格" ? disability : ability(item)}
                     <div styleName="item-data-down">
                         <div styleName={`username itemdown-${index}`}>{item.realName}</div>
@@ -229,7 +221,6 @@ class JulyPC extends React.Component {
         </div>
         let rank_panel = () => {
             let { rankdata } = this.state
-            // console.log(`this.state.rankdata.length:${this.state.rankdata.length}`)
             let empty = <div styleName="rank-data">
                 <div styleName="empty-box">
                     参赛团队还在努力准备中...
