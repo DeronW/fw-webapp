@@ -183,7 +183,7 @@ class JulyMobile extends React.Component {
             </div>
             <div styleName="m-n-tips">
                 <div>活动期间，团队累投年化额≥350万且排名前10的用户</div>
-                <div>送出88万奖金！</div>
+                <div>瓜分88万奖金！</div>
             </div>
             <div styleName="m-b-treasure">
                 <img src={require("../images/mobile/m-star.png")} styleName="treasure-pic" onClick={this.popTeamShow}/>
