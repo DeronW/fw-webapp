@@ -242,7 +242,7 @@ class JulyMobile extends React.Component {
         </div>
         let bottom_panel = () => {
             let {singledata} = this.props
-            let team_text =  <span>，团队累投年化
+            let team_text = <span>，团队累投年化
                     <span styleName="color-yellow">
                         {singledata.yearAmtSumAll ? singledata.yearAmtSumAll : "0"}元
                     </span> 。</span>
@@ -252,7 +252,7 @@ class JulyMobile extends React.Component {
                     <span styleName="color-yellow">{singledata.ucount}人</span>
                     ，有效好友累投年化
                     <span styleName="color-yellow">{singledata.yearAmtSum}元</span>
-                    {((singledata.yearAmtSumAll=='0')||(!singledata.yearAmtSumAll))? null:team_text}
+                    {((singledata.yearAmtSumAll == '0') || (!singledata.yearAmtSumAll)) ? null : team_text}
                 </div>
                 <div styleName="logged-text">
                     <span styleName="howinvite-after" onClick={this.showInvitePop}>如何邀请</span>
