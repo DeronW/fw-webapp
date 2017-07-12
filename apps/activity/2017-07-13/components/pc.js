@@ -2,17 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
-<<<<<<< HEAD
-=======
 import { Get } from '../../lib/helpers/request.js'
->>>>>>> refact
 import gotoPage from '../../lib/helpers/goto-page.js'
 import PCHeader from '../../lib/components/pc-header.js'
-<<<<<<< HEAD
 import {PopStartPanel, PopInvitePC, PopEndPanel} from './popall.js'
-=======
-import { PopStartPanel, PopTeamTips, PopInvitePC, PopEndPanel } from './popall.js'
->>>>>>> refact
 
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
@@ -142,8 +135,6 @@ class JulyPC extends React.Component {
                     </div>
                 }
                 return <div styleName="data-item" key={index}>
-<<<<<<< HEAD
-=======
                     {/*<div styleName="item-data-up">*/}
                     {/*<div styleName="separable-bonus">可分奖金</div>*/}
                     {/*<div styleName="bonus-amount">*/}
@@ -151,7 +142,6 @@ class JulyPC extends React.Component {
                     {/*</div>*/}
                     {/**/}
                     {/*</div>*/}
->>>>>>> refact
                     {item.isValid == "暂无瓜分资格" ? disability : ability(item)}
                     <div styleName="item-data-down">
                         <div styleName={`username itemdown-${index}`}>{item.realName}</div>
@@ -238,12 +228,8 @@ class JulyPC extends React.Component {
             </div>
         </div>
         let rank_panel = () => {
-<<<<<<< HEAD
-            let {rankdata} = this.state
-=======
             let { rankdata } = this.state
             // console.log(`this.state.rankdata.length:${this.state.rankdata.length}`)
->>>>>>> refact
             let empty = <div styleName="rank-data">
                 <div styleName="empty-box">
                     参赛团队还在努力准备中...
