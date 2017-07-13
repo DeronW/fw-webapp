@@ -69,7 +69,7 @@ class ProductDisplay extends React.Component {
 
         let _single_product_link = {
             display:"block",
-            width:"182px",
+            width:"200px",
             textAlign:"center",
             float:"left",
             marginBottom:"50px"
@@ -111,7 +111,7 @@ class ProductDisplay extends React.Component {
             height:"58px",
             position:"absolute",
             bottom:"-106px",
-            left:"270px"
+            left:"300px"
         }
 
         let singleProduct = (item, index) => {
