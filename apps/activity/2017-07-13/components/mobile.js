@@ -27,7 +27,7 @@ class JulyMobile extends React.Component {
             fightdata: nextProps.fightdata
         });
         //活动状态判断
-        // this.popStatusHandler(nextProps.timestamp)
+        this.popStatusHandler(nextProps.timestamp)
     }
 
     componentDidMount() {
@@ -251,7 +251,7 @@ class JulyMobile extends React.Component {
                 <div styleName="logged-des">
                     活动内，您有效邀友
                     <span styleName="color-yellow">{singledata.ucount}人</span>
-                    ，有效好友累投年化
+                    ，好友累投年化
                     <span styleName="color-yellow">{singledata.yearAmtSum}元</span>
                     {((singledata.yearAmtSumAll == '0') || (!singledata.yearAmtSumAll)) ? null : team_text}。
                 </div>
