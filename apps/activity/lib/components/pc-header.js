@@ -73,9 +73,9 @@ class PCHeader extends React.Component {
                     {/*<img src={require("../images/header/mall.png")} />*/}
                     {/*</a>*/}
 
-                    <a styleName="nav-link" href="http://bbs.9888.cn">
-                        <img src={require("../images/header/bbs.png")}/>
-                    </a>
+                    {/*<a styleName="nav-link" href="http://bbs.9888.cn">*/}
+                        {/*<img src={require("../images/header/bbs.png")}/>*/}
+                    {/*</a>*/}
 
                     {!isLogin &&
                     <a styleName="btn-link" href="/depository/regist/toRegist.shtml?sourceSite=jrgc">注册</a>}

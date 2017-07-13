@@ -40,14 +40,12 @@ class Login extends React.Component {
     }
 
     login = (jrcgToken,sourceType) => {
-        alert("jrgcToken:"+jrcgToken)
-        alert(sourceType)
          this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
             jrgcToken: jrcgToken,
             sourceType: sourceType
         }).then(data => {
             let dict = data;
-            alert(dict.token)
+            alert(dict.userStatus)
             Storage.setUserDict({
                 token: dict.token,
                 status: dict.userStatus,
