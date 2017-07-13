@@ -5,6 +5,7 @@ import styles from '../css/mobile.css'
 import MobileHeader from '../../lib/components/mobile-header.js'
 import {PopStartPanel, PopTeamTips, PopInviteMobile, PopEndPanel} from './popall.js'
 import gotoPage from '../../lib/helpers/goto-page.js'
+import Browser from '../../lib/helpers/browser.js'
 
 
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
@@ -273,7 +274,7 @@ class JulyMobile extends React.Component {
             </div>
         }
         return <div styleName="july-mobile-box">
-            <MobileHeader bgColor="rgba(0,0,0,0.5)"/>
+            {Browser.inApp ? null : <MobileHeader bgColor="rgba(0,0,0,0.5)"/>}
             <div styleName="m-banner">
                 <img src={require("../images/mobile/m-anchor-1.png")} styleName="banner-item m-anchor-one"
                      onClick={() => this.startmove(0, 700)}/>

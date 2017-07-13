@@ -30,7 +30,7 @@ class Content extends React.Component {
         Get('/api/fiveYearsActivity/v1/getTeamAndSelfYearAmt.do')
             .then(data => {
                 this.setState({rankdata: data.data})
-            });
+            }, () => true);
         Get('/api/fiveYearsActivity/v1/getTeamYam.do')
             .then(data => {
                 this.setState({fightdata: data.data})
