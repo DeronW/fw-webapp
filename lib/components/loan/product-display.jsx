@@ -15,7 +15,7 @@ class ProductDisplay extends React.Component {
     componentDidMount() {
         $FXH.Post(`${API_PATH}/api/product/v1/productDisplayList.json`,{
             pageIndex:1,
-            pageSize:100,
+            pageSize:8,
             productDisplayType:3
         }).then(data => {
             this.setState({productList: data.resultList })

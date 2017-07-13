@@ -99,7 +99,6 @@ class Home extends React.Component {
     render() {
         return (
             <div className="content-wrap">
-                <ProductDisplay/>
                 {$FW.Browser.inJRGCApp() ? null : <div><img src="images/banner.jpg"/></div>}
                 <div className="loan-product-container">
                     <div className="product-title">
