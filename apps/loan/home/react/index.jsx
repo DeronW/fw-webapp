@@ -119,7 +119,7 @@ class Home extends React.Component {
                 {this.state.showBulletin &&
                     <Bulletin bulletinCnt={this.state.bulletinCnt} handleBulletinExit={() => { this.setState({ showBulletin: false }) }} />}
 
-                <div className="official-info">
+                {!$FW.Browser.inApp() && <div className="official-info">
                     <div className="official-links">
                         <a onClick={()=>{gotoHandler('/static/loan/user-weixin-new-download/index.html')}}>下载APP</a>
                         <span></span>
@@ -129,7 +129,7 @@ class Home extends React.Component {
                     </div>
                     <div className="company-info">©2017 深圳市众利财富管理有限公司</div>
                     <div className="company-info">粤ICP备17034889号-1</div>
-                </div>
+                </div>}
 
             </div>
         )

@@ -67,6 +67,44 @@ class ProductDisplay extends React.Component {
             lineHeight:"38px"
         }
 
+        let _single_product_link = {
+            display:"block",
+            width:"165px",
+            textAlign:"center"
+        }
+
+        let _product_logo = {
+            width:"90px",
+            height:"90px"
+        }
+
+        let _product_name = {
+            fontSize:"32px",
+            color:"#333"
+        }
+
+        let _product_label = {
+            width:"165px",
+            lineHeight:"36px",
+            background:"#edf5ff",
+            borderRadius:"18px",
+            fontSize:"24px",
+            color:"#6aa4f0"
+        }
+
+
+        let singleProduct = (index, item) => {
+            let generate_labels = (label) => (
+                <span key={lab}>{label.labelValue}</span>
+            );
+            return (
+                <a key={index} href={item.productDetailUrl} style={_single_product_link}>
+                     <img src={item.productLogo} style={_product_logo}/>
+                     <span style={_product_name}>{item.productName}</span>
+                     <span style={_product_label}>{item.productLabelList && item.productLabelList.map(generate_labels)}</span>
+                </a>
+            )
+        }
 
         return <div style={_product_mask}>
             <div style={_product_popup}>
@@ -74,7 +112,7 @@ class ProductDisplay extends React.Component {
                 <div style={_product_fail_reason}>您的用户信息与读秒不匹配无法授权登录读秒</div>
                 <div style={_product_tip}>为方便您快速借到钱，推荐您申请以下借款产品</div>
                 <div>
-
+                    {this.state.productList && this.state.productList.map(singleProduct)}
                 </div>
             </div>
         </div>
