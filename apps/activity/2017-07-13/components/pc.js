@@ -26,7 +26,7 @@ class JulyPC extends React.Component {
             fightdata: nextProps.fightdata
         });
         //活动状态判断
-        // this.popStatusHandler(nextProps.timestamp)
+        this.popStatusHandler(nextProps.timestamp)
     }
 
     componentDidMount() {
@@ -246,7 +246,7 @@ class JulyPC extends React.Component {
             let logged = <div styleName="log-box logged-box">
                 活动内，您有效邀友
                 <span styleName="color-yellow">{singledata.ucount}个</span>
-                ，有效好友累投年化
+                ，好友累投年化
                 <span styleName="color-yellow">{singledata.yearAmtSum}元</span>
                 {((singledata.yearAmtSumAll == '0') || (!singledata.yearAmtSumAll)) ? null : team_des}。
                 <div styleName="invite-pc-after" onClick={this.showHowInvite}>
