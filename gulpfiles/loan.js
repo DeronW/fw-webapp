@@ -142,6 +142,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         include_components: [
             'use-strict.jsx', `${PROJ}/header.jsx`,
             `${PROJ}/bottom-nav-bar.jsx`,
+            `${PROJ}/product-display.jsx`,
             'confirm.jsx', 'nav.jsx',
             'loading.jsx', 'alert.jsx',
             'banner-group.jsx', 'toast.jsx',

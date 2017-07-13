@@ -19,7 +19,7 @@ class AboutUs extends React.Component {
             <div styleName="banner">
                 <img src={require('../images/about-us/logo.png')} />
                 <div styleName="banner-intro">
-                    放心花是由深圳市众利财富管理有限公司推出的基于移动端线上贷款信息聚合平台，满足您的各类贷款需求。
+                    放心花主要为用户提供短期的小额急借的现金借贷服务。用户通过授信认证获得授信额度，在额度内随时可进行借款，借款额度在500元-50000元之间。操作简单、方便快速、实时秒到账，做年轻人专属的手机钱包。
                     </div>
             </div>
             <div styleName="wexin-panel">
