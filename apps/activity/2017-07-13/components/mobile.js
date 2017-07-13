@@ -33,9 +33,7 @@ class JulyMobile extends React.Component {
     }
 
     popStatusHandler = (timestamp) => {
-        if (timestamp < 1499875200000) {
-            ReactDOM.render(<PopStartPanel/>, document.getElementById("pop"))
-        } else if (timestamp > 1502726400000 + 60 * 60 * 24 * 7 * 1000) {
+        if (timestamp > 1502726400000 + 60 * 60 * 24 * 7 * 1000) {
             ReactDOM.render(<PopEndPanel/>, document.getElementById("pop"))
         } else {
             ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
@@ -244,16 +242,17 @@ class JulyMobile extends React.Component {
         </div>
         let bottom_panel = () => {
             let {singledata} = this.props
+            let team_text = <span>，团队累投年化
+                    <span styleName="color-yellow">
+                        {singledata.yearAmtSumAll ? singledata.yearAmtSumAll : "0"}元
+                    </span> </span>
             let logged_text = <div styleName="m-logged">
                 <div styleName="logged-des">
                     活动内，您有效邀友
                     <span styleName="color-yellow">{singledata.ucount}人</span>
                     ，有效好友累投年化
-                    <span styleName="color-yellow">{singledata.yearAmtSum}元</span>，
-                    团队累投年化
-                    <span styleName="color-yellow">
-                        {singledata.yearAmtSumAll ? singledata.yearAmtSumAll : "0"}元
-                    </span> 。
+                    <span styleName="color-yellow">{singledata.yearAmtSum}元</span>
+                    {((singledata.yearAmtSumAll == '0') || (!singledata.yearAmtSumAll)) ? null : team_text}。
                 </div>
                 <div styleName="logged-text">
                     <span styleName="howinvite-after" onClick={this.showInvitePop}>如何邀请</span>

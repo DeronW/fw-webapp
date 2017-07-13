@@ -3,9 +3,11 @@ import Browser from './browser.js'
 
 let NativeBridge;
 
+let nil = () => null
+
 Browser.inApp ?
     NativeBridge = new NativeBridgeFactory() :
-    NativeBridge = { trigger: () => null }
+    NativeBridge = { trigger:nil, onReceive:nil }
 
 NativeBridge.close = function () {
     NativeBridge.trigger('close')
