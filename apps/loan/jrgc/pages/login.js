@@ -34,7 +34,7 @@ class Login extends React.Component {
 
         NativeBridge.trigger("refresh_loan_token");
         NativeBridge.onReceive(data => {
-            alert(data)
+            alert(data.token)
             data.token ? this.login(data.token) : NativeBridge.login()
         })
     }
