@@ -24,12 +24,12 @@ class Login extends React.Component {
         let jrgc_ios = Browser.inIOSApp;
         let jrgc_android = Browser.inAndroidApp;
         let jrgc_weixin = Browser.inWeixin;
-        let jrgc_wap = Browser.inMobile;
+        // let jrgc_wap = Browser.inMobile;
         let jrgc_web = !Browser.inMobile;
 
         if (jrgc_ios) sourceType = 1;
         if (jrgc_android) sourceType = 2;
-        if (jrgc_wap) sourceType = 3;
+        // if (jrgc_wap) sourceType = 3;
         if (jrgc_weixin) sourceType = 4;
         if (jrgc_web) sourceType = 5;
 
