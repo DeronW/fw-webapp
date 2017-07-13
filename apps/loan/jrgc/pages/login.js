@@ -38,6 +38,7 @@ class Login extends React.Component {
         })
     }
     login = (jrcgToken) => {
+        alert(jrgcToken);
          this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
             jrgcToken: jrcgToken,
             sourceType: sourceType
