@@ -9,7 +9,7 @@ import styles from '../css/login.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Login extends React.Component {
     state = {
-        show:false
+        show:false,
     }
     componentDidMount() {
         this.gotoLogin();
@@ -17,22 +17,7 @@ class Login extends React.Component {
             this.setState({show:true})
         }, 10000)
     }
-    login = (jrcgToken) => {
-        alert("jrgcToken:"+jrcgToken)
-         this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
-            jrgcToken: jrcgToken,
-            sourceType: sourceType
-        }).then(data => {
-            let dict = data;
-            Storage.setUserDict({
-                token: dict.token,
-                status: dict.userStatus,
-                code: dict.invitationCode,
-                uid: dict.uid
-            })
-            location.href = '/static/loan/jrgc/index.html#/home';
-        }, e => Components.showAlert(e.message));
-    }
+    
 
     gotoLogin = ()=>{
         let sourceType;
@@ -50,11 +35,28 @@ class Login extends React.Component {
 
         NativeBridge.trigger("refresh_loan_token");
         NativeBridge.onReceive(data => {
-            alert(data.token)
-            data.token ? this.login(data.token) : NativeBridge.login()
+            data.token ? this.login(data.token,sourceType) : NativeBridge.login()
         })
     }
-    
+
+    login = (jrcgToken,sourceType) => {
+        alert("jrgcToken:"+jrcgToken)
+        alert(sourceType)
+         this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
+            jrgcToken: jrcgToken,
+            sourceType: sourceType
+        }).then(data => {
+            let dict = data;
+            alert(dict.token)
+            Storage.setUserDict({
+                token: dict.token,
+                status: dict.userStatus,
+                code: dict.invitationCode,
+                uid: dict.uid
+            })
+            location.href = '/static/loan/jrgc/index.html#/home';
+        }, e => Components.showAlert(e.message));
+    }
     reload_jrgc = () => {
         location.href = "/static/loan/jrgc/index.html#/login"
     }
