@@ -125,19 +125,19 @@ class ProductDisplay extends React.Component {
         }
 
         return
-            <div>
-                {this.state.show && <div style={_product_mask}>
-                    <div style={_product_popup}>
-                        <div style={_product_title}>审核未通过</div>
-                        <div style={_product_fail_reason}>{this.props.errorMessage}</div>
-                        <div style={_product_tip}>为方便您快速借到钱，推荐您申请以下借款产品</div>
-                        <div style={_product_list_wrap}>
-                            {this.state.productList.length > 0 && this.state.productList.map(singleProduct)}
-                        </div>
-                        <div style={_close_btn} onClick={this.closeHandler}></div>
-                    </div>
-                </div>}
-            </div>
+               <div>
+                   {this.state.show && <div style={_product_mask}>
+                       <div style={_product_popup}>
+                           <div style={_product_title}>审核未通过</div>
+                           <div style={_product_fail_reason}>{this.props.errorMessage}</div>
+                           <div style={_product_tip}>为方便您快速借到钱，推荐您申请以下借款产品</div>
+                           <div style={_product_list_wrap}>
+                               {this.state.productList.length > 0 && this.state.productList.map(singleProduct)}
+                           </div>
+                           <div style={_close_btn} onClick={this.closeHandler}></div>
+                       </div>
+                   </div>}
+               </div>
     }
 }
 
