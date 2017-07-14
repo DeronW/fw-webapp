@@ -31,8 +31,9 @@ export default class Login{
     }
 
     login = (jrcgToken,sourceType) => {
-        Components.showAlert(`jrgc:${jrcgToken.slice(0,5)}`)
-         Post(`${API_PATH}/api/userext/v1/signature.json`, {
+        Components.showAlert(`jrgc:${jrcgToken.slice(0,8)}`);
+        Components.showAlert(sourceType)
+        this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
             jrgcToken: jrcgToken,
             sourceType: sourceType
         }).then(data => {

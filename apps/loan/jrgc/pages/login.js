@@ -24,7 +24,6 @@ class Login extends React.Component {
         let {login} =this.props;
         return <div>
             {!Browser.inJRGCApp && <Header title={'跳转'} />}
-
             <div styleName="delayPanel" style={{display: login.show ? 'block':"none"}}>
                 <div styleName="tip">很抱歉，访问此页面暂时出现问题</div>
                 <div styleName="tip-img"><img src={require("../images/icon.png")} /></div>
