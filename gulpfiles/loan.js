@@ -7,7 +7,7 @@ let APP_NAMES = [
     // 'more', //更多 been refactory
     // 'faq', //常见问题 been refactory
     // 'about-us', //关于我们 been refactory
-    '404'
+    // '404'
 ];
 
 // 用户模块
