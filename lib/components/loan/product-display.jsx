@@ -4,12 +4,13 @@ class ProductDisplay extends React.Component {
         super(props);
         this.state = {
             productList:[],
-            show:true
+            show:true,
+            improve:this.props.improve
         };
     }
 
     closeHandler = () => {
-        this.setState({show:false})
+        this.props.callbackHandler(false);
     }
 
     componentDidMount() {
@@ -114,6 +115,15 @@ class ProductDisplay extends React.Component {
             left:"300px"
         }
 
+        let _improve_amount = {
+            display:"block",
+            fontSize:"28px",
+            color:"#6aa4f0",
+            lineHeight:"92px",
+            textAlign:"center",
+            borderTop:"1px solid #f0f0f0"
+        }
+
         let singleProduct = (item, index) => {
             return (
                 <a key={index} href={item.productDetailUrl} style={_single_product_link}>
@@ -123,6 +133,8 @@ class ProductDisplay extends React.Component {
                 </a>
             )
         }
+
+        const USER = $FW.Store.getUserDict();
 
         return (
                 <div>
@@ -134,6 +146,7 @@ class ProductDisplay extends React.Component {
                             <div style={_product_list_wrap}>
                                 {this.state.productList.length > 0 && this.state.productList.map(singleProduct)}
                             </div>
+                            {this.state.improve && <a style={_improve_amount} href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>仍去提额</a>}
                             <div style={_close_btn} onClick={this.closeHandler}></div>
                         </div>
                     </div>}
