@@ -24,15 +24,9 @@ export default class Login{
         if (jrgc_weixin) sourceType = 4;
         if (jrgc_web) sourceType = 5;
 
-        NativeBridge.trigger("refresh_loan_token");
-        NativeBridge.onReceive(data => {
-            data.token ? this.login(data.token,sourceType) : NativeBridge.login()
-        })
-    }
-
-    login = (jrcgToken,sourceType) => {
+        let login = (jrcgToken) => {
         Components.showAlert(`jrgc:${jrcgToken.slice(0,8)}`);
-        Components.showAlert(sourceType)
+        Components.showAlert(`sourceType:${sourceType}`)
         this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
             jrgcToken: jrcgToken,
             sourceType: sourceType
@@ -47,7 +41,15 @@ export default class Login{
             })
             location.href = '/static/loan/jrgc/index.html#/home';
         }, e => Components.showAlert(e.message));
+
+        NativeBridge.trigger("refresh_loan_token");
+        NativeBridge.onReceive(data => {
+            data.token ? login(data.token) : NativeBridge.login()
+        })
     }
+    }
+
+    
     reload_jrgc = () => {
         location.href = "/static/loan/jrgc/index.html#/login"
     }
