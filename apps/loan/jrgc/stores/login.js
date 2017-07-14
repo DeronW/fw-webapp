@@ -1,16 +1,16 @@
 import { extendObservable, computed } from 'mobx'
 import { Components } from 'fw-javascripts'
 
-import { Browser,Storage,NativeBridge } from '../../lib/helpers'
-export default class Login{
-    constructor(Post){
+import { Browser, Storage, NativeBridge } from '../../lib/helpers'
+export default class Login {
+    constructor(Post) {
         this.Post = Post;
 
-        extendObservable(this,{
-            show:false
+        extendObservable(this, {
+            show: false
         })
     }
-    gotoLogin = ()=>{
+    gotoLogin = () => {
         let sourceType;
         let jrgc_ios = Browser.inIOSApp;
         let jrgc_android = Browser.inAndroidApp;
@@ -25,36 +25,35 @@ export default class Login{
         if (jrgc_web) sourceType = 5;
 
         let login = (jrcgToken) => {
-        Components.showAlert(`jrgc:${jrcgToken.slice(0,8)}`);
-        Components.showAlert(`sourceType:${sourceType}`)
-        this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
-            jrgcToken: jrcgToken,
-            sourceType: sourceType
-        }).then(data => {
-            let dict = data;
-            alert(dict.userStatus)
-            Storage.setUserDict({
-                token: dict.token,
-                status: dict.userStatus,
-                code: dict.invitationCode,
-                uid: dict.uid
-            })
-            location.href = '/static/loan/jrgc/index.html#/home';
-        }, e => Components.showAlert(e.message));
-
+            Components.showAlert(`jrgc:${jrcgToken.slice(0, 8)}`);
+            Components.showAlert(`sourceType:${sourceType}`)
+            this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
+                jrgcToken: jrcgToken,
+                sourceType: sourceType
+            }).then(data => {
+                let dict = data;
+                alert(dict.userStatus)
+                Storage.setUserDict({
+                    token: dict.token,
+                    status: dict.userStatus,
+                    code: dict.invitationCode,
+                    uid: dict.uid
+                })
+                location.href = '/static/loan/jrgc/index.html#/home';
+            }, e => Components.showAlert(e.message));
+        }
         NativeBridge.trigger("refresh_loan_token");
         NativeBridge.onReceive(data => {
             data.token ? login(data.token) : NativeBridge.login()
         })
     }
-    }
 
-    
+
     reload_jrgc = () => {
         location.href = "/static/loan/jrgc/index.html#/login"
     }
 
-    setShow = () =>{
+    setShow = () => {
         this.show = true
     }
 }
