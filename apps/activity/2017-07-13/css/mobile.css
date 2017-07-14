@@ -431,15 +431,15 @@ body {
 }
 
 .name-two {
-    padding-left: 30px;
+    padding-left: 68px;
 }
 
 .name-three {
-    padding-left: 40px;
+    padding-left: 26px;
 }
 
 .name-four {
-    padding-left: 46px;
+    padding-left: 35px;
 }
 
 .data-detil {
@@ -481,18 +481,18 @@ body {
 }
 
 .rank_number {
-    display: inline-block;
-    width: 60px;
+    width: 50px;
+    float: left;
 }
 
 .rank-username {
     display: inline-block;
-    width: 128px;
+    width: 160px;
 }
 
 .rank-totalmoney {
     display: inline-block;
-    width: 204px;
+    width: 190px;
 }
 
 .rank-bonus {
@@ -553,7 +553,8 @@ body {
     text-align: center;
     font-size: 24px;
 }
-.m_bottom_close{
+
+.m_bottom_close {
     position: absolute;
     top: 0;
     right: 35px;
@@ -561,6 +562,7 @@ body {
     width: 60px;
     height: 60px;
 }
+
 .m-logged {
 
 }
