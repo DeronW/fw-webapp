@@ -25,9 +25,8 @@ export default class Login {
         if (jrgc_web) sourceType = 5;
 
         let login = (jrcgToken) => {
-            Components.showAlert(`jrgc:${jrcgToken.slice(0, 8)}`);
-            Components.showAlert(`sourceType:${sourceType}`)
-            this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
+            Components.showAlert(`jrgc:${jrcgToken.slice(0, 5)}`);
+            this.Post(`/api/userext/v1/signature.json`, {
                 jrgcToken: jrcgToken,
                 sourceType: sourceType
             }).then(data => {
@@ -42,6 +41,7 @@ export default class Login {
                 location.href = '/static/loan/jrgc/index.html#/home';
             }, e => Components.showAlert(e.message));
         }
+        login("datatoken")
         NativeBridge.trigger("refresh_loan_token");
         NativeBridge.onReceive(data => {
             data.token ? login(data.token) : NativeBridge.login()
