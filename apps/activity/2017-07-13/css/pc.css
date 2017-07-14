@@ -468,19 +468,23 @@
 }
 
 .item-one {
-    padding-left: 30px;
+    padding-left: 25px;
 }
 
 .item-two {
-    padding-left: 66px;
+    padding-left: 55px;
+}
+
+.item-five {
+    padding-left: 45px;
 }
 
 .item-three {
-    padding-left: 82px;
+    padding-left: 39px;
 }
 
 .item-four {
-    padding-left: 68px;
+    padding-left: 40px;
 }
 
 .rank-data {
@@ -507,19 +511,23 @@
 }
 
 .rank-num {
-    width: 75px;
+    width: 70px;
 }
 
 .rank-username {
-    width: 130px;
+    width: 111px;
+}
+
+.rank-teamcount {
+    width: 82px;
 }
 
 .rank-total {
-    width: 186px;
+    width: 140px;
 }
 
 .rank-bonus {
-    width: 128px;
+    width: 110px;
     color: #ff2f4c;
 }
 
