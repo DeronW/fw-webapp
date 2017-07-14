@@ -5,6 +5,7 @@ import Stores from './stores'
 import { Post } from '../lib/helpers'
 
 let stores = {
-    home:new Stores.Home(Post)
+    home:new Stores.Home(Post),
+    login:new Stores.Login(Post)
 }
 render(AppRouter(stores),document.getElementById("cnt"))
