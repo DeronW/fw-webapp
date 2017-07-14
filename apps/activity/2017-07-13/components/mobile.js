@@ -204,9 +204,13 @@ class JulyMobile extends React.Component {
             let rank_data_func = (item, index) => {
                 return <div styleName={index % 2 == 0 ? "rank-data-item" : "rank-data-item rank-data-odd"} key={index}>
                     <span styleName="rank_number">{index + 1}</span>
-                    <span styleName="rank-username">{item.realName}</span>
+                    <span styleName="rank-username">
+                        {item.realName}({item.ucount ? item.ucount : '0' })
+                    </span>
                     <span styleName="rank-totalmoney">{item.yearAmtSum}</span>
-                    <span styleName="rank-bonus">{item.isValid}</span>
+                    <span styleName="rank-bonus">
+                        {item.isValid == "暂无瓜分资格" ? "暂无资格" : item.isValid}
+                    </span>
                 </div>
             }
             let data_box = <div styleName="data-box">
@@ -215,9 +219,9 @@ class JulyMobile extends React.Component {
             return <div styleName="m-rank">
                 <div styleName="m-r-data">
                     <div styleName="data-name">
-                        <span styleName="name-one">排名</span>
-                        <span styleName="name-two">用户名</span>
-                        <span styleName="name-three">团队累投年化额(元)</span>
+                        {/*<span styleName="name-one">排名</span>*/}
+                        <span styleName="name-two">用户(团队人数)</span>
+                        <span styleName="name-three">团队累投年化(元)</span>
                         <span styleName="name-four">奖金(元)</span>
                     </div>
                     <div styleName="data-detil">

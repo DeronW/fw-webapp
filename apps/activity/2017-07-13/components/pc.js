@@ -200,8 +200,13 @@ class JulyPC extends React.Component {
                 return <div key={index} styleName={index % 2 != 0 ? "rank-item rank-even" : "rank-item"}>
                     <span styleName="r-data-item rank-num">{index + 1}</span>
                     <span styleName="r-data-item rank-username">{item.realName}</span>
+                    <span styleName="r-data-item rank-teamcount">
+                        {item.ucount ? item.ucount : '0'}
+                    </span>
                     <span styleName="r-data-item rank-total">{item.yearAmtSum}</span>
-                    <span styleName="r-data-item rank-bonus">{item.isValid}</span>
+                    <span styleName="r-data-item rank-bonus">
+                        {item.isValid == "暂无瓜分资格" ? "暂无资格" : item.isValid}
+                    </span>
                 </div>
             }
             let rankdata_box = <div styleName="rank-data">
@@ -212,7 +217,8 @@ class JulyPC extends React.Component {
                     <div styleName="rank-name">
                         <span styleName="name-item item-one">排名</span>
                         <span styleName="name-item item-two">用户名</span>
-                        <span styleName="name-item item-three">团队累投年化额(元)</span>
+                        <span styleName="name-item item-five">团队人数</span>
+                        <span styleName="name-item item-three">团队累投年化(元)</span>
                         <span styleName="name-item item-four">奖金(元)</span>
                     </div>
                     {rankdata.length == 0 ? empty : rankdata_box}
