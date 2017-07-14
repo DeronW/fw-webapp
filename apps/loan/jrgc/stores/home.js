@@ -1,6 +1,6 @@
 import { extendObservable, computed } from 'mobx'
 import { Components } from 'fw-javascripts'
-import { Storage } from '../../lib/helpers'
+import { Storage,NativeBridge } from '../../lib/helpers'
 
 import { Browser } from '../../lib/helpers'
 export default class Home {
