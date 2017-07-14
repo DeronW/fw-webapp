@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Components } from 'fw-javascripts'
 
-import { Browser,Storage,NativeBridge } from '../../lib/helpers'
+import { Browser,Storage,NativeBridge,Post } from '../../lib/helpers'
 import { Header } from '../../lib/components'
 import styles from '../css/login.css'
 
@@ -40,8 +40,8 @@ class Login extends React.Component {
     }
 
     login = (jrcgToken,sourceType) => {
-        Components.showAlert("jrgc")
-         this.Post(`${API_PATH}/api/userext/v1/signature.json`, {
+        Components.showAlert(`jrgc:${jrcgToken.slice(0,5)}`)
+         Post(`${API_PATH}/api/userext/v1/signature.json`, {
             jrgcToken: jrcgToken,
             sourceType: sourceType
         }).then(data => {
