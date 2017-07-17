@@ -48,7 +48,7 @@ export default class Home {
 
         if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
 
-        Browser.inApp ? NativeBridge.goto(link, need_login) : location.href = encodeURI(link);
+        Browser.inApp ? NativeBridge.trigger('goto',link, need_login) : location.href = encodeURI(link);
     }
 
 }
