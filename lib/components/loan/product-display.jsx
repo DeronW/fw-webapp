@@ -23,8 +23,6 @@ class ProductDisplay extends React.Component {
             }, e => { $FW.Component.Toast(e.message) });
     }
 
-
-
     render() {
 
         let _product_mask = {
@@ -127,12 +125,6 @@ class ProductDisplay extends React.Component {
             borderTop:"1px solid #f0f0f0"
         }
 
-        function gotoHandler(link, toNative, need_login, next_title) {
-            if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
-            if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-            $FW.Browser.inApp() ? NativeBridge.goto(link, need_login, next_title) : location.href = encodeURI(link);
-        }
-
         let singleProduct = (item, index) => {
             return (
                 <a key={index} onClick={()=>gotoHandler(item.productDetailUrl, false, item.productName)} style={_single_product_link}>
@@ -164,3 +156,8 @@ class ProductDisplay extends React.Component {
     }
 }
 
+function gotoHandler(link, toNative, need_login, next_title) {
+    if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
+    if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
+    $FW.Browser.inApp() ? NativeBridge.goto(link, need_login, next_title) : location.href = encodeURI(link);
+}
