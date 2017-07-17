@@ -77,12 +77,16 @@ class BorrowMoney extends React.Component {
                         // this.setState({
                         //     canStatus: 0, canMessage: data.canMessage, loanUuid: data.loanUuid
                         // });
-                        this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
+                        this.setState({
+                            canStatus: 0
+                        });
                     } else if (data.canStatus == 1) {
                         // this.setState({
                         //     canStatus: 1, loanUuid: data.loanUuid, canMessage: data.canMessage
                         // });
-                        this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
+                        this.setState({
+                            canStatus: 1
+                        });
                     } else if (data.canStatus == 2) {
                         this.setState({ canStatus: 2 });
                     }
@@ -114,9 +118,11 @@ class BorrowMoney extends React.Component {
             let link = `/static/loan/dumiao-put-in/index.html?pid=${$FW.Format.urlQuery().pid}`;
             gotoHandler(link);
         } else if (canStatus === 0) {
-            this.setState({ dumiaoEnterPopShow: true });
+            //this.setState({ dumiaoEnterPopShow: true });
+            this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
         } else if (canStatus == 1) {
-            this.setState({ canMessageShow: true });
+            //this.setState({ canMessageShow: true });
+            this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
         } else {
             this.setState({ tryOtherLoanPopShow: true });
         }

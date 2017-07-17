@@ -58,7 +58,7 @@ class ProductDisplay extends React.Component {
             textAlign:"center",
             fontSize:"24px",
             color:"#999",
-            lineHeight:"38px"
+            lineHeight:"60px"
         }
 
         let _product_tip = {
