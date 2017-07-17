@@ -74,13 +74,15 @@ class BorrowMoney extends React.Component {
             $FXH.Post(`${API_PATH}/api/loan/v1/dmStatus.json`)
                 .then(data => {
                     if (data.canStatus == 0) {
-                        this.setState({
-                            canStatus: 0, canMessage: data.canMessage, loanUuid: data.loanUuid
-                        });
+                        // this.setState({
+                        //     canStatus: 0, canMessage: data.canMessage, loanUuid: data.loanUuid
+                        // });
+                        this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
                     } else if (data.canStatus == 1) {
-                        this.setState({
-                            canStatus: 1, loanUuid: data.loanUuid, canMessage: data.canMessage
-                        });
+                        // this.setState({
+                        //     canStatus: 1, loanUuid: data.loanUuid, canMessage: data.canMessage
+                        // });
+                        this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
                     } else if (data.canStatus == 2) {
                         this.setState({ canStatus: 2 });
                     }
