@@ -1,6 +1,6 @@
 import { extendObservable, computed } from 'mobx'
 import { Components } from 'fw-javascripts'
-import { Storage,NativeBridge } from '../../lib/helpers'
+import { Storage, NativeBridge } from '../../lib/helpers'
 
 import { Browser } from '../../lib/helpers'
 export default class Home {
@@ -16,13 +16,13 @@ export default class Home {
     }
 
     getDataHandler = () => {
-        this.Post(`/api/product/v1/noticeList.json`)
+        this.Post(`/api/product/v1/noticeList.json`, null, true)
             .then(data => {
                 let newBulletinCnt = data.noticeContent;
                 let token = Storage.getUserDict().token;
 
                 // if bulettin is secondary and it's read within the valid token, we just ignore that bulletin
-                this.showBulletin = true; 
+                this.showBulletin = true;
                 this.bulletinCnt = newBulletinCnt;
 
                 if (data.gradeType == '2' && Storage.isBulletinRead(token, newBulletinCnt)) return
@@ -32,11 +32,12 @@ export default class Home {
         this.Post(`/api/product/v1/productList.json`)
             .then(data => {
                 this.loanProductList = data.resultList
-            }, e => Components.showToast(e))
+            })
+
         this.Post(`/api/product/v1/recommendedList.json`)
             .then(data => {
                 this.subProductList = data.resultList
-            }, e => Components.showToast(e))
+            })
     }
 
     closeBulletin = () => {
@@ -48,7 +49,7 @@ export default class Home {
 
         if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
 
-        Browser.inApp ? NativeBridge.trigger('goto',link, need_login) : location.href = encodeURI(link);
+        Browser.inApp ? NativeBridge.trigger('goto', link, need_login) : location.href = encodeURI(link);
     }
 
 }
