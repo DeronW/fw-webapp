@@ -1,0 +1,16 @@
+.test:
+  script:
+  - node -v
+  - mpm -v
+  
+staging:
+  type: deploy
+  script:
+  - npm install
+  only:
+  - master
+
+production:
+  type: deploy
+  script:
+  - echo 123
