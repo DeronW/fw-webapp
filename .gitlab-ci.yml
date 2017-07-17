@@ -14,5 +14,3 @@ production:
   type: deploy
   script:
   - echo 123
-  only:
-  - tags
