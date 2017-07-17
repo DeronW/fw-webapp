@@ -140,7 +140,7 @@ class ProductDisplay extends React.Component {
                 <div>
                     {this.state.show && <div style={_product_mask}>
                         <div style={_product_popup}>
-                            <div style={_product_title}>审核未通过</div>
+                            <div style={_product_title}>{this.props.popTitle}</div>
                             <div style={_product_fail_reason}>{this.props.errorMessage}</div>
                             <div style={_product_tip}>为方便您快速借到钱，推荐您申请以下借款产品</div>
                             <div style={_product_list_wrap}>

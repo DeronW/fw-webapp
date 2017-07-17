@@ -88,7 +88,7 @@ class VerifyCode extends React.Component{
 
     return (
         <div>
-            {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} errorMessage={this.state.failMsg}/>}
+            {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} errorMessage={this.state.failMsg} popTitle={"审核未通过"}/>}
             <div className={this.state.codePop ? "mask" : "mask dis"}>
                 <div className="verify-popup">
                     <div className="verify-popup-wrap">
