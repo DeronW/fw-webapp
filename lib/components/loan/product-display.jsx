@@ -23,8 +23,7 @@ class ProductDisplay extends React.Component {
             }, e => { $FW.Component.Toast(e.message) });
     }
 
-    gotoHandler = (link, toNative, need_login, next_title) => {
-        if ($FW.Browser.inFXHApp() && toNative) return NativeBridge.toNative(toNative);
+    gotoHandler = (link, need_login, next_title) => {
         if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
         $FW.Browser.inApp() ? NativeBridge.goto(link, need_login, next_title) : location.href = encodeURI(link);
     }
