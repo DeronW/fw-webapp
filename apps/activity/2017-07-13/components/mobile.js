@@ -220,7 +220,7 @@ class JulyMobile extends React.Component {
                 <div styleName="m-r-data">
                     <div styleName="data-name">
                         {/*<span styleName="name-one">排名</span>*/}
-                        <span styleName="name-two">用户(团队人数)</span>
+                        <span styleName="name-two">用户名(团队人数)</span>
                         <span styleName="name-three">团队累投年化(元)</span>
                         <span styleName="name-four">奖金(元)</span>
                     </div>
