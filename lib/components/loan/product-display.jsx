@@ -127,7 +127,7 @@ class ProductDisplay extends React.Component {
 
         function gotoHandler(link, need_login, next_title){
             if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-            $FW.Browser.inApp() ? NativeBridge.goto(link, need_login, next_title) : location.href = encodeURI(link);
+            $FW.Browser.inApp() ? NativeBridge.goto(link, need_login, encodeURI(next_title)) : location.href = encodeURI(link);
         }
 
         let singleProduct = (item, index) => {
