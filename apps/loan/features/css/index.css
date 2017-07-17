@@ -1,3 +1,14 @@
+html,
+body {
+    height: 100%;
+}
+
 body {
     margin: 0;
+}
+
+a {
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    outline: 0;
 }

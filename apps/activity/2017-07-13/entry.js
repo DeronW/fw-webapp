@@ -11,16 +11,36 @@ class Content extends React.Component {
 
     state = {
         isLogin: null,
-        timestamp: null
+        timestamp: null,
+        rankdata: [],
+        singledata: {},
+        fightdata: []
     }
 
     componentDidMount() {
-        UserReady((isLogin) => {
-            this.setState({isLogin: isLogin})
-        })
-        Get('/activity/v1/timestamp.json')
+        UserReady((isLogin, user) => {
+            this.setState({isLogin: isLogin, username: user.userName})
+            this.state.isLogin && this.getSelfData()
+        });
+
+        Get('/api/userState/v1/timestamp.json')
             .then(data => {
                 this.setState({timestamp: data.timestamp})
+            });
+        Get('/api/fiveYearsActivity/v1/getTeamAndSelfYearAmt.do')
+            .then(data => {
+                this.setState({rankdata: data.data})
+            }, () => true);
+        Get('/api/fiveYearsActivity/v1/getTeamYam.do')
+            .then(data => {
+                this.setState({fightdata: data.data})
+            })
+    }
+
+    getSelfData = () => {
+        Get('/api/fiveYearsActivity/v1/getSelfYearAmt.do')
+            .then(data => {
+                this.setState({singledata: data.data})
             })
     }
 
@@ -33,9 +53,11 @@ class Content extends React.Component {
         let props = {
             isLogin: this.state.isLogin,
             closePopHandler: this.closePopHandler,
-            timestamp: this.state.timestamp
+            timestamp: this.state.timestamp,
+            rankdata: this.state.rankdata,
+            singledata: this.state.singledata,
+            fightdata: this.state.fightdata
         }
-        console.log(`props.timestamp${props.timestamp}`)
         let Content = isMobile ? <JulyMobile {...props} /> : <JulyPC {...props}/>
         return <div>
             {Content}

@@ -1,5 +1,7 @@
-<script src="javascripts/raven-3.10.0.min.js" crossorigin="anonymous"></script>
+<script src="https://static.9888.cn/javascripts/common/raven-refine-3.12.2.min.js" crossorigin="anonymous"></script>
 <script>
+    if (typeof (Raven) === 'undefined') throw new Error('Raven is not defined')
+
     Raven.config('{{ SENTRY_DSN }}', {
         autoBreadcrumbs: { xhr: false }
     }).install();

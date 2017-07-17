@@ -2,14 +2,26 @@
     width: 100%;
     height: auto;
     background: #205494;
+    overflow: hidden;
 }
 
 .pc-banner {
-    width: 100%;
-    height: 100%;
+    width: 1920px;
+    height: 1090px;
     background: url("../images/pc/banner.jpg") no-repeat center;
-    background-size: contain;
     position: relative;
+    left: 50%;
+    top: -50px;
+    margin-left: -960px;
+
+}
+
+.pc-banner-pics {
+    width: 1000px;
+    margin: 0 auto;
+    height: 1000px;
+    position: relative;
+
 }
 
 .anchor-item {
@@ -26,30 +38,28 @@
 }
 
 .anchor-one {
-
-    top: 286px;
-    left: 504px;
+    top: 454px;
+    left: 272px;
 }
 
 .anchor-two {
-
-    top: 300px;
-    left: 806px;
+    top: 473px;
+    left: 702px;
 }
 
 .anchor-three {
-    top: 405px;
-    left: 430px;
+    top: 616px;
+    left: 168px;
 }
 
 .anchor-four {
-    top: 530px;
-    left: 619px;
+    top: 800px;
+    left: 436px;
 }
 
 .anchor-five {
-    top: 500px;
-    right: 406px;
+    top: 750px;
+    right: 133px;
 }
 
 .anchor-item:hover {
@@ -61,36 +71,36 @@
 .anchor-one:hover {
     width: 80px;
     height: 124px;
-    top: 275px;
-    left: 499px;
+    top: 445px;
+    left: 269px;
 }
 
 .anchor-two:hover {
     width: 80px;
     height: 124px;
-    top: 290px;
-    left: 801px;
+    top: 467px;
+    left: 697px;
 }
 
 .anchor-three:hover {
     width: 80px;
     height: 124px;
-    top: 397px;
-    left: 426px;
+    top: 616px;
+    left: 162px;
 }
 
 .anchor-four:hover {
     width: 80px;
     height: 124px;
-    top: 523px;
-    left: 615px;
+    top: 800px;
+    left: 432px;
 }
 
 .anchor-five:hover {
     width: 80px;
     height: 124px;
-    top: 490px;
-    right: 402px;
+    top: 750px;
+    right: 129px;
 }
 
 .pc-content {
@@ -140,7 +150,7 @@
 
 .tips-text {
     position: absolute;
-    top: 42px;
+    top: 40px;
     left: 50%;
     font-size: 20px;
     color: #677ba8;
@@ -261,7 +271,7 @@
     width: 1138px;
     height: 158px;
     margin: 373px auto 0;
-    display: table;
+    /*display: table;*/
 }
 
 .data-item {
@@ -269,24 +279,88 @@
     height: 100%;
     margin-left: 30px;
     float: left;
+    /*padding-top: 20px;*/
+}
+
+.itemdown-0 {
+    color: #f3c000;
+}
+
+.itemdown-1 {
+    color: #ff9154;
+}
+
+.itemdown-2 {
+    color: #e76e9e;
+}
+
+.itemdown-3 {
+    color: #b57ed7;
+}
+
+.itemdown-4 {
+    color: #53be83;
+}
+
+.item-data-up {
+    width: 100%;
+    height: 61px;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    padding-top: 5px;
+}
+
+.item-data-up .data-up-disability {
+    line-height: 57px;
+}
+
+.item-data-down {
+    font-size: 24px;
+    text-align: center;
+    height: 100px;
 }
 
 .item-up {
     width: 100%;
-    height: 42px;
+    height: 40px;
     text-align: center;
     font-size: 24px;
     color: #fff;
-    line-height: 60px;
+    line-height: 40px;
     padding-top: 14px;
 }
 
 .item-down {
     font-size: 24px;
-    color: #f3c000;
     text-align: center;
     height: 128px;
-    line-height: 128px;
+    line-height: 112px;
+}
+
+.separable-bonus {
+    font-size: 14px;
+    color: #966600;
+}
+
+.bonus-amount {
+    font-size: 24px;
+    color: #fff;
+}
+
+.username {
+    font-size: 24px;
+    padding: 3px 0;
+}
+
+.add-year {
+    font-size: 14px;
+    color: #6f95c4;
+}
+
+.year-amount {
+    font-size: 20px;
+    color: #fff;
 }
 
 .pc-bonus {
@@ -394,25 +468,74 @@
 }
 
 .item-one {
-    padding-left: 40px;
+    padding-left: 25px;
 }
 
 .item-two {
-    padding-left: 86px;
+    padding-left: 55px;
+}
+
+.item-five {
+    padding-left: 45px;
 }
 
 .item-three {
-    padding-left: 74px;
+    padding-left: 39px;
 }
 
 .item-four {
-    padding-left: 60px;
+    padding-left: 40px;
 }
 
 .rank-data {
     margin: 0 1px 0 6px;
     height: 388px;
     background-color: #fff;
+}
+
+.rank-item {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #4e548f;
+}
+
+.rank-even {
+    background-color: #ececec;
+}
+
+.r-data-item {
+    display: inline-block;
+    text-align: center;
+}
+
+.rank-num {
+    width: 70px;
+}
+
+.rank-username {
+    width: 111px;
+}
+
+.rank-teamcount {
+    width: 82px;
+}
+
+.rank-total {
+    width: 140px;
+}
+
+.rank-bonus {
+    width: 110px;
+    color: #ff2f4c;
+}
+
+.empty-box {
+    font-size: 24px;
+    color: #7c9fc1;
+    text-align: center;
+    line-height: 388px;
 }
 
 .rank-tips {
@@ -466,7 +589,7 @@
     font-size: 16px;
     text-align: center;
     color: #fff;
-    padding-top: 35px;
+    padding-top: 26px;
 }
 
 .bottom-btn {
@@ -484,7 +607,7 @@
     left: 8%;
 }
 
-.invite-pc-after, .pc-invest {
+.invite-pc-after, .pc-invest, .pre-login, .invite-pc-pre {
     display: inline-block;
     cursor: pointer;
     width: 106px;
@@ -495,6 +618,15 @@
     border-radius: 20px;
     color: #fff;
     margin-right: 20px;
+}
+
+.color-yellow {
+    font-size: 16px;
+    color: #ffe400;
+}
+
+.pre-login {
+    margin-left: 20px;
 }
 
 /*pc banner action*/

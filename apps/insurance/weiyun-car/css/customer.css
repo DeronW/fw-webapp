@@ -5,6 +5,8 @@
     padding-left: 24px;
     background-color: #f9f9f9;
     color: #333;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #e3e5ea;
     font-size: 32px;
 }
 
@@ -47,14 +49,15 @@
     display: table;
     width: 100%;
     background: white;
+    margin-bottom: 20px;
     padding-bottom: 20px;
 }
 
 .picture-panel-title {
-    color: #666;
-    font-size: 30px;
     margin-top: 20px;
     padding-left: 24px;
+    color: #333;
+    font-size: 32px;
 }
 
 .picture-panel-desc {
@@ -107,3 +110,27 @@
     color: #666;
     font-size: 30px;
 }
+.field-check span{
+    display: inline-block;
+    margin-top: -4px;
+    vertical-align: middle;
+}
+.panel-text{
+    float: right;
+    width: 510px;
+    height: 90px;
+    line-height: 90px;
+    color: #666;
+    font-size: 30px;
+    text-align: right;
+    display: inline-block;
+}
+.input-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+

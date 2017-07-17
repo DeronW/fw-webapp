@@ -64,7 +64,25 @@ class StorageFactory {
 
         return r
     }
+    
+    setUserDict = (dict) => {
+        if (typeof (dict) === 'string') dict = JSON.parse(dict);
+        dict.token && this.set('userToken', dict.token);
+        dict.status && this.set('userStatus', dict.status);
+        dict.invitCode && this.set('invitationCode', dict.invitCode);
+        dict.uid && this.set('uid', dict.uid);
+        dict.phone && this.set('phone', dict.phone);
+    }
 
+    setBulletin =  (token, cnt) => {
+        this.set('bulletinToken', token);
+        this.set('bulletinCnt', cnt);
+    }
+
+    // if a bulletin is read for provided token
+    isBulletinRead = (token, cnt) => {
+        return (this.get('bulletinToken') === token) && (this.get('bulletinCnt') === cnt)
+    }
     // getUserID = () => {
     //     return this.get('uid') || Utils.Cookie.get('uid')
     // }

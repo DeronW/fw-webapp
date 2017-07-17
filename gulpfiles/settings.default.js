@@ -19,8 +19,8 @@ module.exports = {
         dev_api_path: '//localhost/fake-api'
             // dev_api_path: '//fe.9888.cn/api/test-a/insurance'
     },
-    activity: {
-        dev_api_path: '//localhost/fake-api'
-            // dev_api_path: '//fe.9888keji.com/api/test-c/activity'
+     "activity": {
+        // dev_api_path: '//localhost/fake-api'
+        dev_api_path: '//fe.gongchangp2p.cn/api/test-c/p2p-web'
     }
 }

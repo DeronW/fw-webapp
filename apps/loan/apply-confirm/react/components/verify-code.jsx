@@ -7,7 +7,9 @@ class VerifyCode extends React.Component{
             show_warn: false,
             value: '',
             codePop:true,
-            otherTip:false
+            otherTip:false,
+            loanShow:false,
+            failMsg:''
         }
         this.changeValueHandler = this.changeValueHandler.bind(this);
         this.closePopHandler = this.closePopHandler.bind(this);
@@ -67,12 +69,17 @@ class VerifyCode extends React.Component{
         }
     }, e => {
         if(e.code == 603002){
-            this.setState({codePop:false, otherTip:true});
+            this.setState({codePop:false, loanShow:true, failMsg:e.message});
         }else{
             $FW.Component.Toast(e.message)}
         }
     );
 }
+
+    callbackHandler = () => {
+        this.setState({loanShow:false})
+    }
+
     render() {
     let frequent_tip = this.state.show_warn &&
         <div className="wrong-tip">{this.state.show_text}</div>;
@@ -81,6 +88,7 @@ class VerifyCode extends React.Component{
 
     return (
         <div>
+            {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} errorMessage={this.state.failMsg}/>}
             <div className={this.state.codePop ? "mask" : "mask dis"}>
                 <div className="verify-popup">
                     <div className="verify-popup-wrap">

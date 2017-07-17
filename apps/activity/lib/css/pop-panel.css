@@ -102,3 +102,73 @@
 .voucher-title-c {
     font-size: 20px;
 }
+
+@media screen and (max-width: 760px) {
+    .pc-header-container {
+        display: none;
+    }
+
+    .mobile-header-container {
+        display: block;
+    }
+
+    .gift-panel {
+        width: 680px;
+        height: 700px;
+        margin-top: -350px;
+        margin-left: -340px;
+    }
+
+    .title {
+        height: 80px;
+        line-height: 80px;
+        font-size: 28px;
+    }
+
+    .btn-close {
+        font-size: 54px;
+        padding: 0 20px;
+    }
+
+    .yqyl-table {
+        width: 640px;
+        padding-left: 2%;
+    }
+
+    .light-color {
+        font-size: 12px;
+    }
+
+    .paragraph-title {
+        font-size: 26px;
+        padding-left: 5%;
+        margin-bottom: 8px;
+    }
+
+    .paragraph {
+        font-size: 18px;
+        padding-left: 5%;
+        width: 95%;
+    }
+
+    .voucher {
+        transform: scale(0.9);
+        width: 168px;
+        margin-right: -5px;
+    }
+
+    .light-color {
+        font-size: 16px;
+        width: 608px;
+    }
+
+    span, em {
+        display: inline-block;
+        font-style: normal;
+    }
+}
+
+
+
+
+

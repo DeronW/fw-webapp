@@ -16,7 +16,8 @@ class WantLoan extends React.Component{
             orderGid: null,
             loanGid: null,
             showToZH: false,
-            failMsg: ''
+            failMsg: '',
+            loanShow:false
         }
         this.changeHandler = this.changeHandler.bind(this);
         this.loanHandler = this.loanHandler.bind(this);
@@ -74,10 +75,15 @@ class WantLoan extends React.Component{
                 location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`;
             }
         },(err) => {
-            if (err.code === 24005) return this.setState({showToZH: true, failMsg: err.message})
+            if (err.code === 24005) return this.setState({loanShow: true, failMsg: err.message})
             $FW.Component.Toast(err.message);
         });
     }
+
+    callbackHandler = () => {
+        this.setState({loanShow:false})
+    }
+
     render() {
         const USER = $FW.Store.getUserDict();
         let interest = this.props.baseRateDay * 100;
@@ -90,6 +96,7 @@ class WantLoan extends React.Component{
 
         return (
             <div>
+                {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} errorMessage={this.state.failMsg}/>}
                 <div className="loan-box">
                     <div className="loan-box-title">借款金额(元)</div>
                     <input className="loan-num" type="number" name="number" value={this.state.loanNum} onChange={this.changeHandler} />

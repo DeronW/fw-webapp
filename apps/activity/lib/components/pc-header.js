@@ -62,8 +62,8 @@ class PCHeader extends React.Component {
         }
 
         return <div styleName="header-placeholder">
-            <div styleName="header" style={
-                {backgroundColor: this.props.bgColor || 'black'}}>
+            <div styleName="header" style=
+                {{backgroundColor: this.props.bgColor || 'black'}}>
                 <div styleName="header-panel">
                     <a styleName="nav-link" href="http://www.9888keji.com/">
                         <img src={require("../images/header/home.png")}/>
@@ -73,27 +73,30 @@ class PCHeader extends React.Component {
                     {/*<img src={require("../images/header/mall.png")} />*/}
                     {/*</a>*/}
 
-                    <a styleName="nav-link" href="http://bbs.9888.cn">
-                        <img src={require("../images/header/bbs.png")}/>
-                    </a>
+                    {/*<a styleName="nav-link" href="http://bbs.9888.cn">*/}
+                        {/*<img src={require("../images/header/bbs.png")}/>*/}
+                    {/*</a>*/}
 
-                    <a styleName="btn-link" href="/depository/regist/toRegist.shtml?sourceSite=jrgc">注册</a>
-                    <div styleName="btn-link-sp"></div>
-                    <a styleName="btn-link" onClick={this.login}>登录</a>
-                    <div styleName="btn-link-sp"></div>
+                    {!isLogin &&
+                    <a styleName="btn-link" href="/depository/regist/toRegist.shtml?sourceSite=jrgc">注册</a>}
+                    {!isLogin && <div styleName="btn-link-sp"></div>}
+                    {!isLogin && <a styleName="btn-link" onClick={this.login}>登录</a>}
+                    {!isLogin && <div styleName="btn-link-sp"></div>}
 
                     {logout}{user_panel()}
-
-                    <div styleName="btn-link-sp"></div>
-                    <div styleName="btn-link btn-download-app" target="_blank"
-                         href="http://www.9888keji.com/static/web/app-download/index.html">APP下载
+                    {isLogin && <div styleName="btn-link-sp"></div>}
+                    <a styleName="btn-link btn-download-app" target="_blank"
+                       href="https://www.9888keji.com/static/keji-web/app-download/index.html">APP下载
                         <div styleName="download-app">
                             <img src={require('../images/header/app.jpg')}/>
                             <a styleName="d-download">立即下载App</a>
-                            <a styleName="d-android">Android版下载</a>
-                            <a styleName="d-ios">iOS版下载</a>
+                            <a styleName="d-android"
+                               href="https://www.9888keji.com/static/keji-web/app-download/index.html">Android版下载</a>
+                            <a styleName="d-ios"
+                               href="https://www.9888keji.com/static/keji-web/app-download/index.html">iOS版下载</a>
                         </div>
-                    </div>
+                    </a>
+                    <div styleName="btn-link-sp"></div>
                     <a styleName="btn-link" target="_blank"
                        href="http://www.9888keji.com/static/web/guide-cookbook/index.html">玩赚攻略</a>
                     <div styleName="btn-link-sp"></div>

@@ -19,7 +19,10 @@ class ApplyTenMillionLoan extends React.Component {
             countdownShow: false,
             codeToken: '',
             codeType: '',
-            bothFilled: false
+            bothFilled: false,
+            captchaVal:'',
+            url:'',
+            verifyToken:''
         }
     }
 
@@ -33,6 +36,22 @@ class ApplyTenMillionLoan extends React.Component {
                 this.setState({ bothFilled: false })
             }
         }
+    }
+
+    componentDidMount(){
+       this.reGetCaptchaHandler();
+    }
+
+    reGetCaptchaHandler = () => {
+        $FW.Post(`${API_PATH}/api/userBase/v1/verifyNum.json`, {
+            mobile: this.state.phoneVal,
+            sourceType: 5
+        }).then((data)=>{
+            this.setState({
+                url:data.url,
+                verifyToken:data.verifyToken
+            })
+        });
     }
 
     phoneChange = (e) => {
@@ -51,37 +70,52 @@ class ApplyTenMillionLoan extends React.Component {
         }
     }
 
+    captchaChange = e => {
+        if(e.target.value.length <=4){
+            this.setState({captchaVal:e.target.value})
+        }
+    }
+
     handlerCountdown = () => {
         if (this.state.phoneVal == '') {
             $FW.Component.Toast("手机号不能为空");
         } else if (!isMobilePhone(this.state.phoneVal)) {
             $FW.Component.Toast("手机号格式不正确");
-        } else {
-            $FW.Post(`${API_PATH}/api/userBase/v1/userExist.json`, {
+        } else if(this.state.captchaVal == ''){
+            $FW.Component.Toast("请输入图片验证码");
+        }else {
+            $FW.Post(`${API_PATH}/api/userBase/v1/userExistIndex.json`, {
                 mobile: this.state.phoneVal,
-                sourceType: 5,
-                version: 'v1'
-            }).then(() => {
-                $FW.Component.Toast("手机号已注册");
-                setTimeout(function () {
-                    window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
-                }, 2000)
-            }, (e)=>{
-                if(e.code == 20014){
-                    this.startCountingDown()
+                sourceType: 5
+            }).then((data) => {
+                if(data.userCode == 10000){
+                    $FW.Component.Toast("手机号已注册");
+                    setTimeout(function () {
+                        window.location.href = '/static/loan/outside-mortgage-id-download/index.html'
+                    }, 2000)
+                }else if(data.userCode == 20014){
                     $FW.Post(`${API_PATH}/api/userBase/v1/sendVerifyCode.json`, {
                         mobile: this.state.phoneVal,
                         userOperationType: 3,
-                        sourceType: 5
+                        sourceType: 5,
+                        verifyToken: this.state.verifyToken,
+                        verifyCode: this.state.captchaVal
                     }).then(data => {
+                        this.startCountingDown()
                         this.setState({
                             codeToken: data.codeToken,
                             codeType: data.codeType
                         })
+                    }, e => {
+                        if(e.code == 20020){
+                            this.reGetCaptchaHandler();
+                            clearInterval(this.timer)
+                            $FW.Component.Toast(e.message);
+                        }
                     })
-                }else{
-                    $FW.Component.Toast(e.message);
                 }
+            }, (e)=> {
+                $FW.Component.Toast(e.message)
             })
         }
     }
@@ -153,6 +187,20 @@ class ApplyTenMillionLoan extends React.Component {
                     <div className="li verification-code-li">
                         <div className="input">
                             <div className="i">
+                                <input type="text" className="input"
+                                       placeholder="请输入图片验证码"
+                                       value={this.state.captchaVal}
+                                       onChange={this.captchaChange}
+                                />
+                            </div>
+                            <div className="btn">
+                                 <img className="captchaImg" src={this.state.url} onClick={this.reGetCaptchaHandler}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="li verification-code-li">
+                        <div className="input">
+                            <div className="i">
                                 <input type="number" className="input"
                                     placeholder="验证码"
                                     value={this.state.codeVal}
@@ -168,7 +216,6 @@ class ApplyTenMillionLoan extends React.Component {
                             </div>
                         </div>
                     </div>
-
                     <div className={this.state.bothFilled ? "apply-btn" : "apply-btn-forbid"} onClick={this.applyBtn}>申请千万贷款</div>
                 </div>
             </div>
