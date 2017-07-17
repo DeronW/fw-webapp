@@ -118,6 +118,12 @@ const REFACTORY_PAGES = [{
     compiler:'webpack'
 }]
 
+// 第三方授权页面
+const AUTH_PAGES = [{
+    name: '3rd',
+    compiler: 'webpack'
+}]
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...BILL_PAGES,
@@ -132,7 +138,8 @@ APP_NAMES.push(
     ...CREDIT_CARD,
     ...MORTGAGE,
     ...APPLY_TEN_MILLION_LOAN,
-    ...REFACTORY_PAGES
+    ...REFACTORY_PAGES,
+    ...AUTH_PAGES
 );
 
 
