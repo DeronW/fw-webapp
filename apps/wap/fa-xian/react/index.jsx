@@ -172,7 +172,7 @@ const Content = React.createClass({
                     {this.state.topics.map(topic)}
                 </div>
                 <div className="contact-us">
-                    <a className="service" href="tel:400-0322-988">
+                    <a className="service" href="tel:010-65255966">
                         <i className="icon-service"></i><span>联系客服</span></a>
                     <a className="about-us">
                         <i className="icon-about-us icon-about-us-grey"></i>

@@ -26,7 +26,7 @@ class ProductDisplay extends React.Component {
     render() {
 
         let _product_mask = {
-            position:"absolute",
+            position:"fixed",
             width:"100%",
             height:"100%",
             top:"0",
@@ -58,7 +58,8 @@ class ProductDisplay extends React.Component {
             textAlign:"center",
             fontSize:"24px",
             color:"#999",
-            lineHeight:"38px"
+            lineHeight:"38px",
+            marginTop:"-18px"
         }
 
         let _product_tip = {
@@ -140,7 +141,7 @@ class ProductDisplay extends React.Component {
                 <div>
                     {this.state.show && <div style={_product_mask}>
                         <div style={_product_popup}>
-                            <div style={_product_title}>审核未通过</div>
+                            <div style={_product_title}>{this.props.popTitle}</div>
                             <div style={_product_fail_reason}>{this.props.errorMessage}</div>
                             <div style={_product_tip}>为方便您快速借到钱，推荐您申请以下借款产品</div>
                             <div style={_product_list_wrap}>

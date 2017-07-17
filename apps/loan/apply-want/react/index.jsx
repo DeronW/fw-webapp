@@ -96,7 +96,7 @@ class WantLoan extends React.Component{
 
         return (
             <div>
-                {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} errorMessage={this.state.failMsg}/>}
+                {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} errorMessage={this.state.failMsg} popTitle={"审核失败"}/>}
                 <div className="loan-box">
                     <div className="loan-box-title">借款金额(元)</div>
                     <input className="loan-num" type="number" name="number" value={this.state.loanNum} onChange={this.changeHandler} />

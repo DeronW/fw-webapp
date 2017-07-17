@@ -226,8 +226,8 @@ class ApplyLoan extends React.Component {
 
         return (
             <div className="apply-loan">
-                {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler}/>}
-                {this.state.improveShow && <ProductDisplay callbackHandler={this.callbackHandler} improve={true}/>}
+                {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} popTitle={"提示"}/>}
+                {this.state.improveShow && <ProductDisplay callbackHandler={this.callbackHandler} improve={true} popTitle={"提示"}/>}
                 <div className={$FW.Browser.inJRGCApp() ? "app-loan-num" : "loan-num"}>
                     {this.getBorrowBtn()}
                 </div>
