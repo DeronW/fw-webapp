@@ -18,62 +18,77 @@ class VerifyCode extends React.Component{
         this.confirmBtnHandler = this.confirmBtnHandler.bind(this);
     }
     changeValueHandler(e) {
-    this.setState({value: e.target.value});
+        this.setState({value: e.target.value});
 }
     closePopHandler() {
-    this.props.callbackCloseHanler(false);
+        this.props.callbackCloseHanler(false);
 }
     countingDown() {
         this.setState({
             countdown: 60
         });
+        this.checkAjax();
         this.timer = setInterval(() => {
+            let c = this.state.countdown;
+            if (c % 6 === 0) this.checkAjax();
             this.setState({
-                countdown: this.state.countdown - 1
+                countdown: c - 1
             });
-            if (this.state.countdown == 0) {
+            if (this.state.countdown <= 0) {
                 clearInterval(this.timer);
             }
         }, 1000);
     }
     componentDidMount() {
-    this.countingDown();
-}
+        this.countingDown();
+    }
+
+    checkAjax = () => {
+        let query = $FW.Format.urlQuery();
+        let orderGid = query.orderGid;
+        $FXH.Post(`${API_PATH}/api/loan/v1/status.json`, {
+            orderGid: orderGid
+        }).then(() => {
+        }, (err) => {
+            this.setState({codePop:false,loanShow:true,failMsg:err.message})
+        });
+    }
+
     componentWillUnmount() {
         clearInterval(this.timer);
     }
     getSMSCode() {
-    let query = $FW.Format.urlQuery();
-    let orderGid = query.orderGid;
-    if (this.state.countdown <= 0) {
-        this.countingDown();
-        $FXH.Post(`${API_PATH}/api/loan/v1/resendverifycode.json`,{orderGid: orderGid});
-    }
+        let query = $FW.Format.urlQuery();
+        let orderGid = query.orderGid;
+        if (this.state.countdown <= 0) {
+            this.countingDown();
+            $FXH.Post(`${API_PATH}/api/loan/v1/resendverifycode.json`,{orderGid: orderGid});
+        }
 }
     confirmBtnHandler() {
-    let query = $FW.Format.urlQuery();
-    let orderGid = query.orderGid;
-    if (this.state.value == '')
-        return $FW.Component.Toast("请输入短信验证码");
+        let query = $FW.Format.urlQuery();
+        let orderGid = query.orderGid;
+        if (this.state.value == '')
+            return $FW.Component.Toast("请输入短信验证码");
 
-    $FXH.Post(`${API_PATH}/api/loan/v1/do.json`, {
-        orderGid: orderGid,
-        verifyCode: this.state.value
-    }).then(() => {
-        if($FW.Browser.inJRGCApp()){
-            gotoHandler(`/static/loan/apply-result/index.html?orderGid=${orderGid}`);
-        }else{
-            this.props.callbackCloseHanler(false);
-            this.props.callbackResultShow(true);
-            this.props.callbackGetLoanResultCheck(true);
-        }
-    }, e => {
-        if(e.code == 603002){
-            this.setState({codePop:false, loanShow:true, failMsg:e.message});
-        }else{
-            $FW.Component.Toast(e.message)}
-        }
-    );
+        $FXH.Post(`${API_PATH}/api/loan/v1/do.json`, {
+            orderGid: orderGid,
+            verifyCode: this.state.value
+        }).then(() => {
+            if($FW.Browser.inJRGCApp()){
+                gotoHandler(`/static/loan/apply-result/index.html?orderGid=${orderGid}`);
+            }else{
+                this.props.callbackCloseHanler(false);
+                this.props.callbackResultShow(true);
+                this.props.callbackGetLoanResultCheck(true);
+            }
+        }, e => {
+            if(e.code == 603002){
+                this.setState({codePop:false, loanShow:true, failMsg:e.message});
+            }else{
+                $FW.Component.Toast(e.message)}
+            }
+        );
 }
 
     callbackHandler = () => {
