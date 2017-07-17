@@ -30,7 +30,7 @@ class VerifyCode extends React.Component{
         this.checkAjax();
         this.timer = setInterval(() => {
             let c = this.state.countdown;
-            if (c % 6 === 0) this.checkAjax();
+            if (c % 5 === 0) this.checkAjax();
             this.setState({
                 countdown: c - 1
             });
@@ -48,7 +48,7 @@ class VerifyCode extends React.Component{
         let orderGid = query.orderGid;
         $FXH.Post(`${API_PATH}/api/loan/v1/status.json`, {
             orderGid: orderGid
-        }).then(() => {
+        }, 'silence').then(() => {
         }, (err) => {
             this.setState({codePop:false,loanShow:true,failMsg:err.message})
         });
