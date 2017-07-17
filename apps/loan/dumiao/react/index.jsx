@@ -56,7 +56,8 @@ class BorrowMoney extends React.Component {
             canStatus: null,
             canMessage: '',
             loanUuid: null,
-            loanShow:false
+            loanShow:false,
+            failMsg: ''
         }
     }
     componentDidMount = () => {
@@ -84,7 +85,7 @@ class BorrowMoney extends React.Component {
                     }
                 }, err => {
                     if( err.code == 20013 || err.code == 1001003){
-                        this.setState({loanShow:true});
+                        this.setState({loanShow:true, failMsg:err.message});
                     }else{
                         this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
                     }
