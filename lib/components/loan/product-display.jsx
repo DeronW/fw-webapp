@@ -26,7 +26,7 @@ class ProductDisplay extends React.Component {
     render() {
 
         let _product_mask = {
-            position:"absolute",
+            position:"fixed",
             width:"100%",
             height:"100%",
             top:"0",
