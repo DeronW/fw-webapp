@@ -55,7 +55,8 @@ class BorrowMoney extends React.Component {
             tryOtherLoanMsg: '',
             canStatus: null,
             canMessage: '',
-            loanUuid: null
+            loanUuid: null,
+            loanShow:false
         }
     }
     componentDidMount = () => {
@@ -82,10 +83,20 @@ class BorrowMoney extends React.Component {
                         this.setState({ canStatus: 2 });
                     }
                 }, err => {
-                    this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
+                    if( err.code == 20013 || err.code == 1001003){
+                        this.setState({loanShow:true});
+                    }else{
+                        this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
+                    }
+
                 });
         })
     }
+
+    callbackHandler = () => {
+        this.setState({loanShow:false})
+    }
+
     clickHandler = () => {
         let { canStatus, borrowStatus } = this.state;
         // 初始化数据没有完成, 稍后再试
@@ -135,6 +146,7 @@ class BorrowMoney extends React.Component {
         }
 
         return <div className="">
+            {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} errorMessage={this.state.failMsg}/>}
             <div className="">
                 <div className="borrow-money-list">
                     <div className="icon-block">
