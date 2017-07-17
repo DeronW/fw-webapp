@@ -75,7 +75,7 @@ class WantLoan extends React.Component{
                 location.href = `/static/loan/apply-confirm/index.html?loanNum=${this.state.loanNum}&orioleOrderGid=${this.state.orioleOrderGid}&withdrawCardGid=${filtered[0].cardGid}&orderGid=${this.state.orderGid}`;
             }
         },(err) => {
-            if (err.code === 24005) return this.setState({loanShow: true, failMsg: err.message})
+            if (err.code === 24003) return this.setState({loanShow: true, failMsg: err.message})
             $FW.Component.Toast(err.message);
         });
     }

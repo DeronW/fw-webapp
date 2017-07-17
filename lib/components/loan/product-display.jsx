@@ -125,13 +125,18 @@ class ProductDisplay extends React.Component {
             borderTop:"1px solid #f0f0f0"
         }
 
+        function gotoHandler(link, need_login, next_title){
+            if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
+            $FW.Browser.inApp() ? NativeBridge.goto(link, need_login, next_title) : location.href = encodeURI(link);
+        }
+
         let singleProduct = (item, index) => {
             return (
-                <a key={index} href={item.productDetailUrl} style={_single_product_link}>
+                <div key={index} onClick={()=>gotoHandler(item.productDetailUrl,false,item.productName)} style={_single_product_link}>
                      <img src={item.productLogo} style={_product_logo}/>
                      <span style={_product_name}>{item.productName}</span>
                      <span style={_product_label}>{item.productLabelList[0].labelValue}</span>
-                </a>
+                </div>
             )
         }
 
@@ -139,7 +144,7 @@ class ProductDisplay extends React.Component {
 
         return (
                 <div>
-                    {this.state.show && <div style={_product_mask}>
+                    {this.state.show && <div style={_product_mask} onClick={this.closeHandler}>
                         <div style={_product_popup}>
                             <div style={_product_title}>{this.props.popTitle}</div>
                             <div style={_product_fail_reason}>{this.props.errorMessage}</div>
