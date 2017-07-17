@@ -132,11 +132,11 @@ class ProductDisplay extends React.Component {
 
         let singleProduct = (item, index) => {
             return (
-                <a key={index} onClick={this.gotoHandler(item.productDetailUrl, false, item.productName)} style={_single_product_link}>
+                <div key={index} onClick={this.gotoHandler(item.productDetailUrl, false, item.productName)} style={_single_product_link}>
                      <img src={item.productLogo} style={_product_logo}/>
                      <span style={_product_name}>{item.productName}</span>
                      <span style={_product_label}>{item.productLabelList[0].labelValue}</span>
-                </a>
+                </div>
             )
         }
 
