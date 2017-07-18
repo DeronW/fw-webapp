@@ -59,7 +59,7 @@ class BorrowMoney extends React.Component {
             loanShow:false,
             failMsg: '',
             title:'',
-            errCode:''
+            errCode:null
         }
     }
     componentDidMount = () => {
