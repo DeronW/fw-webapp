@@ -1,26 +1,101 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
+import { Components, Utils } from 'fw-javascripts'
+
 import { Header } from '../../lib/components'
+import { Post } from '../../lib/helpers'
 
 import styles from '../css/auth-request.css'
 
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class AuthFail extends React.Component {
+class AuthRequest extends React.Component {
 
     state = {
-        captchaImgUrl: require("../images/auth-request/captcha-img-holder.png"),
-        smsBtnText: '获取验证码'
+        phone: '',
+        captchaImgUrl: '',
+        captchaToken: '',
+        captchaInput: '',
+        getSMSTimer: 60,
+        SMSToken: '',
+        SMSInput: '',
+    }
+
+    componentDidMount() {
+        this.setState({ phone: Utils.hashQuery.phone })
+        this.getCaptcha();
+    }
+
+    get maskedPhone() {
+        return this.state.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+    }
+
+    getCaptcha = () => {
+        Post('/api/userBase/v1/verifyNum.json').then(data => {
+            this.setState({
+                captchaImgUrl: data.url,
+                captchaToken: data.verifyToken
+            })
+        })
+    }
+
+    handleInput = (inputType) => (e) => {
+        this.setState({ [inputType]: e.target.value })
+    }
+
+    SMSTimerController = () => {
+        this._timer = setInterval(() => {
+            if (this.state.getSMSTimer <= 1) {
+                clearInterval(this._timer);
+                return this.setState({ getSMSTimer: 60 })
+            }
+            this.setState({ getSMSTimer: this.state.getSMSTimer - 1 })
+        }, 1000)
+    }
+
+    getSMS = () => {
+        let { phone, getSMSTimer, captchaToken, captchaInput } = this.state;
+        if (!captchaInput) return Components.showToast('请输入图形验证码');
+
+        let ableToGetSMS = getSMSTimer === 60;
+        if (!ableToGetSMS) return
+
+        return Post('/api/userBase/v1/sendVerifyCode.json', {
+            mobile: phone,
+            userOperationType: 3,
+            verifyToken: captchaToken,
+            verifyCode: captchaInput
+        }, 'silence').then((data) => {
+            this.setState({ SMSToken: data.codeToken });
+            this.SMSTimerController();
+        }, e => {
+            if (e.code == 20020) {
+                Components.showToast('图形验证码不正确');
+                this.getCaptcha();
+            }
+        })
+    }
+
+    submitAuthRequest = () => {
+        // return Post('/api/userBase/v1/blabla.json', {
+        //     mobile: phone,
+        //     verifyToken: captchaToken,
+        //     verifyCode: captchaInput
+        // }, 'silence').then((data) => {
+        //     this.setState({ SMSToken: data.codeToken });
+        //     this.SMSTimerController();
+        // }, e => {})
     }
 
     render() {
         let { history } = this.props;
+        let { getSMSTimer, captchaImgUrl, captchaInput, SMSInput } = this.state;
         return (
             <div>
                 <Header title="授权" history={history} />
                 <div styleName="auth-info">请授权
-                    <span styleName="auth-phone"></span>
+                    <span styleName="auth-phone">{this.maskedPhone}</span>
                     登录放心花
                 </div>
                 <div>
@@ -31,21 +106,32 @@ class AuthFail extends React.Component {
                     <div styleName="input-field-grp">
                         <div styleName="input-field">
                             <i styleName="captcha-icon"></i>
-                            <input styleName="captcha-input" />
-                            <div styleName="captcha-img-container">
-                                <img src={this.state.captchaImgUrl} />
+                            <input styleName="captcha-input"
+                                maxLength="4"
+                                value={captchaInput}
+                                placeholder="请输入图形验证码"
+                                onChange={this.handleInput('captchaInput')}/>
+                            <div styleName="captcha-img-container" onClick={this.getCaptcha}>
+                                <img src={captchaImgUrl} />
                             </div>
                         </div>
                         <div styleName="input-field">
                             <i styleName="sms-icon"></i>
-                            <input styleName="sms-input" />
-                            <div styleName="sms-btn">{this.state.smsBtnText}</div>
+                            <input styleName="sms-input"
+                                maxLength="4" type="number"
+                                value={SMSInput}
+                                placeholder="请输入短信验证码"
+                                onChange={this.handleInput('SMSInput')} />
+                            <div styleName="sms-btn" onClick={this.getSMS}>
+                                {getSMSTimer === 60 ? "获取验证码": `${getSMSTimer}s`}
+                            </div>
                         </div>
                     </div>
+                <div styleName="submit-btn" onClick={this.submitAuthRequest}>确认授权</div>
                 </div>
             </div>
         )
     }
 }
 
-export default AuthFail
+export default AuthRequest
