@@ -10,7 +10,7 @@ import styles from '../css/auth-request.css'
 
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class AuthFail extends React.Component {
+class AuthRequest extends React.Component {
 
     state = {
         phone: '',
@@ -134,4 +134,4 @@ class AuthFail extends React.Component {
     }
 }
 
-export default AuthFail
+export default AuthRequest
