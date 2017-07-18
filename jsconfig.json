@@ -1,9 +1,13 @@
 {
     "compilerOptions": {
+        "noLib": true,
         "target": "es6",
         "experimentalDecorators": true
     },
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "build",
+        "cdn",
+        "lib"
     ]
 }
