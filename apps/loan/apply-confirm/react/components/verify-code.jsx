@@ -43,9 +43,7 @@ class VerifyCode extends React.Component{
         this.countingDown();
     }
 
-    componentDidUpdate(){
-        this.countingDown();
-    }
+
 
     componentWillReceiveProps() {
         this.setState({codePop:this.props.stateProps})
