@@ -52,14 +52,14 @@ class VerifyCode extends React.Component{
         }).then((data) => {
             let finishFlag = true;
             if(data.loanStatus == 2 || data.loanStatus == 3){
-                 this.setState({codePop:false,loanShow:true,failMsg:data.failReason})
+                 this.setState({loanShow:true,failMsg:data.failReason})
              }else{
                  finishFlag = false
              }
 
              if(this.state.countdown <= 0){
                   if(data.loanStatus == 2 || data.loanStatus == 3){
-                     this.setState({codePop:false,loanShow:true,failMsg:data.failReason})
+                     this.setState({loanShow:true,failMsg:data.failReason})
                  }else{
                       finishFlag = false
                   }
@@ -69,7 +69,7 @@ class VerifyCode extends React.Component{
 
         }, (err) => {
             clearInterval(this.timer);
-            this.setState({codePop:false,loanShow:true,failMsg:err.message})
+            this.setState({loanShow:true,failMsg:err.message})
         });
     }
 
@@ -103,7 +103,7 @@ class VerifyCode extends React.Component{
             }
         }, e => {
             if(e.code == 603002){
-                this.setState({codePop:false, loanShow:true, failMsg:e.message});
+                this.setState({loanShow:true, failMsg:e.message});
             }else{
                 $FW.Component.Toast(e.message)}
             }
@@ -111,7 +111,7 @@ class VerifyCode extends React.Component{
 }
 
     callbackHandler = () => {
-        this.setState({loanShow:false})
+        this.setState({loanShow:false, codePop:false})
     }
 
     render() {
