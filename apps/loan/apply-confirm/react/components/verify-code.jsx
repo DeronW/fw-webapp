@@ -6,7 +6,7 @@ class VerifyCode extends React.Component{
             countdown: 0,
             show_warn: false,
             value: '',
-            codePop:this.props.stateProps,
+            codePop:true,
             otherTip:false,
             loanShow:false,
             failMsg:''
@@ -43,9 +43,9 @@ class VerifyCode extends React.Component{
         this.countingDown();
     }
 
-    componentWillReceiveProps() {
-        this.setState({codePop:this.props.stateProps})
-    }
+    // componentWillReceiveProps() {
+    //     this.setState({codePop:this.props.stateProps})
+    // }
 
     checkAjax = () => {
         let query = $FW.Format.urlQuery();
@@ -116,7 +116,7 @@ class VerifyCode extends React.Component{
 
     callbackHandler = () => {
         this.setState({loanShow:false});
-        this.props.reSetState(true);
+        //this.props.reSetState(true);
     }
 
     render() {
