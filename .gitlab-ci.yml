@@ -2,14 +2,7 @@ before_script:
   - node -v
   - mpm -v
   
-test:
-  type: deploy
-  script:
-  - npm install
-  only:
-  - master
-
 production:
-  type: deploy
+  type: build
   script:
   - echo 123
