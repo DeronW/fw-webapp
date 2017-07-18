@@ -47,10 +47,30 @@ class VerifyCode extends React.Component{
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
         $FXH.Post(`${API_PATH}/api/loan/v1/status.json`, {
-            orderGid: orderGid,
-            enable_loading: false
-        }).then(() => {
+            orderGid: orderGid
+        }).then(()=>{
+            $FW.Component.hideAjaxLoading();
+            return new Promise(resolve =>resolve())
+        }).then((data) => {
+            let finishFlag = true;
+            if(data.loanStatus == 2 || data.loanStatus == 3){
+                 this.setState({codePop:false,loanShow:true,failMsg:data.failReason})
+             }else{
+                 finishFlag = false
+             }
+
+             if(this.state.countdown <= 0){
+                  if(data.loanStatus == 2 || data.loanStatus == 3){
+                     this.setState({codePop:false,loanShow:true,failMsg:data.failReason})
+                 }else{
+                      finishFlag = false
+                  }
+             }
+
+            if (finishFlag) clearInterval(this.timer);
+
         }, (err) => {
+            clearInterval(this.timer);
             this.setState({codePop:false,loanShow:true,failMsg:err.message})
         });
     }
