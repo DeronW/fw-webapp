@@ -43,9 +43,9 @@ class VerifyCode extends React.Component{
         this.countingDown();
     }
 
-    // componentWillReceiveProps() {
-    //     this.setState({codePop:this.props.stateProps})
-    // }
+    componentWillReceiveProps() {
+        this.setState({codePop:this.props.stateProps})
+    }
 
     checkAjax = () => {
         let query = $FW.Format.urlQuery();
