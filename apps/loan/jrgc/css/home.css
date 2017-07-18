@@ -56,25 +56,23 @@ body {
 .loan-product-amount {
   color: #999;
   font-size: 27px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .loan-product-label {
   display: inline-block;
   height: 36px;
-  line-height: 36px;
-  padding:0 3px;
+  line-height: 32px;
+  padding:0 6px;
   border-radius: 2px;
   font-size: 24px;
+  margin: 0 6px;
 }
-
-.loan-product-label-icon {
-  margin-right: 6px;
-  vertical-align: baseline;
+.loan-product-label img{
+  vertical-align: middle;
 }
-
-.loan-product-label-icon[src*="label-2"] {
-  vertical-align: initial;
+.loan-product-label span{
+  vertical-align: middle;
 }
 
 .sub-product-container {

@@ -8,7 +8,7 @@ export default class Login {
         this.Post = Post;
 
         extendObservable(this, {
-            show: false
+            
         })
     }
     gotoLogin = () => {
@@ -50,9 +50,5 @@ export default class Login {
 
     reload_jrgc = () => {
         location.href = "/static/loan/jrgc/index.html#/login"
-    }
-
-    setShow = () => {
-        this.show = true
     }
 }
