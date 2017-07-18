@@ -1,8 +1,21 @@
 before_script:
   - node -v
-  - mpm -v
+  - npm -v
+
+after_script:
+  - npm run clean
+
+stages:
+  - build
+  - deploy
   
-production:
-  type: build
+job fetch from git:
+  stage: build
   script:
-  - echo 123
+    - git --version
+
+  only:
+    - master
+    
+  tags:
+    - frontend
