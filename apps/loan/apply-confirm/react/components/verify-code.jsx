@@ -6,7 +6,7 @@ class VerifyCode extends React.Component{
             countdown: 0,
             show_warn: false,
             value: '',
-            codePop:this.props.callbackGetState,
+            codePop:false,
             otherTip:false,
             loanShow:false,
             failMsg:''
@@ -43,8 +43,8 @@ class VerifyCode extends React.Component{
         this.countingDown();
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({codePop:nextProps.callbackGetState})
+    componentWillReceiveProps() {
+        this.setState({codePop:this.props.stateProps})
     }
 
     checkAjax = () => {

@@ -87,7 +87,7 @@ class ConfirmLoanWrap extends React.Component{
                             callbackGetLoanResultFail={this.getLoanResultFail}
                             callbackGetLoanResultCheck={this.getLoanResultCheck}
                             reSetState={this.reGetState}
-                            callbackGetState={this.state.reSetState}
+                            stateProps={this.state.reSetState}
                 /> : null}
 
             {this.state.loanResult ?
