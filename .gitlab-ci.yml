@@ -1,8 +1,18 @@
 before_script:
   - node -v
-  - mpm -v
+  - npm -v
   
-production:
-  type: build
+variables:
+  - echo ''
+  
+after_script:
+  - npm run clean
+
+job_fetch:
   script:
-  - echo 123
+    - git pull
+
+  stage: build
+  only: 
+    - master
+  allow_filure: true
