@@ -6,7 +6,7 @@ class VerifyCode extends React.Component{
             countdown: 0,
             show_warn: false,
             value: '',
-            codePop:true,
+            codePop:this.props.stateProps,
             otherTip:false,
             loanShow:false,
             failMsg:''
@@ -115,8 +115,8 @@ class VerifyCode extends React.Component{
 }
 
     callbackHandler = () => {
-        this.setState({loanShow:false, codePop:false});
-        //this.props.reSetState(true);
+        this.setState({loanShow:false});
+        this.props.reSetState(true);
     }
 
     render() {
