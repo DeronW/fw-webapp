@@ -8,6 +8,9 @@ after_script:
 stages:
   - build
   - deploy
+
+tags:
+  - frontend
   
 job fetch from git:
   stage: build
