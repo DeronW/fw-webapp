@@ -19,7 +19,6 @@ job fetch from git:
 job compile project:
   stage: build
   script:
-    - git -v
     - npm install
   tags:
     - frontend
