@@ -47,7 +47,8 @@ class VerifyCode extends React.Component{
         let query = $FW.Format.urlQuery();
         let orderGid = query.orderGid;
         $FXH.Post(`${API_PATH}/api/loan/v1/status.json`, {
-            orderGid: orderGid
+            orderGid: orderGid,
+            with_out_loading:true
         }).then((data) => {
             let finishFlag = true;
             if(data.loanStatus == 2 || data.loanStatus == 3){
