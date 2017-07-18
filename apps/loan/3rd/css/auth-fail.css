@@ -8,10 +8,22 @@ body {
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .info-text {
     color: #333;
-    font-size: 30px;
-    text-align: center;
+    font-size: 32px;
+    margin-top: 30px;
+}
+
+.bottom-btn {
+    width: 656px;
+    height: 73px;
+    line-height: 73px;
+    margin: 75px auto;
+    background-color: #6ba4f0;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 32px;
 }
