@@ -8,7 +8,8 @@ class ConfirmLoanWrap extends React.Component{
             noticeShow: false,
             successResult: false,
             failResult: false,
-            checkResult: false
+            checkResult: false,
+            reSetState:false
         }
         this.itemShow = this.itemShow.bind(this);
         this.itemDetailHide = this.itemDetailHide.bind(this);
@@ -55,6 +56,10 @@ class ConfirmLoanWrap extends React.Component{
     getLoanResultCheck(booleanVal) {
         this.setState({ checkResult: booleanVal });
     }
+    reGetState = (booleanVal) => {
+        this.setState({reSetState:booleanVal});
+    }
+
     render() {
     let cashBank = this.props.userBankList.withdrawBankcard;
 
@@ -81,6 +86,8 @@ class ConfirmLoanWrap extends React.Component{
                             callbackGetLoanResultSuccess={this.getLoanResultSuccess}
                             callbackGetLoanResultFail={this.getLoanResultFail}
                             callbackGetLoanResultCheck={this.getLoanResultCheck}
+                            reSetState={this.reGetState}
+                            callbackGetState={this.state.reSetState}
                 /> : null}
 
             {this.state.loanResult ?
