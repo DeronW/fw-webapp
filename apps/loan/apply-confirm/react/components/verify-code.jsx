@@ -119,7 +119,7 @@ class VerifyCode extends React.Component{
 }
 
     callbackHandler = () => {
-        this.setState({loanShow:false});
+        this.setState({loanShow:false, codePop:false});
         this.props.reSetState(true);
     }
 
