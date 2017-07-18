@@ -92,8 +92,10 @@ class BorrowMoney extends React.Component {
                         this.setState({ canStatus: 2 });
                     }
                 }, err => {
-                    if(err.code == 20013 || err.code == 1001003){
-                        this.setState({errCode:err.code, failMsg:err.message, title:"审核未通过"})
+                    if(err.code == 20013){
+                        this.setState({errCode:err.code, failMsg:"您的用户信息与读秒不匹配无法授权登录读秒", title:"审核未通过"})
+                    }else if(err.code == 1001003){
+                        this.setState({errCode:err.code, failMsg:"您无法申请读秒借款", title:"提示"})
                     }else{
                         this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
                     }
