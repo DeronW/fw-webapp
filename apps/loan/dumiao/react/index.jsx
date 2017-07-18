@@ -109,7 +109,7 @@ class BorrowMoney extends React.Component {
         let { canStatus, borrowStatus} = this.state;
         // 初始化数据没有完成, 稍后再试
         if (canStatus === null) return;
-
+        console.log(this.state.errCode)
         if (borrowStatus == 1 || borrowStatus == 101) {
             gotoHandler('/static/loan/user-card-set/index.html');
         } else if (canStatus == 2) {
