@@ -73,7 +73,7 @@ class ConfirmLoan extends React.Component{
             if(data.loanStatus == 2 || data.loanStatus == 3){
                 this.setState({codePop:false,loanShow:true,failMsg:data.failReason})
             }else if(data.loanStatus >= 4){
-                clearInterval(this.timer);
+                finishFlag = true
             }else{
                 finishFlag = false
             }
@@ -82,7 +82,7 @@ class ConfirmLoan extends React.Component{
                 if(data.loanStatus == 2 || data.loanStatus == 3){
                     this.setState({codePop:false,loanShow:true,failMsg:data.failReason})
                 }else if(data.loanStatus >= 4){
-                    clearInterval(this.timer);
+                    finishFlag = true
                 }else{
                     finishFlag = false
                 }
