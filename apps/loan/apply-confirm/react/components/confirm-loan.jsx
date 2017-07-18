@@ -11,7 +11,8 @@ class ConfirmLoan extends React.Component{
             codePop:false,
             otherTip:false,
             loanShow:false,
-            failMsg:''
+            failMsg:'',
+            loanStatus:''
         }
     }
     confirmHandler = () => {
@@ -52,7 +53,7 @@ class ConfirmLoan extends React.Component{
         this.checkAjax();
         this.timer = setInterval(() => {
             let c = this.state.countdown;
-            if (c % 5 === 0) this.checkAjax();
+            if (c % 5 === 0 && this.state.loanStatus <= 1) this.checkAjax();
             this.setState({
                 countdown: c - 1
             });
@@ -71,18 +72,18 @@ class ConfirmLoan extends React.Component{
         }).then((data) => {
             let finishFlag = true;
             if(data.loanStatus == 2 || data.loanStatus == 3){
-                this.setState({codePop:false,loanShow:true,failMsg:data.failReason})
+                this.setState({codePop:false,loanShow:true,failMsg:data.failReason,loanStatus:data.loanStatus})
             }else if(data.loanStatus >= 4){
-                return new Promise(reject => reject())
+                this.setState({loanStatus:data.loanStatus});
             }else{
                 finishFlag = false
             }
 
             if(this.state.countdown <= 0){
                 if(data.loanStatus == 2 || data.loanStatus == 3){
-                    this.setState({codePop:false,loanShow:true,failMsg:data.failReason})
+                    this.setState({codePop:false,loanShow:true,failMsg:data.failReason,loanStatus:data.loanStatus})
                 }else if(data.loanStatus >= 4){
-                    return new Promise(reject => reject())
+                    this.setState({loanStatus:data.loanStatus});
                 }else{
                     finishFlag = false
                 }
