@@ -2,6 +2,7 @@ import { extendObservable, computed } from 'mobx'
 import { Components } from 'fw-javascripts'
 
 import { Browser, Storage, NativeBridge } from '../../lib/helpers'
+
 export default class Login {
     constructor(Post) {
         this.Post = Post;
@@ -39,6 +40,7 @@ export default class Login {
                 location.href = '/static/loan/jrgc/index.html#/home';
             }, e => Components.showAlert(e.message));
         }
+
         NativeBridge.trigger("refresh_loan_token");
         NativeBridge.onReceive(data => {
             data.token ? login(data.token) : NativeBridge.login()
