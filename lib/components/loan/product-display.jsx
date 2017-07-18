@@ -32,7 +32,7 @@ class ProductDisplay extends React.Component {
             top:"0",
             left:"0",
             background:"rgba(0,0,0,.7)",
-            zIndex:"10"
+            zIndex:"100000"
         };
 
         let _product_popup = {
