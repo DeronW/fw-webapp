@@ -45,6 +45,7 @@ class VerifyCode extends React.Component{
 
     componentWillReceiveProps() {
         this.setState({codePop:this.props.stateProps})
+        this.countingDown();
     }
 
     checkAjax = () => {
