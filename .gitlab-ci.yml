@@ -1,18 +1,18 @@
 before_script:
   - node -v
   - npm -v
-  
-variables:
-  - echo ''
-  
+
 after_script:
   - npm run clean
 
-job_fetch:
-  script:
-    - git pull
-
+stages:
+  - build
+  - deploy
+  
+job fetch from git:
   stage: build
-  only: 
+  script:
+    - git --version
+
+  only:
     - master
-  allow_filure: true
