@@ -59,7 +59,8 @@ class BorrowMoney extends React.Component {
             loanShow:false,
             failMsg: '',
             title:'',
-            errCode:null
+            errCode:null,
+            sucCode:10000
         }
     }
     componentDidMount = () => {
@@ -106,10 +107,9 @@ class BorrowMoney extends React.Component {
     }
 
     clickHandler = () => {
-        let { canStatus, borrowStatus} = this.state;
+        let { canStatus, borrowStatus, errCode, sucCode} = this.state;
         // 初始化数据没有完成, 稍后再试
-        if (canStatus === null) return;
-        console.log(this.state.errCode)
+        if (sucCode && canStatus === null) return;
         if (borrowStatus == 1 || borrowStatus == 101) {
             gotoHandler('/static/loan/user-card-set/index.html');
         } else if (canStatus == 2) {
@@ -121,7 +121,7 @@ class BorrowMoney extends React.Component {
         } else if (canStatus == 1) {
             //this.setState({ canMessageShow: true });
             this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
-        } else if(this.state.errCode == 20013 || this.state.errCode == 1001003){
+        } else if(errCode == 20013 || errCode == 1001003){
             this.setState({loanShow:true});
         }else {
             this.setState({ tryOtherLoanPopShow: true });
