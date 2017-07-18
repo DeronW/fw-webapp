@@ -62,12 +62,11 @@ body {
 .loan-product-label {
   display: inline-block;
   height: 36px;
-  line-height: 30px;
+  line-height: 32px;
   padding:0 6px;
   border-radius: 2px;
   font-size: 24px;
-  margin-right: 6px;
-  margin-left: 6px;
+  margin: 0 6px;
 }
 .loan-product-label img{
   vertical-align: middle;
