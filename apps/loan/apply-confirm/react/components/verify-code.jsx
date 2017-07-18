@@ -43,11 +43,9 @@ class VerifyCode extends React.Component{
         this.countingDown();
     }
 
-
-
-    componentWillReceiveProps() {
-        this.setState({codePop:this.props.stateProps})
-    }
+    // componentWillReceiveProps() {
+    //     this.setState({codePop:this.props.stateProps})
+    // }
 
     checkAjax = () => {
         let query = $FW.Format.urlQuery();
@@ -118,7 +116,7 @@ class VerifyCode extends React.Component{
 
     callbackHandler = () => {
         this.setState({loanShow:false, codePop:false});
-        this.props.reSetState(true);
+        //this.props.reSetState(true);
     }
 
     render() {
