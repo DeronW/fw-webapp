@@ -6,7 +6,7 @@ class VerifyCode extends React.Component{
             countdown: 0,
             show_warn: false,
             value: '',
-            codePop:false,
+            codePop:true,
             otherTip:false,
             loanShow:false,
             failMsg:''
