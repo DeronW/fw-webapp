@@ -8,8 +8,8 @@ import './css/index.css'
 
 
 let stores = {
-    jrgc_home: new Stores.Home(Post),
-    jrgc_login: new Stores.Login(Post)
+    jrgc_home: new Stores.JRGCHome(Post),
+    jrgc_login: new Stores.JRGCLogin(Post)
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))
