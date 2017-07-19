@@ -90,9 +90,9 @@ const WEIXIN_PAGES = [
 //     'market-detail'
 // ]
 
-const CREDIT_CARD = [
-    'credit-card-products'
-]
+// const CREDIT_CARD = [
+//     'credit-card-products'
+// ]
 
 const MORTGAGE = [
     'house-mortgage'
@@ -129,7 +129,7 @@ APP_NAMES.push(
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
-    ...CREDIT_CARD,
+    // ...CREDIT_CARD,
     ...MORTGAGE,
     ...APPLY_TEN_MILLION_LOAN,
     ...REFACTORY_PAGES
