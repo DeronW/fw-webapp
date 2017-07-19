@@ -31,11 +31,21 @@ class FieldPanel extends React.Component {
     }
 
     focusHandler = () => {
-
+        ReactDOM.findDOMNode(this.refs['field-edit-panel']).style.top = document.documentElement.scrollTop || document.body.scrollTop;
+        ReactDOM.findDOMNode(this.refs['field-edit-panel']).style.position = "absolute";
     }
 
     render() {
         let { value } = this.state, { field, field_key } = this.props;
+
+        let field_edit_panel_style = {
+            position: "fixed",
+            top: $FW.Browser.inWeixin() || $FW.Browser.inApp() ? '0px' : '100px',
+            width: "100%",
+            height: "100%",
+            paddingTop: "20px",
+            background: "#f0f0f0"
+        }
 
         let input_type = () => {
             return <div className="field-item">
@@ -63,9 +73,7 @@ class FieldPanel extends React.Component {
             return <div> {field.options.map(option)} </div>
         }
 
-        return <div className="field-edit-panel" style={{
-            top: $FW.Browser.inWeixin() || $FW.Browser.inApp() ? '0px' : '100px'
-        }}>
+        return <div className="field-edit-panel" ref="field-edit-panel" style={field_edit_panel_style}>
             {field.describe &&
                 <div className="section-title">{field.describe}</div>}
             {field.options ?
