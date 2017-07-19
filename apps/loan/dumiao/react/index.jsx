@@ -112,7 +112,7 @@ class BorrowMoney extends React.Component {
     clickHandler = () => {
         let { canStatus, borrowStatus, errCode} = this.state;
         // 初始化数据没有完成, 稍后再试
-        if (canStatus === null && errCode != 20013 && errCode !=1001003) return;
+        if (canStatus === null && errCode != 20013 && errCode !=1001003 && errCode !=10001) return;
         if (borrowStatus == 1 || borrowStatus == 101) {
             gotoHandler('/static/loan/user-card-set/index.html');
         } else if (canStatus == 2) {
