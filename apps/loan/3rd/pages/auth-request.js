@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 
 import { Components, Utils } from 'fw-javascripts'
 
-import { Header } from '../../lib/components'
+import { Header, Captcha } from '../../lib/components'
 import { Post } from '../../lib/helpers'
 
 import styles from '../css/auth-request.css'
@@ -14,7 +14,7 @@ class AuthRequest extends React.Component {
 
     state = {
         phone: '',
-        captchaImgUrl: '',
+        captchaTimeStamp: Date.now(),
         captchaToken: '',
         captchaInput: '',
         getSMSTimer: 60,
@@ -24,24 +24,18 @@ class AuthRequest extends React.Component {
 
     componentDidMount() {
         this.setState({ phone: Utils.hashQuery.phone })
-        this.getCaptcha();
     }
 
     get maskedPhone() {
         return this.state.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
     }
 
-    getCaptcha = () => {
-        Post('/api/userBase/v1/verifyNum.json').then(data => {
-            this.setState({
-                captchaImgUrl: data.url,
-                captchaToken: data.verifyToken
-            })
-        })
+    handleSMSInput = (e) => {
+        this.setState({ SMSInput: e.target.value })
     }
 
-    handleInput = (inputType) => (e) => {
-        this.setState({ [inputType]: e.target.value })
+    captchaInputHandler = (input, token) => {
+        this.setState({ captchaInput: input, captchaToken: token})
     }
 
     SMSTimerController = () => {
@@ -72,7 +66,7 @@ class AuthRequest extends React.Component {
         }, e => {
             if (e.code == 20020) {
                 Components.showToast('图形验证码不正确');
-                this.getCaptcha();
+                this.setState({ captchaTimeStamp: Date.now() });
             }
         })
     }
@@ -94,40 +88,36 @@ class AuthRequest extends React.Component {
         return (
             <div>
                 <Header title="授权" history={history} />
+
                 <div styleName="auth-info">请授权
                     <span styleName="auth-phone">{this.maskedPhone}</span>
                     登录放心花
                 </div>
+
                 <div>
                     <div styleName="cooperation-logo-container">
                         <i styleName="third-party-logo"></i>
                         <i styleName="fxh-logo"></i>
                     </div>
+
                     <div styleName="input-field-grp">
-                        <div styleName="input-field">
-                            <i styleName="captcha-icon"></i>
-                            <input styleName="captcha-input"
-                                maxLength="4"
-                                value={captchaInput}
-                                placeholder="请输入图形验证码"
-                                onChange={this.handleInput('captchaInput')}/>
-                            <div styleName="captcha-img-container" onClick={this.getCaptcha}>
-                                <img src={captchaImgUrl} />
-                            </div>
-                        </div>
+
+                        <Captcha changeHandler={this.captchaInputHandler} timeStamp={this.state.captchaTimeStamp} />
+
                         <div styleName="input-field">
                             <i styleName="sms-icon"></i>
                             <input styleName="sms-input"
                                 maxLength="4" type="number"
                                 value={SMSInput}
                                 placeholder="请输入短信验证码"
-                                onChange={this.handleInput('SMSInput')} />
+                                onChange={this.handleSMSInput} />
                             <div styleName="sms-btn" onClick={this.getSMS}>
                                 {getSMSTimer === 60 ? "获取验证码": `${getSMSTimer}s`}
                             </div>
                         </div>
                     </div>
-                <div styleName="submit-btn" onClick={this.submitAuthRequest}>确认授权</div>
+
+                    <div styleName="submit-btn" onClick={this.submitAuthRequest}>确认授权</div>
                 </div>
             </div>
         )

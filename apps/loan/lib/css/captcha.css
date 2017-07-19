@@ -31,8 +31,11 @@
     outline: none;
 }
 
-.img-btn {
+.img-container {
     float: right;
     width: 200px;
-    vertical-align: middle;
+}
+
+.img-container img {
+    width: 100%;
 }

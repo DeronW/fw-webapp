@@ -1,12 +1,12 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
-import Post from '../helpers'
+import { Post } from '../helpers'
 
 import styles from '../css/captcha.css'
 
 
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles)
 class Captcha extends React.Component {
 
     state = {
@@ -19,6 +19,10 @@ class Captcha extends React.Component {
         this.getCaptcha();
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.timeStamp !== this.props.timeStamp) this.getCaptcha();
+    }
+
     getCaptcha = () => {
         Post('/api/userBase/v1/verifyNum.json').then(data => {
             this.setState({
@@ -29,6 +33,7 @@ class Captcha extends React.Component {
     }
 
     handleInput = (e) => {
+        this.props.changeHandler(e.target.value, this.state.token);
         this.setState({ inputStr: e.target.value })
     }
 
@@ -41,7 +46,9 @@ class Captcha extends React.Component {
                     value={inputStr}
                     placeholder="请输入图形验证码"
                     onChange={this.handleInput} />
-                <img styleName="img-btn" onClick={this.getCaptcha} src={imgUrl} />
+                <div styleName="img-container" onClick={this.getCaptcha}>
+                    <img src={imgUrl} />
+                </div>
             </div>
         )
     }
