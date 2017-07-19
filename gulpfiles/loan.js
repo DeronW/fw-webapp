@@ -132,8 +132,8 @@ APP_NAMES.push(
     ...CREDIT_CARD,
     ...MORTGAGE,
     ...APPLY_TEN_MILLION_LOAN,
-    ...REFACTORY_PAGES,
-    ...AUTH_PAGES
+    ...REFACTORY_PAGES
+    // ...AUTH_PAGES
 );
 
 
