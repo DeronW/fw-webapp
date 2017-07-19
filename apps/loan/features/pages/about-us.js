@@ -15,7 +15,7 @@ class AboutUs extends React.Component {
             Browser.inApp ? NativeBridge.close() : history.goBack()
         }
         return <div styleName="bg">
-            {!Browser.inApp && <Header title="关于我们" goBack={goBack} enable={'force'} />}
+            {!Browser.inApp && <Header title="关于我们" goBack={goBack}/>}
             <div styleName="banner">
                 <img src={require('../images/about-us/logo.png')} />
                 <div styleName="banner-intro">
