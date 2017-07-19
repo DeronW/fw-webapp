@@ -14,15 +14,26 @@ export default class Home {
     }
 
     getDataHandler = () => {
+        // this.Post(`/api/product/v1/productList.json`)
+        //     .then(data => {
+        //         this.loanProductList = data.resultList
+        //     })
+
+        // this.Post(`/api/product/v1/recommendedList.json`)
+        //     .then(data => {
+        //         this.subProductList = data.resultList
+        //     })
+
         this.Post(`/api/product/v1/productList.json`)
             .then(data => {
                 this.loanProductList = data.resultList
             })
-
-        this.Post(`/api/product/v1/recommendedList.json`)
-            .then(data => {
-                this.subProductList = data.resultList
-            })
+            .then(
+                this.Post(`/api/product/v1/recommendedList.json`)
+                    .then(data => {
+                        this.subProductList = data.resultList
+                    })
+            )
     }
 
     gotoHandler = (link, toNative, need_login) => {
