@@ -18,8 +18,7 @@ export default class Home {
             .then(data => {
                 this.loanProductList = data.resultList
             })
-
-        this.Post(`/api/product/v1/recommendedList.json`)
+            .then(() => this.Post(`/api/product/v1/recommendedList.json`))
             .then(data => {
                 this.subProductList = data.resultList
             })
