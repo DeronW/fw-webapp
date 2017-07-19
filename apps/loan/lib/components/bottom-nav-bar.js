@@ -18,6 +18,10 @@ class BottomNavBar extends React.Component {
         };
     }
 
+    this_is_a_placeholder_function = () => {
+        let a = 'fijswoi;dfj;oafj;wjfow'
+    }
+
     render() {
         let easyloan_style_footer_fixed = {
             width: "720px",
