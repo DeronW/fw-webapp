@@ -17,12 +17,12 @@ export default class Home {
         this.Post(`/api/product/v1/productList.json`)
             .then(data => {
                 this.loanProductList = data.resultList
-            })
-
-        this.Post(`/api/product/v1/recommendedList.json`)
-            .then(data => {
-                this.subProductList = data.resultList
-            })
+            }).then(new Promise(() => {
+                this.Post(`/api/product/v1/recommendedList.json`)
+                    .then(data => {
+                        this.subProductList = data.resultList
+                    })
+            }))
     }
 
     gotoHandler = (link, toNative, need_login) => {
