@@ -29,11 +29,11 @@ const USER_PAGES = [
 
 ]
 
-// 金融工场APP页面
-const JRGC_PAGES = [
-    'fxh-jrgc-invite', //放心花金融工场邀请页面
-    'fxh-jrgc-invite-banner', //放心花金融工场邀请页面(banner入口)
-]
+// // 金融工场APP页面
+// const JRGC_PAGES = [
+//     'fxh-jrgc-invite', //放心花金融工场邀请页面
+//     'fxh-jrgc-invite-banner', //放心花金融工场邀请页面(banner入口)
+// ]
 
 // 合作方页面
 const OUTSIDE_PAGES = [
@@ -114,13 +114,7 @@ const REFACTORY_PAGES = [{
     name: 'protocols',
     compiler: 'webpack'
 },{
-    name:'jrgc',
-    compiler:'webpack'
-}]
-
-// 第三方授权页面
-const AUTH_PAGES = [{
-    name: '3rd',
+    name: '3rd', // 第三方授权页面, 包括JRGC的特殊登录
     compiler: 'webpack'
 }]
 
@@ -131,7 +125,7 @@ APP_NAMES.push(
     ...APPLY_PAGES,
     ...APP_NAMES,
     // ...PROTOCOL_PAGES,
-    ...JRGC_PAGES,
+    // ...JRGC_PAGES,
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,

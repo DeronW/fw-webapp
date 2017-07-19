@@ -220,10 +220,6 @@ class ApplyLoan extends React.Component {
 
     render() {
 
-        let banner = <div className="ad">
-            <a href="https://m.easyloan888.com/static/loan/fxh-jrgc-invite/index.html"><img src="images/banner.png" /></a>
-        </div>
-
         return (
             <div className="apply-loan">
                 {this.state.loanShow && <ProductDisplay callbackHandler={this.callbackHandler} popTitle={"提示"}/>}

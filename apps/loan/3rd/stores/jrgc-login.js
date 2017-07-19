@@ -8,7 +8,7 @@ export default class Login {
         this.Post = Post;
 
         extendObservable(this, {
-            
+
         })
     }
     gotoLogin = () => {
@@ -37,7 +37,7 @@ export default class Login {
                     code: dict.invitationCode,
                     uid: dict.uid
                 })
-                location.href = '/static/loan/jrgc/index.html#/home';
+                location.href = '/static/loan/3rd/index.html#/jrgc-home';
             }, e => Components.showAlert(e.message));
         }
 
@@ -49,6 +49,6 @@ export default class Login {
 
 
     reload_jrgc = () => {
-        location.href = "/static/loan/jrgc/index.html#/login"
+        location.href = "/static/loan/3rd/index.html#/jrgc-login"
     }
 }

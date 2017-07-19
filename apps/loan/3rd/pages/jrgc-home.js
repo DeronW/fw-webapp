@@ -6,9 +6,9 @@ import { Components } from 'fw-javascripts'
 
 import { Header,BottomNavBar } from '../../lib/components'
 import { Browser } from '../../lib/helpers'
-import styles from '../css/home.css'
+import styles from '../css/jrgc-home.css'
 
-const LoanProduct = inject('home')(observer(CSSModules((props) => {
+const LoanProduct = inject('jrgc_home')(observer(CSSModules((props) => {
     let productLink = props.productName === '放心花' ? `/static/loan/fxh/index.html` : `/static/loan/dumiao/index.html`,
         productToNative = props.productName === '放心花' ? 'fxh_detail' : '';
     let labelBorderColor = { '1': '#fd6f79', '2': '#46abef', '3': '#fd9c34' };
@@ -24,7 +24,7 @@ const LoanProduct = inject('home')(observer(CSSModules((props) => {
         </div>
     );
     return (
-        <div styleName="loan-product-card" onClick={() => { props.home.gotoHandler(`${productLink}?pid=${props.productId}`, productToNative) }}>
+        <div styleName="loan-product-card" onClick={() => { props.jrgc_home.gotoHandler(`${productLink}?pid=${props.productId}`, productToNative) }}>
             <img styleName="loan-product-logo" src={props.productLogo} />
             <div styleName="loan-product-name">{props.productName}</div>
             <div styleName="loan-product-amount">借款范围({props.amountStr})</div>
@@ -35,10 +35,10 @@ const LoanProduct = inject('home')(observer(CSSModules((props) => {
     )
 }, styles)))
 
-const SubProduct = inject('home')(observer(CSSModules((props) => {
+const SubProduct = inject('jrgc_home')(observer(CSSModules((props) => {
     let toNative = props.toNative ? props.toNative : '';
     return (
-        <div styleName="sub-product-item" onClick={() => { props.home.gotoHandler(props.redirectUrl, toNative) }}>
+        <div styleName="sub-product-item" onClick={() => { props.jrgc_home.gotoHandler(props.redirectUrl, toNative) }}>
             <div styleName="sub-product-logo-container">
                 <img styleName="sub-product-logo" src={decodeURIComponent(props.logoUrl)} />
             </div>
@@ -51,37 +51,37 @@ const SubProduct = inject('home')(observer(CSSModules((props) => {
     )
 }, styles)))
 
-@inject("home")
+@inject("jrgc_home")
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class Home extends React.Component {
+class JRGCHome extends React.Component {
 
     componentDidMount() {
-        this.props.home.getDataHandler()
+        this.props.jrgc_home.getDataHandler()
     }
+
     render() {
-        let { home } = this.props;
+        let { jrgc_home } = this.props;
         return <div>
-            {Browser.inJRGCApp ? null : <div><img styleName="banner" src={require("../images/banner.jpg")} alt="" /></div>}
             <div styleName="loan-product-container">
                 <div styleName="product-title">
-                    <img styleName="product-title-icon" src={require("../images/loan-category-icon.png")} />我要借款
+                    <img styleName="product-title-icon" src={require("../images/jrgc/loan-category-icon.png")} />我要借款
                     <div>
-                        {home.loanProductList.map(product => <LoanProduct {...product} key={product.productId} />)}
+                        {jrgc_home.loanProductList.map(product => <LoanProduct {...product} key={product.productId} />)}
                     </div>
                 </div>
             </div>
             <div styleName="sub-product-container">
                 <div styleName="product-title">
-                    <img styleName="product-title-icon" src={require("../images/sub-category-icon.png")} />
+                    <img styleName="product-title-icon" src={require("../images/jrgc/sub-category-icon.png")} />
                     精选推荐
                     </div>
                 <div styleName="sub-product-item-container">
-                    {home.subProductList.map(product => <SubProduct {...product} key={product.productTitle} />)}
+                    {jrgc_home.subProductList.map(product => <SubProduct {...product} key={product.productTitle} />)}
                 </div>
             </div>
         </div>
     }
 }
-export default Home
+export default JRGCHome
 
