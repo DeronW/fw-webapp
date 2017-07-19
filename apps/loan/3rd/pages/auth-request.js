@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 
 import { Components, Utils } from 'fw-javascripts'
 
-import { Header, Captcha } from '../../lib/components'
+import { Header } from '../../lib/components'
 import { Post } from '../../lib/helpers'
 
 import styles from '../css/auth-request.css'
@@ -14,7 +14,7 @@ class AuthRequest extends React.Component {
 
     state = {
         phone: '',
-        captchaTimeStamp: Date.now(),
+        captchaImgUrl: '',
         captchaToken: '',
         captchaInput: '',
         getSMSTimer: 60,
@@ -24,18 +24,24 @@ class AuthRequest extends React.Component {
 
     componentDidMount() {
         this.setState({ phone: Utils.hashQuery.phone })
+        this.getCaptcha();
     }
 
     get maskedPhone() {
         return this.state.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
     }
 
-    handleSMSInput = (e) => {
-        this.setState({ SMSInput: e.target.value })
+    getCaptcha = () => {
+        Post('/api/userBase/v1/verifyNum.json').then(data => {
+            this.setState({
+                captchaImgUrl: data.url,
+                captchaToken: data.verifyToken
+            })
+        })
     }
 
-    captchaInputHandler = (input, token) => {
-        this.setState({ captchaInput: input, captchaToken: token})
+    handleInput = (inputType) => (e) => {
+        this.setState({ [inputType]: e.target.value })
     }
 
     SMSTimerController = () => {
@@ -61,12 +67,13 @@ class AuthRequest extends React.Component {
             verifyToken: captchaToken,
             verifyCode: captchaInput
         }, 'silence').then((data) => {
+            Components.showToast('验证码已发送');
             this.setState({ SMSToken: data.codeToken });
             this.SMSTimerController();
         }, e => {
             if (e.code == 20020) {
                 Components.showToast('图形验证码不正确');
-                this.setState({ captchaTimeStamp: Date.now() });
+                this.getCaptcha();
             }
         })
     }
@@ -101,8 +108,17 @@ class AuthRequest extends React.Component {
                     </div>
 
                     <div styleName="input-field-grp">
-
-                        <Captcha changeHandler={this.captchaInputHandler} timeStamp={this.state.captchaTimeStamp} />
+                        <div styleName="input-field">
+                            <i styleName="captcha-icon"></i>
+                            <input styleName="captcha-input"
+                                maxLength="4"
+                                value={captchaInput}
+                                placeholder="请输入图形验证码"
+                                onChange={this.handleInput('captchaInput')}/>
+                            <div styleName="captcha-img-container" onClick={this.getCaptcha}>
+                                <img src={captchaImgUrl} />
+                            </div>
+                        </div>
 
                         <div styleName="input-field">
                             <i styleName="sms-icon"></i>
@@ -110,7 +126,7 @@ class AuthRequest extends React.Component {
                                 maxLength="4" type="number"
                                 value={SMSInput}
                                 placeholder="请输入短信验证码"
-                                onChange={this.handleSMSInput} />
+                                onChange={this.handleInput('SMSInput')} />
                             <div styleName="sms-btn" onClick={this.getSMS}>
                                 {getSMSTimer === 60 ? "获取验证码": `${getSMSTimer}s`}
                             </div>
