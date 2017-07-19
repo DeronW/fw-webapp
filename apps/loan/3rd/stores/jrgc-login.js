@@ -37,7 +37,7 @@ export default class Login {
                     code: dict.invitationCode,
                     uid: dict.uid
                 })
-                location.href = '/static/loan/jrgc/index.html#/home';
+                location.href = '/static/loan/3rd/index.html#/jrgc-home';
             }, e => Components.showAlert(e.message));
         }
 

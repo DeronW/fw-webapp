@@ -29,11 +29,11 @@ const USER_PAGES = [
 
 ]
 
-// 金融工场APP页面
-const JRGC_PAGES = [
-    'fxh-jrgc-invite', //放心花金融工场邀请页面
-    'fxh-jrgc-invite-banner', //放心花金融工场邀请页面(banner入口)
-]
+// // 金融工场APP页面
+// const JRGC_PAGES = [
+//     'fxh-jrgc-invite', //放心花金融工场邀请页面
+//     'fxh-jrgc-invite-banner', //放心花金融工场邀请页面(banner入口)
+// ]
 
 // 合作方页面
 const OUTSIDE_PAGES = [
@@ -125,7 +125,7 @@ APP_NAMES.push(
     ...APPLY_PAGES,
     ...APP_NAMES,
     // ...PROTOCOL_PAGES,
-    ...JRGC_PAGES,
+    // ...JRGC_PAGES,
     ...WEIXIN_PAGES,
     ...FXH_PAGES,
     ...DU_MIAO_PAGES,
