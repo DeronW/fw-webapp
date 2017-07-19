@@ -29,6 +29,11 @@ class FieldPanel extends React.Component {
     selectChangeHandler = (v) => {
         this.setState({ value: v }, this.confirmHandler)
     }
+
+    focusHandler = () => {
+
+    }
+
     render() {
         let { value } = this.state, { field, field_key } = this.props;
 
@@ -39,7 +44,9 @@ class FieldPanel extends React.Component {
                     <div className="text">
                         <input placeholder={field.placeholder}
                             onChange={this.textChangeHandler}
-                            value={value} />
+                            value={value}
+                            onFocus={this.focusHandler}
+                        />
                     </div>
                 </div>
             </div>
