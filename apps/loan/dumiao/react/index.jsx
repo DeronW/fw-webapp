@@ -123,7 +123,7 @@ class BorrowMoney extends React.Component {
             //this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
         } else if (canStatus == 1) {
             //this.setState({ canMessageShow: true });
-            this.setState({loanShow:true, failMsg:this.state.failMsg, title:"提示"});
+            this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
         } else if(errCode == 20013 || errCode == 1001003){
             this.setState({loanShow:true});
         } else if(errCode == 10001){
