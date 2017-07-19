@@ -113,34 +113,38 @@ class MainPanel extends React.Component {
             </div>
         }
 
-        return <div className="main-panel">
-            {['balance', 'term'].map(field_item)}
-            {panel_title('基本信息')}
-            {['realName', 'idCard'].map(disabled_field_item)}
-            {['creditCard', 'email', 'city', 'address', 'homeSituation'].map(field_item)}
-            {panel_title('紧急联系人')}
-            {['emContact', 'emRelationship', 'emMobile'].map(field_item)}
-            {panel_title('工作信息')}
-            {['income', 'workExperience'].map(field_item)}
+        return (
+                <div className="main-panel-wrap">
+                    <div className="main-panel">
+                        {['balance', 'term'].map(field_item)}
+                        {panel_title('基本信息')}
+                        {['realName', 'idCard'].map(disabled_field_item)}
+                        {['creditCard', 'email', 'city', 'address', 'homeSituation'].map(field_item)}
+                        {panel_title('紧急联系人')}
+                        {['emContact', 'emRelationship', 'emMobile'].map(field_item)}
+                        {panel_title('工作信息')}
+                        {['income', 'workExperience'].map(field_item)}
 
-            <div className="agree">
-                <div className="text"> 点击“申请借款”即视为同意
-            <a href="/static/loan/protocol-dumiao-openaccount/index.html">《开户授权书》
-            </a>、
-            <a href="/static/loan/protocol-personinfo-collect/index.html">《个人信息采集授权说明》
-            </a>
-				</div>
-			</div>
+                        <div className="agree">
+                            <div className="text"> 点击“申请借款”即视为同意
+                                <a href="/static/loan/protocol-dumiao-openaccount/index.html">《开户授权书》
+                                </a>、
+                                <a href="/static/loan/protocol-personinfo-collect/index.html">《个人信息采集授权说明》
+                                </a>
+                            </div>
+                        </div>
 
-            <div className="btn-area">
-                <div className="btn" onClick={this.submitHandler}>
-                    申请借款</div>
-            </div>
+                        <div className="btn-area">
+                            <div className="btn" onClick={this.submitHandler}>
+                                申请借款</div>
+                        </div>
 
-            {field && <FieldPanel
-            field_key={this.state.field_key}
-            field={field} set_form_data={this.setFormData} />}
-        </div>
+                        {field && <FieldPanel
+                            field_key={this.state.field_key}
+                            field={field} set_form_data={this.setFormData} />}
+                    </div>
+                </div>
+            )
     }
 }
 
