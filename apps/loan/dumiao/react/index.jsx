@@ -93,9 +93,9 @@ class BorrowMoney extends React.Component {
                     }
                 }, err => {
                     if(err.code == 20013){
-                        this.setState({errCode:err.code, failMsg:"您的用户信息与读秒不匹配无法授权登录读秒", title:"审核未通过"})
+                        this.setState({errCode:err.code, failMsg:"您的用户信息与分期不匹配无法授权登录分期", title:"审核未通过"})
                     }else if(err.code == 1001003){
-                        this.setState({errCode:err.code, failMsg:"您无法申请读秒借款", title:"提示"})
+                        this.setState({errCode:err.code, failMsg:"您无法申请分期借款", title:"提示"})
                     }else if(err.code == 10001){
                         this.setState({errCode:err.code, failMsg:err.message});
                     }else{
@@ -123,7 +123,7 @@ class BorrowMoney extends React.Component {
             //this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
         } else if (canStatus == 1) {
             //this.setState({ canMessageShow: true });
-            this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
+            this.setState({loanShow:true, failMsg:"您无法申请分期借款", title:"提示"});
         } else if(errCode == 20013 || errCode == 1001003){
             this.setState({loanShow:true});
         } else if(errCode == 10001){
