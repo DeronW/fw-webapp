@@ -8,6 +8,8 @@
         "node_modules",
         "build",
         "cdn",
-        "lib"
+        "lib",
+        ".vscode",
+        ".git"
     ]
 }
