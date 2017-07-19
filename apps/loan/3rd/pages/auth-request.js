@@ -67,6 +67,7 @@ class AuthRequest extends React.Component {
             verifyToken: captchaToken,
             verifyCode: captchaInput
         }, 'silence').then((data) => {
+            Components.showToast('验证码已发送');
             this.setState({ SMSToken: data.codeToken });
             this.SMSTimerController();
         }, e => {
@@ -94,15 +95,18 @@ class AuthRequest extends React.Component {
         return (
             <div>
                 <Header title="授权" history={history} />
+
                 <div styleName="auth-info">请授权
                     <span styleName="auth-phone">{this.maskedPhone}</span>
                     登录放心花
                 </div>
+
                 <div>
                     <div styleName="cooperation-logo-container">
                         <i styleName="third-party-logo"></i>
                         <i styleName="fxh-logo"></i>
                     </div>
+
                     <div styleName="input-field-grp">
                         <div styleName="input-field">
                             <i styleName="captcha-icon"></i>
@@ -115,6 +119,7 @@ class AuthRequest extends React.Component {
                                 <img src={captchaImgUrl} />
                             </div>
                         </div>
+
                         <div styleName="input-field">
                             <i styleName="sms-icon"></i>
                             <input styleName="sms-input"
@@ -127,7 +132,8 @@ class AuthRequest extends React.Component {
                             </div>
                         </div>
                     </div>
-                <div styleName="submit-btn" onClick={this.submitAuthRequest}>确认授权</div>
+
+                    <div styleName="submit-btn" onClick={this.submitAuthRequest}>确认授权</div>
                 </div>
             </div>
         )

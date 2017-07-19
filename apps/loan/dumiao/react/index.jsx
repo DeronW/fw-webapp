@@ -96,6 +96,8 @@ class BorrowMoney extends React.Component {
                         this.setState({errCode:err.code, failMsg:"您的用户信息与读秒不匹配无法授权登录读秒", title:"审核未通过"})
                     }else if(err.code == 1001003){
                         this.setState({errCode:err.code, failMsg:"您无法申请读秒借款", title:"提示"})
+                    }else if(err.code == 10001){
+                        this.setState({errCode:err.code, failMsg:err.message});
                     }else{
                         this.setState({ ableEnter: err.code, tryOtherLoanMsg: err.message })
                     }
@@ -110,7 +112,7 @@ class BorrowMoney extends React.Component {
     clickHandler = () => {
         let { canStatus, borrowStatus, errCode} = this.state;
         // 初始化数据没有完成, 稍后再试
-        if (canStatus === null && errCode != 20013 && errCode !=1001003) return;
+        if (canStatus === null && errCode != 20013 && errCode !=1001003 && errCode !=10001) return;
         if (borrowStatus == 1 || borrowStatus == 101) {
             gotoHandler('/static/loan/user-card-set/index.html');
         } else if (canStatus == 2) {
@@ -124,6 +126,8 @@ class BorrowMoney extends React.Component {
             this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
         } else if(errCode == 20013 || errCode == 1001003){
             this.setState({loanShow:true});
+        } else if(errCode == 10001){
+            $FW.Component.Toast(this.state.failMsg)
         }else {
             this.setState({ tryOtherLoanPopShow: true });
         }
