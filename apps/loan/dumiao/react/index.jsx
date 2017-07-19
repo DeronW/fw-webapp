@@ -82,12 +82,12 @@ class BorrowMoney extends React.Component {
                         //     canStatus: 0
                         // });
                     } else if (data.canStatus == 1) {
-                        this.setState({
-                            canStatus: 1, loanUuid: data.loanUuid, canMessage: data.canMessage
-                        });
                         // this.setState({
-                        //     canStatus: 1
+                        //     canStatus: 1, loanUuid: data.loanUuid, canMessage: data.canMessage
                         // });
+                        this.setState({
+                            canStatus: 1, failMsg:data.message
+                        });
                     } else if (data.canStatus == 2) {
                         this.setState({ canStatus: 2 });
                     }
@@ -122,8 +122,8 @@ class BorrowMoney extends React.Component {
             this.setState({ dumiaoEnterPopShow: true });
             //this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
         } else if (canStatus == 1) {
-            this.setState({ canMessageShow: true });
-            //this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
+            //this.setState({ canMessageShow: true });
+            this.setState({loanShow:true, failMsg:this.state.failMsg, title:"提示"});
         } else if(errCode == 20013 || errCode == 1001003){
             this.setState({loanShow:true});
         } else if(errCode == 10001){
