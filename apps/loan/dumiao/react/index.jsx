@@ -119,11 +119,11 @@ class BorrowMoney extends React.Component {
             let link = `/static/loan/dumiao-put-in/index.html?pid=${$FW.Format.urlQuery().pid}`;
             gotoHandler(link);
         } else if (canStatus === 0) {
-            //this.setState({ dumiaoEnterPopShow: true });
-            this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
+            this.setState({ dumiaoEnterPopShow: true });
+            //this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
         } else if (canStatus == 1) {
-            //this.setState({ canMessageShow: true });
-            this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
+            this.setState({ canMessageShow: true });
+            //this.setState({loanShow:true, failMsg:"您无法申请读秒借款", title:"提示"});
         } else if(errCode == 20013 || errCode == 1001003){
             this.setState({loanShow:true});
         } else if(errCode == 10001){
