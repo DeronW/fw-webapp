@@ -113,9 +113,6 @@ const REFACTORY_PAGES = [{
 }, {
     name: 'protocols',
     compiler: 'webpack'
-},{
-    name:'jrgc',
-    compiler:'webpack'
 }]
 
 // 第三方授权页面
