@@ -2,12 +2,12 @@ import { Request, Components } from 'fw-javascripts'
 
 const API_PATH = document.getElementById('api-path').value;
 
-function inHome(){
+function inHome() {
     var p = location.pathname;
     return p === '/' || p === '/static/loan/home/index.html'
 }
 
-function loginInApp(){
+function loginInApp() {
     location.href = '/static/loan/user-jrgc-login/index.html';
 }
 
@@ -34,7 +34,6 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
             data: merged_data,
             silence: true
         }).catch(error => {
-
             if (error.code == 100008) {
                 // 处理用户登录功能
                 Components.showToast(`登录失效，请重新登录 [${error.code}]`)
@@ -49,14 +48,14 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
                 //         location.href = '/static/loan/account/index.html#/entry'
                 //     }, 1800);
 
-            } else if (error.code == 11000) {
-                //11000 代表参数不完整
-                !silence && Components.showToast("参数不完整，请重新登录！")
             } else {
                 if (silence)
                     return new Promise((reslove, reject) => reject(error))
 
-                Components.showToast(error.message)
+                //11000 代表参数不完整
+                let msg = error.code == 11000 ? '参数不完整，请重新登录！' : error.message;
+
+                Components.showToast(msg)
 
                 return new Promise((resolve, reject) => {
                     setTimeout(() => reject(error), 1700)
