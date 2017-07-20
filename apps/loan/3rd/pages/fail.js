@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 
 import { Header } from '../../lib/components'
 
-import styles from '../css/auth-fail.css'
+import styles from '../css/fail.css'
 
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })

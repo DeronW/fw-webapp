@@ -6,11 +6,11 @@ import { Components, Utils } from 'fw-javascripts'
 import { Header } from '../../lib/components'
 import { Post } from '../../lib/helpers'
 
-import styles from '../css/auth-request.css'
+import styles from '../css/authorize.css'
 
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
-class AuthRequest extends React.Component {
+class Authorize extends React.Component {
 
     state = {
         phone: '',
@@ -23,7 +23,7 @@ class AuthRequest extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ phone: Utils.hashQuery.phone })
+        this.setState({ phone: Utils.hashQuery.mobile })
         this.getCaptcha();
     }
 
@@ -78,15 +78,21 @@ class AuthRequest extends React.Component {
         })
     }
 
-    submitAuthRequest = () => {
-        // return Post('/api/userBase/v1/blabla.json', {
-        //     mobile: phone,
-        //     verifyToken: captchaToken,
-        //     verifyCode: captchaInput
-        // }, 'silence').then((data) => {
-        //     this.setState({ SMSToken: data.codeToken });
-        //     this.SMSTimerController();
-        // }, e => {})
+    submitAuthorize = () => {
+        let { phone, SMSToken, SMSInput } = this.state;
+        let { history } = this.props;
+        return Post('/api/userBase/v1/channelregister.json', {
+            mobile: phone,
+            partner: Utils.hashQuery.partner,
+            sigin: Utils.hashQuery.sigin,
+            timestamp: Utils.hashQuery.timestamp,
+            codeToken: SMSToken,
+            verifyCode: SMSInput
+        }, 'silence').then((data) => {
+
+        }, e => {
+            history.push('/fail');
+        })
     }
 
     render() {
@@ -133,11 +139,11 @@ class AuthRequest extends React.Component {
                         </div>
                     </div>
 
-                    <div styleName="submit-btn" onClick={this.submitAuthRequest}>确认授权</div>
+                    <div styleName="submit-btn" onClick={this.submitAuthorize}>确认授权</div>
                 </div>
             </div>
         )
     }
 }
 
-export default AuthRequest
+export default Authorize
