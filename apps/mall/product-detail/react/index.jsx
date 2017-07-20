@@ -78,7 +78,7 @@ const Product = React.createClass({
                     <p>2、工分兑换礼品非质量问题不支持退换货；</p>
                     <p>3、礼品图片仅供参考请以收到实物为准；</p>
                     <p>4、部分商品需要提供身份证号码，客服会在5个工作日内给您致电；</p>
-                    <p>5、  苹果系列产品不支持退换，如有问题请到苹果指定的维修服务网店咨询，维修时如需发票，烦请致电客服(只提供电子发票)；</p>
+                    <p>5、苹果系列产品不支持退换，如有问题请到苹果指定的维修服务网店咨询，维修时如需发票，烦请致电客服(只提供电子发票)；</p>
                     <p>6、兑换即视为认同此规则。</p>
                     <hr />
                 </div>
@@ -101,10 +101,11 @@ const Product = React.createClass({
         if (data.market_price) {
             market_price = null;
             {/*<div className="market-price">
-                    <span>市价：</span>
-                    <span className="market-price-num">&yen;{data.market_price}</span>
-                </div>*/}
+             <span>市价：</span>
+             <span className="market-price-num">&yen;{data.market_price}</span>
+             </div>*/
             }
+        }
 
         let user_level_manifest;
         if (data.vipLevel == 1) user_level_manifest = "普通用户";
@@ -353,8 +354,8 @@ $FW.DOMReady(function () {
         let i = document.createElement('iframe');
         i.src = '/favicon.ico';
         i.style.display = 'none';
-        i.onload = function() {
-            setTimeout(function(){
+        i.onload = function () {
+            setTimeout(function () {
                 i.remove();
             }, 9)
         }
