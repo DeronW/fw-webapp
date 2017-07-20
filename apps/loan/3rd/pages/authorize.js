@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules'
 import { Components, Utils } from 'fw-javascripts'
 
 import { Header } from '../../lib/components'
-import { Post } from '../../lib/helpers'
+import { Post, Storage } from '../../lib/helpers'
 
 import styles from '../css/authorize.css'
 
@@ -25,6 +25,10 @@ class Authorize extends React.Component {
     componentDidMount() {
         this.setState({ phone: Utils.hashQuery.mobile })
         this.getCaptcha();
+    }
+
+    componentWillUnmount() {
+        if (this._timer) clearInterval(this._timer);
     }
 
     get maskedPhone() {
@@ -81,15 +85,23 @@ class Authorize extends React.Component {
     submitAuthorize = () => {
         let { phone, SMSToken, SMSInput } = this.state;
         let { history } = this.props;
-        return Post('/api/userBase/v1/channelregister.json', {
+        return Post('/api/userBase/v1/channelRegister.json', {
             mobile: phone,
             partner: Utils.hashQuery.partner,
-            sigin: Utils.hashQuery.sigin,
+            sign: Utils.hashQuery.sign,
             timestamp: Utils.hashQuery.timestamp,
             codeToken: SMSToken,
             verifyCode: SMSInput
         }, 'silence').then((data) => {
-
+            let dict = data;
+            Storage.login({
+                token: dict.userToken,
+                status: dict.userStatus,
+                uid: dict.uid,
+                phone: dict.mobile,
+                invite_code: dict.invitationCode
+            })
+            location.href = '/static/loan/home/index.html';
         }, e => {
             history.push('/fail');
         })
