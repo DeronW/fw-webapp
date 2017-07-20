@@ -18,8 +18,8 @@ class Fail extends React.Component {
             partner: Utils.hashQuery.partner,
             sign: Utils.hashQuery.sigin,
             timestamp: Utils.hashQuery.timestamp,
-            // token: Utils.hashQuery.token
-            token: 'success'
+            token: Utils.hashQuery.token
+            // token: 'success'
         }, 'silence').then((data) => {
             let dict = data;
             Storage.login({
