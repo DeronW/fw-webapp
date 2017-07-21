@@ -32,7 +32,7 @@ class PayBackResult extends React.Component{
         }, e => $FW.Component.Toast(e.message));
     }
     render() {
-    let {payback_status} = this.state;
+    let {payback_status,activityRecomUrl} = this.state;
 
     if (payback_status === null) return null;
 
@@ -75,7 +75,6 @@ class PayBackResult extends React.Component{
             }
             // {
             //   // activityRecomUrl ? gotoHandler(`${activityRecomUrl}`) : null;
-            //   activityRecomUrl ? alert(111) : null; 
             // }
         </div>
     )

@@ -23,6 +23,7 @@ export default class InviteActivity extends React.Component {
         this.setState({popShow:false});
     }
     nativeShare = () => {
+        let inviteCode = $FW.Format.urlQuery().yqm;
         NativeBridge.share({
             title: '掌上钱包，随用随取',
             image: 'https://static.9888.cn/images/loan/invitation.jpg',
