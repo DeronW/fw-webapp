@@ -108,26 +108,25 @@ const P2P = [
 ]
 
 const REFACTOR_PAGES = [{
-    name:'invest',
+    name: 'invest',
     compiler: 'webpack'
 }]
 
 APP_NAMES.push(
-    ...USER_PAGES,
-    ...PROTOCOL_PAGES,
-    ...TOPIC_PAGES,
-    ...HUISHANG_PAGES,
-    ...NOTICE_PAGES,
-    ...SHOUSHAN,
-    ...OUTSIDE_PAGES,
-    ...P2P
+    // ...USER_PAGES,
+    // ...PROTOCOL_PAGES,
+    // ...TOPIC_PAGES,
+    // ...HUISHANG_PAGES,
+    // ...NOTICE_PAGES,
+    // ...SHOUSHAN,
+    // ...OUTSIDE_PAGES,
+    // ...P2P,
+    {
+        name: 'invest',
+        compiler: 'webpack'
+    }
 )
 
-// 重构页面, 暂时屏蔽掉原来的所有页面
-// APP_NAMES = [{
-//     name:'invest',
-//     compiler: 'webpack'
-// }]
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     const COMMON_COMPONENTS = [
