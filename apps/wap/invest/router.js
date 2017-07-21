@@ -15,8 +15,8 @@ export default (stores) => {
         <Provider {...stores}>
             <Switch>
                 <Route exact path="/details" component={Details} />
-                <Route exact path="/my-reserve" component={MyReserve} />
                 <Route exact path="/submit-reserve" component={SubmitReserve} />
+                <Route exact path="/my-reserve" component={MyReserve} />
             </Switch>
         </Provider>
     </Router>
