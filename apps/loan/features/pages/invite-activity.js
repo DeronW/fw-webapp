@@ -50,7 +50,7 @@ export default class InviteActivity extends React.Component {
             </div>) : (<div styleName="share-link">
                 <div styleName="top-tip">长按复制链接分享给好友注册</div>
                 <div styleName="btn-tip">
-                    <input type="text" value={invite_activity.shareLink}/>
+                    <input type="text" value={invite_activity.shareLink+ `&jumpType=${Browser.inWeixin ? 'to_home' : 'app'}`}/>
                 </div>
             </div>)
             }
