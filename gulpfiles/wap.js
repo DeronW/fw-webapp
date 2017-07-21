@@ -120,8 +120,8 @@ APP_NAMES.push(
     ...NOTICE_PAGES,
     ...SHOUSHAN,
     ...OUTSIDE_PAGES,
-    ...P2P
-    // ...REFACTOR_PAGES
+    ...P2P,
+    ...REFACTOR_PAGES
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
@@ -156,6 +156,7 @@ module.exports = function (gulp, generate_task, CONSTANTS) {
         generate_task(PROJ, i, Object.assign({}, default_options, {
             api_path: "",
             cmd_prefix: 'pack',
+            environment: 'production',
             cdn_prefix: `/static/${PROJ}/${i.name || i}/`
         }))
     });
