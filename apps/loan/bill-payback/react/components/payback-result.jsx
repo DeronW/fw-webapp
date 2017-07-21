@@ -25,6 +25,7 @@ class PayBackResult extends React.Component{
             this.setState({
                 payback_status: data.status,
                 fail_reason: data.failReason,
+                activityRecomUrl:data. activityRecomUrl,
                 repaymentAmount: data.repaymentAmount,
                 loanLeftAmount: data.loanLeftAmount
             });
@@ -71,6 +72,9 @@ class PayBackResult extends React.Component{
                 <div className="payback-result-ing-tip">稍后可到账单页面<br />查看具体还款结果。</div>
                 <div className="payback-customer-service"><img src="images/phone.png" />如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
             </div>
+            }
+            {
+              activityRecomUrl ? gotoHandler(`${activityRecomUrl}`) : null; 
             }
         </div>
     )
