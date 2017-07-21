@@ -6,7 +6,8 @@ class PayBackResult extends React.Component{
             fail_reason:null,
             repaymentGid: this.props.repaymentGid,
             repaymentAmount: null,
-            loanLeftAmount: null
+            loanLeftAmount: null,
+            activityRecomUrl:""
         }
         this.queryResult = this.queryResult.bind(this);
     }
@@ -60,7 +61,7 @@ class PayBackResult extends React.Component{
                 <a className="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
                     提升额度</a>
                 <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/fxh/index.html`)}>申请用钱</div>
-            </div> && gotoHandler(`${activityRecomUrl}`)}
+            </div> }
             {payback_status >= 2 &&
             <div>
                 <div className="payback-result-fail-tip">{this.state.fail_reason}</div>
@@ -73,9 +74,7 @@ class PayBackResult extends React.Component{
                 <div className="payback-customer-service"><img src="images/phone.png" />如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
             </div>
             }
-            // {
-            //   // activityRecomUrl ? gotoHandler(`${activityRecomUrl}`) : null;
-            // }
+
         </div>
     )
 }

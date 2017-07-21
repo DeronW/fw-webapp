@@ -8,7 +8,8 @@ class LoanResult extends React.Component{
             checkingResult: false,
             countdown: 0,
             loanStatus: null,
-            failReason: null
+            failReason: null,
+            activityRecomUrl:""
         }
         this.resetState = this.resetState.bind(this);
         this.countingDown = this.countingDown.bind(this);
@@ -47,7 +48,11 @@ class LoanResult extends React.Component{
             orderGid: orderGid
         }).then((data) => {
             let finishFlag = true;
-            activityRecomUrl = data.activityRecomUrl;
+            this.setState({
+                activityRecomUrl:data.activityRecomUrl,
+                loanStatus:data.loanStatus
+            });
+            
 
             if (data.loanStatus == 6) {
                 this.setState({
@@ -70,9 +75,9 @@ class LoanResult extends React.Component{
                         waitingResultShow: false,
                         successResultShow: true,
                     });
-                    if(activityRecomUrl){
-                        gotoHandler(`${data.activityRecomUrl}`);
-                    }
+                    // if(activityRecomUrl){
+                    //     gotoHandler(`${data.activityRecomUrl}`);
+                    // }
                     
                 } else if (data.loanStatus == 5) {
                     this.setState({
@@ -200,6 +205,7 @@ class LoanResult extends React.Component{
                 </div>
             </div>
         </div>
+        {loanStatus && activityRecomUrl && gotoHandler(`${data.activityRecomUrl}`}
     )
 }
 }
