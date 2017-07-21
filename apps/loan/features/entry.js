@@ -4,6 +4,11 @@ import AppRouter from './router.js'
 
 import './css/index.css'
 
-let stores = {}
+import Stores from './stores'
+import { Post } from '../lib/helpers'
+
+let stores = {
+    invite_activity: new Stores.InviteActivity(Post)
+}
 
 render(AppRouter(stores), document.getElementById('cnt'))

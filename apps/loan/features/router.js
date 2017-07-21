@@ -13,6 +13,7 @@ import MarketApp from './pages/market-app.js'
 import ContactUs from './pages/contact-us.js'
 import NotFound from './pages/not-found.js'
 import CreditCards from './pages/credit-cards.js'
+import InviteActivity from './pages/invite-activity.js'
 
 export default (stores) => {
     return <Router>
@@ -25,6 +26,7 @@ export default (stores) => {
                 <Route exact path='/contact-us' component={ContactUs} />
                 <Route exact path='/credit-cards' component={CreditCards} />
                 <Route exact path='/not-found' component={NotFound} />
+                <Route exact path='/invite-activity' component={InviteActivity} />
             </Switch>
         </Provider>
     </Router>

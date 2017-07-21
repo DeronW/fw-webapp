@@ -1,0 +1,142 @@
+.bg {
+    height: 100%;
+    background: #f0f0f0;
+}
+
+.share-btn {
+    /*margin-top:150px;*/
+    width: 654px;
+    height: 74px;
+    line-height: 74px;
+    text-align: center;
+    margin: 200px auto 124px;
+    background: #639afb;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 32px;
+}
+
+.instruction {
+    width: 184px;
+    height: 42px;
+    line-height: 42px;
+    margin: 0 auto;
+    border: 1px solid #e2e1e1;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 24px;
+    color: #bbb;
+}
+
+.arrow-right {
+    margin-left: 10px;
+}
+
+.share-link {
+    width: 654px;
+    height: 124px;
+    margin: 200px auto 88px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("../images/invite-activity/invite-link.png")
+}
+
+.top-tip {
+    color: #fff;
+    font-size: 22px;
+    line-height: 50px;
+    padding-left: 30px;
+}
+
+.btn-tip {
+    width: 590px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.btn-tip input {
+    width: 590px;
+    height: 37px;
+    word-wrap: break-word;
+    font-size: 18px;
+    color: #5a79b1;
+    text-align: center;
+    margin-top: 2px;
+}
+
+.btn-tip input:focus {
+    outline: none;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .7);
+    z-index: 99999;
+}
+
+.mask img {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.pop-content {
+    background: url("../images/invite-activity/pop.png") no-repeat;
+    width: 600px;
+    padding-left: 20px;
+    height: 757px;
+    padding-top: 168px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.pop-title {
+    background: url("../images/invite-activity/title-bg.png") no-repeat;
+    width: 132px;
+    padding-left: 20px;
+    height: 51px;
+    line-height: 42px;
+    font-size: 27px;
+    color: #fff;
+}
+
+.pop-item {
+    font-size: 24px;
+    max-height: 999999px;
+    color: #fff;
+    text-align: justify;
+    line-height: 50px;
+    padding-left: 28px;
+    width: 520px;
+}
+
+.activity-time {
+    margin: 20px 0;
+}
+
+.activity-rules {
+    margin-bottom: 10px;
+}
+
+.close-btn {
+    background: url("../images/invite-activity/close.png") no-repeat;
+    width: 59px;
+    height: 59px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.rule-content {
+    height: 500px;
+    overflow: scroll;
+}
