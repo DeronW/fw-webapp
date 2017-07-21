@@ -106,6 +106,12 @@ const P2P = [
     'p2p-notice-safeguard', //p2p资金安全保障
     'p2p-notice-information-disclosure', //微金信息披露
 ]
+
+const REFACTOR_PAGES = [{
+    name:'invest',
+    compiler: 'webpack'
+}]
+
 APP_NAMES.push(
     ...USER_PAGES,
     ...PROTOCOL_PAGES,
@@ -115,6 +121,7 @@ APP_NAMES.push(
     ...SHOUSHAN,
     ...OUTSIDE_PAGES,
     ...P2P
+    // ...REFACTOR_PAGES
 )
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
