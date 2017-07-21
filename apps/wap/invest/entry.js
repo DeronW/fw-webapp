@@ -9,7 +9,8 @@ import AppRouter from './router'
 import * as Stores from './stores'
 
 let stores = {
-    details:new Stores.Details(Post)
+    details:new Stores.Details(Post),
+    myreserve:new Stores.Details(Post)
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))
