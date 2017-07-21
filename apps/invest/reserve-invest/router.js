@@ -12,12 +12,12 @@ import SubmitReserve from './pages/submit-reserve'
 
 export default (stores) => {
     return <Router>
-        <Proviser {...stores}>
+        <Provider {...stores}>
             <Switch>
                 <Route exact path="/details" component={Details} />
                 <Route exact path="/my-reserve" component={MyReserve} />
                 <Route exact path="/submit-reserve" component={SubmitReserve} />
             </Switch>
-        </Proviser>
+        </Provider>
     </Router>
 }

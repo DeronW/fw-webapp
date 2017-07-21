@@ -12,4 +12,4 @@ class Details extends React.Component {
         </div>
     }
 }
-
+export default Details
