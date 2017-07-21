@@ -6,6 +6,7 @@ import {
     Switch
 } from 'react-router-dom'
 
+import Home from './pages/home.js'
 import Register from './pages/register.js'
 import Borrowing from './pages/borrowing.js'
 import Cost from './pages/cost.js'
@@ -17,6 +18,7 @@ export default () => {
     return <Router>
         <Provider>
             <Switch>
+                <Route exact path='/' component={Home} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/borrowing' component={Borrowing} />
                 <Route exact path='/cost' component={Cost} />
