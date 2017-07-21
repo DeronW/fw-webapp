@@ -120,9 +120,14 @@ APP_NAMES.push(
     ...NOTICE_PAGES,
     ...SHOUSHAN,
     ...OUTSIDE_PAGES,
-    ...P2P,
-    ...REFACTOR_PAGES
+    ...P2P
 )
+
+// 重构页面, 暂时屏蔽掉原来的所有页面
+APP_NAMES = [{
+    name:'invest',
+    compiler: 'webpack'
+}]
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
     const COMMON_COMPONENTS = [
