@@ -47,6 +47,7 @@ class LoanResult extends React.Component{
             orderGid: orderGid
         }).then((data) => {
             let finishFlag = true;
+            activityRecomUrl = data.activityRecomUrl;
 
             if (data.loanStatus == 6) {
                 this.setState({
@@ -69,6 +70,10 @@ class LoanResult extends React.Component{
                         waitingResultShow: false,
                         successResultShow: true,
                     });
+                    if(activityRecomUrl){
+                        gotoHandler(`${data.activityRecomUrl}`);
+                    }
+                    
                 } else if (data.loanStatus == 5) {
                     this.setState({
                         waitingResultShow: false,
