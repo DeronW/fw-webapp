@@ -59,6 +59,12 @@ class LoanResult extends React.Component{
                     waitingResultShow: false,
                     successResultShow: true,
                 });
+                if(activityRecomUrl){
+                    setTimeout(() => {
+                        location.href=`${activityRecomUrl}`;
+                    }, 2000)
+                    
+                }
             } else if (data.loanStatus == 5) {
                 this.setState({
                     waitingResultShow: false,
@@ -205,7 +211,6 @@ class LoanResult extends React.Component{
                 </div>
             </div>
         </div>
-        {loanStatus && activityRecomUrl && gotoHandler(`${data.activityRecomUrl}`}
     )
 }
 }
