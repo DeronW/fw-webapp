@@ -22,5 +22,9 @@ module.exports = {
     activity: {
         // dev_api_path: '//localhost/fake-api'
         dev_api_path: '//fe.gongchangp2p.cn/api/test-c/p2p-web'
+    },
+    invest: {
+        // dev_api_path: '//localhost/fake-api'
+        dev_api_path: '//localhost/fake-api'
     }
 }

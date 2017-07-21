@@ -24,3 +24,4 @@ require('./gulpfiles/loan.js')(gulp, gt, CONSTANTS);
 // require('./gulpfiles/withdraw.js')(gulp, gt, CONSTANTS);
 require('./gulpfiles/activity.js')(gulp, gt, CONSTANTS);
 require('./gulpfiles/insurance.js')(gulp, gt, CONSTANTS);
+require('./gulpfiles/invest.js')(gulp, gt, CONSTANTS);
