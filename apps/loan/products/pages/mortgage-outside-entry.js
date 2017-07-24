@@ -65,7 +65,7 @@ class MortgageOutsideEntry extends React.Component {
         let ableToGetSMS = getSMSTimer === 60;
         if (!ableToGetSMS) return
 
-        return Post('/api/userBase/v1/sendVerifyCode.json', {
+        Post('/api/userBase/v1/sendVerifyCode.json', {
             mobile: phone,
             userOperationType: 3,
             verifyToken: captchaToken,
@@ -84,8 +84,12 @@ class MortgageOutsideEntry extends React.Component {
 
     register = () => {
         let { phone, SMSToken, SMSInput } = this.state;
+        if (!(phone && SMSInput)) return
+
+        if (!this.isPhoneValid()) return Components.showToast('手机号格式不正确')
+
         let { history } = this.props;
-        return Post('/api/userBase/v1/register.json', {
+        Post('/api/userBase/v1/register.json', {
             mobile: phone,
             codeToken: SMSToken,
             verifyCode: SMSInput,
@@ -100,7 +104,8 @@ class MortgageOutsideEntry extends React.Component {
 
     render() {
         let { history } = this.props;
-        let { phone, getSMSTimer, captchaImgUrl, captchaInput, SMSInput } = this.state;
+        let { phone, getSMSTimer, captchaImgUrl, captchaInput, SMSInput } = this.state,
+            allFieldsFilled = phone && captchaInput && SMSInput;
 
         return (
             <div>
@@ -136,12 +141,13 @@ class MortgageOutsideEntry extends React.Component {
                         </div>
                     </div>
 
-                    <a styleName="register-btn" onClick={this.register}>申请千万贷款</a>
+                    <a styleName="register-btn"
+                        style={{ 'background': allFieldsFilled ? '#f26052' : '#1e8570', 'color': allFieldsFilled ? '#fff' : '#0d5c4c'}}
+                        onClick={this.register}>申请千万贷款</a>
                 </div>
             </div>
         )
     }
-
 }
 
 export default MortgageOutsideEntry
