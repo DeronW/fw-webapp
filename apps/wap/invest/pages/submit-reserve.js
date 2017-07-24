@@ -16,7 +16,7 @@ class SubmitReserve extends React.Component{
                     <div styleName="money">可用余额 <span>{`￥${45214}`}</span></div>
                     <div styleName="inputMoney">
                         <input type="text" placeholder="50元起投" value=""/>
-                        <span onClick={}>全投</span>
+                        <span>全投</span>
                     </div>
                 </div>
             </div>
