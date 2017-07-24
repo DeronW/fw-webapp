@@ -62,6 +62,7 @@ const Login = React.createClass({
     },
 
     getSMSCodeHandler: function() {
+
         if (!this.state.reSend) return;
         let FormData = {
             phone: this.state.val1
@@ -182,7 +183,7 @@ const Login = React.createClass({
             className = { i == this.state.tab ? 'active' : null }
             onClick = {
                     () => this.switchTabHandler(i)
-                } > { i == 'veri' ? '验证码登录' : '普通登录' } 
+                } > { i == 'veri' ? '验证码登录' : '普通登录' }
                 </div>
         };
 
@@ -194,36 +195,37 @@ const Login = React.createClass({
         name = "code"
         defaultValue = ""
         onChange = { this.handleCode }
-        /> 
-        <div className = "empty" > </div> <
-        input type = "button"
-        className = "yzm b-radius"
-        onClick = { this.getSMSCodeHandler }
-        id = "btnMessageCode"
-        value = {!this.state.reSend ? "重新发送(" + this.state.value + ")" : this.state.value }
-        /> </
-        div > <
-            label className = "phone"
+        />
+        <div className = "empty" > </div>
+
+        {/* <input type="button"
+        className="yzm b-radius"
+        onClick={ this.getSMSCodeHandler }
+        id="btnMessageCode"
+        value={!this.state.reSend ? "重新发送(" + this.state.value + ")" : this.state.value } /> */}
+
+        </div>
+        <label className = "phone"
         htmlFor = "code" > { this.state.code } </label>
         </div > ;
 
         let Pwd1 = <div >
             <div className = "field" >
             <
-            span className = "ico-password" > </span> 
+            span className = "ico-password" > </span>
             <input type = "password"
         placeholder = "登录密码"
         name = "pwd"
         defaultValue = ""
         onChange = { this.handlePaw }
         className = "password f-14" / >
-            <div className = "empty" > </div> 
-            </div> 
+            <div className = "empty" > </div>
+            </div>
             <label className = "phone"
         htmlFor = "pwd" > { this.state.paw } </label>
         </div > ;
 
-        return ( 
+        return (
             <div >
             {/*<div className = "recharge-panel-tab" > { this.tabs.map(tab) } </div> */}
             <div className="top-img"><img src="images/douge_login.png" alt="" className="login-logo"/></div>
@@ -234,9 +236,9 @@ const Login = React.createClass({
             placeholder = "手机号（免注册登录）"
             defaultValue = ""
             onChange = { this.handlePhone }
-            /> 
-            <div className = "empty" > </div> 
-            </div > 
+            />
+            <div className = "empty" > </div>
+            </div >
             <label className = "phone"
             htmlFor = "phone" > { this.state.phone } </label> { this.state.tab == 'veri' ? Pwd : null } { this.state.tab == 'pwd' ? Pwd1 : null }
 
@@ -244,9 +246,9 @@ const Login = React.createClass({
             input type = "button"
             onClick = { this.state.tab == 'veri' ? this.loginVeri : this.loginPaw }
             className = { this.state.active ? "btn-red active" : "btn-red" }
-            value = "登录" / >
-            
-            </div> 
+            value = "请前往金融工场APP兑换" / >
+
+            </div>
             <img src="images/login_bg.png" className="login-bg" alt=""/>
             </
             div >
