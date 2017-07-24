@@ -1,0 +1,88 @@
+/*  input-field--width: 598px;
+    input-field--height: 74px; */
+
+input {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-appearance: none;
+    -webkit-text-size-adjust: none;
+    -webkit-touch-callout: none;
+    background: transparent;
+    outline: none;
+    border: none;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #32d1a7;
+}
+
+.cnt-container {
+    padding: 790px 0 60px;
+    background: url('../images/mortgage-outside-entry/bg.jpg') #218a75 no-repeat;
+}
+
+.input-item {
+    box-sizing: border-box;
+    display: table;
+    width: 598px;
+    height: 74px;
+    padding-right: 20px;
+    margin: 0 auto 30px;
+    border: 1px solid #54d1bb;
+    border-radius: 5px;
+}
+
+.item-icon {
+    float: left;
+    width: 54px;
+    height: 72px;
+    background: url('../images/mortgage-outside-entry/code-icon.png') no-repeat center;
+}
+
+.phone-input .item-icon {
+    background: url('../images/mortgage-outside-entry/phone-icon.png') no-repeat center;
+}
+
+.input-item input {
+    outline: none;
+    float: left;
+    width: 360px;
+    height: 72px;
+    line-height: 72px;
+    color: #fff;
+    font-size: 30px;
+}
+
+.captcha-img-container {
+    float: right;
+    width: 150px;
+    height: 72px;
+    line-height: 72px;
+}
+
+.captcha-img-container img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.sms-btn {
+    float: right;
+    height: 72px;
+    line-height: 72px;
+    color: #62dfff;
+    font-size: 30px;
+}
+
+.register-btn {
+    box-sizing: border-box;
+    display: block;
+    width: 598px;
+    height: 74px;
+    line-height: 74px;
+    margin: 0 auto 60px;
+    background-color: #f26052;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+}

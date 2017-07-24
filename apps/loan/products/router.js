@@ -8,6 +8,7 @@ import {
 
 import Mortgage from './pages/mortgage.js'
 import MortgageDownload from './pages/mortgage-download.js'
+import MortgageOutsideEntry from './pages/mortgage-outside-entry.js'
 
 
 export default () => {
@@ -16,6 +17,7 @@ export default () => {
             <Switch>
                 <Route path='/mortgage' component={Mortgage} />
                 <Route path='/mortgage-download' component={MortgageDownload} />
+                <Route path='/mortgage-outside-entry' component={MortgageOutsideEntry} />
             </Switch>
         </Provider>
     </Router>
