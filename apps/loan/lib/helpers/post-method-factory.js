@@ -43,10 +43,10 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
 
                 if (Browser.inFXHApp) NativeBridge.login();
 
-                // if (!Browser.inJRGCApp && !Browser.inFXHApp)
-                //     setTimeout(() => {
-                //         location.href = '/static/loan/account/index.html#/entry'
-                //     }, 1800);
+                if (!Browser.inJRGCApp && !Browser.inFXHApp)
+                    setTimeout(() => {
+                        location.href = '/static/loan/account/index.html#/entry'
+                    }, 1800);
 
             } else {
                 if (silence)
