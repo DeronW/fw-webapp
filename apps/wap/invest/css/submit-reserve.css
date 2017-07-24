@@ -62,11 +62,11 @@ input::-webkit-input-placeholder {
     padding-left: 20px;
     background: #f2f2f2;
     font-size: 32px;
-    color: #ccc;
+    color: #555;
     width: 470px;
 }
 
-.inputMoney span {
+.inputMoney .allmadeBtn {
     display: inline-block;
     color: #4aa1f9;
     margin-left: 90px;
@@ -123,10 +123,18 @@ input::-webkit-input-placeholder {
 }
 
 .protocolChecked {
-    width: 33px;
-    height: 33px;
+    width: 34px;
+    height: 34px;
     display: inline-block;
     background: url("../images/submit-reserve/procotol-checked.png") no-repeat center;
+    vertical-align: middle;
+}
+
+.protocolUnChecked {
+    width: 34px;
+    height: 34px;
+    display: inline-block;
+    background: url("../images/submit-reserve/protocol-unchecked.png") no-repeat center;
     vertical-align: middle;
 }
 
