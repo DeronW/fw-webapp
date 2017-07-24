@@ -6,6 +6,7 @@ import Header from '../components/header.js'
 import styles from '../css/submit-reserve.css'
 
 @inject('submitReserve')
+@observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class SubmitReserve extends React.Component {
     componentDidMount() {
@@ -23,8 +24,17 @@ class SubmitReserve extends React.Component {
         this.props.submitReserve.setFormData('reserveMoney', submitReserve.currentMoney)
     }
 
+    checkHandler = () => {
+        let {submitReserve} = this.props
+        this.props.submitReserve.setFormData('isChecked', !submitReserve.isChecked)
+        console.log(submitReserve.isChecked)
+    }
+
     render() {
         let {submitReserve} = this.props
+        let ischeck = submitReserve.isChecked ?
+            styles["protocolChecked"] :
+            styles["protocolUnChecked"]
         return <div>
             <Header title="提交预约" history={history} show_close={false}/>
             <div styleName="submitPanel">
@@ -34,7 +44,8 @@ class SubmitReserve extends React.Component {
                         <span>{`￥${submitReserve.currentMoney}`}</span>
                     </div>
                     <div styleName="inputMoney">
-                        <input type="text" placeholder="50元起投" value={submitReserve.reserveMoney} onChange={this.inputChangeHandler('reserveMoney')}/>
+                        <input type="text" placeholder="50元起投" value={submitReserve.reserveMoney}
+                               onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
                         </span>
@@ -63,7 +74,7 @@ class SubmitReserve extends React.Component {
                 </div>
             </div>
             <div styleName="submitProtocol">
-                <span styleName="protocolChecked"></span>
+                <span className={ischeck} onClick={this.checkHandler}></span>
                 <span styleName="protocolText">《预约协议》</span>
             </div>
             <div styleName="submitBtnContainer">

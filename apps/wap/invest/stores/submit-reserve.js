@@ -6,6 +6,7 @@ export default class SubmitReserve {
         extendObservable(this, {
             currentMoney: '45214',//用户账户的现有金额
             reserveMoney: '',//用户输入的预约金额
+            isChecked: true
         })
     }
 

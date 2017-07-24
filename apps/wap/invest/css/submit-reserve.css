@@ -62,7 +62,7 @@ input::-webkit-input-placeholder {
     padding-left: 20px;
     background: #f2f2f2;
     font-size: 32px;
-    color: #ccc;
+    color: #555;
     width: 470px;
 }
 
@@ -127,6 +127,14 @@ input::-webkit-input-placeholder {
     height: 33px;
     display: inline-block;
     background: url("../images/submit-reserve/procotol-checked.png") no-repeat center;
+    vertical-align: middle;
+}
+
+.protocolUnChecked {
+    width: 33px;
+    height: 33px;
+    display: inline-block;
+    background: url("../images/submit-reserve/protocol-unchecked.png") no-repeat center;
     vertical-align: middle;
 }
 
