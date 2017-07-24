@@ -1,0 +1,61 @@
+
+input::-webkit-input-placeholder{
+    color: #ccc;
+}
+.submitPanel{
+    width: 100%;
+    height: 100%;
+    background: #ebebee;
+    color: #333;
+    font-size: 32px;
+    box-sizing: border-box;
+    padding-top: 20px;
+}
+.reserveMoney{
+    box-sizing: border-box;
+    height: 90px;
+    line-height: 90px;
+    border-top: 1px solid #e3e5ea;
+    border-bottom: 1px solid #e3e5ea;
+    padding-left: 30px;
+    width: 100%;
+    background: #fff;
+}
+.userMoney{
+    color: #555;
+    font-size: 30px;
+    padding: 34px 30px 30px 30px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    border-bottom: 1px solid #e3e5ea;
+}
+.money span{
+    color: #fd4d4c;
+}
+.inputMoney{
+    margin-top: 30px;
+    border: 1px solid #e3e5ea;
+    border-radius: 8px;
+    width: 660px;
+    height: 84px;
+    line-height: 84px;
+    background: #f2f2f2;
+}
+.inputMoney input{
+    display: inline-block;
+    border: none;
+    outline: none;
+    height: 80px;
+    line-height: 80px;
+    padding-left: 20px;
+    background: #f2f2f2;
+    font-size: 32px;
+    color: #ccc;
+    width: 470px;
+}
+.inputMoney span{
+    display: inline-block;
+    color: #4aa1f9;
+    margin-left: 90px;
+}
