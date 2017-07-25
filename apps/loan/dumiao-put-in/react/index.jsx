@@ -150,6 +150,7 @@ class MainPanel extends React.Component {
 
 $FW.DOMReady(() => {
     NativeBridge.setTitle('借款申请');
-    ReactDOM.render(($FW.Browser.inApp()) && <Header title={'借款申请'} />, HEADER_NODE)
+    NativeBridge.showHeader();
+    ReactDOM.render(<Header title={'借款申请'} />, HEADER_NODE)
 	ReactDOM.render(<MainPanel />, CONTENT_NODE)
 })
