@@ -14,7 +14,7 @@ class Details extends React.Component {
     }
 
     render() {
-        let {reserve} = this.props
+        let {reserve,history,location} = this.props
         return <div>
             <Header title="详情" history={history} show_close={false}/>
             <div styleName="topInfo">
@@ -86,7 +86,7 @@ class Details extends React.Component {
             </div>
             <div styleName="bottomBox">
                 <div styleName="recordBtn">预约记录</div>
-                <div styleName="reserveBtn" onClick={() => reserve.reserveHandler()}>立即预约</div>
+                <div styleName="reserveBtn" onClick={() => reserve.reserveHandler(history)}>立即预约</div>
             </div>
         </div>
     }

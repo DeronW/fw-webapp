@@ -1,6 +1,7 @@
 import { extendObservable, computed } from 'mobx'
 import * as $FW from 'fw-components'
 import { Components, Utils } from 'fw-javascripts'
+import  NativeBridge  from '../helpers/native-bridge.js'
 
 export default class Details {
     constructor(Post) {
@@ -45,13 +46,15 @@ export default class Details {
             })
     }
 
-    reserveHandler = () => {
-        
-        this.Post('/api/invest/v1/reserveApply.json',{applyAmt:this.reserveMoney,applyInvestClaimId:this.context.id})
+    reserveHandler = (history) => {
+        NativeBridge.login();
+        if (this.isRisk === 0) return location.href = "https://m.9888.cn/static/wap/user-evaluate-p2p/index.html";
+        if(this.batchMaxmum === 0) return location.href = "";//调到自动投资页面
+        this.Post('/api/invest/v1/reserveApply.json', { applyAmt: this.reserveMoney, applyInvestClaimId: this.context.id })
             .then(data => {
-                console.log(data)
+                data.appointStatus && history.push("/submit-reserve")
             })
-        }
+    }
     setFormData = (field, value) => {
         this[field] = value
     }
