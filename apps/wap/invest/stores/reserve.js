@@ -30,7 +30,7 @@ export default class Details {
         })
     }
 
-    reserveHandler = () => {
+    getDataHandler = () => {
         this.Post('/api/invest/v1/entryReserve.json', { applyInvestClaimId: Utils.hashQuery.applyInvestClaimId })
             .then(data => {
                 this.context = data.appointClaim;
@@ -45,10 +45,11 @@ export default class Details {
             })
     }
 
-    submitHandler = () => {
-         this.Post('/api/invest/v1/entryReserve.json',{applyAmt:this.reserveMoney,applyInvestClaimId:this.context.id})
+    reserveHandler = () => {
+        
+        this.Post('/api/invest/v1/reserveApply.json',{applyAmt:this.reserveMoney,applyInvestClaimId:this.context.id})
             .then(data => {
-                
+                console.log(data)
             })
         }
     setFormData = (field, value) => {

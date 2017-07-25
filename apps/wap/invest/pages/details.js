@@ -10,7 +10,7 @@ import styles from '../css/details.css'
 class Details extends React.Component {
 
     componentDidMount() {
-        this.props.reserve.reserveHandler()
+        this.props.reserve.getDataHandler()
     }
 
     render() {
@@ -86,7 +86,7 @@ class Details extends React.Component {
             </div>
             <div styleName="bottomBox">
                 <div styleName="recordBtn">预约记录</div>
-                <div styleName="reserveBtn">立即预约</div>
+                <div styleName="reserveBtn" onClick={() => reserve.reserveHandler()}>立即预约</div>
             </div>
         </div>
     }
