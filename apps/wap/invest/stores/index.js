@@ -1,9 +1,5 @@
-import Details from './details.js'
-import SubmitReserve from './submit-reserve.js'
-import MyReserve from './my-reserve.js'
+import Reserve from './reserve.js'
 
 export {
-    Details,
-    SubmitReserve,
-    MyReserve
+    Reserve
 }

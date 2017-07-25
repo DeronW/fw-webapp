@@ -4,16 +4,20 @@ import {observer, inject} from 'mobx-react'
 import Header from '../components/header'
 import styles from '../css/details.css'
 
-@inject('details')
+@inject('reserve')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Details extends React.Component {
+
+    componentDidMount(){
+        this.props.reserve.reserveHandler()
+    }
     render() {
         let {details} = this.props
         return <div>
             <Header title="详情" history={history}/>
             <div styleName="top-info">
-                {details.invest_term}
+                {/*reserve.invest_term*/}
             </div>
         </div>
     }
