@@ -47,7 +47,7 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
                 let msg = error.message
                 if (error.code == 11000) msg = '参数不完整，请重新登录！[11000]'
                 if (error.code == LOGIN_CODE) msg = `登录失效，请重新登录! [${LOGIN_CODE}]`
-                if (!slience || error.code == LOGIN_CODE) Components.showToast(msg)
+                if (!silence || error.code == LOGIN_CODE) Components.showToast(msg)
 
                 if (error.code == LOGIN_CODE) {
                     // 处理用户登录功能
@@ -59,7 +59,7 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
                         setTimeout(loginInBrowser, 1800)
                     }
                 } else {
-                    slience ? reject(error) : setTimeout(() => reject(error), 1700)
+                    silence ? reject(error) : setTimeout(() => reject(error), 1700)
                 }
             })
         })
