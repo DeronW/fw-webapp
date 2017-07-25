@@ -13,6 +13,7 @@ class MyReserve extends React.Component {
     }
 
     render() {
+        let {reserve, history}= this.props
         return <div>
             <Header title="我的预约" history={history} show_close={false}/>
             <div styleName="reserveItem">

@@ -13,8 +13,13 @@ class Details extends React.Component {
         this.props.reserve.getDataHandler()
     }
 
+    jumpRecordHandler = () => {
+        let {history} = this.props
+        history.push(`/my-reserve`)
+    }
+
     render() {
-        let {reserve,history,location} = this.props
+        let {reserve, history, location} = this.props
         return <div>
             <Header title="详情" history={history} show_close={false}/>
             <div styleName="topInfo">

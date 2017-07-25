@@ -28,7 +28,7 @@ class submitReserve extends React.Component {
     }
 
     render() {
-        let {reserve} = this.props
+        let {reserve, history}= this.props
         let ischeck = reserve.isChecked ?
             styles["protocolChecked"] :
             styles["protocolUnChecked"]
