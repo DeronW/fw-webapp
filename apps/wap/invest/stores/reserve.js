@@ -1,6 +1,7 @@
-import { extendObservable, computed } from 'mobx'
+import {extendObservable, computed} from 'mobx'
 import * as $FW from 'fw-components'
-import { Components, Utils } from 'fw-javascripts'
+import {Components, Utils} from 'fw-javascripts'
+import  NativeBridge  from '../helpers/native-bridge.js'
 
 export default class Details {
     constructor(Post) {
@@ -14,9 +15,7 @@ export default class Details {
                 minAmt: null,//最小预约额
                 repayPeriod: null,//期限
             },
-            records: [
-
-            ],
+            records: [],
             pageData: {
                 pageNo: 1,
                 pageSize: 4,
@@ -30,23 +29,31 @@ export default class Details {
         })
     }
 
-    reserveHandler = () => {
-        this.Post('/api/invest/v1/entryReserve.json', { applyInvestClaimId: Utils.hashQuery.applyInvestClaimId })
+    getDataHandler = () => {
+        this.Post('/api/invest/v1/entryReserve.json', {applyInvestClaimId: Utils.hashQuery.applyInvestClaimId})
             .then(data => {
                 this.context = data.appointClaim;
                 this.accountAmount = data.accountAmount;
                 this.isRisk = data.isRisk;
                 this.batchMaxmum = data.batchMaxmum
             })
-        this.Post('/api/invest/v1/reserveList.json', { page: this.page, pageSize: this.pageSize })
+        this.Post('/api/invest/v1/reserveList.json', {page: this.page, pageSize: this.pageSize})
             .then(data => {
                 this.pageData = data.pageData;
                 this.records = data.result
             })
     }
+    reserveHandler = (history) => {
+        if (this.isRisk === 0) return location.href = "https://m.9888.cn/static/wap/user-evaluate-p2p/index.html";
+        if (this.batchMaxmum === 0) return location.href = "";//调到自动投资页面
+        this.Post('/api/invest/v1/reserveApply.json', {
+            applyAmt: this.reserveMoney,
+            applyInvestClaimId: this.context.id
+        })
 
-    setFormData = (field, value) => {
-        this[field] = value
+        setFormData = (field, value) => {
+            this[field] = value
+        }
+
     }
-
 }

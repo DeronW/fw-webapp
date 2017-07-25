@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/pc.css'
