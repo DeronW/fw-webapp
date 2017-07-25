@@ -3,12 +3,17 @@ import { Request, Components } from 'fw-javascripts'
 const API_PATH = document.getElementById('api-path').value;
 
 function inHome() {
-    var p = location.pathname;
+    let p = location.pathname, h = location.hash
     return p === '/' || p === '/static/loan/home/index.html'
+        || (p === '/static/loan/products/index.html' && h == '#/')
 }
 
-function loginInApp() {
-    location.href = '/static/loan/user-jrgc-login/index.html';
+function loginInJRGC() {
+    location.href = '/static/loan/3rd/index.html#jrgc-login';
+}
+
+function loginInBrowser() {
+    location.href = '/static/loan/account/index.html#/entry'
 }
 
 
@@ -34,33 +39,29 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
             data: merged_data,
             silence: true
         }).catch(error => {
-            if (error.code == 100008) {
-                // 处理用户登录功能
-                Components.showToast(`登录失效，请重新登录 [${error.code}]`)
-                if (Browser.inJRGCApp) {
-                    inHome() ? loginInApp() : NativeBridge.close()
+
+            const LOGIN_CODE = 100008
+
+            return new Promise((_, reject) => {
+
+                let msg = error.message
+                if (error.code == 11000) msg = '参数不完整，请重新登录！[11000]'
+                if (error.code == LOGIN_CODE) msg = `登录失效，请重新登录! [${LOGIN_CODE}]`
+                if (!slience || error.code == LOGIN_CODE) Components.showToast(msg)
+
+                if (error.code == LOGIN_CODE) {
+                    // 处理用户登录功能
+                    if (Browser.inJRGCApp) {
+                        inHome() ? loginInJRGC() : NativeBridge.close()
+                    } else if (Browser.inFXHApp) {
+                        NativeBridge.login()
+                    } else {
+                        setTimeout(loginInBrowser, 1800)
+                    }
+                } else {
+                    slience ? reject(error) : setTimeout(() => reject(error), 1700)
                 }
-
-                if (Browser.inFXHApp) NativeBridge.login();
-
-                if (!Browser.inJRGCApp && !Browser.inFXHApp)
-                    setTimeout(() => {
-                        location.href = '/static/loan/account/index.html#/entry'
-                    }, 1800);
-
-            } else {
-                if (silence)
-                    return new Promise((reslove, reject) => reject(error))
-
-                //11000 代表参数不完整
-                let msg = error.code == 11000 ? '参数不完整，请重新登录！' : error.message;
-
-                Components.showToast(msg)
-
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => reject(error), 1700)
-                })
-            }
+            })
         })
     }
 }
