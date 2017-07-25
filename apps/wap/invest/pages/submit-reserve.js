@@ -19,12 +19,7 @@ class submitReserve extends React.Component {
 
     allMadeHandler = () => {
         let {reserve} = this.props
-        this.props.reserve.setFormData('reserveMoney', reserve.currentMoney)
-    }
-
-    checkHandler = () => {
-        let {reserve} = this.props
-        this.props.reserve.setFormData('isChecked', !reserve.isChecked)
+        this.props.reserve.setFormData('reserveMoney', reserve.accountAmount)
     }
 
     render() {
@@ -38,7 +33,7 @@ class submitReserve extends React.Component {
                 <div styleName="reserveMoney">预约金额</div>
                 <div styleName="userMoney">
                     <div styleName="money">可用余额
-                        <span>{`￥${reserve.currentMoney}`}</span>
+                        <span>{`￥${reserve.accountAmount}`}</span>
                     </div>
                     <div styleName="inputMoney">
                         <input type="text" placeholder="50元起投" value={reserve.reserveMoney}
@@ -71,11 +66,10 @@ class submitReserve extends React.Component {
                 </div>
             </div>
             <div styleName="submitProtocol">
-                <span className={ischeck} onClick={this.checkHandler}></span>
-                <span styleName="protocolText">《预约协议》</span>
+                <span styleName="protocolText">本人已阅读并同意签署《预约协议》</span>
             </div>
             <div styleName="submitBtnContainer">
-                <div styleName="submitBtn">立即预约</div>
+                <div styleName="submitBtn" onClick={() => this.props.reserve.submitRerveHandler(history)}>立即预约</div>
             </div>
         </div>
     }

@@ -42,8 +42,8 @@ class Details extends React.Component {
                 </div>
             </div>
             <div styleName="tipsBox">
-                <span styleName="tipsItem">平均2小时起息</span>
-                <span styleName="tipsItem">100元起预约</span>
+                <span styleName="tipsItem">{reserve.context.avgLoanPeriod}</span>
+                <span styleName="tipsItem">{reserve.context.minAmt}元起预约</span>
             </div>
             <div styleName="flowBox">
                 <div styleName="flowHeader">预约流程</div>
@@ -90,7 +90,7 @@ class Details extends React.Component {
                 </div>
             </div>
             <div styleName="bottomBox">
-                <div styleName="recordBtn">预约记录</div>
+                <div styleName="recordBtn" onClick={this.jumpRecordHandler}>预约记录</div>
                 <div styleName="reserveBtn" onClick={() => reserve.reserveHandler(history)}>立即预约</div>
             </div>
         </div>
