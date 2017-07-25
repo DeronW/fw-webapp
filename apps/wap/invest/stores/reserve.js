@@ -1,6 +1,6 @@
 import {extendObservable, computed} from 'mobx'
 import * as $FW from 'fw-components'
-import {Components, Utils} from 'fw-javascripts'
+import {Components, Utils,Event} from 'fw-javascripts'
 import  NativeBridge  from '../helpers/native-bridge.js'
 
 export default class Details {
@@ -11,14 +11,14 @@ export default class Details {
                 avgLoanPeriod: '',//平均起息时间
                 bookValidPeriod: null,//预约有效期
                 id: null,//预约标id
-                loadRate: null,//利率
+                loadRate: '',//利率
                 minAmt: '',//最小预约额
-                repayPeriod: null,//期限
+                repayPeriod: '',//期限
             },
             records: [],
             pageData: {
                 pageNo: 1,
-                pageSize: 4,
+                pageSize: 3,
                 totalCount: 20
             },
             accountAmount: 88888,//可用余额
@@ -39,11 +39,22 @@ export default class Details {
                 this.minAmt = data.appointClaim.minAmt
                 this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
             })
-        this.Post('/api/invest/v1/reserveList.json', {page: this.page, pageSize: this.pageSize})
-            .then(data => {
-                this.pageData = data.pageData;
-                this.records = data.result
-            })
+    }
+    getReserveList = (done) => {
+        if (this.pageData.pageNo === 0) return done && done()
+
+        this.Post('/api/invest/v1/reserveList.json', {
+            page: this.pageData.pageNo,
+            pageSize: this.pageData.pageSize
+        }).then(data => {
+            this.pageData = data.pageData;
+            this.records = data.result
+            this.records.push(...data.result)
+            this.records.pageNo < data.totalCount ?
+                this.records.pageNo++ :
+                this.records.pageNo = 0;
+            done && done();
+        })
     }
     reserveHandler = (history) => {
         if (this.isRisk === 0) return location.href = "https://m.9888.cn/static/wap/user-evaluate-p2p/index.html";
