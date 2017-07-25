@@ -19,7 +19,8 @@ class MortgageOutsideApply extends React.Component {
         duration: '',
         district: '',
         neighbour: '',
-        area: ''
+        area: '',
+        showLeavePop: false
     }
 
     handleChange = type => e => this.setState({ [type]: e.target.value })
@@ -53,7 +54,7 @@ class MortgageOutsideApply extends React.Component {
 
     render() {
         let { history } = this.props;
-        let { amount, duration, district, neighbour, area } = this.state,
+        let { amount, duration, district, neighbour, area, showLeavePop } = this.state,
             allFieldsFilled = amount && duration && district && neighbour && area;
         return (
             <div styleName="cnt-container">
@@ -126,6 +127,19 @@ class MortgageOutsideApply extends React.Component {
                         提交资料
                     </a>
                 </div>
+
+                <div styleName="leave-catch" onClick={() => { this.setState({ showLeavePop: true }) }}></div>
+                { showLeavePop &&
+                    <div styleName="mask">
+                        <div styleName="pop">
+                            <div styleName="pop-content">马上就要申请成功了，真的要退出吗？</div>
+                            <div styleName="pop-btn-grp">
+                                <div styleName="pop-btn-cancel" onClick={() => { history.push('/mortgage-outside-entry') }}>离开</div>
+                                <div styleName="pop-btn-confirm" onClick={() => { this.setState({ showLeavePop: false }) }}>继续申请</div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         )
     }
