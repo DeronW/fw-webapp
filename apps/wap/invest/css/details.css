@@ -1,5 +1,112 @@
-.top-info {
-    width: 100%;
-    height: 300px;
-    background: #f9655a;
+html, body {
+    height: 100%;
+    background-color: #ebebee;
+    font-family: PingFangSC-Regular, sans-serif;
+    color: #555;
 }
+
+.topInfo {
+    width: 100%;
+    height: 187px;
+    background: #5b6993;
+    display: table;
+    font-size: 22px;
+    color: #fff;
+}
+
+.infoRate {
+    width: 359px;
+    float: left;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.rateUp, .dateUp {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.rateUp .percent {
+    font-size: 24px;
+    padding-left: 5px;
+}
+
+.dateUp .percent {
+    font-size: 24px;
+    padding-left: 5px;
+}
+
+.garyGap {
+    width: 2px;
+    height: 65px;
+    float: left;
+    background-color: #8690ae;
+    margin-top: 61px;
+}
+
+.infoDate {
+    width: 359px;
+    float: right;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.tipsBox {
+    width: 690px;
+    height: 28px;
+    border-bottom: 1px solid #d8d8d8;
+    padding: 20px 0 20px 30px;
+    background-color: #ebebee;
+}
+
+.tipsBox .tipsItem {
+    font-size: 22px;
+    color: #5b7aa4;
+    background-color: #fff;
+    border: 1px solid #5b7aa4;
+    padding: 5px;
+    margin-right: 20px;
+    border-radius: 4px;
+}
+
+.flowBox {
+    width: 100%;
+    height: 243px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.flowHeader {
+    width: 690px;
+    height: 90px;
+    padding-left: 30px;
+    border-bottom: 1px solid #d8d8d8;
+    background-color: #f9f9f9;
+    font-size: 32px;
+    color: #333;
+    line-height: 90px;
+}
+
+.flowContent {
+    width: 674px;
+    height: 101px;
+    padding: 31px 21px 20px 25px;
+    background-color: #ffffff;
+    display: table;
+}
+
+.flowItem {
+    float: left;
+    width: 156px;
+    height: 101px;
+    text-align: center;
+    font-size: 26px;
+    color: #555555;
+}
+
+.flowArrow {
+    float: left;
+    width: 16px;
+    height: 101px;
+    text-align: center;
+}
+
