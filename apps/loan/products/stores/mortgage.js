@@ -42,13 +42,28 @@ export default class Mortgage {
     }
 
     setPanelData = (history, field, v) => {
-        this._set_field(field, v);
         history.goBack();
+        this._set_field(field, v);
     }
 
     fetchBasicInfo = () => {
         this.Post('/api/userext/v1/userAuthentication.json', { version: 'v1' })
             .then(data => this.setFormData(data));
+    }
+
+    submit = (history) => {
+        this.Post('/api/public/v1/mortgage.json', {
+            phone: this.phone,
+            mortgAmountRange: this.amount,
+            mortgTimeLong: this.duration,
+            area: this.district,
+            housingEstate: this.neighbour,
+            houseBuildArea: this.area,
+            province: '北京市',
+            city: this.city,
+            realName: this.realName
+        }).then(data => history.push('/mortgage-success'))
+        .catch(e => { Components.showToast(e.message) })
     }
 
 }
