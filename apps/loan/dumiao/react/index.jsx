@@ -279,6 +279,6 @@ const USER = $FW.Store.getUserDict();
 
 $FW.DOMReady(() => {
     NativeBridge.setTitle('分期');
-    ReactDOM.render(<Header title={"分期"} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"分期"} enable={'force'} />, HEADER_NODE);
     ReactDOM.render(<BorrowMoney />, CONTENT_NODE)
 })
