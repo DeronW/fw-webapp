@@ -7,7 +7,6 @@ export default class Mortgage {
         this.Post = Post;
 
         extendObservable(this, {
-            currentPanel: '',
             phone: '',
             realName: '',
             amount: '',
@@ -27,20 +26,24 @@ export default class Mortgage {
         return this.phone && this.realName && this.amount && this.duration && this.city && this.district && this.neighbour && this.area
     }
 
-    setField = (k, v) => {
+    _set_field = (k, v) => {
         this[k] = v;
     }
 
     setFormData = (data) => {
         for (let i in data) {
             if (!data[i]) return
-            this.setField(i, data[i]);
+            this._set_field(i, data[i]);
         }
     }
 
     setCurrentPanel = (history, p) => {
         history.push(`/mortgage-apply#${p}`);
-        this.currentPanel = p;
+    }
+
+    setPanelData = (history, field, v) => {
+        this._set_field(field, v);
+        history.goBack();
     }
 
     fetchBasicInfo = () => {

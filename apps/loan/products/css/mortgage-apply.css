@@ -5,7 +5,7 @@
     min-height: 100%;
 }
 
-.item-grp-name {
+.item-grp-name, .select-label {
     margin-left: 30px;
     height: 64px;
     line-height: 64px;
@@ -13,7 +13,7 @@
     font-size: 28px;
 }
 
-.item-grp {
+.item-grp, .option-grp {
     box-sizing: border-box;
     padding-left: 30px;
     background-color: #fff;
@@ -23,19 +23,34 @@
     margin-bottom: 150px;
 }
 
-.item-container {
+.item-container, .unselected-option {
     box-sizing: border-box;
     display: table;
     width: 100%;
     height: 99px;
+    line-height: 99px;
     border-bottom: 1px solid #eee;
     padding-right: 24px;
+    color: #333;
+    font-size: 32px;
+}
+
+.selected-option {
+    composes: unselected-option;
+    background: url('../images/mortgage-apply/selected.png') no-repeat 630px;
 }
 
 .mutable-item-container {
     composes: item-container;
     padding-right: 54px;
     background: url('../images/mortgage-apply/expand.png') no-repeat 650px;
+}
+
+.input-item-container {
+    composes: item-container;
+    padding-left: 30px;
+    margin-top: 20px;
+    background-color: #fff;
 }
 
 .item-container:last-child {
@@ -50,7 +65,7 @@
     font-size: 32px;
 }
 
-.item-value {
+.item-value, .input-item-container input {
     float: right;
     width: 450px;
     height: 99px;
@@ -59,7 +74,6 @@
     font-size: 32px;
     text-align: right;
 }
-
 
 .submit-btn-container {
     position: fixed;

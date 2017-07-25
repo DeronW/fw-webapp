@@ -37,31 +37,88 @@ const DisplayItem = inject('mortgage')(observer(CSSModules((props) => {
         <div className={immutable ? styles['item-container'] : styles['mutable-item-container']}
             onClick={() => { !immutable && props.mortgage.setCurrentPanel(history, field) }}>
             <div styleName="item-name">{itemName}</div>
-            <div styleName="item-value" style={{ "color": mortgage[field] ? "#333" : "#999"}}>{itemValue}</div>
+            <div styleName="item-value" style={{ 'color': mortgage[field] ? '#333' : '#999' }}>{itemValue}</div>
         </div>
     )
 }, styles, { "allowMultiple": true, "errorWhenNotFound": false })))
 
+
 /* parameters
-    <InputItem field="" />
+    <InputItem field="" history={history} />
 */
-// const InputItem = inject('mortgage')(observer(CSSModules((props) => {
-//     let { mortgage, field } = props,
-//         itemValue = mortgage[field];
-//     return (
-//         <div styleName="item-container">
-//             <div styleName="item-name">{Model[field].name}</div>
-//             <input placeholder="请输入"
-//                 value={itemValue}
-//                 onChange={() => {mortgage.setField(field)}}/>
-//         </div>
-//     )
-// }, styles)))
+@inject('mortgage')
+@observer
+@CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
+class InputItem extends React.Component {
+
+    state = { value: '' }
+
+    componentDidMount() {
+        let { mortgage, field } = this.props;
+        this.setState({ value: mortgage[field] })
+    }
+
+    handleInput = (e) => {
+        this.setState({ value: e.target.value })
+    }
+
+    handleSubmit = () => {
+        let { mortgage, field, history } = this.props;
+        mortgage.setPanelData(history, field, this.state.value);
+    }
+
+    render() {
+        let { mortgage, field } = this.props,
+            value = this.state.value;
+        return (
+            <div>
+                <div styleName="input-item-container">
+                    <div styleName="item-name">{Model[field].name}</div>
+                    <input placeholder="请输入"
+                        value={value}
+                        onChange={this.handleInput} />
+                </div>
+                <div styleName="submit-btn-container">
+                    <a styleName="submit-btn"
+                        style={{ 'background': value ? '#639afb' : '#ccc'}}
+                        onClick={this.handleSubmit}>
+                        确定
+                    </a>
+                </div>
+            </div>
+        )
+    }
+}
+
+/* parameters
+    <SelectItem field="" history={history} />
+*/
+const SelectItem = inject('mortgage')(observer(CSSModules((props) => {
+    let { mortgage, field, immutable, history } = props,
+        itemName = Model[field].name,
+        itemOptions = Model[field].options,
+        itemValue = mortgage[field];
+    let gen_options = (optValue) => (
+        <div key={optValue}
+            className={optValue === itemValue ? styles['selected-option'] : styles['unselected-option']}
+            onClick={() => { mortgage.setPanelData(history, field, optValue) }}>
+            {optValue}
+        </div>
+    )
+    return (
+        <div>
+            <div styleName="select-label">{`选择${itemName}`}</div>
+            <div styleName="option-grp">
+                { itemOptions.map(gen_options) }
+            </div>
+        </div>
+    )
+}, styles, { "allowMultiple": true, "errorWhenNotFound": false })))
 
 
 @inject('mortgage')
 @observer
-@CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false})
+@CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class MortgageApply extends React.Component {
 
     componentDidMount() {
@@ -70,18 +127,22 @@ class MortgageApply extends React.Component {
 
     render() {
         let { mortgage, history } = this.props,
-            hasRealName = mortgage.hasRealName;
-
+            currentPanel = history.location.hash.slice(1);
 
         return (
             <div styleName="cnt-container">
                 <Header title="房产抵押贷款" history={history} />
 
-                <div>
+                { currentPanel && (
+                    Model[currentPanel].options ?
+                        <SelectItem field={currentPanel} history={history} />
+                        :
+                        <InputItem field={currentPanel} history={history} /> )}
+                { !currentPanel && <div>
                     <div styleName="item-grp-name">申请人信息</div>
                     <div styleName="item-grp">
                         <DisplayItem field="phone" history={history} immutable />
-                        <DisplayItem field="realName" history={history} immutable={hasRealName} />
+                        <DisplayItem field="realName" history={history} immutable={mortgage.hasRealName} />
                     </div>
 
                     <div styleName="item-grp-name">抵押金额及期限</div>
@@ -97,15 +158,15 @@ class MortgageApply extends React.Component {
                         <DisplayItem field="neighbour" history={history} />
                         <DisplayItem field="area" history={history} />
                     </div>
-                </div>
 
-                <div styleName="submit-btn-container">
-                    <a styleName="submit-btn"
-                        style={{ 'background': mortgage.allFieldsFilled ? '#639afb' : '#ccc'}}
-                        onClick={this.handleSubmit}>
-                        提交资料
-                    </a>
-                </div>
+                    <div styleName="submit-btn-container">
+                        <a styleName="submit-btn"
+                            style={{ 'background': mortgage.allFieldsFilled ? '#639afb' : '#ccc'}}
+                            onClick={this.handleSubmit}>
+                            提交
+                        </a>
+                    </div>
+                </div> }
             </div>
         )
     }
