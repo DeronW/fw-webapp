@@ -9,9 +9,7 @@ import AppRouter from './router'
 import * as Stores from './stores'
 
 let stores = {
-    details: new Stores.Details(Post),
-    myreserve: new Stores.MyReserve(Post),
-    submitReserve: new Stores.SubmitReserve(Post)
+    reserve: new Stores.Reserve(Post),
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))

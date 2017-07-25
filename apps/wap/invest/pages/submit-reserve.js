@@ -5,34 +5,33 @@ import {observer, inject} from 'mobx-react'
 import Header from '../components/header.js'
 import styles from '../css/submit-reserve.css'
 
-@inject('submitReserve')
+@inject('reserve')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class SubmitReserve extends React.Component {
+class submitReserve extends React.Component {
     componentDidMount() {
 
     }
 
     inputChangeHandler = name => e => {
         console.log(111)
-        this.props.submitReserve.setFormData(name, e.target.value)
+        this.props.reserve.setFormData(name, e.target.value)
     }
 
     allMadeHandler = () => {
         console.log(2222)
-        let {submitReserve} = this.props
-        this.props.submitReserve.setFormData('reserveMoney', submitReserve.currentMoney)
+        let {reserve} = this.props
+        this.props.reserve.setFormData('reserveMoney', reserve.currentMoney)
     }
 
     checkHandler = () => {
-        let {submitReserve} = this.props
-        this.props.submitReserve.setFormData('isChecked', !submitReserve.isChecked)
-        console.log(submitReserve.isChecked)
+        let {reserve} = this.props
+        this.props.reserve.setFormData('isChecked', !reserve.isChecked)
     }
 
     render() {
-        let {submitReserve} = this.props
-        let ischeck = submitReserve.isChecked ?
+        let {reserve} = this.props
+        let ischeck = reserve.isChecked ?
             styles["protocolChecked"] :
             styles["protocolUnChecked"]
         return <div>
@@ -41,10 +40,10 @@ class SubmitReserve extends React.Component {
                 <div styleName="reserveMoney">预约金额</div>
                 <div styleName="userMoney">
                     <div styleName="money">可用余额
-                        <span>{`￥${submitReserve.currentMoney}`}</span>
+                        <span>{`￥${reserve.currentMoney}`}</span>
                     </div>
                     <div styleName="inputMoney">
-                        <input type="text" placeholder="50元起投" value={submitReserve.reserveMoney}
+                        <input type="text" placeholder="50元起投" value={reserve.reserveMoney}
                                onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
@@ -83,4 +82,4 @@ class SubmitReserve extends React.Component {
         </div>
     }
 }
-export default SubmitReserve
+export default submitReserve

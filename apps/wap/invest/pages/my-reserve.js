@@ -4,7 +4,7 @@ import {observer, inject} from 'mobx-react'
 import styles from '../css/my-reserve.css'
 import Header from '../components/header'
 
-@inject('myreserve')
+@inject('reserve')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class MyReserve extends React.Component {
