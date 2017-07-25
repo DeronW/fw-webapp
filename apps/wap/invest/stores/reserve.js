@@ -15,8 +15,13 @@ export default class Details {
                 repayPeriod: null,//期限
             },
             records: [
-                
+
             ],
+            pageData: {
+                pageNo: 1,
+                pageSize: 4,
+                totalCount: 20
+            },
             accountAmount: null,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
             batchMaxmum: 0,//批量投资限额
@@ -28,7 +33,15 @@ export default class Details {
     reserveHandler = () => {
         this.Post('/api/invest/v1/entryReserve.json', { applyInvestClaimId: Utils.hashQuery.applyInvestClaimId })
             .then(data => {
-                // this.accountAmount = 
+                this.context = data.appointClaim;
+                this.accountAmount = data.accountAmount;
+                this.isRisk = data.isRisk;
+                this.batchMaxmum = data.batchMaxmum
+            })
+        this.Post('/api/invest/v1/reserveList.json', { page: this.page, pageSize: this.pageSize })
+            .then(data => {
+                this.pageData = data.pageData;
+                this.records = data.result
             })
     }
 
