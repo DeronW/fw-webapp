@@ -14,12 +14,10 @@ class submitReserve extends React.Component {
     }
 
     inputChangeHandler = name => e => {
-        console.log(111)
         this.props.reserve.setFormData(name, e.target.value)
     }
 
     allMadeHandler = () => {
-        console.log(2222)
         let {reserve} = this.props
         this.props.reserve.setFormData('reserveMoney', reserve.currentMoney)
     }

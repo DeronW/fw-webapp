@@ -45,6 +45,12 @@ export default class Details {
             })
     }
 
+    submitHandler = () => {
+         this.Post('/api/invest/v1/entryReserve.json',{applyAmt:this.reserveMoney,applyInvestClaimId:this.context.id})
+            .then(data => {
+                
+            })
+        }
     setFormData = (field, value) => {
         this[field] = value
     }
