@@ -25,7 +25,8 @@ class Details extends React.Component {
             <div styleName="topInfo">
                 <div styleName="infoRate">
                     <div styleName="rateUp">
-                        <span>6</span><span styleName="percent">%</span>
+                        <span>{reserve.context.loadRate}</span>
+                        <span styleName="percent">%</span>
                     </div>
                     <div styleName="rateDown">
                         年化借款利率
@@ -34,7 +35,8 @@ class Details extends React.Component {
                 <div styleName="garyGap"></div>
                 <div styleName="infoDate">
                     <div styleName="dateUp">
-                        <span>21</span><span styleName="percent">天</span>
+                        <span>{reserve.context.repayPeriod}</span>
+                        <span styleName="percent">天</span>
                     </div>
                     <div styleName="dateDown">
                         期限
@@ -42,8 +44,8 @@ class Details extends React.Component {
                 </div>
             </div>
             <div styleName="tipsBox">
-                <span styleName="tipsItem">平均2小时起息</span>
-                <span styleName="tipsItem">100元起预约</span>
+                <span styleName="tipsItem">{reserve.context.avgLoanPeriod}</span>
+                <span styleName="tipsItem">{reserve.context.minAmt}元起预约</span>
             </div>
             <div styleName="flowBox">
                 <div styleName="flowHeader">预约流程</div>
@@ -90,7 +92,7 @@ class Details extends React.Component {
                 </div>
             </div>
             <div styleName="bottomBox">
-                <div styleName="recordBtn">预约记录</div>
+                <div styleName="recordBtn" onClick={this.jumpRecordHandler}>预约记录</div>
                 <div styleName="reserveBtn" onClick={() => reserve.reserveHandler(history)}>立即预约</div>
             </div>
         </div>
