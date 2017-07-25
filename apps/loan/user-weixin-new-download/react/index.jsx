@@ -1,5 +1,6 @@
 $FW.DOMReady(function () {
     NativeBridge.setTitle('关注下载');
+    NativeBridge.showHeader();
     ReactDOM.render(<Header title={'关注下载'} />, HEADER_NODE)
     var channel = $FW.Format.urlQuery().name;
     var ConcertUtilBrowser = {
