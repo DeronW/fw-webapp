@@ -18,7 +18,7 @@ export default (stores) => {
     return <Router>
         <Provider {...stores}>
             <Switch>
-                <Route path='/' component={Home} />
+                <Route path='/' exact component={Home} />
 
                 <Route path='/mortgage-download' component={MortgageDownload} />
                 <Route path='/mortgage-outside-entry' component={MortgageOutsideEntry} />

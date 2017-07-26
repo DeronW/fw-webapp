@@ -8,7 +8,7 @@ import styles from '../css/mortgage-download.css'
 class MortgageDownload extends React.Component {
     render() {
         return <div styleName="bg">
-            <Header title="放心花" />
+            <Header title="放心花" history={this.props.history} />
             <div styleName="download-wrap">
                 <div styleName="text-area">审核专员预计在1个工作日内联系您</div>
                 <div styleName="qr-img"><img src={require("../images/mortgage-download/qr.png")} /></div>
