@@ -17,23 +17,17 @@ const Ajax = options => {
             message: ...
         }
         */
-        if (error.code == 40101) {
-            console.log('here ! should go to login')
-
-            Browser.inApp ?
-                NativeBridge.login() :
-                location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
-        } else {
-            // 如果不弹出错误, 就直接reject
-            if (options.silence)
-                return new Promise((reslove, reject) => reject(error))
-
-            Components.showToast(error.message)
-
-            return new Promise((resolve, reject) => {
-                setTimeout(() => reject(error), 1700)
-            })
-        }
+        return new Promise((_, reject) => {
+            !options.silence && Components.showToast(error.message)
+            if (error.code == 40101) {
+                // 处理用户登录功能
+                Browser.inApp ?
+                    NativeBridge.login() :
+                    location.href = 'https://m.9888.cn/mpwap/orderuser/toLogin.shtml'
+            } else {
+                silence ? reject(error) : setTimeout(() => reject(error), 1700)
+            }
+        })
     })
 }
 

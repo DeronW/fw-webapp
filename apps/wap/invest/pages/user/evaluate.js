@@ -1,7 +1,8 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import Header from '../../components/header'
+import { Header } from '../../components'
+import { Get } from '../../helpers'
 
 import styles from '../../css/user/evaluate.css'
 
@@ -186,114 +187,125 @@ const QUESTIONS = [{
     }]
 }];
 
-let startArr = [];
-
-QUESTIONS.forEach(value => {
-    let json = {};
-    json[value.name] = -1;
-    startArr.push(json);
-});
-
-
-function back_handler() {
-
-}
-
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Evaluate extends React.Component {
     state = {
         finished: false,
         score: 0,
-        type: "",
+        evaluateType: "风险类型",
         selected: {}
     }
 
+    back_handler = () => {
+        this.props.history.goBack()
+    }
+
+    componentDidMount() {
+        document.title = '风险测评'
+    }
+
     selectHandler = (name, optionIndex) => {
-        this.setState({ name: optionIndex })
+        let { selected } = this.state
+        selected[name] = optionIndex
+        this.setState({ selected: selected })
+    }
+
+    submitHandler = () => {
+        let form_data = {}, { selected } = this.state, err;
+
+        for (let i in selected) {
+            if (form_data[i] == -1) err = true;
+            form_data[i] = ['A', 'B', 'C', 'D', 'E'][selected[i]]
+        }
+
+        err ?
+            Component.showToast("您还有未填写试题") :
+            Get('/mpwap/orderuser/riskGradeInto.shtml', form_data)
+                .then(data => this.setState({
+                    finished: true,
+                    score: data.score,
+                    evaluateType: data.gradeLevel
+                }))
     }
 
     render() {
-        let { finished, score, type, selected } = this.state
+        let { finished, score, evaluateType, selected } = this.state
 
         let result = () => {
-            return <div className="question-result">
-                <div className="result-top">
-                    <div className="result-img"><img src="images/result.png" /></div>
-                    <div className="result-score">{score}分</div>
-                    <div className="result-text1">评估完成，您的风险承受能力为：</div>
-                    <div className="result-text2">{type}</div>
+            return <div>
+                <div styleName="result-top">
+                    <img styleName="result-img" src={require("../../images/user/evaluate/result.png")} />
+                    <div styleName="result-score">{score}分</div>
+                    <div styleName="result-text1">评估完成，您的风险承受能力为：</div>
+                    <div styleName="result-text2">{evaluateType}</div>
                 </div>
-                <div className="result-cnt">
-                    <div className="text1">郑重提醒：</div>
-                    <div className="text2">
+                <div styleName="result-cnt">
+                    <div styleName="result-text-1">郑重提醒：</div>
+                    <div styleName="result-text-2">
                         出借人需具备相应的风险承受能力，审慎参与市场出借，合理配置金融资产。本风险承受能力评估并不构成对出借人未来所承担出借风险程度的保证，仅作为本平台客户适当性服务的依据。实际出借时请慎重选择，本平台不对出借人据此出借资金所产生的风险承担责任。
                     </div>
-                    <div className="text3"> 本人声明：</div>
-                    <div className="text4">在出借人风险承受能力测试过程中，本人提供的全部信息、资料是真实、准确和完整的，测试结果真实、准确地反映了本人的出借风险承受程度。
+                    <div styleName="result-text-1"> 本人声明：</div>
+                    <div styleName="result-text-2">在出借人风险承受能力测试过程中，本人提供的全部信息、资料是真实、准确和完整的，测试结果真实、准确地反映了本人的出借风险承受程度。
                     </div>
-                    <div className="text5">本人保证上述所填信息为本人真实的意思表示，完全独立依据自身情况和判断做出上述答案，并接受评估意见。否则由此导致的一切后果由本人承担。
+                    <div styleName="result-text-2">本人保证上述所填信息为本人真实的意思表示，完全独立依据自身情况和判断做出上述答案，并接受评估意见。否则由此导致的一切后果由本人承担。
                     </div>
-                    <div className="list-box">
-                        <div className="li-head">
-                            <div className="li-l">分数</div>
-                            <div className="li-r">风险承受能力类型</div>
+                    <div styleName="result-list-box">
+                        <div styleName="li-head">
+                            <div styleName="li-l">分数</div>
+                            <div styleName="li-r">风险承受能力类型</div>
                         </div>
-                        <div className="li">
-                            <div className="li-l">61分或以上</div>
-                            <div className="li-r">进取型</div>
+                        <div styleName="li">
+                            <div styleName="li-l">61分或以上</div>
+                            <div styleName="li-r">进取型</div>
                         </div>
-                        <div className="li">
-                            <div className="li-l">41-60分</div>
-                            <div className="li-r">平衡型</div>
+                        <div styleName="li">
+                            <div styleName="li-l">41-60分</div>
+                            <div styleName="li-r">平衡型</div>
                         </div>
-                        <div className="li">
-                            <div className="li-l">21-40分</div>
-                            <div className="li-r">稳健型</div>
+                        <div styleName="li">
+                            <div styleName="li-l">21-40分</div>
+                            <div styleName="li-r">稳健型</div>
                         </div>
-                        <div className="li">
-                            <div className="li-l">20分以下</div>
-                            <div className="li-r">谨慎型</div>
+                        <div styleName="li">
+                            <div styleName="li-l">20分以下</div>
+                            <div styleName="li-r">谨慎型</div>
                         </div>
                     </div>
                 </div>
-                <div className="foot-btn-box">
-                    <a className="foot-btn" onClick={back_handler}>退出</a>
+                <div styleName="submit-panel">
+                    <a styleName="btn-submit" onClick={this.back_handler}>退出</a>
                 </div>
             </div>
         }
 
         let questions = () => {
-            let question = (q, num) => {
+            let question = (q, index) => {
 
                 let option = (o, oIndex) => {
                     let cn = "select"
                     if (selected[q.name] == oIndex) cn += ' checked'
 
-                    return <div className="question-select" key={oIndex}>
-                        <div className={cn}
-                            onClick={() => this.selectHandler(myName, oIndex)}>
-                        </div>
-                        {o.a}
+                    return <div styleName="question-select" key={oIndex}
+                        onClick={() => this.selectHandler(q.name, oIndex)}>
+                        <i styleName={cn}></i>{o.a}
                     </div>
                 }
 
-                return <div key={num} className="question-li">
-                    <div className="question">{q.q}</div>
-                    <div className="answer">
-                        {i.options.map(option)}
-                    </div>
+                return <div key={index} styleName="question-item">
+                    <div styleName="question-title">{q.q}</div>
+                    {q.options.map(option)}
                 </div>
             }
-            return <div className="question-box">
-                <div className="question-img"><img src="images/question-top.png" /></div>
-                <div className="question-ul">{QUESTIONS.map(question)}</div>
-                <div className="foot-btn-box">
-                    <div className="foot-btn" onClick={this.fnSumHandler}>提交</div>
+            return <div>
+                <img styleName="banner" src={require("../../images/user/evaluate/question-top.png")} />
+                <div styleName="question-list">{QUESTIONS.map(question)}</div>
+                <div styleName="submit-panel">
+                    <div styleName="btn-submit" onClick={this.submitHandler}>提交</div>
                 </div>
             </div>
         }
 
-        return <div>
+        return <div styleName="bg">
             <Header title="风险承受能力评估" history={history} show_close={false} />
             {!finished && questions()}
             {finished && result()}
