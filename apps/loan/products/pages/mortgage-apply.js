@@ -32,21 +32,25 @@ const Model = {
     <DisplayItem field="" immutable=Bool history={history} />
 */
 const DisplayItem = inject('mortgage')(observer(CSSModules((props) => {
+
     let { mortgage, field, immutable, history } = props,
-        itemName = Model[field].name,
-        itemValue = mortgage[field] || (Model[field].options ? '请选择' : '请输入');
+        itemPlaceholder = Model[field].options !== undefined ? '请选择' : '请输入',
+        itemValue = mortgage[field],
+        itemStyleName = immutable ? 'item-container' : 'mutable-item-container';
+
     return (
-        <div className={immutable ? styles['item-container'] : styles['mutable-item-container']}
-            onClick={() => { !immutable && props.mortgage.setCurrentPanel(history, field) }}>
-            <div styleName="item-name">{itemName}</div>
-            <div styleName="item-value" style={{ 'color': mortgage[field] ? '#333' : '#999' }}>
-                { itemValue }
-                { field === 'area' && mortgage[field] &&
+        <div className={styles[itemStyleName]}
+            onClick={() => { !immutable && mortgage.setCurrentPanel(history, field) }}>
+            <div styleName="item-name">{Model[field].name}</div>
+            <div styleName="item-value" style={{ 'color': itemValue ? '#333' : '#999' }}>
+                { itemValue || itemPlaceholder }
+                { field === 'area' && itemValue &&
                     <span styleName="area-measure-unit">m<span styleName="super-align-char">2</span></span> }
             </div>
         </div>
     )
-}, styles, { "allowMultiple": true, "errorWhenNotFound": false })))
+
+}, styles)))
 
 
 /* parameters
@@ -54,14 +58,12 @@ const DisplayItem = inject('mortgage')(observer(CSSModules((props) => {
 */
 @inject('mortgage')
 @observer
-@CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
+@CSSModules(styles)
 class InputItem extends React.Component {
 
     state = { value: '' }
 
     componentDidMount() {
-        document.title = '房产抵押贷款';
-
         let { mortgage, field } = this.props;
         this.setState({ value: mortgage[field] })
     }
@@ -94,7 +96,6 @@ class InputItem extends React.Component {
                         placeholder="请输入"
                         value={value}
                         onChange={this.handleInput} />
-
                 </div>
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn"
@@ -112,26 +113,31 @@ class InputItem extends React.Component {
     <SelectItem field="" history={history} />
 */
 const SelectItem = inject('mortgage')(observer(CSSModules((props) => {
+
     let { mortgage, field, immutable, history } = props,
-        itemName = Model[field].name,
         itemOptions = Model[field].options,
         itemValue = mortgage[field];
-    let gen_options = (optValue) => (
-        <div key={optValue}
-            className={optValue === itemValue ? styles['selected-option'] : styles['unselected-option']}
-            onClick={() => { mortgage.setPanelData(history, field, optValue) }}>
-            {optValue}
-        </div>
-    )
+
+    let gen_options = (optValue) => {
+        let optStyleName = optValue === itemValue ? 'selected-option' : 'unselected-option';
+        return (
+            <div key={optValue}
+                className={styles[optStyleName]}
+                onClick={() => { mortgage.setPanelData(history, field, optValue) }}>
+                {optValue}
+            </div>
+        )
+    }
+
     return (
         <div>
-            <div styleName="select-label">{`选择${itemName}`}</div>
+            <div styleName="select-label">{`选择${Model[field].name}`}</div>
             <div styleName="option-grp">
                 { itemOptions.map(gen_options) }
             </div>
         </div>
     )
-}, styles, { "allowMultiple": true, "errorWhenNotFound": false })))
+}, styles)))
 
 
 @inject('mortgage')
@@ -140,6 +146,7 @@ const SelectItem = inject('mortgage')(observer(CSSModules((props) => {
 class MortgageApply extends React.Component {
 
     componentDidMount() {
+        document.title = '房产抵押贷款';
         this.props.mortgage.fetchBasicInfo();
     }
 
