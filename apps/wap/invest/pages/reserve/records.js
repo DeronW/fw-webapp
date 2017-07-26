@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import styles from '../../css/reserve/records.css'
 import Header from '../../components/header'
-import {Event} from 'fw-javascripts'
+import {Event, Components} from 'fw-javascripts'
 
 @inject('reserve')
 @observer
@@ -16,6 +16,20 @@ class ReserveRecords extends React.Component {
     componentDidMount() {
         this.props.reserve.getReserveList(null)
         Event.touchBottom(this.props.reserve.getReserveList(null));
+    }
+
+    cancelReserveHandler = (bookTime) => {
+        let {reserve, history}= this.props
+
+        reserve.cancelHandler().then((data) => {
+            //1:表示失败
+            if (data.cancelResult == '1') {
+                (bookTime < bookTime + 60 * 60 * 1000 * 2) && Components.showToast("2小时内不能取消预约")
+            } else if (data.cancelResult == '0') {
+                Components.showToast("取消成功")
+                reserve.getReserveList(null)
+            }
+        })
     }
 
     render() {
@@ -57,7 +71,8 @@ class ReserveRecords extends React.Component {
                     </div>
                     {item.status == 0 && <div styleName="infoItem">
                         <div styleName="infoItemLeft protocolLook">查看预约协议</div>
-                        <div styleName="itemHeaderRight cancelBtn" onClick={() => reserve.cancelHandler(item.bookTime)}>
+                        <div styleName="itemHeaderRight cancelBtn"
+                             onClick={() => this.cancelReserveHandler(item.bookTime)}>
                             取消预约
                         </div>
                     </div>}

@@ -4,6 +4,7 @@ import {observer, inject} from 'mobx-react'
 
 import Header from '../../components/header.js'
 import styles from '../../css/reserve/apply.css'
+import {Components} from 'fw-javascripts'
 
 @inject('reserve')
 @observer
@@ -20,6 +21,21 @@ class ReserveApply extends React.Component {
     allMadeHandler = () => {
         let {reserve} = this.props
         this.props.reserve.setFormData('reserveMoney', reserve.accountAmount)
+    }
+
+    applyHandler = () => {
+        let {reserve, history} = this.props
+        if (reserve.reserveMoney == 0) {
+            Components.showToast("预约金额不能为空")
+        } else if (reserve.reserveMoney < 100) {
+            Components.showToast("预约金额不足100")
+        } else if (reserve.reserveMoney > reserve.accountAmount) {
+            Components.showToast("可用金额不足，请充值后重试")
+        } else {
+            reserve.submitRerveHandler().then(() => {
+                history.push(`/reserve/records`)
+            })
+        }
     }
 
     render() {
@@ -66,7 +82,7 @@ class ReserveApply extends React.Component {
                 <span styleName="protocolText">本人已阅读并同意签署《预约协议》</span>
             </div>
             <div styleName="submitBtnContainer">
-                <div styleName="submitBtn" onClick={() => this.props.reserve.submitRerveHandler(history)}>立即预约</div>
+                <div styleName="submitBtn" onClick={this.applyHandler}>立即预约</div>
             </div>
         </div>
     }
