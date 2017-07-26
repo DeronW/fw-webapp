@@ -204,11 +204,16 @@ class Evaluate extends React.Component {
     state = {
         finished: false,
         score: 0,
-        type: ""
+        type: "",
+        selected: {}
+    }
+
+    selectHandler = (name, optionIndex) => {
+        this.setState({ name: optionIndex })
     }
 
     render() {
-        let { finished, score, type } = this.state
+        let { finished, score, type, selected } = this.state
 
         let result = () => {
             return <div className="question-result">
@@ -258,28 +263,26 @@ class Evaluate extends React.Component {
         }
 
         let questions = () => {
-            let question = (i, num) => {
-                let myName = i.name;
-                let myNum = num;
-                let option = (o, oIndex) => {
-                    return (
-                        <div className="question-select" key={oIndex}>
-                            <div className={this.state.selected[myNum][myName] == oIndex ? "select checked" : "select"}
-                                onClick={() => this.clickHandler(myName, myNum, oIndex)}>
-                            </div>
-                            {o.a}
-                        </div>
-                    )
-                };
+            let question = (q, num) => {
 
-                return (
-                    <div key={num} className="question-li">
-                        <div className="question">{i.q}</div>
-                        <div className="answer">
-                            {i.options.map(option)}
+                let option = (o, oIndex) => {
+                    let cn = "select"
+                    if (selected[q.name] == oIndex) cn += ' checked'
+
+                    return <div className="question-select" key={oIndex}>
+                        <div className={cn}
+                            onClick={() => this.selectHandler(myName, oIndex)}>
                         </div>
+                        {o.a}
                     </div>
-                )
+                }
+
+                return <div key={num} className="question-li">
+                    <div className="question">{q.q}</div>
+                    <div className="answer">
+                        {i.options.map(option)}
+                    </div>
+                </div>
             }
             return <div className="question-box">
                 <div className="question-img"><img src="images/question-top.png" /></div>
