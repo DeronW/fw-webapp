@@ -50,12 +50,6 @@ export default class Reserve {
             done && done();
         })
     }
-    reserveHandler = (history) => {
-        if (this.isRisk === 0) return location.href = "https://m.9888.cn/static/wap/user-evaluate-p2p/index.html";
-        if (this.batchMaxmum === 0) return location.href = "";//调到自动投资页面
-        history.push(`/submit-reserve`)
-
-    }
 
     submitRerveHandler = (history) => {
         if (this.reserveMoney == 0) {

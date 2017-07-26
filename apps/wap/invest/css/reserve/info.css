@@ -92,39 +92,55 @@
     padding: 26px 21px 25px 25px;
     background-color: #ffffff;
     display: table;
+    position: relative;
 }
 
-.flowItem {
+.tab-item {
+    width: 25%;
+    height: 100%;
     float: left;
-    width: 156px;
-    height: 101px;
-    text-align: center;
     font-size: 26px;
     color: #555555;
-}
-
-.flowArrow {
-    float: left;
-    width: 16px;
-    height: 101px;
     text-align: center;
-    line-height: 90px;
+    padding-top: 70px;
 }
 
-.flowItem1 {
-    margin-top: 18px;
+.tab-book {
+    background: url("../../images/reserve/info/flow1.png") no-repeat center 0;
 }
 
-.flowItem2 {
-    margin-top: 13px;
+.tab-froze {
+    background: url("../../images/reserve/info/flow2.png") no-repeat center 0;
 }
 
-.flowItem3 {
-    margin-top: 16px;
+.tab-bid {
+    background: url("../../images/reserve/info/flow3.png") no-repeat center 0;
 }
 
-.flowItem4 {
-    margin-top: 8px;
+.tab-interest {
+    background: url("../../images/reserve/info/flow4.png") no-repeat center 0;
+}
+
+.icon-arrow {
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    background: url("../../images/reserve/info/arrow.png") no-repeat center;
+}
+
+.icon-arrow1 {
+    top: 45px;
+    left: 180px;
+}
+
+.icon-arrow2 {
+    top: 45px;
+    left: 340px;
+}
+
+.icon-arrow3 {
+    top: 45px;
+    right: 160px;
 }
 
 .introduceBox {
