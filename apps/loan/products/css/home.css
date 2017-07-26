@@ -1,0 +1,83 @@
+.bg {
+    background: #f0f0f0;
+    height: 100%;
+}
+
+.banner {
+    display: block;
+    height: 300px;
+    width: 100%;
+}
+
+.panel-title {
+    padding: 27px;
+    color: #666;
+    font-size: 30px;
+    background: white;
+}
+
+.icon-money {
+    position: relative;
+    top: 4px;
+    margin-right: 12px;
+}
+
+.icon-recommended {
+    position: relative;
+    top: 4px;
+    margin-right: 12px;
+}
+
+.sp-item {
+    background: white url("../images/home/next-icon.png") no-repeat 660px center;
+    box-sizing: border-box;
+    padding-top: 1px;
+    position: relative;
+    height: 160px;
+}
+
+.sp-logo {
+    margin: 20px 20px 0 20px;
+    float: left;
+    width: 114px;
+    height: 114px;
+}
+
+.sp-t-a {
+    color: #333;
+    font-size: 33px;
+    margin-top: 30px;
+}
+
+.sp-t-b {
+    color: #999;
+    font-size: 30px;
+    margin-top: 14px;
+}
+
+.ft-links {
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 30px;
+}
+
+.ft-links a {
+    font-size: 28px;
+    color: #666;
+}
+
+.ft-links span {
+    display: inline-block;
+    width: 1px;
+    height: 26px;
+    background: #ccc;
+    margin: 0 37px;
+    vertical-align: text-bottom;
+}
+
+.company-info {
+    text-align: center;
+    font-size: 22px;
+    color: #999;
+    line-height: 30px;
+}
