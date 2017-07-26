@@ -68,6 +68,7 @@ class MortgageOutsideEntry extends React.Component {
         Post('/api/userBase/v1/sendVerifyCode.json', {
             mobile: phone,
             userOperationType: 3,
+            sourceType: 5,
             verifyToken: captchaToken,
             verifyCode: captchaInput
         }, 'silence').then((data) => {
@@ -75,6 +76,10 @@ class MortgageOutsideEntry extends React.Component {
             this.setState({ SMSToken: data.codeToken });
             this.SMSTimerController();
         }, e => {
+            if (e.code == 201003) {
+                Components.showToast('手机号已注册');
+                setTimeout(() => this.props.history.push('/mortgage-download'), 1700)
+            }
             if (e.code == 20020) {
                 Components.showToast('图形验证码不正确');
                 this.getCaptcha();
