@@ -142,6 +142,11 @@
     left: 0;
 }
 
+.applyProtocol {
+    display: inline-block;
+    text-decoration: underline;
+}
+
 .submitBtn {
     width: 660px;
     height: 74px;

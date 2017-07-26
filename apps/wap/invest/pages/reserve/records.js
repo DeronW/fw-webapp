@@ -32,6 +32,11 @@ class ReserveRecords extends React.Component {
         })
     }
 
+    lookProtocolHandler = () => {
+        let {history} = this.props
+        history.push(`/reserve/protocol`)
+    }
+
     render() {
         let {reserve, history}= this.props
         let {records} = reserve
@@ -70,7 +75,7 @@ class ReserveRecords extends React.Component {
                         </div>
                     </div>
                     {item.status == 0 && <div styleName="infoItem">
-                        <div styleName="infoItemLeft protocolLook">查看预约协议</div>
+                        <div styleName="infoItemLeft protocolLook" onClick={this.lookProtocolHandler}>查看预约协议</div>
                         <div styleName="itemHeaderRight cancelBtn"
                              onClick={() => this.cancelReserveHandler(item.bookTime)}>
                             取消预约

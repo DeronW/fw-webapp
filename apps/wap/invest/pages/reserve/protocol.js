@@ -4,9 +4,12 @@ import {observer, inject} from 'mobx-react'
 import styles from '../../css/reserve/protocol.css'
 import Header from '../../components/header'
 
+@inject('reserve')
+@observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveProtocol extends React.Component {
     render() {
+        let {history} = this.props
         return <div styleName="protocol-box">
             <Header title="预约出借服务协议" history={history} show_close={false}/>
             <div>

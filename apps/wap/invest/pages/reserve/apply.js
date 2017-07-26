@@ -1,7 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-
 import Header from '../../components/header.js'
 import styles from '../../css/reserve/apply.css'
 import {Components} from 'fw-javascripts'
@@ -36,6 +35,11 @@ class ReserveApply extends React.Component {
                 history.push(`/reserve/records`)
             })
         }
+    }
+
+    jumpToProtocol = () => {
+        let {history} = this.props
+        history.push(`/reserve/protocol`)
     }
 
     render() {
@@ -79,7 +83,9 @@ class ReserveApply extends React.Component {
                 </div>
             </div>
             <div styleName="submitProtocol">
-                <span styleName="protocolText">本人已阅读并同意签署《预约协议》</span>
+                <span styleName="protocolText">本人已阅读并同意签署
+                    <span styleName="applyProtocol" onClick={this.jumpToProtocol}>《预约协议》</span>
+                </span>
             </div>
             <div styleName="submitBtnContainer">
                 <div styleName="submitBtn" onClick={this.applyHandler}>立即预约</div>
