@@ -32,7 +32,7 @@ class ReserveApply extends React.Component {
         } else if (reserve.reserveMoney > reserve.accountAmount) {
             Components.showToast("可用金额不足，请充值后重试")
         } else {
-            reserve.submitRerveHandler().then(() => {
+            reserve.submitReserveHandler().then(() => {
                 history.push(`/reserve/records`)
             })
         }

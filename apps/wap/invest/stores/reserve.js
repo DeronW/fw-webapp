@@ -50,7 +50,7 @@ export default class Reserve {
         })
     }
 
-    submitRerveHandler = () => {
+    submitReserveHandler = () => {
         return this.Post('/api/invest/v1/reserveApply.json', {
             applyAmt: this.reserveMoney,
             applyInvestClaimId: this.context.id
