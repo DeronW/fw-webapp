@@ -1,35 +1,35 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import Header from '../../components/header'
 import styles from '../../css/reserve/info.css'
 
 @inject('reserve')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class ReserveInfo extends React.Component {
 
     componentDidMount() {
         this.props.reserve.getDataHandler()
     }
 
-    jumpRecordHandler = () => {
-        let {history} = this.props
-        history.push(`/reserve/records`)
-    }
-
     reserveHandler = () => {
-        let {reserve, history} = this.props
-        if (reserve.isRisk === 0) return location.href = "https://m.9888.cn/static/wap/user-evaluate-p2p/index.html";
-        if (reserve.batchMaxmum === 0) return location.href = "";//调到自动投资页面
-        history.push(`/reserve/apply`)
+        let { reserve, history } = this.props
+
+        if (reserve.isRisk == 0) {
+            history.push('/user/evaluate')
+        } else if (reserve.batchMaxmum === 0) {
+            location.href = "";//调到自动投资页面
+        } else {
+            history.push('/reserve/apply')
+        }
     }
 
     render() {
-        let {reserve, history} = this.props
-        let {context} = reserve
+        let { reserve, history } = this.props
+        let { context } = reserve
         return <div styleName="infoContainer">
-            <Header title="详情" history={history} show_close={false}/>
+            <Header title="详情" history={history} show_close={false} />
             <div styleName="topInfo">
                 <div styleName="infoRate">
                     <div styleName="rateUp">
@@ -90,7 +90,9 @@ class ReserveInfo extends React.Component {
                 </div>
             </div>
             <div styleName="bottomBox">
-                <div styleName="recordBtn" onClick={this.jumpRecordHandler}>预约记录</div>
+                <div styleName="recordBtn" onClick={
+                    () => this.props.history.push('/reserve/records')
+                }>预约记录</div>
                 <div styleName="reserveBtn" onClick={this.reserveHandler}>立即预约</div>
             </div>
         </div>
