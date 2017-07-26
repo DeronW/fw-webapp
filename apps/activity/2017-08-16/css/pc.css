@@ -1,3 +1,53 @@
 .pc{
-    color: #f00;
+
+}
+.nine-grid{
+    width: 180px;
+    height: 180px;
+    background: #ccc;
+     position: relative; 
+    border:1px solid #666;
+}
+.nine-grid div{
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    float: left;
+    position: absolute;
+}
+.nine-grid div:nth-child(1){
+    left: 0;
+    top: 0;
+}
+.nine-grid div:nth-child(2){
+    left: 60px;
+    top: 0;
+}
+.nine-grid div:nth-child(3){
+    left: 120px;
+    top: 0;
+}
+.nine-grid div:nth-child(4){
+    left: 0;
+    top: 60px;
+}
+.nine-grid div:nth-child(5){
+    left: 120px;
+    top: 60px;
+}
+.nine-grid div:nth-child(6){
+    left: 0;
+    top: 120px;
+}
+.nine-grid div:nth-child(7){
+    left: 60px;
+    top: 120px;
+}
+.nine-grid div:nth-child(8){
+    left: 120px;
+    top: 120px;
+}
+.active{
+    background: #9eb71c;
 }
