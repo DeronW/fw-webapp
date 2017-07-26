@@ -60,6 +60,8 @@ class InputItem extends React.Component {
     state = { value: '' }
 
     componentDidMount() {
+        document.title = '房产抵押贷款';
+
         let { mortgage, field } = this.props;
         this.setState({ value: mortgage[field] })
     }
