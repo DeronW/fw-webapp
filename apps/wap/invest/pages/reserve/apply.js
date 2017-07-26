@@ -2,13 +2,13 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 
-import Header from '../components/header.js'
-import styles from '../css/submit-reserve.css'
+import Header from '../../components/header.js'
+import styles from '../../css/reserve/apply.css'
 
 @inject('reserve')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class submitReserve extends React.Component {
+class ReserveApply extends React.Component {
     componentDidMount() {
         this.props.reserve.getDataHandler()
     }
@@ -24,7 +24,7 @@ class submitReserve extends React.Component {
 
     render() {
         let {reserve, history}= this.props
-        return <div>
+        return <div styleName="">
             <Header title="提交预约" history={history} show_close={false}/>
             <div styleName="submitPanel">
                 <div styleName="reserveMoney">预约金额</div>
@@ -71,4 +71,4 @@ class submitReserve extends React.Component {
         </div>
     }
 }
-export default submitReserve
+export default ReserveApply

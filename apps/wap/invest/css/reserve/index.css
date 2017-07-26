@@ -1,6 +1,7 @@
-body {
+html, body {
     margin: 0;
     font-family: 'San Francisco', 'PingFang SC', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height: 100%;
 }
 
 a,
@@ -9,7 +10,6 @@ a:active {
     text-decoration: none;
     outline: 0;
 }
-
 
 /*
 做一些通用的处理, 在iOS的app审核中, 与商品相关的都必须注明 "该商品与Apple Inc. 无关"
