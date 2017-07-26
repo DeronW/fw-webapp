@@ -15,7 +15,14 @@ class ReserveInfo extends React.Component {
 
     jumpRecordHandler = () => {
         let {history} = this.props
-        history.push(`/my-reserve`)
+        history.push(`/reserve/records`)
+    }
+
+    reserveHandler = () => {
+        let {reserve, history} = this.props
+        if (reserve.isRisk === 0) return location.href = "https://m.9888.cn/static/wap/user-evaluate-p2p/index.html";
+        if (reserve.batchMaxmum === 0) return location.href = "";//调到自动投资页面
+        history.push(`/reserve/apply`)
     }
 
     render() {
@@ -51,34 +58,21 @@ class ReserveInfo extends React.Component {
             <div styleName="flowBox">
                 <div styleName="flowHeader">预约流程</div>
                 <div styleName="flowContent">
-                    {/*<div styleName="tab-a">*/}
-                    {/*预约出借*/}
-                    {/*</div>*/}
-                    <div styleName="flowItem">
-                        <img src={require('../../images/reserve/info/flow1.png')}/>
-                        <div styleName="flowItem1">预约出借</div>
+                    <div styleName="tab-item tab-book">
+                        预约出借
                     </div>
-                    <div styleName="flowArrow">
-                        <img src={require('../../images/reserve/info/arrow.png')}/>
+                    <div styleName="tab-item tab-froze">
+                        冻结资金
                     </div>
-                    <div styleName="flowItem">
-                        <img src={require('../../images/reserve/info/flow2.png')}/>
-                        <div styleName="flowItem2">冻结资金</div>
+                    <div styleName="tab-item tab-bid">
+                        投标（自动）
                     </div>
-                    <div styleName="flowArrow">
-                        <img src={require('../../images/reserve/info/arrow.png')}/>
+                    <div styleName="tab-item tab-interest">
+                        起息
                     </div>
-                    <div styleName="flowItem">
-                        <img src={require('../../images/reserve/info/flow3.png')}/>
-                        <div styleName="flowItem3">投标（自动）</div>
-                    </div>
-                    <div styleName="flowArrow">
-                        <img src={require('../../images/reserve/info/arrow.png')}/>
-                    </div>
-                    <div styleName="flowItem">
-                        <img src={require('../../images/reserve/info/flow4.png')}/>
-                        <div styleName="flowItem4">起息</div>
-                    </div>
+                    <div styleName="icon-arrow icon-arrow1"></div>
+                    <div styleName="icon-arrow icon-arrow2"></div>
+                    <div styleName="icon-arrow icon-arrow3"></div>
                 </div>
             </div>
             <div styleName="introduceBox">
@@ -97,7 +91,7 @@ class ReserveInfo extends React.Component {
             </div>
             <div styleName="bottomBox">
                 <div styleName="recordBtn" onClick={this.jumpRecordHandler}>预约记录</div>
-                <div styleName="reserveBtn" onClick={() => reserve.reserveHandler(history)}>立即预约</div>
+                <div styleName="reserveBtn" onClick={this.reserveHandler}>立即预约</div>
             </div>
         </div>
     }
