@@ -1,6 +1,6 @@
 import {extendObservable, computed} from 'mobx'
 import * as $FW from 'fw-components'
-import {Components, Utils,Event} from 'fw-javascripts'
+import {Components, Utils, Event} from 'fw-javascripts'
 import  NativeBridge  from '../helpers/native-bridge.js'
 
 export default class Details {
@@ -78,6 +78,20 @@ export default class Details {
                 history.push(`/my-reserve`)
             })
         }
+    }
+
+    cancelHandler = (bookTime) => {
+        this.Post('/api/invest/v1/cancleReserve.json', {
+            applyId: this.context.id
+        }).then((data) => {
+            //1:表示失败
+            if (data.cancelResult == '1') {
+                (bookTime < bookTime + 60 * 60 * 1000 * 2) && Components.showToast("2小时内不能取消预约")
+            } else if (data.cancelResult == '0') {
+                Components.showToast("取消成功")
+                this.getReserveList(null)
+            }
+        })
     }
 
     setFormData = (field, value) => {
