@@ -36,7 +36,6 @@ export default class Reserve {
     }
     getReserveList = (done) => {
         if (this.records_page_no === 0) return done && done()
-
         this.Post('/api/invest/v1/reserveList.json', {
             page: this.records_page_no,
             pageSize: 3
@@ -51,34 +50,16 @@ export default class Reserve {
         })
     }
 
-    submitRerveHandler = (history) => {
-        if (this.reserveMoney == 0) {
-            Components.showToast("预约金额不能为空")
-        } else if (this.reserveMoney < 100) {
-            Components.showToast("预约金额不足100")
-        } else if (this.reserveMoney > this.accountAmount) {
-            Components.showToast("可用金额不足，请充值后重试")
-        } else {
-            return this.Post('/api/invest/v1/reserveApply.json', {
-                applyAmt: this.reserveMoney,
-                applyInvestClaimId: this.context.id
-            }).then(() => {
-                history.push(`/my-reserve`)
-            })
-        }
+    submitRerveHandler = () => {
+        return this.Post('/api/invest/v1/reserveApply.json', {
+            applyAmt: this.reserveMoney,
+            applyInvestClaimId: this.context.id
+        })
     }
 
-    cancelHandler = (bookTime) => {
-        this.Post('/api/invest/v1/cancleReserve.json', {
+    cancelHandler = () => {
+        return this.Post('/api/invest/v1/cancleReserve.json', {
             applyId: this.context.id
-        }).then((data) => {
-            //1:表示失败
-            if (data.cancelResult == '1') {
-                (bookTime < bookTime + 60 * 60 * 1000 * 2) && Components.showToast("2小时内不能取消预约")
-            } else if (data.cancelResult == '0') {
-                Components.showToast("取消成功")
-                this.getReserveList(null)
-            }
         })
     }
 
