@@ -1,13 +1,13 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-import Header from '../components/header'
-import styles from '../css/details.css'
+import Header from '../../components/header'
+import styles from '../../css/reserve/info.css'
 
 @inject('reserve')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class Details extends React.Component {
+class ReserveInfo extends React.Component {
 
     componentDidMount() {
         this.props.reserve.getDataHandler()
@@ -19,13 +19,14 @@ class Details extends React.Component {
     }
 
     render() {
-        let {reserve, history, location} = this.props
-        return <div>
+        let {reserve, history} = this.props
+        let {context} = reserve
+        return <div styleName="infoContainer">
             <Header title="详情" history={history} show_close={false}/>
             <div styleName="topInfo">
                 <div styleName="infoRate">
                     <div styleName="rateUp">
-                        <span>{reserve.context.loadRate}</span>
+                        <span>{context.loadRate}</span>
                         <span styleName="percent">%</span>
                     </div>
                     <div styleName="rateDown">
@@ -35,7 +36,7 @@ class Details extends React.Component {
                 <div styleName="garyGap"></div>
                 <div styleName="infoDate">
                     <div styleName="dateUp">
-                        <span>{reserve.context.repayPeriod}</span>
+                        <span>{context.repayPeriod}</span>
                         <span styleName="percent">天</span>
                     </div>
                     <div styleName="dateDown">
@@ -44,35 +45,38 @@ class Details extends React.Component {
                 </div>
             </div>
             <div styleName="tipsBox">
-                <span styleName="tipsItem">{reserve.context.avgLoanPeriod}</span>
-                <span styleName="tipsItem">{reserve.context.minAmt}元起预约</span>
+                <span styleName="tipsItem">{context.avgLoanPeriod}</span>
+                <span styleName="tipsItem">{context.minAmt}元起预约</span>
             </div>
             <div styleName="flowBox">
                 <div styleName="flowHeader">预约流程</div>
                 <div styleName="flowContent">
+                    {/*<div styleName="tab-a">*/}
+                    {/*预约出借*/}
+                    {/*</div>*/}
                     <div styleName="flowItem">
-                        <img src={require('../images/details/flow1.png')}/>
+                        <img src={require('../../images/reserve/info/flow1.png')}/>
                         <div styleName="flowItem1">预约出借</div>
                     </div>
                     <div styleName="flowArrow">
-                        <img src={require('../images/details/arrow.png')}/>
+                        <img src={require('../../images/reserve/info/arrow.png')}/>
                     </div>
                     <div styleName="flowItem">
-                        <img src={require('../images/details/flow2.png')}/>
+                        <img src={require('../../images/reserve/info/flow2.png')}/>
                         <div styleName="flowItem2">冻结资金</div>
                     </div>
                     <div styleName="flowArrow">
-                        <img src={require('../images/details/arrow.png')}/>
+                        <img src={require('../../images/reserve/info/arrow.png')}/>
                     </div>
                     <div styleName="flowItem">
-                        <img src={require('../images/details/flow3.png')}/>
+                        <img src={require('../../images/reserve/info/flow3.png')}/>
                         <div styleName="flowItem3">投标（自动）</div>
                     </div>
                     <div styleName="flowArrow">
-                        <img src={require('../images/details/arrow.png')}/>
+                        <img src={require('../../images/reserve/info/arrow.png')}/>
                     </div>
                     <div styleName="flowItem">
-                        <img src={require('../images/details/flow4.png')}/>
+                        <img src={require('../../images/reserve/info/flow4.png')}/>
                         <div styleName="flowItem4">起息</div>
                     </div>
                 </div>
@@ -98,4 +102,4 @@ class Details extends React.Component {
         </div>
     }
 }
-export default Details
+export default ReserveInfo

@@ -1,14 +1,14 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-import styles from '../css/my-reserve.css'
-import Header from '../components/header'
+import styles from '../../css/reserve/records.css'
+import Header from '../../components/header'
 import {Event} from 'fw-javascripts'
 
 @inject('reserve')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
-class MyReserve extends React.Component {
+class ReserveRecords extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -71,4 +71,4 @@ class MyReserve extends React.Component {
     }
 }
 
-export default MyReserve
+export default ReserveRecords

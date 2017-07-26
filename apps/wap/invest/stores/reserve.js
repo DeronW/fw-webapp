@@ -1,9 +1,7 @@
 import {extendObservable, computed} from 'mobx'
-import * as $FW from 'fw-components'
 import {Components, Utils, Event} from 'fw-javascripts'
-import  NativeBridge  from '../helpers/native-bridge.js'
 
-export default class Details {
+export default class Reserve {
     constructor(Post) {
         this.Post = Post
         extendObservable(this, {
@@ -16,11 +14,7 @@ export default class Details {
                 repayPeriod: '',//期限
             },
             records: [],
-            pageData: {
-                pageNo: 1,
-                pageSize: 3,
-                totalCount: 20
-            },
+            records_page_no: 1,
             accountAmount: 88888,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
             batchMaxmum: 0,//批量投资限额
@@ -41,13 +35,13 @@ export default class Details {
             })
     }
     getReserveList = (done) => {
-        if (this.pageData.pageNo === 0) return done && done()
+        if (this.records_page_no === 0) return done && done()
 
         this.Post('/api/invest/v1/reserveList.json', {
-            page: this.pageData.pageNo,
-            pageSize: this.pageData.pageSize
+            page: this.records_page_no,
+            pageSize: 3
         }).then(data => {
-            this.pageData = data.pageData;
+            this.records_page_no = data.pageData;
             this.records = data.result
             this.records.push(...data.result)
             this.records.pageNo < data.totalCount ?
@@ -71,7 +65,7 @@ export default class Details {
         } else if (this.reserveMoney > this.accountAmount) {
             Components.showToast("可用金额不足，请充值后重试")
         } else {
-            this.Post('/api/invest/v1/reserveApply.json', {
+            return this.Post('/api/invest/v1/reserveApply.json', {
                 applyAmt: this.reserveMoney,
                 applyInvestClaimId: this.context.id
             }).then(() => {

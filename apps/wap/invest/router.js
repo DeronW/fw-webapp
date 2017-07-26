@@ -7,9 +7,9 @@ import {
 } from 'react-router-dom'
 
 import UserEvaluate from './pages/user/evaluate.js'
-import Details from './pages/details'
-import MyReserve from './pages/my-reserve'
-import SubmitReserve from './pages/submit-reserve'
+import ReserveInfo from './pages/reserve/info'
+import ReserveRecords from './pages/reserve/records'
+import ReserveApply from './pages/reserve/apply'
 
 export default (stores) => {
     return <Router>
@@ -17,9 +17,9 @@ export default (stores) => {
             <Switch>
                 <Route exact path="/user/evaluate" component={UserEvaluate} />
 
-                <Route exact path="/details" component={Details} />
-                <Route exact path="/submit-reserve" component={SubmitReserve} />
-                <Route exact path="/my-reserve" component={MyReserve} />
+                <Route exact path="/reserve/info" component={ReserveInfo} />
+                <Route exact path="/reserve/apply" component={ReserveApply} />
+                <Route exact path="/reserve/records" component={ReserveRecords} />
             </Switch>
         </Provider>
     </Router>
