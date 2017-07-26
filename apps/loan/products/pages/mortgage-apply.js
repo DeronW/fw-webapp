@@ -162,7 +162,7 @@ class MortgageApply extends React.Component {
                     <div styleName="submit-btn-container">
                         <a styleName="submit-btn"
                             style={{ 'background': mortgage.allFieldsFilled ? '#639afb' : '#ccc'}}
-                            onClick={this.handleSubmit}>
+                            onClick={() => { mortgage.submit(history) }}>
                             提交
                         </a>
                     </div>

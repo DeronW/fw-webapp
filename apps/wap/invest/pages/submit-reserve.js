@@ -10,7 +10,7 @@ import styles from '../css/submit-reserve.css'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class submitReserve extends React.Component {
     componentDidMount() {
-
+        this.props.reserve.getDataHandler()
     }
 
     inputChangeHandler = name => e => {
@@ -24,9 +24,6 @@ class submitReserve extends React.Component {
 
     render() {
         let {reserve, history}= this.props
-        let ischeck = reserve.isChecked ?
-            styles["protocolChecked"] :
-            styles["protocolUnChecked"]
         return <div>
             <Header title="提交预约" history={history} show_close={false}/>
             <div styleName="submitPanel">
@@ -49,19 +46,19 @@ class submitReserve extends React.Component {
                 <div styleName="infoContent">
                     <div styleName="infoItem">
                         <div styleName="itemLeft">期限</div>
-                        <div styleName="itemRight">21天</div>
+                        <div styleName="itemRight">{reserve.context.repayPeriod}天</div>
                     </div>
                     <div styleName="infoItem">
                         <div styleName="itemLeft">预期年化</div>
-                        <div styleName="itemRight">6%</div>
+                        <div styleName="itemRight">{reserve.context.loadRate}%</div>
                     </div>
                     <div styleName="infoItem">
                         <div styleName="itemLeft">预约有效期</div>
-                        <div styleName="itemRight">3天</div>
+                        <div styleName="itemRight">{reserve.context.bookValidPeriod}天</div>
                     </div>
                     <div styleName="infoItem itemLast">
                         <div styleName="itemLeft">预计起息时间</div>
-                        <div styleName="itemRight">平均6小时起息</div>
+                        <div styleName="itemRight">{reserve.context.avgLoanPeriod}</div>
                     </div>
                 </div>
             </div>

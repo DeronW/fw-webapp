@@ -25,7 +25,8 @@ class Details extends React.Component {
             <div styleName="topInfo">
                 <div styleName="infoRate">
                     <div styleName="rateUp">
-                        <span>6</span><span styleName="percent">%</span>
+                        <span>{reserve.context.loadRate}</span>
+                        <span styleName="percent">%</span>
                     </div>
                     <div styleName="rateDown">
                         年化借款利率
@@ -34,7 +35,8 @@ class Details extends React.Component {
                 <div styleName="garyGap"></div>
                 <div styleName="infoDate">
                     <div styleName="dateUp">
-                        <span>21</span><span styleName="percent">天</span>
+                        <span>{reserve.context.repayPeriod}</span>
+                        <span styleName="percent">天</span>
                     </div>
                     <div styleName="dateDown">
                         期限
