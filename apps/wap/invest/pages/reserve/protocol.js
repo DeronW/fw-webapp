@@ -4,8 +4,6 @@ import {observer, inject} from 'mobx-react'
 import styles from '../../css/reserve/protocol.css'
 import Header from '../../components/header'
 
-@inject('reserve')
-@observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveProtocol extends React.Component {
     render() {
