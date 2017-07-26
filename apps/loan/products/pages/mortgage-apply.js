@@ -2,6 +2,8 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 
+import { Components } from 'fw-javascripts'
+
 import { Header } from '../../lib/components'
 
 import styles from '../css/mortgage-apply.css'
@@ -37,7 +39,11 @@ const DisplayItem = inject('mortgage')(observer(CSSModules((props) => {
         <div className={immutable ? styles['item-container'] : styles['mutable-item-container']}
             onClick={() => { !immutable && props.mortgage.setCurrentPanel(history, field) }}>
             <div styleName="item-name">{itemName}</div>
-            <div styleName="item-value" style={{ 'color': mortgage[field] ? '#333' : '#999' }}>{itemValue}</div>
+            <div styleName="item-value" style={{ 'color': mortgage[field] ? '#333' : '#999' }}>
+                { itemValue }
+                { field === 'area' && mortgage[field] &&
+                    <span styleName="area-measure-unit">m<span styleName="super-align-char">2</span></span> }
+            </div>
         </div>
     )
 }, styles, { "allowMultiple": true, "errorWhenNotFound": false })))
@@ -58,13 +64,18 @@ class InputItem extends React.Component {
         this.setState({ value: mortgage[field] })
     }
 
-    handleInput = (e) => {
-        this.setState({ value: e.target.value })
+    handleInput = e => {
+        let v = e.target.value;
+        if (this.props.field === 'area') v = v.replace(/\D/g, '')
+        this.setState({ value: v })
     }
 
     handleSubmit = () => {
-        let { mortgage, field, history } = this.props;
-        mortgage.setPanelData(history, field, this.state.value);
+        let v = this.state.value,
+            { mortgage, field, history } = this.props;
+        if (v === '') return
+        if (v == 0 && field === 'area') return Components.showToast('建筑面积必须大于0')
+        mortgage.setPanelData(history, field, v);
     }
 
     render() {
@@ -74,9 +85,14 @@ class InputItem extends React.Component {
             <div>
                 <div styleName="input-item-container">
                     <div styleName="item-name">{Model[field].name}</div>
-                    <input placeholder="请输入"
+                    { field === 'area' &&
+                        <span styleName="area-measure-unit"> m<span styleName="super-align-char">2</span></span> }
+                    <input maxLength={field === 'area' ? "4" : "20"}
+                        type={field === 'area' ? "num" : "text"}
+                        placeholder="请输入"
                         value={value}
                         onChange={this.handleInput} />
+
                 </div>
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn"

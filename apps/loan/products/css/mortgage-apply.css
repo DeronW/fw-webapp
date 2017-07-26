@@ -65,7 +65,7 @@
     font-size: 32px;
 }
 
-.item-value, .input-item-container input {
+.item-value, .input-item-container input, .area-measure-unit {
     float: right;
     width: 450px;
     height: 99px;
@@ -73,6 +73,17 @@
     color: #333;
     font-size: 32px;
     text-align: right;
+}
+
+.area-measure-unit {
+    width: auto;
+    margin-left: 12px;
+    line-height: 90px;
+}
+
+.super-align-char {
+    vertical-align: super;
+    font-size: 18px;
 }
 
 .submit-btn-container {
