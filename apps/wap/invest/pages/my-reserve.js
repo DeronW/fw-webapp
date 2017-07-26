@@ -33,7 +33,7 @@ class MyReserve extends React.Component {
             return <div styleName="reserveItem" key={index}>
                 <div styleName="itemHeader">
                     <div
-                        styleName="itemHeaderLeft">{new Date(parseInt(item.bookTime / 1000) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, "")}</div>
+                        styleName="itemHeaderLeft">{new Date(parseInt(item.bookTime)).toLocaleDateString().replace(/\//g, "-") + " " + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 8)}</div>
                     <div styleName="itemHeaderRight">{status}</div>
                 </div>
                 <div styleName="infoContainer">
@@ -57,7 +57,9 @@ class MyReserve extends React.Component {
                     </div>
                     {item.status == 0 && <div styleName="infoItem">
                         <div styleName="infoItemLeft protocolLook">查看预约协议</div>
-                        <div styleName="itemHeaderRight cancelBtn">取消预约</div>
+                        <div styleName="itemHeaderRight cancelBtn" onClick={() => reserve.cancelHandler(item.bookTime)}>
+                            取消预约
+                        </div>
                     </div>}
                 </div>
             </div>

@@ -5,6 +5,9 @@ const PROJ = 'activity'
 const APP_NAMES = [{
     name: '2017-07-13',
     compiler: 'webpack'
+},{
+    name: '2017-08-16',
+    compiler: 'webpack'
 }]
 
 module.exports = function (gulp, generate_task, CONSTANTS) {
