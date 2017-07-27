@@ -8,7 +8,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = function (site_name, page_name, CONFIG) {
 
     const page_path = path.resolve(__dirname, `../apps/${site_name}/${page_name}`),
-        build_path = path.resolve(__dirname, `../build/${site_name}/${page_name}/`);
+        build_path = path.resolve(__dirname, `../build/${site_name}/${page_name}`),
+        relative_path = `/static/${site_name}/${page_name}`
 
     const compiler = webpack({
         entry: ["babel-polyfill", `${page_path}/entry.js`],
@@ -100,7 +101,7 @@ module.exports = function (site_name, page_name, CONFIG) {
                 template: `${page_path}/index.html`
             })
             , new ExtractTextPlugin({
-                filename: CONFIG.debug ? 'all.css' : 'all.[contenthash:4].css',
+                filename: CONFIG.debug ? 'all.css' : `${relative_path}/all.[contenthash:4].css`,
                 allChunks: true,
                 ignoreOrder: true
             })
