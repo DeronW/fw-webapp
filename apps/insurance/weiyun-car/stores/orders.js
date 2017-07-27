@@ -6,25 +6,27 @@ export default class Orders {
         this.Get = Get;
         extendObservable(this, {
             current_type: 'all', // all, paid, unpaid, completed
-            all_list: [{
-                orderNum: 123,
-                insuranceAmount: 3400,
-                carNum: '京A12345',
-                orderState: '1',
-            }, {
-                orderNum: 1234,
-                insuranceAmount: 3400,
-                carNum: '京A12345',
-                orderState: '0',
-            }],
-            paid_list: [],
-            unpaid_list: [],
-            completed_list: [],
+            all: {
+                list: [],
+                page_no: 1
+            },
+            paid: {
+                list: [],
+                page_no: 1
+            },
+            unpaid: {
+                list: [],
+                page_no: 1
+            },
+            completed: {
+                list: [],
+                page_no: 1
+            }
         })
     }
 
     @computed get current_list() {
-        return this[`${this.current_type}_list`]
+        return this[this.current_type].list
     }
 
     @computed get current_type_no() {
@@ -34,14 +36,27 @@ export default class Orders {
     get_type_name = (type_no) => ['待付款', '支付超时', '已支付', '退款完成', '已完成'][type_no]
 
     switch_type = (type) => {
-        this.current_type = type
+        this.current_type = type;
+        if (!this[type].list.length) this.fetch_orders()
     }
 
-    fetch_orders = () => {
+    fetch_orders = (done) => {
+        let typeData = this[this.current_type];
+        if (!typeData.page_no) return
+
         this.Get('/carInsurance/getOrderList.shtml', {
-            orderState: this.current_type_no
+            orderState: this.current_type_no,
+            pageNo: typeData.page_no,
+            pageSize: 7
         }).then(data => {
-            this[`${this.current_type}_list`].push(data.orderInfo)
+            let { pagination, result } = data.pageData;
+            typeData.list.push(...result);
+            if (pagination.totalPage == typeData.page_no) {
+                typeData.page_no = 0;
+            } else {
+                typeData.page_no++;
+            }
+            done && done();
         })
     }
 
