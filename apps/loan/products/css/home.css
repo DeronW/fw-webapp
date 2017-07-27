@@ -28,6 +28,72 @@
     margin-right: 12px;
 }
 
+.product {
+    height: 170px;
+    position: relative;
+    color: #666;
+    font-size: 26px;
+    background: white url("../images/home/next-icon.png") no-repeat 660px center;
+}
+
+.product .bottom-line {
+    width: 690px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 1px;
+    background: #eeeeee;
+}
+
+
+.product-logo {
+    position: absolute;
+    top: 35px;
+    left: 30px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #eee;
+}
+
+.product-title {
+    color: #333333;
+    font-size: 30px;
+    position: absolute;
+    top: 50px;
+    left: 150px;
+}
+
+.product-limit {
+    color: #6aa4f0;
+    font-size: 30px;
+    position: absolute;
+    top: 50px;
+    left: 280px;
+}
+
+.product-expire {
+    position: absolute;
+    top: 95px;
+    left: 150px;
+}
+
+.product-interest {
+    position: absolute;
+    top: 95px;
+    left: 280px;
+}
+
+.product-timing {
+    position: absolute;
+    top: 95px;
+    left: 460px;
+}
+
+.sep-line {
+    height: 20px;
+}
+
 .sp-item {
     background: white url("../images/home/next-icon.png") no-repeat 660px center;
     box-sizing: border-box;
