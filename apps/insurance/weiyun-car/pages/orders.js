@@ -13,7 +13,10 @@ import styles from '../css/orders.css'
 class Orders extends React.Component {
 
     componentDidMount() {
-        document.title = '我的订单'
+        document.title = '我的订单';
+
+        let { orders } = this.props;
+        orders.fetch_orders();
     }
 
     render() {
@@ -22,20 +25,24 @@ class Orders extends React.Component {
 
         let order_item = order => {
 
-            return <div key={order.id} styleName="order-item">
+            let type_name = orders.get_type_name(order.orderState)
+
+            return <div key={order.orderNum} styleName="order-item">
                 <div styleName="order-item-id">
-                    订单号: {order.id}
-                    <span styleName="order-status-paid"> 已支付 </span>
+                    订单号: {order.orderNum}
+                    <span styleName="order-status-paid">{type_name}</span>
                 </div>
                 <div styleName="order-item-cnt">
                     <span styleName="order-prefix">续保</span>
-                    <span styleName="order-licenses">{order.licenseNo}</span>
-                    <span styleName="order-price">¥{order.price}</span>
+                    <span styleName="order-licenses">{order.carNum}</span>
+                    <span styleName="order-price">¥{order.insuranceAmount}</span>
                 </div>
-                <div styleName="pay-row">
-                    <div styleName="pay-split-line"></div>
-                    <Link styleName="btn-pay" to="/">立即支付</Link>
-                </div>
+                { type_name == '待付款' &&
+                    <div styleName="pay-row">
+                        <div styleName="pay-split-line"></div>
+                        <Link styleName="btn-pay" to="/">立即支付</Link>
+                    </div>
+                }
             </div>
         }
 
