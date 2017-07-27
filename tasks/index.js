@@ -65,7 +65,10 @@ function generate_webpack_task(site_name, page_name, CONFIG) {
 
     function revision2cdn() {
         return revision([`${build_path}/**`], cdn_path, {
-            dontRenameFile: ['index.html']
+            dontRenameFile: ['index.html'],
+            transformPath: function (rev, source, path) {
+                return CONFIG.cdn_prefix + rev
+            }
         })
     }
 
