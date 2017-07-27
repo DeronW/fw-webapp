@@ -8,7 +8,8 @@ import { Post } from '../lib/helpers'
 
 let stores = {
     home: new Stores.Home(Post),
-    mortgage: new Stores.Mortgage(Post)
+    mortgage: new Stores.Mortgage(Post),
+    loopLoan: new Stores.LoopLoan(Post),
 }
 
 render(AppRouter(stores), document.getElementById('cnt'))
