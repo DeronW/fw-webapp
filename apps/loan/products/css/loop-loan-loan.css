@@ -54,6 +54,14 @@ input{
     float:right;
     margin-right:30px;
 }
+.arrow{
+    display:inline-block;
+    background:url(../images/loop-loan-loan/arrow.jpg) no-repeat;
+    width:18px;
+    height:34px;
+    vertical-align: middle;
+    margin-left:15px;
+}
 .tip{
     display:inline-block;
     width:30px;

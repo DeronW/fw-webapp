@@ -36,7 +36,7 @@ export default class LoopLoanLoan extends React.Component {
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">打款至</div>
-                        <div styleName="loan-info-right">888</div>
+                        <div styleName="loan-info-right">中国银行(2333)<span styleName="arrow"></span></div>
                     </div>
                 </div>
                 <div styleName="agreement-issue">
