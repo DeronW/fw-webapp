@@ -1,3 +1,8 @@
+.applyPanel {
+    height: 100%;
+    background: #ebebee;
+    font-family: 'PingFangSC-Regular, sans-serif';
+}
 
 .submitPanel {
     width: 100%;
@@ -111,6 +116,7 @@
     font-size: 28px;
     color: #4aa1f9;
     line-height: 30px;
+    padding-bottom: 300px;
 }
 
 .protocolChecked {

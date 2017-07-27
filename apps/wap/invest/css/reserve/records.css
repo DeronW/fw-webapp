@@ -1,3 +1,8 @@
+.recordsPanel {
+    height: 100%;
+    background-color: #ebebee;
+    font-family: 'PingFangSC-Regular, sans-serif';
+}
 
 .colorRed {
     color: #fd4d4c;
@@ -12,6 +17,21 @@
     color: #555;
     font-size: 32px;
     margin-top: 20px;
+}
+
+.cancelstyle {
+    width: 100%;
+    min-height: 360px;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+    background-color: #fff;
+    color: #ccc;
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+.cancelstyle .colorRed {
+    color: #ccc;
 }
 
 .itemHeader {

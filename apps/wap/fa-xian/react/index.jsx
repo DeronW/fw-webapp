@@ -20,10 +20,22 @@ const Content = React.createClass({
             topics: [],
             position_index: 0,
             position: 0,
-            coupon_count: ""
+            coupon_count: "",
+            service_phone: '010-65255966'
         }
     },
     componentDidMount() {
+
+        // 在特定时段(2017-07-28 15:00 ~ 2017-07-29 10:00) 修改客服电话
+        let d = (new Date()).getTime()
+
+        if (d > 1501225200000) {
+            this.setState({ service_phone: '400-6766-988' })
+        }
+        if (d > 1501293600000) {
+            this.setState({ service_phone: '400-0322-988' })
+        }
+
         $FW.Ajax({
             url: "https://fore.9888.cn/cms/api/appbanner.php",
             data: {
@@ -165,14 +177,14 @@ const Content = React.createClass({
                     <a onClick={() => gotoHandler("http://p-javashop-statics.oss-cn-beijing.aliyuncs.com/weixin/index.html#/home/products")}>
                         <i className="icon icon-bao"></i>工场保险</a>
 
-                    <a onClick={()=> gotoHandler('https://m.9888.cn/static/insurance/weiyun-car/#/customer')}> <i className="icon icon-waiting"></i>敬请期待</a>
+                    <a onClick={() => gotoHandler('https://m.9888.cn/static/insurance/weiyun-car/#/customer')}> <i className="icon icon-waiting"></i>敬请期待</a>
                 </div>
                 <div className="title-recommended" onClick={this.bdHandler}> 内容推荐</div>
                 <div className="events">
                     {this.state.topics.map(topic)}
                 </div>
                 <div className="contact-us">
-                    <a className="service" href="tel:010-65255966">
+                    <a className="service" href={`tel:${this.state.service_phone}`}>
                         <i className="icon-service"></i><span>联系客服</span></a>
                     <a className="about-us">
                         <i className="icon-about-us icon-about-us-grey"></i>

@@ -40,7 +40,7 @@ export default class Reserve {
             page: this.records_page_no,
             pageSize: 3
         }).then(data => {
-            this.records_page_no = data.pageData;
+            this.records_page_no = data.pageData.pageNo;
             this.records = data.result
             this.records.push(...data.result)
             this.records.pageNo < data.totalCount ?
@@ -57,9 +57,9 @@ export default class Reserve {
         })
     }
 
-    cancelHandler = () => {
+    cancelHandler = (id) => {
         return this.Post('/api/invest/v1/cancleReserve.json', {
-            applyId: this.context.id
+            applyId: id
         })
     }
 

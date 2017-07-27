@@ -79,8 +79,15 @@ class Home extends React.Component {
         let { products, sub_products } = this.state
 
         let product = (props, index) => {
-            return <div key={index}>
+            return <div styleName="product" key={index}>
+                <img styleName="product-logo" src={props.productLogo} />
+                <div styleName="product-title">{props.productName}</div>
+                <div styleName="product-limit">{props.amountStr}</div>
+                <div styleName="product-expire">{props.termRangeStr}</div>
+                <div styleName="product-interest">???</div>
+                <div styleName="product-timing">{props.fastLoanValue}</div>
 
+                {index < 2 && <div styleName="bottom-line"></div>}
             </div>
         }
 
@@ -105,9 +112,10 @@ class Home extends React.Component {
             {this.state.showBulletin &&
                 <Bulletin bulletinCnt={this.state.bulletinCnt} handleBulletinExit={() => { this.setState({ showBulletin: false }) }} />}
 
+            <div styleName="sep-line"></div>
+
             <div styleName="panel-title">
-                <img styleName="icon-recommended" src={require("../images/home/sub-category-icon.png")} />
-                精选推荐</div>
+                <img styleName="icon-recommended" src={require("../images/home/sub-category-icon.png")} />精选推荐</div>
 
             {sub_products.map(sub_product)}
 
