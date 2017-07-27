@@ -18,10 +18,10 @@ class ReserveRecords extends React.Component {
         Event.touchBottom(this.props.reserve.getReserveList);
     }
 
-    cancelReserveHandler = (bookTime) => {
+    cancelReserveHandler = (bookTime, id) => {
         let {reserve, history}= this.props
 
-        reserve.cancelHandler().then((data) => {
+        reserve.cancelHandler(id).then((data) => {
             //1:表示失败
             if (data.cancelResult == '1') {
                 (bookTime < bookTime + 60 * 60 * 1000 * 2) && Components.showToast("2小时内不能取消预约")
@@ -47,9 +47,10 @@ class ReserveRecords extends React.Component {
             } else if (item.status == 1) {
                 status = '预约结束 '
             } else if (item.status == 2) {
-                status = '预约取消'
+                status = '已取消'
             }
-            return <div styleName="reserveItem" key={index}>
+            let cancelstyle = item.status == 2 ? styles['cancelstyle']:styles['reserveItem']
+            return <div className={cancelstyle} key={index}>
                 <div styleName="itemHeader">
                     <div
                         styleName="itemHeaderLeft">{new Date(parseInt(item.bookTime)).toLocaleDateString().replace(/\//g, "-") + " " + new Date(parseInt(item.bookTime)).toTimeString().substr(0, 8)}</div>
@@ -77,14 +78,14 @@ class ReserveRecords extends React.Component {
                     {item.status == 0 && <div styleName="infoItem">
                         <div styleName="infoItemLeft protocolLook" onClick={this.lookProtocolHandler}>查看预约协议</div>
                         <div styleName="itemHeaderRight cancelBtn"
-                             onClick={() => this.cancelReserveHandler(item.bookTime)}>
+                             onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
                             取消预约
                         </div>
                     </div>}
                 </div>
             </div>
         }
-        return <div>
+        return <div styleName="recordsBox">
             <Header title="我的预约" history={history} show_close={false}/>
             {records.map(records_func)}
         </div>
