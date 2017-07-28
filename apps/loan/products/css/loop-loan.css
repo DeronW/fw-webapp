@@ -98,7 +98,6 @@
     top:0;
     left:0;
     background:rgba(0,0,0,.7);
-    display:none;
 }
 .popup{
     position:absolute;
@@ -127,4 +126,16 @@
     background:#6aa4f0;
     border-radius:4px;
     margin:22px auto 0;
+}
+.btn-tip{
+    font-size:24px;
+    color:#999;
+    text-align:center;
+    margin-top:22px;
+}
+.tip{
+    display:inline-block;
+    width:30px;
+    height:30px;
+    background:url(../images/loop-loan/tip.jpg) no-repeat;
 }
