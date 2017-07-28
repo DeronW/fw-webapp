@@ -20,6 +20,9 @@ class StorageFactory {
     }
 
     login = dict => {
+        // 一次新的登录, 表示一个新的用户周期的开始
+        this.clear()
+
         if (typeof (dict) === 'string') dict = JSON.parse(dict);
 
         ['token', 'status', 'invite_code', 'uid', 'phone'].forEach(k => {
@@ -74,14 +77,10 @@ class StorageFactory {
         dict.phone && this.set('phone', dict.phone);
     }
 
-    setBulletin =  (token, cnt) => {
-        this.set('bulletinToken', token);
-        this.set('bulletinCnt', cnt);
-    }
-
-    // if a bulletin is read for provided token
-    isBulletinRead = (token, cnt) => {
-        return (this.get('bulletinToken') === token) && (this.get('bulletinCnt') === cnt)
+    isBulletinRead = cnt => {
+        let k = '_$_bulletin', read = this.get(k)
+        this.set(k, cnt)
+        return read
     }
 }
 

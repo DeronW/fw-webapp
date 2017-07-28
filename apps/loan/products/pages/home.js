@@ -29,8 +29,6 @@ class Home extends React.Component {
 
     componentDidMount() {
 
-        showBulletin('aaaa')
-
         Post(`/api/product/v1/productList.json`)
             .then(data => this.setState({ products: data.resultList }))
             .then(() => Post(`/api/product/v1/recommendedList.json`))
@@ -41,23 +39,13 @@ class Home extends React.Component {
                 if (data.gradeType == 1) return showBulletin(data.noticeContent)
                 // 弱类型公告
                 if (data.gradeType == 2) {
-                    if()
+                    if (Storage.isBulletinRead(data.noticeContent))
+                        return txt && showBulletin(data.noticeContent)
                 }
+            }, e => null)
+            .then(()=>{
+                // here is show USER match YouYiJie or not
             })
-
-        Post(`/api/product/v1/noticeList.json`, null, true)
-            .then(data => {
-                let newBulletinCnt = data.noticeContent;
-                let token = $FW.Store.getUserDict().token;
-
-                // if bulettin is secondary and it's read within the valid token, we just ignore that bulletin
-                if (data.gradeType == '2' && $FW.Store.isBulletinRead(token, newBulletinCnt)) return
-
-                this.setState({ showBulletin: true, bulletinCnt: newBulletinCnt })
-
-            }, e => {
-                if (e.code == 22003) return; // no bulletin now
-            });
     }
 
     handleBannerJump = () => {

@@ -10,7 +10,7 @@
 }
 .icon{
     display:inline-block;
-    background:url(../images/loop-loan/icon.png) no-repeat;
+    background:url(../images/loan-youyi-index/icon.png) no-repeat;
     width:27px;
     height:28px;
     margin-right:20px;
@@ -137,5 +137,5 @@
     display:inline-block;
     width:30px;
     height:30px;
-    background:url(../images/loop-loan/tip.jpg) no-repeat;
+    background:url(../images/loan-youyi-index/tip.jpg) no-repeat;
 }
