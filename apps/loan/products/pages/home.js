@@ -14,10 +14,10 @@ import styles from '../css/home.css'
 //         link = location.protocol + '//' + location.hostname + link;
 // }
 
-function gotoHandler(link, need_login, next_title) {
+function gotoHandler(link, need_login, next_title, special_webview) {
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
     if (Browser.inFXHApp){
-        NativeBridge.goto(link, need_login, next_title);
+        NativeBridge.goto(link, need_login, next_title, special_webview);
     }else{
         location.href = link;
     }
@@ -69,7 +69,7 @@ class Home extends React.Component {
 
         let product = (props, index) => {
             let clichHandler = () => {
-                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index',false,"优易借");
+                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index',false,"优易借",true);
                 if (props.productId == 1) Browser.inFXHApp ? NativeBridge.toNative("fxh_detail") : location.href = '/static/loan/fxh/index.html';
                 if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html')
             }

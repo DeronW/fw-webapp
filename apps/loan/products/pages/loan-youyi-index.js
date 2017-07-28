@@ -5,11 +5,13 @@ import { Header } from '../../lib/components'
 import styles from '../css/loan-youyi-index.css'
 import {NativeBridge, Browser} from '../../lib/helpers'
 
-function gotoHandler(link, need_login, next_title) {
-    if (Browser.inFXHApp) return NativeBridge.goto(link, need_login, next_title);
-    if (link.indexOf('://') < 0)
-        link = location.protocol + '//' + location.hostname + link;
+function gotoHandler(link, need_login, next_title, special_webview) {
+    if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
+    if (Browser.inFXHApp){
+        NativeBridge.goto(link, need_login, next_title, special_webview);
+    }else{
         location.href = link;
+    }
 }
 
 @inject('loopLoan')
@@ -34,7 +36,7 @@ export default class LoopLoan extends React.Component {
         if(loopLoan.userStatus == 0){
             history.push('/loan-youyi-card')
         }else if(loopLoan.userStatus == 1){
-            gotoHandler(loopLoan.url,false,"芝麻信用授权")
+            gotoHandler(loopLoan.url,false,"芝麻信用授权",false)
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500 ){
             history.push('/loan-youyi-form')
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){

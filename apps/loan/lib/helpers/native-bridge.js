@@ -21,8 +21,8 @@ NativeBridge.login = function () {
     NativeBridge.trigger('login', '', true)
 }
 
-NativeBridge.goto = function(link, need_login, next_title){
-    NativeBridge.trigger('goto', link, need_login, next_title)
+NativeBridge.goto = function(link, need_login, next_title, special_webview){
+    NativeBridge.trigger('goto', link, need_login, next_title, special_webview)
 }
 
 NativeBridge.toNative = function(title){
