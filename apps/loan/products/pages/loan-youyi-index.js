@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
-import styles from '../css/loop-loan.css'
+import styles from '../css/loan-youyi-index.css'
 import {NativeBridge, Browser} from '../../lib/helpers'
 
 function gotoHandler(link, need_login, next_title) {

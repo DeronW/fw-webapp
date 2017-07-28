@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Utils } from 'fw-javascripts'
 import { Header } from '../../lib/components'
-import styles from '../css/loop-loan-authorization.css'
+import styles from '../css/loan-youyi-authorization.css'
 
 @inject('loopLoan')
 @observer
