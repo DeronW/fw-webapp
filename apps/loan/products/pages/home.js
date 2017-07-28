@@ -114,15 +114,18 @@ class Home extends React.Component {
 
             {sub_products.map(sub_product)}
 
-            <div styleName="ft-links">
-                <a onClick={() => { gotoHandler('/static/loan/user-weixin-new-download/index.html') }}>下载APP</a>
-                <span></span>
-                <a onClick={() => { gotoHandler('/static/loan/features/index.html#/about-us') }}>关于我们</a>
-                <span></span>
-                <a onClick={() => { gotoHandler('/static/loan/features/index.html#/contact-us') }}>联系我们</a>
-            </div>
-            <div styleName="company-info">©2017 深圳市众利财富管理有限公司</div>
-            <div styleName="company-info">粤ICP备17034889号-1</div>
+            {!Browser.inFXHApp && <div>
+                <div styleName="ft-links">
+                    <a onClick={() => { gotoHandler('/static/loan/user-weixin-new-download/index.html') }}>下载APP</a>
+                    <span></span>
+                    <a onClick={() => { gotoHandler('/static/loan/features/index.html#/about-us') }}>关于我们</a>
+                    <span></span>
+                    <a onClick={() => { gotoHandler('/static/loan/features/index.html#/contact-us') }}>联系我们</a>
+                </div>
+                <div styleName="company-info">©2017 深圳市众利财富管理有限公司</div>
+                <div styleName="company-info">粤ICP备17034889号-1</div>
+            </div>}
+
 
             <BottomNavBar />
         </div>
