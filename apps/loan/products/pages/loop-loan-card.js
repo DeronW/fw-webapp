@@ -32,7 +32,7 @@ export default class LoopLoanCard extends React.Component {
     }
 
     confirmHandler = () => {
-        if(!this.state.checked){
+        if(Object.keys(this.state.checked).length === 0){
             Components.showToast('请选择银行卡')
         }else{
             this.props.loopLoan.submit_bankinfo(this.state.selectedBankUuid);
