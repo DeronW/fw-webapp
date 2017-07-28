@@ -1,9 +1,9 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Post, Browser } from '../../lib/helpers'
+import { Post, Browser, Storage } from '../../lib/helpers'
 
-import { BottomNavBar } from '../../lib/components'
+import { BottomNavBar, showBulletin } from '../../lib/components'
 
 import styles from '../css/home.css'
 
@@ -28,11 +28,22 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+
+        showBulletin('aaaa')
+
         Post(`/api/product/v1/productList.json`)
             .then(data => this.setState({ products: data.resultList }))
-
-        Post(`/api/product/v1/recommendedList.json`)
+            .then(() => Post(`/api/product/v1/recommendedList.json`))
             .then(data => this.setState({ sub_products: data.resultList }))
+            .then(() => Post(`/api/product/v1/noticeList.json`, null, true))
+            .then(data => {
+                // 强类型公告, 只要返回, 一定弹出提示
+                if (data.gradeType == 1) return showBulletin(data.noticeContent)
+                // 弱类型公告
+                if (data.gradeType == 2) {
+                    if()
+                }
+            })
 
         Post(`/api/product/v1/noticeList.json`, null, true)
             .then(data => {
