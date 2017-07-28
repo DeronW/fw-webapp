@@ -15,8 +15,10 @@ import RedbagResult from './pages/redbag-result.js'
 import BankCard from './pages/bank-card.js'
 import BankCardAdd from './pages/bank-card-add.js'
 import BankCardVerify from './pages/bank-card-verify.js'
+
+import RepaymentYouyi from './pages/repayment-youyi.js'
+import RepaymentFenqi from './pages/repayment-fenqi.js'
 import RepaymentList from './pages/repayment-list.js'
-import Repayment from './pages/repayment.js'
 import RepaymentResult from './pages/repayment-result.js'
 
 export default (stores) => {
@@ -34,10 +36,11 @@ export default (stores) => {
                 <Route exact path='/bank-card' component={BankCard} />
                 <Route exact path='/bank-card-add' component={BankCardAdd} />
                 <Route exact path='/bank-card-verify' component={BankCardVerify} />
-                {/*还款*/}
-                <Route exact path='/repayment-list' component={RepaymentList} />
                 {/*还款相关页面*/}
-                <Route exact path='/repayment' component={Repayment} />
+                <Route exact path='/repayment-list' component={RepaymentList} />
+                <Route exact path='/repayment-youyi' component={RepaymentYouyi} />
+                {/* <Route exact path='/repayment-fxh' component={RepaymentFxh} /> */}
+                <Route exact path='/repayment-fenqi' component={RepaymentFenqi} />
                 <Route exact path='/repayment-result' component={RepaymentResult} />
                 <Route exact path='/repayment-bank-card' component={BankCard} />
             </Switch>

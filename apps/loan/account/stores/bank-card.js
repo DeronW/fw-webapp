@@ -18,7 +18,7 @@ export default class BankCard {
     }
 
     fetch_card_list = () => {
-        this.Post('/api/bankcard/v1/bankcardlist.json').then(data => {
+        return this.Post('/api/bankcard/v1/bankcardlist.json').then(data => {
             this.all = data.userBankList.withdrawBankcard
         })
     }
