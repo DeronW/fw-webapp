@@ -62,7 +62,7 @@ export default class LoopLoan extends React.Component {
                 <div styleName="loan-box">
                     <div styleName="available-loan-num">{loopLoan.canBorrowAmt}</div>
                     <div styleName="loan-title">可借额度(元)</div>
-                    <div styleName="loan-tip"><span styleName="icon"></span>{loopLoan.productDesc}</div>
+                    <div styleName="loan-tip"><span styleName="icon"></span>{loopLoan.productDes}</div>
                 </div>
                 <div styleName="loan-info-container">
                     <div styleName="loan-info">
