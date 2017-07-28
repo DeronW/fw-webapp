@@ -13,7 +13,8 @@ export default class LoopLoanCard extends React.Component {
         super(props)
         this.state = {
             //checked:null
-            checked:[]
+            checked:[],
+            selectedBankUuid:null
         }
     }
     componentDidMount(){
@@ -21,17 +22,21 @@ export default class LoopLoanCard extends React.Component {
         this.props.loopLoan.get_cardlist();
     }
 
-    selectHandler = index => {
+    selectHandler = (index, selectedBankUuid) => {
         let t = this.state.checked;
         t = [];
         //t[index] = !t[index]
         t[index] = true;
-        this.setState({ checked: t });
+        this.setState({ checked: t, selectedBankUuid: selectedBankUuid});
         //this.setState({checked:index});
     }
 
     confirmHandler = () => {
-        this.props.loopLoan.submit_bankinfo(bankCardUuid);
+        if(!this.state.checked){
+            Components.showToast('请选择银行卡')
+        }else{
+            this.props.loopLoan.submit_bankinfo(this.state.selectedBankUuid);
+        }
     }
 
 
@@ -40,7 +45,7 @@ export default class LoopLoanCard extends React.Component {
 
         let card_item = (item,index) => {
 
-            let handler = () => this.selectHandler(index),
+            let handler = () => this.selectHandler(index, item.uuid),
                 checked = this.state.checked[index];
             //let {checked} =this.state;
             return <div styleName="card-item" key={index} onClick={handler}>
