@@ -3,6 +3,14 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
 import styles from '../css/loop-loan.css'
+import {NativeBridge, Browser} from '../../lib/helpers'
+
+function gotoHandler(link, need_login, next_title) {
+    if (Browser.inFXHApp) return NativeBridge.goto(link, need_login, next_title);
+    if (link.indexOf('://') < 0)
+        link = location.protocol + '//' + location.hostname + link;
+        location.href = link;
+}
 
 @inject('loopLoan')
 @observer
@@ -25,7 +33,7 @@ export default class LoopLoan extends React.Component {
         if(loopLoan.userStatus == 0){
             history.push('/loop-loan-card')
         }else if(loopLoan.userStatus == 1){
-            history.push(loopLoan.url)
+            gotoHandler(loopLoan.url,false,"芝麻信用授权")
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500 ){
             history.push('/loop-loan-loan')
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){
@@ -71,7 +79,7 @@ export default class LoopLoan extends React.Component {
                             <div styleName="loan-info-title">总额度(元){loopLoan.userStatus == 2 && loopLoan.creditLine == 0 && <span styleName="tip" onClick={this.showHandler}></span>}</div>
                         </div>
                         <div styleName="loan-info-right">
-                            <div styleName="loan-info-num">{loopLoan.period}</div>
+                            <div styleName="loan-info-num">{loopLoan.period}天</div>
                             <div styleName="loan-info-title">借款期限</div>
                         </div>
                     </div>

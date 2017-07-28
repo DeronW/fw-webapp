@@ -4,6 +4,7 @@ import {observer, inject} from 'mobx-react'
 import styles from '../../css/reserve/records.css'
 import Header from '../../components/header'
 import {Event, Components} from 'fw-javascripts'
+import showConfirm from '../../components/confirm'
 
 @inject('reserve')
 @observer
@@ -18,23 +19,25 @@ class ReserveRecords extends React.Component {
         Event.touchBottom(this.props.reserve.getReserveList);
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         Event.cancelTouchBottom()
     }
 
     cancelReserveHandler = (bookTime, id) => {
-        let {reserve, history}= this.props
+        let {reserve, history}= this.props;
+        let cb = () => {
+            reserve.cancelHandler(id).then((data) => {
+                if(data.cancelResult=='1'){
 
-        reserve.cancelHandler(id).then((data) => {
-            //1:表示失败
-            if (data.cancelResult == '1') {
-                (bookTime < bookTime + 60 * 60 * 1000 * 2) && Components.showToast("2小时内不能取消预约")
-            } else if (data.cancelResult == '0') {
-                Components.showToast("取消成功")
-                reserve.getReserveList(null)
-            }
-        })
+                }else if(data.cancelResult=='0'){
+                    Components.showToast("取消成功")
+                    reserve.getReserveList(null, true)
+                }
+            })
+        };
+        showConfirm('确定取消？',cb)
     }
+
 
     lookProtocolHandler = () => {
         let {history} = this.props
@@ -51,9 +54,10 @@ class ReserveRecords extends React.Component {
             } else if (item.status == 1) {
                 status = '预约结束 '
             } else if (item.status == 2) {
+                console.log("item.status" + item.status)
                 status = '已取消'
             }
-            let cancelstyle = item.status == 2 ? styles['cancelstyle']:styles['reserveItem']
+            let cancelstyle = item.status == 2 ? styles['cancelstyle'] : styles['reserveItem']
             return <div className={cancelstyle} key={index}>
                 <div styleName="itemHeader">
                     <div

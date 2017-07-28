@@ -26,7 +26,7 @@ export default class LoopLoan {
             this.creditLine = data.creditLine;
             this.minLoanAmt = data.minLoanAmt;
             this.period = data.period;
-            this.productDesc = data.productDesc;
+            this.productDesc = data.productDes;
             this.productUuid = data.productUuid;
             this.userStatus = data.userStatus;
         }).then(()=>{
