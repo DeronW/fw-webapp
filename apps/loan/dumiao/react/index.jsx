@@ -235,7 +235,7 @@ class BorrowMoney extends React.Component {
                     <a className="know-btn" onClick={
                         () => $FW.Browser.inApp() ?
                             NativeBridge.close() :
-                            gotoHandler("/static/loan/home/index.html")}>
+                            gotoHandler("/static/loan/products/index.html#/")}>
                         尝试其他借款</a>
                 </div>
             </div>}
@@ -246,7 +246,7 @@ class BorrowMoney extends React.Component {
                     <a className="know-btn" onClick={
                         () => $FW.Browser.inApp() ?
                             NativeBridge.close() :
-                            gotoHandler("/static/loan/home/index.html")}>
+                            gotoHandler("/static/loan/products/index.html#/")}>
                         尝试其他借款</a>
                 </div>
             </div>}

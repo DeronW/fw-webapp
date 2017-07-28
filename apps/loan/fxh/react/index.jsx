@@ -250,7 +250,7 @@ class ApplyLoan extends React.Component {
                         {/*<div className="pop-title">提示</div>*/}
                         {/*<div className="pop-content">为方便您快速借到钱，推荐您尝试申请其他借款产品</div>*/}
                         {/*<a className="pop-cancel" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>仍去提额</a>*/}
-                        {/*<a className="pop-confirm" href='/static/loan/home/index.html'>尝试其他</a>*/}
+                        {/*<a className="pop-confirm" href='/static/loan/products/index.html#/'>尝试其他</a>*/}
                     {/*</div>*/}
                 {/*</div>}*/}
             </div>

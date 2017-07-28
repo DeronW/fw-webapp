@@ -17,7 +17,7 @@ const MortgageSuccess = CSSModules((props) => (
         <Header title="房产抵押贷款" history={props.history} />
         <div styleName="success-mask">
             { !Browser.inWeixin && !Browser.inApp &&
-                <div styleName="close-icon" onClick={() => { gotoHandler('/static/loan/home/index.html') }}></div>
+                <div styleName="close-icon" onClick={() => { gotoHandler('/static/loan/products/index.html#/') }}></div>
             }
             <div styleName="success-container">
                 <div styleName="success-tip-1">您已成功申请</div>

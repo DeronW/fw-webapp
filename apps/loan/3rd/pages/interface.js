@@ -29,7 +29,7 @@ class Fail extends React.Component {
                 phone: dict.mobile,
                 invite_code: dict.invitationCode
             })
-            location.href = '/static/loan/home/index.html';
+            location.href = '/static/loan/products/index.html#/';
         }, e => {
             history.push('/fail');
         })

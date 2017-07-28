@@ -52,7 +52,7 @@ class LoanResult extends React.Component{
                 activityRecomUrl:data.activityRecomUrl,
                 loanStatus:data.loanStatus
             });
-            
+
 
             if (data.loanStatus == 6) {
                 this.setState({
@@ -63,7 +63,7 @@ class LoanResult extends React.Component{
                     setTimeout(() => {
                         location.href=`${activityRecomUrl}`;
                     }, 2000)
-                    
+
                 }
             } else if (data.loanStatus == 5) {
                 this.setState({
@@ -84,7 +84,7 @@ class LoanResult extends React.Component{
                     // if(activityRecomUrl){
                     //     gotoHandler(`${data.activityRecomUrl}`);
                     // }
-                    
+
                 } else if (data.loanStatus == 5) {
                     this.setState({
                         waitingResultShow: false,
@@ -117,7 +117,7 @@ class LoanResult extends React.Component{
     return (
         <div className="loan-result">
             <div className="header">
-                <div className="arrow-left" onClick={() => { gotoHandler("/static/loan/home/index.html") }}></div>
+                <div className="arrow-left" onClick={() => { gotoHandler("/static/loan/products/index.html#/") }}></div>
                 <div className="title">借款结果</div>
             </div>
             <div className="result-box">
@@ -207,7 +207,7 @@ class LoanResult extends React.Component{
                                 href="tel:400-102-0066">400-102-0066</a></div>
                         </div>
                     </div>
-                    <div className="apply-btn" onClick={()=>gotoHandler('/static/loan/home/index.html')}>重新借款</div>
+                    <div className="apply-btn" onClick={()=>gotoHandler('/static/loan/products/index.html#/')}>重新借款</div>
                 </div>
             </div>
         </div>

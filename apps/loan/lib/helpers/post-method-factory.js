@@ -4,7 +4,7 @@ const API_PATH = document.getElementById('api-path').value;
 
 function inHome() {
     let p = location.pathname, h = location.hash
-    return p === '/' || p === '/static/loan/home/index.html'
+    return p === '/' || p === '/static/loan/products/index.html#/'
         || (p === '/static/loan/products/index.html' && h == '#/')
 }
 

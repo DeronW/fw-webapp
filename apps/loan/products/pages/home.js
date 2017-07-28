@@ -1,28 +1,11 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Post, Browser } from '../../lib/helpers'
+import { Post, Browser, Storage } from '../../lib/helpers'
 
-import { BottomNavBar } from '../../lib/components'
+import { BottomNavBar, showBulletin } from '../../lib/components'
 
 import styles from '../css/home.css'
-
-
-function Bulletin(props) {
-    return (
-        <div className="bulletin-mask">
-            <div className="bulletin">
-                <div className="bulletin-head">
-                    {/* <img src="images/bulletin-head.png" /> */}
-                </div>
-                <div className="bulletin-content">{props.bulletinCnt}</div>
-                <div className="close-icon-container" onClick={props.handleBulletinExit}></div>
-                <div className="bulletin-exit" onClick={props.handleBulletinExit}>知道了</div>
-            </div>
-        </div>
-    )
-}
-
 
 function gotoHandler(link, toNative) {
     if (Browser.inFXHApp) return NativeBridge.toNative(toNative);
@@ -40,16 +23,27 @@ class Home extends React.Component {
     state = {
         products: [],
         sub_products: [],
-        showBulletin: false,
-        bulletinCnt: '',
+        showBulletin: true,
+        bulletinCnt: 'xx',
     }
 
     componentDidMount() {
+
+        showBulletin('aaaa')
+
         Post(`/api/product/v1/productList.json`)
             .then(data => this.setState({ products: data.resultList }))
-
-        Post(`/api/product/v1/recommendedList.json`)
+            .then(() => Post(`/api/product/v1/recommendedList.json`))
             .then(data => this.setState({ sub_products: data.resultList }))
+            .then(() => Post(`/api/product/v1/noticeList.json`, null, true))
+            .then(data => {
+                // 强类型公告, 只要返回, 一定弹出提示
+                if (data.gradeType == 1) return showBulletin(data.noticeContent)
+                // 弱类型公告
+                if (data.gradeType == 2) {
+                    if()
+                }
+            })
 
         Post(`/api/product/v1/noticeList.json`, null, true)
             .then(data => {
@@ -67,19 +61,23 @@ class Home extends React.Component {
     }
 
     handleBannerJump = () => {
-        let ua = navigator.userAgent;
-        let r = ua.match(/EasyLoan888\/(\d+.\d+.\d+)/);
-        let appVersion = r ? r[1] : '0';
-        if ($FW.Browser.inIOS() && appVersion == '1.2.20') return;
-        // gotoHandler($FW.Theme.get('weixin_download_page'))
-        $FW.Browser.inFXHApp() ? NativeBridge.toNative('invite') : location.href = '/static/loan/weixin-invite/index.html';
+        $FW.Browser.inFXHApp() ?
+            NativeBridge.toNative('invite') :
+            location.href = '/static/loan/weixin-invite/index.html';
     }
 
     render() {
         let { products, sub_products } = this.state
+        let { history } = this.props
 
         let product = (props, index) => {
-            return <div styleName="product" key={index}>
+            let clichHandler = () => {
+                if (props.productId == 11) history.push('/loop-loan')
+                if (props.productId == 1) gotoHandler('/static/loan/fxh/index.html')
+                if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html')
+            }
+
+            return <a styleName="product" key={index} onClick={clichHandler}>
                 <img styleName="product-logo" src={props.productLogo} />
                 <div styleName="product-title">{props.productName}</div>
                 <div styleName="product-limit">{props.amountStr}</div>
@@ -88,10 +86,13 @@ class Home extends React.Component {
                 <div styleName="product-timing">{props.fastLoanValue}</div>
 
                 {index < 2 && <div styleName="bottom-line"></div>}
-            </div>
+            </a>
         }
 
         let sub_product = (props, index) => {
+            let clickHandler = () => {
+                gotoHandler(props.redirectUrl)
+            }
             return <div styleName="sp-item" key={index}
                 onClick={() => { gotoHandler(props.redirectUrl) }}>
                 <img styleName="sp-logo" src={decodeURIComponent(props.logoUrl)} />
@@ -108,9 +109,6 @@ class Home extends React.Component {
                 我要借款</div>
 
             {products.map(product)}
-
-            {this.state.showBulletin &&
-                <Bulletin bulletinCnt={this.state.bulletinCnt} handleBulletinExit={() => { this.setState({ showBulletin: false }) }} />}
 
             <div styleName="sep-line"></div>
 

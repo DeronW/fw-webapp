@@ -13,7 +13,8 @@ export default class LoopLoan {
             productDesc:'',
             productUuid:'',
             userStatus:'',
-            url:''
+            url:'',
+            cardList:[]
         })
     }
 
@@ -25,7 +26,7 @@ export default class LoopLoan {
             this.creditLine = data.creditLine;
             this.minLoanAmt = data.minLoanAmt;
             this.period = data.period;
-            this.productDesc = data.productDesc;
+            this.productDesc = data.productDes;
             this.productUuid = data.productUuid;
             this.userStatus = data.userStatus;
         }).then(()=>{
@@ -35,7 +36,25 @@ export default class LoopLoan {
         });
     }
 
+    @computed get loopLoan_card() {
+        let filtered = this.cardList.filter(e => e.authPlatform == 2)
+        return filtered;
+    }
 
+    get_cardlist = () => {
+        this.Post('/api/bankcard/v1/bankcardlist.json').then((data)=>{
+            this.cardList = data.userBankList.withdrawBankcard;
+        })
+    }
 
+    submit_bankinfo = (bankCardUuid) => {
+        this.Post('/api/looploan/bankcard/v1/commitInfo.json',{
+            bankCardUuid:bankCardUuid
+        }).then(()=>{
+            Components.showToast("绑卡成功")
+        },()=>{
+            Components.showToast("绑卡失败")
+        });
+    }
 
 }

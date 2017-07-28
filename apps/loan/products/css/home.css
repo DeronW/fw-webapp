@@ -29,6 +29,7 @@
 }
 
 .product {
+    display: block;
     height: 170px;
     position: relative;
     color: #666;

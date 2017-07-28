@@ -2,7 +2,7 @@ function SuccessMask() {
     return (
         <div className="success-mask">
             {(SOURCE_TYPE !== 4 && !$FW.Browser.inApp()) &&
-                <div className="close-icon" onClick={() => { gotoHandler('/static/loan/home/index.html') }}></div>
+                <div className="close-icon" onClick={() => { gotoHandler('/static/loan/products/index.html#/') }}></div>
             }
             <div className="success-container">
                 <div className="success-tip-1">您已成功申请</div>
