@@ -81,7 +81,7 @@ class Home extends React.Component {
 
         let product = (props, index) => {
             return <a styleName="product" key={index} onClick={() => {
-                if (props.productId == 11) History.push('/loop-loan')
+                if (props.productId == 11) history.push('/loop-loan')
             }}>
                 <img styleName="product-logo" src={props.productLogo} />
                 <div styleName="product-title">{props.productName}</div>
