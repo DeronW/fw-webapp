@@ -68,7 +68,7 @@ class Home extends React.Component {
         let product = (props, index) => {
             let clichHandler = () => {
                 if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index',false,"")
-                if (props.productId == 1) gotoHandler('/static/loan/fxh/index.html')
+                if (props.productId == 1) Browser.inFXHApp ? NativeBridge.toNative("fxh") : location.href = '/static/loan/fxh/index.html';
                 if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html')
             }
 
