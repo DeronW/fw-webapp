@@ -7,11 +7,18 @@ import { BottomNavBar, showBulletin } from '../../lib/components'
 
 import styles from '../css/home.css'
 
-function gotoHandler(link, toNative) {
-    if (Browser.inFXHApp) return NativeBridge.toNative(toNative);
+// function gotoHandler(link, toNative) {
+//     if (Browser.inFXHApp) return NativeBridge.toNative(toNative);
+//
+//     if (link.indexOf('://') < 0)
+//         link = location.protocol + '//' + location.hostname + link;
+// }
 
+function gotoHandler(link, need_login, next_title) {
+    if (Browser.inFXHApp) return NativeBridge.goto(link, need_login, next_title);
     if (link.indexOf('://') < 0)
         link = location.protocol + '//' + location.hostname + link;
+        location.href = link;
 }
 
 
@@ -60,7 +67,7 @@ class Home extends React.Component {
 
         let product = (props, index) => {
             let clichHandler = () => {
-                if (props.productId == 11) history.push('/loan-youyi-index')
+                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index',false,"")
                 if (props.productId == 1) gotoHandler('/static/loan/fxh/index.html')
                 if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html')
             }
