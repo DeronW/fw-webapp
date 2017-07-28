@@ -9,6 +9,7 @@ function gotoHandler(link, need_login, next_title) {
     if (Browser.inFXHApp) return NativeBridge.goto(link, need_login, next_title);
     if (link.indexOf('://') < 0)
         link = location.protocol + '//' + location.hostname + link;
+        location.href = link;
 }
 
 @inject('loopLoan')
