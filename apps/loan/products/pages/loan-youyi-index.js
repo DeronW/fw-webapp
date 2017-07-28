@@ -25,6 +25,7 @@ export default class LoopLoan extends React.Component {
 
     componentDidMount(){
         document.title = '优易借';
+        NativeBridge.hide_header();
         this.props.loopLoan.get_baseinfo();
     }
 

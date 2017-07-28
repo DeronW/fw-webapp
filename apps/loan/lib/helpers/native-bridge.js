@@ -25,5 +25,14 @@ NativeBridge.goto = function(link, need_login, next_title){
     NativeBridge.trigger('goto', link, need_login, next_title)
 }
 
+NativeBridge.toNative = function(title){
+    NativeBridge.trigger('toNative',title);
+}
+
+NativeBridge.hide_header = function () {
+    NativeBridge.trigger('hide_header');
+}
+
+
 export default NativeBridge
 
