@@ -14,7 +14,9 @@ export default class LoopLoan {
             productUuid:'',
             userStatus:'',
             url:'',
-            cardList:[]
+            cardList:[],
+            zmScore:'',
+            authFail:false
         })
     }
 
@@ -54,6 +56,17 @@ export default class LoopLoan {
             Components.showToast("绑卡成功")
         },()=>{
             Components.showToast("绑卡失败")
+        });
+    }
+
+    zima_callback = (params,sign) => {
+        this.Post('/api/zhima/v1/credit/callback.json',{
+            params:params,
+            sign:sign
+        }).then((data)=>{
+            this.zmScore = data.zmScore;
+        },()=>{
+            this.authFail = true
         });
     }
 

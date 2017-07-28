@@ -19,27 +19,26 @@ export default class LoopLoanAuthorization extends React.Component {
     }
     componentDidMount(){
         document.title = '芝麻信用授权';
-        console.log(this.state.params)
-        console.log(this.state.sign)
+        this.props.loopLoan.zima_callback(this.state.params,this.state.sign);
     }
     confirmHandler = () => {
         let {history} = this.props;
         history.push('/home');
     }
     render(){
-        let { history } = this.props;
+        let { history, loopLoan } = this.props;
         return (
             <div styleName="cnt-container">
                 <Header title="芝麻信用授权" history={history} />
                 <div styleName="result">
-                    <div styleName="success">
+                    {loopLoan.zmScore && <div styleName="success">
                         <div styleName="title">授权成功</div>
                         <div styleName="img"><img styleName="auth-img" src={require("../images/loan-youyi-authorization/success.png")}/></div>
-                    </div>
-                    <div styleName="fail dis">
+                    </div>}
+                    {loopLoan.authFail && <div styleName="fail">
                         <div styleName="title">授权失败</div>
                         <div styleName="img"><img styleName="auth-img" src={require("../images/loan-youyi-authorization/fail.png")}/></div>
-                    </div>
+                    </div>}
                 </div>
                 <div styleName="btn" onClick={this.confirmHandler}>确定</div>
             </div>
