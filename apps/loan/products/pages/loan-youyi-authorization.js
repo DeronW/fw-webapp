@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Utils } from 'fw-javascripts'
 import { Header } from '../../lib/components'
+import {NativeBridge, Browser} from '../../lib/helpers'
 import styles from '../css/loan-youyi-authorization.css'
 
 @inject('loopLoan')
@@ -23,7 +24,7 @@ export default class LoopLoanAuthorization extends React.Component {
     }
     confirmHandler = () => {
         let {history} = this.props;
-        history.push('/');
+        Browser.inFXHApp ? NativeBridge.close() : history.push('/')
     }
     render(){
         let { history, loopLoan } = this.props;
