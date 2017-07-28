@@ -48,11 +48,20 @@ export default class RepaymentList extends React.Component {
                     </div>
                     <div styleName="line"></div>
                     <div styleName="bottom">
-                        <div stylename="time-limit"></div>
+                        <div styleName="time-limit">
+                            <p styleName="time-detail">21天</p>
+                            <p styleName="desc">期限</p>
+                        </div>
                         <b styleName="gap-line"></b>
-                        <div stylename="put-day"></div>
+                        <div styleName="put-day">
+                            <p styleName="time-detail">2017-7-28</p>
+                            <p styleName="desc">放款日</p>
+                        </div>
                         <b styleName="gap-line"></b>
-                        <div stylename="deadline"></div>
+                        <div styleName="deadline">
+                            <p styleName="time-detail">2017-7-28</p>
+                            <p styleName="desc">还款日</p>
+                        </div>
                     </div>
                 </div>
             </div>
