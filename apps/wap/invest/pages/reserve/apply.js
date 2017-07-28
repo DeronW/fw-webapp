@@ -84,7 +84,9 @@ class ReserveApply extends React.Component {
             </div>
             <div styleName="submitProtocol">
                 <span styleName="protocolText">本人已阅读并同意签署
-                    <span styleName="applyProtocol" onClick={this.jumpToProtocol}>《预约协议》</span>
+                    <span styleName="applyProtocol" onClick={this.jumpToProtocol}>
+                        《预约协议》
+                    </span>
                 </span>
             </div>
             <div styleName="submitBtnContainer">

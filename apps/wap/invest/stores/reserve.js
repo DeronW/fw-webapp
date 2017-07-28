@@ -24,8 +24,9 @@ export default class Reserve {
     }
 
     getDataHandler = () => {
-        this.Post('/api/invest/v1/entryReserve.json', {applyInvestClaimId: Utils.hashQuery.applyInvestClaimId})
+        this.Post('/api/v1/intoAppointPage.shtml', {applyInvestClaimId: Utils.hashQuery.applyInvestClaimId})
             .then(data => {
+                console.log(data)
                 this.context = data.appointClaim;
                 this.accountAmount = data.accountAmount;
                 this.isRisk = data.isRisk;
@@ -46,7 +47,7 @@ export default class Reserve {
             this.records.push(...data.result)
             this.records_page_no++
 
-            if(this.records.length >= data.pageData.totalCount)
+            if (this.records.length >= data.pageData.totalCount)
                 this.records_page_no = 0
 
             done && done();
