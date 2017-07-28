@@ -4,6 +4,14 @@ import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
 import styles from '../css/loop-loan.css'
 
+
+function gotoHandler(link, toNative) {
+    if (Browser.inFXHApp) return NativeBridge.toNative(toNative);
+
+    if (link.indexOf('://') < 0)
+        link = location.protocol + '//' + location.hostname + link;
+}
+
 @inject('loopLoan')
 @observer
 @CSSModules(styles,{ "allowMultiple": true, "errorWhenNotFound": false })
@@ -25,7 +33,7 @@ export default class LoopLoan extends React.Component {
         if(loopLoan.userStatus == 0){
             history.push('/loop-loan-card')
         }else if(loopLoan.userStatus == 1){
-            history.push(loopLoan.url)
+            gotoHandler(loopLoan.url)
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500 ){
             history.push('/loop-loan-loan')
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){

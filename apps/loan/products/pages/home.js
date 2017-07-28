@@ -82,7 +82,7 @@ class Home extends React.Component {
             let clickHandler = () => {
                 gotoHandler(props.redirectUrl)
             }
-            return <div styleName="sp-item" key={index} onClick={clickHandler}
+            return <div styleName="sp-item" key={index}
                 onClick={() => { gotoHandler(props.redirectUrl) }}>
                 <img styleName="sp-logo" src={decodeURIComponent(props.logoUrl)} />
                 <div styleName="sp-t-a">{props.productTitle}</div>
