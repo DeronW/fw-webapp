@@ -12,7 +12,8 @@ export default class LoopLoanCard extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            checked:false
+            //checked:null
+            checked:[]
         }
     }
     componentDidMount(){
@@ -20,16 +21,32 @@ export default class LoopLoanCard extends React.Component {
         this.props.loopLoan.get_cardlist();
     }
 
-    selectHandler = () => {
-        this.setState({checked:!this.state.checked})
+    selectHandler = index => {
+        let t = this.state.checked;
+        t = [];
+        //t[index] = !t[index]
+        t[index] = true;
+        this.setState({ checked: t });
+        //this.setState({checked:index});
     }
+
+    confirmHandler = () => {
+        this.props.loopLoan.submit_bankinfo(bankCardUuid);
+    }
+
 
     render(){
         let { history, loopLoan } = this.props;
 
         let card_item = (item,index) => {
-            return <div styleName="card-item" key={index}>
-                <span styleName={this.state.checked ? "checked-box" : "unchecked-box"} onClick={this.selectHandler}></span>
+
+            let handler = () => this.selectHandler(index),
+                checked = this.state.checked[index];
+            //let {checked} =this.state;
+            return <div styleName="card-item" key={index} onClick={handler}>
+                <div styleName="checkbox-wrap">
+                    <span styleName={ checked ? "checked-box" : "unchecked-box"}></span>
+                </div>
                 <div styleName="card">
                     <div styleName="logo-wrap">
                         <img styleName="card-logo" src={item.logoUrl}/>
@@ -50,7 +67,7 @@ export default class LoopLoanCard extends React.Component {
                     {loopLoan.loopLoan_card.map(card_item)}
                 </div>
                 <div styleName="btn-container">
-                    <div styleName="btn">确认</div>
+                    <div styleName="btn" onClick={this.confirmHandler}>确认</div>
                 </div>
             </div>
         )

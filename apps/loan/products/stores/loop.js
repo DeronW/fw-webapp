@@ -47,4 +47,14 @@ export default class LoopLoan {
         })
     }
 
+    submit_bankinfo = (bankCardUuid) => {
+        this.Post('/api/looploan/bankcard/v1/commitInfo.json',{
+            bankCardUuid:bankCardUuid
+        }).then(()=>{
+            Components.showToast("绑卡成功")
+        },()=>{
+            Components.showToast("绑卡失败")
+        });
+    }
+
 }
