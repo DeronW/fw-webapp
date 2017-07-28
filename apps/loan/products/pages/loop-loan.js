@@ -3,11 +3,10 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
 import styles from '../css/loop-loan.css'
+import {NativeBridge, Browser} from '../../lib/helpers'
 
-
-function gotoHandler(link, toNative) {
-    if (Browser.inFXHApp) return NativeBridge.toNative(toNative);
-
+function gotoHandler(link, need_login, next_title) {
+    if (Browser.inFXHApp) return NativeBridge.goto(link, need_login, next_title);
     if (link.indexOf('://') < 0)
         link = location.protocol + '//' + location.hostname + link;
 }
@@ -33,7 +32,7 @@ export default class LoopLoan extends React.Component {
         if(loopLoan.userStatus == 0){
             history.push('/loop-loan-card')
         }else if(loopLoan.userStatus == 1){
-            gotoHandler(loopLoan.url)
+            gotoHandler(loopLoan.url,false,"芝麻信用授权")
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500 ){
             history.push('/loop-loan-loan')
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){
