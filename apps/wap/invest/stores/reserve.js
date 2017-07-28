@@ -24,8 +24,9 @@ export default class Reserve {
     }
 
     getDataHandler = () => {
-        this.Post('/api/invest/v1/entryReserve.json', {applyInvestClaimId: Utils.hashQuery.applyInvestClaimId})
+        this.Post('/api/v1/intoAppointPage.shtml', {applyInvestClaimId: Utils.hashQuery.applyInvestClaimId})
             .then(data => {
+                console.log(data)
                 this.context = data.appointClaim;
                 this.accountAmount = data.accountAmount;
                 this.isRisk = data.isRisk;
@@ -39,14 +40,14 @@ export default class Reserve {
 
         const PAGE_SIZE = 10
 
-        this.Post('/api/invest/v1/reserveList.json', {
+        this.Post('/api/v1/appointRecordList.shtml', {
             page: this.records_page_no,
             pageSize: PAGE_SIZE
         }).then(data => {
-            this.records.push(...data.result)
+            this.records.push(...data.pageData.result)
             this.records_page_no++
 
-            if(this.records.length >= data.pageData.totalCount)
+            if (this.records.length >= data.pageData.pagination.totalCount)
                 this.records_page_no = 0
 
             done && done();
@@ -54,14 +55,14 @@ export default class Reserve {
     }
 
     submitReserveHandler = () => {
-        return this.Post('/api/invest/v1/reserveApply.json', {
+        return this.Post('/api/v1/investAppoint.shtml', {
             applyAmt: this.reserveMoney,
             applyInvestClaimId: this.context.id
         })
     }
 
     cancelHandler = (id) => {
-        return this.Post('/api/invest/v1/cancleReserve.json', {
+        return this.Post('/api/v1/cancelAppoint.shtml', {
             applyId: id
         })
     }
