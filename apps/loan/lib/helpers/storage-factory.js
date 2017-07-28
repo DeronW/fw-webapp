@@ -64,7 +64,7 @@ class StorageFactory {
 
         return r
     }
-    
+
     setUserDict = (dict) => {
         if (typeof (dict) === 'string') dict = JSON.parse(dict);
         dict.token && this.set('userToken', dict.token);
@@ -83,9 +83,6 @@ class StorageFactory {
     isBulletinRead = (token, cnt) => {
         return (this.get('bulletinToken') === token) && (this.get('bulletinCnt') === cnt)
     }
-    // getUserID = () => {
-    //     return this.get('uid') || Utils.Cookie.get('uid')
-    // }
 }
 
 const Storage_this_is_only_for_sample = {
