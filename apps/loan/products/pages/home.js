@@ -58,7 +58,7 @@ class Home extends React.Component {
     }
 
     handleBannerJump = () => {
-        $FW.Browser.inFXHApp() ?
+        Browser.inFXHApp ?
             NativeBridge.toNative('invite') :
             location.href = '/static/loan/weixin-invite/index.html';
     }
@@ -69,7 +69,7 @@ class Home extends React.Component {
 
         let product = (props, index) => {
             let clichHandler = () => {
-                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index',false,"优易借")
+                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index',false,"优易借");
                 if (props.productId == 1) Browser.inFXHApp ? NativeBridge.toNative("fxh_detail") : location.href = '/static/loan/fxh/index.html';
                 if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html')
             }
