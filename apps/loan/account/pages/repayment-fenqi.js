@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Repayment extends React.Component {
+class RepaymentFenqi extends React.Component {
     render() {
         return (
             <div></div>
@@ -8,4 +8,4 @@ class Repayment extends React.Component {
     }
 }
 
-export default Repayment
+export default RepaymentFenqi

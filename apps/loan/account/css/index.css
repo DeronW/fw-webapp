@@ -13,8 +13,11 @@ a {
 }
 
 input {
-    outline: 0;
     -webkit-appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    background: transparent;
+    outline: none;
+    border: none;
 }
 
 :global .icon-phone {
