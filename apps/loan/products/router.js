@@ -16,6 +16,7 @@ import LoopLoan from './pages/loop-loan.js'
 import LoopLoanLoan from './pages/loop-loan-loan.js'
 import LoopLoanResult from './pages/loop-loan-result.js'
 import LoopLoanAuthorization from './pages/loop-loan-authorization.js'
+import LoopLoanCard from './pages/loop-loan-card.js'
 
 export default (stores) => {
     return <Router>
@@ -26,6 +27,7 @@ export default (stores) => {
                 <Route path='/loop-loan-loan' component={LoopLoanLoan} />
                 <Route path='/loop-loan-result' component={LoopLoanResult} />
                 <Route path='/loop-loan-authorization' component={LoopLoanAuthorization} />
+                <Route path='/loop-loan-card' component={LoopLoanCard} />
                 <Route path='/mortgage-download' component={MortgageDownload} />
                 <Route path='/mortgage-outside-entry' component={MortgageOutsideEntry} />
                 <Route path='/mortgage-outside-apply' component={MortgageOutsideApply} />

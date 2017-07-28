@@ -18,6 +18,10 @@ class ReserveRecords extends React.Component {
         Event.touchBottom(this.props.reserve.getReserveList);
     }
 
+    componentWillUnmount(){
+        Event.cancelTouchBottom()
+    }
+
     cancelReserveHandler = (bookTime, id) => {
         let {reserve, history}= this.props
 

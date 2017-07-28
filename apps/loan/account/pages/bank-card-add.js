@@ -48,14 +48,21 @@ class BankCardAdd extends React.Component {
         if (!/^1(3|4|5|7|8)\d{9}$/.test(phone)) err = "手机号格式不对";
         if (card_info.cardType === 1) err = "请绑定借记卡";
         if (card_info.canVerify === 0) err = "不支持绑定此类卡";
-
         err ?
             Components.showToast(err) :
             bank_card.add_new_card_info(
                 card_info.bankName, card_no,
                 card_info.card_type, phone,
-                account.get_user_status()).then(() => {
-                    history.push('/bank-card-verify')
+                account.get_user_status())
+                // .then(() => {
+                //     history.push('/bank-card-verify')
+                // }, e => {
+                //     Components.showToast(err);
+                // })
+                .then((data) => {
+                    data && history.push('/bank-card-verify')
+                }, e => {
+                    Components.showToast(err);
                 })
     }
 

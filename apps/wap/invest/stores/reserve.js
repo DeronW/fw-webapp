@@ -13,7 +13,7 @@ export default class Reserve {
                 minAmt: '',//最小预约额
                 repayPeriod: '',//期限
             },
-            records: [],
+            records: [],//记录的列表
             records_page_no: 1,
             accountAmount: 88888,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
@@ -35,17 +35,20 @@ export default class Reserve {
             })
     }
     getReserveList = (done) => {
-        if (this.records_page_no === 0) return done && done()
+        if (this.records_page_no === 0) return done && done();
+
+        const PAGE_SIZE = 10
+
         this.Post('/api/invest/v1/reserveList.json', {
             page: this.records_page_no,
-            pageSize: 3
+            pageSize: PAGE_SIZE
         }).then(data => {
-            this.records_page_no = data.pageData.pageNo;
-            this.records = data.result
             this.records.push(...data.result)
-            this.records.pageNo < data.totalCount ?
-                this.records.pageNo++ :
-                this.records.pageNo = 0;
+            this.records_page_no++
+
+            if(this.records.length >= data.pageData.totalCount)
+                this.records_page_no = 0
+
             done && done();
         })
     }

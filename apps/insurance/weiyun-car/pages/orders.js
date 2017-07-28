@@ -3,6 +3,8 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Redirect, Link } from 'react-router-dom'
 
+import { Event } from 'fw-javascripts'
+
 import Header from '../components/header'
 
 import styles from '../css/orders.css'
@@ -16,7 +18,13 @@ class Orders extends React.Component {
         document.title = '我的订单';
 
         let { orders } = this.props;
+
+        Event.touchBottom(orders.fetch_orders);
         orders.fetch_orders();
+    }
+
+    componentWillUnmount() {
+        Event.cancelTouchBottom()
     }
 
     render() {

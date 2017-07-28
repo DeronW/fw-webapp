@@ -55,7 +55,8 @@ class BankCardVerify extends React.Component {
     }
 
     submitHandler = () => {
-        let { code } = this.state
+        let { code } = this.state;
+        let {history} = this.props;
 
         if (code.length < 4)
             return Components.showToast('验证码不能小于4位')
@@ -86,6 +87,7 @@ class BankCardVerify extends React.Component {
                 Components.showToast("验证码不正确");
             } else {
                 this.setState({ result: 0 })
+                history.push('/bank-card');
             }
         } else if (result == 1) {
             Browser.inJRGCApp() ?
