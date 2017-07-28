@@ -35,7 +35,13 @@ export default class Reserve {
                 this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
             })
     }
-    getReserveList = (done) => {
+
+    getReserveList = (done, reset) => {
+        if (reset) {
+            this.records_page_no = 1
+            this.records=[]
+        }
+        console.log(this.records_page_no)
         if (this.records_page_no === 0) return done && done();
 
         const PAGE_SIZE = 10
