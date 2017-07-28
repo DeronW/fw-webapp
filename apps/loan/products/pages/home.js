@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Post, Browser, Storage } from '../../lib/helpers'
+import { Post, Browser, Storage, NativeBridge } from '../../lib/helpers'
 
 import { BottomNavBar, showBulletin } from '../../lib/components'
 
