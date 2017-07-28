@@ -378,7 +378,7 @@ class InteractWrap extends React.Component {
                     invitCode:dict.invitationCode,
                     uid:dict.uid
                 });
-                window.location.href = '/static/loan/home/index.html';
+                window.location.href = '/static/loan/products/index.html#/';
                 break;
             default:
                 $FW.Store.setUserDict({
@@ -389,7 +389,7 @@ class InteractWrap extends React.Component {
                     invitCode:dict.invitationCode,
                     uid:dict.uid
                 });
-                window.location.href = '/static/loan/home/index.html';
+                window.location.href = '/static/loan/products/index.html#/';
         }
     }
 

@@ -92,7 +92,7 @@ class BankCardVerify extends React.Component {
         } else if (result == 1) {
             Browser.inJRGCApp() ?
                 NativeBridge.close() :
-                window.location.href = '/static/loan/home/index.html';
+                window.location.href = '/static/loan/products/index.html#/';
         } else if (result == 2) {
             this.setState({ result: 2, result_reason: '' })
         } else {

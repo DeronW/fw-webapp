@@ -88,7 +88,7 @@ class BottomNavBar extends React.Component {
                 "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAhFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8g2+bRAAAAK3RSTlMA+rjwJcZseyrlpMGTIN3rkB2YbzbaYBgLBlnWvLGgVS+qMizMf0xIQfVxp/+zHAAAAdJJREFUSMellumWgjAMhS9QFhFZZFERd0ed4f3fb9KOUrAgPcz3Qw9dTprkNg1UkiIw88gwotwMigSjJO627rB1F/jE8VT3cDpiiNX+uWZmBm6auoE5ew7sV+jlYIlp22FyjDm2GLQOUNks+ZThX/DGxTf4zHKDN9YmH5976MGb8zlz/bbD5iYcDOBwQ3Znz6biTmcYJOOBqNpn436EH+O/CLk/rVjRZ8TwERbRorLJh0V+ZBghI3+sV3582p9iFIeW+RCceXShAY/1GZwdHesCDTw62k7EQtgbQXrA4+rSvwctPFr6Rf9byis0IY3kQEI7nSb4thWjS2zZrBO0BQr6Ze2YlGhTdsLJ6KtAQOJqhr5pKO4a4XKVnyS1ACbJGrpW/laHtE8avvb4cmUdoyFIXy60cUm/EPrSJiXPJmyZcjDhvg7SfRE2bcRqkUoNZCqlYEaQgpGyHEHKUhX/0k6a+5HvVPGrV4yOGz4guEV1qF6xnoucUaYq5377sSkHR/Uiv8pF2wwz6ydVopaLgaJ090PDyPePvqIk7TmapW96gUWpX8anPxb6T9LUh2/68yofcU/ZIB/x/7UKakMS84YkVhqSiW3P9OZKbeEsw7AGWrhf+EBSF7SUTxMAAAAASUVORK5CYII=')"
         })
 
-        let _href_a = goto('/static/loan/home/index.html')
+        let _href_a = goto('/static/loan/products/index.html#/')
         let _href_payback = goto('/static/loan/payback/index.html')
         let _href_invite = goto('/static/loan/weixin-invite/index.html')
         let _href_self = goto('/static/loan/user/index.html')

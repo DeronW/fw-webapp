@@ -156,7 +156,7 @@ class VerifyCode extends React.Component{
                 <div className="tip-pop">
                     <span className="tip-1">提示</span>
                     <span className="tip-2">为方便您快速借到钱，推荐您尝试其他借款产品。</span>
-                    <Nav className="to-zhangzhong" href={`/static/loan/home/index.html`}>尝试其他</Nav>
+                    <Nav className="to-zhangzhong" href={`/static/loan/products/index.html#/`}>尝试其他</Nav>
                     <img className="close-icon" src="images/close-icon.jpg" onClick={() => {this.setState({otherTip: false})}}/>
                 </div>
             </div>

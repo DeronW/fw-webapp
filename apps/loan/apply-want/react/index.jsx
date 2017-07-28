@@ -116,7 +116,7 @@ class WantLoan extends React.Component{
                         <div className="pop">
                             <span className="tip-1">审核失败</span>
                             <span className="tip-2">{this.state.failMsg}</span>
-                            <Nav className="to-zhangzhong" href={`/static/loan/home/index.html`}>尝试其他借款</Nav>
+                            <Nav className="to-zhangzhong" href={`/static/loan/products/index.html#/`}>尝试其他借款</Nav>
                             <img className="close-icon" src="images/close-icon.jpg" onClick={() => {this.setState({showToZH: false})}}></img>
                         </div>
                     </div>

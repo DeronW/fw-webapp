@@ -77,7 +77,7 @@ export default class Account {
                 phone: this.phone,
                 invite_code: dict.invitationCode
             })
-            location.href = '/static/loan/home/index.html'
+            location.href = '/static/loan/products/index.html#/'
         }, e => Components.showToast(e.message))
     }
 
@@ -96,7 +96,7 @@ export default class Account {
                 phone: this.phone,
                 invite_code: dict.invitationCode
             })
-            location.href = '/static/loan/home/index.html'
+            location.href = '/static/loan/products/index.html#/'
         }, e => {
             if(this.codeToken == ''){
                 Components.showToast("验证码错误，请重新输入")
@@ -120,7 +120,7 @@ export default class Account {
                 status: dict.userStatus,
                 uid: dict.uid
             })
-            location.href = `/static/loan/home/index.html`;
+            location.href = `/static/loan/products/index.html#/`;
         }, e => {
             if(this.codeToken == ''){
                 Components.showToast("验证码错误，请重新输入")
