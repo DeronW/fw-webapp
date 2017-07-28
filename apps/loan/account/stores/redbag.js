@@ -1,4 +1,4 @@
-import {extendObservable, computed} from 'mobx'
+import { extendObservable, computed } from 'mobx'
 import { Components } from 'fw-javascripts'
 
 export default class Redbag {
@@ -32,9 +32,9 @@ export default class Redbag {
             card = filtered[0];
 
         return card && {
-                uuid: card.uuid,
-                text: `${card.bankShortName}(尾号${card.cardNo.slice(-4)})`
-            }
+            uuid: card.uuid,
+            text: `${card.bankShortName}(尾号${card.cardNo.slice(-4)})`
+        }
     }
 
     fetch_user_redbag = () => {
@@ -47,10 +47,10 @@ export default class Redbag {
             this.instruction = data.instruction;
         }).then(() => {
             // 用户是否可提现状态
-            return this.Post('/api/loan/v1/baseinfo.json', {productId: 1})
+            return this.Post('/api/loan/v1/baseinfo.json', { productId: 1 })
         }).then(data => {
             this.borrowBtnStatus = data.borrowBtnStatus
-            // return new Promise(resolve => resolve())
+                // return new Promise(resolve => resolve())
         }).then(() => {
             // 提现银行卡号
             return this.Post('/api/bankcard/v1/bankcardlist.json')
@@ -86,7 +86,7 @@ export default class Redbag {
 
     // 明细页下拉加载更多
     loadMoreRecords = (done, reset) => {
-        let {records} = this
+        let { records } = this
 
         if (reset) {
             records.rows = []
@@ -108,4 +108,3 @@ export default class Redbag {
     }
 
 }
-
