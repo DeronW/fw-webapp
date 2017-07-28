@@ -44,10 +44,10 @@ export default class Reserve {
             page: this.records_page_no,
             pageSize: PAGE_SIZE
         }).then(data => {
-            this.records.push(...data.result)
+            this.records.push(...data.pageData.result)
             this.records_page_no++
 
-            if (this.records.length >= data.pageData.totalCount)
+            if (this.records.length >= data.pageData.pagination.totalCount)
                 this.records_page_no = 0
 
             done && done();

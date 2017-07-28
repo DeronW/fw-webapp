@@ -53,7 +53,7 @@ class ReserveApply extends React.Component {
                         <span>{`￥${reserve.accountAmount}`}</span>
                     </div>
                     <div styleName="inputMoney">
-                        <input type="text" placeholder="50元起投" value={reserve.reserveMoney}
+                        <input type="text" placeholder="100元起投" value={reserve.reserveMoney}
                                onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
