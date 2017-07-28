@@ -40,8 +40,8 @@ class Home extends React.Component {
     state = {
         products: [],
         sub_products: [],
-        showBulletin: false,
-        bulletinCnt: '',
+        showBulletin: true,
+        bulletinCnt: 'xx',
     }
 
     componentDidMount() {
@@ -77,9 +77,12 @@ class Home extends React.Component {
 
     render() {
         let { products, sub_products } = this.state
+        let { history } = this.props
 
         let product = (props, index) => {
-            return <div styleName="product" key={index}>
+            return <a styleName="product" key={index} onClick={() => {
+                if (props.productId == 11) History.push('/loop-loan')
+            }}>
                 <img styleName="product-logo" src={props.productLogo} />
                 <div styleName="product-title">{props.productName}</div>
                 <div styleName="product-limit">{props.amountStr}</div>
@@ -88,7 +91,7 @@ class Home extends React.Component {
                 <div styleName="product-timing">{props.fastLoanValue}</div>
 
                 {index < 2 && <div styleName="bottom-line"></div>}
-            </div>
+            </a>
         }
 
         let sub_product = (props, index) => {
