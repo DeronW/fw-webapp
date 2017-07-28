@@ -7,23 +7,6 @@ import { BottomNavBar } from '../../lib/components'
 
 import styles from '../css/home.css'
 
-
-function Bulletin(props) {
-    return (
-        <div className="bulletin-mask">
-            <div className="bulletin">
-                <div className="bulletin-head">
-                    {/* <img src="images/bulletin-head.png" /> */}
-                </div>
-                <div className="bulletin-content">{props.bulletinCnt}</div>
-                <div className="close-icon-container" onClick={props.handleBulletinExit}></div>
-                <div className="bulletin-exit" onClick={props.handleBulletinExit}>知道了</div>
-            </div>
-        </div>
-    )
-}
-
-
 function gotoHandler(link, toNative) {
     if (Browser.inFXHApp) return NativeBridge.toNative(toNative);
 
@@ -67,12 +50,9 @@ class Home extends React.Component {
     }
 
     handleBannerJump = () => {
-        let ua = navigator.userAgent;
-        let r = ua.match(/EasyLoan888\/(\d+.\d+.\d+)/);
-        let appVersion = r ? r[1] : '0';
-        if ($FW.Browser.inIOS() && appVersion == '1.2.20') return;
-        // gotoHandler($FW.Theme.get('weixin_download_page'))
-        $FW.Browser.inFXHApp() ? NativeBridge.toNative('invite') : location.href = '/static/loan/weixin-invite/index.html';
+        $FW.Browser.inFXHApp() ?
+            NativeBridge.toNative('invite') :
+            location.href = '/static/loan/weixin-invite/index.html';
     }
 
     render() {
@@ -80,9 +60,13 @@ class Home extends React.Component {
         let { history } = this.props
 
         let product = (props, index) => {
-            return <a styleName="product" key={index} onClick={() => {
+            let clichHandler = () => {
                 if (props.productId == 11) history.push('/loop-loan')
-            }}>
+                if (props.productId == 1) gotoHandler('/static/loan/fxh/index.html')
+                if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html')
+            }
+
+            return <a styleName="product" key={index} onClick={clichHandler}>
                 <img styleName="product-logo" src={props.productLogo} />
                 <div styleName="product-title">{props.productName}</div>
                 <div styleName="product-limit">{props.amountStr}</div>
@@ -95,7 +79,10 @@ class Home extends React.Component {
         }
 
         let sub_product = (props, index) => {
-            return <div styleName="sp-item" key={index}
+            let clickHandler = () => {
+                gotoHandler(props.redirectUrl)
+            }
+            return <div styleName="sp-item" key={index} onClick={clickHandler}
                 onClick={() => { gotoHandler(props.redirectUrl) }}>
                 <img styleName="sp-logo" src={decodeURIComponent(props.logoUrl)} />
                 <div styleName="sp-t-a">{props.productTitle}</div>
@@ -111,9 +98,6 @@ class Home extends React.Component {
                 我要借款</div>
 
             {products.map(product)}
-
-            {this.state.showBulletin &&
-                <Bulletin bulletinCnt={this.state.bulletinCnt} handleBulletinExit={() => { this.setState({ showBulletin: false }) }} />}
 
             <div styleName="sep-line"></div>
 
