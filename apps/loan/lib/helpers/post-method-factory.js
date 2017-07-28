@@ -8,7 +8,7 @@ function inHome(){
 }
 
 function loginInApp(){
-    location.href = '/static/loan/user-jrgc-login/index.html';
+    location.href = '/static/loan/3rd/index.html#/jrgc-login'
 }
 
 
