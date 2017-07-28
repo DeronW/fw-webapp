@@ -31,11 +31,11 @@ export default class LoopLoan extends React.Component {
     clickHandler = () => {
         let { loopLoan, history } = this.props;
         if(loopLoan.userStatus == 0){
-            history.push('/loop-loan-card')
+            history.push('/loan-youyi-card')
         }else if(loopLoan.userStatus == 1){
             gotoHandler(loopLoan.url,false,"芝麻信用授权")
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500 ){
-            history.push('/loop-loan-loan')
+            history.push('/loan-youyi-form')
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){
             history.push('/home')
         }
