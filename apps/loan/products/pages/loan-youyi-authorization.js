@@ -23,7 +23,7 @@ export default class LoopLoanAuthorization extends React.Component {
     }
     confirmHandler = () => {
         let {history} = this.props;
-        history.push('/home');
+        history.push('/');
     }
     render(){
         let { history, loopLoan } = this.props;

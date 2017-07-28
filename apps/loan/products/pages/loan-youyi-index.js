@@ -37,7 +37,7 @@ export default class LoopLoan extends React.Component {
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500 ){
             history.push('/loan-youyi-form')
         }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){
-            history.push('/home')
+            history.push('/')
         }
     }
 
