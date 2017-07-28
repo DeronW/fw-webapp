@@ -40,7 +40,7 @@ export default class Reserve {
 
         const PAGE_SIZE = 10
 
-        this.Post('/api/invest/v1/reserveList.json', {
+        this.Post('/api/v1/appointRecordList.shtml', {
             page: this.records_page_no,
             pageSize: PAGE_SIZE
         }).then(data => {
@@ -55,14 +55,14 @@ export default class Reserve {
     }
 
     submitReserveHandler = () => {
-        return this.Post('/api/invest/v1/reserveApply.json', {
+        return this.Post('/api/v1/investAppoint.shtml', {
             applyAmt: this.reserveMoney,
             applyInvestClaimId: this.context.id
         })
     }
 
     cancelHandler = (id) => {
-        return this.Post('/api/invest/v1/cancleReserve.json', {
+        return this.Post('/api/v1/cancelAppoint.shtml', {
             applyId: id
         })
     }
