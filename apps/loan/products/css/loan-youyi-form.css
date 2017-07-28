@@ -56,7 +56,7 @@ input{
 }
 .arrow{
     display:inline-block;
-    background:url(../images/loop-loan-loan/arrow.jpg) no-repeat;
+    background:url(../images/loan-youyi-form/arrow.jpg) no-repeat;
     width:18px;
     height:34px;
     vertical-align: middle;
@@ -66,7 +66,7 @@ input{
     display:inline-block;
     width:30px;
     height:30px;
-    background:url(../images/loop-loan-loan/tip.jpg) no-repeat;
+    background:url(../images/loan-youyi-form/tip.jpg) no-repeat;
     position:absolute;
     top:35px;
     left:95px;
@@ -90,7 +90,7 @@ input{
     display:block;
     width:36px;
     height:36px;
-    background:url(../images/loop-loan-loan/checked.png) no-repeat;
+    background:url(../images/loan-youyi-form/checked.png) no-repeat;
     float:left;
     margin-top:5px;
 }

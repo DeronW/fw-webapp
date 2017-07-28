@@ -34,11 +34,11 @@ export default class LoopLoanAuthorization extends React.Component {
                 <div styleName="result">
                     <div styleName="success">
                         <div styleName="title">授权成功</div>
-                        <div styleName="img"><img styleName="auth-img" src={require("../images/loop-loan-authorization/success.png")}/></div>
+                        <div styleName="img"><img styleName="auth-img" src={require("../images/loan-youyi-authorization/success.png")}/></div>
                     </div>
                     <div styleName="fail dis">
                         <div styleName="title">授权失败</div>
-                        <div styleName="img"><img styleName="auth-img" src={require("../images/loop-loan-authorization/fail.png")}/></div>
+                        <div styleName="img"><img styleName="auth-img" src={require("../images/loan-youyi-authorization/fail.png")}/></div>
                     </div>
                 </div>
                 <div styleName="btn" onClick={this.confirmHandler}>确定</div>

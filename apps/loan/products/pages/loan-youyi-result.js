@@ -19,7 +19,7 @@ export default class LoopLoanResult extends React.Component {
                 <Header title="借款结果" history={history} />
                 <div styleName="success-result-box dis">
                     <div styleName="wrap-box">
-                        <div styleName="success-icon"><img styleName="img-size" src={require("../images/loop-loan-result/success.png")} /></div>
+                        <div styleName="success-icon"><img styleName="img-size" src={require("../images/loan-youyi-result/success.png")} /></div>
                         <div styleName="loan-result3">
                             <div styleName="icon1"></div>
                             <div styleName="icon1-info">申请成功</div>
@@ -39,7 +39,7 @@ export default class LoopLoanResult extends React.Component {
                 </div>
                 <div styleName="fail-result-box">
                     <div styleName="wrap-box">
-                        <div styleName="fail-icon"><img styleName="img-size" src={require("../images/loop-loan-result/fail.png")} /></div>
+                        <div styleName="fail-icon"><img styleName="img-size" src={require("../images/loan-youyi-result/fail.png")} /></div>
                         <div styleName="loan-result3">
                             <div styleName="icon1"></div>
                             <div styleName="icon1-info">申请成功</div>
@@ -59,7 +59,7 @@ export default class LoopLoanResult extends React.Component {
                 </div>
 
                 <div styleName="customer-service">
-                    <div styleName="service-wrap"><img src={require("../images/loop-loan-result/phone.png")}/>如有问题请致电：<a
+                    <div styleName="service-wrap"><img src={require("../images/loan-youyi-result/phone.png")}/>如有问题请致电：<a
                         href="tel:400-102-0066">400-102-0066</a></div>
                 </div>
             </div>
