@@ -65,9 +65,13 @@ export default class LoopLoan extends React.Component {
             btn_title = '尝试其他借款'
         }
 
+        let goBack = () => {
+            Browser.inFXHApp ? NativeBridge.close() : history.goBack()
+        }
+
         return (
             <div styleName="cnt-container">
-                <Header title="优易借" history={history} />
+                <Header title="优易借" goBack={goBack} enable={'force'}/>
                 <div styleName="loan-box">
                     <div styleName="available-loan-num">{loopLoan.canBorrowAmt}</div>
                     <div styleName="loan-title">可借额度(元)</div>
