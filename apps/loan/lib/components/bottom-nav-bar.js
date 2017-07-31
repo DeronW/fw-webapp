@@ -32,7 +32,9 @@ class BottomNavBar extends React.Component {
 
         let isActiveTab = (tab) => {
             let pt = location.pathname, cnd = false;
-            if (tab === 'home' && (pt === '/' || pt == '/static/loan/products/')) cnd = true;
+            if (tab === 'home' &&
+                (pt === '/' || pt == '/static/loan/products/' || pt == '/static/loan/products/index.html'))
+                cnd = true;
 
             return pt.match(`/static/loan/${tab}`) || cnd
         }

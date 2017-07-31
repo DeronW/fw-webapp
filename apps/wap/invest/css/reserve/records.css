@@ -1,7 +1,10 @@
 .recordsPanel {
     height: 100%;
+    display: table;
     background-color: #ebebee;
     font-family: 'PingFangSC-Regular, sans-serif';
+    overflow: hidden;
+    width: 100%;
 }
 
 .colorRed {
@@ -96,3 +99,13 @@
     color: #4aa1f9;
 }
 
+.emptyPanel {
+    height: 100%;
+    text-align: center;
+    font-size: 30px;
+    color: #555;
+}
+
+.emptyPanel img {
+    margin-bottom: 20px;
+}
