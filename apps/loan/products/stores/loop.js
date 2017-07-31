@@ -43,10 +43,10 @@ export default class LoopLoan {
         });
     }
 
-    @computed get loopLoan_card() {
-        let filtered = this.cardList.filter(e => e.authPlatform == 2)
-        return filtered;
-    }
+    // @computed get loopLoan_card() {
+    //     let filtered = this.cardList.filter(e => e.authPlatform == 2)
+    //     return filtered;
+    // }
 
     get_cardlist = () => {
         this.Post('/api/bankcard/v1/bankcardlist.json').then((data)=>{
