@@ -14,8 +14,8 @@ export default class LoopLoanAuthorization extends React.Component {
         super(props)
         let q = Utils.hashQuery;
         this.state = {
-            params:q.params,
-            sign:q.sign
+            params:encodeURIComponent(q.params),
+            sign:encodeURIComponent(q.sign)
         }
     }
     componentDidMount(){

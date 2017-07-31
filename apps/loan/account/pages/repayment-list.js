@@ -14,8 +14,20 @@ import styles from '../css/repayment-list.css'
     "errorWhenNotFound": false
 })
 export default class RepaymentList extends React.Component {
+   
+        // state = {
+        //     current_type: window.location.hash.slice(1) || '1',
+        //     tab: {
+        //         '1': { name: '申请中', page_no: 1, order_list: [] },
+        //         '2': { name: '还款中', page_no: 1, order_list: [] },
+        //         '3': { name: '未通过', page_no: 1, order_list: [] },
+        //         '4': { name: '已还款', page_no: 1, order_list: [] }
+        //     }
+        // }
+  
         componentDidMount(){
             let {repayment_list} = this.props;
+            // let {current_type} = this.state;
             repayment_list.getRepaymentList();
         }
         toRepaymentDetail = () => {

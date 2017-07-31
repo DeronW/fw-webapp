@@ -16,9 +16,9 @@ import styles from '../css/home.css'
 
 function gotoHandler(link, need_login, next_title, special_webview) {
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    if (Browser.inFXHApp){
+    if (Browser.inFXHApp) {
         NativeBridge.goto(link, need_login, next_title, special_webview);
-    }else{
+    } else {
         location.href = link;
     }
 }
@@ -32,8 +32,7 @@ class Home extends React.Component {
     state = {
         products: [],
         sub_products: [],
-        showBulletin: true,
-        bulletinCnt: 'xx',
+        enable_youyi: false
     }
 
     componentDidMount() {
@@ -51,9 +50,11 @@ class Home extends React.Component {
                     if (Storage.isBulletinRead(data.noticeContent))
                         return txt && showBulletin(data.noticeContent)
                 }
-            }, e => null)
-            .then(()=>{
+            }, e => new Promise((resolve, _) => resolve()))
+            .then(() => {
                 // here is show USER match YouYiJie or not
+            }).then(data => {
+                this.setState({ enable_youyi: true })
             })
     }
 
@@ -64,12 +65,12 @@ class Home extends React.Component {
     }
 
     render() {
-        let { products, sub_products } = this.state
+        let { products, sub_products, enable_youyi } = this.state
         let { history } = this.props
 
         let product = (props, index) => {
             let clichHandler = () => {
-                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index',false,"优易借",true);
+                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index', false, "优易借", true);
                 if (props.productId == 1) Browser.inFXHApp ? NativeBridge.toNative("fxh_detail") : location.href = '/static/loan/fxh/index.html';
                 if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html?pid=21')
             }
@@ -126,6 +127,17 @@ class Home extends React.Component {
                 <div styleName="company-info">粤ICP备17034889号-1</div>
             </div>}
 
+            {enable_youyi && <div styleName="enable-youyi">
+                <div styleName="text-a">恭喜您被选中</div>
+                <div styleName="text-b">
+                    我们邀请您使用放心花新推出的借款产品<br />
+                    “优易借”。优易借是主打14天借款期限的<br />
+                    新产品，利息固定为6%，且还款时间灵活，<br />
+                    您可以提前还款和部分还款。快去试试吧~
+                </div>
+                <a styleName="btn-close" onClick={
+                    () => this.setState({ enable_youyi: false })}></a>
+            </div>}
 
             <BottomNavBar />
         </div>
