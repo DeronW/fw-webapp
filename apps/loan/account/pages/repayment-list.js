@@ -14,36 +14,27 @@ import styles from '../css/repayment-list.css'
     "errorWhenNotFound": false
 })
 export default class RepaymentList extends React.Component {
+        componentDidMount(){
+            let {repayment_list} = this.props;
+            repayment_list.getRepaymentList();
+        }
+        toRepaymentDetail = () => {
+            let {repayment_list,history} = this.props;
+            history.push('/repayment-youyi', {query: { loanUuid: repayment_list.loopLoanUuid }} )
+        }
     render(){
-        // let repayment_item = (item,index) => {
-        //     return <div styleNme="item-self">
-        //         <div styleName="top">
-        //             <div styleName="top-left">
-        //                 <span styleName="logo-text">放心花</span>
-        //                 <span styleName="status">已逾期</span>
-        //             </div>
-        //             <div styleName="top-right">
-        //                 <span styleName="repay-num">&yen;2898</span>
-        //                 <span styleName="repay-btn">还款</span>
-        //             </div>
-        //         </div>
-        //         <div styleName="line"></div>
-        //         <div styleName="bottom"></div>
-        //     </div>
-        // }
-        return <div>
-            <Header title="还款" history={history} enable={'force'}/>
-            {/*内容部分*/}
-            <div styleName="repayment-content">
-                <div styleName="item-self">
-                    <div styleName="top">
+        let {repayment_list, history} = this.props;
+        let resultList = repayment_list.resultList;
+        let repayment_item = (item,index) => {
+            return <div styleName="item-self" key={index}>
+                <div styleName="top">
                         <div styleName="top-left">
                             <span styleName="logo-text">放心花</span>
                             <span styleName="status">已逾期</span>
                         </div>
                         <div styleName="top-right">
                             <span styleName="repay-num">&yen;2898</span>
-                            <span styleName="repay-btn">还款</span>
+                            <span styleName="repay-btn" onClick = {this.toRepaymentDetail}>还款</span>
                         </div>
                     </div>
                     <div styleName="line"></div>
@@ -63,7 +54,13 @@ export default class RepaymentList extends React.Component {
                             <p styleName="desc">还款日</p>
                         </div>
                     </div>
-                </div>
+            </div>
+        }
+        return <div>
+            <Header title="还款" history={history} enable={'force'}/>
+            {/*内容部分*/}
+            <div styleName="repayment-content">
+                {resultList.map(repayment_item)}
             </div>
         </div>
     }
