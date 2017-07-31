@@ -20,6 +20,7 @@ import RepaymentList from './pages/repayment-list.js'
 import RepaymentYouyi from './pages/repayment-youyi.js'
 import RepaymentFenqi from './pages/repayment-fenqi.js'
 import RepaymentResult from './pages/repayment-result.js'
+import RepaymentFangXin from './pages/repayment-fangxin.js'
 
 export default (stores) => {
     return <Router>
@@ -39,7 +40,7 @@ export default (stores) => {
                 {/*还款相关页面*/}
                 <Route exact path='/repayment-list' component={RepaymentList} />
                 <Route exact path='/repayment-youyi' component={RepaymentYouyi} />
-                {/* <Route exact path='/repayment-fxh' component={RepaymentFxh} /> */}
+                {<Route exact path='/repayment-fangxin' component={RepaymentFangXin} />}
                 <Route exact path='/repayment-fenqi' component={RepaymentFenqi} />
                 <Route exact path='/repayment-result' component={RepaymentResult} />
                 <Route exact path='/repayment-bank-card' component={BankCard} />

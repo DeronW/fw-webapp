@@ -9,24 +9,31 @@ import { Header } from '../../lib/components'
 import styles from '../css/repayment-youyi.css'
 
 
-@inject('repayment_youyi')
+@inject('account', 'repayment_youyi')
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class Repayment extends React.Component {
 
-    state = { amountEditDisabled: false }
+    state = {
+        protocolChecked: true,
+        amountEditDisabled: false,
+        showSMSPop: false,
+        SMSTimer: 60,
+        SMSInput: ''
+    }
 
     componentDidMount() {
         document.title = '还款详情';
 
-        let { repayment_youyi, bank_card, history } = this.props,
-            loanId = Utils.urlQuery.loanId;
-
-        repayment_youyi.setLoanId(loanId);
+        let { repayment_youyi } = this.props;
 
         repayment_youyi.fetchRepaymentInfo().then(data => {
             if (repayment_youyi.unpaidAmount < 200) this.setState({ amountEditDisabled: true })
         });
+    }
+
+    componentWillUnmount() {
+        this.clearSMSTimer();
     }
 
     handleInput = e => {
@@ -36,7 +43,11 @@ class Repayment extends React.Component {
         repayment_youyi.setAmount(v);
     }
 
+    toggleProtocol = () => this.setState({ protocolChecked: !this.state.protocolChecked})
+
     handleSubmit = () => {
+        if (!this.state.protocolChecked) return
+
         let { repayment_youyi, history } = this.props,
             repaymentAmount = repayment_youyi.repaymentAmount,
             unpaidAmount = repayment_youyi.unpaidAmount;
@@ -45,11 +56,54 @@ class Repayment extends React.Component {
         if (unpaidAmount - repaymentAmount < 100 && unpaidAmount - repaymentAmount > 0) return Components.showToast('剩余金额不能小于100')
 
         if (unpaidAmount - repaymentAmount < 0) repayment_youyi.setAmount(unpaidAmount);
+
+        repayment_youyi.submitRepayment().then(data => {
+            this.setState({ showSMSPop: true });
+            this.SMSTimerController();
+        })
+    }
+
+    getSMS = () => {
+        let ableToGetSMS = this.state.getSMSTimer === 60;
+        if (!ableToGetSMS) return
+
+        let { repayment_youyi } = this.props;
+        repayment_youyi.getSMS().then(data => {
+            Components.showToast('验证码已发送');
+            this.setState({ SMSToken: data.codeToken });
+            this.SMSTimerController();
+        });
+    }
+
+    SMSTimerController = () => {
+        this._sms_timer = setInterval(() => {
+            if (this.state.SMSTimer <= 1) {
+                clearInterval(this._sms_timer);
+                return this.setState({ SMSTimer: 60 })
+            }
+            this.setState({ SMSTimer: this.state.SMSTimer - 1 })
+        }, 1000)
+    }
+
+    clearSMSTimer = () => {
+        this.setState({ SMSTimer: 60 });
+        if (this._sms_timer) clearInterval(this._sms_timer);
+    }
+
+    handleSMSInput = e => {
+        this.setState({ SMSInput: e.target.value.replace(/\D/, '') })
+    }
+
+    handleConfirm = () => {
+        let { history, repayment_youyi } = this.props,
+            { SMSInput } = this.state;
+        if (SMSInput.length < 4) return
+        repayment_youyi.confirmRepayment(history, SMSInput);
     }
 
     render() {
-        let { history, repayment_youyi } = this.props,
-            { amountEditDisabled } = this.state,
+        let { history, repayment_youyi, account } = this.props,
+            { protocolChecked, amountEditDisabled, showSMSPop, SMSTimer, SMSInput } = this.state,
             amountEditItem;
 
         if (amountEditDisabled) {
@@ -69,13 +123,32 @@ class Repayment extends React.Component {
             </div>
         }
 
+        let SMSPop = <div styleName="pop-mask">
+            <div styleName="pop">
+                <div styleName="pop-close"
+                    onClick={() => { this.setState({ showSMSPop: false }); this.clearSMSTimer() }}></div>
+                <div styleName="pop-title">短信验证码</div>
+                <div styleName="pop-info">已向{account.mask_phone}发送验证码</div>
+                <div styleName="sms-input">
+                    <input type="num" value={SMSInput} onChange={this.handleSMSInput}/>
+                    <div styleName="sms-btn" onClick={this.getSMS}>
+                        {SMSTimer === 60 ? "重新获取": `${SMSTimer}s`}
+                    </div>
+                </div>
+                <div styleName="pop-submit"
+                    style={{ "background": SMSInput.length > 3 ? "#6aa4f0" : "#eee" }}
+                    onClick={this.handleConfirm}>
+                    确定</div>
+            </div>
+        </div>
+
         return (
             <div styleName="cnt-container">
 
                 <Header title="还款明细" history={history} />
 
                 <div styleName="banner">
-                    <img src={require('../images/repayment-fxh/ue.png')}></img>
+                    <img src={require('../images/repayment-youyi/logo.png')}></img>
                     优易借</div>
 
                 <div styleName="amount-overview">
@@ -108,7 +181,8 @@ class Repayment extends React.Component {
                     { amountEditItem }
                 </div>
 
-                <div styleName="checked-protocol">
+                <div className={ protocolChecked ? styles['checked-protocol'] : styles['unchecked-protocol'] }
+                    onClick={this.toggleProtocol}>
                     同意<span>《委托扣款授权书（还款）》、《委托扣款授权书（支付服务费）》</span>
                 </div>
 
@@ -118,6 +192,8 @@ class Repayment extends React.Component {
                         立即还款
                     </a>
                 </div>
+
+                { showSMSPop && SMSPop}
             </div>
         )
     }

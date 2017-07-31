@@ -10,7 +10,7 @@ import styles from '../../css/reserve/info.css'
 class ReserveInfo extends React.Component {
 
     componentDidMount() {
-        this.props.reserve.getDataHandler()
+        this.props.reserve.fetchProduct()
     }
 
     reserveHandler = () => {
@@ -19,7 +19,8 @@ class ReserveInfo extends React.Component {
         if (reserve.isRisk == 0) {
             history.push('/user/evaluate')
         } else if (reserve.batchMaxmum === 0) {
-            location.href = "";//调到自动投资页面
+            // location.href = "";//调到自动投资页面
+            NativeBridge.toNative('auto_bid_auth')
         } else {
             history.push('/reserve/apply')
         }

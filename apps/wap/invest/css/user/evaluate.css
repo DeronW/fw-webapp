@@ -34,7 +34,7 @@
     color: #666;
 }
 
-.question-select .select {
+.select {
     position: absolute;
     top: 0;
     left: 0;
@@ -44,8 +44,14 @@
     max-height: 9999px;
 }
 
-.question-select .select.checked {
+.checked {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 44px;
+    height: 44px;
     background: transparent url("../../images/user/evaluate/checked.png") no-repeat 50%;
+    max-height: 9999px;
 }
 
 .submit-panel {

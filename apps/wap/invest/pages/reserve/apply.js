@@ -10,7 +10,7 @@ import {Components} from 'fw-javascripts'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveApply extends React.Component {
     componentDidMount() {
-        this.props.reserve.getDataHandler()
+        this.props.reserve.fetchProduct()
     }
 
     inputChangeHandler = name => e => {
