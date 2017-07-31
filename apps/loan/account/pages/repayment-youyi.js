@@ -25,10 +25,7 @@ class Repayment extends React.Component {
     componentDidMount() {
         document.title = '还款详情';
 
-        let { repayment_youyi, bank_card, history } = this.props,
-            loanId = Utils.urlQuery.loanId;
-
-        repayment_youyi.setLoanId(loanId);
+        let { repayment_youyi } = this.props;
 
         repayment_youyi.fetchRepaymentInfo().then(data => {
             if (repayment_youyi.unpaidAmount < 200) this.setState({ amountEditDisabled: true })
