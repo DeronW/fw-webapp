@@ -105,6 +105,10 @@ export default class LoopLoan {
         })
    }
 
-
+    regetSMSCode = () => {
+        this.Post('/api/looploan/loan/v1/resendverifycode.json',{
+            loanUuid:this.loanUuid
+        }).then();
+    }
 
 }

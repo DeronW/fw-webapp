@@ -14,11 +14,13 @@ export default class LoopLoanLoan extends React.Component {
         super(props)
         this.state = {
             value : "",
+            smsValue:"",
             hasInput:false,
             checked:true,
             mask1Show:false,
             mask2Show:false,
-            mask3Show:false
+            mask3Show:false,
+            remain: 0
         }
     }
 
@@ -62,6 +64,28 @@ export default class LoopLoanLoan extends React.Component {
         this.setState({mask2Show:false})
     }
 
+    countingDown = () => {
+        if (this.state.remain <= 1) window.clearInterval(this._timer);
+        this.setState({remain: this.state.remain - 1});
+    }
+
+    tick = () => {
+        this.setState({remain: 60});
+        window.clearInterval(this._timer);
+        this._timer = setInterval(this.countingDown, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this._timer);
+    }
+
+    getSMSCode = () => {
+        if (this.state.remain <= 0) {
+            this.tick();
+            this.props.loopLoan.regetSMSCode();
+        }
+    }
+
     confirmHandler = () => {
         if(!this.state.checked){
             Components.showToast("请同意相关协议")
@@ -69,7 +93,8 @@ export default class LoopLoanLoan extends React.Component {
             Components.showToast("请输入借款金额")
         }else{
             this.props.loopLoan.loan_confirm(this.state.value);
-            this.setState({mask3Show:true})
+            this.setState({mask3Show:true});
+            this.tick();
         }
     }
 
@@ -149,10 +174,11 @@ export default class LoopLoanLoan extends React.Component {
                                 </div>
                                 <div styleName="verify-input">
                                     <input styleName="sms-input" type="number" name="number"
-                                           value="" placeholder="输入验证码"/>
-                                    <span styleName="btn-countdown"></span>
+                                           value={this.state.smsValue} placeholder="输入验证码"/>
+                                    <span styleName="btn-countdown" onClick={this.getSMSCode}>
+                                {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                                 </div>
-                                 <div styleName="confirm-btn">确定</div>
+                                 <div styleName={this.state.smsValue ? "confirm-btn blue" : "confirm-btn gray"}>确定</div>
                         </div>
                     </div>
                 </div>}

@@ -142,6 +142,9 @@ input{
 .purple{
     background:#556bb8;
 }
+.blue{
+    background:#6aa4f0;
+}
 .btn-tip{
     font-size:24px;
     color:#999;
@@ -360,7 +363,6 @@ input{
     height:74px;
     line-height:74px;
     border:1px solid #6aa4f0;
-    background:#6aa4f0;
     text-align:center;
     font-size:30px;
     color:#fff;
