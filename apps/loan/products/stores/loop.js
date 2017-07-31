@@ -21,7 +21,9 @@ export default class LoopLoan {
             shouldRepaymentAmount:'',
             totalFeeAmount:'',
             loanUuid:'',
-            feeAmoutExts:[]
+            feeAmoutExts:[],
+            bankName:'',
+            bankCardNo:''
         })
     }
 
@@ -93,6 +95,13 @@ export default class LoopLoan {
             productUuid:this.productUuid
         }).then((data)=>{
             this.loanUuid = data.loanUuid
+        })
+   }
+
+   check_cardinfo = () => {
+        this.Post('/api/looploan/bankcard/v1/cardInfo.json').then((data)=>{
+            this.bankName = data.cardInfo.bankName;
+            this.bankCardNo = data.cardInfo.bankCardNo;
         })
    }
 

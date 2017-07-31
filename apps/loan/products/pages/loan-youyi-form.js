@@ -24,6 +24,7 @@ export default class LoopLoanLoan extends React.Component {
 
     componentDidMount(){
         document.title = '借钱';
+        this.props.loopLoan.check_cardinfo();
     }
 
     changeHandler = (e) => {
@@ -75,6 +76,13 @@ export default class LoopLoanLoan extends React.Component {
     render(){
         let { history, loopLoan } = this.props;
         let USER = Storage.getUserDict();
+        let item_list = (item, index) => {
+            return (
+                <div styleName="item-list" key={index}><span styleName="item-left">{item.feeName}</span><span
+                    styleName="item-right">{item.feeAmout}元</span></div>
+            )
+        };
+
         return (
             <div styleName="cnt-container">
                 <Header title="借钱" history={history} />
@@ -100,7 +108,7 @@ export default class LoopLoanLoan extends React.Component {
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">打款至</div>
-                        <div styleName="loan-bank-info">中国银行(2333)<span styleName="arrow"></span></div>
+                        <div styleName="loan-bank-info">{loopLoan.bankName}({loopLoan.bankCardNo.slice(-4)})<span styleName="arrow"></span></div>
                     </div>
                 </div>
                 <div styleName="agreement-issue">
@@ -115,17 +123,18 @@ export default class LoopLoanLoan extends React.Component {
                 </div>
                 {this.state.mask1Show && <div styleName="mask1">
                     <div styleName="detail-pop">
-                        <div styleName="close-icon"></div>
+                        <div styleName="close-icon" onClick={this.detailHideHandler}></div>
                         <div styleName="item-title">借款费用详情</div>
-                        <div styleName="item-wrap"></div>
+                        <div styleName="item-wrap">
+                            {loopLoan.feeAmoutExts.map(item_list)}
+                        </div>
                         <div styleName="know-btn" onClick={this.detailHideHandler}>知道了</div>
                     </div>
                 </div>}
                 {this.state.mask2Show && <div styleName="mask2">
                     <div styleName="notice-pop">
-                        <div styleName="notice-close" onClick={this.overdueHideHandler}></div>
                         <div styleName="notice-title">逾期费用说明</div>
-                        <div styleName="close-icon"></div>
+                        <div styleName="close-icon" onClick={this.overdueHideHandler}></div>
                         <div styleName="notice-content"></div>
                         <div styleName="notice-btn" onClick={this.overdueHideHandler}>知道了</div>
                     </div>
