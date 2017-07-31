@@ -27,15 +27,15 @@ class ReserveRecords extends React.Component {
         let {reserve, history}= this.props;
         let cb = () => {
             reserve.cancelHandler(id).then((data) => {
-                if(data.cancelResult=='1'){
+                if (data.cancelResult == '1') {
 
-                }else if(data.cancelResult=='0'){
+                } else if (data.cancelResult == '0') {
                     Components.showToast("取消成功")
                     reserve.getReserveList(null, true)
                 }
             })
         };
-        showConfirm('确定取消？',cb)
+        showConfirm('确定取消？', cb)
     }
 
 
@@ -93,9 +93,13 @@ class ReserveRecords extends React.Component {
                 </div>
             </div>
         }
+        let no_records = <div styleName="emptyPanel">
+            <img src={require('../../images/reserve/records/norecords.png')}/>
+            <div>暂无预约</div>
+        </div>
         return <div styleName="recordsPanel">
             <Header title="我的预约" history={history} show_close={false}/>
-            {records.map(records_func)}
+            {records.length == 0 ? no_records : records.map(records_func)}
         </div>
     }
 }
