@@ -4,29 +4,51 @@ import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Header } from '../../lib/components'
+import { Browser, Post } from '../../lib/helpers'
 
-import styles from '../css/repayment-list.css'
+import styles from '../css/repayment-records.css'
 
-@inject("repayment_list")
+@inject("repayment_youyi")
 @observer
 @CSSModules(styles, {
     "allowMultiple": true,
     "errorWhenNotFound": false
 })
-export default class RepaymentList extends React.Component {
-   
+export default class RepaymentRecords extends React.Component {
+        state = {
+            loanUuid:"",
+            productId:"",
+            resultList: [],
+            curPage: 1,
+            uid: ""
+        }
         componentDidMount(){
-            let {repayment_list} = this.props;
-            repayment_list.getRepaymentList();
+            let {repayment_youyi} = this.props;
+            repayment_youyi.setLoanId(this.state.loanUuid);
+            Post(`/api/order/v1/orderList.json`, {
+            page: this.state.curPage,
+            pageSize: 10,
+            loanStatus: 2
+        }).then(data => {
+            this.setState({ resultList:  data.resultList })
+        })
+
         }
         toRepaymentDetail = () => {
             let {repayment_list,history} = this.props;
-            history.push('/repayment-youyi', {query: { loanUuid: repayment_list.loopLoanUuid }} )
+            let {loanUuid, productId} = this.state;
+            // 根据返回的productId跳转到不同的还款页面
+            productId == '1' && (location.href = `/static/loan/repayment-reord/index.html`);
+            productId == '21' && history.push('/repayment-youyi');
+            productId == '11' && history.push('/repayment-youyi');
+            
         }
     render(){
-        let {repayment_list, history} = this.props;
-        let resultList = repayment_list.resultList;
+        let {history} = this.props;
+        let {resultList} = this.state;
         let repayment_item = (item,index) => {
+            this.state.productId = item.productId;
+            this.state.loanUuid = item.uuid;
             return <div styleName="item-self" key={index}>
                 <div styleName="top">
                         <div styleName="top-left">
@@ -51,7 +73,7 @@ export default class RepaymentList extends React.Component {
                         </div>
                         <b styleName="gap-line"></b>
                         <div styleName="deadline">
-                            <p styleName="time-detail">{item.repaymentTime}</p>
+                            <p styleName="time-detail">{item.repaymentTimeStr}</p>
                             <p styleName="desc">还款日</p>
                         </div>
                     </div>
