@@ -78,9 +78,17 @@ class StorageFactory {
     }
 
     isBulletinRead = cnt => {
-        let k = '_$_bulletin', read = this.get(k)
+        let k = '_$_bulletin_', read_over = this.get(k)
         this.set(k, cnt)
-        return read
+        return read_over
+    }
+
+    setStoreData = (pathname, data) => {
+
+    }
+
+    getStoreData = pathname => {
+        return {}
     }
 }
 
