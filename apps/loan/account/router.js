@@ -16,9 +16,9 @@ import BankCard from './pages/bank-card.js'
 import BankCardAdd from './pages/bank-card-add.js'
 import BankCardVerify from './pages/bank-card-verify.js'
 
+import RepaymentList from './pages/repayment-list.js'
 import RepaymentYouyi from './pages/repayment-youyi.js'
 import RepaymentFenqi from './pages/repayment-fenqi.js'
-import RepaymentList from './pages/repayment-list.js'
 import RepaymentResult from './pages/repayment-result.js'
 
 export default (stores) => {
