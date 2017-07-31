@@ -12,6 +12,6 @@ let stores = {
     bank_card: new Stores.BankCard(Post),
     redbag: new Stores.Redbag(Post),
     repayment_youyi: new Stores.RepaymentYouyi(Post),
-    repayment_list: new Stores.RepaymentList(Post)
+    repayment_fangxin: new Stores.RepaymentFangXin(Post)
 }
 render(AppRouter(stores), document.getElementById('cnt'))

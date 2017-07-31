@@ -91,7 +91,7 @@
 
 .info-item a {
     padding-right: 36px;
-    background: url('../images/repayment-fxh/entry.png') no-repeat right;
+    background: url('../images/repayment-youyi/entry.png') no-repeat right;
 }
 
 .repayment-input {
@@ -135,7 +135,7 @@
 
 .protocol {
     box-sizing: border-box;
-    margin: 20px 33px;
+    margin: 20px 33px 178px;
     padding-left: 48px;
     color: #999;
     font-size: 27px;
@@ -148,10 +148,94 @@
 
 .unchecked-protocol {
     composes: protocol;
-    background: url('../images/repayment-fxh/unchecked.png') no-repeat left top;
+    background: url('../images/repayment-youyi/unchecked.png') no-repeat left top;
 }
 
 .checked-protocol {
     composes: protocol;
-    background: url('../images/repayment-fxh/checked.png') no-repeat left top;
+    background: url('../images/repayment-youyi/checked.png') no-repeat left top;
+}
+
+.pop-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: 99;
+}
+
+.pop {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 594px;
+    padding: 34px;
+    background: #fff;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.pop-close {
+    position: absolute;
+    top: 34px;
+    right: 34px;
+    width: 34px;
+    height: 34px;
+    background: url('../images/repayment-youyi/close.jpg') no-repeat center;
+}
+
+.pop-title {
+    margin-bottom: 15px;
+    color: #6aa4f0;
+    font-size: 32px;
+}
+
+.pop-info {
+    line-height: 38px;
+    margin-bottom: 25px;
+    color: #666;
+    font-size: 24px;
+}
+
+.sms-input {
+    box-sizing: border-box;
+    display: table;
+    width: 100%;
+    height: 66px;
+    padding: 0 20px;
+    margin-bottom: 25px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    font-size: 26px;
+}
+
+.sms-input input {
+    float: left;
+    width: 400px;
+    height: 64px;
+    line-height: 64px;
+    font-size: 26px;
+}
+
+.sms-btn {
+    float: right;
+    height: 64px;
+    line-height: 64px;
+    color: #333;
+    font-size: 26px;
+}
+
+.pop-submit {
+    height: 78px;
+    line-height: 78px;
+    background: #6aa4f0;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 32px;
+    text-align: center;
 }

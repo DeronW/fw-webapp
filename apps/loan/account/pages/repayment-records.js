@@ -4,66 +4,76 @@ import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Header } from '../../lib/components'
+import { Browser, Post } from '../../lib/helpers'
 
-import styles from '../css/repayment-list.css'
+import styles from '../css/repayment-records.css'
 
-@inject("repayment_list")
+@inject("repayment_youyi")
 @observer
 @CSSModules(styles, {
     "allowMultiple": true,
     "errorWhenNotFound": false
 })
-export default class RepaymentList extends React.Component {
-    // constructor(){
-    //     super()
-    //     state = {
-    //         current_type: window.location.hash.slice(1) || '1',
-    //         tab: {
-    //             '1': { name: '申请中', page_no: 1, order_list: [] },
-    //             '2': { name: '还款中', page_no: 1, order_list: [] },
-    //             '3': { name: '未通过', page_no: 1, order_list: [] },
-    //             '4': { name: '已还款', page_no: 1, order_list: [] }
-    //         }
-    //     }
-    // }
+export default class RepaymentRecords extends React.Component {
+        state = {
+            loanUuid:"",
+            productId:"",
+            resultList: [],
+            curPage: 1,
+            uid: ""
+        }
         componentDidMount(){
-            let {repayment_list} = this.props;
-            // let {current_type} = this.state;
-            repayment_list.getRepaymentList();
+            let {repayment_youyi} = this.props;
+            repayment_youyi.setLoanId(this.state.loanUuid);
+            Post(`/api/order/v1/orderList.json`, {
+            page: this.state.curPage,
+            pageSize: 10,
+            loanStatus: 2
+        }).then(data => {
+            this.setState({ resultList:  data.resultList })
+        })
+
         }
         toRepaymentDetail = () => {
             let {repayment_list,history} = this.props;
-            history.push('/repayment-youyi', {query: { loanUuid: repayment_list.loopLoanUuid }} )
+            let {loanUuid, productId} = this.state;
+            // 根据返回的productId跳转到不同的还款页面
+            productId == '1' && (location.href = `/static/loan/repayment-record/index.html`);
+            productId == '21' && history.push('/repayment-youyi');
+            productId == '11' && history.push('/repayment-youyi');
+            
         }
     render(){
-        let {repayment_list, history} = this.props;
-        let resultList = repayment_list.resultList;
+        let {history} = this.props;
+        let {resultList} = this.state;
         let repayment_item = (item,index) => {
+            this.state.productId = item.productId;
+            this.state.loanUuid = item.uuid;
             return <div styleName="item-self" key={index}>
                 <div styleName="top">
                         <div styleName="top-left">
-                            <span styleName="logo-text">放心花</span>
-                            <span styleName="status">已逾期</span>
+                            <span styleName="logo-text">{item.productName}</span>
+                            {item.overdueStatus && <span styleName="status">已逾期</span>}
                         </div>
                         <div styleName="top-right">
-                            <span styleName="repay-num">&yen;2898</span>
+                            <span styleName="repay-num">&yen;{item.loanLeftAmtStr}</span>
                             <span styleName="repay-btn" onClick = {this.toRepaymentDetail}>还款</span>
                         </div>
                     </div>
                     <div styleName="line"></div>
                     <div styleName="bottom">
                         <div styleName="time-limit">
-                            <p styleName="time-detail">21天</p>
+                            <p styleName="time-detail">{item.termNumStr}</p>
                             <p styleName="desc">期限</p>
                         </div>
                         <b styleName="gap-line"></b>
                         <div styleName="put-day">
-                            <p styleName="time-detail">2017-7-28</p>
+                            <p styleName="time-detail">{item.loanTimeStr}</p>
                             <p styleName="desc">放款日</p>
                         </div>
                         <b styleName="gap-line"></b>
                         <div styleName="deadline">
-                            <p styleName="time-detail">2017-7-28</p>
+                            <p styleName="time-detail">{item.repaymentTimeStr}</p>
                             <p styleName="desc">还款日</p>
                         </div>
                     </div>

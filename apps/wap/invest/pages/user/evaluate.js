@@ -186,35 +186,53 @@ const QUESTIONS = [{
         score: 9
     }]
 }];
+const startArr = [];
+
+QUESTIONS.forEach(value => {
+    let json = {};
+    json[value.name] = -1;
+    startArr.push(json);
+});
+@observer
+@inject('reserve')
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Evaluate extends React.Component {
     state = {
         finished: false,
         score: 0,
         evaluateType: "风险类型",
-        selected: {}
+        selected: startArr
     }
 
     back_handler = () => {
-        this.props.history.goBack()
+        this.props.history.push(`/reserve/info`)
     }
 
     componentDidMount() {
         document.title = '风险测评'
     }
 
-    selectHandler = (name, optionIndex) => {
-        let {selected} = this.state
-        selected[name] = optionIndex
-        this.setState({selected: selected})
+    selectHandler = (value, index, num) => {
+        // let {selected} = this.state
+        // console.log(`selectedname:${selected[name]}`)
+        // console.log(`optionIndex:${optionIndex}`)
+        // selected[name] = optionIndex
+        // this.setState({selected: selected})
+        console.log(1111)
+        let {selected} = this.state;
+        selected[index][value] = num;
+        this.setState({selected: selected});
     }
 
     submitHandler = () => {
+        console.log('submit')
         let form_data = {}, {selected} = this.state, err;
+        console.log(selected.length)
         for (let i = 0; i < selected.length; i++) {
             Object.assign(form_data, selected[i])
         }
         for (let i in form_data) {
+            console.log(form_data[i])
             if (form_data[i] == -1) err = true;
             form_data[i] = ['A', 'B', 'C', 'D', 'E'][form_data[i]]
         }
@@ -281,14 +299,16 @@ class Evaluate extends React.Component {
 
         let questions = () => {
             let question = (q, index) => {
-
+                let myName = q.name;
+                let myNum = index;
                 let option = (o, oIndex) => {
                     let cn = "select"
-                    if (selected[q.name] == oIndex) cn += ' checked'
-
-                    return <div styleName="question-select" key={oIndex}
-                                onClick={() => this.selectHandler(q.name, oIndex)}>
-                        <i styleName={cn}></i>{o.a}
+                    selected[myNum][myName] == oIndex ? cn = styles['checked'] : cn = styles['select']
+                    return <div styleName="question-select" key={oIndex}>
+                        <div className={cn}
+                             onClick={() => this.selectHandler(myName, myNum, oIndex)}>
+                        </div>
+                        {o.a}
                     </div>
                 }
 
