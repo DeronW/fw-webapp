@@ -13,6 +13,8 @@ import styles from '../css/repayment-youyi.css'
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class Repayment extends React.Component {
 
+    state = { amountEditDisabled: false }
+
     componentDidMount() {
         document.title = '还款详情';
 
@@ -21,11 +23,38 @@ class Repayment extends React.Component {
 
         repayment_youyi.setLoanId(loanId);
 
-        repayment_youyi.fetchRepaymentInfo();
+        repayment_youyi.fetchRepaymentInfo().then(data => {
+            if (repayment_youyi.unpaidAmount < 200) this.setState({ amountEditDisabled: true })
+        });
+    }
+
+    handleInput = e => {
+        let { repayment_youyi } = this.props,
+            v = e.target.value;
+        v = v.replace(/[^\d|\.]/g, '');
+        repayment_youyi.setAmount(v);
     }
 
     render() {
-        let { history, repayment_youyi } = this.props;
+        let { history, repayment_youyi } = this.props,
+            { amountEditDisabled } = this.state,
+            amountEditItem;
+        if (amountEditDisabled) {
+            amountEditItem = <div styleName="info-item">
+                <div styleName="item-name">还款金额</div>
+                <div styleName="item-value">{repayment_youyi.repaymentAmount}</div>
+            </div>
+        } else {
+            amountEditItem = <div styleName="repayment-input-item">
+                <input styleName="repayment-input"
+                    type="num"
+                    placeholder="请输入还款金额"
+                    value={repayment_youyi.repaymentAmount}
+                    onChange={this.handleInput} />
+                <div styleName="pay-off-btn"
+                    onClick={() => { repayment_youyi.setAmount(repayment_youyi.unpaidAmount)} }>全部还清</div>
+            </div>
+        }
         return (
             <div styleName="cnt-container">
 
@@ -60,12 +89,9 @@ class Repayment extends React.Component {
                 <div styleName="repayment-info">
                     <div styleName="info-item">
                         <div styleName="item-name">选择银行卡</div>
-                        <a styleName="item-value">{`${repayment_youyi.bank}(${repayment_youyi.cardNo})`}</a>
+                        <div styleName="item-value">{`${repayment_youyi.bank}(${repayment_youyi.cardNo})`}</div>
                     </div>
-                    <div styleName="repayment-input-item">
-                        <input styleName="repayment-input" placeholder="请输入还款金额"/>
-                        <div styleName="pay-off-btn">全部还清</div>
-                    </div>
+                    { amountEditItem }
                 </div>
 
                 <div styleName="checked-protocol">
@@ -74,7 +100,6 @@ class Repayment extends React.Component {
 
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn"
-                        style={{ 'background': false ? '#556bb8' : '#ccc'}}
                         onClick={() => {  }}>
                         立即还款
                     </a>
