@@ -15,6 +15,7 @@ import styles from '../css/repayment-list.css'
 })
 export default class RepaymentList extends React.Component {
     constructor(){
+        super()
         state = {
             current_type: window.location.hash.slice(1) || '1',
             tab: {
