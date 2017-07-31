@@ -27,6 +27,7 @@ export default class LoopLoanLoan extends React.Component {
     componentDidMount(){
         document.title = '借钱';
         this.props.loopLoan.check_cardinfo();
+        this.props.loopLoan.get_baseinfo();
     }
 
     changeHandler = (e) => {
