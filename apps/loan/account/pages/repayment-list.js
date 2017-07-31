@@ -28,8 +28,8 @@ export default class RepaymentList extends React.Component {
     // }
         componentDidMount(){
             let {repayment_list} = this.props;
-            let {current_type} = this.state;
-            repayment_list.getRepaymentList(current_type);
+            // let {current_type} = this.state;
+            repayment_list.getRepaymentList();
         }
         toRepaymentDetail = () => {
             let {repayment_list,history} = this.props;
