@@ -34,7 +34,7 @@ export default class RepaymentList extends React.Component {
                             {item.overdueStatus && <span styleName="status">已逾期</span>}
                         </div>
                         <div styleName="top-right">
-                            <span styleName="repay-num">&yen;{item.oanLeftAmtStr}</span>
+                            <span styleName="repay-num">&yen;{item.loanLeftAmtStr}</span>
                             <span styleName="repay-btn" onClick = {this.toRepaymentDetail}>还款</span>
                         </div>
                     </div>
