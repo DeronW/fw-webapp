@@ -30,6 +30,7 @@ class Basic extends React.Component {
     handleSubmit = () => {
         let { basic, car, policy_detail, history } = this.props;
         basic.submit(history).then(data => {
+            basic.setFormData('carOwnersName', data.carInfo.licenseOwner);
             car.setForm(data.carInfo);
             policy_detail.setForm(data.insureInfo);
             history.push('/policy-detail');
