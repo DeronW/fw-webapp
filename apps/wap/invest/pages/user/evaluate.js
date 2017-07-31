@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import {Header} from '../../components'
 import {Get} from '../../helpers'
-
+import {Components} from 'fw-javascripts'
 import styles from '../../css/user/evaluate.css'
 
 const QUESTIONS = [{
@@ -211,15 +211,17 @@ class Evaluate extends React.Component {
 
     submitHandler = () => {
         let form_data = {}, {selected} = this.state, err;
-
-        for (let i in selected) {
-            if (form_data[i] == -1) err = true;
-            form_data[i] = ['A', 'B', 'C', 'D', 'E'][selected[i]]
+        for (let i = 0; i < selected.length; i++) {
+            Object.assign(form_data, selected[i])
         }
-
+        for (let i in form_data) {
+            if (form_data[i] == -1) err = true;
+            form_data[i] = ['A', 'B', 'C', 'D', 'E'][form_data[i]]
+        }
+        console.log(err)
         err ?
-            Component.showToast("您还有未填写试题") :
-            Get('/mpwap/orderuser/riskGradeInto.shtml', form_data)
+            Components.showToast("您还有未填写试题") :
+            Get('/orderuser/riskGradeP2P.shtml', form_data)
                 .then(data => this.setState({
                     finished: true,
                     score: data.score,
