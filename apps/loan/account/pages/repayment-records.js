@@ -24,16 +24,16 @@ export default class RepaymentRecords extends React.Component {
         }
         componentDidMount(){
             let {repayment_youyi} = this.props;
-            console.log(111);
-            console.log(this.state.loanUuid);
-            console.log(222);
-            repayment_youyi.setLoanId(this.state.loanUuid);
             Post(`/api/order/v1/orderList.json`, {
             page: this.state.curPage,
             pageSize: 10,
             loanStatus: 2
         }).then(data => {
-            this.setState({ resultList:  data.resultList })
+            this.setState({ resultList:  data.resultList });
+            repayment_youyi.setLoanId(this.state.loanUuid);
+            console.log(111);
+            console.log(this.state.loanUuid);
+            console.log(222);
         })
 
         }
