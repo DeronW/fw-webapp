@@ -53,6 +53,13 @@ export default class LoopLoanLoan extends React.Component {
         this.setState({mask3Show:false})
     }
 
+    overdueShowHandler = () => {
+        this.setState({mask2Show:true})
+    }
+
+    overdueHideHandler = () => {
+        this.setState({mask2Show:false})
+    }
 
     confirmHandler = () => {
         if(!this.state.checked){
@@ -88,6 +95,9 @@ export default class LoopLoanLoan extends React.Component {
                         <div styleName="loan-info-title">总利息<span styleName="tip" onClick={this.detailShowHandler}></span></div>
                         <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput ? loopLoan.totalFeeAmount : 0}</div>
                     </div>
+                    <div styleName="overdue-tip">
+                        请按时还款，避免<span styleName="overdue-btn" onClick={this.overdueShowHandler}>逾期费用</span>
+                    </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">打款至</div>
                         <div styleName="loan-bank-info">中国银行(2333)<span styleName="arrow"></span></div>
@@ -113,11 +123,11 @@ export default class LoopLoanLoan extends React.Component {
                 </div>}
                 {this.state.mask2Show && <div styleName="mask2">
                     <div styleName="notice-pop">
-                        <div styleName="notice-close"></div>
+                        <div styleName="notice-close" onClick={this.overdueHideHandler}></div>
                         <div styleName="notice-title">逾期费用说明</div>
                         <div styleName="close-icon"></div>
                         <div styleName="notice-content"></div>
-                        <div styleName="notice-btn">知道了</div>
+                        <div styleName="notice-btn" onClick={this.overdueHideHandler}>知道了</div>
                     </div>
                 </div>}
                 {this.state.mask3Show && <div styleName="mask3">
