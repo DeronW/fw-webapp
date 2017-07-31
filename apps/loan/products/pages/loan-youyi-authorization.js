@@ -24,7 +24,7 @@ export default class LoopLoanAuthorization extends React.Component {
     }
     confirmHandler = () => {
         let {history} = this.props;
-        Browser.inFXHApp ? NativeBridge.close() : history.push('/')
+        Browser.inFXHApp ? NativeBridge.toNative('home') : history.push('/')
     }
     render(){
         let { history, loopLoan } = this.props;
