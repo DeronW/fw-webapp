@@ -2,13 +2,14 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 
-import { Utils } from 'fw-javascripts'
+import { Utils, Components } from 'fw-javascripts'
 
 import { Header } from '../../lib/components'
 
 import styles from '../css/repayment-youyi.css'
 
-@inject('repayment_youyi', 'bank_card')
+
+@inject('repayment_youyi')
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class Repayment extends React.Component {
@@ -35,10 +36,22 @@ class Repayment extends React.Component {
         repayment_youyi.setAmount(v);
     }
 
+    handleSubmit = () => {
+        let { repayment_youyi, history } = this.props,
+            repaymentAmount = repayment_youyi.repaymentAmount,
+            unpaidAmount = repayment_youyi.unpaidAmount;
+        if (repaymentAmount === '') return Components.showToast('请输入还款金额')
+        if (repaymentAmount < 100) return Components.showToast('还款金额不能小于100')
+        if (unpaidAmount - repaymentAmount < 100 && unpaidAmount - repaymentAmount > 0) return Components.showToast('剩余金额不能小于100')
+
+        if (unpaidAmount - repaymentAmount < 0) repayment_youyi.setAmount(unpaidAmount);
+    }
+
     render() {
         let { history, repayment_youyi } = this.props,
             { amountEditDisabled } = this.state,
             amountEditItem;
+
         if (amountEditDisabled) {
             amountEditItem = <div styleName="info-item">
                 <div styleName="item-name">还款金额</div>
@@ -55,6 +68,7 @@ class Repayment extends React.Component {
                     onClick={() => { repayment_youyi.setAmount(repayment_youyi.unpaidAmount)} }>全部还清</div>
             </div>
         }
+
         return (
             <div styleName="cnt-container">
 
@@ -100,7 +114,7 @@ class Repayment extends React.Component {
 
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn"
-                        onClick={() => {  }}>
+                        onClick={this.handleSubmit}>
                         立即还款
                     </a>
                 </div>
