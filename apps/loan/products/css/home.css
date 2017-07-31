@@ -160,7 +160,7 @@
 }
 
 .enable-youyi .text-a {
-    margin-top: 560px;
+    margin-top: 525px;
     color: #fe5756;
     font-size: 50px;
 }
@@ -169,6 +169,7 @@
     margin-top: 20px;
     font-size: 30px;
     color: #666666;
+    line-height: 52px;
 }
 
 .enable-youyi .btn-close {
