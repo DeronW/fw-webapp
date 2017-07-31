@@ -16,7 +16,12 @@ export default class LoopLoan {
             url:'',
             cardList:[],
             zmScore:'',
-            authFail:false
+            authFail:false,
+            accountInAmount:'',
+            shouldRepaymentAmount:'',
+            totalFeeAmount:'',
+            loanUuid:'',
+            feeAmoutExts:[]
         })
     }
 
@@ -69,5 +74,28 @@ export default class LoopLoan {
             this.authFail = true
         });
     }
+
+   loan_calculate = (value) => {
+        this.Post('/api/looploan/loan/v1/tryLoanBudget.json',{
+            loanAmt:value,
+            productUuid:this.productUuid
+        }).then((data)=>{
+            this.accountInAmount = data.accountInAmount;
+            this.shouldRepaymentAmount = data.shouldRepaymentAmount;
+            this.totalFeeAmount = this.totalFeeAmount;
+            this.feeAmoutExts = data.feeAmoutExts;
+        });
+   }
+
+   loan_confirm = (value) => {
+        this.Post('/api/looploan/loan/v1/apply.json',{
+            loanAmt:value,
+            productUuid:this.productUuid
+        }).then((data)=>{
+            this.loanUuid = data.loanUuid
+        })
+   }
+
+
 
 }
