@@ -46,7 +46,6 @@
     background: #eeeeee;
 }
 
-
 .product-logo {
     position: absolute;
     top: 35px;
@@ -147,4 +146,36 @@
     font-size: 22px;
     color: #999;
     line-height: 30px;
+}
+
+.enable-youyi {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4) url("../images/home/bingo-bg.png") no-repeat center 30%;
+}
+
+.enable-youyi .text-a {
+    margin-top: 560px;
+    color: #fe5756;
+    font-size: 50px;
+}
+
+.enable-youyi .text-b {
+    margin-top: 20px;
+    font-size: 30px;
+    color: #666666;
+}
+
+.enable-youyi .btn-close {
+    display: block;
+    left: 50%;
+    width: 58px;
+    height: 58px;
+    margin: 150px auto 0;
+    background: transparent url("../images/home/bingo-close.png") no-repeat center;
 }
