@@ -7,6 +7,10 @@ input{
     outline:none;
     border:none;
 }
+.input-num::-webkit-input-placeholder{
+    font-size: 30px;
+    color:#999;
+}
 .cnt-container {
     background-color: #f0f0f0;
     min-height: 100%;
@@ -49,6 +53,17 @@ input{
     position:relative;
 }
 .loan-info-right{
+    font-size:30px;
+    float:right;
+    margin-right:30px;
+}
+.has-input{
+    color:#000;
+}
+.has-not-input{
+    color:#999;
+}
+.loan-bank-info{
     font-size:30px;
     color:#000;
     float:right;
@@ -117,9 +132,14 @@ input{
     text-align:center;
     font-size:34px;
     color:#fff;
-    background:#556bb8;
     border-radius:4px;
     margin:22px auto;
+}
+.gray{
+    background:#ccc;
+}
+.purple{
+    background:#556bb8;
 }
 .btn-tip{
     font-size:24px;
@@ -134,7 +154,6 @@ input{
     top:0;
     left:0;
     background:rgba(0,0,0,.7);
-    display:none;
 }
 .mask2{
     width:100%;
@@ -143,7 +162,6 @@ input{
     top:0;
     left:0;
     background:rgba(0,0,0,.7);
-    display:none;
 }
 .mask3{
     width:100%;
@@ -152,7 +170,6 @@ input{
     top:0;
     left:0;
     background:rgba(0,0,0,.7);
-    display:none;
 }
 .popup{
     position:absolute;
