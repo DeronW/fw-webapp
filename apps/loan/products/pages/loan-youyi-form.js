@@ -119,15 +119,15 @@ export default class LoopLoanLoan extends React.Component {
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">到账金额</div>
-                        <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput ? loopLoan.accountInAmount : 0 }</div>
+                        <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput && this.state.value >= 500 ? loopLoan.accountInAmount : 0 }</div>
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">应还金额</div>
-                        <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput ? loopLoan.shouldRepaymentAmount : 0}</div>
+                        <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput && this.state.value >= 500 ? loopLoan.shouldRepaymentAmount : 0}</div>
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">总利息<span styleName="tip" onClick={this.detailShowHandler}></span></div>
-                        <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput ? loopLoan.totalFeeAmount : 0}</div>
+                        <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput && this.state.value >= 500 ? loopLoan.totalFeeAmount : 0}</div>
                     </div>
                     <div styleName="overdue-tip">
                         请按时还款，避免<span styleName="overdue-btn" onClick={this.overdueShowHandler}>逾期费用</span>
