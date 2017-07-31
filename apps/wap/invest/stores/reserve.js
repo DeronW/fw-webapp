@@ -19,12 +19,13 @@ export default class Reserve {
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
             batchMaxmum: 0,//批量投资限额
             reserveMoney: '',//用户输入的预约金额
-            isChecked: true
+            isChecked: true,
+            applyInvestClaimId: Utils.hashQuery.applyInvestClaimId
         })
     }
 
     getDataHandler = () => {
-        this.Post('/api/v1/intoAppointPage.shtml', {applyInvestClaimId: Utils.hashQuery.applyInvestClaimId})
+        this.Post('/api/v1/intoAppointPage.shtml', {applyInvestClaimId: this.applyInvestClaimId})
             .then(data => {
                 console.log(data)
                 this.context = data.appointClaim;
@@ -39,7 +40,7 @@ export default class Reserve {
     getReserveList = (done, reset) => {
         if (reset) {
             this.records_page_no = 1
-            this.records=[]
+            this.records = []
         }
         console.log(this.records_page_no)
         if (this.records_page_no === 0) return done && done();
