@@ -21,12 +21,21 @@ export default class RepaymentList {
         this.userGid = USER.gid;
 
 
-        this.Post(`/api/order/v1/orderList.json`, {
-            // loopLoanUuid: this.loopLoanUuid,
+        // this.Post(`/api/order/v1/orderList.json`, {
+        //     // loopLoanUuid: this.loopLoanUuid,
+        //     page: this.page,
+        //     pageSize: 10,
+        //     uid: this.uid,
+        //     userGid: this.userGid,
+
+        // }).then(data => {
+        //     this.resultList = data.resultList
+        // })
+
+        this.Post(`/api/looploan/repayment/v1/repaymentRecordList.json`, {
+            loopLoanUuid: this.loopLoanUuid,
             page: this.page,
-            pageSize: 10,
-            uid: this.uid,
-            userGid: this.userGid,
+            pageSize: 10
 
         }).then(data => {
             this.resultList = data.resultList
