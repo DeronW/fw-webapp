@@ -54,7 +54,6 @@ class JulyMobile extends React.Component {
                                          closePopHandler={this.props.closePopHandler}
                                          isLogin={this.state.isLogin}/>, document.getElementById("pop"))
     }
-
     login = () => {
         gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
