@@ -31,9 +31,6 @@ export default class RepaymentRecords extends React.Component {
         }).then(data => {
             this.setState({ resultList:  data.resultList });
             repayment_youyi.setLoanId(this.state.loanUuid);
-            console.log(111);
-            console.log(this.state.loanUuid);
-            console.log(222);
         })
 
         }
@@ -41,6 +38,7 @@ export default class RepaymentRecords extends React.Component {
             let {repayment_list,history} = this.props;
             let {loanUuid, productId} = this.state;
             // 根据返回的productId跳转到不同的还款页面
+            console.log(productId);
             productId == '1' && (location.href = `/static/loan/repayment-record/index.html`);
             productId == '21' && history.push('/repayment-youyi');
             productId == '11' && history.push('/repayment-youyi');
