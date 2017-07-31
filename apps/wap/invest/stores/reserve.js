@@ -15,26 +15,32 @@ export default class Reserve {
             },
             records: [],//记录的列表
             records_page_no: 1,
-            accountAmount: 88888,//可用余额
+            accountAmount: -1,//可用余额
             isRisk: 0,//是不是进行风险评估：0-为评估 1-已评估
             batchMaxmum: 0,//批量投资限额
             reserveMoney: '',//用户输入的预约金额
             isChecked: true,
-            applyInvestClaimId: Utils.hashQuery.applyInvestClaimId
+            applyInvestClaimId: ''
         })
     }
 
-    getDataHandler = () => {
-        this.Post('/api/v1/intoAppointPage.shtml', {applyInvestClaimId: this.applyInvestClaimId})
-            .then(data => {
-                console.log(data)
-                this.context = data.appointClaim;
-                this.accountAmount = data.accountAmount;
-                this.isRisk = data.isRisk;
-                this.batchMaxmum = data.batchMaxmum
-                this.minAmt = data.appointClaim.minAmt
-                this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-            })
+    getApplyInvestClaimId = () => {
+        let id = Utils.hashQuery.applyInvestClaimId
+        if (id) this.applyInvestClaimId = id
+        return this.applyInvestClaimId
+    }
+
+    fetchProduct = () => {
+        this.Post('/api/v1/intoAppointPage.shtml', {
+            applyInvestClaimId: this.getApplyInvestClaimId()
+        }).then(data => {
+            this.context = data.appointClaim;
+            this.accountAmount = data.accountAmount;
+            this.isRisk = data.isRisk;
+            this.batchMaxmum = data.batchMaxmum
+            this.minAmt = data.appointClaim.minAmt
+            this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
+        })
     }
 
     getReserveList = (done, reset) => {
