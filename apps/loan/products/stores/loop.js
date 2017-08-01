@@ -24,7 +24,8 @@ export default class LoopLoan {
             loanUuid:'',
             feeAmoutExts:[],
             bankName:'',
-            bankCardNo:''
+            bankCardNo:'',
+            latedescription:''
         })
     }
 
@@ -45,6 +46,10 @@ export default class LoopLoan {
             return this.Post('/api/zhima/v1/credit/auth.json');
         }).then((data)=>{
             this.url = data.url
+        }).then(()=>{
+            return this.Post('/api/looploan/repayment/v1/lateDescription.json');
+        }).then((data)=>{
+            this.latedescription = data.latedescription
         });
     }
 
