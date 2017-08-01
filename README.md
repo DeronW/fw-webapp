@@ -138,7 +138,6 @@ wap站：npm run gulp wap是扥:[文件名]:watch
 
 ## 项目目录结果说明
 - apps
-- lib
 - public
 - scripts
     - clean.js 清除上次编译结果文件
