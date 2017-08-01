@@ -160,12 +160,14 @@ export default class LoopLoanLoan extends React.Component {
     }
 
     loanConfirmHandler = () => {
-        this.props.loopLoan.check_loanStatus(this.state.smsValue).then(() => {
-            this.props.history.push('/loan-youyi-result')
-        }, (e) => {
-            this.setState({mask3Show:false});
-            Components.showToast(e.message)
-        });
+        if(this.state.smsValue.length>=4){
+            this.props.loopLoan.check_loanStatus(this.state.smsValue).then(() => {
+                this.props.history.push('/loan-youyi-result')
+            }, (e) => {
+                this.setState({mask3Show:false});
+                Components.showToast(e.message)
+            });
+        }
     }
 
     render() {
