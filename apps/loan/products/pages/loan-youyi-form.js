@@ -37,6 +37,9 @@ export default class LoopLoanLoan extends React.Component {
             if(v>loopLoan.canBorrowAmt){
                 this.setState({value:loopLoan.canBorrowAmt})
                 this.props.loopLoan.loan_calculate(this.state.value);
+            }else if(v < loopLoan.minLoanAmt){
+                this.setState({value:loopLoan.minLoanAmt})
+                this.props.loopLoan.loan_calculate(this.state.value);
             }else if(parseInt(v) >= loopLoan.minLoanAmt && parseInt(v) <= loopLoan.canBorrowAmt){
                 this.props.loopLoan.loan_calculate(v);
             }
@@ -159,7 +162,7 @@ export default class LoopLoanLoan extends React.Component {
                 </div>
                 <div styleName="btn-container">
                     <div styleName="btn-tip">可提前还款或部分还款，免手续费</div>
-                    <div styleName={this.state.value >= loopLoan.minLoanAmt && this.state.checked ? "btn purple" : "btn gray"} onClick={this.confirmHandler}>确定</div>
+                    <div styleName={this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt && this.state.checked ? "btn purple" : "btn gray"} onClick={this.confirmHandler}>确定</div>
                 </div>
                 {this.state.mask1Show && <div styleName="mask1">
                     <div styleName="detail-pop">
