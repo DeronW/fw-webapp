@@ -25,7 +25,8 @@ export default class LoopLoan {
             feeAmoutExts:[],
             bankName:'',
             bankCardNo:'',
-            latedescription:''
+            latedescription:'',
+            loanStatus:''
         })
     }
 
@@ -123,6 +124,15 @@ export default class LoopLoan {
         this.Post('/api/looploan/loan/v1/resendverifycode.json',{
             loanUuid:this.loanUuid
         }).then();
+    }
+
+    check_loanStatus = (value) => {
+        this.Post('/api/looploan/loan/v1/do.json',{
+            loanUuid:this.loanUuid,
+            verifycode:value
+        }).then((data)=>{
+            this.loanStatus = data.loanStatus;
+        });
     }
 
 }

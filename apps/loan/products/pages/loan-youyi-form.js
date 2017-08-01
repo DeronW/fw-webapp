@@ -105,6 +105,14 @@ export default class LoopLoanLoan extends React.Component {
         }
     }
 
+    loanConfirmHandler = () => {
+        this.props.loopLoan.check_loanStatus(this.state.smsValue).then(()=>{
+            this.props.history.push('/loan-youyi-result')
+        },(e)=>{
+            Components.showToast(e.message)
+        });
+    }
+
     render(){
         let { history, loopLoan } = this.props;
         let USER = Storage.getUserDict();
@@ -185,7 +193,7 @@ export default class LoopLoanLoan extends React.Component {
                                     <span styleName="btn-countdown" onClick={this.getSMSCode}>
                                 {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                                 </div>
-                                 <div styleName={this.state.smsValue ? "confirm-btn blue" : "confirm-btn gray"}>确定</div>
+                                 <div styleName={this.state.smsValue ? "confirm-btn blue" : "confirm-btn gray"} onClick={this.loanConfirmHandler}>确定</div>
                         </div>
                     </div>
                 </div>}
