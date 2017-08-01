@@ -215,7 +215,7 @@ class Evaluate extends React.Component {
         let form_data = {}, {selected} = this.state, err;
         Object.assign(form_data, selected)
         for (let i in form_data) {
-            if (Object.keys(form_data).length < 10) err = true;
+            if (Object.keys(form_data).length < QUESTIONS.length) err = true;
             form_data[i] = ['A', 'B', 'C', 'D', 'E'][form_data[i]]
         }
         err ?
