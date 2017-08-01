@@ -76,6 +76,10 @@ export default class LoopLoanLoan extends React.Component {
 
     }
 
+    smsValueHandler = (e) => {
+        this.setState({smsValue:e.target.value})
+    }
+
     checkHandler = () => {
         this.setState({checked: !this.state.checked})
     }
@@ -143,6 +147,7 @@ export default class LoopLoanLoan extends React.Component {
         this.props.loopLoan.check_loanStatus(this.state.smsValue).then(() => {
             this.props.history.push('/loan-youyi-result')
         }, (e) => {
+            this.setState({mask3Show:false});
             Components.showToast(e.message)
         });
     }
@@ -235,11 +240,11 @@ export default class LoopLoanLoan extends React.Component {
                             </div>
                             <div styleName="verify-input">
                                 <input styleName="sms-input" type="number" name="number"
-                                       value={this.state.smsValue} placeholder="输入验证码"/>
+                                       value={this.state.smsValue} placeholder="输入验证码" onChange={this.smsValueHandler}/>
                                 <span styleName="btn-countdown" onClick={this.getSMSCode}>
                                 {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                             </div>
-                            <div styleName={this.state.smsValue ? "confirm-btn blue" : "confirm-btn gray"}
+                            <div styleName={this.state.smsValue.length >=4 ? "confirm-btn blue" : "confirm-btn gray"}
                                  onClick={this.loanConfirmHandler}>确定
                             </div>
                         </div>

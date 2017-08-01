@@ -127,7 +127,7 @@ export default class LoopLoan {
     }
 
     check_loanStatus = (value) => {
-        this.Post('/api/looploan/loan/v1/do.json',{
+        return this.Post('/api/looploan/loan/v1/do.json',{
             loanUuid:this.loanUuid,
             verifycode:value
         }).then((data)=>{
