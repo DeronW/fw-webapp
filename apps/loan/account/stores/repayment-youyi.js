@@ -15,7 +15,9 @@ export default class RepaymentYouyi {
             bank: '', // 银行名称
             cardNo: '', // 银行卡号后四位
             repaymentAmount: '', // 还款金额
-            protocolChecked: true // 是否同意协议
+            protocolChecked: true, // 是否同意协议
+            repaymentResult: '', // 'fail', 'success', 'waiting'
+            leftAmount: '' // 还款成功后仍剩余金额
         })
     }
 
@@ -63,6 +65,23 @@ export default class RepaymentYouyi {
             setTimeout(() => {
                 history.push('/repayment-result')
             }, 1700)
+        })
+    }
+
+    fetchRepaymentResult = () => {
+        this.Post('/api/looploan/repayment/v1/repaymentStatus.json', {
+            repaymentUuid: this.repaymentUuid
+        }).then(data => {
+            let { loanLeftAmount, repaymentAmount, status } = data;
+            this.leftAmount = loanLeftAmount;
+            this.repaymentAmount = repaymentAmount;
+            if (status == 0) {
+                this.repaymentResult = 'waiting'
+            } else if (status == 1) {
+                this.repaymentResult = 'success'
+            } else if (status == 2) {
+                this.repaymentResult = 'fail'
+            }
         })
     }
 
