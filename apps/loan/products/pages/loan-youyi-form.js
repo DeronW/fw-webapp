@@ -156,6 +156,8 @@ export default class LoopLoanLoan extends React.Component {
             )
         };
 
+        let validate_term = this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt;
+
         return (
             <div styleName="cnt-container">
                 <Header title="借钱" history={history} enable={'force'}/>
@@ -168,18 +170,18 @@ export default class LoopLoanLoan extends React.Component {
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">到账金额</div>
                         <div
-                            styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.accountInAmount : 0 }</div>
+                            styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.accountInAmount : 0 }</div>
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">应还金额</div>
                         <div
-                            styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.shouldRepaymentAmount : 0}</div>
+                            styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.shouldRepaymentAmount : 0}</div>
                     </div>
                     <div styleName="loan-info-item">
-                        <div styleName="loan-info-title">总利息{this.state.value >= loopLoan.minLoanAmt &&
+                        <div styleName="loan-info-title">总利息{validate_term &&
                         <span styleName="tip" onClick={this.detailShowHandler}></span>}</div>
                         <div
-                            styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.totalFeeAmount : 0}</div>
+                            styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.totalFeeAmount : 0}</div>
                     </div>
                     <div styleName="overdue-tip">
                         请按时还款，避免<span styleName="overdue-btn" onClick={this.overdueShowHandler}>逾期费用</span>
@@ -200,7 +202,7 @@ export default class LoopLoanLoan extends React.Component {
                 <div styleName="btn-container">
                     <div styleName="btn-tip">可提前还款或部分还款，免手续费</div>
                     <div
-                        styleName={this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt && this.state.checked ? "btn purple" : "btn gray"}
+                        styleName={validate_term && this.state.checked ? "btn purple" : "btn gray"}
                         onClick={this.confirmHandler}>确定
                     </div>
                 </div>
