@@ -7,7 +7,6 @@ import Stores from './stores'
 import { Post } from '../lib/helpers'
 
 let stores = {
-    home: new Stores.Home(Post),
     mortgage: new Stores.Mortgage(Post),
     loopLoan: new Stores.LoopLoan(Post),
 }
