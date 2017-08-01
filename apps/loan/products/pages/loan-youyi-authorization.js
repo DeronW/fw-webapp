@@ -23,7 +23,7 @@ export default class LoopLoanAuthorization extends React.Component {
         this.props.loopLoan.zima_callback(this.state.params,this.state.sign);
     }
     confirmHandler = () => {
-        Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/'
+        Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/loan-youyi-index'
     }
     render(){
         let { history, loopLoan } = this.props;
