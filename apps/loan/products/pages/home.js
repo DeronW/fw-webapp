@@ -7,24 +7,13 @@ import { BottomNavBar, showBulletin } from '../../lib/components'
 
 import styles from '../css/home.css'
 
-// function gotoHandler(link, toNative) {
-//     if (Browser.inFXHApp) return NativeBridge.toNative(toNative);
-//
-//     if (link.indexOf('://') < 0)
-//         link = location.protocol + '//' + location.hostname + link;
-// }
+function gotoHandler(link, toNative) {
+    if (Browser.inFXHApp) return NativeBridge.toNative(toNative);
 
-function gotoHandler(link, need_login, next_title, special_webview) {
-    if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    if (Browser.inFXHApp) {
-        NativeBridge.goto(link, need_login, next_title, special_webview);
-    } else {
-        location.href = link;
-    }
+    if (link.indexOf('://') < 0)
+        link = location.protocol + '//' + location.hostname + link;
 }
 
-
-@inject('home')
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class Home extends React.Component {
@@ -71,7 +60,7 @@ class Home extends React.Component {
 
         let product = (props, index) => {
             let clichHandler = () => {
-                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index', false, "优易借", true);
+                if (props.productId == 11) gotoHandler('/static/loan/products/index.html#/loan-youyi-index');
                 if (props.productId == 1) Browser.inFXHApp ? NativeBridge.toNative("fxh_detail") : location.href = '/static/loan/fxh/index.html';
                 if (props.productId == 21) gotoHandler('/static/loan/dumiao/index.html?pid=21')
             }
