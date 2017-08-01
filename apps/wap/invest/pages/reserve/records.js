@@ -54,7 +54,6 @@ class ReserveRecords extends React.Component {
             } else if (item.status == 1) {
                 status = '预约结束 '
             } else if (item.status == 2) {
-                console.log("item.status" + item.status)
                 status = '已取消'
             }
             let cancelstyle = item.status == 2 ? styles['cancelstyle'] : styles['reserveItem']
