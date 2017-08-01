@@ -35,7 +35,7 @@ class BottomNavBar extends React.Component {
             if (tab === 'home' &&
                 (pt === '/' || pt == '/static/loan/products/' || pt == '/static/loan/products/index.html'))
                 cnd = true;
-            if(tab === 'payback' && (pt == '/static/loan/account/') )
+            if(tab === 'payback' && (pt == '/static/loan/account/' || pt == '/static/loan/account/index.html') )
             cnd = true;
             return pt.match(`/static/loan/${tab}`) || cnd
         }
