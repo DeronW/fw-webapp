@@ -129,7 +129,7 @@ export default class LoopLoanLoan extends React.Component {
                         <div styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.shouldRepaymentAmount : 0}</div>
                     </div>
                     <div styleName="loan-info-item">
-                        <div styleName="loan-info-title">总利息<span styleName="tip" onClick={this.detailShowHandler}></span></div>
+                        <div styleName="loan-info-title">总利息{this.state.value >= loopLoan.minLoanAmt && <span styleName="tip" onClick={this.detailShowHandler}></span>}</div>
                         <div styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.totalFeeAmount : 0}</div>
                     </div>
                     <div styleName="overdue-tip">
