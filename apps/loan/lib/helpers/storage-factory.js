@@ -77,10 +77,18 @@ class StorageFactory {
         dict.phone && this.set('phone', dict.phone);
     }
 
-    isBulletinRead = cnt => {
-        let k = '_$_bulletin', read = this.get(k)
+    isContentNotRead = (key, cnt = 'placeholder') => {
+        let k = `_$_cnt_${key}`, read_over = this.get(k)
         this.set(k, cnt)
-        return read
+        return !read_over
+    }
+
+    setStoreData = (pathname, data) => {
+
+    }
+
+    getStoreData = pathname => {
+        return {}
     }
 }
 

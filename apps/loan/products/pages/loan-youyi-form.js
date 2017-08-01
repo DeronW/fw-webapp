@@ -14,16 +14,19 @@ export default class LoopLoanLoan extends React.Component {
         super(props)
         this.state = {
             value : "",
-            hasInput:false,
+            smsValue:"",
             checked:true,
             mask1Show:false,
             mask2Show:false,
-            mask3Show:false
+            mask3Show:false,
+            remain: 0
         }
     }
 
     componentDidMount(){
         document.title = '借钱';
+        this.props.loopLoan.check_cardinfo();
+        this.props.loopLoan.get_baseinfo();
     }
 
     changeHandler = (e) => {
@@ -31,7 +34,7 @@ export default class LoopLoanLoan extends React.Component {
         let v = e.target.value;
         if(v.length <= 5){
             this.setState({value:v, hasInput:true})
-            if(parseInt(v) >= 500 && parseInt(v) <= loopLoan.canBorrowAmt){
+            if(parseInt(v) >= loopLoan.minLoanAmt && parseInt(v) <= loopLoan.canBorrowAmt){
                 this.props.loopLoan.loan_calculate(v);
             }
         }
@@ -53,6 +56,35 @@ export default class LoopLoanLoan extends React.Component {
         this.setState({mask3Show:false})
     }
 
+    overdueShowHandler = () => {
+        this.setState({mask2Show:true})
+    }
+
+    overdueHideHandler = () => {
+        this.setState({mask2Show:false})
+    }
+
+    countingDown = () => {
+        if (this.state.remain <= 1) window.clearInterval(this._timer);
+        this.setState({remain: this.state.remain - 1});
+    }
+
+    tick = () => {
+        this.setState({remain: 60});
+        window.clearInterval(this._timer);
+        this._timer = setInterval(this.countingDown, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this._timer);
+    }
+
+    getSMSCode = () => {
+        if (this.state.remain <= 0) {
+            this.tick();
+            this.props.loopLoan.regetSMSCode();
+        }
+    }
 
     confirmHandler = () => {
         if(!this.state.checked){
@@ -61,13 +93,21 @@ export default class LoopLoanLoan extends React.Component {
             Components.showToast("请输入借款金额")
         }else{
             this.props.loopLoan.loan_confirm(this.state.value);
-            this.setState({mask3Show:true})
+            this.setState({mask3Show:true});
+            this.tick();
         }
     }
 
     render(){
         let { history, loopLoan } = this.props;
         let USER = Storage.getUserDict();
+        let item_list = (item, index) => {
+            return (
+                <div styleName="item-list" key={index}><span styleName="item-left">{item.feeName}</span><span
+                    styleName="item-right">{item.feeAmout}元</span></div>
+            )
+        };
+
         return (
             <div styleName="cnt-container">
                 <Header title="借钱" history={history} />
@@ -78,19 +118,22 @@ export default class LoopLoanLoan extends React.Component {
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">到账金额</div>
-                        <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput ? loopLoan.accountInAmount : 0 }</div>
+                        <div styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.accountInAmount : 0 }</div>
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">应还金额</div>
-                        <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput ? loopLoan.shouldRepaymentAmount : 0}</div>
+                        <div styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.shouldRepaymentAmount : 0}</div>
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">总利息<span styleName="tip" onClick={this.detailShowHandler}></span></div>
-                        <div styleName={this.state.hasInput? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.hasInput ? loopLoan.totalFeeAmount : 0}</div>
+                        <div styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.totalFeeAmount : 0}</div>
+                    </div>
+                    <div styleName="overdue-tip">
+                        请按时还款，避免<span styleName="overdue-btn" onClick={this.overdueShowHandler}>逾期费用</span>
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">打款至</div>
-                        <div styleName="loan-bank-info">中国银行(2333)<span styleName="arrow"></span></div>
+                        <div styleName="loan-bank-info">{loopLoan.bankName}({loopLoan.bankCardNo.slice(-4)})<span styleName="arrow"></span></div>
                     </div>
                 </div>
                 <div styleName="agreement-issue">
@@ -101,23 +144,24 @@ export default class LoopLoanLoan extends React.Component {
                 </div>
                 <div styleName="btn-container">
                     <div styleName="btn-tip">可提前还款或部分还款，免手续费</div>
-                    <div styleName={this.state.hasInput && this.state.checked ? "btn purple" : "btn gray"} onClick={this.confirmHandler}>确定</div>
+                    <div styleName={this.state.value && this.state.checked ? "btn purple" : "btn gray"} onClick={this.confirmHandler}>确定</div>
                 </div>
                 {this.state.mask1Show && <div styleName="mask1">
                     <div styleName="detail-pop">
-                        <div styleName="close-icon"></div>
+                        <div styleName="close-icon" onClick={this.detailHideHandler}></div>
                         <div styleName="item-title">借款费用详情</div>
-                        <div styleName="item-wrap"></div>
+                        <div styleName="item-wrap">
+                            {loopLoan.feeAmoutExts.map(item_list)}
+                        </div>
                         <div styleName="know-btn" onClick={this.detailHideHandler}>知道了</div>
                     </div>
                 </div>}
                 {this.state.mask2Show && <div styleName="mask2">
                     <div styleName="notice-pop">
-                        <div styleName="notice-close"></div>
                         <div styleName="notice-title">逾期费用说明</div>
-                        <div styleName="close-icon"></div>
+                        <div styleName="close-icon" onClick={this.overdueHideHandler}></div>
                         <div styleName="notice-content"></div>
-                        <div styleName="notice-btn">知道了</div>
+                        <div styleName="notice-btn" onClick={this.overdueHideHandler}>知道了</div>
                     </div>
                 </div>}
                 {this.state.mask3Show && <div styleName="mask3">
@@ -130,10 +174,11 @@ export default class LoopLoanLoan extends React.Component {
                                 </div>
                                 <div styleName="verify-input">
                                     <input styleName="sms-input" type="number" name="number"
-                                           value="" placeholder="输入验证码"/>
-                                    <span styleName="btn-countdown"></span>
+                                           value={this.state.smsValue} placeholder="输入验证码"/>
+                                    <span styleName="btn-countdown" onClick={this.getSMSCode}>
+                                {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
                                 </div>
-                                 <div styleName="confirm-btn">确定</div>
+                                 <div styleName={this.state.smsValue ? "confirm-btn blue" : "confirm-btn gray"}>确定</div>
                         </div>
                     </div>
                 </div>}

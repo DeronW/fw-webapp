@@ -21,7 +21,9 @@ export default class LoopLoan {
             shouldRepaymentAmount:'',
             totalFeeAmount:'',
             loanUuid:'',
-            feeAmoutExts:[]
+            feeAmoutExts:[],
+            bankName:'',
+            bankCardNo:''
         })
     }
 
@@ -43,10 +45,10 @@ export default class LoopLoan {
         });
     }
 
-    @computed get loopLoan_card() {
-        let filtered = this.cardList.filter(e => e.authPlatform == 2)
-        return filtered;
-    }
+    // @computed get loopLoan_card() {
+    //     let filtered = this.cardList.filter(e => e.authPlatform == 2)
+    //     return filtered;
+    // }
 
     get_cardlist = () => {
         this.Post('/api/bankcard/v1/bankcardlist.json').then((data)=>{
@@ -96,6 +98,17 @@ export default class LoopLoan {
         })
    }
 
+   check_cardinfo = () => {
+        this.Post('/api/looploan/bankcard/v1/cardInfo.json').then((data)=>{
+            this.bankName = data.cardInfo.bankName;
+            this.bankCardNo = data.cardInfo.bankCardNo;
+        })
+   }
 
+    regetSMSCode = () => {
+        this.Post('/api/looploan/loan/v1/resendverifycode.json',{
+            loanUuid:this.loanUuid
+        }).then();
+    }
 
 }

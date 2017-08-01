@@ -47,14 +47,15 @@ class Home extends React.Component {
                 if (data.gradeType == 1) return showBulletin(data.noticeContent)
                 // 弱类型公告
                 if (data.gradeType == 2) {
-                    if (Storage.isBulletinRead(data.noticeContent))
+                    if (Storage.isContentNotRead('BULLETIN', data.noticeContent))
                         return txt && showBulletin(data.noticeContent)
                 }
             }, e => new Promise((resolve, _) => resolve()))
-            .then(() => {
-                // here is show USER match YouYiJie or not
-            }).then(data => {
-                this.setState({ enable_youyi: true })
+            .then(data => {
+                // 用户是否为白名单用户, 看产品列表有没有优易借的产品
+                let has_youyi = this.state.products.filter(p => p.productId == 11)
+                if (has_youyi && Storage.isContentNotRead('YOUYI_WELCOME'))
+                    this.setState({ enable_youyi: true })
             })
     }
 
@@ -139,7 +140,7 @@ class Home extends React.Component {
                     () => this.setState({ enable_youyi: false })}></a>
             </div>}
 
-            <BottomNavBar />
+            {!Browser.inFXHApp && <BottomNavBar />}
         </div>
     }
 }
