@@ -48,7 +48,6 @@ export default class Reserve {
             this.records_page_no = 1
             this.records = []
         }
-        console.log(this.records_page_no)
         if (this.records_page_no === 0) return done && done();
 
         const PAGE_SIZE = 10
