@@ -92,9 +92,13 @@ export default class LoopLoanLoan extends React.Component {
         }else if(this.state.value == ''){
             Components.showToast("请输入借款金额")
         }else{
-            this.props.loopLoan.loan_confirm(this.state.value);
-            this.setState({mask3Show:true});
-            this.tick();
+            this.props.loopLoan.loan_confirm(this.state.value).then(()=>{
+                this.setState({mask3Show:true});
+                this.tick();
+            },e=>{
+                window.clearInterval(this._timer);
+            });
+
         }
     }
 
