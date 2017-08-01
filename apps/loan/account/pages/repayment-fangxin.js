@@ -65,19 +65,18 @@ class RepaymentFangXin extends React.Component {
     changeValueHandler = e => {
         this.setState({ code: e.target.value });
     }
+    
     countingDown = () => {
         if (this.state.remain <= 1) window.clearInterval(this._timer);
         this.setState({ remain: this.state.remain - 1 });
     }
-    tick = () => {
-        this.setState({ remain: 60 });
-        window.clearInterval(this._timer);
-        this._timer = setInterval(this.countingDown, 1000);
-    }
+
     getSMSCode = () => {
         let { repayment_fangxin } = this.props;
         if (this.state.remain <= 0) {
-            this.tick();
+            this.setState({ remain: 60 });
+            window.clearInterval(this._timer);
+            this._timer = setInterval(this.countingDown, 1000);
             repayment_fangxin.resendverifycode().then((data) => {
                 Components.showToast(data.retCode == 1 ?'发送成功':"发送失败")
             }, e => Components.Toast(e.message));
@@ -166,7 +165,8 @@ class RepaymentFangXin extends React.Component {
                     <div styleName="amountItem">
                         <div styleName="itemName">还款金额</div>
                         <div styleName="itemAlready">{repayment_fangxin.loanLeftAmount}</div>
-                    </div> : <div styleName="amountItem">
+                    </div> : 
+                    <div styleName="amountItem">
                         <input styleName="itemInput" type="number" placeholder="输入还款金额" value={repayment_fangxin.inputAmount} onChange={this.inputAmountHandler()} />
                         <div styleName="itemAll" onClick={this.allAmountHandler(repayment_fangxin.loanLeftAmount)}>全部还清</div>
                     </div>
