@@ -39,7 +39,7 @@ export default class RepaymentRecords extends React.Component {
             repayment_youyi.setLoanId(uuid);
             repayment_fangxin.setLoanId(uuid);
             productId == '1' && history.push('/repayment-fangxin');
-            productId == '21' && history.push('/repayment-fenqi');
+            productId == '21' && history.push('/repayment-fenqi',{query: { loanUuid: uuid}});
             productId == '11' && history.push('/repayment-youyi');
         }
     render(){
