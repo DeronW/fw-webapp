@@ -33,9 +33,12 @@ export default class LoopLoanLoan extends React.Component {
         let {loopLoan} = this.props;
         let v = e.target.value;
         if(v.length <= 5){
-            this.setState({value:v, hasInput:true})
-            if(parseInt(v) >= loopLoan.minLoanAmt && parseInt(v) <= loopLoan.canBorrowAmt){
-                this.props.loopLoan.loan_calculate(v);
+            this.setState({value:v})
+            if(v>loopLoan.canBorrowAmt){
+                this.setState({value:loopLoan.canBorrowAmt})
+                if(parseInt(v) >= loopLoan.minLoanAmt && parseInt(v) <= loopLoan.canBorrowAmt){
+                    this.props.loopLoan.loan_calculate(v);
+                }
             }
         }
     }
