@@ -105,7 +105,7 @@ export default class LoopLoan {
    }
 
    loan_confirm = (value) => {
-        this.Post('/api/looploan/loan/v1/apply.json',{
+        return this.Post('/api/looploan/loan/v1/apply.json',{
             loanAmt:value,
             productUuid:this.productUuid
         }).then((data)=>{
