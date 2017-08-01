@@ -85,7 +85,7 @@ class Content extends React.Component {
 }
 
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"借款账单"} show_back={false} />, HEADER_NODE);
-    ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
+    ReactDOM.render(<Header title={"借款账单"} show_back={true} />, HEADER_NODE);
+    //ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     ReactDOM.render(<Content />, CONTENT_NODE);
 });
