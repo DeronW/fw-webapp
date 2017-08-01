@@ -42,11 +42,16 @@ export default class LoopLoanLoan extends React.Component {
         let {loopLoan} = this.props;
         let v = e.target.value;
         if(v.length > 5) return;
-
-        v = Math.min(loopLoan.canBorrowAmt, v)
-        v = Math.max(loopLoan.minLoanAmt, v)
-        this.setState({value: v}, this.resetCalculateTimer);
-
+        this.setState({value: v})
+        // v = Math.min(loopLoan.canBorrowAmt, v)
+        // v = Math.max(loopLoan.minLoanAmt, v)
+        if(v > loopLoan.canBorrowAmt){
+            Components.showToast("输入金额大于可借额度")
+        }else if(v < loopLoan.minLoanAmt){
+            Components.showToast("输入金额小于最低可借额度")
+        }else if(v <= loopLoan.canBorrowAmt && v >= loopLoan.minLoanAmt){
+             this.resetCalculateTimer();
+        }
 
 
         // let {loopLoan} = this.props;
