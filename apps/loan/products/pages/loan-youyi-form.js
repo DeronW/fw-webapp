@@ -38,12 +38,24 @@ export default class LoopLoanLoan extends React.Component {
 
     }
 
+    resetValidateTimer = () => {
+        let {loopLoan} = this.props;
+        clearTimeout(this._validate_timer);
+        this._validate_timer = setTimeout(()=>{
+            if(this.state.value > loopLoan.canBorrowAmt){
+                Components.showToast("输入金额大于可借额度")
+            }else if(this.state.value < loopLoan.minLoanAmt){
+                Components.showToast("输入金额小于最低可借额度")
+            }
+        },1000)
+    }
+
     validate = () => {
         let {loopLoan} = this.props;
         if(this.state.value > loopLoan.canBorrowAmt){
-            Components.showToast("输入金额大于可借额度")
+            this.resetValidateTimer();
         }else if(this.state.value < loopLoan.minLoanAmt){
-            Components.showToast("输入金额小于最低可借额度")
+            this.resetValidateTimer();
         }else if(this.state.value <= loopLoan.canBorrowAmt && this.state.value >= loopLoan.minLoanAmt){
             this.resetCalculateTimer();
         }
