@@ -19,48 +19,45 @@ class BankCard extends React.Component {
         let { bank_card } = this.props;
 
         let bank_item = (item, index) => {
-            let cpcn = 'card-panel card-panel-';
-            if (index % 3 === 0) cpcn += 'red'
-            if (index % 3 === 1) cpcn += 'blue'
-            if (index % 3 === 2) cpcn += 'green'
-
-            return <div styleName="card" key={index}>
-                <div styleName={cpcn}>
-                    <div styleName="card-panel-t">
-                        <div styleName="bank-logo">
-                            <img src={item.logoUrl} />
-                        </div>
-                        <span>{item.bankShortName}</span>
+            let cardLabel;
+            if (item.authPlatform == 1) {
+                cardLabel = '放心花';
+            } else if (item.authPlatform == 2) {
+                cardLabel = '优易借';
+            }
+            return <div styleName="card" key={item.cardNo}>
+                <div styleName="bank-info">
+                    <div styleName="bank-logo">
+                        <img src={item.logoUrl} />
                     </div>
-
-                    <div styleName="card-type">{item.cardType == 0 ? "借记卡" : "信用卡"}</div>
-                    <div styleName="card-number">{item.cardNo}</div>
-
-                    {item.isRealNameBindCard &&
-                        <div styleName="default-bank-card">提现卡</div>}
+                    <div styleName="bank-name">{item.bankShortName}</div>
                 </div>
-                <div styleName="bottom-line"></div>
+                <div styleName="card-info">
+                    <span styleName="card-no">{item.cardNo}</span>
+                    <div styleName="card-label">
+                        <span>{cardLabel}</span>
+                    </div>
+                </div>
             </div>
         }
 
-        return <div>
+        return <div styleName="cnt-container">
             <Header title="银行卡管理" history={history} />
-            {bank_card.all.map(bank_item)}
 
-            <div styleName="management-tips">
-                <div>1.储蓄卡(尾号{bank_card.default_card_number.slice(-4)})为默认提现卡，不可变更。</div>
-                <div>2.支持绑定多张银行卡。</div>
+            <div styleName="tips">
+                1.在这里您可以看到使用不同借款产品时绑定过的银行卡；
+                <br/>
+                2.在实际使用中我们会自动为您筛选当前可用的银行卡。
             </div>
 
-            <div styleName="fixed-panel-holder">
-                <div styleName="fixed-panel">
-                    <div styleName="fixed-panel-tips">
-                        绑定银行卡越多，信用额度越高！
-                    </div>
-                    <Link styleName="fixed-panel-btn" to="/bank-card-add">
-                        马上添加
-                    </Link>
-                </div>
+            <div styleName="list-container">
+                { bank_card.all.map(bank_item) }
+            </div>
+
+            <div styleName="submit-btn-container">
+                <Link styleName="submit-btn" to="/bank-card-add">
+                    添加银行卡
+                </Link>
             </div>
         </div>
     }
