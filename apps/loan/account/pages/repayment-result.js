@@ -7,19 +7,19 @@ import { Header } from '../../lib/components'
 import styles from '../css/repayment-result.css'
 
 
-@inject('repayment_youyi')
+@inject('repayment_result')
 @observer
 @CSSModules(styles, { allowMultiple: true })
 class RepaymentResult extends React.Component {
 
     componentDidMount() {
         document.title = '还款结果';
-        this.props.repayment_youyi.fetchRepaymentResult();
+        this.props.repayment_result.fetchRepaymentResult();
     }
 
     render() {
-        let { history, repayment_youyi } = this.props,
-        { repaymentAmount, leftAmount, repaymentResult } = repayment_youyi;
+        let { history, repayment_result } = this.props,
+        { repaymentAmount, leftAmount, repaymentResult } = repayment_result;
 
         let paidOff = <div>
             <div styleName="result-container success">
