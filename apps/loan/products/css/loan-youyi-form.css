@@ -9,6 +9,7 @@ input{
 }
 .input-num::-webkit-input-placeholder{
     font-size: 30px;
+    line-height:45px;
     color:#999;
 }
 .cnt-container {
@@ -27,7 +28,7 @@ input{
     font-size:30px;
     color:#666;
     display:inline-block;
-    margin-top:66px;
+    margin-top:57px;
     padding-left:30px;
 }
 .input-num{
