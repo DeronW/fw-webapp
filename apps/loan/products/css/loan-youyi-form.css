@@ -9,7 +9,7 @@ input{
 }
 .input-num::-webkit-input-placeholder{
     font-size: 30px;
-    line-height:45px;
+    line-height:normal;
     color:#999;
 }
 .cnt-container {
@@ -34,6 +34,7 @@ input{
 .input-num{
    width:400px;
    height:60px;
+    line-height:normal;
     text-align:right;
    font-size:50px;
    color:#556bb8;
