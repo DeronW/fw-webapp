@@ -189,12 +189,11 @@ const QUESTIONS = [{
 const startArr = [];
 
 QUESTIONS.forEach(value => {
-    let json = {};
-    json[value.name] = -1;
-    startArr.push(json);
+    let json = {}
+    json[value.name] = -1
+    startArr.push(json)
 });
 @observer
-@inject('reserve')
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Evaluate extends React.Component {
     state = {
@@ -213,30 +212,20 @@ class Evaluate extends React.Component {
     }
 
     selectHandler = (value, index, num) => {
-        // let {selected} = this.state
-        // console.log(`selectedname:${selected[name]}`)
-        // console.log(`optionIndex:${optionIndex}`)
-        // selected[name] = optionIndex
-        // this.setState({selected: selected})
-        console.log(1111)
         let {selected} = this.state;
         selected[index][value] = num;
         this.setState({selected: selected});
     }
 
     submitHandler = () => {
-        console.log('submit')
         let form_data = {}, {selected} = this.state, err;
-        console.log(selected.length)
         for (let i = 0; i < selected.length; i++) {
             Object.assign(form_data, selected[i])
         }
         for (let i in form_data) {
-            console.log(form_data[i])
             if (form_data[i] == -1) err = true;
             form_data[i] = ['A', 'B', 'C', 'D', 'E'][form_data[i]]
         }
-        console.log(err)
         err ?
             Components.showToast("您还有未填写试题") :
             Get('/orderuser/riskGradeP2P.shtml', form_data)
