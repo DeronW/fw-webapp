@@ -164,12 +164,15 @@ div{
   margin-bottom:25px;
 }
 .verify-input{
-  width:572px;
+  width:525px;
   padding-left:20px;
   height:64px;
   border:1px solid #ebeaea;
   border-radius:6px;
   background:#fafafa;
+}
+.verify-input input{
+    width: 340px;
 }
 .sms-input{
   width:400px;
@@ -188,7 +191,7 @@ div{
   overflow:hidden;
 }
 .btn-list .confirm-btn{
-  width:278px;
+  width:260px;
   height:78px;
   line-height:78px;
   border:1px solid #6aa4f0;
@@ -201,7 +204,7 @@ div{
   float:right;
 }
 .btn-list .cancel-btn{
-  width:278px;
+  width:260px;
   height:78px;
   line-height:78px;
   border:1px solid #6aa4f0;

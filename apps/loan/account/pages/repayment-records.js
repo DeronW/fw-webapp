@@ -8,7 +8,7 @@ import { Browser, Post } from '../../lib/helpers'
 
 import styles from '../css/repayment-records.css'
 
-@inject("repayment_youyi")
+@inject("repayment_youyi","repayment_fangxin")
 @observer
 @CSSModules(styles, {
     "allowMultiple": true,
@@ -30,25 +30,22 @@ export default class RepaymentRecords extends React.Component {
             loanStatus: 2
         }).then(data => {
             this.setState({ resultList:  data.resultList });
-            repayment_youyi.setLoanId(this.state.loanUuid);
         })
 
         }
-        toRepaymentDetail = () => {
-            let {repayment_list,history} = this.props;
-            let {loanUuid, productId} = this.state;
+        toRepaymentDetail = (productId,uuid) => () => {
+            let {repayment_youyi,history} = this.props;
             // 根据返回的productId跳转到不同的还款页面
+            repayment_youyi.setLoanId(uuid);
+            repayment_fangxin.setLoanId(uuid);
             productId == '1' && history.push('/repayment-fangxin');
             productId == '21' && history.push('/repayment-fenqi');
             productId == '11' && history.push('/repayment-youyi');
-            
         }
     render(){
         let {history} = this.props;
         let {resultList} = this.state;
         let repayment_item = (item,index) => {
-            this.state.productId = item.productId;
-            this.state.loanUuid = item.uuid;
             return <div styleName="item-self" key={index}>
                 <div styleName="top">
                         <div styleName="top-left">
@@ -57,7 +54,7 @@ export default class RepaymentRecords extends React.Component {
                         </div>
                         <div styleName="top-right">
                             <span styleName="repay-num">&yen;{item.loanLeftAmtStr}</span>
-                            <span styleName="repay-btn" onClick = {this.toRepaymentDetail}>还款</span>
+                            <span styleName="repay-btn" onClick = {this.toRepaymentDetail(item.productId,item.uuid)}>还款</span>
                         </div>
                     </div>
                     <div styleName="line"></div>

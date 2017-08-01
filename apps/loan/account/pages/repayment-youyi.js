@@ -9,7 +9,7 @@ import { Header } from '../../lib/components'
 import styles from '../css/repayment-youyi.css'
 
 
-@inject('account', 'repayment_youyi')
+@inject('account', 'repayment_youyi', 'repayment_result')
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class Repayment extends React.Component {
@@ -48,7 +48,7 @@ class Repayment extends React.Component {
     handleSubmit = () => {
         if (!this.state.protocolChecked) return
 
-        let { repayment_youyi, history } = this.props,
+        let { repayment_youyi, repayment_result, history } = this.props,
             repaymentAmount = repayment_youyi.repaymentAmount,
             unpaidAmount = repayment_youyi.unpaidAmount;
         if (repaymentAmount === '') return Components.showToast('请输入还款金额')
@@ -57,9 +57,11 @@ class Repayment extends React.Component {
 
         if (unpaidAmount - repaymentAmount < 0) repayment_youyi.setAmount(unpaidAmount);
 
-        repayment_youyi.submitRepayment().then(data => {
+        repayment_youyi.submitRepayment().then(repaymentUuid => {
             this.setState({ showSMSPop: true });
             this.SMSTimerController();
+
+            repayment_result.setUidAndProduct(repaymentUuid, 'youyi');
         })
     }
 

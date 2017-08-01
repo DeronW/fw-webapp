@@ -7,7 +7,7 @@ export default class RepaymentYouyi {
 
         extendObservable(this, {
             loanId: '', //
-            repaymentId: '',
+            repaymentUuid: '',
             unpaidAmount: '', // 待还金额
             overdueAmount: '', // 逾期费
             dueDate: '', // 还款日
@@ -16,14 +16,12 @@ export default class RepaymentYouyi {
             cardNo: '', // 银行卡号后四位
             repaymentAmount: '', // 还款金额
             protocolChecked: true, // 是否同意协议
-            repaymentResult: '', // 'fail', 'success', 'waiting'
-            leftAmount: '' // 还款成功后仍剩余金额
         })
     }
 
     setLoanId = id => this.loanId = id
 
-    setRepaymentId = id => this.repaymentId = id
+    setRepaymentId = id => this.repaymentUuid = id
 
     setAmount = v => {
         this.repaymentAmount = v;
@@ -48,6 +46,7 @@ export default class RepaymentYouyi {
             repaymentAmt: this.repaymentAmount
         }).then(data => {
             this.setRepaymentId(data.repaymentUuid);
+            return data.repaymentUuid
         })
     }
 
@@ -65,23 +64,6 @@ export default class RepaymentYouyi {
             setTimeout(() => {
                 history.push('/repayment-result')
             }, 1700)
-        })
-    }
-
-    fetchRepaymentResult = () => {
-        this.Post('/api/looploan/repayment/v1/repaymentStatus.json', {
-            repaymentUuid: this.repaymentUuid
-        }).then(data => {
-            let { loanLeftAmount, repaymentAmount, status } = data;
-            this.leftAmount = loanLeftAmount;
-            this.repaymentAmount = repaymentAmount;
-            if (status == 0) {
-                this.repaymentResult = 'waiting'
-            } else if (status == 1) {
-                this.repaymentResult = 'success'
-            } else if (status == 2) {
-                this.repaymentResult = 'fail'
-            }
         })
     }
 
