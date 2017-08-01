@@ -20,6 +20,7 @@ export default class LoopLoanAuthorization extends React.Component {
     }
     componentDidMount(){
         document.title = '芝麻信用授权';
+        NativeBridge.hide_header();
         this.props.loopLoan.zima_callback(this.state.params,this.state.sign);
     }
     confirmHandler = () => {
