@@ -21,7 +21,8 @@ export default class LoopLoan extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            show:false
+            show:false,
+            questionShow:false
         }
     }
 
@@ -48,8 +49,12 @@ export default class LoopLoan extends React.Component {
         }
     }
 
-    showHandler = () => {
-        this.setState({show:true});
+    questionShowHandler = () => {
+        this.setState({questionShow:true});
+    }
+
+    questionCloseHandler = () => {
+        this.setState({questionShow:false});
     }
 
     closeHandler = () => {
@@ -87,7 +92,7 @@ export default class LoopLoan extends React.Component {
                     <div styleName="loan-info">
                         <div styleName="loan-info-left">
                             <div styleName="loan-info-num">{loopLoan.creditLine}</div>
-                            <div styleName="loan-info-title">总额度(元){loopLoan.userStatus == 2 && loopLoan.creditLine == 0 && <span styleName="tip" onClick={this.showHandler}></span>}</div>
+                            <div styleName="loan-info-title">总额度(元){loopLoan.userStatus == 2 && loopLoan.creditLine == 0 && <span styleName="tip" onClick={this.questionShowHandler}></span>}</div>
                         </div>
                         <div styleName="loan-info-right">
                             <div styleName="loan-info-num">{loopLoan.period}天</div>
@@ -104,6 +109,12 @@ export default class LoopLoan extends React.Component {
                     <div styleName="popup">
                         <div styleName="popup-tip">{loopLoan.errMsg}</div>
                         <div styleName="popup-btn" onClick={this.closeHandler}>知道了</div>
+                    </div>
+                </div>}
+                {this.state.questionShow && <div styleName="mask">
+                    <div styleName="popup">
+                        <div styleName="popup-tip">您当前不符合借款标准，请尝试其他借款产品</div>
+                        <div styleName="popup-btn" onClick={this.questionCloseHandler}>知道了</div>
                     </div>
                 </div>}
             </div>
