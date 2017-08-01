@@ -16,7 +16,7 @@ export default class YouyiRepayment extends React.Component {
             Browser.inApp ? NativeBridge.close() : history.goBack()
         }
         return <div styleName="bg">
-            <Header title="委托扣款授权书（还款）" history={history} goBack={goBack}/>
+            <Header title="委托扣款授权书（还款）" history={history} goBack={goBack} enable={'force'}/>
             <div styleName="protocol-article">
 
 
