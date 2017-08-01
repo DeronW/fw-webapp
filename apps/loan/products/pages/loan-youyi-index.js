@@ -37,10 +37,14 @@ export default class LoopLoan extends React.Component {
             history.push('/loan-youyi-card')
         }else if(loopLoan.userStatus == 1){
             gotoHandler(loopLoan.url,false,"芝麻信用授权",false)
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500 ){
+        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt ){
             history.push('/loan-youyi-form')
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){
-            Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/'
+        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt){
+            if(loopLoan.errMsg){
+                this.setState({show:true})
+            }else{
+                Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/'
+            }
         }
     }
 
@@ -59,9 +63,9 @@ export default class LoopLoan extends React.Component {
             btn_title = '去借款'
         }else if(loopLoan.userStatus == 1){
             btn_title = '去认证'
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500){
+        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt){
             btn_title = '去借款'
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){
+        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt){
             btn_title = '尝试其他借款'
         }else{
             btn_title = '尝试其他借款'
@@ -93,12 +97,12 @@ export default class LoopLoan extends React.Component {
                     <div styleName="vertical-line"></div>
                 </div>
                 <div styleName="btn-container">
-                    {LoopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500 && <div styleName="btn-tip">最低500元起借</div>}
+                    {LoopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt && <div styleName="btn-tip">最低{loopLoan.minLoanAmt}元起借</div>}
                     <div styleName="btn" onClick={this.clickHandler}>{btn_title}</div>
                 </div>
                 {this.state.show && <div styleName="mask">
                     <div styleName="popup">
-                        <div styleName="popup-tip">您离成功借钱只差一步请先完成必填认证！</div>
+                        <div styleName="popup-tip">{loopLoan.errMsg}</div>
                         <div styleName="popup-btn" onClick={this.closeHandler}>知道了</div>
                     </div>
                 </div>}
