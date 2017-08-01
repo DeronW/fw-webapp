@@ -27,6 +27,8 @@ class Repayment extends React.Component {
 
         let { repayment_youyi } = this.props;
 
+        if (Utils.hashQuery.loanUuid) repayment_youyi.setLoanId(Utils.hashQuery.loanUuid);
+
         repayment_youyi.fetchRepaymentInfo().then(data => {
             if (repayment_youyi.unpaidAmount < 200) this.setState({ amountEditDisabled: true })
         });
