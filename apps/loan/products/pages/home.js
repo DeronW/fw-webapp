@@ -139,7 +139,7 @@ class Home extends React.Component {
                     () => this.setState({ enable_youyi: false })}></a>
             </div>}
 
-            <BottomNavBar />
+            {!Browser.inFXHApp && <BottomNavBar />}
         </div>
     }
 }
