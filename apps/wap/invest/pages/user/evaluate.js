@@ -186,13 +186,7 @@ const QUESTIONS = [{
         score: 9
     }]
 }];
-const startArr = [];
 
-QUESTIONS.forEach(value => {
-    let json = {}
-    json[value.name] = -1
-    startArr.push(json)
-});
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class Evaluate extends React.Component {
@@ -200,7 +194,7 @@ class Evaluate extends React.Component {
         finished: false,
         score: 0,
         evaluateType: "风险类型",
-        selected: startArr
+        selected: {}
     }
 
     back_handler = () => {
@@ -213,17 +207,15 @@ class Evaluate extends React.Component {
 
     selectHandler = (value, index, num) => {
         let {selected} = this.state;
-        selected[index][value] = num;
+        selected[value] = num
         this.setState({selected: selected});
     }
 
     submitHandler = () => {
         let form_data = {}, {selected} = this.state, err;
-        for (let i = 0; i < selected.length; i++) {
-            Object.assign(form_data, selected[i])
-        }
+        Object.assign(form_data, selected)
         for (let i in form_data) {
-            if (form_data[i] == -1) err = true;
+            if (Object.keys(form_data).length < 10) err = true;
             form_data[i] = ['A', 'B', 'C', 'D', 'E'][form_data[i]]
         }
         err ?
@@ -291,8 +283,8 @@ class Evaluate extends React.Component {
                 let myName = q.name;
                 let myNum = index;
                 let option = (o, oIndex) => {
-                    let cn = "select"
-                    selected[myNum][myName] == oIndex ? cn = styles['checked'] : cn = styles['select']
+                    let cn = "select";
+                    (selected && selected[myName] == oIndex) ? cn = styles['checked'] : cn = styles['select']
                     return <div styleName="question-select" key={oIndex}>
                         <div className={cn}
                              onClick={() => this.selectHandler(myName, myNum, oIndex)}>
