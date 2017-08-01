@@ -114,8 +114,8 @@ export default class LoopLoan {
 
    check_cardinfo = () => {
         this.Post('/api/looploan/bankcard/v1/cardInfo.json').then((data)=>{
-            this.bankName = data.cardInfo.bankName;
-            this.bankCardNo = data.cardInfo.bankCardNo;
+            this.bankName = data.bankName;
+            this.bankCardNo = data.bankCardNo;
         })
    }
 
