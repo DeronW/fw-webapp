@@ -46,6 +46,8 @@ export default class LoopLoanLoan extends React.Component {
                 Components.showToast("输入金额大于可借额度")
             }else if(this.state.value < loopLoan.minLoanAmt){
                 Components.showToast("输入金额小于最低可借额度")
+            }else if(this.state.value == ''){
+                Components.showToast("请输入借款金额")
             }
         },1000)
     }
@@ -55,6 +57,8 @@ export default class LoopLoanLoan extends React.Component {
         if(this.state.value > loopLoan.canBorrowAmt){
             this.resetValidateTimer();
         }else if(this.state.value < loopLoan.minLoanAmt){
+            this.resetValidateTimer();
+        }else if(this.state.value == ''){
             this.resetValidateTimer();
         }else if(this.state.value <= loopLoan.canBorrowAmt && this.state.value >= loopLoan.minLoanAmt){
             this.resetCalculateTimer();
