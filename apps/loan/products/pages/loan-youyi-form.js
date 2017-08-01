@@ -33,9 +33,12 @@ export default class LoopLoanLoan extends React.Component {
         let {loopLoan} = this.props;
         let v = e.target.value;
         if(v.length <= 5){
-            this.setState({value:v, hasInput:true})
-            if(parseInt(v) >= loopLoan.minLoanAmt && parseInt(v) <= loopLoan.canBorrowAmt){
-                this.props.loopLoan.loan_calculate(v);
+            this.setState({value:v})
+            if(v>loopLoan.canBorrowAmt){
+                this.setState({value:loopLoan.canBorrowAmt})
+                if(parseInt(v) >= loopLoan.minLoanAmt && parseInt(v) <= loopLoan.canBorrowAmt){
+                    this.props.loopLoan.loan_calculate(v);
+                }
             }
         }
     }
@@ -92,9 +95,13 @@ export default class LoopLoanLoan extends React.Component {
         }else if(this.state.value == ''){
             Components.showToast("请输入借款金额")
         }else{
-            this.props.loopLoan.loan_confirm(this.state.value);
-            this.setState({mask3Show:true});
-            this.tick();
+            this.props.loopLoan.loan_confirm(this.state.value).then(()=>{
+                this.setState({mask3Show:true});
+                this.tick();
+            },e=>{
+                window.clearInterval(this._timer);
+            });
+
         }
     }
 
@@ -110,7 +117,7 @@ export default class LoopLoanLoan extends React.Component {
 
         return (
             <div styleName="cnt-container">
-                <Header title="借钱" history={history} />
+                <Header title="借钱" history={history} enable={'force'}/>
                 <div styleName="loan-container">
                     <div styleName="loan-input-num">
                         <span styleName="input-title">借多少</span>
@@ -125,7 +132,7 @@ export default class LoopLoanLoan extends React.Component {
                         <div styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.shouldRepaymentAmount : 0}</div>
                     </div>
                     <div styleName="loan-info-item">
-                        <div styleName="loan-info-title">总利息<span styleName="tip" onClick={this.detailShowHandler}></span></div>
+                        <div styleName="loan-info-title">总利息{this.state.value >= loopLoan.minLoanAmt && <span styleName="tip" onClick={this.detailShowHandler}></span>}</div>
                         <div styleName={this.state.value >= loopLoan.minLoanAmt ? "loan-info-right has-input": "loan-info-right has-not-input"}>{this.state.value >= loopLoan.minLoanAmt ? loopLoan.totalFeeAmount : 0}</div>
                     </div>
                     <div styleName="overdue-tip">
@@ -160,7 +167,7 @@ export default class LoopLoanLoan extends React.Component {
                     <div styleName="notice-pop">
                         <div styleName="notice-title">逾期费用说明</div>
                         <div styleName="close-icon" onClick={this.overdueHideHandler}></div>
-                        <div styleName="notice-content"></div>
+                        <div styleName="notice-content">{loopLoan.latedescription}</div>
                         <div styleName="notice-btn" onClick={this.overdueHideHandler}>知道了</div>
                     </div>
                 </div>}
