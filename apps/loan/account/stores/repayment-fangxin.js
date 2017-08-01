@@ -42,13 +42,13 @@ export default class RepaymentFangXin {
             this.dueTime = new Date(data.dueTime).toLocaleDateString();
             this.repaymentAmount = data.repaymentAmount;
         }).then(() => this.Post("/api/bankcard/v1/bankcardlist.json"))
-            .then(data => {
-                let card = data.userBankList.withdrawBankcard.filter((item, index) => {
-                    return item.isRealNameBindCard == true
-                });
-                this.withdrawBankShortName = card[0].bankShortName;
-                this.withdrawCardNo = card[0].cardNo.slice(-4)
-            })
+          .then(data => {
+            let card = data.userBankList.withdrawBankcard.filter((item, index) => {
+                return item.isRealNameBindCard == true
+            });
+            this.withdrawBankShortName = card[0].bankShortName;
+            this.withdrawCardNo = card[0].cardNo.slice(-4)
+          })
     }
 
     resendverifycode = () => {
@@ -59,9 +59,9 @@ export default class RepaymentFangXin {
         }).then(data => {
             this.orderGid = data.orderGid;
         }, e => Components.showToast(e.message))
-            .then(() => this.Post('/api/repayment/v1/resendverifycode.json', {
-                orderGid: this.orderGid
-            }))
+          .then(() => this.Post('/api/repayment/v1/resendverifycode.json', {
+            orderGid: this.orderGid
+          }))
     }
 
     confirmHandler = (code) => {
