@@ -6,11 +6,6 @@ import { Header } from '../../lib/components'
 import {NativeBridge, Browser} from '../../lib/helpers'
 import styles from '../css/loan-youyi-authorization.css'
 
-function closeWebView(){
-    NativeBridge.close();
-    NativeBridge.close();
-}
-
 @inject('loopLoan')
 @observer
 @CSSModules(styles,{ "allowMultiple": true, "errorWhenNotFound": false })
@@ -28,7 +23,7 @@ export default class LoopLoanAuthorization extends React.Component {
         this.props.loopLoan.zima_callback(this.state.params,this.state.sign);
     }
     confirmHandler = () => {
-        Browser.inFXHApp ? closeWebView() : location.href='/static/loan/products/index.html#/'
+        Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/'
     }
     render(){
         let { history, loopLoan } = this.props;
