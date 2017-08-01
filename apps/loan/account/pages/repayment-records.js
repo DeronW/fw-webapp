@@ -79,12 +79,17 @@ export default class RepaymentRecords extends React.Component {
                     </div>
             </div>
         }
+        let noData = <div styleName="no-data">
+                        <img src={require("../images/no-data.png")} alt="" styleName="blank-img"/>
+                        <p styleName="blank-text">暂无数据</p>
+                    </div>
         return <div>
             <Header title="还款" history={history} enable={'force'}/>
             {/*内容部分*/}
             <div styleName="repayment-content">
-                {resultList.map(repayment_item)}
+                {resultList.length>0 && resultList.map(repayment_item)}
             </div>
+            {resultList.length ==0 && noData}
         </div>
     }
 }
