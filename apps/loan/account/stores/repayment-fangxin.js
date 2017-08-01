@@ -14,14 +14,25 @@ export default class RepaymentFangXin {
             withdrawCardNo: null,//银行卡号
             inputAmount:"",
             orderGid:null,
+            cardGid: '',
+            cardType: '',
+            chosenBank: '', // 选择的银行卡银行名称
+            chosenCardNo: '', // 选择的银行卡卡号
         })
+    }
+
+    chooseCard = (gid, type, name, no) => {
+        this.cardGid = gid;
+        this.cardType = type;
+        this.chosenBank = name;
+        this.chosenCardNo = no;
     }
 
     paybackHandler = (cardGid) => {
         var loanGid = Utils.urlQuery.loanGid;
         // if (this.props.cardType == 1) {
         //     $FW.Component.Toast("信用卡暂不支持还款");
-        // } 
+        // }
         this.Post(`/api/repayment/v1/checksmsverifycode.json`, {
             repaymentAmount: this.inputAmount,
             loanGid: loanGid,
@@ -46,7 +57,8 @@ export default class RepaymentFangXin {
     }
 
     submitHandler=()=>{
-        // return 
+        // return
     }
+
     setLoanAmount = (value) => this.inputAmount = value
 }
