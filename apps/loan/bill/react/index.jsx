@@ -84,8 +84,12 @@ class Content extends React.Component {
     }
 }
 
+function back_handler(){
+    location.href = "/static/loan/user/index.html";
+}
+
 $FW.DOMReady(function () {
-    ReactDOM.render(<Header title={"借款账单"} show_back={true} />, HEADER_NODE);
+    ReactDOM.render(<Header title={"借款账单"} show_back={true} back_handler={back_handler()}/>, HEADER_NODE);
     //ReactDOM.render(<BottomNavBar />, BOTTOM_NAV_NODE);
     ReactDOM.render(<Content />, CONTENT_NODE);
 });
