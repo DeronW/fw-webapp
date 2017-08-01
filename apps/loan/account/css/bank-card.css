@@ -1,133 +1,125 @@
+.cnt-container {
+    min-height: 100%;
+    background-color: #eee;
+}
+
+.tips {
+    line-height: 1.5;
+    margin: 36px 34px 0;
+    color: #999;
+    font-size: 24px;
+}
+
+.list-container {
+    margin: 27px 34px 178px;
+}
+
 .card {
-    padding: 0 34px;
-    margin-top: 34px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 154;
+    padding: 30px 30px 30px 20px;
+    margin-bottom: 20px;
+    border-radius: 12px;
 }
 
-.card-panel {
-    height: 216px;
-    margin: 0 4px;
-    border-radius: 16px 16px 0 0;
-    padding-top: 1px;
-    position: relative;
-    color: white;
+.card:nth-child(3n+1) {
+    background-color: #dc4b58;
+    color: #dc4b58;
 }
 
-.card-panel-red {
-    background-color: #ed6667;
+.card:nth-child(3n+2) {
+    background-color: #5066ab;
+    color: #5066ab;
 }
 
-.card-panel-blue {
-    background-color: #7b9ad3;
+.card:nth-child(3n) {
+    background-color: #3b9b6e;
+    color: #3b9b6e;
 }
 
-.card-panel-green {
-    background-color: #78c09f;
-}
-
-.card-panel-t {
-    height: 64px;
-    font-size: 32px;
-    line-height: 64px;
-    margin: 18px 40px 0;
-    padding-bottom: 20px;
-    border-bottom: 1px solid hsla(0, 0%, 100%, .5);
-    font-size: 32px;
+.bank-info {
+    height: 48px;
+    line-height: 48px;
+    color: #fff;
+    font-size: 30px;
 }
 
 .bank-logo {
-    border-radius: 50%;
     float: left;
-    width: 64px;
-    height: 57px;
-    padding-top: 7px;
-    background: hsla(0, 0%, 100%, .5);
-    text-align: center;
-    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+    margin-right: 11px;
+    background-color: #fff;
+    border-radius: 50%;
 }
 
 .bank-logo img {
     display: block;
-    width: 40px;
-    height: 40px;
-    border: 5px solid hsla(0, 0%, 100%, .2);
-    border-radius: 50%;
-    background: #fff;
-    margin: 0 auto;
-    vertical-align: middle;
+    width: 36px;
+    height: 36px;
+    margin: 7px;
 }
 
-.card .card-type {
-    display: block;
-    font-size: 28px;
-    line-height: 30px;
-    margin-top: 20px;
-    margin-left: 40px;
-}
-
-.card .card-number {
-    display: block;
-    font-size: 36px;
-    line-height: 40px;
-    margin-top: 10px;
-    margin-left: 40px;
-}
-
-.card .bottom-line {
-    height: 1px;
-    background: rgba(0, 0, 0, .5);
-    border-bottom: 1px solid #fff;
-}
-
-.default-bank-card {
-    position: absolute;
-    top: 134px;
-    right: 40px;
-    width: 124px;
+.bank-name {
+    float: left;
     height: 50px;
     line-height: 50px;
-    text-align: center;
-    font-size: 28px;
+}
+
+.card-info {
+    display: table;
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    margin-top: 9px;
+}
+
+.card-no {
+    float: left;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 58px;
+    color: #fff;
+    font-size: 36px;
+}
+
+.card-label {
+    float: right;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 9px;
     background-color: #fff;
     border-radius: 5px;
-    color: #ed6667;
+    -webkit-transform: skew(-10deg);
+    transform: skew(-10deg);
 }
 
-.management-tips {
-    padding: 0 34px;
-    font-size: 27px;
-    color: #999;
-    line-height: 40px;
-    margin-top: 40px;
-}
-
-.fixed-panel-holder {
-    height: 180px;
-}
-
-.fixed-panel {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    height: 180px;
-    background: white;
-}
-
-.fixed-panel-tips {
-    font-size: 27px;
-    color: #999;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.fixed-panel-btn {
+.card-label span {
     display: block;
-    width: 654px;
-    height: 84px;
-    line-height: 84px;
-    background: #6aa4f0;
-    text-align: center;
-    font-size: 34px;
+    font-size: 24px;
+    -webkit-transform: skew(10deg);
+    transform: skew(10deg);
+}
+
+.submit-btn-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 128px;
+    background-color: #fff;
+    box-shadow: 0 0 24px rgba(0, 0, 0, .2);
+}
+
+.submit-btn {
+    display: block;
+    height: 82px;
+    line-height: 82px;
+    margin: 22px 20px;
+    background-color: #639afb;
+    border-radius: 5px;
     color: #fff;
-    border-radius: 8px;
-    margin: 20px auto 0;
+    font-size: 30px;
+    text-align: center;
 }

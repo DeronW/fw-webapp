@@ -38,8 +38,8 @@ export default class RepaymentRecords extends React.Component {
             let {repayment_list,history} = this.props;
             let {loanUuid, productId} = this.state;
             // 根据返回的productId跳转到不同的还款页面
-            productId == '1' && (location.href = `/static/loan/repayment-record/index.html`);
-            productId == '21' && history.push('/repayment-youyi');
+            productId == '1' && history.push('/repayment-fangxin');
+            productId == '21' && history.push('/repayment-fenqi');
             productId == '11' && history.push('/repayment-youyi');
             
         }
@@ -79,12 +79,17 @@ export default class RepaymentRecords extends React.Component {
                     </div>
             </div>
         }
+        let noData = <div styleName="no-data">
+                        <img src={require("../images/no-data.png")} alt="" styleName="blank-img"/>
+                        <p styleName="blank-text">暂无数据</p>
+                    </div>
         return <div>
             <Header title="还款" history={history} enable={'force'}/>
             {/*内容部分*/}
             <div styleName="repayment-content">
-                {resultList.map(repayment_item)}
+                {resultList.length>0 && resultList.map(repayment_item)}
             </div>
+            {resultList.length ==0 && noData}
         </div>
     }
 }

@@ -1,8 +1,8 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { Header } from '../../lib/components'
+import { Header } from '../../../lib/components'
 
-import styles from '../css/register.css'
+import styles from '../../css/protocols/register.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Register extends React.Component {
@@ -14,7 +14,7 @@ class Register extends React.Component {
     render() {
         let { history } = this.props;
 
-        return <div>
+        return <div styleName="bg">
             <Header title="“放心花”用户注册协议" history={history} />
 
             <div styleName="protocol-article">
