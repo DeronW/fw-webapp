@@ -7,9 +7,6 @@ input{
   outline:none;
   border:none;
 }
-div{
-    box-sizing: border-box;
-}
 .repayment{
     width: 100%;
     height: 100%;
@@ -51,7 +48,7 @@ div{
     font-size: 38px;
     color: #556bb8;
     margin-top: -8px;
-}  
+}
 .amoutLate .amountNum{
     font-size: 38px;
     color: #ff6f79;
@@ -106,7 +103,7 @@ div{
 .amountBottom{
     width: 100%;
     background: #fff;
-    margin-top:140px; 
+    margin-top:140px;
     padding: 20px 0;
 }
 .submitBtn{
