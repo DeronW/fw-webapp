@@ -82,7 +82,7 @@ class BottomNavBar extends React.Component {
         })
 
         let _href_a = goto('/static/loan/products/index.html#/')
-        let _href_payback = goto('/static/loan/payback/index.html')
+        let _href_payback = goto('/static/loan/account/index.html#/repayment-records')
         let _href_invite = goto('/static/loan/weixin-invite/index.html')
         let _href_self = goto('/static/loan/market/index.html')
         let _href_more = goto('/static/loan/user/index.html')
