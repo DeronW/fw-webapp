@@ -76,7 +76,7 @@ class Home extends React.Component {
                 <div styleName="product-title">{props.productName}</div>
                 <div styleName="product-limit">{props.amountStr}</div>
                 <div styleName="product-expire">{props.termRangeStr}</div>
-                <div styleName="product-interest">???</div>
+                <div styleName="product-interest">{props.loanRate}</div>
                 <div styleName="product-timing">{props.fastLoanValue}</div>
 
                 {index < 2 && <div styleName="bottom-line"></div>}
