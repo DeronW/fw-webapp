@@ -2,6 +2,9 @@
     background-color: #f0f0f0;
     min-height: 100%;
 }
+.card-list{
+    padding-bottom:130px;
+}
 .card-tip{
     font-size:24px;
     color:#999;
