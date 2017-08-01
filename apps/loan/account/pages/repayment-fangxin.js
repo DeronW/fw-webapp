@@ -78,7 +78,8 @@ class RepaymentFangXin extends React.Component {
         let { repayment_fangxin } = this.props;
         if (this.state.remain <= 0) {
             this.tick();
-            repayment_fangxin.resendverifycode().then(() => {
+            repayment_fangxin.resendverifycode().then((data) => {
+                Components.showToast(data.retCode == 1 ?'发送成功':"发送失败")
             }, e => Components.Toast(e.message));
         }
     }
