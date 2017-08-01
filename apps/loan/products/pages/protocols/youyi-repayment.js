@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Header } from '../../../lib/components'
-
+import {NativeBridge, Browser} from '../../lib/helpers'
 import styles from '../../css/protocols/partner.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
@@ -12,8 +12,11 @@ export default class YouyiRepayment extends React.Component {
     }
     render() {
         let { history } = this.props;
+        let goBack = () => {
+            Browser.inApp ? NativeBridge.close() : history.goBack()
+        }
         return <div styleName="bg">
-            <Header title="委托扣款授权书（还款）" history={history} />
+            <Header title="委托扣款授权书（还款）" history={history} goBack={goBack} enable={'force'}/>
             <div styleName="protocol-article">
 
 
