@@ -11,7 +11,10 @@ import styles from '../css/repayment-fangxin.css'
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class RepaymentFangXin extends React.Component {
-
+    state = {
+        remain:0,
+        show:false,
+    }
     componentDidMount() {
         document.title = "还款明细";
         let { repayment_fangxin } = this.props;
@@ -32,10 +35,14 @@ class RepaymentFangXin extends React.Component {
     }
 
     verifySMSHandler = () => {
-        if (!this.verifyHandler) return repayment_fangxin.setLoanAmount("")
-            
+        if(this.verifyHandler){
+            this.setState({show:true});
+        }
     }
 
+    closePopHandler = () => {
+        this.setState({show:false})
+    }
     get verifyHandler(){
         let { repayment_fangxin } = this.props;
         let rf = repayment_fangxin;
@@ -48,6 +55,17 @@ class RepaymentFangXin extends React.Component {
 
     render() {
         let { history, repayment_fangxin } = this.props;
+        let {remain,show} = this.state;
+
+        let smsMask = <div styleName="mask">
+            <div styleName="verify-popup">
+                <div styleName="verify-popup-wrap">
+                    <div styleName="verify-popup-close" onClick={this.closePopHandler}></div>
+                    <div styleName="verify-popup-title">短信验证</div>
+                    
+                </div>
+            </div>
+        </div>
         return <div styleName="repayment">
             <Header title="还款明细" history={history} />
             <div styleName="banner">
@@ -98,6 +116,7 @@ class RepaymentFangXin extends React.Component {
             <div styleName="amountBottom">
                 <div styleName="submitBtn" onClick={() => this.verifySMSHandler()}>立即还款</div>
             </div>
+            {show && smsMask}
         </div>
     }
 }
