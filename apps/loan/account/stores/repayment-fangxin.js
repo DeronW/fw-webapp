@@ -59,9 +59,6 @@ export default class RepaymentFangXin {
     submitHandler=()=>{
         // return
     }
-<<<<<<< HEAD
-}
-=======
+
     setLoanAmount = (value) => this.inputAmount = value
 }
->>>>>>> 2b15a3b9d3761fd214b2772df838422b0b313259
