@@ -20,7 +20,6 @@ export default class LoopLoanAuthorization extends React.Component {
     }
     componentDidMount(){
         document.title = '芝麻信用授权';
-        NativeBridge.hide_header();
         this.props.loopLoan.zima_callback(this.state.params,this.state.sign);
     }
     confirmHandler = () => {
@@ -30,7 +29,7 @@ export default class LoopLoanAuthorization extends React.Component {
         let { history, loopLoan } = this.props;
         return (
             <div styleName="cnt-container">
-                <Header title="芝麻信用授权" history={history} />
+                {!Browser.inFXHApp && <Header title="芝麻信用授权" history={history} />}
                 <div styleName="result">
                     {loopLoan.zmScore && <div styleName="success">
                         <div styleName="title">授权成功</div>
