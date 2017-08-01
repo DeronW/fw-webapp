@@ -12,8 +12,19 @@ export default class RepaymentFangXin {
             repaymentAmount: 0,//已还金额
             withdrawBankShortName: '',//提现银行卡
             withdrawCardNo: null,//银行卡号
-            inputAmount:""
+            inputAmount:"",
+            cardGid: '',
+            cardType: '',
+            chosenBank: '', // 选择的银行卡银行名称
+            chosenCardNo: '', // 选择的银行卡卡号
         })
+    }
+
+    chooseCard = (gid, type, name, no) => {
+        this.cardGid = gid;
+        this.cardType = type;
+        this.chosenBank = name;
+        this.chosenCardNo = no;
     }
 
     repaymentHandler = () => {

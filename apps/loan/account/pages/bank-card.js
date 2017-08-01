@@ -12,11 +12,16 @@ import styles from '../css/bank-card.css'
 class BankCard extends React.Component {
 
     componentDidMount() {
-        this.props.bank_card.fetch_card_list()
+        document.title = '银行卡管理';
+        this.props.bank_card.fetch_card_list();
     }
 
     render() {
-        let { bank_card } = this.props;
+        // 从银行卡管理入口进来：
+        // *1 显示卡片label
+        // *2 显示tips
+        // *3 不允许绑卡
+        let { bank_card, history } = this.props;
 
         let bank_item = (item, index) => {
             let cardLabel;
@@ -52,12 +57,6 @@ class BankCard extends React.Component {
 
             <div styleName="list-container">
                 { bank_card.all.map(bank_item) }
-            </div>
-
-            <div styleName="submit-btn-container">
-                <Link styleName="submit-btn" to="/bank-card-add">
-                    添加银行卡
-                </Link>
             </div>
         </div>
     }
