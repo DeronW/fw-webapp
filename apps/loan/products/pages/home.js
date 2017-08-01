@@ -42,7 +42,7 @@ class Home extends React.Component {
             }, e => new Promise((resolve, _) => resolve()))
             .then(data => {
                 // 用户是否为白名单用户, 看产品列表有没有优易借的产品
-                let has_youyi = this.state.products.filter(p => p.productId == 11)
+                let has_youyi = this.state.products.filter(p => p.productId == 11).length
                 if (has_youyi && Storage.isContentNotRead('YOUYI_WELCOME'))
                     this.setState({ enable_youyi: true })
             })
