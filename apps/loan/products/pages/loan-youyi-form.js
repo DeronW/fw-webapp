@@ -159,7 +159,7 @@ export default class LoopLoanLoan extends React.Component {
                 </div>
                 <div styleName="btn-container">
                     <div styleName="btn-tip">可提前还款或部分还款，免手续费</div>
-                    <div styleName={this.state.value && this.state.checked ? "btn purple" : "btn gray"} onClick={this.confirmHandler}>确定</div>
+                    <div styleName={this.state.value >= loopLoan.minLoanAmt && this.state.checked ? "btn purple" : "btn gray"} onClick={this.confirmHandler}>确定</div>
                 </div>
                 {this.state.mask1Show && <div styleName="mask1">
                     <div styleName="detail-pop">
