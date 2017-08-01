@@ -30,7 +30,7 @@ class ReserveInfo extends React.Component {
         let {reserve, history} = this.props
         let {context} = reserve
         return <div styleName="infoPanel">
-            <Header title="详情" history={history} show_close={false}/>
+            {/*<Header title="详情" history={history} show_close={false}/>*/}
             <div styleName="topInfo">
                 <div styleName="infoRate">
                     <div styleName="rateUp">
