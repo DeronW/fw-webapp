@@ -12,8 +12,9 @@ import styles from '../css/repayment-fangxin.css'
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class RepaymentFangXin extends React.Component {
     state = {
-        remain:0,
-        show:false,
+        remain: 0,
+        show: false,
+        code: ''
     }
     componentDidMount() {
         document.title = "还款明细";
@@ -25,7 +26,7 @@ class RepaymentFangXin extends React.Component {
         let { repayment_fangxin } = this.props;
         let v = e.target.value;
         if (/\..{3}/.test(v)) return;
-        if(v.split(".")[0].length > 7) return;
+        if (v.split(".")[0].length > 7) return;
         repayment_fangxin.setLoanAmount(v)
     }
 
@@ -35,15 +36,19 @@ class RepaymentFangXin extends React.Component {
     }
 
     verifySMSHandler = () => {
-        if(this.verifyHandler){
-            this.setState({show:true});
+        if (this.verifyHandler) {
+            this.setState({ show: true });
         }
     }
 
     closePopHandler = () => {
-        this.setState({show:false})
+        this.setState({ show: false })
     }
-    get verifyHandler(){
+    chooseBank = () => {
+        let { history } = this.props;
+        history.push("/repayment-bank-card")
+    }
+    get verifyHandler() {
         let { repayment_fangxin } = this.props;
         let rf = repayment_fangxin;
         if (!rf.inputAmount) return Components.showToast("请输入还款金额");
@@ -52,17 +57,61 @@ class RepaymentFangXin extends React.Component {
         if (rf.inputAmount < 100) return Components.showToast("还款金额不能小于100");
         return true
     }
-
+    changeValueHandler = e => {
+        this.setState({ code: e.target.value });
+    }
+    countingDown = () => {
+        if (this.state.remain <= 1) window.clearInterval(this._timer);
+        this.setState({ remain: this.state.remain - 1 });
+    }
+    tick = () => {
+        this.setState({ remain: 60 });
+        window.clearInterval(this._timer);
+        this._timer = setInterval(this.countingDown, 1000);
+    }
+    getSMSCode = () => {
+        let { repayment_fangxin } = this.props;
+        if (this.state.remain <= 0) {
+            this.tick();
+            $FXH.Post(`${API_PATH}/api/repayment/v1/resendverifycode.json`, {
+                orderGid: repayment_fangxin.orderGid
+            }).then(() => {
+            }, e => Components.Toast(e.message));
+        }
+    }
+    componentWillUnmount() {
+        clearInterval(this._timer);
+    }
+    confirmBtnHandler = () => {
+        let { repayment_fangxin } = this.props;
+        let { code } = this.state;
+        if (code == '') {
+            Components.showToast("请输入验证码");
+        } else {
+            repayment_fangxin.confirmHandler(code)
+        }
+    }
     render() {
         let { history, repayment_fangxin } = this.props;
-        let {remain,show} = this.state;
-
+        let { remain, show, code } = this.state;
         let smsMask = <div styleName="mask">
             <div styleName="verify-popup">
                 <div styleName="verify-popup-wrap">
                     <div styleName="verify-popup-close" onClick={this.closePopHandler}></div>
                     <div styleName="verify-popup-title">短信验证</div>
-                    
+                    <div styleName="verify-popup-tip">
+                        已向{repayment_fangxin.chosenBank}(尾号{repayment_fangxin.chosenCardNo})预留的手机号发送短信验证码
+                    </div>
+                    <div styleName="verify-input">
+                        <input styleName="sms-input" type="number" name="number" value={code}
+                            placeholder="输入验证码" onChange={this.changeValueHandler} />
+                        <span styleName="btn-countdown" onClick={this.getSMSCode}>
+                            {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
+                    </div>
+                    <div styleName="btn-list">
+                        <div styleName="cancel-btn" onClick={this.closePopHandler}>取消</div>
+                        <div styleName="confirm-btn" onClick={this.confirmBtnHandler}>确定</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,7 +147,7 @@ class RepaymentFangXin extends React.Component {
             <div styleName="amountPanel">
                 <div styleName="amountItem">
                     <div styleName="itemName">选择银行卡</div>
-                    <div styleName="itemAlready">{`${repayment_fangxin.withdrawBankShortName}(${repayment_fangxin.withdrawCardNo})`}
+                    <div styleName="itemAlready" onClick={() => this.chooseBank()}>{`${repayment_fangxin.chosenBank || repayment_fangxin.withdrawBankShortName}(${repayment_fangxin.chosenCardNo || repayment_fangxin.withdrawCardNo})`}
                         <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
                     </div>
                 </div>
