@@ -26,7 +26,6 @@ export default class RepaymentFangXin {
         this.cardType = type;
         this.chosenBank = name;
         this.chosenCardNo = no;
-        })
     }
 
     paybackHandler = (cardGid) => {
