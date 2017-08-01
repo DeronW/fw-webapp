@@ -3,7 +3,7 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
-import { Header } from '../../lib/components'
+import { Header,BottomNavBar } from '../../lib/components'
 import { Browser, Post } from '../../lib/helpers'
 
 import styles from '../css/repayment-records.css'
@@ -39,7 +39,7 @@ export default class RepaymentRecords extends React.Component {
             repayment_youyi.setLoanId(uuid);
             repayment_fangxin.setLoanId(uuid);
             productId == '1' && history.push('/repayment-fangxin');
-            productId == '21' && history.push('/repayment-fenqi');
+            productId == '21' && history.push('/repayment-fenqi',{query: { loanUuid: uuid}});
             productId == '11' && history.push('/repayment-youyi');
         }
     render(){
@@ -81,12 +81,13 @@ export default class RepaymentRecords extends React.Component {
                         <p styleName="blank-text">暂无数据</p>
                     </div>
         return <div>
-            <Header title="还款" history={history} enable={'force'}/>
+            <Header title="还款" hideGoback enable={'force'}/>
             {/*内容部分*/}
             <div styleName="repayment-content">
                 {resultList.length>0 && resultList.map(repayment_item)}
             </div>
             {resultList.length ==0 && noData}
+            <BottomNavBar/>
         </div>
     }
 }
