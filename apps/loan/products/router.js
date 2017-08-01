@@ -24,7 +24,7 @@ export default (stores) => {
     return <Router>
         <Provider {...stores}>
             <Switch>
-                <Route exact path='/' exact component={Home} />
+                <Route exact path='/' component={Home} />
                 <Route exact path='/loan-youyi-index' component={LoopLoan} />
                 <Route exact path='/loan-youyi-form' component={LoopLoanLoan} />
                 <Route exact path='/loan-youyi-result' component={LoopLoanResult} />
@@ -42,6 +42,12 @@ export default (stores) => {
                 <Route exact path='/protocols/dumiao' component={Protocols.Dumiao} />
                 <Route exact path='/protocols/partner' component={Protocols.Partner} />
                 <Route exact path='/protocols/info-collect' component={Protocols.InfoCollect} />
+
+                <Route exact path='/protocols/youyi-loan' component={Protocols.YouyiLoan} />
+                <Route exact path='/protocols/youyi-loan-service' component={Protocols.YouyiLoanService} />
+                <Route exact path='/protocols/youyi-repayment' component={Protocols.YouyiRepayment} />
+                <Route exact path='/protocols/youyi-repayment-service' component={Protocols.YouyiRepaymentService} />
+
             </Switch>
         </Provider>
     </Router>
