@@ -64,8 +64,14 @@ export default class LoopLoan {
             bankCardUuid:bankCardUuid
         }).then(()=>{
             Components.showToast("绑卡成功")
+            setTimeout(()=>{
+                location.href = '/static/loan/products/index.html#/loan-youyi-index'
+            },2000);
         },()=>{
             Components.showToast("绑卡失败")
+            setTimeout(()=>{
+                location.href = '/static/loan/products/index.html#/loan-youyi-index'
+            },2000);
         });
     }
 
