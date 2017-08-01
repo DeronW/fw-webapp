@@ -111,9 +111,6 @@ const REFACTORY_PAGES = [{
     name: 'account',
     compiler: 'webpack'
 }, {
-    name: 'protocols',
-    compiler: 'webpack'
-}, {
     name: '3rd', // 第三方授权页面, 包括JRGC的特殊登录
     compiler: 'webpack'
 }, {

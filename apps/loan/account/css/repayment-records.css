@@ -93,3 +93,12 @@
     color: #999;
     margin: 0;
 }
+
+.no-data {
+    margin-top: 300px;
+    text-align: center;
+}
+
+.blank-text {
+    font-size: 28px;
+}

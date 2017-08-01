@@ -1,8 +1,8 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { Header } from '../../lib/components'
+import { Header } from '../../../lib/components'
 
-import styles from '../css/dumiao-openaccount.css'
+import styles from '../../css/protocols/dumiao.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class Dumiao extends React.Component {
@@ -12,7 +12,7 @@ export default class Dumiao extends React.Component {
     }
     render() {
         let { history } = this.props;
-        return <div>
+        return <div styleName="bg">
         <Header title="读秒开户授权书" history={history} />
         <div styleName="protocol-article">
     <div styleName="weight">委 托 人：

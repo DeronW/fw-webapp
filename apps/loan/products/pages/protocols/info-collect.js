@@ -1,8 +1,8 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { Header } from '../../lib/components'
+import { Header } from '../../../lib/components'
 
-import styles from '../css/personinfo-collect.css'
+import styles from '../../css/protocols/personinfo-collect.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class InfoCollect extends React.Component {
@@ -12,7 +12,7 @@ export default class InfoCollect extends React.Component {
     }
     render() {
         let { history } = this.props;
-        return <div>
+        return <div styleName="bg">
             <Header title="个人信息采集授权声明" history={history} />
             <div styleName="protocol-article">
                     <div style={{ textAlign: 'left', textIndent: '0' }}>本声明是一份独立、有效的文件，不因本人是否成功借款而影响本声明的效力。</div>

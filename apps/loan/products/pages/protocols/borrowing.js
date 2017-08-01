@@ -1,8 +1,8 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import { Header } from '../../lib/components'
+import { Header } from '../../../lib/components'
 
-import styles from '../css/partner.css'
+import styles from '../../css/protocols/partner.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class Partner extends React.Component {
@@ -12,7 +12,7 @@ export default class Partner extends React.Component {
     }
     render() {
         let { history } = this.props;
-        return <div>
+        return <div styleName="bg">
             <Header title="借款服务协议" history={history} />
             <div styleName="protocol-article">
 

@@ -21,7 +21,8 @@ export default class LoopLoan extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            show:false
+            show:false,
+            questionShow:false
         }
     }
 
@@ -37,15 +38,23 @@ export default class LoopLoan extends React.Component {
             history.push('/loan-youyi-card')
         }else if(loopLoan.userStatus == 1){
             gotoHandler(loopLoan.url,false,"芝麻信用授权",false)
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500 ){
+        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt ){
             history.push('/loan-youyi-form')
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){
-            Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/'
+        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt){
+            if(loopLoan.errMsg){
+                this.setState({show:true})
+            }else{
+                Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/'
+            }
         }
     }
 
-    showHandler = () => {
-        this.setState({show:true});
+    questionShowHandler = () => {
+        this.setState({questionShow:true});
+    }
+
+    questionCloseHandler = () => {
+        this.setState({questionShow:false});
     }
 
     closeHandler = () => {
@@ -59,9 +68,9 @@ export default class LoopLoan extends React.Component {
             btn_title = '去借款'
         }else if(loopLoan.userStatus == 1){
             btn_title = '去认证'
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= 500){
+        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt){
             btn_title = '去借款'
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500){
+        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt){
             btn_title = '尝试其他借款'
         }else{
             btn_title = '尝试其他借款'
@@ -83,7 +92,7 @@ export default class LoopLoan extends React.Component {
                     <div styleName="loan-info">
                         <div styleName="loan-info-left">
                             <div styleName="loan-info-num">{loopLoan.creditLine}</div>
-                            <div styleName="loan-info-title">总额度(元){loopLoan.userStatus == 2 && loopLoan.creditLine == 0 && <span styleName="tip" onClick={this.showHandler}></span>}</div>
+                            <div styleName="loan-info-title">总额度(元){loopLoan.userStatus == 2 && loopLoan.creditLine == 0 && <span styleName="tip" onClick={this.questionShowHandler}></span>}</div>
                         </div>
                         <div styleName="loan-info-right">
                             <div styleName="loan-info-num">{loopLoan.period}天</div>
@@ -93,13 +102,19 @@ export default class LoopLoan extends React.Component {
                     <div styleName="vertical-line"></div>
                 </div>
                 <div styleName="btn-container">
-                    {LoopLoan.userStatus == 2 && loopLoan.canBorrowAmt < 500 && <div styleName="btn-tip">最低500元起借</div>}
+                    {LoopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt && <div styleName="btn-tip">最低{loopLoan.minLoanAmt}元起借</div>}
                     <div styleName="btn" onClick={this.clickHandler}>{btn_title}</div>
                 </div>
                 {this.state.show && <div styleName="mask">
                     <div styleName="popup">
-                        <div styleName="popup-tip">您离成功借钱只差一步请先完成必填认证！</div>
+                        <div styleName="popup-tip">{loopLoan.errMsg}</div>
                         <div styleName="popup-btn" onClick={this.closeHandler}>知道了</div>
+                    </div>
+                </div>}
+                {this.state.questionShow && <div styleName="mask">
+                    <div styleName="popup">
+                        <div styleName="popup-tip">您当前不符合借款标准，请尝试其他借款产品</div>
+                        <div styleName="popup-btn" onClick={this.questionCloseHandler}>知道了</div>
                     </div>
                 </div>}
             </div>

@@ -13,6 +13,7 @@ export default class LoopLoan {
             productDesc:'',
             productUuid:'',
             userStatus:'',
+            errMsg:'',
             url:'',
             cardList:[],
             zmScore:'',
@@ -38,6 +39,8 @@ export default class LoopLoan {
             this.productDesc = data.productDes;
             this.productUuid = data.productUuid;
             this.userStatus = data.userStatus;
+        }, e => {
+            this.errMsg = e.message;
         }).then(()=>{
             return this.Post('/api/zhima/v1/credit/auth.json');
         }).then((data)=>{
@@ -61,8 +64,14 @@ export default class LoopLoan {
             bankCardUuid:bankCardUuid
         }).then(()=>{
             Components.showToast("绑卡成功")
+            setTimeout(()=>{
+                location.href = '/static/loan/products/index.html#/loan-youyi-index'
+            },2000);
         },()=>{
             Components.showToast("绑卡失败")
+            setTimeout(()=>{
+                location.href = '/static/loan/products/index.html#/loan-youyi-index'
+            },2000);
         });
     }
 
