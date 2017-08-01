@@ -1,15 +1,17 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-import Header from '../../components/header.js'
+import {Header} from '../../components/'
 import styles from '../../css/reserve/apply.css'
 import {Components} from 'fw-javascripts'
+import {NativeBridge}from '../../helpers/'
 
 @inject('reserve')
 @observer
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveApply extends React.Component {
     componentDidMount() {
+        NativeBridge.trigger('hide_header')
         this.props.reserve.fetchProduct()
     }
 

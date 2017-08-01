@@ -1,9 +1,9 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
-import Header from '../../components/header'
+import {Header} from '../../components/'
 import styles from '../../css/reserve/info.css'
-import NativeBridge from '../../helpers/native-bridge'
+import {NativeBridge} from '../../helpers/'
 
 @inject('reserve')
 @observer
@@ -11,6 +11,7 @@ import NativeBridge from '../../helpers/native-bridge'
 class ReserveInfo extends React.Component {
 
     componentDidMount() {
+        NativeBridge.trigger('hide_header')
         this.props.reserve.fetchProduct()
     }
 
@@ -31,7 +32,7 @@ class ReserveInfo extends React.Component {
         let {reserve, history} = this.props
         let {context} = reserve
         return <div styleName="infoPanel">
-            {/*<Header title="详情" history={history} show_close={false}/>*/}
+            <Header title="详情" history={history} show_close={false}/>
             <div styleName="topInfo">
                 <div styleName="infoRate">
                     <div styleName="rateUp">

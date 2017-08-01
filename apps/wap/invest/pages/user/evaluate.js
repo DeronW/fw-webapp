@@ -194,7 +194,7 @@ class Evaluate extends React.Component {
         finished: false,
         score: 0,
         evaluateType: "风险类型",
-        selected: {}
+        selected: []
     }
 
     back_handler = () => {
@@ -205,18 +205,21 @@ class Evaluate extends React.Component {
         document.title = '风险测评'
     }
 
-    selectHandler = (value, index, num) => {
-        let {selected} = this.state;
-        selected[value] = num
+    selectHandler = (questionIndex, answerIndex) => {
+        let {selected} = this.state
+        selected[questionIndex] = answerIndex
         this.setState({selected: selected});
     }
 
     submitHandler = () => {
         let form_data = {}, {selected} = this.state, err;
-        Object.assign(form_data, selected)
-        for (let i in form_data) {
-            if (Object.keys(form_data).length < QUESTIONS.length) err = true;
-            form_data[i] = ['A', 'B', 'C', 'D', 'E'][form_data[i]]
+        for(let i = 0;i < QUESTIONS.length; i++){
+            let v = ['A', 'B', 'C', 'D', 'E'][selected[i]]
+            if(!v) {
+                err = true
+                break
+            }
+            form_data[QUESTIONS[i].name] = v
         }
         err ?
             Components.showToast("您还有未填写试题") :
@@ -284,10 +287,10 @@ class Evaluate extends React.Component {
                 let myNum = index;
                 let option = (o, oIndex) => {
                     let cn = "select";
-                    (selected && selected[myName] == oIndex) ? cn = styles['checked'] : cn = styles['select']
+                    (selected && selected[myNum] == oIndex) ? cn = styles['checked'] : cn = styles['select']
                     return <div styleName="question-select" key={oIndex}>
                         <div className={cn}
-                             onClick={() => this.selectHandler(myName, myNum, oIndex)}>
+                             onClick={() => this.selectHandler(myNum, oIndex)}>
                         </div>
                         {o.a}
                     </div>
