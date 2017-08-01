@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { Header } from '../../../lib/components'
-import {NativeBridge, Browser} from '../../lib/helpers'
+import {NativeBridge, Browser} from '../../../lib/helpers'
 import styles from '../../css/protocols/partner.css'
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
