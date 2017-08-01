@@ -56,10 +56,10 @@ export default class RepaymentFangXin {
             repaymentAmount: this.inputAmount,
             loanGid: this.loanGid,
             cardGid: this.cardGid
-        }).then(date => {
-            this.orderGid = date.orderGid;
+        }).then(data => {
+            this.orderGid = data.orderGid;
         }, e => Components.showToast(e.message))
-            .then(() => ('/api/repayment/v1/resendverifycode.json', {
+            .then(() => this.Post('/api/repayment/v1/resendverifycode.json', {
                 orderGid: this.orderGid
             }))
     }
