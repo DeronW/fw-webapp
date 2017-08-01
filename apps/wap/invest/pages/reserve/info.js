@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules'
 import {observer, inject} from 'mobx-react'
 import Header from '../../components/header'
 import styles from '../../css/reserve/info.css'
+import NativeBridge from '../../helpers/native-bridge'
 
 @inject('reserve')
 @observer
