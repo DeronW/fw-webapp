@@ -228,7 +228,7 @@ class UserInfoWrap extends React.Component {
         };
     }
 
-    componentDidMount = () => {
+    componentDidMount(){
         $FXH.Post(`${API_PATH}/api/userBase/v1/userCenter.json`).then(data => {
             this.setState({ phoneNum: data.mobile });
         });

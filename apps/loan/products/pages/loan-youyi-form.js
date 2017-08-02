@@ -4,7 +4,7 @@ import {observer, inject} from 'mobx-react'
 import {Components} from 'fw-javascripts'
 import {Header} from '../../lib/components'
 import styles from '../css/loan-youyi-form.css'
-import {Storage} from '../../lib/helpers'
+import {Storage, Browser} from '../../lib/helpers'
 
 @inject('loopLoan')
 @observer
@@ -174,7 +174,6 @@ export default class LoopLoanLoan extends React.Component {
 
     render() {
         let {history, loopLoan} = this.props;
-        let USER = Storage.getUserDict();
         let item_list = (item, index) => {
             return (
                 <div styleName="item-list" key={index}><span styleName="item-left">{item.feeName}</span><span
@@ -189,7 +188,7 @@ export default class LoopLoanLoan extends React.Component {
                 <div styleName="loan-container">
                     <div styleName="loan-input-num">
                         <span styleName="input-title">借多少</span>
-                        <input styleName="input-num" type="number" value={this.state.value}
+                        <input styleName={Browser.inIOS ? "input-num-ios": "input-num-android"} type="number" value={this.state.value}
                                placeholder={"最多可借" + loopLoan.canBorrowAmt + "元"} onChange={this.changeHandler}/>
                     </div>
                     <div styleName="loan-info-item">
@@ -203,7 +202,7 @@ export default class LoopLoanLoan extends React.Component {
                             styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.shouldRepaymentAmount : 0}</div>
                     </div>
                     <div styleName="loan-info-item">
-                        <div styleName="loan-info-title">总利息{validate_term &&
+                        <div styleName="loan-info-title">总费用{validate_term &&
                         <span styleName="tip" onClick={this.detailShowHandler}></span>}</div>
                         <div
                             styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.totalFeeAmount : 0}</div>
@@ -255,7 +254,7 @@ export default class LoopLoanLoan extends React.Component {
                             <div styleName="verify-popup-close" onClick={this.popupHideHandler}></div>
                             <div styleName="verify-popup-title">短信验证</div>
                             <div styleName="verify-popup-tip">
-                                已向{USER.phone}发送短信验证码
+                                已向{loopLoan.mask_phone}发送短信验证码
                             </div>
                             <div styleName="verify-input">
                                 <input styleName="sms-input" type="number" name="number"

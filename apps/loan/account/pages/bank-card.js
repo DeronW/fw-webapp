@@ -24,7 +24,19 @@ class BankCard extends React.Component {
         let { bank_card, history } = this.props;
 
         let bank_item = (item, index) => {
-            let cardLabel;
+            let cardLabelStr = item.authPlatform || '';
+            let genCardLabel = (cardLabelStr) => {
+                let cardLabelArray = cardLabelStr === '' ? [] : cardLabelStr.split(',');
+                return cardLabelArray.map(labelNo => {
+                    let cardLabel;
+                    if (labelNo == 1) {
+                        cardLabel = '放心花';
+                    } else if (labelNo == 2) {
+                        cardLabel = '优易借';
+                    }
+                    return <span key={labelNo}>{cardLabel}</span>
+                })
+            }
             if (item.authPlatform == 1) {
                 cardLabel = '放心花';
             } else if (item.authPlatform == 2) {
@@ -40,7 +52,7 @@ class BankCard extends React.Component {
                 <div styleName="card-info">
                     <span styleName="card-no">{item.cardNo}</span>
                     <div styleName="card-label">
-                        <span>{cardLabel}</span>
+                        { genCardLabel(cardLabelStr) }
                     </div>
                 </div>
             </div>

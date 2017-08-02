@@ -50,3 +50,12 @@
     left: 40px;
     background: #6aa4f0;
 }
+.iosapp-header-placeholder {
+    height: 128px;
+    background: white;
+}
+.iosapp-header {
+    box-sizing: border-box;
+    height: 128px;
+    padding-top: 40px;
+}
