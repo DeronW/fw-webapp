@@ -174,7 +174,6 @@ export default class LoopLoanLoan extends React.Component {
 
     render() {
         let {history, loopLoan} = this.props;
-        let USER = Storage.getUserDict();
         let item_list = (item, index) => {
             return (
                 <div styleName="item-list" key={index}><span styleName="item-left">{item.feeName}</span><span
@@ -255,7 +254,7 @@ export default class LoopLoanLoan extends React.Component {
                             <div styleName="verify-popup-close" onClick={this.popupHideHandler}></div>
                             <div styleName="verify-popup-title">短信验证</div>
                             <div styleName="verify-popup-tip">
-                                已向{USER.phone}发送短信验证码
+                                已向{loopLoan.phone}发送短信验证码
                             </div>
                             <div styleName="verify-input">
                                 <input styleName="sms-input" type="number" name="number"
