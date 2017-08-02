@@ -47,10 +47,12 @@
     height: 84px;
     line-height: 84px;
     background: #f2f2f2;
+    display: table;
 }
 
 .inputMoney input {
-    display: inline-block;
+    display: block;
+    float: left;
     border: none;
     outline: none;
     height: 80px;
@@ -63,9 +65,14 @@
 }
 
 .inputMoney .allmadeBtn {
-    display: inline-block;
+    display: block;
     color: #4aa1f9;
     margin-left: 90px;
+    float: right;
+    margin-right: 20px;
+    height: 80px;
+    width: 60px;
+    line-height: 80px;
 }
 
 .interval {

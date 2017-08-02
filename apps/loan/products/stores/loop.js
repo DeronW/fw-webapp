@@ -99,7 +99,7 @@ export default class LoopLoan {
         }).then((data)=>{
             this.accountInAmount = data.accountInAmount;
             this.shouldRepaymentAmount = data.shouldRepaymentAmount;
-            this.totalFeeAmount = this.totalFeeAmount;
+            this.totalFeeAmount = data.totalFeeAmount;
             this.feeAmoutExts = data.feeAmoutExts;
         });
    }
