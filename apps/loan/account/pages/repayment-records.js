@@ -70,7 +70,7 @@ export default class RepaymentRecords extends React.Component {
                         </div>
                         <b styleName="gap-line"></b>
                         <div styleName="deadline">
-                            <p styleName="time-detail">{item.dueTimeStr}</p>
+                            <p styleName="time-detail">{item.repaymentTimeStr}</p>
                             <p styleName="desc">还款日</p>
                         </div>
                     </div>
