@@ -5,7 +5,6 @@ import {Header} from '../../components/'
 import styles from '../../css/reserve/apply.css'
 import {Components} from 'fw-javascripts'
 import {NativeBridge}from '../../helpers/'
-import {Browser} from '../../helpers/'
 
 @inject('reserve')
 @observer

@@ -31,12 +31,12 @@ export default class RepaymentYouyi {
     fetchRepaymentInfo = () => {
         return this.Post('/api/looploan/repayment/v1/loanDetail.json', { loanUuid: this.loanId })
             .then(data => {
-                this.unpaidAmount = data.loanLeftAmt;
-                this.overdueAmount = data.overdueFee;
-                this.dueDate = (new Date(data.dueTime)).toJSON().slice(0, 10);
-                this.paidAmount = data.repaymentAmount;
+                this.unpaidAmount = data.loanLeftAmtStr;
+                this.overdueAmount = data.overdueFeeStr;
+                this.dueDate = data.dueTimeStr;
+                this.paidAmount = data.repaymenAmtStr;
                 this.bank = data.bankName;
-                this.cardNo = data.withdrawCardNo;
+                this.cardNo = data.withdrawCardNo.slice(-4);
                 if (this.unpaidAmount < 200) this.repaymentAmount = this.unpaidAmount;
             })
     }

@@ -1,6 +1,7 @@
 .bg {
     height: 100%;
     background-color: #f0f0f0;
+    padding-bottom: 20px;
 }
 
 .bill-header {
@@ -137,4 +138,129 @@
     float: right;
     margin-right: 30px;
     margin-top: 60px;
+}
+
+.payback-item {
+    height: 225px;
+    margin-top: 20px;
+    position: relative;
+    background: white;
+    font-size: 28px;
+    text-align: center;
+}
+
+.pi-title {
+    font-size: 35px;
+    color: black;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.pi-overdate {
+    color: white;
+    background: #ff6f79;
+    border-radius: 4px;
+    position: absolute;
+    top: 35px;
+    left: 180px;
+    font-size: 24px;
+    padding: 5px 9px;
+}
+
+.pi-money {
+    position: absolute;
+    top: 40px;
+    right: 200px;
+    width: 150px;
+    color: #6aa4f0;
+}
+
+.pi-date-limit {
+    position: absolute;
+    top: 126px;
+    width: 100px;
+    left: 30px;
+    text-align: center;
+}
+
+.pi-date-release {
+    position: absolute;
+    top: 126px;
+    width: 200px;
+    left: 220px;
+    text-align: center;
+}
+
+.pi-date-payback {
+    position: absolute;
+    top: 126px;
+    width: 200px;
+    right: 30px;
+    text-align: center;
+}
+
+.pi-txt-limit {
+    position: absolute;
+    top: 168px;
+    width: 100px;
+    left: 30px;
+    color: #999999;
+}
+
+.pi-txt-release {
+    position: absolute;
+    top: 168px;
+    width: 200px;
+    left: 220px;
+    color: #999999;
+}
+
+.pi-txt-payback {
+    position: absolute;
+    top: 168px;
+    width: 200px;
+    right: 30px;
+    color: #999999;
+}
+
+.pi-payback {
+    width: 146px;
+    height: 68px;
+    position: absolute;
+    display: block;
+    top: 22px;
+    right: 35px;
+    border: 1px solid #6aa4f0;
+    border-radius: 4px;
+    color: #6aa4f0;
+    text-align: center;
+    line-height: 68px;
+}
+
+.pi-line-a {
+    position: absolute;
+    top: 110px;
+    right: 0;
+    left: 30px;
+    height: 1px;
+    background: #f4f4f4;
+}
+
+.pi-line-b {
+    position: absolute;
+    top: 154px;
+    right: 265px;
+    width: 2px;
+    height: 44px;
+    background: #f4f4f4;
+}
+
+.pi-line-c {
+    position: absolute;
+    top: 154px;
+    left: 180px;
+    width: 2px;
+    height: 44px;
+    background: #f4f4f4;
 }
