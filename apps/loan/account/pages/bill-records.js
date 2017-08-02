@@ -86,23 +86,25 @@ class BillRecords extends React.Component {
         let payback_item = (i, index) => {
             let { repayment_youyi, repayment_fangxin, history } = this.props
 
-            if (i.productId == '1') {
-                repayment_fangxin.setLoanId(i.uuid)
-                history.push('/repayment-fangxin')
-            } else if (i.productId == '21') {
-                history.push('/repayment-fenqi', {
-                    query: { loanUuid: i.uuid }
-                })
-            } else if (i.productId == '11') {
-                repayment_youyi.setLoanId(i.uuid)
-                history.push('/repayment-youyi')
+            let clickHandler = () => {
+                if (i.productId == '1') {
+                    repayment_fangxin.setLoanId(i.uuid)
+                    history.push('/repayment-fangxin')
+                } else if (i.productId == '21') {
+                    history.push('/repayment-fenqi', {
+                        query: { loanUuid: i.uuid }
+                    })
+                } else if (i.productId == '11') {
+                    repayment_youyi.setLoanId(i.uuid)
+                    history.push('/repayment-youyi')
+                }
             }
 
             return <div styleName="payback-item" key={`${i.orderGid}${index}`}>
                 <div styleName="pi-title">{i.productName}</div>
                 <div styleName="pi-overdate">已逾期</div>
                 <div styleName="pi-money">&yen;{i.loanAmt}</div>
-                <a styleName="pi-payback" href={link}>还款</a>
+                <a styleName="pi-payback" href={clickHandler}>还款</a>
                 <div styleName="pi-date-limit">{i.termNumStr}</div>
                 <div styleName="pi-date-release">{i.loanTimeStr}</div>
                 <div styleName="pi-date-payback">{i.dueTimeStr}</div>
