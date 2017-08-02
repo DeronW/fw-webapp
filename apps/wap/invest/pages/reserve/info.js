@@ -4,6 +4,7 @@ import {observer, inject} from 'mobx-react'
 import {Header} from '../../components/'
 import styles from '../../css/reserve/info.css'
 import {NativeBridge} from '../../helpers/'
+import {Browser} from '../../helpers/'
 
 @inject('reserve')
 @observer
@@ -31,7 +32,8 @@ class ReserveInfo extends React.Component {
     render() {
         let {reserve, history} = this.props
         let {context} = reserve
-        return <div styleName="infoPanel">
+        let iosTop = Browser.inIOS ? styles['iosInfoPanel'] : styles['infoPanel']
+        return <div className={iosTop}>
             <Header title="详情" history={history} show_close={false}/>
             <div styleName="topInfo">
                 <div styleName="infoRate">
