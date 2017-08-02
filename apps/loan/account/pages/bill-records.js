@@ -76,7 +76,8 @@ class BillRecords extends React.Component {
                     <img src={require("../images/bill-records/right-arrow.png")} /></div>
                 <div styleName="apply-status-wrap">
                     <div styleName="apply-status">
-                        <span styleName={`bill-${current_type}-color`}>{current_type == 2 ? "立即还款" : tab[current_type].name}</span>
+                        <span styleName={`bill-${current_type}-color`}>
+                            {tab[current_type].name}</span>
                     </div>
                     <div styleName="apply-time">{order.dueTimeStr}</div>
                 </div>
@@ -104,7 +105,7 @@ class BillRecords extends React.Component {
                 <div styleName="pi-title">{i.productName}</div>
                 <div styleName="pi-overdate">已逾期</div>
                 <div styleName="pi-money">&yen;{i.loanAmt}</div>
-                <a styleName="pi-payback" href={clickHandler}>还款</a>
+                <a styleName="pi-payback" href={clickHandler()}>还款</a>
                 <div styleName="pi-date-limit">{i.termNumStr}</div>
                 <div styleName="pi-date-release">{i.loanTimeStr}</div>
                 <div styleName="pi-date-payback">{i.dueTimeStr}</div>
