@@ -12,6 +12,7 @@ export default class RepaymentFangXin {
             repaymentAmount: 0,//已还金额
             withdrawBankShortName: '',//提现银行卡
             withdrawCardNo: null,//银行卡号
+            repaymentUuid:null,
             inputAmount: "",
             orderGid: null,
             cardGid: '',
@@ -43,6 +44,8 @@ export default class RepaymentFangXin {
             this.overdueFee = data.overdueFee || 0;
             this.dueTime = new Date(data.dueTime).toLocaleDateString();
             this.repaymentAmount = data.repaymentAmount;
+            this.repaymentUuid = data.repaymentUuid;
+
         }).then(() => this.Post("/api/bankcard/v1/bankcardlist.json"))
           .then(data => {
             let card = data.userBankList.withdrawBankcard.filter((item, index) => {

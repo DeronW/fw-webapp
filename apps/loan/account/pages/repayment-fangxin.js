@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
 import { Components } from 'fw-javascripts'
 
+import { NativeBridge } from '../../lib/helpers'
 import { Header } from '../../lib/components'
 import styles from '../css/repayment-fangxin.css'
 
@@ -66,6 +67,10 @@ class RepaymentFangXin extends React.Component {
         this.setState({ code: e.target.value });
     }
     
+    gotoRecord = () => {
+        NativeBridge.goto(`https://m.easyloan888.com/static/loan/repayment-record/index.html?repaymentUuid${this.repaymentUuid}`,true)
+    }
+
     countingDown = () => {
         if (this.state.remain <= 1) window.clearInterval(this._timer);
         this.setState({ remain: this.state.remain - 1 });
@@ -148,7 +153,7 @@ class RepaymentFangXin extends React.Component {
                 </div>
                 <div styleName="amountItem">
                     <div styleName="itemName">已还金额</div>
-                    <div styleName="itemAlready">{repayment_fangxin.repaymentAmount}
+                    <div styleName="itemAlready" onClick={this.gotoRecord}>{repayment_fangxin.repaymentAmount}
                         <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
                     </div>
                 </div>
