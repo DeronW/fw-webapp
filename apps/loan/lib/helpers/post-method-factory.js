@@ -51,6 +51,7 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
 
                 if (error.code == LOGIN_CODE) {
                     // 处理用户登录功能
+                    console.log('should go to login');
                     if (Browser.inJRGCApp) {
                         inHome() ? loginInJRGC() : NativeBridge.close()
                     } else if (Browser.inFXHApp) {
