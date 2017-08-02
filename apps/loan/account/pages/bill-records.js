@@ -8,6 +8,7 @@ import { Event, Utils } from 'fw-javascripts'
 
 import styles from '../css/bill-records.css'
 
+@inject("repayment_youyi", "repayment_fangxin")
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class BillRecords extends React.Component {
@@ -83,13 +84,19 @@ class BillRecords extends React.Component {
         }
 
         let payback_item = (i, index) => {
+            let { repayment_youyi, repayment_fangxin, history } = this.props
 
-            if (i.productId == 1)
-                link = `/static/loan/account/index.html#/repayment-youyi?loanUuid=${i.loanGid}`
-            if (i.productId == 11)
-                i = `/static/loan/fxh-bill/index.html?uuid=${i.loanGid}`
-            if (i.productId == 21)
-                i = `/static/loan/dumiao-bill/index.html?uuid=${i.uuid}&baseStatus=${i.baseStatus}`
+            if (i.productId == '1') {
+                repayment_fangxin.setLoanId(uuid)
+                history.push('/repayment-fangxin')
+            } else if (i.productId == '21') {
+                history.push('/repayment-fenqi', {
+                    query: { loanUuid: uuid }
+                })
+            } else if (i.productId == '11') {
+                repayment_youyi.setLoanId(uuid)
+                history.push('/repayment-youyi')
+            }
 
             return <div styleName="payback-item" key={`${i.orderGid}${index}`}>
                 <div styleName="pi-title">{i.productName}</div>
