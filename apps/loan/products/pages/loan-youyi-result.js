@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { Components } from 'fw-javascripts'
 import { Header } from '../../lib/components'
 import styles from '../css/loan-youyi-result.css'
+import {NativeBridge, Browser} from '../../lib/helpers'
 
 @inject('loopLoan')
 @observer
@@ -16,16 +17,19 @@ export default class LoopLoanResult extends React.Component {
         document.title = '借款结果';
     }
     loanAgainHandler = () => {
-        this.props.history.push('/loan-youyi-index');
+        location.href = '/static/loan/products/index.html#/'
     }
     checkOrderHandler = () => {
         location.href = `/static/loan/account/index.html#/repayment-youyi?loanUuid=${this.props.loopLoan.loanUuid}`;
     }
     render(){
         let { history, loopLoan } = this.props;
+        let goBack = () => {
+            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
+        }
         return (
             <div styleName="cnt-container">
-                <Header title="借款结果" history={history}/>
+                <Header title="借款结果" goBack={goBack}/>
                 {loopLoan.loanStatus == 0 && <div styleName="checking-result-box">
                     <div styleName="wrap-box">
                         <div styleName="success-icon"><img styleName="img-size" src={require("../images/loan-youyi-result/success.png")} /></div>
