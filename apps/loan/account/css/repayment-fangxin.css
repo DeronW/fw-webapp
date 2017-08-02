@@ -161,7 +161,7 @@ input{
   margin-bottom:25px;
 }
 .verify-input{
-  width:525px;
+  width:570px;
   padding-left:20px;
   height:64px;
   border:1px solid #ebeaea;
@@ -169,7 +169,7 @@ input{
   background:#fafafa;
 }
 .verify-input input{
-    width: 340px;
+    width: 400px;
 }
 .sms-input{
   width:400px;
