@@ -19,6 +19,8 @@ import BankCard from './pages/bank-card.js'
 import BankCardAdd from './pages/bank-card-add.js'
 import BankCardVerify from './pages/bank-card-verify.js'
 
+import BillRecords from './pages/bill-records.js'
+
 import RepaymentRecords from './pages/repayment-records.js'
 import RepaymentYouyi from './pages/repayment-youyi.js'
 import RepaymentFenqi from './pages/repayment-fenqi.js'
@@ -46,11 +48,13 @@ export default (stores) => {
                 {/*还款相关页面*/}
                 <Route exact path='/repayment-records' component={RepaymentRecords} />
                 <Route exact path='/repayment-youyi' component={RepaymentYouyi} />
-                {<Route exact path='/repayment-fangxin' component={RepaymentFangXin} />}
+                <Route exact path='/repayment-fangxin' component={RepaymentFangXin} />
                 <Route exact path='/repayment-fenqi' component={RepaymentFenqi} />
                 <Route exact path='/repayment-result' component={RepaymentResult} />
                 <Route exact path='/repayment-bank-card' component={RepaymentBankCard} />
                 <Route exact path='/repayment-youyi-records' component={RepaymentYouyiRecords} />
+                <Route exact path='/bill-records' component={BillRecords} />
+
             </Switch>
         </Provider>
     </Router>
