@@ -58,9 +58,12 @@ class BillRecords extends React.Component {
         }
 
         let order_item = (order, index) => {
-            let link = order.productId == 1 ?
-                `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}` :
-                `/static/loan/dumiao-bill/index.html?uuid=${order.uuid}&baseStatus=${order.baseStatus}`;
+            if (order.productId == 1)
+                link = `/static/loan/account/index.html#/repayment-youyi?loanUuid=${order.loanGid}`
+            if (order.productId == 11)
+                link = `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}`
+            if (order.productId == 21)
+                link = `/static/loan/dumiao-bill/index.html?uuid=${order.uuid}&baseStatus=${order.baseStatus}`
 
             return <a styleName="list_li" key={`${order.orderGid}${index}`} href={link}>
                 <div styleName="list-img"><img src={order.productLogo} /></div>
@@ -80,11 +83,19 @@ class BillRecords extends React.Component {
         }
 
         let payback_item = (i, index) => {
+
+            if (i.productId == 1)
+                link = `/static/loan/account/index.html#/repayment-youyi?loanUuid=${i.loanGid}`
+            if (i.productId == 11)
+                i = `/static/loan/fxh-bill/index.html?uuid=${i.loanGid}`
+            if (i.productId == 21)
+                i = `/static/loan/dumiao-bill/index.html?uuid=${i.uuid}&baseStatus=${i.baseStatus}`
+
             return <div styleName="payback-item" key={`${i.orderGid}${index}`}>
                 <div styleName="pi-title">{i.productName}</div>
                 <div styleName="pi-overdate">已逾期</div>
                 <div styleName="pi-money">&yen;{i.loanAmt}</div>
-                <a styleName="pi-payback">还款</a>
+                <a styleName="pi-payback" href={link}>还款</a>
                 <div styleName="pi-date-limit">{i.termNumStr}</div>
                 <div styleName="pi-date-release">{i.loanTimeStr}</div>
                 <div styleName="pi-date-payback">{i.repaymentTimeStr}</div>
