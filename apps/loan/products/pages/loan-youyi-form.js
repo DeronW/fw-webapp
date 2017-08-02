@@ -150,7 +150,7 @@ export default class LoopLoanLoan extends React.Component {
             Components.showToast("请同意相关协议")
         } else if (this.state.value == '') {
             Components.showToast("请输入借款金额")
-        } else if (this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt) {
+        } else if (this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt && this.state.value % 100 == 0) {
             this.props.loopLoan.loan_confirm(this.state.value).then(() => {
                 this.setState({mask3Show: true});
                 this.tick();
@@ -182,7 +182,7 @@ export default class LoopLoanLoan extends React.Component {
             )
         };
 
-        let validate_term = this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt;
+        let validate_term = this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt && this.state.value % 100 == 0;
         return (
             <div styleName="cnt-container">
                 <Header title="借钱" history={history}/>
