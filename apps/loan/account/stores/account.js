@@ -25,7 +25,7 @@ export default class Account {
     }
 
     @computed get mask_phone() {
-        return this.phone.replace(/(\d{3})\d{6}(\d{2})/, '$1******$2')
+        return this.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
     }
 
     get_captcha = () => {
