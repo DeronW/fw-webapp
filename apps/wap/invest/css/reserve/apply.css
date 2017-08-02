@@ -70,6 +70,9 @@
     margin-left: 90px;
     float: right;
     margin-right: 20px;
+    height: 80px;
+    width: 60px;
+    line-height: 80px;
 }
 
 .interval {
