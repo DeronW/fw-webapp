@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import { Header } from '../../lib/components'
 import { Post } from '../../lib/helpers'
-import { Event } from 'fw-javascripts'
+import { Event, Utils } from 'fw-javascripts'
 
 import styles from '../css/bill-records.css'
 
@@ -12,7 +12,7 @@ import styles from '../css/bill-records.css'
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class BillRecords extends React.Component {
     state = {
-        current_type: '1',
+        current_type: Utils.hashQuery.type || '1',
         tab: {
             '1': { name: '申请中', page_no: 1, order_list: [] },
             '2': { name: '还款中', page_no: 1, order_list: [] },
