@@ -46,6 +46,8 @@ export default class LoopLoanLoan extends React.Component {
                 Components.showToast(`您当前最高可借${loopLoan.canBorrowAmt}元`)
             }else if(this.state.value < loopLoan.minLoanAmt){
                 Components.showToast(`最低${loopLoan.minLoanAmt}起借`)
+            }else if(this.state.value > loopLoan.minLoanAmt && this.state.value < loopLoan.canBorrowAmt && this.state.value % 100 != 0){
+                Components.showToast('借款金额必须为100的整数倍')
             }else if(!this.state.value){
                 Components.showToast("请输入借款金额")
             }
@@ -60,7 +62,7 @@ export default class LoopLoanLoan extends React.Component {
             this.resetValidateTimer();
         }else if(!this.state.value){
             this.resetValidateTimer();
-        }else if(this.state.value <= loopLoan.canBorrowAmt && this.state.value >= loopLoan.minLoanAmt){
+        }else if(this.state.value <= loopLoan.canBorrowAmt && this.state.value >= loopLoan.minLoanAmt && this.state.value % 100 == 0){
             this.resetCalculateTimer();
         }
     }
@@ -219,7 +221,7 @@ export default class LoopLoanLoan extends React.Component {
                     <div styleName={this.state.checked ? "checked-box" : "unchecked-box"}
                          onClick={this.checkHandler}></div>
                     <div styleName="check-item">同意<a href="/static/loan/products/index.html#/protocols/youyi-loan">《借款合同》</a>、<a
-                        href="/static/loan/products/index.html#/protocols/youyi-loan-service">《借款服务协议》</a>，未按时还款将计入信用卡银行的信用报告
+                        href="/static/loan/products/index.html#/protocols/youyi-loan-service">《借款服务协议》</a>
                     </div>
                 </div>
                 <div styleName="btn-container">
