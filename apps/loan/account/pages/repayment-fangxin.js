@@ -68,7 +68,8 @@ class RepaymentFangXin extends React.Component {
     }
     
     gotoRecord = () => {
-        NativeBridge.goto(`https://m.easyloan888.com/static/loan/repayment-record/index.html?repaymentUuid${this.repaymentUuid}`,true)
+        let { repayment_fangxin } = this.props;
+        location.href = `https://m.easyloan888.com/static/loan/repayment-record/index.html?repaymentUuid=${repayment_fangxin.repaymentUuid}`
     }
 
     countingDown = () => {
