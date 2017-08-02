@@ -17,7 +17,7 @@ export default class LoopLoanResult extends React.Component {
         document.title = '借款结果';
     }
     loanAgainHandler = () => {
-        location.href = '/static/loan/products/index.html#/'
+        location.href = '/static/loan/products/index.html#/loan-youyi-index'
     }
     checkOrderHandler = () => {
         location.href = `/static/loan/account/index.html#/repayment-youyi?loanUuid=${this.props.loopLoan.loanUuid}`;

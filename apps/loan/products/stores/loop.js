@@ -1,5 +1,6 @@
 import { extendObservable, computed } from 'mobx'
 import { Components } from 'fw-javascripts'
+import { Storage } from '../../lib/helpers'
 
 export default class LoopLoan {
     constructor(Post) {
@@ -27,8 +28,16 @@ export default class LoopLoan {
             bankName:'',
             bankCardNo:'',
             latedescription:'',
-            loanStatus:''
+            loanStatus:'',
+            phone:''
         })
+
+        this.init_data()
+    }
+
+    init_data = () => {
+        let ud = Storage.getUserDict()
+        this.phone = ud.phone
     }
 
     get_baseinfo = () => {
@@ -60,6 +69,11 @@ export default class LoopLoan {
     //     let filtered = this.cardList.filter(e => e.authPlatform == 2)
     //     return filtered;
     // }
+
+    @computed get mask_phone() {
+        return this.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+    }
+
 
     get_cardlist = () => {
         this.Post('/api/bankcard/v1/bankcardlist.json').then((data)=>{
