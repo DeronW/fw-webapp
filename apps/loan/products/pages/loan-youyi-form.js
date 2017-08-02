@@ -219,7 +219,7 @@ export default class LoopLoanLoan extends React.Component {
                     <div styleName={this.state.checked ? "checked-box" : "unchecked-box"}
                          onClick={this.checkHandler}></div>
                     <div styleName="check-item">同意<a href="/static/loan/products/index.html#/protocols/youyi-loan">《借款合同》</a>、<a
-                        href="/static/loan/products/index.html#/protocols/youyi-loan-service">《借款服务协议》</a>，未按时还款将计入信用卡银行的信用报告
+                        href="/static/loan/products/index.html#/protocols/youyi-loan-service">《借款服务协议》</a>
                     </div>
                 </div>
                 <div styleName="btn-container">
