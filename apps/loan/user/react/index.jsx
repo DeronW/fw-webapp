@@ -138,7 +138,7 @@ class MajorUserInfo extends React.Component {
                 <div className="info-icon-container">
                     <img src="images/more_repayment.png"></img>
                 </div>
-                <span className="info-name">还款</span>
+                <span className="info-name">借款订单</span>
                 <div className="right-align-container">
                     <div className="right-arrow-container">
                         <div className="fake-arrow"></div>

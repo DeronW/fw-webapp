@@ -43,9 +43,9 @@ export default class LoopLoanLoan extends React.Component {
         clearTimeout(this._validate_timer);
         this._validate_timer = setTimeout(()=>{
             if(this.state.value > loopLoan.canBorrowAmt){
-                Components.showToast("输入金额大于可借额度")
+                Components.showToast(`您最多可借${loopLoan.canBorrowAmt}`)
             }else if(this.state.value < loopLoan.minLoanAmt){
-                Components.showToast("输入金额小于最低可借额度")
+                Components.showToast(`最低${loopLoan.minLoanAmt}起借`)
             }else if(!this.state.value){
                 Components.showToast("请输入借款金额")
             }
@@ -184,7 +184,7 @@ export default class LoopLoanLoan extends React.Component {
 
         return (
             <div styleName="cnt-container">
-                <Header title="借钱" history={history} enable={'force'}/>
+                <Header title="借钱" history={history}/>
                 <div styleName="loan-container">
                     <div styleName="loan-input-num">
                         <span styleName="input-title">借多少</span>
