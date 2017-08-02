@@ -87,14 +87,14 @@ class BillRecords extends React.Component {
             let { repayment_youyi, repayment_fangxin, history } = this.props
 
             if (i.productId == '1') {
-                repayment_fangxin.setLoanId(uuid)
+                repayment_fangxin.setLoanId(i.uuid)
                 history.push('/repayment-fangxin')
             } else if (i.productId == '21') {
                 history.push('/repayment-fenqi', {
-                    query: { loanUuid: uuid }
+                    query: { loanUuid: i.uuid }
                 })
             } else if (i.productId == '11') {
-                repayment_youyi.setLoanId(uuid)
+                repayment_youyi.setLoanId(i.uuid)
                 history.push('/repayment-youyi')
             }
 
