@@ -74,7 +74,7 @@ class BillRecords extends React.Component {
                     <div styleName="apply-status">
                         <span styleName={`bill-${current_type}-color`}>{current_type == 2 ? "立即还款" : tab[current_type].name}</span>
                     </div>
-                    <div styleName="apply-time">{order.loanSuccessTime}</div>
+                    <div styleName="apply-time">{order.dueTimeStr}</div>
                 </div>
             </a>
         }

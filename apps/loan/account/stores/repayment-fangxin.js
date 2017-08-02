@@ -6,8 +6,8 @@ export default class RepaymentFangXin {
         this.Post = Post;
         extendObservable(this, {
             logo: '', //logo url
-            loanLeftAmount: 0, //待还金额
-            overdueFee: 0, //逾期费
+            loanLeftAmount: null, //待还金额
+            overdueFee: null, //逾期费
             dueTime: '', //还款日期
             repaymentAmount: 0, //已还金额
             withdrawBankShortName: '', //提现银行卡
