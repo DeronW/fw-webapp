@@ -5,6 +5,7 @@ import {Header} from '../../components/'
 import styles from '../../css/reserve/apply.css'
 import {Components} from 'fw-javascripts'
 import {NativeBridge}from '../../helpers/'
+import {Browser} from '../../helpers/'
 
 @inject('reserve')
 @observer
@@ -46,7 +47,8 @@ class ReserveApply extends React.Component {
 
     render() {
         let {reserve, history}= this.props
-        return <div styleName="applyPanel">
+        let apply_panel = Browser.inIOS ? styles['iosApplyPanel'] : styles['applyPanel']
+        return <div className={apply_panel}>
             <Header title="提交预约" history={history} show_close={false}/>
             <div styleName="submitPanel">
                 <div styleName="reserveMoney">预约金额</div>
