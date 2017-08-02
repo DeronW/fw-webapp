@@ -54,7 +54,7 @@ class ConfirmLoanWrap extends React.Component{
         this.setState({ failResult: booleanVal });
     }
     getLoanResultCheck(booleanVal) {
-        this.setState({ checkResult: booleanVal });
+        this.setState({ loanResult: booleanVal });
     }
     reGetState = (booleanVal) => {
         this.setState({reSetState:booleanVal});
@@ -77,6 +77,7 @@ class ConfirmLoanWrap extends React.Component{
                          totalFeeAmount={this.props.totalFeeAmount}
                          callbackNoticeShow={this.noticeShow}
                          callbackGetLoanResultCheck={this.getLoanResultCheck}
+
             />
             {this.state.itemShow ? <ItemDetail callbackItemDetailHide={this.itemDetailHide}
                                                feeExtList={this.props.feeExtList} /> : null}
