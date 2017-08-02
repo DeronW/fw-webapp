@@ -14,10 +14,10 @@ class BillRecords extends React.Component {
     state = {
         current_type: Utils.hashQuery.type || '1',
         tab: {
-            '1': { name: '申请中', page_no: 1, order_list: [] },
-            '2': { name: '还款中', page_no: 1, order_list: [] },
-            '3': { name: '未通过', page_no: 1, order_list: [] },
-            '4': { name: '已还款', page_no: 1, order_list: [] }
+            '1': { name: '申请中', page_no: 1, records: [] },
+            '2': { name: '还款中', page_no: 1, records: [] },
+            '3': { name: '未通过', page_no: 1, records: [] },
+            '4': { name: '已还款', page_no: 1, records: [] }
         }
     }
 
@@ -30,7 +30,7 @@ class BillRecords extends React.Component {
             pageIndex: current_tab.page_no,
             loanStatus: current_type
         }).then(data => {
-            tab[current_type].order_list.push(...data.resultList)
+            tab[current_type].records.push(...data.resultList)
             current_tab.page_no < data.totalPage ?
                 tab[current_type].page_no++ :
                 tab[current_type].page_no = 0;
@@ -79,18 +79,39 @@ class BillRecords extends React.Component {
             </a>
         }
 
+        let payback_item = (i, index) => {
+            return <div styleName="payback-item" key={`${i.orderGid}${index}`}>
+                <div styleName="pi-title">{i.productName}</div>
+                <div styleName="pi-overdate">已逾期</div>
+                <div styleName="pi-money">&yen;{i.loanAmt}</div>
+                <a styleName="pi-payback">还款</a>
+                <div styleName="pi-date-limit">{i.termNumStr}</div>
+                <div styleName="pi-date-release">{i.loanTimeStr}</div>
+                <div styleName="pi-date-payback">{i.repaymentTimeStr}</div>
+                <div styleName="pi-txt-limit">期限</div>
+                <div styleName="pi-txt-release">放款日</div>
+                <div styleName="pi-txt-payback">还款日</div>
+
+                <div styleName="pi-line-a"></div>
+                <div styleName="pi-line-b"></div>
+                <div styleName="pi-line-c"></div>
+            </div>
+        }
+
         let empty = <span styleName="no-data"></span>
-        let current_tab = this.state.tab[this.state.current_type]
+        let records = this.state.tab[this.state.current_type].records
 
         return <div styleName="bg">
             <Header title="订单记录" />
 
-            <div styleName="bill-header"> {['1', '2', '3', '4'].map(btn_tab)} </div>
+            <div styleName="bill-header">
+                {['1', '2', '3', '4'].map(btn_tab)}</div>
 
             <div styleName="billContainer">
-                {current_tab.order_list.map(order_item)}
-                {current_tab.order_list.length === 0 && empty}
-            </div>
+                {current_type != 2 && records.map(order_item)}</div>
+
+            {current_type == 2 && records.map(payback_item)}
+            {records.length === 0 && empty}
         </div>
     }
 }

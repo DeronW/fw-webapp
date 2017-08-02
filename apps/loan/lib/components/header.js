@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import styles from '../css/header.css'
 import { Theme } from '../helpers'
-import {Browser} from '../lib/helpers'
+import {Browser} from '../helpers/'
 
 const Header = CSSModules(styles, {
     "allowMultiple": true,
