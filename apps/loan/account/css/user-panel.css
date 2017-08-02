@@ -1,0 +1,52 @@
+.bg {
+    background-color: #f0f0f0;
+    font-size: 30px;
+}
+
+.banner {
+    padding-top: 64px;
+    box-sizing: border-box;
+    height: 338px;
+    width: 100%;
+    background-color: #44adf0;
+    text-align: center;
+}
+
+.avatar {
+    display: block;
+    margin: 0 auto;
+    width: 156px;
+    height: 156px;
+}
+
+.mask-phone {
+    color: #fff;
+    font-size: 32px;
+    margin-top: 18px;
+}
+
+.links {
+    width: 100%;
+    margin: 21px 0;
+    background-color: #fff;
+}
+
+.link-item {
+    display: block;
+    position: relative;
+    margin-left: 35px;
+    width: calc(100% - 35px);
+    height: 100px;
+    background-color: #fff;
+    border-bottom: 1px solid #ebeaea;
+    color: #666;
+    line-height: 100px;
+    background: transparent url("../images/user-panel/right-arrow.png") no-repeat 640px center;
+}
+
+.link-item img {
+    float: left;
+    position: relative;
+    top: 26px;
+    margin-right: 18px;
+}
