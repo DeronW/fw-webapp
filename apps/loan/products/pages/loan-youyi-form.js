@@ -184,7 +184,7 @@ export default class LoopLoanLoan extends React.Component {
 
         return (
             <div styleName="cnt-container">
-                <Header title="借钱" history={history} enable={'force'}/>
+                <Header title="借钱" history={history}/>
                 <div styleName="loan-container">
                     <div styleName="loan-input-num">
                         <span styleName="input-title">借多少</span>

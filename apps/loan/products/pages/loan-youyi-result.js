@@ -25,7 +25,7 @@ export default class LoopLoanResult extends React.Component {
         let { history, loopLoan } = this.props;
         return (
             <div styleName="cnt-container">
-                <Header title="借款结果" history={history} enable={'force'}/>
+                <Header title="借款结果" history={history}/>
                 {loopLoan.loanStatus == 0 && <div styleName="checking-result-box">
                     <div styleName="wrap-box">
                         <div styleName="success-icon"><img styleName="img-size" src={require("../images/loan-youyi-result/success.png")} /></div>
