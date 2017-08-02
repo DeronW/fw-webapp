@@ -66,7 +66,7 @@ class Content extends React.Component {
                     <div className="apply-status">
                         <span className={`bill-${current_type}-color`}>{ current_type == 2 ? "立即还款" : tab[current_type].name}</span>
                     </div>
-                    <div className="apply-time">{order.loanSuccessTime}</div>
+                    <div className="apply-time">{order.dueTimeStr}</div>
                 </div>
             </Nav>
         }
