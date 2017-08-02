@@ -85,7 +85,7 @@ class BottomNavBar extends React.Component {
         let _href_payback = goto('/static/loan/account/index.html#/repayment-records')
         let _href_invite = goto('/static/loan/weixin-invite/index.html')
         let _href_self = goto('/static/loan/market/index.html')
-        let _href_more = goto('/static/loan/user/index.html')
+        let _href_more = goto('/static/loan/account/index.html#/user-panel')
         let _dome_section = {
             width: "140px",
             height: "100px",

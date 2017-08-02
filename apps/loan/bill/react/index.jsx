@@ -85,7 +85,7 @@ class Content extends React.Component {
 }
 
 function back_handler(){
-    location.href = "/static/loan/user/index.html";
+    location.href = "/static/loan/account/index.html#/user-panel";
 }
 
 $FW.DOMReady(function () {
