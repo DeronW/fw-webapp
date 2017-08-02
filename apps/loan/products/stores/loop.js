@@ -9,6 +9,7 @@ export default class LoopLoan {
             canBorrowAmt:'',
             creditLine:'',
             minLoanAmt:'',
+            maxLoanAmt:'',
             period:'',
             productDesc:'',
             productUuid:'',
@@ -37,6 +38,7 @@ export default class LoopLoan {
             this.canBorrowAmt = data.canBorrowAmt;
             this.creditLine = data.creditLine;
             this.minLoanAmt = data.minLoanAmt;
+            this.maxLoanAmt = data.maxLoanAmt;
             this.period = data.period;
             this.productDesc = data.productDes;
             this.productUuid = data.productUuid;
