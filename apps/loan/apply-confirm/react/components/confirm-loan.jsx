@@ -123,7 +123,6 @@ class ConfirmLoan extends React.Component{
                 if($FW.Browser.inJRGCApp()){
                     gotoHandler(`/static/loan/apply-result/index.html?orderGid=${orderGid}`);
                 }else{
-                    this.props.callbackCloseHanler(false);
                     this.props.callbackResultShow(true);
                     this.props.callbackGetLoanResultCheck(true);
                 }
