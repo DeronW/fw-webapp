@@ -47,8 +47,7 @@ class ReserveApply extends React.Component {
 
     render() {
         let {reserve, history}= this.props
-        let apply_panel = Browser.inIOS ? styles['iosApplyPanel'] : styles['applyPanel']
-        return <div className={apply_panel}>
+        return <div styleName='applyPanel'>
             <Header title="提交预约" history={history} show_close={false}/>
             <div styleName="submitPanel">
                 <div styleName="reserveMoney">预约金额</div>

@@ -32,8 +32,7 @@ class ReserveInfo extends React.Component {
     render() {
         let {reserve, history} = this.props
         let {context} = reserve
-        let topPanel = Browser.inIOS ? styles['iosInfoPanel'] : styles['infoPanel']
-        return <div className={topPanel}>
+        return <div styleName='infoPanel'>
             <Header title="详情" history={history} show_close={false}/>
             <div styleName="topInfo">
                 <div styleName="infoRate">
