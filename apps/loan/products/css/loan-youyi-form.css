@@ -23,6 +23,7 @@ input{
 .loan-input-num{
     height:119px;
     border-bottom:1px solid #ebeaea;
+    overflow:hidden;
 }
 .input-title{
     font-size:30px;
@@ -31,7 +32,7 @@ input{
     margin-top:66px;
     padding-left:30px;
 }
-.input-num{
+.input-num-android{
    width:400px;
    height:60px;
     line-height:normal;
@@ -41,6 +42,16 @@ input{
    float:right;
    margin-right:30px;
    margin-top:46px;
+}
+.input-num-ios{
+    width:400px;
+    height:60px;
+    line-height:normal;
+    text-align:right;
+    font-size:50px;
+    color:#556bb8;
+    float:right;
+    margin-top:46px;
 }
 .loan-info-item{
     height:99px;
