@@ -20,7 +20,7 @@ export default class LoopLoan {
             authFail:false,
             accountInAmount:'',
             shouldRepaymentAmount:'',
-            totalFeeAmount:'',
+            totalFeeAmount:null,
             loanUuid:'',
             feeAmoutExts:[],
             bankName:'',
