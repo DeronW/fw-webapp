@@ -22,6 +22,7 @@ import RepaymentFenqi from './pages/repayment-fenqi.js'
 import RepaymentResult from './pages/repayment-result.js'
 import RepaymentFangXin from './pages/repayment-fangxin.js'
 import RepaymentBankCard from './pages/repayment-bank-card.js'
+import RepaymentYouyiRecords from './pages/repayment-youyi-records'
 
 export default (stores) => {
     return <Router>
@@ -45,6 +46,7 @@ export default (stores) => {
                 <Route exact path='/repayment-fenqi' component={RepaymentFenqi} />
                 <Route exact path='/repayment-result' component={RepaymentResult} />
                 <Route exact path='/repayment-bank-card' component={RepaymentBankCard} />
+                <Route exact path='/repayment-youyi-records' component={RepaymentYouyiRecords} />
             </Switch>
         </Provider>
     </Router>

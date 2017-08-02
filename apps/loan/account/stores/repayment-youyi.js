@@ -15,7 +15,8 @@ export default class RepaymentYouyi {
             bank: '', // 银行名称
             cardNo: '', // 银行卡号后四位
             repaymentAmount: '', // 还款金额
-            protocolChecked: true, // 是否同意协议
+            protocolChecked: true, // 是否同意协议,
+            records: [], // 还款记录
         })
     }
 
@@ -64,6 +65,18 @@ export default class RepaymentYouyi {
             setTimeout(() => {
                 history.push('/repayment-result')
             }, 1700)
+        })
+    }
+
+    fetchRecords = pageNo => {
+        return this.Post('/api/looploan/repayment/v1/repaymentRecordList.json', {
+            loopLoanUuid: this.loanId,
+            page: pageNo,
+            pageSize: 10
+        }).then(data => {
+            this.records.push(...data.resultList);
+            let moreToLoad = data.totalPage > pageNo;
+            return moreToLoad
         })
     }
 

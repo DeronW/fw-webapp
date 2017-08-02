@@ -173,7 +173,7 @@ class Repayment extends React.Component {
                     </div>
                     <div styleName="info-item">
                         <div styleName="item-name">已还金额</div>
-                        <a styleName="item-value">{repayment_youyi.paidAmount}</a>
+                        <a styleName="item-value" href="/static/loan/account/index.html#/repayment-youyi-records">{repayment_youyi.paidAmount}</a>
                     </div>
                 </div>
 
@@ -188,8 +188,8 @@ class Repayment extends React.Component {
                 <div className={ protocolChecked ? styles['checked-protocol'] : styles['unchecked-protocol'] }
                     onClick={this.toggleProtocol}>
                     同意
-                    <a href='/static/loan/products/index.html#/protocols/youyi-repayment'>《委托扣款授权书（还款）》</a>、
-                    <a href='/static/loan/products/index.html#/protocols/youyi-repayment-service'>《委托扣款授权书（支付服务费）》</a>
+                    <a href="/static/loan/products/index.html#/protocols/youyi-repayment">《委托扣款授权书（还款）》</a>、
+                    <a href="/static/loan/products/index.html#/protocols/youyi-repayment-service">《委托扣款授权书（支付服务费）》</a>
                 </div>
 
                 <div styleName="submit-btn-container">
