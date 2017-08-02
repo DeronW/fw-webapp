@@ -20,7 +20,7 @@ export default class LoopLoan {
             authFail:false,
             accountInAmount:'',
             shouldRepaymentAmount:'',
-            totalFeeAmount:null,
+            totalFeeAmount:'',
             loanUuid:'',
             feeAmoutExts:[],
             bankName:'',
@@ -99,7 +99,7 @@ export default class LoopLoan {
         }).then((data)=>{
             this.accountInAmount = data.accountInAmount;
             this.shouldRepaymentAmount = data.shouldRepaymentAmount;
-            this.totalFeeAmount = this.totalFeeAmount;
+            this.totalFeeAmount = data.totalFeeAmount;
             this.feeAmoutExts = data.feeAmoutExts;
         });
    }

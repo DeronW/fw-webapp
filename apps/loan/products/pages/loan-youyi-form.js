@@ -181,7 +181,6 @@ export default class LoopLoanLoan extends React.Component {
         };
 
         let validate_term = this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt;
-        console.log(loopLoan.totalFeeAmount)
         return (
             <div styleName="cnt-container">
                 <Header title="借钱" history={history}/>

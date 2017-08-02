@@ -12,6 +12,7 @@ export default class RepaymentFangXin {
             repaymentAmount: 0, //已还金额
             withdrawBankShortName: '', //提现银行卡
             withdrawCardNo: null, //银行卡号
+            repaymentUuid: null,
             inputAmount: "",
             orderGid: null,
             cardGid: '',
@@ -36,7 +37,7 @@ export default class RepaymentFangXin {
 
     repaymentHandler = () => {
         this.Post('/api/repayment/v1/loandetail.json', {
-                loanUuid: this.loanGid
+                loanGid: this.loanGid
             }).then(data => {
                 this.logo = data.productLogo;
                 this.loanLeftAmount = data.loanLeftAmount;
