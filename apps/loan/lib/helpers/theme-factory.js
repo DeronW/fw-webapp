@@ -11,7 +11,7 @@ let THEME_DICT = {
         weixin_download_page: '/static/loan/user-weixin-jrgcapp/index.html'
     },
     fxh_app: {
-        header:false,
+        header:true,
         weixin_download_page: '/static/loan/user-weixin-fxhapp/index.html'
     },
     partner: {
