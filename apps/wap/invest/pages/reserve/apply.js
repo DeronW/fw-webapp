@@ -27,7 +27,7 @@ class ReserveApply extends React.Component {
 
     applyHandler = () => {
         let {reserve, history} = this.props
-        if (reserve.reserveMoney == '') {
+        if (reserve.reserveMoney === '') {
             Components.showToast("预约金额不能为空")
         } else if (reserve.reserveMoney < reserve.context.minAmt) {
             Components.showToast("预约金额不足100")

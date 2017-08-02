@@ -51,7 +51,7 @@ class UserPanel extends React.Component {
     }
 
     render() {
-        let { account } = this.props
+        let { account, history } = this.props
 
         return <div styleName="bg">
             <div styleName="banner">
@@ -64,7 +64,7 @@ class UserPanel extends React.Component {
                     <img src={require("../images/user-panel/info_icon.png")} />
                     个人信息
                 </a>
-                <a styleName="link-item" href="/static/loan/bill/index.html#2">
+                <a styleName="link-item" onClick={() => history.push("/bill-records?type=2")}>
                     <img src={require("../images/user-panel/more_repayment.png")} />
                     借款订单
                 </a>

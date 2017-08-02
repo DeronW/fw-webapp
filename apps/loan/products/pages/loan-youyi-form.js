@@ -4,7 +4,7 @@ import {observer, inject} from 'mobx-react'
 import {Components} from 'fw-javascripts'
 import {Header} from '../../lib/components'
 import styles from '../css/loan-youyi-form.css'
-import {Storage} from '../../lib/helpers'
+import {Storage, Browser} from '../../lib/helpers'
 
 @inject('loopLoan')
 @observer
@@ -189,7 +189,7 @@ export default class LoopLoanLoan extends React.Component {
                 <div styleName="loan-container">
                     <div styleName="loan-input-num">
                         <span styleName="input-title">借多少</span>
-                        <input styleName="input-num" type="number" value={this.state.value}
+                        <input styleName={Browser.inIOS ? "input-num-ios": "input-num-android"} type="number" value={this.state.value}
                                placeholder={"最多可借" + loopLoan.canBorrowAmt + "元"} onChange={this.changeHandler}/>
                     </div>
                     <div styleName="loan-info-item">
@@ -203,14 +203,14 @@ export default class LoopLoanLoan extends React.Component {
                             styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.shouldRepaymentAmount : 0}</div>
                     </div>
                     <div styleName="loan-info-item">
-                        <div styleName="loan-info-title">总利息{validate_term &&
+                        <div styleName="loan-info-title">总费用{validate_term &&
                         <span styleName="tip" onClick={this.detailShowHandler}></span>}</div>
                         <div
                             styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.totalFeeAmount : 0}</div>
                     </div>
-                    <div styleName="overdue-tip">
+                    {this.state.value && <div styleName="overdue-tip">
                         请按时还款，避免<span styleName="overdue-btn" onClick={this.overdueShowHandler}>逾期费用</span>
-                    </div>
+                    </div>}
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">打款至</div>
                         <div styleName="loan-bank-info">{loopLoan.bankName}({loopLoan.bankCardNo.slice(-4)})<span

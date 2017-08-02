@@ -128,7 +128,7 @@ class Home extends React.Component {
                 <div styleName="text-b">
                     我们邀请您使用放心花新推出的借款产品<br />
                     “优易借”。优易借是主打14天借款期限的<br />
-                    新产品，利息固定为6%，且还款时间灵活，<br />
+                    新产品，综合费率6%，且还款时间灵活，<br />
                     您可以提前还款和部分还款。快去试试吧~
                 </div>
                 <a styleName="btn-close" onClick={
