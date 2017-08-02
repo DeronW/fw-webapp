@@ -15,6 +15,13 @@ export default class Account {
             captcha_token: '',
             codeToken:''
         })
+
+        this.init_data()
+    }
+
+    init_data = () => {
+        let ud = Storage.getUserDict()
+        this.phone = ud.phone
     }
 
     @computed get mask_phone() {
