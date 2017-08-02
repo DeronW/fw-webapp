@@ -65,10 +65,11 @@
 }
 
 .inputMoney .allmadeBtn {
-    display: inline-block;
+    display: block;
     color: #4aa1f9;
     margin-left: 90px;
-    float: left;
+    float: right;
+    margin-right: 20px;
 }
 
 .interval {
