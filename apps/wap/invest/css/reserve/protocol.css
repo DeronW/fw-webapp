@@ -6,6 +6,7 @@
     color: #333;
     padding: 30px;
     display: table;
+    padding-top: 0;
 }
 
 .number {
