@@ -118,7 +118,7 @@ APP_NAMES.push(
     // ...TOPIC_PAGES,
     // ...HUISHANG_PAGES,
     // ...NOTICE_PAGES,
-    // ...SHOUSHAN,
+    ...SHOUSHAN, // 这是给首山提现用的页面
     // ...OUTSIDE_PAGES,
     // ...P2P,
     {
