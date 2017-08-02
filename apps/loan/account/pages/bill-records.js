@@ -45,10 +45,11 @@ class BillRecords extends React.Component {
         Event.touchBottom(this.loadMoreHandler);
     }
     switchTabHandler = (type) => {
-        this.setState({ current_type: type }, this.loadMoreHandler);
+        this.setState({ current_type: type }, this.loadMoreHandler)
     }
     render() {
         let { current_type, tab } = this.state;
+
 
         let btn_tab = (type, index) => {
             let cn = `ui-tab-li ${type === current_type && 'ui-select-li'}`
@@ -59,6 +60,8 @@ class BillRecords extends React.Component {
         }
 
         let order_item = (order, index) => {
+            let link;
+
             if (order.productId == 1)
                 link = `/static/loan/account/index.html#/repayment-youyi?loanUuid=${order.loanGid}`
             if (order.productId == 11)
@@ -121,6 +124,9 @@ class BillRecords extends React.Component {
 
         let empty = <span styleName="no-data"></span>
         let records = this.state.tab[this.state.current_type].records
+
+        console.log(current_type)
+        console.log(records)
 
         return <div styleName="bg">
             <Header title="订单记录" />
