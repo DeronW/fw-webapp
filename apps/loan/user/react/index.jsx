@@ -89,7 +89,7 @@ class MajorUserInfo extends React.Component {
         this.state = {
             link_a: null,
             link_b: null,
-            link_c: '/static/loan/bill/index.html#1',
+            link_c: '/static/loan/bill/index.html#2',
             link_d: null,
             tips: null
         }

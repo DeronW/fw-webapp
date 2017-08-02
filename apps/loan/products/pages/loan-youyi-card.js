@@ -66,7 +66,7 @@ export default class LoopLoanCard extends React.Component {
 
         return (
             <div styleName="cnt-container">
-                <Header title="选择银行卡" history={history} enable={'force'}/>
+                <Header title="选择银行卡" history={history}/>
                 <div styleName="card-tip">首次使用优易借产品时，您需要重新绑定一张银行卡。</div>
                 <div styleName="card-list">
                     {loopLoan.cardList.map(card_item)}
