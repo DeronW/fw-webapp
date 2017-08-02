@@ -61,16 +61,15 @@
     background: #f2f2f2;
     font-size: 32px;
     color: #555;
-    width: 470px;
+    width: 420px;
 }
 
 .inputMoney .allmadeBtn {
     display: block;
     color: #4aa1f9;
-    float: left;
-    margin-right: 20px;
+    float: right;
+    padding-right: 20px;
     height: 80px;
-    width: 150px;
     line-height: 80px;
     text-align: right;
 }
