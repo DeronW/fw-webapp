@@ -7,7 +7,7 @@ input{
     outline:none;
     border:none;
 }
-.input-num::-webkit-input-placeholder{
+.input-num-ios::-webkit-input-placeholder, .input-num-android::-webkit-input-placeholder{
     font-size: 30px;
     line-height:normal;
     color:#999;
