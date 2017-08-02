@@ -30,7 +30,6 @@ class Basic extends React.Component {
     handleSubmit = () => {
         let { basic, car, policy_detail, history } = this.props;
         basic.submit(history).then(data => {
-            basic.setFormData('carOwnersName', data.carInfo.licenseOwner);
             car.setForm(data.carInfo);
             policy_detail.setForm(data.insureInfo);
             history.push('/policy-detail');
@@ -54,7 +53,8 @@ class Basic extends React.Component {
                 <div styleName="select-placeholder">
                     <i styleName="icon-down-arrow"></i>
                     <select styleName="field-input-select"
-                        onChange={this.inputChangeHandler('cityCode')}>
+                        onChange={this.inputChangeHandler('cityCode')}
+                        value={basic.cityCode || ''}>
                         <option value="">请选择</option>
                         <option value="1">北京</option>
                         <option value="2">重庆</option>
@@ -76,7 +76,8 @@ class Basic extends React.Component {
                 <div styleName="select-placeholder">
                     <i styleName="icon-down-arrow"></i>
                     <select styleName="field-input-select"
-                        onChange={this.inputChangeHandler('carNoArea')}>
+                        onChange={this.inputChangeHandler('carNoArea')}
+                        value={basic.carNoArea || ''}>
                         <option value="">请选择</option>
                         <option value="京">京</option>
                         <option value="渝">渝</option>
@@ -110,7 +111,8 @@ class Basic extends React.Component {
                 <div styleName="select-placeholder">
                     <i styleName="icon-down-arrow"></i>
                     <select styleName="field-input-select"
-                        onChange={this.inputChangeHandler('intentionCompanyCode')} >
+                        onChange={this.inputChangeHandler('intentionCompanyCode')}
+                        value={basic.intentionCompanyCode || ''} >
                         <option value="">请选择</option>
                         <option value="0">平安保险</option>
                         <option value="1">太平洋保险</option>
