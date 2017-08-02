@@ -48,7 +48,7 @@ class Orders extends React.Component {
                 { type_name == '待付款' &&
                     <div styleName="pay-row">
                         <div styleName="pay-split-line"></div>
-                        <Link styleName="btn-pay" to="/">立即支付</Link>
+                        <a styleName="btn-pay" href={order.payUrl}>立即支付</a>
                     </div>
                 }
             </div>
