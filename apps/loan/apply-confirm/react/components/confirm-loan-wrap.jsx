@@ -83,16 +83,6 @@ class ConfirmLoanWrap extends React.Component{
                                                feeExtList={this.props.feeExtList} /> : null}
             {this.state.noticeShow ?
                 <Notice content={this.props.latedescription} callbackNoticeHide={this.noticeHide} /> : null}
-            {/*{this.state.verifyCodeShow ?*/}
-                {/*<VerifyCode callbackCloseHanler={this.closeHandler} callbackResultShow={this.resultShow}*/}
-                            {/*bankShortName={filtered[0].bankShortName} cardNo={filtered[0].cardNo}*/}
-                            {/*callbackGetLoanResultSuccess={this.getLoanResultSuccess}*/}
-                            {/*callbackGetLoanResultFail={this.getLoanResultFail}*/}
-                            {/*callbackGetLoanResultCheck={this.getLoanResultCheck}*/}
-                            {/*reSetState={this.reGetState}*/}
-                            {/*stateProps={this.state.reSetState}*/}
-                {/*/> : null}*/}
-
             {this.state.loanResult ?
                 <LoanResult callbackResultHide={this.resultHide} bankShortName={filtered[0].bankShortName}
                             cardNo={filtered[0].cardNo} success={this.state.successResult}
