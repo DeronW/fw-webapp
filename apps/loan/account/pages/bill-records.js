@@ -87,7 +87,7 @@ class BillRecords extends React.Component {
                 <a styleName="pi-payback">还款</a>
                 <div styleName="pi-date-limit">{i.termNumStr}</div>
                 <div styleName="pi-date-release">{i.loanTimeStr}</div>
-                <div styleName="pi-date-payback">{i.repaymentTimeStr}</div>
+                <div styleName="pi-date-payback">{i.dueTimeStr}</div>
                 <div styleName="pi-txt-limit">期限</div>
                 <div styleName="pi-txt-release">放款日</div>
                 <div styleName="pi-txt-payback">还款日</div>
