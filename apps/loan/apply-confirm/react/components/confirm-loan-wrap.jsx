@@ -75,7 +75,9 @@ class ConfirmLoanWrap extends React.Component{
                          shouldRepaymentAmount={this.props.shouldRepaymentAmount}
                          dueTime={this.props.dueTimeStr}
                          totalFeeAmount={this.props.totalFeeAmount}
-                         callbackNoticeShow={this.noticeShow} />
+                         callbackNoticeShow={this.noticeShow}
+                         callbackGetLoanResultCheck={this.getLoanResultCheck}
+            />
             {this.state.itemShow ? <ItemDetail callbackItemDetailHide={this.itemDetailHide}
                                                feeExtList={this.props.feeExtList} /> : null}
             {this.state.noticeShow ?
