@@ -8,22 +8,22 @@ export default class Customer {
         this.Post = Post;
         extendObservable(this, {
             holder: {
-                name: '12',
-                mobile: '12',
-                cardId: '12',
-                email: '12',
+                name: '',
+                mobile: '',
+                cardId: '',
+                email: '',
                 image1: '',
                 image2: ''
             },
             recognizee: {
-                name: '23',
-                mobile: '23',
-                cardId: '23',
-                email: '23',
+                name: '',
+                mobile: '',
+                cardId: '',
+                email: '',
                 image1: '',
                 image2: ''
             },
-            isSame: false,
+            isSame: true,
             vehicleLicenseImage1: '',
             vehicleLicenseImage2: ''
         })

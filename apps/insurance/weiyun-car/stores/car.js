@@ -5,6 +5,7 @@ export default class Car {
     constructor(Get) {
         this.Get = Get;
         extendObservable(this, {
+            carOwnersName: '', // 车主姓名
             moldName: '', // 品牌型号
             engineNo: '', // 发动机号
             carVin: '', // 车架号
@@ -19,6 +20,7 @@ export default class Car {
     }
 
     setForm = (data) => {
+        this.setFormData('carOwnersName', data.licenseOwner);
         this.setFormData('moldName', data.modleName);
         this.setFormData('engineNo', data.engineNo);
         this.setFormData('carVin', data.carVin);
