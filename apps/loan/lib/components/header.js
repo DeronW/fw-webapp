@@ -15,7 +15,7 @@ const Header = CSSModules(styles, {
     return <div styleName={Browser.inIOSApp ?
     "header-placeholder iosapp-header-placeholder" : "header-placeholder"} >
         <div styleName={Browser.inIOSApp ? "header iosapp-header" : "header"}>
-            { !props.hideGoback && <a styleName="btn-back" onClick={goBack}></a> }
+            { !props.hideGoback && <a styleName={Browser.inIOSApp ? "iosapp-btn-back" : "btn-back"} onClick={goBack}></a> }
             { props.title }
         </div>
     </div>
