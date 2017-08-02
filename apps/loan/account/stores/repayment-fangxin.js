@@ -23,15 +23,15 @@ export default class RepaymentFangXin {
         })
     }
 
-    setLoanId = (id) => {
-        this.loanGid = id
-    }
+    setLoanId = id => this.loanGid = id;
+
     chooseCard = (gid, type, name, no) => {
         this.cardGid = gid;
         this.cardType = type;
         this.chosenBank = name;
         this.chosenCardNo = no;
     }
+    
     repaymentHandler = () => {
         this.Post('/api/repayment/v1/loandetail.json', {
             loanGid: this.loanGid

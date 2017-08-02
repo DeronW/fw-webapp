@@ -101,7 +101,7 @@ class MajorUserInfo extends React.Component {
         }).then(data => {
             let st = data.borrowBtnStatus,
                 link_a = '/static/loan/user-info/index.html'
-                link_b = '/static/loan/user-card-management/index.html'
+                link_b = '/static/loan/account/index.html#/bank-card'
                 link_d = '/static/loan/account/index.html#/redbag'
             if (st === 1) { // 未实名
                 link_a = link_b = link_d = '/static/loan/user-card-set/index.html'
