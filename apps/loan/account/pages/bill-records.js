@@ -69,12 +69,18 @@ class BillRecords extends React.Component {
         let order_item = (order, index) => {
 
             let clickHandler = () => {
+
+                console.log(1)
+
+                console.log(order.productId)
+                console.log(order.productId == '11')
+
                 if (order.productId == '1') {
                     history.push(`/bill-youyi-detail?id=${order.loanGid}`)
                 } else if (order.productId == '21') {
                     location.href = `/static/loan/dumiao-bill/index.html?uuid=${order.uuid}&baseStatus=${order.baseStatus}`
                 } else if (order.productId == '11') {
-                    location.herf = `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}`
+                    location.href = `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}`
                 }
             }
 

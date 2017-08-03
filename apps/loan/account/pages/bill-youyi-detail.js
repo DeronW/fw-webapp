@@ -132,9 +132,7 @@ class BillYouyiDetail extends React.Component {
 
             { status == 2 &&
                 <div styleName="submit-btn-container">
-                    <a styleName="submit-btn" >
-                        立即还款
-                    </a>
+                    <a styleName="submit-btn" >立即还款</a>
                 </div>
             }
 
