@@ -5,7 +5,7 @@ import AppRouter from './router.js'
 import './css/index.css'
 
 import Stores from './stores'
-import { Post } from '../lib/helpers'
+import { Post, StoreSpy } from '../lib/helpers'
 
 let stores = {
     account: new Stores.Account(Post),
@@ -15,4 +15,7 @@ let stores = {
     repayment_fangxin: new Stores.RepaymentFangXin(Post),
     repayment_result: new Stores.RepaymentResult(Post)
 }
+
+new StoreSpy().wiretap()
+
 render(AppRouter(stores), document.getElementById('cnt'))
