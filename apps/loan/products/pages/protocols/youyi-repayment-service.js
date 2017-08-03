@@ -8,7 +8,6 @@ import styles from '../../css/protocols/partner.css'
 export default class YouyiRepaymentService extends React.Component {
 
     componentDidMount() {
-        NativeBridge.hide_header();
         document.title = '数字证书服务协议'
     }
     render() {
