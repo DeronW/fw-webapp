@@ -147,7 +147,8 @@
 
 .status-bar-paid {
     composes: status-bar;
-    background-color: #ff4f5b;
+    /* background-color: #ff4f5b; */
+     background-color: #d8d8d8;
 }
 
 .status-bar-rejected {
