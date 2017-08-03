@@ -75,11 +75,11 @@ class BillRecords extends React.Component {
                 console.log(order.productId)
                 console.log(order.productId == '11')
 
-                if (order.productId == '1') {
+                if (order.productId == '11') {
                     history.push(`/bill-youyi-detail?id=${order.loanGid}`)
                 } else if (order.productId == '21') {
                     location.href = `/static/loan/dumiao-bill/index.html?uuid=${order.uuid}&baseStatus=${order.baseStatus}`
-                } else if (order.productId == '11') {
+                } else if (order.productId == '1') {
                     location.href = `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}`
                 }
             }
