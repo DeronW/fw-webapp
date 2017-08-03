@@ -8,7 +8,8 @@ export default class RepaymentFangXin {
         this.data = {}
 
         extendObservable(this.data, {
-            loanGid: ''
+            loanGid: '',
+            inputAmount: "",
         })
 
         extendObservable(this, {
@@ -20,7 +21,6 @@ export default class RepaymentFangXin {
             withdrawBankShortName: '', //提现银行卡
             withdrawCardNo: null, //银行卡号
             repaymentUuid: null,
-            inputAmount: "",
             defaultCardGid:null,
             orderGid: null,
             cardGid: '',
@@ -33,7 +33,7 @@ export default class RepaymentFangXin {
 
     setLoanGid = id => this.data.loanGid = id;
 
-    setLoanAmount = (value) => this.inputAmount = value
+    setLoanAmount = (value) => this.data.inputAmount = value
 
     chooseCard = (gid, type, name, no) => {
         this.cardGid = gid;
@@ -65,7 +65,7 @@ export default class RepaymentFangXin {
 
     resendverifycode = () => {
         return this.Post(`/api/repayment/v1/checksmsverifycode.json`, {
-                repaymentAmount: this.inputAmount,
+                repaymentAmount: this.data.inputAmount,
                 loanGid: this.data.loanGid,
                 cardGid: this.cardGid || this.defaultCardGid
             }).then(data => {
