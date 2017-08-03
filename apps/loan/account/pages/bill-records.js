@@ -90,7 +90,7 @@ class BillRecords extends React.Component {
 
             let clickHandler = () => {
                 if (i.productId == '1') {
-                    history.push(`/repayment-fangxin?loanUuid=${i.uuid}`)
+                    history.push(`/repayment-fangxin?loanUuid=${i.loanGid}`)
                 } else if (i.productId == '21') {
                     history.push(`/repayment-fenqi?loanUuid=${i.uuid}`)
                 } else if (i.productId == '11') {
