@@ -49,6 +49,7 @@ class BillRecords extends React.Component {
     }
     render() {
         let { current_type, tab } = this.state;
+        let { history } = this.props;
 
 
         let btn_tab = (type, index) => {
@@ -119,7 +120,7 @@ class BillRecords extends React.Component {
         let records = this.state.tab[this.state.current_type].records
 
         return <div styleName="bg">
-            <Header title="订单记录" />
+            <Header title="订单记录" history = {history}/>
 
             <div styleName="bill-header">
                 {['1', '2', '3', '4'].map(btn_tab)}</div>
