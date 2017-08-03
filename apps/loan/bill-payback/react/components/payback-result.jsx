@@ -35,7 +35,7 @@ class PayBackResult extends React.Component{
                     setTimeout(() => {
                         location.href=`${activityRecomUrl}`;
                     }, 2000)
-                    
+
                 }
             }
         }, e => $FW.Component.Toast(e.message));
@@ -63,9 +63,9 @@ class PayBackResult extends React.Component{
             <div className="payback-result-success-tip">
                 { this.state.loanLeftAmount == 0 ?
                 <div className="tip-top">欢迎再次使用！</div>
-                : <div className="tip-top">还有{this.state.loanLeftAmount.toFixed(2)}元未还，请记得准时还款！</div>
+                : <div className="tip-top">还有{this.state.loanLeftAmount}元未还，请记得准时还款！</div>
                 }
-                <div className="tip-bottom"> 还款金额：<span>{this.state.repaymentAmount.toFixed(2)}</span>元</div>
+                <div className="tip-bottom"> 还款金额：<span>{this.state.repaymentAmount}</span>元</div>
                 <a className="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${SOURCE_TYPE}&token=${USER.token}&uid=${USER.uid}`}>
                     提升额度</a>
                 <div className="apply-btn" onClick={() => gotoHandler(`/static/loan/fxh/index.html`)}>申请用钱</div>
