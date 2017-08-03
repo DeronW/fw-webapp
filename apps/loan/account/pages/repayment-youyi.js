@@ -174,7 +174,11 @@ class Repayment extends React.Component {
                     </div>
                     <div styleName="info-item">
                         <div styleName="item-name">已还金额</div>
-                        <a styleName="item-value" href="/static/loan/account/index.html#/repayment-youyi-records">{repayment_youyi.paidAmount}</a>
+                        { repayment_youyi.paidAmount == 0 ?
+                            <div styleName="item-value">{repayment_youyi.paidAmount}</div>
+                            :
+                            <a styleName="item-value" href="/static/loan/account/index.html#/repayment-youyi-records">{repayment_youyi.paidAmount}</a>
+                        }
                     </div>
                 </div>
 
