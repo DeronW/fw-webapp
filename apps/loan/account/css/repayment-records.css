@@ -13,7 +13,7 @@
 
 .top {
     /*height: 78px;*/
-    padding: 34px 24px;
+    padding: 26px 24px;
     overflow: hidden;
 }
 
@@ -64,22 +64,48 @@
 
 .bottom {
     overflow: hidden;
-    padding: 22px 0;
+    /*padding: 22px 0;*/
+    position: relative;
+    height: 120px;
 }
 
 .time-limit,
 .put-day,
 .deadline {
-    float: left;
-    margin: 0 54px;
+    /*float: left;*/
+    /*margin: 0 54px;*/
+    position: absolute;
+    top: 12px;
 }
 
-.gap-line {
+.time-limit {
+    left: 40px;
+}
+
+.put-day {
+    left: 220px;
+}
+
+.deadline {
+    right: 40px;
+}
+
+.gap-line-left,
+.gap-line-right {
     float: left;
     width: 1px;
     height: 46px;
     background: #f3f2f2;
-    margin-top: 22px;
+    top: 34px;
+    position: absolute;
+}
+
+.gap-line-left {
+    left: 180px;
+}
+
+.gap-line-right {
+    right: 265px;
 }
 
 .time-detail {

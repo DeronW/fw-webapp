@@ -90,12 +90,12 @@ export default class RepaymentRecords extends React.Component {
                         <p styleName="time-detail">{item.termNumStr}</p>
                         <p styleName="desc">期限</p>
                     </div>
-                    <b styleName="gap-line"></b>
+                    <b styleName="gap-line-left"></b>
                     <div styleName="put-day">
                         <p styleName="time-detail">{item.loanTimeStr}</p>
                         <p styleName="desc">放款日</p>
                     </div>
-                    <b styleName="gap-line"></b>
+                    <b styleName="gap-line-right"></b>
                     <div styleName="deadline">
                         <p styleName="time-detail">{item.dueTimeStr}</p>
                         <p styleName="desc">还款日</p>
