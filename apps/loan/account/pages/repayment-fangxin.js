@@ -32,11 +32,15 @@ class RepaymentFangXin extends React.Component {
         let { inputAmount } = this.props.repayment_fangxin.data;
 
         let rf = repayment_fangxin;
+
+        if (rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200) {
+            return rf.setLoanAmount(rf.loanLeftAmount)
+        }
+
         if (!inputAmount && rf.loanLeftAmount >= 200) {
             return Components.showToast("请输入还款金额");
-        }else if(rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200){
-            rf.setLoanAmount(rf.loanLeftAmount)
         }
+
         if ((inputAmount - rf.loanLeftAmount) > 0) return rf.setLoanAmount(rf.loanLeftAmount)
         if ((rf.loanLeftAmount - inputAmount) > 0 && (rf.loanLeftAmount - inputAmount) < 100) return Components.showToast("剩余金额不能小于100");
         if (inputAmount < 100) return Components.showToast("还款金额不能小于100");
@@ -103,7 +107,7 @@ class RepaymentFangXin extends React.Component {
     }
     confirmBtnHandler = () => {
         let { repayment_fangxin, repayment_result, history } = this.props;
-        
+
         let { code } = this.state;
         if (code == '') {
             Components.showToast("请输入验证码");
