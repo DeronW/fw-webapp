@@ -12,17 +12,17 @@
 
 .success {
     composes: result-container;
-    background: url('../images/repayment-result/success.png') #fff no-repeat center 135px;
+    background: url('../images/repayment-youyi-result/success.png') #fff no-repeat center 135px;
 }
 
 .fail {
     composes: result-container;
-    background: url('../images/repayment-result/fail.png') #fff no-repeat center 135px;
+    background: url('../images/repayment-youyi-result/fail.png') #fff no-repeat center 135px;
 }
 
 .waiting {
     composes: result-container;
-    background: url('../images/repayment-result/waiting.png') #fff no-repeat center 135px;
+    background: url('../images/repayment-youyi-result/waiting.png') #fff no-repeat center 135px;
 }
 
 .title {
