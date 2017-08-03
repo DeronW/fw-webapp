@@ -7,7 +7,7 @@ import { Header } from '../../lib/components'
 import styles from '../css/repayment-result.css'
 
 
-@inject('repayment_result')
+@inject('repayment_youyi', 'repayment_result')
 @observer
 @CSSModules(styles, { allowMultiple: true })
 class RepaymentResult extends React.Component {
@@ -18,8 +18,12 @@ class RepaymentResult extends React.Component {
     }
 
     render() {
-        let { history, repayment_result } = this.props,
-        { repaymentAmount, leftAmount, repaymentResult } = repayment_result;
+        let { history, repayment_youyi, repayment_result } = this.props,
+        { repaymentAmount, leftAmount, repaymentResult } = repayment_result,
+        { loanId } = repayment_youyi.data;
+
+        let youyi_home_link = '/static/loan/products/index.html#/loan-youyi-index',
+            repayment_youyi_link = `/static/loan/account/index.html#/repayment-youyi?id=${loanId}`;
 
         let paidOff = <div>
             <div styleName="result-container success">
@@ -29,7 +33,7 @@ class RepaymentResult extends React.Component {
                     恭喜您已还清全部借款，请保持良好的信用
                 </div>
             </div>
-            <div styleName="btn">再借一笔</div>
+            <a styleName="btn" href={youyi_home_link}>再借一笔</a>
         </div>
 
         let stillLeft = <div>
@@ -40,7 +44,7 @@ class RepaymentResult extends React.Component {
                     还差 <span>{leftAmount}</span>元 未还，请记得按时还款
                 </div>
             </div>
-            <div styleName="btn">查看订单</div>
+            <a styleName="btn" href={repayment_youyi_link}>查看订单</a>
         </div>
 
         let fail = <div>
@@ -48,7 +52,7 @@ class RepaymentResult extends React.Component {
                 <div styleName="title">还款成功</div>
                 <div styleName="info">请检查网络原因，本次还款失败</div>
             </div>
-            <div styleName="btn">查看订单</div>
+            <a styleName="btn" href={repayment_youyi_link}>查看订单</a>
         </div>
 
         let waiting = <div>
@@ -59,7 +63,7 @@ class RepaymentResult extends React.Component {
                     如果还款失败我们稍后会发送短信通知您
                 </div>
             </div>
-            <div styleName="btn">查看订单</div>
+            <a styleName="btn" href={repayment_youyi_link}>查看订单</a>
         </div>
 
         return <div styleName="cnt-container">
