@@ -24,7 +24,7 @@ export default class LoopLoanLoan extends React.Component {
     }
 
     componentDidMount() {
-        document.title = '借钱';
+        document.title = '借款';
         this.props.loopLoan.check_cardinfo();
         this.props.loopLoan.get_baseinfo();
     }
@@ -184,7 +184,7 @@ export default class LoopLoanLoan extends React.Component {
         let validate_term = this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt && this.state.value % 100 == 0;
         return (
             <div styleName="cnt-container">
-                <Header title="借钱" history={history}/>
+                <Header title="借款" history={history}/>
                 <div styleName="loan-container">
                     <div styleName="loan-input-num">
                         <span styleName="input-title">借多少</span>
