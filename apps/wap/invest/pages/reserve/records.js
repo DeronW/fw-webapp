@@ -1,21 +1,24 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import styles from '../../css/reserve/records.css'
 import Header from '../../components/header'
-import {Event, Components} from 'fw-javascripts'
+import { Event, Components } from 'fw-javascripts'
 import showConfirm from '../../components/confirm'
+import { NativeBridge } from '../../helpers'
 
 @inject('reserve')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class ReserveRecords extends React.Component {
     constructor(props) {
         super(props)
     }
 
     componentDidMount() {
+
         NativeBridge.trigger('hide_header')
+
         this.props.reserve.getReserveList(null, true)
         Event.touchBottom(this.props.reserve.getReserveList);
     }
@@ -25,7 +28,7 @@ class ReserveRecords extends React.Component {
     }
 
     cancelReserveHandler = (bookTime, id) => {
-        let {reserve, history}= this.props;
+        let { reserve, history } = this.props;
         let cb = () => {
             reserve.cancelHandler(id).then((data) => {
                 if (data.cancelResult == '1') {
@@ -41,13 +44,13 @@ class ReserveRecords extends React.Component {
 
 
     lookProtocolHandler = () => {
-        let {history} = this.props
+        let { history } = this.props
         history.push(`/reserve/protocol`)
     }
 
     render() {
-        let {reserve, history}= this.props
-        let {records} = reserve
+        let { reserve, history } = this.props
+        let { records } = reserve
         let records_func = (item, index) => {
             let status;
             if (item.status == 0) {
@@ -86,7 +89,7 @@ class ReserveRecords extends React.Component {
                     {item.status == 0 && <div styleName="infoItem">
                         <div styleName="infoItemLeft protocolLook" onClick={this.lookProtocolHandler}>查看预约协议</div>
                         <div styleName="itemHeaderRight cancelBtn"
-                             onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
+                            onClick={() => this.cancelReserveHandler(item.bookTime, item.id)}>
                             取消预约
                         </div>
                     </div>}
@@ -94,11 +97,11 @@ class ReserveRecords extends React.Component {
             </div>
         }
         let no_records = <div styleName="emptyPanel">
-            <img src={require('../../images/reserve/records/norecords.png')}/>
+            <img src={require('../../images/reserve/records/norecords.png')} />
             <div styleName="norecords-text">暂无预约</div>
         </div>
         return <div styleName="recordsPanel">
-            <Header title="我的预约" history={history} show_close={false}/>
+            <Header title="我的预约" history={history} show_close={false} />
             {records.length == 0 ? no_records : records.map(records_func)}
         </div>
     }

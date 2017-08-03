@@ -2,7 +2,7 @@ import React from 'react'
 import CSSModules from 'react-css-modules'
 import { inject, observer } from 'mobx-react'
 
-import { Event } from 'fw-javascripts'
+import { Event, Utils } from 'fw-javascripts'
 
 import { Post } from '../../lib/helpers'
 
@@ -20,6 +20,9 @@ class RepaymentYouyiRecords extends React.Component {
 
     componentDidMount() {
         document.title = '还款记录';
+
+        this.props.repayment_youyi.setLoopLoanUuid(Utils.hashQuery.id);
+
         Event.touchBottom(this.loadMoreRecords);
         this.loadMoreRecords(null);
     }
