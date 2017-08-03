@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Components } from 'fw-javascripts'
+import { Components, Utils } from 'fw-javascripts'
 
 import { NativeBridge } from '../../lib/helpers'
 import { Header } from '../../lib/components'
@@ -20,10 +20,14 @@ class RepaymentFangXin extends React.Component {
     componentDidMount() {
         document.title = "还款明细";
         let { repayment_fangxin } = this.props;
+
+        if (Utils.hashQuery.loanUuid)
+            repayment_fangxin.setLoanId(Utils.hashQuery.loanUuid);
+
         repayment_fangxin.repaymentHandler();
     }
 
-    get verifyHandler() {
+    verifyHandler() {
         let { repayment_fangxin } = this.props;
         let rf = repayment_fangxin;
         if (!rf.inputAmount) return Components.showToast("请输入还款金额");
@@ -37,7 +41,7 @@ class RepaymentFangXin extends React.Component {
     }
 
     verifySMSHandler = () => {
-        if (this.verifyHandler) {
+        if (this.verifyHandler()) {
             this.setState({ show: true });
         }
     }
@@ -66,7 +70,7 @@ class RepaymentFangXin extends React.Component {
     changeValueHandler = e => {
         this.setState({ code: e.target.value });
     }
-    
+
     gotoRecord = () => {
         let { repayment_fangxin } = this.props;
         location.href = `https://m.easyloan888.com/static/loan/repayment-record/index.html?repaymentUuid=${repayment_fangxin.repaymentUuid}`
@@ -84,7 +88,7 @@ class RepaymentFangXin extends React.Component {
             window.clearInterval(this._timer);
             this._timer = setInterval(this.countingDown, 1000);
             repayment_fangxin.resendverifycode().then((data) => {
-                Components.showToast(data.retCode == 1 ?'发送成功':"发送失败")
+                Components.showToast(data.retCode == 1 ? '发送成功' : "发送失败")
             }, e => Components.Toast(e.message));
         }
     }
@@ -92,7 +96,7 @@ class RepaymentFangXin extends React.Component {
         clearInterval(this._timer);
     }
     confirmBtnHandler = () => {
-        let { repayment_fangxin, repayment_result,history } = this.props;
+        let { repayment_fangxin, repayment_result, history } = this.props;
         let { code } = this.state;
         if (code == '') {
             Components.showToast("请输入验证码");
@@ -100,9 +104,9 @@ class RepaymentFangXin extends React.Component {
             repayment_fangxin.confirmHandler(code).then(repaymentGid => {
                 repayment_result.setUidAndProduct(repaymentGid, "fangxin")
             })
-            setTimeout(()=>{
+            setTimeout(() => {
                 history.push("/repayment-result")
-            },800)
+            }, 800)
         }
     }
     render() {
@@ -171,7 +175,7 @@ class RepaymentFangXin extends React.Component {
                     <div styleName="amountItem">
                         <div styleName="itemName">还款金额</div>
                         <div styleName="itemAlready">{repayment_fangxin.loanLeftAmount}</div>
-                    </div> : 
+                    </div> :
                     <div styleName="amountItem">
                         <input styleName="itemInput" type="number" placeholder="输入还款金额" value={repayment_fangxin.inputAmount} onChange={this.inputAmountHandler()} />
                         <div styleName="itemAll" onClick={this.allAmountHandler(repayment_fangxin.loanLeftAmount)}>全部还清</div>
