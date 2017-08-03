@@ -103,6 +103,7 @@ export default class LoopLoan extends React.Component {
                 </div>
                 <div styleName="btn-container">
                     {LoopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt && <div styleName="btn-tip">最低{loopLoan.minLoanAmt}元起借</div>}
+                    {LoopLoan.userStatus == 1 && <div styleName="btn-tip">借款前请先完成芝麻信用分认证</div>}
                     <div styleName="btn" onClick={this.clickHandler}>{btn_title}</div>
                 </div>
                 {this.state.show && <div styleName="mask">
