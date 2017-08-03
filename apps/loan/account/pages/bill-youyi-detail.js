@@ -115,7 +115,7 @@ class BillYouyiDetail extends React.Component {
         }
 
         return <div styleName="cnt-container">
-            <Header title="账单详情" history={this.props.history} />
+            <Header title="账单详情" history={this.props.history} enable={'force'} />
 
             { (status == 2 || status == 3) &&
                 <Link styleName="repayment-records-entry" to={`repayment-youyi-records?id=${loopLoanUuid}`}>还款记录</Link>
