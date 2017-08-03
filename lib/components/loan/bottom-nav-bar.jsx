@@ -105,7 +105,7 @@ class BottomNavBar extends React.Component {
             <div style={easyloan_style_footer_fixed}>
                 <a style={_style_tab_a} href={_href_a}>
                     <i style={_style_tab_a_icon}></i>
-                    首页
+                    借款
                 </a>
                 <a style={_style_tab_payback} href={_href_payback}>
                     <i style={_style_tab_payback_icon}></i>
