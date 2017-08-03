@@ -41,11 +41,52 @@
     padding-bottom: 80px;
     background: #fff;
 }
-
+.payback-result-ing-tip{
+  font-size:32px;
+  line-height:48px;
+  color:#666;
+  text-align:center;
+}
+.payback-customer-service{
+  font-size:32px;
+  line-height:48px;
+  color:#666;
+  text-align:center;
+}
+.payback-customer-service img{
+  margin-right:20px;
+  margin-top:-10px;
+}
+.payback-customer-service a{
+  color:#6aa4f0;
+}
 .info span {
     color: #ff6f79;
 }
-
+.credit-btn{
+  display:block;
+  width:652px;
+  border:1px solid #6aa4f0;
+  height:84px;
+  line-height:84px;
+  text-align:center;
+  font-size:34px;
+  color:#6aa4f0;
+  border-radius:6px;
+  margin:34px auto;
+}
+.apply-btn{
+  display: block;
+  width:654px;
+  height:84px;
+  line-height:84px;
+  background:#6aa4f0;
+  text-align:center;
+  font-size:34px;
+  color:#fff;
+  border-radius:6px;
+  margin:34px auto;
+}
 .btn {
     display: block;
     width: 660px;
