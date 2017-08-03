@@ -21,7 +21,7 @@ class RepaymentFangXin extends React.Component {
         document.title = "还款明细";
         let { repayment_fangxin } = this.props;
 
-        repayment_fangxin.setLoanGid(Utils.hashQuery.loanUuid);
+        repayment_fangxin.setLoanGid(Utils.hashQuery.loanGid);
 
         repayment_fangxin.fetchRepaymentInfo()
     }
