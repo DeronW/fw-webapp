@@ -197,17 +197,19 @@ input {
     border: 1px solid #ebeaea;
     border-radius: 6px;
     background: #fafafa;
+    display: table;
 }
 
-.verify-input input {
-    width: 400px;
-}
+/* .verify-input input {
+    width: 350px;
+} */
 
 .sms-input {
-    width: 400px;
+    width: 350px;
     height: 64px;
     line-height: normal;
     font-size: 26px;
+    float: left;
 }
 
 .btn-countdown {
@@ -216,6 +218,8 @@ input {
     font-size: 26px;
     color: #6aa4f0;
     text-align: center;
+    float: right;
+    line-height: 68px;
 }
 
 .btn-list {
