@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import CSSModules from 'react-css-modules'
 
 import { Header } from '../../lib/components'
-
+import {Storage, Browser} from '../../lib/helpers'
 import styles from '../css/repayment-fangxin-result.css'
 
 
@@ -22,6 +22,21 @@ class RepaymentFangXinResult extends React.Component {
         { repaymentAmount, leftAmount, repaymentResult } = repayment_fangxin_result,
         { loanGid } = repayment_fangxin.data;
 
+        let USER = Storage.getUserDict();
+
+        let sourceType;
+        let jrgc_ios = Browser.inIOSApp;
+        let jrgc_android = Browser.inAndroidApp;
+        let jrgc_weixin = Browser.inWeixin;
+        let jrgc_wap = Browser.inMobile;
+        let jrgc_web = !Browser.inMobile;
+
+        if (jrgc_ios) sourceType = 1;
+        if (jrgc_android) sourceType = 2;
+        if (jrgc_wap) sourceType = 3;
+        if (jrgc_weixin) sourceType = 4;
+        if (jrgc_web) sourceType = 5;
+
         let fangxin_home_link = '/static/loan/fxh/index.html',
             repayment_fangxin_link = `/static/loan/account/index.html#/repayment-fangxin?id=${loanGid}`;
 
@@ -39,7 +54,7 @@ class RepaymentFangXinResult extends React.Component {
             <div styleName="info">
                     还有 <span>{leftAmount}</span>元未还，请记得按时还款<br/>
                     还款金额： {repaymentAmount}元
-                    <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml`}>
+                    <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml??sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`}>
                     提升额度</a>
                 <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
             </div>
