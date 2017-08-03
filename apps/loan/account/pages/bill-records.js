@@ -64,9 +64,9 @@ class BillRecords extends React.Component {
         let order_item = (order, index) => {
             let link;
 
-            if (order.productId == 1)
-                link = `/static/loan/account/index.html#/bill-youyi-detail?id=${order.loanGid}`
             if (order.productId == 11)
+                link = `/static/loan/account/index.html#/bill-youyi-detail?id=${order.loanGid}`
+            if (order.productId == 1)
                 link = `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}`
             if (order.productId == 21)
                 link = `/static/loan/dumiao-bill/index.html?uuid=${order.uuid}&baseStatus=${order.baseStatus}`
