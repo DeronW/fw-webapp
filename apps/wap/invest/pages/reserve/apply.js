@@ -36,6 +36,7 @@ class ReserveApply extends React.Component {
             reserve.submitReserveHandler().then(() => {
                 Components.showToast('预约成功')
                 history.push(`/reserve/records`)
+                reserve.getReserveList(null, true)
             })
         }
     }

@@ -4,6 +4,7 @@ import {Components, Utils, Event} from 'fw-javascripts'
 export default class Reserve {
     constructor(Post) {
         this.Post = Post
+
         extendObservable(this, {
             context: {
                 avgLoanPeriod: '',//平均起息时间
