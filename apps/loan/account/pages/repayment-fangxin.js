@@ -29,11 +29,15 @@ class RepaymentFangXin extends React.Component {
     verifyHandler() {
         let { repayment_fangxin } = this.props;
         let rf = repayment_fangxin;
-        if (!rf.inputAmount) return Components.showToast("请输入还款金额");
-        if ((rf.inputAmount - rf.loanLeftAmount) > 0) return repayment_fangxin.setLoanAmount(rf.loanLeftAmount)
+        if (!rf.inputAmount && rf.loanLeftAmount >= 200) {
+            return Components.showToast("请输入还款金额");
+        }else if(rf.loanLeftAmount >0 && rf.loanLeftAmount < 200){
+            rf.setLoanAmount(rf.loanLeftAmount)
+        }
+        if ((rf.inputAmount - rf.loanLeftAmount) > 0) return rf.setLoanAmount(rf.loanLeftAmount)
         if ((rf.loanLeftAmount - rf.inputAmount) > 0 && (rf.loanLeftAmount - rf.inputAmount) < 100) return Components.showToast("剩余金额不能小于100");
         if (rf.inputAmount < 100) return Components.showToast("还款金额不能小于100");
-        if (repayment_fangxin.cardType == 1) {
+        if (rf.cardType == 1) {
             return Components.showToast("信用卡暂不支持还款");
         }
         return true
