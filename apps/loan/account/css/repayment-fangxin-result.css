@@ -5,24 +5,26 @@
 
 .result-container {
     box-sizing: border-box;
-    padding: 57px 0 79px;
-    margin-top: 23px;
-    text-align: center;
+    /* padding: 70px 0; */
+    margin-top: 24px;
+    text-align: center; 
+    width: 100%;
+    height: 420px;
 }
 
 .success {
     composes: result-container;
-    background: url('../images/repayment-fangxin-result/success.png') #fff no-repeat center 135px;
+    background: url('../images/repayment-fangxin-result/success.png') #fff no-repeat center center;
 }
 
 .fail {
     composes: result-container;
-    background: url('../images/repayment-fangxin-result/fail.png') #fff no-repeat center 135px;
+    background: url('../images/repayment-fangxin-result/fail.png') #fff no-repeat center center;
 }
 
 .waiting {
     composes: result-container;
-    background: url('../images/repayment-fangxin-result/waiting.png') #fff no-repeat center 135px;
+    background: url('../images/repayment-fangxin-result/waiting.png') #fff no-repeat center center;
 }
 
 .title {
@@ -31,10 +33,13 @@
 }
 
 .info {
-    line-height: 1.84;
-    margin-top: 284px;
+    margin-bottom: 24px;
     color: #666;
     font-size: 28px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 80px;
+    background: #fff;
 }
 
 .info span {
