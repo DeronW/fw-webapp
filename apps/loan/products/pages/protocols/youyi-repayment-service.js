@@ -9,15 +9,12 @@ export default class YouyiRepaymentService extends React.Component {
 
     componentDidMount() {
         NativeBridge.hide_header();
-        document.title = '委托扣款授权书（支付服务费）'
+        document.title = '数字证书服务协议'
     }
     render() {
         let { history } = this.props;
-        let goBack = () => {
-            Browser.inApp ? NativeBridge.close() : history.goBack()
-        }
         return <div styleName="bg">
-            <Header title="委托扣款授权书（支付服务费）" goBack={goBack}/>
+            <Header title="数字证书服务协议" history={history}/>
             <div styleName="protocol-article">
 
 
