@@ -9,6 +9,7 @@ export default class YouyiRepayment extends React.Component {
 
     componentDidMount() {
         document.title = '委托扣款授权书（还款）'
+        NativeBridge.hide_header();
     }
     render() {
         let { history } = this.props;
