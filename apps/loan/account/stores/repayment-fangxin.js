@@ -3,7 +3,14 @@ import { Utils, Components } from 'fw-javascripts'
 
 export default class RepaymentFangXin {
     constructor(Post) {
-        this.Post = Post;
+        this.Post = Post
+
+        this.data = {}
+
+        extendObservable(this.data, {
+            loanGid: ''
+        })
+
         extendObservable(this, {
             logo: '', //logo url
             loanLeftAmount: null, //待还金额
@@ -20,11 +27,10 @@ export default class RepaymentFangXin {
             chosenBank: '', // 选择的银行卡银行名称
             chosenCardNo: '', // 选择的银行卡卡号
             repaymentGid: null,
-            loanGid: null,
         })
     }
 
-    setLoanId = id => this.loanGid = id;
+    setLoanGid = id => this.data.loanGid = id;
 
     setLoanAmount = (value) => this.inputAmount = value
 
@@ -35,9 +41,9 @@ export default class RepaymentFangXin {
         this.chosenCardNo = no;
     }
 
-    repaymentHandler = () => {
+    fetchRepaymentInfo = () => {
         this.Post('/api/repayment/v1/loandetail.json', {
-                loanGid: this.loanGid
+                loanGid: this.data.loanGid
             }).then(data => {
                 this.logo = data.productLogo;
                 this.loanLeftAmount = data.loanLeftAmount;
@@ -57,7 +63,7 @@ export default class RepaymentFangXin {
     resendverifycode = () => {
         return this.Post(`/api/repayment/v1/checksmsverifycode.json`, {
                 repaymentAmount: this.inputAmount,
-                loanGid: this.loanGid,
+                loanGid: this.data.loanGid,
                 cardGid: this.cardGid
             }).then(data => {
                 this.orderGid = data.orderGid;
