@@ -3,8 +3,8 @@ import { spy } from 'mobx'
 
 
 export default class StoreSpy {
-    constructor() {
-
+    constructor(stores) {
+        this.stores = stores
     }
 
     log = (txt) => {
