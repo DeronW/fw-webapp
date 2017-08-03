@@ -135,52 +135,54 @@ class RepaymentFangXin extends React.Component {
         </div>
 
         return <div styleName="repayment">
-            <Header title="还款明细" history={history} />
-            <div styleName="banner">
-                <img src={repayment_fangxin.logo} alt="" />
-                <span>放心花</span>
-            </div>
-            <div styleName="amount">
-                <div styleName="money amountMoney">
-                    <div styleName="amountNum">{repayment_fangxin.loanLeftAmount}</div>
-                    <div styleName="amountName">待还金额(元)</div>
+            <div styleName="repaymentBox">
+                <Header title="还款明细" history={history} />
+                <div styleName="banner">
+                    <img src={repayment_fangxin.logo} alt="" />
+                    <span>放心花</span>
                 </div>
-                <div styleName="money amoutLate">
-                    <div styleName="amountNum">{repayment_fangxin.overdueFee}</div>
-                    <div styleName="amountName">逾期费(元)</div>
-                </div>
-            </div>
-            <div styleName="amountPanel">
-                <div styleName="amountItem">
-                    <div styleName="itemName">还款日</div>
-                    <div styleName="itemTime">{repayment_fangxin.dueTime}</div>
-                </div>
-                <div styleName="amountItem">
-                    <div styleName="itemName">已还金额</div>
-                    <div styleName="itemAlready" onClick={this.gotoRecord}>{repayment_fangxin.repaymentAmount}
-                        <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
+                <div styleName="amount">
+                    <div styleName="money amountMoney">
+                        <div styleName="amountNum">{repayment_fangxin.loanLeftAmount}</div>
+                        <div styleName="amountName">待还金额(元)</div>
+                    </div>
+                    <div styleName="money amoutLate">
+                        <div styleName="amountNum">{repayment_fangxin.overdueFee}</div>
+                        <div styleName="amountName">逾期费(元)</div>
                     </div>
                 </div>
-
-            </div>
-            <div styleName="amountPanel">
-                <div styleName="amountItem">
-                    <div styleName="itemName">选择银行卡</div>
-                    <div styleName="itemAlready" onClick={() => this.chooseBank()}>{`${repayment_fangxin.chosenBank || repayment_fangxin.withdrawBankShortName}(${repayment_fangxin.chosenCardNo || repayment_fangxin.withdrawCardNo})`}
-                        <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
-                    </div>
-                </div>
-                {repayment_fangxin.loanLeftAmount < 200 ?
+                <div styleName="amountPanel">
                     <div styleName="amountItem">
-                        <div styleName="itemName">还款金额</div>
-                        <div styleName="itemAlready">{repayment_fangxin.loanLeftAmount}</div>
-                    </div> :
-                    <div styleName="amountItem">
-                        <input styleName="itemInput" type="number" placeholder="输入还款金额" value={repayment_fangxin.inputAmount} onChange={this.inputAmountHandler()} />
-                        <div styleName="itemAll" onClick={this.allAmountHandler(repayment_fangxin.loanLeftAmount)}>全部还清</div>
+                        <div styleName="itemName">还款日</div>
+                        <div styleName="itemTime">{repayment_fangxin.dueTime}</div>
                     </div>
-                }
+                    <div styleName="amountItem">
+                        <div styleName="itemName">已还金额</div>
+                        <div styleName="itemAlready" onClick={this.gotoRecord}>{repayment_fangxin.repaymentAmount}
+                            <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
+                        </div>
+                    </div>
 
+                </div>
+                <div styleName="amountPanel">
+                    <div styleName="amountItem">
+                        <div styleName="itemName">选择银行卡</div>
+                        <div styleName="itemAlready" onClick={() => this.chooseBank()}>{`${repayment_fangxin.chosenBank || repayment_fangxin.withdrawBankShortName}(${repayment_fangxin.chosenCardNo || repayment_fangxin.withdrawCardNo})`}
+                            <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
+                        </div>
+                    </div>
+                    {repayment_fangxin.loanLeftAmount < 200 ?
+                        <div styleName="amountItem">
+                            <div styleName="itemName">还款金额</div>
+                            <div styleName="itemAlready">{repayment_fangxin.loanLeftAmount}</div>
+                        </div> :
+                        <div styleName="amountItem">
+                            <input styleName="itemInput" type="number" placeholder="输入还款金额" value={repayment_fangxin.inputAmount} onChange={this.inputAmountHandler()} />
+                            <div styleName="itemAll" onClick={this.allAmountHandler(repayment_fangxin.loanLeftAmount)}>全部还清</div>
+                        </div>
+                    }
+
+                </div>
             </div>
             <div styleName="amountBottom">
                 <div styleName="submitBtn" onClick={() => this.verifySMSHandler()}>立即还款</div>
