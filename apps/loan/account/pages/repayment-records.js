@@ -51,7 +51,7 @@ export default class RepaymentRecords extends React.Component {
             curPage = curPage < data.totalPage
                 ? (curPage+1)
                 : 0;
-            // this.setState({resultList: resultList});
+            this.setState({resultList: resultList});
 
             done && done()
         })
