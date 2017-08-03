@@ -30,9 +30,9 @@ export default class RepaymentYouyi {
 
     setRepaymentId = id => this.repaymentUuid = id
 
-    setAmount = v => {
-        this.repaymentAmount = v;
-    }
+    setAmount = v => this.repaymentAmount = v
+
+    resetAmount = () => this.repaymentAmount = ''
 
     fetchRepaymentInfo = () => {
         return this.Post('/api/looploan/repayment/v1/loanDetail.json', {

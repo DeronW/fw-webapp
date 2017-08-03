@@ -3,6 +3,7 @@ import BankCard from './bank-card.js'
 import Redbag from './redbag.js'
 import RepaymentYouyi from './repayment-youyi.js'
 import RepaymentFangXin from './repayment-fangxin.js'
+import RepaymentFangXinResult from './repayment-fangxin-result.js'
 import RepaymentYouyiResult from './repayment-youyi-result.js'
 
 export default {
@@ -11,5 +12,6 @@ export default {
     Redbag,
     RepaymentYouyi,
     RepaymentFangXin,
+    RepaymentFangXinResult,
     RepaymentYouyiResult
 }

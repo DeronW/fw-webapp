@@ -58,7 +58,7 @@ class ReserveApply extends React.Component {
                 <div styleName="reserveMoney">预约金额</div>
                 <div styleName="userMoney">
                     <div styleName="money">可用余额
-                        <span>{`￥${reserve.accountAmount}`}</span>
+                        <span>&yen;{reserve.accountAmount}</span>
                     </div>
                     <div styleName="inputMoney">
                         <input type="text" placeholder="100元起投" value={reserve.reserveMoney}

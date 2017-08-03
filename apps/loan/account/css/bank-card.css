@@ -89,6 +89,7 @@
     height: 38px;
     line-height: 38px;
     padding: 0 9px;
+    margin-left: 15px;
     background-color: #fff;
     border-radius: 5px;
     -webkit-transform: skew(-10deg);
