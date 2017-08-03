@@ -11,8 +11,6 @@ import Header from '../../components/header'
 class ReserveProtocol extends React.Component {
     componentDidMount() {
         this.props.reserve.getContractHandler().then(data=>{
-            console.log(data)
-            console.log(data.contractMsg)
             this.props.reserve.contractMsg = data.contractMsg
         })
     }
