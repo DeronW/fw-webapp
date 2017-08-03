@@ -111,7 +111,8 @@
 .time-detail {
     font-size: 29px;
     margin: 0;
-    margin-bottom: 16px;
+    /*margin-bottom: 16px;*/
+    line-height: 52px;
 }
 
 .desc {
