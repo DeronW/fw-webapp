@@ -13,7 +13,7 @@ export default class StoreSpy {
     wiretap = () => {
         // https://mobx.js.org/refguide/spy.html
         spy((event) => {
-            console.log(event)
+            // console.log(event) // for debug
             if (this[`handle_${event.type}`])
                 this[`handle_${event.type}`](event)
         })
