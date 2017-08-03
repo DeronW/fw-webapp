@@ -34,11 +34,11 @@ export default class RepaymentRecords extends React.Component {
         })
 
     }
-    toRepaymentDetail = (productId, uuid) => () => {
+    toRepaymentDetail = (productId,uuid,loanGid) => () => {
         let {repayment_youyi, repayment_fangxin, history} = this.props;
         // 根据返回的productId跳转到不同的还款页面
         repayment_youyi.setLoanId(uuid);
-        repayment_fangxin.setLoanId(uuid);
+        repayment_fangxin.setLoanId(loanGid);
         productId == '1' && history.push('/repayment-fangxin');
         productId == '21' && history.push('/repayment-fenqi', {
             query: {
@@ -61,7 +61,7 @@ export default class RepaymentRecords extends React.Component {
                         <span styleName="repay-num">&yen;{item.loanLeftAmtStr}</span>
                         <span
                             styleName="repay-btn"
-                            onClick={this.toRepaymentDetail(item.productId, item.uuid)}>还款</span>
+                            onClick={this.toRepaymentDetail(item.productId, item.uuid,item.loanGid)}>还款</span>
                     </div>
                 </div>
                 <div styleName="line"></div>
