@@ -19,16 +19,17 @@ export default class RepaymentYouyi {
     }
 
     fetchRepaymentResult = () => {
-        let postUrl;
+        let postUrl, postData;
+
         if (this.product == 'fangxin') {
             postUrl = '/api/repayment/v1/repaymentstatus.json';
+            postData = { repaymentGid: this.repaymentUuid };
         } else if (this.product == 'youyi') {
             postUrl = '/api/looploan/repayment/v1/repaymentStatus.json';
+            postData = { repaymentUuid: this.repaymentUuid };
         }
 
-        this.Post(postUrl, {
-            repaymentUuid: this.repaymentUuid
-        }).then(data => {
+        this.Post(postUrl, postData).then(data => {
             let { loanLeftAmount, repaymentAmount, status } = data;
             this.leftAmount = loanLeftAmount;
             this.repaymentAmount = repaymentAmount;

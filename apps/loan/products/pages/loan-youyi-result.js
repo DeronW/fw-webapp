@@ -20,7 +20,7 @@ export default class LoopLoanResult extends React.Component {
         location.href = '/static/loan/products/index.html#/loan-youyi-index'
     }
     checkOrderHandler = () => {
-        location.href = `/static/loan/account/index.html#/repayment-youyi?loanUuid=${this.props.loopLoan.loanUuid}`;
+        location.href = `/static/loan/account/index.html#/repayment-youyi?id=${this.props.loopLoan.loanUuid}`;
     }
     render(){
         let { history, loopLoan } = this.props;
@@ -98,4 +98,3 @@ export default class LoopLoanResult extends React.Component {
 
     }
 }
-

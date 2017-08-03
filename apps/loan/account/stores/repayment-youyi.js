@@ -41,7 +41,7 @@ export default class RepaymentYouyi {
             this.unpaidAmount = data.loanLeftAmountStr;
             this.overdueAmount = data.overdueFeeStr;
             this.dueDate = data.dueTimeStr;
-            this.paidAmount = data.repaymenAmountStr;
+            this.paidAmount = data.repaymentAmountStr;
             this.bank = data.bankName;
             this.cardNo = data.withdrawCardNo.slice(-4);
             this.loopLoanUuid = data.loopLoanUuid;

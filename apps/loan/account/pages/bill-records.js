@@ -65,7 +65,7 @@ class BillRecords extends React.Component {
             let link;
 
             if (order.productId == 1)
-                link = `/static/loan/account/index.html#/repayment-youyi?loanUuid=${order.loanGid}`
+                link = `/static/loan/account/index.html#/bill-youyi-detail?id=${order.loanGid}`
             if (order.productId == 11)
                 link = `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}`
             if (order.productId == 21)
@@ -91,18 +91,18 @@ class BillRecords extends React.Component {
 
             let clickHandler = () => {
                 if (i.productId == '1') {
-                    history.push(`/repayment-fangxin?loanGid=${i.loanGid}`)
+                    history.push(`/repayment-fangxin?id=${i.loanGid}`)
                 } else if (i.productId == '21') {
-                    history.push(`/repayment-fenqi?loanUuid=${i.uuid}`)
+                    history.push(`/repayment-fenqi?id=${i.uuid}`)
                 } else if (i.productId == '11') {
-                    history.push(`/repayment-youyi?loanUuid=${i.uuid}`)
+                    history.push(`/repayment-youyi?id=${i.uuid}`)
                 }
             }
 
             return <div styleName="payback-item" key={`${i.orderGid}${index}`}>
                 <div styleName="pi-title">{i.productName}</div>
                 {i.overdueStatus && <div styleName="pi-overdate">已逾期</div>}
-                <div styleName="pi-money">&yen;{i.loanAmt}</div>
+                <div styleName="pi-money">&yen;{i.loanLeftAmtStr}</div>
                 <a styleName="pi-payback" onClick={clickHandler}>还款</a>
                 <div styleName="pi-date-limit">{i.termNumStr}</div>
                 <div styleName="pi-date-release">{i.loanTimeStr}</div>

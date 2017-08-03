@@ -27,7 +27,7 @@ class Repayment extends React.Component {
 
         let { repayment_youyi } = this.props;
 
-        repayment_youyi.setLoanId(Utils.hashQuery.loanGid)
+        repayment_youyi.setLoanId(Utils.hashQuery.id)
 
         repayment_youyi.fetchRepaymentInfo().then(data => {
             if (repayment_youyi.unpaidAmount < 200)
@@ -174,7 +174,11 @@ class Repayment extends React.Component {
                     </div>
                     <div styleName="info-item">
                         <div styleName="item-name">已还金额</div>
-                        <a styleName="item-value" href="/static/loan/account/index.html#/repayment-youyi-records">{repayment_youyi.paidAmount}</a>
+                        { repayment_youyi.paidAmount == 0 ?
+                            <div styleName="item-value">{repayment_youyi.paidAmount}</div>
+                            :
+                            <a styleName="item-value" href="/static/loan/account/index.html#/repayment-youyi-records">{repayment_youyi.paidAmount}</a>
+                        }
                     </div>
                 </div>
 
@@ -186,12 +190,12 @@ class Repayment extends React.Component {
                     {amountEditItem}
                 </div>
 
-                <div className={protocolChecked ? styles['checked-protocol'] : styles['unchecked-protocol']}
+                {/* <div className={protocolChecked ? styles['checked-protocol'] : styles['unchecked-protocol']}
                     onClick={this.toggleProtocol}>
                     同意
                     <a href="/static/loan/products/index.html#/protocols/youyi-repayment">《委托扣款授权书（还款）》</a>、
                     <a href="/static/loan/products/index.html#/protocols/youyi-repayment-service">《委托扣款授权书（支付服务费）》</a>
-                </div>
+                </div> */}
 
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn"
