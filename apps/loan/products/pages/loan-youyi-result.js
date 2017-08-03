@@ -25,7 +25,7 @@ export default class LoopLoanResult extends React.Component {
     render(){
         let { history, loopLoan } = this.props;
         let goBack = () => {
-            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/loan-youyi-index'
+            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
         }
         return (
             <div styleName="cnt-container">
