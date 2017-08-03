@@ -1,5 +1,5 @@
 import { extendObservable } from 'mobx'
-import { Utils, Components } from 'fw-javascripts'
+import { Components } from 'fw-javascripts'
 
 export default class RepaymentFangXin {
     constructor(Post) {
