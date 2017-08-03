@@ -20,6 +20,7 @@ import BankCardAdd from './pages/bank-card-add.js'
 import BankCardVerify from './pages/bank-card-verify.js'
 
 import BillRecords from './pages/bill-records.js'
+import BillYouyiDetail from './pages/bill-youyi-detail.js'
 
 import RepaymentRecords from './pages/repayment-records.js'
 import RepaymentYouyi from './pages/repayment-youyi.js'
@@ -54,6 +55,7 @@ export default (stores) => {
                 <Route exact path='/repayment-bank-card' component={RepaymentBankCard} />
                 <Route exact path='/repayment-youyi-records' component={RepaymentYouyiRecords} />
                 <Route exact path='/bill-records' component={BillRecords} />
+                <Route exact path='/bill-youyi-detail' component={BillYouyiDetail} />
 
             </Switch>
         </Provider>
