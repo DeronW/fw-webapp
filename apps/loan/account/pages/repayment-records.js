@@ -37,15 +37,13 @@ export default class RepaymentRecords extends React.Component {
     toRepaymentDetail = (productId,uuid,loanGid) => () => {
         let {repayment_youyi, repayment_fangxin, history} = this.props;
         // 根据返回的productId跳转到不同的还款页面
-        repayment_youyi.setLoanId(uuid);
-        // repayment_fangxin.setLoanId(loanGid);
         productId == '1' && history.push(`/repayment-fangxin?loanGid=${loanGid}`);
         productId == '21' && history.push('/repayment-fenqi', {
             query: {
                 loanUuid: uuid
             }
         });
-        productId == '11' && history.push('/repayment-youyi');
+        productId == '11' && history.push(`/repayment-youyi?loanGid=${uuid}`);
     }
     render() {
         let {history} = this.props;
