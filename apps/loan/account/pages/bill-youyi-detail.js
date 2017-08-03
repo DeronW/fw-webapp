@@ -27,7 +27,7 @@ class BillYouyiDetail extends React.Component {
 
     componentDidMount() {
         document.title = '账单详情';
-        let loanId = Utils.hashQuery.loanUuid;
+        let loanId = Utils.hashQuery.id;
         Post('/api/looploan/repayment/v1/loanDetail.json', {
             loanUuid: loanId
         }).then(data => {

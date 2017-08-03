@@ -25,7 +25,7 @@ class RepaymentFenqi extends React.Component {
 
     componentDidMount() {
         document.title = '还款明细';
-        this.setState({ loanUuid: Utils.hashQuery.loanUuid })
+        this.setState({ loanUuid: Utils.hashQuery.id })
     }
 
     componentDidUpdate(prevProps, prevState) {
