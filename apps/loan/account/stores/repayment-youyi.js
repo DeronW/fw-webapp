@@ -28,6 +28,8 @@ export default class RepaymentYouyi {
 
     setLoanId = id => this.data.loanId = id
 
+    setLoopLoanUuid = id => this.loopLoanUuid = id
+
     setRepaymentId = id => this.repaymentUuid = id
 
     setAmount = v => this.repaymentAmount = v

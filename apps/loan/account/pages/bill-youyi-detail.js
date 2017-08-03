@@ -25,6 +25,7 @@ class BillYouyiDetail extends React.Component {
         overdueAmount: '',
         loanDate: '',
         dueDate: '',
+        loopLoanUuid: ''
     }
 
     componentDidMount() {
@@ -45,14 +46,15 @@ class BillYouyiDetail extends React.Component {
                 unpaidAmount: data.loanLeftAmountStr,
                 overdueAmount: data.overdueFeeStr,
                 loanDate: data.loanTimeStr,
-                dueDate: data.dueTimeStr
+                dueDate: data.dueTimeStr,
+                loopLoanUuid: data.loopLoanUuid
             })
         })
     }
 
     render() {
         let { loanId, status, loanAmount, duration, actualAmount, paidAmount,
-            unpaidAmount, overdueAmount, loanDate, dueDate } = this.state,
+            unpaidAmount, overdueAmount, loanDate, dueDate, loopLoanUuid } = this.state,
             statusBar, detailContainer;
 
         let detail4TruelyLoaned = <div>
@@ -114,6 +116,10 @@ class BillYouyiDetail extends React.Component {
 
         return <div styleName="cnt-container">
             <Header title="账单详情" history={this.props.history} />
+
+            { (status == 2 || status == 3) &&
+                <Link styleName="repayment-records-entry" to={`repayment-youyi-records?id=${loopLoanUuid}`}>还款记录</Link>
+            }
 
             <div styleName="logo-container">
                 <img src={require('../images/repayment-youyi/logo.png')}></img>
