@@ -26,19 +26,23 @@ class ReserveApply extends React.Component {
 
     applyHandler = () => {
         let {reserve, history} = this.props
-        if (reserve.reserveMoney === '') {
-            Components.showToast("预约金额不能为空")
-        } else if (reserve.reserveMoney < reserve.context.minAmt) {
-            Components.showToast("预约金额不足100")
-        } else if (reserve.reserveMoney > reserve.accountAmount) {
-            Components.showToast("可用金额不足，请充值后重试")
-        } else {
-            reserve.submitReserveHandler().then(() => {
-                Components.showToast('预约成功')
-                history.push(`/reserve/records`)
-                // reserve.getReserveList(null, true)
-            })
-        }
+        reserve.fetchProduct().then(data => {
+            if (reserve.reserveMoney === '') {
+                Components.showToast("预约金额不能为空")
+            } else if (reserve.reserveMoney < reserve.context.minAmt) {
+                Components.showToast("预约金额不足100")
+            } else if (reserve.reserveMoney > reserve.accountAmount) {
+                Components.showToast("可用金额不足，请充值后重试")
+            } else if (reserve.reserveMoney > data.batchMaxmum) {
+                Components.showToast("自动投标金额不足")
+                NativeBridge.toNative('auto_bid_second')
+            } else {
+                reserve.submitReserveHandler().then(() => {
+                    Components.showToast('预约成功')
+                    history.push(`/reserve/records`)
+                })
+            }
+        })
     }
 
     jumpToProtocol = () => {
