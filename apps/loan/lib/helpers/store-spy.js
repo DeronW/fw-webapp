@@ -12,12 +12,6 @@ export default class StoreSpy {
     }
 
     wiretap = () => {
-        if (document) {
-            // 如果在正式环境, 不要添加调试信息
-            if (document.getElementById('env').value == 'production')
-                return null
-        }
-
         if (window) {
             window._$_show_me_mobx_stores = () => {
                 this.log('全部stores')
@@ -29,6 +23,12 @@ export default class StoreSpy {
                     console.log(i, this.stores[i].data)
                 }
             }
+        }
+
+        if (document) {
+            // 如果在正式环境, 不要添加调试信息
+            if (document.getElementById('env').value == 'production')
+                return null
         }
 
         // https://mobx.js.org/refguide/spy.html
