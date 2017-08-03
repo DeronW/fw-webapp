@@ -111,7 +111,7 @@ export default class LoopLoanLoan extends React.Component {
     }
 
     popupHideHandler = () => {
-        this.setState({mask3Show: false})
+        this.setState({mask3Show: false, smsValue:""})
     }
 
     overdueShowHandler = () => {
