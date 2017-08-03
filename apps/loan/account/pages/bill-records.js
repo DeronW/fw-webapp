@@ -79,10 +79,7 @@ class BillRecords extends React.Component {
                 <div styleName="right-arrow">
                     <img src={require("../images/bill-records/right-arrow.png")} /></div>
                 <div styleName="apply-status-wrap">
-                    <div styleName="apply-status">
-                        <span styleName={`bill-${current_type}-color`}>
-                            {tab[current_type].name}</span>
-                    </div>
+                    <div styleName="apply-status">{tab[current_type].name}</div>
                     <div styleName="apply-time">{order.dueTimeStr}</div>
                 </div>
             </a>
@@ -93,15 +90,11 @@ class BillRecords extends React.Component {
 
             let clickHandler = () => {
                 if (i.productId == '1') {
-                    repayment_fangxin.setLoanId(i.uuid)
-                    history.push('/repayment-fangxin')
+                    history.push(`/repayment-fangxin?loanUuid=${i.uuid}`)
                 } else if (i.productId == '21') {
-                    history.push('/repayment-fenqi', {
-                        query: { loanUuid: i.uuid }
-                    })
+                    history.push(`/repayment-fenqi?loanUuid=${i.uuid}`)
                 } else if (i.productId == '11') {
-                    repayment_youyi.setLoanId(i.uuid)
-                    history.push('/repayment-youyi')
+                    history.push(`/repayment-youyi?loanUuid=${i.uuid}`)
                 }
             }
 
