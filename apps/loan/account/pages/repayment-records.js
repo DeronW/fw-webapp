@@ -5,6 +5,7 @@ import {Redirect} from 'react-router'
 import {Link} from 'react-router-dom'
 import {Header, BottomNavBar} from '../../lib/components'
 import {Browser, Post, NativeBridge} from '../../lib/helpers'
+import { Event, Utils } from 'fw-javascripts'
 
 import styles from '../css/repayment-records.css'
 
@@ -25,15 +26,35 @@ export default class RepaymentRecords extends React.Component {
     componentDidMount() {
         document.title = '还款';
         NativeBridge.setTitle("还款");
-        let {repayment_youyi} = this.props;
+        this.loadMoreHandler(null);
+        Event.touchBottom(this.loadMoreHandler);
+        // let {repayment_youyi} = this.props;
+        // Post(`/api/order/v1/orderList.json`, {
+        //     page: this.state.curPage,
+        //     pageSize: 10,
+        //     loanStatus: 2
+        // }).then(data => {
+        //     this.setState({resultList: data.resultList});
+        // })
+
+    }
+    loadMoreHandler = (done) => {
+        let { resultList, curPage } = this.state;
+        if (curPage === 0) return done && done();
+
         Post(`/api/order/v1/orderList.json`, {
-            page: this.state.curPage,
             pageSize: 10,
+            page: curPage,
             loanStatus: 2
         }).then(data => {
-            this.setState({resultList: data.resultList});
-        })
+            resultList.push(...data.resultList)
+            curPage < data.totalPage ?
+                curPage++ :
+                curPage = 0;
+            this.setState({ resultList: resultList });
 
+            done && done()
+        })
     }
     toRepaymentDetail = (productId,uuid,loanGid) => () => {
         let {repayment_youyi, repayment_fangxin, history} = this.props;
