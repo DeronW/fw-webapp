@@ -20,6 +20,10 @@ class RepaymentFangXin extends React.Component {
     componentDidMount() {
         document.title = "还款明细";
         let { repayment_fangxin } = this.props;
+
+        if (Utils.hashQuery.loanUuid)
+            repayment_fangxin.setLoanId(Utils.hashQuery.loanUuid);
+
         repayment_fangxin.repaymentHandler();
     }
 
@@ -84,7 +88,7 @@ class RepaymentFangXin extends React.Component {
             window.clearInterval(this._timer);
             this._timer = setInterval(this.countingDown, 1000);
             repayment_fangxin.resendverifycode().then((data) => {
-                Components.showToast(data.retCode == 1 ?'发送成功':"发送失败")
+                Components.showToast(data.retCode == 1 ? '发送成功' : "发送失败")
             }, e => Components.Toast(e.message));
         }
     }
@@ -92,7 +96,7 @@ class RepaymentFangXin extends React.Component {
         clearInterval(this._timer);
     }
     confirmBtnHandler = () => {
-        let { repayment_fangxin, repayment_result,history } = this.props;
+        let { repayment_fangxin, repayment_result, history } = this.props;
         let { code } = this.state;
         if (code == '') {
             Components.showToast("请输入验证码");
@@ -100,9 +104,9 @@ class RepaymentFangXin extends React.Component {
             repayment_fangxin.confirmHandler(code).then(repaymentGid => {
                 repayment_result.setUidAndProduct(repaymentGid, "fangxin")
             })
-            setTimeout(()=>{
+            setTimeout(() => {
                 history.push("/repayment-result")
-            },800)
+            }, 800)
         }
     }
     render() {
