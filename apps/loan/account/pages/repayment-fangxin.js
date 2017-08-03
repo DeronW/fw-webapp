@@ -31,7 +31,7 @@ class RepaymentFangXin extends React.Component {
         let rf = repayment_fangxin;
         if (!rf.inputAmount && rf.loanLeftAmount >= 200) {
             return Components.showToast("请输入还款金额");
-        }else if(rf.loanLeftAmount >0 && rf.loanLeftAmount < 200){
+        }else if(rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200){
             rf.setLoanAmount(rf.loanLeftAmount)
         }
         if ((rf.inputAmount - rf.loanLeftAmount) > 0) return rf.setLoanAmount(rf.loanLeftAmount)
