@@ -4,7 +4,7 @@ import CSSModules from 'react-css-modules'
 
 import { Header } from '../../lib/components'
 
-import styles from '../css/repayment-result.css'
+import styles from '../css/repayment-youyi-result.css'
 
 
 @inject('repayment_fangxin', 'repayment_fangxin_result')
