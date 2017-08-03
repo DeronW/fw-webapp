@@ -16,6 +16,6 @@ let stores = {
     repayment_youyi_result: new Stores.RepaymentYouyiResult(Post)
 }
 
-new StoreSpy().wiretap()
+new StoreSpy(stores).wiretap()
 
 render(AppRouter(stores), document.getElementById('cnt'))

@@ -3,7 +3,8 @@ import { spy } from 'mobx'
 
 
 export default class StoreSpy {
-    constructor() {
+    constructor(stores) {
+        this.stores = stores
     }
 
     log = (txt) => {
@@ -11,6 +12,11 @@ export default class StoreSpy {
     }
 
     wiretap = () => {
+        if (document) {
+            // 如果在正式环境, 不要添加调试信息
+            if (document.getElementById('env').value == 'production')
+                return null
+        }
         // https://mobx.js.org/refguide/spy.html
         spy((event) => {
             // console.log(event) // for debug

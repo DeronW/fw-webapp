@@ -11,6 +11,6 @@ let stores = {
     loopLoan: new Stores.LoopLoan(Post),
 }
 
-new StoreSpy().wiretap()
+new StoreSpy(stores).wiretap()
 
 render(AppRouter(stores), document.getElementById('cnt'))

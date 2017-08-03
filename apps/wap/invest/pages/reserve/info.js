@@ -17,17 +17,18 @@ class ReserveInfo extends React.Component {
     }
 
     reserveHandler = () => {
-        let {reserve, history} = this.props
+        let {history} = this.props
+        this.props.reserve.fetchProduct().then(data => {
+            if (data.isRisk == 0) {
+                history.push('/user/evaluate')
+            } else if (data.batchMaxmum === 0) {
+                //调到自动投资页面
+                NativeBridge.toNative('auto_bid_auth')
+            } else {
+                history.push('/reserve/apply')
+            }
+        })
 
-        if (reserve.isRisk == 0) {
-            history.push('/user/evaluate')
-        } else if (reserve.batchMaxmum === 0) {
-            //调到自动投资页面
-            NativeBridge.toNative('auto_bid_auth')
-        } else {
-            this.props.reserve.fetchProduct()
-            history.push('/reserve/apply')
-        }
     }
 
     render() {
