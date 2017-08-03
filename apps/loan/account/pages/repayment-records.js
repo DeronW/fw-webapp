@@ -4,7 +4,7 @@ import {observer, inject} from 'mobx-react'
 import {Redirect} from 'react-router'
 import {Link} from 'react-router-dom'
 import {Header, BottomNavBar} from '../../lib/components'
-import {Browser, Post} from '../../lib/helpers'
+import {Browser, Post, NativeBridge} from '../../lib/helpers'
 
 import styles from '../css/repayment-records.css'
 
@@ -24,6 +24,7 @@ export default class RepaymentRecords extends React.Component {
     }
     componentDidMount() {
         document.title = '还款';
+        NativeBridge.setTitle("还款");
         let {repayment_youyi} = this.props;
         Post(`/api/order/v1/orderList.json`, {
             page: this.state.curPage,
@@ -86,7 +87,7 @@ export default class RepaymentRecords extends React.Component {
             <p styleName="blank-text">暂无数据</p>
         </div>
         return <div>
-            <Header title="还款" hideGoback enable={'force'}/> {/*内容部分*/}
+            <Header title="还款" hideGoback/> {/*内容部分*/}
             <div styleName="repayment-content">
                 {resultList.length > 0 && resultList.map(repayment_item)}
             </div>
