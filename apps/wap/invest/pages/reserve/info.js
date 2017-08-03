@@ -17,8 +17,10 @@ class ReserveInfo extends React.Component {
     }
 
     reserveHandler = () => {
-        let {history} = this.props
-        this.props.reserve.fetchProduct().then(data => {
+        console.log(1111)
+        let {history,reserve} = this.props
+        reserve.fetchProduct().then(data => {
+            console.log(data)
             if (data.isRisk == 0) {
                 history.push('/user/evaluate')
             } else if (data.batchMaxmum === 0) {

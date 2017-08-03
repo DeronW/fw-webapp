@@ -17,6 +17,20 @@ export default class StoreSpy {
             if (document.getElementById('env').value == 'production')
                 return null
         }
+
+        if (window) {
+            window._$_show_me_mobx_stores = () => {
+                this.log('全部stores')
+                console.log(this.stores)
+            }
+            window._$_show_me_mobx_stores_data = () => {
+                this.log('全部stores的data属性')
+                for (let i in this.stores) {
+                    console.log(i, this.stores[i].data)
+                }
+            }
+        }
+
         // https://mobx.js.org/refguide/spy.html
         spy((event) => {
             // console.log(event) // for debug
