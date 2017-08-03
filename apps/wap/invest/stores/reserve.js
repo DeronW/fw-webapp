@@ -88,8 +88,6 @@ export default class Reserve {
 
     getContractHandler = () => {
         return this.Post('/api/v1/appointContractMess.shtml').then(data => {
-            console.log(data)
-            console.log(data.contractMsg)
             this.contractMsg = data.contractMsg
             return {
                 contractMsg:this.contractMsg
