@@ -1,5 +1,6 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
+import { Link } from 'react-router-dom'
 
 import { Utils } from 'fw-javascripts'
 
@@ -14,6 +15,7 @@ import styles from '../css/bill-youyi-detail.css'
 class BillYouyiDetail extends React.Component {
 
     state = {
+        loanId: '',
         status: '',
         loanAmount: '',
         duration: '',
@@ -27,7 +29,10 @@ class BillYouyiDetail extends React.Component {
 
     componentDidMount() {
         document.title = '账单详情';
+
         let loanId = Utils.hashQuery.id;
+        this.setState({ loanId: loanId });
+
         Post('/api/looploan/repayment/v1/loanDetail.json', {
             loanUuid: loanId
         }).then(data => {
@@ -46,7 +51,7 @@ class BillYouyiDetail extends React.Component {
     }
 
     render() {
-        let { status, loanAmount, duration, actualAmount, paidAmount,
+        let { loanId, status, loanAmount, duration, actualAmount, paidAmount,
             unpaidAmount, overdueAmount, loanDate, dueDate } = this.state,
             statusBar, detailContainer;
 
@@ -132,7 +137,9 @@ class BillYouyiDetail extends React.Component {
 
             {status == 2 &&
                 <div styleName="submit-btn-container">
-                    <a styleName="submit-btn" >立即还款</a>
+                    <Link styleName="submit-btn" to={`/repayment-youyi?id=${loanId}`} >
+                        立即还款
+                    </Link>
                 </div>
             }
 
