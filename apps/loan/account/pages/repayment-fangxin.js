@@ -53,6 +53,7 @@ class RepaymentFangXin extends React.Component {
     verifySMSHandler = () => {
         if (this.verifyHandler()) {
             this.setState({ show: true });
+            this.getSMSCode();
         }
     }
 
@@ -136,8 +137,8 @@ class RepaymentFangXin extends React.Component {
                     <div styleName="verify-input">
                         <input styleName="sms-input" type="number" name="number" value={code}
                             placeholder="输入验证码" onChange={this.changeValueHandler} />
-                        <span styleName="btn-countdown" onClick={this.getSMSCode}>
-                            {this.state.remain > 0 ? this.state.remain + 's' : '获取验证码'}</span>
+                        <span styleName="btn-countdown">
+                            {this.state.remain > 0 ? this.state.remain + 's' : '60s'}</span>
                     </div>
                     <div styleName="btn-list">
                         <div styleName="cancel-btn" onClick={this.closePopHandler}>取消</div>
