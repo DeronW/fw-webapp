@@ -186,12 +186,12 @@ class Repayment extends React.Component {
                     {amountEditItem}
                 </div>
 
-                <div className={protocolChecked ? styles['checked-protocol'] : styles['unchecked-protocol']}
+                {/* <div className={protocolChecked ? styles['checked-protocol'] : styles['unchecked-protocol']}
                     onClick={this.toggleProtocol}>
                     同意
                     <a href="/static/loan/products/index.html#/protocols/youyi-repayment">《委托扣款授权书（还款）》</a>、
                     <a href="/static/loan/products/index.html#/protocols/youyi-repayment-service">《委托扣款授权书（支付服务费）》</a>
-                </div>
+                </div> */}
 
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn"
