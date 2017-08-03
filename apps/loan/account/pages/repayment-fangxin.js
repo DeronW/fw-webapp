@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import { Components } from 'fw-javascripts'
+import { Components, Utils } from 'fw-javascripts'
 
 import { NativeBridge } from '../../lib/helpers'
 import { Header } from '../../lib/components'
