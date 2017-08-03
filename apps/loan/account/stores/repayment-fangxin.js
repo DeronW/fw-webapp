@@ -51,6 +51,7 @@ export default class RepaymentFangXin {
                 this.overdueFee = data.overdueFee || 0;
                 this.dueTime = new Date(data.dueTime).toLocaleDateString();
                 this.repaymentAmount = data.repaymentAmount;
+                this.repaymentUuid = data.repaymentUuid;
             }).then(() => this.Post("/api/bankcard/v1/bankcardlist.json"))
             .then(data => {
                 let card = data.userBankList.withdrawBankcard.filter((item, index) => {
