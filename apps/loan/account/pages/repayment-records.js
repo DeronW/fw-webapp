@@ -86,7 +86,7 @@ export default class RepaymentRecords extends React.Component {
             <p styleName="blank-text">暂无数据</p>
         </div>
         return <div>
-            <Header title="还款" hideGoback enable={'force'}/> {/*内容部分*/}
+            <Header title="还款" hideGoback/> {/*内容部分*/}
             <div styleName="repayment-content">
                 {resultList.length > 0 && resultList.map(repayment_item)}
             </div>
