@@ -13,7 +13,7 @@ export default class YouyiLoanService extends React.Component {
     render() {
         let { history } = this.props;
         return <div styleName="bg">
-            <Header title="借款服务协议" history={history} enable={'force'}/>
+            <Header title="借款服务协议" history={history}/>
             <div styleName="protocol-article">
 
 
