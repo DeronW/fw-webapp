@@ -47,7 +47,7 @@ export default class RepaymentRecords extends React.Component {
             page: curPage,
             loanStatus: 2
         }).then(data => {
-            resultList = resultList.push(...data.resultList)
+            resultList.push(...data.resultList)
             curPage = curPage < data.totalPage
                 ? (curPage+1)
                 : 0;
