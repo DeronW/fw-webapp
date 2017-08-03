@@ -1,14 +1,14 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Header} from '../../components/'
+import { observer, inject } from 'mobx-react'
+import { Header } from '../../components/'
 import styles from '../../css/reserve/info.css'
-import {NativeBridge} from '../../helpers/'
-import {Browser} from '../../helpers/'
+import { NativeBridge } from '../../helpers'
+import { Browser } from '../../helpers'
 
 @inject('reserve')
 @observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class ReserveInfo extends React.Component {
 
     componentDidMount() {
@@ -17,7 +17,7 @@ class ReserveInfo extends React.Component {
     }
 
     reserveHandler = () => {
-        let {history, reserve} = this.props
+        let { history, reserve } = this.props
         reserve.fetchProduct().then(data => {
             if (data.isRisk == 0) {
                 history.push('/user/evaluate')
@@ -32,10 +32,10 @@ class ReserveInfo extends React.Component {
     }
 
     render() {
-        let {reserve, history} = this.props
-        let {context} = reserve
+        let { reserve, history } = this.props
+        let { context } = reserve
         return <div styleName='infoPanel'>
-            <Header title="详情" history={history} show_close={false}/>
+            <Header title="详情" history={history} show_close={false} />
             <div styleName="topInfo">
                 <div styleName="infoRate">
                     <div styleName="rateUp">
