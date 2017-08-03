@@ -5,7 +5,7 @@ import {Redirect} from 'react-router'
 import {Link} from 'react-router-dom'
 import {Header, BottomNavBar} from '../../lib/components'
 import {Browser, Post, NativeBridge} from '../../lib/helpers'
-import { Event, Utils } from 'fw-javascripts'
+import {Event, Utils} from 'fw-javascripts'
 
 import styles from '../css/repayment-records.css'
 
@@ -28,35 +28,34 @@ export default class RepaymentRecords extends React.Component {
         NativeBridge.setTitle("还款");
         this.loadMoreHandler(null);
         Event.touchBottom(this.loadMoreHandler);
-        // let {repayment_youyi} = this.props;
-        // Post(`/api/order/v1/orderList.json`, {
-        //     page: this.state.curPage,
-        //     pageSize: 10,
-        //     loanStatus: 2
-        // }).then(data => {
-        //     this.setState({resultList: data.resultList});
-        // })
+        // let {repayment_youyi} = this.props; Post(`/api/order/v1/orderList.json`, {
+        //  page: this.state.curPage,     pageSize: 10,     loanStatus: 2 }).then(data
+        // => {     this.setState({resultList: data.resultList}); })
 
     }
+    componentWillUnmount() {
+        Event.cancelTouchBottom();
+    }
     loadMoreHandler = (done) => {
-        let { resultList, curPage } = this.state;
-        if (curPage === 0) return done && done();
-
+        let {resultList, curPage} = this.state;
+        if (curPage === 0) 
+            return done && done();
+        
         Post(`/api/order/v1/orderList.json`, {
             pageSize: 10,
             page: curPage,
             loanStatus: 2
         }).then(data => {
             resultList.push(...data.resultList)
-            curPage < data.totalPage ?
-                curPage++ :
-                curPage = 0;
-            this.setState({ resultList: resultList });
+            curPage < data.totalPage
+                ? curPage++
+                : curPage = 0;
+            this.setState({resultList: resultList});
 
             done && done()
         })
     }
-    toRepaymentDetail = (productId,uuid,loanGid) => () => {
+    toRepaymentDetail = (productId, uuid, loanGid) => () => {
         let {repayment_youyi, repayment_fangxin, history} = this.props;
         // 根据返回的productId跳转到不同的还款页面
         productId == '1' && history.push(`/repayment-fangxin?loanGid=${loanGid}`);
@@ -81,7 +80,7 @@ export default class RepaymentRecords extends React.Component {
                         <span styleName="repay-num">&yen;{item.loanLeftAmtStr}</span>
                         <span
                             styleName="repay-btn"
-                            onClick={this.toRepaymentDetail(item.productId, item.uuid,item.loanGid)}>还款</span>
+                            onClick={this.toRepaymentDetail(item.productId, item.uuid, item.loanGid)}>还款</span>
                     </div>
                 </div>
                 <div styleName="line"></div>
