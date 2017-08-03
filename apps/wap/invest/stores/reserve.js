@@ -21,7 +21,8 @@ export default class Reserve {
             batchMaxmum: 0,//批量投资限额
             reserveMoney: '',//用户输入的预约金额
             isChecked: true,
-            applyInvestClaimId: ''
+            applyInvestClaimId: '',
+            contractMsg: ''
         })
     }
 
@@ -41,6 +42,11 @@ export default class Reserve {
             this.batchMaxmum = data.batchMaxmum
             this.minAmt = data.appointClaim.minAmt
             this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
+
+            return {
+                isRisk:this.isRisk,
+                batchMaxmum:this.batchMaxmum
+            }
         })
     }
 
@@ -81,7 +87,14 @@ export default class Reserve {
     }
 
     getContractHandler = () => {
-        return this.Post('/api/v1/appointContractMess.shtml')
+        return this.Post('/api/v1/appointContractMess.shtml').then(data => {
+            console.log(data)
+            console.log(data.contractMsg)
+            this.contractMsg = data.contractMsg
+            return {
+                contractMsg:this.contractMsg
+            }
+        })
     }
 
     setFormData = (field, value) => {

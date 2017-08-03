@@ -13,8 +13,8 @@ let stores = {
     redbag: new Stores.Redbag(Post),
     repayment_youyi: new Stores.RepaymentYouyi(Post),
     repayment_fangxin: new Stores.RepaymentFangXin(Post),
-    repayment_result: new Stores.RepaymentResult(Post),
     repayment_fangxin_result: new Stores.RepaymentResult(Post),
+    repayment_youyi_result: new Stores.RepaymentYouyiResult(Post)
 }
 
 new StoreSpy(stores).wiretap()

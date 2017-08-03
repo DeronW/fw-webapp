@@ -30,9 +30,9 @@ export default class RepaymentYouyi {
 
     setRepaymentId = id => this.repaymentUuid = id
 
-    setAmount = v => {
-        this.repaymentAmount = v;
-    }
+    setAmount = v => this.repaymentAmount = v
+
+    resetAmount = () => this.repaymentAmount = ''
 
     fetchRepaymentInfo = () => {
         return this.Post('/api/looploan/repayment/v1/loanDetail.json', {
@@ -71,7 +71,7 @@ export default class RepaymentYouyi {
             verifycode: SMSInput
         }).then(data => {
             setTimeout(() => {
-                history.push('/repayment-result')
+                history.push('/repayment-youyi-result')
             }, 1700)
         })
     }

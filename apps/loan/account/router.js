@@ -25,8 +25,8 @@ import BillYouyiDetail from './pages/bill-youyi-detail.js'
 import RepaymentRecords from './pages/repayment-records.js'
 import RepaymentYouyi from './pages/repayment-youyi.js'
 import RepaymentFenqi from './pages/repayment-fenqi.js'
-import RepaymentResult from './pages/repayment-result.js'
 import RepaymentFangXinResult from './pages/repayment-fangxin-result.js'
+import RepaymentYouyiResult from './pages/repayment-youyi-result.js'
 import RepaymentFangXin from './pages/repayment-fangxin.js'
 import RepaymentBankCard from './pages/repayment-bank-card.js'
 import RepaymentYouyiRecords from './pages/repayment-youyi-records'
@@ -52,8 +52,12 @@ export default (stores) => {
                 <Route exact path='/repayment-youyi' component={RepaymentYouyi} />
                 <Route exact path='/repayment-fangxin' component={RepaymentFangXin} />
                 <Route exact path='/repayment-fenqi' component={RepaymentFenqi} />
+<<<<<<< HEAD
                 <Route exact path='/repayment-result' component={RepaymentResult} />
                 <Route exact path='/repayment-fangxin-result' component={RepaymentFangXinResult} />
+=======
+                <Route exact path='/repayment-youyi-result' component={RepaymentYouyiResult} />
+>>>>>>> b69c1f2ebdb64f2b4d5570bff81025cff85c29e7
                 <Route exact path='/repayment-bank-card' component={RepaymentBankCard} />
                 <Route exact path='/repayment-youyi-records' component={RepaymentYouyiRecords} />
                 <Route exact path='/bill-records' component={BillRecords} />

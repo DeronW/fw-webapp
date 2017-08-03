@@ -2,6 +2,10 @@
     background: #f0f0f0;
 }
 
+.center{
+    text-align:center;
+}
+
 .protocol-article {
     padding: 34px;
 }

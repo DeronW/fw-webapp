@@ -4,9 +4,10 @@
     font-size: 30px;
     line-height: 46px;
     color: #333;
-    padding: 30px;
     display: table;
     padding-top: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .number {
@@ -23,4 +24,8 @@
 
 .signature-right {
     float: right;
+}
+
+.contractText {
+    padding: 30px;
 }
