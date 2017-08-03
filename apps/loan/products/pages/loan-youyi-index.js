@@ -77,7 +77,7 @@ export default class LoopLoan extends React.Component {
         }
 
         let goBack = () => {
-            Browser.inFXHApp ? NativeBridge.close() : history.goBack()
+            Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
         }
 
         return (
