@@ -23,7 +23,7 @@ class RepaymentFangXin extends React.Component {
         repayment_fangxin.repaymentHandler();
     }
 
-    get verifyHandler() {
+    verifyHandler() {
         let { repayment_fangxin } = this.props;
         let rf = repayment_fangxin;
         if (!rf.inputAmount) return Components.showToast("请输入还款金额");
@@ -37,7 +37,7 @@ class RepaymentFangXin extends React.Component {
     }
 
     verifySMSHandler = () => {
-        if (this.verifyHandler) {
+        if (this.verifyHandler()) {
             this.setState({ show: true });
         }
     }
@@ -66,7 +66,7 @@ class RepaymentFangXin extends React.Component {
     changeValueHandler = e => {
         this.setState({ code: e.target.value });
     }
-    
+
     gotoRecord = () => {
         let { repayment_fangxin } = this.props;
         location.href = `https://m.easyloan888.com/static/loan/repayment-record/index.html?repaymentUuid=${repayment_fangxin.repaymentUuid}`
@@ -171,7 +171,7 @@ class RepaymentFangXin extends React.Component {
                     <div styleName="amountItem">
                         <div styleName="itemName">还款金额</div>
                         <div styleName="itemAlready">{repayment_fangxin.loanLeftAmount}</div>
-                    </div> : 
+                    </div> :
                     <div styleName="amountItem">
                         <input styleName="itemInput" type="number" placeholder="输入还款金额" value={repayment_fangxin.inputAmount} onChange={this.inputAmountHandler()} />
                         <div styleName="itemAll" onClick={this.allAmountHandler(repayment_fangxin.loanLeftAmount)}>全部还清</div>
