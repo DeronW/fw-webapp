@@ -13,6 +13,7 @@ export default class RepaymentYouyi {
 
         extendObservable(this, {
             repaymentUuid: '',
+            loopLoanUuid: '',
             unpaidAmount: '', // 待还金额
             overdueAmount: '', // 逾期费
             dueDate: '', // 还款日
@@ -43,13 +44,14 @@ export default class RepaymentYouyi {
             this.paidAmount = data.repaymenAmountStr;
             this.bank = data.bankName;
             this.cardNo = data.withdrawCardNo.slice(-4);
+            this.loopLoanUuid = data.loopLoanUuid;
             if (this.unpaidAmount < 200) this.repaymentAmount = this.unpaidAmount;
         })
     }
 
     submitRepayment = () => {
         return this.Post('/api/looploan/repayment/v1/checkSmsVerifyCode.json', {
-            loopLoanUuid: this.data.loanId,
+            loopLoanUuid: this.loopLoanUuid,
             repaymentAmt: this.repaymentAmount
         }).then(data => {
             this.setRepaymentId(data.repaymentUuid);
@@ -76,7 +78,7 @@ export default class RepaymentYouyi {
 
     fetchRecords = pageNo => {
         return this.Post('/api/looploan/repayment/v1/repaymentRecordList.json', {
-            loopLoanUuid: this.data.loanId,
+            loopLoanUuid: this.loopLoanUuid,
             page: pageNo,
             pageSize: 10
         }).then(data => {
