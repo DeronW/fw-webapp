@@ -33,9 +33,9 @@ export default class RepaymentRecords extends React.Component {
         // => {     this.setState({resultList: data.resultList}); })
 
     }
-    // componentWillUnmount() {
-    //     Event.cancelTouchBottom();
-    // }
+    componentWillUnmount() {
+        Event.cancelTouchBottom();
+    }
     loadMoreHandler = (done) => {
         let {resultList, curPage} = this.state;
         if (curPage === 0) 
