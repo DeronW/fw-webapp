@@ -85,6 +85,7 @@ export default class LoopLoan {
         this.Post('/api/looploan/bankcard/v1/commitInfo.json',{
             bankCardUuid:bankCardUuid
         }).then(()=>{
+            this.get_baseinfo();
             Components.showToast("绑卡成功")
             setTimeout(()=>{
                 location.href = '/static/loan/products/index.html#/loan-youyi-index'

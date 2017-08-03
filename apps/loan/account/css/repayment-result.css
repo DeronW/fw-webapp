@@ -42,6 +42,7 @@
 }
 
 .btn {
+    display: block;
     width: 660px;
     height: 84px;
     line-height: 84px;

@@ -80,6 +80,10 @@ export default class Reserve {
         })
     }
 
+    getContractHandler = () => {
+        return this.Post('/api/v1/appointContractMess.shtml')
+    }
+
     setFormData = (field, value) => {
         this[field] = value
     }

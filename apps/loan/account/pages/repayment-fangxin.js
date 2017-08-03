@@ -24,19 +24,22 @@ class RepaymentFangXin extends React.Component {
         repayment_fangxin.setLoanGid(Utils.hashQuery.id);
 
         repayment_fangxin.fetchRepaymentInfo()
+        repayment_fangxin.setLoanAmount('');
     }
 
     verifyHandler() {
         let { repayment_fangxin } = this.props;
+        let { inputAmount } = this.props.repayment_fangxin.data;
+
         let rf = repayment_fangxin;
-        if (!rf.inputAmount && rf.loanLeftAmount >= 200) {
+        if (!inputAmount && rf.loanLeftAmount >= 200) {
             return Components.showToast("请输入还款金额");
         }else if(rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200){
             rf.setLoanAmount(rf.loanLeftAmount)
         }
-        if ((rf.inputAmount - rf.loanLeftAmount) > 0) return rf.setLoanAmount(rf.loanLeftAmount)
-        if ((rf.loanLeftAmount - rf.inputAmount) > 0 && (rf.loanLeftAmount - rf.inputAmount) < 100) return Components.showToast("剩余金额不能小于100");
-        if (rf.inputAmount < 100) return Components.showToast("还款金额不能小于100");
+        if ((inputAmount - rf.loanLeftAmount) > 0) return rf.setLoanAmount(rf.loanLeftAmount)
+        if ((rf.loanLeftAmount - inputAmount) > 0 && (rf.loanLeftAmount - inputAmount) < 100) return Components.showToast("剩余金额不能小于100");
+        if (inputAmount < 100) return Components.showToast("还款金额不能小于100");
         if (rf.cardType == 1) {
             return Components.showToast("信用卡暂不支持还款");
         }
@@ -100,6 +103,7 @@ class RepaymentFangXin extends React.Component {
     }
     confirmBtnHandler = () => {
         let { repayment_fangxin, repayment_result, history } = this.props;
+        
         let { code } = this.state;
         if (code == '') {
             Components.showToast("请输入验证码");
@@ -114,6 +118,7 @@ class RepaymentFangXin extends React.Component {
     }
     render() {
         let { history, repayment_fangxin } = this.props;
+        let { inputAmount } = this.props.repayment_fangxin.data;
         let { remain, show, code } = this.state;
 
         let smsMask = <div styleName="mask">
@@ -181,7 +186,7 @@ class RepaymentFangXin extends React.Component {
                             <div styleName="itemAlready">{repayment_fangxin.loanLeftAmount}</div>
                         </div> :
                         <div styleName="amountItem">
-                            <input styleName="itemInput" type="number" placeholder="输入还款金额" value={repayment_fangxin.inputAmount} onChange={this.inputAmountHandler()} />
+                            <input styleName="itemInput" type="number" placeholder="输入还款金额" value={inputAmount} onChange={this.inputAmountHandler()} />
                             <div styleName="itemAll" onClick={this.allAmountHandler(repayment_fangxin.loanLeftAmount)}>全部还清</div>
                         </div>
                     }
