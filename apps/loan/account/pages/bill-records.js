@@ -125,9 +125,6 @@ class BillRecords extends React.Component {
         let empty = <span styleName="no-data"></span>
         let records = this.state.tab[this.state.current_type].records
 
-        console.log(current_type)
-        console.log(records)
-
         return <div styleName="bg">
             <Header title="订单记录" />
 
