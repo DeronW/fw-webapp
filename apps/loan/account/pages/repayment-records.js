@@ -26,7 +26,7 @@ export default class RepaymentRecords extends React.Component {
     componentDidMount() {
         document.title = '还款';
         NativeBridge.setTitle("还款");
-        this.loadMoreHandler(null);
+        this.loadMoreHandler(null,true);
         Event.touchBottom(this.loadMoreHandler);
         // let {repayment_youyi} = this.props; Post(`/api/order/v1/orderList.json`, {
         //  page: this.state.curPage,     pageSize: 10,     loanStatus: 2 }).then(data
@@ -36,8 +36,12 @@ export default class RepaymentRecords extends React.Component {
     componentWillUnmount() {
         Event.cancelTouchBottom();
     }
-    loadMoreHandler = (done) => {
+    loadMoreHandler = (done,reset) => {
         let {resultList, curPage} = this.state;
+        if (reset) {
+            resultList = [];
+            curPage = 1;
+        }
         if (curPage === 0) 
             return done && done();
         
