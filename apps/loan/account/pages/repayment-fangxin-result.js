@@ -37,7 +37,7 @@ class RepaymentFangXinResult extends React.Component {
         let stillLeft = <div>
             <div styleName="result-container success"></div>
             <div styleName="info">
-                    还有 <span>{leftAmount.toFixed(2)}</span>元未还，请记得按时还款<br/>
+                    还有 <span>{leftAmount}</span>元未还，请记得按时还款<br/>
                     还款金额： {repaymentAmount}元
                     <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml`}>
                     提升额度</a>
