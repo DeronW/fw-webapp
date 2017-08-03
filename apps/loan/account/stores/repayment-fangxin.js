@@ -21,6 +21,7 @@ export default class RepaymentFangXin {
             withdrawCardNo: null, //银行卡号
             repaymentUuid: null,
             inputAmount: "",
+            defaultCardGid:null,
             orderGid: null,
             cardGid: '',
             cardType: '',
@@ -57,6 +58,7 @@ export default class RepaymentFangXin {
                 });
                 this.withdrawBankShortName = card[0].bankShortName;
                 this.withdrawCardNo = card[0].cardNo.slice(-4)
+                this.defaultCardGid = card[0].cardGid;
             })
     }
 
@@ -64,7 +66,7 @@ export default class RepaymentFangXin {
         return this.Post(`/api/repayment/v1/checksmsverifycode.json`, {
                 repaymentAmount: this.inputAmount,
                 loanGid: this.data.loanGid,
-                cardGid: this.cardGid
+                cardGid: this.cardGid || this.defaultCardGid
             }).then(data => {
                 this.orderGid = data.orderGid;
             }, e => Components.showToast(e.message))
