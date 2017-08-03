@@ -65,7 +65,7 @@ class BillRecords extends React.Component {
             let link;
 
             if (order.productId == 1)
-                link = `/static/loan/account/index.html#/repayment-youyi?loanUuid=${order.loanGid}`
+                link = `/static/loan/account/index.html#/repayment-youyi?loanGid=${order.loanGid}`
             if (order.productId == 11)
                 link = `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}`
             if (order.productId == 21)
@@ -95,7 +95,7 @@ class BillRecords extends React.Component {
                 } else if (i.productId == '21') {
                     history.push(`/repayment-fenqi?loanUuid=${i.uuid}`)
                 } else if (i.productId == '11') {
-                    history.push(`/repayment-youyi?loanUuid=${i.uuid}`)
+                    history.push(`/repayment-youyi?loanGid=${i.uuid}`)
                 }
             }
 
