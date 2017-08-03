@@ -10,6 +10,7 @@ import Header from '../../components/header'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveProtocol extends React.Component {
     componentDidMount() {
+        NativeBridge.trigger('hide_header')
         this.props.reserve.getContractHandler().then(data=>{
             this.props.reserve.contractMsg = data.contractMsg
         })
