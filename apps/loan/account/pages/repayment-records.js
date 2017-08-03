@@ -23,6 +23,7 @@ export default class RepaymentRecords extends React.Component {
         uid: ""
     }
     componentDidMount() {
+        document.title = '还款';
         let {repayment_youyi} = this.props;
         Post(`/api/order/v1/orderList.json`, {
             page: this.state.curPage,

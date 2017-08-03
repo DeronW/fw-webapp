@@ -41,6 +41,7 @@ class BillRecords extends React.Component {
         })
     }
     componentDidMount() {
+        document.title = '订单记录';
         this.loadMoreHandler(null);
         Event.touchBottom(this.loadMoreHandler);
     }
