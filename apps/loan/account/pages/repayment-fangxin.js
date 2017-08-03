@@ -116,7 +116,7 @@ class RepaymentFangXin extends React.Component {
                 repayment_fangxin_result.setUidAndProduct(repaymentGid)
             })
             setTimeout(() => {
-                history.push("/repayment-result")
+                history.push("/repayment-fangxin-result")
             }, 800)
         }
     }

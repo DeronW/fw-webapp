@@ -8,7 +8,6 @@ import { Event, Utils } from 'fw-javascripts'
 
 import styles from '../css/bill-records.css'
 
-@inject("repayment_youyi", "repayment_fangxin")
 @observer
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class BillRecords extends React.Component {
@@ -45,6 +44,12 @@ class BillRecords extends React.Component {
         this.loadMoreHandler(null);
         Event.touchBottom(this.loadMoreHandler);
     }
+
+    componentWillUnmount() {
+        Event.cancelTouchBottom()
+    }
+
+
     switchTabHandler = (type) => {
         this.setState({ current_type: type }, this.loadMoreHandler)
     }
@@ -62,16 +67,25 @@ class BillRecords extends React.Component {
         }
 
         let order_item = (order, index) => {
-            let link;
 
-            if (order.productId == 11)
-                link = `/static/loan/account/index.html#/bill-youyi-detail?id=${order.loanGid}`
-            if (order.productId == 1)
-                link = `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}`
-            if (order.productId == 21)
-                link = `/static/loan/dumiao-bill/index.html?uuid=${order.uuid}&baseStatus=${order.baseStatus}`
+            let clickHandler = () => {
 
-            return <a styleName="list_li" key={`${order.orderGid}${index}`} href={link}>
+                console.log(1)
+
+                console.log(order.productId)
+                console.log(order.productId == '11')
+
+                if (order.productId == '11') {
+                    history.push(`/bill-youyi-detail?id=${order.loanGid}`)
+                } else if (order.productId == '21') {
+                    location.href = `/static/loan/dumiao-bill/index.html?uuid=${order.uuid}&baseStatus=${order.baseStatus}`
+                } else if (order.productId == '1') {
+                    location.href = `/static/loan/fxh-bill/index.html?uuid=${order.loanGid}`
+                }
+            }
+
+            return <a styleName="list_li" key={`${order.orderGid}${index}`}
+                onClick={clickHandler}>
                 <div styleName="list-img"><img src={order.productLogo} /></div>
                 <div styleName="list-content">
                     <div styleName="apply-num">借款金额:{order.loanAmtStr}元</div>
@@ -87,7 +101,6 @@ class BillRecords extends React.Component {
         }
 
         let payback_item = (i, index) => {
-            let { repayment_youyi, repayment_fangxin, history } = this.props
 
             let clickHandler = () => {
                 if (i.productId == '1') {
@@ -121,7 +134,7 @@ class BillRecords extends React.Component {
         let records = this.state.tab[this.state.current_type].records
 
         return <div styleName="bg">
-            <Header title="订单记录" history = {history}/>
+            <Header title="订单记录" history={history} />
 
             <div styleName="bill-header">
                 {['1', '2', '3', '4'].map(btn_tab)}</div>

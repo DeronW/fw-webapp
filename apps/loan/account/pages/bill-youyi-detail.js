@@ -65,7 +65,7 @@ class BillYouyiDetail extends React.Component {
                     <div styleName="name">已还金额(元)</div>
                     <div styleName="value">{paidAmount}</div>
                 </div>
-                { overdueAmount != 0 &&
+                {overdueAmount != 0 &&
                     <div styleName="item">
                         <div styleName="name">逾期费(元)</div>
                         <div styleName="value">{overdueAmount}</div>
@@ -113,14 +113,14 @@ class BillYouyiDetail extends React.Component {
         }
 
         return <div styleName="cnt-container">
-            <Header title="账单详情" history={history} />
+            <Header title="账单详情" history={this.props.history} />
 
             <div styleName="logo-container">
                 <img src={require('../images/repayment-youyi/logo.png')}></img>
                 优易借
             </div>
 
-            { statusBar }
+            {statusBar}
 
             <div styleName="bill-sum">
                 <div styleName="loan-amount">
@@ -133,9 +133,9 @@ class BillYouyiDetail extends React.Component {
                 </div>
             </div>
 
-            { detailContainer }
+            {detailContainer}
 
-            { status == 2 &&
+            {status == 2 &&
                 <div styleName="submit-btn-container">
                     <Link styleName="submit-btn" to={`/repayment-youyi?id=${loanId}`} >
                         立即还款

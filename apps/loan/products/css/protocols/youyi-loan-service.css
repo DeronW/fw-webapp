@@ -29,3 +29,16 @@
     font-weight: 900;
     margin: 10px 0;
 }
+
+.protocol-article table {
+    width: 100%;
+    line-height: 2em;
+    font-size: 26px;
+    border-collapse: collapse;
+}
+
+.protocol-article table td {
+    border: 1px solid black;
+    text-indent: 0em !important;
+    text-align:center;
+}

@@ -1,0 +1,60 @@
+.cnt-container {
+    min-height: 100%;
+    background-color: #eee;
+}
+
+.result-container {
+    box-sizing: border-box;
+    /* padding: 70px 0; */
+    margin-top: 24px;
+    text-align: center; 
+    width: 100%;
+    height: 420px;
+}
+
+.success {
+    composes: result-container;
+    background: url('../images/repayment-fangxin-result/success.png') #fff no-repeat center center;
+}
+
+.fail {
+    composes: result-container;
+    background: url('../images/repayment-fangxin-result/fail.png') #fff no-repeat center center;
+}
+
+.waiting {
+    composes: result-container;
+    background: url('../images/repayment-fangxin-result/waiting.png') #fff no-repeat center center;
+}
+
+.title {
+    color: #556bb8;
+    font-size: 40px;
+}
+
+.info {
+    margin-bottom: 24px;
+    color: #666;
+    font-size: 28px;
+    width: 100%;
+    text-align: center;
+    padding-bottom: 80px;
+    background: #fff;
+}
+
+.info span {
+    color: #ff6f79;
+}
+
+.btn {
+    display: block;
+    width: 660px;
+    height: 84px;
+    line-height: 84px;
+    margin: 30px auto;
+    color: #fff;
+    background: #556bb8;
+    border-radius: 4px;
+    font-size: 34px;
+    text-align: center;
+}
