@@ -102,7 +102,7 @@ class BillRecords extends React.Component {
             return <div styleName="payback-item" key={`${i.orderGid}${index}`}>
                 <div styleName="pi-title">{i.productName}</div>
                 {i.overdueStatus && <div styleName="pi-overdate">已逾期</div>}
-                <div styleName="pi-money">&yen;{i.loanAmt}</div>
+                <div styleName="pi-money">&yen;{i.loanLeftAmtStr}</div>
                 <a styleName="pi-payback" onClick={clickHandler}>还款</a>
                 <div styleName="pi-date-limit">{i.termNumStr}</div>
                 <div styleName="pi-date-release">{i.loanTimeStr}</div>
