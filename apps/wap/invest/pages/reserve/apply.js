@@ -81,7 +81,7 @@ class ReserveApply extends React.Component {
                     </div>
                     <div styleName="infoItem itemLast">
                         <div styleName="itemLeft">预计起息时间</div>
-                        <div styleName="itemRight">{reserve.context.avgLoanPeriod}</div>
+                        <div styleName="itemRight">平均{reserve.context.avgLoanPeriod}小时起息</div>
                     </div>
                 </div>
             </div>

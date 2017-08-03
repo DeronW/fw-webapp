@@ -102,10 +102,11 @@
 .emptyPanel {
     height: 100%;
     text-align: center;
-    font-size: 30px;
-    color: #555;
+    font-size: 28px;
+    color: #8591b3;
 }
 
 .emptyPanel img {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 150px;
 }
