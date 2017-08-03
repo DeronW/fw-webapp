@@ -8,12 +8,16 @@ import styles from '../../css/protocols/partner.css'
 export default class YouyiRepaymentService extends React.Component {
 
     componentDidMount() {
+        NativeBridge.hide_header();
         document.title = '委托扣款授权书（支付服务费）'
     }
     render() {
         let { history } = this.props;
+        let goBack = () => {
+            Browser.inApp ? NativeBridge.close() : history.goBack()
+        }
         return <div styleName="bg">
-            <Header title="委托扣款授权书（支付服务费）" history={history}/>
+            <Header title="委托扣款授权书（支付服务费）" goBack={goBack}/>
             <div styleName="protocol-article">
 
 

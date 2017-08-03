@@ -15,7 +15,7 @@ class ReserveRecords extends React.Component {
     }
 
     componentDidMount() {
-        this.props.reserve.getReserveList(null)
+        this.props.reserve.getReserveList(null,true)
         Event.touchBottom(this.props.reserve.getReserveList);
     }
 
