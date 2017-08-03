@@ -52,12 +52,8 @@ export default (stores) => {
                 <Route exact path='/repayment-youyi' component={RepaymentYouyi} />
                 <Route exact path='/repayment-fangxin' component={RepaymentFangXin} />
                 <Route exact path='/repayment-fenqi' component={RepaymentFenqi} />
-<<<<<<< HEAD
-                <Route exact path='/repayment-result' component={RepaymentResult} />
                 <Route exact path='/repayment-fangxin-result' component={RepaymentFangXinResult} />
-=======
                 <Route exact path='/repayment-youyi-result' component={RepaymentYouyiResult} />
->>>>>>> b69c1f2ebdb64f2b4d5570bff81025cff85c29e7
                 <Route exact path='/repayment-bank-card' component={RepaymentBankCard} />
                 <Route exact path='/repayment-youyi-records' component={RepaymentYouyiRecords} />
                 <Route exact path='/bill-records' component={BillRecords} />
