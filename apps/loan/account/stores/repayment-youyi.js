@@ -3,10 +3,15 @@ import { extendObservable } from 'mobx'
 export default class RepaymentYouyi {
 
     constructor(Post) {
-        this.Post = Post;
+        this.Post = Post
+
+        this.data = {}
+
+        extendObservable(this.data, {
+            loanId: ''
+        })
 
         extendObservable(this, {
-            loanId: '', //
             repaymentUuid: '',
             unpaidAmount: '', // 待还金额
             overdueAmount: '', // 逾期费
@@ -20,7 +25,7 @@ export default class RepaymentYouyi {
         })
     }
 
-    setLoanId = id => this.loanId = id
+    setLoanId = id => this.data.loanId = id
 
     setRepaymentId = id => this.repaymentUuid = id
 
@@ -29,21 +34,22 @@ export default class RepaymentYouyi {
     }
 
     fetchRepaymentInfo = () => {
-        return this.Post('/api/looploan/repayment/v1/loanDetail.json', { loanUuid: this.loanId })
-            .then(data => {
-                this.unpaidAmount = data.loanLeftAmountStr;
-                this.overdueAmount = data.overdueFeeStr;
-                this.dueDate = data.dueTimeStr;
-                this.paidAmount = data.repaymenAmountStr;
-                this.bank = data.bankName;
-                this.cardNo = data.withdrawCardNo.slice(-4);
-                if (this.unpaidAmount < 200) this.repaymentAmount = this.unpaidAmount;
-            })
+        return this.Post('/api/looploan/repayment/v1/loanDetail.json', {
+            loanUuid: this.data.loanId
+        }).then(data => {
+            this.unpaidAmount = data.loanLeftAmountStr;
+            this.overdueAmount = data.overdueFeeStr;
+            this.dueDate = data.dueTimeStr;
+            this.paidAmount = data.repaymenAmountStr;
+            this.bank = data.bankName;
+            this.cardNo = data.withdrawCardNo.slice(-4);
+            if (this.unpaidAmount < 200) this.repaymentAmount = this.unpaidAmount;
+        })
     }
 
     submitRepayment = () => {
         return this.Post('/api/looploan/repayment/v1/checkSmsVerifyCode.json', {
-            loopLoanUuid: this.loanId,
+            loopLoanUuid: this.data.loanId,
             repaymentAmt: this.repaymentAmount
         }).then(data => {
             this.setRepaymentId(data.repaymentUuid);
@@ -70,7 +76,7 @@ export default class RepaymentYouyi {
 
     fetchRecords = pageNo => {
         return this.Post('/api/looploan/repayment/v1/repaymentRecordList.json', {
-            loopLoanUuid: this.loanId,
+            loopLoanUuid: this.data.loanId,
             page: pageNo,
             pageSize: 10
         }).then(data => {

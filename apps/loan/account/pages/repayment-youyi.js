@@ -27,11 +27,12 @@ class Repayment extends React.Component {
 
         let { repayment_youyi } = this.props;
 
-        if (Utils.hashQuery.loanUuid) repayment_youyi.setLoanId(Utils.hashQuery.loanUuid);
+        repayment_youyi.setLoanId(Utils.hashQuery.loanUuid)
 
         repayment_youyi.fetchRepaymentInfo().then(data => {
-            if (repayment_youyi.unpaidAmount < 200) this.setState({ amountEditDisabled: true })
-        });
+            if (repayment_youyi.unpaidAmount < 200)
+                this.setState({ amountEditDisabled: true })
+        })
     }
 
     componentWillUnmount() {
@@ -45,7 +46,7 @@ class Repayment extends React.Component {
         repayment_youyi.setAmount(v);
     }
 
-    toggleProtocol = () => this.setState({ protocolChecked: !this.state.protocolChecked})
+    toggleProtocol = () => this.setState({ protocolChecked: !this.state.protocolChecked })
 
     handleSubmit = () => {
         if (!this.state.protocolChecked) return
@@ -123,7 +124,7 @@ class Repayment extends React.Component {
                     value={repayment_youyi.repaymentAmount}
                     onChange={this.handleInput} />
                 <div styleName="pay-off-btn"
-                    onClick={() => { repayment_youyi.setAmount(repayment_youyi.unpaidAmount)} }>全部还清</div>
+                    onClick={() => { repayment_youyi.setAmount(repayment_youyi.unpaidAmount) }}>全部还清</div>
             </div>
         }
 
@@ -134,9 +135,9 @@ class Repayment extends React.Component {
                 <div styleName="pop-title">短信验证码</div>
                 <div styleName="pop-info">已向{account.mask_phone}发送验证码</div>
                 <div styleName="sms-input">
-                    <input type="num" value={SMSInput} onChange={this.handleSMSInput}/>
+                    <input type="num" value={SMSInput} onChange={this.handleSMSInput} />
                     <div styleName="sms-btn" onClick={this.getSMS}>
-                        {SMSTimer === 60 ? "重新获取": `${SMSTimer}s`}
+                        {SMSTimer === 60 ? "重新获取" : `${SMSTimer}s`}
                     </div>
                 </div>
                 <div styleName="pop-submit"
@@ -182,10 +183,10 @@ class Repayment extends React.Component {
                         <div styleName="item-name">选择银行卡</div>
                         <div styleName="item-value">{`${repayment_youyi.bank}(${repayment_youyi.cardNo})`}</div>
                     </div>
-                    { amountEditItem }
+                    {amountEditItem}
                 </div>
 
-                <div className={ protocolChecked ? styles['checked-protocol'] : styles['unchecked-protocol'] }
+                <div className={protocolChecked ? styles['checked-protocol'] : styles['unchecked-protocol']}
                     onClick={this.toggleProtocol}>
                     同意
                     <a href="/static/loan/products/index.html#/protocols/youyi-repayment">《委托扣款授权书（还款）》</a>、
@@ -199,7 +200,7 @@ class Repayment extends React.Component {
                     </a>
                 </div>
 
-                { showSMSPop && SMSPop}
+                {showSMSPop && SMSPop}
             </div>
         )
     }
