@@ -71,7 +71,7 @@ export default class RepaymentYouyi {
             verifycode: SMSInput
         }).then(data => {
             setTimeout(() => {
-                history.push('/repayment-result')
+                history.push('/repayment-youyi-result')
             }, 1700)
         })
     }
