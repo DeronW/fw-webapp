@@ -32,7 +32,7 @@ export default class Reserve {
     }
 
     fetchProduct = () => {
-        this.Post('/api/v1/intoAppointPage.shtml', {
+        return this.Post('/api/v1/intoAppointPage.shtml', {
             applyInvestClaimId: this.getApplyInvestClaimId()
         }).then(data => {
             this.context = data.appointClaim;
