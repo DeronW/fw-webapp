@@ -4,8 +4,15 @@ import {observer, inject} from 'mobx-react'
 import styles from '../../css/reserve/protocol.css'
 import Header from '../../components/header'
 
+@inject('reserve')
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveProtocol extends React.Component {
+    componentDidMount() {
+        this.props.reserve.getContractHandler().then((data) => {
+            console.log(data)
+        })
+    }
+
     render() {
         let {history} = this.props
         return <div styleName="protocol-box">

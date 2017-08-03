@@ -25,6 +25,7 @@ class ReserveInfo extends React.Component {
             //调到自动投资页面
             NativeBridge.toNative('auto_bid_auth')
         } else {
+            this.props.reserve.fetchProduct()
             history.push('/reserve/apply')
         }
     }

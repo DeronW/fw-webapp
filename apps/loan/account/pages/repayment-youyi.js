@@ -43,6 +43,8 @@ class Repayment extends React.Component {
         let { repayment_youyi } = this.props,
             v = e.target.value;
         v = v.replace(/[^\d|\.]/g, '');
+
+        if (v - repayment_youyi.unpaidAmount > 0) v = repayment_youyi.unpaidAmount
         repayment_youyi.setAmount(v);
     }
 
