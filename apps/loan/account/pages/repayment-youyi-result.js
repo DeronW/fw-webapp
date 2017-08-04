@@ -7,19 +7,19 @@ import { Header } from '../../lib/components'
 import styles from '../css/repayment-youyi-result.css'
 
 
-@inject('repayment_youyi', 'repayment_youyi_result')
+@inject('repayment_youyi')
 @observer
 @CSSModules(styles, { allowMultiple: true })
 class RepaymentYouyiResult extends React.Component {
 
     componentDidMount() {
         document.title = '还款结果';
-        this.props.repayment_youyi_result.fetchRepaymentResult();
+        this.props.repayment_youyi.fetchRepaymentResult();
     }
 
     render() {
-        let { history, repayment_youyi, repayment_youyi_result } = this.props,
-        { repaymentAmount, leftAmount, repaymentResult } = repayment_youyi_result,
+        let { history, repayment_youyi } = this.props,
+        { repaymentAmount, leftAmount, repaymentResult } = repayment_youyi,
         { loanId } = repayment_youyi.data;
 
         let youyi_home_link = '/static/loan/products/index.html#/loan-youyi-index',

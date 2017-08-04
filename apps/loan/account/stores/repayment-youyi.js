@@ -23,6 +23,8 @@ export default class RepaymentYouyi {
             repaymentAmount: '', // 还款金额
             protocolChecked: true, // 是否同意协议,
             records: [], // 还款记录
+            repaymentResult: '', // 'fail', 'success', 'waiting'
+            leftAmount: '' // 还款成功后仍剩余金额
         })
     }
 
@@ -57,7 +59,6 @@ export default class RepaymentYouyi {
             repaymentAmt: this.repaymentAmount
         }).then(data => {
             this.setRepaymentId(data.repaymentUuid);
-            return data.repaymentUuid
         })
     }
 
@@ -87,6 +88,23 @@ export default class RepaymentYouyi {
             this.records.push(...data.resultList);
             let moreToLoad = data.totalPage > pageNo;
             return moreToLoad
+        })
+    }
+
+    fetchRepaymentResult = () => {
+        this.Post('/api/looploan/repayment/v1/repaymentStatus.json', {
+            repaymentUuid: this.repaymentUuid
+        }).then(data => {
+            let { loanLeftAmountStr, repaymentAmountStr, status } = data;
+            this.leftAmount = loanLeftAmountStr;
+            this.repaymentAmount = repaymentAmountStr;
+            if (status == 0) {
+                this.repaymentResult = 'waiting'
+            } else if (status == 1) {
+                this.repaymentResult = 'success'
+            } else if (status == 2) {
+                this.repaymentResult = 'fail'
+            }
         })
     }
 
