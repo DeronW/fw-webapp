@@ -70,7 +70,8 @@ class RepaymentFangXin extends React.Component {
     }
 
     closePopHandler = () => {
-        this.setState({ show: false })
+        this.setState({ show: false,remain:0 })
+        clearInterval(this._timer)
     }
     chooseBank = () => {
         let { history } = this.props;
@@ -165,7 +166,7 @@ class RepaymentFangXin extends React.Component {
                 <div styleName="amountPanel">
                     <div styleName="amountItem">
                         <div styleName="itemName">还款日</div>
-                        <div styleName="itemTime">{repayment_fangxin.dueTime}</div>
+                        <div styleName="itemTime">{repayment_fangxin.dueTimeStr}</div>
                     </div>
                     <div styleName="amountItem">
                         <div styleName="itemName">已还金额</div>
