@@ -10,7 +10,7 @@ class PayBack extends React.Component{
 
     componentDidMount() {
         if (this.props.loanLeftAmount < 200) {
-            let repaymentAmount = this.props.loanLeftAmount.toFixed(2);
+            let repaymentAmount = this.props.loanLeftAmount;
             this.setState({
                 repaymentAmount: repaymentAmount.toString(),
                 disableInput: true
@@ -58,7 +58,7 @@ class PayBack extends React.Component{
     }
 
     render() {
-        let loanLeftAmount = this.props.loanLeftAmount.toFixed(2);
+        let loanLeftAmount = this.props.loanLeftAmount;
         return (
         <div className="payback-box">
             <div className="fxh-banner"></div>

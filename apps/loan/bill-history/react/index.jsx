@@ -40,7 +40,7 @@ const HistoryBill = React.createClass({
                     <div className="bill-detail">
                         <div className="bill-detail-wrap">
                             <span className="bill-money">
-                                {item.loanAmount.toFixed(2)}</span>
+                                {item.loanAmount}</span>
                         </div>
                         <span className="bill-deadline">{item.loanTimeStr}</span>
                     </div>

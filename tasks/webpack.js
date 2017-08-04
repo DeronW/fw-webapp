@@ -55,7 +55,7 @@ module.exports = function (site_name, page_name, CONFIG) {
                         loader: 'css-loader',
                         options: {
                             modules: true,
-                            localIdentName: '[name]__[local]--[hash:base64:6]'
+                            localIdentName: '[name]__[local]--[hash:base64:4]'
                         }
                     }, {
                         loader: 'resolve-url-loader',
@@ -101,7 +101,8 @@ module.exports = function (site_name, page_name, CONFIG) {
                 template: `${page_path}/index.html`
             })
             , new ExtractTextPlugin({
-                filename: CONFIG.debug ? 'all.css' : `${relative_path}/all.[contenthash:4].css`,
+                // filename: CONFIG.debug ? 'all.css' : `${relative_path}/all.[contenthash:4].css`,
+                filename: CONFIG.debug ? 'all.css' : `all.[contenthash:4].css`,
                 allChunks: true,
                 ignoreOrder: true
             })
