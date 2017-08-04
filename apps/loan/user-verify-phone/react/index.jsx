@@ -109,7 +109,7 @@ class VerifyPhone extends React.Component {
                 $FW.Component.Toast("验证码不正确");
             }
         } else if (result == 1) {
-            $FW.Browser.inJRGCApp() ? NativeBridge.close() : window.location.href = '/static/loan/products/index.html#/';
+            $FW.Browser.inJRGCApp() ? NativeBridge.close() : window.location.href = '/static/loan/account/index.html#/repayment-records';
         } else if (result == 2) {
             this.setState({ show: true });
         } else {
