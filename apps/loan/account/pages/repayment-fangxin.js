@@ -39,8 +39,6 @@ class RepaymentFangXin extends React.Component {
         if (!inputAmount && rf.loanLeftAmount >= 200) {
             return Components.showToast("请输入还款金额");
         }
-
-        if ((inputAmount - rf.loanLeftAmount) > 0) return rf.setLoanAmount(rf.loanLeftAmount)
         if ((rf.loanLeftAmount - inputAmount) > 0 && (rf.loanLeftAmount - inputAmount) < 100) return Components.showToast("剩余金额不能小于100");
         if (inputAmount < 100) return Components.showToast("还款金额不能小于100");
         if (rf.cardType == 1) {
@@ -61,6 +59,8 @@ class RepaymentFangXin extends React.Component {
         let v = e.target.value;
         if (/\..{3}/.test(v)) return;
         if (v.split(".")[0].length > 7) return;
+
+        if (v - repayment_fangxin.loanLeftAmount > 0) v = repayment_fangxin.loanLeftAmount
         repayment_fangxin.setLoanAmount(v)
     }
 
