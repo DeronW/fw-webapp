@@ -69,23 +69,19 @@ class Repayment extends React.Component {
     }
 
     getSMS = () => {
-        let ableToGetSMS = this.state.getSMSTimer === 60;
+        let ableToGetSMS = this.state.SMSTimer === 60;
         if (!ableToGetSMS) return
 
         let { repayment_youyi } = this.props;
         repayment_youyi.getSMS().then(data => {
             Components.showToast('验证码已发送');
-            this.setState({ SMSToken: data.codeToken });
             this.SMSTimerController();
         });
     }
 
     SMSTimerController = () => {
         this._sms_timer = setInterval(() => {
-            if (this.state.SMSTimer <= 1) {
-                clearInterval(this._sms_timer);
-                return this.setState({ SMSTimer: 60 })
-            }
+            if (this.state.SMSTimer <= 1) return this.clearSMSTimer()
             this.setState({ SMSTimer: this.state.SMSTimer - 1 })
         }, 1000)
     }
