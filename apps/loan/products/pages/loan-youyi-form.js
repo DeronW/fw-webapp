@@ -214,8 +214,7 @@ export default class LoopLoanLoan extends React.Component {
                     </div>}
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">打款至</div>
-                        <div styleName="loan-bank-info">{loopLoan.bankName}({loopLoan.bankCardNo.slice(-4)})<span
-                            styleName="arrow"></span></div>
+                        <div styleName="loan-bank-info">{loopLoan.bankName}({loopLoan.bankCardNo.slice(-4)})</div>
                     </div>
                 </div>
                 <div styleName="agreement-issue">

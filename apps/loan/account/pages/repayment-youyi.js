@@ -129,7 +129,7 @@ class Repayment extends React.Component {
                 <div styleName="pop-close"
                     onClick={() => { this.setState({ showSMSPop: false }); this.clearSMSTimer() }}></div>
                 <div styleName="pop-title">短信验证码</div>
-                <div styleName="pop-info">已向{account.mask_phone}发送验证码</div>
+                <div styleName="pop-info">已向您银行预留手机({account.mask_phone})发送短信</div>
                 <div styleName="sms-input">
                     <input type="num" value={SMSInput} maxLength="8" onChange={this.handleSMSInput} />
                     <div styleName="sms-btn" onClick={this.getSMS}>
