@@ -95,7 +95,9 @@ export default class LoopLoanLoan extends React.Component {
     }
 
     smsValueHandler = (e) => {
-        this.setState({smsValue:e.target.value})
+        if(e.target.value.length <= 8){
+            this.setState({smsValue:e.target.value})
+        }
     }
 
     checkHandler = () => {
