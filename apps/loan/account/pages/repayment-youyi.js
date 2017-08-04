@@ -23,7 +23,7 @@ class Repayment extends React.Component {
     }
 
     componentDidMount() {
-        document.title = '还款详情';
+        document.title = '还款明细';
 
         let { repayment_youyi } = this.props;
 
