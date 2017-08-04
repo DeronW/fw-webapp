@@ -1,5 +1,6 @@
 .cnt-container {
     min-height: 100%;
+    margin-bottom: 178px;
     background-color: #eee;
 }
 
@@ -59,10 +60,6 @@
     padding-left: 33px;
     margin: 20px 0;
     background-color: #fff;
-}
-
-.left-space-4-btn {
-    margin-bottom: 178px;
 }
 
 .info-item, .repayment-input-item {
