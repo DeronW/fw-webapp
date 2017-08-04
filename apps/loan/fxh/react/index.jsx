@@ -262,8 +262,11 @@ const USER = $FW.Store.getUserDict();
 const user = USER;
 
 $FW.DOMReady(function () {
+    let goHome = () =>{
+        location.href = "https://m.easyloan888.com"
+    }
     NativeBridge.setTitle('放心花');
-    ReactDOM.render(<Header title={'放心花'} />, HEADER_NODE)
+    ReactDOM.render(<Header title={'放心花'} back_handler={goHome}/>, HEADER_NODE)
     $FXH.Post(`${API_PATH}/api/loan/v1/baseinfo.json`, {
         productId: $FW.Format.urlQuery().pid || 1
     }).then(data => {
