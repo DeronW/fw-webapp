@@ -178,7 +178,7 @@ class Repayment extends React.Component {
                     </div>
                 </div>
 
-                <div styleName="repayment-info">
+                <div styleName="repayment-info left-space-4-btn">
                     <div styleName="info-item">
                         <div styleName="item-name">选择银行卡</div>
                         <div styleName="item-value">{`${repayment_youyi.bank}(${repayment_youyi.cardNo})`}</div>
