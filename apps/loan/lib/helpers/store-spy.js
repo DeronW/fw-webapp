@@ -12,12 +12,6 @@ export default class StoreSpy {
     }
 
     wiretap = () => {
-        if (document) {
-            // 如果在正式环境, 不要添加调试信息
-            if (document.getElementById('env').value == 'production')
-                return null
-        }
-
         if (window) {
             window._$_show_me_mobx_stores = () => {
                 this.log('全部stores')
@@ -29,6 +23,12 @@ export default class StoreSpy {
                     console.log(i, this.stores[i].data)
                 }
             }
+        }
+
+        if (document) {
+            // 如果在正式环境, 不要添加调试信息
+            if (document.getElementById('env').value == 'production')
+                return null
         }
 
         // https://mobx.js.org/refguide/spy.html
@@ -45,14 +45,14 @@ export default class StoreSpy {
     }
     handle_update = event => {
         let obj = event.object.constructor.name
-        this.log(`更新字段 ${obj}.${event.name}: "${event.oldValue}" => "${event.newValue}"`)
+        this.log(`更新 ${obj}.${event.name}: "${event.oldValue}" => "${event.newValue}"`)
     }
     handle_add = event => {
         let obj = event.object.constructor.name
-        this.log(`新增字段 ${obj}.${event.name}: "${event.newValue}"`)
+        this.log(`新增 ${obj}.${event.name}: "${event.newValue}"`)
     }
     handle_delete = event => {
         let obj = event.object.constructor.name
-        this.log(`删除字段 ${obj}.${event.name}: "${event.oldValue}"`)
+        this.log(`删除 ${obj}.${event.name}: "${event.oldValue}"`)
     }
 }

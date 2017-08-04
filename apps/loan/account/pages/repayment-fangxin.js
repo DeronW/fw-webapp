@@ -32,7 +32,6 @@ class RepaymentFangXin extends React.Component {
         let { inputAmount } = this.props.repayment_fangxin.data;
 
         let rf = repayment_fangxin;
-
         if (rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200) {
             return rf.setLoanAmount(rf.loanLeftAmount)
         }
@@ -147,7 +146,7 @@ class RepaymentFangXin extends React.Component {
                 </div>
             </div>
         </div>
-
+        let m = repayment_fangxin.repaymentAmount;
         return <div styleName="repayment">
             <div styleName="repaymentBox">
                 <Header title="还款明细" history={history} />
@@ -172,9 +171,11 @@ class RepaymentFangXin extends React.Component {
                     </div>
                     <div styleName="amountItem">
                         <div styleName="itemName">已还金额</div>
-                        <div styleName="itemAlready" onClick={this.gotoRecord}>{repayment_fangxin.repaymentAmount}
-                            <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
-                        </div>
+                        {
+                            {m} ? <div styleName="itemAlready" onClick={this.gotoRecord}>{m}
+                                <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
+                            </div> : <div styleName="itemAlready">{m}</div>
+                        }
                     </div>
 
                 </div>
