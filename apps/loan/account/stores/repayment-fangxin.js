@@ -50,10 +50,10 @@ export default class RepaymentFangXin {
                 loanGid: this.data.loanGid
             }).then(data => {
                 this.logo = data.productLogo;
-                this.loanLeftAmount = data.loanLeftAmount;
-                this.overdueFee = data.overdueFee || 0;
+                this.loanLeftAmount = data.loanLeftAmountStr;
+                this.overdueFee = data.overdueFeeStr || 0;
                 this.dueTimeStr = data.dueTimeStr;
-                this.repaymentAmount = data.repaymentAmount;
+                this.repaymentAmount = data.repaymentAmountStr;
                 this.repaymentUuid = data.repaymentUuid;
             }).then(() => this.Post("/api/bankcard/v1/bankcardlist.json"))
             .then(data => {

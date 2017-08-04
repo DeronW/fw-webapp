@@ -155,11 +155,11 @@ class RepaymentFangXin extends React.Component {
                 </div>
                 <div styleName="amount">
                     <div styleName="money amountMoney">
-                        <div styleName="amountNum">{Utils.format.price(repayment_fangxin.loanLeftAmount,2)}</div>
+                        <div styleName="amountNum">{repayment_fangxin.loanLeftAmount}</div>
                         <div styleName="amountName">待还金额(元)</div>
                     </div>
                     <div styleName="money amoutLate">
-                        <div styleName="amountNum">{Utils.format.price(repayment_fangxin.overdueFee,2)}</div>
+                        <div styleName="amountNum">{repayment_fangxin.overdueFee}</div>
                         <div styleName="amountName">逾期费(元)</div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@ class RepaymentFangXin extends React.Component {
                     <div styleName="amountItem">
                         <div styleName="itemName">已还金额</div>
                         {
-                            m > 0 ? <div styleName="itemAlready" onClick={this.gotoRecord}>{Utils.format.price(m,2)}
+                            m > 0 ? <div styleName="itemAlready" onClick={this.gotoRecord}>{m}
                                 <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
                             </div> : <div styleName="itemAlready">{m}</div>
                         }
