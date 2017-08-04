@@ -12,6 +12,7 @@ export default class RepaymentYouyi {
         })
 
         extendObservable(this, {
+            logoUrl: '',
             repaymentUuid: '',
             loopLoanUuid: '',
             unpaidAmount: '', // 待还金额
@@ -42,6 +43,7 @@ export default class RepaymentYouyi {
         return this.Post('/api/looploan/repayment/v1/loanDetail.json', {
             loanUuid: this.data.loanId
         }).then(data => {
+            this.logoUrl = data.productLogo;
             this.unpaidAmount = data.loanLeftAmountStr;
             this.overdueAmount = data.overdueFeeStr;
             this.dueDate = data.dueTimeStr;
