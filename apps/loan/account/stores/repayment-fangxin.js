@@ -16,10 +16,10 @@ export default class RepaymentFangXin {
             logo: '', //logo url
             loanLeftAmount: null, //待还金额
             overdueFee: null, //逾期费
-            dueTime: '', //还款日期
+            dueTimeStr: '', //还款日期
             repaymentAmount: 0, //已还金额
             withdrawBankShortName: '', //提现银行卡
-            withdrawCardNo: null, //银行卡号
+            withdrawCardNo: '', //银行卡号
             repaymentUuid: null,
             defaultCardGid:null,
             orderGid: null,
@@ -52,7 +52,7 @@ export default class RepaymentFangXin {
                 this.logo = data.productLogo;
                 this.loanLeftAmount = data.loanLeftAmount;
                 this.overdueFee = data.overdueFee || 0;
-                this.dueTime = new Date(data.dueTime).toLocaleDateString();
+                this.dueTimeStr = data.dueTimeStr;
                 this.repaymentAmount = data.repaymentAmount;
                 this.repaymentUuid = data.repaymentUuid;
             }).then(() => this.Post("/api/bankcard/v1/bankcardlist.json"))
