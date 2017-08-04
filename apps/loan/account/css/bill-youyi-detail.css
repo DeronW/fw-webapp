@@ -2,6 +2,7 @@
     position: relative;
     min-height: 100%;
     background-color: #eee;
+    overflow-x: hidden;
 }
 
 .repayment-records-entry {
