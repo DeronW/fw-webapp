@@ -34,15 +34,13 @@ class ReserveApply extends React.Component {
             } else if (reserve.reserveMoney > reserve.accountAmount) {
                 Components.showToast("可用金额不足，请充值后重试")
             } else if (reserve.reserveMoney > data.batchMaxmum) {
-                Components.showToast("自动投标金额不足")
-                setTimeout(() => {
+                Components.showToast("自动投标金额不足").then(() => {
                     NativeBridge.toNative('auto_bid_second')
-                }, 2000)
-            } else {
-                reserve.submitReserveHandler().then(() => {
-                    Components.showToast('预约成功')
-                    history.push(`/reserve/records`)
                 })
+            } else {
+                reserve.submitReserveHandler()
+                    .then(() => Components.showToast('预约成功'))
+                    .then(() => history.push(`/reserve/records`))
             }
         })
     }
