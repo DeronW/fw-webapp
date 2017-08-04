@@ -22,6 +22,9 @@ export default class LoopLoanResult extends React.Component {
     checkOrderHandler = () => {
         location.href = `/static/loan/account/index.html#/repayment-youyi?id=${this.props.loopLoan.loanUuid}`;
     }
+    knownHandler = () => {
+        Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/'
+    }
     render(){
         let { history, loopLoan } = this.props;
         let goBack = () => {
@@ -47,6 +50,7 @@ export default class LoopLoanResult extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <div styleName="btn" onClick={this.knownHandler}>知道了</div>
                 </div>}
                 {loopLoan.loanStatus == 1 && <div styleName="success-result-box">
                     <div styleName="wrap-box">
