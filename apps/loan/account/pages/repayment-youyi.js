@@ -63,8 +63,8 @@ class Repayment extends React.Component {
         if (unpaidAmount - repaymentAmount < 100 && unpaidAmount - repaymentAmount > 0) return Components.showToast('剩余金额不能小于100')
 
         repayment_youyi.submitRepayment().then(repaymentUuid => {
-            this.setState({ showSMSPop: true });
             this.SMSTimerController();
+            setTimeout(() => this.setState({ showSMSPop: true }), 1000);
         })
     }
 
