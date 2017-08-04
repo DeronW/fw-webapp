@@ -137,7 +137,7 @@ class Repayment extends React.Component {
                 <div styleName="pop-title">短信验证码</div>
                 <div styleName="pop-info">已向{account.mask_phone}发送验证码</div>
                 <div styleName="sms-input">
-                    <input type="num" value={SMSInput} onChange={this.handleSMSInput} />
+                    <input type="num" value={SMSInput} maxLength="8" onChange={this.handleSMSInput} />
                     <div styleName="sms-btn" onClick={this.getSMS}>
                         {SMSTimer === 60 ? "重新获取" : `${SMSTimer}s`}
                     </div>
