@@ -154,23 +154,23 @@ class RepaymentFangXin extends React.Component {
                 </div>
                 <div styleName="amount">
                     <div styleName="money amountMoney">
-                        <div styleName="amountNum">{repayment_fangxin.loanLeftAmount}</div>
+                        <div styleName="amountNum">{Utils.format.price(repayment_fangxin.loanLeftAmount,3)}</div>
                         <div styleName="amountName">待还金额(元)</div>
                     </div>
                     <div styleName="money amoutLate">
-                        <div styleName="amountNum">{repayment_fangxin.overdueFee}</div>
+                        <div styleName="amountNum">{Utils.format.price(repayment_fangxin.overdueFee,3)}</div>
                         <div styleName="amountName">逾期费(元)</div>
                     </div>
                 </div>
                 <div styleName="amountPanel">
                     <div styleName="amountItem">
                         <div styleName="itemName">还款日</div>
-                        <div styleName="itemTime">{repayment_fangxin.dueTime}</div>
+                        <div styleName="itemTime">{repayment_fangxin.dueTimeStr}</div>
                     </div>
                     <div styleName="amountItem">
                         <div styleName="itemName">已还金额</div>
                         {
-                            m > 0 ? <div styleName="itemAlready" onClick={this.gotoRecord}>{m}
+                            m > 0 ? <div styleName="itemAlready" onClick={this.gotoRecord}>{Utils.format.price(m,3)}
                                 <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
                             </div> : <div styleName="itemAlready">{m}</div>
                         }
