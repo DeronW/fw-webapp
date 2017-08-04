@@ -33,7 +33,10 @@ export default class RepaymentFangXin {
         })
     }
 
-    setLoanGid = id => this.data.loanGid = id;
+    setLoanGid = id => {
+        this.data.loanGid = id;
+    }
+
 
     setLoanAmount = (value) => this.data.inputAmount = value
 

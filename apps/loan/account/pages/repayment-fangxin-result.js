@@ -43,18 +43,19 @@ class RepaymentFangXinResult extends React.Component {
 
         let paidOff = <div>
             <div styleName="result-container success"></div>
-            <div styleName="info">本次成功还款{repaymentAmountNow}元
-                    <br/>
-                    恭喜您已还清全部借款，请保持良好的信用
-                </div>
-            <a styleName="btn" href={fangxin_home_link}>再借一笔</a>
+            <div styleName="info">欢迎再次使用！
+                <div styleName="infoMoney">还款金额： <span>{repaymentAmountNow}</span>元</div>
+            </div>
+            <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`}>
+                    提升额度</a>
+                <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
         </div>
 
         let stillLeft = <div>
             <div styleName="result-container success"></div>
             <div styleName="info">
-                    还有 <span>{leftAmount}</span> 元未还，请记得按时还款<br/>
-                    还款金额： {repaymentAmountNow}元
+                    还有 <span>{leftAmount}</span> 元未还，请记得准时还款！
+                    <div styleName="infoMoney">还款金额： <span>{repaymentAmountNow}</span>元</div>
             </div>
             <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`}>
                     提升额度</a>
