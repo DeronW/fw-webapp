@@ -8,7 +8,7 @@ import { Header } from '../../lib/components'
 import styles from '../css/repayment-fangxin.css'
 
 
-@inject("repayment_fangxin", "repayment_fangxin_result")
+@inject("repayment_fangxin")
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class RepaymentFangXin extends React.Component {
@@ -107,7 +107,7 @@ class RepaymentFangXin extends React.Component {
         clearInterval(this._timer);
     }
     confirmBtnHandler = () => {
-        let { repayment_fangxin, repayment_fangxin_result, history } = this.props;
+        let { repayment_fangxin, history } = this.props;
 
         let { code } = this.state;
         if (code == '') {
