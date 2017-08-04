@@ -14,17 +14,17 @@
 
 .success {
     composes: result-container;
-    background: url('../images/repayment-fangxin-result/success.png') #fff no-repeat center center;
+    background: url('../images/repayment-fangxin-result/success.png')  no-repeat center center;
 }
 
 .fail {
     composes: result-container;
-    background: url('../images/repayment-fangxin-result/fail.png') #fff no-repeat center center;
+    background: url('../images/repayment-fangxin-result/fail.png')  no-repeat center center;
 }
 
 .waiting {
     composes: result-container;
-    background: url('../images/repayment-fangxin-result/waiting.png') #fff no-repeat center center;
+    background: url('../images/repayment-fangxin-result/waiting.png')  no-repeat center center;
 }
 
 .title {
@@ -39,7 +39,9 @@
     width: 100%;
     text-align: center;
     padding-bottom: 80px;
-    background: #fff;
+}
+.infoMoney{
+    margin-top: 20px;
 }
 .payback-result-ing-tip{
   font-size:32px;
@@ -61,7 +63,7 @@
   color:#6aa4f0;
 }
 .info span {
-    color: #ff6f79;
+    color:#6aa4f0;
 }
 .credit-btn{
   display:block;
