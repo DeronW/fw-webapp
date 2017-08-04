@@ -27,7 +27,6 @@ export default class RepaymentFangXin {
             cardType: '',
             chosenBank: '', // 选择的银行卡银行名称
             chosenCardNo: '', // 选择的银行卡卡号
-            repaymentGid: null,
             repaymentResult: '', // 'fail', 'success', 'waiting'
             leftAmount: '', // 还款成功后仍剩余金额
             repaymentAmountNow:0,
@@ -84,13 +83,13 @@ export default class RepaymentFangXin {
             orderGid: this.orderGid,
             verifyCode: code
         }).then(data => {
-            this.repaymentGid = data.repaymentGid;
+            return data.repaymentGid
         }, e => Components.showToast(e.message));
     }
 
-     fetchRepaymentResult = () => {
+     fetchRepaymentResult = (gid) => {
         this.Post('/api/repayment/v1/repaymentstatus.json', {
-            repaymentGid: this.repaymentGid
+            repaymentGid: gid
         }).then(data => {
             let { loanLeftAmount, repaymentAmount, status } = data;
             this.leftAmount = loanLeftAmount;

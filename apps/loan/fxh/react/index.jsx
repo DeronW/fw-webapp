@@ -263,7 +263,7 @@ const user = USER;
 
 $FW.DOMReady(function () {
     let goHome = () =>{
-        location.href = "https://m.easyloan888.com"
+        location.href = "/static/loan/products/index.html#/"
     }
     NativeBridge.setTitle('放心花');
     ReactDOM.render(<Header title={'放心花'} back_handler={goHome}/>, HEADER_NODE)

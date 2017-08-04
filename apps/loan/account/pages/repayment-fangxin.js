@@ -113,10 +113,9 @@ class RepaymentFangXin extends React.Component {
         if (code == '') {
             Components.showToast("请输入验证码");
         } else {
-            repayment_fangxin.confirmHandler(code);
-            setTimeout(() => {
-                history.push("/repayment-fangxin-result")
-            }, 800)
+            repayment_fangxin.confirmHandler(code).then(repaymentGid =>{
+                history.push(`/repayment-fangxin-result?id=${repaymentGid}`)
+            });
         }
     }
     render() {
