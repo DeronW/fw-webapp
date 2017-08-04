@@ -1,9 +1,14 @@
-import {extendObservable, computed} from 'mobx'
-import {Components, Utils, Event} from 'fw-javascripts'
+import { extendObservable, computed } from 'mobx'
+import { Components, Utils, Event } from 'fw-javascripts'
 
 export default class Reserve {
     constructor(Post) {
         this.Post = Post
+
+        this.data = {}
+
+        extendObservable(this.data, {
+        })
 
         extendObservable(this, {
             context: {
@@ -44,8 +49,8 @@ export default class Reserve {
             this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
 
             return {
-                isRisk:this.isRisk,
-                batchMaxmum:this.batchMaxmum
+                isRisk: this.isRisk,
+                batchMaxmum: this.batchMaxmum
             }
         })
     }
@@ -90,7 +95,7 @@ export default class Reserve {
         return this.Post('/api/v1/appointContractMess.shtml').then(data => {
             this.contractMsg = data.contractMsg
             return {
-                contractMsg:this.contractMsg
+                contractMsg: this.contractMsg
             }
         })
     }
