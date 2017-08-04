@@ -277,7 +277,7 @@ input{
     margin:25px auto 34px;
 }
 .close-icon{
-    background:url(../images/close.jpg) no-repeat;
+    background:url(../images/loan-youyi-form/close.jpg) no-repeat;
     width:20px;
     height:20px;
     position:absolute;
@@ -336,7 +336,7 @@ input{
     margin-bottom:15px;
 }
 .verify-popup-close{
-    background:url(../images/close.jpg)  no-repeat;
+    background:url(../images/loan-youyi-form/close.jpg)  no-repeat;
     width:20px;
     height:20px;
     background-size:100% 100%;
@@ -377,7 +377,6 @@ input{
     width:100%;
     height:74px;
     line-height:74px;
-    border:1px solid #6aa4f0;
     text-align:center;
     font-size:30px;
     color:#fff;
