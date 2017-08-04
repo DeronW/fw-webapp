@@ -1,9 +1,10 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
+import { Event, Components } from 'fw-javascripts'
+
 import styles from '../../css/reserve/records.css'
 import Header from '../../components/header'
-import { Event, Components } from 'fw-javascripts'
 import showConfirm from '../../components/confirm'
 import { NativeBridge } from '../../helpers'
 

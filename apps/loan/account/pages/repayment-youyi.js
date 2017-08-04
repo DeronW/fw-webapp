@@ -149,7 +149,7 @@ class Repayment extends React.Component {
                 <Header title="还款明细" history={history} />
 
                 <div styleName="banner">
-                    <img src={require('../images/repayment-youyi/logo.png')}></img>
+                    <img src={repayment_youyi.logoUrl}></img>
                     优易借</div>
 
                 <div styleName="amount-overview">

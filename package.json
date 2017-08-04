@@ -44,7 +44,7 @@
     "css-loader": "0.28.4",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "0.11.2",
-    "fw-components": "^0.2.2",
+    "fw-components": "^0.3.0",
     "fw-javascripts": "^0.3.5",
     "html-webpack-plugin": "^2.29.0",
     "image-webpack-loader": "3.3.1",
