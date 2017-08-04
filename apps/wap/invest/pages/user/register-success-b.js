@@ -28,12 +28,13 @@ class RegisterSuccess extends React.Component {
 
     componentWillMount() {
         Get('/new/userLogin/registResult.shtml').then(data => {
-            this.setState({ result: data.registResult })
+            let r = this.state.result;
+            data.registResult.forEach(i => r.push(i))
+            this.setState({ result: r })
         })
     }
 
     render() {
-        let { restype, resvalue } = this.state
 
         const TYPE_TEXT = {
             'A': '元返现券礼包已经转入您的账户中',
@@ -46,10 +47,10 @@ class RegisterSuccess extends React.Component {
             <Header title={"注册成功"} show_back={false} />
             <img styleName="banner" src={require("../../images/user/register-success-b/b.png")} />
             <div styleName="success-title">注册成功</div>
-            {this.state.result.map(i => {
-                return <div styleName="desc">
-                    <span>{resvalue}</span>
-                    {TYPE_TEXT[restype]}
+            {this.state.result.map((i, index) => {
+                return <div styleName="desc" key={index}>
+                    <span>{i.resvalue}</span>
+                    {TYPE_TEXT[i.restype]}
                 </div>
             })}
             <a styleName="btn" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.eten.myriches">立即赚收益</a>
