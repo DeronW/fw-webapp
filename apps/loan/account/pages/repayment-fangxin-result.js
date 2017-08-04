@@ -1,6 +1,7 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import CSSModules from 'react-css-modules'
+import {  Utils } from 'fw-javascripts'
 
 import { Header } from '../../lib/components'
 import {Storage, Browser} from '../../lib/helpers'
@@ -14,7 +15,7 @@ class RepaymentFangXinResult extends React.Component {
 
     componentDidMount() {
         document.title = '还款结果';
-        this.props.repayment_fangxin.fetchRepaymentResult();
+        this.props.repayment_fangxin.fetchRepaymentResult(Utils.hashQuery.id);
     }
 
     render() {
