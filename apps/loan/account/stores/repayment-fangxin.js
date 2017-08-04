@@ -28,6 +28,9 @@ export default class RepaymentFangXin {
             chosenBank: '', // 选择的银行卡银行名称
             chosenCardNo: '', // 选择的银行卡卡号
             repaymentGid: null,
+            repaymentResult: '', // 'fail', 'success', 'waiting'
+            leftAmount: '', // 还款成功后仍剩余金额
+            repaymentAmountNow:0,//本次还款金额
         })
     }
 
@@ -60,8 +63,38 @@ export default class RepaymentFangXin {
                 this.withdrawBankShortName = card[0].bankShortName;
                 this.withdrawCardNo = card[0].cardNo.slice(-4)
                 this.defaultCardGid = card[0].cardGid;
+            }).then(()=>this.Post('/api/repayment/v1/repaymentstatus.json', {
+                repaymentGid: this.repaymentUuid
+            })).then(data => {
+                let { loanLeftAmount, repaymentAmount, status } = data;
+                this.leftAmount = loanLeftAmount;
+                this.repaymentAmountNow = repaymentAmount;
+                if (status == 0) {
+                    this.repaymentResult = 'waiting'
+                } else if (status == 1) {
+                    this.repaymentResult = 'success'
+                } else if (status == 2) {
+                    this.repaymentResult = 'fail'
+                }
             })
     }
+
+    // fetchRepaymentResult = () => {
+    //     this.Post('/api/repayment/v1/repaymentstatus.json', {
+    //         repaymentGid: this.repaymentUuid
+    //     }).then(data => {
+    //         let { loanLeftAmount, repaymentAmount, status } = data;
+    //         this.leftAmount = loanLeftAmount;
+    //         this.repaymentAmount = repaymentAmount;
+    //         if (status == 0) {
+    //             this.repaymentResult = 'waiting'
+    //         } else if (status == 1) {
+    //             this.repaymentResult = 'success'
+    //         } else if (status == 2) {
+    //             this.repaymentResult = 'fail'
+    //         }
+    //     })
+    // }
 
     resendverifycode = () => {
         return this.Post(`/api/repayment/v1/checksmsverifycode.json`, {
