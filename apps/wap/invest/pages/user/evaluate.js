@@ -1,9 +1,9 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
-import {observer, inject} from 'mobx-react'
-import {Header} from '../../components'
-import {Get} from '../../helpers'
-import {Components} from 'fw-javascripts'
+import { observer, inject } from 'mobx-react'
+import { Header } from '../../components'
+import { Get } from '../../helpers'
+import { Components } from 'fw-javascripts'
 import styles from '../../css/user/evaluate.css'
 
 const QUESTIONS = [{
@@ -187,8 +187,7 @@ const QUESTIONS = [{
     }]
 }];
 
-@observer
-@CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Evaluate extends React.Component {
     state = {
         finished: false,
@@ -206,16 +205,16 @@ class Evaluate extends React.Component {
     }
 
     selectHandler = (questionIndex, answerIndex) => {
-        let {selected} = this.state
+        let { selected } = this.state
         selected[questionIndex] = answerIndex
-        this.setState({selected: selected});
+        this.setState({ selected: selected });
     }
 
     submitHandler = () => {
-        let form_data = {}, {selected} = this.state, err;
-        for(let i = 0;i < QUESTIONS.length; i++){
+        let form_data = {}, { selected } = this.state, err;
+        for (let i = 0; i < QUESTIONS.length; i++) {
             let v = ['A', 'B', 'C', 'D', 'E'][selected[i]]
-            if(!v) {
+            if (!v) {
                 err = true
                 break
             }
@@ -232,12 +231,12 @@ class Evaluate extends React.Component {
     }
 
     render() {
-        let {finished, score, evaluateType, selected} = this.state
-        let {history} = this.props
+        let { finished, score, evaluateType, selected } = this.state
+        let { history } = this.props
         let result = () => {
             return <div>
                 <div styleName="result-top">
-                    <img styleName="result-img" src={require("../../images/user/evaluate/result.png")}/>
+                    <img styleName="result-img" src={require("../../images/user/evaluate/result.png")} />
                     <div styleName="result-score">{score}分</div>
                     <div styleName="result-text1">评估完成，您的风险承受能力为：</div>
                     <div styleName="result-text2">{evaluateType}</div>
@@ -290,7 +289,7 @@ class Evaluate extends React.Component {
                     (selected && selected[myNum] == oIndex) ? cn = styles['checked'] : cn = styles['select']
                     return <div styleName="question-select" key={oIndex}>
                         <div className={cn}
-                             onClick={() => this.selectHandler(myNum, oIndex)}>
+                            onClick={() => this.selectHandler(myNum, oIndex)}>
                         </div>
                         {o.a}
                     </div>
@@ -302,7 +301,7 @@ class Evaluate extends React.Component {
                 </div>
             }
             return <div>
-                <img styleName="banner" src={require("../../images/user/evaluate/question-top.png")}/>
+                <img styleName="banner" src={require("../../images/user/evaluate/question-top.png")} />
                 <div styleName="question-list">{QUESTIONS.map(question)}</div>
                 <div styleName="submit-panel">
                     <div styleName="btn-submit" onClick={this.submitHandler}>提交</div>
@@ -311,7 +310,7 @@ class Evaluate extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header title="风险承受能力评估" history={history} show_close={false}/>
+            <Header title="风险承受能力评估" history={history} show_close={false} />
             {!finished && questions()}
             {finished && result()}
         </div>

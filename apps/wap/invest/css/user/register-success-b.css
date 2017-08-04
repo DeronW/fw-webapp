@@ -1,0 +1,22 @@
+.bg {
+    min-height: 100%;
+    background: #ebebee;
+}
+
+.banner {
+    margin: 100px auto 10px;
+    display: block;
+}
+
+.success-title {
+    padding: 0 0 10px;
+    font-size: 44px;
+    line-height: 50px;
+    color: #5799e8;
+}
+
+.desc {
+    font-size: 30px;
+    line-height: 40px;
+    color: #a9b1b5;
+}
