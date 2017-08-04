@@ -172,7 +172,7 @@ class RepaymentFangXin extends React.Component {
                     <div styleName="amountItem">
                         <div styleName="itemName">已还金额</div>
                         {
-                            {m} ? <div styleName="itemAlready" onClick={this.gotoRecord}>{m}
+                            m > 0 ? <div styleName="itemAlready" onClick={this.gotoRecord}>{m}
                                 <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
                             </div> : <div styleName="itemAlready">{m}</div>
                         }
