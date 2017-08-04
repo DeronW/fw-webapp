@@ -7,19 +7,19 @@ import {Storage, Browser} from '../../lib/helpers'
 import styles from '../css/repayment-fangxin-result.css'
 
 
-@inject('repayment_fangxin', 'repayment_fangxin_result')
+@inject('repayment_fangxin')
 @observer
 @CSSModules(styles, { allowMultiple: true })
 class RepaymentFangXinResult extends React.Component {
 
     componentDidMount() {
         document.title = '还款结果';
-        this.props.repayment_fangxin_result.fetchRepaymentResult();
+        this.props.repayment_fangxin.fetchRepaymentResult();
     }
 
     render() {
-        let { history, repayment_fangxin, repayment_fangxin_result } = this.props,
-        { repaymentAmount, leftAmount, repaymentResult } = repayment_fangxin_result,
+        let { history, repayment_fangxin } = this.props,
+        { repaymentAmountNow, leftAmount, repaymentResult } = repayment_fangxin,
         { loanGid } = repayment_fangxin.data;
 
         let USER = Storage.getUserDict();
@@ -42,7 +42,7 @@ class RepaymentFangXinResult extends React.Component {
 
         let paidOff = <div>
             <div styleName="result-container success"></div>
-            <div styleName="info">本次成功还款{repaymentAmount}元
+            <div styleName="info">本次成功还款{repaymentAmountNow}元
                     <br/>
                     恭喜您已还清全部借款，请保持良好的信用
                 </div>
@@ -53,7 +53,7 @@ class RepaymentFangXinResult extends React.Component {
             <div styleName="result-container success"></div>
             <div styleName="info">
                     还有 <span>{leftAmount}</span> 元未还，请记得按时还款<br/>
-                    还款金额： {repaymentAmount}元
+                    还款金额： {repaymentAmountNow}元
             </div>
             <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`}>
                     提升额度</a>
