@@ -9,7 +9,7 @@ import { Header } from '../../lib/components'
 import styles from '../css/repayment-youyi.css'
 
 
-@inject('account', 'repayment_youyi', 'repayment_youyi_result')
+@inject('account', 'repayment_youyi')
 @observer
 @CSSModules(styles, { allowMultiple: true, errorWhenNotFound: false })
 class Repayment extends React.Component {
@@ -23,7 +23,7 @@ class Repayment extends React.Component {
     }
 
     componentDidMount() {
-        document.title = '还款详情';
+        document.title = '还款明细';
 
         let { repayment_youyi } = this.props;
 
@@ -55,7 +55,7 @@ class Repayment extends React.Component {
     handleSubmit = () => {
         if (!this.state.protocolChecked) return
 
-        let { repayment_youyi, repayment_youyi_result, history } = this.props,
+        let { repayment_youyi, history } = this.props,
             repaymentAmount = repayment_youyi.repaymentAmount,
             unpaidAmount = repayment_youyi.unpaidAmount;
         if (repaymentAmount === '') return Components.showToast('请输入还款金额')
@@ -65,29 +65,23 @@ class Repayment extends React.Component {
         repayment_youyi.submitRepayment().then(repaymentUuid => {
             this.setState({ showSMSPop: true });
             this.SMSTimerController();
-
-            repayment_youyi_result.setId(repaymentUuid);
         })
     }
 
     getSMS = () => {
-        let ableToGetSMS = this.state.getSMSTimer === 60;
+        let ableToGetSMS = this.state.SMSTimer === 60;
         if (!ableToGetSMS) return
 
         let { repayment_youyi } = this.props;
         repayment_youyi.getSMS().then(data => {
             Components.showToast('验证码已发送');
-            this.setState({ SMSToken: data.codeToken });
             this.SMSTimerController();
         });
     }
 
     SMSTimerController = () => {
         this._sms_timer = setInterval(() => {
-            if (this.state.SMSTimer <= 1) {
-                clearInterval(this._sms_timer);
-                return this.setState({ SMSTimer: 60 })
-            }
+            if (this.state.SMSTimer <= 1) return this.clearSMSTimer()
             this.setState({ SMSTimer: this.state.SMSTimer - 1 })
         }, 1000)
     }
@@ -191,13 +185,6 @@ class Repayment extends React.Component {
                     </div>
                     {amountEditItem}
                 </div>
-
-                {/* <div className={protocolChecked ? styles['checked-protocol'] : styles['unchecked-protocol']}
-                    onClick={this.toggleProtocol}>
-                    同意
-                    <a href="/static/loan/products/index.html#/protocols/youyi-repayment">《委托扣款授权书（还款）》</a>、
-                    <a href="/static/loan/products/index.html#/protocols/youyi-repayment-service">《委托扣款授权书（支付服务费）》</a>
-                </div> */}
 
                 <div styleName="submit-btn-container">
                     <a styleName="submit-btn"

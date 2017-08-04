@@ -84,7 +84,7 @@ export default class LoopLoan extends React.Component {
             <div styleName="cnt-container">
                 <Header title="优易借" goBack={goBack}/>
                 <div styleName="loan-box">
-                    <div styleName="available-loan-num">{loopLoan.userStatus < 2 ? loopLoan.maxLoanAmt: loopLoan.canBorrowAmt}</div>
+                    <div styleName="available-loan-num">{loopLoan.canBorrowAmt}</div>
                     <div styleName="loan-title">{loopLoan.userStatus < 2 ? "最高" : ""}可借额度(元)</div>
                     <div styleName="loan-tip"><span styleName="icon"></span>{loopLoan.productDesc}</div>
                 </div>
