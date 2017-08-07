@@ -83,7 +83,7 @@ class UserPanel extends React.Component {
 
             </div>
 
-            <BottomNavBar />
+            <BottomNavBar history={history} />
         </div>
     }
 

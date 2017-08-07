@@ -25,6 +25,7 @@ export default (stores) => {
                 <Route exact path="/jrgc-home" component={JRGCHome} />
                 <Route exact path="/jrgc-login" component={JRGCLogin} />
 
+                {/* 微信相关页面 */}
             </Switch>
         </Provider>
     </Router>

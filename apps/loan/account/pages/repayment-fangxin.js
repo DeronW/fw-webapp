@@ -89,10 +89,8 @@ class RepaymentFangXin extends React.Component {
     }
 
     gotoRecord = () => {
-        let { repayment_fangxin } = this.props;
-        // location.href = `/static/loan/repayment-record/index.html?repaymentUuid=${repayment_fangxin.repaymentUuid}`
-
-        this.props.history.push(`/repayment-fangxin-records?repaymentUuid=${repayment_fangxin.repaymentUuid}`)
+        let { repayment_fangxin,history } = this.props;
+        history.push(`/repayment-fangxin-records?repaymentUuid=${repayment_fangxin.repaymentUuid}`)
     }
 
     countingDown = () => {
@@ -178,9 +176,9 @@ class RepaymentFangXin extends React.Component {
                     <div styleName="amountItem">
                         <div styleName="itemName">已还金额</div>
                         {
-                            m > 0 ? <div styleName="itemAlready" onClick={this.gotoRecord}>{m}
+                            m > 0 ? <div styleName="itemAlready" onClick={this.gotoRecord}><span>{m}</span>
                                 <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
-                            </div> : <div styleName="itemAlready">{m}</div>
+                            </div> : <div styleName="itemAlready"><span>{m}</span></div>
                         }
                     </div>
 
@@ -188,7 +186,8 @@ class RepaymentFangXin extends React.Component {
                 <div styleName="amountPanel">
                     <div styleName="amountItem">
                         <div styleName="itemName">选择银行卡</div>
-                        <div styleName="itemAlready" onClick={() => this.chooseBank()}>{`${repayment_fangxin.chosenBank || repayment_fangxin.withdrawBankShortName}(${repayment_fangxin.chosenCardNo || repayment_fangxin.withdrawCardNo})`}
+                        <div styleName="itemAlready" onClick={() => this.chooseBank()}>
+                            <span>{`${repayment_fangxin.chosenBank || repayment_fangxin.withdrawBankShortName}(${repayment_fangxin.chosenCardNo || repayment_fangxin.withdrawCardNo})`}</span>
                             <img src={require("../images/repayment-fangxin/entry.png")} alt="" />
                         </div>
                     </div>
@@ -206,7 +205,7 @@ class RepaymentFangXin extends React.Component {
                 </div>
             </div>
             <div styleName="amountBottom">
-                <div styleName="submitBtn" onClick={() => this.verifySMSHandler()}>立即还款</div>
+                <div styleName="submitBtn" onClick={this.verifySMSHandler}>立即还款</div>
             </div>
             {show && smsMask}
         </div>

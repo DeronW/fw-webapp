@@ -75,6 +75,8 @@
 
 .itemName {
     float: left;
+    height: 100px;
+    line-height: 104px;
 }
 
 .itemTime {
@@ -82,6 +84,8 @@
     margin-right: 30px;
     color: #333;
     font-size: 34px;
+    height: 100px;
+    line-height: 104px;
 }
 
 .itemAlready {
@@ -90,8 +94,12 @@
     color: #333;
     font-size: 32px;
 }
-
+.itemAlready span{
+    display: inline-block;
+    vertical-align: middle;
+}
 .itemAlready img {
+    vertical-align: middle;
     display: inline-block;
     margin-left: 20px;
 }

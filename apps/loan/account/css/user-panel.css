@@ -1,6 +1,7 @@
 .bg {
     background-color: #f0f0f0;
     font-size: 30px;
+    min-height: 100%;
 }
 
 .banner {
