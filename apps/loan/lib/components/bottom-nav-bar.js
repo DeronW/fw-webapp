@@ -72,7 +72,7 @@ function get_styles(type) {
     if (type == 'tab_c')
         style = Object.assign({}, STYLE_TAB_BASE, tabColor('c'))
 
-    if (type == 'tab_c')
+    if (type == 'tab_d')
         style = Object.assign({}, STYLE_TAB_BASE, tabColor('d'))
 
     if (type == 'icon_a')
