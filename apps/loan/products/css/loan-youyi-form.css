@@ -243,7 +243,8 @@
 }
 .item-left{
     display:inline-block;
-    width:250px;
+    width:200px;
+    padding-left:50px;
     text-align:left;
 }
 .item-right{
