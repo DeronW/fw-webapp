@@ -11,7 +11,7 @@ let tabColor = (keyword) => {
 
 let isActiveTab = (tab) => {
     let pt = location.pathname, hash = location.hash, cnd = false;
-    if (tab === 'home' &&
+    if (tab === 'a' &&
         (pt === '/' || pt == '/static/loan/products/' || pt == '/static/loan/products/index.html'))
         cnd = true;
 
@@ -64,7 +64,7 @@ function get_styles(type) {
         }
 
     if (type == 'tab_a')
-        style = Object.assign({}, STYLE_TAB_BASE, tabColor('home'))
+        style = Object.assign({}, STYLE_TAB_BASE, tabColor('a'))
 
     if (type == 'tab_b')
         style = Object.assign({}, STYLE_TAB_BASE, tabColor('b'))
@@ -77,7 +77,7 @@ function get_styles(type) {
 
     if (type == 'icon_a')
         style = Object.assign({}, STYLE_ICON_BASE, {
-            backgroundImage: isActiveTab("home") ?
+            backgroundImage: isActiveTab("a") ?
                 "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACsAAAA0CAMAAAAkAzG8AAAAjVBMVEUAAAB3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOrlVKg8AAAALnRSTlMA7mVUqgL7aRAG8qWHCvfmIr+h27yVkFlPRt/Y0sqEfHQ/JsRwMiwcF7U3sj0ID7pfdgAAAaBJREFUSMeVlutygjAQhQ8KKFBEBS94r9Zr2/P+j9cxaliYSNLvV2b4JoTdPRlgIjqdIjgRbWIy3rjYQUFFEdjdLz6Zwshw7MXL8fy+08XjixII5kk+iP29UDMqVp9AQk0elDkV3lC7+nm4G1Iw1itfux413zQSa3dAGwPtFlZ3pN1Pq/sDzdqirlExs7hd2ddR+2kDCM5Zi5qdUWO/eKsu9o3h6sXva7uNamrSft5UuFu2M6nUvq3JYfV1XdroiChYEBmZirfNFs+izuTBEu2Kru1egzRHT7grXTGPMgDT50Zj+XG/r7hR0EO6JLN+Y56OpjIMjriFnGMfGwuxoWSZYjtFtDJ348oaCdIUE9Y5PN2sepOiD6SPlQhyoNQLNWjAisdtUoqsKE7A8LGSMTIP2Qd0Hyo2yvWd3Ktycyc3U8PLir6iSoGUL/rSsdaBZWN4fcUMKNWikO4OcpzM55UjvHJ0l0AUOrphiiMdXd7QMbnRzpjlCV2ZYO3sruE5ux7ozr/2HTm7BTrObgfBwVE9REDQ9RdsEHqCkAzz+w/DH2wcGYWSW5VPAAAAAElFTkSuQmCC')" :
                 "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAA0CAMAAADG3yrFAAAArlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8tivQqAAAAOXRSTlMA73cDq5lm/MNa9URtBfjr39mnlGI2GQ0InoN0PujHvn1RFOOJTCbPy15WSUIrIdO4ofK1MQ+PaDA0h19wAAACgklEQVRIx6VV2ZaqMBAM4sqAoKLgrrhvo87ozO3//7FbWSDAUfGcqQfodIqkUylb9mf8K3vNjW2+xd03iePbYcX4tEii8oQQ2JVB9SbjPnj94QLPHUbhsfRTaaQ3OWEKaPmo84igzNgN64+D+8Aljm2UcM0NKdR7bELUXCPZ4Bt4pHBNyF2MvFaN+GuFx0xk4xWs8xjfhzH5gNSJRTbfsoYJuedcUCcrh+3w7iXnx6CNd1QnEqHEr0tGyUSVLSJXq97GcvzT+4RXkixi9oQKH0gOU2pg2OGB01j+BiwLEyu4ae0uYPvsMTqYG6QTJyvZSkPf0SK7246AkRrkJ6xuLuk3Zdl5lImMY/4UtgXnPCZbMyfLvRIwf0BuEDAN06kZAZ3HYuSn7hakXLHHGHkwgbyoxAZH9gwn+KWhh0Oir7j6WD9H6wVvLDX5B8ZX3La1ltHSSmSfSnPpUVlGoUFbR1Ra03dcITprsqEMD6ykEQKPtoleNk4Ypv2caDGg2og7wvjM/JK6aTG0iS/kBfPMDQWQw9eL0VhPRQvajOXxtRz6Wr6JLrKeD44ZN+VBhNog9Zg8jnUsUQ7IqfyXKcMesvuX5APCdSbUqOvrTS+nN3lC1oUOUuW/Jl/QgfPCzMsCLtFERjF5CX2k5KINvDwg2yOOhGUQ3NRRKwKocCqjmLwG50PZpOkU1Gxaqq1cibasgMy7dlv14X4hWVk6hKXsQnKVW1qadVRIVpb28U2uy66P3Sg9VvtXRRNpsWKciSrqnMVoC80MrmAxhkQGY+KftBg+eKoNFGNG5IoG417tahbDUga23TfgF77+u4A1zfqb3KnJwN63PcqhaWRg1Vr9lcn+A9xEjULtMBklAAAAAElFTkSuQmCC')"
         })
@@ -124,20 +124,31 @@ class BottomNavBar extends React.Component {
 
     render() {
 
+        let { history } = this.props
+
         let link_handler = tab => {
-            let goto = path => !isActiveTab(path) && path
+            // 如果当前tab是激活状态, 不用跳转
+            if (isActiveTab(tab)) return;
 
             if (tab == 'a') {
-                goto('/static/loan/products/index.html#/')
+                location.href = '/static/loan/products/index.html#/'
             }
             if (tab == 'b') {
-                goto('/static/loan/account/index.html#/repayment-records')
+                if (isActiveTab('d') && history) {
+                    history.push('/repayment-records')
+                } else {
+                    location.href = '/static/loan/account/index.html#/repayment-records'
+                }
             }
             if (tab == 'c') {
-                goto('/static/loan/weixin-invite/index.html')
+                location.href = '/static/loan/weixin-invite/index.html'
             }
             if (tab == 'd') {
-                goto('/static/loan/account/index.html#/user-panel')
+                if (isActiveTab('d') && history) {
+                    history.push('/user-panel')
+                } else {
+                    location.href = '/static/loan/account/index.html#/user-panel'
+                }
             }
         }
 
