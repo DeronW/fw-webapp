@@ -27,7 +27,7 @@ export default class Basic {
             cityCode: this.data.cityCode,
             idCard: this.data.idCard,
             intentionCompanyCode: this.data.intentionCompanyCode,
-            licenseNo: this.data.formatLicenseNo
+            licenseNo: this.formatLicenseNo
         })
     }
 
@@ -36,7 +36,7 @@ export default class Basic {
     }
 
     @computed get formatLicenseNo() {
-        return this.licenseNo ? this.licenseNo.toUpperCase() : ''
+        return this.data.licenseNo ? this.data.licenseNo.toUpperCase() : ''
     }
 
     @computed get valid() {
