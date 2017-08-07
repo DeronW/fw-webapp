@@ -42,46 +42,35 @@ class RepaymentFangXinResult extends React.Component {
             repayment_fangxin_link = `/static/loan/account/index.html#/repayment-fangxin?id=${loanGid}`;
 
         let paidOff = <div>
-            
-            <div styleName="result-container success">
-                <div styleName="title">还款成功</div>
-            </div>
+            <div styleName="result-container success"></div>
             <div styleName="info">欢迎再次使用！
                 <div styleName="infoMoney">还款金额： <span>{repaymentAmountNow}</span>元</div>
             </div>
-            <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
             <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`}>
                     提升额度</a>
-                
+                <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
         </div>
 
         let stillLeft = <div>
-            <div styleName="result-container success">
-                <div styleName="title">还款成功</div>
-            </div>
+            <div styleName="result-container success"></div>
             <div styleName="info">
                     还有 <span>{leftAmount}</span> 元未还，请记得准时还款！
                     <div styleName="infoMoney">还款金额： <span>{repaymentAmountNow}</span>元</div>
             </div>
-            <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
             <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`}>
-                提升额度
-            </a>
+                    提升额度</a>
+                <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
         </div>
 
         let fail = <div>
-            <div styleName="result-container fail">
-                <div styleName="title">还款失败</div>
-            </div>
+            <div styleName="result-container fail"> </div>
             <div styleName="info">请检查网络原因，本次还款失败</div>
             <div styleName="payback-customer-service"><img src={require("../images/repayment-fangxin-result/phone.png")} />如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
             <a styleName="btn" href={repayment_fangxin_link}>查看订单</a>
         </div>
 
         let waiting = <div>
-            <div styleName="result-container waiting">
-                <div styleName="title">还款中</div>
-            </div>
+            <div styleName="result-container waiting"></div>
             <div styleName="info">
                 <div styleName="payback-result-ing-tip">稍后可到账单页面<br />查看具体还款结果</div>
                 <div styleName="payback-customer-service"><img src={require("../images/repayment-fangxin-result/phone.png")} />如有问题，请致电<a href="tel:400-102-0066">400-102-0066</a></div>
