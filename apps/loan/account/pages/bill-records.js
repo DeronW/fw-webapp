@@ -46,7 +46,7 @@ class BillRecords extends React.Component {
     }
 
     componentWillUnmount() {
-        Event.cancelTouchBottom()
+        Event.cancelTouchBottom();
     }
 
 
