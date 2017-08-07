@@ -41,7 +41,7 @@ export default class LoopLoan {
     }
 
     get_baseinfo = () => {
-        this.Post('/api/looploan/loan/v1/baseinfo.json', {
+        return this.Post('/api/looploan/loan/v1/baseinfo.json', {
             productUuid: 11
         }).then((data) => {
             this.canBorrowAmt = data.canBorrowAmt;
