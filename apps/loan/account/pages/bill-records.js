@@ -27,7 +27,7 @@ class BillRecords extends React.Component {
 
         Post(`/api/order/v1/orderList.json`, {
             pageSize: 10,
-            pageIndex: currentÒ_tab.page_no,
+            pageIndex: current_tab.page_no,
             loanStatus: current_type
         }).then(data => {
             tab[current_type].records.push(...data.resultList)
@@ -47,6 +47,7 @@ class BillRecords extends React.Component {
 
     componentWillUnmount() {
         Event.cancelTouchBottom();
+        this.state.tab.records = [];
     }
 
 
