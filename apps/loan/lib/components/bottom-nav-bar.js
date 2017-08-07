@@ -111,17 +111,6 @@ function get_styles(type) {
  <NavBar title={}  height={} background={} />
  */
 class BottomNavBar extends React.Component {
-    constructor(props) {
-        super(props);
-        let height = parseInt(this.props.height) || 100;
-        let lineHeight = parseInt(this.props.height) || 100;
-        this.state = {
-            height: height,
-            lineHeight: lineHeight,
-            background: this.props.background || 'white'
-        };
-    }
-
     render() {
 
         let { history } = this.props
