@@ -21,7 +21,7 @@ const CarImage = inject('basic', 'car')(observer(CSSModules((props) => {
                 <div styleName="car-info">
                     <div styleName="car-info-item">
                         车牌号码
-                        <span>{`${basic.carNoArea}${basic.licenseNo}`}</span>
+                        <span>{`${basic.data.carNoArea}${basic.data.licenseNo}`}</span>
                     </div>
                     <div styleName="car-info-item">
                         车主信息

@@ -8,7 +8,7 @@ export default class StoreSpy {
     }
 
     log = (txt) => {
-        console.log('%c store spy:', 'background: #222; color: #eee', txt)
+        console.log('%c spy: ', 'background: #222; color: #eee', txt)
     }
 
     wiretap = () => {
@@ -41,18 +41,19 @@ export default class StoreSpy {
 
     handle_computed = event => {
         let obj = event.object.constructor.name
-        this.log(`自动计算 ${obj}`)
+        this.log(`COMPUTED ${obj}`)
     }
     handle_update = event => {
+        console.log(event)
         let obj = event.object.constructor.name
-        this.log(`更新 ${obj}.${event.name}: "${event.oldValue}" => "${event.newValue}"`)
+        this.log(`UPDATE ${obj}.${event.name}: "${event.oldValue}" => "${event.newValue}"`)
     }
     handle_add = event => {
         let obj = event.object.constructor.name
-        this.log(`新增 ${obj}.${event.name}: "${event.newValue}"`)
+        this.log(`ADD ${obj}.${event.name}: "${event.newValue}"`)
     }
     handle_delete = event => {
         let obj = event.object.constructor.name
-        this.log(`删除 ${obj}.${event.name}: "${event.oldValue}"`)
+        this.log(`DELETE ${obj}.${event.name}: "${event.oldValue}"`)
     }
 }

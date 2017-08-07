@@ -3,7 +3,14 @@ import { extendObservable, computed } from 'mobx'
 export default class Car {
 
     constructor(Get) {
-        this.Get = Get;
+        this.Get = Get
+
+        this.data = {}
+
+        extendObservable(this.data, {
+            a: null
+        })
+
         extendObservable(this, {
             carOwnersName: '', // 车主姓名
             moldName: '', // 品牌型号
@@ -24,7 +31,7 @@ export default class Car {
         this.setFormData('moldName', data.modleName);
         this.setFormData('engineNo', data.engineNo);
         this.setFormData('carVin', data.carVin);
-        this.setFormData('registerDate', data.registerDate);
+        data.registerDate && this.setFormData('registerDate', data.registerDate);
         this.setFormData('forceExpireDate', data.forceExpireDate);
         this.setFormData('businessExpireDate', data.businessExpireDate);
     }
