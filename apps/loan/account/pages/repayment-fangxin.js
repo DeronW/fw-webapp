@@ -70,7 +70,7 @@ class RepaymentFangXin extends React.Component {
     }
 
     closePopHandler = () => {
-        this.setState({ show: false,remain:0 })
+        this.setState({ show: false, remain: 0 })
         clearInterval(this._timer)
     }
     chooseBank = () => {
@@ -84,7 +84,9 @@ class RepaymentFangXin extends React.Component {
 
     gotoRecord = () => {
         let { repayment_fangxin } = this.props;
-        location.href = `/static/loan/repayment-record/index.html?repaymentUuid=${repayment_fangxin.repaymentUuid}`
+        // location.href = `/static/loan/repayment-record/index.html?repaymentUuid=${repayment_fangxin.repaymentUuid}`
+
+        this.props.history.push(`/static/loan/account/index.html#/repayment-fangxin-records?repaymentUuid=${repayment_fangxin.repaymentUuid}`)
     }
 
     countingDown = () => {
@@ -113,7 +115,7 @@ class RepaymentFangXin extends React.Component {
         if (code == '') {
             Components.showToast("请输入验证码");
         } else {
-            repayment_fangxin.confirmHandler(code).then(repaymentGid =>{
+            repayment_fangxin.confirmHandler(code).then(repaymentGid => {
                 history.push(`/repayment-fangxin-result?id=${repaymentGid}`)
             });
         }
