@@ -36,12 +36,10 @@ class RepaymentFangXin extends React.Component {
             rf.setLoanAmount(rf.loanLeftAmount);
             return false
         }  
-        
         if (!inputAmount && rf.loanLeftAmount >= 200){
             Components.showToast("请输入还款金额");
             return false
         }
-        
         if ((rf.loanLeftAmount - inputAmount) > 0 && (rf.loanLeftAmount - inputAmount) < 100){
             Components.showToast("剩余金额不能小于100");
             return false
@@ -54,12 +52,10 @@ class RepaymentFangXin extends React.Component {
             Components.showToast("信用卡暂不支持还款");
             return false
         } 
-        
         return true
     }
 
     verifySMSHandler = () => {
-        console.log(this.verifyHandler())
         if (this.verifyHandler()) {
             this.setState({ show: true });
             this.getSMSCode();
