@@ -39,9 +39,9 @@ export default class RepaymentRecords extends React.Component {
     loadMoreHandler = (done) => {
         let {resultList, curPage} = this.state;
 
-        if (curPage === 0) 
+        if (curPage === 0)
             return done && done();
-        
+
         Post(`/api/order/v1/orderList.json`, {
             pageSize: 10,
             page: curPage,
@@ -101,8 +101,9 @@ export default class RepaymentRecords extends React.Component {
             <img src={require("../images/no-data.png")} alt="" styleName="blank-img"/>
             <p styleName="blank-text">暂无数据</p>
         </div>
-        return <div>
-            <Header title="还款" hideGoback/> {/*内容部分*/}
+
+        return <div styleName="bg">
+            <Header title="还款" /> {/*内容部分*/}
             <div styleName="repayment-content">
                 {resultList.length > 0 && resultList.map(repayment_item)}
             </div>
