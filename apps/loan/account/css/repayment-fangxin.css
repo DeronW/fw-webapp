@@ -75,6 +75,8 @@
 
 .itemName {
     float: left;
+    height: 100px;
+    line-height: 104px;
 }
 
 .itemTime {
