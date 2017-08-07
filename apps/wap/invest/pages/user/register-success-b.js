@@ -27,7 +27,7 @@ class RegisterSuccess extends React.Component {
     }
 
     componentDidMount() {
-        document.title = '金融工场'
+        // document.title = '金融工场'
 
         Get('/new/userLogin/registResult.shtml').then(data => {
             let r = this.state.result;
