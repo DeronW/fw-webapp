@@ -44,7 +44,8 @@ export default class LoopLoan extends React.Component {
             } else {
                 Browser.inFXHApp ? NativeBridge.close() : history.push('/')
             }
-        } else if (loopLoan.errMsg) {
+        }
+        if (loopLoan.errMsg) {
             Browser.inFXHApp ? NativeBridge.close() : history.push('/')
         }
     }
@@ -62,7 +63,7 @@ export default class LoopLoan extends React.Component {
     }
 
     render() {
-        let { history, loopLoan } = this.props;
+        let { loopLoan } = this.props;
         let btn_title;
         if (loopLoan.userStatus == 0) {
             btn_title = '去借款'
@@ -72,11 +73,11 @@ export default class LoopLoan extends React.Component {
             btn_title = '去借款'
         } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt) {
             btn_title = '尝试其他借款'
-        } else if (loopLoan.errMsg) {
-            btn_title = '尝试其他借款'
         } else {
             btn_title = '尝试其他借款'
         }
+
+        if(loopLoan.errMsg)  btn_title = '尝试其他借款'
 
         let goBack = () => {
             Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
