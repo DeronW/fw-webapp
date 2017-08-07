@@ -27,7 +27,7 @@ class RegisterSuccess extends React.Component {
     }
 
     componentDidMount() {
-        document.title = '金融工场'
+        // document.title = '金融工场'
 
         Get('/new/userLogin/registResult.shtml').then(data => {
             let r = this.state.result;
@@ -46,7 +46,7 @@ class RegisterSuccess extends React.Component {
         }
 
         return <div styleName="bg">
-            <Header title={"注册成功"} show_back={false} />
+            <Header title={"注册成功"} show_back={false} show_close={false} />
             <img styleName="banner" src={require("../../images/user/register-success-b/b.png")} />
             <div styleName="success-title">注册成功</div>
             {this.state.result.map((i, index) => {
