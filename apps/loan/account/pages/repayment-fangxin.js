@@ -89,8 +89,8 @@ class RepaymentFangXin extends React.Component {
     }
 
     gotoRecord = () => {
-        let { repayment_fangxin } = this.props;
-        this.props.history.push(`/repayment-fangxin-records?repaymentUuid=${repayment_fangxin.repaymentUuid}`)
+        let { repayment_fangxin,history } = this.props;
+        history.push(`/repayment-fangxin-records?repaymentUuid=${repayment_fangxin.repaymentUuid}`)
     }
 
     countingDown = () => {
