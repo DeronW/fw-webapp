@@ -36,10 +36,19 @@ class BottomNavBar extends React.Component {
                 (pt === '/' || pt == '/static/loan/products/' || pt == '/static/loan/products/index.html'))
                 cnd = true;
 
-            if (tab === 'b' && hash == "#/repayment-records" && (pt == '/static/loan/account/' || pt == '/static/loan/account/index.html'))
+            if (tab === 'b' && hash == "#/repayment-records" &&
+                (pt == '/static/loan/account/' ||
+                    pt == '/static/loan/account/index.html'))
                 cnd = true;
 
-            if (tab === 'd' && hash == "#/user-panel" && (pt == '/static/loan/account/' || pt == '/static/loan/account/index.html'))
+            if (tab === 'c' &&
+                (pt == '/static/loan/weixin-invite/index.html' ||
+                    pt == '/static/loan/weixin-invite/'))
+                cnd = true;
+
+            if (tab === 'd' && hash == "#/user-panel" &&
+                (pt == '/static/loan/account/' ||
+                    pt == '/static/loan/account/index.html'))
                 cnd = true;
 
             return pt.match(`/static/loan/${tab}`) || cnd
@@ -65,13 +74,10 @@ class BottomNavBar extends React.Component {
                 color: cnd ? "#77a4ea" : "#ffffff"
             }
         }
-        let goto = (path) => {
-            return isActiveTab(path) ? null : path
-        }
 
         let _style_tab_a = Object.assign({}, STYLE_TAB_BASE, tabColor('home'))
         let _style_tab_b = Object.assign({}, STYLE_TAB_BASE, tabColor('b'))
-        let _style_tab_invite = Object.assign({}, STYLE_TAB_BASE, tabColor('weixin-invite'))
+        let _style_tab_c = Object.assign({}, STYLE_TAB_BASE, tabColor('c'))
         let _style_tab_d = Object.assign({}, STYLE_TAB_BASE, tabColor('d'))
 
         let _style_tab_a_icon = Object.assign({}, STYLE_ICON_BASE, {
@@ -84,8 +90,8 @@ class BottomNavBar extends React.Component {
                 "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADYAAAAqCAMAAADPj1gPAAAAh1BMVEUAAABqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPAjB1QCAAAALHRSTlMAIrs8m/hmBOOIFAHzNRvtycKTznkKCPG1YD8pDrCCUtnVqaNwaVhKL9qPfw0Pv6wAAAGqSURBVEjHndXrloIgFAXgraEQqKmVZdfp3ky8//MNpaJmrIHZP1pnLfi6HA+EKjxn0jJRVopaJQo5ZFlU7CTdsqvYQpUk9mwSL9Ve9lJzVfmwDPXV7le1UcUMtllXbEX8NE0z/88cS/pyTyZyaZ9s07BSuoQ0bOrEAl6zQDolrln7RhPzPEW6HL2zW8FMbJ0sTGyJ+cT8zWYGlnK11GZ6J7KNLwT5xKKSYtVtzhgrXVcjtPoasiNQRro3JAxjJGEY7rT7oTgPWZCnesfkDp32obKcDVgvV9Br/WmPwaKRBRTk+dtGUsWeMeDgzFQ49tE/WN6eR+LA5Hiu4cOByYXvh8BluwdllkxPyVo1dYOjK0vUyBXY2rMDIWQP3PKROhT2jKOJnnsTW3RWLuru5Sg87+Z3+/SBZTTubhlOyfde7BpGNTtwiJ/utq04v92P9NQw5QPUp+UCsexu7PWCbZpTKsezTL1+6Zac1ZMyJcSofy/ONAsS803LaX8pLdDWxPzvue19/+fQSrdcvURAhbkxD1VyJzVFHf7toKIY2p0CW5Xd0UmReFaZt+QXgfcecXeczVsAAAAASUVORK5CYII=')" :
                 "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADcAAAAqCAMAAAAgTTMxAAAAkFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+WABnwAAAAL3RSTlMAPA6l+kT28m8dF5ln3EsyEggEwlwiDAL80sq+q56M6+XjsaLXWEHOuK2BYlAsKCeUuNsAAAGySURBVEjHndXpcqsgAIZhanDDJa6Je07Wrqff/d9dpxIoNmEKeX/pjM+AwCjhuaUH07wuyAVrYNVzxl0Jy0bufOD5PzGrcFvA59cAODMqBCDdlpg3u3rwjVeydKVj/2BR4wo3wqpSOB/wqg0xaFN9PyscgDdiWAVAcfxlc0cPnJyPuHRP83a2O+1s811bzBd3XIx9oXPFHrHGpR7eibYYXnrPsQOwImppm6q3K+DAbl2AZloetCOO6u12ahDMYKO6LPhUNyqIogRJFEUBkX0G2Qwc1S2q95BlROkP18Eb5Xjmrp4Pwoqvk4V7AvJHXEYxFQ84MoFHaZfauGKiEL2bOBlz3R69m/bY5TaOXNeFAetHXG3n1nEcd+ji+IT99rdjWudQiGh6sy7hwjnq2X9NksSHn5xe1Vk6d1yFfn37fmrrHmfhmHQXH/RM1AIszvSZwr9cXXYEPO5IOIAuR8wWo1EM1wnyz3sp12XAC9H2goEQ1aXSMQ+OjjnwmOJo+zFfXvi/uiLaKlf++MKfLYmJYSPQiANLgVNopNg4L8i1A6z6EK7eWSj1o1ofqKny3+Qx/wJ1oJ37DGG9sQAAAABJRU5ErkJggg==')"
         })
-        let _style_tab_invite_icon = Object.assign({}, STYLE_ICON_BASE, {
-            backgroundImage: isActiveTab("weixin-invite") ?
+        let _style_tab_c_icon = Object.assign({}, STYLE_ICON_BASE, {
+            backgroundImage: isActiveTab("c") ?
                 "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAzCAMAAAD1nzvvAAAAe1BMVEUAAAB3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOp3pOrL2IeZAAAAKHRSTlMA+PQJl+/dBerXfisP41AYg0K6oJCKc2rPx8J4Xj2ppDgfs0tHWKwmRdWwEQAAAidJREFUSMedleuagiAQQAeMvGdppmnZvZ33f8JFGz60xRY6vyg8zjTDEPzBexS1YGldPDxwwGsFKsTaXo1DHBPGAHAKGF92h48v2XCcwjcA5WsZVB/iCXxHyJjHqBnWp7mgns5TEw5PX7ZMrnPfLO7QxI6y2ct1ZBZTo5iqfHJEnpm8M5o5034SUEi7TClXeqAxidsZcQvEhfJ+ZzEjLkDBEb8TxZeih1+KR2dRV0+YxHJGXNO+nyLuTeJhRlyN9tcmMTN73KORE4jsAiZyo1iSxyig7WFdJnRQ1VhZ1pXREa/68nowg7//46nK3HkewzxJM/WCI/xLdrj1MUs28rqs70K08ihdjmLfJhPt0jHkQy7xU2XZnYcc+44sMhoOiTiAZjV8l/5Q7G13Wq9ebz7yV84buVYVaEFxQ1Tbbzy4ii+3kmpXhii5qTyFnvZk8rtPozplui8p9ZO26f/iR2nxluOIgr6O5Prx6gF7u4KLtqqibvneUkrGE2rSbmjHnUJe5btpDmdZ9ui51NdoBlTlT5O4ok+NmgXa8ZilyDw60fx1125wFjakypDY6LmtAWCNtkSjhiQAjbXYjK7JO/jMWuS+tKgqpdTt6aeT+vCEyEFsSXz2aRcOYqHvphByBzEnUTYigNpBrEeHDlIHMQWIq7a8Bn1E7iByuKjHT8AcRAZ3Cl1nEDqIIfhXmWVd3Hxw7aPGt2/kwocJcXQNxT8/VYTXKJ5YvyU3/o3QyjwfAAAAAElFTkSuQmCC')" :
                 "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAyCAMAAAA+w+hKAAAApVBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////+4/eNVAAAANnRSTlMAVQSB6Fr58+z15M+nh07ajmwqDwjwL9XKvbCromk2E5h1cGbBtp1h4d2zk3pIHrlEGlc6xSPOO8k/AAACnUlEQVRIx9VV2YKiQAxEQMBrABUPxAvP8RjHcab+/9M2me6lUVtgH7deSKcp0hWStPGEgTVuOq4/tgbGv+C2Rob1rTLNDHCHwGTvNGr425pZwOtvQIjaaa2WtiO2N31yu2A0V6+JbdpvnHpi0Ts1aNkm60BP+RU96rTpd9W665PjjQScdwGbGJv6gzbpPNe852oDexnmyyNmR0t8o53avatGrrq0f+i7zo+OmADDR9+QVUp8ArB0xHfNUTrAe7YYASMdkZK4e/TtKM3ZYgHYOiLr0SU6Hx7/D9GpmpwV4GaLDbDXEX0gePRtc/92BiB5UeLNh2K80imO0v5oEnH2quTCexe32UDWDfO2+i72SdDdvDgiq7izQ/aoz6Y+pK0O05tw+87FwuKu6j1zVATHEtv9kM8WDf4qbHkn8/XIaYPgJeFXmnjgeJUnnYU84nk5Y7682BjTzxqr6fjJG7E3bO9EUlYRvPXyXujJBWHC5qzTcmF/d+QpJyDYKyObdlE9py0WMRbGMxZiK6HMfENgmRsahEta16ViNu2MQDiSnOkyGLL9lhtJ+1lBAj5t9XbIL5tZdXsfRhG6ERe7SvyX8JL1eryrOF05fj1KRubslf0tAFNpHzi6THjLKENLDdglgDkbNjdwGY5qNM5kprriqcEajLHoHCXSdClSoURRfZcnkRfWpiRWF3kCnJ6UWI5AibwBOEuJhXgU2W/w9RSKuEV4EjniRtoqiaUit0bWamuug7gSMQYOqtV8DrsoZqi3R6rOPb6Hrarj6D1XdDwPwkrE9Pf+6YbLIPb41zjcU1Uw5UvuowGBhDW6E2taK0R9ZcURH/UsaPvW1dihIhwg5bHm2K3kbP5egU6jCjFyH5M4SA9Dr4Tr+Rvrfiz9AXYgkQpDKgzEAAAAAElFTkSuQmCC')"
         })
@@ -95,28 +101,41 @@ class BottomNavBar extends React.Component {
                 "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAhFBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8g2+bRAAAAK3RSTlMA+rjwJcZseyrlpMGTIN3rkB2YbzbaYBgLBlnWvLGgVS+qMizMf0xIQfVxp/+zHAAAAdJJREFUSMellumWgjAMhS9QFhFZZFERd0ed4f3fb9KOUrAgPcz3Qw9dTprkNg1UkiIw88gwotwMigSjJO627rB1F/jE8VT3cDpiiNX+uWZmBm6auoE5ew7sV+jlYIlp22FyjDm2GLQOUNks+ZThX/DGxTf4zHKDN9YmH5976MGb8zlz/bbD5iYcDOBwQ3Znz6biTmcYJOOBqNpn436EH+O/CLk/rVjRZ8TwERbRorLJh0V+ZBghI3+sV3582p9iFIeW+RCceXShAY/1GZwdHesCDTw62k7EQtgbQXrA4+rSvwctPFr6Rf9byis0IY3kQEI7nSb4thWjS2zZrBO0BQr6Ze2YlGhTdsLJ6KtAQOJqhr5pKO4a4XKVnyS1ACbJGrpW/laHtE8avvb4cmUdoyFIXy60cUm/EPrSJiXPJmyZcjDhvg7SfRE2bcRqkUoNZCqlYEaQgpGyHEHKUhX/0k6a+5HvVPGrV4yOGz4guEV1qF6xnoucUaYq5377sSkHR/Uiv8pF2wwz6ydVopaLgaJ090PDyPePvqIk7TmapW96gUWpX8anPxb6T9LUh2/68yofcU/ZIB/x/7UKakMS84YkVhqSiW3P9OZKbeEsw7AGWrhf+EBSF7SUTxMAAAAASUVORK5CYII=')"
         })
 
-        let _href_a = goto('/static/loan/products/index.html#/')
-        let _href_b = goto('/static/loan/account/index.html#/repayment-records')
-        let _href_invite = goto('/static/loan/weixin-invite/index.html')
-        let _href_d = goto('/static/loan/account/index.html#/user-panel')
+        let link_handler = tab => {
+
+            let goto = path => !isActiveTab(path) && path
+
+            if (tab == 'a') {
+                goto('/static/loan/products/index.html#/')
+            }
+            if (tab == 'b') {
+                goto('/static/loan/account/index.html#/repayment-records')
+            }
+            if (tab == 'c') {
+                goto('/static/loan/weixin-invite/index.html')
+            }
+            if (tab == 'd') {
+                goto('/static/loan/account/index.html#/user-panel')
+            }
+        }
 
         if (Browser.inApp) return null;
 
         return <div style={{ height: '120px' }}>
             <div style={easyloan_style_footer_fixed}>
-                <a style={_style_tab_a} href={_href_a}>
+                <a style={_style_tab_a} onClick={() => link_handler('a')}>
                     <i style={_style_tab_a_icon}></i>
                     借款
                 </a>
-                <a style={_style_tab_b} href={_href_b}>
+                <a style={_style_tab_b} onClick={() => link_handler('b')}>
                     <i style={_style_tab_b_icon}></i>
                     还款
                 </a>
-                <a style={_style_tab_invite} href={_href_invite}>
-                    <i style={_style_tab_invite_icon}></i>
+                <a style={_style_tab_c} onClick={() => link_handler('c')}>
+                    <i style={_style_tab_c_icon}></i>
                     邀友
                 </a>
-                <a style={_style_tab_d} href={_href_d}>
+                <a style={_style_tab_d} onClick={() => link_handler('d')}>
                     <i style={_style_tab_d_icon}></i>
                     我的
                 </a>
