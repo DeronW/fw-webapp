@@ -78,7 +78,7 @@ class ReserveRecords extends React.Component {
                     <div styleName="infoItem">
                         <div styleName="infoItemLeft">预约冻结金额</div>
                         <div styleName="itemHeaderRight colorRed">
-                            {item.frozenAmt}元
+                            {item.bookInvestAmt}元
                         </div>
                     </div>
                     <div styleName="infoItem">

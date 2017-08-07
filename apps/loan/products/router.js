@@ -30,12 +30,15 @@ export default (stores) => {
                 <Route exact path='/loan-youyi-result' component={LoopLoanResult} />
                 <Route exact path='/loan-youyi-authorization' component={LoopLoanAuthorization} />
                 <Route exact path='/loan-youyi-card' component={LoopLoanCard} />
+
+                {/* 房屋抵押贷款  */}
                 <Route exact path='/mortgage-download' component={MortgageDownload} />
                 <Route exact path='/mortgage-outside-entry' component={MortgageOutsideEntry} />
                 <Route exact path='/mortgage-outside-apply' component={MortgageOutsideApply} />
                 <Route exact path='/mortgage-apply' component={MortgageApply} />
                 <Route exact path='/mortgage-success' component={MortgageSuccess} />
 
+                {/* 所有产品协议  */}
                 <Route exact path='/protocols/register' component={Protocols.Register} />
                 <Route exact path='/protocols/borrowing' component={Protocols.Borrowing} />
                 <Route exact path='/protocols/cost' component={Protocols.Cost} />
