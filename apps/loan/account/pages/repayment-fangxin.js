@@ -35,6 +35,7 @@ class RepaymentFangXin extends React.Component {
 
         if (rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200) {
             rf.setLoanAmount(rf.loanLeftAmount);
+            return !err
         }
         if (!inputAmount && rf.loanLeftAmount >= 200) {
             err = "请输入还款金额"
