@@ -15,14 +15,10 @@ import styles from '../css/repayment-fangxin-records.css'
     errorWhenNotFound: false
 })
 class RepaymentFangxinRecords extends React.Component {
-    constructor() {
-        super()
-        this.repayment_id = Utils.hashQuery.repaymentUuid
 
-        this.state = {
-            list: [],
-            curPage: 1
-        }
+    state = {
+        list: [],
+        curPage: 1
     }
 
     componentDidMount() {
@@ -41,10 +37,11 @@ class RepaymentFangxinRecords extends React.Component {
         if (this.state.curPage === 0) return done && done()
 
         Post(`/api/repayment/v1/repaymentrecordlist.json`, {
-            repaymentid: this.repaymentid,
+            repaymentid: Utils.hashQuery.repaymentUuid,
             page: this.state.curPage,
             pageSize: 20
         }).then((data) => {
+
             let list_temp = [...this.state.list],
                 curPage_temp = this.state.curPage;
             list_temp.push(...data.resultList)

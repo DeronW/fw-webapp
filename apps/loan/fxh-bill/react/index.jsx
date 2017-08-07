@@ -26,7 +26,7 @@ class Detail extends React.Component {
                 <div className="header">
                     <div className="back-arrow" onClick={this.clickHandler}></div>
                     <div className="page-name">账单详情</div>
-                    {data.haveRepaymentRecord && <a className="bill-history-entry" href={`/static/loan/repayment-record/index.html?repaymentUuid=${data.repaymentUuid}`}>还款记录</a>}
+                    {data.haveRepaymentRecord && <a className="bill-history-entry" href={`/static/loan/account/index.html#/repayment-fangxin-records?repaymentUuid=${data.repaymentUuid}`}>还款记录</a>}
                 </div>
                 <div className="logo-box">
                     <img className="logo-img" src="images/logo.png"/>
