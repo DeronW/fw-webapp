@@ -39,16 +39,17 @@ class RegisterSuccess extends React.Component {
     render() {
 
         const TYPE_TEXT = {
-            'A': '元返现券礼包已经转入您的账户中',
-            'B': '返息券已经转入您的账户中',
-            'C': '公分已经转入您的账户中',
-            '1': '工豆已经转入您的账户中'
+            'A': '元返现券礼包 + 新手专享特权',
+            'B': '返息券 + 新手专享特权',
+            'C': '工分 + 新手专享特权',
+            '1': '工豆 + 新手专享特权'
         }
 
         return <div styleName="bg">
             <Header title={"注册成功"} show_back={false} show_close={false} />
             <img styleName="banner" src={require("../../images/user/register-success-b/b.png")} />
             <div styleName="success-title">注册成功</div>
+            <div styleName="desc">恭喜您获得</div>
             {this.state.result.map((i, index) => {
                 return <div styleName="desc" key={index}>
                     <span>{i.resvalue}</span>
