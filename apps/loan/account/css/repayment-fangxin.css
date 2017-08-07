@@ -42,7 +42,7 @@
 }
 
 .amountMoney {
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #eee;
 }
 
 .amountMoney .amountNum {
@@ -71,6 +71,10 @@
     display: table;
     border-bottom: 1px solid #ebeaea;
     line-height: 96px;
+    position: relative;
+}
+.amountNoBorder{
+    border-bottom: transparent;
 }
 
 .itemName {
@@ -106,9 +110,9 @@
 
 .itemInput {
     float: left;
-    height: 32px;
+    top: 34px;
+    position: absolute;
     font-size: 30px;
-    margin-top: 34px;
     width: 450px;
 }
 
