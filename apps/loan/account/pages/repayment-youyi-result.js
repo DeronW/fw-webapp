@@ -2,6 +2,8 @@ import React from 'react'
 import { inject, observer } from 'mobx-react'
 import CSSModules from 'react-css-modules'
 
+import { Utils } from 'fw-javascripts'
+
 import { Header } from '../../lib/components'
 
 import styles from '../css/repayment-youyi-result.css'
@@ -15,7 +17,10 @@ class RepaymentYouyiResult extends React.Component {
     componentDidMount() {
         document.title = '还款结果'
 
-        this.props.repayment_youyi.fetchRepaymentResult()
+        let { repayment_youyi } = this.props,
+            repaymentUuid = Utils.hashQuery.id;
+        repayment_youyi.setRepaymentId(repaymentUuid);
+        repayment_youyi.fetchRepaymentResult();
     }
 
     render() {
