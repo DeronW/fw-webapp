@@ -1,17 +1,3 @@
-a {
-    text-decoration: none;
-}
-
-img {
-    vertical-align: middle;
-}
-
-a,
-div.img {
-    margin: 0;
-    padding: 0;
-}
-
 .delayPanel {
     position: absolute;
     top: 50%;
