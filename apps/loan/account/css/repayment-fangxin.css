@@ -75,10 +75,13 @@
 .amountNoBorder{
     border-bottom: transparent;
 }
-.amountPadding{
-    height: 30px;
+.amountInput{
+    width: 100%;
+    display: table;
+    border-bottom: 1px solid #ebeaea;
     padding: 30px 0;
     line-height: 30px;
+    background: #fff;
 }
 
 .itemName {
@@ -124,7 +127,7 @@
     margin-right: 30px;
     font-size: 32px;
     color: #6aa4f0;
-    line-height:normal;
+    margin-top: -6px;
 }
 
 .amountBottom {
