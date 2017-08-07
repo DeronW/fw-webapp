@@ -49,9 +49,10 @@ class RepaymentFangXinResult extends React.Component {
             <div styleName="info">欢迎再次使用！
                 <div styleName="infoMoney">还款金额： <span>{repaymentAmountNow}</span>元</div>
             </div>
+            <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
             <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`}>
                     提升额度</a>
-                <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
+                
         </div>
 
         let stillLeft = <div>
@@ -62,9 +63,10 @@ class RepaymentFangXinResult extends React.Component {
                     还有 <span>{leftAmount}</span> 元未还，请记得准时还款！
                     <div styleName="infoMoney">还款金额： <span>{repaymentAmountNow}</span>元</div>
             </div>
+            <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
             <a styleName="credit-btn" href={`/api/credit/v1/creditlist.shtml?sourceType=${sourceType}&token=${USER.token}&uid=${USER.uid}`}>
-                    提升额度</a>
-                <a styleName="apply-btn" href={fangxin_home_link}>申请用钱</a>
+                提升额度
+            </a>
         </div>
 
         let fail = <div>
