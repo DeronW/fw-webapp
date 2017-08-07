@@ -1,32 +1,30 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
+
 import { Header } from '../../lib/components'
 import styles from '../css/loan-youyi-index.css'
-import {NativeBridge, Browser} from '../../lib/helpers'
+import { NativeBridge, Browser } from '../../lib/helpers'
 
 function gotoHandler(link, need_login, next_title, special_webview) {
     if (link.indexOf('://') < 0) link = location.protocol + '//' + location.hostname + link;
-    if (Browser.inFXHApp){
+    if (Browser.inFXHApp) {
         NativeBridge.goto(link, need_login, next_title, special_webview);
-    }else{
+    } else {
         location.href = link;
     }
 }
 
 @inject('loopLoan')
 @observer
-@CSSModules(styles,{ "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 export default class LoopLoan extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            show:false,
-            questionShow:false
-        }
+    state = {
+        show: false,
+        questionShow: false
     }
 
-    componentDidMount(){
+    componentDidMount() {
         document.title = '优易借';
         NativeBridge.hide_header();
         this.props.loopLoan.get_baseinfo();
@@ -34,49 +32,49 @@ export default class LoopLoan extends React.Component {
 
     clickHandler = () => {
         let { loopLoan, history } = this.props;
-        if(loopLoan.userStatus == 0){
+        if (loopLoan.userStatus == 0) {
             history.push('/loan-youyi-card')
-        }else if(loopLoan.userStatus == 1){
-            gotoHandler(loopLoan.url,false,"芝麻信用授权",false)
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt ){
+        } else if (loopLoan.userStatus == 1) {
+            gotoHandler(loopLoan.url, false, "芝麻信用授权", false)
+        } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt) {
             history.push('/loan-youyi-form')
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt){
-            if(loopLoan.errMsg){
-                this.setState({show:true})
-            }else{
-                Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/'
+        } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt) {
+            if (loopLoan.errMsg) {
+                this.setState({ show: true })
+            } else {
+                Browser.inFXHApp ? NativeBridge.close() : history.push('/')
             }
-        }else if(loopLoan.errMsg){
-            Browser.inFXHApp ? NativeBridge.close() : location.href='/static/loan/products/index.html#/'
+        } else if (loopLoan.errMsg) {
+            Browser.inFXHApp ? NativeBridge.close() : history.push('/')
         }
     }
 
     questionShowHandler = () => {
-        this.setState({questionShow:true});
+        this.setState({ questionShow: true });
     }
 
     questionCloseHandler = () => {
-        this.setState({questionShow:false});
+        this.setState({ questionShow: false });
     }
 
     closeHandler = () => {
-        this.setState({show:false});
+        this.setState({ show: false });
     }
 
-    render(){
+    render() {
         let { history, loopLoan } = this.props;
         let btn_title;
-        if(loopLoan.userStatus == 0){
+        if (loopLoan.userStatus == 0) {
             btn_title = '去借款'
-        }else if(loopLoan.userStatus == 1){
+        } else if (loopLoan.userStatus == 1) {
             btn_title = '去认证'
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt){
+        } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt) {
             btn_title = '去借款'
-        }else if(loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt){
+        } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt) {
             btn_title = '尝试其他借款'
-        }else if(loopLoan.errMsg){
+        } else if (loopLoan.errMsg) {
             btn_title = '尝试其他借款'
-        }else{
+        } else {
             btn_title = '尝试其他借款'
         }
 
@@ -86,7 +84,7 @@ export default class LoopLoan extends React.Component {
 
         return (
             <div styleName="cnt-container">
-                <Header title="优易借" goBack={goBack}/>
+                <Header title="优易借" goBack={goBack} />
                 <div styleName="loan-box">
                     <div styleName="available-loan-num">{loopLoan.canBorrowAmt}</div>
                     <div styleName="loan-title">{loopLoan.userStatus < 2 ? "最高" : ""}可借额度(元)</div>
@@ -123,7 +121,7 @@ export default class LoopLoan extends React.Component {
                     </div>
                 </div>}
             </div>
-       )
+        )
 
     }
 }
