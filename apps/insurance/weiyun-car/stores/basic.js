@@ -25,7 +25,7 @@ export default class Basic {
             cityCode: this.cityCode,
             idCard: this.idCard,
             intentionCompanyCode: this.intentionCompanyCode,
-            licenseNo: this.licenseNo
+            licenseNo: this.formatLicenseNo
         })
     }
 
