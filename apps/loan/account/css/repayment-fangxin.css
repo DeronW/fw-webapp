@@ -78,7 +78,7 @@
 .amountInput{
     width: 100%;
     display: table;
-    border-bottom: 1px solid #ebeaea;
+    border-bottom: transparent;
     background: #fff;
     line-height: 96px;
 }
