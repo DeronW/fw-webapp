@@ -205,7 +205,7 @@ class RepaymentFangXin extends React.Component {
                 </div>
             </div>
             <div styleName="amountBottom">
-                <div styleName="submitBtn" onClick={() => this.verifySMSHandler()}>立即还款</div>
+                <div styleName="submitBtn" onClick={this.verifySMSHandler}>立即还款</div>
             </div>
             {show && smsMask}
         </div>
