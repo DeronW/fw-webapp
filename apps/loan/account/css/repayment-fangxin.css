@@ -71,10 +71,14 @@
     display: table;
     border-bottom: 1px solid #ebeaea;
     line-height: 96px;
-    position: relative;
 }
 .amountNoBorder{
     border-bottom: transparent;
+}
+.amountPadding{
+    height: 30px;
+    padding: 32px 0;
+    line-height: 0;
 }
 
 .itemName {
@@ -110,10 +114,9 @@
 
 .itemInput {
     float: left;
-    top: 34px;
-    position: absolute;
     font-size: 30px;
     width: 450px;
+    line-height: normal;
 }
 
 .itemAll {
@@ -121,6 +124,7 @@
     margin-right: 30px;
     font-size: 32px;
     color: #6aa4f0;
+    line-height: 30px;
 }
 
 .amountBottom {

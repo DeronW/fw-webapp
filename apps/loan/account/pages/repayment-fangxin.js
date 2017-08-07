@@ -196,7 +196,7 @@ class RepaymentFangXin extends React.Component {
                             <div styleName="itemName">还款金额</div>
                             <div styleName="itemAlready">{repayment_fangxin.loanLeftAmount}</div>
                         </div> :
-                        <div styleName="amountItem amountNoBorder">
+                        <div styleName="amountItem amountPadding">
                             <input styleName="itemInput" type="number" placeholder="输入还款金额" value={inputAmount} onChange={this.inputAmountHandler()} />
                             <div styleName="itemAll" onClick={this.allAmountHandler(repayment_fangxin.loanLeftAmount)}>全部还清</div>
                         </div>
