@@ -25,24 +25,28 @@ class BillRecords extends React.Component {
         let { current_type, tab } = this.state, current_tab = tab[current_type];
         if (current_tab.page_no === 0) return done && done();
 
-        Post(`/api/order/v1/orderList.json`, {
+        return Post(`/api/order/v1/orderList.json`, {
             pageSize: 10,
             pageIndex: current_tab.page_no,
             loanStatus: current_type
         }).then(data => {
             tab[current_type].records.push(...data.resultList)
+
             current_tab.page_no < data.totalPage ?
                 tab[current_type].page_no++ :
                 tab[current_type].page_no = 0;
+
             this.setState({ tab: tab });
 
             done && done()
         })
     }
     componentDidMount() {
-        document.title = '订单记录';
-        this.loadMoreHandler(null);
-        Event.touchBottom(this.loadMoreHandler);
+        document.title = '订单记录'
+
+        this.loadMoreHandler().then(() => {
+            Event.touchBottom(this.loadMoreHandler)
+        })
     }
 
     componentWillUnmount() {
