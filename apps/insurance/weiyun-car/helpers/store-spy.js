@@ -33,7 +33,6 @@ export default class StoreSpy {
 
         // https://mobx.js.org/refguide/spy.html
         spy((event) => {
-            // console.log(event) // for debug
             if (this[`handle_${event.type}`])
                 this[`handle_${event.type}`](event)
         })
@@ -44,7 +43,6 @@ export default class StoreSpy {
         this.log(`COMPUTED ${obj}`)
     }
     handle_update = event => {
-        console.log(event)
         let obj = event.object.constructor.name
         this.log(`UPDATE ${obj}.${event.name}: "${event.oldValue}" => "${event.newValue}"`)
     }

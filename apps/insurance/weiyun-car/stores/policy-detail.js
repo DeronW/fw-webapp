@@ -3,7 +3,7 @@ import { extendObservable, computed } from 'mobx'
 export default class PolicyDetail {
 
     constructor(Get) {
-        this.Get = Get;
+        this.Get = Get
 
         extendObservable(this, {
             cheSun: null,
@@ -38,7 +38,6 @@ export default class PolicyDetail {
 
     setForm = (data) => {
         for (let k in data) {
-            console.log(k, data[k])
             if (this[k] !== undefined) {
                 this[k] = data[k]
             }
