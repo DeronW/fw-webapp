@@ -236,14 +236,15 @@
 }
 .item-list{
     width:450px;
-    font-size:24px;
+    font-size:30px;
     color:#999;
     line-height:45px;
     margin:0 auto;
 }
 .item-left{
     display:inline-block;
-    width:250px;
+    width:200px;
+    padding-left:50px;
     text-align:left;
 }
 .item-right{
