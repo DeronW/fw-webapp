@@ -37,9 +37,9 @@ export default class PolicyDetail {
     }
 
     setForm = (data) => {
-        for (var k in data) {
+        for (let k in data) {
             if (this[k] !== undefined) {
-                this[k] = data[k];
+                this[k] = data[k]
             }
         }
     }
