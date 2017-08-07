@@ -173,7 +173,7 @@ class Repayment extends React.Component {
                         { repayment_youyi.paidAmount == 0 ?
                             <div styleName="item-value">{repayment_youyi.paidAmount}</div>
                             :
-                            <a styleName="item-value" href="/static/loan/account/index.html#/repayment-youyi-records">{repayment_youyi.paidAmount}</a>
+                            <a styleName="item-value" href={`/static/loan/account/index.html#/repayment-youyi-records?id=${repayment_youyi.loopLoanUuid}`}>{repayment_youyi.paidAmount}</a>
                         }
                     </div>
                 </div>

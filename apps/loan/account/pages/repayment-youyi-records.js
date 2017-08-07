@@ -29,6 +29,7 @@ class RepaymentYouyiRecords extends React.Component {
 
     componentWillUnmount() {
         Event.cancelTouchBottom();
+        this.props.repayment_youyi.clearRecords();
     }
 
     loadMoreRecords = (done) => {

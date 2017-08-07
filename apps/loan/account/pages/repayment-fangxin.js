@@ -31,20 +31,25 @@ class RepaymentFangXin extends React.Component {
         let { repayment_fangxin } = this.props;
         let { inputAmount } = this.props.repayment_fangxin.data;
 
-        let rf = repayment_fangxin;
-        if (rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200) {
-            return rf.setLoanAmount(rf.loanLeftAmount)
-        }
+        let rf = repayment_fangxin, err;
 
+        if (rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200) {
+            rf.setLoanAmount(rf.loanLeftAmount);
+        }
         if (!inputAmount && rf.loanLeftAmount >= 200) {
-            return Components.showToast("请输入还款金额");
+            err = "请输入还款金额"
         }
-        if ((rf.loanLeftAmount - inputAmount) > 0 && (rf.loanLeftAmount - inputAmount) < 100) return Components.showToast("剩余金额不能小于100");
-        if (inputAmount < 100) return Components.showToast("还款金额不能小于100");
+        if ((rf.loanLeftAmount - inputAmount) > 0 && (rf.loanLeftAmount - inputAmount) < 100) {
+            err = "剩余金额不能小于100"
+        }
+        if (inputAmount < 100) {
+            err = "还款金额不能小于100"
+        }
         if (rf.cardType == 1) {
-            return Components.showToast("信用卡暂不支持还款");
+            err = "信用卡暂不支持还款"
         }
-        return true
+        err && Components.showToast(err)
+        return !err
     }
 
     verifySMSHandler = () => {
@@ -70,7 +75,7 @@ class RepaymentFangXin extends React.Component {
     }
 
     closePopHandler = () => {
-        this.setState({ show: false,remain:0 })
+        this.setState({ show: false, remain: 0 })
         clearInterval(this._timer)
     }
     chooseBank = () => {
@@ -84,7 +89,9 @@ class RepaymentFangXin extends React.Component {
 
     gotoRecord = () => {
         let { repayment_fangxin } = this.props;
-        location.href = `https://m.easyloan888.com/static/loan/repayment-record/index.html?repaymentUuid=${repayment_fangxin.repaymentUuid}`
+        // location.href = `/static/loan/repayment-record/index.html?repaymentUuid=${repayment_fangxin.repaymentUuid}`
+
+        this.props.history.push(`/repayment-fangxin-records?repaymentUuid=${repayment_fangxin.repaymentUuid}`)
     }
 
     countingDown = () => {
@@ -113,7 +120,7 @@ class RepaymentFangXin extends React.Component {
         if (code == '') {
             Components.showToast("请输入验证码");
         } else {
-            repayment_fangxin.confirmHandler(code).then(repaymentGid =>{
+            repayment_fangxin.confirmHandler(code).then(repaymentGid => {
                 history.push(`/repayment-fangxin-result?id=${repaymentGid}`)
             });
         }
