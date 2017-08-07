@@ -90,8 +90,12 @@
     color: #333;
     font-size: 32px;
 }
-
+.itemAlready span{
+    display: inline-block;
+    vertical-align: middle;
+}
 .itemAlready img {
+    vertical-align: middle;
     display: inline-block;
     margin-left: 20px;
 }
