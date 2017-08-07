@@ -6,11 +6,6 @@ export default class Basic {
     constructor(Get) {
         this.Get = Get
 
-
-        extendObservable(this.data, {
-
-        })
-
         extendObservable(this, {
             carNoArea: null,//	车牌号首位汉字
             carOwnersName: '', //	String	车主姓名
