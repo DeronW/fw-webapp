@@ -31,28 +31,25 @@ class RepaymentFangXin extends React.Component {
         let { repayment_fangxin } = this.props;
         let { inputAmount } = this.props.repayment_fangxin.data;
 
-        let rf = repayment_fangxin;
-        if (rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200){
+        let rf = repayment_fangxin, err;
+
+        if (rf.loanLeftAmount > 0 && rf.loanLeftAmount < 200) {
             rf.setLoanAmount(rf.loanLeftAmount);
-            return false
-        }  
-        if (!inputAmount && rf.loanLeftAmount >= 200){
-            Components.showToast("请输入还款金额");
-            return false
         }
-        if ((rf.loanLeftAmount - inputAmount) > 0 && (rf.loanLeftAmount - inputAmount) < 100){
-            Components.showToast("剩余金额不能小于100");
-            return false
-        } 
-        if (inputAmount < 100){
-            Components.showToast("还款金额不能小于100");
-            return false
-        } 
-        if (rf.cardType == 1){
-            Components.showToast("信用卡暂不支持还款");
-            return false
-        } 
-        return true
+        if (!inputAmount && rf.loanLeftAmount >= 200) {
+            err = "请输入还款金额"
+        }
+        if ((rf.loanLeftAmount - inputAmount) > 0 && (rf.loanLeftAmount - inputAmount) < 100) {
+            err = "剩余金额不能小于100"
+        }
+        if (inputAmount < 100) {
+            err = "还款金额不能小于100"
+        }
+        if (rf.cardType == 1) {
+            err = "信用卡暂不支持还款"
+        }
+        err && Components.showToast(err)
+        return !err
     }
 
     verifySMSHandler = () => {
