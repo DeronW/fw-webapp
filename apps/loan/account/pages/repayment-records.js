@@ -26,10 +26,9 @@ export default class RepaymentRecords extends React.Component {
     componentDidMount() {
         document.title = '还款';
         NativeBridge.setTitle("还款");
-        this.loadMoreHandler(null).then(() => {
+        this.loadMoreHandler(null);
 
         Event.touchBottom(this.loadMoreHandler);
-        });
         // let {repayment_youyi} = this.props; Post(`/api/order/v1/orderList.json`, {
         //  page: this.state.curPage,     pageSize: 10,     loanStatus: 2 }).then(data
         // => {     this.setState({resultList: data.resultList}); })
