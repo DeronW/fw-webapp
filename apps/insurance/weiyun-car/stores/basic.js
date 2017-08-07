@@ -6,7 +6,9 @@ export default class Basic {
     constructor(Get) {
         this.Get = Get
 
-        extendObservable(this, {
+        this.data = {}
+
+        extendObservable(this.data, {
             carNoArea: null,//	车牌号首位汉字
             carOwnersName: '', //	String	车主姓名
             cityCode: null, //	是	Int	城市Id(北京：1，重庆：2 ，天津3，成都4，昆明：5)
@@ -20,17 +22,17 @@ export default class Basic {
         if (!this.valid) return;
 
         return this.Get('/carInsurance/applyCarInsurance.shtml', {
-            carNoArea: this.carNoArea,
-            carOwnersName: this.carOwnersName,
-            cityCode: this.cityCode,
-            idCard: this.idCard,
-            intentionCompanyCode: this.intentionCompanyCode,
-            licenseNo: this.formatLicenseNo
+            carNoArea: this.data.carNoArea,
+            carOwnersName: this.data.carOwnersName,
+            cityCode: this.data.cityCode,
+            idCard: this.data.idCard,
+            intentionCompanyCode: this.data.intentionCompanyCode,
+            licenseNo: this.data.formatLicenseNo
         })
     }
 
     setFormData = (field, value) => {
-        this[field] = value
+        this.data[field] = value
     }
 
     @computed get formatLicenseNo() {
@@ -38,6 +40,8 @@ export default class Basic {
     }
 
     @computed get valid() {
-        return this.carNoArea && this.carOwnersName && this.cityCode && this.idCard && this.intentionCompanyCode && this.licenseNo
+        return this.data.carNoArea && this.data.carOwnersName &&
+            this.data.cityCode && this.data.idCard &&
+            this.data.intentionCompanyCode && this.data.licenseNo
     }
 }
