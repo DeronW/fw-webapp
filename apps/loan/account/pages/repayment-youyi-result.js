@@ -13,8 +13,9 @@ import styles from '../css/repayment-youyi-result.css'
 class RepaymentYouyiResult extends React.Component {
 
     componentDidMount() {
-        document.title = '还款结果';
-        this.props.repayment_youyi.fetchRepaymentResult();
+        document.title = '还款结果'
+
+        this.props.repayment_youyi.fetchRepaymentResult()
     }
 
     render() {
@@ -30,8 +31,7 @@ class RepaymentYouyiResult extends React.Component {
             <div styleName="result-container success">
                 <div styleName="title">还款成功</div>
                 <div styleName="info">本次成功还款{repaymentAmount}元
-                    <br />
-                    恭喜您已还清全部借款，请保持良好的信用
+                    <br />恭喜您已还清全部借款，请保持良好的信用
                 </div>
             </div>
             <a styleName="btn" href="/static/loan/products/index.html#/loan-youyi-index">再借一笔</a>
