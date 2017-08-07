@@ -11,6 +11,7 @@ let tabColor = (keyword) => {
 
 let isActiveTab = (tab) => {
     let pt = location.pathname, hash = location.hash, cnd = false;
+
     if (tab === 'a' &&
         (pt === '/' || pt == '/static/loan/products/' || pt == '/static/loan/products/index.html'))
         cnd = true;
@@ -30,7 +31,7 @@ let isActiveTab = (tab) => {
             pt == '/static/loan/account/index.html'))
         cnd = true;
 
-    return pt.match(`/static/loan/${tab}`) || cnd
+    return cnd
 }
 
 function get_styles(type) {
