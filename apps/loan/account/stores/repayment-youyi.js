@@ -39,6 +39,8 @@ export default class RepaymentYouyi {
 
     resetAmount = () => this.repaymentAmount = ''
 
+    clearRecords = () => this.records = []
+
     fetchRepaymentInfo = () => {
         return this.Post('/api/looploan/repayment/v1/loanDetail.json', {
             loanUuid: this.data.loanId
