@@ -16,7 +16,7 @@ import styles from '../css/repayment-youyi-records.css'
 @CSSModules(styles)
 class RepaymentYouyiRecords extends React.Component {
 
-    pageNo = 1 ;
+    state = { pageNo: 1 }
 
     componentDidMount() {
         document.title = '还款记录';
@@ -33,10 +33,11 @@ class RepaymentYouyiRecords extends React.Component {
     }
 
     loadMoreRecords = (done) => {
-        if (this.pageNo == 0) return done && done;
+        let { pageNo } = this.state;
+        if (pageNo == 0) return done && done;
 
-        this.props.repayment_youyi.fetchRecords(this.pageNo).then(moreToLoad => {
-            this.pageNo = moreToLoad ? (this.pageNo + 1) : 0;
+        this.props.repayment_youyi.fetchRecords(pageNo).then(moreToLoad => {
+            this.setState({ pageNo: moreToLoad ? (pageNo + 1) : 0 });
             done && done();
         })
     }
