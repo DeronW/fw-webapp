@@ -40,9 +40,8 @@ export default class Basic {
     }
 
     @computed get valid() {
-        return true
-        // return this.data.carNoArea && this.data.carOwnersName &&
-        //     this.data.cityCode && this.data.idCard &&
-        //     this.data.intentionCompanyCode && this.data.licenseNo
+        return this.data.carNoArea && this.data.carOwnersName &&
+            this.data.cityCode && this.data.idCard &&
+            this.data.intentionCompanyCode && this.data.licenseNo
     }
 }
