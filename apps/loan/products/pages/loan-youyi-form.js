@@ -128,7 +128,7 @@ export default class LoopLoanLoan extends React.Component {
     }
 
     confirmHandler = () => {
-        let {loopLoan} = this.props;
+        let {loopLoan, history} = this.props;
         if (!this.state.checked) {
             Components.showToast("请同意相关协议")
         } else if (this.state.value == '') {
