@@ -155,17 +155,16 @@ export default class LoopLoanLoan extends React.Component {
             Components.showToast("请输入借款金额")
         } else if (this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt && this.state.value % 100 == 0) {
             this.props.loopLoan.loan_confirm(this.state.value).then(() => {
-                this.setState({mask3Show: true});
-                this.tick();
-            }, e => {
-                window.clearInterval(this._timer);
-                if(loopLoan.applyErrCode == 20005 || loopLoan.applyErrCode == 20009 || loopLoan.applyErrCode == 20013){
+                if(loopLoan.applyErrCode == 10000){
+                    this.setState({mask3Show: true});
+                    this.tick();
+                }else if(loopLoan.applyErrCode == 20005 || loopLoan.applyErrCode == 20009 || loopLoan.applyErrCode == 20013){
+                    window.clearInterval(this._timer);
                     this.setState({show:true});
                 }else{
                     Components.showToast(loopLoan.applyErrMsg);
                 }
             });
-
         }
     }
 

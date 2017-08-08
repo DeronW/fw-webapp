@@ -130,6 +130,7 @@ export default class LoopLoan {
             loanAmt: value,
             productUuid: this.productUuid
         },'silence').then((data) => {
+            this.applyErrCode = data.code;
             this.loanUuid = data.loanUuid
         }, e => {
             this.applyErrCode = e.code;
