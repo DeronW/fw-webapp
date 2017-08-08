@@ -21,11 +21,11 @@ let showBulletin = text => {
 
 let showBlueAlert = function (title, options) {
     options = options || {};
-    let id = '_id_react_component_global_alert',
+    let id = '_id_react_component_global_blue_alert',
         node = createTemporaryDOMNode(id);
 
     return new Promise((resolve, _) => {
-        render(<Alert
+        render(<BlueAlert
             text={title}
             confirm_text={'知道了'}
             mountedNode={node}
