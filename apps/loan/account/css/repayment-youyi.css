@@ -83,7 +83,7 @@
     box-sizing: border-box;
     float: left;
     height: 99px;
-    line-height: 99px;
+    line-height: 103px;
     color: #666;
 }
 
@@ -102,10 +102,10 @@
 .repayment-input {
     composes: item-name;
     width: 342px;
-    padding: 30px 0;
+    padding: 36px 0;
     color: #333;
     font-size: 30px;
-    line-height: normal;
+    line-height: 30px;
 }
 
 .repayment-input::-webkit-input-placeholder {
