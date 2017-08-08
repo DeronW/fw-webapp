@@ -83,32 +83,5 @@ Alert.propTypes = {
     unMountAlert: PropTypes.func // 组件卸载时的回调函数
 }
 
-let createTemporaryDOMNode = function (id) {
-    let node = document.getElementById(id)
-    if (!node) {
-        node = document.createElement('div');
-        node.id = id;
-        document.body.appendChild(node);
-    }
-    return node
-}
 
-let showBlueAlert = function (title, options) {
-    options = options || {};
-    let id = '_id_react_component_global_alert',
-        node = createTemporaryDOMNode(id);
-
-    return new Promise((resolve, _) => {
-        render(<Alert
-            text={title}
-            confirm_text={'确认'}
-            mountedNode={node}
-            unMountAlert={() => {
-                node.parentNode.removeChild(node)
-                resolve()
-            }}
-        />, node)
-    })
-}
-
-export default showBlueAlert
+export default Alert
