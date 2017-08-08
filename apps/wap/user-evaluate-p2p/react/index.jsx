@@ -305,6 +305,7 @@ const QuestionPanel = React.createClass({
                     <div className="question-content">
                         <div className="qc-title">尊敬的客户：</div>
                         &nbsp;&nbsp;&nbsp;&nbsp;为了便于您了解自身的风险承受能力，选择合适的出借项目，请您填写以下评估问卷，工场微金承诺对您的所有个人资料保密。下列问题可协助评估您对金融工具及出借目标相关风险的态度。请您回答所有的问题，并在各题最合适的答案选项上打“√”。我们将根据您的加总分评估您的出借风险承受能力，建议您出借与自己的风险承受能力相匹配的出借项目。为了及时了解您的出借风险承受能力，我们建议您定期评估。
+
                     </div>
                     <div className="risk-tips">
                         风险提示：出借需承担各类风险，可能遭受资金损失。市场
