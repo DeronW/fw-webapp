@@ -11,41 +11,36 @@ let Post = PostMethodFactory(Storage, Browser, NativeBridge)
 let Theme = new ThemeFactory(Storage, Browser)
 
 
-function mobxStoreExtend(sup, base) {
-    let descriptor = Object.getOwnPropertyDescriptor(base.prototype, "constructor")
-    base.prototype = Object.create(sup.prototype)
+function mobxStoreExtend(store) {
 
-    let handler = {
-        construct: function (target, args) {
-            let obj = Object.create(base.prototype)
-            this.apply(target, obj, args)
-            obj._setStoreData = Storage.setStoreData
-            obj._getStoreData = Storage.getStoreData
+    function extend() {
+        const KEY = `${location.pathname}:${store.name}`
+
+        // read data from Storage, and merge into this.data
+        if (!this.data) this.data = {}
+        Object.assign(this.data, Storage.getStoreData(KEY))
+
+        // 增加保存方法
+        this._saveData = () => Storage.setStoreData(KEY, this.data)
+    }
+
+    return new Proxy(store, {
+        construct: function (target, args, newTarget) {
+            let obj = new target(...args)
+            extend.call(obj)
+            console.log(obj)
             return obj
-        },
-        apply: function (target, that, args) {
-            sup.apply(that, args)
-            base.apply(that, args)
         },
         get: function (target, name) {
             if (name in target) return target[name]
 
             const KEY = location.pathname
 
-            if (name == 'setStoreData') {
+            // 只需要有一个 存入数据方法, 不需要读取方法
+            if (name == 'setStoreData')
                 this._setStoreData(KEY, this.data)
-            }
-
-            if (name == 'getStoreData') {
-                this.data = this._getStoreData(KEY)
-            }
         }
-    }
-
-    let proxy = new Proxy(base, handler)
-    descriptor.value = proxy
-    Object.defineProperty(base.prototype, "constructor", descriptor)
-    return proxy
+    })
 }
 
 
@@ -55,5 +50,6 @@ export {
     NativeBridge,
     Browser,
     Theme,
-    StoreSpy
+    StoreSpy,
+    mobxStoreExtend
 }

@@ -7,25 +7,24 @@ export default class Account {
     constructor(Post) {
         this.Post = Post
 
-        extendObservable(this, {
-            //userCode: 10000  -已注册已设置密码, 201003-已注册未设置密码, 20014-未注册
-            userCode: '',
-            phone: '', // 用户登录手机号,
-            captcha_img_url: '',
-            captcha_token: '',
-            codeToken:''
+        this.data = {}
+
+        extendObservable(this.data, {
+            phone: '', // 用户登录手机号
         })
 
-        this.init_data()
-    }
+        extendObservable(this, {
+            // comment: userCode: 10000  -已注册已设置密码, 201003-已注册未设置密码, 20014-未注册
+            userCode: '',
+            captcha_img_url: '',
+            captcha_token: '',
+            codeToken: ''
+        })
 
-    init_data = () => {
-        let ud = Storage.getUserDict()
-        this.phone = ud.phone
     }
 
     @computed get mask_phone() {
-        return this.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+        return this.data.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
     }
 
     get_captcha = () => {
@@ -45,19 +44,22 @@ export default class Account {
         if (this.userCode == 10000) uot = 2
 
         return this.Post('/api/userBase/v1/sendVerifyCode.json', {
-            mobile: this.phone,
+            mobile: this.data.phone,
             userOperationType: uot,
             verifyToken: this.captcha_token,
             verifyCode: captcha
-        }, 'silence').then((data)=>{
+        }, 'silence').then((data) => {
             this.codeToken = data.codeToken
         })
     }
 
     check_user_exist = phone => {
-        this.phone = phone;
+
+        this.data.phone = phone
+        this._saveData()
+
         return this.Post('/api/userBase/v1/userExistIndex.json', {
-            mobile: this.phone
+            mobile: this.data.phone
         }, 'silence').then(data => {
             this.userCode = data.userCode
             return new Promise(resolve => resolve())
@@ -72,7 +74,7 @@ export default class Account {
         if (err) return Components.showToast(err)
 
         this.Post('/api/userBase/v1/login.json', {
-            mobile: this.phone,
+            mobile: this.data.phone,
             password: password
         }).then(data => {
             let dict = data.userLogin
@@ -81,7 +83,7 @@ export default class Account {
                 token: dict.userToken,
                 status: dict.userStatus,
                 uid: dict.uid,
-                phone: this.phone,
+                phone: this.data.phone,
                 invite_code: dict.invitationCode
             })
             location.href = '/static/loan/products/index.html#/'
@@ -91,7 +93,7 @@ export default class Account {
     reset_password = (password, sms_code) => {
         this.Post('/api/userBase/v1/resetPass.json', {
             codeToken: this.codeToken,
-            mobile: this.phone,
+            mobile: this.data.phone,
             password: password,
             verifyCode: sms_code
         }, 'silence').then(data => {
@@ -100,14 +102,14 @@ export default class Account {
                 token: dict.userToken,
                 status: dict.userStatus,
                 uid: dict.uid,
-                phone: this.phone,
+                phone: this.data.phone,
                 invite_code: dict.invitationCode
             })
             location.href = '/static/loan/products/index.html#/'
         }, e => {
-            if(this.codeToken == ''){
+            if (this.codeToken == '') {
                 Components.showToast("验证码错误，请重新输入")
-            }else{
+            } else {
                 Components.showToast(e.message)
             }
         })
@@ -115,7 +117,7 @@ export default class Account {
 
     register = (pwd, sms_code, invite_code) => {
         this.Post('/api/userBase/v1/register.json', {
-            mobile: this.phone,
+            mobile: this.data.phone,
             codeToken: this.codeToken,
             password: pwd,
             verifyCode: sms_code,
@@ -129,9 +131,9 @@ export default class Account {
             })
             location.href = `/static/loan/products/index.html#/`;
         }, e => {
-            if(this.codeToken == ''){
+            if (this.codeToken == '') {
                 Components.showToast("验证码错误，请重新输入")
-            }else{
+            } else {
                 Components.showToast(e.message)
             }
         })

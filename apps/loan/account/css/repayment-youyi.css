@@ -19,6 +19,9 @@
     width: 150px;
     height: 150px;
     margin: 0 auto 6px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 50%;
 }
 
 .amount-overview {
@@ -77,6 +80,7 @@
 }
 
 .item-name {
+    box-sizing: border-box;
     float: left;
     height: 99px;
     line-height: 99px;
@@ -98,7 +102,7 @@
 .repayment-input {
     composes: item-name;
     width: 342px;
-    padding: 0;
+    padding: 24px 0;
     color: #333;
     font-size: 30px;
 }
