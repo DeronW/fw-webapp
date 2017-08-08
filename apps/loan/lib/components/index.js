@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom'
+import ReactDOM, {render} from 'react-dom'
 import React from 'react'
 import {createTemporaryDOMNode} from 'fw-components'
 
