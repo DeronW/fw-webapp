@@ -26,7 +26,7 @@ function getStyles() {
             background: "white"
         },
         text: {
-            margin: "30px auto",
+            margin: "0 auto 30px",
             lineHeight: "50px",
             color: "#555555",
             width: "100%",
