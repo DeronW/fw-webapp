@@ -1,14 +1,12 @@
 import { render } from 'react-dom'
 
 import AppRouter from './router.js'
-
 import './css/index.css'
-
 import Stores from './stores'
-import { Post, StoreSpy } from '../lib/helpers'
+import { Post, StoreSpy, mobxStoreExtend } from '../lib/helpers'
 
 let stores = {
-    account: new Stores.Account(Post),
+    account: new (mobxStoreExtend(Stores.Account))(Post),
     bank_card: new Stores.BankCard(Post),
     redbag: new Stores.Redbag(Post),
     repayment_youyi: new Stores.RepaymentYouyi(Post),

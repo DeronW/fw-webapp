@@ -11,41 +11,27 @@ let Post = PostMethodFactory(Storage, Browser, NativeBridge)
 let Theme = new ThemeFactory(Storage, Browser)
 
 
-function mobxStoreExtend(sup, base) {
-    let descriptor = Object.getOwnPropertyDescriptor(base.prototype, "constructor")
-    base.prototype = Object.create(sup.prototype)
+function mobxStoreExtend(store) {
 
-    let handler = {
-        construct: function (target, args) {
-            let obj = Object.create(base.prototype)
-            this.apply(target, obj, args)
-            obj._setStoreData = Storage.setStoreData
-            obj._getStoreData = Storage.getStoreData
-            return obj
-        },
-        apply: function (target, that, args) {
-            sup.apply(that, args)
-            base.apply(that, args)
-        },
-        get: function (target, name) {
-            if (name in target) return target[name]
+    function extend() {
+        const KEY = `${location.pathname}:${store.name}`
 
-            const KEY = location.pathname
+        // read data from Storage, and merge into this.data
+        if (!this.data) this.data = {}
+        Object.assign(this.data, Storage.getStoreData(KEY))
 
-            if (name == 'setStoreData') {
-                this._setStoreData(KEY, this.data)
-            }
-
-            if (name == 'getStoreData') {
-                this.data = this._getStoreData(KEY)
-            }
-        }
+        // 增加保存方法
+        this._cacheData = () => Storage.setStoreData(KEY, this.data)
     }
 
-    let proxy = new Proxy(base, handler)
-    descriptor.value = proxy
-    Object.defineProperty(base.prototype, "constructor", descriptor)
-    return proxy
+    return new Proxy(store, {
+        construct: function (target, args, newTarget) {
+            let obj = new target(...args)
+            extend.call(obj)
+            console.log(obj)
+            return obj
+        }
+    })
 }
 
 
@@ -55,5 +41,6 @@ export {
     NativeBridge,
     Browser,
     Theme,
-    StoreSpy
+    StoreSpy,
+    mobxStoreExtend
 }

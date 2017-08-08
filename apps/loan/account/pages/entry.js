@@ -6,11 +6,14 @@ import { Components } from 'fw-javascripts'
 import styles from '../css/entry.css'
 
 @inject('account')
-@CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
+@CSSModules(styles, {
+    allowMultiple: true,
+    errorWhenNotFound: false
+})
 class Entry extends React.Component {
 
     state = {
-        phone: this.props.account.phone
+        phone: this.props.account.data.phone
     }
 
     componentDidMount() {
@@ -39,8 +42,10 @@ class Entry extends React.Component {
         if (err) return Components.showToast(err);
 
         account.check_user_exist(phone).then(() => {
-            if(account.userCode == 201003 || account.userCode == 20014 ) history.push('/set-password')
-            if(account.userCode == 10000) history.push('/login')
+            if (account.userCode == 201003 || account.userCode == 20014)
+                history.push('/set-password')
+            if (account.userCode == 10000)
+                history.push('/login')
         })
     }
 
