@@ -46,11 +46,7 @@ export default class LoopLoan extends React.Component {
         } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt >= loopLoan.minLoanAmt) {
             history.push('/loan-youyi-form')
         } else if (loopLoan.userStatus == 2 && loopLoan.canBorrowAmt < loopLoan.minLoanAmt) {
-            if (loopLoan.errMsg) {
-                this.setState({ show: true })
-            } else {
-                Browser.inFXHApp ? NativeBridge.close() : history.push('/')
-            }
+            Browser.inFXHApp ? NativeBridge.close() : history.push('/')
         }
         if (loopLoan.errMsg) {
             Browser.inFXHApp ? NativeBridge.close() : history.push('/')
