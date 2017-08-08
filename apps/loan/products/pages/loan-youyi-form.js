@@ -32,12 +32,12 @@ export default class LoopLoanLoan extends React.Component {
     }
 
     resetCalculateTimer = () => {
-        clearTimeout(this._$_timer)
-
-        this._$_timer = setTimeout(() => {
-            this.props.loopLoan.loan_calculate(this.state.value);
-        }, 1000)
-
+        // clearTimeout(this._$_timer)
+        //
+        // this._$_timer = setTimeout(() => {
+        //     this.props.loopLoan.loan_calculate(this.state.value);
+        // }, 1000)
+        this.props.loopLoan.loan_calculate(this.state.value);
     }
 
     resetValidateTimer = () => {
