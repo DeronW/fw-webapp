@@ -135,7 +135,7 @@ export default class LoopLoanLoan extends React.Component {
             Components.showToast("请输入借款金额")
         } else if (this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt && this.state.value % 100 == 0) {
             this.props.loopLoan.loan_confirm(this.state.value).catch(e => {
-                if ([20005, 20009, 20013].indexOf(e.code) > -1) {
+                if ([20005, 20009, 20013, 24003].indexOf(e.code) > -1) {
                     showBlueAlert(e.message).then(() => {
                         Browser.inFXHApp ? NativeBridge.close() : history.push('/')
                     })
