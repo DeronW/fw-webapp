@@ -105,7 +105,7 @@ export default class RepaymentRecords extends React.Component {
         </div>
 
         return <div styleName="bg">
-            <Header title="还款" history={history} /> {/*内容部分*/}
+            <Header title="还款" hideGoback={true}/> {/*内容部分*/}
             <div styleName="repayment-content">
                 {resultList.length > 0 && resultList.map(repayment_item)}
             </div>
