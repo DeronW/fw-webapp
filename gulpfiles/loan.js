@@ -47,7 +47,7 @@ const OUTSIDE_PAGES = [
 const BILL_PAGES = [
     // 'bill', //账单首页 // should removed
     // 'bill-history', //历史账单 // depracated
-    'bill-payback', //还款页面
+    // 'bill-payback', //还款页面
     // 'repayment-record' //还款列表页面
 ]
 
@@ -95,10 +95,7 @@ const WEIXIN_PAGES = [
 // ]
 
 const MORTGAGE = [
-    'house-mortgage'
-]
-
-const APPLY_TEN_MILLION_LOAN = [
+    'house-mortgage',
     'outside-mortgage-apply-ten-million-loan',
     'outside-mortgage-ten-million-loan-info',
     'outside-mortgage-id-download'
@@ -131,7 +128,6 @@ APP_NAMES.push(
     ...DU_MIAO_PAGES,
     // ...CREDIT_CARD,
     ...MORTGAGE,
-    ...APPLY_TEN_MILLION_LOAN,
     ...REFACTORY_PAGES
     // ...AUTH_PAGES
 );

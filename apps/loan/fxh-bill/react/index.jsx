@@ -1,10 +1,10 @@
 
 class Detail extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.clickHandler = this.clickHandler.bind(this);
     }
-    clickHandler(){
+    clickHandler() {
         window.history.back();
     }
     render() {
@@ -15,7 +15,7 @@ class Detail extends React.Component {
             let d = {
                 '0': 'icon1', '1': 'icon1',
                 '2': 'icon2', '3': 'icon2',
-                '5': 'icon2', '100':'icon4',
+                '5': 'icon2', '100': 'icon4',
                 '101': 'icon3', '102': 'icon3'
             }
             return d[status] && <div className={d[status]}></div>
@@ -29,7 +29,7 @@ class Detail extends React.Component {
                     {data.haveRepaymentRecord && <a className="bill-history-entry" href={`/static/loan/account/index.html#/repayment-fangxin-records?repaymentUuid=${data.repaymentUuid}`}>还款记录</a>}
                 </div>
                 <div className="logo-box">
-                    <img className="logo-img" src="images/logo.png"/>
+                    <img className="logo-img" src="images/logo.png" />
                     <div className="logo-brand">放心花</div>
                     {status_icon(st)}
                 </div>
@@ -76,7 +76,7 @@ class Detail extends React.Component {
                             <span>{data.dueTimeStr}</span>
                         </div>
                     </div>}
-                    {(st == 0 || st == 1 || st ==2 || st == 3 || st == 5) && <div className="loan-detail-box">
+                    {(st == 0 || st == 1 || st == 2 || st == 3 || st == 5) && <div className="loan-detail-box">
                         <div>
                             <span>借款时间</span>
                             <span>{data.loanTimeStr}</span>
@@ -84,9 +84,11 @@ class Detail extends React.Component {
                     </div>}
                 </div>
                 {(st == 102 || st == 103) &&
-                <div className="pay-back-btn-box" ><a href={`/static/loan/bill-payback/index.html?loanGid=${loanGid}&token=${user.token}&userGid=${user.gid}&userId=${user.id}&repaymentUuid=${data.repaymentUuid}`}>立即还款</a></div>}
+                    <div className="pay-back-btn-box" >
+                        <a href={`/static/loan/account/index.html#/repayment-fangxin?id=${loanGid}`}>
+                            立即还款</a></div>}
                 {st == 101 &&
-                <div className="pay-back-btn-box"><span>立即还款</span></div>}
+                    <div className="pay-back-btn-box"><span>立即还款</span></div>}
             </div>
         )
     }
