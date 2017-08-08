@@ -111,6 +111,7 @@
 .repayment-input::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     color: #999;
+    line-height: 35px;
 }
 
 .pay-off-btn {
