@@ -16,6 +16,7 @@ export default class LoopLoan {
             productUuid: '',
             userStatus: '',
             errMsg: '',
+            errCode:'',
             url: '',
             cardList: [],
             zmScore: '',
@@ -43,7 +44,7 @@ export default class LoopLoan {
     get_baseinfo = () => {
         return this.Post('/api/looploan/loan/v1/baseinfo.json', {
             productUuid: 11
-        }).then((data) => {
+        },'slience').then((data) => {
             this.canBorrowAmt = data.canBorrowAmt;
             this.creditLine = data.creditLine;
             this.minLoanAmt = data.minLoanAmt;
@@ -54,6 +55,7 @@ export default class LoopLoan {
             this.userStatus = data.userStatus;
         }, e => {
             this.errMsg = e.message;
+            this.errCode = e.code;
         }).then(() => {
             return this.Post('/api/zhima/v1/credit/auth.json');
         }).then((data) => {

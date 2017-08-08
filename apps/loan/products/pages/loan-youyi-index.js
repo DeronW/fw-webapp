@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-
+import {Components} from 'fw-javascripts'
 import { Header } from '../../lib/components'
 import styles from '../css/loan-youyi-index.css'
 import { NativeBridge, Browser } from '../../lib/helpers'
@@ -27,7 +27,13 @@ export default class LoopLoan extends React.Component {
     componentDidMount() {
         document.title = '优易借';
         NativeBridge.hide_header();
-        this.props.loopLoan.get_baseinfo();
+        this.props.loopLoan.get_baseinfo().then(()=>{
+            if(this.props.loopLoan.errCode == 20005){
+                this.setState({show:true});
+            }else{
+                Components.showToast(this.props.loopLoan.errMsg);
+            }
+        });
     }
 
     clickHandler = () => {
