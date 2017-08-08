@@ -113,7 +113,7 @@ const REFACTOR_PAGES = [{
 }]
 
 APP_NAMES.push(
-    // ...USER_PAGES,
+    ...USER_PAGES,
     ...PROTOCOL_PAGES,
     // ...TOPIC_PAGES,
     // ...HUISHANG_PAGES,

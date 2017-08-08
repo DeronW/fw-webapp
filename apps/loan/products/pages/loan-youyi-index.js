@@ -25,13 +25,14 @@ export default class LoopLoan extends React.Component {
     }
 
     componentDidMount() {
+        let { loopLoan } = this.props;
         document.title = '优易借';
         NativeBridge.hide_header();
-        this.props.loopLoan.get_baseinfo().then(()=>{
-            if(this.props.loopLoan.errCode == 20005){
+        loopLoan.get_baseinfo().then(()=>{
+            if(loopLoan.errCode == 20005 || loopLoan.errCode == 20009 || loopLoan.errCode == 20013){
                 this.setState({show:true});
             }else{
-                Components.showToast(this.props.loopLoan.errMsg);
+                Components.showToast(loopLoan.errMsg);
             }
         });
     }
@@ -65,7 +66,8 @@ export default class LoopLoan extends React.Component {
     }
 
     closeHandler = () => {
-        this.setState({ show: false });
+        let { history } = this.props;
+        Browser.inFXHApp ? NativeBridge.close() : history.push('/')
     }
 
     render() {
