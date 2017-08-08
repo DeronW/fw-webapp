@@ -1,6 +1,7 @@
 import { extendObservable, computed } from 'mobx'
 import { Components } from 'fw-javascripts'
 import { Storage } from '../../lib/helpers'
+import { showBlueAlert } from '../../lib/components'
 
 export default class LoopLoan {
     constructor(Post) {
@@ -130,11 +131,11 @@ export default class LoopLoan {
             loanAmt: value,
             productUuid: this.productUuid
         },'silence').then((data) => {
-            this.applyErrCode = data.code;
             this.loanUuid = data.loanUuid
         }, e => {
-            this.applyErrCode = e.code;
-            this.applyErrMsg = e.message;
+            if([20005, 20009, 20013].indexOf(e.code) > -1) {
+                return showBlueAlert(e.message)
+            }
         })
     }
 
