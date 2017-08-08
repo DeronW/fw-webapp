@@ -14,11 +14,12 @@
     /*height: 226px;*/
     background: #fff;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .top {
     /*height: 78px;*/
-    padding: 26px 24px;
+    padding: 21px 24px;
     overflow: hidden;
 }
 
@@ -63,15 +64,20 @@
 }
 
 .line {
-    border: 1px solid #f3f2f2;
-    margin-left: 32px;
+    /*border: 1px solid #f3f2f2;
+    margin-left: 32px;*/
+    position: absolute;
+    left: 32px;
+    right: 0;
+    height: 1px;
+    background: #f3f2f2;
 }
 
 .bottom {
     overflow: hidden;
     /*padding: 22px 0;*/
     position: relative;
-    height: 120px;
+    height: 112px;
 }
 
 .time-limit,
