@@ -5,6 +5,7 @@ import {Components} from 'fw-javascripts'
 import {Header} from '../../lib/components'
 import styles from '../css/loan-youyi-form.css'
 import {Storage, NativeBridge, Browser} from '../../lib/helpers'
+import { showBlueAlert } from '../../lib/components'
 
 @inject('loopLoan')
 @observer
@@ -72,27 +73,6 @@ export default class LoopLoanLoan extends React.Component {
         let v = e.target.value;
         if(v.length > 5) return;
         this.setState({value:v}, this.validate);
-        // v = Math.min(loopLoan.canBorrowAmt, v)
-        // v = Math.max(loopLoan.minLoanAmt, v)
-
-
-
-        // let {loopLoan} = this.props;
-        // let v = e.target.value;
-        // if (v.length <= 5) {
-        //     this.setState({value: v})
-        //
-        //     if (v > loopLoan.canBorrowAmt) {
-        //         this.setState({value: loopLoan.canBorrowAmt})
-        //         // this.props.loopLoan.loan_calculate(this.state.value);
-        //     } else if (v < loopLoan.minLoanAmt) {
-        //         this.setState({value: loopLoan.minLoanAmt})
-        //         // this.props.loopLoan.loan_calculate(this.state.value);
-        //     } else if (this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt) {
-        //         // this.props.loopLoan.loan_calculate(v);
-        //     }
-        // }
-
     }
 
     smsValueHandler = (e) => {
@@ -154,16 +134,13 @@ export default class LoopLoanLoan extends React.Component {
         } else if (this.state.value == '') {
             Components.showToast("请输入借款金额")
         } else if (this.state.value >= loopLoan.minLoanAmt && this.state.value <= loopLoan.canBorrowAmt && this.state.value % 100 == 0) {
-            this.props.loopLoan.loan_confirm(this.state.value).then(() => {
-                // if(loopLoan.applyErrCode == 10000){
-                //     this.setState({mask3Show: true});
-                //     this.tick();
-                // }else if(loopLoan.applyErrCode == 20005 || loopLoan.applyErrCode == 20009 || loopLoan.applyErrCode == 20013){
-                //     window.clearInterval(this._timer);
-                //     this.setState({show:true});
-                // }else{
-                //     Components.showToast(loopLoan.applyErrMsg);
-                // }
+            this.props.loopLoan.loan_confirm(this.state.value).catch(e=>{
+                    if([20005, 20009, 20013].indexOf(e.code) > -1) {
+                        showBlueAlert(e.message).then(()=>{
+                            Browser.inFXHApp ? NativeBridge.close() : history.push('/')
+                        })
+                    }
+            }).then(() => {
                 this.setState({mask3Show: true});
                 this.tick();
             });

@@ -27,7 +27,7 @@ let showBlueAlert = function (title, options) {
     return new Promise((resolve, _) => {
         render(<Alert
             text={title}
-            confirm_text={'确认'}
+            confirm_text={'知道了'}
             mountedNode={node}
             unMountAlert={() => {
                 node.parentNode.removeChild(node)
