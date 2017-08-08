@@ -38,7 +38,10 @@ class UserPanel extends React.Component {
 
         if (unauthorized) {
             location.href = '/static/loan/user-card-set/index.html'
+            // 此处应返回, 不然, 会直接执行到下面的代码
+            return
         }
+
         if (type == 'a') {
             location.href = '/static/loan/user-info/index.html'
         }
