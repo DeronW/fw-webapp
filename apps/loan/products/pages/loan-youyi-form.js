@@ -4,7 +4,7 @@ import {observer, inject} from 'mobx-react'
 import {Components} from 'fw-javascripts'
 import {Header} from '../../lib/components'
 import styles from '../css/loan-youyi-form.css'
-import {Storage, Browser} from '../../lib/helpers'
+import {Storage, NativeBridge, Browser} from '../../lib/helpers'
 
 @inject('loopLoan')
 @observer
@@ -19,7 +19,8 @@ export default class LoopLoanLoan extends React.Component {
             mask1Show: false,
             mask2Show: false,
             mask3Show: false,
-            remain: 0
+            remain: 0,
+            show:false
         }
     }
 
@@ -158,6 +159,11 @@ export default class LoopLoanLoan extends React.Component {
                 this.tick();
             }, e => {
                 window.clearInterval(this._timer);
+                if(loopLoan.applyErrCode == 20005 || loopLoan.applyErrCode == 20009 || loopLoan.applyErrCode == 20013){
+                    this.setState({show:true});
+                }else{
+                    Components.showToast(loopLoan.applyErrMsg);
+                }
             });
 
         }
@@ -172,6 +178,10 @@ export default class LoopLoanLoan extends React.Component {
                 Components.showToast(e.message)
             });
         }
+    }
+
+    closeHandler = () => {
+        Browser.inFXHApp ? NativeBridge.close() : history.push('/')
     }
 
     render() {
@@ -267,6 +277,12 @@ export default class LoopLoanLoan extends React.Component {
                                  onClick={this.loanConfirmHandler}>确定
                             </div>
                         </div>
+                    </div>
+                </div>}
+                {this.state.show && <div styleName="err-mask">
+                    <div styleName="err-popup">
+                        <div styleName="err-popup-tip">{loopLoan.applyErrMsg}</div>
+                        <div styleName="err-popup-btn" onClick={this.closeHandler}>知道了</div>
                     </div>
                 </div>}
             </div>
