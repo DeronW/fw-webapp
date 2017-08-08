@@ -11,38 +11,37 @@ function getStyles() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'rgba(0,0,0,0.2)'
+            background: 'rgba(0,0,0,0.7)'
         },
         alert_panel: {
             display: "table",
             position: "absolute",
             top: "50%",
             left: "50%",
-            marginLeft: "-288px",
+            marginLeft: "-330px",
             marginTop: "-101px",
-            width: "576px",
-            borderRadius: "8px",
+            width: "600px",
+            padding:"30px",
+            borderRadius: "10px",
             background: "white"
         },
         text: {
             margin: "30px auto",
-            lineHeight: "40px",
+            lineHeight: "50px",
             color: "#555555",
-            padding: "0 36px",
-            maxWidth: "576px",
-            fontSize: "28px",
+            width: "100%",
+            fontSize: "30px",
             textAlign: "center"
         },
         btn: {
             display: "block",
-            width: "516px",
-            height: "74px",
-            lineHeight: "74px",
+            width: "100%",
+            height: "83px",
+            lineHeight: "83px",
             textAlign: "center",
             color: "white",
             background: "#6aa4f0",
-            borderRadius: '6px',
-            margin: '0 auto 30px',
+            borderRadius: '4px',
             fontSize: "34px"
         }
     }
@@ -51,7 +50,7 @@ function getStyles() {
 class Alert extends Component {
     static defaultProps = {
         text: '好像出了点问题!?',
-        confirmBtnText: '确定'
+        confirmBtnText: '知道了'
     }
 
     hideHandler = () => {
