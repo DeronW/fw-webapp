@@ -383,3 +383,39 @@
 .overdue-btn{
     color:#6aa4f0;
 }
+.err-mask{
+    width:100%;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,.7);
+}
+.err-popup{
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%,-50%);
+    transform:translate(-50%,-50%);
+    width:600px;
+    background:#fff;
+    border-radius:10px;
+    padding:30px;
+}
+.err-popup-tip{
+    font-size:30px;
+    line-height:50px;
+    color:#666;
+    text-align:center;
+}
+.err-popup-btn{
+    width:100%;
+    height:83px;
+    line-height:83px;
+    text-align:center;
+    font-size:34px;
+    color:#fff;
+    background:#6aa4f0;
+    border-radius:4px;
+    margin:22px auto 0;
+}

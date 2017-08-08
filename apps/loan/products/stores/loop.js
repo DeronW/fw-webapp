@@ -30,7 +30,9 @@ export default class LoopLoan {
             bankCardNo: '',
             latedescription: '',
             loanStatus: '',
-            phone: ''
+            phone: '',
+            applyErrCode:'',
+            applyErrMsg:''
         })
 
         this.init_data()
@@ -127,8 +129,11 @@ export default class LoopLoan {
         return this.Post('/api/looploan/loan/v1/apply.json', {
             loanAmt: value,
             productUuid: this.productUuid
-        }).then((data) => {
+        },'silence').then((data) => {
             this.loanUuid = data.loanUuid
+        }, e => {
+            this.applyErrCode = e.code;
+            this.applyErrMsg = e.message;
         })
     }
 
