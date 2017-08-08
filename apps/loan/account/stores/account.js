@@ -24,7 +24,8 @@ export default class Account {
     }
 
     @computed get mask_phone() {
-        return this.data.phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
+        let phone = this.data.phone || Storage.getUserDict().phone
+        return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
     }
 
     get_captcha = () => {

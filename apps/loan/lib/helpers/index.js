@@ -14,7 +14,14 @@ let Theme = new ThemeFactory(Storage, Browser)
 function mobxStoreExtend(store) {
 
     function extend() {
-        const KEY = `${location.pathname}:${store.name}`
+        let pt = location.pathname
+        if (pt == '/') pt = 'home'
+        if (pt.startsWith('/static/')) {
+            let g = pt.match(/static\/(\w+)\/(\w+)\//)
+            pt = `${g[1]}:${g[2]}`
+        }
+
+        const KEY = `${pt}:${store.name}`
 
         // read data from Storage, and merge into this.data
         if (!this.data) this.data = {}
@@ -28,7 +35,6 @@ function mobxStoreExtend(store) {
         construct: function (target, args, newTarget) {
             let obj = new target(...args)
             extend.call(obj)
-            console.log(obj)
             return obj
         }
     })
