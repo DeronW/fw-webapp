@@ -42,7 +42,7 @@
 }
 
 .amountMoney {
-    border-right: 1px solid #ccc;
+    border-right: 1px solid #eee;
 }
 
 .amountMoney .amountNum {
@@ -70,6 +70,16 @@
     height: 96px;
     display: table;
     border-bottom: 1px solid #ebeaea;
+    line-height: 96px;
+}
+.amountNoBorder{
+    border-bottom: transparent;
+}
+.amountInput{
+    width: 100%;
+    display: table;
+    border-bottom: transparent;
+    background: #fff;
     line-height: 96px;
 }
 
@@ -106,10 +116,12 @@
 
 .itemInput {
     float: left;
-    height: 32px;
     font-size: 30px;
-    margin-top: 34px;
     width: 450px;
+    margin: 0 32px 0 0;
+    height: 32px;
+    padding: 30px 0;
+    line-height: 30px;
 }
 
 .itemAll {

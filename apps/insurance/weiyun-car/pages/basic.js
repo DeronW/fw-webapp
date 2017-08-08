@@ -28,11 +28,13 @@ class Basic extends React.Component {
     }
 
     handleSubmit = () => {
-        let { basic, car, policy_detail, history } = this.props;
-        basic.submit(history).then(data => {
-            car.setForm(data.carInfo);
-            policy_detail.setForm(data.insureInfo);
-            history.push('/policy-detail');
+        let { basic, car, policy_detail, history } = this.props
+
+        basic.submit().then(data => {
+            car.setForm(data.carInfo)
+            policy_detail.setForm(data.insureInfo)
+
+            setTimeout(() => history.push('/policy-detail'), 200)
         }).catch(e => {
             if (e.code == 10003) history.push('/car')
         })
@@ -54,7 +56,7 @@ class Basic extends React.Component {
                     <i styleName="icon-down-arrow"></i>
                     <select styleName="field-input-select"
                         onChange={this.inputChangeHandler('cityCode')}
-                        value={basic.cityCode || ''}>
+                        value={basic.data.cityCode || ''}>
                         <option value="">请选择</option>
                         <option value="1">北京</option>
                         <option value="2">重庆</option>
@@ -69,7 +71,7 @@ class Basic extends React.Component {
             <div styleName="field">
                 <div styleName="field-title">车牌号码</div>
                 <input styleName="field-input-text" placeholder="请输入车牌号码"
-                    value={basic.formatLicenseNo}
+                    value={basic.data.formatLicenseNo}
                     onChange={this.inputChangeHandler('licenseNo')} />
                 <div styleName="field-v-line"></div>
 
@@ -77,7 +79,7 @@ class Basic extends React.Component {
                     <i styleName="icon-down-arrow"></i>
                     <select styleName="field-input-select"
                         onChange={this.inputChangeHandler('carNoArea')}
-                        value={basic.carNoArea || ''}>
+                        value={basic.data.carNoArea || ''}>
                         <option value="">请选择</option>
                         <option value="京">京</option>
                         <option value="渝">渝</option>
@@ -92,7 +94,7 @@ class Basic extends React.Component {
             <div styleName="field">
                 <div styleName="field-title">车主姓名</div>
                 <input styleName="field-input-text" placeholder="请输入车主姓名"
-                    value={basic.carOwnersName}
+                    value={basic.data.carOwnersName}
                     onChange={this.inputChangeHandler('carOwnersName')} />
                 <div styleName="field-underline"></div>
             </div>
@@ -100,7 +102,7 @@ class Basic extends React.Component {
             <div styleName="field">
                 <div styleName="field-title">身份证号</div>
                 <input styleName="field-input-text" placeholder="请输入身份证号"
-                    value={basic.idCard}
+                    value={basic.data.idCard}
                     onChange={this.idCardInputHandler}
                 />
                 <div styleName="field-underline"></div>
@@ -112,7 +114,7 @@ class Basic extends React.Component {
                     <i styleName="icon-down-arrow"></i>
                     <select styleName="field-input-select"
                         onChange={this.inputChangeHandler('intentionCompanyCode')}
-                        value={basic.intentionCompanyCode || ''} >
+                        value={basic.data.intentionCompanyCode || ''} >
                         <option value="">请选择</option>
                         <option value="0">平安保险</option>
                         <option value="1">太平洋保险</option>

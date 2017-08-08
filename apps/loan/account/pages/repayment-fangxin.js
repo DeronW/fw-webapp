@@ -173,7 +173,7 @@ class RepaymentFangXin extends React.Component {
                         <div styleName="itemName">还款日</div>
                         <div styleName="itemTime">{repayment_fangxin.dueTimeStr}</div>
                     </div>
-                    <div styleName="amountItem">
+                    <div styleName="amountItem amountNoBorder">
                         <div styleName="itemName">已还金额</div>
                         {
                             m > 0 ? <div styleName="itemAlready" onClick={this.gotoRecord}><span>{m}</span>
@@ -192,11 +192,11 @@ class RepaymentFangXin extends React.Component {
                         </div>
                     </div>
                     {repayment_fangxin.loanLeftAmount < 200 ?
-                        <div styleName="amountItem">
+                        <div styleName="amountItem amountNoBorder">
                             <div styleName="itemName">还款金额</div>
                             <div styleName="itemAlready">{repayment_fangxin.loanLeftAmount}</div>
                         </div> :
-                        <div styleName="amountItem">
+                        <div styleName="amountInput">
                             <input styleName="itemInput" type="number" placeholder="输入还款金额" value={inputAmount} onChange={this.inputAmountHandler()} />
                             <div styleName="itemAll" onClick={this.allAmountHandler(repayment_fangxin.loanLeftAmount)}>全部还清</div>
                         </div>
