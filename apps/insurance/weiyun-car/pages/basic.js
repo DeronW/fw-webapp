@@ -31,10 +31,10 @@ class Basic extends React.Component {
         let { basic, car, policy_detail, history } = this.props
 
         basic.submit().then(data => {
-            history.push('/policy-detail')
-
             car.setForm(data.carInfo)
             policy_detail.setForm(data.insureInfo)
+
+            setTimeout(() => history.push('/policy-detail'), 200)
         }).catch(e => {
             if (e.code == 10003) history.push('/car')
         })

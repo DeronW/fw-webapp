@@ -10,9 +10,10 @@ import styles from '../css/policy-detail.css'
 import styles_icon_circle from '../css/icons/circle.css'
 
 
-const Select = CSSModules((props) => {
-    let hasValidData = props.value || props.value == '0',
-        maskText = hasValidData ? props.options.find((opt) => opt.value === props.value).name : props.placeholder;
+const Select = inject('policy_detail')(observer(CSSModules((props) => {
+    let selectedOption = props.options.find((opt) => opt.value === props.value),
+        hasValidData = props.value && selectedOption || props.value == '0',
+        maskText = hasValidData ? selectedOption.name : props.placeholder;
     let gen_options = opt => <option styleName="native-option" key={opt.name} value={opt.value}>{opt.name}</option>
     return (
         <div styleName="select-widget">
@@ -24,7 +25,7 @@ const Select = CSSModules((props) => {
             </select>
         </div>
     )
-}, styles)
+}, styles)))
 
 const Field = inject('policy_detail')(observer(CSSModules(function (props) {
 
@@ -57,6 +58,7 @@ const Field = inject('policy_detail')(observer(CSSModules(function (props) {
         <div styleName="right-els">
             {bjmC}
             <Select placeholder="请选择"
+                title={title}
                 value={policy_detail[name]}
                 options={options}
                 handleChange={handler} />
