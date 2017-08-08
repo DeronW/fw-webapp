@@ -1,7 +1,7 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 import { observer, inject } from 'mobx-react'
-import {Components} from 'fw-javascripts'
+import { Components } from 'fw-javascripts'
 import { Header } from '../../lib/components'
 import styles from '../css/loan-youyi-index.css'
 import { NativeBridge, Browser } from '../../lib/helpers'
@@ -28,11 +28,13 @@ export default class LoopLoan extends React.Component {
         let { loopLoan } = this.props;
         document.title = '优易借';
         NativeBridge.hide_header();
-        loopLoan.get_baseinfo().then(()=>{
-            if(loopLoan.errCode == 20005 || loopLoan.errCode == 20009 || loopLoan.errCode == 20013){
-                this.setState({show:true});
-            }else{
-                Components.showToast(loopLoan.errMsg);
+        loopLoan.get_baseinfo().then(() => {
+            if (loopLoan.errCode == 20005 ||
+                loopLoan.errCode == 20009 ||
+                loopLoan.errCode == 20013) {
+                this.setState({ show: true })
+            } else if (loopLoan.errCode) {
+                Components.showToast(loopLoan.errMsg)
             }
         });
     }
@@ -81,7 +83,7 @@ export default class LoopLoan extends React.Component {
             btn_title = '尝试其他借款'
         }
 
-        if(loopLoan.errMsg)  btn_title = '尝试其他借款'
+        if (loopLoan.errMsg) btn_title = '尝试其他借款'
 
         let goBack = () => {
             Browser.inFXHApp ? NativeBridge.close() : location.href = '/static/loan/products/index.html#/'
