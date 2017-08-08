@@ -66,6 +66,7 @@ export default class LoopLoan extends React.Component {
     }
 
     closeHandler = () => {
+        let { history } = this.props;
         Browser.inFXHApp ? NativeBridge.close() : history.push('/')
     }
 
