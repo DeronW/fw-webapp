@@ -15,6 +15,7 @@
 }
 
 .logo-container {
+    position: relative;
     box-sizing: border-box;
     height: 303px;
     padding-top: 48px;
@@ -45,8 +46,15 @@
 .loan-amount {
     box-sizing: border-box;
     float: left;
-    width: 50%;
-    border-right: 1px solid #eee;
+    width: calc(50% - 1px);
+}
+
+.vertical-line {
+    float: left;
+    width: 1px;
+    height: 60px;
+    background-color: #eee;
+    margin: 14px 0;
 }
 
 .due-date {
@@ -126,7 +134,7 @@
 
 .status-bar {
     position: absolute;
-    top: 110px;
+    top: 25px;
     right: -70px;
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);

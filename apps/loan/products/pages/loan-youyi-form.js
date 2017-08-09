@@ -155,7 +155,7 @@ export default class LoopLoanLoan extends React.Component {
             this.props.loopLoan.check_loanStatus(this.state.smsValue).then(() => {
                 this.props.history.push('/loan-youyi-result')
             }, (e) => {
-                this.setState({mask3Show: false});
+                this.setState({mask3Show: false,smsValue: ""});
                 Components.showToast(e.message)
             });
         }
