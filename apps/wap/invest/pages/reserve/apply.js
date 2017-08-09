@@ -11,7 +11,7 @@ import {NativeBridge} from '../../helpers/'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveApply extends React.Component {
     state = {
-        pending: false
+        pending: false,
     }
 
     componentDidMount() {
@@ -45,8 +45,12 @@ class ReserveApply extends React.Component {
                 if (this.state.pending)  return
                 this.setState({pending: true})
                 reserve.submitReserveHandler()
-                    .then(() => Components.showToast('预约成功'),
-                        () => {this.setState({pending: false})})
+                    .then(() => {
+                            Components.showToast('预约成功')
+                        },
+                        () => {
+                            this.setState({pending: false})
+                        })
                     .then(() => {
                         history.push(`/reserve/records`)
                     })
@@ -62,7 +66,7 @@ class ReserveApply extends React.Component {
     render() {
         let {reserve, history} = this.props
         return <div styleName='applyPanel'>
-            <Header title="提交预约" history={history} show_close={false}/>
+            <Header title="提交预约" history={history}/>
             <div styleName="submitPanel">
                 <div styleName="reserveMoney">预约金额</div>
                 <div styleName="userMoney">
@@ -70,7 +74,7 @@ class ReserveApply extends React.Component {
                         <span>&yen;{reserve.accountAmount}</span>
                     </div>
                     <div styleName="inputMoney">
-                        <input type="number" placeholder="100元起投" value={reserve.reserveMoney}
+                        <input type="number" placeholder="100元起预约" value={reserve.reserveMoney}
                                onChange={this.inputChangeHandler('reserveMoney')}/>
                         <span styleName="allmadeBtn" onClick={this.allMadeHandler}>
                             全投
@@ -95,7 +99,7 @@ class ReserveApply extends React.Component {
                     </div>
                     <div styleName="infoItem itemLast">
                         <div styleName="itemLeft">预计起息时间</div>
-                        <div styleName="itemRight">平均{reserve.context.avgLoanPeriod}小时起息</div>
+                        <div styleName="itemRight">预计明日起息</div>
                     </div>
                 </div>
             </div>

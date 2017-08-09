@@ -20,6 +20,10 @@
     text-decoration: none;
 }
 
+.link-us {
+    margin-top: -4px;
+}
+
 .v-line {
     position: absolute;
     left: 30px;
@@ -70,7 +74,7 @@
 .btn-logout {
     display: block;
     margin: 30px auto;
-    width: 680px;
+    width: 654px;
     height: 74px;
     line-height: 74px;
     text-align: center;
@@ -141,7 +145,7 @@
 }
 
 .pop-confirm {
-    font-size: 34px;
+    font-size: 30px;
     color: #fff;
     background: #6aa4f0;
     float: right;
@@ -150,7 +154,7 @@
     height: 74px;
     line-height: 74px;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #6aa4f0;
     text-decoration: none;
 }

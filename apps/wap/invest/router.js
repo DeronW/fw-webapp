@@ -6,12 +6,7 @@ import {
     Switch
 } from 'react-router-dom'
 
-// import UserEvaluate from './pages/user/evaluate.js'
-import ReserveInfo from './pages/reserve/info'
-import ReserveRecords from './pages/reserve/records'
-import ReserveApply from './pages/reserve/apply'
-import ReserveProtocol from './pages/reserve/protocol'
-
+import * as Reserve from './pages/reserve'
 import * as User from './pages/user'
 
 export default (stores) => {
@@ -23,10 +18,10 @@ export default (stores) => {
                 <Route exact path="/user/register-success-b" component={User.RegisterSuccessB} />
 
                 {/*预约投资  */}
-                <Route exact path="/reserve/info" component={ReserveInfo} />
-                <Route exact path="/reserve/apply" component={ReserveApply} />
-                <Route exact path="/reserve/records" component={ReserveRecords} />
-                <Route exact path="/reserve/protocol" component={ReserveProtocol} />
+                <Route exact path="/reserve/info" component={Reserve.Info} />
+                <Route exact path="/reserve/apply" component={Reserve.Apply} />
+                <Route exact path="/reserve/records" component={Reserve.Records} />
+                <Route exact path="/reserve/protocol" component={Reserve.Protocol} />
             </Switch>
         </Provider>
     </Router>

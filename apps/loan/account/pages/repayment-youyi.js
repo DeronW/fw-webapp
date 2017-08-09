@@ -15,7 +15,6 @@ import styles from '../css/repayment-youyi.css'
 class Repayment extends React.Component {
 
     state = {
-        protocolChecked: true,
         amountEditDisabled: false,
         showSMSPop: false,
         SMSTimer: 60,
@@ -50,11 +49,7 @@ class Repayment extends React.Component {
         repayment_youyi.setAmount(v);
     }
 
-    toggleProtocol = () => this.setState({ protocolChecked: !this.state.protocolChecked })
-
     handleSubmit = () => {
-        if (!this.state.protocolChecked) return
-
         let { repayment_youyi, history } = this.props,
             repaymentAmount = repayment_youyi.repaymentAmount,
             unpaidAmount = repayment_youyi.unpaidAmount;
@@ -109,7 +104,7 @@ class Repayment extends React.Component {
 
     render() {
         let { history, repayment_youyi, account } = this.props,
-            { protocolChecked, amountEditDisabled, showSMSPop, SMSTimer, SMSInput } = this.state,
+            { amountEditDisabled, showSMSPop, SMSTimer, SMSInput } = this.state,
             amountEditItem;
 
         if (amountEditDisabled) {

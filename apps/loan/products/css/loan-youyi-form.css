@@ -1,7 +1,14 @@
-
-.input-num-ios::-webkit-input-placeholder, .input-num-android::-webkit-input-placeholder{
+body{
+    background:#f0f0f0;
+}
+.input-num-ios::-webkit-input-placeholder{
     font-size: 30px;
-    line-height:normal;
+    line-height:100%;
+    color:#999;
+}
+.input-num-android::-webkit-input-placeholder{
+    font-size: 30px;
+    line-height:100%;
     color:#999;
 }
 .cnt-container {
@@ -16,34 +23,36 @@
     height:119px;
     border-bottom:1px solid #ebeaea;
     overflow:hidden;
+    margin-left:30px;
 }
 .input-title{
     font-size:30px;
     color:#666;
     display:inline-block;
-    margin-top:66px;
-    padding-left:30px;
+    margin-top:52px;
 }
 .input-num-android{
    width:400px;
-   height:60px;
-    line-height:normal;
+   height:54px;
+    line-height:54px;
     text-align:right;
-   font-size:50px;
+   font-size:54px;
    color:#556bb8;
-   float:right;
-   margin-right:30px;
-   margin-top:46px;
+    margin-top:20px;
 }
 .input-num-ios{
     width:400px;
-    height:60px;
-    line-height:normal;
+    height:54px;
+    line-height:54px;
     text-align:right;
-    font-size:50px;
+    font-size:54px;
     color:#556bb8;
+    margin-top:20px;
+}
+.loan-num-wrap{
+    font-size:30px;
+    color:#000;
     float:right;
-    margin-top:46px;
 }
 .loan-info-item{
     height:99px;
@@ -51,6 +60,15 @@
     line-height:99px;
     margin-left:30px;
     overflow:hidden;
+}
+.loan-info-item-without-border{
+    height:99px;
+    line-height:99px;
+    margin-left:30px;
+    overflow:hidden;
+}
+.loan-info-item:last-child{
+    border-bottom:none;
 }
 .loan-info-title{
     font-size:30px;
@@ -370,6 +388,10 @@
     color:#fff;
     border-radius:4px;
     margin:34px auto 0;
+}
+.overdue-wrap{
+    padding-bottom:20px;
+    background:#F0F0F0;
 }
 .overdue-tip{
     height:70px;

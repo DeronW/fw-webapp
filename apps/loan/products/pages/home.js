@@ -126,10 +126,9 @@ class Home extends React.Component {
             {enable_youyi && <div styleName="enable-youyi">
                 <div styleName="text-a">恭喜您被选中</div>
                 <div styleName="text-b">
-                    我们邀请您使用放心花新推出的借款产品<br />
-                    “优易借”。优易借是主打14天借款期限的<br />
-                    新产品，综合费率6%，且还款时间灵活，<br />
-                    您可以提前还款和部分还款。快去试试吧~
+                    我们邀请您使用放心花新推出的借款产<br />
+                    品优易借。借款期限14天，综合费率6%，<br />
+                    还款方式灵活，快去试试吧~<br />
                 </div>
                 <a styleName="btn-close" onClick={
                     () => this.setState({ enable_youyi: false })}></a>

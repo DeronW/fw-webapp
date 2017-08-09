@@ -1,6 +1,6 @@
 .bg {
     background-color: #f0f0f0;
-    font-size: 30px;
+    font-size: 28px;
     min-height: 100%;
 }
 
@@ -42,12 +42,21 @@
     border-bottom: 1px solid #ebeaea;
     color: #666;
     line-height: 100px;
-    background: transparent url("../images/user-panel/right-arrow.png") no-repeat 640px center;
+    background: transparent url("../images/user-panel/right-arrow.png") no-repeat 637px center;
+}
+
+.link-item:last-child{
+    border-bottom:none;
 }
 
 .link-item img {
-    float: left;
     position: relative;
-    top: 26px;
     margin-right: 18px;
+    width:38px;
+    height:38px;
+    vertical-align:middle;
+}
+
+.link-item img.bank-card-icon{
+    margin-top:-8px;
 }

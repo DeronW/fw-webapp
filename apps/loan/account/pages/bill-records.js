@@ -60,7 +60,7 @@ class BillRecords extends React.Component {
     render() {
         let { current_type, tab } = this.state;
         let { history } = this.props;
-
+        
 
         let btn_tab = (type, index) => {
             let cn = `ui-tab-li ${type === current_type && 'ui-select-li'}`
@@ -98,8 +98,8 @@ class BillRecords extends React.Component {
                 <div styleName="right-arrow">
                     <img src={require("../images/bill-records/right-arrow.png")} /></div>
                 <div styleName="apply-status-wrap">
-                    <div styleName="apply-status">{tab[current_type].name}</div>
-                    <div styleName="apply-time">{order.dueTimeStr}</div>
+                    <div styleName="apply-status"  style={{color:current_type ==1?"#649cfe":current_type ==3?"#f4313e":current_type ==4?"#999":"#333" }}>{tab[current_type].name}</div>
+                    <div styleName="apply-time">{order.loanTimeStr}</div>
                 </div>
             </a>
         }
