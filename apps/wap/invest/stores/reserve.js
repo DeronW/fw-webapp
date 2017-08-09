@@ -1,5 +1,5 @@
-import { extendObservable, computed } from 'mobx'
-import { Components, Utils, Event } from 'fw-javascripts'
+import {extendObservable, computed} from 'mobx'
+import {Components, Utils, Event} from 'fw-javascripts'
 
 export default class Reserve {
     constructor(Post) {
@@ -7,8 +7,7 @@ export default class Reserve {
 
         this.data = {}
 
-        extendObservable(this.data, {
-        })
+        extendObservable(this.data, {})
 
         extendObservable(this, {
             context: {
@@ -47,7 +46,6 @@ export default class Reserve {
             this.batchMaxmum = data.batchMaxmum
             this.minAmt = data.appointClaim.minAmt
             this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-
             return {
                 isRisk: this.isRisk,
                 batchMaxmum: this.batchMaxmum
@@ -79,9 +77,14 @@ export default class Reserve {
     }
 
     submitReserveHandler = () => {
-        return this.Post('/api/v1/investAppoint.shtml', {
-            applyAmt: this.reserveMoney,
-            applyInvestClaimId: this.context.id
+        return this.Post('/api/v1/intoAppointPage.shtml', {
+            applyInvestClaimId: this.getApplyInvestClaimId()
+        }).then((data)=> {
+            return this.Post('/api/v1/investAppoint.shtml', {
+                applyAmt: this.reserveMoney,
+                applyInvestClaimId: this.context.id,
+                bookInvestToken: data.bookInvestToken
+            })
         })
     }
 

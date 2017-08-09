@@ -7,6 +7,7 @@
     width: 100%;
     height: auto;
     margin-top: 20px;
+    font-family: "PingFangSC";
 }
 
 .item-self {
@@ -30,7 +31,7 @@
 
 .top-right {
     float: right;
-    font-size: 30px;
+    font-size: 36px;
     color: #6aa4f0;
 }
 
@@ -87,18 +88,22 @@
     /*margin: 0 54px;*/
     position: absolute;
     top: 22px;
+    text-align: center;
 }
 
 .time-limit {
-    left: 40px;
+    left: 30px;
+    width: 100px;
 }
 
 .put-day {
     left: 220px;
+    width: 200px;
 }
 
 .deadline {
-    right: 40px;
+    right: 30px;
+    width: 200px;
 }
 
 .gap-line-left,
