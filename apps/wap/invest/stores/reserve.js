@@ -26,8 +26,7 @@ export default class Reserve {
             reserveMoney: '',//用户输入的预约金额
             isChecked: true,
             applyInvestClaimId: '',
-            contractMsg: '',
-            bookInvestToken:''
+            contractMsg: ''
         })
     }
 
@@ -47,11 +46,9 @@ export default class Reserve {
             this.batchMaxmum = data.batchMaxmum
             this.minAmt = data.appointClaim.minAmt
             this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-            this.bookInvestToken = data.bookInvestToken
             return {
                 isRisk: this.isRisk,
-                batchMaxmum: this.batchMaxmum,
-                bookInvestToken:this.bookInvestToken
+                batchMaxmum: this.batchMaxmum
             }
         })
     }
@@ -80,10 +77,14 @@ export default class Reserve {
     }
 
     submitReserveHandler = () => {
-        return this.Post('/api/v1/investAppoint.shtml', {
-            applyAmt: this.reserveMoney,
-            applyInvestClaimId: this.context.id,
-            bookInvestToken: this.bookInvestToken
+        return this.Post('/api/v1/intoAppointPage.shtml', {
+            applyInvestClaimId: this.getApplyInvestClaimId()
+        }).then((data)=> {
+            return this.Post('/api/v1/investAppoint.shtml', {
+                applyAmt: this.reserveMoney,
+                applyInvestClaimId: this.context.id,
+                bookInvestToken: data.bookInvestToken
+            })
         })
     }
 
