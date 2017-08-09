@@ -54,13 +54,14 @@
 
 .repay-btn {
     display: inline-block;
-    width: 146px;
-    height: 68px;
+    width: 150px;
+    height: 60px;
     border: 1px solid #6aa4f0;
     border-radius: 3px;
-    line-height: 68px;
+    line-height: 60px;
     text-align: center;
-    margin-left: 22px;
+    margin-left: 20px;
+    font-size: 30px;
 }
 
 .line {
