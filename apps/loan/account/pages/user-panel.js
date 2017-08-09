@@ -72,7 +72,7 @@ class UserPanel extends React.Component {
                     订单记录
                 </a>
                 <a styleName="link-item" onClick={() => this.clickHandler('c')}>
-                    <img src={require("../images/user-panel/bank_icon.png")} />
+                    <img styleName="bank-card-icon" src={require("../images/user-panel/bank_icon.png")} />
                     银行卡
                 </a>
                 <a styleName="link-item" onClick={() => this.clickHandler('d')}>
