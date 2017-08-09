@@ -1,4 +1,6 @@
-
+body{
+    background:#f0f0f0;
+}
 .input-num-ios::-webkit-input-placeholder, .input-num-android::-webkit-input-placeholder{
     font-size: 30px;
     line-height:normal;
@@ -29,7 +31,7 @@
    height:60px;
     line-height:normal;
     text-align:right;
-   font-size:50px;
+   font-size:54px;
    color:#556bb8;
    float:right;
    margin-right:30px;
@@ -40,7 +42,7 @@
     height:60px;
     line-height:normal;
     text-align:right;
-    font-size:50px;
+    font-size:54px;
     color:#556bb8;
     float:right;
     margin-top:36px;
