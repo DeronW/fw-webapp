@@ -124,9 +124,9 @@ class BillYouyiDetail extends React.Component {
             <div styleName="logo-container">
                 <img src={require('../images/repayment-youyi/logo.png')}></img>
                 优易借
+                {statusBar}
             </div>
 
-            {statusBar}
 
             <div styleName="bill-sum">
                 <div styleName="loan-amount">
