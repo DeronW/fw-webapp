@@ -48,6 +48,8 @@
 .link-item img {
     float: left;
     position: relative;
-    top: 26px;
+    top: 35px;
     margin-right: 18px;
+    width:40px;
+    height:40px;
 }
