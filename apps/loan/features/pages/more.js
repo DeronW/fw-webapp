@@ -75,7 +75,7 @@ class More extends React.Component {
                 <i styleName="icon icon-faq"></i>
                 常见问题
                 <i styleName="icon-ra"></i>
-                <div styleName="v-line"></div>
+                {/*<div styleName="v-line"></div>*/}
             </Link>
 
             <a styleName="btn-logout" onClick={this.toggleLogoutHandler}>退出登录</a>

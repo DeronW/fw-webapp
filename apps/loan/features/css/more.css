@@ -20,6 +20,10 @@
     text-decoration: none;
 }
 
+.btn-item:first-child {
+    margin-top: -4px;
+}
+
 .v-line {
     position: absolute;
     left: 30px;
