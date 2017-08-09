@@ -1,15 +1,16 @@
 .header-placeholder {
     display: block;
-    height:88px;
-    width:100%;
-    background:#fff;
+    height: 88px;
+    width: 100%;
+    background: #fff;
 }
+
 .header {
-    position:fixed;
+    position: fixed;
     z-index: 99;
-    top:0;
-    left:0;
-    right:0;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     height: 88px;
     line-height: 92px;
@@ -18,18 +19,19 @@
     font-size: 36px;
     color: #333;
 }
+
 .btn-back {
     display: block;
     width: 24px;
     height: 42px;
     position: absolute;
-    background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAABACAMAAACnZz6fAAAAilBMVEUAAABqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPCO4MWrAAAALXRSTlMABOz05vv4Dz4o8N8ZC9WEdlMU2s/Kxb+ilpCKfm1lWUxGMiIep5s2LrlgXa00eCvYAAABKElEQVRIx4XWWZKCQBBFUSzAARBFHFFBBRW12f/2un0dwR838/sEQVblUB7HqPBdxWT+6rrOMdl1fxERmWy7byyIbETuo2GyWovsgSSpyANIk4sc4F/qWOQIZBZjRiKByBJIa5ObEzkDeUZfEZZApr7IB8hVZJwBuYxFLkAyEf8KpApFpkDeIhGRUsfinkDO/+QGZCkSzICcbHIUiWsghUjeADmIpAn0615kvQJyF9kQ+RHZTsyMdkQ8Vd1r7lE4fYbNov8dOy0h83gQPfpjNu8iF7KuveHsBmoDaoxrtQVi17yiDLl3FB/sQe5lngn2bLFnlD3rKkaR0BtIP3tLRO3AgIZdwOiEqLYXT7/jCkRJCosQFiouZl7wys5+KASe9eCQYVT4LvsFjlpBPth8nNUAAAAASUVORK5CYII=') no-repeat center;
-    background-size:100% 100%;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAABACAMAAACnZz6fAAAAilBMVEUAAABqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPBqpPCO4MWrAAAALXRSTlMABOz05vv4Dz4o8N8ZC9WEdlMU2s/Kxb+ilpCKfm1lWUxGMiIep5s2LrlgXa00eCvYAAABKElEQVRIx4XWWZKCQBBFUSzAARBFHFFBBRW12f/2un0dwR838/sEQVblUB7HqPBdxWT+6rrOMdl1fxERmWy7byyIbETuo2GyWovsgSSpyANIk4sc4F/qWOQIZBZjRiKByBJIa5ObEzkDeUZfEZZApr7IB8hVZJwBuYxFLkAyEf8KpApFpkDeIhGRUsfinkDO/+QGZCkSzICcbHIUiWsghUjeADmIpAn0615kvQJyF9kQ+RHZTsyMdkQ8Vd1r7lE4fYbNov8dOy0h83gQPfpjNu8iF7KuveHsBmoDaoxrtQVi17yiDLl3FB/sQe5lngn2bLFnlD3rKkaR0BtIP3tLRO3AgIZdwOiEqLYXT7/jCkRJCosQFiouZl7wys5+KASe9eCQYVT4LvsFjlpBPth8nNUAAAAASUVORK5CYII=') no-repeat center;
+    background-size: 100% 100%;
     top: 23px;
     left: 34px;
 }
 
-.iosapp-btn-back{
+.iosapp-btn-back {
     top: 63px !important;
 }
 
@@ -48,16 +50,18 @@
     position: absolute;
     width: 4px;
     height: 30px;
-    -wekit-transform:rotate(135deg);
+    -wekit-transform: rotate(135deg);
     transform: rotate(135deg);
     top: 40px;
     left: 40px;
     background: #6aa4f0;
 }
+
 .iosapp-header-placeholder {
     height: 128px;
     background: white;
 }
+
 .iosapp-header {
     box-sizing: border-box;
     height: 128px;
