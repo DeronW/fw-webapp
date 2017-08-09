@@ -1,53 +1,53 @@
-.pc{
+.bottom-box {
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    bottom: 0;
+}
 
-}
-.nine-grid{
-    width: 180px;
-    height: 180px;
-    background: #ccc;
-     position: relative; 
-    border:1px solid #666;
-}
-.nine-grid div{
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
+.log-box {
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
     text-align: center;
-    float: left;
+    color: #fff;
+    padding-top: 26px;
+}
+
+.bottom-btn {
     position: absolute;
+    top: 0px;
+    right: 200px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
 }
-.nine-grid div:nth-child(1){
-    left: 0;
-    top: 0;
+
+.pic-ship {
+    position: absolute;
+    top: -55px;
+    left: 8%;
 }
-.nine-grid div:nth-child(2){
-    left: 60px;
-    top: 0;
+
+.invite-pc-after, .pc-invest, .pre-login, .invite-pc-pre {
+    display: inline-block;
+    cursor: pointer;
+    width: 106px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: #ff2f4c;
+    border-radius: 20px;
+    color: #fff;
+    margin-right: 20px;
 }
-.nine-grid div:nth-child(3){
-    left: 120px;
-    top: 0;
+
+.color-yellow {
+    font-size: 16px;
+    color: #ffe400;
 }
-.nine-grid div:nth-child(4){
-    left: 0;
-    top: 60px;
-}
-.nine-grid div:nth-child(5){
-    left: 120px;
-    top: 60px;
-}
-.nine-grid div:nth-child(6){
-    left: 0;
-    top: 120px;
-}
-.nine-grid div:nth-child(7){
-    left: 60px;
-    top: 120px;
-}
-.nine-grid div:nth-child(8){
-    left: 120px;
-    top: 120px;
-}
-.active{
-    background: #9eb71c;
+
+.pre-login {
+    margin-left: 20px;
 }

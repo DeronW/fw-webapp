@@ -7,6 +7,7 @@ import Mobile from './components/mobile.js'
 import PC from './components/pc.js'
 import { Get } from '../lib/helpers/request.js'
 import UserReady from '../lib/helpers/user-ready.js'
+import gotoPage from '../lib/helpers/goto-page.js'
 
 class C extends React.Component {
     state = {
@@ -24,14 +25,20 @@ class C extends React.Component {
                 this.setState({timestamp: data.timestamp})
             });
     }
+
     closePopHandler = () => {
         ReactDOM.unmountComponentAtNode(document.getElementById('pop'));
+    }
+
+    loginHandler = () => {
+        gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
     render() {
         let props = {
             isLogin: this.state.isLogin,
             closePopHandler: this.closePopHandler,
             timestamp: this.state.timestamp,
+            loginHandler:this.loginHandler
         }
         return <div>
             {navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ?

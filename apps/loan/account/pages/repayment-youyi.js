@@ -15,7 +15,6 @@ import styles from '../css/repayment-youyi.css'
 class Repayment extends React.Component {
 
     state = {
-        protocolChecked: true,
         amountEditDisabled: false,
         showSMSPop: false,
         SMSTimer: 60,
@@ -50,11 +49,7 @@ class Repayment extends React.Component {
         repayment_youyi.setAmount(v);
     }
 
-    toggleProtocol = () => this.setState({ protocolChecked: !this.state.protocolChecked })
-
     handleSubmit = () => {
-        if (!this.state.protocolChecked) return
-
         let { repayment_youyi, history } = this.props,
             repaymentAmount = repayment_youyi.repaymentAmount,
             unpaidAmount = repayment_youyi.unpaidAmount;
@@ -102,9 +97,14 @@ class Repayment extends React.Component {
         repayment_youyi.confirmRepayment(history, SMSInput);
     }
 
+    hideSMSPop = () => {
+        this.setState({ SMSInput: '', showSMSPop: false });
+        this.clearSMSTimer();
+    }
+
     render() {
         let { history, repayment_youyi, account } = this.props,
-            { protocolChecked, amountEditDisabled, showSMSPop, SMSTimer, SMSInput } = this.state,
+            { amountEditDisabled, showSMSPop, SMSTimer, SMSInput } = this.state,
             amountEditItem;
 
         if (amountEditDisabled) {
@@ -127,7 +127,7 @@ class Repayment extends React.Component {
         let SMSPop = <div styleName="pop-mask">
             <div styleName="pop">
                 <div styleName="pop-close"
-                    onClick={() => { this.setState({ showSMSPop: false }); this.clearSMSTimer() }}></div>
+                    onClick={this.hideSMSPop}></div>
                 <div styleName="pop-title">短信验证码</div>
                 <div styleName="pop-info">已向您银行卡预留手机号发送验证码</div>
                 <div styleName="sms-input">
