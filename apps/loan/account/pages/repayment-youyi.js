@@ -102,6 +102,11 @@ class Repayment extends React.Component {
         repayment_youyi.confirmRepayment(history, SMSInput);
     }
 
+    hideSMSPop = () => {
+        this.setState({ SMSInput: '', showSMSPop: false });
+        this.clearSMSTimer();
+    }
+
     render() {
         let { history, repayment_youyi, account } = this.props,
             { protocolChecked, amountEditDisabled, showSMSPop, SMSTimer, SMSInput } = this.state,
@@ -127,7 +132,7 @@ class Repayment extends React.Component {
         let SMSPop = <div styleName="pop-mask">
             <div styleName="pop">
                 <div styleName="pop-close"
-                    onClick={() => { this.setState({ showSMSPop: false }); this.clearSMSTimer() }}></div>
+                    onClick={this.hideSMSPop}></div>
                 <div styleName="pop-title">短信验证码</div>
                 <div styleName="pop-info">已向您银行卡预留手机号发送验证码</div>
                 <div styleName="sms-input">
