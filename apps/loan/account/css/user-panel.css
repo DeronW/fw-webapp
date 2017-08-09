@@ -1,6 +1,6 @@
 .bg {
     background-color: #f0f0f0;
-    font-size: 30px;
+    font-size: 28px;
     min-height: 100%;
 }
 
@@ -46,10 +46,13 @@
 }
 
 .link-item img {
-    float: left;
     position: relative;
-    top: 35px;
     margin-right: 18px;
-    width:40px;
-    height:40px;
+    width:38px;
+    height:38px;
+    vertical-align:middle;
+}
+
+.link-item img.bank-card-icon{
+    margin-top:-8px;
 }
