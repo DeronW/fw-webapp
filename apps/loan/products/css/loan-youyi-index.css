@@ -5,8 +5,8 @@
 }
 .loan-box{
     width:100%;
-    padding-top:70px;
-    height:290px;
+    padding-top:80px;
+    height:280px;
     background:#556bb8;
 }
 .icon{
@@ -17,7 +17,7 @@
     margin-right:20px;
 }
 .available-loan-num{
-    font-size:112px;
+    font-size:90px;
     line-height:100%;
     color:#fff;
     text-align:center;
@@ -34,7 +34,7 @@
     line-height:100%;
     color:#fff;
     text-align:center;
-    margin-top:60px;
+    margin-top:70px;
 }
 .loan-info{
     width:100%;
@@ -52,7 +52,7 @@
     float:left;
 }
 .loan-info-num{
-    font-size:40px;
+    font-size:38px;
     line-height:100%;
     text-align:center;
     color:#556bb8;
@@ -127,13 +127,13 @@
     color:#fff;
     background:#6aa4f0;
     border-radius:4px;
-    margin:22px auto 0;
+    margin:20px auto 0;
 }
 .btn-tip{
     font-size:24px;
     color:#999;
     text-align:center;
-    margin-top:22px;
+    margin-top:20px;
 }
 .tip{
     display:inline-block;
@@ -141,5 +141,5 @@
     height:30px;
     background:url(../images/loan-youyi-index/tip.jpg) no-repeat;
     position:absolute;
-    top:-2px;
+    top:-2.5px;
 }
