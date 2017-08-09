@@ -2,7 +2,7 @@
     position: relative;
     min-height: 100%;
     background-color: #eee;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .repayment-records-entry {
@@ -22,6 +22,7 @@
     color: #fff;
     font-size: 34px;
     text-align: center;
+    overflow: hidden;
 }
 
 .logo-container img {
