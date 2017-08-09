@@ -28,24 +28,19 @@ body{
 }
 .input-num-android{
    width:400px;
-   height:60px;
+   height:99px;
     line-height:normal;
     text-align:right;
    font-size:54px;
    color:#556bb8;
-   float:right;
-   margin-right:30px;
-   margin-top:40px;
 }
 .input-num-ios{
     width:400px;
-    height:60px;
+    height:99px;
     line-height:normal;
     text-align:right;
     font-size:54px;
     color:#556bb8;
-    float:right;
-    margin-top:40px;
 }
 .loan-info-item{
     height:99px;
