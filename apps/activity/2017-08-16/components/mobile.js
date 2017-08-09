@@ -44,7 +44,7 @@ class Mobile extends React.Component {
             let notlogged_text = <div styleName="m-notlogged">
                 <div styleName="pre-des">请登录后查看您活动内的邀友和投标情况</div>
                 <div styleName="pre-text">
-                    <span styleName="pre-golog" onClick={this.login}>立即登录</span>
+                    <span styleName="pre-golog" onClick={loginHandler}>立即登录</span>
                     <span styleName="howinvite-pre" onClick={this.showInvestHandler}>如何邀请</span>
                 </div>
             </div>
