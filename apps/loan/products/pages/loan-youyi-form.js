@@ -182,7 +182,7 @@ export default class LoopLoanLoan extends React.Component {
                 <div styleName="loan-container">
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">借多少</div>
-                        <div styleName="loan-bank-info">
+                        <div styleName="loan-num-wrap">
                             <input styleName={Browser.inIOS ? "input-num-ios" : "input-num-android"} type="number"
                                    value={this.state.value}
                                    placeholder={"最多可借" + loopLoan.canBorrowAmt + "元"} onChange={this.changeHandler}/>

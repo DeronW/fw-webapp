@@ -3,7 +3,7 @@ body{
 }
 .input-num-ios::-webkit-input-placeholder, .input-num-android::-webkit-input-placeholder{
     font-size: 30px;
-    line-height:normal;
+    line-height:99px;
     color:#999;
 }
 .cnt-container {
@@ -29,7 +29,7 @@ body{
 .input-num-android{
    width:400px;
    height:99px;
-    line-height:normal;
+    line-height:99px;
     text-align:right;
    font-size:54px;
    color:#556bb8;
@@ -37,10 +37,15 @@ body{
 .input-num-ios{
     width:400px;
     height:99px;
-    line-height:normal;
+    line-height:99px;
     text-align:right;
     font-size:54px;
     color:#556bb8;
+}
+.loan-num-wrap{
+    font-size:30px;
+    color:#000;
+    float:right;
 }
 .loan-info-item{
     height:99px;
