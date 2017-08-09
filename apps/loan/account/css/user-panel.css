@@ -42,7 +42,11 @@
     border-bottom: 1px solid #ebeaea;
     color: #666;
     line-height: 100px;
-    background: transparent url("../images/user-panel/right-arrow.png") no-repeat 640px center;
+    background: transparent url("../images/user-panel/right-arrow.png") no-repeat 637px center;
+}
+
+.link-item:last-child{
+    border-bottom:none;
 }
 
 .link-item img {
