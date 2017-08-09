@@ -1,5 +1,5 @@
-import { extendObservable, computed } from 'mobx'
-import { Components, Utils, Event } from 'fw-javascripts'
+import {extendObservable, computed} from 'mobx'
+import {Components, Utils, Event} from 'fw-javascripts'
 
 export default class Reserve {
     constructor(Post) {
@@ -7,8 +7,7 @@ export default class Reserve {
 
         this.data = {}
 
-        extendObservable(this.data, {
-        })
+        extendObservable(this.data, {})
 
         extendObservable(this, {
             context: {
@@ -27,7 +26,8 @@ export default class Reserve {
             reserveMoney: '',//用户输入的预约金额
             isChecked: true,
             applyInvestClaimId: '',
-            contractMsg: ''
+            contractMsg: '',
+            bookInvestToken:''
         })
     }
 
@@ -47,10 +47,11 @@ export default class Reserve {
             this.batchMaxmum = data.batchMaxmum
             this.minAmt = data.appointClaim.minAmt
             this.avgLoanPeriod = data.appointClaim.avgLoanPeriod
-
+            this.bookInvestToken = data.bookInvestToken
             return {
                 isRisk: this.isRisk,
-                batchMaxmum: this.batchMaxmum
+                batchMaxmum: this.batchMaxmum,
+                bookInvestToken:this.bookInvestToken
             }
         })
     }
@@ -81,7 +82,8 @@ export default class Reserve {
     submitReserveHandler = () => {
         return this.Post('/api/v1/investAppoint.shtml', {
             applyAmt: this.reserveMoney,
-            applyInvestClaimId: this.context.id
+            applyInvestClaimId: this.context.id,
+            bookInvestToken: this.bookInvestToken
         })
     }
 
