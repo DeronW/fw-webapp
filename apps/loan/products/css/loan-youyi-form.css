@@ -384,6 +384,7 @@ body{
 }
 .overdue-wrap{
     margin-bottom:20px;
+    background:#F0F0F0;
 }
 .overdue-tip{
     height:70px;
