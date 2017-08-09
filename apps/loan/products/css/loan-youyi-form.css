@@ -1,9 +1,14 @@
 body{
     background:#f0f0f0;
 }
-.input-num-ios::-webkit-input-placeholder, .input-num-android::-webkit-input-placeholder{
+.input-num-ios::-webkit-input-placeholder{
     font-size: 30px;
-    line-height:normal;
+    line-height:100%;
+    color:#999;
+}
+.input-num-android::-webkit-input-placeholder{
+    font-size: 30px;
+    line-height:100%;
     color:#999;
 }
 .cnt-container {
