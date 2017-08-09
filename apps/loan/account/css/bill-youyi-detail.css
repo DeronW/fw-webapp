@@ -46,8 +46,15 @@
 .loan-amount {
     box-sizing: border-box;
     float: left;
-    width: 50%;
-    border-right: 1px solid #eee;
+    width: calc(50% - 1px);
+}
+
+.vertical-line {
+    float: left;
+    width: 1px;
+    height: 60px;
+    background-color: #eee;
+    margin: 14px 0;
 }
 
 .due-date {
