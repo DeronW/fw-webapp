@@ -1,4 +1,6 @@
-
+body{
+    background:#f0f0f0;
+}
 .input-num-ios::-webkit-input-placeholder, .input-num-android::-webkit-input-placeholder{
     font-size: 30px;
     line-height:normal;
@@ -29,25 +31,31 @@
    height:60px;
     line-height:normal;
     text-align:right;
-   font-size:50px;
+   font-size:54px;
    color:#556bb8;
    float:right;
    margin-right:30px;
-   margin-top:36px;
+   margin-top:40px;
 }
 .input-num-ios{
     width:400px;
     height:60px;
     line-height:normal;
     text-align:right;
-    font-size:50px;
+    font-size:54px;
     color:#556bb8;
     float:right;
-    margin-top:36px;
+    margin-top:40px;
 }
 .loan-info-item{
     height:99px;
     border-bottom:1px solid #ebeaea;
+    line-height:99px;
+    margin-left:30px;
+    overflow:hidden;
+}
+.loan-info-item-without-border{
+    height:99px;
     line-height:99px;
     margin-left:30px;
     overflow:hidden;
@@ -374,6 +382,9 @@
     border-radius:4px;
     margin:34px auto 0;
 }
+.overdue-wrap{
+    margin-bottom:20px;
+}
 .overdue-tip{
     height:70px;
     line-height:70px;
@@ -382,7 +393,6 @@
     font-size:24px;
     color:#999;
     text-align:right;
-    margin-bottom:20px;
 }
 .overdue-btn{
     color:#6aa4f0;

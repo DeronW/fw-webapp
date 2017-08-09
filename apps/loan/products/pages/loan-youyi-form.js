@@ -196,15 +196,15 @@ export default class LoopLoanLoan extends React.Component {
                         <div
                             styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.shouldRepaymentAmount : 0}</div>
                     </div>
-                    <div styleName="loan-info-item">
+                    <div styleName={this.state.value ? "loan-info-item-without-border" : "loan-info-item"}>
                         <div styleName="loan-info-title">总费用{validate_term &&
                         <span styleName="tip" onClick={this.detailShowHandler}></span>}</div>
                         <div
                             styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.totalFeeAmount : 0}</div>
                     </div>
-                    {this.state.value && <div styleName="overdue-tip">
+                    {this.state.value && <div styleName="overdue-wrap"><div styleName="overdue-tip">
                         请按时还款，避免<span styleName="overdue-btn" onClick={this.overdueShowHandler}>逾期费用</span>
-                    </div>}
+                    </div></div>}
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">打款至</div>
                         <div styleName="loan-bank-info">{loopLoan.bankName}({loopLoan.bankCardNo.slice(-4)})</div>
