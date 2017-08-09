@@ -31,7 +31,7 @@ class C extends React.Component {
     }
 
     loginHandler = () => {
-        gotoPage('登录', 'http://www.gongchangp2p.cn/api/activityPullNew/ActivityControl.do?code=WZNHD')
+        gotoPage('登录', 'http://www.gongchangp2p.com/api/activityPullNew/ActivityControl.do?code=WZNHD')
     }
     render() {
         let props = {
@@ -40,6 +40,7 @@ class C extends React.Component {
             timestamp: this.state.timestamp,
             loginHandler:this.loginHandler
         }
+        
         return <div>
             {navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ?
                 <Mobile {...props} /> : <PC {...props} />}
