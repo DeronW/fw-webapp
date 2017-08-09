@@ -133,6 +133,7 @@ class BillYouyiDetail extends React.Component {
                     <div styleName="bill-sum-value">{loanAmount}</div>
                     <div styleName="bill-sum-name">借款金额</div>
                 </div>
+                <div styleName="vertical-line"></div>
                 <div styleName="due-date">
                     <div styleName="bill-sum-value">{duration}</div>
                     <div styleName="bill-sum-name">借款期限</div>
