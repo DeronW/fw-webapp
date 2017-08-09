@@ -390,7 +390,7 @@ body{
     font-size:24px;
     color:#999;
     text-align:right;
-    margin-bottom:20px;
+    padding-bottom:20px;
 }
 .overdue-btn{
     color:#6aa4f0;
