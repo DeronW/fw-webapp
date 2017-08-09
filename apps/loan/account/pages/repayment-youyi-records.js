@@ -42,16 +42,21 @@ class RepaymentYouyiRecords extends React.Component {
         })
     }
 
+    formatTime = (t) => {
+        let JSONDate = (new Date(t)).toJSON();
+        return `${JSONDate.slice(0,10)} ${JSONDate.slice(11,19)}`
+    }
+
     render() {
         let { history, repayment_youyi } = this.props,
             list = repayment_youyi.records;
 
         let genItem = (item, index) => {
-            let { repaymentAmtStr, repaymentTime, bankShortName, cardNo } = item;
+            let { repaymentAmtStr, updateTime, bankShortName, cardNo } = item;
             return <div styleName="item" key={index}>
                 <div styleName="time-amount-info">
                     <div styleName="amount">{repaymentAmtStr}</div>
-                    <div styleName="time">{repaymentTime}</div>
+                    <div styleName="time">{this.formatTime(updateTime)}</div>
                 </div>
                 <div styleName="card-info">
                     {bankShortName}(尾号{cardNo.slice(-4)})
