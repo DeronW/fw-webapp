@@ -383,7 +383,7 @@ body{
     margin:34px auto 0;
 }
 .overdue-wrap{
-    margin-bottom:20px;
+    padding-bottom:20px;
     background:#F0F0F0;
 }
 .overdue-tip{
