@@ -51,9 +51,10 @@
     margin-left: 30px;
     border-bottom: 1px solid #ebeaea;
     overflow: hidden;
-    &:last-child {
-        border-bottom: 1px solid transparent;
-    }
+}
+
+.list_li:last-child {
+    border-bottom: 1px solid transparent;
 }
 
 .list-img {
@@ -98,6 +99,7 @@
     line-height: 100%;
     text-align: right;
     margin-bottom: 22px;
+    margin-top: -6px;
 }
 
 .bill-1-color {
@@ -163,17 +165,18 @@
     border-radius: 4px;
     position: absolute;
     top: 35px;
-    left: 180px;
+    left: 150px;
     font-size: 24px;
     padding: 5px 9px;
 }
 
 .pi-money {
     position: absolute;
-    top: 40px;
+    top: 32px;
     right: 200px;
     width: 150px;
     color: #6aa4f0;
+    font-size: 36px;
 }
 
 .pi-date-limit {
