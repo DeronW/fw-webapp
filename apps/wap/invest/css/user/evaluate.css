@@ -170,3 +170,40 @@
     width: 50%;
     float: left;
 }
+
+.question-img {
+    width: 100%;
+    height: 634px;
+    background: url("../../images/user/evaluate/questionbg.png") no-repeat center;
+}
+
+.question-tips {
+    height: 55px;
+    line-height: 55px;
+    font-size: 24px;
+    color: #00b7c3;
+    padding-left: 30px;
+}
+
+.question-content {
+    width: 602px;
+    height: 453px;
+    padding-top: 30px;
+    margin: 0 60px;
+    font-size: 24px;
+    color: #333;
+    line-height: 30px;
+}
+
+.qc-text {
+    padding-left: 20px;
+}
+
+.risk-tips {
+    width: 660px;
+    height: 63px;
+    font-size: 26px;
+    color: #6b4508;
+    padding: 15px 30px;
+    line-height: 34px;
+}
