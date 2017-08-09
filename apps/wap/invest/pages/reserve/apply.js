@@ -11,7 +11,7 @@ import {NativeBridge} from '../../helpers/'
 @CSSModules(styles, {"allowMultiple": true, "errorWhenNotFound": false})
 class ReserveApply extends React.Component {
     state = {
-        pending: false
+        pending: false,
     }
 
     componentDidMount() {
@@ -45,7 +45,7 @@ class ReserveApply extends React.Component {
                 if (this.state.pending)  return
                 this.setState({pending: true})
                 reserve.submitReserveHandler()
-                    .then(() => Components.showToast('预约成功'),
+                    .then(() => {Components.showToast('预约成功')},
                         () => {this.setState({pending: false})})
                     .then(() => {
                         history.push(`/reserve/records`)
