@@ -16,13 +16,13 @@
     height:119px;
     border-bottom:1px solid #ebeaea;
     overflow:hidden;
+    margin-left:30px;
 }
 .input-title{
     font-size:30px;
     color:#666;
     display:inline-block;
-    margin-top:66px;
-    padding-left:30px;
+    margin-top:52px;
 }
 .input-num-android{
    width:400px;
@@ -51,6 +51,9 @@
     line-height:99px;
     margin-left:30px;
     overflow:hidden;
+}
+.loan-info-item:last-child{
+    border-bottom:none;
 }
 .loan-info-title{
     font-size:30px;
@@ -379,6 +382,7 @@
     font-size:24px;
     color:#999;
     text-align:right;
+    margin-bottom:20px;
 }
 .overdue-btn{
     color:#6aa4f0;
