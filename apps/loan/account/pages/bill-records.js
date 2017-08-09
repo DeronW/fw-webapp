@@ -99,7 +99,7 @@ class BillRecords extends React.Component {
                     <img src={require("../images/bill-records/right-arrow.png")} /></div>
                 <div styleName="apply-status-wrap">
                     <div styleName="apply-status">{tab[current_type].name}</div>
-                    <div styleName="apply-time">{order.dueTimeStr}</div>
+                    <div styleName="apply-time">{order.loanTimeStr}</div>
                 </div>
             </a>
         }
