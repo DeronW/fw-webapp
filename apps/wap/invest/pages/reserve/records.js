@@ -102,7 +102,7 @@ class ReserveRecords extends React.Component {
             <div styleName="norecords-text">暂无预约</div>
         </div>
         return <div styleName="recordsPanel">
-            <Header title="我的预约" history={history} show_close={false} />
+            <Header title="我的预约" history={history}/>
             {records.length == 0 ? no_records : records.map(records_func)}
         </div>
     }
