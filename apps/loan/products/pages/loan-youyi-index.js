@@ -104,7 +104,7 @@ export default class LoopLoan extends React.Component {
                             <div styleName="loan-info-title">总额度(元){loopLoan.userStatus == 2 && loopLoan.creditLine == 0 && <span styleName="tip" onClick={this.questionShowHandler}></span>}</div>
                         </div>
                         <div styleName="loan-info-right">
-                            <div styleName="loan-info-num">{loopLoan.period}天</div>
+                            <div styleName="loan-info-num">{loopLoan.period}<span>天</span></div>
                             <div styleName="loan-info-title">借款期限</div>
                         </div>
                     </div>
