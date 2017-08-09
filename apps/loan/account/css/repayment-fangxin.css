@@ -15,7 +15,10 @@
     padding: 50px 0;
     text-align: center;
 }
-
+.banner img{
+    width: 150px;
+    height: 150px;
+}
 .banner span {
     display: block;
     font-size: 34px;
