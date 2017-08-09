@@ -98,8 +98,8 @@
     font-size: 24px;
     line-height: 100%;
     text-align: right;
-    margin-bottom: 22px;
-    margin-top: -6px;
+    margin-bottom: 20px;
+    margin-top: -2px;
 }
 
 .bill-1-color {
@@ -173,7 +173,7 @@
 .pi-money {
     position: absolute;
     top: 32px;
-    right: 220px;
+    right: 200px;
     width: 150px;
     color: #6aa4f0;
     font-size: 36px;

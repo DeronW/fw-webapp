@@ -180,11 +180,14 @@ export default class LoopLoanLoan extends React.Component {
             <div styleName="cnt-container">
                 <Header title="借款" history={history}/>
                 <div styleName="loan-container">
-                    <div styleName="loan-input-num">
-                        <span styleName="input-title">借多少</span>
-                        <input styleName={Browser.inIOS ? "input-num-ios" : "input-num-android"} type="number"
-                               value={this.state.value}
-                               placeholder={"最多可借" + loopLoan.canBorrowAmt + "元"} onChange={this.changeHandler}/>
+                    <div styleName="loan-info-item">
+                        <div styleName="loan-info-title">借多少</div>
+                        <div styleName="loan-num-wrap">
+                            <input styleName={Browser.inIOS ? "input-num-ios" : "input-num-android"} type="number"
+                                   value={this.state.value}
+                                   placeholder={"最多可借" + loopLoan.canBorrowAmt + "元"} onChange={this.changeHandler}/>
+                        </div>
+
                     </div>
                     <div styleName="loan-info-item">
                         <div styleName="loan-info-title">到账金额</div>
