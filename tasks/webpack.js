@@ -12,7 +12,7 @@ module.exports = function (site_name, page_name, CONFIG) {
         relative_path = `/static/${site_name}/${page_name}`
 
     const compiler = webpack({
-        entry: ["babel-polyfill", `${page_path}/entry.js`],
+        entry: ['babel-polyfill', 'proxy-polyfill', `${page_path}/entry.js`],
         output: {
             path: `${build_path}`,
             filename: 'javascripts/[name].[chunkhash:6].js'
