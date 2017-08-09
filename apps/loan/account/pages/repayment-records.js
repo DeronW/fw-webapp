@@ -74,7 +74,8 @@ export default class RepaymentRecords extends React.Component {
                         {item.overdueStatus && <span styleName="status">已逾期</span>}
                     </div>
                     <div styleName="top-right">
-                        <span styleName="repay-num">&yen;{item.loanLeftAmtStr}</span>
+                        {/*<span styleName="repay-num">&yen;{item.loanLeftAmtStr}</span>*/}
+                        <span styleName="repay-num">￥{item.loanLeftAmtStr}</span>
                         <span
                             styleName="repay-btn"
                             onClick={this.toRepaymentDetail(item.productId, item.uuid, item.loanGid)}>还款</span>
