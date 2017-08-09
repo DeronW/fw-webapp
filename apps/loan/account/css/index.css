@@ -1,5 +1,7 @@
-html, body {
+html,
+body {
     height: 100%;
+    font-family: 'San Francisco', 'PingFang SC', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -7,7 +9,6 @@ body {
     height: 100%;
     min-height: 100%;
     background: #f0f0f0;
-    font-family: 'San Francisco', 'PingFang SC', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a {
