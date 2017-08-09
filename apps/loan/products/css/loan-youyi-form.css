@@ -35,7 +35,7 @@ body{
    color:#556bb8;
    float:right;
    margin-right:30px;
-   margin-top:36px;
+   margin-top:46px;
 }
 .input-num-ios{
     width:400px;
@@ -45,11 +45,17 @@ body{
     font-size:54px;
     color:#556bb8;
     float:right;
-    margin-top:36px;
+    margin-top:46px;
 }
 .loan-info-item{
     height:99px;
     border-bottom:1px solid #ebeaea;
+    line-height:99px;
+    margin-left:30px;
+    overflow:hidden;
+}
+.loan-info-item-without-border{
+    height:99px;
     line-height:99px;
     margin-left:30px;
     overflow:hidden;
@@ -384,7 +390,7 @@ body{
     font-size:24px;
     color:#999;
     text-align:right;
-    margin-bottom:20px;
+    padding-bottom:20px;
 }
 .overdue-btn{
     color:#6aa4f0;

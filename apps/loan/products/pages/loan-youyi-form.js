@@ -196,7 +196,7 @@ export default class LoopLoanLoan extends React.Component {
                         <div
                             styleName={validate_term ? "loan-info-right has-input" : "loan-info-right has-not-input"}>{validate_term ? loopLoan.shouldRepaymentAmount : 0}</div>
                     </div>
-                    <div styleName="loan-info-item">
+                    <div styleName={this.state.value ? "loan-info-item-without-border" : "loan-info-item"}>
                         <div styleName="loan-info-title">总费用{validate_term &&
                         <span styleName="tip" onClick={this.detailShowHandler}></span>}</div>
                         <div
