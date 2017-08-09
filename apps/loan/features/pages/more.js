@@ -32,7 +32,7 @@ class More extends React.Component {
         let Contact = <div styleName="pop-bg">
             <div styleName="pop-panel">
                 <div styleName="pop-title">联系客服</div>
-                <a styleName="pop-close" onClick={this.toggleContactHandler}>&times;</a>
+                {/*<a styleName="pop-close" onClick={this.toggleContactHandler}>&times;</a>*/}
                 <div styleName="pop-content">400-102-0066</div>
                 <a styleName="pop-cancel"
                     onClick={this.toggleContactHandler}>取消</a>
@@ -43,7 +43,7 @@ class More extends React.Component {
         let Logout = <div styleName="pop-bg">
             <div styleName="pop-panel">
                 <div styleName="pop-title">退出登录</div>
-                <a styleName="pop-close" onClick={this.toggleLogoutHandler}>&times;</a>
+                {/*<a styleName="pop-close" onClick={this.toggleLogoutHandler}>&times;</a>*/}
                 <div styleName="pop-content">确定退出登录当前账号？</div>
                 <a styleName="pop-cancel"
                     onClick={this.toggleLogoutHandler}>取消</a>
@@ -57,7 +57,7 @@ class More extends React.Component {
             <img styleName="banner" src={require('../images/more/hotline.jpg')}
                 onClick={this.toggleContactHandler} />
 
-            <a styleName="btn-item" onClick={this.toggleContactHandler}>
+            <a styleName="btn-item link-us" onClick={this.toggleContactHandler}>
                 <i styleName="icon icon-phone"></i>
                 联系我们
                 <i styleName="icon-ra"></i>
