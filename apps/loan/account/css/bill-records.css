@@ -303,6 +303,9 @@
     text-align: center;
     margin-left: 12px;
     vertical-align: text-bottom;
+    /*为了对齐*/
+    position: absolute;
+    top: 34px;
 }
 
 .repay-btn {
