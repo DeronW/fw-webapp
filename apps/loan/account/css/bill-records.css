@@ -279,7 +279,7 @@
 
 .top-left {
     float: left;
-    margin-top: 6px;
+    /*margin-top: 6px;*/
 }
 
 .top-right {
@@ -306,7 +306,7 @@
     vertical-align: text-bottom;
     /*为了对齐*/
     position: absolute;
-    top: 45px;
+    top: 38px;
 }
 
 .repay-btn {
