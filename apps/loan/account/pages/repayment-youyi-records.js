@@ -56,7 +56,7 @@ class RepaymentYouyiRecords extends React.Component {
             return <div styleName="item" key={index}>
                 <div styleName="time-amount-info">
                     <div styleName="amount">{repaymentAmtStr}</div>
-                    <div styleName="time">{this.formatTime(updateTime)}</div>
+                    <div styleName="time">{this.formatTime(createTimeStr)}</div>
                 </div>
                 <div styleName="card-info">
                     {bankShortName}(尾号{cardNo.slice(-4)})
