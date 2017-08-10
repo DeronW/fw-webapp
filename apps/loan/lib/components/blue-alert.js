@@ -67,8 +67,10 @@ class Alert extends Component {
 
         return <div style={styles.root_panel}>
             <div style={styles.alert_panel}>
-                <div className="_style_alert_text"
-                     style={styles.text}>{this.props.text}</div>
+                <div styleName="_style_alert_text_container">
+                    <div className="_style_alert_text"
+                        style={styles.text}>{this.props.text}</div>
+                </div>
                 <a style={styles.btn} onClick={this.hideHandler}>{this.props.confirmBtnText}</a>
             </div>
         </div>
