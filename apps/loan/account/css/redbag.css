@@ -7,6 +7,13 @@
     z-index: 101;
 }
 
+.details-entry-inIOS{
+    position: absolute;
+    top: 64px;
+    right: 34px;
+    z-index: 101;
+}
+
 .details-entry span {
     font-size: 28px;
     color: #6aa4f0;
