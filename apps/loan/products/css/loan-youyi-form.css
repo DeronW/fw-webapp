@@ -415,6 +415,7 @@ body {
     width: 532px;
     padding: 0 30px;
     height: 64px;
+    line-height: 64px;
     border: 1px solid #ebeaea;
     border-radius: 6px;
     background: #fafafa;
@@ -423,7 +424,7 @@ body {
 }
 
 .sms-input {
-    width: 380px;
+    width: 350px;
     height: 64px;
     line-height: 64px;
     font-size: 26px;
@@ -433,6 +434,7 @@ body {
     display: inline-block;
     width: 152px;
     font-size: 26px;
+    line-height: 64px;
     color: #6aa4f0;
     text-align: right;
 }
