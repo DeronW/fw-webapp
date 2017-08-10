@@ -41,7 +41,7 @@ class RepaymentFenqi extends React.Component {
                 name: data.productName,
                 amount: data.loanAmtStr,
                 duration: data.termNumStr,
-                dueDate: data.repaymentTime,
+                dueDate: data.dueTimeStr,
                 baseStatus: ''
             })
         })
