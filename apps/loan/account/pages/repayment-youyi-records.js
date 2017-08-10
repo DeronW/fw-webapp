@@ -20,12 +20,10 @@ class RepaymentYouyiRecords extends React.Component {
 
     componentDidMount() {
         document.title = '还款记录';
-        window.scroll(0, 0);
 
         this.props.repayment_youyi.setLoopLoanUuid(Utils.hashQuery.id);
 
-        Event.touchBottom(this.loadMoreRecords);
-        this.loadMoreRecords(null);
+        this.loadMoreRecords(null).then(() => Event.touchBottom(this.loadMoreRecords));
     }
 
     componentWillUnmount() {
@@ -37,7 +35,7 @@ class RepaymentYouyiRecords extends React.Component {
         let { pageNo } = this.state;
         if (pageNo == 0) return done && done;
 
-        this.props.repayment_youyi.fetchRecords(pageNo).then(moreToLoad => {
+        return this.props.repayment_youyi.fetchRecords(pageNo).then(moreToLoad => {
             this.setState({ pageNo: moreToLoad ? (pageNo + 1) : 0 });
             done && done();
         })
