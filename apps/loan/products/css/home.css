@@ -53,7 +53,6 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 1px solid #eee;
 }
 
 .product-title {
@@ -103,7 +102,7 @@
 }
 
 .sp-logo {
-    margin: 20px 20px 0 20px;
+    margin: 20px 20px 0 30px;
     float: left;
     width: 100px;
     height: 100px;
