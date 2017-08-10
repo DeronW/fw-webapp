@@ -184,7 +184,6 @@
     padding: 34px;
     background: #fff;
     border-radius: 10px;
-    text-align: center;
 }
 
 .pop-close {
@@ -200,6 +199,7 @@
     margin-bottom: 15px;
     color: #6aa4f0;
     font-size: 32px;
+    text-align: center;
 }
 
 .pop-info {
@@ -235,7 +235,7 @@
     float: right;
     height: 64px;
     line-height: 64px;
-    color: #333;
+    color: #6aa4f0;
     font-size: 26px;
 }
 
