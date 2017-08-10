@@ -83,7 +83,7 @@ class Alert extends Component {
 
         return <div style={styles.root_panel}>
             <div style={styles.alert_panel}>
-                <div className="_style_alert_text_container">
+                <div style={styles.text_container}>
                     <div className="_style_alert_text"
                         style={styles.text}>{this.props.text}</div>
                 </div>
