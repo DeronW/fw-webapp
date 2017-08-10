@@ -47,15 +47,15 @@ class C extends React.Component {
         gotoPage('登录', 'http://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=BJLTHD')
     }
     render() {
-        let { isLogin, ladderData, personData } = this.state;
+        let { isLogin, ladderData, personData,total } = this.state;
         let props = {
             isLogin: isLogin,
             closePopHandler: this.closePopHandler,
             timestamp: this.state.timestamp,
             loginHandler: this.loginHandler,
             ladderData: ladderData,
-            personData: personData
-
+            personData: personData,
+            total:total
         }
 
         return <div>

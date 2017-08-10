@@ -1,3 +1,231 @@
+.pc{
+    width: 100%;
+    height: 100%;
+    background: #10172d;
+    position: relative;
+}
+.banner{
+    height: 280px;
+}
+.peopleTitle{
+    width: 498px;
+    height: 155px;
+    margin: auto;
+    background: url('../images/pc/peopleTitle.png') no-repeat;
+}
+.qrcode{
+    width: 564px;
+    height: 310px;
+    margin: 20px auto 40px;
+    background: url('../images/pc/qrcode.png') no-repeat;
+    text-align: center;
+    padding-top: 1px;
+}
+.qrTittle{
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    margin-top: -60px; 
+}
+.qrText{
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    margin: 50px 0 0; 
+}
+.kingTitle{
+    width: 498px;
+    height: 155px;
+    margin: auto;
+    background: url('../images/pc/kingTitle.png') no-repeat;
+}
+.kingExplain{
+    width: 846px;
+    margin: 60px auto;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.future{
+    width: 832px;
+    height: 556px;
+    margin: 0 auto 60px;
+    background: url('../images/pc/future1.png') no-repeat;
+    position: relative;
+    color: #fff;
+}
+.futureleft{
+    position: absolute;
+    top: 64px;
+    left: 70px;
+    color: #913e30;
+    font-size: 16px;
+}
+.futureRight{
+    position: absolute;
+    top: 62px;
+    right: 88px;
+    color: #913e30;
+    font-size: 16px;
+}
+.investTop{
+    font-size: 16px;
+    position: absolute;
+    left: 90px;
+}
+.investTop1{
+    position: absolute;
+    top: 118px;
+}
+.investTop2{
+    position: absolute;
+    top: 168px;
+}
+.investTop3{
+    position: absolute;
+    top: 220px;
+}
+.investTop4{
+    position: absolute;
+    top: 270px;
+}
+.coeTop{
+    font-size: 16px;
+    color: #fff;
+    position: absolute;
+    right: 100px;
+}
+.coeTop1{
+    position: absolute;
+    top: 118px;
+}
+.coeTop2{
+    position: absolute;
+    top: 168px;
+}
+.coeTop3{
+    position: absolute;
+    top: 220px;
+}
+.coeTop4{
+    position: absolute;
+    top: 270px;
+}
+.total{
+    position: absolute;
+    left: 0px;
+    bottom: 120px;
+    color: #913e30;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+}
+.totalExplain{
+    position: absolute;
+    left: 0px;
+    bottom: 90px;
+    color: #913e30;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+}
+.textExplain{
+    position: absolute;
+    left: 0px;
+    bottom: 10px;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+}
+.tenTitle{
+    width: 498px;
+    height: 155px;
+    margin: auto;
+    background: url('../images/pc/tenTitle.png') no-repeat;
+}
+.topTen{
+    width: 100%;
+    height:1448px;
+    background: url('../images/pc/bg.png') no-repeat;
+    background-size: center;
+    /* overflow: hidden; */
+}
+.topExplain{
+    font-size: 14px;
+    color: #fff;
+    width: 850px;
+    text-align: center;
+    margin: 30px auto 10px;
+    line-height: 30px;
+}
+.ladder{
+    width: 1120px;
+    height: 690px;
+    margin: -40px auto 0;
+    background: url('../images/pc/ladderBg.png') no-repeat;
+    color: #fff;
+    font-size: 14px;
+    padding-top: 1px;
+}
+table{
+    width:878px;
+    margin: 90px auto 0;
+    text-align:center;
+    border-collapse:collapse;
+    border-spacing:1;
+    border-spacing:0; 
+}
+thead{
+    width: 100%;
+}
+thead td{
+    color: #a0b9d9;
+}
+td{
+    height: 48px;
+    line-height: 48px;
+}
+table tr:nth-child(2n+1){
+    background: #2f405e;
+}
+.rankAmt{
+    color: #41a5e5;
+}
+.remind{
+    width: 1020px;
+    margin: auto;
+    font-size: 16px;
+    color: #fff;
+}
+.activityExplain{
+    width: 100%;
+    height: 426px;
+    box-sizing: border-box;
+    padding: 60px 395px 0px 284px; 
+    background: #152339;
+    color: #fff;
+    margin-top: 70px;
+}
+.activityTitle{
+    font-size: 36px;
+}
+.activityExplain p{
+    width: 1012px;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+
+
+
+
+
+
+
+
+
 .bottom-box {
     width: 100%;
     height: 80px;
@@ -50,24 +278,4 @@
 
 .pre-login {
     margin-left: 20px;
-}
-.ladder{
-    width: 660px;
-    margin: auto;
-}
-table{
-    width:100%;
-    text-align:center;
-    border-collapse:collapse;
-    border-spacing:1;
-    border-spacing:0; 
-}
-thead{
-    width: 100%;
-    height: 60px;
-    background: #666;
-}
-td{
-    height: 60px;
-    line-height: 60px;
 }
