@@ -133,7 +133,7 @@ class RedBag extends React.Component {
         return <div>
             <Header title="红包账户" goBack={goBack} enable={'force'}/>
 
-            <div styleName="details-entry">
+            <div styleName={Browser.inFXHApp ? "details-entry-inIOS" : "details-entry"}>
                 <Link to="/redbag-records"><span>红包明细</span></Link>
             </div>
             <div styleName="red-packet-wrapper">

@@ -114,7 +114,8 @@ class MortgageOutsideEntry extends React.Component {
 
         return (
             <div>
-                <Header hideGoback title="放心花" history={history} />
+                <Header noBack title="放心花" history={history} />
+
                 <div styleName="cnt-container">
                     <div styleName="input-item phone-input">
                         <i styleName="item-icon"></i>
