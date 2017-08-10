@@ -20,6 +20,10 @@ class RepaymentYouyiRecords extends React.Component {
 
     componentDidMount() {
         document.title = '还款记录';
+        console.log(document.body.scrollTop, document.documentElement.scrollTop);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        console.log(document.body.scrollTop, document.documentElement.scrollTop);
 
         this.props.repayment_youyi.setLoopLoanUuid(Utils.hashQuery.id);
 
