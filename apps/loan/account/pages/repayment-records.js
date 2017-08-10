@@ -26,9 +26,9 @@ export default class RepaymentRecords extends React.Component {
     componentDidMount() {
         document.title = '还款';
         NativeBridge.setTitle("还款");
-            this.loadMoreHandler().then(() => {
-                Event.touchBottom(this.loadMoreHandler);
-            })
+        this.loadMoreHandler().then(() => {
+            Event.touchBottom(this.loadMoreHandler);
+        })
 
         // let {repayment_youyi} = this.props; Post(`/api/order/v1/orderList.json`, {
         //  page: this.state.curPage,     pageSize: 10,     loanStatus: 2 }).then(data
@@ -106,7 +106,7 @@ export default class RepaymentRecords extends React.Component {
         </div>
 
         return <div styleName="bg">
-            <Header title="还款" hideGoback={true}/> {/*内容部分*/}
+            <Header title="还款" noBack /> {/*内容部分*/}
             <div styleName="repayment-content">
                 {resultList.length > 0 && resultList.map(repayment_item)}
             </div>

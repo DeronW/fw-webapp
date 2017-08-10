@@ -52,11 +52,11 @@ class RepaymentYouyiRecords extends React.Component {
             list = repayment_youyi.records;
 
         let genItem = (item, index) => {
-            let { repaymentAmtStr, updateTime, bankShortName, cardNo } = item;
+            let { repaymentAmtStr, createTimeStr, bankShortName, cardNo } = item;
             return <div styleName="item" key={index}>
                 <div styleName="time-amount-info">
                     <div styleName="amount">{repaymentAmtStr}</div>
-                    <div styleName="time">{this.formatTime(updateTime)}</div>
+                    <div styleName="time">{createTimeStr}</div>
                 </div>
                 <div styleName="card-info">
                     {bankShortName}(尾号{cardNo.slice(-4)})

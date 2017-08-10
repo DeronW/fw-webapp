@@ -18,13 +18,13 @@
 
 .icon-money {
     position: relative;
-    top: 4px;
+    top: 6px;
     margin-right: 12px;
 }
 
 .icon-recommended {
     position: relative;
-    top: 4px;
+    top: 6px;
     margin-right: 12px;
 }
 
@@ -86,7 +86,7 @@
 .product-timing {
     position: absolute;
     top: 95px;
-    left:486px;
+    left: 486px;
 }
 
 .sep-line {

@@ -87,8 +87,9 @@ export default class Account {
                 phone: this.data.phone,
                 invite_code: dict.invitationCode
             })
+
             location.href = '/static/loan/products/index.html#/'
-        }, e => Components.showToast(e.message))
+        })
     }
 
     reset_password = (password, sms_code) => {

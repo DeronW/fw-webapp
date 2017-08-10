@@ -33,6 +33,15 @@ class Login extends React.Component {
         this.props.history.replace('/set-password')
     }
 
+    keydownHandler = event => {
+        if (event.keyCode == 13)
+            this.submitHandler()
+    }
+
+    submitHandler = () => {
+        this.props.account.login(this.state.password)
+    }
+
     render() {
         let { account, history } = this.props;
         let { password, plaintext } = this.state;
@@ -41,9 +50,8 @@ class Login extends React.Component {
             <a styleName="btn-back" onClick={history.goBack}></a>
             <div styleName="title">登录</div>
             <img styleName="logo" src={require('../images/logo.png')} />
-            <div styleName="welcome">亲爱的
-                <span>{account.mask_phone}</span>
-                欢迎登录
+            <div styleName="welcome">
+                亲爱的<span>{account.mask_phone}</span>欢迎登录
             </div>
             <div styleName="form">
                 <i className="icon-lock" styleName="icon-lock"></i>
@@ -53,11 +61,11 @@ class Login extends React.Component {
                 <input styleName="input" type={plaintext ? 'text' : 'password'}
                     value={password}
                     onChange={this.changeHandler}
+                    onKeyDown={this.keydownHandler}
                     placeholder="请输入登录密码" />
                 <div styleName="underline"></div>
             </div>
-            <a styleName="btn-submit" onClick={
-                () => account.login(password, history)}>下一步</a>
+            <a styleName="btn-submit" onClick={this.submitHandler}>下一步</a>
             <a styleName="btn-forgot" onClick={this.forgetHandler}>忘记密码?</a>
         </div>
     }
