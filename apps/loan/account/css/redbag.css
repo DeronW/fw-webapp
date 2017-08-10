@@ -173,6 +173,7 @@
     border: 1px solid #ebeaea;
     border-radius: 6px;
     background: #fafafa;
+    font-size:0;
 }
 
 .sms-input {
