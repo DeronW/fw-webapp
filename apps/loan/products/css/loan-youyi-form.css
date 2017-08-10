@@ -428,6 +428,7 @@ body {
     height: 64px;
     line-height: 64px;
     font-size: 26px;
+    float:left;
 }
 
 .btn-countdown {
@@ -437,6 +438,7 @@ body {
     line-height: 64px;
     color: #6aa4f0;
     text-align: right;
+    float:right;
 }
 
 .confirm-btn {
