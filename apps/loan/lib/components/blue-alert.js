@@ -23,7 +23,8 @@ function getStyles() {
             width: "600px",
             padding:"30px",
             borderRadius: "10px",
-            background: "white"
+            background: "white",
+            minHeight:"370px"
         },
         text_container:{
             width:"100%",
