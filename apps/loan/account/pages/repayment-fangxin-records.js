@@ -61,7 +61,7 @@ class RepaymentFangxinRecords extends React.Component {
             <div styleName="record-list-item" key={item.createTime + index}>
                 <div styleName="left-els">
                     <div styleName="amount">{item.repaymentAmtStr}</div>
-                    <div styleName="time">{this.formatTime(item.createTimeStr)}</div>
+                    <div styleName="time">{item.createTimeStr}</div>
                 </div>
                 <div styleName="right-els">
                     <span>{item.bankShortName}</span>
