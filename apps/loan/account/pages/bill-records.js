@@ -116,11 +116,26 @@ class BillRecords extends React.Component {
                 }
             }
 
+
+
             return <div styleName="payback-item" key={`${i.orderGid}${index}`}>
-                <div styleName="pi-title">{i.productName}</div>
+                {/*<div styleName="pi-title">{i.productName}</div>
                 {i.overdueStatus && <div styleName="pi-overdate">已逾期</div>}
                 <div styleName="pi-money">&yen;{i.loanLeftAmtStr}</div>
-                <a styleName="pi-payback" onClick={clickHandler}>还款</a>
+                <a styleName="pi-payback" onClick={clickHandler}>还款</a>*/}
+                <div styleName="top">
+                    <div styleName="top-left">
+                        <span styleName="logo-text">{i.productName}</span>
+                        {i.overdueStatus && <span styleName="status">已逾期</span>}
+                    </div>
+                    <div styleName="top-right">
+                        {/*<span styleName="repay-num">&yen;{item.loanLeftAmtStr}</span>*/}
+                        <span styleName="repay-num">￥{i.loanLeftAmtStr}</span>
+                        <span
+                            styleName="repay-btn"
+                            onClick={clickHandler}>还款</span>
+                    </div>
+                </div>
                 <div styleName="pi-date-limit">{i.termNumStr}</div>
                 <div styleName="pi-date-release">{i.loanTimeStr}</div>
                 <div styleName="pi-date-payback">{i.dueTimeStr}</div>
