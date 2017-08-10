@@ -2,7 +2,7 @@
 
 .details-entry {
     position: absolute;
-    top: 24px;
+    top: 26px;
     right: 34px;
     z-index: 101;
 }
@@ -167,27 +167,33 @@
 }
 
 .verify-input {
-    width: 572px;
-    padding-left: 20px;
+    width: 532px;
+    padding: 0 30px;
     height: 64px;
+    line-height:64px;
     border: 1px solid #ebeaea;
     border-radius: 6px;
     background: #fafafa;
+    font-size:0;
+    overflow:hidden;
 }
 
 .sms-input {
-    width: 400px;
+    width: 350px;
     height: 64px;
-    line-height: normal;
+    line-height: 64px;
     font-size: 26px;
+    float:left;
 }
 
 .btn-countdown {
     display: inline-block;
     width: 152px;
     font-size: 26px;
+    line-height:64px;
     color: #6aa4f0;
-    text-align: center;
+    text-align: right;
+    float:right;
 }
 
 .btn-list {

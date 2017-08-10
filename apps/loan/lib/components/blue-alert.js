@@ -23,26 +23,43 @@ function getStyles() {
             width: "600px",
             padding:"30px",
             borderRadius: "10px",
-            background: "white"
+            background: "white",
+            minHeight:"370px"
+        },
+        text_container:{
+            width:"100%",
+            position:"absolute",
+            left:0,
+            right:0,
+            bottom:"113px",
+            minHeight:"300px",
+            display:"table"
         },
         text: {
             margin: "0 auto 30px",
             lineHeight: "50px",
             color: "#555555",
-            width: "100%",
+            // width: "100%",
             fontSize: "30px",
-            textAlign: "center"
+            textAlign: "center",
+            display:"table-cell",
+            verticalAlign:"middle",
+            padding:"0 30px"
         },
         btn: {
             display: "block",
-            width: "100%",
+            // width: "100%",
             height: "83px",
             lineHeight: "83px",
             textAlign: "center",
             color: "white",
             background: "#6aa4f0",
             borderRadius: '4px',
-            fontSize: "34px"
+            fontSize: "34px",
+            position:"absolute",
+            left:"30px",
+            right:"30px",
+            bottom:"30px"
         }
     }
 }
@@ -67,8 +84,10 @@ class Alert extends Component {
 
         return <div style={styles.root_panel}>
             <div style={styles.alert_panel}>
-                <div className="_style_alert_text"
-                     style={styles.text}>{this.props.text}</div>
+                <div style={styles.text_container}>
+                    <div className="_style_alert_text"
+                        style={styles.text}>{this.props.text}</div>
+                </div>
                 <a style={styles.btn} onClick={this.hideHandler}>{this.props.confirmBtnText}</a>
             </div>
         </div>

@@ -38,6 +38,7 @@
 .money span {
     color: #fd4d4c;
     font-weight: 700;
+    padding-left: 5px;
 }
 
 .inputMoney {
