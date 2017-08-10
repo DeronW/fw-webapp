@@ -1,6 +1,7 @@
 import { Utils } from 'fw-javascripts'
 
 class StorageFactory {
+
     constructor(Browser) {
         this.Browser = Browser
         this.storage = window.localStorage
@@ -51,6 +52,18 @@ class StorageFactory {
         this.storage.clear()
     }
 
+    _verifyAppSameUser = (cookie_dict) => {
+        // 仅在app中需要执行, 检查从cookie
+        // 中取得的用户token和本地保存的是否相同
+        const K = '_$USER_TOKEN_FROM_APP'
+        let local_token = this.get(K)
+
+        if (local_token && local_token != cookie_dict.token) {
+            this.clear()
+            this.set(K, cookie_dict.token)
+        }
+    }
+
     getUserDict = () => {
         let r = {};
 
@@ -63,6 +76,11 @@ class StorageFactory {
             ['uid', 'token', 'phone'].forEach(i => {
                 if (Utils.Cookie.get(i)) r[i] = Utils.Cookie.get(i)
             })
+
+            // hook 在app中, 用户重新登录不会通知网页, 次是网页本地存储
+            // 可能还是上一个用户的信息, 所以每次从cookie中去除用户信息
+            // 要和网页本地存储中的用户标识比对, 不同的话要清除掉本地存储
+            this._verifyAppSameUser(r)
         }
 
         return r
@@ -91,7 +109,7 @@ class StorageFactory {
         let r
         try {
             r = JSON.parse(this.get(`_$store_${k}`))
-        } catch (err){ }
+        } catch (err) { }
         return r
     }
 }
