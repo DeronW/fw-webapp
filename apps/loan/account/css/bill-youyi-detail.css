@@ -7,7 +7,7 @@
 
 .repayment-records-entry {
     position: fixed;
-    top: 27px;
+    top: 21px;
     right: 30px;
     color: #556bb8;
     font-size: 32px;
@@ -92,7 +92,7 @@
     font-size: 32px;
 }
 
-.item {
+.item:last-child {
     border: none;
 }
 

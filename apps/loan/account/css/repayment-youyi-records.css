@@ -44,11 +44,15 @@
 }
 
 .amount {
+    height: 50px;
+    line-height: 50px;
     color: #556bb8;
     font-size: 36px;
 }
 
 .time {
+    height: 40px;
+    line-height: 30px;
     color: #aaa;
     font-size: 28px;
 }
