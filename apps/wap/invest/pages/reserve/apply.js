@@ -99,7 +99,7 @@ class ReserveApply extends React.Component {
                     </div>
                     <div styleName="infoItem itemLast">
                         <div styleName="itemLeft">预计起息时间</div>
-                        <div styleName="itemRight">预计明日起息</div>
+                        <div styleName="itemRight">预计今日起息</div>
                     </div>
                 </div>
             </div>

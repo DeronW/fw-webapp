@@ -13,17 +13,30 @@ class C extends React.Component {
     state = {
         isLogin: null,
         timestamp: null,
+        ladderData: [],
+        total: null,
+        personData: {}
     }
 
     componentDidMount() {
         UserReady((isLogin, user) => {
-            this.setState({isLogin: isLogin, username: user.userName})
+            this.setState({ isLogin: isLogin, username: user.userName })
         });
 
         Get('/api/userState/v1/timestamp.json')
             .then(data => {
-                this.setState({timestamp: data.timestamp})
+                this.setState({ timestamp: data.timestamp })
             });
+
+        Get('/api/augSepActivity/v1/getAugSepInvestList.json')
+            .then(data => {
+                this.setState({ ladderData: data.teamdata, total: data.total })
+            })
+
+        Get('/api/augSepActivity/v1/getSelfInvestInfo.json')
+            .then(data => {
+                this.setState({ personData: data.data })
+            })
     }
 
     closePopHandler = () => {
@@ -31,16 +44,20 @@ class C extends React.Component {
     }
 
     loginHandler = () => {
-        gotoPage('登录', 'http://www.gongchangp2p.com/api/activityPullNew/ActivityControl.do?code=WZNHD')
+        gotoPage('登录', 'http://www.gongchangp2p.com/api/activityPullNew/ActivityControl.shtml?code=BJLTHD')
     }
     render() {
+        let { isLogin, ladderData, personData } = this.state;
         let props = {
-            isLogin: this.state.isLogin,
+            isLogin: isLogin,
             closePopHandler: this.closePopHandler,
             timestamp: this.state.timestamp,
-            loginHandler:this.loginHandler
+            loginHandler: this.loginHandler,
+            ladderData: ladderData,
+            personData: personData
+
         }
-        
+
         return <div>
             {navigator.userAgent.match(/Android|iPhone|iPad|Mobile/i) ?
                 <Mobile {...props} /> : <PC {...props} />}

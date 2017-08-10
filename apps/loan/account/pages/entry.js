@@ -60,7 +60,7 @@ class Entry extends React.Component {
                 <i className="icon-phone" styleName="icon-phone"></i>
                 {phone &&
                     <i styleName="icon-clear" onClick={this.clearHandler}></i>}
-                <input styleName="input" value={phone}
+                <input styleName="input" type="number" value={phone}
                     onChange={this.changeHandler}
                     placeholder="请输入手机号进行注册" />
                 <div styleName="underline"></div>
