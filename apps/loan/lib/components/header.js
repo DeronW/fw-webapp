@@ -34,17 +34,27 @@ const Header = CSSModules(styles, {
         NativeBridge.trigger('hide_header')
     }
 
-    return <div styleName={Browser.inIOSApp ?
-        "header-placeholder iosapp-header-placeholder" : "header-placeholder"} >
-        <div styleName={Browser.inIOSApp ? "header iosapp-header" : "header"}>
-            {!props.hideGoback &&
-                <a styleName={Browser.inIOSApp ? "iosapp-btn-back" : "btn-back"}
-                    onClick={goBack}></a>}
+    let sn_a = "header-placeholder", sn_b = "header", sn_c = "btn-back";
+    if (Browser.inIOSApp) {
+        sn_a += ' iosapp-header-placeholder'
+        sn_b += ' iosapp-header'
+        sn_c += ' iosapp-btn-back'
+    }
+
+    return <div styleName={sn_a} >
+        <div styleName={sn_b}>
+            {!props.noBack &&
+                <a styleName={sn_c} onClick={() => goBack(props)}></a>}
             {props.title}
         </div>
     </div>
 })
 
-
+Header.defaultProps = {
+    noBack: false,
+    goBack: null,
+    history: null,
+    title: ''
+}
 
 export default Header
