@@ -39,7 +39,7 @@ class Login extends React.Component {
     }
 
     submitHandler = () => {
-        this.props.account.login(password)
+        this.props.account.login(this.state.password)
     }
 
     render() {
