@@ -60,8 +60,8 @@ class StorageFactory {
 
         if (local_token && local_token != cookie_dict.token) {
             this.clear()
-            this.set(K, cookie_dict.token)
         }
+        this.set(K, cookie_dict.token)
     }
 
     getUserDict = () => {
