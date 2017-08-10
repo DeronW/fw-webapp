@@ -167,8 +167,8 @@
 }
 
 .verify-input {
-    width: 572px;
-    padding-left: 20px;
+    width: 532px;
+    padding: 0 30px;
     height: 64px;
     border: 1px solid #ebeaea;
     border-radius: 6px;
@@ -177,7 +177,7 @@
 }
 
 .sms-input {
-    width: 400px;
+    width: 380px;
     height: 64px;
     line-height: normal;
     font-size: 26px;
@@ -188,7 +188,7 @@
     width: 152px;
     font-size: 26px;
     color: #6aa4f0;
-    text-align: center;
+    text-align: right;
 }
 
 .btn-list {
