@@ -115,7 +115,7 @@
 .reloadBtn{
     width: 48px;
     height: 48px;
-    position: absolute;
+    position: fixed;
     top:20px;
     right: 20px;
     background: url("../../images/reserve/records/gold_reload.png") no-repeat center;
@@ -125,7 +125,7 @@
 .reloadBtnIos{
     width: 48px;
     height: 48px;
-    position: absolute;
+    position: fixed;
     top: 60px;
     right: 20px;
     background: url('../../images/reserve/records/gold_reload.png') no-repeat center;
