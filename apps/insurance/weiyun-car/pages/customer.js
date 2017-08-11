@@ -38,7 +38,7 @@ class UploadImg extends React.Component {
     }
 
     render() {
-        let { placeholder } = this.props
+        let { placeholder, renderAsDisplay } = this.props
         let { img_data, tips } = this.state
 
         if (renderAsDisplay) img_data = `http://it.99weiyun.com.cn/wybb_uploads/${img_data}`
