@@ -41,9 +41,11 @@ class UploadImg extends React.Component {
         let { placeholder } = this.props
         let { img_data, tips } = this.state
 
+        if (renderAsDisplay) img_data = `http://it.99weiyun.com.cn/wybb_uploads/${img_data}`
+
         return <div styleName="field-image">
             <img src={img_data} />
-            <input type="file" onChange={this.changeHandler} disabled={this.props.disabled} />
+            <input type="file" onChange={this.changeHandler} disabled={this.props.renderAsDisplay} />
             <br /> <br />
             <div styleName="">请添加</div>
             <div>{placeholder}</div>
@@ -68,7 +70,7 @@ class Customer extends React.Component {
 
         let hold_input_text = (title, name) => {
             return <div styleName="field-text">{title}
-                <input placeholder="请输入" type="text" disabled={renderAsDisplay}
+                <input placeholder="请输入" type="text" renderAsDisplay={renderAsDisplay}
                     value={customer.holder[name]}
                     onChange={this.changeHandler('holder', name)} />
                 <div styleName="v-line"></div>
@@ -79,7 +81,7 @@ class Customer extends React.Component {
             if (customer.isSame) return null;
 
             return <div styleName="field-text">{title}
-                <input placeholder="请输入" type="text" disabled={renderAsDisplay}
+                <input placeholder="请输入" type="text" renderAsDisplay={renderAsDisplay}
                     value={customer.recognizee[name]}
                     onChange={this.changeHandler('recognizee', name)} />
             </div>
@@ -96,8 +98,8 @@ class Customer extends React.Component {
             <div styleName="picture-panel">
                 <div styleName="picture-panel-title">上传身份证照片</div>
                 <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
-                <UploadImg placeholder="身份证正面照片" imgId="img1" src={customer.holder.image1} disabled={renderAsDisplay} />
-                <UploadImg placeholder="身份证反面照片" imgId="img2" src={customer.holder.image2} disabled={renderAsDisplay} />
+                <UploadImg placeholder="身份证正面照片" imgId="img1" src={customer.holder.image1} renderAsDisplay={renderAsDisplay} />
+                <UploadImg placeholder="身份证反面照片" imgId="img2" src={customer.holder.image2} renderAsDisplay={renderAsDisplay} />
             </div>
 
             { !renderAsDisplay &&
@@ -118,16 +120,16 @@ class Customer extends React.Component {
                 <div styleName="picture-panel">
                     <div styleName="picture-panel-title">上传身份证照片</div>
                     <div styleName="picture-panel-desc">按保监局要求上传身份证正反面照片</div>
-                    <UploadImg placeholder="身份证反面照片" imgId="img3" src={customer.recognizee.image1} disabled={renderAsDisplay} />
-                    <UploadImg placeholder="身份证反面照片" imgId="img4" src={customer.recognizee.image2} disabled={renderAsDisplay} />
+                    <UploadImg placeholder="身份证反面照片" imgId="img3" src={customer.recognizee.image1} renderAsDisplay={renderAsDisplay} />
+                    <UploadImg placeholder="身份证反面照片" imgId="img4" src={customer.recognizee.image2} renderAsDisplay={renderAsDisplay} />
                 </div>
             }
 
             <div styleName="picture-panel">
                 <div styleName="picture-panel-title">上传驾驶证照片</div>
                 <div styleName="picture-panel-desc">按保监局要求上传驾驶证正反面照片</div>
-                <UploadImg placeholder="驾驶证正面照片" imgId="img7" src={customer.vehicleLicenseImage1} disabled={renderAsDisplay} />
-                <UploadImg placeholder="驾驶证反面照片" imgId="img8" src={customer.vehicleLicenseImage2} disabled={renderAsDisplay} />
+                <UploadImg placeholder="驾驶证正面照片" imgId="img7" src={customer.vehicleLicenseImage1} renderAsDisplay={renderAsDisplay} />
+                <UploadImg placeholder="驾驶证反面照片" imgId="img8" src={customer.vehicleLicenseImage2} renderAsDisplay={renderAsDisplay} />
             </div>
 
             { !renderAsDisplay &&
