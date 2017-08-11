@@ -127,6 +127,9 @@ APP_NAMES.push(
     }, {
         name: 'withdraw',
         compiler: 'webpack'
+    }, {
+        name: 'p2p',
+        compiler: 'webpack'
     }
 )
 
