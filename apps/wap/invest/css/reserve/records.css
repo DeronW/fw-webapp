@@ -5,6 +5,7 @@
     font-family: 'PingFangSC-Regular, sans-serif';
     overflow: hidden;
     width: 100%;
+    position: relative;
 }
 
 .colorRed {
@@ -109,4 +110,24 @@
 .emptyPanel img {
     margin-bottom: 10px;
     margin-top: 150px;
+}
+
+.reloadBtn{
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    top:20px;
+    right: 20px;
+    background: url("../../images/reserve/records/gold_reload.png") no-repeat center;
+    z-index: 99;
+}
+
+.reloadBtnIos{
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: url('../../images/reserve/records/gold_reload.png') no-repeat center;
+    z-index: 99;
 }
