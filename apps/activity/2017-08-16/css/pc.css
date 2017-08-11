@@ -169,7 +169,7 @@
     font-size: 14px;
     padding-top: 1px;
 }
-table{
+.ladder table{
     width:878px;
     margin: 90px auto 0;
     text-align:center;
@@ -177,17 +177,17 @@ table{
     border-spacing:1;
     border-spacing:0; 
 }
-thead{
+.ladder thead{
     width: 100%;
 }
-thead td{
+.ladder thead td{
     color: #a0b9d9;
 }
-td{
+.ladder td{
     height: 48px;
     line-height: 48px;
 }
-table tr:nth-child(2n+1){
+.ladder tr:nth-child(2n+1){
     background: #2f405e;
 }
 .rankAmt{

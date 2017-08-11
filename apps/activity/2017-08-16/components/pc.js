@@ -77,9 +77,6 @@ class PC extends React.Component {
             </div>
         }
 
-        let loginInvest = <div>
-
-        </div>
         return <div styleName="pc">
             <PCHeader bgColor="rgba(8,11,22,0.9)" />
             <div styleName="banner"></div>
