@@ -142,14 +142,15 @@ wap站：npm run gulp wap是扥:[文件名]:watch
     - gen-differential-compile-cmd.js 检查当前分支与git仓库远程分支的文件差异, 并生成差量编译脚本
     - webpack.config.js
 - tasks
+- gulpfiles
+    - loan.js
+    - mall.js
+    - wap.js
+    - settings.default.js
 - .editorconfig
 - .eslintrc
 - .gitignore
 - gulpfile.js
-- gulpfile.loan.js
-- gulpfile.mall.js
-- gulpfile.wap.js
-- gulpfile.settings.default.js
 - gulpfile.settings.js
 - Jenkinsfile
 - package.json
