@@ -113,19 +113,20 @@
 }
 
 .reloadBtn{
-    width: 28px;
-    height: 28px;
+    width: 48px;
+    height: 48px;
     position: absolute;
     top:20px;
     right: 20px;
     background: url("../../images/reserve/records/gold_reload.png") no-repeat center;
+    z-index: 99;
 }
 
 .reloadBtnIos{
     width: 48px;
     height: 48px;
     position: absolute;
-    top: 20px;
+    top: 60px;
     right: 20px;
     background: url('../../images/reserve/records/gold_reload.png') no-repeat center;
     z-index: 99;

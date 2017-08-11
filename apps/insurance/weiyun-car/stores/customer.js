@@ -67,7 +67,7 @@ export default class Customer {
             imgId: imgId,
             imgCode: imgCode
         }, { contentType: false }).then((data) => {
-            this.setImgUrl(imgId, `http://it.99weiyun.com.cn/wybb_uploads/${data.imgUrl}`);
+            this.setImgUrl(imgId, data.imgUrl);
         })
     }
 
