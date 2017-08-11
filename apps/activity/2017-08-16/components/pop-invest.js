@@ -33,9 +33,6 @@ class PopInviteMobile extends React.Component {
             <div>登录后查看我的工场码</div>
             <div>还没有工场码？注册即可拥有。</div>
             <div styleName="log-btn" onClick={this.login}>登录注册</div>
-            <div>新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span></div>
-            <div>邀请好友升级最高再送<span styleName="color-red">350元</span></div>
-            <a styleName="more" href="https://www.9888keji.com/cms/addhtml/2057.html">更多新手秘笈</a>
         </div>
         let after_tips = <div styleName="after-box">
             <div>请好友注册或投资时</div>
@@ -91,7 +88,7 @@ class PopInvitePC extends React.Component {
         let {gcm} = this.state;
         let {closePopHandler, gotoLogin, isLogin} = this.props;
 
-        let notLoginTips = <div styleName="nolog-box">
+        let notLoginTips = <div styleName="nolog-invest">
             <div>请好友用您的工场码注册，去投标，达成团队目标。</div>
             <div>登录后查看我的工场码</div>
             <div>还没有工场码？注册即可拥有。</div>
@@ -101,7 +98,7 @@ class PopInvitePC extends React.Component {
             <a styleName="policy-link" href="https://www.9888keji.com/news/notice/2167.html" target="_blank">更多新手秘笈></a>
         </div>;
 
-        let loginTips = <div styleName="log-box">
+        let loginTips = <div styleName="log-invest">
             <div styleName="write-gcm"><span styleName="order">1</span>请好友注册或投资时填写我的工场码<span
                 styleName="gcm-text">{gcm}</span></div>
             <div styleName="copy-box">

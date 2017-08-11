@@ -21,6 +21,11 @@ class C extends React.Component {
     componentDidMount() {
         UserReady((isLogin, user) => {
             this.setState({ isLogin: isLogin, username: user.userName })
+            isLogin && Get('/api/augSepActivity/v1/getSelfInvestInfo.json')
+            .then(data => {
+                this.setState({ personData: data.data })
+            })
+             
         });
 
         Get('/api/userState/v1/timestamp.json')
@@ -33,10 +38,7 @@ class C extends React.Component {
                 this.setState({ ladderData: data.teamdata, total: data.total })
             })
 
-        Get('/api/augSepActivity/v1/getSelfInvestInfo.json')
-            .then(data => {
-                this.setState({ personData: data.data })
-            })
+       
     }
 
     closePopHandler = () => {

@@ -24,7 +24,6 @@ class PC extends React.Component {
     render() {
         let { close } = this.state;
         let { isLogin, loginHandler, timestamp,ladderData,personData,total } = this.props;
-        // console
         let ladder = () => {
             let topName = ['最强王者','至尊星耀','璀璨钻石','永恒钻石','尊贵铂金','超凡大师','荣耀黄金','秩序白银','不屈白银','倔强青铜'];
             let empty = <div>人气王还在堵车，马上就来！</div>
@@ -32,8 +31,11 @@ class PC extends React.Component {
                 return <tr key={index}>
                     <td >{topName[index]}</td>
                     <td >{item.realName}</td>
-                    <td >{item.ucount}</td>
-                    <td styleName="rankAmt">{item.yearAmtSum}</td>
+                    <td >{item.uCount}</td>
+                    <td styleName="rankAmt">
+                        {item.yearAmtSum}<br/>
+                        <span>{item.yearAmtDe && `( 含等额标${item.yearAmtDe} )`}</span>
+                    </td>
                     <td styleName="rankAmt">{item.isValid}</td>   
                 </tr>
             }
@@ -72,7 +74,7 @@ class PC extends React.Component {
             </div>;
             return <div styleName="bottom-box">
                 {isLogin ? logged : unlogged}
-                <img src="" styleName="pic-ship" />
+                <img src={require("../images/pc/bottomIcon.png")} styleName="pic-ship" />
                 <div styleName="bottom-btn" onClick={this.closeHandler}>&times;</div>
             </div>
         }
@@ -81,11 +83,12 @@ class PC extends React.Component {
             <PCHeader bgColor="rgba(8,11,22,0.9)" />
             <div styleName="banner"></div>
             <div styleName="peopleTitle"></div>
+            <div styleName="layer">
+                <div styleName="layerText">邀请人及被邀请人，且团队人数≥2人；<br/>例如：A邀请的好友有B、C、D、E，那么ABCDE算一个团队。</div>
+            </div>
             <div styleName="qrTittle">APP专享</div>
             <div styleName="qrText">活动期间，每天7点、14点、20点领券中心上架最划算优惠券！</div>
-            <div styleName="qrcode">    
-                
-            </div>
+            <div styleName="qrcode"></div>
             <div styleName="kingTitle"></div>
             <div styleName="kingExplain">活动期间，平台累投年化金额达标，团队累计年化投资额≥350万且团队人数≥2人，排名前10的用户，将获得其团队总年化投资金额*对应团队奖金系数的奖金。累计金额越多获得的奖金就越多。
             </div>
@@ -128,7 +131,7 @@ class PC extends React.Component {
                 </div>
             </div>
             
-            {/*close && bottom_panel()*/}
+            {close && bottom_panel()}
             {timestamp && <PopStartPC timestamp={timestamp} />}
         </div>
     }
