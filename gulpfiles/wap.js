@@ -124,6 +124,9 @@ APP_NAMES.push(
     {
         name: 'invest',
         compiler: 'webpack'
+    }, {
+        name: 'withdraw',
+        compiler: 'webpack'
     }
 )
 
