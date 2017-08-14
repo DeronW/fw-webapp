@@ -52,5 +52,6 @@ class CouponCenter extends React.Component {
 }
 
 $FW.DOMReady(function () {
+    NativeBridge.setTitle('领券中心')
     ReactDOM.render(<CouponCenter />, CONTENT_NODE)
 });
