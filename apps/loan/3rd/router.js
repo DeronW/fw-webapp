@@ -19,7 +19,7 @@ export default (stores) => {
             <Switch>
                 <Route exact path='/fail' component={Fail} />
                 <Route exact path='/authorize' component={Authorize} />
-                <Route exact path='/interface' component={Interface} />
+                <Route exact path='/' component={Interface} />
 
                 {/* 金融工场作为内部第三方, 有特殊的处理方式  */}
                 <Route exact path="/jrgc-home" component={JRGCHome} />
