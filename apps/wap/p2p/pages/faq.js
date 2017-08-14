@@ -276,7 +276,7 @@ class List extends React.Component {
             </div>
         }
 
-        return <div>
+        return <div styleName="bg">
             <Header title="帮助中心" history={this.props.history} />
             {QUESTIONS.map(group)}
         </div>
@@ -331,7 +331,7 @@ class Page extends React.Component {
             </div>
         }
 
-        return <div styleName="topic">
+        return <div styleName="bg topic">
             <Header title="帮助中心" history={this.props.history} />
             <div styleName="topic-title">{this.state.topic.topic_title}</div>
             <div styleName="topic-content">

@@ -1,7 +1,8 @@
-body {
+.bg {
     background-color: #ebebee;
     color: #333;
     padding-bottom: 30px;
+    min-height: 100%;
 }
 
 .group {
