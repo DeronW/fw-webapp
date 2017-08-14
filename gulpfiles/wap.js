@@ -5,7 +5,7 @@ const PROJ = 'wap';
 let APP_NAMES = [
     'home', // 首页
     'about-us', // 关于我们
-    'faq', // 帮助中心
+    // 'faq', // 帮助中心
     'app-download', // app 下载页面
     'guide-cookbook', // 用户使用引导页面
     // test page
@@ -96,7 +96,7 @@ const OUTSIDE_PAGES = [
 
 const P2P = [
     'p2p-invite', //P2P邀请返利, 邀请人
-    'p2p-interest-reward', //P2P年化加息奖励
+    // 'p2p-interest-reward', //P2P年化加息奖励
     'p2p-vip-prerogative',
     'p2p-policy', //政策法规页面
     'p2p-pdf',
