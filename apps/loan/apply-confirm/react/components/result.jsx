@@ -66,7 +66,8 @@ class LoanResult extends React.Component {
                 });
                 if (this.state.activityRecomUrl) {
                     setTimeout(() => {
-                        location.href  = `${this.state.activityRecomUrl}`;
+                        // location.href  = `${this.state.activityRecomUrl}`;
+                        location.href  = `/static/loan/features/index.html#/invite-activity`
                     }, 2000)
 
                 }
