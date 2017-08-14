@@ -37,8 +37,8 @@ class Mobile extends React.Component {
         // let rank = (item) => {
         //     return item.yearAmtDe ? styles['rankAmtDe'] : styles['rankAmt'];
         // }
+        let empty = <div styleName="empty">人气王还在堵车，马上就来！</div>
         let ladder = () => {
-            let empty = <div>人气王还在堵车，马上就来！</div>
             let list = (item,index) => {
                 return <tr key={index}>
                     <td styleName={`icon icon-${index}`}>{index+1}</td>
@@ -51,8 +51,12 @@ class Mobile extends React.Component {
                     <td styleName="rankAmt">{item.isValid}</td>   
                 </tr>
             }
+
+            let loginPrice = <div>活动期内，您团队内共<span>{personData.uCount}</span>人，累投年化<span>{personData.yearAmtSum}</span>元，当前可分<span>{personData.isValid}</span>元奖金！</div>
             return <div>
-                <div styleName="ladderPrice">活动期内，您团队内共<span>{personData.uCount}</span>人，累投年化<span>{personData.yearAmtSum}</span>元，当前可分<span>{personData.isValid}</span>元奖金！</div>    
+                <div styleName="ladderPrice">
+                    {isLogin?loginPrice:"登陆后查看获奖情况"}
+                </div>    
                 <table>
                     <thead>
                         <td>排名</td>
@@ -126,14 +130,13 @@ class Mobile extends React.Component {
                 <div styleName="topExplain">活动期间，平台累投年化金额达标，团队累计年化投资额≥200万且团队人数≥2人，排名前10的用户，将按照其累计投资金额
 占比进行不同级别的奖金分配。累计金额越多获得的奖金就越多</div>
                 <div styleName="ladder">
-                    {ladder()}
+                    {ladderData && ladderData.length > 0 ? ladder():empty}
                 </div>
                 <div styleName="remind">
                     <p>温馨提示：</p>
                     <p>1、奖金包奖励以工豆形式发放；</p>
                     <p>2、投资等额标时，＞18个月的项目按18个月计算年化投资额。</p>
                 </div>
-                <div styleName="apple">以上活动由金融工场主办 与Apple Inc. 无关</div>
             </div>
             {close && bottom_panel()}
             {timestamp && <PopStartMobile timestamp={timestamp}/>}

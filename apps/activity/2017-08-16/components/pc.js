@@ -24,9 +24,9 @@ class PC extends React.Component {
     render() {
         let { close } = this.state;
         let { isLogin, loginHandler, timestamp,ladderData,personData,total } = this.props;
+        let empty = <div styleName="empty">人气王还在堵车，马上就来！</div>
         let ladder = () => {
             let topName = ['最强王者','至尊星耀','璀璨钻石','永恒钻石','尊贵铂金','超凡大师','荣耀黄金','秩序白银','不屈白银','倔强青铜'];
-            let empty = <div>人气王还在堵车，马上就来！</div>
             let list = (item,index) => {
                 return <tr key={index}>
                     <td >{topName[index]}</td>
@@ -61,7 +61,7 @@ class PC extends React.Component {
                 <span styleName="color-yellow">{personData.uCount}人</span>
                 ，累投年化
                 <span styleName="color-yellow">{personData.yearAmtSum}元</span>
-                {total > 40000000 && personData.isValid !=0 ? team_des :'继续加油!'}
+                {total > 80000000 && personData.isValid !=0 ? team_des :'继续加油!'}
                 <div styleName="invite-pc-after" onClick={this.showInvestHandler}>
                     如何邀请
                 </div>
@@ -111,10 +111,8 @@ class PC extends React.Component {
             
             <div styleName="topTen">
                 <div styleName="tenTitle"></div>
-                <div styleName="topExplain">活动期间，平台累投年化金额达标，团队累计年化投资额≥200万且团队人数≥2人，排名前10的用户，将按照其累计投资金额
-占比进行不同级别的奖金分配。累计金额越多获得的奖金就越多</div>
                 <div styleName="ladder">
-                    {ladder()}
+                    {ladderData && ladderData.length > 0 ? ladder():empty}
                 </div>
                 <div styleName="remind">
                     <p>温馨提示：</p>

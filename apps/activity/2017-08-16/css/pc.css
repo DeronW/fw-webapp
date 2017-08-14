@@ -18,7 +18,7 @@
     height: 134px;
     background: url("../images/pc/layer.png") no-repeat;
     position: fixed;
-    top: 530px;
+    top: 360px;
     right: 200px;
     cursor: pointer;
     z-index: 100
@@ -195,6 +195,11 @@
     color: #fff;
     font-size: 14px;
     padding-top: 1px;
+    text-align: center;
+}
+.empty{
+    margin-top: 340px;
+    font-size: 28px;
 }
 .ladder table{
     width:878px;
