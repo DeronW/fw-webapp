@@ -53,14 +53,15 @@ class PC extends React.Component {
             </table>
         }
         let bottom_panel = () => {
-            // let team_des = <span>
-            //     ，当前可分<span styleName="color-yellow">{personData.isValid}</span>奖金！</span>
+            let team_des = <span>
+                ，当前可分<span styleName="color-yellow">{personData.isValid}</span>奖金！
+            </span>
             let logged = <div styleName="log-box logged-box">
                 活动期内，您团队内共
-                <span styleName="color-yellow">{personData.uCount}个</span>
+                <span styleName="color-yellow">{personData.uCount}人</span>
                 ，累投年化
                 <span styleName="color-yellow">{personData.yearAmtSum}元</span>
-                ，当前可分<span styleName="color-yellow">{personData.isValid}</span>奖金！
+                {total > 40000000 && personData.isValid !=0 ? team_des :'继续加油!'}
                 <div styleName="invite-pc-after" onClick={this.showInvestHandler}>
                     如何邀请
                 </div>
