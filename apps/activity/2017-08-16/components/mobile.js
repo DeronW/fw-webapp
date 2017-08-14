@@ -17,7 +17,8 @@ class Mobile extends React.Component {
 
     state = {
         close:true,
-        showLayer:false
+        showLayer:false,
+        showExplain:false
     }
     componentDidMount(){
 
@@ -31,6 +32,9 @@ class Mobile extends React.Component {
         e.preventDefault(); 
         e.stopPropagation(); 
         this.setState({showLayer:true})
+    }
+    triggerExplain = () => {
+        this.setState({showExplain:!this.state.showExplain})
     }
     closeLayerHandler = (e) => {
         this.setState({showLayer:false})
@@ -51,9 +55,18 @@ class Mobile extends React.Component {
         NativeBridge.close()
     }
     render() {
-        let {close,showLayer} =this.state;
+        let {close,showLayer,showExplain} =this.state;
         let { isLogin, loginHandler, timestamp,ladderData,personData,total } = this.props;
         
+        let actExplain = <div styleName="actExplain">
+            <div styleName="actTitle">活动说明</div>
+            <p>1.活动期间，投资转让项目，不能参与本次活动；</p>
+            <p>2.投资等额标时，＞18个月的项目按18个月计算年化投资额；</p>
+            <p>3.排序规则：按累投年化先后顺序排名，累投年化相同时以达到该累投年化的先后顺序为准；</p>
+            <p>4.奖金活动奖励将于活动结束后7个工作日内，统一发放至邀请人的工场账户；</p>
+            <p>5.金融工场有权随时随机抽查邀请人所推荐好友的真实性，一旦发现存在好友用虚假手机号注册、好友对注册金融工场账户不知情及非好友真实意愿等造假和欺骗行为，则立即清除虚假好友的统计数据并回收相关奖励，且保留追究由此给金融工场带来的一切损失的权利；</p>
+            <p>6.活动最终解释权归金融工场所有，活动详情致电客服热线咨询：400-0322-988。</p>
+        </div>
         let empty = <div styleName="empty">人气王还在堵车，马上就来！</div>
         let ladder = () => {
             let list = (item,index) => {
@@ -117,6 +130,7 @@ class Mobile extends React.Component {
         return <div styleName="mobile" onClick={this.closeLayerHandler}>
             {Browser.inApp ? null : <MobileHeader bgColor="rgba(0,0,0,0.5)" />}
             <div styleName="banner"></div>
+            <div styleName="activityExplain" onClick={this.triggerExplain}></div>
             <div styleName="layer" onClick={this.showLayerHandler}>
                 <div styleName="layerText" style={{"display":showLayer?"block":"none"}}>邀请人及被邀请人，且团队人数≥2人；<br/>例如：A邀请的好友有B、C、D、E，那么ABCDE算一个团队。</div>
             </div>
@@ -157,6 +171,7 @@ class Mobile extends React.Component {
             </div>
             {close && bottom_panel()}
             {timestamp && <PopStartMobile timestamp={timestamp}/>}
+            {showExplain && actExplain}
         </div>
     }
 }
