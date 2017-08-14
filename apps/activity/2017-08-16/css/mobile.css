@@ -1,27 +1,304 @@
+.mobile{
+    width: 100%;
+    height: 100%;
+    background: #10172d;
+}
+.banner{
+    height: 280px;
+}
+.peopleTitle{
+    width: 498px;
+    height: 155px;
+    margin: auto;
+    background: url('../images/mobile/peopleTitle.png') no-repeat;
+}
+.layer{
+    width: 142px;
+    height: 152px;
+    background: url("../images/mobile/layer.png") no-repeat;
+    position: absolute;
+    top: 290px;
+    right: 22px;
+    cursor: pointer;
+}
+.layerText{
+    width: 664px;
+    height: 123px;
+    padding: 20px;
+    background: url("../images/mobile/teamBg.png") no-repeat;
+    display: none;
+    position: absolute;
+    top: -120px;
+    right: -16px;
+    color: #abcaff;
+    font-size: 22px;
+    line-height: 36px;
+}
+.qrTittle{
+    color: #fff;
+    text-align: center;
+    font-size: 26px;
+    margin-top: -60px; 
+}
+.qrText{
+    color: #fff;
+    font-size: 22px;
+    text-align: center;
+    margin: 80px 0 0; 
+}
+.coupon{
+    width: 307px;
+    height: 80px;
+    background: url("../images/mobile/coupon.png") no-repeat;
+    margin: 70px auto;
+    font-size: 30px;
+    line-height: 80px;
+    text-align: center;
+    color: #fff;
+}
+.kingTitle{
+    width: 498px;
+    height: 155px;
+    margin: auto;
+    background: url('../images/mobile/kingTitle.png') no-repeat;
+}
+.kingExplain{
+    width: 100%;
+    box-sizing: border-box;
+    margin: 60px auto 20px;
+    text-align: left;
+    color: #fff;
+    font-size: 22px;
+    line-height: 36px;
+    padding: 0 30px;
+}
+.future{
+    width: 720px;
+    height: 720px;
+    margin: 0 auto 60px;
+    background: url('../images/mobile/future0.png') no-repeat;
+    position: relative;
+    color: #fff;
+    font-size: 22px;
+}
+.futureleft{
+    position: absolute;
+    top: 84px;
+    left: 70px;
+    color: #884332;
+    width: 98px;
+    text-align: center;
+}
+.futureRight{
+    position: absolute;
+    top: 84px;
+    right: 68px;
+    color: #884332;
+}
+.investTop{
+    position: absolute;
+    left: 60px;
+    font-size: 24px;
+}
+.investTop1{
+    position: absolute;
+    top: 190px;
+}
+.investTop2{
+    position: absolute;
+    top: 252px;
+}
+.investTop3{
+    position: absolute;
+    top: 315px;
+}
+.investTop4{
+    position: absolute;
+    top: 380px;
+}
+.coeTop{
+    font-size: 24px;
+    color: #fff;
+    position: absolute;
+    right: 80px;
+}
+.coeTop1{
+    position: absolute;
+    top: 190px;
+}
+.coeTop2{
+    position: absolute;
+    top: 252px;
+}
+.coeTop3{
+    position: absolute;
+    top: 315px;
+}
+.coeTop4{
+    position: absolute;
+    top: 380px;
+}
+.total{
+    position: absolute;
+    left: 0px;
+    bottom: 180px;
+    color: #884332;
+    width: 100%;
+    text-align: center;
+}
+.totalExplain{
+    position: absolute;
+    left: 0px;
+    bottom: 130px;
+    color: #913e30;
+    width: 100%;
+    text-align: center;
+}
+.textExplain{
+    position: absolute;
+    left: 0px;
+    bottom: -80px;
+    width: 100%;
+    text-align: center;
+    width: 100%;
+    padding: 0 60px;
+    box-sizing: border-box;
+}
+.tenTitle{
+    width: 498px;
+    height: 155px;
+    margin: 120px auto 0;
+    background: url('../images/mobile/tenTitle.png') no-repeat;
+}
+.topTen{
+    font-size: 22px;
+}
+.topExplain{
+    font-size: 22px;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    margin: 30px auto 20px;
+    line-height: 36px;
+    box-sizing: border-box;
+    padding: 0 30px;
+}
+.ladder{
+    width: 100%;
+    height: 981px;
+    margin: -40px auto 0;
+    background: url('../images/mobile/ladderBg.png') no-repeat;
+    color: #fff;
+    font-size: 14px;
+    padding-top: 1px;
+}
+.ladderPrice{
+    padding: 20px 12px;
+    color: #fff;
+    font-size: 22px;
+    background: #323f5d;
+    width:84%;
+    margin: 70px auto 0;
+}
+.ladderPrice span{
+    color: #41a5e5;
+}
+.ladder table{
+    width:92%;
+    margin: auto;
+    text-align:center;
+    border-collapse:collapse;
+    border-spacing:1;
+    border-spacing:0; 
+    border: 0;
+}
+.ladder thead{
+    width: 100%;
+}
+.ladder thead td{
+    color: #a0b9d9;
+    font-size: 24px;
+}
+.ladder td{
+    height: 70px;
+    font-size: 22px;
+}
+.ladder tr:nth-child(2n+1){
+    background: #2f405e;
+}
+.ladder .icon{
+    width: 32px;
+    height: 32px;
+    background: #475982;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+}
+.ladder .rankAmt{
+    color: #41a5e5;
+    line-height: 0px;
+}
+.ladder .rankAmt span{
+    color: #a0b9d9;
+}
+.remind{
+    width: 100%;
+    font-size: 22px;
+    color: #fff;
+    padding: 0 34px;
+}
+.apple{
+    width: 100%;
+    text-align: center;
+    font-size: 26px;
+    color: #fff;
+   margin-bottom: 160px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .m-bottom {
     width: 100%;
-    height: 200px;
+    height: 140px;
     position: fixed;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(11, 16, 31, 0.8);
     color: #fff;
     text-align: center;
     font-size: 24px;
     line-height: 60px;
 }
-
+.bottomIcon{
+    position: absolute;
+    left: 0;
+    top:20px;
+}
 .m_bottom_close {
     position: absolute;
     top: 0;
     right: 35px;
     font-size: 45px;
-    width: 60px;
-    height: 60px;
+    width: 36px;
+    height: 36px;
+    background: url("../images/mobile/close.png") no-repeat;
 }
 .logged-des {
     width: 90%;
-    margin: 20px auto;
+    margin: 0 auto;
 }
 
 .logged-text, .pre-text {
@@ -30,24 +307,22 @@
 }
 
 .howinvite-pre, .howinvite-after, .pre-golog, .after-invest {
-    width: 216px;
-    height: 50px;
-    background-color: #ff3d4b;
-    line-height: 50px;
-    border-radius: 20px;
+    width: 246px;
+    height: 56px;
+    background-color: #41a5e5;
+    line-height: 56px;
+    border-radius: 4px;
     display: inline-block;
     text-align: center;
     color: #fff;
 }
 
 .pre-golog {
-    margin-right: 60px;
+    margin-right: 20px;
+    margin-left: 10px;
 }
 
 .howinvite-after {
-    margin-right: 60px;
-}
-
-.pre-des {
-    margin: 35px 0;
+    margin-right: 20px;
+    margin-left: 10px;
 }

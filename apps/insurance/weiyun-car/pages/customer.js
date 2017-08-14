@@ -38,14 +38,14 @@ class UploadImg extends React.Component {
     }
 
     render() {
-        let { placeholder } = this.props
+        let { placeholder, renderAsDisplay } = this.props
         let { img_data, tips } = this.state
 
         if (renderAsDisplay) img_data = `http://it.99weiyun.com.cn/wybb_uploads/${img_data}`
 
         return <div styleName="field-image">
             <img src={img_data} />
-            <input type="file" onChange={this.changeHandler} disabled={this.props.renderAsDisplay} />
+            <input type="file" onChange={this.changeHandler} disabled={renderAsDisplay} />
             <br /> <br />
             <div styleName="">请添加</div>
             <div>{placeholder}</div>

@@ -8,14 +8,15 @@
 }
 
 .pop-m-invite {
-    width: 656px;
-    height: 699px;
-    background: #fff;
+    width: 720px;
+    height: 505px;
+    background: url("../images/pop-invest/mobileBg.png") no-repeat;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -350px;
-    margin-left: -328px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 .pre-box {
@@ -31,11 +32,11 @@
 .log-btn {
     width: 250px;
     height: 60px;
-    background: #f8544b;
+    background: #4a9fe7;
     line-height: 60px;
     font-size: 28px;
     text-align: center;
-    border-radius: 30px;
+    border-radius: 4px;
     color: #fff;
     margin: 20px auto 70px;
     cursor: pointer;
@@ -44,7 +45,7 @@
 .after-box {
     width: 458px;
     height: 390px;
-    margin: 160px auto 0;
+    margin: 90px auto 0;
     font-size: 28px;
     color: #004179;
     text-align: center;
@@ -60,7 +61,7 @@
     color: #555555;
     background: #ededed;
     border-radius: 4px;
-    margin: 25px auto 85px;
+    margin: 10px auto 10px;
 }
 
 .m-newer {
@@ -76,25 +77,25 @@
     line-height: 60px;
     font-size: 28px;
     text-align: center;
-    border-radius: 30px;
+    border-radius: 4px;
     color: #fff;
-    margin: 20px auto 0;
+    margin: 10px auto 0;
 }
 
 .m-close-btn {
-    width: 91px;
-    height: 91px;
-    background: url("../images/pop/m-close.png") no-repeat center;
+    width: 70px;
+    height: 70px;
+    background: transparent;
     position: absolute;
-    bottom: -150px;
-    left: 50%;
-    margin-left: -45px;
+    top:28px;
+    right:30px;
 }
 
 .color-red {
     display: inline-block;
     color: #f8544b;
 }
+
 
 .pop-invite-pc {
     width: 100%;
@@ -107,9 +108,9 @@
 }
 
 .pop-invite-pc-text {
-    width: 758px;
-    height: 435px;
-    background: #fff;
+    width: 786px;
+    height: 505px;
+    background: url('../images/pop-invest/pcBg.png') no-repeat;
     position: absolute;
     top: 50%;
     margin-top: -217px;
@@ -117,13 +118,13 @@
     margin-left: -379px;
 }
 
-.nolog-box {
+.nolog-invest {
     width: 464px;
     height: 243px;
     margin: 0 auto;
     text-align: center;
     font-size: 16px;
-    color: #004179;
+    color: #913e30;
     padding-top: 100px;
     line-height: 28px;
 }
@@ -135,7 +136,7 @@
     text-align: center;
     font-size: 18px;
     color: #fff;
-    background: #f8544b;
+    background: #25a2ea;
     border-radius: 4px;
     margin: 35px auto;
     cursor: pointer;
@@ -143,6 +144,7 @@
 
 .tips {
     font-size: 14px;
+    color: #064277;;
 }
 
 .color-red {
@@ -155,12 +157,12 @@
     color: #58b7ff;
 }
 
-.log-box {
+.log-invest {
     width: 600px;
     height: 240px;
     margin: 115px auto 0;
     font-size: 16px;
-    color: #004179;
+    color: #913e30;
 }
 
 .order {
@@ -169,7 +171,7 @@
     height: 26px;
     line-height: 26px;
     text-align: center;
-    background: #3bb2ff;
+    background: #913e30;
     color: #fff;
     border-radius: 50%;
     margin-right: 10px;
@@ -202,7 +204,7 @@
 }
 
 .copy-text {
-    width: 540px;
+    width: 590px;
     height: 32px;
     padding: 0 10px;
     line-height: 32px;
@@ -211,7 +213,6 @@
     color: #555555;
     background: #ededed;
     border-radius: 4px;
-    margin-left: 32px;
     margin-top: 5px;
     display: inline-block;
 }
@@ -223,8 +224,8 @@
     line-height: 27px;
     text-align: center;
     color: #fff;
-    background: #f8544b;
-    border-radius: 35px;
+    background: #2daef9;
+    border-radius: 4px;
     margin-left: -2px;
     font-size: 14px;
     cursor: pointer;
@@ -234,7 +235,8 @@
 .logged-tips {
     font-size: 14px;
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    color: #064277;
 }
 
 .color-red {
@@ -252,8 +254,8 @@
     width: 59px;
     height: 59px;
     position: absolute;
-    top: -50px;
-    right: 25px;
-    background: url("../images/pop/pop-close.png") no-repeat center;
+    top: 32px;
+    right: 30px;
+    background: transparent;
     cursor: pointer;
 }
