@@ -8,6 +8,7 @@ import {
 
 import * as Reserve from './pages/reserve'
 import * as User from './pages/user'
+import * as Features from './pages/features'
 
 export default (stores) => {
     return <Router>
@@ -22,6 +23,9 @@ export default (stores) => {
                 <Route exact path="/reserve/apply" component={Reserve.Apply} />
                 <Route exact path="/reserve/records" component={Reserve.Records} />
                 <Route exact path="/reserve/protocol" component={Reserve.Protocol} />
+
+                <Route exact path='/features/faq' component={Features.FAQList}/>
+                <Route exact path='/features/faq/:kind' component={Features.FAQPage}/>
             </Switch>
         </Provider>
     </Router>
