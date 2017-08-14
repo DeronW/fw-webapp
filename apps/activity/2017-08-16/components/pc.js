@@ -57,7 +57,7 @@ class PC extends React.Component {
             //     ，当前可分<span styleName="color-yellow">{personData.isValid}</span>奖金！</span>
             let logged = <div styleName="log-box logged-box">
                 活动期内，您团队内共
-                <span styleName="color-yellow">{personData.ucount}个</span>
+                <span styleName="color-yellow">{personData.uCount}个</span>
                 ，累投年化
                 <span styleName="color-yellow">{personData.yearAmtSum}元</span>
                 ，当前可分<span styleName="color-yellow">{personData.isValid}</span>奖金！

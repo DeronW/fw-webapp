@@ -52,7 +52,7 @@ class Mobile extends React.Component {
                 </tr>
             }
             return <div>
-                <div styleName="ladderPrice">活动期内，您团队内共<span>506</span>人，累投年化<span>100,000,000.00</span>元，当前可分<span>5000,000.00</span>元奖金！</div>    
+                <div styleName="ladderPrice">活动期内，您团队内共<span>{personData.uCount}</span>人，累投年化<span>{personData.yearAmtSum}</span>元，当前可分<span>{personData.isValid}</span>元奖金！</div>    
                 <table>
                     <thead>
                         <td>排名</td>
