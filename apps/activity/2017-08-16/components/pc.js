@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
+import { Utils } from 'fw-javascripts'
+
 import styles from '../css/pc.css'
 import gotoPage from '../../lib/helpers/goto-page.js'
 import PCHeader from '../../lib/components/pc-header.js'
@@ -54,13 +56,13 @@ class PC extends React.Component {
         }
         let bottom_panel = () => {
             let team_des = <span>
-                ，当前可分<span styleName="color-yellow">{personData.isValid}</span>奖金！
+                当前可分<span styleName="color-yellow">{personData.isValid}</span>奖金！
             </span>
             let logged = <div styleName="log-box logged-box">
                 活动期内，您团队内共
                 <span styleName="color-yellow">{personData.uCount}人</span>
                 ，累投年化
-                <span styleName="color-yellow">{personData.yearAmtSum}元</span>
+                <span styleName="color-yellow">{personData.yearAmtSum}元，</span>
                 {total > 80000000 && personData.isValid !=0 ? team_des :'继续加油!'}
                 <div styleName="invite-pc-after" onClick={this.showInvestHandler}>
                     如何邀请
@@ -104,7 +106,7 @@ class PC extends React.Component {
                 <div styleName="coeTop coeTop2">0.8%</div>
                 <div styleName="coeTop coeTop3">0.5%</div>
                 <div styleName="coeTop coeTop4">0.1%</div>
-                <div styleName="total">当前平台累投年化额：{total}万</div>
+                <div styleName="total">当前平台累投年化额：{Utils.format.price(total / 10000,2)}万</div>
                 <div styleName="totalExplain">团队奖金奖励=(非等额标年化额+等额标年化额x0.56)x奖金系数</div>
                 <div styleName="textExplain">奖金按照对应的平台累投年化金额开启，只开启一个最高标准奖金系数。</div>
             </div>

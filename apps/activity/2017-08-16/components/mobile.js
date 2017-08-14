@@ -2,12 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import CSSModules from 'react-css-modules'
 import styles from '../css/mobile.css'
+import { Utils } from 'fw-javascripts'
+
 import gotoPage from '../../lib/helpers/goto-page.js'
 import MobileHeader from '../../lib/components/mobile-header.js'
 import { PopStartMobile } from '../../lib/components/pop-start.js'
 import { PopInviteMobile } from './pop-invest.js'
 import Browser from '../../lib/helpers/browser.js'
 import NativeBridge from '../../lib/helpers/native-bridge.js'
+
 
 @CSSModules(styles, { "allowMultiple": true, "errorWhenNotFound": false })
 class Mobile extends React.Component {
@@ -55,8 +58,8 @@ class Mobile extends React.Component {
                     <td styleName="rankAmt">{item.isValid}</td>   
                 </tr>
             }
-
-            let loginPrice = <div>活动期内，您团队内共<span>{personData.uCount}</span>人，累投年化<span>{personData.yearAmtSum}</span>元，当前可分<span>{personData.isValid}</span>元奖金！</div>
+            let hasprice = <span>当前可分<span styleName="blue">{personData.isValid}</span>元奖金！</span>
+            let loginPrice = <div>活动期内，您团队内共<span styleName="blue">{personData.uCount}</span>人，累投年化<span styleName="blue">{personData.yearAmtSum}</span>元，{total > 80000000 && personData.isValid ? hasprice : "继续加油!"}</div>
             return <div>
                 <div styleName="ladderPrice">
                     {isLogin?loginPrice:"登陆后查看获奖情况"}
@@ -125,7 +128,7 @@ class Mobile extends React.Component {
                 <div styleName="coeTop coeTop2">0.8%</div>
                 <div styleName="coeTop coeTop3">0.5%</div>
                 <div styleName="coeTop coeTop4">0.1%</div>
-                <div styleName="total">当前平台累投年化额：{total}万</div>
+                <div styleName="total">当前平台累投年化额：{Utils.format.price(total / 10000,2)}万</div>
                 <div styleName="totalExplain">团队奖金奖励=(非等额标年化额+等额标年化额x0.56)x奖金系数</div>
                 <div styleName="textExplain">奖金按照对应的平台累投年化金额开启，只开启一个最高标准奖金系数。</div>
             </div>

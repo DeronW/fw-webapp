@@ -206,7 +206,7 @@
     margin: 70px auto 0;
     text-align: center;
 }
-.ladderPrice span{
+.ladderPrice .blue{
     color: #41a5e5;
 }
 .ladder table{
