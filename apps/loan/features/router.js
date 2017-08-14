@@ -15,11 +15,13 @@ import NotFound from './pages/not-found.js'
 import CreditCards from './pages/credit-cards.js'
 import InviteActivity from './pages/invite-activity.js'
 import Download from './pages/download.js'
+import Waiting from './pages/waiting.js'
 
 export default (stores) => {
     return <Router>
         <Provider {...stores} >
             <Switch>
+                <Route exact path='/waiting' component={Waiting} />
                 <Route exact path='/more' component={More} />
                 <Route exact path='/about-us' component={AboutUs} />
                 <Route exact path='/faq' component={FAQ} />
