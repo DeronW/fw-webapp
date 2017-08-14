@@ -1,0 +1,17 @@
+.bg {
+    background-color: #ebebee;
+}
+
+.img {
+    max-width: 80%;
+    display: block;
+    margin: 25% auto 0;
+}
+
+.txt {
+    margin-top: 5px;
+    font-size: 24px;
+    font-size: 5vw;
+    text-align: center;
+    color: #8591b3;
+}
