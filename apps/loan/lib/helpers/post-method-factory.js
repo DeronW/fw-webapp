@@ -56,7 +56,7 @@ const PostMethodFactory = function (Storage, Browser, NativeBridge) {
                     } else if (Browser.inFXHApp) {
                         NativeBridge.login()
                     } else {
-                        setTimeout(loginInBrowser, 1800)
+                        // setTimeout(loginInBrowser, 1800)
                     }
                 } else {
                     silence ? reject(error) : setTimeout(() => reject(error), 1700)
