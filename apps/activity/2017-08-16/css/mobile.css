@@ -227,12 +227,14 @@
     background: #2f405e;
 }
 .ladder .icon{
+    display: block;
     width: 32px;
     height: 32px;
     background: #475982;
     border-radius: 50%;
     text-align: center;
     line-height: 32px;
+    margin: 18px 0 0 20px;
 }
 .ladder .rankAmt{
     color: #41a5e5;
