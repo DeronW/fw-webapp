@@ -16,7 +16,7 @@ class Fail extends React.Component {
         let { history } = this.props;
         return Post('/api/userext/v1/validTokenAndLogin.json', {
             partner: Utils.hashQuery.partner,
-            sign: Utils.hashQuery.sigin,
+            sign: Utils.hashQuery.sign,
             timestamp: Utils.hashQuery.timestamp,
             token: Utils.hashQuery.token
             // token: 'success'
