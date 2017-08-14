@@ -93,8 +93,7 @@ class PopInvitePC extends React.Component {
             <div>登录后查看我的工场码</div>
             <div>还没有工场码？注册即可拥有。</div>
             <div styleName="golog" onClick={this.login}>登录注册</div>
-            <div styleName="tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span
-                styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span styleName="color-red">350元</span></div>
+            <div styleName="tips">新手注册即送<span styleName="color-red">200元</span>，首投即获<span styleName="color-red">0.6%返息券</span>，邀请好友升级最高再送<span styleName="color-red">350元</span></div>
             <a styleName="policy-link" href="https://www.9888keji.com/news/notice/2167.html" target="_blank">更多新手秘笈></a>
         </div>;
 

@@ -105,9 +105,7 @@ class Mobile extends React.Component {
             let team_text = <span>，团队累投年化<span styleName="color-yellow">元</span></span>
             let logged_text = <div styleName="m-logged">
                 <div styleName="logged-des">
-                    活动内，您有效邀友
-                    <span styleName="color-yellow">人</span>，好友累投年化
-                    <span styleName="color-yellow">元</span>
+                    朋友多，这些奖励还觉得不够？
                 </div>
                 <div styleName="logged-text">
                     <span styleName="howinvite-after" onClick={this.showInvestHandler}>如何邀请</span>

@@ -236,12 +236,15 @@
 }
 .activityExplain{
     width: 100%;
-    height: 440px;
-    box-sizing: border-box;
-    padding: 60px 395px 0px 284px; 
+    height: 400px;
     background: #152339;
     color: #fff;
     margin-top: 70px;
+    padding-top: 40px;
+}
+.actEx{
+    width: 1020px;
+    margin: auto;
 }
 .activityTitle{
     font-size: 36px;
