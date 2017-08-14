@@ -102,7 +102,7 @@ class Mobile extends React.Component {
             <div styleName="peopleTitle"></div>
             <div styleName="qrTittle">APP专享</div>
             <div styleName="qrText">活动期间，每天7点、14点、20点领券中心上架最划算优惠券！</div>
-            <div styleName="coupon" onClcik="">去抢券</div>
+            <div styleName="coupon" onClick="">去抢券</div>
             <div styleName="kingTitle"></div>
             <div styleName="kingExplain">活动期间，平台累投年化金额达标，团队累计年化投资额≥350万且团队人数≥2人，排名前10的用户，将获得其团队总年化投资金额*对应团队奖金系数的奖金。累计金额越多获得的奖金就越多。
             </div>
